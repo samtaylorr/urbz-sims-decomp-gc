@@ -2955,6 +2955,14 @@ void fn_800EEDEC(void) {
     fn_800EC8E0();
 }
 
+void fn_800EF048(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    M2C_UNK fn_800EC3E4(s32, s32, s32, s32, s32);
+    if (arg3 == -1) {
+        fn_800EAF58();
+    }
+    fn_800EC3E4(arg0, arg2, arg1, fn_800EF6F8(arg0) - arg2, arg3);
+}
+
 s32 fn_800EF6F8(void **arg0) {
     return M2C_FIELD(*arg0, s32 *, 4);
 }
