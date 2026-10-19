@@ -10,6 +10,10 @@ void fn_801B262C(void **self, s32 flags) {
     }
 }
 
+s16 fn_801B28E4(void *arg0) {
+    return M2C_FIELD(arg0, s16 *, 4);
+}
+
 s32 fn_801B2D08(void) {
     return 0;
 }
