@@ -244,6 +244,21 @@ s32 fn_800F86C8(void *arg0, s32 arg1) {
     return temp_r9 - (var_r3 & 0xFFFFFF80);
 }
 
+void *fn_800F86F4(void *arg0, s32 arg1) {
+    s32 temp_r9;
+    s32 var_r3;
+
+    temp_r9 = M2C_FIELD(arg0, s32 *, 0);
+    if ((arg1 > temp_r9) || (arg1 <= (s32) (temp_r9 - 0x80))) {
+        return NULL;
+    }
+    var_r3 = (M2C_FIELD(arg0, s32 *, 4) + arg1) - temp_r9;
+    if (var_r3 < 0) {
+        var_r3 += 0x80;
+    }
+    return arg0 + ((var_r3 * 8) + 8);
+}
+
 s32 fn_800F873C(void) {
     return 0;
 }
