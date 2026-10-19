@@ -78,6 +78,10 @@ void fn_802059A8(void) {
 
 }
 
+void fn_80206190(void) {
+
+}
+
 s32 fn_80223248(s32 *self) {
     return self[1];
 }
