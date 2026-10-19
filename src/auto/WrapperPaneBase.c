@@ -15,6 +15,10 @@ typedef struct {
 } WrapperPaneBase;
 
 void fn_800CD09C(void);
+s32 fn_800C5630(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x6C);
+}
+
 s32 fn_800C60BC(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x78);
 }
