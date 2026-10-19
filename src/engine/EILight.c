@@ -111,6 +111,10 @@ f32 fn_802F0394(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0xA0);
 }
 
+s32 fn_802F03BC(s32 arg0) {
+    return arg0 + 0xA4;
+}
+
 void fn_802F03C4(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x9C) = arg1;
 }
