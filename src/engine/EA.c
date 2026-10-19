@@ -197,6 +197,22 @@ s32 fn_802D9E3C(void) {
     return 1;
 }
 
+s32 fn_802D9E44(void *arg0, s32 arg1) {
+    s32 temp_r3;
+
+    if ((s32) (arg1 & 6) == 6) {
+        return 1;
+    }
+    temp_r3 = M2C_FIELD((arg0 + (M2C_FIELD(arg0, s32 *, 4) & 0xFFFFFFF8)), s32 *, 4) & 1;
+    if (!(arg1 & 2)) {
+        if (!(arg1 & 4)) {
+            return 0;
+        }
+        return temp_r3 ^ 1;
+    }
+    return temp_r3;
+}
+
 void fn_802DB018(void);
 void fn_802DAFB0(void) {
     fn_802DB018();
