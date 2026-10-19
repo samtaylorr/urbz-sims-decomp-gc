@@ -1378,6 +1378,32 @@ void fn_8039F270(void *arg0, void **arg1) {
     M2C_FIELD(arg0, void **, 4) = temp_r11;
 }
 
+void fn_8039F2D0(void *arg0, void **arg1) {
+    void *temp_r11;
+    void *temp_r9;
+    void *temp_r9_2;
+
+    temp_r11 = M2C_FIELD(arg0, void **, 8);
+    M2C_FIELD(arg0, void **, 8) = (void *) M2C_FIELD(temp_r11, void **, 0xC);
+    temp_r9 = M2C_FIELD(temp_r11, void **, 0xC);
+    if (temp_r9 != NULL) {
+        M2C_FIELD(temp_r9, void **, 4) = arg0;
+    }
+    M2C_FIELD(temp_r11, void **, 4) = (void *) M2C_FIELD(arg0, void **, 4);
+    if (arg0 == (void *) *arg1) {
+        *arg1 = temp_r11;
+    } else {
+        temp_r9_2 = M2C_FIELD(arg0, void **, 4);
+        if (arg0 == (void *) M2C_FIELD(temp_r9_2, void **, 0xC)) {
+            M2C_FIELD(temp_r9_2, void **, 0xC) = temp_r11;
+        } else {
+            M2C_FIELD(temp_r9_2, void **, 8) = temp_r11;
+        }
+    }
+    M2C_FIELD(temp_r11, void **, 0xC) = arg0;
+    M2C_FIELD(arg0, void **, 4) = temp_r11;
+}
+
 extern u8 lbl_8040D2A8[];
 void fn_8039FE84(void **self, s32 flags) {
     *self = lbl_8040D2A8;
