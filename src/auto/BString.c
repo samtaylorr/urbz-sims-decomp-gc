@@ -866,6 +866,10 @@ void fn_800DDE00(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x18) = 0;
 }
 
+void fn_800DE570(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x18) = 0;
+}
+
 void fn_800DE57C(void) {
 
 }
