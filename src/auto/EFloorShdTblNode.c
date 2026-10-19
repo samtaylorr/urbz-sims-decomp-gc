@@ -133,3 +133,7 @@ u16 fn_8005988C(void *arg0) {
     return M2C_FIELD(arg0, u16 *, 0x8E);
 }
 
+u16 fn_80059894(void *arg0) {
+    return M2C_FIELD(arg0, u16 *, 0x92);
+}
+
