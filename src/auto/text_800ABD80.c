@@ -38,6 +38,11 @@ s32 fn_800AEB28(void) {
     return 1;
 }
 
+void *fn_800AF0C8(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x4C4) = 1;
+    return arg0 + 0x1C;
+}
+
 void fn_800AFD2C(void) {
 
 }
