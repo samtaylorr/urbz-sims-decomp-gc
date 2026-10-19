@@ -543,6 +543,10 @@ s32 fn_800DC6B4(void) {
     return lbl_80495A70;
 }
 
+void fn_800DE57C(void) {
+
+}
+
 void fn_800E1868(void) {
     fn_800E3BC0();
 }
