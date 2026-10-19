@@ -5,6 +5,10 @@ void fn_802FBC54(void) {
 
 }
 
+void fn_802FBC58(void) {
+
+}
+
 s32 fn_802FC0DC(void) {
     return 0;
 }
