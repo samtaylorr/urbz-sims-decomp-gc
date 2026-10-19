@@ -34,6 +34,10 @@ s32 fn_802E0B28(void) {
     return 0;
 }
 
+void fn_802E0B48(u8 *self, s32 value) {
+    *(s32 *)(self + 0x468) = value;
+}
+
 s32 fn_802E1A50(void) {
     return 1;
 }
