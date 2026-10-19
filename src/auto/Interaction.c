@@ -230,6 +230,10 @@ s32 fn_801175E4(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x28);
 }
 
+void fn_801175EC(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0x28) = arg1;
+}
+
 s32 fn_801175F4(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x38);
 }
