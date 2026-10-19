@@ -108,6 +108,10 @@ s32 fn_8026EDF0(void) {
     return lbl_804960A8;
 }
 
+s32 fn_802735E8(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x10);
+}
+
 s32 fn_80273894(s32 *self) {
     return self[6];
 }
