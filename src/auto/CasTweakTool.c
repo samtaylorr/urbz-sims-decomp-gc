@@ -13,3 +13,7 @@ void fn_801D395C(void) {
 
 }
 
+u8 *fn_801D494C(u8 *self) {
+    return self + 8;
+}
+
