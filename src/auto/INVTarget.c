@@ -369,6 +369,18 @@ s32 fn_80217A30(void *arg0, s32 arg1) {
     return temp_r0;
 }
 
+s32 fn_80219DA0(void) {
+    void *fn_80219E28();
+    s32 var_r3;
+    void *temp_r3;
+
+    temp_r3 = fn_80219E28();
+    if ((temp_r3 == NULL) || (var_r3 = 5, (((s32) M2C_FIELD(temp_r3, s32 *, 0x34) == 0) != 0))) {
+        var_r3 = 0;
+    }
+    return var_r3;
+}
+
 void fn_8021BECC(s32 arg0) {
     M2C_UNK fn_801F5420(s32);
     fn_801F5420(arg0 + 0x84);
