@@ -24,6 +24,10 @@ s32 fn_803241DC(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void fn_80325888(void) {
+
+}
+
 void fn_8032421C(void);
 void fn_80329080(void) {
     fn_8032421C();
