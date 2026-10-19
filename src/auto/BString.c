@@ -63,3 +63,8 @@ void fn_800EEBB4(void) {
     fn_800EC774();
 }
 
+void fn_800EE994(void);
+void fn_800EEC2C(void) {
+    fn_800EE994();
+}
+
