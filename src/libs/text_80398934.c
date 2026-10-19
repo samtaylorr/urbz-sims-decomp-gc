@@ -216,6 +216,15 @@ void fn_8039AB04(void) {
     fn_8030AD40();
 }
 
+void fn_8039AB7C(void *self, s32 flags) {
+    extern u8 lbl_80406CE0[];
+    extern void fn_802D20E8(void *);
+    M2C_FIELD(self, void **, 4) = lbl_80406CE0;
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_8039AC38(void *self, s32 flags) {
     M2C_FIELD(self, void **, 0xC0) = lbl_80406CB0;
     if (flags & 1) {
