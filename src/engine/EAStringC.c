@@ -74,6 +74,12 @@ void fn_802ACBE8(char *self) {
     fn_802AE360(self + 8);
 }
 
+void fn_803B72E0();
+void fn_802ACC0C(char *self) {
+    extern void fn_803B72E0(void *);
+    fn_803B72E0(self + 8);
+}
+
 s32 fn_802ACC64(void) {
     return 1;
 }
