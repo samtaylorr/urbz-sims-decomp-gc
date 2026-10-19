@@ -76,7 +76,27 @@ s32 fn_80311350(u32 *arg0, u32 *arg1) {
     return -1;
 }
 
-s32 fn_80311A4C(void *arg0) {
+s32 fn_80311990();
+void fn_803112CC(void *arg0, s32 arg1, s32 arg2, s32 arg3);
+void fn_80311404(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+s32 fn_803119D4(arg0, arg1)
+    void *arg0;
+    s32 arg1;
+{
+    s32 result;
+    s32 i;
+
+    if (arg1 == -1) {
+        return 0;
+    }
+    result = 0;
+    for (i = fn_80311990(arg0) + 1; i <= M2C_FIELD(arg0, s32 *, 8); i++) {
+        result |= M2C_FIELD(arg0, s32 *, i * 0xC + 0x14);
+    }
+    return result;
+}
+
+s32 fn_80311A4C(void *arg0, s32 arg1) {
     return M2C_FIELD(M2C_FIELD(arg0, void **, 0x200), s32 *, 8) & ~fn_803119D4();
 }
 
