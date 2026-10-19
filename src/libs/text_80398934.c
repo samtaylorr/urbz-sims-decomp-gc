@@ -56,6 +56,9 @@ extern u8 lbl_80406D08[];
 s32 fn_8018E70C(void *out, void *obj, s32 arg0, s32 arg1, s32 arg2);
 void fn_8018E8F8(void *out, void *obj, s32 arg);
 void fn_8018EA6C(void);
+s32 fn_8018E514(void *out, void *obj);
+void fn_8039C0B8(void *, s32, s32, s32);
+extern u8 lbl_804094E0[];
 void fn_80398CD8(void (*cb)(void)) {
     lbl_8049662C = cb;
 }
