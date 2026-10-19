@@ -236,6 +236,10 @@ void fn_8019F3B0(void *arg0, f32 farg0) {
     M2C_FIELD(arg0, f32 *, 0xC) = farg0;
 }
 
+f32 fn_8019F3B8(void *arg0) {
+    return M2C_FIELD(arg0, f32 *, 0x50);
+}
+
 f32 fn_8019F3C0(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0x54);
 }
