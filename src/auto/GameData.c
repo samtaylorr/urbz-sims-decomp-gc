@@ -41,6 +41,10 @@ s32 fn_80047AFC(void) {
     return 1;
 }
 
+void fn_80047B04(void) {
+
+}
+
 void fn_80048DF8(void) {
     fn_80048D04();
 }
