@@ -31,6 +31,10 @@ s32 fn_8018CD5C(void) {
     return 0;
 }
 
+void fn_8018CD64(void) {
+
+}
+
 s32 fn_8018CD68(void) {
     return 0;
 }
