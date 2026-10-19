@@ -45,3 +45,8 @@ void fn_8033F2B8(s32 arg0, s32 arg1, s32 arg2) {
     lbl_8049502C = arg2;
 }
 
+void fn_8033F9C0(void) {
+    M2C_UNK fn_8033F94C(M2C_UNK, M2C_UNK);
+    fn_8033F94C(1, 0xFFFF);
+}
+
