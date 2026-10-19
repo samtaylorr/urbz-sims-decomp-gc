@@ -110,6 +110,10 @@ s32 fn_802B201C(void) {
     return lbl_80496130;
 }
 
+s32 fn_802B3B14(char *self) {
+    return *(s32 *)(self + 0xC);
+}
+
 s32 fn_802B3B1C(void) {
     return 0;
 }
