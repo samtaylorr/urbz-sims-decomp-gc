@@ -221,6 +221,10 @@ s32 fn_800CF8DC(u8 *self) {
     return *(s32 *)(self + 0x50);
 }
 
+s32 fn_800CF92C(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x6C);
+}
+
 f32 fn_800CFE34(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0x2C);
 }
