@@ -6,6 +6,15 @@ void fn_802F1AD4(void) {
     fn_802D2FD0();
 }
 
+extern void fn_802D30D4(void *, s32 *);
+s32 fn_802F1AF4(s32 arg0, s32 *out) {
+    s32 tmp;
+
+    fn_802D30D4((void *)arg0, &tmp);
+    *out = tmp;
+    return arg0;
+}
+
 void fn_802F1B74(void);
 void fn_802F2500(void) {
     fn_802F1B74();
