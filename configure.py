@@ -408,6 +408,7 @@ config.libs = [
             Object(NonMatching, "engine/EResPrefetchFile.c"),
             Object(NonMatching, "engine/text_80320408.c"),
             Object(NonMatching, "engine/text_80324168.c"),
+            Object(NonMatching, "engine/ERModel.c"),
             Object(NonMatching, "misc/text_8038FC80.c"),
             Object(NonMatching, "libs/text_80398934.c"),
         ],
