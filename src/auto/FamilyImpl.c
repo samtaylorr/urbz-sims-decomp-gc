@@ -78,6 +78,10 @@ void fn_8010C0A0(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x18) = arg1;
 }
 
+s32 fn_8010C0D8(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x34) & 1;
+}
+
 s32 fn_8010C13C(void) {
     return 0;
 }
