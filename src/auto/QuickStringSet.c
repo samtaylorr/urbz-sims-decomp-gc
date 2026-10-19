@@ -110,6 +110,10 @@ s32 fn_800F98F4(s32 *self) {
     return self[2];
 }
 
+void fn_800FA0F0(s32 *self, s32 value) {
+    *self = value;
+}
+
 s32 fn_800FB614(s32 *self) {
     return self[1];
 }
