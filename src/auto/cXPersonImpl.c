@@ -96,6 +96,10 @@ s32 fn_80185FDC(void **arg0) {
     return M2C_FIELD(M2C_FIELD(*arg0, void **, 0x8C), s32 *, 0x8C);
 }
 
+s32 fn_80185FEC(void **arg0) {
+    return M2C_FIELD(M2C_FIELD(*arg0, void **, 0x8C), s32 *, 0x90);
+}
+
 s32 fn_80185FFC(void *arg0) {
     return M2C_FIELD(arg0, u16 *, 0x90) & 1;
 }
