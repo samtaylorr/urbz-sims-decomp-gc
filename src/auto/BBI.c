@@ -164,6 +164,13 @@ s32 fn_80060C90(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void fn_80060D80(void *arg0, s32 arg1, s32 arg2) {
+    M2C_UNK fn_80060DE4(void *);
+    M2C_FIELD(arg0, s32 *, 0x308) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x3A8) = arg2;
+    fn_80060DE4(arg0);
+}
+
 s32 fn_80060DAC(void) {
     return 0;
 }
