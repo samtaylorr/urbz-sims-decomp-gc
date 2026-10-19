@@ -2,6 +2,14 @@
 #include "common.h"
 
 extern s32 lbl_8049661C;
+void fn_8039859C(void *arg0, u8 *arg1) {
+    M2C_FIELD(arg0, u8 **, 0) = arg1;
+    M2C_FIELD(arg0, s32 *, 4) = 2;
+    M2C_FIELD(arg0, s8 *, 8) = (s8) (((u8) *M2C_FIELD(arg0, u8 **, 0) >> 4U) & 7);
+    M2C_FIELD(arg0, s8 *, 9) = (s8) (*M2C_FIELD(arg0, u8 **, 0) & 0xF);
+    M2C_FIELD(arg0, u8 **, 0) = (u8 *) (M2C_FIELD(arg0, u8 **, 0) + 1);
+}
+
 void fn_803985D8(void *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 0) = arg1;
     M2C_FIELD(arg0, s32 *, 8) = arg1;
