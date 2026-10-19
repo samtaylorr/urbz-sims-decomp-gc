@@ -33,6 +33,10 @@ s32 fn_8010C580(void) {
     return 0;
 }
 
+s32 fn_8010C5F8(void) {
+    return 1;
+}
+
 s32 fn_8010C670(void) {
     return 0;
 }
