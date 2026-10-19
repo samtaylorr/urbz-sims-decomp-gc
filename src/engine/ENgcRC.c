@@ -31,6 +31,20 @@ loop_1:
     goto loop_1;
 }
 
+void fn_80348B8C(u8 *arg0, u32 arg1, u8 arg2) {
+    u8 temp_r0;
+
+    temp_r0 = *arg0;
+    if (temp_r0 <= arg1) {
+        *arg0 = 0;
+        return;
+    }
+    if (temp_r0 > arg2) {
+        *arg0 = arg2;
+    }
+    *arg0 -= arg1;
+}
+
 void *fn_80348E8C(u32 size, void *p) {
     return p;
 }
