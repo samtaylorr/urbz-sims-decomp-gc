@@ -80,3 +80,9 @@ s32 fn_800A4374(void *arg0) {
 s32 fn_800A437C(void) {
     return lbl_804942B4;
 }
+
+void fn_800A439C(void) {
+    M2C_UNK fn_800A40F0(M2C_UNK, M2C_UNK);
+    fn_800A40F0(1, 0xFFFF);
+}
+
