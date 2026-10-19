@@ -169,6 +169,11 @@ void fn_802DD5B0(void *self, void *arg) {
     fn_802D21E0(arg);
 }
 
+void fn_802DD82C(void *arg0, s32 arg1) {
+    M2C_UNK fn_802DDCAC(s32, s32, s32);
+    fn_802DDCAC(M2C_FIELD(arg0, s32 *, 0), M2C_FIELD(arg0, s32 *, 4), arg1);
+}
+
 void fn_802DDDC8(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0xC) = (s32) ((arg1 + 0x1F) & 0xFFFFFFE0);
 }
