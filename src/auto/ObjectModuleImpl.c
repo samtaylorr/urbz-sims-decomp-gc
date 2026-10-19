@@ -81,6 +81,10 @@ s32 fn_80157A38(void) {
     return lbl_80496648;
 }
 
+void fn_80157F24(void) {
+
+}
+
 extern u8 lbl_803D9C80[];
 void *fn_8016A870(void) {
     return lbl_803D9C80;
