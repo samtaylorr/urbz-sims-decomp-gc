@@ -176,3 +176,9 @@ void fn_802D21E0(void *arg0) {
 void fn_802D24C8(void) {
     fn_802D24E8();
 }
+
+void fn_802D26A0(void) {
+    M2C_UNK fn_802D2634(M2C_UNK, M2C_UNK);
+    fn_802D2634(1, 0xFFFF);
+}
+
