@@ -36,6 +36,10 @@ s32 fn_8032A700(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x14C);
 }
 
+s32 fn_8032A708(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x158);
+}
+
 void fn_8032B9E4(void) {
 
 }
