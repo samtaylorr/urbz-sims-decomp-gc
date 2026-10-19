@@ -168,3 +168,8 @@ void fn_8006CD40(void) {
     fn_8006D798();
 }
 
+void fn_80308518(void);
+void fn_8007BB0C(void) {
+    fn_80308518();
+}
+
