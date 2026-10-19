@@ -393,6 +393,7 @@ config.libs = [
             Object(NonMatching, "engine/ERC.c"),
             Object(NonMatching, "engine/EShader.c"),
             Object(NonMatching, "engine/ESubModelShader.c"),
+            Object(NonMatching, "engine/EWindow.c"),
             Object(NonMatching, "misc/text_8038FC80.c"),
             Object(NonMatching, "libs/text_80398934.c"),
         ],
