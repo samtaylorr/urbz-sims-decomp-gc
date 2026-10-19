@@ -55,6 +55,13 @@ s32 *fn_800D1EA4(s32 *self, s32 arg1) {
     return self;
 }
 
+void fn_800D3DF4(s32 *self, s32 flags) {
+    self[5] = (s32)lbl_804093F8;
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_800D4428(void) {
     fn_800D1F84();
 }
