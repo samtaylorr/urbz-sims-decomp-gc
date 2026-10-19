@@ -2,6 +2,13 @@
 #include "common.h"
 
 extern s32 lbl_80494538;
+void fn_8018EDE0(void **obj) {
+    if (obj != NULL) {
+        char *vt = (char *)*obj;
+        (*(void (**)(void *, s32))(vt + 0xC))((char *)obj + *(s16 *)(vt + 0x8), 3);
+    }
+}
+
 void fn_8018EE20(s32 arg0, s32 arg1) {
     M2C_UNK fn_8018D8DC(s32, s32, M2C_UNK);
     fn_8018D8DC(arg1, arg0, 1);
