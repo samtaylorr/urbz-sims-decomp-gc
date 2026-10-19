@@ -175,6 +175,10 @@ s16 fn_801B6520(void *arg0) {
     return *M2C_FIELD(arg0, s16 **, 4);
 }
 
+u16 fn_801B652C(void *arg0) {
+    return M2C_FIELD(M2C_FIELD(arg0, void **, 4), u16 *, 0xE);
+}
+
 void fn_801B6580(void) {
 
 }
