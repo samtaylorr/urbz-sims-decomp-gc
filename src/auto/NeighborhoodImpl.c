@@ -8,6 +8,13 @@ void fn_80123160(void) {
     fn_801234B4();
 }
 
+void fn_80123188(void **obj) {
+    if (obj != NULL) {
+        char *vt = (char *)*obj;
+        (*(void (**)(void *, s32))(vt + 0xC))((char *)obj + *(s16 *)(vt + 0x8), 3);
+    }
+}
+
 M2C_UNK *fn_801231C8(void) {
     extern M2C_UNK lbl_80495B74;
     return &lbl_80495B74;
