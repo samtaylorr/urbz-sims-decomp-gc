@@ -28,6 +28,10 @@ s32 fn_80361D1C(void) {
     return 1;
 }
 
+void fn_80361F28(void) {
+
+}
+
 void *fn_8036202C(u32 size, void *p);
 void *fn_8036202C(u32 size, void *p) {
     return p;
