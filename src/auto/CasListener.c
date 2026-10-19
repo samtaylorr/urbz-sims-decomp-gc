@@ -386,10 +386,10 @@ s32 fn_801C638C(void *arg0) {
     s32 temp_r3;
 
     temp_r3 = M2C_FIELD(arg0, s32 *, 0x18);
-    if (temp_r3 == 0) {
-        return 0;
+    if (temp_r3 != 0) {
+        return temp_r3 + 8;
     }
-    return temp_r3 + 8;
+    return 0;
 }
 
 void fn_801C63A8(void *arg0, s32 arg1, s32 arg2, void **arg3) {
