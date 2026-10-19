@@ -226,6 +226,10 @@ s32 fn_8039BA18(EIWallPartFlags *self, s32 i) {
     return self->unk2C[i];
 }
 
+f32 fn_8039BA40(void *arg0) {
+    return M2C_FIELD(arg0, f32 *, 8) * M2C_FIELD(arg0, f32 *, 4);
+}
+
 void fn_8039BB90(void) {
     fn_8018EA6C();
 }
