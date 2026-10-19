@@ -129,6 +129,11 @@ s32 fn_802F03CC(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x9C);
 }
 
+extern const f32 lbl_803F0DB8[];
+f32 fn_802F03D4(void) {
+    return lbl_803F0DB8[0];
+}
+
 extern s32 lbl_80494E58;
 s32 fn_802F03E8(void) {
     return lbl_80494E58;
