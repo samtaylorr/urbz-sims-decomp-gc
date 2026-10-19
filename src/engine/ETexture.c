@@ -61,6 +61,10 @@ s32 fn_8036F1DC(void) {
     return 1;
 }
 
+void fn_8036F1E4(void) {
+
+}
+
 s32 fn_8036F1F0(void) {
     return 0;
 }
