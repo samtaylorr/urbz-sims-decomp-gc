@@ -34,6 +34,12 @@ void fn_800ADBEC(void) {
 
 }
 
+void fn_800ADD24(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x14) = 4;
+    M2C_FIELD(arg0, s32 *, 0x470) = 3;
+    M2C_FIELD(arg0, s32 *, 0x468) = 3;
+}
+
 s32 fn_800AEB28(void) {
     return 1;
 }
