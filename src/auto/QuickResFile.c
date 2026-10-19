@@ -27,6 +27,10 @@ void fn_8018CB38(void **self, s32 flags) {
     }
 }
 
+s16 fn_8018CC28(void *arg0) {
+    return M2C_FIELD(M2C_FIELD(arg0, void **, 4), s16 *, 4);
+}
+
 s32 fn_8018CC54(void) {
     return 0;
 }
