@@ -360,6 +360,10 @@ void fn_8039DAE4(void) {
 
 }
 
+void fn_8039DB04(void *arg0, f32 farg0) {
+    M2C_FIELD(arg0, f32 *, 0xC) = farg0;
+}
+
 f32 fn_8039DB0C(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0xC);
 }
