@@ -38,6 +38,12 @@ void fn_80325B1C(s32 arg0) {
     fn_80366120(arg0 + 0x490B0);
 }
 
+void fn_80327A68(s32 arg0) {
+    M2C_UNK fn_80328DD4(s32);
+    fn_80328AE0();
+    fn_80328DD4(arg0);
+}
+
 void fn_80328CF8(s32 arg0) {
     M2C_UNK fn_802F5BD0(s32);
     fn_802F5BD0(arg0 + 0x28);
