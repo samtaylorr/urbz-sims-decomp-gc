@@ -341,6 +341,12 @@ void fn_800FC178(void **self, s32 flags) {
     }
 }
 
+extern u8 lbl_8040D548[];
+void **fn_800FC1AC(void **self) {
+    *self = lbl_8040D548;
+    return self;
+}
+
 s32 fn_800FC360(void *arg0) {
     return M2C_FIELD(M2C_FIELD(arg0, void **, 4), s32 *, 4);
 }
