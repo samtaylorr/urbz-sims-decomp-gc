@@ -57,6 +57,10 @@ f32 fn_80105498(u8 *arg0) {
     return (f32) (f64) (s8) *arg0;
 }
 
+f32 fn_801054D0(void *arg0) {
+    return (f32) (f64) (s8) M2C_FIELD(arg0, u8 *, 1);
+}
+
 void fn_80105508(void *arg0) {
     M2C_FIELD(arg0, s8 *, 2) = 0;
 }
