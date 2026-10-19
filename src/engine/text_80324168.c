@@ -2,6 +2,12 @@
 #include "common.h"
 
 void fn_802D2FD0(void);
+s32 *fn_80324168(s32 *arg0) {
+    arg0[0] = 0;
+    arg0[1] = 0;
+    return arg0;
+}
+
 void fn_8032417C(void) {
     fn_802D2FD0();
 }
