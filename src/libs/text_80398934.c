@@ -4754,6 +4754,12 @@ void fn_803BF820(void **self, s32 flags) {
     }
 }
 
+void fn_803BF854(void *self) {
+    ((s32 *)self)[0] = 0;
+    ((s32 *)self)[2] = 0;
+    ((s32 *)self)[1] = 0;
+}
+
 extern void fn_803BF854(void *);
 void *fn_803BF868(void *self) {
     fn_803BF854(self);
