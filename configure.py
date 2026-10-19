@@ -431,6 +431,7 @@ config.libs = [
             Object(NonMatching, "engine/text_80338E40.c"),
             Object(NonMatching, "engine/EyeToyManager.c"),
             Object(NonMatching, "engine/ENgcAudio.c"),
+            Object(NonMatching, "engine/ENgcAudioSampleManager.c"),
             Object(NonMatching, "misc/text_8038FC80.c"),
             Object(NonMatching, "libs/text_80398934.c"),
         ],
