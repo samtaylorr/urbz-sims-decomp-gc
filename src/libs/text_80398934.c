@@ -633,9 +633,9 @@ void fn_8039BECC(s32 *dst, s32 *src, s32 n) {
 }
 
 void fn_8039C07C(s32 *dst, s32 *src, s32 n) {
-    dst += n - 1;
     src += n - 1;
-    while (n-- != 0) {
+    dst += n - 1;
+    while (--n != -1) {
         *dst-- = *src--;
     }
 }
