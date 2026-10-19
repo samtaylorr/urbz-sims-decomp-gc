@@ -716,6 +716,10 @@ void fn_8039E788(s32 *self, s32 flags) {
     }
 }
 
+void fn_8039EA18(void) {
+    fn_80048A48(lbl_8041F754);
+}
+
 void fn_8039EA40(s32 *self, s32 flags) {
     self[5] = (s32)lbl_804093F8;
     if (flags & 1) {
