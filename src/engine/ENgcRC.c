@@ -102,6 +102,12 @@ void fn_803483F0(s32 arg0) {
     fn_8037A938(lbl_8046C3C8, arg0, 1);
 }
 
+void fn_80348954(s32 arg0) {
+    void fn_8037A938(void *, s32, s32);
+    extern u8 lbl_8046B058[];
+    fn_8037A938(lbl_8046B058, arg0, 1);
+}
+
 void fn_80348B8C(u8 *arg0, u32 arg1, u8 arg2) {
     u8 temp_r0;
 
