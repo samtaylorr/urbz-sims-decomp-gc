@@ -96,6 +96,10 @@ void fn_80097B40(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
 
+s32 fn_80097B9C(void *arg0) {
+    return ((u32) M2C_FIELD(arg0, u32 *, 0x4D4) >> 6U) & 1;
+}
+
 f32 fn_80097C08(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0xFC);
 }
