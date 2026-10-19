@@ -9,6 +9,11 @@ s32 fn_80310750(void) {
     return 0;
 }
 
+s32 fn_80310A48(void *arg0, f32 farg0) {
+    M2C_FIELD(arg0, f32 *, 0x1E4) = farg0;
+    return 1;
+}
+
 s32 fn_80310FE4(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x1AC);
 }
