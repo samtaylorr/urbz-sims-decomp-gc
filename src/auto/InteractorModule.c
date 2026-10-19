@@ -29,6 +29,10 @@ f32 fn_8023E8CC(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0x80);
 }
 
+s32 fn_8023E93C(s32 arg0) {
+    return arg0 + 0x68;
+}
+
 f32 fn_8023E94C(void) {
     extern f32 lbl_80496770;
     return lbl_80496770;
