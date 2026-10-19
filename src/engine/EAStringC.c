@@ -345,6 +345,10 @@ s32 fn_802BB640(s32 *self) {
     return self[2];
 }
 
+void fn_802BB6CC(void) {
+    lbl_80443314[0]();
+}
+
 s32 fn_802BB79C(void) {
     return 0;
 }
