@@ -210,6 +210,10 @@ s32 fn_8039B728(void) {
     return 0;
 }
 
+void fn_8039B730(void *arg0, s16 arg1) {
+    M2C_FIELD(arg0, s16 *, 0xC) = arg1;
+}
+
 s32 fn_8039B738(void) {
     return 0;
 }
