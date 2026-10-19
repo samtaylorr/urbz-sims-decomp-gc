@@ -6,6 +6,10 @@ s32 fn_8031FC74(void) {
     return 0;
 }
 
+s32 fn_8031FC7C(void) {
+    return 1;
+}
+
 s32 fn_8031FC84(void) {
     return 0;
 }
