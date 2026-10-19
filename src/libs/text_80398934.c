@@ -174,6 +174,15 @@ void fn_8039AD88(void) {
 
 }
 
+void fn_8039AD8C(void *arg0, s32 arg1) {
+    extern u8 lbl_80406DF8[];
+    void fn_802D20E8(void *);
+    M2C_FIELD(arg0, void **, 8) = lbl_80406DF8;
+    if (arg1 & 1) {
+        fn_802D20E8(arg0);
+    }
+}
+
 void fn_8039AE08(void) {
 
 }
