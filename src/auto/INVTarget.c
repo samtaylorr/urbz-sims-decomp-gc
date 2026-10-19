@@ -54,6 +54,10 @@ void fn_801FE2C0(void) {
 
 }
 
+void fn_8020064C(void) {
+
+}
+
 s32 fn_80223248(s32 *self) {
     return self[1];
 }
