@@ -264,6 +264,13 @@ void fn_8039B7FC(u8 *self, s32 flags) {
     }
 }
 
+void fn_8039B958(u8 *self, s32 flags) {
+    *(void **)(self + 0x28) = lbl_80407C28;
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 s32 fn_8039BA10(void) {
     return 0;
 }
@@ -1240,6 +1247,13 @@ void fn_803AB624(void) {
 
 s32 fn_803AB678(s32 *self) {
     return self[2];
+}
+
+s32 fn_803AB714(s32 arg0, s32 arg1) {
+    s32 fn_800F69E8(s32);
+    M2C_UNK fn_800F69F8(s32, s32);
+    fn_800F69F8(arg1, fn_800F69E8(arg0 + 4));
+    return 1;
 }
 
 void fn_80197B90(void);
