@@ -14,6 +14,10 @@ s32 fn_800BF7E0(void) {
     return 0;
 }
 
+void fn_800BF7E8(void) {
+
+}
+
 s32 fn_800BF7EC(void) {
     return 0;
 }
