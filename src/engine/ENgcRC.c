@@ -63,6 +63,11 @@ void fn_8034BC0C(void) {
     fn_8035B7F8(lbl_8046DF78);
 }
 
+void fn_8035B8CC(u8 *arg);
+void fn_8034BC34(void) {
+    fn_8035B8CC(lbl_8046DF78);
+}
+
 extern void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
 void fn_8034BCEC(void *arg0) {
