@@ -13,3 +13,12 @@ s32 fn_802DFF60(void) {
     return 0;
 }
 
+extern u8 lbl_80419848[];
+extern void fn_802D20E8(void *);
+void fn_802DFF84(void **self, s32 flags) {
+    *self = lbl_80419848;
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
