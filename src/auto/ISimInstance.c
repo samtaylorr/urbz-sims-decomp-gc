@@ -28,6 +28,11 @@ s32 fn_80066BDC(void) {
     return lbl_80491CB0[0];
 }
 
+extern u16 lbl_80491CB4[];
+u16 fn_80066BE8(void) {
+    return lbl_80491CB4[0];
+}
+
 void *fn_80066BF4(void) {
     return lbl_80491CA0;
 }
