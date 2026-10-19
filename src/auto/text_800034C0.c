@@ -18,6 +18,10 @@ s32 fn_800034C0(void) {
     return lbl_80493F0C;
 }
 
+void fn_800034C8(void *self, s32 value) {
+    lbl_80493F0C = value;
+}
+
 u8 *fn_8000381C(u8 *self) {
     fn_802E0460(self);
     *(u8 **)(self + 0x338) = lbl_804069E8;
