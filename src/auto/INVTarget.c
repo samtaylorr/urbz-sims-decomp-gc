@@ -157,6 +157,11 @@ void fn_8020069C(void) {
 
 }
 
+void fn_802006A0(void *arg0) {
+    M2C_UNK fn_801E0884(void *, void *, u8);
+    fn_801E0884(arg0 + 0x79C, arg0, M2C_FIELD(arg0, u8 *, 0x87));
+}
+
 void fn_802007DC(void *arg0) {
     M2C_UNK fn_802006CC(s32, void *);
     fn_802006CC(M2C_FIELD(arg0, s32 *, 4), arg0);
