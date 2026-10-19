@@ -24,6 +24,17 @@ s32 fn_801D7DE4(void) {
     return lbl_804945FC;
 }
 
+s32 fn_801D9790(void) {
+    s32 fn_801D91AC();
+    M2C_UNK fn_802D1FC8(M2C_UNK);
+    extern s32 lbl_8049460C;
+    if ((s32) lbl_8049460C == 0) {
+        fn_802D1FC8(0x10);
+        lbl_8049460C = fn_801D91AC();
+    }
+    return lbl_8049460C;
+}
+
 s32 fn_801DCC6C(void *arg0) {
     s32 var_r11;
 
