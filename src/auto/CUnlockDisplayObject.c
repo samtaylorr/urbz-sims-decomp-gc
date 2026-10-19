@@ -5,6 +5,12 @@ s32 fn_800B72E8(void) {
     return 1;
 }
 
+extern void *fn_802D0AB8(void *);
+extern void fn_802D1A00(void *, void *);
+void fn_800B9644(void *arg0) {
+    fn_802D1A00(fn_802D0AB8(arg0), arg0);
+}
+
 s32 fn_800BBD78(s32 *self) {
     return self[1];
 }
