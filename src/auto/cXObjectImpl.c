@@ -144,6 +144,10 @@ void fn_801489D4(void) {
 
 }
 
+s32 fn_801489D8(void *arg0) {
+    return M2C_FIELD(M2C_FIELD(arg0, void **, 0x8C), s32 *, 0x50);
+}
+
 s32 fn_80148B5C(s32 arg0) {
     return arg0 + 0x70;
 }
