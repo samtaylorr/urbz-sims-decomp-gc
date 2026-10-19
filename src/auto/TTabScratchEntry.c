@@ -333,6 +333,10 @@ void fn_801A0858(void *self, s32 flags) {
     }
 }
 
+void fn_801A0E48(s32 *arg0) {
+    *arg0 = 0;
+}
+
 s32 fn_801A0FCC(void) {
     return 0x1E;
 }
