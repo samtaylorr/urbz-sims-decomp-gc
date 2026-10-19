@@ -51,3 +51,7 @@ void fn_80185E04(void) {
 
 }
 
+u8 *fn_80185E9C(u8 *self) {
+    return self + 8;
+}
+
