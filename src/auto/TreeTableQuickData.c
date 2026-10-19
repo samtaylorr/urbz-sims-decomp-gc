@@ -48,6 +48,10 @@ s32 fn_801B380C(void) {
     return 0;
 }
 
+void fn_801B3908(s32 *self, s32 value) {
+    *self = value;
+}
+
 s32 fn_801B3E30(void) {
     return 0;
 }
