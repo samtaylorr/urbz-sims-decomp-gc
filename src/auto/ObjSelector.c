@@ -88,3 +88,12 @@ void fn_8016F4C0(s32 self, s32 flags) {
     }
 }
 
+void fn_8016F784(M2C_UNK **arg0) {
+    M2C_UNK *temp_r9;
+
+    temp_r9 = *arg0;
+    if (temp_r9 != NULL) {
+        *arg0 = *temp_r9;
+    }
+}
+
