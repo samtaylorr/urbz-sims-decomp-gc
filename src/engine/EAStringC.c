@@ -134,6 +134,11 @@ s32 fn_802AD034(void) {
     return 1;
 }
 
+void fn_802AD03C(char *self) {
+    extern void fn_802AEA9C(void *);
+    fn_802AEA9C(self + 8);
+}
+
 s32 fn_802AD114(void) {
     return 0;
 }
