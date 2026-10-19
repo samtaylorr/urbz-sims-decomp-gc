@@ -58,3 +58,7 @@ s32 fn_80176098(void) {
     return 0;
 }
 
+s32 fn_801760B8(void) {
+    return lbl_80495C90;
+}
+
