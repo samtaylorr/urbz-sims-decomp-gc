@@ -64,6 +64,12 @@ s32 fn_801336B0(void *arg0) {
     return 1;
 }
 
+s32 fn_8013391C(s32 arg0, s32 arg1) {
+    M2C_UNK fn_801336D8(s32, s32);
+    fn_801336D8(arg1, arg0);
+    return arg0;
+}
+
 void fn_80133954(s32 *arg0) {
     *arg0 = 0;
 }
