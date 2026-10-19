@@ -30,3 +30,8 @@ void fn_803100F0(void *self, s32 flags) {
     }
 }
 
+void fn_8031020C(void) {
+    M2C_UNK fn_803101B8(M2C_UNK, M2C_UNK);
+    fn_803101B8(1, 0xFFFF);
+}
+
