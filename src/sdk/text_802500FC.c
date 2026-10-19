@@ -121,6 +121,11 @@ s32 fn_802599FC(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x2D4);
 }
 
+void fn_8025AD58(void) {
+    M2C_UNK fn_8025AD78();
+    fn_8025AD78();
+}
+
 s32 fn_8025D7FC(void) {
     return 4;
 }
