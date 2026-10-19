@@ -91,6 +91,26 @@ void fn_800B1DCC(void) {
 
 }
 
+void fn_800B20E8(void *arg0) {
+    s32 fn_800B2190(void *);
+    M2C_UNK fn_800B2384(void *, s32);
+    s32 fn_800B2710(void *, s32 *);
+    s32 fn_800B2750(void *, s32 *);
+    s32 sp8;
+    void *temp_r29;
+
+    temp_r29 = arg0 + 0x444;
+    sp8 = M2C_FIELD(arg0, s32 *, 0x7AC);
+    sp8 = fn_800B2710(temp_r29, &sp8);
+    if ((fn_800B2750(temp_r29, &sp8) != 0) && (fn_800B2190(arg0) != 0)) {
+        sp8 = M2C_FIELD(arg0, s32 *, 0x7AC);
+        sp8 = fn_800B2710(temp_r29, &sp8);
+    }
+    if (fn_800B2750(arg0 + 0x444, &sp8) == 0) {
+        fn_800B2384(arg0, sp8);
+    }
+}
+
 void *fn_800B2614(void *arg0) {
     return arg0 + (M2C_FIELD(arg0, s32 *, 0x360) * 0x6C);
 }
