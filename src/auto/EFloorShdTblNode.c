@@ -30,6 +30,14 @@ void fn_80052F5C(void) {
 
 }
 
+void fn_80053474(s32 arg0) {
+    s32 fn_80053198();
+    M2C_UNK fn_800534B0(s32);
+    if (fn_80053198() != 0) {
+        fn_800534B0(arg0);
+    }
+}
+
 void fn_80053948(void *arg0) {
     M2C_UNK fn_80053428();
     fn_80053428();
