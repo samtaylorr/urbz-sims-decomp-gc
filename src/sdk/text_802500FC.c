@@ -381,6 +381,11 @@ void fn_80275690(void) {
 
 }
 
+void fn_80276D34(void) {
+    extern void *__cpReg;
+    M2C_FIELD(__cpReg, s16 *, 4) = 4;
+}
+
 void fn_802773FC(void) {
 
 }
