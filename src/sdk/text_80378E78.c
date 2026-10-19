@@ -18,6 +18,10 @@ void fn_8037E858(void) {
 
 }
 
+s32 fn_8037E85C(void) {
+    return 0x4000;
+}
+
 extern s32 lbl_8049633C;
 s32 fn_8037E864(void) {
     return lbl_8049633C;
