@@ -98,6 +98,14 @@ s32 fn_801BC084(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x10) & 1;
 }
 
+s32 fn_801BD6CC(void *arg0, s32 arg1) {
+    s32 temp_r0;
+
+    temp_r0 = M2C_FIELD(arg0, s32 *, 4);
+    M2C_FIELD(arg0, s32 *, 4) = arg1;
+    return temp_r0;
+}
+
 void fn_801BF628(void) {
 
 }
