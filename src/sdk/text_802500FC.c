@@ -116,6 +116,10 @@ void fn_80275690(void) {
 
 }
 
+void fn_802773FC(void) {
+
+}
+
 s32 fn_80277404(void) {
     return 0;
 }
