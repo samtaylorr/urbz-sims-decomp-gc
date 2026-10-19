@@ -5,6 +5,10 @@ void fn_800ACA14(void) {
 
 }
 
+void fn_800ACA1C(void) {
+
+}
+
 s32 fn_800AEB28(void) {
     return 1;
 }
