@@ -34,3 +34,8 @@ u8 *fn_801D494C(u8 *self) {
     return self + 8;
 }
 
+void fn_801D4B2C(void) {
+    M2C_UNK fn_801D4AD8(M2C_UNK, M2C_UNK);
+    fn_801D4AD8(1, 0xFFFF);
+}
+
