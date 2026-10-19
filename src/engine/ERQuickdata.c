@@ -127,3 +127,7 @@ s32 fn_803312D4(EIWallPartFlags *self, s32 i) {
     return self->unk2C[i];
 }
 
+u8 fn_80331364(void *arg0) {
+    return M2C_FIELD(arg0, u8 *, 0x5C);
+}
+
