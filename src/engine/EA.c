@@ -30,6 +30,10 @@ s32 fn_802D8B2C(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x2C);
 }
 
+s32 fn_802D9118(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x32C);
+}
+
 void fn_802D9120(void) {
 
 }
