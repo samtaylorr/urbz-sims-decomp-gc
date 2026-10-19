@@ -347,6 +347,12 @@ void fn_800CFFF0(void *arg0) {
     fn_800CE474(arg0);
 }
 
+void fn_800D0020(void *arg0) {
+    M2C_UNK fn_800CE5A8(void *);
+    M2C_FIELD(arg0, s32 *, 4) = (s32) (M2C_FIELD(arg0, s32 *, 4) & 0xFFFFFFFE);
+    fn_800CE5A8(arg0);
+}
+
 s32 fn_800D0050(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 4) & 1;
 }
