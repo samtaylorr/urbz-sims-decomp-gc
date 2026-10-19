@@ -4410,6 +4410,10 @@ s32 fn_803B75F0(void) {
     return 1;
 }
 
+u8 *fn_803B75F8(u8 *self) {
+    return self + 8;
+}
+
 s32 fn_803B7600(void) {
     return 1;
 }
