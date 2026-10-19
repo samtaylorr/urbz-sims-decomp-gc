@@ -11,3 +11,7 @@ void fn_8035EA70(void) {
     fn_8035EC18();
 }
 
+s32 fn_8035F14C(void) {
+    return 1;
+}
+
