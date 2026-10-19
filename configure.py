@@ -173,15 +173,11 @@ config.asflags = [
     f"-I build/{config.version}/include",
     f"--defsym BUILD_VERSION={version_num}",
 ]
-config.ldflags = [
-    "-fp hardware",
-    "-nodefaults",
-]
-if args.debug:
-    config.ldflags.append("-g")  # Or -gdwarf-2 for Wii linkers
-if args.map:
-    config.ldflags.append("-mapunused")
-    # config.ldflags.append("-listclosure") # For Wii linkers
+# SN Systems ProDG toolchain (ngccc / ngcld) instead of Metrowerks, as in the
+# Bustin' Out decomp (same engine): https://github.com/daftblazer/bustin-out-decomp
+config.prodg = True
+config.prodg_ldscript = Path("config") / config.version / "ldscript.ld"
+config.ldflags = []
 
 # Use for any additional files that should cause a re-configure when modified
 config.reconfig_deps = []
@@ -190,64 +186,41 @@ config.reconfig_deps = []
 # Can be overridden in libraries or objects
 config.scratch_preset_id = None
 
-# Base flags, common to most GC/Wii games.
-# Generally leave untouched, with overrides added below.
+# Base flags for ngccc (GCC 2.95.2, SN build), taken from the Bustin' Out decomp
 cflags_base = [
-    "-nodefaults",
-    "-proc gekko",
-    "-align powerpc",
-    "-enum int",
-    "-fp hardware",
-    "-Cpp_exceptions off",
-    "-O4,p",
-    "-inline auto",
-    '-pragma "cats off"',
-    '-pragma "warn_notinlined off"',
-    "-maxerrors 1",
-    "-nosyspath",
-    "-RTTI off",
-    "-fp_contract on",
-    "-str reuse",
-    "-multibyte",  # For Wii compilers, replace with `-enc SJIS`
-    "-i include",
-    f"-i build/{config.version}/include",
+    "-O2",
+    "-G8",
+    # Vtables go to .rodata and inline/template functions are emitted as local
+    # copies in every translation unit
+    "-fno-weak",
+    # Template repository: instances are emitted once, as global symbols, in the
+    # unit chosen at link time (see tools/prodg_cc.py)
+    "-frepo",
+    "-fno-implement-inlines",
+    # Plain `char` is signed (the engine was ported from PS2)
+    "-fsigned-char",
+    "-Iinclude",
+    f"-Ibuild/{config.version}/include",
     f"-DBUILD_VERSION={version_num}",
     f"-DVERSION_{config.version}",
 ]
 
-# Debug flags
 if args.debug:
-    # Or -sym dwarf-2 for Wii compilers
-    cflags_base.extend(["-sym on", "-DDEBUG=1"])
+    cflags_base.extend(["-g", "-DDEBUG=1"])
 else:
     cflags_base.append("-DNDEBUG=1")
 
-# Warning flags
 if args.warn == "all":
-    cflags_base.append("-W all")
+    cflags_base.append("-Wall")
 elif args.warn == "off":
-    cflags_base.append("-W off")
+    cflags_base.append("-w")
 elif args.warn == "error":
-    cflags_base.append("-W error")
+    cflags_base.append("-Werror")
 
-# Metrowerks library flags
-cflags_runtime = [
-    *cflags_base,
-    "-use_lmw_stmw on",
-    "-str reuse,pool,readonly",
-    "-gccinc",
-    "-common off",
-    "-inline auto",
-]
+cflags_runtime = cflags_base
+cflags_rel = cflags_base
 
-# REL flags
-cflags_rel = [
-    *cflags_base,
-    "-sdata 0",
-    "-sdata2 0",
-]
-
-config.linker_version = "GC/1.3.2"
+config.linker_version = "ProDG/3.7"
 config.shift_jis = False
 
 
@@ -255,7 +228,7 @@ config.shift_jis = False
 def DolphinLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
     return {
         "lib": lib_name,
-        "mw_version": "GC/1.2.5n",
+        "mw_version": config.linker_version,
         "cflags": cflags_base,
         "progress_category": "sdk",
         "objects": objects,
@@ -266,7 +239,7 @@ def DolphinLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
 def Rel(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
     return {
         "lib": lib_name,
-        "mw_version": "GC/1.3.2",
+        "mw_version": config.linker_version,
         "cflags": cflags_rel,
         "progress_category": "game",
         "objects": objects,

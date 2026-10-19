@@ -25,12 +25,20 @@ def in_wsl() -> bool:
     return "microsoft-standard" in uname().release
 
 
-def import_d_file(in_file: str) -> str:
+def import_d_file(in_file: str, target: str = "") -> str:
     out_text = ""
 
     with open(in_file) as file:
         for idx, line in enumerate(file):
-            if idx == 0:
+            if idx == 0 and target:
+                # Replace the target and transform the remaining paths below.
+                # (ProDG names the target `file.obj` and lists deps on one line.)
+                deps = line.split(":", 1)[1].replace("\\\n", "").split()
+                out_text += target + ": \\\n"
+                for dep in deps:
+                    out_text += "\t" + dep.replace("\\", "/") + " \\\n"
+                out_text = out_text[:-3] + "\n" if not line.endswith(" \\\n") else out_text
+            elif idx == 0:
                 if line.endswith(" \\\n"):
                     out_text += line[:-3].replace("\\", "/") + " \\\n"
                 else:
@@ -42,6 +50,10 @@ def import_d_file(in_file: str) -> str:
                     path = line.lstrip()[:-3]
                 else:
                     path = line.strip()
+                if target and not (len(path) > 1 and path[1] == ":"):
+                    # Already a relative/Unix path
+                    out_text += "\t" + path.replace("\\", "/") + suffix + "\n"
+                    continue
                 # lowercase drive letter
                 path = path[0].lower() + path[1:]
                 if path[0] == "z":
@@ -72,9 +84,14 @@ def main() -> None:
         "d_file_out",
         help="""Dependency file out""",
     )
+    parser.add_argument(
+        "--target",
+        default="",
+        help="Override the dependency target (for compilers that emit a wrong one)",
+    )
     args = parser.parse_args()
 
-    output = import_d_file(args.d_file)
+    output = import_d_file(args.d_file, args.target)
 
     with open(args.d_file_out, "w", encoding="UTF-8") as f:
         f.write(output)

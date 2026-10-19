@@ -171,6 +171,10 @@ class ProjectConfig:
             None  # List of precompiled headers
         )
         self.linker_version: Optional[str] = None  # mwld version
+        # SN Systems ProDG (GCC) toolchain instead of Metrowerks CodeWarrior.
+        # `mw_version` / `linker_version` are then of the form "ProDG/3.7".
+        self.prodg: bool = False
+        self.prodg_ldscript: Optional[Path] = None  # GNU-style linker script for ngcld
         self.version: Optional[str] = None  # Version name
         self.warn_missing_config: bool = False  # Warn on missing unit configuration
         self.warn_missing_source: bool = False  # Warn on missing source file
@@ -694,6 +698,27 @@ def generate_build_ninja(
     mwld_cmd = f"{wrapper_cmd}{mwld} $ldflags -o $out @$out.rsp"
     mwld_implicit: List[Optional[Path]] = [compilers_implicit or mwld, wrapper_implicit]
 
+    if config.prodg:
+        # ProDG: ngccc (GCC driver) and ngcld locate their config through SN_NGC_PATH.
+        # ngccc -MMD writes the depfile next to the object, with a `.obj` target.
+        sn_env = f"env SN_NGC_PATH={compiler_path} "
+        mwcc = compiler_path / "ngccc.exe"
+        # Compiled through tools/prodg_cc.py, which reproduces the original
+        # build's template repository (-frepo) assignment for the unit.
+        prodg_cc = config.tools_dir / "prodg_cc.py"
+        mwcc_cmd = f"$python {prodg_cc} --nm {binutils / f'powerpc-eabi-nm{EXE}'} --unit $unit -- {sn_env}{wrapper_cmd}{mwcc} $cflags -MMD -c $in -o $out"
+        mwcc_implicit = [compilers_implicit or mwcc, wrapper_implicit, prodg_cc]
+        mwcc_sjis_cmd = mwcc_cmd
+        mwcc_sjis_implicit = [*mwcc_implicit]
+        mwcc_extab_cmd = mwcc_cmd
+        mwcc_extab_implicit = [*mwcc_implicit]
+        mwcc_sjis_extab_cmd = mwcc_cmd
+        mwcc_sjis_extab_implicit = [*mwcc_implicit]
+        # ngcld does not support response files
+        mwld = compiler_path / "ngcld.exe"
+        mwld_cmd = f"{sn_env}{wrapper_cmd}{mwld} $ldflags -o $out $in"
+        mwld_implicit = [compilers_implicit or mwld, wrapper_implicit]
+
     # GNU as
     gnu_as = binutils / f"powerpc-eabi-as{EXE}"
     gnu_as_cmd = (
@@ -705,6 +730,15 @@ def generate_build_ninja(
     gnu_as_implicit.append(build_path / "include" / "macros.inc")
 
     if os.name != "nt":
+        transform_dep = config.tools_dir / "transform_dep.py"
+        if config.prodg:
+            mwcc_cmd = f"{CHAIN}{mwcc_cmd} && $python {transform_dep} --target $out $basefile.d $basefile.d"
+            mwcc_sjis_cmd = mwcc_extab_cmd = mwcc_sjis_extab_cmd = mwcc_cmd
+            mwcc_implicit.append(transform_dep)
+            mwcc_sjis_implicit.append(transform_dep)
+            mwcc_extab_implicit.append(transform_dep)
+            mwcc_sjis_extab_implicit.append(transform_dep)
+    if os.name != "nt" and not config.prodg:
         transform_dep = config.tools_dir / "transform_dep.py"
         mwcc_cmd += f" && $python {transform_dep} $basefile.d $basefile.d"
         mwcc_sjis_cmd += f" && $python {transform_dep} $basefile.d $basefile.d"
@@ -902,10 +936,17 @@ def generate_build_ninja(
             n.comment(f"Link {self.name}")
             if self.module_id == 0:
                 elf_path = build_path / f"{self.name}.elf"
-                elf_ldflags = f"$ldflags -lcf {serialize_path(self.ldscript)}"
+                if config.prodg:
+                    if config.prodg_ldscript is None:
+                        sys.exit("ProjectConfig.prodg_ldscript missing")
+                    self.ldscript = config.prodg_ldscript
+                    elf_ldflags = f"$ldflags -T {serialize_path(self.ldscript)}"
+                else:
+                    elf_ldflags = f"$ldflags -lcf {serialize_path(self.ldscript)}"
                 if config.generate_map:
                     elf_map = map_path(elf_path)
-                    elf_ldflags += f" -map {serialize_path(elf_map)}"
+                    map_flag = "-Map" if config.prodg else "-map"
+                    elf_ldflags += f" {map_flag} {serialize_path(elf_map)}"
                 else:
                     elf_map = None
                 n.build(
@@ -1009,7 +1050,9 @@ def generate_build_ninja(
 
             # Add appropriate language flag if it doesn't exist already
             # Added directly to the source so it flows to other generation tasks
-            if not any(flag.startswith("-lang") for flag in cflags) and not any(
+            if config.prodg:
+                pass  # GCC infers the language from the file extension
+            elif not any(flag.startswith("-lang") for flag in cflags) and not any(
                 flag.startswith("-lang") for flag in extra_cflags
             ):
                 # Ensure extra_cflags is a unique instance,
@@ -1034,6 +1077,8 @@ def generate_build_ninja(
                 "basedir": os.path.dirname(obj.src_obj_path),
                 "basefile": obj.src_obj_path.with_suffix(""),
             }
+            if config.prodg:
+                variables["unit"] = obj.name
 
             if obj.options["shift_jis"] and obj.options["extab_padding"] is not None:
                 build_rule = "mwcc_sjis_extab"
@@ -1198,12 +1243,16 @@ def generate_build_ninja(
 
         # Check if all compiler versions exist
         for mw_version in used_compiler_versions:
-            mw_path = compilers / mw_version / "mwcceppc.exe"
+            mw_path = compilers / mw_version / (
+                "ngccc.exe" if config.prodg else "mwcceppc.exe"
+            )
             if config.compilers_path and not os.path.exists(mw_path):
                 sys.exit(f"Compiler {mw_path} does not exist")
 
         # Check if linker exists
-        mw_path = compilers / str(config.linker_version) / "mwldeppc.exe"
+        mw_path = compilers / str(config.linker_version) / (
+            "ngcld.exe" if config.prodg else "mwldeppc.exe"
+        )
         if config.compilers_path and not os.path.exists(mw_path):
             sys.exit(f"Linker {mw_path} does not exist")
 
@@ -1600,6 +1649,11 @@ def generate_objdiff_config(
 
     # decomp.me compiler name mapping
     COMPILER_MAP = {
+        "ProDG/3.5": "prodg_35",
+        "ProDG/3.5b140": "prodg_35_b140",
+        "ProDG/3.7": "prodg_37",
+        "ProDG/3.8.1": "prodg_381",
+        "ProDG/3.9.3": "prodg_393",
         "GC/1.0": "mwcc_233_144",
         "GC/1.1": "mwcc_233_159",
         "GC/1.1p1": "mwcc_233_159p1",

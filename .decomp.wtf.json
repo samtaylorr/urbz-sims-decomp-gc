@@ -2,7 +2,7 @@
   "created": "from scratch",
   "platform": "gc",
   "version": "GUBE69",
-  "compiler": "GC/1.3.2",
+  "compiler": "ProDG/3.7",
   "game": {
     "what": "your copy of the game",
     "path": "orig/GUBE69/game.iso",
