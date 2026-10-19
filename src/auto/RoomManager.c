@@ -92,6 +92,24 @@ s32 fn_80192C7C(void) {
     return lbl_80494538;
 }
 
+u16 fn_80192C84(u16 arg0) {
+    u16 *fn_80190AA4(s32, u16);
+    extern s32 lbl_80496654;
+    s32 temp_r31;
+    u16 *temp_r3;
+    u16 *temp_r3_2;
+
+    temp_r31 = lbl_80496654;
+    temp_r3_2 = fn_80190AA4(temp_r31, arg0);
+    if (temp_r3_2 != NULL) {
+        temp_r3 = fn_80190AA4(temp_r31, M2C_FIELD(temp_r3_2, u16 *, 2));
+        if (temp_r3 != NULL) {
+            return *temp_r3;
+        }
+    }
+    return arg0;
+}
+
 void fn_80192D70(void) {
     M2C_UNK fn_80192CE4(M2C_UNK, M2C_UNK);
     fn_80192CE4(1, 0xFFFF);
