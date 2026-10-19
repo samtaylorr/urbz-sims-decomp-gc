@@ -245,6 +245,10 @@ void fn_801A3010(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0xC) = arg1;
 }
 
+void fn_801A3018(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0x10) = arg1;
+}
+
 s32 fn_801A3020(s32 *self) {
     return self[1];
 }
