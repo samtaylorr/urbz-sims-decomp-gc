@@ -113,6 +113,15 @@ s32 fn_801BBAB0(char *self) {
     return *(s32 *)(self + 0xC);
 }
 
+void fn_801BBFB0(void *arg0) {
+    void *temp_r9;
+
+    temp_r9 = M2C_FIELD(arg0, void **, 0xC);
+    if ((s32) M2C_FIELD(temp_r9, s32 *, 4) != 0) {
+        M2C_FIELD(temp_r9, s32 *, 4) = 0;
+    }
+}
+
 void fn_801BBFCC(void) {
 
 }
