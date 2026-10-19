@@ -230,6 +230,10 @@ void fn_801AA4AC(void) {
 
 }
 
+void fn_801AA4B0(void) {
+
+}
+
 s32 fn_801AA4B4(void) {
     return 0;
 }
