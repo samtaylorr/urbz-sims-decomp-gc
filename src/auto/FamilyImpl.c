@@ -38,6 +38,10 @@ void fn_8010B568(void **self, s32 flags) {
     }
 }
 
+s32 fn_8010B9DC(void *arg0) {
+    return (s32) (M2C_FIELD(arg0, s32 *, 0x28) - M2C_FIELD(arg0, s32 *, 0x24)) >> 2;
+}
+
 s32 fn_8010BD50(void) {
     return 0;
 }
