@@ -29,6 +29,11 @@ void fn_802D5244(M2C_UNK **arg0) {
     *arg0 = &lbl_803FD294;
 }
 
+void fn_802D58E4(s32 *arg0) {
+    M2C_UNK fn_802D5200(s32);
+    fn_802D5200(*arg0);
+}
+
 extern u8 lbl_80419540[];
 extern void fn_802D20E8(void *);
 void fn_802D6A28(void **self, s32 flags) {
