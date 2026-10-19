@@ -110,6 +110,10 @@ s32 fn_802DF340(void) {
     return 0;
 }
 
+s32 fn_802DF348(s32 *self) {
+    return self[7];
+}
+
 s32 fn_802DF350(void) {
     return 0;
 }
