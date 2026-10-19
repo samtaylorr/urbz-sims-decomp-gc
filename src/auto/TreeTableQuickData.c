@@ -104,3 +104,7 @@ s32 fn_801B66C4(void) {
     return 0;
 }
 
+s32 fn_801B66CC(void) {
+    return 0;
+}
+
