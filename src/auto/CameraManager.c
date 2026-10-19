@@ -18,6 +18,10 @@ void fn_80014E0C(void) {
 
 }
 
+void fn_80014F3C(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+}
+
 void fn_80014F48(void *self, s32 flags) {
     if (flags & 1) {
         fn_802D20E8(self);
