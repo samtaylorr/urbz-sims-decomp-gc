@@ -74,6 +74,14 @@ s32 fn_8010C070(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x14);
 }
 
+void fn_8010C078(void *arg0, s32 arg1) {
+    if (arg1 <= 0xF423F) {
+        M2C_FIELD(arg0, s32 *, 0x14) = arg1;
+        return;
+    }
+    M2C_FIELD(arg0, s32 *, 0x14) = 0xF423F;
+}
+
 s32 fn_8010C098(s32 *self) {
     return self[6];
 }
