@@ -11,6 +11,11 @@ void fn_80372304(void) {
     fn_80371B64();
 }
 
+extern u8 lbl_80493E6C[];
+void *fn_80372388(void) {
+    return lbl_80493E6C;
+}
+
 void fn_802D2430(void);
 void fn_80372424(void) {
     fn_802D2430();
