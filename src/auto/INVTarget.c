@@ -58,6 +58,10 @@ s32 fn_801F55B0(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0xF8);
 }
 
+s32 fn_801F55B8(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0xE4);
+}
+
 void fn_801F55C0(void) {
     fn_800C3B48();
 }
