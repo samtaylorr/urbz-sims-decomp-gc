@@ -117,3 +117,8 @@ s32 fn_8031BDA4(void *arg0, s32 arg1) {
     return M2C_FIELD(arg0, s32 *, 0x20) + (arg1 * 0xB8);
 }
 
+void fn_8031BDB4(void) {
+    M2C_UNK fn_8031BB5C(M2C_UNK, M2C_UNK);
+    fn_8031BB5C(1, 0xFFFF);
+}
+
