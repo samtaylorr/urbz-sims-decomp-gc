@@ -6,6 +6,15 @@ s32 fn_8019B448(void) {
     return 0;
 }
 
+extern u8 lbl_80414770[];
+extern void fn_802D20E8(void *);
+void fn_8019CE74(void **self, s32 flags) {
+    *self = lbl_80414770;
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 s32 fn_8019E508(void) {
     return 1;
 }
