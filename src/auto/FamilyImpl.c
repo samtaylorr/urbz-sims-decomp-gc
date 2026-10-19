@@ -254,3 +254,8 @@ void fn_8010D234(void (*cb)(void)) {
     lbl_8049441C = cb;
 }
 
+void fn_8010D290(void) {
+    M2C_UNK fn_8010D23C(M2C_UNK, M2C_UNK);
+    fn_8010D23C(1, 0xFFFF);
+}
+
