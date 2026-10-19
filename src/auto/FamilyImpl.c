@@ -95,6 +95,16 @@ void fn_8010C0A8(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x20) = 0;
 }
 
+void fn_8010C0B8(void *arg0, s32 arg1) {
+    s32 temp_r0;
+
+    temp_r0 = M2C_FIELD(arg0, s32 *, 0x34) & 0xFFFFFFFE;
+    M2C_FIELD(arg0, s32 *, 0x34) = temp_r0;
+    if (arg1 != 0) {
+        M2C_FIELD(arg0, s32 *, 0x34) = (s32) (temp_r0 | 1);
+    }
+}
+
 s32 fn_8010C0D8(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x34) & 1;
 }
