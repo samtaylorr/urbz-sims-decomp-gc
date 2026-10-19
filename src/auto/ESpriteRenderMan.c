@@ -40,6 +40,21 @@ void fn_800414B0(s32 *self) {
     self[1] = 1;
 }
 
+void fn_80041580(void **arg0) {
+    M2C_UNK fn_8003FE70(s32);
+    M2C_UNK fn_800415D0(void **);
+    void *var_r31;
+
+    var_r31 = *arg0;
+    if (var_r31 != NULL) {
+        do {
+            fn_8003FE70(M2C_FIELD(var_r31, s32 *, 0));
+            var_r31 = M2C_FIELD(var_r31, void **, 8);
+        } while (var_r31 != NULL);
+    }
+    fn_800415D0(arg0);
+}
+
 void fn_80041664(void **arg0) {
     M2C_UNK fn_80040038(s32);
     void *var_r31;
