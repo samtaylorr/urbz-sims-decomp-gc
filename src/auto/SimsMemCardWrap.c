@@ -89,6 +89,10 @@ void fn_800A9C7C(void) {
 
 }
 
+void fn_800A9C80(void) {
+
+}
+
 s32 fn_800AA638(void) {
     return 1;
 }
