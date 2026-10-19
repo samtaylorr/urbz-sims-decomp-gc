@@ -7,6 +7,10 @@ void fn_802500FC(void) {
     fn_8024FF78(fn_8024FF70() & ~0x200);
 }
 
+s32 fn_8025015C(void) {
+    return *(s32 *)0x80000040;
+}
+
 void fn_80251714(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 4) = arg1;
 }
