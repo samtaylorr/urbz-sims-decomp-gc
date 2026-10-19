@@ -69,6 +69,11 @@ void fn_8001635C(void) {
 
 }
 
+void fn_80016810(void) {
+    M2C_UNK fn_80043F0C(M2C_UNK);
+    fn_80043F0C(0);
+}
+
 void fn_80016C78(void) {
 
 }
