@@ -252,6 +252,16 @@ void *fn_801F091C(void **self, char *name) {
     return self;
 }
 
+void *fn_801F0970(void **self, char *name) {
+    extern u8 lbl_80417510[];
+    extern u8 lbl_80417490[];
+    self[2] = lbl_80417510;
+    self[0] = name;
+    self[1] = (void *)fn_801F0834(name);
+    self[2] = lbl_80417490;
+    return self;
+}
+
 void fn_801F388C(void) {
 
 }
