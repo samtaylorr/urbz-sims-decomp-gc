@@ -160,6 +160,10 @@ s32 fn_803099E8(s32 arg0) {
     return arg0 + 0x80;
 }
 
+void fn_803099F0(void *arg0, f32 farg0) {
+    M2C_FIELD(arg0, f32 *, 0x8C) = farg0;
+}
+
 extern void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
 void fn_8030A738(void *arg0) {
