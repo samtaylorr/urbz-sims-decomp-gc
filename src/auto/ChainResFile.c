@@ -38,6 +38,10 @@ s8 fn_80105B78(u8 *arg0) {
     return (s8) *arg0;
 }
 
+s8 fn_80105B84(void *arg0) {
+    return (s8) M2C_FIELD(arg0, u8 *, 1);
+}
+
 void fn_80105C14(void *arg0, s8 arg1) {
     M2C_FIELD(arg0, s8 *, 2) = arg1;
 }
