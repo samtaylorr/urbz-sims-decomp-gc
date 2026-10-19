@@ -5,6 +5,10 @@ s32 fn_802C47F4(void) {
     return 0;
 }
 
+void fn_802C47FC(void) {
+
+}
+
 extern s32 lbl_80494DB0;
 void fn_802C54FC(void (*cb)(void)) {
     lbl_80494DB0 = cb;
