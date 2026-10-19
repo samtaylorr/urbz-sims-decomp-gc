@@ -30,6 +30,22 @@ void *fn_802D197C(void *heap, u32 size, u32 align);
 void *fn_802DBBCC(void *heap, u32 size, u32 align);
 void *fn_802D0B3C(void);
 void *fn_800EBA28(void *mem, s32 arg);
+void *fn_802D0AB8(void *);
+
+static inline void *BString_Alloc(u32 size, u32 align) {
+    void *heap;
+    void *p;
+
+    heap = ((void *(*)(void))fn_802D0AB8)();
+    p = fn_802D197C(heap, size, align);
+    if (p == NULL) {
+        p = fn_802DBBCC(heap, size, 0);
+        if (p == NULL && heap == ((void *(*)(void))fn_802D0AB8)()) {
+            return fn_802DBBCC(fn_802D0B3C(), size, 0);
+        }
+    }
+    return p;
+}
 f32 fn_800E416C(void *arg0);
 extern f32 lbl_803D496C[];
 extern f32 lbl_803D4970[];
