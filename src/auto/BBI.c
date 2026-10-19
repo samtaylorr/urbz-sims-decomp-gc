@@ -241,6 +241,10 @@ s32 fn_80063278(s32 arg0) {
     return arg0 + 0x3E4;
 }
 
+s32 fn_800632A0(s32 arg0) {
+    return arg0 + 0x3F0;
+}
+
 void fn_800633C8(void) {
     fn_8005FB70();
 }
