@@ -258,6 +258,11 @@ s32 fn_8026E9F4(s32 *self) {
     return self[2];
 }
 
+void fn_8026E9FC(void *arg0, s32 *arg1, s32 *arg2) {
+    *arg1 = M2C_FIELD(arg0, s32 *, 0xC);
+    *arg2 = M2C_FIELD(arg0, s32 *, 0x10);
+}
+
 extern s32 lbl_80496098;
 s32 fn_8026EDD8(void) {
     return lbl_80496098;
