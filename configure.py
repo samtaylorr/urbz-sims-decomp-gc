@@ -308,6 +308,7 @@ config.libs = [
             Object(NonMatching, "auto/EyeToyClient.c"),
             Object(NonMatching, "auto/GameData.c"),
             Object(NonMatching, "auto/EGlobal.c"),
+            Object(NonMatching, "auto/text_8004F1BC.c"),
             Object(NonMatching, "libsn/text_8023EBD8.c"),
             Object(NonMatching, "clib/text_80241A98.c"),
             Object(NonMatching, "engine/text_802781E4.c"),
