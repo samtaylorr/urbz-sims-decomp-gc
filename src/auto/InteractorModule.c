@@ -57,6 +57,10 @@ s32 fn_8023E77C(void *arg0) {
     return M2C_FIELD(M2C_FIELD(arg0, void **, 0x8C), s32 *, 8);
 }
 
+s32 fn_8023E89C(void *arg0) {
+    return ((u32) M2C_FIELD(arg0, u32 *, 0x84) >> 7U) & 1;
+}
+
 f32 fn_8023E8CC(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0x80);
 }
