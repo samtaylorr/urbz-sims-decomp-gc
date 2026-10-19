@@ -2908,6 +2908,11 @@ void *fn_800ED300(void *self) {
     return self;
 }
 
+void *fn_800ED330(void *arg0, const char *arg1) {
+    ((void (*)(void *, const char *, s32))fn_800EBDA4)(arg0, arg1, arg1 ? fn_80248808(arg1) : 0);
+    return arg0;
+}
+
 extern void fn_800EBC84(void *);
 void *fn_800ED5D8(void *self) {
     fn_800EBC84(self);
