@@ -4967,6 +4967,10 @@ void fn_803BBD88(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0) = arg1;
 }
 
+s32 fn_803BBD94(s32 *arg0, s32 arg1) {
+    return M2C_FIELD(((arg1 * 4) + *arg0), s32 *, 4);
+}
+
 extern u8 lbl_8041B6F0[];
 void fn_803BBDA8(void **self, s32 flags) {
     *self = lbl_8041B6F0;
