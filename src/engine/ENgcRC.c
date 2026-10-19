@@ -2,6 +2,11 @@
 #include "common.h"
 
 void fn_802FB604(void);
+void *fn_80348E8C(u32 size, void *p);
+void *fn_80348E8C(u32 size, void *p) {
+    return p;
+}
+
 void fn_80348F38(void) {
     fn_802FB604();
 }
