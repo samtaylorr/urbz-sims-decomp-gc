@@ -63,6 +63,16 @@ void fn_8004D9D4(void) {
     fn_8001E370(lbl_8041ED64);
 }
 
+void fn_8004DCC0(void *arg0) {
+    M2C_UNK fn_80064EC4(s32);
+    void *temp_r9;
+
+    temp_r9 = M2C_FIELD(arg0, void **, 0xEC);
+    if (temp_r9 != NULL) {
+        fn_80064EC4(M2C_FIELD(temp_r9, s32 *, 4));
+    }
+}
+
 s32 fn_8004E644(void) {
     return 0;
 }
