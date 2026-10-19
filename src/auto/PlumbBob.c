@@ -26,6 +26,9 @@ void fn_8006E268(void *self) {
     }
 }
 
+void fn_8006E2D0(void) {
+}
+
 s32 fn_800702F8(void) {
     return 0;
 }
