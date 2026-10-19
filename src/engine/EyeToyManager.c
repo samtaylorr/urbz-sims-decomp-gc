@@ -10,6 +10,15 @@ s32 fn_803390A4(void) {
     return 0;
 }
 
+s32 fn_803390C4(s32 arg0) {
+    extern s32 lbl_80494F74;
+    if (arg0 != -1) {
+        fn_8033930C();
+        lbl_80494F74 -= 1;
+    }
+    return 1;
+}
+
 void fn_8033915C(s32 arg0) {
     if (arg0 != -1) {
         fn_8033930C();
