@@ -6,6 +6,10 @@ s32 fn_802D82B4(void) {
     return 0;
 }
 
+s32 fn_802D8B1C(void) {
+    return 1;
+}
+
 s32 fn_802D8B24(void) {
     return 0;
 }
