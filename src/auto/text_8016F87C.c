@@ -26,6 +26,10 @@ s32 fn_8016FA58(void *arg0, s32 arg1) {
     return 1;
 }
 
+void fn_8016FA64(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    M2C_FIELD(arg0, M2C_UNK (**)(s32, s32, s32), 0x34)(arg1, arg2, arg3);
+}
+
 s32 fn_8016FE18(void) {
     return 1;
 }
