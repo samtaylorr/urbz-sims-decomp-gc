@@ -180,6 +180,13 @@ void *fn_8039A038(void *self) {
     return self;
 }
 
+void fn_8039A068(u8 *p, s32 n) {
+    while (--n != -1) {
+        fn_8039A038(p);
+        p += 0xC;
+    }
+}
+
 void fn_8039A0B4(s32 *self, s32 n) {
     while (--n != -1) {
         self++;
