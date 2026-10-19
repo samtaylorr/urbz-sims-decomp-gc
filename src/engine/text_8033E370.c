@@ -4,3 +4,9 @@
 void fn_8033E484(void) {
 
 }
+
+void fn_8033E710(void) {
+    M2C_UNK fn_8033E6BC(M2C_UNK, M2C_UNK);
+    fn_8033E6BC(1, 0xFFFF);
+}
+
