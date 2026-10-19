@@ -22,3 +22,7 @@ s32 fn_8033C4EC(void) {
     return 0;
 }
 
+void fn_8033D214(void) {
+
+}
+
