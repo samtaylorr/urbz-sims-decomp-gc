@@ -19,6 +19,12 @@ s32 fn_80129550(void) {
     return 0x1C;
 }
 
+s32 fn_8012A8C0(void) {
+    M2C_UNK fn_8012AF90();
+    fn_8012AF90();
+    return 0;
+}
+
 s32 fn_8012A8E4(void) {
     return 0;
 }
