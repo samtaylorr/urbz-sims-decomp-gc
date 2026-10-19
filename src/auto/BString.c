@@ -1914,6 +1914,12 @@ void fn_800E4724(void) {
     fn_800E46B8(lbl_80496640);
 }
 
+void fn_800E4810(s32 arg0) {
+    M2C_UNK fn_800E4748(s32, s32);
+    extern s32 lbl_80496640;
+    fn_800E4748(lbl_80496640, arg0);
+}
+
 void fn_800E4958(s32 *self, s32 flags) {
     s32 *v;
     self[5] = (s32)lbl_8040CB28;
