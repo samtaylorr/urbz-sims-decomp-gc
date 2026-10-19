@@ -119,6 +119,11 @@ void *fn_8006381C(void) {
     return lbl_80491EBC;
 }
 
+extern s32 lbl_80491EC8[];
+s32 fn_80063828(void) {
+    return lbl_80491EC8[0];
+}
+
 void *fn_8006384C(void) {
     return lbl_80491EBC;
 }
