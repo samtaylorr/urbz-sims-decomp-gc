@@ -149,6 +149,23 @@ s32 fn_8029F660(void **arg0) {
     return var_r9;
 }
 
+void *fn_8029F8BC(void *arg0) {
+    void *temp_r11;
+    void *temp_r11_2;
+
+    temp_r11 = M2C_FIELD(arg0, void **, 0x54);
+    if (temp_r11 != NULL) {
+        M2C_FIELD(temp_r11, void **, 0x58) = (void *) M2C_FIELD(arg0, void **, 0x58);
+    }
+    temp_r11_2 = M2C_FIELD(arg0, void **, 0x58);
+    if (temp_r11_2 != NULL) {
+        M2C_FIELD(temp_r11_2, void **, 0x54) = (void *) M2C_FIELD(arg0, void **, 0x54);
+    }
+    M2C_FIELD(arg0, void **, 0x54) = NULL;
+    M2C_FIELD(arg0, void **, 0x58) = NULL;
+    return arg0;
+}
+
 s32 fn_802A1514(s32 *self) {
     return *self;
 }
