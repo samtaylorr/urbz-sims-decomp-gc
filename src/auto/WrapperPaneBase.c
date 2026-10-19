@@ -229,6 +229,10 @@ s32 fn_800CF92C(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x6C);
 }
 
+void fn_800CFE2C(void *arg0, f32 farg0) {
+    M2C_FIELD(arg0, f32 *, 0x2C) = farg0;
+}
+
 f32 fn_800CFE34(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0x2C);
 }
