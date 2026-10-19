@@ -698,6 +698,14 @@ s32 fn_803A1674(s32 *self) {
     return self[2];
 }
 
+extern u8 lbl_8040EDA0[];
+void fn_803A167C(void **self, s32 flags) {
+    *self = lbl_8040EDA0;
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_803A29C8(void) {
     fn_8018EA6C();
 }
