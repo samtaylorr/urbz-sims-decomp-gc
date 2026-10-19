@@ -43,6 +43,10 @@ char *fn_80014CD4(char *self) {
     return self + 0x44C;
 }
 
+s32 fn_80014D3C(char *self) {
+    return *(s32 *)(self + 0x3D4);
+}
+
 s32 fn_80014D44(char *self) {
     return *(s32 *)(self + 0xC);
 }
