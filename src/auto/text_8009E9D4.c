@@ -46,6 +46,10 @@ void fn_800A4370(void) {
 
 }
 
+s32 fn_800A4374(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x174);
+}
+
 s32 fn_800A437C(void) {
     return lbl_804942B4;
 }
