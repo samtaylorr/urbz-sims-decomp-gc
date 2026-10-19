@@ -117,6 +117,10 @@ s32 fn_80260F58(void) {
     return 1;
 }
 
+void fn_80260F60(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 4) = (s32) (M2C_FIELD(arg0, s32 *, 0) + 1);
+}
+
 s32 fn_80260F70(void) {
     extern void *lbl_80495EB0;
     return M2C_FIELD(lbl_80495EB0, s32 *, 0x38);
