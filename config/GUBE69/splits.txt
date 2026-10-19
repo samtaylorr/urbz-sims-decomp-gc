@@ -25,7 +25,10 @@ auto/ESimsCam.c:
 	.text       start:0x8000CA9C end:0x80014DCC
 
 auto/CameraManager.c:
-	.text       start:0x80014DCC end:0x8023EBD8
+	.text       start:0x80014DCC end:0x800177F8
+
+auto/ECheatLookup.c:
+	.text       start:0x800177F8 end:0x8023EBD8
 
 libsn/text_8023EBD8.c:
 	.text       start:0x8023EBD8 end:0x80241A98
