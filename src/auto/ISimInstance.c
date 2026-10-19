@@ -82,6 +82,10 @@ s32 fn_80065AC4(void) {
     return 0;
 }
 
+void fn_80065ACC(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0x308) = arg1;
+}
+
 void *fn_80066B10(u32 size, void *p);
 void *fn_80066B10(u32 size, void *p) {
     return p;
