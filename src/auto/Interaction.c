@@ -24,6 +24,11 @@ void fn_8010D628(s32 *self, s32 value) {
     *self = value;
 }
 
+void fn_8010D630(void *arg0) {
+    s32 fn_800C488C();
+    M2C_FIELD(arg0, s32 *, 8) = fn_800C488C();
+}
+
 extern u8 lbl_8040EBA0[];
 void fn_8010D784(void **self, s32 flags) {
     *self = lbl_8040EBA0;
