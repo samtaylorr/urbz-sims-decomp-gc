@@ -122,6 +122,37 @@ void fn_80355E28(u8 *self) {
     *(s32 *)(self + 0x510) = 0;
 }
 
+void fn_80355E64(u8 *self, u8 *arg) {
+    u8 *p;
+    s8 on;
+    u8 off;
+    u8 mode;
+    u8 enable;
+
+    enable = arg[1];
+    mode = arg[2];
+    off = arg[3];
+    on = 0;
+    self[0x462C] = enable;
+    self[0x462D] = mode;
+    self[0x462E] = off;
+    if (enable != 0) {
+        on = 1;
+    }
+    p = *(u8 **)(self + 0x4D8);
+    p[0x3B4] = off == 0;
+    p[0x3AC] = on;
+    *(u32 *)(p + 0x6CC) |= 0x80000000 | 0x40;
+    *(s32 *)(p + 0x3B0) = lbl_803F4668[mode];
+}
+
+extern s32 lbl_804951A4;
+void fn_803560D0(void) {
+    if (lbl_804951A4 != 0) {
+        lbl_804951A4 = 0;
+    }
+}
+
 void fn_80273F88(void);
 void fn_80357AA0(void) {
     fn_80273F88();
