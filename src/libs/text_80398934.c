@@ -1565,6 +1565,24 @@ void fn_803A36A0(s32 *first, s32 *last, s32 comp) {
     }
 }
 
+s32 fn_803A3790(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    struct {
+        void *vtbl;
+        s32 unk4;
+        s32 unk8;
+    } tmp, *p;
+    u8 out[8];
+    s32 ret;
+
+    p = &tmp;
+    tmp.unk4 = arg0;
+    tmp.vtbl = lbl_8040FD10;
+    p->unk8 = arg2;
+    ret = fn_8018E70C(out, p, arg4, arg1, arg3);
+    ((void (*)(void *, s32))fn_8018EA6C)(p, 2);
+    return ret;
+}
+
 void fn_803A3D2C(s32 *first, s32 *last, s32 comp);
 void fn_803A3DD8(s32 *first, s32 *last, s32 *val, s32 comp);
 void fn_803A3E2C(s32 *first, s32 *last, s32 comp) {
