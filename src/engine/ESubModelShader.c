@@ -40,3 +40,7 @@ void fn_80302230(void) {
 
 }
 
+s32 fn_80305908(s32 arg0) {
+    return arg0 + 0x48;
+}
+
