@@ -95,3 +95,7 @@ s32 fn_802F5B14(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x120);
 }
 
+s32 fn_802F5B24(s32 arg0) {
+    return arg0 + 0x90;
+}
+
