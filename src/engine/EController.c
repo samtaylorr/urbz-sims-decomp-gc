@@ -148,6 +148,11 @@ void fn_8031202C(void *arg0, s32 arg1, s32 arg2) {
     fn_80311404(arg0, arg1, a, fn_80311A4C(arg0, arg2), 1);
 }
 
+void fn_803121AC(void *arg0, s32 arg1, s32 arg2) {
+    s32 a = fn_80311B2C(arg0, arg2);
+    fn_80311404(arg0, arg1, a, fn_80311A4C(arg0, arg2), 1);
+}
+
 void fn_8031220C(void *arg0, s32 arg1, s32 arg2) {
     fn_803112CC(arg0, fn_80311A4C(arg0, arg2), 1, arg1);
 }
