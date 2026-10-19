@@ -4154,6 +4154,12 @@ void fn_803B7494(char *self) {
     fn_802AEA9C(self + 8);
 }
 
+void fn_802AEABC();
+void fn_803B74B8(char *self) {
+    extern void fn_802AEABC(void *);
+    fn_802AEABC(self + 8);
+}
+
 s32 fn_803B75F0(void) {
     return 1;
 }
