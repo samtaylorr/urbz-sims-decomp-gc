@@ -22,6 +22,11 @@ s32 fn_80102414(void *arg0, s32 arg1) {
     return (s32) ((arg1 - M2C_FIELD(M2C_FIELD(arg0, void **, 8), s32 *, 4)) * 0xCCCCCCCD) >> 2;
 }
 
+void **fn_801028B0(void **self) {
+    *self = lbl_8040D690;
+    return self;
+}
+
 extern void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
 void fn_801029D8(void *arg0) {
