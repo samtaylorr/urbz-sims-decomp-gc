@@ -317,6 +317,7 @@ config.libs = [
             Object(NonMatching, "auto/text_8008C46C.c"),
             Object(NonMatching, "auto/ScrollingTextBox.c"),
             Object(NonMatching, "auto/SimImageMaker.c"),
+            Object(NonMatching, "auto/text_8009E9D4.c"),
             Object(NonMatching, "libsn/text_8023EBD8.c"),
             Object(NonMatching, "clib/text_80241A98.c"),
             Object(NonMatching, "engine/text_802781E4.c"),
