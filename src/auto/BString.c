@@ -2198,6 +2198,18 @@ void fn_800E97C0(s32 *self, s32 flags) {
     }
 }
 
+s32 *fn_800E97F4(s32 *self, s32 a) {
+    extern s32 lbl_8040CE90[];
+    self[0] = a;
+    self[1] = -1;
+    self[2] = 0;
+    self[3] = -1;
+    self[4] = 1;
+    self[5] = (s32)lbl_8040CE90;
+    self[6] = 0;
+    return self;
+}
+
 void fn_800E982C(s32 *self, s32 flags) {
     self[5] = (s32)lbl_804093F8;
     if (flags & 1) {
