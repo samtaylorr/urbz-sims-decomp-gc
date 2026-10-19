@@ -156,6 +156,25 @@ void fn_802D9DE4(void) {
 
 }
 
+void fn_802D9DE8(void *arg0, void *arg1, s32 arg2) {
+    void *temp_r9;
+    void *temp_r10;
+    void *temp_r11;
+
+    temp_r11 = M2C_FIELD(arg0, void **, 0x444);
+    temp_r10 = arg0 + 0x34;
+    M2C_FIELD(arg0, void **, 0x444) = arg1;
+    M2C_FIELD(arg1, void **, 0xC) = arg1;
+    M2C_FIELD(arg1, void **, 8) = arg1;
+    if ((temp_r11 != temp_r10) && (arg2 != 0)) {
+        temp_r9 = M2C_FIELD(temp_r10, void **, 0xC);
+        M2C_FIELD(temp_r11, void **, 8) = temp_r10;
+        M2C_FIELD(temp_r11, void **, 0xC) = temp_r9;
+        M2C_FIELD(temp_r10, void **, 0xC) = temp_r11;
+        M2C_FIELD(temp_r9, void **, 8) = temp_r11;
+    }
+}
+
 s32 fn_802D9E3C(void) {
     return 1;
 }
