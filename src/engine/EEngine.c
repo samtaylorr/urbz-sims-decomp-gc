@@ -160,3 +160,7 @@ s32 fn_802E1A50(void) {
     return 1;
 }
 
+void fn_802E1A58(void) {
+    fn_802E19F8(1, 0xFFFF);
+}
+
