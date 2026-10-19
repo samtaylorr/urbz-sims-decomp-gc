@@ -215,6 +215,13 @@ void fn_800E20F4(s32 *self, s32 flags) {
     }
 }
 
+void fn_800E2168(s32 *self, s32 flags) {
+    self[5] = (s32)lbl_804093F8;
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_800E21DC(s32 *self, s32 flags) {
     self[5] = (s32)lbl_804093F8;
     if (flags & 1) {
