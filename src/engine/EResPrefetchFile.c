@@ -56,6 +56,13 @@ void fn_80320010(void) {
 
 }
 
+void fn_80320204(void) {
+    M2C_UNK fn_8031FEAC();
+    M2C_UNK fn_80320378(M2C_UNK);
+    fn_80320378(0x24);
+    fn_8031FEAC();
+}
+
 void fn_8032027C(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
