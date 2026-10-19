@@ -10,3 +10,7 @@ void fn_8027F924(void) {
 
 }
 
+void fn_8027FAA8(void) {
+
+}
+
