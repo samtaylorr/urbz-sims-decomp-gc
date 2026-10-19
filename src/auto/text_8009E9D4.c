@@ -6,6 +6,10 @@ void fn_800A0568(void) {
 
 }
 
+void fn_800A0A88(void) {
+
+}
+
 s32 fn_800A437C(void) {
     return lbl_804942B4;
 }
