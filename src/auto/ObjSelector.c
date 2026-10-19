@@ -15,6 +15,13 @@ void fn_8016C114(void) {
     fn_8016C1A4();
 }
 
+void fn_8016C13C(void) {
+    M2C_UNK fn_8016C1A4();
+    M2C_UNK fn_802D1FC8(M2C_UNK);
+    fn_802D1FC8(0x18);
+    fn_8016C1A4();
+}
+
 s32 fn_8016C258(void) {
     return 1;
 }
