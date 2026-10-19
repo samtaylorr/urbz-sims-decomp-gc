@@ -91,6 +91,10 @@ void fn_802F02F4(void) {
 
 }
 
+void fn_802F02F8(void) {
+
+}
+
 s32 fn_802F02FC(void) {
     return 0;
 }
