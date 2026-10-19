@@ -111,6 +111,12 @@ void fn_8019CA6C(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x34) = -1;
 }
 
+void fn_8019CA78(void *arg0, u32 arg1) {
+    if (arg1 <= 7U) {
+        M2C_FIELD(arg0, u32 *, 0x34) = arg1;
+    }
+}
+
 extern u8 lbl_80414770[];
 extern void fn_802D20E8(void *);
 void fn_8019CE74(void **self, s32 flags) {
