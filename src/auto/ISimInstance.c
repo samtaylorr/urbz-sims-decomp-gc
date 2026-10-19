@@ -23,6 +23,13 @@ s32 fn_80065A34(s32 arg0, s32 *out) {
     return arg0;
 }
 
+extern u8 lbl_80409228[];
+extern void fn_802D20E8(void *);
+extern void fn_80065CEC(void *, s32, s32);
+void fn_80065A74(void *self, s32 arg1) {
+    fn_80065CEC(self, 4, arg1);
+}
+
 s32 fn_80065AC4(void) {
     return 0;
 }
