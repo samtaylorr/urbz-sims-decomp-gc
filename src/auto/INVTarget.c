@@ -174,6 +174,11 @@ void fn_801F0498(void) {
 
 }
 
+void fn_801F0744(void *arg0, s32 arg1) {
+    f64 fn_80246DDC(s32);
+    M2C_FIELD(arg0, M2C_UNK (**)(f32), 0xC)((f32) fn_80246DDC(arg1));
+}
+
 void fn_801F0784(void) {
     M2C_UNK fn_801EA898(s32);
     extern s32 lbl_80494630;
