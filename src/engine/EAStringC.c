@@ -561,6 +561,10 @@ s32 fn_802BB38C(void) {
     return 0;
 }
 
+void fn_802BB394(void) {
+
+}
+
 s32 fn_802BB43C(void) {
     return 0;
 }
