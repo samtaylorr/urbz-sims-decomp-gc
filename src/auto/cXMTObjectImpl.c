@@ -15,6 +15,10 @@ void fn_80118300(void) {
     fn_800F1A60((s32)&lbl_80495B6C, 2);
 }
 
+s32 fn_8011BE28(void) {
+    return 0x584D544F;
+}
+
 void fn_8011CD64(void) {
 
 }
