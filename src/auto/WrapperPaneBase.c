@@ -93,6 +93,14 @@ s32 fn_800C60C4(void *arg0, s32 arg1) {
     return temp_r0;
 }
 
+void fn_800C7BD0(s32 arg0) {
+    M2C_UNK fn_800C8614(s32);
+    M2C_UNK fn_800C8908(s32);
+    fn_800CEEC4();
+    fn_800C8908(arg0);
+    fn_800C8614(arg0);
+}
+
 void fn_800C9604(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x78) = arg1;
     M2C_FIELD(arg0, s32 *, 0x7C) = 0;
