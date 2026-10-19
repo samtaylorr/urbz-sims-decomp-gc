@@ -58,3 +58,7 @@ s32 fn_801AA4BC(void) {
     return 0;
 }
 
+s32 fn_801AA4C4(void) {
+    return 0;
+}
+
