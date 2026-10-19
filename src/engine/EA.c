@@ -107,6 +107,10 @@ void fn_802DDDC8(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0xC) = (s32) ((arg1 + 0x1F) & 0xFFFFFFE0);
 }
 
+u32 fn_802DE1B0(void *arg0) {
+    return (u32) (M2C_FIELD(arg0, s32 *, 4) + 0x1F) >> 5U;
+}
+
 void fn_802DE598(void) {
 
 }
