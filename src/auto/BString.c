@@ -2623,17 +2623,19 @@ void fn_800EE5C4(s32 arg0, s32 arg1) {
 }
 
 u32 fn_800EE6DC(void **arg0, void *arg1, u32 arg2, u32 arg3) {
-    u32 n = arg2;
     if (arg3 > fn_800EF6F8(arg0)) {
         fn_800EAF5C();
     }
-    if (n > fn_800EF6F8(arg0) - arg3) {
-        n = fn_800EF6F8(arg0) - arg3;
+    {
+        u32 n = arg2;
+        if (n > fn_800EF6F8(arg0) - arg3) {
+            n = fn_800EF6F8(arg0) - arg3;
+        }
+        if (fn_800EF6F8(arg0) != 0) {
+            fn_8024839C(arg1, fn_800EAFCC(arg0) + arg3, n);
+        }
+        return n;
     }
-    if (fn_800EF6F8(arg0) != 0) {
-        fn_8024839C(arg1, fn_800EAFCC(arg0) + arg3, n);
-    }
-    return n;
 }
 
 void fn_800EE76C(s32 arg0, void **arg1, s32 arg2) {
@@ -2653,15 +2655,7 @@ void fn_800EE7E4(s32 arg0, const char *arg1, s32 arg2) {
 }
 
 u32 fn_800EE83C(void **arg0, u8 arg1, u32 arg2) {
-    const u8 *c = &arg1;
-    while (arg2 < fn_800EF6F8(arg0)) {
-        s32 ne = 1;
-        if (fn_800EAFCC(arg0)[arg2] == *c) {
-            ne = 0;
-        }
-        if (!ne) {
-            break;
-        }
+    while (arg2 < fn_800EF6F8(arg0) && !BString_CharEq(&fn_800EAFCC(arg0)[arg2], &arg1)) {
         arg2++;
     }
     return arg2 < fn_800EF6F8(arg0) ? arg2 : -1;
