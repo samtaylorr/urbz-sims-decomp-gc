@@ -17,6 +17,10 @@ void fn_8004D3E8(void) {
 
 }
 
+void fn_8004D3EC(void) {
+
+}
+
 s32 fn_8004E644(void) {
     return 0;
 }
