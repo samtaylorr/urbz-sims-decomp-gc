@@ -42,6 +42,15 @@ void fn_80015404(void) {
 
 }
 
+void fn_800156E8(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x550) = 0;
+    if ((s32) M2C_FIELD(arg0, s32 *, 0x578) != 0) {
+        M2C_FIELD(arg0, s32 *, 0x554) = 0;
+        return;
+    }
+    M2C_FIELD(arg0, s32 *, 0x554) = 1;
+}
+
 void fn_80015710(void) {
     extern s32 lbl_80495100;
     extern s32 lbl_80495704;
