@@ -371,6 +371,16 @@ void fn_8039BD94(s32 *self, s32 n) {
     }
 }
 
+void fn_8039BDB0(s32 **self);
+void fn_8039BDB0(s32 **self) {
+    s32 *p;
+
+    fn_8039BD94(self[0], (s32)self[1]);
+    p = self[0];
+    fn_802D1A00(fn_802D0AB8(), p);
+    fn_8039BD50(self);
+}
+
 void fn_8039BEB0(s32 *self, s32 n) {
     while (--n != -1) {
         self++;
