@@ -59,3 +59,9 @@ s32 fn_80192B04(void *arg0) {
 s32 fn_80192C7C(void) {
     return lbl_80494538;
 }
+
+void fn_80192D70(void) {
+    M2C_UNK fn_80192CE4(M2C_UNK, M2C_UNK);
+    fn_80192CE4(1, 0xFFFF);
+}
+
