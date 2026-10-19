@@ -1169,6 +1169,20 @@ void fn_803A64F4(void **self, s32 flags) {
     }
 }
 
+void fn_803A87BC(void *arg0, void *arg1, void *arg2) {
+    void **temp_r9;
+
+    if (arg0 != arg2) {
+        *M2C_FIELD(arg2, void ***, 4) = arg0;
+        *M2C_FIELD(arg1, void ***, 4) = arg2;
+        *M2C_FIELD(arg0, void ***, 4) = arg1;
+        temp_r9 = M2C_FIELD(arg0, void ***, 4);
+        M2C_FIELD(arg0, void ***, 4) = (void **) M2C_FIELD(arg2, void ***, 4);
+        M2C_FIELD(arg2, void ***, 4) = (void **) M2C_FIELD(arg1, void ***, 4);
+        M2C_FIELD(arg1, void ***, 4) = temp_r9;
+    }
+}
+
 extern u8 lbl_80413E80[];
 void fn_803A92E4(void **self, s32 flags) {
     *self = lbl_80413E80;
