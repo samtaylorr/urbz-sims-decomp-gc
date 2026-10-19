@@ -121,6 +121,13 @@ s32 fn_8012FE08(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x180);
 }
 
+void fn_8012FE10(void) {
+    extern s32 lbl_80494464;
+    extern s32 lbl_80494468;
+    lbl_80494468 = 0;
+    lbl_80494464 = 0;
+}
+
 s32 fn_8013019C(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x28) + 1;
 }
