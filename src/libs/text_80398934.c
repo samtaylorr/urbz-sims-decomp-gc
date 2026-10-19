@@ -309,6 +309,13 @@ s32 fn_803B95C0(void) {
     return 1;
 }
 
+void fn_803B9750(void **obj) {
+    if (obj != NULL) {
+        char *vt = (char *)*obj;
+        (*(void (**)(void *, s32))(vt + 0x34))((char *)obj + *(s16 *)(vt + 0x30), 3);
+    }
+}
+
 extern u8 lbl_804936F0[];
 void *fn_803B9790(void) {
     return lbl_804936F0;
