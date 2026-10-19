@@ -29,6 +29,10 @@ void fn_800AFD2C(void) {
 
 }
 
+void fn_800B1DCC(void) {
+
+}
+
 s32 fn_800B2EF4(char *self) {
     return *(s32 *)(self + 0xC);
 }
