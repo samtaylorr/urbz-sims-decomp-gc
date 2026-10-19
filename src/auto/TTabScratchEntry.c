@@ -495,6 +495,19 @@ void fn_801A0E48(s32 *arg0) {
     *arg0 = 0;
 }
 
+u16 fn_801A0F3C(void *arg0, u16 arg1, s32 arg2) {
+    u16 var_r0;
+
+    if ((u32) (arg2 - 1) <= 1U) {
+        var_r0 = M2C_FIELD(arg0, u16 *, 8);
+        M2C_FIELD(arg0, u16 *, 8) = arg1;
+    } else {
+        var_r0 = M2C_FIELD(arg0, u16 *, 0x14);
+        M2C_FIELD(arg0, u16 *, 0x14) = arg1;
+    }
+    return var_r0;
+}
+
 s32 fn_801A0FCC(void) {
     return 0x1E;
 }
