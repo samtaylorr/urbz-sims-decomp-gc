@@ -126,6 +126,12 @@ void fn_8019CE74(void **self, s32 flags) {
     }
 }
 
+void fn_8019CFDC(void *arg0, s32 arg1, s32 arg2) {
+    M2C_FIELD(arg0, s32 *, 0x1C) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x20) = arg2;
+    M2C_FIELD(arg0, s32 *, 0x48) = (s32) (M2C_FIELD(arg0, s32 *, 0x48) | 0x40);
+}
+
 s32 fn_8019E508(void) {
     return 1;
 }
