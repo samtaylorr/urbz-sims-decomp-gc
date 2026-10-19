@@ -25,3 +25,7 @@ void fn_8018587C(void) {
 
 }
 
+void fn_80185880(void) {
+
+}
+
