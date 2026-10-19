@@ -96,3 +96,7 @@ s32 fn_80277414(void) {
     return 0;
 }
 
+s32 fn_80277424(void) {
+    return 1;
+}
+
