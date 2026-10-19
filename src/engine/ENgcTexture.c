@@ -6,6 +6,12 @@ void fn_8035F6E4(void) {
     fn_802FF4EC();
 }
 
+void fn_8035F704(s32 arg0) {
+    void fn_80338000(void *, s32, s32);
+    extern u8 lbl_8045BA40[];
+    fn_80338000(lbl_8045BA40, arg0, 4);
+}
+
 void *fn_8035F734(u32 size, void *p);
 void *fn_8035F734(u32 size, void *p) {
     return p;
