@@ -4703,6 +4703,14 @@ void *fn_803BBFE4(void *self) {
     return self;
 }
 
+extern void fn_803BC064(s32);
+void fn_803BC0B0(s32 self, s32 flags) {
+    fn_803BC064(self);
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_803BC0F0(void *self) {
     ((s32 *)self)[0] = 0;
     ((s32 *)self)[2] = 0;
