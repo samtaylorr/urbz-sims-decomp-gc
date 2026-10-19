@@ -42,6 +42,13 @@ s32 fn_8036E9D8(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0xA4);
 }
 
+void fn_8036EA50(void) {
+    M2C_UNK fn_8036D868();
+    M2C_UNK fn_8036EBC4(M2C_UNK);
+    fn_8036EBC4(0x27C);
+    fn_8036D868();
+}
+
 void fn_8036EAC8(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
