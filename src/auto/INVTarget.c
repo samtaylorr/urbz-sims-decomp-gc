@@ -926,6 +926,22 @@ void fn_8022F404(void) {
     fn_802320F8();
 }
 
+s32 fn_802303F0(void) {
+    M2C_UNK fn_80226070(s32, M2C_UNK);
+    s32 fn_802311B4();
+    s32 temp_r3;
+    s32 var_r3;
+
+    temp_r3 = fn_802311B4();
+    var_r3 = 0;
+    if (temp_r3 != 0) {
+        fn_80226070(temp_r3, 0x4EBB9687);
+        fn_80226070(temp_r3, 0x8BC514D2);
+        var_r3 = 1;
+    }
+    return var_r3;
+}
+
 void fn_80230448(void) {
     fn_802320F8();
 }
