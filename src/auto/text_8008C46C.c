@@ -161,3 +161,8 @@ void fn_800983AC(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x18) = 5;
 }
 
+void fn_8009A724(void) {
+    M2C_UNK fn_80097A3C(M2C_UNK, M2C_UNK);
+    fn_80097A3C(1, 0xFFFF);
+}
+
