@@ -42,6 +42,10 @@ void fn_801325DC(void (*cb)(void)) {
     lbl_80494478 = cb;
 }
 
+void fn_80135D6C(void) {
+
+}
+
 s32 fn_80137E2C(void) {
     return 0;
 }
