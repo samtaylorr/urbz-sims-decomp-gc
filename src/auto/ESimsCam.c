@@ -107,3 +107,7 @@ void fn_80014D5C(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x56C) = arg1;
 }
 
+u16 fn_80014D64(void *arg0) {
+    return M2C_FIELD(arg0, u16 *, 0x570);
+}
+
