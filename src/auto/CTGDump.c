@@ -16,3 +16,8 @@ void fn_800F5248(void) {
 
 }
 
+void fn_800F5448(void) {
+    M2C_UNK fn_800F53FC(M2C_UNK, M2C_UNK);
+    fn_800F53FC(1, 0xFFFF);
+}
+
