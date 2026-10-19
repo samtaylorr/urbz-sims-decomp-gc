@@ -34,6 +34,11 @@ typedef struct {
 } SearchEntry;
 void fn_802D8BEC(void *);
 void fn_8030AD40(void);
+extern s32 lbl_8049662C;
+void fn_80398CD8(void (*cb)(void)) {
+    lbl_8049662C = cb;
+}
+
 void fn_8039AB04(void) {
     fn_8030AD40();
 }
