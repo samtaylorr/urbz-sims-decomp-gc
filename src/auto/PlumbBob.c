@@ -328,6 +328,15 @@ s32 fn_8006FD2C(s32 arg0) {
     return arg0 + 0x70;
 }
 
+s32 fn_8006FDB4(s32 arg0) {
+    M2C_UNK fn_8006FF58(s32);
+    M2C_UNK fn_800F6FB4(s32, s32, M2C_UNK);
+    fn_800F6FB4(arg0 + 0x4C, arg0 + 0x54, 0x20);
+    fn_800F6FB4(arg0 + 0x94, arg0 + 0x9C, 0x20);
+    fn_8006FF58(arg0);
+    return arg0;
+}
+
 s32 fn_800702F8(void) {
     return 0;
 }
