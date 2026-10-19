@@ -106,6 +106,10 @@ s32 fn_801BFD6C(u8 *self) {
     return *(s32 *)(self + 0x20);
 }
 
+s32 fn_801BFD74(s32 *self) {
+    return self[6];
+}
+
 void fn_801C0120(void) {
 
 }
