@@ -86,7 +86,7 @@ void fn_802FFD20(void) {
 }
 
 void fn_802FFD40(void) {
-    M2C_UNK fn_802FFB7C(M2C_UNK, M2C_UNK);
+    void fn_802FFB7C(s32, s32);
     fn_802FFB7C(1, 0xFFFF);
 }
 
