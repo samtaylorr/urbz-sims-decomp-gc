@@ -435,6 +435,7 @@ config.libs = [
             Object(NonMatching, "engine/ENgcClockMan.c"),
             Object(NonMatching, "engine/text_8033E370.c"),
             Object(NonMatching, "engine/ENgcEngine.c"),
+            Object(NonMatching, "engine/ENgcGraphics.c"),
             Object(NonMatching, "misc/text_8038FC80.c"),
             Object(NonMatching, "libs/text_80398934.c"),
         ],
