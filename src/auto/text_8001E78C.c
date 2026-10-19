@@ -9,6 +9,10 @@ void fn_8001FC50(void) {
 
 }
 
+void fn_8001FC54(void) {
+
+}
+
 s32 fn_80021248(void) {
     return 1;
 }
