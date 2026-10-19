@@ -5,3 +5,9 @@ void fn_800A9720(void);
 void fn_800C2950(void) {
     fn_800A9720();
 }
+
+void fn_800A9920(void);
+void fn_800C2970(void) {
+    fn_800A9920();
+}
+
