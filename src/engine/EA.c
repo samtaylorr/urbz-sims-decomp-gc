@@ -36,6 +36,15 @@ s32 fn_802D9278(char *self) {
     return *(s32 *)(self + 0xC);
 }
 
+extern void fn_802D96A8(s32);
+extern void fn_802D20E8(s32);
+void fn_802D94C0(s32 self, s32 flags) {
+    fn_802D96A8(self);
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 s32 fn_802D9E3C(void) {
     return 1;
 }
