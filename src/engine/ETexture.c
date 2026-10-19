@@ -68,6 +68,11 @@ s32 fn_80370FA8(void) {
     return lbl_80493DDC[0];
 }
 
+extern u16 lbl_80493DE0[];
+u16 fn_80370FB4(void) {
+    return lbl_80493DE0[0];
+}
+
 void *fn_80370FC0(void) {
     return lbl_80493DCC;
 }
