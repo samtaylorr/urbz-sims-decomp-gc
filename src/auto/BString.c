@@ -282,6 +282,7 @@ void fn_80048A48(void *);
 extern u8 lbl_8040B5A8[];
 extern u8 lbl_8040B440[];
 s32 *fn_800D3E40(s32 *self, s32 arg1) {
+    extern u8 lbl_8040B440[];
     self[0] = arg1;
     self[1] = -1;
     self[2] = 0;
@@ -289,8 +290,8 @@ s32 *fn_800D3E40(s32 *self, s32 arg1) {
     self[4] = 1;
     self[6] = 0;
     self[7] = 0;
-    self[8] = 0;
     self[5] = (s32)lbl_8040B440;
+    self[8] = 0;
     return self;
 }
 
