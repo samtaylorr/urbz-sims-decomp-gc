@@ -461,6 +461,10 @@ void fn_800DB1BC(void) {
 
 }
 
+void fn_800DB1C0(void) {
+
+}
+
 void fn_802D0F9C(void);
 void fn_800DB81C(void) {
     fn_802D0F9C();
