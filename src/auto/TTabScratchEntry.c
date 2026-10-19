@@ -115,6 +115,12 @@ void fn_801A1E30(void) {
     fn_801A1B50();
 }
 
+void fn_801A2EF4();
+void fn_801A2600(char *self) {
+    extern void fn_801A2EF4(void *);
+    fn_801A2EF4(self + 8);
+}
+
 void fn_801A2FF8(s32 *self, s32 value) {
     *self = value;
 }
