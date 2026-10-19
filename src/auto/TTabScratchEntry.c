@@ -16,6 +16,24 @@ void fn_8019A0CC(void **obj) {
     }
 }
 
+s32 fn_8019AC24(void *arg0) {
+    s16 temp_r0;
+
+    temp_r0 = M2C_FIELD(arg0, s16 *, 0x1C);
+    switch (temp_r0) {                              /* irregular */
+    case 2:
+        return 0x13;
+    case 3:
+        return 6;
+    case 1:
+        return 0x12;
+    case 0:
+        return 7;
+    default:
+        return -1;
+    }
+}
+
 s16 fn_8019AFE8(void *arg0) {
     return M2C_FIELD(arg0, s16 *, 0x34);
 }
