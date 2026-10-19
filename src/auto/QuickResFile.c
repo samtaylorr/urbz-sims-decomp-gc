@@ -20,6 +20,11 @@ s32 fn_80186788(s32 arg0) {
     return arg0 + 0x1904;
 }
 
+void fn_8018A070(s32 *arg0) {
+    M2C_UNK fn_8011AA6C(s32);
+    fn_8011AA6C(*arg0);
+}
+
 s32 fn_8018A844(void) {
     return 0x444F4F52;
 }
