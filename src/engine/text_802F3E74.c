@@ -24,6 +24,12 @@ s32 fn_802F3ED4(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void fn_802F42E4(s32 arg0, s32 arg1) {
+    M2C_UNK fn_802F42A8(s32, s32, M2C_UNK, M2C_UNK, M2C_UNK);
+    s32 fn_80337F14(s32);
+    fn_802F42A8(arg0, fn_80337F14(arg1), 0, 0, 0);
+}
+
 extern void fn_802E34F0(void *, void *);
 void fn_802F4A8C(char *self, void *arg1) {
     fn_802E34F0(arg1, self + 0x44);
