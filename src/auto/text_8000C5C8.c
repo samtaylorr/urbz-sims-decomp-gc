@@ -12,3 +12,7 @@ void fn_8000CA44(void) {
     fn_8000CA20(1, 0xFFFF);
 }
 
+void fn_8000CA70(void) {
+    fn_8000CA20(0, 0xFFFF);
+}
+
