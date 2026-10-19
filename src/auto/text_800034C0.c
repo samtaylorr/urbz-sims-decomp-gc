@@ -36,6 +36,10 @@ void fn_800043E8(void) {
     fn_800C47CC();
 }
 
+s32 fn_800051A8(void) {
+    return 0;
+}
+
 void fn_802C5240(void);
 
 void fn_8001C2A4(void);
