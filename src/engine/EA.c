@@ -53,6 +53,10 @@ void fn_802D94C0(s32 self, s32 flags) {
     }
 }
 
+void fn_802D9DE4(void) {
+
+}
+
 s32 fn_802D9E3C(void) {
     return 1;
 }
