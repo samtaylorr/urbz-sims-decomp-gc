@@ -352,6 +352,28 @@ void fn_8039E174(s32 *self, s32 flags) {
     }
 }
 
+extern u8 lbl_8040CB28[];
+extern void fn_8039E33C(void *, s32);
+extern void fn_803997AC(void *, u32);
+void fn_8039E1A8(s32 *self, s32 flags) {
+    s32 *v;
+    self[5] = (s32)lbl_8040CB28;
+    fn_8039E33C(self + 0x14, 2);
+    v = self + 10;
+    if (v[0] != 0) {
+        u32 size = (u32)(v[3] - v[0]) & ~3;
+        if (size > 0x80) {
+            fn_802D20E8((void *)v[0]);
+        } else {
+            fn_803997AC((void *)v[0], size);
+        }
+    }
+    self[5] = (s32)lbl_804093F8;
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_8039E238(s32 *self, s32 flags) {
     self[5] = (s32)lbl_804093F8;
     if (flags & 1) {
