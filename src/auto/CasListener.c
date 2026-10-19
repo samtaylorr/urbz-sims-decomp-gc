@@ -160,6 +160,11 @@ void fn_801BF6A8(void *arg0) {
     fn_801C0124(M2C_FIELD(arg0, s32 *, 0x48));
 }
 
+void fn_801BF6CC(void *arg0) {
+    M2C_UNK fn_801C019C(s32);
+    fn_801C019C(M2C_FIELD(arg0, s32 *, 0x48));
+}
+
 void fn_801BF6F0(void *arg0) {
     M2C_UNK fn_801C01A0(s32);
     fn_801C01A0(M2C_FIELD(arg0, s32 *, 0x48));
