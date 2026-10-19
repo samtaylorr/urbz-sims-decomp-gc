@@ -15,3 +15,8 @@ void fn_80335B9C(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0xA8) = arg1;
 }
 
+void fn_80335BA4(void) {
+    M2C_UNK fn_80335AA4(M2C_UNK, M2C_UNK);
+    fn_80335AA4(1, 0xFFFF);
+}
+
