@@ -13,3 +13,7 @@ void fn_800414A4(s32 *self) {
     self[0] = 1;
 }
 
+void fn_800414B0(s32 *self) {
+    self[1] = 1;
+}
+
