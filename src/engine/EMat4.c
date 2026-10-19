@@ -140,6 +140,26 @@ s32 fn_802CB550(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x44);
 }
 
+void fn_802CB634(void *arg0, s32 arg1) {
+    void *fn_802D1FC8(M2C_UNK);
+    void *temp_r3;
+    void *temp_r9;
+
+    temp_r3 = fn_802D1FC8(0xC);
+    if (temp_r3 != NULL) {
+        M2C_FIELD(temp_r3, s32 *, 0) = arg1;
+        temp_r9 = M2C_FIELD(arg0, void **, 0);
+        M2C_FIELD(temp_r3, void **, 8) = temp_r9;
+        if (temp_r9 != NULL) {
+            M2C_FIELD(temp_r9, void **, 4) = temp_r3;
+        } else {
+            M2C_FIELD(arg0, void **, 4) = temp_r3;
+        }
+        M2C_FIELD(temp_r3, s32 *, 4) = 0;
+        M2C_FIELD(arg0, void **, 0) = temp_r3;
+    }
+}
+
 void fn_802CBB94(void) {
 
 }
