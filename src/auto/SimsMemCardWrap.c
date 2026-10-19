@@ -99,6 +99,12 @@ void fn_800A9BAC(s32 *self, s32 arg1) {
     fn_803349A8(lbl_8045B438, arg1);
 }
 
+void fn_800A9C30(void *arg0) {
+    M2C_UNK fn_80334CF8(M2C_UNK *, s32);
+    fn_80334CF8(&lbl_8045B438, M2C_FIELD(arg0, s32 *, 0x108));
+    M2C_FIELD(arg0, s32 *, 0x108) = 0;
+}
+
 void fn_800A9C70(void) {
 
 }
