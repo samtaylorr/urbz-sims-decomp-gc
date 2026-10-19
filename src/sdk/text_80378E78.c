@@ -57,6 +57,11 @@ void fn_80382024(s32 arg0) {
     lbl_804963D4 = arg0;
 }
 
+extern s32 lbl_80496404;
+void fn_803822AC(s32 arg0) {
+    lbl_80496404 = arg0;
+}
+
 extern u8 lbl_8047E260[];
 void *fn_80382840(void) {
     return lbl_8047E260;
