@@ -6,6 +6,10 @@ void fn_80299A50(void) {
     fn_802999D4();
 }
 
+s32 fn_80299B8C(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x60) & 1;
+}
+
 s32 fn_80299C74(u8 *self) {
     return *(s32 *)(self + 0x50);
 }
