@@ -1127,6 +1127,11 @@ s32 fn_803A606C(s32 *self) {
     return self[2];
 }
 
+void fn_803A6074(void *arg0) {
+    M2C_UNK fn_8016DE9C(s32);
+    fn_8016DE9C(M2C_FIELD(arg0, s32 *, 4));
+}
+
 s32 fn_803A6098(s32 *self) {
     return self[2];
 }
