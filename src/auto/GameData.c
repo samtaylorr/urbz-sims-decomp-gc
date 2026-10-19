@@ -9,6 +9,12 @@ extern s32 lbl_80494428;
 extern s32 lbl_8041F7A0[];
 void fn_801238C4(u8 *obj, s32 arg);
 
+s32 fn_80043FF8(void) {
+    M2C_UNK fn_80043C40();
+    fn_80043C40();
+    return 0;
+}
+
 void fn_800440B0(void) {
 
 }
