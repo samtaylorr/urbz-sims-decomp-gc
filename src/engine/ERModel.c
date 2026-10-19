@@ -88,3 +88,7 @@ void *fn_8032CE88(u32 size, void *p) {
     return p;
 }
 
+s32 fn_8032CF30(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x84);
+}
+
