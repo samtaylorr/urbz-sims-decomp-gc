@@ -18,6 +18,10 @@ void fn_801B7C94(void) {
 
 }
 
+void fn_801B8424(void) {
+
+}
+
 s32 fn_801B872C(char *self) {
     return *(s32 *)(self + 0xC);
 }
