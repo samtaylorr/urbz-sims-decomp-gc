@@ -32,6 +32,10 @@ void fn_8032B9E4(void) {
 
 }
 
+s32 fn_8032C194(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x134);
+}
+
 void fn_8032CD5C(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
