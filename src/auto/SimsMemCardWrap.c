@@ -97,6 +97,10 @@ s32 fn_800AA638(void) {
     return 1;
 }
 
+void fn_800AA784(void) {
+
+}
+
 s32 fn_800AB030(void) {
     return 0;
 }
