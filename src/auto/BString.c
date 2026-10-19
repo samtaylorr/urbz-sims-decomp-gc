@@ -1830,6 +1830,10 @@ f32 fn_800E416C(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0x4C);
 }
 
+void fn_800E44BC(void *arg0, f32 farg0) {
+    M2C_FIELD(arg0, f32 *, 0x14) = (f32) (M2C_FIELD(arg0, f32 *, 0x14) + farg0);
+}
+
 void fn_800E4958(s32 *self, s32 flags) {
     s32 *v;
     self[5] = (s32)lbl_8040CB28;
