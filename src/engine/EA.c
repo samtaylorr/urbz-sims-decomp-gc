@@ -86,6 +86,11 @@ void fn_802D9A0C(void *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 0x4C8) = arg2;
 }
 
+void fn_802D9A18(void *arg0, s32 arg1, s32 arg2) {
+    M2C_FIELD(arg0, s32 *, 0x4BC) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x4C0) = arg2;
+}
+
 s32 fn_802D9A3C(void) {
     return 0x1000;
 }
