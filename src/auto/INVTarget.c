@@ -778,6 +778,14 @@ s32 fn_80229F5C(void *arg0) {
     return (s32) ((M2C_FIELD(arg0, s32 *, 0x70) - M2C_FIELD(arg0, s32 *, 0x6C)) * 0xB6DB6DB7) >> 3;
 }
 
+void fn_8022D8C4(void *arg0) {
+    M2C_UNK fn_802D20E8(s32);
+    fn_802D20E8(M2C_FIELD(arg0, s32 *, 0));
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    fn_802D20E8(M2C_FIELD(arg0, s32 *, 4));
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+}
+
 void fn_802320F8(void);
 void fn_8022DA50(void) {
     fn_802320F8();
