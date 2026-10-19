@@ -50,6 +50,15 @@ void fn_802D4874(s32 *arg0) {
     fn_802DF4B8(temp_r3, temp_r3);
 }
 
+s32 *fn_802D49AC(s32 *arg0) {
+    M2C_UNK fn_802DF358(s32, s32);
+    s32 temp_r3;
+
+    temp_r3 = *arg0;
+    fn_802DF358(temp_r3, temp_r3);
+    return arg0;
+}
+
 void fn_802D4F24(f64 farg0) {
     M2C_UNK fn_802D4598(f32);
     fn_802D4598((f32) farg0);
