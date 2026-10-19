@@ -934,6 +934,19 @@ s32 fn_801A4FB0(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x38);
 }
 
+s32 fn_801A9C10(void *arg0, void *arg1) {
+    s32 var_r11;
+    u8 temp_r0;
+    u8 temp_r9;
+
+    temp_r9 = M2C_FIELD(arg1, u8 *, 0);
+    var_r11 = 0;
+    if (((s8) temp_r9 < (s32) M2C_FIELD(arg0, s32 *, 0x1C)) || ((s8) temp_r9 > (s32) M2C_FIELD(arg0, s32 *, 0x20)) || (temp_r0 = M2C_FIELD(arg1, u8 *, 1), (((s8) temp_r0 < (s32) M2C_FIELD(arg0, s32 *, 0x24)) != 0)) || ((s8) temp_r0 > (s32) M2C_FIELD(arg0, s32 *, 0x28))) {
+        var_r11 = 1;
+    }
+    return var_r11;
+}
+
 s32 fn_801A9D9C(void *arg0, void *arg1) {
     u8 temp_r0;
     u8 temp_r0_2;
