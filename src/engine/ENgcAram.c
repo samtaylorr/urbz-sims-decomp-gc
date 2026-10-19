@@ -23,3 +23,8 @@ void fn_80373E20(void) {
     lbl_80495260 = 0;
 }
 
+void fn_80374000(void) {
+    M2C_UNK fn_80373FAC(M2C_UNK, M2C_UNK);
+    fn_80373FAC(1, 0xFFFF);
+}
+
