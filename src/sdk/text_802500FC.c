@@ -92,6 +92,11 @@ s32 fn_80256504(s32 arg0) {
     return temp_r0;
 }
 
+void fn_80256914(void) {
+    M2C_UNK fn_8025667C();
+    fn_8025667C();
+}
+
 void fn_80258364(void) {
 
 }
