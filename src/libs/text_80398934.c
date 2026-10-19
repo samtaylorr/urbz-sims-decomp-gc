@@ -4552,6 +4552,12 @@ void *fn_803BC458(void *self) {
     return self;
 }
 
+void fn_803BC578(void *self) {
+    ((s32 *)self)[0] = 0;
+    ((s32 *)self)[2] = 0;
+    ((s32 *)self)[1] = 0;
+}
+
 extern void fn_803BC578(void *);
 void *fn_803BC58C(void *self) {
     fn_803BC578(self);
