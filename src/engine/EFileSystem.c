@@ -22,6 +22,10 @@ s32 fn_802C5CFC(char *self) {
     return *(s32 *)(self + 0xC);
 }
 
+s32 fn_802C5D1C(u8 *self) {
+    return *(s32 *)(self + 0x20);
+}
+
 s32 fn_802C605C(s32 *self) {
     return *self;
 }
