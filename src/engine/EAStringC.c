@@ -432,6 +432,13 @@ s32 fn_802B4E80(void) {
     return lbl_80496130;
 }
 
+void fn_802B6E08(s32 *arg0) {
+    s32 temp_r0;
+
+    temp_r0 = *arg0;
+    *arg0 = (temp_r0 & 0xF000FFFF) | ((temp_r0 & 0x0FFF0000) + 0x10000);
+}
+
 s32 fn_802B6F38(void) {
     return 0;
 }
