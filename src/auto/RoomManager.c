@@ -6,6 +6,10 @@ s32 fn_8018EE50(void) {
     return 1;
 }
 
+s32 fn_8018FA7C(s32 *self) {
+    return self[2];
+}
+
 s32 fn_80192C7C(void) {
     return lbl_80494538;
 }
