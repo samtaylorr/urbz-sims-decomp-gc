@@ -2,6 +2,11 @@
 #include "common.h"
 
 extern s32 lbl_80495004;
+void fn_8033E768(void) {
+    extern s32 lbl_80495040;
+    lbl_80495040 = 1;
+}
+
 void fn_8033EA4C(void) {
 
 }
