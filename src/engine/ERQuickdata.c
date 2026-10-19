@@ -33,6 +33,12 @@ s32 fn_8032D9F0(void *arg0) {
     return 0;
 }
 
+void fn_8032E124(s32 arg0) {
+    void fn_80338000(void *, s32, s32);
+    extern u8 lbl_8045B980[];
+    fn_80338000(lbl_8045B980, arg0, 4);
+}
+
 void fn_8032E154(s32 arg0) {
     void fn_80338184(void *, s32);
     extern u8 lbl_8045B980[];
