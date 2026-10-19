@@ -18,6 +18,13 @@ void fn_801CF890(void *arg0) {
     }
 }
 
+void fn_801D36C0(u8 *self) {
+    extern void fn_801CD6DC(u8 *);
+    extern u8 lbl_80416238[];
+    *(u8 **)(self + 4) = lbl_80416238;
+    fn_801CD6DC(self);
+}
+
 void fn_801D3954(void) {
 
 }
