@@ -51,6 +51,11 @@ s32 fn_8000C218(void) {
     return 1;
 }
 
+void fn_800C38C8(void *);
+void fn_8000C220(void *self, void *arg) {
+    fn_800C38C8(arg);
+}
+
 s32 fn_8000C244(void) {
     return 1;
 }
