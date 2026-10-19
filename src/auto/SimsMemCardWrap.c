@@ -48,6 +48,10 @@ s32 fn_800A9930(void) {
     return lbl_8049627C;
 }
 
+s32 fn_800A9938(void) {
+    return (u32)(lbl_80495810 - 1) <= 2;
+}
+
 void *fn_800A9950(void *self) {
     fn_800A9980(self);
     return self;
