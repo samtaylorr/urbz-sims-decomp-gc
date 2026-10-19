@@ -9,6 +9,11 @@ s32 fn_802D38E4(s32 *self) {
     return *self;
 }
 
+void fn_802D39E4(M2C_UNK **arg0) {
+    extern M2C_UNK lbl_80494DD0;
+    *arg0 = &lbl_80494DD0;
+}
+
 extern u8 lbl_80419540[];
 extern void fn_802D20E8(void *);
 void fn_802D6A28(void **self, s32 flags) {
