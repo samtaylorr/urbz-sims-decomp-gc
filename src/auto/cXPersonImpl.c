@@ -16,6 +16,10 @@ s32 fn_80181314(void) {
     return 0x50455253;
 }
 
+s32 fn_80181A20(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x5FC) ^ 1;
+}
+
 void fn_80182220(void) {
 
 }
