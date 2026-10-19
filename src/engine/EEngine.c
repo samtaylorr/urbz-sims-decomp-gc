@@ -11,6 +11,11 @@ void *fn_802E0AE4(void) {
     return fn_802D1F94;
 }
 
+extern u8 fn_802D1EDC[];
+void *fn_802E0AF0(void) {
+    return fn_802D1EDC;
+}
+
 s32 fn_802E0B20(void) {
     return 0;
 }
