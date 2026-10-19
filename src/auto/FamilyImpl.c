@@ -13,3 +13,7 @@ s32 fn_8010BD50(void) {
     return 0;
 }
 
+s32 fn_8010C13C(void) {
+    return 0;
+}
+
