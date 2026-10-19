@@ -243,6 +243,10 @@ s32 fn_8027368C(s32 *arg0) {
     return *arg0 & 3;
 }
 
+s32 fn_80273698(u32 *arg0) {
+    return ((u32) *arg0 >> 2U) & 3;
+}
+
 s32 fn_80273894(s32 *self) {
     return self[6];
 }
