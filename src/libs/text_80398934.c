@@ -658,6 +658,10 @@ s32 fn_803A606C(s32 *self) {
     return self[2];
 }
 
+s32 fn_803A6098(s32 *self) {
+    return self[2];
+}
+
 void fn_803A6424(void) {
     fn_8018EA6C();
 }
