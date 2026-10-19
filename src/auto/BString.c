@@ -25,6 +25,11 @@ void fn_800D165C(void) {
     fn_800F1A60((s32)&lbl_80495A44, 2);
 }
 
+extern s32 lbl_80495A4C;
+void fn_800D1684(void) {
+    fn_800F1A60((s32)&lbl_80495A4C, 2);
+}
+
 void fn_800D188C(s32 *self) {
     fn_800D2A40(self);
     if (self[6] != 0) {
