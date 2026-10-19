@@ -25,6 +25,15 @@ s32 fn_800A6154(void) {
     return 0;
 }
 
+void fn_800A96DC(f32 x) {
+    lbl_80494320 = x;
+    if (x == lbl_803CE168[0]) {
+        lbl_80495924 = lbl_80495928;
+        lbl_80495930 = lbl_80495934;
+    }
+    fn_800A9720();
+}
+
 extern s32 lbl_8049592C;
 s32 fn_800A9920(void) {
     return lbl_8049592C;
