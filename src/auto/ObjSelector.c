@@ -52,6 +52,11 @@ void fn_8016CCF0(void) {
 
 }
 
+extern s32 lbl_80495C78;
+void fn_8016CDFC(void) {
+    fn_800F1A60((s32)&lbl_80495C78, 2);
+}
+
 extern void fn_8016F714(s32);
 extern void fn_802D20E8(s32);
 void fn_8016F4C0(s32 self, s32 flags) {
