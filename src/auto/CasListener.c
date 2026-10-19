@@ -169,9 +169,9 @@ void fn_801BF5C4(void *self, s32 flags) {
 }
 
 void fn_801BF5F8(void *arg0, s32 arg1) {
-    extern void fn_801BFFB4(s32, void *);
+    extern void fn_801BFFB4(s32, s32);
     M2C_FIELD(arg0, s32 *, 0) = arg1;
-    fn_801BFFB4(M2C_FIELD(arg0, s32 *, 8), arg0);
+    fn_801BFFB4(M2C_FIELD(arg0, s32 *, 8), arg1);
 }
 
 void fn_801BF628(void) {
