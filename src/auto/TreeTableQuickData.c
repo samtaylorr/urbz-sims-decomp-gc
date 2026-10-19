@@ -358,6 +358,16 @@ s32 fn_801B65FC(void) {
     return 0;
 }
 
+s16 fn_801B6620(void *arg0) {
+    void *temp_r9;
+
+    temp_r9 = M2C_FIELD(arg0, void **, 4);
+    if (temp_r9 != NULL) {
+        return M2C_FIELD(temp_r9, s16 *, 4);
+    }
+    return 0;
+}
+
 void fn_801B6680(void) {
 
 }
