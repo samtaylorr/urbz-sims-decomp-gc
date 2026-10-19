@@ -71,6 +71,10 @@ void fn_8006A1E8(void) {
 
 }
 
+void fn_8006A1EC(void) {
+
+}
+
 s32 fn_8006A1F4(void) {
     return 1;
 }
