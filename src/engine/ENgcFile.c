@@ -1,6 +1,17 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+void fn_802DFD50(void *arg0) {
+    M2C_UNK fn_80260574(s32);
+    void *temp_r9;
+
+    fn_80260574(arg0 + 0x2C);
+    if (arg0 != NULL) {
+        temp_r9 = M2C_FIELD(arg0, void **, 0x28);
+        M2C_FIELD(temp_r9, M2C_UNK (**)(void *, M2C_UNK), 0xC)(arg0 + M2C_FIELD(temp_r9, s16 *, 8), 3);
+    }
+}
+
 s32 fn_802DFEEC(void) {
     return 0;
 }
