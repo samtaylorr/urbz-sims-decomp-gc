@@ -206,6 +206,11 @@ void fn_800F8820(void (*cb)(void)) {
     lbl_804943C8 = cb;
 }
 
+void fn_800F8BF4(s32 arg0) {
+    M2C_UNK fn_80248488(s32, M2C_UNK, M2C_UNK);
+    fn_80248488(arg0 + 0x2940, 0, 0x140);
+}
+
 void fn_800F8CB4(void) {
 
 }
