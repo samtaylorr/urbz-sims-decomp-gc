@@ -146,6 +146,10 @@ void fn_8019F1F8(void) {
 
 }
 
+s32 fn_8019F1FC(void) {
+    return 2;
+}
+
 void fn_8019F204(void **self, s32 flags) {
     *self = lbl_80414770;
     if (flags & 1) {
