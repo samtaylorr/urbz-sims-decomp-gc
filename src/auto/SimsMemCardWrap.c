@@ -5,6 +5,10 @@ s32 fn_800A4964(void) {
     return 1;
 }
 
+s32 fn_800A496C(void) {
+    return 1;
+}
+
 s32 fn_800A6154(void) {
     return 0;
 }
