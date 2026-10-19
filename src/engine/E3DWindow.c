@@ -16,3 +16,8 @@ void fn_802E5EA4(void) {
     fn_802E5700();
 }
 
+void fn_802EB650(void);
+void fn_802EB590(void) {
+    fn_802EB650();
+}
+
