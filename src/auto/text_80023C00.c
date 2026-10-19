@@ -20,6 +20,10 @@ void *fn_800287FC(void) {
     return lbl_803C4E2C;
 }
 
+void fn_800288D8(void) {
+
+}
+
 extern s32 lbl_80493F9C;
 s32 fn_800288DC(void) {
     return lbl_80493F9C;
