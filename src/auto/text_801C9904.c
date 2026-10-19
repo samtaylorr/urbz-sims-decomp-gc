@@ -65,3 +65,8 @@ void fn_801CE928(s32 arg0) {
     fn_801CC954(arg0 + 0xF8);
 }
 
+void fn_801CEB74(void) {
+    M2C_UNK fn_801CEB20(M2C_UNK, M2C_UNK);
+    fn_801CEB20(1, 0xFFFF);
+}
+
