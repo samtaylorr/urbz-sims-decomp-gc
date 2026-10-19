@@ -382,6 +382,16 @@ s32 fn_801C62C0(s32 *self) {
     return self[2];
 }
 
+s32 fn_801C638C(void *arg0) {
+    s32 temp_r3;
+
+    temp_r3 = M2C_FIELD(arg0, s32 *, 0x18);
+    if (temp_r3 == 0) {
+        return 0;
+    }
+    return temp_r3 + 8;
+}
+
 void fn_801C63A8(void *arg0, s32 arg1, s32 arg2, void **arg3) {
     char *temp_r11;
     void *temp_r9;
@@ -398,14 +408,24 @@ void fn_801C63A8(void *arg0, s32 arg1, s32 arg2, void **arg3) {
 s32 fn_801C63F8(void *arg0) {
     s32 fn_801CE7E4(s32);
     s32 temp_r0;
-    s32 var_r3;
 
     temp_r0 = M2C_FIELD(arg0, s32 *, 0x14);
-    var_r3 = 0;
-    if (temp_r0 != 0) {
-        var_r3 = fn_801CE7E4(temp_r0);
+    if (temp_r0 == 0) {
+        return 0;
     }
-    return var_r3;
+    return fn_801CE7E4(temp_r0);
+}
+
+f32 fn_801C6460(void *arg0) {
+    f32 fn_801CE82C(void *);
+    extern const f32 lbl_803DDF5C[];
+    void *temp_r3;
+
+    temp_r3 = M2C_FIELD(arg0, void **, 0x14);
+    if (temp_r3 == NULL) {
+        return lbl_803DDF5C[0];
+    }
+    return fn_801CE82C(temp_r3);
 }
 
 void fn_801C675C(void *self, s32 flags) {
