@@ -408,6 +408,12 @@ s32 fn_80081798(void) {
     return 0;
 }
 
+s32 fn_800817BC(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x1A40) = 0;
+    M2C_FIELD(arg0, s32 *, 0x1A44) = 0;
+    return 0;
+}
+
 void fn_80081A14(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x1A38) = arg1;
     M2C_FIELD(arg0, s32 *, 0x1A48) = (s32) (M2C_FIELD(arg0, s32 *, 0x1A3C) - arg1);
