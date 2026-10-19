@@ -868,6 +868,11 @@ s32 fn_803A0688(void) {
     return 0;
 }
 
+s32 fn_803A094C(s32 *arg0) {
+    *arg0 = 0;
+    return 1;
+}
+
 s32 fn_803A095C(s32 *p) {
     if (p[0] != 0) {
         p[1]++;
