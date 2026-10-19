@@ -25,6 +25,12 @@ void fn_8024CE64(void) {
     fn_8024D324();
 }
 
+void fn_8024D7AC(void) {
+    M2C_UNK fn_8024D784(s32);
+    extern s32 lbl_80494988;
+    fn_8024D784(lbl_80494988);
+}
+
 void fn_8024F99C(void);
 void fn_8024EF20(void) {
     fn_8024F99C();
