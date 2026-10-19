@@ -120,6 +120,13 @@ s32 fn_801B5DD0(void) {
     return 1;
 }
 
+void fn_801B603C(void) {
+    M2C_UNK fn_801B5A68();
+    M2C_UNK fn_802D1FC8(M2C_UNK);
+    fn_802D1FC8(0x24);
+    fn_801B5A68();
+}
+
 s16 fn_801B6338(void *arg0) {
     return *M2C_FIELD(arg0, s16 **, 4);
 }
