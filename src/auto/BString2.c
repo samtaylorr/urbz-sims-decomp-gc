@@ -128,6 +128,11 @@ void *fn_800F22C0(void *self) {
     return self;
 }
 
+void *fn_800F22F0(void *arg0, const char *arg1) {
+    ((void (*)(void *, const char *, s32))fn_800F06A0)(arg0, arg1, arg1 ? fn_800F8120(arg1) : 0);
+    return arg0;
+}
+
 extern void fn_800F095C(void *);
 void *fn_800F251C(void *self) {
     fn_800F095C(self);
