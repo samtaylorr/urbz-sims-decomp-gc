@@ -19,6 +19,12 @@ void fn_802D3D24(s32 *arg0) {
     fn_80248808(*arg0);
 }
 
+s32 *fn_802D3D7C(s32 *arg0) {
+    M2C_UNK fn_803783F0(s32);
+    fn_803783F0(*arg0);
+    return arg0;
+}
+
 void fn_802D4634(u8 **arg0, s32 arg1, u8 arg2) {
     u8 *var_r3;
     u8 var_r0;
