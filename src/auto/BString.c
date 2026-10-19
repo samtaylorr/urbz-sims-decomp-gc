@@ -896,6 +896,12 @@ void fn_800DF61C(void) {
 
 }
 
+void fn_800DF844(void *arg0) {
+    extern s32 lbl_80495A6C;
+    lbl_80495A6C = 0;
+    M2C_FIELD(arg0, s32 *, 0x1C) = 0;
+}
+
 void fn_800DF9D8(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x18) = 0;
 }
