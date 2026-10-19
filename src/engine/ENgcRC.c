@@ -116,6 +116,12 @@ void fn_80355E00(u8 *self, u8 *arg) {
     lbl_80495124 = arg[1];
 }
 
+void fn_80355E28(u8 *self) {
+    fn_8034F9F0(self);
+    fn_80351084(self);
+    *(s32 *)(self + 0x510) = 0;
+}
+
 void fn_80273F88(void);
 void fn_80357AA0(void) {
     fn_80273F88();
