@@ -1654,6 +1654,23 @@ void fn_803A64F4(void **self, s32 flags) {
     }
 }
 
+extern u8 lbl_80410E48[];
+void fn_803A6528(s32 arg0, s32 arg1, s32 arg2) {
+    struct {
+        void *vtbl;
+        s32 unk4;
+        s32 unk8;
+    } tmp, *p;
+    u8 out[8];
+
+    p = &tmp;
+    tmp.unk4 = arg0;
+    tmp.vtbl = lbl_80410E48;
+    p->unk8 = arg2;
+    fn_8018E8F8(out, p, arg1);
+    ((void (*)(void *, s32))fn_8018EA6C)(p, 2);
+}
+
 void fn_803A87BC(void *arg0, void *arg1, void *arg2) {
     void **temp_r9;
 
