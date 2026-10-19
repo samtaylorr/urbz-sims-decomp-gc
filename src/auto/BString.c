@@ -138,6 +138,13 @@ s32 fn_800E1C34(void) {
     return lbl_804966E4;
 }
 
+void fn_800E1C78(s32 *self, s32 flags) {
+    self[5] = (s32)lbl_804093F8;
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 s32 fn_800EB5B4(void) {
     return 0;
 }
