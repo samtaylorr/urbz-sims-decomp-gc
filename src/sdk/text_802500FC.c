@@ -62,6 +62,10 @@ s32 fn_80255A38(void) {
     return *(s32 *)0x80000028;
 }
 
+s32 fn_80255A44(void) {
+    return *(s32 *)0x800000F0;
+}
+
 void fn_80258364(void) {
 
 }
