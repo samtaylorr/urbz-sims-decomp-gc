@@ -95,6 +95,21 @@ void fn_800568FC(s32 arg0, s32 arg1) {
     }
 }
 
+s32 fn_80056AE0(s32 arg0) {
+    switch (arg0) {                                 /* irregular */
+    case 1:
+        return 1;
+    case 3:
+        return 3;
+    case 4:
+        return 2;
+    case 2:
+        return 4;
+    default:
+        return 0;
+    }
+}
+
 void fn_80058514(void) {
     fn_802D2FD0();
 }
