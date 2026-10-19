@@ -2,6 +2,17 @@
 #include "common.h"
 
 void fn_800C3B48(void);
+s32 fn_801D7550(void) {
+    s32 fn_801D6D0C();
+    M2C_UNK fn_802D1FC8(M2C_UNK);
+    extern s32 lbl_804945F8;
+    if ((s32) lbl_804945F8 == 0) {
+        fn_802D1FC8(0x10);
+        lbl_804945F8 = fn_801D6D0C();
+    }
+    return lbl_804945F8;
+}
+
 s32 fn_801DCC6C(void *arg0) {
     s32 var_r11;
 
