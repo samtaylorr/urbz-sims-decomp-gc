@@ -18,3 +18,8 @@ int fn_80019C9C(char *self, const char *name) {
     return fn_802486DC(name, self + 8) == 0;
 }
 
+void fn_80019CD0(char *self, char *buf, int size) {
+    fn_80248A10(buf, *(char **)(self + 0xC) + 8, size);
+    buf[size - 1] = 0;
+}
+
