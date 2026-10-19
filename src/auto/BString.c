@@ -181,6 +181,19 @@ void fn_800D2AE4(void) {
 
 }
 
+s32 *fn_800D3BD0(s32 *self, s32 arg1) {
+    extern u8 lbl_8040B5A8[];
+    self[0] = arg1;
+    self[1] = -1;
+    self[2] = 0;
+    self[3] = -1;
+    self[4] = 1;
+    self[6] = 0;
+    self[5] = (s32)lbl_8040B5A8;
+    self[7] = 0;
+    return self;
+}
+
 s32 fn_800D3C0C(s32 *self) {
     return self[6];
 }
@@ -259,6 +272,22 @@ s32 fn_800D3E28(u8 *self) {
 
 s32 fn_800D3E30(s32 *self) {
     return self[6];
+}
+
+void fn_80048A48(void *);
+extern u8 lbl_8040B5A8[];
+extern u8 lbl_8040B440[];
+s32 *fn_800D3E40(s32 *self, s32 arg1) {
+    self[0] = arg1;
+    self[1] = -1;
+    self[2] = 0;
+    self[3] = -1;
+    self[4] = 1;
+    self[6] = 0;
+    self[7] = 0;
+    self[8] = 0;
+    self[5] = (s32)lbl_8040B440;
+    return self;
 }
 
 void fn_800D3E80(s32 *self, s32 flags) {
