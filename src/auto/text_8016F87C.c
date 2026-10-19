@@ -259,6 +259,19 @@ s32 fn_80175E1C(void) {
     return lbl_80495C90;
 }
 
+s32 fn_80175E24(s32 arg0, s32 arg1) {
+    s32 var_r0;
+
+    if (arg1 != 0x13) {
+        var_r0 = 0;
+        if (arg1 == 0x12) {
+            var_r0 = arg0;
+        }
+        return var_r0;
+    }
+    return arg0;
+}
+
 s32 fn_80175E44(void) {
     return 0;
 }
