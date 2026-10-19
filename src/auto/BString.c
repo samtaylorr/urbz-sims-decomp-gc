@@ -47,6 +47,11 @@ void fn_800E1868(void) {
     fn_800E3BC0();
 }
 
+extern s32 lbl_804966DC;
+s32 fn_800E1A2C(void) {
+    return lbl_804966DC;
+}
+
 s32 fn_800EB5B4(void) {
     return 0;
 }
