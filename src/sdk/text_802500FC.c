@@ -220,6 +220,10 @@ u8 fn_8026BFE4(void) {
     return (u8) *(s32 *)0xCC006C04;
 }
 
+u8 fn_8026C010(void) {
+    return (u8) ((u32) *(u32 *)0xCC006C04 >> 8U);
+}
+
 void fn_8026C18C(void) {
     extern s32 lbl_80496028;
     lbl_80496028 = 0;
