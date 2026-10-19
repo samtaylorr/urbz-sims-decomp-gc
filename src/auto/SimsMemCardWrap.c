@@ -36,6 +36,10 @@ void fn_800A73CC(void *self, s32 flags) {
     }
 }
 
+void fn_800A9624(void) {
+
+}
+
 void fn_800A96DC(f32 x) {
     lbl_80494320 = x;
     if (x == lbl_803CE168[0]) {
