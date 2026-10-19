@@ -23,6 +23,11 @@ void *fn_8036CFAC(void) {
     return lbl_80493D2C;
 }
 
+extern s32 lbl_80493D38[];
+s32 fn_8036CFB8(void) {
+    return lbl_80493D38[0];
+}
+
 void *fn_8036CFDC(void) {
     return lbl_80493D2C;
 }
