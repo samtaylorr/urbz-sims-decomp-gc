@@ -64,6 +64,10 @@ s32 fn_8026C4FC(void) {
     return 0;
 }
 
+s32 fn_8026E9EC(s32 *self) {
+    return *self;
+}
+
 s32 fn_8026E9F4(s32 *self) {
     return self[2];
 }
