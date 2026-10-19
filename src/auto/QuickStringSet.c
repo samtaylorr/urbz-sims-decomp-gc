@@ -60,6 +60,10 @@ void fn_800F7A14(void) {
 
 }
 
+void fn_800F7A18(void) {
+
+}
+
 s32 fn_800F7A20(void) {
     return 0;
 }
