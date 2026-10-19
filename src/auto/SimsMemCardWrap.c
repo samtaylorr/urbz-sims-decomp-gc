@@ -93,6 +93,14 @@ void fn_800A9C80(void) {
 
 }
 
+extern void fn_800A9CC4(s32);
+void fn_800A9C84(s32 self, s32 flags) {
+    fn_800A9CC4(self);
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 s32 fn_800AA638(void) {
     return 1;
 }
