@@ -106,6 +106,10 @@ void fn_801BF79C(void) {
     fn_803074F0();
 }
 
+s32 fn_801BF7BC(void *arg0) {
+    return ((u32) M2C_FIELD(arg0, u32 *, 0x18) >> 1U) & 1;
+}
+
 s32 fn_801BFD6C(u8 *self) {
     return *(s32 *)(self + 0x20);
 }
