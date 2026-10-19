@@ -166,6 +166,14 @@ void fn_80214DB0(void) {
 
 }
 
+s32 fn_80217A30(void *arg0, s32 arg1) {
+    s32 temp_r0;
+
+    temp_r0 = M2C_FIELD(arg0, s32 *, 0x164);
+    M2C_FIELD(arg0, s32 *, 0x164) = arg1;
+    return temp_r0;
+}
+
 s32 fn_8021BEF0(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x104);
 }
