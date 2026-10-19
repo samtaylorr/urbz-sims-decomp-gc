@@ -125,3 +125,10 @@ void fn_800D104C(u8 *self) {
     fn_800CE8F4(self, 2);
 }
 
+void fn_800D109C(u8 *self) {
+    u8 *obj = *(u8 **)(self + 0x48);
+    u8 *vt = *(u8 **)(obj + 0x1C);
+    (*(void (**)(void *))(vt + 0x5C))(obj + *(s16 *)(vt + 0x58));
+    fn_800CE924(self, 2);
+}
+
