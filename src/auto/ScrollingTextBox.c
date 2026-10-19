@@ -20,6 +20,19 @@ void fn_8009AA44(void *arg0, f32 farg0, f32 farg1, f32 farg2, f32 farg3) {
     }
 }
 
+void fn_8009AA70(void *arg0, s32 arg1) {
+    f32 fn_8039AA70(s32, M2C_UNK);
+    void *temp_r30;
+
+    temp_r30 = M2C_FIELD(arg0, void **, 0x24);
+    if (temp_r30 != NULL) {
+        M2C_FIELD(temp_r30, f32 *, 0) = fn_8039AA70(arg1, 0);
+        M2C_FIELD(temp_r30, f32 *, 4) = fn_8039AA70(arg1, 1);
+        M2C_FIELD(temp_r30, f32 *, 8) = fn_8039AA70(arg1, 2);
+        M2C_FIELD(temp_r30, f32 *, 0xC) = fn_8039AA70(arg1, 3);
+    }
+}
+
 void fn_8009AAF8(void *arg0, f32 farg0, f32 farg1) {
     M2C_FIELD(arg0, f32 *, 0x34) = farg0;
     M2C_FIELD(arg0, f32 *, 0x38) = farg1;
