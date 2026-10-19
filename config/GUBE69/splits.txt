@@ -106,7 +106,10 @@ auto/CDirtyXmlNode.c:
 	.text       start:0x800BEF3C end:0x800C3E20
 
 auto/CTGFileImpl.c:
-	.text       start:0x800C3E20 end:0x8023EBD8
+	.text       start:0x800C3E20 end:0x800C46A4
+
+auto/WrapperPaneBase.c:
+	.text       start:0x800C46A4 end:0x8023EBD8
 
 libsn/text_8023EBD8.c:
 	.text       start:0x8023EBD8 end:0x80241A98
