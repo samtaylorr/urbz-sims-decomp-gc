@@ -2,6 +2,10 @@
 #include "common.h"
 
 void fn_80307CCC(void);
+void fn_80306D28(void) {
+
+}
+
 s32 fn_80307998(void) {
     return 0;
 }
