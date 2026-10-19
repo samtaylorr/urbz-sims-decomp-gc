@@ -48,6 +48,13 @@ void fn_800C4408(void) {
 
 }
 
+void fn_800C4508(void *self, void **obj) {
+    if (obj != NULL) {
+        char *vt = (char *)*obj;
+        (*(void (**)(void *, s32))(vt + 0xC))((char *)obj + *(s16 *)(vt + 0x8), 3);
+    }
+}
+
 s32 fn_800C4548(void) {
     return 1;
 }
