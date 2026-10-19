@@ -51,3 +51,8 @@ void fn_80023B38(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
 
+void fn_80023BD4(void) {
+    M2C_UNK fn_80023864(M2C_UNK, M2C_UNK);
+    fn_80023864(1, 0xFFFF);
+}
+
