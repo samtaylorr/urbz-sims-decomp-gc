@@ -66,6 +66,20 @@ void fn_802E5EA4(void) {
     fn_802E5700();
 }
 
+void fn_802E66F8(s32 arg0, s32 arg1, f32 farg0, f32 farg1) {
+    M2C_UNK fn_802CB69C(s32, void *);
+    void *fn_802D1FC8(M2C_UNK);
+    void *temp_r3;
+
+    temp_r3 = fn_802D1FC8(0xC);
+    if (temp_r3 != NULL) {
+        M2C_FIELD(temp_r3, s32 *, 0) = arg1;
+        M2C_FIELD(temp_r3, f32 *, 4) = farg0;
+        M2C_FIELD(temp_r3, f32 *, 8) = farg1;
+        fn_802CB69C(arg0, temp_r3);
+    }
+}
+
 void fn_802E7720(void *arg0) {
     s32 temp_r0;
     s32 var_ctr;
