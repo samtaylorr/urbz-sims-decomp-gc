@@ -313,6 +313,10 @@ void fn_802B092C(void) {
     fn_8027873C();
 }
 
+s32 fn_802B0958(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x4C);
+}
+
 s32 fn_802B0D24(void) {
     return lbl_80496130;
 }
