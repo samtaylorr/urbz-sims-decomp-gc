@@ -541,3 +541,7 @@ s32 fn_801B24C8(void) {
     return 0;
 }
 
+s32 fn_801B2570(void) {
+    return 2;
+}
+
