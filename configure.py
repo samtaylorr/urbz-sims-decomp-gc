@@ -346,6 +346,7 @@ config.libs = [
             Object(NonMatching, "auto/RoomManager.c"),
             Object(NonMatching, "auto/SpacePartition.c"),
             Object(NonMatching, "auto/SeqResFile.c"),
+            Object(NonMatching, "auto/TTabScratchEntry.c"),
             Object(NonMatching, "libsn/text_8023EBD8.c"),
             Object(NonMatching, "clib/text_80241A98.c"),
             Object(NonMatching, "engine/text_802781E4.c"),
