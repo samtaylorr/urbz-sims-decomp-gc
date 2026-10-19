@@ -106,6 +106,12 @@ void fn_8032CE38(void) {
     fn_802D2430();
 }
 
+void fn_8032CE58(s32 arg0) {
+    void fn_80338000(void *, s32, s32);
+    extern u8 lbl_8045B82C[];
+    fn_80338000(lbl_8045B82C, arg0, 4);
+}
+
 void *fn_8032CE88(u32 size, void *p);
 void *fn_8032CE88(u32 size, void *p) {
     return p;
