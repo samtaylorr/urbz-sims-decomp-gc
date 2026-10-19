@@ -797,6 +797,10 @@ s32 fn_801AB13C(s32 arg0) {
     return arg0 + 0x10;
 }
 
+s32 fn_801AB348(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0) + (M2C_FIELD(arg0, s32 *, 0x54) * 0x10);
+}
+
 void fn_801AB5C8(void) {
 
 }
