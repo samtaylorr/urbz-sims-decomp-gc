@@ -96,6 +96,10 @@ s32 fn_8016D334(void) {
     return (M2C_FIELD(M2C_FIELD(fn_8016CC44(), void **, 0x38), u16 *, 0x98) ^ 1) & 1;
 }
 
+s32 fn_8016D364(void) {
+    return ((u32) (M2C_FIELD(M2C_FIELD(fn_8016CC44(), void **, 0x38), u16 *, 0x98) ^ 2) >> 1U) & 1;
+}
+
 s16 fn_8016D45C(void *arg0) {
     return M2C_FIELD(M2C_FIELD(arg0, void **, 0x38), s16 *, 0x9E);
 }
