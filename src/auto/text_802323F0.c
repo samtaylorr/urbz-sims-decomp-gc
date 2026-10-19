@@ -20,6 +20,10 @@ s32 fn_80233460(s32 arg0) {
     return arg0 + 0x60;
 }
 
+s32 fn_80235760(s32 arg0) {
+    return arg0 + 0xA8;
+}
+
 extern void fn_80230708(void *, void *);
 void fn_80235974(void *arg0) {
     fn_80230708(fn_8022554C(arg0), arg0);
