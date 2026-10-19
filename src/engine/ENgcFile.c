@@ -22,6 +22,10 @@ void fn_802DFF84(void **self, s32 flags) {
     }
 }
 
+void fn_802E01B8(void) {
+
+}
+
 void fn_802D8F90();
 void fn_802E03E4(char *self) {
     extern void fn_802D8F90(void *);
