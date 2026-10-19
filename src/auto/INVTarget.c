@@ -524,6 +524,11 @@ void fn_80206698(void *arg0) {
     fn_801FF2C0(arg0, 1);
 }
 
+void fn_802066BC(void *arg0) {
+    extern void fn_801FF2C0(void *, s32);
+    fn_801FF2C0(arg0, 1);
+}
+
 u8 fn_80207074(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 0x8C0);
 }
