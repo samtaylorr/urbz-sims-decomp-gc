@@ -22,6 +22,10 @@ void fn_8010D784(void **self, s32 flags) {
     }
 }
 
+void fn_8010E984(void) {
+
+}
+
 s32 fn_8010EA58(void) {
     return 1;
 }
