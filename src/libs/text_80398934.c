@@ -6704,6 +6704,15 @@ void fn_803BCED0(s32 *self, s32 n) {
     }
 }
 
+void fn_803BB16C(s32 *dst, s32 *src, s32 n);
+void fn_803BB250(void *self, s32 n, s32 arg2);
+s32 *fn_803BD14C(s32 *self, s32 *other);
+s32 *fn_803BD14C(s32 *self, s32 *other) {
+    fn_803BB250(self, other[1], 0);
+    fn_803BB16C((s32 *)self[0], (s32 *)other[0], other[1]);
+    return self;
+}
+
 void fn_80335FD8(void);
 void fn_803BD7F8(void) {
     fn_80335FD8();
