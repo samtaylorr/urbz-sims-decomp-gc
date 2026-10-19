@@ -850,6 +850,11 @@ void fn_800DC86C(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x20) = 1;
 }
 
+void fn_800DCE1C(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x20) = 0;
+    M2C_FIELD(arg0, s32 *, 0x1C) = 1;
+}
+
 void fn_800DD170(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x18) = 0;
 }
