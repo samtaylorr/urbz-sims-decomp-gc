@@ -134,6 +134,14 @@ void fn_8035500C(void) {
 
 }
 
+void fn_803552C0(void *arg0, void *arg1) {
+    void *temp_r11;
+
+    M2C_FIELD(M2C_FIELD(arg0, void **, 0x4D8), s32 *, 0x6EC) = (s32) M2C_FIELD(arg1, s32 *, 4);
+    temp_r11 = M2C_FIELD(arg0, void **, 0x4D8);
+    M2C_FIELD(temp_r11, s32 *, 0x6CC) = (s32) (M2C_FIELD(temp_r11, s32 *, 0x6CC) | 0x80000000 | 0x40);
+}
+
 void fn_80355DE8(void) {
     if (lbl_80495198 != 0) {
         lbl_80495198 = 0;
