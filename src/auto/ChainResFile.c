@@ -34,3 +34,7 @@ void fn_801055FC(void *self, s32 flags) {
     }
 }
 
+void fn_80105C28(void) {
+
+}
+
