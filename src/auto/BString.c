@@ -15,6 +15,11 @@ extern f32 lbl_803D14CC[];
 extern f32 lbl_803D14D0[];
 extern s32 lbl_8041F7B0[];
 extern s32 lbl_80434A9C[];
+void fn_800EAF5C(void);
+u8 *fn_800EAFCC(void **arg0);
+void fn_800EC49C(s32, s32, s32, s32);
+s32 fn_800EF6F8(void **arg0);
+void fn_8024839C(void *dst, const void *src, u32 n);
 
 void fn_800D1634(void) {
     fn_800F1A60((s32)&lbl_80495A3C, 2);
@@ -2613,6 +2618,23 @@ void fn_800EE5C4(s32 arg0, s32 arg1) {
     fn_800EE454(arg0, arg1, fn_800EBC7C());
 }
 
+u32 fn_800EE6DC(void **arg0, void *arg1, u32 arg2, u32 arg3) {
+    if (arg3 > fn_800EF6F8(arg0)) {
+        fn_800EAF5C();
+    }
+    if (arg2 > fn_800EF6F8(arg0) - arg3) {
+        arg2 = fn_800EF6F8(arg0) - arg3;
+    }
+    if (fn_800EF6F8(arg0) != 0) {
+        fn_8024839C(arg1, fn_800EAFCC(arg0) + arg3, arg2);
+    }
+    return arg2;
+}
+
+void fn_800EE76C(s32 arg0, void **arg1, s32 arg2) {
+    fn_800EC49C(arg0, (s32)fn_800EAFCC(arg1), arg2, fn_800EF6F8(arg1));
+}
+
 void fn_800EC49C(s32, s32, s32, s32);
 void fn_800EE7C4(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     fn_800EC49C(arg0, arg1, arg2, arg3);
@@ -2623,6 +2645,13 @@ s32 fn_80248808(const char *arg0);
 void fn_8024839C(void *dst, const void *src, u32 n);
 void fn_800EE7E4(s32 arg0, const char *arg1, s32 arg2) {
     fn_800EC49C(arg0, (s32)arg1, arg2, arg1 ? fn_80248808(arg1) : 0);
+}
+
+u32 fn_800EE83C(void **arg0, u8 arg1, u32 arg2) {
+    while (arg2 < fn_800EF6F8(arg0) && !(fn_800EAFCC(arg0)[arg2] == arg1)) {
+        arg2++;
+    }
+    return arg2 < fn_800EF6F8(arg0) ? arg2 : -1;
 }
 
 void fn_800EC59C(void);
