@@ -23,6 +23,10 @@ s32 fn_8003A230(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void fn_8003D024(void) {
+
+}
+
 void fn_8003F8A0(void) {
     fn_8003F9E0();
 }
