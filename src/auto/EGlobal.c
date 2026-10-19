@@ -13,6 +13,16 @@ void fn_8004AF40(void) {
 
 }
 
+s32 fn_8004B944(void *arg0) {
+    s32 temp_r3;
+
+    temp_r3 = M2C_FIELD(arg0, s32 *, 0xF4);
+    if (temp_r3 == 0) {
+        return 0;
+    }
+    return temp_r3 + 0x18;
+}
+
 void fn_8004B95C(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0xF4) = arg1;
 }
