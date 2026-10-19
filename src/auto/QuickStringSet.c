@@ -150,6 +150,10 @@ s32 fn_800F98F4(s32 *self) {
     return self[2];
 }
 
+s32 fn_800F98FC(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x10);
+}
+
 void fn_800FA0F0(s32 *self, s32 value) {
     *self = value;
 }
