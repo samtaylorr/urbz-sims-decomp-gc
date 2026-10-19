@@ -70,6 +70,12 @@ s32 fn_8010C688(void) {
     return 0;
 }
 
+void fn_8010CFA0(void *self, s32 flags) {
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 s32 fn_8010D220(void) {
     return 0;
 }
