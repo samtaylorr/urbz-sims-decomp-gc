@@ -3,6 +3,8 @@
 
 extern u8 lbl_803C1390[];
 extern u8 lbl_804069E8[];
+extern u8 lbl_8041E1A0[];
+extern u8 lbl_8041E1C8[];
 void fn_802E04BC(void *);
 void fn_802E0460(void *);
 u8 *fn_8000381C(u8 *self) {
