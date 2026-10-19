@@ -2720,8 +2720,9 @@ s32 fn_800EB5B4(void) {
     return 0;
 }
 
-void fn_800EB5BC(s32 *arg0) {
-    arg0[3]++;
+void *fn_800EB5BC(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0xC)++;
+    return arg0;
 }
 
 extern void fn_800EAF08(s32);
