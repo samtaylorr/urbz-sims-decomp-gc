@@ -80,6 +80,21 @@ void fn_802CBB94(void) {
 
 }
 
+s32 fn_802CD600(void **arg0) {
+    s32 var_r9;
+    void *var_r3;
+
+    var_r3 = *arg0;
+    var_r9 = 0;
+    if (var_r3 != NULL) {
+        do {
+            var_r3 = M2C_FIELD(var_r3, void **, 0x10);
+            var_r9 += 1;
+        } while (var_r3 != NULL);
+    }
+    return var_r9;
+}
+
 void fn_802CDB1C(void *arg0) {
     fn_802D1A00(fn_802D0C44(arg0), arg0);
 }
