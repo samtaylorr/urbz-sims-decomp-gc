@@ -54,6 +54,11 @@ void fn_802D8F48(void *arg0) {
     fn_8025993C(M2C_FIELD(arg0, s32 *, 0x318));
 }
 
+void fn_802D8F6C(void *arg0) {
+    M2C_UNK fn_802599FC(s32);
+    fn_802599FC(M2C_FIELD(arg0, s32 *, 0x318));
+}
+
 void fn_802D8FFC(void) {
     M2C_UNK fn_802D8FCC();
     M2C_UNK fn_802D9124();
