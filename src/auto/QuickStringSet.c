@@ -23,6 +23,10 @@ s32 fn_800F69E8(s32 *self) {
     return *self;
 }
 
+s32 fn_800F69F0(s32 *self) {
+    return *self;
+}
+
 s32 fn_800F6FEC(s32 *self) {
     return self[1];
 }
