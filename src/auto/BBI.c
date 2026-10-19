@@ -492,3 +492,8 @@ void fn_80063AA0(void) {
     fn_802D2430();
 }
 
+void fn_80063EA4(void) {
+    M2C_UNK fn_80062EBC(M2C_UNK, M2C_UNK);
+    fn_80062EBC(1, 0xFFFF);
+}
+
