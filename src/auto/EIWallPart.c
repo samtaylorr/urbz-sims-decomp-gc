@@ -107,6 +107,32 @@ u8 fn_80030758(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 0x3B);
 }
 
+s32 fn_80030804(s32 arg0) {
+    if (arg0 == 0) {
+        return 0;
+    }
+    switch (arg0) {                                 /* irregular */
+    case 3:
+        return 1;
+    case 9:
+        return 7;
+    case 6:
+        return 8;
+    case 1:
+        return 2;
+    case 2:
+        return 3;
+    case 12:
+        return 6;
+    case 4:
+        return 4;
+    case 8:
+        return 5;
+    default:
+        return 0;
+    }
+}
+
 void fn_800328F8(char *self, void *arg1) {
     fn_802E34F0(arg1, self + 0x44);
 }
