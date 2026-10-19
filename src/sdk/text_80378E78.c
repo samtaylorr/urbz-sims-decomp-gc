@@ -37,6 +37,10 @@ s32 fn_8037E86C(void) {
     return lbl_80496340;
 }
 
+s32 fn_8037E99C(void) {
+    return *(u16 *)0xCC00500A & 0x20;
+}
+
 void fn_803805DC(void) {
 
 }
