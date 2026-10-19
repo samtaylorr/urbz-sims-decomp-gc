@@ -45,3 +45,8 @@ void fn_80033054(void) {
     fn_802D2FD0();
 }
 
+void fn_802F4AB8(void);
+void fn_80033A3C(void) {
+    fn_802F4AB8();
+}
+
