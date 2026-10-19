@@ -57,6 +57,17 @@ void fn_80191460(void) {
 
 }
 
+void *fn_80191B94(void *arg0) {
+    M2C_UNK fn_801AD7B0(u16, void *);
+    void *temp_r31;
+
+    temp_r31 = arg0 + 0x24;
+    if (((u32) ((M2C_FIELD(temp_r31, s32 *, 4) - M2C_FIELD(arg0, s32 *, 0x24)) * 0xCCCCCCCD) >> 2U) == 0) {
+        fn_801AD7B0(M2C_FIELD(arg0, u16 *, 0), temp_r31);
+    }
+    return temp_r31;
+}
+
 s32 fn_80192788(void *arg0) {
     u32 temp_r3;
 
