@@ -520,6 +520,12 @@ s32 fn_80273894(s32 *self) {
     return self[6];
 }
 
+void fn_80273AA4(void *arg0, s32 *arg1, s32 *arg2, u16 *arg3) {
+    *arg1 = (M2C_FIELD(arg0, s32 *, 4) << 5) & 0x03FFFFE0;
+    *arg2 = ((u32) M2C_FIELD(arg0, u32 *, 0) >> 0xAU) & 3;
+    *arg3 = M2C_FIELD(arg0, u16 *, 8);
+}
+
 s32 fn_80273AC8(void *arg0) {
     return (M2C_FIELD(arg0, s32 *, 4) << 5) & 0x03FFFFE0;
 }
