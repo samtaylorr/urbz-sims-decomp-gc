@@ -831,6 +831,13 @@ void fn_800DBFE0(void *arg0, s32 arg1, f32 farg0) {
     M2C_FIELD(arg0, f32 *, 0xA8) = (f32) (M2C_FIELD(arg0, f32 *, 0xA8) + farg0);
 }
 
+void fn_800DC000(void *arg0) {
+    s32 fn_800E3E50();
+    if (fn_800E3E50() != 0) {
+        M2C_FIELD(arg0, s32 *, 0xAC) = 1;
+    }
+}
+
 s32 fn_800DC1C4(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x94);
 }
