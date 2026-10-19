@@ -130,6 +130,10 @@ void fn_802ACC30(char *self) {
     fn_803B739C(self + 8);
 }
 
+u8 *fn_802ACC54(u8 *self) {
+    return self + 8;
+}
+
 s32 fn_802ACC64(void) {
     return 1;
 }
