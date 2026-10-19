@@ -4439,6 +4439,10 @@ s32 fn_803B7270(void) {
     return 0;
 }
 
+s32 fn_803B72D8(s32 arg0) {
+    return arg0 & 0xFFFFFFFE;
+}
+
 void fn_802ADE44();
 void fn_803B7458(char *self) {
     extern void fn_802ADE44(void *);
