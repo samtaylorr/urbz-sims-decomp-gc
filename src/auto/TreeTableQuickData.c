@@ -458,3 +458,8 @@ s32 fn_801B66D8(s32 *self) {
     return self[1];
 }
 
+void fn_801B66E0(void) {
+    M2C_UNK fn_801B6304(M2C_UNK, M2C_UNK);
+    fn_801B6304(1, 0xFFFF);
+}
+
