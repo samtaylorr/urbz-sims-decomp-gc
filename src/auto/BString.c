@@ -862,6 +862,18 @@ s32 *fn_800DAF74(s32 *self, s32 a) {
     return self;
 }
 
+s32 *fn_800DAFA8(s32 *self, s32 a) {
+    extern s32 lbl_8040BA38[];
+    self[0] = a;
+    self[1] = -1;
+    self[2] = 0;
+    self[3] = -1;
+    self[4] = 1;
+    self[5] = (s32)lbl_8040BA38;
+    self[6] = 0;
+    return self;
+}
+
 void fn_802D0F9C(void);
 void fn_800DB148(void) {
     fn_802D0F9C();
