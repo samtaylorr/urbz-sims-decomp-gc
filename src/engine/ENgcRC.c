@@ -45,6 +45,11 @@ void fn_8034B700(void) {
 
 }
 
+void fn_803552E4(u8 *arg);
+void fn_8034BAF8(void) {
+    fn_803552E4(lbl_8046DF78);
+}
+
 void fn_8034BC04(void) {
 
 }
