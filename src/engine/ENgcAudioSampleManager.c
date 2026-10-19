@@ -6,6 +6,16 @@ void fn_8033D3A0(void) {
     fn_80336078();
 }
 
+s32 fn_8033DD68(void *arg0, void *arg1) {
+    s32 var_r9;
+
+    var_r9 = 0;
+    if (((s32) M2C_FIELD(arg1, s32 *, 0xC) != 0) || ((s32) M2C_FIELD(arg1, s32 *, 8) != 0) || (arg1 == (s32) M2C_FIELD(arg0, s32 *, 0xAC))) {
+        var_r9 = 1;
+    }
+    return var_r9;
+}
+
 void fn_8033740C(void);
 void fn_8033E0B4(void) {
     fn_8033740C();
