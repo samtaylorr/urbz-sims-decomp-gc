@@ -85,10 +85,6 @@ void fn_800C4628(s32 arg0) {
     fn_800F69E8(arg0 + 4);
 }
 
-extern u8 lbl_803D04CC[];
-extern u8 lbl_80495A30[];
-extern void *fn_802D7F48(const char *, void *);
-extern void fn_802D7F94(void *);
 void fn_800C45C0(s32 arg0, s32 arg1);
 
 void fn_800C464C(void) {
