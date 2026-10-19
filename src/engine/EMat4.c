@@ -268,6 +268,28 @@ void fn_802CF2BC(void *arg0) {
     fn_802D1A00(fn_802D0C44(arg0), arg0);
 }
 
+void fn_802D00D4(void *arg0) {
+    M2C_UNK fn_802D0164(void *, s32);
+    s32 var_r4;
+    u16 temp_r9;
+
+    if ((u32) M2C_FIELD(arg0, u32 *, 0x1024) > (u32) M2C_FIELD(arg0, u32 *, 0x1014)) {
+        M2C_FIELD(arg0, s32 *, 0x102C) = 1;
+        do {
+            temp_r9 = M2C_FIELD(arg0, u16 *, 0x1004);
+            M2C_FIELD(arg0, s32 *, 0x1028) = (s32) M2C_FIELD(arg0, s32 *, 0x102C);
+            M2C_FIELD(arg0, s32 *, 0x102C) = -1;
+            M2C_FIELD(arg0, u32 *, 0x1024) = 0U;
+            if ((s32) temp_r9 != 0) {
+                var_r4 = M2C_FIELD(arg0, s32 *, 0x1008) + (temp_r9 * 0x48);
+            } else {
+                var_r4 = 0;
+            }
+            fn_802D0164(arg0, var_r4);
+        } while ((u32) M2C_FIELD(arg0, u32 *, 0x1024) > (u32) M2C_FIELD(arg0, u32 *, 0x1014));
+    }
+}
+
 s32 fn_802D0334(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x1024);
 }
