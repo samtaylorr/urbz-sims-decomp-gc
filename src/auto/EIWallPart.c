@@ -1,6 +1,12 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+extern void fn_802D30D4(void *, s32 *);
+extern void fn_802E34F0(void *, void *);
+void fn_800328F8(char *self, void *arg1) {
+    fn_802E34F0(arg1, self + 0x44);
+}
+
 void fn_80032BD8(void) {
     fn_802D2FD0();
 }
