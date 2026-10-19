@@ -373,6 +373,7 @@ config.libs = [
             Object(NonMatching, "engine/text_802781E4.c"),
             Object(NonMatching, "engine/AptActionInterpreter.c"),
             Object(NonMatching, "engine/AptCharacterAnimation.c"),
+            Object(NonMatching, "engine/EAStringC.c"),
             Object(NonMatching, "misc/text_8038FC80.c"),
             Object(NonMatching, "libs/text_80398934.c"),
         ],
