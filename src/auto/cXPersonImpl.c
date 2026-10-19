@@ -20,3 +20,8 @@ void fn_80185870(void) {
 s32 fn_80185874(void) {
     return 0;
 }
+
+void fn_8018587C(void) {
+
+}
+
