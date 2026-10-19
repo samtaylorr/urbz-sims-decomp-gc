@@ -232,6 +232,11 @@ s32 fn_80269134(void) {
     return lbl_80495F8C;
 }
 
+void fn_8026AD18(void) {
+    M2C_UNK fn_8025F710();
+    fn_8025F710();
+}
+
 extern s32 lbl_80494AC0;
 s32 fn_8026AF1C(void) {
     return lbl_80494AC0;
