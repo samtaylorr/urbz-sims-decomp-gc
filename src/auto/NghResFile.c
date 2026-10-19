@@ -85,3 +85,7 @@ void fn_8012AAB0(void) {
 
 }
 
+void fn_8012ACA4(void) {
+
+}
+
