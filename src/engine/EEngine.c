@@ -95,6 +95,14 @@ void fn_802E0D30(void) {
 
 }
 
+s32 fn_802E0FB4(void *arg0) {
+    extern s32 lbl_80494E04;
+    if ((s32) M2C_FIELD(arg0, s32 *, 8) != 0) {
+        return lbl_80494E04;
+    }
+    return 1;
+}
+
 void fn_802E13B4(void) {
 
 }
