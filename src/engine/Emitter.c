@@ -6,6 +6,10 @@ s32 fn_8030ACB0(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x8C);
 }
 
+void fn_8030AF88(void *arg0, f32 farg0) {
+    M2C_FIELD(M2C_FIELD(arg0, void **, 0x8C), f32 *, 0xBC) = farg0;
+}
+
 s32 fn_8030AFC8(void) {
     return 0;
 }
