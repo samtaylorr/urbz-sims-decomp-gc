@@ -2874,6 +2874,11 @@ void fn_800ECE00(s32 self, s32 flags) {
     }
 }
 
+void *fn_800ECF20(void *arg0, const char *arg1) {
+    ((void (*)(void *, const char *, s32))fn_800EBC84)(arg0, arg1, arg1 ? fn_80248808(arg1) : 0);
+    return arg0;
+}
+
 extern void fn_800EBDA4(void *);
 void *fn_800ED300(void *self) {
     fn_800EBDA4(self);
