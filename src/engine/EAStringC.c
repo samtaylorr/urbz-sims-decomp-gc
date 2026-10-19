@@ -72,6 +72,10 @@ s32 fn_802AD238(void) {
     return 1;
 }
 
+s32 fn_802AD240(void) {
+    return 1;
+}
+
 s32 fn_802AD320(void) {
     return 0;
 }
