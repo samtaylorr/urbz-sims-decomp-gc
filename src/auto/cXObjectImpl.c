@@ -147,6 +147,10 @@ void fn_80148684(void (*cb)(void)) {
     lbl_80494480 = cb;
 }
 
+s32 fn_8014868C(void *arg0) {
+    return (s32) (M2C_FIELD(arg0, s32 *, 0x94) - M2C_FIELD(arg0, s32 *, 0x90)) >> 5;
+}
+
 s32 fn_801489CC(void) {
     return 0;
 }
