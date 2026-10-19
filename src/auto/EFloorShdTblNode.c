@@ -4,6 +4,11 @@
 extern s32 lbl_80496694;
 extern void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
+void fn_80052C9C(void) {
+    extern s32 lbl_8049664C;
+    lbl_8049664C = 0;
+}
+
 void fn_80052EFC(void) {
 
 }
