@@ -53,6 +53,10 @@ s32 fn_8011747C(s32 *self) {
     return self[2];
 }
 
+s32 fn_801175AC(s32 *self) {
+    return self[1];
+}
+
 s32 fn_8011785C(void) {
     return 0;
 }
