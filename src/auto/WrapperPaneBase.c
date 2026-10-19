@@ -64,3 +64,13 @@ void fn_800CFFEC(void) {
 
 }
 
+extern s32 fn_80248808(s32);
+void fn_800D07BC(s32 *self, s32 arg) {
+    self[14] = arg;
+    if (arg == 0) {
+        self[15] = arg;
+    } else {
+        self[15] = fn_80248808(arg);
+    }
+}
+
