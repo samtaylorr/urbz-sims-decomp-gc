@@ -934,6 +934,23 @@ void fn_8020F430(s32 arg0) {
     } while (var_r31 <= 4);
 }
 
+s32 fn_8020F990(void) {
+    M2C_UNK fn_800A4B14(M2C_UNK, s32 *);
+    s32 spC;
+    s32 sp8;
+    s32 var_r3;
+
+    sp8 = 0;
+    fn_800A4B14(0, &sp8);
+    spC = 0;
+    fn_800A4B14(1, &spC);
+    var_r3 = 0;
+    if ((sp8 != 0) || (spC != 0)) {
+        var_r3 = 1;
+    }
+    return var_r3;
+}
+
 void fn_80214DB0(void) {
 
 }
