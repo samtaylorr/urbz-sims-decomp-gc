@@ -1678,6 +1678,14 @@ s32 fn_800EBC7C(void) {
     return 0;
 }
 
+extern void fn_800EAF60(s32);
+void fn_800ECE00(s32 self, s32 flags) {
+    fn_800EAF60(self);
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 extern void fn_800EBDA4(void *);
 void *fn_800ED300(void *self) {
     fn_800EBDA4(self);
