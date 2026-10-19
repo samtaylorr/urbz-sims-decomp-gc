@@ -151,6 +151,10 @@ s32 fn_801B6384(s32 *self) {
     return self[1];
 }
 
+s16 fn_801B638C(void *arg0) {
+    return M2C_FIELD(M2C_FIELD(arg0, void **, 4), s16 *, 0x14);
+}
+
 s32 fn_801B64A8(void) {
     return 0x10;
 }
