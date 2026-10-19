@@ -2295,6 +2295,16 @@ void fn_800E6630(void) {
     fn_803338AC(lbl_80494FCC, 0);
 }
 
+void fn_800E82E8(void *arg0, s32 arg1) {
+    void *temp_r11;
+    void *temp_r9;
+
+    fn_80048A48(&lbl_8041F754);
+    temp_r11 = M2C_FIELD(arg0, void **, 0x18);
+    temp_r9 = M2C_FIELD(temp_r11, void **, 0x44);
+    M2C_FIELD(temp_r9, M2C_UNK (**)(void *, s32), 0x1C)(temp_r11 + M2C_FIELD(temp_r9, s16 *, 0x18), arg1);
+}
+
 void fn_800E95F0(void) {
 
 }
