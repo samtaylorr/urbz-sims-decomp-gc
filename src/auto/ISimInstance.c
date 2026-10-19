@@ -18,6 +18,11 @@ void *fn_80066BC4(void) {
     return lbl_80491CA0;
 }
 
+extern s32 lbl_80491CAC[];
+s32 fn_80066BD0(void) {
+    return lbl_80491CAC[0];
+}
+
 void *fn_80066BF4(void) {
     return lbl_80491CA0;
 }
