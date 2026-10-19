@@ -46,6 +46,10 @@ s32 fn_802C649C(void) {
     return 0;
 }
 
+s32 fn_802C64B8(s32 *self) {
+    return self[6];
+}
+
 s32 fn_802C64F0(u8 *self) {
     return *(s32 *)(self + 0x20);
 }
