@@ -154,6 +154,11 @@ void fn_800F9564(void *arg0, f32 farg0) {
     M2C_FIELD(arg0, f32 *, 0x34) = farg0;
 }
 
+s32 fn_800F98E0(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0x14) = arg1;
+    return 1;
+}
+
 s32 fn_800F98EC(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x14);
 }
