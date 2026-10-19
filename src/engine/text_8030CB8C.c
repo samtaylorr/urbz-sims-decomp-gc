@@ -33,6 +33,15 @@ s32 fn_8030FA44(void *arg0) {
     return M2C_FIELD(M2C_FIELD(arg0, void **, 4), s32 *, 0x84);
 }
 
+void fn_8030FAAC(s32 *arg0) {
+    M2C_UNK fn_8036F45C(s32);
+    M2C_UNK fn_8036FB28(s32, s32);
+    extern s32 lbl_80494EE4;
+    fn_8036F45C(*arg0);
+    fn_8036FB28(lbl_80494EE4, *arg0);
+    *arg0 = 0;
+}
+
 s32 fn_8030FE2C(void) {
     extern void *lbl_80494EEC;
     return M2C_FIELD(lbl_80494EEC, s32 *, 8);
