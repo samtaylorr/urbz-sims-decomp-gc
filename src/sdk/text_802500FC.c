@@ -1124,6 +1124,27 @@ void fn_80277430(void) {
 
 }
 
+s32 fn_80277694(s32 arg0, s32 arg1) {
+    M2C_UNK fn_80277BDC(s32, s32, s32);
+    extern s32 lbl_804960D0;
+    extern s32 lbl_804960D4;
+    extern s8 lbl_804960DC;
+    s32 temp_r31;
+    s32 var_r3;
+
+    temp_r31 = fn_8025465C();
+    if (lbl_804960D0 & 0x10000) {
+        var_r3 = 0x1000;
+    } else {
+        var_r3 = 0;
+    }
+    fn_80277BDC(var_r3 + 0x1E000, arg0, (arg1 + 3) & 0xFFFFFFFC);
+    lbl_804960D4 = 0;
+    lbl_804960DC = 0;
+    fn_80254684(temp_r31);
+    return 0;
+}
+
 void fn_802781E0(void) {
 
 }
