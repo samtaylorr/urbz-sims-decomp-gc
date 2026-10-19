@@ -277,6 +277,10 @@ void fn_803BE780(void) {
     fn_80310774();
 }
 
+s32 fn_803BEBD8(void) {
+    return 0;
+}
+
 void fn_803BEC14(u8 *self) {
     *(u8 **)(self + 0x338) = lbl_8041CFA8;
     fn_802D8BEC(self);
