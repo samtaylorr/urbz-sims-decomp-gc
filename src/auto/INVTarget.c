@@ -621,6 +621,23 @@ void fn_8020DF04(void) {
     fn_801DB18C(lbl_803E75EC);
 }
 
+void fn_8020F430(s32 arg0) {
+    M2C_UNK fn_801868E4(s32, s32, s32);
+    extern s32 lbl_8049440C;
+    s32 temp_r3;
+    s32 var_r30;
+    s32 var_r31;
+
+    var_r30 = arg0 + 0x148;
+    var_r31 = 1;
+    do {
+        temp_r3 = var_r30;
+        var_r30 += 0x1BE0;
+        fn_801868E4(temp_r3, lbl_8049440C, var_r31);
+        var_r31 += 1;
+    } while (var_r31 <= 4);
+}
+
 void fn_80214DB0(void) {
 
 }
