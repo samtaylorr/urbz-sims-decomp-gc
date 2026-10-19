@@ -340,6 +340,10 @@ void fn_800D63EC(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
 
+void fn_800D6420(void) {
+
+}
+
 s32 fn_800D6434(void) {
     return 0;
 }
