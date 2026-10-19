@@ -117,6 +117,11 @@ void fn_802EEED0(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x98) = arg1;
 }
 
+extern const f32 lbl_803F0C94[];
+f32 fn_802EEED8(void) {
+    return lbl_803F0C94[0];
+}
+
 s32 fn_802EEEE4(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x14);
 }
