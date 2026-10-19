@@ -466,6 +466,17 @@ s32 fn_8026BAAC(s32 arg0) {
     return 0;
 }
 
+s32 fn_8026BAE8(s32 arg0) {
+    extern s32 lbl_8049601C;
+    s32 temp_r31;
+
+    temp_r31 = lbl_8049601C;
+    fn_8025465C();
+    lbl_8049601C = arg0;
+    fn_80254684();
+    return temp_r31;
+}
+
 s32 fn_8026BBB4(void) {
     return ((u16) *(u16 *)0xCC005036 >> 0xFU) & 1;
 }
