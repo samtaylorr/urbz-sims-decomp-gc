@@ -18,6 +18,10 @@ s32 fn_8019F0A8(void) {
     return 0;
 }
 
+s32 fn_8019F0B4(void) {
+    return 0;
+}
+
 void fn_801A1E30(void) {
     fn_801A1B50();
 }
