@@ -7,6 +7,11 @@ typedef struct Vec3 {
 
 extern void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
+extern void fn_802D20E8(void *);
+s32 fn_8000D4F8(s32 *self) {
+    return *self;
+}
+
 void fn_80014C94(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
