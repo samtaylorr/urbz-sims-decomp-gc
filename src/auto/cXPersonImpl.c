@@ -125,6 +125,15 @@ u16 fn_80185F10(void *arg0) {
     return M2C_FIELD(arg0, u16 *, 0x4E4);
 }
 
+void fn_80185F18(void *arg0) {
+    void *temp_r3;
+    void *temp_r9;
+
+    temp_r3 = M2C_FIELD(arg0, void **, 4);
+    temp_r9 = M2C_FIELD(temp_r3, void **, 4);
+    M2C_FIELD(temp_r9, M2C_UNK (**)(void *, s32), 0x10C)(temp_r3 + M2C_FIELD(temp_r9, s16 *, 0x108), 0x1F);
+}
+
 void fn_80185F54(void *arg0, s32 arg1) {
     void *temp_r11;
     void *temp_r9;
