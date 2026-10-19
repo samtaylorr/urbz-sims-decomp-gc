@@ -19,6 +19,10 @@ s32 fn_800BBD78(s32 *self) {
     return self[1];
 }
 
+void fn_800BC03C(void) {
+
+}
+
 s32 fn_800BC124(void) {
     return 1;
 }
