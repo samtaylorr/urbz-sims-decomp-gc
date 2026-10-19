@@ -38,6 +38,10 @@ s32 fn_8019F1F0(void) {
     return 0;
 }
 
+s32 fn_8019F26C(s32 *self) {
+    return self[2];
+}
+
 s32 fn_8019F878(void) {
     return 0;
 }
