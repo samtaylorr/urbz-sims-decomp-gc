@@ -15,6 +15,15 @@ s32 fn_8036BD74(s32 arg0, s32 *out) {
     return arg0;
 }
 
+extern void fn_802C5C58(void *, s32 *);
+s32 fn_8036BDB4(s32 arg0, s32 *out) {
+    s32 tmp;
+
+    fn_802C5C58((void *)arg0, &tmp);
+    *out = tmp;
+    return arg0;
+}
+
 void fn_8036C038(void) {
     fn_802D2FD0();
 }
