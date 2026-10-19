@@ -21,3 +21,7 @@ void fn_80375D78(void) {
     fn_80240ED0();
 }
 
+s32 fn_80375E44(void) {
+    return 0;
+}
+
