@@ -138,6 +138,10 @@ f32 fn_803082B4(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0xA8);
 }
 
+void fn_803082BC(void *arg0, f32 farg0) {
+    M2C_FIELD(arg0, f32 *, 0xA8) = farg0;
+}
+
 s32 fn_803082C4(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0xA4);
 }
