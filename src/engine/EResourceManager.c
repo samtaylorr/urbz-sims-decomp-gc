@@ -14,6 +14,11 @@ s32 fn_80337F34(void) {
     return 0;
 }
 
+void fn_80337FDC(s32 arg0) {
+    M2C_UNK fn_8033983C(s32);
+    fn_8033983C(arg0 + 0x6C);
+}
+
 s32 fn_8033891C(s32 *self) {
     return self[1];
 }
