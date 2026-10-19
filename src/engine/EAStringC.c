@@ -214,6 +214,10 @@ s32 fn_802BBB10(void) {
     return 0;
 }
 
+s32 fn_802BBD0C(s32 *self) {
+    return self[2];
+}
+
 s32 fn_802BCA14(void) {
     return 0;
 }
