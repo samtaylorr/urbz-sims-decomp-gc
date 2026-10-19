@@ -95,6 +95,11 @@ s32 fn_8031ED2C(s32 arg0) {
     return arg0 + 0x18;
 }
 
+void fn_8031ED34(s32 arg0) {
+    M2C_UNK fn_802D3CE4(s32);
+    fn_802D3CE4(arg0 + 0x18);
+}
+
 s32 fn_8031ED58(s32 *self) {
     return self[7];
 }
