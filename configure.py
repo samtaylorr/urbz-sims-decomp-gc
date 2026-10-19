@@ -306,6 +306,7 @@ config.libs = [
             Object(NonMatching, "auto/ESim.c"),
             Object(NonMatching, "auto/ESpriteRenderMan.c"),
             Object(NonMatching, "auto/EyeToyClient.c"),
+            Object(NonMatching, "auto/GameData.c"),
             Object(NonMatching, "libsn/text_8023EBD8.c"),
             Object(NonMatching, "clib/text_80241A98.c"),
             Object(NonMatching, "engine/text_802781E4.c"),
