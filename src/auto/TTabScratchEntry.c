@@ -172,6 +172,12 @@ void fn_8019E5B0(void **self, s32 flags) {
     }
 }
 
+s32 fn_8019E638(s32 arg0) {
+    M2C_UNK fn_800F6A38(s32);
+    fn_800F6A38(arg0 + 4);
+    return 1;
+}
+
 s32 fn_8019F070(void) {
     return 0;
 }
