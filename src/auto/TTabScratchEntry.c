@@ -568,6 +568,24 @@ s32 fn_8019FC9C(void) {
     return temp_r29 ^ (M2C_FIELD(&sp8, s32 *, 4) ^ fn_80247C34());
 }
 
+s32 fn_801A0558(s32 arg0) {
+    switch (arg0) {                                 /* irregular */
+    case 1:
+        return 4;
+    case 2:
+        return 8;
+    case 4:
+        return 1;
+    case 8:
+        return 2;
+    default:
+        return 0;
+    case 16:
+    case 32:
+        return arg0;
+    }
+}
+
 void fn_801A0858(void *self, s32 flags) {
     if (flags & 1) {
         fn_802D20E8(self);
