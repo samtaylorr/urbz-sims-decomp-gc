@@ -5,6 +5,12 @@ s32 fn_8016FE18(void) {
     return 1;
 }
 
+extern u8 lbl_80434F64[];
+void fn_80174B18(u8 *arg);
+void fn_8017073C(void) {
+    fn_80174B18(lbl_80434F64);
+}
+
 s32 fn_80170764(void) {
     return 0;
 }
