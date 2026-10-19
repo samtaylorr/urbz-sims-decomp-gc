@@ -125,6 +125,10 @@ void fn_8035BF60(void) {
     }
 }
 
+s32 fn_8035DA74(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x28);
+}
+
 void fn_8035DB44(void) {
     fn_8036EFA4();
 }
