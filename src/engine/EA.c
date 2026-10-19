@@ -23,6 +23,17 @@ void fn_802D8580(void *arg0) {
     fn_802D8424(M2C_FIELD(arg0, s32 *, 4));
 }
 
+void fn_802D88C8(void *arg0) {
+    M2C_UNK fn_80240EC8(s32);
+    void *temp_r9;
+
+    fn_80240EC8(M2C_FIELD(arg0, s32 *, 0x2C));
+    if (arg0 != NULL) {
+        temp_r9 = M2C_FIELD(arg0, void **, 0x28);
+        M2C_FIELD(temp_r9, M2C_UNK (**)(void *, M2C_UNK), 0xC)(arg0 + M2C_FIELD(temp_r9, s16 *, 8), 3);
+    }
+}
+
 void fn_802D8AAC(void *arg0) {
     M2C_UNK fn_80240ED8(s32);
     fn_80240ED8(M2C_FIELD(arg0, s32 *, 0x2C));
