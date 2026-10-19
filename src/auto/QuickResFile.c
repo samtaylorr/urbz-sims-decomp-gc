@@ -78,3 +78,12 @@ s32 fn_8018CEE8(void) {
 void fn_8018D8BC(void) {
     fn_8018D8DC();
 }
+
+extern u8 lbl_80413FF0[];
+void fn_8018EA6C(void **self, s32 flags) {
+    *self = lbl_80413FF0;
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
