@@ -126,6 +126,17 @@ void fn_8034C05C(void) {
 
 }
 
+void fn_8034D53C(void *arg0, s32 arg1, s32 arg2) {
+    M2C_UNK fn_8036A52C(s32, void *);
+    void *temp_r29;
+
+    temp_r29 = arg0 + 0x3AC;
+    M2C_FIELD(arg0, s32 *, 0x360) = arg2;
+    fn_8036A52C(arg1, temp_r29);
+    M2C_FIELD(temp_r29, s8 *, 3) = 0x7F;
+    M2C_FIELD(arg0, s32 *, 0x3B0) = 0xFFFFFF;
+}
+
 s32 fn_8034D5AC(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x34C);
 }
