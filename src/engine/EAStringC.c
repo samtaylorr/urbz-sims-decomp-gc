@@ -117,6 +117,16 @@ s32 fn_802A4354(void) {
     return 1;
 }
 
+void fn_802ACAF8(void *arg0, s32 arg1) {
+    s32 temp_r0;
+
+    temp_r0 = M2C_FIELD(arg0, s32 *, 0x18) & 0xFFFFFFFE;
+    M2C_FIELD(arg0, s32 *, 0x18) = temp_r0;
+    if (arg1 != 0) {
+        M2C_FIELD(arg0, s32 *, 0x18) = (s32) (temp_r0 | 1);
+    }
+}
+
 s32 fn_802ACB18(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x18) & 1;
 }
