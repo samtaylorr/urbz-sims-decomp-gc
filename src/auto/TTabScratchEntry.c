@@ -883,6 +883,16 @@ s32 fn_801B1824(void *arg0) {
     return M2C_FIELD(arg0, u16 *, 4) & 0x7FFF;
 }
 
+void fn_801B19AC(void *arg0, s32 arg1) {
+    u16 temp_r0;
+
+    temp_r0 = M2C_FIELD(arg0, u16 *, 4) & 0x7FFF;
+    M2C_FIELD(arg0, u16 *, 4) = temp_r0;
+    if (arg1 != 0) {
+        M2C_FIELD(arg0, u16 *, 4) = (u16) (temp_r0 | 0x8000);
+    }
+}
+
 s32 fn_801B19F4(void) {
     return 0;
 }
