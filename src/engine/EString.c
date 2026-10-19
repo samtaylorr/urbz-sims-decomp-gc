@@ -49,6 +49,23 @@ void fn_802D5024(u8 *arg0) {
     }
 }
 
+void fn_802D5050(u8 *arg0) {
+    u8 *var_r3;
+    u8 var_r0;
+
+    var_r3 = arg0;
+    var_r0 = *var_r3;
+    if ((s32) var_r0 != 0) {
+        do {
+            if ((s32) var_r0 == 0x5C) {
+                M2C_FIELD(var_r3, u8 *, 0) = 0x2F;
+            }
+            var_r0 = M2C_FIELD(var_r3, u8 *, 1);
+            var_r3 += 1;
+        } while ((s32) var_r0 != 0);
+    }
+}
+
 void fn_802D51DC(f64 farg0) {
     M2C_UNK fn_802D62F0(f32);
     fn_802D62F0((f32) farg0);
