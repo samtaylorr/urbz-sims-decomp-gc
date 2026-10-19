@@ -48,6 +48,10 @@ s32 fn_802D0F94(void) {
     return 0;
 }
 
+void fn_802D0F9C(void) {
+
+}
+
 void fn_802D1F94(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
