@@ -73,6 +73,10 @@ void fn_8012AAA0(void) {
 
 }
 
+void fn_8012AAA4(void) {
+
+}
+
 s32 fn_8012AAA8(void) {
     return 1;
 }
