@@ -109,7 +109,7 @@ s32 fn_80311ABC(void *arg0) {
     return M2C_FIELD(M2C_FIELD(arg0, void **, 0x200), s32 *, 0x18) & ~fn_803119D4();
 }
 
-s32 fn_80311AF4(void *arg0) {
+s32 fn_80311AF4(void *arg0, s32 arg1) {
     return M2C_FIELD(M2C_FIELD(arg0, void **, 0x200), s32 *, 0x20) & ~fn_803119D4();
 }
 
