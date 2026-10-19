@@ -39,3 +39,7 @@ s32 fn_80311B68(s32 *self) {
     return self[1];
 }
 
+s32 fn_80311B70(void *arg0) {
+    return ((u32) M2C_FIELD(arg0, u32 *, 4) >> 1U) & 1;
+}
+
