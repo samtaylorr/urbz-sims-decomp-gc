@@ -101,6 +101,10 @@ void fn_800F7EC8(void) {
 
 }
 
+void fn_800F7ECC(void) {
+
+}
+
 s32 fn_800F7F4C(void) {
     return 0;
 }
