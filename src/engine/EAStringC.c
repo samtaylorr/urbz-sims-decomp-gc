@@ -709,6 +709,16 @@ void fn_802B6FA4(void) {
 
 }
 
+extern void fn_802D20E8(void *);
+void fn_802B709C(void *self, s32 flags) {
+    extern u8 lbl_80418D70[];
+    extern void fn_802D20E8(void *);
+    M2C_FIELD(self, void **, 4) = lbl_80418D70;
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 s32 fn_802B70DC(s32 *arg0) {
     return *arg0 & 0x3F;
 }
