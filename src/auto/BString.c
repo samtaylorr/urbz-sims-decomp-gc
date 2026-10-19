@@ -46,6 +46,10 @@ s32 fn_800EB5B4(void) {
     return 0;
 }
 
+s32 fn_800EBC7C(void) {
+    return 0;
+}
+
 void fn_800EC49C(void);
 void fn_800EE7C4(void) {
     fn_800EC49C();
