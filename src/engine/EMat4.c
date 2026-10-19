@@ -206,11 +206,6 @@ s32 fn_802D1424(u32 arg0) {
     return a + b + c + fn_802D1404(((void *(*)(void))fn_802D0C44)(), arg0);
 }
 
-extern s32 lbl_80494DCC;
-extern void *fn_802D0B3C(void);
-extern void *fn_802D0BC0(void);
-extern u8 lbl_80446D34[];
-void fn_802CAA00(void *, s32);
 void fn_802D1494(void) {
     fn_802CAA00(lbl_80446D34 + 0x20, 2);
 }
