@@ -35,6 +35,10 @@ void fn_80068664(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x1CC) = 1;
 }
 
+void fn_80068670(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x1CC) = 1;
+}
+
 void fn_8006867C(void) {
 
 }
