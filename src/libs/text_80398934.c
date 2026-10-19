@@ -4424,6 +4424,12 @@ void fn_803B97C0(void **self, s32 flags) {
     }
 }
 
+void fn_803B9800(s32 *self, s32 n) {
+    while (--n != -1) {
+        self++;
+    }
+}
+
 void fn_803B981C(void *self) {
     ((s32 *)self)[0] = 0;
     ((s32 *)self)[2] = 0;
