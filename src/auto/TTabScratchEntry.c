@@ -210,6 +210,10 @@ void fn_801A37C4(void **self, s32 flags) {
     }
 }
 
+void fn_801A3CFC(void) {
+
+}
+
 s32 fn_801A3D08(void) {
     return 0;
 }
