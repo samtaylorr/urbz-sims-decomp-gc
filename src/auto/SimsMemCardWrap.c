@@ -121,6 +121,10 @@ s32 fn_800AB038(void) {
     return 0;
 }
 
+void fn_800AB040(void) {
+
+}
+
 s32 fn_800AB76C(void) {
     return 0;
 }
