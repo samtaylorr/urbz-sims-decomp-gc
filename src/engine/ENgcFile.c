@@ -30,6 +30,16 @@ void fn_802DFF84(void **self, s32 flags) {
     }
 }
 
+void fn_802E010C(s32 arg0) {
+    s32 *fn_802D1FC8(M2C_UNK);
+    M2C_UNK fn_802E0208(s32, s32 *);
+    s32 *temp_r3;
+
+    temp_r3 = fn_802D1FC8(0xC);
+    *temp_r3 = 2;
+    fn_802E0208(arg0, temp_r3);
+}
+
 void fn_802E01B8(void) {
 
 }
