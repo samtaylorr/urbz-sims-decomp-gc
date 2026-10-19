@@ -15,6 +15,10 @@ s32 fn_8004148C(s32 *self) {
     return self[2];
 }
 
+s32 fn_80041494(s32 *self) {
+    return *self;
+}
+
 s32 fn_8004149C(s32 *self) {
     return self[1];
 }
