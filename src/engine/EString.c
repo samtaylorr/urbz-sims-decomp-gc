@@ -5,6 +5,10 @@ s32 fn_802D32A0(void) {
     return 0;
 }
 
+s32 fn_802D38E4(s32 *self) {
+    return *self;
+}
+
 extern u8 lbl_80419540[];
 extern void fn_802D20E8(void *);
 void fn_802D6A28(void **self, s32 flags) {
