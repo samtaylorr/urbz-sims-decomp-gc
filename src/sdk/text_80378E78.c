@@ -46,6 +46,11 @@ s32 fn_80382D7C(void) {
     return lbl_80496448;
 }
 
+extern u8 lbl_8047E2A0[];
+void *fn_803837CC(void) {
+    return lbl_8047E2A0;
+}
+
 extern s32 lbl_80496440;
 s32 fn_803847A0(void) {
     return lbl_80496440;
