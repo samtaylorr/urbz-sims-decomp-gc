@@ -30,6 +30,12 @@ s32 fn_800C4050(void) {
     return 1;
 }
 
+void fn_800C43D8(void *self, s32 flags) {
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 s32 fn_800C4400(void) {
     return 1;
 }
