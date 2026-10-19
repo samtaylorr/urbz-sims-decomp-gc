@@ -16,6 +16,23 @@ void fn_802C6A5C(s32 *arg0) {
     fn_80248808(*arg0);
 }
 
+void fn_802C725C(u8 **arg0, s32 arg1, u8 arg2) {
+    u8 *var_r3;
+    u8 var_r0;
+
+    var_r3 = *arg0;
+    var_r0 = *var_r3;
+    if ((s32) var_r0 != 0) {
+        do {
+            if ((s8) var_r0 == arg1) {
+                M2C_FIELD(var_r3, u8 *, 0) = arg2;
+            }
+            var_r0 = M2C_FIELD(var_r3, u8 *, 1);
+            var_r3 += 1;
+        } while ((s32) var_r0 != 0);
+    }
+}
+
 void fn_802C7A84(void) {
 
 }
