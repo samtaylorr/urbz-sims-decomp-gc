@@ -11,3 +11,8 @@ void fn_800F5220(void *self, s32 flags) {
         fn_802D20E8(self);
     }
 }
+
+void fn_800F5248(void) {
+
+}
+
