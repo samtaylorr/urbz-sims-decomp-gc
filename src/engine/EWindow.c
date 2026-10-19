@@ -2,6 +2,22 @@
 #include "common.h"
 
 void fn_80307CCC(void);
+void fn_80306CAC(void *arg0) {
+    s32 fn_80307224(void *);
+    void *temp_r9;
+    void *temp_r9_2;
+
+    if (fn_80307224(arg0 + 0xCC) != 0) {
+        temp_r9 = M2C_FIELD(arg0, void **, 0x44);
+        M2C_FIELD(temp_r9, M2C_UNK (**)(void *), 0xDC)(arg0 + M2C_FIELD(temp_r9, s16 *, 0xD8));
+        return;
+    }
+    if (fn_80307224(arg0 + 0xA4) != 0) {
+        temp_r9_2 = M2C_FIELD(arg0, void **, 0x44);
+        M2C_FIELD(temp_r9_2, M2C_UNK (**)(void *), 0xD4)(arg0 + M2C_FIELD(temp_r9_2, s16 *, 0xD0));
+    }
+}
+
 void fn_80306D28(void) {
 
 }
