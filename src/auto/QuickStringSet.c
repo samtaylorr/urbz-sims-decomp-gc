@@ -138,6 +138,10 @@ void fn_800F8820(void (*cb)(void)) {
     lbl_804943C8 = cb;
 }
 
+void fn_800F8CB4(void) {
+
+}
+
 s32 fn_800F8EA4(void) {
     return 0;
 }
