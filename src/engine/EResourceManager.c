@@ -10,6 +10,10 @@ s32 fn_80337F34(void) {
     return 0;
 }
 
+s32 fn_80338950(s32 *self) {
+    return self[2];
+}
+
 void fn_803365B8(void);
 void fn_80338970(void) {
     fn_803365B8();
