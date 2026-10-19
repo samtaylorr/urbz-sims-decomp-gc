@@ -54,6 +54,10 @@ void fn_80065AA8(void) {
 
 }
 
+void fn_80065AAC(void) {
+
+}
+
 s32 fn_80065AC4(void) {
     return 0;
 }
