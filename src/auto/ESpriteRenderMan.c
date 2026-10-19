@@ -11,6 +11,11 @@ void fn_8003FC04(void) {
 
 }
 
+void fn_800402BC(s32 arg0, void *arg1) {
+    M2C_UNK fn_800402E8(s32, s32);
+    fn_800402E8(M2C_FIELD(arg1, s32 *, 0x18), arg0);
+}
+
 void fn_80041458(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
