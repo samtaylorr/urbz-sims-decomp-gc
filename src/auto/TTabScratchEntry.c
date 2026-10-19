@@ -9,6 +9,13 @@ void fn_8019A0A4(void) {
     fn_8019A10C();
 }
 
+void fn_8019A0CC(void **obj) {
+    if (obj != NULL) {
+        char *vt = (char *)*obj;
+        (*(void (**)(void *, s32))(vt + 0xC))((char *)obj + *(s16 *)(vt + 0x8), 3);
+    }
+}
+
 s16 fn_8019AFE8(void *arg0) {
     return M2C_FIELD(arg0, s16 *, 0x34);
 }
