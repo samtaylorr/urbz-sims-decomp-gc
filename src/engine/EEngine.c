@@ -2,6 +2,10 @@
 #include "common.h"
 
 extern u8 fn_802D1E4C[];
+void fn_802E08F8(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x454) = 0;
+}
+
 void *fn_802E0AD8(void) {
     return fn_802D1E4C;
 }
