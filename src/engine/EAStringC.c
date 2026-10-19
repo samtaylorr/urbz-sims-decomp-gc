@@ -1543,6 +1543,26 @@ void fn_802BD608(s32 arg0, s32 arg1) {
     fn_802BD494(arg0, arg1);
 }
 
+void fn_802C43BC(void) {
+    extern void *lbl_80494DAC;
+    void *temp_r31;
+    void *temp_r9;
+    void *temp_r9_2;
+
+    if ((void *) lbl_80494DAC != NULL) {
+        do {
+            temp_r9 = M2C_FIELD(lbl_80494DAC, void **, 4);
+            temp_r31 = M2C_FIELD(lbl_80494DAC, void **, 0xC);
+            M2C_FIELD(temp_r9, M2C_UNK (**)(void *), 0x74)(lbl_80494DAC + M2C_FIELD(temp_r9, s16 *, 0x70));
+            if ((void *) lbl_80494DAC != NULL) {
+                temp_r9_2 = M2C_FIELD(lbl_80494DAC, void **, 4);
+                M2C_FIELD(temp_r9_2, M2C_UNK (**)(void *, M2C_UNK), 0x64)(lbl_80494DAC + M2C_FIELD(temp_r9_2, s16 *, 0x60), 3);
+            }
+            lbl_80494DAC = temp_r31;
+        } while (temp_r31 != NULL);
+    }
+}
+
 void fn_802C45A0(void) {
     M2C_UNK fn_802C44DC(M2C_UNK, M2C_UNK);
     fn_802C44DC(1, 0xFFFF);
