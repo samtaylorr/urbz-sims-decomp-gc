@@ -100,6 +100,14 @@ s32 fn_800FB8A4(void) {
     return 0;
 }
 
+extern u8 lbl_8040D5A0[];
+void fn_800FC178(void **self, s32 flags) {
+    *self = lbl_8040D5A0;
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 extern s32 lbl_804944B0;
 s32 fn_800FC378(void) {
     return lbl_804944B0;
