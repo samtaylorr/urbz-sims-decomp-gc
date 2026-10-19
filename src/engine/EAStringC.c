@@ -351,6 +351,10 @@ u8 *fn_802B3B04(u8 *self) {
     return self + 8;
 }
 
+void fn_802B3B0C(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0xC) = arg1;
+}
+
 s32 fn_802B3B14(char *self) {
     return *(s32 *)(self + 0xC);
 }
