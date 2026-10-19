@@ -404,3 +404,7 @@ s32 fn_800D15E4(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x64) + 0x34;
 }
 
+f32 fn_800D15F0(void *arg0) {
+    return M2C_FIELD(M2C_FIELD(arg0, void **, 0x64), f32 *, 0x34);
+}
+
