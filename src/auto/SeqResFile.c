@@ -5,6 +5,10 @@ void fn_801991B4(void) {
 
 }
 
+void fn_801991B8(void) {
+
+}
+
 void fn_80199EB8(s32 *self) {
     self[0] = 1;
 }
