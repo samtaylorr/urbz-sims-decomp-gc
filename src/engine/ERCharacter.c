@@ -80,3 +80,8 @@ void fn_8031BD20(void) {
     fn_802D2430();
 }
 
+void *fn_8031BD70(u32 size, void *p);
+void *fn_8031BD70(u32 size, void *p) {
+    return p;
+}
+
