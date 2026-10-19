@@ -56,3 +56,18 @@ s32 fn_80367610(void *arg0) {
     return (M2C_FIELD(arg0, s32 *, 0x18) * M2C_FIELD(arg0, s16 *, 0x1C)) + 0x23;
 }
 
+s32 fn_803698D8(void **arg0) {
+    s32 var_r9;
+    void *var_r3;
+
+    var_r3 = *arg0;
+    var_r9 = 0;
+    if (var_r3 != NULL) {
+        do {
+            var_r3 = M2C_FIELD(var_r3, void **, 0x10);
+            var_r9 += 1;
+        } while (var_r3 != NULL);
+    }
+    return var_r9;
+}
+
