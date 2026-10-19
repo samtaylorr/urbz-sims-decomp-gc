@@ -228,6 +228,10 @@ s32 fn_80175E64(void) {
     return 1;
 }
 
+s32 fn_80175E6C(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0xE0);
+}
+
 s32 fn_80175E74(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0xD4);
 }
