@@ -79,3 +79,7 @@ void fn_8031C700(void) {
     fn_802D2430();
 }
 
+s32 fn_8031C720(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x24);
+}
+
