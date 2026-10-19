@@ -10,6 +10,10 @@ void fn_8031A4F8(void) {
 
 }
 
+s32 fn_8031B700(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x80);
+}
+
 void fn_802D2FD0(void);
 void fn_8031B708(void) {
     fn_802D2FD0();
