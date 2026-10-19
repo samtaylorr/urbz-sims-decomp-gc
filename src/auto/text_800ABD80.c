@@ -86,6 +86,10 @@ s32 fn_800B2F54(s32 *self) {
     return self[2];
 }
 
+u16 fn_800B2F5C(void *arg0) {
+    return M2C_FIELD(arg0, u16 *, 0x1E);
+}
+
 s32 fn_800B2FC4(char *self) {
     return *(s32 *)(self + 0xC);
 }
