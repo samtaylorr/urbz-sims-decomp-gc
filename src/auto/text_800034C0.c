@@ -3,3 +3,9 @@
 
 void fn_80003CEC(void) {
 }
+
+void fn_800C47CC(void);
+void fn_800043E8(void) {
+    fn_800C47CC();
+}
+
