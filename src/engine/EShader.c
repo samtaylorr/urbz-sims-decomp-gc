@@ -17,3 +17,7 @@ void fn_802FFCDC(void) {
 
 }
 
+void fn_802FFCE0(void) {
+
+}
+
