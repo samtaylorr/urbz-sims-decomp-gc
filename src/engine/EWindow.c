@@ -78,6 +78,10 @@ s32 fn_80307A84(void *arg0) {
     return ((u32) M2C_FIELD(arg0, u32 *, 0x18) >> 3U) & 1;
 }
 
+s32 fn_80307A90(void *arg0) {
+    return ((u32) M2C_FIELD(arg0, u32 *, 0x18) >> 4U) & 1;
+}
+
 s32 fn_80307A9C(s32 arg0) {
     return arg0 + 0x2C;
 }
