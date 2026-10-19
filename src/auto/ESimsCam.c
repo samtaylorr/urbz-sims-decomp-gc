@@ -99,3 +99,7 @@ void fn_80014D4C(char *self, s32 value) {
     *(s32 *)(self + 0x578) = value;
 }
 
+s32 fn_80014D54(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x578);
+}
+
