@@ -5,3 +5,9 @@ void fn_8033740C(void);
 void fn_8033563C(void) {
     fn_8033740C();
 }
+
+void fn_80337430(void);
+void fn_8033565C(void) {
+    fn_80337430();
+}
+
