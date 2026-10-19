@@ -64,6 +64,10 @@ void fn_800CFFEC(void) {
 
 }
 
+s32 fn_800D0788(s32 *self) {
+    return self[6];
+}
+
 extern s32 fn_80248808(s32);
 void fn_800D07BC(s32 *self, s32 arg) {
     self[14] = arg;
@@ -72,5 +76,9 @@ void fn_800D07BC(s32 *self, s32 arg) {
     } else {
         self[15] = fn_80248808(arg);
     }
+}
+
+s32 fn_800D0804(s32 *self, s32 i) {
+    return self[16 + i];
 }
 
