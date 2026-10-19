@@ -6,6 +6,10 @@ void fn_80337F14(void) {
     fn_802C52EC();
 }
 
+s32 fn_80337F34(void) {
+    return 0;
+}
+
 void fn_803365B8(void);
 void fn_80338970(void) {
     fn_803365B8();
