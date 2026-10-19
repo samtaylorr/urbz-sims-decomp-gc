@@ -297,6 +297,20 @@ void fn_800E1868(void) {
     fn_800E3BC0();
 }
 
+extern void fn_800C681C(void *);
+void fn_800E19C4(u8 *self) {
+    if (*(u8 **)(self + 0x94) != 0) {
+        u8 *obj;
+        fn_800C681C(*(u8 **)(self + 0x94));
+        obj = *(u8 **)(self + 0x94);
+        if (obj != 0) {
+            u8 *vt = *(u8 **)(obj + 0x44);
+            (*(void (**)(void *, s32))(vt + 0xc))(obj + *(s16 *)(vt + 8), 3);
+        }
+        *(u8 **)(self + 0x94) = 0;
+    }
+}
+
 extern s32 lbl_804966DC;
 s32 fn_800E1A2C(void) {
     return lbl_804966DC;
