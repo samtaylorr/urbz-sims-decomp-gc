@@ -10,6 +10,10 @@ void *fn_802C7D1C(void *self) {
     return self;
 }
 
+void fn_802C96D4(void) {
+
+}
+
 void fn_802CDB1C(void *arg0) {
     fn_802D1A00(fn_802D0C44(arg0), arg0);
 }
