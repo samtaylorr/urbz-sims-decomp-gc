@@ -1190,6 +1190,13 @@ s32 fn_802BCBC4(void) {
     return 0;
 }
 
+void fn_802BD608(s32 arg0, s32 arg1) {
+    M2C_UNK fn_802BD324();
+    M2C_UNK fn_802BD494(s32, s32);
+    fn_802BD324();
+    fn_802BD494(arg0, arg1);
+}
+
 void fn_802C45A0(void) {
     M2C_UNK fn_802C44DC(M2C_UNK, M2C_UNK);
     fn_802C44DC(1, 0xFFFF);
