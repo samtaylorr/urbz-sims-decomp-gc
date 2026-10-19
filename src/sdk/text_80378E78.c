@@ -146,3 +146,9 @@ s32 fn_80389994(void *arg0) {
 s32 fn_8038C698(void) {
     return 0;
 }
+
+extern s32 lbl_80495668;
+void fn_8038DEBC(s32 arg0) {
+    lbl_80495668 = arg0;
+}
+
