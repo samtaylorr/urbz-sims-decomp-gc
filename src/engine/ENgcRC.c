@@ -163,6 +163,16 @@ void fn_80355268(void *arg0, void *arg1) {
     M2C_FIELD(temp_r11, s32 *, 0x6CC) = (s32) (M2C_FIELD(temp_r11, s32 *, 0x6CC) | 0x80000000 | 0x40);
 }
 
+void fn_80355294(void *arg0, void *arg1) {
+    void *temp_r11;
+    void *temp_r9;
+
+    temp_r9 = M2C_FIELD(arg0, void **, 0x4D8);
+    M2C_FIELD(temp_r9, s32 *, 0x6EC) = (s32) (M2C_FIELD(temp_r9, s32 *, 0x6EC) & M2C_FIELD(arg1, s32 *, 4));
+    temp_r11 = M2C_FIELD(arg0, void **, 0x4D8);
+    M2C_FIELD(temp_r11, s32 *, 0x6CC) = (s32) (M2C_FIELD(temp_r11, s32 *, 0x6CC) | 0x80000000 | 0x40);
+}
+
 void fn_803552C0(void *arg0, void *arg1) {
     void *temp_r11;
 
