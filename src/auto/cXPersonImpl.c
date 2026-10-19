@@ -7,6 +7,11 @@ void fn_80176558(void) {
     fn_800F1A60((s32)&lbl_80495C94, 2);
 }
 
+M2C_UNK *fn_80177154(void) {
+    extern M2C_UNK lbl_80495CA0;
+    return &lbl_80495CA0;
+}
+
 void fn_80182220(void) {
 
 }
