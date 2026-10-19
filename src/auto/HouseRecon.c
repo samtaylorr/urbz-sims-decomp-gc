@@ -7,6 +7,21 @@ void fn_80052238(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x384) = (s32) (M2C_FIELD(arg0, s32 *, 0x384) | arg1);
 }
 
+s32 fn_80052248(void *arg0) {
+    s32 temp_r3;
+    s32 var_r9;
+
+    var_r9 = 1;
+    if ((s32) M2C_FIELD(arg0, s32 *, 0x380) != 4) {
+        temp_r3 = M2C_FIELD(arg0, s32 *, 0x3BC);
+        var_r9 = 0;
+        if ((temp_r3 != 0x92D8AE4A) && (temp_r3 != 0x6BCF6EE9)) {
+            var_r9 = 1;
+        }
+    }
+    return var_r9;
+}
+
 s32 fn_800522E0(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x3D0) = arg1;
     return 1;
