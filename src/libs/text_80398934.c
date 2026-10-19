@@ -632,6 +632,14 @@ void fn_8039BECC(s32 *dst, s32 *src, s32 n) {
     }
 }
 
+void fn_8039C07C(s32 *dst, s32 *src, s32 n) {
+    dst += n - 1;
+    src += n - 1;
+    while (n-- != 0) {
+        *dst-- = *src--;
+    }
+}
+
 void fn_8039C190(void *self, s32 arg1) {
     fn_8039C0B8(self, arg1, M2C_FIELD(self, s32 *, 4), 1);
 }
@@ -5901,6 +5909,11 @@ void fn_803B9908(s32 *dst, s32 *src, s32 n) {
     while (--n != -1) {
         *dst++ = *src++;
     }
+}
+
+void fn_803B9AF4(void *, s32, s32, s32);
+void fn_803B9BCC(void *self, s32 arg1) {
+    fn_803B9AF4(self, arg1, M2C_FIELD(self, s32 *, 4), 1);
 }
 
 extern void fn_803B9C44(void *);
