@@ -380,6 +380,10 @@ void fn_8039DB14(void *arg0, f32 farg0) {
     M2C_FIELD(arg0, f32 *, 0x10) = farg0;
 }
 
+f32 fn_8039DB1C(void *arg0) {
+    return M2C_FIELD(arg0, f32 *, 0x10);
+}
+
 void fn_8039DC8C(void) {
 
 }
