@@ -64,6 +64,17 @@ void fn_801DCC94(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x88) = (s32) M2C_FIELD(arg0, s32 *, 0x84);
 }
 
+s32 fn_801E0118(void) {
+    s32 fn_801DFC68();
+    M2C_UNK fn_802D1FC8(M2C_UNK);
+    extern s32 lbl_80494620;
+    if ((s32) lbl_80494620 == 0) {
+        fn_802D1FC8(0x10);
+        lbl_80494620 = fn_801DFC68();
+    }
+    return lbl_80494620;
+}
+
 void fn_801E0308(void *arg0, void *arg1) {
     M2C_FIELD(arg1, void **, 0x74) = (void *) M2C_FIELD(arg0, void **, 0x74);
     M2C_FIELD(arg0, void **, 0x74) = arg1;
