@@ -17,6 +17,13 @@ void fn_8033EA4C(void) {
 
 }
 
+void fn_8033EA90(void) {
+    M2C_UNK fn_8033EB00();
+    extern s32 lbl_80494FF8;
+    lbl_80494FF8 = 1;
+    fn_8033EB00();
+}
+
 void fn_8033EAB8(void) {
 
 }
