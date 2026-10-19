@@ -357,6 +357,10 @@ void fn_801A37C4(void **self, s32 flags) {
     }
 }
 
+s16 fn_801A3C68(void *arg0) {
+    return M2C_FIELD(arg0, s16 *, 4);
+}
+
 void fn_801A3CFC(void) {
 
 }
