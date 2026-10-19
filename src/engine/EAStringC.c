@@ -255,6 +255,10 @@ s32 fn_802AD320(void) {
     return 0;
 }
 
+void fn_802AD328(void) {
+
+}
+
 s32 fn_802AD498(void) {
     return 0;
 }
