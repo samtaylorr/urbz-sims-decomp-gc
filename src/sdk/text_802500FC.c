@@ -150,6 +150,13 @@ s32 fn_8025D7FC(void) {
     return 4;
 }
 
+void fn_8025F594(void) {
+    M2C_UNK fn_8025F148();
+    M2C_UNK fn_8025F448();
+    fn_8025F148();
+    fn_8025F448();
+}
+
 void fn_8025F914(s32 arg0) {
     extern s32 *lbl_80495EA8;
     *lbl_80495EA8 = arg0;
