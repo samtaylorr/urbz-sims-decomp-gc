@@ -106,3 +106,8 @@ void fn_802FECEC(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x14) = 1;
 }
 
+void fn_802FECF8(void) {
+    M2C_UNK fn_802FEBE0(M2C_UNK, M2C_UNK);
+    fn_802FEBE0(1, 0xFFFF);
+}
+
