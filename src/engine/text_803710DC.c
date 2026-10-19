@@ -24,6 +24,10 @@ s32 fn_8037113C(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void fn_803712D0(void) {
+
+}
+
 void fn_8037117C(void);
 void fn_80371484(void) {
     fn_8037117C();
