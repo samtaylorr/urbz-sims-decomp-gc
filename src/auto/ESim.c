@@ -28,6 +28,11 @@ s32 fn_8003AD8C(void) {
     return fn_8003AD54() ^ 1;
 }
 
+void fn_8003CA70(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    M2C_UNK fn_800A43F4(s32, s32, M2C_UNK, s32, s32, M2C_UNK);
+    fn_800A43F4(arg1, arg0 + 0x410, 0, arg2, arg3, 0);
+}
+
 void fn_8003D024(void) {
 
 }
