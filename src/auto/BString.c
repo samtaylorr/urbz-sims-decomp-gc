@@ -2883,15 +2883,7 @@ s32 fn_800EBC7C(void) {
 }
 
 void *fn_800ECCD0(void **arg0, s32 arg1) {
-    void *heap = ((void *(*)(void))fn_802D0AB8)();
-    void *p = fn_802D197C(heap, 0x10, 4);
-    if (p == NULL) {
-        p = fn_802DBBCC(heap, 0x10, 0);
-        if (p == NULL && heap == ((void *(*)(void))fn_802D0AB8)()) {
-            p = fn_802DBBCC(fn_802D0B3C(), 0x10, 0);
-        }
-    }
-    *arg0 = fn_800EBA28(p, arg1);
+    *arg0 = fn_800EBA28(BString_Alloc(0x10, 4), arg1);
     return arg0;
 }
 
