@@ -75,3 +75,8 @@ void fn_80331DB8(void) {
     fn_802D2430();
 }
 
+void *fn_80331E08(u32 size, void *p);
+void *fn_80331E08(u32 size, void *p) {
+    return p;
+}
+
