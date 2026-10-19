@@ -7,3 +7,8 @@ void fn_8000CA20(s32 arg0, s32 arg1) {
         lbl_8049664C = 1;
     }
 }
+
+void fn_8000CA44(void) {
+    fn_8000CA20(1, 0xFFFF);
+}
+
