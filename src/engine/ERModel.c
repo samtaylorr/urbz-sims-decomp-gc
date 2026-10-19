@@ -24,6 +24,10 @@ s32 fn_803292C4(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void fn_80329838(void) {
+
+}
+
 void fn_8032CD5C(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
