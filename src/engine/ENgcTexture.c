@@ -211,6 +211,11 @@ void fn_803626CC(s32 arg0) {
     fn_80338184(lbl_8045BAE8, arg0);
 }
 
+void fn_8036288C(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    void fn_803632B4(s32, s32, s32, s32);
+    fn_803632B4(arg1, arg2, arg3, arg4);
+}
+
 s32 fn_80362D30(void) {
     return 2;
 }
