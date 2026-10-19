@@ -20,6 +20,16 @@ s32 fn_80186788(s32 arg0) {
     return arg0 + 0x1904;
 }
 
+s32 fn_80186884(void *arg0) {
+    s32 *fn_8010B96C(void *, M2C_UNK);
+    void *temp_r31;
+
+    if (((s32) M2C_FIELD(arg0, s32 *, 4) == 0) || (temp_r31 = arg0 + 0xC, ((fn_8010B96C(temp_r31, 0) == NULL) != 0))) {
+        return -1;
+    }
+    return *fn_8010B96C(temp_r31, 0);
+}
+
 void fn_8018A070(s32 *arg0) {
     M2C_UNK fn_8011AA6C(s32);
     fn_8011AA6C(*arg0);
