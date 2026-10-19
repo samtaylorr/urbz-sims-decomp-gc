@@ -68,3 +68,8 @@ s32 fn_801B36F0(void) {
     return 2;
 }
 
+void fn_801B36F8(void) {
+    M2C_UNK fn_801B365C(M2C_UNK, M2C_UNK);
+    fn_801B365C(1, 0xFFFF);
+}
+
