@@ -33,3 +33,7 @@ s32 fn_8012A954(void) {
     return 0;
 }
 
+s32 fn_8012A9F4(void) {
+    return 0;
+}
+
