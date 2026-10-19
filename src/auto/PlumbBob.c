@@ -379,6 +379,10 @@ void fn_8008A7A4(s32 *arg0) {
     *arg0 = 0;
 }
 
+void fn_8008B420(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x158) = 1;
+}
+
 void fn_8008C388(void) {
     fn_8008C3A8();
 }
