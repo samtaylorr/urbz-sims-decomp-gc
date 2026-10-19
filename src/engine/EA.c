@@ -276,6 +276,12 @@ s32 fn_802DEC58(s32 *self) {
     return self[1];
 }
 
+extern void fn_802DED88(void *);
+void fn_802DED88(void *self) {
+    extern void *fn_802DDCE8(void *, s32);
+    fn_802DDCE8(self, 0);
+}
+
 void fn_802DDC6C(void);
 void fn_802DEDAC(void) {
     fn_802DDC6C();
