@@ -41,3 +41,7 @@ s32 fn_80028940(void) {
     return 0;
 }
 
+void fn_8002B868(void) {
+
+}
+
