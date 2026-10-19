@@ -1,6 +1,15 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+extern void fn_800ABE24(s32);
+extern void fn_802D20E8(s32);
+void fn_800ABD94(s32 self, s32 flags) {
+    fn_800ABE24(self);
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_800ACA14(void) {
 
 }
