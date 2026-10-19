@@ -13,25 +13,25 @@ u8 fn_80059B90(u8 *self) {
 }
 
 s32 fn_80059B98(s32 *self, struct BBI_Vec3 *out) {
-    s32 tmp[1];
+    struct BBI_Handle tmp;
 
     if (out != 0) {
         out->a = self[0];
         out->b = self[1];
-        tmp[0] = out->c;
+        tmp = ((struct BBI_Handle *)out)[2];
         return 1;
-    } else {
-        return 0;
     }
+    return 0;
 }
 
-void fn_80059BD4(s32 *self) {
+s32 *fn_80059BD4(s32 *self) {
     s32 i;
     s32 *p = self;
 
-    for (i = 0; i < 0x24; i++) {
+    for (i = 0x24; i != 0; i--) {
         *p++ = 0;
     }
+    return self;
 }
 
 extern void fn_8005A038(s32);
