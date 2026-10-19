@@ -385,6 +385,7 @@ config.libs = [
             Object(NonMatching, "engine/EGraphics.c"),
             Object(NonMatching, "engine/text_802EF524.c"),
             Object(NonMatching, "engine/EILight.c"),
+            Object(NonMatching, "engine/EInstance.c"),
             Object(NonMatching, "misc/text_8038FC80.c"),
             Object(NonMatching, "libs/text_80398934.c"),
         ],
