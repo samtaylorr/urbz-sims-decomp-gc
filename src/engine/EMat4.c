@@ -197,10 +197,10 @@ void fn_802D0960(void *arg0, f32 *src, s16 *dst) {
 }
 
 void fn_802D09E0(void *arg0, u16 *src, f32 *dst) {
-    dst[0] = (u32)src[0] * *(f32 *)&lbl_803F02C0;
-    dst[1] = (u32)src[1] * *(f32 *)&lbl_803F02C0;
-    dst[2] = (u32)src[2] * *(f32 *)&lbl_803F02C0;
-    dst[3] = (u32)src[3] * *(f32 *)&lbl_803F02C0;
+    dst[0] = (u32)src[0] * lbl_803F02C0[0];
+    dst[1] = (u32)src[1] * lbl_803F02C0[0];
+    dst[2] = (u32)src[2] * lbl_803F02C0[0];
+    dst[3] = (u32)src[3] * lbl_803F02C0[0];
 }
 
 void fn_802D0A8C(void) {
