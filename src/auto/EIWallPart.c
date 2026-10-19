@@ -36,6 +36,28 @@ void fn_8002EFD0(void *arg0) {
     }
 }
 
+s32 fn_8002F014(void *arg0, s32 arg1) {
+    s32 fn_800F47E4(s32, s32);
+    s32 temp_r30;
+    void *var_r31;
+
+    var_r31 = M2C_FIELD(arg0, void **, 0x4C);
+    if (var_r31 != NULL) {
+loop_1:
+        temp_r30 = M2C_FIELD(var_r31, s32 *, 0);
+        if (fn_800F47E4(temp_r30 + 0x110, arg1) != 0) {
+            return temp_r30;
+        }
+        var_r31 = M2C_FIELD(var_r31, void **, 8);
+        if (var_r31 == NULL) {
+            goto block_4;
+        }
+        goto loop_1;
+    }
+block_4:
+    return 0;
+}
+
 void fn_8002F818(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x5C) = 1;
 }
