@@ -21,6 +21,10 @@ void fn_8010A8A4(void) {
 
 }
 
+s32 fn_8010B4E8(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x80);
+}
+
 extern u8 lbl_8040E770[];
 extern void fn_802D20E8(void *);
 void fn_8010B568(void **self, s32 flags) {
