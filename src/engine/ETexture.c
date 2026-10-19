@@ -20,6 +20,10 @@ s32 fn_8036EE60(void) {
     return 0;
 }
 
+s32 fn_8036F018(s32 *self) {
+    return self[2];
+}
+
 s32 fn_8036F1DC(void) {
     return 1;
 }
