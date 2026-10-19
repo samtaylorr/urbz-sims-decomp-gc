@@ -45,6 +45,10 @@ s32 fn_8014866C(void) {
     return lbl_8049447C;
 }
 
+void fn_80148674(void (*cb)(void)) {
+    lbl_8049447C = cb;
+}
+
 s32 fn_8014867C(void) {
     return lbl_80494480;
 }
