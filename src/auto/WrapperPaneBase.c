@@ -203,6 +203,15 @@ void fn_800CD8C8(f32 farg0) {
     M2C_FIELD(temp_r9, M2C_UNK (**)(void *, f32), 0x7C)(temp_r3 + M2C_FIELD(temp_r9, s16 *, 0x78), farg0);
 }
 
+void fn_800CD910(f32 farg0) {
+    void *temp_r3;
+    void *temp_r9;
+
+    temp_r3 = fn_800CD660();
+    temp_r9 = M2C_FIELD(temp_r3, void **, 0x1C);
+    M2C_FIELD(temp_r9, M2C_UNK (**)(void *, f32), 0x8C)(temp_r3 + M2C_FIELD(temp_r9, s16 *, 0x88), farg0);
+}
+
 s32 fn_800CD998(void) {
     void *fn_800CD660();
     return M2C_FIELD(fn_800CD660(), s32 *, 0x20);
