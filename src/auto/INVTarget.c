@@ -702,6 +702,23 @@ s32 fn_8021BEF0(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x104);
 }
 
+void fn_80221924(void *arg0, s32 arg1, f32 farg0) {
+    switch (arg1) {                                 /* irregular */
+    case 7:
+        M2C_FIELD(arg0, f32 *, 0x34) = farg0;
+        return;
+    case 8:
+        M2C_FIELD(arg0, f32 *, 0x38) = farg0;
+        return;
+    case 11:
+        M2C_FIELD(arg0, f32 *, 0x3C) = farg0;
+        return;
+    case 12:
+        M2C_FIELD(arg0, f32 *, 0x40) = farg0;
+        return;
+    }
+}
+
 void fn_80221970(s32 arg0, s32 arg1) {
     M2C_UNK fn_8022DA70(s32, s32);
     fn_8022DA70(arg1, arg0);
