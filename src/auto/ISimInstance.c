@@ -151,7 +151,7 @@ u16 fn_80066C00(void) {
 
 extern void fn_802D6A90(void *, void *, void *, void *, s32, void *, void *);
 extern void fn_80066B18(void);
-extern void fn_80066B60(void);
+extern void fn_80066B60(void *);
 extern u8 lbl_803C8578[];
 extern u8 lbl_80491C50[];
 void fn_80066C0C(s32 arg0) {
