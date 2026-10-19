@@ -432,6 +432,19 @@ s32 fn_800817BC(void *arg0) {
     return 0;
 }
 
+s32 fn_800817D4(void) {
+    void *fn_80081808();
+    s32 var_r0;
+    void *temp_r3;
+
+    temp_r3 = fn_80081808();
+    var_r0 = 0;
+    if (temp_r3 != NULL) {
+        var_r0 = M2C_FIELD(temp_r3, s32 *, 8);
+    }
+    return var_r0;
+}
+
 void fn_80081A14(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x1A38) = arg1;
     M2C_FIELD(arg0, s32 *, 0x1A48) = (s32) (M2C_FIELD(arg0, s32 *, 0x1A3C) - arg1);
