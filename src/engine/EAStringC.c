@@ -1177,3 +1177,8 @@ s32 fn_802BCBC4(void) {
     return 0;
 }
 
+void fn_802C45A0(void) {
+    M2C_UNK fn_802C44DC(M2C_UNK, M2C_UNK);
+    fn_802C44DC(1, 0xFFFF);
+}
+
