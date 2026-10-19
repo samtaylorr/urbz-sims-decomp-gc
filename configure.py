@@ -391,6 +391,7 @@ config.libs = [
             Object(NonMatching, "engine/text_802F3374.c"),
             Object(NonMatching, "engine/text_802F3E74.c"),
             Object(NonMatching, "engine/ERC.c"),
+            Object(NonMatching, "engine/EShader.c"),
             Object(NonMatching, "misc/text_8038FC80.c"),
             Object(NonMatching, "libs/text_80398934.c"),
         ],
