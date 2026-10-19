@@ -45,6 +45,11 @@ void fn_80370010(void) {
     fn_802D2FD0();
 }
 
+extern u8 lbl_80493DCC[];
+void *fn_80370F90(void) {
+    return lbl_80493DCC;
+}
+
 void fn_802D2430(void);
 void fn_8037102C(void) {
     fn_802D2430();
