@@ -4543,6 +4543,12 @@ void *fn_803BAD8C(void *self) {
     return self;
 }
 
+void fn_803BAEE4(s32 *self, s32 n) {
+    while (--n != -1) {
+        self++;
+    }
+}
+
 void fn_803BAF00(void *self) {
     ((s32 *)self)[0] = 0;
     ((s32 *)self)[2] = 0;
