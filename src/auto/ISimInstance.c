@@ -105,8 +105,9 @@ void fn_80066A50(f32 *out, u8 *obj) {
     out[2] = p[2];
 }
 
-void fn_80066AFC(void **self) {
+void **fn_80066AFC(void **self) {
     *self = lbl_80409228;
+    return self;
 }
 
 void *fn_80066B10(u32 size, void *p);
