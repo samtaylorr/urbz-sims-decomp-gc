@@ -21,6 +21,10 @@ void fn_80047AE8(void) {
 
 }
 
+void fn_80047AEC(void) {
+
+}
+
 s32 fn_80047AFC(void) {
     return 1;
 }
