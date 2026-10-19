@@ -51,6 +51,31 @@ void fn_802D88C8(void *arg0) {
     }
 }
 
+s32 fn_802D891C(s32 arg0, s32 arg1, s32 arg2) {
+    s32 fn_802D8988(s32, s32, s32);
+    s32 temp_r3;
+    s32 var_r30;
+    s32 var_r31;
+
+    var_r30 = arg1;
+    var_r31 = arg2;
+    if (arg2 != 0) {
+loop_1:
+        temp_r3 = fn_802D8988(arg0, var_r30, var_r31);
+        if (temp_r3 == 0) {
+            return 0;
+        }
+        var_r30 += temp_r3;
+        var_r31 -= temp_r3;
+        if (var_r31 == 0) {
+            goto block_4;
+        }
+        goto loop_1;
+    }
+block_4:
+    return arg2;
+}
+
 void fn_802D8AAC(void *arg0) {
     M2C_UNK fn_80240ED8(s32);
     fn_80240ED8(M2C_FIELD(arg0, s32 *, 0x2C));
