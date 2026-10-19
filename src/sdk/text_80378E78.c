@@ -75,6 +75,11 @@ void fn_80382024(s32 arg0) {
     lbl_804963D4 = arg0;
 }
 
+void fn_803822A0(void) {
+    extern s32 lbl_804963FC;
+    lbl_804963FC = 1;
+}
+
 extern s32 lbl_80496404;
 void fn_803822AC(s32 arg0) {
     lbl_80496404 = arg0;
