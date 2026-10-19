@@ -31,6 +31,17 @@ void fn_800458C0(void) {
     fn_80045698(lbl_8041F754);
 }
 
+void fn_800458E8(void) {
+    u8 *vt;
+    u8 *obj;
+
+    fn_8004577C(lbl_8041F754);
+    vt = *(u8 **)lbl_80496650;
+    obj = (*(u8 *(**)(u8 *))(vt + 0x1CC))(lbl_80496650 + *(s16 *)(vt + 0x1C8));
+    vt = *(u8 **)obj;
+    (*(void (**)(u8 *, s32, s32))(vt + 0x8C))(obj + *(s16 *)(vt + 0x88), lbl_8049440C, lbl_80494428);
+}
+
 void fn_80046FE0(void) {
 
 }
@@ -77,6 +88,12 @@ void fn_8004876C(void) {
 
 void fn_80048DF8(void) {
     fn_80048D04();
+}
+
+extern u8 lbl_8041F94C[];
+void fn_8004E824(u8 *arg);
+void fn_8004910C(void) {
+    fn_8004E824(lbl_8041F94C);
 }
 
 void fn_800495E8(void) {
