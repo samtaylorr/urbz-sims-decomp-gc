@@ -37,6 +37,17 @@ s32 fn_801D7DE4(void) {
     return lbl_804945FC;
 }
 
+void fn_801D8508(s32 arg0) {
+    M2C_UNK fn_801D854C(s32, s32);
+    s32 var_r31;
+
+    var_r31 = 0;
+    do {
+        fn_801D854C(arg0, var_r31);
+        var_r31 += 1;
+    } while (var_r31 <= 4);
+}
+
 s32 fn_801D9680(void) {
     s32 fn_801D8810();
     M2C_UNK fn_802D1FC8(M2C_UNK);
