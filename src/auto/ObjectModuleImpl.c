@@ -39,6 +39,10 @@ void fn_80151734(void) {
 
 }
 
+void fn_80152310(void) {
+
+}
+
 s32 fn_80156444(void) {
     return 0;
 }
