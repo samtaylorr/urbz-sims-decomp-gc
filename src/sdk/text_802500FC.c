@@ -11,3 +11,7 @@ s32 fn_8026C4FC(void) {
     return 0;
 }
 
+s32 fn_80277404(void) {
+    return 0;
+}
+
