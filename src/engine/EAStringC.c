@@ -178,6 +178,21 @@ s32 fn_802A4354(void) {
     return 1;
 }
 
+void fn_802A6E10(s32 arg0) {
+    M2C_UNK fn_802A6CE0();
+    s32 fn_802D2058(M2C_UNK);
+    extern s32 lbl_804966FC;
+    extern s32 lbl_80496700;
+    extern s32 lbl_80496704;
+    s32 temp_r3;
+
+    temp_r3 = fn_802D2058(0x4000);
+    lbl_80496700 = temp_r3;
+    lbl_80496704 = temp_r3 + arg0;
+    lbl_804966FC = temp_r3;
+    fn_802A6CE0();
+}
+
 void fn_802ACAF8(void *arg0, s32 arg1) {
     s32 temp_r0;
 
