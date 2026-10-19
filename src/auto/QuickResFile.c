@@ -4,6 +4,10 @@
 void fn_8018D8DC(void);
 extern u8 lbl_80413E80[];
 extern void fn_802D20E8(void *);
+void fn_80186218(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
+
 s32 fn_80186778(s32 arg0) {
     return arg0 + 0xC8;
 }
