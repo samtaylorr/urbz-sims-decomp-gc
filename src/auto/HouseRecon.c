@@ -12,6 +12,10 @@ void fn_800528A0(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
 
+s32 fn_80052954(u32 *arg0) {
+    return ((u32) *arg0 >> 1U) & 1;
+}
+
 void fn_80052AC8(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
