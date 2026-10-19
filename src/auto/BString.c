@@ -1872,6 +1872,14 @@ void fn_800E44BC(void *arg0, f32 farg0) {
     M2C_FIELD(arg0, f32 *, 0x14) = (f32) (M2C_FIELD(arg0, f32 *, 0x14) + farg0);
 }
 
+void fn_800E4698(void) {
+    extern void *lbl_80496640;
+    if ((void *) lbl_80496640 != NULL) {
+        M2C_FIELD(lbl_80496640, s32 *, 4) = (s32) M2C_FIELD(lbl_80496640, s32 *, 0);
+    }
+    lbl_80496640 = NULL;
+}
+
 void fn_800E4958(s32 *self, s32 flags) {
     s32 *v;
     self[5] = (s32)lbl_8040CB28;
