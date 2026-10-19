@@ -79,6 +79,10 @@ s32 fn_8031ED0C(void) {
     return 1;
 }
 
+s32 fn_8031ED14(s32 *self) {
+    return self[2];
+}
+
 s32 fn_8031EE44(void) {
     return 1;
 }
