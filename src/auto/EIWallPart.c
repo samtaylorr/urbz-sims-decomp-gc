@@ -23,6 +23,19 @@ void fn_8002DBA4(void *arg0) {
     fn_8002F824(M2C_FIELD(arg0, s32 *, 0xC), M2C_FIELD(arg0, s32 *, 0x10C));
 }
 
+void fn_8002EFD0(void *arg0) {
+    M2C_UNK fn_8002D800(s32);
+    void *var_r31;
+
+    var_r31 = M2C_FIELD(arg0, void **, 0x4C);
+    if (var_r31 != NULL) {
+        do {
+            fn_8002D800(M2C_FIELD(var_r31, s32 *, 0));
+            var_r31 = M2C_FIELD(var_r31, void **, 8);
+        } while (var_r31 != NULL);
+    }
+}
+
 void fn_8002F818(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x5C) = 1;
 }
