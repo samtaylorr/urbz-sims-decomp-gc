@@ -7,6 +7,11 @@ void fn_80237C70(void *arg0) {
     fn_8022F404(fn_8022554C(arg0), arg0);
 }
 
+void fn_802396D4(s32 arg0) {
+    M2C_UNK fn_8022A394(s32, s32, M2C_UNK);
+    fn_8022A394(arg0 + 8, arg0 + 0x20, 2);
+}
+
 void fn_80239EB0(s32 arg0, s32 arg1) {
     M2C_UNK fn_8022F424(s32, s32);
     fn_8022F424(arg1, arg0);
