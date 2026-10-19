@@ -4528,6 +4528,12 @@ void *fn_803BC1F0(void *self) {
     return self;
 }
 
+void fn_803BC310(void *self) {
+    ((s32 *)self)[0] = 0;
+    ((s32 *)self)[2] = 0;
+    ((s32 *)self)[1] = 0;
+}
+
 extern void fn_803BC310(void *);
 void *fn_803BC324(void *self) {
     fn_803BC310(self);
