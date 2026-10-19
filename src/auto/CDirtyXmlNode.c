@@ -26,6 +26,10 @@ s32 fn_800BF7F4(void) {
     return 0;
 }
 
+void fn_800BFBCC(void) {
+
+}
+
 s32 fn_800C0604(void) {
     return 0;
 }
