@@ -28,6 +28,19 @@ void fn_801029D8(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
 
+s32 fn_80104A5C(s32 arg0, s32 arg1) {
+    s32 var_r0;
+
+    if (arg1 != 0xF) {
+        var_r0 = 0;
+        if (arg1 == 0x10) {
+            var_r0 = arg0;
+        }
+        return var_r0;
+    }
+    return arg0;
+}
+
 s32 fn_801051C0(void) {
     return 0;
 }
