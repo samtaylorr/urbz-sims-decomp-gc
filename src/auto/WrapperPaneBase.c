@@ -71,6 +71,11 @@ f32 fn_800C57E0(void *arg0) {
     return M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x70), void **, 0x64), f32 *, 0x38);
 }
 
+void fn_800C602C(void *arg0, s32 arg1) {
+    M2C_UNK fn_800CE154(s32, M2C_UNK, M2C_UNK, s32);
+    fn_800CE154(M2C_FIELD(arg0, s32 *, 0x70), 0, 1, arg1);
+}
+
 s32 fn_800C60BC(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x78);
 }
