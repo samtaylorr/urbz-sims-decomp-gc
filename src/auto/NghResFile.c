@@ -25,6 +25,10 @@ s32 fn_8012A910(void) {
     return 0;
 }
 
+s32 fn_8012A944(void) {
+    return 1;
+}
+
 s32 fn_8012A94C(void) {
     return 0;
 }
