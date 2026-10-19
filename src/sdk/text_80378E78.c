@@ -169,6 +169,17 @@ void fn_8038230C(void) {
     fn_80259838(&lbl_80496408);
 }
 
+s32 fn_803827FC(s32 arg0) {
+    extern s32 lbl_804963F8;
+    s32 temp_r31;
+
+    temp_r31 = lbl_804963F8;
+    fn_8025465C();
+    lbl_804963F8 = arg0;
+    fn_80254684();
+    return temp_r31;
+}
+
 extern u8 lbl_8047E260[];
 void *fn_80382840(void) {
     return lbl_8047E260;
