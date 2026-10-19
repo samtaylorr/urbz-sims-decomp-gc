@@ -173,6 +173,11 @@ s32 fn_80260574(void) {
     return 1;
 }
 
+void fn_80260BB0(void) {
+    extern M2C_UNK lbl_80495EC8;
+    fn_80259838(&lbl_80495EC8);
+}
+
 void fn_80260D6C(void) {
     M2C_UNK fn_802642C0();
     fn_802642C0();
