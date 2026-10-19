@@ -25,6 +25,22 @@ void fn_800F66A0(void (*cb)(void)) {
     lbl_80495A94 = cb;
 }
 
+s32 fn_800F67E4(u32 arg0) {
+    s32 fn_800F66D8();
+    s32 temp_r31;
+    s32 var_r30;
+
+    temp_r31 = fn_800F66D8() % arg0;
+    var_r30 = fn_800F66D8() % arg0;
+    if (temp_r31 < var_r30) {
+        var_r30 = temp_r31;
+    }
+    if (fn_800F66D8() & 1) {
+        var_r30 = -var_r30;
+    }
+    return var_r30;
+}
+
 void *fn_800F687C(void *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 0) = arg1;
     M2C_FIELD(arg0, s32 *, 4) = arg2;
