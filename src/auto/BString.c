@@ -198,6 +198,10 @@ s32 fn_800D3C0C(s32 *self) {
     return self[6];
 }
 
+s32 fn_800D3C14(s32 *self) {
+    return self[7];
+}
+
 s32 fn_800D3C58(s32 *self) {
     return self[6];
 }
