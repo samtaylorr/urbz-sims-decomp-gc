@@ -25,3 +25,7 @@ void fn_802F3310(void) {
     fn_802D2430();
 }
 
+s32 fn_802F3340(void) {
+    return 1;
+}
+
