@@ -2,6 +2,14 @@
 #include "common.h"
 
 extern s32 lbl_804945D4;
+u8 *fn_801D5404(u8 *self) {
+    extern void fn_801C72DC(u8 *);
+    extern u8 lbl_804165F8[];
+    fn_801C72DC(self);
+    *(u8 **)(self + 4) = lbl_804165F8;
+    return self;
+}
+
 void fn_801D5440(u8 *self) {
     extern void fn_801C7588(u8 *);
     extern u8 lbl_804165F8[];
