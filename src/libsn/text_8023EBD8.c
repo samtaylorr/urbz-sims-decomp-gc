@@ -45,3 +45,7 @@ void fn_80240EFC(void) {
 
 }
 
+void fn_80240F04(void) {
+
+}
+
