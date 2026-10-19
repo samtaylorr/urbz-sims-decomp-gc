@@ -41,6 +41,10 @@ s32 fn_802FFC9C(WrapperPaneBase *self, s32 i) {
     return self->unk40[i];
 }
 
+void fn_802FFCCC(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 4) = (s32) (M2C_FIELD(arg0, s32 *, 4) & 0xFDFFFFFF);
+}
+
 void fn_802FFCDC(void) {
 
 }
