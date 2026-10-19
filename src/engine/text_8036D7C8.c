@@ -34,6 +34,10 @@ void fn_8036DF8C(char *self, void *arg1) {
     fn_802E34F0(arg1, self + 0x44);
 }
 
+void fn_8036E9D0(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0xA4) = arg1;
+}
+
 s32 fn_8036E9D8(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0xA4);
 }
