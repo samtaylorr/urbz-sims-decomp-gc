@@ -299,6 +299,7 @@ config.libs = [
             Object(NonMatching, "auto/CameraManager.c"),
             Object(NonMatching, "auto/ECheatLookup.c"),
             Object(NonMatching, "auto/text_8001A244.c"),
+            Object(NonMatching, "auto/ESimsDataManager.c"),
             Object(NonMatching, "libsn/text_8023EBD8.c"),
             Object(NonMatching, "clib/text_80241A98.c"),
             Object(NonMatching, "engine/text_802781E4.c"),
