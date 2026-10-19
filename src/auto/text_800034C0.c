@@ -124,3 +124,8 @@ void fn_800634E8(void) {
     fn_802D2430();
 }
 
+void fn_800606B0(void);
+void fn_800635B0(void) {
+    fn_800606B0();
+}
+
