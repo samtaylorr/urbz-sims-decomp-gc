@@ -16,6 +16,10 @@ extern f32 lbl_803D14D0[];
 extern s32 lbl_8041F7B0[];
 extern s32 lbl_80434A9C[];
 
+void fn_800D1634(void) {
+    fn_800F1A60((s32)&lbl_80495A3C, 2);
+}
+
 void fn_800D1908(s32 *self) {
     fn_800D27B8(self);
     if (self[6] != 0) {
