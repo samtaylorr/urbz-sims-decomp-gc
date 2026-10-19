@@ -760,6 +760,17 @@ s32 fn_80224A28(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x14);
 }
 
+s32 fn_802254C0(void *arg0, s32 arg1) {
+    s32 fn_80225B14();
+    s32 var_r31;
+
+    var_r31 = arg1;
+    if (fn_80225B14() == 0) {
+        var_r31 = 0;
+    }
+    return M2C_FIELD(arg0, s32 *, 0x40) + (var_r31 * 0x10);
+}
+
 extern s32 lbl_80494674;
 s32 fn_80225544(void) {
     return lbl_80494674;
