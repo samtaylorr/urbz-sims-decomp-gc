@@ -5,6 +5,10 @@ s32 fn_800B3420(s32 arg0) {
     return arg0 + 0x60;
 }
 
+s32 fn_800B3428(s32 arg0) {
+    return arg0 + 0x64;
+}
+
 s32 fn_800B3470(void) {
     return 0;
 }
