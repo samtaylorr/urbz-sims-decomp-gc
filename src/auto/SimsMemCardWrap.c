@@ -10,6 +10,10 @@ extern s32 lbl_80495934;
 extern s32 lbl_80495810;
 extern s32 lbl_8045B438[];
 extern void fn_800A9720(void);
+void fn_8003E5E0(s32, s32);
+extern u8 *lbl_80496668;
+extern u8 *lbl_804961A4;
+void fn_800AA018(void);
 extern void fn_800A9980(void *);
 extern void fn_803349A8(void *, s32);
 
