@@ -162,6 +162,15 @@ void fn_8006A640(void) {
     fn_8006A5E8();
 }
 
+void fn_8006C704(void *arg0) {
+    M2C_UNK fn_8006C35C();
+    M2C_UNK fn_8006C3F4(void *);
+    if ((s32) M2C_FIELD(arg0, s32 *, 0x3A4) == 9) {
+        fn_8006C35C();
+        fn_8006C3F4(arg0);
+    }
+}
+
 void fn_8006C7F0(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
