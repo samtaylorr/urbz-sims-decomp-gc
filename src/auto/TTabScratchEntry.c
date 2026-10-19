@@ -532,6 +532,14 @@ void fn_801A0858(void *self, s32 flags) {
     }
 }
 
+void fn_801A0DFC(s32 *arg0, s32 arg1) {
+    M2C_UNK fn_801A0780(s32);
+    M2C_UNK fn_801A08DC(s32 *, s32);
+    fn_801A0780(arg1);
+    fn_801A08DC(arg0, arg1);
+    *arg0 &= ~arg1;
+}
+
 void fn_801A0E48(s32 *arg0) {
     *arg0 = 0;
 }
