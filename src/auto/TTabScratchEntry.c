@@ -181,6 +181,10 @@ void fn_801A264C(void) {
 
 }
 
+s32 fn_801A29A8(s32 arg0) {
+    return arg0 + 0x10;
+}
+
 void fn_801A2FF8(s32 *self, s32 value) {
     *self = value;
 }
