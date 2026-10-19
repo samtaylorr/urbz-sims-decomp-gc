@@ -781,6 +781,10 @@ s32 fn_801AA930(s32 *self) {
     return self[1];
 }
 
+s32 fn_801AB074(void *arg0) {
+    return (s32) (M2C_FIELD(arg0, s32 *, 4) - M2C_FIELD(arg0, s32 *, 0)) >> 4;
+}
+
 s32 fn_801AB088(s32 *arg0, s32 arg1) {
     return *arg0 + (arg1 * 0x10);
 }
