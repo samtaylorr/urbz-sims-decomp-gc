@@ -140,6 +140,14 @@ void fn_8012FE10(void) {
     lbl_80494464 = 0;
 }
 
+void fn_80130178(s32 arg0, s32 arg1) {
+    extern s32 lbl_80494460;
+    extern s32 lbl_80495BAC;
+    if ((arg1 == 0xFFFF) && (arg0 != 0)) {
+        lbl_80495BAC = lbl_80494460;
+    }
+}
+
 s32 fn_8013019C(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x28) + 1;
 }
