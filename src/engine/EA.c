@@ -106,6 +106,15 @@ s32 fn_802D9214(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0xC);
 }
 
+s32 fn_802D9244(void *arg0) {
+    M2C_UNK fn_8025AFC8();
+    s32 temp_r30;
+
+    temp_r30 = M2C_FIELD(arg0, s32 *, 0xC) - 1;
+    fn_8025AFC8();
+    return temp_r30;
+}
+
 s32 fn_802D9278(char *self) {
     return *(s32 *)(self + 0xC);
 }
