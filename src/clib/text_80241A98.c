@@ -11,3 +11,8 @@ void fn_8024CE64(void) {
     fn_8024D324();
 }
 
+void fn_8024F99C(void);
+void fn_8024EF20(void) {
+    fn_8024F99C();
+}
+
