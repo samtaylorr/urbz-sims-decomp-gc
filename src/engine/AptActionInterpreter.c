@@ -26,3 +26,7 @@ void fn_80281E3C(void) {
 
 }
 
+void fn_80281E40(void) {
+
+}
+
