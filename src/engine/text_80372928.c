@@ -80,3 +80,7 @@ void *fn_803739B0(u32 size, void *p) {
     return p;
 }
 
+s32 fn_803739E4(u8 *self) {
+    return *(s32 *)(self + 0x20);
+}
+
