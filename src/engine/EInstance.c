@@ -189,3 +189,7 @@ void fn_802F1A6C(void) {
 
 }
 
+s32 fn_802F1A88(s32 *self) {
+    return self[7];
+}
+
