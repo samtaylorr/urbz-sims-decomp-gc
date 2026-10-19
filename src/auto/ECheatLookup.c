@@ -46,3 +46,7 @@ void fn_80019CD0(char *self, char *buf, int size) {
     buf[size - 1] = 0;
 }
 
+s32 fn_8001A1D4(void *arg0) {
+    return M2C_FIELD(M2C_FIELD(arg0, void **, 0xC), s32 *, 0x4C);
+}
+
