@@ -4590,6 +4590,14 @@ void *fn_803BAD8C(void *self) {
     return self;
 }
 
+extern void fn_803BAE0C(s32);
+void fn_803BAE58(s32 self, s32 flags) {
+    fn_803BAE0C(self);
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_803BAEE4(s32 *self, s32 n) {
     while (--n != -1) {
         self++;
