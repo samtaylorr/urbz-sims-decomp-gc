@@ -69,6 +69,10 @@ s32 fn_80175CE4(void) {
     return 0;
 }
 
+s32 fn_80175CEC(s32 arg0) {
+    return arg0 + 0x18;
+}
+
 s32 fn_80175D3C(void) {
     return 0;
 }
