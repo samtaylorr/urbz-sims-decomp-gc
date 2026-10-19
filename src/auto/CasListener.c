@@ -34,6 +34,12 @@ s32 fn_801C04DC(char *self) {
     return *(s32 *)(self + 0xC);
 }
 
+extern void fn_801C5778(void *);
+void *fn_801C5720(void *self) {
+    fn_801C5778(self);
+    return self;
+}
+
 extern void fn_802D20E8(void *);
 void fn_801C5750(void *self, s32 flags) {
     if (flags & 1) {
