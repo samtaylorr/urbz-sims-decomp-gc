@@ -112,6 +112,10 @@ s32 fn_80111F6C(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x10);
 }
 
+s32 fn_80111F74(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x14);
+}
+
 s32 fn_80111F8C(s32 *self) {
     return self[7];
 }
