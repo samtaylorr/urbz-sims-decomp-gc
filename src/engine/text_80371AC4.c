@@ -28,6 +28,10 @@ void fn_80371C1C(void) {
 
 }
 
+void fn_80371C20(void) {
+
+}
+
 void fn_80371B64(void);
 void fn_80372304(void) {
     fn_80371B64();
