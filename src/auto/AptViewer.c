@@ -6,6 +6,10 @@ void fn_8000A794(void) {
 
 }
 
+void fn_8000ACE4(void) {
+
+}
+
 s32 fn_8000B210(void) {
     return 0;
 }
