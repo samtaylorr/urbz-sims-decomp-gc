@@ -1262,6 +1262,17 @@ s32 fn_803A3010(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x8C);
 }
 
+void fn_803A3D2C(s32 *first, s32 *last, s32 comp);
+void fn_803A3DD8(s32 *first, s32 *last, s32 *val, s32 comp);
+void fn_803A3E2C(s32 *first, s32 *last, s32 comp) {
+    if (last - first > 16) {
+        fn_803A3D2C(first, first + 16, comp);
+        fn_803A3DD8(first + 16, last, 0, comp);
+    } else {
+        fn_803A3D2C(first, last, comp);
+    }
+}
+
 extern u8 lbl_8040FF60[];
 void fn_803A3F1C(void **self, s32 flags) {
     *self = lbl_8040FF60;
