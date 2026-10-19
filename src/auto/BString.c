@@ -114,6 +114,10 @@ void fn_800D2A4C(void) {
 
 }
 
+void fn_800D2A50(void) {
+
+}
+
 void fn_800D3DF4(s32 *self, s32 flags) {
     self[5] = (s32)lbl_804093F8;
     if (flags & 1) {
