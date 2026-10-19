@@ -123,6 +123,13 @@ s16 fn_801B6344(void *arg0) {
     return M2C_FIELD(M2C_FIELD(arg0, void **, 4), s16 *, 2);
 }
 
+s32 fn_801B6350(void *arg0) {
+    void *temp_r9;
+
+    temp_r9 = M2C_FIELD(arg0, void **, 4);
+    return M2C_FIELD(temp_r9, s16 *, 2) + M2C_FIELD(temp_r9, s16 *, 4);
+}
+
 s16 fn_801B6364(void *arg0) {
     return M2C_FIELD(M2C_FIELD(arg0, void **, 4), s16 *, 4);
 }
