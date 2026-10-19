@@ -130,6 +130,12 @@ s32 fn_8011747C(s32 *self) {
     return self[2];
 }
 
+extern s32 lbl_80495B08;
+extern void fn_801055FC(s32, s32);
+void fn_80117494(void) {
+    fn_801055FC((s32)&lbl_80495B08, 2);
+}
+
 s32 fn_801175AC(s32 *self) {
     return self[1];
 }
