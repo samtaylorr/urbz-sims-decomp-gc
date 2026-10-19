@@ -2,6 +2,10 @@
 #include "common.h"
 
 void fn_802C52EC(void);
+void fn_80336E04(void) {
+
+}
+
 void fn_80337F14(void) {
     fn_802C52EC();
 }
