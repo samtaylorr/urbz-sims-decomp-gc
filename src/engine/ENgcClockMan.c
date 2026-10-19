@@ -14,3 +14,7 @@ void fn_8033E194(void) {
 
 }
 
+void fn_8033E198(void) {
+
+}
+
