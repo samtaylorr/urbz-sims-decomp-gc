@@ -52,6 +52,11 @@ s32 fn_80171960(void) {
     return 1;
 }
 
+void fn_80172464(s32 arg0) {
+    M2C_UNK fn_80174A98(s32);
+    fn_80174A98(arg0 + 0x18);
+}
+
 s32 fn_80173E64(void) {
     return 1;
 }
