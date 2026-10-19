@@ -14,6 +14,10 @@ void fn_8002DA3C(void) {
 
 }
 
+void fn_8002DA40(void) {
+
+}
+
 void fn_800328F8(char *self, void *arg1) {
     fn_802E34F0(arg1, self + 0x44);
 }
