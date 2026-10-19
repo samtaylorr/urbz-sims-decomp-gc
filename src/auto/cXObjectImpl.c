@@ -86,3 +86,7 @@ s32 fn_801489CC(void) {
     return 0;
 }
 
+void fn_801489D4(void) {
+
+}
+
