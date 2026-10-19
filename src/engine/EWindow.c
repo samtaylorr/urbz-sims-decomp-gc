@@ -14,6 +14,10 @@ s32 fn_80306F74(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x60);
 }
 
+s32 fn_80306F7C(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x5C);
+}
+
 void fn_80307018(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x8C) = arg1;
 }
