@@ -355,6 +355,16 @@ s32 fn_800D3EB4(void *arg0) {
     return var_r9;
 }
 
+s32 fn_800D3EDC(void *arg0) {
+    s32 var_r9;
+
+    var_r9 = 0;
+    if (((s32) M2C_FIELD(arg0, s32 *, 0x18) == 0) && ((s32) M2C_FIELD(arg0, s32 *, 0x20) != 0)) {
+        var_r9 = 1;
+    }
+    return var_r9;
+}
+
 extern s32 lbl_8040B3F8[];
 s32 *fn_800D3F04(s32 *self, s32 a) {
     self[0] = a;
