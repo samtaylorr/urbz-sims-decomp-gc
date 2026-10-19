@@ -14,6 +14,10 @@ void fn_8008DCCC(void (*cb)(void)) {
     lbl_804941F0 = cb;
 }
 
+void fn_8008DCD4(void) {
+
+}
+
 s32 fn_8008F854(void) {
     return 1;
 }
