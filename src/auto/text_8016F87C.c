@@ -74,6 +74,15 @@ void fn_80174E84(s32 *self, s32 value) {
     *self = value;
 }
 
+void fn_80175B08(void) {
+    s32 var_ctr;
+
+    var_ctr = 0x40;
+    do {
+        var_ctr -= 1;
+    } while (var_ctr != 0);
+}
+
 s32 fn_80175C9C(s32 *self) {
     return self[2];
 }
