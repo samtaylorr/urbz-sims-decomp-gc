@@ -104,3 +104,7 @@ s32 fn_80329214(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x4911C);
 }
 
+void fn_80329220(void *arg0, f32 farg0) {
+    M2C_FIELD(arg0, f32 *, 0x4D13C) = farg0;
+}
+
