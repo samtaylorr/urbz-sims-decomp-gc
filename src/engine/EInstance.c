@@ -132,6 +132,10 @@ s32 fn_802F1944(u8 *self) {
     return *(s32 *)(self + 0x20);
 }
 
+void fn_802F19D4(void) {
+
+}
+
 s32 fn_802F19D8(void) {
     return 0;
 }
