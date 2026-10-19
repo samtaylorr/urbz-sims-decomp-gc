@@ -12,6 +12,10 @@ void fn_802324F4(void *arg0) {
     fn_80230448(fn_8022554C(arg0), arg0);
 }
 
+void fn_802326E0(void) {
+
+}
+
 extern void fn_80230708(void *, void *);
 void fn_80235974(void *arg0) {
     fn_80230708(fn_8022554C(arg0), arg0);
