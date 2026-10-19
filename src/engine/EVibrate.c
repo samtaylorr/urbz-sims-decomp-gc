@@ -2,6 +2,13 @@
 #include "common.h"
 
 void fn_80314E68(void);
+extern void fn_802D20E8(void *);
+void fn_80314D18(void *self, s32 flags) {
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 s32 fn_80314DB0(s32 *self) {
     return *self;
 }
