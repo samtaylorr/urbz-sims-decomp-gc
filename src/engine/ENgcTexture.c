@@ -155,6 +155,12 @@ s32 fn_80362D38(void) {
     return 2;
 }
 
+void fn_80362D40(s32 arg0) {
+    void fn_80338000(void *, s32, s32);
+    extern u8 lbl_8045BAE8[];
+    fn_80338000(lbl_8045BAE8, arg0, 4);
+}
+
 void *fn_80362D70(u32 size, void *p);
 void *fn_80362D70(u32 size, void *p) {
     return p;
