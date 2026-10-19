@@ -323,6 +323,7 @@ config.libs = [
             Object(NonMatching, "auto/text_800B3040.c"),
             Object(NonMatching, "auto/CUnlockDisplayObject.c"),
             Object(NonMatching, "auto/CDirtyXmlNode.c"),
+            Object(NonMatching, "auto/CTGFileImpl.c"),
             Object(NonMatching, "libsn/text_8023EBD8.c"),
             Object(NonMatching, "clib/text_80241A98.c"),
             Object(NonMatching, "engine/text_802781E4.c"),
