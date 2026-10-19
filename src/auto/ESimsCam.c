@@ -56,6 +56,17 @@ void fn_800108B8(void) {
 
 }
 
+f32 fn_800111A4(void *arg0) {
+    f32 temp_f11;
+    f32 temp_f12;
+    void *temp_r9;
+
+    temp_r9 = M2C_FIELD(arg0, void **, 8);
+    temp_f11 = M2C_FIELD(temp_r9, f32 *, 4);
+    temp_f12 = M2C_FIELD(temp_r9, f32 *, 0x20);
+    return (((M2C_FIELD(arg0, f32 *, 0x458) - temp_f11) / (M2C_FIELD(temp_r9, f32 *, 8) - temp_f11)) * (M2C_FIELD(temp_r9, f32 *, 0x24) - temp_f12)) + temp_f12;
+}
+
 void fn_800113C4(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     M2C_FIELD(arg0, s32 *, 0x580) = arg1;
     M2C_FIELD(arg0, s32 *, 0x584) = arg2;
