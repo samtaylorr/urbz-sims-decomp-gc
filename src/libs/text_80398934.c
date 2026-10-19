@@ -51,7 +51,7 @@ void *fn_80399C38(void *self, s32 *arg1) {
         ((void (*)(void *, void *, s32))vt[7].pfn)((char *)self + vt[7].delta, &tmp, 4);
     }
     for (i = 0; i < n; i++) {
-        s32 v = (*(s32 **)arg1)[i];
+        s32 v = *(s32 *)(arg1[0] + i * 4);
         VtblEntry *vt = *(VtblEntry **)((char *)self + 0x18);
         ((void (*)(void *, void *, s32))vt[7].pfn)((char *)self + vt[7].delta, &v, 4);
     }
@@ -4822,6 +4822,12 @@ s32 fn_803C014C(void) {
 extern u16 lbl_80493E08[];
 u16 fn_803C0158(void) {
     return lbl_80493E08[0];
+}
+
+void fn_803C0220(void *self) {
+    ((s32 *)self)[0] = 0;
+    ((s32 *)self)[2] = 0;
+    ((s32 *)self)[1] = 0;
 }
 
 extern void fn_803C0220(void *);
