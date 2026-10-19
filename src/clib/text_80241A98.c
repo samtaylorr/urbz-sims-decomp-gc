@@ -31,6 +31,11 @@ void *fn_8024C068(void) {
     return lbl_803EBED4;
 }
 
+void fn_8024C074(s32 arg0, s32 arg1) {
+    M2C_UNK fn_8024BEB4(s32, s32, s32);
+    fn_8024BEB4(lbl_80494988, arg0, arg1);
+}
+
 void fn_8024D324(void);
 void fn_8024CE64(void) {
     fn_8024D324();
