@@ -102,6 +102,13 @@ s32 fn_80151040(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x6D8);
 }
 
+void fn_8015121C(void **obj) {
+    if (obj != NULL) {
+        char *vt = (char *)*obj;
+        (*(void (**)(void *, s32))(vt + 0xC))((char *)obj + *(s16 *)(vt + 0x8), 3);
+    }
+}
+
 void fn_80151734(void) {
 
 }
