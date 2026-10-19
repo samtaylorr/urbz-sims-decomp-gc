@@ -16,6 +16,8 @@ extern f32 lbl_803D14D0[];
 extern s32 lbl_8041F7B0[];
 extern s32 lbl_80434A9C[];
 void fn_800EAF5C(void);
+s32 fn_800EB360(s32, s32);
+s32 fn_800EF0A8(s32, s32, s32);
 u8 *fn_800EAFCC(void **arg0);
 void fn_800EC49C(s32, s32, s32, s32);
 s32 fn_800EF6F8(void **arg0);
@@ -2702,8 +2704,16 @@ s32 fn_800EB4D0(void) {
     return fn_800EB388() ^ 1;
 }
 
+s32 fn_800EB4F4(s32 arg0, s32 arg1) {
+    return fn_800EB360(arg1, arg0) ^ 1;
+}
+
 s32 fn_800EB5B4(void) {
     return 0;
+}
+
+void fn_800EB5BC(s32 *arg0) {
+    arg0[3]++;
 }
 
 extern void fn_800EAF08(s32);
