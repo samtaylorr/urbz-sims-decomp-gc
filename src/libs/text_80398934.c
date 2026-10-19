@@ -131,6 +131,12 @@ s32 fn_8039BD48(s32 *self) {
     return self[2];
 }
 
+extern void fn_8039BD50(void *);
+void *fn_8039BD64(void *self) {
+    fn_8039BD50(self);
+    return self;
+}
+
 void fn_8039C1B8(void) {
     fn_8030AD40();
 }
