@@ -364,6 +364,12 @@ s32 fn_8026C4FC(void) {
     return 0;
 }
 
+void fn_8026CD4C(void) {
+    s32 PPCMfhid2();
+    M2C_UNK PPCMthid2(s32);
+    PPCMthid2(PPCMfhid2() & 0xBFFFFFFF);
+}
+
 void fn_8026E418(void *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 0xC) = arg1;
     M2C_FIELD(arg0, s32 *, 0x10) = arg2;
