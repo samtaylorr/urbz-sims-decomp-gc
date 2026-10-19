@@ -2,6 +2,28 @@
 #include "common.h"
 
 void fn_80317758(void);
+s32 fn_80317514(void *arg0) {
+    s32 temp_r3;
+    s32 var_r7;
+    u8 temp_r10;
+    u8 temp_r8;
+
+    temp_r8 = M2C_FIELD(arg0, u8 *, 0);
+    temp_r10 = M2C_FIELD(arg0, u8 *, 1);
+    var_r7 = 0;
+    if ((s32) ((temp_r8 << 8) | temp_r10) == 0xC0FB) {
+        var_r7 = 1;
+    } else {
+        temp_r3 = (temp_r8 << 0x18) | (temp_r10 << 0x10) | (M2C_FIELD(arg0, u8 *, 2) << 8) | M2C_FIELD(arg0, u8 *, 3);
+        if (temp_r3 == 0x42494746) {
+            var_r7 = 2;
+        } else if ((s32) (temp_r3 & 0xFFFFFF00) == 0x42494700) {
+            var_r7 = 3;
+        }
+    }
+    return var_r7;
+}
+
 void fn_80317B98(void) {
     fn_80317758();
 }
