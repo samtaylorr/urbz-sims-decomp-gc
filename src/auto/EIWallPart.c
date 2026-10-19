@@ -18,6 +18,11 @@ void fn_8002DA40(void) {
 
 }
 
+void fn_8002DBA4(void *arg0) {
+    M2C_UNK fn_8002F824(s32, s32);
+    fn_8002F824(M2C_FIELD(arg0, s32 *, 0xC), M2C_FIELD(arg0, s32 *, 0x10C));
+}
+
 void fn_8002F818(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x5C) = 1;
 }
