@@ -56,6 +56,16 @@ void fn_80320010(void) {
 
 }
 
+s32 fn_8032015C(void *arg0) {
+    M2C_UNK fn_8031EA90();
+    s32 temp_r3;
+
+    fn_8031EA90();
+    temp_r3 = M2C_FIELD(arg0, s32 *, 0x20);
+    M2C_FIELD(arg0, s32 *, 0x20) = 0;
+    return temp_r3;
+}
+
 void fn_80320204(void) {
     M2C_UNK fn_8031FEAC();
     M2C_UNK fn_80320378(M2C_UNK);
