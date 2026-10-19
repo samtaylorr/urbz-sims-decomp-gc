@@ -208,6 +208,19 @@ void fn_80059810(void) {
     fn_802D2430();
 }
 
+void fn_80059830(void **self, s32 flags) {
+    extern u8 lbl_80408268[];
+    extern void fn_80059100(void *);
+    extern void fn_802F05AC(void *, s32);
+    extern void fn_800589C4(void *);
+    *self = lbl_80408268;
+    fn_80059100(self);
+    fn_802F05AC(self, 0);
+    if (flags & 1) {
+        fn_800589C4(self);
+    }
+}
+
 void fn_80059888(void) {
 
 }
