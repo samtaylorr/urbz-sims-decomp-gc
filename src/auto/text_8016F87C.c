@@ -393,6 +393,11 @@ s32 fn_801760D8(void) {
     return M2C_FIELD(lbl_80495C90, s32 *, 0x14);
 }
 
+void fn_80176180(s32 arg0) {
+    M2C_UNK fn_8016F910(s32);
+    fn_8016F910(arg0 + 0x1A0);
+}
+
 s32 fn_80176288(s32 arg0) {
     return arg0 + 0x1E0;
 }
