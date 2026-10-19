@@ -131,3 +131,8 @@ s32 fn_800BC124(void) {
     return 1;
 }
 
+void fn_800BEF10(void) {
+    M2C_UNK fn_800BEED8(M2C_UNK, M2C_UNK);
+    fn_800BEED8(1, 0xFFFF);
+}
+
