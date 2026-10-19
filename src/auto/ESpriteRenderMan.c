@@ -13,6 +13,24 @@ extern void *lbl_8049444C;
 extern void *lbl_80494450;
 void *fn_8003FB24(u32 size);
 void fn_8003FBB4(void *arg0);
+void *fn_8003FB24(u32 size) {
+    void *heap;
+    void *p;
+
+    heap = ((void *(*)(void))fn_802D0AB8)();
+    if (size == 0) {
+        return NULL;
+    }
+    p = fn_802D197C(heap, size, 4);
+    if (p == NULL) {
+        p = fn_802DBBCC(heap, size, 0);
+        if (p == NULL && heap == ((void *(*)(void))fn_802D0AB8)()) {
+            return fn_802DBBCC(fn_802D0B3C(), size, 0);
+        }
+    }
+    return p;
+}
+
 void fn_8003FBB4(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
