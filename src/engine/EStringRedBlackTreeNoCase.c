@@ -24,6 +24,14 @@ s32 fn_80365A3C(void **arg0) {
     return var_r9;
 }
 
+void *fn_80365BB4(void *arg0) {
+    M2C_UNK fn_80365C8C();
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    fn_80365C8C();
+    return arg0;
+}
+
 void fn_80365D3C(void *arg0) {
     M2C_UNK fn_80248488(s32, M2C_UNK, s32);
     fn_80248488(M2C_FIELD(arg0, s32 *, 8), 0, M2C_FIELD(arg0, s32 *, 0xC) * 4);
