@@ -49,3 +49,7 @@ s32 fn_8010C688(void) {
     return 0;
 }
 
+s32 fn_8010D220(void) {
+    return 0;
+}
+
