@@ -231,6 +231,11 @@ s32 fn_802B3B24(void) {
     return 0;
 }
 
+extern void (*lbl_80443314[])(void);
+void fn_802B3CA8(void) {
+    lbl_80443314[0]();
+}
+
 s32 fn_802B46AC(void) {
     return 0;
 }
