@@ -170,6 +170,10 @@ s32 fn_801175AC(s32 *self) {
     return self[1];
 }
 
+f32 fn_801175B4(void *arg0) {
+    return M2C_FIELD(arg0, f32 *, 0x30);
+}
+
 s32 fn_801175C4(s32 arg0) {
     return arg0 + 0x18;
 }
