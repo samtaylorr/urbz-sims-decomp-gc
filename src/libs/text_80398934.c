@@ -356,6 +356,10 @@ s32 fn_8039D380(s32 *self) {
     return self[2];
 }
 
+void fn_8039D8D8(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x38) = (s32) (M2C_FIELD(arg0, s32 *, 0x38) | 0x10000000);
+}
+
 void fn_8039DAD4(void) {
 
 }
