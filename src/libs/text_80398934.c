@@ -4449,6 +4449,10 @@ s32 fn_803B8C80(void) {
     return 0;
 }
 
+void fn_803B8CE8(void) {
+
+}
+
 s32 fn_803B8D70(void) {
     return 0;
 }
