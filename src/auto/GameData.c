@@ -53,6 +53,10 @@ void fn_80047B0C(void) {
 
 }
 
+void fn_8004876C(void) {
+
+}
+
 void fn_80048DF8(void) {
     fn_80048D04();
 }
