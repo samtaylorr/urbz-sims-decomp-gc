@@ -6,6 +6,10 @@ s32 fn_8018EE50(void) {
     return 1;
 }
 
+s32 fn_8018F7F8(void *arg0) {
+    return (s32) (M2C_FIELD(arg0, s32 *, 8) - M2C_FIELD(arg0, s32 *, 4)) >> 2;
+}
+
 void fn_8018F874(void *arg0) {
     extern void *lbl_80494534;
     M2C_FIELD(arg0, void **, 4) = (void *) lbl_80494534;
