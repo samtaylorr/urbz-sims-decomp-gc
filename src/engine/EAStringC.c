@@ -755,6 +755,12 @@ s32 fn_802BB7A4(void) {
     return 0;
 }
 
+void fn_802BB99C(void *arg0) {
+    extern void *lbl_80494D98;
+    M2C_FIELD(arg0, void **, 8) = (void *) lbl_80494D98;
+    lbl_80494D98 = arg0;
+}
+
 f32 fn_802BB9AC(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 8);
 }
