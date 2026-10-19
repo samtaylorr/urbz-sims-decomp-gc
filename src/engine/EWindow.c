@@ -213,6 +213,13 @@ s32 fn_803082C4(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0xA4);
 }
 
+void fn_803083BC(void *arg0) {
+    M2C_UNK fn_80305B1C();
+    fn_80305B1C();
+    M2C_FIELD(arg0, s32 *, 0xF4) = 0;
+    M2C_FIELD(arg0, s32 *, 0x100) = 0;
+}
+
 void fn_803090EC(void *arg0) {
     void *temp_r9;
 
