@@ -14,6 +14,10 @@ u32 fn_80248808(const char *);
 char *fn_80248A10(char *, const char *, u32);
 void fn_802E04BC(void *);
 void fn_802E0460(void *);
+s32 fn_800034C0(void) {
+    return lbl_80493F0C;
+}
+
 u8 *fn_8000381C(u8 *self) {
     fn_802E0460(self);
     *(u8 **)(self + 0x338) = lbl_804069E8;
