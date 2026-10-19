@@ -9,3 +9,7 @@ s32 fn_8004149C(s32 *self) {
     return self[1];
 }
 
+void fn_800414A4(s32 *self) {
+    self[0] = 1;
+}
+
