@@ -62,6 +62,10 @@ void fn_801A1E30(void) {
     fn_801A1B50();
 }
 
+s32 fn_801A3020(s32 *self) {
+    return self[1];
+}
+
 extern s32 lbl_80494554;
 s32 fn_801A3048(void) {
     return lbl_80494554;
