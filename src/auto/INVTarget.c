@@ -329,6 +329,28 @@ void fn_801DFDAC(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     M2C_FIELD(temp_r10, M2C_UNK **, 4) = NULL;
 }
 
+s32 fn_801DFF98(void **arg0, s32 arg1) {
+    M2C_UNK fn_801DFE14(void **, void *);
+    s32 fn_802486DC(s32, s32);
+    s32 var_r28;
+    void *temp_r30;
+    void *var_r31;
+
+    var_r31 = *arg0;
+    var_r28 = 0;
+    if (var_r31 != NULL) {
+        do {
+            temp_r30 = M2C_FIELD(var_r31, void **, 4);
+            if (fn_802486DC(M2C_FIELD(var_r31, s32 *, 0x10), arg1) == 0) {
+                fn_801DFE14(arg0, var_r31);
+                var_r28 = 1;
+            }
+            var_r31 = temp_r30;
+        } while (var_r31 != NULL);
+    }
+    return var_r28;
+}
+
 s32 fn_801E0118(void) {
     s32 fn_801DFC68();
     M2C_UNK fn_802D1FC8(M2C_UNK);
