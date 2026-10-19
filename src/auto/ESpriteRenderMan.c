@@ -45,3 +45,8 @@ void fn_80041A5C(void) {
     fn_8004198C(1, 0xFFFF);
 }
 
+void fn_80041A88(void) {
+    M2C_UNK fn_8004198C(M2C_UNK, M2C_UNK);
+    fn_8004198C(0, 0xFFFF);
+}
+
