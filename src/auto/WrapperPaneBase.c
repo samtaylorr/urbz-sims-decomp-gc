@@ -89,6 +89,12 @@ void fn_800C9604(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x80) = 0;
 }
 
+void fn_800C9618(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0x7C) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x78) = 0;
+    M2C_FIELD(arg0, s32 *, 0x80) = 0;
+}
+
 void fn_800CA9F4(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x70) = arg1;
 }
