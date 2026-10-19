@@ -133,3 +133,7 @@ s32 fn_802BCA14(void) {
     return 0;
 }
 
+s32 fn_802BCA1C(void) {
+    return 0;
+}
+
