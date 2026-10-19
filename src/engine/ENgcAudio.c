@@ -50,3 +50,8 @@ void fn_8033D21C(void) {
 
 }
 
+void fn_8033D220(void) {
+    M2C_UNK fn_8033D114(M2C_UNK, M2C_UNK);
+    fn_8033D114(1, 0xFFFF);
+}
+
