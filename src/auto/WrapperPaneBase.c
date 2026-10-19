@@ -40,6 +40,10 @@ void fn_800CF868(u8 *self, s32 on) {
     }
 }
 
+s32 fn_800CF894(u8 *self) {
+    return *(s32 *)(self + 0x20);
+}
+
 void fn_8039D8D8(void *);
 void fn_800CF89C(u8 *self, s32 arg1) {
     u8 *p = self + 0x20;
