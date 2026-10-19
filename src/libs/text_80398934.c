@@ -989,6 +989,10 @@ s32 fn_803A2A0C(s32 *self) {
     return self[2];
 }
 
+s32 fn_803A3010(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x8C);
+}
+
 extern u8 lbl_8040FF60[];
 void fn_803A3F1C(void **self, s32 flags) {
     *self = lbl_8040FF60;
