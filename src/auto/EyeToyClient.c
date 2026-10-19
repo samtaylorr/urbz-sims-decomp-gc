@@ -94,6 +94,14 @@ void fn_80043390(s32 arg0) {
     }
 }
 
+void fn_8004342C(s32 arg0) {
+    M2C_UNK fn_800433A4(s32, s32, M2C_UNK);
+    extern s32 lbl_8049409C;
+    if (((s32) lbl_8049409C != 0) && (fn_80043480() != 0)) {
+        fn_800433A4(arg0, fn_80043480(), 1);
+    }
+}
+
 extern s32 lbl_804940A8;
 s32 fn_80043480(void) {
     return lbl_804940A8;
