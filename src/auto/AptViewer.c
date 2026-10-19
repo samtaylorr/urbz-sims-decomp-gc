@@ -39,6 +39,10 @@ s32 fn_8000C170(void *self, s32 arg) {
     return result;
 }
 
+s32 fn_8000C1EC(void) {
+    return 0;
+}
+
 void fn_8000C1F4(void *self, void *arg) {
     fn_800C3828(arg);
 }
