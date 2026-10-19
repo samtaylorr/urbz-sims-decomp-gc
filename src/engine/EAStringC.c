@@ -571,6 +571,14 @@ void fn_802B7158(s32 *arg0, s32 arg1) {
     }
 }
 
+void fn_802B7178(s32 *arg0, s32 arg1) {
+    if (arg1 == 0) {
+        *arg0 &= 0xFFFFC03F;
+        return;
+    }
+    *arg0 = (*arg0 & 0xFFFFC03F) | (arg1 << 6);
+}
+
 void fn_802B71A8(s32 *arg0) {
     *arg0 += 0x40;
 }
