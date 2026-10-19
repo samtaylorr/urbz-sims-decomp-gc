@@ -328,8 +328,8 @@ void fn_8039B664(void *arg0) {
         if (!more) {
             break;
         }
-        data = node[0];
         next = (s32 *)node[1];
+        data = node[0];
         if (M2C_FIELD(arg0, s32 *, 8) != 0 && data != 0) {
             fn_800F1A60(data, 3);
         }
