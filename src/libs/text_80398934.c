@@ -1018,6 +1018,29 @@ void fn_803AE740(BoundPmf *b) {
     f(obj + off);
 }
 
+void fn_803AE7B8(BoundPmf *b) {
+    s16 index = b->index;
+    char *obj = b->obj;
+    VtblEntry e;
+    void (*f)(void *);
+    s16 delta;
+    s32 off;
+
+    if (index >= 0) {
+        e = (*(VtblEntry **)(obj + b->u.delta2))[index - 1];
+        f = e.pfn;
+    } else {
+        f = b->u.pfn;
+    }
+    delta = b->delta;
+    if (index >= 0) {
+        off = e.delta + delta;
+    } else {
+        off = delta;
+    }
+    f(obj + off);
+}
+
 extern u8 lbl_80417160[];
 void fn_803AEC68(s32 *self, s32 flags) {
     self[5] = (s32)lbl_80417160;
