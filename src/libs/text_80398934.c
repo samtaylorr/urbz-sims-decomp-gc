@@ -5952,6 +5952,11 @@ void fn_803BA044(void *self) {
     ((s32 *)self)[1] = 0;
 }
 
+void fn_803BA2EC(void *, s32, s32, s32);
+void fn_803BA3C4(void *self, s32 arg1) {
+    fn_803BA2EC(self, arg1, M2C_FIELD(self, s32 *, 4), 1);
+}
+
 s32 fn_803BA3EC(s32 *self) {
     return *self;
 }
