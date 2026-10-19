@@ -2,6 +2,15 @@
 #include "common.h"
 
 void fn_8018D8DC(void);
+extern u8 lbl_80413E80[];
+extern void fn_802D20E8(void *);
+void fn_8018CB38(void **self, s32 flags) {
+    *self = lbl_80413E80;
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 s32 fn_8018CC54(void) {
     return 0;
 }
