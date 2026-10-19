@@ -4640,6 +4640,12 @@ u16 fn_803C0158(void) {
     return lbl_80493E08[0];
 }
 
+extern void fn_803C0220(void *);
+void *fn_803C0234(void *self) {
+    fn_803C0220(self);
+    return self;
+}
+
 void fn_803C0D34(void);
 void fn_803C0D04(void) {
     fn_803C0D34();
