@@ -372,6 +372,7 @@ config.libs = [
             Object(NonMatching, "clib/text_80241A98.c"),
             Object(NonMatching, "engine/text_802781E4.c"),
             Object(NonMatching, "engine/AptActionInterpreter.c"),
+            Object(NonMatching, "engine/AptCharacterAnimation.c"),
             Object(NonMatching, "misc/text_8038FC80.c"),
             Object(NonMatching, "libs/text_80398934.c"),
         ],
