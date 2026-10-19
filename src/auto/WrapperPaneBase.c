@@ -208,6 +208,15 @@ void fn_800CDAD0(void) {
     M2C_FIELD(temp_r9, M2C_UNK (**)(void *), 0x74)(temp_r3 + M2C_FIELD(temp_r9, s16 *, 0x70));
 }
 
+void fn_800CDB08(void) {
+    void *temp_r3;
+    void *temp_r9;
+
+    temp_r3 = fn_800CD660();
+    temp_r9 = M2C_FIELD(temp_r3, void **, 0x1C);
+    M2C_FIELD(temp_r9, M2C_UNK (**)(void *), 0x84)(temp_r3 + M2C_FIELD(temp_r9, s16 *, 0x80));
+}
+
 void fn_800CD104(void);
 void fn_800CED30(void) {
     fn_800CD104();
