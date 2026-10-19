@@ -31,6 +31,15 @@ void fn_800CF648(s32 *self) {
     self[1] = 1;
 }
 
+void fn_800CF868(u8 *self, s32 on) {
+    u8 *p = self + 0x20;
+    if (on) {
+        *(u32 *)(p + 0x38) |= 0x20;
+    } else {
+        *(u32 *)(p + 0x38) &= ~0x20;
+    }
+}
+
 void fn_8039D8D8(void *);
 void fn_800CF89C(u8 *self, s32 arg1) {
     u8 *p = self + 0x20;
