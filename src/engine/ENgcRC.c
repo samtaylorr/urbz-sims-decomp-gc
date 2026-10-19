@@ -35,6 +35,12 @@ void *fn_80348E8C(u32 size, void *p) {
     return p;
 }
 
+void fn_80348E94(s32 arg0) {
+    M2C_UNK fn_80338184(s32, s32);
+    extern s32 lbl_8049627C;
+    fn_80338184(lbl_8049627C, arg0);
+}
+
 s32 fn_80348EBC(u8 *self) {
     return *(s32 *)(self + 0x20);
 }
