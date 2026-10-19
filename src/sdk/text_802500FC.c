@@ -42,6 +42,11 @@ s32 fn_80252900(void) {
     return *(s32 *)0x800000D4;
 }
 
+void fn_802530AC(void) {
+    M2C_UNK fn_80378324();
+    fn_80378324();
+}
+
 void fn_80253990(void) {
     extern s32 lbl_80495E10;
     lbl_80495E10 = 1;
