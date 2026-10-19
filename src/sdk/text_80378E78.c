@@ -14,6 +14,11 @@ s32 fn_8037E780(void) {
     return lbl_80496354;
 }
 
+void fn_8037E84C(void) {
+    extern s32 lbl_80496354;
+    lbl_80496354 = 0;
+}
+
 void fn_8037E858(void) {
 
 }
