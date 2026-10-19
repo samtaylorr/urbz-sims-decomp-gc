@@ -130,6 +130,15 @@ void fn_8036F254(void *arg0) {
     M2C_FIELD(arg0, s32 *, 8) = (s32) (M2C_FIELD(arg0, s32 *, 8) | 0x80);
 }
 
+s32 fn_8036F334(void) {
+    M2C_UNK fn_8036FA90(M2C_UNK *);
+    extern M2C_UNK lbl_80495238;
+    extern M2C_UNK lbl_8049523C;
+    fn_8036FA90(&lbl_80495238);
+    fn_8036FA90(&lbl_8049523C);
+    return 0;
+}
+
 void fn_8036FF88(void) {
 
 }
