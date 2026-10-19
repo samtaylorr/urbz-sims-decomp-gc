@@ -53,3 +53,8 @@ void fn_800EEAC4(void) {
     fn_800EC6BC();
 }
 
+void fn_800EE83C(void);
+void fn_800EEB3C(void) {
+    fn_800EE83C();
+}
+
