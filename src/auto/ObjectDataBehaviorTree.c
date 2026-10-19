@@ -17,3 +17,8 @@ s16 fn_801B28E4(void *arg0) {
 s32 fn_801B2D08(void) {
     return 0;
 }
+
+s32 fn_801B36F0(void) {
+    return 2;
+}
+
