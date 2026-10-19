@@ -25,6 +25,10 @@ void fn_800A51BC(void) {
 
 }
 
+s32 fn_800A51C0(void) {
+    return 0xD6000;
+}
+
 s32 fn_800A6154(void) {
     return 0;
 }
