@@ -21,6 +21,12 @@ void fn_802EDCCC(void) {
     fn_802FB578();
 }
 
+s32 fn_802EEB54(void *arg0) {
+    M2C_UNK fn_802EE6D0();
+    fn_802EE6D0();
+    return M2C_FIELD(arg0, s32 *, 0x90);
+}
+
 void fn_802EEDA8(void *arg0, f32 *arg1, f32 *arg2, f32 *arg3, f32 *arg4) {
     *arg1 = M2C_FIELD(arg0, f32 *, 0x2AC);
     *arg2 = M2C_FIELD(arg0, f32 *, 0x2B0);
