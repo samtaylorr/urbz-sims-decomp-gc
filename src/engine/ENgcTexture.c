@@ -32,6 +32,12 @@ void fn_80361244(void *arg0) {
     fn_80361568(M2C_FIELD(arg0, s32 *, 0x28));
 }
 
+void fn_803613A4(s32 arg0) {
+    void fn_80338000(void *, s32, s32);
+    extern u8 lbl_8045BAE8[];
+    fn_80338000(lbl_8045BAE8, arg0, 4);
+}
+
 void *fn_803613D4(u32 size, void *p);
 void *fn_803613D4(u32 size, void *p) {
     return p;
