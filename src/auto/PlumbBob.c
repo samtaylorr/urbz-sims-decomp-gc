@@ -358,6 +358,11 @@ void fn_8007C5A4(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x198) = arg1;
 }
 
+void fn_8007C5AC(s32 arg0) {
+    M2C_UNK fn_8007BB4C(s32);
+    fn_8007BB4C(arg0 + 0x7C);
+}
+
 void fn_800816B0(void) {
 
 }
