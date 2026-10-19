@@ -437,6 +437,14 @@ void fn_802639D8(s32 arg0, void *arg1) {
     fn_80259838(&lbl_80495EC8);
 }
 
+void fn_80263B5C(s32 arg0, void *arg1);
+void fn_80263B5C(s32 arg0, void *arg1) {
+    M2C_UNK fn_80259838(M2C_UNK *);
+    extern M2C_UNK lbl_80495EC8;
+    M2C_FIELD(arg1, s32 *, 0x20) = arg0;
+    fn_80259838(&lbl_80495EC8);
+}
+
 void fn_80264094(void) {
     extern M2C_UNK lbl_80495EC8;
     fn_80259838(&lbl_80495EC8);
