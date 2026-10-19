@@ -40,3 +40,8 @@ void fn_800414B0(s32 *self) {
     self[1] = 1;
 }
 
+void fn_80041A5C(void) {
+    M2C_UNK fn_8004198C(M2C_UNK, M2C_UNK);
+    fn_8004198C(1, 0xFFFF);
+}
+
