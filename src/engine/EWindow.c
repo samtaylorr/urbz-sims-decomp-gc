@@ -6,6 +6,10 @@ s32 fn_80307998(void) {
     return 0;
 }
 
+s32 fn_80307AD4(char *self) {
+    return *(s32 *)(self + 0xC);
+}
+
 extern s32 lbl_80494EB0;
 void fn_80307BBC(void (*cb)(void)) {
     lbl_80494EB0 = cb;
