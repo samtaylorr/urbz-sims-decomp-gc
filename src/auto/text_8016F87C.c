@@ -45,3 +45,7 @@ s32 fn_80176090(void) {
     return 0;
 }
 
+s32 fn_80176098(void) {
+    return 0;
+}
+
