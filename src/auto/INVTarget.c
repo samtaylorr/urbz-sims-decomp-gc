@@ -171,6 +171,28 @@ s32 fn_801D9790(void) {
     return lbl_8049460C;
 }
 
+s32 fn_801DC084(void **arg0, s32 arg1) {
+    M2C_UNK fn_801DBF38(void **, void *);
+    s32 fn_802486DC(s32, s32);
+    s32 var_r28;
+    void *temp_r30;
+    void *var_r31;
+
+    var_r31 = *arg0;
+    var_r28 = 0;
+    if (var_r31 != NULL) {
+        do {
+            temp_r30 = M2C_FIELD(var_r31, void **, 4);
+            if (fn_802486DC(M2C_FIELD(var_r31, s32 *, 0x10), arg1) == 0) {
+                fn_801DBF38(arg0, var_r31);
+                var_r28 = 1;
+            }
+            var_r31 = temp_r30;
+        } while (var_r31 != NULL);
+    }
+    return var_r28;
+}
+
 void fn_801DC128(void **arg0, s32 arg1) {
     void *temp_r31;
     void *temp_r9;
