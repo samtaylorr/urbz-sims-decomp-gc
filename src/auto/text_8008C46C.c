@@ -58,6 +58,10 @@ void fn_8008FEE0(void) {
 
 }
 
+void fn_8008FEE4(void) {
+
+}
+
 s32 fn_80093598(void) {
     return 0;
 }
