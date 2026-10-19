@@ -34,3 +34,9 @@ s32 fn_80095A44(void) {
     return 1;
 }
 
+extern void *fn_802D0AB8(void *);
+extern void fn_802D1A00(void *, void *);
+void fn_80097B40(void *arg0) {
+    fn_802D1A00(fn_802D0AB8(arg0), arg0);
+}
+
