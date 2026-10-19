@@ -214,6 +214,11 @@ void fn_80148BB4(void *arg0) {
     fn_8016DD1C(M2C_FIELD(arg0, s32 *, 0x8C));
 }
 
+void fn_80148BD8(void *arg0) {
+    M2C_UNK fn_8016DD7C(s32);
+    fn_8016DD7C(M2C_FIELD(arg0, s32 *, 0x8C));
+}
+
 s32 fn_80148CB8(void *arg0) {
     return ((s32) (M2C_FIELD(arg0, s32 *, 0x94) - M2C_FIELD(arg0, s32 *, 0x90)) >> 5) - 1;
 }
