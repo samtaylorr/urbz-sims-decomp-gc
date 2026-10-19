@@ -541,6 +541,10 @@ f32 fn_801A3C88(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0x10C);
 }
 
+s16 fn_801A3CA0(void *arg0) {
+    return M2C_FIELD(arg0, s16 *, 0x114);
+}
+
 void fn_801A3CFC(void) {
 
 }
