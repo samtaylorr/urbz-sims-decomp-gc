@@ -510,6 +510,13 @@ void fn_801FE2C0(void) {
 
 }
 
+void fn_8020037C(s32 arg0) {
+    M2C_UNK fn_80248488(s32, M2C_UNK, M2C_UNK);
+    fn_80248488(arg0 + 0x38B, 0, 0x100);
+    fn_80248488(arg0 + 0x48B, 0, 0x100);
+    fn_80248488(arg0 + 0x58B, 0, 0x100);
+}
+
 void fn_8020064C(void) {
 
 }
