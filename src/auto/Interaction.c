@@ -134,6 +134,12 @@ void fn_80116754(void) {
     fn_800F1A60((s32)&lbl_80495B00, 2);
 }
 
+extern u8 lbl_80434BD4[];
+void fn_802C7FE8(u8 *arg);
+void fn_801168DC(void) {
+    fn_802C7FE8(lbl_80434BD4);
+}
+
 s32 fn_80117474(char *self) {
     return *(s32 *)(self + 0xC);
 }
