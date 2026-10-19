@@ -109,3 +109,7 @@ s32 fn_802BB43C(void) {
     return 0;
 }
 
+s32 fn_802BB444(void) {
+    return 0;
+}
+
