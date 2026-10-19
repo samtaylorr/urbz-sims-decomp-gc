@@ -6,6 +6,10 @@ s32 fn_800F6698(void) {
     return lbl_80495A94;
 }
 
+void fn_800F66A0(void (*cb)(void)) {
+    lbl_80495A94 = cb;
+}
+
 s32 fn_800F7A20(void) {
     return 0;
 }
