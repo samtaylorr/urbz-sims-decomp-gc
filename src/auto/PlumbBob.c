@@ -186,6 +186,10 @@ void fn_80072B0C(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
 
+void fn_800775F0(void) {
+
+}
+
 void fn_80078124(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
