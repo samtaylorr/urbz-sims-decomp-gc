@@ -62,6 +62,19 @@ s32 fn_80233460(s32 arg0) {
     return arg0 + 0x60;
 }
 
+s32 fn_802348F8(s32 *arg0, s32 arg1, s32 arg2) {
+    s32 fn_8022BBF8(s32, s32, s32);
+    M2C_UNK fn_80234820(s32 *);
+    s32 var_r3;
+
+    var_r3 = 0;
+    if ((s32) *arg0 != 0) {
+        fn_80234820(arg0);
+        var_r3 = fn_8022BBF8(*arg0, arg1, arg2);
+    }
+    return var_r3;
+}
+
 s32 fn_80235760(s32 arg0) {
     return arg0 + 0xA8;
 }
