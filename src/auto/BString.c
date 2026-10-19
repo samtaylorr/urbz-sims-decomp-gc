@@ -1629,6 +1629,11 @@ void fn_800E9A30(s32 *self) {
     fn_800E938C(self[2]);
 }
 
+extern void fn_800E9480(s32);
+void fn_800E9A54(s32 *self) {
+    fn_800E9480(self[2]);
+}
+
 void fn_800E9B4C(s32 *self, s32 flags) {
     self[5] = (s32)lbl_804093F8;
     if (flags & 1) {
