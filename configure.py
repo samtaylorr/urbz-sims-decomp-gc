@@ -272,6 +272,7 @@ config.libs = [
             Object(NonMatching, "engine/text_802781E4.c"),
             Object(NonMatching, "sdk/text_80378E78.c"),
             Object(NonMatching, "misc/text_8038FC80.c"),
+            Object(NonMatching, "runtime/text_80390B40.c"),
         ],
     },
 ]
