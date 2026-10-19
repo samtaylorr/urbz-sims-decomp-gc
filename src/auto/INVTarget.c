@@ -225,6 +225,7 @@ void fn_801F086C(void *arg0, s32 arg1) {
 void *fn_801F0874(void **self, char *name) {
     extern u8 lbl_80417510[];
     extern u8 lbl_804174F0[];
+    s32 fn_801F0834(char *);
     self[2] = lbl_80417510;
     self[0] = name;
     self[1] = (void *)fn_801F0834(name);
