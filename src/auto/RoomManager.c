@@ -10,6 +10,10 @@ s32 fn_8018FA7C(s32 *self) {
     return self[2];
 }
 
+s32 fn_8018FD00(s32 *self) {
+    return *self;
+}
+
 s32 fn_80192C7C(void) {
     return lbl_80494538;
 }
