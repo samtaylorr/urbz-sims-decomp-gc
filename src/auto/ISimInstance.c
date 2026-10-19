@@ -98,6 +98,13 @@ void fn_80065CEC(void *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 0x30C) = (s32) (M2C_FIELD(arg0, s32 *, 0x30C) & ~arg1);
 }
 
+void fn_80066A50(f32 *out, u8 *obj) {
+    f32 *p = (f32 *)(obj + 0x110);
+    out[0] = p[0];
+    out[1] = p[1];
+    out[2] = p[2];
+}
+
 void fn_80066AFC(void **self) {
     *self = lbl_80409228;
 }
@@ -202,7 +209,7 @@ s32 fn_80066DB0(s32 arg0) {
 }
 
 void fn_80066DB8(void) {
-    M2C_UNK fn_80066A74(M2C_UNK, M2C_UNK);
+    void fn_80066A74(s32, s32);
     fn_80066A74(1, 0xFFFF);
 }
 
