@@ -225,6 +225,12 @@ void fn_802D0C18(void) {
     fn_802D94C0(lbl_8044604C, 2);
 }
 
+extern u8 lbl_8044680C[];
+void fn_802D0C9C(void);
+void fn_802D0C9C(void) {
+    fn_802D94C0(lbl_8044680C, 2);
+}
+
 s32 fn_802D0F94(void) {
     return 0;
 }
