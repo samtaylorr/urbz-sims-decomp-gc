@@ -127,3 +127,7 @@ void fn_8018EA6C(void **self, s32 flags) {
     }
 }
 
+void fn_8018EAA0(void) {
+
+}
+
