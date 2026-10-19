@@ -1,6 +1,10 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+void fn_801236E8(void) {
+
+}
+
 s32 fn_80124808(void) {
     return 0;
 }
