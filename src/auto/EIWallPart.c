@@ -19,26 +19,24 @@ s32 fn_80032924(char *self, s32 i) {
     return arr[i];
 }
 
-s32 fn_80032934(char *self, s32 i) {
-    char *node = *(char **)(self + 0x14);
-    s32 *slot;
+s32 fn_80032934(EIWallPartFlags *self, s32 i) {
+    char *node = (char *)self->unk14;
 
     if (node == NULL) {
-        ((s32 *)(self + 0x2C))[i] = (s32)node;
+        self->unk2C[i] = (s32)node;
         return 0;
     }
-    slot = (s32 *)(self + 0x2C);
-    slot[i] = 1;
+    self->unk2C[i] = 1;
     for (; node != NULL; node = *(char **)(node + 8)) {
         void **obj = *(void ***)node;
         char *vt = (char *)*obj;
         s32 r = (*(s32 (**)(void *))(vt + 0x144))((char *)obj + *(s16 *)(vt + 0x140));
         if (r == 0) {
-            slot[i] = r;
+            self->unk2C[i] = r;
             break;
         }
     }
-    return slot[i];
+    return self->unk2C[i];
 }
 
 void fn_80032BD8(void) {
