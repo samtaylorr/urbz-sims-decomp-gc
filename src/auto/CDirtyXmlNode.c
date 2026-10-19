@@ -30,6 +30,10 @@ void fn_800BFBCC(void) {
 
 }
 
+void fn_800BFBD0(void) {
+
+}
+
 s32 fn_800C0604(void) {
     return 0;
 }
