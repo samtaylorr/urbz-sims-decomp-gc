@@ -87,6 +87,11 @@ void fn_8010BF98(s32 arg0, s32 arg1) {
     fn_8018D8DC(arg1, arg0, 1);
 }
 
+void **fn_8010C02C(void **self) {
+    *self = lbl_8040E770;
+    return self;
+}
+
 s32 fn_8010C040(s32 *self) {
     return self[2];
 }
