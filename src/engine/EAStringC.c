@@ -100,6 +100,10 @@ s32 fn_802A4354(void) {
     return 1;
 }
 
+s32 fn_802ACB18(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x18) & 1;
+}
+
 void fn_802AEA9C();
 void fn_802ACB50(char *self) {
     extern void fn_802AEA9C(void *);
