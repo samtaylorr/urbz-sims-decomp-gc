@@ -107,6 +107,10 @@ void fn_8018CEFC(void) {
 
 }
 
+void fn_8018CF00(void) {
+
+}
+
 void fn_8018D8BC(void) {
     fn_8018D8DC();
 }
