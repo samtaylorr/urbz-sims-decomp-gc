@@ -213,6 +213,18 @@ s16 fn_800FB878(void *arg0) {
     return M2C_FIELD(M2C_FIELD(arg0, void **, 4), s16 *, 4);
 }
 
+s16 fn_800FB884(void *arg0) {
+    s32 var_r3;
+    void *temp_r9;
+
+    var_r3 = 0;
+    temp_r9 = *M2C_FIELD(arg0, void ***, 4);
+    if (temp_r9 != NULL) {
+        var_r3 = M2C_FIELD(temp_r9, s32 *, -4);
+    }
+    return (s16) var_r3;
+}
+
 s32 fn_800FB8A4(void) {
     return 0;
 }
