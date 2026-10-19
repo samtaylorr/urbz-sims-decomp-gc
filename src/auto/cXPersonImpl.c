@@ -76,6 +76,10 @@ u16 fn_80185F10(void *arg0) {
     return M2C_FIELD(arg0, u16 *, 0x4E4);
 }
 
+s16 fn_80186020(void *arg0) {
+    return M2C_FIELD(arg0, s16 *, 0x9C);
+}
+
 s32 fn_80186030(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x4D0);
 }
