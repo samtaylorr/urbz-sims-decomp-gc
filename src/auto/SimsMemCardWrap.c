@@ -146,6 +146,10 @@ s32 fn_800AA748(void *arg0) {
     return ((u32) M2C_FIELD(arg0, u32 *, 0x10) >> 3U) & 1;
 }
 
+s32 fn_800AA754(void *arg0) {
+    return ((u32) M2C_FIELD(arg0, u32 *, 0x10) >> 7U) & 1;
+}
+
 void fn_800AA784(void) {
 
 }
