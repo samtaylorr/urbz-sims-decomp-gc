@@ -9,3 +9,7 @@ s32 fn_802C5CEC(void) {
     return 0;
 }
 
+s32 fn_802C649C(void) {
+    return 0;
+}
+
