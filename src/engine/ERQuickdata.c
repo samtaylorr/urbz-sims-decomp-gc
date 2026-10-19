@@ -23,6 +23,16 @@ void fn_8032D444(void) {
 
 }
 
+s32 fn_8032D9F0(void *arg0) {
+    void *temp_r9;
+
+    temp_r9 = M2C_FIELD(arg0, void **, 0x20);
+    if (temp_r9 != NULL) {
+        return M2C_FIELD(temp_r9, s32 *, 0xC);
+    }
+    return 0;
+}
+
 s32 fn_8032E180(u8 *self) {
     return *(s32 *)(self + 0x20);
 }
