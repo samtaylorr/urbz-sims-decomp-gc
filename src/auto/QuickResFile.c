@@ -151,6 +151,10 @@ void fn_8018D1E8(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x18) = 1;
 }
 
+void fn_8018D56C(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x28) = 0;
+}
+
 void fn_8018D8BC(void) {
     fn_8018D8DC();
 }
