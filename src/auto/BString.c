@@ -2902,6 +2902,21 @@ void *fn_800ED0BC(void *arg0, const char *arg1) {
     return arg0;
 }
 
+void *fn_800ED274(void *arg0, void **arg1, u32 arg2, u32 arg3) {
+    if (arg2 > fn_800EF6F8(arg1)) {
+        fn_800EAF5C();
+    }
+    {
+        u8 *s = fn_800EAFCC(arg1) + arg2;
+        u32 n = arg3;
+        if (n > fn_800EF6F8(arg1) - arg2) {
+            n = fn_800EF6F8(arg1) - arg2;
+        }
+        ((void (*)(void *, u8 *, u32))fn_800EBDA4)(arg0, s, n);
+    }
+    return arg0;
+}
+
 extern void fn_800EBDA4(void *);
 void *fn_800ED300(void *self) {
     fn_800EBDA4(self);
@@ -2917,6 +2932,11 @@ extern void fn_800EBC84(void *);
 void *fn_800ED5D8(void *self) {
     fn_800EBC84(self);
     return self;
+}
+
+void *fn_800ED608(void *arg0, const char *arg1) {
+    ((void (*)(void *, const char *, s32))fn_800EBC84)(arg0, arg1, arg1 ? fn_80248808(arg1) : 0);
+    return arg0;
 }
 
 extern void fn_800EBF1C(void *);
