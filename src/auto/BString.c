@@ -2015,6 +2015,10 @@ void fn_800E9A78(s32 *self) {
     fn_800E94E8(self[2]);
 }
 
+s32 fn_800E9A9C(void *arg0) {
+    return M2C_FIELD(M2C_FIELD(arg0, void **, 8), s32 *, 0x98);
+}
+
 void fn_800E9AA8(s32 *self) {
     fn_800E9514(self[2]);
 }
