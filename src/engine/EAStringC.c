@@ -341,6 +341,10 @@ s32 fn_802B8D70(void) {
     return 0;
 }
 
+s32 fn_802B90B4(u8 *self) {
+    return *(s32 *)(self + 0x20);
+}
+
 s32 fn_802B914C(void) {
     return 0;
 }
