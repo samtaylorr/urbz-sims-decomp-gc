@@ -9,6 +9,12 @@ typedef struct {
 
 
 void fn_802D2FD0(void);
+extern void *fn_802D0AB8(void *);
+extern void fn_802D1A00(void *, void *);
+void fn_8032D310(void *arg0) {
+    fn_802D1A00(fn_802D0AB8(arg0), arg0);
+}
+
 void fn_8032E190(void) {
     fn_802D2FD0();
 }
