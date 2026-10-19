@@ -281,3 +281,8 @@ s32 fn_8003A0AC(void) {
     return 0;
 }
 
+void fn_8003A178(void) {
+    M2C_UNK fn_80039B84(M2C_UNK, M2C_UNK);
+    fn_80039B84(1, 0xFFFF);
+}
+
