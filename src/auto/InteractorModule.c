@@ -12,6 +12,11 @@ void fn_80239EB0(s32 arg0, s32 arg1) {
     fn_8022F424(arg1, arg0);
 }
 
+void fn_80239EDC(s32 arg0, s32 arg1) {
+    M2C_UNK fn_8022F480(s32, s32);
+    fn_8022F480(arg1, arg0);
+}
+
 s32 fn_8023C218(void *arg0) {
     return ((u32) M2C_FIELD(arg0, u32 *, 0xC0) >> 7U) & 1;
 }
