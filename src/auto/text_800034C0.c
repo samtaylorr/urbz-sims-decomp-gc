@@ -38,16 +38,27 @@ void fn_800043E8(void) {
     fn_800C47CC();
 }
 
+s32 fn_800050F0(u8 *self) {
+    u16 *p = (u16 *)(self + 0x1c);
+    s32 result = 0;
+    s32 i;
+    for (i = 0; i < 6; i++) {
+        result = *p++ | result;
+    }
+    return result;
+}
+
 extern u8 lbl_8041E1A0[];
 extern u8 lbl_8041E1C8[];
 void fn_80005118(s32 init, s32 code) {
     s32 i;
     if (code == 0xFFFF) {
         if (init != 0) {
-            *(s32 *)(lbl_8041E1A0 + 0x18) = 0;
-            *(s32 *)(lbl_8041E1A0 + 0x14) = 0;
+            u8 *s = lbl_8041E1A0;
+            *(s32 *)(s + 0x14) = 0;
+            *(s32 *)(s + 0x18) = 0;
             for (i = 5; i >= 0; i--) {
-                ((u16 *)(lbl_8041E1A0 + 0x1c))[i] = 0;
+                ((u16 *)(s + 0x1c))[i] = 0;
             }
             fn_8000381C(lbl_8041E1C8);
         } else {
