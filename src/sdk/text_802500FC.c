@@ -64,6 +64,10 @@ s32 fn_8026C4FC(void) {
     return 0;
 }
 
+s32 fn_8026E9F4(s32 *self) {
+    return self[2];
+}
+
 extern s32 lbl_80496098;
 s32 fn_8026EDD8(void) {
     return lbl_80496098;
