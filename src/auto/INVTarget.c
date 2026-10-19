@@ -68,6 +68,26 @@ void fn_801D8508(s32 arg0) {
     } while (var_r31 <= 4);
 }
 
+s32 fn_801D8BA0(void **arg0, s32 arg1) {
+    s32 fn_802486DC(s32, s32);
+    void *var_r31;
+
+    var_r31 = *arg0;
+    if (var_r31 != NULL) {
+loop_1:
+        if (fn_802486DC(M2C_FIELD(var_r31, s32 *, 8), arg1) == 0) {
+            return 1;
+        }
+        var_r31 = M2C_FIELD(var_r31, void **, 4);
+        if (var_r31 == NULL) {
+            goto block_4;
+        }
+        goto loop_1;
+    }
+block_4:
+    return 0;
+}
+
 s32 fn_801D9074(void **arg0, s32 arg1) {
     s32 fn_802486DC(s32, s32);
     void *var_r31;
