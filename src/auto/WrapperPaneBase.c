@@ -132,3 +132,7 @@ void fn_800D109C(u8 *self) {
     fn_800CE924(self, 2);
 }
 
+u8 *fn_800D10EC(u8 *self) {
+    return self + 8;
+}
+
