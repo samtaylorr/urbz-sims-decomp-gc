@@ -2,6 +2,11 @@
 #include "common.h"
 
 void fn_800C3B48(void);
+s32 fn_801D7380(void *arg0) {
+    s32 fn_801D7224(void *);
+    return fn_801D7224(arg0) != 0;
+}
+
 s32 fn_801D7550(void) {
     s32 fn_801D6D0C();
     M2C_UNK fn_802D1FC8(M2C_UNK);
