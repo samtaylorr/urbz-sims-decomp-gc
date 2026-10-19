@@ -30,3 +30,7 @@ void fn_8024EF20(void) {
     fn_8024F99C();
 }
 
+void fn_8024FA04(void) {
+
+}
+
