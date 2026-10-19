@@ -4526,6 +4526,10 @@ s32 fn_803B95C0(void) {
     return 1;
 }
 
+void fn_803B95C8(void) {
+
+}
+
 extern void fn_8039A514(void *);
 void *fn_803B95CC(void *self) {
     fn_8039A514(self);
