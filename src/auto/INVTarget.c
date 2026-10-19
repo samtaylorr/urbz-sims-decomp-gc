@@ -167,6 +167,11 @@ void fn_80200D74(void *arg0) {
     fn_80200D9C(M2C_FIELD(arg0, s32 *, 4), arg0);
 }
 
+void fn_80200FBC(void *arg0) {
+    M2C_UNK fn_80200E2C(s32, void *);
+    fn_80200E2C(M2C_FIELD(arg0, s32 *, 4), arg0);
+}
+
 s32 fn_802037F0(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x88) = 0;
     return 1;
