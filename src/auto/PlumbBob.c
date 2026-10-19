@@ -115,6 +115,10 @@ void fn_8006CD40(void) {
     fn_8006D798();
 }
 
+void fn_8006D998(void) {
+
+}
+
 void fn_8006D99C(s32 *self, s32 value) {
     *self = value;
 }
