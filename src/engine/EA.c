@@ -77,6 +77,10 @@ s32 fn_802DF30C(void) {
     return 0;
 }
 
+s32 fn_802DF338(u8 *self) {
+    return *(s32 *)(self + 0x20);
+}
+
 s32 fn_802DF340(void) {
     return 0;
 }
