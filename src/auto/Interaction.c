@@ -84,6 +84,10 @@ s32 fn_80111F64(char *self) {
     return *(s32 *)(self + 0xC);
 }
 
+s32 fn_80117474(char *self) {
+    return *(s32 *)(self + 0xC);
+}
+
 s32 fn_8011747C(s32 *self) {
     return self[2];
 }
