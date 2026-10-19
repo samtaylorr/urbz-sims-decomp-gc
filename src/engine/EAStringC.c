@@ -40,6 +40,12 @@ s32 fn_802A4354(void) {
     return 1;
 }
 
+void fn_802AEA9C();
+void fn_802ACB50(char *self) {
+    extern void fn_802AEA9C(void *);
+    fn_802AEA9C(self + 8);
+}
+
 s32 fn_802ACBBC(void) {
     return 1;
 }
