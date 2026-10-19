@@ -14,6 +14,10 @@ s32 fn_800F68B4(s32 *self) {
     return self[1];
 }
 
+s32 fn_800F6FEC(s32 *self) {
+    return self[1];
+}
+
 s32 fn_800F7A20(void) {
     return 0;
 }
