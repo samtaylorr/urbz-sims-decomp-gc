@@ -47,6 +47,15 @@ s32 fn_802EF030(s32 arg0, s32 *out) {
     return arg0;
 }
 
+extern void fn_802C5C58(void *, s32 *);
+s32 fn_802EF070(s32 arg0, s32 *out) {
+    s32 tmp;
+
+    fn_802C5C58((void *)arg0, &tmp);
+    *out = tmp;
+    return arg0;
+}
+
 void fn_802EF3F4(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
