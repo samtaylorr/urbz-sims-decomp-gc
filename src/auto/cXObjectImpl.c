@@ -6,6 +6,12 @@ void fn_801301DC(void) {
 
 }
 
+extern s32 lbl_80495BB0;
+extern void fn_800F1A60(s32, s32);
+void fn_8013020C(void) {
+    fn_800F1A60((s32)&lbl_80495BB0, 2);
+}
+
 s32 fn_80130388(void) {
     return lbl_80494470;
 }
