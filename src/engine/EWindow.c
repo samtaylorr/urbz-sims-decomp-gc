@@ -22,6 +22,10 @@ void fn_803079A4(void) {
 
 }
 
+void fn_803079A8(void) {
+
+}
+
 s32 fn_80307AD4(char *self) {
     return *(s32 *)(self + 0xC);
 }
