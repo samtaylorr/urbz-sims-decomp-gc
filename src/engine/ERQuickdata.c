@@ -102,6 +102,10 @@ void *fn_80331208(u32 size, void *p) {
     return p;
 }
 
+s32 fn_8033123C(u8 *self) {
+    return *(s32 *)(self + 0x20);
+}
+
 s32 fn_803312D4(EIWallPartFlags *self, s32 i) {
     return self->unk2C[i];
 }
