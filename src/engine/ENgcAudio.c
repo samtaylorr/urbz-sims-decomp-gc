@@ -30,3 +30,7 @@ void fn_8033D218(void) {
 
 }
 
+void fn_8033D21C(void) {
+
+}
+
