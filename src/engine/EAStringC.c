@@ -10,6 +10,10 @@ s32 fn_8029A0DC(void) {
     return 0;
 }
 
+s32 fn_8029F4CC(void) {
+    return 0;
+}
+
 void fn_802A204C(void);
 void fn_802A202C(void) {
     fn_802A204C();
