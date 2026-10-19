@@ -8,6 +8,10 @@ s32 fn_80041D94(void) {
     return lbl_804957B8;
 }
 
+void fn_80042A60(void (*cb)(void)) {
+    lbl_804940B0 = cb;
+}
+
 extern void (*lbl_804940B0)(void);
 extern s32 lbl_8049407C;
 extern s32 lbl_80494084;
