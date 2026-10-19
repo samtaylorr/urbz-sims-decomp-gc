@@ -8,3 +8,8 @@ s32 fn_80364F28(s32 *self) {
 void fn_803672B8(void) {
 
 }
+
+s32 fn_803672C4(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x44);
+}
+
