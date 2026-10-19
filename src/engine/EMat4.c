@@ -191,11 +191,20 @@ s32 fn_802D12C4(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x528);
 }
 
+void fn_802D12CC(void *arg0) {
+    fn_802D1A00(arg0, M2C_FIELD(arg0, void **, 0x7BC));
+    M2C_FIELD(arg0, void **, 0x7BC) = 0;
+    fn_802D1A00(((void *(*)(void))fn_802D0AB8)(), (void *)lbl_80494DCC);
+    lbl_80494DCC = 0;
+}
+
 s32 fn_802D1404(void *arg0, u32 arg1) {
-    if (arg1 > 0x4F) {
-        return 0;
+    s32 *p;
+    if (arg1 < 0x50) {
+        p = (s32 *)((u8 *)arg0 + 0x53C);
+        return p[arg1];
     }
-    return ((s32 *)((u8 *)arg0 + 0x53C))[arg1];
+    return 0;
 }
 
 s32 fn_802D1424(void *arg0) {
