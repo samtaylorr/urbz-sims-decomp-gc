@@ -60,3 +60,8 @@ void fn_80123040(s32 arg0) {
     fn_8011D830(arg0 + 0x6C);
 }
 
+void fn_80123108(void) {
+    M2C_UNK fn_80123064(M2C_UNK, M2C_UNK);
+    fn_80123064(1, 0xFFFF);
+}
+
