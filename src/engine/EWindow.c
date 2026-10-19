@@ -213,6 +213,12 @@ void fn_80309198(void) {
     fn_8030861C();
 }
 
+s32 *fn_803091B8(s32 *arg0) {
+    arg0[0] = 0;
+    arg0[1] = 0;
+    return arg0;
+}
+
 void fn_80309928(s32 arg0) {
     M2C_UNK fn_80309214(s32);
     fn_80309214(arg0 + 0x9C);
