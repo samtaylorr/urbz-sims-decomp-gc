@@ -580,6 +580,22 @@ u8 fn_80207074(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 0x8C0);
 }
 
+void fn_80208768(void *arg0) {
+    s32 temp_r0;
+
+    temp_r0 = M2C_FIELD(arg0, s32 *, 0x114);
+    switch (temp_r0) {                              /* irregular */
+    case 0:
+        M2C_FIELD(arg0, s32 *, 0x114) = 1;
+        M2C_FIELD(arg0, s32 *, 0x118) = 1;
+        return;
+    case 4:
+    case 19:
+        M2C_FIELD(arg0, s32 *, 0x118) = 1;
+        return;
+    }
+}
+
 void fn_80208AD8(s32 arg0) {
     M2C_UNK fn_801F5420(s32);
     fn_801F5420(arg0 + 0x84);
