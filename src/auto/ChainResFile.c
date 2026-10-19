@@ -34,6 +34,10 @@ void fn_801055FC(void *self, s32 flags) {
     }
 }
 
+void fn_80105C14(void *arg0, s8 arg1) {
+    M2C_FIELD(arg0, s8 *, 2) = arg1;
+}
+
 void fn_80105C28(void) {
 
 }
