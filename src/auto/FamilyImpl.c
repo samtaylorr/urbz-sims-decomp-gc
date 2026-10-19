@@ -86,6 +86,10 @@ s32 fn_8010C104(void *arg0) {
     return ((u32) M2C_FIELD(arg0, u32 *, 0x34) >> 1U) & 1;
 }
 
+s32 fn_8010C130(void *arg0) {
+    return ((u32) M2C_FIELD(arg0, u32 *, 0x34) >> 2U) & 1;
+}
+
 s32 fn_8010C13C(void) {
     return 0;
 }
