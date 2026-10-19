@@ -28,6 +28,11 @@ void fn_8035F07C(void) {
     fn_8034F440(lbl_8046DF78);
 }
 
+void fn_8034F470(u8 *arg);
+void fn_8035F0A4(void) {
+    fn_8034F470(lbl_8046DF78);
+}
+
 void fn_8035F144(void) {
 
 }
