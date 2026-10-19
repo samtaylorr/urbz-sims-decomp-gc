@@ -5059,6 +5059,14 @@ void *fn_803BF868(void *self) {
     return self;
 }
 
+extern void fn_803BF8FC(s32);
+void fn_803BF948(s32 self, s32 flags) {
+    fn_803BF8FC(self);
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_803BF988(void *self) {
     ((s32 *)self)[0] = 0;
     ((s32 *)self)[2] = 0;
