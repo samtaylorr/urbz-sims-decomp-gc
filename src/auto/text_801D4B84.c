@@ -2,6 +2,15 @@
 #include "common.h"
 
 extern s32 lbl_804945C8;
+
+typedef struct {
+    s32 v[12];
+} Unk801D4BF0;
+
+typedef struct {
+    s32 v[3];
+} Unk801D4CC0;
+
 void fn_801D4BC0(u8 *self) {
     extern void fn_801C7588(u8 *);
     extern u8 lbl_80416358[];
