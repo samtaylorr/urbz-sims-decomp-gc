@@ -392,6 +392,17 @@ void fn_8026B8F4(void) {
     lbl_80494AB8 = 0;
 }
 
+s32 fn_8026BAAC(s32 arg0) {
+    extern s32 lbl_80496004;
+    if ((arg0 < 0) || (arg0 >= 4)) {
+        return 0;
+    }
+    if (lbl_80496004 & (0x80000000U >> arg0)) {
+        return 1;
+    }
+    return 0;
+}
+
 s32 fn_8026BBB4(void) {
     return ((u16) *(u16 *)0xCC005036 >> 0xFU) & 1;
 }
