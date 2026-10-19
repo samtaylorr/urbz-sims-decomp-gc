@@ -886,6 +886,19 @@ void fn_801A3CA8(void *arg0, s16 arg1) {
     M2C_FIELD(arg0, s16 *, 0x114) = arg1;
 }
 
+void fn_801A3CB0(void) {
+    M2C_UNK fn_800F160C(M2C_UNK *);
+    M2C_UNK fn_800F3304(M2C_UNK *);
+    M2C_UNK fn_80246D44(M2C_UNK *);
+    extern s32 lbl_80495D40;
+    if ((s32) lbl_80495D40 == 0) {
+        fn_800F160C(&lbl_80495D3C);
+        lbl_80495D40 = 1;
+        fn_80246D44(&fn_801A30AC);
+    }
+    fn_800F3304(&lbl_80495D3C);
+}
+
 void fn_801A3CFC(void) {
 
 }
