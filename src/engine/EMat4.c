@@ -5,6 +5,12 @@ void fn_802D24E8(void);
 extern void *fn_802D0C44(void *);
 extern void fn_802D1A00(void *, void *);
 extern void fn_802C7DD0(void *);
+s32 *fn_802C66FC(s32 *arg0) {
+    arg0[0] = 0;
+    arg0[1] = 0;
+    return arg0;
+}
+
 void fn_802C686C(void *arg0, s8 *arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 4) = arg2;
     M2C_FIELD(arg0, s8 **, 0) = arg1;
