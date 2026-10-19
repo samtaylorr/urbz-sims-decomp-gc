@@ -6,6 +6,10 @@ void fn_8033EA4C(void) {
 
 }
 
+void fn_8033EAB8(void) {
+
+}
+
 s32 fn_8033EC8C(void) {
     return lbl_80495004;
 }
