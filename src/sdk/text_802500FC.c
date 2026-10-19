@@ -66,6 +66,13 @@ s32 fn_80255A44(void) {
     return *(s32 *)0x800000F0;
 }
 
+void fn_80255E5C(s32 arg0, s32 arg1) {
+    extern s32 lbl_80495E30;
+    extern s32 lbl_80495E34;
+    lbl_80495E30 = arg0;
+    lbl_80495E34 = arg1;
+}
+
 void fn_80258364(void) {
 
 }
