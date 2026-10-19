@@ -57,3 +57,7 @@ s32 fn_802B3B1C(void) {
     return 0;
 }
 
+s32 fn_802B3B24(void) {
+    return 0;
+}
+
