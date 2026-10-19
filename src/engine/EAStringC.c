@@ -757,6 +757,12 @@ void fn_802BBA38(void) {
     lbl_80443314[0]();
 }
 
+void fn_802BBAE8(void *arg0) {
+    extern void *lbl_80494D9C;
+    M2C_FIELD(arg0, void **, 8) = (void *) lbl_80494D9C;
+    lbl_80494D9C = arg0;
+}
+
 s32 fn_802BBB08(void) {
     return 0;
 }
