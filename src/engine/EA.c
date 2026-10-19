@@ -100,6 +100,12 @@ void fn_802D9210(void) {
 
 }
 
+s32 fn_802D9214(void *arg0) {
+    M2C_UNK fn_8025AEEC();
+    fn_8025AEEC();
+    return M2C_FIELD(arg0, s32 *, 0xC);
+}
+
 s32 fn_802D9278(char *self) {
     return *(s32 *)(self + 0xC);
 }
