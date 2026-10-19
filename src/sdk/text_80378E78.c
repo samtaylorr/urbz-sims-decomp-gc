@@ -332,6 +332,23 @@ u16 fn_8038DAFC(void) {
     return lbl_80495660;
 }
 
+s32 fn_8038DE10(s32 arg0) {
+    extern u8 lbl_80495662;
+    s32 var_r4;
+
+    if (lbl_80495662 & 0x20) {
+        var_r4 = 1;
+    } else {
+        var_r4 = 0;
+    }
+    if (arg0 != 0) {
+        lbl_80495662 |= 0x20;
+    } else {
+        lbl_80495662 &= 0xFFFFFFDF;
+    }
+    return var_r4;
+}
+
 extern s32 lbl_80495668;
 void fn_8038DEBC(s32 arg0) {
     lbl_80495668 = arg0;
