@@ -1262,6 +1262,17 @@ s32 fn_803A3010(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x8C);
 }
 
+void fn_803A35A4(s32 *first, s32 *last, s32 comp);
+void fn_803A364C(s32 *first, s32 *last, s32 *val, s32 comp);
+void fn_803A36A0(s32 *first, s32 *last, s32 comp) {
+    if (last - first > 16) {
+        fn_803A35A4(first, first + 16, comp);
+        fn_803A364C(first + 16, last, 0, comp);
+    } else {
+        fn_803A35A4(first, last, comp);
+    }
+}
+
 void fn_803A3D2C(s32 *first, s32 *last, s32 comp);
 void fn_803A3DD8(s32 *first, s32 *last, s32 *val, s32 comp);
 void fn_803A3E2C(s32 *first, s32 *last, s32 comp) {
