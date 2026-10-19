@@ -58,6 +58,10 @@ void fn_80105C14(void *arg0, s8 arg1) {
     M2C_FIELD(arg0, s8 *, 2) = arg1;
 }
 
+void fn_80105C1C(void *arg0, void *arg1) {
+    M2C_FIELD(arg0, u8 *, 2) = (u8) M2C_FIELD(arg1, u8 *, 2);
+}
+
 void fn_80105C28(void) {
 
 }
