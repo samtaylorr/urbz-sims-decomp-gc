@@ -16,3 +16,7 @@ void fn_80335E64(void) {
     fn_80337430();
 }
 
+s32 fn_80335EC8(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0xA8);
+}
+
