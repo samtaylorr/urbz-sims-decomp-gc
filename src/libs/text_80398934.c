@@ -115,6 +115,13 @@ void fn_80399F48(s32 **self) {
     fn_80399F34(self);
 }
 
+void fn_80399F94(s32 **self, s32 flags) {
+    fn_80399F48(self);
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_8039A024(void *self) {
     ((s32 *)self)[0] = 0;
     ((s32 *)self)[2] = 0;
