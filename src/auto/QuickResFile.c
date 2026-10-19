@@ -24,6 +24,10 @@ s32 fn_8018A844(void) {
     return 0x444F4F52;
 }
 
+void fn_8018C9D4(void ****arg0, s32 arg1) {
+    M2C_FIELD(***arg0, s32 *, 0x10) = arg1;
+}
+
 void fn_8018CAB0(void) {
 
 }
