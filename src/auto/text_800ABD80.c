@@ -127,6 +127,10 @@ void fn_800B2F94(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, u8 *, 0x10) = (u8) (M2C_FIELD(arg0, u8 *, 0x10) | arg1);
 }
 
+void fn_800B2FA4(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, u8 *, 0x10) = (u8) (M2C_FIELD(arg0, u8 *, 0x10) & ~arg1);
+}
+
 s32 fn_800B2FB4(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x30);
 }
