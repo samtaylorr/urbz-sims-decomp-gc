@@ -337,6 +337,10 @@ s32 fn_801A0FD4(void) {
     return 0x168;
 }
 
+void fn_801A1340(void *arg0, s16 arg1) {
+    M2C_FIELD(arg0, s16 *, 0x30) = arg1;
+}
+
 void fn_803AB7D4();
 void fn_801A135C(char *self) {
     extern void fn_803AB7D4(void *);
