@@ -10,6 +10,10 @@ void fn_800EF8B8(void) {
 
 }
 
+s32 fn_800EF928(s32 **arg0) {
+    return **arg0;
+}
+
 s32 fn_800EFF00(void) {
     return 0;
 }
