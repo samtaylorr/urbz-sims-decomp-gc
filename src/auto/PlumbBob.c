@@ -504,3 +504,8 @@ void fn_8008C388(void) {
     fn_8008C3A8();
 }
 
+void fn_8008C414(void) {
+    M2C_UNK fn_8008C3C0(M2C_UNK, M2C_UNK);
+    fn_8008C3C0(1, 0xFFFF);
+}
+
