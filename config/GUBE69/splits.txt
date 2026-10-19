@@ -391,7 +391,10 @@ engine/text_80333504.c:
 	.text       start:0x80333504 end:0x80333694
 
 engine/EControllerManager.c:
-	.text       start:0x80333694 end:0x80378E78
+	.text       start:0x80333694 end:0x80335020
+
+engine/text_80335020.c:
+	.text       start:0x80335020 end:0x80378E78
 
 sdk/text_80378E78.c:
 	.text       start:0x80378E78 end:0x8038FC80
