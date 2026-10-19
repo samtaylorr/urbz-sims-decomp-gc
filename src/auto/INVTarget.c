@@ -90,6 +90,12 @@ void fn_8020ACCC(void) {
 
 }
 
+extern u8 lbl_803E75EC[];
+void fn_801DB18C(u8 *arg);
+void fn_8020DF04(void) {
+    fn_801DB18C(lbl_803E75EC);
+}
+
 void fn_80214DB0(void) {
 
 }
