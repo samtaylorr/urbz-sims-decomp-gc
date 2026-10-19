@@ -960,6 +960,24 @@ void fn_801AB5C8(void) {
 
 }
 
+void fn_801AB5CC(void *arg0) {
+    s32 var_r9;
+    s32 temp_r11;
+    s32 temp_r0;
+
+    temp_r11 = M2C_FIELD(arg0, s32 *, 0);
+    temp_r0 = M2C_FIELD(arg0, s32 *, 4);
+    var_r9 = temp_r11;
+    if (temp_r11 != temp_r0) {
+        do {
+            var_r9 += 0x10;
+        } while (var_r9 != temp_r0);
+    }
+    M2C_FIELD(arg0, s32 *, 4) = temp_r11;
+    M2C_FIELD(arg0, s32 *, 0x54) = -1;
+    M2C_FIELD(arg0, s32 *, 0x58) = -1;
+}
+
 s32 fn_801B1824(void *arg0) {
     return M2C_FIELD(arg0, u16 *, 4) & 0x7FFF;
 }
