@@ -7,6 +7,10 @@ void *fn_80348E8C(u32 size, void *p) {
     return p;
 }
 
+s32 fn_80348EBC(u8 *self) {
+    return *(s32 *)(self + 0x20);
+}
+
 void fn_80348F38(void) {
     fn_802FB604();
 }
