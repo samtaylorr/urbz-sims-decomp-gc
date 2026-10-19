@@ -1853,6 +1853,10 @@ void fn_803AEC9C(s32 *self, s32 flags) {
     }
 }
 
+void fn_803AF118(void) {
+
+}
+
 void fn_803AF184(BoundPmf *b) {
     s16 index = b->index;
     char *obj = b->obj;
