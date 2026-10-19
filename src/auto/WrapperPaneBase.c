@@ -81,11 +81,9 @@ s32 fn_800D0788(s32 *self) {
     return self[6];
 }
 
-void fn_800D0790(s32 *self, s32 *a, s32 *b) {
-    self[8] = a[1];
-    self[7] = a[0];
-    self[10] = b[1];
-    self[9] = b[0];
+void fn_800D0790(WrapperPaneBase *self, WrapperPanePoint *pos, WrapperPanePoint *size) {
+    self->pos = *pos;
+    self->size = *size;
 }
 
 extern s32 fn_80248808(s32);
@@ -98,7 +96,7 @@ void fn_800D07BC(s32 *self, s32 arg) {
     }
 }
 
-s32 fn_800D0804(u8 *self, s32 i) {
-    return ((s32 *)(self + 0x40))[i];
+s32 fn_800D0804(WrapperPaneBase *self, s32 i) {
+    return self->unk40[i];
 }
 
