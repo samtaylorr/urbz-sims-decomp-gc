@@ -188,3 +188,9 @@ void fn_80359520(void) {
 
 }
 
+void fn_8035BCFC(void *arg0, u8 *arg1, u8 *arg2, u8 *arg3) {
+    *arg1 = M2C_FIELD(arg0, u8 *, 0x462C);
+    *arg2 = M2C_FIELD(arg0, u8 *, 0x462D);
+    *arg3 = M2C_FIELD(arg0, u8 *, 0x462E);
+}
+
