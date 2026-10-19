@@ -2,6 +2,18 @@
 #include "common.h"
 
 void fn_802E2390(void);
+void fn_802E2288(s32 arg0) {
+    M2C_UNK fn_802C8A34(s32, s32);
+    M2C_UNK fn_802C98D8(s32);
+    M2C_UNK fn_802E3CB4(s32);
+    s32 temp_r29;
+
+    temp_r29 = arg0 + 0xE0;
+    fn_802C98D8(temp_r29);
+    fn_802C8A34(arg0 + 0xA0, temp_r29);
+    fn_802E3CB4(arg0);
+}
+
 void fn_802E3ED4(void) {
     fn_802E2390();
 }
