@@ -19,6 +19,10 @@ void fn_8032D440(void) {
 
 }
 
+void fn_8032D444(void) {
+
+}
+
 s32 fn_8032E180(u8 *self) {
     return *(s32 *)(self + 0x20);
 }
