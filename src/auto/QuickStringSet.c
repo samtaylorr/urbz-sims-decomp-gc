@@ -174,6 +174,10 @@ void fn_800FA0F0(s32 *self, s32 value) {
     *self = value;
 }
 
+void fn_800FA0F8(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 4) = arg1;
+}
+
 s32 fn_800FB614(s32 *self) {
     return self[1];
 }
