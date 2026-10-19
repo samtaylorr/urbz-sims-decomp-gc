@@ -632,6 +632,10 @@ void fn_8039BECC(s32 *dst, s32 *src, s32 n) {
     }
 }
 
+void fn_8039C190(void *self, s32 arg1) {
+    fn_8039C0B8(self, arg1, M2C_FIELD(self, s32 *, 4), 1);
+}
+
 void fn_8039C1B8(void) {
     fn_8030AD40();
 }
