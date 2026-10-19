@@ -4504,6 +4504,12 @@ void *fn_803BBFE4(void *self) {
     return self;
 }
 
+void fn_803BC0F0(void *self) {
+    ((s32 *)self)[0] = 0;
+    ((s32 *)self)[2] = 0;
+    ((s32 *)self)[1] = 0;
+}
+
 extern void fn_803BC0F0(void *);
 void *fn_803BC104(void *self) {
     fn_803BC0F0(self);
