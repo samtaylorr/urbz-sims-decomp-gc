@@ -39,6 +39,16 @@ s32 fn_80183B60(void **arg0) {
     return ((u32) M2C_FIELD(*arg0, u32 *, 0x84) >> 1U) & 1;
 }
 
+void fn_80184F48(void *arg0) {
+    M2C_UNK fn_80176C18(void *, M2C_UNK);
+    M2C_UNK fn_80184488(void *);
+    if ((s32) M2C_FIELD(arg0, s32 *, 0x5FC) != 0) {
+        fn_80176C18(arg0 + 0x130, 0);
+        M2C_FIELD(arg0, s32 *, 0x5FC) = 0;
+        fn_80184488(arg0);
+    }
+}
+
 void fn_80185868(void) {
 
 }
