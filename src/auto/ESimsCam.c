@@ -8,6 +8,17 @@ typedef struct Vec3 {
 extern void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
 extern void fn_802D20E8(void *);
+void fn_8000D48C(void *arg0) {
+    f32 temp_f13;
+
+    temp_f13 = M2C_FIELD(arg0, f32 *, 4);
+    if (M2C_FIELD(arg0, f32 *, 8) < temp_f13) {
+        M2C_FIELD(arg0, f32 *, 8) = temp_f13;
+    }
+    M2C_FIELD(arg0, f32 *, 0x7C) = (f32) M2C_FIELD(arg0, f32 *, 0xC);
+    M2C_FIELD(arg0, f32 *, 0x80) = (f32) M2C_FIELD(arg0, f32 *, 4);
+}
+
 void fn_8000D4C8(void *self, s32 flags) {
     if (flags & 1) {
         fn_802D20E8(self);
