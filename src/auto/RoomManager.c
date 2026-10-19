@@ -45,6 +45,13 @@ void fn_80191460(void) {
 
 }
 
+s32 fn_80192788(void *arg0) {
+    u32 temp_r3;
+
+    temp_r3 = M2C_FIELD(arg0, u32 *, 0x48);
+    return (s32) (temp_r3 + (temp_r3 >> 0x1FU)) >> 1;
+}
+
 s32 fn_80192B04(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x90);
 }
