@@ -5,3 +5,9 @@ void fn_802D2FD0(void);
 void fn_802EF010(void) {
     fn_802D2FD0();
 }
+
+void fn_802D2430(void);
+void fn_802EF4D0(void) {
+    fn_802D2430();
+}
+
