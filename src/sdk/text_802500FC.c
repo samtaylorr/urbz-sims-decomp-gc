@@ -390,6 +390,15 @@ u16 fn_80273AE0(void *arg0) {
     return M2C_FIELD(arg0, u16 *, 8);
 }
 
+s32 fn_80273FD0(s32 arg0) {
+    extern void *__GXData;
+    s32 temp_r0;
+
+    temp_r0 = M2C_FIELD(__GXData, s32 *, 0x4C8);
+    M2C_FIELD(__GXData, s32 *, 0x4C8) = arg0;
+    return temp_r0;
+}
+
 void fn_80275168(void) {
 
 }
