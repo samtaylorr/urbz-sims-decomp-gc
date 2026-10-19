@@ -2200,6 +2200,10 @@ s32 fn_800EB010(s32 **arg0) {
     return **arg0;
 }
 
+s32 fn_800EB01C(s32 *arg0) {
+    return *arg0 + 4;
+}
+
 s32 fn_800EB5B4(void) {
     return 0;
 }
