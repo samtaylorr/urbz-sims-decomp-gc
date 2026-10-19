@@ -1406,6 +1406,24 @@ s32 fn_803A1354(s32 arg0, s32 arg1, s32 arg2) {
     return ret;
 }
 
+s32 fn_803A13B8(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    struct {
+        void *vtbl;
+        s32 unk4;
+        s32 unk8;
+    } tmp, *p;
+    u8 out[8];
+    s32 ret;
+
+    p = &tmp;
+    tmp.unk4 = arg0;
+    tmp.vtbl = lbl_8040E600;
+    p->unk8 = arg2;
+    ret = fn_8018E70C(out, p, arg4, arg1, arg3);
+    ((void (*)(void *, s32))fn_8018EA6C)(p, 2);
+    return ret;
+}
+
 void fn_803A1424(void) {
     fn_8018EA6C();
 }
