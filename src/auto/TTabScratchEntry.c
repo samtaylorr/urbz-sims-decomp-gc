@@ -6,6 +6,10 @@ s16 fn_8019AFE8(void *arg0) {
     return M2C_FIELD(arg0, s16 *, 0x34);
 }
 
+s32 fn_8019B1D0(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0xA4);
+}
+
 s32 fn_8019B448(void) {
     return 0;
 }
