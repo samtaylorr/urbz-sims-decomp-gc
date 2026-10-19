@@ -23,6 +23,11 @@ void fn_8030091C(void) {
     fn_80338000(lbl_8045B82C);
 }
 
+void fn_80338184(u8 *arg);
+void fn_80300944(void) {
+    fn_80338184(lbl_8045B82C);
+}
+
 void fn_80302228(void) {
 
 }
