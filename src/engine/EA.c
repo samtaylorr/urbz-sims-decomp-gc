@@ -237,6 +237,13 @@ void fn_802DD5B0(void *self, void *arg) {
     fn_802D21E0(arg);
 }
 
+extern void fn_802CAA00(void *, s32);
+extern u8 lbl_80451F84[];
+void fn_802DD5D4(void);
+void fn_802DD5D4(void) {
+    fn_802CAA00(lbl_80451F84, 2);
+}
+
 void fn_802DD82C(void *arg0, s32 arg1) {
     M2C_UNK fn_802DDCAC(s32, s32, s32);
     fn_802DDCAC(M2C_FIELD(arg0, s32 *, 0), M2C_FIELD(arg0, s32 *, 4), arg1);
