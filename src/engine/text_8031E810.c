@@ -106,6 +106,10 @@ void fn_8031EE38(void) {
 
 }
 
+void fn_8031EE3C(void) {
+
+}
+
 s32 fn_8031EE44(void) {
     return 1;
 }
