@@ -318,6 +318,10 @@ void fn_80081E00(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x36C) = arg1;
 }
 
+void fn_80081E08(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0x370) = arg1;
+}
+
 void fn_80089604(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
