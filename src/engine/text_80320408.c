@@ -142,6 +142,17 @@ f32 fn_80323FA0(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0x5C);
 }
 
+void fn_80324018(void *arg0, s32 arg1) {
+    f32 fn_8039AA70(s32, M2C_UNK);
+    void *temp_r29;
+
+    temp_r29 = arg0 + 0x64;
+    M2C_FIELD(arg0, f32 *, 0x64) = fn_8039AA70(arg1, 0);
+    M2C_FIELD(temp_r29, f32 *, 4) = fn_8039AA70(arg1, 1);
+    M2C_FIELD(temp_r29, f32 *, 8) = fn_8039AA70(arg1, 2);
+    M2C_FIELD(temp_r29, f32 *, 0xC) = fn_8039AA70(arg1, 3);
+}
+
 s32 fn_803240A0(s32 arg0) {
     return arg0 + 0x64;
 }
