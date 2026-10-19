@@ -4331,6 +4331,13 @@ void fn_803BEC14(u8 *self) {
     fn_802D8BEC(self);
 }
 
+void fn_803BEC44(void **self, s32 flags) {
+    *self = lbl_804194A0;
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_803C00F4(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
