@@ -207,6 +207,12 @@ void *fn_802D0AB8(void *unused) {
     return lbl_8044490C;
 }
 
+extern u8 lbl_804450CC[];
+void fn_802D0B10(void);
+void fn_802D0B10(void) {
+    fn_802D94C0(lbl_804450CC, 2);
+}
+
 s32 fn_802D0F94(void) {
     return 0;
 }
