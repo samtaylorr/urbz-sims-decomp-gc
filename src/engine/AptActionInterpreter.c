@@ -66,3 +66,7 @@ void fn_80287CF8(void) {
 
 }
 
+void fn_80287DE4(void) {
+
+}
+
