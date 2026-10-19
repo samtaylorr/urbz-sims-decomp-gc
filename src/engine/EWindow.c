@@ -82,6 +82,10 @@ f32 fn_80307AB4(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0x28);
 }
 
+f32 fn_80307ABC(void *arg0) {
+    return M2C_FIELD(arg0, f32 *, 0x20);
+}
+
 f32 fn_80307AC4(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0x24);
 }
