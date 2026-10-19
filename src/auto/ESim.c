@@ -84,3 +84,7 @@ void fn_8003FA80(void) {
 
 }
 
+s32 fn_8003FA84(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x530);
+}
+
