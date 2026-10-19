@@ -1650,6 +1650,10 @@ void fn_800EAF58(void) {
 
 }
 
+void fn_800EAF5C(void) {
+
+}
+
 s32 fn_800EB5B4(void) {
     return 0;
 }
