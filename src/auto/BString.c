@@ -4,6 +4,39 @@
 void fn_800D1F84(void);
 extern u8 lbl_8040B320[];
 extern u8 lbl_8040B368[];
+extern s32 lbl_80495A3C;
+extern void fn_800F1A60(s32, s32);
+extern void fn_800D2A40(s32 *);
+extern void fn_800D27B8(s32 *);
+void fn_800E3B38(s32 *self, s32 id, f32 time);
+void fn_800E3B80(s32 *self, s32 arg);
+extern f32 lbl_803D14C8[];
+extern f32 lbl_803D14CC[];
+extern f32 lbl_803D14D0[];
+extern s32 lbl_8041F7B0[];
+extern s32 lbl_80434A9C[];
+
+void fn_800D1908(s32 *self) {
+    fn_800D27B8(self);
+    if (self[6] != 0) {
+        fn_800E3B38(self, 0x26, lbl_803D14CC[0]);
+    }
+    if (self[7] != 0) {
+        fn_800E3B80(self, 1);
+    }
+}
+
+void fn_800D196C(s32 *self) {
+    fn_800D2A40(self);
+    if (self[6] != 0) {
+        lbl_8041F7B0[0] = 0;
+        fn_800E3B38(self, 0x27, lbl_803D14D0[0]);
+    }
+    if (self[7] != 0) {
+        fn_800E3B80(self, 1);
+    }
+}
+
 s32 *fn_800D1D9C(s32 *self, s32 arg1) {
     self[0] = arg1;
     self[1] = -1;
