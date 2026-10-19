@@ -41,6 +41,12 @@ void fn_800A7388(void *arg0, s32 *arg1) {
     *arg1 = (M2C_FIELD(arg0, u8 *, 0) << 0x18) | (M2C_FIELD(arg0, u8 *, 1) << 0x10) | (M2C_FIELD(arg0, u8 *, 2) << 8) | M2C_FIELD(arg0, u8 *, 3);
 }
 
+s32 *fn_800A73B8(s32 *arg0) {
+    arg0[0] = 0;
+    arg0[1] = 0;
+    return arg0;
+}
+
 extern void fn_802D20E8(void *);
 void fn_800A73CC(void *self, s32 flags) {
     if (flags & 1) {
