@@ -204,6 +204,12 @@ void *fn_8039BD64(void *self) {
     return self;
 }
 
+void fn_8039BECC(s32 *dst, s32 *src, s32 n) {
+    while (--n != -1) {
+        *dst++ = *src++;
+    }
+}
+
 void fn_8039C1B8(void) {
     fn_8030AD40();
 }
