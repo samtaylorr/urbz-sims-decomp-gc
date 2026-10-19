@@ -262,6 +262,10 @@ s32 fn_8007C44C(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x80);
 }
 
+s32 fn_8007C454(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x84);
+}
+
 s32 fn_8007C488(void) {
     return 0;
 }
