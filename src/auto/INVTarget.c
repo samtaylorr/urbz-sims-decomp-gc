@@ -248,6 +248,24 @@ void fn_8020ACCC(void) {
 
 }
 
+s32 fn_8020DD78(void *arg0) {
+    s32 var_r3;
+
+    if ((s32) M2C_FIELD(arg0, s32 *, 0x120) == 0x13) {
+        var_r3 = M2C_FIELD(arg0, s32 *, 0x110);
+        if (var_r3 == -1) {
+            return M2C_FIELD(arg0, s32 *, 0x114);
+        }
+        /* Duplicate return node #6. Try simplifying control flow for better match */
+        return var_r3;
+    }
+    var_r3 = M2C_FIELD(arg0, s32 *, 0x104);
+    if (var_r3 == -1) {
+        return M2C_FIELD(arg0, s32 *, 0x108);
+    }
+    return var_r3;
+}
+
 extern u8 lbl_803E75EC[];
 void fn_801DB18C(u8 *arg);
 void fn_8020DF04(void) {
