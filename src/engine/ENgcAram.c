@@ -23,6 +23,21 @@ void fn_80373E20(void) {
     lbl_80495260 = 0;
 }
 
+void fn_80373F24(void) {
+    M2C_UNK fn_80254684(s32);
+    extern s32 lbl_80496320;
+    extern s32 lbl_80495264;
+    s32 temp_r0;
+
+    if ((s32) lbl_80495264 != 0) {
+        temp_r0 = lbl_80495264 - 1;
+        lbl_80495264 = temp_r0;
+        if (temp_r0 == 0) {
+            fn_80254684(lbl_80496320);
+        }
+    }
+}
+
 void fn_80374000(void) {
     M2C_UNK fn_80373FAC(M2C_UNK, M2C_UNK);
     fn_80373FAC(1, 0xFFFF);
