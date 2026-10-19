@@ -66,6 +66,11 @@ s32 fn_8012A910(void) {
     return 0;
 }
 
+void fn_8012A918(s32 arg0, s32 arg1) {
+    M2C_UNK fn_800F6A38(s32, s32);
+    fn_800F6A38(arg1, arg0 + 0x2C);
+}
+
 s32 fn_8012A944(void) {
     return 1;
 }
