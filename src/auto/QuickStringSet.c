@@ -534,12 +534,12 @@ s32 fn_800FDAB8(void *arg0, s32 arg1) {
         id = fn_800FC36C(arg0);
         break;
     }
-    if (id != -1) {
-        obj = (*(u8 *(**)(u8 *, s32))(*(u8 **)lbl_8049665C + 0x3C))(lbl_8049665C + *(s16 *)(*(u8 **)lbl_8049665C + 0x38), id);
-        vt = *(u8 **)(obj + 0x10);
-        return (*(s32 (**)(u8 *, s32))(vt + 0x7C))(obj + *(s16 *)(vt + 0x78), 0x42484156);
+    if (id == -1) {
+        return 0;
     }
-    return 0;
+    obj = (*(u8 *(**)(u8 *, s32))(*(u8 **)lbl_8049665C + 0x3C))(lbl_8049665C + *(s16 *)(*(u8 **)lbl_8049665C + 0x38), id);
+    vt = *(u8 **)(obj + 0x10);
+    return (*(s32 (**)(u8 *, s32))(vt + 0x7C))(obj + *(s16 *)(vt + 0x78), 0x42484156);
 }
 
 s32 fn_800FDF38(s32 *self) {
