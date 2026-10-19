@@ -191,6 +191,10 @@ void *fn_80039DC8(u32 size, void *p) {
     return p;
 }
 
+void fn_80039E00(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0x378) = arg1;
+}
+
 extern void *fn_80039F7C(u32);
 extern void fn_8003A064(void *);
 void fn_80039E08(void) {
