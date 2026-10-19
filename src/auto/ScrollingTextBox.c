@@ -8,6 +8,11 @@ void fn_8009A93C(void *arg0, f32 farg0, f32 farg1) {
     M2C_FIELD(arg0, f32 *, 0x18) = farg1;
 }
 
+void fn_8009AAF8(void *arg0, f32 farg0, f32 farg1) {
+    M2C_FIELD(arg0, f32 *, 0x34) = farg0;
+    M2C_FIELD(arg0, f32 *, 0x38) = farg1;
+}
+
 void fn_8009B19C(s32 *self, s32 value) {
     *self = value;
 }
