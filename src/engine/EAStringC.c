@@ -185,6 +185,10 @@ void fn_802ACFF0(void) {
 
 }
 
+void fn_802ACFF4(void) {
+
+}
+
 void fn_802ACFF8(char *self) {
     extern void fn_802ADE44(void *);
     fn_802ADE44(self + 8);
