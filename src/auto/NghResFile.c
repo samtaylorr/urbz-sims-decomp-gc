@@ -65,6 +65,10 @@ s32 fn_8012AA6C(void) {
     return 0;
 }
 
+s32 fn_8012AA74(void) {
+    return 0x1C004;
+}
+
 void fn_8012AA90(void) {
 
 }
