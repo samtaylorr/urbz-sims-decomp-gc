@@ -3,6 +3,12 @@
 
 extern void fn_800ABE24(s32);
 extern void fn_802D20E8(s32);
+s32 *fn_800ABD80(s32 *arg0) {
+    arg0[0] = 0;
+    arg0[1] = 0;
+    return arg0;
+}
+
 void fn_800ABD94(s32 self, s32 flags) {
     fn_800ABE24(self);
     if (flags & 1) {
