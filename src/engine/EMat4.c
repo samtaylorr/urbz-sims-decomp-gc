@@ -198,6 +198,15 @@ void fn_802D0A8C(void) {
     fn_802D94C0(lbl_8044490C, 2);
 }
 
+void *fn_802D0AB8(void *unused) {
+    if (lbl_80496150 == 0) {
+        fn_802D0D30(lbl_8044490C, lbl_803F02C8);
+        lbl_80496150 = 1;
+        fn_80246D44(fn_802D0A8C);
+    }
+    return lbl_8044490C;
+}
+
 s32 fn_802D0F94(void) {
     return 0;
 }
