@@ -478,6 +478,10 @@ void fn_800DB81C(void) {
     fn_802D0F9C();
 }
 
+void fn_800DB83C(void) {
+
+}
+
 void fn_800DBC9C(void) {
     fn_800E3BC0();
 }
