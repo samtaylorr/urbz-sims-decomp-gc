@@ -2275,6 +2275,16 @@ void fn_800E6570(void) {
 
 }
 
+void fn_800E65D4(void *arg0, s32 arg1) {
+    void *temp_r11;
+    void *temp_r9;
+
+    fn_80048A48(&lbl_8041F754);
+    temp_r11 = M2C_FIELD(arg0, void **, 0x18);
+    temp_r9 = M2C_FIELD(temp_r11, void **, 0x44);
+    M2C_FIELD(temp_r9, M2C_UNK (**)(void *, s32), 0x1C)(temp_r11 + M2C_FIELD(temp_r9, s16 *, 0x18), arg1);
+}
+
 void fn_800E662C(void) {
 
 }
