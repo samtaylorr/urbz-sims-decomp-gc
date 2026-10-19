@@ -17,6 +17,12 @@ void fn_802FFB78(void) {
 
 }
 
+void fn_802FFBE0(s32 arg0) {
+    void fn_80338000(void *, s32, s32);
+    extern u8 lbl_8045BA40[];
+    fn_80338000(lbl_8045BA40, arg0, 4);
+}
+
 void fn_802FFC10(s32 arg0) {
     void fn_80338184(void *, s32);
     extern u8 lbl_8045BA40[];
