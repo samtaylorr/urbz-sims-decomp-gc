@@ -4,3 +4,8 @@
 s32 fn_802DFEEC(void) {
     return 0;
 }
+
+s32 fn_802DFF60(void) {
+    return 0;
+}
+
