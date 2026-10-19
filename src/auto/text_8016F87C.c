@@ -447,3 +447,8 @@ void fn_801763D0(M2C_UNK *arg0) {
     M2C_FIELD(temp_r9, M2C_UNK **, 8) = arg0;
 }
 
+void fn_80176500(void) {
+    M2C_UNK fn_80175B18(M2C_UNK, M2C_UNK);
+    fn_80175B18(1, 0xFFFF);
+}
+
