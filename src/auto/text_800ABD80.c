@@ -47,6 +47,11 @@ void fn_800AFD2C(void) {
 
 }
 
+void fn_800B01B4(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x4E0) = 3;
+    M2C_FIELD(arg0, s32 *, 0x14) = 4;
+}
+
 void fn_800B1DCC(void) {
 
 }
