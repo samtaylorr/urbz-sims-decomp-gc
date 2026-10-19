@@ -5372,7 +5372,7 @@ void *fn_803BAD8C(void *self) {
 
 void fn_803BADBC(u8 *p, s32 n) {
     extern void fn_803009E8(void *, s32);
-    while (n--) {
+    while (--n != -1) {
         fn_803009E8(p, 2);
         p += 0x6C;
     }
