@@ -35,3 +35,7 @@ s32 fn_800CFFE4(s32 *self) {
     return *self;
 }
 
+void fn_800CFFEC(void) {
+
+}
+
