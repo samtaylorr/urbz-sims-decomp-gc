@@ -70,6 +70,11 @@ s32 fn_8010BD50(void) {
     return 0;
 }
 
+void fn_8010BF98(s32 arg0, s32 arg1) {
+    M2C_UNK fn_8018D8DC(s32, s32, M2C_UNK);
+    fn_8018D8DC(arg1, arg0, 1);
+}
+
 s32 fn_8010C040(s32 *self) {
     return self[2];
 }
