@@ -141,6 +141,15 @@ s32 fn_802642B8(void) {
     return lbl_80495F08;
 }
 
+s32 fn_802643B8(s32 arg0) {
+    extern s32 lbl_80494A2C;
+    s32 temp_r0;
+
+    temp_r0 = lbl_80494A2C;
+    lbl_80494A2C = arg0;
+    return temp_r0;
+}
+
 s32 fn_802649F0(void) {
     return 0x80000000;
 }
