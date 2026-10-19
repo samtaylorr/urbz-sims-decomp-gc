@@ -31,4 +31,7 @@ misc/text_8038FC80.c:
 	.text       start:0x8038FC80 end:0x80390B40
 
 runtime/text_80390B40.c:
-	.text       start:0x80390B40 end:0x803C0D60
+	.text       start:0x80390B40 end:0x80398934
+
+libs/text_80398934.c:
+	.text       start:0x80398934 end:0x803C0D60
