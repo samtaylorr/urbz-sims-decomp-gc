@@ -29,6 +29,11 @@ void *fn_8036202C(u32 size, void *p) {
     return p;
 }
 
+void *fn_80362560(u32 size, void *p);
+void *fn_80362560(u32 size, void *p) {
+    return p;
+}
+
 void fn_802D2FD0(void);
 void fn_80363C8C(void) {
     fn_802D2FD0();
