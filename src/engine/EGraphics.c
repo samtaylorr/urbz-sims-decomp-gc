@@ -13,6 +13,7 @@ extern u8 lbl_803F0CD8[];
 extern u8 lbl_80493740[];
 extern u8 lbl_80493718[];
 extern const f32 lbl_803F0C8C[];
+typedef struct { f32 x, y, z; } EGraphicsVec3;
 extern const f32 lbl_803F0CA0[];
 extern const f32 lbl_803F0CB0[];
 void fn_802ED900(void) {
