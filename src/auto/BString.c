@@ -72,6 +72,17 @@ s32 *fn_800D1EA4(s32 *self, s32 arg1) {
     return self;
 }
 
+extern s32 lbl_8040B248[];
+s32 *fn_800D1EE4(s32 *self, s32 a) {
+    self[0] = a;
+    self[1] = -1;
+    self[2] = 0;
+    self[3] = -1;
+    self[4] = 1;
+    self[5] = (s32)lbl_8040B248;
+    return self;
+}
+
 void fn_800D3DF4(s32 *self, s32 flags) {
     self[5] = (s32)lbl_804093F8;
     if (flags & 1) {
