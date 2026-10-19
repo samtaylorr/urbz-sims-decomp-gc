@@ -36,6 +36,11 @@ s32 fn_80310AB8(void *arg0, f32 farg0) {
     return 1;
 }
 
+void fn_80310C98(void *arg0) {
+    M2C_UNK fn_8036FD3C(s32);
+    fn_8036FD3C(M2C_FIELD(arg0, s32 *, 0x1FC));
+}
+
 s32 fn_80310FE4(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x1AC);
 }
