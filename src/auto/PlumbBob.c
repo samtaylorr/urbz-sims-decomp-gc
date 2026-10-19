@@ -13,6 +13,11 @@ s32 fn_800671A0(void *arg0) {
     return 0;
 }
 
+void fn_80067A68(void *arg0) {
+    extern void fn_800675EC(void *, s32);
+    fn_800675EC(arg0, 1);
+}
+
 void fn_80068444(void) {
 
 }
