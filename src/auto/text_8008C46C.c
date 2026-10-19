@@ -87,6 +87,24 @@ void fn_800969B0(void) {
 
 }
 
+void fn_800969B4(s32 arg0, s32 arg1) {
+    M2C_UNK fn_80248784(s32, s32);
+    s32 var_r29;
+    s32 var_r30;
+    s32 var_r31;
+
+    var_r30 = arg0 + 0x258;
+    var_r31 = arg0 + 0x1D8;
+    var_r29 = 4;
+    do {
+        fn_80248784(var_r31, var_r30);
+        var_r30 += 0x80;
+        var_r31 += 0x80;
+        var_r29 -= 1;
+    } while (var_r29 != 0);
+    fn_80248784(arg0 + 0x3D8, arg1);
+}
+
 void fn_80096DA4(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x114) = arg1;
 }
