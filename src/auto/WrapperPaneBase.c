@@ -322,6 +322,17 @@ void fn_800CF648(s32 *self) {
     self[1] = 1;
 }
 
+void fn_800CF6B4(void *arg0, s32 arg1) {
+    f32 fn_8039AA70(s32, M2C_UNK);
+    void *temp_r29;
+
+    temp_r29 = M2C_FIELD(arg0, void **, 0x44);
+    M2C_FIELD(temp_r29, f32 *, 0) = fn_8039AA70(arg1, 0);
+    M2C_FIELD(temp_r29, f32 *, 4) = fn_8039AA70(arg1, 1);
+    M2C_FIELD(temp_r29, f32 *, 8) = fn_8039AA70(arg1, 2);
+    M2C_FIELD(temp_r29, f32 *, 0xC) = fn_8039AA70(arg1, 3);
+}
+
 s32 fn_800CF720(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x44);
 }
