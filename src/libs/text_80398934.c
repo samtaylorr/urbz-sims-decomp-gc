@@ -136,6 +136,10 @@ s32 fn_803AE06C(void) {
     return 0;
 }
 
+s32 fn_803B71F8(void) {
+    return 0;
+}
+
 void fn_802F05AC(void);
 void fn_803BAAB8(void) {
     fn_802F05AC();
