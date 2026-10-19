@@ -6,6 +6,11 @@ void *fn_802E0AD8(void) {
     return fn_802D1E4C;
 }
 
+extern u8 fn_802D1F94[];
+void *fn_802E0AE4(void) {
+    return fn_802D1F94;
+}
+
 s32 fn_802E0B20(void) {
     return 0;
 }
