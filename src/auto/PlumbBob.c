@@ -25,6 +25,10 @@ void fn_8007BB2C(void) {
     fn_8030861C();
 }
 
+s32 fn_8007C488(void) {
+    return 0;
+}
+
 void fn_8008A398(void) {
     fn_8008A3B8();
 }
