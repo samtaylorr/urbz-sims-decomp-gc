@@ -4843,6 +4843,10 @@ void fn_803BBDA8(void **self, s32 flags) {
     }
 }
 
+void fn_803BBDDC(void) {
+
+}
+
 void fn_803BBFD0(void *self) {
     ((s32 *)self)[0] = 0;
     ((s32 *)self)[2] = 0;
