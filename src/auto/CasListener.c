@@ -110,6 +110,10 @@ s32 fn_801BFD74(s32 *self) {
     return self[6];
 }
 
+s32 fn_801BFD7C(s32 *self) {
+    return self[7];
+}
+
 void fn_801C0120(void) {
 
 }
