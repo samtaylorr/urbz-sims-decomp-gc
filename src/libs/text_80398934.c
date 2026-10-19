@@ -342,6 +342,10 @@ void fn_803BE780(void) {
     fn_80310774();
 }
 
+s32 fn_803BEBC8(void) {
+    return 1;
+}
+
 s32 fn_803BEBD8(void) {
     return 0;
 }
