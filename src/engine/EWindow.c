@@ -212,6 +212,11 @@ void fn_80309970(s32 arg0) {
     fn_8030935C(arg0 + 0x9C);
 }
 
+void fn_80309994(s32 arg0) {
+    M2C_UNK fn_8030935C(s32);
+    fn_8030935C(arg0 + 0x9C);
+}
+
 s32 fn_803099E8(s32 arg0) {
     return arg0 + 0x80;
 }
