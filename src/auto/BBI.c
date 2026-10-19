@@ -210,6 +210,21 @@ s32 fn_80060670(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void fn_80060758(void *arg0, s32 arg1, s32 arg2) {
+    M2C_UNK fn_800607B8();
+    M2C_UNK fn_8005F54C(void *);
+    void *temp_r9;
+
+    M2C_FIELD(arg0, s32 *, 0x308) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x3A8) = arg2;
+    fn_800607B8();
+    fn_8005F54C(arg0);
+    if ((s32) M2C_FIELD(arg0, s32 *, 0x134) != 0) {
+        temp_r9 = M2C_FIELD(arg0, void **, 0);
+        M2C_FIELD(temp_r9, M2C_UNK (**)(void *), 0x54)(arg0 + M2C_FIELD(temp_r9, s16 *, 0x50));
+    }
+}
+
 void fn_80060C30(void) {
     fn_802D2FD0();
 }
