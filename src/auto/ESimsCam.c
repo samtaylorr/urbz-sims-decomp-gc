@@ -10,3 +10,7 @@ void fn_80014C94(void *arg0) {
 void fn_80014CC8(void) {
 }
 
+char *fn_80014CCC(char *self) {
+    return self + 0x428;
+}
+
