@@ -316,6 +316,10 @@ void fn_8039C26C(void) {
 
 }
 
+void fn_8039C270(void) {
+
+}
+
 void fn_8039C32C(void) {
     fn_8018EA6C();
 }
