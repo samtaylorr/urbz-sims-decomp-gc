@@ -252,3 +252,8 @@ void *fn_8037107C(u32 size, void *p) {
     return p;
 }
 
+void fn_803710B0(void) {
+    M2C_UNK fn_80370E68(M2C_UNK, M2C_UNK);
+    fn_80370E68(1, 0xFFFF);
+}
+
