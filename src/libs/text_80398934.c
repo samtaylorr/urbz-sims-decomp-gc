@@ -4595,6 +4595,10 @@ void fn_803B97F8(void) {
 
 }
 
+void fn_803B97FC(void) {
+
+}
+
 void fn_803B9800(s32 *self, s32 n) {
     while (--n != -1) {
         self++;
