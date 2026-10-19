@@ -374,6 +374,10 @@ void fn_800D857C(void) {
     fn_800E3D4C();
 }
 
+void fn_800D9AC8(void) {
+
+}
+
 void fn_800DAAC4(void) {
     fn_800D1F84();
 }
