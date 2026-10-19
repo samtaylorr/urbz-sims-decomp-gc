@@ -177,3 +177,7 @@ void fn_802F1A64(void) {
 
 }
 
+void fn_802F1A68(void) {
+
+}
+
