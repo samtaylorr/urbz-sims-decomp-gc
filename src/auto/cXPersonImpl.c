@@ -160,6 +160,10 @@ s32 fn_80186078(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x510);
 }
 
+s32 fn_80186080(void *arg0) {
+    return (s32) ((M2C_FIELD(arg0, s32 *, 0x4D8) - M2C_FIELD(arg0, s32 *, 0x4D4)) * 0xC18F9C19) >> 2;
+}
+
 void fn_801860A0(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x5F8) = arg1;
 }
