@@ -158,6 +158,10 @@ f32 fn_800CD9E0(void) {
     return M2C_FIELD(fn_800CD660(), f32 *, 0x54);
 }
 
+s32 fn_800CDA04(void) {
+    return M2C_FIELD(fn_800CD660(), s32 *, 0x6C);
+}
+
 void fn_800CD104(void);
 void fn_800CED30(void) {
     fn_800CD104();
