@@ -15,6 +15,10 @@ s32 fn_802E5498(s32 arg0) {
     return arg0 + 0x280;
 }
 
+s32 fn_802E54A0(s32 arg0) {
+    return arg0 + 0x290;
+}
+
 s32 fn_802E54B8(s32 arg0) {
     return arg0 + 0x1E0;
 }
