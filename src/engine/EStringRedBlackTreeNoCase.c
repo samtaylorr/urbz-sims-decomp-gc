@@ -5,6 +5,10 @@ s32 fn_80364F28(s32 *self) {
     return self[7];
 }
 
+void fn_8036727C(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0x40) = arg1;
+}
+
 void fn_803672B8(void) {
 
 }
