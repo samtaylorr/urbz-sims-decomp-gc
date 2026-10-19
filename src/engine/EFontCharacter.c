@@ -10,3 +10,7 @@ void fn_8036C038(void) {
     fn_802D2FD0();
 }
 
+void fn_8036C31C(void) {
+    fn_802D2FD0();
+}
+
