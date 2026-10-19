@@ -405,6 +405,7 @@ config.libs = [
             Object(NonMatching, "engine/EResourceLoaderImpl.c"),
             Object(NonMatching, "engine/text_8031E810.c"),
             Object(NonMatching, "engine/EResPrefetch.c"),
+            Object(NonMatching, "engine/EResPrefetchFile.c"),
             Object(NonMatching, "misc/text_8038FC80.c"),
             Object(NonMatching, "libs/text_80398934.c"),
         ],
