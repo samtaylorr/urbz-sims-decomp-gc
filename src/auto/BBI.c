@@ -5,6 +5,15 @@ s32 fn_80059AC4(s32 *self) {
     return self[1];
 }
 
+extern void fn_8005A038(s32);
+extern void fn_802D20E8(s32);
+void fn_80059BF4(s32 self, s32 flags) {
+    fn_8005A038(self);
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_8005B368(void) {
 
 }
