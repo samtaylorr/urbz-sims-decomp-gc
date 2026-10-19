@@ -88,6 +88,10 @@ void fn_802F176C(void) {
 
 }
 
+void fn_802F1770(void) {
+
+}
+
 s32 fn_802F177C(void) {
     return 1;
 }
