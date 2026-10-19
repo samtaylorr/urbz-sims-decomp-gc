@@ -70,6 +70,10 @@ s16 fn_8016D328(void *arg0) {
     return M2C_FIELD(M2C_FIELD(arg0, void **, 0x38), s16 *, 0x96);
 }
 
+s16 fn_8016D45C(void *arg0) {
+    return M2C_FIELD(M2C_FIELD(arg0, void **, 0x38), s16 *, 0x9E);
+}
+
 extern s32 lbl_80495C88;
 void fn_8016E5DC(void) {
     fn_800F1A60((s32)&lbl_80495C88, 2);
