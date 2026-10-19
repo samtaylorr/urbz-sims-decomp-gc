@@ -37,6 +37,13 @@ void fn_8035BDD0(void) {
     }
 }
 
+extern s32 lbl_804951D4;
+void fn_8035BDE8(void) {
+    if (lbl_804951D4 != 0) {
+        lbl_804951D4 = 0;
+    }
+}
+
 void fn_8035BED8(void) {
 
 }
