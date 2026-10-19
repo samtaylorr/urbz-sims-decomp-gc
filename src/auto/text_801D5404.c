@@ -4,3 +4,8 @@
 s32 fn_801D5650(void) {
     return 0;
 }
+
+s32 fn_801D5658(void) {
+    return 0;
+}
+
