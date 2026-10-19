@@ -140,6 +140,10 @@ s32 *fn_800D3C68(s32 *self, s32 arg1) {
     return self;
 }
 
+s32 fn_800D3CDC(s32 *self) {
+    return self[8] == 0 && self[11] != 0;
+}
+
 void fn_800D3D04(s32 *self) {
     fn_800E9514(self[2]);
 }
