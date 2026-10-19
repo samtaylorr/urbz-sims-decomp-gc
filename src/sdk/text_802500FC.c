@@ -280,6 +280,11 @@ s32 fn_8026BE88(void) {
     return (((u32) *(u32 *)0xCC006C00 >> 6U) & 1) ^ 1;
 }
 
+void fn_8026BEC4(void) {
+    M2C_UNK fn_8026BEE4();
+    fn_8026BEE4();
+}
+
 s32 fn_8026BFB8(void) {
     return ((u32) *(u32 *)0xCC006C00 >> 1U) & 1;
 }
