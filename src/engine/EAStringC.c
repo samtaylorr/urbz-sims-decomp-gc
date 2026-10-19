@@ -508,6 +508,10 @@ void fn_802B723C(void) {
 
 }
 
+s32 fn_802B7240(s32 arg0) {
+    return arg0 - 0x10;
+}
+
 void fn_802B7248(void) {
 
 }
