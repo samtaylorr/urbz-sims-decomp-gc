@@ -47,6 +47,11 @@ s32 fn_8030417C(void *arg0) {
     return ((u32) (M2C_FIELD(temp_r11, s32 *, 0x74) | M2C_FIELD(temp_r11, s32 *, 0xB4)) >> 5U) & 1;
 }
 
+void fn_803042D4(s32 arg0, s32 arg1) {
+    M2C_UNK fn_802E2288(s32, s32, s32, s32);
+    fn_802E2288(arg1, arg0, arg0 + 0xC, arg0 + 0x18);
+}
+
 void fn_8030582C(s32 arg0, s32 arg1) {
     s32 var_ctr;
 
