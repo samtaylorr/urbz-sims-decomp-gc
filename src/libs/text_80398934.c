@@ -165,6 +165,10 @@ s32 fn_8039AD74(s32 *self) {
     return self[2];
 }
 
+void fn_8039AD88(void) {
+
+}
+
 void fn_802C5484(void);
 void fn_8039B5F8(void) {
     fn_802C5484();
