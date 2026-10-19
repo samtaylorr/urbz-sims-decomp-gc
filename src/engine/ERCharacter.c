@@ -97,3 +97,7 @@ void *fn_8031BD70(u32 size, void *p) {
     return p;
 }
 
+s32 fn_8031BDA4(void *arg0, s32 arg1) {
+    return M2C_FIELD(arg0, s32 *, 0x20) + (arg1 * 0xB8);
+}
+
