@@ -300,6 +300,10 @@ s32 fn_801760B8(void) {
     return lbl_80495C90;
 }
 
+s32 fn_80176288(s32 arg0) {
+    return arg0 + 0x1E0;
+}
+
 s32 fn_801762BC(void) {
     return 1;
 }
