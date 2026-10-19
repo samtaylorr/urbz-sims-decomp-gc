@@ -634,6 +634,10 @@ void fn_803A3F50(void) {
     fn_8018EA6C();
 }
 
+s32 fn_803A3FA8(s32 *self) {
+    return self[2];
+}
+
 void fn_803A5FA8(void) {
     fn_8018EA6C();
 }
