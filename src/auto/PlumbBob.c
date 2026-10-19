@@ -330,6 +330,10 @@ void fn_80089604(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
 
+void fn_80089638(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0xBC) = arg1;
+}
+
 f32 fn_80089648(void) {
     extern f32 lbl_804966A0;
     return lbl_804966A0;
