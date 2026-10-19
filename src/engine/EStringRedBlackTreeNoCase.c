@@ -91,6 +91,19 @@ s32 fn_80367610(void *arg0) {
     return (M2C_FIELD(arg0, s32 *, 0x18) * M2C_FIELD(arg0, s16 *, 0x1C)) + 0x23;
 }
 
+s32 fn_80368E14(s32 arg0, s32 arg1) {
+    s32 fn_802D3EE8(s32, s32);
+    s32 fn_80368E80();
+    s32 fn_80369088(s32, s32, s32, M2C_UNK);
+    s32 temp_r3;
+
+    temp_r3 = fn_80368E80();
+    if ((temp_r3 != 0) && (fn_802D3EE8(temp_r3 + 0x1C, arg1) == 0)) {
+        return temp_r3 + 0x18;
+    }
+    return fn_80369088(arg0, temp_r3, arg1, 0) + 0x18;
+}
+
 s32 fn_803698D8(void **arg0) {
     s32 var_r9;
     void *var_r3;
