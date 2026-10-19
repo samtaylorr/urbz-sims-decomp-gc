@@ -17,6 +17,23 @@ void fn_802FFB78(void) {
 
 }
 
+void fn_802FFB7C(s32 arg0, s32 arg1) {
+    void fn_802CA9A8(void *);
+    void fn_802CAA00(void *, s32);
+    extern u8 lbl_80454A38[];
+    extern s32 lbl_804961E4[2];
+    if (arg1 == 0xFFFF) {
+        if (arg0 != 0) {
+            s32 *p = lbl_804961E4;
+            p[1] = 0;
+            p[0] = 0;
+            fn_802CA9A8(lbl_80454A38);
+        } else {
+            fn_802CAA00(lbl_80454A38, 2);
+        }
+    }
+}
+
 void fn_802FFBE0(s32 arg0) {
     void fn_80338000(void *, s32, s32);
     extern u8 lbl_8045BA40[];
