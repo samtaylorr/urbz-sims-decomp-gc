@@ -110,6 +110,11 @@ void fn_80361F28(void) {
 
 }
 
+void fn_80361FCC(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    void fn_80363220(s32, s32, s32, s32);
+    fn_80363220(arg1, arg2, arg3, arg4);
+}
+
 void fn_80361FFC(s32 arg0) {
     void fn_80338000(void *, s32, s32);
     extern u8 lbl_8045BAE8[];
