@@ -48,6 +48,11 @@ void fn_801EA748(void) {
     }
 }
 
+void fn_801F02C0(void *arg0, s32 arg1) {
+    M2C_UNK fn_80248784(s32, s32);
+    fn_80248784(arg1, M2C_FIELD(arg0, s32 *, 0xC));
+}
+
 void fn_801F0490(void) {
 
 }
