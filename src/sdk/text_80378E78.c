@@ -231,6 +231,13 @@ void fn_80383B44(void *arg0, s16 arg1) {
     fn_80254684();
 }
 
+void fn_80384068(void *arg0, s16 arg1) {
+    fn_8025465C();
+    M2C_FIELD(arg0, s16 *, 0x19E) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x1C) = (s32) (M2C_FIELD(arg0, s32 *, 0x1C) | 0x400);
+    fn_80254684();
+}
+
 void fn_80384798(s32 arg0) {
     lbl_80496440 = arg0;
 }
