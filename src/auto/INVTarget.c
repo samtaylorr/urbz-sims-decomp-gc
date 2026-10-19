@@ -214,6 +214,11 @@ void fn_8020512C(void) {
 
 }
 
+void fn_802055C8(void *arg0, s32 arg1) {
+    s8 fn_80246E00(s32);
+    M2C_FIELD(arg0, s8 *, 0x8C1) = fn_80246E00(arg1);
+}
+
 void fn_802059A8(void) {
 
 }
