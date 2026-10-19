@@ -4,6 +4,17 @@
 struct BBI_Handle { s32 v; };
 struct BBI_Vec3 { s32 a; s32 b; s32 c; };
 
+void *fn_80059918(void *arg0) {
+    extern u8 lbl_80408398[];
+    M2C_FIELD(arg0, void **, 8) = lbl_80408398;
+    M2C_FIELD(arg0, s8 *, 0) = 0;
+    M2C_FIELD(arg0, s8 *, 1) = 0;
+    M2C_FIELD(arg0, s8 *, 2) = 0;
+    M2C_FIELD(arg0, s8 *, 3) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    return arg0;
+}
+
 void fn_80059948(void *arg0, s32 arg1) {
     extern u8 lbl_80408398[];
     void fn_802D20E8(void *);
