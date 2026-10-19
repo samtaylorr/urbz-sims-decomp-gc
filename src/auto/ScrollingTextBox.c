@@ -3,6 +3,11 @@
 
 extern void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
+void fn_8009A93C(void *arg0, f32 farg0, f32 farg1) {
+    M2C_FIELD(arg0, f32 *, 0x14) = farg0;
+    M2C_FIELD(arg0, f32 *, 0x18) = farg1;
+}
+
 void fn_8009B19C(s32 *self, s32 value) {
     *self = value;
 }
