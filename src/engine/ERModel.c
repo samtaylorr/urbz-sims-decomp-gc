@@ -28,6 +28,10 @@ void fn_80329838(void) {
 
 }
 
+void fn_8032B9E4(void) {
+
+}
+
 void fn_8032CD5C(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
