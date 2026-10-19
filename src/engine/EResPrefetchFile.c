@@ -58,6 +58,16 @@ u16 fn_803202F8(void) {
     return lbl_804938BE[0];
 }
 
+extern void fn_802D6A90(void *, void *, void *, void *, s32, void *, void *);
+extern void fn_80320204(void);
+extern void fn_8032022C(void);
+extern void fn_80320258(void);
+extern u8 lbl_803F2F20[];
+extern u8 lbl_80493858[];
+void fn_80320304(s32 arg0) {
+    fn_802D6A90(lbl_804938A8, fn_80320204, fn_8032022C, fn_80320258, arg0, lbl_803F2F20, lbl_80493858);
+}
+
 void fn_802D2430(void);
 void fn_80320358(void) {
     fn_802D2430();
