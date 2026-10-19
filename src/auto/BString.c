@@ -2286,6 +2286,21 @@ void fn_800E5104(void *arg0) {
     fn_800490B0(&lbl_8041F754);
 }
 
+void fn_800E54D0(void *arg0) {
+    M2C_UNK fn_800CEE00(void *);
+    void *temp_r11;
+    void *temp_r9;
+
+    fn_800CEE00(M2C_FIELD(arg0, void **, 0x18));
+    temp_r11 = M2C_FIELD(arg0, void **, 0x18);
+    if (temp_r11 != NULL) {
+        temp_r9 = M2C_FIELD(temp_r11, void **, 0x44);
+        M2C_FIELD(temp_r9, M2C_UNK (**)(void *, M2C_UNK), 0xC)(temp_r11 + M2C_FIELD(temp_r9, s16 *, 8), 3);
+    }
+    M2C_FIELD((int)arg0, void **, 0x18) = NULL;
+    M2C_FIELD(arg0, s32 *, 0x1C) = 0;
+}
+
 void fn_800E5B8C(void) {
 
 }
