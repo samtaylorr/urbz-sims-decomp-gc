@@ -4250,6 +4250,12 @@ s32 fn_803B95C0(void) {
     return 1;
 }
 
+extern void fn_8039A514(void *);
+void *fn_803B95CC(void *self) {
+    fn_8039A514(self);
+    return self;
+}
+
 void fn_803B9750(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
