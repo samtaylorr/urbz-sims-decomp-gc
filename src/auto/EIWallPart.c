@@ -156,6 +156,21 @@ void fn_800364C0(void *arg0, s32 arg1, s32 arg2) {
     }
 }
 
+void fn_800382D0(s32 arg0, void **arg1) {
+    M2C_UNK fn_800381A4(s32, s32, s32);
+    s32 temp_r4;
+    void *var_r31;
+
+    var_r31 = *arg1;
+    if (var_r31 != NULL) {
+        do {
+            temp_r4 = M2C_FIELD(var_r31, s32 *, 0);
+            fn_800381A4(arg0, temp_r4 + 8, temp_r4 + 0x14);
+            var_r31 = M2C_FIELD(var_r31, void **, 8);
+        } while (var_r31 != NULL);
+    }
+}
+
 extern void *fn_80032AE0(u32);
 extern void fn_800331DC(void *);
 void *fn_80039DC8(u32 size, void *p);
