@@ -7,6 +7,76 @@ void *fn_801C9904(void *self) {
     return self;
 }
 
+void fn_801C9DC0(void *arg0, s32 arg1, s8 arg2) {
+    switch (arg1) {                                 /* irregular */
+    case 3:
+        M2C_FIELD(arg0, s8 *, 0x89) = arg2;
+        return;
+    case 4:
+        M2C_FIELD(arg0, s8 *, 0x8B) = arg2;
+        return;
+    case 5:
+        M2C_FIELD(arg0, s8 *, 0x8C) = arg2;
+        return;
+    case 6:
+        M2C_FIELD(arg0, s8 *, 0x8D) = arg2;
+        return;
+    case 1:
+        M2C_FIELD(arg0, s8 *, 0x87) = arg2;
+        return;
+    case 2:
+        M2C_FIELD(arg0, s8 *, 0x88) = arg2;
+        return;
+    case 7:
+        M2C_FIELD(arg0, s8 *, 0x8E) = arg2;
+        return;
+    case 0:
+        M2C_FIELD(arg0, s8 *, 0x86) = arg2;
+        return;
+    case 8:
+        M2C_FIELD(arg0, s8 *, 0x8F) = arg2;
+        return;
+    case 9:
+        M2C_FIELD(arg0, s8 *, 0x90) = arg2;
+        return;
+    case 10:
+        M2C_FIELD(arg0, s8 *, 0x91) = arg2;
+        return;
+    case 11:
+        M2C_FIELD(arg0, s8 *, 0x92) = arg2;
+        return;
+    case 12:
+        M2C_FIELD(arg0, s8 *, 0x93) = arg2;
+        return;
+    case 13:
+        M2C_FIELD(arg0, s8 *, 0x94) = arg2;
+        return;
+    case 14:
+        M2C_FIELD(arg0, s8 *, 0xA1) = arg2;
+        return;
+    case 15:
+        M2C_FIELD(arg0, s8 *, 0xA2) = arg2;
+        return;
+    case 18:
+        M2C_FIELD(arg0, s8 *, 0xA5) = arg2;
+        return;
+    case 16:
+        M2C_FIELD(arg0, s8 *, 0xA3) = arg2;
+        return;
+    case 17:
+        M2C_FIELD(arg0, s8 *, 0xA4) = arg2;
+        return;
+    case 21:
+    case 19:
+        M2C_FIELD(arg0, s8 *, 0xA6) = arg2;
+        return;
+    case 20:
+    case 22:
+        M2C_FIELD(arg0, s8 *, 0xA7) = arg2;
+        return;
+    }
+}
+
 s32 fn_801CB188(s32 *self) {
     return self[1];
 }
