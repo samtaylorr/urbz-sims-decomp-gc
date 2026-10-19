@@ -179,6 +179,24 @@ void fn_801DC128(void **arg0, s32 arg1) {
     }
 }
 
+void fn_801DC18C(void **arg0, s32 arg1) {
+    void *temp_r31;
+    void *temp_r9;
+    void *var_r3;
+
+    var_r3 = *arg0;
+    if (var_r3 != NULL) {
+        do {
+            temp_r31 = M2C_FIELD(var_r3, void **, 4);
+            if ((s32) M2C_FIELD(var_r3, s32 *, 8) <= 0x32) {
+                temp_r9 = M2C_FIELD(var_r3, void **, 0xC);
+                M2C_FIELD(temp_r9, M2C_UNK (**)(void *, s32), 0xC)(temp_r9, arg1);
+            }
+            var_r3 = temp_r31;
+        } while (var_r3 != NULL);
+    }
+}
+
 s32 fn_801DC1F0(void) {
     s32 fn_801DBD24();
     M2C_UNK fn_802D1FC8(M2C_UNK);
