@@ -1601,6 +1601,10 @@ void fn_800E4A10(void) {
 
 }
 
+s32 fn_800E4A14(s32 *self) {
+    return self[6];
+}
+
 s32 fn_800E4A78(u8 *self) {
     return *(s32 *)(self + 0x20);
 }
