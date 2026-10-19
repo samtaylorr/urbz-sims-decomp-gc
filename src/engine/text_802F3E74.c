@@ -37,6 +37,13 @@ s32 fn_802F56AC(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x124);
 }
 
+void fn_802F5830(void) {
+    M2C_UNK fn_802F3F14();
+    M2C_UNK fn_802F59A4(M2C_UNK);
+    fn_802F59A4(0x300);
+    fn_802F3F14();
+}
+
 void fn_802F58A8(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
