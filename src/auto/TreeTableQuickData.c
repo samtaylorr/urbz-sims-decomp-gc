@@ -48,3 +48,7 @@ s32 fn_801B380C(void) {
     return 0;
 }
 
+s32 fn_801B3E30(void) {
+    return 0;
+}
+
