@@ -74,6 +74,10 @@ s32 fn_80078160(void) {
     return 0;
 }
 
+void fn_8007B35C(void *arg0) {
+    fn_802D1A00(fn_802D0AB8(arg0), arg0);
+}
+
 void fn_8007BB0C(void) {
     fn_80308518();
 }
