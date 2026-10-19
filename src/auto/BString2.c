@@ -26,3 +26,8 @@ void fn_800F3BB4(void) {
     fn_800F134C();
 }
 
+void fn_800F3938(void);
+void fn_800F3C2C(void) {
+    fn_800F3938();
+}
+
