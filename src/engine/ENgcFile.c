@@ -12,6 +12,24 @@ void fn_802DFD50(void *arg0) {
     }
 }
 
+s32 fn_802DFDA4(s32 arg0, s32 arg1, s32 arg2) {
+    s32 fn_802DFE00(s32, s32, s32);
+    s32 temp_r3;
+    s32 var_r30;
+    s32 var_r31;
+
+    var_r30 = arg1;
+    var_r31 = arg2;
+    if (arg2 != 0) {
+        do {
+            temp_r3 = fn_802DFE00(arg0, var_r30, var_r31);
+            var_r30 += temp_r3;
+            var_r31 -= temp_r3;
+        } while (var_r31 != 0);
+    }
+    return arg2;
+}
+
 s32 fn_802DFEEC(void) {
     return 0;
 }
