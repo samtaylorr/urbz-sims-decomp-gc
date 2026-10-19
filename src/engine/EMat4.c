@@ -22,6 +22,10 @@ void fn_802CB544(void) {
 
 }
 
+s32 fn_802CB548(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x40);
+}
+
 s32 fn_802CB550(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x44);
 }
