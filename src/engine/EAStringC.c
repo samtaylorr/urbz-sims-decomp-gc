@@ -1304,6 +1304,14 @@ s32 fn_802BB2FC(s32 arg0) {
     return r;
 }
 
+void fn_802BB344(s32 arg0, s32 arg1) {
+    extern void (*lbl_80443318[])(s32, s32);
+    extern void fn_802A1EF0(void);
+
+    fn_802A1EF0();
+    lbl_80443318[0](arg0 - 8, arg1 + 8);
+}
+
 s32 fn_802BB38C(void) {
     return 0;
 }
