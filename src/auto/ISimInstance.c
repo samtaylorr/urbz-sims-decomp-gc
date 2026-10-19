@@ -146,6 +146,10 @@ void fn_80066D44(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
 
+void fn_80066D78(void) {
+
+}
+
 s32 fn_80066D90(void) {
     return 0;
 }
