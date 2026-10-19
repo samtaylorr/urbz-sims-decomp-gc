@@ -78,6 +78,10 @@ s32 fn_802B46AC(void) {
     return 0;
 }
 
+s32 fn_802B4E80(void) {
+    return lbl_80496130;
+}
+
 s32 fn_802B6F38(void) {
     return 0;
 }
