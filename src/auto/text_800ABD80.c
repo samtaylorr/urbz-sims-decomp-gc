@@ -58,6 +58,10 @@ s32 fn_800B2F04(s32 arg0) {
     return arg0 + 0x10;
 }
 
+s32 fn_800B2F0C(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x14);
+}
+
 s32 fn_800B2F1C(s32 arg0) {
     return arg0 + 0x18;
 }
