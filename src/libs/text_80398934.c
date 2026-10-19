@@ -40,19 +40,19 @@ void fn_80398CD8(void (*cb)(void)) {
 }
 
 void *fn_80399C38(void *self, s32 *arg1) {
-    VtblEntry *vt;
     s32 n;
     s32 i;
     s32 tmp;
 
-    vt = *(VtblEntry **)((char *)self + 0x18);
     n = arg1[1];
     tmp = n;
-    ((void (*)(void *, void *, s32))vt[7].pfn)((char *)self + vt[7].delta, &tmp, 4);
+    {
+        VtblEntry *vt = *(VtblEntry **)((char *)self + 0x18);
+        ((void (*)(void *, void *, s32))vt[7].pfn)((char *)self + vt[7].delta, &tmp, 4);
+    }
     for (i = 0; i < n; i++) {
-        s32 v;
-        vt = *(VtblEntry **)((char *)self + 0x18);
-        v = ((s32 *)arg1[0])[i];
+        s32 v = ((s32 *)arg1[0])[i];
+        VtblEntry *vt = *(VtblEntry **)((char *)self + 0x18);
         ((void (*)(void *, void *, s32))vt[7].pfn)((char *)self + vt[7].delta, &v, 4);
     }
     return self;
@@ -4448,6 +4448,13 @@ void *fn_803BAD8C(void *self) {
 }
 
 void fn_803BAF00(void *self) {
+    ((s32 *)self)[0] = 0;
+    ((s32 *)self)[2] = 0;
+    ((s32 *)self)[1] = 0;
+}
+
+extern void fn_803BB38C(void *);
+void fn_803BB38C(void *self) {
     ((s32 *)self)[0] = 0;
     ((s32 *)self)[2] = 0;
     ((s32 *)self)[1] = 0;
