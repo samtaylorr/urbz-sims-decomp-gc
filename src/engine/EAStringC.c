@@ -177,6 +177,10 @@ s32 fn_802ACF08(void) {
     return 0;
 }
 
+void fn_802ACF10(void) {
+
+}
+
 void fn_802ACFF8(char *self) {
     extern void fn_802ADE44(void *);
     fn_802ADE44(self + 8);
