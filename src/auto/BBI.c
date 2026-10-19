@@ -101,6 +101,11 @@ void fn_80063980(void) {
     fn_8006177C();
 }
 
+extern u8 lbl_80491EE4[];
+void *fn_80063A04(void) {
+    return lbl_80491EE4;
+}
+
 void fn_80063AA0(void) {
     fn_802D2430();
 }
