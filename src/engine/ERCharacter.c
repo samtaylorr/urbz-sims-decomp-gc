@@ -113,6 +113,12 @@ void *fn_8031BD70(u32 size, void *p) {
     return p;
 }
 
+void fn_8031BD78(s32 arg0) {
+    void fn_80338184(void *, s32);
+    extern u8 lbl_8045B390[];
+    fn_80338184(lbl_8045B390, arg0);
+}
+
 s32 fn_8031BDA4(void *arg0, s32 arg1) {
     return M2C_FIELD(arg0, s32 *, 0x20) + (arg1 * 0xB8);
 }
