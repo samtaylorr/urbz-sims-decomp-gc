@@ -129,6 +129,11 @@ s32 fn_80311B70(void *arg0) {
     return ((u32) M2C_FIELD(arg0, u32 *, 4) >> 1U) & 1;
 }
 
+void fn_80311B7C(void *arg0, s32 arg1, s32 arg2) {
+    s32 a = fn_80311A4C(arg0, arg2);
+    fn_80311404(arg0, arg1, a, fn_80311A4C(arg0, arg2), 0);
+}
+
 void fn_8031254C(void *arg0, void *arg1) {
     void *temp_r10;
     void *temp_r9;
