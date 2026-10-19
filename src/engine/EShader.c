@@ -21,6 +21,10 @@ void fn_802FFC3C(void) {
 
 }
 
+s32 fn_802FFC40(s32 arg0) {
+    return arg0 + 0x10;
+}
+
 s32 fn_802FFC80(s32 *self) {
     return self[1];
 }
