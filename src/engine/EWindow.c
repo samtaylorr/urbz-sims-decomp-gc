@@ -252,6 +252,13 @@ void fn_8030A738(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
 
+void fn_8030A76C(s32 arg0, s32 arg1) {
+    M2C_UNK fn_8030A4A8();
+    M2C_UNK fn_8030A460(s32, s32);
+    fn_8030A4A8();
+    fn_8030A460(arg0, arg1);
+}
+
 void fn_8030A7F0(void *arg0, void *arg1, void *arg2) {
     M2C_FIELD(arg2, f32 *, 0) = (f32) ((M2C_FIELD(arg1, f32 *, 0) * M2C_FIELD(arg0, f32 *, 0)) + M2C_FIELD(arg0, f32 *, 0x30));
     M2C_FIELD(arg2, f32 *, 4) = (f32) ((M2C_FIELD(arg1, f32 *, 4) * M2C_FIELD(arg0, f32 *, 0x14)) + M2C_FIELD(arg0, f32 *, 0x34));
