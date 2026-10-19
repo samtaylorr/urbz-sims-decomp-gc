@@ -44,6 +44,14 @@ void fn_80334B04(void *arg0, f32 farg0) {
     M2C_FIELD(arg0, f32 *, 0xA8) = farg0;
 }
 
+void fn_80334B94(s32 arg0, s32 arg1) {
+    s32 fn_80334B0C();
+    M2C_UNK fn_8033789C(s32, s32);
+    if (((s32) lbl_80494F5C != 0) || (fn_80334B0C() != 0)) {
+        fn_8033789C(arg0, arg1);
+    }
+}
+
 void fn_80334EC4(void (*cb)(void)) {
     lbl_80494F5C = cb;
 }
