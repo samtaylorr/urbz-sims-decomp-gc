@@ -370,6 +370,10 @@ s32 fn_803BEBFC(void) {
     return 1;
 }
 
+s32 fn_803BEC04(void) {
+    return 1;
+}
+
 s32 fn_803BEC0C(void) {
     return 0;
 }
