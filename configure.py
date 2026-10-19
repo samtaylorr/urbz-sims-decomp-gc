@@ -449,6 +449,7 @@ config.libs = [
             Object(NonMatching, "engine/text_8036D7C8.c"),
             Object(NonMatching, "engine/ETexture.c"),
             Object(NonMatching, "engine/text_803710DC.c"),
+            Object(NonMatching, "engine/text_803715F8.c"),
             Object(NonMatching, "misc/text_8038FC80.c"),
             Object(NonMatching, "libs/text_80398934.c"),
         ],
