@@ -6,6 +6,10 @@ void fn_80306D28(void) {
 
 }
 
+void fn_80307994(void) {
+
+}
+
 s32 fn_80307998(void) {
     return 0;
 }
