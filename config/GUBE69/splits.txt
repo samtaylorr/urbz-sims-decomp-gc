@@ -424,7 +424,10 @@ engine/text_80338CB0.c:
 	.text       start:0x80338CB0 end:0x80338E40
 
 engine/text_80338E40.c:
-	.text       start:0x80338E40 end:0x80378E78
+	.text       start:0x80338E40 end:0x80338FD0
+
+engine/EyeToyManager.c:
+	.text       start:0x80338FD0 end:0x80378E78
 
 sdk/text_80378E78.c:
 	.text       start:0x80378E78 end:0x8038FC80
