@@ -25,6 +25,13 @@ s32 fn_800A6154(void) {
     return 0;
 }
 
+extern void fn_802D20E8(void *);
+void fn_800A73CC(void *self, s32 flags) {
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_800A96DC(f32 x) {
     lbl_80494320 = x;
     if (x == lbl_803CE168[0]) {
@@ -68,8 +75,9 @@ extern void fn_800A9980(void *);
 extern s32 lbl_8045B438[];
 extern void fn_803349A8(void *);
 void fn_800A9BAC(void *self, s32 arg1) {
+    s32 *p = lbl_8045B438;
     *(s32 *)((char *)self + 0x108) = arg1;
-    fn_803349A8(lbl_8045B438);
+    fn_803349A8(p);
 }
 
 s32 fn_800A9C74(void) {
