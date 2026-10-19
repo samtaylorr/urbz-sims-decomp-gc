@@ -6,6 +6,14 @@ void fn_8030EF10(void) {
     fn_8030DA64();
 }
 
+void fn_8030FA1C(s32 *arg0, s32 arg1, s32 arg2) {
+    if (arg2 != 0) {
+        *arg0 |= arg1;
+        return;
+    }
+    *arg0 &= ~arg1;
+}
+
 s32 fn_8030FA44(void *arg0) {
     return M2C_FIELD(M2C_FIELD(arg0, void **, 4), s32 *, 0x84);
 }
