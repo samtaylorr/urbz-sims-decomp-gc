@@ -55,6 +55,11 @@ void fn_802EEDCC(void *arg0, f32 *arg1, f32 *arg2, f32 *arg3, f32 *arg4) {
     *arg4 = M2C_FIELD(arg0, f32 *, 0x2FC);
 }
 
+void fn_802EEE2C(void *arg0, EGraphicsVec3 *arg1, EGraphicsVec3 *arg2) {
+    *arg1 = M2C_FIELD(arg0, EGraphicsVec3 *, 0x300);
+    *arg2 = M2C_FIELD(arg0, EGraphicsVec3 *, 0x30C);
+}
+
 void fn_802EEE68(void) {
 
 }
