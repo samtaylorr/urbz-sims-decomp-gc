@@ -414,6 +414,7 @@ config.libs = [
             Object(NonMatching, "engine/HDDThread.c"),
             Object(NonMatching, "engine/text_80332DE0.c"),
             Object(NonMatching, "engine/text_80332F70.c"),
+            Object(NonMatching, "engine/text_803331B8.c"),
             Object(NonMatching, "misc/text_8038FC80.c"),
             Object(NonMatching, "libs/text_80398934.c"),
         ],
