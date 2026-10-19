@@ -191,6 +191,10 @@ void fn_8031244C(void *arg0, s32 arg1, s32 arg2) {
     fn_803112CC(arg0, fn_80311B2C(arg0, arg2), 1, arg1);
 }
 
+void fn_80312494(void *arg0, s32 arg1, s32 arg2) {
+    fn_80311310(arg0, fn_80311B2C(arg0, arg2), 1, arg1);
+}
+
 void fn_8031254C(void *arg0, void *arg1) {
     void *temp_r10;
     void *temp_r9;
