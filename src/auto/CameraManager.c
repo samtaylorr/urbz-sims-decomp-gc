@@ -4,6 +4,12 @@
 extern void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
 extern void fn_802D20E8(void *);
+s32 *fn_80014DCC(s32 *arg0) {
+    arg0[0] = 0;
+    arg0[1] = 0;
+    return arg0;
+}
+
 void fn_80014DE0(void *self, s32 flags) {
     if (flags & 1) {
         fn_802D20E8(self);
@@ -16,6 +22,24 @@ void fn_80014E08(void) {
 
 void fn_80014E0C(void) {
 
+}
+
+s32 *fn_80014EE0(void) {
+    void *fn_802D1FC8(s32);
+    extern s32 *lbl_80493F2C;
+    if (lbl_80493F2C == 0) {
+        lbl_80493F2C = fn_80014DCC(fn_802D1FC8(8));
+        fn_80014E08();
+    }
+    return lbl_80493F2C;
+}
+
+void fn_80014F24(s32 *arg0, s32 arg1, s32 arg2) {
+    arg0[arg1] = arg2;
+}
+
+s32 fn_80014F30(s32 *arg0, s32 arg1) {
+    return arg0[arg1];
 }
 
 void fn_80014F3C(void *arg0) {
