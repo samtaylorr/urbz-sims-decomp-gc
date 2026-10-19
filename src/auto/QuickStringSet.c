@@ -166,6 +166,10 @@ s32 fn_800F98FC(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x10);
 }
 
+s32 fn_800F9904(s32 arg0) {
+    return arg0 + 0x20;
+}
+
 void fn_800FA0F0(s32 *self, s32 value) {
     *self = value;
 }
