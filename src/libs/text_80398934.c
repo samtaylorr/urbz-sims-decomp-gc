@@ -82,6 +82,12 @@ void fn_80399D20(s32 *dst, s32 *src, s32 n) {
     }
 }
 
+void fn_80399F18(s32 *self, s32 n) {
+    while (--n != -1) {
+        self++;
+    }
+}
+
 void fn_80399F34(void *self) {
     ((s32 *)self)[0] = 0;
     ((s32 *)self)[2] = 0;
