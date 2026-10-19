@@ -863,6 +863,11 @@ void fn_800DD3B4(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x18) = 0;
 }
 
+void fn_800DD8C0(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x18) = 0;
+    M2C_FIELD(arg0, s32 *, 0x24) = 1;
+}
+
 void fn_800DDA60(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x18) = 0;
 }
