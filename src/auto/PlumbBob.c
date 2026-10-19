@@ -62,6 +62,10 @@ s32 fn_80070464(void) {
     return 0;
 }
 
+void fn_80072B0C(void *arg0) {
+    fn_802D1A00(fn_802D0AB8(arg0), arg0);
+}
+
 s32 fn_80078160(void) {
     return 0;
 }
