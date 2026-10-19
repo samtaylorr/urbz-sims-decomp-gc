@@ -86,6 +86,12 @@ void fn_80046FFC(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x154) = (s32) (M2C_FIELD(arg0, s32 *, 0x154) | (1 << arg1));
 }
 
+void fn_80047A84(void *arg0) {
+    if (((s32) M2C_FIELD(arg0, s32 *, 0x50) != 0) && ((s32) M2C_FIELD(arg0, s32 *, 0xA4) == 0)) {
+        M2C_FIELD(arg0, s32 *, 0xA4) = 1;
+    }
+}
+
 void fn_80047AE8(void) {
 
 }
