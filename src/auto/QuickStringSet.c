@@ -252,6 +252,12 @@ void fn_800FA0F8(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 4) = arg1;
 }
 
+void fn_800FA100(s32 arg0) {
+    M2C_UNK fn_800FB360(s32);
+    fn_800FAE08();
+    fn_800FB360(arg0);
+}
+
 s32 fn_800FB614(s32 *self) {
     return self[1];
 }
