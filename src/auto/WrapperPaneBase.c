@@ -15,3 +15,7 @@ void fn_800CF648(s32 *self) {
     self[1] = 1;
 }
 
+s32 fn_800CFFE4(s32 *self) {
+    return *self;
+}
+
