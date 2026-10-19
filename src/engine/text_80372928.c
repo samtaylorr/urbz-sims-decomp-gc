@@ -82,6 +82,12 @@ void fn_80373960(void) {
     fn_802D2430();
 }
 
+void fn_80373980(s32 arg0) {
+    void fn_80338000(void *, s32, s32);
+    extern u8 lbl_8045BBA0[];
+    fn_80338000(lbl_8045BBA0, arg0, 4);
+}
+
 void *fn_803739B0(u32 size, void *p);
 void *fn_803739B0(u32 size, void *p) {
     return p;
