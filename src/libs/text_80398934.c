@@ -252,6 +252,13 @@ void fn_8039B740(u8 *self, s32 flags) {
     }
 }
 
+void fn_8039B794(void **self, s32 flags) {
+    *self = lbl_80407690;
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 extern u8 lbl_80407900[];
 extern u8 lbl_80407690[];
 extern u8 lbl_80407C28[];
