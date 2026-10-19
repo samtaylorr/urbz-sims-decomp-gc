@@ -14,6 +14,10 @@ void fn_8033480C(void) {
 
 }
 
+f32 fn_80334A58(void *arg0) {
+    return M2C_FIELD(arg0, f32 *, 0xA8);
+}
+
 void fn_80334EC4(void (*cb)(void)) {
     lbl_80494F5C = cb;
 }
