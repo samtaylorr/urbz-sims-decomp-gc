@@ -35,6 +35,11 @@ void fn_8031D300(s32 arg0) {
     fn_8031C91C(arg0 + 0x37C);
 }
 
+void fn_8031D324(s32 arg0) {
+    M2C_UNK fn_8031C820(s32);
+    fn_8031C820(arg0 + 0x37C);
+}
+
 void fn_8031E778(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x3EC) = arg1;
 }
