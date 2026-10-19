@@ -368,6 +368,10 @@ void fn_8007C5D0(s32 arg0) {
     fn_8007BB94(arg0 + 0x7C);
 }
 
+void fn_8007C5F4(s32 arg0) {
+    fn_8007BBDC(arg0 + 0x7C);
+}
+
 void fn_800816B0(void) {
 
 }
