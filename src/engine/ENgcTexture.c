@@ -11,6 +11,10 @@ void *fn_8035F734(u32 size, void *p) {
     return p;
 }
 
+s32 fn_80361238(void *arg0) {
+    return M2C_FIELD(M2C_FIELD(arg0, void **, 0x28), s32 *, 0x70);
+}
+
 void *fn_803613D4(u32 size, void *p);
 void *fn_803613D4(u32 size, void *p) {
     return p;
