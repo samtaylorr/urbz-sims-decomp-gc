@@ -14,6 +14,13 @@ void fn_80149AF4(void) {
     fn_8014A1E4();
 }
 
+void fn_80149B1C(void **obj) {
+    if (obj != NULL) {
+        char *vt = (char *)*obj;
+        (*(void (**)(void *, s32))(vt + 0xC))((char *)obj + *(s16 *)(vt + 0x8), 3);
+    }
+}
+
 s32 fn_80149BDC(void) {
     return lbl_804944B0;
 }
