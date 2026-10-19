@@ -13,6 +13,10 @@ s32 fn_8010A7EC(void) {
     return 0;
 }
 
+s32 fn_8010A89C(s32 *self) {
+    return self[7];
+}
+
 void fn_8010A8A4(void) {
 
 }
