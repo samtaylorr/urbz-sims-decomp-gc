@@ -45,3 +45,8 @@ s32 fn_8019F890(void) {
 void fn_801A1E30(void) {
     fn_801A1B50();
 }
+
+s32 fn_801A3D08(void) {
+    return 0;
+}
+
