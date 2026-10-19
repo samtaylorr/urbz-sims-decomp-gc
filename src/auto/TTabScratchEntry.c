@@ -339,6 +339,10 @@ s32 fn_801A309C(s32 *self) {
     return self[1];
 }
 
+s32 fn_801A30A4(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x28);
+}
+
 extern s32 lbl_80495D3C;
 extern void fn_800F1A60(s32, s32);
 void fn_801A30AC(void) {
