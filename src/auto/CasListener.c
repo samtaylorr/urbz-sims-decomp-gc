@@ -155,6 +155,10 @@ void fn_801C5E58(void) {
 
 }
 
+void fn_801C5E5C(void) {
+
+}
+
 s32 fn_801C62C0(s32 *self) {
     return self[2];
 }
