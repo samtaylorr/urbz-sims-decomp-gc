@@ -70,3 +70,8 @@ void fn_80287DE4(void) {
 
 }
 
+void fn_8028AB6C(void) {
+    M2C_UNK fn_8028AABC(M2C_UNK, M2C_UNK);
+    fn_8028AABC(1, 0xFFFF);
+}
+
