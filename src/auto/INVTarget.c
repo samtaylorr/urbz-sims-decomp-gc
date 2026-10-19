@@ -1037,6 +1037,36 @@ s32 fn_80217A30(void *arg0, s32 arg1) {
     return temp_r0;
 }
 
+s32 fn_80219D14(void) {
+    s32 var_r3;
+    void *temp_r3;
+
+    temp_r3 = fn_80219E28();
+    if (temp_r3 != NULL) {
+        if ((s32) M2C_FIELD(temp_r3, s32 *, 0x20) != 0) {
+            return 2;
+        }
+        if ((s32) M2C_FIELD(temp_r3, s32 *, 0x24) != 0) {
+            return 1;
+        }
+        if ((s32) M2C_FIELD(temp_r3, s32 *, 0x28) != 0) {
+            return 0;
+        }
+        if ((s32) M2C_FIELD(temp_r3, s32 *, 0x2C) != 0) {
+            return 3;
+        }
+        var_r3 = 4;
+        if ((s32) M2C_FIELD(temp_r3, s32 *, 0x30) == 0) {
+            goto block_10;
+        }
+        /* Duplicate return node #11. Try simplifying control flow for better match */
+        return var_r3;
+    }
+block_10:
+    var_r3 = 6;
+    return var_r3;
+}
+
 s32 fn_80219DA0(void) {
     void *fn_80219E28();
     s32 var_r3;
