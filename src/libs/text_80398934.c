@@ -4797,6 +4797,10 @@ void fn_803BB77C(s32 self, s32 flags) {
     }
 }
 
+void fn_803BB7FC(void) {
+
+}
+
 void fn_803BB800(void *self) {
     ((s32 *)self)[0] = 0;
     ((s32 *)self)[2] = 0;
