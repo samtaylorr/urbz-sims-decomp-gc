@@ -18,6 +18,10 @@ void fn_802C96D4(void) {
 
 }
 
+void fn_802CB508(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0x40) = arg1;
+}
+
 void fn_802CB544(void) {
 
 }
