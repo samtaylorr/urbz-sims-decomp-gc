@@ -49,7 +49,10 @@ auto/ESim.c:
 	.text       start:0x8003A1D0 end:0x8003FB24
 
 auto/ESpriteRenderMan.c:
-	.text       start:0x8003FB24 end:0x8023EBD8
+	.text       start:0x8003FB24 end:0x80041AB4
+
+auto/EyeToyClient.c:
+	.text       start:0x80041AB4 end:0x8023EBD8
 
 libsn/text_8023EBD8.c:
 	.text       start:0x8023EBD8 end:0x80241A98
