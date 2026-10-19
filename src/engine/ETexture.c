@@ -24,6 +24,13 @@ s32 fn_8036EDA4(void) {
     return 1;
 }
 
+void *fn_8036EDF4(void *arg0) {
+    M2C_UNK fn_802D8B34();
+    fn_802D8B34();
+    M2C_FIELD(arg0, M2C_UNK **, 0x338) = &lbl_8041DC30;
+    return arg0;
+}
+
 void fn_8036EE30(u8 *self) {
     *(u8 **)(self + 0x338) = lbl_8041DC30;
     fn_802D8BEC(self);
