@@ -84,6 +84,12 @@ void fn_80105B90(void *arg0, s32 *arg1, s32 *arg2) {
     *arg2 = (s32) (s8) M2C_FIELD(arg0, u8 *, 1);
 }
 
+void fn_80105BAC(void *arg0, s32 *arg1, s32 *arg2, s32 *arg3) {
+    *arg1 = (s32) (s8) M2C_FIELD(arg0, u8 *, 0);
+    *arg2 = (s32) (s8) M2C_FIELD(arg0, u8 *, 1);
+    *arg3 = (s32) (s8) M2C_FIELD(arg0, u8 *, 2);
+}
+
 void fn_80105BEC(void *arg0, s8 arg1, s8 arg2) {
     M2C_FIELD(arg0, s8 *, 0) = arg1;
     M2C_FIELD(arg0, s8 *, 1) = arg2;
