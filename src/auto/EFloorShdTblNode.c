@@ -156,3 +156,8 @@ u16 fn_80059894(void *arg0) {
     return M2C_FIELD(arg0, u16 *, 0x92);
 }
 
+void fn_800598C0(void) {
+    M2C_UNK fn_8005950C(M2C_UNK, M2C_UNK);
+    fn_8005950C(1, 0xFFFF);
+}
+
