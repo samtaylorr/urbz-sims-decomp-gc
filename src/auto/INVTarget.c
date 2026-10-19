@@ -132,6 +132,10 @@ s32 fn_8022350C(s32 *self) {
     return *self;
 }
 
+s32 fn_80224A28(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x14);
+}
+
 extern s32 lbl_80494674;
 s32 fn_80225544(void) {
     return lbl_80494674;
