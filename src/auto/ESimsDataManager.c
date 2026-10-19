@@ -4,3 +4,8 @@
 s32 fn_8001D680(void) {
     return 0;
 }
+
+s32 fn_8001D688(void) {
+    return 0;
+}
+
