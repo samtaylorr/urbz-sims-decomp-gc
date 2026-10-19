@@ -4420,6 +4420,10 @@ void fn_803B762C(char *self) {
     fn_802AEABC(self + 8);
 }
 
+void fn_803B78AC(void) {
+
+}
+
 extern void (*lbl_80443318[])(void);
 void fn_803B79BC(void) {
     lbl_80443318[0]();
