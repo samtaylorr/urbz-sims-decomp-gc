@@ -2,6 +2,13 @@
 #include "common.h"
 
 void fn_801A1B50(void);
+void fn_8019A0A4(void) {
+    M2C_UNK fn_8019A10C();
+    M2C_UNK fn_802D1FC8(M2C_UNK);
+    fn_802D1FC8(0x184);
+    fn_8019A10C();
+}
+
 s16 fn_8019AFE8(void *arg0) {
     return M2C_FIELD(arg0, s16 *, 0x34);
 }
