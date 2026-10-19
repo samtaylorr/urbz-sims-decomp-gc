@@ -38,6 +38,10 @@ void fn_800A22D4(void) {
 
 }
 
+s32 fn_800A3F68(void *arg0) {
+    return M2C_FIELD(M2C_FIELD(arg0, void **, 0x68), s32 *, 0xC);
+}
+
 void fn_800A40EC(void) {
 
 }
