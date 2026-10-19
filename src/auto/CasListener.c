@@ -66,6 +66,10 @@ s32 fn_801BB774(char *self) {
     return *(s32 *)(self + 0xC);
 }
 
+void fn_801BB8F4(void) {
+
+}
+
 s32 fn_801BB930(void) {
     return 0;
 }
