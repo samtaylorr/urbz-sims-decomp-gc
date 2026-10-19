@@ -30,6 +30,10 @@ u8 fn_800306FC(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 0x3B);
 }
 
+u8 fn_80030758(void *arg0) {
+    return M2C_FIELD(arg0, u8 *, 0x3B);
+}
+
 void fn_800328F8(char *self, void *arg1) {
     fn_802E34F0(arg1, self + 0x44);
 }
