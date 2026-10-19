@@ -212,6 +212,10 @@ s32 fn_8026BC30(void) {
     return lbl_80496028;
 }
 
+void fn_8026BC8C(void) {
+    *(s32 *)0xCC006C00 = (*(s32 *)0xCC006C00 & 0xFFFFFFDF) | 0x20;
+}
+
 void fn_8026BCA4(s32 arg0) {
     *(s32 *)0xCC006C0C = arg0;
 }
