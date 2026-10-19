@@ -422,6 +422,7 @@ config.libs = [
             Object(NonMatching, "engine/text_803351E8.c"),
             Object(NonMatching, "engine/text_8033536C.c"),
             Object(NonMatching, "engine/text_80335530.c"),
+            Object(NonMatching, "engine/text_803356D4.c"),
             Object(NonMatching, "misc/text_8038FC80.c"),
             Object(NonMatching, "libs/text_80398934.c"),
         ],
