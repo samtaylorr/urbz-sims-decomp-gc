@@ -206,6 +206,12 @@ s32 fn_801A309C(s32 *self) {
     return self[1];
 }
 
+extern s32 lbl_80495D3C;
+extern void fn_800F1A60(s32, s32);
+void fn_801A30AC(void) {
+    fn_800F1A60((s32)&lbl_80495D3C, 2);
+}
+
 extern u8 lbl_80414FD0[];
 void fn_801A37C4(void **self, s32 flags) {
     *self = lbl_80414FD0;
