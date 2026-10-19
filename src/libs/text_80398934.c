@@ -49,6 +49,10 @@ void fn_8039B618(void) {
     fn_8018EA6C();
 }
 
+s32 fn_8039B65C(s32 *self) {
+    return self[2];
+}
+
 s32 fn_8039B700(void) {
     return 1;
 }
