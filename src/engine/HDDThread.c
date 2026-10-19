@@ -18,3 +18,7 @@ s32 fn_80332834(char *self) {
     return *(s32 *)(self + 0xC);
 }
 
+void fn_803328F0(void) {
+
+}
+
