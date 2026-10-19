@@ -636,6 +636,14 @@ void fn_800DA758(void) {
 
 }
 
+void fn_800DA75C(void *arg0, void *arg1) {
+    M2C_FIELD(arg0, s32 *, 0xC) = 1;
+    if (arg1 != NULL) {
+        M2C_FIELD(arg1, s32 *, 0x160) = 1;
+        M2C_FIELD(arg1, s32 *, 0x238) = (s32) (M2C_FIELD(arg1, s32 *, 0x238) | 1);
+    }
+}
+
 void fn_800DAAC4(void) {
     fn_800D1F84();
 }
