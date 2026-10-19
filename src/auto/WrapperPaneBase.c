@@ -150,6 +150,10 @@ s32 fn_800CD998(void) {
     return M2C_FIELD(fn_800CD660(), s32 *, 0x20);
 }
 
+s32 fn_800CD9BC(void) {
+    return M2C_FIELD(fn_800CD660(), s32 *, 0x50);
+}
+
 void fn_800CD104(void);
 void fn_800CED30(void) {
     fn_800CD104();
