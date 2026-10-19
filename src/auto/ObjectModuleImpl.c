@@ -109,6 +109,10 @@ s32 fn_80157A38(void) {
     return lbl_80496648;
 }
 
+s32 fn_80157A98(void *arg0, s32 arg1) {
+    return M2C_FIELD(arg0, s32 *, 0x2078) + (arg1 * 0x3C);
+}
+
 extern s32 lbl_80495BE0;
 extern void fn_800F1A60(s32, s32);
 void fn_80157AEC(void) {
