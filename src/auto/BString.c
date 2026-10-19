@@ -977,6 +977,11 @@ void fn_800DB58C(s32 *self) {
     ((f32 *)self)[6] = lbl_803D49B0[0];
 }
 
+extern f32 lbl_803D49CC[];
+void fn_800DB6F8(s32 *self) {
+    ((f32 *)self)[6] = lbl_803D49CC[0];
+}
+
 void fn_802D0F9C(void);
 void fn_800DB81C(void) {
     fn_802D0F9C();
