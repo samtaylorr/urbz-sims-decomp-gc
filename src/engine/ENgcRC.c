@@ -26,6 +26,10 @@ s32 fn_80348EBC(u8 *self) {
     return *(s32 *)(self + 0x20);
 }
 
+s32 fn_80348EC4(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x24);
+}
+
 void fn_80348F38(void) {
     fn_802FB604();
 }
