@@ -380,9 +380,7 @@ s32 fn_802634AC(DVDCommandBlock *block) {
     s32 state;
     s32 retVal;
 
-    block->command = 7;
-    block->callback = (void *)fn_8026354C;
-    result = fn_80262F24(1, block);
+    result = fn_802633F0(block, (void *)fn_8026354C);
     if (result == 0) {
         return -1;
     }
