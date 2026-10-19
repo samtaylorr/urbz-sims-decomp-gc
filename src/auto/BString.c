@@ -1100,6 +1100,17 @@ void fn_800E2B70(s32 *self, s32 flags) {
     }
 }
 
+extern s32 lbl_8040C978[];
+s32 *fn_800E3070(s32 *self, s32 a) {
+    self[0] = a;
+    self[1] = -1;
+    self[2] = 0;
+    self[3] = -1;
+    self[4] = 1;
+    self[5] = (s32)lbl_8040C978;
+    return self;
+}
+
 extern u8 lbl_8040C8E8[];
 s32 *fn_800E31B0(s32 *self, s32 arg1) {
     self[0] = arg1;
