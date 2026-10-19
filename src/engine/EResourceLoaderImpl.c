@@ -16,3 +16,7 @@ void fn_8031CFE8(char *self) {
     fn_802D8F90(self + 8);
 }
 
+void fn_8031D080(void) {
+
+}
+
