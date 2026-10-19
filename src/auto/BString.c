@@ -256,6 +256,10 @@ s32 *fn_800D45BC(s32 *self, s32 arg1) {
     return self;
 }
 
+void fn_800D4818(void) {
+
+}
+
 extern s32 lbl_8040B7A0[];
 s32 *fn_800D4B30(s32 *self, s32 a) {
     self[0] = a;
