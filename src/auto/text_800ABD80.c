@@ -5,6 +5,10 @@ void fn_800ACA14(void) {
 
 }
 
+void fn_800ACA18(void) {
+
+}
+
 void fn_800ACA1C(void) {
 
 }
