@@ -6,6 +6,13 @@ void fn_80299A50(void) {
     fn_802999D4();
 }
 
+void fn_80299AF4(s32 *arg0) {
+    s32 temp_r0;
+
+    temp_r0 = *arg0;
+    *arg0 = (temp_r0 & 0xF000FFFF) | ((temp_r0 & 0x0FFF0000) + 0x10000);
+}
+
 s32 fn_80299B8C(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x60) & 1;
 }
