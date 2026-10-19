@@ -935,6 +935,10 @@ void fn_800DB1C0(void) {
 
 }
 
+void fn_800DB1C4(s32 *self) {
+    fn_800E3B38(self, 2, lbl_803D4970[0]);
+}
+
 void fn_800DB1F0(void) {
 
 }
