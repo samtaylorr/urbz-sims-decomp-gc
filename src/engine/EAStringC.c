@@ -191,6 +191,34 @@ void fn_802A202C(void) {
     fn_802A204C();
 }
 
+s32 fn_802A2784(s32 arg0) {
+    s32 var_r0;
+
+    var_r0 = 0;
+    if (arg0 & 8) {
+        var_r0 = 0x800;
+    }
+    if (arg0 & 4) {
+        var_r0 |= 0x400;
+    }
+    if (arg0 & 0x40) {
+        var_r0 |= 0x1000;
+    }
+    if (arg0 & 1) {
+        var_r0 |= 0x2000;
+    }
+    if (arg0 & 2) {
+        var_r0 |= 0x4000;
+    }
+    if (arg0 & 0x20) {
+        var_r0 |= 0x8000;
+    }
+    if (arg0 & 0x10) {
+        var_r0 |= 0x10000;
+    }
+    return var_r0;
+}
+
 void fn_802A2AE4(void *arg0, void *arg1, void *arg2) {
     M2C_FIELD(arg2, f32 *, 0) = (f32) ((M2C_FIELD(arg1, f32 *, 0) * M2C_FIELD(arg0, f32 *, 0)) + (M2C_FIELD(arg1, f32 *, 8) * M2C_FIELD(arg0, f32 *, 4)) + M2C_FIELD(arg1, f32 *, 0x10));
     M2C_FIELD(arg2, f32 *, 4) = (f32) ((M2C_FIELD(arg1, f32 *, 4) * M2C_FIELD(arg0, f32 *, 0)) + (M2C_FIELD(arg1, f32 *, 0xC) * M2C_FIELD(arg0, f32 *, 4)) + M2C_FIELD(arg1, f32 *, 0x14));
