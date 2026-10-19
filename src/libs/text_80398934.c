@@ -5520,6 +5520,23 @@ void fn_803BB3BC(s32 *dst, s32 *src, s32 n) {
     }
 }
 
+void fn_803BB3E8(s32 **, s32, s32);
+void *fn_803BB654(void *self, s32 **arg1) {
+    s32 n;
+    s32 i;
+
+    {
+        VtblEntry *vt = *(VtblEntry **)((char *)self + 0x18);
+        ((void (*)(void *, void *, s32))vt[6].pfn)((char *)self + vt[6].delta, &n, 4);
+    }
+    fn_803BB3E8(arg1, n, 0);
+    for (i = 0; i < n; i++) {
+        VtblEntry *vt = *(VtblEntry **)((char *)self + 0x18);
+        ((void (*)(void *, void *, s32))vt[6].pfn)((char *)self + vt[6].delta, &arg1[0][i], 4);
+    }
+    return self;
+}
+
 extern void fn_803BAF00(void *);
 void *fn_803BB700(void *self) {
     fn_803BAF00(self);
