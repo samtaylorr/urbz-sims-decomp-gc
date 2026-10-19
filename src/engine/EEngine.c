@@ -74,6 +74,11 @@ void fn_802E0B78(void) {
 
 }
 
+void fn_802E0D24(void) {
+    extern s32 lbl_80494FDC;
+    lbl_80494FDC = 0;
+}
+
 void fn_802E0D30(void) {
 
 }
