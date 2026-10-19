@@ -9,6 +9,12 @@ void fn_803985D8(void *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 4) = arg2;
 }
 
+void fn_803985F0(void) {
+    M2C_UNK fn_80251C1C(s32, s32);
+    extern void *lbl_80496618;
+    fn_80251C1C(M2C_FIELD(lbl_80496618, s32 *, 0), M2C_FIELD(lbl_80496618, s32 *, 4));
+}
+
 void fn_80398744(s32 arg0) {
     lbl_8049661C = arg0;
 }
