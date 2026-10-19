@@ -11,6 +11,14 @@ void fn_802E3EF4(void) {
     fn_802E232C();
 }
 
+void fn_802E4660(void *arg0, s32 arg1) {
+    M2C_UNK fn_802E2460();
+    if ((s32) M2C_FIELD(arg0, s32 *, 0x31C) != arg1) {
+        M2C_FIELD(arg0, s32 *, 0x31C) = arg1;
+        fn_802E2460();
+    }
+}
+
 s32 fn_802E5498(s32 arg0) {
     return arg0 + 0x280;
 }
