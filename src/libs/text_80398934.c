@@ -4437,6 +4437,10 @@ void fn_803B79BC(void) {
     lbl_80443318[0]();
 }
 
+s32 fn_803B7DC4(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x10);
+}
+
 void fn_803B7DCC(void) {
     lbl_80443318[0]();
 }
