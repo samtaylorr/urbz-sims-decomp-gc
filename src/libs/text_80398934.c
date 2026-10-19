@@ -5396,7 +5396,7 @@ void fn_803BAE58(s32 self, s32 flags) {
 
 void fn_803BAE98(u8 *p, s32 n) {
     extern void fn_8030096C(void *);
-    while (n--) {
+    while (--n != -1) {
         fn_8030096C(p);
         p += 0x6C;
     }
