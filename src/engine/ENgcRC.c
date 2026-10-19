@@ -101,6 +101,11 @@ void fn_8034D8E8(void) {
 
 }
 
+void fn_8034D91C(s16 arg0) {
+    extern s16 lbl_80495146;
+    lbl_80495146 = arg0;
+}
+
 void fn_80270D34(void);
 void fn_8034F8BC(void) {
     fn_80270D34();
