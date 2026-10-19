@@ -19,6 +19,13 @@ void fn_800F66A0(void (*cb)(void)) {
     lbl_80495A94 = cb;
 }
 
+void *fn_800F687C(void *arg0, s32 arg1, s32 arg2) {
+    M2C_FIELD(arg0, s32 *, 0) = arg1;
+    M2C_FIELD(arg0, s32 *, 4) = arg2;
+    fn_800F68E0();
+    return arg0;
+}
+
 s32 fn_800F68B4(s32 *self) {
     return self[1];
 }
