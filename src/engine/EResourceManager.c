@@ -18,6 +18,10 @@ s32 fn_8033891C(s32 *self) {
     return self[1];
 }
 
+void fn_80338934(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+}
+
 void fn_80338940(void) {
 
 }
