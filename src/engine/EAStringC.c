@@ -328,6 +328,11 @@ void fn_802AE5EC(void) {
     fn_802AE440();
 }
 
+void fn_802AF384(void *arg0, f32 farg0, f32 farg1) {
+    M2C_FIELD(arg0, f32 *, 0x20) = farg0;
+    M2C_FIELD(arg0, f32 *, 0x24) = farg1;
+}
+
 s32 fn_802AF390(s32 arg0) {
     return arg0 + 0x10;
 }
