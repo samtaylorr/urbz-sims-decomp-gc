@@ -280,8 +280,9 @@ s32 fn_802EF4F0(void) {
     return 1;
 }
 
+void fn_802EF2E4(s32 arg0, s32 arg1);
+
 void fn_802EF4F8(void) {
-    M2C_UNK fn_802EF2E4(M2C_UNK, M2C_UNK);
     fn_802EF2E4(1, 0xFFFF);
 }
 
