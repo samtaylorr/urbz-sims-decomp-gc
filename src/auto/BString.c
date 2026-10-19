@@ -170,14 +170,12 @@ s32 *fn_800D1F50(s32 *self, s32 a) {
 }
 
 void fn_800D1F84(void) {
-    void fn_80319494(char *, s32);
+    void fn_80319494(const char *, int);
     void fn_80332C50(void *);
-    extern char lbl_803D1698[];
+    extern const char lbl_803D1698[];
     extern u8 lbl_8045AAB0[];
-    char *name;
     fn_80332C50(lbl_8045AAB0);
-    name = lbl_803D1698;
-    fn_80319494(name, 151);
+    fn_80319494(lbl_803D1698, 151);
 }
 
 void fn_800D1FBC(void *arg0) {
@@ -2143,6 +2141,18 @@ void fn_800E4F34(void) {
 
 void fn_800E4F38(void) {
 
+}
+
+void fn_800E5104(void *arg0) {
+    M2C_UNK fn_800490B0(M2C_UNK *);
+    extern s32 lbl_80494F40;
+    extern s32 lbl_80494F44;
+    if ((s32) M2C_FIELD(arg0, s32 *, 0x18) != 0) {
+        lbl_80494F40 = 1;
+        lbl_80494F44 = 1;
+        M2C_FIELD(arg0, s32 *, 0x18) = 0;
+    }
+    fn_800490B0(&lbl_8041F754);
 }
 
 void fn_800E5B8C(void) {
