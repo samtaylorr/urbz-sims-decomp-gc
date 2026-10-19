@@ -97,6 +97,15 @@ void fn_8039C1D8(void) {
     fn_8030AD40();
 }
 
+extern u8 lbl_804093F8[];
+extern void fn_802D20E8(void *);
+void fn_8039C200(s32 *self, s32 flags) {
+    self[5] = (s32)lbl_804093F8;
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_8039C32C(void) {
     fn_8018EA6C();
 }
