@@ -33,6 +33,15 @@ void fn_8003CA70(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     fn_800A43F4(arg1, arg0 + 0x410, 0, arg2, arg3, 0);
 }
 
+void fn_8003CFE0(s32 arg0) {
+    s32 fn_8003E48C();
+    M2C_UNK fn_802E77F0(s32, s32, s32);
+    extern s32 lbl_80494DFC;
+    if (fn_8003E48C() == 0) {
+        fn_802E77F0(arg0 + 0x314, arg0 + 0xD0, lbl_80494DFC);
+    }
+}
+
 void fn_8003D024(void) {
 
 }
