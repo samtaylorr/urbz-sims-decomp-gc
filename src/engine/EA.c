@@ -6,6 +6,10 @@ s32 fn_802D82B4(void) {
     return 0;
 }
 
+s32 fn_802D8460(s32 *self) {
+    return self[2];
+}
+
 s32 fn_802D8B1C(void) {
     return 1;
 }
