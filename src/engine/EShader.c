@@ -29,6 +29,10 @@ void fn_802FFC48(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 4) = (s32) (M2C_FIELD(arg0, s32 *, 4) | arg1);
 }
 
+void fn_802FFC58(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 4) = (s32) (M2C_FIELD(arg0, s32 *, 4) & ~arg1);
+}
+
 s32 fn_802FFC80(s32 *self) {
     return self[1];
 }
