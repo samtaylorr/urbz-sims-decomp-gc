@@ -22,6 +22,10 @@ void fn_801F3890(void) {
 
 }
 
+void fn_801F55A4(void) {
+
+}
+
 void fn_801F55C0(void) {
     fn_800C3B48();
 }
