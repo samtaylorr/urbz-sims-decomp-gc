@@ -75,6 +75,10 @@ void fn_802A151C(s32 *self, s32 value) {
     *self = value;
 }
 
+s32 fn_802A2014(s32 arg0) {
+    return arg0 - 8;
+}
+
 void fn_802A204C(void);
 void fn_802A202C(void) {
     fn_802A204C();
