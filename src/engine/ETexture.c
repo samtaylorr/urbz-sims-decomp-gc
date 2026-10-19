@@ -64,6 +64,10 @@ s32 fn_8036FFAC(void) {
     return 0;
 }
 
+s32 fn_8036FFB8(s32 *self) {
+    return *self;
+}
+
 void fn_802D2FD0(void);
 void fn_80370010(void) {
     fn_802D2FD0();
