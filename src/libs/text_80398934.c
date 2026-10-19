@@ -89,6 +89,10 @@ void fn_8039BB90(void) {
     fn_8018EA6C();
 }
 
+s32 fn_8039BBE8(s32 *self) {
+    return self[2];
+}
+
 void fn_8039BCB8(void) {
     fn_8018EA6C();
 }
