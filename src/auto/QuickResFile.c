@@ -83,6 +83,10 @@ void fn_8018CEE0(void) {
 
 }
 
+void fn_8018CEE4(void) {
+
+}
+
 s32 fn_8018CEE8(void) {
     return 0;
 }
