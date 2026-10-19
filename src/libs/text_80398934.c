@@ -105,6 +105,10 @@ void fn_803BAAB8(void) {
     fn_802F05AC();
 }
 
+void fn_803BAAD8(void) {
+    fn_802F05AC();
+}
+
 void fn_803BEC14(u8 *self) {
     *(u8 **)(self + 0x338) = lbl_8041CFA8;
     fn_802D8BEC(self);
