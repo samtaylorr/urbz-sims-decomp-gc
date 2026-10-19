@@ -5013,6 +5013,14 @@ void fn_803BED78(s32 *self, s32 n) {
     }
 }
 
+extern void fn_803BED94(s32);
+void fn_803BEDE0(s32 self, s32 flags) {
+    fn_803BED94(self);
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_803BF0C0(s32 *self, s32 n) {
     while (--n != -1) {
         self++;
