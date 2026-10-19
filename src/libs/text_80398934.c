@@ -269,6 +269,11 @@ s32 fn_8039BD1C(s32 *self) {
     return self[2];
 }
 
+void fn_8039BD24(void *arg0) {
+    M2C_UNK fn_8004FCD0(s32);
+    fn_8004FCD0(M2C_FIELD(arg0, s32 *, 4));
+}
+
 s32 fn_8039BD48(s32 *self) {
     return self[2];
 }
