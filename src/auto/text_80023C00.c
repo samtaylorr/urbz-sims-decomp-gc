@@ -24,6 +24,10 @@ void *fn_800287FC(void) {
     return lbl_803C4E2C;
 }
 
+s32 fn_80028808(s32 arg0) {
+    return arg0 + 0x58;
+}
+
 void fn_800288D8(void) {
 
 }
