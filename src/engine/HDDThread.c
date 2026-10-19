@@ -68,6 +68,14 @@ void fn_80332AA8(s32 arg0) {
     fn_80332AE0(arg0, fn_80332A48());
 }
 
+void fn_80332D00(void *arg0) {
+    M2C_FIELD((int)arg0, s32 *, (int)0x5C0) = 0;
+    M2C_FIELD(arg0, s32 *, (unsigned)0x5C8) = 0;
+    M2C_FIELD(arg0, s32 *, 0x5CC) = 0;
+    M2C_FIELD(arg0, s32 *, 0x5C4) = 0;
+    fn_803321D8();
+}
+
 void fn_80332D88(void) {
     M2C_UNK fn_80332D34(M2C_UNK, M2C_UNK);
     fn_80332D34(1, 0xFFFF);
