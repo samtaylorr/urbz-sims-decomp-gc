@@ -397,6 +397,10 @@ s32 fn_801A9EC4(s32 *self) {
     return self[6];
 }
 
+s32 fn_801A9ECC(void) {
+    return 0x40;
+}
+
 void fn_801AA4A8(void) {
 
 }
