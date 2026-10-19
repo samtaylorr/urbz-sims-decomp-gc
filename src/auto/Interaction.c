@@ -62,6 +62,12 @@ s32 fn_8010FACC(void) {
     return 1;
 }
 
+extern void *fn_802D0AB8(void *);
+extern void fn_802D1A00(void *, void *);
+void fn_8010FC58(void *arg0) {
+    fn_802D1A00(fn_802D0AB8(arg0), arg0);
+}
+
 s32 fn_80111F5C(s32 *self) {
     return self[2];
 }
