@@ -90,6 +90,14 @@ s32 fn_80011F38(void *arg0) {
     return 1;
 }
 
+void fn_80012108(void *arg0, s32 arg1, s32 arg2) {
+    M2C_UNK fn_80012148();
+    if (((arg1 != 0) && ((s32) M2C_FIELD(arg0, s32 *, 0x168) != arg1)) || (arg2 != 0)) {
+        M2C_FIELD(arg0, s32 *, 0x168) = arg1;
+        fn_80012148();
+    }
+}
+
 void fn_80014164(void *arg0, s32 arg1) {
     if ((M2C_FIELD(arg0, s32 *, 0x238) ^ 1) & 1) {
         M2C_FIELD(arg0, s32 *, 0x22C) = arg1;
