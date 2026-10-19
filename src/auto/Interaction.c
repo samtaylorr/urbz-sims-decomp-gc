@@ -104,6 +104,10 @@ s32 fn_80111F64(char *self) {
     return *(s32 *)(self + 0xC);
 }
 
+s32 fn_80111F94(u8 *self) {
+    return *(s32 *)(self + 0x20);
+}
+
 void fn_80112168(void) {
 
 }
