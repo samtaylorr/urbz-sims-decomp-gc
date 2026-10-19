@@ -69,3 +69,8 @@ void fn_800C4628(s32 arg0) {
     fn_800F69E8(arg0 + 4);
 }
 
+void fn_800C464C(void) {
+    M2C_UNK fn_800C45C0(M2C_UNK, M2C_UNK);
+    fn_800C45C0(1, 0xFFFF);
+}
+
