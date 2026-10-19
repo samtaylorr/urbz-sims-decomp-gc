@@ -1234,6 +1234,10 @@ void fn_803ADF5C(s32 *self, s32 flags) {
     }
 }
 
+void fn_803AE060(void) {
+
+}
+
 s32 fn_803AE064(void) {
     return 0;
 }
