@@ -180,6 +180,10 @@ s32 fn_80148EF0(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x8C);
 }
 
+s32 fn_80148EF8(void *arg0) {
+    return M2C_FIELD(M2C_FIELD(arg0, void **, 0x8C), s32 *, 0xC);
+}
+
 s32 fn_80148FAC(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x60);
 }
