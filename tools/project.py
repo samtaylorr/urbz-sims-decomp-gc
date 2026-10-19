@@ -457,6 +457,11 @@ def generate_build(config: ProjectConfig) -> None:
 
 
 # Generate build.ninja
+def is_prodg(mw_version: Any) -> bool:
+    """Whether a compiler version names SN ProDG ("ProDG/3.7") rather than Metrowerks."""
+    return str(mw_version).startswith("ProDG/")
+
+
 def generate_build_ninja(
     config: ProjectConfig,
     objects: Dict[str, Object],
@@ -698,6 +703,11 @@ def generate_build_ninja(
     mwld_cmd = f"{wrapper_cmd}{mwld} $ldflags -o $out @$out.rsp"
     mwld_implicit: List[Optional[Path]] = [compilers_implicit or mwld, wrapper_implicit]
 
+    # With ProDG, libraries whose mw_version is a Metrowerks one (e.g. the Dolphin SDK,
+    # shipped prebuilt with CodeWarrior) still compile with mwcceppc through this rule.
+    mwcc_mw_cmd = mwcc_cmd
+    mwcc_mw_implicit: List[Optional[Path]] = [*mwcc_implicit]
+
     if config.prodg:
         # ProDG: ngccc (GCC driver) and ngcld locate their config through SN_NGC_PATH.
         # ngccc -MMD writes the depfile next to the object, with a `.obj` target.
@@ -738,6 +748,9 @@ def generate_build_ninja(
             mwcc_sjis_implicit.append(transform_dep)
             mwcc_extab_implicit.append(transform_dep)
             mwcc_sjis_extab_implicit.append(transform_dep)
+    if os.name != "nt" and config.prodg:
+        mwcc_mw_cmd += f" && $python {transform_dep} $basefile.d $basefile.d"
+        mwcc_mw_implicit.append(transform_dep)
     if os.name != "nt" and not config.prodg:
         transform_dep = config.tools_dir / "transform_dep.py"
         mwcc_cmd += f" && $python {transform_dep} $basefile.d $basefile.d"
@@ -780,6 +793,17 @@ def generate_build_ninja(
         deps="gcc",
     )
     n.newline()
+
+    if config.prodg:
+        n.comment("Metrowerks build for libraries with a GC/Wii mw_version in a ProDG project")
+        n.rule(
+            name="mwcc_mw",
+            command=mwcc_mw_cmd,
+            description="MWCC $out",
+            depfile="$basefile.d",
+            deps="gcc",
+        )
+        n.newline()
 
     n.comment("MWCC build (with UTF-8 to Shift JIS wrapper)")
     n.rule(
@@ -1048,9 +1072,11 @@ def generate_build_ninja(
             cflags = obj.options["cflags"]
             extra_cflags = obj.options["extra_cflags"]
 
+            prodg = is_prodg(obj.options["mw_version"])
+
             # Add appropriate language flag if it doesn't exist already
             # Added directly to the source so it flows to other generation tasks
-            if config.prodg:
+            if prodg:
                 pass  # GCC infers the language from the file extension
             elif not any(flag.startswith("-lang") for flag in cflags) and not any(
                 flag.startswith("-lang") for flag in extra_cflags
@@ -1077,8 +1103,11 @@ def generate_build_ninja(
                 "basedir": os.path.dirname(obj.src_obj_path),
                 "basefile": obj.src_obj_path.with_suffix(""),
             }
-            if config.prodg:
+            if prodg:
                 variables["unit"] = obj.name
+            elif config.prodg:
+                build_rule = "mwcc_mw"
+                build_implcit = mwcc_mw_implicit
 
             if obj.options["shift_jis"] and obj.options["extab_padding"] is not None:
                 build_rule = "mwcc_sjis_extab"
@@ -1244,7 +1273,7 @@ def generate_build_ninja(
         # Check if all compiler versions exist
         for mw_version in used_compiler_versions:
             mw_path = compilers / mw_version / (
-                "ngccc.exe" if config.prodg else "mwcceppc.exe"
+                "ngccc.exe" if is_prodg(mw_version) else "mwcceppc.exe"
             )
             if config.compilers_path and not os.path.exists(mw_path):
                 sys.exit(f"Compiler {mw_path} does not exist")

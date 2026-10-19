@@ -220,6 +220,32 @@ elif args.warn == "error":
 cflags_runtime = cflags_base
 cflags_rel = cflags_base
 
+# Metrowerks flags for the code linked in prebuilt: the Dolphin SDK and the CodeWarrior runtime
+# (their functions save LR before creating the frame, as the older CodeWarrior compilers do)
+cflags_mw = [
+    "-nodefaults",
+    "-proc gekko",
+    "-align powerpc",
+    "-enum int",
+    "-fp hardware",
+    "-Cpp_exceptions off",
+    "-O4,p",
+    "-inline auto",
+    '-pragma "cats off"',
+    '-pragma "warn_notinlined off"',
+    "-maxerrors 1",
+    "-nosyspath",
+    "-RTTI off",
+    "-fp_contract on",
+    "-str reuse",
+    "-multibyte",
+    "-i include",
+    f"-i build/{config.version}/include",
+    f"-DBUILD_VERSION={version_num}",
+    f"-DVERSION_{config.version}",
+    "-DNDEBUG=1",
+]
+
 config.linker_version = "ProDG/3.7"
 config.shift_jis = False
 
@@ -228,8 +254,8 @@ config.shift_jis = False
 def DolphinLib(lib_name: str, objects: List[Object]) -> Dict[str, Any]:
     return {
         "lib": lib_name,
-        "mw_version": config.linker_version,
-        "cflags": cflags_base,
+        "mw_version": "GC/1.2.5n",
+        "cflags": cflags_mw,
         "progress_category": "sdk",
         "objects": objects,
     }
@@ -268,14 +294,19 @@ config.libs = [
             Object(NonMatching, "auto/text_800034C0.c"),
             Object(NonMatching, "libsn/text_8023EBD8.c"),
             Object(NonMatching, "clib/text_80241A98.c"),
-            Object(NonMatching, "sdk/text_802500FC.c"),
             Object(NonMatching, "engine/text_802781E4.c"),
-            Object(NonMatching, "sdk/text_80378E78.c"),
             Object(NonMatching, "misc/text_8038FC80.c"),
-            Object(NonMatching, "runtime/text_80390B40.c"),
             Object(NonMatching, "libs/text_80398934.c"),
         ],
     },
+    DolphinLib(
+        "dolphin",
+        [
+            Object(NonMatching, "sdk/text_802500FC.c"),
+            Object(NonMatching, "sdk/text_80378E78.c"),
+            Object(NonMatching, "runtime/text_80390B40.c"),
+        ],
+    ),
 ]
 
 
