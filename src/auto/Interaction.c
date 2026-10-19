@@ -116,6 +116,12 @@ void fn_8011216C(void) {
 
 }
 
+extern s32 lbl_80495B00;
+extern void fn_800F1A60(s32, s32);
+void fn_80116754(void) {
+    fn_800F1A60((s32)&lbl_80495B00, 2);
+}
+
 s32 fn_80117474(char *self) {
     return *(s32 *)(self + 0xC);
 }
