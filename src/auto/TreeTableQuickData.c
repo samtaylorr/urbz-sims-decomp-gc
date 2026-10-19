@@ -92,6 +92,10 @@ void fn_801B637C(void) {
 
 }
 
+void fn_801B6380(void) {
+
+}
+
 s32 fn_801B6384(s32 *self) {
     return self[1];
 }
