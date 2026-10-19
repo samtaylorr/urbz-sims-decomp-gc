@@ -14,6 +14,11 @@ void *fn_8003F924(void) {
     return lbl_80491C78;
 }
 
+extern s32 lbl_80491C84[];
+s32 fn_8003F930(void) {
+    return lbl_80491C84[0];
+}
+
 void *fn_8003F954(void) {
     return lbl_80491C78;
 }
