@@ -4,6 +4,13 @@
 extern u8 lbl_80409228[];
 extern void fn_802D20E8(void *);
 
+void fn_800659A0(void **self, s32 flags) {
+    *self = lbl_80409228;
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_800659D4(void) {
     fn_802D2FD0();
 }
