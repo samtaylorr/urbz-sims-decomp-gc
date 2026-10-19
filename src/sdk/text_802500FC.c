@@ -177,6 +177,12 @@ void fn_8025F914(s32 arg0) {
     *lbl_80495EA8 = arg0;
 }
 
+void fn_8025FA20(void *arg0, void *arg1, f32 farg0) {
+    M2C_FIELD(arg1, f32 *, 0) = (f32) (M2C_FIELD(arg0, f32 *, 0) * farg0);
+    M2C_FIELD(arg1, f32 *, 4) = (f32) (M2C_FIELD(arg0, f32 *, 4) * farg0);
+    M2C_FIELD(arg1, f32 *, 8) = (f32) (M2C_FIELD(arg0, f32 *, 8) * farg0);
+}
+
 s32 fn_80260574(void) {
     M2C_UNK fn_802646D0();
     fn_802646D0();
