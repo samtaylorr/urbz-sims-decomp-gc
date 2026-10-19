@@ -211,3 +211,8 @@ void fn_80364084(void) {
     fn_802D2430();
 }
 
+void fn_803640CC(void) {
+    M2C_UNK fn_80363EE0(M2C_UNK, M2C_UNK);
+    fn_80363EE0(1, 0xFFFF);
+}
+
