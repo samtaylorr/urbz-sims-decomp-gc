@@ -38,3 +38,7 @@ void fn_80282008(void) {
 
 }
 
+void fn_8028200C(void) {
+
+}
+
