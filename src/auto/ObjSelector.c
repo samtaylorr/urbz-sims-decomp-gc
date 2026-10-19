@@ -44,6 +44,10 @@ void fn_8016C894(void) {
     fn_800F1A60((s32)&lbl_80495C70, 2);
 }
 
+s32 fn_8016CCE0(void *arg0) {
+    return M2C_FIELD(M2C_FIELD(arg0, void **, 0x38), s32 *, 0x1C);
+}
+
 void fn_8016CCEC(void) {
 
 }
