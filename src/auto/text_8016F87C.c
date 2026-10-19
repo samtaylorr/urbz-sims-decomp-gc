@@ -117,6 +117,10 @@ s32 fn_80175DDC(void) {
     return 1;
 }
 
+s32 fn_80175DE4(void) {
+    return 1;
+}
+
 extern s32 lbl_80495C90;
 s32 fn_80175E1C(void) {
     return lbl_80495C90;
