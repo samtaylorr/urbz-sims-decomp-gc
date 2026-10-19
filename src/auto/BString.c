@@ -2014,6 +2014,12 @@ void fn_800E662C(void) {
 
 }
 
+void fn_800E6630(void) {
+    M2C_UNK fn_803338AC(s32, M2C_UNK);
+    extern s32 lbl_80494FCC;
+    fn_803338AC(lbl_80494FCC, 0);
+}
+
 void fn_800E95F0(void) {
 
 }
