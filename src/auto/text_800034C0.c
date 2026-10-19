@@ -23,3 +23,7 @@ void fn_8001C3B8(void) {
     fn_8001C2A4();
 }
 
+void fn_8001C3D8(void) {
+    fn_8001C2A4();
+}
+
