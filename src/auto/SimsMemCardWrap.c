@@ -64,20 +64,9 @@ void *fn_800A9950(void *self) {
     return self;
 }
 
-extern f32 lbl_803CE168[];
-extern f32 lbl_80494320;
-extern f32 lbl_80495924;
-extern f32 lbl_80495928;
-extern s32 lbl_80495934;
-extern void fn_800A9720(void);
-extern s32 lbl_80495810;
-extern void fn_800A9980(void *);
-extern s32 lbl_8045B438[];
-extern void fn_803349A8(void *);
-void fn_800A9BAC(void *self, s32 arg1) {
-    s32 *p = lbl_8045B438;
-    *(s32 *)((char *)self + 0x108) = arg1;
-    fn_803349A8(p);
+void fn_800A9BAC(s32 *self, s32 arg1) {
+    self[0x42] = arg1;
+    fn_803349A8(lbl_8045B438);
 }
 
 s32 fn_800A9C74(void) {
