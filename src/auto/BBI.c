@@ -95,6 +95,14 @@ void fn_800616DC(void) {
     fn_802D2FD0();
 }
 
+s32 fn_800616FC(s32 arg0, s32 *out) {
+    s32 tmp;
+
+    fn_802D30D4((void *)arg0, &tmp);
+    *out = tmp;
+    return arg0;
+}
+
 void fn_800630FC(void) {
     fn_8005B71C();
 }
