@@ -176,6 +176,10 @@ void fn_801B65CC(void) {
 
 }
 
+void fn_801B65D0(void) {
+
+}
+
 s32 fn_801B65DC(s32 *self) {
     return self[1];
 }
