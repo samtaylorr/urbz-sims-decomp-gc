@@ -9,6 +9,11 @@ void fn_80052C9C(void) {
     lbl_8049664C = 0;
 }
 
+void fn_80052CA8(void) {
+    extern s32 lbl_8049664C;
+    lbl_8049664C = 1;
+}
+
 void fn_80052EFC(void) {
 
 }
