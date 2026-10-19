@@ -128,6 +128,10 @@ void fn_801B6598(void) {
 
 }
 
+void fn_801B659C(void) {
+
+}
+
 s32 fn_801B65B8(void) {
     return 0;
 }
