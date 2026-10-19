@@ -88,3 +88,8 @@ s32 fn_80311B70(void *arg0) {
     return ((u32) M2C_FIELD(arg0, u32 *, 4) >> 1U) & 1;
 }
 
+void fn_80312DA8(void) {
+    M2C_UNK fn_80312D20(M2C_UNK, M2C_UNK);
+    fn_80312D20(1, 0xFFFF);
+}
+
