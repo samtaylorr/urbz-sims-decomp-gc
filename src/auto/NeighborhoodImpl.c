@@ -13,6 +13,10 @@ void fn_80127CA8(void) {
 
 }
 
+void fn_80127F7C(void) {
+
+}
+
 extern s32 lbl_80495B9C;
 s32 fn_80128338(void) {
     return lbl_80495B9C;
