@@ -6,6 +6,10 @@ void fn_8001B7D4(void) {
     lbl_80493F34 = 0;
 }
 
+void fn_8001B7E0(void *arg0, s32 arg1) {
+    *M2C_FIELD(arg0, s32 **, 0x48) = arg1;
+}
+
 void fn_8001C2A0(void) {
 
 }
