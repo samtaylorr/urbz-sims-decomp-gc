@@ -1814,6 +1814,10 @@ void fn_800E95FC(void) {
 
 }
 
+s32 fn_800E9708(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x98);
+}
+
 void fn_800E9758(s32 *self, s32 flags) {
     self[5] = (s32)lbl_804093F8;
     if (flags & 1) {
