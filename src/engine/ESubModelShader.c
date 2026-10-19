@@ -4,3 +4,8 @@
 s32 fn_802FFF68(void) {
     return 0;
 }
+
+void fn_802FFF70(void) {
+
+}
+
