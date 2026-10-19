@@ -128,6 +128,14 @@ void fn_803822AC(s32 arg0) {
     lbl_80496404 = arg0;
 }
 
+void fn_8038230C(void) {
+    M2C_UNK fn_80259838(M2C_UNK *);
+    extern s32 lbl_80496400;
+    extern M2C_UNK lbl_80496408;
+    lbl_80496400 = 1;
+    fn_80259838(&lbl_80496408);
+}
+
 extern u8 lbl_8047E260[];
 void *fn_80382840(void) {
     return lbl_8047E260;
