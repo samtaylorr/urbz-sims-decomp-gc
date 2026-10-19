@@ -135,6 +135,11 @@ void fn_80157F24(void) {
 
 }
 
+void fn_80157FDC(s32 *arg0) {
+    M2C_UNK fn_801A1E50(s32);
+    fn_801A1E50(*arg0);
+}
+
 extern s32 lbl_80495BE8;
 void fn_8015A3FC(void) {
     fn_800F1A60((s32)&lbl_80495BE8, 2);
