@@ -13,3 +13,7 @@ s32 fn_8001D688(void) {
     return 0;
 }
 
+void fn_8001D690(void) {
+
+}
+
