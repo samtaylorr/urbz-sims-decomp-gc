@@ -215,3 +215,8 @@ void fn_8035F30C(void) {
 
 }
 
+void fn_8035F310(void) {
+    M2C_UNK fn_8035F2B8(M2C_UNK, M2C_UNK);
+    fn_8035F2B8(1, 0xFFFF);
+}
+
