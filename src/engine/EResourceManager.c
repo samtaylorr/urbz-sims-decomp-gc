@@ -22,6 +22,10 @@ void fn_80338940(void) {
 
 }
 
+void fn_80338944(void) {
+
+}
+
 s32 fn_80338948(s32 *self) {
     return self[1];
 }
