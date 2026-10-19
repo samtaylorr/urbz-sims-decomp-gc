@@ -152,6 +152,14 @@ s32 fn_8039C370(s32 *self) {
     return self[2];
 }
 
+extern u8 lbl_80409DD8[];
+void fn_8039C584(void **self, s32 flags) {
+    *self = lbl_80409DD8;
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_8039D338(void) {
     fn_8018EA6C();
 }
