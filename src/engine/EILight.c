@@ -134,3 +134,8 @@ s32 fn_802F03E8(void) {
     return lbl_80494E58;
 }
 
+void fn_802F03F0(void) {
+    M2C_UNK fn_802F0114(M2C_UNK, M2C_UNK);
+    fn_802F0114(1, 0xFFFF);
+}
+
