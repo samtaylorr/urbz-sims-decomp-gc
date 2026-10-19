@@ -192,3 +192,7 @@ s32 fn_801C95CC(void) {
     return lbl_804945C0;
 }
 
+u8 *fn_801C98C8(u8 *self) {
+    return self + 8;
+}
+
