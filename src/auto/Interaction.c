@@ -47,6 +47,25 @@ void fn_8010DA6C(void *arg0, void *arg1) {
     M2C_FIELD(arg0, void **, 0x404) = arg1;
 }
 
+void fn_8010DA7C(void *arg0, void *arg1) {
+    void *var_r0;
+    void *var_r9;
+
+    var_r0 = M2C_FIELD(arg0, void **, 0x404);
+    var_r9 = NULL;
+    if (var_r0 != arg1) {
+        do {
+            var_r9 = var_r0;
+            var_r0 = M2C_FIELD(var_r9, void **, 0x38);
+        } while (var_r0 != arg1);
+    }
+    if (var_r9 != NULL) {
+        M2C_FIELD(var_r9, void **, 0x38) = (void *) M2C_FIELD(arg1, void **, 0x38);
+        return;
+    }
+    M2C_FIELD(arg0, void **, 0x404) = (void *) M2C_FIELD(arg1, void **, 0x38);
+}
+
 void fn_8010DABC(void *arg0, void *arg1) {
     M2C_FIELD(arg1, void **, 0x24) = (void *) M2C_FIELD(arg0, void **, 0x408);
     M2C_FIELD(arg0, void **, 0x408) = arg1;
