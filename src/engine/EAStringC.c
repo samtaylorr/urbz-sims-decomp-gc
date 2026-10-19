@@ -360,6 +360,10 @@ s32 fn_802B6F58(void) {
     return 0;
 }
 
+void fn_802B6FA0(void) {
+
+}
+
 void fn_802B76E8(char *self) {
     extern void fn_802ADE44(void *);
     fn_802ADE44(self + 8);
