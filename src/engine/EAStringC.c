@@ -460,6 +460,10 @@ u8 fn_802B70F4(u32 *arg0) {
     return (u8) ((u32) *arg0 >> 6U);
 }
 
+s32 fn_802B7100(s32 *arg0) {
+    return *arg0 & 0x8000;
+}
+
 void fn_802B71F4(void) {
 
 }
