@@ -10,6 +10,10 @@ s32 fn_80361D14(void) {
     return 1;
 }
 
+s32 fn_80361D1C(void) {
+    return 1;
+}
+
 void fn_802D2FD0(void);
 void fn_80363C8C(void) {
     fn_802D2FD0();
