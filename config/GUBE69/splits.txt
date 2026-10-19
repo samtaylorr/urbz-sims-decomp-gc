@@ -79,7 +79,10 @@ auto/PlumbBob.c:
 	.text       start:0x80066DE4 end:0x8008C46C
 
 auto/text_8008C46C.c:
-	.text       start:0x8008C46C end:0x8023EBD8
+	.text       start:0x8008C46C end:0x8009A750
+
+auto/ScrollingTextBox.c:
+	.text       start:0x8009A750 end:0x8023EBD8
 
 libsn/text_8023EBD8.c:
 	.text       start:0x8023EBD8 end:0x80241A98
