@@ -113,6 +113,13 @@ s32 fn_803A0688(void) {
     return 0;
 }
 
+s32 fn_803A095C(s32 *p) {
+    if (p[0] != 0) {
+        p[1]++;
+    }
+    return 1;
+}
+
 SearchEntry *fn_803A097C(SearchEntry *lo, SearchEntry *hi, s32 key) {
     for (;;) {
         s32 n = hi - lo;
