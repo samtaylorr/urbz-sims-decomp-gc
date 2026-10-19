@@ -6,6 +6,12 @@ void fn_80348F38(void) {
     fn_802FB604();
 }
 
+extern void *fn_802D0AB8(void *);
+extern void fn_802D1A00(void *, void *);
+void fn_8034BCEC(void *arg0) {
+    fn_802D1A00(fn_802D0AB8(arg0), arg0);
+}
+
 void fn_80270D34(void);
 void fn_8034F8BC(void) {
     fn_80270D34();
