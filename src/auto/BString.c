@@ -181,6 +181,10 @@ void fn_800D2AE4(void) {
 
 }
 
+s32 fn_800D3C0C(s32 *self) {
+    return self[6];
+}
+
 extern void fn_800E9514(s32);
 extern u8 lbl_8040B518[];
 s32 *fn_800D3C68(s32 *self, s32 arg1) {
