@@ -51,6 +51,24 @@ void fn_80365D3C(void *arg0) {
     fn_80248488(M2C_FIELD(arg0, s32 *, 8), 0, M2C_FIELD(arg0, s32 *, 0xC) * 4);
 }
 
+void fn_8036619C(void *arg0) {
+    M2C_UNK *var_r30;
+    M2C_UNK fn_802D20E8(M2C_UNK *);
+    M2C_UNK *temp_r30;
+
+    var_r30 = M2C_FIELD(arg0, M2C_UNK **, 4);
+    if (var_r30 != NULL) {
+        do {
+            temp_r30 = *var_r30;
+            fn_802D20E8(var_r30);
+            var_r30 = temp_r30;
+        } while (var_r30 != NULL);
+    }
+    M2C_FIELD(arg0, M2C_UNK **, 4) = (int)NULL;
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    fn_80365D3C(arg0);
+}
+
 s32 fn_8036625C(void **arg0) {
     s32 var_r9;
     void *var_r3;
