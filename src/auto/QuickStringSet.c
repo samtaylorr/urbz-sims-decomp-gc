@@ -211,6 +211,10 @@ void fn_800FC178(void **self, s32 flags) {
     }
 }
 
+s32 fn_800FC360(void *arg0) {
+    return M2C_FIELD(M2C_FIELD(arg0, void **, 4), s32 *, 4);
+}
+
 extern s32 lbl_804944B0;
 s32 fn_800FC378(void) {
     return lbl_804944B0;
