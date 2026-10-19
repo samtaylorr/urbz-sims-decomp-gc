@@ -26,6 +26,10 @@ void fn_800ACBE8(void) {
 
 }
 
+void fn_800ACF2C(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x14) = 4;
+}
+
 void fn_800ADBEC(void) {
 
 }
