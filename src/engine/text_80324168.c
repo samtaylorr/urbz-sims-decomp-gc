@@ -16,3 +16,8 @@ void fn_803291A0(void) {
     fn_802D2430();
 }
 
+extern s32 lbl_80494F38;
+s32 fn_80329200(void) {
+    return lbl_80494F38;
+}
+
