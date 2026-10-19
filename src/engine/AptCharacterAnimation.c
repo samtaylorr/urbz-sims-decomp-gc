@@ -10,6 +10,17 @@ void fn_8028D540(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x127C) = arg1;
 }
 
+s32 fn_8028E05C(void *arg0) {
+    s32 fn_802AEA9C(s32);
+    s32 var_r3;
+
+    var_r3 = fn_802AEA9C(arg0 + 8);
+    if ((s32) M2C_FIELD(arg0, s32 *, 0x1C) != 0) {
+        var_r3 += M2C_FIELD(arg0, s32 *, 0x24);
+    }
+    return var_r3;
+}
+
 s32 fn_80290008(s32 arg0) {
     return arg0 & 0xFFFFFFFE;
 }
