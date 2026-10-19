@@ -227,6 +227,19 @@ void fn_8006A640(void) {
     fn_8006A5E8();
 }
 
+void fn_8006C6B4(void *arg0) {
+    M2C_UNK fn_8006C130(void *);
+    M2C_UNK fn_8006C2F8();
+    M2C_UNK fn_8006C458(void *);
+    extern s32 lbl_80494138;
+    if ((s32) M2C_FIELD(arg0, s32 *, 0x3A4) == 9) {
+        lbl_80494138 = 0;
+        fn_8006C2F8();
+        fn_8006C458(arg0);
+        fn_8006C130(arg0);
+    }
+}
+
 void fn_8006C704(void *arg0) {
     M2C_UNK fn_8006C35C();
     M2C_UNK fn_8006C3F4(void *);
