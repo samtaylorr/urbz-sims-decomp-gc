@@ -38,6 +38,11 @@ void fn_80325B1C(s32 arg0) {
     fn_80366120(arg0 + 0x490B0);
 }
 
+void fn_80326190(void *arg0) {
+    M2C_UNK fn_802F5D80(void *, void *, void *, s32, s32);
+    fn_802F5D80(arg0 + 0x28, arg0 + 0x48EFC, arg0 + 0x49120, M2C_FIELD(arg0, s32 *, 0x4B120), M2C_FIELD(arg0, s32 *, 0x4911C));
+}
+
 void fn_80327A68(s32 arg0) {
     M2C_UNK fn_80328DD4(s32);
     fn_80328AE0();
