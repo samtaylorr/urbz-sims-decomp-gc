@@ -31,6 +31,11 @@ void fn_8024D7AC(void) {
     fn_8024D784(lbl_80494988);
 }
 
+void fn_8024DE44(void *arg0) {
+    M2C_UNK fn_8024DE6C(s32, s16);
+    fn_8024DE6C(M2C_FIELD(arg0, s32 *, 0x5C), M2C_FIELD(arg0, s16 *, 0xE));
+}
+
 void fn_8024F99C(void);
 void fn_8024EF20(void) {
     fn_8024F99C();
