@@ -108,6 +108,10 @@ s32 fn_8026EDF0(void) {
     return lbl_804960A8;
 }
 
+void fn_80275168(void) {
+
+}
+
 s32 fn_80277404(void) {
     return 0;
 }
