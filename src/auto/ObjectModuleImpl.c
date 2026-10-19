@@ -67,6 +67,10 @@ void fn_80152310(void) {
 
 }
 
+void fn_80154BB4(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x2048) = (s32) M2C_FIELD(arg0, s32 *, 0x2044);
+}
+
 s32 fn_80156444(void) {
     return 0;
 }
