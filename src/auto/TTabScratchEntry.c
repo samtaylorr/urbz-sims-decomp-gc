@@ -99,6 +99,10 @@ s32 fn_801A3094(void) {
     return lbl_80494550;
 }
 
+s32 fn_801A309C(s32 *self) {
+    return self[1];
+}
+
 s32 fn_801A3D08(void) {
     return 0;
 }
