@@ -7,6 +7,13 @@ void fn_80024440(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
 
+void fn_80024474(void **obj) {
+    if (obj != NULL) {
+        char *vt = (char *)obj[0x11];
+        (*(void (**)(void *, s32))(vt + 0xC))((char *)obj + *(s16 *)(vt + 8), 3);
+    }
+}
+
 void fn_800245B0(void) {
     s32 fn_800245DC();
     M2C_UNK fn_802D1FC8(M2C_UNK);
