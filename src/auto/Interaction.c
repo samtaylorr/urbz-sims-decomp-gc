@@ -231,6 +231,13 @@ void fn_80111F9C(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x14) = 0;
 }
 
+void fn_80111FD0(void **obj) {
+    if (obj != NULL) {
+        char *vt = (char *)*obj;
+        (*(void (**)(void *, s32))(vt + 0xC))((char *)obj + *(s16 *)(vt + 0x8), 3);
+    }
+}
+
 void fn_80112168(void) {
 
 }
