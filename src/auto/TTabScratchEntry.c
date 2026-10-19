@@ -602,6 +602,10 @@ s32 fn_801A3AAC(void *arg0) {
     return ((u16) M2C_FIELD(arg0, u16 *, 0x110) >> 8U) & 1;
 }
 
+s32 fn_801A3AD8(void *arg0) {
+    return ((u16) M2C_FIELD(arg0, u16 *, 0x110) >> 9U) & 1;
+}
+
 s32 fn_801A3B70(void) {
     return 0x10;
 }
