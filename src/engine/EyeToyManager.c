@@ -82,6 +82,12 @@ void fn_8033BBCC(void) {
     fn_802D0B3C();
 }
 
+void fn_8033BC4C(s32 arg0) {
+    void fn_80337AEC(void *, s32);
+    extern u8 lbl_8045BBA0[];
+    fn_80337AEC(lbl_8045BBA0, arg0);
+}
+
 void fn_8033740C(void);
 void fn_8033BCE4(void) {
     fn_8033740C();
