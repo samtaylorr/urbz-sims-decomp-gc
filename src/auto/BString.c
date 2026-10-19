@@ -1046,6 +1046,17 @@ void fn_800E2A14(s32 *self, s32 flags) {
     }
 }
 
+extern s32 lbl_8040BFA0[];
+s32 *fn_800E2A54(s32 *self, s32 a) {
+    self[0] = a;
+    self[1] = -1;
+    self[2] = 0;
+    self[3] = -1;
+    self[4] = 1;
+    self[5] = (s32)lbl_8040BFA0;
+    return self;
+}
+
 void fn_800E2A88(s32 *self, s32 flags) {
     self[5] = (s32)lbl_804093F8;
     if (flags & 1) {
