@@ -49,6 +49,10 @@ s32 fn_80175CA4(s32 *self) {
     return self[1];
 }
 
+s32 fn_80175CB8(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0xAC);
+}
+
 s32 fn_80175CC0(char *self) {
     return *(s32 *)(self + 0xC);
 }
