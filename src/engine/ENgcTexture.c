@@ -20,6 +20,10 @@ void *fn_803613D4(u32 size, void *p) {
     return p;
 }
 
+void fn_803615F0(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x44) = (s32) (M2C_FIELD(arg0, s32 *, 0x44) - 1);
+}
+
 void fn_80361600(void) {
 
 }
