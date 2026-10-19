@@ -185,6 +185,12 @@ void fn_803081EC(void) {
     fn_80307CCC();
 }
 
+void fn_8030824C(s32 arg0) {
+    M2C_UNK fn_80307D00(s32);
+    fn_803075C8();
+    fn_80307D00(arg0);
+}
+
 f32 fn_803082B4(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0xA8);
 }
