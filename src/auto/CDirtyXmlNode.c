@@ -34,6 +34,12 @@ void fn_800BFBD0(void) {
 
 }
 
+extern u8 lbl_80431650[];
+void fn_802C876C(u8 *arg);
+void fn_800C05A0(void) {
+    fn_802C876C(lbl_80431650);
+}
+
 s32 fn_800C0604(void) {
     return 0;
 }
