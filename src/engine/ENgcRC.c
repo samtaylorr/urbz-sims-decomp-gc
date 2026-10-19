@@ -18,6 +18,12 @@ void fn_80346F5C(void) {
 
 }
 
+void fn_80347238(s32 arg0) {
+    void fn_8037A938(void *, s32, s32);
+    extern u8 lbl_8046DA00[];
+    fn_8037A938(lbl_8046DA00, arg0, 1);
+}
+
 void fn_803481C0(void) {
     s32 fn_80347F70();
     M2C_UNK fn_8034806C(s32);
