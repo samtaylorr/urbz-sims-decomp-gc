@@ -22,6 +22,10 @@ void fn_8008E250(void) {
 
 }
 
+void fn_8008E254(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x28) = 1;
+}
+
 void fn_8008F240(void) {
 
 }
