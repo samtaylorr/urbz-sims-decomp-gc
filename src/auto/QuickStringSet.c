@@ -38,6 +38,10 @@ s32 fn_800F7F64(void) {
     return 0;
 }
 
+s32 fn_800F7F6C(void) {
+    return 1;
+}
+
 s32 fn_800F7F74(void) {
     return 0;
 }
