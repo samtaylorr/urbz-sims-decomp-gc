@@ -30,6 +30,11 @@ void *fn_8032CDCC(void) {
     return lbl_80493948;
 }
 
+extern u16 lbl_8049395E[];
+u16 fn_8032CDD8(void) {
+    return lbl_8049395E[0];
+}
+
 void fn_802D2430(void);
 void fn_8032CE38(void) {
     fn_802D2430();
