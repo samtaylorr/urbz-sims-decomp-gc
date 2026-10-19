@@ -78,3 +78,8 @@ s32 fn_802379CC(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x6C);
 }
 
+void fn_802379D4(void) {
+    M2C_UNK fn_80237980(M2C_UNK, M2C_UNK);
+    fn_80237980(1, 0xFFFF);
+}
+
