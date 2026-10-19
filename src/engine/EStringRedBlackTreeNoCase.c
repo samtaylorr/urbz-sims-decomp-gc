@@ -98,6 +98,29 @@ s32 fn_803698D8(void **arg0) {
     return var_r9;
 }
 
+s32 fn_80369B40(void *arg0, u8 *arg1) {
+    s32 var_r10;
+    s8 var_r9;
+    u8 *var_r4;
+    u8 var_r11;
+
+    var_r4 = arg1;
+    var_r11 = *var_r4;
+    var_r10 = 0;
+    if ((s32) var_r11 != 0) {
+        do {
+            var_r9 = (s8) var_r11;
+            if ((u32) (var_r9 - 0x61) <= 0x19U) {
+                var_r9 -= 0x20;
+            }
+            var_r11 = M2C_FIELD(var_r4, u8 *, 1);
+            var_r4 += 1;
+            var_r10 = (var_r10 * 5) + var_r9;
+        } while ((s32) var_r11 != 0);
+    }
+    return var_r10 & M2C_FIELD(arg0, s32 *, 0x10);
+}
+
 s32 fn_8036A258(void **arg0) {
     s32 var_r9;
     void *var_r3;
