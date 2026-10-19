@@ -26,6 +26,10 @@ s32 fn_802EEE98(void) {
     return 1;
 }
 
+s32 fn_802EEEA8(void) {
+    return 1;
+}
+
 void fn_802EF010(void) {
     fn_802D2FD0();
 }
