@@ -5510,3 +5510,7 @@ void fn_803C0D04(void) {
     fn_803C0D34();
 }
 
+void fn_803C0D24(M2C_UNK **arg0) {
+    *arg0 = &lbl_804194A0;
+}
+
