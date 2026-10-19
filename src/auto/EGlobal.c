@@ -117,6 +117,10 @@ s32 fn_8004F120(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x198);
 }
 
+void fn_8004F128(void *arg0) {
+    M2C_FIELD(arg0, s16 *, 0xAA) = 0;
+}
+
 u16 fn_8004F134(u16 *arg0) {
     return *arg0;
 }
