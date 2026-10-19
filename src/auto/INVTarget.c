@@ -636,6 +636,26 @@ void fn_8020ACCC(void) {
 
 }
 
+void fn_8020C99C(void *arg0) {
+    M2C_UNK fn_8020FA8C();
+    M2C_UNK fn_8020FC34();
+    M2C_UNK fn_8020FD84();
+    s32 temp_r0;
+
+    temp_r0 = M2C_FIELD(arg0, s32 *, 0x120);
+    switch (temp_r0) {                              /* irregular */
+    case 9:
+        fn_8020FD84();
+        return;
+    case 28:
+        fn_8020FA8C();
+        return;
+    case 29:
+        fn_8020FC34();
+        return;
+    }
+}
+
 s32 fn_8020DD78(void *arg0) {
     s32 var_r3;
 
