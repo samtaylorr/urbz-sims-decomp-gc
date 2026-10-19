@@ -37,3 +37,7 @@ void fn_8016CCEC(void) {
 
 }
 
+void fn_8016CCF0(void) {
+
+}
+
