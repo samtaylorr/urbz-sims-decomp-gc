@@ -10,6 +10,10 @@ void fn_8033BD7C(void **self, s32 flags) {
     }
 }
 
+void fn_8033BFF8(void) {
+
+}
+
 s32 fn_8033C4E4(void) {
     return 0;
 }
