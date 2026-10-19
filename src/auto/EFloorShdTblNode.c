@@ -132,6 +132,20 @@ s32 fn_80058574(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void fn_80058900(void *arg0, void *arg1) {
+    void *temp_r9;
+    void *var_r31;
+
+    var_r31 = M2C_FIELD(arg0, void **, 0x114);
+    if (var_r31 != NULL) {
+        do {
+            temp_r9 = M2C_FIELD(arg1, void **, 0x68);
+            M2C_FIELD(temp_r9, M2C_UNK (**)(void *, s32), 0xB4)(arg1 + M2C_FIELD(temp_r9, s16 *, 0xB0), M2C_FIELD(var_r31, s32 *, 8));
+            var_r31 = M2C_FIELD(var_r31, void **, 0);
+        } while (var_r31 != NULL);
+    }
+}
+
 void fn_8005895C(s32 arg0, s32 arg1) {
     M2C_UNK fn_802E34F0(s32, s32);
     fn_802E34F0(arg1, arg0 + 0x120);
