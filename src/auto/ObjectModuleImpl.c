@@ -85,6 +85,10 @@ void fn_80157F24(void) {
 
 }
 
+void fn_801690B0(void) {
+
+}
+
 extern u8 lbl_803D9C80[];
 void *fn_8016A870(void) {
     return lbl_803D9C80;
