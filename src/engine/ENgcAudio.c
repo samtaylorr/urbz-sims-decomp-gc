@@ -22,6 +22,10 @@ s32 fn_8033C4EC(void) {
     return 0;
 }
 
+s32 fn_8033D104(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x38);
+}
+
 void fn_8033D214(void) {
 
 }
