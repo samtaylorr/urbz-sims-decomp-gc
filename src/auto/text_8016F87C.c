@@ -304,6 +304,10 @@ s32 fn_80176288(s32 arg0) {
     return arg0 + 0x1E0;
 }
 
+s32 fn_80176290(s32 arg0) {
+    return arg0 + 0x28C;
+}
+
 s32 fn_801762BC(void) {
     return 1;
 }
