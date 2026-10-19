@@ -4,3 +4,8 @@
 s32 fn_8016C618(void) {
     return 0;
 }
+
+s32 fn_8016C620(void) {
+    return 0;
+}
+
