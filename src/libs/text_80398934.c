@@ -1300,6 +1300,17 @@ s32 fn_803A3FA8(s32 *self) {
     return self[2];
 }
 
+void fn_803A4E30(s32 *first, s32 *last, s32 comp);
+void fn_803A4ED4(s32 *first, s32 *last, s32 *val, s32 comp);
+void fn_803A4F28(s32 *first, s32 *last, s32 comp) {
+    if (last - first > 16) {
+        fn_803A4E30(first, first + 16, comp);
+        fn_803A4ED4(first + 16, last, 0, comp);
+    } else {
+        fn_803A4E30(first, last, comp);
+    }
+}
+
 extern u8 lbl_80411160[];
 void fn_803A5BC0(void **self, s32 flags) {
     *self = lbl_80411160;
