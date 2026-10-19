@@ -94,6 +94,11 @@ s32 fn_802ACCFC(void) {
     return 0;
 }
 
+void fn_802ACDEC(char *self) {
+    extern void fn_802ADE44(void *);
+    fn_802ADE44(self + 8);
+}
+
 s32 fn_802ACE20(void) {
     return 1;
 }
