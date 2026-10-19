@@ -96,6 +96,10 @@ void fn_80148448(void **arg0, s32 arg1) {
     M2C_FIELD(*arg0, s32 *, 4) = arg1;
 }
 
+void fn_80148454(void **arg0, s32 arg1) {
+    M2C_FIELD(*arg0, s32 *, 8) = arg1;
+}
+
 s32 fn_801484F8(char *self) {
     return *(s32 *)(self + 0xC);
 }
