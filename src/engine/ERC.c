@@ -9,6 +9,11 @@ void fn_802F7188(f32 *arg0, f32 farg0) {
     *arg0 = farg0;
 }
 
+void fn_802FB8A0(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 4) = arg1;
+    M2C_FIELD(arg0, s8 *, 0) = 7;
+}
+
 void fn_802FBC54(void) {
 
 }
