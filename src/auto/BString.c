@@ -1499,7 +1499,7 @@ void fn_800E3B5C(s32 *self) {
 }
 
 extern void fn_800E3E40(s32);
-void fn_800E3B80(s32 *self) {
+void fn_800E3B80(s32 *self, s32 arg) {
     fn_800E3E40(self[2]);
 }
 
