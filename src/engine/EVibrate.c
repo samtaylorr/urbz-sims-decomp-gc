@@ -2,6 +2,10 @@
 #include "common.h"
 
 void fn_80314E68(void);
+s32 fn_80314DB0(s32 *self) {
+    return *self;
+}
+
 void fn_80314E34(void) {
     fn_80314E68();
 }
