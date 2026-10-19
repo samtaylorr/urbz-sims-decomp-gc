@@ -7,6 +7,14 @@ void fn_80024440(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
 
+void fn_800245B0(void) {
+    s32 fn_800245DC();
+    M2C_UNK fn_802D1FC8(M2C_UNK);
+    extern s32 lbl_80493FA0;
+    fn_802D1FC8(0x28);
+    lbl_80493FA0 = fn_800245DC();
+}
+
 void fn_800275A0(void) {
 
 }
