@@ -57,6 +57,13 @@ void fn_801325DC(void (*cb)(void)) {
     lbl_80494478 = cb;
 }
 
+s32 fn_801336B0(void *arg0) {
+    if ((((s32) M2C_FIELD(arg0, s32 *, 0x6C) >> 4) <= 0) || (((s32) M2C_FIELD(arg0, s32 *, 0x68) >> 4) <= 0)) {
+        return 0;
+    }
+    return 1;
+}
+
 void fn_80133954(s32 *arg0) {
     *arg0 = 0;
 }
