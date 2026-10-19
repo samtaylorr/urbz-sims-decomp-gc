@@ -37,6 +37,12 @@ void fn_803256E0(s32 arg0, s32 arg1) {
     fn_80325978(arg0, arg1);
 }
 
+void fn_803257E8(void *arg0, void *arg1) {
+    s32 fn_802CB69C(s32);
+    M2C_FIELD(arg1, s32 *, 0x88) = fn_802CB69C(arg0 + 0x48EFC);
+    M2C_FIELD(arg0, s32 *, 0x28) = 1;
+}
+
 void fn_80325888(void) {
 
 }
