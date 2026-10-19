@@ -30,6 +30,15 @@ void fn_8010A8A4(void) {
 
 }
 
+void fn_8010AB64(void *arg0, s32 arg1) {
+    extern s16 lbl_804944C4;
+    M2C_FIELD(arg0, s32 *, 0x80) = arg1;
+    if (arg1 == -1) {
+        M2C_FIELD(arg0, s32 *, 0x80) = (s32) (M2C_FIELD(arg0, s32 *, 0) - 1);
+    }
+    lbl_804944C4 = 1;
+}
+
 s32 fn_8010B4E8(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x80);
 }
