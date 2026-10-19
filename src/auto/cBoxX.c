@@ -1,6 +1,18 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+s32 fn_800FE02C(s32 arg0, s32 arg1, s32 arg2) {
+    extern s32 lbl_804943E4;
+    extern s32 lbl_80495AD0;
+    extern s32 lbl_80495AD4;
+    extern s32 lbl_80495AD8;
+    lbl_80495AD4 = arg0;
+    lbl_804943E4 = 1;
+    lbl_80495AD0 = arg1;
+    lbl_80495AD8 = arg2;
+    return 1;
+}
+
 void fn_80101300(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0xC) = arg1;
     M2C_FIELD(arg0, s32 *, 4) = 1;
