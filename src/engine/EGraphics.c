@@ -102,6 +102,10 @@ s32 fn_802EEFAC(void) {
     return 0x400;
 }
 
+s32 fn_802EEFB4(s32 arg0) {
+    return arg0 + 0x40;
+}
+
 void fn_802EEFBC(void) {
 
 }
