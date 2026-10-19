@@ -263,6 +263,12 @@ void fn_8011709C(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x40) = temp_r9;
 }
 
+void fn_80117160(void *arg0) {
+    M2C_UNK fn_800F1AA0(s32);
+    fn_800F1AA0(arg0 + 0x34);
+    M2C_FIELD(arg0, s32 *, 0x44) = (s32) (M2C_FIELD(arg0, s32 *, 0x44) | 0x80);
+}
+
 s32 fn_80117474(char *self) {
     return *(s32 *)(self + 0xC);
 }
