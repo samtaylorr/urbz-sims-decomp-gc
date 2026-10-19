@@ -84,6 +84,10 @@ s32 fn_8030A9BC(void) {
     return lbl_80494EC4;
 }
 
+void fn_8030A9C4(void) {
+
+}
+
 s32 fn_8030A9D0(void) {
     return 0;
 }
