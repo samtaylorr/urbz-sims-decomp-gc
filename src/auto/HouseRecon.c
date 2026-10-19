@@ -32,3 +32,7 @@ void fn_80052AFC(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x38C) = 1;
 }
 
+void fn_80052B08(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x38C) = 0;
+}
+
