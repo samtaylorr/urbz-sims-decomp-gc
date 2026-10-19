@@ -27,6 +27,10 @@ void fn_8034AD3C(void) {
 
 }
 
+void fn_8034AD40(void) {
+
+}
+
 extern void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
 void fn_8034BCEC(void *arg0) {
