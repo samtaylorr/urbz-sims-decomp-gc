@@ -20,3 +20,8 @@ void fn_80279D70(void) {
     fn_80279D00();
 }
 
+extern s32 lbl_80496100;
+void fn_8027A680(void (*cb)(void)) {
+    lbl_80496100 = cb;
+}
+
