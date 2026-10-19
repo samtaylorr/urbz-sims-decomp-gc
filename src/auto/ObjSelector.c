@@ -17,3 +17,7 @@ s32 fn_8016C710(void) {
     return 0;
 }
 
+s32 fn_8016C718(void) {
+    return 0;
+}
+
