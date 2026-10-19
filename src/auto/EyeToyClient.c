@@ -16,6 +16,11 @@ void fn_80041D9C(void) {
 
 }
 
+s32 fn_80041FBC(s32 arg0) {
+    extern s32 lbl_8049408C;
+    return ((s32) lbl_8049408C >> arg0) & 1;
+}
+
 void fn_80042A60(void (*cb)(void)) {
     lbl_804940B0 = cb;
 }
