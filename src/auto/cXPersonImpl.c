@@ -24,6 +24,10 @@ void fn_80182220(void) {
 
 }
 
+s32 fn_80183B60(void **arg0) {
+    return ((u32) M2C_FIELD(*arg0, u32 *, 0x84) >> 1U) & 1;
+}
+
 void fn_80185868(void) {
 
 }
