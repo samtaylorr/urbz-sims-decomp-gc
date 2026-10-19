@@ -4435,6 +4435,12 @@ void fn_803BAB58(void) {
     fn_802F05AC();
 }
 
+void fn_803BAD78(void *self) {
+    ((s32 *)self)[0] = 0;
+    ((s32 *)self)[2] = 0;
+    ((s32 *)self)[1] = 0;
+}
+
 extern void fn_803BAD78(void *);
 void *fn_803BAD8C(void *self) {
     fn_803BAD78(self);
