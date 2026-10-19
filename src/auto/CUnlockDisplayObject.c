@@ -29,6 +29,19 @@ void fn_800BA124(void *arg0, f32 farg0) {
     M2C_FIELD(arg0, f32 *, 0x480) = farg0;
 }
 
+void fn_800BADDC(void *arg0, s32 arg1) {
+    M2C_UNK fn_800BBADC(M2C_UNK *, s32);
+    M2C_UNK *var_r31;
+
+    var_r31 = M2C_FIELD(arg0, M2C_UNK **, 0x44C);
+    if (var_r31 != NULL) {
+        do {
+            fn_800BBADC(var_r31, arg1);
+            var_r31 = *var_r31;
+        } while (var_r31 != NULL);
+    }
+}
+
 void fn_800BAEDC(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x428) = 0;
 }
