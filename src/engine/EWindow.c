@@ -30,6 +30,10 @@ s32 fn_803079E4(s32 *self) {
     return self[6];
 }
 
+s32 fn_80307AAC(s32 *self) {
+    return self[7];
+}
+
 s32 fn_80307AD4(char *self) {
     return *(s32 *)(self + 0xC);
 }
