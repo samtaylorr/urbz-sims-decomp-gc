@@ -83,6 +83,10 @@ void fn_802F02EC(void) {
 
 }
 
+void fn_802F02F0(void) {
+
+}
+
 s32 fn_802F02FC(void) {
     return 0;
 }
