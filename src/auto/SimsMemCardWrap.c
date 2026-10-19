@@ -33,6 +33,10 @@ s32 fn_800A6154(void) {
     return 0;
 }
 
+void fn_800A617C(void *arg0, s32 *arg1) {
+    *arg1 = (M2C_FIELD(arg0, u8 *, 0) << 0x18) | (M2C_FIELD(arg0, u8 *, 1) << 0x10) | (M2C_FIELD(arg0, u8 *, 2) << 8) | M2C_FIELD(arg0, u8 *, 3);
+}
+
 extern void fn_802D20E8(void *);
 void fn_800A73CC(void *self, s32 flags) {
     if (flags & 1) {
