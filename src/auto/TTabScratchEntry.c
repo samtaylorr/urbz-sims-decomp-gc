@@ -617,6 +617,10 @@ s32 fn_801AA930(s32 *self) {
     return self[1];
 }
 
+void fn_801AB0E8(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0x54) = arg1;
+}
+
 s32 fn_801AB13C(s32 arg0) {
     return arg0 + 0x10;
 }
