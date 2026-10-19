@@ -330,7 +330,7 @@ s32 fn_802628C4(u32 arg0) {
     return 0;
 }
 
-s32 fn_80262F24(s32, void *);
+s32 fn_80262F24(s32, DVDCommandBlock *);
 void *fn_80262F18(void) {
     return (void *)fn_80262F24;
 }
