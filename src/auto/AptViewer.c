@@ -87,3 +87,8 @@ s32 fn_8000C534(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x3A4);
 }
 
+void fn_8000C570(void) {
+    M2C_UNK fn_8000C53C(M2C_UNK, M2C_UNK);
+    fn_8000C53C(1, 0xFFFF);
+}
+
