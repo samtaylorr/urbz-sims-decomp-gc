@@ -141,3 +141,7 @@ s32 fn_800AB76C(void) {
     return 0;
 }
 
+void fn_800ABD50(void) {
+
+}
+
