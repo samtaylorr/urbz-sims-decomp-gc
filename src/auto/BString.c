@@ -366,6 +366,20 @@ void fn_800D3FB4(s32 *self) {
     fn_800E9554(self[2]);
 }
 
+extern u8 lbl_8040B3B0[];
+s32 *fn_800D3FD8(s32 *self, s32 arg1) {
+    extern u8 lbl_8040B3B0[];
+    self[0] = arg1;
+    self[1] = -1;
+    self[2] = 0;
+    self[3] = -1;
+    self[4] = 1;
+    self[6] = 0;
+    self[5] = (s32)lbl_8040B3B0;
+    self[7] = 0;
+    return self;
+}
+
 void fn_800D4014(s32 *self, s32 flags) {
     self[5] = (s32)lbl_804093F8;
     if (flags & 1) {
