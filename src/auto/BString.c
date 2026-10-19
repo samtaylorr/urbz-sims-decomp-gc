@@ -228,6 +228,17 @@ s32 *fn_800D45BC(s32 *self, s32 arg1) {
     return self;
 }
 
+extern s32 lbl_8040B7A0[];
+s32 *fn_800D4B30(s32 *self, s32 a) {
+    self[0] = a;
+    self[1] = -1;
+    self[2] = 0;
+    self[3] = -1;
+    self[4] = 1;
+    self[5] = (s32)lbl_8040B7A0;
+    return self;
+}
+
 extern u8 lbl_8040B998[];
 s32 *fn_800D4F70(s32 *self, s32 arg1) {
     self[0] = arg1;
