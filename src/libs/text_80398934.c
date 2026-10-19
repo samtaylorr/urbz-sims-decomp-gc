@@ -650,6 +650,23 @@ void fn_8039C274(void) {
 
 }
 
+extern u8 lbl_804094E0[];
+void fn_8039C2D4(s32 arg0, s32 arg1, s32 arg2) {
+    struct {
+        void *vtbl;
+        s32 unk4;
+        s32 unk8;
+    } tmp, *p;
+    u8 out[8];
+
+    p = &tmp;
+    tmp.unk4 = arg0;
+    tmp.vtbl = lbl_804094E0;
+    p->unk8 = arg2;
+    fn_8018E8F8(out, p, arg1);
+    ((void (*)(void *, s32))fn_8018EA6C)(p, 2);
+}
+
 void fn_8039C32C(void) {
     fn_8018EA6C();
 }
