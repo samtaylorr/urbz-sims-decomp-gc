@@ -20,3 +20,7 @@ void fn_8031ECEC(void) {
     fn_802D2430();
 }
 
+s32 fn_8031ED0C(void) {
+    return 1;
+}
+
