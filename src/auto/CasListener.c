@@ -94,6 +94,10 @@ void fn_801BBFD0(void) {
 
 }
 
+void fn_801BF628(void) {
+
+}
+
 void fn_801BF79C(void) {
     fn_803074F0();
 }
