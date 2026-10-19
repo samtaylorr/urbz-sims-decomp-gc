@@ -21,6 +21,10 @@ s32 fn_800A496C(void) {
     return 1;
 }
 
+void fn_800A51BC(void) {
+
+}
+
 s32 fn_800A6154(void) {
     return 0;
 }
