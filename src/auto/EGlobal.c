@@ -9,6 +9,10 @@ void fn_8004AF40(void) {
 
 }
 
+void fn_8004B95C(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0xF4) = arg1;
+}
+
 void fn_8004C614(void) {
 
 }
