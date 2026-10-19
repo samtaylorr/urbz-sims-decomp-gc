@@ -158,6 +158,10 @@ s32 fn_801C0A58(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x10) & 1;
 }
 
+void fn_801C465C(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x10) = 0;
+}
+
 extern void fn_801C5778(void *);
 void *fn_801C5720(void *self) {
     fn_801C5778(self);
