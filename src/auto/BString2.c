@@ -10,6 +10,12 @@ s32 fn_800F0698(void) {
     return 0;
 }
 
+extern void fn_800F07C4(void *);
+void *fn_800F1FA8(void *self) {
+    fn_800F07C4(self);
+    return self;
+}
+
 void fn_800F3738(void) {
     fn_800F0FFC();
 }
