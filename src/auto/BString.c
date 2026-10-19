@@ -551,6 +551,10 @@ void fn_800DEA64(void) {
 
 }
 
+void fn_800DF61C(void) {
+
+}
+
 void fn_800E1868(void) {
     fn_800E3BC0();
 }
