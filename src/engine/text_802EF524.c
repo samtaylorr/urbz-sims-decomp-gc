@@ -16,6 +16,11 @@ void *fn_802EF9F0(void) {
     return lbl_80493768;
 }
 
+extern s32 lbl_80493774[];
+s32 fn_802EF9FC(void) {
+    return lbl_80493774[0];
+}
+
 void *fn_802EFA20(void) {
     return lbl_80493768;
 }
