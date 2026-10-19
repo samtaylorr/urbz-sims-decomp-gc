@@ -5,6 +5,13 @@ extern u8 lbl_803C1390[];
 extern u8 lbl_804069E8[];
 extern u8 lbl_8041E1A0[];
 extern u8 lbl_8041E1C8[];
+extern s32 lbl_80493F0C;
+extern char lbl_803C1320[];
+extern char lbl_803C1328[];
+extern char lbl_80491BF0[];
+char *fn_80248B28(const char *, const char *);
+u32 fn_80248808(const char *);
+char *fn_80248A10(char *, const char *, u32);
 void fn_802E04BC(void *);
 void fn_802E0460(void *);
 u8 *fn_8000381C(u8 *self) {
