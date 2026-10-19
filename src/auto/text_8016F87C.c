@@ -33,3 +33,7 @@ s32 fn_80175D54(void) {
     return 0;
 }
 
+s32 fn_80175E44(void) {
+    return 0;
+}
+
