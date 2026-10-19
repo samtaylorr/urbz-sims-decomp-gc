@@ -2,6 +2,24 @@
 #include "common.h"
 
 extern s32 lbl_80494F5C;
+s32 fn_803336A8(void *arg0) {
+    s32 var_ctr;
+    s32 var_r9;
+    void *var_r3;
+
+    var_r3 = arg0;
+    var_r9 = 0;
+    var_ctr = 4;
+    do {
+        M2C_FIELD(var_r3, s32 *, 0) = var_r9;
+        M2C_FIELD(var_r3, s32 *, 0x10) = 1;
+        var_r9 += 1;
+        var_r3 += 4;
+        var_ctr -= 1;
+    } while (var_ctr != 0);
+    return 1;
+}
+
 void fn_8033372C(void) {
 
 }
