@@ -1749,6 +1749,10 @@ void fn_800EA5AC(s32 *self, s32 flags) {
     }
 }
 
+void fn_800EA5E0(s32 *self) {
+    fn_800E9514(self[2]);
+}
+
 extern s32 lbl_8040D088[];
 s32 *fn_800EA64C(s32 *self, s32 a) {
     self[0] = a;
