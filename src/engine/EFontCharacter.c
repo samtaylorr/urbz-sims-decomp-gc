@@ -80,6 +80,11 @@ void *fn_8036D268(void) {
     return lbl_80493D7C;
 }
 
+extern s32 lbl_80493D88[];
+s32 fn_8036D274(void) {
+    return lbl_80493D88[0];
+}
+
 void *fn_8036D298(void) {
     return lbl_80493D7C;
 }
