@@ -22,6 +22,10 @@ u8 fn_801B27B0(void *arg0) {
     return M2C_FIELD(M2C_FIELD(arg0, void **, 0x54), u8 *, 4);
 }
 
+void fn_801B27BC(void *arg0, s8 arg1) {
+    M2C_FIELD(M2C_FIELD(arg0, void **, 0x54), s8 *, 4) = arg1;
+}
+
 s16 fn_801B28E4(void *arg0) {
     return M2C_FIELD(arg0, s16 *, 4);
 }
