@@ -332,3 +332,7 @@ u8 fn_801762E4(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 0x340);
 }
 
+u8 fn_801762EC(void *arg0) {
+    return M2C_FIELD(arg0, u8 *, 0x341);
+}
+
