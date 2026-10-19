@@ -279,6 +279,34 @@ s32 fn_801DFBE0(void) {
     return lbl_8049461C;
 }
 
+void fn_801DFDAC(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    M2C_UNK *temp_r0;
+    M2C_UNK *temp_r10;
+    M2C_UNK *temp_r9;
+
+    temp_r10 = M2C_FIELD(arg0, s32 **, 8);
+    temp_r9 = M2C_FIELD(temp_r10, s32 **, 4);
+    M2C_FIELD(arg0, s32 **, 8) = temp_r9;
+    if (temp_r9 != NULL) {
+        *temp_r9 = 0;
+    }
+    M2C_FIELD(temp_r10, s32 *, 8) = arg1;
+    M2C_FIELD(temp_r10, s32 *, 0xC) = arg2;
+    M2C_FIELD(temp_r10, s32 *, 0x10) = arg3;
+    temp_r0 = M2C_FIELD(arg0, s32 **, 0);
+    if (temp_r0 == NULL) {
+        M2C_FIELD(arg0, s32 **, 0) = temp_r10;
+        M2C_FIELD(temp_r10, M2C_UNK **, 0) = temp_r0;
+        M2C_FIELD(arg0, M2C_UNK **, 4) = temp_r10;
+        M2C_FIELD(temp_r10, M2C_UNK **, 4) = temp_r0;
+        return;
+    }
+    M2C_FIELD(M2C_FIELD(arg0, M2C_UNK **, 4), M2C_UNK **, 4) = temp_r10;
+    M2C_FIELD(temp_r10, M2C_UNK **, 0) = M2C_FIELD(arg0, M2C_UNK **, 4);
+    M2C_FIELD(arg0, M2C_UNK **, 4) = temp_r10;
+    M2C_FIELD(temp_r10, M2C_UNK **, 4) = NULL;
+}
+
 s32 fn_801E0118(void) {
     s32 fn_801DFC68();
     M2C_UNK fn_802D1FC8(M2C_UNK);
