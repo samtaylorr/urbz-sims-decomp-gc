@@ -33,6 +33,11 @@ s32 fn_8036CFC4(void) {
     return lbl_80493D3C[0];
 }
 
+extern u16 lbl_80493D40[];
+u16 fn_8036CFD0(void) {
+    return lbl_80493D40[0];
+}
+
 void *fn_8036CFDC(void) {
     return lbl_80493D2C;
 }
