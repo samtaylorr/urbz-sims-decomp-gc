@@ -30,3 +30,8 @@ void fn_801CE82C(s32 arg0) {
     fn_801CBFF8(arg0 + 0xF8);
 }
 
+void fn_801CE850(s32 arg0) {
+    M2C_UNK fn_801CC288(s32);
+    fn_801CC288(arg0 + 0xF8);
+}
+
