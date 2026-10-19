@@ -338,6 +338,12 @@ s32 fn_80223248(s32 *self) {
     return self[1];
 }
 
+void fn_802233F0(s32 arg0, void *arg1, void *arg2) {
+    M2C_FIELD(arg1, s32 *, 0) = arg0;
+    M2C_FIELD(arg1, s32 *, 4) = (s32) M2C_FIELD(arg2, s32 *, 8);
+    M2C_FIELD(arg2, M2C_UNK (**)(void *), 0xC)(arg1);
+}
+
 void fn_8022345C(void) {
 
 }
