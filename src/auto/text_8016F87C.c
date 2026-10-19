@@ -17,6 +17,10 @@ void fn_8016FA20(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x20) = arg1;
 }
 
+void fn_8016FA28(void *arg0, s32 arg1, s32 arg2) {
+    M2C_FIELD(arg0, M2C_UNK (**)(s32, s32), 0x20)(arg1, arg2);
+}
+
 s32 fn_8016FA58(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x34) = arg1;
     return 1;
