@@ -31,6 +31,12 @@ void fn_8034AD40(void) {
 
 }
 
+extern u8 lbl_8046DF78[];
+void fn_80359160(u8 *arg);
+void fn_8034ADDC(void) {
+    fn_80359160(lbl_8046DF78);
+}
+
 void fn_8034AFD4(void) {
 
 }
