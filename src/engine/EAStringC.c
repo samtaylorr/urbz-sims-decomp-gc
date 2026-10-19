@@ -93,3 +93,7 @@ s32 fn_802B8D70(void) {
     return 0;
 }
 
+s32 fn_802B914C(void) {
+    return 0;
+}
+
