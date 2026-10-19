@@ -22,6 +22,10 @@ s32 fn_8031FC8C(void) {
     return 0;
 }
 
+s32 fn_8031FC94(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x40);
+}
+
 s32 fn_8031FE04(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x2C);
 }
