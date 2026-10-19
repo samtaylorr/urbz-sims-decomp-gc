@@ -56,6 +56,13 @@ s32 fn_803669C0(void *arg0) {
     return var_r3 - temp_r11;
 }
 
+void fn_80366A3C(s32 arg0) {
+    s32 fn_80366820(s32, M2C_UNK, M2C_UNK);
+    do {
+
+    } while (fn_80366820(arg0, 0, 0) != 0);
+}
+
 void fn_8036727C(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x40) = arg1;
 }
