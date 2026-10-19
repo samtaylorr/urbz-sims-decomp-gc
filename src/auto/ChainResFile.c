@@ -53,6 +53,10 @@ s32 fn_8010531C(s32 *self) {
     return *self;
 }
 
+f32 fn_80105498(u8 *arg0) {
+    return (f32) (f64) (s8) *arg0;
+}
+
 void fn_80105508(void *arg0) {
     M2C_FIELD(arg0, s8 *, 2) = 0;
 }
