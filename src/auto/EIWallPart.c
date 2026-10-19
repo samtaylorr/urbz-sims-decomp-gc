@@ -143,6 +143,19 @@ void fn_80035CD4(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
 
+void fn_800364C0(void *arg0, s32 arg1, s32 arg2) {
+    M2C_UNK fn_800359FC(s32, s32, s32);
+    void *var_r31;
+
+    var_r31 = M2C_FIELD(arg0, void **, 0x14);
+    if (var_r31 != NULL) {
+        do {
+            fn_800359FC(M2C_FIELD(var_r31, s32 *, 0), arg1, arg2);
+            var_r31 = M2C_FIELD(var_r31, void **, 8);
+        } while (var_r31 != NULL);
+    }
+}
+
 extern void *fn_80032AE0(u32);
 extern void fn_800331DC(void *);
 void *fn_80039DC8(u32 size, void *p);
