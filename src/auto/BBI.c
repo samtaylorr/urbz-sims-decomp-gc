@@ -39,6 +39,14 @@ s32 fn_8005FAF0(s32 arg0, s32 *out) {
     return arg0;
 }
 
+s32 fn_8005FB30(s32 arg0, s32 *out) {
+    s32 tmp;
+
+    fn_802C5C58((void *)arg0, &tmp);
+    *out = tmp;
+    return arg0;
+}
+
 void fn_80060610(void) {
     fn_802D2FD0();
 }
