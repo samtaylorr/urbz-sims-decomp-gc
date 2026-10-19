@@ -46,6 +46,19 @@ void fn_8003D024(void) {
 
 }
 
+void fn_8003E4A8(void *arg0) {
+    M2C_UNK fn_8003E50C(void *);
+    M2C_UNK fn_802D8F90(s32);
+    extern s32 lbl_80494DF0;
+    fn_802D8F90(lbl_80494DF0);
+    if (((s32) M2C_FIELD(arg0, s32 *, 0x63C) != 0) && ((s32) M2C_FIELD(arg0, s32 *, 0x600) <= 0)) {
+        if ((s32) M2C_FIELD(arg0, s32 *, 0x640) != 0) {
+            fn_8003E50C(arg0);
+        }
+        M2C_FIELD(arg0, s32 *, 0x63C) = 0;
+    }
+}
+
 void fn_8003ECBC(void *arg0, s32 *arg1) {
     *arg1 = M2C_FIELD(arg0, u8 *, 0) | (M2C_FIELD(arg0, u8 *, 1) << 8) | (M2C_FIELD(arg0, u8 *, 2) << 0x10) | (M2C_FIELD(arg0, u8 *, 3) << 0x18);
 }
