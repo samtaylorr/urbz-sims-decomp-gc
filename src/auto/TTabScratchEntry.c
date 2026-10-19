@@ -123,6 +123,10 @@ s32 fn_801AA4C4(void) {
     return 0;
 }
 
+s32 fn_801AA930(s32 *self) {
+    return self[1];
+}
+
 s32 fn_801B19F4(void) {
     return 0;
 }
