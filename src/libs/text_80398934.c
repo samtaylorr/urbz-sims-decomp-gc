@@ -59,7 +59,7 @@ void *fn_80399C38(void *self, s32 *arg1) {
 }
 
 void fn_80399CD4(void *self, s32 n) {
-    while (n--) {
+    while (--n != -1) {
     }
 }
 
@@ -91,6 +91,12 @@ extern void fn_80399F34(void *);
 void *fn_8039A038(void *self) {
     fn_80399F34(self);
     return self;
+}
+
+void fn_8039A514(void *self) {
+    ((s32 *)self)[0] = 0;
+    ((s32 *)self)[2] = 0;
+    ((s32 *)self)[1] = 0;
 }
 
 void fn_8039AB04(void) {
