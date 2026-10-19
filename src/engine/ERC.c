@@ -61,6 +61,10 @@ void fn_802FE858(void) {
 
 }
 
+void fn_802FE85C(void) {
+
+}
+
 s32 fn_802FECD8(void) {
     return 0;
 }
