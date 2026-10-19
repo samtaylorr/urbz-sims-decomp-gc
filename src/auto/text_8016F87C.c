@@ -42,6 +42,10 @@ s32 fn_80175E44(void) {
     return 0;
 }
 
+s32 fn_80175EA0(void) {
+    return lbl_80495C90;
+}
+
 s32 fn_80175F84(void) {
     return 0;
 }
