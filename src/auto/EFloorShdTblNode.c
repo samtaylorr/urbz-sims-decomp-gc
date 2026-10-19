@@ -76,6 +76,15 @@ s32 fn_800568D0(void) {
     return lbl_80496694;
 }
 
+void fn_800568FC(s32 arg0, s32 arg1) {
+    M2C_UNK fn_802CB8D4(s32);
+    M2C_UNK fn_802D20E8(s32);
+    fn_802CB8D4(arg0 + 4);
+    if (arg1 & 1) {
+        fn_802D20E8(arg0);
+    }
+}
+
 void fn_80058514(void) {
     fn_802D2FD0();
 }
