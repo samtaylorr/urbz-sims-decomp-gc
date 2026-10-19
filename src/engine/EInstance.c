@@ -46,6 +46,11 @@ s32 fn_802F19F4(void) {
     return 0;
 }
 
+void fn_802C876C(void *);
+void fn_802F1A2C(void *self, void *arg) {
+    fn_802C876C(arg);
+}
+
 s32 fn_802F1A50(void) {
     return 0;
 }
