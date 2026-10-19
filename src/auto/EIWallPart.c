@@ -14,9 +14,8 @@ void fn_800328F8(char *self, void *arg1) {
     fn_802E34F0(arg1, self + 0x44);
 }
 
-s32 fn_80032924(char *self, s32 i) {
-    s32 *arr = (s32 *)(self + 0x2C);
-    return arr[i];
+s32 fn_80032924(EIWallPartFlags *self, s32 i) {
+    return self->unk2C[i];
 }
 
 s32 fn_80032934(EIWallPartFlags *self, s32 i) {
