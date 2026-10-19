@@ -93,3 +93,7 @@ void fn_8012ACA8(void) {
 
 }
 
+void fn_8012ACAC(void) {
+
+}
+
