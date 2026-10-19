@@ -103,6 +103,10 @@ s32 fn_800051A8(void) {
     return 0;
 }
 
+void *fn_800051B0(void) {
+    return lbl_80491BF0;
+}
+
 void fn_800051BC(void) {
     fn_80005118(1, 0xFFFF);
 }
