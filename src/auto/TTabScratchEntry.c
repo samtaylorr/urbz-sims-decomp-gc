@@ -91,6 +91,10 @@ void fn_8019C850(void) {
 
 }
 
+void fn_8019CA54(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x34) = -3;
+}
+
 extern u8 lbl_80414770[];
 extern void fn_802D20E8(void *);
 void fn_8019CE74(void **self, s32 flags) {
