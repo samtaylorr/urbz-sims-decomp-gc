@@ -145,3 +145,8 @@ u16 fn_8004F134(u16 *arg0) {
     return *arg0;
 }
 
+void fn_8004F164(void) {
+    M2C_UNK fn_8004EDEC(M2C_UNK, M2C_UNK);
+    fn_8004EDEC(1, 0xFFFF);
+}
+
