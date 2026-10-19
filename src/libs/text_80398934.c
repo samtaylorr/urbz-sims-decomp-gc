@@ -101,6 +101,10 @@ void fn_8039BCD8(void) {
     fn_8018EA6C();
 }
 
+s32 fn_8039BD1C(s32 *self) {
+    return self[2];
+}
+
 void fn_8039C1B8(void) {
     fn_8030AD40();
 }
