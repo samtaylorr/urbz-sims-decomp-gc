@@ -245,3 +245,8 @@ void *fn_8016A870(void) {
     return lbl_803D9C80;
 }
 
+void fn_8016BFB4(void) {
+    M2C_UNK fn_8016BE04(M2C_UNK, M2C_UNK);
+    fn_8016BE04(1, 0xFFFF);
+}
+
