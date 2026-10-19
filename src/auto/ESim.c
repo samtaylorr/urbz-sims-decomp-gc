@@ -101,6 +101,11 @@ void fn_8003FAAC(void *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 0x46C) = arg2;
 }
 
+s32 fn_8003FAB8(void *arg0, s32 *arg1) {
+    *arg1 = M2C_FIELD(arg0, s32 *, 0x46C);
+    return M2C_FIELD(arg0, s32 *, 0x52C);
+}
+
 s32 fn_8003FAE8(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x53C);
 }
