@@ -79,3 +79,7 @@ void fn_802EFA8C(void) {
     fn_802D2430();
 }
 
+s32 fn_802EFAAC(void) {
+    return 2;
+}
+
