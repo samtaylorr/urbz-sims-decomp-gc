@@ -33,3 +33,9 @@ void fn_80334EC4(void (*cb)(void)) {
 s32 fn_80334ECC(void) {
     return lbl_80494F5C;
 }
+
+void fn_80334FC8(void) {
+    M2C_UNK fn_80334F08(M2C_UNK, M2C_UNK);
+    fn_80334F08(1, 0xFFFF);
+}
+
