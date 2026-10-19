@@ -34,6 +34,16 @@ void fn_8006E2D4(void) {
     fn_800490B0(lbl_8041F754);
 }
 
+s32 *fn_8006E308(s32 *self, s32 a) {
+    self[0] = a;
+    self[1] = -1;
+    self[2] = 0;
+    self[3] = -1;
+    self[4] = 1;
+    self[5] = (s32)lbl_804093B0;
+    return self;
+}
+
 s32 fn_800702F8(void) {
     return 0;
 }
