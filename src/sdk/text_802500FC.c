@@ -335,6 +335,21 @@ s32 fn_802642B8(void) {
     return lbl_80495F08;
 }
 
+s32 fn_802642C0(void *arg0) {
+    s32 temp_r0;
+    s32 var_r31;
+
+    fn_8025465C();
+    temp_r0 = M2C_FIELD(arg0, s32 *, 0xC);
+    if (temp_r0 == 3) {
+        var_r31 = 1;
+    } else {
+        var_r31 = temp_r0;
+    }
+    fn_80254684();
+    return var_r31;
+}
+
 s32 fn_802643B8(s32 arg0) {
     extern s32 lbl_80494A2C;
     s32 temp_r0;
