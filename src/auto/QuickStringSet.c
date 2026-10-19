@@ -498,6 +498,12 @@ void **fn_800FDA44(void **self) {
     return self;
 }
 
+void fn_800FDA88(void **self) {
+    M2C_UNK fn_800FC1C0(void **);
+    *self = lbl_8040D498;
+    fn_800FC1C0(self);
+}
+
 s32 fn_800FDF38(s32 *self) {
     return self[1];
 }
