@@ -64,6 +64,11 @@ s32 fn_8036C37C(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void fn_8036C56C(s32 arg0) {
+    M2C_UNK fn_803BEE20(s32);
+    fn_803BEE20(arg0 + 0x20);
+}
+
 void fn_8036C818(void) {
     fn_802D2FD0();
 }
