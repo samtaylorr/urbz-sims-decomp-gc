@@ -876,6 +876,23 @@ void fn_8020C99C(void *arg0) {
     }
 }
 
+void fn_8020DC48(void *arg0, s32 arg1, void *arg2) {
+    s32 temp_r3;
+
+    if (((s32) M2C_FIELD(arg2, s32 *, 0) == 0xFF) || (temp_r3 = M2C_FIELD(arg0, s32 *, 0x120), ((temp_r3 == 0x1B) != 0)) || (temp_r3 == 0x11) || (temp_r3 == 0x16)) {
+        M2C_FIELD(arg2, s32 *, 0) = arg1;
+        M2C_FIELD(arg2, s32 *, 4) = -1;
+        return;
+    }
+    if ((s32) M2C_FIELD(arg2, s32 *, 4) == 0xFF) {
+        M2C_FIELD(arg2, s32 *, 4) = (s32) ~(arg1 | arg1);
+        return;
+    }
+    if ((s32) M2C_FIELD(arg2, s32 *, 8) == 0) {
+        M2C_FIELD(arg2, s32 *, 8) = (s32) (arg1 + 1);
+    }
+}
+
 s32 fn_8020DD78(void *arg0) {
     s32 var_r3;
 
