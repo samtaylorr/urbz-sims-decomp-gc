@@ -131,6 +131,16 @@ s32 fn_802ACB18(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x18) & 1;
 }
 
+void fn_802ACB24(void *arg0, s32 arg1) {
+    s32 temp_r0;
+
+    temp_r0 = M2C_FIELD(arg0, s32 *, 0x18) & 0xFFFFFFFD;
+    M2C_FIELD(arg0, s32 *, 0x18) = temp_r0;
+    if (arg1 != 0) {
+        M2C_FIELD(arg0, s32 *, 0x18) = (s32) (temp_r0 | 2);
+    }
+}
+
 s32 fn_802ACB44(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x18) & 2;
 }
