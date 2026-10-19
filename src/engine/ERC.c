@@ -5,6 +5,10 @@ void fn_802F70D4(void *arg0, s8 arg1) {
     M2C_FIELD(arg0, s8 *, 0x38) = arg1;
 }
 
+void fn_802F7188(f32 *arg0, f32 farg0) {
+    *arg0 = farg0;
+}
+
 void fn_802FBC54(void) {
 
 }
