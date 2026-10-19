@@ -304,6 +304,10 @@ s32 fn_800D0804(WrapperPaneBase *self, s32 i) {
     return self->unk40[i];
 }
 
+s32 fn_800D0B40(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x40);
+}
+
 s32 fn_800D0F08(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x48);
 }
