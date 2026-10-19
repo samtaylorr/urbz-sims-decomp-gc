@@ -150,6 +150,10 @@ void fn_80066D78(void) {
 
 }
 
+void fn_80066D8C(void) {
+
+}
+
 s32 fn_80066D90(void) {
     return 0;
 }
