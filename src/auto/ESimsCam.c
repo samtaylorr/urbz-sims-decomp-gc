@@ -28,6 +28,15 @@ void fn_8000D500(char *self, Vec3 *a, Vec3 *b, Vec3 *c) {
     *(Vec3 *)(self + 0x20) = *c;
 }
 
+f32 fn_8000DB6C(void *arg0) {
+    f32 temp_f13;
+    void *temp_r9;
+
+    temp_r9 = M2C_FIELD(arg0, void **, 8);
+    temp_f13 = M2C_FIELD(temp_r9, f32 *, 4);
+    return (M2C_FIELD(arg0, f32 *, 0x458) - temp_f13) / (M2C_FIELD(temp_r9, f32 *, 8) - temp_f13);
+}
+
 f32 fn_8000DBD8(void *arg0) {
     return M2C_FIELD(M2C_FIELD(arg0, void **, 8), f32 *, 0x30);
 }
