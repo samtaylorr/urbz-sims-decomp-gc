@@ -110,6 +110,10 @@ void fn_8008A6D4(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
 
+s32 fn_8008A708(s32 *self) {
+    return *self;
+}
+
 void fn_8008C388(void) {
     fn_8008C3A8();
 }
