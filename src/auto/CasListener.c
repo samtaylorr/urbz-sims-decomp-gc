@@ -261,6 +261,15 @@ s32 fn_801C3794(void) {
     return lbl_804945A0;
 }
 
+s32 fn_801C37CC(void) {
+    s32 fn_802D1FC8(M2C_UNK);
+    extern s32 lbl_804945A4;
+    if ((s32) lbl_804945A4 == 0) {
+        lbl_804945A4 = fn_802D1FC8(1);
+    }
+    return lbl_804945A4;
+}
+
 void fn_801C465C(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x10) = 0;
 }
