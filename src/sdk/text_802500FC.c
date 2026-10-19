@@ -289,6 +289,12 @@ void fn_802725D0(void *arg0, f32 farg0, f32 farg1, f32 farg2) {
     M2C_FIELD(arg0, f32 *, 0x18) = farg2;
 }
 
+void fn_802725FC(void *arg0, f32 farg0, f32 farg1, f32 farg2) {
+    M2C_FIELD(arg0, f32 *, 0x1C) = farg0;
+    M2C_FIELD(arg0, f32 *, 0x20) = farg1;
+    M2C_FIELD(arg0, f32 *, 0x24) = farg2;
+}
+
 void fn_80272A08(void *arg0, s32 *arg1) {
     M2C_FIELD(arg0, s32 *, 0xC) = (s32) *arg1;
 }
