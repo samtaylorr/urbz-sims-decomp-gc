@@ -83,3 +83,7 @@ s32 fn_802F2640(void) {
     return 3;
 }
 
+f32 fn_802F2668(void *arg0) {
+    return M2C_FIELD(arg0, f32 *, 0xDC);
+}
+
