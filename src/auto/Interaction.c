@@ -527,3 +527,8 @@ s32 fn_80117874(u8 *self) {
     return *(s32 *)(self + 0x50);
 }
 
+void fn_8011787C(void) {
+    M2C_UNK fn_80117544(M2C_UNK, M2C_UNK);
+    fn_80117544(1, 0xFFFF);
+}
+
