@@ -34,9 +34,9 @@ s8 fn_800599B0(u8 *arg0) {
     return (s8) *arg0;
 }
 
-void fn_800599BC(s8 *arg0, s32 arg1) {
-    void fn_800599F0(s8 *, s32);
-    fn_800599F0(arg0, arg1);
+void fn_800599BC(s8 *arg0, s8 arg1) {
+    void fn_800599F0(s8 *);
+    fn_800599F0(arg0);
     arg0[3] = arg1;
 }
 
