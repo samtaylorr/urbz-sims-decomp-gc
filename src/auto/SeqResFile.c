@@ -3,6 +3,10 @@
 
 extern s32 lbl_80495D10;
 extern void fn_800F1A60(s32, s32);
+void fn_80197AC8(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0xD4) = 0;
+}
+
 void fn_8019882C(void) {
     fn_800F1A60((s32)&lbl_80495D10, 2);
 }
