@@ -72,6 +72,10 @@ s32 fn_800EFE1C(void) {
     return fn_800EFCD4() ^ 1;
 }
 
+s32 fn_800EFE40(s32 arg0, s32 arg1) {
+    return fn_800EFCAC(arg1, arg0) ^ 1;
+}
+
 s32 fn_800EFE70(s32 arg0, s32 arg1) {
     return fn_800EFCD4(arg1, arg0) ^ 1;
 }
