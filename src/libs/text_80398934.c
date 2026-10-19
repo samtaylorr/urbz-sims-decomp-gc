@@ -2723,6 +2723,29 @@ void fn_803B1248(BoundPmf *b) {
     f(obj + off);
 }
 
+void fn_803B12C0(BoundPmf *b) {
+    s16 index = b->index;
+    char *obj = b->obj;
+    VtblEntry e;
+    void (*f)(void *);
+    s16 delta;
+    s32 off;
+
+    if (index >= 0) {
+        e = (*(VtblEntry **)(obj + b->u.delta2))[index - 1];
+        f = e.pfn;
+    } else {
+        f = b->u.pfn;
+    }
+    delta = b->delta;
+    if (index >= 0) {
+        off = e.delta + delta;
+    } else {
+        off = delta;
+    }
+    f(obj + off);
+}
+
 void fn_803B1338(BoundPmf *b) {
     s16 index = b->index;
     char *obj = b->obj;
