@@ -4,6 +4,14 @@
 extern u8 lbl_80409228[];
 extern void fn_802D20E8(void *);
 
+void *fn_80063ED0(void *arg0, s32 arg1) {
+    M2C_UNK fn_802CCA4C(void *);
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    fn_802CCA4C(arg0 + 4);
+    M2C_FIELD(arg0, s32 *, 0x10) = arg1;
+    return arg0;
+}
+
 void fn_800659A0(void **self, s32 flags) {
     *self = lbl_80409228;
     if (flags & 1) {
