@@ -207,7 +207,8 @@ s32 fn_802D1424(u32 arg0) {
 }
 
 void fn_802D1494(void) {
-    fn_802CAA00(lbl_80446D34 + 0x20, 2);
+    u8 *p = lbl_80446D34;
+    fn_802CAA00(&p[0x20], 2);
 }
 
 void fn_802D1F94(void *arg0) {
