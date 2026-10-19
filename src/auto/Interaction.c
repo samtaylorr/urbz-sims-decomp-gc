@@ -9,6 +9,10 @@ s32 fn_8010F020(void) {
     return 1;
 }
 
+s32 fn_8010F028(void) {
+    return 1;
+}
+
 s32 fn_8011785C(void) {
     return 0;
 }
