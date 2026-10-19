@@ -22,6 +22,10 @@ s32 fn_802D8B24(void) {
     return 0;
 }
 
+void fn_802D9120(void) {
+
+}
+
 void fn_802D9124(void) {
     fn_80258544();
 }
