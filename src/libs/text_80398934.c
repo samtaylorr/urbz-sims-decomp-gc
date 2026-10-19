@@ -106,6 +106,15 @@ void fn_80399F34(void *self) {
     ((s32 *)self)[1] = 0;
 }
 
+void fn_80399F48(s32 **self) {
+    s32 *p;
+
+    fn_80399F18(self[0], (s32)self[1]);
+    p = self[0];
+    fn_802D1A00(fn_802D0AB8(), p);
+    fn_80399F34(self);
+}
+
 void fn_8039A024(void *self) {
     ((s32 *)self)[0] = 0;
     ((s32 *)self)[2] = 0;
