@@ -38,6 +38,10 @@ s32 fn_80299CAC(u8 *self) {
     return *(s32 *)(self + 0x50);
 }
 
+s32 fn_80299CB4(u8 *self) {
+    return *(s32 *)(self + 0x50);
+}
+
 s32 fn_8029A0DC(void) {
     return 0;
 }
