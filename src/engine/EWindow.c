@@ -64,6 +64,11 @@ void fn_803079A8(void) {
 
 }
 
+void fn_803079AC(s32 arg0, s32 *arg1) {
+    M2C_UNK fn_802D3CE4(s32, s32);
+    fn_802D3CE4(arg0 + 0x14, *arg1);
+}
+
 s32 fn_803079D4(s32 arg0) {
     return arg0 + 0x14;
 }
