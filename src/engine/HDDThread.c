@@ -16,6 +16,13 @@ s32 fn_803321E4(void) {
     return lbl_80494F54;
 }
 
+s32 fn_803326F0(void *arg0) {
+    if (((s32) M2C_FIELD(arg0, s32 *, 4) != 0) && ((s32) M2C_FIELD(arg0, s32 *, 0) != 0)) {
+        return M2C_FIELD(arg0, s32 *, 0x10);
+    }
+    return 0;
+}
+
 s32 fn_80332824(s32 *self) {
     return *self;
 }
