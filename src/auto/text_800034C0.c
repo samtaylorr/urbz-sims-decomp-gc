@@ -1,6 +1,20 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+extern u8 lbl_803C1390[];
+extern u8 lbl_804069E8[];
+void fn_802E04BC(void *);
+void fn_802E0460(void *);
+u8 *fn_8000381C(u8 *self) {
+    fn_802E0460(self);
+    *(u8 **)(self + 0x338) = lbl_804069E8;
+    *(s32 *)(self + 0x478) = 0;
+    *(s32 *)(self + 0x480) = 0;
+    *(u8 *)(self + 0x484) = 0;
+    *(s32 *)(self + 0x488) = 0;
+    return self;
+}
+
 void fn_80003CEC(void) {
 }
 
