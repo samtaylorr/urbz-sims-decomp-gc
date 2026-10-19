@@ -39,11 +39,10 @@ void fn_800043E8(void) {
 }
 
 s32 fn_800050F0(u8 *self) {
-    u16 *p = (u16 *)(self + 0x1c);
     s32 result = 0;
     s32 i;
     for (i = 0; i < 6; i++) {
-        result = *p++ | result;
+        result |= ((u16 *)(self + 0x1c))[i];
     }
     return result;
 }
