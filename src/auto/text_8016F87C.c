@@ -312,3 +312,7 @@ s32 fn_801762BC(void) {
     return 1;
 }
 
+s32 fn_801762C4(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x32C);
+}
+
