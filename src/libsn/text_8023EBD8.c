@@ -49,3 +49,7 @@ void fn_80240F04(void) {
 
 }
 
+void fn_80240F0C(void) {
+
+}
+
