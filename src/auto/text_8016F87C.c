@@ -80,6 +80,10 @@ s32 fn_80174D04(s32 *arg0) {
     return 1;
 }
 
+s32 fn_80174E40(u32 *arg0, u32 *arg1) {
+    return (u32) *arg0 < (u32) *arg1;
+}
+
 void fn_80174E84(s32 *self, s32 value) {
     *self = value;
 }
