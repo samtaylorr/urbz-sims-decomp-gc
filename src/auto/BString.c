@@ -2570,6 +2570,22 @@ void fn_800EA6EC(void *self, s32 flags) {
     }
 }
 
+s32 fn_800EA9B0(s32 arg0) {
+    s32 fn_800EA758(s32, s32);
+    s32 temp_r3;
+    s32 var_r30;
+    s32 var_r31;
+
+    var_r30 = 0;
+    var_r31 = 0;
+    do {
+        temp_r3 = fn_800EA758(arg0, var_r31);
+        var_r31 += 1;
+        var_r30 += temp_r3;
+    } while (var_r31 <= 0x3F);
+    return var_r30;
+}
+
 s32 fn_800EABC0(s32 arg0, s32 arg1) {
     return arg0 + (arg1 * 8);
 }
