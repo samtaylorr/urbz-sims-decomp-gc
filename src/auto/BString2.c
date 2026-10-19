@@ -18,6 +18,10 @@ s32 fn_800EF928(s32 **arg0) {
     return **arg0;
 }
 
+s32 fn_800EF934(s32 *arg0) {
+    return *arg0 + 4;
+}
+
 s32 fn_800EFF00(void) {
     return 0;
 }
