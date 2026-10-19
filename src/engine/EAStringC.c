@@ -214,6 +214,10 @@ u8 *fn_802AD01C(u8 *self) {
     return self + 8;
 }
 
+u8 *fn_802AD024(u8 *self) {
+    return self + 8;
+}
+
 s32 fn_802AD02C(void) {
     return 1;
 }
