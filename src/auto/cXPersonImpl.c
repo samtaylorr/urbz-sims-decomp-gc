@@ -7,6 +7,24 @@ void fn_80176558(void) {
     fn_800F1A60((s32)&lbl_80495C94, 2);
 }
 
+s32 fn_80176A3C(void *arg0, u32 arg1) {
+    M2C_UNK fn_80176690(void *, u32);
+    M2C_UNK fn_80176778(void *, u32);
+    s32 fn_80176904(void *, void *);
+    s32 temp_r4;
+
+    temp_r4 = M2C_FIELD(arg0, s32 *, 0x370);
+    if (arg1 >= (u32) (M2C_FIELD(arg0, s32 *, 0x374) - temp_r4)) {
+        return 0;
+    }
+    if (fn_80176904(arg0, arg0 + (((temp_r4 + arg1) % 10) * 0x58)) == 0) {
+        fn_80176778(arg0, arg1);
+    } else {
+        fn_80176690(arg0, arg1);
+    }
+    return 1;
+}
+
 M2C_UNK *fn_80177154(void) {
     extern M2C_UNK lbl_80495CA0;
     return &lbl_80495CA0;
