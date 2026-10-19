@@ -1100,6 +1100,17 @@ void fn_800DC71C(void) {
     (*(void (**)(void *, void (*)(void)))(vt + 0x44))(obj + *(s16 *)(vt + 0x40), fn_800DC6D4);
 }
 
+void fn_800DC760(void);
+void fn_800DC7A0(void) {
+    u8 *obj;
+    u8 *vt;
+
+    fn_800DC6BC();
+    obj = lbl_804961A4;
+    vt = *(u8 **)obj;
+    (*(void (**)(void *, void (*)(void)))(vt + 0x44))(obj + *(s16 *)(vt + 0x40), fn_800DC760);
+}
+
 void fn_800DC86C(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x20) = 1;
 }
