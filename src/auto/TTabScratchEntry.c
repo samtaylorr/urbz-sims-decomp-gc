@@ -553,6 +553,10 @@ void fn_801A3CFC(void) {
 
 }
 
+s16 fn_801A3D00(void *arg0) {
+    return M2C_FIELD(arg0, s16 *, 0x110);
+}
+
 s32 fn_801A3D08(void) {
     return 0;
 }
