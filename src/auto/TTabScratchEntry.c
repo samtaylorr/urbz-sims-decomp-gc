@@ -240,6 +240,10 @@ void fn_801A3D10(void) {
 
 }
 
+s32 fn_801A9EC4(s32 *self) {
+    return self[6];
+}
+
 void fn_801AA4A8(void) {
 
 }
