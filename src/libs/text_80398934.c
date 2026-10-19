@@ -1187,6 +1187,10 @@ void fn_803AD158(void **self, s32 flags) {
     }
 }
 
+void fn_803ADDDC(void) {
+
+}
+
 void fn_803ADEE4(BoundPmf *b) {
     s16 index = b->index;
     char *obj = b->obj;
