@@ -2,6 +2,9 @@
 #include "common.h"
 
 void fn_802D2FD0(void);
+extern s32 lbl_804961C4;
+extern void fn_802EFBA8(void *);
+extern u8 lbl_80419C98[];
 void fn_802ED900(void) {
 
 }
