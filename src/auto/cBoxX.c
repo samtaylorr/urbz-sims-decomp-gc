@@ -13,6 +13,14 @@ s32 fn_800FE02C(s32 arg0, s32 arg1, s32 arg2) {
     return 1;
 }
 
+void fn_80100534(s32 arg0, s32 arg1) {
+    M2C_UNK fn_803A0874(s32, s32 *);
+    s32 sp8;
+
+    sp8 = arg1;
+    fn_803A0874(arg0 + 0x3C, &sp8);
+}
+
 void fn_80101300(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0xC) = arg1;
     M2C_FIELD(arg0, s32 *, 4) = 1;
