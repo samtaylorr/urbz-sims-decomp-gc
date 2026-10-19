@@ -185,8 +185,27 @@ void fn_801F0784(void) {
     fn_801EA898(lbl_80494630);
 }
 
+s32 fn_801F0834(char *s) {
+    s32 sum = 0;
+    s32 i;
+    for (i = 0; s[i] != 0; i++) {
+        sum += s[i];
+    }
+    return sum;
+}
+
 void fn_801F086C(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0xAC) = arg1;
+}
+
+void *fn_801F0874(void **self, char *name) {
+    extern u8 lbl_80417510[];
+    extern u8 lbl_804174F0[];
+    self[2] = lbl_80417510;
+    self[0] = name;
+    self[1] = (void *)fn_801F0834(name);
+    self[2] = lbl_804174F0;
+    return self;
 }
 
 void fn_801F388C(void) {
