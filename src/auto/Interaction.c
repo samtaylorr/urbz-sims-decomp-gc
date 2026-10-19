@@ -22,6 +22,11 @@ void fn_8010D784(void **self, s32 flags) {
     }
 }
 
+s32 fn_8010D8F4(void) {
+    fn_8010E984();
+    return 1;
+}
+
 void fn_8010DA6C(void *arg0, void *arg1) {
     M2C_FIELD(arg1, void **, 0x38) = (void *) M2C_FIELD(arg0, void **, 0x404);
     M2C_FIELD(arg0, void **, 0x404) = arg1;
