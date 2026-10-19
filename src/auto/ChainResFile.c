@@ -10,6 +10,10 @@ void fn_801020E0(void **self, s32 flags) {
     }
 }
 
+s32 fn_801023F4(void *arg0) {
+    return M2C_FIELD(M2C_FIELD(arg0, void **, 8), s32 *, 0xC);
+}
+
 extern void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
 void fn_801029D8(void *arg0) {
