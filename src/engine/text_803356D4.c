@@ -2,6 +2,11 @@
 #include "common.h"
 
 void fn_8033740C(void);
+void fn_80325374(void *);
+void fn_803356D4(void *self, void *arg) {
+    fn_80325374(arg);
+}
+
 void fn_80335764(void) {
     fn_8033740C();
 }
