@@ -28,3 +28,9 @@ s32 fn_8010531C(s32 *self) {
     return *self;
 }
 
+void fn_801055FC(void *self, s32 flags) {
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
