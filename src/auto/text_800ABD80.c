@@ -160,6 +160,18 @@ s32 fn_800B2FC4(char *self) {
     return *(s32 *)(self + 0xC);
 }
 
+void fn_800B2FCC(void) {
+    s32 fn_801D7E6C();
+    M2C_UNK fn_801D841C(s32, M2C_UNK);
+    M2C_UNK fn_802D1FC8(M2C_UNK);
+    extern s32 lbl_80494600;
+    if ((s32) lbl_80494600 == 0) {
+        fn_802D1FC8(0x78);
+        lbl_80494600 = fn_801D7E6C();
+    }
+    fn_801D841C(lbl_80494600, 0xF926C0B2);
+}
+
 void fn_800B3014(void) {
     M2C_UNK fn_800B2C98(M2C_UNK, M2C_UNK);
     fn_800B2C98(1, 0xFFFF);
