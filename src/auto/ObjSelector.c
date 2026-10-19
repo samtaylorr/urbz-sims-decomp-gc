@@ -109,6 +109,12 @@ void fn_8016E5DC(void) {
     fn_800F1A60((s32)&lbl_80495C88, 2);
 }
 
+s32 *fn_8016F4AC(s32 *arg0) {
+    arg0[0] = 0;
+    arg0[1] = 0;
+    return arg0;
+}
+
 extern void fn_8016F714(s32);
 extern void fn_802D20E8(s32);
 void fn_8016F4C0(s32 self, s32 flags) {
