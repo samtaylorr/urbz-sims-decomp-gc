@@ -441,6 +441,7 @@ config.libs = [
             Object(NonMatching, "engine/ENgcRC.c"),
             Object(NonMatching, "engine/ENgcRenderer.c"),
             Object(NonMatching, "engine/ENgcTexture.c"),
+            Object(NonMatching, "engine/EStringRedBlackTreeNoCase.c"),
             Object(NonMatching, "misc/text_8038FC80.c"),
             Object(NonMatching, "libs/text_80398934.c"),
         ],
