@@ -11,6 +11,11 @@ void fn_8036D960(void) {
     fn_8036DBA8();
 }
 
+extern void fn_802E34F0(void *, void *);
+void fn_8036DF8C(char *self, void *arg1) {
+    fn_802E34F0(arg1, self + 0x44);
+}
+
 void fn_8036EAC8(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
