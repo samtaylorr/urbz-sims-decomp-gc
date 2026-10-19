@@ -24,6 +24,10 @@ void *fn_80003974(void) {
     return lbl_803C1390;
 }
 
+s32 fn_80003980(void) {
+    return 0;
+}
+
 void fn_80003CEC(void) {
 }
 
