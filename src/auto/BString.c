@@ -2052,6 +2052,29 @@ s32 fn_800E2BA4(s32 *self) {
     return *(s32 *)(self[2] + 0x94);
 }
 
+void fn_800E2FD8(void *arg0) {
+    M2C_UNK fn_800D2180();
+    s32 var_r9;
+    s32 var_r9_2;
+
+    fn_800D2180();
+    var_r9 = 0;
+    if (((s32) M2C_FIELD(arg0, s32 *, 0x20) == 0) && ((s32) M2C_FIELD(arg0, s32 *, 0x28) != 0)) {
+        var_r9 = 1;
+    }
+    if (var_r9 != 0) {
+        fn_800E3B80(arg0, 2);
+        return;
+    }
+    var_r9_2 = 0;
+    if (((s32) M2C_FIELD(arg0, s32 *, 0x20) == 0) && ((s32) M2C_FIELD(arg0, s32 *, 0x2C) != 0)) {
+        var_r9_2 = 1;
+    }
+    if (var_r9_2 != 0) {
+        fn_800E3B80(arg0, 1);
+    }
+}
+
 extern s32 lbl_8040C978[];
 s32 *fn_800E3070(s32 *self, s32 a) {
     self[0] = a;
