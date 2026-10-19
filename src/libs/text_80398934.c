@@ -70,7 +70,7 @@ void fn_80399CF0(void *self) {
 }
 
 void fn_80399D20(s32 *dst, s32 *src, s32 n) {
-    for (; n != 0; n--) {
+    while (--n != -1) {
         *dst++ = *src++;
     }
 }
