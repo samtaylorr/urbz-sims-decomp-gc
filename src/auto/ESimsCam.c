@@ -55,6 +55,10 @@ char *fn_80014CD4(char *self) {
     return self + 0x44C;
 }
 
+s32 fn_80014CDC(s32 arg0) {
+    return arg0 + 0x434;
+}
+
 f32 fn_80014D34(char *self) {
     return *(f32 *)(self + 0x45C);
 }
