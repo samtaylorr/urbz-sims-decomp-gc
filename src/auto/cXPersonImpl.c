@@ -72,6 +72,18 @@ void fn_80185E04(void) {
 
 }
 
+s32 fn_80185E08(void *arg0, s32 arg1) {
+    s32 temp_r3;
+    void *temp_r9;
+
+    temp_r9 = arg0 + 0x130;
+    temp_r3 = M2C_FIELD(temp_r9, s32 *, 0x374) - M2C_FIELD(temp_r9, s32 *, 0x370);
+    if ((arg1 == 0) && ((s32) M2C_FIELD(arg0, s32 *, 0x5FC) != 0)) {
+        return temp_r3 - 1;
+    }
+    return temp_r3;
+}
+
 u8 *fn_80185E9C(u8 *self) {
     return self + 8;
 }
