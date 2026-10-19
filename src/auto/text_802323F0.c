@@ -62,6 +62,16 @@ void fn_80236F20(s32 arg0, s32 arg1) {
     fn_80230774(arg1, arg0);
 }
 
+void fn_80236F4C(void *arg0, s32 arg1) {
+    if (arg1 == 0) {
+        M2C_FIELD(arg0, s32 *, 0x30) = 1;
+        return;
+    }
+    if ((arg1 == 1) && ((s32) M2C_FIELD(arg0, s32 *, 0xEC) != 1)) {
+        M2C_FIELD(arg0, s32 *, 0x64) = arg1;
+    }
+}
+
 s32 fn_80237978(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0xEC);
 }
