@@ -334,6 +334,16 @@ s32 fn_8019F484(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x34);
 }
 
+void fn_8019F4A4(void *arg0, s32 arg1) {
+    s32 temp_r0;
+
+    temp_r0 = M2C_FIELD(arg0, s32 *, 0x1C) & 0xFFFFF7FF;
+    M2C_FIELD(arg0, s32 *, 0x1C) = temp_r0;
+    if (arg1 != 0) {
+        M2C_FIELD(arg0, s32 *, 0x1C) = (s32) (temp_r0 | 0x800);
+    }
+}
+
 s32 fn_8019F4C4(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x24);
 }
