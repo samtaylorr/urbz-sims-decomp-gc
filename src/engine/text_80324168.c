@@ -11,6 +11,13 @@ void fn_80329080(void) {
     fn_8032421C();
 }
 
+void fn_803290C4(void **obj) {
+    if (obj != NULL) {
+        char *vt = (char *)*obj;
+        (*(void (**)(void *, s32))(vt + 0x34))((char *)obj + *(s16 *)(vt + 0x30), 3);
+    }
+}
+
 extern u8 lbl_804938F8[];
 void *fn_80329104(void) {
     return lbl_804938F8;
