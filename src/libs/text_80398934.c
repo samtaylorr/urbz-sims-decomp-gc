@@ -4442,6 +4442,12 @@ void *fn_803B98BC(void *self) {
     return self;
 }
 
+void fn_803B98EC(s32 *self, s32 n) {
+    while (--n != -1) {
+        self++;
+    }
+}
+
 void fn_803B9908(s32 *dst, s32 *src, s32 n) {
     while (--n != -1) {
         *dst++ = *src++;
