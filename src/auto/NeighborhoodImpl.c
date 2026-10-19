@@ -41,6 +41,10 @@ s32 fn_80128348(void) {
     return lbl_80495BA4;
 }
 
+s16 fn_801285F4(void *arg0) {
+    return M2C_FIELD(arg0, s16 *, 0x168);
+}
+
 void fn_801286E8(void) {
 
 }
