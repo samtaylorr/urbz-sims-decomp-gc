@@ -124,6 +124,10 @@ f32 fn_802EEEF4(void *arg0) {
     return lbl_803F0CA0[0] / (f32) M2C_FIELD(arg0, s32 *, 0x14);
 }
 
+f32 fn_802EEF34(void *arg0) {
+    return lbl_803F0CB0[0] / (f32) M2C_FIELD(arg0, s32 *, 0x18);
+}
+
 s32 fn_802EEF74(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x14);
 }
