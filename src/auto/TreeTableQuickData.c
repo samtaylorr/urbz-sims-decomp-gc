@@ -19,6 +19,10 @@ void fn_801B377C(void) {
     fn_8016C0EC();
 }
 
+s32 fn_801B379C(void) {
+    return 0;
+}
+
 void fn_8010C15C(void);
 void fn_801B37AC(void) {
     fn_8010C15C();
