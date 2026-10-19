@@ -20,6 +20,18 @@ void fn_800D1634(void) {
     fn_800F1A60((s32)&lbl_80495A3C, 2);
 }
 
+void fn_800D188C(s32 *self) {
+    fn_800D2A40(self);
+    if (self[6] != 0) {
+        lbl_8041F7B0[0] = 1;
+        lbl_80434A9C[0] = 0;
+        fn_800E3B38(self, 0x27, lbl_803D14C8[0]);
+    }
+    if (self[7] != 0) {
+        fn_800E3B80(self, 1);
+    }
+}
+
 void fn_800D1908(s32 *self) {
     fn_800D27B8(self);
     if (self[6] != 0) {
