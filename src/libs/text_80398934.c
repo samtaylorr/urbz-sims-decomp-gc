@@ -3,6 +3,11 @@
 
 extern u8 lbl_8041CFA8[];
 void fn_802D8BEC(void *);
+void fn_8030AD40(void);
+void fn_8039AB04(void) {
+    fn_8030AD40();
+}
+
 void fn_803BEC14(u8 *self) {
     *(u8 **)(self + 0x338) = lbl_8041CFA8;
     fn_802D8BEC(self);
