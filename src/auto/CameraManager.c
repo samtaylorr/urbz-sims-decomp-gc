@@ -24,22 +24,25 @@ void fn_80014E0C(void) {
 
 }
 
-s32 *fn_80014EE0(void) {
+s32 fn_80014EE0(void) {
     void *fn_802D1FC8(s32);
-    extern s32 *lbl_80493F2C;
-    if (lbl_80493F2C == 0) {
-        lbl_80493F2C = fn_80014DCC(fn_802D1FC8(8));
+    extern s32 lbl_80493F2C;
+    s32 *p;
+    if ((s32)lbl_80493F2C == 0) {
+        p = fn_802D1FC8(8);
+        lbl_80493F2C = (s32)fn_80014DCC(p);
         fn_80014E08();
     }
     return lbl_80493F2C;
 }
 
 void fn_80014F24(s32 *arg0, s32 arg1, s32 arg2) {
-    arg0[arg1] = arg2;
+    s32 off = arg1 << 2;
+    *(s32 *)((s32)arg0 + off) = arg2;
 }
 
 s32 fn_80014F30(s32 *arg0, s32 arg1) {
-    return arg0[arg1];
+    return *(s32 *)(arg1 * 4 + (s32)arg0);
 }
 
 void fn_80014F3C(void *arg0) {
