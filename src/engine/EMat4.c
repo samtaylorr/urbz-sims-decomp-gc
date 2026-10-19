@@ -220,6 +220,12 @@ void fn_802D1494(void) {
     fn_802CAA00(&p[0x20], 2);
 }
 
+extern u8 lbl_80446D70[];
+void fn_802D14C4(void) {
+    u8 *p = lbl_80446D70;
+    fn_802CAA00(&p[0x20], 2);
+}
+
 void fn_802D1F94(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
