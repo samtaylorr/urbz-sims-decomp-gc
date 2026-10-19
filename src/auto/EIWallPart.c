@@ -66,6 +66,14 @@ s32 fn_80033074(s32 arg0, s32 *out) {
     return arg0;
 }
 
+s32 fn_800330B4(s32 arg0, s32 *out) {
+    s32 tmp;
+
+    fn_802C5C58((void *)arg0, &tmp);
+    *out = tmp;
+    return arg0;
+}
+
 void fn_80033A3C(void) {
     fn_802F4AB8();
 }
