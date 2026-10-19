@@ -461,6 +461,17 @@ s32 fn_801C6504(void *arg0) {
     return fn_801CE898(temp_r0);
 }
 
+s32 fn_801C6538(void *arg0) {
+    s32 fn_801CEEFC(s32);
+    s32 temp_r0;
+
+    temp_r0 = M2C_FIELD(arg0, s32 *, 0x14);
+    if (temp_r0 == 0) {
+        return 0;
+    }
+    return fn_801CEEFC(temp_r0);
+}
+
 void fn_801C675C(void *self, s32 flags) {
     extern u8 lbl_80415F28[];
     extern void fn_802D20E8(void *);
