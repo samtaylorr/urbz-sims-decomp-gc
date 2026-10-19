@@ -45,3 +45,7 @@ void fn_8002B868(void) {
 
 }
 
+void fn_8002B940(void) {
+
+}
+
