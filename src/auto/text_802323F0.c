@@ -16,6 +16,43 @@ void fn_802326E0(void) {
 
 }
 
+void fn_802326E4(void *arg0, s32 arg1) {
+    M2C_UNK fn_80233468();
+    M2C_UNK fn_80233538();
+    M2C_UNK fn_80234E50(void *, M2C_UNK);
+    s32 var_r9;
+    s32 var_r9_2;
+
+    switch (arg1) {                                 /* irregular */
+    case 0:
+        var_r9 = 1;
+        if ((s32) M2C_FIELD(arg0, s32 *, 0x60) == 0) {
+            var_r9 = 0;
+        }
+        if (var_r9 != 0) {
+            fn_80233468();
+            return;
+        }
+        return;
+    case 4:
+        var_r9_2 = 1;
+        if ((s32) M2C_FIELD(arg0, s32 *, 0x60) == 0) {
+            var_r9_2 = 0;
+        }
+        if (var_r9_2 != 0) {
+            fn_80233538();
+            return;
+        }
+        break;
+    case 5:
+        fn_80234E50(arg0 + 0x60, 1);
+        return;
+    case 6:
+        fn_80234E50(arg0 + 0x60, 0);
+        break;
+    }
+}
+
 void fn_80232878(void *arg0, s32 arg1, f32 farg0) {
     switch (arg1) {                                 /* irregular */
     case 7:
