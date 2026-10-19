@@ -114,6 +114,10 @@ s32 fn_801C04DC(char *self) {
     return *(s32 *)(self + 0xC);
 }
 
+void fn_801C089C(void) {
+
+}
+
 extern void fn_801C5778(void *);
 void *fn_801C5720(void *self) {
     fn_801C5778(self);
