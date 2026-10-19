@@ -95,6 +95,26 @@ void fn_80096DAC(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x118) = arg1;
 }
 
+void fn_80096DB4(void *arg0) {
+    s32 temp_r9;
+    s32 var_r0;
+    s32 var_r10;
+    void *temp_r11;
+
+    var_r10 = 1;
+    temp_r11 = M2C_FIELD(arg0, void **, 8) + 0x314;
+    temp_r9 = M2C_FIELD(temp_r11, s32 *, 4);
+    if (temp_r9 >= 0) {
+        var_r0 = M2C_FIELD(temp_r11, s32 *, 0x40) + (temp_r9 * 0xB0);
+    } else {
+        var_r0 = 0;
+    }
+    if (var_r0 == 0) {
+        var_r10 = 0;
+    }
+    M2C_FIELD(M2C_FIELD(arg0, void **, 8), s32 *, 0x374) = var_r10;
+}
+
 extern void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
 void fn_80097B40(void *arg0) {
