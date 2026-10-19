@@ -192,6 +192,17 @@ void fn_800AA054(void) {
     (*(void (**)(void *, void (*)(void)))(vt + 0x44))(obj + *(s16 *)(vt + 0x40), fn_800AA018);
 }
 
+void fn_800AA098(void);
+void fn_800AA2AC(void) {
+    u8 *obj;
+    u8 *vt;
+
+    fn_800AA000();
+    obj = lbl_804961A4;
+    vt = *(u8 **)obj;
+    (*(void (**)(void *, void (*)(void)))(vt + 0x44))(obj + *(s16 *)(vt + 0x40), fn_800AA098);
+}
+
 s32 fn_800AA584(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 4) = arg1;
     return 0;
