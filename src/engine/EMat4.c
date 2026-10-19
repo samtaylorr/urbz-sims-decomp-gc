@@ -199,10 +199,8 @@ void fn_802D12CC(void *arg0) {
 }
 
 s32 fn_802D1404(void *arg0, u32 arg1) {
-    s32 *p;
     if (arg1 < 0x50) {
-        p = (s32 *)((u8 *)arg0 + 0x53C);
-        return p[arg1];
+        return M2C_FIELD(arg0, s32 *, 0x53C + arg1 * 4);
     }
     return 0;
 }
@@ -241,6 +239,12 @@ void fn_802D1524(void) {
 extern u8 lbl_80446E24[];
 void fn_802D1554(void) {
     u8 *p = lbl_80446E24;
+    fn_802CAA00(&p[0x20], 2);
+}
+
+extern u8 lbl_80446E60[];
+void fn_802D1584(void) {
+    u8 *p = lbl_80446E60;
     fn_802CAA00(&p[0x20], 2);
 }
 
