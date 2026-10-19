@@ -91,6 +91,14 @@ void fn_80139440(void *arg0, s32 arg1) {
     }
 }
 
+s32 fn_80139454(void *arg0, f32 *arg1, f32 *arg2) {
+    if ((s32) M2C_FIELD(arg0, s32 *, 0xCC) != 0) {
+        *arg1 = M2C_FIELD(arg0, f32 *, 0xD0);
+        *arg2 = M2C_FIELD(arg0, f32 *, 0xD4);
+    }
+    return M2C_FIELD(arg0, s32 *, 0xCC);
+}
+
 void fn_8013948C(void *arg0, f32 *arg1, f32 *arg2) {
     *arg1 = M2C_FIELD(arg0, f32 *, 0xD0);
     *arg2 = M2C_FIELD(arg0, f32 *, 0xD4);
