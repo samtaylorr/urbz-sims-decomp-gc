@@ -103,6 +103,10 @@ void fn_802DD5B0(void *self, void *arg) {
     fn_802D21E0(arg);
 }
 
+void fn_802DDDC8(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0xC) = (s32) ((arg1 + 0x1F) & 0xFFFFFFE0);
+}
+
 void fn_802DE598(void) {
 
 }
