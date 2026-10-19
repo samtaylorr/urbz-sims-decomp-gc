@@ -1,5 +1,12 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
+typedef struct {
+    u8 pad0[0x14];
+    void *unk14;
+    u8 pad18[0x2C - 0x18];
+    s32 unk2C[1];
+} EIWallPartFlags;
+
 
 extern u8 lbl_8041CFA8[];
 
@@ -83,6 +90,10 @@ s32 fn_8039B738(void) {
 
 s32 fn_8039BA10(void) {
     return 0;
+}
+
+s32 fn_8039BA18(EIWallPartFlags *self, s32 i) {
+    return self->unk2C[i];
 }
 
 void fn_8039BB90(void) {
