@@ -320,6 +320,41 @@ void *fn_80262F18(void) {
     return (void *)fn_80262F24;
 }
 
+void fn_8026354C(s32 arg0, void *arg1);
+s32 fn_802634AC(void *arg0) {
+    s32 fn_8025465C();
+    M2C_UNK fn_80254684(s32);
+    M2C_UNK fn_8025974C(M2C_UNK *);
+    extern M2C_UNK lbl_80495EC8;
+    s32 retVal;
+    s32 enabled;
+    s32 state;
+
+    M2C_FIELD(arg0, s32 *, 8) = 7;
+    M2C_FIELD(arg0, void **, 0x28) = (void *)fn_8026354C;
+    if (fn_80262F24(1, arg0) == 0) {
+        return -1;
+    }
+    enabled = fn_8025465C();
+    while (1) {
+        state = M2C_FIELD(arg0, s32 *, 0xC);
+        if (state == 0 || state == -1 || state == 10) {
+            retVal = M2C_FIELD(arg0, s32 *, 0x20);
+            break;
+        }
+        fn_8025974C(&lbl_80495EC8);
+    }
+    fn_80254684(enabled);
+    return retVal;
+}
+
+void fn_8026354C(s32 arg0, void *arg1) {
+    M2C_UNK fn_80259838(M2C_UNK *);
+    extern M2C_UNK lbl_80495EC8;
+    M2C_FIELD(arg1, s32 *, 0x20) = arg0;
+    fn_80259838(&lbl_80495EC8);
+}
+
 void fn_80264094(void) {
     extern M2C_UNK lbl_80495EC8;
     fn_80259838(&lbl_80495EC8);
