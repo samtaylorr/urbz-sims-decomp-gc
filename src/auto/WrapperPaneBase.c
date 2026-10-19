@@ -108,6 +108,10 @@ void fn_800CED30(void) {
     fn_800CD104();
 }
 
+void fn_800CEDF8(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0x4C) = arg1;
+}
+
 void fn_800CEEC0(void) {
 
 }
