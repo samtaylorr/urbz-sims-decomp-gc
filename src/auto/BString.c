@@ -1217,6 +1217,17 @@ void fn_800E9B4C(s32 *self, s32 flags) {
     }
 }
 
+extern s32 lbl_8040CCE0[];
+s32 *fn_800E9B80(s32 *self, s32 a) {
+    self[0] = a;
+    self[1] = -1;
+    self[2] = 0;
+    self[3] = -1;
+    self[4] = 1;
+    self[5] = (s32)lbl_8040CCE0;
+    return self;
+}
+
 extern u8 lbl_8040CFF8[];
 s32 *fn_800E9EE0(s32 *self, s32 arg1) {
     self[0] = arg1;
