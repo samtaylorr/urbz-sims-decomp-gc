@@ -147,6 +147,11 @@ void fn_800596EC(void *self) {
     fn_800585B4(self, 0);
 }
 
+void fn_80059710(void *self) {
+    extern void fn_80059830(void *, s32);
+    fn_80059830(self, 2);
+}
+
 void fn_80059734(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
