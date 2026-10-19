@@ -4836,6 +4836,12 @@ void *fn_803C0234(void *self) {
     return self;
 }
 
+void fn_803C06EC(void *self) {
+    ((s32 *)self)[0] = 0;
+    ((s32 *)self)[2] = 0;
+    ((s32 *)self)[1] = 0;
+}
+
 extern void fn_803C06EC(void *);
 void *fn_803C0700(void *self) {
     fn_803C06EC(self);
