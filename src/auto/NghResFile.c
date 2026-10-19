@@ -5,6 +5,12 @@ void fn_801288B4(void) {
 
 }
 
+void fn_801289C4(M2C_UNK *arg0) {
+    extern M2C_UNK *lbl_80494448;
+    *arg0 = lbl_80494448;
+    lbl_80494448 = arg0;
+}
+
 s32 fn_80129544(void) {
     return 0xD6000;
 }
