@@ -26,6 +26,18 @@ void fn_8014C3F4(void) {
 
 }
 
+void fn_8014DEA0(void *arg0, void *arg1) {
+    s32 temp_r0;
+    void *temp_r11;
+
+    temp_r11 = M2C_FIELD(arg1, void **, 0xC);
+    if (temp_r11 != NULL) {
+        temp_r0 = M2C_FIELD(arg0, s32 *, 0x6D4) + M2C_FIELD(temp_r11, s32 *, 0x3C);
+        M2C_FIELD(arg0, s32 *, 0x6D4) = temp_r0;
+        M2C_FIELD(arg0, s32 *, 0x6D4) = (s32) (temp_r0 + M2C_FIELD(temp_r11, s32 *, 0x40));
+    }
+}
+
 void fn_8014FDD0(void) {
 
 }
