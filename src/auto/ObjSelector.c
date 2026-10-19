@@ -33,6 +33,12 @@ s32 fn_8016C718(void) {
     return 0;
 }
 
+extern s32 lbl_80495C5C;
+extern void fn_800F1A60(s32, s32);
+void fn_8016C720(void) {
+    fn_800F1A60((s32)&lbl_80495C5C, 2);
+}
+
 void fn_8016CCEC(void) {
 
 }
