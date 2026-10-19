@@ -1446,6 +1446,10 @@ void fn_800E3144(s32 *self) {
     fn_800E9514(self[2]);
 }
 
+void fn_800E3168(s32 *self) {
+    fn_800E953C(self[2]);
+}
+
 void fn_800E318C(s32 *self) {
     fn_800E9554(self[2]);
 }
