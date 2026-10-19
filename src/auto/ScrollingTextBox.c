@@ -7,6 +7,10 @@ void fn_8009B19C(s32 *self, s32 value) {
     *self = value;
 }
 
+void fn_8009B580(void) {
+
+}
+
 void fn_8009CBA4(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
