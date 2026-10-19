@@ -180,6 +180,24 @@ void fn_802D0894(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
 
+void fn_802D0960(void *arg0, f32 *src, s16 *dst) {
+    dst[0] = src[0] * lbl_803F02B0;
+    dst[1] = src[1] * lbl_803F02B0;
+    dst[2] = src[2] * lbl_803F02B0;
+    dst[3] = src[3] * lbl_803F02B0;
+}
+
+void fn_802D09E0(void *arg0, u16 *src, f32 *dst) {
+    dst[0] = src[0] * lbl_803F02C0;
+    dst[1] = src[1] * lbl_803F02C0;
+    dst[2] = src[2] * lbl_803F02C0;
+    dst[3] = src[3] * lbl_803F02C0;
+}
+
+void fn_802D0A8C(void) {
+    fn_802D94C0(lbl_8044490C, 2);
+}
+
 s32 fn_802D0F94(void) {
     return 0;
 }
