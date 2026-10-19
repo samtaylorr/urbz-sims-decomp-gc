@@ -6,6 +6,11 @@ s32 fn_80307998(void) {
     return 0;
 }
 
+extern s32 lbl_80494EB0;
+void fn_80307BBC(void (*cb)(void)) {
+    lbl_80494EB0 = cb;
+}
+
 void fn_803081EC(void) {
     fn_80307CCC();
 }
