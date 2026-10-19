@@ -5,6 +5,10 @@ s32 fn_80310750(void) {
     return 0;
 }
 
+s32 fn_80311B60(s32 *self) {
+    return *self;
+}
+
 s32 fn_80311B68(s32 *self) {
     return self[1];
 }
