@@ -7,6 +7,11 @@ s32 fn_8036ED88(void) {
     return 0;
 }
 
+void fn_8036ED90(void *arg0, s32 arg1, s32 arg2) {
+    M2C_FIELD(arg0, s32 *, 0) = arg1;
+    M2C_FIELD(arg0, s32 *, 4) = arg2;
+}
+
 void fn_8036ED9C(void) {
 
 }
