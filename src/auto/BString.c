@@ -1489,7 +1489,7 @@ s32 *fn_800E31B0(s32 *self, s32 arg1) {
 }
 
 extern void fn_800E3DBC(s32);
-void fn_800E3B38(s32 *self) {
+void fn_800E3B38(s32 *self, s32 id, f32 time) {
     fn_800E3DBC(self[2]);
 }
 
