@@ -2161,6 +2161,23 @@ SearchEntry *fn_803ABF48(SearchEntry *lo, SearchEntry *hi, s32 key) {
     }
 }
 
+void fn_803AC08C(s32 arg0, void *arg1) {
+    void *temp_r30;
+    void *var_r31;
+
+    var_r31 = arg1;
+    if (var_r31 != NULL) {
+        do {
+            fn_803AC08C(arg0, M2C_FIELD(var_r31, void **, 0xC));
+            temp_r30 = M2C_FIELD(var_r31, void **, 8);
+            if (var_r31 != NULL) {
+                fn_803997AC(var_r31, 0x20);
+            }
+            var_r31 = temp_r30;
+        } while (var_r31 != NULL);
+    }
+}
+
 s32 fn_803AC3B0(void) {
     return 4;
 }
