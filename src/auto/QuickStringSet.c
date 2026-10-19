@@ -3,6 +3,10 @@
 
 extern s32 lbl_80495A94;
 extern s32 lbl_804943C0;
+s32 fn_800F6688(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x10C);
+}
+
 void fn_800F6690(void (*cb)(void)) {
     lbl_804943C0 = cb;
 }
