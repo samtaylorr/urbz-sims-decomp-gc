@@ -217,6 +217,13 @@ void fn_801168DC(void) {
     fn_802C7FE8(lbl_80434BD4);
 }
 
+void fn_80116F80(void *arg0, void *arg1) {
+    M2C_FIELD(arg0, u16 *, 0x18) = (u16) M2C_FIELD(arg1, u16 *, 0);
+    M2C_FIELD(arg0, u16 *, 0x1A) = (u16) M2C_FIELD(arg1, u16 *, 2);
+    M2C_FIELD(arg0, u16 *, 0x1C) = (u16) M2C_FIELD(arg1, u16 *, 4);
+    M2C_FIELD(arg0, u16 *, 0x1E) = (u16) M2C_FIELD(arg1, u16 *, 6);
+}
+
 void fn_8011709C(void *arg0) {
     extern s32 lbl_80494438;
     s32 temp_r9;
