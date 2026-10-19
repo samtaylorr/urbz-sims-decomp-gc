@@ -2180,6 +2180,10 @@ s32 fn_800EABC0(s32 arg0, s32 arg1) {
     return arg0 + (arg1 * 8);
 }
 
+s32 fn_800EABCC(s32 arg0, s32 arg1) {
+    return arg0 + (arg1 * 8);
+}
+
 void fn_800EAF58(void) {
 
 }
