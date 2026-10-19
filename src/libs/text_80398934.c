@@ -4387,6 +4387,13 @@ s32 fn_803B9FEC(s32 *self) {
     return *self;
 }
 
+extern void fn_803BA044(void *);
+void fn_803BA044(void *self) {
+    ((s32 *)self)[0] = 0;
+    ((s32 *)self)[2] = 0;
+    ((s32 *)self)[1] = 0;
+}
+
 s32 fn_803BA3EC(s32 *self) {
     return *self;
 }
