@@ -833,6 +833,11 @@ void fn_800DC6BC(void) {
     lbl_80495A70 = 0;
 }
 
+void fn_800DC6C8(void) {
+    extern s32 lbl_80495A70;
+    lbl_80495A70 = 1;
+}
+
 void fn_800DE57C(void) {
 
 }
