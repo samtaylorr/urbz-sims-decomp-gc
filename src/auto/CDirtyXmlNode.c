@@ -38,6 +38,10 @@ s32 fn_800C0604(void) {
     return 0;
 }
 
+void fn_800C060C(void) {
+
+}
+
 void fn_800C2950(void) {
     fn_800A9720();
 }
