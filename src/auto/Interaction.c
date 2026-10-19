@@ -180,6 +180,13 @@ void fn_8010FD68(void) {
     fn_8010FDD0();
 }
 
+void fn_8010FD90(void **obj) {
+    if (obj != NULL) {
+        char *vt = (char *)*obj;
+        (*(void (**)(void *, s32))(vt + 0xC))((char *)obj + *(s16 *)(vt + 0x8), 3);
+    }
+}
+
 void fn_801102DC(void) {
 
 }
