@@ -4,3 +4,8 @@
 s32 fn_80343C5C(void) {
     return 0;
 }
+
+s32 fn_80343C64(void) {
+    return 0;
+}
+
