@@ -422,10 +422,10 @@ f32 fn_801C6460(void *arg0) {
     void *temp_r3;
 
     temp_r3 = M2C_FIELD(arg0, void **, 0x14);
-    if (temp_r3 == NULL) {
-        return lbl_803DDF5C[0];
+    if (temp_r3 != NULL) {
+        return fn_801CE82C(temp_r3);
     }
-    return fn_801CE82C(temp_r3);
+    return lbl_803DDF5C[0];
 }
 
 void fn_801C675C(void *self, s32 flags) {
