@@ -1,6 +1,7 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+struct BBI_Handle { s32 v; };
 struct BBI_Vec3 { s32 a; s32 b; s32 c; };
 
 s32 fn_80059AC4(s32 *self) {
@@ -11,23 +12,25 @@ u8 fn_80059B90(u8 *self) {
     return self[2];
 }
 
-s32 fn_80059B98(s32 *self, s32 *out) {
-    s32 tmp;
+s32 fn_80059B98(s32 *self, struct BBI_Vec3 *out) {
+    s32 tmp[1];
 
     if (out != 0) {
-        out[0] = self[0];
-        out[1] = self[1];
-        tmp = out[2];
+        out->a = self[0];
+        out->b = self[1];
+        tmp[0] = out->c;
         return 1;
+    } else {
+        return 0;
     }
-    return 0;
 }
 
 void fn_80059BD4(s32 *self) {
     s32 i;
+    s32 *p = self;
 
     for (i = 0; i < 0x24; i++) {
-        self[i] = 0;
+        *p++ = 0;
     }
 }
 
