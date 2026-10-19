@@ -1903,6 +1903,12 @@ f32 fn_800E416C(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0x4C);
 }
 
+void fn_800E41DC(void *arg0) {
+    M2C_UNK fn_800E43DC(s32);
+    fn_800E43DC(arg0 + 0x38);
+    M2C_FIELD(arg0, s32 *, 0x8C) = 0;
+}
+
 void fn_800E44BC(void *arg0, f32 farg0) {
     M2C_FIELD(arg0, f32 *, 0x14) = (f32) (M2C_FIELD(arg0, f32 *, 0x14) + farg0);
 }
