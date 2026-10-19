@@ -257,6 +257,15 @@ void fn_80261270(s32 arg0) {
     lbl_80494A30 = arg0;
 }
 
+void fn_80261530(void) {
+    M2C_UNK fn_80261458(M2C_UNK);
+    M2C_UNK fn_80264274();
+    M2C_UNK fn_802652F4(M2C_UNK);
+    fn_802652F4(0x01234568);
+    fn_80264274();
+    fn_80261458(0);
+}
+
 extern u8 fn_80262F24[];
 void *fn_80262F18(void) {
     return fn_80262F24;
