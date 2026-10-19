@@ -219,6 +219,12 @@ s32 fn_80070464(void) {
     return 0;
 }
 
+void fn_800704E0(void *arg0) {
+    extern s32 lbl_80494168;
+    M2C_FIELD(arg0, s32 *, 0x44) = (s32) M2C_FIELD(arg0, s32 *, 0x10);
+    lbl_80494168 = 1;
+}
+
 void fn_80070560(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x10) = (s32) M2C_FIELD(arg0, s32 *, 0x44);
 }
