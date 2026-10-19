@@ -18,6 +18,11 @@ void fn_8036C818(void) {
     fn_802D2FD0();
 }
 
+extern u8 lbl_80493D2C[];
+void *fn_8036CFAC(void) {
+    return lbl_80493D2C;
+}
+
 void fn_802D2430(void);
 void fn_8036D048(void) {
     fn_802D2430();
