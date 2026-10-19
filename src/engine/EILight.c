@@ -20,3 +20,8 @@ s32 fn_802F02FC(void) {
     return 0;
 }
 
+extern s32 lbl_80494E58;
+s32 fn_802F03E8(void) {
+    return lbl_80494E58;
+}
+
