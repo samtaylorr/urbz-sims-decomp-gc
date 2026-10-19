@@ -1,6 +1,13 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+typedef struct {
+    u8 pad0[0x14];
+    void *unk14;
+    u8 pad18[0x2C - 0x18];
+    s32 unk2C[1];
+} EIWallPartFlags;
+
 extern void fn_802D30D4(void *, s32 *);
 extern void fn_802E34F0(void *, void *);
 void fn_800328F8(char *self, void *arg1) {
@@ -8,7 +15,8 @@ void fn_800328F8(char *self, void *arg1) {
 }
 
 s32 fn_80032924(char *self, s32 i) {
-    return ((s32 *)(self + 0x2C))[i];
+    s32 *arr = (s32 *)(self + 0x2C);
+    return arr[i];
 }
 
 s32 fn_80032934(char *self, s32 i) {
