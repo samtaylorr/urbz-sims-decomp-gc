@@ -4373,6 +4373,12 @@ void *fn_803B90DC(void *self) {
     return self;
 }
 
+void fn_803B910C(s32 *self, s32 n) {
+    while (--n != -1) {
+        self++;
+    }
+}
+
 s32 fn_803B95C0(void) {
     return 1;
 }
