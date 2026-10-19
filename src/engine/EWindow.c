@@ -92,6 +92,10 @@ void fn_80309198(void) {
     fn_8030861C();
 }
 
+s32 fn_803099E8(s32 arg0) {
+    return arg0 + 0x80;
+}
+
 extern void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
 void fn_8030A738(void *arg0) {
