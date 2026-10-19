@@ -400,6 +400,16 @@ s32 fn_8019F5A0(void *arg0) {
     return ((u32) M2C_FIELD(arg0, u32 *, 0x1C) >> 0xEU) & 1;
 }
 
+void fn_8019F5AC(void *arg0, s32 arg1) {
+    s32 temp_r0;
+
+    temp_r0 = M2C_FIELD(arg0, s32 *, 0x1C) & 0xFFFF7FFF;
+    M2C_FIELD(arg0, s32 *, 0x1C) = temp_r0;
+    if (arg1 != 0) {
+        M2C_FIELD(arg0, s32 *, 0x1C) = (s32) (temp_r0 | 0x8000);
+    }
+}
+
 s32 fn_8019F5CC(void *arg0) {
     return ((u32) M2C_FIELD(arg0, u32 *, 0x1C) >> 0xFU) & 1;
 }
