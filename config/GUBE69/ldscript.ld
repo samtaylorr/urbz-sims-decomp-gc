@@ -12,7 +12,9 @@ SECTIONS
 	. = 0x80003100;
 	.init : { *(.init) }
 	.text : { *(.text) }
-	.ctors : { *(.ctors) }
+	/* dtk calls the DOL's constructor/destructor lists section .rodata2: it holds two GCC
+	 * -1-terminated lists, and dtk's .ctors check stops at the first list's 0 */
+	.ctors : { *(.ctors) *(.rodata2) }
 	. = ALIGN(8);
 	.rodata : { *(.rodata) }
 	. = ALIGN(8);

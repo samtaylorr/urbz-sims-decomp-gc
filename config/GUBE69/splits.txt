@@ -2,12 +2,12 @@ Sections:
 	.init       type:code align:4
 	.text       type:code align:4
 	.rodata2    type:rodata align:4
-	.rodata     type:rodata align:4
-	.data       type:data align:4
-	.bss        type:bss align:4
+	.rodata     type:rodata align:8
+	.data       type:data align:8
+	.bss        type:bss align:8
 	.sdata      type:data align:32
-	.sbss       type:bss align:4
-	.sdata2     type:rodata align:16
+	.sbss       type:bss align:8
+	.sdata2     type:rodata align:32
 
 auto/text_800034C0.c:
 	.text       start:0x800034C0 end:0x803C0D60

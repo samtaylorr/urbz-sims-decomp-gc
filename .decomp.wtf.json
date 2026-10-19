@@ -26,13 +26,11 @@
       "/home/staylor/.local/share/decompnet/toolchains/wibo/wibo"
     ],
     [
-      "ninja",
-      "all_source",
-      "build/GUBE69/report.json"
+      "ninja"
     ]
   ],
   "rebuild": {
-    "identical": false,
-    "detail": "1 files differ: main.dol"
+    "identical": true,
+    "detail": "identical"
   }
 }
