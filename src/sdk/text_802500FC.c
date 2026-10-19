@@ -140,6 +140,10 @@ void fn_8027741C(void) {
 
 }
 
+void fn_80277420(void) {
+
+}
+
 s32 fn_80277424(void) {
     return 1;
 }
