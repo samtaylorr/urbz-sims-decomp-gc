@@ -10,6 +10,12 @@ void fn_801020E0(void **self, s32 flags) {
     }
 }
 
+extern void *fn_802D0AB8(void *);
+extern void fn_802D1A00(void *, void *);
+void fn_801029D8(void *arg0) {
+    fn_802D1A00(fn_802D0AB8(arg0), arg0);
+}
+
 s32 fn_801051C0(void) {
     return 0;
 }
