@@ -816,6 +816,10 @@ void fn_802BBD98(void) {
     lbl_80443314[0]();
 }
 
+s32 fn_802BC640(void **arg0, u32 arg1) {
+    return arg1 < (u16) M2C_FIELD(*arg0, u16 *, 4);
+}
+
 s32 fn_802BCA14(void) {
     return 0;
 }
