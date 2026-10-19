@@ -9,6 +9,15 @@ s32 fn_8010A7EC(void) {
     return 0;
 }
 
+extern u8 lbl_8040E770[];
+extern void fn_802D20E8(void *);
+void fn_8010B568(void **self, s32 flags) {
+    *self = lbl_8040E770;
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 s32 fn_8010BD50(void) {
     return 0;
 }
