@@ -414,6 +414,22 @@ void fn_801F501C(void *arg0) {
     }
 }
 
+void fn_801F5060(void *arg0) {
+    void *temp_r0;
+    void *temp_r11;
+
+    temp_r11 = M2C_FIELD(arg0, void **, 0xD8);
+    if (temp_r11 != NULL) {
+        temp_r0 = M2C_FIELD(arg0, void **, 0xA8);
+        if (temp_r0 != NULL) {
+            M2C_FIELD(arg0, void **, 0xD8) = NULL;
+            M2C_FIELD(temp_r11, M2C_UNK (**)(void *), 0xC)(temp_r11);
+            return;
+        }
+        M2C_FIELD(arg0, void **, 0xD8) = temp_r0;
+    }
+}
+
 void fn_801F55A4(void) {
 
 }
