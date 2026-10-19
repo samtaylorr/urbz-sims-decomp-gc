@@ -46,6 +46,10 @@ s32 fn_802EEE98(void) {
     return 1;
 }
 
+s32 fn_802EEEA0(void) {
+    return -1;
+}
+
 s32 fn_802EEEA8(void) {
     return 1;
 }
