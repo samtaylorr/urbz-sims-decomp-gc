@@ -50,6 +50,10 @@ void fn_8008F874(void) {
 
 }
 
+void fn_8008F878(void) {
+
+}
+
 s32 fn_80093598(void) {
     return 0;
 }
