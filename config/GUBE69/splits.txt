@@ -13,7 +13,10 @@ auto/text_800034C0.c:
 	.text       start:0x800034C0 end:0x80005214
 
 auto/AptShaderWord.c:
-	.text       start:0x80005214 end:0x8023EBD8
+	.text       start:0x80005214 end:0x8000A6FC
+
+auto/AptViewer.c:
+	.text       start:0x8000A6FC end:0x8023EBD8
 
 libsn/text_8023EBD8.c:
 	.text       start:0x8023EBD8 end:0x80241A98
