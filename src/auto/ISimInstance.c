@@ -174,3 +174,7 @@ s32 fn_80066D90(void) {
     return 0;
 }
 
+s32 fn_80066DB0(s32 arg0) {
+    return arg0 + 0x314;
+}
+
