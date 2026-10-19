@@ -1,6 +1,13 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+void fn_8016C0EC(void) {
+    M2C_UNK fn_8016C1A4();
+    M2C_UNK fn_802D1FC8(M2C_UNK);
+    fn_802D1FC8(0x18);
+    fn_8016C1A4();
+}
+
 s32 fn_8016C258(void) {
     return 1;
 }
