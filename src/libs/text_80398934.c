@@ -364,6 +364,10 @@ void fn_8039DAE4(void) {
 
 }
 
+s32 fn_8039DAFC(s32 arg0) {
+    return arg0 + 0xC;
+}
+
 void fn_8039DB04(void *arg0, f32 farg0) {
     M2C_FIELD(arg0, f32 *, 0xC) = farg0;
 }
