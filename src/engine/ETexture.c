@@ -7,3 +7,9 @@ void fn_8036EE30(u8 *self) {
     *(u8 **)(self + 0x338) = lbl_8041DC30;
     fn_802D8BEC(self);
 }
+
+void fn_802D2FD0(void);
+void fn_80370010(void) {
+    fn_802D2FD0();
+}
+
