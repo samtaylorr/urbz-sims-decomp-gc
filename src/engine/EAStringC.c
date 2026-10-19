@@ -403,6 +403,11 @@ s32 fn_802AF398(s32 arg0) {
     return arg0 + 0x28;
 }
 
+void fn_802B0084(s32 arg0, s32 arg1) {
+    M2C_UNK fn_802B000C(M2C_UNK, s32, s32);
+    fn_802B000C(0, arg0, arg1);
+}
+
 void fn_8027873C(void);
 void fn_802B092C(void) {
     fn_8027873C();
