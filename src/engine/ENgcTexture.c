@@ -40,6 +40,10 @@ s32 fn_80361D1C(void) {
     return 1;
 }
 
+void fn_80361F18(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 8) = (s32) (M2C_FIELD(arg0, s32 *, 8) | 0x80);
+}
+
 void fn_80361F28(void) {
 
 }
