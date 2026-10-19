@@ -75,6 +75,12 @@ void fn_80399D20(s32 *dst, s32 *src, s32 n) {
     }
 }
 
+void fn_80399F34(void *self) {
+    ((s32 *)self)[0] = 0;
+    ((s32 *)self)[2] = 0;
+    ((s32 *)self)[1] = 0;
+}
+
 void fn_8039A024(void *self) {
     ((s32 *)self)[0] = 0;
     ((s32 *)self)[2] = 0;
