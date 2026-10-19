@@ -178,6 +178,10 @@ s32 fn_801175D4(u8 *self) {
     return *(s32 *)(self + 0x20);
 }
 
+s32 fn_801175DC(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x14);
+}
+
 s32 fn_8011785C(void) {
     return 0;
 }
