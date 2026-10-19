@@ -120,3 +120,7 @@ s32 fn_80097C58(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x4C8);
 }
 
+s32 fn_80097C60(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x4CC);
+}
+
