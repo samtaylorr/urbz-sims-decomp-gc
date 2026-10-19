@@ -58,6 +58,10 @@ s32 fn_801484F8(char *self) {
     return *(s32 *)(self + 0xC);
 }
 
+void fn_80148500(void) {
+
+}
+
 s32 fn_80148664(void) {
     return lbl_80494474;
 }
