@@ -75,3 +75,8 @@ void fn_80373960(void) {
     fn_802D2430();
 }
 
+void *fn_803739B0(u32 size, void *p);
+void *fn_803739B0(u32 size, void *p) {
+    return p;
+}
+
