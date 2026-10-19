@@ -33,6 +33,10 @@ void fn_801303B0(void (*cb)(void)) {
     lbl_80494480 = cb;
 }
 
+void fn_80131DA4(void) {
+
+}
+
 extern s32 lbl_80494478;
 void fn_801325DC(void (*cb)(void)) {
     lbl_80494478 = cb;
