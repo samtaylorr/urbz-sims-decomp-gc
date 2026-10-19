@@ -48,6 +48,12 @@ void fn_80251884(s32 arg0) {
     lbl_804949A8 = arg0;
 }
 
+void fn_80252280(void) {
+    s32 fn_8024FF88();
+    M2C_UNK fn_8024FF90(s32);
+    fn_8024FF90((fn_8024FF88() | 0x80000000) & 0xFFDFFFFF);
+}
+
 s32 fn_80252900(void) {
     return *(s32 *)0x800000D4;
 }
