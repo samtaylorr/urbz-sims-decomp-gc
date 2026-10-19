@@ -7,6 +7,10 @@ void fn_80237C70(void *arg0) {
     fn_8022F404(fn_8022554C(arg0), arg0);
 }
 
+s32 fn_8023C2C8(s32 arg0) {
+    return arg0 + 0x68;
+}
+
 f32 fn_8023C2D0(void) {
     extern f32 lbl_80496760;
     return lbl_80496760;
