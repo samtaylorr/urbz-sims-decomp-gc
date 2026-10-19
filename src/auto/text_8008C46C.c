@@ -24,3 +24,8 @@ s32 fn_80093598(void) {
 void fn_8009415C(void) {
     fn_80091BE8();
 }
+
+s32 fn_80095A44(void) {
+    return 1;
+}
+
