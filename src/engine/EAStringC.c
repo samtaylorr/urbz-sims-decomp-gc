@@ -420,6 +420,10 @@ void fn_802B7224(void) {
 
 }
 
+void fn_802B7228(void) {
+
+}
+
 void fn_802B76E8(char *self) {
     extern void fn_802ADE44(void *);
     fn_802ADE44(self + 8);
