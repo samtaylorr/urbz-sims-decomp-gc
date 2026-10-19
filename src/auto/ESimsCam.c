@@ -36,6 +36,11 @@ void fn_800108B8(void) {
 
 }
 
+s32 fn_80011F24(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0x58C) = arg1;
+    return 1;
+}
+
 s32 fn_80011F30(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x58C);
 }
