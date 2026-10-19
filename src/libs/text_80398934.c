@@ -257,6 +257,11 @@ s32 fn_803B979C(void) {
     return lbl_804936FC[0];
 }
 
+extern s32 lbl_80493700[];
+s32 fn_803B97A8(void) {
+    return lbl_80493700[0];
+}
+
 void fn_802F05AC(void);
 void fn_803BAAB8(void) {
     fn_802F05AC();
