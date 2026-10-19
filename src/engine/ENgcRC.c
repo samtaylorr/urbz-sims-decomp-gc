@@ -93,6 +93,10 @@ void fn_8034C05C(void) {
 
 }
 
+s32 fn_8034D5AC(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x34C);
+}
+
 void fn_8034D8E8(void) {
 
 }
