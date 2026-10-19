@@ -220,6 +220,10 @@ void fn_802AD11C(void) {
 
 }
 
+void fn_802AD1FC(void) {
+
+}
+
 void fn_802AD204(char *self) {
     extern void fn_802ADE44(void *);
     fn_802ADE44(self + 8);
