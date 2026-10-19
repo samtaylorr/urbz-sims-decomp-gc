@@ -95,6 +95,12 @@ void *fn_80066B10(u32 size, void *p) {
     return p;
 }
 
+void fn_80066B18(void) {
+    M2C_UNK fn_80066C80(M2C_UNK);
+    fn_80066C80(0x3A8);
+    fn_80065ADC();
+}
+
 void fn_80066B40(void) {
     fn_80065ADC();
 }
