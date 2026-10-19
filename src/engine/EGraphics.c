@@ -98,6 +98,10 @@ s32 fn_802EEFA4(void) {
     return 0x400;
 }
 
+s32 fn_802EEFAC(void) {
+    return 0x400;
+}
+
 void fn_802EEFBC(void) {
 
 }
