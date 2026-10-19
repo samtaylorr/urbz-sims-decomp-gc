@@ -142,6 +142,12 @@ void *fn_80331208(u32 size, void *p) {
     return p;
 }
 
+void fn_80331210(s32 arg0) {
+    void fn_80338184(void *, s32);
+    extern u8 lbl_8045BA40[];
+    fn_80338184(lbl_8045BA40, arg0);
+}
+
 s32 fn_8033123C(u8 *self) {
     return *(s32 *)(self + 0x20);
 }
