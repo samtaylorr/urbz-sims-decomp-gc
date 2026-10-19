@@ -788,6 +788,14 @@ void fn_800DBFDC(void) {
 
 }
 
+void fn_800DBFE0(void *arg0, s32 arg1, f32 farg0) {
+    if (arg1 != 0) {
+        M2C_FIELD(arg0, f32 *, 0xA8) = farg0;
+        return;
+    }
+    M2C_FIELD(arg0, f32 *, 0xA8) = (f32) (M2C_FIELD(arg0, f32 *, 0xA8) + farg0);
+}
+
 s32 fn_800DC1C4(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x94);
 }
