@@ -41,3 +41,12 @@ void fn_8016CCF0(void) {
 
 }
 
+extern void fn_8016F714(s32);
+extern void fn_802D20E8(s32);
+void fn_8016F4C0(s32 self, s32 flags) {
+    fn_8016F714(self);
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
