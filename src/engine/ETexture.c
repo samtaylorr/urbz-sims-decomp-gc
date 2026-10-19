@@ -44,6 +44,10 @@ void fn_8036F130(void) {
 
 }
 
+void fn_8036F134(void) {
+
+}
+
 void *fn_8036F168(u32 size, void *p);
 void *fn_8036F168(u32 size, void *p) {
     return p;
