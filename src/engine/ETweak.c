@@ -2,6 +2,19 @@
 #include "common.h"
 
 void fn_802435CC(void);
+s32 fn_80313110(s32 arg0) {
+    s32 var_r3;
+    s32 var_r9;
+
+    var_r3 = arg0;
+    var_r9 = -1;
+    do {
+        var_r9 += 1;
+        var_r3 = var_r3 >> 1;
+    } while (var_r3 != 0);
+    return var_r9;
+}
+
 void fn_803135D4(void) {
     fn_802435CC();
 }
