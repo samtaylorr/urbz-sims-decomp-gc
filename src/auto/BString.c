@@ -2470,3 +2470,8 @@ s32 fn_800EF704(void **arg0) {
     return M2C_FIELD(*arg0, s32 *, 8);
 }
 
+void fn_800EF7E0(void) {
+    M2C_UNK fn_800EF78C(M2C_UNK, M2C_UNK);
+    fn_800EF78C(1, 0xFFFF);
+}
+
