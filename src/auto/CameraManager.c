@@ -37,6 +37,13 @@ void fn_80015404(void) {
 
 }
 
+void fn_80015710(void) {
+    extern s32 lbl_80495100;
+    extern s32 lbl_80495704;
+    lbl_80495704 = 0;
+    lbl_80495100 = 0;
+}
+
 void fn_800157CC(void) {
 
 }
