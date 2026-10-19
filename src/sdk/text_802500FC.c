@@ -33,6 +33,10 @@ s32 fn_80260F58(void) {
     return 1;
 }
 
+void fn_8026126C(void) {
+
+}
+
 extern u8 fn_80262F24[];
 void *fn_80262F18(void) {
     return fn_80262F24;
