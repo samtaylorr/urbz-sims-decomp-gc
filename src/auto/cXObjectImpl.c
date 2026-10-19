@@ -48,6 +48,10 @@ void fn_801325DC(void (*cb)(void)) {
     lbl_80494478 = cb;
 }
 
+void fn_80133954(s32 *arg0) {
+    *arg0 = 0;
+}
+
 s32 fn_801352DC(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0xB0);
 }
