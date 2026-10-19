@@ -24,6 +24,19 @@ s32 fn_80320468(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void fn_80320590(void *arg0) {
+    M2C_UNK fn_8036C508(s32);
+    void *var_r31;
+
+    var_r31 = M2C_FIELD(arg0, void **, 0x24);
+    if (var_r31 != NULL) {
+        do {
+            fn_8036C508(M2C_FIELD(var_r31, s32 *, 0));
+            var_r31 = M2C_FIELD(var_r31, void **, 8);
+        } while (var_r31 != NULL);
+    }
+}
+
 void fn_80323460(void *arg0) {
     M2C_UNK fn_803233D4();
     fn_803233D4();
