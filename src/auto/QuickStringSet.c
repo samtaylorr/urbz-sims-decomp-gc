@@ -35,6 +35,10 @@ s32 fn_800F6FEC(s32 *self) {
     return self[1];
 }
 
+void fn_800F7018(s16 **arg0) {
+    **arg0 = 0;
+}
+
 s32 fn_800F7138(s32 *self) {
     return *self;
 }
