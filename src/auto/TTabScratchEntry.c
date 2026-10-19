@@ -180,6 +180,10 @@ void fn_8019F318(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x40) = arg1;
 }
 
+void fn_8019F320(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0x48) = arg1;
+}
+
 s32 fn_8019F34C(s32 *self) {
     return self[6];
 }
