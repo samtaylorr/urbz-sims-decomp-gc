@@ -316,6 +316,20 @@ s32 fn_800E1A2C(void) {
     return lbl_804966DC;
 }
 
+extern s32 lbl_80434A9C[];
+extern s32 lbl_8041F754[];
+void fn_800E1A48(void) {
+    lbl_8041F754[0x7C / 4] = 1;
+    lbl_8041F754[0x80 / 4] = lbl_80434A9C[1];
+    lbl_8041F754[0x84 / 4] = 0;
+    if (lbl_80434A9C[0x30 / 4] == 2) {
+        lbl_8041F754[0x84 / 4] = 1;
+    }
+    if (lbl_80434A9C[0x34 / 4] == 2) {
+        lbl_8041F754[0x84 / 4] |= 2;
+    }
+}
+
 extern s32 lbl_804966E4;
 s32 fn_800E1C34(void) {
     return lbl_804966E4;
