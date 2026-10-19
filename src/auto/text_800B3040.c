@@ -33,3 +33,7 @@ void fn_800B49F0(void) {
 
 }
 
+s32 fn_800B4C20(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x74);
+}
+
