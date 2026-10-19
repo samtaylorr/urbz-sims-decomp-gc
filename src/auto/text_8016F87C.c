@@ -63,6 +63,10 @@ s32 fn_80175CC0(char *self) {
     return *(s32 *)(self + 0xC);
 }
 
+s32 fn_80175CC8(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x14);
+}
+
 void fn_80175CD0(void) {
 
 }
