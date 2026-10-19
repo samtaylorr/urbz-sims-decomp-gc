@@ -525,6 +525,10 @@ s16 fn_801A3C68(void *arg0) {
     return M2C_FIELD(arg0, s16 *, 4);
 }
 
+void fn_801A3C70(void *arg0, s16 arg1) {
+    M2C_FIELD(arg0, s16 *, 4) = arg1;
+}
+
 void fn_801A3CFC(void) {
 
 }
