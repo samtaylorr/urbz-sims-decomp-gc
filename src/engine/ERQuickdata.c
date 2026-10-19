@@ -167,3 +167,8 @@ s32 fn_80331410(void *arg0) {
     return ((u32) (M2C_FIELD(temp_r9, s32 *, 0x74) | M2C_FIELD(temp_r9, s32 *, 0xB4)) >> 5U) & 1;
 }
 
+void fn_8033143C(void) {
+    M2C_UNK fn_80330FC4(M2C_UNK, M2C_UNK);
+    fn_80330FC4(1, 0xFFFF);
+}
+
