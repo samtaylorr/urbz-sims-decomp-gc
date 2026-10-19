@@ -633,6 +633,10 @@ void fn_802B8D78(void) {
 
 }
 
+void fn_802B8F3C(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x24) = 0;
+}
+
 s32 fn_802B90B4(u8 *self) {
     return *(s32 *)(self + 0x20);
 }
