@@ -3,6 +3,10 @@
 
 extern void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
+void fn_80052238(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0x384) = (s32) (M2C_FIELD(arg0, s32 *, 0x384) | arg1);
+}
+
 s32 fn_800522E0(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x3D0) = arg1;
     return 1;
