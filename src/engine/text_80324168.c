@@ -35,6 +35,12 @@ void fn_80325888(void) {
 
 }
 
+void fn_80325A7C(s32 arg0, s32 arg1) {
+    s32 fn_802C52EC(s32);
+    M2C_UNK fn_80325AB8(s32, s32);
+    fn_80325AB8(arg0, fn_802C52EC(arg1));
+}
+
 void fn_80325AF4(s32 arg0) {
     M2C_UNK fn_803660C8(s32);
     fn_803660C8(arg0 + 0x490B0);
