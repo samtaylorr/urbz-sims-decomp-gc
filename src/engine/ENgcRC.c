@@ -23,22 +23,31 @@ void fn_8034713C(void) {
     void fn_803488E4(void *);
     void fn_80348380(void *);
     void fn_8037A8D8(void *, void *, s32);
-    extern u8 lbl_8046C400[];
-    extern u8 lbl_8046C578[];
+    extern struct {
+        u8 pad0[0xA7];
+        u8 unkA7;
+        u8 pad1[0x8];
+        s32 unkB0;
+        u8 pad2[0x4C];
+        struct { u8 pad[0xC]; } unk100[10];
+        u8 pad3[0x30];
+        struct { u8 pad[0xC]; } unk1A8[3];
+    } lbl_8046C400;
+    extern struct { u8 pad[0x10]; } lbl_8046C578[3];
     extern u8 lbl_8046DA00[];
     extern s32 lbl_804962A4;
-    u8 *p;
-    if (*(s32 *)(lbl_8046C400 + 0xB0) == 0) {
-        for (p = lbl_8046C400 + 0x100; p <= lbl_8046C400 + 0x16C; p += 0xC) {
-            fn_80348008(p);
+    s32 i;
+    if (lbl_8046C400.unkB0 == 0) {
+        for (i = 0; i < 10; i++) {
+            fn_80348008(&lbl_8046C400.unk100[i]);
         }
     }
-    for (p = lbl_8046C578; p <= lbl_8046C578 + 0x20; p += 0x10) {
-        fn_803488E4(p);
+    for (i = 0; i < 3; i++) {
+        fn_803488E4(&lbl_8046C578[i]);
     }
-    if (lbl_8046C400[0xA7] != 0) {
-        for (p = lbl_8046C400 + 0x1A8; p <= lbl_8046C400 + 0x1C0; p += 0xC) {
-            fn_80348380(p);
+    if (lbl_8046C400.unkA7 != 0) {
+        for (i = 0; i < 3; i++) {
+            fn_80348380(&lbl_8046C400.unk1A8[i]);
         }
     }
     fn_8037A8D8(lbl_8046DA00, &lbl_804962A4, 1);
