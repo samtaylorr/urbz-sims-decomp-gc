@@ -374,6 +374,7 @@ config.libs = [
             Object(NonMatching, "engine/AptActionInterpreter.c"),
             Object(NonMatching, "engine/AptCharacterAnimation.c"),
             Object(NonMatching, "engine/EAStringC.c"),
+            Object(NonMatching, "engine/EFileSystem.c"),
             Object(NonMatching, "misc/text_8038FC80.c"),
             Object(NonMatching, "libs/text_80398934.c"),
         ],
