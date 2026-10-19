@@ -34,6 +34,31 @@ s32 fn_802DFEEC(void) {
     return 0;
 }
 
+s32 fn_802DFEF4(void *arg0, s32 arg1, s32 arg2) {
+    s32 temp_r11;
+    s32 var_r0;
+    u32 temp_r9;
+
+    temp_r11 = M2C_FIELD(arg0, s32 *, 0x68);
+    if (arg2 == 1) {
+        var_r0 = temp_r11 + arg1;
+        goto block_5;
+    }
+    if (arg2 == 0) {
+        M2C_FIELD(arg0, s32 *, 0x68) = arg1;
+    } else {
+        var_r0 = M2C_FIELD(arg0, s32 *, 0x60) - arg1;
+block_5:
+        M2C_FIELD(arg0, s32 *, 0x68) = var_r0;
+    }
+    temp_r9 = M2C_FIELD(arg0, u32 *, 0x70) + (M2C_FIELD(arg0, s32 *, 0x68) - temp_r11);
+    M2C_FIELD(arg0, u32 *, 0x70) = temp_r9;
+    if (temp_r9 > 0xFFFU) {
+        M2C_FIELD(arg0, s32 *, 0x74) = 1;
+    }
+    return M2C_FIELD(arg0, s32 *, 0x68);
+}
+
 s32 fn_802DFF50(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x68);
 }
