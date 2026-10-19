@@ -15,6 +15,11 @@ void fn_8012373C(s32 arg0) {
     fn_800F6A38(arg0 + 4);
 }
 
+void fn_801245D0(s32 arg0) {
+    M2C_UNK fn_800F5974(s32);
+    fn_800F5974(arg0 + 4);
+}
+
 s32 fn_80124808(void) {
     return 0;
 }
