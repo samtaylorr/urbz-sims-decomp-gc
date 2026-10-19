@@ -133,6 +133,10 @@ void fn_8035DB44(void) {
     fn_8036EFA4();
 }
 
+void fn_8035DE6C(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x24) = 1;
+}
+
 extern void fn_802D20E8(void *);
 void fn_8035DFB8(void *self, s32 flags) {
     if (flags & 1) {
