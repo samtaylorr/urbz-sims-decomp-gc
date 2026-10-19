@@ -5902,6 +5902,10 @@ void fn_803BB77C(s32 self, s32 flags) {
     }
 }
 
+void fn_803BB7F0(void *self, s8 *p) {
+    *p = 0;
+}
+
 void fn_803BB7FC(void) {
 
 }
