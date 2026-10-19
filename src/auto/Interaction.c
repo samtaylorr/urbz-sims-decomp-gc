@@ -431,6 +431,16 @@ s32 fn_801177C8(void *arg0) {
     return ((u32) M2C_FIELD(arg0, u32 *, 0x44) >> 9U) & 1;
 }
 
+void fn_801177D4(void *arg0, s32 arg1) {
+    s32 temp_r0;
+
+    temp_r0 = M2C_FIELD(arg0, s32 *, 0x44) & 0xFFFFFDFF;
+    M2C_FIELD(arg0, s32 *, 0x44) = temp_r0;
+    if (arg1 != 0) {
+        M2C_FIELD(arg0, s32 *, 0x44) = (s32) (temp_r0 | 0x200);
+    }
+}
+
 s32 fn_801177F4(void *arg0) {
     return ((u32) M2C_FIELD(arg0, u32 *, 0x44) >> 0xAU) & 1;
 }
