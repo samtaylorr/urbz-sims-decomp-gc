@@ -34,3 +34,7 @@ void fn_800DBC9C(void) {
     fn_800E3BC0();
 }
 
+void fn_800E1868(void) {
+    fn_800E3BC0();
+}
+
