@@ -58,3 +58,8 @@ void fn_802EB590(void) {
     fn_802EB650();
 }
 
+void fn_802ED6F4(void) {
+    M2C_UNK fn_802ED604(M2C_UNK, M2C_UNK);
+    fn_802ED604(1, 0xFFFF);
+}
+
