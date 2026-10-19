@@ -468,6 +468,10 @@ void fn_802B71A8(s32 *arg0) {
     *arg0 += 0x40;
 }
 
+void fn_802B71B8(s32 *arg0) {
+    *arg0 -= 0x40;
+}
+
 s32 fn_802B71E8(u32 *arg0) {
     return ((u32) *arg0 >> 0x1EU) & 1;
 }
