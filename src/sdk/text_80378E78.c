@@ -1,5 +1,7 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
+extern s32 lbl_80496440;
+
 
 extern s32 lbl_80496354;
 s32 fn_8037AD2C(s32 *self) {
@@ -83,6 +85,10 @@ void *fn_803837CC(void) {
 
 void fn_80383A20(void) {
 
+}
+
+void fn_80384798(s32 arg0) {
+    lbl_80496440 = arg0;
 }
 
 extern s32 lbl_80496440;
