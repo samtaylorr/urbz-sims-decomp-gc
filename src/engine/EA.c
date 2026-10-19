@@ -120,6 +120,11 @@ s32 fn_802D9028(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x320);
 }
 
+s32 fn_802D9030(void *arg0) {
+    s32 fn_802D9060(void *);
+    return fn_802D9060(arg0) != 0;
+}
+
 void fn_802D9110(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x32C) = arg1;
 }
