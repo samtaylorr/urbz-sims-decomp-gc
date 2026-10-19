@@ -1472,6 +1472,12 @@ s32 *fn_800EA680(s32 *self, s32 arg1) {
     return self;
 }
 
+void fn_800EA6EC(void *self, s32 flags) {
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 s32 fn_800EB5B4(void) {
     return 0;
 }
