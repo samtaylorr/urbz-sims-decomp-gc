@@ -250,6 +250,10 @@ s32 fn_801AA930(s32 *self) {
     return self[1];
 }
 
+void fn_801AB5C8(void) {
+
+}
+
 s32 fn_801B19F4(void) {
     return 0;
 }
