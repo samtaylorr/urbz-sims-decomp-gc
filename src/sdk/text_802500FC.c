@@ -157,6 +157,11 @@ void fn_8025F594(void) {
     fn_8025F448();
 }
 
+void fn_8025F7F4(void) {
+    extern s32 lbl_80495EA0;
+    fn_8025F710(lbl_80495EA0);
+}
+
 void fn_8025F914(s32 arg0) {
     extern s32 *lbl_80495EA8;
     *lbl_80495EA8 = arg0;
