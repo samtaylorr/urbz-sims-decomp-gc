@@ -105,6 +105,10 @@ s32 fn_8039BD1C(s32 *self) {
     return self[2];
 }
 
+s32 fn_8039BD48(s32 *self) {
+    return self[2];
+}
+
 void fn_8039C1B8(void) {
     fn_8030AD40();
 }
