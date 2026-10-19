@@ -49,6 +49,10 @@ s16 fn_801285F4(void *arg0) {
     return M2C_FIELD(arg0, s16 *, 0x168);
 }
 
+s32 fn_801286A0(void *arg0) {
+    return (s32) (M2C_FIELD(arg0, s32 *, 0x15C) - M2C_FIELD(arg0, s32 *, 0x158)) >> 2;
+}
+
 s16 fn_801286C4(void *arg0) {
     return M2C_FIELD(arg0, s16 *, 0x16A);
 }
