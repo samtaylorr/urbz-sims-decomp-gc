@@ -216,3 +216,7 @@ u8 *fn_801C98C8(u8 *self) {
     return self + 8;
 }
 
+s32 fn_801C98D0(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x504);
+}
+
