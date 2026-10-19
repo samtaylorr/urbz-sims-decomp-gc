@@ -38,6 +38,10 @@ s32 fn_8008F864(void) {
     return 1;
 }
 
+void fn_8008F86C(void) {
+
+}
+
 s32 fn_80093598(void) {
     return 0;
 }
