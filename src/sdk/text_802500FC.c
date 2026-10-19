@@ -133,6 +133,14 @@ s32 fn_802585AC(void *arg0) {
     return 0;
 }
 
+void fn_80258C80(void) {
+    M2C_UNK fn_80258A58(M2C_UNK);
+    extern s32 lbl_80495E6C;
+    if ((s32) lbl_80495E6C != 0) {
+        fn_80258A58(0);
+    }
+}
+
 s32 fn_802599FC(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x2D4);
 }
