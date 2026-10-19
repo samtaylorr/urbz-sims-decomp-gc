@@ -225,6 +225,17 @@ void fn_802D0C18(void) {
     fn_802D94C0(lbl_8044604C, 2);
 }
 
+extern u8 lbl_803F02FC[];
+extern s32 lbl_8049615C;
+void *fn_802D0C44(void *unused) {
+    if (lbl_8049615C == 0) {
+        fn_802D0D30(lbl_8044604C, lbl_803F02FC);
+        lbl_8049615C = 1;
+        fn_80246D44(fn_802D0C18);
+    }
+    return lbl_8044604C;
+}
+
 extern u8 lbl_8044680C[];
 void fn_802D0C9C(void);
 void fn_802D0C9C(void) {
