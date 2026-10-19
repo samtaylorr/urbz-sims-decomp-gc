@@ -39,6 +39,27 @@ s32 fn_800A496C(void) {
     return 1;
 }
 
+s32 fn_800A4FCC(s32 arg0, s32 *arg1) {
+    M2C_UNK fn_800A4924(s32, s32);
+    s32 fn_8012EB5C(void *, s32, s32 *);
+    extern void *lbl_8049440C;
+    extern s32 lbl_80494460;
+    s32 temp_r0;
+    s32 temp_r3;
+
+    temp_r0 = M2C_FIELD(lbl_8049440C, s32 *, 0x24);
+    if (temp_r0 == 1) {
+        *arg1 = temp_r0;
+        return 1;
+    }
+    temp_r3 = fn_8012EB5C(lbl_8049440C, arg0, arg1);
+    if (temp_r3 != 1) {
+        *arg1 = 1;
+    }
+    fn_800A4924(lbl_80494460, arg0);
+    return temp_r3;
+}
+
 void fn_800A51BC(void) {
 
 }
