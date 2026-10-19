@@ -96,6 +96,23 @@ s32 fn_8031DE84(void *arg0) {
     return var_r30;
 }
 
+void fn_8031E310(void *arg0) {
+    M2C_UNK fn_802D8334(void *, M2C_UNK);
+    s32 fn_8031CB40(s32, s32 *, M2C_UNK);
+    M2C_UNK fn_8031E368(void *, s32);
+    s32 sp8;
+
+loop_1:
+    if (fn_8031CB40(arg0 + 0x37C, &sp8, 1) != 0) {
+        fn_8031E368(arg0, sp8);
+    }
+    if ((s32) M2C_FIELD(arg0, s32 *, 0x3F0) == 0) {
+        goto loop_1;
+    }
+    fn_802D8334(arg0 + 0x3F4, -1);
+    goto loop_1;
+}
+
 void fn_8031E778(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x3EC) = arg1;
 }
