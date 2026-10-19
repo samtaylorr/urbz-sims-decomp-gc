@@ -21,10 +21,3 @@ void fn_8008C388(void) {
     fn_8008C3A8();
 }
 
-void fn_8008CD40(void) {
-    fn_803073C4();
-}
-
-void fn_8009415C(void) {
-    fn_80091BE8();
-}
