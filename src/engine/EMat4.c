@@ -53,6 +53,11 @@ void fn_802C7DD0(void *arg0) {
     M2C_FIELD(arg0, s32 *, 8) = 0;
 }
 
+void fn_802C829C(s32 arg0, s32 arg1, s32 arg2) {
+    M2C_UNK fn_8037D6D8(s32, s32, s32);
+    fn_8037D6D8(arg1, arg2, arg0);
+}
+
 void fn_802C96D4(void) {
 
 }
