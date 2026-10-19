@@ -884,6 +884,14 @@ s32 fn_803AC408(void) {
     return 1;
 }
 
+extern u8 lbl_80415BD0[];
+void fn_803ACF84(void **self, s32 flags) {
+    *self = lbl_80415BD0;
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_803ADEE4(BoundPmf *b) {
     s16 index = b->index;
     char *obj = b->obj;
