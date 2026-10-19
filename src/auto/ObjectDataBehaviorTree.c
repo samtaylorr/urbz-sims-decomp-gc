@@ -18,6 +18,10 @@ s16 fn_801B27A4(void *arg0) {
     return M2C_FIELD(M2C_FIELD(arg0, void **, 0x54), s16 *, 2);
 }
 
+u8 fn_801B27B0(void *arg0) {
+    return M2C_FIELD(M2C_FIELD(arg0, void **, 0x54), u8 *, 4);
+}
+
 s16 fn_801B28E4(void *arg0) {
     return M2C_FIELD(arg0, s16 *, 4);
 }
