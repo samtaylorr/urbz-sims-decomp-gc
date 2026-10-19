@@ -143,6 +143,10 @@ s32 fn_8019F4FC(u8 *self) {
     return *(s32 *)(self + 0x20);
 }
 
+void fn_8019F604(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0x38) = arg1;
+}
+
 extern u8 lbl_80414970[];
 void fn_8019F844(void **self, s32 flags) {
     *self = lbl_80414970;
