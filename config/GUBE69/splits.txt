@@ -130,7 +130,10 @@ auto/ChainResFile.c:
 	.text       start:0x801020E0 end:0x80106008
 
 auto/FamilyImpl.c:
-	.text       start:0x80106008 end:0x8023EBD8
+	.text       start:0x80106008 end:0x8010D2E8
+
+auto/Interaction.c:
+	.text       start:0x8010D2E8 end:0x8023EBD8
 
 libsn/text_8023EBD8.c:
 	.text       start:0x8023EBD8 end:0x80241A98
