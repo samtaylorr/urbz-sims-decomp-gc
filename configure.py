@@ -420,6 +420,7 @@ config.libs = [
             Object(NonMatching, "engine/EControllerManager.c"),
             Object(NonMatching, "engine/text_80335020.c"),
             Object(NonMatching, "engine/text_803351E8.c"),
+            Object(NonMatching, "engine/text_8033536C.c"),
             Object(NonMatching, "misc/text_8038FC80.c"),
             Object(NonMatching, "libs/text_80398934.c"),
         ],
