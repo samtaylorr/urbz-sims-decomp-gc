@@ -10,3 +10,8 @@ void *fn_801C9904(void *self) {
 s32 fn_801CB188(s32 *self) {
     return self[1];
 }
+
+void fn_801CD968(void) {
+
+}
+
