@@ -5,6 +5,10 @@ void fn_8004AF3C(void) {
 
 }
 
+void fn_8004AF40(void) {
+
+}
+
 s32 fn_8004E644(void) {
     return 0;
 }
