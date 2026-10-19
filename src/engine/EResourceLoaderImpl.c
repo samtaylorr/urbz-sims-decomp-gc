@@ -33,6 +33,18 @@ void fn_8031CC34(s32 arg0) {
     fn_803669C0(arg0 + 0x37C);
 }
 
+void fn_8031CFA0(s32 arg0) {
+    M2C_UNK fn_802D1FC8(M2C_UNK);
+    s32 *fn_8031C7B4();
+    M2C_UNK fn_8031D084(s32, s32 *);
+    s32 *temp_r3;
+
+    fn_802D1FC8(0x28);
+    temp_r3 = fn_8031C7B4();
+    *temp_r3 = 2;
+    fn_8031D084(arg0, temp_r3);
+}
+
 void fn_802D8F90();
 void fn_8031CFE8(char *self) {
     extern void fn_802D8F90(void *);
