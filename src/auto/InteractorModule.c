@@ -7,6 +7,11 @@ void fn_80237C70(void *arg0) {
     fn_8022F404(fn_8022554C(arg0), arg0);
 }
 
+void fn_80239EB0(s32 arg0, s32 arg1) {
+    M2C_UNK fn_8022F424(s32, s32);
+    fn_8022F424(arg1, arg0);
+}
+
 s32 fn_8023C218(void *arg0) {
     return ((u32) M2C_FIELD(arg0, u32 *, 0xC0) >> 7U) & 1;
 }
