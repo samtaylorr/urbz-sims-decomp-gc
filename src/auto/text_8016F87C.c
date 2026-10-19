@@ -37,6 +37,10 @@ s32 fn_801746D0(void) {
     return 1;
 }
 
+void fn_80174E84(s32 *self, s32 value) {
+    *self = value;
+}
+
 s32 fn_80175C9C(s32 *self) {
     return self[2];
 }
