@@ -142,6 +142,12 @@ void *fn_800596B8(u32 size, void *p) {
     return p;
 }
 
+void *fn_800596C0(void) {
+    extern void *fn_80058988(u32);
+    extern void *fn_800585B4(void *, s32);
+    return fn_800585B4(fn_80058988(0x138), 0);
+}
+
 void fn_800596EC(void *self) {
     extern void *fn_800585B4(void *, s32);
     fn_800585B4(self, 0);
