@@ -95,6 +95,10 @@ s32 fn_802EEEA8(void) {
     return 1;
 }
 
+f32 fn_802EEEB0(void) {
+    return lbl_803F0C8C[0];
+}
+
 s32 fn_802EEEC8(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x98);
 }
