@@ -45,6 +45,10 @@ s16 fn_801285F4(void *arg0) {
     return M2C_FIELD(arg0, s16 *, 0x168);
 }
 
+s16 fn_801286C4(void *arg0) {
+    return M2C_FIELD(arg0, s16 *, 0x16A);
+}
+
 void fn_801286E8(void) {
 
 }
