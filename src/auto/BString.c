@@ -1669,6 +1669,10 @@ s32 *fn_800E9B80(s32 *self, s32 a) {
     return self;
 }
 
+void fn_800E9BB4(s32 *self) {
+    fn_800E9514(self[2]);
+}
+
 extern u8 lbl_8040CFF8[];
 s32 *fn_800E9EE0(s32 *self, s32 arg1) {
     self[0] = arg1;
