@@ -10,6 +10,10 @@ void fn_80014DE0(void *self, s32 flags) {
     }
 }
 
+void fn_80014E08(void) {
+
+}
+
 void fn_80014F48(void *self, s32 flags) {
     if (flags & 1) {
         fn_802D20E8(self);
