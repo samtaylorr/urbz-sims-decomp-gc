@@ -341,6 +341,10 @@ void fn_802B092C(void) {
     fn_8027873C();
 }
 
+s32 fn_802B094C(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0xC) + 8;
+}
+
 s32 fn_802B0958(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x4C);
 }
