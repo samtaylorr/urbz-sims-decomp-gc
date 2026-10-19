@@ -6,6 +6,10 @@ s32 fn_8019B448(void) {
     return 0;
 }
 
+s32 fn_8019E508(void) {
+    return 1;
+}
+
 s32 fn_8019F070(void) {
     return 0;
 }
