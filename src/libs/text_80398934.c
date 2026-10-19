@@ -4255,6 +4255,14 @@ void fn_803BE5AC(void) {
     fn_80335FD8();
 }
 
+extern u8 lbl_8041C438[];
+void fn_803BE5F4(void **self, s32 flags) {
+    *self = lbl_8041C438;
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_803103A0(void);
 void fn_803BE628(void) {
     fn_803103A0();
