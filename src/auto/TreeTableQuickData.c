@@ -32,3 +32,7 @@ void fn_801B37AC(void) {
     fn_8010C15C();
 }
 
+s32 fn_801B37CC(void) {
+    return 0;
+}
+
