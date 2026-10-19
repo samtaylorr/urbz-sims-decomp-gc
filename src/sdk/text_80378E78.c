@@ -336,6 +336,14 @@ u16 fn_80388F84(void) {
     return lbl_804964A0;
 }
 
+s32 fn_80389540(s32 arg0) {
+    s32 fn_8038B684(M2C_UNK);
+    if ((arg0 == 0) && ((fn_8038B684(0) == -1) || (fn_8038B684(1) == -1))) {
+        return 0;
+    }
+    return 1;
+}
+
 s32 fn_80389590(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x88);
 }
