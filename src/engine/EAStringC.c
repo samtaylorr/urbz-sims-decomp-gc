@@ -531,6 +531,16 @@ void fn_802B7138(s32 *arg0, s32 arg1) {
     }
 }
 
+void fn_802B7158(s32 *arg0, s32 arg1) {
+    s32 temp_r0;
+
+    temp_r0 = *arg0 & 0xFFFFBFFF;
+    *arg0 = temp_r0;
+    if (arg1 != 0) {
+        *arg0 = temp_r0 | 0x4000;
+    }
+}
+
 void fn_802B71A8(s32 *arg0) {
     *arg0 += 0x40;
 }
