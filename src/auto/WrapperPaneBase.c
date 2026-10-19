@@ -192,6 +192,10 @@ f32 fn_800CF82C(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0x34);
 }
 
+f32 fn_800CF834(void *arg0) {
+    return M2C_FIELD(arg0, f32 *, 0x38);
+}
+
 void fn_800CF868(u8 *self, s32 on) {
     u8 *p = self + 0x20;
     if (on) {
