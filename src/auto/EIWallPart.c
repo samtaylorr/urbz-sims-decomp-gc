@@ -30,6 +30,11 @@ s32 fn_80039D18(void) {
     return lbl_80491C0C[0];
 }
 
+extern s32 lbl_80491C10[];
+s32 fn_80039D24(void) {
+    return lbl_80491C10[0];
+}
+
 extern u16 lbl_80491C14[];
 u16 fn_80039D30(void) {
     return lbl_80491C14[0];
