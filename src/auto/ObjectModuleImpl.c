@@ -15,6 +15,10 @@ void fn_8014C3F4(void) {
 
 }
 
+void fn_8014FDD0(void) {
+
+}
+
 void fn_8014FDD4(void) {
 
 }
