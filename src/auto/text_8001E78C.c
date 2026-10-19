@@ -29,13 +29,13 @@ void fn_800235FC(void *arg0, f32 farg0, f32 farg1, f32 farg2, f32 farg3) {
     M2C_FIELD(M2C_FIELD(arg0, void **, 0x4C), f32 *, 0x1C) = farg3;
 }
 
-extern void *fn_802D0AB8(void *);
+extern void *fn_802D0AB8(void);
 extern void fn_802D1A00(void *, void *);
 extern void *fn_802D197C(void *, u32, s32);
 extern void *fn_802DC3C0(void *, u32, s32, s32, s32);
 extern void *fn_802D0B3C(void);
 void fn_80023A00(void *arg0) {
-    fn_802D1A00(fn_802D0AB8(arg0), arg0);
+    fn_802D1A00(fn_802D0AB8(), arg0);
 }
 
 void fn_80023A34(void **obj) {
@@ -61,7 +61,7 @@ void *fn_80023A8C(u32 size) {
     void *heap;
     void *p;
 
-    heap = fn_802D0AB8((void *)size);
+    heap = fn_802D0AB8();
     if (size == 0) {
         return NULL;
     }
@@ -69,7 +69,7 @@ void *fn_80023A8C(u32 size) {
     p = fn_802D197C(heap, size, 0x10);
     if (p == NULL) {
         p = fn_802DC3C0(heap, size, 0x10, 0, 0);
-        if (p == NULL && heap == fn_802D0AB8(p)) {
+        if (p == NULL && heap == fn_802D0AB8()) {
             return fn_802DC3C0(fn_802D0B3C(), size, 0x10, 0, 0);
         }
     }
@@ -77,11 +77,16 @@ void *fn_80023A8C(u32 size) {
 }
 
 void fn_80023B38(void *arg0) {
-    fn_802D1A00(fn_802D0AB8(arg0), arg0);
+    fn_802D1A00(fn_802D0AB8(), arg0);
 }
 
 s32 fn_80023B6C(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x14) != 0;
+}
+
+void fn_80023B84(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    M2C_FIELD(arg0, s32 *, 0) = arg2;
+    M2C_FIELD(arg0, s32 *, 4) = arg3;
 }
 
 void fn_80023BD4(void) {
