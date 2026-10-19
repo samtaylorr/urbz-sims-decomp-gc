@@ -32,6 +32,21 @@ void fn_80371C20(void) {
 
 }
 
+void fn_80371C24(void *arg0) {
+    M2C_UNK fn_802CB8D4(void *);
+    M2C_UNK fn_8031EA2C(s32);
+    void *var_r31;
+
+    var_r31 = M2C_FIELD(arg0, void **, 0x20);
+    if (var_r31 != NULL) {
+        do {
+            fn_8031EA2C(M2C_FIELD(var_r31, s32 *, 0));
+            var_r31 = M2C_FIELD(var_r31, void **, 8);
+        } while (var_r31 != NULL);
+    }
+    fn_802CB8D4(arg0 + 0x20);
+}
+
 void fn_80371B64(void);
 void fn_80372304(void) {
     fn_80371B64();
