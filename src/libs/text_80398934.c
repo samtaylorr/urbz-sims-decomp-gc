@@ -4217,6 +4217,10 @@ s32 fn_803B9FEC(s32 *self) {
     return *self;
 }
 
+s32 fn_803BA3EC(s32 *self) {
+    return *self;
+}
+
 void fn_802F05AC(void);
 void fn_803BAAB8(void) {
     fn_802F05AC();
