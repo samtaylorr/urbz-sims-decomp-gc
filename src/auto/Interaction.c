@@ -10,6 +10,14 @@ void fn_8010D324(void **self, s32 flags) {
     }
 }
 
+extern u8 lbl_8040EBA0[];
+void fn_8010D784(void **self, s32 flags) {
+    *self = lbl_8040EBA0;
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 s32 fn_8010EA58(void) {
     return 1;
 }
