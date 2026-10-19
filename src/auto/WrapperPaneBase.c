@@ -82,8 +82,16 @@ s32 fn_800D0788(s32 *self) {
 }
 
 void fn_800D0790(WrapperPaneBase *self, WrapperPanePoint *pos, WrapperPanePoint *size) {
-    self->pos = *pos;
-    self->size = *size;
+    s32 px = pos->x;
+    s32 py = pos->y;
+    s32 sx;
+    s32 sy;
+    self->pos.x = px;
+    self->pos.y = py;
+    sx = size->x;
+    sy = size->y;
+    self->size.x = sx;
+    self->size.y = sy;
 }
 
 extern s32 fn_80248808(s32);
