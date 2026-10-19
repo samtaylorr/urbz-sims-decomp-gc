@@ -48,6 +48,10 @@ s32 fn_802ACE20(void) {
     return 1;
 }
 
+s32 fn_802ACE28(void) {
+    return 1;
+}
+
 s32 fn_802ACF08(void) {
     return 0;
 }
