@@ -94,6 +94,10 @@ u8 fn_800B2F64(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 0x20);
 }
 
+u8 fn_800B2F6C(void *arg0) {
+    return M2C_FIELD(arg0, u8 *, 0x21);
+}
+
 s32 fn_800B2FC4(char *self) {
     return *(s32 *)(self + 0xC);
 }
