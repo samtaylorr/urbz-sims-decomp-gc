@@ -52,3 +52,7 @@ void fn_802EF4D0(void) {
     fn_802D2430();
 }
 
+s32 fn_802EF4F0(void) {
+    return 1;
+}
+
