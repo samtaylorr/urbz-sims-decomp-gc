@@ -144,6 +144,10 @@ void fn_801B65A8(void) {
 
 }
 
+void fn_801B65AC(void) {
+
+}
+
 s32 fn_801B65B8(void) {
     return 0;
 }
