@@ -208,6 +208,10 @@ void fn_8026BCA4(s32 arg0) {
     *(s32 *)0xCC006C0C = arg0;
 }
 
+s32 fn_8026BD98(void) {
+    return *(s32 *)0xCC006C00 & 1;
+}
+
 void fn_8026C18C(void) {
     extern s32 lbl_80496028;
     lbl_80496028 = 0;
