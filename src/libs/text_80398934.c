@@ -5942,6 +5942,14 @@ void fn_803B9908(s32 *dst, s32 *src, s32 n) {
     }
 }
 
+void fn_803B9AB8(s32 *dst, s32 *src, s32 n) {
+    src += n - 1;
+    dst += n - 1;
+    while (--n != -1) {
+        *dst-- = *src--;
+    }
+}
+
 void fn_803B9AF4(void *, s32, s32, s32);
 void fn_803B9BCC(void *self, s32 arg1) {
     fn_803B9AF4(self, arg1, M2C_FIELD(self, s32 *, 4), 1);
