@@ -1,6 +1,13 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+void fn_80123160(void) {
+    M2C_UNK fn_801234B4();
+    M2C_UNK fn_802D1FC8(M2C_UNK);
+    fn_802D1FC8(0x1D8);
+    fn_801234B4();
+}
+
 M2C_UNK *fn_801231C8(void) {
     extern M2C_UNK lbl_80495B74;
     return &lbl_80495B74;
