@@ -32,6 +32,10 @@ void fn_8003D024(void) {
 
 }
 
+void fn_8003ECBC(void *arg0, s32 *arg1) {
+    *arg1 = M2C_FIELD(arg0, u8 *, 0) | (M2C_FIELD(arg0, u8 *, 1) << 8) | (M2C_FIELD(arg0, u8 *, 2) << 0x10) | (M2C_FIELD(arg0, u8 *, 3) << 0x18);
+}
+
 void fn_8003F8A0(void) {
     fn_8003F9E0();
 }
