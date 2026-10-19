@@ -64,6 +64,11 @@ s32 fn_800C4560(void) {
     return 1;
 }
 
+void **fn_800C4614(void **self) {
+    *self = lbl_8040A890;
+    return self;
+}
+
 void fn_800C4628(s32 arg0) {
     M2C_UNK fn_800F69E8(s32);
     fn_800F69E8(arg0 + 4);
