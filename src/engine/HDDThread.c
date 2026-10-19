@@ -51,3 +51,8 @@ void fn_80332A44(void) {
 
 }
 
+void fn_80332D88(void) {
+    M2C_UNK fn_80332D34(M2C_UNK, M2C_UNK);
+    fn_80332D34(1, 0xFFFF);
+}
+
