@@ -112,3 +112,7 @@ void fn_80097C38(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x4D0) = arg1;
 }
 
+s32 fn_80097C50(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x4C4);
+}
+
