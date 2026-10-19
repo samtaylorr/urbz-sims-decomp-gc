@@ -476,6 +476,10 @@ void fn_802B71C8(s32 *arg0) {
     *arg0 |= 0x40000000;
 }
 
+void fn_802B71D8(s32 *arg0) {
+    *arg0 &= 0xBFFFFFFF;
+}
+
 s32 fn_802B71E8(u32 *arg0) {
     return ((u32) *arg0 >> 0x1EU) & 1;
 }
