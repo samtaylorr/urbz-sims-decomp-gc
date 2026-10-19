@@ -10,6 +10,10 @@ void fn_802EDB28(void) {
 
 }
 
+void fn_802EDB2C(void) {
+
+}
+
 s32 fn_802EEE70(void) {
     return 0;
 }
