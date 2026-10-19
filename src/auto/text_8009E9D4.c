@@ -14,6 +14,10 @@ void fn_800A0A8C(void) {
 
 }
 
+void fn_800A13DC(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0x1A0) = arg1;
+}
+
 void fn_800A1B38(void) {
 
 }
