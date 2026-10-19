@@ -6,6 +6,10 @@ void fn_8033372C(void) {
 
 }
 
+s32 fn_80333D60(void) {
+    return 4;
+}
+
 void fn_8033480C(void) {
 
 }
