@@ -106,3 +106,8 @@ void fn_800616DC(void) {
     fn_802D2FD0();
 }
 
+void fn_8005B71C(void);
+void fn_800630FC(void) {
+    fn_8005B71C();
+}
+
