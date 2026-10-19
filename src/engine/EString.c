@@ -152,6 +152,20 @@ void fn_802D58E4(s32 *arg0) {
     fn_802D5200(*arg0);
 }
 
+s32 fn_802D5EC8(s32 arg0, s32 *arg1, s32 arg2) {
+    M2C_UNK fn_802D50BC(s32, s32, s32);
+    M2C_UNK fn_802D5254(s32 *, s32);
+    M2C_UNK fn_802D544C(s32 *, s32);
+    s32 sp8;
+    s32 temp_r29;
+
+    temp_r29 = *arg1;
+    fn_802D544C(&sp8, arg2);
+    fn_802D50BC(arg0, temp_r29, sp8);
+    fn_802D5254(&sp8, sp8);
+    return arg0;
+}
+
 extern u8 lbl_80419540[];
 extern void fn_802D20E8(void *);
 void fn_802D6A28(void **self, s32 flags) {
