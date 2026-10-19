@@ -175,6 +175,27 @@ void fn_802D6A28(void **self, s32 flags) {
     }
 }
 
+void *fn_802D6A90(void *arg0, s32 arg1, s32 arg2, s32 arg3, s16 arg4, s32 arg5, s32 arg6) {
+    s32 fn_802C5240(s32);
+    M2C_UNK fn_802D6B18(void *);
+    extern s32 lbl_80494DE0;
+    M2C_FIELD(arg0, s32 *, 0) = arg1;
+    M2C_FIELD(arg0, s32 *, 4) = arg2;
+    M2C_FIELD(arg0, s32 *, 8) = arg3;
+    M2C_FIELD(arg0, s32 *, 0xC) = arg5;
+    M2C_FIELD(arg0, s32 *, 0x10) = fn_802C5240(arg5);
+    M2C_FIELD(arg0, s16 *, 0x14) = arg4;
+    M2C_FIELD(arg0, s16 *, 0x16) = -1;
+    if (arg6 != arg0) {
+        M2C_FIELD(arg0, s32 *, 0x18) = arg6;
+    } else {
+        M2C_FIELD(arg0, s32 *, 0x18) = 0;
+    }
+    lbl_80494DE0 += 1;
+    fn_802D6B18(arg0);
+    return arg0;
+}
+
 void *fn_802D6BA0(u32 arg0) {
     extern void *lbl_80494DD8;
     u32 temp_r0;
