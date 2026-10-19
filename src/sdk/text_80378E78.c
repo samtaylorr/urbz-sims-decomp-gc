@@ -67,6 +67,11 @@ s32 fn_80380AF4(void) {
     return lbl_80496384;
 }
 
+void fn_80380AFC(void) {
+    M2C_UNK fn_80380B20(M2C_UNK);
+    fn_80380B20(0);
+}
+
 void fn_80381010(void *arg0) {
     extern void *lbl_80496388;
     M2C_FIELD(arg0, void **, 8) = (void *) lbl_80496388;
