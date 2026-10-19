@@ -28,6 +28,11 @@ void fn_80325888(void) {
 
 }
 
+void fn_80328E5C(void *arg0, void *arg1) {
+    M2C_FIELD(arg1, void **, 0x28) = (void *) M2C_FIELD(arg0, void **, 0x4D130);
+    M2C_FIELD(arg0, void **, 0x4D130) = arg1;
+}
+
 void fn_8032421C(void);
 void fn_80329080(void) {
     fn_8032421C();
