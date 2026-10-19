@@ -101,6 +101,14 @@ void fn_80097B40(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
 
+void fn_80097B74(void *arg0, s32 arg1) {
+    if (arg1 == 1) {
+        M2C_FIELD(arg0, s32 *, 0x4D4) = (s32) (M2C_FIELD(arg0, s32 *, 0x4D4) | 0x40);
+        return;
+    }
+    M2C_FIELD(arg0, s32 *, 0x4D4) = (s32) (M2C_FIELD(arg0, s32 *, 0x4D4) & 0xFFFFFFBF);
+}
+
 s32 fn_80097B9C(void *arg0) {
     return ((u32) M2C_FIELD(arg0, u32 *, 0x4D4) >> 6U) & 1;
 }
