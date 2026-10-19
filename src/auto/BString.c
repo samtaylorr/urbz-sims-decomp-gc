@@ -2435,6 +2435,11 @@ void *fn_800ED814(void *self) {
     return self;
 }
 
+void fn_800EE5C4(s32 arg0, s32 arg1) {
+    M2C_UNK fn_800EE454(s32, s32, s32);
+    fn_800EE454(arg0, arg1, fn_800EBC7C());
+}
+
 void fn_800EC49C(void);
 void fn_800EE7C4(void) {
     fn_800EC49C();
