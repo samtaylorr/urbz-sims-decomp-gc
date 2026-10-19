@@ -22,4 +22,7 @@ sdk/text_802500FC.c:
 	.text       start:0x802500FC end:0x802781E4
 
 engine/text_802781E4.c:
-	.text       start:0x802781E4 end:0x803C0D60
+	.text       start:0x802781E4 end:0x80378E78
+
+sdk/text_80378E78.c:
+	.text       start:0x80378E78 end:0x803C0D60
