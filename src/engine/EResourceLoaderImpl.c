@@ -20,3 +20,7 @@ void fn_8031D080(void) {
 
 }
 
+void fn_8031E778(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0x3EC) = arg1;
+}
+
