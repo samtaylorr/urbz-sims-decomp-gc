@@ -352,6 +352,7 @@ config.libs = [
             Object(NonMatching, "auto/CasListener.c"),
             Object(NonMatching, "auto/text_801C9904.c"),
             Object(NonMatching, "auto/CasTweakTool.c"),
+            Object(NonMatching, "auto/text_801D4B84.c"),
             Object(NonMatching, "libsn/text_8023EBD8.c"),
             Object(NonMatching, "clib/text_80241A98.c"),
             Object(NonMatching, "engine/text_802781E4.c"),

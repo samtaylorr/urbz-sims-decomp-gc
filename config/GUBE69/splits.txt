@@ -190,7 +190,10 @@ auto/text_801C9904.c:
 	.text       start:0x801C9904 end:0x801CEBA0
 
 auto/CasTweakTool.c:
-	.text       start:0x801CEBA0 end:0x8023EBD8
+	.text       start:0x801CEBA0 end:0x801D4B84
+
+auto/text_801D4B84.c:
+	.text       start:0x801D4B84 end:0x8023EBD8
 
 libsn/text_8023EBD8.c:
 	.text       start:0x8023EBD8 end:0x80241A98
