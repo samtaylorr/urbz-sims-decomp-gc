@@ -917,6 +917,12 @@ void fn_800DB168(void) {
 
 }
 
+void fn_800DB16C(s32 *self) {
+    if (fn_800DBE90(self[2]) != 0) {
+        fn_800E3B38(self, 1, lbl_803D496C[0]);
+    }
+}
+
 void fn_800DB1B8(void) {
 
 }
