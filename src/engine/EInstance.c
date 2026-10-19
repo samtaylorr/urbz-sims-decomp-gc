@@ -28,3 +28,7 @@ s32 fn_802F19F4(void) {
     return 0;
 }
 
+s32 fn_802F1A50(void) {
+    return 0;
+}
+
