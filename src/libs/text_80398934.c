@@ -145,6 +145,10 @@ void fn_8039D338(void) {
     fn_8018EA6C();
 }
 
+s32 fn_8039D380(s32 *self) {
+    return self[2];
+}
+
 void fn_8039DC94(s32 *self, s32 flags) {
     self[5] = (s32)lbl_804093F8;
     if (flags & 1) {
