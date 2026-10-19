@@ -128,6 +128,10 @@ s32 fn_801175AC(s32 *self) {
     return self[1];
 }
 
+s32 fn_801175D4(u8 *self) {
+    return *(s32 *)(self + 0x20);
+}
+
 s32 fn_8011785C(void) {
     return 0;
 }
