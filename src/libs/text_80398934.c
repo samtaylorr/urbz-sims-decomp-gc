@@ -4928,6 +4928,12 @@ void *fn_803BF99C(void *self) {
     return self;
 }
 
+void fn_803BF9CC(s32 *self, s32 n) {
+    while (--n != -1) {
+        self++;
+    }
+}
+
 void fn_803BFA74(void *self) {
     ((s32 *)self)[0] = 0;
     ((s32 *)self)[2] = 0;
