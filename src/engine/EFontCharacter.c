@@ -56,6 +56,14 @@ s32 fn_8036C33C(s32 arg0, s32 *out) {
     return arg0;
 }
 
+s32 fn_8036C37C(s32 arg0, s32 *out) {
+    s32 tmp;
+
+    fn_802C5C58((void *)arg0, &tmp);
+    *out = tmp;
+    return arg0;
+}
+
 void fn_8036C818(void) {
     fn_802D2FD0();
 }
