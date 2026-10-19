@@ -8,6 +8,11 @@ void fn_8039AB04(void) {
     fn_8030AD40();
 }
 
+void fn_8018EA6C(void);
+void fn_8039AD30(void) {
+    fn_8018EA6C();
+}
+
 void fn_803BEC14(u8 *self) {
     *(u8 **)(self + 0x338) = lbl_8041CFA8;
     fn_802D8BEC(self);
