@@ -88,6 +88,10 @@ s32 fn_802D1194(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x534);
 }
 
+s32 fn_802D119C(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x538);
+}
+
 void fn_802D11A4(void) {
 
 }
