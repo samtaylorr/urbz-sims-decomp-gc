@@ -14,3 +14,7 @@ char *fn_80014CCC(char *self) {
     return self + 0x428;
 }
 
+char *fn_80014CD4(char *self) {
+    return self + 0x44C;
+}
+
