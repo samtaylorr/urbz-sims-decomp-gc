@@ -68,6 +68,33 @@ void *fn_80191B94(void *arg0) {
     return temp_r31;
 }
 
+s32 fn_80191F6C(s32 arg0) {
+    s32 var_r0;
+    s32 var_r0_2;
+    s32 var_r9;
+
+    var_r9 = 0;
+    if ((arg0 == 1) || (arg0 == 7) || (arg0 == 8) || (arg0 == 9)) {
+        var_r0 = 1;
+    } else {
+        var_r0 = 0;
+    }
+    if (var_r0 == 0) {
+        if ((arg0 == 3) || (arg0 == 5) || (arg0 == 6) || (arg0 == 0xF) || (arg0 == 0x17)) {
+            var_r0_2 = 1;
+        } else {
+            var_r0_2 = 0;
+        }
+        if ((var_r0_2 != 0) || (arg0 == 0x16)) {
+            goto block_16;
+        }
+    } else {
+block_16:
+        var_r9 = 1;
+    }
+    return var_r9;
+}
+
 s32 fn_80192788(void *arg0) {
     u32 temp_r3;
 
