@@ -32,6 +32,17 @@ void fn_8033EABC(void) {
 
 }
 
+void fn_8033EAC0(void) {
+    M2C_UNK fn_80256608(void (*)());
+    s32 fn_8025667C();
+    extern s32 lbl_80494FFC;
+    if (fn_8025667C() != 0) {
+        lbl_80494FFC = 1;
+        return;
+    }
+    fn_80256608(fn_8033EAC0);
+}
+
 s32 fn_8033EC8C(void) {
     return lbl_80495004;
 }
