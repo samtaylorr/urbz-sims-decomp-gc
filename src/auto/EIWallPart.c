@@ -7,6 +7,32 @@ void fn_800328F8(char *self, void *arg1) {
     fn_802E34F0(arg1, self + 0x44);
 }
 
+s32 fn_80032924(char *self, s32 i) {
+    return ((s32 *)(self + 0x2C))[i];
+}
+
+s32 fn_80032934(char *self, s32 i) {
+    char *node = *(char **)(self + 0x14);
+    s32 *slot;
+
+    if (node == NULL) {
+        ((s32 *)(self + 0x2C))[i] = (s32)node;
+        return 0;
+    }
+    slot = (s32 *)(self + 0x2C);
+    slot[i] = 1;
+    for (; node != NULL; node = *(char **)(node + 8)) {
+        void **obj = *(void ***)node;
+        char *vt = (char *)*obj;
+        s32 r = (*(s32 (**)(void *))(vt + 0x144))((char *)obj + *(s16 *)(vt + 0x140));
+        if (r == 0) {
+            slot[i] = r;
+            break;
+        }
+    }
+    return slot[i];
+}
+
 void fn_80032BD8(void) {
     fn_802D2FD0();
 }
@@ -15,6 +41,15 @@ s32 fn_80032BF8(s32 arg0, s32 *out) {
     s32 tmp;
 
     fn_802D30D4((void *)arg0, &tmp);
+    *out = tmp;
+    return arg0;
+}
+
+extern void fn_802C5C58(void *, s32 *);
+s32 fn_80032C38(s32 arg0, s32 *out) {
+    s32 tmp;
+
+    fn_802C5C58((void *)arg0, &tmp);
     *out = tmp;
     return arg0;
 }
