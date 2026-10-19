@@ -14,3 +14,8 @@ s32 fn_801D6188(void) {
     return 0;
 }
 
+void fn_801D6240(void) {
+    M2C_UNK fn_801D6190(M2C_UNK, M2C_UNK);
+    fn_801D6190(1, 0xFFFF);
+}
+
