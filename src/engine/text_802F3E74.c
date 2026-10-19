@@ -111,3 +111,7 @@ s32 fn_802F5B24(s32 arg0) {
     return arg0 + 0x90;
 }
 
+s32 fn_802F5B2C(s32 arg0) {
+    return arg0 + 0xD0;
+}
+
