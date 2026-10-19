@@ -105,6 +105,11 @@ void *fn_800F251C(void *self) {
     return self;
 }
 
+void fn_800F34EC(s32 arg0, s32 arg1) {
+    M2C_UNK fn_800F3358(s32, s32, s32);
+    fn_800F3358(arg0, arg1, fn_800F0698());
+}
+
 void fn_800F3738(void) {
     fn_800F0FFC();
 }
