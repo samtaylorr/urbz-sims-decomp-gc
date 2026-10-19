@@ -64,6 +64,13 @@ void fn_800A40EC(void) {
 
 }
 
+void fn_800A42E8(void **obj) {
+    if (obj != NULL) {
+        char *vt = (char *)obj[0x11];
+        (*(void (**)(void *, s32))(vt + 0xC))((char *)obj + *(s16 *)(vt + 8), 3);
+    }
+}
+
 void fn_800A4328(s32 arg0) {
     M2C_UNK fn_800F3304(s32);
     fn_800F3304(arg0 + 0x58);
