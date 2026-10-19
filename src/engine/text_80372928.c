@@ -91,3 +91,8 @@ s32 fn_803739E4(u8 *self) {
     return *(s32 *)(self + 0x20);
 }
 
+void fn_803739EC(void) {
+    M2C_UNK fn_8037379C(M2C_UNK, M2C_UNK);
+    fn_8037379C(1, 0xFFFF);
+}
+
