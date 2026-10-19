@@ -4,3 +4,8 @@
 s32 fn_800C3F6C(void) {
     return 0;
 }
+
+s32 fn_800C3FAC(void) {
+    return 0;
+}
+
