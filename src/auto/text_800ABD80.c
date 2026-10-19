@@ -32,6 +32,29 @@ void fn_800ACBE8(void) {
 
 }
 
+void fn_800ACE5C(s32 arg0, s32 arg1) {
+    s32 fn_800ABE88(s32, s32);
+    s32 var_r30;
+    s32 var_r31;
+
+    if (arg1 != 0) {
+        var_r31 = arg0 + 0x3C;
+        var_r30 = 0;
+loop_2:
+        if (fn_800ABE88(var_r31, arg1) != 0) {
+            fn_800ABE24(var_r31);
+            return;
+        }
+        var_r30 += 1;
+        var_r31 += 8;
+        if (var_r30 > 0x7F) {
+
+        } else {
+            goto loop_2;
+        }
+    }
+}
+
 void fn_800ACF2C(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x14) = 4;
 }
