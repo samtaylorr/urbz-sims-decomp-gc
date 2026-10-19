@@ -41,6 +41,10 @@ s32 fn_8023E93C(s32 arg0) {
     return arg0 + 0x68;
 }
 
+s32 fn_8023E944(s32 arg0) {
+    return arg0 + 0x74;
+}
+
 f32 fn_8023E94C(void) {
     extern f32 lbl_80496770;
     return lbl_80496770;
