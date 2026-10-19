@@ -240,6 +240,28 @@ void fn_8039AE08(void) {
 
 }
 
+void fn_8039B4A4(s32 *first, s32 *last, s32 comp) {
+    if (last - first > 16) {
+        fn_8039B3A4(first, first + 16, comp);
+        fn_8039B450(first + 16, last, 0, comp);
+    } else {
+        fn_8039B3A4(first, last, comp);
+    }
+}
+
+void fn_8039B510(s32 *first, s32 *last, s32 comp) {
+    if (first != last) {
+        s32 n = last - first;
+        s32 k = 0;
+        while (n != 1) {
+            n >>= 1;
+            k++;
+        }
+        fn_8039B1E4(first, last, 0, k * 2, comp);
+        fn_8039B4A4(first, last, comp);
+    }
+}
+
 void fn_802C5484(void);
 void fn_8039B5F8(void) {
     fn_802C5484();
