@@ -123,6 +123,13 @@ void fn_8010FD34(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
 
+void fn_8010FD68(void) {
+    M2C_UNK fn_8010FDD0();
+    M2C_UNK fn_802D1FC8(M2C_UNK);
+    fn_802D1FC8(0x24);
+    fn_8010FDD0();
+}
+
 void fn_801102DC(void) {
 
 }
