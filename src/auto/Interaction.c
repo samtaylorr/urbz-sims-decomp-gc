@@ -206,6 +206,10 @@ void fn_80117494(void) {
     fn_801055FC((s32)&lbl_80495B08, 2);
 }
 
+s32 fn_80117520(void *arg0) {
+    return ((u32) M2C_FIELD(arg0, u32 *, 0x44) >> 0xCU) & 7;
+}
+
 s32 fn_801175AC(s32 *self) {
     return self[1];
 }
