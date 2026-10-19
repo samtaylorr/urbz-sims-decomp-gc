@@ -6,6 +6,13 @@ void fn_8000A794(void) {
 
 }
 
+void fn_8000AC58(void) {
+    M2C_UNK fn_8000A798();
+    M2C_UNK fn_8000B198();
+    fn_8000B198();
+    fn_8000A798();
+}
+
 void fn_8000ACE4(void) {
 
 }
