@@ -75,6 +75,10 @@ s32 fn_8018CED8(void) {
     return 0;
 }
 
+void fn_8018CEE0(void) {
+
+}
+
 s32 fn_8018CEE8(void) {
     return 0;
 }
