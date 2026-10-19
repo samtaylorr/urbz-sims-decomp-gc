@@ -294,6 +294,10 @@ s32 fn_800D3E30(s32 *self) {
     return self[6];
 }
 
+s32 fn_800D3E38(s32 *self) {
+    return self[7];
+}
+
 void fn_80048A48(void *);
 extern u8 lbl_8040B5A8[];
 extern u8 lbl_8040B440[];
