@@ -154,3 +154,8 @@ s32 fn_800B2FC4(char *self) {
     return *(s32 *)(self + 0xC);
 }
 
+void fn_800B3014(void) {
+    M2C_UNK fn_800B2C98(M2C_UNK, M2C_UNK);
+    fn_800B2C98(1, 0xFFFF);
+}
+
