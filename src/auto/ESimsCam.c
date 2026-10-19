@@ -63,6 +63,10 @@ s32 fn_80014CE4(s32 arg0) {
     return arg0 + 0x434;
 }
 
+s32 fn_80014D0C(s32 arg0) {
+    return arg0 + 0x18;
+}
+
 f32 fn_80014D34(char *self) {
     return *(f32 *)(self + 0x45C);
 }
