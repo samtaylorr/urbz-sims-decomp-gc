@@ -142,6 +142,14 @@ void fn_8016F784(M2C_UNK **arg0) {
     }
 }
 
+s32 fn_8016F79C(s32 *arg0) {
+    s32 temp_r30;
+
+    temp_r30 = *arg0;
+    fn_8016F784(arg0);
+    return temp_r30;
+}
+
 void fn_8016F824(void) {
     M2C_UNK fn_8016F7D0(M2C_UNK, M2C_UNK);
     fn_8016F7D0(1, 0xFFFF);
