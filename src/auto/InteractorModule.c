@@ -85,6 +85,23 @@ void fn_8023C45C(void *arg0) {
     fn_8022E84C(fn_8022554C(arg0), arg0);
 }
 
+void fn_8023D840(void *arg0, s32 arg1, f32 farg0) {
+    switch (arg1) {                                 /* irregular */
+    case 7:
+        M2C_FIELD(arg0, f32 *, 0x34) = farg0;
+        return;
+    case 8:
+        M2C_FIELD(arg0, f32 *, 0x38) = farg0;
+        return;
+    case 11:
+        M2C_FIELD(arg0, f32 *, 0x3C) = farg0;
+        return;
+    case 12:
+        M2C_FIELD(arg0, f32 *, 0x40) = farg0;
+        return;
+    }
+}
+
 void fn_8023D88C(s32 arg0, s32 arg1) {
     M2C_UNK fn_8022E86C(s32, s32);
     fn_8022E86C(arg1, arg0);
