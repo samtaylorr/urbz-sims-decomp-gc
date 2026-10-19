@@ -1,6 +1,18 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+s32 fn_8031054C(u32 *arg0, u32 *arg1) {
+    u32 temp_r0;
+    u32 temp_r9;
+
+    temp_r9 = *arg0;
+    temp_r0 = *arg1;
+    if (temp_r9 >= temp_r0) {
+        return temp_r9 > temp_r0;
+    }
+    return -1;
+}
+
 void fn_803105B0(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 4) = arg1;
 }
