@@ -539,6 +539,20 @@ void fn_800EA5AC(s32 *self, s32 flags) {
     }
 }
 
+extern u8 lbl_8040D040[];
+s32 *fn_800EA680(s32 *self, s32 arg1) {
+    self[0] = arg1;
+    self[1] = -1;
+    self[2] = 0;
+    self[3] = -1;
+    self[4] = 1;
+    self[6] = 0;
+    self[7] = 0;
+    self[8] = 0;
+    self[5] = (s32)lbl_8040D040;
+    return self;
+}
+
 s32 fn_800EB5B4(void) {
     return 0;
 }
