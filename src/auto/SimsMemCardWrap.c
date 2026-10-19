@@ -20,7 +20,6 @@ s32 fn_800A9920(void) {
     return lbl_8049592C;
 }
 
-extern s32 lbl_80495930;
 s32 fn_800A9928(void) {
     return lbl_80495930;
 }
