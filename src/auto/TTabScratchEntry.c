@@ -109,6 +109,10 @@ void fn_801A1E30(void) {
     fn_801A1B50();
 }
 
+void fn_801A2FF8(s32 *self, s32 value) {
+    *self = value;
+}
+
 s32 fn_801A3020(s32 *self) {
     return self[1];
 }
