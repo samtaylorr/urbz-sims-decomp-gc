@@ -109,6 +109,21 @@ void fn_8016F4C0(s32 self, s32 flags) {
     }
 }
 
+s32 fn_8016F500(M2C_UNK **arg0) {
+    M2C_UNK *var_r3;
+    s32 var_r9;
+
+    var_r3 = *arg0;
+    var_r9 = 0;
+    if (var_r3 != NULL) {
+        do {
+            var_r3 = *var_r3;
+            var_r9 += 1;
+        } while (var_r3 != NULL);
+    }
+    return var_r9;
+}
+
 void fn_8016F784(M2C_UNK **arg0) {
     M2C_UNK *temp_r9;
 
