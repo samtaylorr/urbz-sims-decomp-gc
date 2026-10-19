@@ -44,6 +44,10 @@ s32 fn_800C4400(void) {
     return 1;
 }
 
+void fn_800C4408(void) {
+
+}
+
 s32 fn_800C4548(void) {
     return 1;
 }
