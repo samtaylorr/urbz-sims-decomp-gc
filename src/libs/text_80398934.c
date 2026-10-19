@@ -4342,6 +4342,12 @@ void *fn_803BAD8C(void *self) {
     return self;
 }
 
+extern void fn_803BAF00(void *);
+void *fn_803BB700(void *self) {
+    fn_803BAF00(self);
+    return self;
+}
+
 extern u8 lbl_8041B6F0[];
 void fn_803BBDA8(void **self, s32 flags) {
     *self = lbl_8041B6F0;
