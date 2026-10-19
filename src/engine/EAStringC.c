@@ -376,6 +376,10 @@ void fn_802B71F8(void) {
 
 }
 
+void fn_802B71FC(void) {
+
+}
+
 void fn_802B76E8(char *self) {
     extern void fn_802ADE44(void *);
     fn_802ADE44(self + 8);
