@@ -206,6 +206,12 @@ s32 fn_800AB76C(void) {
     return 0;
 }
 
+f32 fn_800AB854(void) {
+    f32 fn_800AB814();
+    extern f32 lbl_804966AC;
+    return fn_800AB814() - lbl_804966AC;
+}
+
 void fn_800ABD50(void) {
 
 }
