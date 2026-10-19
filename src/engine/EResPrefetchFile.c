@@ -119,3 +119,8 @@ void *fn_803203A8(u32 size, void *p) {
     return p;
 }
 
+void fn_803203DC(void) {
+    M2C_UNK fn_80320194(M2C_UNK, M2C_UNK);
+    fn_80320194(1, 0xFFFF);
+}
+
