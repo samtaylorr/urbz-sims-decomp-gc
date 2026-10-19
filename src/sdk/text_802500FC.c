@@ -6,9 +6,9 @@ typedef struct DVDCommandBlock {
     void *prev;
     u32 command;
     s32 state;
+    u32 blockOffset;
     u32 offset;
     u32 length;
-    void *addr;
     u32 currTransferSize;
     u32 transferredSize;
     void *id;
@@ -336,7 +336,7 @@ void *fn_80262F18(void) {
 }
 
 void fn_8026354C(s32 arg0, void *arg1);
-s32 fn_802634AC(void *arg0) {
+s32 fn_802634AC(DVDCommandBlock *block) {
     s32 fn_8025465C();
     M2C_UNK fn_80254684(s32);
     M2C_UNK fn_8025974C(M2C_UNK *);
@@ -345,16 +345,16 @@ s32 fn_802634AC(void *arg0) {
     s32 enabled;
     s32 state;
 
-    M2C_FIELD(arg0, s32 *, 8) = 7;
-    M2C_FIELD(arg0, void **, 0x28) = (void *)fn_8026354C;
-    if (fn_80262F24(1, arg0) == 0) {
+    block->command = 7;
+    block->callback = (void *)fn_8026354C;
+    if (fn_80262F24(1, block) == 0) {
         return -1;
     }
     enabled = fn_8025465C();
     while (1) {
-        state = M2C_FIELD(arg0, s32 *, 0xC);
+        state = block->state;
         if (state == 0 || state == -1 || state == 10) {
-            retVal = M2C_FIELD(arg0, s32 *, 0x20);
+            retVal = block->transferredSize;
             break;
         }
         fn_8025974C(&lbl_80495EC8);
@@ -370,7 +370,7 @@ void fn_8026354C(s32 arg0, void *arg1) {
     fn_80259838(&lbl_80495EC8);
 }
 
-s32 fn_80263574(void *arg0, void *arg1) {
+s32 fn_80263574(DVDCommandBlock *block, void *callback) {
     M2C_UNK fn_80251BF0(s32, s32);
     s32 fn_8025465C();
     M2C_UNK fn_80254684(s32);
@@ -381,19 +381,15 @@ s32 fn_80263574(void *arg0, void *arg1) {
     extern s32 lbl_80495EDC;
     s32 enabled;
     s32 retVal;
-    u32 cmd;
 
-    M2C_FIELD(arg0, s32 *, 8) = 8;
-    M2C_FIELD(arg0, void **, 0x28) = arg1;
-    if (lbl_80494A2C != 0) {
-        cmd = M2C_FIELD(arg0, u32 *, 8);
-        if (cmd == 1 || cmd - 4 <= 1 || cmd == 0xE) {
-            fn_80251BF0(M2C_FIELD(arg0, s32 *, 0x18), M2C_FIELD(arg0, s32 *, 0x14));
-        }
+    block->command = 8;
+    block->callback = callback;
+    if (lbl_80494A2C != 0 && (block->command == 1 || block->command - 4 <= 1 || block->command == 0xE)) {
+        fn_80251BF0(block->length, block->offset);
     }
     enabled = fn_8025465C();
-    M2C_FIELD(arg0, s32 *, 0xC) = 2;
-    retVal = fn_80264C7C(1, arg0);
+    block->state = 2;
+    retVal = fn_80264C7C(1, block);
     if (lbl_80495ED0 == 0 && lbl_80495EDC == 0) {
         fn_802622E0();
     }
@@ -401,7 +397,7 @@ s32 fn_80263574(void *arg0, void *arg1) {
     return retVal;
 }
 
-s32 fn_80263630(void *arg0) {
+s32 fn_80263630(DVDCommandBlock *block) {
     s32 fn_8025465C();
     M2C_UNK fn_80254684(s32);
     M2C_UNK fn_8025974C(M2C_UNK *);
@@ -411,16 +407,16 @@ s32 fn_80263630(void *arg0) {
     s32 enabled;
     s32 state;
 
-    M2C_FIELD(arg0, s32 *, 8) = 8;
-    M2C_FIELD(arg0, void **, 0x28) = (void *)fn_802636D0;
-    if (fn_80262F24(1, arg0) == 0) {
+    block->command = 8;
+    block->callback = (void *)fn_802636D0;
+    if (fn_80262F24(1, block) == 0) {
         return -1;
     }
     enabled = fn_8025465C();
     while (1) {
-        state = M2C_FIELD(arg0, s32 *, 0xC);
+        state = block->state;
         if (state == 0 || state == -1 || state == 10) {
-            retVal = M2C_FIELD(arg0, s32 *, 0x20);
+            retVal = block->transferredSize;
             break;
         }
         fn_8025974C(&lbl_80495EC8);
