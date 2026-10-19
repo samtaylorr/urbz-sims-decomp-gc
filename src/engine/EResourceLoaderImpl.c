@@ -53,6 +53,19 @@ void fn_8031D324(s32 arg0) {
     fn_8031C820(arg0 + 0x37C);
 }
 
+void fn_8031DDBC(void *arg0) {
+    M2C_UNK fn_80337F84(void *);
+    void *var_r31;
+
+    var_r31 = M2C_FIELD(arg0, void **, 0x348);
+    if (var_r31 != NULL) {
+        do {
+            fn_80337F84(var_r31);
+            var_r31 = M2C_FIELD(var_r31, void **, 0xA0);
+        } while (var_r31 != NULL);
+    }
+}
+
 void fn_8031E778(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x3EC) = arg1;
 }
