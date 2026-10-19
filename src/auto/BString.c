@@ -415,6 +415,17 @@ s32 *fn_800DC2B4(s32 *self, s32 a) {
     return self;
 }
 
+extern s32 lbl_8040BC88[];
+s32 *fn_800DC368(s32 *self, s32 a) {
+    self[0] = a;
+    self[1] = -1;
+    self[2] = 0;
+    self[3] = -1;
+    self[4] = 1;
+    self[5] = (s32)lbl_8040BC88;
+    return self;
+}
+
 extern s32 lbl_80495A70;
 s32 fn_800DC6B4(void) {
     return lbl_80495A70;
