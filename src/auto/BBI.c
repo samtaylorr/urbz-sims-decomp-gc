@@ -21,6 +21,10 @@ void fn_80060C30(void) {
     fn_802D2FD0();
 }
 
+s32 fn_80060DAC(void) {
+    return 0;
+}
+
 void fn_800616DC(void) {
     fn_802D2FD0();
 }
