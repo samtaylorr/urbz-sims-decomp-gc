@@ -13,6 +13,10 @@ void fn_80044A38(s32 *self) {
     self[1] = 1;
 }
 
+u8 fn_800451AC(void *arg0) {
+    return M2C_FIELD(arg0, u8 *, 0xB);
+}
+
 void fn_80046FE0(void) {
 
 }
