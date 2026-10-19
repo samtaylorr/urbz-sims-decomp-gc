@@ -4600,6 +4600,12 @@ void *fn_803BF99C(void *self) {
     return self;
 }
 
+extern void fn_803BFA74(void *);
+void *fn_803BFA88(void *self) {
+    fn_803BFA74(self);
+    return self;
+}
+
 void fn_803C00C0(void **self, s32 flags) {
     *self = lbl_804194A0;
     if (flags & 1) {
