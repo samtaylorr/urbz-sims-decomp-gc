@@ -17,6 +17,25 @@ void fn_8000ACE4(void) {
 
 }
 
+void fn_8000B0BC(void *arg0, u8 *arg1, s32 arg2) {
+    M2C_UNK fn_800C3954(u8 *);
+    M2C_UNK fn_800C3998(u8 *);
+    M2C_UNK fn_80248784(void *, u8 *);
+    M2C_UNK fn_80278950();
+    if ((arg1 != NULL) && ((s32) *arg1 != 0)) {
+        if ((s32) M2C_FIELD(arg0, s32 *, 0x350) != 0) {
+            fn_8000B198();
+        }
+        fn_800C3998(arg1);
+        if (arg2 != 0) {
+            fn_800C3954(arg1);
+        }
+        fn_80248784(arg0 + 0x380, arg1);
+        M2C_FIELD(arg0, s32 *, 0x350) = 1;
+        fn_80278950();
+    }
+}
+
 s32 fn_8000B210(void) {
     return 0;
 }
