@@ -50,3 +50,8 @@ void fn_8000C1F4(void *self, void *arg) {
 s32 fn_8000C218(void) {
     return 1;
 }
+
+s32 fn_8000C244(void) {
+    return 1;
+}
+
