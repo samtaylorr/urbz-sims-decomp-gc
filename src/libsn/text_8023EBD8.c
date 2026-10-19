@@ -61,3 +61,7 @@ void fn_8024148C(void) {
 
 }
 
+void fn_80241934(void) {
+
+}
+
