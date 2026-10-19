@@ -155,6 +155,15 @@ void fn_802DAFD0(void *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 0x4D4) = arg2;
 }
 
+void fn_802DBBA8(void *arg0, s32 arg1, s32 arg2) {
+    M2C_FIELD(arg0, s32 *, 0x48C) = arg2;
+    if (arg2 == 0) {
+        M2C_FIELD(arg0, s32 *, 0x48C) = 1;
+    }
+    M2C_FIELD(arg0, s32 *, 0x488) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x490) = 0;
+}
+
 void fn_802D21E0(void *);
 void fn_802DD5B0(void *self, void *arg) {
     fn_802D21E0(arg);
