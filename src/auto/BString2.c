@@ -84,6 +84,11 @@ s32 fn_800EFF00(void) {
     return 0;
 }
 
+void *fn_800EFF08(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0xC)++;
+    return arg0;
+}
+
 extern void fn_800EF864(s32);
 extern void fn_802D20E8(s32);
 void fn_800F0658(s32 self, s32 flags) {
