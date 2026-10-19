@@ -6,6 +6,33 @@ void fn_80278618(void) {
     fn_802A1E68();
 }
 
+void fn_8027866C(void) {
+    M2C_UNK fn_8028DDA0();
+    M2C_UNK fn_802923AC();
+    M2C_UNK fn_8029A290();
+    M2C_UNK fn_802A7294();
+    M2C_UNK fn_802A9880();
+    M2C_UNK fn_802AADB4();
+    M2C_UNK fn_802AB9F4();
+    M2C_UNK fn_802B0AE4();
+    M2C_UNK fn_802B1574();
+    M2C_UNK fn_802B7ABC();
+    M2C_UNK fn_802B9314();
+    M2C_UNK fn_802BA19C();
+    fn_8028DDA0();
+    fn_8029A290();
+    fn_802A7294();
+    fn_802A9880();
+    fn_802AADB4();
+    fn_802AB9F4();
+    fn_802B0AE4();
+    fn_802B7ABC();
+    fn_802B9314();
+    fn_802BA19C();
+    fn_802923AC();
+    fn_802B1574();
+}
+
 void fn_80278950(void) {
     M2C_UNK fn_802A2990(s32);
     extern s32 lbl_804960E8;
