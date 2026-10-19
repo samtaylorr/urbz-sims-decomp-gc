@@ -12,6 +12,10 @@ M2C_UNK *fn_80177154(void) {
     return &lbl_80495CA0;
 }
 
+s32 fn_80181314(void) {
+    return 0x50455253;
+}
+
 void fn_80182220(void) {
 
 }
