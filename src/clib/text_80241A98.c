@@ -10,6 +10,11 @@ void fn_80248078(void) {
     fn_80247D48();
 }
 
+extern s32 lbl_80494988;
+s32 fn_8024BEAC(void) {
+    return lbl_80494988;
+}
+
 void fn_8024D324(void);
 void fn_8024CE64(void) {
     fn_8024D324();
