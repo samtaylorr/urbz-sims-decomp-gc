@@ -277,6 +277,11 @@ void fn_802B772C(char *self) {
     fn_802AEA9C(self + 8);
 }
 
+void fn_802B7750(char *self) {
+    extern void fn_802AEABC(void *);
+    fn_802AEABC(self + 8);
+}
+
 s32 fn_802B7804(void) {
     return 0;
 }
