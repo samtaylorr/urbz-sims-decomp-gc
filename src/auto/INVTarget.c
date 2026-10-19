@@ -404,6 +404,16 @@ void fn_801F3890(void) {
 
 }
 
+void fn_801F501C(void *arg0) {
+    void *temp_r9;
+
+    temp_r9 = M2C_FIELD(arg0, void **, 0xD4);
+    if (temp_r9 != NULL) {
+        M2C_FIELD(arg0, void **, 0xD4) = NULL;
+        M2C_FIELD(temp_r9, M2C_UNK (**)(void *), 0xC)(temp_r9);
+    }
+}
+
 void fn_801F55A4(void) {
 
 }
