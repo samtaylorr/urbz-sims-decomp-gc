@@ -20,6 +20,15 @@ u8 *fn_800EAFCC(void **arg0);
 void fn_800EC49C(s32, s32, s32, s32);
 s32 fn_800EF6F8(void **arg0);
 void fn_8024839C(void *dst, const void *src, u32 n);
+s32 fn_800DBE90(s32);
+f32 fn_800E416C(void *arg0);
+extern f32 lbl_803D496C[];
+extern f32 lbl_803D4970[];
+extern f32 lbl_803D4974[];
+extern f32 lbl_803D497C[];
+extern f32 lbl_803D4980[];
+extern f32 lbl_803D4984[];
+extern const f32 lbl_803D4988[];
 
 static inline s32 BString_CharEq(const u8 *a, const u8 *b) {
     return *a == *b;
