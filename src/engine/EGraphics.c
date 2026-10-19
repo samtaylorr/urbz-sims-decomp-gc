@@ -203,6 +203,15 @@ s32 fn_802EF070(s32 arg0, s32 *out) {
     return arg0;
 }
 
+extern s32 lbl_804961C4;
+extern void *fn_802D1FC8(s32);
+extern void fn_802EFBA8(void *);
+extern u8 lbl_80419C98[];
+extern void fn_802F05AC(void *, s32);
+void fn_802EF3D0(void *self) {
+    fn_802F05AC(self, 2);
+}
+
 extern s32 fn_802D6A90(void *, void *, void *, void *, s32, void *, void *);
 void *fn_802EF354(void);
 void fn_802EF398(void *self);
