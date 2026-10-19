@@ -46,6 +46,13 @@ void fn_801029D8(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
 
+void fn_80102A50(void **obj) {
+    if (obj != NULL) {
+        char *vt = (char *)*obj;
+        (*(void (**)(void *, s32))(vt + 0xC))((char *)obj + *(s16 *)(vt + 0x8), 3);
+    }
+}
+
 s32 fn_80104A5C(s32 arg0, s32 arg1) {
     s32 var_r0;
 
