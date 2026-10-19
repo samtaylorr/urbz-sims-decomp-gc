@@ -382,6 +382,11 @@ void fn_8007C63C(s32 arg0) {
     fn_8030861C(arg0 + 0x7C);
 }
 
+void fn_8007C660(s32 arg0) {
+    M2C_UNK fn_802CB994(s32);
+    fn_802CB994(arg0 + 0x18C);
+}
+
 void fn_800816B0(void) {
 
 }
