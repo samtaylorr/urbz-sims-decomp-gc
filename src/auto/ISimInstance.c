@@ -13,3 +13,7 @@ void fn_80066C60(void) {
     fn_802D2430();
 }
 
+s32 fn_80066D90(void) {
+    return 0;
+}
+
