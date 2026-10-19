@@ -382,6 +382,32 @@ s32 fn_801C62C0(s32 *self) {
     return self[2];
 }
 
+void fn_801C63A8(void *arg0, s32 arg1, s32 arg2, void **arg3) {
+    char *temp_r11;
+    void *temp_r9;
+
+    temp_r11 = M2C_FIELD(arg0, char **, 0x18);
+    if (temp_r11 != NULL) {
+        temp_r9 = M2C_FIELD(temp_r11, void **, 4);
+        M2C_FIELD(temp_r9, void (**)(void *, s32, s32, void **), 0x7C)(temp_r11 + M2C_FIELD(temp_r9, s16 *, 0x78), arg1, arg2, arg3);
+    } else if (arg3 != NULL) {
+        *arg3 = temp_r11;
+    }
+}
+
+s32 fn_801C63F8(void *arg0) {
+    s32 fn_801CE7E4(s32);
+    s32 temp_r0;
+    s32 var_r3;
+
+    temp_r0 = M2C_FIELD(arg0, s32 *, 0x14);
+    var_r3 = 0;
+    if (temp_r0 != 0) {
+        var_r3 = fn_801CE7E4(temp_r0);
+    }
+    return var_r3;
+}
+
 void fn_801C675C(void *self, s32 flags) {
     extern u8 lbl_80415F28[];
     extern void fn_802D20E8(void *);
