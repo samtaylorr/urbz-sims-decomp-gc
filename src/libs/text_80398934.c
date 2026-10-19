@@ -4398,6 +4398,12 @@ s32 fn_803BA3EC(s32 *self) {
     return *self;
 }
 
+void fn_803BA3F4(void *self) {
+    ((s32 *)self)[0] = 0;
+    ((s32 *)self)[2] = 0;
+    ((s32 *)self)[1] = 0;
+}
+
 extern void fn_803BA3F4(void *);
 void *fn_803BA408(void *self) {
     fn_803BA3F4(self);
