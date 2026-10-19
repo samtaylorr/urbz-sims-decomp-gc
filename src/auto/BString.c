@@ -11,3 +11,8 @@ void fn_800D855C(void) {
     fn_800E3BC0();
 }
 
+void fn_800E3D4C(void);
+void fn_800D857C(void) {
+    fn_800E3D4C();
+}
+
