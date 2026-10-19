@@ -11,6 +11,13 @@ void fn_801CF874(void *arg0) {
     }
 }
 
+void fn_801CF890(void *arg0) {
+    if ((s32) M2C_FIELD(arg0, s32 *, 0x150) != 0) {
+        M2C_FIELD(arg0, s32 *, 0x158) = 1;
+        M2C_FIELD(arg0, s32 *, 0x154) = 0;
+    }
+}
+
 void fn_801D3954(void) {
 
 }
