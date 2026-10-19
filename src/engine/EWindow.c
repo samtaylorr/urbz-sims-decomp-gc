@@ -35,6 +35,11 @@ void fn_80306FD0(void *arg0) {
     fn_80305EE0(arg0, 1);
 }
 
+void fn_80306FF4(void *arg0) {
+    extern void fn_80305FE0(void *, s32);
+    fn_80305FE0(arg0, 1);
+}
+
 void fn_80307018(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x8C) = arg1;
 }
