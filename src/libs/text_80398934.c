@@ -3095,6 +3095,13 @@ void fn_803B04EC(u8 *self, s32 flags) {
     }
 }
 
+void fn_803B0520(u8 *self, s32 flags) {
+    *(void **)(self + 0x10) = lbl_80417770;
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_803B0554(BoundPmf *b) {
     s16 index = b->index;
     char *obj = b->obj;
