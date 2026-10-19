@@ -1,6 +1,21 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+void *fn_8016C00C(void *arg0, s32 arg1, u32 arg2) {
+    M2C_UNK fn_8016C0B8(void *);
+    s32 fn_802D2058(s32);
+    M2C_FIELD(arg0, u32 *, 4) = arg2;
+    M2C_FIELD(arg0, s32 *, 0) = arg1;
+    if (0x7CFFU >= arg2) {
+        M2C_FIELD(arg0, s32 *, 8) = fn_802D2058(arg2 * 2);
+    } else {
+        M2C_FIELD(arg0, u32 *, 4) = 0U;
+        M2C_FIELD(arg0, s32 *, 8) = 0;
+    }
+    fn_8016C0B8(arg0);
+    return arg0;
+}
+
 void fn_8016C0EC(void) {
     M2C_UNK fn_8016C1A4();
     M2C_UNK fn_802D1FC8(M2C_UNK);
