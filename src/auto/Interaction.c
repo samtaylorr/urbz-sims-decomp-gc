@@ -27,6 +27,11 @@ void fn_8010DA6C(void *arg0, void *arg1) {
     M2C_FIELD(arg0, void **, 0x404) = arg1;
 }
 
+void fn_8010DABC(void *arg0, void *arg1) {
+    M2C_FIELD(arg1, void **, 0x24) = (void *) M2C_FIELD(arg0, void **, 0x408);
+    M2C_FIELD(arg0, void **, 0x408) = arg1;
+}
+
 void fn_8010E984(void) {
 
 }
