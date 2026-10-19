@@ -61,6 +61,13 @@ void fn_802E7720(void *arg0) {
     }
 }
 
+void fn_802E8E7C(void *arg0) {
+    M2C_UNK fn_802E8EB0();
+    extern s32 lbl_80494DFC;
+    fn_802E8EB0();
+    M2C_FIELD(arg0, s32 *, 0x2C) = (s32) lbl_80494DFC;
+}
+
 void fn_802EB650(void);
 void fn_802EB590(void) {
     fn_802EB650();
