@@ -144,6 +144,10 @@ f32 fn_800CF748(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0x48);
 }
 
+void fn_800CF750(void *arg0, f32 farg0) {
+    M2C_FIELD(arg0, f32 *, 0x4C) = farg0;
+}
+
 f32 fn_800CF7DC(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0x2C);
 }
