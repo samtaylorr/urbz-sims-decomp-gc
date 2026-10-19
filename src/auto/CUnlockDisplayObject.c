@@ -11,6 +11,13 @@ void fn_800B9644(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
 
+void fn_800B9678(void **obj) {
+    if (obj != NULL) {
+        char *vt = (char *)obj[0x11];
+        (*(void (**)(void *, s32))(vt + 0xC))((char *)obj + *(s16 *)(vt + 8), 3);
+    }
+}
+
 void fn_800B96B8(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x15C) = arg1;
 }
