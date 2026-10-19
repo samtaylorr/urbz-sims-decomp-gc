@@ -289,6 +289,11 @@ void fn_80072B0C(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
 
+void fn_80076E3C(void *arg0) {
+    extern void fn_80305FE0(void *, s32);
+    fn_80305FE0(arg0, 1);
+}
+
 void fn_800775F0(void) {
 
 }
