@@ -26,3 +26,8 @@ f32 fn_8023E94C(void) {
     return lbl_80496770;
 }
 
+f32 fn_8023E954(void) {
+    extern f32 lbl_80496774;
+    return lbl_80496774;
+}
+
