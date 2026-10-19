@@ -384,6 +384,15 @@ s32 fn_800CF8DC(u8 *self) {
     return *(s32 *)(self + 0x50);
 }
 
+void fn_800CF8E4(void *arg0, f32 farg0) {
+    void *temp_r3;
+
+    temp_r3 = arg0 + 0x20;
+    M2C_FIELD(temp_r3, f32 *, 0x34) = farg0;
+    fn_8039D8D8(temp_r3);
+    M2C_FIELD(arg0, s32 *, 4) = (s32) (M2C_FIELD(arg0, s32 *, 4) | 2);
+}
+
 f32 fn_800CF924(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0x54);
 }
