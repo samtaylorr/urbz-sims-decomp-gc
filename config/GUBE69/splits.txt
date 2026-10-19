@@ -322,7 +322,10 @@ engine/EWindow.c:
 	.text       start:0x803059C8 end:0x8030AA04
 
 engine/Emitter.c:
-	.text       start:0x8030AA04 end:0x80378E78
+	.text       start:0x8030AA04 end:0x8030CB8C
+
+engine/text_8030CB8C.c:
+	.text       start:0x8030CB8C end:0x80378E78
 
 sdk/text_80378E78.c:
 	.text       start:0x80378E78 end:0x8038FC80
