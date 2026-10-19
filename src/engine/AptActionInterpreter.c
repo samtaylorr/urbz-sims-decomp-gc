@@ -5,3 +5,8 @@ void fn_8027AEC8(void);
 void fn_8027B774(void) {
     fn_8027AEC8();
 }
+
+void fn_8027F924(void) {
+
+}
+
