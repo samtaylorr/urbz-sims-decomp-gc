@@ -11,6 +11,10 @@ void fn_800CED30(void) {
     fn_800CD104();
 }
 
+void fn_800CEEC0(void) {
+
+}
+
 void fn_800CF648(s32 *self) {
     self[1] = 1;
 }
