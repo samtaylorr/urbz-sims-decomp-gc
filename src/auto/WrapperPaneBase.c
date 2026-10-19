@@ -263,6 +263,17 @@ f32 fn_800CF834(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0x38);
 }
 
+void fn_800CF83C(s32 arg0, s32 arg1) {
+    void *temp_r3;
+
+    temp_r3 = arg0 + 0x20;
+    if (arg1 != 0) {
+        M2C_FIELD(temp_r3, s32 *, 0x38) = (s32) (M2C_FIELD(temp_r3, s32 *, 0x38) | 8);
+        return;
+    }
+    M2C_FIELD(temp_r3, s32 *, 0x38) = (s32) (M2C_FIELD(temp_r3, s32 *, 0x38) & 0xFFFFFFF7);
+}
+
 void fn_800CF868(u8 *self, s32 on) {
     u8 *p = self + 0x20;
     if (on) {
