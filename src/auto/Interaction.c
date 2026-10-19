@@ -17,6 +17,10 @@ s32 fn_8010F2AC(void) {
     return 1;
 }
 
+s32 fn_8010F2B4(void) {
+    return 1;
+}
+
 s32 fn_8011785C(void) {
     return 0;
 }
