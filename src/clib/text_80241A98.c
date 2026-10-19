@@ -2,6 +2,12 @@
 #include "common.h"
 
 void fn_80247D48(void);
+void fn_80245AB8(s32 arg0) {
+    M2C_UNK fn_80245A30(s32, s32);
+    extern s32 lbl_80494988;
+    fn_80245A30(lbl_80494988, arg0);
+}
+
 s32 fn_80245C8C(void) {
     return 0;
 }
