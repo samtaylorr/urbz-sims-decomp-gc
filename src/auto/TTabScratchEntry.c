@@ -91,6 +91,12 @@ s32 fn_8019BA10(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x90);
 }
 
+void fn_8019BA18(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0x90) = arg1;
+    M2C_FIELD(arg0, s16 *, 0x58) = (s16) (arg1 / 10000);
+    M2C_FIELD(arg0, s16 *, 0x56) = (s16) (arg1 % 10000);
+}
+
 s32 fn_8019BA48(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x9C);
 }
