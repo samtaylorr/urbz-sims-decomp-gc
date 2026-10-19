@@ -237,6 +237,10 @@ f32 fn_800CFE34(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0x2C);
 }
 
+void fn_800CFE3C(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0x30) = arg1;
+}
+
 s32 fn_800CFE44(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x30);
 }
