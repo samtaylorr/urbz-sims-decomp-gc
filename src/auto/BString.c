@@ -1410,6 +1410,10 @@ void fn_800E4958(s32 *self, s32 flags) {
     }
 }
 
+void fn_800E49E8(void) {
+
+}
+
 void fn_800E9758(s32 *self, s32 flags) {
     self[5] = (s32)lbl_804093F8;
     if (flags & 1) {
