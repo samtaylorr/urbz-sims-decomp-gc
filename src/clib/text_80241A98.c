@@ -66,6 +66,15 @@ void fn_8024DE44(void *arg0) {
     fn_8024DE6C(M2C_FIELD(arg0, s32 *, 0x5C), M2C_FIELD(arg0, s16 *, 0xE));
 }
 
+void fn_8024DE6C(s32 *arg0, s32 arg1) {
+    s32 fn_80375D28(s32);
+    extern s32 lbl_804966F8;
+    lbl_804966F8 = 0;
+    if ((fn_80375D28(arg1) == -1) && ((s32) lbl_804966F8 != 0)) {
+        *arg0 = lbl_804966F8;
+    }
+}
+
 void fn_8024F99C(void);
 void fn_8024EF20(void) {
     fn_8024F99C();
