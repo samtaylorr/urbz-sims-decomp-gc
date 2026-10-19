@@ -29,6 +29,11 @@ void fn_802CAA88(s32 arg0) {
     fn_802D8334(arg0 + 4);
 }
 
+void fn_802CAAAC(s32 arg0) {
+    M2C_UNK fn_802D838C(s32);
+    fn_802D838C(arg0 + 4);
+}
+
 void fn_802CB508(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x40) = arg1;
 }
