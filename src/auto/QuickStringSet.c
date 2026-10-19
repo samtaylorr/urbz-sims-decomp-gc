@@ -43,6 +43,13 @@ s32 fn_800F69F0(s32 *self) {
     return *self;
 }
 
+void *fn_800F6FB4(void *arg0, s32 arg1, s32 arg2) {
+    M2C_FIELD(arg0, s32 *, 0) = arg1;
+    M2C_FIELD(arg0, s32 *, 4) = arg2;
+    fn_800F7018();
+    return arg0;
+}
+
 s32 fn_800F6FEC(s32 *self) {
     return self[1];
 }
