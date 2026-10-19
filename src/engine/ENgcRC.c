@@ -226,6 +226,13 @@ void fn_80357AA0(void) {
     fn_80273F88();
 }
 
+void fn_80358C9C(void) {
+    M2C_UNK fn_80348BC0();
+    extern s32 lbl_804950EC;
+    fn_80348BC0();
+    lbl_804950EC = 1;
+}
+
 void fn_80359520(void) {
 
 }
