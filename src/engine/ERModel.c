@@ -140,3 +140,7 @@ s32 fn_8032CF60(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x94);
 }
 
+u8 fn_8032CF68(void *arg0) {
+    return M2C_FIELD(arg0, u8 *, 0x160);
+}
+
