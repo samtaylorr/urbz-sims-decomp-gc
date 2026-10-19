@@ -40,6 +40,13 @@ void fn_80302230(void) {
 
 }
 
+s32 fn_8030417C(void *arg0) {
+    void *temp_r11;
+
+    temp_r11 = M2C_FIELD(M2C_FIELD(arg0, void **, 8), void **, 0x20);
+    return ((u32) (M2C_FIELD(temp_r11, s32 *, 0x74) | M2C_FIELD(temp_r11, s32 *, 0xB4)) >> 5U) & 1;
+}
+
 s32 fn_80305908(s32 arg0) {
     return arg0 + 0x48;
 }
