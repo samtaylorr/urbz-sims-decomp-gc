@@ -381,6 +381,15 @@ s32 fn_801C62C0(s32 *self) {
     return self[2];
 }
 
+void fn_801C675C(void *self, s32 flags) {
+    extern u8 lbl_80415F28[];
+    extern void fn_802D20E8(void *);
+    M2C_FIELD(self, void **, 4) = lbl_80415F28;
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_801C6790(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 8) = arg1;
 }
