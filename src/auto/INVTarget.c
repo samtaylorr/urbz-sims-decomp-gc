@@ -86,6 +86,10 @@ void fn_8020ACC8(void) {
 
 }
 
+void fn_8020ACCC(void) {
+
+}
+
 s32 fn_80223248(s32 *self) {
     return self[1];
 }
