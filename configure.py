@@ -377,6 +377,7 @@ config.libs = [
             Object(NonMatching, "engine/EFileSystem.c"),
             Object(NonMatching, "engine/EMat4.c"),
             Object(NonMatching, "engine/EString.c"),
+            Object(NonMatching, "engine/EA.c"),
             Object(NonMatching, "misc/text_8038FC80.c"),
             Object(NonMatching, "libs/text_80398934.c"),
         ],
