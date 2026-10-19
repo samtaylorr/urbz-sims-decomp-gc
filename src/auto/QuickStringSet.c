@@ -469,6 +469,27 @@ s32 fn_800FC788(void *arg0, s32 arg1) {
     return -1;
 }
 
+s32 fn_800FD808(void *arg0, s32 arg1) {
+    void *var_r9;
+
+    var_r9 = NULL;
+    switch (arg1) {                                 /* irregular */
+    case 1:
+        var_r9 = M2C_FIELD(arg0, void **, 0x18);
+        break;
+    case 2:
+        var_r9 = M2C_FIELD(arg0, void **, 0x10);
+        break;
+    case 3:
+        var_r9 = M2C_FIELD(arg0, void **, 0x14);
+        break;
+    }
+    if (var_r9 != NULL) {
+        return M2C_FIELD(var_r9, s32 *, 0x24);
+    }
+    return 0;
+}
+
 s32 fn_800FDF38(s32 *self) {
     return self[1];
 }
