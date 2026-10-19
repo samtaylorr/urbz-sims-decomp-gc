@@ -104,6 +104,10 @@ void fn_80214DB0(void) {
 
 }
 
+s32 fn_8021BEF0(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x104);
+}
+
 s32 fn_80223248(s32 *self) {
     return self[1];
 }
