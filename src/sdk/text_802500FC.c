@@ -231,6 +231,10 @@ s32 fn_802735E8(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x10);
 }
 
+s32 fn_80273658(void *arg0) {
+    return (M2C_FIELD(arg0, s32 *, 0xC) << 5) & 0x03FFFFE0;
+}
+
 s32 fn_80273684(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x14);
 }
