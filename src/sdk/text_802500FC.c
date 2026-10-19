@@ -335,6 +335,31 @@ void *fn_80262F18(void) {
     return (void *)fn_80262F24;
 }
 
+s32 fn_80262F24(s32 prio, DVDCommandBlock *block) {
+    M2C_UNK fn_80251BF0(void *, u32);
+    s32 fn_8025465C();
+    M2C_UNK fn_80254684(s32);
+    M2C_UNK fn_802622E0();
+    s32 fn_80264C7C(s32, void *);
+    extern s32 lbl_80494A2C;
+    extern u32 lbl_80495ED0;
+    extern s32 lbl_80495EDC;
+    s32 level;
+    s32 result;
+
+    if (lbl_80494A2C != 0 && (block->command == 1 || block->command - 4 <= 1 || block->command == 0xE)) {
+        fn_80251BF0(block->addr, block->length);
+    }
+    level = fn_8025465C();
+    block->state = 2;
+    result = fn_80264C7C(prio, block);
+    if (lbl_80495ED0 == 0 && lbl_80495EDC == 0) {
+        fn_802622E0();
+    }
+    fn_80254684(level);
+    return result;
+}
+
 void fn_8026354C(s32 arg0, void *arg1);
 s32 fn_802634AC(DVDCommandBlock *block) {
     s32 fn_8025465C();
