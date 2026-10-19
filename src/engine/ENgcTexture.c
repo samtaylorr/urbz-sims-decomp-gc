@@ -52,6 +52,10 @@ void *fn_80362D70(u32 size, void *p) {
     return p;
 }
 
+void fn_80362E44(void) {
+
+}
+
 void *fn_80362E78(u32 size, void *p);
 void *fn_80362E78(u32 size, void *p) {
     return p;
