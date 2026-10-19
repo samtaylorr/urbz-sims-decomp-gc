@@ -947,3 +947,8 @@ s32 fn_801B2570(void) {
     return 2;
 }
 
+void fn_801B2578(void) {
+    M2C_UNK fn_801B2364(M2C_UNK, M2C_UNK);
+    fn_801B2364(1, 0xFFFF);
+}
+
