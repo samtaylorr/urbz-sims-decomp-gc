@@ -21,3 +21,7 @@ void fn_80039F5C(void) {
     fn_802D2430();
 }
 
+s32 fn_8003A0AC(void) {
+    return 0;
+}
+
