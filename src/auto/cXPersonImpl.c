@@ -132,3 +132,7 @@ s32 fn_801860A8(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x600);
 }
 
+void fn_801860B0(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0x600) = arg1;
+}
+
