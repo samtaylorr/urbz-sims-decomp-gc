@@ -14,3 +14,7 @@ void fn_8027FAA8(void) {
 
 }
 
+void fn_8027FAAC(void) {
+
+}
+
