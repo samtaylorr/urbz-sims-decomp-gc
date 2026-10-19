@@ -466,6 +466,10 @@ void *fn_801A29B0(void *arg0) {
     return arg0 + ((M2C_FIELD(arg0, u8 *, 7) * 2) + 0x10);
 }
 
+s32 fn_801A29C4(void *arg0) {
+    return (((M2C_FIELD(arg0, u8 *, 6) + M2C_FIELD(arg0, u8 *, 7) + 3) * 2) & 0x7F8) + 0x10;
+}
+
 s32 fn_801A2B54(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 4) - M2C_FIELD(arg0, s32 *, 0);
 }
