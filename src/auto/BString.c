@@ -1917,6 +1917,11 @@ void fn_800E49E8(void) {
 
 }
 
+void fn_800E49EC(s32 arg0) {
+    M2C_UNK fn_800E44CC(s32);
+    fn_800E44CC(arg0 + 0x38);
+}
+
 void fn_800E4A10(void) {
 
 }
