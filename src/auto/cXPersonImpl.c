@@ -16,6 +16,21 @@ s32 fn_80181314(void) {
     return 0x50455253;
 }
 
+void fn_801816BC(void *arg0) {
+    M2C_UNK fn_80117E80(void *);
+    s16 *fn_80141C5C(s32, M2C_UNK);
+    void *temp_r10;
+    void *temp_r11;
+
+    if (((s16) M2C_FIELD(arg0, s16 *, 0x42) == 0) && ((s16) *fn_80141C5C(M2C_FIELD(arg0, void **, 0) + 0x28, 0x22) == 0)) {
+        temp_r10 = M2C_FIELD(M2C_FIELD(arg0, void **, 0), void **, 4);
+        temp_r11 = M2C_FIELD(temp_r10, void **, 4);
+        if (M2C_FIELD(temp_r11, s32 (**)(void *), 0x174)(temp_r10 + M2C_FIELD(temp_r11, s16 *, 0x170)) != 0) {
+            fn_80117E80(arg0 + 0xA8);
+        }
+    }
+}
+
 s32 fn_80181A20(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x5FC) ^ 1;
 }
