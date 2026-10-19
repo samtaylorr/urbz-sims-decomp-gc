@@ -130,6 +130,11 @@ u8 fn_801FAD08(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 0x100);
 }
 
+void fn_801FE23C(s32 arg0) {
+    M2C_UNK fn_801E0F64(s32);
+    fn_801E0F64(arg0 + 0x79C);
+}
+
 void fn_801FE2C0(void) {
 
 }
