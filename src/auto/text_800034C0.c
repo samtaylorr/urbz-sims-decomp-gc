@@ -66,6 +66,11 @@ void fn_800043E8(void) {
     fn_800C47CC();
 }
 
+void fn_80004408(void) {
+    extern s32 lbl_80493F14;
+    lbl_80493F14 += 1;
+}
+
 s32 fn_800050F0(u8 *self) {
     s32 result = 0;
     s32 i;
