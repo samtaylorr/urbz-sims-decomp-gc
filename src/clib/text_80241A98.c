@@ -16,6 +16,11 @@ void fn_80248078(void) {
     fn_80247D48();
 }
 
+void fn_8024928C(void *arg0) {
+    M2C_UNK fn_802492BC(s16, M2C_UNK, M2C_UNK, M2C_UNK);
+    fn_802492BC(M2C_FIELD(arg0, s16 *, 0xE), 0, 0, 2);
+}
+
 extern s32 lbl_80494988;
 s32 fn_8024BEAC(void) {
     return lbl_80494988;
