@@ -53,6 +53,13 @@ void fn_8032BF88(s32 arg0) {
     fn_8032C204(arg0);
 }
 
+void fn_8032C08C(void *arg0, s32 arg1, s32 arg2) {
+    s32 fn_8031AEB4(s32, s32);
+    if (fn_8031AEB4(M2C_FIELD(arg0, s32 *, 0x130) + (arg1 * 0xE0), arg2) != 0) {
+        M2C_FIELD(arg0, s32 *, 0x12C) = 1;
+    }
+}
+
 s32 fn_8032C194(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x134);
 }
