@@ -4368,6 +4368,12 @@ void fn_803BBDA8(void **self, s32 flags) {
     }
 }
 
+extern void fn_803BBFD0(void *);
+void *fn_803BBFE4(void *self) {
+    fn_803BBFD0(self);
+    return self;
+}
+
 void fn_80335FD8(void);
 void fn_803BD7F8(void) {
     fn_80335FD8();
