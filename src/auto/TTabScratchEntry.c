@@ -70,3 +70,7 @@ s32 fn_801B24B8(void) {
     return 0;
 }
 
+s32 fn_801B24C8(void) {
+    return 0;
+}
+
