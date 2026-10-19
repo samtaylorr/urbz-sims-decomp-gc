@@ -1993,6 +1993,23 @@ void fn_803A87BC(void *arg0, void *arg1, void *arg2) {
     }
 }
 
+void fn_803A8B7C(s32 arg0, void *arg1) {
+    void *temp_r30;
+    void *var_r31;
+
+    var_r31 = arg1;
+    if (var_r31 != NULL) {
+        do {
+            fn_803A8B7C(arg0, M2C_FIELD(var_r31, void **, 0xC));
+            temp_r30 = M2C_FIELD(var_r31, void **, 8);
+            if (var_r31 != NULL) {
+                fn_803997AC(var_r31, 0x18);
+            }
+            var_r31 = temp_r30;
+        } while (var_r31 != NULL);
+    }
+}
+
 extern u8 lbl_80413E80[];
 void fn_803A92E4(void **self, s32 flags) {
     *self = lbl_80413E80;
