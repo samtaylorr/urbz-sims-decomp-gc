@@ -3,6 +3,12 @@
 
 extern u8 lbl_8041C438[];
 extern void fn_802D20E8(void *);
+extern u8 lbl_8041C3F8[];
+void **fn_8033E14C(void **self) {
+    *self = lbl_8041C3F8;
+    return self;
+}
+
 void fn_8033E160(void **self, s32 flags) {
     *self = lbl_8041C438;
     if (flags & 1) {
