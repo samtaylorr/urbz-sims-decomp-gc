@@ -85,3 +85,9 @@ void fn_8036EBA4(void) {
     fn_802D2430();
 }
 
+extern void *fn_802D0AB8(void *);
+extern void fn_802D1A00(void *, void *);
+void fn_8036EC78(void *arg0) {
+    fn_802D1A00(fn_802D0AB8(arg0), arg0);
+}
+
