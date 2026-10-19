@@ -37,6 +37,13 @@ void fn_8018CAB0(void) {
 
 }
 
+void fn_8018CAB4(void) {
+    M2C_UNK fn_8018CB1C();
+    M2C_UNK fn_802D1FC8(M2C_UNK);
+    fn_802D1FC8(8);
+    fn_8018CB1C();
+}
+
 void fn_8018CB38(void **self, s32 flags) {
     *self = lbl_80413E80;
     if (flags & 1) {
