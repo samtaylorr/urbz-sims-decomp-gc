@@ -45,6 +45,10 @@ s32 fn_80362520(void) {
     return 2;
 }
 
+s32 fn_80362528(void) {
+    return 2;
+}
+
 void *fn_80362560(u32 size, void *p);
 void *fn_80362560(u32 size, void *p) {
     return p;
