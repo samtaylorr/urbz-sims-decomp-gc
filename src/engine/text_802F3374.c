@@ -24,6 +24,12 @@ s32 fn_802F33D4(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void fn_802F3CE0(void) {
+    M2C_UNK fn_802D1FC8(M2C_UNK);
+    fn_802D1FC8(0xF4);
+    fn_802F3414();
+}
+
 void fn_802F3414(void);
 void fn_802F3D08(void) {
     fn_802F3414();
