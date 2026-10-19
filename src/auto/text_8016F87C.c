@@ -9,3 +9,7 @@ s32 fn_8017076C(void) {
     return 0;
 }
 
+s32 fn_80175CDC(void) {
+    return 0;
+}
+
