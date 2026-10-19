@@ -6,6 +6,15 @@ void fn_802F041C(void) {
     fn_802D2FD0();
 }
 
+extern void fn_802D30D4(void *, s32 *);
+s32 fn_802F043C(s32 arg0, s32 *out) {
+    s32 tmp;
+
+    fn_802D30D4((void *)arg0, &tmp);
+    *out = tmp;
+    return arg0;
+}
+
 extern s32 lbl_80494E5C;
 s32 fn_802F150C(void) {
     return lbl_80494E5C;
