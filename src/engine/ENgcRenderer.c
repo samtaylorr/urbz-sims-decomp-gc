@@ -22,6 +22,12 @@ void fn_8035EA70(void) {
     fn_8035EC18();
 }
 
+extern u8 lbl_8046DF78[];
+void fn_8034F440(u8 *arg);
+void fn_8035F07C(void) {
+    fn_8034F440(lbl_8046DF78);
+}
+
 void fn_8035F144(void) {
 
 }
