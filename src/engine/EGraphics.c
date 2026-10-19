@@ -214,6 +214,11 @@ void *fn_802EF354(void) {
     return self;
 }
 
+void fn_802EF398(void *self) {
+    fn_802EFBA8(self);
+    *(void **)self = lbl_80419C98;
+}
+
 extern s32 lbl_804961C4;
 extern void *fn_802D1FC8(s32);
 extern void fn_802EFBA8(void *);
