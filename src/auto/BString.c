@@ -63,6 +63,10 @@ void fn_800D196C(s32 *self) {
     }
 }
 
+void fn_800D1ACC(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x18) = 0;
+}
+
 s32 *fn_800D1D9C(s32 *self, s32 arg1) {
     self[0] = arg1;
     self[1] = -1;
