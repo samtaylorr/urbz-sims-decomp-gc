@@ -23,6 +23,10 @@ void *fn_8036CFAC(void) {
     return lbl_80493D2C;
 }
 
+void *fn_8036CFDC(void) {
+    return lbl_80493D2C;
+}
+
 void fn_802D2430(void);
 void fn_8036D048(void) {
     fn_802D2430();
