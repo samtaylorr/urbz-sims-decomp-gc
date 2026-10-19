@@ -44,6 +44,15 @@ void fn_800C05A0(void) {
     fn_802C876C(lbl_80431650);
 }
 
+void fn_800C05C8(void *arg0) {
+    M2C_FIELD(&lbl_80431650, f32 *, 0) = (f32) M2C_FIELD(arg0, f32 *, 0);
+    M2C_FIELD(&lbl_80431650, f32 *, 4) = (f32) M2C_FIELD(arg0, f32 *, 4);
+    M2C_FIELD(&lbl_80431650, f32 *, 0x10) = (f32) M2C_FIELD(arg0, f32 *, 8);
+    M2C_FIELD(&lbl_80431650, f32 *, 0x14) = (f32) M2C_FIELD(arg0, f32 *, 0xC);
+    M2C_FIELD(&lbl_80431650, f32 *, 0x30) = (f32) M2C_FIELD(arg0, f32 *, 0x10);
+    M2C_FIELD(&lbl_80431650, f32 *, 0x34) = (f32) M2C_FIELD(arg0, f32 *, 0x14);
+}
+
 s32 fn_800C0604(void) {
     return 0;
 }
