@@ -92,6 +92,10 @@ s32 fn_802F17AC(s32 *self) {
     return self[2];
 }
 
+s32 fn_802F1944(u8 *self) {
+    return *(s32 *)(self + 0x20);
+}
+
 s32 fn_802F19D8(void) {
     return 0;
 }
