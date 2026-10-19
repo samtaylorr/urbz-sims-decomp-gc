@@ -37,3 +37,7 @@ void fn_80185DB8(void) {
 
 }
 
+void fn_80185E00(void) {
+
+}
+
