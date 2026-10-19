@@ -32,6 +32,10 @@ s32 fn_802A4354(void) {
     return 1;
 }
 
+s32 fn_802ACBBC(void) {
+    return 1;
+}
+
 s32 fn_802ACCFC(void) {
     return 0;
 }
