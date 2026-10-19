@@ -34,6 +34,11 @@ s32 fn_80058574(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void *fn_800596B8(u32 size, void *p);
+void *fn_800596B8(u32 size, void *p) {
+    return p;
+}
+
 void fn_80059734(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
