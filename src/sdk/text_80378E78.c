@@ -6,6 +6,11 @@ s32 fn_8037E780(void) {
     return lbl_80496354;
 }
 
+extern s32 lbl_8049633C;
+s32 fn_8037E864(void) {
+    return lbl_8049633C;
+}
+
 s32 fn_8038C698(void) {
     return 0;
 }
