@@ -9,6 +9,10 @@ void fn_80314D18(void *self, s32 flags) {
     }
 }
 
+void fn_80314DA4(s32 *arg0) {
+    *arg0 = 0;
+}
+
 s32 fn_80314DB0(s32 *self) {
     return *self;
 }
