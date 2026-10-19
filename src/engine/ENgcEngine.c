@@ -7,6 +7,13 @@ void fn_8033E768(void) {
     lbl_80495040 = 1;
 }
 
+extern u8 lbl_8041C570[];
+void fn_8033E7C4(void **self) {
+    M2C_UNK fn_802E0CA0(void **);
+    *self = lbl_8041C570;
+    fn_802E0CA0(self);
+}
+
 void fn_8033E7F4(void *arg0) {
     M2C_UNK fn_802E0D34();
     M2C_FIELD(arg0, s32 *, 8) = 0;
