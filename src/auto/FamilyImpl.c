@@ -22,6 +22,16 @@ s32 fn_8010A7EC(void) {
     return 0;
 }
 
+s32 fn_8010A7F4(void *arg0) {
+    s32 var_r9;
+
+    var_r9 = 0;
+    if (((s32) M2C_FIELD(arg0, s32 *, 8) != 0) && ((s32) M2C_FIELD(arg0, s32 *, 0xC) != 0)) {
+        var_r9 = 1;
+    }
+    return var_r9;
+}
+
 s32 fn_8010A89C(s32 *self) {
     return self[7];
 }
