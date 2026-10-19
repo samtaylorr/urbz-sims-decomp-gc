@@ -904,6 +904,10 @@ s32 fn_800E1C34(void) {
     return lbl_804966E4;
 }
 
+s32 fn_800E1C3C(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x94);
+}
+
 extern s32 lbl_8040C858[];
 s32 *fn_800E1C44(s32 *self, s32 a) {
     self[0] = a;
