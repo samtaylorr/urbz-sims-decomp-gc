@@ -5,6 +5,11 @@ s32 fn_800A6154(void) {
     return 0;
 }
 
+extern s32 lbl_8049592C;
+s32 fn_800A9920(void) {
+    return lbl_8049592C;
+}
+
 s32 fn_800A9C74(void) {
     return 0;
 }
