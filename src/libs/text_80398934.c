@@ -1861,6 +1861,10 @@ void fn_803AF14C(void) {
 
 }
 
+void fn_803AF180(void) {
+
+}
+
 void fn_803AF184(BoundPmf *b) {
     s16 index = b->index;
     char *obj = b->obj;
