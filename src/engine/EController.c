@@ -13,6 +13,10 @@ s32 fn_80310FE4(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x1AC);
 }
 
+void fn_80310FEC(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0x1AC) = arg1;
+}
+
 s32 fn_80311B60(s32 *self) {
     return *self;
 }
