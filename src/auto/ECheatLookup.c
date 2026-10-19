@@ -50,3 +50,7 @@ s32 fn_8001A1D4(void *arg0) {
     return M2C_FIELD(M2C_FIELD(arg0, void **, 0xC), s32 *, 0x4C);
 }
 
+s32 fn_8001A1E0(void *arg0) {
+    return M2C_FIELD(M2C_FIELD(arg0, void **, 0xC), s32 *, 0x50);
+}
+
