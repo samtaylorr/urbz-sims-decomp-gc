@@ -66,6 +66,10 @@ void fn_802E13B8(void) {
 
 }
 
+void fn_802E1A20(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 8) = arg1;
+}
+
 void fn_802E1A28(void) {
 
 }
