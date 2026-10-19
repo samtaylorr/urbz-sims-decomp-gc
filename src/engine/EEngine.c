@@ -50,6 +50,10 @@ void fn_802E0B48(u8 *self, s32 value) {
     *(s32 *)(self + 0x468) = value;
 }
 
+s32 fn_802E0B50(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x46C);
+}
+
 void fn_802E0B60(void) {
 
 }
