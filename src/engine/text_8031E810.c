@@ -87,6 +87,11 @@ s32 fn_8031ED24(char *self) {
     return *(s32 *)(self + 0xC);
 }
 
+void *fn_8031EDF8(u32 size, void *p);
+void *fn_8031EDF8(u32 size, void *p) {
+    return p;
+}
+
 extern void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
 void fn_8031EE00(void *arg0) {
