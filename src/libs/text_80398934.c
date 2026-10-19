@@ -4195,6 +4195,12 @@ void fn_803BD868(void) {
     fn_80335FD8();
 }
 
+extern void *fn_802D0AB8(void *);
+extern void fn_802D1A00(void *, void *);
+void fn_803BD888(void *arg0) {
+    fn_802D1A00(fn_802D0AB8(arg0), arg0);
+}
+
 void fn_803BD8BC(void) {
     fn_80335FD8();
 }
