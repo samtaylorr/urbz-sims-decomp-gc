@@ -12,6 +12,10 @@ s32 fn_80186780(s32 arg0) {
     return arg0 + 0x38;
 }
 
+s32 fn_80186788(s32 arg0) {
+    return arg0 + 0x1904;
+}
+
 void fn_8018CAB0(void) {
 
 }
