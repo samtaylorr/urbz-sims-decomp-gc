@@ -330,6 +330,10 @@ s32 *fn_800D5070(s32 *self, s32 a) {
     return self;
 }
 
+void fn_800D5FAC(void) {
+
+}
+
 extern void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
 void fn_800D63EC(void *arg0) {
