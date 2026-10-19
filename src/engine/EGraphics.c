@@ -62,6 +62,10 @@ void fn_802EEFC0(void) {
 
 }
 
+void fn_802EEFC4(void) {
+
+}
+
 s32 fn_802EF004(void) {
     return 1;
 }
