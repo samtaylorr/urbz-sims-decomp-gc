@@ -81,3 +81,7 @@ s32 fn_8012AAA8(void) {
     return 1;
 }
 
+void fn_8012AAB0(void) {
+
+}
+
