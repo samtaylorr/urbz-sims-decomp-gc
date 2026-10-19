@@ -9,6 +9,10 @@ void fn_801181F4(void) {
 
 }
 
+void fn_8011CD64(void) {
+
+}
+
 s32 fn_8012242C(s32 *self) {
     return self[2];
 }
