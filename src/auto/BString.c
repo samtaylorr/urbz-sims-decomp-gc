@@ -1646,6 +1646,10 @@ void fn_800EA6EC(void *self, s32 flags) {
     }
 }
 
+void fn_800EAF58(void) {
+
+}
+
 s32 fn_800EB5B4(void) {
     return 0;
 }
