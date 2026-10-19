@@ -111,3 +111,7 @@ u16 fn_80014D64(void *arg0) {
     return M2C_FIELD(arg0, u16 *, 0x570);
 }
 
+s32 fn_80014D6C(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x574);
+}
+
