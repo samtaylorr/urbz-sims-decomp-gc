@@ -85,6 +85,11 @@ void fn_8036EBA4(void) {
     fn_802D2430();
 }
 
+void *fn_8036EC70(u32 size, void *p);
+void *fn_8036EC70(u32 size, void *p) {
+    return p;
+}
+
 extern void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
 void fn_8036EC78(void *arg0) {
