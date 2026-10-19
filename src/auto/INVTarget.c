@@ -152,6 +152,10 @@ s32 fn_80223128(s32 arg0) {
     return arg0 + 0x60;
 }
 
+s32 fn_80223130(s32 arg0) {
+    return arg0 + 0x90;
+}
+
 void fn_80223240(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 4) = arg1;
 }
