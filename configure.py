@@ -330,6 +330,7 @@ config.libs = [
             Object(NonMatching, "auto/CTGDump.c"),
             Object(NonMatching, "auto/QuickStringSet.c"),
             Object(NonMatching, "auto/cBoxX.c"),
+            Object(NonMatching, "auto/ChainResFile.c"),
             Object(NonMatching, "libsn/text_8023EBD8.c"),
             Object(NonMatching, "clib/text_80241A98.c"),
             Object(NonMatching, "engine/text_802781E4.c"),

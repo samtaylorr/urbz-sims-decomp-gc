@@ -124,7 +124,10 @@ auto/QuickStringSet.c:
 	.text       start:0x800F54A0 end:0x800FE02C
 
 auto/cBoxX.c:
-	.text       start:0x800FE02C end:0x8023EBD8
+	.text       start:0x800FE02C end:0x801020E0
+
+auto/ChainResFile.c:
+	.text       start:0x801020E0 end:0x8023EBD8
 
 libsn/text_8023EBD8.c:
 	.text       start:0x8023EBD8 end:0x80241A98
