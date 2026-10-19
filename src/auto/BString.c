@@ -170,12 +170,12 @@ s32 *fn_800D1F50(s32 *self, s32 a) {
 }
 
 void fn_800D1F84(void) {
-    void fn_80319494(char *, s32);
+    void fn_80319494(void *, s32);
     void fn_80332C50(void *);
-    extern char lbl_803D1698[];
+    extern s32 lbl_803D1698;
     extern u8 lbl_8045AAB0[];
     fn_80332C50(lbl_8045AAB0);
-    fn_80319494(lbl_803D1698, 151);
+    fn_80319494(&lbl_803D1698, 151);
 }
 
 void fn_800D1FBC(void *arg0) {
@@ -336,6 +336,18 @@ void fn_800D3D28(s32 *self) {
 extern void fn_800E9554(s32);
 void fn_800D3D4C(s32 *self) {
     fn_800E9554(self[2]);
+}
+
+s32 *fn_800D3D70(s32 *self, s32 a) {
+    extern s32 lbl_8040B4D0[];
+    self[0] = a;
+    self[1] = -1;
+    self[2] = 0;
+    self[3] = -1;
+    self[4] = 1;
+    self[5] = (s32)lbl_8040B4D0;
+    self[6] = 0;
+    return self;
 }
 
 extern u8 lbl_8040B488[];
