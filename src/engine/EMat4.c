@@ -46,6 +46,10 @@ s32 fn_802CE9C8(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x10A8);
 }
 
+s32 fn_802CE9D0(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x1098);
+}
+
 extern void *fn_802D0AB8(void *);
 void fn_802CEE44(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
