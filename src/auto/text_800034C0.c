@@ -59,6 +59,10 @@ void fn_80039F5C(void) {
     fn_802D2430();
 }
 
+void fn_8003A1D0(void) {
+    fn_802D2FD0();
+}
+
 void fn_8003F9E0(void);
 void fn_8003F8A0(void) {
     fn_8003F9E0();
