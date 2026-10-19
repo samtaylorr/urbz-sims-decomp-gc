@@ -1,6 +1,10 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+void fn_802C46DC(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x1C) = 0;
+}
+
 s32 fn_802C47F4(void) {
     return 0;
 }
