@@ -161,6 +161,11 @@ void fn_8039AD30(void) {
     fn_8018EA6C();
 }
 
+void fn_8039AD50(void *arg0) {
+    M2C_UNK fn_801509D4(s32);
+    fn_801509D4(M2C_FIELD(arg0, s32 *, 4));
+}
+
 s32 fn_8039AD74(s32 *self) {
     return self[2];
 }
