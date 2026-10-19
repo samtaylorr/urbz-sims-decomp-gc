@@ -478,7 +478,10 @@ engine/text_8036D4B8.c:
 	.text       start:0x8036D4B8 end:0x8036D7C8
 
 engine/text_8036D7C8.c:
-	.text       start:0x8036D7C8 end:0x80378E78
+	.text       start:0x8036D7C8 end:0x8036ECE0
+
+engine/ETexture.c:
+	.text       start:0x8036ECE0 end:0x80378E78
 
 sdk/text_80378E78.c:
 	.text       start:0x80378E78 end:0x8038FC80
