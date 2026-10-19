@@ -87,6 +87,10 @@ s32 fn_8031ED24(char *self) {
     return *(s32 *)(self + 0xC);
 }
 
+s32 fn_8031ED2C(s32 arg0) {
+    return arg0 + 0x18;
+}
+
 s32 fn_8031ED58(s32 *self) {
     return self[7];
 }
