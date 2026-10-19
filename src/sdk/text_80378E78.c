@@ -63,6 +63,12 @@ s32 fn_80380AF4(void) {
     return lbl_80496384;
 }
 
+void fn_80381010(void *arg0) {
+    extern void *lbl_80496388;
+    M2C_FIELD(arg0, void **, 8) = (void *) lbl_80496388;
+    lbl_80496388 = arg0;
+}
+
 void fn_80381518(void) {
     extern s32 lbl_80496394;
     extern s32 lbl_80496390;
