@@ -123,3 +123,8 @@ void fn_8003FAF0(void *arg0, f32 farg0) {
     M2C_FIELD(arg0, f32 *, 0x540) = farg0;
 }
 
+void fn_8003FAF8(void) {
+    M2C_UNK fn_8003F64C(M2C_UNK, M2C_UNK);
+    fn_8003F64C(1, 0xFFFF);
+}
+
