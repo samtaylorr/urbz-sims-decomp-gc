@@ -1,6 +1,12 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+s32 *fn_8016F87C(s32 *arg0) {
+    arg0[0] = 0;
+    arg0[1] = 0;
+    return arg0;
+}
+
 void fn_8016F980(void *arg0) {
     s32 var_r11;
     void *temp_r9;
