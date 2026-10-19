@@ -93,6 +93,20 @@ s32 fn_802C605C(s32 *self) {
     return *self;
 }
 
+s32 fn_802C6434(void *arg0, s32 arg1) {
+    M2C_UNK fn_802C7B54();
+    extern s32 lbl_80494DB8;
+    if ((s32) M2C_FIELD(arg0, s32 *, 0x14) == 0) {
+        if ((s32) lbl_80494DB8 == 0) {
+            fn_802C7B54();
+        }
+        M2C_FIELD(arg0, s32 *, 0x10) = arg1;
+        M2C_FIELD(arg0, s32 *, 0x14) = 1;
+        return 1;
+    }
+    return 0;
+}
+
 s32 fn_802C6494(void) {
     return 1;
 }
