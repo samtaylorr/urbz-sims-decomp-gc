@@ -1,6 +1,21 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+typedef struct DVDCommandBlock {
+    void *next;
+    void *prev;
+    u32 command;
+    s32 state;
+    u32 offset;
+    u32 length;
+    void *addr;
+    u32 currTransferSize;
+    u32 transferredSize;
+    void *id;
+    void *callback;
+    void *userData;
+} DVDCommandBlock;
+
 unsigned long fn_8024FF70(void);
 void fn_8024FF78(unsigned long);
 void fn_802500FC(void) {
