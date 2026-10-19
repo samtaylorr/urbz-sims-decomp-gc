@@ -169,6 +169,11 @@ s32 fn_802F1954(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x24);
 }
 
+void fn_802F197C(void *arg0, s32 arg1, s32 arg2) {
+    M2C_FIELD(arg0, s32 *, 0x34) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x38) = arg2;
+}
+
 void fn_802F19C4(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x10) = arg1;
 }
