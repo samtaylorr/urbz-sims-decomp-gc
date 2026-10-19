@@ -33,6 +33,10 @@ void fn_80251884(s32 arg0) {
     lbl_804949A8 = arg0;
 }
 
+s32 fn_80252900(void) {
+    return *(s32 *)0x800000D4;
+}
+
 void fn_80253990(void) {
     extern s32 lbl_80495E10;
     lbl_80495E10 = 1;
