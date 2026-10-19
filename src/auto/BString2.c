@@ -22,6 +22,11 @@ s32 fn_800EF934(s32 *arg0) {
     return *arg0 + 4;
 }
 
+s32 fn_800F41B8(s32, s32, s32, s32);
+s32 fn_800EFCD4(s32 arg0, s32 arg1) {
+    return (u32)fn_800F41B8(arg0, arg1, 0, 1) >> 31;
+}
+
 void fn_800EFD00(s32 arg0, s32 arg1) {
     M2C_UNK fn_800EFCAC(s32, s32);
     fn_800EFCAC(arg1, arg0);
