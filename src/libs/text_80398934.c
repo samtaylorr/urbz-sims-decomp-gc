@@ -295,6 +295,11 @@ void fn_803BEC14(u8 *self) {
     fn_802D8BEC(self);
 }
 
+extern u8 lbl_80493DF4[];
+void *fn_803C0134(void) {
+    return lbl_80493DF4;
+}
+
 void fn_803C0D34(void);
 void fn_803C0D04(void) {
     fn_803C0D34();
