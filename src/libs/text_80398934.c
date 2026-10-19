@@ -4015,6 +4015,15 @@ void fn_803B0AF4(BoundPmf *b) {
     f(obj + off);
 }
 
+void fn_803B0B6C(void *self, s32 flags) {
+    extern u8 lbl_80417860[];
+    extern void fn_802D20E8(void *);
+    M2C_FIELD(self, void **, 4) = lbl_80417860;
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_803B0BA0(BoundPmf *b) {
     s16 index = b->index;
     char *obj = b->obj;
