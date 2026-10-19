@@ -374,6 +374,11 @@ void fn_8007A888(void *arg0) {
     fn_80305EE0(arg0, 1);
 }
 
+void fn_8007A8AC(void *arg0) {
+    extern void fn_80305FE0(void *, s32);
+    fn_80305FE0(arg0, 1);
+}
+
 void fn_8007ACF8(void *arg0) {
     if ((s32) M2C_FIELD(arg0, s32 *, 0xFDC) != 0) {
         M2C_FIELD(arg0, s8 *, 0xF7C) = 2;
