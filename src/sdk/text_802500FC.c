@@ -223,6 +223,25 @@ void fn_8025B2B0(void) {
     fn_80259838();
 }
 
+s32 fn_8025D78C(void) {
+    s32 fn_802502B8();
+    extern s32 lbl_80495E80;
+    extern s32 lbl_80495E84;
+    extern s32 lbl_80495E88;
+    extern s32 lbl_80495E8C;
+    if ((u32) (lbl_80495E8C + 0x5A010000) == 0x5AU) {
+        return 0;
+    }
+    if (!(fn_802502B8() & 0x10000000)) {
+        lbl_80495E88 = 0;
+        return 2;
+    }
+    lbl_80495E88 = 0xA5FF005A;
+    lbl_80495E80 = 0;
+    lbl_80495E84 = 1;
+    return 0;
+}
+
 s32 fn_8025D7FC(void) {
     return 4;
 }
