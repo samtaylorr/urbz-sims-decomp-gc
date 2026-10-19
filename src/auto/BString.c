@@ -1486,6 +1486,12 @@ s32 fn_800EBC7C(void) {
     return 0;
 }
 
+extern void fn_800EBDA4(void *);
+void *fn_800ED300(void *self) {
+    fn_800EBDA4(self);
+    return self;
+}
+
 void fn_800EC49C(void);
 void fn_800EE7C4(void) {
     fn_800EC49C();
