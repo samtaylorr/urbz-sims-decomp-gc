@@ -192,6 +192,10 @@ s32 fn_803B75F0(void) {
     return 1;
 }
 
+s32 fn_803B7600(void) {
+    return 1;
+}
+
 s32 fn_803B8C78(void) {
     return 0;
 }
