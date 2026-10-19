@@ -156,6 +156,25 @@ s32 fn_802F17AC(s32 *self) {
     return self[2];
 }
 
+void fn_802F1850(void *arg0, s16 *arg1, s16 *arg2) {
+    M2C_UNK (*temp_r0)(s32, M2C_UNK, s16 *, s16 *);
+    s32 var_r11;
+
+    temp_r0 = M2C_FIELD(arg0, M2C_UNK (**)(s32, M2C_UNK, s16 *, s16 *), 0x20);
+    if (temp_r0 != NULL) {
+        temp_r0(M2C_FIELD(arg0, s32 *, 0x30), 0, arg1, arg2);
+    } else {
+        *arg2 = (s16) temp_r0;
+        *arg1 = (s16) temp_r0;
+    }
+    var_r11 = 1;
+    if ((s16) M2C_FIELD(arg0, s16 *, 0x28) == (s16) *arg1) {
+        var_r11 = 0;
+    }
+    M2C_FIELD(arg0, s32 *, 8) = var_r11;
+    M2C_FIELD(arg0, s16 *, 0x28) = (s16) (u16) *arg1;
+}
+
 void fn_802F1920(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x18) = arg1;
 }
