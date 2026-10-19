@@ -2,6 +2,13 @@
 #include "common.h"
 
 void fn_802FB604(void);
+extern s32 lbl_80495198;
+extern s32 lbl_8049519C;
+extern s32 lbl_80495120;
+extern s32 lbl_80495124;
+extern s32 lbl_803F4668[];
+void fn_8034F9F0(u8 *self);
+void fn_80351084(u8 *self);
 void *fn_80348E8C(u32 size, void *p);
 void fn_80345FB0(void) {
 
