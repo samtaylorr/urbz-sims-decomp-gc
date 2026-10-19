@@ -144,6 +144,16 @@ s32 fn_800CAA04(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x68);
 }
 
+void fn_800CAFE8(void *arg0) {
+    M2C_UNK fn_800CB350(void *);
+    M2C_UNK fn_800CB514(void *);
+    M2C_FIELD(arg0, s32 *, 0x70) = 0;
+    M2C_FIELD(arg0, s32 *, 0x74) = 0;
+    fn_800CEEC8();
+    fn_800CB350(arg0);
+    fn_800CB514(arg0);
+}
+
 s32 fn_800CBD30(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x78);
 }
