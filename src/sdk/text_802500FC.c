@@ -430,6 +430,13 @@ void fn_8026E418(void *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 0x10) = arg2;
 }
 
+void fn_8026E6C4(s32 arg0) {
+    M2C_UNK fn_8026E6F8(s32);
+    M2C_UNK fn_802706E4();
+    fn_802706E4();
+    fn_8026E6F8(arg0);
+}
+
 s32 fn_8026E9EC(s32 *self) {
     return *self;
 }
