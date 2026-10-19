@@ -452,6 +452,23 @@ void fn_800FC6E0(void) {
 
 }
 
+s32 fn_800FC788(void *arg0, s32 arg1) {
+    if ((u32) (arg1 - 0x100) > 0x2228U) {
+        /* Duplicate return node #1. Try simplifying control flow for better match */
+        return -1;
+    }
+    if (arg1 <= 0xFFF) {
+        return lbl_804944B0;
+    }
+    if (arg1 <= 0x1FFF) {
+        return M2C_FIELD(M2C_FIELD(arg0, void **, 4), s32 *, 4);
+    }
+    if (arg1 <= 0x2328) {
+        return M2C_FIELD(M2C_FIELD(arg0, void **, 4), s32 *, 8);
+    }
+    return -1;
+}
+
 s32 fn_800FDF38(s32 *self) {
     return self[1];
 }
