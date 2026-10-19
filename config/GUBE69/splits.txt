@@ -121,7 +121,10 @@ auto/CTGDump.c:
 	.text       start:0x800F49D8 end:0x800F54A0
 
 auto/QuickStringSet.c:
-	.text       start:0x800F54A0 end:0x8023EBD8
+	.text       start:0x800F54A0 end:0x800FE02C
+
+auto/cBoxX.c:
+	.text       start:0x800FE02C end:0x8023EBD8
 
 libsn/text_8023EBD8.c:
 	.text       start:0x8023EBD8 end:0x80241A98
