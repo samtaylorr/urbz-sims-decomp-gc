@@ -158,6 +158,10 @@ s32 *fn_8006E308(s32 *self, s32 a) {
     return self;
 }
 
+void fn_8006E7AC(void) {
+
+}
+
 s32 fn_800702F8(void) {
     return 0;
 }
