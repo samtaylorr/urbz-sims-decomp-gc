@@ -484,6 +484,11 @@ u16 fn_80273AE0(void *arg0) {
     return M2C_FIELD(arg0, u16 *, 8);
 }
 
+void fn_80273E3C(u32 *arg0, s32 *arg1, s32 *arg2) {
+    *arg1 = ((*arg0 << 9) & 0x7FE00) + 0x80000;
+    *arg2 = ((u32) *arg0 >> 0xAU) & 0x7FF;
+}
+
 s32 fn_80273FD0(s32 arg0) {
     extern void *__GXData;
     s32 temp_r0;
