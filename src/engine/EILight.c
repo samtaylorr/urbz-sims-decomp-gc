@@ -16,6 +16,10 @@ void *fn_802F0230(void) {
     return lbl_80493740;
 }
 
+void *fn_802F0260(void) {
+    return lbl_80493740;
+}
+
 void fn_802D2430(void);
 void fn_802F02CC(void) {
     fn_802D2430();
