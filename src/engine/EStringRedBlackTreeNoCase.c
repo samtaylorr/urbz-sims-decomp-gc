@@ -24,6 +24,21 @@ s32 fn_80365A3C(void **arg0) {
     return var_r9;
 }
 
+s32 fn_8036625C(void **arg0) {
+    s32 var_r9;
+    void *var_r3;
+
+    var_r3 = *arg0;
+    var_r9 = 0;
+    if (var_r3 != NULL) {
+        do {
+            var_r3 = M2C_FIELD(var_r3, void **, 4);
+            var_r9 += 1;
+        } while (var_r3 != NULL);
+    }
+    return var_r9;
+}
+
 s32 fn_803669C0(void *arg0) {
     s32 temp_r11;
     s32 var_r3;
