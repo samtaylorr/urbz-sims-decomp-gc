@@ -98,6 +98,11 @@ s32 fn_80260F58(void) {
     return 1;
 }
 
+s32 fn_80260F70(void) {
+    extern void *lbl_80495EB0;
+    return M2C_FIELD(lbl_80495EB0, s32 *, 0x38);
+}
+
 void fn_8026126C(void) {
 
 }
