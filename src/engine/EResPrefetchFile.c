@@ -10,6 +10,10 @@ s32 fn_8031FC84(void) {
     return 0;
 }
 
+s32 fn_8031FC8C(void) {
+    return 0;
+}
+
 void fn_8031FE0C(void) {
     fn_802D2FD0();
 }
