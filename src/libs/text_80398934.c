@@ -4291,6 +4291,12 @@ void fn_803B97C0(void **self, s32 flags) {
     }
 }
 
+extern void fn_803B981C(void *);
+void *fn_803B98BC(void *self) {
+    fn_803B981C(self);
+    return self;
+}
+
 s32 fn_803B9FEC(s32 *self) {
     return *self;
 }
