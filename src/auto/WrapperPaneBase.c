@@ -108,3 +108,13 @@ s32 fn_800D0804(WrapperPaneBase *self, s32 i) {
     return self->unk40[i];
 }
 
+void fn_800CE8F4(u8 *self, s32 arg);
+void fn_800CE924(u8 *self, s32 arg);
+void fn_800D0FF0(u8 *self) {
+    u8 *obj = *(u8 **)(self + 0x48);
+    u8 *vt = *(u8 **)(obj + 0x1C);
+    (*(void (**)(void *))(vt + 0x3C))(obj + *(s16 *)(vt + 0x38));
+    fn_800CE8F4(self, 2);
+    fn_800CE924(self, 2);
+}
+
