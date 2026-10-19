@@ -271,7 +271,10 @@ engine/EString.c:
 	.text       start:0x802D26CC end:0x802D7E20
 
 engine/EA.c:
-	.text       start:0x802D7E20 end:0x80378E78
+	.text       start:0x802D7E20 end:0x802DFB9C
+
+engine/ENgcFile.c:
+	.text       start:0x802DFB9C end:0x80378E78
 
 sdk/text_80378E78.c:
 	.text       start:0x80378E78 end:0x8038FC80
