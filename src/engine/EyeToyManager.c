@@ -69,6 +69,13 @@ void fn_80339320(void) {
 
 }
 
+void *fn_80339348(void *arg0) {
+    M2C_UNK fn_802CA9A8();
+    fn_802CA9A8();
+    M2C_FIELD(arg0, s32 *, 0x20) = 0;
+    return arg0;
+}
+
 s32 fn_8033983C(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x24);
 }
