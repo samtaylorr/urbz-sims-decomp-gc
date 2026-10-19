@@ -29,6 +29,10 @@ void fn_802F4A8C(char *self, void *arg1) {
     fn_802E34F0(arg1, self + 0x44);
 }
 
+void fn_802F56A4(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0x124) = arg1;
+}
+
 void fn_802F58A8(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
