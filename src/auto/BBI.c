@@ -88,6 +88,12 @@ s32 fn_8005B6DC(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void fn_8005CEF0(void *arg0) {
+    M2C_UNK fn_802E9CD4(s32);
+    fn_802E9CD4(arg0 + 0x314);
+    M2C_FIELD(arg0, s32 *, 0x3C8) = 0;
+}
+
 void fn_8005D344(void) {
     fn_8005D054();
 }
