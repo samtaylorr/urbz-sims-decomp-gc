@@ -64,6 +64,11 @@ void fn_800A40EC(void) {
 
 }
 
+void fn_800A4328(s32 arg0) {
+    M2C_UNK fn_800F3304(s32);
+    fn_800F3304(arg0 + 0x58);
+}
+
 void fn_800A4370(void) {
 
 }
