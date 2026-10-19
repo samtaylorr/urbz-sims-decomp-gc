@@ -106,6 +106,10 @@ s32 fn_8003FAB8(void *arg0, s32 *arg1) {
     return M2C_FIELD(arg0, s32 *, 0x52C);
 }
 
+f32 fn_8003FAC8(void *arg0) {
+    return M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x3BC), void **, 0x134), f32 *, 0x6C);
+}
+
 s32 fn_8003FAE8(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x53C);
 }
