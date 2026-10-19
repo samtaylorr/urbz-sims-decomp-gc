@@ -11,6 +11,10 @@ void fn_8036ED9C(void) {
 
 }
 
+void fn_8036EDA0(void) {
+
+}
+
 s32 fn_8036EDA4(void) {
     return 1;
 }
