@@ -36,3 +36,7 @@ s32 fn_801B37CC(void) {
     return 0;
 }
 
+s32 fn_801B37D4(void) {
+    return 0;
+}
+
