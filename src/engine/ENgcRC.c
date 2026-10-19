@@ -123,11 +123,12 @@ void fn_80355E28(u8 *self) {
 }
 
 void fn_80355E64(u8 *self, u8 *arg) {
-    u8 *p;
-    s8 on;
-    u8 off;
-    u8 mode;
     u8 enable;
+    u8 mode;
+    u8 off;
+    s32 on;
+    u8 *p;
+    s32 val;
 
     enable = arg[1];
     mode = arg[2];
@@ -140,10 +141,11 @@ void fn_80355E64(u8 *self, u8 *arg) {
         on = 1;
     }
     p = *(u8 **)(self + 0x4D8);
+    val = lbl_803F4668[mode];
     p[0x3B4] = off == 0;
     p[0x3AC] = on;
+    *(s32 *)(p + 0x3B0) = val;
     *(u32 *)(p + 0x6CC) |= 0x80000000 | 0x40;
-    *(s32 *)(p + 0x3B0) = lbl_803F4668[mode];
 }
 
 extern s32 lbl_804951A4;
