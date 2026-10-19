@@ -410,6 +410,7 @@ config.libs = [
             Object(NonMatching, "engine/text_80324168.c"),
             Object(NonMatching, "engine/ERModel.c"),
             Object(NonMatching, "engine/ERQuickdata.c"),
+            Object(NonMatching, "engine/ERTexture.c"),
             Object(NonMatching, "misc/text_8038FC80.c"),
             Object(NonMatching, "libs/text_80398934.c"),
         ],

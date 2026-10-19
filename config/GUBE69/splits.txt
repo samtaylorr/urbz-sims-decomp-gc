@@ -367,7 +367,10 @@ engine/ERModel.c:
 	.text       start:0x80329264 end:0x8032CFC0
 
 engine/ERQuickdata.c:
-	.text       start:0x8032CFC0 end:0x80378E78
+	.text       start:0x8032CFC0 end:0x80331494
+
+engine/ERTexture.c:
+	.text       start:0x80331494 end:0x80378E78
 
 sdk/text_80378E78.c:
 	.text       start:0x80378E78 end:0x8038FC80
