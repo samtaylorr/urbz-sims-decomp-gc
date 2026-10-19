@@ -485,6 +485,11 @@ void fn_8008A7A4(s32 *arg0) {
     *arg0 = 0;
 }
 
+void fn_8008A7B0(s32 arg0, s32 arg1) {
+    M2C_UNK fn_8008BCC8(s32, s32);
+    fn_8008BCC8(arg1, arg0);
+}
+
 void fn_8008B420(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x158) = 1;
 }
