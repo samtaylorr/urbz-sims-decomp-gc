@@ -26,6 +26,12 @@ s32 fn_8031FC94(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x40);
 }
 
+void fn_8031FD08(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
+    M2C_UNK fn_8031FD64(s32, s32, s32, s32, s32, s32);
+    s32 fn_80337F14(s32);
+    fn_8031FD64(arg0, arg1, fn_80337F14(arg2), arg3, arg4, arg5);
+}
+
 s32 fn_8031FE04(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x2C);
 }
