@@ -15,6 +15,12 @@ s32 fn_8025015C(void) {
     return *(s32 *)0x80000040;
 }
 
+void fn_80250290(void) {
+    s32 PPCMfhid2();
+    M2C_UNK PPCMthid2(s32);
+    PPCMthid2(PPCMfhid2() & 0xBFFFFFFF);
+}
+
 void fn_80250FC4(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0) = 0;
     M2C_FIELD(arg0, s32 *, 4) = 0;
