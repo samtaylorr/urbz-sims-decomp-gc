@@ -37,6 +37,15 @@ void fn_802C6A5C(s32 *arg0) {
     fn_80248808(*arg0);
 }
 
+void fn_802C6CCC(s32 *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    M2C_UNK fn_802C69B0(s32, s32);
+    M2C_UNK fn_802C6D20(s32, s32, s32);
+    fn_802C69B0(arg1, *arg0 + arg2);
+    if (arg3 != -1) {
+        fn_802C6D20(arg1, arg1, arg3);
+    }
+}
+
 void fn_802C725C(u8 **arg0, s32 arg1, u8 arg2) {
     u8 *var_r3;
     u8 var_r0;
