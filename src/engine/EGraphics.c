@@ -54,6 +54,10 @@ s32 fn_802EEF9C(u8 *self) {
     return *(s32 *)(self + 0x20);
 }
 
+void fn_802EEFBC(void) {
+
+}
+
 s32 fn_802EF004(void) {
     return 1;
 }
