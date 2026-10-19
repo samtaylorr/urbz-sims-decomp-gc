@@ -54,6 +54,10 @@ void fn_801BB5E8(void) {
 
 }
 
+void fn_801BB5EC(void) {
+
+}
+
 s32 fn_801BB774(char *self) {
     return *(s32 *)(self + 0xC);
 }
