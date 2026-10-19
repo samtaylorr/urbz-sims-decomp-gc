@@ -673,6 +673,20 @@ s32 fn_8026AF1C(void) {
     return lbl_80494AC0;
 }
 
+s32 fn_8026B6EC(s32 arg0, s32 *arg1) {
+    extern s32 lbl_80494AB4;
+    extern s32 lbl_80495FEC;
+    extern s32 lbl_80495FF0;
+    u32 temp_r3;
+
+    *arg1 = fn_8025F148();
+    temp_r3 = 0x80000000U >> arg0;
+    if ((lbl_80495FF0 & temp_r3) || ((s32) lbl_80494AB4 == arg0) || !(lbl_80495FEC & temp_r3)) {
+        return 0;
+    }
+    return 1;
+}
+
 void fn_8026B8F4(void) {
     extern s32 lbl_80494AB8;
     lbl_80494AB8 = 0;
