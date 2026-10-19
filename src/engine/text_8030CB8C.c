@@ -2,6 +2,21 @@
 #include "common.h"
 
 void fn_8030DA64(void);
+s32 fn_8030CC3C(void) {
+    M2C_UNK fn_8030FAAC(M2C_UNK *);
+    M2C_UNK fn_8030FDC4();
+    M2C_UNK fn_8036F334();
+    extern M2C_UNK lbl_804961F4;
+    extern M2C_UNK lbl_804961F8;
+    extern M2C_UNK lbl_804961FC;
+    fn_8030FAAC(&lbl_804961F4);
+    fn_8030FAAC(&lbl_804961F8);
+    fn_8030FAAC(&lbl_804961FC);
+    fn_8030FDC4();
+    fn_8036F334();
+    return 0;
+}
+
 void fn_8030EF10(void) {
     fn_8030DA64();
 }
