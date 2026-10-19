@@ -330,6 +330,13 @@ void fn_800FB720(void **obj) {
     }
 }
 
+void **fn_800FB760(void **arg0) {
+    extern char lbl_8040D418[];
+    arg0[0] = lbl_8040D418;
+    arg0[1] = 0;
+    return arg0;
+}
+
 extern u8 lbl_8040D458[];
 void fn_800FB77C(void **self, s32 flags) {
     *self = lbl_8040D458;
