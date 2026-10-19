@@ -23,6 +23,10 @@ s32 fn_800CAA04(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x68);
 }
 
+s32 fn_800CBD30(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x78);
+}
+
 s32 fn_800CBD48(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x68);
 }
