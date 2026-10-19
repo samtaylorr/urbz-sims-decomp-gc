@@ -6,6 +6,10 @@ s32 fn_8033909C(void) {
     return 0;
 }
 
+s32 fn_803390A4(void) {
+    return 0;
+}
+
 void fn_8033BBCC(void) {
     fn_802D0B3C();
 }
