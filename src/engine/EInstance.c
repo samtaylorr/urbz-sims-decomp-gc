@@ -43,6 +43,12 @@ s32 fn_802F150C(void) {
     return lbl_80494E5C;
 }
 
+void fn_802F1604(void) {
+    M2C_UNK fn_802D1FC8(M2C_UNK);
+    fn_802D1FC8(0x8C);
+    fn_802F04BC();
+}
+
 void fn_802F04BC(void);
 void fn_802F162C(void) {
     fn_802F04BC();
