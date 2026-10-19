@@ -158,6 +158,33 @@ s32 fn_8036F334(void) {
     return 0;
 }
 
+s32 fn_8036FB28(void *arg0, void *arg1) {
+    void **temp_r9;
+    void *temp_r10;
+    void *temp_r9_2;
+
+    temp_r10 = arg1 - 8;
+    if ((s32) M2C_FIELD(arg0, s32 *, 8) == 0) {
+        return -1;
+    }
+    if (temp_r10 == (void *) M2C_FIELD(arg0, void **, 0x10)) {
+        M2C_FIELD(arg0, void **, 0x10) = (void *) M2C_FIELD(arg1, void **, -8);
+    }
+    temp_r9 = M2C_FIELD(temp_r10, void ***, 4);
+    if (temp_r9 != NULL) {
+        *temp_r9 = M2C_FIELD(arg1, void **, -8);
+    }
+    temp_r9_2 = M2C_FIELD(arg1, void **, -8);
+    if (temp_r9_2 != NULL) {
+        M2C_FIELD(temp_r9_2, void ***, 4) = (void **) M2C_FIELD(temp_r10, void ***, 4);
+    }
+    M2C_FIELD(temp_r10, void ***, 4) = NULL;
+    M2C_FIELD(arg1, void **, -8) = (void *) M2C_FIELD(arg0, void **, 0xC);
+    M2C_FIELD(arg0, void **, 0xC) = temp_r10;
+    M2C_FIELD(arg0, s32 *, 8) = (s32) (M2C_FIELD(arg0, s32 *, 8) - 1);
+    return 0;
+}
+
 void fn_8036FF88(void) {
 
 }
