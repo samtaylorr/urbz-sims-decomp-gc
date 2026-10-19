@@ -11,6 +11,14 @@ typedef struct {
     s32 v[3];
 } Unk801D4CC0;
 
+u8 *fn_801D4B84(u8 *self) {
+    extern void fn_801C72DC(u8 *);
+    extern u8 lbl_80416358[];
+    fn_801C72DC(self);
+    *(u8 **)(self + 4) = lbl_80416358;
+    return self;
+}
+
 void fn_801D4BC0(u8 *self) {
     extern void fn_801C7588(u8 *);
     extern u8 lbl_80416358[];
