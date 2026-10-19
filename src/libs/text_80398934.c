@@ -4987,6 +4987,14 @@ void *fn_803BEC78(void *self) {
     return self;
 }
 
+extern void fn_803BECA8(s32);
+void fn_803BECF4(s32 self, s32 flags) {
+    fn_803BECA8(self);
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_803BED34(void *self) {
     ((s32 *)self)[0] = 0;
     ((s32 *)self)[2] = 0;
