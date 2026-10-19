@@ -54,6 +54,10 @@ void fn_803079A8(void) {
 
 }
 
+s32 fn_803079D4(s32 arg0) {
+    return arg0 + 0x14;
+}
+
 void fn_803079DC(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x1C) = arg1;
 }
