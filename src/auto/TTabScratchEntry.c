@@ -128,6 +128,10 @@ s32 fn_8019F384(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x48);
 }
 
+f32 fn_8019F3C0(void *arg0) {
+    return M2C_FIELD(arg0, f32 *, 0x54);
+}
+
 void fn_8019F3D0(void **self, s32 flags) {
     *self = lbl_80414770;
     if (flags & 1) {
