@@ -27,6 +27,11 @@ void fn_800C2970(void) {
     fn_800A9920();
 }
 
+extern s32 lbl_80494360;
+void fn_800C2E1C(void (*cb)(void)) {
+    lbl_80494360 = cb;
+}
+
 void fn_802D22C8(void);
 void fn_800C3AFC(void) {
     fn_802D22C8();
