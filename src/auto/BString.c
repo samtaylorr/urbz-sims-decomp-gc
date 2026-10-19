@@ -868,6 +868,11 @@ s32 fn_800E1A2C(void) {
     return lbl_804966DC;
 }
 
+void fn_800E1A34(void) {
+    extern s32 lbl_804966D8;
+    lbl_804966D8 = 0;
+}
+
 extern s32 lbl_80434A9C[];
 extern s32 lbl_8041F754[];
 void fn_800E1A48(void) {
