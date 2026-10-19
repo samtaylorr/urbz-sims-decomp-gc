@@ -6,6 +6,10 @@ void fn_80306D28(void) {
 
 }
 
+void fn_80306F64(void *arg0, f32 farg0) {
+    M2C_FIELD(arg0, f32 *, 0x88) = farg0;
+}
+
 s32 fn_80306F6C(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x48);
 }
