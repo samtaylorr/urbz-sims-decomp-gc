@@ -44,6 +44,10 @@ s32 fn_8031FE6C(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void fn_80320010(void) {
+
+}
+
 void fn_8032027C(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
