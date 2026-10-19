@@ -947,6 +947,11 @@ void fn_800DB1F4(s32 *self) {
     ((f32 *)self)[6] = lbl_803D4974[0];
 }
 
+extern f32 lbl_803D4978[];
+void fn_800DB204(s32 *self) {
+    ((f32 *)self)[6] = lbl_803D4978[0];
+}
+
 void fn_800DB214(s32 *self, f32 dt) {
     if (fn_800E416C((void *)self[2]) < lbl_803D497C[0]) {
         if (((f32 *)self)[6] < lbl_803D4980[0]) {
