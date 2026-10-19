@@ -150,3 +150,7 @@ void fn_800659D4(void) {
     fn_802D2FD0();
 }
 
+void fn_80066C60(void) {
+    fn_802D2430();
+}
+
