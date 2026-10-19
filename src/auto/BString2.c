@@ -14,6 +14,15 @@ s32 fn_800EFF00(void) {
     return 0;
 }
 
+extern void fn_800EF864(s32);
+extern void fn_802D20E8(s32);
+void fn_800F0658(s32 self, s32 flags) {
+    fn_800EF864(self);
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 s32 fn_800F0698(void) {
     return 0;
 }
