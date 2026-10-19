@@ -5,6 +5,11 @@ void fn_8008CD40(void) {
     fn_803073C4();
 }
 
+extern s32 lbl_804941F0;
+void fn_8008DCCC(void (*cb)(void)) {
+    lbl_804941F0 = cb;
+}
+
 s32 fn_8008F854(void) {
     return 1;
 }
