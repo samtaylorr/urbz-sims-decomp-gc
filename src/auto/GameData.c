@@ -5,6 +5,10 @@ void fn_800440B0(void) {
 
 }
 
+void fn_800440B4(void) {
+
+}
+
 void fn_80044A38(s32 *self) {
     self[1] = 1;
 }
