@@ -670,6 +670,29 @@ s32 fn_80219DA0(void) {
     return var_r3;
 }
 
+s32 fn_80219DDC(void) {
+    s32 temp_r3_2;
+    s32 var_r3;
+    void *temp_r3;
+
+    temp_r3 = fn_80219E28();
+    if (temp_r3 != NULL) {
+        temp_r3_2 = M2C_FIELD(temp_r3, s32 *, 0x1C);
+        if (temp_r3_2 > 0x21) {
+            return 0;
+        }
+        var_r3 = 2;
+        if (temp_r3_2 >= -0x22) {
+            goto block_4;
+        }
+        /* Duplicate return node #5. Try simplifying control flow for better match */
+        return var_r3;
+    }
+block_4:
+    var_r3 = 1;
+    return var_r3;
+}
+
 void fn_8021BECC(s32 arg0) {
     M2C_UNK fn_801F5420(s32);
     fn_801F5420(arg0 + 0x84);
