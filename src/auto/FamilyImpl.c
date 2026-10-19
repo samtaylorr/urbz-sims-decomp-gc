@@ -32,6 +32,19 @@ s32 fn_8010A7F4(void *arg0) {
     return var_r9;
 }
 
+void fn_8010A834(void *arg0) {
+    void *temp_r29;
+    void *temp_r29_2;
+    void *temp_r30;
+    void *temp_r30_2;
+
+    temp_r29 = M2C_FIELD(arg0, void **, 4);
+    temp_r30 = M2C_FIELD(temp_r29, void **, 4);
+    temp_r30_2 = temp_r30 + 0x50;
+    temp_r29_2 = temp_r29 + M2C_FIELD(temp_r30, s16 *, 0x50);
+    M2C_FIELD(temp_r30_2, M2C_UNK (**)(void *, s32), 4)(temp_r29_2, fn_8010A7EC());
+}
+
 s32 fn_8010A89C(s32 *self) {
     return self[7];
 }
