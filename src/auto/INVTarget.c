@@ -60,6 +60,12 @@ void fn_801F0498(void) {
 
 }
 
+void fn_801F0784(void) {
+    M2C_UNK fn_801EA898(s32);
+    extern s32 lbl_80494630;
+    fn_801EA898(lbl_80494630);
+}
+
 void fn_801F086C(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0xAC) = arg1;
 }
