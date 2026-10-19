@@ -18,6 +18,16 @@ void *fn_80039D0C(void) {
     return lbl_80491C00;
 }
 
+extern s32 lbl_80491C0C[];
+s32 fn_80039D18(void) {
+    return lbl_80491C0C[0];
+}
+
+extern u16 lbl_80491C14[];
+u16 fn_80039D30(void) {
+    return lbl_80491C14[0];
+}
+
 void *fn_80039D3C(void) {
     return lbl_80491C00;
 }
