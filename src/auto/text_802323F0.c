@@ -17,3 +17,8 @@ void fn_80235974(void *arg0) {
     fn_80230708(fn_8022554C(arg0), arg0);
 }
 
+extern void fn_80230710(void *, void *);
+void fn_802359A8(void *arg0) {
+    fn_80230710(fn_8022554C(arg0), arg0);
+}
+
