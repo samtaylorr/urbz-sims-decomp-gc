@@ -102,6 +102,14 @@ u8 fn_801F9D6C(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 0xDC);
 }
 
+void fn_801FAC58(void *arg0, s8 arg1) {
+    if (arg1 != 0) {
+        M2C_FIELD(arg0, s8 *, 0x100) = 1;
+        return;
+    }
+    M2C_FIELD(arg0, s8 *, 0x100) = arg1;
+}
+
 u8 fn_801FAD08(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 0x100);
 }
