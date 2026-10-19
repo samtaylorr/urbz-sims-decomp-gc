@@ -23,6 +23,11 @@ s32 fn_800F68B4(s32 *self) {
     return self[1];
 }
 
+void fn_800F68BC(s32 *arg0) {
+    M2C_UNK fn_80248808(s32);
+    fn_80248808(*arg0);
+}
+
 s32 fn_800F69E8(s32 *self) {
     return *self;
 }
