@@ -53,6 +53,11 @@ s32 fn_8032E1F0(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void fn_8032F0BC(s8 arg0) {
+    extern s8 lbl_80494F50;
+    lbl_80494F50 = arg0;
+}
+
 void fn_8032F5A0(void);
 void fn_8033031C(void) {
     fn_8032F5A0();
