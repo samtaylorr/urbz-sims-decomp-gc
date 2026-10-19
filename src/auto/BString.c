@@ -1442,6 +1442,10 @@ void fn_800E662C(void) {
 
 }
 
+void fn_800E95F0(void) {
+
+}
+
 void fn_800E9758(s32 *self, s32 flags) {
     self[5] = (s32)lbl_804093F8;
     if (flags & 1) {
