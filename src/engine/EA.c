@@ -161,6 +161,11 @@ void fn_802DEDAC(void) {
     fn_802DDC6C();
 }
 
+s32 fn_802DEDDC(void) {
+    s32 fn_802DE2F8();
+    return fn_802DE2F8() ^ 1;
+}
+
 s32 fn_802DEE00(s32 *self) {
     return *self;
 }
