@@ -70,6 +70,10 @@ s32 fn_800B2F1C(s32 arg0) {
     return arg0 + 0x18;
 }
 
+s32 fn_800B2F3C(s32 arg0) {
+    return arg0 + 0x1A;
+}
+
 s32 fn_800B2F4C(s32 *self) {
     return self[1];
 }
