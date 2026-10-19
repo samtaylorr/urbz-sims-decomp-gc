@@ -38,6 +38,11 @@ void fn_8033D10C(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x3C) = arg1;
 }
 
+void **fn_8033D168(void **self) {
+    *self = lbl_8041C298;
+    return self;
+}
+
 void fn_8033D214(void) {
 
 }
