@@ -2866,6 +2866,19 @@ s32 fn_800EBC7C(void) {
     return 0;
 }
 
+void *fn_800ECCD0(void **arg0, s32 arg1) {
+    void *heap = ((void *(*)(void))fn_802D0AB8)();
+    void *p = fn_802D197C(heap, 0x10, 4);
+    if (p == NULL) {
+        p = fn_802DBBCC(heap, 0x10, 0);
+        if (p == NULL && heap == ((void *(*)(void))fn_802D0AB8)()) {
+            p = fn_802DBBCC(fn_802D0B3C(), 0x10, 0);
+        }
+    }
+    *arg0 = fn_800EBA28(p, arg1);
+    return arg0;
+}
+
 extern void fn_800EAF60(s32);
 void fn_800ECE00(s32 self, s32 flags) {
     fn_800EAF60(self);
@@ -2881,6 +2894,11 @@ void *fn_800ECF20(void *arg0, const char *arg1) {
 
 void *fn_800ED068(void *arg0, void **arg1) {
     ((void (*)(void *, u8 *, s32))fn_800EBDA4)(arg0, fn_800EAFCC(arg1), fn_800EF6F8(arg1));
+    return arg0;
+}
+
+void *fn_800ED0BC(void *arg0, const char *arg1) {
+    ((void (*)(void *, const char *, s32))fn_800EBDA4)(arg0, arg1, arg1 ? fn_80248808(arg1) : 0);
     return arg0;
 }
 
