@@ -6,6 +6,10 @@ void fn_80299A50(void) {
     fn_802999D4();
 }
 
+s32 fn_8029A0DC(void) {
+    return 0;
+}
+
 void fn_802A204C(void);
 void fn_802A202C(void) {
     fn_802A204C();
