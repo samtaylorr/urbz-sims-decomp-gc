@@ -44,6 +44,8 @@ void fn_80399F48(s32 **self);
 void fn_80399F94(s32 **self, s32 flags);
 extern s32 lbl_8049662C;
 void fn_8039B1E4(s32 *first, s32 *last, s32 *val, s32 depth, s32 comp);
+void fn_8039B3A4(s32 *first, s32 *last, s32 comp);
+void fn_8039B450(s32 *first, s32 *last, s32 *val, s32 comp);
 extern u8 lbl_80407128[];
 s32 fn_8018E850(void *out, void *obj, s32 arg);
 extern char *lbl_80495050;
@@ -262,6 +264,23 @@ void fn_8039B510(s32 *first, s32 *last, s32 comp) {
     }
 }
 
+s32 fn_8039B594(s32 arg0, s32 arg1, s32 arg2) {
+    struct {
+        void *vtbl;
+        s32 unk4;
+        s32 unk8;
+    } tmp;
+    u8 out[12];
+    s32 ret;
+
+    tmp.unk4 = arg0;
+    tmp.vtbl = lbl_80407128;
+    tmp.unk8 = arg2;
+    ret = fn_8018E850(out, &tmp, arg1);
+    ((void (*)(void *, s32))fn_8018EA6C)(&tmp, 2);
+    return ret;
+}
+
 void fn_802C5484(void);
 void fn_8039B5F8(void) {
     fn_802C5484();
@@ -291,6 +310,7 @@ void fn_802CB8D4(void *);
 void fn_8039B664(void *arg0) {
     s32 *node;
     s32 *next;
+    s32 more;
 
     M2C_FIELD(arg0, s32 *, 0x20) = 0;
     {
@@ -298,7 +318,14 @@ void fn_8039B664(void *arg0) {
         vt[8].pfn(lbl_80495050 + vt[8].delta);
     }
     node = M2C_FIELD(arg0, s32 **, 4);
-    while (node != NULL) {
+    for (;;) {
+        more = 1;
+        if (node == NULL) {
+            more = 0;
+        }
+        if (!more) {
+            break;
+        }
         next = (s32 *)node[1];
         if (M2C_FIELD(arg0, s32 *, 8) != 0 && node[0] != 0) {
             fn_800F1A60(node[0], 3);
