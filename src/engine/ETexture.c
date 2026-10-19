@@ -53,6 +53,15 @@ void fn_80370010(void) {
     fn_802D2FD0();
 }
 
+extern void fn_802D30D4(void *, s32 *);
+s32 fn_80370030(s32 arg0, s32 *out) {
+    s32 tmp;
+
+    fn_802D30D4((void *)arg0, &tmp);
+    *out = tmp;
+    return arg0;
+}
+
 void fn_80370F50(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
