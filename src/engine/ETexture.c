@@ -24,6 +24,10 @@ s32 fn_8036F018(s32 *self) {
     return self[2];
 }
 
+s32 fn_8036F1D4(s32 *self) {
+    return self[2];
+}
+
 s32 fn_8036F1DC(void) {
     return 1;
 }
