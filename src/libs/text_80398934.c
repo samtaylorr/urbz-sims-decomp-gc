@@ -4433,6 +4433,10 @@ void fn_803B7DCC(void) {
     lbl_80443318[0]();
 }
 
+void fn_803B8C70(void) {
+
+}
+
 s32 fn_803B8C78(void) {
     return 0;
 }
