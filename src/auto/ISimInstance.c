@@ -33,6 +33,9 @@ void fn_80065A74(void *self, s32 arg1) {
 void fn_80065A9C(void) {
 }
 
+void fn_80065AA0(void) {
+}
+
 s32 fn_80065AC4(void) {
     return 0;
 }
