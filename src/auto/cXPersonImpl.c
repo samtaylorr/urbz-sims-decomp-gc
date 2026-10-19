@@ -41,3 +41,7 @@ void fn_80185E00(void) {
 
 }
 
+void fn_80185E04(void) {
+
+}
+
