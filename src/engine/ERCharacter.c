@@ -35,6 +35,11 @@ void *fn_8031BCB4(void) {
     return lbl_80493830;
 }
 
+extern u16 lbl_80493846[];
+u16 fn_8031BCC0(void) {
+    return lbl_80493846[0];
+}
+
 void fn_802D2430(void);
 void fn_8031BD20(void) {
     fn_802D2430();
