@@ -50,6 +50,10 @@ s32 fn_8010F1E4(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x24);
 }
 
+s32 fn_8010F2A4(void) {
+    return 0x5622;
+}
+
 s32 fn_8010F2AC(void) {
     return 1;
 }
