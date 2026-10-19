@@ -295,6 +295,7 @@ config.libs = [
             Object(NonMatching, "auto/AptShaderWord.c"),
             Object(NonMatching, "auto/AptViewer.c"),
             Object(NonMatching, "auto/text_8000C5C8.c"),
+            Object(NonMatching, "auto/ESimsCam.c"),
             Object(NonMatching, "libsn/text_8023EBD8.c"),
             Object(NonMatching, "clib/text_80241A98.c"),
             Object(NonMatching, "engine/text_802781E4.c"),
