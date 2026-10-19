@@ -222,3 +222,7 @@ s32 fn_801760B8(void) {
     return lbl_80495C90;
 }
 
+s32 fn_801762BC(void) {
+    return 1;
+}
+
