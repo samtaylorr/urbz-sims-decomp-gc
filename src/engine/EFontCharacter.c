@@ -76,6 +76,14 @@ s32 fn_8036C838(s32 arg0, s32 *out) {
     return arg0;
 }
 
+s32 fn_8036C878(s32 arg0, s32 *out) {
+    s32 tmp;
+
+    fn_802C5C58((void *)arg0, &tmp);
+    *out = tmp;
+    return arg0;
+}
+
 void fn_8036CF6C(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
