@@ -140,6 +140,10 @@ void fn_803ABB10(void) {
     fn_800FC178();
 }
 
+s32 fn_803AC3C0(void) {
+    return 1;
+}
+
 s32 fn_803AE064(void) {
     return 0;
 }
