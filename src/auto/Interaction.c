@@ -42,6 +42,10 @@ s32 fn_8010F028(void) {
     return 1;
 }
 
+s32 fn_8010F030(u8 *self) {
+    return *(s32 *)(self + 0x20);
+}
+
 s32 fn_8010F2AC(void) {
     return 1;
 }
