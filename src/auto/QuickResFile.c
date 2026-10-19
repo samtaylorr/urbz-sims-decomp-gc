@@ -163,6 +163,19 @@ void fn_8018CF04(void) {
 
 }
 
+s32 fn_8018CFC4(s32 arg0, s32 arg1) {
+    s32 var_r0;
+
+    if (arg1 != 0x11) {
+        var_r0 = 0;
+        if (arg1 == 0x10) {
+            var_r0 = arg0;
+        }
+        return var_r0;
+    }
+    return arg0;
+}
+
 void fn_8018D1E8(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x18) = 1;
 }
