@@ -24,6 +24,11 @@ s32 fn_802F047C(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void fn_802F0A30(s32 arg0) {
+    M2C_UNK fn_802C5070(s32);
+    fn_802C5070(arg0 + 0x44);
+}
+
 void fn_802F1130(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0xD00) = 0;
 }
