@@ -69,6 +69,10 @@ void fn_802DF214(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
 
+s32 fn_802DF304(u8 *self) {
+    return *(s32 *)(self + 0x20);
+}
+
 s32 fn_802DF30C(void) {
     return 0;
 }
