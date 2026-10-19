@@ -373,7 +373,10 @@ engine/ERTexture.c:
 	.text       start:0x80331494 end:0x80331EA4
 
 engine/HDDThread.c:
-	.text       start:0x80331EA4 end:0x80378E78
+	.text       start:0x80331EA4 end:0x80332DE0
+
+engine/text_80332DE0.c:
+	.text       start:0x80332DE0 end:0x80378E78
 
 sdk/text_80378E78.c:
 	.text       start:0x80378E78 end:0x8038FC80
