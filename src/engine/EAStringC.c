@@ -163,6 +163,10 @@ void fn_802ACDEC(char *self) {
     fn_802ADE44(self + 8);
 }
 
+u8 *fn_802ACE10(u8 *self) {
+    return self + 8;
+}
+
 s32 fn_802ACE20(void) {
     return 1;
 }
