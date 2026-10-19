@@ -78,6 +78,10 @@ void fn_802E0B68(void) {
 
 }
 
+s32 fn_802E0B6C(void) {
+    return 0x18000;
+}
+
 void fn_802E0B78(void) {
 
 }
