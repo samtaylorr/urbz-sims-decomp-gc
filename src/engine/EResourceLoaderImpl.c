@@ -78,6 +78,24 @@ void fn_8031DDBC(void *arg0) {
     }
 }
 
+s32 fn_8031DE84(void *arg0) {
+    s32 fn_80337FDC(void *);
+    s32 temp_r3;
+    s32 var_r30;
+    void *var_r31;
+
+    var_r31 = M2C_FIELD(arg0, void **, 0x348);
+    var_r30 = 0;
+    if (var_r31 != NULL) {
+        do {
+            temp_r3 = fn_80337FDC(var_r31);
+            var_r31 = M2C_FIELD(var_r31, void **, 0xA0);
+            var_r30 += temp_r3;
+        } while (var_r31 != NULL);
+    }
+    return var_r30;
+}
+
 void fn_8031E778(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x3EC) = arg1;
 }
