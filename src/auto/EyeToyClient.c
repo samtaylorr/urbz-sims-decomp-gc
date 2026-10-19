@@ -67,3 +67,7 @@ s32 fn_80043480(void) {
     return lbl_804940A8;
 }
 
+void fn_80043BB4(void) {
+
+}
+
