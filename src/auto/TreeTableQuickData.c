@@ -61,6 +61,20 @@ s32 fn_801B380C(void) {
     return 0;
 }
 
+s32 fn_801B3854(void *arg0, void *arg1) {
+    s32 var_r11;
+    u32 temp_r0;
+    u32 temp_r9;
+
+    temp_r9 = M2C_FIELD(arg0, u32 *, 0);
+    var_r11 = 0;
+    temp_r0 = M2C_FIELD(arg1, u32 *, 0);
+    if ((temp_r9 < temp_r0) || (((s32) temp_r9 == (s32) temp_r0) && ((u16) M2C_FIELD(arg0, u16 *, 4) < (u16) M2C_FIELD(arg1, u16 *, 4)))) {
+        var_r11 = 1;
+    }
+    return var_r11;
+}
+
 s32 fn_801B38BC(void) {
     s32 fn_801B388C();
     return fn_801B388C() ^ 1;
