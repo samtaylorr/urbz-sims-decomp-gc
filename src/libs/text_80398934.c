@@ -74,6 +74,10 @@ s32 fn_803A0680(void) {
     return 0;
 }
 
+s32 fn_803A0688(void) {
+    return 0;
+}
+
 void fn_803A1424(void) {
     fn_8018EA6C();
 }
