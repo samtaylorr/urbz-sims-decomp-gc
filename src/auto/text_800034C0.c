@@ -33,6 +33,10 @@ s32 fn_80003980(void) {
 void fn_80003CEC(void) {
 }
 
+void fn_800043E0(u8 *self, s32 value) {
+    *(s32 *)(self + 0x468) = value;
+}
+
 void fn_800C47CC(void);
 void fn_800043E8(void) {
     fn_800C47CC();
