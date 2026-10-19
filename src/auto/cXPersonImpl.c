@@ -188,3 +188,8 @@ void fn_801860C8(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x604) = 0;
 }
 
+void fn_80186160(void) {
+    M2C_UNK fn_80185A90(M2C_UNK, M2C_UNK);
+    fn_80185A90(1, 0xFFFF);
+}
+
