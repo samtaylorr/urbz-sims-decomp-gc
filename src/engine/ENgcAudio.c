@@ -44,6 +44,17 @@ void fn_8033CB94(void) {
     }
 }
 
+void *fn_8033CBD0(void) {
+    void *fn_802D1FC8(M2C_UNK);
+    M2C_UNK fn_803BE5CC();
+    void *temp_r3;
+
+    temp_r3 = fn_802D1FC8(0x20);
+    M2C_FIELD(temp_r3, s32 *, 8) = -1;
+    fn_803BE5CC();
+    return temp_r3;
+}
+
 s32 fn_8033D104(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x38);
 }
