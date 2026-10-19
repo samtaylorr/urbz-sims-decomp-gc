@@ -1246,6 +1246,10 @@ s32 fn_803AE06C(void) {
     return 0;
 }
 
+void fn_803AE074(void) {
+
+}
+
 void fn_803AE07C(BoundPmf *b) {
     s16 index = b->index;
     char *obj = b->obj;
