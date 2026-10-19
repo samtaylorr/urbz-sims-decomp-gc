@@ -22,3 +22,13 @@ void fn_8033EABC(void) {
 s32 fn_8033EC8C(void) {
     return lbl_80495004;
 }
+
+void fn_8033F2B8(s32 arg0, s32 arg1, s32 arg2) {
+    extern s32 lbl_80495024;
+    extern s32 lbl_80495028;
+    extern s32 lbl_8049502C;
+    lbl_80495024 = arg0;
+    lbl_80495028 = arg1;
+    lbl_8049502C = arg2;
+}
+
