@@ -4,3 +4,8 @@
 s32 fn_8010A3E8(void) {
     return 0;
 }
+
+s32 fn_8010A7EC(void) {
+    return 0;
+}
+
