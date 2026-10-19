@@ -27,6 +27,10 @@ s32 fn_80023A74(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x68);
 }
 
+s32 fn_80023A7C(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x78);
+}
+
 void fn_80023B38(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
