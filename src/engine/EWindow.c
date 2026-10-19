@@ -50,6 +50,10 @@ void fn_80307BD4(void (*cb)(void)) {
     lbl_80494EBC = cb;
 }
 
+void fn_80307DF0(void) {
+
+}
+
 void fn_803081EC(void) {
     fn_80307CCC();
 }
