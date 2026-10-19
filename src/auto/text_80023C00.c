@@ -58,6 +58,11 @@ void fn_800289C8(void *arg0) {
     fn_80028948(M2C_FIELD(arg0, s32 *, 0x6C));
 }
 
+void fn_8002B83C(s32 arg0, void *arg1) {
+    M2C_UNK fn_801BFDF8(s32, s32);
+    fn_801BFDF8(M2C_FIELD(arg1, s32 *, 0x18), arg0);
+}
+
 void fn_8002B868(void) {
 
 }
