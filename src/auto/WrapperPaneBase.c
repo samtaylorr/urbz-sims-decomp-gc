@@ -1,6 +1,19 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+typedef struct {
+    s32 x;
+    s32 y;
+} WrapperPanePoint;
+
+typedef struct {
+    u8 pad0[0x1C];
+    WrapperPanePoint pos;
+    WrapperPanePoint size;
+    u8 pad2C[0x40 - 0x2C];
+    s32 unk40[1];
+} WrapperPaneBase;
+
 void fn_800CD09C(void);
 void fn_800CCF70(void) {
     fn_800CD09C();
@@ -68,6 +81,13 @@ s32 fn_800D0788(s32 *self) {
     return self[6];
 }
 
+void fn_800D0790(s32 *self, s32 *a, s32 *b) {
+    self[8] = a[1];
+    self[7] = a[0];
+    self[10] = b[1];
+    self[9] = b[0];
+}
+
 extern s32 fn_80248808(s32);
 void fn_800D07BC(s32 *self, s32 arg) {
     self[14] = arg;
@@ -78,7 +98,7 @@ void fn_800D07BC(s32 *self, s32 arg) {
     }
 }
 
-s32 fn_800D0804(s32 *self, s32 i) {
-    return self[16 + i];
+s32 fn_800D0804(u8 *self, s32 i) {
+    return ((s32 *)(self + 0x40))[i];
 }
 
