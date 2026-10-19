@@ -392,6 +392,11 @@ f32 fn_8039DB1C(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0x10);
 }
 
+void fn_8039DB88(void *arg0, f32 farg0) {
+    M2C_FIELD(arg0, f32 *, 0x14) = farg0;
+    M2C_FIELD(arg0, s32 *, 4) = (s32) (M2C_FIELD(arg0, s32 *, 4) & 0xFFFFFFFD);
+}
+
 void fn_8039DC8C(void) {
 
 }
