@@ -191,6 +191,10 @@ s32 fn_8026BBB4(void) {
     return ((u16) *(u16 *)0xCC005036 >> 0xFU) & 1;
 }
 
+s32 fn_8026BBF4(void) {
+    return (*(u16 *)0xCC00503A << 5) & 0xFFFE0;
+}
+
 extern s32 lbl_80496028;
 s32 fn_8026BC30(void) {
     return lbl_80496028;
