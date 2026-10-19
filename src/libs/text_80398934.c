@@ -239,6 +239,24 @@ void fn_8039AC6C(s32 arg0, s32 arg1, s32 arg2) {
     ((void (*)(void *, s32))fn_8018EA6C)(p, 2);
 }
 
+s32 fn_8039ACC4(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    struct {
+        void *vtbl;
+        s32 unk4;
+        s32 unk8;
+    } tmp, *p;
+    u8 out[8];
+    s32 ret;
+
+    p = &tmp;
+    tmp.unk4 = arg0;
+    tmp.vtbl = lbl_80406D08;
+    p->unk8 = arg2;
+    ret = fn_8018E70C(out, p, arg4, arg1, arg3);
+    ((void (*)(void *, s32))fn_8018EA6C)(p, 2);
+    return ret;
+}
+
 void fn_8018EA6C(void);
 void fn_8039AD30(void) {
     fn_8018EA6C();
