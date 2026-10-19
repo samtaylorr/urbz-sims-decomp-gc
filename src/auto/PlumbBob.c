@@ -230,6 +230,11 @@ void fn_80089604(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
 
+f32 fn_80089648(void) {
+    extern f32 lbl_804966A0;
+    return lbl_804966A0;
+}
+
 extern void fn_802D20E8(void *);
 void fn_80089698(void *self, s32 flags) {
     if (flags & 1) {
