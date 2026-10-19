@@ -388,6 +388,16 @@ s32 fn_80269134(void) {
     return lbl_80495F8C;
 }
 
+void fn_80269C78(u32 arg0, s32 arg1, s32 arg2) {
+    M2C_UNK fn_80269B90(s32, s32);
+    M2C_UNK fn_80269C04(s32, s32);
+    if (arg0 == 0U) {
+        fn_80269B90(arg1, arg2);
+        return;
+    }
+    fn_80269C04(arg1, arg2);
+}
+
 void fn_8026AD18(void) {
     M2C_UNK fn_8025F710();
     fn_8025F710();
