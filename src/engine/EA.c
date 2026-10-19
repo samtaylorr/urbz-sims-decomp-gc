@@ -382,6 +382,22 @@ s32 fn_802DF350(void) {
     return 0;
 }
 
+s32 fn_802DF4B8(s32 arg0, s32 arg1) {
+    s32 fn_80248640(s32, M2C_UNK);
+    M2C_UNK fn_80248784(s32, s32);
+    M2C_UNK fn_802DF3F0(s32);
+    s32 temp_r3;
+
+    temp_r3 = fn_80248640(arg1, 0x3A);
+    if ((temp_r3 != 0) && (temp_r3 == (s32) (arg1 + 1))) {
+        fn_80248784(arg0, temp_r3 + 1);
+    } else if (arg0 != arg1) {
+        fn_80248784(arg0, arg1);
+    }
+    fn_802DF3F0(arg0);
+    return arg0;
+}
+
 void fn_802DF890(void *arg0, s32 arg1) {
     M2C_UNK fn_802DF924();
     if ((s32) M2C_FIELD(arg0, s32 *, 8) != 0) {
