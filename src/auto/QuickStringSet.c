@@ -369,11 +369,11 @@ s32 fn_800FB7B0(void *arg0, s32 arg1, s32 arg2) {
         n = *(s32 *)(p - 4);
     }
     r = fn_803A053C(p, p + n * 8, arg2);
-    if (r == 0) {
-        return -1;
+    if (r != 0) {
+        *(s32 *)((u8 *)arg0 + 4) = r;
+        return 0;
     }
-    *(s32 *)((u8 *)arg0 + 4) = r;
-    return 0;
+    return -1;
 }
 
 s16 fn_800FB878(void *arg0) {
