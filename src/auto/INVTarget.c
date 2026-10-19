@@ -110,6 +110,22 @@ void fn_801DCC94(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x88) = (s32) M2C_FIELD(arg0, s32 *, 0x84);
 }
 
+void fn_801DFB28(void **arg0) {
+    void *temp_r9;
+    void *var_r31;
+
+    var_r31 = *arg0;
+    if (var_r31 != NULL) {
+        do {
+            if ((s32) M2C_FIELD(var_r31, s32 *, 8) > 0x32) {
+                temp_r9 = M2C_FIELD(var_r31, void **, 0xC);
+                M2C_FIELD(temp_r9, M2C_UNK (**)(void *), 0xC)(temp_r9);
+            }
+            var_r31 = M2C_FIELD(var_r31, void **, 4);
+        } while (var_r31 != NULL);
+    }
+}
+
 s32 fn_801DFBE0(void) {
     s32 fn_801DF724();
     M2C_UNK fn_802D1FC8(M2C_UNK);
