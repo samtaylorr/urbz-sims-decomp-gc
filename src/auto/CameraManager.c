@@ -42,7 +42,8 @@ void fn_80014F24(s32 *arg0, s32 arg1, s32 arg2) {
 }
 
 s32 fn_80014F30(s32 *arg0, s32 arg1) {
-    return *(s32 *)(arg1 * 4 + (s32)arg0);
+    s32 off = arg1 << 2;
+    return *(s32 *)((s32)arg0 + off);
 }
 
 void fn_80014F3C(void *arg0) {
