@@ -124,6 +124,12 @@ void fn_801F83C4(void) {
 
 }
 
+void fn_801F9D38(s32 arg0) {
+    M2C_UNK fn_801F9AE0(s32);
+    fn_801F9C80();
+    fn_801F9AE0(arg0);
+}
+
 u8 fn_801F9D6C(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 0xDC);
 }
