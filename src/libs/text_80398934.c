@@ -152,6 +152,10 @@ s32 fn_803AC3F0(void) {
     return 1;
 }
 
+s32 fn_803AC408(void) {
+    return 1;
+}
+
 s32 fn_803AE064(void) {
     return 0;
 }
