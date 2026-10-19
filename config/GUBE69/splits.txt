@@ -466,7 +466,10 @@ engine/EStringRedBlackTreeNoCase.c:
 	.text       start:0x803640F8 end:0x8036A768
 
 engine/text_8036A768.c:
-	.text       start:0x8036A768 end:0x80378E78
+	.text       start:0x8036A768 end:0x8036A91C
+
+engine/ScalarDecomp.c:
+	.text       start:0x8036A91C end:0x80378E78
 
 sdk/text_80378E78.c:
 	.text       start:0x80378E78 end:0x8038FC80
