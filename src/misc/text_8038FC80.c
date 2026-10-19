@@ -11,3 +11,8 @@ s32 fn_8038FDCC(void) {
     return lbl_804964BC;
 }
 
+extern s32 lbl_804964B8;
+s32 fn_8038FDD4(void) {
+    return lbl_804964B8;
+}
+
