@@ -25,6 +25,10 @@ s32 fn_801303A8(void) {
     return lbl_80494480;
 }
 
+void fn_801303B0(void (*cb)(void)) {
+    lbl_80494480 = cb;
+}
+
 s32 fn_80137E2C(void) {
     return 0;
 }
