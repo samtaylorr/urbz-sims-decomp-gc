@@ -111,3 +111,8 @@ void fn_80105C28(void) {
 
 }
 
+void fn_80105FB0(void) {
+    M2C_UNK fn_80105E78(M2C_UNK, M2C_UNK);
+    fn_80105E78(1, 0xFFFF);
+}
+
