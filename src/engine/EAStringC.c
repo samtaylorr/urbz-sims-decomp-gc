@@ -13,6 +13,16 @@ void fn_80299AF4(s32 *arg0) {
     *arg0 = (temp_r0 & 0xF000FFFF) | ((temp_r0 & 0x0FFF0000) + 0x10000);
 }
 
+void fn_80299B6C(void *arg0, s32 arg1) {
+    s32 temp_r0;
+
+    temp_r0 = M2C_FIELD(arg0, s32 *, 0x60) & 0xFFFFFFFE;
+    M2C_FIELD(arg0, s32 *, 0x60) = temp_r0;
+    if (arg1 != 0) {
+        M2C_FIELD(arg0, s32 *, 0x60) = (s32) (temp_r0 | 1);
+    }
+}
+
 s32 fn_80299B8C(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x60) & 1;
 }
