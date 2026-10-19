@@ -88,6 +88,10 @@ s32 fn_8010D220(void) {
     return 0;
 }
 
+void fn_8010D228(void) {
+
+}
+
 extern s32 lbl_80494418;
 void fn_8010D22C(void (*cb)(void)) {
     lbl_80494418 = cb;
