@@ -7,6 +7,57 @@ void *fn_801C9904(void *self) {
     return self;
 }
 
+s8 fn_801C9BC8(void *arg0, s32 arg1) {
+    switch (arg1) {                                 /* irregular */
+    case 3:
+        return (s8) M2C_FIELD(arg0, u8 *, 0x89);
+    case 4:
+        return (s8) M2C_FIELD(arg0, u8 *, 0x8B);
+    case 5:
+        return (s8) M2C_FIELD(arg0, u8 *, 0x8C);
+    case 6:
+        return (s8) M2C_FIELD(arg0, u8 *, 0x8D);
+    case 1:
+        return (s8) M2C_FIELD(arg0, u8 *, 0x87);
+    case 2:
+        return (s8) M2C_FIELD(arg0, u8 *, 0x88);
+    case 7:
+        return (s8) M2C_FIELD(arg0, u8 *, 0x8E);
+    case 0:
+        return (s8) M2C_FIELD(arg0, u8 *, 0x86);
+    case 8:
+        return (s8) M2C_FIELD(arg0, u8 *, 0x8F);
+    case 9:
+        return (s8) M2C_FIELD(arg0, u8 *, 0x90);
+    case 10:
+        return (s8) M2C_FIELD(arg0, u8 *, 0x91);
+    case 11:
+        return (s8) M2C_FIELD(arg0, u8 *, 0x92);
+    case 12:
+        return (s8) M2C_FIELD(arg0, u8 *, 0x93);
+    case 13:
+        return (s8) M2C_FIELD(arg0, u8 *, 0x94);
+    case 14:
+        return (s8) M2C_FIELD(arg0, u8 *, 0xA1);
+    case 15:
+        return (s8) M2C_FIELD(arg0, u8 *, 0xA2);
+    case 18:
+        return (s8) M2C_FIELD(arg0, u8 *, 0xA5);
+    case 16:
+        return (s8) M2C_FIELD(arg0, u8 *, 0xA3);
+    case 17:
+        return (s8) M2C_FIELD(arg0, u8 *, 0xA4);
+    case 21:
+    case 19:
+        return (s8) M2C_FIELD(arg0, u8 *, 0xA6);
+    case 20:
+    case 22:
+        return (s8) M2C_FIELD(arg0, u8 *, 0xA7);
+    default:
+        return 0;
+    }
+}
+
 void fn_801C9DC0(void *arg0, s32 arg1, s8 arg2) {
     switch (arg1) {                                 /* irregular */
     case 3:
