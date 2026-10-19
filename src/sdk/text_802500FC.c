@@ -78,6 +78,15 @@ void fn_80255E5C(s32 arg0, s32 arg1) {
     lbl_80495E34 = arg1;
 }
 
+s32 fn_80256504(s32 arg0) {
+    extern s32 lbl_80495E40;
+    s32 temp_r0;
+
+    temp_r0 = lbl_80495E40;
+    lbl_80495E40 = arg0;
+    return temp_r0;
+}
+
 void fn_80258364(void) {
 
 }
