@@ -187,6 +187,10 @@ void fn_8026B8F4(void) {
     lbl_80494AB8 = 0;
 }
 
+s32 fn_8026BBB4(void) {
+    return ((u16) *(u16 *)0xCC005036 >> 0xFU) & 1;
+}
+
 extern s32 lbl_80496028;
 s32 fn_8026BC30(void) {
     return lbl_80496028;
