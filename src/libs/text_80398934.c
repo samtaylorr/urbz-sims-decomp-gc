@@ -308,6 +308,10 @@ void fn_8039C234(s32 *self, s32 flags) {
     }
 }
 
+void fn_8039C268(void) {
+
+}
+
 void fn_8039C32C(void) {
     fn_8018EA6C();
 }
