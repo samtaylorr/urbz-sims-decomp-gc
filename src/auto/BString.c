@@ -1798,6 +1798,10 @@ s32 fn_800E3BA4(void *arg0) {
     return M2C_FIELD(M2C_FIELD(arg0, void **, 8), s32 *, 0x8C);
 }
 
+s32 fn_800E3E6C(void *arg0) {
+    return M2C_FIELD(M2C_FIELD(arg0, void **, 0x38), s32 *, 0xC);
+}
+
 f32 fn_800E416C(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0x4C);
 }
