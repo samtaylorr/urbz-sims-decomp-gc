@@ -72,6 +72,12 @@ s32 fn_8010B9DC(void *arg0) {
     return (s32) (M2C_FIELD(arg0, s32 *, 0x28) - M2C_FIELD(arg0, s32 *, 0x24)) >> 2;
 }
 
+void fn_8010BD14(s32 arg0, s32 arg1) {
+    M2C_UNK fn_800F22F0(s32, s32);
+    s32 fn_800F7138(s32);
+    fn_800F22F0(arg0 + 4, fn_800F7138(arg1));
+}
+
 s32 fn_8010BD50(void) {
     return 0;
 }
