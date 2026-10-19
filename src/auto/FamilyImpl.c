@@ -38,6 +38,10 @@ s32 fn_8010C050(char *self) {
     return *(s32 *)(self + 0xC);
 }
 
+s32 fn_8010C098(s32 *self) {
+    return self[6];
+}
+
 s32 fn_8010C13C(void) {
     return 0;
 }
