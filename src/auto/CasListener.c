@@ -416,6 +416,17 @@ s32 fn_801C63F8(void *arg0) {
     return fn_801CE7E4(temp_r0);
 }
 
+s32 fn_801C642C(void *arg0) {
+    s32 fn_801CE808(s32);
+    s32 temp_r0;
+
+    temp_r0 = M2C_FIELD(arg0, s32 *, 0x14);
+    if (temp_r0 == 0) {
+        return 0;
+    }
+    return fn_801CE808(temp_r0);
+}
+
 f32 fn_801C6460(void *arg0) {
     f32 fn_801CE82C(void *);
     extern const f32 lbl_803DDF5C[];
