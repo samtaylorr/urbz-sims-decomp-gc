@@ -50,6 +50,11 @@ s32 fn_80065AC4(void) {
     return 0;
 }
 
+void *fn_80066B10(u32 size, void *p);
+void *fn_80066B10(u32 size, void *p) {
+    return p;
+}
+
 void fn_80066B40(void) {
     fn_80065ADC();
 }
