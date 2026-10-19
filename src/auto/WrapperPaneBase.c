@@ -23,6 +23,10 @@ void fn_800CEEC8(void) {
 
 }
 
+void fn_800CF02C(void) {
+
+}
+
 void fn_800CF648(s32 *self) {
     self[1] = 1;
 }
