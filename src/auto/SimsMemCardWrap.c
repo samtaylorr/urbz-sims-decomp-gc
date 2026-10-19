@@ -212,6 +212,12 @@ f32 fn_800AB854(void) {
     return fn_800AB814() - lbl_804966AC;
 }
 
+f32 fn_800AB8A8(void) {
+    f32 fn_800AB814();
+    extern f32 lbl_804966B0;
+    return fn_800AB814() - lbl_804966B0;
+}
+
 void fn_800ABD50(void) {
 
 }
