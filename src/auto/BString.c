@@ -3072,6 +3072,29 @@ void fn_800EEDEC(void) {
     fn_800EC8E0();
 }
 
+s32 fn_800EEF1C(s32 arg0, s32 arg1, u32 arg2, u32 arg3) {
+    M2C_UNK fn_800EC9AC(s32);
+    M2C_UNK fn_800ECC34(s32, s32, u32);
+    s32 temp_r28;
+    u32 var_r5;
+
+    if (arg2 > fn_800EF6F8(arg1)) {
+        fn_800EAF5C();
+    }
+    if (fn_800EF6F8(arg1) != 0) {
+        temp_r28 = fn_800EAFCC(arg1) + arg2;
+        if (arg3 > (u32) (fn_800EF6F8(arg1) - arg2)) {
+            var_r5 = fn_800EF6F8(arg1) - arg2;
+        } else {
+            var_r5 = arg3;
+        }
+        fn_800ECC34(arg0, temp_r28, var_r5);
+    } else {
+        fn_800EC9AC(arg0);
+    }
+    return arg0;
+}
+
 void fn_800EF048(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     M2C_UNK fn_800EC3E4(s32, s32, s32, s32, s32);
     if (arg3 == -1) {
