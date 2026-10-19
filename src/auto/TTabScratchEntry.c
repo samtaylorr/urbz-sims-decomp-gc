@@ -22,6 +22,10 @@ s32 fn_8019B89C(void *arg0) {
     return M2C_FIELD(arg0, u16 *, 0x68) & 0x1FF;
 }
 
+s32 fn_8019B8A8(void *arg0) {
+    return ((u16) M2C_FIELD(arg0, u16 *, 0x68) >> 9U) & 1;
+}
+
 void fn_8019B8B4(void *arg0, s16 arg1) {
     M2C_FIELD(arg0, s16 *, 0x6A) = arg1;
 }
