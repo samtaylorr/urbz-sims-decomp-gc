@@ -6523,6 +6523,13 @@ void *fn_803BB9CC(void *self) {
     return self;
 }
 
+s32 *fn_803BBA58(s32 *self, s32 *other);
+s32 *fn_803BBA58(s32 *self, s32 *other) {
+    fn_80399D4C(self, other[1], 0);
+    fn_80399D20((s32 *)self[0], (s32 *)other[0], other[1]);
+    return self;
+}
+
 void fn_803BBD88(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 4) = arg1;
     M2C_FIELD(arg0, s32 *, 0) = arg1;
