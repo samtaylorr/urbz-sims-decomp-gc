@@ -16,3 +16,8 @@ void fn_80332EF8(void) {
     fn_80337430();
 }
 
+void fn_80332F18(void) {
+    M2C_UNK fn_80332E6C(M2C_UNK, M2C_UNK);
+    fn_80332E6C(1, 0xFFFF);
+}
+
