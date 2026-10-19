@@ -65,3 +65,7 @@ void fn_80241934(void) {
 
 }
 
+s32 fn_80241A90(void) {
+    return -1;
+}
+
