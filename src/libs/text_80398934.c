@@ -130,6 +130,12 @@ void fn_8039A528(s32 *self, s32 n) {
     }
 }
 
+void fn_8039A7A4(s32 *self, s32 n) {
+    while (--n != -1) {
+        self++;
+    }
+}
+
 void fn_8039A7C0(void *self) {
     ((s32 *)self)[0] = 0;
     ((s32 *)self)[2] = 0;
