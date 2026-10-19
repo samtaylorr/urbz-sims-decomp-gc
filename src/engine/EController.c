@@ -22,6 +22,13 @@ void fn_803105B0(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 4) = arg1;
 }
 
+void fn_80310728(void *arg0) {
+    M2C_FIELD(M2C_FIELD(arg0, void **, 0x200), s32 *, 0x20) = 0;
+    M2C_FIELD(M2C_FIELD(arg0, void **, 0x200), s32 *, 0x18) = 0;
+    M2C_FIELD(M2C_FIELD(arg0, void **, 0x1FC), s32 *, 0x20) = 0;
+    M2C_FIELD(M2C_FIELD(arg0, void **, 0x1FC), s32 *, 0x18) = 0;
+}
+
 s32 fn_80310750(void) {
     return 0;
 }
