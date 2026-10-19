@@ -55,3 +55,7 @@ u8 *fn_80185E9C(u8 *self) {
     return self + 8;
 }
 
+s32 fn_80186030(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x4D0);
+}
+
