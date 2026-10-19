@@ -58,6 +58,10 @@ void fn_801B3908(s32 *self, s32 value) {
     *self = value;
 }
 
+void fn_801B3910(void *arg0, s16 arg1) {
+    M2C_FIELD(arg0, s16 *, 4) = arg1;
+}
+
 void fn_801B3C50(void) {
 
 }
