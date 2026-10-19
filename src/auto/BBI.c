@@ -224,6 +224,13 @@ u16 fn_80063858(void) {
     return lbl_80491ED2[0];
 }
 
+extern void fn_800636F0(void);
+extern void fn_800637B8(void);
+extern u8 lbl_803C7F2C[];
+void fn_80063864(s32 arg0) {
+    fn_802D6A90(lbl_80491EBC, fn_800636F0, fn_80063798, fn_800637B8, arg0, lbl_803C7F2C, lbl_80491E44);
+}
+
 void fn_800638B8(void) {
     fn_802D2430();
 }
