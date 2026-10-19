@@ -10,6 +10,12 @@ s32 fn_803390A4(void) {
     return 0;
 }
 
+void fn_8033915C(s32 arg0) {
+    if (arg0 != -1) {
+        fn_8033930C();
+    }
+}
+
 extern s32 lbl_80494F80;
 s32 fn_80339258(void) {
     s32 temp_r3;
