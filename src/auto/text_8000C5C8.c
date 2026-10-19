@@ -31,6 +31,14 @@ void fn_8000C66C(void) {
     lbl_8049664C = 1;
 }
 
+void fn_8000C6E4(void) {
+    extern void **lbl_80496220;
+    extern s32 lbl_8049664C;
+    char *vt = (char *)*lbl_80496220;
+    (*(void (**)(void *))(vt + 0x4C))((char *)lbl_80496220 + *(s16 *)(vt + 0x48));
+    lbl_8049664C = 1;
+}
+
 void fn_8000C8E0(void) {
     M2C_UNK fn_8010C96C(s32, M2C_UNK);
     M2C_UNK fn_8010CD4C(s32);
