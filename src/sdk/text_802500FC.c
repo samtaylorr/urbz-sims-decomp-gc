@@ -42,6 +42,10 @@ void fn_80253990(void) {
     lbl_80495E10 = 1;
 }
 
+s32 fn_80254A24(void) {
+    return *(s32 *)0x800000C8;
+}
+
 void fn_80254F64(void) {
 
 }
