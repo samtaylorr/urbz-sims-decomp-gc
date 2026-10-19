@@ -44,6 +44,15 @@ void fn_8032B9E4(void) {
 
 }
 
+void fn_8032BF88(s32 arg0) {
+    M2C_UNK fn_8032BF30();
+    M2C_UNK fn_8032C204(s32);
+    M2C_UNK fn_803BC284(s32);
+    fn_8032BF30();
+    fn_803BC284(arg0 + 0x130);
+    fn_8032C204(arg0);
+}
+
 s32 fn_8032C194(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x134);
 }
