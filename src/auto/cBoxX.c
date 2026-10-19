@@ -45,6 +45,17 @@ void fn_80100DD8(s32 arg0) {
     fn_80100FB4(arg0);
 }
 
+void fn_80100EDC(void *arg0) {
+    M2C_UNK fn_800F97E8(s32, M2C_UNK);
+    s32 temp_r0;
+
+    temp_r0 = M2C_FIELD(arg0, s32 *, 0x78);
+    M2C_FIELD(arg0, s32 *, 0x88) = (s32) (M2C_FIELD(arg0, s32 *, 0x88) + 1);
+    if (temp_r0 != 0) {
+        fn_800F97E8(temp_r0, 1);
+    }
+}
+
 void fn_80101300(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0xC) = arg1;
     M2C_FIELD(arg0, s32 *, 4) = 1;
