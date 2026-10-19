@@ -135,3 +135,7 @@ u8 fn_80331364(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 0x5C);
 }
 
+s32 fn_8033136C(void *arg0) {
+    return ((u32) M2C_FIELD(arg0, u32 *, 0x64) >> 2U) & 1;
+}
+
