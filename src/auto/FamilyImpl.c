@@ -62,6 +62,12 @@ void fn_8010B568(void **self, s32 flags) {
     }
 }
 
+void fn_8010B9A0(s32 arg0, s32 arg1) {
+    s32 fn_800F3304(s32);
+    M2C_UNK fn_800F7148(s32, s32);
+    fn_800F7148(arg1, fn_800F3304(arg0 + 4));
+}
+
 s32 fn_8010B9DC(void *arg0) {
     return (s32) (M2C_FIELD(arg0, s32 *, 0x28) - M2C_FIELD(arg0, s32 *, 0x24)) >> 2;
 }
