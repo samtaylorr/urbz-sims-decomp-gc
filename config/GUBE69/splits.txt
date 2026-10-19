@@ -448,7 +448,10 @@ engine/ENgcGraphics.c:
 	.text       start:0x8033FA18 end:0x8034058C
 
 engine/text_8034058C.c:
-	.text       start:0x8034058C end:0x80378E78
+	.text       start:0x8034058C end:0x80340634
+
+engine/ENgcMemoryCard.c:
+	.text       start:0x80340634 end:0x80378E78
 
 sdk/text_80378E78.c:
 	.text       start:0x80378E78 end:0x8038FC80

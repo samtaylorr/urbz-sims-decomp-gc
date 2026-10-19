@@ -437,6 +437,7 @@ config.libs = [
             Object(NonMatching, "engine/ENgcEngine.c"),
             Object(NonMatching, "engine/ENgcGraphics.c"),
             Object(NonMatching, "engine/text_8034058C.c"),
+            Object(NonMatching, "engine/ENgcMemoryCard.c"),
             Object(NonMatching, "misc/text_8038FC80.c"),
             Object(NonMatching, "libs/text_80398934.c"),
         ],
