@@ -143,6 +143,17 @@ void fn_8012ACB0(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x28) = (s32) (arg1 - 1);
 }
 
+s32 fn_8012F7A8(s32 arg0, s32 arg1) {
+    M2C_UNK fn_800F68E0(s32);
+    M2C_UNK fn_800F68F0(s32, s32, M2C_UNK);
+    s32 temp_r30;
+
+    temp_r30 = arg0 + 0x2C;
+    fn_800F68E0(temp_r30);
+    fn_800F68F0(temp_r30, arg1, -1);
+    return 1;
+}
+
 void fn_8012FE00(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x180) = arg1;
 }
