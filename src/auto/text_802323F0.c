@@ -34,6 +34,13 @@ s32 fn_80232D34(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0xA4);
 }
 
+void fn_80232E38(s32 arg0, s32 arg1) {
+    M2C_UNK fn_80232528();
+    M2C_UNK fn_80232E74(s32, s32);
+    fn_80232528();
+    fn_80232E74(arg0, arg1);
+}
+
 s32 fn_80233460(s32 arg0) {
     return arg0 + 0x60;
 }
