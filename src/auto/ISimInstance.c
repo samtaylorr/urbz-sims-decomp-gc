@@ -192,3 +192,8 @@ s32 fn_80066DB0(s32 arg0) {
     return arg0 + 0x314;
 }
 
+void fn_80066DB8(void) {
+    M2C_UNK fn_80066A74(M2C_UNK, M2C_UNK);
+    fn_80066A74(1, 0xFFFF);
+}
+
