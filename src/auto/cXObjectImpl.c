@@ -297,3 +297,8 @@ void fn_80149468(void) {
 
 }
 
+void fn_80149474(void) {
+    M2C_UNK fn_801482C4(M2C_UNK, M2C_UNK);
+    fn_801482C4(1, 0xFFFF);
+}
+
