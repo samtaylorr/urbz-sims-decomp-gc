@@ -160,6 +160,10 @@ void fn_802F19C4(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x10) = arg1;
 }
 
+s32 fn_802F19CC(s32 arg0) {
+    return arg0 + 0x44;
+}
+
 void fn_802F19D4(void) {
 
 }
