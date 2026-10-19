@@ -882,6 +882,12 @@ void fn_800DEA64(void) {
 
 }
 
+void fn_800DF490(void *arg0) {
+    extern s32 lbl_80495A6C;
+    lbl_80495A6C = 0;
+    M2C_FIELD(arg0, s32 *, 0x1C) = 0;
+}
+
 void fn_800DF610(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x18) = 0;
 }
