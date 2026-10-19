@@ -9,6 +9,23 @@ void fn_8006CD40(void) {
     fn_8006D798();
 }
 
+extern s32 fn_802E0904(void *);
+extern s32 fn_802E091C(void *);
+extern void fn_8010CD4C(s32);
+extern void fn_800E3B38(void *, s32, f32);
+extern void fn_800490B0(void *);
+extern s32 lbl_8041E1C8[];
+extern s32 lbl_8041F754[];
+extern s32 lbl_80496644;
+extern f32 lbl_803C9700[];
+extern s32 lbl_804093B0[];
+void fn_8006E268(void *self) {
+    if (fn_802E0904(lbl_8041E1C8) == 0 && fn_802E091C(lbl_8041E1C8) == 0) {
+        fn_8010CD4C(lbl_80496644);
+        fn_800E3B38(self, 3, lbl_803C9700[0]);
+    }
+}
+
 s32 fn_800702F8(void) {
     return 0;
 }
