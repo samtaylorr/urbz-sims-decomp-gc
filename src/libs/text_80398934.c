@@ -4412,6 +4412,14 @@ void *fn_803B95CC(void *self) {
     return self;
 }
 
+extern void fn_803B95FC(s32);
+void fn_803B9648(s32 self, s32 flags) {
+    fn_803B95FC(self);
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_803B9750(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
