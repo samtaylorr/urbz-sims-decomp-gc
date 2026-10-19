@@ -245,3 +245,8 @@ void fn_802DFB40(void) {
 
 }
 
+void fn_802DFB70(void) {
+    M2C_UNK fn_802DFB44(M2C_UNK, M2C_UNK);
+    fn_802DFB44(1, 0xFFFF);
+}
+
