@@ -122,3 +122,8 @@ s32 fn_802F5B2C(s32 arg0) {
     return arg0 + 0xD0;
 }
 
+void fn_802F5B34(void) {
+    M2C_UNK fn_802F57C0(M2C_UNK, M2C_UNK);
+    fn_802F57C0(1, 0xFFFF);
+}
+
