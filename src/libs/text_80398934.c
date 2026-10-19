@@ -4946,6 +4946,12 @@ void *fn_803BFA88(void *self) {
     return self;
 }
 
+void fn_803BFAB8(s32 *self, s32 n) {
+    while (--n != -1) {
+        self++;
+    }
+}
+
 void fn_803C00C0(void **self, s32 flags) {
     *self = lbl_804194A0;
     if (flags & 1) {
