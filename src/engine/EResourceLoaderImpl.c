@@ -9,3 +9,10 @@ void fn_8031C768(void **self, s32 flags) {
         fn_802D20E8(self);
     }
 }
+
+void fn_802D8F90();
+void fn_8031CFE8(char *self) {
+    extern void fn_802D8F90(void *);
+    fn_802D8F90(self + 8);
+}
+
