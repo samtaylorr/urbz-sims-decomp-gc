@@ -154,6 +154,14 @@ void fn_8006A5E8(void) {
     lbl_8049664C = 1;
 }
 
+void fn_8006A640(void) {
+    M2C_UNK fn_8006AD28(s32);
+    extern s32 lbl_80494148;
+    fn_8006AD28(lbl_80494148);
+    lbl_80494148 = 0;
+    fn_8006A5E8();
+}
+
 void fn_8006C7F0(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
