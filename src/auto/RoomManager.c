@@ -26,6 +26,11 @@ void fn_8018FD20(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0xC) = arg1;
 }
 
+M2C_UNK *fn_8018FD28(void) {
+    extern M2C_UNK lbl_80495CC0;
+    return &lbl_80495CC0;
+}
+
 void fn_80191460(void) {
 
 }
