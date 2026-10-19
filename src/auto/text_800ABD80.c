@@ -17,6 +17,10 @@ void fn_800ACBE8(void) {
 
 }
 
+void fn_800ADBEC(void) {
+
+}
+
 s32 fn_800AEB28(void) {
     return 1;
 }
