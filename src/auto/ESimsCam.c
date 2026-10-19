@@ -50,6 +50,12 @@ s32 fn_80011F38(void *arg0) {
     return 1;
 }
 
+void fn_80014164(void *arg0, s32 arg1) {
+    if ((M2C_FIELD(arg0, s32 *, 0x238) ^ 1) & 1) {
+        M2C_FIELD(arg0, s32 *, 0x22C) = arg1;
+    }
+}
+
 void fn_80014A9C(void) {
 
 }
