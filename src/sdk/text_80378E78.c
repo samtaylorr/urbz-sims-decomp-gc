@@ -141,6 +141,27 @@ void *fn_80382840(void) {
     return lbl_8047E260;
 }
 
+void fn_80382CB8(void) {
+    extern s32 lbl_80496418;
+    extern s32 lbl_8049641C;
+    extern s32 lbl_80496420;
+    extern s32 lbl_80496424;
+    extern s32 lbl_80496428;
+    extern s32 lbl_8049642C;
+    extern s32 lbl_80496430;
+    extern s32 lbl_80496434;
+    extern s32 lbl_80496438;
+    lbl_80496438 = 0;
+    lbl_80496434 = 0;
+    lbl_80496430 = 0;
+    lbl_8049642C = 0;
+    lbl_80496428 = 0;
+    lbl_80496424 = 0;
+    lbl_80496420 = 0;
+    lbl_8049641C = 0;
+    lbl_80496418 = 0;
+}
+
 void fn_80382CE4(void) {
 
 }
