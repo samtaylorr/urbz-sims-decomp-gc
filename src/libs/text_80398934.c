@@ -1466,6 +1466,25 @@ s32 fn_803A5084(s32 arg0, s32 arg1, s32 arg2) {
     return ret;
 }
 
+extern u8 lbl_80410DF8[];
+s32 fn_803A51C0(s32 arg0, s32 arg1, s32 arg2) {
+    struct {
+        void *vtbl;
+        s32 unk4;
+        s32 unk8;
+    } tmp, *p;
+    u8 out[8];
+    s32 ret;
+
+    p = &tmp;
+    tmp.unk4 = arg0;
+    tmp.vtbl = lbl_80410DF8;
+    p->unk8 = arg2;
+    ret = fn_8018E850(out, p, arg1);
+    ((void (*)(void *, s32))fn_8018EA6C)(p, 2);
+    return ret;
+}
+
 extern u8 lbl_80411160[];
 void fn_803A5BC0(void **self, s32 flags) {
     *self = lbl_80411160;
