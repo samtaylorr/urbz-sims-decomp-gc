@@ -36,6 +36,10 @@ void fn_802DD5B0(void *self, void *arg) {
     fn_802D21E0(arg);
 }
 
+s32 fn_802DEC58(s32 *self) {
+    return self[1];
+}
+
 void fn_802DDC6C(void);
 void fn_802DEDAC(void) {
     fn_802DDC6C();
