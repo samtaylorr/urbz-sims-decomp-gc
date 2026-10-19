@@ -76,6 +76,11 @@ s32 fn_80311350(u32 *arg0, u32 *arg1) {
     return -1;
 }
 
+s32 fn_80311B2C(void *arg0) {
+    s32 fn_803119D4();
+    return M2C_FIELD(arg0, s32 *, 0x1B4) & ~fn_803119D4();
+}
+
 s32 fn_80311B60(s32 *self) {
     return *self;
 }
