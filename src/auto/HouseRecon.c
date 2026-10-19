@@ -32,6 +32,10 @@ void fn_80052904(s32 *arg0) {
     *arg0 |= 8;
 }
 
+void fn_80052914(s32 *arg0) {
+    *arg0 &= 0xFFFFFFFE;
+}
+
 s32 fn_80052954(u32 *arg0) {
     return ((u32) *arg0 >> 1U) & 1;
 }
