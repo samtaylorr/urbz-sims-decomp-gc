@@ -103,6 +103,10 @@ void fn_8019F3D0(void **self, s32 flags) {
     }
 }
 
+s32 fn_8019F4FC(u8 *self) {
+    return *(s32 *)(self + 0x20);
+}
+
 extern u8 lbl_80414970[];
 void fn_8019F844(void **self, s32 flags) {
     *self = lbl_80414970;
