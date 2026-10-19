@@ -47,6 +47,18 @@ void fn_803112BC(void *arg0) {
     M2C_FIELD(M2C_FIELD(arg0, void **, 0x200), s32 *, 0x78) = 1;
 }
 
+s32 fn_80311350(u32 *arg0, u32 *arg1) {
+    u32 temp_r0;
+    u32 temp_r9;
+
+    temp_r9 = *arg0;
+    temp_r0 = *arg1;
+    if (temp_r9 >= temp_r0) {
+        return temp_r9 > temp_r0;
+    }
+    return -1;
+}
+
 s32 fn_80311B60(s32 *self) {
     return *self;
 }
