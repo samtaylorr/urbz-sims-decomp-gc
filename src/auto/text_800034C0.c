@@ -36,8 +36,30 @@ void fn_800043E8(void) {
     fn_800C47CC();
 }
 
+extern u8 lbl_8041E1A0[];
+extern u8 lbl_8041E1C8[];
+void fn_80005118(s32 init, s32 code) {
+    s32 i;
+    if (code == 0xFFFF) {
+        if (init != 0) {
+            *(s32 *)(lbl_8041E1A0 + 0x18) = 0;
+            *(s32 *)(lbl_8041E1A0 + 0x14) = 0;
+            for (i = 5; i >= 0; i--) {
+                ((u16 *)(lbl_8041E1A0 + 0x1c))[i] = 0;
+            }
+            fn_8000381C(lbl_8041E1C8);
+        } else {
+            fn_8000386C(lbl_8041E1C8, 2);
+        }
+    }
+}
+
 s32 fn_800051A8(void) {
     return 0;
+}
+
+void fn_800051BC(void) {
+    fn_80005118(1, 0xFFFF);
 }
 
 void fn_802C5240(void);
