@@ -11,6 +11,10 @@ s32 fn_8023C218(void *arg0) {
     return ((u32) M2C_FIELD(arg0, u32 *, 0xC0) >> 7U) & 1;
 }
 
+s32 fn_8023C224(void *arg0) {
+    return ((u32) M2C_FIELD(arg0, u32 *, 0xC0) >> 4U) & 1;
+}
+
 s32 fn_8023C2C0(s32 arg0) {
     return arg0 + 0x5C;
 }
