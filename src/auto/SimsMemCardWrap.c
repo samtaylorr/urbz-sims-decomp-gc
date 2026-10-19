@@ -11,7 +11,7 @@ extern s32 lbl_80495810;
 extern s32 lbl_8045B438[];
 extern void fn_800A9720(void);
 extern void fn_800A9980(void *);
-extern void fn_803349A8(void *);
+extern void fn_803349A8(void *, s32);
 
 s32 fn_800A4964(void) {
     return 1;
@@ -66,7 +66,6 @@ void *fn_800A9950(void *self) {
 
 void fn_800A9BAC(s32 *self, s32 arg1) {
     self[0x42] = arg1;
-    fn_803349A8(lbl_8045B438);
 }
 
 s32 fn_800A9C74(void) {
