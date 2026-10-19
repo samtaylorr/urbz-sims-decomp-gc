@@ -82,6 +82,10 @@ void fn_80206190(void) {
 
 }
 
+s32 fn_80208AFC(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x104);
+}
+
 void fn_8020ACC8(void) {
 
 }
