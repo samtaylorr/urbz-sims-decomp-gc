@@ -560,6 +560,16 @@ void fn_802B3CA8(void) {
     lbl_80443314[0]();
 }
 
+s32 fn_802B461C(s32 arg0) {
+    extern s32 (*lbl_80443310[])(s32);
+    extern void fn_802A1E98(s32);
+    s32 r;
+
+    r = lbl_80443310[0](arg0 + 8) + 8;
+    fn_802A1E98(r);
+    return r;
+}
+
 s32 fn_802B46AC(void) {
     return 0;
 }
