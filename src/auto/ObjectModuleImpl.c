@@ -11,6 +11,10 @@ s32 fn_80149BDC(void) {
     return lbl_804944B0;
 }
 
+s16 fn_80149BE4(void *arg0) {
+    return M2C_FIELD(arg0, s16 *, 4);
+}
+
 void fn_8014C3F4(void) {
 
 }
