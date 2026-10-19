@@ -14,6 +14,10 @@ s32 fn_8018FD00(s32 *self) {
     return *self;
 }
 
+s32 fn_8018FD18(char *self) {
+    return *(s32 *)(self + 0xC);
+}
+
 s32 fn_80192C7C(void) {
     return lbl_80494538;
 }
