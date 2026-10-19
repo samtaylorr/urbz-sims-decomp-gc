@@ -126,6 +126,11 @@ void fn_8025AD58(void) {
     fn_8025AD78();
 }
 
+void fn_8025AE20(void) {
+    M2C_UNK fn_8025AE94();
+    fn_8025AE94();
+}
+
 s32 fn_8025D7FC(void) {
     return 4;
 }
