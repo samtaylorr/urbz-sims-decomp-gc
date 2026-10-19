@@ -10,6 +10,11 @@ void fn_801DCC94(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x88) = (s32) M2C_FIELD(arg0, s32 *, 0x84);
 }
 
+void fn_801E0308(void *arg0, void *arg1) {
+    M2C_FIELD(arg1, void **, 0x74) = (void *) M2C_FIELD(arg0, void **, 0x74);
+    M2C_FIELD(arg0, void **, 0x74) = arg1;
+}
+
 s32 fn_801E0428(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x74);
 }
