@@ -10,6 +10,15 @@ void fn_8031A4F8(void) {
 
 }
 
+s32 fn_8031AE8C(void *arg0) {
+    s32 temp_r3;
+
+    if (((s32) M2C_FIELD(arg0, s32 *, 0x94) == 0) || (temp_r3 = M2C_FIELD(arg0, s32 *, 0x90), ((temp_r3 > 1) == 0))) {
+        return 0;
+    }
+    return temp_r3 - 1;
+}
+
 s32 fn_8031B700(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x80);
 }
