@@ -11,6 +11,10 @@ void fn_802E3EF4(void) {
     fn_802E232C();
 }
 
+void fn_802E54C0(void) {
+
+}
+
 void fn_802E5700(void);
 void fn_802E5EA4(void) {
     fn_802E5700();
