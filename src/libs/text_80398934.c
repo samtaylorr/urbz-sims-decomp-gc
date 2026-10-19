@@ -4608,6 +4608,10 @@ s32 fn_803B8EE4(s32 *arg0) {
     return *arg0 + 8;
 }
 
+s32 fn_803B8EF0(s32 *arg0) {
+    return *arg0 + 8;
+}
+
 void fn_803B90C8(void *self) {
     ((s32 *)self)[0] = 0;
     ((s32 *)self)[2] = 0;
