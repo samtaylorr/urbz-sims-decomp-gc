@@ -5,6 +5,10 @@ void fn_802FFB78(void) {
 
 }
 
+void fn_802FFC3C(void) {
+
+}
+
 s32 fn_802FFC80(s32 *self) {
     return self[1];
 }
