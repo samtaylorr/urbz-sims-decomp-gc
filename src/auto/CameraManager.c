@@ -94,3 +94,9 @@ void fn_800170FC(void) {
 void fn_800176DC(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
+
+void fn_800177CC(void) {
+    M2C_UNK fn_80017100(M2C_UNK, M2C_UNK);
+    fn_80017100(1, 0xFFFF);
+}
+
