@@ -197,3 +197,7 @@ s32 fn_802F1A88(s32 *self) {
     return self[7];
 }
 
+s32 fn_802F1A90(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x14);
+}
+
