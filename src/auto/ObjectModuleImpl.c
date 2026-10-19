@@ -7,6 +7,13 @@ void fn_80149998(void *self, void *arg) {
     fn_800F68E0(arg);
 }
 
+void fn_80149AF4(void) {
+    M2C_UNK fn_8014A1E4();
+    M2C_UNK fn_802D1FC8(M2C_UNK);
+    fn_802D1FC8(0x6F0);
+    fn_8014A1E4();
+}
+
 s32 fn_80149BDC(void) {
     return lbl_804944B0;
 }
