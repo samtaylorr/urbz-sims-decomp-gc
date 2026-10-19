@@ -78,6 +78,10 @@ s32 fn_801B47E4(s32 *self) {
     return self[7];
 }
 
+s32 fn_801B47EC(s32 *self) {
+    return self[7];
+}
+
 extern s32 lbl_80495D88;
 void fn_801B5624(void) {
     fn_800F1A60((s32)&lbl_80495D88, 2);
