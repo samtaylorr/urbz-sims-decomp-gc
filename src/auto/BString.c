@@ -2628,9 +2628,9 @@ void fn_800EEAC4(void) {
     fn_800EC6BC();
 }
 
-void fn_800EE83C(void);
-void fn_800EEB3C(void) {
-    fn_800EE83C();
+u32 fn_800EE83C(void **arg0, u8 arg1, u32 arg2);
+void fn_800EEB3C(void **arg0, u8 arg1, u32 arg2) {
+    fn_800EE83C(arg0, arg1, arg2);
 }
 
 void fn_800EC774(void);
