@@ -383,6 +383,7 @@ config.libs = [
             Object(NonMatching, "engine/text_802E1A84.c"),
             Object(NonMatching, "engine/E3DWindow.c"),
             Object(NonMatching, "engine/EGraphics.c"),
+            Object(NonMatching, "engine/text_802EF524.c"),
             Object(NonMatching, "misc/text_8038FC80.c"),
             Object(NonMatching, "libs/text_80398934.c"),
         ],
