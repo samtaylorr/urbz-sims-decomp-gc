@@ -4494,6 +4494,12 @@ void fn_803BA438(s32 *self, s32 n) {
     }
 }
 
+void fn_803BA538(s32 *self, s32 n) {
+    while (--n != -1) {
+        self++;
+    }
+}
+
 void fn_803BA554(s32 *dst, s32 *src, s32 n) {
     while (--n != -1) {
         *dst++ = *src++;
