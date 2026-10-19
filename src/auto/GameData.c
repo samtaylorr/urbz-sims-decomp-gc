@@ -30,8 +30,8 @@ void fn_800454E0(s32 *self) {
     lbl_80495B9C = 0;
     self[0x50 / 4] = 0;
     lbl_80495BA0 = 0;
-    self[0x68 / 4] = 0;
     self[0x5C / 4] = 0;
+    self[0x68 / 4] = 0;
 }
 
 void fn_80045600(void) {
