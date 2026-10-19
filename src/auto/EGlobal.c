@@ -47,6 +47,11 @@ void fn_8004D3EC(void) {
 
 }
 
+void fn_8004D8E0(void *arg0) {
+    M2C_UNK fn_8004174C(s32);
+    fn_8004174C(M2C_FIELD(arg0, s32 *, 0x150));
+}
+
 extern u8 lbl_8041ED64[];
 void fn_8001E370(u8 *arg);
 void fn_8004D9D4(void) {
