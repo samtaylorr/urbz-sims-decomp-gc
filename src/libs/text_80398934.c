@@ -192,6 +192,14 @@ s32 *fn_8039A290(s32 *self, s32 *other) {
     return self;
 }
 
+void fn_8039A2DC(u8 *dst, u8 *src, s32 n) {
+    while (--n != -1) {
+        fn_8039A290((s32 *)dst, (s32 *)src);
+        src += 0xC;
+        dst += 0xC;
+    }
+}
+
 void fn_8039A4F8(s32 *self, s32 n) {
     while (--n != -1) {
         self++;
