@@ -148,6 +148,10 @@ u8 *fn_80223464(u8 *self) {
     return self + 8;
 }
 
+s32 fn_8022346C(s32 arg0) {
+    return arg0 + 0x20;
+}
+
 s32 fn_8022350C(s32 *self) {
     return *self;
 }
