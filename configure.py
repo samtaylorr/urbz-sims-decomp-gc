@@ -267,6 +267,7 @@ config.libs = [
         "objects": [
             Object(NonMatching, "auto/text_800034C0.c"),
             Object(NonMatching, "libsn/text_8023EBD8.c"),
+            Object(NonMatching, "clib/text_80241A98.c"),
         ],
     },
 ]

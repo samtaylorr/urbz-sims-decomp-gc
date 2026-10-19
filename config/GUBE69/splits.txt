@@ -13,4 +13,7 @@ auto/text_800034C0.c:
 	.text       start:0x800034C0 end:0x8023EBD8
 
 libsn/text_8023EBD8.c:
-	.text       start:0x8023EBD8 end:0x803C0D60
+	.text       start:0x8023EBD8 end:0x80241A98
+
+clib/text_80241A98.c:
+	.text       start:0x80241A98 end:0x803C0D60
