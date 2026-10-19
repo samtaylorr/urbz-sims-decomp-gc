@@ -4486,6 +4486,10 @@ void fn_803B8DE8(char *self) {
     fn_802ADE44(self + 8);
 }
 
+u8 *fn_803B8E0C(u8 *self) {
+    return self + 8;
+}
+
 s32 fn_803B8E14(void) {
     return 1;
 }
