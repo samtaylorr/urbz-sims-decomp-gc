@@ -255,6 +255,10 @@ s32 fn_80273868(u32 *arg0) {
     return ((u32) *arg0 >> 0x15U) & 1;
 }
 
+s32 fn_80273888(u32 *arg0) {
+    return ((u32) *arg0 >> 0x13U) & 3;
+}
+
 s32 fn_80273894(s32 *self) {
     return self[6];
 }
