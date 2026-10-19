@@ -5,6 +5,10 @@ void fn_8028D540(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x127C) = arg1;
 }
 
+s32 fn_80290008(s32 arg0) {
+    return arg0 & 0xFFFFFFFE;
+}
+
 s32 fn_80290010(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x24);
 }
