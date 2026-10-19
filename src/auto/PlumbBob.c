@@ -94,6 +94,21 @@ void fn_80068578(void) {
 
 }
 
+void fn_8006857C(void *arg0, s32 arg1) {
+    M2C_UNK fn_80067AA4(void *, s32, M2C_UNK);
+    s32 fn_801BFD60(s32);
+    s32 fn_801BFD7C(s32);
+    s32 var_r29;
+
+    var_r29 = 0;
+    if (arg1 == fn_801BFD7C(M2C_FIELD(arg0, s32 *, 0x1F4))) {
+        var_r29 = M2C_FIELD(arg0, s32 *, 0x1F4);
+    } else if (arg1 == fn_801BFD7C(M2C_FIELD(arg0, s32 *, 0x1F8))) {
+        var_r29 = M2C_FIELD(arg0, s32 *, 0x1F8);
+    }
+    fn_80067AA4(arg0, fn_801BFD60(var_r29), 5);
+}
+
 void fn_80068664(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x1CC) = 1;
 }
