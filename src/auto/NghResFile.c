@@ -32,6 +32,25 @@ s32 fn_80129550(void) {
     return 0x1C;
 }
 
+s32 fn_80129630(s32 arg0) {
+    s32 fn_801295D8(s32 *);
+    s32 sp8;
+    s32 var_r30;
+    s32 var_r31;
+
+    sp8 = 0;
+    M2C_FIELD(&sp8, s32 *, 4) = 0;
+    var_r30 = 0;
+    var_r31 = arg0;
+    if (var_r31 != 0) {
+        do {
+            var_r30 += 1;
+            var_r31 -= fn_801295D8(&sp8);
+        } while (var_r31 != 0);
+    }
+    return var_r30;
+}
+
 s32 fn_8012A8C0(void) {
     M2C_UNK fn_8012AF90();
     fn_8012AF90();
