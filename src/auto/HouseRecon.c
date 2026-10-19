@@ -72,3 +72,8 @@ void fn_80052B08(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x38C) = 0;
 }
 
+void fn_80052B14(void) {
+    M2C_UNK fn_80052798(M2C_UNK, M2C_UNK);
+    fn_80052798(1, 0xFFFF);
+}
+
