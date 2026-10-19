@@ -22,6 +22,10 @@ s32 fn_80338950(s32 *self) {
     return self[2];
 }
 
+s32 fn_80338958(char *self) {
+    return *(s32 *)(self + 0xC);
+}
+
 void fn_803365B8(void);
 void fn_80338970(void) {
     fn_803365B8();
