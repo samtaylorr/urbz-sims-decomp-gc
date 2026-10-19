@@ -498,6 +498,11 @@ s32 fn_803C014C(void) {
     return lbl_80493E04[0];
 }
 
+extern u16 lbl_80493E08[];
+u16 fn_803C0158(void) {
+    return lbl_80493E08[0];
+}
+
 void fn_803C0D34(void);
 void fn_803C0D04(void) {
     fn_803C0D34();
