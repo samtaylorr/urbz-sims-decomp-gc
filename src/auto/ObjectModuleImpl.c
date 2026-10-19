@@ -39,6 +39,11 @@ s32 fn_801506B4(void) {
     return 0;
 }
 
+void fn_80150FFC(s32 arg0) {
+    M2C_UNK fn_800F69E8(s32);
+    fn_800F69E8(arg0 + 0x560);
+}
+
 s32 fn_80151020(s32 arg0) {
     return arg0 + 4;
 }
