@@ -444,6 +444,7 @@ config.libs = [
             Object(NonMatching, "engine/EStringRedBlackTreeNoCase.c"),
             Object(NonMatching, "engine/text_8036A768.c"),
             Object(NonMatching, "engine/ScalarDecomp.c"),
+            Object(NonMatching, "engine/EFontCharacter.c"),
             Object(NonMatching, "misc/text_8038FC80.c"),
             Object(NonMatching, "libs/text_80398934.c"),
         ],
