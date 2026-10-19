@@ -30,7 +30,7 @@ s32 fn_800C4050(void) {
     return 1;
 }
 
-void fn_800C43D4(void) {
+void fn_800C43D4(void *self) {
 
 }
 
