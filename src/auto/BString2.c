@@ -22,6 +22,11 @@ s32 fn_800EF934(s32 *arg0) {
     return *arg0 + 4;
 }
 
+s32 fn_800EFDB0(void) {
+    s32 fn_800EFC28();
+    return fn_800EFC28() ^ 1;
+}
+
 s32 fn_800EFF00(void) {
     return 0;
 }
