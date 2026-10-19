@@ -21,6 +21,10 @@ s32 fn_80251874(void) {
     return lbl_804949A8;
 }
 
+void fn_8025187C(s32 arg0) {
+    lbl_80495E08 = arg0;
+}
+
 void fn_80254F64(void) {
 
 }
