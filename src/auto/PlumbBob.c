@@ -128,6 +128,13 @@ void fn_8006A2C8(void) {
 
 }
 
+void fn_8006A494(void *arg0) {
+    if (M2C_FIELD(arg0, s32 *, 0x48) != 0) {
+        M2C_FIELD(arg0, s32 *, 0x48) = 0;
+        M2C_FIELD(arg0, s32 *, 0x54) = 0;
+    }
+}
+
 s32 fn_8006A598(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x54);
 }
