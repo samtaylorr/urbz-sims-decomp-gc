@@ -108,6 +108,10 @@ s32 fn_80111F64(char *self) {
     return *(s32 *)(self + 0xC);
 }
 
+s32 fn_80111F6C(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x10);
+}
+
 s32 fn_80111F8C(s32 *self) {
     return self[7];
 }
