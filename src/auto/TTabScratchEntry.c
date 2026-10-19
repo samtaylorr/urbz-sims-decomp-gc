@@ -841,6 +841,13 @@ void fn_801A3D10(void) {
 
 }
 
+s32 fn_801A3D24(s32 arg0) {
+    if ((arg0 == 3) || (arg0 == 5) || (arg0 == 6) || (arg0 == 0xF) || (arg0 == 0x17)) {
+        return 1;
+    }
+    return 0;
+}
+
 u8 fn_801A4308(s32 arg0, s32 arg1) {
     return (u8) ((s32) ((arg0 * 0x10) | arg0) >> ((s32) (8 - arg1) >> 1));
 }
