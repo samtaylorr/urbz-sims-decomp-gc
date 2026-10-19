@@ -14,6 +14,10 @@ s16 fn_801B28E4(void *arg0) {
     return M2C_FIELD(arg0, s16 *, 4);
 }
 
+void fn_801B28EC(void *arg0, s16 arg1) {
+    M2C_FIELD(arg0, s16 *, 4) = arg1;
+}
+
 s32 fn_801B2D08(void) {
     return 0;
 }
