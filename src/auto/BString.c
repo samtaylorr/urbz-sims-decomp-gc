@@ -828,6 +828,11 @@ s32 fn_800DC6B4(void) {
     return lbl_80495A70;
 }
 
+void fn_800DC6BC(void) {
+    extern s32 lbl_80495A70;
+    lbl_80495A70 = 0;
+}
+
 void fn_800DE57C(void) {
 
 }
