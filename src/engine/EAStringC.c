@@ -83,6 +83,10 @@ s32 fn_802A201C(void *arg0) {
     return M2C_FIELD(arg0, s32 *, -4);
 }
 
+s32 fn_802A2024(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, -8);
+}
+
 void fn_802A204C(void);
 void fn_802A202C(void) {
     fn_802A204C();
