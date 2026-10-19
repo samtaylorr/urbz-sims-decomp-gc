@@ -10,6 +10,13 @@ void fn_801020E0(void **self, s32 flags) {
     }
 }
 
+void fn_801021BC(void **obj) {
+    if (obj != NULL) {
+        char *vt = (char *)*obj;
+        (*(void (**)(void *, s32))(vt + 0xC))((char *)obj + *(s16 *)(vt + 0x8), 3);
+    }
+}
+
 s32 fn_801023F4(void *arg0) {
     return M2C_FIELD(M2C_FIELD(arg0, void **, 8), s32 *, 0xC);
 }
