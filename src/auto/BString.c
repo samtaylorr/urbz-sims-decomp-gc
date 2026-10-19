@@ -2286,3 +2286,7 @@ void fn_800EEDEC(void) {
     fn_800EC8E0();
 }
 
+s32 fn_800EF6F8(void **arg0) {
+    return M2C_FIELD(*arg0, s32 *, 4);
+}
+
