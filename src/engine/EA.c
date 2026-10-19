@@ -27,6 +27,11 @@ void fn_802DAFB0(void) {
     fn_802DB018();
 }
 
+void fn_802D21E0(void *);
+void fn_802DD5B0(void *self, void *arg) {
+    fn_802D21E0(arg);
+}
+
 void fn_802DDC6C(void);
 void fn_802DEDAC(void) {
     fn_802DDC6C();
