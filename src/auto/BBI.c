@@ -1,6 +1,8 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+struct BBI_Vec3 { s32 a; s32 b; s32 c; };
+
 s32 fn_80059AC4(s32 *self) {
     return self[1];
 }
