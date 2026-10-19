@@ -235,6 +235,12 @@ void fn_80363918(void) {
 
 }
 
+void fn_8036391C(void *arg0) {
+    M2C_UNK fn_802CB930();
+    fn_802CB930();
+    M2C_FIELD(arg0, s32 *, 0x10) = (s32) (M2C_FIELD(arg0, s32 *, 0xC) * 2);
+}
+
 void fn_802D2FD0(void);
 void fn_80363C8C(void) {
     fn_802D2FD0();
