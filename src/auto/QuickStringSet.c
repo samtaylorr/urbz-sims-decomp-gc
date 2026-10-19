@@ -13,3 +13,7 @@ s32 fn_800F7EA0(void) {
     return 0;
 }
 
+s32 fn_800F7EA8(void) {
+    return 0;
+}
+
