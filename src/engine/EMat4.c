@@ -11,8 +11,8 @@ extern void *fn_802D0BC0(void);
 extern void fn_802CAA00(void *, s32);
 extern s32 lbl_80494DCC;
 extern u8 lbl_80446D34[];
-extern f32 lbl_803F02B0;
-extern f32 lbl_803F02C0;
+extern const f32 lbl_803F02B0[];
+extern const f32 lbl_803F02C0[];
 extern u8 lbl_803F02C8[];
 extern u8 lbl_8044490C[];
 extern s32 lbl_80496150;
@@ -190,17 +190,17 @@ void fn_802D0894(void *arg0) {
 }
 
 void fn_802D0960(void *arg0, f32 *src, s16 *dst) {
-    dst[0] = src[0] * lbl_803F02B0;
-    dst[1] = src[1] * lbl_803F02B0;
-    dst[2] = src[2] * lbl_803F02B0;
-    dst[3] = src[3] * lbl_803F02B0;
+    dst[0] = src[0] * *(f32 *)&lbl_803F02B0;
+    dst[1] = src[1] * *(f32 *)&lbl_803F02B0;
+    dst[2] = src[2] * *(f32 *)&lbl_803F02B0;
+    dst[3] = src[3] * *(f32 *)&lbl_803F02B0;
 }
 
 void fn_802D09E0(void *arg0, u16 *src, f32 *dst) {
-    dst[0] = src[0] * lbl_803F02C0;
-    dst[1] = src[1] * lbl_803F02C0;
-    dst[2] = src[2] * lbl_803F02C0;
-    dst[3] = src[3] * lbl_803F02C0;
+    dst[0] = (u32)src[0] * *(f32 *)&lbl_803F02C0;
+    dst[1] = (u32)src[1] * *(f32 *)&lbl_803F02C0;
+    dst[2] = (u32)src[2] * *(f32 *)&lbl_803F02C0;
+    dst[3] = (u32)src[3] * *(f32 *)&lbl_803F02C0;
 }
 
 void fn_802D0A8C(void) {
