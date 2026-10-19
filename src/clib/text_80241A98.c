@@ -5,3 +5,9 @@ void fn_80247D48(void);
 void fn_80248078(void) {
     fn_80247D48();
 }
+
+void fn_8024D324(void);
+void fn_8024CE64(void) {
+    fn_8024D324();
+}
+
