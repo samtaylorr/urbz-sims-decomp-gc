@@ -110,6 +110,25 @@ void fn_80255E5C(s32 arg0, s32 arg1) {
     lbl_80495E34 = arg1;
 }
 
+void fn_80255F1C(void *arg0) {
+    extern M2C_UNK ResetFunctionQueue_80495E38;
+    void *temp_r4;
+    void *temp_r5;
+
+    temp_r4 = M2C_FIELD(arg0, void **, 8);
+    temp_r5 = M2C_FIELD(arg0, void **, 0xC);
+    if (temp_r4 == NULL) {
+        M2C_FIELD(&ResetFunctionQueue_80495E38, void **, 4) = temp_r5;
+    } else {
+        M2C_FIELD(temp_r4, void **, 0xC) = temp_r5;
+    }
+    if (temp_r5 == NULL) {
+        M2C_FIELD(&ResetFunctionQueue_80495E38, void **, 0) = temp_r4;
+        return;
+    }
+    M2C_FIELD(temp_r5, void **, 8) = temp_r4;
+}
+
 s32 fn_80256504(s32 arg0) {
     extern s32 lbl_80495E40;
     s32 temp_r0;
