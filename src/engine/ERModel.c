@@ -28,6 +28,10 @@ void fn_80329838(void) {
 
 }
 
+s32 fn_8032A6F8(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x140);
+}
+
 void fn_8032B9E4(void) {
 
 }
