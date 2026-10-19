@@ -2642,6 +2642,23 @@ s32 fn_800EA9B0(s32 arg0) {
     return var_r30;
 }
 
+void fn_800EAAF8(s32 arg0, s32 arg1) {
+    s32 var_r31;
+
+    if (arg0 != 0) {
+        var_r31 = arg0 + 0x200;
+        if (arg0 != var_r31) {
+            do {
+                var_r31 -= 8;
+                fn_800EA6EC(var_r31, 0);
+            } while (arg0 != var_r31);
+        }
+    }
+    if (arg1 & 1) {
+        fn_802D20E8(arg0);
+    }
+}
+
 s32 fn_800EABC0(s32 arg0, s32 arg1) {
     return arg0 + (arg1 * 8);
 }
