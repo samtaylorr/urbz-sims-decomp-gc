@@ -380,6 +380,15 @@ s32 fn_80266A24(void) {
     return 1;
 }
 
+void fn_80266AE8(s32 arg0, s32 arg1) {
+    extern s32 lbl_80495F64;
+    extern s32 lbl_80495F68;
+    fn_8025465C();
+    lbl_80495F64 = arg0;
+    lbl_80495F68 = arg1;
+    fn_80254684();
+}
+
 s32 fn_80266B64(void) {
     return 1;
 }
