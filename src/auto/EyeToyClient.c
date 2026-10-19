@@ -12,6 +12,12 @@ void fn_80042A60(void (*cb)(void)) {
     lbl_804940B0 = cb;
 }
 
+void fn_80042A68(void) {
+    if (lbl_804940B0 != 0) {
+        lbl_804940B0();
+    }
+}
+
 extern void (*lbl_804940B0)(void);
 extern s32 lbl_8049407C;
 extern s32 lbl_80494084;
