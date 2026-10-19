@@ -1794,6 +1794,10 @@ void fn_800E3B80(s32 *self, s32 arg) {
     fn_800E3E40(self[2]);
 }
 
+s32 fn_800E3BA4(void *arg0) {
+    return M2C_FIELD(M2C_FIELD(arg0, void **, 8), s32 *, 0x8C);
+}
+
 f32 fn_800E416C(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0x4C);
 }
