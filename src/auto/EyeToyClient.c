@@ -66,6 +66,10 @@ s32 fn_80043218(void) {
     return 0xB;
 }
 
+s32 fn_80043220(void) {
+    return 5;
+}
+
 extern s32 lbl_804940A8;
 s32 fn_80043480(void) {
     return lbl_804940A8;
