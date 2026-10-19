@@ -26,3 +26,8 @@ void fn_8001D690(void) {
 
 }
 
+void fn_8001E734(void) {
+    M2C_UNK fn_8001E6AC(M2C_UNK, M2C_UNK);
+    fn_8001E6AC(1, 0xFFFF);
+}
+
