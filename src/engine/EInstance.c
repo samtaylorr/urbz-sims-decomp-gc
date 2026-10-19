@@ -20,3 +20,7 @@ s32 fn_802F19D8(void) {
     return 0;
 }
 
+s32 fn_802F19EC(void) {
+    return 0;
+}
+
