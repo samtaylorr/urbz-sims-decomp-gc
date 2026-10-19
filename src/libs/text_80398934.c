@@ -269,15 +269,16 @@ s32 fn_8039B594(s32 arg0, s32 arg1, s32 arg2) {
         void *vtbl;
         s32 unk4;
         s32 unk8;
-    } tmp;
-    u8 out[12];
+    } tmp, *p;
+    u8 out[8];
     s32 ret;
 
+    p = &tmp;
     tmp.unk4 = arg0;
     tmp.vtbl = lbl_80407128;
-    tmp.unk8 = arg2;
-    ret = fn_8018E850(out, &tmp, arg1);
-    ((void (*)(void *, s32))fn_8018EA6C)(&tmp, 2);
+    p->unk8 = arg2;
+    ret = fn_8018E850(out, p, arg1);
+    ((void (*)(void *, s32))fn_8018EA6C)(p, 2);
     return ret;
 }
 
@@ -310,6 +311,7 @@ void fn_802CB8D4(void *);
 void fn_8039B664(void *arg0) {
     s32 *node;
     s32 *next;
+    s32 data;
     s32 more;
 
     M2C_FIELD(arg0, s32 *, 0x20) = 0;
@@ -326,9 +328,10 @@ void fn_8039B664(void *arg0) {
         if (!more) {
             break;
         }
+        data = node[0];
         next = (s32 *)node[1];
-        if (M2C_FIELD(arg0, s32 *, 8) != 0 && node[0] != 0) {
-            fn_800F1A60(node[0], 3);
+        if (M2C_FIELD(arg0, s32 *, 8) != 0 && data != 0) {
+            fn_800F1A60(data, 3);
         }
         node = next;
     }
