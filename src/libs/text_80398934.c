@@ -4555,6 +4555,12 @@ void fn_803BAF00(void *self) {
     ((s32 *)self)[1] = 0;
 }
 
+void fn_803BB370(s32 *self, s32 n) {
+    while (--n != -1) {
+        self++;
+    }
+}
+
 extern void fn_803BB38C(void *);
 void fn_803BB38C(void *self) {
     ((s32 *)self)[0] = 0;
