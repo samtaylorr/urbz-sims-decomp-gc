@@ -127,6 +127,14 @@ void fn_8035BF0C(void) {
     }
 }
 
+void fn_8035BF24(void *arg0) {
+    extern s32 lbl_80495204;
+    if ((s32) lbl_80495204 != 0) {
+        lbl_80495204 = 0;
+    }
+    M2C_FIELD(arg0, s32 *, 0x4DC) = (s32) (M2C_FIELD(arg0, s32 *, 0x4DC) + 0x20);
+}
+
 extern s32 lbl_80495208;
 void fn_8035BF48(void) {
     if (lbl_80495208 != 0) {
