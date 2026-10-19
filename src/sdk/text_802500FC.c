@@ -156,3 +156,7 @@ void fn_80277430(void) {
 
 }
 
+void fn_802781E0(void) {
+
+}
+
