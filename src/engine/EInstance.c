@@ -124,6 +124,10 @@ void fn_802F1794(void) {
 
 }
 
+s32 fn_802F1798(void) {
+    return 0x32;
+}
+
 s32 fn_802F17AC(s32 *self) {
     return self[2];
 }
