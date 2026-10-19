@@ -23,6 +23,10 @@ s32 fn_802ACCFC(void) {
     return 0;
 }
 
+s32 fn_802ACF08(void) {
+    return 0;
+}
+
 void fn_802AE440(void);
 void fn_802AE5EC(void) {
     fn_802AE440();
