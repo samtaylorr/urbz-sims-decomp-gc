@@ -41,6 +41,11 @@ void fn_803805DC(void) {
 
 }
 
+void fn_80380754(void) {
+    extern s32 lbl_80496384;
+    lbl_80496384 = 0;
+}
+
 extern s32 lbl_80496380;
 s32 fn_80380AEC(void) {
     return lbl_80496380;
