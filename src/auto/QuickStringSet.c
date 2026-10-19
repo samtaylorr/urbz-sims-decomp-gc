@@ -71,6 +71,13 @@ void fn_800F77D4(void) {
     fn_800F788C();
 }
 
+void fn_800F77FC(void) {
+    M2C_UNK fn_800F788C();
+    M2C_UNK fn_802D1FC8(M2C_UNK);
+    fn_802D1FC8(0x14);
+    fn_800F788C();
+}
+
 extern u8 lbl_8040D2A8[];
 extern void fn_802D20E8(void *);
 void fn_800F78B8(void **self, s32 flags) {
