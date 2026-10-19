@@ -229,7 +229,10 @@ auto/text_801D6A64.c:
 	.text       start:0x801D6A64 end:0x801D6D0C
 
 auto/INVTarget.c:
-	.text       start:0x801D6D0C end:0x8023EBD8
+	.text       start:0x801D6D0C end:0x802323F0
+
+auto/text_802323F0.c:
+	.text       start:0x802323F0 end:0x8023EBD8
 
 libsn/text_8023EBD8.c:
 	.text       start:0x8023EBD8 end:0x80241A98
