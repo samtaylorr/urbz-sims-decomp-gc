@@ -18,3 +18,8 @@ void fn_80373BEC(void) {
     lbl_8049525C = 0;
 }
 
+void fn_80373E20(void) {
+    extern s32 lbl_80495260;
+    lbl_80495260 = 0;
+}
+
