@@ -830,6 +830,15 @@ s32 fn_8039D380(s32 *self) {
     return self[2];
 }
 
+void fn_8039A544(s32 *dst, s32 *src, s32 n);
+void fn_8039A610(void *self, s32 n, s32 arg2);
+s32 *fn_8039D388(s32 *self, s32 *other);
+s32 *fn_8039D388(s32 *self, s32 *other) {
+    fn_8039A610(self, other[1], 0);
+    fn_8039A544((s32 *)self[0], (s32 *)other[0], other[1]);
+    return self;
+}
+
 void fn_8039D8D8(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x38) = (s32) (M2C_FIELD(arg0, s32 *, 0x38) | 0x10000000);
 }
