@@ -105,6 +105,25 @@ void fn_80066A50(f32 *out, u8 *obj) {
     out[2] = p[2];
 }
 
+void fn_80066A74(s32 arg0, s32 arg1) {
+    extern s32 fn_802D6A90(void *, void *, void *, void *, s32, void *, void *);
+    extern void fn_80066B18(void);
+    extern void fn_80066B40(void);
+    extern void fn_80066B60(void *);
+    extern u8 lbl_80491CA0[];
+    extern u8 lbl_803C8578[];
+    extern u8 lbl_80491C50[];
+    extern s32 lbl_8049583C;
+    s32 i;
+    if (arg1 == 0xFFFF && arg0 != 0) {
+        for (i = 0; i < 3; i++) {
+        }
+        for (i = 0; i < 4; i++) {
+        }
+        lbl_8049583C = fn_802D6A90(lbl_80491CA0, fn_80066B18, fn_80066B40, fn_80066B60, 0, lbl_803C8578, lbl_80491C50);
+    }
+}
+
 void **fn_80066AFC(void **self) {
     *self = lbl_80409228;
     return self;
