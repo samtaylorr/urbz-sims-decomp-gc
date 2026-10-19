@@ -18,3 +18,7 @@ void fn_8027FAAC(void) {
 
 }
 
+void fn_80280E28(void) {
+
+}
+
