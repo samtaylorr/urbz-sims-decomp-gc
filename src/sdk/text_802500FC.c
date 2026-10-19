@@ -584,6 +584,17 @@ void fn_8026E9FC(void *arg0, s32 *arg1, s32 *arg2) {
     *arg2 = M2C_FIELD(arg0, s32 *, 0x10);
 }
 
+s32 fn_8026EA10(s32 arg0) {
+    extern s32 lbl_804960A4;
+    s32 temp_r31;
+
+    temp_r31 = lbl_804960A4;
+    fn_8025465C();
+    lbl_804960A4 = arg0;
+    fn_80254684();
+    return temp_r31;
+}
+
 extern s32 lbl_80496098;
 s32 fn_8026EDD8(void) {
     return lbl_80496098;
