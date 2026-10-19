@@ -80,3 +80,7 @@ s32 fn_801B65F4(void) {
     return 0;
 }
 
+s32 fn_801B65FC(void) {
+    return 0;
+}
+
