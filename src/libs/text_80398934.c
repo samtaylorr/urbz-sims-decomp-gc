@@ -186,6 +186,14 @@ void fn_8039A0B4(s32 *self, s32 n) {
     }
 }
 
+void fn_8039A0D0(s32 *dst, s32 *src, s32 n) {
+    Elem12 *d = (Elem12 *)dst;
+    Elem12 *s = (Elem12 *)src;
+    while (--n != -1) {
+        *d++ = *s++;
+    }
+}
+
 s32 *fn_8039A290(s32 *self, s32 *other) {
     fn_8039A10C(self, other[1], 0);
     fn_8039A0D0((s32 *)self[0], (s32 *)other[0], other[1]);
