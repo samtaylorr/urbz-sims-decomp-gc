@@ -703,6 +703,12 @@ void fn_8039E6D0(s32 *self, s32 flags) {
     }
 }
 
+extern u8 lbl_8041F754[];
+void fn_80048A48(u8 *arg);
+void fn_8039E760(void) {
+    fn_80048A48(lbl_8041F754);
+}
+
 void fn_8039E788(s32 *self, s32 flags) {
     self[5] = (s32)lbl_804093F8;
     if (flags & 1) {
