@@ -155,16 +155,24 @@ s32 fn_803A0BC0(s32 *a, s32 *b) {
 void fn_803A0E9C(BoundPmf *b) {
     s16 index = b->index;
     char *obj = b->obj;
-    VtblEntry *e;
+    VtblEntry e;
     void (*f)(void *);
+    s16 delta;
+    s32 off;
 
     if (index >= 0) {
-        e = &(*(VtblEntry **)(obj + b->u.delta2))[index - 1];
-        f = e->pfn;
+        e = (*(VtblEntry **)(obj + b->u.delta2))[index - 1];
+        f = e.pfn;
     } else {
         f = b->u.pfn;
     }
-    f(obj + (index >= 0 ? e->delta + b->delta : b->delta));
+    delta = b->delta;
+    if (index >= 0) {
+        off = e.delta + delta;
+    } else {
+        off = delta;
+    }
+    f(obj + off);
 }
 
 void fn_803A1424(void) {
