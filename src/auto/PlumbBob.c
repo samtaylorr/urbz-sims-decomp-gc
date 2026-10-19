@@ -262,6 +262,14 @@ s32 fn_80078160(void) {
     return 0;
 }
 
+void fn_8007ACF8(void *arg0) {
+    if ((s32) M2C_FIELD(arg0, s32 *, 0xFDC) != 0) {
+        M2C_FIELD(arg0, s8 *, 0xF7C) = 2;
+        return;
+    }
+    M2C_FIELD(arg0, s8 *, 0xF7C) = 1;
+}
+
 void fn_8007B35C(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
