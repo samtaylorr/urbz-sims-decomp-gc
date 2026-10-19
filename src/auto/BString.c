@@ -364,6 +364,10 @@ void fn_800E1C78(s32 *self, s32 flags) {
     }
 }
 
+s32 fn_800E1CAC(s32 *self) {
+    return *(s32 *)(self[2] + 0x94);
+}
+
 void fn_800E1CEC(s32 *self, s32 flags) {
     self[5] = (s32)lbl_804093F8;
     if (flags & 1) {
