@@ -66,6 +66,10 @@ void fn_802E13B8(void) {
 
 }
 
+void fn_802E1A28(void) {
+
+}
+
 s32 fn_802E1A44(char *self) {
     return *(s32 *)(self + 0xC);
 }
