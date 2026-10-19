@@ -21,6 +21,10 @@ void fn_800EC49C(s32, s32, s32, s32);
 s32 fn_800EF6F8(void **arg0);
 void fn_8024839C(void *dst, const void *src, u32 n);
 
+static inline s32 BString_CharEq(const u8 *a, const u8 *b) {
+    return *a == *b;
+}
+
 void fn_800D1634(void) {
     fn_800F1A60((s32)&lbl_80495A3C, 2);
 }
@@ -2619,16 +2623,17 @@ void fn_800EE5C4(s32 arg0, s32 arg1) {
 }
 
 u32 fn_800EE6DC(void **arg0, void *arg1, u32 arg2, u32 arg3) {
+    u32 n = arg2;
     if (arg3 > fn_800EF6F8(arg0)) {
         fn_800EAF5C();
     }
-    if (arg2 > fn_800EF6F8(arg0) - arg3) {
-        arg2 = fn_800EF6F8(arg0) - arg3;
+    if (n > fn_800EF6F8(arg0) - arg3) {
+        n = fn_800EF6F8(arg0) - arg3;
     }
     if (fn_800EF6F8(arg0) != 0) {
-        fn_8024839C(arg1, fn_800EAFCC(arg0) + arg3, arg2);
+        fn_8024839C(arg1, fn_800EAFCC(arg0) + arg3, n);
     }
-    return arg2;
+    return n;
 }
 
 void fn_800EE76C(s32 arg0, void **arg1, s32 arg2) {
