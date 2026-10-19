@@ -151,6 +151,11 @@ s32 fn_80063A10(void) {
     return lbl_80491EF0[0];
 }
 
+extern s32 lbl_80491EF4[];
+s32 fn_80063A1C(void) {
+    return lbl_80491EF4[0];
+}
+
 void *fn_80063A34(void) {
     return lbl_80491EE4;
 }
