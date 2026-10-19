@@ -494,6 +494,17 @@ s32 fn_8026BC30(void) {
     return lbl_80496028;
 }
 
+s32 fn_8026BC38(s32 arg0) {
+    extern s32 lbl_80496018;
+    s32 temp_r31;
+
+    temp_r31 = lbl_80496018;
+    fn_8025465C();
+    lbl_80496018 = arg0;
+    fn_80254684();
+    return temp_r31;
+}
+
 void fn_8026BC8C(void) {
     *(s32 *)0xCC006C00 = (*(s32 *)0xCC006C00 & 0xFFFFFFDF) | 0x20;
 }
