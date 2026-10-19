@@ -15,6 +15,10 @@ void fn_800BB10C(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
 
+s32 fn_800BBB64(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x80);
+}
+
 s32 fn_800BBD3C(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x78);
 }
