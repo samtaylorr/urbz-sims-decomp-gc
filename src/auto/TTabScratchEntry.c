@@ -46,6 +46,10 @@ s32 fn_8019F880(void) {
     return 0;
 }
 
+s32 fn_8019F888(void) {
+    return 1;
+}
+
 s32 fn_8019F890(void) {
     return 0;
 }
