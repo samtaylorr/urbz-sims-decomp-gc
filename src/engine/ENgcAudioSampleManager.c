@@ -2,6 +2,13 @@
 #include "common.h"
 
 void fn_80336078(void);
+void fn_8033D35C(s32 arg0, s32 arg1, s32 arg2) {
+    M2C_UNK fn_803360FC(s32, s32, s32);
+    M2C_UNK fn_8033D700();
+    fn_8033D700();
+    fn_803360FC(arg0, arg1, arg2);
+}
+
 void fn_8033D3A0(void) {
     fn_80336078();
 }
