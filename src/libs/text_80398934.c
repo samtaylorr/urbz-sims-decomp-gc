@@ -1862,6 +1862,25 @@ void fn_803A4740(s32 arg0, void *arg1) {
     }
 }
 
+void fn_803A479C(s32 arg0, void *arg1) {
+    M2C_UNK fn_8011CDD8(void *, M2C_UNK);
+    void *temp_r30;
+    void *var_r31;
+
+    var_r31 = arg1;
+    if (var_r31 != NULL) {
+        do {
+            fn_803A479C(arg0, M2C_FIELD(var_r31, void **, 0xC));
+            temp_r30 = M2C_FIELD(var_r31, void **, 8);
+            fn_8011CDD8(var_r31 + 0x14, 2);
+            if (var_r31 != NULL) {
+                fn_803997AC(var_r31, 0x48);
+            }
+            var_r31 = temp_r30;
+        } while (var_r31 != NULL);
+    }
+}
+
 void fn_803A4804(s32 arg0, void *arg1) {
     void *temp_r30;
     void *var_r31;
