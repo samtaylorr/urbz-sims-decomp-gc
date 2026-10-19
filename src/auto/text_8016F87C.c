@@ -45,6 +45,10 @@ s32 fn_80175CA4(s32 *self) {
     return self[1];
 }
 
+s32 fn_80175CC0(char *self) {
+    return *(s32 *)(self + 0xC);
+}
+
 s32 fn_80175CD4(void) {
     return 1;
 }
