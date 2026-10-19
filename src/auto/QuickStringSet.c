@@ -21,3 +21,7 @@ s32 fn_800F7F4C(void) {
     return 0;
 }
 
+s32 fn_800F7F54(void) {
+    return 0;
+}
+
