@@ -30,6 +30,16 @@ void fn_80052F5C(void) {
 
 }
 
+s32 fn_80053428(void *arg0) {
+    s32 var_r9;
+
+    var_r9 = 0;
+    if (((s32) M2C_FIELD(arg0, s32 *, 0x4C) != 0) && ((s32) M2C_FIELD(arg0, s32 *, 0x50) != 0) && ((s32) M2C_FIELD(arg0, s32 *, 0x58) != 0) && ((s32) M2C_FIELD(arg0, s32 *, 0x5C) != 0) && ((s32) M2C_FIELD(arg0, s32 *, 0x60) != 0)) {
+        var_r9 = 1;
+    }
+    return var_r9;
+}
+
 void fn_80053474(s32 arg0) {
     s32 fn_80053198();
     M2C_UNK fn_800534B0(s32);
