@@ -39,6 +39,42 @@ void fn_80398CD8(void (*cb)(void)) {
     lbl_8049662C = cb;
 }
 
+void *fn_80399C38(void *self, s32 *arg1) {
+    VtblEntry *vt;
+    s32 n;
+    s32 i;
+    s32 tmp;
+
+    vt = *(VtblEntry **)((char *)self + 0x18);
+    n = arg1[1];
+    tmp = n;
+    ((void (*)(void *, void *, s32))vt[7].pfn)((char *)self + vt[7].delta, &tmp, 4);
+    for (i = 0; i < n; i++) {
+        s32 v;
+        vt = *(VtblEntry **)((char *)self + 0x18);
+        v = ((s32 *)arg1[0])[i];
+        ((void (*)(void *, void *, s32))vt[7].pfn)((char *)self + vt[7].delta, &v, 4);
+    }
+    return self;
+}
+
+void fn_80399CD4(void *self, s32 n) {
+    while (n--) {
+    }
+}
+
+void fn_80399CF0(void *self) {
+    ((s32 *)self)[0] = 0;
+    ((s32 *)self)[2] = 0;
+    ((s32 *)self)[1] = 0;
+}
+
+void fn_80399D20(s32 *dst, s32 *src, s32 n) {
+    for (; n != 0; n--) {
+        *dst++ = *src++;
+    }
+}
+
 extern void fn_80399F34(void *);
 void *fn_8039A038(void *self) {
     fn_80399F34(self);
