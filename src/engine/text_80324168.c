@@ -108,3 +108,7 @@ void fn_80329220(void *arg0, f32 farg0) {
     M2C_FIELD(arg0, f32 *, 0x4D13C) = farg0;
 }
 
+void fn_8032922C(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0x4D138) = arg1;
+}
+
