@@ -91,6 +91,11 @@ void fn_80157F24(void) {
 
 }
 
+extern s32 lbl_80495BE8;
+void fn_8015A3FC(void) {
+    fn_800F1A60((s32)&lbl_80495BE8, 2);
+}
+
 void fn_801690B0(void) {
 
 }
