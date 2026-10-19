@@ -158,6 +158,22 @@ s32 fn_800BBD78(s32 *self) {
     return self[1];
 }
 
+s32 fn_800BBFC8(void *arg0) {
+    s32 fn_8003E48C(s32);
+    M2C_UNK fn_8003E4A8(s32);
+    s32 var_r30;
+
+    var_r30 = 1;
+    if (((s32) M2C_FIELD(arg0, s32 *, 0x8C) == 0) || ((s32) M2C_FIELD(arg0, s32 *, 0x10) == 0) || ((s32) M2C_FIELD(arg0, s32 *, 0x34) == 0)) {
+        var_r30 = 0;
+    }
+    fn_8003E4A8(M2C_FIELD(arg0, s32 *, 0x8C));
+    if (fn_8003E48C(M2C_FIELD(arg0, s32 *, 0x8C)) != 0) {
+        var_r30 = 0;
+    }
+    return var_r30;
+}
+
 void fn_800BC03C(void) {
 
 }
