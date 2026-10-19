@@ -211,6 +211,11 @@ void fn_80039F5C(void) {
     fn_802D2430();
 }
 
+void *fn_8003A028(u32 size, void *p);
+void *fn_8003A028(u32 size, void *p) {
+    return p;
+}
+
 void fn_8003A030(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
