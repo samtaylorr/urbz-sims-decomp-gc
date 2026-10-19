@@ -31,6 +31,13 @@ void fn_801E13BC(void *arg0) {
     M2C_FIELD(arg0, u8 *, 0x114) = (u8) (M2C_FIELD(arg0, u8 *, 0x114) - 1);
 }
 
+void fn_801EA748(void) {
+    extern void *lbl_80494630;
+    if ((void *) lbl_80494630 != NULL) {
+        M2C_FIELD(lbl_80494630, s32 *, 0xB0) = 1;
+    }
+}
+
 void fn_801F0490(void) {
 
 }
