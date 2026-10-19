@@ -4905,6 +4905,30 @@ void fn_803BAB58(void) {
     fn_802F05AC();
 }
 
+void fn_803BAB78(void) {
+    s32 var_ctr;
+    s32 var_ctr_2;
+    s32 var_ctr_3;
+    s32 var_ctr_4;
+
+    var_ctr = 3;
+    do {
+        var_ctr -= 1;
+    } while (var_ctr != 0);
+    var_ctr_2 = 4;
+    do {
+        var_ctr_2 -= 1;
+    } while (var_ctr_2 != 0);
+    var_ctr_3 = 3;
+    do {
+        var_ctr_3 -= 1;
+    } while (var_ctr_3 != 0);
+    var_ctr_4 = 4;
+    do {
+        var_ctr_4 -= 1;
+    } while (var_ctr_4 != 0);
+}
+
 void fn_803BAD78(void *self) {
     ((s32 *)self)[0] = 0;
     ((s32 *)self)[2] = 0;
