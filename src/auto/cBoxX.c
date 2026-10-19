@@ -13,6 +13,18 @@ s32 fn_800FE02C(s32 arg0, s32 arg1, s32 arg2) {
     return 1;
 }
 
+s32 fn_800FE178(s32 arg0, s32 arg1, s32 *arg2) {
+    s32 fn_800FB988(s32);
+    s32 var_r3;
+
+    var_r3 = 0;
+    if (arg1 <= 0x14) {
+        *arg2 = fn_800FB988(arg0);
+        var_r3 = 1;
+    }
+    return var_r3;
+}
+
 void fn_800FE830(s32 arg0) {
     M2C_UNK fn_80101EF8(s32);
     extern s32 lbl_804943F0;
