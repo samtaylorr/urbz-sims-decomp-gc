@@ -13,6 +13,20 @@ extern void fn_800A9720(void);
 extern void fn_800A9980(void *);
 extern void fn_803349A8(void *, s32);
 
+s32 fn_800A4754(void) {
+    M2C_UNK fn_802CA9A8();
+    s32 fn_802D1FC8(M2C_UNK);
+    extern s32 lbl_80494310;
+    s32 temp_r30;
+
+    if ((s32) lbl_80494310 == 0) {
+        temp_r30 = fn_802D1FC8(0x1C);
+        fn_802CA9A8();
+        lbl_80494310 = temp_r30;
+    }
+    return lbl_80494310;
+}
+
 s32 fn_800A4964(void) {
     return 1;
 }
