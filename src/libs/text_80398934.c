@@ -600,6 +600,14 @@ SearchEntry *fn_803A097C(SearchEntry *lo, SearchEntry *hi, s32 key) {
     }
 }
 
+extern u8 lbl_8040D750[];
+void fn_803A09DC(void **self, s32 flags) {
+    *self = lbl_8040D750;
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 s32 fn_803A0BC0(s32 *a, s32 *b) {
     return a[1] == b[1] && a[0] == b[0];
 }
