@@ -1163,6 +1163,10 @@ s32 fn_803AC3D8(void) {
     return 1;
 }
 
+s32 fn_803AC3E8(void) {
+    return 2;
+}
+
 s32 fn_803AC3F0(void) {
     return 1;
 }
