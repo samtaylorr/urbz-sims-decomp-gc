@@ -52,6 +52,10 @@ void fn_800F78EC(void) {
 
 }
 
+void fn_800F7A10(void) {
+
+}
+
 s32 fn_800F7A20(void) {
     return 0;
 }
