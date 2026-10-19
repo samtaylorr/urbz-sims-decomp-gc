@@ -366,6 +366,7 @@ config.libs = [
             Object(NonMatching, "auto/text_801D6A64.c"),
             Object(NonMatching, "auto/INVTarget.c"),
             Object(NonMatching, "auto/text_802323F0.c"),
+            Object(NonMatching, "auto/InteractorModule.c"),
             Object(NonMatching, "libsn/text_8023EBD8.c"),
             Object(NonMatching, "clib/text_80241A98.c"),
             Object(NonMatching, "engine/text_802781E4.c"),
