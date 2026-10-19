@@ -313,6 +313,10 @@ s32 fn_801AA930(s32 *self) {
     return self[1];
 }
 
+s32 fn_801AB13C(s32 arg0) {
+    return arg0 + 0x10;
+}
+
 void fn_801AB5C8(void) {
 
 }
