@@ -9,3 +9,8 @@ void fn_8033E160(void **self, s32 flags) {
         fn_802D20E8(self);
     }
 }
+
+void fn_8033E194(void) {
+
+}
+
