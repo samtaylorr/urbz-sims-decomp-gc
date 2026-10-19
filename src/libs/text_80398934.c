@@ -22,6 +22,10 @@ void fn_8039B618(void) {
     fn_8018EA6C();
 }
 
+void fn_8039BB90(void) {
+    fn_8018EA6C();
+}
+
 void fn_803BEC14(u8 *self) {
     *(u8 **)(self + 0x338) = lbl_8041CFA8;
     fn_802D8BEC(self);
