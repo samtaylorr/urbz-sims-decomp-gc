@@ -33,6 +33,10 @@ void fn_802F56A4(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x124) = arg1;
 }
 
+s32 fn_802F56AC(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x124);
+}
+
 void fn_802F58A8(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
