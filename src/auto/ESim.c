@@ -96,3 +96,7 @@ s32 fn_8003FAA4(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x654);
 }
 
+s32 fn_8003FAE8(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x53C);
+}
+
