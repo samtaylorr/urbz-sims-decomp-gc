@@ -9,3 +9,8 @@ s32 fn_8030AFC8(void) {
 void fn_8030C490(void) {
     fn_8030AA98();
 }
+
+void fn_8030CB5C(void) {
+
+}
+
