@@ -77,6 +77,10 @@ void fn_800A9BAC(s32 *self, s32 arg1) {
     fn_803349A8(lbl_8045B438, arg1);
 }
 
+void fn_800A9C70(void) {
+
+}
+
 s32 fn_800A9C74(void) {
     return 0;
 }
