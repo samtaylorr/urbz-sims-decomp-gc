@@ -579,6 +579,15 @@ void fn_801A1E30(void) {
     fn_801A1B50();
 }
 
+void fn_801A1E50(s32 arg0, s32 arg1) {
+    M2C_UNK fn_801A1E98(s32, s32);
+    M2C_UNK fn_801A2FA0(s32, M2C_UNK);
+    if (arg1 != 0) {
+        fn_801A2FA0(arg1, 0);
+    }
+    fn_801A1E98(arg0, arg1);
+}
+
 void fn_801A2EF4();
 void fn_801A2600(char *self) {
     extern void fn_801A2EF4(void *);
