@@ -63,6 +63,16 @@ void fn_801055FC(void *self, s32 flags) {
     }
 }
 
+s32 fn_80105674(void *arg0, void *arg1) {
+    s32 var_r11;
+
+    var_r11 = 0;
+    if (((s32) M2C_FIELD(arg1, u8 *, 0) != (s32) M2C_FIELD(arg0, u8 *, 0)) || ((s32) M2C_FIELD(arg1, u8 *, 1) != (s32) M2C_FIELD(arg0, u8 *, 1))) {
+        var_r11 = 1;
+    }
+    return var_r11;
+}
+
 s32 fn_801058BC(void *arg0) {
     return (s8) M2C_FIELD(arg0, u8 *, 0) + (s8) M2C_FIELD(arg0, u8 *, 1);
 }
