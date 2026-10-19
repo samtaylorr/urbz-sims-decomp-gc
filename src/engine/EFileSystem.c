@@ -18,6 +18,10 @@ s32 fn_802C5CF4(s32 *self) {
     return self[2];
 }
 
+s32 fn_802C605C(s32 *self) {
+    return *self;
+}
+
 s32 fn_802C6494(void) {
     return 1;
 }
