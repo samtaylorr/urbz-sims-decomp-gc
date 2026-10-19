@@ -5,6 +5,10 @@ void fn_802D24E8(void);
 extern void *fn_802D0C44(void *);
 extern void fn_802D1A00(void *, void *);
 extern void fn_802C7DD0(void *);
+void fn_802C7A84(void) {
+
+}
+
 void *fn_802C7D1C(void *self) {
     fn_802C7DD0(self);
     return self;
