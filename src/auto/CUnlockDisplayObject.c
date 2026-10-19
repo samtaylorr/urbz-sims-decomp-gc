@@ -19,6 +19,10 @@ void fn_800B96C0(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x158) = arg1;
 }
 
+void fn_800BA124(void *arg0, f32 farg0) {
+    M2C_FIELD(arg0, f32 *, 0x480) = farg0;
+}
+
 void fn_800BB10C(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
