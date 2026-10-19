@@ -4,3 +4,8 @@
 s32 fn_8004E644(void) {
     return 0;
 }
+
+s32 fn_8004E734(void) {
+    return 0;
+}
+
