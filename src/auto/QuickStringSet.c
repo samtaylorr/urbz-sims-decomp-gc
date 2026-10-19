@@ -323,6 +323,13 @@ void fn_800FB6F8(void) {
     fn_800FB760();
 }
 
+void fn_800FB720(void **obj) {
+    if (obj != NULL) {
+        char *vt = (char *)*obj;
+        (*(void (**)(void *, s32))(vt + 0xC))((char *)obj + *(s16 *)(vt + 0x8), 3);
+    }
+}
+
 extern u8 lbl_8040D458[];
 void fn_800FB77C(void **self, s32 flags) {
     *self = lbl_8040D458;
