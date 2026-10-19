@@ -32,6 +32,10 @@ typedef struct {
     s32 unk8;
     s32 unkC;
 } SearchEntry;
+
+typedef struct {
+    s32 a, b, c;
+} Elem12;
 void fn_802D8BEC(void *);
 void fn_802D20E8(void *);
 void fn_8030AD40(void);
