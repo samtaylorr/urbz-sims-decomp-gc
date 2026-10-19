@@ -79,3 +79,7 @@ void fn_803715A4(void) {
     fn_802D2430();
 }
 
+s32 fn_803715C4(u8 *self) {
+    return *(s32 *)(self + 0x20);
+}
+
