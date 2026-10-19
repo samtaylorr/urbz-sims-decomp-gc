@@ -43,3 +43,13 @@ void fn_80101C10(void *arg0) {
     }
 }
 
+void fn_80101C30(void *arg0) {
+    s32 temp_r9;
+
+    temp_r9 = M2C_FIELD(arg0, s32 *, 0x28) - 1;
+    M2C_FIELD(arg0, s32 *, 0x28) = temp_r9;
+    if (temp_r9 < 0) {
+        M2C_FIELD(arg0, s32 *, 0x28) = 0x2B;
+    }
+}
+
