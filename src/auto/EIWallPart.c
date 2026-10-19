@@ -11,6 +11,14 @@ void fn_80032BD8(void) {
     fn_802D2FD0();
 }
 
+s32 fn_80032BF8(s32 arg0, s32 *out) {
+    s32 tmp;
+
+    fn_802D30D4((void *)arg0, &tmp);
+    *out = tmp;
+    return arg0;
+}
+
 void fn_80033054(void) {
     fn_802D2FD0();
 }
