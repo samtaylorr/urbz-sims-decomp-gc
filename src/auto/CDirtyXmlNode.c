@@ -37,6 +37,12 @@ void fn_800C3820(void (*cb)(void)) {
     lbl_80495A24 = cb;
 }
 
+extern void *fn_802D0AB8(void *);
+extern void fn_802D1A00(void *, void *);
+void fn_800C3AC8(void *arg0) {
+    fn_802D1A00(fn_802D0AB8(arg0), arg0);
+}
+
 void fn_802D22C8(void);
 void fn_800C3AFC(void) {
     fn_802D22C8();
