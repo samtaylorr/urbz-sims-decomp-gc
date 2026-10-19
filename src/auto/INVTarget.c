@@ -244,6 +244,11 @@ s32 fn_8021BEF0(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x104);
 }
 
+void fn_80221970(s32 arg0, s32 arg1) {
+    M2C_UNK fn_8022DA70(s32, s32);
+    fn_8022DA70(arg1, arg0);
+}
+
 s32 fn_802230D0(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 0x5C) & 1;
 }
