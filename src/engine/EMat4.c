@@ -200,7 +200,7 @@ void fn_802D12CC(void *arg0) {
 
 s32 fn_802D1404(void *arg0, u32 arg1) {
     if (arg1 < 0x50) {
-        return M2C_FIELD(arg0, s32 *, 0x53C + arg1 * 4);
+        return ((struct { u8 pad[0x53C]; s32 arr[0x50]; } *)arg0)->arr[arg1];
     }
     return 0;
 }
