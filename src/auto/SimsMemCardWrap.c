@@ -2,6 +2,16 @@
 #include "common.h"
 
 extern s32 lbl_80495930;
+extern f32 lbl_803CE168[];
+extern f32 lbl_80494320;
+extern f32 lbl_80495924;
+extern f32 lbl_80495928;
+extern s32 lbl_80495934;
+extern s32 lbl_80495810;
+extern s32 lbl_8045B438[];
+extern void fn_800A9720(void);
+extern void fn_800A9980(void *);
+extern void fn_803349A8(void *);
 
 s32 fn_800A4964(void) {
     return 1;
@@ -27,6 +37,26 @@ s32 fn_800A9928(void) {
 extern s32 lbl_8049627C;
 s32 fn_800A9930(void) {
     return lbl_8049627C;
+}
+
+void *fn_800A9950(void *self) {
+    fn_800A9980(self);
+    return self;
+}
+
+extern f32 lbl_803CE168[];
+extern f32 lbl_80494320;
+extern f32 lbl_80495924;
+extern f32 lbl_80495928;
+extern s32 lbl_80495934;
+extern void fn_800A9720(void);
+extern s32 lbl_80495810;
+extern void fn_800A9980(void *);
+extern s32 lbl_8045B438[];
+extern void fn_803349A8(void *);
+void fn_800A9BAC(void *self, s32 arg1) {
+    *(s32 *)((char *)self + 0x108) = arg1;
+    fn_803349A8(lbl_8045B438);
 }
 
 s32 fn_800A9C74(void) {
