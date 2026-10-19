@@ -7,6 +7,10 @@ s32 fn_8036ED88(void) {
     return 0;
 }
 
+s32 fn_8036EDA4(void) {
+    return 1;
+}
+
 void fn_8036EE30(u8 *self) {
     *(u8 **)(self + 0x338) = lbl_8041DC30;
     fn_802D8BEC(self);
