@@ -18,6 +18,14 @@ void fn_800A13DC(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x1A0) = arg1;
 }
 
+s32 fn_800A18A8(void *arg0, s32 arg1) {
+    s32 temp_r0;
+
+    temp_r0 = M2C_FIELD(arg0, s32 *, 0x180);
+    M2C_FIELD(arg0, s32 *, 0x180) = arg1;
+    return temp_r0;
+}
+
 void fn_800A1B38(void) {
 
 }
