@@ -54,6 +54,10 @@ s32 fn_802EEEEC(s32 *self) {
     return self[6];
 }
 
+s32 fn_802EEF7C(s32 *self) {
+    return self[6];
+}
+
 s32 fn_802EEF9C(u8 *self) {
     return *(s32 *)(self + 0x20);
 }
