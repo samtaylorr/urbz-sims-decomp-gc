@@ -605,6 +605,34 @@ void fn_803ABB10(void) {
     fn_800FC178();
 }
 
+SearchEntry *fn_803ABF48(SearchEntry *lo, SearchEntry *hi, s32 key) {
+    for (;;) {
+        s32 n = hi - lo;
+        SearchEntry *mid;
+        s32 d;
+
+        if (n <= 0) {
+            return 0;
+        }
+        if (n == 1) {
+            if (lo->key == key) {
+                return lo;
+            }
+            return 0;
+        }
+        mid = lo + n / 2;
+        d = key - mid->key;
+        if (d == 0) {
+            return mid;
+        }
+        if (d > 0) {
+            lo = mid + 1;
+        } else {
+            hi = mid;
+        }
+    }
+}
+
 s32 fn_803AC3C0(void) {
     return 1;
 }
