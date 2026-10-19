@@ -51,3 +51,7 @@ s32 fn_80014D44(char *self) {
     return *(s32 *)(self + 0xC);
 }
 
+void fn_80014D4C(char *self, s32 value) {
+    *(s32 *)(self + 0x578) = value;
+}
+
