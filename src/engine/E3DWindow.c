@@ -11,6 +11,10 @@ void fn_802E3EF4(void) {
     fn_802E232C();
 }
 
+s32 fn_802E5498(s32 arg0) {
+    return arg0 + 0x280;
+}
+
 s32 fn_802E54B8(s32 arg0) {
     return arg0 + 0x1E0;
 }
