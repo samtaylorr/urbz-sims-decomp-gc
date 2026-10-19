@@ -260,6 +260,10 @@ void fn_800D4818(void) {
 
 }
 
+void fn_800D4914(void) {
+
+}
+
 extern s32 lbl_8040B7A0[];
 s32 *fn_800D4B30(s32 *self, s32 a) {
     self[0] = a;
