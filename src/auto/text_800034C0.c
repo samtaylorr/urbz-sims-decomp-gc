@@ -94,6 +94,11 @@ void fn_80005118(s32 init, s32 code) {
     }
 }
 
+extern u8 lbl_803C11A0[];
+void *fn_8000519C(void) {
+    return lbl_803C11A0;
+}
+
 s32 fn_800051A8(void) {
     return 0;
 }
