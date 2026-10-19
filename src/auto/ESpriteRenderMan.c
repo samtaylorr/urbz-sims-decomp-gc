@@ -3,6 +3,16 @@
 
 extern void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
+extern void *fn_802D197C(void *heap, u32 size, s32 align);
+extern void *fn_802DBBCC(void *heap, u32 size, s32 align);
+extern void *fn_802DC3C0(void *heap, u32 size, s32 align, s32, s32);
+extern void *fn_802D0B3C(void);
+extern void fn_8003FD30(void *);
+extern u8 lbl_80407F88[];
+extern void *lbl_8049444C;
+extern void *lbl_80494450;
+void *fn_8003FB24(u32 size);
+void fn_8003FBB4(void *arg0);
 void fn_8003FBB4(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
