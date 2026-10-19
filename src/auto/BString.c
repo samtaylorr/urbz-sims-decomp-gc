@@ -257,6 +257,23 @@ void fn_800DAAC4(void) {
     fn_800D1F84();
 }
 
+extern u8 lbl_8040BB58[];
+s32 *fn_800DAEC0(s32 *self, s32 arg1) {
+    self[0] = arg1;
+    self[1] = -1;
+    self[2] = 0;
+    self[3] = -1;
+    self[4] = 1;
+    self[6] = 0;
+    self[7] = 0;
+    self[8] = 0;
+    self[9] = 0;
+    self[10] = 0;
+    self[11] = 0;
+    self[5] = (s32)lbl_8040BB58;
+    return self;
+}
+
 void fn_802D0F9C(void);
 void fn_800DB148(void) {
     fn_802D0F9C();
