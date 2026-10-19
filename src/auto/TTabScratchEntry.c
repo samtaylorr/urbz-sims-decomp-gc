@@ -91,6 +91,10 @@ void fn_8019C850(void) {
 
 }
 
+void fn_8019CA14(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x1C) = (s32) (M2C_FIELD(arg0, s32 *, 0x1C) & 0xFFFFFF00);
+}
+
 void fn_8019CA54(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x34) = -3;
 }
