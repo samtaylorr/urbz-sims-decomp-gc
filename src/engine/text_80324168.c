@@ -24,6 +24,13 @@ s32 fn_803241DC(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void fn_803256E0(s32 arg0, s32 arg1) {
+    M2C_UNK fn_8032588C();
+    M2C_UNK fn_80325978(s32, s32);
+    fn_8032588C();
+    fn_80325978(arg0, arg1);
+}
+
 void fn_80325888(void) {
 
 }
