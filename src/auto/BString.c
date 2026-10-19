@@ -1691,6 +1691,10 @@ void fn_800E3B80(s32 *self, s32 arg) {
     fn_800E3E40(self[2]);
 }
 
+f32 fn_800E416C(void *arg0) {
+    return M2C_FIELD(arg0, f32 *, 0x4C);
+}
+
 void fn_800E4958(s32 *self, s32 flags) {
     s32 *v;
     self[5] = (s32)lbl_8040CB28;
