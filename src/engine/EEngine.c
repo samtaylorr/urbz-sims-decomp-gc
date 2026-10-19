@@ -38,6 +38,10 @@ s32 fn_802E0B30(void) {
     return 8;
 }
 
+s32 fn_802E0B38(s32 arg0) {
+    return arg0 + 0x350;
+}
+
 void fn_802E0B48(u8 *self, s32 value) {
     *(s32 *)(self + 0x468) = value;
 }
