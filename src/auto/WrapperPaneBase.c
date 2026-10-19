@@ -344,3 +344,7 @@ u8 *fn_800D10EC(u8 *self) {
     return self + 8;
 }
 
+s32 fn_800D12A8(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x60);
+}
+
