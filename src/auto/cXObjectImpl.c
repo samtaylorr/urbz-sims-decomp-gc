@@ -132,6 +132,16 @@ void fn_80148500(void) {
 
 }
 
+void fn_80148504(void *arg0, s32 arg1, s32 arg2) {
+    s32 temp_r0;
+
+    temp_r0 = M2C_FIELD(arg0, s32 *, 0x84) & ~arg1;
+    M2C_FIELD(arg0, s32 *, 0x84) = temp_r0;
+    if (arg2 != 0) {
+        M2C_FIELD(arg0, s32 *, 0x84) = (s32) (temp_r0 | arg1);
+    }
+}
+
 s32 fn_80148664(void) {
     return lbl_80494474;
 }
