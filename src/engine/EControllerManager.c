@@ -18,6 +18,10 @@ f32 fn_80334A58(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0xA8);
 }
 
+void fn_80334B04(void *arg0, f32 farg0) {
+    M2C_FIELD(arg0, f32 *, 0xA8) = farg0;
+}
+
 void fn_80334EC4(void (*cb)(void)) {
     lbl_80494F5C = cb;
 }
