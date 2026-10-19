@@ -584,6 +584,18 @@ void fn_800D4914(void) {
 
 }
 
+s32 *fn_800D4AB8(s32 *self, s32 a) {
+    extern s32 lbl_8040B830[];
+    self[0] = a;
+    self[1] = -1;
+    self[2] = 0;
+    self[3] = -1;
+    self[4] = 1;
+    self[5] = (s32)lbl_8040B830;
+    self[6] = 0;
+    return self;
+}
+
 extern u8 lbl_8040B7E8[];
 s32 *fn_800D4AF0(s32 *self, s32 arg1) {
     extern u8 lbl_8040B7E8[];
