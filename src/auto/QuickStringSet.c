@@ -183,6 +183,10 @@ s32 fn_800FC378(void) {
     return lbl_804944B0;
 }
 
+void fn_800FC6E0(void) {
+
+}
+
 s32 fn_800FDF38(s32 *self) {
     return self[1];
 }
