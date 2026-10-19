@@ -1108,6 +1108,16 @@ void fn_802B78AC(char *self) {
     fn_802AE360(self + 8);
 }
 
+s32 fn_802B8CE0(s32 arg0) {
+    extern s32 (*lbl_80443310[])(s32);
+    extern void fn_802A1E98(s32);
+    s32 r;
+
+    r = lbl_80443310[0](arg0 + 8) + 8;
+    fn_802A1E98(r);
+    return r;
+}
+
 s32 fn_802B8D70(void) {
     return 0;
 }
