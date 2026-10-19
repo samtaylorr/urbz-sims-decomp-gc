@@ -35,6 +35,13 @@ typedef struct {
 void fn_802D8BEC(void *);
 void fn_802D20E8(void *);
 void fn_8030AD40(void);
+void *fn_802D0AB8(void);
+void fn_802D1A00(void *, void *);
+void fn_80399D4C(s32 **, s32, s32);
+void fn_80399F18(s32 *self, s32 n);
+void fn_80399F34(void *self);
+void fn_80399F48(s32 **self);
+void fn_80399F94(s32 **self, s32 flags);
 extern s32 lbl_8049662C;
 void fn_80398CD8(void (*cb)(void)) {
     lbl_8049662C = cb;
