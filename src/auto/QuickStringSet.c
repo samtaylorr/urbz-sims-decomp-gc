@@ -490,6 +490,14 @@ s32 fn_800FD808(void *arg0, s32 arg1) {
     return 0;
 }
 
+extern u8 lbl_8040D498[];
+void **fn_800FDA44(void **self) {
+    fn_800FC1AC(self);
+    self[4] = 0;
+    self[0] = lbl_8040D498;
+    return self;
+}
+
 s32 fn_800FDF38(s32 *self) {
     return self[1];
 }
