@@ -216,3 +216,8 @@ s32 fn_8018EAA4(void) {
     return 0x52636F6E;
 }
 
+void fn_8018ED6C(void) {
+    M2C_UNK fn_8018EAB0(M2C_UNK, M2C_UNK);
+    fn_8018EAB0(1, 0xFFFF);
+}
+
