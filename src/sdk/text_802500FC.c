@@ -482,6 +482,15 @@ void fn_80270384(void) {
     *(s8 *)0xCC008000 = 0x48;
 }
 
+void fn_80270740(void) {
+    M2C_UNK PPCMtwpar(M2C_UNK);
+    s32 fn_802500C0();
+    do {
+
+    } while (fn_802500C0() & 1);
+    PPCMtwpar(0x0C008000);
+}
+
 u16 fn_80270C44(void) {
     extern void *__peReg;
     return M2C_FIELD(__peReg, u16 *, 0xE);
