@@ -80,6 +80,10 @@ s16 fn_80186020(void *arg0) {
     return M2C_FIELD(arg0, s16 *, 0x9C);
 }
 
+s32 fn_80186028(s32 arg0) {
+    return arg0 + 0xA8;
+}
+
 s32 fn_80186030(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x4D0);
 }
