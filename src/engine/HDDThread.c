@@ -62,6 +62,12 @@ void fn_80332A44(void) {
 
 }
 
+void fn_80332AA8(s32 arg0) {
+    s32 fn_80332A48();
+    M2C_UNK fn_80332AE0(s32, s32);
+    fn_80332AE0(arg0, fn_80332A48());
+}
+
 void fn_80332D88(void) {
     M2C_UNK fn_80332D34(M2C_UNK, M2C_UNK);
     fn_80332D34(1, 0xFFFF);
