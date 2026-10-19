@@ -95,6 +95,14 @@ s32 fn_8010F030(u8 *self) {
     return *(s32 *)(self + 0x20);
 }
 
+void fn_8010F038(void *arg0, s32 arg1) {
+    M2C_UNK fn_8010F078();
+    if ((arg1 != (s32) M2C_FIELD(arg0, s32 *, 0x20)) && ((s32) M2C_FIELD(arg0, s32 *, 0x1C) != 0)) {
+        M2C_FIELD(arg0, s32 *, 0x30) = 1;
+    }
+    fn_8010F078();
+}
+
 s32 fn_8010F1E4(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x24);
 }
