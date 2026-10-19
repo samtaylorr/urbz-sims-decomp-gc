@@ -28,6 +28,14 @@ void fn_8036C038(void) {
     fn_802D2FD0();
 }
 
+s32 fn_8036C058(s32 arg0, s32 *out) {
+    s32 tmp;
+
+    fn_802D30D4((void *)arg0, &tmp);
+    *out = tmp;
+    return arg0;
+}
+
 void fn_8036C31C(void) {
     fn_802D2FD0();
 }
