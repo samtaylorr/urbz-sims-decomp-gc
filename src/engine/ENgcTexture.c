@@ -16,6 +16,10 @@ void *fn_803613D4(u32 size, void *p) {
     return p;
 }
 
+void fn_80361600(void) {
+
+}
+
 s32 fn_80361D14(void) {
     return 1;
 }
