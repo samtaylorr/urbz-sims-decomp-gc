@@ -113,6 +113,10 @@ void fn_80033A3C(void) {
     fn_802F4AB8();
 }
 
+s16 fn_80034F8C(void *arg0) {
+    return M2C_FIELD(arg0, s16 *, 0x322);
+}
+
 void fn_80035CD4(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
