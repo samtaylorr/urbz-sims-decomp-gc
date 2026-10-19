@@ -16,6 +16,10 @@ s32 fn_80059AC4(s32 *self) {
     return self[1];
 }
 
+s8 fn_80059B50(void *arg0) {
+    return (s8) M2C_FIELD(arg0, u8 *, 1);
+}
+
 u8 fn_80059B90(u8 *self) {
     return self[2];
 }
