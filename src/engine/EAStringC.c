@@ -10,6 +10,10 @@ s32 fn_80299C74(u8 *self) {
     return *(s32 *)(self + 0x50);
 }
 
+s32 fn_80299C7C(u8 *self) {
+    return *(s32 *)(self + 0x50);
+}
+
 s32 fn_8029A0DC(void) {
     return 0;
 }
