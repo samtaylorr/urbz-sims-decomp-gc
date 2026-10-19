@@ -93,19 +93,18 @@ void fn_80035CD4(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
 
+extern void *fn_80032AE0(u32);
+extern void fn_800331DC(void *);
+void *fn_80039DC8(u32 size, void *p);
 void fn_80039C54(void) {
-    fn_80032AE0(0x380);
-    fn_800331DC();
+    fn_800331DC(fn_80032AE0(0x380));
 }
 
 void fn_80039C7C(void *p) {
     fn_800331DC(fn_80039DC8(0x380, p));
 }
 
-extern void fn_80032AE0(s32);
-extern void fn_800331DC(void *);
 extern void fn_800352A4(void *, s32);
-void *fn_80039DC8(u32 size, void *p);
 void fn_80039CA8(void *self) {
     fn_800352A4(self, 2);
 }
