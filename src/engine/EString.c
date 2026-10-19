@@ -33,3 +33,7 @@ void fn_802D6A28(void **self, s32 flags) {
     }
 }
 
+s32 fn_802D6EF8(void *arg0) {
+    return (M2C_FIELD(arg0, s32 *, 0x18) * M2C_FIELD(arg0, s16 *, 0x1C)) + 0xE3;
+}
+
