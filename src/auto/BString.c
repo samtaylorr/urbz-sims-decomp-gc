@@ -1861,6 +1861,10 @@ void fn_800E4A34(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x8C) = 0;
 }
 
+void fn_800E4A40(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x90) = 1;
+}
+
 void fn_800E4A58(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x20) = 1;
 }
