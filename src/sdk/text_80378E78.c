@@ -151,6 +151,11 @@ s32 fn_8038C698(void) {
     return 0;
 }
 
+u16 fn_8038DAFC(void) {
+    extern u16 lbl_80495660;
+    return lbl_80495660;
+}
+
 extern s32 lbl_80495668;
 void fn_8038DEBC(s32 arg0) {
     lbl_80495668 = arg0;
