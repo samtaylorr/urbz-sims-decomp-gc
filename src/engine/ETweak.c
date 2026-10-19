@@ -31,6 +31,13 @@ void fn_80314124(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x28) = arg1;
 }
 
+void fn_80314560(void *arg0) {
+    M2C_UNK fn_80314004();
+    M2C_FIELD(arg0, s32 *, 0x34) = 1;
+    fn_80314004();
+    M2C_FIELD(arg0, s32 *, 0x2C) = (s32) (M2C_FIELD(arg0, s32 *, 0x2C) - 1);
+}
+
 void fn_803145A0(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x30) = arg1;
 }
