@@ -195,6 +195,16 @@ void *fn_80039DC8(u32 size, void *p) {
     return p;
 }
 
+s32 fn_80039DE8(s32 arg0) {
+    s32 var_r0;
+
+    var_r0 = 1;
+    if (!(arg0 & 0x30)) {
+        var_r0 = 0;
+    }
+    return var_r0;
+}
+
 void fn_80039E00(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x378) = arg1;
 }
