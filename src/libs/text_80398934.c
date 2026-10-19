@@ -4728,6 +4728,12 @@ void *fn_803BEC78(void *self) {
     return self;
 }
 
+void fn_803BED34(void *self) {
+    ((s32 *)self)[0] = 0;
+    ((s32 *)self)[2] = 0;
+    ((s32 *)self)[1] = 0;
+}
+
 extern void fn_803BED34(void *);
 void *fn_803BED48(void *self) {
     fn_803BED34(self);
