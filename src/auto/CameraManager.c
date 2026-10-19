@@ -24,6 +24,11 @@ void fn_80014F48(void *self, s32 flags) {
     }
 }
 
+f32 fn_8001529C(void) {
+    extern f32 lbl_8049570C;
+    return lbl_8049570C;
+}
+
 void fn_80015404(void) {
 
 }
