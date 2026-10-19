@@ -490,6 +490,10 @@ void fn_800DBC9C(void) {
     fn_800E3BC0();
 }
 
+void fn_800DBFDC(void) {
+
+}
+
 extern s32 lbl_8040BE80[];
 s32 *fn_800DC1CC(s32 *self, s32 a) {
     self[0] = a;
