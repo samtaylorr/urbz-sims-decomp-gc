@@ -272,6 +272,13 @@ s32 fn_80387254(void) {
     return *(u16 *)0xCC00500A & 0x200;
 }
 
+void *fn_803872D4(void *arg0) {
+    fn_8025465C();
+    M2C_FIELD(arg0, s32 *, 8) = (s32) (M2C_FIELD(arg0, s32 *, 8) | 2);
+    fn_80254684();
+    return arg0;
+}
+
 extern s32 lbl_80496498;
 s32 fn_8038742C(void) {
     return lbl_80496498;
