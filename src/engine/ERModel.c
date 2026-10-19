@@ -152,3 +152,7 @@ s32 fn_8032CF84(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x16C);
 }
 
+s32 fn_8032CF8C(s32 arg0) {
+    return arg0 + 0x170;
+}
+
