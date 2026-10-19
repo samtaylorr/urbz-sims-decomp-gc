@@ -12,6 +12,10 @@ void fn_8036EE30(u8 *self) {
     fn_802D8BEC(self);
 }
 
+s32 fn_8036EE60(void) {
+    return 0;
+}
+
 void fn_802D2FD0(void);
 void fn_80370010(void) {
     fn_802D2FD0();
