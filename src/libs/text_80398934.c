@@ -4466,6 +4466,12 @@ void *fn_803BB700(void *self) {
     return self;
 }
 
+void fn_803BB800(void *self) {
+    ((s32 *)self)[0] = 0;
+    ((s32 *)self)[2] = 0;
+    ((s32 *)self)[1] = 0;
+}
+
 extern void fn_803BB800(void *);
 void *fn_803BB814(void *self) {
     fn_803BB800(self);
