@@ -14,6 +14,10 @@ void fn_80339318(void) {
 
 }
 
+void fn_8033931C(void) {
+
+}
+
 extern s32 lbl_80494F88;
 s32 fn_8033A73C(void) {
     return lbl_80494F88;
