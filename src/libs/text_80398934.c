@@ -1939,6 +1939,23 @@ void fn_803A6A14(s32 arg0, void *arg1) {
     }
 }
 
+void fn_803A6B48(s32 arg0, void *arg1) {
+    void *temp_r30;
+    void *var_r31;
+
+    var_r31 = arg1;
+    if (var_r31 != NULL) {
+        do {
+            fn_803A6B48(arg0, M2C_FIELD(var_r31, void **, 0xC));
+            temp_r30 = M2C_FIELD(var_r31, void **, 8);
+            if (var_r31 != NULL) {
+                fn_803997AC(var_r31, 0x18);
+            }
+            var_r31 = temp_r30;
+        } while (var_r31 != NULL);
+    }
+}
+
 void fn_803A87BC(void *arg0, void *arg1, void *arg2) {
     void **temp_r9;
 
