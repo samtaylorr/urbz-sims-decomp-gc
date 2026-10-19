@@ -201,6 +201,10 @@ void fn_800CFFEC(void) {
 
 }
 
+s32 fn_800D00A4(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x34);
+}
+
 s32 fn_800D0788(s32 *self) {
     return self[6];
 }
