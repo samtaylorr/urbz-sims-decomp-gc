@@ -15,6 +15,15 @@ s32 fn_802F1AF4(s32 arg0, s32 *out) {
     return arg0;
 }
 
+extern void fn_802C5C58(void *, s32 *);
+s32 fn_802F1B34(s32 arg0, s32 *out) {
+    s32 tmp;
+
+    fn_802C5C58((void *)arg0, &tmp);
+    *out = tmp;
+    return arg0;
+}
+
 void fn_802F1B74(void);
 void fn_802F2500(void) {
     fn_802F1B74();
