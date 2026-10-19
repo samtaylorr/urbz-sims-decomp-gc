@@ -108,6 +108,14 @@ void fn_80355DE8(void) {
     }
 }
 
+void fn_80355E00(u8 *self, u8 *arg) {
+    if (lbl_8049519C != 0) {
+        lbl_8049519C = 0;
+    }
+    lbl_80495120 = *(s32 *)(arg + 4);
+    lbl_80495124 = arg[1];
+}
+
 void fn_80273F88(void);
 void fn_80357AA0(void) {
     fn_80273F88();
