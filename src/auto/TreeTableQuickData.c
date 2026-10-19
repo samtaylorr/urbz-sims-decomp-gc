@@ -66,6 +66,16 @@ s32 fn_801B38BC(void) {
     return fn_801B388C() ^ 1;
 }
 
+s32 fn_801B38E0(void *arg0) {
+    s32 var_r9;
+
+    var_r9 = 0;
+    if (((s32) M2C_FIELD(arg0, s32 *, 0) != 0) && ((s32) M2C_FIELD(arg0, u16 *, 4) != 0)) {
+        var_r9 = 1;
+    }
+    return var_r9;
+}
+
 void fn_801B3908(s32 *self, s32 value) {
     *self = value;
 }
