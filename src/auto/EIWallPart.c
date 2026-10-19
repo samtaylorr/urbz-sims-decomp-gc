@@ -44,6 +44,11 @@ void *fn_80039D3C(void) {
     return lbl_80491C00;
 }
 
+extern u16 lbl_80491C16[];
+u16 fn_80039D48(void) {
+    return lbl_80491C16[0];
+}
+
 extern void fn_802D6A90(void *, void *, void *, void *, s32, void *, void *);
 extern void fn_80039C54(void);
 extern void fn_80039C7C(void);
