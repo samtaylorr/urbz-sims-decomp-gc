@@ -87,3 +87,8 @@ void *fn_80331E08(u32 size, void *p) {
     return p;
 }
 
+void fn_80331E78(void) {
+    M2C_UNK fn_80331BF4(M2C_UNK, M2C_UNK);
+    fn_80331BF4(1, 0xFFFF);
+}
+
