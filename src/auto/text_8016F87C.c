@@ -29,3 +29,7 @@ s32 fn_80175D4C(void) {
     return 0;
 }
 
+s32 fn_80175D54(void) {
+    return 0;
+}
+
