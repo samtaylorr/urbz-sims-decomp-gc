@@ -4,3 +4,9 @@
 void fn_8036A768(void) {
 
 }
+
+void fn_8036A8F0(void) {
+    M2C_UNK fn_8036A83C(M2C_UNK, M2C_UNK);
+    fn_8036A83C(1, 0xFFFF);
+}
+
