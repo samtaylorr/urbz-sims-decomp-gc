@@ -13,6 +13,19 @@ s32 fn_801D7550(void) {
     return lbl_804945F8;
 }
 
+void fn_801D7D6C(void **arg0) {
+    M2C_UNK fn_800B9F18(s32);
+    void *var_r31;
+
+    var_r31 = *arg0;
+    if (var_r31 != NULL) {
+        do {
+            fn_800B9F18(M2C_FIELD(var_r31, s32 *, 0x1C));
+            var_r31 = M2C_FIELD(var_r31, void **, 4);
+        } while (var_r31 != NULL);
+    }
+}
+
 s32 fn_801D7DE4(void) {
     s32 fn_801D75D8();
     M2C_UNK fn_802D1FC8(M2C_UNK);
