@@ -249,6 +249,10 @@ void fn_801A3D10(void) {
 
 }
 
+s32 fn_801A4FA8(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x2C);
+}
+
 s32 fn_801A9EC4(s32 *self) {
     return self[6];
 }
