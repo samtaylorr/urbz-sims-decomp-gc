@@ -517,6 +517,10 @@ u8 *fn_802B770C(u8 *self) {
     return self + 8;
 }
 
+u8 *fn_802B7714(u8 *self) {
+    return self + 8;
+}
+
 s32 fn_802B771C(void) {
     return 1;
 }
