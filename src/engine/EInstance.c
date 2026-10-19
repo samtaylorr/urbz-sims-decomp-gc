@@ -28,6 +28,11 @@ void fn_802F1130(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0xD00) = 0;
 }
 
+void fn_802F14E0(void *arg0) {
+    M2C_UNK fn_80327B0C(s32);
+    fn_80327B0C(M2C_FIELD(arg0, s32 *, 4));
+}
+
 extern s32 lbl_80494E5C;
 s32 fn_802F150C(void) {
     return lbl_80494E5C;
