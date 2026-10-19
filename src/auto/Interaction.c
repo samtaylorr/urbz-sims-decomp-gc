@@ -80,6 +80,10 @@ s32 fn_80111F5C(s32 *self) {
     return self[2];
 }
 
+s32 fn_80111F64(char *self) {
+    return *(s32 *)(self + 0xC);
+}
+
 s32 fn_8011747C(s32 *self) {
     return self[2];
 }
