@@ -57,6 +57,17 @@ s32 fn_801D9790(void) {
     return lbl_8049460C;
 }
 
+s32 fn_801DC1F0(void) {
+    s32 fn_801DBD24();
+    M2C_UNK fn_802D1FC8(M2C_UNK);
+    extern s32 lbl_80494614;
+    if ((s32) lbl_80494614 == 0) {
+        fn_802D1FC8(0x10);
+        lbl_80494614 = fn_801DBD24();
+    }
+    return lbl_80494614;
+}
+
 s32 fn_801DCC6C(void *arg0) {
     s32 var_r11;
 
