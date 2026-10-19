@@ -7,6 +7,10 @@ void fn_80024440(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
 
+void fn_800275A0(void) {
+
+}
+
 s32 fn_80028698(void) {
     return 0;
 }
