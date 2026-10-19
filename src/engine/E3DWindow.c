@@ -55,6 +55,12 @@ void fn_802E54C0(void) {
 
 }
 
+void fn_802E5E58(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    M2C_UNK fn_802E58E4(s32, s32, s32, s32);
+    s32 fn_80337F14(s32);
+    fn_802E58E4(arg0, fn_80337F14(arg1), arg2, arg3);
+}
+
 void fn_802E5700(void);
 void fn_802E5EA4(void) {
     fn_802E5700();
