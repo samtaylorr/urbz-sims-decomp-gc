@@ -27,6 +27,10 @@ s32 fn_8011DCBC(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x10);
 }
 
+s32 fn_80122288(void) {
+    return 7;
+}
+
 s32 fn_8012242C(s32 *self) {
     return self[2];
 }
