@@ -6,6 +6,10 @@ s32 fn_802D82B4(void) {
     return 0;
 }
 
+void fn_802D8328(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+}
+
 s32 fn_802D8458(char *self) {
     return *(s32 *)(self + 0xC);
 }
