@@ -163,6 +163,12 @@ void *fn_80039DC8(u32 size, void *p) {
     return p;
 }
 
+extern void *fn_80039F7C(u32);
+extern void fn_8003A064(void *);
+void fn_80039E08(void) {
+    fn_8003A064(fn_80039F7C(0x380));
+}
+
 void fn_80039E80(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
