@@ -104,6 +104,10 @@ void fn_80112168(void) {
 
 }
 
+void fn_8011216C(void) {
+
+}
+
 s32 fn_80117474(char *self) {
     return *(s32 *)(self + 0xC);
 }
