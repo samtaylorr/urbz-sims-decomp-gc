@@ -4145,6 +4145,14 @@ u16 fn_803B97B4(void) {
     return lbl_80493704[0];
 }
 
+extern u8 lbl_804194A0[];
+void fn_803B97C0(void **self, s32 flags) {
+    *self = lbl_804194A0;
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_802F05AC(void);
 void fn_803BAAB8(void) {
     fn_802F05AC();
