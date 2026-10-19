@@ -5,3 +5,9 @@ void fn_8036EFA4(void);
 void fn_8035DB44(void) {
     fn_8036EFA4();
 }
+
+void fn_8035EC18(void);
+void fn_8035EA70(void) {
+    fn_8035EC18();
+}
+
