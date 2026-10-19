@@ -7115,6 +7115,14 @@ void fn_803C07E0(s32 self, s32 flags) {
     }
 }
 
+void fn_8039A334(void *self, s32 n, s32 arg2);
+s32 *fn_803C08EC(s32 *self, s32 *other);
+s32 *fn_803C08EC(s32 *self, s32 *other) {
+    fn_8039A334(self, other[1], 0);
+    fn_8039A2DC((s32 *)self[0], (s32 *)other[0], other[1]);
+    return self;
+}
+
 extern void fn_8039A024(void *);
 void *fn_803C0C20(void *self) {
     fn_8039A024(self);
