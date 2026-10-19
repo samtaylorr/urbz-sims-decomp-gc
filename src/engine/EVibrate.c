@@ -25,6 +25,14 @@ s32 fn_80315430(void) {
     return 1;
 }
 
+void fn_80316EFC(void *arg0, s32 arg1) {
+    M2C_UNK fn_80316A58();
+    if (arg1 != (s32) M2C_FIELD(arg0, s32 *, 0x9C)) {
+        M2C_FIELD(arg0, s32 *, 0x9C) = arg1;
+        fn_80316A58();
+    }
+}
+
 void fn_80317390(void) {
     M2C_UNK fn_80317224(M2C_UNK, M2C_UNK);
     fn_80317224(1, 0xFFFF);
