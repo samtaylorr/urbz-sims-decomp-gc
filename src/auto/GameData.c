@@ -15,6 +15,11 @@ s32 fn_80043FF8(void) {
     return 0;
 }
 
+s32 fn_8004401C(void) {
+    fn_80043C40();
+    return 0;
+}
+
 void fn_800440B0(void) {
 
 }
