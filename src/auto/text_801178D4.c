@@ -5,3 +5,9 @@ M2C_UNK *fn_801178D4(void) {
     extern M2C_UNK lbl_80495B10;
     return &lbl_80495B10;
 }
+
+void fn_801181C4(void) {
+    M2C_UNK fn_80118138(M2C_UNK, M2C_UNK);
+    fn_80118138(1, 0xFFFF);
+}
+
