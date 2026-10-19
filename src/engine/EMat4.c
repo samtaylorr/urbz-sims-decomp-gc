@@ -11,6 +11,15 @@ extern void *fn_802D0BC0(void);
 extern void fn_802CAA00(void *, s32);
 extern s32 lbl_80494DCC;
 extern u8 lbl_80446D34[];
+extern f32 lbl_803F02B0;
+extern f32 lbl_803F02C0;
+extern u8 lbl_803F02C8[];
+extern u8 lbl_8044490C[];
+extern s32 lbl_80496150;
+extern void fn_802D94C0(void *, s32);
+extern void fn_802D0D30(void *, void *);
+extern void fn_80246D44(void (*)(void));
+void fn_802D0A8C(void);
 s32 *fn_802C66FC(s32 *arg0) {
     arg0[0] = 0;
     arg0[1] = 0;
