@@ -16,6 +16,11 @@ void fn_80307BC4(void (*cb)(void)) {
     lbl_80494EB4 = cb;
 }
 
+extern s32 lbl_80494EB8;
+void fn_80307BCC(void (*cb)(void)) {
+    lbl_80494EB8 = cb;
+}
+
 void fn_803081EC(void) {
     fn_80307CCC();
 }
