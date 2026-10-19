@@ -4734,6 +4734,15 @@ void fn_803B2C84(void *arg0, s32 arg1) {
     }
 }
 
+void fn_803B61D4(void *arg0, s32 arg1) {
+    extern u8 lbl_80417CF0[];
+    void fn_802D20E8(void *);
+    M2C_FIELD(arg0, void **, 8) = lbl_80417CF0;
+    if (arg1 & 1) {
+        fn_802D20E8(arg0);
+    }
+}
+
 extern void fn_802BE53C(void *);
 void *fn_803B6F48(void *self) {
     fn_802BE53C(self);
