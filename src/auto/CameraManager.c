@@ -28,6 +28,11 @@ void fn_80014F48(void *self, s32 flags) {
     }
 }
 
+void fn_800150A8(void *arg0) {
+    M2C_UNK fn_800159F4(s32);
+    fn_800159F4(M2C_FIELD(arg0, s32 *, 4));
+}
+
 f32 fn_8001529C(void) {
     extern f32 lbl_8049570C;
     return lbl_8049570C;
