@@ -18,6 +18,10 @@ s32 fn_80102400(void *arg0, s32 arg1) {
     return M2C_FIELD(M2C_FIELD(arg0, void **, 8), s32 *, 4) + (arg1 * 0x14);
 }
 
+s32 fn_80102414(void *arg0, s32 arg1) {
+    return (s32) ((arg1 - M2C_FIELD(M2C_FIELD(arg0, void **, 8), s32 *, 4)) * 0xCCCCCCCD) >> 2;
+}
+
 extern void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
 void fn_801029D8(void *arg0) {
