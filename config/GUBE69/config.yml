@@ -1,0 +1,20 @@
+# Made by decomp.wtf. See config.example.yml for every option.
+object_base: orig/GUBE69
+object: sys/main.dol
+hash: 4a87d376427d5d7feff24c13859af71336d25822
+symbols: config/GUBE69/symbols.txt
+splits: config/GUBE69/splits.txt
+mw_comment_version: 10
+detect_objects: true
+detect_strings: true
+write_asm: true
+skip_cfa_ranges:
+- start: .text:0x8024FBBC
+  end: .text:0x8024FED8
+block_relocations:
+- source: .init:0x80003100
+  end: .init:0x80003118
+- source: .init:0x8000315C
+  end: .init:0x80003164
+- source: .text:0x802400AC
+  end: .text:0x802400BC

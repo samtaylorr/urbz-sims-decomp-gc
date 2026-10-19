@@ -1,0 +1,38 @@
+{
+  "created": "from scratch",
+  "platform": "gc",
+  "version": "GUBE69",
+  "compiler": "GC/1.3.2",
+  "game": {
+    "what": "your copy of the game",
+    "path": "orig/GUBE69/game.iso",
+    "sha1": null
+  },
+  "setup": [
+    [
+      "python",
+      "configure.py",
+      "--dtk",
+      "/home/staylor/.local/share/decompnet/toolchains/dtk/dtk",
+      "--binutils",
+      "/home/staylor/.local/share/decompnet/toolchains/gc-wii-binutils",
+      "--compilers",
+      "/home/staylor/.local/share/decompnet/toolchains/mwcc",
+      "--objdiff",
+      "/home/staylor/.local/share/decompnet/toolchains/objdiff-cli/objdiff-cli",
+      "--sjiswrap",
+      "/home/staylor/.local/share/decompnet/toolchains/sjiswrap/sjiswrap.exe",
+      "--wrapper",
+      "/home/staylor/.local/share/decompnet/toolchains/wibo/wibo"
+    ],
+    [
+      "ninja",
+      "all_source",
+      "build/GUBE69/report.json"
+    ]
+  ],
+  "rebuild": {
+    "identical": false,
+    "detail": "1 files differ: main.dol"
+  }
+}
