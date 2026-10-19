@@ -9,6 +9,18 @@ s32 fn_80364F28(s32 *self) {
     return self[7];
 }
 
+s32 fn_803669C0(void *arg0) {
+    s32 temp_r11;
+    s32 var_r3;
+
+    temp_r11 = M2C_FIELD(arg0, s32 *, 0x34);
+    var_r3 = M2C_FIELD(arg0, s32 *, 0x30);
+    if (var_r3 < temp_r11) {
+        var_r3 += M2C_FIELD(arg0, s32 *, 0x38);
+    }
+    return var_r3 - temp_r11;
+}
+
 void fn_8036727C(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x40) = arg1;
 }
