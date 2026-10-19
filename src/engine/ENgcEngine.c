@@ -7,6 +7,12 @@ void fn_8033E768(void) {
     lbl_80495040 = 1;
 }
 
+void fn_8033E7F4(void *arg0) {
+    M2C_UNK fn_802E0D34();
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+    fn_802E0D34();
+}
+
 void fn_8033EA4C(void) {
 
 }
