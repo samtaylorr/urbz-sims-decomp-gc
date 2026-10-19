@@ -634,6 +634,13 @@ void fn_800D72A4(void) {
 
 }
 
+void fn_800D7654(void) {
+    M2C_UNK fn_800E18B8(M2C_UNK);
+    extern s32 lbl_80495BA4;
+    lbl_80495BA4 = 1;
+    fn_800E18B8(0xD);
+}
+
 void fn_800E3BC0(void);
 void fn_800D855C(void) {
     fn_800E3BC0();
