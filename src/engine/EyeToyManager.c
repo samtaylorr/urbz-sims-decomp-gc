@@ -46,6 +46,14 @@ s32 fn_80339258(void) {
     return temp_r3;
 }
 
+void fn_80339268(s32 arg0, s32 *arg1, s32 *arg2) {
+    if (arg0 != -1) {
+        fn_8033930C();
+    }
+    *arg1 = 0;
+    *arg2 = 0;
+}
+
 void fn_803392AC(s32 arg0) {
     if (arg0 != -1) {
         fn_8033930C();
