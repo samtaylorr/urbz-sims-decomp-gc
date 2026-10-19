@@ -37,6 +37,37 @@ void fn_801CF890(void *arg0) {
     }
 }
 
+s32 fn_801D31B0(void **arg0) {
+    s32 var_r0;
+    void *temp_r3;
+
+    temp_r3 = *arg0;
+    var_r0 = 0;
+    if (temp_r3 != NULL) {
+        var_r0 = M2C_FIELD(temp_r3, s32 *, 0x24);
+    }
+    switch (var_r0) {                               /* irregular */
+    case 0:
+        return 1;
+    case 1:
+        return 2;
+    case 2:
+        return 4;
+    case 8:
+    case 14:
+    case 18:
+    case 20:
+    case 16:
+    case 10:
+    case 12:
+    case 4:
+    case 6:
+        return 3;
+    default:
+        return 0;
+    }
+}
+
 void fn_801D36C0(u8 *self) {
     extern void fn_801CD6DC(u8 *);
     extern u8 lbl_80416238[];
