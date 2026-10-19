@@ -25,6 +25,10 @@ s32 fn_8010F578(void) {
     return 1;
 }
 
+s32 fn_8010F82C(void) {
+    return 1;
+}
+
 s32 fn_8011785C(void) {
     return 0;
 }
