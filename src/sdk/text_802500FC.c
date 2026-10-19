@@ -171,6 +171,14 @@ void fn_80258C80(void) {
     }
 }
 
+void fn_80258CB0(void) {
+    s32 temp_r31;
+
+    temp_r31 = fn_8025465C();
+    fn_80258A58(1);
+    fn_80254684(temp_r31);
+}
+
 s32 fn_802599FC(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x2D4);
 }
