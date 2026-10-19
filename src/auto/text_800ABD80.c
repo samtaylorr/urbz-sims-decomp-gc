@@ -17,3 +17,7 @@ s32 fn_800B2F54(s32 *self) {
     return self[2];
 }
 
+s32 fn_800B2FC4(char *self) {
+    return *(s32 *)(self + 0xC);
+}
+
