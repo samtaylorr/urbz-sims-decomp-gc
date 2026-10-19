@@ -156,6 +156,10 @@ s32 fn_8033136C(void *arg0) {
     return ((u32) M2C_FIELD(arg0, u32 *, 0x64) >> 2U) & 1;
 }
 
+u8 fn_80331378(void *arg0) {
+    return (u8) ((M2C_FIELD(arg0, u8 *, 0x72) * 4) + (M2C_FIELD(arg0, u8 *, 0x73) / 15));
+}
+
 s32 fn_80331410(void *arg0) {
     void *temp_r9;
 
