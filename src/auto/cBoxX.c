@@ -61,3 +61,8 @@ void fn_80101C30(void *arg0) {
     }
 }
 
+void fn_80102088(void) {
+    M2C_UNK fn_80102010(M2C_UNK, M2C_UNK);
+    fn_80102010(1, 0xFFFF);
+}
+
