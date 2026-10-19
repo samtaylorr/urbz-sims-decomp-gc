@@ -290,6 +290,15 @@ s32 fn_802DEE00(s32 *self) {
     return *self;
 }
 
+s32 fn_802DEE08(void *arg0, s32 arg1, s32 arg2) {
+    M2C_UNK fn_802482F8(s32, s32);
+    if (arg1 != 0) {
+        fn_802482F8(arg1, M2C_FIELD(arg0, s32 *, 0x1C) + M2C_FIELD(arg0, s32 *, 0x20));
+    }
+    M2C_FIELD(arg0, s32 *, 0x20) = (s32) (M2C_FIELD(arg0, s32 *, 0x20) + arg2);
+    return arg2;
+}
+
 extern void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
 void fn_802DF214(void *arg0) {
