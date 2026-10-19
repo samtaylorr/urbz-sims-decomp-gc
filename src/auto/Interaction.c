@@ -156,6 +156,10 @@ void fn_8011216C(void) {
 
 }
 
+s32 fn_80112304(s32 arg0) {
+    return arg0 >> 8;
+}
+
 extern s32 lbl_80495B00;
 extern void fn_800F1A60(s32, s32);
 void fn_80116754(void) {
