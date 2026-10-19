@@ -72,6 +72,10 @@ s32 fn_800F7A20(void) {
     return 0;
 }
 
+void fn_800F7A28(void) {
+
+}
+
 void fn_800F68E0(void *);
 void fn_800F7A2C(void *self, void *arg) {
     fn_800F68E0(arg);
