@@ -40,6 +40,11 @@ s32 fn_800F6FEC(s32 *self) {
     return self[1];
 }
 
+void fn_800F6FF4(s32 *arg0) {
+    M2C_UNK fn_800F8120(s32);
+    fn_800F8120(*arg0);
+}
+
 void fn_800F7018(s16 **arg0) {
     **arg0 = 0;
 }
