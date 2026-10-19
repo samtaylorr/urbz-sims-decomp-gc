@@ -52,6 +52,13 @@ void fn_80334B94(s32 arg0, s32 arg1) {
     }
 }
 
+void fn_80334CF8(s32 arg0, s32 arg1) {
+    M2C_UNK fn_803379C8(s32, s32);
+    if (((s32) lbl_80494F5C != 0) || (fn_80334B0C() != 0)) {
+        fn_803379C8(arg0, arg1);
+    }
+}
+
 void fn_80334EC4(void (*cb)(void)) {
     lbl_80494F5C = cb;
 }
