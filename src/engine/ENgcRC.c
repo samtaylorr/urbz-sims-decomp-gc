@@ -61,6 +61,10 @@ void fn_8034C05C(void) {
 
 }
 
+void fn_8034D8E8(void) {
+
+}
+
 void fn_80270D34(void);
 void fn_8034F8BC(void) {
     fn_80270D34();
