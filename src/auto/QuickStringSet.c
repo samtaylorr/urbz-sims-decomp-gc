@@ -249,6 +249,13 @@ s32 fn_800FB678(void *arg0) {
     return var_r9;
 }
 
+void fn_800FB6F8(void) {
+    M2C_UNK fn_800FB760();
+    M2C_UNK fn_802D1FC8(M2C_UNK);
+    fn_802D1FC8(8);
+    fn_800FB760();
+}
+
 extern u8 lbl_8040D458[];
 void fn_800FB77C(void **self, s32 flags) {
     *self = lbl_8040D458;
