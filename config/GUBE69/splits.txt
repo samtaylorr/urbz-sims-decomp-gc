@@ -220,7 +220,10 @@ auto/text_801D626C.c:
 	.text       start:0x801D626C end:0x801D6514
 
 auto/text_801D6514.c:
-	.text       start:0x801D6514 end:0x8023EBD8
+	.text       start:0x801D6514 end:0x801D67BC
+
+auto/text_801D67BC.c:
+	.text       start:0x801D67BC end:0x8023EBD8
 
 libsn/text_8023EBD8.c:
 	.text       start:0x8023EBD8 end:0x80241A98
