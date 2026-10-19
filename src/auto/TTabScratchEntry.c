@@ -146,6 +146,16 @@ void fn_8019CA78(void *arg0, u32 arg1) {
     }
 }
 
+void fn_8019CBE8(void *arg0, void *arg1) {
+    M2C_FIELD(arg1, s16 *, 0) = 0;
+    M2C_FIELD(arg1, s32 *, 0x10) = (s32) M2C_FIELD(arg0, s32 *, 0xC);
+    M2C_FIELD(arg1, s32 *, 0x14) = (s32) M2C_FIELD(arg0, s32 *, 0x10);
+    M2C_FIELD(arg1, s32 *, 0x18) = (s32) M2C_FIELD(arg0, s32 *, 8);
+    M2C_FIELD(arg1, f32 *, 4) = (f32) M2C_FIELD(arg0, f32 *, 0x14);
+    M2C_FIELD(arg1, f32 *, 8) = (f32) M2C_FIELD(arg0, f32 *, 0x18);
+    M2C_FIELD(arg1, f32 *, 0xC) = (f32) M2C_FIELD(arg0, f32 *, 0x1C);
+}
+
 extern u8 lbl_80414770[];
 extern void fn_802D20E8(void *);
 void fn_8019CE74(void **self, s32 flags) {
