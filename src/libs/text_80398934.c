@@ -1155,6 +1155,10 @@ SearchEntry *fn_803ABF48(SearchEntry *lo, SearchEntry *hi, s32 key) {
     }
 }
 
+s32 fn_803AC3B0(void) {
+    return 4;
+}
+
 s32 fn_803AC3B8(void) {
     return 2;
 }
