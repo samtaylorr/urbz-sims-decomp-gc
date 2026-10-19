@@ -188,3 +188,8 @@ void fn_8008A398(void) {
     fn_8008A3B8();
 }
 
+void fn_8008C3A8(void);
+void fn_8008C388(void) {
+    fn_8008C3A8();
+}
+
