@@ -5,6 +5,30 @@ s32 fn_80059AC4(s32 *self) {
     return self[1];
 }
 
+u8 fn_80059B90(u8 *self) {
+    return self[2];
+}
+
+s32 fn_80059B98(s32 *self, s32 *out) {
+    s32 tmp;
+
+    if (out != 0) {
+        out[0] = self[0];
+        out[1] = self[1];
+        tmp = out[2];
+        return 1;
+    }
+    return 0;
+}
+
+void fn_80059BD4(s32 *self) {
+    s32 i;
+
+    for (i = 0; i < 0x24; i++) {
+        self[i] = 0;
+    }
+}
+
 extern void fn_8005A038(s32);
 extern void fn_802D20E8(s32);
 void fn_80059BF4(s32 self, s32 flags) {
