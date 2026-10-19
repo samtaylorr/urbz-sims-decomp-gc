@@ -99,6 +99,12 @@ void fn_8039A514(void *self) {
     ((s32 *)self)[1] = 0;
 }
 
+void fn_8039A7C0(void *self) {
+    ((s32 *)self)[0] = 0;
+    ((s32 *)self)[2] = 0;
+    ((s32 *)self)[1] = 0;
+}
+
 void fn_8039AB04(void) {
     fn_8030AD40();
 }
