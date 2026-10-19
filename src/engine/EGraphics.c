@@ -50,6 +50,10 @@ s32 fn_802EEEA8(void) {
     return 1;
 }
 
+s32 fn_802EEEE4(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x14);
+}
+
 s32 fn_802EEEEC(s32 *self) {
     return self[6];
 }
