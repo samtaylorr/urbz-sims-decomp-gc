@@ -10,6 +10,23 @@ void fn_802D8328(void *arg0) {
     M2C_FIELD(arg0, s32 *, 4) = 0;
 }
 
+s32 fn_802D838C(void *arg0) {
+    s32 fn_8025465C();
+    M2C_UNK fn_80254684(M2C_UNK);
+    M2C_UNK fn_8037ACCC(void *);
+    M2C_UNK var_r30;
+
+    var_r30 = 1;
+    if (fn_8025465C() == 0) {
+        var_r30 = 0;
+    }
+    if ((s32) M2C_FIELD(arg0, s32 *, 0xC) < (s32) M2C_FIELD(arg0, s32 *, 8)) {
+        fn_8037ACCC(arg0 + 0xC);
+    }
+    fn_80254684(var_r30);
+    return 1;
+}
+
 s32 fn_802D8458(char *self) {
     return *(s32 *)(self + 0xC);
 }
