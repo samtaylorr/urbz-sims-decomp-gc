@@ -48,3 +48,8 @@ void fn_800EE91C(void) {
     fn_800EC59C();
 }
 
+void fn_800EC6BC(void);
+void fn_800EEAC4(void) {
+    fn_800EC6BC();
+}
+
