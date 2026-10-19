@@ -514,6 +514,18 @@ s32 fn_8019F890(void) {
     return 0;
 }
 
+s32 fn_8019FC9C(void) {
+    M2C_UNK fn_800C4744(M2C_UNK *);
+    s32 fn_800C4820();
+    s32 fn_80247C34();
+    M2C_UNK sp8;
+    s32 temp_r29;
+
+    fn_800C4744(&sp8);
+    temp_r29 = fn_800C4820();
+    return temp_r29 ^ (M2C_FIELD(&sp8, s32 *, 4) ^ fn_80247C34());
+}
+
 void fn_801A0858(void *self, s32 flags) {
     if (flags & 1) {
         fn_802D20E8(self);
