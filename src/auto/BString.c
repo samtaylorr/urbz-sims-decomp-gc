@@ -24,6 +24,20 @@ s32 *fn_800D1DE8(s32 *self, s32 arg1) {
     return self;
 }
 
+extern u8 lbl_8040B290[];
+s32 *fn_800D1EA4(s32 *self, s32 arg1) {
+    self[0] = arg1;
+    self[1] = -1;
+    self[2] = 0;
+    self[3] = -1;
+    self[4] = 1;
+    self[6] = 0;
+    self[7] = 0;
+    self[8] = 0;
+    self[5] = (s32)lbl_8040B290;
+    return self;
+}
+
 void fn_800D4428(void) {
     fn_800D1F84();
 }
