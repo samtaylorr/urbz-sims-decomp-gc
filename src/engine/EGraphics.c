@@ -38,6 +38,13 @@ void fn_802EF010(void) {
     fn_802D2FD0();
 }
 
+void fn_802EF3F4(void **obj) {
+    if (obj != NULL) {
+        char *vt = (char *)*obj;
+        (*(void (**)(void *, s32))(vt + 0x34))((char *)obj + *(s16 *)(vt + 0x30), 3);
+    }
+}
+
 extern u8 lbl_80493718[];
 void *fn_802EF434(void) {
     return lbl_80493718;
