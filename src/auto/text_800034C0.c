@@ -22,6 +22,15 @@ void fn_800034C8(void *self, s32 value) {
     lbl_80493F0C = value;
 }
 
+void fn_800034D0(void *self, const char *name) {
+    if (fn_80248B28(name, lbl_803C1320) || fn_80248B28(name, lbl_803C1328)) {
+        if (fn_80248808(name) > 4) {
+            fn_80248A10(lbl_80491BF0, name, 0x10);
+            lbl_80491BF0[0xf] = 0;
+        }
+    }
+}
+
 u8 *fn_8000381C(u8 *self) {
     fn_802E0460(self);
     *(u8 **)(self + 0x338) = lbl_804069E8;
