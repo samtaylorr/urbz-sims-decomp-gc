@@ -70,6 +70,10 @@ void fn_802E1A28(void) {
 
 }
 
+s32 fn_802E1A34(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x30);
+}
+
 s32 fn_802E1A44(char *self) {
     return *(s32 *)(self + 0xC);
 }
