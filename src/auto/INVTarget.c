@@ -2,6 +2,16 @@
 #include "common.h"
 
 void fn_800C3B48(void);
+s32 fn_801DCC6C(void *arg0) {
+    s32 var_r11;
+
+    var_r11 = 1;
+    if ((s32) M2C_FIELD(arg0, s32 *, 0x84) == (s32) M2C_FIELD(arg0, s32 *, 0x88)) {
+        var_r11 = 0;
+    }
+    return var_r11;
+}
+
 s32 fn_801DCC8C(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x84);
 }
