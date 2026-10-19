@@ -530,6 +530,19 @@ void fn_80063AA0(void) {
     fn_802D2430();
 }
 
+void fn_80063AC0(void *arg0, s32 *arg1) {
+    M2C_UNK fn_8005CBC8();
+    s32 temp_r4;
+
+    temp_r4 = *arg1;
+    if ((s32) M2C_FIELD(arg0, s32 *, 0x400) != temp_r4) {
+        M2C_FIELD(arg0, s32 *, 0x400) = temp_r4;
+        if (temp_r4 != 0) {
+            fn_8005CBC8();
+        }
+    }
+}
+
 void fn_80063EA4(void) {
     M2C_UNK fn_80062EBC(M2C_UNK, M2C_UNK);
     fn_80062EBC(1, 0xFFFF);
