@@ -17,3 +17,7 @@ s32 fn_800C4048(void) {
     return 0;
 }
 
+s32 fn_800C4050(void) {
+    return 1;
+}
+
