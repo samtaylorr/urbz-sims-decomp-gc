@@ -5,6 +5,10 @@ s32 fn_802DFEEC(void) {
     return 0;
 }
 
+s32 fn_802DFF50(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x68);
+}
+
 s32 fn_802DFF58(void) {
     return 1;
 }
