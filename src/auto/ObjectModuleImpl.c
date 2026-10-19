@@ -81,6 +81,12 @@ s32 fn_80157A38(void) {
     return lbl_80496648;
 }
 
+extern s32 lbl_80495BE0;
+extern void fn_800F1A60(s32, s32);
+void fn_80157AEC(void) {
+    fn_800F1A60((s32)&lbl_80495BE0, 2);
+}
+
 void fn_80157F24(void) {
 
 }
