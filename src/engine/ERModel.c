@@ -75,3 +75,8 @@ void fn_8032CE38(void) {
     fn_802D2430();
 }
 
+void *fn_8032CE88(u32 size, void *p);
+void *fn_8032CE88(u32 size, void *p) {
+    return p;
+}
+
