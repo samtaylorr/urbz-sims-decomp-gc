@@ -10,6 +10,10 @@ s32 fn_80223248(s32 *self) {
     return self[1];
 }
 
+s32 fn_8022350C(s32 *self) {
+    return *self;
+}
+
 extern s32 lbl_80494674;
 s32 fn_80225544(void) {
     return lbl_80494674;
