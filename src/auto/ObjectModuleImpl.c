@@ -33,6 +33,20 @@ void fn_8014C3F4(void) {
 
 }
 
+void fn_8014DE2C(void *arg0, void *arg1) {
+    M2C_UNK fn_8014F258(void *, void *);
+    s32 fn_8014FDB4(void *, void *);
+    s32 fn_8016CB30(void *);
+    s32 temp_r9;
+
+    temp_r9 = M2C_FIELD(arg1, s32 *, 0x68) - 1;
+    M2C_FIELD(arg1, s32 *, 0x68) = temp_r9;
+    if ((temp_r9 == 0) && (fn_8016CB30(arg1) == 0)) {
+        fn_8014F258(arg0, arg1);
+    }
+    M2C_FIELD(arg0, s32 *, 0x6D8) = (s32) (M2C_FIELD(arg0, s32 *, 0x6D8) - fn_8014FDB4(arg0, arg1));
+}
+
 void fn_8014DEA0(void *arg0, void *arg1) {
     s32 temp_r0;
     void *temp_r11;
