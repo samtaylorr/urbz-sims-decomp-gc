@@ -94,6 +94,14 @@ void fn_8035BE90(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x4DC) = (s32) (M2C_FIELD(arg0, s32 *, 0x4DC) + 0x18);
 }
 
+void fn_8035BEB4(void *arg0) {
+    extern s32 lbl_804951F4;
+    if ((s32) lbl_804951F4 != 0) {
+        lbl_804951F4 = 0;
+    }
+    M2C_FIELD(arg0, s32 *, 0x4DC) = (s32) (M2C_FIELD(arg0, s32 *, 0x4DC) + 0x18);
+}
+
 void fn_8035BED8(void) {
 
 }
