@@ -4447,6 +4447,12 @@ void *fn_803BAD8C(void *self) {
     return self;
 }
 
+void fn_803BAF00(void *self) {
+    ((s32 *)self)[0] = 0;
+    ((s32 *)self)[2] = 0;
+    ((s32 *)self)[1] = 0;
+}
+
 extern void fn_803BAF00(void *);
 void *fn_803BB700(void *self) {
     fn_803BAF00(self);
