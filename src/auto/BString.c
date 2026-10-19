@@ -20,3 +20,8 @@ void fn_800DAAC4(void) {
     fn_800D1F84();
 }
 
+void fn_802D0F9C(void);
+void fn_800DB148(void) {
+    fn_802D0F9C();
+}
+
