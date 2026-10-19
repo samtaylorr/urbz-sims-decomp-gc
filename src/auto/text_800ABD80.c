@@ -55,6 +55,10 @@ void *fn_800B2614(void *arg0) {
     return arg0 + (M2C_FIELD(arg0, s32 *, 0x360) * 0x6C);
 }
 
+void *fn_800B2624(void *arg0) {
+    return arg0 + (M2C_FIELD(arg0, s32 *, 0x364) * 0x6C);
+}
+
 s32 fn_800B2708(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x360);
 }
