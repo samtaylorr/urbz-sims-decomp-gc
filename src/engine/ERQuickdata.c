@@ -27,6 +27,10 @@ s32 fn_8032E180(u8 *self) {
     return *(s32 *)(self + 0x20);
 }
 
+s32 fn_8032E188(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x24);
+}
+
 void fn_8032E190(void) {
     fn_802D2FD0();
 }
