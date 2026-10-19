@@ -913,6 +913,17 @@ s32 fn_801A4FB0(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x38);
 }
 
+s32 fn_801A9D9C(void *arg0, void *arg1) {
+    u8 temp_r0;
+    u8 temp_r0_2;
+
+    temp_r0 = M2C_FIELD(arg1, u8 *, 0);
+    if (((s8) temp_r0 < 0) || ((s8) temp_r0 >= (s32) M2C_FIELD(arg0, s32 *, 0x14)) || (temp_r0_2 = M2C_FIELD(arg1, u8 *, 1), (((s8) temp_r0_2 < 0) != 0)) || ((s8) temp_r0_2 >= (s32) M2C_FIELD(arg0, s32 *, 0x18))) {
+        return 1;
+    }
+    return 0;
+}
+
 s32 fn_801A9EBC(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x14);
 }
