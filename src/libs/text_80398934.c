@@ -740,6 +740,14 @@ s32 fn_8039C370(s32 *self) {
     return self[2];
 }
 
+void fn_8039C378(s32 *self) {
+    s32 i;
+
+    for (i = 7; i >= 0; i--) {
+        self[i] = 0;
+    }
+}
+
 extern u8 lbl_80409DD8[];
 void fn_8039C584(void **self, s32 flags) {
     *self = lbl_80409DD8;
