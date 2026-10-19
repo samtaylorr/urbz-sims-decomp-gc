@@ -5,3 +5,9 @@ void fn_800CD09C(void);
 void fn_800CCF70(void) {
     fn_800CD09C();
 }
+
+void fn_800CD104(void);
+void fn_800CED30(void) {
+    fn_800CD104();
+}
+
