@@ -42,3 +42,8 @@ void fn_8001C570(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x18) = 0x16;
 }
 
+void fn_8001C57C(void) {
+    M2C_UNK fn_8001C4BC(M2C_UNK, M2C_UNK);
+    fn_8001C4BC(1, 0xFFFF);
+}
+
