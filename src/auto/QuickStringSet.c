@@ -48,6 +48,10 @@ void fn_800F78B8(void **self, s32 flags) {
     }
 }
 
+void fn_800F78EC(void) {
+
+}
+
 s32 fn_800F7A20(void) {
     return 0;
 }
