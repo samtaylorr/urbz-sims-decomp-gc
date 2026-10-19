@@ -6,3 +6,9 @@ extern void fn_802303F0(void *, void *);
 void fn_802324C0(void *arg0) {
     fn_802303F0(fn_8022554C(arg0), arg0);
 }
+
+extern void fn_80230448(void *, void *);
+void fn_802324F4(void *arg0) {
+    fn_80230448(fn_8022554C(arg0), arg0);
+}
+
