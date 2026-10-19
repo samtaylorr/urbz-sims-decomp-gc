@@ -287,6 +287,10 @@ void fn_8019F604(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x38) = arg1;
 }
 
+f32 fn_8019F60C(void *arg0) {
+    return M2C_FIELD(arg0, f32 *, 4);
+}
+
 extern u8 lbl_80414970[];
 void fn_8019F844(void **self, s32 flags) {
     *self = lbl_80414970;
