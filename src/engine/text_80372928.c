@@ -24,6 +24,13 @@ s32 fn_80372988(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void fn_8037380C(void) {
+    M2C_UNK fn_803729C8();
+    M2C_UNK fn_80373980(M2C_UNK);
+    fn_80373980(0x48);
+    fn_803729C8();
+}
+
 void fn_80373884(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
