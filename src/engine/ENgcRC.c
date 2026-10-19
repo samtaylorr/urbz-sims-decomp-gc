@@ -18,6 +18,19 @@ void fn_80346F5C(void) {
 
 }
 
+void fn_803481C0(void) {
+    s32 fn_80347F70();
+    M2C_UNK fn_8034806C(s32);
+    M2C_UNK fn_8034828C();
+    s32 temp_r30;
+
+loop_1:
+    temp_r30 = fn_80347F70();
+    fn_8034828C();
+    fn_8034806C(temp_r30);
+    goto loop_1;
+}
+
 void *fn_80348E8C(u32 size, void *p) {
     return p;
 }
