@@ -148,6 +148,11 @@ s32 fn_8036D3E8(void) {
     return lbl_80493DB4[0];
 }
 
+extern u16 lbl_80493DB8[];
+u16 fn_8036D3F4(void) {
+    return lbl_80493DB8[0];
+}
+
 void *fn_8036D400(void) {
     return lbl_80493DA4;
 }
