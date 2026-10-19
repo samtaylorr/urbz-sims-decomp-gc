@@ -15,3 +15,8 @@ void fn_801CD968(void) {
 
 }
 
+void fn_801CE7E4(s32 arg0) {
+    M2C_UNK fn_801CB190(s32);
+    fn_801CB190(arg0 + 0xF8);
+}
+
