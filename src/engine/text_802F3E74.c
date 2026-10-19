@@ -80,6 +80,11 @@ void fn_802F5984(void) {
     fn_802D2430();
 }
 
+void *fn_802F5A50(u32 size, void *p);
+void *fn_802F5A50(u32 size, void *p) {
+    return p;
+}
+
 extern void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
 void fn_802F5A58(void *arg0) {
