@@ -198,6 +198,15 @@ void fn_801168DC(void) {
     fn_802C7FE8(lbl_80434BD4);
 }
 
+void fn_8011709C(void *arg0) {
+    extern s32 lbl_80494438;
+    s32 temp_r9;
+
+    temp_r9 = lbl_80494438 + 1;
+    lbl_80494438 = temp_r9;
+    M2C_FIELD(arg0, s32 *, 0x40) = temp_r9;
+}
+
 s32 fn_80117474(char *self) {
     return *(s32 *)(self + 0xC);
 }
