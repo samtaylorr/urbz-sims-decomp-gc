@@ -22,6 +22,10 @@ void fn_8039B618(void) {
     fn_8018EA6C();
 }
 
+s32 fn_8039B700(void) {
+    return 1;
+}
+
 s32 fn_8039B718(void) {
     return 0;
 }
