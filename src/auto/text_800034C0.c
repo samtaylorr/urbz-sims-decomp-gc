@@ -15,6 +15,11 @@ u8 *fn_8000381C(u8 *self) {
     return self;
 }
 
+void fn_8000386C(u8 *self) {
+    *(u8 **)(self + 0x338) = lbl_804069E8;
+    fn_802E04BC(self);
+}
+
 void fn_80003CEC(void) {
 }
 
