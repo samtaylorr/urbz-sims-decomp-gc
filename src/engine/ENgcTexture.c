@@ -156,9 +156,9 @@ void *fn_80362060(void *arg0) {
     void fn_80361408(void *, s32, s32, s32);
     extern u8 lbl_8041D2B8[];
     fn_80361408(arg0, 8, 8, 8);
-    M2C_FIELD(arg0, s32 *, 0xD0) = 0;
     M2C_FIELD(arg0, void **, 0x24) = lbl_8041D2B8;
     M2C_FIELD(arg0, s32 *, 0xCC) = 0;
+    M2C_FIELD(arg0, s32 *, 0xD0) = 0;
     return arg0;
 }
 
