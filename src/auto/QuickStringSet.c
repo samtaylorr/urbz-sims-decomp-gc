@@ -10,6 +10,10 @@ void fn_800F66A0(void (*cb)(void)) {
     lbl_80495A94 = cb;
 }
 
+s32 fn_800F68B4(s32 *self) {
+    return self[1];
+}
+
 s32 fn_800F7A20(void) {
     return 0;
 }
