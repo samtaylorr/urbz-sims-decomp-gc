@@ -120,6 +120,19 @@ s32 fn_8005B6DC(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void fn_8005BAE8(void *arg0, s32 arg1) {
+    M2C_UNK fn_803256E0(s32, s32, M2C_UNK);
+    void *var_r31;
+
+    var_r31 = M2C_FIELD(arg0, void **, 0x430);
+    if (var_r31 != NULL) {
+        do {
+            fn_803256E0(arg1, M2C_FIELD(var_r31, s32 *, 0), 0);
+            var_r31 = M2C_FIELD(var_r31, void **, 8);
+        } while (var_r31 != NULL);
+    }
+}
+
 void fn_8005CEF0(void *arg0) {
     M2C_UNK fn_802E9CD4(s32);
     fn_802E9CD4(arg0 + 0x314);
