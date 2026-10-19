@@ -104,3 +104,7 @@ void fn_800F3E30(void) {
     fn_800F1510();
 }
 
+s32 fn_800F4878(void **arg0) {
+    return M2C_FIELD(*arg0, s32 *, 4);
+}
+
