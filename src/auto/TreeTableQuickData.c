@@ -100,6 +100,10 @@ s32 fn_801B6384(s32 *self) {
     return self[1];
 }
 
+void fn_801B6580(void) {
+
+}
+
 s32 fn_801B65B8(void) {
     return 0;
 }
