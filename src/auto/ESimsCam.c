@@ -28,6 +28,10 @@ void fn_8000D500(char *self, Vec3 *a, Vec3 *b, Vec3 *c) {
     *(Vec3 *)(self + 0x20) = *c;
 }
 
+void fn_800108B8(void) {
+
+}
+
 void fn_80014C94(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
