@@ -62,6 +62,10 @@ void fn_800051BC(void) {
     fn_80005118(1, 0xFFFF);
 }
 
+void fn_800051E8(void) {
+    fn_80005118(0, 0xFFFF);
+}
+
 void fn_802C5240(void);
 
 void fn_8001C2A4(void);
