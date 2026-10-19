@@ -166,6 +166,10 @@ void fn_8006F534(void) {
 
 }
 
+void fn_8006F538(void) {
+
+}
+
 s32 fn_800702F8(void) {
     return 0;
 }
