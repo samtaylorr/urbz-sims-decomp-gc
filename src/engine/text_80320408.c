@@ -75,6 +75,11 @@ void fn_80323E90(void) {
     fn_802D2430();
 }
 
+void *fn_80323F5C(u32 size, void *p);
+void *fn_80323F5C(u32 size, void *p) {
+    return p;
+}
+
 extern void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
 void fn_80323F64(void *arg0) {
