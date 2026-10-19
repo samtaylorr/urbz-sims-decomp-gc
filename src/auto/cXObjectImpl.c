@@ -6,6 +6,11 @@ void fn_801301DC(void) {
 
 }
 
+void fn_801301E0(void *arg0, s32 *arg1, s32 *arg2) {
+    *arg1 = (s16) M2C_FIELD(arg0, s16 *, 0x16) >> 8;
+    *arg2 = (s32) M2C_FIELD(arg0, u8 *, 0x17);
+}
+
 extern s32 lbl_80495BB0;
 extern void fn_800F1A60(s32, s32);
 void fn_8013020C(void) {
