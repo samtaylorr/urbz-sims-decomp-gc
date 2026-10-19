@@ -56,6 +56,10 @@ s32 fn_802ACF08(void) {
     return 0;
 }
 
+s32 fn_802AD02C(void) {
+    return 1;
+}
+
 s32 fn_802AD114(void) {
     return 0;
 }
