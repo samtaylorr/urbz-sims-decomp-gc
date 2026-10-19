@@ -160,7 +160,10 @@ auto/text_8016F87C.c:
 	.text       start:0x8016F87C end:0x80176558
 
 auto/cXPersonImpl.c:
-	.text       start:0x80176558 end:0x8023EBD8
+	.text       start:0x80176558 end:0x801861B8
+
+auto/QuickResFile.c:
+	.text       start:0x801861B8 end:0x8023EBD8
 
 libsn/text_8023EBD8.c:
 	.text       start:0x8023EBD8 end:0x80241A98
