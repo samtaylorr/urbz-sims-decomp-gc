@@ -2618,6 +2618,13 @@ void fn_800EE7C4(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     fn_800EC49C(arg0, arg1, arg2, arg3);
 }
 
+u8 *fn_800EAFCC(void **arg0);
+s32 fn_80248808(const char *arg0);
+void fn_8024839C(void *dst, const void *src, u32 n);
+void fn_800EE7E4(s32 arg0, const char *arg1, s32 arg2) {
+    fn_800EC49C(arg0, (s32)arg1, arg2, arg1 ? fn_80248808(arg1) : 0);
+}
+
 void fn_800EC59C(void);
 void fn_800EE91C(void) {
     fn_800EC59C();
