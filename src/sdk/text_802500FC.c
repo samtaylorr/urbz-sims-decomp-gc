@@ -58,6 +58,10 @@ void fn_80254F6C(s32 arg0) {
     *(s32 *)0x800030D0 = arg0;
 }
 
+s32 fn_80255A38(void) {
+    return *(s32 *)0x80000028;
+}
+
 void fn_80258364(void) {
 
 }
