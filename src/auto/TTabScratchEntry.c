@@ -477,6 +477,10 @@ s16 fn_801A38DC(void *arg0) {
     return M2C_FIELD(arg0, s16 *, 4);
 }
 
+void fn_801A38E4(void *arg0, s16 arg1) {
+    M2C_FIELD(arg0, s16 *, 4) = arg1;
+}
+
 s16 fn_801A391C(void *arg0) {
     return M2C_FIELD(arg0, s16 *, 8);
 }
