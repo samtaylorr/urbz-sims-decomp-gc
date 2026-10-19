@@ -94,6 +94,22 @@ void fn_80399D20(s32 *dst, s32 *src, s32 n) {
     }
 }
 
+void *fn_80399E6C(void *self, s32 **arg1) {
+    s32 n;
+    s32 i;
+
+    {
+        VtblEntry *vt = *(VtblEntry **)((char *)self + 0x18);
+        ((void (*)(void *, void *, s32))vt[6].pfn)((char *)self + vt[6].delta, &n, 4);
+    }
+    fn_80399D4C(arg1, n, 0);
+    for (i = 0; i < n; i++) {
+        VtblEntry *vt = *(VtblEntry **)((char *)self + 0x18);
+        ((void (*)(void *, void *, s32))vt[6].pfn)((char *)self + vt[6].delta, &arg1[0][i], 4);
+    }
+    return self;
+}
+
 void fn_80399F18(s32 *self, s32 n) {
     while (--n != -1) {
         self++;
