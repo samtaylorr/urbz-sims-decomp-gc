@@ -90,6 +90,10 @@ f32 fn_80323F98(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0x58);
 }
 
+f32 fn_80323FA0(void *arg0) {
+    return M2C_FIELD(arg0, f32 *, 0x5C);
+}
+
 s32 fn_803240A0(s32 arg0) {
     return arg0 + 0x64;
 }
