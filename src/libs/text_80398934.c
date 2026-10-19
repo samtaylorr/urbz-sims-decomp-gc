@@ -2,6 +2,29 @@
 #include "common.h"
 
 extern u8 lbl_8041CFA8[];
+
+typedef struct {
+    s16 delta;
+    s16 index;
+    void (*pfn)(void *);
+} VtblEntry;
+
+typedef struct {
+    s16 delta;
+    s16 index;
+    union {
+        void (*pfn)(void *);
+        s16 delta2;
+    } u;
+    char *obj;
+} BoundPmf;
+
+typedef struct {
+    s32 key;
+    s32 unk4;
+    s32 unk8;
+    s32 unkC;
+} SearchEntry;
 void fn_802D8BEC(void *);
 void fn_8030AD40(void);
 void fn_8039AB04(void) {
