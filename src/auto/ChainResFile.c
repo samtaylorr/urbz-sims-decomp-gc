@@ -27,6 +27,12 @@ void **fn_801028B0(void **self) {
     return self;
 }
 
+extern u8 lbl_8040D608[];
+void **fn_801028C4(void **self) {
+    *self = lbl_8040D608;
+    return self;
+}
+
 extern void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
 void fn_801029D8(void *arg0) {
