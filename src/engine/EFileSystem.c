@@ -18,6 +18,10 @@ s32 fn_802C5CF4(s32 *self) {
     return self[2];
 }
 
+s32 fn_802C5CFC(char *self) {
+    return *(s32 *)(self + 0xC);
+}
+
 s32 fn_802C605C(s32 *self) {
     return *self;
 }
