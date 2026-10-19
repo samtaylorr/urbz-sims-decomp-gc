@@ -67,6 +67,11 @@ void fn_800688B8(void) {
 
 }
 
+void fn_80068978(s32 arg0) {
+    M2C_UNK fn_80086094(s32);
+    fn_80086094(arg0 + 0x210);
+}
+
 void fn_80068F58(void) {
 
 }
