@@ -26,6 +26,10 @@ void fn_8010E984(void) {
 
 }
 
+void fn_8010E988(void) {
+
+}
+
 s32 fn_8010EA58(void) {
     return 1;
 }
