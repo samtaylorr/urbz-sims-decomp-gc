@@ -13,6 +13,11 @@ void fn_8001FC54(void) {
 
 }
 
+void fn_80021104(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0x6C) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x68) = 0;
+}
+
 s32 fn_80021248(void) {
     return 1;
 }
