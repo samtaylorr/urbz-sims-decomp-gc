@@ -99,6 +99,10 @@ s32 fn_800CBD50(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x6C);
 }
 
+s32 fn_800CBD58(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x74) ^ 1;
+}
+
 void fn_800CCF70(void) {
     fn_800CD09C();
 }
