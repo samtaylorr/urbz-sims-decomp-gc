@@ -1,6 +1,11 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+void fn_80310528(void *arg0) {
+    M2C_UNK fn_8036FC58(s32);
+    fn_8036FC58(M2C_FIELD(arg0, s32 *, 0x200));
+}
+
 s32 fn_8031054C(u32 *arg0, u32 *arg1) {
     u32 temp_r0;
     u32 temp_r9;
