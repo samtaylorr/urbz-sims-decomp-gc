@@ -101,6 +101,28 @@ void fn_802F5984(void) {
     fn_802D2430();
 }
 
+extern void *fn_802D197C(void *, u32, s32);
+extern void *fn_802DC3C0(void *, u32, s32, s32, s32);
+extern void *fn_802D0B3C(void);
+void *fn_802F59A4(u32 size) {
+    void *heap;
+    void *p;
+
+    heap = fn_802D0AB8();
+    if (size == 0) {
+        return NULL;
+    }
+    size = (size + 0xF) & ~0xF;
+    p = fn_802D197C(heap, size, 0x10);
+    if (p == NULL) {
+        p = fn_802DC3C0(heap, size, 0x10, 0, 0);
+        if (p == NULL && heap == fn_802D0AB8()) {
+            return fn_802DC3C0(fn_802D0B3C(), size, 0x10, 0, 0);
+        }
+    }
+    return p;
+}
+
 void *fn_802F5A50(u32 size, void *p);
 void *fn_802F5A50(u32 size, void *p) {
     return p;
