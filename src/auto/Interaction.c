@@ -156,6 +156,10 @@ s32 fn_801175AC(s32 *self) {
     return self[1];
 }
 
+s32 fn_801175C4(s32 arg0) {
+    return arg0 + 0x18;
+}
+
 s32 fn_801175D4(u8 *self) {
     return *(s32 *)(self + 0x20);
 }
