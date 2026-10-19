@@ -209,6 +209,11 @@ s32 fn_80148BAC(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x58);
 }
 
+void fn_80148BB4(void *arg0) {
+    M2C_UNK fn_8016DD1C(s32);
+    fn_8016DD1C(M2C_FIELD(arg0, s32 *, 0x8C));
+}
+
 s32 fn_80148CB8(void *arg0) {
     return ((s32) (M2C_FIELD(arg0, s32 *, 0x94) - M2C_FIELD(arg0, s32 *, 0x90)) >> 5) - 1;
 }
