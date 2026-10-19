@@ -41,3 +41,7 @@ s32 fn_8012AA6C(void) {
     return 0;
 }
 
+s32 fn_8012AA98(void) {
+    return 0;
+}
+
