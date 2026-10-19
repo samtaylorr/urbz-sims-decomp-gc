@@ -105,6 +105,16 @@ s32 fn_800F7EA8(void) {
     return 0;
 }
 
+s16 fn_800F7EB0(void *arg0) {
+    void *temp_r9;
+
+    temp_r9 = M2C_FIELD(arg0, void **, 8);
+    if (temp_r9 != NULL) {
+        return M2C_FIELD(temp_r9, s16 *, 8);
+    }
+    return 0;
+}
+
 void fn_800F7EC8(void) {
 
 }
