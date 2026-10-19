@@ -26,6 +26,10 @@ s32 fn_802C5CFC(char *self) {
     return *(s32 *)(self + 0xC);
 }
 
+s32 fn_802C5D04(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x10);
+}
+
 s32 fn_802C5D0C(s32 *self) {
     return self[6];
 }
