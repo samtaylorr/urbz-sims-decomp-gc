@@ -224,6 +224,10 @@ s32 fn_801B6694(void) {
     return 0;
 }
 
+void fn_801B669C(void) {
+
+}
+
 s32 fn_801B66A0(void) {
     return 1;
 }
