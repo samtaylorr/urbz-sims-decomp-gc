@@ -146,3 +146,7 @@ void fn_80063AA0(void) {
     fn_802D2430();
 }
 
+void fn_800659D4(void) {
+    fn_802D2FD0();
+}
+
