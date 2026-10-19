@@ -5416,25 +5416,26 @@ void fn_803BAF00(void *self) {
 
 void fn_803BAF14(u8 *p, s32 n) {
     while (--n != -1) {
-        M2C_FIELD(p, s32 *, 0x0) = 0;
-        M2C_FIELD(p, s32 *, 0x4) = 0;
-        M2C_FIELD(p, s32 *, 0x8) = 0;
-        M2C_FIELD(p, s32 *, 0xC) = 0;
-        M2C_FIELD(p, s32 *, 0x10) = 0;
-        M2C_FIELD(p, s32 *, 0x14) = 0;
-        M2C_FIELD(p, s32 *, 0x18) = 0;
-        M2C_FIELD(p, s32 *, 0x1C) = 0;
-        M2C_FIELD(p, s32 *, 0x20) = 0;
-        M2C_FIELD(p, u8 *, 0x24) = 0xFF;
-        M2C_FIELD(p, u8 *, 0x25) = 0xFF;
-        M2C_FIELD(p, u8 *, 0x26) = 0xFF;
-        M2C_FIELD(p, u8 *, 0x27) = 0xFF;
-        M2C_FIELD(p, s16 *, 0x28) = 0;
-        M2C_FIELD(p, u8 *, 0x2B) = 0;
-        M2C_FIELD(p, u8 *, 0x2A) = 0;
-        M2C_FIELD(p, s32 *, 0x2C) = 0;
-        M2C_FIELD(p, u8 *, 0x30) = 0;
+        u8 *q = p;
         p += 0x34;
+        M2C_FIELD(q, s32 *, 0x0) = 0;
+        M2C_FIELD(q, s32 *, 0x4) = 0;
+        M2C_FIELD(q, s32 *, 0x8) = 0;
+        M2C_FIELD(q, s32 *, 0xC) = 0;
+        M2C_FIELD(q, s32 *, 0x10) = 0;
+        M2C_FIELD(q, s32 *, 0x14) = 0;
+        M2C_FIELD(q, s32 *, 0x18) = 0;
+        M2C_FIELD(q, s32 *, 0x1C) = 0;
+        M2C_FIELD(q, s32 *, 0x20) = 0;
+        M2C_FIELD(q, u8 *, 0x24) = 0xFF;
+        M2C_FIELD(q, u8 *, 0x25) = 0xFF;
+        M2C_FIELD(q, u8 *, 0x26) = 0xFF;
+        M2C_FIELD(q, u8 *, 0x27) = 0xFF;
+        M2C_FIELD(q, s16 *, 0x28) = 0;
+        M2C_FIELD(q, u8 *, 0x2B) = 0;
+        M2C_FIELD(q, u8 *, 0x2A) = 0;
+        M2C_FIELD(q, s32 *, 0x2C) = 0;
+        M2C_FIELD(q, u8 *, 0x30) = 0;
     }
 }
 
