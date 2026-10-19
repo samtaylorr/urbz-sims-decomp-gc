@@ -235,6 +235,28 @@ s32 fn_801BFD7C(s32 *self) {
     return self[7];
 }
 
+s32 fn_801BFD84(void *arg0) {
+    s32 temp_r0;
+
+    temp_r0 = M2C_FIELD(arg0, s32 *, 0x24);
+    switch (temp_r0) {                              /* irregular */
+    case 0:
+        return M2C_FIELD(arg0, s32 *, 0);
+    case 1:
+        return M2C_FIELD(arg0, s32 *, 4);
+    case 2:
+        return M2C_FIELD(arg0, s32 *, 8);
+    case 3:
+        return M2C_FIELD(arg0, s32 *, 0xC);
+    case 4:
+        return M2C_FIELD(arg0, s32 *, 0x10);
+    case 5:
+        return M2C_FIELD(arg0, s32 *, 0x14);
+    default:
+        return M2C_FIELD(arg0, s32 *, 0);
+    }
+}
+
 void fn_801C0120(void) {
 
 }
