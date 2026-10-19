@@ -86,6 +86,10 @@ s32 fn_801BBAB0(char *self) {
     return *(s32 *)(self + 0xC);
 }
 
+void fn_801BBFCC(void) {
+
+}
+
 void fn_801BF79C(void) {
     fn_803074F0();
 }
