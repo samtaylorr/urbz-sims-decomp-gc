@@ -190,3 +190,8 @@ void fn_800C3C04(u8 *src, s32 len, u16 *dst) {
     }
 }
 
+void fn_800C3DC8(void) {
+    M2C_UNK fn_800C3C94(M2C_UNK, M2C_UNK);
+    fn_800C3C94(1, 0xFFFF);
+}
+
