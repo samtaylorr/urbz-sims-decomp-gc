@@ -46,6 +46,10 @@ s32 fn_8029A0DC(void) {
     return 0;
 }
 
+void fn_8029A0E4(void) {
+
+}
+
 s32 fn_8029A0E8(void) {
     return 1;
 }
