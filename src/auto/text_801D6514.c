@@ -1,5 +1,9 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
+typedef struct {
+    s32 v[12];
+} Unk801D4BF0;
+
 
 extern s32 lbl_804945EC;
 u8 *fn_801D6514(u8 *self) {
@@ -15,6 +19,15 @@ void fn_801D6550(u8 *self) {
     extern u8 lbl_80416B38[];
     *(u8 **)(self + 4) = lbl_80416B38;
     fn_801C7588(self);
+}
+
+s32 fn_801D6580(u8 *self, s32 arg1, Unk801D4BF0 *out) {
+    extern Unk801D4BF0 lbl_804365CC;
+    if (arg1 == 0) {
+        *out = lbl_804365CC;
+        return 1;
+    }
+    return 0;
 }
 
 s32 fn_801D65E4(void) {
