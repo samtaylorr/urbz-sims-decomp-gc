@@ -214,7 +214,10 @@ auto/text_801D5C8C.c:
 	.text       start:0x801D5C8C end:0x801D5F34
 
 auto/text_801D5F34.c:
-	.text       start:0x801D5F34 end:0x8023EBD8
+	.text       start:0x801D5F34 end:0x801D626C
+
+auto/text_801D626C.c:
+	.text       start:0x801D626C end:0x8023EBD8
 
 libsn/text_8023EBD8.c:
 	.text       start:0x8023EBD8 end:0x80241A98
