@@ -105,3 +105,8 @@ s32 fn_803240A0(s32 arg0) {
     return arg0 + 0x64;
 }
 
+void fn_8032413C(void) {
+    M2C_UNK fn_80323CB8(M2C_UNK, M2C_UNK);
+    fn_80323CB8(1, 0xFFFF);
+}
+
