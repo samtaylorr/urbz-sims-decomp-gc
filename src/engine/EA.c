@@ -14,6 +14,10 @@ s32 fn_802D8460(s32 *self) {
     return self[2];
 }
 
+s32 fn_802D8B14(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x30);
+}
+
 s32 fn_802D8B1C(void) {
     return 1;
 }
