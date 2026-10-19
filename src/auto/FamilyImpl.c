@@ -46,6 +46,10 @@ s32 fn_8010C050(char *self) {
     return *(s32 *)(self + 0xC);
 }
 
+void fn_8010C058(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0xC) = arg1;
+}
+
 s32 fn_8010C060(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x10);
 }
