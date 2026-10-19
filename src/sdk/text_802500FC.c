@@ -17,6 +17,10 @@ s32 fn_80251874(void) {
     return lbl_804949A8;
 }
 
+void fn_80254F64(void) {
+
+}
+
 s32 fn_80260F58(void) {
     return 1;
 }
