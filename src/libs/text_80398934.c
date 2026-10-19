@@ -39,6 +39,12 @@ void fn_80398CD8(void (*cb)(void)) {
     lbl_8049662C = cb;
 }
 
+extern void fn_80399F34(void *);
+void *fn_8039A038(void *self) {
+    fn_80399F34(self);
+    return self;
+}
+
 void fn_8039AB04(void) {
     fn_8030AD40();
 }
