@@ -37,3 +37,7 @@ s32 fn_80230708(void) {
     return 1;
 }
 
+s32 fn_80230710(void) {
+    return 1;
+}
+
