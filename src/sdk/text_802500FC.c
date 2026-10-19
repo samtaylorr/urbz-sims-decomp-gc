@@ -21,6 +21,10 @@ void fn_80254F64(void) {
 
 }
 
+void fn_80254F68(void) {
+
+}
+
 s32 fn_80260F58(void) {
     return 1;
 }
