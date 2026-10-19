@@ -7,6 +7,10 @@ void fn_80345FB0(void) {
 
 }
 
+void fn_80346F5C(void) {
+
+}
+
 void *fn_80348E8C(u32 size, void *p) {
     return p;
 }
