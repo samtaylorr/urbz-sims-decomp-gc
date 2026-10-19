@@ -68,6 +68,11 @@ void fn_8023D88C(s32 arg0, s32 arg1) {
     fn_8022E86C(arg1, arg0);
 }
 
+void fn_8023D8B8(s32 arg0, s32 arg1) {
+    M2C_UNK fn_8022E8C8(s32, s32);
+    fn_8022E8C8(arg1, arg0);
+}
+
 s32 fn_8023E77C(void *arg0) {
     return M2C_FIELD(M2C_FIELD(arg0, void **, 0x8C), s32 *, 8);
 }
