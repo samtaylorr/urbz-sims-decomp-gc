@@ -2879,6 +2879,11 @@ void *fn_800ECF20(void *arg0, const char *arg1) {
     return arg0;
 }
 
+void *fn_800ED068(void *arg0, void **arg1) {
+    ((void (*)(void *, u8 *, s32))fn_800EBDA4)(arg0, fn_800EAFCC(arg1), fn_800EF6F8(arg1));
+    return arg0;
+}
+
 extern void fn_800EBDA4(void *);
 void *fn_800ED300(void *self) {
     fn_800EBDA4(self);
