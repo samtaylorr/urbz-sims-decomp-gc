@@ -1351,6 +1351,13 @@ void fn_803AD158(void **self, s32 flags) {
     }
 }
 
+void fn_803ADDAC(u8 *self) {
+    extern void fn_801C5CBC(u8 *);
+    extern u8 lbl_80415FF8[];
+    *(u8 **)(self + 4) = lbl_80415FF8;
+    fn_801C5CBC(self);
+}
+
 void fn_803ADDDC(void) {
 
 }
