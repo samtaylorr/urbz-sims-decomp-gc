@@ -289,6 +289,10 @@ s32 fn_80225554(s32 *self) {
     return *self;
 }
 
+s32 fn_80229F5C(void *arg0) {
+    return (s32) ((M2C_FIELD(arg0, s32 *, 0x70) - M2C_FIELD(arg0, s32 *, 0x6C)) * 0xB6DB6DB7) >> 3;
+}
+
 void fn_802320F8(void);
 void fn_8022DA50(void) {
     fn_802320F8();
