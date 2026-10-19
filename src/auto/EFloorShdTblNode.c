@@ -10,6 +10,15 @@ void fn_80058514(void) {
     fn_802D2FD0();
 }
 
+extern void fn_802D30D4(void *, s32 *);
+s32 fn_80058534(s32 arg0, s32 *out) {
+    s32 tmp;
+
+    fn_802D30D4((void *)arg0, &tmp);
+    *out = tmp;
+    return arg0;
+}
+
 extern void fn_802C5C58(void *, s32 *);
 s32 fn_80058574(s32 arg0, s32 *out) {
     s32 tmp;
