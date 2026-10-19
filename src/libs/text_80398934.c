@@ -4213,6 +4213,10 @@ void fn_803B97C0(void **self, s32 flags) {
     }
 }
 
+s32 fn_803B9FEC(s32 *self) {
+    return *self;
+}
+
 void fn_802F05AC(void);
 void fn_803BAAB8(void) {
     fn_802F05AC();
