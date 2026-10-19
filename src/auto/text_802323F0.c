@@ -16,6 +16,11 @@ void fn_802326E0(void) {
 
 }
 
+void fn_80232930(s32 arg0, s32 arg1) {
+    M2C_UNK fn_80230468(s32, s32);
+    fn_80230468(arg1, arg0);
+}
+
 void fn_80232D2C(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0xA4) = arg1;
 }
