@@ -12,15 +12,16 @@ static inline void BaseCtor_800D1D(s32 *self, s32 arg1) {
     self[4] = 1;
 }
 extern u8 lbl_8040B320[];
-void fn_800D1DE8(s32 *self, s32 arg1) {
+s32 *fn_800D1DE8(s32 *self, s32 arg1) {
     self[0] = arg1;
     self[1] = -1;
     self[2] = 0;
     self[3] = -1;
     self[4] = 1;
-    self[5] = (s32)lbl_8040B320;
     self[6] = 0;
     self[7] = 0;
+    self[5] = (s32)lbl_8040B320;
+    return self;
 }
 
 void fn_800D4428(void) {
