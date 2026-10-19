@@ -40,6 +40,19 @@ void fn_802E5EA4(void) {
     fn_802E5700();
 }
 
+void fn_802E7720(void *arg0) {
+    s32 temp_r0;
+    s32 var_ctr;
+
+    temp_r0 = M2C_FIELD(arg0, s32 *, 0x3C);
+    if (temp_r0 > 0) {
+        var_ctr = temp_r0;
+        do {
+            var_ctr -= 1;
+        } while (var_ctr != 0);
+    }
+}
+
 void fn_802EB650(void);
 void fn_802EB590(void) {
     fn_802EB650();
