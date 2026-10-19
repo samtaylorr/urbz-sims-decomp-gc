@@ -57,6 +57,10 @@ void *fn_8036F168(u32 size, void *p) {
     return p;
 }
 
+u8 fn_8036F19C(void *arg0) {
+    return M2C_FIELD(arg0, u8 *, 0x18);
+}
+
 s32 fn_8036F1D4(s32 *self) {
     return self[2];
 }
