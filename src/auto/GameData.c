@@ -146,3 +146,8 @@ void fn_800495E8(void) {
 
 }
 
+void fn_80049738(void) {
+    M2C_UNK fn_800495EC(M2C_UNK, M2C_UNK);
+    fn_800495EC(1, 0xFFFF);
+}
+
