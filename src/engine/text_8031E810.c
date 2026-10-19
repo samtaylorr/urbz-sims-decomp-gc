@@ -151,3 +151,8 @@ s32 fn_8031EE44(void) {
     return 1;
 }
 
+void fn_8031EE4C(void) {
+    M2C_UNK fn_8031EB28(M2C_UNK, M2C_UNK);
+    fn_8031EB28(1, 0xFFFF);
+}
+
