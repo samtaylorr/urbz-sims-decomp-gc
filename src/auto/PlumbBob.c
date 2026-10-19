@@ -187,6 +187,18 @@ void fn_8006A20C(void) {
 
 }
 
+void fn_8006A2A4(void *arg0) {
+    register unsigned temp_r9;
+
+    temp_r9 = M2C_FIELD(arg0, s32 *, 0x48);
+    if (temp_r9 == 0) {
+        M2C_FIELD(arg0, s32 *, 0x4C) = temp_r9;
+        M2C_FIELD(arg0, s32 *, 0x50) = temp_r9;
+        M2C_FIELD(arg0, s32 *, 0x54) = temp_r9;
+        M2C_FIELD(arg0, s32 *, 0x48) = 1;
+    }
+}
+
 void fn_8006A2C8(void) {
 
 }
