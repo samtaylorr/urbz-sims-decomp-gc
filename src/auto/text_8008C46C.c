@@ -5,6 +5,10 @@ void fn_8008CD40(void) {
     fn_803073C4();
 }
 
+s32 fn_8008F85C(void) {
+    return 0;
+}
+
 void fn_8009415C(void) {
     fn_80091BE8();
 }
