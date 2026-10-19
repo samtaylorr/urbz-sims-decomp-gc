@@ -117,6 +117,17 @@ void fn_802E18CC(void *arg0, s32 arg1) {
     }
 }
 
+void fn_802E19F8(s32 arg0, s32 arg1) {
+    s32 var_ctr;
+
+    if ((arg1 == 0xFFFF) && (arg0 != 0)) {
+        var_ctr = 3;
+        do {
+            var_ctr -= 1;
+        } while (var_ctr != 0);
+    }
+}
+
 void fn_802E1A20(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 8) = arg1;
 }
