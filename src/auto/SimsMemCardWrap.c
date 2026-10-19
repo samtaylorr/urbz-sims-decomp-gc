@@ -153,6 +153,11 @@ void fn_800A9C84(s32 self, s32 flags) {
     }
 }
 
+void fn_800A9F14(void *self, u8 *arg1) {
+    u8 *vt = *(u8 **)(arg1 + 4);
+    (*(void (**)(void *, s32, s32))(vt + 0x1AC))(arg1 + *(s16 *)(vt + 0x1A8), 0x22, 0);
+}
+
 void fn_800AA000(void) {
     extern s32 lbl_8049664C;
     lbl_8049664C = 0;
