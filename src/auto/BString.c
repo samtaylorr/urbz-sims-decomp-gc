@@ -958,6 +958,11 @@ void fn_800DB214(s32 *self, f32 dt) {
     }
 }
 
+extern f32 lbl_803D4998[];
+void fn_800DB390(s32 *self) {
+    ((f32 *)self)[6] = lbl_803D4998[0];
+}
+
 void fn_800DB4F8(void) {
 
 }
