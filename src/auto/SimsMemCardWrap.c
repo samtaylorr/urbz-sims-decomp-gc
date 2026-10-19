@@ -133,6 +133,10 @@ void fn_800AB5B4(void) {
 
 }
 
+void fn_800AB5F8(void) {
+
+}
+
 s32 fn_800AB76C(void) {
     return 0;
 }
