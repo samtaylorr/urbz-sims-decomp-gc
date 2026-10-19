@@ -2,6 +2,10 @@
 #include "common.h"
 
 void fn_800A9720(void);
+s32 fn_800BF7E0(void) {
+    return 0;
+}
+
 void fn_800C2950(void) {
     fn_800A9720();
 }
