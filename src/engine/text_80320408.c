@@ -15,6 +15,15 @@ s32 fn_80320428(s32 arg0, s32 *out) {
     return arg0;
 }
 
+extern void fn_802C5C58(void *, s32 *);
+s32 fn_80320468(s32 arg0, s32 *out) {
+    s32 tmp;
+
+    fn_802C5C58((void *)arg0, &tmp);
+    *out = tmp;
+    return arg0;
+}
+
 void fn_80323DB4(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
