@@ -10,6 +10,11 @@ void fn_8010D324(void **self, s32 flags) {
     }
 }
 
+void fn_8010D388(s32 arg0) {
+    M2C_UNK fn_80248488(s32, M2C_UNK, M2C_UNK);
+    fn_80248488(arg0 + 4, 0, 0x4E);
+}
+
 void fn_8010D628(s32 *self, s32 value) {
     *self = value;
 }
