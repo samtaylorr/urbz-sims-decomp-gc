@@ -605,6 +605,15 @@ void fn_80276D34(void) {
     M2C_FIELD(__cpReg, s16 *, 4) = 4;
 }
 
+s32 fn_80276D44(void) {
+    M2C_UNK fn_80276B8C(s32 *, M2C_UNK *);
+    s32 spC;
+    M2C_UNK sp8;
+
+    fn_80276B8C(&spC, &sp8);
+    return spC;
+}
+
 void fn_802773FC(void) {
 
 }
