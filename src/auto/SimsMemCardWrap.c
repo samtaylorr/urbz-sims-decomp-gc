@@ -54,6 +54,11 @@ f32 fn_800A9910(void) {
     return lbl_80495920;
 }
 
+f32 fn_800A9918(void) {
+    extern f32 lbl_80495924;
+    return lbl_80495924;
+}
+
 extern s32 lbl_8049592C;
 s32 fn_800A9920(void) {
     return lbl_8049592C;
