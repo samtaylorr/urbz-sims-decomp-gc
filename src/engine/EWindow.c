@@ -92,6 +92,10 @@ void fn_8030A9C8(void) {
 
 }
 
+void fn_8030A9CC(void) {
+
+}
+
 s32 fn_8030A9D0(void) {
     return 0;
 }
