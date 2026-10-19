@@ -28,6 +28,24 @@ void fn_802D8AAC(void *arg0) {
     fn_80240ED8(M2C_FIELD(arg0, s32 *, 0x2C));
 }
 
+s32 fn_802D8AD0(void *arg0, s32 arg1, s32 arg2) {
+    s32 var_r0;
+
+    if (arg2 == 1) {
+        var_r0 = M2C_FIELD(arg0, s32 *, 0x30) + arg1;
+        goto block_5;
+    }
+    if (arg2 == 0) {
+        M2C_FIELD(arg0, s32 *, 0x30) = arg1;
+    } else {
+        var_r0 = M2C_FIELD(arg0, s32 *, 0x14) - arg1;
+block_5:
+        M2C_FIELD(arg0, s32 *, 0x30) = var_r0;
+    }
+    M2C_FIELD(arg0, s32 *, 0x3C) = 1;
+    return M2C_FIELD(arg0, s32 *, 0x30);
+}
+
 s32 fn_802D8B14(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x30);
 }
