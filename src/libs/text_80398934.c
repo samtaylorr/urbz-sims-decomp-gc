@@ -5177,6 +5177,14 @@ void *fn_803C0234(void *self) {
     return self;
 }
 
+extern void fn_803C02C8(s32);
+void fn_803C0314(s32 self, s32 flags) {
+    fn_803C02C8(self);
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_803C06EC(void *self) {
     ((s32 *)self)[0] = 0;
     ((s32 *)self)[2] = 0;
