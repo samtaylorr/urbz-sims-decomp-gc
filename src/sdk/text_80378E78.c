@@ -51,6 +51,11 @@ s32 fn_803847A8(void) {
     return lbl_80496444;
 }
 
+extern s32 lbl_80496468;
+s32 fn_80384AC4(void) {
+    return lbl_80496468;
+}
+
 s32 fn_8038C698(void) {
     return 0;
 }
