@@ -20,3 +20,7 @@ void fn_80309198(void) {
     fn_8030861C();
 }
 
+s32 fn_8030A9D0(void) {
+    return 0;
+}
+
