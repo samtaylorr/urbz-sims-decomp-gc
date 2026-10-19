@@ -455,6 +455,7 @@ config.libs = [
             Object(NonMatching, "engine/text_80372928.c"),
             Object(NonMatching, "engine/ENgcAram.c"),
             Object(NonMatching, "engine/EMemoryWriteStream.c"),
+            Object(NonMatching, "engine/text_80375C5C.c"),
             Object(NonMatching, "misc/text_8038FC80.c"),
             Object(NonMatching, "libs/text_80398934.c"),
         ],
