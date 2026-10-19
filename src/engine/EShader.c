@@ -13,6 +13,16 @@ typedef struct {
 } WrapperPaneBase;
 
 
+s32 fn_802FEFA0(void *arg0) {
+    M2C_UNK fn_802FEFE4(void *);
+    M2C_UNK fn_803BABAC();
+    fn_803BABAC();
+    if (M2C_FIELD(arg0, s32 *, 4) & 0x84000000) {
+        fn_802FEFE4(arg0);
+    }
+    return 1;
+}
+
 void fn_802FFB78(void) {
 
 }
