@@ -24,6 +24,10 @@ s32 fn_8022554C(void) {
     return lbl_80494678;
 }
 
+s32 fn_80225554(s32 *self) {
+    return *self;
+}
+
 void fn_802320F8(void);
 void fn_8022DA50(void) {
     fn_802320F8();
