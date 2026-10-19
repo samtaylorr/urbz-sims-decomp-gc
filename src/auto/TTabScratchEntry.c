@@ -168,6 +168,10 @@ s32 fn_8019F26C(s32 *self) {
     return self[2];
 }
 
+s32 fn_8019F2A8(void) {
+    return 0xC;
+}
+
 void fn_8019F310(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x3C) = arg1;
 }
