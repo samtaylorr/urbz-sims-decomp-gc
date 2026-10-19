@@ -472,6 +472,19 @@ u8 fn_801FAD08(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 0x100);
 }
 
+s32 fn_801FAD44(s32 arg0) {
+    switch (arg0) {                                 /* irregular */
+    case 0:
+        return 1;
+    case 1:
+        return 2;
+    case 2:
+        return 3;
+    default:
+        return 0;
+    }
+}
+
 void fn_801FE23C(s32 arg0) {
     M2C_UNK fn_801E0F64(s32);
     fn_801E0F64(arg0 + 0x79C);
