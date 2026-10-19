@@ -236,6 +236,10 @@ s32 fn_8039AD74(s32 *self) {
     return self[2];
 }
 
+void fn_8039AD7C(void *self, s8 *p) {
+    *p = 0;
+}
+
 void fn_8039AD88(void) {
 
 }
