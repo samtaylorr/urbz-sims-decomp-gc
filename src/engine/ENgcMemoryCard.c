@@ -54,3 +54,7 @@ s32 fn_80345204(void) {
     return 1;
 }
 
+void fn_8034520C(void) {
+
+}
+
