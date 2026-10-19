@@ -25,6 +25,12 @@ void *fn_802C7D1C(void *self) {
     return self;
 }
 
+void fn_802C7DD0(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
+
 void fn_802C96D4(void) {
 
 }
