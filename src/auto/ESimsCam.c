@@ -16,6 +16,12 @@ s32 fn_8000D4F8(s32 *self) {
     return *self;
 }
 
+void fn_8000D500(char *self, Vec3 *a, Vec3 *b, Vec3 *c) {
+    *(Vec3 *)(self + 0x8) = *a;
+    *(Vec3 *)(self + 0x14) = *b;
+    *(Vec3 *)(self + 0x20) = *c;
+}
+
 void fn_80014C94(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
