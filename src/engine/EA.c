@@ -118,6 +118,10 @@ void fn_802DFB30(void) {
 
 }
 
+void fn_802DFB34(void) {
+
+}
+
 s32 fn_802DFB38(void) {
     return 0;
 }
