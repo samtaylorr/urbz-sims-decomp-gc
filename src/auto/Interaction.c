@@ -123,3 +123,8 @@ s32 fn_801175AC(s32 *self) {
 s32 fn_8011785C(void) {
     return 0;
 }
+
+s32 fn_80117874(u8 *self) {
+    return *(s32 *)(self + 0x50);
+}
+
