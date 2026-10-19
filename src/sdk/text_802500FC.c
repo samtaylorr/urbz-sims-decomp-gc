@@ -360,6 +360,15 @@ s32 fn_80262F24(s32 prio, DVDCommandBlock *block) {
     return result;
 }
 
+s32 fn_802633F0(DVDCommandBlock *block, void *callback) {
+    s32 idle;
+
+    block->command = 7;
+    block->callback = callback;
+    idle = fn_80262F24(1, block);
+    return idle;
+}
+
 void fn_8026354C(s32 arg0, void *arg1);
 s32 fn_802634AC(DVDCommandBlock *block) {
     s32 fn_8025465C();
