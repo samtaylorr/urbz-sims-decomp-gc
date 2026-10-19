@@ -152,6 +152,27 @@ void fn_802D6A28(void **self, s32 flags) {
     }
 }
 
+void *fn_802D6BA0(u32 arg0) {
+    extern void *lbl_80494DD8;
+    u32 temp_r0;
+    void *var_r9;
+
+    var_r9 = lbl_80494DD8;
+loop_1:
+    if (var_r9 != NULL) {
+        temp_r0 = M2C_FIELD(var_r9, u32 *, 0x10);
+        if (arg0 < temp_r0) {
+            var_r9 = M2C_FIELD(var_r9, void **, 0x1C);
+            goto loop_1;
+        }
+        if (arg0 > temp_r0) {
+            var_r9 = M2C_FIELD(var_r9, void **, 0x20);
+            goto loop_1;
+        }
+    }
+    return var_r9;
+}
+
 s32 fn_802D6EF8(void *arg0) {
     return (M2C_FIELD(arg0, s32 *, 0x18) * M2C_FIELD(arg0, s16 *, 0x1C)) + 0xE3;
 }
