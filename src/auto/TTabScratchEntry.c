@@ -23,6 +23,10 @@ s32 fn_8019E508(void) {
     return 1;
 }
 
+void fn_8019E510(void) {
+
+}
+
 void fn_8019E514(void *self, s32 flags) {
     if (flags & 1) {
         fn_802D20E8(self);
