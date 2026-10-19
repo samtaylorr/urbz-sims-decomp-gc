@@ -45,6 +45,10 @@ void fn_8019B8C4(void *arg0, s16 arg1) {
     M2C_FIELD(arg0, s16 *, 0x6E) = arg1;
 }
 
+void fn_8019B8CC(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0x88) = (s32) (arg1 - (M2C_FIELD(arg0, s16 *, 0x20) + (M2C_FIELD(arg0, s16 *, 0x1E) * 0x3C) + (M2C_FIELD(arg0, s16 *, 0x14) * 0xE10)));
+}
+
 f32 fn_8019B8F4(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0xB0);
 }
