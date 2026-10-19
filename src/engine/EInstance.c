@@ -6,6 +6,11 @@ void fn_802F041C(void) {
     fn_802D2FD0();
 }
 
+extern s32 lbl_80494E5C;
+s32 fn_802F150C(void) {
+    return lbl_80494E5C;
+}
+
 void fn_802F04BC(void);
 void fn_802F162C(void) {
     fn_802F04BC();
