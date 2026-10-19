@@ -14,6 +14,19 @@ void fn_800C3E20(void **self, s32 flags) {
     }
 }
 
+s32 fn_800C3F08(void *arg0) {
+    M2C_UNK fn_802D8040(s32, s32, M2C_UNK);
+    s32 fn_802D80A8(s32);
+    s32 temp_r28;
+    s32 temp_r29;
+
+    temp_r28 = fn_802D80A8(M2C_FIELD(arg0, s32 *, 0x110));
+    fn_802D8040(M2C_FIELD(arg0, s32 *, 0x110), 0, 2);
+    temp_r29 = fn_802D80A8(M2C_FIELD(arg0, s32 *, 0x110));
+    fn_802D8040(M2C_FIELD(arg0, s32 *, 0x110), temp_r28, 0);
+    return temp_r29;
+}
+
 s32 fn_800C3F6C(void) {
     return 0;
 }
