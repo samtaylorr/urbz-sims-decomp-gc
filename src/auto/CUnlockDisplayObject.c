@@ -26,6 +26,25 @@ void fn_800B96C0(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x158) = arg1;
 }
 
+void fn_800B9ABC(void *arg0) {
+    void *temp_r31;
+    void *temp_r9;
+    void *var_r11;
+
+    var_r11 = M2C_FIELD(arg0, void **, 0x44C);
+    if (var_r11 != NULL) {
+        do {
+            temp_r31 = M2C_FIELD(var_r11, void **, 0);
+            if (var_r11 != NULL) {
+                temp_r9 = M2C_FIELD(var_r11, void **, 0x84);
+                M2C_FIELD(temp_r9, M2C_UNK (**)(void *, M2C_UNK), 0xC)(var_r11 + M2C_FIELD(temp_r9, s16 *, 8), 3);
+            }
+            var_r11 = temp_r31;
+        } while (var_r11 != NULL);
+    }
+    M2C_FIELD(arg0, void **, 0x44C) = NULL;
+}
+
 void fn_800B9EF0(void *arg0) {
     M2C_UNK fn_800B99CC();
     M2C_FIELD(arg0, s32 *, 0x434) = 3;
