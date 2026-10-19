@@ -25,3 +25,8 @@ void fn_800DB148(void) {
     fn_802D0F9C();
 }
 
+void fn_802D0F9C(void);
+void fn_800DB81C(void) {
+    fn_802D0F9C();
+}
+
