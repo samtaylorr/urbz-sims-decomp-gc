@@ -88,6 +88,31 @@ void fn_802C829C(s32 arg0, s32 arg1, s32 arg2) {
     fn_8037D6D8(arg1, arg2, arg0);
 }
 
+void *fn_802C846C(void *arg0, s32 arg1) {
+    s32 temp_r4;
+    s32 var_r30;
+    s32 var_r31;
+    s32 var_r9;
+    void *temp_r9;
+
+    var_r9 = 0;
+    do {
+        var_r31 = (var_r9 * 0x10) + arg1;
+        var_r30 = 4;
+loop_2:
+        temp_r9 = M2C_FIELD(arg0, void **, 0x18);
+        temp_r4 = var_r31;
+        var_r31 += 4;
+        M2C_FIELD(temp_r9, M2C_UNK (**)(void *, s32, M2C_UNK), 0x34)(arg0 + M2C_FIELD(temp_r9, s16 *, 0x30), temp_r4, 4);
+        var_r30 -= 1;
+        if (var_r30 != 0) {
+            goto loop_2;
+        }
+        var_r9 += 1;
+    } while (var_r9 <= 3);
+    return arg0;
+}
+
 void *fn_802C87C4(void *arg0, void *arg1) {
     M2C_UNK fn_802C876C();
     void *temp_r9;
