@@ -1706,6 +1706,10 @@ s32 fn_800E4A1C(s32 *self) {
     return self[7];
 }
 
+s32 fn_800E4A2C(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x8C);
+}
+
 s32 fn_800E4A78(u8 *self) {
     return *(s32 *)(self + 0x20);
 }
