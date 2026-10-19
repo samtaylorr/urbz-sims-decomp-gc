@@ -80,6 +80,12 @@ void fn_800C2834(void) {
 
 }
 
+void fn_800C292C(void) {
+    M2C_UNK fn_800A9628(s32);
+    extern s32 lbl_80494364;
+    fn_800A9628(lbl_80494364);
+}
+
 void fn_800C2950(void) {
     fn_800A9720();
 }
