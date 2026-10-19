@@ -110,6 +110,11 @@ s32 fn_8026BC30(void) {
     return lbl_80496028;
 }
 
+void fn_8026C18C(void) {
+    extern s32 lbl_80496028;
+    lbl_80496028 = 0;
+}
+
 s32 fn_8026C4FC(void) {
     return 0;
 }
