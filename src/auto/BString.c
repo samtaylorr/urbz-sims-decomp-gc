@@ -2519,6 +2519,24 @@ s32 fn_800EABCC(s32 arg0, s32 arg1) {
     return arg0 + (arg1 * 8);
 }
 
+s32 fn_800EAE8C(s32 arg0) {
+    s32 fn_800EA9B0(s32);
+    s32 temp_r29;
+    s32 temp_r3;
+    s32 var_r30;
+    s32 var_r31;
+
+    var_r31 = arg0;
+    var_r30 = 0;
+    temp_r29 = var_r31 + 0x1F8;
+    do {
+        temp_r3 = fn_800EA9B0(var_r31);
+        var_r31 += 8;
+        var_r30 += temp_r3;
+    } while (var_r31 <= temp_r29);
+    return var_r30;
+}
+
 void fn_800EAF58(void) {
 
 }
@@ -2659,8 +2677,12 @@ void fn_800EE7E4(s32 arg0, const char *arg1, s32 arg2) {
 }
 
 u32 fn_800EE83C(void **arg0, u8 arg1, u32 arg2) {
+    const u8 *c = &arg1;
     while (arg2 < fn_800EF6F8(arg0)) {
-        s32 ne = !BString_CharEq(&fn_800EAFCC(arg0)[arg2], &arg1);
+        s32 ne = 1;
+        if (fn_800EAFCC(arg0)[arg2] == *c) {
+            ne = 0;
+        }
         if (!ne) {
             break;
         }
