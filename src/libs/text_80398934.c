@@ -4398,6 +4398,12 @@ void *fn_803BC458(void *self) {
     return self;
 }
 
+extern void fn_803BC578(void *);
+void *fn_803BC58C(void *self) {
+    fn_803BC578(self);
+    return self;
+}
+
 void fn_80335FD8(void);
 void fn_803BD7F8(void) {
     fn_80335FD8();
