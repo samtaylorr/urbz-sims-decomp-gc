@@ -6,6 +6,13 @@ extern s32 lbl_80496440;
 
 
 extern s32 lbl_80496354;
+s32 fn_803798A4(void *arg0) {
+    if (((u8) M2C_FIELD(arg0, u8 *, 0) == 0x59) && ((u8) M2C_FIELD(arg0, u8 *, 1) == 0x61) && ((u8) M2C_FIELD(arg0, u8 *, 2) == 0x79)) {
+        return M2C_FIELD(arg0, s32 *, 4);
+    }
+    return 0;
+}
+
 s32 fn_8037AD2C(s32 *self) {
     return *self;
 }
