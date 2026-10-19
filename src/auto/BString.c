@@ -1498,6 +1498,12 @@ void *fn_800ED5D8(void *self) {
     return self;
 }
 
+extern void fn_800EBF1C(void *);
+void *fn_800ED814(void *self) {
+    fn_800EBF1C(self);
+    return self;
+}
+
 void fn_800EC49C(void);
 void fn_800EE7C4(void) {
     fn_800EC49C();
