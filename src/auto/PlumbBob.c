@@ -242,6 +242,14 @@ void fn_800775F0(void) {
 
 }
 
+void fn_80077678(void *arg0) {
+    if ((s32) M2C_FIELD(arg0, s32 *, 0xFE4) != 0) {
+        M2C_FIELD(arg0, s8 *, 0xF80) = 2;
+        return;
+    }
+    M2C_FIELD(arg0, s8 *, 0xF80) = 1;
+}
+
 void fn_80078124(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
