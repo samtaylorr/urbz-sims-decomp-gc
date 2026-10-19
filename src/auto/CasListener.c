@@ -74,6 +74,10 @@ void fn_801BB8F8(void) {
 
 }
 
+void fn_801BB92C(void) {
+
+}
+
 s32 fn_801BB930(void) {
     return 0;
 }
