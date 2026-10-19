@@ -304,6 +304,17 @@ void fn_80261530(void) {
     fn_80261458(0);
 }
 
+s32 fn_802628C4(u32 arg0) {
+    extern u32 lbl_80494A3C;
+    if ((arg0 == 1U) || ((u32) (arg0 - 4) <= 1U) || (arg0 == 0xEU)) {
+        return 1;
+    }
+    if (arg0 == (u32) lbl_80494A3C) {
+        return 1;
+    }
+    return 0;
+}
+
 extern u8 fn_80262F24[];
 void *fn_80262F18(void) {
     return fn_80262F24;
