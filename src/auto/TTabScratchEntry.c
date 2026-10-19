@@ -19,6 +19,15 @@ s32 fn_8019E508(void) {
     return 1;
 }
 
+extern u8 lbl_804148D0[];
+extern void fn_802D20E8(void *);
+void fn_8019E5B0(void **self, s32 flags) {
+    *self = lbl_804148D0;
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 s32 fn_8019F070(void) {
     return 0;
 }
