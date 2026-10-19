@@ -136,6 +136,11 @@ void fn_8025AE94(void) {
     PPCHalt();
 }
 
+void fn_8025B1BC(void) {
+    M2C_UNK fn_80258534();
+    fn_80258534();
+}
+
 s32 fn_8025D7FC(void) {
     return 4;
 }
