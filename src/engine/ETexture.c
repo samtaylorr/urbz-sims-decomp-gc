@@ -57,6 +57,12 @@ void fn_8036F134(void) {
 
 }
 
+void fn_8036F138(s32 arg0) {
+    void fn_80338000(void *, s32, s32);
+    extern u8 lbl_8045BAE8[];
+    fn_80338000(lbl_8045BAE8, arg0, 4);
+}
+
 void *fn_8036F168(u32 size, void *p);
 void *fn_8036F168(u32 size, void *p) {
     return p;
