@@ -1199,6 +1199,10 @@ void fn_803ADE44(void) {
 
 }
 
+void fn_803ADE78(void) {
+
+}
+
 void fn_803ADEE4(BoundPmf *b) {
     s16 index = b->index;
     char *obj = b->obj;
