@@ -53,3 +53,7 @@ void fn_80240F0C(void) {
 
 }
 
+void fn_80241488(void) {
+
+}
+
