@@ -37,6 +37,12 @@ s32 fn_80339258(void) {
     return temp_r3;
 }
 
+void fn_803392AC(s32 arg0) {
+    if (arg0 != -1) {
+        fn_8033930C();
+    }
+}
+
 s32 fn_8033930C(s32 arg0) {
     extern s32 lbl_80494F78;
     return lbl_80494F78 + arg0;
