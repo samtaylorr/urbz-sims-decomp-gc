@@ -239,6 +239,11 @@ s32 fn_80148EBC(s32 arg0) {
     return arg0 + 0x68;
 }
 
+void fn_80148EC4(void *arg0) {
+    M2C_UNK fn_8016DBF0(s32);
+    fn_8016DBF0(M2C_FIELD(arg0, s32 *, 0x8C));
+}
+
 s32 fn_80148EE8(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x8C);
 }
