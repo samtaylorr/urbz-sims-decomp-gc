@@ -1,6 +1,14 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+extern s32 lbl_80495B9C;
+extern s32 lbl_80495BA0;
+extern u8 *lbl_80496650;
+extern s32 lbl_8049440C;
+extern s32 lbl_80494428;
+extern s32 lbl_8041F7A0[];
+void fn_801238C4(u8 *obj, s32 arg);
+
 void fn_800440B0(void) {
 
 }
