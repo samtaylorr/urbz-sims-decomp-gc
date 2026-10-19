@@ -659,6 +659,24 @@ void fn_8008A7B0(s32 arg0, s32 arg1) {
     fn_8008BCC8(arg1, arg0);
 }
 
+void fn_8008ABBC(s32 arg0, s32 arg1) {
+    M2C_UNK fn_8008AB4C();
+    s32 temp_r0;
+    s32 var_r9;
+
+    fn_8008AB4C();
+    temp_r0 = arg0 + 0x184;
+    if (temp_r0 != 0) {
+        var_r9 = arg0 + 0x1C4;
+        if (temp_r0 != var_r9) {
+            do {
+                var_r9 -= 0x10;
+            } while (temp_r0 != var_r9);
+        }
+    }
+    fn_80089698(arg0, arg1);
+}
+
 void fn_8008B420(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x158) = 1;
 }
