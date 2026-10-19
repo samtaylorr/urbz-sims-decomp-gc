@@ -29,6 +29,15 @@ s32 fn_8018A844(void) {
     return 0x444F4F52;
 }
 
+void fn_8018C4E8(s32 *arg0, s32 arg1) {
+    M2C_UNK fn_8011BF84(s32);
+    M2C_UNK fn_8018A0E0(s32 *, M2C_UNK);
+    fn_8011BF84(*arg0);
+    if (arg1 <= 0x33) {
+        fn_8018A0E0(arg0, 1);
+    }
+}
+
 void fn_8018C9D4(void ****arg0, s32 arg1) {
     M2C_FIELD(***arg0, s32 *, 0x10) = arg1;
 }
