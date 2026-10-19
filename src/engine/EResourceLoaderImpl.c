@@ -10,6 +10,11 @@ void fn_8031C768(void **self, s32 flags) {
     }
 }
 
+void fn_8031CC10(s32 arg0) {
+    M2C_UNK fn_803669E4(s32);
+    fn_803669E4(arg0 + 0x37C);
+}
+
 void fn_802D8F90();
 void fn_8031CFE8(char *self) {
     extern void fn_802D8F90(void *);
