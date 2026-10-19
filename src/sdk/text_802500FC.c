@@ -341,13 +341,15 @@ s32 fn_802634AC(DVDCommandBlock *block) {
     M2C_UNK fn_80254684(s32);
     M2C_UNK fn_8025974C(M2C_UNK *);
     extern M2C_UNK lbl_80495EC8;
-    s32 retVal;
+    s32 result;
     s32 enabled;
     s32 state;
+    s32 retVal;
 
     block->command = 7;
     block->callback = (void *)fn_8026354C;
-    if (fn_80262F24(1, block) == 0) {
+    result = fn_80262F24(1, block);
+    if (result == 0) {
         return -1;
     }
     enabled = fn_8025465C();
@@ -371,30 +373,12 @@ void fn_8026354C(s32 arg0, void *arg1) {
 }
 
 s32 fn_80263574(DVDCommandBlock *block, void *callback) {
-    M2C_UNK fn_80251BF0(s32, s32);
-    s32 fn_8025465C();
-    M2C_UNK fn_80254684(s32);
-    M2C_UNK fn_802622E0();
-    s32 fn_80264C7C(s32, void *);
-    extern s32 lbl_80494A2C;
-    extern u32 lbl_80495ED0;
-    extern s32 lbl_80495EDC;
-    s32 enabled;
-    s32 retVal;
+    s32 idle;
 
     block->command = 8;
     block->callback = callback;
-    if (lbl_80494A2C != 0 && (block->command == 1 || block->command - 4 <= 1 || block->command == 0xE)) {
-        fn_80251BF0(block->length, block->offset);
-    }
-    enabled = fn_8025465C();
-    block->state = 2;
-    retVal = fn_80264C7C(1, block);
-    if (lbl_80495ED0 == 0 && lbl_80495EDC == 0) {
-        fn_802622E0();
-    }
-    fn_80254684(enabled);
-    return retVal;
+    idle = fn_80262F24(1, block);
+    return idle;
 }
 
 s32 fn_80263630(DVDCommandBlock *block) {
@@ -403,13 +387,13 @@ s32 fn_80263630(DVDCommandBlock *block) {
     M2C_UNK fn_8025974C(M2C_UNK *);
     void fn_802636D0();
     extern M2C_UNK lbl_80495EC8;
-    s32 retVal;
+    s32 result;
     s32 enabled;
     s32 state;
+    s32 retVal;
 
-    block->command = 8;
-    block->callback = (void *)fn_802636D0;
-    if (fn_80262F24(1, block) == 0) {
+    result = fn_80263574(block, (void *)fn_802636D0);
+    if (result == 0) {
         return -1;
     }
     enabled = fn_8025465C();
