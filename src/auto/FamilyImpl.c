@@ -139,6 +139,14 @@ s32 fn_8010C688(void) {
     return 0;
 }
 
+s32 fn_8010C9E8(void) {
+    extern void *lbl_80495ADC;
+    if ((void *) lbl_80495ADC != NULL) {
+        return M2C_FIELD(lbl_80495ADC, s32 *, 0x4C);
+    }
+    return 3;
+}
+
 void fn_8010CFA0(void *self, s32 flags) {
     if (flags & 1) {
         fn_802D20E8(self);
