@@ -2280,6 +2280,11 @@ s32 fn_800EB488(void) {
     return fn_800EB31C() ^ 1;
 }
 
+s32 fn_800EB4AC(void) {
+    s32 fn_800EB360();
+    return fn_800EB360() ^ 1;
+}
+
 s32 fn_800EB5B4(void) {
     return 0;
 }
