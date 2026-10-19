@@ -70,3 +70,7 @@ void fn_80345210(void) {
 
 }
 
+s32 fn_80345A44(void *arg0, s32 arg1) {
+    return M2C_FIELD(arg0, s32 *, 8) + (arg1 * 8);
+}
+
