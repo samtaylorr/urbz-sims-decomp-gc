@@ -145,6 +145,11 @@ void fn_800CCF70(void) {
     fn_800CD09C();
 }
 
+s32 fn_800CD998(void) {
+    void *fn_800CD660();
+    return M2C_FIELD(fn_800CD660(), s32 *, 0x20);
+}
+
 void fn_800CD104(void);
 void fn_800CED30(void) {
     fn_800CD104();
