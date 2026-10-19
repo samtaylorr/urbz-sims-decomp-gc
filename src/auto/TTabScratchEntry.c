@@ -82,6 +82,11 @@ void fn_8019BA50(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x9C) = arg1;
 }
 
+s32 fn_8019C804(void) {
+    extern void *lbl_8049454C;
+    return M2C_FIELD(lbl_8049454C, s32 *, 0x18);
+}
+
 void fn_8019C850(void) {
 
 }
