@@ -199,7 +199,10 @@ auto/text_801D4E2C.c:
 	.text       start:0x801D4E2C end:0x801D50D4
 
 auto/text_801D50D4.c:
-	.text       start:0x801D50D4 end:0x8023EBD8
+	.text       start:0x801D50D4 end:0x801D5404
+
+auto/text_801D5404.c:
+	.text       start:0x801D5404 end:0x8023EBD8
 
 libsn/text_8023EBD8.c:
 	.text       start:0x8023EBD8 end:0x80241A98
