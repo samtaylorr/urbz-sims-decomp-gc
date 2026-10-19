@@ -160,6 +160,10 @@ s32 fn_801B65B8(void) {
     return 0;
 }
 
+void fn_801B65C0(void) {
+
+}
+
 s32 fn_801B65DC(s32 *self) {
     return self[1];
 }
