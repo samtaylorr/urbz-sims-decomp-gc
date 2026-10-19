@@ -130,6 +130,10 @@ void fn_802EEFD4(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x31C) = 1;
 }
 
+void fn_802EEFE0(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x31C) = 0;
+}
+
 s32 fn_802EEFEC(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x31C);
 }
