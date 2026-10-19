@@ -72,12 +72,17 @@ s32 fn_803474B4(void) {
     extern s32 lbl_8046C488[];
     s32 flags = lbl_8046C488[0];
     if (flags & 1) {
-        return fn_80269230() == 0;
+        if (fn_80269230() == 0) {
+            return 1;
+        }
+    } else if (flags & 2) {
+        if (fn_80269230() == 1) {
+            return 1;
+        }
+    } else {
+        return 1;
     }
-    if (flags & 2) {
-        return fn_80269230() == 1;
-    }
-    return 1;
+    return 0;
 }
 
 void fn_80347FA4(s32 arg0) {
