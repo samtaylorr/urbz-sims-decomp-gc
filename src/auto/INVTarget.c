@@ -106,6 +106,10 @@ void fn_80223460(void) {
 
 }
 
+u8 *fn_80223464(u8 *self) {
+    return self + 8;
+}
+
 s32 fn_8022350C(s32 *self) {
     return *self;
 }
