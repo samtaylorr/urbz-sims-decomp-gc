@@ -116,6 +116,10 @@ s32 fn_8032CF50(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x90);
 }
 
+s32 fn_8032CF58(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x98);
+}
+
 s32 fn_8032CF60(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x94);
 }
