@@ -165,6 +165,13 @@ void fn_80063798(void) {
     fn_80060CD0();
 }
 
+void fn_800637DC(void **obj) {
+    if (obj != NULL) {
+        char *vt = (char *)*obj;
+        (*(void (**)(void *, s32))(vt + 0x34))((char *)obj + *(s16 *)(vt + 0x30), 3);
+    }
+}
+
 extern u8 lbl_80491EBC[];
 void *fn_8006381C(void) {
     return lbl_80491EBC;
