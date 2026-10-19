@@ -248,6 +248,10 @@ s32 fn_801B66CC(void) {
     return 0;
 }
 
+void fn_801B66D4(void) {
+
+}
+
 s32 fn_801B66D8(s32 *self) {
     return self[1];
 }
