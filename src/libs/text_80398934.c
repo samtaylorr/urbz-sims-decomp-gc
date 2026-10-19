@@ -1362,6 +1362,13 @@ void fn_803ADDDC(void) {
 
 }
 
+void fn_803ADDE0(u8 *self) {
+    extern void fn_801C5CBC(u8 *);
+    extern u8 lbl_80416218[];
+    *(u8 **)(self + 4) = lbl_80416218;
+    fn_801C5CBC(self);
+}
+
 void fn_803ADE10(void) {
 
 }
