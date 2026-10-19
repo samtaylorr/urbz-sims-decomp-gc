@@ -360,6 +360,11 @@ void fn_8039C32C(void) {
     fn_8018EA6C();
 }
 
+void fn_8039C34C(void *arg0) {
+    M2C_UNK fn_8006FFAC(s32);
+    fn_8006FFAC(M2C_FIELD(arg0, s32 *, 4));
+}
+
 s32 fn_8039C370(s32 *self) {
     return self[2];
 }
