@@ -402,6 +402,10 @@ s16 fn_801A1348(void *arg0) {
     return M2C_FIELD(arg0, s16 *, 0x30);
 }
 
+void fn_801A1350(void *arg0) {
+    M2C_FIELD(arg0, s16 *, 0x30) = 0;
+}
+
 void fn_803AB7D4();
 void fn_801A135C(char *self) {
     extern void fn_803AB7D4(void *);
