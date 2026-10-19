@@ -74,6 +74,10 @@ s32 fn_802E1A44(char *self) {
     return *(s32 *)(self + 0xC);
 }
 
+void fn_802E1A4C(void) {
+
+}
+
 s32 fn_802E1A50(void) {
     return 1;
 }
