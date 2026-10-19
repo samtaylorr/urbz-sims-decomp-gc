@@ -198,6 +198,10 @@ s32 fn_80175F74(void) {
     return 1;
 }
 
+s32 fn_80175F7C(void) {
+    return 1;
+}
+
 s32 fn_80175F84(void) {
     return 0;
 }
