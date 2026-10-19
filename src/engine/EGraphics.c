@@ -213,6 +213,12 @@ s32 fn_802EF070(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void fn_802EF2E4(s32 arg0, s32 arg1) {
+    if (arg1 == 0xFFFF && arg0 != 0) {
+        lbl_804961C4 = fn_802D6A90(lbl_80493718, fn_802EF354, fn_802EF398, fn_802EF3D0, 0, lbl_803F0CD8, lbl_80493740);
+    }
+}
+
 void *fn_802EF354(void) {
     extern void *fn_802D1FC8(s32);
     void **self = fn_802D1FC8(0xC0);
