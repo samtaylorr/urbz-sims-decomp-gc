@@ -118,6 +118,13 @@ void fn_8035BF48(void) {
     }
 }
 
+extern s32 lbl_8049520C;
+void fn_8035BF60(void) {
+    if (lbl_8049520C != 0) {
+        lbl_8049520C = 0;
+    }
+}
+
 void fn_8035DB44(void) {
     fn_8036EFA4();
 }
