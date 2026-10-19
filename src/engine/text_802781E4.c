@@ -38,6 +38,11 @@ void fn_8027A680(void (*cb)(void)) {
     lbl_80496100 = cb;
 }
 
+f32 fn_8027A688(void) {
+    f64 fn_80246DDC();
+    return (f32) fn_80246DDC();
+}
+
 void fn_8027A79C(s32 arg0) {
     extern s32 lbl_80494B58;
     if (arg0 != 0) {
