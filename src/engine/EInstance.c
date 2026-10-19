@@ -128,6 +128,10 @@ s32 fn_802F1798(void) {
     return 0x32;
 }
 
+void fn_802F17A0(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+}
+
 s32 fn_802F17AC(s32 *self) {
     return self[2];
 }
