@@ -29,6 +29,13 @@ void fn_8031EA90(void *arg0) {
     fn_80337C24(M2C_FIELD(arg0, s32 *, 4), arg0);
 }
 
+void fn_8031EB98(void) {
+    M2C_UNK fn_8031E8B0();
+    M2C_UNK fn_8031ED68(M2C_UNK);
+    fn_8031ED68(0x20);
+    fn_8031E8B0();
+}
+
 void fn_8031EC10(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
