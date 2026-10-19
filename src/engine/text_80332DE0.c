@@ -26,8 +26,9 @@ u8 *fn_80332E00(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 void fn_80332E6C(s32 arg0, s32 arg1) {
     if (arg1 == 0xFFFF) {
         if (arg0 != 0) {
-            fn_80335F5C(lbl_8045B0F0);
-            *(u8 **)(lbl_8045B0F0 + 0xA4) = lbl_8041BBF8;
+            u8 *p = lbl_8045B0F0;
+            fn_80335F5C(p);
+            *(u8 **)(p + 0xA4) = lbl_8041BBF8;
             return;
         }
         fn_80335FD8(lbl_8045B0F0, 2);
