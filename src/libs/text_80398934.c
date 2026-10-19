@@ -187,6 +187,11 @@ void fn_8039B618(void) {
     fn_8018EA6C();
 }
 
+void fn_8039B638(void *arg0) {
+    M2C_UNK fn_8001DE88(s32);
+    fn_8001DE88(M2C_FIELD(arg0, s32 *, 4));
+}
+
 s32 fn_8039B65C(s32 *self) {
     return self[2];
 }
