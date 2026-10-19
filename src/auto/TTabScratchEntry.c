@@ -193,6 +193,10 @@ s32 fn_8019F0C4(void) {
     return 0;
 }
 
+s32 fn_8019F1C0(void *arg0) {
+    return (s32) ((M2C_FIELD(arg0, s32 *, 0x58) - M2C_FIELD(arg0, s32 *, 0x54)) * 0x38E38E39) >> 3;
+}
+
 s32 fn_8019F1E0(void *arg0, s32 arg1) {
     return M2C_FIELD(arg0, s32 *, 0x54) + (arg1 * 0x48);
 }
