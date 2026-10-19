@@ -320,6 +320,10 @@ s32 fn_802AF390(s32 arg0) {
     return arg0 + 0x10;
 }
 
+s32 fn_802AF398(s32 arg0) {
+    return arg0 + 0x28;
+}
+
 void fn_8027873C(void);
 void fn_802B092C(void) {
     fn_8027873C();
