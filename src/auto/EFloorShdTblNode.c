@@ -142,6 +142,11 @@ void *fn_800596B8(u32 size, void *p) {
     return p;
 }
 
+void fn_800596EC(void *self) {
+    extern void *fn_800585B4(void *, s32);
+    fn_800585B4(self, 0);
+}
+
 void fn_80059734(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
