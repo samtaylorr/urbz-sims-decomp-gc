@@ -28,6 +28,25 @@ void fn_802EDB2C(void) {
 
 }
 
+void fn_802EDB30(void *arg0) {
+    s32 fn_802D8F90(s32);
+    extern s32 lbl_80494DF0;
+    extern void *lbl_80495220;
+    void *temp_r11;
+    void *temp_r9;
+    void *temp_r9_2;
+
+    if (fn_802D8F90(lbl_80494DF0) != 0) {
+        temp_r11 = M2C_FIELD(arg0, void **, 0x324);
+        if (temp_r11 != NULL) {
+            temp_r9 = M2C_FIELD(temp_r11, void **, 0x68);
+            M2C_FIELD(temp_r9, M2C_UNK (**)(void *), 0x14)(temp_r11 + M2C_FIELD(temp_r9, s16 *, 0x10));
+        }
+        temp_r9_2 = M2C_FIELD(lbl_80495220, void **, 0x338);
+        M2C_FIELD(temp_r9_2, M2C_UNK (**)(void *), 0x44)(lbl_80495220 + M2C_FIELD(temp_r9_2, s16 *, 0x40));
+    }
+}
+
 void fn_802EDCCC(void) {
     M2C_UNK fn_802D1FC8(M2C_UNK);
     M2C_UNK fn_802FB578();
