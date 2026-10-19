@@ -70,6 +70,18 @@ void fn_802C829C(s32 arg0, s32 arg1, s32 arg2) {
     fn_8037D6D8(arg1, arg2, arg0);
 }
 
+void *fn_802C87C4(void *arg0, void *arg1) {
+    M2C_UNK fn_802C876C();
+    void *temp_r9;
+
+    fn_802C876C();
+    temp_r9 = arg0 + 0x30;
+    M2C_FIELD(arg0, f32 *, 0x30) = (f32) M2C_FIELD(arg1, f32 *, 0);
+    M2C_FIELD(temp_r9, f32 *, 4) = (f32) M2C_FIELD(arg1, f32 *, 4);
+    M2C_FIELD(temp_r9, f32 *, 8) = (f32) M2C_FIELD(arg1, f32 *, 8);
+    return arg0;
+}
+
 void fn_802C96D4(void) {
 
 }
