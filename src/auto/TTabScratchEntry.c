@@ -325,6 +325,12 @@ s32 fn_8019F2A8(void) {
     return 0xC;
 }
 
+extern void fn_8019F2D4(void *);
+void fn_8019F2D4(void *self) {
+    extern void *fn_8019D2DC(void *, s32);
+    fn_8019D2DC(self, 0);
+}
+
 void fn_8019F310(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x3C) = arg1;
 }
