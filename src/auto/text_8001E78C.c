@@ -84,9 +84,8 @@ s32 fn_80023B6C(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x14) != 0;
 }
 
-void fn_80023B84(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
-    M2C_FIELD(arg0, s32 *, 0) = arg2;
-    M2C_FIELD(arg0, s32 *, 4) = arg3;
+void fn_80023B84(s64 *arg0, s64 arg1) {
+    *arg0 = arg1;
 }
 
 void fn_80023BD4(void) {
