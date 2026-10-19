@@ -613,6 +613,46 @@ s32 fn_802AF398(s32 arg0) {
     return arg0 + 0x28;
 }
 
+void fn_802AF3A0(void *arg0, void *arg1, void *arg2, f32 farg0) {
+    f32 temp_f13;
+    f32 temp_f13_10;
+    f32 temp_f13_11;
+    f32 temp_f13_12;
+    f32 temp_f13_2;
+    f32 temp_f13_3;
+    f32 temp_f13_4;
+    f32 temp_f13_5;
+    f32 temp_f13_6;
+    f32 temp_f13_7;
+    f32 temp_f13_8;
+    f32 temp_f13_9;
+
+    temp_f13 = M2C_FIELD(arg0, f32 *, 0x20);
+    M2C_FIELD(arg2, f32 *, 0x20) = (f32) (((M2C_FIELD(arg1, f32 *, 0x20) - temp_f13) * farg0) + temp_f13);
+    temp_f13_2 = M2C_FIELD(arg0, f32 *, 0x24);
+    M2C_FIELD(arg2, f32 *, 0x24) = (f32) (((M2C_FIELD(arg1, f32 *, 0x24) - temp_f13_2) * farg0) + temp_f13_2);
+    temp_f13_3 = M2C_FIELD(arg0, f32 *, 0x10);
+    M2C_FIELD(arg2, f32 *, 0x10) = (f32) (((M2C_FIELD(arg1, f32 *, 0x10) - temp_f13_3) * farg0) + temp_f13_3);
+    temp_f13_4 = M2C_FIELD(arg0, f32 *, 0x1C);
+    M2C_FIELD(arg2, f32 *, 0x1C) = (f32) (((M2C_FIELD(arg1, f32 *, 0x1C) - temp_f13_4) * farg0) + temp_f13_4);
+    temp_f13_5 = M2C_FIELD(arg0, f32 *, 0x28);
+    M2C_FIELD(arg2, f32 *, 0x28) = (f32) (((M2C_FIELD(arg1, f32 *, 0x28) - temp_f13_5) * farg0) + temp_f13_5);
+    temp_f13_6 = M2C_FIELD(arg0, f32 *, 0x2C);
+    M2C_FIELD(arg2, f32 *, 0x2C) = (f32) (((M2C_FIELD(arg1, f32 *, 0x2C) - temp_f13_6) * farg0) + temp_f13_6);
+    temp_f13_7 = M2C_FIELD(arg0, f32 *, 0x30);
+    M2C_FIELD(arg2, f32 *, 0x30) = (f32) (((M2C_FIELD(arg1, f32 *, 0x30) - temp_f13_7) * farg0) + temp_f13_7);
+    temp_f13_8 = M2C_FIELD(arg0, f32 *, 0x34);
+    M2C_FIELD(arg2, f32 *, 0x34) = (f32) (((M2C_FIELD(arg1, f32 *, 0x34) - temp_f13_8) * farg0) + temp_f13_8);
+    temp_f13_9 = M2C_FIELD(arg0, f32 *, 0x38);
+    M2C_FIELD(arg2, f32 *, 0x38) = (f32) (((M2C_FIELD(arg1, f32 *, 0x38) - temp_f13_9) * farg0) + temp_f13_9);
+    temp_f13_10 = M2C_FIELD(arg0, f32 *, 0x3C);
+    M2C_FIELD(arg2, f32 *, 0x3C) = (f32) (((M2C_FIELD(arg1, f32 *, 0x3C) - temp_f13_10) * farg0) + temp_f13_10);
+    temp_f13_11 = M2C_FIELD(arg0, f32 *, 0x40);
+    M2C_FIELD(arg2, f32 *, 0x40) = (f32) (((M2C_FIELD(arg1, f32 *, 0x40) - temp_f13_11) * farg0) + temp_f13_11);
+    temp_f13_12 = M2C_FIELD(arg0, f32 *, 0x44);
+    M2C_FIELD(arg2, f32 *, 0x44) = (f32) (((M2C_FIELD(arg1, f32 *, 0x44) - temp_f13_12) * farg0) + temp_f13_12);
+}
+
 void fn_802AFF78(void *arg0, void *arg1, void *arg2) {
     M2C_FIELD(arg0, f32 *, 0x10) = (f32) ((M2C_FIELD(arg2, f32 *, 0x10) * M2C_FIELD(arg1, f32 *, 0)) + M2C_FIELD(arg1, f32 *, 0x10));
     M2C_FIELD(arg0, f32 *, 0x14) = (f32) ((M2C_FIELD(arg2, f32 *, 0x14) * M2C_FIELD(arg1, f32 *, 4)) + M2C_FIELD(arg1, f32 *, 0x14));
