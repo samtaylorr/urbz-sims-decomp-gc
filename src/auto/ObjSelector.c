@@ -9,6 +9,10 @@ void fn_8016C2E8(void) {
 
 }
 
+void fn_8016C2EC(void) {
+
+}
+
 s32 fn_8016C618(void) {
     return 0;
 }
