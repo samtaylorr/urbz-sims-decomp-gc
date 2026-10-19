@@ -332,6 +332,10 @@ s32 fn_8019F5CC(void *arg0) {
     return ((u32) M2C_FIELD(arg0, u32 *, 0x1C) >> 0xFU) & 1;
 }
 
+s32 fn_8019F5F8(void *arg0) {
+    return M2C_FIELD(arg0, u16 *, 0x1C) & 1;
+}
+
 void fn_8019F604(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x38) = arg1;
 }
