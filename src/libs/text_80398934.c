@@ -163,6 +163,13 @@ void fn_8039DD98(s32 *self, s32 flags) {
     }
 }
 
+void fn_8039DDCC(s32 *self, s32 flags) {
+    self[5] = (s32)lbl_804093F8;
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 s32 fn_803A0680(void) {
     return 0;
 }
