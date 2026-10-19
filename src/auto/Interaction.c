@@ -226,6 +226,10 @@ s32 fn_801175DC(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x14);
 }
 
+s32 fn_801175F4(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x38);
+}
+
 void fn_801175FC(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x38) = arg1;
 }
