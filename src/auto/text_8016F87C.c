@@ -33,6 +33,11 @@ s32 fn_80175D54(void) {
     return 0;
 }
 
+extern s32 lbl_80495C90;
+s32 fn_80175E1C(void) {
+    return lbl_80495C90;
+}
+
 s32 fn_80175E44(void) {
     return 0;
 }
