@@ -8,6 +8,18 @@ void fn_8009A93C(void *arg0, f32 farg0, f32 farg1) {
     M2C_FIELD(arg0, f32 *, 0x18) = farg1;
 }
 
+void fn_8009AA44(void *arg0, f32 farg0, f32 farg1, f32 farg2, f32 farg3) {
+    void *temp_r9;
+
+    temp_r9 = M2C_FIELD(arg0, void **, 0x24);
+    if (temp_r9 != NULL) {
+        M2C_FIELD(temp_r9, f32 *, 0) = farg0;
+        M2C_FIELD(M2C_FIELD(arg0, void **, 0x24), f32 *, 4) = farg1;
+        M2C_FIELD(M2C_FIELD(arg0, void **, 0x24), f32 *, 8) = farg2;
+        M2C_FIELD(M2C_FIELD(arg0, void **, 0x24), f32 *, 0xC) = farg3;
+    }
+}
+
 void fn_8009AAF8(void *arg0, f32 farg0, f32 farg1) {
     M2C_FIELD(arg0, f32 *, 0x34) = farg0;
     M2C_FIELD(arg0, f32 *, 0x38) = farg1;
