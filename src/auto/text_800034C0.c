@@ -50,3 +50,8 @@ void fn_80033A3C(void) {
     fn_802F4AB8();
 }
 
+void fn_802D2430(void);
+void fn_80039DA8(void) {
+    fn_802D2430();
+}
+
