@@ -313,6 +313,7 @@ config.libs = [
             Object(NonMatching, "auto/EFloorShdTblNode.c"),
             Object(NonMatching, "auto/BBI.c"),
             Object(NonMatching, "auto/ISimInstance.c"),
+            Object(NonMatching, "auto/PlumbBob.c"),
             Object(NonMatching, "libsn/text_8023EBD8.c"),
             Object(NonMatching, "clib/text_80241A98.c"),
             Object(NonMatching, "engine/text_802781E4.c"),
