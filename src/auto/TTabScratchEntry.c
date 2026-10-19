@@ -609,6 +609,10 @@ s32 fn_801AA4C4(void) {
     return 0;
 }
 
+s32 fn_801AA4E0(void) {
+    return 0x80;
+}
+
 s32 fn_801AA930(s32 *self) {
     return self[1];
 }
