@@ -89,6 +89,11 @@ s32 fn_8025D7FC(void) {
     return 4;
 }
 
+void fn_8025F914(s32 arg0) {
+    extern s32 *lbl_80495EA8;
+    *lbl_80495EA8 = arg0;
+}
+
 s32 fn_80260F58(void) {
     return 1;
 }
