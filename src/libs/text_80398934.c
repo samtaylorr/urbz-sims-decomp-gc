@@ -1379,6 +1379,25 @@ s32 fn_803A3010(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x8C);
 }
 
+extern u8 lbl_8040FD10[];
+s32 fn_803A3018(s32 arg0, s32 arg1, s32 arg2) {
+    struct {
+        void *vtbl;
+        s32 unk4;
+        s32 unk8;
+    } tmp, *p;
+    u8 out[8];
+    s32 ret;
+
+    p = &tmp;
+    tmp.unk4 = arg0;
+    tmp.vtbl = lbl_8040FD10;
+    p->unk8 = arg2;
+    ret = fn_8018E850(out, p, arg1);
+    ((void (*)(void *, s32))fn_8018EA6C)(p, 2);
+    return ret;
+}
+
 void fn_803A35A4(s32 *first, s32 *last, s32 comp);
 void fn_803A364C(s32 *first, s32 *last, s32 *val, s32 comp);
 void fn_803A36A0(s32 *first, s32 *last, s32 comp) {
