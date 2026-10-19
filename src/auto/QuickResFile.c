@@ -38,6 +38,10 @@ s32 fn_8018CE48(void) {
     return 0;
 }
 
+s32 fn_8018CE50(void) {
+    return 0;
+}
+
 void fn_8018D8BC(void) {
     fn_8018D8DC();
 }
