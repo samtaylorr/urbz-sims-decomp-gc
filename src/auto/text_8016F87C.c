@@ -395,3 +395,11 @@ u8 fn_801762EC(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 0x341);
 }
 
+void fn_801763D0(M2C_UNK *arg0) {
+    void *temp_r9;
+
+    temp_r9 = M2C_FIELD(lbl_80495C90, s32 *, 0x58) + 0x110;
+    *arg0 = M2C_FIELD(temp_r9, M2C_UNK **, 8);
+    M2C_FIELD(temp_r9, M2C_UNK **, 8) = arg0;
+}
+
