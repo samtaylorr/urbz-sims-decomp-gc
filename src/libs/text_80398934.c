@@ -113,6 +113,25 @@ s32 fn_803A0688(void) {
     return 0;
 }
 
+s32 fn_803A0BC0(s32 *a, s32 *b) {
+    return a[1] == b[1] && a[0] == b[0];
+}
+
+void fn_803A0E9C(BoundPmf *b) {
+    s16 index = b->index;
+    char *obj = b->obj;
+    VtblEntry *e;
+    void (*f)(void *);
+
+    if (index >= 0) {
+        e = &(*(VtblEntry **)(obj + b->u.delta2))[index - 1];
+        f = e->pfn;
+    } else {
+        f = b->u.pfn;
+    }
+    f(obj + (index >= 0 ? e->delta + b->delta : b->delta));
+}
+
 void fn_803A1424(void) {
     fn_8018EA6C();
 }
