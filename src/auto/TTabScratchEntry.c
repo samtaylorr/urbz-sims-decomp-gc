@@ -105,6 +105,12 @@ s32 fn_8019F890(void) {
     return 0;
 }
 
+void fn_803AB7D4();
+void fn_801A135C(char *self) {
+    extern void fn_803AB7D4(void *);
+    fn_803AB7D4(self + 8);
+}
+
 void fn_801A1E30(void) {
     fn_801A1B50();
 }
