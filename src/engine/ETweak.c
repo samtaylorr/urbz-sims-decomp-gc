@@ -2,6 +2,19 @@
 #include "common.h"
 
 void fn_802435CC(void);
+void fn_80313090(void *arg0, s32 arg1) {
+    s32 fn_802D118C(s32);
+    s32 fn_802D1194(s32);
+    s32 fn_802D119C(s32);
+    s32 fn_802D12C4(s32);
+    s32 fn_802DCFE0(s32);
+    M2C_FIELD(arg0, s32 *, 0) = fn_802D12C4(arg1);
+    M2C_FIELD(arg0, u32 *, 4) = (u32) ((u32) (fn_802DCFE0(arg1) + 0x3FF) >> 0xAU);
+    M2C_FIELD(arg0, u32 *, 8) = (u32) ((u32) (fn_802D118C(arg1) + 0x3FF) >> 0xAU);
+    M2C_FIELD(arg0, u32 *, 0xC) = (u32) ((u32) (fn_802D1194(arg1) + 0x3FF) >> 0xAU);
+    M2C_FIELD(arg0, s32 *, 0x10) = fn_802D119C(arg1);
+}
+
 s32 fn_80313110(s32 arg0) {
     s32 var_r3;
     s32 var_r9;
