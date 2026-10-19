@@ -445,6 +445,15 @@ s32 fn_80269134(void) {
     return lbl_80495F8C;
 }
 
+void fn_802696D0(s16 *arg0, s16 *arg1) {
+    extern s16 lbl_80495FAC;
+    extern s16 lbl_80495FAE;
+    fn_8025465C();
+    *arg0 = lbl_80495FAC;
+    *arg1 = lbl_80495FAE;
+    fn_80254684();
+}
+
 void fn_80269C78(u32 arg0, s32 arg1, s32 arg2) {
     M2C_UNK fn_80269B90(s32, s32);
     M2C_UNK fn_80269C04(s32, s32);
