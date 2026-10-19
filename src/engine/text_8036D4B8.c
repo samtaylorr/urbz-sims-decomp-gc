@@ -85,3 +85,8 @@ void fn_8036D77C(void) {
     fn_802D2430();
 }
 
+void fn_8036D79C(void) {
+    M2C_UNK fn_8036D5C4(M2C_UNK, M2C_UNK);
+    fn_8036D5C4(1, 0xFFFF);
+}
+
