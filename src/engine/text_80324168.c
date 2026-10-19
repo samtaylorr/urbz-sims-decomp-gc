@@ -83,6 +83,10 @@ void fn_803291A0(void) {
     fn_802D2430();
 }
 
+void fn_803291C0(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0x4D134) = arg1;
+}
+
 extern s32 lbl_80494F38;
 s32 fn_80329200(void) {
     return lbl_80494F38;
