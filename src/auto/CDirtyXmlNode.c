@@ -114,6 +114,18 @@ void fn_800C3820(void (*cb)(void)) {
     lbl_80495A24 = cb;
 }
 
+void fn_800C3954(s32 arg0) {
+    M2C_UNK fn_80279D50(M2C_UNK);
+    extern s32 lbl_80494368;
+    extern s32 lbl_8049436C;
+    lbl_8049436C = arg0;
+    lbl_80494368 = 0;
+    do {
+        fn_80279D50(1);
+    } while ((s32) lbl_80494368 == 0);
+    lbl_8049436C = 0;
+}
+
 extern void (*lbl_8044331C[])(void);
 extern u8 *lbl_80494DF0;
 extern char lbl_803D04B8[];
