@@ -110,6 +110,10 @@ void fn_801BF628(void) {
 
 }
 
+void fn_801BF714(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0x18) = (s32) (M2C_FIELD(arg0, s32 *, 0x18) | arg1);
+}
+
 void fn_801BF79C(void) {
     fn_803074F0();
 }
