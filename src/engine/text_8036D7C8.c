@@ -100,3 +100,7 @@ void fn_8036EC78(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
 
+s32 fn_8036ECAC(s32 arg0) {
+    return arg0 + 0x90;
+}
+
