@@ -111,6 +111,11 @@ void fn_800A9C84(s32 self, s32 flags) {
     }
 }
 
+void fn_800AA000(void) {
+    extern s32 lbl_8049664C;
+    lbl_8049664C = 0;
+}
+
 s32 fn_800AA638(void) {
     return 1;
 }
