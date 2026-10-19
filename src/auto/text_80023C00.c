@@ -11,6 +11,10 @@ void fn_800275A0(void) {
 
 }
 
+void fn_80028650(void) {
+
+}
+
 s32 fn_80028698(void) {
     return 0;
 }
