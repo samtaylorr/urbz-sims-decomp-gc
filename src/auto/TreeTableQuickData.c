@@ -2,6 +2,12 @@
 #include "common.h"
 
 void fn_800F77AC(void);
+extern s32 lbl_80495D68;
+extern void fn_800F1A60(s32, s32);
+void fn_801B3724(void) {
+    fn_800F1A60((s32)&lbl_80495D68, 2);
+}
+
 void fn_801B374C(void) {
     fn_800F77AC();
 }
