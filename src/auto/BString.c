@@ -335,6 +335,17 @@ s32 *fn_800DAEC0(s32 *self, s32 arg1) {
     return self;
 }
 
+extern s32 lbl_8040BB10[];
+s32 *fn_800DAF0C(s32 *self, s32 a) {
+    self[0] = a;
+    self[1] = -1;
+    self[2] = 0;
+    self[3] = -1;
+    self[4] = 1;
+    self[5] = (s32)lbl_8040BB10;
+    return self;
+}
+
 void fn_802D0F9C(void);
 void fn_800DB148(void) {
     fn_802D0F9C();
