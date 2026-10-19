@@ -31,6 +31,10 @@ s32 fn_802AD114(void) {
     return 0;
 }
 
+s32 fn_802AD320(void) {
+    return 0;
+}
+
 void fn_802AE440(void);
 void fn_802AE5EC(void) {
     fn_802AE440();
