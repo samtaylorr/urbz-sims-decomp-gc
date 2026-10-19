@@ -26,6 +26,10 @@ f32 fn_8033CA64(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 4);
 }
 
+f32 fn_8033CB30(void *arg0) {
+    return M2C_FIELD(arg0, f32 *, 8);
+}
+
 s32 fn_8033D104(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x38);
 }
