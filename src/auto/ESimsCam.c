@@ -71,6 +71,10 @@ f32 fn_80014D14(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0x458);
 }
 
+f32 fn_80014D1C(void *arg0) {
+    return M2C_FIELD(arg0, f32 *, 0x460);
+}
+
 f32 fn_80014D34(char *self) {
     return *(f32 *)(self + 0x45C);
 }
