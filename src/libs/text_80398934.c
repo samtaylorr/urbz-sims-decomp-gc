@@ -4130,6 +4130,12 @@ void fn_803B2BD8(BoundPmf *b) {
     f(obj + off);
 }
 
+extern void fn_802BE53C(void *);
+void *fn_803B6F48(void *self) {
+    fn_802BE53C(self);
+    return self;
+}
+
 s32 fn_803B71F8(void) {
     return 0;
 }
