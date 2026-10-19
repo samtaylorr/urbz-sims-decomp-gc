@@ -6,6 +6,10 @@ int fn_802486DC(const char *a, const char *b);
 char *fn_80248A10(char *dst, const char *src, int n);
 unsigned int fn_80248808(const char *s);
 extern char lbl_803C2A3C[];
+void fn_800194C0(void) {
+
+}
+
 char *fn_8001995C(char *self, s32 arg1, const char *arg2, s32 arg3, s32 arg4, char *arg5, s32 arg6, s32 arg7) {
     *(s32 *)(self + 0x4) = arg1;
     fn_80248A10(self + 8, arg2, 0x40);
