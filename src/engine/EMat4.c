@@ -20,6 +20,11 @@ void fn_802C7A84(void) {
 
 }
 
+void fn_802C7A88(f64 farg0) {
+    M2C_UNK fn_802C71B0(f32);
+    fn_802C71B0((f32) farg0);
+}
+
 void *fn_802C7D1C(void *self) {
     fn_802C7DD0(self);
     return self;
