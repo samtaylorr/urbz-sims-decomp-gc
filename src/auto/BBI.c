@@ -39,6 +39,10 @@ void fn_8005DA60(void) {
 
 }
 
+void fn_8005DC04(void) {
+
+}
+
 void fn_8005FAD0(void) {
     fn_802D2FD0();
 }
