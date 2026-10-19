@@ -64,6 +64,10 @@ void fn_80135D6C(void) {
 
 }
 
+s32 fn_801375C8(void) {
+    return 0x584F424A;
+}
+
 s32 fn_80137E2C(void) {
     return 0;
 }
