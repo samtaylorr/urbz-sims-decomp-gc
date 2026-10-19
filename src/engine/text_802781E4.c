@@ -26,6 +26,21 @@ void fn_80279D70(void) {
     fn_80279D00();
 }
 
+s32 fn_8027A564(void) {
+    void *fn_8027873C();
+    void *temp_r3;
+    void *temp_r3_2;
+
+    temp_r3_2 = fn_8027873C();
+    if (temp_r3_2 != NULL) {
+        temp_r3 = M2C_FIELD(temp_r3_2, void **, 0x50);
+        if (temp_r3 != NULL) {
+            return M2C_FIELD(temp_r3, s32 *, 0x18);
+        }
+    }
+    return -1;
+}
+
 void fn_8027A650(s32 arg0) {
     extern s32 lbl_80494B40;
     extern s32 lbl_804960E4;
