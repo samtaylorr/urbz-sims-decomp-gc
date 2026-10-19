@@ -41,3 +41,7 @@ s32 fn_8010C678(void) {
     return 0;
 }
 
+s32 fn_8010C680(void) {
+    return 0;
+}
+
