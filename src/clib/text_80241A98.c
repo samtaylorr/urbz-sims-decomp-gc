@@ -15,6 +15,11 @@ s32 fn_8024BEAC(void) {
     return lbl_80494988;
 }
 
+extern u8 lbl_803EBED4[];
+void *fn_8024C068(void) {
+    return lbl_803EBED4;
+}
+
 void fn_8024D324(void);
 void fn_8024CE64(void) {
     fn_8024D324();
