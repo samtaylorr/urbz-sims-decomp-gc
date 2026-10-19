@@ -2,6 +2,10 @@
 #include "common.h"
 
 extern s32 lbl_80494470;
+void fn_801301DC(void) {
+
+}
+
 s32 fn_80130388(void) {
     return lbl_80494470;
 }
