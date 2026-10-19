@@ -120,6 +120,10 @@ s32 fn_80111F74(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x14);
 }
 
+s32 fn_80111F7C(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x24);
+}
+
 s32 fn_80111F84(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x14);
 }
