@@ -178,7 +178,10 @@ auto/TTabScratchEntry.c:
 	.text       start:0x8019A0A4 end:0x801B25A4
 
 auto/ObjectDataBehaviorTree.c:
-	.text       start:0x801B25A4 end:0x8023EBD8
+	.text       start:0x801B25A4 end:0x801B3724
+
+auto/TreeTableQuickData.c:
+	.text       start:0x801B3724 end:0x8023EBD8
 
 libsn/text_8023EBD8.c:
 	.text       start:0x8023EBD8 end:0x80241A98
