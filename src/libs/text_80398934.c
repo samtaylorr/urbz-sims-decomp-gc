@@ -4568,6 +4568,12 @@ void fn_803BB38C(void *self) {
     ((s32 *)self)[1] = 0;
 }
 
+void fn_803BB3A0(s32 *self, s32 n) {
+    while (--n != -1) {
+        self++;
+    }
+}
+
 void fn_803BB3BC(s32 *dst, s32 *src, s32 n) {
     while (--n != -1) {
         *dst++ = *src++;
