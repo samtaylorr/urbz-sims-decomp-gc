@@ -1809,6 +1809,25 @@ s32 fn_803A3FA8(s32 *self) {
     return self[2];
 }
 
+void fn_803A467C(s32 arg0, void *arg1) {
+    M2C_UNK fn_800ECE00(void *, M2C_UNK);
+    void *temp_r30;
+    void *var_r31;
+
+    var_r31 = arg1;
+    if (var_r31 != NULL) {
+        do {
+            fn_803A467C(arg0, M2C_FIELD(var_r31, void **, 0xC));
+            temp_r30 = M2C_FIELD(var_r31, void **, 8);
+            fn_800ECE00(var_r31 + 0x10, 2);
+            if (var_r31 != NULL) {
+                fn_803997AC(var_r31, 0x18);
+            }
+            var_r31 = temp_r30;
+        } while (var_r31 != NULL);
+    }
+}
+
 void fn_803A46E4(s32 arg0, void *arg1) {
     void *temp_r30;
     void *var_r31;
