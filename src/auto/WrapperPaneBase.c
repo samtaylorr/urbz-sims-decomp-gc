@@ -31,6 +31,14 @@ void fn_800CF648(s32 *self) {
     self[1] = 1;
 }
 
+void fn_8039D8D8(void *);
+void fn_800CF89C(u8 *self, s32 arg1) {
+    u8 *p = self + 0x20;
+    *(s32 *)(p + 0x30) = arg1;
+    fn_8039D8D8(p);
+    *(u32 *)(self + 0x4) |= 2;
+}
+
 s32 fn_800CFFE4(s32 *self) {
     return *self;
 }
