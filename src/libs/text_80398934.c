@@ -39,6 +39,10 @@ void fn_80398CD8(void (*cb)(void)) {
     lbl_8049662C = cb;
 }
 
+void fn_80399218(void) {
+
+}
+
 void *fn_80399C38(void *self, s32 **arg1) {
     s32 n;
     s32 i;
