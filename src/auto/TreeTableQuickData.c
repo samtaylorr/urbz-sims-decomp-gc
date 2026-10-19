@@ -238,6 +238,11 @@ u16 fn_801B652C(void *arg0) {
     return M2C_FIELD(M2C_FIELD(arg0, void **, 4), u16 *, 0xE);
 }
 
+void fn_801B6538(void *arg0) {
+    M2C_UNK fn_801A31D4(s32);
+    fn_801A31D4(M2C_FIELD(arg0, s32 *, 4));
+}
+
 f32 fn_801B655C(void *arg0) {
     return M2C_FIELD(M2C_FIELD(arg0, void **, 4), f32 *, 8);
 }
