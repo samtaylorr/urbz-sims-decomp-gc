@@ -171,6 +171,16 @@ void fn_803847F8(s32 arg0, s32 arg1) {
     lbl_8049645C = 1;
 }
 
+s32 fn_803849D0(s32 arg0) {
+    if (arg0 < 0) {
+        return 0;
+    }
+    if (arg0 > 0x7F) {
+        return 0x7F;
+    }
+    return arg0;
+}
+
 void fn_80384AB8(void) {
 
 }
