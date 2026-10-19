@@ -112,6 +112,14 @@ s32 fn_8010F83C(s32 *self) {
     return self[6];
 }
 
+void fn_8010F844(void *arg0, s32 arg1) {
+    M2C_UNK fn_8010F878();
+    if (arg1 != (s32) M2C_FIELD(arg0, s32 *, 0x18)) {
+        M2C_FIELD(arg0, s32 *, 0x20) = 1;
+    }
+    fn_8010F878();
+}
+
 s32 fn_8010FA08(void) {
     return 0x200;
 }
