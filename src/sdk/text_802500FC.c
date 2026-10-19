@@ -614,6 +614,14 @@ s32 fn_80276D44(void) {
     return spC;
 }
 
+s32 fn_80276D70(void) {
+    M2C_UNK spC;
+    s32 sp8;
+
+    fn_80276B8C(&spC, &sp8);
+    return sp8;
+}
+
 void fn_802773FC(void) {
 
 }
