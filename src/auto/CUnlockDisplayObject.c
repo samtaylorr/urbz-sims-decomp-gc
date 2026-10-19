@@ -23,6 +23,10 @@ void fn_800BA124(void *arg0, f32 farg0) {
     M2C_FIELD(arg0, f32 *, 0x480) = farg0;
 }
 
+s32 fn_800BB038(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x444);
+}
+
 void fn_800BB10C(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
