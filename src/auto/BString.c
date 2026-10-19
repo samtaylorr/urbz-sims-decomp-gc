@@ -2648,7 +2648,15 @@ void fn_800EE7E4(s32 arg0, const char *arg1, s32 arg2) {
 }
 
 u32 fn_800EE83C(void **arg0, u8 arg1, u32 arg2) {
-    while (arg2 < fn_800EF6F8(arg0) && !(fn_800EAFCC(arg0)[arg2] == arg1)) {
+    const u8 *c = &arg1;
+    while (arg2 < fn_800EF6F8(arg0)) {
+        s32 ne = 1;
+        if (fn_800EAFCC(arg0)[arg2] == *c) {
+            ne = 0;
+        }
+        if (!ne) {
+            break;
+        }
         arg2++;
     }
     return arg2 < fn_800EF6F8(arg0) ? arg2 : -1;
