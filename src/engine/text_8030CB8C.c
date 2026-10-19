@@ -30,6 +30,21 @@ void fn_803100F0(void *self, s32 flags) {
     }
 }
 
+void fn_80310118(void *arg0, void *arg1) {
+    void *temp_r9;
+
+    M2C_FIELD(arg1, void **, 0) = (void *) M2C_FIELD(arg0, void **, 4);
+    temp_r9 = M2C_FIELD(arg0, void **, 4);
+    if (temp_r9 != NULL) {
+        M2C_FIELD(temp_r9, void **, 4) = arg1;
+    } else {
+        M2C_FIELD(arg0, void **, 0) = arg1;
+    }
+    M2C_FIELD(arg1, s32 *, 4) = 0;
+    M2C_FIELD(arg0, void **, 4) = arg1;
+    M2C_FIELD(arg0, s32 *, 8) = (s32) (M2C_FIELD(arg0, s32 *, 8) + 1);
+}
+
 void fn_8031020C(void) {
     M2C_UNK fn_803101B8(M2C_UNK, M2C_UNK);
     fn_803101B8(1, 0xFFFF);
