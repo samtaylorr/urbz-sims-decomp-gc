@@ -23,3 +23,8 @@ void fn_8036D048(void) {
     fn_802D2430();
 }
 
+void fn_8036C0D8(void);
+void fn_8036D090(void) {
+    fn_8036C0D8();
+}
+
