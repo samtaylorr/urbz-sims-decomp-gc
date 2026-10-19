@@ -165,6 +165,10 @@ s32 fn_802F1A50(void) {
     return 0;
 }
 
+void fn_802F1A58(void) {
+
+}
+
 s32 fn_802F1A5C(void) {
     return 0;
 }
