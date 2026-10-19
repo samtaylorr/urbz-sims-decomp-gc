@@ -96,6 +96,10 @@ s32 fn_8019F26C(s32 *self) {
     return self[2];
 }
 
+s32 fn_8019F34C(s32 *self) {
+    return self[6];
+}
+
 void fn_8019F3D0(void **self, s32 flags) {
     *self = lbl_80414770;
     if (flags & 1) {
