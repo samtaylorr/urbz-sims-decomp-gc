@@ -126,6 +126,10 @@ void fn_801C089C(void) {
 
 }
 
+s32 fn_801C0A50(s32 *self) {
+    return self[7];
+}
+
 extern void fn_801C5778(void *);
 void *fn_801C5720(void *self) {
     fn_801C5778(self);
