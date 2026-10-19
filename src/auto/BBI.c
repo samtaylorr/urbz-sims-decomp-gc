@@ -63,6 +63,10 @@ s32 fn_8005FB30(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void fn_8005FC18(void) {
+
+}
+
 void fn_80060610(void) {
     fn_802D2FD0();
 }
