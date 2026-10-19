@@ -11,6 +11,10 @@ s32 fn_8036A98C(s32 *self) {
     return self[2];
 }
 
+s32 fn_8036ACBC(void *arg0) {
+    return (M2C_FIELD(arg0, s32 *, 0x18) * M2C_FIELD(arg0, s16 *, 0x1C)) + 0x63;
+}
+
 s32 fn_8036BC0C(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x40);
 }
