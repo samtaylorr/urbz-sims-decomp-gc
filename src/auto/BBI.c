@@ -205,6 +205,11 @@ void *fn_80063A34(void) {
     return lbl_80491EE4;
 }
 
+extern u16 lbl_80491EFA[];
+u16 fn_80063A40(void) {
+    return lbl_80491EFA[0];
+}
+
 void fn_80063AA0(void) {
     fn_802D2430();
 }
