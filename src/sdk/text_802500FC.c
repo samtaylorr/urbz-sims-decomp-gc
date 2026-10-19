@@ -6,9 +6,9 @@ typedef struct DVDCommandBlock {
     void *prev;
     u32 command;
     s32 state;
-    u32 blockOffset;
     u32 offset;
     u32 length;
+    void *addr;
     u32 currTransferSize;
     u32 transferredSize;
     void *id;
