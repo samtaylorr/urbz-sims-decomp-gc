@@ -339,3 +339,8 @@ void fn_800FDFC4(void *arg0) {
     M2C_FIELD(arg0, s32 *, 4) = -1;
 }
 
+void fn_800FDFD4(void) {
+    M2C_UNK fn_800FDEB0(M2C_UNK, M2C_UNK);
+    fn_800FDEB0(1, 0xFFFF);
+}
+
