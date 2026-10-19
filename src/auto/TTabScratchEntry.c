@@ -588,6 +588,10 @@ s32 fn_801A38FC(void *arg0) {
     return M2C_FIELD(arg0, s16 *, 6) + M2C_FIELD(arg0, s16 *, 8);
 }
 
+void fn_801A390C(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s16 *, 8) = (s16) (arg1 - M2C_FIELD(arg0, u16 *, 6));
+}
+
 s16 fn_801A391C(void *arg0) {
     return M2C_FIELD(arg0, s16 *, 8);
 }
