@@ -189,6 +189,13 @@ s32 fn_80370070(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void fn_80370ED8(void) {
+    M2C_UNK fn_803700B0();
+    M2C_UNK fn_8037104C(M2C_UNK);
+    fn_8037104C(0x9C);
+    fn_803700B0();
+}
+
 void fn_80370F50(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
