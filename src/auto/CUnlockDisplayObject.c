@@ -95,6 +95,10 @@ void fn_800BC03C(void) {
 
 }
 
+s32 fn_800BC118(void *arg0) {
+    return M2C_FIELD(M2C_FIELD(arg0, void **, 0x178), s32 *, 0x80);
+}
+
 s32 fn_800BC124(void) {
     return 1;
 }
