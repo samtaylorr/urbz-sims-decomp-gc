@@ -315,9 +315,9 @@ s32 fn_802628C4(u32 arg0) {
     return 0;
 }
 
-extern u8 fn_80262F24[];
+s32 fn_80262F24(s32, void *);
 void *fn_80262F18(void) {
-    return fn_80262F24;
+    return (void *)fn_80262F24;
 }
 
 void fn_80264094(void) {
