@@ -21,6 +21,11 @@ void *fn_802E0B08(void) {
     return lbl_803F050C;
 }
 
+extern u8 lbl_803F0540[];
+void *fn_802E0B14(void) {
+    return lbl_803F0540;
+}
+
 s32 fn_802E0B20(void) {
     return 0;
 }
