@@ -254,6 +254,15 @@ void fn_80384068(void *arg0, s16 arg1) {
     fn_80254684();
 }
 
+void fn_803840B4(void *arg0, void *arg1) {
+    fn_8025465C();
+    M2C_FIELD(arg0, u16 *, 0x1A0) = (u16) M2C_FIELD(arg1, u16 *, 0);
+    M2C_FIELD(arg0, u16 *, 0x1A2) = (u16) M2C_FIELD(arg1, u16 *, 2);
+    M2C_FIELD(arg0, u16 *, 0x1A4) = (u16) M2C_FIELD(arg1, u16 *, 4);
+    M2C_FIELD(arg0, s32 *, 0x1C) = (s32) (M2C_FIELD(arg0, s32 *, 0x1C) | 0x800);
+    fn_80254684();
+}
+
 void fn_80384224(void *arg0, s16 arg1) {
     fn_8025465C();
     M2C_FIELD(arg0, s16 *, 0x1A6) = arg1;
