@@ -5,3 +5,8 @@ void fn_80314E68(void);
 void fn_80314E34(void) {
     fn_80314E68();
 }
+
+s32 fn_80315430(void) {
+    return 1;
+}
+
