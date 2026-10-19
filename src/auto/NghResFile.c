@@ -101,6 +101,10 @@ void fn_8012ACAC(void) {
 
 }
 
+void fn_8012FE00(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0x180) = arg1;
+}
+
 s32 fn_801301A8(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x24);
 }
