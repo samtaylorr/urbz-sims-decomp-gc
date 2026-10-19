@@ -316,6 +316,10 @@ s32 fn_8019F4FC(u8 *self) {
     return *(s32 *)(self + 0x20);
 }
 
+s32 fn_8019F548(void *arg0) {
+    return ((u32) M2C_FIELD(arg0, u32 *, 0x1C) >> 9U) & 1;
+}
+
 void fn_8019F604(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x38) = arg1;
 }
