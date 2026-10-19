@@ -272,6 +272,11 @@ void fn_802D0C9C(void) {
     fn_802D94C0(lbl_8044680C, 2);
 }
 
+s32 fn_802D0F64(void *arg0) {
+    s32 fn_802DD058(void *);
+    return fn_802DD058(arg0) != 0;
+}
+
 s32 fn_802D0F94(void) {
     return 0;
 }
