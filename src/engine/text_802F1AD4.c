@@ -93,3 +93,8 @@ f32 fn_802F2668(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0xDC);
 }
 
+void fn_802F2670(void) {
+    M2C_UNK fn_802F2468(M2C_UNK, M2C_UNK);
+    fn_802F2468(1, 0xFFFF);
+}
+
