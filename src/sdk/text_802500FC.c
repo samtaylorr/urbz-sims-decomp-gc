@@ -49,6 +49,11 @@ void fn_8026126C(void) {
 
 }
 
+extern s32 lbl_80494A30;
+void fn_80261270(s32 arg0) {
+    lbl_80494A30 = arg0;
+}
+
 extern u8 fn_80262F24[];
 void *fn_80262F18(void) {
     return fn_80262F24;
