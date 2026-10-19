@@ -79,6 +79,14 @@ s32 fn_80060C50(s32 arg0, s32 *out) {
     return arg0;
 }
 
+s32 fn_80060C90(s32 arg0, s32 *out) {
+    s32 tmp;
+
+    fn_802C5C58((void *)arg0, &tmp);
+    *out = tmp;
+    return arg0;
+}
+
 s32 fn_80060DAC(void) {
     return 0;
 }
