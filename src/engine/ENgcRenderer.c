@@ -26,6 +26,10 @@ void fn_8035F144(void) {
 
 }
 
+void fn_8035F148(void) {
+
+}
+
 s32 fn_8035F14C(void) {
     return 1;
 }
