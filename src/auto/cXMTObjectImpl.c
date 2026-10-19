@@ -23,6 +23,10 @@ void fn_8011CCA8(void ***arg0, s32 arg1) {
     M2C_FIELD(**arg0, s32 *, 8) = arg1;
 }
 
+void fn_8011CCB8(void ***arg0, s32 arg1) {
+    M2C_FIELD(**arg0, s32 *, 0xC) = arg1;
+}
+
 void fn_8011CD64(void) {
 
 }
