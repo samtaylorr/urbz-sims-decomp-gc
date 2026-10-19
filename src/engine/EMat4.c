@@ -292,6 +292,17 @@ void fn_802D0C9C(void) {
     fn_802D94C0(lbl_8044680C, 2);
 }
 
+M2C_UNK *fn_802D0CC8(void) {
+    M2C_UNK fn_802D9300(M2C_UNK *, M2C_UNK, M2C_UNK, M2C_UNK, M2C_UNK, M2C_UNK, M2C_UNK);
+    extern s32 lbl_80496160;
+    if ((s32) lbl_80496160 == 0) {
+        fn_802D9300(&lbl_8044680C, 0, 0, 1, 0, 0, 0);
+        lbl_80496160 = 1;
+        fn_80246D44(&fn_802D0C9C);
+    }
+    return &lbl_8044680C;
+}
+
 s32 fn_802D0F64(void *arg0) {
     s32 fn_802DD058(void *);
     return fn_802DD058(arg0) != 0;
