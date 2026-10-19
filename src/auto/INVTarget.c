@@ -300,6 +300,16 @@ s32 fn_8022346C(s32 arg0) {
     return arg0 + 0x20;
 }
 
+s32 fn_8022349C(void *arg0) {
+    s32 var_r9;
+
+    var_r9 = 0;
+    if (((s32) M2C_FIELD(arg0, s32 *, 0x44) != 0) || ((s32) M2C_FIELD(arg0, s32 *, 0x48) != 0)) {
+        var_r9 = 1;
+    }
+    return var_r9;
+}
+
 s32 fn_8022350C(s32 *self) {
     return *self;
 }
