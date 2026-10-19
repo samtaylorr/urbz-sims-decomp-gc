@@ -55,7 +55,10 @@ auto/EyeToyClient.c:
 	.text       start:0x80041AB4 end:0x80043C40
 
 auto/GameData.c:
-	.text       start:0x80043C40 end:0x8023EBD8
+	.text       start:0x80043C40 end:0x80049790
+
+auto/EGlobal.c:
+	.text       start:0x80049790 end:0x8023EBD8
 
 libsn/text_8023EBD8.c:
 	.text       start:0x8023EBD8 end:0x80241A98
