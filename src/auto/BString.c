@@ -2914,14 +2914,8 @@ void *fn_800ED274(void *arg0, void **arg1, u32 arg2, u32 arg3) {
     if (arg2 > fn_800EF6F8(arg1)) {
         fn_800EAF5C();
     }
-    {
-        u8 *s = fn_800EAFCC(arg1) + arg2;
-        u32 n = arg3;
-        if (n > fn_800EF6F8(arg1) - arg2) {
-            n = fn_800EF6F8(arg1) - arg2;
-        }
-        ((void (*)(void *, u8 *, u32))fn_800EBDA4)(arg0, s, n);
-    }
+    ((void (*)(void *, u8 *, u32))fn_800EBDA4)(arg0, fn_800EAFCC(arg1) + arg2,
+        arg3 > fn_800EF6F8(arg1) - arg2 ? fn_800EF6F8(arg1) - arg2 : arg3);
     return arg0;
 }
 
