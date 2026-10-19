@@ -179,9 +179,9 @@ u16 fn_800597B0(void) {
 }
 
 extern void fn_802D6A90(void *, void *, void *, void *, s32, void *, void *);
-extern void fn_800596C0(void);
-extern void fn_800596EC(void);
-extern void fn_80059710(void);
+extern void *fn_800596C0(void);
+extern void fn_800596EC(void *);
+extern void fn_80059710(void *);
 extern u8 lbl_803C7B8C[];
 extern u8 lbl_80491E1C[];
 void fn_800597BC(s32 arg0) {
