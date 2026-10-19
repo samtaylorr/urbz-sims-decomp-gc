@@ -64,6 +64,21 @@ void fn_80380754(void) {
     lbl_80496384 = 0;
 }
 
+void fn_80380A94(void) {
+    M2C_UNK fn_8025465C();
+    M2C_UNK fn_80254684();
+    extern s32 lbl_80496358;
+    extern s32 lbl_8049635C;
+    extern s32 lbl_80496360;
+    extern s32 lbl_80496364;
+    fn_8025465C();
+    lbl_80496358 = 0;
+    lbl_8049635C = 0;
+    lbl_80496360 = 0;
+    lbl_80496364 = 0;
+    fn_80254684();
+}
+
 extern s32 lbl_80496380;
 s32 fn_80380AEC(void) {
     return lbl_80496380;
