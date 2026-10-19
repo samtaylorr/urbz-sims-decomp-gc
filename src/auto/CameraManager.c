@@ -28,6 +28,10 @@ void fn_80015404(void) {
 
 }
 
+void fn_800157CC(void) {
+
+}
+
 void fn_800176DC(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
