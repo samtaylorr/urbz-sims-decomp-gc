@@ -481,6 +481,12 @@ void fn_80081DB8(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x3C4) = arg1;
 }
 
+void fn_80081DC0(void *arg0, s32 arg1) {
+    M2C_UNK fn_800BD804(s32, s32, M2C_UNK);
+    fn_800BD804(arg1, arg0 + 0x164, 1);
+    M2C_FIELD(arg0, s32 *, 0x160) = arg1;
+}
+
 void fn_80081E00(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x36C) = arg1;
 }
