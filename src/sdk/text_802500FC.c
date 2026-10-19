@@ -1084,6 +1084,30 @@ s32 fn_80276D70(void) {
     return sp8;
 }
 
+void fn_80276FB0(void) {
+    extern void *__memReg;
+    M2C_FIELD(__memReg, s16 *, 0x32) = 0;
+    M2C_FIELD(__memReg, s16 *, 0x34) = 0;
+    M2C_FIELD(__memReg, s16 *, 0x36) = 0;
+    M2C_FIELD(__memReg, s16 *, 0x38) = 0;
+    M2C_FIELD(__memReg, s16 *, 0x3C) = 0;
+    M2C_FIELD(__memReg, s16 *, 0x3A) = 0;
+    M2C_FIELD(__memReg, s16 *, 0x40) = 0;
+    M2C_FIELD(__memReg, s16 *, 0x3E) = 0;
+    M2C_FIELD(__memReg, s16 *, 0x44) = 0;
+    M2C_FIELD(__memReg, s16 *, 0x42) = 0;
+    M2C_FIELD(__memReg, s16 *, 0x48) = 0;
+    M2C_FIELD(__memReg, s16 *, 0x46) = 0;
+    M2C_FIELD(__memReg, s16 *, 0x4C) = 0;
+    M2C_FIELD(__memReg, s16 *, 0x4A) = 0;
+    M2C_FIELD(__memReg, s16 *, 0x50) = 0;
+    M2C_FIELD(__memReg, s16 *, 0x4E) = 0;
+    M2C_FIELD(__memReg, s16 *, 0x54) = 0;
+    M2C_FIELD(__memReg, s16 *, 0x52) = 0;
+    M2C_FIELD(__memReg, s16 *, 0x58) = 0;
+    M2C_FIELD(__memReg, s16 *, 0x56) = 0;
+}
+
 void fn_802773FC(void) {
 
 }
