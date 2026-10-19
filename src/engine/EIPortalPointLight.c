@@ -24,6 +24,12 @@ s32 fn_802F26FC(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void fn_802F31C8(void) {
+    M2C_UNK fn_802D1FC8(M2C_UNK);
+    fn_802D1FC8(0xEC);
+    fn_802F273C();
+}
+
 void fn_802F273C(void);
 void fn_802F31F0(void) {
     fn_802F273C();
