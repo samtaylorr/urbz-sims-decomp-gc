@@ -2,6 +2,18 @@
 #include "common.h"
 
 void fn_802D2FD0(void);
+s32 fn_8031BDE0(s32 *arg0, s32 *arg1) {
+    s32 temp_r0;
+    s32 temp_r9;
+
+    temp_r9 = *arg0;
+    temp_r0 = *arg1;
+    if (temp_r9 >= temp_r0) {
+        return temp_r9 > temp_r0;
+    }
+    return -1;
+}
+
 void fn_8031BE00(void) {
     fn_802D2FD0();
 }
