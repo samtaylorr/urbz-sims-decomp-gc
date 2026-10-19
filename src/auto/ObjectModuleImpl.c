@@ -130,6 +130,16 @@ s32 fn_80157AA8(void *arg0) {
     return (s32) ((M2C_FIELD(arg0, s32 *, 0x207C) - M2C_FIELD(arg0, s32 *, 0x2078)) * 0xEEEEEEEF) >> 2;
 }
 
+s32 fn_80157AC8(void *arg0) {
+    s32 var_r11;
+
+    var_r11 = 1;
+    if (((u32) (M2C_FIELD(arg0, s32 *, 0x2038) - M2C_FIELD(arg0, s32 *, 0x2034)) >> 2U) == 0) {
+        var_r11 = 0;
+    }
+    return var_r11;
+}
+
 extern s32 lbl_80495BE0;
 extern void fn_800F1A60(s32, s32);
 void fn_80157AEC(void) {
