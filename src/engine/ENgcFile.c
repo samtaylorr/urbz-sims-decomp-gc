@@ -40,3 +40,8 @@ void fn_802E03E4(char *self) {
     fn_802D8F90(self + 8);
 }
 
+void fn_802E0408(void) {
+    M2C_UNK fn_802E0390(M2C_UNK, M2C_UNK);
+    fn_802E0390(1, 0xFFFF);
+}
+
