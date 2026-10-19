@@ -51,6 +51,13 @@ void fn_8018CADC(void **obj) {
     }
 }
 
+void **fn_8018CB1C(void **arg0) {
+    extern char lbl_80413E40[];
+    arg0[0] = lbl_80413E40;
+    arg0[1] = 0;
+    return arg0;
+}
+
 void fn_8018CB38(void **self, s32 flags) {
     *self = lbl_80413E80;
     if (flags & 1) {
