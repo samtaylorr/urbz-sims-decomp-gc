@@ -652,6 +652,17 @@ s32 fn_80270FA8(s32 arg0) {
     return temp_r31;
 }
 
+s32 fn_80271074(s32 arg0) {
+    extern s32 lbl_804960B4;
+    s32 temp_r31;
+
+    temp_r31 = lbl_804960B4;
+    fn_8025465C();
+    lbl_804960B4 = arg0;
+    fn_80254684();
+    return temp_r31;
+}
+
 void fn_802725B4(void *arg0, f32 farg0, f32 farg1, f32 farg2, f32 farg3, f32 farg4, f32 farg5) {
     M2C_FIELD(arg0, f32 *, 0x10) = farg0;
     M2C_FIELD(arg0, f32 *, 0x14) = farg1;
