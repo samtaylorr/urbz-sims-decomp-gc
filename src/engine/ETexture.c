@@ -185,6 +185,58 @@ s32 fn_8036FB28(void *arg0, void *arg1) {
     return 0;
 }
 
+void fn_8036FE3C(void *arg0, void *arg1) {
+    s32 fn_8036FBA8(void *, s32);
+    s32 fn_8036FBC8(void *, s32);
+    M2C_UNK fn_8036FBE8(void *, s32, s32);
+    M2C_UNK fn_8036FC20(void *, s32, s32);
+    s32 temp_r4;
+    s32 temp_r5;
+    s32 temp_r9;
+    s32 var_ctr;
+    s32 var_r31;
+    void *var_r10;
+    void *var_r11;
+
+    var_ctr = 2;
+    var_r10 = arg0 + 0x6C;
+    M2C_FIELD(arg0, s32 *, 0) = (s32) M2C_FIELD(arg1, s32 *, 0);
+    var_r11 = arg1 + 0x6C;
+    M2C_FIELD(arg0, s32 *, 4) = (s32) M2C_FIELD(arg1, s32 *, 4);
+    M2C_FIELD(arg0, s32 *, 8) = (s32) M2C_FIELD(arg1, s32 *, 8);
+    M2C_FIELD(arg0, s32 *, 0xC) = (s32) M2C_FIELD(arg1, s32 *, 0xC);
+    M2C_FIELD(arg0, s32 *, 0x10) = (s32) M2C_FIELD(arg1, s32 *, 0x10);
+    M2C_FIELD(arg0, s32 *, 0x14) = (s32) M2C_FIELD(arg1, s32 *, 0x14);
+    M2C_FIELD(arg0, s32 *, 0x18) = (s32) M2C_FIELD(arg1, s32 *, 0x18);
+    M2C_FIELD(arg0, s32 *, 0x20) = (s32) M2C_FIELD(arg1, s32 *, 0x20);
+    M2C_FIELD(arg0, s32 *, 0x1C) = (s32) M2C_FIELD(arg1, s32 *, 0x1C);
+    M2C_FIELD(arg0, s32 *, 0x24) = (s32) M2C_FIELD(arg1, s32 *, 0x24);
+    do {
+        M2C_FIELD(var_r10, f32 *, -0x44) = (f32) M2C_FIELD(var_r11, f32 *, -0x44);
+        M2C_FIELD(var_r10, f32 *, -0x40) = (f32) M2C_FIELD(var_r11, f32 *, -0x40);
+        M2C_FIELD(var_r10, f32 *, -0x34) = (f32) M2C_FIELD(var_r11, f32 *, -0x34);
+        M2C_FIELD(var_r10, f32 *, -0x30) = (f32) M2C_FIELD(var_r11, f32 *, -0x30);
+        M2C_FIELD(var_r10, f32 *, -0x24) = (f32) M2C_FIELD(var_r11, f32 *, -0x24);
+        M2C_FIELD(var_r10, f32 *, -0x20) = (f32) M2C_FIELD(var_r11, f32 *, -0x20);
+        M2C_FIELD(var_r10, f32 *, -0x14) = (f32) M2C_FIELD(var_r11, f32 *, -0x14);
+        M2C_FIELD(var_r10, f32 *, -0x10) = (f32) M2C_FIELD(var_r11, f32 *, -0x10);
+        M2C_FIELD(var_r10, s32 *, -4) = (s32) M2C_FIELD(var_r11, s32 *, -4);
+        temp_r9 = M2C_FIELD(var_r11, s32 *, 0);
+        var_r11 += 8;
+        M2C_FIELD(var_r10, s32 *, 0) = temp_r9;
+        var_r10 += 8;
+        var_ctr -= 1;
+    } while (var_ctr != 0);
+    var_r31 = 0;
+    do {
+        fn_8036FC20(arg0, var_r31, fn_8036FBC8(arg1, var_r31));
+        temp_r5 = fn_8036FBA8(arg1, var_r31);
+        temp_r4 = var_r31;
+        var_r31 += 1;
+        fn_8036FBE8(arg0, temp_r4, temp_r5);
+    } while (var_r31 <= 0x1F);
+}
+
 void fn_8036FF88(void) {
 
 }
