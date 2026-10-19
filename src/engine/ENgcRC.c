@@ -43,6 +43,10 @@ void fn_8034BC04(void) {
 
 }
 
+void fn_8034BC08(void) {
+
+}
+
 extern void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
 void fn_8034BCEC(void *arg0) {
