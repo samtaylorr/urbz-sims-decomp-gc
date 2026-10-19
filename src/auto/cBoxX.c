@@ -33,3 +33,13 @@ void fn_80101330(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x14) = 1;
 }
 
+void fn_80101C10(void *arg0) {
+    u32 temp_r9;
+
+    temp_r9 = M2C_FIELD(arg0, u32 *, 0x28) + 1;
+    M2C_FIELD(arg0, u32 *, 0x28) = temp_r9;
+    if (temp_r9 > 0x2BU) {
+        M2C_FIELD(arg0, u32 *, 0x28) = 0U;
+    }
+}
+
