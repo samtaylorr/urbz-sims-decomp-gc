@@ -37,3 +37,7 @@ s32 fn_800C4558(void) {
     return 1;
 }
 
+s32 fn_800C4560(void) {
+    return 1;
+}
+
