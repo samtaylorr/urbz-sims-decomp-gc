@@ -106,6 +106,10 @@ void fn_803081EC(void) {
     fn_80307CCC();
 }
 
+s32 fn_803082C4(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0xA4);
+}
+
 void fn_80308518(void);
 void fn_80309178(void) {
     fn_80308518();
