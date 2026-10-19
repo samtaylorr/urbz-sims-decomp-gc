@@ -244,6 +244,11 @@ s32 fn_802643B8(s32 arg0) {
     return temp_r0;
 }
 
+void fn_8026477C(void) {
+    extern M2C_UNK lbl_80495EC8;
+    fn_80259838(&lbl_80495EC8);
+}
+
 s32 fn_802649F0(void) {
     return 0x80000000;
 }
