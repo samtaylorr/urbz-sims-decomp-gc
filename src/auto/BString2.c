@@ -16,6 +16,12 @@ void *fn_800F1FA8(void *self) {
     return self;
 }
 
+extern void fn_800F06A0(void *);
+void *fn_800F22C0(void *self) {
+    fn_800F06A0(self);
+    return self;
+}
+
 void fn_800F3738(void) {
     fn_800F0FFC();
 }
