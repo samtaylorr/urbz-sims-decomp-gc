@@ -152,6 +152,10 @@ f32 fn_800CF758(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0x4C);
 }
 
+s32 fn_800CF774(s32 arg0) {
+    return arg0 + 0x24;
+}
+
 f32 fn_800CF7DC(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0x2C);
 }
