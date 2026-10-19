@@ -34,3 +34,7 @@ s32 fn_8035F14C(void) {
     return 1;
 }
 
+void fn_8035F30C(void) {
+
+}
+
