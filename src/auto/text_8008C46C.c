@@ -82,6 +82,10 @@ void fn_80096DA4(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x114) = arg1;
 }
 
+void fn_80096DAC(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0x118) = arg1;
+}
+
 extern void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
 void fn_80097B40(void *arg0) {
