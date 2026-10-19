@@ -284,6 +284,11 @@ s32 fn_80217A30(void *arg0, s32 arg1) {
     return temp_r0;
 }
 
+void fn_8021BECC(s32 arg0) {
+    M2C_UNK fn_801F5420(s32);
+    fn_801F5420(arg0 + 0x84);
+}
+
 s32 fn_8021BEF0(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x104);
 }
