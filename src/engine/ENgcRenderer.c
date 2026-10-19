@@ -211,6 +211,17 @@ s32 fn_8035F14C(void) {
     return 1;
 }
 
+void fn_8035F154(s32 arg0) {
+    M2C_UNK fn_8035F240(s32, s32);
+    M2C_UNK fn_80366820(s32, s32 *, M2C_UNK);
+    s32 sp8;
+
+loop_1:
+    fn_80366820(arg0 + 0x348, &sp8, 1);
+    fn_8035F240(arg0, sp8);
+    goto loop_1;
+}
+
 void fn_8035F30C(void) {
 
 }
