@@ -102,6 +102,12 @@ void fn_8035500C(void) {
 
 }
 
+void fn_80355DE8(void) {
+    if (lbl_80495198 != 0) {
+        lbl_80495198 = 0;
+    }
+}
+
 void fn_80273F88(void);
 void fn_80357AA0(void) {
     fn_80273F88();
