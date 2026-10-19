@@ -111,6 +111,10 @@ s32 fn_80060DAC(void) {
     return 0;
 }
 
+void fn_800616D8(void) {
+
+}
+
 void fn_800616DC(void) {
     fn_802D2FD0();
 }
