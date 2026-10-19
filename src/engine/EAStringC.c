@@ -452,6 +452,10 @@ s32 fn_802B70DC(s32 *arg0) {
     return *arg0 & 0x3F;
 }
 
+s32 fn_802B70E8(u32 *arg0) {
+    return ((u32) *arg0 >> 0xEU) & 1;
+}
+
 void fn_802B71F4(void) {
 
 }
