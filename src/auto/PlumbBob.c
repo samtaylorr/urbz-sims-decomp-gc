@@ -60,8 +60,10 @@ void fn_80067A68(void *arg0) {
 }
 
 s32 fn_80067A8C(void *arg0, s32 arg1) {
-    void **arr = (void **)((u8 *)arg0 + 0x1FC);
-    return (M2C_FIELD(arr[arg1], u32 *, 0x18) >> 1) & 1;
+    s32 base = (s32)arg0 + 0x1FC;
+    s32 off = arg1 << 2;
+    void *p = *(void **)(base + off);
+    return (M2C_FIELD(p, u32 *, 0x18) >> 1) & 1;
 }
 
 void fn_80068444(void) {
