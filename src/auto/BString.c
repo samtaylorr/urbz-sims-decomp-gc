@@ -25,6 +25,10 @@ static inline s32 BString_CharEq(const u8 *a, const u8 *b) {
     return *a == *b;
 }
 
+static inline s32 BString_CharNe(const u8 *a, const u8 *b) {
+    return !BString_CharEq(a, b);
+}
+
 void fn_800D1634(void) {
     fn_800F1A60((s32)&lbl_80495A3C, 2);
 }
@@ -2655,7 +2659,11 @@ void fn_800EE7E4(s32 arg0, const char *arg1, s32 arg2) {
 }
 
 u32 fn_800EE83C(void **arg0, u8 arg1, u32 arg2) {
-    while (arg2 < fn_800EF6F8(arg0) && !BString_CharEq(&fn_800EAFCC(arg0)[arg2], &arg1)) {
+    while (arg2 < fn_800EF6F8(arg0)) {
+        s32 ne = !BString_CharEq(&fn_800EAFCC(arg0)[arg2], &arg1);
+        if (!ne) {
+            break;
+        }
         arg2++;
     }
     return arg2 < fn_800EF6F8(arg0) ? arg2 : -1;
