@@ -82,6 +82,10 @@ s16 fn_801B47D4(void *arg0) {
     return M2C_FIELD(arg0, s16 *, 0x18);
 }
 
+void fn_801B47DC(void *arg0, s16 arg1) {
+    M2C_FIELD(arg0, s16 *, 0x18) = arg1;
+}
+
 s32 fn_801B47E4(s32 *self) {
     return self[7];
 }
