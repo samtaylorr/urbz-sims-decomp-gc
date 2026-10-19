@@ -37,7 +37,10 @@ auto/ESimsDataManager.c:
 	.text       start:0x8001C5A8 end:0x8001E78C
 
 auto/text_8001E78C.c:
-	.text       start:0x8001E78C end:0x8023EBD8
+	.text       start:0x8001E78C end:0x80023C00
+
+auto/text_80023C00.c:
+	.text       start:0x80023C00 end:0x8023EBD8
 
 libsn/text_8023EBD8.c:
 	.text       start:0x8023EBD8 end:0x80241A98
