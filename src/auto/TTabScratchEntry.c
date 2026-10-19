@@ -690,6 +690,21 @@ void fn_801A30AC(void) {
     fn_800F1A60((s32)&lbl_80495D3C, 2);
 }
 
+s16 fn_801A375C(void **arg0, s32 arg1) {
+    s32 var_r0;
+    void *temp_r3;
+
+    temp_r3 = *arg0;
+    var_r0 = 0;
+    if (temp_r3 != NULL) {
+        var_r0 = M2C_FIELD(temp_r3, s32 *, -4);
+    }
+    if ((arg1 >= 0) && (arg1 < var_r0)) {
+        return M2C_FIELD((temp_r3 + (arg1 << 5)), s16 *, 0x1A);
+    }
+    return -1;
+}
+
 extern u8 lbl_80414FD0[];
 void fn_801A37C4(void **self, s32 flags) {
     *self = lbl_80414FD0;
