@@ -5,6 +5,10 @@ s32 fn_800AEB28(void) {
     return 1;
 }
 
+s32 fn_800B2EF4(char *self) {
+    return *(s32 *)(self + 0xC);
+}
+
 s32 fn_800B2F4C(s32 *self) {
     return self[1];
 }
