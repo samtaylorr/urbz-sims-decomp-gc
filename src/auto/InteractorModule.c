@@ -7,6 +7,26 @@ void fn_80237C70(void *arg0) {
     fn_8022F404(fn_8022554C(arg0), arg0);
 }
 
+void fn_80239684(void *arg0) {
+    M2C_UNK fn_80237FE8();
+    s32 temp_r0;
+    s32 temp_r0_2;
+    s32 temp_r9;
+
+    temp_r9 = M2C_FIELD(arg0, s32 *, 0xC0);
+    temp_r0 = temp_r9 & 1;
+    if (temp_r0 != 0) {
+        temp_r0_2 = temp_r9 & ~0x45;
+        M2C_FIELD(arg0, s32 *, 0xC0) = temp_r0_2;
+        if (!(temp_r9 & 0x200)) {
+            M2C_FIELD(arg0, s32 *, 0xC0) = (s32) (temp_r0_2 & 0xFFFFFFF7);
+        }
+    } else {
+        M2C_FIELD(arg0, s32 *, 0xC0) = temp_r0;
+        fn_80237FE8();
+    }
+}
+
 void fn_802396D4(s32 arg0) {
     M2C_UNK fn_8022A394(s32, s32, M2C_UNK);
     fn_8022A394(arg0 + 8, arg0 + 0x20, 2);
