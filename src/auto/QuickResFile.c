@@ -171,3 +171,7 @@ void fn_8018EAA0(void) {
 
 }
 
+s32 fn_8018EAA4(void) {
+    return 0x52636F6E;
+}
+
