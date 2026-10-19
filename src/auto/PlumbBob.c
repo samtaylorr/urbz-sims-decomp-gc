@@ -13,9 +13,21 @@ s32 fn_800671A0(void *arg0) {
     return 0;
 }
 
+void fn_80067A28(void *arg0) {
+    extern void fn_800671CC(void *, s32);
+    extern void fn_8000EC58(s32);
+    fn_800671CC(arg0, 1);
+    fn_8000EC58(M2C_FIELD(arg0, s32 *, 0x1E4));
+    fn_8000EC58(M2C_FIELD(arg0, s32 *, 0x1E8));
+}
+
 void fn_80067A68(void *arg0) {
     extern void fn_800675EC(void *, s32);
     fn_800675EC(arg0, 1);
+}
+
+s32 fn_80067A8C(void *arg0, s32 arg1) {
+    return (M2C_FIELD(((void **)((u8 *)arg0 + 0x1FC))[arg1], u32 *, 0x18) >> 1) & 1;
 }
 
 void fn_80068444(void) {
