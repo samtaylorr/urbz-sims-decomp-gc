@@ -181,6 +181,18 @@ void fn_800D2AE4(void) {
 
 }
 
+void fn_800D3B70(u8 *self, s32 arg1) {
+    extern s32 lbl_8041F754[];
+    extern void fn_80048A48(void *);
+    u8 *obj;
+    fn_80048A48(lbl_8041F754);
+    obj = *(u8 **)(self + 0x18);
+    if (obj != 0) {
+        u8 *vt = *(u8 **)(obj + 0x44);
+        (*(void (**)(void *, s32))(vt + 0x1C))(obj + *(s16 *)(vt + 0x18), arg1);
+    }
+}
+
 s32 *fn_800D3BD0(s32 *self, s32 arg1) {
     extern u8 lbl_8040B5A8[];
     self[0] = arg1;
