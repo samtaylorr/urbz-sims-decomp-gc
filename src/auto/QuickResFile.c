@@ -4,6 +4,10 @@
 void fn_8018D8DC(void);
 extern u8 lbl_80413E80[];
 extern void fn_802D20E8(void *);
+void fn_8018CAB0(void) {
+
+}
+
 void fn_8018CB38(void **self, s32 flags) {
     *self = lbl_80413E80;
     if (flags & 1) {
