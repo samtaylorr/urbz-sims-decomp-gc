@@ -26,6 +26,10 @@ s32 fn_8039B700(void) {
     return 1;
 }
 
+s32 fn_8039B708(void) {
+    return 1;
+}
+
 s32 fn_8039B718(void) {
     return 0;
 }
