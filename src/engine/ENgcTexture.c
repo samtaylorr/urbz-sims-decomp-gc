@@ -307,6 +307,11 @@ void fn_803630B0(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     fn_8036336C(arg1, arg2, arg3, arg4);
 }
 
+void fn_803630E0(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    void fn_803635F8(s32, s32, s32, s32);
+    fn_803635F8(arg1, arg2, arg3, arg4);
+}
+
 void fn_80363110(s32 arg0) {
     void fn_80338000(void *, s32, s32);
     extern u8 lbl_8045BAE8[];
