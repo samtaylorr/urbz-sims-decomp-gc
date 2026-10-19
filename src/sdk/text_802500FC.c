@@ -274,6 +274,10 @@ s32 fn_8026EDF8(void) {
     return temp_r3;
 }
 
+void fn_80270384(void) {
+    *(s8 *)0xCC008000 = 0x48;
+}
+
 u16 fn_80270C44(void) {
     extern void *__peReg;
     return M2C_FIELD(__peReg, u16 *, 0xE);
