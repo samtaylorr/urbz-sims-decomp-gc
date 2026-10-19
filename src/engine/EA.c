@@ -24,3 +24,7 @@ void fn_802DEDAC(void) {
     fn_802DDC6C();
 }
 
+s32 fn_802DF30C(void) {
+    return 0;
+}
+
