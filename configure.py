@@ -400,6 +400,7 @@ config.libs = [
             Object(NonMatching, "engine/EFrameAllocGroup.c"),
             Object(NonMatching, "engine/ETweak.c"),
             Object(NonMatching, "engine/EVibrate.c"),
+            Object(NonMatching, "engine/ERCharacter.c"),
             Object(NonMatching, "misc/text_8038FC80.c"),
             Object(NonMatching, "libs/text_80398934.c"),
         ],
