@@ -198,12 +198,12 @@ s32 fn_802D1404(void *arg0, u32 arg1) {
     return ((s32 *)((u8 *)arg0 + 0x53C))[arg1];
 }
 
-s32 fn_802D1424(u32 arg0) {
+s32 fn_802D1424(void *arg0) {
     s32 a, b, c;
-    a = fn_802D1404(fn_802D0AB8((void *)arg0), arg0);
-    b = fn_802D1404(fn_802D0B3C(), arg0);
-    c = fn_802D1404(fn_802D0BC0(), arg0);
-    return a + b + c + fn_802D1404(((void *(*)(void))fn_802D0C44)(), arg0);
+    a = fn_802D1404(fn_802D0AB8(arg0), (u32)arg0);
+    b = fn_802D1404(fn_802D0B3C(), (u32)arg0);
+    c = fn_802D1404(fn_802D0BC0(), (u32)arg0);
+    return a + b + c + fn_802D1404(((void *(*)(void))fn_802D0C44)(), (u32)arg0);
 }
 
 void fn_802D1494(void) {
