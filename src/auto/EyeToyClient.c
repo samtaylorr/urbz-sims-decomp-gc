@@ -4,6 +4,10 @@
 extern void (*lbl_804940B0)(void);
 
 extern s32 lbl_804957B8;
+void fn_80041CDC(void) {
+
+}
+
 s32 fn_80041D94(void) {
     return lbl_804957B8;
 }
