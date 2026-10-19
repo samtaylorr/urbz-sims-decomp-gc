@@ -125,3 +125,7 @@ s32 fn_802BBB08(void) {
     return 0;
 }
 
+s32 fn_802BBB10(void) {
+    return 0;
+}
+
