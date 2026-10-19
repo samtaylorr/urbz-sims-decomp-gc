@@ -261,6 +261,10 @@ f32 fn_800D0064(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0x30);
 }
 
+void fn_800D006C(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0x34) = arg1;
+}
+
 s32 fn_800D00A4(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x34);
 }
