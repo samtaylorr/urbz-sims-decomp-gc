@@ -5,3 +5,9 @@ extern s32 lbl_804945EC;
 s32 fn_801D65E4(void) {
     return lbl_804945EC;
 }
+
+void fn_801D6790(void) {
+    M2C_UNK fn_801D66E0(M2C_UNK, M2C_UNK);
+    fn_801D66E0(1, 0xFFFF);
+}
+
