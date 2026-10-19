@@ -86,6 +86,10 @@ s32 fn_8010FA08(void) {
     return 0x200;
 }
 
+s32 fn_8010FABC(void) {
+    return 0x5622;
+}
+
 s32 fn_8010FAC4(void) {
     return 1;
 }
