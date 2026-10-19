@@ -70,6 +70,10 @@ void fn_80204078(void) {
 
 }
 
+void fn_8020512C(void) {
+
+}
+
 s32 fn_80223248(s32 *self) {
     return self[1];
 }
