@@ -601,6 +601,11 @@ s32 fn_802737B4(u32 *arg0) {
     return ((u32) *arg0 >> 4U) & 1;
 }
 
+f32 fn_802737C0(void *arg0) {
+    extern f32 lbl_804975D0;
+    return (f32) (u8) M2C_FIELD(arg0, s32 *, 4) * lbl_804975D0;
+}
+
 s32 fn_80273868(u32 *arg0) {
     return ((u32) *arg0 >> 0x15U) & 1;
 }
