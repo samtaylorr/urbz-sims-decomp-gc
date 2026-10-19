@@ -64,6 +64,15 @@ s32 fn_80192788(void *arg0) {
     return (s32) (temp_r3 + (temp_r3 >> 0x1FU)) >> 1;
 }
 
+void fn_8019279C(void *arg0, s32 arg1) {
+    M2C_UNK fn_80191B04();
+    M2C_UNK fn_803AA148(s32, s32);
+    fn_80191B04();
+    fn_803AA148(arg0 + 4, arg1);
+    M2C_FIELD(arg0, s32 *, 0x34) = 1;
+    M2C_FIELD(arg0, s32 *, 0x80) = 1;
+}
+
 s32 fn_80192B04(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x90);
 }
