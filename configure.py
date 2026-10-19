@@ -396,6 +396,7 @@ config.libs = [
             Object(NonMatching, "engine/EWindow.c"),
             Object(NonMatching, "engine/Emitter.c"),
             Object(NonMatching, "engine/text_8030CB8C.c"),
+            Object(NonMatching, "engine/EController.c"),
             Object(NonMatching, "misc/text_8038FC80.c"),
             Object(NonMatching, "libs/text_80398934.c"),
         ],
