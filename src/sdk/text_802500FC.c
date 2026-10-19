@@ -167,6 +167,12 @@ void fn_8025F914(s32 arg0) {
     *lbl_80495EA8 = arg0;
 }
 
+s32 fn_80260574(void) {
+    M2C_UNK fn_802646D0();
+    fn_802646D0();
+    return 1;
+}
+
 void fn_80260D6C(void) {
     M2C_UNK fn_802642C0();
     fn_802642C0();
