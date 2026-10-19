@@ -94,6 +94,10 @@ void fn_8007C54C(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
 
+void fn_80081D84(void *arg0) {
+    fn_802D1A00(fn_802D0AB8(arg0), arg0);
+}
+
 void fn_8008A398(void) {
     fn_8008A3B8();
 }
