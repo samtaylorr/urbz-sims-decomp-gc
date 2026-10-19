@@ -83,6 +83,11 @@ void fn_802FEAB4(s32 *arg0) {
     fn_8036375C(*arg0);
 }
 
+void fn_802FEAD8(s32 *arg0) {
+    M2C_UNK fn_802CB634(s32);
+    fn_802CB634(*arg0);
+}
+
 s32 fn_802FECD8(void) {
     return 0;
 }
