@@ -26,6 +26,11 @@ s32 fn_802F328C(void) {
     return lbl_804937C8[0];
 }
 
+extern u16 lbl_804937CC[];
+u16 fn_802F3298(void) {
+    return lbl_804937CC[0];
+}
+
 void *fn_802F32A4(void) {
     return lbl_804937B8;
 }
