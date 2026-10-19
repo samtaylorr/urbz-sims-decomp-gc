@@ -90,3 +90,7 @@ void fn_8005D344(void) {
     fn_8005D054();
 }
 
+void fn_8005FAD0(void) {
+    fn_802D2FD0();
+}
+
