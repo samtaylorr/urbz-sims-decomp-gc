@@ -10,6 +10,10 @@ void fn_800EF8B8(void) {
 
 }
 
+s32 fn_800EF91C(void **arg0) {
+    return M2C_FIELD(*arg0, s32 *, 0xC);
+}
+
 s32 fn_800EF928(s32 **arg0) {
     return **arg0;
 }
