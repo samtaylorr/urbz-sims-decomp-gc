@@ -768,6 +768,10 @@ void fn_8039EC98(s32 *self, s32 flags) {
     }
 }
 
+void fn_8039ECCC(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x18) = 0;
+}
+
 void fn_8039ED08(void) {
     fn_80048A48(lbl_8041F754);
 }
