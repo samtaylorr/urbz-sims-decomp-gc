@@ -4764,6 +4764,12 @@ void *fn_803BED48(void *self) {
     return self;
 }
 
+void fn_803BF0DC(s32 *dst, s32 *src, s32 n) {
+    while (--n != -1) {
+        *dst++ = *src++;
+    }
+}
+
 void fn_803BF7EC(void **self, s32 flags) {
     *self = lbl_804194A0;
     if (flags & 1) {
