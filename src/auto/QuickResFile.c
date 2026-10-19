@@ -44,6 +44,13 @@ void fn_8018CAB4(void) {
     fn_8018CB1C();
 }
 
+void fn_8018CADC(void **obj) {
+    if (obj != NULL) {
+        char *vt = (char *)*obj;
+        (*(void (**)(void *, s32))(vt + 0xC))((char *)obj + *(s16 *)(vt + 0x8), 3);
+    }
+}
+
 void fn_8018CB38(void **self, s32 flags) {
     *self = lbl_80413E80;
     if (flags & 1) {
