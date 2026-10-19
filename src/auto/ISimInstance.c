@@ -12,6 +12,12 @@ void *fn_80063ED0(void *arg0, s32 arg1) {
     return arg0;
 }
 
+extern void fn_80064EC4(void *);
+void fn_80064EC4(void *self) {
+    extern void *fn_800650DC(void *, s32);
+    fn_800650DC(self, 0);
+}
+
 void fn_800659A0(void **self, s32 flags) {
     *self = lbl_80409228;
     if (flags & 1) {
