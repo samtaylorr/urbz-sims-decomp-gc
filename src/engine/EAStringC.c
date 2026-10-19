@@ -134,6 +134,10 @@ u8 *fn_802ACC54(u8 *self) {
     return self + 8;
 }
 
+u8 *fn_802ACC5C(u8 *self) {
+    return self + 8;
+}
+
 s32 fn_802ACC64(void) {
     return 1;
 }
