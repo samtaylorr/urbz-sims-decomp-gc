@@ -30,6 +30,20 @@ f32 fn_8033CB30(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 8);
 }
 
+void fn_8033CB94(void) {
+    M2C_UNK fn_8035DFE0(s32);
+    M2C_UNK fn_8035F938(s32);
+    M2C_UNK fn_80385FA8();
+    extern s32 lbl_80494F98;
+    extern s32 lbl_80494FA8;
+    extern s32 lbl_80494FAC;
+    if ((s32) lbl_80494F98 != 0) {
+        fn_80385FA8();
+        fn_8035F938(lbl_80494FA8);
+        fn_8035DFE0(lbl_80494FAC);
+    }
+}
+
 s32 fn_8033D104(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x38);
 }
