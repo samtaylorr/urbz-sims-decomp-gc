@@ -87,6 +87,12 @@ void *fn_80331E08(u32 size, void *p) {
     return p;
 }
 
+void fn_80331E10(s32 arg0) {
+    void fn_80338184(void *, s32);
+    extern u8 lbl_8045BAE8[];
+    fn_80338184(lbl_8045BAE8, arg0);
+}
+
 void fn_80331E78(void) {
     M2C_UNK fn_80331BF4(M2C_UNK, M2C_UNK);
     fn_80331BF4(1, 0xFFFF);
