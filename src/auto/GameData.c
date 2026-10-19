@@ -13,6 +13,10 @@ void fn_80044A38(s32 *self) {
     self[1] = 1;
 }
 
+void fn_80046FE0(void) {
+
+}
+
 s32 fn_80047AFC(void) {
     return 1;
 }
