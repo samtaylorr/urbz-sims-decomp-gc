@@ -20,6 +20,10 @@ void fn_8000386C(u8 *self) {
     fn_802E04BC(self);
 }
 
+void *fn_80003974(void) {
+    return lbl_803C1390;
+}
+
 void fn_80003CEC(void) {
 }
 
