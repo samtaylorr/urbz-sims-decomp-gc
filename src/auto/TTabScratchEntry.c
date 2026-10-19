@@ -329,6 +329,10 @@ void fn_801A0858(void *self, s32 flags) {
     }
 }
 
+s32 fn_801A0FCC(void) {
+    return 0x1E;
+}
+
 void fn_803AB7D4();
 void fn_801A135C(char *self) {
     extern void fn_803AB7D4(void *);
