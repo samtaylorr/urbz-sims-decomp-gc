@@ -174,3 +174,7 @@ s32 fn_801301A8(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x24);
 }
 
+void fn_801301B0(void) {
+    fn_80130178(1, 0xFFFF);
+}
+
