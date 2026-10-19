@@ -302,6 +302,16 @@ s32 fn_802DF350(void) {
     return 0;
 }
 
+void fn_802DF890(void *arg0, s32 arg1) {
+    M2C_UNK fn_802DF924();
+    if ((s32) M2C_FIELD(arg0, s32 *, 8) != 0) {
+        fn_802DF924();
+    }
+    if (arg1 & 1) {
+        fn_802D20E8(arg0);
+    }
+}
+
 void fn_802DFB30(void) {
 
 }
