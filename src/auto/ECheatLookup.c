@@ -25,6 +25,7 @@ char *fn_8001995C(char *self, s32 arg1, const char *arg2, s32 arg3, s32 arg4, ch
 }
 
 void fn_80019C58(char *self) {
+    extern void fn_802C5240(void *);
     fn_802C5240(self + 8);
 }
 
