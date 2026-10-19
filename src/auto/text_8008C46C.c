@@ -22,6 +22,10 @@ void fn_8008E250(void) {
 
 }
 
+void fn_8008F240(void) {
+
+}
+
 s32 fn_8008F854(void) {
     return 1;
 }
