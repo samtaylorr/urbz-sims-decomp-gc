@@ -448,6 +448,10 @@ void fn_802B6FA4(void) {
 
 }
 
+s32 fn_802B70DC(s32 *arg0) {
+    return *arg0 & 0x3F;
+}
+
 void fn_802B71F4(void) {
 
 }
