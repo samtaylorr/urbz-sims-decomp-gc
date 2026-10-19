@@ -935,6 +935,11 @@ void fn_800DFC08(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x18) = 0;
 }
 
+void fn_800DFFE4(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x18) = 0;
+    M2C_FIELD(arg0, s32 *, 0x20) = 0;
+}
+
 void fn_800E023C(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x18) = 0;
 }
