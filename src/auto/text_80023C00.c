@@ -45,6 +45,11 @@ s32 fn_80028940(void) {
     return 0;
 }
 
+void fn_800289C8(void *arg0) {
+    M2C_UNK fn_80028948(s32);
+    fn_80028948(M2C_FIELD(arg0, s32 *, 0x6C));
+}
+
 void fn_8002B868(void) {
 
 }
