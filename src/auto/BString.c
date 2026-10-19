@@ -775,6 +775,10 @@ void fn_800DBFDC(void) {
 
 }
 
+s32 fn_800DC1C4(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x94);
+}
+
 extern s32 lbl_8040BE80[];
 s32 *fn_800DC1CC(s32 *self, s32 a) {
     self[0] = a;
