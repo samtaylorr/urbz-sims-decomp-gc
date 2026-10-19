@@ -396,3 +396,7 @@ f32 fn_800D1594(void *arg0) {
     return M2C_FIELD(M2C_FIELD(arg0, void **, 0x64), f32 *, 0x2C);
 }
 
+f32 fn_800D15A0(void *arg0) {
+    return M2C_FIELD(M2C_FIELD(arg0, void **, 0x64), f32 *, 0x30);
+}
+
