@@ -100,6 +100,13 @@ s32 fn_80258544(void) {
     return *(s32 *)0x800000E4;
 }
 
+s32 fn_802585AC(void *arg0) {
+    if ((s32) M2C_FIELD(arg0, s32 *, 0x2CC) > 0) {
+        return 1;
+    }
+    return 0;
+}
+
 s32 fn_802599FC(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x2D4);
 }
