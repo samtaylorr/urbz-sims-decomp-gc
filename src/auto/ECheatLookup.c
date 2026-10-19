@@ -6,6 +6,12 @@ int fn_802486DC(const char *a, const char *b);
 char *fn_80248A10(char *dst, const char *src, int n);
 unsigned int fn_80248808(const char *s);
 extern char lbl_803C2A3C[];
+void fn_80018D98(s32 arg0) {
+    M2C_UNK fn_80018DCC(s32);
+    fn_800194C0();
+    fn_80018DCC(arg0);
+}
+
 void fn_800194C0(void) {
 
 }
