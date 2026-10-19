@@ -187,6 +187,10 @@ s16 fn_801B6568(void *arg0) {
     return M2C_FIELD(M2C_FIELD(arg0, void **, 4), s16 *, 0x16);
 }
 
+s16 fn_801B6574(void *arg0) {
+    return M2C_FIELD(M2C_FIELD(arg0, void **, 4), s16 *, 0x12);
+}
+
 void fn_801B6580(void) {
 
 }
