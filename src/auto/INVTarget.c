@@ -129,6 +129,22 @@ void fn_801E13BC(void *arg0) {
     M2C_FIELD(arg0, u8 *, 0x114) = (u8) (M2C_FIELD(arg0, u8 *, 0x114) - 1);
 }
 
+void fn_801E2140(void *arg0) {
+    M2C_UNK fn_801E2180();
+    M2C_UNK fn_801E2674();
+    u8 temp_r0;
+
+    temp_r0 = M2C_FIELD(arg0, u8 *, 0x314);
+    switch ((s32) temp_r0) {                        /* irregular */
+    case 1:
+        fn_801E2674();
+        return;
+    case 2:
+        fn_801E2180();
+        return;
+    }
+}
+
 void fn_801EA748(void) {
     extern void *lbl_80494630;
     if ((void *) lbl_80494630 != NULL) {
