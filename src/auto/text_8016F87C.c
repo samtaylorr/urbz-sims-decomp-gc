@@ -1,6 +1,18 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+void fn_8016F980(void *arg0) {
+    s32 var_r11;
+    void *temp_r9;
+
+    var_r11 = 0;
+    temp_r9 = *M2C_FIELD(arg0, void ***, 0);
+    if (temp_r9 != NULL) {
+        var_r11 = M2C_FIELD(temp_r9, s32 *, -4);
+    }
+    M2C_FIELD(arg0, s32 *, 4) = (s32) (var_r11 - 1);
+}
+
 void fn_8016FA20(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x20) = arg1;
 }
