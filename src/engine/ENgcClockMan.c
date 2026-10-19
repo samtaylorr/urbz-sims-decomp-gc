@@ -18,3 +18,8 @@ void fn_8033E198(void) {
 
 }
 
+void fn_8033E318(void) {
+    M2C_UNK fn_8033E2CC(M2C_UNK, M2C_UNK);
+    fn_8033E2CC(1, 0xFFFF);
+}
+
