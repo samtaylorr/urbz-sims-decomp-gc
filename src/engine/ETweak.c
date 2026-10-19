@@ -5,3 +5,8 @@ void fn_802435CC(void);
 void fn_803135D4(void) {
     fn_802435CC();
 }
+
+void fn_8031411C(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0x38) = arg1;
+}
+
