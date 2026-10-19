@@ -353,6 +353,14 @@ void fn_80214DB0(void) {
 
 }
 
+void fn_802178D4(void *arg0) {
+    M2C_UNK fn_801F53A0(void *);
+    if ((s32) M2C_FIELD(arg0, s32 *, 0x160) != 0) {
+        M2C_FIELD(arg0, s32 *, 0x160) = 0;
+        fn_801F53A0(arg0 + 0x84);
+    }
+}
+
 s32 fn_80217A30(void *arg0, s32 arg1) {
     s32 temp_r0;
 
