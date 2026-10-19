@@ -671,6 +671,10 @@ s32 fn_800DAEB0(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x38);
 }
 
+void fn_800DAEB8(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0x3C) = arg1;
+}
+
 extern u8 lbl_8040BB58[];
 s32 *fn_800DAEC0(s32 *self, s32 arg1) {
     self[0] = arg1;
