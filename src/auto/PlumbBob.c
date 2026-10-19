@@ -29,6 +29,11 @@ void fn_8006E268(void *self) {
 void fn_8006E2D0(void) {
 }
 
+void fn_8006E2D4(void) {
+    fn_802E091C(lbl_8041E1C8);
+    fn_800490B0(lbl_8041F754);
+}
+
 s32 fn_800702F8(void) {
     return 0;
 }
