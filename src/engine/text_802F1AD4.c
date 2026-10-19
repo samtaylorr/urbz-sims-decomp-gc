@@ -79,3 +79,7 @@ void fn_802F2620(void) {
     fn_802D2430();
 }
 
+s32 fn_802F2640(void) {
+    return 3;
+}
+
