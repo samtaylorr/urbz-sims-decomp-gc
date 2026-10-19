@@ -19,6 +19,10 @@ void fn_8006CD40(void) {
     fn_8006D798();
 }
 
+void fn_8006D99C(s32 *self, s32 value) {
+    *self = value;
+}
+
 extern s32 fn_802E0904(void *);
 extern s32 fn_802E091C(void *);
 extern void fn_8010CD4C(s32);
