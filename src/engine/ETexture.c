@@ -62,6 +62,12 @@ void *fn_8036F168(u32 size, void *p) {
     return p;
 }
 
+void fn_8036F170(s32 arg0) {
+    void fn_80338184(void *, s32);
+    extern u8 lbl_8045BAE8[];
+    fn_80338184(lbl_8045BAE8, arg0);
+}
+
 u8 fn_8036F19C(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 0x18);
 }
