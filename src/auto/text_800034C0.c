@@ -77,3 +77,7 @@ void fn_80058514(void) {
     fn_802D2FD0();
 }
 
+void fn_80059810(void) {
+    fn_802D2430();
+}
+
