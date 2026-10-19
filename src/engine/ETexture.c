@@ -69,6 +69,10 @@ u16 fn_8036F1AC(void *arg0) {
     return M2C_FIELD(arg0, u16 *, 0x10);
 }
 
+u16 fn_8036F1B4(void *arg0) {
+    return M2C_FIELD(arg0, u16 *, 0x12);
+}
+
 s32 fn_8036F1D4(s32 *self) {
     return self[2];
 }
