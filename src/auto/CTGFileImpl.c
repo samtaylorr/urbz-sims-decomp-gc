@@ -83,6 +83,16 @@ s32 fn_800C4568(void *self, const char *name) {
     return f != NULL;
 }
 
+void fn_800C45C0(s32 arg0, s32 arg1) {
+    if (arg1 == 0xFFFF) {
+        if (arg0 != 0) {
+            fn_800C43D4(lbl_80495A30);
+        } else {
+            fn_800C43D8(lbl_80495A30, 2);
+        }
+    }
+}
+
 void **fn_800C4614(void **self) {
     *self = lbl_8040A890;
     return self;
