@@ -661,6 +661,18 @@ void fn_802B7258(void) {
 
 }
 
+s32 fn_802B72E8(u32 *arg0) {
+    s32 var_r9;
+    u32 temp_r3;
+
+    temp_r3 = *arg0;
+    var_r9 = 0;
+    if ((s32) (temp_r3 & 0x3F) == 8) {
+        var_r9 = (temp_r3 >> 0xFU) & 1;
+    }
+    return var_r9;
+}
+
 void fn_802B76E0(void) {
 
 }
