@@ -933,15 +933,6 @@ void fn_800DB1F0(void) {
 
 }
 
-s32 fn_800DBE90(s32);
-extern f32 lbl_803D496C[];
-extern f32 lbl_803D4970[];
-extern f32 lbl_803D4974[];
-f32 fn_800E416C(void *arg0);
-extern f32 lbl_803D497C[];
-extern f32 lbl_803D4980[];
-extern f32 lbl_803D4984[];
-extern const f32 lbl_803D4988[];
 void fn_800DB214(s32 *self, f32 dt) {
     if (fn_800E416C((void *)self[2]) < lbl_803D497C[0]) {
         if (((f32 *)self)[6] < lbl_803D4980[0]) {
