@@ -2,6 +2,10 @@
 #include "common.h"
 
 void fn_800C3B48(void);
+s32 fn_801DCC8C(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x84);
+}
+
 void fn_801F0490(void) {
 
 }
