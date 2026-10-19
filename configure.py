@@ -379,6 +379,7 @@ config.libs = [
             Object(NonMatching, "engine/EString.c"),
             Object(NonMatching, "engine/EA.c"),
             Object(NonMatching, "engine/ENgcFile.c"),
+            Object(NonMatching, "engine/EEngine.c"),
             Object(NonMatching, "misc/text_8038FC80.c"),
             Object(NonMatching, "libs/text_80398934.c"),
         ],
