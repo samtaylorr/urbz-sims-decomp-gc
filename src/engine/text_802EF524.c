@@ -83,3 +83,7 @@ s32 fn_802EFAAC(void) {
     return 2;
 }
 
+s32 fn_802EFAD4(s32 arg0) {
+    return arg0 + 0xC0;
+}
+
