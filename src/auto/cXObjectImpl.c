@@ -43,6 +43,10 @@ void fn_80131DA4(void) {
 
 }
 
+s32 fn_80132200(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x84) & 0x1F;
+}
+
 extern s32 lbl_80494478;
 void fn_801325DC(void (*cb)(void)) {
     lbl_80494478 = cb;
