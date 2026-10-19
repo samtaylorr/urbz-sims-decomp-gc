@@ -37,6 +37,11 @@ s32 fn_800EFDF8(void) {
     return fn_800EFCAC() ^ 1;
 }
 
+s32 fn_800EFE1C(void) {
+    s32 fn_800EFCD4();
+    return fn_800EFCD4() ^ 1;
+}
+
 s32 fn_800EFF00(void) {
     return 0;
 }
