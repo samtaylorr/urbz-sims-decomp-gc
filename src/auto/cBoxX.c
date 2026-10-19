@@ -37,6 +37,14 @@ void fn_80100D9C(s32 arg0) {
     fn_80100F68(arg0);
 }
 
+void fn_80100DD8(s32 arg0) {
+    M2C_UNK fn_80100FB4(s32);
+    M2C_UNK fn_80100E74(s32);
+    fn_80100F1C();
+    fn_80100E74(arg0);
+    fn_80100FB4(arg0);
+}
+
 void fn_80101300(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0xC) = arg1;
     M2C_FIELD(arg0, s32 *, 4) = 1;
