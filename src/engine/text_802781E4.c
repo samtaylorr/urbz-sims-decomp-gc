@@ -6,6 +6,12 @@ void fn_80278618(void) {
     fn_802A1E68();
 }
 
+void fn_80278950(void) {
+    M2C_UNK fn_802A2990(s32);
+    extern s32 lbl_804960E8;
+    fn_802A2990(lbl_804960E8);
+}
+
 s32 fn_80278974(void) {
     return 1;
 }
