@@ -22,6 +22,10 @@ void fn_80191460(void) {
 
 }
 
+s32 fn_80192B04(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x90);
+}
+
 s32 fn_80192C7C(void) {
     return lbl_80494538;
 }
