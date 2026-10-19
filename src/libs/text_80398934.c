@@ -122,6 +122,13 @@ void fn_80399F94(s32 **self, s32 flags) {
     }
 }
 
+void fn_80399FD4(u8 *p, s32 n) {
+    while (--n != -1) {
+        fn_80399F94((s32 **)p, 2);
+        p += 0xC;
+    }
+}
+
 void fn_8039A024(void *self) {
     ((s32 *)self)[0] = 0;
     ((s32 *)self)[2] = 0;
