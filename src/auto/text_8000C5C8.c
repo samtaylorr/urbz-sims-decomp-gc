@@ -3,14 +3,20 @@
 
 void fn_8000C5C8(void) {
     extern void **lbl_80496650;
-    extern char lbl_8041F94C[];
+    extern struct {
+        u8 pad0[0xEC];
+        char *unkEC;
+        u8 pad1[0x194 - 0xF0];
+        s32 unk194;
+        u8 pad2[0x330 - 0x198];
+        s32 unk330;
+    } lbl_8041F94C;
     extern s32 lbl_8049440C;
     extern s32 lbl_8049664C;
     char *vt = (char *)*lbl_80496650;
     (*(void (**)(void *, s32, s32, s32, s32))(vt + 0x64))(
         (char *)lbl_80496650 + *(s16 *)(vt + 0x60), lbl_8049440C,
-        *(s32 *)(*(char **)(lbl_8041F94C + 0xEC) + 0x6C),
-        *(s32 *)(lbl_8041F94C + 0x330), *(s32 *)(lbl_8041F94C + 0x194));
+        *(s32 *)(lbl_8041F94C.unkEC + 0x6C), lbl_8041F94C.unk330, lbl_8041F94C.unk194);
     lbl_8049664C = 1;
 }
 
