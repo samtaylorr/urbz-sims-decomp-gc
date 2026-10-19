@@ -142,7 +142,10 @@ auto/cXMTObjectImpl.c:
 	.text       start:0x801181F0 end:0x80123160
 
 auto/NeighborhoodImpl.c:
-	.text       start:0x80123160 end:0x8023EBD8
+	.text       start:0x80123160 end:0x801287A0
+
+auto/NghResFile.c:
+	.text       start:0x801287A0 end:0x8023EBD8
 
 libsn/text_8023EBD8.c:
 	.text       start:0x8023EBD8 end:0x80241A98
