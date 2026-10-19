@@ -30,6 +30,10 @@ void fn_801F0498(void) {
 
 }
 
+void fn_801F086C(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0xAC) = arg1;
+}
+
 void fn_801F388C(void) {
 
 }
