@@ -6,6 +6,19 @@ void fn_80317B98(void) {
     fn_80317758();
 }
 
+s32 fn_80317CD8(s32 arg0) {
+    s32 fn_80317BB8();
+    s32 temp_r3;
+    s32 var_r30;
+
+    var_r30 = 0;
+    temp_r3 = fn_80317BB8();
+    if (temp_r3 != 0) {
+        var_r30 = arg0 + temp_r3;
+    }
+    return var_r30;
+}
+
 void fn_8031A4F8(void) {
 
 }
