@@ -88,6 +88,14 @@ s32 fn_800FB614(s32 *self) {
     return self[1];
 }
 
+extern u8 lbl_8040D458[];
+void fn_800FB77C(void **self, s32 flags) {
+    *self = lbl_8040D458;
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 s32 fn_800FB8A4(void) {
     return 0;
 }
