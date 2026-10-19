@@ -84,6 +84,10 @@ void fn_8010FD34(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
 
+void fn_801102DC(void) {
+
+}
+
 s32 fn_80111A54(s32 *self) {
     return *self;
 }
