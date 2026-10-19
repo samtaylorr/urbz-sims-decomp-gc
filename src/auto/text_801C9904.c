@@ -50,3 +50,8 @@ void fn_801CE8BC(s32 arg0) {
     fn_801CB3E4(arg0 + 0xF8);
 }
 
+void fn_801CE8E0(s32 arg0) {
+    M2C_UNK fn_801CB6F8(s32);
+    fn_801CB6F8(arg0 + 0xF8);
+}
+
