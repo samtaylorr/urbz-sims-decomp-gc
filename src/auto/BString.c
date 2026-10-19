@@ -2594,6 +2594,18 @@ s32 fn_800EABCC(s32 arg0, s32 arg1) {
     return arg0 + (arg1 * 8);
 }
 
+s32 fn_800EADEC(s32 arg0, s32 arg1) {
+    M2C_UNK fn_800EA920(s32, s32);
+    s32 var_r31;
+
+    var_r31 = arg0;
+    do {
+        fn_800EA920(var_r31, arg1);
+        var_r31 += 8;
+    } while (var_r31 <= (s32) (arg0 + 0x1F8));
+    return arg0;
+}
+
 s32 fn_800EAE8C(s32 arg0) {
     s32 fn_800EA9B0(s32);
     s32 temp_r29;
