@@ -262,7 +262,10 @@ engine/EAStringC.c:
 	.text       start:0x802901E4 end:0x802C45F8
 
 engine/EFileSystem.c:
-	.text       start:0x802C45F8 end:0x80378E78
+	.text       start:0x802C45F8 end:0x802C66FC
+
+engine/EMat4.c:
+	.text       start:0x802C66FC end:0x80378E78
 
 sdk/text_80378E78.c:
 	.text       start:0x80378E78 end:0x8038FC80
