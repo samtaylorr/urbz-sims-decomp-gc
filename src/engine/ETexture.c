@@ -40,6 +40,10 @@ s32 fn_8036F018(s32 *self) {
     return self[2];
 }
 
+void fn_8036F130(void) {
+
+}
+
 void *fn_8036F168(u32 size, void *p);
 void *fn_8036F168(u32 size, void *p) {
     return p;
