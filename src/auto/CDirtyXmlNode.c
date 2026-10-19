@@ -89,6 +89,28 @@ void fn_800C3820(void (*cb)(void)) {
     lbl_80495A24 = cb;
 }
 
+extern void (*lbl_8044331C[])(void);
+extern u8 *lbl_80494DF0;
+extern char lbl_803D04B8[];
+extern char lbl_803D0268[];
+extern char lbl_803D04C0[];
+void fn_802D3C60(void *, void *);
+void fn_802D41A8(void *, char *);
+void fn_8027897C(char *, char *);
+void fn_802D39F0(void *, char *);
+s32 fn_800C3998(char *arg0) {
+    char *str[3];
+    u8 *vt = *(u8 **)(lbl_80494DF0 + 0x338);
+
+    fn_802D3C60(str, (*(void *(**)(void *))(vt + 0x24))(lbl_80494DF0 + *(s16 *)(vt + 0x20)));
+    fn_802D41A8(str, lbl_803D04B8);
+    fn_802D41A8(str, lbl_803D0268);
+    fn_802D41A8(str, arg0);
+    fn_8027897C(str[0], lbl_803D04C0);
+    fn_802D39F0(str, str[0]);
+    return 1;
+}
+
 extern void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
 void fn_800C3AC8(void *arg0) {
@@ -98,5 +120,58 @@ void fn_800C3AC8(void *arg0) {
 void fn_802D22C8(void);
 void fn_800C3AFC(void) {
     fn_802D22C8();
+}
+
+void fn_800C3B1C(void) {
+    lbl_8044331C[0]();
+}
+
+void fn_800C3B48(u16 *src, s32 len, u8 *dst) {
+    s32 i;
+
+    if (len == -1) {
+        u16 *p = src;
+        len = 0;
+        while (*p != 0) {
+            p++;
+            len++;
+        }
+        len++;
+    }
+    for (i = 0; i < len; i++) {
+        if (*src <= 0x7F) {
+            *dst = *src;
+        } else if (*src <= 0x7FF) {
+            *dst = ((*src >> 6) & 0x1F) | 0xC0;
+            *++dst = (*src & 0x3F) | 0x80;
+        } else {
+            *dst = ((*src >> 12) & 0xF) | 0xE0;
+            *++dst = ((*src >> 6) & 0x3F) | 0x80;
+            *++dst = (*src & 0x3F) | 0x80;
+        }
+        dst++;
+        src++;
+    }
+}
+
+void fn_800C3C04(u8 *src, s32 len, u16 *dst) {
+    u8 *end = src + len;
+
+    while (src < end) {
+        u8 c = *src;
+        if (!(c & 0x80)) {
+            *dst = c;
+            src++;
+        } else if ((c & 0xE0) == 0xC0) {
+            *dst = ((c & 0x1F) << 6) | (src[1] & 0x3F);
+            src += 2;
+        } else if ((c & 0xF0) == 0xE0) {
+            *dst = ((c & 0xF) << 12) | ((src[1] & 0x3F) << 6) | (src[2] & 0x3F);
+            src += 3;
+        } else {
+            return;
+        }
+        dst++;
+    }
 }
 
