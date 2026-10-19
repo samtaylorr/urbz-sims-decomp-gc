@@ -146,16 +146,16 @@ s32 *fn_800D1EE4(s32 *self, s32 a) {
     return self;
 }
 
-void fn_800D1F18(void *arg0, s32 arg1) {
-    extern u8 lbl_8040B200[];
-    s32 *p = arg0;
-    p[0] = arg1;
-    p[3] = -1;
-    p[4] = 1;
-    p[5] = (s32)lbl_8040B200;
-    p[6] = 0;
-    p[1] = -1;
-    p[2] = 0;
+s32 *fn_800D1F18(s32 *self, s32 a) {
+    extern s32 lbl_8040B200[];
+    self[0] = a;
+    self[1] = -1;
+    self[2] = 0;
+    self[3] = -1;
+    self[4] = 1;
+    self[5] = (s32)lbl_8040B200;
+    self[6] = 0;
+    return self;
 }
 
 extern s32 lbl_8040B1B8[];
