@@ -111,6 +111,12 @@ s32 fn_8019F890(void) {
     return 0;
 }
 
+void fn_801A0858(void *self, s32 flags) {
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_803AB7D4();
 void fn_801A135C(char *self) {
     extern void fn_803AB7D4(void *);
