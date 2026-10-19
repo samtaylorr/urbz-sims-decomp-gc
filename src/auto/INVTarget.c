@@ -102,6 +102,10 @@ void fn_8022345C(void) {
 
 }
 
+void fn_80223460(void) {
+
+}
+
 s32 fn_8022350C(s32 *self) {
     return *self;
 }
