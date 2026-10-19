@@ -5415,7 +5415,7 @@ void fn_803BAF00(void *self) {
 }
 
 void fn_803BAF14(u8 *p, s32 n) {
-    while (n--) {
+    while (--n != -1) {
         M2C_FIELD(p, s32 *, 0x0) = 0;
         M2C_FIELD(p, s32 *, 0x4) = 0;
         M2C_FIELD(p, s32 *, 0x8) = 0;
@@ -5491,6 +5491,14 @@ extern void fn_803BB800(void *);
 void *fn_803BB814(void *self) {
     fn_803BB800(self);
     return self;
+}
+
+void fn_803BB844(s32 self) {
+    extern s32 lbl_8045B390[];
+    extern void fn_80338184(void *, s32);
+    fn_80399CD4((u8 *)((s32 *)self)[0], ((s32 *)self)[1]);
+    fn_80338184(lbl_8045B390, ((s32 *)self)[0]);
+    fn_80399CF0((void *)self);
 }
 
 extern void fn_803BB844(s32);
