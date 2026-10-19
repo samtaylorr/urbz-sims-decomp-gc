@@ -58,6 +58,10 @@ void fn_800C061C(void) {
 
 }
 
+void fn_800C0634(void) {
+
+}
+
 void fn_800C2950(void) {
     fn_800A9720();
 }
