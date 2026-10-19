@@ -360,6 +360,10 @@ void fn_8039DAE4(void) {
 
 }
 
+void fn_8039DC8C(void) {
+
+}
+
 void fn_8039DC94(s32 *self, s32 flags) {
     self[5] = (s32)lbl_804093F8;
     if (flags & 1) {
