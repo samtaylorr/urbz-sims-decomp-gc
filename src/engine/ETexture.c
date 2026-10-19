@@ -85,6 +85,10 @@ void fn_8036FF88(void) {
 
 }
 
+void fn_8036FF8C(void) {
+
+}
+
 s32 fn_8036FF94(void) {
     return 0;
 }
