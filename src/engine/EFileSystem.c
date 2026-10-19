@@ -66,6 +66,11 @@ void fn_802C5D44(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 8) = arg1;
 }
 
+void fn_802C5E30(s32 arg0) {
+    M2C_UNK fn_803B9128(s32);
+    fn_803B9128(arg0 + 4);
+}
+
 s32 fn_802C605C(s32 *self) {
     return *self;
 }
