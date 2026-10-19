@@ -12,6 +12,10 @@ s32 fn_80041D94(void) {
     return lbl_804957B8;
 }
 
+void fn_80041D9C(void) {
+
+}
+
 void fn_80042A60(void (*cb)(void)) {
     lbl_804940B0 = cb;
 }
