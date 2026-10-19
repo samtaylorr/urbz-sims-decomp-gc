@@ -4394,6 +4394,14 @@ void fn_803B910C(s32 *self, s32 n) {
     }
 }
 
+extern void fn_803B9128(s32);
+void fn_803B9174(s32 self, s32 flags) {
+    fn_803B9128(self);
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 s32 fn_803B95C0(void) {
     return 1;
 }
