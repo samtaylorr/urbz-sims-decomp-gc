@@ -62,6 +62,12 @@ s32 fn_802ACBBC(void) {
     return 1;
 }
 
+void fn_802ADFFC();
+void fn_802ACBC4(char *self) {
+    extern void fn_802ADFFC(void *);
+    fn_802ADFFC(self + 8);
+}
+
 s32 fn_802ACC64(void) {
     return 1;
 }
