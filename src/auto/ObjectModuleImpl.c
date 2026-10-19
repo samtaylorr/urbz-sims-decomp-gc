@@ -6,6 +6,10 @@ s32 fn_80149BDC(void) {
     return lbl_804944B0;
 }
 
+s32 fn_8014FDD8(void) {
+    return 1;
+}
+
 s32 fn_801506AC(void) {
     return 0;
 }
