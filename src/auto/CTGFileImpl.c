@@ -75,6 +75,14 @@ s32 fn_800C4560(void) {
     return 1;
 }
 
+s32 fn_800C4568(void *self, const char *name) {
+    void *f = fn_802D7F48(name, lbl_803D04CC);
+    if (f != NULL) {
+        fn_802D7F94(f);
+    }
+    return f != NULL;
+}
+
 void **fn_800C4614(void **self) {
     *self = lbl_8040A890;
     return self;
