@@ -2342,6 +2342,11 @@ void fn_800EB40C(s32 arg0, s32 arg1) {
     fn_800EB2DC(arg1, arg0);
 }
 
+void fn_800EB438(s32 arg0, s32 arg1) {
+    M2C_UNK fn_800EB31C(s32, s32);
+    fn_800EB31C(arg1, arg0);
+}
+
 s32 fn_800EB464(void) {
     s32 fn_800EB2DC();
     return fn_800EB2DC() ^ 1;
