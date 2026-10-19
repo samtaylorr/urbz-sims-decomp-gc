@@ -33,6 +33,12 @@ void fn_8004D3EC(void) {
 
 }
 
+extern u8 lbl_8041ED64[];
+void fn_8001E370(u8 *arg);
+void fn_8004D9D4(void) {
+    fn_8001E370(lbl_8041ED64);
+}
+
 s32 fn_8004E644(void) {
     return 0;
 }
