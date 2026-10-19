@@ -173,6 +173,21 @@ void fn_8035EA70(void) {
     fn_8035EC18();
 }
 
+void fn_8035EE3C(void) {
+    M2C_UNK fn_80254684(s32);
+    extern s32 lbl_804962D4;
+    extern s32 lbl_804962D8;
+    s32 temp_r0;
+
+    if ((s32) lbl_804962D8 != 0) {
+        temp_r0 = lbl_804962D8 - 1;
+        lbl_804962D8 = temp_r0;
+        if (temp_r0 == 0) {
+            fn_80254684(lbl_804962D4);
+        }
+    }
+}
+
 extern u8 lbl_8046DF78[];
 void fn_8034F440(u8 *arg);
 void fn_8035F07C(void) {
