@@ -58,6 +58,21 @@ void fn_800402BC(s32 arg0, void *arg1) {
     fn_800402E8(M2C_FIELD(arg1, s32 *, 0x18), arg0);
 }
 
+void *fn_800413CC(void) {
+    void *heap;
+    void *p;
+
+    heap = ((void *(*)(void))fn_802D0AB8)();
+    p = fn_802D197C(heap, 0xF0, 0x10);
+    if (p == NULL) {
+        p = fn_802DC3C0(heap, 0xF0, 0x10, 0, 0);
+        if (p == NULL && heap == ((void *(*)(void))fn_802D0AB8)()) {
+            return fn_802DC3C0(fn_802D0B3C(), 0xF0, 0x10, 0, 0);
+        }
+    }
+    return p;
+}
+
 void fn_80041458(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
