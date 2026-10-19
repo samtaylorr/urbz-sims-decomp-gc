@@ -235,7 +235,10 @@ auto/text_802323F0.c:
 	.text       start:0x802323F0 end:0x80237A00
 
 auto/InteractorModule.c:
-	.text       start:0x80237A00 end:0x8023EBD8
+	.text       start:0x80237A00 end:0x8023EA34
+
+auto/text_8023EA34.c:
+	.text       start:0x8023EA34 end:0x8023EBD8
 
 libsn/text_8023EBD8.c:
 	.text       start:0x8023EBD8 end:0x80241A98
