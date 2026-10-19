@@ -95,6 +95,12 @@ void fn_8019CA14(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x1C) = (s32) (M2C_FIELD(arg0, s32 *, 0x1C) & 0xFFFFFF00);
 }
 
+void fn_8019CA24(void *arg0, u32 arg1) {
+    if (arg1 <= 7U) {
+        M2C_FIELD(arg0, s32 *, 0x1C) = (s32) (M2C_FIELD(arg0, s32 *, 0x1C) | (1 << arg1));
+    }
+}
+
 void fn_8019CA44(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x1C) = (s32) (M2C_FIELD(arg0, s32 *, 0x1C) | 0x100);
 }
