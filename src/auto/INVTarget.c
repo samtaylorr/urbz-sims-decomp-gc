@@ -33,3 +33,7 @@ void fn_80230448(void) {
     fn_802320F8();
 }
 
+s32 fn_80230708(void) {
+    return 1;
+}
+
