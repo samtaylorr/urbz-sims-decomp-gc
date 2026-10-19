@@ -329,6 +329,11 @@ void fn_80081790(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x1A28) = arg1;
 }
 
+void fn_80081A14(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0x1A38) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x1A48) = (s32) (M2C_FIELD(arg0, s32 *, 0x1A3C) - arg1);
+}
+
 void fn_80081D84(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
