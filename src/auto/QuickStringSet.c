@@ -150,6 +150,10 @@ s32 fn_800F8EA4(void) {
     return 0;
 }
 
+void fn_800F9564(void *arg0, f32 farg0) {
+    M2C_FIELD(arg0, f32 *, 0x34) = farg0;
+}
+
 s32 fn_800F98EC(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x14);
 }
