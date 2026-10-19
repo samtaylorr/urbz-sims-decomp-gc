@@ -4,6 +4,10 @@
 struct BBI_Handle { s32 v; };
 struct BBI_Vec3 { s32 a; s32 b; s32 c; };
 
+s8 fn_800599B0(u8 *arg0) {
+    return (s8) *arg0;
+}
+
 s32 fn_80059AC4(s32 *self) {
     return self[1];
 }
