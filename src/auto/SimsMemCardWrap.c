@@ -125,6 +125,11 @@ void fn_800AA00C(void) {
     lbl_8049664C = 1;
 }
 
+s32 fn_800AA584(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 4) = arg1;
+    return 0;
+}
+
 s32 fn_800AA638(void) {
     return 1;
 }
