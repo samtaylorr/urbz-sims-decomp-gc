@@ -58,8 +58,9 @@ void *fn_80399C38(void *self, s32 *arg1) {
     return self;
 }
 
-void fn_80399CD4(void *self, s32 n) {
+void fn_80399CD4(s32 *self, s32 n) {
     while (--n != -1) {
+        self++;
     }
 }
 
