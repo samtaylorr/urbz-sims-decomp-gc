@@ -271,6 +271,14 @@ void fn_8026477C(void) {
     fn_80259838(&lbl_80495EC8);
 }
 
+void fn_802649C4(void) {
+    M2C_UNK fn_80259838(M2C_UNK *);
+    extern s32 lbl_80495F0C;
+    extern M2C_UNK lbl_80495EC8;
+    lbl_80495F0C = 1;
+    fn_80259838(&lbl_80495EC8);
+}
+
 s32 fn_802649F0(void) {
     return 0x80000000;
 }
