@@ -4705,6 +4705,14 @@ void fn_803B9174(s32 self, s32 flags) {
     }
 }
 
+void fn_803B9594(void) {
+    M2C_UNK fn_802C7C90();
+    extern s32 lbl_80494DBC;
+    if ((s32) lbl_80494DBC == 0) {
+        fn_802C7C90();
+    }
+}
+
 s32 fn_803B95C0(void) {
     return 1;
 }
