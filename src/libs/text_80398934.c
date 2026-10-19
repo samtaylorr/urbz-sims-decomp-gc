@@ -213,3 +213,9 @@ void fn_803BEC14(u8 *self) {
     *(u8 **)(self + 0x338) = lbl_8041CFA8;
     fn_802D8BEC(self);
 }
+
+void fn_803C0D34(void);
+void fn_803C0D04(void) {
+    fn_803C0D34();
+}
+
