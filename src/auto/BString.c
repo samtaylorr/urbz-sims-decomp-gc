@@ -1026,6 +1026,10 @@ void fn_800E275C(s32 *self, s32 flags) {
     }
 }
 
+s32 fn_800E2790(s32 *self) {
+    return *(s32 *)(self[2] + 0x94);
+}
+
 extern s32 lbl_8040C150[];
 s32 *fn_800E279C(s32 *self, s32 a) {
     self[0] = a;
