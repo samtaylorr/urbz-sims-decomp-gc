@@ -1467,6 +1467,11 @@ s32 *fn_800E31B0(s32 *self, s32 arg1) {
     return self;
 }
 
+extern void fn_800E3DBC(s32);
+void fn_800E3B38(s32 *self) {
+    fn_800E3DBC(self[2]);
+}
+
 void fn_800E4958(s32 *self, s32 flags) {
     s32 *v;
     self[5] = (s32)lbl_8040CB28;
