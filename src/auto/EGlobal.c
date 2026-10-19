@@ -17,6 +17,10 @@ s32 fn_8004B964(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0xF4);
 }
 
+void fn_8004B96C(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0x114) = arg1;
+}
+
 void fn_8004C614(void) {
 
 }
