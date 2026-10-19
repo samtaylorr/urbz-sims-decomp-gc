@@ -75,6 +75,10 @@ void fn_80363720(void) {
 
 }
 
+void fn_80363918(void) {
+
+}
+
 void fn_802D2FD0(void);
 void fn_80363C8C(void) {
     fn_802D2FD0();
