@@ -19,6 +19,10 @@ void fn_8011CD64(void) {
 
 }
 
+s32 fn_8011D7D0(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x30);
+}
+
 s32 fn_8011DCBC(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x10);
 }
