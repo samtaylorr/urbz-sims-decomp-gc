@@ -24,6 +24,11 @@ void fn_802D4F24(f64 farg0) {
     fn_802D4598((f32) farg0);
 }
 
+void fn_802D51DC(f64 farg0) {
+    M2C_UNK fn_802D62F0(f32);
+    fn_802D62F0((f32) farg0);
+}
+
 void fn_802D5238(M2C_UNK **arg0) {
     extern M2C_UNK lbl_80494DD4;
     *arg0 = &lbl_80494DD4;
