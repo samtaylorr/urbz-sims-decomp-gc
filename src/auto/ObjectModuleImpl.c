@@ -55,6 +55,10 @@ void fn_80156450(void) {
 
 }
 
+void fn_801566DC(void) {
+
+}
+
 extern s32 lbl_8049665C;
 s32 fn_801579E0(void) {
     return lbl_8049665C;
