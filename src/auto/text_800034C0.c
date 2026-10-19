@@ -41,3 +41,7 @@ void fn_80032BD8(void) {
     fn_802D2FD0();
 }
 
+void fn_80033054(void) {
+    fn_802D2FD0();
+}
+
