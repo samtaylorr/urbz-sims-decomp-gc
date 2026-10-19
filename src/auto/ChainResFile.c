@@ -24,3 +24,7 @@ s32 fn_80105314(s32 *self) {
     return self[1];
 }
 
+s32 fn_8010531C(s32 *self) {
+    return *self;
+}
+
