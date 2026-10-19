@@ -4212,6 +4212,11 @@ s32 fn_803B8E1C(void) {
     return 1;
 }
 
+void fn_803B8E24(char *self) {
+    extern void fn_802AEA9C(void *);
+    fn_802AEA9C(self + 8);
+}
+
 s32 fn_803B95C0(void) {
     return 1;
 }
