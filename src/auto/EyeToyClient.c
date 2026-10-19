@@ -103,3 +103,8 @@ void fn_80043BB4(void) {
 
 }
 
+void fn_80043C14(void) {
+    M2C_UNK fn_80043BB8(M2C_UNK, M2C_UNK);
+    fn_80043BB8(1, 0xFFFF);
+}
+
