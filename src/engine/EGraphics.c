@@ -14,6 +14,13 @@ void fn_802EDB2C(void) {
 
 }
 
+void fn_802EDCCC(void) {
+    M2C_UNK fn_802D1FC8(M2C_UNK);
+    M2C_UNK fn_802FB578();
+    fn_802D1FC8(0x6C);
+    fn_802FB578();
+}
+
 void fn_802EEDA8(void *arg0, f32 *arg1, f32 *arg2, f32 *arg3, f32 *arg4) {
     *arg1 = M2C_FIELD(arg0, f32 *, 0x2AC);
     *arg2 = M2C_FIELD(arg0, f32 *, 0x2B0);
