@@ -14,6 +14,15 @@ s32 fn_800659F4(s32 arg0, s32 *out) {
     return arg0;
 }
 
+extern void fn_802C5C58(void *, s32 *);
+s32 fn_80065A34(s32 arg0, s32 *out) {
+    s32 tmp;
+
+    fn_802C5C58((void *)arg0, &tmp);
+    *out = tmp;
+    return arg0;
+}
+
 s32 fn_80065AC4(void) {
     return 0;
 }
