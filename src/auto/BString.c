@@ -631,6 +631,10 @@ void fn_800DAAC4(void) {
     fn_800D1F84();
 }
 
+s32 fn_800DAE30(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x24);
+}
+
 s32 fn_800DAE40(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x30);
 }
