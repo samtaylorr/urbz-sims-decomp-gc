@@ -48,3 +48,8 @@ void fn_8031E780(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x3F0) = 1;
 }
 
+void fn_8031E7B8(void) {
+    M2C_UNK fn_8031E724(M2C_UNK, M2C_UNK);
+    fn_8031E724(1, 0xFFFF);
+}
+
