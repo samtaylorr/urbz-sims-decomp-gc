@@ -167,6 +167,13 @@ s32 fn_8010C154(void) {
     return 0;
 }
 
+void fn_8010C15C(void) {
+    M2C_UNK fn_8010C214();
+    M2C_UNK fn_802D1FC8(M2C_UNK);
+    fn_802D1FC8(0x14);
+    fn_8010C214();
+}
+
 s32 fn_8010C580(void) {
     return 0;
 }
