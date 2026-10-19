@@ -1136,6 +1136,13 @@ s32 fn_801B24C8(void) {
     return 0;
 }
 
+extern u8 lbl_804152F0[];
+void fn_801B2540(void **self) {
+    M2C_UNK fn_801B1774(void **);
+    *self = lbl_804152F0;
+    fn_801B1774(self);
+}
+
 s32 fn_801B2570(void) {
     return 2;
 }
