@@ -846,6 +846,10 @@ void fn_800DC6C8(void) {
     lbl_80495A70 = 1;
 }
 
+void fn_800DC86C(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x20) = 1;
+}
+
 void fn_800DE57C(void) {
 
 }
