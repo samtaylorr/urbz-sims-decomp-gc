@@ -653,6 +653,14 @@ void fn_803AEC68(s32 *self, s32 flags) {
     }
 }
 
+extern u8 lbl_80417190[];
+void fn_803AEC9C(s32 *self, s32 flags) {
+    self[5] = (s32)lbl_80417190;
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 s32 fn_803B71F8(void) {
     return 0;
 }
