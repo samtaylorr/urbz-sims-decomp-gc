@@ -153,6 +153,26 @@ s32 fn_80256504(s32 arg0) {
     return temp_r0;
 }
 
+u32 fn_80256608(u32 arg0) {
+    M2C_UNK fn_80254AC0(M2C_UNK);
+    M2C_UNK fn_80254B48(M2C_UNK);
+    extern u32 lbl_80495E48;
+    s32 temp_r3;
+    u32 temp_r30;
+
+    temp_r3 = fn_8025465C();
+    temp_r30 = lbl_80495E48;
+    lbl_80495E48 = arg0;
+    if (arg0 != 0U) {
+        *(s32 *)0xCC003000 = 2;
+        fn_80254B48(0x200);
+    } else {
+        fn_80254AC0(0x200);
+    }
+    fn_80254684(temp_r3);
+    return temp_r30;
+}
+
 void fn_80256914(void) {
     M2C_UNK fn_8025667C();
     fn_8025667C();
