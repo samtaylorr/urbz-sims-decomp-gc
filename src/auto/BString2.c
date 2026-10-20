@@ -178,16 +178,13 @@ u32 fn_800F3620(void **arg0, void *arg1, u32 arg2, u32 arg3) {
     if (arg3 > fn_800F4878(arg0)) {
         fn_800EF8B8();
     }
-    {
-        u32 n = arg2;
-        if (n > fn_800F4878(arg0) - arg3) {
-            n = fn_800F4878(arg0) - arg3;
-        }
-        if (fn_800F4878(arg0) != 0) {
-            fn_8024839C(arg1, (fn_800F4878(arg0) ? *(u16 **)*arg0 : 0) + arg3, n * 2);
-        }
-        return n;
+    if (arg2 > fn_800F4878(arg0) - arg3) {
+        arg2 = fn_800F4878(arg0) - arg3;
     }
+    if (fn_800F4878(arg0) != 0) {
+        fn_8024839C(arg1, (void *)(arg3 * 2 + (u32)BString2_Data(arg0)), arg2 * 2);
+    }
+    return arg2;
 }
 
 void fn_800F36CC(s32 arg0, void **arg1, s32 arg2) {
@@ -203,12 +200,9 @@ void fn_800F3758(s32 arg0, const char *arg1, s32 arg2) {
 }
 
 u32 fn_800F37B0(void **arg0, u16 arg1, u32 arg2) {
-    const u16 *c = &arg1;
     while (arg2 < fn_800F4878(arg0)) {
-        s32 ne = 1;
-        if ((fn_800F4878(arg0) ? *(u16 **)*arg0 : 0)[arg2] == *c) {
-            ne = 0;
-        }
+        const u16 *d = BString2_Data(arg0);
+        s32 ne = !BString2_Eq(&d[arg2], &arg1);
         if (!ne) {
             break;
         }
