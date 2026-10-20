@@ -7318,6 +7318,17 @@ s32 fn_803BE650(s32 arg0) {
     return 0;
 }
 
+s32 fn_803BE694(s32 arg0) {
+    s32 fn_8031082C(s32);
+    void fn_803BEA8C(s32);
+
+    if (fn_8031082C(arg0) != 0) {
+        fn_803BEA8C(arg0);
+        return 1;
+    }
+    return 0;
+}
+
 void fn_80310758(void);
 void fn_803BE760(void) {
     fn_80310758();
