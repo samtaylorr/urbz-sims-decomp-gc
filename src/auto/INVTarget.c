@@ -2,6 +2,18 @@
 #include "common.h"
 
 void fn_800C3B48(void);
+s32 fn_801D72DC(void **arg0, s32 arg1) {
+    M2C_UNK fn_801D6FD0(void **, void *);
+    void *node;
+
+    node = fn_801D7224(arg0, arg1);
+    if (node != NULL) {
+        fn_801D6FD0(arg0, node);
+        return 1;
+    }
+    return 0;
+}
+
 s32 fn_801D7320(void **arg0, s32 arg1) {
     M2C_UNK fn_801D6FD0(void **, void *);
     s32 var_r3;
@@ -177,6 +189,15 @@ s32 fn_801D9680(void) {
         lbl_80494604 = fn_801D8810();
     }
     return lbl_80494604;
+}
+
+void fn_801D96BC(void) {
+    extern char *lbl_80494604;
+    if (lbl_80494604 != NULL) {
+        char *vt = M2C_FIELD(lbl_80494604, char **, 0xC);
+        M2C_FIELD(vt, void (**)(void *, s32), 0xC)(lbl_80494604 + M2C_FIELD(vt, s16 *, 8), 3);
+        lbl_80494604 = NULL;
+    }
 }
 
 s32 fn_801D9708(void) {
