@@ -1313,6 +1313,15 @@ void fn_801B1F0C(void *arg0) {
     M2C_FIELD(vt, void (**)(void *), 0x34)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x30));
 }
 
+extern char lbl_80435418[];
+extern char lbl_80435438[];
+void fn_802D23C0();
+s32 fn_801B225C(s32 arg0) {
+    M2C_UNK fn_800F6A38(s32);
+    fn_800F6A38(arg0 + 0x18);
+    return 1;
+}
+
 s32 fn_801B24B8(void) {
     return 0;
 }
