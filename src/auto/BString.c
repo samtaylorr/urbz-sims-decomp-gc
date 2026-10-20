@@ -1243,11 +1243,18 @@ s32 *fn_800DC200(s32 *self, s32 a) {
     return self;
 }
 
-UnkDC234 fn_800DC234(s32 arg1) {
+UnkDC234 *fn_800DC234(UnkDC234 *self, s32 a) {
     extern f32 lbl_803D4A30[];
     extern char lbl_8040BDF0[];
-    UnkDC234 s = { arg1, -1, 0, -1, 1, lbl_8040BDF0, lbl_803D4A30[0] };
-    return s;
+    f32 f = lbl_803D4A30[0];
+    self->unk0 = a;
+    self->unk4 = -1;
+    self->unk8 = 0;
+    self->unkC = -1;
+    self->unk10 = 1;
+    self->unk14 = lbl_8040BDF0;
+    self->unk18 = f;
+    return self;
 }
 
 extern s32 lbl_8040BD60[];
