@@ -61,7 +61,8 @@ f32 fn_802F1558(void *arg0) {
 }
 
 void fn_802F156C(void *arg0, s32 arg1) {
-    ((s32 *)((char *)arg0 + 0x7C))[lbl_80494E5C] = arg1;
+    s32 *vals = (s32 *)((char *)arg0 + 0x7C);
+    vals[lbl_80494E5C] = arg1;
 }
 
 void fn_802F1604(void) {
