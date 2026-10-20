@@ -656,6 +656,13 @@ void fn_8039BDB0(s32 **self) {
     fn_8039BD50(self);
 }
 
+void fn_8039BDFC(s32 self, s32 flags) {
+    fn_8039BDB0(self);
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_8039BEB0(s32 *self, s32 n) {
     while (--n != -1) {
         self++;
