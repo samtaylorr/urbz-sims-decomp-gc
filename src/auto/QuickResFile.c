@@ -344,6 +344,12 @@ void fn_8018D8BC(void) {
     fn_8018D8DC();
 }
 
+void fn_8018EA34(void *arg0, u8 *p) {
+    u8 t = p[1];
+    p[1] = p[0];
+    p[0] = t;
+}
+
 void fn_8018EA48(void *arg0, u8 *p) {
     u8 t;
     t = p[3];
