@@ -461,6 +461,23 @@ s32 fn_800CF92C(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x6C);
 }
 
+void fn_800CFDA0(void *arg0, void *arg1) {
+    *(WPBVec3 *)((char *)arg0 + 0x20) = *(WPBVec3 *)arg1;
+    M2C_FIELD(arg0, f32 *, 0x2C) = M2C_FIELD(arg1, f32 *, 0xC);
+}
+
+WPBVec4 fn_800CFDC8(void *arg1) {
+    extern f32 lbl_803D12E8;
+    WPBVec4 t;
+    WPBVec3 *p = (WPBVec3 *)((char *)arg1 + 0x20);
+    t.x = p->x;
+    t.y = p->y;
+    t.z = p->z;
+    t.w = lbl_803D12E8;
+    t.w = M2C_FIELD(arg1, f32 *, 0x2C);
+    return t;
+}
+
 void fn_800CFE2C(void *arg0, f32 farg0) {
     M2C_FIELD(arg0, f32 *, 0x2C) = farg0;
 }
