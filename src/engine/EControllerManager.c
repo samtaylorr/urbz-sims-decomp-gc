@@ -2,6 +2,11 @@
 #include "common.h"
 
 extern s32 lbl_80494F5C;
+
+typedef struct {
+    s32 a;
+    s32 b;
+} ECtrlPair;
 s32 fn_803336A8(void *arg0) {
     s32 var_ctr;
     s32 var_r9;
