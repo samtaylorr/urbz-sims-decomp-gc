@@ -248,7 +248,7 @@ s32 *fn_802D49AC(s32 *arg0) {
 
 s32 *fn_802D49E4(s32 *arg0, s32 arg1) {
     M2C_UNK fn_802D39F0(s32 *, s32);
-    M2C_UNK fn_802D3CE4(s32 *, s32);
+    s32 *fn_802D3CE4(s32 *, char *);
     M2C_UNK fn_802D40E4(s32 *, s32 *, s32);
     s32 sp8;
     s32 len;
