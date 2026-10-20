@@ -89,6 +89,23 @@ s32 fn_8036C878(s32 arg0, s32 *out) {
     return arg0;
 }
 
+extern u8 lbl_8041D928[];
+void *fn_8036CF18(void) {
+    M2C_UNK fn_802D1FC8(M2C_UNK);
+    void **p = (void **)fn_802D1FC8(0x10);
+    *p = lbl_8041D928;
+    return p;
+}
+
+void fn_8036CF4C(void **arg0) {
+    *arg0 = lbl_8041D928;
+}
+
+extern u8 lbl_804194A0[];
+void fn_8036CF5C(void **arg0) {
+    *arg0 = lbl_804194A0;
+}
+
 void fn_8036CF6C(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
@@ -126,9 +143,6 @@ u16 fn_8036CFE8(void) {
 }
 
 extern void fn_802D6A90(void *, void *, void *, void *, s32, void *, void *);
-extern void fn_8036CF18(void);
-extern void fn_8036CF4C(void);
-extern void fn_8036CF5C(void);
 extern u8 lbl_803F5174[];
 extern u8 lbl_804936F0[];
 void fn_8036CFF4(s32 arg0) {
