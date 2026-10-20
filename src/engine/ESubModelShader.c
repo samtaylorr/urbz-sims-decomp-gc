@@ -110,6 +110,15 @@ void fn_80300264(u8 *self, s32 arg1, s32 arg2, s32 arg3, f32 farg0, f32 farg1) {
     }
 }
 
+void fn_803002F8(u8 *self, s32 arg1, s32 arg2) {
+    extern void fn_803040A4(u8 *, s32, s32);
+    s32 i;
+
+    for (i = 0; i < *(s32 *)(self + 4); i++) {
+        fn_803040A4(*(u8 **)self + i * 0x6C, arg1, arg2);
+    }
+}
+
 void fn_803003C4(u8 *self) {
     extern void fn_803023D8(u8 *);
     s32 i;
