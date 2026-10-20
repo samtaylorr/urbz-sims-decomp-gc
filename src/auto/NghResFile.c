@@ -183,9 +183,9 @@ void *fn_8012F7F0(void *arg0) {
 
 void fn_8012F7F0_dummy(void);
 void fn_8012F830(void *arg0, u8 *p) {
-    u8 t = p[0];
-    p[0] = p[1];
-    p[1] = t;
+    u8 t = p[1];
+    p[1] = p[0];
+    p[0] = t;
 }
 
 void fn_8012F844(void *arg0, u8 *p) {
