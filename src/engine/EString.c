@@ -184,11 +184,10 @@ s32 fn_802D3DB0(s32 *arg0, s32 arg1) {
 s32 *fn_802D41A8(s32 *arg0, char *arg1) {
     M2C_UNK fn_802D39F0(s32 *, s32);
     s32 tmp;
-    s32 *p = &tmp;
 
-    fn_802D3928(p, (char *)*arg0, arg1);
+    fn_802D3928(&tmp, (char *)*arg0, arg1);
     fn_802D3CE4(arg0, (char *)tmp);
-    fn_802D39F0(p, tmp);
+    fn_802D39F0(&tmp, tmp);
     return arg0;
 }
 
@@ -198,6 +197,27 @@ s32 *fn_802D4200(s32 *arg0, s32 *arg1, s32 arg2) {
     c = arg2 << 8;
     fn_802D3928(arg0, (char *)*arg1, (char *)&c);
     return arg0;
+}
+
+s32 *fn_802D4240(s32 *arg0, s32 arg1) {
+    M2C_UNK fn_802D39F0(s32 *, s32);
+    s32 tmp;
+
+    fn_802D4200(&tmp, arg0, arg1);
+    fn_802D3CE4(arg0, (char *)tmp);
+    fn_802D39F0(&tmp, tmp);
+    return arg0;
+}
+
+s32 fn_802D4298(char **arg0, char *arg1, s32 arg2) {
+    char *fn_80248640(char *, char *);
+    char *p;
+
+    if (**arg0 == 0) {
+        return -1;
+    }
+    p = fn_80248640(*arg0 + arg2, arg1);
+    return p != 0 ? p - *arg0 : -1;
 }
 
 void fn_802D4634(u8 **arg0, s32 arg1, u8 arg2) {
