@@ -12,6 +12,10 @@ void *fn_80063ED0(void *arg0, s32 arg1) {
     return arg0;
 }
 
+s32 fn_80064948(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 4) == 0;
+}
+
 extern void fn_80064EC4(void *);
 void fn_80064EC4(void *self) {
     extern void *fn_800650DC(void *, s32);
