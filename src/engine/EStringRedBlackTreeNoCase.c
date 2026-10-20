@@ -51,6 +51,14 @@ void fn_80365D3C(void *arg0) {
     fn_80248488(M2C_FIELD(arg0, s32 *, 8), 0, M2C_FIELD(arg0, s32 *, 0xC) * 4);
 }
 
+s32 fn_80365D6C(void *arg0, s32 arg1) {
+    void fn_803660C8(void *, s32, s32 *);
+    s32 sp8;
+
+    fn_803660C8(arg0, arg1, &sp8);
+    return sp8;
+}
+
 void fn_8036619C(void *arg0) {
     M2C_UNK *var_r30;
     M2C_UNK fn_802D20E8(M2C_UNK *);
