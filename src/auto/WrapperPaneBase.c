@@ -481,12 +481,12 @@ void fn_800CFDA0(void *arg0, void *arg1) {
     M2C_FIELD(arg0, f32 *, 0x2C) = M2C_FIELD(arg1, f32 *, 0xC);
 }
 
-void fn_800CFDC8(WPBVec4 *out, void *arg1) {
+WPBVec4 *fn_800CFDC8(WPBVec4 *out, void *arg1) {
     extern f32 lbl_803D12E8[];
     WPBVec4 t;
     WPBVec4_Set(&t, (WPBVec3 *)((char *)arg1 + 0x20), lbl_803D12E8[0]);
     t.w = M2C_FIELD(arg1, f32 *, 0x2C);
-    WPBVec4_Copy(out, &t);
+    return WPBVec4_Copy(out, &t);
 }
 
 void fn_800CFE2C(void *arg0, f32 farg0) {
