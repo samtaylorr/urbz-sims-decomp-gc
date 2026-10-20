@@ -1,6 +1,31 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+static inline void *fn_802E5F90_inline(void *arg0, s32 arg1) {
+    s32 cur;
+    s32 flags;
+    s32 i;
+
+    if (arg1 & 0x103F) {
+        cur = M2C_FIELD(arg0, s32 *, 4);
+        if (cur != -1) {
+            flags = M2C_FIELD(M2C_FIELD(arg0, char **, 0x40) + cur * 0xB0, s32 *, 0x30);
+        } else {
+            flags = 0;
+        }
+        if (flags & arg1) {
+            return M2C_FIELD(arg0, char **, 0x40) + cur * 0xB0;
+        }
+        return NULL;
+    }
+    for (i = M2C_FIELD(arg0, s32 *, 0x34); i < M2C_FIELD(arg0, s32 *, 0x3C); i++) {
+        if ((arg1 >> i) & 1) {
+            return M2C_FIELD(arg0, char **, 0x40) + i * 0xB0;
+        }
+    }
+    return NULL;
+}
+
 void fn_802E2390(void);
 void fn_802E2288(s32 arg0) {
     M2C_UNK fn_802C8A34(s32, s32);
