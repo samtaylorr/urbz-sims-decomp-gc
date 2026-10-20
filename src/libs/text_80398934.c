@@ -360,9 +360,10 @@ void fn_8039AF90(s32 *first, s32 *last, s32 comp) {
 }
 
 void fn_8039B010(s32 *first, s32 *last, s32 comp) {
-    s32 val = last[-1];
-    last[-1] = *first;
-    fn_8039AE74(first, 0, last - 1 - first, val, comp);
+    s32 *result = last - 1;
+    s32 val = *result;
+    *result = *first;
+    fn_8039AE74(first, 0, result - first, val, comp);
 }
 
 void fn_8039AE74(s32 *first, s32 hole, s32 len, s32 val, s32 comp);
