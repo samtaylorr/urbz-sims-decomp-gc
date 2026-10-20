@@ -601,6 +601,10 @@ void fn_800D04EC(void *arg0, s32 arg1) {
     ((void (*)(void *, s32, s32))fn_800CD7F0)(arg0, 2, arg1);
 }
 
+void fn_800D0514(void *arg0, s32 arg1) {
+    ((void (*)(void *, s32, s32))fn_800CD838)(arg0, 2, arg1);
+}
+
 void fn_800D0594(void *arg0, s32 arg1) {
     void *fn_800CD724(void *, s32, s32);
     fn_800CD724(arg0, 1, arg1);
