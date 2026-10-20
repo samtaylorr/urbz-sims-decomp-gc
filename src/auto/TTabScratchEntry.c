@@ -1322,6 +1322,10 @@ s32 fn_801B225C(s32 arg0) {
     return 1;
 }
 
+s32 fn_801B22F4(void *arg0) {
+    return ++M2C_FIELD(arg0, s32 *, 0x60);
+}
+
 s32 fn_801B24B8(void) {
     return 0;
 }
