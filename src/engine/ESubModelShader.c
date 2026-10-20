@@ -27,6 +27,23 @@ void fn_802FFE1C(u8 *self) {
     }
 }
 
+s32 fn_802FFED4(u8 *self) {
+    extern void fn_80300A40(u8 *);
+    extern s32 fn_80300ACC(u8 *);
+    s32 i;
+    s32 j;
+
+    for (i = 0; i < *(s32 *)(self + 4); i++) {
+        if (fn_80300ACC(*(u8 **)self + i * 0x6C) == 0) {
+            for (j = i - 1; j >= 0; j--) {
+                fn_80300A40(*(u8 **)self + j * 0x6C);
+            }
+            return 0;
+        }
+    }
+    return 1;
+}
+
 s32 fn_802FFF68(void) {
     return 0;
 }
