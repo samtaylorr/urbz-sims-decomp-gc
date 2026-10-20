@@ -12,9 +12,8 @@ static inline s32 fn_802E5EC4_inline(void *arg0, s32 arg1) {
     s32 i;
 
     if (arg1 & 0x103F) {
-        s32 cur = M2C_FIELD(arg0, s32 *, 4);
-        if (fn_802E5F90_flags(arg0, cur) & arg1) {
-            return cur;
+        if (fn_802E5F90_flags(arg0, M2C_FIELD(arg0, s32 *, 4)) & arg1) {
+            return M2C_FIELD(arg0, s32 *, 4);
         }
     }
     for (i = M2C_FIELD(arg0, s32 *, 0x34); i < M2C_FIELD(arg0, s32 *, 0x3C); i++) {
@@ -110,35 +109,11 @@ void fn_802E5EA4(void) {
 }
 
 s32 fn_802E5EC4(void *arg0, s32 arg1) {
-    s32 cur;
-    s32 flags;
-    s32 i;
-    s32 idx;
-
-    if (arg1 & 0x103F) {
-        cur = M2C_FIELD(arg0, s32 *, 4);
-        if (cur != -1) {
-            flags = M2C_FIELD(M2C_FIELD(arg0, char **, 0x40) + cur * 0xB0, s32 *, 0x30);
-        } else {
-            flags = 0;
-        }
-        if (flags & arg1) {
-            idx = cur;
-            goto found;
-        }
+    s32 idx = fn_802E5EC4_inline(arg0, arg1);
+    if (idx == -1) {
+        return 0;
     }
-    for (i = M2C_FIELD(arg0, s32 *, 0x34); i < M2C_FIELD(arg0, s32 *, 0x3C); i++) {
-        if ((arg1 >> i) & 1) {
-            idx = i;
-            goto found;
-        }
-    }
-    idx = -1;
-found:
-    if (idx != -1) {
-        return M2C_FIELD(M2C_FIELD(arg0, char **, 0x40) + idx * 0xB0, s32 *, 0xA8) == 1;
-    }
-    return 0;
+    return M2C_FIELD(M2C_FIELD(arg0, char **, 0x40) + idx * 0xB0, s32 *, 0xA8) == 1;
 }
 
 void fn_802E5F6C(void *arg0, void *arg1) {
@@ -147,6 +122,7 @@ void fn_802E5F6C(void *arg0, void *arg1) {
     }
 }
 
+void fn_802E5F6C(void *arg0, void *arg1);
 void fn_802E5F90(void *arg0, s32 arg1) {
     fn_802E5F6C(arg0, fn_802E5F90_inline(arg0, arg1));
 }
