@@ -280,6 +280,18 @@ s32 fn_800F8000(void *arg0) {
     return var_r3;
 }
 
+void fn_800F805C(s32 *arg0) {
+    void fn_800F80B4(s32 *);
+    s32 sp[2];
+
+    sp[0] = arg0[0];
+    sp[1] = arg0[1];
+    fn_800F80B4(&sp[0]);
+    fn_800F80B4(&sp[1]);
+    arg0[0] = sp[1];
+    arg0[1] = sp[0];
+}
+
 s32 fn_800F86C8(void *arg0, s32 arg1) {
     s32 temp_r9;
     s32 var_r3;
@@ -588,6 +600,10 @@ s32 fn_800FDAB8(void *arg0, s32 arg1) {
     obj = (*(u8 *(**)(u8 *, s32))(*(u8 **)lbl_8049665C + 0x3C))(lbl_8049665C + *(s16 *)(*(u8 **)lbl_8049665C + 0x38), id);
     vt = *(u8 **)(obj + 0x10);
     return (*(s32 (**)(u8 *, s32))(vt + 0x7C))(obj + *(s16 *)(vt + 0x78), 0x42484156);
+}
+
+s32 fn_800FDE40(void *arg0) {
+    return ++M2C_FIELD(arg0, s32 *, 0x10);
 }
 
 s32 fn_800FDF38(s32 *self) {
