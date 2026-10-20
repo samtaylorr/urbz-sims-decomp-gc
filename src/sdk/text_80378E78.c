@@ -675,33 +675,15 @@ void fn_8038B5E8(s32 chan, s32 arg1) {
 }
 
 s32 fn_8038B684(s32 chan) {
-    void fn_80251378(void *);
-    s32 fn_8025465C(void);
-    void fn_80254684(s32);
-    void fn_8025BD6C(s32, s32);
-    void fn_8025C2BC(s32);
     s32 fn_8038907C(s32, void *);
-    extern u8 lbl_804912A0[];
     u8 sp8[4];
-    s32 *p;
-    s32 enabled;
     s32 result;
 
     result = fn_8038907C(chan, sp8);
     if (result < 0) {
         return result;
     }
-    p = (s32 *)(lbl_804912A0 + chan * 0x110);
-    enabled = fn_8025465C();
-    if (p[0] != 0) {
-        fn_8025BD6C(chan, 0);
-        fn_8025C2BC(chan);
-        fn_80251378((u8 *)p + 0xE0);
-        p[0] = 0;
-        p[1] = -3;
-        p[9] = 0;
-    }
-    fn_80254684(enabled);
+    fn_8038B5E8(chan, -3);
     return 0;
 }
 
