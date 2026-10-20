@@ -30,12 +30,16 @@ void fn_8033372C(void) {
 }
 
 void fn_803338AC(s32, s32);
+static inline s32 ECtrl_NumPorts(void) {
+    return 4;
+}
+
 void *fn_803338D0(s32, s32);
 void fn_8031056C(void *, s32, s32);
 void fn_80333CC8(s32 arg0, s32 arg1, s32 arg2) {
     s32 i;
 
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i <= 3; i++) {
         fn_8031056C(fn_803338D0(arg0, i), arg1, arg2);
         fn_803338AC(arg0, i);
     }
