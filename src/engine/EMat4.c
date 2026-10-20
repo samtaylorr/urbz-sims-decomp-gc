@@ -202,6 +202,12 @@ void fn_802CAC8C(s32 arg0) {
     fn_802D8424(arg0 + 4);
 }
 
+void **fn_802CACB0(void **arg0) {
+    char *vt = *arg0;
+    ((void (*)(void *, s32))M2C_FIELD(vt, void **, 0x14))((char *)arg0 + M2C_FIELD(vt, s16 *, 0x10), -1);
+    return arg0;
+}
+
 void fn_802CB508(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x40) = arg1;
 }
