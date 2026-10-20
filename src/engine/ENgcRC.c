@@ -149,10 +149,11 @@ s32 fn_80347668(void) {
 
 s32 fn_80347D3C(void) {
     extern u8 lbl_8046C400[];
-    if (*(s32 *)(lbl_8046C400 + 0xA0) == 0) {
-        return -1;
+    u8 *p = lbl_8046C400;
+    if (*(s32 *)(p + 0xA0) != 0) {
+        return *(f32 *)(p + 0xDC);
     }
-    return *(f32 *)(lbl_8046C400 + 0xDC);
+    return -1;
 }
 
 void fn_80347E54(void) {
