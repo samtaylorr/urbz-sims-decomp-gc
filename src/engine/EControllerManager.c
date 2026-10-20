@@ -29,6 +29,11 @@ void fn_8033372C(void) {
 
 }
 
+s32 fn_803338C0(void *arg0, s32 i) {
+    struct TTabScratchEntryA { u8 pad[0x10]; s32 unk10[4]; } *self = arg0;
+    return self->unk10[i];
+}
+
 void fn_803338AC(s32, s32);
 static inline s32 ECtrl_NumPorts(void) {
     return 4;
