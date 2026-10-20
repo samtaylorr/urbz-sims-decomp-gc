@@ -196,6 +196,20 @@ s32 fn_8005FB30(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void fn_8005FBB8(void *arg0, s32 arg1) {
+    void fn_8005B890(void *, s32);
+    void *fn_802D0AB8(void);
+    void fn_802D1A00(void *, void *);
+    extern u8 lbl_804089D0[];
+    extern u8 lbl_80408A08[];
+    M2C_FIELD(arg0, void **, 0x300) = lbl_804089D0;
+    M2C_FIELD(arg0, void **, 0) = lbl_80408A08;
+    fn_8005B890(arg0, 0);
+    if (arg1 & 1) {
+        fn_802D1A00(fn_802D0AB8(), arg0);
+    }
+}
+
 void fn_8005FC18(void) {
 
 }
