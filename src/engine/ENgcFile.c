@@ -109,6 +109,20 @@ void *fn_802DFFB8(char *self) {
     return self;
 }
 
+void fn_802E0024(char *self, s32 flags) {
+    extern void fn_802CAA00(void *, s32);
+    extern void fn_802D8BEC(void *, s32);
+    extern void fn_80366554(void *, s32);
+    extern u8 lbl_804197D8[];
+    extern u8 lbl_804197F8[];
+    M2C_FIELD(self, void **, 0x340) = lbl_804197D8;
+    M2C_FIELD(self, void **, 0) = lbl_804197F8;
+    fn_80366554(self + 0x368, 2);
+    fn_802CAA00(self + 0x34C, 2);
+    fn_802D8BEC(self + 8, 0);
+    fn_802DFF84((void **)self, flags);
+}
+
 void fn_802E010C(s32 arg0) {
     s32 *fn_802D1FC8(M2C_UNK);
     M2C_UNK fn_802E0208(s32, s32 *);
