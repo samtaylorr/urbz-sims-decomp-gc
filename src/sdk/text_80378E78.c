@@ -257,6 +257,12 @@ void fn_80381598(void **arg0) {
     *arg0 = lbl_804764C0[lbl_804963B4] + 0x280;
 }
 
+void fn_803815B8(void **arg0) {
+    extern u8 lbl_804764C0[][0x780];
+    extern s32 lbl_804963B4;
+    *arg0 = lbl_804764C0[lbl_804963B4] + 0x500;
+}
+
 void fn_8038162C(void **arg0) {
     extern u8 lbl_80477B40[][0x780];
     extern s32 lbl_804963B4;
