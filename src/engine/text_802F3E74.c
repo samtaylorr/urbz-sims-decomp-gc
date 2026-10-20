@@ -1,6 +1,14 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+typedef struct { f32 x, y, z; } ECamVec3;
+
+static inline void ECamVec3_Set(ECamVec3 *v, f32 x, f32 y, f32 z) {
+    v->x = x;
+    v->z = z;
+    v->y = y;
+}
+
 void fn_802D2FD0(void);
 void fn_802F3E74(void) {
     fn_802D2FD0();
@@ -30,27 +38,26 @@ void *fn_802F3F14(void *arg0) {
     extern void fn_802C876C(void *);
     extern f32 lbl_803F11AC[];
     extern u8 lbl_8041A678[];
-    struct { f32 x, y, z; } v;
+    typedef struct { f32 x, y, z; } V3;
     char *q;
+    V3 v;
+    f32 c;
 
     q = (char *)arg0 + 0x110;
     fn_8036D558(arg0);
     *(void **)arg0 = lbl_8041A678;
     fn_803BAB78(q);
+    c = lbl_803F11AC[0];
     M2C_FIELD(arg0, s32 *, 0x120) = 0;
-    v.x = lbl_803F11AC[0];
-    v.z = lbl_803F11AC[0];
-    v.y = lbl_803F11AC[0];
-    M2C_FIELD(q, f32 *, 0) = v.x;
-    M2C_FIELD(q, f32 *, 0xC) = lbl_803F11AC[0];
-    M2C_FIELD(q, f32 *, 4) = v.y;
-    M2C_FIELD(q, f32 *, 8) = v.z;
-    M2C_FIELD(arg0, s32 *, 0x138) = 0;
+    v.x = v.z = v.y = c;
+    *(V3 *)q = v;
+    M2C_FIELD(q, f32 *, 0xC) = c;
     M2C_FIELD(arg0, s32 *, 0x134) = 0;
     M2C_FIELD(arg0, s32 *, 0x128) = 0;
     M2C_FIELD(arg0, s32 *, 0x130) = 0;
     M2C_FIELD(arg0, s32 *, 0x12C) = 0;
     M2C_FIELD(arg0, s32 *, 0x124) = 0;
+    M2C_FIELD(arg0, s32 *, 0x138) = 0;
     fn_802C876C((char *)arg0 + 0x90);
     fn_802C876C((char *)arg0 + 0xD0);
     M2C_FIELD(arg0, s32 *, 0x64) |= 0x200;
