@@ -39,6 +39,23 @@ void fn_802F3FC8(void **arg0, s32 arg1) {
     }
 }
 
+void fn_802F4024(void *arg0, void *arg1) {
+    extern void fn_802F0604(void *, void *);
+    extern void fn_802C83E4(void *, void *);
+    void *vt;
+    void (*func)(void *, s32 *, s32);
+    void *obj;
+    s32 val;
+
+    fn_802F0604(arg0, arg1);
+    vt = M2C_FIELD(arg1, void **, 0x18);
+    func = M2C_FIELD(vt, void (**)(void *, s32 *, s32), 0x3C);
+    obj = (char *)arg1 + M2C_FIELD(vt, s16 *, 0x38);
+    val = M2C_FIELD(arg0, s32 *, 0x120);
+    func(obj, &val, 4);
+    fn_802C83E4(arg1, (char *)arg0 + 0x90);
+}
+
 void fn_802F42E4(s32 arg0, s32 arg1) {
     M2C_UNK fn_802F42A8(s32, s32, M2C_UNK, M2C_UNK, M2C_UNK);
     s32 fn_80337F14(s32);
