@@ -188,6 +188,11 @@ s32 fn_8018CE60(void) {
     return 0;
 }
 
+void fn_8018CE68(void *arg0, void *arg1, s32 arg2) {
+    M2C_UNK fn_800F68E0(s32);
+    fn_800F68E0(arg2);
+}
+
 s32 fn_8018CE8C(void) {
     return 0;
 }
