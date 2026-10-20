@@ -102,6 +102,12 @@ void fn_800684EC(void) {
 
 }
 
+void fn_800684F0(void *arg0, s32 arg1) {
+    M2C_UNK fn_800292C4(void *, s32);
+    extern void *lbl_8041FA38[];
+    fn_800292C4(lbl_8041FA38[0], arg1);
+}
+
 void fn_80068518(void) {
 
 }
