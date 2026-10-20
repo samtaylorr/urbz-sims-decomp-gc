@@ -207,6 +207,13 @@ void fn_80307DF0(void) {
 
 }
 
+extern u8 lbl_8041AD40[];
+extern void fn_8030951C(void *);
+void fn_803081BC(u8 *self) {
+    *(u8 **)(self + 0x44) = lbl_8041AD40;
+    fn_8030951C(self);
+}
+
 void fn_803081EC(void) {
     fn_80307CCC();
 }
