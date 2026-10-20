@@ -2799,8 +2799,14 @@ void fn_800EA6C0(u64 *arg0) {
     *arg0 = 0;
 }
 
+static inline void BitsSet(u64 *d, u64 s) {
+    *d = s;
+}
+
 void fn_800EA6D4(u64 *arg0, u64 *arg1) {
-    *arg0 = *arg1;
+    u64 t = *arg1;
+    u64 *d = arg0;
+    *d = t;
 }
 
 void fn_800EA6EC(void *self, s32 flags) {
@@ -2811,6 +2817,16 @@ void fn_800EA6EC(void *self, s32 flags) {
 
 void fn_800EA744(u64 *arg0) {
     *arg0 = 0;
+}
+
+s32 fn_800EA758(s32 arg0, s32 arg1) {
+    u64 v = *(u64 *)arg0 >> arg1;
+    u64 bit = 1;
+    s32 ret = 0;
+    if ((v & bit) != 0) {
+        ret = 1;
+    }
+    return ret;
 }
 
 void fn_800EA7F8(u64 *arg0, s32 arg1) {
