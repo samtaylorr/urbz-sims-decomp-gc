@@ -572,6 +572,11 @@ void fn_800D0318(void *arg0, s32 arg1, s32 arg2) {
     fn_800CD6DC(arg0, 0, arg1, arg2);
 }
 
+void fn_800D0344(void *arg0, s32 arg1) {
+    void *fn_800CD724(void *, s32, s32);
+    fn_800CD724(arg0, 0, arg1);
+}
+
 void fn_800D036C(void *arg0, s32 arg1, s32 arg2) {
     M2C_UNK fn_800CD774(void *, s32, s32, s32);
     fn_800CD774(arg0, 0, arg1, arg2);
