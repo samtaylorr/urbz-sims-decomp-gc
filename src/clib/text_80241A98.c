@@ -102,6 +102,11 @@ void fn_8024F98C(void) {
     fn_80246D2C();
 }
 
+void fn_8024F99C(void) {
+    extern void (*lbl_803F7AD0[])(void);
+    lbl_803F7AD0[0]();
+}
+
 void fn_8024FA04(void) {
 
 }
