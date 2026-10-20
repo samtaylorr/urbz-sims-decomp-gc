@@ -68,6 +68,14 @@ void fn_80100EDC(void *arg0) {
     }
 }
 
+void fn_8010120C(void) {
+    extern void *lbl_80494FA4;
+    void *vt;
+
+    vt = *(void **)lbl_80494FA4;
+    ((void (*)(void *))M2C_FIELD(vt, void **, 0x4C))((char *)lbl_80494FA4 + M2C_FIELD(vt, s16 *, 0x48));
+}
+
 void fn_80101300(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0xC) = arg1;
     M2C_FIELD(arg0, s32 *, 4) = 1;
