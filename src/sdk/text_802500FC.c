@@ -402,7 +402,7 @@ u32 fn_8026158C(u32 error) {
     }
 }
 
-extern s32 lbl_80495EF0;
+extern u32 lbl_80495EF0;
 extern u32 lbl_80495EF8;
 extern void (*lbl_80495EF4)(s32, DVDCommandBlock *);
 extern DVDCommandBlock lbl_80442960;
