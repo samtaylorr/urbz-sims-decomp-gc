@@ -2799,14 +2799,12 @@ void fn_800EA6C0(u64 *arg0) {
     *arg0 = 0;
 }
 
-static inline void BitsSet(u64 *d, u64 s) {
-    *d = s;
-}
+typedef struct Bits64 {
+    u64 bits;
+} Bits64;
 
 void fn_800EA6D4(u64 *arg0, u64 *arg1) {
-    u64 t = *arg1;
-    u64 *d = arg0;
-    *d = t;
+    BitsSet(arg0, *arg1);
 }
 
 void fn_800EA6EC(void *self, s32 flags) {
