@@ -19,6 +19,12 @@ s32 *fn_8016F8A4(s32 *arg0, s32 *arg1) {
     return arg0;
 }
 
+s32 *fn_8016F8BC(s32 *arg0, s32 arg1) {
+    arg0[0] = arg1;
+    arg0[1] = 0;
+    return arg0;
+}
+
 s32 *fn_8016F8E8(s32 *arg0) {
     arg0[1]--;
     return arg0;
