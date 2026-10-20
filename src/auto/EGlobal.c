@@ -102,6 +102,25 @@ EGlobalHandle fn_8004BB6C(void) {
     return h;
 }
 
+EGlobalHandle fn_8004BD48(void *arg1, s32 arg2) {
+    s32 fn_8032D5C8(s32, void *);
+    EGlobalHandle *fn_8032D6E8(s32, s32, s32);
+    extern u8 lbl_803C6C6C[];
+    extern s32 lbl_8041FA68[];
+    extern EGlobalHandle lbl_80495804;
+    EGlobalHandle *p;
+    s32 key;
+
+    if (arg2 != 0) {
+        key = fn_8032D5C8(M2C_FIELD(arg1, s32 *, 0x11C), lbl_803C6C6C);
+        p = fn_8032D6E8(lbl_8041FA68[0], key, arg2);
+        if (p != NULL) {
+            return *p;
+        }
+    }
+    return lbl_80495804;
+}
+
 void fn_8004C614(void) {
 
 }
