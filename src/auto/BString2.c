@@ -164,8 +164,16 @@ void fn_800F34EC(s32 arg0, s32 arg1) {
     fn_800F3358(arg0, arg1, fn_800F0698());
 }
 
+void fn_800F36CC(s32 arg0, void **arg1, s32 arg2) {
+    ((void (*)(s32, s32, s32, s32))fn_800F0FFC)(arg0, (s32)(fn_800F4878(arg1) ? *(u16 **)*arg1 : 0), arg2, fn_800F4878(arg1));
+}
+
 void fn_800F3738(void) {
     fn_800F0FFC();
+}
+
+void fn_800F3758(s32 arg0, const char *arg1, s32 arg2) {
+    ((void (*)(s32, s32, s32, s32))fn_800F0FFC)(arg0, (s32)arg1, arg2, arg1 ? fn_800F8120(arg1) : 0);
 }
 
 void fn_800F1120(void);
