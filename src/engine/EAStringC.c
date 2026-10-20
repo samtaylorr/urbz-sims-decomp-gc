@@ -265,10 +265,12 @@ void fn_802A6E10(s32 arg0) {
     fn_802A6CE0();
 }
 
-static inline void *fn_802A8240_makep(const f32 *pvalue) {
-    f32 value = *pvalue;
+void *fn_802A8240(void *self, s32 arg1) {
+    extern s32 lbl_804433C4[];
     extern u8 lbl_80418D70[];
     extern u8 lbl_804190F0[];
+    extern void fn_802B4998(s32, s32);
+    extern f32 fn_80243694(void);
     extern void *fn_802BB9B4(s32);
     extern void fn_802B7124(void *, s32);
     extern void fn_802B710C(void *, s32);
@@ -277,7 +279,13 @@ static inline void *fn_802A8240_makep(const f32 *pvalue) {
     extern void fn_802B7178(void *, s32);
     extern void fn_802B71C8(void *);
     extern void fn_803B76C8(void *, void *);
+    f32 value;
 
+    if (arg1 < 1) {
+        return (void *)lbl_80496130;
+    }
+    fn_802B4998(((s32 *)lbl_804433C4[2])[lbl_804433C4[0] - 1], arg1);
+    value = fn_80243694();
     if (lbl_80494D98 != NULL) {
         void *obj = lbl_80494D98;
         void *pool = lbl_80494B48;
@@ -306,20 +314,6 @@ static inline void *fn_802A8240_makep(const f32 *pvalue) {
         M2C_FIELD(obj, void **, 4) = lbl_804190F0;
         return obj;
     }
-}
-
-void *fn_802A8240(void *self, s32 arg1) {
-    extern s32 lbl_804433C4[];
-    extern void fn_802B4998(s32, s32);
-    extern f32 fn_80243694(void);
-    f32 value;
-
-    if (arg1 < 1) {
-        return (void *)lbl_80496130;
-    }
-    fn_802B4998(((s32 *)lbl_804433C4[2])[lbl_804433C4[0] - 1], arg1);
-    value = fn_80243694();
-    return fn_802A8240_makep(&value);
 }
 
 void fn_802ACAF8(void *arg0, s32 arg1) {
