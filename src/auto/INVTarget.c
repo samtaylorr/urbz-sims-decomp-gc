@@ -438,6 +438,19 @@ void fn_801DFDAC(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     M2C_FIELD(temp_r10, M2C_UNK **, 4) = NULL;
 }
 
+void *fn_801E0008(void **arg0, s32 arg1);
+s32 fn_801DFF54(void **arg0, s32 arg1) {
+    M2C_UNK fn_801DFE14(void **, void *);
+    void *node;
+
+    node = fn_801E0008(arg0, arg1);
+    if (node != NULL) {
+        fn_801DFE14(arg0, node);
+        return 1;
+    }
+    return 0;
+}
+
 s32 fn_801DFF98(void **arg0, s32 arg1) {
     M2C_UNK fn_801DFE14(void **, void *);
     s32 fn_802486DC(s32, s32);
