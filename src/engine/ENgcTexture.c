@@ -425,6 +425,11 @@ void fn_80363F78(void) {
     fn_80363D2C();
 }
 
+void fn_80363F98(void **arg0) {
+    extern u8 lbl_804194A0[];
+    *arg0 = lbl_804194A0;
+}
+
 void fn_80363FA8(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
