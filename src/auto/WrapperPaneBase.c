@@ -512,7 +512,7 @@ void fn_800CFF68(void *arg0, s32 flags) {
     s32 *v;
     s32 *self = arg0;
     self[0x17] = (s32)lbl_8040AC68;
-    ((void (*)(void *))fn_800CD104)(self);
+    fn_800CD104(self);
     v = self + 2;
     if (v[0] != 0) {
         u32 size = (u32)(v[3] - v[0]) & ~3;
