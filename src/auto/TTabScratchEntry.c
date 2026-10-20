@@ -266,6 +266,15 @@ void fn_8019EE44(void *arg0) {
     M2C_FIELD(vt, void (**)(void *), 0x34)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x30));
 }
 
+s32 fn_8019EE78(void *arg0, void *arg1) {
+    s32 fn_803AAECC(void *, s32, s32, s32, s32);
+    extern void *lbl_8049665C;
+    void *obj = lbl_8049665C;
+    void *vt = M2C_FIELD(obj, void **, 0);
+    s32 r = M2C_FIELD(vt, s32 (**)(void *, s32), 0x3C)((char *)obj + M2C_FIELD(vt, s16 *, 0x38), M2C_FIELD(arg1, s32 *, 0));
+    return fn_803AAECC((char *)arg0 + 0x54, r, 0x534C4F54, M2C_FIELD(arg1, s16 *, 4), 0) == 0;
+}
+
 s32 fn_8019F070(void) {
     return 0;
 }
