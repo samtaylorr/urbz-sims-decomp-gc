@@ -6068,6 +6068,10 @@ void fn_803B7DCC(void) {
     lbl_80443318[0]();
 }
 
+s32 fn_803B8378(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 4) == 0;
+}
+
 void fn_803B8C70(void) {
 
 }
