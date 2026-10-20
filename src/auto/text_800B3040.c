@@ -29,7 +29,7 @@ s32 fn_800B49E8(void) {
     return 0;
 }
 
-void fn_800B49F0(void) {
+void fn_800B49F0(void *arg0, s32 arg1, s32 arg2) {
 
 }
 
