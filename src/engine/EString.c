@@ -86,7 +86,7 @@ void fn_802D4874(s32 *arg0) {
 s32 fn_802D489C(s32 arg0, s32 *arg1) {
     M2C_UNK fn_802D3C60(s32, s32);
     s32 fn_802DF5D8(char *, s32);
-    char sp8[256];
+    char sp8[0x104];
 
     fn_802D3C60(arg0, fn_802DF5D8(sp8, *arg1));
     return arg0;
