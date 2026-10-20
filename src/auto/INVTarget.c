@@ -471,6 +471,15 @@ s32 fn_801E0118(void) {
     return lbl_80494620;
 }
 
+void fn_801E0154(void) {
+    extern char *lbl_80494620;
+    if (lbl_80494620 != NULL) {
+        char *vt = M2C_FIELD(lbl_80494620, char **, 0xC);
+        M2C_FIELD(vt, void (**)(void *, s32), 0xC)(lbl_80494620 + M2C_FIELD(vt, s16 *, 8), 3);
+        lbl_80494620 = NULL;
+    }
+}
+
 void fn_801E0308(void *arg0, void *arg1) {
     M2C_FIELD(arg1, void **, 0x74) = (void *) M2C_FIELD(arg0, void **, 0x74);
     M2C_FIELD(arg0, void **, 0x74) = arg1;
