@@ -1001,8 +1001,22 @@ s32 fn_801A3B04(void *arg0) {
     return ((u16) M2C_FIELD(arg0, u16 *, 0x110) >> 0xAU) & 1;
 }
 
+void fn_801A3B10(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, u16 *, 0x110) &= ~0x400;
+    if (arg1 != 0) {
+        M2C_FIELD(arg0, u16 *, 0x110) |= 0x400;
+    }
+}
+
 s32 fn_801A3B30(void *arg0) {
     return ((u16) M2C_FIELD(arg0, u16 *, 0x110) >> 0xBU) & 1;
+}
+
+void fn_801A3B3C(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, u16 *, 0x110) &= ~0x800;
+    if (arg1 != 0) {
+        M2C_FIELD(arg0, u16 *, 0x110) |= 0x800;
+    }
 }
 
 s32 fn_801A3B5C(void *arg0) {
@@ -1023,6 +1037,10 @@ void *fn_801A3B8C(void *arg0, s32 i) {
 
 void *fn_801A3BA0(void *arg0, s32 i) {
     return (u8 *)arg0 + (i * 0x10 + 8) + 4;
+}
+
+void *fn_801A3BB4(void *arg0, s32 i) {
+    return (u8 *)arg0 + (i * 0x10 + 8) + 8;
 }
 
 void *fn_801A3BC8(void *arg0, s32 i) {
