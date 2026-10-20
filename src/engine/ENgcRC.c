@@ -267,6 +267,15 @@ s32 fn_8034809C(s32 arg0, s32 arg1) {
     return 0;
 }
 
+void fn_80348150(void) {
+    void fn_80259354(void *);
+    extern u8 lbl_8046B090[];
+    extern s32 lbl_8049506C;
+    if (lbl_8049506C != 0) {
+        fn_80259354(lbl_8046B090);
+    }
+}
+
 void fn_80348184(void) {
     void fn_80258FB8(void *);
     extern u8 lbl_8046B090[];
