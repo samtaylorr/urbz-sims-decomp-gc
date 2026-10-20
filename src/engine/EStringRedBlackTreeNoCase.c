@@ -190,6 +190,14 @@ s32 fn_80369B40(void *arg0, u8 *arg1) {
     return var_r10 & M2C_FIELD(arg0, s32 *, 0x10);
 }
 
+s32 fn_80369C84(void *arg0, s32 arg1) {
+    void fn_8036A04C(void *, s32, s32 *);
+    s32 sp8;
+
+    fn_8036A04C(arg0, arg1, &sp8);
+    return sp8;
+}
+
 s32 fn_8036A258(void **arg0) {
     s32 var_r9;
     void *var_r3;
