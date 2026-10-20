@@ -33,6 +33,33 @@ s32 fn_80333D60(void) {
     return 4;
 }
 
+extern ECtrlPair lbl_803F3724[];
+extern ECtrlPair lbl_803F372C[];
+void fn_80333B64(s32, ECtrlPair *, s32, s32, s32, s32, s32);
+void fn_80333A04(s32, s32, ECtrlPair *, ECtrlPair *, s32, s32, s32);
+
+void fn_80333D68(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    ECtrlPair b = lbl_803F3724[0];
+    ECtrlPair a = lbl_803F3724[0];
+    fn_80333A04(arg0, arg1, &a, &b, 0, arg2, arg3);
+}
+
+void fn_80333DBC(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    ECtrlPair a = lbl_803F372C[0];
+    ECtrlPair b = lbl_803F3724[0];
+    fn_80333A04(arg0, arg1, &a, &b, 0, arg2, arg3);
+}
+
+void fn_80333F54(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    ECtrlPair p = lbl_803F3724[0];
+    fn_80333B64(arg0, &p, 0, 0, arg1, arg2, arg3);
+}
+
+void fn_803340E4(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    ECtrlPair p = lbl_803F3724[0];
+    fn_80333B64(arg0, &p, 0, 1, arg1, arg2, arg3);
+}
+
 s32 fn_803347A4(s32 arg0) {
     return 1 << arg0;
 }
