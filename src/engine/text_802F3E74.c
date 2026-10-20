@@ -76,7 +76,7 @@ s32 fn_802F56AC(void *arg0) {
 }
 
 void fn_802F5830(void) {
-    M2C_UNK fn_802F3F14();
+    void *fn_802F3F14();
     M2C_UNK fn_802F59A4(M2C_UNK);
     fn_802F59A4(0x300);
     fn_802F3F14();
