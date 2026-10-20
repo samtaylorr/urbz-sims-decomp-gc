@@ -74,24 +74,30 @@ void fn_80068448(void *arg0, s32 arg1) {
     M2C_UNK fn_80067AA4(void *, s32, M2C_UNK);
     M2C_UNK fn_80024ADC(void *, s32 *);
     M2C_UNK fn_802CB8D4(s32 *);
+    struct {
+        char pad[0x204];
+        void *arr[1];
+    } *self = arg0;
     s32 sp8[3];
+    s32 *var_r31;
     s32 var_r30;
     void *temp_r3;
 
-    temp_r3 = ((void **) ((char *) arg0 + 0x204))[arg1];
+    temp_r3 = self->arr[arg1];
     var_r30 = 0;
     if (temp_r3 == NULL || *M2C_FIELD(temp_r3, s32 **, 0xF4) != 2) {
-        sp8[1] = 0;
-        sp8[0] = 0;
-        sp8[2] = 1;
-        fn_80024ADC(temp_r3, sp8);
+        var_r31 = sp8;
+        var_r31[1] = 0;
+        var_r31[0] = 0;
+        var_r31[2] = 1;
+        fn_80024ADC(temp_r3, var_r31);
         if (sp8[0] != 0) {
             var_r30 = 2;
         }
-        fn_802CB8D4(sp8);
-        fn_802CB8D4(sp8);
+        fn_802CB8D4(var_r31);
+        fn_802CB8D4(var_r31);
     }
-    fn_80067AA4(arg0, arg1, var_r30);
+    fn_80067AA4(self, arg1, var_r30);
 }
 
 void fn_800684E8(void) {
