@@ -4,6 +4,10 @@
 extern u8 lbl_80409228[];
 extern void fn_802D20E8(void *);
 
+static inline s32 ISimInstance_IterValid(void *it) {
+    return it != NULL;
+}
+
 void *fn_80063ED0(void *arg0, s32 arg1) {
     M2C_UNK fn_802CCA4C(void *);
     M2C_FIELD(arg0, s32 *, 0) = 0;
