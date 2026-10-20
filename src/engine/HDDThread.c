@@ -77,6 +77,21 @@ void fn_80332A44(void) {
 
 }
 
+s32 fn_80332A48(s32 arg0, s32 arg1) {
+    s32 fn_803327E0(s32, s32);
+    s32 i;
+    s32 p;
+
+    p = arg0 + 0x340;
+    for (i = 0; i < 32; i++) {
+        if (fn_803327E0(p, arg1) != 0) {
+            return i;
+        }
+        p += 0x14;
+    }
+    return -1;
+}
+
 void fn_80332AA8(s32 arg0) {
     s32 fn_80332A48();
     M2C_UNK fn_80332AE0(s32, s32);
