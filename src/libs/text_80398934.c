@@ -898,7 +898,7 @@ static inline s32 SortComp_Lg(s32 n) {
 void fn_8039CCD4(s32 *first, s32 *last, SortComp *comp) {
     if (first != last) {
         fn_8039C968(first, last, 0, SortComp_Lg(last - first) * 2, *comp);
-        fn_8039CC48(first, last, comp);
+        ((void (*)(s32 *, s32 *, SortComp))fn_8039CC48)(first, last, *comp);
     }
 }
 
