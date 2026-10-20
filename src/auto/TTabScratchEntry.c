@@ -473,6 +473,10 @@ s32 fn_8019F484(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x34);
 }
 
+s32 fn_8019F48C(void *arg0) {
+    return (M2C_FIELD(arg0, s32 *, 0x1C) & 0x800) != 0;
+}
+
 void fn_8019F4A4(void *arg0, s32 arg1) {
     s32 temp_r0;
 
@@ -504,7 +508,8 @@ f32 fn_8019F4E4(void *arg0) {
 }
 
 s32 fn_8019F4EC(void *arg0, s32 i) {
-    return ((s32 *)((u8 *)arg0 + 0x10))[i];
+    struct TTabScratchEntryA { u8 pad[0x10]; s32 unk10[4]; } *self = arg0;
+    return self->unk10[i];
 }
 
 s32 fn_8019F4FC(u8 *self) {
