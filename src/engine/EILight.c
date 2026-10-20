@@ -163,6 +163,10 @@ f32 fn_802F03D4(void) {
     return lbl_803F0DB8[0];
 }
 
+void fn_802F03E0(s32 arg0) {
+    lbl_80494E58 = arg0;
+}
+
 extern s32 lbl_80494E58;
 s32 fn_802F03E8(void) {
     return lbl_80494E58;
