@@ -129,6 +129,15 @@ void fn_8032BFC4(u8 *self) {
     }
 }
 
+void fn_8032C028(u8 *self) {
+    extern void fn_80300750(u8 *);
+    s32 i;
+
+    for (i = 0; i < ListCount(self + 0x20); i++) {
+        fn_80300750(*(u8 **)(self + 0x20) + i * 0x18);
+    }
+}
+
 void fn_8032C08C(void *arg0, s32 arg1, s32 arg2) {
     s32 fn_8031AEB4(s32, s32);
     if (fn_8031AEB4(M2C_FIELD(arg0, s32 *, 0x130) + (arg1 * 0xE0), arg2) != 0) {
