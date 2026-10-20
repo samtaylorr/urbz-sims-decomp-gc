@@ -2523,6 +2523,13 @@ s32 fn_803AADC8(s32 arg0, s32 arg1, s32 arg2) {
     return ret;
 }
 
+void fn_803AAE2C(s32 arg0, s32 arg1, s32 arg2) {
+    s32 *p = &arg0;
+
+    p[1] = arg2;
+    fn_803AADC8((s32)p, arg1, arg2);
+}
+
 s32 fn_803AAE60(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     struct {
         void *vtbl;
