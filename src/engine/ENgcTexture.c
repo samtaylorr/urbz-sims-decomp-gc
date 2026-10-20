@@ -451,6 +451,21 @@ void fn_80363E44(void **obj) {
     }
 }
 
+void fn_80363EE0(s32 arg0, s32 arg1) {
+    extern s32 fn_802D6A90(void *, void *, void *, void *, s32, void *, void *);
+    extern void fn_80363F50(void);
+    extern void fn_80363F78(void);
+    extern void fn_80363F98(void **);
+    extern u8 lbl_80493920[];
+    extern u8 lbl_803F4F30[];
+    extern u8 lbl_804936F0[];
+    extern s32 lbl_804962EC;
+
+    if (arg1 == 0xFFFF && arg0 != 0) {
+        lbl_804962EC = fn_802D6A90(lbl_80493920, fn_80363F50, fn_80363F78, fn_80363F98, 0, lbl_803F4F30, lbl_804936F0);
+    }
+}
+
 void fn_80363F50(void) {
     M2C_UNK fn_802D1FC8(M2C_UNK);
     fn_802D1FC8(0x28);
