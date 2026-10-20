@@ -65,6 +65,12 @@ void fn_8024928C(void *arg0) {
     fn_802492BC(M2C_FIELD(arg0, s16 *, 0xE), 0, 0, 2);
 }
 
+void fn_8024BE60(s32 arg0, s32 arg1, s32 arg2) {
+    extern s32 lbl_80494988;
+    void fn_8024BCB0(s32, s32, s32, s32);
+    fn_8024BCB0(lbl_80494988, arg0, arg1, arg2);
+}
+
 extern s32 lbl_80494988;
 s32 fn_8024BEAC(void) {
     return lbl_80494988;
