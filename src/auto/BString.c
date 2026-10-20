@@ -2930,6 +2930,13 @@ s32 fn_800E9D6C(s32 *self) {
     return self[6];
 }
 
+void fn_800E9D74(void *arg0) {
+    extern s32 lbl_8041F754[];
+    extern void fn_800D28AC(void *);
+    lbl_8041F754[0] = 3;
+    fn_800D28AC(arg0);
+}
+
 extern u8 lbl_8040CFF8[];
 s32 *fn_800E9EE0(s32 *self, s32 arg1) {
     self[0] = arg1;
