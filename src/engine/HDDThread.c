@@ -99,10 +99,13 @@ void fn_80332AA8(s32 arg0) {
 }
 
 s32 fn_80332AE0(char *arg0, u32 arg1) {
-    if (arg1 > 0x1FU) {
-        return 0;
+    s32 var_r3;
+
+    var_r3 = 0;
+    if (arg1 <= 0x1FU) {
+        var_r3 = fn_803326F0(&arg0[arg1 * 0x14 + 0x340]);
     }
-    return fn_803326F0(arg0 + arg1 * 0x14 + 0x340);
+    return var_r3;
 }
 
 s32 *fn_80332B94(char *arg0, u32 arg1) {
