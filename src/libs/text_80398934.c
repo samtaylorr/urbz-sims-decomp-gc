@@ -1849,6 +1849,27 @@ void fn_803A3AA4(s32 *first, s32 *middle, s32 *last, s32 comp) {
     fn_803A39D8(first, middle, last, 0, comp);
 }
 
+s32 *fn_803A3ACC(s32 *first, s32 *last, s32 pivot, s32 (*comp)(s32 *, s32 *)) {
+    s32 tmp;
+
+    while (1) {
+        while (comp(first, &pivot)) {
+            first++;
+        }
+        last--;
+        while (comp(&pivot, last)) {
+            last--;
+        }
+        if (!(first < last)) {
+            return first;
+        }
+        tmp = *first;
+        *first = *last;
+        *last = tmp;
+        first++;
+    }
+}
+
 void fn_803A3D2C(s32 *first, s32 *last, s32 comp);
 void fn_803A3DD8(s32 *first, s32 *last, s32 *val, s32 comp);
 void fn_803A3E2C(s32 *first, s32 *last, s32 comp) {
