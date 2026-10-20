@@ -2,6 +2,7 @@
 #include "common.h"
 
 void fn_800F0FFC(void);
+s32 fn_800F4878(void **arg0);
 void fn_800EF8B4(void) {
 
 }
@@ -164,6 +165,23 @@ void fn_800F34EC(s32 arg0, s32 arg1) {
     fn_800F3358(arg0, arg1, fn_800F0698());
 }
 
+u32 fn_800F3620(void **arg0, void *arg1, u32 arg2, u32 arg3) {
+    void fn_8024839C(void *dst, const void *src, u32 n);
+    if (arg3 > fn_800F4878(arg0)) {
+        fn_800EF8B8();
+    }
+    {
+        u32 n = arg2;
+        if (n > fn_800F4878(arg0) - arg3) {
+            n = fn_800F4878(arg0) - arg3;
+        }
+        if (fn_800F4878(arg0) != 0) {
+            fn_8024839C(arg1, (fn_800F4878(arg0) ? *(u16 **)*arg0 : 0) + arg3, n * 2);
+        }
+        return n;
+    }
+}
+
 void fn_800F36CC(s32 arg0, void **arg1, s32 arg2) {
     ((void (*)(s32, s32, s32, s32))fn_800F0FFC)(arg0, (s32)(fn_800F4878(arg1) ? *(u16 **)*arg1 : 0), arg2, fn_800F4878(arg1));
 }
@@ -174,6 +192,21 @@ void fn_800F3738(void) {
 
 void fn_800F3758(s32 arg0, const char *arg1, s32 arg2) {
     ((void (*)(s32, s32, s32, s32))fn_800F0FFC)(arg0, (s32)arg1, arg2, arg1 ? fn_800F8120(arg1) : 0);
+}
+
+u32 fn_800F37B0(void **arg0, u16 arg1, u32 arg2) {
+    const u16 *c = &arg1;
+    while (arg2 < fn_800F4878(arg0)) {
+        s32 ne = 1;
+        if ((fn_800F4878(arg0) ? *(u16 **)*arg0 : 0)[arg2] == *c) {
+            ne = 0;
+        }
+        if (!ne) {
+            break;
+        }
+        arg2++;
+    }
+    return arg2 < fn_800F4878(arg0) ? arg2 : -1;
 }
 
 void fn_800F1120(void);
