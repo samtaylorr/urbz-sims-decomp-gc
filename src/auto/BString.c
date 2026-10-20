@@ -318,19 +318,19 @@ void fn_800D2778(void) {
 
 void fn_800D28E8(void *arg0) {
     M2C_UNK fn_800E18EC(M2C_UNK);
-    struct {
+    struct G {
         s32 cur;
         s32 idx;
         s32 arr[2];
-    } *g = (void *)lbl_80434A9C;
+    };
     s32 r;
 
     if (M2C_FIELD(arg0, s32 *, 0x18) == 0 && M2C_FIELD(arg0, s32 *, 0x1C) == 0) {
         r = fn_800E18EC(6);
         if (r == 1) {
             M2C_FIELD(arg0, s32 *, 0x18) = r;
-            g->arr[g->idx] = g->cur;
-            g->arr[g->idx == 0] = g->cur == 0;
+            ((struct G *)lbl_80434A9C)->arr[((struct G *)lbl_80434A9C)->idx] = ((struct G *)lbl_80434A9C)->cur;
+            ((struct G *)lbl_80434A9C)->arr[((struct G *)lbl_80434A9C)->idx == 0] = ((struct G *)lbl_80434A9C)->cur == 0;
         } else if ((u32)(r - 2) <= 1) {
             M2C_FIELD(arg0, s32 *, 0x1C) = 1;
         }
