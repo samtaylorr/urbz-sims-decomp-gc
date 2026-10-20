@@ -133,7 +133,7 @@ void fn_80348008(s32 arg0) {
 
 void fn_803481C0(void) {
     s32 fn_80347F70();
-    M2C_UNK fn_8034806C(s32);
+    void fn_8034806C(s32);
     M2C_UNK fn_8034828C();
     s32 temp_r30;
 
