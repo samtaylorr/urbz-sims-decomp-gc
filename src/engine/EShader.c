@@ -117,3 +117,7 @@ void fn_802FFD40(void) {
     fn_802FFB7C(1, 0xFFFF);
 }
 
+void fn_802FFD6C(void) {
+    fn_802FFB7C(0, 0xFFFF);
+}
+
