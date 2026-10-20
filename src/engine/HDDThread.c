@@ -98,6 +98,21 @@ void fn_80332AA8(s32 arg0) {
     fn_80332AE0(arg0, fn_80332A48());
 }
 
+s32 fn_80332AE0(char *arg0, u32 arg1) {
+    if (arg1 > 0x1FU) {
+        return 0;
+    }
+    return fn_803326F0(arg0 + arg1 * 0x14 + 0x340);
+}
+
+s32 *fn_80332B94(char *arg0, u32 arg1) {
+    extern s32 lbl_803F35E0[];
+    if (arg1 <= 0x1FU) {
+        return (s32 *)fn_80332824((s32 *)&arg0[arg1 * 0x14 + 0x340]);
+    }
+    return lbl_803F35E0;
+}
+
 void fn_80332D00(void *arg0) {
     M2C_FIELD((int)arg0, s32 *, (int)0x5C0) = 0;
     M2C_FIELD(arg0, s32 *, (unsigned)0x5C8) = 0;
