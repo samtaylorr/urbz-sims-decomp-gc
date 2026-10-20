@@ -95,6 +95,15 @@ void fn_80300488(u8 *self) {
     }
 }
 
+void fn_80300698(u8 *self) {
+    extern void fn_80300DC0(u8 *);
+    s32 i;
+
+    for (i = 0; i < *(s32 *)(self + 4); i++) {
+        fn_80300DC0(*(u8 **)self + i * 0x6C);
+    }
+}
+
 void fn_8030089C(void) {
 
 }
