@@ -101,6 +101,21 @@ void fn_8010E988(void) {
 
 }
 
+void fn_8010E9FC(void **arg0, s32 arg1) {
+    extern u8 lbl_8040EAF8[];
+    extern void *lbl_80495AF8;
+    extern void fn_8010F2BC(void *);
+    extern void *fn_802D0AB8(void);
+    extern void fn_802D1A00(void *, void *);
+
+    *arg0 = lbl_8040EAF8;
+    fn_8010F2BC(arg0);
+    fn_8010DA7C(lbl_80495AF8, arg0);
+    if (arg1 & 1) {
+        fn_802D1A00(fn_802D0AB8(), arg0);
+    }
+}
+
 s32 fn_8010EA58(void) {
     return 1;
 }
