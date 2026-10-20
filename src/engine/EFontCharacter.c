@@ -203,7 +203,7 @@ u16 fn_8036D13C(void) {
 }
 
 extern void fn_8036D068(void);
-extern void fn_8036D0B0(void);
+extern void fn_8036D0B0(void **);
 extern u8 lbl_803F5184[];
 void fn_8036D148(s32 arg0) {
     fn_802D6A90(lbl_80493D54, fn_8036D068, fn_8036D090, fn_8036D0B0, arg0, lbl_803F5184, lbl_804936F0);
