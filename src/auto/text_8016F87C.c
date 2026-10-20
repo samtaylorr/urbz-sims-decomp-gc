@@ -7,6 +7,25 @@ s32 *fn_8016F87C(s32 *arg0) {
     return arg0;
 }
 
+s32 *fn_8016F890(s32 *arg0, s32 arg1) {
+    arg0[0] = arg1;
+    arg0[1] = 0;
+    return arg0;
+}
+
+void fn_8016F8A4(void *arg0, void *arg1) {
+    M2C_FIELD(arg0, s32 *, 0) = M2C_FIELD(arg1, s32 *, 0);
+    M2C_FIELD(arg0, s32 *, 4) = M2C_FIELD(arg1, s32 *, 4);
+}
+
+void fn_8016F8E8(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 4) = M2C_FIELD(arg0, s32 *, 4) - 1;
+}
+
+void fn_8016F8FC(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 4) = M2C_FIELD(arg0, s32 *, 4) + arg1;
+}
+
 void fn_8016F980(void *arg0) {
     s32 var_r11;
     void *temp_r9;
