@@ -170,14 +170,17 @@ s32 fn_80347D74(s32 arg0) {
     extern u8 lbl_8046C658[];
     extern u8 lbl_8046C680[];
     extern s32 lbl_80495070;
+    s32 ret;
     if (fn_80258CEC(lbl_8046C6A8, fn_80347E90, 0, lbl_8046D9C0, 0x1000, arg0, 1) != 0) {
         fn_8037A8D8(lbl_8046C5D0, lbl_8046C630, 10);
         fn_8037A8D8(lbl_8046C5F0, lbl_8046C658, 10);
         fn_8037A8D8(lbl_8046C610, lbl_8046C680, 10);
         lbl_80495070 = 1;
-        return 1;
+        ret = 1;
+    } else {
+        ret = 0;
     }
-    return 0;
+    return ret;
 }
 
 void fn_80347E20(void) {
@@ -327,7 +330,7 @@ void fn_803481E8(u8 *arg0) {
     size = lbl_8046C400.unkBC;
     for (;;) {
         msg.index = i;
-        fn_8034828C(&msg);
+        fn_8034828C(&msg.buf);
         if ((s32)((i + lbl_8046C400.unkC0) % lbl_8046C400.unk50) == (s32)(lbl_8046C400.unk50 - 1)) {
             if (lbl_8046C400.unkA6 & 1) {
                 size = *(s32 *)msg.buf;
@@ -359,9 +362,9 @@ void fn_8034828C(u8 **arg0) {
         u8 unk70[0xEC - 0x70];
         s32 unkEC;
     } lbl_8046C400;
+    struct Entry *e;
     s32 *sizes;
     u8 *data;
-    struct Entry *e;
     u32 i;
 
     sizes = (s32 *)(*arg0 + 8);
