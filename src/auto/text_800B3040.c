@@ -47,13 +47,14 @@ void fn_800B3278(void *arg0, s32 arg1) {
         index = arg1 - 37;
         group = 5;
     }
-    M2C_FIELD(arg0, s32 *, 0xB4) = group;
     M2C_FIELD(arg0, s32 *, 0xB0) = index;
+    M2C_FIELD(arg0, s32 *, 0xB4) = group;
     fn_8000AA2C(lbl_8041FA1C[0], lbl_803CECE0, 0, 0, 0);
 }
 
 void fn_800B3324(void *arg0, char *name, s32 arg2) {
     void fn_802D57BC(void *, const char *);
+    void fn_800B49F0(void *, s32, s32);
     extern char lbl_803CECF4[];
     s32 temp_r0;
 
@@ -64,8 +65,8 @@ void fn_800B3324(void *arg0, char *name, s32 arg2) {
         fn_802D57BC((char *)arg0 + 0x60, lbl_803CECF4);
     }
     temp_r0 = M2C_FIELD(arg0, s32 *, 0xE4);
-    M2C_FIELD(arg0, s32 *, 0xF4) = temp_r0;
     M2C_FIELD(arg0, s32 *, 0xF0) = temp_r0;
+    M2C_FIELD(arg0, s32 *, 0xF4) = temp_r0;
     M2C_FIELD(arg0, s32 *, 0x74) = 0;
     M2C_FIELD(arg0, s32 *, 0x104) = M2C_FIELD(arg0, s32 *, 0x10C);
     fn_800B49F0(arg0, M2C_FIELD(arg0, s32 *, 0x9C), M2C_FIELD(arg0, s32 *, 0x94));
