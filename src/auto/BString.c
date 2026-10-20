@@ -1170,6 +1170,14 @@ void fn_800DC090(void) {
     }
 }
 
+void fn_800DC0C8(void) {
+    void fn_8006C704(void *);
+    extern void *lbl_804943B0;
+    if (lbl_804943B0 != NULL && M2C_FIELD(lbl_804943B0, void **, 0x94) != NULL) {
+        fn_8006C704(M2C_FIELD(lbl_804943B0, void **, 0x94));
+    }
+}
+
 void fn_800DC138(void) {
     extern void *lbl_804943B0;
     if (lbl_804943B0 != NULL) {
