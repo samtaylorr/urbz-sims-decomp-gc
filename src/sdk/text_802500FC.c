@@ -428,6 +428,11 @@ s32 fn_80261640(u32 resume) {
     return 0;
 }
 
+void fn_80261A44(void);
+void fn_80261A1C(void) {
+    fn_802664BC(fn_80261A44);
+}
+
 s32 fn_802628C4(u32 arg0) {
     extern u32 lbl_80494A3C;
     if ((arg0 == 1U) || ((u32) (arg0 - 4) <= 1U) || (arg0 == 0xEU)) {
