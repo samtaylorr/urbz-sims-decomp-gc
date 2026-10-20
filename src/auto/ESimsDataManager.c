@@ -6,6 +6,11 @@ typedef struct {
     s32 *end;
 } ESimsIdVec;
 
+static inline void fn_8001E5B8_call(void **pp) {
+    void *vt = *(void **)*pp;
+    ((void (*)(void *))M2C_FIELD(vt, void **, 0x1C))((char *)*pp + M2C_FIELD(vt, s16 *, 0x18));
+}
+
 void *fn_8001D654(u32 size, s32 arg1, void *p) {
     return p;
 }
