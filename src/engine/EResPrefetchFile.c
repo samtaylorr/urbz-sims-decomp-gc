@@ -58,6 +58,15 @@ s32 fn_8031FE6C(s32 arg0, s32 *out) {
     return arg0;
 }
 
+M2C_UNK fn_8031FEAC(void *self) {
+    extern void fn_8031E8B0(void *);
+    extern u8 lbl_8041B778[];
+    fn_8031E8B0(self);
+    M2C_FIELD(self, s32 *, 0x20) = 0;
+    *(void **)self = lbl_8041B778;
+    return (M2C_UNK)self;
+}
+
 void fn_8031FEF0(void **self, s32 flags) {
     extern u8 lbl_8041B778[];
     extern void fn_8031FF50(void *);
@@ -79,6 +88,19 @@ void fn_8031FF50(void *self) {
         fn_80338184(lbl_8045B58C, M2C_FIELD(self, s32 *, 0x20));
         M2C_FIELD(self, s32 *, 0x20) = 0;
     }
+}
+
+void fn_8031FF98(void *self, void *stream) {
+    extern void fn_8031E988(void *, void *);
+    char *vt;
+    s32 size;
+
+    fn_8031E988(self, stream);
+    vt = M2C_FIELD(stream, char **, 0x18);
+    size = M2C_FIELD(self, s32 *, 0x1C);
+    ((void (*)(void *, void *, s32))M2C_FIELD(vt, void **, 0x3C))((char *)stream + M2C_FIELD(vt, s16 *, 0x38), &size, 4);
+    vt = M2C_FIELD(stream, char **, 0x18);
+    ((void (*)(void *, void *, s32))M2C_FIELD(vt, void **, 0x3C))((char *)stream + M2C_FIELD(vt, s16 *, 0x38), M2C_FIELD(self, void **, 0x20), M2C_FIELD(self, s32 *, 0x1C));
 }
 
 void fn_80320010(void) {
