@@ -105,6 +105,37 @@ s32 fn_8010EA58(void) {
     return 1;
 }
 
+s32 fn_8010EA60(void *arg0) {
+    extern void *lbl_80494FA4;
+    s32 count;
+
+    count = M2C_FIELD(arg0, s32 *, 4);
+    if (count == 1) {
+        if (M2C_FIELD(arg0, s32 *, 0x1C) != 0) {
+            s32 q[7];
+            void *obj;
+            void *vt;
+            q[0] = 0;
+            obj = lbl_80494FA4;
+            vt = *(void **)obj;
+            ((void (*)(void *, s32, s32 *))M2C_FIELD(vt, void **, 0xAC))(
+                (u8 *)obj + M2C_FIELD(vt, s16 *, 0xA8), M2C_FIELD(arg0, s32 *, 0x1C), q);
+            if (q[4] != 0) {
+                M2C_FIELD(arg0, s32 *, 0x30) = count;
+                M2C_FIELD(arg0, s32 *, 0x20) = 0;
+                return M2C_FIELD(arg0, s32 *, 4) = M2C_FIELD(arg0, s32 *, 4) - 1;
+            }
+        }
+        if (arg0 != NULL) {
+            void *vt = *(void **)arg0;
+            ((void (*)(void *, s32))M2C_FIELD(vt, void **, 0x9C))(
+                (u8 *)arg0 + M2C_FIELD(vt, s16 *, 0x98), 3);
+        }
+        return 0;
+    }
+    return M2C_FIELD(arg0, s32 *, 4) = count - 1;
+}
+
 extern u8 lbl_8040EAF8[];
 extern void *lbl_80495AF8;
 extern f32 lbl_803D71E8[];
@@ -152,6 +183,10 @@ s32 fn_8010F2B4(void) {
 
 s32 fn_8010F578(void) {
     return 1;
+}
+
+s32 fn_8010F580(void *arg0) {
+    return ++M2C_FIELD(arg0, s32 *, 4);
 }
 
 s32 fn_8010F724(s32 *self) {
