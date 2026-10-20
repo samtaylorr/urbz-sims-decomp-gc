@@ -7264,6 +7264,10 @@ void fn_803BDFC8(s32 *first, s32 *middle, s32 *last, s32 comp) {
     fn_803BDE90(first, middle, last, 0, comp);
 }
 
+s32 fn_803BE554(s32 *arg0, s32 *arg1) {
+    return arg0[1] < arg1[1];
+}
+
 void fn_803BE56C(void) {
     fn_80335FD8();
 }
@@ -7274,6 +7278,16 @@ void fn_803BE58C(void) {
 
 void fn_803BE5AC(void) {
     fn_80335FD8();
+}
+
+void fn_803BE5CC(void *arg0) {
+    extern f32 lbl_803F3ED0;
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, f32 *, 0xC) = lbl_803F3ED0;
+    M2C_FIELD(arg0, f32 *, 0x10) = lbl_803F3ED0;
+    M2C_FIELD(arg0, f32 *, 0x14) = lbl_803F3ED0;
+    M2C_FIELD(arg0, s32 *, 0x18) = 0;
+    M2C_FIELD(arg0, s32 *, 0x1C) = 0;
 }
 
 extern u8 lbl_8041C438[];
