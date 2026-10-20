@@ -58,6 +58,20 @@ s32 fn_8031FE6C(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void fn_8031FEF0(void **self, s32 flags) {
+    extern u8 lbl_8041B778[];
+    extern void fn_8031FF50(void *);
+    extern void fn_8031E910(void *, s32);
+    void fn_80338184(void *, s32);
+    extern u8 lbl_8045B58C[];
+    *self = lbl_8041B778;
+    fn_8031FF50(self);
+    fn_8031E910(self, 0);
+    if (flags & 1) {
+        fn_80338184(lbl_8045B58C, (s32)self);
+    }
+}
+
 void fn_80320010(void) {
 
 }
