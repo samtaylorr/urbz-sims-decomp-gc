@@ -987,6 +987,10 @@ s32 fn_801A3B70(void) {
     return 0x10;
 }
 
+void *fn_801A3BA0(void *arg0, s32 i) {
+    return (u8 *)arg0 + (i * 0x10 + 8) + 4;
+}
+
 void *fn_801A3BF0(void *arg0, s32 i) {
     return (u8 *)arg0 + (i * 0x10 + 8);
 }
