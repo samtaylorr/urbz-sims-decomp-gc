@@ -2913,6 +2913,11 @@ s32 fn_800EB01C(s32 *arg0) {
     return *arg0 + 4;
 }
 
+s32 fn_800EEFC4(s32, s32, s32, s32);
+s32 fn_800EB2B0(s32 arg0, s32 arg1) {
+    return (u32)fn_800EEFC4(arg0, arg1, 0, -1) >> 31;
+}
+
 s32 fn_800EB360(s32 arg0, s32 arg1) {
     return (u32)fn_800EF0A8(arg0, arg1, 0) >> 31;
 }
