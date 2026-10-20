@@ -1475,6 +1475,22 @@ void fn_800E1868(void) {
     fn_800E3BC0();
 }
 
+s32 fn_800E18B8(s32 arg0) {
+    extern s32 lbl_804966D8;
+    extern s32 lbl_804966DC;
+    extern s32 lbl_804966E0;
+    s32 ret;
+
+    ret = 0;
+    if (lbl_804966DC == 0 && (u32)(arg0 - 1) <= 0x15U) {
+        lbl_804966E0 = 0;
+        lbl_804966D8 = 0;
+        lbl_804966DC = arg0;
+        ret = arg0;
+    }
+    return ret;
+}
+
 s32 fn_800E18EC(s32 arg0) {
     extern s32 lbl_804966D8;
     extern s32 lbl_804966E0;
