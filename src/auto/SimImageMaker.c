@@ -2,10 +2,10 @@
 #include "common.h"
 
 void fn_8009CC04(u32 arg0, u8 *arg1) {
-    arg1[3] = arg0;
     arg1[0] = arg0 >> 24;
     arg1[1] = arg0 >> 16;
     arg1[2] = arg0 >> 8;
+    arg1[3] = arg0;
 }
 
 void fn_8009CC24(void *arg0, s32 *arg1) {
@@ -13,10 +13,11 @@ void fn_8009CC24(void *arg0, s32 *arg1) {
 }
 
 u32 fn_8009CC54(u32 arg0, u32 arg1, u32 arg2, u32 arg3) {
-    return (((arg0 & 0xFF) + (arg1 & 0xFF) + (arg2 & 0xFF) + (arg3 & 0xFF)) >> 2)
-         | (((((arg0 >> 8) & 0xFF) + ((arg1 >> 8) & 0xFF) + ((arg2 >> 8) & 0xFF) + ((arg3 >> 8) & 0xFF)) << 6) & 0x1FF00)
-         | (((((arg0 >> 16) & 0xFF) + ((arg1 >> 16) & 0xFF) + ((arg2 >> 16) & 0xFF) + ((arg3 >> 16) & 0xFF)) << 14) & 0x1FF0000)
-         | ((((arg0 >> 24) + (arg1 >> 24) + (arg2 >> 24) + (arg3 >> 24)) << 22) & 0xFF000000);
+    u32 b = (arg0 & 0xFF) + (arg1 & 0xFF) + (arg2 & 0xFF) + (arg3 & 0xFF);
+    u32 g = ((arg0 >> 8) & 0xFF) + ((arg1 >> 8) & 0xFF) + ((arg2 >> 8) & 0xFF) + ((arg3 >> 8) & 0xFF);
+    u32 r = ((arg0 >> 16) & 0xFF) + ((arg1 >> 16) & 0xFF) + ((arg2 >> 16) & 0xFF) + ((arg3 >> 16) & 0xFF);
+    u32 a = (arg0 >> 24) + (arg1 >> 24) + (arg2 >> 24) + (arg3 >> 24);
+    return (b >> 2) | (((g >> 2) << 8) & 0xFF00) | (((r >> 2) << 16) & 0xFF0000) | ((a >> 2) << 24);
 }
 
 void *fn_8009CCE4(void *arg0) {
@@ -56,6 +57,13 @@ void fn_8009D0F8(void *arg0, s32 arg1) {
 
 void fn_8009D100(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x88) = arg1;
+}
+
+void fn_8009D108(void *arg0, s32 arg1, s32 arg2) {
+    struct { char pad[0x8C]; s32 arr[1]; } *self = arg0;
+    if (arg1 <= 0x16) {
+        self->arr[arg1] = arg2;
+    }
 }
 
 void fn_8009E9A8(void) {
