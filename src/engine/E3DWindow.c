@@ -166,6 +166,11 @@ void fn_802E8E7C(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x2C) = (s32) lbl_80494DFC;
 }
 
+void fn_802E9D34(void *arg0, void *arg1);
+void fn_802EA264(void *arg0, s32 arg1) {
+    fn_802E9D34(arg0, fn_802E5F90_inline(arg0, arg1));
+}
+
 void fn_802EB384(void *arg0, void *arg1);
 void fn_802EB3E4(void *arg0, s32 arg1) {
     fn_802EB384(arg0, fn_802E5F90_inline(arg0, arg1));
