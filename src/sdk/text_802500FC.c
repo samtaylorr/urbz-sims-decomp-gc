@@ -358,6 +358,36 @@ void fn_80261530(void) {
     fn_80261458(0);
 }
 
+extern u32 lbl_80495F00;
+extern s32 lbl_80495F04;
+u32 fn_8026158C(u32 error) {
+    extern DVDCommandBlock *lbl_80495ED0;
+    if (error == 0x20400) {
+        lbl_80495F00 = error;
+        return 1;
+    }
+    error &= 0xffffff;
+    if ((error == 0x62800) || (error == 0x23a00) || (error == 0xb5a01)) {
+        return 0;
+    }
+    ++lbl_80495F04;
+    if (lbl_80495F04 == 2) {
+        if (error == lbl_80495F00) {
+            lbl_80495F00 = error;
+            return 1;
+        } else {
+            lbl_80495F00 = error;
+            return 2;
+        }
+    }
+    lbl_80495F00 = error;
+    if ((error == 0x31100) || (lbl_80495ED0->command == 5)) {
+        return 2;
+    } else {
+        return 3;
+    }
+}
+
 s32 fn_802628C4(u32 arg0) {
     extern u32 lbl_80494A3C;
     if ((arg0 == 1U) || ((u32) (arg0 - 4) <= 1U) || (arg0 == 0xEU)) {
