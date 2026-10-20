@@ -783,6 +783,11 @@ void fn_80089638(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0xBC) = arg1;
 }
 
+void fn_80089640(f32 arg0) {
+    extern f32 lbl_804966A0;
+    lbl_804966A0 = arg0;
+}
+
 f32 fn_80089648(void) {
     extern f32 lbl_804966A0;
     return lbl_804966A0;
