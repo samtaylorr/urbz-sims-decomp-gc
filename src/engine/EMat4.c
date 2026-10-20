@@ -77,6 +77,13 @@ char **fn_802C7874(char **arg0, s32 arg1) {
     return arg0;
 }
 
+s32 fn_802C78D0(s32 arg0, s32 arg1) {
+    M2C_UNK fn_802C77D0(s32, s32);
+    fn_802C7874((char **)arg0, arg1);
+    fn_802C77D0(arg0, arg1);
+    return arg0;
+}
+
 void fn_802C7A84(void) {
 
 }
