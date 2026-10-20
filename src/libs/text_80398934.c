@@ -868,7 +868,9 @@ void fn_8039CBEC(s32 *first, s32 *last, s32 *val, SortComp *comp) {
 }
 
 static inline void SortComp_UnguardedInsertionSort(s32 *first, s32 *last, SortComp comp) {
-    ((void (*)(s32 *, s32 *, s32 *, SortComp))fn_8039CBEC)(first, last, 0, comp);
+    SortComp c = comp;
+
+    ((void (*)(s32 *, s32 *, s32 *, SortComp))fn_8039CBEC)(first, last, 0, c);
 }
 
 void fn_8039CC48(s32 *first, s32 *last, SortComp *comp) {
