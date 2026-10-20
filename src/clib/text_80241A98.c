@@ -32,6 +32,19 @@ s32 fn_80245C8C(void) {
     return 0;
 }
 
+s32 fn_80247C34(void) {
+    extern s32 lbl_80494988;
+    s32 *p = (s32 *)(lbl_80494988 + 0x58);
+    *p = *p * 0x41C64E6D + 0x3039;
+    return *p & 0x7FFFFFFF;
+}
+
+void fn_80247C58(void) {
+    extern char lbl_803EBB7C[];
+    s32 fn_802530CC();
+    fn_802530CC(0, 0, lbl_803EBB7C, (char *)__builtin_return_address(0) - 4);
+}
+
 void fn_80248078(void) {
     fn_80247D48();
 }
