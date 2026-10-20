@@ -33,6 +33,10 @@ void fn_802F1130(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0xD00) = 0;
 }
 
+extern s32 lbl_80494E5C;
+extern f32 lbl_803F0EC4[];
+extern f32 lbl_803F0EC8[];
+
 void fn_802F14E0(void *arg0) {
     M2C_UNK fn_80327B0C(s32);
     fn_80327B0C(M2C_FIELD(arg0, s32 *, 4));
