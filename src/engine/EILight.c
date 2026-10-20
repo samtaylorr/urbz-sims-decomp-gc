@@ -119,6 +119,10 @@ f32 fn_802F0394(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0xA0);
 }
 
+void fn_802F039C(u8 *arg0, EILightVec3 *arg1) {
+    *(EILightVec3 *)(arg0 + 0xA4) = *arg1;
+}
+
 s32 fn_802F03BC(s32 arg0) {
     return arg0 + 0xA4;
 }
