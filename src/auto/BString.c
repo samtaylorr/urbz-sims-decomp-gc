@@ -2809,6 +2809,10 @@ void fn_800EA6EC(void *self, s32 flags) {
     }
 }
 
+void fn_800EA744(u64 *arg0) {
+    *arg0 = 0;
+}
+
 void fn_800EA7F8(u64 *arg0, s32 arg1) {
     *arg0 |= (u64)1 << arg1;
 }
