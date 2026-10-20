@@ -19,6 +19,17 @@ void *fn_802D3668(void *arg0, char *arg1) {
     return arg0;
 }
 
+void *fn_802D3840(void *arg0, void *arg1) {
+    void *fn_802D3714(void *);
+    void *temp_r3;
+    void *temp_r9;
+
+    temp_r3 = fn_802D3714(arg0);
+    temp_r9 = M2C_FIELD(temp_r3, void **, 0x18);
+    M2C_FIELD(temp_r9, M2C_UNK (**)(void *, void *, s32), 0x34)((s8 *)temp_r3 + M2C_FIELD(temp_r9, s16 *, 0x30), (s8 *)arg1 + 0xC, 4);
+    return temp_r3;
+}
+
 void *fn_802D3894(void *arg0) {
     extern u8 lbl_804194F8[];
     M2C_FIELD(arg0, void **, 0x18) = lbl_804194F8;
