@@ -1883,6 +1883,13 @@ void fn_803A3918(s32 *first, s32 *last, s32 comp) {
     }
 }
 
+void fn_803A3998(s32 *first, s32 *last, s32 comp) {
+    s32 *result = last - 1;
+    s32 val = *result;
+    *result = *first;
+    fn_803A37FC(first, 0, result - first, val, comp);
+}
+
 void fn_803A39D8(s32 *first, s32 *middle, s32 *last, s32 *val, s32 comp);
 void fn_803A3AA4(s32 *first, s32 *middle, s32 *last, s32 comp) {
     fn_803A39D8(first, middle, last, 0, comp);
