@@ -5,6 +5,12 @@ static inline s32 ListCount(u8 *list) {
     return *(s32 *)(list + 4);
 }
 
+extern void fn_802482F8(void *, void *, s32);
+static inline u8 *ReadData(void *dst, u8 *src, s32 size) {
+    fn_802482F8(dst, src, size);
+    return src + size;
+}
+
 void fn_802D2FD0(void);
 void fn_80329264(void) {
     fn_802D2FD0();
