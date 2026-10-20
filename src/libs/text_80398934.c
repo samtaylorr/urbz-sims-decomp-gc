@@ -6576,6 +6576,12 @@ void fn_803B9648(s32 self, s32 flags) {
     }
 }
 
+extern void fn_803B971C(void **);
+void fn_803B971C(void **arg0) {
+    extern u8 lbl_804194A0[];
+    *arg0 = lbl_804194A0;
+}
+
 void fn_803B9750(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
