@@ -176,6 +176,11 @@ void fn_802EB3E4(void *arg0, s32 arg1) {
     fn_802EB384(arg0, fn_802E5F90_inline(arg0, arg1));
 }
 
+void fn_802EB484(void *arg0, void *arg1);
+void fn_802EB4F0(void *arg0, s32 arg1) {
+    fn_802EB484(arg0, fn_802E5F90_inline(arg0, arg1));
+}
+
 void fn_802EB650(void);
 void fn_802EB590(void) {
     fn_802EB650();
