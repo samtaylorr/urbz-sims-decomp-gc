@@ -173,6 +173,45 @@ s32 fn_8012F7A8(s32 arg0, s32 arg1) {
     return 1;
 }
 
+void *fn_8012F7F0(void *arg0) {
+    void fn_801297A4(void *);
+    if (M2C_FIELD(M2C_FIELD(arg0, void **, 0x184), s32 *, 0x7C) == 0) {
+        fn_801297A4(M2C_FIELD(arg0, void **, 0x184));
+    }
+    return M2C_FIELD(arg0, void **, 0x184);
+}
+
+void fn_8012F7F0_dummy(void);
+void fn_8012F830(void *arg0, u8 *p) {
+    u8 t = p[0];
+    p[0] = p[1];
+    p[1] = t;
+}
+
+void fn_8012F844(void *arg0, u8 *p) {
+    u8 t0 = p[0];
+    u8 t1 = p[1];
+    p[0] = p[3];
+    p[1] = p[2];
+    p[2] = t1;
+    p[3] = t0;
+}
+
+void fn_8012F868(void *arg0, void *arg1) {
+    void fn_8012FAD0(void *, void *, void *);
+    struct {
+        s32 a;
+        s32 b;
+        s32 c;
+        s32 d;
+    } s;
+    s.a = 0;
+    s.d = 0;
+    s.b = 0;
+    s.c = 0;
+    fn_8012FAD0(arg0, arg1, &s);
+}
+
 void fn_8012FE00(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x180) = arg1;
 }
