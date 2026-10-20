@@ -60,6 +60,10 @@ s32 fn_801B2D08(void) {
     return 0;
 }
 
+s32 fn_801B2F3C(void *arg0) {
+    return ++M2C_FIELD(arg0, s32 *, 0x64);
+}
+
 s32 fn_801B36E8(void) {
     return 8;
 }
