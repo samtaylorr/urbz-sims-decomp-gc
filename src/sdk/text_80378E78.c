@@ -630,12 +630,12 @@ s32 fn_80389994(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x84);
 }
 
-s32 fn_8038AD04(void) {
-    s32 fn_8025BFA8();
+s32 fn_8038AD04(s32 chan) {
+    s32 fn_8025BFA8(s32);
     if (*(u8 *)0x800030E3 & 0x80) {
         return 0;
     }
-    return fn_8025BFA8();
+    return fn_8025BFA8(chan);
 }
 
 s32 fn_8038B5A0(s32 chan, s32 arg1, s32 arg2) {
