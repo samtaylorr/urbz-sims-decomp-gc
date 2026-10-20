@@ -16,6 +16,8 @@ typedef struct DVDCommandBlock {
     void *userData;
 } DVDCommandBlock;
 
+extern DVDCommandBlock *lbl_80495ED0;
+
 unsigned long fn_8024FF70(void);
 void fn_8024FF78(unsigned long);
 void fn_802500FC(void) {
@@ -420,7 +422,7 @@ s32 fn_80261640(u32 resume) {
             ((void (*)(s32, DVDCommandBlock *))finished->callback)(-3, finished);
         }
         if (lbl_80495EF4) {
-            lbl_80495EF4(0, finished);
+            (*lbl_80495EF4)(0, finished);
         }
         fn_802622E0();
         return 1;
