@@ -3192,6 +3192,10 @@ void fn_800EF048(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     fn_800EC3E4(arg0, arg2, arg1, fn_800EF6F8(arg0) - arg2, arg3);
 }
 
+s32 fn_800EF6CC(s32 arg0, s32 arg1) {
+    return (u32)fn_800EEFC4(arg0, arg1, 0, -1) >> 31;
+}
+
 s32 fn_800EF6F8(void **arg0) {
     return M2C_FIELD(*arg0, s32 *, 4);
 }
