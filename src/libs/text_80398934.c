@@ -340,6 +340,23 @@ void fn_8039AE08(void) {
 
 }
 
+void fn_8039AF90(s32 *first, s32 *last, s32 comp) {
+    s32 len = last - first;
+    s32 parent;
+
+    if (len < 2) {
+        return;
+    }
+    parent = (len - 2) / 2;
+    while (1) {
+        fn_8039AE74(first, parent, len, first[parent], comp);
+        if (parent == 0) {
+            return;
+        }
+        parent--;
+    }
+}
+
 void fn_8039B010(s32 *first, s32 *last, s32 comp) {
     s32 val = last[-1];
     last[-1] = *first;
@@ -1946,6 +1963,11 @@ void fn_803A4804(s32 arg0, void *arg1) {
             var_r31 = temp_r30;
         } while (var_r31 != NULL);
     }
+}
+
+void fn_803A4AE8(s32 *first, s32 *middle, s32 *last, s32 *val, s32 comp);
+void fn_803A4BB4(s32 *first, s32 *middle, s32 *last, s32 comp) {
+    fn_803A4AE8(first, middle, last, 0, comp);
 }
 
 void fn_803A4E30(s32 *first, s32 *last, s32 comp);
