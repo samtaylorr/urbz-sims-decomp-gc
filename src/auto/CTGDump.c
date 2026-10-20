@@ -57,6 +57,13 @@ s32 fn_800F5330(s32 arg0, s32 arg1) {
     return arg0;
 }
 
+s32 fn_800F5374(s32 arg0, s32 arg1) {
+    char buf[64];
+
+    fn_80245BB4(buf, lbl_803D5A4C, arg1);
+    return arg0;
+}
+
 void fn_800F5448(void) {
     M2C_UNK fn_800F53FC(M2C_UNK, M2C_UNK);
     fn_800F53FC(1, 0xFFFF);
