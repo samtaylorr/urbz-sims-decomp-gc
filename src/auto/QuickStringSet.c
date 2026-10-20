@@ -559,6 +559,10 @@ s32 fn_800FD808(void *arg0, s32 arg1) {
     return 0;
 }
 
+s32 fn_800FD9D4(void *arg0) {
+    return ++M2C_FIELD(arg0, s32 *, 0x1C);
+}
+
 s32 fn_800FD9E8(void **obj) {
     s32 n;
     n = --M2C_FIELD(obj, s32 *, 0x1C);
