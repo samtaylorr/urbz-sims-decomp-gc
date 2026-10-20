@@ -2813,6 +2813,10 @@ void fn_800EA6EC(void *self, s32 flags) {
     }
 }
 
+Bits64 fn_800EA714(Bits64 *arg0) {
+    return *arg0;
+}
+
 Bits64 fn_800EA72C(Bits64 *arg0) {
     return *arg0;
 }
