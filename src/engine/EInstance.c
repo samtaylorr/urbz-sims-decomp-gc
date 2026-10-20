@@ -43,6 +43,27 @@ s32 fn_802F150C(void) {
     return lbl_80494E5C;
 }
 
+extern f32 lbl_803F0EC4[];
+extern f32 lbl_803F0EC8[];
+void fn_802F1514(void *arg0, f32 value) {
+    if (value <= lbl_803F0EC4[0]) {
+        value = lbl_803F0EC4[0];
+    }
+    if (value >= lbl_803F0EC8[0]) {
+        value = lbl_803F0EC8[0];
+    }
+    ((f32 *)((char *)arg0 + 0x68))[lbl_80494E5C] = value;
+}
+
+f32 fn_802F1558(void *arg0) {
+    f32 *vals = (f32 *)((char *)arg0 + 0x68);
+    return vals[lbl_80494E5C];
+}
+
+void fn_802F156C(void *arg0, s32 arg1) {
+    ((s32 *)((char *)arg0 + 0x7C))[lbl_80494E5C] = arg1;
+}
+
 void fn_802F1604(void) {
     M2C_UNK fn_802D1FC8(M2C_UNK);
     fn_802D1FC8(0x8C);
