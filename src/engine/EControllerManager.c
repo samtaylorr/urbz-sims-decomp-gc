@@ -98,6 +98,11 @@ void fn_803341D4(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     fn_80333B64(arg0, &p, 0, 1, arg1, arg2, arg3);
 }
 
+void fn_80334224(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    ECtrlPair p = lbl_803F3744[0];
+    fn_80333B64(arg0, &p, 0, 1, arg1, arg2, arg3);
+}
+
 s32 fn_803347A4(s32 arg0) {
     return 1 << arg0;
 }
