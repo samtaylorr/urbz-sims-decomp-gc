@@ -61,16 +61,17 @@ void fn_80248230(s32 arg0, s32 arg1, s32 arg2) {
     fn_80248098(lbl_80494988, arg0, arg1, arg2);
 }
 
-s32 fn_80248268(const void *m1, const void *m2, u32 n) {
+s32 fn_80248268(const void *m1, const void *m2, u32 len) {
     unsigned char *s1 = (unsigned char *)m1;
     unsigned char *s2 = (unsigned char *)m2;
     unsigned long *a1;
     unsigned long *a2;
+    int n = len;
 
-    if (!(n < 4) && !(((long)s1 | (long)s2) & 3)) {
+    if (!((unsigned)n < 4) && !(((long)s1 | (long)s2) & 3)) {
         a1 = (unsigned long *)s1;
         a2 = (unsigned long *)s2;
-        while (n >= 4) {
+        while ((unsigned)n >= 4) {
             if (*a1 != *a2)
                 break;
             a1++;
@@ -81,8 +82,7 @@ s32 fn_80248268(const void *m1, const void *m2, u32 n) {
         s2 = (unsigned char *)a2;
     }
 
-    while (n) {
-        n--;
+    while (n--) {
         if (*s1 != *s2)
             return *s1 - *s2;
         s1++;
@@ -123,34 +123,32 @@ void *fn_802482F8(void *dst0, const void *src0, u32 len0) {
     return dst0;
 }
 
-void *fn_80248488(void *m, s32 c, u32 n) {
+void *fn_80248488(void *m, s32 c, s32 n) {
     char *s = (char *)m;
     unsigned long buffer;
     unsigned long *aligned_addr;
 
-    if (!(n < 4) && !((long)m & 3)) {
+    if (!((u32)n < 4) && !((long)m & 3)) {
         aligned_addr = (unsigned long *)m;
         c &= 0xff;
         buffer = (c << 8) | c;
         buffer |= (buffer << 16);
-        while (n >= 16) {
+        while ((u32)n >= 16) {
             *aligned_addr++ = buffer;
             *aligned_addr++ = buffer;
             *aligned_addr++ = buffer;
             *aligned_addr++ = buffer;
             n -= 16;
         }
-        while (n >= 4) {
+        while ((u32)n >= 4) {
             *aligned_addr++ = buffer;
             n -= 4;
         }
         s = (char *)aligned_addr;
     }
 
-    while (n != 0) {
-        n--;
+    while (n--)
         *s++ = (char)c;
-    }
 
     return m;
 }
