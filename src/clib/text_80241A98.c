@@ -97,6 +97,11 @@ void fn_8024F8BC(void) {
     fn_802530CC(0, 0, lbl_803EC0BC);
 }
 
+void fn_8024F98C(void) {
+    void fn_80246D2C(void) __attribute__((noreturn));
+    fn_80246D2C();
+}
+
 void fn_8024FA04(void) {
 
 }
