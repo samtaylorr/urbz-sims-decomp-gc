@@ -8,6 +8,30 @@ typedef struct Vec3 {
 extern void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
 extern void fn_802D20E8(void *);
+extern void *fn_802D197C(void *, u32, s32);
+extern void *fn_802DC3C0(void *, u32, s32, s32, s32);
+extern void *fn_802D0B3C(void);
+extern void fn_80248488(void *, s32, s32);
+
+static inline void *ESimsCam_AllocAligned(u32 size) {
+    void *heap;
+    void *p;
+
+    heap = ((void *(*)(void))fn_802D0AB8)();
+    if (size == 0) {
+        return NULL;
+    }
+    size = (size + 0xF) & ~0xF;
+    p = fn_802D197C(heap, size, 0x10);
+    if (p == NULL) {
+        p = fn_802DC3C0(heap, size, 0x10, 0, 0);
+        if (p == NULL && heap == ((void *(*)(void))fn_802D0AB8)()) {
+            return fn_802DC3C0(fn_802D0B3C(), size, 0x10, 0, 0);
+        }
+    }
+    return p;
+}
+
 void fn_8000D48C(void *arg0) {
     f32 temp_f13;
 
@@ -106,6 +130,32 @@ void fn_80014164(void *arg0, s32 arg1) {
 
 void fn_80014A9C(void) {
 
+}
+
+extern void *fn_802D197C(void *, u32, s32);
+extern void *fn_802DC3C0(void *, u32, s32, s32, s32);
+extern void *fn_802D0B3C(void);
+extern void fn_80248488(void *, s32, s32);
+void *fn_80014BD0(u32 size) {
+    void *heap;
+    void *p;
+    u32 n;
+
+    heap = ((void *(*)(void))fn_802D0AB8)();
+    if (size == 0) {
+        p = NULL;
+    } else {
+        n = (size + 0xF) & ~0xF;
+        p = fn_802D197C(heap, n, 0x10);
+        if (p == NULL) {
+            p = fn_802DC3C0(heap, n, 0x10, 0, 0);
+            if (p == NULL && heap == ((void *(*)(void))fn_802D0AB8)()) {
+                p = fn_802DC3C0(fn_802D0B3C(), n, 0x10, 0, 0);
+            }
+        }
+    }
+    fn_80248488(p, 0, size);
+    return p;
 }
 
 void fn_80014C94(void *arg0) {
