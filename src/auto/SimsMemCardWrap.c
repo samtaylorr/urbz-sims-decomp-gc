@@ -60,6 +60,12 @@ s32 fn_800A4FCC(s32 arg0, s32 *arg1) {
     return temp_r3;
 }
 
+void fn_800A50DC(void *arg0, s32 arg1) {
+    M2C_UNK fn_8007046C(void *, s32);
+    extern void *lbl_8041FAD0[];
+    fn_8007046C(lbl_8041FAD0[0], arg1);
+}
+
 void fn_800A51BC(void) {
 
 }
