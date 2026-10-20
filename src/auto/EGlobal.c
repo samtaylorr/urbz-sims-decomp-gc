@@ -109,6 +109,11 @@ s32 fn_8004F0C8(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x368);
 }
 
+void fn_8004F0D0(void *arg0, s32 arg1) {
+    extern s32 lbl_80494F40;
+    lbl_80494F40 = arg1;
+}
+
 extern s32 lbl_80494F40;
 s32 fn_8004F0D8(void) {
     return lbl_80494F40;
@@ -153,6 +158,16 @@ void fn_8004F128(void *arg0) {
 
 u16 fn_8004F134(u16 *arg0) {
     return *arg0;
+}
+
+u16 fn_8004F13C(void *arg0, s32 arg1) {
+    u16 *vals = (u16 *)((char *)arg0 + 0x92);
+    return vals[arg1];
+}
+
+u16 fn_8004F14C(void *arg0, s32 arg1, s32 arg2) {
+    u16 (*vals)[6] = (u16 (*)[6])((char *)arg0 + 2);
+    return vals[arg1][arg2];
 }
 
 void fn_8004F164(void) {
