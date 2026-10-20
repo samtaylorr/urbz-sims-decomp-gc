@@ -6188,6 +6188,21 @@ void fn_803B74B8(char *self) {
     fn_802AEABC(self + 8);
 }
 
+void fn_803B74DC(void *arg0, s32 arg1) {
+    extern char lbl_80418308[];
+    extern void (*lbl_80443318[])(void *, s32);
+    extern void fn_802ADDF4(void *, s32);
+    extern void fn_802B709C(void *, s32);
+    extern void fn_802A1EF0(void *);
+    M2C_FIELD(arg0, void **, 4) = lbl_80418308;
+    fn_802ADDF4((u8 *)arg0 + 8, 2);
+    fn_802B709C(arg0, 0);
+    if (arg1 & 1) {
+        fn_802A1EF0(arg0);
+        lbl_80443318[0]((u8 *)arg0 - 8, 0x20);
+    }
+}
+
 void fn_803B75CC(char *self) {
     extern void fn_802ADE44(void *);
     fn_802ADE44(self + 8);
