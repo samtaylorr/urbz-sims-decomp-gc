@@ -1499,6 +1499,11 @@ void fn_800E1A34(void) {
     lbl_804966D8 = 0;
 }
 
+void fn_800E1A40(s32 arg0) {
+    extern s32 lbl_804966E4;
+    lbl_804966E4 = arg0;
+}
+
 extern s32 lbl_80434A9C[];
 extern s32 lbl_8041F754[];
 void fn_800E1A48(void) {
