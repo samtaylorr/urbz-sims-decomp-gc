@@ -279,6 +279,21 @@ s32 fn_8019EF58(void *arg0) {
     return ++M2C_FIELD(arg0, s32 *, 0x64);
 }
 
+s32 fn_8019EF6C(void *arg0) {
+    s32 n;
+    void *vt;
+
+    n = --M2C_FIELD(arg0, s32 *, 0x64);
+    if (n == 0) {
+        if (arg0 != NULL) {
+            vt = M2C_FIELD(arg0, void **, 0);
+            M2C_FIELD(vt, void (**)(void *, s32), 0x64)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x60), 3);
+        }
+        return 0;
+    }
+    return n;
+}
+
 s32 fn_8019F070(void) {
     return 0;
 }
