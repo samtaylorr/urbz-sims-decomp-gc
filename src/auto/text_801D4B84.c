@@ -75,7 +75,7 @@ s32 fn_801D4CC0(u8 *self, s32 arg1, Unk801D4CC0 *out, f32 *outf) {
 }
 
 void fn_801D4E00(void) {
-    M2C_UNK fn_801D4D50(M2C_UNK, M2C_UNK);
+    extern void fn_801D4D50(s32, s32);
     fn_801D4D50(1, 0xFFFF);
 }
 
