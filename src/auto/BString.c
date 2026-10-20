@@ -2849,16 +2849,6 @@ void fn_800EA6C0(u64 *arg0) {
     *arg0 = 0;
 }
 
-typedef struct UnkDC234 {
-    s32 unk0;
-    s32 unk4;
-    s32 unk8;
-    s32 unkC;
-    s32 unk10;
-    void *unk14;
-    f32 unk18;
-} UnkDC234;
-
 typedef struct Bits64 {
     u64 bits;
 } Bits64;
