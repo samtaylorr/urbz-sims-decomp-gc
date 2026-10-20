@@ -433,6 +433,12 @@ void fn_80261A1C(void) {
     fn_802664BC(fn_80261A44);
 }
 
+void fn_802621FC(void);
+void fn_802663EC(void (*)(void));
+void fn_802621D4(void) {
+    fn_802663EC(fn_802621FC);
+}
+
 s32 fn_802628C4(u32 arg0) {
     extern u32 lbl_80494A3C;
     if ((arg0 == 1U) || ((u32) (arg0 - 4) <= 1U) || (arg0 == 0xEU)) {
