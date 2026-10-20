@@ -266,6 +266,23 @@ s32 fn_802D5EC8(s32 arg0, s32 *arg1, s32 arg2) {
     return arg0;
 }
 
+void fn_802D69E4(u16 **arg0) {
+    u16 *var_r3;
+    u16 var_r0;
+
+    var_r3 = *arg0;
+    var_r0 = *var_r3;
+    if ((s32) var_r0 != 0) {
+        do {
+            if ((s32) var_r0 == 0x5C) {
+                M2C_FIELD(var_r3, u16 *, 0) = 0x2F;
+            }
+            var_r0 = M2C_FIELD(var_r3, u16 *, 2);
+            var_r3 += 1;
+        } while ((s32) var_r0 != 0);
+    }
+}
+
 void **fn_802D6A14(void **self) {
     extern u8 lbl_80419540[];
     *self = lbl_80419540;
