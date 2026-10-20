@@ -311,9 +311,9 @@ void fn_800CDB40(void) {
     M2C_FIELD(temp_r9, M2C_UNK (**)(void *), 0x94)(temp_r3 + M2C_FIELD(temp_r9, s16 *, 0x90));
 }
 
-void fn_800CD104(void);
-void fn_800CED30(void) {
-    fn_800CD104();
+void fn_800CD104(void *self);
+void fn_800CED30(void *self) {
+    fn_800CD104(self);
 }
 
 void fn_800CEDF8(void *arg0, s32 arg1) {
