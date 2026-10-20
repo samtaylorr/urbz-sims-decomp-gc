@@ -122,6 +122,10 @@ s32 fn_801B44B0(void) {
     return 0;
 }
 
+s32 fn_801B4528(void *arg0) {
+    return ++M2C_FIELD(arg0, s32 *, 0x14);
+}
+
 s16 fn_801B47D4(void *arg0) {
     return M2C_FIELD(arg0, s16 *, 0x18);
 }
