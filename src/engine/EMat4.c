@@ -63,6 +63,20 @@ void fn_802C725C(u8 **arg0, s32 arg1, u8 arg2) {
     }
 }
 
+char **fn_802C7874(char **arg0, s32 arg1) {
+    M2C_UNK fn_802C69B0(s32, s32);
+    char *p;
+
+    p = *arg0;
+    if (*p == arg1) {
+        do {
+            p++;
+        } while (*p == arg1);
+        fn_802C69B0((s32)arg0, (s32)p);
+    }
+    return arg0;
+}
+
 void fn_802C7A84(void) {
 
 }
