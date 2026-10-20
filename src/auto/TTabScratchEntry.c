@@ -1002,9 +1002,10 @@ s32 fn_801A3B04(void *arg0) {
 }
 
 void fn_801A3B10(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, u16 *, 0x110) &= ~0x400;
+    s32 v = M2C_FIELD(arg0, u16 *, 0x110) & ~0x400;
+    M2C_FIELD(arg0, u16 *, 0x110) = v;
     if (arg1 != 0) {
-        M2C_FIELD(arg0, u16 *, 0x110) |= 0x400;
+        M2C_FIELD(arg0, u16 *, 0x110) = v | 0x400;
     }
 }
 
@@ -1013,9 +1014,10 @@ s32 fn_801A3B30(void *arg0) {
 }
 
 void fn_801A3B3C(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, u16 *, 0x110) &= ~0x800;
+    struct { u8 pad[0x110]; u16 a : 4; u16 flag : 1; u16 rest : 11; u16 b; s16 c; } *self = arg0;
+    self->flag = 0;
     if (arg1 != 0) {
-        M2C_FIELD(arg0, u16 *, 0x110) |= 0x800;
+        self->flag = 1;
     }
 }
 
