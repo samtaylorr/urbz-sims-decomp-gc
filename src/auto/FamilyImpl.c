@@ -248,6 +248,10 @@ s32 fn_8010C5F8(void) {
     return 1;
 }
 
+s32 fn_8010C600(void *arg0) {
+    return ++M2C_FIELD(arg0, s32 *, 0x10);
+}
+
 s32 fn_8010C670(void) {
     return 0;
 }
