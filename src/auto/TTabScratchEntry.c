@@ -517,7 +517,10 @@ s32 fn_8019F4FC(u8 *self) {
 }
 
 s32 fn_8019F504(void *arg0) {
-    return (M2C_FIELD(arg0, s32 *, 0x1C) & 0x1000) != 0;
+    if (M2C_FIELD(arg0, s32 *, 0x1C) & 0x1000) {
+        return 1;
+    }
+    return 0;
 }
 
 s32 fn_8019F51C(void *arg0) {
