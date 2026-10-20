@@ -125,6 +125,16 @@ void fn_80347638(s32 arg0) {
     fn_8037A938(lbl_8046DA20, arg0, 0);
 }
 
+s32 fn_80347668(void) {
+    s32 fn_8037AA00(void *, s32 *, s32);
+    extern u8 lbl_8046DA20[];
+    s32 sp8;
+    if (fn_8037AA00(lbl_8046DA20, &sp8, 0) != 1) {
+        return 0;
+    }
+    return sp8;
+}
+
 void fn_80347E54(void) {
     void fn_80258FB8(void *);
     extern u8 lbl_8046C6A8[];
