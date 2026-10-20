@@ -559,6 +559,34 @@ s32 fn_800FD808(void *arg0, s32 arg1) {
     return 0;
 }
 
+s32 fn_800FD8C4(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    extern s32 fn_8031C444(s32);
+    extern s32 fn_800FD1A4(void *, s16, s32, s32);
+    s32 id;
+    s32 h;
+
+    id = 0;
+    switch (arg2) {
+    case 1:
+        id = M2C_FIELD(arg0, s32 *, 0x18);
+        break;
+    case 2:
+        id = M2C_FIELD(arg0, s32 *, 0x10);
+        break;
+    case 3:
+        id = M2C_FIELD(arg0, s32 *, 0x14);
+        break;
+    }
+    if (id == 0) {
+        return 0;
+    }
+    h = fn_8031C444(id);
+    if (h == 0) {
+        return 0;
+    }
+    return fn_800FD1A4(arg0, h, arg3, 1);
+}
+
 s32 fn_800FD964(void **arg0, s32 arg1, void **arg2) {
     void *vt;
 
