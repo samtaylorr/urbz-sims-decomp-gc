@@ -569,11 +569,10 @@ s16 fn_800FD858(void *arg0, s32 arg1) {
         p = M2C_FIELD(arg0, s32 *, 0x14);
         if (p != 0) {
             ret = fn_8031C470(p, arg1);
-            if (ret != 0) {
-                return ret;
-            }
         }
-        ret = fn_8031C470(M2C_FIELD(arg0, s32 *, 0x18), arg1);
+        if (ret == 0) {
+            ret = fn_8031C470(M2C_FIELD(arg0, s32 *, 0x18), arg1);
+        }
     }
     return ret;
 }
