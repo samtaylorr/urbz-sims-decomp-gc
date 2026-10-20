@@ -742,14 +742,8 @@ void fn_80087D64(s32 arg0) {
     extern u8 lbl_803CB0D0[];
     extern u8 lbl_803CB0D4[];
     extern s32 lbl_8041FA1C[];
-    u8 *s;
 
-    if (arg0 != 0) {
-        s = lbl_803CB0D0;
-    } else {
-        s = lbl_803CB0D4;
-    }
-    fn_8000AA2C(lbl_8041FA1C[0], lbl_803CB0C8, 0, 0, 1, s);
+    fn_8000AA2C(lbl_8041FA1C[0], lbl_803CB0C8, 0, 0, 1, arg0 ? lbl_803CB0D0 : lbl_803CB0D4);
 }
 
 void fn_8008824C(void *arg0) {
