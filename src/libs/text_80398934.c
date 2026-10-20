@@ -6960,6 +6960,11 @@ void fn_803BDA1C(void) {
     fn_80335FD8();
 }
 
+void fn_803BDE90(s32 *first, s32 *middle, s32 *last, s32 *val, s32 comp);
+void fn_803BDFC8(s32 *first, s32 *middle, s32 *last, s32 comp) {
+    fn_803BDE90(first, middle, last, 0, comp);
+}
+
 void fn_803BE56C(void) {
     fn_80335FD8();
 }
