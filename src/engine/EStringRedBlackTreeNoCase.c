@@ -23,6 +23,37 @@ s32 fn_80364F28(s32 *self) {
     return self[7];
 }
 
+extern char lbl_80401348[];
+void fn_80364FE4(void *arg0, void *arg1) {
+    void *temp_r10;
+    void *temp_r11;
+    void *temp_r9;
+
+    temp_r11 = M2C_FIELD(arg1, void **, 4);
+    M2C_FIELD(arg1, void **, 4) = M2C_FIELD(temp_r11, void **, 0);
+    temp_r10 = M2C_FIELD(temp_r11, void **, 0);
+    if (temp_r10 != lbl_80401348) {
+        M2C_FIELD(temp_r10, void **, 8) = arg1;
+    }
+    if (temp_r11 != lbl_80401348) {
+        M2C_FIELD(temp_r11, void **, 8) = M2C_FIELD(arg1, void **, 8);
+    }
+    temp_r9 = M2C_FIELD(arg1, void **, 8);
+    if (temp_r9 != NULL) {
+        if (arg1 == M2C_FIELD(temp_r9, void **, 0)) {
+            M2C_FIELD(temp_r9, void **, 0) = temp_r11;
+        } else {
+            M2C_FIELD(temp_r9, void **, 4) = temp_r11;
+        }
+    } else {
+        M2C_FIELD(arg0, void **, 8) = temp_r11;
+    }
+    M2C_FIELD(temp_r11, void **, 0) = arg1;
+    if (arg1 != lbl_80401348) {
+        M2C_FIELD(arg1, void **, 8) = temp_r11;
+    }
+}
+
 s32 fn_80365A3C(void **arg0) {
     s32 var_r9;
     void *var_r3;
