@@ -8,6 +8,16 @@ void *fn_802FFD98(void *arg0) {
     return arg0;
 }
 
+void fn_802FFDD0(u8 *self, s32 flags) {
+    extern void fn_803BAE58(u8 *, s32);
+    extern void fn_802D20E8(u8 *);
+    *(s32 *)(self + 0x14) = 0;
+    fn_803BAE58(self, 2);
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_802FFE1C(u8 *self) {
     extern void fn_80300A40(u8 *);
     s32 i;
