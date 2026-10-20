@@ -27,6 +27,15 @@ void fn_802FFE1C(u8 *self) {
     }
 }
 
+void fn_802FFE78(u8 *self) {
+    extern void fn_80300A80(u8 *);
+    s32 i;
+
+    for (i = 0; i < *(s32 *)(self + 4); i++) {
+        fn_80300A80(*(u8 **)self + i * 0x6C);
+    }
+}
+
 s32 fn_802FFED4(u8 *self) {
     extern void fn_80300A40(u8 *);
     extern s32 fn_80300ACC(u8 *);
@@ -50,6 +59,22 @@ s32 fn_802FFF68(void) {
 
 void fn_802FFF70(void) {
 
+}
+
+void fn_80300044(u8 *self, u8 *arg1) {
+    s32 i;
+
+    for (i = 0; i < *(s32 *)(self + 4); i++) {
+        u8 *items = *(u8 **)self;
+        u8 *item = items + i * 0x6C;
+        u8 *obj = *(u8 **)(*(u8 **)(item + 8) + 0x20);
+        u8 *vt = *(u8 **)(obj + 0xF0);
+        (*(void (**)(void *, u8 *, s32))(vt + 0x14))(obj + *(s16 *)(vt + 0x10), arg1, 0);
+        vt = *(u8 **)(arg1 + 0x68);
+        (*(void (**)(void *, s32, f32))(vt + 0x1AC))(arg1 + *(s16 *)(vt + 0x1A8), 0, *(f32 *)(item + 0x24));
+        vt = *(u8 **)(arg1 + 0x68);
+        (*(void (**)(void *, s32))(vt + 0xB4))(arg1 + *(s16 *)(vt + 0xB0), *(s32 *)(items + i * 0x6C));
+    }
 }
 
 void fn_8030089C(void) {
