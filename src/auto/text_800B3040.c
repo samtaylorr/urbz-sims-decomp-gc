@@ -25,30 +25,26 @@ void fn_800B3278(void *arg0, s32 arg1) {
     void fn_8000AA2C(s32, const char *, ...);
     extern char lbl_803CECE0[];
     extern s32 lbl_8041FA1C[];
-    s32 group;
-    s32 index;
 
     if (arg1 > 40) {
         arg1 = 0;
     }
     if (arg1 <= 9) {
-        index = arg1 + 1;
-        group = 1;
+        M2C_FIELD(arg0, s32 *, 0xB0) = arg1 + 1;
+        M2C_FIELD(arg0, s32 *, 0xB4) = 1;
     } else if (arg1 <= 19) {
-        index = arg1 - 9;
-        group = 2;
+        M2C_FIELD(arg0, s32 *, 0xB0) = arg1 - 9;
+        M2C_FIELD(arg0, s32 *, 0xB4) = 2;
     } else if (arg1 <= 29) {
-        index = arg1 - 19;
-        group = 3;
+        M2C_FIELD(arg0, s32 *, 0xB0) = arg1 - 19;
+        M2C_FIELD(arg0, s32 *, 0xB4) = 3;
     } else if (arg1 <= 37) {
-        index = arg1 - 29;
-        group = 4;
+        M2C_FIELD(arg0, s32 *, 0xB0) = arg1 - 29;
+        M2C_FIELD(arg0, s32 *, 0xB4) = 4;
     } else {
-        index = arg1 - 37;
-        group = 5;
+        M2C_FIELD(arg0, s32 *, 0xB0) = arg1 - 37;
+        M2C_FIELD(arg0, s32 *, 0xB4) = 5;
     }
-    M2C_FIELD(arg0, s32 *, 0xB0) = index;
-    M2C_FIELD(arg0, s32 *, 0xB4) = group;
     fn_8000AA2C(lbl_8041FA1C[0], lbl_803CECE0, 0, 0, 0);
 }
 
