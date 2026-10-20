@@ -882,6 +882,10 @@ void fn_8039CC48(s32 *first, s32 *last, SortComp *comp) {
     }
 }
 
+static inline void SortComp_FinalInsertionSort(s32 *first, s32 *last, SortComp comp) {
+    fn_8039CC48(first, last, &comp);
+}
+
 static inline s32 SortComp_Lg(s32 n) {
     s32 k;
 
