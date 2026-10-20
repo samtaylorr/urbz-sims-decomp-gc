@@ -103,6 +103,12 @@ void fn_80334224(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     fn_80333B64(arg0, &p, 0, 1, arg1, arg2, arg3);
 }
 
+void fn_803342C8(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    ECtrlPair a = lbl_803F372C[0];
+    ECtrlPair b = lbl_803F3724[0];
+    fn_80333A04(arg0, arg1, &a, &b, 1, arg2, arg3);
+}
+
 void fn_80334460(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     ECtrlPair p = lbl_803F3724[0];
     fn_80333B64(arg0, &p, 1, 0, arg1, arg2, arg3);
