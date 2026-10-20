@@ -181,6 +181,25 @@ s32 fn_802D3DB0(s32 *arg0, s32 arg1) {
     return 1;
 }
 
+s32 *fn_802D41A8(s32 *arg0, char *arg1) {
+    M2C_UNK fn_802D39F0(s32 *, s32);
+    s32 tmp;
+    s32 *p = &tmp;
+
+    fn_802D3928(p, (char *)*arg0, arg1);
+    fn_802D3CE4(arg0, (char *)tmp);
+    fn_802D39F0(p, tmp);
+    return arg0;
+}
+
+s32 *fn_802D4200(s32 *arg0, s32 *arg1, s32 arg2) {
+    s16 c;
+
+    c = arg2 << 8;
+    fn_802D3928(arg0, (char *)*arg1, (char *)&c);
+    return arg0;
+}
+
 void fn_802D4634(u8 **arg0, s32 arg1, u8 arg2) {
     u8 *var_r3;
     u8 var_r0;
