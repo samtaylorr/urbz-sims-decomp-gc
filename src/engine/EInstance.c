@@ -54,13 +54,16 @@ s32 fn_802F150C(void) {
 extern f32 lbl_803F0EC4[];
 extern f32 lbl_803F0EC8[];
 void fn_802F1514(void *arg0, f32 value) {
+    f32 *vals;
+
     if (value <= lbl_803F0EC4[0]) {
         value = lbl_803F0EC4[0];
     }
     if (value >= lbl_803F0EC8[0]) {
         value = lbl_803F0EC8[0];
     }
-    ((f32 *)((char *)arg0 + 0x68))[lbl_80494E5C] = value;
+    vals = (f32 *)((char *)arg0 + 0x68);
+    vals[lbl_80494E5C] = value;
 }
 
 f32 fn_802F1558(void *arg0) {
