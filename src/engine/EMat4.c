@@ -256,17 +256,18 @@ void *fn_802CC9A0(void *arg0, char *arg1) {
     return arg0;
 }
 
-void fn_802CCA4C(void *arg0) {
+void *fn_802CCA4C(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 4) = 0;
     M2C_FIELD(arg0, s32 *, 0) = 0;
     M2C_FIELD(arg0, void **, 8) = lbl_803FD274;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
+    return arg0;
 }
 
 void *fn_802CCA6C(void *arg0, void *arg1) {
     void fn_802CD66C(void *, void *, s32);
     M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, void **, 8) = lbl_803FD274;
     M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, void **, 8) = lbl_803FD274;
     fn_802CD66C(arg0, arg1, 1);
     return arg0;
 }
