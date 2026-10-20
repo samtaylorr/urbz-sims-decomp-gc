@@ -174,7 +174,7 @@ void fn_8018CD70(void *arg0, s32 arg1) {
         if (var_r3 != NULL) {
             var_r3 = fn_8032D8E0(var_r3, M2C_FIELD(arg0, s32 *, 0xC), &sp8);
             if (var_r3 != NULL && (var_r3 = M2C_FIELD(var_r3, void **, 8)) != NULL) {
-                var_r4 = *(s32 *)((sp8 * 4) + (char *)var_r3);
+                var_r4 = *(s32 *)((sp8 * 4) + (s32)var_r3);
             } else {
                 var_r4 = 0;
             }
@@ -309,8 +309,11 @@ void fn_8018CF08(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
             if (temp_r3_4 != NULL) {
                 var_r0 = temp_r3_4[-1];
             }
-            if (arg3 <= var_r0 && temp_r3_4[(u32)(arg3 - 1)] != 0) {
-                fn_800F68F0(arg1, temp_r3_4[(u32)(arg3 - 1)], -1);
+            if (arg3 <= var_r0) {
+                s32 *p = temp_r3_4 + (arg3 - 1);
+                if (*p != 0) {
+                    fn_800F68F0(arg1, *p, -1);
+                }
             }
         }
     }
@@ -339,6 +342,16 @@ void fn_8018D56C(void *arg0) {
 
 void fn_8018D8BC(void) {
     fn_8018D8DC();
+}
+
+void fn_8018EA48(void *arg0, u8 *p) {
+    u8 t;
+    t = p[3];
+    p[3] = p[0];
+    p[0] = t;
+    t = p[2];
+    p[2] = p[1];
+    p[1] = t;
 }
 
 extern u8 lbl_80413FF0[];
