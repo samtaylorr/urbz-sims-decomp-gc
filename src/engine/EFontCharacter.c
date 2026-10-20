@@ -166,6 +166,10 @@ void fn_8036D090(void) {
     fn_8036C0D8();
 }
 
+void fn_8036D0B0(void **arg0) {
+    *arg0 = lbl_804194A0;
+}
+
 void fn_8036D0C0(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
