@@ -134,6 +134,16 @@ void fn_802D3C60(s32 *arg0, char *arg1) {
     }
 }
 
+s32 *fn_802D3CE4(s32 *arg0, char *arg1) {
+    M2C_UNK fn_802D39F0(s32 *, s32);
+    s32 old;
+
+    old = *arg0;
+    fn_802D3C60(arg0, arg1);
+    fn_802D39F0(arg0, old);
+    return arg0;
+}
+
 s32 fn_802D3D24(s32 *arg0) {
     s32 fn_80248808(s32);
     return fn_80248808(*arg0);
@@ -147,7 +157,7 @@ s32 *fn_802D3D7C(s32 *arg0) {
 
 s32 fn_802D3DB0(s32 *arg0, s32 arg1) {
     M2C_UNK fn_802482F8();
-    void fn_802D39F0(s32 *, s32);
+    M2C_UNK fn_802D39F0(s32 *, s32);
     char *fn_802D3A1C(s32 *, s32);
     void fn_802D3E40(s32 *);
     char *buf;
@@ -157,12 +167,13 @@ s32 fn_802D3DB0(s32 *arg0, s32 arg1) {
         len = fn_802D3D24(arg0);
         if (arg1 > len) {
             buf = fn_802D3A1C(arg0, arg1 + 1);
-            if (buf == 0) {
+            if (buf != 0) {
+                fn_802482F8(buf, *arg0, len + 1);
+                fn_802D39F0(arg0, *arg0);
+                *arg0 = (s32)buf;
+            } else {
                 return 0;
             }
-            fn_802482F8(buf, *arg0, len + 1);
-            fn_802D39F0(arg0, *arg0);
-            *arg0 = (s32)buf;
         }
     } else {
         fn_802D3E40(arg0);
