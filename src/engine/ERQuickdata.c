@@ -37,6 +37,20 @@ void fn_8032D310(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
 
+void fn_8032D38C(void **self, s32 flags) {
+    extern u8 lbl_8041BA38[];
+    extern void fn_8032D3EC(void *);
+    extern void fn_8031E910(void *, s32);
+    void fn_80338184(void *, s32);
+    extern u8 lbl_8045B980[];
+    *self = lbl_8041BA38;
+    fn_8032D3EC(self);
+    fn_8031E910(self, 0);
+    if (flags & 1) {
+        fn_80338184(lbl_8045B980, (s32)self);
+    }
+}
+
 void fn_8032D440(void) {
 
 }
