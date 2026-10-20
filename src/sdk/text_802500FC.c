@@ -349,6 +349,14 @@ void fn_80261270(s32 arg0) {
     lbl_80494A30 = arg0;
 }
 
+void fn_80261458(void);
+void fn_802652F4(void);
+void fn_802664BC(void (*)(void));
+void fn_80261504(void) {
+    fn_802652F4();
+    fn_802664BC(fn_80261458);
+}
+
 void fn_80261530(void) {
     M2C_UNK fn_80261458(M2C_UNK);
     M2C_UNK fn_80264274();
@@ -386,6 +394,32 @@ u32 fn_8026158C(u32 error) {
     } else {
         return 3;
     }
+}
+
+extern s32 lbl_80495EF0;
+extern u32 lbl_80495EF8;
+extern void (*lbl_80495EF4)(s32, DVDCommandBlock *);
+extern DVDCommandBlock lbl_80442960;
+void fn_802622E0(void);
+s32 fn_80261640(u32 resume) {
+    extern DVDCommandBlock *lbl_80495ED0;
+    DVDCommandBlock *finished;
+    if (lbl_80495EF0) {
+        lbl_80495EF8 = resume;
+        lbl_80495EF0 = 0;
+        finished = lbl_80495ED0;
+        lbl_80495ED0 = &lbl_80442960;
+        finished->state = 10;
+        if (finished->callback) {
+            ((void (*)(s32, DVDCommandBlock *))finished->callback)(-3, finished);
+        }
+        if (lbl_80495EF4) {
+            lbl_80495EF4(0, finished);
+        }
+        fn_802622E0();
+        return 1;
+    }
+    return 0;
 }
 
 s32 fn_802628C4(u32 arg0) {
