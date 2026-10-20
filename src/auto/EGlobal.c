@@ -50,6 +50,13 @@ void fn_8004BA08(void *arg0, s32 arg1, s32 arg2) {
     }
 }
 
+EGlobalHandle fn_8004BA7C(void) {
+    extern s32 lbl_80495804;
+    EGlobalHandle h;
+    h.value = lbl_80495804;
+    return h;
+}
+
 void fn_8004C614(void) {
 
 }
