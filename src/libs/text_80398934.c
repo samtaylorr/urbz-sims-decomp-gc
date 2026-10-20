@@ -856,6 +856,39 @@ void fn_8039C584(void **self, s32 flags) {
     }
 }
 
+void fn_8039CAD8(s32 *it, s32 val, SortComp comp);
+void fn_8039CB38(s32 *first, s32 *last, SortComp comp);
+void fn_8039C968(s32 *first, s32 *last, s32 *val, s32 depth, SortComp comp);
+void fn_8039CBEC(s32 *first, s32 *last, s32 *val, SortComp *comp) {
+    s32 *it;
+
+    for (it = first; it != last; it++) {
+        fn_8039CAD8(it, *it, *comp);
+    }
+}
+
+void fn_8039CC48(s32 *first, s32 *last, SortComp *comp) {
+    if (last - first > 16) {
+        fn_8039CB38(first, first + 16, *comp);
+        fn_8039CBEC(first + 16, last, 0, comp);
+    } else {
+        fn_8039CB38(first, last, *comp);
+    }
+}
+
+void fn_8039CCD4(s32 *first, s32 *last, SortComp *comp) {
+    if (first != last) {
+        s32 n = last - first;
+        s32 k = 0;
+        while (n != 1) {
+            n >>= 1;
+            k++;
+        }
+        fn_8039C968(first, last, 0, k * 2, *comp);
+        fn_8039CC48(first, last, comp);
+    }
+}
+
 extern u8 lbl_8040A1F0[];
 s32 fn_8039CD68(s32 arg0, s32 arg1, s32 arg2) {
     struct {
@@ -873,6 +906,18 @@ s32 fn_8039CD68(s32 arg0, s32 arg1, s32 arg2) {
     ret = fn_8018E850(out, p, arg1);
     ((void (*)(void *, s32))fn_8018EA6C)(p, 2);
     return ret;
+}
+
+void fn_8039CDCC(s32 arg0, s32 arg1, s32 arg2) {
+    struct {
+        s32 unk0;
+        s32 unk4;
+    } tmp, *p;
+
+    p = &tmp;
+    tmp.unk0 = arg0;
+    p->unk4 = arg2;
+    fn_8039CD68((s32)p, arg1, arg2);
 }
 
 s32 fn_8039CE00(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
