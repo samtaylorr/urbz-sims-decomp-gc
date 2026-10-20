@@ -267,6 +267,13 @@ void fn_8006A20C(void) {
 
 }
 
+s32 fn_8006A210(u8 *self) {
+    if (*(s32 *)(self + 0x27F8) != 0) {
+        return 1;
+    }
+    return 0;
+}
+
 extern u8 lbl_804092E8[];
 extern void fn_80307364(void *);
 extern void fn_8030728C(void *);
