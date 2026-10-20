@@ -540,6 +540,11 @@ void fn_800D02C4(void *arg0, s32 arg1) {
     fn_800CD660(arg0, 3, arg1);
 }
 
+void fn_800D02EC(void *arg0, s32 arg1, s32 arg2) {
+    M2C_UNK fn_800CD6A8(void *, s32, s32, s32);
+    fn_800CD6A8(arg0, 0, arg1, arg2);
+}
+
 s32 fn_800D0788(s32 *self) {
     return self[6];
 }
