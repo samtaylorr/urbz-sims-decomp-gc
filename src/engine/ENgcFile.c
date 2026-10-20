@@ -75,6 +75,12 @@ s32 fn_802DFF68(s32 arg0) {
     return arg0 + 0x2C;
 }
 
+void **fn_802DFF70(void **self) {
+    extern u8 lbl_80419848[];
+    *self = lbl_80419848;
+    return self;
+}
+
 extern u8 lbl_80419848[];
 extern void fn_802D20E8(void *);
 void fn_802DFF84(void **self, s32 flags) {
