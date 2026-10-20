@@ -473,6 +473,11 @@ s32 fn_801760D8(void) {
     return M2C_FIELD(lbl_80495C90, s32 *, 0x14);
 }
 
+void fn_801760E4(char *self) {
+    char *vt = *(char **)(self + 0xBC);
+    (*(void (**)(char *))(vt + 0xE4))(self + *(s16 *)(vt + 0xE0));
+}
+
 void fn_80176118(char *self) {
     char *vt = *(char **)(self + 0xBC);
     (*(void (**)(char *))(vt + 0xE4))(self + *(s16 *)(vt + 0xE0));
