@@ -53,6 +53,8 @@ extern s32 lbl_8049662C;
 void fn_8039B1E4(s32 *first, s32 *last, s32 *val, s32 depth, s32 comp);
 void fn_8039B3A4(s32 *first, s32 *last, s32 comp);
 void fn_8039B450(s32 *first, s32 *last, s32 *val, s32 comp);
+void fn_8039AE74(s32 *first, s32 hole, s32 len, s32 val, s32 comp);
+void fn_8039B050(s32 *first, s32 *middle, s32 *last, s32 *val, s32 comp);
 extern u8 lbl_80407128[];
 s32 fn_8018E850(void *out, void *obj, s32 arg);
 extern char *lbl_80495050;
