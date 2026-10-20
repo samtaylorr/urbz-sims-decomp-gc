@@ -275,6 +275,10 @@ s32 fn_8019EE78(void *arg0, void *arg1) {
     return fn_803AAECC((char *)arg0 + 0x54, r, 0x534C4F54, M2C_FIELD(arg1, s16 *, 4), 0) == 0;
 }
 
+s32 fn_8019EF58(void *arg0) {
+    return ++M2C_FIELD(arg0, s32 *, 0x64);
+}
+
 s32 fn_8019F070(void) {
     return 0;
 }
