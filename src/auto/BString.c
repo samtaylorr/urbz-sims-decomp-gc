@@ -1210,6 +1210,13 @@ void fn_800DC164(s32 arg0, f32 farg0) {
     }
 }
 
+void fn_800DC198(void) {
+    extern void *lbl_804943B0;
+    if (lbl_804943B0 != NULL) {
+        fn_800DC000(lbl_804943B0);
+    }
+}
+
 s32 fn_800DC1C4(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x94);
 }
@@ -1239,14 +1246,7 @@ s32 *fn_800DC200(s32 *self, s32 a) {
 UnkDC234 fn_800DC234(s32 arg1) {
     extern f32 lbl_803D4A30[];
     extern char lbl_8040BDF0[];
-    UnkDC234 s;
-    s.unk0 = arg1;
-    s.unk4 = -1;
-    s.unk8 = 0;
-    s.unkC = -1;
-    s.unk10 = 1;
-    s.unk14 = lbl_8040BDF0;
-    s.unk18 = lbl_803D4A30[0];
+    UnkDC234 s = { arg1, -1, 0, -1, 1, lbl_8040BDF0, lbl_803D4A30[0] };
     return s;
 }
 
