@@ -7,10 +7,6 @@ static inline void EStream_Write(void *stream, void *data, s32 len) {
     char *vt = M2C_FIELD(stream, char **, 0x18);
     ((void (*)(void *, void *, s32))M2C_FIELD(vt, void **, 0x3C))((char *)stream + M2C_FIELD(vt, s16 *, 0x38), data, len);
 }
-
-static inline void EStream_WriteInt(void *stream, s32 value) {
-    EStream_Write(stream, &value, 4);
-}
 void fn_8031FB44(void) {
 
 }
