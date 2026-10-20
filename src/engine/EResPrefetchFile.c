@@ -2,6 +2,15 @@
 #include "common.h"
 
 void fn_802D2FD0(void);
+
+static inline void EStream_Write(void *stream, void *data, s32 len) {
+    char *vt = M2C_FIELD(stream, char **, 0x18);
+    ((void (*)(void *, void *, s32))M2C_FIELD(vt, void **, 0x3C))((char *)stream + M2C_FIELD(vt, s16 *, 0x38), data, len);
+}
+
+static inline void EStream_WriteInt(void *stream, s32 value) {
+    EStream_Write(stream, &value, 4);
+}
 void fn_8031FB44(void) {
 
 }
@@ -92,15 +101,12 @@ void fn_8031FF50(void *self) {
 
 void fn_8031FF98(void *self, void *stream) {
     extern void fn_8031E988(void *, void *);
-    char *vt;
     s32 size;
 
     fn_8031E988(self, stream);
-    vt = M2C_FIELD(stream, char **, 0x18);
     size = M2C_FIELD(self, s32 *, 0x1C);
-    ((void (*)(void *, void *, s32))M2C_FIELD(vt, void **, 0x3C))((char *)stream + M2C_FIELD(vt, s16 *, 0x38), &size, 4);
-    vt = M2C_FIELD(stream, char **, 0x18);
-    ((void (*)(void *, void *, s32))M2C_FIELD(vt, void **, 0x3C))((char *)stream + M2C_FIELD(vt, s16 *, 0x38), M2C_FIELD(self, void **, 0x20), M2C_FIELD(self, s32 *, 0x1C));
+    ((void (*)(void *, void *, s32))M2C_FIELD(M2C_FIELD(stream, char **, 0x18), void **, 0x3C))((char *)stream + M2C_FIELD(M2C_FIELD(stream, char **, 0x18), s16 *, 0x38), &size, 4);
+    ((void (*)(void *, void *, s32))M2C_FIELD(M2C_FIELD(stream, char **, 0x18), void **, 0x3C))((char *)stream + M2C_FIELD(M2C_FIELD(stream, char **, 0x18), s16 *, 0x38), M2C_FIELD(self, void **, 0x20), M2C_FIELD(self, s32 *, 0x1C));
 }
 
 void fn_80320010(void) {
