@@ -89,6 +89,10 @@ void fn_801B31C4(void *arg0) {
     M2C_FIELD(vt, void (**)(void *), 0x34)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x30));
 }
 
+s32 fn_801B35EC(void *arg0) {
+    return ++M2C_FIELD(arg0, s32 *, 0x60);
+}
+
 s32 fn_801B36E8(void) {
     return 8;
 }
