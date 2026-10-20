@@ -202,38 +202,38 @@ void fn_802D4874(s32 *arg0) {
 }
 
 s32 fn_802D489C(s32 arg0, s32 *arg1) {
-    M2C_UNK fn_802D3C60(s32, s32);
-    s32 fn_802DF5D8(char *, s32);
+    void fn_802D3C60(s32 *, char *);
+    char *fn_802DF5D8(char *, s32);
     char sp8[0x104];
 
-    fn_802D3C60(arg0, fn_802DF5D8(sp8, *arg1));
+    fn_802D3C60((s32 *)arg0, fn_802DF5D8(sp8, *arg1));
     return arg0;
 }
 
 s32 fn_802D48E0(s32 arg0, s32 *arg1) {
-    M2C_UNK fn_802D3C60(s32, s32);
-    s32 fn_802DF65C(char *, s32);
+    void fn_802D3C60(s32 *, char *);
+    char *fn_802DF65C(char *, s32);
     char sp8[0x104];
 
-    fn_802D3C60(arg0, fn_802DF65C(sp8, *arg1));
+    fn_802D3C60((s32 *)arg0, fn_802DF65C(sp8, *arg1));
     return arg0;
 }
 
 s32 fn_802D4924(s32 arg0, s32 *arg1) {
-    M2C_UNK fn_802D3C60(s32, s32);
-    s32 fn_802DF728(char *, s32);
+    void fn_802D3C60(s32 *, char *);
+    char *fn_802DF728(char *, s32);
     char sp8[0x104];
 
-    fn_802D3C60(arg0, fn_802DF728(sp8, *arg1));
+    fn_802D3C60((s32 *)arg0, fn_802DF728(sp8, *arg1));
     return arg0;
 }
 
 s32 fn_802D4968(s32 arg0, s32 *arg1) {
-    M2C_UNK fn_802D3C60(s32, s32);
-    s32 fn_802DF7BC(char *, s32);
+    void fn_802D3C60(s32 *, char *);
+    char *fn_802DF7BC(char *, s32);
     char sp8[0x104];
 
-    fn_802D3C60(arg0, fn_802DF7BC(sp8, *arg1));
+    fn_802D3C60((s32 *)arg0, fn_802DF7BC(sp8, *arg1));
     return arg0;
 }
 
