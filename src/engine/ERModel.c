@@ -37,6 +37,15 @@ void fn_803296D4(u8 *self) {
     }
 }
 
+void fn_80329738(u8 *self) {
+    extern void fn_802FFE78(u8 *);
+    s32 i;
+
+    for (i = 0; i < ListCount(self + 0x20); i++) {
+        fn_802FFE78(*(u8 **)(self + 0x20) + i * 0x18);
+    }
+}
+
 s32 fn_8032979C(u8 *self) {
     extern void fn_802FFE1C(u8 *);
     extern s32 fn_802FFED4(u8 *);
@@ -71,8 +80,6 @@ s32 fn_80329DDC(u8 *self, u8 *data) {
     extern void fn_80338184(void *, void *);
     extern u8 lbl_8045B82C[];
     u8 *start = data;
-    u8 *src;
-    s32 size;
 
     fn_802482F8(self + 0x164, data, 4);
     data += 4;
@@ -82,10 +89,8 @@ s32 fn_80329DDC(u8 *self, u8 *data) {
     }
     if (*(s32 *)(self + 0x164) != 0) {
         *(void **)(self + 0x168) = fn_80338000(lbl_8045B82C, *(s32 *)(self + 0x164) << 6, 0x10);
-        size = *(s32 *)(self + 0x164) << 6;
-        src = data;
-        data += size;
-        fn_802482F8(*(void **)(self + 0x168), src, size);
+        fn_802482F8(*(void **)(self + 0x168), data, *(s32 *)(self + 0x164) << 6);
+        data += *(s32 *)(self + 0x164) << 6;
     }
     return data - start;
 }
