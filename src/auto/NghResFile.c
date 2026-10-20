@@ -189,12 +189,13 @@ void fn_8012F830(void *arg0, u8 *p) {
 }
 
 void fn_8012F844(void *arg0, u8 *p) {
-    u8 t0 = p[0];
-    u8 t1 = p[1];
-    p[0] = p[3];
-    p[1] = p[2];
-    p[2] = t1;
-    p[3] = t0;
+    u8 t;
+    t = p[3];
+    p[3] = p[0];
+    p[0] = t;
+    t = p[2];
+    p[2] = p[1];
+    p[1] = t;
 }
 
 void fn_8012F868(void *arg0, void *arg1) {
