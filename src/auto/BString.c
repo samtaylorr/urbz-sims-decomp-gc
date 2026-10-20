@@ -1,6 +1,16 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+typedef struct UnkDC234 {
+    s32 unk0;
+    s32 unk4;
+    s32 unk8;
+    s32 unkC;
+    s32 unk10;
+    void *unk14;
+    f32 unk18;
+} UnkDC234;
+
 void fn_800D1F84(void);
 extern u8 lbl_8040B320[];
 extern u8 lbl_8040B368[];
