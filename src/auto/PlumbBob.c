@@ -759,6 +759,22 @@ void fn_8008824C(void *arg0) {
     }
 }
 
+f32 fn_8008940C(void *arg0) {
+    extern f32 lbl_803CBCF8[];
+    f32 v[3];
+    f32 *p = v;
+    f32 r;
+
+    r = lbl_803CBCF8[0];
+    v[0] = r;
+    p[1] = r;
+    p[2] = v[0];
+    if (M2C_FIELD(arg0, s32 *, 0x18) & 2) {
+        r = M2C_FIELD(arg0, f32 *, 0xC8);
+    }
+    return r;
+}
+
 void fn_80089604(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
