@@ -155,6 +155,15 @@ void fn_80300558(u8 *self, s32 arg1) {
     }
 }
 
+void fn_80300634(u8 *self, s32 arg1) {
+    extern void fn_80303588(u8 *, s32);
+    s32 i;
+
+    for (i = 0; i < *(s32 *)(self + 4); i++) {
+        fn_80303588(*(u8 **)self + i * 0x6C, arg1);
+    }
+}
+
 void fn_80300698(u8 *self) {
     extern void fn_80300DC0(u8 *);
     s32 i;
