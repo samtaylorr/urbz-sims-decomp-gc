@@ -340,6 +340,12 @@ void fn_8039AE08(void) {
 
 }
 
+void fn_8039AE74(s32 *first, s32 hole, s32 len, s32 val, s32 comp);
+void fn_8039B050(s32 *first, s32 *middle, s32 *last, s32 *val, s32 comp);
+void fn_8039B11C(s32 *first, s32 *middle, s32 *last, s32 comp) {
+    fn_8039B050(first, middle, last, 0, comp);
+}
+
 void fn_8039B4A4(s32 *first, s32 *last, s32 comp) {
     if (last - first > 16) {
         fn_8039B3A4(first, first + 16, comp);
