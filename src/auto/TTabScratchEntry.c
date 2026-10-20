@@ -1341,6 +1341,14 @@ s32 fn_801B2308(void *arg0) {
     return var_r3;
 }
 
+void fn_802D23C0(void *, void *, s32, s32);
+s32 fn_801B2364(s32 arg0, s32 arg1) {
+    if ((arg1 == 0xFFFF) && (arg0 != 0)) {
+        u32 p = (u32)lbl_80435438;
+        fn_802D23C0(lbl_80435418, (void *)((p + 0x3F) & ~0x3F), 0x20, 0x5A);
+    }
+}
+
 s32 fn_801B24B8(void) {
     return 0;
 }
