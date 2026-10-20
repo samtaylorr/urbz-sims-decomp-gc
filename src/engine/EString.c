@@ -5,6 +5,20 @@ s32 fn_802D32A0(void) {
     return 0;
 }
 
+void *fn_802D3668(void *arg0, char *arg1) {
+    void *vt;
+
+    vt = M2C_FIELD(arg0, void **, 0x18);
+    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x34)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x30), arg1, 4);
+    vt = M2C_FIELD(arg0, void **, 0x18);
+    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x34)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x30), arg1 + 4, 4);
+    vt = M2C_FIELD(arg0, void **, 0x18);
+    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x34)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x30), arg1 + 8, 4);
+    vt = M2C_FIELD(arg0, void **, 0x18);
+    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x34)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x30), arg1 + 0xC, 4);
+    return arg0;
+}
+
 s32 fn_802D38E4(s32 *self) {
     return *self;
 }
