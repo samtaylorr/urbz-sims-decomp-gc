@@ -867,26 +867,32 @@ void fn_8039CBEC(s32 *first, s32 *last, s32 *val, SortComp *comp) {
     }
 }
 
-void fn_8039CC48(s32 *first, s32 *last, SortComp comp) {
+static inline void SortComp_UnguardedInsertionSort(s32 *first, s32 *last, SortComp comp) {
+    fn_8039CBEC(first, last, 0, &comp);
+}
+
+void fn_8039CC48(s32 *first, s32 *last, SortComp *comp) {
     if (last - first > 16) {
-        fn_8039CB38(first, first + 16, comp);
-        fn_8039CBEC(first + 16, last, 0, &comp);
+        fn_8039CB38(first, first + 16, *comp);
+        SortComp_UnguardedInsertionSort(first + 16, last, *comp);
     } else {
-        fn_8039CB38(first, last, comp);
+        fn_8039CB38(first, last, *comp);
     }
+}
+
+static inline s32 SortComp_Lg(s32 n) {
+    s32 k;
+
+    for (k = 0; n != 1; n >>= 1) {
+        k++;
+    }
+    return k;
 }
 
 void fn_8039CCD4(s32 *first, s32 *last, SortComp *comp) {
     if (first != last) {
-        s32 n = last - first;
-        s32 k = 0;
-
-        while (n != 1) {
-            n >>= 1;
-            k++;
-        }
-        fn_8039C968(first, last, 0, k * 2, *comp);
-        fn_8039CC48(first, last, *comp);
+        fn_8039C968(first, last, 0, SortComp_Lg(last - first) * 2, *comp);
+        fn_8039CC48(first, last, comp);
     }
 }
 
