@@ -643,6 +643,29 @@ s32 fn_8038B5A0(s32 chan, s32 arg1, s32 arg2) {
     return fn_803894A8(chan);
 }
 
+void fn_8038B5E8(s32 chan, s32 arg1) {
+    void fn_80251378(void *);
+    s32 fn_8025465C(void);
+    void fn_80254684(s32);
+    void fn_8025BD6C(s32, s32);
+    void fn_8025C2BC(s32);
+    extern u8 lbl_804912A0[];
+    s32 *p;
+    s32 enabled;
+
+    p = (s32 *)(lbl_804912A0 + chan * 0x110);
+    enabled = fn_8025465C();
+    if (p[0] != 0) {
+        fn_8025BD6C(chan, 0);
+        fn_8025C2BC(chan);
+        fn_80251378((u8 *)p + 0xE0);
+        p[0] = 0;
+        p[1] = arg1;
+        p[9] = 0;
+    }
+    fn_80254684(enabled);
+}
+
 s32 fn_8038C698(void) {
     return 0;
 }
