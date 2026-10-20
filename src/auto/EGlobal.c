@@ -39,6 +39,17 @@ void fn_8004B96C(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x114) = arg1;
 }
 
+void fn_8004BA08(void *arg0, s32 arg1, s32 arg2) {
+    M2C_UNK fn_802E4420(s32, s32, s32);
+    void *vt;
+
+    vt = M2C_FIELD(arg0, void **, 0x3A4);
+    if (((s32 (*)(void *))M2C_FIELD(vt, void **, 0xE4))((char *)arg0 + M2C_FIELD(vt, s16 *, 0xE0)) != 0) {
+        vt = M2C_FIELD(arg0, void **, 0x3A4);
+        fn_802E4420(((s32 (*)(void *))M2C_FIELD(vt, void **, 0xE4))((char *)arg0 + M2C_FIELD(vt, s16 *, 0xE0)), arg1, arg2);
+    }
+}
+
 void fn_8004C614(void) {
 
 }
