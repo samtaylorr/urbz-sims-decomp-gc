@@ -121,9 +121,11 @@ void fn_80068520(void *arg0, void *arg1) {
     M2C_UNK fn_800A1FF8(void *, s32, s32);
     s32 temp_r29;
     void *temp_r3;
+    void **var_r9;
 
     temp_r29 = M2C_FIELD(arg1, s32 *, 0x38);
-    temp_r3 = M2C_FIELD(arg0, void **, 0x1FC + temp_r29 * 4);
+    var_r9 = (void **) ((char *) arg0 + 0x1FC);
+    temp_r3 = var_r9[temp_r29];
     fn_800A1FF8(temp_r3, M2C_FIELD(temp_r3, s32 *, 0x174), 0);
     fn_80067AA4(arg0, temp_r29, 0);
 }
