@@ -109,6 +109,12 @@ void fn_8024F924(void) {
     fn_802530CC(0, 0, lbl_803EC168);
 }
 
+void fn_8024F958(void) {
+    extern char lbl_803EC1C0[];
+    s32 fn_802530CC();
+    fn_802530CC(0, 0, lbl_803EC1C0);
+}
+
 void fn_8024F98C(void) {
     void fn_80246D2C(void) __attribute__((noreturn));
     fn_80246D2C();
