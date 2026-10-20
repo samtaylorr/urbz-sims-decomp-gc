@@ -579,6 +579,13 @@ void fn_800D4014(s32 *self, s32 flags) {
     }
 }
 
+void fn_800D4048(void *arg0) {
+    extern s32 lbl_8041F754[];
+    extern void fn_800D28AC(void *);
+    lbl_8041F754[0] = 3;
+    fn_800D28AC(arg0);
+}
+
 extern u8 lbl_8040B638[];
 s32 *fn_800D41B4(s32 *self, s32 arg1) {
     self[0] = arg1;
