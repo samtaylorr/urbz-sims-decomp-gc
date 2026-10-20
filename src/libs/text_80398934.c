@@ -7297,11 +7297,12 @@ void fn_803BE5AC(void) {
 }
 
 void fn_803BE5CC(void *arg0) {
-    extern f32 lbl_803F3ED0;
+    extern f32 lbl_803F3ED0[];
+    f32 z = lbl_803F3ED0[0];
     M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, f32 *, 0xC) = lbl_803F3ED0;
-    M2C_FIELD(arg0, f32 *, 0x10) = lbl_803F3ED0;
-    M2C_FIELD(arg0, f32 *, 0x14) = lbl_803F3ED0;
+    M2C_FIELD(arg0, f32 *, 0x14) = z;
+    M2C_FIELD(arg0, f32 *, 0x10) = z;
+    M2C_FIELD(arg0, f32 *, 0xC) = z;
     M2C_FIELD(arg0, s32 *, 0x18) = 0;
     M2C_FIELD(arg0, s32 *, 0x1C) = 0;
 }
