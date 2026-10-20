@@ -39,8 +39,8 @@ void fn_80333B64(s32, ECtrlPair *, s32, s32, s32, s32, s32);
 void fn_80333A04(s32, s32, ECtrlPair *, ECtrlPair *, s32, s32, s32);
 
 void fn_80333D68(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
-    ECtrlPair b = lbl_803F3724[0];
     ECtrlPair a = lbl_803F3724[0];
+    ECtrlPair b = lbl_803F3724[0];
     fn_80333A04(arg0, arg1, &a, &b, 0, arg2, arg3);
 }
 
