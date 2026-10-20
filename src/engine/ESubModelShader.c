@@ -8,6 +8,15 @@ void *fn_802FFD98(void *arg0) {
     return arg0;
 }
 
+void fn_802FFE1C(u8 *self) {
+    extern void fn_80300A40(u8 *);
+    s32 i;
+
+    for (i = 0; i < *(s32 *)(self + 4); i++) {
+        fn_80300A40(*(u8 **)self + i * 0x6C);
+    }
+}
+
 s32 fn_802FFF68(void) {
     return 0;
 }
