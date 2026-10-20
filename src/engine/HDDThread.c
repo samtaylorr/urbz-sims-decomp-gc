@@ -126,6 +126,16 @@ s32 fn_80332BD8(char *arg0, u32 arg1) {
     return var_r3;
 }
 
+s32 fn_80332C14(char *arg0, u32 arg1) {
+    s32 var_r3;
+
+    var_r3 = 0;
+    if (arg1 <= 0x1FU) {
+        var_r3 = fn_80332834(&arg0[arg1 * 0x14 + 0x340]);
+    }
+    return var_r3;
+}
+
 void fn_80332D00(void *arg0) {
     M2C_FIELD((int)arg0, s32 *, (int)0x5C0) = 0;
     M2C_FIELD(arg0, s32 *, (unsigned)0x5C8) = 0;
