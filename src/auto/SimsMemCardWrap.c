@@ -84,6 +84,17 @@ s32 fn_800A6154(void) {
     return 0;
 }
 
+void fn_800A615C(u32 arg0, u8 *arg1) {
+    u8 a = arg0 >> 24;
+    u8 r = arg0 >> 16;
+    u8 g = arg0 >> 8;
+    u8 b = arg0;
+    arg1[0] = a;
+    arg1[1] = r;
+    arg1[2] = g;
+    arg1[3] = b;
+}
+
 void fn_800A617C(void *arg0, s32 *arg1) {
     *arg1 = (M2C_FIELD(arg0, u8 *, 0) << 0x18) | (M2C_FIELD(arg0, u8 *, 1) << 0x10) | (M2C_FIELD(arg0, u8 *, 2) << 8) | M2C_FIELD(arg0, u8 *, 3);
 }
