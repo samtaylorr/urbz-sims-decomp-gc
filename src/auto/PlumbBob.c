@@ -279,6 +279,17 @@ s32 fn_8006A210(u8 *self) {
     return 0;
 }
 
+u8 *fn_8006A228(u8 *self) {
+    extern u8 lbl_804092E8[];
+    extern void fn_8030728C(void *);
+    fn_8030728C(self);
+    *(u8 **)(self + 0x44) = lbl_804092E8;
+    *(s32 *)(self + 0x48) = 0;
+    *(s32 *)(self + 0x4C) = 0;
+    *(s32 *)(self + 0x54) = 0;
+    return self;
+}
+
 extern u8 lbl_804092E8[];
 extern void fn_80307364(void *);
 extern void fn_8030728C(void *);
