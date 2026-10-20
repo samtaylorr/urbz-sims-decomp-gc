@@ -2,6 +2,7 @@
 #include "common.h"
 
 void fn_800C3B48(void);
+void *fn_801D7224(void **arg0, s32 arg1);
 s32 fn_801D72DC(void **arg0, s32 arg1) {
     M2C_UNK fn_801D6FD0(void **, void *);
     void *node;
@@ -35,9 +36,8 @@ s32 fn_801D7320(void **arg0, s32 arg1) {
     return var_r3;
 }
 
-s32 fn_801D7380(void *arg0) {
-    s32 fn_801D7224(void *);
-    return fn_801D7224(arg0) != 0;
+s32 fn_801D7380(void **arg0, s32 arg1) {
+    return fn_801D7224(arg0, arg1) != 0;
 }
 
 s32 fn_801D7550(void) {
