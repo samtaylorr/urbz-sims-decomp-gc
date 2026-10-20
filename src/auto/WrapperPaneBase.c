@@ -17,6 +17,20 @@ typedef struct {
 typedef struct { f32 x, y, z; } WPBVec3;
 typedef struct { f32 x, y, z, w; } WPBVec4;
 
+static inline void WPBVec4_Set(WPBVec4 *d, const WPBVec3 *v, f32 w) {
+    d->x = v->x;
+    d->y = v->y;
+    d->z = v->z;
+    d->w = w;
+}
+
+static inline void WPBVec4_Copy(WPBVec4 *d, const WPBVec4 *s) {
+    d->x = s->x;
+    d->y = s->y;
+    d->z = s->z;
+    d->w = s->w;
+}
+
 void fn_800CD09C(void);
 s32 fn_800C5630(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x6C);
@@ -466,16 +480,29 @@ void fn_800CFDA0(void *arg0, void *arg1) {
     M2C_FIELD(arg0, f32 *, 0x2C) = M2C_FIELD(arg1, f32 *, 0xC);
 }
 
-WPBVec4 fn_800CFDC8(void *arg1) {
-    extern f32 lbl_803D12E8;
+void fn_800CFDC8(WPBVec4 *out, void *arg1) {
+    extern f32 lbl_803D12E8[];
     WPBVec4 t;
-    WPBVec3 *p = (WPBVec3 *)((char *)arg1 + 0x20);
-    t.x = p->x;
-    t.y = p->y;
-    t.z = p->z;
-    t.w = lbl_803D12E8;
+    WPBVec4 *q;
+    WPBVec3 *p;
+    WPBVec4 *o;
+    f32 x, y, z, w;
+    p = (WPBVec3 *)((char *)arg1 + 0x20);
+    q = &t;
+    q->x = p->x;
+    q->y = p->y;
+    q->z = p->z;
+    q->w = lbl_803D12E8[0];
     t.w = M2C_FIELD(arg1, f32 *, 0x2C);
-    return t;
+    o = out;
+    x = q->x;
+    y = q->y;
+    z = q->z;
+    w = q->w;
+    o->x = x;
+    o->y = y;
+    o->z = z;
+    o->w = w;
 }
 
 void fn_800CFE2C(void *arg0, f32 farg0) {
@@ -494,14 +521,14 @@ s32 fn_800CFE44(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x30);
 }
 
-void fn_800CFF68(s32 *self, s32 flags) {
+void fn_800CFF68(void *arg0, s32 flags) {
     extern u8 lbl_8040AC68[];
     extern void fn_802D20E8(void *);
     extern void fn_803997AC(void *, u32);
     s32 *v;
-    self[0x17] = (s32)lbl_8040AC68;
+    M2C_FIELD(arg0, u8 **, 0x5C) = lbl_8040AC68;
     fn_800CD104();
-    v = self + 2;
+    v = (s32 *)((char *)arg0 + 8);
     if (v[0] != 0) {
         u32 size = (u32)(v[3] - v[0]) & ~3;
         if (size > 0x80) {
@@ -511,7 +538,7 @@ void fn_800CFF68(s32 *self, s32 flags) {
         }
     }
     if (flags & 1) {
-        fn_802D20E8(self);
+        fn_802D20E8(arg0);
     }
 }
 
