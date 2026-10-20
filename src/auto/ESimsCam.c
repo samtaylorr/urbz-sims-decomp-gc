@@ -21,7 +21,7 @@ static inline void *ESimsCam_AllocAligned(u32 size) {
     if (size == 0) {
         return NULL;
     }
-    size = (size + 0xF) & ~0xF;
+    size = (size + 0xF) & ~0xFU;
     p = fn_802D197C(heap, size, 0x10);
     if (p == NULL) {
         p = fn_802DC3C0(heap, size, 0x10, 0, 0);
@@ -137,7 +137,13 @@ extern void *fn_802DC3C0(void *, u32, s32, s32, s32);
 extern void *fn_802D0B3C(void);
 extern void fn_80248488(void *, s32, s32);
 void *fn_80014BD0(u32 size) {
-    return ESimsCam_AllocAlignedZero(size);
+    void *p;
+
+    p = ESimsCam_AllocAligned(size);
+    if (p) {
+    }
+    fn_80248488(p, 0, size);
+    return p;
 }
 
 void fn_80014C94(void *arg0) {
