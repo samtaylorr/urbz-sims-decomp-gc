@@ -102,16 +102,27 @@ void fn_8010E988(void) {
 }
 
 void *fn_8010E98C(void *arg0) {
+    struct Interaction {
+        u8 *vt;
+        s32 unk4;
+        u8 pad8[0x18];
+        s32 unk20;
+        s32 unk24;
+        f32 unk28;
+        f32 unk2C;
+        s32 unk30;
+        s32 unk34;
+    } *self = arg0;
     extern u8 lbl_8040EAF8[];
     extern void *lbl_80495AF8;
     extern f32 lbl_803D71E8[];
-    M2C_FIELD(arg0, u8 **, 0) = lbl_8040EAF8;
-    M2C_FIELD(arg0, s32 *, 4) = 1;
-    M2C_FIELD(arg0, s32 *, 0x24) = 0x200;
-    M2C_FIELD(arg0, s32 *, 0x20) = M2C_FIELD(arg0, s32 *, 0x34) = 0x400;
-    fn_8010DA6C(lbl_80495AF8, arg0);
-    M2C_FIELD(arg0, f32 *, 0x2C) = M2C_FIELD(arg0, f32 *, 0x28) = lbl_803D71E8[0];
-    return arg0;
+    self->vt = lbl_8040EAF8;
+    self->unk4 = 1;
+    self->unk24 = 0x200;
+    self->unk34 = self->unk20 = 0x400;
+    fn_8010DA6C(lbl_80495AF8, self);
+    self->unk2C = self->unk28 = lbl_803D71E8[0];
+    return self;
 }
 
 void fn_8010E9FC(void **arg0, s32 arg1) {
