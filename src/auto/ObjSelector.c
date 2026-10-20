@@ -37,6 +37,13 @@ void fn_8016C13C(void) {
     fn_8016C1A4();
 }
 
+void fn_8016C164(void **obj) {
+    if (obj != NULL) {
+        char *vt = (char *)*obj;
+        (*(void (**)(void *, s32))(vt + 0x64))((char *)obj + *(s16 *)(vt + 0x60), 3);
+    }
+}
+
 s32 fn_8016C258(void) {
     return 1;
 }
