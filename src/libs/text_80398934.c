@@ -2024,6 +2024,24 @@ void fn_803A4804(s32 arg0, void *arg1) {
     }
 }
 
+void fn_803A4910(s32 *first, s32 hole, s32 len, s32 val, s32 comp);
+void fn_803A4A28(s32 *first, s32 *last, s32 comp) {
+    s32 len = last - first;
+    s32 parent;
+
+    if (len < 2) {
+        return;
+    }
+    parent = (len - 2) / 2;
+    while (1) {
+        fn_803A4910(first, parent, len, first[parent], comp);
+        if (parent == 0) {
+            return;
+        }
+        parent--;
+    }
+}
+
 void fn_803A4AE8(s32 *first, s32 *middle, s32 *last, s32 *val, s32 comp);
 void fn_803A4BB4(s32 *first, s32 *middle, s32 *last, s32 comp) {
     fn_803A4AE8(first, middle, last, 0, comp);
