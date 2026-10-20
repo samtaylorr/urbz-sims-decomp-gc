@@ -165,6 +165,11 @@ s32 fn_8019C81C(void) {
     return M2C_FIELD(lbl_8049454C, s32 *, 0x20);
 }
 
+void **fn_8019C828(void **self) {
+    *self = lbl_80414770;
+    return self;
+}
+
 void fn_8019C850(void) {
 
 }
