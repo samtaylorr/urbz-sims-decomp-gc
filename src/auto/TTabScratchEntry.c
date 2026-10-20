@@ -474,7 +474,11 @@ s32 fn_8019F484(void *arg0) {
 }
 
 s32 fn_8019F48C(void *arg0) {
-    return (M2C_FIELD(arg0, s32 *, 0x1C) & 0x800) != 0;
+    s32 flags = M2C_FIELD(arg0, s32 *, 0x1C);
+    if (flags & 0x800) {
+        return 1;
+    }
+    return 0;
 }
 
 void fn_8019F4A4(void *arg0, s32 arg1) {
