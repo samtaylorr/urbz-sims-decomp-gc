@@ -329,6 +329,10 @@ void fn_800D2A30(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x1C) = 0;
 }
 
+void fn_800D2A40(s32 *self) {
+    self[6] = 1;
+}
+
 void fn_800D2A4C(void) {
 
 }
