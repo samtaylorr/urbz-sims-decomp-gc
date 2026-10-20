@@ -16,6 +16,25 @@ void fn_800F5248(void) {
 
 }
 
+extern s32 fn_800F8120(s32);
+extern void *fn_802D2058(s32);
+extern void fn_800F51EC(void *, s32);
+extern void fn_802D211C(void *);
+extern s32 fn_80245BB4(char *, const char *, ...);
+extern char lbl_803D5A48[];
+extern char lbl_803D5A4C[];
+extern u8 lbl_80495A90[];
+s32 fn_800F524C(s32 arg0, s32 arg1) {
+    void *buf;
+
+    buf = fn_802D2058(fn_800F8120(arg1) + 1);
+    fn_800F51EC(buf, arg1);
+    if (buf != 0) {
+        fn_802D211C(buf);
+    }
+    return arg0;
+}
+
 void fn_800F5448(void) {
     M2C_UNK fn_800F53FC(M2C_UNK, M2C_UNK);
     fn_800F53FC(1, 0xFFFF);
