@@ -156,6 +156,10 @@ s32 fn_8018CD68(void) {
     return 0;
 }
 
+s32 fn_8018CE18(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0xC) != 0;
+}
+
 s32 fn_8018CE30(void) {
     return 0;
 }
