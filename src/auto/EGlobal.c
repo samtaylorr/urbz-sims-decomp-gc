@@ -169,8 +169,8 @@ u16 fn_8004F13C(struct { u8 pad[0x92]; u16 unk92[1]; } *arg0, s32 arg1) {
     return arg0->unk92[arg1];
 }
 
-u16 fn_8004F14C(void *arg0, s32 arg1, s32 arg2) {
-    return ((u16 (*)[6])((char *)arg0 + 2))[arg1][arg2];
+u16 fn_8004F14C(struct { u16 unk0; u16 unk2[1][6]; } *arg0, s32 arg1, s32 arg2) {
+    return arg0->unk2[arg1][arg2];
 }
 
 void fn_8004F164(void) {
