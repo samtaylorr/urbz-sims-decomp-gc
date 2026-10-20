@@ -10,8 +10,8 @@ static inline s32 QRF_ArrayCount(s32 *a) {
 }
 
 static inline s32 QRF_ArrayGet(s32 *a, s32 i) {
-    if (i < QRF_ArrayCount(a)) {
-        return a[i];
+    if (i <= QRF_ArrayCount(a)) {
+        return a[i - 1];
     }
     return 0;
 }
@@ -301,8 +301,8 @@ void fn_8018CF08(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     void *temp_r3;
     char *temp_r3_2;
     s32 **temp_r3_3;
-    s32 *temp_r3_4;
     s32 var_r4;
+    s32 val;
 
     fn_800F68E0(arg1);
     temp_r3 = M2C_FIELD(arg0, void **, 0xC);
@@ -314,9 +314,9 @@ void fn_8018CF08(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
         }
         temp_r3_3 = fn_8039FDA4(temp_r3_2, temp_r3_2 + var_r4 * 0xC, arg2);
         if (temp_r3_3 != NULL && arg3 > 0) {
-            temp_r3_4 = *temp_r3_3;
-            if (arg3 <= QRF_ArrayCount(temp_r3_4) && temp_r3_4[arg3 - 1] != 0) {
-                fn_800F68F0(arg1, temp_r3_4[arg3 - 1], -1);
+            val = QRF_ArrayGet(*temp_r3_3, arg3 - 1);
+            if (val != 0) {
+                fn_800F68F0(arg1, val, -1);
             }
         }
     }
