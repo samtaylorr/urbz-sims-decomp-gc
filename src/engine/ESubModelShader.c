@@ -84,11 +84,11 @@ void fn_80300104(u8 *self, u8 *arg1) {
     for (i = 0; i < *(s32 *)(self + 4); i++) {
         u8 *items = *(u8 **)self;
         u8 *item = items + i * 0x6C;
-        u8 *vt;
-        vt = *(u8 **)(arg1 + 0x68);
+        u8 *vt = *(u8 **)(arg1 + 0x68);
+        u8 *vt2;
         (*(void (**)(void *, s32, f32))(vt + 0x1AC))(arg1 + *(s16 *)(vt + 0x1A8), 0, *(f32 *)(item + 0x24));
-        vt = *(u8 **)(arg1 + 0x68);
-        (*(void (**)(void *, s32))(vt + 0xB4))(arg1 + *(s16 *)(vt + 0xB0), *(s32 *)(items + i * 0x6C));
+        vt2 = *(u8 **)(arg1 + 0x68);
+        (*(void (**)(void *, s32))(vt2 + 0xB4))(arg1 + *(s16 *)(vt2 + 0xB0), *(s32 *)(items + i * 0x6C));
     }
 }
 
