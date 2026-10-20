@@ -105,6 +105,15 @@ s32 fn_8010EA58(void) {
     return 1;
 }
 
+extern u8 lbl_8040EAF8[];
+extern void *lbl_80495AF8;
+extern f32 lbl_803D71E8[];
+void fn_8010DA6C(void *arg0, void *arg1);
+void fn_8010DA7C(void *arg0, void *arg1);
+s32 fn_8010EB1C(void *arg0) {
+    return ++M2C_FIELD(arg0, s32 *, 4);
+}
+
 s32 fn_8010F020(void) {
     return 1;
 }
