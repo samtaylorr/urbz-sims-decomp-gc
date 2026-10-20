@@ -127,7 +127,10 @@ void fn_8024F99C(void) {
 
 s32 fn_8024F9C8(s32 arg0, s32 arg1, s32 arg2) {
     s32 fn_802486DC(s32, s32);
-    return fn_802486DC(arg0, arg1) ? 0 : arg2;
+    if (fn_802486DC(arg0, arg1) == 0) {
+        return arg2;
+    }
+    return 0;
 }
 
 void fn_8024FA04(void) {
