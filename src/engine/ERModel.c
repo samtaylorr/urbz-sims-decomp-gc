@@ -1,6 +1,10 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+static inline s32 ListCount(u8 *list) {
+    return *(s32 *)(list + 4);
+}
+
 void fn_802D2FD0(void);
 void fn_80329264(void) {
     fn_802D2FD0();
@@ -26,25 +30,23 @@ s32 fn_803292C4(s32 arg0, s32 *out) {
 
 void fn_803296D4(u8 *self) {
     extern void fn_802FFE1C(u8 *);
-    u8 *list = self + 0x20;
     s32 i;
 
-    for (i = 0; i < *(s32 *)(list + 4); i++) {
-        fn_802FFE1C(*(u8 **)list + i * 0x18);
+    for (i = 0; i < *(s32 *)(self + 0x20 + 4); i++) {
+        fn_802FFE1C(*(u8 **)(self + 0x20) + i * 0x18);
     }
 }
 
 s32 fn_8032979C(u8 *self) {
     extern void fn_802FFE1C(u8 *);
     extern s32 fn_802FFED4(u8 *);
-    u8 *list = self + 0x20;
     s32 i;
     s32 j;
 
-    for (i = 0; i < *(s32 *)(list + 4); i++) {
-        if (fn_802FFED4(*(u8 **)list + i * 0x18) == 0) {
+    for (i = 0; i < *(s32 *)(self + 0x20 + 4); i++) {
+        if (fn_802FFED4(*(u8 **)(self + 0x20) + i * 0x18) == 0) {
             for (j = i - 1; j >= 0; j--) {
-                fn_802FFE1C(*(u8 **)list + j * 0x18);
+                fn_802FFE1C(*(u8 **)(self + 0x20) + j * 0x18);
             }
             return 0;
         }
@@ -61,6 +63,31 @@ s32 fn_80329DB8(u32 arg0) {
         return 1;
     }
     return (u16)arg0 == 0x26;
+}
+
+s32 fn_80329DDC(u8 *self, u8 *data) {
+    extern void fn_802482F8(void *, void *, s32);
+    extern void *fn_80338000(void *, s32, s32);
+    extern void fn_80338184(void *, void *);
+    extern u8 lbl_8045B82C[];
+    u8 *start = data;
+    u8 *src;
+    s32 size;
+
+    fn_802482F8(self + 0x164, data, 4);
+    data += 4;
+    if (*(void **)(self + 0x168) != 0) {
+        fn_80338184(lbl_8045B82C, *(void **)(self + 0x168));
+        *(void **)(self + 0x168) = 0;
+    }
+    if (*(s32 *)(self + 0x164) != 0) {
+        *(void **)(self + 0x168) = fn_80338000(lbl_8045B82C, *(s32 *)(self + 0x164) << 6, 0x10);
+        size = *(s32 *)(self + 0x164) << 6;
+        src = data;
+        data += size;
+        fn_802482F8(*(void **)(self + 0x168), src, size);
+    }
+    return data - start;
 }
 
 s32 fn_8032A6F8(void *arg0) {
