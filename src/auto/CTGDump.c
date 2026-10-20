@@ -73,7 +73,7 @@ s32 fn_800F53B8(s32 arg0, s32 arg1) {
 }
 
 void fn_800F5448(void) {
-    M2C_UNK fn_800F53FC(M2C_UNK, M2C_UNK);
+    void fn_800F53FC(s32, s32);
     fn_800F53FC(1, 0xFFFF);
 }
 
