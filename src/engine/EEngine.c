@@ -146,12 +146,12 @@ void fn_802E1964(void *self, void *arg1) {
 }
 
 void fn_802E19D0(void *self, void *arg1) {
-    extern M2C_UNK lbl_803F0754;
-    M2C_FIELD(arg1, s32 *, 0x10) = 0;
-    M2C_FIELD(arg1, M2C_UNK **, 0) = &lbl_803F0754;
+    extern char lbl_803F0754[];
+    M2C_FIELD(arg1, char **, 0) = lbl_803F0754;
     M2C_FIELD(arg1, s32 *, 4) = 1;
     M2C_FIELD(arg1, s32 *, 8) = 0;
     M2C_FIELD(arg1, s32 *, 0xC) = 0;
+    M2C_FIELD(arg1, s32 *, 0x10) = 0;
 }
 
 void fn_802E19F8(s32 arg0, s32 arg1) {
