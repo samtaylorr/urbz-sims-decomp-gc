@@ -987,6 +987,10 @@ s32 fn_801A3B70(void) {
     return 0x10;
 }
 
+void *fn_801A3BF0(void *arg0, s32 i) {
+    return (u8 *)arg0 + (i * 0x10 + 8);
+}
+
 s16 fn_801A3C58(void *arg0) {
     return M2C_FIELD(arg0, s16 *, 6);
 }
