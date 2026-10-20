@@ -887,7 +887,7 @@ void fn_800DAC40(void *arg0) {
     extern u8 lbl_8041F754[];
     extern f32 lbl_803D4588[];
     extern void fn_80047AA8(void *);
-    M2C_UNK fn_800D2180();
+    extern void fn_800D2180(void *);
     s32 var_r9;
     s32 var_r9_2;
 
