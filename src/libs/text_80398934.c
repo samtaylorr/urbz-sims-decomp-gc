@@ -36,6 +36,10 @@ typedef struct {
 typedef struct {
     s32 a, b, c;
 } Elem12;
+
+typedef struct {
+    s32 v;
+} SortComp;
 void fn_802D8BEC(void *);
 void fn_802D20E8(void *);
 void fn_8030AD40(void);
