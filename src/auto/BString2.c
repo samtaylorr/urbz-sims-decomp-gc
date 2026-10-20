@@ -11,6 +11,14 @@ static inline u16 *BString2_Data(void **s) {
 static inline s32 BString2_Eq(const u16 *a, const u16 *b) {
     return *a == *b;
 }
+
+static inline s32 BString2_Ne(const u16 *a, const u16 *b) {
+    s32 ne = 1;
+    if (BString2_Eq(a, b)) {
+        ne = 0;
+    }
+    return ne;
+}
 void fn_800EF8B4(void) {
 
 }
@@ -200,9 +208,12 @@ void fn_800F3758(s32 arg0, const char *arg1, s32 arg2) {
 }
 
 u32 fn_800F37B0(void **arg0, u16 arg1, u32 arg2) {
+    s32 ne;
     while (arg2 < fn_800F4878(arg0)) {
-        const u16 *d = BString2_Data(arg0);
-        s32 ne = !BString2_Eq(&d[arg2], &arg1);
+        ne = 1;
+        if (BString2_Eq(&BString2_Data(arg0)[arg2], &arg1)) {
+            ne = 0;
+        }
         if (!ne) {
             break;
         }
