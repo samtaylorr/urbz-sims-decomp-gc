@@ -192,6 +192,10 @@ s32 fn_8018CE8C(void) {
     return 0;
 }
 
+void fn_8018CE94(void *arg0, void *arg1, s16 *arg2) {
+    *arg2 = 0;
+}
+
 s32 fn_8018CEAC(void) {
     return 0;
 }
