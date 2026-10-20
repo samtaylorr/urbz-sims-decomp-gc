@@ -282,14 +282,15 @@ s32 fn_800F8000(void *arg0) {
 
 void fn_800F805C(s32 *arg0) {
     void fn_800F80B4(s32 *);
-    s32 sp[2];
+    s32 a;
+    s32 b;
 
-    sp[0] = arg0[0];
-    sp[1] = arg0[1];
-    fn_800F80B4(&sp[0]);
-    fn_800F80B4(&sp[1]);
-    arg0[0] = sp[1];
-    arg0[1] = sp[0];
+    a = arg0[0];
+    b = arg0[1];
+    fn_800F80B4(&a);
+    fn_800F80B4(&b);
+    arg0[0] = b;
+    arg0[1] = a;
 }
 
 s32 fn_800F86C8(void *arg0, s32 arg1) {
