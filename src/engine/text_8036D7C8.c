@@ -24,6 +24,21 @@ s32 fn_8036D828(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void fn_8036D904(void **arg0, s32 arg1) {
+    extern void fn_8036D960(void *);
+    extern void fn_802F05AC(void *, s32);
+    extern void *fn_802D0AB8();
+    extern void fn_802D1A00(void *, void *);
+    extern u8 lbl_8041DAB0[];
+
+    *arg0 = lbl_8041DAB0;
+    fn_8036D960(arg0);
+    fn_802F05AC(arg0, 0);
+    if (arg1 & 1) {
+        fn_802D1A00(fn_802D0AB8(), arg0);
+    }
+}
+
 void fn_8036DBA8(void);
 void fn_8036D960(void) {
     fn_8036DBA8();
