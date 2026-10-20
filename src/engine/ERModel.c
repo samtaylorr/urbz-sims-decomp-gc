@@ -24,8 +24,43 @@ s32 fn_803292C4(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void fn_803296D4(u8 *self) {
+    extern void fn_802FFE1C(u8 *);
+    u8 *list = self + 0x20;
+    s32 i;
+
+    for (i = 0; i < *(s32 *)(list + 4); i++) {
+        fn_802FFE1C(*(u8 **)list + i * 0x18);
+    }
+}
+
+s32 fn_8032979C(u8 *self) {
+    extern void fn_802FFE1C(u8 *);
+    extern s32 fn_802FFED4(u8 *);
+    u8 *list = self + 0x20;
+    s32 i;
+    s32 j;
+
+    for (i = 0; i < *(s32 *)(list + 4); i++) {
+        if (fn_802FFED4(*(u8 **)list + i * 0x18) == 0) {
+            for (j = i - 1; j >= 0; j--) {
+                fn_802FFE1C(*(u8 **)list + j * 0x18);
+            }
+            return 0;
+        }
+    }
+    return 1;
+}
+
 void fn_80329838(void) {
 
+}
+
+s32 fn_80329DB8(u32 arg0) {
+    if ((arg0 >> 16) != 0) {
+        return 1;
+    }
+    return (u16)arg0 == 0x26;
 }
 
 s32 fn_8032A6F8(void *arg0) {
