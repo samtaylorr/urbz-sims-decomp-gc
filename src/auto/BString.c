@@ -119,6 +119,16 @@ void fn_800D1D38(void) {
     lbl_8041F7B8[0] = 0;
 }
 
+void fn_800D1D48(s32 *self) {
+    extern s32 lbl_8041F754[];
+    extern void fn_800D2CE8(s32 *);
+    fn_800D2CE8(self);
+    if (lbl_8041F754[0x78 / 4] != 0) {
+        lbl_8041F754[0x78 / 4] = 0;
+        fn_800E3B80(self, 2);
+    }
+}
+
 s32 *fn_800D1D9C(s32 *self, s32 arg1) {
     self[0] = arg1;
     self[1] = -1;
