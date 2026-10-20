@@ -265,6 +265,12 @@ void fn_802A6E10(s32 arg0) {
     fn_802A6CE0();
 }
 
+static inline void *fn_802A8240_make(f32 value);
+
+static inline void *fn_802A8240_makep(const f32 *pvalue) {
+    return fn_802A8240_make(*pvalue);
+}
+
 static inline void *fn_802A8240_make(f32 value) {
     extern u8 lbl_80418D70[];
     extern u8 lbl_804190F0[];
@@ -309,54 +315,14 @@ static inline void *fn_802A8240_make(f32 value) {
 
 void *fn_802A8240(void *self, s32 arg1) {
     extern s32 lbl_804433C4[];
-    extern u8 lbl_80418D70[];
-    extern u8 lbl_804190F0[];
     extern void fn_802B4998(s32, s32);
     extern f32 fn_80243694(void);
-    extern void *fn_802BB9B4(s32);
-    extern void fn_802B7124(void *, s32);
-    extern void fn_802B710C(void *, s32);
-    extern void fn_802B7138(void *, s32);
-    extern void fn_802B7158(void *, s32);
-    extern void fn_802B7178(void *, s32);
-    extern void fn_802B71C8(void *);
-    extern void fn_803B76C8(void *, void *);
-    f32 value;
-    void *obj;
 
-    if (arg1 <= 0) {
+    if (arg1 < 1) {
         return (void *)lbl_80496130;
     }
     fn_802B4998(((s32 *)lbl_804433C4[2])[lbl_804433C4[0] - 1], arg1);
-    value = fn_80243694();
-    if (lbl_80494D98 != NULL) {
-        void *pool;
-        s32 count;
-        obj = lbl_80494D98;
-        pool = lbl_80494B48;
-        lbl_80494D98 = M2C_FIELD(obj, void **, 8);
-        count = M2C_FIELD(pool, s32 *, 4);
-        if (count >= M2C_FIELD(pool, s32 *, 0)) {
-            M2C_FIELD(obj, u32 *, 0) &= ~0x40000000;
-        } else {
-            M2C_FIELD(pool, void ***, 8)[count] = obj;
-            M2C_FIELD(pool, s32 *, 4) = count + 1;
-        }
-        M2C_FIELD(obj, f32 *, 8) = value;
-    } else {
-        obj = fn_802BB9B4(0xC);
-        M2C_FIELD(obj, void **, 4) = lbl_80418D70;
-        fn_802B7124(obj, 6);
-        fn_802B710C(obj, 0);
-        fn_802B7138(obj, 1);
-        fn_802B7158(obj, 0);
-        fn_802B7178(obj, 0);
-        fn_802B71C8(obj);
-        fn_803B76C8(lbl_80494B48, obj);
-        M2C_FIELD(obj, f32 *, 8) = value;
-        M2C_FIELD(obj, void **, 4) = lbl_804190F0;
-    }
-    return obj;
+    return fn_802A8240_make(fn_80243694());
 }
 
 void fn_802ACAF8(void *arg0, s32 arg1) {
