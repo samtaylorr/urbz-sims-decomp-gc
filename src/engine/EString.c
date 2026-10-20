@@ -70,7 +70,7 @@ void *fn_802D4798(void *arg0, s32 arg1) {
 void fn_802D47F4(s32 *arg0) {
     M2C_UNK fn_802D3CE4(s32 *, s32);
     s32 fn_802DF448(char *, s32);
-    char sp8[256];
+    char sp8[0x104];
 
     fn_802D3CE4(arg0, fn_802DF448(sp8, *arg0));
 }
