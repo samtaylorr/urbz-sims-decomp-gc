@@ -2967,6 +2967,13 @@ s32 *fn_800E9F1C(s32 *self, s32 arg1) {
     return self;
 }
 
+void fn_800E9F68(void *arg0) {
+    extern s32 lbl_8041F754[];
+    extern void fn_800D28AC(void *);
+    lbl_8041F754[0] = 3;
+    fn_800D28AC(arg0);
+}
+
 void fn_800EA4DC(void) {
     M2C_UNK fn_800487EC(M2C_UNK *);
     fn_800D2AE4();
