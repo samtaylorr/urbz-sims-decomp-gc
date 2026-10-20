@@ -170,6 +170,11 @@ void **fn_8019C828(void **self) {
     return self;
 }
 
+void **fn_8019C83C(void **self) {
+    *self = lbl_80414770;
+    return self;
+}
+
 void fn_8019C850(void) {
 
 }
