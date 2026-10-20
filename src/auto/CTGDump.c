@@ -2,7 +2,7 @@
 #include "common.h"
 
 extern void fn_802D20E8(void *);
-void fn_800F521C(void) {
+void fn_800F521C(void *self) {
 
 }
 
