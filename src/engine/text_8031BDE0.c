@@ -36,6 +36,23 @@ s32 fn_8031BE60(s32 arg0, s32 *out) {
     return arg0;
 }
 
+extern void *fn_802D0AB8(void *);
+extern void fn_802D1A00(void *, void *);
+void fn_8031BEE8(void **arg0, s32 arg1) {
+    extern void fn_8031BF44(void *);
+    extern void fn_8031E910(void *, s32);
+    extern void *fn_802D0AB8();
+    extern void fn_802D1A00(void *, void *);
+    extern u8 lbl_8041B320[];
+
+    *arg0 = lbl_8041B320;
+    fn_8031BF44(arg0);
+    fn_8031E910(arg0, 0);
+    if (arg1 & 1) {
+        fn_802D1A00(fn_802D0AB8(), arg0);
+    }
+}
+
 void fn_8031BEA0(void);
 void fn_8031C5E0(void) {
     fn_8031BEA0();
