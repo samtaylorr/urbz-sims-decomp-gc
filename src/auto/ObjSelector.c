@@ -111,12 +111,12 @@ void *fn_8016C748(void *arg0) {
     void fn_80197AC8(void *);
     void fn_80197AD4(void *, s32, void *);
     void fn_8019F898(void *);
-    extern s32 lbl_803D9EE8;
-    extern s32 lbl_80411A38;
+    extern char lbl_803D9EE8[];
+    extern char lbl_80411A38[];
     fn_8019F898(arg0);
-    M2C_FIELD(arg0, void **, 0x10) = &lbl_80411A38;
+    M2C_FIELD(arg0, void **, 0x10) = lbl_80411A38;
     fn_80197AC8(arg0);
-    fn_80197AD4(arg0, 2, &lbl_803D9EE8);
+    fn_80197AD4(arg0, 2, lbl_803D9EE8);
     return arg0;
 }
 
