@@ -24,11 +24,12 @@ static inline void WPBVec4_Set(WPBVec4 *d, const WPBVec3 *v, f32 w) {
     d->w = w;
 }
 
-static inline void WPBVec4_Copy(WPBVec4 *d, const WPBVec4 *s) {
+static inline WPBVec4 *WPBVec4_Copy(WPBVec4 *d, const WPBVec4 *s) {
     d->x = s->x;
     d->y = s->y;
     d->z = s->z;
     d->w = s->w;
+    return d;
 }
 
 void fn_800CD09C(void);
@@ -483,26 +484,9 @@ void fn_800CFDA0(void *arg0, void *arg1) {
 void fn_800CFDC8(WPBVec4 *out, void *arg1) {
     extern f32 lbl_803D12E8[];
     WPBVec4 t;
-    WPBVec4 *q;
-    WPBVec3 *p;
-    WPBVec4 *o;
-    f32 x, y, z, w;
-    p = (WPBVec3 *)((char *)arg1 + 0x20);
-    q = &t;
-    q->x = p->x;
-    q->y = p->y;
-    q->z = p->z;
-    q->w = lbl_803D12E8[0];
+    WPBVec4_Set(&t, (WPBVec3 *)((char *)arg1 + 0x20), lbl_803D12E8[0]);
     t.w = M2C_FIELD(arg1, f32 *, 0x2C);
-    o = out;
-    x = q->x;
-    y = q->y;
-    z = q->z;
-    w = q->w;
-    o->x = x;
-    o->y = y;
-    o->z = z;
-    o->w = w;
+    WPBVec4_Copy(out, &t);
 }
 
 void fn_800CFE2C(void *arg0, f32 farg0) {
