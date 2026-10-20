@@ -66,7 +66,7 @@ s32 fn_8001DD04(s32 *arg0, s32 *arg1) {
 }
 
 void fn_8001E210(void *arg0, s32 arg1) {
-    M2C_UNK fn_8001DD7C(void *, void *);
+    void fn_8001DD7C(void *, s32 *);
     M2C_UNK fn_802D838C(s32);
     M2C_UNK fn_8039B594(void *, s32, M2C_UNK, M2C_UNK, M2C_UNK);
     extern s32 lbl_8049440C;
