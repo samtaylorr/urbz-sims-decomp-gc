@@ -61,6 +61,26 @@ s32 fn_8016C628(void) {
     return 0;
 }
 
+void fn_8016C6A0(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0x14) += 1;
+}
+
+s32 fn_8016C6B4(void *arg0) {
+    s32 var_r3;
+    void *temp_r9;
+
+    var_r3 = M2C_FIELD(arg0, s32 *, 0x14) - 1;
+    M2C_FIELD(arg0, s32 *, 0x14) = var_r3;
+    if (var_r3 == 0) {
+        if (arg0 != NULL) {
+            temp_r9 = M2C_FIELD(arg0, void **, 0);
+            M2C_FIELD(temp_r9, void (**)(void *, s32), 0x64)((char *)arg0 + M2C_FIELD(temp_r9, s16 *, 0x60), 3);
+        }
+        return 0;
+    }
+    return var_r3;
+}
+
 s32 fn_8016C710(void) {
     return 0;
 }
