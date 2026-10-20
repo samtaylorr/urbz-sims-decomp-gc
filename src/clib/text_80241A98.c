@@ -97,6 +97,12 @@ void fn_8024F8BC(void) {
     fn_802530CC(0, 0, lbl_803EC0BC);
 }
 
+void fn_8024F924(void) {
+    extern char lbl_803EC168[];
+    s32 fn_802530CC();
+    fn_802530CC(0, 0, lbl_803EC168);
+}
+
 void fn_8024F98C(void) {
     void fn_80246D2C(void) __attribute__((noreturn));
     fn_80246D2C();
@@ -105,6 +111,11 @@ void fn_8024F98C(void) {
 void fn_8024F99C(void) {
     extern void (*lbl_803F7AD0[])(void);
     lbl_803F7AD0[0]();
+}
+
+s32 fn_8024F9C8(s32 arg0, s32 arg1, s32 arg2) {
+    s32 fn_802486DC(s32, s32);
+    return fn_802486DC(arg0, arg1) ? 0 : arg2;
 }
 
 void fn_8024FA04(void) {
