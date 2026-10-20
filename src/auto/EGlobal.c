@@ -119,6 +119,11 @@ s32 fn_8004F0D8(void) {
     return lbl_80494F40;
 }
 
+void fn_8004F0E0(void *arg0, s32 arg1) {
+    extern s32 lbl_80494F44;
+    lbl_80494F44 = arg1;
+}
+
 extern s32 lbl_80494F44;
 s32 fn_8004F0E8(void) {
     return lbl_80494F44;
