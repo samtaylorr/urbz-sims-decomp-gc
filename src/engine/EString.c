@@ -28,9 +28,9 @@ void fn_802D39E4(M2C_UNK **arg0) {
     *arg0 = &lbl_80494DD0;
 }
 
-void fn_802D3D24(s32 *arg0) {
-    M2C_UNK fn_80248808(s32);
-    fn_80248808(*arg0);
+s32 fn_802D3D24(s32 *arg0) {
+    s32 fn_80248808(s32);
+    return fn_80248808(*arg0);
 }
 
 s32 *fn_802D3D7C(s32 *arg0) {
