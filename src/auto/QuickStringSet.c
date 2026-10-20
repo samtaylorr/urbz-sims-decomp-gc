@@ -252,6 +252,22 @@ s32 fn_800F7FEC(void *arg0) {
     return ++M2C_FIELD(arg0, s32 *, 0x10);
 }
 
+s32 fn_800F8000(void *arg0) {
+    s32 var_r3;
+    void *temp_r9;
+
+    var_r3 = M2C_FIELD(arg0, s32 *, 0x10) - 1;
+    M2C_FIELD(arg0, s32 *, 0x10) = var_r3;
+    if (var_r3 == 0) {
+        if (arg0 != NULL) {
+            temp_r9 = M2C_FIELD(arg0, void **, 0);
+            M2C_FIELD(temp_r9, void (**)(void *, s32), 0x64)((char *)arg0 + M2C_FIELD(temp_r9, s16 *, 0x60), 3);
+        }
+        return 0;
+    }
+    return var_r3;
+}
+
 s32 fn_800F86C8(void *arg0, s32 arg1) {
     s32 temp_r9;
     s32 var_r3;
