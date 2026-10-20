@@ -86,6 +86,33 @@ void fn_802D39E4(M2C_UNK **arg0) {
     *arg0 = &lbl_80494DD0;
 }
 
+s32 fn_802D3BA0(s32 *arg0, s32 arg1) {
+    void fn_802D39F0(s32 *, s32);
+    void fn_802D3C60(s32 *, char *);
+    s32 fn_802D7FC8(char *, s32, s32, s32);
+    char buf[1024];
+    char c;
+    s32 n;
+    s32 i;
+
+    i = 0;
+    do {
+        n = fn_802D7FC8(&c, 1, 1, arg1);
+        if (n == 0 || c == '\n') {
+            buf[i++] = 0;
+            break;
+        }
+        buf[i++] = c;
+    } while (n == 1);
+    if (i > 1 && buf[i - 2] == '\r') {
+        buf[i - 2] = 0;
+        i--;
+    }
+    fn_802D39F0(arg0, *arg0);
+    fn_802D3C60(arg0, buf);
+    return i - 1;
+}
+
 s32 fn_802D3D24(s32 *arg0) {
     s32 fn_80248808(s32);
     return fn_80248808(*arg0);
