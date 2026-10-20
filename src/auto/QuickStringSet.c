@@ -248,6 +248,10 @@ s32 fn_800F7F74(void) {
     return 0;
 }
 
+s32 fn_800F7FEC(void *arg0) {
+    return ++M2C_FIELD(arg0, s32 *, 0x10);
+}
+
 s32 fn_800F86C8(void *arg0, s32 arg1) {
     s32 temp_r9;
     s32 var_r3;
