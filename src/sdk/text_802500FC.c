@@ -366,6 +366,12 @@ void fn_80261530(void) {
     fn_80261458(0);
 }
 
+void fn_802616DC(void);
+void fn_80266548(void (*)(void));
+void fn_80261564(void) {
+    fn_80266548(fn_802616DC);
+}
+
 extern u32 lbl_80495F00;
 extern s32 lbl_80495F04;
 u32 fn_8026158C(u32 error) {
