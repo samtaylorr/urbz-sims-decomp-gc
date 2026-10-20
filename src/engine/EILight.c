@@ -3,6 +3,14 @@
 
 typedef struct { f32 x, y, z; } EILightVec3;
 
+extern s32 lbl_80494E58;
+
+static inline void EILightVec3_Set(EILightVec3 *v, f32 x, f32 y, f32 z) {
+    v->x = x;
+    v->y = y;
+    v->z = z;
+}
+
 void fn_802D2FD0(void);
 void fn_802EFB08(void) {
     fn_802D2FD0();
@@ -109,6 +117,13 @@ s32 fn_802F02FC(void) {
 
 void fn_802F0324(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0xBC) = arg1;
+}
+
+void fn_802F032C(void *arg0, EILightVec3 *out) {
+    extern f32 lbl_803F0DB4[];
+    EILightVec3 v;
+    v.z = v.y = v.x = lbl_803F0DB4[0];
+    *out = v;
 }
 
 f32 *fn_802F0368(f32 *out, u8 *obj) {
