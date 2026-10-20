@@ -90,6 +90,25 @@ void fn_802DFF84(void **self, s32 flags) {
     }
 }
 
+void *fn_802DFFB8(char *self) {
+    extern void **fn_802DFF70(void **);
+    extern void fn_802D8B34(void *);
+    extern void fn_802CA9A8(void *);
+    extern void fn_803664B0(void *);
+    extern u8 lbl_804197D8[];
+    extern u8 lbl_804197F8[];
+    extern void *lbl_804961A4;
+    fn_802DFF70((void **)self);
+    fn_802D8B34(self + 8);
+    M2C_FIELD(self, void **, 0x340) = lbl_804197D8;
+    M2C_FIELD(self, void **, 0) = lbl_804197F8;
+    fn_802CA9A8(self + 0x34C);
+    fn_803664B0(self + 0x368);
+    M2C_FIELD(self, s32 *, 0x348) = 0;
+    lbl_804961A4 = self;
+    return self;
+}
+
 void fn_802E010C(s32 arg0) {
     s32 *fn_802D1FC8(M2C_UNK);
     M2C_UNK fn_802E0208(s32, s32 *);
