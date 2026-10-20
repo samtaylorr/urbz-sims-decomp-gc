@@ -68,8 +68,9 @@ void fn_80300044(u8 *self, u8 *arg1) {
         u8 *items = *(u8 **)self;
         u8 *item = items + i * 0x6C;
         u8 *obj = *(u8 **)(*(u8 **)(item + 8) + 0x20);
-        u8 *vt = *(u8 **)(obj + 0xF0);
-        (*(void (**)(void *, u8 *, s32))(vt + 0x14))(obj + *(s16 *)(vt + 0x10), arg1, 0);
+        u8 *ovt = *(u8 **)(obj + 0xF0);
+        u8 *vt;
+        (*(void (**)(void *, u8 *, s32))(ovt + 0x14))(obj + *(s16 *)(ovt + 0x10), arg1, 0);
         vt = *(u8 **)(arg1 + 0x68);
         (*(void (**)(void *, s32, f32))(vt + 0x1AC))(arg1 + *(s16 *)(vt + 0x1A8), 0, *(f32 *)(item + 0x24));
         vt = *(u8 **)(arg1 + 0x68);
