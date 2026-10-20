@@ -61,6 +61,18 @@ s32 fn_8016C628(void) {
     return 0;
 }
 
+s32 fn_8016C630(void *arg0, s32 arg1, void **arg2) {
+    void *temp_r9;
+
+    if (arg2 != NULL && (arg1 == 1 || arg1 == 0x4BE348E2)) {
+        temp_r9 = M2C_FIELD(arg0, void **, 0);
+        M2C_FIELD(temp_r9, void (**)(void *), 0x14)((char *)arg0 + M2C_FIELD(temp_r9, s16 *, 0x10));
+        *arg2 = arg0;
+        return 1;
+    }
+    return 0;
+}
+
 void fn_8016C6A0(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x14) += 1;
 }
