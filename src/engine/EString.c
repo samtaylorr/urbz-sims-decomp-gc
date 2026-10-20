@@ -19,6 +19,15 @@ void *fn_802D3668(void *arg0, char *arg1) {
     return arg0;
 }
 
+void fn_802D38B0(void *arg0, s32 arg1) {
+    extern u8 lbl_804194F8[];
+    extern void fn_802D20E8(void *);
+    M2C_FIELD(arg0, void **, 0x18) = lbl_804194F8;
+    if (arg1 & 1) {
+        fn_802D20E8(arg0);
+    }
+}
+
 s32 fn_802D38E4(s32 *self) {
     return *self;
 }
