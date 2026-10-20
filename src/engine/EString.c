@@ -266,6 +266,31 @@ s32 fn_802D5EC8(s32 arg0, s32 *arg1, s32 arg2) {
     return arg0;
 }
 
+u16 **fn_802D6934(u16 **arg0) {
+    u16 *p;
+
+    p = *arg0;
+    for (;;) {
+        switch (*p) {
+        case 0:
+            return arg0;
+        case '"':
+        case '#':
+        case '*':
+        case '/':
+        case ':':
+        case '<':
+        case '>':
+        case '?':
+        case '\\':
+        case '|':
+            *p = '_';
+            break;
+        }
+        p++;
+    }
+}
+
 void fn_802D69B4(u16 **arg0) {
     u16 *var_r3;
     u16 var_r0;
