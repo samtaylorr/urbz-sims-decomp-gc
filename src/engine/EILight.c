@@ -111,6 +111,14 @@ void fn_802F0324(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0xBC) = arg1;
 }
 
+f32 *fn_802F0368(f32 *out, u8 *obj) {
+    f32 *p = (f32 *)(obj + 0xB0);
+    out[0] = p[0];
+    out[1] = p[1];
+    out[2] = p[2];
+    return out;
+}
+
 void fn_802F038C(void *arg0, f32 farg0) {
     M2C_FIELD(arg0, f32 *, 0xA0) = farg0;
 }
