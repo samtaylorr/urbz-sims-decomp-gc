@@ -6763,6 +6763,15 @@ void fn_803BA818(void *self, s32 arg1) {
     fn_803BA740(self, arg1, M2C_FIELD(self, s32 *, 4), 1);
 }
 
+void fn_803BA840(void *arg0, s32 arg1) {
+    extern u8 lbl_804194F8[];
+    extern void fn_802D20E8(void *);
+    M2C_FIELD(arg0, void **, 0x18) = lbl_804194F8;
+    if (arg1 & 1) {
+        fn_802D20E8(arg0);
+    }
+}
+
 void fn_802F05AC(void);
 void fn_803BAAB8(void) {
     fn_802F05AC();
