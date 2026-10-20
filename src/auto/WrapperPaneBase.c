@@ -706,6 +706,10 @@ void fn_800D0614(void *arg0, s32 arg1) {
     ((void (*)(void *, s32, s32))fn_800CD7F0)(arg0, 1, arg1);
 }
 
+void fn_800D063C(void *arg0, s32 arg1) {
+    ((void (*)(void *, s32, s32))fn_800CD838)(arg0, 1, arg1);
+}
+
 s32 fn_800D0788(s32 *self) {
     return self[6];
 }
