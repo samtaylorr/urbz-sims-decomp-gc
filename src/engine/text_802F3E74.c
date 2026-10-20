@@ -24,6 +24,39 @@ s32 fn_802F3ED4(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void *fn_802F3F14(void *arg0) {
+    extern void fn_8036D558(void *);
+    extern void fn_803BAB78(void *);
+    extern void fn_802C876C(void *);
+    extern f32 lbl_803F11AC[];
+    extern u8 lbl_8041A678[];
+    struct { f32 x, y, z; } v;
+    char *q;
+
+    q = (char *)arg0 + 0x110;
+    fn_8036D558(arg0);
+    *(void **)arg0 = lbl_8041A678;
+    fn_803BAB78(q);
+    M2C_FIELD(arg0, s32 *, 0x120) = 0;
+    v.x = lbl_803F11AC[0];
+    v.z = lbl_803F11AC[0];
+    v.y = lbl_803F11AC[0];
+    M2C_FIELD(q, f32 *, 0) = v.x;
+    M2C_FIELD(q, f32 *, 0xC) = lbl_803F11AC[0];
+    M2C_FIELD(q, f32 *, 4) = v.y;
+    M2C_FIELD(q, f32 *, 8) = v.z;
+    M2C_FIELD(arg0, s32 *, 0x138) = 0;
+    M2C_FIELD(arg0, s32 *, 0x134) = 0;
+    M2C_FIELD(arg0, s32 *, 0x128) = 0;
+    M2C_FIELD(arg0, s32 *, 0x130) = 0;
+    M2C_FIELD(arg0, s32 *, 0x12C) = 0;
+    M2C_FIELD(arg0, s32 *, 0x124) = 0;
+    fn_802C876C((char *)arg0 + 0x90);
+    fn_802C876C((char *)arg0 + 0xD0);
+    M2C_FIELD(arg0, s32 *, 0x64) |= 0x200;
+    return arg0;
+}
+
 void fn_802F3FC8(void **arg0, s32 arg1) {
     extern void fn_802F41E8(void *);
     extern void fn_8036D594(void *, s32);
@@ -54,6 +87,22 @@ void fn_802F4024(void *arg0, void *arg1) {
     val = M2C_FIELD(arg0, s32 *, 0x120);
     func(obj, &val, 4);
     fn_802C83E4(arg1, (char *)arg0 + 0x90);
+}
+
+void fn_802F4088(void *arg0, void *arg1) {
+    extern void fn_802F06A4(void *, void *);
+    extern void fn_802C846C(void *, void *);
+    extern void fn_802F412C(void *, s32, s32);
+    extern u16 lbl_80491C66[];
+    void *vt;
+
+    fn_802F06A4(arg0, arg1);
+    if (lbl_80491C66[0] == 0) {
+        vt = M2C_FIELD(arg1, void **, 0x18);
+        M2C_FIELD(vt, void (**)(void *, void *, s32), 0x34)((char *)arg1 + M2C_FIELD(vt, s16 *, 0x30), (char *)arg0 + 0x120, 4);
+        fn_802C846C(arg1, (char *)arg0 + 0x90);
+    }
+    fn_802F412C(arg0, 0, 0);
 }
 
 void fn_802F42E4(s32 arg0, s32 arg1) {
