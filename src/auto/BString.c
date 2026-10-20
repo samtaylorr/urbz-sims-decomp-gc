@@ -961,6 +961,10 @@ s32 fn_800DAE80(char *self) {
     return *(s32 *)(self + 0xC);
 }
 
+s32 fn_800DAE88(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0xC) != 0;
+}
+
 void fn_800DAEA0(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x20) = arg1;
 }
