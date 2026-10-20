@@ -59,6 +59,18 @@ void fn_8037BB54(void *arg0, char arg1, f32 farg0) {
     fn_8037BCC8(arg0, arg1, sinA, cosA);
 }
 
+void fn_8037BF40(void *arg0, char arg1, f32 farg0) {
+    f32 fn_802434CC(f32);
+    f32 fn_80243694(f32);
+    void fn_8037BE90(void *, char, f32, f32);
+    f32 sinA;
+    f32 cosA;
+
+    sinA = fn_80243694(farg0);
+    cosA = fn_802434CC(farg0);
+    fn_8037BE90(arg0, arg1, sinA, cosA);
+}
+
 #pragma peephole reset
 void fn_8037BFB0(void *arg0, f32 farg0, f32 farg1, f32 farg2) {
     M2C_FIELD(arg0, f32 *, 0) = 1.0f;
