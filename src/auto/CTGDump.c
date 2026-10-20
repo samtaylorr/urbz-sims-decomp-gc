@@ -75,10 +75,10 @@ s32 fn_800F53B8(s32 arg0, s32 arg1) {
 void fn_800F53FC(s32 arg0, s32 arg1) {
     if (arg1 == 0xFFFF) {
         if (arg0 != 0) {
-            fn_800F521C(lbl_80495A90);
+            fn_800F521C(&lbl_80495A90);
             return;
         }
-        fn_800F5220(lbl_80495A90, 2);
+        fn_800F5220(&lbl_80495A90, 2);
     }
 }
 
