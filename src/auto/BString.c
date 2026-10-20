@@ -316,6 +316,27 @@ void fn_800D2778(void) {
 
 }
 
+void fn_800D28E8(void *arg0) {
+    M2C_UNK fn_800E18EC(M2C_UNK);
+    struct {
+        s32 cur;
+        s32 idx;
+        s32 arr[2];
+    } *g = (void *)lbl_80434A9C;
+    s32 r;
+
+    if (M2C_FIELD(arg0, s32 *, 0x18) == 0 && M2C_FIELD(arg0, s32 *, 0x1C) == 0) {
+        r = fn_800E18EC(6);
+        if (r == 1) {
+            M2C_FIELD(arg0, s32 *, 0x18) = r;
+            g->arr[g->idx] = g->cur;
+            g->arr[g->idx == 0] = g->cur == 0;
+        } else if ((u32)(r - 2) <= 1) {
+            M2C_FIELD(arg0, s32 *, 0x1C) = 1;
+        }
+    }
+}
+
 void fn_800D2990(void) {
 
 }
@@ -367,12 +388,12 @@ void fn_800D2A54(s32 *self) {
     s32 state;
 
     fn_800DC03C(0);
-    self[10] = 0;
     self[4] = 0;
     self[7] = 0;
     self[8] = 0;
     self[6] = 0;
     self[9] = 0;
+    self[10] = 0;
     if (lbl_8041F754[0x5C / 4] != 0) {
         if (lbl_8041F754[0x50 / 4] != 0) {
             fn_80045500(lbl_8041F754);
