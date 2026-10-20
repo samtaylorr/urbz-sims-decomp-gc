@@ -10,6 +10,7 @@ extern void *fn_802D0B3C(void);
 extern void *fn_802D0BC0(void);
 extern void fn_802CAA00(void *, s32);
 extern s32 lbl_80494DCC;
+extern char lbl_803FD274[];
 extern u8 lbl_80446D34[];
 extern const f32 lbl_803F02B0[];
 extern const f32 lbl_803F02C0[];
