@@ -1483,8 +1483,8 @@ s32 fn_800E18B8(s32 arg0) {
 
     ret = 0;
     if (lbl_804966DC == 0 && (u32)(arg0 - 1) <= 0x15U) {
-        lbl_804966E0 = 0;
         lbl_804966D8 = 0;
+        lbl_804966E0 = 0;
         lbl_804966DC = arg0;
         ret = arg0;
     }
@@ -1511,15 +1511,21 @@ void fn_800E1908(void *arg0) {
     extern char lbl_8040AA10[];
     extern char lbl_8040AA98[];
     void *p;
+    char *name;
+    s32 *a;
+    s32 *b;
 
     p = fn_802D1FC8(0xDC);
+    name = lbl_803D4BBC;
     fn_8030728C();
-    M2C_FIELD(p, char **, 0x48) = lbl_803D4BBC;
+    M2C_FIELD(p, char **, 0x48) = name;
     M2C_FIELD(p, char **, 0x44) = lbl_8040AA10;
     M2C_FIELD(p, s32 *, 0x4C) = 0;
-    M2C_FIELD(p, s32 *, 0x50) = 0;
-    M2C_FIELD(p, s32 *, 0x54) = 0;
-    M2C_FIELD(p, s32 *, 0x5C) = 0;
+    a = (s32 *)((char *)p + 0x50);
+    a[0] = 0;
+    a[1] = 0;
+    b = (s32 *)((char *)p + 0x58);
+    b[1] = 0;
     M2C_FIELD(p, s32 *, 0x64) = 1;
     M2C_FIELD(p, char **, 0x44) = lbl_8040AA98;
     M2C_FIELD(p, s32 *, 0xC8) = 0;
