@@ -87,3 +87,7 @@ void fn_800F5448(void) {
     fn_800F53FC(1, 0xFFFF);
 }
 
+void fn_800F5474(void) {
+    fn_800F53FC(0, 0xFFFF);
+}
+
