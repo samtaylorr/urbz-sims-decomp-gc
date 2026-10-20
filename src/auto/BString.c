@@ -1043,6 +1043,10 @@ s32 *fn_800DAFA8(s32 *self, s32 a) {
     return self;
 }
 
+s32 fn_800DAFE0(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x18) != 0;
+}
+
 void fn_802D0F9C(void);
 void fn_800DB148(void) {
     fn_802D0F9C();
