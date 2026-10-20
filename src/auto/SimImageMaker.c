@@ -2,10 +2,14 @@
 #include "common.h"
 
 void fn_8009CC04(u32 arg0, u8 *arg1) {
-    arg1[0] = arg0 >> 24;
-    arg1[1] = (arg0 >> 16) & 0xFF;
-    arg1[2] = (arg0 >> 8) & 0xFF;
-    arg1[3] = arg0 & 0xFF;
+    u8 a = arg0 >> 24;
+    u8 r = arg0 >> 16;
+    u8 g = arg0 >> 8;
+    u8 b = arg0;
+    arg1[0] = a;
+    arg1[1] = r;
+    arg1[2] = g;
+    arg1[3] = b;
 }
 
 void fn_8009CC24(void *arg0, s32 *arg1) {
