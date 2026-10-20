@@ -198,6 +198,11 @@ void fn_800F3E30(void) {
     fn_800F1510();
 }
 
+s32 fn_800F47E4(s32 arg0, s32 arg1) {
+    s32 fn_800F4058(s32, s32, s32, s32);
+    return fn_800F4058(arg0, arg1, 0, -1) == 0;
+}
+
 s32 fn_800F484C(s32 arg0, s32 arg1) {
     return (u32)fn_800F4058(arg0, arg1, 0, -1) >> 31;
 }
