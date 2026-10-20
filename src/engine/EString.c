@@ -109,6 +109,15 @@ s32 fn_802D48E0(s32 arg0, s32 *arg1) {
     return arg0;
 }
 
+s32 fn_802D4924(s32 arg0, s32 *arg1) {
+    M2C_UNK fn_802D3C60(s32, s32);
+    s32 fn_802DF728(char *, s32);
+    char sp8[0x104];
+
+    fn_802D3C60(arg0, fn_802DF728(sp8, *arg1));
+    return arg0;
+}
+
 s32 *fn_802D49AC(s32 *arg0) {
     M2C_UNK fn_802DF358(s32, s32);
     s32 temp_r3;
