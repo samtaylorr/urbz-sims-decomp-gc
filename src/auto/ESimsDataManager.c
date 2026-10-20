@@ -1,6 +1,11 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+typedef struct {
+    s32 *begin;
+    s32 *end;
+} ESimsIdVec;
+
 void *fn_8001D654(u32 size, s32 arg1, void *p) {
     return p;
 }
@@ -65,6 +70,25 @@ s32 fn_8001DD04(s32 *arg0, s32 *arg1) {
     fn_803365B8(mgr, *arg0, &a, &a2);
     fn_803365B8(mgr, *arg1, &b, &b2);
     return a < b;
+}
+
+void fn_8001DD7C(void *arg0, s32 *arg1) {
+    extern void fn_8039B510(s32 *, s32 *, s32 (*)(s32 *, s32 *));
+    extern void fn_803347B0(void *, s32, s32, s32);
+    extern u8 lbl_8045B438[];
+    s32 n;
+    s32 i;
+
+    n = M2C_FIELD(arg0, s32 **, 4) - M2C_FIELD(arg0, s32 **, 0);
+    if (n != 0) {
+        fn_8039B510(M2C_FIELD(arg0, s32 **, 0), M2C_FIELD(arg0, s32 **, 4), fn_8001DD04);
+        for (i = 0; i < n; i++) {
+            fn_803347B0(lbl_8045B438, M2C_FIELD(arg0, s32 **, 0)[i], 0, 0);
+            if (arg1 != NULL) {
+                (*arg1)++;
+            }
+        }
+    }
 }
 
 void fn_8001E210(void *arg0, s32 arg1) {
