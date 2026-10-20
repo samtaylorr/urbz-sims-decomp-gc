@@ -205,12 +205,13 @@ void fn_8012F868(void *arg0, void *arg1) {
         s32 b;
         s32 c;
         s32 d;
-    } s;
+    } s, *ps;
+    ps = &s;
     s.a = 0;
-    s.d = 0;
-    s.b = 0;
-    s.c = 0;
-    fn_8012FAD0(arg0, arg1, &s);
+    ps->b = 0;
+    ps->c = 0;
+    ps->d = 0;
+    fn_8012FAD0(arg0, arg1, ps);
 }
 
 void fn_8012FE00(void *arg0, s32 arg1) {
