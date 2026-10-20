@@ -23,7 +23,7 @@ extern void fn_802D211C(void *);
 extern s32 fn_80245BB4(char *, const char *, ...);
 extern char lbl_803D5A48[];
 extern char lbl_803D5A4C[];
-extern u8 lbl_80495A90[];
+extern s32 lbl_80495A90;
 s32 fn_800F524C(s32 arg0, s32 arg1) {
     void *buf;
 
@@ -70,6 +70,16 @@ s32 fn_800F53B8(s32 arg0, s32 arg1) {
 
     fn_80245BB4(buf, lbl_803D5A54, arg1);
     return arg0;
+}
+
+void fn_800F53FC(s32 arg0, s32 arg1) {
+    if (arg1 == 0xFFFF) {
+        if (arg0 != 0) {
+            fn_800F521C(lbl_80495A90);
+            return;
+        }
+        fn_800F5220(lbl_80495A90, 2);
+    }
 }
 
 void fn_800F5448(void) {
