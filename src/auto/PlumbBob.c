@@ -267,6 +267,14 @@ void fn_8006A20C(void) {
 
 }
 
+extern u8 lbl_804092E8[];
+extern void fn_80307364(void *);
+extern void fn_8030728C(void *);
+void fn_8006A274(u8 *self) {
+    *(u8 **)(self + 0x44) = lbl_804092E8;
+    fn_80307364(self);
+}
+
 void fn_8006A2A4(void *arg0) {
     register unsigned temp_r9;
 
