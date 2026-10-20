@@ -220,6 +220,17 @@ s32 fn_802D4298(char **arg0, char *arg1, s32 arg2) {
     return p != 0 ? p - *arg0 : -1;
 }
 
+s32 fn_802D4364(char **arg0, char *arg1, s32 arg2) {
+    char *fn_80248B28(char *, char *);
+    char *p;
+
+    if (**arg0 == 0) {
+        return -1;
+    }
+    p = fn_80248B28(*arg0 + arg2, arg1);
+    return p != 0 ? p - *arg0 : -1;
+}
+
 void fn_802D4634(u8 **arg0, s32 arg1, u8 arg2) {
     u8 *var_r3;
     u8 var_r0;
