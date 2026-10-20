@@ -4,6 +4,11 @@
 void fn_8018D8DC(void);
 extern u8 lbl_80413E80[];
 extern void fn_802D20E8(void *);
+
+static inline s32 QRF_ArrayCount(s32 *a) {
+    return a != NULL ? a[-1] : 0;
+}
+
 void fn_80186218(void *arg0) {
     M2C_FIELD(arg0, s32 *, 8) = 0;
 }
@@ -156,6 +161,34 @@ s32 fn_8018CD68(void) {
     return 0;
 }
 
+void fn_8018CD70(void *arg0, s32 arg1) {
+    M2C_UNK fn_800F68E0(s32);
+    M2C_UNK fn_800F69F8(s32, s32);
+    void *fn_8032D8E0(void *, s32, s32 *);
+    extern void *lbl_8049665C;
+    s32 sp8;
+    s32 var_r4;
+    void *temp_r9;
+    void *var_r3;
+
+    fn_800F68E0(arg1);
+    if (M2C_FIELD(arg0, s32 *, 0xC) != 0) {
+        temp_r9 = *(void **)lbl_8049665C;
+        var_r3 = ((void *(*)(void *))M2C_FIELD(temp_r9, void **, 0x1AC))((char *)lbl_8049665C + M2C_FIELD(temp_r9, s16 *, 0x1A8));
+        if (var_r3 != NULL) {
+            var_r3 = fn_8032D8E0(var_r3, M2C_FIELD(arg0, s32 *, 0xC), &sp8);
+            if (var_r3 != NULL && (var_r3 = M2C_FIELD(var_r3, void **, 8)) != NULL) {
+                var_r4 = *(s32 *)((sp8 * 4) + (char *)var_r3);
+            } else {
+                var_r4 = 0;
+            }
+            if (var_r4 != 0) {
+                fn_800F69F8(arg1, var_r4);
+            }
+        }
+    }
+}
+
 s32 fn_8018CE18(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0xC) != 0;
 }
@@ -256,7 +289,7 @@ void fn_8018CF04(void) {
 
 void fn_8018CF08(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     M2C_UNK fn_800F68E0(s32);
-    M2C_UNK fn_800F68F0(s32, s32);
+    M2C_UNK fn_800F68F0(s32, s32, s32);
     s32 **fn_8039FDA4(void *, void *, s32);
     void *temp_r3;
     char *temp_r3_2;
@@ -280,8 +313,11 @@ void fn_8018CF08(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
             if (temp_r3_4 != NULL) {
                 var_r0 = temp_r3_4[-1];
             }
-            if (arg3 <= var_r0 && temp_r3_4[arg3 - 1] != 0) {
-                fn_800F68F0(arg1, -1);
+            if (arg3 <= var_r0) {
+                s32 *p = temp_r3_4 + (arg3 - 1);
+                if (*p != 0) {
+                    fn_800F68F0(arg1, *p, -1);
+                }
             }
         }
     }
