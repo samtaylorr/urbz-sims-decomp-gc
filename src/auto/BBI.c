@@ -397,6 +397,10 @@ s32 fn_800632A0(s32 arg0) {
     return arg0 + 0x3F0;
 }
 
+void fn_800632A8(u8 *arg0, struct BBI_Vec3 *arg1) {
+    *(struct BBI_Vec3 *)(arg0 + 0x3F0) = *arg1;
+}
+
 f32 fn_800632C8(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0x3D0);
 }
