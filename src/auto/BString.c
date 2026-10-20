@@ -895,6 +895,10 @@ s32 *fn_800DACDC(s32 *self, s32 a) {
     return self;
 }
 
+s32 fn_800DAD14(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x18) != 0;
+}
+
 s32 fn_800DAE30(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x24);
 }
