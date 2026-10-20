@@ -503,8 +503,27 @@ f32 fn_8019F4E4(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0x30);
 }
 
+s32 fn_8019F4EC(void *arg0, s32 i) {
+    return ((s32 *)((u8 *)arg0 + 0x10))[i];
+}
+
 s32 fn_8019F4FC(u8 *self) {
     return *(s32 *)(self + 0x20);
+}
+
+s32 fn_8019F504(void *arg0) {
+    return (M2C_FIELD(arg0, s32 *, 0x1C) & 0x1000) != 0;
+}
+
+s32 fn_8019F51C(void *arg0) {
+    s32 i;
+
+    for (i = 0; i < 7; i++) {
+        if ((M2C_FIELD(arg0, s32 *, 0x1C) >> i) & 1) {
+            return i;
+        }
+    }
+    return 0;
 }
 
 s32 fn_8019F548(void *arg0) {
