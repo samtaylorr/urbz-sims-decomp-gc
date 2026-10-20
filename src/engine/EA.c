@@ -220,6 +220,10 @@ void fn_802D9124(void) {
     fn_80258544();
 }
 
+s32 fn_802D91D4(void *arg0, s32 arg1) {
+    return arg1 == 0;
+}
+
 extern void fn_8025AEB4(void *);
 void *fn_802D91E0(void *self) {
     fn_8025AEB4(self);
