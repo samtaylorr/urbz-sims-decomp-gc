@@ -43,7 +43,7 @@ s32 fn_8032979C(u8 *self) {
     s32 i;
     s32 j;
 
-    for (i = 0; i < *(s32 *)(self + 0x20 + 4); i++) {
+    for (i = 0; i < ListCount(self + 0x20); i++) {
         if (fn_802FFED4(*(u8 **)(self + 0x20) + i * 0x18) == 0) {
             for (j = i - 1; j >= 0; j--) {
                 fn_802FFE1C(*(u8 **)(self + 0x20) + j * 0x18);
