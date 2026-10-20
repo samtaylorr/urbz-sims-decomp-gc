@@ -482,6 +482,14 @@ s32 fn_800FB8A4(void) {
     return 0;
 }
 
+void fn_800FB8AC(void) {
+    extern void *lbl_80496648;
+    void *vt;
+
+    vt = *(void **)lbl_80496648;
+    ((void (*)(void *))M2C_FIELD(vt, void **, 0x4C))((char *)lbl_80496648 + M2C_FIELD(vt, s16 *, 0x48));
+}
+
 extern u8 lbl_8040D5A0[];
 void fn_800FC178(void **self, s32 flags) {
     *self = lbl_8040D5A0;
