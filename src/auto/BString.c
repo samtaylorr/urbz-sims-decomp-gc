@@ -2803,6 +2803,10 @@ typedef struct Bits64 {
     u64 bits;
 } Bits64;
 
+static inline u64 Bits64_Shr(u64 bits, s32 n) {
+    return bits >> n;
+}
+
 Bits64 fn_800EA6D4(Bits64 *arg0) {
     return *arg0;
 }
@@ -2827,9 +2831,11 @@ void fn_800EA744(u64 *arg0) {
 
 s32 fn_800EA758(s32 arg0, s32 arg1) {
     u64 v = *(u64 *)arg0 >> arg1;
+    Bits64 t;
     u64 bit = 1;
     s32 ret = 0;
-    if ((v & bit) != 0) {
+    t.bits = v;
+    if ((t.bits & bit) != 0) {
         ret = 1;
     }
     return ret;
