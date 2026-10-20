@@ -429,6 +429,18 @@ s32 fn_80175F8C(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0xB4);
 }
 
+s32 fn_80175F94(char *self) {
+    char *obj = *(char **)(self + 0xC0);
+    s32 result = 0;
+    if (obj != NULL) {
+        char *vt = *(char **)(obj + 0xBC);
+        if ((*(s32 (**)(char *))(vt + 0xB4))(obj + *(s16 *)(vt + 0xB0)) != 0) {
+            result = 1;
+        }
+    }
+    return result;
+}
+
 s32 fn_80176068(void) {
     return 1;
 }
