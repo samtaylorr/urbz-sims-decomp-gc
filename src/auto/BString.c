@@ -2795,6 +2795,14 @@ s32 *fn_800EA680(s32 *self, s32 arg1) {
     return self;
 }
 
+void fn_800EA6C0(u64 *arg0) {
+    *arg0 = 0;
+}
+
+void fn_800EA6D4(u64 *arg0, u64 *arg1) {
+    *arg0 = *arg1;
+}
+
 void fn_800EA6EC(void *self, s32 flags) {
     if (flags & 1) {
         fn_802D20E8(self);
