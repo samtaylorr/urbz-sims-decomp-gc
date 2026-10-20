@@ -1846,6 +1846,24 @@ s32 fn_803A3790(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     return ret;
 }
 
+void fn_803A37FC(s32 *first, s32 hole, s32 len, s32 val, s32 comp);
+void fn_803A3918(s32 *first, s32 *last, s32 comp) {
+    s32 len = last - first;
+    s32 parent;
+
+    if (len < 2) {
+        return;
+    }
+    parent = (len - 2) / 2;
+    while (1) {
+        fn_803A37FC(first, parent, len, first[parent], comp);
+        if (parent == 0) {
+            return;
+        }
+        parent--;
+    }
+}
+
 void fn_803A39D8(s32 *first, s32 *middle, s32 *last, s32 *val, s32 comp);
 void fn_803A3AA4(s32 *first, s32 *middle, s32 *last, s32 comp) {
     fn_803A39D8(first, middle, last, 0, comp);
