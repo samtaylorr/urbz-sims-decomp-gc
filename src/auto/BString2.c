@@ -3,6 +3,14 @@
 
 void fn_800F0FFC(void);
 s32 fn_800F4878(void **arg0);
+
+static inline u16 *BString2_Data(void **s) {
+    return fn_800F4878(s) ? *(u16 **)*s : 0;
+}
+
+static inline s32 BString2_Eq(const u16 *a, const u16 *b) {
+    return *a == *b;
+}
 void fn_800EF8B4(void) {
 
 }
