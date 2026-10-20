@@ -630,6 +630,19 @@ s32 fn_80389994(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x84);
 }
 
+s32 fn_8038B5A0(s32 chan, s32 arg1, s32 arg2) {
+    s32 fn_803894A8(s32);
+    s32 fn_8038B400(s32, s32, s32, void *);
+    extern void fn_80387D34(void);
+    s32 result;
+
+    result = fn_8038B400(chan, arg1, arg2, fn_80387D34);
+    if (result < 0) {
+        return result;
+    }
+    return fn_803894A8(chan);
+}
+
 s32 fn_8038C698(void) {
     return 0;
 }
