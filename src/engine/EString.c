@@ -75,6 +75,14 @@ void fn_802D47F4(s32 *arg0) {
     fn_802D3CE4(arg0, fn_802DF448(sp8, *arg0));
 }
 
+void fn_802D4834(s32 *arg0) {
+    M2C_UNK fn_802D3CE4(s32 *, s32);
+    s32 fn_802DF534(char *, s32);
+    char sp8[0x104];
+
+    fn_802D3CE4(arg0, fn_802DF534(sp8, *arg0));
+}
+
 void fn_802D4874(s32 *arg0) {
     M2C_UNK fn_802DF4B8(s32, s32);
     s32 temp_r3;
