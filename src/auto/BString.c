@@ -595,8 +595,8 @@ void fn_800D4074(s32 *self) {
     extern s32 lbl_80434AC8[];
     fn_800D28E8(self);
     if (self[6] != 0) {
-        lbl_80434AC8[0] = 1;
         lbl_8041F768[0] = 0;
+        lbl_80434AC8[0] = 1;
         fn_8006FF58(lbl_8041FAD0[0]);
         fn_800E3B38(self, 0x10, lbl_803D19E0[0]);
     } else if (self[7] != 0) {
