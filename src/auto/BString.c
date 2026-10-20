@@ -1257,6 +1257,20 @@ UnkDC234 *fn_800DC234(UnkDC234 *self, s32 a) {
     return self;
 }
 
+UnkDC234 *fn_800DC274(UnkDC234 *self, s32 a) {
+    extern f32 lbl_803D4A34[];
+    extern char lbl_8040BDA8[];
+    f32 f = lbl_803D4A34[0];
+    self->unk0 = a;
+    self->unk4 = -1;
+    self->unk8 = 0;
+    self->unkC = -1;
+    self->unk10 = 1;
+    self->unk14 = lbl_8040BDA8;
+    self->unk18 = f;
+    return self;
+}
+
 extern s32 lbl_8040BD60[];
 s32 *fn_800DC2B4(s32 *self, s32 a) {
     self[0] = a;
