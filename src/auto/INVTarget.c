@@ -814,6 +814,12 @@ void fn_801F5060(void *arg0) {
     }
 }
 
+void fn_801F53CC(void *arg0, s32 arg1) {
+    M2C_UNK fn_801F50B8(void *, s32);
+    extern void *lbl_8041FAC8[];
+    fn_801F50B8(lbl_8041FAC8[0], arg1);
+}
+
 void fn_801F55A4(void) {
 
 }
