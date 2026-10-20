@@ -186,6 +186,11 @@ void fn_802EB590(void) {
     fn_802EB650();
 }
 
+void fn_802EC460(void *arg0, void *arg1);
+void fn_802EC4C8(void *arg0, s32 arg1) {
+    fn_802EC460(arg0, fn_802E5F90_inline(arg0, arg1));
+}
+
 void fn_802ED6F4(void) {
     M2C_UNK fn_802ED604(M2C_UNK, M2C_UNK);
     fn_802ED604(1, 0xFFFF);
