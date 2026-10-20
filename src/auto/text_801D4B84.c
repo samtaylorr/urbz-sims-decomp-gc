@@ -11,6 +11,10 @@ typedef struct {
     s32 v[3];
 } Unk801D4CC0;
 
+typedef struct {
+    f32 x, y, z;
+} Vec801D4D50;
+
 u8 *fn_801D4B84(u8 *self) {
     extern void fn_801C72DC(u8 *);
     extern u8 lbl_80416358[];
