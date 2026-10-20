@@ -382,6 +382,11 @@ s32 fn_80175EA8(void) {
     return 1;
 }
 
+void fn_80175F20(char *self) {
+    char *vt = *(char **)(self + 0xBC);
+    (*(void (**)(char *))(vt + 0xE4))(self + *(s16 *)(vt + 0xE0));
+}
+
 s32 fn_80175F54(void) {
     return 1;
 }
