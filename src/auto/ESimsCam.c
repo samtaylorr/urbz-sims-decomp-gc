@@ -133,9 +133,8 @@ void fn_80014A9C(void) {
 }
 
 void *fn_80014BD0(u32 size) {
-    void *p;
+    void *p = ESimsCam_AllocAligned(size);
 
-    p = ESimsCam_AllocAligned(size);
     fn_80248488(p, 0, size);
     return p;
 }
