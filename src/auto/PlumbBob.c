@@ -533,6 +533,13 @@ void fn_8007B390(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x1224) = arg1;
 }
 
+extern u8 lbl_80409910[];
+extern void fn_80304AB4(void *);
+void fn_8007B80C(u8 *self) {
+    *(u8 **)(self + 0x44) = lbl_80409910;
+    fn_80304AB4(self);
+}
+
 void fn_8007BB0C(void) {
     fn_80308518();
 }
