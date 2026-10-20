@@ -510,9 +510,10 @@ void fn_800CFF68(void *arg0, s32 flags) {
     extern void fn_802D20E8(void *);
     extern void fn_803997AC(void *, u32);
     s32 *v;
-    M2C_FIELD(arg0, u8 **, 0x5C) = lbl_8040AC68;
-    fn_800CD104();
-    v = (s32 *)((char *)arg0 + 8);
+    s32 *self = arg0;
+    self[0x17] = (s32)lbl_8040AC68;
+    ((void (*)(void *))fn_800CD104)(self);
+    v = self + 2;
     if (v[0] != 0) {
         u32 size = (u32)(v[3] - v[0]) & ~3;
         if (size > 0x80) {
@@ -522,7 +523,7 @@ void fn_800CFF68(void *arg0, s32 flags) {
         }
     }
     if (flags & 1) {
-        fn_802D20E8(arg0);
+        fn_802D20E8(self);
     }
 }
 
