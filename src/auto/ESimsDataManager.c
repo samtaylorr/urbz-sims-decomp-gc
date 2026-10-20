@@ -6,11 +6,6 @@ typedef struct {
     s32 *end;
 } ESimsIdVec;
 
-static inline void fn_8001E5B8_call(void **pp) {
-    void *vt = *(void **)*pp;
-    ((void (*)(void *))M2C_FIELD(vt, void **, 0x1C))((char *)*pp + M2C_FIELD(vt, s16 *, 0x18));
-}
-
 void *fn_8001D654(u32 size, s32 arg1, void *p) {
     return p;
 }
@@ -115,18 +110,15 @@ void fn_8001E5B8(void *arg0, void *arg1, s32 arg2) {
     extern u8 lbl_8041EE24[];
     extern void *lbl_80496220;
     void *obj;
-    void **ref;
     void *vt;
 
     fn_8001E284(arg0, arg1, arg2);
     obj = arg0;
-    ref = &obj;
     M2C_FIELD(arg0, s32 *, 0xA8) = 2;
     vt = *(void **)arg0;
     ((void (*)(void *, s32))M2C_FIELD(vt, void **, 0x14))((char *)arg0 + M2C_FIELD(vt, s16 *, 0x10), -1);
     M2C_FIELD(arg1, s32 *, 0x600) += 1;
-    vt = *(void **)*ref;
-    ((void (*)(void *))M2C_FIELD(vt, void **, 0x1C))((char *)*ref + M2C_FIELD(vt, s16 *, 0x18));
+    fn_8001E5B8_call(&obj);
     vt = *(void **)lbl_80496220;
     ((void (*)(void *, void *, s32, void *, void *, s32, s32))M2C_FIELD(vt, void **, 0x64))((char *)lbl_80496220 + M2C_FIELD(vt, s16 *, 0x60), arg0, 1, lbl_8041EE24, arg1, arg2, 0);
 }
