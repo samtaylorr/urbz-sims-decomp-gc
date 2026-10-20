@@ -32,7 +32,7 @@ void fn_803296D4(u8 *self) {
     extern void fn_802FFE1C(u8 *);
     s32 i;
 
-    for (i = 0; i < *(s32 *)(self + 0x20 + 4); i++) {
+    for (i = 0; i < ListCount(self + 0x20); i++) {
         fn_802FFE1C(*(u8 **)(self + 0x20) + i * 0x18);
     }
 }
