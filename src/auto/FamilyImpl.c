@@ -240,6 +240,13 @@ void fn_8010C1AC(void) {
     fn_8010C214();
 }
 
+void fn_8010C1D4(void **obj) {
+    if (obj != NULL) {
+        char *vt = (char *)*obj;
+        (*(void (**)(void *, s32))(vt + 0x64))((char *)obj + *(s16 *)(vt + 0x60), 3);
+    }
+}
+
 s32 fn_8010C580(void) {
     return 0;
 }
