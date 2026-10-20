@@ -381,7 +381,7 @@ s32 fn_80262F24(s32 prio, DVDCommandBlock *block) {
     M2C_UNK fn_802622E0();
     s32 fn_80264C7C(s32, void *);
     extern s32 lbl_80494A2C;
-    extern u32 lbl_80495ED0;
+    extern DVDCommandBlock *lbl_80495ED0;
     extern s32 lbl_80495EDC;
     s32 level;
     s32 result;
