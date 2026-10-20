@@ -78,6 +78,29 @@ void fn_80300044(u8 *self, u8 *arg1) {
     }
 }
 
+void fn_80300104(u8 *self, u8 *arg1) {
+    s32 i;
+
+    for (i = 0; i < *(s32 *)(self + 4); i++) {
+        u8 *items = *(u8 **)self;
+        u8 *item = items + i * 0x6C;
+        u8 *vt;
+        vt = *(u8 **)(arg1 + 0x68);
+        (*(void (**)(void *, s32, f32))(vt + 0x1AC))(arg1 + *(s16 *)(vt + 0x1A8), 0, *(f32 *)(item + 0x24));
+        vt = *(u8 **)(arg1 + 0x68);
+        (*(void (**)(void *, s32))(vt + 0xB4))(arg1 + *(s16 *)(vt + 0xB0), *(s32 *)(items + i * 0x6C));
+    }
+}
+
+void fn_8030019C(u8 *self, s32 arg1) {
+    extern void fn_80302228(u8 *, s32);
+    s32 i;
+
+    for (i = 0; i < *(s32 *)(self + 4); i++) {
+        fn_80302228(*(u8 **)self + i * 0x6C, arg1);
+    }
+}
+
 void fn_803003C4(u8 *self) {
     extern void fn_803023D8(u8 *);
     s32 i;
