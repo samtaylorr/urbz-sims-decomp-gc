@@ -12,6 +12,27 @@ void *fn_80063ED0(void *arg0, s32 arg1) {
     return arg0;
 }
 
+void fn_800645CC(void *arg0, void *arg1) {
+    M2C_UNK fn_802CD218(void *, s32);
+    void *node;
+    s32 id;
+    void *vt;
+
+    for (node = M2C_FIELD(arg0, void **, 4); node != NULL; node = M2C_FIELD(node, void **, 0x10)) {
+        if (arg1 == M2C_FIELD(node, void **, 0x1C)) {
+            id = M2C_FIELD(node, s32 *, 0x18);
+            goto found;
+        }
+    }
+    id = -1;
+found:
+    fn_802CD218((char *)arg0 + 4, id);
+    if (arg1 != NULL) {
+        vt = *(void **)arg1;
+        M2C_FIELD(vt, void (**)(void *, s32), 0x34)((char *)arg1 + M2C_FIELD(vt, s16 *, 0x30), 3);
+    }
+}
+
 void fn_80064650(s32 *arg0, s32 arg1) {
     M2C_UNK fn_802CCE6C(void *, s32, s32, s32);
     s32 id;
@@ -27,6 +48,10 @@ void fn_8006488C(void *arg0, s32 arg1) {
     void *node;
     void *obj;
     void *vt;
+    void **list;
+    void *it;
+    void *o;
+    void *v;
 
     for (node = M2C_FIELD(arg0, void **, 4); node != NULL; node = M2C_FIELD(node, void **, 0x10)) {
         obj = M2C_FIELD(node, void **, 0x1C);
@@ -34,14 +59,15 @@ void fn_8006488C(void *arg0, s32 arg1) {
         vt = *(void **)obj;
         M2C_FIELD(vt, void (**)(void *, s32), 0x16C)((char *)obj + M2C_FIELD(vt, s16 *, 0x168), arg1);
     }
-    node = M2C_FIELD(arg0, void **, 4);
-    while (node != NULL) {
-        obj = M2C_FIELD(node, void **, 0x1C);
-        node = M2C_FIELD(node, void **, 0x10);
-        vt = *(void **)obj;
-        M2C_FIELD(vt, void (**)(void *), 0xC)((char *)obj + M2C_FIELD(vt, s16 *, 8));
+    list = (void **)((char *)arg0 + 4);
+    it = *list;
+    while ((it != NULL) != 0) {
+        o = M2C_FIELD(it, void **, 0x1C);
+        it = M2C_FIELD(it, void **, 0x10);
+        v = *(void **)o;
+        M2C_FIELD(v, void (**)(void *), 0xC)((char *)o + M2C_FIELD(v, s16 *, 8));
     }
-    fn_802CD53C((char *)arg0 + 4);
+    fn_802CD53C(list);
 }
 
 s32 fn_80064948(void *arg0) {
