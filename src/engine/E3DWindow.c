@@ -91,6 +91,16 @@ void fn_802E5EA4(void) {
     fn_802E5700();
 }
 
+void fn_802E5F6C(void *arg0, void *arg1) {
+    if (arg1 != NULL && M2C_FIELD(arg1, s32 *, 0xA8) == 1) {
+        M2C_FIELD(arg1, s32 *, 0x30) |= 0x08000000;
+    }
+}
+
+void fn_802E5F90(void *arg0, s32 arg1) {
+    fn_802E5F6C(arg0, fn_802E5F90_inline(arg0, arg1));
+}
+
 void fn_802E66F8(s32 arg0, s32 arg1, f32 farg0, f32 farg1) {
     M2C_UNK fn_802CB69C(s32, void *);
     void *fn_802D1FC8(M2C_UNK);
