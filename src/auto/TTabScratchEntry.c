@@ -1193,6 +1193,10 @@ void fn_801B1CBC(void) {
 
 }
 
+s32 fn_801B1D30(void *arg0) {
+    return ++M2C_FIELD(arg0, s32 *, 0x1C);
+}
+
 void fn_801B1F0C(void *arg0) {
     void *vt = M2C_FIELD(arg0, void **, 0);
     M2C_FIELD(vt, void (**)(void *), 0x34)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x30));
