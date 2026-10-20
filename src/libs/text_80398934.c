@@ -340,6 +340,12 @@ void fn_8039AE08(void) {
 
 }
 
+void fn_8039B010(s32 *first, s32 *last, s32 comp) {
+    s32 val = last[-1];
+    last[-1] = *first;
+    fn_8039AE74(first, 0, last - 1 - first, val, comp);
+}
+
 void fn_8039AE74(s32 *first, s32 hole, s32 len, s32 val, s32 comp);
 void fn_8039B050(s32 *first, s32 *middle, s32 *last, s32 *val, s32 comp);
 void fn_8039B11C(s32 *first, s32 *middle, s32 *last, s32 comp) {
@@ -1785,6 +1791,11 @@ s32 fn_803A3018(s32 arg0, s32 arg1, s32 arg2) {
     ret = fn_8018E850(out, p, arg1);
     ((void (*)(void *, s32))fn_8018EA6C)(p, 2);
     return ret;
+}
+
+void fn_803A3254(s32 *first, s32 *middle, s32 *last, s32 *val, s32 comp);
+void fn_803A3320(s32 *first, s32 *middle, s32 *last, s32 comp) {
+    fn_803A3254(first, middle, last, 0, comp);
 }
 
 void fn_803A35A4(s32 *first, s32 *last, s32 comp);
