@@ -24,8 +24,9 @@ s32 *fn_8016F8E8(s32 *arg0) {
     return arg0;
 }
 
-void fn_8016F8FC(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 4) = M2C_FIELD(arg0, s32 *, 4) + arg1;
+s32 *fn_8016F8FC(s32 *arg0, s32 arg1) {
+    arg0[1] += arg1;
+    return arg0;
 }
 
 void fn_8016F980(void *arg0) {
