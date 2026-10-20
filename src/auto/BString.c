@@ -702,6 +702,16 @@ void fn_800D4F0C(void) {
     lbl_8041F7B8[0] = 0;
 }
 
+void fn_800D4F1C(s32 *self) {
+    extern s32 lbl_8041F754[];
+    extern void fn_800D2CE8(s32 *);
+    fn_800D2CE8(self);
+    if (lbl_8041F754[0x78 / 4] != 0) {
+        lbl_8041F754[0x78 / 4] = 0;
+        fn_800E3B80(self, 2);
+    }
+}
+
 extern u8 lbl_8040B998[];
 s32 *fn_800D4F70(s32 *self, s32 arg1) {
     self[0] = arg1;
