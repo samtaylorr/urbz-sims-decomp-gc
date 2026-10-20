@@ -32,9 +32,9 @@ void fn_802C686C(void *arg0, s8 *arg1, s32 arg2) {
     *arg1 = 0;
 }
 
-void fn_802C6A5C(s32 *arg0) {
-    M2C_UNK fn_80248808(s32);
-    fn_80248808(*arg0);
+s32 fn_802C6A5C(s32 *arg0) {
+    s32 fn_80248808(s32);
+    return fn_80248808(*arg0);
 }
 
 void fn_802C6CCC(s32 *arg0, s32 arg1, s32 arg2, s32 arg3) {
