@@ -25,13 +25,11 @@ static inline s32 fn_802E5EC4_inline(void *arg0, s32 arg1) {
 }
 
 static inline void *fn_802E5F90_inline(void *arg0, s32 arg1) {
-    s32 cur;
     s32 i;
 
     if (arg1 & 0x103F) {
-        cur = M2C_FIELD(arg0, s32 *, 4);
-        if (fn_802E5F90_flags(arg0, cur) & arg1) {
-            return M2C_FIELD(arg0, char **, 0x40) + cur * 0xB0;
+        if (fn_802E5F90_flags(arg0, M2C_FIELD(arg0, s32 *, 4)) & arg1) {
+            return M2C_FIELD(arg0, char **, 0x40) + M2C_FIELD(arg0, s32 *, 4) * 0xB0;
         }
         return NULL;
     }
