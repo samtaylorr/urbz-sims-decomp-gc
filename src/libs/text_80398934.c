@@ -1827,6 +1827,11 @@ s32 fn_803A3790(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     return ret;
 }
 
+void fn_803A39D8(s32 *first, s32 *middle, s32 *last, s32 *val, s32 comp);
+void fn_803A3AA4(s32 *first, s32 *middle, s32 *last, s32 comp) {
+    fn_803A39D8(first, middle, last, 0, comp);
+}
+
 void fn_803A3D2C(s32 *first, s32 *last, s32 comp);
 void fn_803A3DD8(s32 *first, s32 *last, s32 *val, s32 comp);
 void fn_803A3E2C(s32 *first, s32 *last, s32 comp) {
