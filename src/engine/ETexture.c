@@ -40,6 +40,15 @@ s32 fn_8036EE60(void) {
     return 0;
 }
 
+extern u8 lbl_8041DC58[];
+void fn_802D20E8(void *);
+void fn_8036EEE0(void *self, s32 flags) {
+    M2C_FIELD(self, u8 **, 0x20) = lbl_8041DC58;
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 s32 fn_8036EF74(s32 *self) {
     return *self;
 }
