@@ -50,12 +50,13 @@ void fn_80345FB0(void) {
 
 void fn_80346F10(void *arg0) {
     s32 fn_80347668(void);
-    void fn_803488E4(void);
+    void fn_803488E4(s32);
     void fn_80270D34(void);
+    s32 r;
     fn_80270D34();
     if (M2C_FIELD(arg0, s32 *, 0x20) != 0) {
-        while (fn_80347668() != 0) {
-            fn_803488E4();
+        while ((r = fn_80347668()) != 0) {
+            fn_803488E4(r);
         }
     }
 }
