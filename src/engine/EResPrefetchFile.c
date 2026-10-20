@@ -72,6 +72,15 @@ void fn_8031FEF0(void **self, s32 flags) {
     }
 }
 
+void fn_8031FF50(void *self) {
+    void fn_80338184(void *, s32);
+    extern u8 lbl_8045B58C[];
+    if (M2C_FIELD(self, s32 *, 0x20) != 0) {
+        fn_80338184(lbl_8045B58C, M2C_FIELD(self, s32 *, 0x20));
+        M2C_FIELD(self, s32 *, 0x20) = 0;
+    }
+}
+
 void fn_80320010(void) {
 
 }
