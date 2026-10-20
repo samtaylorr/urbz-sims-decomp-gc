@@ -1,8 +1,22 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+void fn_8009CC04(u32 arg0, u8 *arg1) {
+    arg1[3] = arg0;
+    arg1[0] = arg0 >> 24;
+    arg1[1] = arg0 >> 16;
+    arg1[2] = arg0 >> 8;
+}
+
 void fn_8009CC24(void *arg0, s32 *arg1) {
     *arg1 = (M2C_FIELD(arg0, u8 *, 0) << 0x18) | (M2C_FIELD(arg0, u8 *, 1) << 0x10) | (M2C_FIELD(arg0, u8 *, 2) << 8) | M2C_FIELD(arg0, u8 *, 3);
+}
+
+u32 fn_8009CC54(u32 arg0, u32 arg1, u32 arg2, u32 arg3) {
+    return (((arg0 & 0xFF) + (arg1 & 0xFF) + (arg2 & 0xFF) + (arg3 & 0xFF)) >> 2)
+         | (((((arg0 >> 8) & 0xFF) + ((arg1 >> 8) & 0xFF) + ((arg2 >> 8) & 0xFF) + ((arg3 >> 8) & 0xFF)) << 6) & 0x1FF00)
+         | (((((arg0 >> 16) & 0xFF) + ((arg1 >> 16) & 0xFF) + ((arg2 >> 16) & 0xFF) + ((arg3 >> 16) & 0xFF)) << 14) & 0x1FF0000)
+         | ((((arg0 >> 24) + (arg1 >> 24) + (arg2 >> 24) + (arg3 >> 24)) << 22) & 0xFF000000);
 }
 
 void *fn_8009CCE4(void *arg0) {
@@ -23,6 +37,17 @@ void *fn_8009CCE4(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x1F4) = 0;
     fn_8009CD8C(arg0);
     return arg0;
+}
+
+void fn_8009CD40(s32 arg0, s32 arg1) {
+    void fn_8009CD8C(s32);
+    void fn_802D20E8(s32);
+    void fn_802E56A0(s32, s32);
+    fn_8009CD8C(arg0);
+    fn_802E56A0(arg0 + 0xC, 2);
+    if (arg1 & 1) {
+        fn_802D20E8(arg0);
+    }
 }
 
 void fn_8009D0F8(void *arg0, s32 arg1) {
