@@ -101,12 +101,18 @@ void fn_8031FF50(void *self) {
 
 void fn_8031FF98(void *self, void *stream) {
     extern void fn_8031E988(void *, void *);
+    char *vt;
+    void (*func)(void *, void *, s32);
+    void *obj;
     s32 size;
 
     fn_8031E988(self, stream);
+    vt = M2C_FIELD(stream, char **, 0x18);
+    func = (void (*)(void *, void *, s32))M2C_FIELD(vt, void **, 0x3C);
+    obj = (char *)stream + M2C_FIELD(vt, s16 *, 0x38);
     size = M2C_FIELD(self, s32 *, 0x1C);
-    ((void (*)(void *, void *, s32))M2C_FIELD(M2C_FIELD(stream, char **, 0x18), void **, 0x3C))((char *)stream + M2C_FIELD(M2C_FIELD(stream, char **, 0x18), s16 *, 0x38), &size, 4);
-    ((void (*)(void *, void *, s32))M2C_FIELD(M2C_FIELD(stream, char **, 0x18), void **, 0x3C))((char *)stream + M2C_FIELD(M2C_FIELD(stream, char **, 0x18), s16 *, 0x38), M2C_FIELD(self, void **, 0x20), M2C_FIELD(self, s32 *, 0x1C));
+    func(obj, &size, 4);
+    EStream_Write(stream, M2C_FIELD(self, void **, 0x20), M2C_FIELD(self, s32 *, 0x1C));
 }
 
 void fn_80320010(void) {
