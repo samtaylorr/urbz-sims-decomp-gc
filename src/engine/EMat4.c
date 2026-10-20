@@ -91,9 +91,10 @@ char **fn_802C7910(char **arg0, s32 arg1) {
 
     n = fn_802C6A5C((s32 *)arg0);
     if (n != 0 && fn_80248640(arg1, (*arg0)[n - 1]) != 0) {
-        do {
+        n--;
+        while (n != 0 && fn_80248640(arg1, (*arg0)[n - 1]) != 0) {
             n--;
-        } while (n != 0 && fn_80248640(arg1, (*arg0)[n - 1]) != 0);
+        }
         fn_802C6D20((s32)arg0, (s32)arg0, n);
     }
     return arg0;
