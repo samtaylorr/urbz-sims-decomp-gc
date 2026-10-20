@@ -991,6 +991,12 @@ void *fn_801A3BF0(void *arg0, s32 i) {
     return (u8 *)arg0 + (i * 0x10 + 8);
 }
 
+void fn_801A3C10(void *arg0, s32 i, s32 arg2) {
+    struct TTabEntryType { u8 pad[0x20]; s16 unk20; s16 pad22; void (*unk24)(void *, s32); } *t;
+    t = *(struct TTabEntryType **)((u8 *)arg0 + i * 0x10 + 8);
+    t->unk24((u8 *)arg0 + (i * 0x10 + 8) + t->unk20, arg2);
+}
+
 s16 fn_801A3C58(void *arg0) {
     return M2C_FIELD(arg0, s16 *, 6);
 }
