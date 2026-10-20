@@ -41,6 +41,12 @@ void **fn_802D84F8(void **arg0) {
     return arg0;
 }
 
+void **fn_802D853C(void **arg0) {
+    char *vt = *arg0;
+    ((void (*)(void *))M2C_FIELD(vt, void **, 0x1C))((char *)arg0 + M2C_FIELD(vt, s16 *, 0x18));
+    return arg0;
+}
+
 void fn_802D8580(void *arg0) {
     M2C_UNK fn_802D8424(s32);
     fn_802D8424(M2C_FIELD(arg0, s32 *, 4));
