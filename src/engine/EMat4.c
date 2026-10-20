@@ -241,6 +241,14 @@ void fn_802CBB94(void) {
 
 }
 
+s32 fn_802CCCF8(void *arg0, s32 arg1) {
+    void fn_802CD440(void *, s32, s32 *);
+    s32 sp8;
+
+    fn_802CD440(arg0, arg1, &sp8);
+    return sp8;
+}
+
 void *fn_802CCD80(void *arg0, s32 arg1);
 void *fn_802CCD20(void *arg0, s32 arg1) {
     char *fn_802CCEEC(void *, void *, s32, s32);
@@ -274,6 +282,26 @@ void *fn_802CCD80(void *arg0, s32 arg1) {
         }
     }
     return var_r11;
+}
+
+void *fn_802CCDC8(void *arg0, u32 arg1) {
+    extern char lbl_803FD274[];
+    void *temp_r3;
+    void *var_r0;
+
+    var_r0 = M2C_FIELD(arg0, void **, 8);
+    if (var_r0 == lbl_803FD274) {
+        return NULL;
+    }
+    do {
+        temp_r3 = var_r0;
+        if (arg1 < M2C_FIELD(temp_r3, u32 *, 0x18)) {
+            var_r0 = M2C_FIELD(temp_r3, void **, 0);
+        } else {
+            var_r0 = M2C_FIELD(temp_r3, void **, 4);
+        }
+    } while (var_r0 != lbl_803FD274);
+    return temp_r3;
 }
 
 s32 fn_802CD600(void **arg0) {
