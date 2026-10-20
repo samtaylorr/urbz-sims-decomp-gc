@@ -309,6 +309,15 @@ s32 fn_801DC1F0(void) {
     return lbl_80494614;
 }
 
+void fn_801DC22C(void) {
+    extern char *lbl_80494614;
+    if (lbl_80494614 != NULL) {
+        char *vt = M2C_FIELD(lbl_80494614, char **, 0xC);
+        M2C_FIELD(vt, void (**)(void *, s32), 0xC)(lbl_80494614 + M2C_FIELD(vt, s16 *, 8), 3);
+        lbl_80494614 = NULL;
+    }
+}
+
 s32 fn_801DCC6C(void *arg0) {
     s32 var_r11;
 
