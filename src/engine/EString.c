@@ -135,13 +135,13 @@ void fn_802D3C60(s32 *arg0, char *arg1) {
 }
 
 s32 *fn_802D3CE4(s32 *arg0, char *arg1) {
-    M2C_UNK fn_802D39F0(s32 *, s32);
-    s32 old;
+    void fn_802D39F0(s32 *, s32);
+    s32 *self = arg0;
+    s32 old = *self;
 
-    old = *arg0;
-    fn_802D3C60(arg0, arg1);
-    fn_802D39F0(arg0, old);
-    return arg0;
+    fn_802D3C60(self, arg1);
+    fn_802D39F0(self, old);
+    return self;
 }
 
 s32 fn_802D3D24(s32 *arg0) {
