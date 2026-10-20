@@ -2803,8 +2803,8 @@ typedef struct Bits64 {
     u64 bits;
 } Bits64;
 
-void fn_800EA6D4(u64 *arg0, u64 *arg1) {
-    BitsSet(arg0, *arg1);
+Bits64 fn_800EA6D4(Bits64 *arg0) {
+    return *arg0;
 }
 
 void fn_800EA6EC(void *self, s32 flags) {
