@@ -18,6 +18,15 @@ s32 fn_801D7550(void) {
     return lbl_804945F8;
 }
 
+void fn_801D758C(void) {
+    extern char *lbl_804945F8;
+    if (lbl_804945F8 != NULL) {
+        char *vt = M2C_FIELD(lbl_804945F8, char **, 0xC);
+        M2C_FIELD(vt, void (**)(void *, s32), 0xC)(lbl_804945F8 + M2C_FIELD(vt, s16 *, 8), 3);
+        lbl_804945F8 = NULL;
+    }
+}
+
 s32 fn_801D7D3C(void *arg0) {
     s32 fn_801D7BE0(void *);
     return fn_801D7BE0(arg0) != 0;
