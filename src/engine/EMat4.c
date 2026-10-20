@@ -214,6 +214,13 @@ void **fn_802CAD40(void **arg0) {
     return arg0;
 }
 
+void fn_802CADC8(void **arg0, s32 arg1) {
+    extern u8 lbl_80419350[];
+    *arg0 = lbl_80419350;
+    fn_802CAA00(arg0 + 7, 2);
+    fn_802CAA00(arg0, arg1);
+}
+
 void fn_802CB508(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x40) = arg1;
 }
