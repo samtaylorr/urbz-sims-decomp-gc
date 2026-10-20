@@ -253,6 +253,29 @@ void *fn_802CCD20(void *arg0, s32 arg1) {
     return fn_802CCEEC(arg0, temp_r3, arg1, 0) + 0x1C;
 }
 
+void *fn_802CCD80(void *arg0, s32 arg1) {
+    extern char lbl_803FD274[];
+    void *var_r11;
+    void *var_r3;
+    s32 temp_r0;
+
+    var_r3 = M2C_FIELD(arg0, void **, 8);
+    var_r11 = NULL;
+    while (var_r3 != lbl_803FD274) {
+        temp_r0 = M2C_FIELD(var_r3, s32 *, 0x18);
+        if (arg1 == temp_r0) {
+            return var_r3;
+        }
+        var_r11 = var_r3;
+        if ((u32) arg1 < (u32) temp_r0) {
+            var_r3 = M2C_FIELD(var_r11, void **, 0);
+        } else {
+            var_r3 = M2C_FIELD(var_r11, void **, 4);
+        }
+    }
+    return var_r11;
+}
+
 s32 fn_802CD600(void **arg0) {
     s32 var_r9;
     void *var_r3;
