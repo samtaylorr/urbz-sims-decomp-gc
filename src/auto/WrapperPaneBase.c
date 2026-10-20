@@ -14,6 +14,9 @@ typedef struct {
     s32 unk40[1];
 } WrapperPaneBase;
 
+typedef struct { f32 x, y, z; } WPBVec3;
+typedef struct { f32 x, y, z, w; } WPBVec4;
+
 void fn_800CD09C(void);
 s32 fn_800C5630(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x6C);
