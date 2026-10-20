@@ -918,14 +918,9 @@ s32 fn_8039CD68(s32 arg0, s32 arg1, s32 arg2) {
 }
 
 void fn_8039CDCC(s32 arg0, s32 arg1, s32 arg2) {
-    struct {
-        s32 unk0;
-        s32 unk4;
-    } tmp, *p;
+    s32 *p = &arg0;
 
-    p = &tmp;
-    tmp.unk0 = arg0;
-    p->unk4 = arg2;
+    p[1] = arg2;
     fn_8039CD68((s32)p, arg1, arg2);
 }
 
