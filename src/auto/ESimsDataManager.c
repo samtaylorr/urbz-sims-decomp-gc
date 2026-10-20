@@ -5,6 +5,10 @@ void *fn_8001D654(u32 size, s32 arg1, void *p) {
     return p;
 }
 
+void *fn_8001D65C(u32 size, s32 arg1, void *p) {
+    return p;
+}
+
 s32 fn_8001D664(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x2C) = arg1;
     return arg1;
@@ -28,6 +32,37 @@ s32 fn_8001D688(void) {
 
 void fn_8001D690(void) {
 
+}
+
+s32 fn_8001D694(void *arg0, s32 arg1) {
+    s32 found;
+    s32 i;
+    s32 n;
+
+    found = 0;
+    n = M2C_FIELD(arg0, s32 **, 4) - M2C_FIELD(arg0, s32 **, 0);
+    for (i = 0; i < n; i++) {
+        if (M2C_FIELD(arg0, s32 **, 0)[i] == arg1) {
+            found = 1;
+            break;
+        }
+    }
+    return found;
+}
+
+s32 fn_8001DD04(s32 *arg0, s32 *arg1) {
+    extern void fn_803365B8(void *, s32, u32 *, s32 *);
+    extern u8 lbl_8045B438[];
+    u32 a;
+    s32 a2;
+    u32 b;
+    s32 b2;
+
+    b = 0;
+    a = 0;
+    fn_803365B8(lbl_8045B438, *arg0, &a, &a2);
+    fn_803365B8(lbl_8045B438, *arg1, &b, &b2);
+    return a < b;
 }
 
 void fn_8001E210(void *arg0, s32 arg1) {
