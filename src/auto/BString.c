@@ -2918,6 +2918,7 @@ s32 fn_800EB244(s32 arg0, s32 arg1) {
 }
 
 s32 fn_800EB278(s32 arg0, s32 arg1) {
+    s32 fn_800EF110(s32, s32, s32, s32);
     return fn_800EF110(arg0, arg1, 0, 1) != 0;
 }
 
