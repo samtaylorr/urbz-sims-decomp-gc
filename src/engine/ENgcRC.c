@@ -264,6 +264,12 @@ s32 fn_8034834C(void) {
     return sp8;
 }
 
+void fn_80348380(s32 arg0) {
+    void fn_8037A938(void *, s32, s32);
+    extern u8 lbl_8046C3A8[];
+    fn_8037A938(lbl_8046C3A8, arg0, 0);
+}
+
 void fn_803483F0(s32 arg0) {
     void fn_8037A938(void *, s32, s32);
     extern u8 lbl_8046C3C8[];
