@@ -1444,6 +1444,28 @@ void fn_8039F0BC(s32 *self, s32 flags) {
     }
 }
 
+void fn_8039F0F0(void *arg0, s32 flags) {
+    extern u8 lbl_8040AC68[];
+    extern void fn_802D20E8(void *);
+    extern void fn_803997AC(void *, u32);
+    s32 *v;
+    s32 *self = arg0;
+    self[0x17] = (s32)lbl_8040AC68;
+    ((void (*)(void *))fn_800CD104)(self);
+    v = self + 2;
+    if (v[0] != 0) {
+        u32 size = (u32)(v[3] - v[0]) & ~3;
+        if (size > 0x80) {
+            fn_802D20E8((void *)v[0]);
+        } else {
+            fn_803997AC((void *)v[0], size);
+        }
+    }
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_8039F16C(s32 *self, s32 flags) {
     self[5] = (s32)lbl_804093F8;
     if (flags & 1) {
