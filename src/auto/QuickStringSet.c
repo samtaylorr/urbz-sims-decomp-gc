@@ -559,6 +559,25 @@ s32 fn_800FD808(void *arg0, s32 arg1) {
     return 0;
 }
 
+s16 fn_800FD858(void *arg0, s32 arg1) {
+    extern s32 fn_8031C470(s32, s32);
+    s32 ret;
+    s32 p;
+
+    ret = fn_8031C470(M2C_FIELD(arg0, s32 *, 0x10), arg1);
+    if (ret == 0) {
+        p = M2C_FIELD(arg0, s32 *, 0x14);
+        if (p != 0) {
+            ret = fn_8031C470(p, arg1);
+            if (ret != 0) {
+                return ret;
+            }
+        }
+        ret = fn_8031C470(M2C_FIELD(arg0, s32 *, 0x18), arg1);
+    }
+    return ret;
+}
+
 s32 fn_800FD8C4(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     extern s32 fn_8031C444(s32);
     extern s32 fn_800FD1A4(void *, s16, s32, s32);
@@ -653,6 +672,18 @@ s32 fn_800FDAB8(void *arg0, s32 arg1) {
     obj = (*(u8 *(**)(u8 *, s32))(*(u8 **)lbl_8049665C + 0x3C))(lbl_8049665C + *(s16 *)(*(u8 **)lbl_8049665C + 0x38), id);
     vt = *(u8 **)(obj + 0x10);
     return (*(s32 (**)(u8 *, s32))(vt + 0x7C))(obj + *(s16 *)(vt + 0x78), 0x42484156);
+}
+
+s32 fn_800FDDD0(void **arg0, s32 arg1, void **arg2) {
+    void *vt;
+
+    if (arg2 != NULL && (arg1 == 1 || arg1 == (s32)0x9F2BC11C)) {
+        vt = *arg0;
+        ((void (*)(void *))M2C_FIELD(vt, void **, 0x14))((u8 *)arg0 + M2C_FIELD(vt, s16 *, 0x10));
+        *arg2 = arg0;
+        return 1;
+    }
+    return 0;
 }
 
 s32 fn_800FDE40(void *arg0) {
