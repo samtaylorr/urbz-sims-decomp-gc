@@ -6,6 +6,11 @@ f32 fn_800B3238(f32 farg0) {
     return farg0 / lbl_803CECD0[0];
 }
 
+f32 fn_800B3258(f32 farg0) {
+    extern f32 lbl_803CECD8[];
+    return farg0 * lbl_803CECD8[0];
+}
+
 s32 fn_800B3420(s32 arg0) {
     return arg0 + 0x60;
 }
