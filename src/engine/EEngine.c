@@ -117,6 +117,11 @@ void fn_802E18CC(void *arg0, s32 arg1) {
     }
 }
 
+void fn_802E18E4(void) {
+    for (;;) {
+    }
+}
+
 void fn_802E18E8(void *self, void *arg1) {
     s32 fn_802D0BC0(void);
     s32 fn_802D118C(s32);
