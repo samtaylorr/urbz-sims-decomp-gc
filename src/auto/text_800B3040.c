@@ -16,6 +16,11 @@ f32 fn_800B3258(f32 farg0) {
     return farg0 * lbl_803CECD8[0];
 }
 
+f32 fn_800B3268(f32 farg0) {
+    extern f32 lbl_803CECDC[];
+    return farg0 * lbl_803CECDC[0];
+}
+
 void fn_800B3278(void *arg0, s32 arg1) {
     void fn_8000AA2C(s32, const char *, ...);
     extern char lbl_803CECE0[];
