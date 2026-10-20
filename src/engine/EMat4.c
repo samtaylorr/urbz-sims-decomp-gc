@@ -241,6 +241,18 @@ void fn_802CBB94(void) {
 
 }
 
+void *fn_802CCD80(void *arg0, s32 arg1);
+void *fn_802CCD20(void *arg0, s32 arg1) {
+    char *fn_802CCEEC(void *, void *, s32, s32);
+    char *temp_r3;
+
+    temp_r3 = fn_802CCD80(arg0, arg1);
+    if (temp_r3 != NULL && M2C_FIELD(temp_r3, s32 *, 0x18) == arg1) {
+        return temp_r3 + 0x1C;
+    }
+    return fn_802CCEEC(arg0, temp_r3, arg1, 0) + 0x1C;
+}
+
 s32 fn_802CD600(void **arg0) {
     s32 var_r9;
     void *var_r3;
