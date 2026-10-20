@@ -746,6 +746,16 @@ void fn_80087D64(s32 arg0) {
     fn_8000AA2C(lbl_8041FA1C[0], lbl_803CB0C8, 0, 0, 1, arg0 ? lbl_803CB0D0 : lbl_803CB0D4);
 }
 
+void fn_80087DC0(s32 arg0) {
+    void fn_8000AA2C();
+    extern u8 lbl_803CB0D8[];
+    extern u8 lbl_803CB0D0[];
+    extern u8 lbl_803CB0D4[];
+    extern s32 lbl_8041FA1C[];
+
+    fn_8000AA2C(lbl_8041FA1C[0], lbl_803CB0D8, 0, 0, 1, arg0 ? lbl_803CB0D0 : lbl_803CB0D4);
+}
+
 void fn_8008824C(void *arg0) {
     void fn_80088278(void *);
     if (M2C_FIELD(arg0, s32 *, 0x18) & 2) {
