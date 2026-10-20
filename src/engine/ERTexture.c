@@ -24,6 +24,20 @@ s32 fn_803314F4(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void fn_80331578(void **self, s32 flags) {
+    extern u8 lbl_8041BB50[];
+    extern void fn_8033160C(void *);
+    extern void fn_8031E910(void *, s32);
+    void fn_80338184(void *, s32);
+    extern u8 lbl_8045BAE8[];
+    *self = lbl_8041BB50;
+    fn_8033160C(self);
+    fn_8031E910(self, 0);
+    if (flags & 1) {
+        fn_80338184(lbl_8045BAE8, (s32)self);
+    }
+}
+
 void fn_80331C64(void) {
     M2C_UNK fn_80331534();
     M2C_UNK fn_80331DD8(M2C_UNK);
