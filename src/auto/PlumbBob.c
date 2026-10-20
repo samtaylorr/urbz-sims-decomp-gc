@@ -223,6 +223,11 @@ void fn_8006A194(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
 
+s32 fn_8006A1C8(u8 *self, s32 i) {
+    struct { char pad[0x1E4]; s32 arr[1]; } *s = (void *)self;
+    return s->arr[i];
+}
+
 s32 fn_8006A1D8(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x1C8);
 }
