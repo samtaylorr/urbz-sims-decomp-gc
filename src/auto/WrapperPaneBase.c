@@ -530,6 +530,10 @@ s32 fn_800D00A4(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x34);
 }
 
+s32 fn_800D00D0(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x34) == 2;
+}
+
 s32 fn_800D00E4(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x34) == 3;
 }
