@@ -353,6 +353,10 @@ s32 fn_802DEC58(s32 *self) {
     return self[1];
 }
 
+s32 fn_802DED04(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 4) == 0;
+}
+
 extern void fn_802DED88(void *);
 void fn_802DED88(void *self) {
     extern void *fn_802DDCE8(void *, s32);
