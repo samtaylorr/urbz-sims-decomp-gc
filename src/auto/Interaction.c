@@ -112,7 +112,7 @@ s32 fn_8010EA60(void *arg0) {
     count = M2C_FIELD(arg0, s32 *, 4);
     if (count == 1) {
         if (M2C_FIELD(arg0, s32 *, 0x1C) != 0) {
-            s32 q[7];
+            s32 q[6];
             void *obj;
             void *vt;
             q[0] = 0;
