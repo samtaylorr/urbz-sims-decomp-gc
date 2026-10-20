@@ -148,6 +148,13 @@ void fn_800F7824(void) {
     fn_800F788C();
 }
 
+void fn_800F784C(void **obj) {
+    if (obj != NULL) {
+        char *vt = (char *)*obj;
+        (*(void (**)(void *, s32))(vt + 0x64))((char *)obj + *(s16 *)(vt + 0x60), 3);
+    }
+}
+
 extern u8 lbl_8040D2A8[];
 extern void fn_802D20E8(void *);
 void fn_800F78B8(void **self, s32 flags) {
