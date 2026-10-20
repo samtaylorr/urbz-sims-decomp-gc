@@ -1189,7 +1189,7 @@ void fn_800DC100(void) {
 void fn_800DC138(void) {
     extern void *lbl_804943B0;
     if (lbl_804943B0 != NULL) {
-        fn_800DBFDC();
+        fn_800DBFDC(lbl_804943B0);
     }
 }
 
@@ -2848,6 +2848,16 @@ s32 *fn_800EA680(s32 *self, s32 arg1) {
 void fn_800EA6C0(u64 *arg0) {
     *arg0 = 0;
 }
+
+typedef struct UnkDC234 {
+    s32 unk0;
+    s32 unk4;
+    s32 unk8;
+    s32 unkC;
+    s32 unk10;
+    void *unk14;
+    f32 unk18;
+} UnkDC234;
 
 typedef struct Bits64 {
     u64 bits;
