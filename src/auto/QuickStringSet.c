@@ -559,6 +559,18 @@ s32 fn_800FD808(void *arg0, s32 arg1) {
     return 0;
 }
 
+s32 fn_800FD964(void **arg0, s32 arg1, void **arg2) {
+    void *vt;
+
+    if (arg2 != NULL && (arg1 == 1 || arg1 == (s32)0x9F2BC11C)) {
+        vt = *arg0;
+        ((void (*)(void *))M2C_FIELD(vt, void **, 0x14))((u8 *)arg0 + M2C_FIELD(vt, s16 *, 0x10));
+        *arg2 = arg0;
+        return 1;
+    }
+    return 0;
+}
+
 s32 fn_800FD9D4(void *arg0) {
     return ++M2C_FIELD(arg0, s32 *, 0x1C);
 }
