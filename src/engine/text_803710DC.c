@@ -79,23 +79,11 @@ void fn_803712D0(void) {
 
 void fn_803712D4(void *arg0, void *arg1, u32 size) {
     extern void fn_8037121C(void *);
-    void *heap;
     void *p;
     char *vt;
 
     fn_8037121C(arg0);
-    heap = ((void *(*)(void))fn_802D0AB8)();
-    if (size == 0) {
-        p = NULL;
-    } else {
-        p = fn_802D197C(heap, size, 4);
-        if (p == NULL) {
-            p = fn_802DBBCC(heap, size, 0);
-            if (p == NULL && heap == ((void *(*)(void))fn_802D0AB8)()) {
-                p = fn_802DBBCC(fn_802D0B3C(), size, 0);
-            }
-        }
-    }
+    p = Alloc(size);
     *(void **)((char *)arg0 + 0x20) = p;
     vt = *(char **)((char *)arg1 + 0x28);
     (*(void (**)(void *, void *, u32))(vt + 0x1C))((char *)arg1 + *(s16 *)(vt + 0x18), p, size);
