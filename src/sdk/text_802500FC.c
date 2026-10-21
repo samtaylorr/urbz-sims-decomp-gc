@@ -377,6 +377,13 @@ s32 fn_80260BD4(DVDFileInfo *fileInfo, s32 offset, void (*callback)(s32, DVDFile
     return 1;
 }
 
+void fn_80260C6C(s32 result, DVDCommandBlock *block) {
+    DVDFileInfo *fileInfo = (DVDFileInfo *)block;
+    if (fileInfo->callback) {
+        (fileInfo->callback)(result, fileInfo);
+    }
+}
+
 void fn_80260D48(void) {
     extern M2C_UNK lbl_80495EC8;
     fn_80259838(&lbl_80495EC8);
