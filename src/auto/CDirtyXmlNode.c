@@ -2,6 +2,9 @@
 #include "common.h"
 
 void fn_800A9720(void);
+
+typedef struct { s32 a[4]; } Struct16_800BF7FC;
+typedef struct { s32 a[4]; s16 b; } Struct18_800BF784;
 s32 fn_800BEF3C(void) {
     return 0x67F664FB;
 }
