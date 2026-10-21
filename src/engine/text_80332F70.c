@@ -1,6 +1,12 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+typedef struct {
+    s16 delta;
+    s16 pad;
+    void *func;
+} VtblEntry;
+
 void fn_80335F5C(void *);
 void fn_80335FD8(void *, s32);
 extern u8 lbl_8041BC40[];
