@@ -100,10 +100,10 @@ u16 fn_8036EB44(void) {
     return lbl_80493D1A[0];
 }
 
-extern void fn_802D6A90(void *, void *, void *, void *, s32, void *, void *);
+extern s32 fn_802D6A90(void *, void *, void *, void *, s32, void *, void *);
 extern void fn_8036EA50(void);
-extern void fn_8036EA78(void);
-extern void fn_8036EAA4(void);
+extern void fn_8036EA78();
+extern void fn_8036EAA4();
 extern u8 lbl_803F52F0[];
 extern u8 lbl_80491E1C[];
 void fn_8036EB50(s32 arg0) {
