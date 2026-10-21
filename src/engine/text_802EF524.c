@@ -3,6 +3,12 @@
 
 typedef struct { f32 x, y, z; } Vec3f;
 
+static inline void Vec3f_Set(Vec3f *v, f32 x, f32 y, f32 z) {
+    v->z = z;
+    v->y = y;
+    v->x = x;
+}
+
 void fn_802D2FD0(void);
 void fn_802EF524(void) {
     fn_802D2FD0();
@@ -24,6 +30,27 @@ s32 fn_802EF584(s32 arg0, s32 *out) {
     fn_802C5C58((void *)arg0, &tmp);
     *out = tmp;
     return arg0;
+}
+
+void fn_802EF768(u8 *arg0, Vec3f *arg1, f32 *arg2, Vec3f *arg3, Vec3f *arg4) {
+    extern f32 lbl_803F0D30[];
+    f32 zero = lbl_803F0D30[0];
+    Vec3f *dir;
+    f32 scale;
+    Vec3f v;
+
+    *arg1 = *(Vec3f *)(arg0 + 0xC0);
+    dir = (Vec3f *)(arg0 + 0xA4);
+    scale = *(f32 *)(arg0 + 0xA0);
+    v.x = dir->x * scale;
+    v.y = dir->y * scale;
+    v.z = dir->z * scale;
+    *arg4 = v;
+    v.z = zero;
+    v.y = zero;
+    v.x = zero;
+    *arg2 = zero;
+    *arg3 = v;
 }
 
 void fn_802EF8D4(s32 arg0, s32 arg1) {
