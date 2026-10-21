@@ -128,6 +128,11 @@ void fn_80331064(void) {
     fn_8032E230();
 }
 
+void fn_803310B8(void *self) {
+    extern void fn_8032E2F4(void *, s32);
+    fn_8032E2F4(self, 2);
+}
+
 void fn_803310DC(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
