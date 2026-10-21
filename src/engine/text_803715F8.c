@@ -121,7 +121,7 @@ u16 fn_80371A18(void) {
 
 extern s32 fn_802D6A90(void *, void *, void *, void *, s32, void *, void *);
 extern void fn_803718D8(void);
-extern void fn_80371978(void);
+extern void fn_80371978();
 extern u8 lbl_803F55DC[];
 extern u8 lbl_80493858[];
 void fn_80371A24(s32 arg0) {
