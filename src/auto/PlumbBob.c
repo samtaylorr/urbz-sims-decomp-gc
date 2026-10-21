@@ -683,6 +683,25 @@ void fn_8007C498(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x10C) = arg1;
 }
 
+void *fn_8007C4A0(u32 size) {
+    void *heap;
+    void *p;
+
+    heap = ((void *(*)(void))fn_802D0AB8)();
+    if (size == 0) {
+        heap = NULL;
+    } else {
+        p = fn_802D197C(heap, size, 4);
+        if (p == NULL && (p = fn_802DBBCC(heap, size, 0)) == NULL && heap == ((void *(*)(void))fn_802D0AB8)()) {
+            heap = fn_802DBBCC(fn_802D0B3C(), size, 0);
+        } else {
+            heap = p;
+        }
+    }
+    fn_80248488(heap, 0, size);
+    return heap;
+}
+
 void fn_8007C54C(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
