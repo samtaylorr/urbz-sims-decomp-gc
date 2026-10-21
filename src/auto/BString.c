@@ -3426,6 +3426,10 @@ s32 fn_800EB524(s32 arg0, s32 arg1) {
     return fn_800EB388(arg1, arg0) ^ 1;
 }
 
+s32 fn_800EB554(s32 arg0, s32 arg1) {
+    return fn_800EB2DC(arg1, arg0) ^ 1;
+}
+
 s32 fn_800EB5B4(void) {
     return 0;
 }
