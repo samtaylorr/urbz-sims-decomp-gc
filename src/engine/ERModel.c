@@ -256,6 +256,8 @@ void fn_8032C204(u8 *self) {
     }
 }
 
+extern f32 lbl_803F33B4;
+extern f32 lbl_803F33B8;
 void fn_8032CC5C(s32 arg0, s32 arg1) {
     if (arg1 == 0xFFFF && arg0 != 0) {
         lbl_80496244 = lbl_803F33B4 * lbl_803F33B8;
