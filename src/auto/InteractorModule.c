@@ -96,6 +96,10 @@ void fn_8023C280(u8 *arg0, Vec3f *arg1) {
     *(Vec3f *)(arg0 + 0x5C) = *arg1;
 }
 
+void fn_8023C2A0(u8 *arg0, Vec3f *arg1) {
+    *(Vec3f *)(arg0 + 0x68) = *arg1;
+}
+
 s32 fn_8023C2C0(s32 arg0) {
     return arg0 + 0x5C;
 }
