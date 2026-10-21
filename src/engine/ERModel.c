@@ -102,6 +102,16 @@ s32 fn_80329DDC(u8 *self, s32 data) {
     return data - start;
 }
 
+void fn_8032A490(u8 *self) {
+    extern void fn_80338184(void *, void *);
+    extern u8 lbl_8045B82C[];
+
+    if (*(void **)(self + 0x1A0) != 0) {
+        fn_80338184(lbl_8045B82C, *(void **)(self + 0x1A0));
+        *(void **)(self + 0x1A0) = 0;
+    }
+}
+
 void fn_8032A5B4(u8 *self, s32 arg1) {
     extern void fn_80300104(u8 *, s32);
     s32 i;
