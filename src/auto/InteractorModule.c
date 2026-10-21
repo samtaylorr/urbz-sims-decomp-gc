@@ -113,6 +113,12 @@ f32 fn_8023C2D0(void) {
     return lbl_80496760;
 }
 
+f32 fn_8023C2D8(void *arg0) {
+    extern f32 lbl_80496764;
+    extern f32 lbl_80496768;
+    return (M2C_FIELD(arg0, u32 *, 0xC0) & 0x100) ? lbl_80496768 : lbl_80496764;
+}
+
 void fn_8023C2F0(void) {
 
 }
@@ -171,6 +177,10 @@ s32 fn_8023E8C0(void *arg0) {
 
 f32 fn_8023E8CC(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0x80);
+}
+
+void fn_8023E8D4(u8 *arg0, Vec3f *arg1) {
+    *(Vec3f *)(arg0 + 0x5C) = *arg1;
 }
 
 s32 fn_8023E934(s32 arg0) {
