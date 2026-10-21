@@ -178,6 +178,16 @@ void fn_8002AECC(void *arg0) {
     fn_80328D1C(M2C_FIELD(arg0, s32 *, 0x1C));
 }
 
+static inline void *fn_8002B464_Lookup(u16 id) {
+    void *fn_80190AA4(s32, u16);
+    extern s32 lbl_80496654;
+
+    if (lbl_80496654 != 0 && id <= 0xFFFA) {
+        return fn_80190AA4(lbl_80496654, id);
+    }
+    return NULL;
+}
+
 void fn_8002B464(u16 arg0, s32 arg1, u16 *arg2, u16 *arg3) {
     void *fn_80190AA4(s32, u16);
     extern s32 lbl_80496654;
