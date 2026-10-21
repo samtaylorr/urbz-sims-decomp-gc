@@ -11,6 +11,15 @@ void fn_80335B38(void) {
     fn_80337430();
 }
 
+void fn_80335F5C(void *);
+extern u8 lbl_8041C018[];
+void *fn_80335B58(void *arg0) {
+    fn_80335F5C(arg0);
+    M2C_FIELD(arg0, s32 *, 0x68) = 1;
+    M2C_FIELD(arg0, void **, 0xA4) = lbl_8041C018;
+    return arg0;
+}
+
 void fn_80335B9C(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0xA8) = arg1;
 }
