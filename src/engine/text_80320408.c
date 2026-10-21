@@ -142,6 +142,16 @@ f32 fn_80323FA0(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0x5C);
 }
 
+extern void fn_80320528(void *, s32);
+extern f32 lbl_8049622C[2];
+extern f32 lbl_803F30E4[];
+extern s32 lbl_80496234;
+extern void fn_803227C4(s32, s32, s32, s32, s32, s32);
+s32 fn_80323FA8(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    fn_803227C4(arg0, arg1, arg2, 0, arg4, arg3);
+    return arg0;
+}
+
 void fn_80324018(void *arg0, s32 arg1) {
     f32 fn_8039AA70(s32, M2C_UNK);
     void *temp_r29;
