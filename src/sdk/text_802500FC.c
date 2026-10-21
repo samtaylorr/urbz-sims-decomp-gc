@@ -334,6 +334,18 @@ s32 fn_80260574(void) {
     return 1;
 }
 
+s32 fn_802609A8(DVDFileInfo *fileInfo, void *addr, s32 length, s32 offset, void (*callback)(s32, DVDFileInfo *), s32 prio) {
+    if (!((0 <= offset) && (offset <= fileInfo->length))) {
+        fn_802530CC(lbl_80494A20, 0x2EE, lbl_803F93A8);
+    }
+    if (!((0 <= offset + length) && (offset + length < fileInfo->length + 32))) {
+        fn_802530CC(lbl_80494A20, 0x2F4, lbl_803F93A8);
+    }
+    fileInfo->callback = callback;
+    fn_80262FE0(&fileInfo->cb, addr, length, fileInfo->startAddr + offset, fn_80260A68, prio);
+    return 1;
+}
+
 void fn_80260A68(s32 result, DVDCommandBlock *block) {
     DVDFileInfo *fileInfo = (DVDFileInfo *)block;
     if (fileInfo->callback) {
