@@ -3494,6 +3494,14 @@ s32 fn_800EBC7C(void) {
     return 0;
 }
 
+void *fn_800EB5D0(void *mem, s32 arg1, s32 arg2);
+void *fn_800EB848(void *mem, const u8 *begin, u32 pos, u32 end);
+void fn_800EAF58(void);
+void **fn_800EC9CC(void **arg0, s32 arg1, s32 arg2) {
+    *arg0 = fn_800EB5D0(BString_Alloc(0x10, 4), arg1, arg2);
+    return arg0;
+}
+
 void *fn_800ECCD0(void **arg0, s32 arg1) {
     *arg0 = fn_800EBA28(BString_Alloc(0x10, 4), arg1);
     return arg0;
