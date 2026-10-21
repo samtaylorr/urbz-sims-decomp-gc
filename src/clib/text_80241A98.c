@@ -302,6 +302,17 @@ s32 fn_8024DF6C(s32 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     return ret;
 }
 
+s32 fn_8024E020(s32 *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    s32 fn_80375D08(s32, s32, s32);
+    extern s32 lbl_804966F8;
+    s32 ret;
+    lbl_804966F8 = 0;
+    if ((ret = fn_80375D08(arg1, arg2, arg3)) == -1 && lbl_804966F8 != 0) {
+        *arg0 = lbl_804966F8;
+    }
+    return ret;
+}
+
 void fn_8024F99C(void);
 void fn_8024EF20(void) {
     fn_8024F99C();
