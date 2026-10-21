@@ -25,8 +25,8 @@ void *fn_80237A00(void *arg0) {
     s32 *p;
 
     fn_8022315C(arg0);
-    IMSlot_Init((IMSlot *) ((u8 *) arg0 + 0x74));
     M2C_FIELD(arg0, s32 **, 0x58) = lbl_80418088;
+    IMSlot_Init((IMSlot *) ((u8 *) arg0 + 0x74));
     IMSlot_Init((IMSlot *) ((u8 *) arg0 + 0x84));
     IMSlot_Init((IMSlot *) ((u8 *) arg0 + 0x94));
     IMSlot_Init((IMSlot *) ((u8 *) arg0 + 0xA4));
@@ -191,6 +191,18 @@ f32 fn_8023C2D8(void *arg0) {
 
 void fn_8023C2F0(void) {
 
+}
+
+void fn_8023C410(void *arg0) {
+    extern void fn_8022E7B4(void *, void *);
+    extern f32 lbl_803EB7D0[];
+    extern f32 lbl_803EB7D4[];
+    f32 x, y;
+    fn_8022E7B4(fn_8022554C(arg0), arg0);
+    x = lbl_803EB7D0[0];
+    y = lbl_803EB7D4[0];
+    M2C_FIELD(arg0, f32 *, 0x50) = x;
+    M2C_FIELD(arg0, f32 *, 0x54) = y;
 }
 
 extern void fn_8022E84C(void *, void *);
