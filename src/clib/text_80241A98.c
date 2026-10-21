@@ -70,6 +70,7 @@ void fn_80246DDC(void *self) {
 }
 
 void fn_80246E00(s32 arg0) {
+    void fn_8024BE60(s32 arg0, s32 arg1, s32 arg2);
     fn_8024BE60(arg0, 0, 0xA);
 }
 
