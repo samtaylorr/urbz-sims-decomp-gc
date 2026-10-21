@@ -2,8 +2,8 @@
 #include "common.h"
 
 typedef struct {
-    s32 a;
-    s32 b;
+    void *node;
+    u8 inserted;
 } CasPair;
 
 void fn_803074F0(void);
