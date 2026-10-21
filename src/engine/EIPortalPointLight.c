@@ -79,6 +79,12 @@ void fn_802F27E4(void *arg0, s32 arg1, s32 arg2) {
     (*(void (**)(void *))(vt + 0x5C))((char *)arg0 + *(s16 *)(vt + 0x58));
 }
 
+void fn_802F3158(s32 arg0, s32 arg1) {
+    if (arg1 == 0xFFFF && arg0 != 0) {
+        lbl_804961D8 = fn_802D6A90(lbl_804937B8, fn_802F31C8, fn_802F31F0, fn_802F3210, 0, lbl_803F0FAC, lbl_80493740);
+    }
+}
+
 void fn_802F31C8(void) {
     M2C_UNK fn_802D1FC8(M2C_UNK);
     fn_802D1FC8(0xEC);
