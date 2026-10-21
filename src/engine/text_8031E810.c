@@ -54,6 +54,12 @@ void fn_8031EAB8(void *arg0) {
     }
 }
 
+void fn_8031EB28(s32 arg0, s32 arg1) {
+    if (arg1 == 0xFFFF && arg0 != 0) {
+        lbl_80496224 = fn_802D6A90(lbl_80493858, fn_8031EB98, fn_8031EBC0, fn_8031EBEC, 0, lbl_803F2E48, lbl_804936F0);
+    }
+}
+
 void fn_8031EB98(void) {
     M2C_UNK fn_8031E8B0();
     M2C_UNK fn_8031ED68(M2C_UNK);
