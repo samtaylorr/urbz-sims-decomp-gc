@@ -47,6 +47,10 @@ void fn_8031FD08(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
     fn_8031FD64(arg0, arg1, fn_80337F14(arg2), arg3, arg4, arg5);
 }
 
+s32 fn_8031FDDC(void *arg0) {
+    return (u32)(M2C_FIELD(arg0, s32 *, 0x40) - M2C_FIELD(arg0, s32 *, 0x3C)) >= (u32)(M2C_FIELD(arg0, s32 *, 0x30) - M2C_FIELD(arg0, s32 *, 0x34));
+}
+
 s32 fn_8031FE04(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x2C);
 }
