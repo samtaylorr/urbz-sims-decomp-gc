@@ -126,6 +126,11 @@ void fn_8003F8A0(void) {
     fn_8003F9E0();
 }
 
+void fn_8003F8C0(void *self) {
+    extern void fn_8003A9F0(void *, s32);
+    fn_8003A9F0(self, 2);
+}
+
 void fn_8003F8E4(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
