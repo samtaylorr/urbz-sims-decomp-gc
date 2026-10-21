@@ -220,6 +220,20 @@ void fn_800CCF70(void) {
     fn_800CD09C();
 }
 
+void fn_800CD05C(void *arg0) {
+    s32 fn_8033740C(void *, s32, s32);
+    extern u8 lbl_8045BA40[];
+    M2C_FIELD(arg0, s32 *, 0x30) = fn_8033740C(lbl_8045BA40, 0, 0);
+}
+
+void fn_800CD09C(void *arg0) {
+    M2C_UNK fn_8031EA2C(s32);
+    if (M2C_FIELD(arg0, s32 *, 0x30) != 0) {
+        fn_8031EA2C(M2C_FIELD(arg0, s32 *, 0x30));
+        M2C_FIELD(arg0, s32 *, 0x30) = 0;
+    }
+}
+
 void fn_800CD7F0(f32 farg0) {
     void *temp_r3;
     void *temp_r9;
