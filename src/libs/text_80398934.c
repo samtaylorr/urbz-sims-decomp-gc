@@ -2322,6 +2322,15 @@ void fn_803A4BB4(s32 *first, s32 *middle, s32 *last, s32 comp) {
     fn_803A4AE8(first, middle, last, 0, comp);
 }
 
+void fn_803A4DD0(s32 *last, s32 val, s32 comp);
+void fn_803A4ED4(s32 *first, s32 *last, s32 *val, s32 comp) {
+    s32 *it;
+
+    for (it = first; it != last; it++) {
+        fn_803A4DD0(it, *it, comp);
+    }
+}
+
 void fn_803A4E30(s32 *first, s32 *last, s32 comp);
 void fn_803A4ED4(s32 *first, s32 *last, s32 *val, s32 comp);
 void fn_803A4F28(s32 *first, s32 *last, s32 comp) {
