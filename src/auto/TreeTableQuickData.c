@@ -66,6 +66,17 @@ s32 fn_801B380C(void) {
     return 0;
 }
 
+TreeKey fn_801B3814(s32 a, s16 b) {
+    TreeKey k;
+    k.a = a;
+    k.b = b;
+    return k;
+}
+
+TreeKey fn_801B3824(TreeKey *src) {
+    return *src;
+}
+
 s32 fn_801B3854(void *arg0, void *arg1) {
     s32 var_r11;
     u32 temp_r0;
@@ -78,6 +89,10 @@ s32 fn_801B3854(void *arg0, void *arg1) {
         var_r11 = 1;
     }
     return var_r11;
+}
+
+s32 fn_801B388C(TreeKey *a, TreeKey *b) {
+    return a->a == b->a && a->b == b->b;
 }
 
 s32 fn_801B38BC(void) {
