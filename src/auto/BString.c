@@ -3658,7 +3658,7 @@ void fn_800EEC2C(void) {
     fn_800EE994();
 }
 
-void fn_800EC848(void);
+u32 fn_800EC848();
 void fn_800EECA4(void) {
     fn_800EC848();
 }
