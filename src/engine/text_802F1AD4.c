@@ -51,6 +51,11 @@ void fn_802F2500(void *self) {
     fn_802F1B74(self);
 }
 
+void fn_802F2520(void *self) {
+    extern void fn_802F05AC(void *, s32);
+    fn_802F05AC(self, 2);
+}
+
 void fn_802F2544(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
