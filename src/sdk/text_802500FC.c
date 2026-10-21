@@ -309,20 +309,6 @@ s32 fn_80260574(void) {
     return 1;
 }
 
-typedef struct DVDFileInfo {
-    DVDCommandBlock cb;
-    u32 startAddr;
-    u32 length;
-    void (*callback)(s32, struct DVDFileInfo *);
-} DVDFileInfo;
-
-typedef struct FSTEntry {
-    u32 isDirAndStringOff;
-    u32 parentOrPosition;
-    u32 nextEntryOrLength;
-} FSTEntry;
-
-extern FSTEntry *lbl_80495EB4;
 extern s32 lbl_80495EC0;
 s32 fn_80260144(char *);
 void fn_802530CC(char *, s32, char *, ...);
