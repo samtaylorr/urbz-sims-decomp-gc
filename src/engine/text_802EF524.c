@@ -26,6 +26,21 @@ s32 fn_802EF584(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void fn_802EF8D4(s32 arg0, s32 arg1) {
+    extern s32 fn_802D6A90(void *, void *, void *, void *, s32, void *, void *);
+    extern void fn_802EF944(void);
+    extern void fn_802EF96C(void);
+    extern void fn_802EF98C(void *);
+    extern u8 lbl_803F0D18[];
+    extern u8 lbl_80493740[];
+    extern u8 lbl_80493768[];
+    extern s32 lbl_804961C8;
+
+    if (arg1 == 0xFFFF && arg0 != 0) {
+        lbl_804961C8 = fn_802D6A90(lbl_80493768, fn_802EF944, fn_802EF96C, fn_802EF98C, 0, lbl_803F0D18, lbl_80493740);
+    }
+}
+
 void fn_802EF944(void) {
     M2C_UNK fn_802D1FC8(M2C_UNK);
     fn_802D1FC8(0xCC);
