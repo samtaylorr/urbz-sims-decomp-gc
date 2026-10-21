@@ -192,13 +192,13 @@ s32 fn_8035EDD8(void) {
     for (i = 0; i < 0x3E; i++) {
         if (lbl_80473F7C[i].unk24 == 0) {
             lbl_80473F7C[i].unk40_0 = 0;
-            lbl_80473F7C[i].unk40_3 = 0;
+            ((u8 *)&lbl_80473F7C[i])[0x40] &= ~0x10;
             lbl_80473F7C[i].unk40_1 = 0;
             break;
         }
     }
     if (i == 0x3E) {
-        return -1;
+        i = -1;
     }
     return i;
 }
