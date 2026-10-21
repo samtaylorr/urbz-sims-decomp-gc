@@ -620,30 +620,28 @@ f32 fn_8039BA40(void *arg0) {
 }
 
 Elem12 *fn_8039BA50(Elem12 *lo, Elem12 *hi, s32 key) {
-    s32 n;
+    s32 n = hi - lo;
+    Elem12 *mid;
+    s32 d;
 
-    while ((n = hi - lo) > 0) {
-        Elem12 *mid;
-        s32 d;
-
-        if (n == 1) {
-            if (lo->a == key) {
-                return lo;
-            }
-            return 0;
-        }
-        mid = lo + n / 2;
-        d = key - mid->a;
-        if (d == 0) {
-            return mid;
-        }
-        if (d > 0) {
-            lo = mid + 1;
-        } else {
-            hi = mid;
-        }
+    if (n <= 0) {
+        return 0;
     }
-    return 0;
+    if (n == 1) {
+        if (lo->a == key) {
+            return lo;
+        }
+        return 0;
+    }
+    mid = lo + n / 2;
+    d = key - mid->a;
+    if (d == 0) {
+        return mid;
+    }
+    if (d > 0) {
+        return fn_8039BA50(mid + 1, hi, key);
+    }
+    return fn_8039BA50(lo, mid, key);
 }
 
 extern u8 lbl_80408138[];
