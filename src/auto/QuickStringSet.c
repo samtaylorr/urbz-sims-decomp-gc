@@ -264,6 +264,14 @@ void fn_800F7B34(void *arg0, s32 arg1, s32 arg2) {
     fn_800F7D14(arg0, obj, arg2);
 }
 
+void fn_800F7B8C(void *arg0, s32 arg1, s32 arg2) {
+    extern u8 *lbl_8049665C;
+    void fn_800F7E18(void *, void *, s32);
+    void *obj;
+    obj = (*(void *(**)(u8 *))(*(u8 **)lbl_8049665C + 0x3C))(lbl_8049665C + *(s16 *)(*(u8 **)lbl_8049665C + 0x38));
+    fn_800F7E18(arg0, obj, arg2);
+}
+
 void fn_800F7BE4(void *arg0, s32 arg1, s32 arg2) {
     extern u8 *lbl_8049665C;
     void fn_800F7E98(void *, void *, s32);
