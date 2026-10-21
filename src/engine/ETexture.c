@@ -359,8 +359,8 @@ u16 fn_80370FCC(void) {
 
 extern void fn_802D6A90(void *, void *, void *, void *, s32, void *, void *);
 extern void fn_80370ED8(void);
-extern void fn_80370F00(void);
-extern void fn_80370F2C(void);
+extern void fn_80370F00();
+extern void fn_80370F2C();
 extern u8 lbl_803F54B0[];
 extern u8 lbl_80493858[];
 void fn_80370FD8(s32 arg0) {
