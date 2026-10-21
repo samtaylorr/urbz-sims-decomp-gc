@@ -321,6 +321,13 @@ void fn_80370ED8(void) {
     fn_803700B0();
 }
 
+extern void fn_803701E8(void *, s32);
+void *fn_802482F8(void *, const void *, u32);
+void fn_803BFDA0(void *, s32, s32);
+void fn_80370F2C(void *self) {
+    fn_803701E8(self, 2);
+}
+
 void fn_80370F50(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
