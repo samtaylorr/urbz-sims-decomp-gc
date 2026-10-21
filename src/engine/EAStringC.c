@@ -10,6 +10,11 @@ void fn_80290C24(s32 arg0) {
     fn_802A14A0(arg0 + 0x24);
 }
 
+void fn_8029280C(void *self, void *arg1) {
+    M2C_UNK fn_802922B8(void *, void *, s32);
+    fn_802922B8(self, arg1, 1);
+}
+
 void fn_80298018(s32 arg0) {
     M2C_UNK fn_802A14A0(s32);
     fn_802A14A0(arg0 + 0x20);
