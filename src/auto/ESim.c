@@ -1,6 +1,25 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+static inline void *ESim_AllocAligned(s32 size) {
+    void *fn_802D0AB8(void);
+    void *fn_802D0B3C(void);
+    void *fn_802D197C(void *, s32, s32);
+    void *fn_802DC3C0(void *, s32, s32, s32, s32);
+    void *heap;
+    void *p;
+
+    heap = fn_802D0AB8();
+    p = fn_802D197C(heap, size, 0x10);
+    if (p == NULL) {
+        p = fn_802DC3C0(heap, size, 0x10, 0, 0);
+        if (p == NULL && heap == fn_802D0AB8()) {
+            return fn_802DC3C0(fn_802D0B3C(), size, 0x10, 0, 0);
+        }
+    }
+    return p;
+}
+
 void fn_8003A1D0(void) {
     fn_802D2FD0();
 }
@@ -143,16 +162,16 @@ void fn_8003F7F8(void) {
     void fn_80248488(void *, s32, s32);
     void *fn_8003F9E0(void *);
     void *heap;
+    void *p;
     void *obj;
 
     heap = fn_802D0AB8();
-    obj = fn_802D197C(heap, 0x680, 0x10);
-    if (obj == NULL) {
-        obj = fn_802DC3C0(heap, 0x680, 0x10, 0, 0);
-        if (obj == NULL && heap == fn_802D0AB8()) {
-            obj = fn_802DC3C0(fn_802D0B3C(), 0x680, 0x10, 0, 0);
-        }
+    if ((p = fn_802D197C(heap, 0x680, 0x10)) == NULL
+        && (p = fn_802DC3C0(heap, 0x680, 0x10, 0, 0)) == NULL
+        && heap == fn_802D0AB8()) {
+        p = fn_802DC3C0(fn_802D0B3C(), 0x680, 0x10, 0, 0);
     }
+    obj = p;
     fn_80248488(obj, 0, 0x680);
     fn_8003F9E0(obj);
 }
@@ -222,6 +241,7 @@ void *fn_8003F9E0(void *arg0) {
     extern u8 lbl_80407C78[];
     s32 i;
     u8 *p;
+    f32 f;
 
     fn_80065ADC(arg0);
     M2C_FIELD(arg0, void **, 0x300) = lbl_80407C40;
@@ -240,9 +260,10 @@ void *fn_8003F9E0(void *arg0) {
     M2C_FIELD(p, s32 *, 0x20) = 0;
     M2C_FIELD(p, s32 *, 0x24) = 0;
     M2C_FIELD(p, s32 *, 0x28) = 0;
+    f = lbl_803C5D44[0];
     M2C_FIELD(p, s32 *, 0x34) = 0;
-    M2C_FIELD(p, f32 *, 0x30) = lbl_803C5D44[0];
-    M2C_FIELD(p, f32 *, 0x2C) = lbl_803C5D44[0];
+    M2C_FIELD(p, f32 *, 0x30) = f;
+    M2C_FIELD(p, f32 *, 0x2C) = f;
     M2C_FIELD(arg0, s32 *, 0x65C) = 0;
     return arg0;
 }
