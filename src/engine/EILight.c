@@ -52,14 +52,16 @@ void fn_802EFF8C(EILightVec3 *out, u8 *obj) {
          ((EILightVec3 *)(obj + 0xB0))->z != lbl_803F0DB0[0])) {
         EILightVec3 *c = (EILightVec3 *)(obj + 0xB0);
         f32 s = *(f32 *)(obj + 0xA0);
-        out->x = s * c->x;
-        out->z = s * c->z;
-        out->y = s * c->y;
-        return;
+        f32 x = s * c->x;
+        f32 y = s * c->y;
+        f32 z = s * c->z;
+        out->x = x;
+        out->y = y;
+        out->z = z;
+    } else {
+        f32 s = *(f32 *)(obj + 0xA0);
+        EILightVec3_Set(out, s, s, s);
     }
-    out->x = *(f32 *)(obj + 0xA0);
-    out->z = *(f32 *)(obj + 0xA0);
-    out->y = *(f32 *)(obj + 0xA0);
 }
 
 void fn_802F0114(s32 arg0, s32 arg1) {
