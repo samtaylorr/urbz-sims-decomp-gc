@@ -136,7 +136,7 @@ void fn_80331E10(s32 arg0) {
 }
 
 void fn_80331E78(void) {
-    M2C_UNK fn_80331BF4(M2C_UNK, M2C_UNK);
+    void fn_80331BF4(s32, s32);
     fn_80331BF4(1, 0xFFFF);
 }
 
