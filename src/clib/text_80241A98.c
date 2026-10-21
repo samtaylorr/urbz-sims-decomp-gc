@@ -2,6 +2,13 @@
 #include "common.h"
 
 void fn_80247D48(void);
+
+typedef struct AtExitBlock {
+    struct AtExitBlock *next;
+    s32 count;
+    s32 funcs[32];
+} AtExitBlock;
+
 void fn_80242320(s32 arg0) {
     fn_802422DC();
     *(s32 *)0xCC006008 = 0x12000000;
@@ -123,24 +130,25 @@ void *fn_802482F8(void *dst0, const void *src0, u32 len0) {
     return dst0;
 }
 
-void *fn_80248488(void *m, s32 c, s32 n) {
+void *fn_80248488(void *m, s32 c, u32 len) {
     char *s = (char *)m;
     unsigned long buffer;
     unsigned long *aligned_addr;
+    int n = len;
 
-    if (!((u32)n < 4) && !((long)m & 3)) {
+    if (!((unsigned)n < 4) && !((long)m & 3)) {
         aligned_addr = (unsigned long *)m;
         c &= 0xff;
         buffer = (c << 8) | c;
         buffer |= (buffer << 16);
-        while ((u32)n >= 16) {
+        while ((unsigned)n >= 16) {
             *aligned_addr++ = buffer;
             *aligned_addr++ = buffer;
             *aligned_addr++ = buffer;
             *aligned_addr++ = buffer;
             n -= 16;
         }
-        while ((u32)n >= 4) {
+        while ((unsigned)n >= 4) {
             *aligned_addr++ = buffer;
             n -= 4;
         }
