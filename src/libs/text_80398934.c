@@ -57,6 +57,8 @@ extern s32 lbl_8049662C;
 void fn_8039B1E4(s32 *first, s32 *last, s32 *val, s32 depth, s32 comp);
 void fn_8039B3A4(s32 *first, s32 *last, s32 comp);
 void fn_8039B450(s32 *first, s32 *last, s32 *val, s32 comp);
+void fn_8039B338(s32 *last, s32 val, s32 comp);
+void fn_8024839C(void *dst, const void *src, u32 n);
 void fn_8039AE74(s32 *first, s32 hole, s32 len, s32 val, s32 comp);
 void fn_8039B050(s32 *first, s32 *middle, s32 *last, s32 *val, s32 comp);
 extern u8 lbl_80407128[];
@@ -397,6 +399,35 @@ s32 *fn_8039B144(s32 *first, s32 *last, s32 pivot, s32 (*comp)(s32 *, s32 *)) {
     }
 }
 
+void fn_8024839C(void *dst, const void *src, u32 n);
+void fn_8039B3A4(s32 *first, s32 *last, s32 comp) {
+    s32 *i;
+
+    if (first == last) {
+        return;
+    }
+    for (i = first + 1; i != last; i++) {
+        s32 val = *i;
+        if (((s32 (*)(s32 *, s32 *))comp)(&val, first)) {
+            s32 n = (char *)i - (char *)first;
+            if (n > 0) {
+                fn_8024839C((char *)(i + 1) - n, first, n);
+            }
+            *first = val;
+        } else {
+            fn_8039B338(i, val, comp);
+        }
+    }
+}
+
+void fn_8039B450(s32 *first, s32 *last, s32 *val, s32 comp) {
+    s32 *it;
+
+    for (it = first; it != last; it++) {
+        fn_8039B338(it, *it, comp);
+    }
+}
+
 void fn_8039B4A4(s32 *first, s32 *last, s32 comp) {
     if (last - first > 16) {
         fn_8039B3A4(first, first + 16, comp);
@@ -574,6 +605,34 @@ f32 fn_8039BA28(void *arg0) {
 
 f32 fn_8039BA40(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 8) * M2C_FIELD(arg0, f32 *, 4);
+}
+
+Elem12 *fn_8039BA50(Elem12 *lo, Elem12 *hi, s32 key) {
+    for (;;) {
+        s32 n = hi - lo;
+        Elem12 *mid;
+        s32 d;
+
+        if (n <= 0) {
+            return 0;
+        }
+        if (n == 1) {
+            if (lo->a == key) {
+                return lo;
+            }
+            return 0;
+        }
+        mid = lo + n / 2;
+        d = key - mid->a;
+        if (d == 0) {
+            return mid;
+        }
+        if (d > 0) {
+            lo = mid + 1;
+        } else {
+            hi = mid;
+        }
+    }
 }
 
 extern u8 lbl_80408138[];
