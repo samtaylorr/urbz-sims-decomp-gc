@@ -127,8 +127,8 @@ s8 *fn_80105514(s8 *self, s8 *other) {
 
 s8 *fn_80105534(s8 *self, s32 *src, s8 arg2) {
     self[0] = src[1] >> 4;
-    self[2] = arg2;
     self[1] = src[0] >> 4;
+    self[2] = arg2;
     return self;
 }
 
