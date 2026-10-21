@@ -15,9 +15,9 @@ void fn_80024440(void *arg0);
 
 void *fn_800242F4(void *arg0) {
     fn_8001E804(arg0);
+    M2C_FIELD(arg0, f32 *, 0xF8) = lbl_803C4B90[0];
     M2C_FIELD(arg0, void **, 0x44) = lbl_80407300;
     M2C_FIELD(arg0, s32 *, 0xF4) = 0;
-    M2C_FIELD(arg0, f32 *, 0xF8) = lbl_803C4B90[0];
     return arg0;
 }
 
