@@ -37,6 +37,21 @@ s32 fn_80371B24(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void fn_80371BB8(void *arg0, s32 arg1) {
+    extern void fn_8031E910(void *, s32);
+    extern void *fn_802D0AB8();
+    extern void fn_802D1A00(void *, void *);
+    extern u8 lbl_8041DFE0[];
+
+    *(u8 **)arg0 = lbl_8041DFE0;
+    fn_80371C24(arg0);
+    fn_802CB8D4((u8 *)arg0 + 0x20);
+    fn_8031E910(arg0, 0);
+    if (arg1 & 1) {
+        fn_802D1A00(fn_802D0AB8(), arg0);
+    }
+}
+
 void fn_80371C1C(void) {
 
 }
