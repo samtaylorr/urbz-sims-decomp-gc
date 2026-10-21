@@ -23,6 +23,14 @@ s32 fn_80364F28(s32 *self) {
     return self[7];
 }
 
+void *fn_80364F78(void *arg0) {
+    extern char lbl_80401348[];
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, void **, 8) = lbl_80401348;
+    return arg0;
+}
+
 extern char lbl_80401348[];
 void fn_80364FE4(void *arg0, void *arg1) {
     void *temp_r10;
