@@ -108,11 +108,12 @@ void fn_8002889C(s32 arg0, s32 arg1) {
     void fn_80024D4C(s32, s32, f32 *);
     extern const f32 lbl_803C4E44[];
     f32 v[3];
+    f32 *p = v;
 
-    v[2] = lbl_803C4E44[0];
-    v[1] = lbl_803C4E44[0];
+    p[2] = lbl_803C4E44[0];
+    p[1] = lbl_803C4E44[0];
     v[0] = lbl_803C4E44[0];
-    fn_80024D4C(arg0, arg1, v);
+    fn_80024D4C(arg0, arg1, p);
 }
 
 void fn_800288D8(void) {
