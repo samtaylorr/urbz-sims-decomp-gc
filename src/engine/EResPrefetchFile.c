@@ -2,6 +2,16 @@
 #include "common.h"
 
 void fn_802D2FD0(void);
+extern s32 fn_802D6A90(void *, void *, void *, void *, s32, void *, void *);
+extern void fn_80320204(void);
+extern void fn_8032022C();
+extern void fn_80320258();
+extern u8 lbl_804938A8[];
+extern u8 lbl_803F2F20[];
+extern u8 lbl_80493858[];
+extern s32 lbl_80496228;
+void *fn_803203A8(u32 size, void *p);
+void fn_80320194(s32, s32);
 
 static inline void EStream_Write(void *stream, void *data, s32 len) {
     char *vt = M2C_FIELD(stream, char **, 0x18);
