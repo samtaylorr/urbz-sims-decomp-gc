@@ -79,6 +79,11 @@ s32 fn_80237F80(void *arg0) {
     return ret;
 }
 
+M2C_UNK fn_80237FE8(void *self) {
+    M2C_UNK fn_8023800C(void *, s32);
+    return fn_8023800C(self, 3);
+}
+
 void fn_80239684(void *arg0) {
     M2C_UNK fn_80237FE8();
     s32 temp_r0;
