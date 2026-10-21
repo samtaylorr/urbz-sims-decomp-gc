@@ -59,11 +59,11 @@ s32 fn_80317D18(s32 arg0) {
 }
 
 void fn_803188C8(const char *arg0) {
-    void fn_80245BB4(char *, const char *, ...);
+    int fn_80245BB4(char *, const char *, ...);
     s32 fn_802D7F48(const char *, const char *);
-    extern char lbl_803F26F0[];
-    extern char lbl_803F26F4[];
-    extern char lbl_803F26FC[];
+    extern const char lbl_803F26F0[];
+    extern const char lbl_803F26F4[];
+    extern const char lbl_803F26FC[];
     extern s32 lbl_80494F18;
     char buf[128];
 
@@ -72,9 +72,9 @@ void fn_803188C8(const char *arg0) {
 }
 
 void fn_80318918(void) {
-    void fn_80245BB4(char *, const char *, ...);
+    int fn_80245BB4(char *, const char *, ...);
     void fn_803188C8(const char *);
-    extern char lbl_803F2700[];
+    extern const char lbl_803F2700[];
     extern s32 lbl_80494F1C;
     char buf[128];
 
