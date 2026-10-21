@@ -407,6 +407,14 @@ s32 fn_80260F70(void) {
     return M2C_FIELD(lbl_80495EB0, s32 *, 0x38);
 }
 
+void fn_80261068(s32 result, DVDCommandBlock *block);
+void fn_80261068(s32 result, DVDCommandBlock *block) {
+    DVDFileInfo *fileInfo = (DVDFileInfo *)block;
+    if (fileInfo->callback) {
+        (fileInfo->callback)(result, fileInfo);
+    }
+}
+
 void fn_802611DC(void) {
     extern M2C_UNK lbl_80495EC8;
     fn_80259838(&lbl_80495EC8);
