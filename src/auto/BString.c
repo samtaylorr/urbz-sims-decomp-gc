@@ -3502,6 +3502,14 @@ void **fn_800EC9CC(void **arg0, s32 arg1, s32 arg2) {
     return arg0;
 }
 
+void **fn_800ECB80(void **arg0, const u8 *arg1, u32 arg2, u32 arg3) {
+    if (arg2 >= ~arg3) {
+        fn_800EAF58();
+    }
+    *arg0 = fn_800EB848(BString_Alloc(0x10, 4), arg1, arg2, arg2 + arg3);
+    return arg0;
+}
+
 void *fn_800ECCD0(void **arg0, s32 arg1) {
     *arg0 = fn_800EBA28(BString_Alloc(0x10, 4), arg1);
     return arg0;
