@@ -412,6 +412,10 @@ void fn_8019F2D4(void *self) {
     fn_8019D2DC(self, 0);
 }
 
+s32 fn_8019F2F8(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x10) != 0;
+}
+
 void fn_8019F310(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x3C) = arg1;
 }
