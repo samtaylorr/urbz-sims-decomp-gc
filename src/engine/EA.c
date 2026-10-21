@@ -30,8 +30,8 @@ s32 fn_802D82D4(void *arg0, s32 arg1, s32 arg2) {
     }
     p = (char *)arg0 + 0xC;
     fn_8037ABB0(p, arg2);
-    M2C_FIELD(arg0, s32 *, 8) = arg1;
     M2C_FIELD(arg0, void **, 4) = p;
+    M2C_FIELD(arg0, s32 *, 8) = arg1;
     return 1;
 }
 
