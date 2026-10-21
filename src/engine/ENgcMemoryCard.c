@@ -10,6 +10,10 @@ void fn_80340654(void **self, s32 flags) {
     }
 }
 
+s32 fn_80340688(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 4) != 0;
+}
+
 void fn_803406A0(void *arg0) {
     M2C_FIELD(arg0, s32 *, 4) = (s32) (M2C_FIELD(arg0, s32 *, 4) + 1);
 }
