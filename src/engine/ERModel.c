@@ -114,23 +114,23 @@ s32 fn_8032A3DC(u8 *self) {
 
 void *fn_8032A410(u8 *self) {
     extern void *fn_80338000(void *, s32, s32);
-    extern void fn_802C8814(f32 *);
-    extern void fn_802C876C(void);
+    extern void fn_802C8814(void *, f32 *);
+    extern void fn_802C876C(void *);
     extern u8 lbl_8045B82C[];
-    extern f32 lbl_803F3360;
+    extern f32 lbl_803F3360[];
     f32 v[3];
     f32 s;
 
     if (*(void **)(self + 0x1A0) == 0) {
         *(void **)(self + 0x1A0) = fn_80338000(lbl_8045B82C, 0x40, 0x10);
         s = *(f32 *)(self + 0x6C);
-        if (s != lbl_803F3360) {
+        if (s != lbl_803F3360[0]) {
             v[0] = s;
-            v[1] = s;
             v[2] = s;
-            fn_802C8814(v);
+            v[1] = s;
+            fn_802C8814(*(void **)(self + 0x1A0), v);
         } else {
-            fn_802C876C();
+            fn_802C876C(*(void **)(self + 0x1A0));
         }
     }
     return *(void **)(self + 0x1A0);
@@ -288,10 +288,10 @@ u16 fn_8032CDD8(void) {
     return lbl_8049395E[0];
 }
 
-extern void fn_802D6A90(void *, void *, void *, void *, s32, void *, void *);
+extern s32 fn_802D6A90(void *, void *, void *, void *, s32, void *, void *);
 extern void fn_8032CCE4(void);
-extern void fn_8032CD0C(void);
-extern void fn_8032CD38(void);
+extern void fn_8032CD0C(void *);
+extern void fn_8032CD38(void *);
 extern u8 lbl_803F331C[];
 extern u8 lbl_80493858[];
 void fn_8032CDE4(s32 arg0) {
