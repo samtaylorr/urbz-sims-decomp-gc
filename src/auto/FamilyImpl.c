@@ -37,6 +37,11 @@ s32 fn_8010A7F4(void *arg0) {
     return var_r9;
 }
 
+s32 fn_8010A81C(u8 *self) {
+    u8 *p = *(u8 **)(self + 8);
+    return p != NULL ? *(s32 *)(p + 4) : 0;
+}
+
 void fn_8010A834(void *arg0) {
     void *temp_r29;
     void *temp_r29_2;
