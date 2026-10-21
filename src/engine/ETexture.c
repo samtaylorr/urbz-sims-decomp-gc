@@ -327,18 +327,20 @@ s32 fn_803702A0(u32 arg0) {
 }
 
 s32 fn_80370428(s32 *arr, u8 *data) {
-    u8 *p = data;
+    void *fn_802482F8(void *, const void *, u32);
+    void fn_803BFDA0(void *, s32, s32);
+    u8 *start = data;
     s32 n;
     s32 i;
 
-    fn_802482F8(&n, p, 4);
-    p += 4;
+    fn_802482F8(&n, data, 4);
+    data += 4;
     fn_803BFDA0(arr, n, 0);
     for (i = 0; i < n; i++) {
-        fn_802482F8((u8 *)*arr + i * 4, p, 4);
-        p += 4;
+        fn_802482F8((u8 *)*arr + i * 4, data, 4);
+        data += 4;
     }
-    return p - data;
+    return data - start;
 }
 
 void fn_80370ED8(void) {
