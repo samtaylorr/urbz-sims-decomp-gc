@@ -9,7 +9,7 @@ typedef struct {
     u32 unk40_0 : 1;
     u32 unk40_1 : 1;
     u32 unk40_2 : 1;
-    u32 unk40_3 : 1;
+    u8 unk40_3 : 1;
     u32 unk40_4 : 28;
 } ENgcRendererSlot;
 
