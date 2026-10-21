@@ -1,6 +1,8 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+void fn_8032421C(void *);
+
 void fn_802D2FD0(void);
 s32 *fn_80324168(s32 *arg0) {
     arg0[0] = 0;
@@ -100,19 +102,22 @@ void fn_80328E5C(void *arg0, void *arg1) {
     M2C_FIELD(arg0, void **, 0x4D130) = arg1;
 }
 
+void fn_80328FF4(void);
+void fn_80329080(void *);
+void fn_803290A0(void *);
 void fn_80328FF4(void) {
     extern s32 fn_802D0AB8(void);
     extern s32 fn_802D0B3C(void);
     extern void *fn_802D197C(s32, s32, s32);
     extern void *fn_802DBBCC(s32, s32, s32);
-    s32 heap;
     void *p;
+    s32 heap;
 
     heap = fn_802D0AB8();
     p = fn_802D197C(heap, 0x4D140, 4);
     if (p == NULL) {
         p = fn_802DBBCC(heap, 0x4D140, 0);
-        if (p == NULL && fn_802D0AB8() == heap) {
+        if (p == NULL && heap == fn_802D0AB8()) {
             p = fn_802DBBCC(fn_802D0B3C(), 0x4D140, 0);
         }
     }
