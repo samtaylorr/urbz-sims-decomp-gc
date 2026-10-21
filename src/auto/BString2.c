@@ -208,9 +208,8 @@ void fn_800F3758(s32 arg0, const char *arg1, s32 arg2) {
 }
 
 u32 fn_800F37B0(void **arg0, u16 arg1, u32 arg2) {
-    s32 ne;
     while (arg2 < fn_800F4878(arg0)) {
-        ne = 1;
+        s32 ne = 1;
         if (BString2_Eq(&BString2_Data(arg0)[arg2], &arg1)) {
             ne = 0;
         }
@@ -255,6 +254,14 @@ void fn_800F3CB8(void) {
 void fn_800F1510(void);
 void fn_800F3E30(void) {
     fn_800F1510();
+}
+
+void fn_800F40F0(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    M2C_UNK fn_800F0F2C(s32, s32, s32, s32, s32);
+    if (arg3 == -1) {
+        fn_800EF8B4();
+    }
+    fn_800F0F2C(arg0, arg2, arg1, fn_800F4878(arg0) - arg2, arg3);
 }
 
 s32 fn_800F47E4(s32 arg0, s32 arg1) {
