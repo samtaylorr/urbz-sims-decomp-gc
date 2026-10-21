@@ -200,6 +200,16 @@ void fn_8035EE3C(void) {
     }
 }
 
+void fn_8035EE7C(void) {
+    s32 fn_8025465C(void);
+    extern s32 lbl_804962D4;
+    extern s32 lbl_804962D8;
+
+    if (++lbl_804962D8 == 1) {
+        lbl_804962D4 = fn_8025465C() != 0;
+    }
+}
+
 extern u8 lbl_8046DF78[];
 void fn_8034F440(u8 *arg);
 void fn_8035F07C(void) {
