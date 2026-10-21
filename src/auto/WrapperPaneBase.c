@@ -17,6 +17,15 @@ typedef struct {
 typedef struct { f32 x, y, z; } WPBVec3;
 typedef struct { f32 x, y, z, w; } WPBVec4;
 
+static inline void WPBBase_Init(void *self, s32 arg1) {
+    extern M2C_UNK lbl_8040B118[];
+
+    M2C_FIELD(self, s32 *, 0) = arg1;
+    M2C_FIELD(self, M2C_UNK **, 0x1C) = lbl_8040B118;
+    M2C_FIELD(self, s32 *, 4) = 1;
+    M2C_FIELD(self, s32 *, 8) = 0;
+}
+
 static inline void WPBVec4_Set(WPBVec4 *d, const WPBVec3 *v, f32 w) {
     d->x = v->x;
     d->y = v->y;
