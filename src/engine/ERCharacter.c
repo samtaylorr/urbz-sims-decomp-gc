@@ -113,6 +113,20 @@ void fn_8031BB58(void) {
 
 }
 
+void fn_8031BB5C(s32 arg0, s32 arg1) {
+    extern s32 fn_802D6A90(void *, void *, void *, void *, s32, void *, void *);
+    extern void fn_8031BBCC(void);
+    extern void fn_8031BBF4(void *);
+    extern void fn_8031BC20(void *);
+    extern u8 lbl_80493830[];
+    extern u8 lbl_803F2CC0[];
+    extern u8 lbl_80493858[];
+    extern s32 lbl_80496218;
+    if (arg1 == 0xFFFF && arg0 != 0) {
+        lbl_80496218 = fn_802D6A90(lbl_80493830, fn_8031BBCC, fn_8031BBF4, fn_8031BC20, 0, lbl_803F2CC0, lbl_80493858);
+    }
+}
+
 void fn_8031BBCC(void) {
     M2C_UNK fn_8031B7A8();
     M2C_UNK fn_8031BD40(M2C_UNK);
