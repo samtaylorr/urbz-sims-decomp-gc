@@ -37,6 +37,15 @@ s32 fn_802F26FC(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void fn_802F27E4(void *arg0, s32 arg1, s32 arg2) {
+    char *vt;
+
+    M2C_FIELD(arg0, s32 *, 0xE8) = arg1;
+    M2C_FIELD(arg0, s32 *, 0xE4) = arg2;
+    vt = *(char **)arg0;
+    (*(void (**)(void *))(vt + 0x5C))((char *)arg0 + *(s16 *)(vt + 0x58));
+}
+
 void fn_802F31C8(void) {
     M2C_UNK fn_802D1FC8(M2C_UNK);
     fn_802D1FC8(0xEC);
