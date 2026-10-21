@@ -916,6 +916,9 @@ void fn_8039C378(s32 *self) {
     }
 }
 
+void fn_8039C3D0(const char *fmt, ...) {
+}
+
 extern u8 lbl_80409DD8[];
 void fn_8039C584(void **self, s32 flags) {
     *self = lbl_80409DD8;
