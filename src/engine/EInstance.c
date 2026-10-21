@@ -208,6 +208,18 @@ void fn_802F1850(void *arg0, s16 *arg1, s16 *arg2) {
     M2C_FIELD(arg0, s16 *, 0x28) = (s16) (u16) *arg1;
 }
 
+void fn_802F18D0(void *arg0, s16 *arg1, s16 *arg2) {
+    void (*temp_r0)(s32, s32, s16 *, s16 *);
+
+    temp_r0 = M2C_FIELD(arg0, void (**)(s32, s32, s16 *, s16 *), 0x24);
+    if (temp_r0 != NULL) {
+        temp_r0(M2C_FIELD(arg0, s32 *, 0x2C), 0, arg1, arg2);
+        return;
+    }
+    *arg2 = -1;
+    *arg1 = -1;
+}
+
 void fn_802F1920(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x18) = arg1;
 }
