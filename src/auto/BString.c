@@ -3225,6 +3225,15 @@ void fn_800EABD8(s32 arg0, s32 arg1) {
     fn_800EA758(temp_r30, fn_80105B78(arg1));
 }
 
+void fn_800EAC28(s32 arg0, s32 arg1) {
+    s32 fn_80105B78(s32);
+    s32 fn_80105B84(s32);
+    s32 temp_r30;
+
+    temp_r30 = arg0 + (fn_80105B84(arg1) * 8);
+    fn_800EA7F8(temp_r30, fn_80105B78(arg1));
+}
+
 s32 fn_800EACF0(s32 arg0, s32 arg1) {
     M2C_UNK fn_800EA8D0(s32, s32);
     s32 temp_r29;
