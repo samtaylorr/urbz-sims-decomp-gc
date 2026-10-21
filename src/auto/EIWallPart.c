@@ -375,8 +375,8 @@ u16 fn_80039EFC(void) {
 }
 
 extern void fn_80039E08(void);
-extern void fn_80039E30(void);
-extern void fn_80039E5C(void);
+extern void fn_80039E30(void *);
+extern void fn_80039E5C(void *);
 extern u8 lbl_803C56B8[];
 void fn_80039F08(s32 arg0) {
     fn_802D6A90(lbl_80491C28, fn_80039E08, fn_80039E30, fn_80039E5C, arg0, lbl_803C56B8, lbl_80491C00);
