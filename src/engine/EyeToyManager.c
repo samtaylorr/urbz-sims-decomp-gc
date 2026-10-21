@@ -2,6 +2,29 @@
 #include "common.h"
 
 void fn_802D0B3C(void);
+extern s32 lbl_80494F80;
+void *fn_802D0AB8(void);
+void *fn_802D197C(void *, u32, s32);
+void *fn_802DBBCC(void *, u32, s32);
+
+static inline void *EyeToyAlloc(u32 size) {
+    void *heap;
+    void *p;
+
+    heap = fn_802D0AB8();
+    if (size == 0) {
+        return NULL;
+    }
+    p = fn_802D197C(heap, size, 4);
+    if (p == NULL) {
+        p = fn_802DBBCC(heap, size, 0);
+        if (p == NULL && heap == fn_802D0AB8()) {
+            return fn_802DBBCC(((void *(*)(void))fn_802D0B3C)(), size, 0);
+        }
+    }
+    return p;
+}
+
 s32 fn_8033909C(void) {
     return 0;
 }
@@ -29,6 +52,13 @@ void fn_80339184(s32 arg0) {
     if (arg0 != -1) {
         fn_8033930C();
     }
+}
+
+s32 fn_803391E4(s32 arg0) {
+    if (arg0 != -1) {
+        fn_8033930C(arg0);
+    }
+    return 1;
 }
 
 void fn_8033921C(s32 arg0) {
@@ -82,6 +112,37 @@ void *fn_80339348(void *arg0) {
     fn_802CA9A8();
     M2C_FIELD(arg0, s32 *, 0x20) = 0;
     return arg0;
+}
+
+void *fn_802D0AB8(void);
+void *fn_802D197C(void *, u32, s32);
+void *fn_802DBBCC(void *, u32, s32);
+void *fn_802D0B3C_h(void);
+s32 fn_80339380(void *arg0, s32 arg1) {
+    void *heap;
+    void *p;
+    u32 size;
+
+    heap = fn_802D0AB8();
+    size = arg1 * 4;
+    if (size == 0) {
+        p = NULL;
+    } else {
+        p = fn_802D197C(heap, size, 4);
+        if (p == NULL) {
+            p = fn_802DBBCC(heap, size, 0);
+            if (p == NULL && heap == fn_802D0AB8()) {
+                p = fn_802DBBCC(((void *(*)(void))fn_802D0B3C)(), size, 0);
+            }
+        }
+    }
+    M2C_FIELD(arg0, void **, 0x20) = p;
+    if (p != NULL) {
+        M2C_FIELD(arg0, s32 *, 0x28) = arg1;
+        M2C_FIELD(arg0, s32 *, 0x24) = 0;
+        return 1;
+    }
+    return 0;
 }
 
 s32 fn_8033983C(void *arg0) {
