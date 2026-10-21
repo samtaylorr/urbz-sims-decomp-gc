@@ -461,12 +461,18 @@ void fn_800CF648(s32 *self) {
 void fn_800CF654(void *arg0) {
     M2C_UNK fn_800CC79C(void *);
     void *vt;
+    void *inner;
+    void *entry;
+    void *obj;
 
     vt = M2C_FIELD(arg0, void **, 0x1C);
-    if (M2C_FIELD(arg0, s32 *, 0x58) & 0x10000000) {
-        fn_800CC79C((char *)arg0 + 0x20);
+    inner = (char *)arg0 + 0x20;
+    entry = (char *)vt + 0x68;
+    obj = (char *)arg0 + M2C_FIELD(vt, s16 *, 0x68);
+    if (M2C_FIELD(inner, s32 *, 0x38) & 0x10000000) {
+        fn_800CC79C(inner);
     }
-    M2C_FIELD((char *)vt + 0x68, M2C_UNK (**)(void *, void *), 4)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x68), (char *)arg0 + 0x3C);
+    M2C_FIELD(entry, M2C_UNK (**)(void *, void *), 4)(obj, (char *)arg0 + 0x3C);
 }
 
 void fn_800CF6B4(void *arg0, s32 arg1) {
