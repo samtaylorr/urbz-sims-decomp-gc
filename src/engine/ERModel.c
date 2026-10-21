@@ -254,11 +254,11 @@ void fn_8032C204(u8 *self) {
     }
 }
 
-extern f32 lbl_803F33B4;
-extern f32 lbl_803F33B8;
+extern f32 lbl_803F33B4[];
+extern f32 lbl_803F33B8[];
 void fn_8032CC5C(s32 arg0, s32 arg1) {
     if (arg1 == 0xFFFF && arg0 != 0) {
-        lbl_80496244 = lbl_803F33B4 * lbl_803F33B8;
+        lbl_80496244 = lbl_803F33B4[0] * lbl_803F33B8[0];
         lbl_80496248 = fn_802D6A90(lbl_80493948, fn_8032CCE4, fn_8032CD0C, fn_8032CD38, 4, lbl_803F331C, lbl_80493858);
     }
 }
