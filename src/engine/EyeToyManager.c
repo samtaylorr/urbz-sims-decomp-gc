@@ -67,6 +67,14 @@ void fn_8033921C(s32 arg0) {
     }
 }
 
+s32 fn_80339244(void) {
+    s32 temp_r3;
+
+    temp_r3 = lbl_80494F80;
+    lbl_80494F80 = 1;
+    return temp_r3 ^ 1;
+}
+
 extern s32 lbl_80494F80;
 s32 fn_80339258(void) {
     s32 temp_r3;
@@ -124,23 +132,9 @@ void *fn_802D197C(void *, u32, s32);
 void *fn_802DBBCC(void *, u32, s32);
 void *fn_802D0B3C_h(void);
 s32 fn_80339380(void *arg0, s32 arg1) {
-    void *heap;
     void *p;
-    u32 size;
 
-    heap = fn_802D0AB8();
-    size = arg1 * 4;
-    if (size == 0) {
-        p = NULL;
-    } else {
-        p = fn_802D197C(heap, size, 4);
-        if (p == NULL) {
-            p = fn_802DBBCC(heap, size, 0);
-            if (p == NULL && heap == fn_802D0AB8()) {
-                p = fn_802DBBCC(((void *(*)(void))fn_802D0B3C)(), size, 0);
-            }
-        }
-    }
+    p = EyeToyAlloc(arg1 * 4);
     M2C_FIELD(arg0, void **, 0x20) = p;
     if (p != NULL) {
         M2C_FIELD(arg0, s32 *, 0x28) = arg1;
