@@ -142,6 +142,10 @@ void fn_80320204(void) {
     fn_8031FEAC();
 }
 
+void fn_8032022C(void *self) {
+    fn_8031FEAC(fn_803203A8(0x24, self));
+}
+
 void fn_80320258(void *self) {
     fn_8031FEF0(self, 2);
 }
