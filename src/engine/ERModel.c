@@ -19,8 +19,6 @@ void *fn_8032CE88(u32 size, void *p);
 extern u8 lbl_80493948[];
 extern u8 lbl_803F331C[];
 extern u8 lbl_80493858[];
-extern f32 lbl_803F33B4;
-extern f32 lbl_803F33B8;
 extern f32 lbl_80496244;
 extern s32 lbl_80496248;
 
