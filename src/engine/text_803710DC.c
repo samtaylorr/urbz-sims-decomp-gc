@@ -58,6 +58,27 @@ void fn_803712D0(void) {
 
 }
 
+void fn_80371394(s32 arg0, s32 arg1) {
+    if (arg1 == 0xFFFF && arg0 != 0) {
+        lbl_8049630C = fn_802D6A90(lbl_80493E1C, fn_80371404, fn_80371484, fn_803714A4, 0, lbl_803F5530, lbl_80493858);
+    }
+}
+
+void *fn_80371404(void) {
+    void *heap;
+    void *p;
+
+    heap = ((void *(*)(void))fn_802D0AB8)();
+    p = fn_802D197C(heap, 0x24, 4);
+    if (p == NULL) {
+        p = fn_802DBBCC(heap, 0x24, 0);
+        if (p == NULL && heap == ((void *(*)(void))fn_802D0AB8)()) {
+            p = fn_802DBBCC(fn_802D0B3C(), 0x24, 0);
+        }
+    }
+    return fn_8037117C(p);
+}
+
 void *fn_8037117C(void *);
 void fn_80371484(void *self) {
     fn_8037117C(self);
