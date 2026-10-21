@@ -30,6 +30,10 @@ void fn_8008F240(void) {
 
 }
 
+s32 fn_8008F83C(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x10) != 0;
+}
+
 s32 fn_8008F854(void) {
     return 1;
 }
