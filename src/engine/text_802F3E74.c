@@ -227,6 +227,11 @@ void fn_802F5A58(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
 
+void fn_802F5A8C(void *arg0, void *arg1) {
+    typedef struct { s32 m[16]; } Mtx44Copy;
+    *(Mtx44Copy *)arg1 = *(Mtx44Copy *)((char *)arg0 + 0x90);
+}
+
 s32 fn_802F5B14(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x120);
 }
@@ -244,7 +249,7 @@ s32 fn_802F5B2C(s32 arg0) {
 }
 
 void fn_802F5B34(void) {
-    M2C_UNK fn_802F57C0(M2C_UNK, M2C_UNK);
+    void fn_802F57C0(s32, s32);
     fn_802F57C0(1, 0xFFFF);
 }
 
