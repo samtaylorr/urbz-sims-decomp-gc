@@ -53,9 +53,9 @@ void fn_8031BEE8(void **arg0, s32 arg1) {
     }
 }
 
-void fn_8031BEA0(void);
-void fn_8031C5E0(void) {
-    fn_8031BEA0();
+void *fn_8031BEA0(void *);
+void fn_8031C5E0(void *self) {
+    fn_8031BEA0(self);
 }
 
 void fn_8031C624(void **obj) {
