@@ -204,6 +204,12 @@ void fn_8036727C(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x40) = arg1;
 }
 
+void fn_80367284(void *arg0, s32 arg1) {
+    M2C_UNK fn_8039A8DC(void *, s32, s32);
+    M2C_FIELD(arg0, s32 *, 0x44) = arg1;
+    fn_8039A8DC((u8 *)arg0 + 0x48, arg1, 0);
+}
+
 void fn_803672B8(void) {
 
 }
