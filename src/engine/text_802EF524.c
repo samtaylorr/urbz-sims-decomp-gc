@@ -71,9 +71,9 @@ u16 fn_802EFA2C(void) {
     return lbl_8049377E[0];
 }
 
-extern void fn_802D6A90(void *, void *, void *, void *, s32, void *, void *);
+extern s32 fn_802D6A90(void *, void *, void *, void *, s32, void *, void *);
 extern void fn_802EF944(void);
-extern void fn_802EF98C(void);
+extern void fn_802EF98C(void *);
 extern u8 lbl_803F0D18[];
 extern u8 lbl_80493740[];
 void fn_802EFA38(s32 arg0) {
