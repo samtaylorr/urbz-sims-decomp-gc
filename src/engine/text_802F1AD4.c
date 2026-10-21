@@ -116,6 +116,10 @@ s32 fn_802F2640(void) {
     return 3;
 }
 
+void fn_802F2648(u8 *arg0, Vec3f *out) {
+    *out = *(Vec3f *)(arg0 + 0xC0);
+}
+
 f32 fn_802F2668(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0xDC);
 }
