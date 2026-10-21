@@ -492,6 +492,7 @@ void fn_800630FC(void) {
 }
 
 void fn_8006311C(void *self) {
+    void fn_8005B890(void *, s32);
     fn_8005B890(self, 2);
 }
 
