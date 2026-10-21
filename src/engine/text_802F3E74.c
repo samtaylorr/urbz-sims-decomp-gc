@@ -133,6 +133,11 @@ void fn_802F5830(void) {
     fn_802F3F14();
 }
 
+void fn_802F5858(void *self) {
+    void *fn_802F5A50(u32 size, void *p);
+    fn_802F3F14(fn_802F5A50(0x300, self));
+}
+
 extern s32 lbl_804961E0;
 void fn_802F5884(void *self) {
     fn_802F3FC8(self, 2);
