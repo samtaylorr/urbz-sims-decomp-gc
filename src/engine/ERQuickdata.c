@@ -134,21 +134,21 @@ void fn_8033031C(void) {
     fn_8032F5A0();
 }
 
-s32 fn_80330F38(void *self, s32 id) {
-    if (M2C_FIELD(self, s32 *, 0x64) & 2) {
-        return fn_80330F38(M2C_FIELD(self, void **, 0x24), id);
+s32 fn_80330F38(ERQdLookup *self, s32 id) {
+    if (self->unk64 & 2) {
+        return fn_80330F38(self->unk24, id);
     }
-    if (M2C_FIELD(M2C_FIELD(self, void **, 0x20), u32 *, 4) & 0x4000000) {
+    if (self->unk20[1] & 0x4000000) {
         u32 i;
-        for (i = 0; i < M2C_FIELD(self, u32 *, 0x3C); i++) {
-            if (M2C_FIELD(self, s32 **, 0x44)[i] == id) {
+        for (i = 0; i < self->unk3C; i++) {
+            if (self->unk44[i] == id) {
                 return 1;
             }
         }
     } else {
         s32 i;
-        for (i = 0; i <= 1; i++) {
-            if (((s32 *)((char *)self + 0x34))[i] == id) {
+        for (i = 0; i < 2; i++) {
+            if (self->unk34[i] == id) {
                 return 1;
             }
         }
@@ -157,7 +157,7 @@ s32 fn_80330F38(void *self, s32 id) {
 }
 
 void fn_80330FC4(s32 arg0, s32 arg1) {
-    extern struct { s32 a; s32 b; } lbl_8049624C;
+    extern s32 lbl_8049624C[2];
     extern s32 lbl_80496254;
     extern u8 lbl_8045AA90[];
     extern u8 lbl_80493970[];
@@ -169,10 +169,11 @@ void fn_80330FC4(s32 arg0, s32 arg1) {
     s32 fn_802D6A90(void *, void *, void *, void *, s32, void *, void *);
     void fn_802CA9A8(void *);
     void fn_802CAA00(void *, s32);
+    s32 *p = lbl_8049624C;
     if (arg1 == 0xFFFF) {
         if (arg0 != 0) {
-            lbl_8049624C.a = 0;
-            lbl_8049624C.b = 0;
+            p[0] = 0;
+            p[1] = 0;
             fn_802CA9A8(lbl_8045AA90);
             lbl_80496254 = fn_802D6A90(lbl_80493970, fn_80331064, fn_8033108C, fn_803310B8, 2, lbl_803F34C0, lbl_80493858);
         } else {
