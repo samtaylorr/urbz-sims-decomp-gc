@@ -309,9 +309,43 @@ s32 fn_80260574(void) {
     return 1;
 }
 
+typedef struct DVDFileInfo {
+    DVDCommandBlock cb;
+    u32 startAddr;
+    u32 length;
+    void (*callback)(s32, struct DVDFileInfo *);
+} DVDFileInfo;
+
+typedef struct FSTEntry {
+    u32 isDirAndStringOff;
+    u32 parentOrPosition;
+    u32 nextEntryOrLength;
+} FSTEntry;
+
+extern FSTEntry *lbl_80495EB4;
+extern s32 lbl_80495EC0;
+s32 fn_80260144(char *);
+void fn_802530CC(char *, s32, char *, ...);
+extern char lbl_80494A20[8];
+extern char lbl_803F93A8[];
+extern char lbl_803F940C[];
+s32 fn_80262FE0(void *, void *, s32, s32, void *, s32);
+s32 fn_802630BC(void *, s32, void *, s32);
+void fn_80260A68(s32 result, DVDCommandBlock *block);
+void fn_80260C6C(s32 result, DVDCommandBlock *block);
+
 void fn_80260BB0(void) {
     extern M2C_UNK lbl_80495EC8;
     fn_80259838(&lbl_80495EC8);
+}
+
+s32 fn_80260BD4(void *fileInfo, s32 offset, void *callback, s32 prio) {
+    if (!((0 <= offset) && ((u32)offset <= *(u32 *)((u8 *)fileInfo + 0x34)))) {
+        fn_802530CC(lbl_80494A20, 0x38B, lbl_803F940C);
+    }
+    *(void **)((u8 *)fileInfo + 0x38) = callback;
+    fn_802630BC(fileInfo, *(s32 *)((u8 *)fileInfo + 0x30) + offset, fn_80260C6C, prio);
+    return 1;
 }
 
 void fn_80260D48(void) {
@@ -410,7 +444,6 @@ extern void (*lbl_80495EF4)(s32, DVDCommandBlock *);
 extern DVDCommandBlock lbl_80442960;
 void fn_802622E0(void);
 s32 fn_80261640(u32 resume) {
-    extern DVDCommandBlock *lbl_80495ED0;
     DVDCommandBlock *finished;
     if (lbl_80495EF0) {
         lbl_80495EF8 = resume;
@@ -422,7 +455,7 @@ s32 fn_80261640(u32 resume) {
             ((void (*)(s32, DVDCommandBlock *))finished->callback)(-3, finished);
         }
         if (lbl_80495EF4) {
-            (*lbl_80495EF4)(0, finished);
+            lbl_80495EF4(0, finished);
         }
         fn_802622E0();
         return 1;
