@@ -660,6 +660,10 @@ void fn_800635B0(void) {
     fn_800606B0();
 }
 
+void fn_800635D0(void *self) {
+    fn_800606F8(self, 2);
+}
+
 void fn_800635F4(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
