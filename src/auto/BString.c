@@ -3494,6 +3494,12 @@ s32 fn_800EBC7C(void) {
     return 0;
 }
 
+M2C_UNK fn_800EC9AC(s32 arg0) {
+    extern s32 lbl_80434AE8[];
+    *(s32 *)arg0 = (s32)lbl_80434AE8;
+    lbl_80434AE8[3]++;
+}
+
 void *fn_800EB5D0(void *mem, s32 arg1, s32 arg2);
 void *fn_800EB848(void *mem, const u8 *begin, u32 pos, u32 end);
 void fn_800EAF58(void);
@@ -3658,9 +3664,9 @@ void fn_800EEC2C(void) {
     fn_800EE994();
 }
 
-u32 fn_800EC848();
-void fn_800EECA4(void) {
-    fn_800EC848();
+u32 fn_800EC848(void **arg0, const u8 *arg1, u32 arg2, u32 arg3);
+void fn_800EECA4(void **arg0, const u8 *arg1, u32 arg2, u32 arg3) {
+    fn_800EC848(arg0, arg1, arg2, arg3);
 }
 
 void fn_800EC8E0(void);
