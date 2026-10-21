@@ -168,6 +168,13 @@ s32 fn_800F0698(void) {
     return 0;
 }
 
+M2C_UNK fn_800F160C(s32 arg0) {
+    extern s32 lbl_80434AF8[];
+    *(s32 **)arg0 = lbl_80434AF8;
+    lbl_80434AF8[3]++;
+    return arg0;
+}
+
 extern void fn_800EF8BC(s32);
 void fn_800F1A60(s32 self, s32 flags) {
     fn_800EF8BC(self);
