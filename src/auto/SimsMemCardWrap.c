@@ -309,8 +309,9 @@ void fn_800AA4A8(void) {
 void fn_800AA4EC(void) {
     M2C_UNK fn_80029A10(s32);
     extern u8 lbl_8041F94C[];
-    fn_80029A10(M2C_FIELD(lbl_8041F94C, s32 *, 0xEC));
-    fn_80029A10(M2C_FIELD(lbl_8041F94C, s32 *, 0xEC));
+    u8 *p = lbl_8041F94C;
+    fn_80029A10(M2C_FIELD(p, s32 *, 0xEC));
+    fn_80029A10(M2C_FIELD(p, s32 *, 0xEC));
     fn_800AA00C();
 }
 
