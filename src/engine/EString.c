@@ -196,6 +196,18 @@ s32 *fn_802D406C(s32 *arg0, s32 *arg1, s32 arg2, s32 arg3) {
     return arg0;
 }
 
+s32 *fn_802D40E4(s32 *arg0, s32 *arg1, s32 arg2) {
+    M2C_UNK fn_802D39F0(s32 *, s32);
+    char *fn_803B9FEC(s32 *);
+    s32 sp8;
+
+    fn_802D3C60(&sp8, fn_803B9FEC(arg1));
+    ((char *)sp8)[arg2] = 0;
+    fn_802D3C60(arg0, fn_803B9FEC(&sp8));
+    fn_802D39F0(&sp8, sp8);
+    return arg0;
+}
+
 s32 *fn_802D4158(s32 *arg0, s32 *arg1, s32 arg2) {
     fn_802D3C60(arg0, (char *)(*arg1 + (fn_802D3D24(arg1) - arg2)));
     return arg0;
@@ -222,7 +234,8 @@ s32 *fn_802D4200(s32 *arg0, s32 *arg1, s32 arg2) {
 s32 *fn_802D4240(s32 *arg0, s32 arg1) {
     M2C_UNK fn_802D39F0(s32 *, s32);
     typedef struct { s32 p; } Str;
-    Str tmp = ((Str (*)(s32 *, s32))fn_802D4200)(arg0, arg1);
+    Str (*f)(s32 *, s32) = (Str (*)(s32 *, s32))fn_802D4200;
+    Str tmp = f(arg0, arg1);
 
     fn_802D3CE4(arg0, (char *)tmp.p);
     fn_802D39F0(&tmp.p, tmp.p);
