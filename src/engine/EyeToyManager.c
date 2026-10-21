@@ -55,9 +55,12 @@ void fn_80339184(s32 arg0) {
 }
 
 s32 fn_803391E4(s32 arg0) {
-    if (arg0 != -1) {
-        fn_8033930C(arg0);
+    s32 fn_8033930C(s32);
+
+    if (arg0 == -1) {
+        return 1;
     }
+    fn_8033930C(arg0);
     return 1;
 }
 
@@ -134,14 +137,14 @@ void *fn_802D0B3C_h(void);
 s32 fn_80339380(void *arg0, s32 arg1) {
     void *p;
 
-    p = EyeToyAlloc(arg1 * 4);
+    p = EyeToyAlloc(arg1 << 2);
     M2C_FIELD(arg0, void **, 0x20) = p;
-    if (p != NULL) {
-        M2C_FIELD(arg0, s32 *, 0x28) = arg1;
-        M2C_FIELD(arg0, s32 *, 0x24) = 0;
-        return 1;
+    if (p == NULL) {
+        return 0;
     }
-    return 0;
+    M2C_FIELD(arg0, s32 *, 0x28) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x24) = 0;
+    return 1;
 }
 
 s32 fn_8033983C(void *arg0) {
