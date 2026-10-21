@@ -218,7 +218,7 @@ s32 fn_8024BEAC(void) {
 }
 
 extern u8 lbl_803EBED4[];
-void *fn_8024C068(void) {
+void *fn_8024C068(s32 arg0) {
     return lbl_803EBED4;
 }
 
