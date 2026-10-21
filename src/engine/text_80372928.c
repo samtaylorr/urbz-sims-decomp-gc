@@ -50,6 +50,12 @@ void fn_80372A2C(void **self, s32 flags) {
     }
 }
 
+void fn_8037379C(s32 arg0, s32 arg1) {
+    if (arg1 == 0xFFFF && arg0 != 0) {
+        lbl_8049631C = fn_802D6A90(lbl_80493EBC, fn_8037380C, fn_80373834, fn_80373860, 0, lbl_803F567C, lbl_80493858);
+    }
+}
+
 void fn_8037380C(void) {
     M2C_UNK fn_803729C8();
     M2C_UNK fn_80373980(M2C_UNK);
