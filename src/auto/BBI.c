@@ -780,6 +780,10 @@ void fn_80063980(void) {
     fn_8006177C();
 }
 
+void fn_800639A0(void *self) {
+    fn_800617C4(self, 2);
+}
+
 void fn_800639C4(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
