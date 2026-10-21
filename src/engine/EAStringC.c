@@ -317,18 +317,21 @@ static inline fn_802A8240_Ret fn_802A8240_new2(f32 value) {
     return r;
 }
 
+static inline void *fn_802A8240_new3(f32 value) {
+    f32 *p = &value;
+    return fn_802A8240_new(*p);
+}
+
 void *fn_802A8240(void *self, s32 arg1) {
     extern s32 lbl_804433C4[];
     extern void fn_802B4998(s32);
     extern f32 fn_80243694(void);
-    f32 value[1];
 
     if (arg1 < 1) {
         return (void *)lbl_80496130;
     }
     fn_802B4998(((s32 *)lbl_804433C4[2])[lbl_804433C4[0] - 1]);
-    value[0] = fn_80243694();
-    return fn_802A8240_new(value[0]);
+    return fn_802A8240_new2(fn_80243694()).obj;
 }
 
 void fn_802ACAF8(void *arg0, s32 arg1) {
