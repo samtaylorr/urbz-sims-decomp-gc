@@ -223,6 +223,16 @@ void *fn_80368B40(void *arg0) {
     return arg0;
 }
 
+void *fn_80368B60(void *arg0, void *arg1) {
+    extern char lbl_80401368[];
+    void fn_80369900(void *, void *, s32);
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, void **, 8) = lbl_80401368;
+    fn_80369900(arg0, arg1, 1);
+    return arg0;
+}
+
 extern char lbl_80401368[];
 void fn_80368BAC(void *arg0, void *arg1) {
     void *temp_r10;
