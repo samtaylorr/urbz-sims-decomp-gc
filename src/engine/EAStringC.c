@@ -250,6 +250,10 @@ s32 fn_802A4354(void) {
     return 1;
 }
 
+s32 fn_802A661C(s32 *arg0) {
+    return ++*arg0;
+}
+
 void fn_802A6E10(s32 arg0) {
     M2C_UNK fn_802A6CE0();
     s32 fn_802D2058(M2C_UNK);
