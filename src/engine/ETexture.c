@@ -314,11 +314,43 @@ s32 fn_80370070(s32 arg0, s32 *out) {
     return arg0;
 }
 
+s32 fn_803702A0(u32 arg0) {
+    s32 i;
+
+    for (i = 0; i < 4; i++) {
+        if ((u8)arg0 > 0x20) {
+            return 1;
+        }
+        arg0 >>= 8;
+    }
+    return 0;
+}
+
+s32 fn_80370428(s32 *arr, u8 *data) {
+    u8 *p = data;
+    s32 n;
+    s32 i;
+
+    fn_802482F8(&n, p, 4);
+    p += 4;
+    fn_803BFDA0(arr, n, 0);
+    for (i = 0; i < n; i++) {
+        fn_802482F8((u8 *)*arr + i * 4, p, 4);
+        p += 4;
+    }
+    return p - data;
+}
+
 void fn_80370ED8(void) {
     M2C_UNK fn_803700B0();
     M2C_UNK fn_8037104C(M2C_UNK);
     fn_8037104C(0x9C);
     fn_803700B0();
+}
+
+void fn_80370F00(void *self) {
+    M2C_UNK fn_803700B0();
+    fn_803700B0(fn_8037107C(0x9C, self));
 }
 
 extern void fn_803701E8(void *, s32);
