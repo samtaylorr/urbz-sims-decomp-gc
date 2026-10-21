@@ -446,8 +446,34 @@ void fn_80061824(void *arg0, s32 arg1, s32 arg2) {
     }
 }
 
+void fn_80063054(void) {
+    extern void *fn_802D0AB8(void);
+    extern void *fn_802D0B3C(void);
+    extern void *fn_802D197C(void *, u32, u32);
+    extern void *fn_802DC3C0(void *, u32, u32, s32, s32);
+    extern void fn_80248488(void *, s32, u32);
+    extern void fn_8005B71C(void *);
+    void *heap;
+    void *p;
+
+    heap = fn_802D0AB8();
+    p = fn_802D197C(heap, 0x660, 0x10);
+    if (p == NULL) {
+        p = fn_802DC3C0(heap, 0x660, 0x10, 0, 0);
+        if (p == NULL && heap == fn_802D0AB8()) {
+            p = fn_802DC3C0(fn_802D0B3C(), 0x660, 0x10, 0, 0);
+        }
+    }
+    fn_80248488(p, 0, 0x660);
+    fn_8005B71C(p);
+}
+
 void fn_800630FC(void) {
     fn_8005B71C();
+}
+
+void fn_8006311C(void *self) {
+    fn_8005B890(self, 2);
 }
 
 void fn_80063140(void **obj) {
@@ -517,6 +543,10 @@ void fn_80063250(void *arg0, s32 arg1) {
 
 s32 fn_80063278(s32 arg0) {
     return arg0 + 0x3E4;
+}
+
+void fn_80063280(u8 *arg0, struct BBI_Vec3 *arg1) {
+    *(struct BBI_Vec3 *)(arg0 + 0x3E4) = *arg1;
 }
 
 s32 fn_800632A0(s32 arg0) {
