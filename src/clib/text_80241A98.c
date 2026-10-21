@@ -39,6 +39,10 @@ s32 fn_80245C8C(void) {
     return 0;
 }
 
+void fn_80246DDC(void *self) {
+    ((void (*)(void *, s32))fn_80247D48)(self, 0);
+}
+
 void fn_80247C28(s32 arg0) {
     extern s32 lbl_80494988;
     *(s32 *)(lbl_80494988 + 0x58) = arg0;
