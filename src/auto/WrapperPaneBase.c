@@ -234,6 +234,15 @@ void fn_800CD09C(void *arg0) {
     }
 }
 
+void fn_800CD0DC(s32 *self) {
+    s32 i;
+
+    self[3] = self[2];
+    for (i = 22; i >= 16; i--) {
+        self[i] = 0;
+    }
+}
+
 void fn_800CD7F0(f32 farg0) {
     void *temp_r3;
     void *temp_r9;
