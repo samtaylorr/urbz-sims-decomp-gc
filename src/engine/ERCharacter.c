@@ -108,6 +108,11 @@ void fn_8031BBCC(void) {
     fn_8031B7A8();
 }
 
+void fn_8031BC20(void *self) {
+    void fn_8031B7EC(void *, s32);
+    fn_8031B7EC(self, 2);
+}
+
 void fn_8031BC44(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
