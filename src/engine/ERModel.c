@@ -102,6 +102,40 @@ s32 fn_80329DDC(u8 *self, s32 data) {
     return data - start;
 }
 
+s32 fn_8032A3DC(u8 *self) {
+    s32 i;
+    s32 total = 0;
+
+    for (i = 0; i < ListCount(self + 0x20); i++) {
+        total += *(s32 *)(*(u8 **)(self + 0x20) + i * 0x18 + 4);
+    }
+    return total;
+}
+
+void *fn_8032A410(u8 *self) {
+    extern void *fn_80338000(void *, s32, s32);
+    extern void fn_802C8814(f32 *);
+    extern void fn_802C876C(void);
+    extern u8 lbl_8045B82C[];
+    extern f32 lbl_803F3360;
+    f32 v[3];
+    f32 s;
+
+    if (*(void **)(self + 0x1A0) == 0) {
+        *(void **)(self + 0x1A0) = fn_80338000(lbl_8045B82C, 0x40, 0x10);
+        s = *(f32 *)(self + 0x6C);
+        if (s != lbl_803F3360) {
+            v[0] = s;
+            v[1] = s;
+            v[2] = s;
+            fn_802C8814(v);
+        } else {
+            fn_802C876C();
+        }
+    }
+    return *(void **)(self + 0x1A0);
+}
+
 void fn_8032A490(u8 *self) {
     extern void fn_80338184(void *, void *);
     extern u8 lbl_8045B82C[];
