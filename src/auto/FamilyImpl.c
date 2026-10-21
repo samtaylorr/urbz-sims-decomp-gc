@@ -28,11 +28,12 @@ void fn_8010A3F0(void) {
 
 void fn_8010A578(u8 **self) {
     void *fn_8015125C(void *, s32);
+    u8 *child;
     u8 *n;
     void *p;
 
-    n = *(u8 **)(*self + 0xC);
-    p = n != NULL ? fn_8015125C(***(void ****)(n + 4), 9) : NULL;
+    child = *(u8 **)(*self + 0xC);
+    p = child != NULL ? fn_8015125C(***(void ****)(child + 4), 9) : NULL;
     if (p == NULL) {
         p = self;
     }
