@@ -285,6 +285,45 @@ s32 fn_80368E14(s32 arg0, s32 arg1) {
     return fn_80369088(arg0, temp_r3, arg1, 0) + 0x18;
 }
 
+void *fn_80368E80(void *arg0, s32 arg1) {
+    s32 fn_802D3EE8(s32, s32);
+    char *var_r30;
+    char *var_r31;
+
+    var_r30 = M2C_FIELD(arg0, char **, 8);
+    var_r31 = NULL;
+    while (var_r30 != lbl_80401368) {
+        if (fn_802D3EE8((s32)(var_r30 + 0x1C), arg1) == 0) {
+            return var_r30;
+        }
+        var_r31 = var_r30;
+        if (fn_802D3EE8((s32)(var_r30 + 0x1C), arg1) > 0) {
+            var_r30 = M2C_FIELD(var_r31, char **, 0);
+        } else {
+            var_r30 = M2C_FIELD(var_r31, char **, 4);
+        }
+    }
+    return var_r31;
+}
+
+void *fn_80368F18(void *arg0, s32 arg1) {
+    s32 fn_802D3EE8(s32, s32);
+    char *var_r0;
+    char *var_r31;
+
+    var_r0 = M2C_FIELD(arg0, char **, 8);
+    var_r31 = NULL;
+    while (var_r0 != lbl_80401368) {
+        var_r31 = var_r0;
+        if (fn_802D3EE8((s32)(var_r31 + 0x1C), arg1) > 0) {
+            var_r0 = M2C_FIELD(var_r31, char **, 0);
+        } else {
+            var_r0 = M2C_FIELD(var_r31, char **, 4);
+        }
+    }
+    return var_r31;
+}
+
 s32 fn_803698D8(void **arg0) {
     s32 var_r9;
     void *var_r3;
