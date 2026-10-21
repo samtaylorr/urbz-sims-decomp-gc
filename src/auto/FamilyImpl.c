@@ -1,6 +1,11 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+typedef struct {
+    s32 a;
+    s32 b;
+} FamilyPair;
+
 void fn_80106008(s32 *arg0) {
     M2C_UNK fn_8011AA6C(s32);
     fn_8011AA6C(*arg0);
