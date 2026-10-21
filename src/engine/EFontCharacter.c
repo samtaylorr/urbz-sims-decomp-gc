@@ -89,6 +89,31 @@ s32 fn_8036C878(s32 arg0, s32 *out) {
     return arg0;
 }
 
+extern void fn_8036C41C(void *, s32);
+extern void fn_8036C92C(void *, s32);
+extern void fn_802CB8D4(void *);
+extern void fn_8036619C(void *);
+void fn_8036C998(char *self) {
+    char *list = self + 4;
+    void ***node = *(void ****)(list + 4);
+
+    while (node != NULL) {
+        void **obj = (void **)node[0];
+        void ***next = (void ***)node[1];
+        if (*(s32 *)(list + 8) != 0) {
+            char *vt = (char *)*obj;
+            (*(void (**)(void *))(vt + 0xC))((char *)obj + *(s16 *)(vt + 8));
+        }
+        node = next;
+    }
+    fn_802CB8D4(list);
+    fn_8036619C(self + 0x28);
+}
+
+extern void fn_802CB8D4(void *);
+extern void fn_8036619C(void *);
+extern void fn_8036C41C(void *, s32);
+extern void fn_8036C92C(void *, s32);
 extern u8 lbl_8041D928[];
 void *fn_8036CF18(void) {
     M2C_UNK fn_802D1FC8(M2C_UNK);
