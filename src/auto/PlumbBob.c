@@ -529,6 +529,29 @@ void fn_80077F64(s32 arg0) {
     } while (var_r30 != 0);
 }
 
+extern void *fn_802D197C(void *, u32, s32);
+extern void *fn_802DBBCC(void *, u32, s32);
+extern void *fn_802D0B3C(void);
+extern void *fn_80248488(void *, s32, u32);
+void *fn_80078078(u32 size) {
+    void *heap;
+    void *p;
+
+    heap = ((void *(*)(void))fn_802D0AB8)();
+    if (size == 0) {
+        heap = NULL;
+    } else {
+        p = fn_802D197C(heap, size, 4);
+        if (p == NULL && (p = fn_802DBBCC(heap, size, 0)) == NULL && heap == ((void *(*)(void))fn_802D0AB8)()) {
+            heap = fn_802DBBCC(fn_802D0B3C(), size, 0);
+        } else {
+            heap = p;
+        }
+    }
+    fn_80248488(heap, 0, size);
+    return heap;
+}
+
 void fn_80078124(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
