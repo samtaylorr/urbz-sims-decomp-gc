@@ -2002,6 +2002,20 @@ void fn_803A36A0(s32 *first, s32 *last, s32 comp) {
     }
 }
 
+void fn_803A33EC(s32 *first, s32 *last, s32 *val, s32 depth, s32 comp);
+void fn_803A370C(s32 *first, s32 *last, s32 comp) {
+    if (first != last) {
+        s32 n = last - first;
+        s32 k = 0;
+        while (n != 1) {
+            n >>= 1;
+            k++;
+        }
+        fn_803A33EC(first, last, 0, k * 2, comp);
+        fn_803A36A0(first, last, comp);
+    }
+}
+
 s32 fn_803A3790(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     struct {
         void *vtbl;
