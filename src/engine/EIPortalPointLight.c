@@ -30,7 +30,7 @@ void fn_802F31C8(void) {
     fn_802F273C();
 }
 
-void fn_802F273C(void);
+void *fn_802F273C();
 void fn_802F31F0(void) {
     fn_802F273C();
 }
