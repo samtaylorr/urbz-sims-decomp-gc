@@ -9,10 +9,10 @@ typedef struct {
 
 extern void fn_8031E8B0(void *);
 
-static inline void fn_80332F70_init(void *self, s32 start, s32 len) {
+static inline void fn_80332F70_init(void *self, s32 start, s32 end) {
     fn_8031E8B0(self);
     M2C_FIELD(self, s32 *, 0x24) = start;
-    M2C_FIELD(self, s32 *, 0x28) = start + len - 1;
+    M2C_FIELD(self, s32 *, 0x28) = end - 1;
 }
 
 void fn_80335F5C(void *);
@@ -42,12 +42,7 @@ void *fn_80332F70(void *arg0, void *arg1, s32 arg2, s32 arg3) {
     } else {
         heap = p;
     }
-    {
-        s32 end = start + arg2 - 1;
-        fn_8031E8B0(heap);
-        M2C_FIELD(heap, s32 *, 0x24) = start;
-        M2C_FIELD(heap, s32 *, 0x28) = end;
-    }
+    fn_80332F70_init(heap, start, arg2);
     *(void **)heap = lbl_8041BC88;
     M2C_FIELD(heap, s32 *, 0x8) = arg3;
     M2C_FIELD(heap, void **, 0x20) = arg1;
