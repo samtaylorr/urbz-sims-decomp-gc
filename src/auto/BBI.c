@@ -23,6 +23,13 @@ static inline void *BBI_AllocAligned(s32 size) {
     return p;
 }
 
+static inline void *BBI_AllocZero(s32 size) {
+    void *fn_80248488(void *, s32, u32);
+    void *p = BBI_AllocAligned(size);
+    fn_80248488(p, 0, size);
+    return p;
+}
+
 void *fn_80059918(void *arg0) {
     extern u8 lbl_80408398[];
     M2C_FIELD(arg0, void **, 8) = lbl_80408398;
@@ -466,11 +473,9 @@ void fn_80061824(void *arg0, s32 arg1, s32 arg2) {
 }
 
 void fn_80063054(void) {
-    extern void fn_80248488(void *, s32, u32);
+    extern void *fn_80248488(void *, s32, u32);
     extern void fn_8005B71C(void *);
-    void *p;
-
-    p = BBI_AllocAligned(0x660);
+    void *p = BBI_AllocAligned(0x660);
     fn_80248488(p, 0, 0x660);
     fn_8005B71C(p);
 }
@@ -700,23 +705,9 @@ void fn_800636D0(void) {
 }
 
 void fn_800636F0(void) {
-    extern void *fn_802D0AB8(void);
-    extern void *fn_802D0B3C(void);
-    extern void *fn_802D197C(void *, u32, u32);
-    extern void *fn_802DC3C0(void *, u32, u32, s32, s32);
-    extern void fn_80248488(void *, s32, u32);
+    extern void *fn_80248488(void *, s32, u32);
     extern void fn_80060CD0(void *);
-    void *heap;
-    void *p;
-
-    heap = fn_802D0AB8();
-    p = fn_802D197C(heap, 0x690, 0x10);
-    if (p == NULL) {
-        p = fn_802DC3C0(heap, 0x690, 0x10, 0, 0);
-        if (p == NULL && heap == fn_802D0AB8()) {
-            p = fn_802DC3C0(fn_802D0B3C(), 0x690, 0x10, 0, 0);
-        }
-    }
+    void *p = BBI_AllocAligned(0x690);
     fn_80248488(p, 0, 0x688);
     fn_80060CD0(p);
 }
