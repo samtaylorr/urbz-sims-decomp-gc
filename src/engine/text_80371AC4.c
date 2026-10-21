@@ -103,7 +103,7 @@ void fn_80372424(void) {
 }
 
 void fn_80372444(void) {
-    M2C_UNK fn_80372214(M2C_UNK, M2C_UNK);
+    void fn_80372214(s32, s32);
     fn_80372214(1, 0xFFFF);
 }
 
