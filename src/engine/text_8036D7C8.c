@@ -75,6 +75,10 @@ void fn_8036EA50(void) {
     fn_8036D868();
 }
 
+void fn_8036EAA4(void *self) {
+    fn_8036D904(self, 2);
+}
+
 void fn_8036EAC8(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
