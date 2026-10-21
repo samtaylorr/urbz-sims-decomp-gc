@@ -209,7 +209,7 @@ void fn_8024BE60(s32 arg0, s32 arg1, s32 arg2) {
 
 s32 fn_8024BE98(s32 c) {
     extern const u8 lbl_803EBA39[];
-    return (lbl_803EBA39)[(u32)c] & 8;
+    return c[lbl_803EBA39] & 8;
 }
 
 extern s32 lbl_80494988;
