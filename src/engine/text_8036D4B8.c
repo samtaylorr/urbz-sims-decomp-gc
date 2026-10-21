@@ -80,7 +80,7 @@ u16 fn_8036D71C(void) {
 
 extern void fn_802D6A90(void *, void *, void *, void *, s32, void *, void *);
 extern void fn_8036D634(void);
-extern void fn_8036D67C(void);
+extern void fn_8036D67C(void **);
 extern u8 lbl_803F5200[];
 extern u8 lbl_80491E1C[];
 void fn_8036D728(s32 arg0) {
