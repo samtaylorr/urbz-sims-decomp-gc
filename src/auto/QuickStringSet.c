@@ -41,6 +41,13 @@ s32 fn_800F67E4(u32 arg0) {
     return var_r30;
 }
 
+void fn_800F684C(u8 *dst, u16 *src) {
+    while (*src != 0) {
+        *dst++ = *src++;
+    }
+    *dst = 0;
+}
+
 void *fn_800F687C(void *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 0) = arg1;
     M2C_FIELD(arg0, s32 *, 4) = arg2;
@@ -155,15 +162,15 @@ void fn_800F784C(void **obj) {
     }
 }
 
-void *fn_800F788C(void *arg0) {
+s32 *fn_800F788C(s32 *self) {
     extern char lbl_8040D178[];
     extern s32 lbl_804943C4;
-    M2C_FIELD(arg0, char **, 0) = lbl_8040D178;
-    M2C_FIELD(arg0, s32 *, 8) = 0;
-    M2C_FIELD(arg0, s32 **, 0xC) = &lbl_804943C4;
-    M2C_FIELD(arg0, s32 *, 0x10) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
-    return arg0;
+    self[0] = (s32)lbl_8040D178;
+    self[2] = 0;
+    self[3] = (s32)&lbl_804943C4;
+    self[4] = 0;
+    self[1] = 0;
+    return self;
 }
 
 extern u8 lbl_8040D2A8[];
