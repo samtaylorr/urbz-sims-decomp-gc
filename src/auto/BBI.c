@@ -4,6 +4,25 @@
 struct BBI_Handle { s32 v; };
 struct BBI_Vec3 { s32 a; s32 b; s32 c; };
 
+static inline void *BBI_AllocAligned(s32 size) {
+    void *fn_802D0AB8(void);
+    void *fn_802D0B3C(void);
+    void *fn_802D197C(void *, s32, s32);
+    void *fn_802DC3C0(void *, s32, s32, s32, s32);
+    void *heap;
+    void *p;
+
+    heap = fn_802D0AB8();
+    p = fn_802D197C(heap, size, 0x10);
+    if (p == NULL) {
+        p = fn_802DC3C0(heap, size, 0x10, 0, 0);
+        if (p == NULL && heap == fn_802D0AB8()) {
+            return fn_802DC3C0(fn_802D0B3C(), size, 0x10, 0, 0);
+        }
+    }
+    return p;
+}
+
 void *fn_80059918(void *arg0) {
     extern u8 lbl_80408398[];
     M2C_FIELD(arg0, void **, 8) = lbl_80408398;
