@@ -58,7 +58,7 @@ void fn_80052D18(void) {
 
 void *fn_80052D64(void *self, s32 count) {
     void *fn_802D1FC8(s32);
-    extern f32 lbl_803C765C;
+    extern const f32 lbl_803C765C[];
     extern u8 lbl_80496730;
     s32 i;
     s32 *p;
@@ -74,7 +74,7 @@ void *fn_80052D64(void *self, s32 count) {
             p[1] = i;
             p[2] = (s32)&lbl_80496730;
             p[3] = (s32)&lbl_80496730;
-            *(f32 *)&p[4] = lbl_803C765C;
+            *(f32 *)&p[4] = lbl_803C765C[0];
             p[5] = 0;
             if (i == 0) {
                 head = p;
