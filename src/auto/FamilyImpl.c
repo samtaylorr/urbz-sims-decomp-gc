@@ -291,6 +291,22 @@ s32 fn_8010C688(void) {
     return 0;
 }
 
+void fn_8010C690(s32 arg0) {
+    extern s32 lbl_80494404;
+    extern s32 lbl_80495ADC;
+    extern s32 lbl_80496644;
+    void fn_8010C96C(s32, s32);
+    s32 fn_8010C9E8(s32);
+    if (lbl_80495ADC != 0) {
+        if (arg0 != 0) {
+            lbl_80494404 = fn_8010C9E8(lbl_80496644);
+            fn_8010C96C(lbl_80496644, 5);
+        } else {
+            fn_8010C96C(lbl_80496644, lbl_80494404);
+        }
+    }
+}
+
 void fn_8010C6E8(s32 *arg0) {
     s32 *p = arg0;
     p[3] = 0;
