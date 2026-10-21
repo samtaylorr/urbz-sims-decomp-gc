@@ -63,12 +63,16 @@ void fn_80331578(void **self, s32 flags) {
 s32 fn_80331B68(void *self) {
     s32 i;
 
-    if (M2C_FIELD(self, s32 *, 0x20) != 0 && lbl_804950A8 != NULL) {
-        for (i = 0; i <= 1; i++) {
-            char *vt = M2C_FIELD(lbl_804950A8, char **, 0x338);
-            if ((*(s32 (**)(void *, s32))(vt + 0x1C))((char *)lbl_804950A8 + *(s16 *)(vt + 0x18), i) == M2C_FIELD(self, s32 *, 0x20)) {
-                return 0;
-            }
+    if (M2C_FIELD(self, s32 *, 0x20) == 0) {
+        return 1;
+    }
+    if (lbl_804950A8 == NULL) {
+        return 1;
+    }
+    for (i = 0; i <= 1; i++) {
+        char *vt = M2C_FIELD(lbl_804950A8, char **, 0x338);
+        if ((*(s32 (**)(void *, s32))(vt + 0x1C))((char *)lbl_804950A8 + *(s16 *)(vt + 0x18), i) == M2C_FIELD(self, s32 *, 0x20)) {
+            return 0;
         }
     }
     return 1;
