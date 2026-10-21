@@ -136,9 +136,9 @@ f32 fn_80043938(void) {
 void fn_80043950(f32 farg0) {
     void fn_803398E8(s32, void *, f32);
     extern f32 lbl_8041F63C[];
-    f32 v = farg0 + farg0;
-    lbl_8041F63C[7] = v;
-    fn_803398E8(0, lbl_8041F63C, v);
+    farg0 += farg0;
+    lbl_8041F63C[7] = farg0;
+    fn_803398E8(0, lbl_8041F63C, farg0);
 }
 
 f32 fn_80043984(void) {
@@ -150,7 +150,8 @@ f32 fn_80043984(void) {
     if (v > lbl_803C6168[0]) {
         v -= lbl_803C616C[0];
     }
-    return (v + lbl_803C6168[0]) / lbl_803C616C[0];
+    v += lbl_803C6168[0];
+    return v / lbl_803C616C[0];
 }
 
 f32 fn_80043A40(void) {
