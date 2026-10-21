@@ -334,17 +334,6 @@ s32 fn_80260574(void) {
     return 1;
 }
 
-extern s32 lbl_80495EC0;
-s32 fn_80260144(char *);
-void fn_802530CC(char *, s32, char *, ...);
-extern char lbl_80494A20[8];
-extern char lbl_803F93A8[];
-extern char lbl_803F940C[];
-s32 fn_80262FE0(void *, void *, s32, s32, void *, s32);
-s32 fn_802630BC(void *, s32, void *, s32);
-void fn_80260A68(s32 result, DVDCommandBlock *block);
-void fn_80260C6C(s32 result, DVDCommandBlock *block);
-
 void fn_80260BB0(void) {
     extern M2C_UNK lbl_80495EC8;
     fn_80259838(&lbl_80495EC8);
