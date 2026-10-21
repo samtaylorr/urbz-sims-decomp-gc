@@ -30,20 +30,23 @@ void fn_80024344(void *arg0, s32 arg1) {
 }
 
 void *fn_80024394(u32 size) {
-    void *heap = fn_802D0AB8((void *)size);
+    void *heap;
     void *p;
+
+    heap = ((void *(*)(void))fn_802D0AB8)();
     if (size == 0) {
-        heap = 0;
+        p = NULL;
     } else {
         p = fn_802D197C(heap, size, 4);
-        if (p == 0 && (p = fn_802DBBCC(heap, size, 0)) == 0 && heap == fn_802D0AB8(p)) {
-            heap = fn_802DBBCC(fn_802D0B3C(), size, 0);
-        } else {
-            heap = p;
+        if (p == NULL) {
+            p = fn_802DBBCC(heap, size, 0);
+            if (p == NULL && heap == ((void *(*)(void))fn_802D0AB8)()) {
+                p = fn_802DBBCC(fn_802D0B3C(), size, 0);
+            }
         }
     }
-    fn_80248488(heap, 0, size);
-    return heap;
+    fn_80248488(p, 0, size);
+    return p;
 }
 
 void fn_80024440(void *arg0) {
