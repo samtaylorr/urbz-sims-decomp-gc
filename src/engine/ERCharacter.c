@@ -83,6 +83,18 @@ void fn_80318918(void) {
     lbl_80494F1C++;
 }
 
+void fn_80318960(void) {
+    int fn_80245BB4(char *, const char *, ...);
+    void fn_803188C8(const char *);
+    extern const char lbl_803F2710[];
+    extern s32 lbl_80494F20;
+    char buf[128];
+
+    fn_80245BB4(buf, lbl_803F2710, lbl_80494F20);
+    fn_803188C8(buf);
+    lbl_80494F20++;
+}
+
 void fn_80318A24(void) {
     int fn_80245BB4(char *, const char *, ...);
     void fn_803188C8(const char *);
