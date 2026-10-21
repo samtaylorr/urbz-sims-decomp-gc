@@ -466,23 +466,11 @@ void fn_80061824(void *arg0, s32 arg1, s32 arg2) {
 }
 
 void fn_80063054(void) {
-    extern void *fn_802D0AB8(void);
-    extern void *fn_802D0B3C(void);
-    extern void *fn_802D197C(void *, u32, u32);
-    extern void *fn_802DC3C0(void *, u32, u32, s32, s32);
     extern void fn_80248488(void *, s32, u32);
     extern void fn_8005B71C(void *);
-    void *heap;
     void *p;
 
-    heap = fn_802D0AB8();
-    p = fn_802D197C(heap, 0x660, 0x10);
-    if (p == NULL) {
-        p = fn_802DC3C0(heap, 0x660, 0x10, 0, 0);
-        if (p == NULL && heap == fn_802D0AB8()) {
-            p = fn_802DC3C0(fn_802D0B3C(), 0x660, 0x10, 0, 0);
-        }
-    }
+    p = BBI_AllocAligned(0x660);
     fn_80248488(p, 0, 0x660);
     fn_8005B71C(p);
 }
@@ -711,8 +699,34 @@ void fn_800636D0(void) {
     fn_802D2430();
 }
 
+void fn_800636F0(void) {
+    extern void *fn_802D0AB8(void);
+    extern void *fn_802D0B3C(void);
+    extern void *fn_802D197C(void *, u32, u32);
+    extern void *fn_802DC3C0(void *, u32, u32, s32, s32);
+    extern void fn_80248488(void *, s32, u32);
+    extern void fn_80060CD0(void *);
+    void *heap;
+    void *p;
+
+    heap = fn_802D0AB8();
+    p = fn_802D197C(heap, 0x690, 0x10);
+    if (p == NULL) {
+        p = fn_802DC3C0(heap, 0x690, 0x10, 0, 0);
+        if (p == NULL && heap == fn_802D0AB8()) {
+            p = fn_802DC3C0(fn_802D0B3C(), 0x690, 0x10, 0, 0);
+        }
+    }
+    fn_80248488(p, 0, 0x688);
+    fn_80060CD0(p);
+}
+
 void fn_80063798(void) {
     fn_80060CD0();
+}
+
+void fn_800637B8(void *self) {
+    fn_80060D20(self, 2);
 }
 
 void fn_800637DC(void **obj) {
