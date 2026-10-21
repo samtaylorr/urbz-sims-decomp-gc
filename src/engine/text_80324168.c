@@ -84,7 +84,7 @@ void fn_80328E5C(void *arg0, void *arg1) {
     M2C_FIELD(arg0, void **, 0x4D130) = arg1;
 }
 
-void fn_8032421C(void);
+void fn_8032421C();
 void fn_80329080(void) {
     fn_8032421C();
 }
