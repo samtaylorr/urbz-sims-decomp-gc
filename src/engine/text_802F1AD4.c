@@ -1,6 +1,17 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+typedef struct { f32 x, y, z; } Vec3_802F1AD4;
+
+extern s32 lbl_804961D4;
+extern u8 lbl_80493790[];
+extern u8 lbl_803F0EF4[];
+extern u8 lbl_80493740[];
+extern s32 fn_802D6A90(void *, void *, void *, void *, s32, void *, void *);
+void fn_802F24D8(void);
+void fn_802F2500(void *);
+void fn_802F2520(void *);
+
 void fn_802D2FD0(void);
 void fn_802F1AD4(void) {
     fn_802D2FD0();
