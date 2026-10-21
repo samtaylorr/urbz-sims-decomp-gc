@@ -1,6 +1,17 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+extern s32 fn_802D6A90(void *, void *, void *, void *, s32, void *, void *);
+extern void fn_8031EB98(void);
+extern void fn_8031EBC0();
+extern void fn_8031EBEC();
+extern u8 lbl_80493858[];
+extern u8 lbl_803F2E48[];
+extern u8 lbl_804936F0[];
+extern s32 lbl_80496224;
+void *fn_8031EDF8(u32 size, void *p);
+void fn_8031EB28(s32, s32);
+
 void fn_802D2FD0(void);
 void fn_8031E810(void) {
     fn_802D2FD0();
