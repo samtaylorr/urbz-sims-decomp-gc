@@ -168,6 +168,16 @@ void fn_8002A698(void *arg0) {
     }
 }
 
+void fn_8002AECC(void *arg0) {
+    M2C_UNK fn_800370F8(s32, M2C_UNK);
+    M2C_UNK fn_80328D1C(s32);
+    if (M2C_FIELD(arg0, s32 *, 8) != 0) {
+        fn_800370F8(M2C_FIELD(arg0, s32 *, 8), 3);
+        M2C_FIELD(arg0, s32 *, 8) = 0;
+    }
+    fn_80328D1C(M2C_FIELD(arg0, s32 *, 0x1C));
+}
+
 void fn_8002B464(u16 arg0, s32 arg1, u16 *arg2, u16 *arg3) {
     void *fn_80190AA4(s32, u16);
     extern s32 lbl_80496654;
