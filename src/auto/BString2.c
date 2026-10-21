@@ -27,6 +27,21 @@ void fn_800EF8B8(void) {
 
 }
 
+void *fn_802D0AB8(void *);
+extern void fn_802D1A00(void *, void *);
+void fn_800EF8BC(s32 self) {
+    extern void fn_802D1A00(void *, void *);
+    extern void fn_800F0658(s32, s32);
+    void *p;
+
+    M2C_FIELD(M2C_FIELD(self, void **, 0), s32 *, 0xC)--;
+    if (M2C_FIELD(M2C_FIELD(self, void **, 0), s32 *, 0xC) == 0) {
+        fn_800F0658(M2C_FIELD(self, s32 *, 0), 2);
+        p = M2C_FIELD(self, void **, 0);
+        fn_802D1A00(((void *(*)(void))fn_802D0AB8)(), p);
+    }
+}
+
 s32 fn_800EF91C(void **arg0) {
     return M2C_FIELD(*arg0, s32 *, 0xC);
 }
