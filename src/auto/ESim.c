@@ -122,6 +122,41 @@ void fn_8003F3CC(void *arg0) {
     }
 }
 
+void fn_8003F79C(void *arg0, s32 arg1) {
+    void fn_802F3FC8(void *, s32);
+    void *fn_802D0AB8(void);
+    void fn_802D1A00(void *, void *);
+    extern u8 lbl_80407E40[];
+    M2C_FIELD(arg0, void **, 0x300) = 0;
+    M2C_FIELD(arg0, void **, 0) = lbl_80407E40;
+    fn_802F3FC8(arg0, 0);
+    if (arg1 & 1) {
+        fn_802D1A00(fn_802D0AB8(), arg0);
+    }
+}
+
+void fn_8003F7F8(void) {
+    void *fn_802D0AB8(void);
+    void *fn_802D0B3C(void);
+    void *fn_802D197C(void *, s32, s32);
+    void *fn_802DC3C0(void *, s32, s32, s32, s32);
+    void fn_80248488(void *, s32, s32);
+    void *fn_8003F9E0(void *);
+    void *heap;
+    void *obj;
+
+    heap = fn_802D0AB8();
+    obj = fn_802D197C(heap, 0x680, 0x10);
+    if (obj == NULL) {
+        obj = fn_802DC3C0(heap, 0x680, 0x10, 0, 0);
+        if (obj == NULL && heap == fn_802D0AB8()) {
+            obj = fn_802DC3C0(fn_802D0B3C(), 0x680, 0x10, 0, 0);
+        }
+    }
+    fn_80248488(obj, 0, 0x680);
+    fn_8003F9E0(obj);
+}
+
 void fn_8003F8A0(void) {
     fn_8003F9E0();
 }
@@ -178,6 +213,38 @@ void fn_8003F96C(s32 arg0) {
 
 void fn_8003F9C0(void) {
     fn_802D2430();
+}
+
+void *fn_8003F9E0(void *arg0) {
+    void fn_80065ADC(void *);
+    extern f32 lbl_803C5D44[];
+    extern u8 lbl_80407C40[];
+    extern u8 lbl_80407C78[];
+    s32 i;
+    u8 *p;
+
+    fn_80065ADC(arg0);
+    M2C_FIELD(arg0, void **, 0x300) = lbl_80407C40;
+    M2C_FIELD(arg0, void **, 0) = lbl_80407C78;
+    for (i = 8; i != 0; i--) {
+    }
+    p = (u8 *)arg0 + 0x604;
+    M2C_FIELD(p, s32 *, 0) = 0;
+    M2C_FIELD(p, s32 *, 4) = 0;
+    M2C_FIELD(p, s32 *, 8) = 0;
+    M2C_FIELD(p, s32 *, 0xC) = 0;
+    M2C_FIELD(p, s32 *, 0x10) = 0;
+    M2C_FIELD(p, s32 *, 0x14) = 0;
+    M2C_FIELD(p, s32 *, 0x18) = 0;
+    M2C_FIELD(p, s32 *, 0x1C) = 0;
+    M2C_FIELD(p, s32 *, 0x20) = 0;
+    M2C_FIELD(p, s32 *, 0x24) = 0;
+    M2C_FIELD(p, s32 *, 0x28) = 0;
+    M2C_FIELD(p, s32 *, 0x34) = 0;
+    M2C_FIELD(p, f32 *, 0x30) = lbl_803C5D44[0];
+    M2C_FIELD(p, f32 *, 0x2C) = lbl_803C5D44[0];
+    M2C_FIELD(arg0, s32 *, 0x65C) = 0;
+    return arg0;
 }
 
 void fn_8003FA80(void) {
