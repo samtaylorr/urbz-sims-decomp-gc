@@ -287,8 +287,8 @@ s32 fn_80368E14(s32 arg0, s32 arg1) {
 
 void *fn_80368E80(void *arg0, s32 arg1) {
     s32 fn_802D3EE8(s32, s32);
-    char *var_r30;
     char *var_r31;
+    char *var_r30;
 
     var_r30 = M2C_FIELD(arg0, char **, 8);
     var_r31 = NULL;
@@ -297,11 +297,7 @@ void *fn_80368E80(void *arg0, s32 arg1) {
             return var_r30;
         }
         var_r31 = var_r30;
-        if (fn_802D3EE8((s32)(var_r30 + 0x1C), arg1) > 0) {
-            var_r30 = M2C_FIELD(var_r31, char **, 0);
-        } else {
-            var_r30 = M2C_FIELD(var_r31, char **, 4);
-        }
+        var_r30 = fn_802D3EE8((s32)(var_r30 + 0x1C), arg1) > 0 ? M2C_FIELD(var_r31, char **, 0) : M2C_FIELD(var_r31, char **, 4);
     }
     return var_r31;
 }
