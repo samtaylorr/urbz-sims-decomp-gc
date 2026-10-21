@@ -1,6 +1,11 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+typedef struct {
+    s32 a;
+    s32 b;
+} CasPair;
+
 void fn_803074F0(void);
 s32 fn_801B68E8(char *self) {
     return *(s32 *)(self + 0xC);
