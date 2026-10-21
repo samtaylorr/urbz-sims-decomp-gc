@@ -53,9 +53,9 @@ void fn_803712D0(void) {
 
 }
 
-void fn_8037117C(void);
-void fn_80371484(void) {
-    fn_8037117C();
+void *fn_8037117C(void *);
+void fn_80371484(void *self) {
+    fn_8037117C(self);
 }
 
 void fn_803714C8(void **obj) {
