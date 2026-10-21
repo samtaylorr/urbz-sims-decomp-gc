@@ -306,6 +306,14 @@ void fn_800AA4A8(void) {
     (*(void (**)(void *, void (*)(void)))(vt + 0x44))(obj + *(s16 *)(vt + 0x40), fn_800AA47C);
 }
 
+void fn_800AA4EC(void) {
+    M2C_UNK fn_80029A10(s32);
+    extern u8 lbl_8041F94C[];
+    fn_80029A10(M2C_FIELD(lbl_8041F94C, s32 *, 0xEC));
+    fn_80029A10(M2C_FIELD(lbl_8041F94C, s32 *, 0xEC));
+    fn_800AA00C();
+}
+
 void fn_800AA4EC(void);
 void fn_800AA52C(void) {
     u8 *obj;
@@ -315,6 +323,14 @@ void fn_800AA52C(void) {
     obj = lbl_804961A4;
     vt = *(u8 **)obj;
     (*(void (**)(void *, void (*)(void)))(vt + 0x44))(obj + *(s16 *)(vt + 0x40), fn_800AA4EC);
+}
+
+s32 fn_800AA570(s32 arg0) {
+    s32 ret = 0;
+    if (arg0) {
+        ret = 1;
+    }
+    return ret;
 }
 
 s32 fn_800AA584(void *arg0, s32 arg1) {
