@@ -7,7 +7,7 @@ void *fn_802D0AB8(void);
 void *fn_802D197C(void *, u32, s32);
 void *fn_802DBBCC(void *, u32, s32);
 
-static inline void *EyeToyAlloc(u32 size) {
+static inline void *EyeToyAlloc(s32 size) {
     void *heap;
     void *p;
 
