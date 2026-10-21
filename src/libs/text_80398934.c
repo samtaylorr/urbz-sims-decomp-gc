@@ -413,24 +413,21 @@ void fn_8039B338(s32 *last, s32 val, s32 comp) {
 void fn_8024839C(void *dst, const void *src, u32 n);
 void fn_8039B3A4(s32 *first, s32 *last, s32 comp) {
     s32 *i;
-    s32 *next;
 
     if (first == last) {
         return;
     }
-    for (i = first + 1; i != last; i = next) {
+    for (i = first + 1; i != last; i++) {
         s32 val = *i;
         if (((s32 (*)(s32 *, s32 *))comp)(&val, first)) {
-            s32 n;
-            next = i + 1;
-            n = (char *)i - (char *)first;
+            s32 *next = i + 1;
+            s32 n = (char *)i - (char *)first;
             if (n > 0) {
                 fn_8024839C((char *)next - n, first, n);
             }
             *first = val;
         } else {
             fn_8039B338(i, val, comp);
-            next = i + 1;
         }
     }
 }
@@ -623,14 +620,12 @@ f32 fn_8039BA40(void *arg0) {
 }
 
 Elem12 *fn_8039BA50(Elem12 *lo, Elem12 *hi, s32 key) {
-    for (;;) {
-        s32 n = hi - lo;
+    s32 n;
+
+    while ((n = hi - lo) > 0) {
         Elem12 *mid;
         s32 d;
 
-        if (n <= 0) {
-            return 0;
-        }
         if (n == 1) {
             if (lo->a == key) {
                 return lo;
@@ -648,6 +643,7 @@ Elem12 *fn_8039BA50(Elem12 *lo, Elem12 *hi, s32 key) {
             hi = mid;
         }
     }
+    return 0;
 }
 
 extern u8 lbl_80408138[];
