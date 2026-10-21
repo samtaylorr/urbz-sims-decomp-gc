@@ -2050,6 +2050,15 @@ void fn_803A3320(s32 *first, s32 *middle, s32 *last, s32 comp) {
     fn_803A3254(first, middle, last, 0, comp);
 }
 
+void fn_803A3540(s32 *last, s32 val, s32 comp);
+void fn_803A364C(s32 *first, s32 *last, s32 *val, s32 comp) {
+    s32 *it;
+
+    for (it = first; it != last; it++) {
+        fn_803A3540(it, *it, comp);
+    }
+}
+
 void fn_803A35A4(s32 *first, s32 *last, s32 comp);
 void fn_803A364C(s32 *first, s32 *last, s32 *val, s32 comp);
 void fn_803A36A0(s32 *first, s32 *last, s32 comp) {
