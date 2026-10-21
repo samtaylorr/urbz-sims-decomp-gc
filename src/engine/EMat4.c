@@ -244,6 +244,11 @@ void *fn_802CAE18(void *arg0) {
     return arg0;
 }
 
+void fn_802CB4E4(void *arg0, void *arg1) {
+    M2C_UNK fn_80248A10(void *, void *, s32);
+    fn_80248A10(arg0, arg1, 0x40);
+}
+
 void fn_802CB508(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x40) = arg1;
 }
