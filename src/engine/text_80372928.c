@@ -118,7 +118,7 @@ s32 fn_803739E4(u8 *self) {
 }
 
 void fn_803739EC(void) {
-    M2C_UNK fn_8037379C(M2C_UNK, M2C_UNK);
+    void fn_8037379C(s32, s32);
     fn_8037379C(1, 0xFFFF);
 }
 
