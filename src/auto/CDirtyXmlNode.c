@@ -20,8 +20,10 @@ void fn_800BF5E0(void) {
 }
 
 char *fn_800BF738(void) {
-    char *p = fn_800BF3FC(fn_80248808(lbl_803D0298) + 1);
-    fn_80248784(p, lbl_803D0298);
+    char *p;
+    const char *s = lbl_803D0298;
+    p = fn_800BF3FC(fn_80248808(s) + 1);
+    fn_80248784(p, s);
     return p;
 }
 
