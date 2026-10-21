@@ -42,10 +42,12 @@ void fn_802D8328(void *arg0) {
 s32 fn_802D8334(void *arg0, s32 arg1) {
     extern void fn_8037AC08(void *);
     extern s32 fn_8037AC78(void *);
+    s32 ret;
 
     if (arg1 != -1) {
+        ret = 0;
         if (fn_8037AC78((char *)arg0 + 0xC) == M2C_FIELD(arg0, s32 *, 0xC)) {
-            return 0;
+            return ret;
         }
     } else {
         fn_8037AC08((char *)arg0 + 0xC);
@@ -465,27 +467,31 @@ void fn_802DF214(void *arg0) {
 
 void fn_802DF248(void *arg0, void *arg1, s32 arg2, s32 arg3) {
     s32 n;
+    s32 off;
+    char *src;
     void *vt;
 
     while (arg3 != 0) {
-        n = 0x1000 - (arg2 & 0xFFF);
+        off = arg2 & 0xFFF;
+        src = M2C_FIELD(arg0, char ***, 0x20)[arg2 / 0x1000] + off;
+        n = 0x1000 - off;
         if (arg3 < n) {
             n = arg3;
         }
         vt = M2C_FIELD(arg1, void **, 0x18);
-        M2C_FIELD(vt, void (**)(void *, char *, s32), 0x3C)((char *)arg1 + M2C_FIELD(vt, s16 *, 0x38),
-            M2C_FIELD(arg0, char ***, 0x20)[arg2 / 0x1000] + (arg2 & 0xFFF), n);
         arg2 += n;
+        M2C_FIELD(vt, void (**)(void *, char *, s32), 0x3C)((char *)arg1 + M2C_FIELD(vt, s16 *, 0x38), src, n);
         arg3 -= n;
     }
 }
 
-void fn_802DF2E0(void *arg0, s32 arg1) {
+void *fn_802DF2E0(void *arg0, s32 arg1) {
     extern char lbl_80419730[];
     M2C_FIELD(arg0, char **, 0x18) = lbl_80419730;
     M2C_FIELD(arg0, s32 *, 0x1C) = arg1;
     M2C_FIELD(arg0, s32 *, 0x20) = 0;
     M2C_FIELD(arg0, s32 *, 0) = 0;
+    return arg0;
 }
 
 s32 fn_802DF304(u8 *self) {
@@ -512,7 +518,9 @@ s32 fn_802DF350(void) {
     return 0;
 }
 
-void fn_802DF358(char *dst, char *src) {
+char *fn_802DF358(char *dst, char *src) {
+    char *p = dst;
+
     while (*src != 0) {
         switch (*src) {
         case '"':
@@ -525,15 +533,16 @@ void fn_802DF358(char *dst, char *src) {
         case '?':
         case '\\':
         case '|':
-            *dst = '_';
+            *p = '_';
             break;
         default:
-            *dst = *src;
+            *p = *src;
             break;
         }
         src++;
-        dst++;
+        p++;
     }
+    return dst;
 }
 
 s32 fn_802DF3F0(s32 arg0) {
