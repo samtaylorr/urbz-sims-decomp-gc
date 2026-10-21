@@ -2168,6 +2168,17 @@ s32 *fn_803A3ACC(s32 *first, s32 *last, s32 pivot, s32 (*comp)(s32 *, s32 *)) {
     }
 }
 
+void fn_803A3CC0(s32 *last, s32 val, s32 comp) {
+    s32 *next = last - 1;
+
+    while (((s32 (*)(s32 *, s32 *))comp)(&val, next)) {
+        *last = *next;
+        last = next;
+        next--;
+    }
+    *last = val;
+}
+
 void fn_803A3CC0(s32 *last, s32 val, s32 comp);
 void fn_803A3DD8(s32 *first, s32 *last, s32 *val, s32 comp) {
     s32 *it;
