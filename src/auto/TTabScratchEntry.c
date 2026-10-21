@@ -386,6 +386,14 @@ s32 fn_8019F26C(s32 *self) {
     return self[2];
 }
 
+s32 fn_8019F274(void *arg0) {
+    s32 ret = 0;
+    if (M2C_FIELD(arg0, s32 *, 0x10) & 1) {
+        ret = 1;
+    }
+    return ret;
+}
+
 s32 fn_8019F28C(void *arg0) {
     return ((u32) M2C_FIELD(arg0, u32 *, 0x10) >> 1U) & 1;
 }
