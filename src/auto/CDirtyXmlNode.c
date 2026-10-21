@@ -5,6 +5,12 @@ void fn_800A9720(void);
 
 typedef struct { s32 a[4]; } Struct16_800BF7FC;
 typedef struct { s32 a[4]; s16 b; } Struct18_800BF784;
+extern Struct16_800BF7FC lbl_80433F98;
+extern Struct18_800BF784 lbl_803D02C8;
+extern char lbl_803D0298[];
+void *fn_800BF3FC(s32);
+s32 fn_80248808(const char *);
+char *fn_80248784(char *, const char *);
 s32 fn_800BEF3C(void) {
     return 0x67F664FB;
 }
