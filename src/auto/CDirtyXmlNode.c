@@ -25,8 +25,10 @@ char *fn_800BF738(void) {
     return p;
 }
 
-void fn_800BF784(void) {
-    *(Struct18_800BF784 *)fn_800BF3FC(0x12) = lbl_803D02C8;
+Struct18_800BF784 *fn_800BF784(void) {
+    Struct18_800BF784 *p = fn_800BF3FC(0x12);
+    *p = lbl_803D02C8;
+    return p;
 }
 
 void fn_800BF7DC(void) {
