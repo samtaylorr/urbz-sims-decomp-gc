@@ -142,6 +142,10 @@ void fn_80320204(void) {
     fn_8031FEAC();
 }
 
+void fn_80320258(void *self) {
+    fn_8031FEF0(self, 2);
+}
+
 void fn_8032027C(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
