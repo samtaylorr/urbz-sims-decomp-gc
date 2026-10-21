@@ -3316,12 +3316,36 @@ void fn_800EAED8(u8 *dst, u16 *src) {
     *dst = 0;
 }
 
+void fn_800EAF08(s32 self) {
+    extern void fn_802D1A00(void *, void *);
+    void *p;
+
+    if (M2C_FIELD(self, s32 *, 8) != 0) {
+        p = M2C_FIELD(self, void **, 0);
+        fn_802D1A00(((void *(*)(void))fn_802D0AB8)(), p);
+        M2C_FIELD(self, s32 *, 8) = 0;
+        M2C_FIELD(self, void **, 0) = 0;
+    }
+}
+
 void fn_800EAF58(void) {
 
 }
 
 void fn_800EAF5C(void) {
 
+}
+
+void fn_800EAF60(s32 self) {
+    extern void fn_802D1A00(void *, void *);
+    void *p;
+
+    M2C_FIELD(M2C_FIELD(self, void **, 0), s32 *, 0xC)--;
+    if (M2C_FIELD(M2C_FIELD(self, void **, 0), s32 *, 0xC) == 0) {
+        fn_800EBC3C(M2C_FIELD(self, s32 *, 0), 2);
+        p = M2C_FIELD(self, void **, 0);
+        fn_802D1A00(((void *(*)(void))fn_802D0AB8)(), p);
+    }
 }
 
 s32 fn_800EAFC0(void **arg0) {
