@@ -677,7 +677,7 @@ u16 fn_80063670(void) {
 }
 
 extern void fn_80063508(void);
-extern void fn_800635D0(void);
+extern void fn_800635D0(void *);
 extern u8 lbl_803C7F10[];
 void fn_8006367C(s32 arg0) {
     fn_802D6A90(lbl_80491E94, fn_80063508, fn_800635B0, fn_800635D0, arg0, lbl_803C7F10, lbl_80491E44);
