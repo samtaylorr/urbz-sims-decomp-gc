@@ -3309,6 +3309,13 @@ s32 fn_800EAE8C(s32 arg0) {
     return var_r30;
 }
 
+void fn_800EAED8(u8 *dst, u16 *src) {
+    while (*src != 0) {
+        *dst++ = *src++;
+    }
+    *dst = 0;
+}
+
 void fn_800EAF58(void) {
 
 }
