@@ -2256,6 +2256,20 @@ void fn_803A4F28(s32 *first, s32 *last, s32 comp) {
     }
 }
 
+void fn_803A4C78(s32 *first, s32 *last, s32 *val, s32 depth, s32 comp);
+void fn_803A4F94(s32 *first, s32 *last, s32 comp) {
+    if (first != last) {
+        s32 n = last - first;
+        s32 k = 0;
+        while (n != 1) {
+            n >>= 1;
+            k++;
+        }
+        fn_803A4C78(first, last, 0, k * 2, comp);
+        fn_803A4F28(first, last, comp);
+    }
+}
+
 extern u8 lbl_80410E20[];
 s32 fn_803A5084(s32 arg0, s32 arg1, s32 arg2) {
     struct {
