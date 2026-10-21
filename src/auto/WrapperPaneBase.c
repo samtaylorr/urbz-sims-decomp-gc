@@ -415,18 +415,16 @@ void *fn_800CF538(void *arg0, s32 arg1) {
     extern M2C_UNK lbl_8040B028[];
     extern M2C_UNK lbl_8040B118[];
     void *inner;
-    f32 zero;
 
     M2C_FIELD(arg0, s32 *, 0) = arg1;
     M2C_FIELD(arg0, M2C_UNK **, 0x1C) = lbl_8040B118;
     M2C_FIELD(arg0, s32 *, 4) = 1;
     M2C_FIELD(arg0, s32 *, 8) = 0;
+    M2C_FIELD(arg0, f32 *, 0x18) = lbl_803D12D0[0];
+    M2C_FIELD(arg0, f32 *, 0xC) = lbl_803D12D0[0];
+    M2C_FIELD(arg0, f32 *, 0x10) = lbl_803D12D0[0];
+    M2C_FIELD(arg0, f32 *, 0x14) = lbl_803D12D0[0];
     M2C_FIELD(arg0, M2C_UNK **, 0x1C) = lbl_8040B028;
-    zero = lbl_803D12D0[0];
-    M2C_FIELD(arg0, f32 *, 0xC) = zero;
-    M2C_FIELD(arg0, f32 *, 0x10) = zero;
-    M2C_FIELD(arg0, f32 *, 0x14) = zero;
-    M2C_FIELD(arg0, f32 *, 0x18) = zero;
     inner = (char *)arg0 + 0x20;
     M2C_FIELD(inner, s32 *, 0x24) = 0;
     fn_800CBFB8(inner);
@@ -520,8 +518,10 @@ f32 fn_800CF758(void *arg0) {
 }
 
 void fn_800CF760(void *arg0, void *arg1) {
-    M2C_FIELD(arg0, s32 *, 0x28) = M2C_FIELD(arg1, s32 *, 4);
-    M2C_FIELD(arg0, s32 *, 0x24) = M2C_FIELD(arg1, s32 *, 0);
+    s32 a = M2C_FIELD(arg1, s32 *, 0);
+    s32 b = M2C_FIELD(arg1, s32 *, 4);
+    M2C_FIELD(arg0, s32 *, 0x28) = b;
+    M2C_FIELD(arg0, s32 *, 0x24) = a;
 }
 
 s32 fn_800CF774(s32 arg0) {
