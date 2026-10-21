@@ -94,12 +94,11 @@ void fn_8014DECC(void *arg0, void *arg1) {
 s32 fn_8014F698(void *arg0, s32 arg1) {
     void *vt;
 
-    if (arg1 != 0) {
-        vt = *(void **)arg0;
-        return M2C_FIELD(vt, s32 (**)(void *, s32), 0x1BC)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x1B8), arg1);
-    } else {
+    if (arg1 == 0) {
         return 0;
     }
+    vt = *(void **)arg0;
+    return M2C_FIELD(vt, s32 (**)(void *, s32), 0x1BC)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x1B8), arg1);
 }
 
 s32 fn_8014F6E0(void *arg0, s32 arg1) {
@@ -109,12 +108,14 @@ s32 fn_8014F6E0(void *arg0, s32 arg1) {
     s32 key;
     s32 *p;
 
-    if (arg1 == 0) {
-        return 0;
+    if (arg1 != 0) {
+        key = fn_8032D5C8(M2C_FIELD(arg0, s32 *, 0x6A0), lbl_803D8FFC);
+        p = fn_8032D6E8(M2C_FIELD(arg0, s32 *, 0x6A0), key, arg1);
+        if (p != NULL) {
+            return *p;
+        }
     }
-    key = fn_8032D5C8(M2C_FIELD(arg0, s32 *, 0x6A0), lbl_803D8FFC);
-    p = fn_8032D6E8(M2C_FIELD(arg0, s32 *, 0x6A0), key, arg1);
-    return p != NULL ? *p : 0;
+    return 0;
 }
 
 s32 fn_8014F744(void *arg0) {
