@@ -3353,6 +3353,13 @@ s32 fn_800EAFC0(void **arg0) {
     return M2C_FIELD(*arg0, s32 *, 0xC);
 }
 
+u8 *fn_800EAFCC(void **arg0) {
+    if (fn_800EF6F8(arg0) == 0) {
+        return 0;
+    }
+    return *(u8 **)*arg0;
+}
+
 s32 fn_800EB010(s32 **arg0) {
     return **arg0;
 }
