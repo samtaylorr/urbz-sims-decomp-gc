@@ -3700,6 +3700,13 @@ void fn_800EEC2C(void) {
     fn_800EE994();
 }
 
+void fn_800EEC4C(s32 arg0, s32 arg1, s32 arg2) {
+    s32 temp_r29;
+
+    temp_r29 = fn_800EAFCC(arg1);
+    fn_800EC848(arg0, temp_r29, arg2, fn_800EF6F8(arg1));
+}
+
 u32 fn_800EC848(void **arg0, const u8 *arg1, u32 arg2, u32 arg3);
 void fn_800EECA4(void **arg0, const u8 *arg1, u32 arg2, u32 arg3) {
     fn_800EC848(arg0, arg1, arg2, arg3);
