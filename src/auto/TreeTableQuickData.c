@@ -66,11 +66,10 @@ s32 fn_801B380C(void) {
     return 0;
 }
 
-TreeKey fn_801B3814(s32 a, s16 b) {
-    TreeKey k;
-    k.a = a;
-    k.b = b;
-    return k;
+TreeKey *fn_801B3814(TreeKey *self, s32 a, s16 b) {
+    self->a = a;
+    self->b = b;
+    return self;
 }
 
 TreeKey fn_801B3824(TreeKey *src) {
@@ -116,6 +115,29 @@ void fn_801B3908(s32 *self, s32 value) {
 
 void fn_801B3910(void *arg0, s16 arg1) {
     M2C_FIELD(arg0, s16 *, 4) = arg1;
+}
+
+void fn_801B3B88(void *arg0, s32 flags) {
+    extern u8 lbl_804155D8[];
+    extern void fn_801B3C08(void *);
+    extern void fn_802D20E8(void *);
+    extern void fn_803997AC(void *, u32);
+    s32 *v;
+    s32 *self = arg0;
+    self[0] = (s32)lbl_804155D8;
+    fn_801B3C08(self);
+    v = self + 1;
+    if (v[0] != 0) {
+        u32 size = (u32)(v[3] - v[0]);
+        if (size > 0x80) {
+            fn_802D20E8((void *)v[0]);
+        } else {
+            fn_803997AC((void *)v[0], size);
+        }
+    }
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
 }
 
 void fn_801B3BFC(void *arg0) {
