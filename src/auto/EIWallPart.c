@@ -338,6 +338,11 @@ void fn_80039E08(void) {
     fn_8003A064(fn_80039F7C(0x380));
 }
 
+void fn_80039E5C(void *self) {
+    extern void fn_80032F5C(void *, s32);
+    fn_80032F5C(self, 2);
+}
+
 void fn_80039E80(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
