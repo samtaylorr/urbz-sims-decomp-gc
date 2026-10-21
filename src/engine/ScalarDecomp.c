@@ -26,10 +26,13 @@ s32 fn_8036ACBC(void *arg0) {
 void fn_8036BB88(s32 arg0, s32 arg1) {
     if (arg1 == 0xFFFF) {
         if (arg0 != 0) {
-            fn_802D23C0(lbl_8047551C, ((u32)lbl_80475558 + 0x3F) & ~0x3F, 0x60, 2);
-            fn_802CA9A8(lbl_8047551C + 0x20);
+            char *p = (char *)lbl_8047551C;
+            char *buf = (char *)lbl_80475558;
+            fn_802D23C0(p, ((u32)buf + 0x3F) & ~0x3F, 0x60, 2);
+            fn_802CA9A8(p + 0x20);
         } else {
-            fn_802CAA00(lbl_8047551C + 0x20, 2);
+            char *q = (char *)lbl_8047551C;
+            fn_802CAA00(q + 0x20, 2);
         }
     }
 }
