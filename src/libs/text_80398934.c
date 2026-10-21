@@ -413,20 +413,24 @@ void fn_8039B338(s32 *last, s32 val, s32 comp) {
 void fn_8024839C(void *dst, const void *src, u32 n);
 void fn_8039B3A4(s32 *first, s32 *last, s32 comp) {
     s32 *i;
+    s32 *next;
 
     if (first == last) {
         return;
     }
-    for (i = first + 1; i != last; i++) {
+    for (i = first + 1; i != last; i = next) {
         s32 val = *i;
         if (((s32 (*)(s32 *, s32 *))comp)(&val, first)) {
-            s32 n = (char *)i - (char *)first;
+            s32 n;
+            next = i + 1;
+            n = (char *)i - (char *)first;
             if (n > 0) {
-                fn_8024839C((char *)(i + 1) - n, first, n);
+                fn_8024839C((char *)next - n, first, n);
             }
             *first = val;
         } else {
             fn_8039B338(i, val, comp);
+            next = i + 1;
         }
     }
 }
