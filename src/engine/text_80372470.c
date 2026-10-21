@@ -60,6 +60,7 @@ void fn_803727BC(void) {
 }
 
 void fn_803727DC(void *self) {
+    void fn_80372554(void *, s32);
     fn_80372554(self, 2);
 }
 
