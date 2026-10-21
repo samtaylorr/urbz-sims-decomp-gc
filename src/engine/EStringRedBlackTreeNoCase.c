@@ -1,6 +1,18 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+s32 fn_80364E64(void *arg0) {
+    void *temp_r11;
+    void *temp_r9;
+
+    temp_r11 = M2C_FIELD(arg0, void **, 0x1C);
+    if (temp_r11 != NULL) {
+        temp_r9 = M2C_FIELD(temp_r11, void **, 0x28);
+        return M2C_FIELD(temp_r9, s32 (**)(void *), 0x24)((char *)temp_r11 + M2C_FIELD(temp_r9, s16 *, 0x20));
+    }
+    return 0;
+}
+
 void fn_80364EAC(void *arg0, void *arg1, s32 arg2, s32 arg3, s32 arg4) {
     M2C_UNK fn_80364D84();
     void *temp_r9;
@@ -21,6 +33,18 @@ void fn_80364F1C(void *arg0) {
 
 s32 fn_80364F28(s32 *self) {
     return self[7];
+}
+
+s32 fn_80364F30(void *arg0) {
+    void *temp_r11;
+    void *temp_r9;
+
+    temp_r11 = M2C_FIELD(arg0, void **, 0x1C);
+    if (temp_r11 != NULL) {
+        temp_r9 = M2C_FIELD(temp_r11, void **, 0x28);
+        return M2C_FIELD(temp_r9, s32 (**)(void *), 0x34)((char *)temp_r11 + M2C_FIELD(temp_r9, s16 *, 0x30));
+    }
+    return 0;
 }
 
 void *fn_80364F78(void *arg0) {
