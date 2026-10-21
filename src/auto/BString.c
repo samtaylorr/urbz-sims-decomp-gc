@@ -3338,6 +3338,7 @@ void fn_800EAF5C(void) {
 
 void fn_800EAF60(s32 self) {
     extern void fn_802D1A00(void *, void *);
+    extern void fn_800EBC3C(s32, s32);
     void *p;
 
     M2C_FIELD(M2C_FIELD(self, void **, 0), s32 *, 0xC)--;
