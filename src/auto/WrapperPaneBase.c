@@ -32,7 +32,7 @@ static inline WPBVec4 *WPBVec4_Copy(WPBVec4 *d, const WPBVec4 *s) {
     return d;
 }
 
-void fn_800CD09C(void);
+void fn_800CD09C();
 s32 fn_800C5630(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x6C);
 }
