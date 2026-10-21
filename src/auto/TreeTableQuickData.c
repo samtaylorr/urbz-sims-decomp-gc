@@ -78,6 +78,12 @@ TreeKey *fn_801B3824(TreeKey *self, TreeKey *src) {
     return self;
 }
 
+TreeKey *fn_801B383C(TreeKey *self, TreeKey *src) {
+    self->a = src->a;
+    self->b = src->b;
+    return self;
+}
+
 s32 fn_801B3854(void *arg0, void *arg1) {
     s32 var_r11;
     u32 temp_r0;
