@@ -305,10 +305,11 @@ s32 fn_802F19F4(void) {
 }
 
 void fn_802F19FC(void *arg0, void *arg1) {
-    extern f32 lbl_803F0ECC;
-    M2C_FIELD(arg1, f32 *, 8) = lbl_803F0ECC;
-    M2C_FIELD(arg1, f32 *, 4) = lbl_803F0ECC;
-    M2C_FIELD(arg1, f32 *, 0) = lbl_803F0ECC;
+    extern f32 lbl_803F0ECC[];
+    f32 zero = lbl_803F0ECC[0];
+    M2C_FIELD(arg1, f32 *, 8) = zero;
+    M2C_FIELD(arg1, f32 *, 4) = zero;
+    M2C_FIELD(arg1, f32 *, 0) = zero;
 }
 
 void fn_802C876C(void *);
