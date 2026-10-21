@@ -330,6 +330,21 @@ void fn_8006A5E8(void) {
     lbl_8049664C = 1;
 }
 
+s32 fn_8006A5F4(void) {
+    void fn_802D85A4(void *);
+    void fn_802D8640(void *, s32);
+    void fn_802D85FC(void *, s32);
+    extern s32 lbl_8049664C;
+    u8 buf[0x40];
+    s32 ret;
+
+    fn_802D85A4(buf);
+    fn_802D8640(buf, 0x10);
+    ret = lbl_8049664C;
+    fn_802D85FC(buf, 2);
+    return ret;
+}
+
 void fn_8006A640(void) {
     M2C_UNK fn_8006AD28(s32);
     extern s32 lbl_80494148;
