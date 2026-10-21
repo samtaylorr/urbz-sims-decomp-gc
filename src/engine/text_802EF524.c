@@ -111,6 +111,10 @@ s32 fn_802EFAAC(void) {
     return 2;
 }
 
+void fn_802EFAB4(u8 *arg0, Vec3f *arg1) {
+    *(Vec3f *)(arg0 + 0xC0) = *arg1;
+}
+
 s32 fn_802EFAD4(s32 arg0) {
     return arg0 + 0xC0;
 }
