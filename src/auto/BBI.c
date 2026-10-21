@@ -488,7 +488,7 @@ u16 fn_800631BC(void) {
 
 extern void fn_802D6A90(void *, void *, void *, void *, s32, void *, void *);
 extern void fn_80063054(void);
-extern void fn_8006311C(void);
+extern void fn_8006311C(void *);
 extern u8 lbl_803C7EE4[];
 extern u8 lbl_80491CA0[];
 void fn_800631C8(s32 arg0) {
