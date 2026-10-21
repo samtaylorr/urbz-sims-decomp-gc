@@ -44,18 +44,22 @@ s32 fn_802EFB68(s32 arg0, s32 *out) {
 }
 
 void fn_802EFF8C(EILightVec3 *out, u8 *obj) {
-    extern f32 lbl_803F0DB0;
-    EILightVec3 *c = (EILightVec3 *)(obj + 0xB0);
-    f32 s;
+    extern f32 lbl_803F0DB0[];
 
     if (*(s32 *)(obj + 0xBC) != 0 &&
-        (c->x != lbl_803F0DB0 || c->y != lbl_803F0DB0 || c->z != lbl_803F0DB0)) {
-        s = *(f32 *)(obj + 0xA0);
-        EILightVec3_Set(out, s * c->x, s * c->y, s * c->z);
+        (((EILightVec3 *)(obj + 0xB0))->x != lbl_803F0DB0[0] ||
+         ((EILightVec3 *)(obj + 0xB0))->y != lbl_803F0DB0[0] ||
+         ((EILightVec3 *)(obj + 0xB0))->z != lbl_803F0DB0[0])) {
+        EILightVec3 *c = (EILightVec3 *)(obj + 0xB0);
+        f32 s = *(f32 *)(obj + 0xA0);
+        out->x = s * c->x;
+        out->z = s * c->z;
+        out->y = s * c->y;
         return;
     }
-    s = *(f32 *)(obj + 0xA0);
-    EILightVec3_Set(out, s, s, s);
+    out->x = *(f32 *)(obj + 0xA0);
+    out->z = *(f32 *)(obj + 0xA0);
+    out->y = *(f32 *)(obj + 0xA0);
 }
 
 void fn_802F0114(s32 arg0, s32 arg1) {
@@ -76,6 +80,7 @@ void fn_802F01AC(void) {
 }
 
 void fn_802F01CC(void *self) {
+    extern void fn_802F05AC(void *, s32);
     fn_802F05AC(self, 2);
 }
 
