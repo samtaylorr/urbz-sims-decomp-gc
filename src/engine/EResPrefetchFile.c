@@ -135,6 +135,12 @@ s32 fn_8032015C(void *arg0) {
     return temp_r3;
 }
 
+void fn_80320194(s32 arg0, s32 arg1) {
+    if (arg1 == 0xFFFF && arg0 != 0) {
+        lbl_80496228 = fn_802D6A90(lbl_804938A8, fn_80320204, fn_8032022C, fn_80320258, 0, lbl_803F2F20, lbl_80493858);
+    }
+}
+
 void fn_80320204(void) {
     M2C_UNK fn_8031FEAC();
     M2C_UNK fn_80320378(M2C_UNK);
