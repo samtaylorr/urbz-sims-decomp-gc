@@ -65,6 +65,11 @@ extern f32 lbl_803D4980[];
 extern f32 lbl_803D4984[];
 extern const f32 lbl_803D4988[];
 
+static inline void BString_SetRep(void **dst, s32 *rep) {
+    *dst = rep;
+    rep[3]++;
+}
+
 static inline s32 BString_CharEq(const u8 *a, const u8 *b) {
     return *a == *b;
 }
@@ -3494,10 +3499,28 @@ s32 fn_800EBC7C(void) {
     return 0;
 }
 
+u32 fn_800EC848(void **arg0, const u8 *arg1, u32 arg2, u32 arg3) {
+    u32 i;
+
+    for (; arg2 < fn_800EF6F8(arg0); arg2++) {
+        for (i = 0; i < arg3; i++) {
+            if (fn_800EAFCC(arg0)[arg2] == arg1[i]) {
+                break;
+            }
+        }
+        if (i != arg3) {
+            break;
+        }
+    }
+    return arg2 < fn_800EF6F8(arg0) ? arg2 : -1;
+}
+
 M2C_UNK fn_800EC9AC(s32 arg0) {
     extern s32 lbl_80434AE8[];
-    *(s32 *)arg0 = (s32)lbl_80434AE8;
-    lbl_80434AE8[3]++;
+    s32 **p = (s32 **)arg0;
+    s32 *rep = lbl_80434AE8;
+    *p = rep;
+    rep[3]++;
 }
 
 void *fn_800EB5D0(void *mem, s32 arg1, s32 arg2);
