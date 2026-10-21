@@ -178,29 +178,14 @@ void fn_8002AECC(void *arg0) {
     fn_80328D1C(M2C_FIELD(arg0, s32 *, 0x1C));
 }
 
-static inline void *fn_8002B464_Lookup(u16 id) {
-    void *fn_80190AA4(s32, u16);
-    extern s32 lbl_80496654;
-
-    if (lbl_80496654 != 0 && id <= 0xFFFA) {
-        return fn_80190AA4(lbl_80496654, id);
-    }
-    return NULL;
-}
-
 void fn_8002B464(u16 arg0, s32 arg1, u16 *arg2, u16 *arg3) {
-    void *fn_80190AA4(s32, u16);
-    extern s32 lbl_80496654;
     void *temp_r3;
-    u16 id = arg0;
 
     *arg3 = arg0;
     *arg2 = arg0;
-    if (lbl_80496654 != 0 && id <= 0xFFFA) {
-        temp_r3 = fn_80190AA4(lbl_80496654, id);
-        if (temp_r3 != NULL) {
-            *arg3 = M2C_FIELD(temp_r3, u16 *, 2);
-        }
+    temp_r3 = fn_8002B464_Lookup(arg0);
+    if (temp_r3 != NULL) {
+        *arg3 = M2C_FIELD(temp_r3, u16 *, 2);
     }
 }
 
