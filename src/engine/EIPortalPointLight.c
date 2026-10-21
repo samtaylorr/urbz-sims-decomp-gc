@@ -53,18 +53,20 @@ void *fn_802F273C(self)
     extern f32 lbl_80494E68;
     extern f32 lbl_80494E80;
     EIPortalPointLightVec3 v;
+    f32 zero;
 
     fn_802F1B74(self);
+    zero = lbl_803F1000[0];
     M2C_FIELD(self, void **, 0) = lbl_8041A388;
     M2C_FIELD(self, s32 *, 0x64) |= 0x80000;
     M2C_FIELD(self, s32 *, 0xE8) = 0;
-    EIPortalPointLightVec3_Set(&v, lbl_803F1000[0], lbl_803F1000[0], lbl_803F1000[0]);
+    EIPortalPointLightVec3_Set(&v, zero, zero, zero);
     fn_802F2278(self, &v);
-    M2C_FIELD(self, f32 *, 0xD8) = lbl_803F1000[0];
-    M2C_FIELD(self, s32 *, 0xE0) = 1;
+    M2C_FIELD(self, f32 *, 0xD8) = zero;
     M2C_FIELD(self, f32 *, 0xDC) = lbl_80494E68;
-    M2C_FIELD(self, s32 *, 0xE4) = 0;
+    M2C_FIELD(self, s32 *, 0xE0) = 1;
     M2C_FIELD(self, f32 *, 0xA0) = lbl_80494E80;
+    M2C_FIELD(self, s32 *, 0xE4) = 0;
     M2C_FIELD(self, s32 *, 0x9C) = 1;
     fn_802F2D08(self);
     return self;
