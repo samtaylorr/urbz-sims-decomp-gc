@@ -210,6 +210,19 @@ void fn_8035EE7C(void) {
     }
 }
 
+void fn_8035EEC4(s32 arg0) {
+    void fn_80385948(s32);
+    extern ENgcRendererSlot lbl_80473F7C[];
+    u32 i;
+
+    for (i = 0; i < 0x3E; i++) {
+        if (lbl_80473F7C[i].unk0 == arg0) {
+            fn_80385948(arg0);
+            lbl_80473F7C[i].unk0 = 0;
+        }
+    }
+}
+
 extern u8 lbl_8046DF78[];
 void fn_8034F440(u8 *arg);
 void fn_8035F07C(void) {
