@@ -292,9 +292,9 @@ s32 fn_8024DDE0(void *arg0, s32 arg1, s32 arg2) {
 
     ret = fn_8024DF14(M2C_FIELD(arg0, s32 **, 0x5C), M2C_FIELD(arg0, s16 *, 0xE), arg1, arg2);
     if (ret == -1) {
-        M2C_FIELD(arg0, u16 *, 0xC) &= ~0x1000;
+        M2C_FIELD(arg0, s16 *, 0xC) &= ~0x1000;
     } else {
-        M2C_FIELD(arg0, u16 *, 0xC) |= 0x1000;
+        M2C_FIELD(arg0, s16 *, 0xC) |= 0x1000;
         M2C_FIELD(arg0, s32 *, 0x58) = ret;
     }
     return ret;
