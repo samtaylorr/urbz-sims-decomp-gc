@@ -1,6 +1,38 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+extern s32 fn_802D6A90(void *, void *, void *, void *, s32, void *, void *);
+extern void *fn_802D0B3C(void);
+extern void *fn_802D197C(void *, u32, s32);
+extern void *fn_802DBBCC(void *, u32, s32);
+extern void *fn_802D0AB8();
+void *fn_8031BEA0(void *);
+void fn_8031C560(void);
+void fn_8031C5E0(void *);
+void fn_8031C600(void *);
+extern u8 lbl_80493880[];
+extern u8 lbl_803F2CF8[];
+extern u8 lbl_80493858[];
+extern s32 lbl_8049621C;
+
+static inline void *Alloc(u32 size) {
+    void *heap;
+    void *p;
+
+    heap = fn_802D0AB8();
+    if (size == 0) {
+        return NULL;
+    }
+    p = fn_802D197C(heap, size, 4);
+    if (p == NULL) {
+        p = fn_802DBBCC(heap, size, 0);
+        if (p == NULL && heap == fn_802D0AB8()) {
+            return fn_802DBBCC(fn_802D0B3C(), size, 0);
+        }
+    }
+    return p;
+}
+
 void fn_802D2FD0(void);
 s32 fn_8031BDE0(s32 *arg0, s32 *arg1) {
     s32 temp_r0;
