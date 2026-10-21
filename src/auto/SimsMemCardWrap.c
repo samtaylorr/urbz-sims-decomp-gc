@@ -339,6 +339,41 @@ s32 fn_800AA584(void *arg0, s32 arg1) {
     return 0;
 }
 
+s32 fn_800AA590(void *arg0) {
+    void fn_802D85A4(void *);
+    void fn_802D8640(void *, s32);
+    void fn_802D85FC(void *, s32);
+    extern s32 lbl_8049664C;
+    u8 buf[0x40];
+    s32 ret;
+    s32 b;
+
+    fn_802D85A4(buf);
+    fn_802D8640(buf, 0x10);
+    ret = lbl_8049664C;
+    fn_802D85FC(buf, 2);
+    if (ret == 0) {
+        return 1;
+    }
+    b = 1;
+    if (M2C_FIELD(arg0, s32 *, 0x108) == 0) {
+        b = 0;
+    }
+    if (b) {
+        fn_800A9C30(arg0);
+        return 1;
+    }
+    b = 1;
+    if (M2C_FIELD(arg0, s32 *, 0x10C) == 0) {
+        b = 0;
+    }
+    if (b) {
+        fn_800A9C7C(arg0);
+        return 1;
+    }
+    return 0;
+}
+
 s32 fn_800AA638(void) {
     return 1;
 }
