@@ -3515,6 +3515,12 @@ void *fn_800ECCD0(void **arg0, s32 arg1) {
     return arg0;
 }
 
+void *fn_800EBB2C(void *mem, s32 arg1, s32 arg2);
+void **fn_800ECD64(void **arg0, s32 arg1, s32 arg2) {
+    *arg0 = fn_800EBB2C(BString_Alloc(0x10, 4), arg1, arg2);
+    return arg0;
+}
+
 extern void fn_800EAF60(s32);
 void fn_800ECE00(s32 self, s32 flags) {
     fn_800EAF60(self);
