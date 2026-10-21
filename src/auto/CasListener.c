@@ -419,6 +419,7 @@ void *fn_801C5E6C(void *arg0) {
     s32 *temp_r9_2;
     s32 *temp_r11;
     s32 *temp_r9;
+    s32 alloc[3];
 
     M2C_FIELD(arg0, s32 **, 4) = NULL;
     temp_r3 = fn_80399BE8(0x14);
