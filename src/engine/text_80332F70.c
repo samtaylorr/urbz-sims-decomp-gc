@@ -7,6 +7,18 @@ extern u8 lbl_8041BC40[];
 extern u8 lbl_8045B198[];
 
 void fn_8033740C(void);
+M2C_UNK fn_80333068(M2C_UNK arg0, M2C_UNK arg1) {
+    if (arg1 == 0xFFFF) {
+        if (arg0 != 0) {
+            fn_80335F5C(lbl_8045B198);
+            M2C_FIELD(lbl_8045B198, s32 *, 0x68) = 1;
+            M2C_FIELD(lbl_8045B198, void **, 0xA4) = lbl_8041BC40;
+        } else {
+            fn_80335FD8(lbl_8045B198, 2);
+        }
+    }
+}
+
 void fn_803330DC(void) {
     fn_8033740C();
 }
