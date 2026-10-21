@@ -165,10 +165,9 @@ s32 fn_8031B768(s32 arg0, s32 *out) {
 
 s32 fn_8031BAD4(u8 *self, s32 arg1) {
     s32 fn_802D3EE8(void *, s32);
-    u8 *list = self + 0x20;
     s32 i;
 
-    for (i = 0; i < *(s32 *)(list + 4); i++) {
+    for (i = 0; i < ListCount(self + 0x20); i++) {
         if (fn_802D3EE8(*(u8 **)(self + 0x20) + i * 0xB8 + 0xB4, arg1) == 0) {
             return i;
         }
