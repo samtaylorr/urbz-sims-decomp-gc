@@ -46,9 +46,9 @@ void fn_8031EA90(void *arg0) {
 }
 
 void fn_8031EAB8(void *arg0) {
-    void fn_8033782C(void *);
+    void fn_8033782C(void *, void *);
     if (M2C_FIELD(arg0, void **, 4) != NULL) {
-        fn_8033782C(M2C_FIELD(arg0, void **, 4));
+        fn_8033782C(M2C_FIELD(arg0, void **, 4), arg0);
     } else {
         M2C_FIELD(arg0, s32 *, 0xC) += 1;
     }
