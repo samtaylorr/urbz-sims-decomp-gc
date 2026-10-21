@@ -2,6 +2,15 @@
 #include "common.h"
 
 extern u8 lbl_8041C640[];
+M2C_UNK **fn_8033FA18(M2C_UNK **arg0) {
+    M2C_UNK fn_802ED720();
+    extern M2C_UNK **lbl_80495050;
+    fn_802ED720();
+    *arg0 = &lbl_8041C640;
+    lbl_80495050 = arg0;
+    return arg0;
+}
+
 void fn_8033FA58(void **self) {
     M2C_UNK fn_802ED8B4(void **);
     *self = lbl_8041C640;
