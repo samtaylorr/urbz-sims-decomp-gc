@@ -39,6 +39,11 @@ s32 fn_80245C8C(void) {
     return 0;
 }
 
+void fn_80246D2C(void) {
+    void lbl_8024E74C() __attribute__((noreturn));
+    lbl_8024E74C(1);
+}
+
 s32 fn_80246D44(s32 func) {
     extern s32 lbl_80494988;
     void *fn_802D2150(u32 size);
