@@ -185,7 +185,7 @@ s32 fn_8036ECAC(s32 arg0) {
 }
 
 void fn_8036ECB4(void) {
-    M2C_UNK fn_8036E9E0(M2C_UNK, M2C_UNK);
+    void fn_8036E9E0(s32, s32);
     fn_8036E9E0(1, 0xFFFF);
 }
 
