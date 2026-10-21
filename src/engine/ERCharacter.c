@@ -108,6 +108,12 @@ void fn_8031BBCC(void) {
     fn_8031B7A8();
 }
 
+void fn_8031BBF4(void *self) {
+    void fn_8031B7A8(void *);
+    void *fn_8031BD70(u32 size, void *p);
+    fn_8031B7A8(fn_8031BD70(0x40, self));
+}
+
 void fn_8031BC20(void *self) {
     void fn_8031B7EC(void *, s32);
     fn_8031B7EC(self, 2);
