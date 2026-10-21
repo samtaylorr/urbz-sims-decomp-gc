@@ -281,6 +281,17 @@ s32 fn_802A66C8(s32 *arg0) {
     return ++*arg0;
 }
 
+void fn_802A66F0(void *arg0) {
+    extern void (*lbl_80443318[])(void *, s32);
+
+    if (arg0 != NULL) {
+        if (M2C_FIELD(arg0, s32 **, 4) != NULL && fn_802A6630(M2C_FIELD(arg0, s32 **, 4)) == 0) {
+            fn_802A6644(M2C_FIELD(arg0, s32 **, 4));
+        }
+        lbl_80443318[0](arg0, 0x10);
+    }
+}
+
 void fn_802A6E10(s32 arg0) {
     M2C_UNK fn_802A6CE0();
     s32 fn_802D2058(M2C_UNK);
