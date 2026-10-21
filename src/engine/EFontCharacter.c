@@ -305,6 +305,12 @@ void fn_8036D304(void) {
     fn_802D2430();
 }
 
+void fn_8036D324(void) {
+    M2C_UNK fn_802D1FC8(M2C_UNK);
+    fn_802D1FC8(0x38);
+    fn_8036C8B8();
+}
+
 void fn_8036C8B8(void);
 void fn_8036D34C(void) {
     fn_8036C8B8();
