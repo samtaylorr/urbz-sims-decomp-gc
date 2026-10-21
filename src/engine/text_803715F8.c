@@ -24,7 +24,7 @@ s32 fn_80371658(s32 arg0, s32 *out) {
     return arg0;
 }
 
-void fn_80371698(void);
+void *fn_80371698();
 void fn_80371958(void) {
     fn_80371698();
 }
