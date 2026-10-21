@@ -9,6 +9,12 @@ static inline void Vec3f_Set(Vec3f *v, f32 x, f32 y, f32 z) {
     v->x = x;
 }
 
+static inline void Vec3f_Scale(Vec3f *out, Vec3f *in, f32 s) {
+    out->x = in->x * s;
+    out->y = in->y * s;
+    out->z = in->z * s;
+}
+
 void fn_802D2FD0(void);
 void fn_802EF524(void) {
     fn_802D2FD0();
@@ -34,22 +40,21 @@ s32 fn_802EF584(s32 arg0, s32 *out) {
 
 void fn_802EF768(u8 *arg0, Vec3f *arg1, f32 *arg2, Vec3f *arg3, Vec3f *arg4) {
     extern f32 lbl_803F0D30[];
-    f32 zero = lbl_803F0D30[0];
     Vec3f *dir;
     f32 scale;
+    f32 zero;
     Vec3f v;
 
     *arg1 = *(Vec3f *)(arg0 + 0xC0);
-    dir = (Vec3f *)(arg0 + 0xA4);
+    zero = lbl_803F0D30[0];
     scale = *(f32 *)(arg0 + 0xA0);
+    dir = (Vec3f *)(arg0 + 0xA4);
     v.x = dir->x * scale;
     v.y = dir->y * scale;
     v.z = dir->z * scale;
     *arg4 = v;
-    v.z = zero;
-    v.y = zero;
-    v.x = zero;
     *arg2 = zero;
+    Vec3f_Set(&v, zero, zero, zero);
     *arg3 = v;
 }
 
