@@ -2173,6 +2173,27 @@ void fn_803A3CC0(s32 *last, s32 val, s32 comp) {
     *last = val;
 }
 
+void fn_803A3D2C(s32 *first, s32 *last, s32 comp) {
+    s32 *i;
+
+    if (first == last) {
+        return;
+    }
+    for (i = first + 1; i != last; i++) {
+        s32 val = *i;
+        if (((s32 (*)(s32 *, s32 *))comp)(&val, first)) {
+            s32 *next = i + 1;
+            s32 n = (char *)i - (char *)first;
+            if (n > 0) {
+                fn_8024839C((char *)next - n, first, n);
+            }
+            *first = val;
+        } else {
+            fn_803A3CC0(i, val, comp);
+        }
+    }
+}
+
 void fn_803A3CC0(s32 *last, s32 val, s32 comp);
 void fn_803A3DD8(s32 *first, s32 *last, s32 *val, s32 comp) {
     s32 *it;
