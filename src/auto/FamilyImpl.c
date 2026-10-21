@@ -19,6 +19,22 @@ void fn_8010A3F0(void) {
 
 }
 
+void fn_8010A578(u8 **self) {
+    void *fn_8015125C(void *, s32);
+    u8 *n;
+    void *p;
+
+    n = *(u8 **)(*self + 0xC);
+    p = n != NULL ? fn_8015125C(***(void ****)(n + 4), 9) : NULL;
+    if (p == NULL) {
+        p = self;
+    }
+    while (p != NULL) {
+        n = *(u8 **)(*(u8 **)p + 8);
+        p = n != NULL ? fn_8015125C(***(void ****)(n + 4), 9) : NULL;
+    }
+}
+
 s32 fn_8010A610(void) {
     return 0x43555253;
 }
@@ -65,6 +81,13 @@ s32 fn_8010A89C(s32 *self) {
 
 void fn_8010A8A4(void) {
 
+}
+
+void fn_8010AB34(u8 *self) {
+    void fn_801F5304(void *);
+    extern u8 lbl_8040E5D0[];
+    *(u8 **)(self + 0x7C) = lbl_8040E5D0;
+    fn_801F5304(self);
 }
 
 void fn_8010AB64(void *arg0, s32 arg1) {
