@@ -50,6 +50,17 @@ void fn_80323D3C(void) {
     fn_803204A8();
 }
 
+void fn_80323D64(void *self) {
+    M2C_UNK fn_803204A8();
+    void *fn_80323F5C(u32 size, void *p);
+    fn_803204A8(fn_80323F5C(0x78, self));
+}
+
+void fn_80323D90(void *self) {
+    void fn_80320528(void *, s32);
+    fn_80320528(self, 2);
+}
+
 void fn_80323DB4(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
