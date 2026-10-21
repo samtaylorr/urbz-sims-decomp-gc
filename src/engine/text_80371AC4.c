@@ -6,7 +6,7 @@ void fn_80371BB8(void *, s32);
 void fn_80371C24(void *);
 M2C_UNK fn_802CB8D4(void *);
 void fn_80372284(void);
-void fn_80372304(void);
+void fn_80372304();
 void fn_80372324();
 extern s32 fn_802D6A90(void *, void *, void *, void *, s32, void *, void *);
 extern u8 lbl_80493E6C[];
