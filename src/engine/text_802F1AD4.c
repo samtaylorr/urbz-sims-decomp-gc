@@ -1,7 +1,13 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
-typedef struct { f32 x, y, z; } Vec3_802F1AD4;
+typedef struct { f32 x, y, z; } Vec3f;
+
+static inline void Vec3f_Set(Vec3f *v, f32 x, f32 y, f32 z) {
+    v->z = z;
+    v->y = y;
+    v->x = x;
+}
 
 extern s32 lbl_804961D4;
 extern u8 lbl_80493790[];
