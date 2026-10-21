@@ -114,7 +114,7 @@ void fn_803728DC(void) {
 }
 
 void fn_803728FC(void) {
-    M2C_UNK fn_803726CC(M2C_UNK, M2C_UNK);
+    void fn_803726CC(s32, s32);
     fn_803726CC(1, 0xFFFF);
 }
 
