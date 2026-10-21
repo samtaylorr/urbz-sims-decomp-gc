@@ -1710,6 +1710,25 @@ void fn_802BB6CC(void) {
     lbl_80443314[0]();
 }
 
+void fn_802BB6F8(void) {
+    void *temp_r31;
+    void *temp_r9;
+    void *temp_r9_2;
+
+    if ((void *) lbl_80494D98 != NULL) {
+        do {
+            temp_r9 = M2C_FIELD(lbl_80494D98, void **, 4);
+            temp_r31 = M2C_FIELD(lbl_80494D98, void **, 8);
+            M2C_FIELD(temp_r9, M2C_UNK (**)(void *), 0x74)(lbl_80494D98 + M2C_FIELD(temp_r9, s16 *, 0x70));
+            if ((void *) lbl_80494D98 != NULL) {
+                temp_r9_2 = M2C_FIELD(lbl_80494D98, void **, 4);
+                M2C_FIELD(temp_r9_2, M2C_UNK (**)(void *, M2C_UNK), 0x64)(lbl_80494D98 + M2C_FIELD(temp_r9_2, s16 *, 0x60), 3);
+            }
+            lbl_80494D98 = temp_r31;
+        } while (temp_r31 != NULL);
+    }
+}
+
 void fn_802BB77C(void *arg0) {
     extern void *lbl_80494D98;
     M2C_FIELD(arg0, void **, 8) = (void *) lbl_80494D98;
