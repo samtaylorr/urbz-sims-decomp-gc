@@ -400,6 +400,36 @@ void fn_802CCAB8(void *arg0, void *arg1) {
     }
 }
 
+void fn_802CCB34(void *arg0, void *arg1) {
+    void *temp_r10;
+    void *temp_r11;
+    void *temp_r9;
+
+    temp_r11 = M2C_FIELD(arg1, void **, 0);
+    M2C_FIELD(arg1, void **, 0) = (void *) M2C_FIELD(temp_r11, void **, 4);
+    temp_r10 = M2C_FIELD(temp_r11, void **, 4);
+    if (temp_r10 != &lbl_803FD274) {
+        M2C_FIELD(temp_r10, void **, 8) = arg1;
+    }
+    if (temp_r11 != &lbl_803FD274) {
+        M2C_FIELD(temp_r11, void **, 8) = (void *) M2C_FIELD(arg1, void **, 8);
+    }
+    temp_r9 = M2C_FIELD(arg1, void **, 8);
+    if (temp_r9 != NULL) {
+        if (arg1 == (void *) M2C_FIELD(temp_r9, void **, 4)) {
+            M2C_FIELD(temp_r9, void **, 4) = temp_r11;
+        } else {
+            M2C_FIELD(temp_r9, void **, 0) = temp_r11;
+        }
+    } else {
+        M2C_FIELD(arg0, void **, 8) = temp_r11;
+    }
+    M2C_FIELD(temp_r11, void **, 4) = arg1;
+    if (arg1 != &lbl_803FD274) {
+        M2C_FIELD(arg1, void **, 8) = temp_r11;
+    }
+}
+
 s32 fn_802CCCF8(void *arg0, s32 arg1) {
     void fn_802CD440(void *, s32, s32 *);
     s32 sp8;
@@ -506,7 +536,6 @@ void *fn_802CD66C(void *self, EMat4Node **other, s32 overwrite) {
             fn_802CCE08(self, key, value, 1);
         }
     }
-    return self;
 }
 
 s32 fn_802CD6F4(EMat4Node **a, EMat4Node **b) {
