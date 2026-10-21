@@ -7,6 +7,19 @@ typedef struct {
     s32 unk2C[1];
 } EIWallPartFlags;
 
+typedef struct ERQdLookup {
+    u8 pad0[0x20];
+    u32 *unk20;
+    struct ERQdLookup *unk24;
+    u8 pad28[0x34 - 0x28];
+    s32 unk34[2];
+    u32 unk3C;
+    u8 pad40[4];
+    s32 *unk44;
+    u8 pad48[0x64 - 0x48];
+    u32 unk64;
+} ERQdLookup;
+
 
 void fn_802D2FD0(void);
 extern void *fn_802D0AB8(void *);
@@ -127,21 +140,45 @@ s32 fn_80330F38(void *self, s32 id) {
     }
     if (M2C_FIELD(M2C_FIELD(self, void **, 0x20), u32 *, 4) & 0x4000000) {
         u32 i;
-        s32 *p = M2C_FIELD(self, s32 **, 0x44);
         for (i = 0; i < M2C_FIELD(self, u32 *, 0x3C); i++) {
-            if (*p++ == id) {
+            if (M2C_FIELD(self, s32 **, 0x44)[i] == id) {
                 return 1;
             }
         }
     } else {
-        s32 *p = (s32 *)((char *)self + 0x34);
-        do {
-            if (*p++ == id) {
+        s32 i;
+        for (i = 0; i <= 1; i++) {
+            if (((s32 *)((char *)self + 0x34))[i] == id) {
                 return 1;
             }
-        } while (p <= (s32 *)((char *)self + 0x38));
+        }
     }
     return 0;
+}
+
+void fn_80330FC4(s32 arg0, s32 arg1) {
+    extern struct { s32 a; s32 b; } lbl_8049624C;
+    extern s32 lbl_80496254;
+    extern u8 lbl_8045AA90[];
+    extern u8 lbl_80493970[];
+    extern u8 lbl_803F34C0[];
+    extern u8 lbl_80493858[];
+    void fn_80331064(void);
+    void fn_8033108C(void *);
+    void fn_803310B8(void *);
+    s32 fn_802D6A90(void *, void *, void *, void *, s32, void *, void *);
+    void fn_802CA9A8(void *);
+    void fn_802CAA00(void *, s32);
+    if (arg1 == 0xFFFF) {
+        if (arg0 != 0) {
+            lbl_8049624C.a = 0;
+            lbl_8049624C.b = 0;
+            fn_802CA9A8(lbl_8045AA90);
+            lbl_80496254 = fn_802D6A90(lbl_80493970, fn_80331064, fn_8033108C, fn_803310B8, 2, lbl_803F34C0, lbl_80493858);
+        } else {
+            fn_802CAA00(lbl_8045AA90, 2);
+        }
+    }
 }
 
 void fn_80331064(void) {
