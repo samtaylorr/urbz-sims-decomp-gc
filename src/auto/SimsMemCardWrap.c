@@ -220,6 +220,21 @@ void fn_800A9F54(void *self, u8 **arg1) {
     fn_8003E5E0(*(s32 *)(**(u8 ***)arg1 + 0x18), 1);
 }
 
+s32 fn_800A9FB4(void) {
+    void fn_802D85A4(void *);
+    void fn_802D8640(void *, s32);
+    void fn_802D85FC(void *, s32);
+    extern s32 lbl_8049664C;
+    u8 buf[0x40];
+    s32 ret;
+
+    fn_802D85A4(buf);
+    fn_802D8640(buf, 0x10);
+    ret = lbl_8049664C;
+    fn_802D85FC(buf, 2);
+    return ret;
+}
+
 void fn_800AA000(void) {
     extern s32 lbl_8049664C;
     lbl_8049664C = 0;
