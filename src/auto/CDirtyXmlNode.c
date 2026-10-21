@@ -49,8 +49,8 @@ s32 fn_800BF7F4(void) {
     return 0;
 }
 
-void fn_800BF7FC(Struct16_800BF7FC *arg0) {
-    *arg0 = lbl_80433F98;
+Struct16_800BF7FC fn_800BF7FC(void) {
+    return lbl_80433F98;
 }
 
 extern Struct16_800BF7FC lbl_80433F98;
