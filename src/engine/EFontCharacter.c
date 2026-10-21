@@ -316,6 +316,10 @@ void fn_8036D34C(void) {
     fn_8036C8B8();
 }
 
+void fn_8036D36C(void *self) {
+    fn_8036C92C(self, 2);
+}
+
 void fn_8036D390(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
