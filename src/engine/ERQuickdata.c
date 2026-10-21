@@ -153,6 +153,7 @@ void fn_80331064(void) {
 
 void fn_8033108C(void *self) {
     void fn_8032E230(void *);
+    void *fn_80331208(u32 size, void *p);
     fn_8032E230(fn_80331208(0x78, self));
 }
 
