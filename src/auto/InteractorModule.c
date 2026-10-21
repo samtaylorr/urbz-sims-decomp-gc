@@ -1,6 +1,8 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+typedef struct { f32 x, y, z; } Vec3f;
+
 extern void *fn_8022554C(void *);
 extern void fn_8022F404(void *, void *);
 void fn_80237C70(void *arg0) {
