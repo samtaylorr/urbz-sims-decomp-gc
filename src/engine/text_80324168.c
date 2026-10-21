@@ -69,9 +69,9 @@ void fn_80326190(void *arg0) {
 }
 
 void fn_80327A68(s32 arg0) {
-    M2C_UNK fn_80328DD4(s32);
+    void fn_80328DD4(void *);
     fn_80328AE0();
-    fn_80328DD4(arg0);
+    fn_80328DD4((void *)arg0);
 }
 
 void fn_80328CF8(s32 arg0) {
