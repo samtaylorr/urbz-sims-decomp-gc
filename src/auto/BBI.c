@@ -779,7 +779,7 @@ u16 fn_80063A40(void) {
 }
 
 extern void fn_800638D8(void);
-extern void fn_800639A0(void);
+extern void fn_800639A0(void *);
 extern u8 lbl_803C7F44[];
 void fn_80063A4C(s32 arg0) {
     fn_802D6A90(lbl_80491EE4, fn_800638D8, fn_80063980, fn_800639A0, arg0, lbl_803C7F44, lbl_80491E44);
