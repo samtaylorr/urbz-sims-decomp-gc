@@ -125,6 +125,32 @@ s8 *fn_80105514(s8 *self, s8 *other) {
     return self;
 }
 
+s8 *fn_80105534(s8 *self, s32 *src, s8 arg2) {
+    self[0] = src[1] >> 4;
+    self[2] = arg2;
+    self[1] = src[0] >> 4;
+    return self;
+}
+
+s8 *fn_80105558(s8 *self, u8 *src, s8 arg2) {
+    self[0] = src[3];
+    self[2] = arg2;
+    self[1] = src[7];
+    return self;
+}
+
+void fn_80105574(s8 *self, s32 a, s32 b, s8 c) {
+    self[0] = a;
+    self[1] = b;
+    if (self[0] != a) {
+        self[0] = 0;
+    }
+    if (self[1] != b) {
+        self[1] = 0;
+    }
+    self[2] = c;
+}
+
 void fn_801055FC(void *self, s32 flags) {
     if (flags & 1) {
         fn_802D20E8(self);
