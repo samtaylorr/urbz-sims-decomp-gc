@@ -100,8 +100,9 @@ void fn_802F3E28(void) {
     fn_802D2430();
 }
 
+void fn_802F3C70(s32 arg0, s32 arg1);
+
 void fn_802F3E48(void) {
-    M2C_UNK fn_802F3C70(M2C_UNK, M2C_UNK);
     fn_802F3C70(1, 0xFFFF);
 }
 
