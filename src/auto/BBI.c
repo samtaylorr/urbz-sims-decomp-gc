@@ -585,6 +585,10 @@ void fn_800633C8(void) {
     fn_8005FB70();
 }
 
+void fn_800633E8(void *self) {
+    fn_8005FBB8(self, 2);
+}
+
 void fn_8006340C(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
