@@ -337,7 +337,7 @@ s32 fn_80260574(void) {
 s32 fn_80260948(char *dirName) {
     s32 entry;
     entry = fn_80260144(dirName);
-    if ((entry < 0) || !((lbl_80495EB4[entry].isDirAndStringOff & 0xFF000000) ? 1 : 0)) {
+    if ((entry < 0) || !((!(lbl_80495EB4[entry].isDirAndStringOff & 0xFF000000)) ? 0 : 1)) {
         return 0;
     }
     lbl_80495EC0 = entry;
