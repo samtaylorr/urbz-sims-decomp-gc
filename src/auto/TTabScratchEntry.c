@@ -1293,6 +1293,11 @@ void fn_801AB5CC(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x58) = -1;
 }
 
+void fn_801AD7B0(void *self, void *arg1) {
+    M2C_UNK fn_801AB600(void *, void *, s32);
+    fn_801AB600(self, arg1, 1);
+}
+
 s32 fn_801B1824(void *arg0) {
     return M2C_FIELD(arg0, u16 *, 4) & 0x7FFF;
 }
