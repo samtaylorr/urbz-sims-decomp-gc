@@ -116,16 +116,16 @@ void fn_800438D0(f32 farg0) {
     f32 msg[16];
 
     if (lbl_8049407C != -1) {
-        f32 v = lbl_803C615C[0];
-        if (farg0 != v) {
-            v = farg0 * lbl_803C6160[0];
+        if (farg0 != lbl_803C615C[0]) {
+            msg[1] = farg0 * lbl_803C6160[0];
+        } else {
+            msg[1] = lbl_803C615C[0];
         }
-        msg[1] = v;
         fn_803392AC(lbl_8049407C, 8, msg);
-    } else {
-        lbl_804957B4 = farg0;
-        lbl_804957B0 = 1;
+        return;
     }
+    lbl_804957B4 = farg0;
+    lbl_804957B0 = 1;
 }
 
 f32 fn_80043938(void) {
