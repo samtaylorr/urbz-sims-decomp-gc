@@ -1,7 +1,22 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
+typedef struct {
+    s32 a;
+    s32 b;
+    s32 c;
+    s32 d;
+} FamilyQuad;
+
 
 extern s32 lbl_80494F54;
+FamilyQuad *fn_80331EA4(FamilyQuad *q) {
+    q->a = 0;
+    q->b = 0;
+    q->c = 0;
+    q->d = 0;
+    return q;
+}
+
 void fn_803321CC(void) {
     extern s32 lbl_80494F54;
     lbl_80494F54 = 1;
