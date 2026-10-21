@@ -1,6 +1,19 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+typedef struct { f32 x, y, z; } EIPortalPointLightVec3;
+
+static inline void EIPortalPointLightVec3_Set(EIPortalPointLightVec3 *v, f32 x, f32 y, f32 z) {
+    v->z = z;
+    v->y = y;
+    v->x = x;
+}
+
+extern s32 lbl_804961D8;
+void *fn_802F1B74(void *);
+void fn_802F2278(void *, EIPortalPointLightVec3 *);
+void fn_802F2D08(void *);
+
 void fn_802D2FD0(void);
 void fn_802F269C(void) {
     fn_802D2FD0();
