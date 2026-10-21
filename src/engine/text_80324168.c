@@ -102,6 +102,20 @@ void fn_80328E5C(void *arg0, void *arg1) {
     M2C_FIELD(arg0, void **, 0x4D130) = arg1;
 }
 
+void fn_80328F84(s32 arg0, s32 arg1) {
+    extern s32 fn_802D6A90(void *, void *, void *, void *, s32, void *, void *);
+    extern void fn_80328FF4(void);
+    extern void fn_80329080(void *);
+    extern void fn_803290A0(void *);
+    extern u8 lbl_804938F8[];
+    extern u8 lbl_803F3210[];
+    extern u8 lbl_80493858[];
+    extern s32 lbl_80496240;
+    if (arg1 == 0xFFFF && arg0 != 0) {
+        lbl_80496240 = fn_802D6A90(lbl_804938F8, fn_80328FF4, fn_80329080, fn_803290A0, 5, lbl_803F3210, lbl_80493858);
+    }
+}
+
 void fn_80328FF4(void);
 void fn_80329080(void *);
 void fn_803290A0(void *);
