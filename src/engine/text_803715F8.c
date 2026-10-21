@@ -57,6 +57,21 @@ s32 fn_80371658(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void fn_803717DC(void **arg0, char *arg1) {
+    extern void fn_80364C90(void *);
+    extern void fn_80364CB0(void *, s32);
+    extern void fn_80364EAC(void *, void *, s32, s32, s32);
+    char buf[0x28];
+    char *vt;
+
+    fn_80364C90(buf);
+    vt = *(char **)(arg1 + 0x28);
+    fn_80364EAC(buf, arg1, 0, (*(s32 (**)(void *))(vt + 0x34))(arg1 + *(s16 *)(vt + 0x30)), 0);
+    vt = (char *)*arg0;
+    (*(void (**)(void *, void *))(vt + 0x3C))((char *)arg0 + *(s16 *)(vt + 0x38), buf);
+    fn_80364CB0(buf, 2);
+}
+
 void fn_80371868(s32 arg0, s32 arg1) {
     if (arg1 == 0xFFFF && arg0 != 0) {
         lbl_80496310 = fn_802D6A90(lbl_80493E44, fn_803718D8, fn_80371958, fn_80371978, 0, lbl_803F55DC, lbl_80493858);
