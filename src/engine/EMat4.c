@@ -472,6 +472,41 @@ s32 fn_802CD600(void **arg0) {
     return var_r9;
 }
 
+void fn_802CD53C(EMat4Node **list);
+void fn_802CCE6C(void *self, s32 key, void *value, s32 arg3);
+void fn_802CCE08(void *self, s32 key, void *value, s32 arg3);
+void *fn_802CD66C(void *self, EMat4Node **other, s32 overwrite);
+void *fn_802CD628(void *self, EMat4Node **other) {
+    fn_802CD53C(self);
+    fn_802CD66C(self, other, 1);
+    return self;
+}
+
+void *fn_802CD66C(void *self, EMat4Node **other, s32 overwrite) {
+    EMat4Node *n;
+
+    for (n = *other; EMat4Node_Valid(n); n = n->next) {
+        if (overwrite) {
+            fn_802CCE6C(self, n->key, n->value, 1);
+        } else {
+            fn_802CCE08(self, n->key, n->value, 1);
+        }
+    }
+    return self;
+}
+
+s32 fn_802CD6F4(EMat4Node **a, EMat4Node **b) {
+    EMat4Node *na = *a;
+    EMat4Node *nb = *b;
+
+    for (; EMat4Node_Valid(na); na = na->next, nb = nb->next) {
+        if (!EMat4Node_Valid(nb) || na->key != nb->key || na->value != nb->value) {
+            return 0;
+        }
+    }
+    return !EMat4Node_Valid(nb);
+}
+
 void fn_802CDB1C(void *arg0) {
     fn_802D1A00(fn_802D0C44(arg0), arg0);
 }
