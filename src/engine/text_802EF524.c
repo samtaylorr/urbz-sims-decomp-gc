@@ -94,7 +94,7 @@ s32 fn_802EFAD4(s32 arg0) {
 }
 
 void fn_802EFADC(void) {
-    M2C_UNK fn_802EF8D4(M2C_UNK, M2C_UNK);
+    void fn_802EF8D4(s32, s32);
     fn_802EF8D4(1, 0xFFFF);
 }
 
