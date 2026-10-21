@@ -118,6 +118,13 @@ void fn_80105508(void *arg0) {
     M2C_FIELD(arg0, s8 *, 2) = 0;
 }
 
+s8 *fn_80105514(s8 *self, s8 *other) {
+    self[0] = other[0];
+    self[1] = other[1];
+    self[2] = other[2];
+    return self;
+}
+
 void fn_801055FC(void *self, s32 flags) {
     if (flags & 1) {
         fn_802D20E8(self);
