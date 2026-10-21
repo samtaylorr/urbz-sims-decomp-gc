@@ -85,6 +85,12 @@ void fn_8031BEE8(void **arg0, s32 arg1) {
     }
 }
 
+void fn_8031C4F0(s32 arg0, s32 arg1) {
+    if (arg1 == 0xFFFF && arg0 != 0) {
+        lbl_8049621C = fn_802D6A90(lbl_80493880, fn_8031C560, fn_8031C5E0, fn_8031C600, 0, lbl_803F2CF8, lbl_80493858);
+    }
+}
+
 void fn_8031C560(void) {
     fn_8031BEA0(Alloc(0x2C));
 }
