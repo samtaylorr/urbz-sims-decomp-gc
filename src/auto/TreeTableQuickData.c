@@ -125,14 +125,17 @@ void fn_801B3B88(void *arg0, s32 flags) {
     extern void fn_802D20E8(void *);
     extern void fn_803997AC(void *, u32);
     s32 *self = arg0;
+    void *p;
+    u32 size;
     self[0] = (s32)lbl_804155D8;
     fn_801B3C08(self);
-    if (self[1] != 0) {
-        u32 size = (u32)(self[4] - self[1]);
+    p = (void *)self[1];
+    size = (u32)(self[4] - self[1]);
+    if (p != 0) {
         if (size > 0x80) {
-            fn_802D20E8((void *)self[1]);
+            fn_802D20E8(p);
         } else {
-            fn_803997AC((void *)self[1], size);
+            fn_803997AC(p, size);
         }
     }
     if (flags & 1) {
