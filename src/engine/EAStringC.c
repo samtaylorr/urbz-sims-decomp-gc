@@ -264,13 +264,13 @@ void fn_802A6644(void *arg0) {
     void fn_803B6F94(void *, s32);
     void fn_803B7DCC(void *, s32);
     extern s32 lbl_804960F0;
-    extern void (*lbl_80443334)(s32);
+    extern void (*lbl_80443334[])(s32);
 
     if (arg0 != NULL) {
         fn_802A452C(lbl_804960F0, arg0);
         if ((u32)(M2C_FIELD(arg0, s32 *, 8) - 3) <= 1U) {
             fn_8028B198(M2C_FIELD(arg0, s32 *, 0x10) + 8, M2C_FIELD(arg0, s32 *, 0xC));
-            lbl_80443334(M2C_FIELD(arg0, s32 *, 0x14));
+            lbl_80443334[0](M2C_FIELD(arg0, s32 *, 0x14));
         }
         fn_803B6F94((u8 *)arg0 + 4, 2);
         fn_803B7DCC(arg0, 0x18);
