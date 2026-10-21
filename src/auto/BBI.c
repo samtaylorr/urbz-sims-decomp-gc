@@ -592,7 +592,7 @@ u16 fn_80063488(void) {
 }
 
 extern void fn_80063320(void);
-extern void fn_800633E8(void);
+extern void fn_800633E8(void *);
 extern u8 lbl_803C7EF8[];
 void fn_80063494(s32 arg0) {
     fn_802D6A90(lbl_80491E6C, fn_80063320, fn_800633C8, fn_800633E8, arg0, lbl_803C7EF8, lbl_80491E44);
