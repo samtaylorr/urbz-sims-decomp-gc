@@ -6,6 +6,13 @@ typedef struct {
     s32 b;
 } FamilyPair;
 
+typedef struct {
+    s32 a;
+    s32 b;
+    s32 c;
+    s32 d;
+} FamilyQuad;
+
 void fn_80106008(s32 *arg0) {
     M2C_UNK fn_8011AA6C(s32);
     fn_8011AA6C(*arg0);
