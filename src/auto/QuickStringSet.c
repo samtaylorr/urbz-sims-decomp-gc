@@ -3,6 +3,10 @@
 
 extern s32 lbl_80495A94;
 extern s32 lbl_804943C0;
+s32 fn_800F6498(void *arg0) {
+    return *(s32 *)((u8 *)arg0 + 0x114) != 0;
+}
+
 void fn_800F661C(s32 arg0, s32 arg1) {
     M2C_UNK fn_800F6A78(s32, s32, M2C_UNK);
     fn_800F68E0();
