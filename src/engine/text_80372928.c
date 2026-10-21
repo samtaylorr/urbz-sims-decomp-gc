@@ -57,6 +57,10 @@ void fn_8037380C(void) {
     fn_803729C8();
 }
 
+void fn_80373834(void *self) {
+    fn_803729C8(fn_803739B0(0x48, self));
+}
+
 void fn_80373860(void *self) {
     fn_80372A2C(self, 2);
 }
