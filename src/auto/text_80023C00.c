@@ -104,6 +104,17 @@ s32 fn_80028808(s32 arg0) {
     return arg0 + 0x58;
 }
 
+void fn_8002889C(s32 arg0, s32 arg1) {
+    void fn_80024D4C(s32, s32, f32 *);
+    extern const f32 lbl_803C4E44[];
+    f32 v[3];
+
+    v[2] = lbl_803C4E44[0];
+    v[1] = lbl_803C4E44[0];
+    v[0] = lbl_803C4E44[0];
+    fn_80024D4C(arg0, arg1, v);
+}
+
 void fn_800288D8(void) {
 
 }
@@ -134,6 +145,23 @@ void fn_80028900(void *arg0, s32 arg1) {
 
 s32 fn_80028940(void) {
     return 0;
+}
+
+s32 fn_80028948(s32 arg0) {
+    typedef struct { s32 v[12]; } Tbl;
+    extern Tbl lbl_803C5154;
+    Tbl t;
+    s32 i;
+
+    t = lbl_803C5154;
+    i = arg0 - 1;
+    if (i < 0) {
+        i = 0;
+    }
+    if (i > 11) {
+        i = 11;
+    }
+    return t.v[i];
 }
 
 void fn_800289C8(void *arg0) {
