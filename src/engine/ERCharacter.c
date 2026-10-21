@@ -84,10 +84,10 @@ void fn_80318918(void) {
 }
 
 void fn_80318A24(void) {
-    void fn_80245BB4(char *, const char *, ...);
+    int fn_80245BB4(char *, const char *, ...);
     void fn_803188C8(const char *);
     void fn_803189F0(void);
-    extern char lbl_803F2730[];
+    extern const char lbl_803F2730[];
     extern s32 lbl_80494F28;
     char buf[128];
 
