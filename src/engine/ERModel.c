@@ -120,17 +120,19 @@ void *fn_8032A410(u8 *self) {
     extern f32 lbl_803F3360[];
     f32 v[3];
     f32 s;
+    void *p;
 
     if (*(void **)(self + 0x1A0) == 0) {
-        *(void **)(self + 0x1A0) = fn_80338000(lbl_8045B82C, 0x40, 0x10);
+        p = fn_80338000(lbl_8045B82C, 0x40, 0x10);
         s = *(f32 *)(self + 0x6C);
+        *(void **)(self + 0x1A0) = p;
         if (s != lbl_803F3360[0]) {
             v[0] = s;
-            v[2] = s;
             v[1] = s;
-            fn_802C8814(*(void **)(self + 0x1A0), v);
+            v[2] = s;
+            fn_802C8814(p, v);
         } else {
-            fn_802C876C(*(void **)(self + 0x1A0));
+            fn_802C876C(p);
         }
     }
     return *(void **)(self + 0x1A0);
@@ -250,6 +252,15 @@ void fn_8032CCE4(void) {
     M2C_UNK fn_8032CE58(M2C_UNK);
     fn_8032CE58(0x1A4);
     fn_80329304();
+}
+
+extern f32 lbl_803F33B4;
+extern f32 lbl_803F33B8;
+extern f32 lbl_80496244;
+extern s32 lbl_80496248;
+void fn_8032CD38(void *self) {
+    void fn_8032952C(void *, s32);
+    fn_8032952C(self, 2);
 }
 
 void fn_8032CD5C(void **obj) {
