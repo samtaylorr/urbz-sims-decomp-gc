@@ -318,6 +318,14 @@ void *fn_80039DC8(u32 size, void *p) {
     return p;
 }
 
+s32 fn_80039DD0(void *arg0) {
+    s32 ret = 1;
+    if (!(M2C_FIELD(arg0, s32 *, 0x300) & 0x30)) {
+        ret = 0;
+    }
+    return ret;
+}
+
 s32 fn_80039DE8(s32 arg0) {
     s32 var_r0;
 
@@ -336,6 +344,10 @@ extern void *fn_80039F7C(u32);
 extern void fn_8003A064(void *);
 void fn_80039E08(void) {
     fn_8003A064(fn_80039F7C(0x380));
+}
+
+void fn_80039E30(void *p) {
+    fn_8003A064(fn_8003A028(0x380, p));
 }
 
 void fn_80039E5C(void *self) {
