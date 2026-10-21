@@ -191,6 +191,10 @@ void fn_80097BA8(void *arg0) {
     M2C_FIELD(arg0, f32 *, 0x34) = fn_80097C84();
 }
 
+s32 fn_80097BD8(s32 arg0) {
+    return arg0 + 0x188;
+}
+
 f32 fn_80097BF8(void *arg0, f32 farg0) {
     f32 temp_f0;
 
