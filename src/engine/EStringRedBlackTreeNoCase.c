@@ -6,11 +6,11 @@ s32 fn_80364E64(void *arg0) {
     void *temp_r9;
 
     temp_r11 = M2C_FIELD(arg0, void **, 0x1C);
-    if (temp_r11 != NULL) {
-        temp_r9 = M2C_FIELD(temp_r11, void **, 0x28);
-        return M2C_FIELD(temp_r9, s32 (**)(void *), 0x24)((char *)temp_r11 + M2C_FIELD(temp_r9, s16 *, 0x20));
+    if (temp_r11 == NULL) {
+        return 0;
     }
-    return 0;
+    temp_r9 = M2C_FIELD(temp_r11, void **, 0x28);
+    return M2C_FIELD(temp_r9, s32 (**)(void *), 0x24)((char *)temp_r11 + M2C_FIELD(temp_r9, s16 *, 0x20));
 }
 
 void fn_80364EAC(void *arg0, void *arg1, s32 arg2, s32 arg3, s32 arg4) {
