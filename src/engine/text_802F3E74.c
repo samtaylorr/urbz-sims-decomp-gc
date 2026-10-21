@@ -243,8 +243,16 @@ void fn_802F5A58(void *arg0) {
 }
 
 void fn_802F5A8C(void *arg0, void *arg1) {
-    typedef struct { s32 m[16]; } Mtx44Copy;
-    *(Mtx44Copy *)arg1 = *(Mtx44Copy *)((char *)arg0 + 0x90);
+    s64 *src = (s64 *)((char *)arg0 + 0x90);
+    s64 *dst = arg1;
+    dst[0] = src[0];
+    dst[1] = src[1];
+    dst[2] = src[2];
+    dst[3] = src[3];
+    dst[4] = src[4];
+    dst[5] = src[5];
+    dst[6] = src[6];
+    dst[7] = src[7];
 }
 
 s32 fn_802F5B14(void *arg0) {
