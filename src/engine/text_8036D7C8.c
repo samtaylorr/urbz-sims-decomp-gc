@@ -60,6 +60,19 @@ void fn_8036DF8C(char *self, void *arg1) {
     fn_802E34F0(arg1, self + 0x44);
 }
 
+s32 fn_8036E97C(void *arg0) {
+    u32 i;
+    void **list;
+
+    for (i = 0; i < M2C_FIELD(arg0, u32 *, 0xB0); i++) {
+        void *p = M2C_FIELD(M2C_FIELD(arg0, void ***, 0xAC)[i], void **, 0x20);
+        if ((M2C_FIELD(p, s32 *, 0x74) | M2C_FIELD(p, s32 *, 0xB4)) & 0x20) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
 void fn_8036E9D0(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0xA4) = arg1;
 }
@@ -73,6 +86,10 @@ void fn_8036EA50(void) {
     M2C_UNK fn_8036EBC4(M2C_UNK);
     fn_8036EBC4(0x27C);
     fn_8036D868();
+}
+
+void fn_8036EA78(void *self) {
+    fn_8036D868(fn_8036EC70(0x27C, self));
 }
 
 void fn_8036EAA4(void *self) {
