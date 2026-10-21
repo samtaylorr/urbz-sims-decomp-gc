@@ -54,6 +54,9 @@ s32 fn_80317D18(s32 arg0) {
     return var_r30;
 }
 
+void fn_80318A70(const char *fmt, ...) {
+}
+
 void fn_8031A4F8(void) {
 
 }
