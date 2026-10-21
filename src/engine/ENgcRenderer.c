@@ -185,6 +185,24 @@ void fn_8035EA70(void) {
     fn_8035EC18();
 }
 
+s32 fn_8035EDD8(void) {
+    extern ENgcRendererSlot lbl_80473F7C[];
+    s32 i;
+
+    for (i = 0; i < 0x3E; i++) {
+        if (lbl_80473F7C[i].unk24 == 0) {
+            lbl_80473F7C[i].unk40_0 = 0;
+            lbl_80473F7C[i].unk40_3 = 0;
+            lbl_80473F7C[i].unk40_1 = 0;
+            break;
+        }
+    }
+    if (i == 0x3E) {
+        return -1;
+    }
+    return i;
+}
+
 void fn_8035EE3C(void) {
     M2C_UNK fn_80254684(s32);
     extern s32 lbl_804962D4;
@@ -221,6 +239,26 @@ void fn_8035EEC4(s32 arg0) {
             lbl_80473F7C[i].unk0 = 0;
         }
     }
+}
+
+void *fn_8035EF28(void *arg0) {
+    void fn_802C7D1C(void *);
+    void fn_802CA9A8(void *);
+    void fn_802D8B34(void *);
+    void fn_803664B0(void *);
+    extern char lbl_8041CF38[];
+    extern void *lbl_80495220;
+    char *self = arg0;
+    char *p = self + 0x394;
+
+    fn_802D8B34(self);
+    *(void **)(self + 0x338) = lbl_8041CF38;
+    fn_803664B0(self + 0x348);
+    fn_802C7D1C(p);
+    *(s32 *)(p + 8) = 0x18;
+    fn_802CA9A8(self + 0x3A0);
+    lbl_80495220 = self;
+    return self;
 }
 
 extern u8 lbl_8046DF78[];
