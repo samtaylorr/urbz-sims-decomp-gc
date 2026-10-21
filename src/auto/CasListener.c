@@ -4,6 +4,7 @@
 typedef struct {
     void *node;
     u8 inserted;
+    u8 pad[3];
 } CasPair;
 
 void fn_803074F0(void);
