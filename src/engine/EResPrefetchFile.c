@@ -201,7 +201,7 @@ void fn_803203B0(s32 arg0) {
 }
 
 void fn_803203DC(void) {
-    M2C_UNK fn_80320194(M2C_UNK, M2C_UNK);
+    void fn_80320194(s32, s32);
     fn_80320194(1, 0xFFFF);
 }
 
