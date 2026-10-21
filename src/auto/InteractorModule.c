@@ -43,9 +43,12 @@ void fn_80237C24(void *arg0) {
     extern void fn_8022EE0C(void *, void *);
     extern f32 lbl_803EB610[];
     extern f32 lbl_803EB614[];
+    f32 x, y;
     fn_8022EE0C(fn_8022554C(arg0), arg0);
-    M2C_FIELD(arg0, f32 *, 0x50) = lbl_803EB610[0];
-    M2C_FIELD(arg0, f32 *, 0x54) = lbl_803EB614[0];
+    x = lbl_803EB610[0];
+    y = lbl_803EB614[0];
+    M2C_FIELD(arg0, f32 *, 0x50) = x;
+    M2C_FIELD(arg0, f32 *, 0x54) = y;
 }
 
 void fn_80237C70(void *arg0) {
