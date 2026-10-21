@@ -41,6 +41,10 @@ s32 *fn_8016F8FC(s32 *arg0, s32 arg1) {
     return arg0;
 }
 
+s32 fn_8016F968(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0) != 0;
+}
+
 void fn_8016F980(void *arg0) {
     s32 var_r11;
     void *temp_r9;
