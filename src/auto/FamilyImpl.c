@@ -55,6 +55,10 @@ void fn_8010A834(void *arg0) {
     M2C_FIELD(temp_r30_2, M2C_UNK (**)(void *, s32), 4)(temp_r29_2, fn_8010A7EC());
 }
 
+FamilyPair fn_8010A884(u8 *self) {
+    return *(FamilyPair *)(self + 0x14);
+}
+
 s32 fn_8010A89C(s32 *self) {
     return self[7];
 }
