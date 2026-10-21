@@ -3712,6 +3712,17 @@ void fn_800EECA4(void **arg0, const u8 *arg1, u32 arg2, u32 arg3) {
     fn_800EC848(arg0, arg1, arg2, arg3);
 }
 
+void fn_800EECC4(s32 arg0, s32 arg1, s32 arg2) {
+    s32 var_r6;
+
+    if (arg1 != 0) {
+        var_r6 = fn_80248808(arg1);
+    } else {
+        var_r6 = 0;
+    }
+    fn_800EC848(arg0, arg1, arg2, var_r6);
+}
+
 void fn_800EC8E0(void);
 void fn_800EEDEC(void) {
     fn_800EC8E0();
