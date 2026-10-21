@@ -108,18 +108,7 @@ void fn_80371394(s32 arg0, s32 arg1) {
 }
 
 void *fn_80371404(void) {
-    void *heap;
-    void *p;
-
-    heap = ((void *(*)(void))fn_802D0AB8)();
-    p = fn_802D197C(heap, 0x24, 4);
-    if (p == NULL) {
-        p = fn_802DBBCC(heap, 0x24, 0);
-        if (p == NULL && heap == ((void *(*)(void))fn_802D0AB8)()) {
-            p = fn_802DBBCC(fn_802D0B3C(), 0x24, 0);
-        }
-    }
-    return fn_8037117C(p);
+    return fn_8037117C(Alloc(0x24));
 }
 
 void *fn_8037117C(void *);
