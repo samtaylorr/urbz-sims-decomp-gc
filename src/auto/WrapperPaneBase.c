@@ -252,10 +252,10 @@ void fn_800CCF70(void) {
     fn_800CD09C();
 }
 
-void fn_800CD05C(void *arg0) {
-    s32 fn_8033740C(void *, s32, s32);
+void fn_800CD05C(void *arg0, u32 arg1) {
+    s32 fn_8033740C(void *, u32, s32, s32);
     extern u8 lbl_8045BA40[];
-    M2C_FIELD(arg0, s32 *, 0x30) = fn_8033740C(lbl_8045BA40, 0, 0);
+    M2C_FIELD(arg0, s32 *, 0x30) = fn_8033740C(lbl_8045BA40, arg1, 0, 0);
 }
 
 void fn_800CD09C(void *arg0) {
