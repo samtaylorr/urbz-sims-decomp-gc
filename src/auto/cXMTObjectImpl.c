@@ -55,6 +55,11 @@ void fn_8011CCC8(void ***arg0, s32 arg1) {
     M2C_FIELD(**arg0, s32 *, 0x10) = arg1;
 }
 
+s32 fn_8011CD4C(u8 *self) {
+    u8 *p = *(u8 **)(self + 8);
+    return p != NULL ? *(s32 *)(p + 4) : 0;
+}
+
 void fn_8011CD64(void) {
 
 }
