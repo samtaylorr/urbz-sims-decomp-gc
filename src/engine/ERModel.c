@@ -389,7 +389,7 @@ s32 fn_8032CF8C(s32 arg0) {
 }
 
 void fn_8032CF94(void) {
-    M2C_UNK fn_8032CC5C(M2C_UNK, M2C_UNK);
+    void fn_8032CC5C(s32, s32);
     fn_8032CC5C(1, 0xFFFF);
 }
 
