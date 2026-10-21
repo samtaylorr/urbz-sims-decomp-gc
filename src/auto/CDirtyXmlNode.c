@@ -4,7 +4,7 @@
 void fn_800A9720(void);
 
 typedef struct { s32 a[4]; } Struct16_800BF7FC;
-typedef struct { s32 a[4]; s16 b; } Struct18_800BF784;
+typedef struct { s16 a[9]; } Struct18_800BF784;
 extern Struct16_800BF7FC lbl_80433F98;
 extern Struct18_800BF784 lbl_803D02C8;
 extern char lbl_803D0298[];
@@ -17,6 +17,16 @@ s32 fn_800BEF3C(void) {
 
 void fn_800BF5E0(void) {
 
+}
+
+char *fn_800BF738(void) {
+    char *p = fn_800BF3FC(fn_80248808(lbl_803D0298) + 1);
+    fn_80248784(p, lbl_803D0298);
+    return p;
+}
+
+void fn_800BF784(void) {
+    *(Struct18_800BF784 *)fn_800BF3FC(0x12) = lbl_803D02C8;
 }
 
 void fn_800BF7DC(void) {
@@ -37,6 +47,10 @@ s32 fn_800BF7EC(void) {
 
 s32 fn_800BF7F4(void) {
     return 0;
+}
+
+void fn_800BF7FC(Struct16_800BF7FC *arg0) {
+    *arg0 = lbl_80433F98;
 }
 
 extern Struct16_800BF7FC lbl_80433F98;
