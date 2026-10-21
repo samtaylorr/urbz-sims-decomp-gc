@@ -41,6 +41,12 @@ s32 fn_802F1B34(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void fn_802F2468(s32 arg0, s32 arg1) {
+    if (arg1 == 0xFFFF && arg0 != 0) {
+        lbl_804961D4 = fn_802D6A90(lbl_80493790, fn_802F24D8, fn_802F2500, fn_802F2520, 0, lbl_803F0EF4, lbl_80493740);
+    }
+}
+
 void *fn_802D1FC8(s32);
 void *fn_802F1B74(void *);
 void fn_802F24D8(void) {
