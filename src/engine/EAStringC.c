@@ -281,6 +281,10 @@ s32 fn_802A66C8(s32 *arg0) {
     return ++*arg0;
 }
 
+s32 fn_802A66DC(s32 *arg0) {
+    return --*arg0;
+}
+
 void fn_802A66F0(void *arg0) {
     extern void (*lbl_80443318[])(void *, s32);
 
