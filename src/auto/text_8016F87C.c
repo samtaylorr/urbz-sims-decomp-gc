@@ -117,9 +117,10 @@ void *fn_8016FD88(void *arg0, s32 arg1) {
     extern void fn_80174B98(void *, s32, s32);
     extern char lbl_804121A0[];
     extern char lbl_804122E8[];
+    u32 hash = 0xE49EC7F7;
     M2C_FIELD(arg0, char **, 0xBC) = lbl_804122E8;
     M2C_FIELD(arg0, u32 *, 0) = 0xABADCAFE;
-    M2C_FIELD(arg0, u32 *, 8) = 0xE49EC7F7;
+    M2C_FIELD(arg0, u32 *, 8) = hash;
     M2C_FIELD(arg0, s32 *, 0x18) = 0;
     M2C_FIELD(arg0, s32 *, 0x10) = 0;
     M2C_FIELD(arg0, s32 *, 0xC) = 0;
