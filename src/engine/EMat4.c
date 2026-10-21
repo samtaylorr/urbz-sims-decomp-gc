@@ -487,9 +487,6 @@ s32 fn_802CD600(void **arg0) {
     return var_r9;
 }
 
-void fn_802CD53C(EMat4Node **list);
-void fn_802CCE6C(void *self, s32 key, void *value, s32 arg3);
-void fn_802CCE08(void *self, s32 key, void *value, s32 arg3);
 void *fn_802CD66C(void *self, EMat4Node **other, s32 overwrite);
 void *fn_802CD628(void *self, EMat4Node **other) {
     fn_802CD53C(self);
