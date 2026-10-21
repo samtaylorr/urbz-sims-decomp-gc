@@ -121,6 +121,17 @@ void fn_800288FC(void) {
 
 }
 
+void fn_80028900(void *arg0, s32 arg1) {
+    void fn_802D20E8(void *);
+    extern u8 lbl_80407628[];
+    extern u8 lbl_80407690[];
+    *(void **)((u8 *)arg0 + 0x20) = lbl_80407690;
+    *(void **)((u8 *)arg0 + 0x1C) = lbl_80407628;
+    if (arg1 & 1) {
+        fn_802D20E8(arg0);
+    }
+}
+
 s32 fn_80028940(void) {
     return 0;
 }
