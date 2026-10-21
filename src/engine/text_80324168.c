@@ -127,7 +127,7 @@ u16 fn_80329140(void) {
 
 extern void fn_802D6A90(void *, void *, void *, void *, s32, void *, void *);
 extern void fn_80328FF4(void);
-extern void fn_803290A0(void);
+extern void fn_803290A0(void *);
 extern u8 lbl_803F3210[];
 extern u8 lbl_80493858[];
 void fn_8032914C(s32 arg0) {
