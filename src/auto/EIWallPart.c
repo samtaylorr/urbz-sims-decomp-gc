@@ -347,6 +347,7 @@ void fn_80039E08(void) {
 }
 
 void fn_80039E30(void *p) {
+    void *fn_8003A028(u32 size, void *p);
     fn_8003A064(fn_8003A028(0x380, p));
 }
 
