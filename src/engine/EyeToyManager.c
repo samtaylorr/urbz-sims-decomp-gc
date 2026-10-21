@@ -137,22 +137,9 @@ void *fn_802D197C(void *, u32, s32);
 void *fn_802DBBCC(void *, u32, s32);
 void *fn_802D0B3C_h(void);
 s32 fn_80339380(void *arg0, s32 arg1) {
-    void *heap;
     void *p;
-    s32 size;
 
-    heap = fn_802D0AB8();
-    size = arg1 * 4;
-    p = NULL;
-    if (size != 0) {
-        p = fn_802D197C(heap, size, 4);
-        if (p == NULL) {
-            p = fn_802DBBCC(heap, size, 0);
-            if (p == NULL && heap == fn_802D0AB8()) {
-                p = fn_802DBBCC(((void *(*)(void))fn_802D0B3C)(), size, 0);
-            }
-        }
-    }
+    p = EyeToyAlloc(arg1);
     M2C_FIELD(arg0, void **, 0x20) = p;
     if (p == NULL) {
         return 0;
