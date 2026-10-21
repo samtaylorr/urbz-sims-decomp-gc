@@ -2096,6 +2096,20 @@ void fn_803A3E2C(s32 *first, s32 *last, s32 comp) {
     }
 }
 
+void fn_803A3B6C(s32 *first, s32 *last, s32 *val, s32 depth, s32 comp);
+void fn_803A3E98(s32 *first, s32 *last, s32 comp) {
+    if (first != last) {
+        s32 n = last - first;
+        s32 k = 0;
+        while (n != 1) {
+            n >>= 1;
+            k++;
+        }
+        fn_803A3B6C(first, last, 0, k * 2, comp);
+        fn_803A3E2C(first, last, comp);
+    }
+}
+
 extern u8 lbl_8040FF60[];
 void fn_803A3F1C(void **self, s32 flags) {
     *self = lbl_8040FF60;
