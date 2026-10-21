@@ -85,6 +85,17 @@ s32 fn_8023C254(void *arg0) {
     return ((u32) M2C_FIELD(arg0, u32 *, 0xC0) >> 9U) & 1;
 }
 
+s32 fn_8023C260(void *arg0) {
+    if (M2C_FIELD(arg0, u32 *, 0xC0) & 0x100) {
+        return *M2C_FIELD(arg0, s32 **, 0xD4);
+    }
+    return 0;
+}
+
+void fn_8023C280(u8 *arg0, Vec3f *arg1) {
+    *(Vec3f *)(arg0 + 0x5C) = *arg1;
+}
+
 s32 fn_8023C2C0(s32 arg0) {
     return arg0 + 0x5C;
 }
