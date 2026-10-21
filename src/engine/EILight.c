@@ -115,6 +115,12 @@ s32 fn_802F02FC(void) {
     return 0;
 }
 
+extern void fn_802F05AC(void *, s32);
+extern s32 lbl_804961CC;
+void fn_802F0304(u8 *arg0, EILightVec3 *arg1) {
+    *(EILightVec3 *)(arg0 + 0xB0) = *arg1;
+}
+
 void fn_802F0324(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0xBC) = arg1;
 }
