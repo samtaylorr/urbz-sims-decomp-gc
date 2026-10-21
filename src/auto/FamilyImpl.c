@@ -256,6 +256,16 @@ s32 fn_8010C580(void) {
     return 0;
 }
 
+s32 fn_8010C588(void **arg0, s32 arg1, void ***arg2) {
+    if (arg2 != NULL && (arg1 == 1 || arg1 == 0x2BEC8A06)) {
+        char *vt = (char *)*arg0;
+        (*(void (**)(void *))(vt + 0x14))((char *)arg0 + *(s16 *)(vt + 0x10));
+        *arg2 = arg0;
+        return 1;
+    }
+    return 0;
+}
+
 s32 fn_8010C5F8(void) {
     return 1;
 }
