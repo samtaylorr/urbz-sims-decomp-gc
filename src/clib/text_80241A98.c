@@ -209,7 +209,7 @@ void fn_8024BE60(s32 arg0, s32 arg1, s32 arg2) {
 
 s32 fn_8024BE98(s32 c) {
     extern const u8 lbl_803EBA39[];
-    return lbl_803EBA39[c] & 8;
+    return (lbl_803EBA39)[(u32)c] & 8;
 }
 
 extern s32 lbl_80494988;
@@ -231,10 +231,13 @@ void fn_8024C0A4(void) {
     fn_8024C068(lbl_80494988);
 }
 
-void fn_8024C9DC(u8 *dst, u8 *src, s32 n) {
-    while (n--) {
+void fn_8024C9DC(void *dst0, const void *src0, u32 len0) {
+    char *dst = dst0;
+    const char *src = src0;
+    int len = len0;
+
+    while (len--)
         *dst++ = *src++;
-    }
 }
 
 void fn_8024D324(void);
