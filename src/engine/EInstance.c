@@ -312,6 +312,14 @@ void fn_802F19FC(void *arg0, void *arg1) {
     M2C_FIELD(arg1, f32 *, 0) = zero;
 }
 
+void fn_802F1A14(void *arg0, void *arg1) {
+    extern f32 lbl_803F0ED0[];
+    f32 zero = lbl_803F0ED0[0];
+    M2C_FIELD(arg1, f32 *, 8) = zero;
+    M2C_FIELD(arg1, f32 *, 4) = zero;
+    M2C_FIELD(arg1, f32 *, 0) = zero;
+}
+
 void fn_802C876C(void *);
 void fn_802F1A2C(void *self, void *arg) {
     fn_802C876C(arg);
