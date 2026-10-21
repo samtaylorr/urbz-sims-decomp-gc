@@ -41,6 +41,31 @@ s32 *fn_8016F8FC(s32 *arg0, s32 arg1) {
     return arg0;
 }
 
+void *fn_8016F910(void *arg0) {
+    char **arr;
+    char *p;
+    s32 n;
+    s32 idx;
+    s32 last;
+
+    arr = M2C_FIELD(arg0, char ***, 0);
+    n = 0;
+    p = *arr;
+    if (p != NULL) {
+        n = M2C_FIELD(p, s32 *, -4);
+    }
+    idx = M2C_FIELD(arg0, s32 *, 4);
+    if (idx < n) {
+        M2C_FIELD(arg0, s32 *, 4) = idx + 1;
+        return *arr + (idx << 4);
+    }
+    last = 0;
+    if (p != NULL) {
+        last = M2C_FIELD(p, s32 *, -4);
+    }
+    return p + ((last - 1) << 4);
+}
+
 s32 fn_8016F968(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0) != 0;
 }
@@ -95,10 +120,10 @@ void *fn_8016FD88(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, char **, 0xBC) = lbl_804122E8;
     M2C_FIELD(arg0, u32 *, 0) = 0xABADCAFE;
     M2C_FIELD(arg0, u32 *, 8) = 0xE49EC7F7;
-    M2C_FIELD(arg0, s32 *, 0xB4) = 0;
     M2C_FIELD(arg0, s32 *, 0x18) = 0;
     M2C_FIELD(arg0, s32 *, 0x10) = 0;
     M2C_FIELD(arg0, s32 *, 0xC) = 0;
+    M2C_FIELD(arg0, s32 *, 0xB4) = 0;
     fn_80174B98((char *)arg0 + 0x18, 0x1F, 0x11);
     M2C_FIELD(arg0, s32 *, 0xC0) = arg1;
     M2C_FIELD(arg0, char **, 0xBC) = lbl_804121A0;
