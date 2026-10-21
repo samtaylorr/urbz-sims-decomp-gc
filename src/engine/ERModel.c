@@ -11,6 +11,19 @@ static inline u8 *ReadData(void *dst, u8 *src, s32 size) {
     return src + size;
 }
 
+extern s32 fn_802D6A90(void *, void *, void *, void *, s32, void *, void *);
+extern void fn_8032CCE4(void);
+extern void fn_8032CD0C(void *);
+extern void fn_8032CD38(void *);
+void *fn_8032CE88(u32 size, void *p);
+extern u8 lbl_80493948[];
+extern u8 lbl_803F331C[];
+extern u8 lbl_80493858[];
+extern f32 lbl_803F33B4;
+extern f32 lbl_803F33B8;
+extern f32 lbl_80496244;
+extern s32 lbl_80496248;
+
 void fn_802D2FD0(void);
 void fn_80329264(void) {
     fn_802D2FD0();
@@ -125,13 +138,14 @@ void *fn_8032A410(u8 *self) {
     if (*(void **)(self + 0x1A0) == 0) {
         p = fn_80338000(lbl_8045B82C, 0x40, 0x10);
         s = *(f32 *)(self + 0x6C);
-        *(void **)(self + 0x1A0) = p;
         if (s != lbl_803F3360[0]) {
-            v[0] = s;
-            v[1] = s;
+            *(void **)(self + 0x1A0) = p;
             v[2] = s;
+            v[1] = s;
+            v[0] = s;
             fn_802C8814(p, v);
         } else {
+            *(void **)(self + 0x1A0) = p;
             fn_802C876C(p);
         }
     }
