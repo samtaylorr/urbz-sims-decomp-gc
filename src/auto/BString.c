@@ -65,11 +65,6 @@ extern f32 lbl_803D4980[];
 extern f32 lbl_803D4984[];
 extern const f32 lbl_803D4988[];
 
-static inline void BString_SetRep(void **dst, s32 *rep) {
-    *dst = rep;
-    rep[3]++;
-}
-
 static inline s32 BString_CharEq(const u8 *a, const u8 *b) {
     return *a == *b;
 }
