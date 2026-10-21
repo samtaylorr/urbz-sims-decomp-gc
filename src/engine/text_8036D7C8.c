@@ -95,6 +95,7 @@ void fn_8036EA50(void) {
 }
 
 void fn_8036EA78(void *self) {
+    s32 fn_8036D868(void *);
     fn_8036D868(fn_8036EC70(0x27C, self));
 }
 
