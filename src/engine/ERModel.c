@@ -254,6 +254,11 @@ void fn_8032CCE4(void) {
     fn_80329304();
 }
 
+void fn_8032CD0C(void *self) {
+    M2C_UNK fn_80329304();
+    fn_80329304(fn_8032CE88(0x1A4, self));
+}
+
 extern f32 lbl_803F33B4;
 extern f32 lbl_803F33B8;
 extern f32 lbl_80496244;
@@ -329,6 +334,11 @@ void fn_8032CE90(s32 arg0) {
     void fn_80338184(void *, s32);
     extern u8 lbl_8045B82C[];
     fn_80338184(lbl_8045B82C, arg0);
+}
+
+void fn_8032CEBC(void *arg0, void *arg1, void *arg2) {
+    void fn_802C4F6C(void *, void *, void *);
+    fn_802C4F6C(arg2, (u8 *)arg0 + 0x3C, arg1);
 }
 
 s32 fn_8032CEF0(void *arg0, s32 arg1) {
