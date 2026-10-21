@@ -91,6 +91,10 @@ void fn_80331C8C(void *self) {
     fn_80331534(fn_80331E08(0x24, self));
 }
 
+void fn_80331CB8(void *self) {
+    fn_80331578(self, 2);
+}
+
 void fn_80331CDC(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
