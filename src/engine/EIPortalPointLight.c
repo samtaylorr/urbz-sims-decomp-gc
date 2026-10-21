@@ -157,7 +157,7 @@ s32 fn_802F3340(void) {
 }
 
 void fn_802F3348(void) {
-    M2C_UNK fn_802F3158(M2C_UNK, M2C_UNK);
+    void fn_802F3158(s32, s32);
     fn_802F3158(1, 0xFFFF);
 }
 
