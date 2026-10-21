@@ -1,6 +1,11 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+typedef struct TreeKey {
+    s32 a;
+    u16 b;
+} TreeKey;
+
 void fn_800F77AC(void);
 extern s32 lbl_80495D68;
 extern void fn_800F1A60(s32, s32);
