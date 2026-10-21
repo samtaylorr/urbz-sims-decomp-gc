@@ -155,6 +155,15 @@ void fn_8032A5B4(u8 *self, s32 arg1) {
     }
 }
 
+void fn_8032A68C(u8 *self, s32 arg1) {
+    extern void fn_80300200(u8 *, s32);
+    s32 i;
+
+    for (i = 0; i < ListCount(self + 0x20); i++) {
+        fn_80300200(*(u8 **)(self + 0x20) + i * 0x18, arg1);
+    }
+}
+
 s32 fn_8032A6F8(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x140);
 }
