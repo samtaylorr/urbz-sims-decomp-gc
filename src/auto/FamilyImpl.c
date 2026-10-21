@@ -362,12 +362,12 @@ void fn_8010C690(s32 arg0) {
     }
 }
 
-void fn_8010C6E8(s32 *arg0) {
-    s32 *p = arg0;
-    p[3] = 0;
-    p[0] = 0;
-    p[1] = 0;
-    p[2] = 0;
+FamilyQuad *fn_8010C6E8(FamilyQuad *q) {
+    q->a = 0;
+    q->b = 0;
+    q->c = 0;
+    q->d = 0;
+    return q;
 }
 
 void fn_8010C704(void *arg0, s32 arg1) {
