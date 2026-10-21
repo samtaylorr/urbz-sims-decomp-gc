@@ -3,8 +3,59 @@
 
 typedef struct { f32 x, y, z; } Vec3f;
 
+typedef struct { s32 a; s32 b; } IMSub;
+typedef struct { s32 a; s32 b; IMSub c; } IMSlot;
+
+static inline void IMSub_Init(IMSub *s) {
+    s->b = 0;
+}
+
+static inline void IMSlot_Init(IMSlot *s) {
+    s->a = 0;
+    s->b = 0;
+    IMSub_Init(&s->c);
+}
+
 extern void *fn_8022554C(void *);
 extern void fn_8022F404(void *, void *);
+void *fn_80237A00(void *arg0) {
+    extern void fn_8022315C(void *);
+    extern s32 lbl_80417710;
+    extern s32 lbl_80418088;
+    s32 *p;
+
+    fn_8022315C(arg0);
+    M2C_FIELD(arg0, s32 *, 0x74) = 0;
+    M2C_FIELD(arg0, s32 **, 0x58) = &lbl_80418088;
+    M2C_FIELD(arg0, s32 *, 0x78) = 0;
+    M2C_FIELD(arg0, s32 *, 0x80) = 0;
+    M2C_FIELD(arg0, s32 *, 0x84) = 0;
+    M2C_FIELD(arg0, s32 *, 0x88) = 0;
+    M2C_FIELD(arg0, s32 *, 0x90) = 0;
+    M2C_FIELD(arg0, s32 *, 0x94) = 0;
+    M2C_FIELD(arg0, s32 *, 0x98) = 0;
+    M2C_FIELD(arg0, s32 *, 0xA0) = 0;
+    M2C_FIELD(arg0, s32 *, 0xA4) = 0;
+    M2C_FIELD(arg0, s32 *, 0xA8) = 0;
+    M2C_FIELD(arg0, s32 *, 0xB0) = 0;
+    p = (s32 *) ((u8 *) arg0 + 0xDC);
+    p[4] = (s32) &lbl_80417710;
+    p[0] = 2;
+    p[9] = 0;
+    p[5] = 0;
+    p[6] = 0;
+    return arg0;
+}
+
+void fn_80237C24(void *arg0) {
+    extern void fn_8022EE0C(void *, void *);
+    extern f32 lbl_803EB610;
+    extern f32 lbl_803EB614;
+    fn_8022EE0C(fn_8022554C(arg0), arg0);
+    M2C_FIELD(arg0, f32 *, 0x50) = lbl_803EB610;
+    M2C_FIELD(arg0, f32 *, 0x54) = lbl_803EB614;
+}
+
 void fn_80237C70(void *arg0) {
     fn_8022F404(fn_8022554C(arg0), arg0);
 }
