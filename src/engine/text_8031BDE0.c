@@ -85,6 +85,18 @@ void fn_8031BEE8(void **arg0, s32 arg1) {
     }
 }
 
+s32 fn_8031C470(u8 *self, const char *name) {
+    extern s32 fn_802486DC(const char *, const char *);
+    u32 i;
+
+    for (i = 0; i < *(u32 *)(self + 0x24); i++) {
+        if (fn_802486DC(*(const char **)(*(u8 **)(self + 0x28) + i * 0xC + 4), name) == 0) {
+            return *(s32 *)(*(u8 **)(self + 0x28) + i * 0xC);
+        }
+    }
+    return 0;
+}
+
 void fn_8031C4F0(s32 arg0, s32 arg1) {
     if (arg1 == 0xFFFF && arg0 != 0) {
         lbl_8049621C = fn_802D6A90(lbl_80493880, fn_8031C560, fn_8031C5E0, fn_8031C600, 0, lbl_803F2CF8, lbl_80493858);
