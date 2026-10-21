@@ -19,6 +19,20 @@ static inline s32 BString2_Ne(const u16 *a, const u16 *b) {
     }
     return ne;
 }
+void *fn_802D0AB8(void *);
+extern void fn_802D1A00(void *, void *);
+void fn_800EF864(s32 self) {
+    extern void fn_802D1A00(void *, void *);
+    void *p;
+
+    if (M2C_FIELD(self, s32 *, 8) != 0) {
+        p = M2C_FIELD(self, void **, 0);
+        fn_802D1A00(((void *(*)(void))fn_802D0AB8)(), p);
+        M2C_FIELD(self, s32 *, 8) = 0;
+        M2C_FIELD(self, void **, 0) = 0;
+    }
+}
+
 void fn_800EF8B4(void) {
 
 }
