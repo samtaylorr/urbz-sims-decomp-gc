@@ -113,6 +113,10 @@ s32 fn_800288DC(void) {
     return lbl_80493F9C;
 }
 
+s32 fn_800288E4(void *arg0) {
+    return *(s32 *)((u8 *)arg0 + 0x114) != 0;
+}
+
 void fn_800288FC(void) {
 
 }
@@ -179,13 +183,17 @@ void fn_8002AECC(void *arg0) {
 }
 
 void fn_8002B464(u16 arg0, s32 arg1, u16 *arg2, u16 *arg3) {
+    void *fn_80190AA4(s32, u16);
+    extern s32 lbl_80496654;
     void *temp_r3;
 
     *arg3 = arg0;
     *arg2 = arg0;
-    temp_r3 = fn_8002B464_Lookup(arg0);
-    if (temp_r3 != NULL) {
-        *arg3 = M2C_FIELD(temp_r3, u16 *, 2);
+    if (lbl_80496654 != 0 && arg0 <= 0xFFFA) {
+        temp_r3 = fn_80190AA4(lbl_80496654, arg0);
+        if (temp_r3 != NULL) {
+            *arg3 = M2C_FIELD(temp_r3, u16 *, 2);
+        }
     }
 }
 
