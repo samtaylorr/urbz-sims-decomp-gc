@@ -3501,10 +3501,11 @@ s32 fn_800EBC7C(void) {
 
 u32 fn_800EC848(void **arg0, const u8 *arg1, u32 arg2, u32 arg3) {
     u32 i;
+    u32 pos = arg2;
 
-    for (; arg2 < fn_800EF6F8(arg0); arg2++) {
+    for (; pos < fn_800EF6F8(arg0); pos++) {
         for (i = 0; i < arg3; i++) {
-            if (fn_800EAFCC(arg0)[arg2] == arg1[i]) {
+            if (fn_800EAFCC(arg0)[pos] == arg1[i]) {
                 break;
             }
         }
@@ -3512,7 +3513,7 @@ u32 fn_800EC848(void **arg0, const u8 *arg1, u32 arg2, u32 arg3) {
             break;
         }
     }
-    return arg2 < fn_800EF6F8(arg0) ? arg2 : -1;
+    return pos < fn_800EF6F8(arg0) ? pos : -1;
 }
 
 M2C_UNK fn_800EC9AC(s32 arg0) {
