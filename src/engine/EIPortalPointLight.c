@@ -10,6 +10,14 @@ static inline void EIPortalPointLightVec3_Set(EIPortalPointLightVec3 *v, f32 x, 
 }
 
 extern s32 lbl_804961D8;
+extern u8 lbl_804937B8[];
+extern u8 lbl_803F0FAC[];
+extern u8 lbl_80493740[];
+extern s32 fn_802D6A90(void *, void *, void *, void *, s32, void *, void *);
+void fn_802F31C8(void);
+void fn_802F31F0(void);
+void fn_802F3210(void *);
+void *fn_802F273C();
 void *fn_802F1B74(void *);
 void fn_802F2278(void *, EIPortalPointLightVec3 *);
 void fn_802F2D08(void *);
