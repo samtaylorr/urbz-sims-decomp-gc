@@ -269,7 +269,7 @@ void fn_8032CCE4(void) {
 }
 
 void fn_8032CD0C(void *self) {
-    M2C_UNK fn_80329304();
+    void fn_80329304(void *);
     fn_80329304(fn_8032CE88(0x1A4, self));
 }
 
