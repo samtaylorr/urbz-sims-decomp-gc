@@ -181,6 +181,21 @@ s32 fn_802D3DB0(s32 *arg0, s32 arg1) {
     return 1;
 }
 
+s32 *fn_802D406C(s32 *arg0, s32 *arg1, s32 arg2, s32 arg3) {
+    M2C_UNK fn_802D39F0(s32 *, s32);
+    s32 *fn_802D40E4(s32 *, s32 *, s32);
+    s32 sp8;
+
+    if (arg3 == -1) {
+        fn_802D3C60(arg0, (char *)(*arg1 + arg2));
+    } else {
+        fn_802D3C60(&sp8, (char *)(*arg1 + arg2));
+        fn_802D40E4(arg0, &sp8, arg3);
+        fn_802D39F0(&sp8, sp8);
+    }
+    return arg0;
+}
+
 s32 *fn_802D4158(s32 *arg0, s32 *arg1, s32 arg2) {
     fn_802D3C60(arg0, (char *)(*arg1 + (fn_802D3D24(arg1) - arg2)));
     return arg0;
@@ -336,7 +351,7 @@ s32 *fn_802D49AC(s32 *arg0) {
 s32 *fn_802D49E4(s32 *arg0, s32 arg1) {
     M2C_UNK fn_802D39F0(s32 *, s32);
     s32 *fn_802D3CE4(s32 *, char *);
-    M2C_UNK fn_802D40E4(s32 *, s32 *, s32);
+    s32 *fn_802D40E4(s32 *, s32 *, s32);
     s32 sp8;
     s32 len;
     s32 i;
