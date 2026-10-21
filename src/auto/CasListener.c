@@ -481,16 +481,14 @@ void fn_801C5F20(void *arg0, s32 arg1) {
     }
 }
 
-extern void fn_803ADC94(CasPair *, s32, void **);
+extern CasPair fn_803ADC94(s32, void **);
 void fn_801C5FB0(s32 arg0, void *arg1) {
     CasPair copy;
-    CasPair res;
     void *key;
     void *temp_r9;
 
     key = arg1;
-    fn_803ADC94(&res, arg0, &key);
-    copy = res;
+    copy = fn_803ADC94(arg0, &key);
     temp_r9 = M2C_FIELD(arg1, void **, 4);
     M2C_FIELD(temp_r9, M2C_UNK (**)(void *, s32), 0x1C)((u8 *)arg1 + M2C_FIELD(temp_r9, s16 *, 0x18), arg0);
 }
