@@ -38,6 +38,16 @@ void fn_80373F24(void) {
     }
 }
 
+void fn_80373F64(void) {
+    s32 fn_8025465C(void);
+    extern s32 lbl_80496320;
+    extern s32 lbl_80495264;
+
+    if (++lbl_80495264 == 1) {
+        lbl_80496320 = fn_8025465C() != 0;
+    }
+}
+
 void fn_80374000(void) {
     M2C_UNK fn_80373FAC(M2C_UNK, M2C_UNK);
     fn_80373FAC(1, 0xFFFF);
