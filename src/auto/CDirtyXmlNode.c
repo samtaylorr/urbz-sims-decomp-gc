@@ -33,6 +33,15 @@ s32 fn_800BF7F4(void) {
     return 0;
 }
 
+extern Struct16_800BF7FC lbl_80433F98;
+extern Struct18_800BF784 lbl_803D02C8;
+extern char lbl_803D0298[];
+void *fn_800BF3FC(s32);
+s32 fn_80248808(const char *);
+char *fn_80248784(char *, const char *);
+void fn_800BFB80(const char *fmt, ...) {
+}
+
 void fn_800BFBCC(void) {
 
 }
