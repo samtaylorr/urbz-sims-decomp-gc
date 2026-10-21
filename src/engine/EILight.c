@@ -3,6 +3,15 @@
 
 typedef struct { f32 x, y, z; } EILightVec3;
 
+extern s32 lbl_804961CC;
+extern u8 lbl_80493740[];
+extern u8 lbl_803F0D58[];
+extern u8 lbl_80491E1C[];
+extern s32 fn_802D6A90(void *, void *, void *, void *, s32, void *, void *);
+void fn_802F0184(void);
+void fn_802F01AC(void);
+void fn_802F01CC(void *);
+
 extern s32 lbl_80494E58;
 
 static inline void EILightVec3_Set(EILightVec3 *v, f32 x, f32 y, f32 z) {
