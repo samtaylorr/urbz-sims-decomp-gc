@@ -21,6 +21,19 @@ extern void fn_802D94C0(void *, s32);
 extern void fn_802D0D30(void *, void *);
 extern void fn_80246D44(void (*)(void));
 void fn_802D0A8C(void);
+
+typedef struct EMat4Node {
+    u8 pad0[0x10];
+    struct EMat4Node *next;
+    u8 pad14[0x4];
+    s32 key;
+    void *value;
+} EMat4Node;
+
+static inline s32 EMat4Node_Valid(EMat4Node *n) {
+    return n != NULL;
+}
+
 s32 *fn_802C66FC(s32 *arg0) {
     arg0[0] = 0;
     arg0[1] = 0;
