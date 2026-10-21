@@ -326,6 +326,14 @@ s32 fn_800AA638(void) {
     return 1;
 }
 
+s32 fn_800AA718(void *arg0) {
+    s32 ret = 0;
+    if (M2C_FIELD(arg0, s32 *, 0x10) & 1) {
+        ret = 1;
+    }
+    return ret;
+}
+
 s32 fn_800AA730(void *arg0) {
     return ((u32) M2C_FIELD(arg0, u32 *, 0x10) >> 1U) & 1;
 }
