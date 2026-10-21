@@ -3508,7 +3508,7 @@ u32 fn_800EC848(void **arg0, const u8 *arg1, u32 arg2, u32 arg3) {
                 break;
             }
         }
-        if (i != arg3) {
+        if (i == arg3) {
             break;
         }
     }
@@ -3517,10 +3517,9 @@ u32 fn_800EC848(void **arg0, const u8 *arg1, u32 arg2, u32 arg3) {
 
 M2C_UNK fn_800EC9AC(s32 arg0) {
     extern s32 lbl_80434AE8[];
-    s32 **p = (s32 **)arg0;
-    s32 *rep = lbl_80434AE8;
-    *p = rep;
-    rep[3]++;
+    *(s32 **)arg0 = lbl_80434AE8;
+    lbl_80434AE8[3]++;
+    return arg0;
 }
 
 void *fn_800EB5D0(void *mem, s32 arg1, s32 arg2);
