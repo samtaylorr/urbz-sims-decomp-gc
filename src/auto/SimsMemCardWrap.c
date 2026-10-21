@@ -192,7 +192,7 @@ s32 fn_800A9C74(void) {
     return 0;
 }
 
-void fn_800A9C7C(void) {
+void fn_800A9C7C(void *arg0) {
 
 }
 
