@@ -90,7 +90,7 @@ u16 fn_803723C4(void) {
 
 extern void fn_802D6A90(void *, void *, void *, void *, s32, void *, void *);
 extern void fn_80372284(void);
-extern void fn_80372324(void);
+extern void fn_80372324();
 extern u8 lbl_803F5600[];
 extern u8 lbl_80493858[];
 void fn_803723D0(s32 arg0) {
