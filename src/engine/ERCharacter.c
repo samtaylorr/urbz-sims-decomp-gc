@@ -54,7 +54,69 @@ s32 fn_80317D18(s32 arg0) {
     return var_r30;
 }
 
+void fn_803188C8(const char *arg0) {
+    void fn_80245BB4(char *, const char *, ...);
+    s32 fn_802D7F48(const char *, const char *);
+    extern char lbl_803F26F0[];
+    extern char lbl_803F26F4[];
+    extern char lbl_803F26FC[];
+    extern s32 lbl_80494F18;
+    char buf[128];
+
+    fn_80245BB4(buf, lbl_803F26F4, lbl_803F26F0, arg0);
+    lbl_80494F18 = fn_802D7F48(buf, lbl_803F26FC);
+}
+
+void fn_80318918(void) {
+    void fn_80245BB4(char *, const char *, ...);
+    void fn_803188C8(const char *);
+    extern char lbl_803F2700[];
+    extern s32 lbl_80494F1C;
+    char buf[128];
+
+    fn_80245BB4(buf, lbl_803F2700, lbl_80494F1C);
+    fn_803188C8(buf);
+    lbl_80494F1C++;
+}
+
+void fn_80318A24(void) {
+    void fn_80245BB4(char *, const char *, ...);
+    void fn_803188C8(const char *);
+    void fn_803189F0(void);
+    extern char lbl_803F2730[];
+    extern s32 lbl_80494F28;
+    char buf[128];
+
+    fn_803189F0();
+    fn_80245BB4(buf, lbl_803F2730, lbl_80494F28);
+    fn_803188C8(buf);
+    lbl_80494F28++;
+}
+
 void fn_80318A70(const char *fmt, ...) {
+}
+
+void fn_80318ABC(s32 arg0) {
+    void fn_80318918(void);
+    void fn_803189F0(void);
+    void fn_80318A70(const char *fmt, ...);
+    extern char lbl_803F2740[];
+    extern char lbl_803F277C[];
+    extern char lbl_803F279C[];
+    extern char lbl_803F27C8[];
+    extern void *lbl_80496220;
+    void *obj;
+    char *vt;
+
+    fn_80318918();
+    fn_80318A70(lbl_803F2740);
+    fn_80318A70(lbl_803F277C, arg0, lbl_803F279C, 0xB1);
+    obj = lbl_80496220;
+    vt = *(char **)obj;
+    ((void (*)(void *, s32))*(void **)(vt + 0xD4))((char *)obj + *(s16 *)(vt + 0xD0), arg0);
+    fn_80318A70(lbl_803F27C8, arg0, lbl_803F279C, 0xB3);
+    fn_80318A70(lbl_803F2740);
+    fn_803189F0();
 }
 
 void fn_8031A4F8(void) {
@@ -99,9 +161,10 @@ s32 fn_8031B768(s32 arg0, s32 *out) {
 
 s32 fn_8031BAD4(u8 *self, s32 arg1) {
     s32 fn_802D3EE8(void *, s32);
+    u8 *list = self + 0x20;
     s32 i;
 
-    for (i = 0; i < *(s32 *)(self + 0x20 + 4); i++) {
+    for (i = 0; i < *(s32 *)(list + 4); i++) {
         if (fn_802D3EE8(*(u8 **)(self + 0x20) + i * 0xB8 + 0xB4, arg1) == 0) {
             return i;
         }
