@@ -107,6 +107,12 @@ s32 fn_80043480(void) {
     return lbl_804940A8;
 }
 
+f32 fn_80043938(void) {
+    extern f32 lbl_803C6164[];
+    extern f32 lbl_8041F658[];
+    return lbl_8041F658[0] * lbl_803C6164[0];
+}
+
 void fn_80043BB4(void) {
 
 }
