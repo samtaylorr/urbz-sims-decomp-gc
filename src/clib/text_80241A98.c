@@ -39,8 +39,33 @@ s32 fn_80245C8C(void) {
     return 0;
 }
 
+s32 fn_80246D44(s32 func) {
+    extern s32 lbl_80494988;
+    void *fn_802D2150(u32 size);
+    AtExitBlock *blk = *(AtExitBlock **)(lbl_80494988 + 0x148);
+    if (blk == NULL) {
+        blk = (AtExitBlock *)(lbl_80494988 + 0x14C);
+        *(AtExitBlock **)(lbl_80494988 + 0x148) = blk;
+    }
+    if (blk->count > 31) {
+        blk = fn_802D2150(sizeof(AtExitBlock));
+        if (blk == NULL) {
+            return -1;
+        }
+        blk->count = 0;
+        blk->next = *(AtExitBlock **)(lbl_80494988 + 0x148);
+        *(AtExitBlock **)(lbl_80494988 + 0x148) = blk;
+    }
+    blk->funcs[blk->count++] = func;
+    return 0;
+}
+
 void fn_80246DDC(void *self) {
     ((void (*)(void *, s32))fn_80247D48)(self, 0);
+}
+
+void fn_80246E00(s32 arg0) {
+    fn_8024BE60(arg0, 0, 0xA);
 }
 
 void fn_80247C28(s32 arg0) {
@@ -253,6 +278,20 @@ void fn_8024D7AC(void) {
     M2C_UNK fn_8024D784(s32);
     extern s32 lbl_80494988;
     fn_8024D784(lbl_80494988);
+}
+
+s32 fn_8024DDE0(void *arg0, s32 arg1, s32 arg2) {
+    s32 fn_8024DF14(s32 *, s32, s32, s32);
+    s32 ret;
+
+    ret = fn_8024DF14(M2C_FIELD(arg0, s32 **, 0x5C), M2C_FIELD(arg0, s16 *, 0xE), arg1, arg2);
+    if (ret == -1) {
+        M2C_FIELD(arg0, u16 *, 0xC) &= ~0x1000;
+    } else {
+        M2C_FIELD(arg0, u16 *, 0xC) |= 0x1000;
+        M2C_FIELD(arg0, s32 *, 0x58) = ret;
+    }
+    return ret;
 }
 
 void fn_8024DE44(void *arg0) {
