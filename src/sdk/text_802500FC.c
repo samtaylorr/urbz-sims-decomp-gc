@@ -334,6 +334,16 @@ s32 fn_80260574(void) {
     return 1;
 }
 
+s32 fn_80260948(char *dirName) {
+    s32 entry;
+    entry = fn_80260144(dirName);
+    if ((entry < 0) || !((lbl_80495EB4[entry].isDirAndStringOff & 0xFF000000) ? 1 : 0)) {
+        return 0;
+    }
+    lbl_80495EC0 = entry;
+    return 1;
+}
+
 s32 fn_802609A8(DVDFileInfo *fileInfo, void *addr, s32 length, s32 offset, void (*callback)(s32, DVDFileInfo *), s32 prio) {
     if (!((0 <= offset) && (offset <= fileInfo->length))) {
         fn_802530CC(lbl_80494A20, 0x2EE, lbl_803F93A8);
@@ -358,12 +368,12 @@ void fn_80260BB0(void) {
     fn_80259838(&lbl_80495EC8);
 }
 
-s32 fn_80260BD4(void *fileInfo, s32 offset, void *callback, s32 prio) {
-    if (!((0 <= offset) && ((u32)offset <= *(u32 *)((u8 *)fileInfo + 0x34)))) {
+s32 fn_80260BD4(DVDFileInfo *fileInfo, s32 offset, void (*callback)(s32, DVDFileInfo *), s32 prio) {
+    if (!((0 <= offset) && (offset <= fileInfo->length))) {
         fn_802530CC(lbl_80494A20, 0x38B, lbl_803F940C);
     }
-    *(void **)((u8 *)fileInfo + 0x38) = callback;
-    fn_802630BC(fileInfo, *(s32 *)((u8 *)fileInfo + 0x30) + offset, fn_80260C6C, prio);
+    fileInfo->callback = callback;
+    fn_802630BC(&fileInfo->cb, fileInfo->startAddr + offset, fn_80260C6C, prio);
     return 1;
 }
 
