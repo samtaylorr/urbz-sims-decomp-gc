@@ -80,9 +80,9 @@ u16 fn_8037287C(void) {
     return lbl_80493EAA[0];
 }
 
-extern void fn_802D6A90(void *, void *, void *, void *, s32, void *, void *);
+extern s32 fn_802D6A90(void *, void *, void *, void *, s32, void *, void *);
 extern void fn_8037273C(void);
-extern void fn_803727DC(void);
+extern void fn_803727DC(void *);
 extern u8 lbl_803F5658[];
 extern u8 lbl_80493858[];
 void fn_80372888(s32 arg0) {
