@@ -349,7 +349,8 @@ void fn_80370ED8(void) {
 }
 
 void fn_80370F00(void *self) {
-    M2C_UNK fn_803700B0();
+    void *fn_8037107C(u32 size, void *p);
+    M2C_UNK fn_803700B0(void *);
     fn_803700B0(fn_8037107C(0x9C, self));
 }
 
