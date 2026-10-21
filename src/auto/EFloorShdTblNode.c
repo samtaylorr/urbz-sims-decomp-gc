@@ -4,6 +4,21 @@
 extern s32 lbl_80496694;
 extern void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
+s32 fn_80052C50(void) {
+    void fn_802D85A4(void *);
+    void fn_802D8640(void *, s32);
+    void fn_802D85FC(void *, s32);
+    extern s32 lbl_8049664C;
+    u8 buf[0x40];
+    s32 ret;
+
+    fn_802D85A4(buf);
+    fn_802D8640(buf, 0x10);
+    ret = lbl_8049664C;
+    fn_802D85FC(buf, 2);
+    return ret;
+}
+
 void fn_80052C9C(void) {
     extern s32 lbl_8049664C;
     lbl_8049664C = 0;
