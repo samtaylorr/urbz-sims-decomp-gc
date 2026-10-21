@@ -29,6 +29,32 @@ void fn_80052CA8(void) {
     lbl_8049664C = 1;
 }
 
+void fn_80052CB4(void) {
+    void fn_8000AA2C();
+    void fn_8000B13C(s32, void *, s32);
+    void fn_80052CA8(void);
+    extern u8 lbl_803C7648[];
+    extern u8 lbl_803C7650[];
+    extern u8 lbl_8041F94C[];
+    fn_8000B13C(*(s32 *)(lbl_8041F94C + 0xD0), lbl_803C7648, 1);
+    fn_8000AA2C(*(s32 *)(lbl_8041F94C + 0xD0), lbl_803C7650, 0, 0, 0);
+    fn_80052CA8();
+}
+
+void fn_80052D18(void) {
+    void fn_80052C9C(void);
+    extern s32 lbl_80494F44;
+    extern u8 *lbl_804961A4;
+    u8 *obj;
+    u8 *vt;
+
+    lbl_80494F44 = 0;
+    fn_80052C9C();
+    obj = lbl_804961A4;
+    vt = *(u8 **)obj;
+    (*(void (**)(void *, void (*)(void)))(vt + 0x44))(obj + *(s16 *)(vt + 0x40), fn_80052CB4);
+}
+
 void fn_80052EFC(void) {
 
 }
