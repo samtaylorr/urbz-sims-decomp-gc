@@ -47,7 +47,7 @@ void fn_80371C24(void *arg0) {
     fn_802CB8D4(arg0 + 0x20);
 }
 
-void fn_80371B64(void);
+void *fn_80371B64();
 void fn_80372304(void) {
     fn_80371B64();
 }
