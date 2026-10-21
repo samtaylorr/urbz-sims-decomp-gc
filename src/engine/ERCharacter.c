@@ -97,6 +97,18 @@ s32 fn_8031B768(s32 arg0, s32 *out) {
     return arg0;
 }
 
+s32 fn_8031BAD4(u8 *self, s32 arg1) {
+    s32 fn_802D3EE8(void *, s32);
+    s32 i;
+
+    for (i = 0; i < *(s32 *)(self + 0x20 + 4); i++) {
+        if (fn_802D3EE8(*(u8 **)(self + 0x20) + i * 0xB8 + 0xB4, arg1) == 0) {
+            return i;
+        }
+    }
+    return -1;
+}
+
 void fn_8031BB58(void) {
 
 }
@@ -192,7 +204,7 @@ s32 fn_8031BDA4(void *arg0, s32 arg1) {
 }
 
 void fn_8031BDB4(void) {
-    M2C_UNK fn_8031BB5C(M2C_UNK, M2C_UNK);
+    void fn_8031BB5C(s32, s32);
     fn_8031BB5C(1, 0xFFFF);
 }
 
