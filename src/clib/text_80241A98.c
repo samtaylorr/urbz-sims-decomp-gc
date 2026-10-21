@@ -245,20 +245,20 @@ void fn_8024CE64(void) {
     fn_8024D324();
 }
 
-void *fn_8024D264(const void *src_void, s32 c, u32 length) {
+void *fn_8024D264(const void *src_void, s32 c, int length) {
     const u8 *src = src_void;
     u8 d = c;
     u32 *asrc;
     u32 mask;
     s32 i;
 
-    if (!(length < 4) && !((u32)src & 3)) {
+    if (!((unsigned)length < 4) && !((u32)src & 3)) {
         asrc = (u32 *)src;
         mask = 0;
         for (i = 0; i < 4; i++) {
             mask = (mask << 8) + d;
         }
-        while (!(length < 4)) {
+        while (!((unsigned)length < 4)) {
             if (((*asrc ^ mask) - 0x01010101) & ~(*asrc ^ mask) & 0x80808080) {
                 src = (u8 *)asrc;
                 for (i = 0; i < 4; i++) {
