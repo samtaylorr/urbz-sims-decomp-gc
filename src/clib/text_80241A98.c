@@ -227,6 +227,10 @@ void fn_8024C074(s32 arg0, s32 arg1) {
     fn_8024BEB4(lbl_80494988, arg0, arg1);
 }
 
+void fn_8024C0A4(void) {
+    fn_8024C068(lbl_80494988);
+}
+
 void fn_8024C9DC(u8 *dst, u8 *src, s32 n) {
     while (n--) {
         *dst++ = *src++;
