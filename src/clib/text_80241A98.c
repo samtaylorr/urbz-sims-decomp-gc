@@ -203,6 +203,43 @@ void fn_8024CE64(void) {
     fn_8024D324();
 }
 
+void *fn_8024D264(const void *src_void, s32 c, u32 length) {
+    const u8 *src = src_void;
+    u8 d = c;
+    u32 *asrc;
+    u32 mask;
+    s32 i;
+
+    if (!(length < 4) && !((u32)src & 3)) {
+        asrc = (u32 *)src;
+        mask = 0;
+        for (i = 0; i < 4; i++) {
+            mask = (mask << 8) + d;
+        }
+        while (!(length < 4)) {
+            if (((*asrc ^ mask) - 0x01010101) & ~(*asrc ^ mask) & 0x80808080) {
+                src = (u8 *)asrc;
+                for (i = 0; i < 4; i++) {
+                    if (*src == d) {
+                        return (void *)src;
+                    }
+                    src++;
+                }
+            }
+            length -= 4;
+            asrc++;
+        }
+        src = (u8 *)asrc;
+    }
+    while (length--) {
+        if (*src == d) {
+            return (void *)src;
+        }
+        src++;
+    }
+    return NULL;
+}
+
 void fn_8024D754(s32 arg0, s32 arg1) {
     M2C_UNK fn_8024D668(s32, s32, s32);
     fn_8024D668(lbl_80494988, arg0, arg1);
@@ -226,6 +263,17 @@ void fn_8024DE6C(s32 *arg0, s32 arg1) {
     if ((fn_80375D28(arg1) == -1) && ((s32) lbl_804966F8 != 0)) {
         *arg0 = lbl_804966F8;
     }
+}
+
+s32 fn_8024DEBC(s32 *arg0, s32 arg1, s32 arg2) {
+    s32 fn_80375D48(s32, ...);
+    extern s32 lbl_804966F8;
+    s32 ret;
+    lbl_804966F8 = 0;
+    if ((ret = fn_80375D48(arg1, arg2)) == -1 && lbl_804966F8 != 0) {
+        *arg0 = lbl_804966F8;
+    }
+    return ret;
 }
 
 s32 fn_8024DF14(s32 *arg0, s32 arg1, s32 arg2, s32 arg3) {
