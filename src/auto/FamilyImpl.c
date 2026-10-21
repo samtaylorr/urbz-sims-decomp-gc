@@ -291,6 +291,33 @@ s32 fn_8010C688(void) {
     return 0;
 }
 
+void fn_8010C6E8(s32 *arg0) {
+    s32 *p = arg0;
+    p[3] = 0;
+    p[0] = 0;
+    p[1] = 0;
+    p[2] = 0;
+}
+
+void fn_8010C704(void *arg0, s32 arg1) {
+    extern s32 lbl_80495AFC;
+    void fn_802D20E8(void *);
+    void **obj;
+
+    if (M2C_FIELD(arg0, s32 *, 8) != 0) {
+        obj = M2C_FIELD(arg0, void ***, 4);
+        if (obj != NULL) {
+            char *vt = (char *)*obj;
+            (*(void (**)(void *, s32))(vt + 0xC))((char *)obj + *(s16 *)(vt + 8), 3);
+        }
+        lbl_80495AFC = 0;
+        M2C_FIELD(arg0, void ***, 4) = NULL;
+    }
+    if (arg1 & 1) {
+        fn_802D20E8(arg0);
+    }
+}
+
 s32 fn_8010C9E8(void) {
     extern void *lbl_80495ADC;
     if ((void *) lbl_80495ADC != NULL) {
