@@ -65,9 +65,10 @@ void fn_803188C8(const char *arg0) {
     extern const char lbl_803F26F4[];
     extern const char lbl_803F26FC[];
     extern s32 lbl_80494F18;
+    const char *prefix = lbl_803F26F0;
     char buf[128];
 
-    fn_80245BB4(buf, lbl_803F26F4, lbl_803F26F0, arg0);
+    fn_80245BB4(buf, lbl_803F26F4, prefix, arg0);
     lbl_80494F18 = fn_802D7F48(buf, lbl_803F26FC);
 }
 
