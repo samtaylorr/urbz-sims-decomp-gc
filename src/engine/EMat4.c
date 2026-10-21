@@ -271,6 +271,19 @@ s32 fn_802CB550(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x44);
 }
 
+void *fn_802CB558(void *arg0, void *arg1, s32 arg2) {
+    M2C_UNK fn_8039ABB0(void *, void *);
+    u8 *src = M2C_FIELD(arg1, u8 **, 0x48) + arg2 * 0x50;
+    f32 *d = (f32 *)((u8 *)arg0 + 4);
+    f32 *s = (f32 *)(src + 4);
+    M2C_FIELD(arg0, s32 *, 0) = M2C_FIELD(src, s32 *, 0);
+    d[0] = s[0];
+    d[1] = s[1];
+    d[2] = s[2];
+    fn_8039ABB0((u8 *)arg0 + 0x10, src + 0x10);
+    return arg0;
+}
+
 void fn_802CB634(void *arg0, s32 arg1) {
     void *fn_802D1FC8(M2C_UNK);
     void *temp_r3;
