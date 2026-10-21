@@ -266,10 +266,10 @@ s32 fn_802F1988(void *arg0) {
     s32 (*temp_r0)(s32);
 
     temp_r0 = M2C_FIELD(arg0, s32 (**)(s32), 0x38);
-    if (temp_r0 == NULL) {
-        return 0;
+    if (temp_r0 != NULL) {
+        return temp_r0(M2C_FIELD(arg0, s32 *, 0x34));
     }
-    return temp_r0(M2C_FIELD(arg0, s32 *, 0x34));
+    return 0;
 }
 
 void fn_802F19C4(void *arg0, s32 arg1) {
