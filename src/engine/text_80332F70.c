@@ -1,6 +1,11 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+void fn_80335F5C(void *);
+void fn_80335FD8(void *, s32);
+extern u8 lbl_8041BC40[];
+extern u8 lbl_8045B198[];
+
 void fn_8033740C(void);
 void fn_803330DC(void) {
     fn_8033740C();
@@ -25,5 +30,9 @@ void *fn_8033311C(void *arg0) {
 void fn_80333160(void) {
     M2C_UNK fn_80333068(M2C_UNK, M2C_UNK);
     fn_80333068(1, 0xFFFF);
+}
+
+void fn_8033318C(void) {
+    fn_80333068(0, 0xFFFF);
 }
 
