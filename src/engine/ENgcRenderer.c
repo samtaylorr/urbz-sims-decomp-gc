@@ -1,6 +1,18 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+typedef struct {
+    s32 unk0;
+    u8 pad4[0x20];
+    s32 unk24;
+    u8 pad28[0x18];
+    u32 unk40_0 : 1;
+    u32 unk40_1 : 1;
+    u32 unk40_2 : 1;
+    u32 unk40_3 : 1;
+    u32 unk40_4 : 28;
+} ENgcRendererSlot;
+
 void fn_8036EFA4(void);
 extern s32 lbl_804951C0;
 void fn_8035BD70(void) {
