@@ -157,6 +157,13 @@ void fn_801055FC(void *self, s32 flags) {
     }
 }
 
+s8 *fn_80105624(s8 *self, s8 *other) {
+    self[0] = other[0];
+    self[1] = other[1];
+    self[2] = other[2];
+    return self;
+}
+
 s32 fn_80105674(void *arg0, void *arg1) {
     s32 var_r11;
 
