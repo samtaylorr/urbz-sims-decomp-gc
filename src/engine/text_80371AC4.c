@@ -60,6 +60,12 @@ void fn_80371C24(void *arg0) {
     fn_802CB8D4(arg0 + 0x20);
 }
 
+void fn_80372214(s32 arg0, s32 arg1) {
+    if (arg1 == 0xFFFF && arg0 != 0) {
+        lbl_80496314 = fn_802D6A90(lbl_80493E6C, fn_80372284, fn_80372304, fn_80372324, 0, lbl_803F5600, lbl_80493858);
+    }
+}
+
 void *fn_80371B64();
 void fn_80372304(void) {
     fn_80371B64();
