@@ -116,26 +116,31 @@ void fn_80328F84(s32 arg0, s32 arg1) {
     }
 }
 
-void fn_80328FF4(void);
-void fn_80329080(void *);
-void fn_803290A0(void *);
-void fn_80328FF4(void) {
-    extern s32 fn_802D0AB8(void);
-    extern s32 fn_802D0B3C(void);
-    extern void *fn_802D197C(s32, s32, s32);
-    extern void *fn_802DBBCC(s32, s32, s32);
+extern void *fn_802D0B3C(void);
+extern void *fn_802D197C(void *, u32, s32);
+extern void *fn_802DBBCC(void *, u32, s32);
+extern void *fn_802D0AB8();
+
+static inline void *Alloc(u32 size) {
+    void *heap;
     void *p;
-    s32 heap;
 
     heap = fn_802D0AB8();
-    p = fn_802D197C(heap, 0x4D140, 4);
+    if (size == 0) {
+        return NULL;
+    }
+    p = fn_802D197C(heap, size, 4);
     if (p == NULL) {
-        p = fn_802DBBCC(heap, 0x4D140, 0);
+        p = fn_802DBBCC(heap, size, 0);
         if (p == NULL && heap == fn_802D0AB8()) {
-            p = fn_802DBBCC(fn_802D0B3C(), 0x4D140, 0);
+            return fn_802DBBCC(fn_802D0B3C(), size, 0);
         }
     }
-    fn_8032421C(p);
+    return p;
+}
+
+void fn_80328FF4(void) {
+    fn_8032421C(Alloc(0x4D140));
 }
 
 void fn_8032421C(void *);
