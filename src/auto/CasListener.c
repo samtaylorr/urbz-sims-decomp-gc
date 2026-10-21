@@ -355,6 +355,13 @@ void fn_801C5CBC(void *self, s32 flags) {
     }
 }
 
+void *fn_801C5DEC(void *arg0) {
+    extern u8 lbl_80415F28[];
+    M2C_FIELD(arg0, void **, 4) = lbl_80415F28;
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    return arg0;
+}
+
 void fn_801C5E08(void *self, s32 flags) {
     extern u8 lbl_80415F28[];
     extern void fn_802D20E8(void *);
