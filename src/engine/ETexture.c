@@ -255,6 +255,13 @@ void fn_8036FE3C(void *arg0, void *arg1) {
     } while (var_r31 <= 0x1F);
 }
 
+void *fn_8036FF6C(void *arg0) {
+    extern u8 lbl_8041DD60[];
+    M2C_FIELD(arg0, void **, 4) = lbl_8041DD60;
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    return arg0;
+}
+
 void fn_8036FF88(void) {
 
 }
