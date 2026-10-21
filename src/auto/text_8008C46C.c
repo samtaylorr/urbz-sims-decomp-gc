@@ -62,6 +62,28 @@ void fn_8008F878(void) {
 
 }
 
+s32 fn_8008F87C(void *arg0, s32 *arg1) {
+    void *fn_8024839C(void *dst, const void *src, u32 n);
+    s32 **vec = (s32 **)(arg0 + 0xD4);
+    s32 ret = 0;
+    if ((u32)((char *)vec[1] - (char *)vec[0]) >> 2) {
+        s32 *dst;
+        s32 *src;
+        s32 *end;
+        *arg1 = *vec[0];
+        dst = M2C_FIELD(arg0, s32 **, 0xD4);
+        end = vec[1];
+        src = dst + 1;
+        if (end != src) {
+            u32 n = (char *)end - (char *)src;
+            dst = (s32 *)((char *)fn_8024839C(dst, src, n) + n);
+        }
+        vec[1] = dst;
+        ret = 1;
+    }
+    return ret;
+}
+
 void fn_8008FEE0(void) {
 
 }
