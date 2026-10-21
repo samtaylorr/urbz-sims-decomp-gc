@@ -113,7 +113,7 @@ s32 fn_8031C720(void *arg0) {
 }
 
 void fn_8031C728(void) {
-    M2C_UNK fn_8031C4F0(M2C_UNK, M2C_UNK);
+    void fn_8031C4F0(s32, s32);
     fn_8031C4F0(1, 0xFFFF);
 }
 
