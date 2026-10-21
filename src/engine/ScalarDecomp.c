@@ -39,6 +39,10 @@ void fn_8036BC54(char *self) {
     fn_8036375C(self + 0x14);
 }
 
+void fn_8036BC78(char *self) {
+    fn_802CB634(self + 0x14);
+}
+
 s32 fn_8036BC9C(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x4C);
 }
