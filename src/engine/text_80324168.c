@@ -89,6 +89,12 @@ void fn_80329080(void) {
     fn_8032421C();
 }
 
+extern s32 lbl_80496240;
+void fn_803290A0(void *self) {
+    extern void fn_8032434C(void *, s32);
+    fn_8032434C(self, 2);
+}
+
 void fn_803290C4(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
