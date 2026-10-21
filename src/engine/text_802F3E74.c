@@ -133,6 +133,11 @@ void fn_802F5830(void) {
     fn_802F3F14();
 }
 
+extern s32 lbl_804961E0;
+void fn_802F5884(void *self) {
+    fn_802F3FC8(self, 2);
+}
+
 void fn_802F58A8(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
