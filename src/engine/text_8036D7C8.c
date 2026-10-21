@@ -81,6 +81,12 @@ s32 fn_8036E9D8(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0xA4);
 }
 
+void fn_8036E9E0(s32 arg0, s32 arg1) {
+    if (arg1 == 0xFFFF && arg0 != 0) {
+        lbl_80496304 = fn_802D6A90(lbl_80493D04, fn_8036EA50, fn_8036EA78, fn_8036EAA4, 0, lbl_803F52F0, lbl_80491E1C);
+    }
+}
+
 void fn_8036EA50(void) {
     M2C_UNK fn_8036D868();
     M2C_UNK fn_8036EBC4(M2C_UNK);
