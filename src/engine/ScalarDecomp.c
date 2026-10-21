@@ -23,6 +23,17 @@ s32 fn_8036ACBC(void *arg0) {
     return (M2C_FIELD(arg0, s32 *, 0x18) * M2C_FIELD(arg0, s16 *, 0x1C)) + 0x63;
 }
 
+void fn_8036BB88(s32 arg0, s32 arg1) {
+    if (arg1 == 0xFFFF) {
+        if (arg0 != 0) {
+            fn_802D23C0(lbl_8047551C, ((u32)lbl_80475558 + 0x3F) & ~0x3F, 0x60, 2);
+            fn_802CA9A8(lbl_8047551C + 0x20);
+        } else {
+            fn_802CAA00(lbl_8047551C + 0x20, 2);
+        }
+    }
+}
+
 s32 fn_8036BC0C(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x40);
 }
@@ -49,5 +60,9 @@ s32 fn_8036BC9C(void *arg0) {
 
 void fn_8036BCFC(void) {
     fn_8036BB88(1, 0xFFFF);
+}
+
+void fn_8036BD28(void) {
+    fn_8036BB88(0, 0xFFFF);
 }
 
