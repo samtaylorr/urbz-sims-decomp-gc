@@ -72,8 +72,10 @@ TreeKey *fn_801B3814(TreeKey *self, s32 a, s16 b) {
     return self;
 }
 
-TreeKey fn_801B3824(TreeKey *src) {
-    return *src;
+TreeKey *fn_801B3824(TreeKey *self, TreeKey *src) {
+    self->a = src->a;
+    self->b = src->b;
+    return self;
 }
 
 s32 fn_801B3854(void *arg0, void *arg1) {
@@ -122,17 +124,15 @@ void fn_801B3B88(void *arg0, s32 flags) {
     extern void fn_801B3C08(void *);
     extern void fn_802D20E8(void *);
     extern void fn_803997AC(void *, u32);
-    s32 *v;
     s32 *self = arg0;
     self[0] = (s32)lbl_804155D8;
     fn_801B3C08(self);
-    v = self + 1;
-    if (v[0] != 0) {
-        u32 size = (u32)(v[3] - v[0]);
+    if (self[1] != 0) {
+        u32 size = (u32)(self[4] - self[1]);
         if (size > 0x80) {
-            fn_802D20E8((void *)v[0]);
+            fn_802D20E8((void *)self[1]);
         } else {
-            fn_803997AC((void *)v[0], size);
+            fn_803997AC((void *)self[1], size);
         }
     }
     if (flags & 1) {
