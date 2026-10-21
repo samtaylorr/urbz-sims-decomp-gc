@@ -119,9 +119,9 @@ void fn_80328FF4(void) {
     fn_8032421C(p);
 }
 
-void fn_8032421C();
-void fn_80329080(void) {
-    fn_8032421C();
+void fn_8032421C(void *);
+void fn_80329080(void *self) {
+    fn_8032421C(self);
 }
 
 extern s32 lbl_80496240;
