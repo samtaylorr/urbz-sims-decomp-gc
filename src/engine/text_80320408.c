@@ -86,10 +86,10 @@ u16 fn_80323E30(void) {
     return lbl_804938E6[0];
 }
 
-extern void fn_802D6A90(void *, void *, void *, void *, s32, void *, void *);
+extern s32 fn_802D6A90(void *, void *, void *, void *, s32, void *, void *);
 extern void fn_80323D3C(void);
-extern void fn_80323D64(void);
-extern void fn_80323D90(void);
+extern void fn_80323D64(void *);
+extern void fn_80323D90(void *);
 extern u8 lbl_803F2F74[];
 extern u8 lbl_80493858[];
 void fn_80323E3C(s32 arg0) {
