@@ -35,6 +35,15 @@ s32 fn_803390A4(void) {
     return 0;
 }
 
+s32 fn_803390AC(void) {
+    extern s32 lbl_80494F7C;
+
+    if (lbl_80494F7C == 0) {
+        return -1;
+    }
+    return -1;
+}
+
 s32 fn_803390C4(s32 arg0) {
     extern s32 lbl_80494F74;
     if (arg0 != -1) {
@@ -127,6 +136,16 @@ void fn_803392AC(s32 arg0) {
     if (arg0 != -1) {
         fn_8033930C();
     }
+}
+
+s32 fn_803392D4(s32 arg0) {
+    s32 fn_8033930C(s32);
+
+    if (arg0 == -1) {
+        return 0;
+    }
+    fn_8033930C(arg0);
+    return 0;
 }
 
 s32 fn_8033930C(s32 arg0) {
