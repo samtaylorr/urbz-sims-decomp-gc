@@ -313,31 +313,34 @@ s32 fn_8010C3F8(void *arg0, void *arg1) {
     return -0x62;
 }
 
-u8 *fn_8010C464(u8 *first, u8 *last, s32 key) {
+s32 *fn_8010C464(s32 (*first)[2], s32 (*last)[2], s32 key) {
     s32 fn_802486DC(s32, s32);
     s32 n;
     s32 c;
-    u8 *mid;
+    s32 (*mid)[2];
 
-    while ((n = (last - first) / 8) > 0) {
+    for (;;) {
+        n = last - first;
+        if (n <= 0) {
+            return NULL;
+        }
         if (n == 1) {
-            if (fn_802486DC(*(s32 *)(first + 4), key) == 0) {
-                return first;
+            if (fn_802486DC((*first)[1], key) == 0) {
+                return *first;
             }
             return NULL;
         }
-        mid = first + (n / 2) * 8;
-        c = fn_802486DC(key, *(s32 *)(mid + 4));
+        mid = first + n / 2;
+        c = fn_802486DC(key, (*mid)[1]);
         if (c == 0) {
-            return mid;
+            return *mid;
         }
         if (c > 0) {
-            first = mid + 8;
+            first = mid + 1;
         } else {
             last = mid;
         }
     }
-    return NULL;
 }
 
 void *fn_8010C508(void *arg0, u8 *arg1) {
