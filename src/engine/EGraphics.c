@@ -49,6 +49,12 @@ void fn_802EDB30(void *arg0) {
     }
 }
 
+void fn_802EDC38(u8 *arg0, Vec3f *arg1, s32 arg2, s32 arg3) {
+    *(Vec3f *)(arg0 + 0x80) = *arg1;
+    *(s32 *)(arg0 + 0x8C) = arg2;
+    *(s32 *)(arg0 + 0xC) = arg3;
+}
+
 void fn_802EDC60(void) {
     extern void *fn_8036BA10(u32);
     extern void *fn_8036B878(void *, s32);
