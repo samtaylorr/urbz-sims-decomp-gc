@@ -42,9 +42,28 @@ void fn_8030FAAC(s32 *arg0) {
     *arg0 = 0;
 }
 
+void fn_8030FDFC(f32 *arg0) {
+    extern f32 lbl_803F2214[];
+    extern f32 lbl_80459B60[];
+    f32 x = arg0[0];
+    f32 z = arg0[2];
+    f32 y = arg0[1];
+    f32 w = lbl_803F2214[0];
+    lbl_80459B60[0] = x;
+    lbl_80459B60[3] = w;
+    lbl_80459B60[1] = y;
+    lbl_80459B60[2] = z;
+}
+
 s32 fn_8030FE2C(void) {
     extern void *lbl_80494EEC;
     return M2C_FIELD(lbl_80494EEC, s32 *, 8);
+}
+
+void fn_803100D8(s32 *arg0) {
+    arg0[0] = 0;
+    arg0[1] = 0;
+    arg0[2] = 0;
 }
 
 extern void fn_802D20E8(void *);
@@ -88,5 +107,11 @@ void fn_80310154(void *arg0, void *arg1) {
 void fn_8031020C(void) {
     void fn_803101B8(s32, s32);
     fn_803101B8(1, 0xFFFF);
+}
+
+extern u8 lbl_80459F70[];
+void fn_80310238(void) {
+    void fn_803101B8(s32, s32);
+    fn_803101B8(0, 0xFFFF);
 }
 
