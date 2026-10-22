@@ -1,6 +1,10 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+static inline char *SeqVec_End(char **v) {
+    return v[1];
+}
+
 extern s32 lbl_80495D10;
 extern void fn_800F1A60(s32, s32);
 void fn_80197AC8(void *arg0) {
@@ -26,14 +30,16 @@ void fn_8019968C(void *arg0) {
     void fn_80198A50(char *);
     extern char lbl_803DB28C[];
     extern s32 lbl_80495A90;
-    char *it;
     char **range;
+    char *it;
 
     range = (char **)((char *)arg0 + 0x10);
-    for (it = range[0]; it != range[1]; it += 0x3C) {
+    it = range[0];
+    while (it != range[1]) {
         fn_800F5248(fn_800F524C(&lbl_80495A90, fn_800F3304((char *)arg0 + 8)), lbl_803DB28C);
         fn_800F5248(fn_800F524C(&lbl_80495A90, fn_800F3304((char *)arg0 + 0xC)), lbl_803DB28C);
         fn_80198A50(it);
+        it += 0x3C;
     }
 }
 
