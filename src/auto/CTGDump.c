@@ -4,21 +4,28 @@
 extern void fn_802D20E8(void *);
 f32 *fn_800F4B08(f32 *out, f32 *arg1, f32 *arg2, s32 arg3) {
     f32 fn_800F4AA4(s32);
-    extern f32 lbl_803D5A04;
+    extern f32 lbl_803D5A04[];
+    f32 scale = lbl_803D5A04[0];
+    f32 x = *arg2 * scale;
+    f32 y = fn_800F4AA4(arg3);
 
-    out[0] = *arg2 * lbl_803D5A04;
-    out[1] = fn_800F4AA4(arg3);
-    out[2] = *arg1 * lbl_803D5A04;
+    out[0] = x;
+    out[1] = y;
+    out[2] = *arg1 * scale;
     return out;
 }
 
 f32 *fn_800F4BE0(f32 *out, s32 *in, s32 arg2) {
     f32 fn_800F4AA4(s32);
-    extern f32 lbl_803D5A0C;
+    extern f32 lbl_803D5A0C[];
+    f32 scale = lbl_803D5A0C[0];
+    f32 x = (f32)in[0] * scale;
+    f32 y = fn_800F4AA4(arg2);
+    f32 z = (f32)in[1] * scale;
 
-    out[0] = (f32)in[0] * lbl_803D5A0C;
-    out[1] = fn_800F4AA4(arg2);
-    out[2] = (f32)in[1] * lbl_803D5A0C;
+    out[0] = x;
+    out[1] = y;
+    out[2] = z;
     return out;
 }
 
