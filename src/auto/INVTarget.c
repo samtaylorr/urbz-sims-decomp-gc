@@ -428,29 +428,17 @@ void fn_801DB8B8(void *arg0, s32 arg1) {
     M2C_UNK fn_802D20E8(s32);
     extern char lbl_80416EF8[];
     extern char lbl_80416F38[];
-    void *p;
-    s32 set;
 
     M2C_FIELD(arg0, void **, 0x80) = lbl_80416EF8;
     if (M2C_FIELD(arg0, s32 *, 0) != 0) {
         fn_801D8B40(M2C_FIELD(arg0, void **, 4), (u8 *)arg0 + 0x28);
         fn_801D9014(M2C_FIELD(arg0, void **, 8), (u8 *)arg0 + 0x38);
         fn_801D94DC(M2C_FIELD(arg0, void **, 0xC), (u8 *)arg0 + 0x48);
-        p = (u8 *)arg0 + 0x58;
-        set = 0;
-        if (M2C_FIELD(p, s32 *, 8) != 0 || M2C_FIELD(p, s32 *, 0) != 0) {
-            set = 1;
+        if (INVList_IsNotEmpty((u8 *)arg0 + 0x58)) {
+            fn_801DFA30(M2C_FIELD(arg0, void **, 0x10), (u8 *)arg0 + 0x58);
         }
-        if (set) {
-            fn_801DFA30(M2C_FIELD(arg0, void **, 0x10), p);
-        }
-        p = (u8 *)arg0 + 0x68;
-        set = 0;
-        if (M2C_FIELD(p, s32 *, 8) != 0 || M2C_FIELD(p, s32 *, 0) != 0) {
-            set = 1;
-        }
-        if (set) {
-            fn_801DC030(M2C_FIELD(arg0, void **, 0x14), p);
+        if (INVList_IsNotEmpty((u8 *)arg0 + 0x68)) {
+            fn_801DC030(M2C_FIELD(arg0, void **, 0x14), (u8 *)arg0 + 0x68);
         }
         if (M2C_FIELD(arg0, void ***, 0x18) != 0) {
             fn_801DFF98(M2C_FIELD(arg0, void ***, 0x18), M2C_FIELD(arg0, s32 *, 0x7C));
