@@ -752,6 +752,19 @@ s32 fn_8038D484(s32 chan, s32 fileNo) {
     return fn_803894A8(chan);
 }
 
+s32 fn_8038D4CC(s32 chan, s32 fileNo, void *callback);
+s32 fn_8038D5DC(s32 chan, s32 fileNo) {
+    s32 fn_803894A8(s32);
+    extern void fn_80387D34(void);
+    s32 result;
+
+    result = fn_8038D4CC(chan, fileNo, fn_80387D34);
+    if (result < 0) {
+        return result;
+    }
+    return fn_803894A8(chan);
+}
+
 s32 fn_8038DAA4(s32 chan, s32 arg1, s32 arg2) {
     s32 fn_803894A8(s32);
     s32 fn_8038D930(s32, s32, s32, void *);
