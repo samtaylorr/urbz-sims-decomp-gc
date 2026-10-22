@@ -108,11 +108,6 @@ void fn_8033F3D0(char *s, s32 *width, s32 *count) {
     }
 }
 
-extern u8 lbl_8045D260[];
-extern u32 lbl_80496284;
-void fn_8033E774(void *);
-char *fn_8037A798(char *, s32 *);
-void fn_8033F94C(s32, s32);
 void fn_8033F9C0(void) {
     fn_8033F94C(1, 0xFFFF);
 }
