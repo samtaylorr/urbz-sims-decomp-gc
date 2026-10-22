@@ -153,6 +153,76 @@ void fn_802E01B8(void) {
 
 }
 
+void fn_802D20E8(void *);
+s32 *fn_802D1FC8(M2C_UNK);
+void fn_802D81B8(void *);
+void fn_802D8260(void *, s32);
+void fn_802D82D4(void *, s32, s32);
+void fn_802D8328(void *);
+void fn_802D8334(void *, s32);
+void fn_802D838C(s32);
+void fn_802DFB30(void *);
+s32 fn_80366820(void *, s32 **, s32);
+void fn_802E0390(s32, s32);
+
+void fn_802E0230(char *self) {
+    struct {
+        u8 pad[0x18];
+    } evt;
+    void *vt;
+    s32 *msg;
+
+    vt = M2C_FIELD(self, void **, 0);
+    if (((s32 (*)(void *))M2C_FIELD(vt, void **, 0x2C))(self + M2C_FIELD(vt, s16 *, 0x28)) == 0) {
+        fn_802D81B8(&evt);
+        fn_802D82D4(&evt, 1, 0);
+        msg = fn_802D1FC8(0xC);
+        msg[0] = 1;
+        msg[1] = (s32)&evt;
+        fn_802E0208((s32)self, msg);
+        fn_802D8334(&evt, -1);
+        fn_802D8328(&evt);
+        fn_802D8260(&evt, 2);
+    }
+}
+
+void fn_802E02D8(char *self) {
+    s32 *msg;
+
+    for (;;) {
+        if (fn_80366820(self + 0x368, &msg, 1) == 0) {
+            continue;
+        }
+        switch (msg[0]) {
+        case 2:
+            fn_802D20E8(msg);
+            return;
+        case 1:
+            fn_802D838C(msg[1]);
+            fn_802D20E8(msg);
+            break;
+        case 3:
+            if (msg[1] != 0) {
+                ((void (*)(void))msg[1])();
+            }
+            fn_802D20E8(msg);
+            break;
+        }
+        fn_802DFB30(self + 8);
+    }
+}
+
+void fn_802E0390(s32 arg0, s32 arg1) {
+    extern u8 lbl_80451FA0[];
+    if (arg1 == 0xFFFF) {
+        if (arg0 != 0) {
+            fn_802DFFB8((char *)lbl_80451FA0);
+        } else {
+            fn_802E0024((char *)lbl_80451FA0, 2);
+        }
+    }
+}
+
 void fn_802D8F90();
 void fn_802E03E4(char *self) {
     extern void fn_802D8F90(void *);
@@ -160,7 +230,10 @@ void fn_802E03E4(char *self) {
 }
 
 void fn_802E0408(void) {
-    M2C_UNK fn_802E0390(M2C_UNK, M2C_UNK);
     fn_802E0390(1, 0xFFFF);
+}
+
+void fn_802E0434(void) {
+    fn_802E0390(0, 0xFFFF);
 }
 
