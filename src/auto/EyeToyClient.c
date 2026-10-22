@@ -95,7 +95,7 @@ void fn_80043390(s32 arg0) {
 }
 
 void fn_8004342C(s32 arg0) {
-    M2C_UNK fn_800433A4(s32, s32, M2C_UNK);
+    void fn_800433A4(s32, s32, s32);
     extern s32 lbl_8049409C;
     if (((s32) lbl_8049409C != 0) && (fn_80043480() != 0)) {
         fn_800433A4(arg0, fn_80043480(), 1);
@@ -119,6 +119,15 @@ s32 fn_80043488(void) {
 s32 fn_800434F0(void) {
     s32 fn_8004200C(void);
     return fn_8004200C() != -1;
+}
+
+s32 fn_80043520(void) {
+    s32 fn_80339324(s32);
+
+    if (lbl_8049407C == -1) {
+        return 1;
+    }
+    return fn_80339324(lbl_8049407C);
 }
 
 void fn_800438D0(f32 farg0) {
