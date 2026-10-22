@@ -53,6 +53,22 @@ void fn_8030C490(void) {
     fn_8030AA98();
 }
 
+extern f32 lbl_803F2088[];
+extern f32 lbl_803F208C[];
+extern f32 lbl_803F2090[];
+extern void *lbl_80494EC4;
+void fn_8030C0E8(void *arg0);
+s32 fn_8030AA04(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7);
+void fn_8030AB88(void *arg0, s32 arg1);
+void fn_8030B800(void);
+void fn_8030B280(void);
+extern void *lbl_80494ED4;
+extern f32 lbl_803F2094[];
+void fn_8030C598(void) {
+    void *vt = M2C_FIELD(lbl_80494ED4, void **, 0x68);
+    M2C_FIELD(vt, void (**)(void *, f32), 0x254)((u8 *)lbl_80494ED4 + M2C_FIELD(vt, s16 *, 0x250), lbl_803F2094[0]);
+}
+
 void fn_8030CB5C(s32 arg0, s32 arg1) {
 
 }
