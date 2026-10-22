@@ -63,8 +63,12 @@ void fn_8033F2B8(s32 arg0, s32 arg1, s32 arg2) {
     lbl_8049502C = arg2;
 }
 
+extern u8 lbl_8045D260[];
+extern u32 lbl_80496284;
+void fn_8033E774(void *);
+char *fn_8037A798(char *, s32 *);
+void fn_8033F94C(s32, s32);
 void fn_8033F9C0(void) {
-    M2C_UNK fn_8033F94C(M2C_UNK, M2C_UNK);
     fn_8033F94C(1, 0xFFFF);
 }
 
