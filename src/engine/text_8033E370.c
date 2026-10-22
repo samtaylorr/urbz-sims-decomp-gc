@@ -63,10 +63,6 @@ s32 fn_8033E3E4(void) {
     return 1;
 }
 
-static inline void *fn_8033E3E4_GetObj(s32 i) {
-    return lbl_80494FC8[i];
-}
-
 void fn_8033E484(void) {
 
 }
@@ -84,7 +80,7 @@ void fn_803BE99C(void *, PadStatus *, s32, s32);
 void fn_8033E488(void *self) {
     PadStatus *pads;
     u32 mask;
-    u32 i;
+    s32 i;
 
     pads = (PadStatus *)((u8 *)self + 0x24);
     fn_8026AA18(pads);
@@ -106,12 +102,10 @@ void fn_8033E488(void *self) {
         fn_8026A6A4(mask);
     }
     for (i = 0; i < 4; i++) {
-        PadStatus st;
-        void *obj;
+        PadStatus st = *pads;
+        void *obj = lbl_80494FC8[i];
         VtEntry *e;
 
-        st = pads[i];
-        obj = lbl_80494FC8[i];
         e = (VtEntry *)(M2C_FIELD(obj, u8 **, 0x204) + 0x80);
         e->fn((u8 *)obj + e->delta);
         if (st.err == 0) {
@@ -135,6 +129,7 @@ void fn_8033E488(void *self) {
             M2C_FIELD(obj, s32 *, 4) = ~7;
             fn_803104FC(obj);
         }
+        pads++;
     }
     fn_803336D4(self);
 }
