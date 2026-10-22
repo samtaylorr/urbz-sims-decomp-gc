@@ -6752,14 +6752,13 @@ void fn_803B9648(s32 self, s32 flags) {
     }
 }
 
-Vec4f fn_803B9688(void) {
+Vec4f *fn_803B9688(Vec4f *v) {
     extern f32 lbl_803F0198[];
     extern f32 lbl_803F019C[];
-    Vec4f v;
-    v.x = lbl_803F0198[0];
-    v.y = lbl_803F0198[0];
-    v.z = lbl_803F0198[0];
-    v.w = lbl_803F019C[0];
+    v->x = lbl_803F0198[0];
+    v->w = lbl_803F019C[0];
+    v->z = lbl_803F0198[0];
+    v->y = lbl_803F0198[0];
     return v;
 }
 
@@ -8071,6 +8070,26 @@ void fn_803C03D4(u8 *p, s32 n) {
     while (--n != -1) {
         fn_80366A7C(p);
         p += 0x58;
+    }
+}
+
+void fn_803C0420(u8 *dst, u8 *src, s32 n) {
+    while (--n != -1) {
+        u8 *d = dst;
+        u8 *s = src;
+        u8 *dp;
+        u8 *sp;
+        s32 i;
+        src += 0x58;
+        dst += 0x58;
+        dp = d;
+        sp = s;
+        for (i = 0x40; i != 0; i--) {
+            *dp++ = *sp++;
+        }
+        M2C_FIELD(d, s32 *, 0x40) = M2C_FIELD(s, s32 *, 0x40);
+        M2C_FIELD(d, s32 *, 0x44) = M2C_FIELD(s, s32 *, 0x44);
+        fn_803BCC34((s32 *)(d + 0x48), (s32 *)(s + 0x48));
     }
 }
 
