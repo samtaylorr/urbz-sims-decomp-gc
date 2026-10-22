@@ -120,3 +120,8 @@ void fn_800B5098(void) {
     fn_800B4C3C(1, 0xFFFF);
 }
 
+void fn_800B50C4(void) {
+    M2C_UNK fn_800B4C3C(M2C_UNK, M2C_UNK);
+    fn_800B4C3C(0, 0xFFFF);
+}
+
