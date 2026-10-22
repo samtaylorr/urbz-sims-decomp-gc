@@ -77,6 +77,20 @@ void fn_8033D10C(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x3C) = arg1;
 }
 
+void fn_8033D114(s32 arg0, s32 arg1) {
+    M2C_UNK fn_8033BDB0(void *);
+    M2C_UNK fn_8033BE20(void *, s32);
+    extern u8 lbl_8045BC60[];
+
+    if (arg1 == 0xFFFF) {
+        if (arg0 != 0) {
+            fn_8033BDB0(lbl_8045BC60);
+        } else {
+            fn_8033BE20(lbl_8045BC60, 2);
+        }
+    }
+}
+
 void **fn_8033D168(void **self) {
     *self = lbl_8041C298;
     return self;
