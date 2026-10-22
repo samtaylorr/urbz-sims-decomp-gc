@@ -292,6 +292,54 @@ void fn_8010C1D4(void **obj) {
     }
 }
 
+s32 fn_8010C3F8(void *arg0, void *arg1) {
+    s32 fn_803A1484(void *, void *);
+    u8 *p;
+    s32 n;
+    void *t;
+
+    if (arg1 != NULL) {
+        t = M2C_FIELD(arg1, void **, 0xC);
+        if (t != NULL) {
+            p = M2C_FIELD(t, u8 **, 0x30);
+            n = 0;
+            if (p != NULL) {
+                n = *(s32 *)(p - 4);
+            }
+            M2C_FIELD(arg0, s32 *, 0xC) = fn_803A1484(p, p + n * 8);
+            return 0;
+        }
+    }
+    return -0x62;
+}
+
+u8 *fn_8010C464(u8 *first, u8 *last, s32 key) {
+    s32 fn_802486DC(s32, s32);
+    s32 n;
+    s32 c;
+    u8 *mid;
+
+    while ((n = (last - first) / 8) > 0) {
+        if (n == 1) {
+            if (fn_802486DC(*(s32 *)(first + 4), key) == 0) {
+                return first;
+            }
+            return NULL;
+        }
+        mid = first + (n / 2) * 8;
+        c = fn_802486DC(key, *(s32 *)(mid + 4));
+        if (c == 0) {
+            return mid;
+        }
+        if (c > 0) {
+            first = mid + 8;
+        } else {
+            last = mid;
+        }
+    }
+    return NULL;
+}
+
 void *fn_8010C508(void *arg0, u8 *arg1) {
     void fn_801B3824(void *, void *);
     fn_801B3824(arg0, arg1 + 4);
