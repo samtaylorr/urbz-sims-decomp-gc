@@ -2,7 +2,7 @@
 #include "common.h"
 
 void fn_80336078(void);
-void fn_8033D278(void *);
+void *fn_8033D278(void *);
 extern u8 lbl_8041C368[];
 
 typedef struct SampleNode {
