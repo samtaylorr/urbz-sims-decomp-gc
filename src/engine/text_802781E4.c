@@ -202,8 +202,8 @@ void fn_8027A89C(void) {
     lbl_80494B44 = 1;
 }
 
+void fn_8027A8A8(s32 arg0, s32 arg1);
 void fn_8027A930(void) {
-    M2C_UNK fn_8027A8A8(M2C_UNK, M2C_UNK);
     fn_8027A8A8(1, 0xFFFF);
 }
 
