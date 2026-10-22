@@ -67,6 +67,13 @@ void fn_802EDCCC(void) {
     fn_802FB578();
 }
 
+void fn_802EDCF4(void *unused, char *obj) {
+    if (obj != NULL) {
+        char *vt = *(char **)(obj + 0x68);
+        (*(void (**)(void *, s32))(vt + 0xC))(obj + *(s16 *)(vt + 0x8), 3);
+    }
+}
+
 s32 fn_802EEB54(void *arg0) {
     M2C_UNK fn_802EE6D0();
     fn_802EE6D0();
