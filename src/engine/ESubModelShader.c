@@ -230,6 +230,14 @@ void fn_80300A40(u8 *self) {
     }
 }
 
+void fn_80300A80(u8 *self) {
+    extern s32 fn_8033740C(void *, s32, s32, s32);
+    extern u8 lbl_8045BA40[];
+    if (*(s32 *)(self + 0xC) != 0) {
+        *(s32 *)(self + 8) = fn_8033740C(lbl_8045BA40, *(s32 *)(self + 0xC), 0, 0);
+    }
+}
+
 void fn_80302228(void) {
 
 }
