@@ -578,6 +578,31 @@ s32 fn_802CD6F4(EMat4Node **a, EMat4Node **b) {
     return !EMat4Node_Valid(nb);
 }
 
+void *fn_802CD778(void *arg0) {
+    extern char lbl_80419400[];
+    s32 i;
+
+    M2C_FIELD(arg0, char **, 0) = lbl_80419400;
+    for (i = 0x100; i != 0; i--) {
+    }
+    M2C_FIELD(arg0, s16 *, 0x108A) = 1;
+    M2C_FIELD(arg0, s32 *, 0x108C) = 0;
+    M2C_FIELD(arg0, s32 *, 0x1090) = 0;
+    return arg0;
+}
+
+void fn_802CD7B0(void *arg0, s32 flags) {
+    extern char lbl_80419400[];
+    extern void fn_802CD800(void *);
+    extern void *fn_802D0AB8(void *);
+
+    M2C_FIELD(arg0, char **, 0) = lbl_80419400;
+    fn_802CD800(arg0);
+    if (flags & 1) {
+        fn_802D1A00(((void *(*)(void))fn_802D0AB8)(), arg0);
+    }
+}
+
 void fn_802CDB1C(void *arg0) {
     fn_802D1A00(fn_802D0C44(arg0), arg0);
 }
