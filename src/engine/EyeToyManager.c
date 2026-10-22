@@ -44,6 +44,16 @@ s32 fn_803390C4(s32 arg0) {
     return 1;
 }
 
+void fn_803390FC(void) {
+    extern u32 lbl_80494F74;
+    u32 i;
+
+    if (lbl_80494F80 == 0) {
+        for (i = 0; i < lbl_80494F74; i++) {
+        }
+    }
+}
+
 void fn_80339128(s32 arg0) {
     if (((s32) lbl_80494F80 == 0) && (arg0 != -1)) {
         fn_8033930C();
