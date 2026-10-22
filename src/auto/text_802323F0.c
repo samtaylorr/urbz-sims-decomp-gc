@@ -1,6 +1,10 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+typedef struct { s32 w[2]; } Struct803EB1D8;
+typedef struct { s32 w[5]; } Struct1A8_5;
+typedef struct { s32 w[7]; } Struct1A8_7;
+
 extern void *fn_8022554C(void *);
 extern void fn_802303F0(void *, void *);
 void fn_802324C0(void *arg0) {
