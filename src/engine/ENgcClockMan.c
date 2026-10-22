@@ -37,6 +37,11 @@ typedef struct BootInfo {
 extern s64 fn_8025A3DC(void);
 extern s32 lbl_80496280;
 
+void fn_8033E19C(void *self, ClockTimer *timer) {
+    timer->time = fn_8025A3DC();
+    timer->elapsed = 0.0f;
+}
+
 void fn_8033E1DC(void *self, ClockTimer *timer) {
     s64 now = fn_8025A3DC();
     u32 ticks = ((u32)now - (u32)timer->time) / (((BootInfo *)0x80000000)->busClock / 4000);
