@@ -263,3 +263,13 @@ void fn_8033BD24(void) {
     fn_8033BC78(1, 0xFFFF);
 }
 
+void *fn_80338000(void *p, s32 size, s32 align);
+void *fn_803729C8(void *p);
+void fn_803733D8(void *p, s32 arg1, s32 arg2);
+extern u8 lbl_8041C180[];
+void fn_80335F5C(void *p);
+void fn_80335FD8(void *p, s32 n);
+void fn_8033BD50(void) {
+    fn_8033BC78(0, 0xFFFF);
+}
+
