@@ -62,6 +62,17 @@ s32 fn_80343C8C(void) {
     return 0;
 }
 
+s32 fn_8034491C(void *arg0, s32 *arg1) {
+    *arg1 = -1;
+    if ((*(s32 (**)(void *, s32))(*(u8 **)arg0 + 0xA4))((u8 *)arg0 + *(s16 *)(*(u8 **)arg0 + 0xA0), 1) != 0) {
+        *arg1 = 1;
+    }
+    if ((*(s32 (**)(void *, s32))(*(u8 **)arg0 + 0xA4))((u8 *)arg0 + *(s16 *)(*(u8 **)arg0 + 0xA0), 0) != 0) {
+        *arg1 = 0;
+    }
+    return *arg1 != -1;
+}
+
 s32 fn_80345204(void) {
     return 1;
 }
