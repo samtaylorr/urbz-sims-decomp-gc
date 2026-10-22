@@ -259,8 +259,8 @@ void fn_8004DD34(void) {
     p = lbl_8041F94C;
     if (M2C_FIELD(p, s32 *, 0xEC) != 0 && M2C_FIELD(p, s32 *, 0xAC) == 1) {
         fn_8002AECC(M2C_FIELD(p, s32 *, 0xEC));
+        fn_800589F8();
     }
-    fn_800589F8();
 }
 
 s32 fn_8004E644(void) {
