@@ -428,6 +428,11 @@ s32 fn_802DED04(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 4) == 0;
 }
 
+void fn_802DED14(void *self) {
+    M2C_UNK fn_802DDDD8(void *, s32, s32);
+    fn_802DDDD8(self, 0, 0);
+}
+
 void fn_802DED64(void *self, void *arg1) {
     M2C_UNK fn_802DDCAC(void *, void *, s32);
     fn_802DDCAC(self, arg1, 0);
