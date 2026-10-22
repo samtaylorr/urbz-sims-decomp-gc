@@ -2,6 +2,13 @@
 #include "common.h"
 
 extern void fn_802D20E8(void *);
+void fn_800F51EC(u8 *dst, u16 *src) {
+    while (*src != 0) {
+        *dst++ = *src++;
+    }
+    *dst = 0;
+}
+
 void fn_800F521C(void *self) {
 
 }
