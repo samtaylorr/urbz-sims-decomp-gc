@@ -166,23 +166,26 @@ s32 fn_80366820(void *, s32 **, s32);
 void fn_802E0390(s32, s32);
 
 void fn_802E0230(char *self) {
+    M2C_UNK fn_802E0208(s32, s32 *);
     struct {
         u8 pad[0x18];
     } evt;
     void *vt;
     s32 *msg;
+    void *e;
 
     vt = M2C_FIELD(self, void **, 0);
     if (((s32 (*)(void *))M2C_FIELD(vt, void **, 0x2C))(self + M2C_FIELD(vt, s16 *, 0x28)) == 0) {
-        fn_802D81B8(&evt);
-        fn_802D82D4(&evt, 1, 0);
+        e = &evt;
+        fn_802D81B8(e);
+        fn_802D82D4(e, 1, 0);
         msg = fn_802D1FC8(0xC);
         msg[0] = 1;
-        msg[1] = (s32)&evt;
+        msg[1] = (s32)e;
         fn_802E0208((s32)self, msg);
-        fn_802D8334(&evt, -1);
-        fn_802D8328(&evt);
-        fn_802D8260(&evt, 2);
+        fn_802D8334(e, -1);
+        fn_802D8328(e);
+        fn_802D8260(e, 2);
     }
 }
 
