@@ -22,6 +22,29 @@ static inline int ScratchPool_Contains(ScratchPool *pool, void *p) {
     return (u32)p >= pool->base && (u32)p < pool->base + pool->size;
 }
 
+void *fn_802D0AB8(void);
+void *fn_802D0B3C(void);
+void *fn_802D197C(void *, u32, s32);
+void *fn_802DBBCC(void *, u32, s32);
+
+static inline void *Heap_Alloc(u32 size) {
+    void *heap;
+    void *p;
+
+    heap = fn_802D0AB8();
+    if (size == 0) {
+        return NULL;
+    }
+    p = fn_802D197C(heap, size, 4);
+    if (p == NULL) {
+        p = fn_802DBBCC(heap, size, 0);
+        if (p == NULL && heap == fn_802D0AB8()) {
+            return fn_802DBBCC(fn_802D0B3C(), size, 0);
+        }
+    }
+    return p;
+}
+
 static inline void ScratchPool_Free(ScratchPool *pool, void *p) {
     if (p != NULL) {
         *(void **)p = pool->free;
@@ -1423,14 +1446,13 @@ s32 fn_801B19F4(void) {
 }
 
 void *fn_801B19FC(u32 size) {
-    void *heap;
     void *p;
+    void *heap;
 
     if (size == 0x20) {
-        p = M2C_FIELD(lbl_80435418, void **, 4);
-        if (p != NULL) {
-            M2C_FIELD(lbl_80435418, void **, 4) = *(void **)p;
-            return p;
+        void *q = ScratchPool_Alloc((ScratchPool *)lbl_80435418);
+        if (q != NULL) {
+            return q;
         }
     }
     heap = fn_802D0AB8();
