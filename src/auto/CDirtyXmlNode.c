@@ -169,19 +169,19 @@ s32 fn_800C3828(s32 arg0) {
             break;
         }
     }
-    if (i == 0) {
-        return 0;
+    if (i != 0) {
+        return lbl_80432EC8[i - 1];
     }
-    return lbl_80432EC8[i - 1];
+    return 0;
 }
 
 s32 fn_800C38C8(s32 arg0) {
     extern s32 lbl_80432EC8[];
-    s32 found;
     s32 i;
+    s32 found;
 
     found = 0;
-    for (i = 0; i < 10; i++) {
+    for (i = found; i < 10; i++) {
         if (arg0 == lbl_80432EC8[i]) {
             found = 1;
             break;
