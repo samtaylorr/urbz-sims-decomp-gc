@@ -1029,6 +1029,20 @@ void fn_802B14CC(void *arg0) {
     }
 }
 
+void fn_802B1520(void *arg0) {
+    extern s32 fn_802BC640(void *, s32);
+    extern void fn_803B8C04(void *);
+    extern void *lbl_80494DAC;
+    u8 *str;
+
+    str = (u8 *)arg0 + 8;
+    M2C_FIELD(arg0, void **, 0xC) = lbl_80494DAC;
+    lbl_80494DAC = arg0;
+    if (fn_802BC640(str, 0x21) != 0) {
+        fn_803B8C04(str);
+    }
+}
+
 s32 fn_802B201C(void) {
     return lbl_80496130;
 }
