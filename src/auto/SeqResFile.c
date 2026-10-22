@@ -30,16 +30,12 @@ void fn_8019968C(void *arg0) {
     void fn_80198A50(char *);
     extern char lbl_803DB28C[];
     extern s32 lbl_80495A90;
-    char **range;
     char *it;
 
-    range = (char **)((char *)arg0 + 0x10);
-    it = range[0];
-    while (it != range[1]) {
+    for (it = *(char **)((char *)arg0 + 0x10); it != SeqVec_End((char **)((char *)arg0 + 0x10)); it += 0x3C) {
         fn_800F5248(fn_800F524C(&lbl_80495A90, fn_800F3304((char *)arg0 + 8)), lbl_803DB28C);
         fn_800F5248(fn_800F524C(&lbl_80495A90, fn_800F3304((char *)arg0 + 0xC)), lbl_803DB28C);
         fn_80198A50(it);
-        it += 0x3C;
     }
 }
 
