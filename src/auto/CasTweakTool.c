@@ -198,3 +198,7 @@ void fn_801D4B2C(void) {
     fn_801D4AD8(1, 0xFFFF);
 }
 
+void fn_801D4B58(void) {
+    fn_801D4AD8(0, 0xFFFF);
+}
+
