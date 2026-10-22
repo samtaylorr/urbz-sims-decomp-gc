@@ -9,6 +9,16 @@ static inline void SeqPair_Clear(s32 *p) {
     p[1] = 0;
 }
 
+static inline void SeqRes_Init(void *self) {
+    M2C_FIELD(self, s32 *, 4) = 0;
+    M2C_FIELD(self, s32 *, 8) = 0;
+    SeqPair_Clear((s32 *)((char *)self + 0xC));
+    M2C_FIELD(self, s32 *, 0x14) = 0;
+    SeqPair_Clear((s32 *)((char *)self + 0x14));
+    SeqPair_Clear((s32 *)((char *)self + 0x1C));
+    M2C_FIELD(self, s32 *, 0) = 0;
+}
+
 extern s32 lbl_80495D10;
 extern void fn_800F1A60(s32, s32);
 void fn_80197AC8(void *arg0) {
@@ -46,10 +56,10 @@ void fn_8019968C(void *arg0) {
 void fn_80199720(void *arg0) {
     M2C_FIELD(arg0, s32 *, 4) = 0;
     M2C_FIELD(arg0, s32 *, 8) = 0;
-    M2C_FIELD((char *)arg0 + 0xC, s32 *, 4) = 0;
+    SeqPair_Clear((s32 *)((char *)arg0 + 0xC));
     M2C_FIELD(arg0, s32 *, 0x14) = 0;
-    M2C_FIELD((char *)arg0 + 0x14, s32 *, 4) = 0;
-    M2C_FIELD((char *)arg0 + 0x1C, s32 *, 4) = 0;
+    SeqPair_Clear((s32 *)((char *)arg0 + 0x14));
+    SeqPair_Clear((s32 *)((char *)arg0 + 0x1C));
     M2C_FIELD(arg0, s32 *, 0) = 0;
 }
 
