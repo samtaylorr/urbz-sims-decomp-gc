@@ -241,9 +241,9 @@ void fn_80059100(void *arg0) {
         }
         p = next;
     }
-    M2C_FIELD(arg0, s32 *, 0x11C) = 0;
     M2C_FIELD(arg0, s32 *, 0x114) = 0;
     M2C_FIELD(arg0, s32 *, 0x118) = 0;
+    M2C_FIELD(arg0, s32 *, 0x11C) = 0;
 }
 
 s32 fn_800591A0(void) {
