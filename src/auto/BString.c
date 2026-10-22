@@ -2758,6 +2758,14 @@ void fn_800E5B8C(void) {
 
 }
 
+void fn_800E5B90(void) {
+    M2C_UNK fn_8004A068(void *);
+    extern s32 lbl_8041F94C[];
+    extern s32 lbl_8049664C;
+    fn_8004A068(lbl_8041F94C);
+    lbl_8049664C = 1;
+}
+
 void fn_800E64BC(void) {
 
 }
