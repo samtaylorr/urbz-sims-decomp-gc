@@ -318,6 +318,7 @@ void fn_80334FC8(void) {
 }
 
 void fn_80334FF4(void) {
+    s32 fn_80334F08(s32, s32);
     fn_80334F08(0, 0xFFFF);
 }
 
