@@ -15,6 +15,7 @@ extern u8 lbl_80493E44[];
 extern u8 lbl_803F55DC[];
 extern u8 lbl_80493858[];
 extern s32 lbl_80496310;
+extern u16 lbl_80493E5A[];
 
 static inline void *Alloc(u32 size) {
     void *heap;
