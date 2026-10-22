@@ -303,9 +303,9 @@ void fn_800F3C2C(void) {
     fn_800F3938();
 }
 
-void fn_800F1450(void);
+u32 fn_800F1450(void **arg0, const u16 *arg1, u32 arg2, u32 arg3);
 void fn_800F3CB8(void) {
-    fn_800F1450();
+    ((void (*)(void))fn_800F1450)();
 }
 
 void fn_800F1510(void);
