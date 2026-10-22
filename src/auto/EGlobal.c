@@ -194,6 +194,13 @@ void fn_8004DC58(void *arg0) {
     ((void (*)(void *))M2C_FIELD(vt, void **, 0xDC))((char *)arg0 + M2C_FIELD(vt, s16 *, 0xD8));
 }
 
+void fn_8004DC8C(void *arg0) {
+    void *vt;
+
+    vt = M2C_FIELD(arg0, void **, 0x3A4);
+    ((void (*)(void *))M2C_FIELD(vt, void **, 0xDC))((char *)arg0 + M2C_FIELD(vt, s16 *, 0xD8));
+}
+
 void fn_8004DCC0(void *arg0) {
     M2C_UNK fn_80064EC4(s32);
     void *temp_r9;
