@@ -1897,6 +1897,17 @@ s32 fn_802BB444(void) {
     return 0;
 }
 
+void fn_802BB44C(void *arg0, s32 arg1) {
+    extern char lbl_80419070[];
+    extern void fn_802B709C(void *, s32);
+    extern void fn_802BB674(void *, s32);
+    M2C_FIELD(arg0, void **, 4) = lbl_80419070;
+    fn_802B709C(arg0, 0);
+    if (arg1 & 1) {
+        fn_802BB674(arg0, 0xC);
+    }
+}
+
 void fn_802BB630(void *arg0) {
     extern void *lbl_80494D94;
     M2C_FIELD(arg0, void **, 8) = (void *) lbl_80494D94;
