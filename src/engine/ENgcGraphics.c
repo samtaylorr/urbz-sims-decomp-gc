@@ -2,6 +2,10 @@
 #include "common.h"
 
 extern u8 lbl_8041C640[];
+extern f32 lbl_803F417C[];
+extern u8 lbl_8045F9F0[];
+extern u8 lbl_8046DF78[];
+extern void fn_8035A124(void *, f32 *, void *, f32, f32, f32, f32);
 M2C_UNK **fn_8033FA18(M2C_UNK **arg0) {
     M2C_UNK fn_802ED720();
     extern M2C_UNK **lbl_80495050;
