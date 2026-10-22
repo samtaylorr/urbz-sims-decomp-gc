@@ -38,3 +38,8 @@ f32 fn_8000A334(void *arg0) {
 void fn_8000A468(s32 arg0, s32 arg1) {
 
 }
+
+void fn_8000A6D0(void) {
+    fn_8000A468(1, 0xFFFF);
+}
+
