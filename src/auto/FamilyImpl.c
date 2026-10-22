@@ -298,6 +298,11 @@ void *fn_8010C508(void *arg0, u8 *arg1) {
     return arg0;
 }
 
+s32 fn_8010C53C(u8 **arg0, u8 *arg1) {
+    u8 *vt = *arg0;
+    return (*(s32 (**)(void *, s32, s16))(vt + 0x7C))((u8 *)arg0 + *(s16 *)(vt + 0x78), *(s32 *)arg1, *(s16 *)(arg1 + 4)) == 0;
+}
+
 s32 fn_8010C580(void) {
     return 0;
 }
