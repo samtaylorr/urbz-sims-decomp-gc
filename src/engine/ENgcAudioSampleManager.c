@@ -95,8 +95,8 @@ void fn_8033E010(s32 arg0, s32 arg1) {
     if (arg1 == 0xFFFF) {
         if (arg0 != 0) {
             fn_8033D2E8(lbl_8045D140);
-            lbl_8045D1F0.count = 0;
             lbl_8045D1F0.head = NULL;
+            lbl_8045D1F0.count = 0;
         } else {
             list = &lbl_8045D1F0;
             for (p = list->head; p != NULL; p = list->head) {
