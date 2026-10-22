@@ -86,7 +86,7 @@ void fn_80310154(void *arg0, void *arg1) {
 }
 
 void fn_8031020C(void) {
-    M2C_UNK fn_803101B8(M2C_UNK, M2C_UNK);
+    void fn_803101B8(s32, s32);
     fn_803101B8(1, 0xFFFF);
 }
 
