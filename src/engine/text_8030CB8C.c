@@ -46,13 +46,13 @@ void fn_8030FDFC(f32 *arg0) {
     extern f32 lbl_803F2214[];
     extern f32 lbl_80459B60[];
     f32 x = arg0[0];
-    f32 z = arg0[2];
     f32 y = arg0[1];
+    f32 z = arg0[2];
     f32 w = lbl_803F2214[0];
     lbl_80459B60[0] = x;
-    lbl_80459B60[3] = w;
     lbl_80459B60[1] = y;
     lbl_80459B60[2] = z;
+    lbl_80459B60[3] = w;
 }
 
 s32 fn_8030FE2C(void) {
@@ -61,9 +61,10 @@ s32 fn_8030FE2C(void) {
 }
 
 void fn_803100D8(s32 *arg0) {
-    arg0[0] = 0;
-    arg0[1] = 0;
-    arg0[2] = 0;
+    s32 *p = arg0;
+    p[0] = 0;
+    p[1] = 0;
+    p[2] = 0;
 }
 
 extern void fn_802D20E8(void *);
