@@ -133,6 +133,20 @@ loop_1:
     goto loop_1;
 }
 
+void fn_8031E724(s32 arg0, s32 arg1) {
+    extern u8 lbl_8045A228[];
+    void fn_8031CC58(void *);
+    void fn_8031CD18(void *, s32);
+
+    if (arg1 == 0xFFFF) {
+        if (arg0 != 0) {
+            fn_8031CC58(lbl_8045A228);
+        } else {
+            fn_8031CD18(lbl_8045A228, 2);
+        }
+    }
+}
+
 void fn_8031E778(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x3EC) = arg1;
 }
