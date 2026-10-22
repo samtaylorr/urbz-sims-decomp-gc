@@ -34,6 +34,7 @@ s32 fn_80292CBC(void *self) {
     u16 *name[2];
     u16 *str;
     s32 mgr;
+    u16 *p;
 
     obj = M2C_FIELD(self, void **, 0x4C);
     if (obj != NULL) {
@@ -43,8 +44,9 @@ s32 fn_80292CBC(void *self) {
         mgr = lbl_804960F4;
         fn_802BE53C(&str, lbl_803EC8D8);
         fn_802A5EE0(mgr, &str, name);
-        if (--*str == 0) {
-            lbl_80494DA0->free(str);
+        p = str;
+        if (--*p == 0) {
+            lbl_80494DA0->free(p);
         }
     }
     return lbl_80496130;
@@ -1988,6 +1990,17 @@ s32 fn_802BB79C(void) {
 
 s32 fn_802BB7A4(void) {
     return 0;
+}
+
+void fn_802BB7AC(void *arg0, s32 arg1) {
+    extern char lbl_804190F0[];
+    extern void fn_802B709C(void *, s32);
+    extern void fn_802BB9E0(void *, s32);
+    M2C_FIELD(arg0, void **, 4) = lbl_804190F0;
+    fn_802B709C(arg0, 0);
+    if (arg1 & 1) {
+        fn_802BB9E0(arg0, 0xC);
+    }
 }
 
 void fn_802BB99C(void *arg0) {
