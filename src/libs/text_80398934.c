@@ -40,6 +40,10 @@ typedef struct {
 typedef struct {
     s32 v;
 } SortComp;
+
+typedef struct {
+    f32 x, y, z, w;
+} Vec4f;
 void fn_802D8BEC(void *);
 void fn_802D20E8(void *);
 void fn_8030AD40(void);
