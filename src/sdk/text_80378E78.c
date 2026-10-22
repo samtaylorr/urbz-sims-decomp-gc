@@ -687,13 +687,13 @@ s32 fn_8038B684(s32 chan) {
     return 0;
 }
 
-s32 fn_8038B874(s32 chan, s32 fileNo, void *callback);
-s32 fn_8038BECC(s32 chan, s32 fileNo) {
+s32 fn_8038B874(s32 chan, u16 encode, void *callback);
+s32 fn_8038BECC(s32 chan, u16 encode) {
     s32 fn_803894A8(s32);
     extern void fn_80387D34(void);
     s32 result;
 
-    result = fn_8038B874(chan, fileNo, fn_80387D34);
+    result = fn_8038B874(chan, encode, fn_80387D34);
     if (result < 0) {
         return result;
     }
