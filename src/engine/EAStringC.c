@@ -1,6 +1,10 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+static inline s32 fn_StackPeek(s32 *stack, s32 i) {
+    return ((s32 *)stack[2])[stack[0] - i - 1];
+}
+
 extern s32 lbl_80496130;
 
 extern void *lbl_80494B48;
@@ -31,7 +35,7 @@ s32 fn_80292CBC(void *self) {
     extern s32 lbl_804960F4;
     extern struct { void *unk0; void (*free)(void *); } *lbl_80494DA0;
     void *obj;
-    u16 *name[2];
+    u16 *name;
     u16 *str;
     s32 mgr;
     u16 *p;
@@ -40,10 +44,10 @@ s32 fn_80292CBC(void *self) {
     if (obj != NULL) {
         fn_802A0890(M2C_FIELD(obj, s32 *, 0x50) + 0x24, self);
     } else {
-        fn_802BE53C(name, lbl_803ECA4C);
+        fn_802BE53C(&name, lbl_803ECA4C);
         mgr = lbl_804960F4;
         fn_802BE53C(&str, lbl_803EC8D8);
-        fn_802A5EE0(mgr, &str, name);
+        fn_802A5EE0(mgr, &str, &name);
         p = str;
         if (--*p == 0) {
             lbl_80494DA0->free(p);
@@ -60,10 +64,10 @@ s32 fn_80292D68(s32 arg0, s32 arg1) {
     s32 b;
     s32 c;
 
-    a = ((s32 *)lbl_804433C4[2])[lbl_804433C4[0] - 1];
-    b = ((s32 *)lbl_804433C4[2])[lbl_804433C4[0] - 1 - 1];
+    a = ((s32 *)lbl_804433C4[2] + lbl_804433C4[0])[-1];
+    b = ((s32 *)lbl_804433C4[2] + (lbl_804433C4[0] - 1))[-1];
     if (arg1 > 2) {
-        c = ((s32 *)lbl_804433C4[2])[lbl_804433C4[0] - 2 - 1];
+        c = ((s32 *)lbl_804433C4[2] + (lbl_804433C4[0] - 2))[-1];
     } else {
         c = 0;
     }
