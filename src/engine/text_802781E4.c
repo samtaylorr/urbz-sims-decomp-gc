@@ -98,12 +98,13 @@ void fn_802786B8(s32 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     extern void fn_802A6644(s32);
     extern s32 lbl_804960F0;
     s32 sp8;
+    s32 *p = &sp8;
 
     sp8 = *arg0;
     if (sp8 != 0) {
         fn_802A661C(sp8);
     }
-    fn_802A4B48(lbl_804960F0, &sp8, arg1, arg2, arg3);
+    fn_802A4B48(lbl_804960F0, p, arg1, arg2, arg3);
     if (*arg0 != 0 && fn_802A6630(*arg0) == 0) {
         fn_802A6644(*arg0);
     }
