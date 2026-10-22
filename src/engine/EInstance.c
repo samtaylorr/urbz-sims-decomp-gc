@@ -83,7 +83,13 @@ void fn_802F0A54(void *arg0) {
 void fn_802F0A84(f32 *v) {
     extern void fn_8025FB2C(f32 *, f32 *);
 
-    fn_8025FB2C(v, v);
+    v[2] -= lbl_803F0E6C[0];
+    if (v[0] != lbl_803F0E70[0] || v[1] != lbl_803F0E70[0] || v[2] != lbl_803F0E70[0]) {
+        fn_8025FB2C(v, v);
+    }
+    if (v[2] == lbl_803F0E70[0]) {
+        v[2] = lbl_803F0E74[0];
+    }
 }
 
 void fn_802F1130(void *arg0) {
