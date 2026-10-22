@@ -49,13 +49,10 @@ f32 fn_8031F9B4(void *arg0) {
 }
 
 void fn_8031F9D4(void *arg0) {
-    M2C_UNK fn_80338BAC(void *);
+    extern struct { s32 unk0; s32 unk4; void *unk8; } lbl_8045BA2C;
+    M2C_UNK fn_80338BAC(void *, void *);
     extern f32 lbl_803F2F00[];
-    extern u8 lbl_8045BA2C[];
-    u8 *p;
-    M2C_FIELD(arg0, s32 *, 0x414) = 0;
     M2C_FIELD(arg0, f32 *, 0x410) = lbl_803F2F00[0];
-    p = lbl_8045BA2C;
     M2C_FIELD(arg0, s32 *, 0x3DC) = 0;
     M2C_FIELD(arg0, s32 *, 0x3E0) = 0;
     M2C_FIELD(arg0, s32 *, 0x3E4) = 0;
@@ -66,8 +63,9 @@ void fn_8031F9D4(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x404) = 0;
     M2C_FIELD(arg0, s32 *, 0x408) = 0;
     M2C_FIELD(arg0, s32 *, 0x40C) = 0;
-    if (arg0 == M2C_FIELD(p, void **, 8)) {
-        fn_80338BAC(p);
+    M2C_FIELD(arg0, s32 *, 0x414) = 0;
+    if (arg0 == lbl_8045BA2C.unk8) {
+        fn_80338BAC(&lbl_8045BA2C, arg0);
     }
 }
 
