@@ -35,16 +35,14 @@ void fn_8004FBD8(s32 arg0, s32 arg1) {
     fn_8004F890(arg0, arg1);
 }
 
-M2C_UNK fn_8004FC3C(M2C_UNK arg0, M2C_UNK arg1) {
+void fn_8004FC3C(s32 arg0, s32 arg1) {
     extern s32 lbl_8049580C;
-    void fn_8004F438();
     if (arg1 == 0xFFFF && arg0 != 0) {
         fn_8004F438(&lbl_8049580C);
     }
 }
 
 void fn_8004FC78(void) {
-    M2C_UNK fn_8004FC3C(M2C_UNK, M2C_UNK);
     fn_8004FC3C(1, 0xFFFF);
 }
 
