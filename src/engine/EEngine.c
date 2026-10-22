@@ -2,6 +2,36 @@
 #include "common.h"
 
 extern u8 fn_802D1E4C[];
+extern u8 lbl_80419898[];
+extern void *lbl_80494DF0;
+extern void fn_802D8BEC(void *);
+extern void *fn_802D1FC8(s32);
+extern void fn_802D39E4(void *);
+extern void fn_802D3CE4(void *, void *);
+extern void *fn_802E0A18(void *, void *);
+extern u8 lbl_803F054C[];
+extern u8 lbl_803F0550[];
+extern void fn_802D8B34(void *);
+extern void fn_802D8CA4(void *, s32, s32, s32);
+extern void fn_802D8EF8(void *);
+extern u8 lbl_803F0554[];
+void fn_802E04BC(u8 *self) {
+    extern u8 lbl_80419898[];
+    extern void *lbl_80494DF0;
+    extern void fn_802D8BEC(void *);
+    *(u8 **)(self + 0x338) = lbl_80419898;
+    lbl_80494DF0 = 0;
+    fn_802D8BEC(self);
+}
+
+void fn_802E0648(u8 *self) {
+    u8 *vt = *(u8 **)(self + 0x338);
+    s32 r = (*(s32 (**)(void *))(vt + 0xC4))(self + *(s16 *)(vt + 0xC0));
+    fn_802D8CA4(self, 0x18, r, 0);
+    *(u8 **)(self + 0x32C) = lbl_803F0554;
+    fn_802D8EF8(self);
+}
+
 void fn_802E08F8(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x454) = 0;
 }
