@@ -2,6 +2,7 @@
 #include "common.h"
 
 extern u8 lbl_80414770[];
+extern char lbl_80435418[];
 
 void fn_801A1B50(void);
 void fn_8019A0A4(void) {
@@ -1365,6 +1366,10 @@ s32 fn_801B1824(void *arg0) {
 void fn_801B186C(void *arg0, s32 arg1, s32 arg2) {
     M2C_UNK fn_800ECF20(s32, s32);
     fn_800ECF20(M2C_FIELD(arg0, s32 *, 0x10) + (arg1 * 4), arg2);
+}
+
+s32 fn_801B19A0(void *arg0) {
+    return (M2C_FIELD(arg0, s16 *, 4) >> 15) & 1;
 }
 
 void fn_801B19AC(void *arg0, s32 arg1) {
