@@ -34,3 +34,8 @@ void fn_8031FA48(void) {
     fn_8031F904(1, 0xFFFF);
 }
 
+void fn_8031FA74(void) {
+    M2C_UNK fn_8031F904(M2C_UNK, M2C_UNK);
+    fn_8031F904(0, 0xFFFF);
+}
+
