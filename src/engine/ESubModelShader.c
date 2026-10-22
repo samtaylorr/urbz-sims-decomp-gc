@@ -238,6 +238,17 @@ void fn_80300A80(u8 *self) {
     }
 }
 
+s32 fn_80300ACC(u8 *self) {
+    extern s32 fn_803371DC(void *, s32, void *);
+    extern u8 lbl_8045BA40[];
+    if (*(s32 *)(self + 0xC) != 0) {
+        if (fn_803371DC(lbl_8045BA40, *(s32 *)(self + 0xC), self + 8) == 0) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
 void fn_80302228(void) {
 
 }
