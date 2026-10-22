@@ -153,6 +153,11 @@ void fn_800A4328(s32 arg0) {
     fn_800F3304(arg0 + 0x58);
 }
 
+void fn_800A434C(s32 arg0) {
+    M2C_UNK fn_800F3304(s32);
+    fn_800F3304(arg0 + 0x5C);
+}
+
 void fn_800A4370(void) {
 
 }
@@ -163,6 +168,14 @@ s32 fn_800A4374(void *arg0) {
 
 s32 fn_800A437C(void) {
     return lbl_804942B4;
+}
+
+void fn_800A4384(void *arg0) {
+    extern f32 lbl_803CD9E0[];
+    f32 v = lbl_803CD9E0[0];
+    M2C_FIELD(arg0, f32 *, 0x190) = v;
+    M2C_FIELD(arg0, f32 *, 0x198) = v;
+    M2C_FIELD(arg0, f32 *, 0x194) = v;
 }
 
 void fn_800A439C(void) {
