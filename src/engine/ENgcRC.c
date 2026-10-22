@@ -557,6 +557,15 @@ void fn_8034C05C(void) {
 
 }
 
+s32 fn_8034E044();
+s32 fn_8034C070(void) {
+    s32 fn_8034E044();
+    if (fn_8034E044() == 0) {
+        return 0;
+    }
+    return 1;
+}
+
 void fn_8034D53C(void *arg0, s32 arg1, s32 arg2) {
     M2C_UNK fn_8036A52C(s32, void *);
     void *temp_r29;
