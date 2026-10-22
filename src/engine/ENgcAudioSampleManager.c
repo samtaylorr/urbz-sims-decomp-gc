@@ -61,6 +61,13 @@ void fn_8033D3A0(void) {
     fn_80336078();
 }
 
+void fn_8033D5B8(void *arg0, void *arg1) {
+    if (M2C_FIELD(arg1, u32 *, 0x28) >= lbl_80494FB8) {
+        fn_8033DD9C(arg0);
+        M2C_FIELD(arg1, u32 *, 0x28) = 0;
+    }
+}
+
 void *fn_8033DD34(void *arg0, s32 arg1) {
     void *p;
 
@@ -81,6 +88,25 @@ s32 fn_8033DD68(void *arg0, void *arg1) {
     return var_r9;
 }
 
+void fn_8033E010(s32 arg0, s32 arg1) {
+    SampleNode *p;
+
+    if (arg1 == 0xFFFF) {
+        if (arg0 != 0) {
+            fn_8033D2E8(lbl_8045D140);
+            lbl_8045D1F0.count = 0;
+            lbl_8045D1F0.head = NULL;
+        } else {
+            while ((p = lbl_8045D1F0.head) != NULL) {
+                lbl_8045D1F0.head = p->next;
+                fn_802D1A00(fn_802D0AB8(), p);
+            }
+            lbl_8045D1F0.count = 0;
+            ((void (*)(void *, s32))fn_8033D32C)(lbl_8045D140, 2);
+        }
+    }
+}
+
 void fn_8033740C(void);
 void fn_8033E0B4(void) {
     fn_8033740C();
@@ -96,12 +122,6 @@ void fn_8033E0F4(void) {
     fn_8033E010(1, 0xFFFF);
 }
 
-extern u32 lbl_80494FB8;
-void fn_8033DD9C(void *);
-extern u8 lbl_8045D140[];
-extern SampleList lbl_8045D1F0;
-void *fn_802D0AB8(void);
-void fn_802D1A00(void *, void *);
 void fn_8033E120(void) {
     fn_8033E010(0, 0xFFFF);
 }
