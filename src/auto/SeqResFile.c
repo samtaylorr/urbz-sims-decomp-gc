@@ -23,8 +23,9 @@ void fn_80199EB8(s32 *self) {
     self[0] = 1;
 }
 
+void fn_80199FF8(s32 arg0, s32 arg1);
+
 void fn_8019A04C(void) {
-    M2C_UNK fn_80199FF8(M2C_UNK, M2C_UNK);
     fn_80199FF8(1, 0xFFFF);
 }
 
