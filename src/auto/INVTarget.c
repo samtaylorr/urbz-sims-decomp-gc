@@ -723,8 +723,8 @@ void *fn_801F01B8(void **self, char *name, s32 mask) {
 
 void fn_801F0258(void *arg0, char *arg1) {
     struct Str7 { char s[7]; };
-    extern struct Str7 lbl_803E2FF4;
-    *(struct Str7 *)arg1 = lbl_803E2FF4;
+    extern char lbl_803E2FF4[];
+    *(struct Str7 *)arg1 = *(struct Str7 *)lbl_803E2FF4;
 }
 
 void fn_801F027C(void *arg0, s32 arg1) {
