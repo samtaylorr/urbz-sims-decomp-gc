@@ -6748,6 +6748,31 @@ void fn_803B9648(s32 self, s32 flags) {
     }
 }
 
+void fn_803B9688(f32 *self) {
+    extern f32 lbl_803F0198;
+    extern f32 lbl_803F019C;
+    f32 zero = lbl_803F0198;
+    self[0] = zero;
+    self[3] = lbl_803F019C;
+    self[2] = zero;
+    self[1] = zero;
+}
+
+void fn_803B96B0(f32 *dst, f32 *src, f32 s) {
+    dst[0] = s * src[0];
+    dst[1] = s * src[1];
+    dst[2] = s * src[2];
+    dst[3] = s * src[3];
+}
+
+void *fn_803B96E8(void) {
+    M2C_UNK fn_802D1FC8(M2C_UNK);
+    extern u8 lbl_804194A0[];
+    void **p = (void **)fn_802D1FC8(4);
+    *p = lbl_804194A0;
+    return p;
+}
+
 extern void fn_803B971C(void **);
 void fn_803B971C(void **arg0) {
     extern u8 lbl_804194A0[];
