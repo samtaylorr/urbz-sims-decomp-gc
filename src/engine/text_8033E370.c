@@ -53,8 +53,22 @@ void fn_8033E484(void) {
 
 }
 
+extern u8 lbl_8045D1FC[];
+void fn_8033E6BC(s32 arg0, s32 arg1) {
+    if (arg1 == 0xFFFF) {
+        if (arg0 != 0) {
+            fn_8033E370(lbl_8045D1FC);
+        } else {
+            fn_8033E3B0(lbl_8045D1FC, 2);
+        }
+    }
+}
+
 void fn_8033E710(void) {
-    M2C_UNK fn_8033E6BC(M2C_UNK, M2C_UNK);
     fn_8033E6BC(1, 0xFFFF);
+}
+
+void fn_8033E73C(void) {
+    fn_8033E6BC(0, 0xFFFF);
 }
 
