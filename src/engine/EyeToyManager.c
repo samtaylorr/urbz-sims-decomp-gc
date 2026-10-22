@@ -27,6 +27,29 @@ static inline void *EyeToyAlloc(s32 count) {
     return p;
 }
 
+void fn_80339018(void) {
+    extern s32 lbl_80494F7C;
+    extern u32 lbl_80494F6C;
+    extern s8 *lbl_80494F78;
+    void fn_802D211C(void *);
+    u32 i;
+    s8 *end;
+
+    if (lbl_80494F7C != 0) {
+        for (i = 0; i < lbl_80494F6C; i++) {
+        }
+        if (lbl_80494F78 != NULL) {
+            end = lbl_80494F78 + ((s32 *)lbl_80494F78)[-2];
+            while (lbl_80494F78 != end) {
+                end--;
+            }
+            fn_802D211C(lbl_80494F78 - 8);
+        }
+        lbl_80494F7C = 0;
+        lbl_80494F78 = NULL;
+    }
+}
+
 s32 fn_8033909C(void) {
     return 0;
 }
