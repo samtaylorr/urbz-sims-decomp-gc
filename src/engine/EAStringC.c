@@ -1934,6 +1934,25 @@ void fn_802BB44C(void *arg0, s32 arg1) {
     }
 }
 
+void *fn_802BB4A0(void *arg0, s32 arg1) {
+    extern char lbl_80418D70[];
+    extern char lbl_80419070[];
+    extern void *lbl_80494B48;
+    extern void fn_803B76C8(void *, void *);
+
+    M2C_FIELD(arg0, void **, 4) = lbl_80418D70;
+    fn_802B7124(arg0, 5);
+    fn_802B710C(arg0, 0);
+    fn_802B7138(arg0, 1);
+    fn_802B7158(arg0, 0);
+    fn_802B7178(arg0, 0);
+    fn_802B71C8(arg0);
+    fn_803B76C8(lbl_80494B48, arg0);
+    M2C_FIELD(arg0, s32 *, 8) = arg1;
+    M2C_FIELD(arg0, void **, 4) = lbl_80419070;
+    return arg0;
+}
+
 void fn_802BB630(void *arg0) {
     extern void *lbl_80494D94;
     M2C_FIELD(arg0, void **, 8) = (void *) lbl_80494D94;
