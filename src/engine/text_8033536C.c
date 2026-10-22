@@ -57,3 +57,7 @@ void fn_803354D8(void) {
     fn_8033542C(1, 0xFFFF);
 }
 
+void fn_80335504(void) {
+    fn_8033542C(0, 0xFFFF);
+}
+
