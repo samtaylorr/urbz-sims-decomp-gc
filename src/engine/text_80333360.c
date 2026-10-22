@@ -30,6 +30,15 @@ extern u8 lbl_8045B2E8[];
 extern u8 lbl_8041BD58[];
 void fn_80335F5C(void *p);
 void fn_80335FD8(void *p, s32 n);
+u8 *fn_80333360(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    u8 *obj;
+
+    obj = fn_80371698(Heap_Alloc(0xA4));
+    *(s32 *)(obj + 0x8) = arg3;
+    fn_802C5BBC(arg1, obj);
+    return obj;
+}
+
 void fn_80333400(s32 arg0, s32 arg1) {
     if (arg1 == 0xFFFF) {
         if (arg0 != 0) {
