@@ -148,7 +148,7 @@ void fn_8031E78C(void *arg0) {
 }
 
 void fn_8031E7B8(void) {
-    M2C_UNK fn_8031E724(M2C_UNK, M2C_UNK);
+    void fn_8031E724(s32, s32);
     fn_8031E724(1, 0xFFFF);
 }
 
