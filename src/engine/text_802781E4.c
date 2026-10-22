@@ -2,6 +2,56 @@
 #include "common.h"
 
 void fn_802A1E68(void);
+void fn_802781E4(void) {
+    extern void (*lbl_80443314)(void);
+    lbl_80443314();
+}
+
+s32 *fn_80278210(s32 *arg0) {
+    s32 i;
+    arg0[0] = 0;
+    arg0[1] = 0;
+    arg0[2] = 0;
+    arg0[3] = 0;
+    arg0[4] = 0;
+    arg0[5] = 0;
+    arg0[6] = 0;
+    arg0[7] = 0;
+    arg0[8] = 0;
+    arg0[9] = 0;
+    arg0[10] = 0;
+    arg0[11] = 0;
+    arg0[12] = 0;
+    arg0[13] = 0;
+    arg0[14] = 0;
+    arg0[15] = 0;
+    arg0[16] = 0;
+    arg0[17] = 0;
+    arg0[18] = 0;
+    arg0[19] = 0;
+    arg0[20] = 0;
+    arg0[21] = 0;
+    arg0[22] = 0;
+    arg0[23] = 0;
+    arg0[24] = 0;
+    arg0[25] = 0;
+    arg0[26] = 0;
+    arg0[27] = 0;
+    arg0[28] = 0;
+    arg0[29] = 0;
+    arg0[30] = 0;
+    arg0[31] = 0;
+    arg0[32] = 0;
+    arg0[33] = 0;
+    arg0[34] = 0;
+    arg0[35] = 0;
+    arg0[36] = 0;
+    arg0[37] = 0;
+    arg0[38] = 0;
+    arg0[39] = 0;
+    return arg0;
+}
+
 void fn_80278618(void) {
     fn_802A1E68();
 }
