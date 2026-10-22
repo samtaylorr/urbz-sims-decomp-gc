@@ -43,6 +43,14 @@ void fn_80316EFC(void *arg0, s32 arg1) {
     }
 }
 
+void fn_803171E8(void *self, s32 arg) {
+    void fn_80316F2C(void *, void *, void *);
+    if (M2C_FIELD(self, s32 *, 0x3C) != arg) {
+        M2C_FIELD(self, s32 *, 0x3C) = arg;
+        fn_80316F2C(self, self, (s8 *)self + 0xC);
+    }
+}
+
 void fn_80317390(void) {
     M2C_UNK fn_80317224(M2C_UNK, M2C_UNK);
     fn_80317224(1, 0xFFFF);
