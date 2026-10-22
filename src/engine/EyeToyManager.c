@@ -261,11 +261,11 @@ void fn_8033B664(s32 **arg0) {
         arg0[2] = a;
         arg0[1] = b;
     }
-    a = arg0[0];
-    b = arg0[1];
-    if (*a > *b) {
-        arg0[0] = b;
-        arg0[1] = a;
+    b = arg0[0];
+    a = arg0[1];
+    if (*b > *a) {
+        arg0[1] = b;
+        arg0[0] = a;
     }
 }
 
