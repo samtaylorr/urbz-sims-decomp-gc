@@ -15,6 +15,15 @@ typedef struct SampleList {
     s32 count;
 } SampleList;
 
+void fn_80335F5C(void *);
+void fn_80335FD8(void *);
+extern u8 lbl_8041C3B0[];
+extern void *lbl_8049627C;
+void fn_8033D2B8(void *arg0) {
+    M2C_FIELD(arg0, u8 **, 0xA4) = lbl_8041C3B0;
+    fn_80335FD8(arg0);
+}
+
 void *fn_8033D2E8(void *arg0) {
     fn_8033D278(arg0);
     M2C_FIELD(arg0, s32 *, 0x68) = 1;
