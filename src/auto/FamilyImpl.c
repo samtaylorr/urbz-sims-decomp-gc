@@ -292,6 +292,12 @@ void fn_8010C1D4(void **obj) {
     }
 }
 
+void *fn_8010C508(void *arg0, u8 *arg1) {
+    void fn_801B3824(void *, void *);
+    fn_801B3824(arg0, arg1 + 4);
+    return arg0;
+}
+
 s32 fn_8010C580(void) {
     return 0;
 }
