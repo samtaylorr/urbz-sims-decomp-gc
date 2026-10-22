@@ -491,6 +491,18 @@ void *fn_802CCDC8(void *arg0, u32 arg1) {
     return var_r3;
 }
 
+EMat4Node *fn_802CD504(void *self, EMat4Node *n, void **out) {
+    EMat4Node *next = n->next;
+
+    if (next != NULL && next->key == n->key) {
+        if (out != NULL) {
+            *out = next->value;
+        }
+        return next;
+    }
+    return NULL;
+}
+
 void fn_802CD59C(EMat4Node **list) {
     extern void *fn_802D0AB8(void *);
     EMat4Node *n;
