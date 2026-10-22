@@ -6,6 +6,13 @@ extern s32 lbl_80494F80;
 void *fn_802D0AB8(void);
 void *fn_802D197C(void *, u32, s32);
 void *fn_802DBBCC(void *, u32, s32);
+void *fn_80338000(void *p, s32 size, s32 align);
+void *fn_803729C8(void *p);
+void fn_803733D8(void *p, s32 arg1, s32 arg2);
+void fn_80335F5C(void *p);
+void fn_80335FD8(void *p, s32 n);
+extern u8 lbl_8045BBA0[];
+extern u8 lbl_8041C180[];
 
 static inline void *EyeToyAlloc(s32 count) {
     void *heap;
