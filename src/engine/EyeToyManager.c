@@ -245,8 +245,41 @@ void fn_8033A744(void) {
 
 }
 
+void fn_8033B664(s32 **arg0) {
+    s32 *a;
+    s32 *b;
+
+    a = arg0[0];
+    b = arg0[1];
+    if (*a > *b) {
+        arg0[1] = a;
+        arg0[0] = b;
+    }
+    a = arg0[1];
+    b = arg0[2];
+    if (*a > *b) {
+        arg0[2] = a;
+        arg0[1] = b;
+    }
+    a = arg0[0];
+    b = arg0[1];
+    if (*a > *b) {
+        arg0[0] = b;
+        arg0[1] = a;
+    }
+}
+
 void fn_8033BBCC(void) {
     fn_802D0B3C();
+}
+
+void *fn_8033BBEC(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    void *p;
+
+    p = fn_803729C8(fn_80338000(lbl_8045BBA0, 0x48, 4));
+    *(s32 *)((u8 *)p + 8) = arg3;
+    fn_803733D8(p, arg1, arg2);
+    return p;
 }
 
 void fn_8033BC4C(s32 arg0) {
