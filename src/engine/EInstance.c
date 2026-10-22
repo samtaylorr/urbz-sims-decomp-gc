@@ -1,6 +1,14 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+typedef struct EInstVec3 {
+    s32 x, y, z;
+} EInstVec3;
+
+extern f32 lbl_803F0E6C;
+extern f32 lbl_803F0E70;
+extern f32 lbl_803F0E74;
+
 void fn_802D2FD0(void);
 void fn_802F041C(void) {
     fn_802D2FD0();
