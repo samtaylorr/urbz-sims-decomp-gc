@@ -57,6 +57,13 @@ s32 fn_80371658(s32 arg0, s32 *out) {
     return arg0;
 }
 
+extern void fn_8031E988(void *, void *);
+extern void fn_803C0354(void *, void *);
+void fn_80371754(void *arg0, void *arg1) {
+    fn_8031E988(arg0, arg1);
+    fn_803C0354(arg1, (u8 *)arg0 + 0x20);
+}
+
 void fn_803717DC(void **arg0, char *arg1) {
     extern void fn_80364C90(void *);
     extern void fn_80364CB0(void *, s32);
