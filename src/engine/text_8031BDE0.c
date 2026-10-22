@@ -15,6 +15,12 @@ extern u8 lbl_803F2CF8[];
 extern u8 lbl_80493858[];
 extern s32 lbl_8049621C;
 
+typedef struct {
+    s32 key;
+    const char *name;
+    s32 value;
+} NameEntry;
+
 static inline void *Alloc(u32 size) {
     void *heap;
     void *p;
@@ -129,7 +135,7 @@ s32 fn_8031C3D8(u8 *self, s32 key) {
     lo = 0;
     while (lo <= hi) {
         mid = (lo + hi) >> 1;
-        e = (s32 *)(*(u8 **)(self + 0x28) + mid * 0xC);
+        e = (s32 *)(mid * 0xC + *(u8 **)(self + 0x28));
         if (key == e[0]) {
             return e[2];
         }
