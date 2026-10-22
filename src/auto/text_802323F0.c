@@ -175,6 +175,15 @@ void fn_802357B8(void *arg0) {
     fn_80232460(arg0);
 }
 
+void fn_802357F0(void *arg0) {
+    void fn_80232460(void *);
+    extern u8 lbl_80417770[];
+    extern u8 lbl_80417DB0[];
+    M2C_FIELD(arg0, void **, 0x58) = lbl_80417DB0;
+    M2C_FIELD(arg0, void **, 0x1B8) = lbl_80417770;
+    fn_80232460(arg0);
+}
+
 void fn_80235914(void *arg0, s32 arg1) {
     void fn_80089698(void *, s32);
     void fn_802D20E8(void *);
