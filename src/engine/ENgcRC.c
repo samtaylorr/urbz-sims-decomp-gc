@@ -330,7 +330,7 @@ void fn_803481E8(u8 *arg0) {
     size = lbl_8046C400.unkBC;
     for (;;) {
         msg.index = i;
-        fn_8034828C(&msg.buf);
+        fn_8034828C(&msg);
         if ((s32)((i + lbl_8046C400.unkC0) % lbl_8046C400.unk50) == (s32)(lbl_8046C400.unk50 - 1)) {
             if (lbl_8046C400.unkA6 & 1) {
                 size = *(s32 *)msg.buf;
@@ -347,14 +347,9 @@ void fn_803481E8(u8 *arg0) {
     }
 }
 
-void fn_8034828C(u8 **arg0) {
-    struct Entry {
-        s32 unk0;
-        s32 unk4;
-        s32 unk8;
-    };
-    struct Entry *fn_8034834C(void);
-    void fn_803483F0(struct Entry *);
+void fn_8034828C(s32 **arg0) {
+    s32 *fn_8034834C(void);
+    void fn_803483F0(s32 *);
     s32 fn_803980A8(s32, u8 *, s32);
     extern struct {
         u8 pad0[0x6C];
@@ -362,23 +357,19 @@ void fn_8034828C(u8 **arg0) {
         u8 unk70[0xEC - 0x70];
         s32 unkEC;
     } lbl_8046C400;
-    struct Entry *e;
-    s32 *sizes;
-    u8 *data;
+    s32 *sizes = *arg0 + 2;
+    u8 *data = (u8 *)(*arg0 + lbl_8046C400.unk6C + 2);
+    s32 *e = fn_8034834C();
     u32 i;
 
-    sizes = (s32 *)(*arg0 + 8);
-    data = *arg0 + lbl_8046C400.unk6C * 4 + 8;
-    e = fn_8034834C();
-    for (i = 0; i < lbl_8046C400.unk6C; i++) {
+    for (i = 0; i < lbl_8046C400.unk6C; i++, sizes++) {
         if (lbl_8046C400.unk70[i] == 1) {
-            e->unk8 = fn_803980A8(e->unk0, data + *sizes * lbl_8046C400.unkEC, 0);
-            e->unk4 = e->unk0;
+            e[2] = fn_803980A8(e[0], data + *sizes * lbl_8046C400.unkEC, 0);
+            e[1] = e[0];
             fn_803483F0(e);
             return;
         }
         data += *sizes;
-        sizes++;
     }
 }
 
@@ -548,6 +539,18 @@ void fn_8034BCEC(void *arg0) {
 
 void fn_8034BDCC(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
+}
+
+extern u8 lbl_8041CE98[];
+extern void *lbl_804950A8;
+extern void fn_8036EE30(void *);
+void fn_8034C028(u8 *self) {
+    extern u8 lbl_8041CE98[];
+    extern void *lbl_804950A8;
+    extern void fn_8036EE30(void *);
+    *(u8 **)(self + 0x338) = lbl_8041CE98;
+    lbl_804950A8 = 0;
+    fn_8036EE30(self);
 }
 
 void fn_8034C05C(void) {
