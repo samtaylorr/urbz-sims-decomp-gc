@@ -6752,21 +6752,24 @@ void fn_803B9648(s32 self, s32 flags) {
     }
 }
 
-void fn_803B9688(f32 *self) {
-    extern f32 lbl_803F0198;
-    extern f32 lbl_803F019C;
-    f32 zero = lbl_803F0198;
-    self[0] = zero;
-    self[3] = lbl_803F019C;
-    self[2] = zero;
-    self[1] = zero;
+Vec4f fn_803B9688(void) {
+    extern f32 lbl_803F0198[];
+    extern f32 lbl_803F019C[];
+    Vec4f v;
+    v.x = lbl_803F0198[0];
+    v.y = lbl_803F0198[0];
+    v.z = lbl_803F0198[0];
+    v.w = lbl_803F019C[0];
+    return v;
 }
 
-void fn_803B96B0(f32 *dst, f32 *src, f32 s) {
-    dst[0] = s * src[0];
-    dst[1] = s * src[1];
-    dst[2] = s * src[2];
-    dst[3] = s * src[3];
+Vec4f fn_803B96B0(const Vec4f *src, f32 s) {
+    Vec4f v;
+    v.x = s * src->x;
+    v.y = s * src->y;
+    v.z = s * src->z;
+    v.w = s * src->w;
+    return v;
 }
 
 void *fn_803B96E8(void) {
@@ -7430,13 +7433,19 @@ void fn_803BC94C(u8 *p, s32 n) {
 }
 
 void fn_803BC998(u8 *dst, u8 *src, s32 n) {
-    struct Name40 { char s[0x40]; };
     while (--n != -1) {
         u8 *d = dst;
         u8 *s = src;
+        u8 *dp;
+        u8 *sp;
+        s32 i;
         src += 0x58;
         dst += 0x58;
-        *(struct Name40 *)d = *(struct Name40 *)s;
+        dp = d;
+        sp = s;
+        for (i = 0x40; i != 0; i--) {
+            *dp++ = *sp++;
+        }
         M2C_FIELD(d, s32 *, 0x40) = M2C_FIELD(s, s32 *, 0x40);
         M2C_FIELD(d, s32 *, 0x44) = M2C_FIELD(s, s32 *, 0x44);
         fn_8039D388((s32 *)(d + 0x48), (s32 *)(s + 0x48));
