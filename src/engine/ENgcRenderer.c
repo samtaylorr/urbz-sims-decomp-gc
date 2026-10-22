@@ -310,6 +310,19 @@ loop_1:
     goto loop_1;
 }
 
+void fn_8035F2B8(s32 arg0, s32 arg1) {
+    extern u8 lbl_80474FF8[];
+    void fn_8035EF8C(void *, s32);
+
+    if (arg1 == 0xFFFF) {
+        if (arg0 != 0) {
+            fn_8035EF28(lbl_80474FF8);
+        } else {
+            fn_8035EF8C(lbl_80474FF8, 2);
+        }
+    }
+}
+
 void fn_8035F30C(void) {
 
 }
