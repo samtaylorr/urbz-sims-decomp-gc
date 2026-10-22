@@ -78,8 +78,9 @@ s32 fn_80345A44(void *arg0, s32 arg1) {
     return M2C_FIELD(arg0, s32 *, 8) + (arg1 * 8);
 }
 
+void fn_80345A54(s32 arg0, s32 arg1);
+
 void fn_80345AA0(void) {
-    M2C_UNK fn_80345A54(M2C_UNK, M2C_UNK);
     fn_80345A54(1, 0xFFFF);
 }
 
