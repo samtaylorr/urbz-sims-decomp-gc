@@ -566,9 +566,15 @@ s32 fn_802CD600(void **arg0) {
 }
 
 void *fn_802CD66C(void *self, EMat4Node **other, s32 overwrite);
-void *fn_802CD628(void *self, EMat4Node **other) {
-    fn_802CD53C(self);
+static inline void EMat4_InsertAll(void *self, EMat4Node **other) {
     fn_802CD66C(self, other, 1);
+}
+
+void *fn_802CD628(void *self, EMat4Node **other) {
+    void *(*copy)(void *, EMat4Node **, s32) = fn_802CD66C;
+
+    fn_802CD53C(self);
+    copy(self, other, 1);
     return self;
 }
 
