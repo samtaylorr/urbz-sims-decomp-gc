@@ -139,6 +139,18 @@ s32 fn_802348F8(s32 *arg0, s32 arg1, s32 arg2) {
     return var_r3;
 }
 
+void fn_8023570C(void **arg0, s32 arg1) {
+    void fn_8022C228(void *, s32);
+    u8 *obj;
+    u8 *vt;
+
+    obj = *arg0;
+    if (obj != NULL) {
+        vt = *(u8 **)(obj + 4);
+        fn_8022C228((*(void *(**)(void *))(vt + 0x4D4))(obj + *(s16 *)(vt + 0x4D0)), arg1);
+    }
+}
+
 s32 fn_80235760(s32 arg0) {
     return arg0 + 0xA8;
 }
