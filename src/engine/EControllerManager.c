@@ -307,8 +307,8 @@ void *fn_80334F80(void *arg0) {
     extern f32 lbl_803F3774[];
     M2C_UNK fn_80335F5C(void *);
     fn_80335F5C(arg0);
-    M2C_FIELD(arg0, u8 **, 0xA4) = lbl_8041BE20;
     M2C_FIELD(arg0, f32 *, 0xA8) = lbl_803F3774[0];
+    M2C_FIELD(arg0, u8 **, 0xA4) = lbl_8041BE20;
     return arg0;
 }
 
