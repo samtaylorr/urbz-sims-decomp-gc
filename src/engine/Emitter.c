@@ -73,3 +73,7 @@ void fn_8030CB5C(s32 arg0, s32 arg1) {
 
 }
 
+void fn_8030CB60(void) {
+    fn_8030CB5C(1, 0xFFFF);
+}
+
