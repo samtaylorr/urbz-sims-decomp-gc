@@ -9,6 +9,16 @@ extern void fn_801961D4(void *);
 extern s32 fn_80194D94(void *);
 void fn_801978E4(s32 arg0, s32 arg1);
 
+void fn_801978E4(s32 arg0, s32 arg1) {
+    if (arg1 == 0xFFFF) {
+        if (arg0 != 0) {
+            fn_80193050(lbl_80435398);
+        } else {
+            fn_803AA364(lbl_80435398, 2);
+        }
+    }
+}
+
 void fn_80197938(void) {
     fn_801978E4(1, 0xFFFF);
 }
