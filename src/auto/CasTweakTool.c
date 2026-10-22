@@ -1,6 +1,8 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+typedef struct { s32 data[0x38]; } CasTweakBlock;
+
 void fn_801CF4D4(void *arg0) {
     M2C_UNK fn_801CE504(void *, s32);
     s32 fn_80247C34();
