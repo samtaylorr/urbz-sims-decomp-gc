@@ -9,11 +9,6 @@ extern f32 lbl_803F0E6C[];
 extern f32 lbl_803F0E70[];
 extern f32 lbl_803F0E74[];
 
-static inline void EInstance_WriteS32(void *stream, s32 value) {
-    char *vt = M2C_FIELD(stream, char **, 0x18);
-    ((void (*)(void *, void *, s32))M2C_FIELD(vt, void **, 0x3C))((char *)stream + M2C_FIELD(vt, s16 *, 0x38), &value, 4);
-}
-
 void fn_802D2FD0(void);
 void fn_802F041C(void) {
     fn_802D2FD0();
