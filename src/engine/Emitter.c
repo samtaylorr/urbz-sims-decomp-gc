@@ -2,6 +2,15 @@
 #include "common.h"
 
 void fn_8030AA98(void);
+extern f32 lbl_803F2088[];
+extern f32 lbl_803F208C[];
+extern f32 lbl_803F2090[];
+extern void *lbl_80494EC4;
+void fn_8030C0E8(void *arg0);
+s32 fn_8030AA04(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7);
+void fn_8030AB88(void *arg0, s32 arg1);
+void fn_8030B800(void);
+void fn_8030B280(void);
 s32 fn_8030ACB0(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x8C);
 }
