@@ -63,6 +63,16 @@ void fn_803403B4(u8 *self, u8 *arg1) {
     *(s32 *)(self + 0x2A4) = 0;
 }
 
+void fn_803404E0(s32 arg0, s32 arg1) {
+    if (arg1 == 0xFFFF) {
+        if (arg0 != 0) {
+            fn_8033FA18((M2C_UNK **)lbl_8045F9F0);
+        } else {
+            fn_8033FA58((void **)lbl_8045F9F0, 2);
+        }
+    }
+}
+
 void fn_803404E0(s32 arg0, s32 arg1);
 
 void fn_80340534(void) {
