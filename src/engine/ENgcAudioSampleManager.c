@@ -16,7 +16,7 @@ typedef struct SampleList {
 } SampleList;
 
 extern u32 lbl_80494FB8;
-void fn_8033DD9C(void *);
+void fn_8033DD9C();
 extern u8 lbl_8045D140[];
 extern SampleList lbl_8045D1F0;
 void *fn_802D0AB8(void);
