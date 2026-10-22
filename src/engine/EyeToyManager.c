@@ -61,8 +61,11 @@ s32 fn_803390A4(void) {
 s32 fn_803390AC(void) {
     extern s32 lbl_80494F7C;
 
-    if (lbl_80494F7C == 0) {
+    if (lbl_80494F7C != 0) {
         return -1;
+    }
+    if (lbl_80494F7C != 0) {
+        return 0;
     }
     return -1;
 }
