@@ -48,3 +48,8 @@ void fn_80317390(void) {
     fn_80317224(1, 0xFFFF);
 }
 
+s32 fn_80317224(s32, s32);
+void fn_803173BC(void) {
+    fn_80317224(0, 0xFFFF);
+}
+
