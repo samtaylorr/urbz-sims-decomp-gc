@@ -63,6 +63,40 @@ void fn_8033F2B8(s32 arg0, s32 arg1, s32 arg2) {
     lbl_8049502C = arg2;
 }
 
+void fn_8033F2C8(void) {
+    extern s32 lbl_80495024;
+    extern s32 lbl_8049502C;
+    u32 *p;
+
+    for (p = (u32 *)lbl_80495024; p < (u32 *)(lbl_80495024 + lbl_8049502C); p++) {
+        *p = 0x10801080;
+    }
+}
+
+void fn_8033F3D0(char *s, s32 *width, s32 *count) {
+    s32 n;
+
+    *width = 0;
+    *count = 0;
+    while (*s != 0) {
+        if (*s == '\n') {
+            break;
+        }
+        if (*s == ' ') {
+            if (*count != 0) {
+                break;
+            }
+            *count = 1;
+            s = fn_8037A798(s, &n);
+            *width += n;
+            break;
+        }
+        s = fn_8037A798(s, &n);
+        *width += n;
+        *count += 1;
+    }
+}
+
 extern u8 lbl_8045D260[];
 extern u32 lbl_80496284;
 void fn_8033E774(void *);
