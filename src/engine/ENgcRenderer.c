@@ -312,19 +312,29 @@ loop_1:
 
 void *fn_8035F1B4(char *self) {
     void *fn_802C7DE4(void *);
-    char *vt;
     void **p;
 
-    vt = *(char **)(self + 0x3A0);
-    (*(void (**)(void *, s32))(vt + 0x14))(self + 0x3A0 + *(s16 *)(vt + 0x10), -1);
-    p = *(void ***)(self + 0x394);
-    if (p != NULL) {
-        *(void **)(self + 0x394) = *p;
-    } else {
-        p = fn_802C7DE4(self + 0x394);
+    {
+        char *m = self + 0x3A0;
+        char *vt = *(char **)m;
+        void (*f)(void *, s32) = *(void (**)(void *, s32))(vt + 0x14);
+        f(m + *(s16 *)(vt + 0x10), -1);
     }
-    vt = *(char **)(self + 0x3A0);
-    (*(void (**)(void *))(vt + 0x1C))(self + 0x3A0 + *(s16 *)(vt + 0x18));
+    {
+        void **list = (void **)(self + 0x394);
+        p = *list;
+        if (p != NULL) {
+            *list = *p;
+        } else {
+            p = fn_802C7DE4(list);
+        }
+    }
+    {
+        char *m = self + 0x3A0;
+        char *vt = *(char **)m;
+        void (*f)(void *) = *(void (**)(void *))(vt + 0x1C);
+        f(m + *(s16 *)(vt + 0x18));
+    }
     return p;
 }
 
