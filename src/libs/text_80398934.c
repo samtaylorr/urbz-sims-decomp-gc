@@ -7396,6 +7396,19 @@ s32 *fn_803BD14C(s32 *self, s32 *other) {
     return self;
 }
 
+void fn_803BD770(void *self) {
+    extern void fn_80338184(void *, s32);
+    extern u8 lbl_8045BA40[];
+    if (M2C_FIELD(self, s32 *, 0xC) != 0) {
+        fn_80338184(lbl_8045BA40, M2C_FIELD(self, s32 *, 0xC));
+        M2C_FIELD(self, s32 *, 0xC) = 0;
+    }
+    if (M2C_FIELD(self, s32 *, 0x10) != 0) {
+        fn_80338184(lbl_8045BA40, M2C_FIELD(self, s32 *, 0x10));
+        M2C_FIELD(self, s32 *, 0x10) = 0;
+    }
+}
+
 void fn_803BD7D8(void *self) {
     fn_802D8BEC(self);
 }
