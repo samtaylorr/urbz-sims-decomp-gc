@@ -1369,7 +1369,7 @@ void fn_801B186C(void *arg0, s32 arg1, s32 arg2) {
 }
 
 s32 fn_801B19A0(void *arg0) {
-    return (M2C_FIELD(arg0, s16 *, 4) >> 15) & 1;
+    return (M2C_FIELD(arg0, s16 *, 4) & 0x8000) != 0;
 }
 
 void fn_801B19AC(void *arg0, s32 arg1) {
@@ -1395,6 +1395,43 @@ s32 fn_801B19CC(void *self, s32 arg1) {
 
 s32 fn_801B19F4(void) {
     return 0;
+}
+
+void *fn_801B19FC(u32 size) {
+    void *heap;
+    void *p;
+
+    if (size == 0x20) {
+        p = M2C_FIELD(lbl_80435418, void **, 4);
+        if (p != NULL) {
+            M2C_FIELD(lbl_80435418, void **, 4) = *(void **)p;
+            return p;
+        }
+    }
+    heap = fn_802D0AB8();
+    if (size == 0) {
+        return NULL;
+    }
+    p = fn_802D197C(heap, size, 4);
+    if (p == NULL) {
+        p = fn_802DBBCC(heap, size, 0);
+        if (p == NULL && heap == fn_802D0AB8()) {
+            return fn_802DBBCC(fn_802D0B3C(), size, 0);
+        }
+    }
+    return p;
+}
+
+void fn_801B1AB4(void *p) {
+    u32 base = M2C_FIELD(lbl_80435418, u32 *, 0);
+    if ((u32)p >= base && (u32)p < base + M2C_FIELD(lbl_80435418, u32 *, 8)) {
+        if (p != NULL) {
+            *(void **)p = M2C_FIELD(lbl_80435418, void **, 4);
+            M2C_FIELD(lbl_80435418, void **, 4) = p;
+        }
+    } else {
+        fn_802D1A00(fn_802D0AB8(), p);
+    }
 }
 
 void fn_801B1CBC(void) {
