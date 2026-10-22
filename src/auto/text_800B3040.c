@@ -132,12 +132,15 @@ s32 fn_800B49F4(void *arg0, char *str) {
     extern char lbl_803CF010[];
     s32 a;
     s32 b;
+    s32 result;
 
     fn_80245C94(str + 2, lbl_803CF010, &a, &b);
     if (a <= 4) {
-        return (a - 1) * 10 + b;
+        result = (a - 1) * 10 + b;
+    } else {
+        result = b + 38;
     }
-    return b + 38;
+    return result;
 }
 
 s32 fn_800B4C20(void *arg0) {
