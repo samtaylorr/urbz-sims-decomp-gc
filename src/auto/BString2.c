@@ -82,6 +82,13 @@ u16 fn_800EF940(void **arg0, u32 arg1) {
     return BString2_Data(arg0)[arg1];
 }
 
+u16 fn_800EF9A4(void **arg0, u32 arg1) {
+    if (arg1 < fn_800F4878(arg0)) {
+        return BString2_Data(arg0)[arg1];
+    }
+    return 0;
+}
+
 s32 fn_800EFA0C(s32 arg0, s32 arg1) {
     s32 fn_800F4058(s32, s32, s32, s32);
     return fn_800F4058(arg0, arg1, 0, -1) == 0;
