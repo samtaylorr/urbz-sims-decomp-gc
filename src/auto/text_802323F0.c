@@ -5,6 +5,7 @@ typedef struct { s32 w[2]; } Struct803EB1D8;
 typedef struct { s32 w[5]; } Struct1A8_5;
 typedef struct { s32 w[7]; } Struct1A8_7;
 typedef struct { s32 v; } Struct1B8;
+typedef struct { u8 b[4]; } Struct1B8b;
 
 extern void *fn_8022554C(void *);
 extern void fn_802303F0(void *, void *);
@@ -168,7 +169,8 @@ void fn_80232C74(u8 *arg0, u8 *arg1) {
             fn_800C3B48(handle != NULL ? *handle : 0, -1, arg0 + 0xA8);
             fn_80248808(arg0 + 0xA8);
         } else {
-            *(Struct803EB1D8 *)(arg0 + 0xA8) = lbl_803EB1D8[0];
+            Struct803EB1D8 tmp = lbl_803EB1D8[0];
+            *(Struct803EB1D8 *)(arg0 + 0xA8) = tmp;
         }
     } else {
         fn_80248784(arg0 + 0xA8, lbl_80494680);
@@ -193,12 +195,12 @@ void fn_80232D74(u8 *arg0, Struct1A8_5 *arg1) {
     void fn_80234BE8(void *);
     void fn_80232C74(u8 *, u8 *);
     extern s32 lbl_8041FC0C[];
-    s32 saved[1];
+    Struct803EB1D8 saved;
 
     fn_80232528();
-    saved[0] = *(s32 *)(arg0 + 0x1B8);
+    saved.w[0] = *(s32 *)(arg0 + 0x1B8);
     *(Struct1A8_5 *)(arg0 + 0x1A8) = *arg1;
-    *(s32 *)(arg0 + 0x1B8) = saved[0];
+    *(s32 *)(arg0 + 0x1B8) = saved.w[0];
     fn_80234BE8(arg0 + 0x60);
     if (lbl_8041FC0C[0] != 0) {
         fn_80232C74(arg0, 0);
@@ -222,12 +224,12 @@ void fn_80232E74(u8 *arg0, Struct1A8_7 *arg1) {
     void fn_80232C74(u8 *, u8 *);
     s32 fn_802337C8(void **, s32, s32);
     extern s32 lbl_8041FC0C[];
-    s32 saved[1];
+    Struct1B8 saved;
 
     if (arg1 != NULL) {
-        saved[0] = *(s32 *)(arg0 + 0x1B8);
+        saved = *(Struct1B8 *)(arg0 + 0x1B8);
         *(Struct1A8_7 *)(arg0 + 0x1A8) = *arg1;
-        *(s32 *)(arg0 + 0x1B8) = saved[0];
+        *(Struct1B8 *)(arg0 + 0x1B8) = saved;
         if (fn_802337C8((void **)(arg0 + 0x60), *(s32 *)(arg0 + 0x1BC), *(u8 *)(arg0 + 0x1C0)) != 0) {
             if (lbl_8041FC0C[0] != 0) {
                 fn_80232C74(arg0, *(u8 **)(arg0 + 0x60));
