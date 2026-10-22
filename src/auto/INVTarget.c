@@ -1191,6 +1191,12 @@ void fn_802055C8(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s8 *, 0x8C1) = fn_80246E00(arg1);
 }
 
+void fn_802055FC(void *arg0, char *arg1) {
+    struct Str7 { char s[7]; };
+    extern char lbl_803E60D8[];
+    *(struct Str7 *)arg1 = *(struct Str7 *)lbl_803E60D8;
+}
+
 void fn_802059A8(void) {
 
 }
