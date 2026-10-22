@@ -47,6 +47,11 @@ s32 fn_800C4050(void) {
     return 1;
 }
 
+void fn_800C40E8(char *self, void *buf) {
+    char *vt = *(char **)self;
+    (*(void (**)(char *, void *, s32))(vt + 0x4C))(self + *(s16 *)(vt + 0x48), buf, 1);
+}
+
 void fn_800C4120(char *self, s8 val) {
     s8 tmp = val;
     char *vt = *(char **)self;
