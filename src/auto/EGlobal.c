@@ -204,6 +204,16 @@ void fn_8004DCC0(void *arg0) {
     }
 }
 
+void fn_8004DCF0(void *arg0) {
+    M2C_UNK fn_8002AF18(void *);
+    M2C_UNK fn_80064EC4(s32);
+
+    if (M2C_FIELD(arg0, void **, 0xEC) != NULL) {
+        fn_8002AF18(M2C_FIELD(arg0, void **, 0xEC));
+        fn_80064EC4(M2C_FIELD(M2C_FIELD(arg0, void **, 0xEC), s32 *, 4));
+    }
+}
+
 s32 fn_8004E644(void) {
     return 0;
 }
