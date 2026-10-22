@@ -5,6 +5,10 @@ static inline char *SeqVec_End(char **v) {
     return v[1];
 }
 
+static inline void SeqPair_Clear(s32 *p) {
+    p[1] = 0;
+}
+
 extern s32 lbl_80495D10;
 extern void fn_800F1A60(s32, s32);
 void fn_80197AC8(void *arg0) {
