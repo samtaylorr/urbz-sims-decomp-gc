@@ -90,19 +90,19 @@ void *fn_800A361C(char *arg0) {
         f32 a;
         f32 b;
     } t;
-    f32 temp_f0;
+    f32 d;
 
     fn_8030728C(arg0);
     M2C_FIELD(arg0, void **, 0x44) = lbl_8040A068;
     fn_800F160C(arg0 + 0x58);
     fn_800F160C(arg0 + 0x5C);
     fn_800F160C(arg0 + 0x60);
-    temp_f0 = lbl_80494290 - lbl_8049428C;
-    t.a = temp_f0 * lbl_803CD8EC[0] + temp_f0;
-    M2C_FIELD(arg0, s32 *, 0x88) = 0;
+    d = lbl_80494290 - lbl_8049428C;
+    t.a = d * lbl_803CD8EC[0] + d;
     t.b = lbl_80494298 - lbl_80494294;
+    M2C_FIELD(arg0, s32 *, 0x88) = 0;
     M2C_FIELD(arg0, f32 *, 0x28) = t.b;
-    M2C_FIELD(arg0, f32 *, 0x20) = t.a;
+    M2C_FIELD(arg0, f32 *, 0x20) = *(f32 *)&t;
     M2C_FIELD(arg0, s32 *, 0x68) = 0;
     return arg0;
 }
@@ -111,18 +111,18 @@ void fn_800A36B4(char *arg0, s32 arg1) {
     void fn_800A3600(void **);
     void fn_800F1A60(void *, s32);
     void fn_80307364(void *, s32);
-    void fn_8031EA2C(s32);
+    void fn_8031EA2C(void *);
     extern u8 lbl_8040A068[];
 
     M2C_FIELD(arg0, void **, 0x44) = lbl_8040A068;
-    M2C_FIELD(arg0, s32 *, 0x68) = 0;
-    if (M2C_FIELD(arg0, s32 *, 0x88) != 0) {
-        fn_8031EA2C(M2C_FIELD(arg0, s32 *, 0x88));
-        M2C_FIELD(arg0, s32 *, 0x88) = 0;
+    M2C_FIELD(arg0, void **, 0x68) = NULL;
+    if (M2C_FIELD(arg0, void **, 0x88) != NULL) {
+        fn_8031EA2C(M2C_FIELD(arg0, void **, 0x88));
+        M2C_FIELD(arg0, void **, 0x88) = NULL;
     }
-    if (M2C_FIELD(arg0, s32 *, 0x8C) != 0) {
-        fn_8031EA2C(M2C_FIELD(arg0, s32 *, 0x8C));
-        M2C_FIELD(arg0, s32 *, 0x8C) = 0;
+    if (M2C_FIELD(arg0, void **, 0x8C) != NULL) {
+        fn_8031EA2C(M2C_FIELD(arg0, void **, 0x8C));
+        M2C_FIELD(arg0, void **, 0x8C) = NULL;
     }
     fn_800F1A60(arg0 + 0x60, 2);
     fn_800F1A60(arg0 + 0x5C, 2);
@@ -168,5 +168,10 @@ s32 fn_800A437C(void) {
 void fn_800A439C(void) {
     M2C_UNK fn_800A40F0(M2C_UNK, M2C_UNK);
     fn_800A40F0(1, 0xFFFF);
+}
+
+void fn_800A43C8(void) {
+    M2C_UNK fn_800A40F0(M2C_UNK, M2C_UNK);
+    fn_800A40F0(0, 0xFFFF);
 }
 
