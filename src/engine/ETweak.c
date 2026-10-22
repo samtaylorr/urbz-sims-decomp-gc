@@ -1,6 +1,10 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+static inline s32 ETweakNode_Valid(void *n) {
+    return n != NULL;
+}
+
 void fn_802435CC(void);
 void fn_80313090(void *arg0, s32 arg1) {
     s32 fn_802D118C(s32);
@@ -93,7 +97,7 @@ void fn_80314B90(s32 arg0) {
 
     list = (s8 *)arg0 + 0xC;
     node = M2C_FIELD(list, void **, 4);
-    while (node != NULL) {
+    while (node != NULL ? 1 : 0) {
         obj = M2C_FIELD(node, s32 **, 0);
         next = M2C_FIELD(node, void **, 4);
         if (M2C_FIELD(list, s32 *, 8) != 0 && obj != NULL) {
