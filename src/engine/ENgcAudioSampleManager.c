@@ -31,6 +31,11 @@ void *fn_8033D2E8(void *arg0) {
     return arg0;
 }
 
+void fn_8033D32C(void *arg0) {
+    M2C_FIELD(arg0, u8 **, 0xA4) = lbl_8041C368;
+    fn_8033D2B8(arg0);
+}
+
 void fn_8033D35C(s32 arg0, s32 arg1, s32 arg2) {
     M2C_UNK fn_803360FC(s32, s32, s32);
     M2C_UNK fn_8033D700();
