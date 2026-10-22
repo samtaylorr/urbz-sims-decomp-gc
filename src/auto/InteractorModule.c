@@ -212,6 +212,15 @@ void fn_8023C45C(void *arg0) {
     fn_8022E84C(fn_8022554C(arg0), arg0);
 }
 
+void fn_8023C71C(s32 *arg0) {
+    M2C_UNK fn_80224E10(M2C_UNK, s32);
+    M2C_UNK fn_80225544(void);
+    M2C_UNK fn_8022D25C(s32);
+
+    fn_8022D25C(*arg0);
+    fn_80224E10(fn_80225544(), *arg0);
+}
+
 M2C_UNK fn_8023C758(void *self) {
     M2C_UNK fn_8023C77C(void *, s32);
     return fn_8023C77C(self, 3);
