@@ -27,6 +27,23 @@ static inline void *Heap_AllocAligned(u32 size, s32 align) {
 }
 
 void fn_8033740C(void);
+void *fn_803204A8(void *);
+extern u8 lbl_8045B634[];
+extern u8 lbl_8041BEF8[];
+void fn_80335F5C(void *p);
+void fn_80335FD8(void *p, s32 n);
+void fn_8033542C(s32 arg0, s32 arg1) {
+    if (arg1 == 0xFFFF) {
+        if (arg0 != 0) {
+            u8 *p = lbl_8045B634;
+            fn_80335F5C(p);
+            *(u8 **)(p + 0xA4) = lbl_8041BEF8;
+            return;
+        }
+        fn_80335FD8(lbl_8045B634, 2);
+    }
+}
+
 void fn_80335498(void) {
     fn_8033740C();
 }
