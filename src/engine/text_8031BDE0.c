@@ -85,6 +85,26 @@ void fn_8031BEE8(void **arg0, s32 arg1) {
     }
 }
 
+void fn_8031BF44(void *arg0) {
+    extern void fn_80338184(void *, s32);
+    extern u8 lbl_8045B4E4[];
+
+    fn_80338184(lbl_8045B4E4, M2C_FIELD(arg0, s32 *, 0x20));
+    M2C_FIELD(arg0, s32 *, 0x20) = 0;
+    if (M2C_FIELD(arg0, s32 *, 0x28) != 0) {
+        fn_80338184(lbl_8045B4E4, M2C_FIELD(arg0, s32 *, 0x28));
+        M2C_FIELD(arg0, s32 *, 0x28) = 0;
+    }
+}
+
+void fn_8031BF9C(void) {
+    extern s32 fn_80240584(void);
+
+    if (fn_80240584() != 0) {
+        *(s32 *)0 = 0;
+    }
+}
+
 s32 fn_8031C470(u8 *self, const char *name) {
     extern s32 fn_802486DC(const char *, const char *);
     u32 i;
