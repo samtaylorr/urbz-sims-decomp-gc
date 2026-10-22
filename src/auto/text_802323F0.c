@@ -79,6 +79,25 @@ void fn_80232878(void *arg0, s32 arg1, f32 farg0) {
     }
 }
 
+void fn_802328C4(void *arg0, s32 arg1) {
+    extern f32 lbl_803EB1C8[];
+
+    switch (arg1) {
+    case 7:
+        M2C_FIELD(arg0, f32 *, 0x34) = lbl_803EB1C8[0];
+        return;
+    case 8:
+        M2C_FIELD(arg0, f32 *, 0x38) = lbl_803EB1C8[0];
+        return;
+    case 11:
+        M2C_FIELD(arg0, f32 *, 0x3C) = lbl_803EB1C8[0];
+        return;
+    case 12:
+        M2C_FIELD(arg0, f32 *, 0x40) = lbl_803EB1C8[0];
+        return;
+    }
+}
+
 void fn_80232930(s32 arg0, s32 arg1) {
     M2C_UNK fn_80230468(s32, s32);
     fn_80230468(arg1, arg0);
