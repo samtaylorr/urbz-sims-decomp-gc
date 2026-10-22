@@ -47,6 +47,12 @@ void fn_802EDB30(void *arg0) {
     }
 }
 
+void fn_802EDC60(void) {
+    extern void *fn_8036BA10(u32);
+    extern void *fn_8036B878(void *, s32);
+    fn_8036B878(fn_8036BA10(0x60), 0x1000);
+}
+
 void fn_802EDC8C(void *unused, char *obj) {
     if (obj != NULL) {
         char *vt = *(char **)(obj + 0x5C);
