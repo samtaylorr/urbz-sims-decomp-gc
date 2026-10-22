@@ -449,6 +449,12 @@ void fn_802DEDAC(void) {
     fn_802DDC6C();
 }
 
+s32 *fn_802DEDCC(s32 *arg0, s32 arg1, s32 arg2) {
+    arg0[0] = arg1;
+    arg0[1] = arg2;
+    return arg0;
+}
+
 s32 fn_802DEDDC(void) {
     s32 fn_802DE2F8();
     return fn_802DE2F8() ^ 1;
