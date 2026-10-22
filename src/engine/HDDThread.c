@@ -204,7 +204,7 @@ void fn_80332D00(void *arg0) {
     fn_803321D8();
 }
 
-void fn_8033283C(void *);
+void *fn_8033283C(void *);
 void fn_802D8BEC(void *, s32);
 extern u8 lbl_8045AAB0[];
 
