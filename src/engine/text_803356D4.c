@@ -36,3 +36,7 @@ void fn_803357A4(void) {
     fn_803356F8(1, 0xFFFF);
 }
 
+void fn_803357D0(void) {
+    fn_803356F8(0, 0xFFFF);
+}
+
