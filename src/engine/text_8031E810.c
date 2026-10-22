@@ -49,6 +49,30 @@ void *fn_8031E9B4(void *arg0, void *arg1) {
     return arg1;
 }
 
+void *fn_8031E9F0(void *arg0, void *arg1) {
+    void *fn_802C5B1C(void *, s32);
+    extern u16 lbl_8049386E[];
+    if (lbl_8049386E[0] == 0) {
+        return fn_802C5B1C(arg1, (s32)arg0 + 0x18);
+    }
+    return arg1;
+}
+
+void fn_8031EA2C(void *arg0) {
+    void fn_80337AEC(void *, void *);
+    char *vt;
+
+    if (M2C_FIELD(arg0, void **, 4) != NULL) {
+        fn_80337AEC(M2C_FIELD(arg0, void **, 4), arg0);
+        return;
+    }
+    M2C_FIELD(arg0, s32 *, 0xC) -= 1;
+    if (M2C_FIELD(arg0, s32 *, 0xC) == 0) {
+        vt = M2C_FIELD(arg0, char **, 0);
+        (*(void (**)(void *))(vt + 0xC))((char *)arg0 + *(s16 *)(vt + 8));
+    }
+}
+
 void fn_8031EA90(void *arg0) {
     M2C_UNK fn_80337C24(s32, void *);
     fn_80337C24(M2C_FIELD(arg0, s32 *, 4), arg0);
