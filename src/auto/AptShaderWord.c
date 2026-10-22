@@ -1,6 +1,11 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+typedef struct AptVec2 {
+    f32 x;
+    f32 y;
+} AptVec2;
+
 void fn_80007EAC(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x18) = (s32) (M2C_FIELD(arg0, s32 *, 0x18) + 1);
 }
