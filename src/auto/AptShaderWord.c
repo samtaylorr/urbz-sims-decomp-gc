@@ -30,6 +30,6 @@ f32 fn_8000A334(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0x2C);
 }
 
-void fn_8000A468(void) {
+void fn_8000A468(s32 arg0, s32 arg1) {
 
 }
