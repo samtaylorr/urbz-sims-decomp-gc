@@ -120,6 +120,12 @@ s32 fn_80232D34(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0xA4);
 }
 
+void fn_80232D3C(u8 *arg0) {
+    extern u8 lbl_803EB1E0[];
+    fn_802324C0(arg0);
+    *(void **)(arg0 + 0x5C) = lbl_803EB1E0;
+}
+
 void fn_80232E38(s32 arg0, s32 arg1) {
     M2C_UNK fn_80232528();
     M2C_UNK fn_80232E74(s32, s32);
