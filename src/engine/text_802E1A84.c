@@ -28,3 +28,8 @@ void fn_802E1B9C(void) {
     fn_802E1B48(1, 0xFFFF);
 }
 
+void fn_802E1BC8(void) {
+    M2C_UNK fn_802E1B48(M2C_UNK, M2C_UNK);
+    fn_802E1B48(0, 0xFFFF);
+}
+
