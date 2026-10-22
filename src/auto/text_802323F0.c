@@ -12,6 +12,15 @@ void fn_802324F4(void *arg0) {
     fn_80230448(fn_8022554C(arg0), arg0);
 }
 
+void fn_802326A4(s32 *arg0) {
+    M2C_UNK fn_80224E10(M2C_UNK, s32);
+    M2C_UNK fn_80225544(void);
+    M2C_UNK fn_8022D25C(s32);
+
+    fn_8022D25C(*arg0);
+    fn_80224E10(fn_80225544(), *arg0);
+}
+
 void fn_802326E0(void) {
 
 }
