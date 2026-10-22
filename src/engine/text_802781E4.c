@@ -2,6 +2,13 @@
 #include "common.h"
 
 void fn_802A1E68(void);
+
+static inline void RefRelease(u16 *ref) {
+    extern u8 *lbl_80494DA0;
+    if (--*ref == 0) {
+        (*(void (**)(void))(lbl_80494DA0 + 4))();
+    }
+}
 void fn_802781E4(void) {
     extern void (*lbl_80443314[])(void);
     lbl_80443314[0]();
@@ -181,13 +188,15 @@ void fn_8027A7EC(u8 *arg0) {
     extern u8 *lbl_80494DA0;
     u16 *sp8;
     u8 *vt;
+    u16 *p;
 
     vt = *(u8 **)(arg0 + 4);
     fn_802BE53C(&sp8, (*(s32 (**)(void *))(vt + 0x7C))(arg0 + *(s16 *)(vt + 0x78)));
     vt = *(u8 **)(arg0 + 4);
     (*(void (**)(void *))(vt + 0x84))(arg0 + *(s16 *)(vt + 0x80));
     fn_802ADFFC(lbl_80494D54 + 8, &sp8, arg0);
-    if (--*sp8 == 0) {
+    p = sp8;
+    if (--*p == 0) {
         (*(void (**)(void))(lbl_80494DA0 + 4))();
     }
 }
@@ -200,6 +209,24 @@ void fn_8027A894(void (*cb)(void)) {
 void fn_8027A89C(void) {
     extern s32 lbl_80494B44;
     lbl_80494B44 = 1;
+}
+
+void fn_8027A8A8(s32 arg0, s32 arg1) {
+    extern s32 lbl_80443310;
+    extern u16 lbl_803FCE5C;
+    extern u8 *lbl_80494DA0;
+    extern u16 *lbl_804960E0;
+    s32 *fn_80278210(s32 *arg0);
+
+    if (arg1 == 0xFFFF) {
+        if (arg0 != 0) {
+            fn_80278210(&lbl_80443310);
+            lbl_804960E0 = &lbl_803FCE5C;
+            lbl_803FCE5C++;
+        } else if (--*lbl_804960E0 == 0) {
+            (*(void (**)(void))(lbl_80494DA0 + 4))();
+        }
+    }
 }
 
 void fn_8027A8A8(s32 arg0, s32 arg1);
