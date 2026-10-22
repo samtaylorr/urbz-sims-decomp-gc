@@ -29,3 +29,8 @@ void fn_8019A04C(void) {
     fn_80199FF8(1, 0xFFFF);
 }
 
+extern u8 lbl_804353F4[];
+void fn_8019A078(void) {
+    fn_80199FF8(0, 0xFFFF);
+}
+
