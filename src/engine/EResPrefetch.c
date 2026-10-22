@@ -31,16 +31,12 @@ void fn_8031F764(s32 arg0, s32 arg1, s32 arg2) {
 
 s32 fn_8031F958(void *arg0) {
     s32 fn_803669C0(void *);
-    s32 var_r0;
     s32 var_r31;
 
     var_r31 = 0;
     if ((s32) M2C_FIELD(arg0, s32 *, 0x414) == 0) {
-        var_r0 = 1;
-        if (fn_803669C0(arg0 + 0x38C) == 0) {
-            var_r0 = 0;
-        }
-        if (var_r0 != 0) {
+        s32 ok = fn_803669C0(arg0 + 0x38C) != 0;
+        if (ok) {
             var_r31 = 1;
         }
     }
