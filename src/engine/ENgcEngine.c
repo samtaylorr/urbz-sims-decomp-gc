@@ -86,25 +86,29 @@ void fn_8033F2C8(void) {
 
 void fn_8033F3D0(char *s, s32 *width, s32 *count) {
     s32 n;
+    u8 c;
 
     *width = 0;
     *count = 0;
-    while (*s != 0) {
-        if (*s == '\n') {
-            break;
-        }
-        if (*s == ' ') {
-            if (*count != 0) {
+    c = *s;
+    if (c != 0) {
+        do {
+            if ((char)c == '\n') {
                 break;
             }
-            *count = 1;
+            if ((char)c == ' ') {
+                if (*count == 0) {
+                    *count = 1;
+                    fn_8037A798(s, &n);
+                    *width += n;
+                }
+                break;
+            }
             s = fn_8037A798(s, &n);
             *width += n;
-            break;
-        }
-        s = fn_8037A798(s, &n);
-        *width += n;
-        *count += 1;
+            *count += 1;
+            c = *s;
+        } while (c != 0);
     }
 }
 
