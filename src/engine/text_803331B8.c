@@ -38,19 +38,9 @@ extern u8 lbl_8041BD10[];
 void fn_80335F5C(void *p);
 void fn_80335FD8(void *p, s32 n);
 void *fn_803331B8(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
-    void *heap;
-    void *p;
     void *obj;
 
-    heap = fn_802D0AB8();
-    p = fn_802D197C(heap, 0x24, 4);
-    if (p == NULL) {
-        p = fn_802DBBCC(heap, 0x24, 0);
-        if (p == NULL && heap == fn_802D0AB8()) {
-            p = fn_802DBBCC(fn_802D0B3C(), 0x24, 0);
-        }
-    }
-    obj = fn_8037117C(p);
+    obj = fn_8037117C(Heap_Alloc(0x24));
     *(s32 *)((u8 *)obj + 8) = arg3;
     fn_803712D4(obj, arg1, arg2);
     return obj;
