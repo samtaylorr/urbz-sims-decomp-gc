@@ -12,3 +12,8 @@ void fn_801978E4(s32 arg0, s32 arg1);
 void fn_80197938(void) {
     fn_801978E4(1, 0xFFFF);
 }
+
+void fn_80197964(void) {
+    fn_801978E4(0, 0xFFFF);
+}
+
