@@ -4,7 +4,7 @@
 void fn_8036FF6C(void *);
 extern u8 lbl_8041DD60[];
 extern void *lbl_80495058;
-extern u8 lbl_80496290[];
+extern s32 lbl_80496290;
 void fn_803405CC(s32, s32);
 
 void *fn_8034058C(void *self) {
