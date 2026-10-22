@@ -10,6 +10,35 @@ void fn_8033E3B0(void *self, s32 flags) {
     }
 }
 
+void fn_8026A7B4(u32);
+void fn_8026A8C8(void);
+void *fn_802D1FC8(s32);
+void fn_80310264(void *);
+extern u8 lbl_8041C478[];
+extern u8 lbl_804939C0[];
+extern void **lbl_80494FC8;
+s32 fn_8033E3E4(void) {
+    s32 i;
+    void **arr;
+    void *obj;
+
+    fn_8026A8C8();
+    fn_8026A7B4(0x80000000);
+    fn_8026A7B4(0x40000000);
+    fn_8026A7B4(0x20000000);
+    fn_8026A7B4(0x10000000);
+    lbl_80494FC8 = (void **)lbl_804939C0;
+    for (i = 0; i <= 3; i++) {
+        arr = lbl_80494FC8;
+        obj = fn_802D1FC8(0x20C);
+        fn_80310264(obj);
+        M2C_FIELD(obj, u8 **, 0x204) = lbl_8041C478;
+        arr[i] = obj;
+        M2C_FIELD(lbl_80494FC8[i], s32 *, 0x208) = i;
+    }
+    return 1;
+}
+
 void fn_8033E484(void) {
 
 }
