@@ -65,3 +65,7 @@ void fn_803334AC(void) {
     fn_80333400(1, 0xFFFF);
 }
 
+void fn_803334D8(void) {
+    fn_80333400(0, 0xFFFF);
+}
+
