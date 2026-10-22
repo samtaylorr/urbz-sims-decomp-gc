@@ -72,3 +72,7 @@ void fn_8033F9C0(void) {
     fn_8033F94C(1, 0xFFFF);
 }
 
+void fn_8033F9EC(void) {
+    fn_8033F94C(0, 0xFFFF);
+}
+
