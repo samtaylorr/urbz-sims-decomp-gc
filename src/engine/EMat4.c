@@ -498,8 +498,11 @@ EMat4Node *fn_802CD498(void *self, s32 key, s32 *out) {
 
     n = (char *)fn_802CD440(self, key, 0);
     if (n != NULL) {
-        while ((next = M2C_FIELD(n, char **, 0xC)) != NULL && M2C_FIELD(next, s32 *, 0x18) == key) {
+    loop:
+        next = M2C_FIELD(n, char **, 0xC);
+        if (next != NULL && M2C_FIELD(next, s32 *, 0x18) == key) {
             n = next;
+            goto loop;
         }
         if (out != NULL) {
             *out = M2C_FIELD(n, s32 *, 0x1C);
