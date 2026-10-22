@@ -69,6 +69,11 @@ void fn_800C4198(char *self, s32 val) {
     (*(void (**)(char *, void *, s32))(vt + 0x54))(self + *(s16 *)(vt + 0x50), &tmp, 4);
 }
 
+void fn_800C41D8(char *self, void *buf) {
+    char *vt = *(char **)self;
+    (*(void (**)(char *, void *, s32))(vt + 0x4C))(self + *(s16 *)(vt + 0x48), buf, 4);
+}
+
 void fn_800C43D4(void *self) {
 
 }
