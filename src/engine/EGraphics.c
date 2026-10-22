@@ -47,6 +47,13 @@ void fn_802EDB30(void *arg0) {
     }
 }
 
+void fn_802EDC8C(void *unused, char *obj) {
+    if (obj != NULL) {
+        char *vt = *(char **)(obj + 0x5C);
+        (*(void (**)(void *, s32))(vt + 0xC))(obj + *(s16 *)(vt + 0x8), 3);
+    }
+}
+
 void fn_802EDCCC(void) {
     M2C_UNK fn_802D1FC8(M2C_UNK);
     M2C_UNK fn_802FB578();
