@@ -7429,6 +7429,20 @@ void fn_803BC94C(u8 *p, s32 n) {
     }
 }
 
+void fn_803BC998(u8 *dst, u8 *src, s32 n) {
+    struct Name40 { char s[0x40]; };
+    while (--n != -1) {
+        u8 *d = dst;
+        u8 *s = src;
+        src += 0x58;
+        dst += 0x58;
+        *(struct Name40 *)d = *(struct Name40 *)s;
+        M2C_FIELD(d, s32 *, 0x40) = M2C_FIELD(s, s32 *, 0x40);
+        M2C_FIELD(d, s32 *, 0x44) = M2C_FIELD(s, s32 *, 0x44);
+        fn_8039D388((s32 *)(d + 0x48), (s32 *)(s + 0x48));
+    }
+}
+
 void *fn_803BCB50(u8 *self, s32 *arr) {
     extern void fn_803BCA30(void *, s32, s32);
     extern void fn_802CB278(void *, void *);
@@ -8014,6 +8028,21 @@ void fn_803C03D4(u8 *p, s32 n) {
         fn_80366A7C(p);
         p += 0x58;
     }
+}
+
+void *fn_803C0654(u8 *self, s32 *arr) {
+    extern void fn_803C04B8(void *, s32, s32);
+    extern void fn_803670E4(void *, void *);
+    u8 *vt = M2C_FIELD(self, u8 **, 0x18);
+    s32 n;
+    s32 i;
+
+    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x34)(self + M2C_FIELD(vt, s16 *, 0x30), &n, 4);
+    fn_803C04B8(arr, n, 0);
+    for (i = 0; i < n; i++) {
+        fn_803670E4(self, (u8 *)*arr + i * 0x58);
+    }
+    return self;
 }
 
 void fn_803C06EC(void *self) {
