@@ -1,7 +1,7 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
-s32 fn_80314E68();
+s32 fn_80314E68(void *self, u8 index);
 extern void fn_802D20E8(void *);
 void *fn_80314CC0(void *arg0) {
     M2C_UNK fn_80248488(M2C_UNK *, M2C_UNK, M2C_UNK);
@@ -27,8 +27,8 @@ s32 fn_80314DB0(s32 *self) {
     return *self;
 }
 
-void fn_80314E34(void) {
-    fn_80314E68();
+void fn_80314E34(void *self, u8 index) {
+    fn_80314E68(self, index);
 }
 
 s32 fn_8031536C(void *self, s32 idx) {
