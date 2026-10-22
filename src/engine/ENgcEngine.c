@@ -1,6 +1,17 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+typedef struct BootInfo {
+    u8 pad[0xF8];
+    u32 busClock;
+} BootInfo;
+
+extern u8 lbl_8045D260[];
+extern u32 lbl_80496284;
+void fn_8033E774(void *);
+char *fn_8037A798(char *, s32 *);
+void fn_8033F94C(s32, s32);
+
 extern s32 lbl_80495004;
 void fn_8033E768(void) {
     extern s32 lbl_80495040;
