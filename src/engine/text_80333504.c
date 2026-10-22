@@ -49,3 +49,7 @@ void fn_8033363C(void) {
     fn_80333590(1, 0xFFFF);
 }
 
+void fn_80333668(void) {
+    fn_80333590(0, 0xFFFF);
+}
+
