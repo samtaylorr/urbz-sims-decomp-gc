@@ -62,6 +62,16 @@ void fn_80339184(s32 arg0) {
     }
 }
 
+s32 fn_803391AC(s32 arg0) {
+    s32 fn_8033930C(s32);
+
+    if (arg0 == -1) {
+        return 0;
+    }
+    fn_8033930C(arg0);
+    return 0;
+}
+
 s32 fn_803391E4(s32 arg0) {
     s32 fn_8033930C(s32);
 
