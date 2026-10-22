@@ -191,24 +191,26 @@ void fn_802E0230(char *self) {
 
 void fn_802E02D8(char *self) {
     s32 *msg;
+    s32 *p;
 
     for (;;) {
         if (fn_80366820(self + 0x368, &msg, 1) == 0) {
             continue;
         }
-        switch (msg[0]) {
+        p = msg;
+        switch (p[0]) {
         case 2:
-            fn_802D20E8(msg);
+            fn_802D20E8(p);
             return;
         case 1:
-            fn_802D838C(msg[1]);
-            fn_802D20E8(msg);
+            fn_802D838C(p[1]);
+            fn_802D20E8(p);
             break;
         case 3:
-            if (msg[1] != 0) {
-                ((void (*)(void))msg[1])();
+            if (p[1] != 0) {
+                ((void (*)(void))p[1])();
             }
-            fn_802D20E8(msg);
+            fn_802D20E8(p);
             break;
         }
         fn_802DFB30(self + 8);
