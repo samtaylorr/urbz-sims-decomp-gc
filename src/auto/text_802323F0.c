@@ -8,6 +8,20 @@ typedef struct { s32 v; } Struct1B8;
 
 extern void *fn_8022554C(void *);
 extern void fn_802303F0(void *, void *);
+void fn_80232460(void *arg0, s32 arg1) {
+    M2C_UNK fn_802335F4(void *, s32);
+    M2C_UNK fn_802D20E8(void *);
+    extern char lbl_80417D08[];
+    extern char lbl_80417F30[];
+
+    M2C_FIELD(arg0, char **, 0x58) = lbl_80417F30;
+    fn_802335F4((char *)arg0 + 0x60, 2);
+    M2C_FIELD(arg0, char **, 0x58) = lbl_80417D08;
+    if (arg1 & 1) {
+        fn_802D20E8(arg0);
+    }
+}
+
 void fn_802324C0(void *arg0) {
     fn_802303F0(fn_8022554C(arg0), arg0);
 }
