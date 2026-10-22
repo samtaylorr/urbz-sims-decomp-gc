@@ -84,3 +84,9 @@ void fn_80345AA0(void) {
     fn_80345A54(1, 0xFFFF);
 }
 
+extern s32 lbl_80496298;
+extern void fn_80340634(void *);
+void fn_80345ACC(void) {
+    fn_80345A54(0, 0xFFFF);
+}
+
