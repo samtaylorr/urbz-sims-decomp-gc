@@ -753,8 +753,7 @@ void fn_801F02EC(s32 arg0, s32 arg1) {
 void fn_801F0318(void *arg0, s32 arg1) {
     void fn_80245BB4(s32, char *, ...);
     extern char lbl_803E3004[];
-    M2C_FIELD(arg0, M2C_UNK (**)(), 0xC)();
-    fn_80245BB4(arg1, lbl_803E3004);
+    fn_80245BB4(arg1, lbl_803E3004, M2C_FIELD(arg0, f64 (**)(), 0xC)());
 }
 
 void fn_801F0490(void) {
