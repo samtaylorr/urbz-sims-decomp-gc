@@ -248,11 +248,10 @@ void fn_80059100(void *arg0) {
 
 s32 fn_800591A0(void) {
     s32 fn_80059220();
-    s32 r = 0;
-    if (fn_80059220() != 0) {
-        r = 1;
+    if (fn_80059220() == 0) {
+        return 0;
     }
-    return r;
+    return 1;
 }
 
 s32 fn_800591D0(void *arg0, s32 arg1) {
