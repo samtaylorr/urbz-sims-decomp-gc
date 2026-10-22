@@ -107,6 +107,20 @@ s32 fn_80043480(void) {
     return lbl_804940A8;
 }
 
+s32 fn_80043488(void) {
+    s32 fn_803391AC(s32);
+
+    if (lbl_8049407C == -1) {
+        return 0;
+    }
+    return fn_803391AC(lbl_8049407C);
+}
+
+s32 fn_800434F0(void) {
+    s32 fn_8004200C(void);
+    return fn_8004200C() != -1;
+}
+
 void fn_800438D0(f32 farg0) {
     void fn_803392AC(s32, s32, void *);
     extern f32 lbl_803C615C[];
