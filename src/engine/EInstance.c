@@ -32,6 +32,18 @@ s32 fn_802F047C(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void fn_802F09B8(void *arg0, void *arg1) {
+    extern void fn_80325EB8(s32, void *, void *);
+    s32 h = M2C_FIELD(arg0, s32 *, 4);
+
+    if (h != 0) {
+        fn_80325EB8(h, arg0, arg1);
+    } else {
+        M2C_FIELD(arg0, EInstVec3 *, 0x44) = ((EInstVec3 *)arg1)[0];
+        M2C_FIELD(arg0, EInstVec3 *, 0x50) = ((EInstVec3 *)arg1)[1];
+    }
+}
+
 void fn_802F0A30(s32 arg0) {
     M2C_UNK fn_802C5070(s32);
     fn_802C5070(arg0 + 0x44);
@@ -43,6 +55,18 @@ void fn_802F0A54(void *arg0) {
 
     if (h != 0) {
         fn_80325C50(h, arg0);
+    }
+}
+
+void fn_802F0A84(f32 *v) {
+    extern void fn_8025FB2C(f32 *, f32 *);
+
+    v[2] -= lbl_803F0E6C;
+    if (v[0] != lbl_803F0E70 || v[1] != lbl_803F0E70 || v[2] != lbl_803F0E70) {
+        fn_8025FB2C(v, v);
+    }
+    if (v[2] == lbl_803F0E70) {
+        v[2] = lbl_803F0E74;
     }
 }
 
