@@ -50,7 +50,7 @@ void fn_803153B8(void *self) {
     extern void *lbl_80494FCC;
     void *fn_803338D0(void *, s32);
     s32 i;
-    for (i = 0; i <= 3; i++) {
+    for (i = 0; i < EVibrate_NumPorts(); i++) {
         if (fn_80314E68(self, i) != 0) {
             void *obj = fn_803338D0(lbl_80494FCC, i);
             if (obj != NULL) {
