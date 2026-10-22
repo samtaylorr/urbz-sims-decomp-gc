@@ -63,8 +63,80 @@ s32 fn_8033E3E4(void) {
     return 1;
 }
 
+static inline void *fn_8033E3E4_GetObj(s32 i) {
+    return lbl_80494FC8[i];
+}
+
 void fn_8033E484(void) {
 
+}
+
+void fn_8026A6A4(u32);
+void fn_8026AA18(PadStatus *);
+void fn_80348984(PadStatus *);
+void fn_803104FC(void *);
+void fn_80310C98(void *, s32);
+void fn_80310CBC(void *, s32);
+void fn_80310DE4(void *, s32, s32);
+void fn_803336D4(void *);
+s32 fn_803BE7A0(void *, PadStatus *);
+void fn_803BE99C(void *, PadStatus *, s32, s32);
+void fn_8033E488(void *self) {
+    PadStatus *pads;
+    u32 mask;
+    u32 i;
+
+    pads = (PadStatus *)((u8 *)self + 0x24);
+    fn_8026AA18(pads);
+    fn_80348984(pads);
+    mask = 0;
+    if (M2C_FIELD(self, s8 *, 0x2E) == -1) {
+        mask |= 0x80000000;
+    }
+    if (M2C_FIELD(self, s8 *, 0x3A) == -1) {
+        mask |= 0x40000000;
+    }
+    if (M2C_FIELD(self, s8 *, 0x46) == -1) {
+        mask |= 0x20000000;
+    }
+    if (M2C_FIELD(self, s8 *, 0x52) == -1) {
+        mask |= 0x10000000;
+    }
+    if (mask != 0) {
+        fn_8026A6A4(mask);
+    }
+    for (i = 0; i < 4; i++) {
+        PadStatus st;
+        void *obj;
+        VtEntry *e;
+
+        st = pads[i];
+        obj = lbl_80494FC8[i];
+        e = (VtEntry *)(M2C_FIELD(obj, u8 **, 0x204) + 0x80);
+        e->fn((u8 *)obj + e->delta);
+        if (st.err == 0) {
+            M2C_FIELD(obj, s32 *, 4) |= 7;
+            fn_80310C98(obj, 1);
+            fn_80310CBC(obj, M2C_FIELD(obj, s32 *, 0x1AC) != 0 ? M2C_FIELD(obj, s32 *, 0x1B0) : fn_803BE7A0(obj, &st));
+            fn_803BE99C(obj, &st, 0, 0);
+            fn_80310DE4(obj, 0, 0);
+            fn_803BE99C(obj, &st, 0, 1);
+            fn_80310DE4(obj, 0, 1);
+            fn_803BE99C(obj, &st, 1, 0);
+            fn_80310DE4(obj, 1, 0);
+            fn_803BE99C(obj, &st, 1, 1);
+            fn_80310DE4(obj, 1, 1);
+        } else if (st.err == -2 || st.err == -3) {
+            M2C_FIELD(obj, s32 *, 4) &= ~2;
+        } else if (st.err == -1) {
+            M2C_FIELD(obj, s32 *, 4) &= ~7;
+            fn_803104FC(obj);
+        } else {
+            M2C_FIELD(obj, s32 *, 4) = ~7;
+            fn_803104FC(obj);
+        }
+    }
+    fn_803336D4(self);
 }
 
 extern u8 lbl_8045D1FC[];
