@@ -116,6 +116,33 @@ s32 fn_8031DE84(void *arg0) {
     return var_r30;
 }
 
+s32 fn_8031E254(void *arg0, s32 arg1) {
+    s32 fn_802D3EE8(s32, s32);
+    void fn_803BBD88(s32 *, s32);
+    s32 fn_803BBD94(s32 *, s32);
+    s32 sp8[2];
+    s32 *tbl;
+    s32 n;
+    s32 k;
+    s32 i;
+
+    tbl = (s32 *)((char *)arg0 + 0x354);
+    for (k = 0; k <= 2; k++) {
+        s32 p = *tbl++;
+        if (p != 0) {
+            i = 0;
+            fn_803BBD88(sp8, p);
+            n = *(s32 *)sp8[0];
+            for (; i < n; i += 2) {
+                if (fn_802D3EE8(arg1, sp8[1] + fn_803BBD94(sp8, i)) == 0) {
+                    return sp8[1] + fn_803BBD94(sp8, i + 1);
+                }
+            }
+        }
+    }
+    return 0;
+}
+
 void fn_8031E310(void *arg0) {
     M2C_UNK fn_802D8334(void *, M2C_UNK);
     s32 fn_8031CB40(s32, s32 *, M2C_UNK);
