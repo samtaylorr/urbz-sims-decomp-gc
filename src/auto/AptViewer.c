@@ -123,6 +123,21 @@ s32 fn_8000C534(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x3A4);
 }
 
+s32 fn_8000C53C(s32 arg0, s32 arg1) {
+    extern f32 lbl_803C19FC[];
+    extern f32 lbl_804956AC;
+    extern f32 lbl_804956B0;
+    extern f32 lbl_804956B4;
+    extern f32 lbl_804956B8;
+    if (arg1 == 0xFFFF && arg0 != 0) {
+        f32 v = lbl_803C19FC[0];
+        lbl_804956B8 = v;
+        lbl_804956AC = v;
+        lbl_804956B0 = v;
+        lbl_804956B4 = v;
+    }
+}
+
 void fn_8000C570(void) {
     M2C_UNK fn_8000C53C(M2C_UNK, M2C_UNK);
     fn_8000C53C(1, 0xFFFF);
