@@ -15,6 +15,22 @@ extern void fn_802D8B34(void *);
 extern void fn_802D8CA4(void *, s32, s32, s32);
 extern void fn_802D8EF8(void *);
 extern u8 lbl_803F0554[];
+u8 *fn_802E0460(u8 *self) {
+    extern u8 lbl_80419898[];
+    extern void *lbl_80494DF0;
+    extern void fn_802D8B34(void *);
+    fn_802D8B34(self);
+    *(s32 *)(self + 0x340) = 0;
+    *(u8 **)(self + 0x338) = lbl_80419898;
+    *(s32 *)(self + 0x450) = 0;
+    *(s32 *)(self + 0x454) = 0;
+    *(s32 *)(self + 0x458) = 0;
+    *(s32 *)(self + 0x45C) = 0;
+    lbl_80494DF0 = self;
+    *(s32 *)(self + 0x468) = 0;
+    return self;
+}
+
 void fn_802E04BC(u8 *self) {
     extern u8 lbl_80419898[];
     extern void *lbl_80494DF0;
