@@ -11,7 +11,7 @@ M2C_UNK **fn_8033FA18(M2C_UNK **arg0) {
     return arg0;
 }
 
-void fn_8033FA58(void **self) {
+void fn_8033FA58(void **self, s32 flags) {
     M2C_UNK fn_802ED8B4(void **);
     *self = lbl_8041C640;
     fn_802ED8B4(self);
@@ -40,6 +40,23 @@ void fn_8033FFD4(void) {
     M2C_UNK fn_8035D9C0();
     fn_802D1FC8(0x2C);
     fn_8035D9C0();
+}
+
+void fn_803403B4(u8 *self, u8 *arg1) {
+    s32 i;
+
+    for (i = 0; i < *(s32 *)(self + 0x2A4); i++) {
+        f32 a[2];
+        f32 b[2];
+        u8 *vt;
+        a[0] = *(f32 *)(self + 0xE4 + i * 0xC);
+        a[1] = *(f32 *)(self + 0xE8 + i * 0xC);
+        b[0] = *(f32 *)(self + 0x1A4 + i * 0xC);
+        b[1] = *(f32 *)(self + 0x1A8 + i * 0xC);
+        vt = *(u8 **)(arg1 + 0x68);
+        (*(void (**)(void *, f32 *, f32 *, f32))(vt + 0x33C))(arg1 + *(s16 *)(vt + 0x338), a, b, *(f32 *)(self + 0x1AC + i * 0xC));
+    }
+    *(s32 *)(self + 0x2A4) = 0;
 }
 
 void fn_803404E0(s32 arg0, s32 arg1);
