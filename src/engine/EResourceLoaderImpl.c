@@ -152,3 +152,8 @@ void fn_8031E7B8(void) {
     fn_8031E724(1, 0xFFFF);
 }
 
+void fn_8031E7E4(void) {
+    void fn_8031E724(s32, s32);
+    fn_8031E724(0, 0xFFFF);
+}
+
