@@ -64,10 +64,10 @@ s32 fn_80292D68(s32 arg0, s32 arg1) {
     s32 b;
     s32 c;
 
-    a = ((s32 *)lbl_804433C4[2] + lbl_804433C4[0])[-1];
-    b = ((s32 *)lbl_804433C4[2] + (lbl_804433C4[0] - 1))[-1];
+    a = fn_StackPeek(lbl_804433C4, 0);
+    b = fn_StackPeek(lbl_804433C4, 1);
     if (arg1 > 2) {
-        c = ((s32 *)lbl_804433C4[2] + (lbl_804433C4[0] - 2))[-1];
+        c = fn_StackPeek(lbl_804433C4, 2);
     } else {
         c = 0;
     }
