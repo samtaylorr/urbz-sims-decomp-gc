@@ -491,6 +491,23 @@ void *fn_802CCDC8(void *arg0, u32 arg1) {
     return var_r3;
 }
 
+EMat4Node *fn_802CD498(void *self, s32 key, s32 *out) {
+    EMat4Node *fn_802CD440(void *, s32, s32);
+    char *n;
+    char *next;
+
+    n = (char *)fn_802CD440(self, key, 0);
+    if (n != NULL) {
+        while ((next = M2C_FIELD(n, char **, 0xC)) != NULL && M2C_FIELD(next, s32 *, 0x18) == key) {
+            n = next;
+        }
+        if (out != NULL) {
+            *out = M2C_FIELD(n, s32 *, 0x1C);
+        }
+    }
+    return (EMat4Node *)n;
+}
+
 EMat4Node *fn_802CD504(void *self, EMat4Node *n, void **out) {
     EMat4Node *next = n->next;
 
@@ -661,6 +678,18 @@ void *fn_802CED98(u32 size) {
 extern void *fn_802D0AB8(void *);
 void fn_802CEE44(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
+}
+
+void fn_802CEF48(void *arg0, s32 flags) {
+    extern char lbl_80419450[];
+    extern void fn_802CEF98(void *);
+    extern void *fn_802D0AB8(void *);
+
+    M2C_FIELD(arg0, char **, 0) = lbl_80419450;
+    fn_802CEF98(arg0);
+    if (flags & 1) {
+        fn_802D1A00(((void *(*)(void))fn_802D0AB8)(), arg0);
+    }
 }
 
 void fn_802CF2BC(void *arg0) {
