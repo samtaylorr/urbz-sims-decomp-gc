@@ -6754,6 +6754,11 @@ void fn_803B971C(void **arg0) {
     *arg0 = lbl_804194A0;
 }
 
+void fn_803B97C0(void **self, s32 flags);
+void fn_803B972C(void **self) {
+    fn_803B97C0(self, 2);
+}
+
 void fn_803B9750(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
