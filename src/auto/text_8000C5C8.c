@@ -97,9 +97,9 @@ void fn_8000C960(void) {
 
 void fn_8000C9A8(void) {
     M2C_UNK fn_8004AF40(void *);
-    extern s32 lbl_8041F94C;
+    extern s32 lbl_8041F94C[];
     extern s32 lbl_8049664C;
-    fn_8004AF40(&lbl_8041F94C);
+    fn_8004AF40(lbl_8041F94C);
     lbl_8049664C = 1;
 }
 
