@@ -1,5 +1,13 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
+typedef struct EMat4Node {
+    u8 pad0[0x10];
+    struct EMat4Node *next;
+    u8 pad14[0x4];
+    s32 key;
+    void *value;
+} EMat4Node;
+
 
 s32 fn_80364E64(void *arg0) {
     void *temp_r11;
@@ -124,6 +132,23 @@ void fn_80365060(void *arg0, void *arg1) {
     if (arg1 != &lbl_80401348) {
         M2C_FIELD(arg1, void **, 8) = temp_r11;
     }
+}
+
+void fn_803659DC(EMat4Node **list);
+void fn_803659DC(EMat4Node **list) {
+    extern void fn_802D20E8(void *);
+    void *p;
+    void *next;
+
+    p = M2C_FIELD(list, void **, 4);
+    while (p != NULL) {
+        next = M2C_FIELD(p, void **, 0xC);
+        fn_802D20E8(p);
+        p = next;
+    }
+    M2C_FIELD(list, char **, 8) = lbl_80401348;
+    M2C_FIELD(list, void **, 4) = NULL;
+    M2C_FIELD(list, s32 *, 0) = 0;
 }
 
 s32 fn_80365A3C(void **arg0) {
