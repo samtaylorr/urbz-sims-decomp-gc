@@ -37,6 +37,15 @@ void fn_802F0A30(s32 arg0) {
     fn_802C5070(arg0 + 0x44);
 }
 
+void fn_802F0A54(void *arg0) {
+    extern void fn_80325C50(s32, void *);
+    s32 h = M2C_FIELD(arg0, s32 *, 4);
+
+    if (h != 0) {
+        fn_80325C50(h, arg0);
+    }
+}
+
 void fn_802F1130(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0xD00) = 0;
 }
