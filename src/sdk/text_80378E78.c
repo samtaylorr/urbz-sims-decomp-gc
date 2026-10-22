@@ -700,10 +700,10 @@ s32 fn_8038BECC(s32 chan, s32 fileNo) {
     return fn_803894A8(chan);
 }
 
+#pragma dont_inline on
 s32 fn_8038BF14(s32 chan, void *callback) {
     return fn_8038B874(chan, fn_80388F84(), callback);
 }
-
 s32 fn_8038BF5C(s32 chan) {
     s32 fn_803894A8(s32);
     extern void fn_80387D34(void);
@@ -715,21 +715,22 @@ s32 fn_8038BF5C(s32 chan) {
     }
     return fn_803894A8(chan);
 }
-
-BOOL fn_8038BFB0(void *dir, char *name) {
+#pragma dont_inline reset
+BOOL fn_8038BFB0(void *dir, const char *fileName) {
     char *entName;
-    int i;
+    char c1, c2;
+    int n;
 
     entName = (char *)dir + 8;
-    for (i = 0; i < 32; i++) {
-        if (*entName++ != *name++) {
+    n = 32;
+    while (0 <= --n) {
+        if ((c1 = *entName++) != (c2 = *fileName++)) {
             return FALSE;
-        }
-        if (name[-1] == '\0') {
+        } else if (c2 == '\0') {
             return TRUE;
         }
     }
-    if (*name == '\0') {
+    if (*fileName == '\0') {
         return TRUE;
     }
     return FALSE;
