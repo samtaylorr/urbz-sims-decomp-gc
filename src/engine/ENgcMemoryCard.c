@@ -96,6 +96,16 @@ s32 fn_80345A44(void *arg0, s32 arg1) {
     return M2C_FIELD(arg0, s32 *, 8) + (arg1 * 8);
 }
 
+void fn_80345A54(s32 arg0, s32 arg1) {
+    if (arg1 == 0xFFFF) {
+        if (arg0 != 0) {
+            fn_80340634(&lbl_80496298);
+            return;
+        }
+        fn_80340654((void **)&lbl_80496298, 2);
+    }
+}
+
 void fn_80345A54(s32 arg0, s32 arg1);
 
 void fn_80345AA0(void) {
