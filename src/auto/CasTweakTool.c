@@ -150,6 +150,16 @@ u8 *fn_801D494C(u8 *self) {
     return self + 8;
 }
 
+void fn_801D4954(u8 *self) {
+    s32 i;
+
+    *(u8 **)(self + 0xF8) = lbl_80416340;
+    for (i = 3; i != 0; i--) {
+    }
+    for (i = 4; i != 0; i--) {
+    }
+}
+
 extern u8 lbl_80416340[];
 extern void fn_802D20E8(void *);
 void fn_801D497C(u8 *self, s32 flags) {
