@@ -6762,12 +6762,15 @@ Vec4f *fn_803B9688(Vec4f *v) {
     return v;
 }
 
-Vec4f fn_803B96B0(const Vec4f *src, f32 s) {
-    Vec4f v;
-    v.x = s * src->x;
-    v.y = s * src->y;
-    v.z = s * src->z;
-    v.w = s * src->w;
+Vec4f *fn_803B96B0(Vec4f *v, const Vec4f *src, f32 s) {
+    f32 x = src->x;
+    f32 y = src->y;
+    f32 z = src->z;
+    f32 w = src->w;
+    v->x = s * x;
+    v->y = s * y;
+    v->z = s * z;
+    v->w = s * w;
     return v;
 }
 
