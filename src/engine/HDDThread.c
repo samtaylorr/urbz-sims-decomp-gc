@@ -123,6 +123,17 @@ s32 fn_80332AE0(char *arg0, u32 arg1) {
     return var_r3;
 }
 
+s32 fn_80332B1C(char *arg0, u32 arg1) {
+    s32 fn_8033277C(void *);
+    s32 var_r3;
+
+    var_r3 = 0;
+    if (arg1 <= 0x1FU) {
+        var_r3 = fn_8033277C(&arg0[arg1 * 0x14 + 0x340]);
+    }
+    return var_r3;
+}
+
 s32 *fn_80332B94(char *arg0, u32 arg1) {
     extern s32 lbl_803F35E0[];
     if (arg1 <= 0x1FU) {
