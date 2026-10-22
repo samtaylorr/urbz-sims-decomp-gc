@@ -5,7 +5,7 @@ static inline s32 ListCount(u8 *list) {
     return *(s32 *)(list + 4);
 }
 
-void fn_80317758(void);
+s32 fn_80317758(s32, s32, s32, s32 *, s32);
 s32 fn_80317514(void *arg0) {
     s32 temp_r3;
     s32 var_r7;
@@ -28,8 +28,8 @@ s32 fn_80317514(void *arg0) {
     return var_r7;
 }
 
-void fn_80317B98(void) {
-    fn_80317758();
+s32 fn_80317B98(s32 arg0, s32 arg1, s32 arg2, s32 *arg3, s32 arg4) {
+    return fn_80317758(arg0, arg1, arg2, arg3, arg4);
 }
 
 s32 fn_80317CD8(s32 arg0) {
