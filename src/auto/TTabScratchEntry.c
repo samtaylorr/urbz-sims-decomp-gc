@@ -4,6 +4,31 @@
 extern u8 lbl_80414770[];
 extern char lbl_80435418[];
 
+typedef struct ScratchPool {
+    u32 base;
+    void *free;
+    u32 size;
+} ScratchPool;
+
+static inline void *ScratchPool_Alloc(ScratchPool *pool) {
+    void *p = pool->free;
+    if (p != NULL) {
+        pool->free = *(void **)p;
+    }
+    return p;
+}
+
+static inline int ScratchPool_Contains(ScratchPool *pool, void *p) {
+    return (u32)p >= pool->base && (u32)p < pool->base + pool->size;
+}
+
+static inline void ScratchPool_Free(ScratchPool *pool, void *p) {
+    if (p != NULL) {
+        *(void **)p = pool->free;
+        pool->free = p;
+    }
+}
+
 void fn_801A1B50(void);
 void fn_8019A0A4(void) {
     M2C_UNK fn_8019A10C();
