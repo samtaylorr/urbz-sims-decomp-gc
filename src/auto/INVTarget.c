@@ -560,6 +560,40 @@ void fn_801EA748(void) {
     }
 }
 
+void *fn_801F01B8(void **self, char *name, s32 mask) {
+    extern u8 lbl_80417510[];
+    extern u8 lbl_804173F0[];
+    s32 fn_801F0834(char *);
+    s32 fn_80248808(char *);
+    char *end;
+    self[0] = name;
+    self[2] = lbl_80417510;
+    self[1] = (void *)fn_801F0834(name);
+    self[2] = lbl_804173F0;
+    end = name + fn_80248808(name);
+    self[3] = (void *)((mask & (1 << (end[-2] * 10 - 0x210 + end[-1]))) != 0);
+    return self;
+}
+
+void fn_801F0258(void *arg0, char *arg1) {
+    struct Str7 { char s[7]; };
+    extern struct Str7 lbl_803E2FF4;
+    *(struct Str7 *)arg1 = lbl_803E2FF4;
+}
+
+void fn_801F027C(void *arg0, s32 arg1) {
+    M2C_UNK fn_80248784(s32, s32);
+    extern char lbl_803E2FFC[];
+    extern char lbl_803E3000[];
+    char *s;
+    if (M2C_FIELD(arg0, s32 *, 0xC) != 0) {
+        s = lbl_803E2FFC;
+    } else {
+        s = lbl_803E3000;
+    }
+    fn_80248784(arg1, (s32)s);
+}
+
 void fn_801F02C0(void *arg0, s32 arg1) {
     M2C_UNK fn_80248784(s32, s32);
     fn_80248784(arg1, M2C_FIELD(arg0, s32 *, 0xC));
