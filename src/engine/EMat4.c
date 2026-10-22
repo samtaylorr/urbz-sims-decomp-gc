@@ -603,8 +603,8 @@ void *fn_802CD778(void *arg0) {
     for (i = 0x100; i != 0; i--) {
     }
     M2C_FIELD(arg0, s16 *, 0x108A) = 1;
-    M2C_FIELD(arg0, s32 *, 0x108C) = 0;
     M2C_FIELD(arg0, s32 *, 0x1090) = 0;
+    M2C_FIELD(arg0, s32 *, 0x108C) = 0;
     return arg0;
 }
 
