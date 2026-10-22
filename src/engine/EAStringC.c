@@ -31,16 +31,18 @@ s32 fn_80292CBC(void *self) {
     extern s32 lbl_804960F4;
     extern struct { void *unk0; void (*free)(void *); } *lbl_80494DA0;
     void *obj;
-    u16 *name;
+    u16 *name[2];
     u16 *str;
+    s32 mgr;
 
     obj = M2C_FIELD(self, void **, 0x4C);
     if (obj != NULL) {
         fn_802A0890(M2C_FIELD(obj, s32 *, 0x50) + 0x24, self);
     } else {
-        fn_802BE53C(&name, lbl_803ECA4C);
+        fn_802BE53C(name, lbl_803ECA4C);
+        mgr = lbl_804960F4;
         fn_802BE53C(&str, lbl_803EC8D8);
-        fn_802A5EE0(lbl_804960F4, &str, &name);
+        fn_802A5EE0(mgr, &str, name);
         if (--*str == 0) {
             lbl_80494DA0->free(str);
         }
@@ -68,19 +70,21 @@ s32 fn_80292D68(s32 arg0, s32 arg1) {
 }
 
 s32 fn_80292E08(s32 arg0) {
-    extern void fn_8027DA94(s32, s32, void **);
+    extern void fn_8027DA94(s32, s32, s32, void **);
     extern void fn_802A0980(s32, void *);
     void *obj;
     u32 flags;
     s32 enabled;
 
     obj = NULL;
-    fn_8027DA94(0, arg0, &obj);
+    fn_8027DA94(arg0, 0, arg0, &obj);
     if (obj != NULL) {
         flags = *(u32 *)obj;
         enabled = 0;
-        if ((s32)(flags & 0x3F) > 0xB && (s32)(flags & 0x3F) <= 0x13) {
-            enabled = (flags >> 15) & 1;
+        if ((s32)(flags & 0x3F) > 0xB) {
+            if ((s32)(flags & 0x3F) <= 0x13) {
+                enabled = (flags >> 15) & 1;
+            }
         }
         if (enabled != 0) {
             fn_802A0980(M2C_FIELD(M2C_FIELD(obj, void **, 0x4C), s32 *, 0x50) + 0x24, obj);
