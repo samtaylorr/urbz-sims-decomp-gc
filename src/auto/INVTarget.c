@@ -112,6 +112,31 @@ s32 fn_801D7DE4(void) {
     return lbl_804945FC;
 }
 
+s32 fn_801D8180(void **arg0, s32 arg1, s32 arg2, s32 arg3) {
+    s32 fn_802486DC(s32, s32);
+    M2C_UNK fn_801D8080(void **, s32, s32, s32);
+    M2C_UNK fn_801D80E8(void **, void *);
+    s32 found;
+    void *var_r31;
+
+    if (arg0[2] != NULL) {
+        var_r31 = arg0[0];
+        found = 0;
+        if (var_r31 != NULL) {
+            do {
+                if (fn_802486DC(M2C_FIELD(var_r31, s32 *, 8), arg1) == 0) {
+                    fn_801D80E8(arg0, var_r31);
+                    found = 1;
+                }
+                var_r31 = M2C_FIELD(var_r31, void **, 4);
+            } while (var_r31 != NULL && found == 0);
+        }
+        fn_801D8080(arg0, arg1, arg2, arg3);
+        return 1;
+    }
+    return 0;
+}
+
 s32 fn_801D8228(void **arg0, s32 arg1) {
     s32 fn_802486DC(s32, s32);
     M2C_UNK fn_801D80E8(void **, void *);
