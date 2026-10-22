@@ -93,6 +93,13 @@ void fn_800F6A78(s32 arg0, s32 arg1, s32 arg2) {
     fn_800F68F0(arg0, fn_800F69E8(arg1), arg2);
 }
 
+void fn_800F6F88(u16 *dst, const u8 *src) {
+    while (*src != 0) {
+        *dst++ = *src++;
+    }
+    *dst = 0;
+}
+
 void *fn_800F6FB4(void *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 0) = arg1;
     M2C_FIELD(arg0, s32 *, 4) = arg2;
@@ -248,10 +255,11 @@ void fn_800F7A50(void) {
 
 }
 
-void fn_800F7A54(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
+void fn_800F7A54(void *arg0, void *arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
     extern u8 *lbl_8049665C;
     void fn_800F7C3C(void *, void *, s32, s32, s32, s32);
-    fn_800F7C3C(arg0, (*(void *(**)(u8 *))(*(u8 **)lbl_8049665C + 0x3C))(lbl_8049665C + *(s16 *)(*(u8 **)lbl_8049665C + 0x38)), arg2, arg3, arg4, arg5);
+    arg1 = (*(void *(**)(u8 *))(*(u8 **)lbl_8049665C + 0x3C))(lbl_8049665C + *(s16 *)(*(u8 **)lbl_8049665C + 0x38));
+    fn_800F7C3C(arg0, arg1, arg2, arg3, arg4, arg5);
 }
 
 void fn_800F7B34(void *arg0, s32 arg1, s32 arg2) {
