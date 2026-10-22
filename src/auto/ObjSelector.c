@@ -56,6 +56,12 @@ void fn_8016C2EC(void) {
 
 }
 
+void *fn_8016C5A0(void *arg0, u8 *arg1) {
+    void fn_801B3824(void *, void *);
+    fn_801B3824(arg0, arg1 + 4);
+    return arg0;
+}
+
 s32 fn_8016C618(void) {
     return 0;
 }
