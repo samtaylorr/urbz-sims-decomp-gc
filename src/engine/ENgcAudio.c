@@ -85,3 +85,11 @@ void fn_8033D220(void) {
     fn_8033D114(1, 0xFFFF);
 }
 
+extern u8 lbl_8045BC60[];
+M2C_UNK fn_8033BDB0(void *);
+M2C_UNK fn_8033BE20(void *, s32);
+void fn_8033D24C(void) {
+    M2C_UNK fn_8033D114(s32, s32);
+    fn_8033D114(0, 0xFFFF);
+}
+
