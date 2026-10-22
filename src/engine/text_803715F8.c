@@ -59,6 +59,19 @@ s32 fn_80371658(s32 arg0, s32 *out) {
     return arg0;
 }
 
+extern void fn_8031E8B0(void *);
+extern void fn_803C0234(void *);
+extern void fn_802E55C0(void *);
+void *fn_80371698(arg0)
+    void *arg0;
+{
+    fn_8031E8B0(arg0);
+    *(u8 **)arg0 = lbl_8041DF58;
+    fn_803C0234((u8 *)arg0 + 0x20);
+    fn_802E55C0((u8 *)arg0 + 0x2C);
+    return arg0;
+}
+
 extern void fn_802E56A0(void *, s32);
 extern void fn_803C0314(void *, s32);
 extern void fn_8031E910(void *, s32);
