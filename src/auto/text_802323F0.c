@@ -4,6 +4,7 @@
 typedef struct { s32 w[2]; } Struct803EB1D8;
 typedef struct { s32 w[5]; } Struct1A8_5;
 typedef struct { s32 w[7]; } Struct1A8_7;
+typedef struct { s32 v; } Struct1B8;
 
 extern void *fn_8022554C(void *);
 extern void fn_802303F0(void *, void *);
