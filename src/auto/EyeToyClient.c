@@ -126,13 +126,7 @@ s32 fn_80043480(void) {
 
 s32 fn_80043488(void) {
     s32 fn_803391AC(s32);
-    s32 handle = lbl_8049407C;
-    s32 ret = 0;
-
-    if (handle != -1) {
-        ret = fn_803391AC(handle);
-    }
-    return ret;
+    return lbl_8049407C != -1 ? fn_803391AC(lbl_8049407C) : 0;
 }
 
 s32 fn_800434F0(void) {
