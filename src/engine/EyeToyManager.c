@@ -45,8 +45,8 @@ void fn_80339018(void) {
             }
             fn_802D211C(lbl_80494F78 - 8);
         }
-        lbl_80494F7C = 0;
         lbl_80494F78 = NULL;
+        lbl_80494F7C = 0;
     }
 }
 
