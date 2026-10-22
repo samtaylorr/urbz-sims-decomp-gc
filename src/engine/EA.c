@@ -424,6 +424,11 @@ s32 fn_802DEC58(s32 *self) {
     return self[1];
 }
 
+void fn_802DECDC(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    M2C_UNK fn_802DDFD4(void *, s32, s32, s32, s32);
+    fn_802DDFD4(arg0, arg1, arg2, M2C_FIELD(arg0, s32 *, 4), arg3);
+}
+
 s32 fn_802DED04(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 4) == 0;
 }
