@@ -2,6 +2,11 @@
 #include "common.h"
 
 void fn_800A9720(void);
+extern void *fn_802D0AB8(void *);
+extern void *fn_802D197C(void *heap, u32 size, s32 align);
+extern void *fn_802DBBCC(void *heap, u32 size, s32 align);
+extern void *fn_802D0B3C(void);
+s32 fn_800C38C8(s32 arg0);
 
 typedef struct { s32 a[4]; } Struct16_800BF7FC;
 typedef struct { s16 a[9]; } Struct18_800BF784;
@@ -148,6 +153,47 @@ void fn_800C2E1C(void (*cb)(void)) {
 extern s32 lbl_80495A24;
 void fn_800C3820(void (*cb)(void)) {
     lbl_80495A24 = cb;
+}
+
+s32 fn_800C3828(s32 arg0) {
+    extern s32 lbl_80432EC8[];
+    s32 i;
+
+    if (arg0 == 0) {
+        return 0;
+    }
+    fn_800C38C8(arg0);
+    for (i = 0; i < 10; i++) {
+        if (lbl_80432EC8[i] == 0) {
+            lbl_80432EC8[i] = arg0;
+            break;
+        }
+    }
+    if (i == 0) {
+        return 0;
+    }
+    return lbl_80432EC8[i - 1];
+}
+
+s32 fn_800C38C8(s32 arg0) {
+    extern s32 lbl_80432EC8[];
+    s32 found;
+    s32 i;
+
+    found = 0;
+    for (i = 0; i < 10; i++) {
+        if (arg0 == lbl_80432EC8[i]) {
+            found = 1;
+            break;
+        }
+    }
+    if (found) {
+        for (; i < 9; i++) {
+            lbl_80432EC8[i] = lbl_80432EC8[i + 1];
+        }
+        lbl_80432EC8[9] = 0;
+    }
+    return found;
 }
 
 void fn_800C3954(s32 arg0) {
