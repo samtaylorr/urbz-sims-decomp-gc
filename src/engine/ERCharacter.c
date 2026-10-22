@@ -42,6 +42,15 @@ s32 fn_80317BB8(s32 arg0, s32 arg1) {
     return sp8;
 }
 
+s32 fn_80317C38(s32 arg0, s32 arg1) {
+    s32 sp8;
+
+    if (fn_80317B98(arg0, 0, arg1, &sp8, 0) == 0) {
+        return 0;
+    }
+    return arg0 + sp8;
+}
+
 s32 fn_80317CD8(s32 arg0) {
     s32 fn_80317BB8();
     s32 temp_r3;
@@ -66,6 +75,19 @@ s32 fn_80317D18(s32 arg0) {
         var_r30 = arg0 + temp_r3;
     }
     return var_r30;
+}
+
+s32 fn_80317D58(s32 arg0, s32 arg1, s32 arg2) {
+    s32 sp8;
+    s32 var_r31;
+
+    var_r31 = 0;
+    sp8 = 0;
+    fn_80317758(arg0, arg1, 0, &sp8, arg2);
+    if (sp8 != 0) {
+        var_r31 = arg0 + sp8;
+    }
+    return var_r31;
 }
 
 void fn_803188C8(const char *arg0) {
