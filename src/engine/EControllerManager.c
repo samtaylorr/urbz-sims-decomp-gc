@@ -258,6 +258,18 @@ void fn_80334CF8(s32 arg0, s32 arg1) {
     }
 }
 
+s32 fn_80334E0C(s32 arg0, s32 arg1) {
+    s32 fn_80334B0C(s32, s32);
+    s32 fn_80337F14(s32);
+    s32 fn_80336EC4(s32, s32);
+    if (lbl_80494F5C == 0) {
+        if (fn_80334B0C(arg0, fn_80337F14(arg1)) == 0) {
+            return 1;
+        }
+    }
+    return fn_80336EC4(arg0, arg1);
+}
+
 void fn_80334EC4(void (*cb)(void)) {
     lbl_80494F5C = cb;
 }
