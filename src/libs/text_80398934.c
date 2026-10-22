@@ -8004,6 +8004,14 @@ void fn_803C0314(s32 self, s32 flags) {
     }
 }
 
+void fn_803C03D4(u8 *p, s32 n) {
+    extern void fn_80366A7C(void *);
+    while (--n != -1) {
+        fn_80366A7C(p);
+        p += 0x58;
+    }
+}
+
 void fn_803C06EC(void *self) {
     ((s32 *)self)[0] = 0;
     ((s32 *)self)[2] = 0;
