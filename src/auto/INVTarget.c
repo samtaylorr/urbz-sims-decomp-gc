@@ -717,7 +717,7 @@ void *fn_801F01B8(void **self, char *name, s32 mask) {
     self[1] = (void *)fn_801F0834(name);
     self[2] = lbl_804173F0;
     end = name + fn_80248808(name);
-    self[3] = (void *)((mask & (1 << (end[-2] * 10 - 0x210 + end[-1]))) != 0);
+    self[3] = (void *)(((1 << ((end[-2] - '0') * 10 + (end[-1] - '0'))) & mask) != 0);
     return self;
 }
 
