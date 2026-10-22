@@ -44,6 +44,14 @@ s32 fn_8036C098(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void fn_8036C2DC(u8 *self) {
+    extern void fn_8031EA2C(s32);
+    if (*(s32 *)(self + 8) != 0) {
+        fn_8031EA2C(*(s32 *)(self + 8));
+        *(s32 *)(self + 8) = 0;
+    }
+}
+
 void fn_8036C31C(void) {
     fn_802D2FD0();
 }
@@ -96,10 +104,20 @@ extern void fn_8036619C(void *);
 void fn_8036C998(char *self) {
     char *list = self + 4;
     void ***node = *(void ****)(list + 4);
+    void ***next;
+    void **obj;
+    int more;
 
-    while (node != NULL) {
-        void **obj = (void **)node[0];
-        void ***next = (void ***)node[1];
+    for (;;) {
+        more = 1;
+        if (node == NULL) {
+            more = 0;
+        }
+        if (!more) {
+            break;
+        }
+        obj = (void **)node[0];
+        next = (void ***)node[1];
         if (*(s32 *)(list + 8) != 0) {
             char *vt = (char *)*obj;
             (*(void (**)(void *))(vt + 0xC))((char *)obj + *(s16 *)(vt + 8));
