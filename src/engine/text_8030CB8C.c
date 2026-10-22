@@ -105,6 +105,17 @@ void fn_80310154(void *arg0, void *arg1) {
     }
 }
 
+void fn_803101B8(s32 arg0, s32 arg1) {
+    extern u8 lbl_80459F70[];
+    if (arg1 == 0xFFFF) {
+        if (arg0 != 0) {
+            fn_803100D8((s32 *)lbl_80459F70);
+        } else {
+            fn_803100F0(lbl_80459F70, 2);
+        }
+    }
+}
+
 void fn_8031020C(void) {
     void fn_803101B8(s32, s32);
     fn_803101B8(1, 0xFFFF);
