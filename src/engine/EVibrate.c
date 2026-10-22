@@ -2,6 +2,9 @@
 #include "common.h"
 
 s32 fn_80314E68(void *self, u8 index);
+static inline s32 EVibrate_NumPorts(void) {
+    return 4;
+}
 extern void fn_802D20E8(void *);
 void *fn_80314CC0(void *arg0) {
     M2C_UNK fn_80248488(M2C_UNK *, M2C_UNK, M2C_UNK);
@@ -46,16 +49,16 @@ s32 fn_8031536C(void *self, s32 idx) {
 void fn_803153B8(void *self) {
     extern void *lbl_80494FCC;
     void *fn_803338D0(void *, s32);
-    s32 i = 0;
-    do {
-        if (fn_80314E68(self, (u8)i) != 0) {
+    s32 i;
+    for (i = 0; i <= 3; i++) {
+        if (fn_80314E68(self, i) != 0) {
             void *obj = fn_803338D0(lbl_80494FCC, i);
             if (obj != NULL) {
                 void *vt = M2C_FIELD(obj, void **, 0x204);
                 M2C_FIELD(vt, void (**)(void *), 0x7C)((s8 *)obj + M2C_FIELD(vt, s16 *, 0x78));
             }
         }
-    } while (++i < 4);
+    }
 }
 
 s32 fn_80315430(void) {
