@@ -32,6 +32,28 @@ s32 fn_802F047C(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void fn_802F0604(void *arg0, void *stream) {
+    extern void fn_8032417C(void *, s32);
+    extern void *fn_80363C8C(s32);
+    extern void fn_802D35D8(void *, void *);
+    char *vt;
+    void (*func)(void *, void *, s32);
+    s32 a;
+    s32 b;
+
+    vt = M2C_FIELD(stream, char **, 0x18);
+    func = (void (*)(void *, void *, s32))M2C_FIELD(vt, void **, 0x3C);
+    a = M2C_FIELD(arg0, s32 *, 0x60);
+    func((char *)stream + M2C_FIELD(vt, s16 *, 0x38), &a, 4);
+    fn_8032417C(stream, M2C_FIELD(arg0, s32 *, 4));
+    stream = fn_80363C8C(M2C_FIELD(arg0, s32 *, 0x40));
+    vt = M2C_FIELD(stream, char **, 0x18);
+    func = (void (*)(void *, void *, s32))M2C_FIELD(vt, void **, 0x3C);
+    b = M2C_FIELD(arg0, s32 *, 0x64);
+    func((char *)stream + M2C_FIELD(vt, s16 *, 0x38), &b, 4);
+    fn_802D35D8(stream, (char *)arg0 + 0x44);
+}
+
 void fn_802F09B8(void *arg0, void *arg1) {
     extern void fn_80325EB8(s32, void *, void *);
     s32 h = M2C_FIELD(arg0, s32 *, 4);
@@ -61,13 +83,7 @@ void fn_802F0A54(void *arg0) {
 void fn_802F0A84(f32 *v) {
     extern void fn_8025FB2C(f32 *, f32 *);
 
-    v[2] -= lbl_803F0E6C;
-    if (v[0] != lbl_803F0E70 || v[1] != lbl_803F0E70 || v[2] != lbl_803F0E70) {
-        fn_8025FB2C(v, v);
-    }
-    if (v[2] == lbl_803F0E70) {
-        v[2] = lbl_803F0E74;
-    }
+    fn_8025FB2C(v, v);
 }
 
 void fn_802F1130(void *arg0) {
