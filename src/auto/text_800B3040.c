@@ -71,6 +71,19 @@ void fn_800B3324(void *arg0, char *name, s32 arg2) {
     }
 }
 
+void fn_800B33C8(void *arg0, char *name, s32 arg2) {
+    void fn_802D57BC(void *, const char *);
+    extern char lbl_803CECF4[];
+
+    M2C_FIELD(arg0, s32 *, 0xC8) = arg2;
+    if (name != NULL) {
+        fn_802D57BC((char *)arg0 + 0x64, name);
+    } else {
+        fn_802D57BC((char *)arg0 + 0x64, lbl_803CECF4);
+    }
+    M2C_FIELD(arg0, s32 *, 0x74) = 0;
+}
+
 s32 fn_800B3420(s32 arg0) {
     return arg0 + 0x60;
 }
