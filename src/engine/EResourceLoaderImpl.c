@@ -133,6 +133,32 @@ loop_1:
     goto loop_1;
 }
 
+void *fn_8031E664(void *arg0, void *arg1, s32 arg2, void *arg3, s32 arg4, s32 arg5) {
+    void fn_802D3E40(void *);
+    void *fn_8033627C(void *);
+    void fn_80337354(void *, void *, s32);
+    char *vt;
+    char *res;
+    char *obj;
+
+    obj = arg3;
+    if (obj == NULL) {
+        obj = fn_8033627C(arg1);
+    }
+    vt = *(char **)(obj + 0x28);
+    (*(void (**)(void *, s32, s32))(vt + 0x2C))(obj + *(s16 *)(vt + 0x28), arg4, 0);
+    vt = *(char **)((char *)arg1 + 0xA4);
+    res = (*(void *(**)(void *, void *, s32, s32))(vt + 0x3C))((char *)arg1 + *(s16 *)(vt + 0x38), obj, arg5, arg2);
+    if (res != NULL) {
+        if (*(s32 *)(res + 0x1C) == 0) {
+            *(s32 *)(res + 0x1C) = arg5;
+        }
+        fn_802D3E40(res + 0x18);
+        fn_80337354(arg1, res, arg2);
+    }
+    return res;
+}
+
 void fn_8031E724(s32 arg0, s32 arg1) {
     extern u8 lbl_8045A228[];
     void fn_8031CC58(void *);
