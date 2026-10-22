@@ -108,6 +108,17 @@ void fn_8033F3D0(char *s, s32 *width, s32 *count) {
     }
 }
 
+void fn_8033F94C(s32 arg0, s32 arg1) {
+    if (arg1 == 0xFFFF) {
+        if (arg0 != 0) {
+            fn_8033E774(lbl_8045D260);
+            lbl_80496284 = (((BootInfo *)0x80000000)->busClock / 4000) * 10;
+        } else {
+            ((void (*)(void *, s32))fn_8033E7C4)(lbl_8045D260, 2);
+        }
+    }
+}
+
 void fn_8033F9C0(void) {
     fn_8033F94C(1, 0xFFFF);
 }
