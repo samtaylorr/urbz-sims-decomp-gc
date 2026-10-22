@@ -22,6 +22,18 @@ u8 *fn_80333524(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     return obj;
 }
 
+M2C_UNK fn_80333590(M2C_UNK arg0, M2C_UNK arg1) {
+    if (arg1 == 0xFFFF) {
+        if (arg0 != 0) {
+            u8 *p = lbl_8045B390;
+            fn_80335F5C(p);
+            *(u8 **)(p + 0xA4) = lbl_8041BDA0;
+            return;
+        }
+        fn_80335FD8(lbl_8045B390, 2);
+    }
+}
+
 void fn_8033740C(void);
 void fn_803335FC(void) {
     fn_8033740C();
