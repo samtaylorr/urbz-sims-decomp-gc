@@ -2,6 +2,7 @@
 #include "common.h"
 
 typedef struct { s32 data[0x38]; } CasTweakBlock;
+extern u8 lbl_80416340[];
 
 void fn_801CF4D4(void *arg0) {
     M2C_UNK fn_801CE504(void *, s32);
