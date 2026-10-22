@@ -37,22 +37,28 @@ s32 fn_802F047C(s32 arg0, s32 *out) {
     return arg0;
 }
 
-void fn_802F0604(void *arg0, void *stream) {
+void fn_802F0604(void *self, void *stream) {
     extern void *fn_8032417C(void *, s32);
     extern void *fn_80363C8C(void *, s32);
     extern void fn_802D35D8(void *, void *);
     char *vt;
-    s32 a;
-    s32 b;
+    void (*func)(void *, void *, s32);
+    void *obj;
+    s32 size;
+    s32 size2;
 
-    a = M2C_FIELD(arg0, s32 *, 0x60);
     vt = M2C_FIELD(stream, char **, 0x18);
-    (*(void (**)(void *, void *, s32))(vt + 0x3C))((char *)stream + *(s16 *)(vt + 0x38), &a, 4);
-    stream = fn_80363C8C(fn_8032417C(stream, M2C_FIELD(arg0, s32 *, 4)), M2C_FIELD(arg0, s32 *, 0x40));
-    b = M2C_FIELD(arg0, s32 *, 0x64);
+    func = (void (*)(void *, void *, s32))M2C_FIELD(vt, void **, 0x3C);
+    obj = (char *)stream + M2C_FIELD(vt, s16 *, 0x38);
+    size = M2C_FIELD(self, s32 *, 0x60);
+    func(obj, &size, 4);
+    stream = fn_80363C8C(fn_8032417C(stream, M2C_FIELD(self, s32 *, 4)), M2C_FIELD(self, s32 *, 0x40));
     vt = M2C_FIELD(stream, char **, 0x18);
-    (*(void (**)(void *, void *, s32))(vt + 0x3C))((char *)stream + *(s16 *)(vt + 0x38), &b, 4);
-    fn_802D35D8(stream, (char *)arg0 + 0x44);
+    func = (void (*)(void *, void *, s32))M2C_FIELD(vt, void **, 0x3C);
+    obj = (char *)stream + M2C_FIELD(vt, s16 *, 0x38);
+    size2 = M2C_FIELD(self, s32 *, 0x64);
+    func(obj, &size2, 4);
+    fn_802D35D8(stream, (char *)self + 0x44);
 }
 
 void fn_802F09B8(void *arg0, void *arg1) {
