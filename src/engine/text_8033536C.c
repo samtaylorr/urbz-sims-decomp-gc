@@ -32,6 +32,17 @@ extern u8 lbl_8045B634[];
 extern u8 lbl_8041BEF8[];
 void fn_80335F5C(void *p);
 void fn_80335FD8(void *p, s32 n);
+void *fn_8033536C(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    u8 *obj;
+    u8 *vt;
+
+    obj = fn_803204A8(Heap_AllocAligned(0x80, 0x10));
+    *(s32 *)(obj + 8) = arg3;
+    vt = *(u8 **)obj;
+    (*(void (**)(void *, s32))(vt + 0x4C))(obj + *(s16 *)(vt + 0x48), arg1);
+    return obj;
+}
+
 void fn_8033542C(s32 arg0, s32 arg1) {
     if (arg1 == 0xFFFF) {
         if (arg0 != 0) {
