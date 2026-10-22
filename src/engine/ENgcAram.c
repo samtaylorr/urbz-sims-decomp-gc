@@ -84,8 +84,24 @@ void fn_80373F64(void) {
     }
 }
 
+void fn_80373FAC(s32 arg0, s32 arg1) {
+    M2C_UNK fn_802CA9A8(void *);
+    M2C_UNK fn_802CAA00(void *, s32);
+    extern u8 lbl_804756C0[];
+    if (arg1 == 0xFFFF) {
+        if (arg0 != 0) {
+            fn_802CA9A8(lbl_804756C0);
+        } else {
+            fn_802CAA00(lbl_804756C0, 2);
+        }
+    }
+}
+
 void fn_80374000(void) {
-    M2C_UNK fn_80373FAC(M2C_UNK, M2C_UNK);
     fn_80373FAC(1, 0xFFFF);
+}
+
+void fn_8037402C(void) {
+    fn_80373FAC(0, 0xFFFF);
 }
 
