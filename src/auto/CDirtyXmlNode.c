@@ -252,3 +252,11 @@ void fn_800C3DC8(void) {
     fn_800C3C94(1, 0xFFFF);
 }
 
+s32 fn_800C38C8(s32 arg0);
+extern void *fn_802D197C(void *heap, u32 size, s32 align);
+extern void *fn_802DBBCC(void *heap, u32 size, s32 align);
+extern void *fn_802D0B3C(void);
+void fn_800C3DF4(void) {
+    fn_800C3C94(0, 0xFFFF);
+}
+
