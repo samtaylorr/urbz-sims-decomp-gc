@@ -68,6 +68,17 @@ s32 fn_8031BE60(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void *fn_8031BEA0(void *arg0) {
+    extern void fn_8031E8B0(void *);
+    extern u8 lbl_8041B320[];
+
+    fn_8031E8B0(arg0);
+    M2C_FIELD(arg0, s32 *, 0x20) = 0;
+    M2C_FIELD(arg0, void **, 0x0) = lbl_8041B320;
+    M2C_FIELD(arg0, s32 *, 0x28) = 0;
+    return arg0;
+}
+
 extern void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
 void fn_8031BEE8(void **arg0, s32 arg1) {
@@ -103,6 +114,32 @@ void fn_8031BF9C(void) {
     if (fn_80240584() != 0) {
         *(s32 *)0 = 0;
     }
+}
+
+s32 fn_8031C3D8(u8 *self, s32 key) {
+    u32 lo;
+    u32 hi;
+    u32 mid;
+    s32 *e;
+
+    if (*(u32 *)(self + 0x24) == 0) {
+        return 0;
+    }
+    hi = *(u32 *)(self + 0x24) - 1;
+    lo = 0;
+    while (lo <= hi) {
+        mid = (lo + hi) >> 1;
+        e = (s32 *)(*(u8 **)(self + 0x28) + mid * 0xC);
+        if (key == e[0]) {
+            return e[2];
+        }
+        if (key < e[0]) {
+            hi = mid - 1;
+        } else {
+            lo = mid + 1;
+        }
+    }
+    return 0;
 }
 
 s32 fn_8031C470(u8 *self, const char *name) {
