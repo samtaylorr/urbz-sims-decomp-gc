@@ -503,6 +503,22 @@ EMat4Node *fn_802CD504(void *self, EMat4Node *n, void **out) {
     return NULL;
 }
 
+void fn_802CD53C(EMat4Node **list) {
+    extern void fn_802D20E8(void *);
+    void *p;
+    void *next;
+
+    p = M2C_FIELD(list, void **, 4);
+    while (p != NULL) {
+        next = M2C_FIELD(p, void **, 0xC);
+        fn_802D20E8(p);
+        p = next;
+    }
+    M2C_FIELD(list, char **, 8) = lbl_803FD274;
+    M2C_FIELD(list, void **, 4) = NULL;
+    M2C_FIELD(list, s32 *, 0) = 0;
+}
+
 void fn_802CD59C(EMat4Node **list) {
     extern void *fn_802D0AB8(void *);
     EMat4Node *n;
@@ -540,12 +556,10 @@ void *fn_802CD66C(void *self, EMat4Node **other, s32 overwrite) {
     EMat4Node *n;
 
     for (n = *other; EMat4Node_Valid(n); n = n->next) {
-        s32 key = n->key;
-        void *value = n->value;
         if (overwrite) {
-            fn_802CCE6C(self, key, value, 1);
+            fn_802CCE6C(self, n->key, n->value, 1);
         } else {
-            fn_802CCE08(self, key, value, 1);
+            fn_802CCE08(self, n->key, n->value, 1);
         }
     }
 }
