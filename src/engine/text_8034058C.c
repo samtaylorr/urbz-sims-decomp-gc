@@ -16,7 +16,7 @@ void *fn_8034058C(void *self) {
 
 void fn_803405CC(s32 arg0, s32 arg1) {
     if (arg1 == 0xFFFF && arg0 != 0) {
-        fn_8034058C(lbl_80496290);
+        fn_8034058C(&lbl_80496290);
     }
 }
 
