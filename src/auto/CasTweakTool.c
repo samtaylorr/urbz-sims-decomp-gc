@@ -158,6 +158,10 @@ void fn_801D497C(u8 *self, s32 flags) {
     }
 }
 
+void fn_801D49B0(CasTweakBlock *src, CasTweakBlock *dst) {
+    *dst = *src;
+}
+
 void fn_801D4B2C(void) {
     M2C_UNK fn_801D4AD8(M2C_UNK, M2C_UNK);
     fn_801D4AD8(1, 0xFFFF);
