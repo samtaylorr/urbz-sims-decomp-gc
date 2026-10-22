@@ -7440,6 +7440,14 @@ void *fn_803BCB50(u8 *self, s32 *arr) {
     return self;
 }
 
+void fn_803BCBE8(u8 *p, s32 n) {
+    extern void fn_80366A7C(void *);
+    while (--n != -1) {
+        fn_80366A7C(p);
+        p += 0x58;
+    }
+}
+
 void fn_8039A7F0(s32 *dst, s32 *src, s32 n);
 void fn_8039A8DC(void *self, s32 n, s32 arg2);
 s32 *fn_803BCC34(s32 *self, s32 *other);
