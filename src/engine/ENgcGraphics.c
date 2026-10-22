@@ -48,3 +48,11 @@ void fn_80340534(void) {
     fn_803404E0(1, 0xFFFF);
 }
 
+extern f32 lbl_803F417C[];
+extern u8 lbl_8046DF78[];
+extern void fn_8035A124(void *, f32 *, void *, f32, f32, f32, f32);
+extern u8 lbl_8045F9F0[];
+void fn_80340560(void) {
+    fn_803404E0(0, 0xFFFF);
+}
+
