@@ -36,7 +36,7 @@ static inline s32 EMat4Node_Valid(EMat4Node *n) {
 
 void fn_802CD53C(EMat4Node **list);
 void fn_802CCE6C(void *self, s32 key, void *value, s32 arg3);
-void fn_802CCE08(void *self, s32 key, void *value, s32 arg3);
+void fn_802CCE08();
 
 s32 *fn_802C66FC(s32 *arg0) {
     arg0[0] = 0;
@@ -556,10 +556,12 @@ void *fn_802CD66C(void *self, EMat4Node **other, s32 overwrite) {
     EMat4Node *n;
 
     for (n = *other; EMat4Node_Valid(n); n = n->next) {
-        if (overwrite) {
-            fn_802CCE6C(self, n->key, n->value, 1);
+        s32 key = n->key;
+        void *value = n->value;
+        if (!overwrite) {
+            fn_802CCE08(self, key, value, 1);
         } else {
-            fn_802CCE08(self, n->key, n->value, 1);
+            fn_802CCE6C(self, key, value, 1);
         }
     }
 }
