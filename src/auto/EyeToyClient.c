@@ -129,6 +129,11 @@ s32 fn_80043488(void) {
     return lbl_8049407C != -1 ? fn_803391AC(lbl_8049407C) : 0;
 }
 
+s32 fn_800434BC(void) {
+    s32 fn_803391E4(s32);
+    return lbl_8049407C != -1 ? fn_803391E4(lbl_8049407C) : 0;
+}
+
 s32 fn_800434F0(void) {
     s32 fn_8004200C(void);
     return fn_8004200C() != -1;
