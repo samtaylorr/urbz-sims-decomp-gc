@@ -272,8 +272,40 @@ void fn_80334ED4(s32 arg0) {
     lbl_80494F60 = arg0;
 }
 
+s32 fn_80334F08(s32 arg0, s32 arg1) {
+    extern u8 lbl_8045B438[];
+    extern u8 lbl_8041BE20[];
+    extern f32 lbl_803F3770[];
+    M2C_UNK fn_80335F5C(void *);
+    M2C_UNK fn_80335FD8(void *, s32);
+    if (arg1 == 0xFFFF) {
+        if (arg0 != 0) {
+            u8 *p = lbl_8045B438;
+            fn_80335F5C(p);
+            *(u8 **)(p + 0xA4) = lbl_8041BE20;
+            *(f32 *)(p + 0xA8) = lbl_803F3770[0];
+            return;
+        }
+        fn_80335FD8(lbl_8045B438, 2);
+    }
+}
+
+void *fn_80334F80(void *arg0) {
+    extern u8 lbl_8041BE20[];
+    extern f32 lbl_803F3774[];
+    M2C_UNK fn_80335F5C(void *);
+    fn_80335F5C(arg0);
+    M2C_FIELD(arg0, u8 **, 0xA4) = lbl_8041BE20;
+    M2C_FIELD(arg0, f32 *, 0xA8) = lbl_803F3774[0];
+    return arg0;
+}
+
 void fn_80334FC8(void) {
     M2C_UNK fn_80334F08(M2C_UNK, M2C_UNK);
     fn_80334F08(1, 0xFFFF);
+}
+
+void fn_80334FF4(void) {
+    fn_80334F08(0, 0xFFFF);
 }
 
