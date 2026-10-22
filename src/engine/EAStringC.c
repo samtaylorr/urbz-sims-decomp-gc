@@ -1942,6 +1942,11 @@ s32 fn_802BB640(s32 *self) {
     return self[2];
 }
 
+void fn_802BB648(void) {
+    extern void (*lbl_80443310[])(void);
+    lbl_80443310[0]();
+}
+
 void fn_802BB6CC(void) {
     lbl_80443314[0]();
 }
