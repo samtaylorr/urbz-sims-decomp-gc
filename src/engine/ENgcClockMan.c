@@ -35,9 +35,9 @@ extern s32 lbl_80496280;
 
 void fn_8033E1DC(void *self, ClockTimer *timer) {
     s64 now = fn_8025A3DC();
-    u32 ticks = ((u32)now - (u32)timer->time) / (*(u32 *)0x800000F8 / 4000);
+    u32 ticks = ((u32)now - (u32)timer->time) / (((struct { u8 pad[0xF8]; u32 busClock; } *)0x80000000)->busClock / 4000);
     timer->time = now;
-    timer->elapsed += (f32)ticks / lbl_803F3F38;
+    timer->elapsed += (f32)ticks / 1000.0f;
 }
 
 f32 fn_8033E26C(void *self, ClockTimer *timer) {
