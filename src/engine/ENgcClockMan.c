@@ -45,6 +45,11 @@ f32 fn_8033E26C(void *self, ClockTimer *timer) {
     return timer->elapsed;
 }
 
+f32 fn_8033E29C(void *self, ClockTimer *timer) {
+    fn_8033E1DC(self, timer);
+    return timer->elapsed;
+}
+
 void fn_8033E2CC(s32 arg0, s32 arg1) {
     if (arg1 == 0xFFFF) {
         if (arg0 != 0) {
