@@ -310,6 +310,40 @@ loop_1:
     goto loop_1;
 }
 
+void *fn_8035F1B4(char *self) {
+    void *fn_802C7DE4(void *);
+    char *vt;
+    void **p;
+
+    vt = *(char **)(self + 0x3A0);
+    (*(void (**)(void *, s32))(vt + 0x14))(self + 0x3A0 + *(s16 *)(vt + 0x10), -1);
+    p = *(void ***)(self + 0x394);
+    if (p != NULL) {
+        *(void **)(self + 0x394) = *p;
+    } else {
+        p = fn_802C7DE4(self + 0x394);
+    }
+    vt = *(char **)(self + 0x3A0);
+    (*(void (**)(void *))(vt + 0x1C))(self + 0x3A0 + *(s16 *)(vt + 0x18));
+    return p;
+}
+
+void fn_8035F240(s32 arg0, s32 arg1) {
+    char *self = (char *)arg0;
+    void **node = (void **)arg1;
+    char *lock = self + 0x3A0;
+    char *vt;
+
+    vt = *(char **)lock;
+    (*(void (**)(void *, s32))(vt + 0x14))(lock + *(s16 *)(vt + 0x10), -1);
+    if (node != NULL) {
+        *node = *(void **)(self + 0x394);
+        *(void **)(self + 0x394) = node;
+    }
+    vt = *(char **)lock;
+    (*(void (**)(void *))(vt + 0x1C))(lock + *(s16 *)(vt + 0x18));
+}
+
 void fn_8035F2B8(s32 arg0, s32 arg1) {
     extern u8 lbl_80474FF8[];
     void fn_8035EF8C(void *, s32);
