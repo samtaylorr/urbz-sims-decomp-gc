@@ -6755,10 +6755,12 @@ void fn_803B9648(s32 self, s32 flags) {
 Vec4f *fn_803B9688(Vec4f *v) {
     extern f32 lbl_803F0198[];
     extern f32 lbl_803F019C[];
-    v->x = lbl_803F0198[0];
-    v->w = lbl_803F019C[0];
-    v->z = lbl_803F0198[0];
-    v->y = lbl_803F0198[0];
+    f32 zero = lbl_803F0198[0];
+    f32 one = lbl_803F019C[0];
+    v->w = one;
+    v->z = zero;
+    v->y = zero;
+    v->x = zero;
     return v;
 }
 
