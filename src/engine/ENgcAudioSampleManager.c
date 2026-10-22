@@ -79,3 +79,13 @@ void fn_8033E0F4(void) {
     fn_8033E010(1, 0xFFFF);
 }
 
+extern u32 lbl_80494FB8;
+void fn_8033DD9C(void *);
+extern u8 lbl_8045D140[];
+extern SampleList lbl_8045D1F0;
+void *fn_802D0AB8(void);
+void fn_802D1A00(void *, void *);
+void fn_8033E120(void) {
+    fn_8033E010(0, 0xFFFF);
+}
+
