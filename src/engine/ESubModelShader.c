@@ -210,6 +210,18 @@ void fn_80300944(void) {
     fn_80338184(lbl_8045B82C);
 }
 
+void fn_803009E8(u8 *self, s32 flags) {
+    extern void fn_80300BE8(u8 *);
+    extern void fn_803BB77C(u8 *, s32);
+    extern void fn_802D20E8(u8 *);
+    fn_80300BE8(self);
+    fn_803BB77C(self + 0x2C, 2);
+    fn_803BB77C(self + 0x14, 2);
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_80302228(void) {
 
 }
