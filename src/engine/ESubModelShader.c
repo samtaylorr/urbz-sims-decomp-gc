@@ -222,6 +222,14 @@ void fn_803009E8(u8 *self, s32 flags) {
     }
 }
 
+void fn_80300A40(u8 *self) {
+    extern void fn_8031EA2C(s32);
+    if (*(s32 *)(self + 8) != 0) {
+        fn_8031EA2C(*(s32 *)(self + 8));
+        *(s32 *)(self + 8) = 0;
+    }
+}
+
 void fn_80302228(void) {
 
 }
