@@ -700,8 +700,56 @@ s32 fn_8038BECC(s32 chan, s32 fileNo) {
     return fn_803894A8(chan);
 }
 
+s32 fn_8038BF14(s32 chan, void *callback) {
+    return fn_8038B874(chan, fn_80388F84(), callback);
+}
+
+s32 fn_8038BF5C(s32 chan) {
+    s32 fn_803894A8(s32);
+    extern void fn_80387D34(void);
+    s32 result;
+
+    result = fn_8038B874(chan, fn_80388F84(), fn_80387D34);
+    if (result < 0) {
+        return result;
+    }
+    return fn_803894A8(chan);
+}
+
+BOOL fn_8038BFB0(void *dir, char *name) {
+    char *entName;
+    int i;
+
+    entName = (char *)dir + 8;
+    for (i = 0; i < 32; i++) {
+        if (*entName++ != *name++) {
+            return FALSE;
+        }
+        if (name[-1] == '\0') {
+            return TRUE;
+        }
+    }
+    if (*name == '\0') {
+        return TRUE;
+    }
+    return FALSE;
+}
+
 s32 fn_8038C698(void) {
     return 0;
+}
+
+s32 fn_8038D358(s32 chan, s32 fileNo, void *callback);
+s32 fn_8038D484(s32 chan, s32 fileNo) {
+    s32 fn_803894A8(s32);
+    extern void fn_80387D34(void);
+    s32 result;
+
+    result = fn_8038D358(chan, fileNo, fn_80387D34);
+    if (result < 0) {
+        return result;
+    }
+    return fn_803894A8(chan);
 }
 
 s32 fn_8038DAA4(s32 chan, s32 arg1, s32 arg2) {
