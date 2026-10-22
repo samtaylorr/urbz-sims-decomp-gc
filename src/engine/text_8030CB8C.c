@@ -60,11 +60,11 @@ s32 fn_8030FE2C(void) {
     return M2C_FIELD(lbl_80494EEC, s32 *, 8);
 }
 
-void fn_803100D8(s32 *arg0) {
-    s32 *p = arg0;
-    p[0] = 0;
-    p[1] = 0;
-    p[2] = 0;
+s32 *fn_803100D8(s32 *arg0) {
+    arg0[1] = 0;
+    arg0[0] = 0;
+    arg0[2] = 0;
+    return arg0;
 }
 
 extern void fn_802D20E8(void *);
