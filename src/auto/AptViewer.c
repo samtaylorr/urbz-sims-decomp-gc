@@ -131,10 +131,10 @@ s32 fn_8000C53C(s32 arg0, s32 arg1) {
     extern f32 lbl_804956B8;
     if (arg1 == 0xFFFF && arg0 != 0) {
         f32 v = lbl_803C19FC[0];
-        lbl_804956B8 = v;
         lbl_804956AC = v;
         lbl_804956B0 = v;
         lbl_804956B4 = v;
+        lbl_804956B8 = v;
     }
 }
 
