@@ -42,8 +42,9 @@ void fn_8033FFD4(void) {
     fn_8035D9C0();
 }
 
+void fn_803404E0(s32 arg0, s32 arg1);
+
 void fn_80340534(void) {
-    M2C_UNK fn_803404E0(M2C_UNK, M2C_UNK);
     fn_803404E0(1, 0xFFFF);
 }
 
