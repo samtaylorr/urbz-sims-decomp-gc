@@ -24,12 +24,11 @@ void fn_80312EE8(s32 arg0, s32 arg1) {
             M2C_FIELD(p, void **, 0) = lbl_80419328;
             fn_802C7B28(p, 2);
             q = p + 4;
-            i = 1;
             M2C_FIELD(p, void **, 0) = lbl_8041B240;
-            do {
+            for (i = 1; i != -1; i--) {
                 fn_80363734(q, 0x1000);
                 q += 0x14;
-            } while (i-- != 0);
+            }
             M2C_FIELD(p, s32 *, 0x2C) = 0;
         } else {
             fn_80312DD4(lbl_80459FB0, 2);
