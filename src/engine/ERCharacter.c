@@ -61,13 +61,13 @@ s32 fn_80317C38(s32 arg0, s32 arg1) {
     return arg0 + sp8;
 }
 
-s32 fn_80317CD8(s32 arg0) {
-    s32 fn_80317BB8();
+s32 fn_80317BB8(s32, s32);
+s32 fn_80317CD8(s32 arg0, s32 arg1) {
     s32 temp_r3;
     s32 var_r30;
 
     var_r30 = 0;
-    temp_r3 = fn_80317BB8();
+    temp_r3 = fn_80317BB8(arg0, arg1);
     if (temp_r3 != 0) {
         var_r30 = arg0 + temp_r3;
     }
