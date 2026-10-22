@@ -40,6 +40,15 @@ void fn_8031E988(s32 arg0, s32 arg1) {
     fn_802D4750(arg1, arg0 + 0x18);
 }
 
+void *fn_8031E9B4(void *arg0, void *arg1) {
+    void *fn_802D4798(void *, s32);
+    extern u16 lbl_8049386E[];
+    if (lbl_8049386E[0] == 0) {
+        return fn_802D4798(arg1, (s32)arg0 + 0x18);
+    }
+    return arg1;
+}
+
 void fn_8031EA90(void *arg0) {
     M2C_UNK fn_80337C24(s32, void *);
     fn_80337C24(M2C_FIELD(arg0, s32 *, 4), arg0);
