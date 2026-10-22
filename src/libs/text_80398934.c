@@ -7396,6 +7396,10 @@ s32 *fn_803BD14C(s32 *self, s32 *other) {
     return self;
 }
 
+void fn_803BD7D8(void *self) {
+    fn_802D8BEC(self);
+}
+
 void fn_80335FD8(void);
 void fn_803BD7F8(void) {
     fn_80335FD8();
