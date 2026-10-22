@@ -60,3 +60,8 @@ void fn_80314C68(void) {
     fn_80314C14(1, 0xFFFF);
 }
 
+void fn_80314C94(void) {
+    s32 fn_80314C14(s32, s32);
+    fn_80314C14(0, 0xFFFF);
+}
+
