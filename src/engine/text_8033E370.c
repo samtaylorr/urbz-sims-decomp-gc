@@ -1,6 +1,20 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+typedef struct PadStatus {
+    s32 unk0;
+    s32 unk4;
+    s16 unk8;
+    s8 err;
+    s8 unkB;
+} PadStatus;
+
+typedef struct VtEntry {
+    s16 delta;
+    s16 pad;
+    void (*fn)(void *);
+} VtEntry;
+
 extern u8 lbl_8041BDE8[];
 void fn_802D20E8(void *);
 void fn_80333694(void *);
