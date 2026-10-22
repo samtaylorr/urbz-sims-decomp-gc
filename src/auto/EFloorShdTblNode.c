@@ -248,21 +248,21 @@ void fn_80059100(void *arg0) {
 
 s32 fn_800591A0(void) {
     s32 fn_80059220();
-    return fn_80059220() != 0;
+    s32 r = 0;
+    if (fn_80059220() != 0) {
+        r = 1;
+    }
+    return r;
 }
 
 s32 fn_800591D0(void *arg0, s32 arg1) {
     s32 i;
-    s32 n;
-    u16 *p;
 
     if (arg1 == M2C_FIELD(arg0, s32 *, 0x8C)) {
         return 1;
     }
-    n = M2C_FIELD(arg0, s32 *, 0x90);
-    p = (u16 *)((u8 *)arg0 + 0x94);
-    for (i = 0; i < n; i++) {
-        if (arg1 == *p++) {
+    for (i = 0; i < M2C_FIELD(arg0, s32 *, 0x90); i++) {
+        if (arg1 == ((u16 *)((u8 *)arg0 + 0x94))[i]) {
             return 1;
         }
     }
