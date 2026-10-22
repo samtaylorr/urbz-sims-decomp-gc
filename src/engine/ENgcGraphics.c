@@ -32,6 +32,13 @@ void fn_8033FD44(s32 arg0, s32 arg1) {
     fn_802EE234(arg0, arg1);
 }
 
+void fn_8033FDCC(void *unused, char *obj) {
+    if (obj != NULL) {
+        char *vt = *(char **)(obj + 0x5C);
+        (*(void (**)(void *, s32))(vt + 0xC))(obj + *(s16 *)(vt + 0x8), 3);
+    }
+}
+
 extern u8 lbl_8045F980[];
 extern void fn_80348F08(void *, s32);
 void fn_8033FE0C(void);
@@ -52,15 +59,31 @@ void fn_803403B4(u8 *self, u8 *arg1) {
     for (i = 0; i < *(s32 *)(self + 0x2A4); i++) {
         f32 a[2];
         f32 b[2];
+        f32 *src = (f32 *)(self + 0xE4 + i * 0xC);
         u8 *vt;
-        a[0] = *(f32 *)(self + 0xE4 + i * 0xC);
-        a[1] = *(f32 *)(self + 0xE8 + i * 0xC);
         b[0] = *(f32 *)(self + 0x1A4 + i * 0xC);
         b[1] = *(f32 *)(self + 0x1A8 + i * 0xC);
+        a[0] = src[0];
+        a[1] = src[1];
         vt = *(u8 **)(arg1 + 0x68);
         (*(void (**)(void *, f32 *, f32 *, f32))(vt + 0x33C))(arg1 + *(s16 *)(vt + 0x338), a, b, *(f32 *)(self + 0x1AC + i * 0xC));
     }
     *(s32 *)(self + 0x2A4) = 0;
+}
+
+void fn_80340458(u8 *self) {
+    if (*(s32 *)(self + 0x320) != 0) {
+        f32 *v = (f32 *)(self + 0x300);
+        f32 s = *(f32 *)(self + 0x2F8);
+        f32 tmp[3];
+        f32 x = v[0] * s;
+        f32 y = v[1] * s;
+        f32 z = v[2] * s;
+        tmp[0] = x;
+        tmp[1] = y;
+        tmp[2] = z;
+        fn_8035A124(lbl_8046DF78, tmp, self + 0x30C, *(f32 *)(self + 0x2E0), *(f32 *)(self + 0x2E4), *(f32 *)(self + 0x2E8) * lbl_803F417C[0], *(f32 *)(self + 0x2F4));
+    }
 }
 
 void fn_803404E0(s32 arg0, s32 arg1) {
