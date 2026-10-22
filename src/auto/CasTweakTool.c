@@ -177,6 +177,11 @@ void fn_801D4A08(CasTweakBlock *dst, CasTweakBlock *src) {
     *dst = *src;
 }
 
+void fn_801D4A60(u8 *self, struct CasVec3 { f32 x, y, z; } *a, struct CasVec3 *b) {
+    *a = *(struct CasVec3 *)(self + 0xE0);
+    *b = *(struct CasVec3 *)(self + 0xEC);
+}
+
 void fn_801D4B2C(void) {
     void fn_801D4AD8(s32, s32);
     fn_801D4AD8(1, 0xFFFF);
