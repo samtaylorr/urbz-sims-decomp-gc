@@ -28,7 +28,7 @@ s32 fn_800F524C(s32 arg0, s32 arg1) {
     void *buf;
 
     buf = fn_802D2058(fn_800F8120(arg1) + 1);
-    fn_800F51EC(buf, arg1);
+    fn_800F51EC(buf, (u16 *)arg1);
     if (buf != 0) {
         fn_802D211C(buf);
     }
