@@ -19,6 +19,13 @@ void fn_80335F5C(void *);
 void fn_80335FD8(void *);
 extern u8 lbl_8041C3B0[];
 extern void *lbl_8049627C;
+void *fn_8033D278(void *arg0) {
+    fn_80335F5C(arg0);
+    M2C_FIELD(arg0, u8 **, 0xA4) = lbl_8041C3B0;
+    lbl_8049627C = arg0;
+    return arg0;
+}
+
 void fn_8033D2B8(void *arg0) {
     M2C_FIELD(arg0, u8 **, 0xA4) = lbl_8041C3B0;
     fn_80335FD8(arg0);
