@@ -258,8 +258,8 @@ void fn_8033BD04(void) {
     fn_80337430();
 }
 
+void fn_8033BC78(s32 arg0, s32 arg1);
 void fn_8033BD24(void) {
-    M2C_UNK fn_8033BC78(M2C_UNK, M2C_UNK);
     fn_8033BC78(1, 0xFFFF);
 }
 
