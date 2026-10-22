@@ -2,6 +2,39 @@
 #include "common.h"
 
 extern void fn_802D20E8(void *);
+f32 *fn_800F4B08(f32 *out, f32 *arg1, f32 *arg2, s32 arg3) {
+    f32 fn_800F4AA4(s32);
+    extern f32 lbl_803D5A04;
+
+    out[0] = *arg2 * lbl_803D5A04;
+    out[1] = fn_800F4AA4(arg3);
+    out[2] = *arg1 * lbl_803D5A04;
+    return out;
+}
+
+f32 *fn_800F4BE0(f32 *out, s32 *in, s32 arg2) {
+    f32 fn_800F4AA4(s32);
+    extern f32 lbl_803D5A0C;
+
+    out[0] = (f32)in[0] * lbl_803D5A0C;
+    out[1] = fn_800F4AA4(arg2);
+    out[2] = (f32)in[1] * lbl_803D5A0C;
+    return out;
+}
+
+s32 fn_800F4D9C(s32 arg0, s32 arg1) {
+    void fn_800F4E18(s32, s32, f32 *);
+    extern f32 lbl_803D5A38[];
+    extern f32 lbl_803D5A3C[];
+    f32 sp8;
+    f32 x;
+
+    x = (f32)arg1 * lbl_803D5A38[0];
+    sp8 = (x + x) * lbl_803D5A3C[0];
+    fn_800F4E18(arg0, 1, &sp8);
+    return arg0;
+}
+
 void fn_800F51EC(u8 *dst, u16 *src) {
     while (*src != 0) {
         *dst++ = *src++;
