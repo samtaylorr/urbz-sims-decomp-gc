@@ -7419,6 +7419,24 @@ s32 fn_803BD464(s32 *arr, u8 *data) {
     return data - start;
 }
 
+s32 fn_803BD508(s32 *arr, u8 *data) {
+    void *fn_802482F8(void *, const void *, u32);
+    void fn_803BCD18(void *, s32, s32);
+    u8 *start = data;
+    s32 n;
+    s32 i;
+
+    fn_802482F8(&n, data, 4);
+    data += 4;
+    fn_803BCD18(arr, n, 0);
+    for (i = 0; i < n; i++) {
+        u8 *obj = (u8 *)*arr + i * 0x58;
+        u8 *vt = M2C_FIELD(obj, u8 **, 0x54);
+        data += M2C_FIELD(vt, s32 (**)(void *, u8 *), 0x1C)(obj + M2C_FIELD(vt, s16 *, 0x18), data);
+    }
+    return data - start;
+}
+
 s32 fn_803BD5AC(s32 *arr, u8 *data) {
     void *fn_802482F8(void *, const void *, u32);
     void fn_803BCF48(void *, s32, s32);
