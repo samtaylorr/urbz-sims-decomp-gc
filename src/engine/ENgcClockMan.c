@@ -24,8 +24,42 @@ void fn_8033E198(void) {
 
 }
 
+typedef struct ClockTimer {
+    s64 time;
+    f32 elapsed;
+} ClockTimer;
+
+extern s64 fn_8025A3DC(void);
+extern f32 lbl_803F3F38;
+extern s32 lbl_80496280;
+
+void fn_8033E1DC(void *self, ClockTimer *timer) {
+    s64 now = fn_8025A3DC();
+    u32 ticks = ((u32)now - (u32)timer->time) / (*(u32 *)0x800000F8 / 4000);
+    timer->time = now;
+    timer->elapsed += (f32)ticks / lbl_803F3F38;
+}
+
+f32 fn_8033E26C(void *self, ClockTimer *timer) {
+    fn_8033E1DC(self, timer);
+    return timer->elapsed;
+}
+
+void fn_8033E2CC(s32 arg0, s32 arg1) {
+    if (arg1 == 0xFFFF) {
+        if (arg0 != 0) {
+            fn_8033E14C((void **)&lbl_80496280);
+            return;
+        }
+        fn_8033E160((void **)&lbl_80496280, 2);
+    }
+}
+
 void fn_8033E318(void) {
-    M2C_UNK fn_8033E2CC(M2C_UNK, M2C_UNK);
     fn_8033E2CC(1, 0xFFFF);
+}
+
+void fn_8033E344(void) {
+    fn_8033E2CC(0, 0xFFFF);
 }
 
