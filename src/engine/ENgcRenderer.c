@@ -336,6 +336,7 @@ void *fn_802C7DE4(void *);
 extern u8 lbl_80474FF8[];
 void fn_8035EF8C(void *, s32);
 void fn_8035F33C(void) {
+    void fn_8035F2B8(s32, s32);
     fn_8035F2B8(0, 0xFFFF);
 }
 
