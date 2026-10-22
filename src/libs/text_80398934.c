@@ -7401,6 +7401,23 @@ s32 *fn_803BD14C(s32 *self, s32 *other) {
     return self;
 }
 
+s32 fn_803BD5AC(s32 *arr, u8 *data) {
+    void *fn_802482F8(void *, const void *, u32);
+    void fn_803BCF48(void *, s32, s32);
+    s32 fn_8036AA70(void *, u8 *);
+    u8 *start = data;
+    s32 n;
+    s32 i;
+
+    fn_802482F8(&n, data, 4);
+    data += 4;
+    fn_803BCF48(arr, n, 0);
+    for (i = 0; i < n; i++) {
+        data += fn_8036AA70((u8 *)*arr + i * 0x1C, data);
+    }
+    return data - start;
+}
+
 void fn_803BD770(void *self) {
     extern void fn_80338184(void *, s32);
     extern u8 lbl_8045BA40[];
