@@ -5,9 +5,9 @@ typedef struct EInstVec3 {
     s32 x, y, z;
 } EInstVec3;
 
-extern f32 lbl_803F0E6C;
-extern f32 lbl_803F0E70;
-extern f32 lbl_803F0E74;
+extern f32 lbl_803F0E6C[];
+extern f32 lbl_803F0E70[];
+extern f32 lbl_803F0E74[];
 
 void fn_802D2FD0(void);
 void fn_802F041C(void) {
