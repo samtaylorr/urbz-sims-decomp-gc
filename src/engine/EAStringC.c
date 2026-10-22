@@ -93,6 +93,30 @@ s32 fn_80292E08(s32 arg0) {
     return lbl_80496130;
 }
 
+s32 fn_80292E88(s32 arg0) {
+    extern void fn_8027DA94(s32, s32, s32, void **);
+    extern void fn_802A0980(s32, void *);
+    void *obj;
+    u32 flags;
+    s32 enabled;
+
+    obj = NULL;
+    fn_8027DA94(arg0, 0, arg0, &obj);
+    if (obj != NULL) {
+        flags = *(u32 *)obj;
+        enabled = 0;
+        if ((s32)(flags & 0x3F) > 0xB) {
+            if ((s32)(flags & 0x3F) <= 0x13) {
+                enabled = (flags >> 15) & 1;
+            }
+        }
+        if (enabled != 0) {
+            fn_802A0980(M2C_FIELD(M2C_FIELD(obj, void **, 0x4C), s32 *, 0x50) + 0x24, obj);
+        }
+    }
+    return lbl_80496130;
+}
+
 void fn_80298018(s32 arg0) {
     M2C_UNK fn_802A14A0(s32);
     fn_802A14A0(arg0 + 0x20);
