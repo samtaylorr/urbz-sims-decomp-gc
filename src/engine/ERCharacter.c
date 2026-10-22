@@ -42,6 +42,16 @@ s32 fn_80317BB8(s32 arg0, s32 arg1) {
     return sp8;
 }
 
+s32 fn_80317BF8(s32 arg0, s32 arg1) {
+    s32 sp8;
+
+    sp8 = 0;
+    if (arg1 != 0) {
+        fn_80317758(arg0, arg1, 0, &sp8, 0);
+    }
+    return sp8;
+}
+
 s32 fn_80317C38(s32 arg0, s32 arg1) {
     s32 sp8;
 
