@@ -288,6 +288,18 @@ void fn_8033BC4C(s32 arg0) {
     fn_80337AEC(lbl_8045BBA0, arg0);
 }
 
+void fn_8033BC78(s32 arg0, s32 arg1) {
+    if (arg1 == 0xFFFF) {
+        if (arg0 != 0) {
+            u8 *p = lbl_8045BBA0;
+            fn_80335F5C(p);
+            *(u8 **)(p + 0xA4) = lbl_8041C180;
+            return;
+        }
+        fn_80335FD8(lbl_8045BBA0, 2);
+    }
+}
+
 void fn_8033740C(void);
 void fn_8033BCE4(void) {
     fn_8033740C();
