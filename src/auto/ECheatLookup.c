@@ -21,15 +21,16 @@ void fn_800194C0(void) {
 
 }
 
-void fn_8001991C(char *self) {
+char *fn_8001991C(char *self) {
     *(s32 *)(self + 0x4) = -1;
     self[8] = 0;
     *(s32 *)(self + 0x4C) = 2;
-    *(s32 *)(self + 0x5C) = 0;
-    *(char **)(self + 0x48) = lbl_803C2A3C;
     *(s32 *)(self + 0x50) = 0;
     *(s32 *)(self + 0x54) = 0;
     *(s32 *)(self + 0x58) = 0;
+    *(s32 *)(self + 0x5C) = 0;
+    *(char **)(self + 0x48) = lbl_803C2A3C;
+    return self;
 }
 
 char *fn_8001995C(char *self, s32 arg1, const char *arg2, s32 arg3, s32 arg4, char *arg5, s32 arg6, s32 arg7) {
