@@ -38,8 +38,8 @@ void fn_80312EE8(s32 arg0, s32 arg1) {
 }
 
 void *fn_80312F90(void *arg0) {
-    u8 *q;
     s32 i;
+    u8 *q;
     M2C_FIELD(arg0, void **, 0) = lbl_80419328;
     fn_802C7B28(arg0, 2);
     q = (u8 *)arg0 + 4;
@@ -48,13 +48,13 @@ void *fn_80312F90(void *arg0) {
     do {
         fn_80363734(q, 0x1000);
         q += 0x14;
-    } while (i-- != 0);
+    } while (i--);
     M2C_FIELD(arg0, s32 *, 0x2C) = 0;
     return arg0;
 }
 
 void fn_80313008(void *arg0) {
-    fn_8036375C((u8 *)arg0 + M2C_FIELD(arg0, s32 *, 0x2C) * 0x14 + 4);
+    fn_8036375C((u8 *)arg0 + (M2C_FIELD(arg0, s32 *, 0x2C) * 0x14 + 4));
 }
 
 void fn_80313038(void) {
