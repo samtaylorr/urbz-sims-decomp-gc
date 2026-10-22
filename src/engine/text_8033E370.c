@@ -3,6 +3,16 @@
 
 extern u8 lbl_8041BDE8[];
 void fn_802D20E8(void *);
+void fn_80333694(void *);
+extern u8 lbl_8041C538[];
+extern void *lbl_80494FCC;
+void *fn_8033E370(void *self) {
+    fn_80333694(self);
+    M2C_FIELD(self, u8 **, 0x20) = lbl_8041C538;
+    lbl_80494FCC = self;
+    return self;
+}
+
 void fn_8033E3B0(void *self, s32 flags) {
     M2C_FIELD(self, u8 **, 0x20) = lbl_8041BDE8;
     if (flags & 1) {
