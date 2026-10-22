@@ -54,6 +54,16 @@ void fn_8033D3A0(void) {
     fn_80336078();
 }
 
+void *fn_8033DD34(void *arg0, s32 arg1) {
+    void *p;
+
+    p = M2C_FIELD(arg0, void **, 0xA8);
+    while (p != NULL && M2C_FIELD(p, s32 *, 0x10) != arg1) {
+        p = M2C_FIELD(p, void **, 4);
+    }
+    return p;
+}
+
 s32 fn_8033DD68(void *arg0, void *arg1) {
     s32 var_r9;
 
