@@ -68,6 +68,28 @@ void **fn_8033D168(void **self) {
     return self;
 }
 
+s32 fn_8033D17C(void **arg0, f32 arg1) {
+    extern f32 lbl_803F3EC8[];
+    extern f32 lbl_803F3ECC[];
+    void *vt;
+    s32 clamped;
+    f32 v;
+
+    clamped = 0;
+    vt = *arg0;
+    v = ((f32 (*)(void *))M2C_FIELD(vt, void **, 0x6C))((char *)arg0 + M2C_FIELD(vt, s16 *, 0x68)) + arg1;
+    if (v > lbl_803F3EC8[0]) {
+        v = lbl_803F3EC8[0];
+        clamped = 1;
+    } else if (v < lbl_803F3ECC[0]) {
+        v = lbl_803F3ECC[0];
+        clamped = 1;
+    }
+    vt = *arg0;
+    ((void (*)(void *, f32))M2C_FIELD(vt, void **, 0x64))((char *)arg0 + M2C_FIELD(vt, s16 *, 0x60), v);
+    return clamped;
+}
+
 void fn_8033D214(void) {
 
 }
