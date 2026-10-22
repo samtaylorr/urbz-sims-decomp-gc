@@ -38,17 +38,16 @@ void fn_80312EE8(s32 arg0, s32 arg1) {
 }
 
 void *fn_80312F90(void *arg0) {
-    s32 i;
     u8 *q;
+    s32 i;
     M2C_FIELD(arg0, void **, 0) = lbl_80419328;
     fn_802C7B28(arg0, 2);
     q = (u8 *)arg0 + 4;
-    i = 1;
     M2C_FIELD(arg0, void **, 0) = lbl_8041B240;
-    do {
+    for (i = 1; i != -1; i--) {
         fn_80363734(q, 0x1000);
         q += 0x14;
-    } while (i--);
+    }
     M2C_FIELD(arg0, s32 *, 0x2C) = 0;
     return arg0;
 }
