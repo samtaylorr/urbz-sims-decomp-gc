@@ -31,6 +31,33 @@ void fn_80314E34(void) {
     fn_80314E68();
 }
 
+s32 fn_8031536C(void *self, s32 idx) {
+    extern void *lbl_80494FCC;
+    void *fn_803338D0(void *, s32);
+    void *obj = fn_803338D0(lbl_80494FCC, idx);
+    void *vt;
+    if (obj != NULL) {
+        vt = M2C_FIELD(obj, void **, 0x204);
+        return M2C_FIELD(vt, s32 (**)(void *), 0x7C)((s8 *)obj + M2C_FIELD(vt, s16 *, 0x78));
+    }
+    return 0;
+}
+
+void fn_803153B8(void *self) {
+    extern void *lbl_80494FCC;
+    void *fn_803338D0(void *, s32);
+    s32 i = 0;
+    do {
+        if (fn_80314E68(self, (u8)i) != 0) {
+            void *obj = fn_803338D0(lbl_80494FCC, i);
+            if (obj != NULL) {
+                void *vt = M2C_FIELD(obj, void **, 0x204);
+                M2C_FIELD(vt, void (**)(void *), 0x7C)((s8 *)obj + M2C_FIELD(vt, s16 *, 0x78));
+            }
+        }
+    } while (++i < 4);
+}
+
 s32 fn_80315430(void) {
     return 1;
 }
