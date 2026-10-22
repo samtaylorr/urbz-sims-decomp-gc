@@ -39,3 +39,7 @@ void fn_80333308(void) {
     fn_8033325C(1, 0xFFFF);
 }
 
+void fn_80333334(void) {
+    fn_8033325C(0, 0xFFFF);
+}
+
