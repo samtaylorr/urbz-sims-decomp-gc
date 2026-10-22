@@ -79,6 +79,17 @@ s32 fn_800B3428(s32 arg0) {
     return arg0 + 0x64;
 }
 
+void fn_800B3430(void *arg0, char *name) {
+    void fn_802D57BC(void *, const char *);
+    extern char lbl_803CECF4[];
+
+    if (name != NULL) {
+        fn_802D57BC((char *)arg0 + 0x70, name);
+    } else {
+        fn_802D57BC((char *)arg0 + 0x70, lbl_803CECF4);
+    }
+}
+
 s32 fn_800B3470(void) {
     return 0;
 }
@@ -101,6 +112,19 @@ s32 fn_800B49E8(void) {
 
 void fn_800B49F0(void *arg0, s32 arg1, s32 arg2) {
 
+}
+
+s32 fn_800B49F4(void *arg0, char *str) {
+    int fn_80245C94(const char *, const char *, ...);
+    extern char lbl_803CF010[];
+    s32 a;
+    s32 b;
+
+    fn_80245C94(str + 2, lbl_803CF010, &a, &b);
+    if (a <= 4) {
+        return (a - 1) * 10 + b;
+    }
+    return b + 38;
 }
 
 s32 fn_800B4C20(void *arg0) {
