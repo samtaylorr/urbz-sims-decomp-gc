@@ -4,6 +4,17 @@
 void fn_80336078(void);
 void fn_8033D278(void *);
 extern u8 lbl_8041C368[];
+
+typedef struct SampleNode {
+    struct SampleNode *next;
+} SampleNode;
+
+typedef struct SampleList {
+    s32 unk0;
+    SampleNode *head;
+    s32 count;
+} SampleList;
+
 void *fn_8033D2E8(void *arg0) {
     fn_8033D278(arg0);
     M2C_FIELD(arg0, s32 *, 0x68) = 1;
