@@ -8,10 +8,11 @@ f32 *fn_800F4B08(f32 *out, f32 *arg1, f32 *arg2, s32 arg3) {
     f32 scale = lbl_803D5A04[0];
     f32 x = *arg2 * scale;
     f32 y = fn_800F4AA4(arg3);
+    f32 z = *arg1 * scale;
 
     out[0] = x;
     out[1] = y;
-    out[2] = *arg1 * scale;
+    out[2] = z;
     return out;
 }
 
