@@ -189,6 +189,24 @@ s32 fn_800F0698(void) {
     return 0;
 }
 
+u32 fn_800F1450(void **arg0, const u16 *arg1, u32 arg2, u32 arg3) {
+    u32 i;
+    u32 pos = arg2;
+
+    while (pos < fn_800F4878(arg0)) {
+        for (i = 0; i < arg3; i++) {
+            if (!BString2_Ne(&BString2_Data(arg0)[pos], &arg1[i])) {
+                break;
+            }
+        }
+        if (i == arg3) {
+            break;
+        }
+        pos++;
+    }
+    return pos < fn_800F4878(arg0) ? pos : -1;
+}
+
 M2C_UNK fn_800F160C(s32 arg0) {
     extern s32 lbl_80434AF8[];
     *(s32 **)arg0 = lbl_80434AF8;
