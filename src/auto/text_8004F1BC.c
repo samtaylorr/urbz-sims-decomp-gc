@@ -17,7 +17,7 @@ s32 fn_8004F2A4(s32 arg0) {
     }
 }
 
-void fn_8004F438(void) {
+void fn_8004F438(void *arg0) {
 
 }
 
