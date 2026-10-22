@@ -126,7 +126,6 @@ s32 fn_8031C3D8(u8 *self, s32 key) {
     u32 lo;
     u32 hi;
     u32 mid;
-    s32 *e;
 
     if (*(u32 *)(self + 0x24) == 0) {
         return 0;
@@ -135,11 +134,10 @@ s32 fn_8031C3D8(u8 *self, s32 key) {
     lo = 0;
     while (lo <= hi) {
         mid = (lo + hi) >> 1;
-        e = (s32 *)(mid * 0xC + *(u8 **)(self + 0x28));
-        if (key == e[0]) {
-            return e[2];
+        if (key == (*(NameEntry **)(self + 0x28))[mid].key) {
+            return (*(NameEntry **)(self + 0x28))[mid].value;
         }
-        if (key < e[0]) {
+        if (key < (*(NameEntry **)(self + 0x28))[mid].key) {
             hi = mid - 1;
         } else {
             lo = mid + 1;
