@@ -56,6 +56,14 @@ void fn_80278618(void) {
     fn_802A1E68();
 }
 
+void fn_80278638(void) {
+    extern s32 lbl_804960E8;
+    extern void fn_8028D764(void);
+    extern void fn_8028D82C(void);
+    extern void fn_802A1FE4(s32, void (*)(void), void (*)(void));
+    fn_802A1FE4(lbl_804960E8, fn_8028D764, fn_8028D82C);
+}
+
 void fn_8027866C(void) {
     M2C_UNK fn_8028DDA0();
     M2C_UNK fn_802923AC();
