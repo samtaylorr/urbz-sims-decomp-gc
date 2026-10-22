@@ -1448,12 +1448,8 @@ void *fn_801B19FC(u32 size) {
 }
 
 void fn_801B1AB4(void *p) {
-    u32 base = M2C_FIELD(lbl_80435418, u32 *, 0);
-    if ((u32)p >= base && (u32)p < base + M2C_FIELD(lbl_80435418, u32 *, 8)) {
-        if (p != NULL) {
-            *(void **)p = M2C_FIELD(lbl_80435418, void **, 4);
-            M2C_FIELD(lbl_80435418, void **, 4) = p;
-        }
+    if (ScratchPool_Contains((ScratchPool *)lbl_80435418, p)) {
+        ScratchPool_Free((ScratchPool *)lbl_80435418, p);
     } else {
         fn_802D1A00(fn_802D0AB8(), p);
     }
