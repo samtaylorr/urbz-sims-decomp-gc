@@ -21,6 +21,13 @@ static inline s32 BString2_Ne(const u16 *a, const u16 *b) {
 }
 void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
+void fn_800EF838(u16 *dst, const u8 *src) {
+    while (*src != 0) {
+        *dst++ = *src++;
+    }
+    *dst = 0;
+}
+
 void fn_800EF864(s32 self) {
     extern void fn_802D1A00(void *, void *);
     void *p;
