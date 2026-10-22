@@ -53,7 +53,7 @@ void fn_8030C490(void) {
     fn_8030AA98();
 }
 
-void fn_8030CB5C(void) {
+void fn_8030CB5C(s32 arg0, s32 arg1) {
 
 }
 
