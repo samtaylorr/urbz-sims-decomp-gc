@@ -8,6 +8,44 @@ typedef struct ChainEntry {
     void *obj;
     u8 pad[0x14];
 } ChainEntry;
+
+typedef struct ChainVecAlloc {
+    s32 unk0;
+    s32 cap;
+} ChainVecAlloc;
+
+typedef struct ChainVec {
+    s32 begin;
+    s32 end;
+    ChainVecAlloc alloc;
+} ChainVec;
+
+extern void fn_803997AC(void *, u32);
+
+static inline void ChainVecAlloc_Init(ChainVecAlloc *a) {
+    a->cap = 0;
+}
+
+static inline void ChainVec_Init(ChainVec *v) {
+    v->begin = 0;
+    v->end = 0;
+    ChainVecAlloc_Init(&v->alloc);
+}
+
+static inline s32 ChainVec_Size(ChainVec *v) {
+    return (v->end - v->begin) >> 2;
+}
+
+static inline void ChainVec_Free(ChainVec *v) {
+    if (v->begin != 0) {
+        u32 size = (u32)(v->alloc.cap - v->begin) & ~3;
+        if (size > 0x80) {
+            fn_802D20E8((void *)v->begin);
+        } else {
+            fn_803997AC((void *)v->begin, size);
+        }
+    }
+}
 void fn_801020E0(void **self, s32 flags) {
     *self = lbl_8040D690;
     if (flags & 1) {
@@ -58,9 +96,78 @@ void fn_80102A50(void **obj) {
     }
 }
 
+s16 fn_8010328C(void *self) {
+    extern void fn_8018FA84(void *, s32);
+    extern void fn_80103320(void *, void *);
+    extern void fn_803997AC(void *, u32);
+    s32 v[4];
+    s16 count;
+
+    fn_8018FA84(self, 0);
+    v[0] = 0;
+    v[1] = 0;
+    v[3] = 0;
+    fn_80103320(self, v);
+    count = (v[1] - v[0]) >> 2;
+    if (v[0] != 0) {
+        u32 size = (u32)(v[3] - v[0]) & ~3;
+        if (size > 0x80) {
+            fn_802D20E8((void *)v[0]);
+        } else {
+            fn_803997AC((void *)v[0], size);
+        }
+    }
+    return count;
+}
+
+s16 fn_80103678(void *self, s32 arg1) {
+    extern void fn_8018FA84(void *, s32);
+    extern s32 fn_8018FA7C(void *);
+    ChainEntry *e;
+    s32 total;
+    s32 i;
+
+    fn_8018FA84(self, 0);
+    total = 0;
+    e = (ChainEntry *)((char *)self + 0x14);
+    for (i = 0; i < 8 && e->obj != NULL; i++, e++) {
+        void *o = e->obj;
+        char *vt = *(char **)((char *)o + 0x10);
+        total += (*(s32 (**)(void *, s32))(vt + 0x7C))((char *)o + *(s16 *)(vt + 0x78), arg1);
+        if (fn_8018FA7C(e->obj) != 0) {
+            fn_8018FA84(self, fn_8018FA7C(e->obj));
+            return 0;
+        }
+    }
+    return total;
+}
+
 void fn_80103810(void *obj, s32 arg1, s32 arg2, s32 arg3) {
     char *vt = *(char **)((char *)obj + 0x10);
     (*(void (**)(void *, s32, s32, s32, s32))(vt + 0x9C))((char *)obj + *(s16 *)(vt + 0x98), arg1, arg2, 0, arg3);
+}
+
+s32 fn_80103C94(void *self, s32 arg1) {
+    extern void fn_8018FA84(void *, s32);
+    extern s32 fn_8018FA7C(void *);
+    s32 i;
+    ChainEntry *e;
+    s32 ret;
+
+    fn_8018FA84(self, 0);
+    i = 0;
+    fn_8018FA84(self, -0x63);
+    e = (ChainEntry *)((char *)self + 0x14);
+    for (e += i; i < 8 && e->obj != NULL; i++, e++) {
+        void *o = e->obj;
+        char *vt = *(char **)((char *)o + 0x10);
+        ret = (*(s32 (**)(void *, s32))(vt + 0xEC))((char *)o + *(s16 *)(vt + 0xE8), arg1);
+        if (fn_8018FA7C(e->obj) == 0) {
+            fn_8018FA84(self, 0);
+            return ret;
+        }
+    }
+    return 0;
 }
 
 s32 fn_80103ED8(char *self, s32 arg1) {
@@ -78,24 +185,28 @@ s32 fn_80103ED8(char *self, s32 arg1) {
     return ret;
 }
 
-void fn_80103F3C(char *self, s32 arg1) {
+void fn_80103F3C(void *self, s32 arg1) {
     extern void fn_8018FA84(void *, s32);
     extern s32 fn_8018FA7C(void *);
-    struct Entry { char *obj; s32 pad[5]; } *list;
     s32 i;
+    ChainEntry *e;
 
     fn_8018FA84(self, 0);
     i = 0;
     fn_8018FA84(self, -0x63);
-    list = (struct Entry *)(self + 0x14);
-    while (list[i].obj != 0) {
-        char *obj = list[i].obj;
-        char *vt = *(char **)(obj + 0x10);
-        (*(void (**)(void *, s32))(vt + 0xDC))(obj + *(s16 *)(vt + 0xD8), arg1);
-        fn_8018FA84(self, fn_8018FA7C(list[i].obj));
-        if (fn_8018FA7C(list[i].obj) == 0) break;
+    e = (ChainEntry *)((char *)self + 0x14);
+    for (; e[i].obj != NULL; ) {
+        void *o = e[i].obj;
+        char *vt = *(char **)((char *)o + 0x10);
+        (*(void (**)(void *, s32))(vt + 0xDC))((char *)o + *(s16 *)(vt + 0xD8), arg1);
+        fn_8018FA84(self, fn_8018FA7C(e[i].obj));
+        if (fn_8018FA7C(e[i].obj) == 0) {
+            return;
+        }
         i++;
-        if (i > 7) break;
+        if (i > 7) {
+            return;
+        }
     }
 }
 
