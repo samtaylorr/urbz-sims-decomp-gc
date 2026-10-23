@@ -465,6 +465,14 @@ void fn_8010CFA0(void *self, s32 flags) {
     }
 }
 
+void fn_8010CFD4(void *self, s32 flags) {
+    extern s32 lbl_80494408;
+    lbl_80494408 = 0;
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_8010D168(void) {
     void fn_801021BC(s32);
     void fn_8010C858(s32);
