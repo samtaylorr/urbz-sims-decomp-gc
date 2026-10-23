@@ -436,6 +436,14 @@ void fn_802D4634(u8 **arg0, s32 arg1, u8 arg2) {
     }
 }
 
+s32 *fn_802D4710(s32 *arg0, s32 arg1, s32 *arg2) {
+    s16 c;
+
+    c = arg1 << 8;
+    fn_802D3928(arg0, (char *)&c, (char *)*arg2);
+    return arg0;
+}
+
 void *fn_802D4798(void *arg0, s32 arg1) {
     s32 *fn_802D3CE4(s32 *, char *);
     char sp8[1024];
