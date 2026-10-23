@@ -456,6 +456,21 @@ s32 fn_800F4890(s32 arg0, const char *arg1) {
     return arg0;
 }
 
+M2C_UNK fn_800F4910(M2C_UNK arg0, M2C_UNK arg1) {
+    extern u8 lbl_80434AF8[];
+    extern u8 lbl_80495A7C[];
+
+    if (arg1 == 0xFFFF) {
+        if (arg0 != 0) {
+            fn_800F160C((s32)lbl_80495A7C);
+            fn_800EFF08(lbl_80434AF8);
+            return;
+        }
+        fn_800F0658((s32)lbl_80434AF8, 2);
+        fn_800F1A60((s32)lbl_80495A7C, 2);
+    }
+}
+
 void fn_800F4980(void) {
     M2C_UNK fn_800F4910(M2C_UNK, M2C_UNK);
     fn_800F4910(1, 0xFFFF);
