@@ -138,7 +138,7 @@ void fn_80290188(void) {
 }
 
 void fn_8029018C(void) {
-    M2C_UNK fn_8028FF8C(M2C_UNK, M2C_UNK);
+    void fn_8028FF8C(s32, s32);
     fn_8028FF8C(1, 0xFFFF);
 }
 
