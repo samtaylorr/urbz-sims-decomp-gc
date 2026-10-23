@@ -106,12 +106,10 @@ void fn_8033707C(char *arg0, s32 arg1) {
 
 void fn_80337354(char *self, char *res, s32 arg2) {
     s32 fn_8033860C(char *, s32, char *, s32);
-    char *lock;
+    ResLock lock;
     char *vt;
     if (res != NULL) {
-        lock = self;
-        vt = *(char **)self;
-        (*(void (**)(void *, s32))(vt + 0x14))(self + *(s16 *)(vt + 0x10), -1);
+        ResLock_Init(&lock, self);
         *(char **)(res + 4) = self;
         *(s32 *)(res + 8) = arg2;
         if (fn_8033860C(self + 0x40, arg2, res, *(s32 *)(self + 0x54)) == 0) {
@@ -119,8 +117,7 @@ void fn_80337354(char *self, char *res, s32 arg2) {
         }
         vt = *(char **)res;
         (*(void (**)(void *))(vt + 0x5C))(res + *(s16 *)(vt + 0x58));
-        vt = *(char **)lock;
-        (*(void (**)(void *))(vt + 0x1C))(lock + *(s16 *)(vt + 0x18));
+        ResLock_Release(&lock);
     }
 }
 
@@ -219,6 +216,16 @@ void fn_80337CF4(char *arg0, s32 arg1) {
     s32 fn_80337D30(char *, s32);
     s32 fn_80337F14(s32);
     fn_80337D30(arg0, fn_80337F14(arg1));
+}
+
+s32 fn_80337D30(char *self, s32 key) {
+    s32 fn_803365B8(char *, s32, s32 *, s32 *);
+    s32 a;
+    s32 b;
+    if (fn_803365B8(self, key, &a, &b) == 0) {
+        return 0;
+    }
+    return b;
 }
 
 s32 fn_80337F14(s32 arg0) {
