@@ -12,40 +12,20 @@ s32 fn_802D32A0(void) {
 }
 
 void *fn_802D34B0(void *arg0, f32 *arg1) {
-    void *vt;
-    f32 x;
-    f32 y;
-    f32 z;
-
-    vt = M2C_FIELD(arg0, void **, 0x18);
-    x = arg1[0];
-    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x38), &x, 4);
-    vt = M2C_FIELD(arg0, void **, 0x18);
-    y = arg1[1];
-    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x38), &y, 4);
-    vt = M2C_FIELD(arg0, void **, 0x18);
-    z = arg1[2];
-    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x38), &z, 4);
+    EStream_WriteF32(arg0, arg1[0]);
+    EStream_WriteF32(arg0, arg1[1]);
+    EStream_WriteF32(arg0, arg1[2]);
     return arg0;
 }
 
 void *fn_802D3558(void *arg0, f32 *arg1) {
-    void *vt;
-    f32 x;
-    f32 y;
-
-    vt = M2C_FIELD(arg0, void **, 0x18);
-    x = arg1[0];
-    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x38), &x, 4);
-    vt = M2C_FIELD(arg0, void **, 0x18);
-    y = arg1[1];
-    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x38), &y, 4);
+    EStream_WriteF32(arg0, arg1[0]);
+    EStream_WriteF32(arg0, arg1[1]);
     return arg0;
 }
 
 void *fn_802D35D8(void *arg0, f32 *arg1) {
-    fn_802D34B0(arg0, arg1);
-    return fn_802D34B0(arg0, arg1 + 3);
+    return fn_802D34B0(fn_802D34B0(arg0, arg1), arg1 + 3);
 }
 
 void *fn_802D360C(void *arg0, f32 *arg1) {
