@@ -130,16 +130,16 @@ void fn_80101C50(void *arg0) {
 void fn_80102010(s32 arg0, s32 arg1) {
     void fn_802CAA00(void *, s32);
     void fn_802CAB04(void *);
-    extern void *lbl_80434B38;
-    extern char lbl_80419350;
+    extern char lbl_80434B38[];
+    extern char lbl_80419350[];
     if (arg1 == 0xFFFF) {
         if (arg0 != 0) {
-            fn_802CAB04(&lbl_80434B38);
+            fn_802CAB04(lbl_80434B38);
             return;
         }
-        lbl_80434B38 = &lbl_80419350;
-        fn_802CAA00((char *)&lbl_80434B38 + 0x1C, 2);
-        fn_802CAA00(&lbl_80434B38, 2);
+        *(void **)lbl_80434B38 = lbl_80419350;
+        fn_802CAA00(lbl_80434B38 + 0x1C, 2);
+        fn_802CAA00(lbl_80434B38, 2);
     }
 }
 
