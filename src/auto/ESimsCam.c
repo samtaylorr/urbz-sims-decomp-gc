@@ -219,3 +219,8 @@ void fn_80014D74(void) {
     fn_80014AA0(1, 0xFFFF);
 }
 
+void fn_80014DA0(void) {
+    void fn_80014AA0(s32, s32);
+    fn_80014AA0(0, 0xFFFF);
+}
+
