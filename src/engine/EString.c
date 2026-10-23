@@ -1,8 +1,63 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+static inline void *EStream_WriteF32(void *s, f32 v) {
+    void *vt = M2C_FIELD(s, void **, 0x18);
+    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)((char *)s + M2C_FIELD(vt, s16 *, 0x38), &v, 4);
+    return s;
+}
+
 s32 fn_802D32A0(void) {
     return 0;
+}
+
+void *fn_802D34B0(void *arg0, f32 *arg1) {
+    void *vt;
+    f32 x;
+    f32 y;
+    f32 z;
+
+    vt = M2C_FIELD(arg0, void **, 0x18);
+    x = arg1[0];
+    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x38), &x, 4);
+    vt = M2C_FIELD(arg0, void **, 0x18);
+    y = arg1[1];
+    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x38), &y, 4);
+    vt = M2C_FIELD(arg0, void **, 0x18);
+    z = arg1[2];
+    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x38), &z, 4);
+    return arg0;
+}
+
+void *fn_802D3558(void *arg0, f32 *arg1) {
+    void *vt;
+    f32 x;
+    f32 y;
+
+    vt = M2C_FIELD(arg0, void **, 0x18);
+    x = arg1[0];
+    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x38), &x, 4);
+    vt = M2C_FIELD(arg0, void **, 0x18);
+    y = arg1[1];
+    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x38), &y, 4);
+    return arg0;
+}
+
+void *fn_802D35D8(void *arg0, f32 *arg1) {
+    fn_802D34B0(arg0, arg1);
+    return fn_802D34B0(arg0, arg1 + 3);
+}
+
+void *fn_802D360C(void *arg0, f32 *arg1) {
+    void *vt;
+    void *s;
+    f32 w;
+
+    s = fn_802D34B0(arg0, arg1);
+    vt = M2C_FIELD(s, void **, 0x18);
+    w = arg1[3];
+    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)((char *)s + M2C_FIELD(vt, s16 *, 0x38), &w, 4);
+    return s;
 }
 
 void *fn_802D3668(void *arg0, char *arg1) {
@@ -233,12 +288,12 @@ s32 *fn_802D4200(s32 *arg0, s32 *arg1, s32 arg2) {
 
 s32 *fn_802D4240(s32 *arg0, s32 arg1) {
     M2C_UNK fn_802D39F0(s32 *, s32);
-    typedef struct { s32 p; } Str;
-    Str (*f)(s32 *, s32) = (Str (*)(s32 *, s32))fn_802D4200;
-    Str tmp = f(arg0, arg1);
+    s32 tmp;
+    s32 *p;
 
-    fn_802D3CE4(arg0, (char *)tmp.p);
-    fn_802D39F0(&tmp.p, tmp.p);
+    fn_802D4200(p = &tmp, arg0, arg1);
+    fn_802D3CE4(arg0, (char *)tmp);
+    fn_802D39F0(p, tmp);
     return arg0;
 }
 
