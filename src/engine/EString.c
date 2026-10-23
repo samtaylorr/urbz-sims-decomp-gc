@@ -28,8 +28,11 @@ void *fn_802D34B0(void *arg0, f32 *arg1) {
 }
 
 void *fn_802D3558(void *arg0, f32 *arg1) {
-    EStream_WriteF32(arg0, arg1[0]);
-    EStream_WriteF32(arg0, arg1[1]);
+    f32 a = arg1[0];
+    f32 b;
+    EStream_WriteF32(arg0, a);
+    b = arg1[1];
+    EStream_WriteF32(arg0, b);
     return arg0;
 }
 
@@ -38,7 +41,8 @@ void *fn_802D35D8(void *arg0, f32 *arg1) {
 }
 
 void *fn_802D360C(void *arg0, f32 *arg1) {
-    return EStream_WriteF32(fn_802D34B0(arg0, arg1), arg1[3]);
+    void *s = fn_802D34B0(arg0, arg1);
+    return EStream_WriteF32(s, arg1[3]);
 }
 
 void *fn_802D3668(void *arg0, char *arg1) {
@@ -599,7 +603,7 @@ s32 *fn_802D5564(s32 *arg0, u16 arg1) {
 }
 
 void fn_802D58E4(s32 *arg0) {
-    M2C_UNK fn_802D5200(s32);
+    s32 fn_802D5200(u16 *);
     fn_802D5200(*arg0);
 }
 
