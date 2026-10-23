@@ -38,6 +38,11 @@ void fn_80129208(s32 arg0, s32 arg1) {
     fn_80129194(arg1, arg0);
 }
 
+void fn_80129234(s32 arg0, s32 arg1) {
+    s32 fn_80129270(s32);
+    fn_80129208(arg0, fn_80129270(arg1));
+}
+
 s32 fn_80129388(s32 arg0, s32 arg1) {
     s32 fn_8012A494(s32, s32, s32);
     M2C_UNK fn_8012F7F0(s32);
