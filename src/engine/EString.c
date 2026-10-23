@@ -92,6 +92,20 @@ void *fn_802D3668(void *arg0, char *arg1) {
     return arg0;
 }
 
+void *fn_802D37A0(void *arg0, char *arg1) {
+    void *vt;
+
+    vt = M2C_FIELD(arg0, void **, 0x18);
+    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x34)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x30), arg1, 4);
+    vt = M2C_FIELD(arg0, void **, 0x18);
+    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x34)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x30), arg1 + 4, 4);
+    return arg0;
+}
+
+void *fn_802D380C(void *arg0, char *arg1) {
+    return fn_802D3714(fn_802D3714(arg0, arg1), arg1 + 0xC);
+}
+
 void *fn_802D3840(void *arg0, void *arg1) {
     void *fn_802D3714(void *, void *);
     void *temp_r3;
