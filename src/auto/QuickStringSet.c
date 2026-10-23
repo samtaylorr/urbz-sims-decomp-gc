@@ -810,6 +810,16 @@ s32 fn_800FDF40(s32 *self) {
     return self[2];
 }
 
+void fn_800FDF48(u8 *arg0, s32 arg1) {
+    s32 fn_800FC7D4(s32);
+    u8 *vt;
+    u8 *obj;
+
+    vt = *(u8 **)arg0 + 0x30;
+    obj = arg0 + *(s16 *)vt;
+    (*(void (**)(u8 *, s32))(vt + 4))(obj, fn_800FC7D4(arg1));
+}
+
 s32 fn_800FDF9C(s32 *arg0) {
     return arg0[0] == -1 && arg0[1] == -1;
 }
