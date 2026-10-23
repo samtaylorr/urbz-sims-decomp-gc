@@ -11,6 +11,12 @@ void fn_801289C4(M2C_UNK *arg0) {
     lbl_80494448 = arg0;
 }
 
+void fn_80129158(s32 arg0, s32 arg1) {
+    s32 fn_80129270(s32);
+    void fn_80129194(s32, s32);
+    fn_80129194(arg0, fn_80129270(arg1));
+}
+
 void fn_80129208(s32 arg0, s32 arg1) {
     void fn_80129194(s32, s32);
     fn_80129194(arg1, arg0);
