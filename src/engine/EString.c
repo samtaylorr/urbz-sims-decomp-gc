@@ -382,7 +382,7 @@ s32 *fn_802D4158(s32 *arg0, s32 *arg1, s32 arg2) {
 }
 
 s32 *fn_802D41A8(s32 *arg0, char *arg1) {
-    M2C_UNK fn_802D39F0(s32 *, s32);
+    void fn_802D39F0(s32 *, s32);
     typedef struct { s32 p; } Str;
     Str tmp = ((Str (*)(char *, char *))fn_802D3928)((char *)*arg0, arg1);
 
