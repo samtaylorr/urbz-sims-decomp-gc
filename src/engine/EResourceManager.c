@@ -89,13 +89,13 @@ s32 fn_80337008(char *self, s32 arg1) {
     s32 fn_80337DCC(char *, s32);
     void fn_803379C8(char *, s32);
     char *vt;
-    if (fn_80337DCC(self, arg1) == 0) {
-        vt = *(char **)(self + 0xA4);
-        (*(void (**)(void *, s32))(vt + 0x24))(self + *(s16 *)(vt + 0x20), arg1);
-        fn_803379C8(self, arg1);
-        return fn_80337DCC(self, arg1);
+    if (fn_80337DCC(self, arg1) != 0) {
+        return 1;
     }
-    return 1;
+    vt = *(char **)(self + 0xA4);
+    (*(void (**)(void *, s32))(vt + 0x24))(self + *(s16 *)(vt + 0x20), arg1);
+    fn_803379C8(self, arg1);
+    return fn_80337DCC(self, arg1);
 }
 
 void fn_8033707C(char *arg0, s32 arg1) {
