@@ -227,10 +227,14 @@ void fn_8005895C(s32 arg0, s32 arg1) {
 s32 fn_80058AFC(s32 arg0) {
     s32 fn_800418C8(s32);
     extern s32 lbl_804940D0;
+    s32 r;
+
     if (arg0 != 0) {
-        return fn_800418C8(arg0);
+        r = fn_800418C8(arg0);
+    } else {
+        r = lbl_804940D0;
     }
-    return lbl_804940D0;
+    return r;
 }
 
 void fn_80059100(void *arg0) {
@@ -410,8 +414,11 @@ u16 fn_80059894(void *arg0) {
 }
 
 u16 fn_8005989C(void *arg0, u32 arg1) {
+    u16 *ids;
+
     if (arg1 < M2C_FIELD(arg0, u32 *, 0x90)) {
-        return ((u16 *)((u8 *)arg0 + 0x94))[arg1];
+        ids = (u16 *)((u8 *)arg0 + 0x94);
+        return ids[arg1];
     }
     return 0;
 }
