@@ -463,6 +463,17 @@ s32 *fn_802D49E4(s32 *arg0, s32 arg1) {
     return arg0;
 }
 
+s32 fn_802D4EC4(s32 *arg0, s32 arg1) {
+    s32 fn_802D3DB0(s32 *, s32);
+    s32 var_r3;
+
+    var_r3 = 0;
+    if (fn_802D3DB0(arg0, arg1) != 0) {
+        var_r3 = *arg0;
+    }
+    return var_r3;
+}
+
 void fn_802D4F00(s32 *arg0) {
     s32 *fn_802D3CE4(s32 *, char *);
     fn_802D3CE4(arg0, (char *)*arg0);
@@ -564,6 +575,16 @@ void fn_802D5238(M2C_UNK **arg0) {
 extern u8 lbl_803FD294[];
 void fn_802D5244(M2C_UNK **arg0) {
     *arg0 = &lbl_803FD294;
+}
+
+s32 *fn_802D5564(s32 *arg0, u16 arg1) {
+    M2C_UNK fn_802D56C4(s32 *, u16 *);
+    u16 sp8[2];
+
+    sp8[0] = arg1;
+    sp8[1] = 0;
+    fn_802D56C4(arg0, sp8);
+    return arg0;
 }
 
 void fn_802D58E4(s32 *arg0) {
