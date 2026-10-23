@@ -10,6 +10,16 @@ typedef struct QSSVec { u8 *begin; u8 *end; QSSAlloc alloc; } QSSVec;
 static inline void QSSAlloc_Clear(QSSAlloc *a) {
     a->cap = 0;
 }
+
+static inline void QSSAlloc_Free(void *p, u32 n) {
+    void fn_802D20E8(void *);
+    void fn_803997AC(void *, u32);
+    if (n > 0x80) {
+        fn_802D20E8(p);
+    } else {
+        fn_803997AC(p, n);
+    }
+}
 s32 fn_800F6498(void *arg0) {
     return *(s32 *)((u8 *)arg0 + 0x114) != 0;
 }
