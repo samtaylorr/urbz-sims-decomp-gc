@@ -112,6 +112,11 @@ void fn_80361EC8(void *arg0) {
     M2C_FIELD(arg0, s32 *, 8) = (s32) (M2C_FIELD(arg0, s32 *, 8) & 0xFFFFFFFC);
 }
 
+void fn_80361EE4(char *self) {
+    char *vt = *(char **)(self + 0x24);
+    (*(void (**)(char *))(vt + 0x4C))(self + *(s16 *)(vt + 0x48));
+}
+
 void fn_80361F18(void *arg0) {
     M2C_FIELD(arg0, s32 *, 8) = (s32) (M2C_FIELD(arg0, s32 *, 8) | 0x80);
 }
