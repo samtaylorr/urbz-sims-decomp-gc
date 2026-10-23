@@ -468,6 +468,19 @@ void fn_80117494(void) {
     fn_801055FC((s32)&lbl_80495B08, 2);
 }
 
+s32 *fn_801174BC(void) {
+    void fn_80246D44(void *);
+    extern s32 lbl_80495B0C;
+    if (lbl_80495B0C == 0) {
+        char *obj = ((char *(*)(void))fn_80117474)();
+        char *vt = *(char **)(obj + 4);
+        (*(void (**)(void *, void *))(vt + 0x31C))(&lbl_80495B08, obj + *(s16 *)(vt + 0x318));
+        lbl_80495B0C = 1;
+        fn_80246D44(fn_80117494);
+    }
+    return &lbl_80495B08;
+}
+
 s32 fn_80117520(void *arg0) {
     return ((u32) M2C_FIELD(arg0, u32 *, 0x44) >> 0xCU) & 7;
 }
