@@ -110,6 +110,8 @@ void *fn_800A61AC(void *arg0) {
 }
 
 void fn_800A61F8(void *self, s32 flags) {
+    void fn_800A6734(void *);
+    void fn_802D20E8(void *);
     fn_800A6734(self);
     if (flags & 1) {
         fn_802D20E8(self);
