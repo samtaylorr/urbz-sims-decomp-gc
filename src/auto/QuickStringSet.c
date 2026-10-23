@@ -11,13 +11,27 @@ static inline void QSSAlloc_Clear(QSSAlloc *a) {
     a->cap = 0;
 }
 
-static inline void QSSAlloc_Free(void *p, u32 n) {
+static inline void QSSVec_Init(QSSVec *v) {
+    v->begin = 0;
+    v->end = 0;
+    QSSAlloc_Clear(&v->alloc);
+}
+
+static inline void QSSVec_Dealloc(void *p, s32 end) {
     void fn_802D20E8(void *);
     void fn_803997AC(void *, u32);
-    if (n > 0x80) {
+    u32 size = (u32)(end - (s32)p) & ~3;
+    if (size > 0x80) {
         fn_802D20E8(p);
     } else {
-        fn_803997AC(p, n);
+        fn_803997AC(p, size);
+    }
+}
+
+static inline void QSSVec_Free(QSSVec *v) {
+    void *p = (void *)v->begin;
+    if (p != 0) {
+        QSSVec_Dealloc(p, (s32)v->alloc.cap);
     }
 }
 s32 fn_800F6498(void *arg0) {
@@ -865,23 +879,14 @@ s32 fn_800FDE40(void *arg0) {
 }
 
 void fn_800FDEB0(s32 arg0, s32 arg1) {
-    void fn_803997AC(void *, u32);
     extern QSSVec lbl_80434B28;
     if (arg1 == 0xFFFF) {
         if (arg0 != 0) {
             lbl_80434B28.begin = 0;
             lbl_80434B28.end = 0;
             QSSAlloc_Clear(&lbl_80434B28.alloc);
-        } else {
-            u8 *p = lbl_80434B28.begin;
-            if (p != 0) {
-                u32 n = (lbl_80434B28.alloc.cap - p) & ~3;
-                if (n > 0x80) {
-                    fn_802D20E8(p);
-                } else {
-                    fn_803997AC(p, n);
-                }
-            }
+        } else if (lbl_80434B28.begin != 0) {
+            QSSAlloc_Free(lbl_80434B28.begin, (lbl_80434B28.alloc.cap - lbl_80434B28.begin) & ~3);
         }
     }
 }
