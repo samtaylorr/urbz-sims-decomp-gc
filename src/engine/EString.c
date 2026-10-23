@@ -240,6 +240,7 @@ s32 fn_802D3DB0(s32 *arg0, s32 arg1) {
 }
 
 void fn_802D3E40(s32 *arg0) {
+    void fn_802D39F0(s32 *, s32);
     fn_802D39F0(arg0, *arg0);
     fn_802D39E4((void *)arg0);
 }
