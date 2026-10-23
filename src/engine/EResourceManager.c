@@ -2,6 +2,22 @@
 #include "common.h"
 
 s32 fn_802C52EC(s32);
+
+typedef struct ResLock {
+    char *obj;
+} ResLock;
+
+static inline void ResLock_Init(ResLock *l, char *obj) {
+    char *vt;
+    l->obj = obj;
+    vt = *(char **)obj;
+    (*(void (**)(void *, s32))(vt + 0x14))(obj + *(s16 *)(vt + 0x10), -1);
+}
+
+static inline void ResLock_Release(ResLock *l) {
+    char *vt = *(char **)l->obj;
+    (*(void (**)(void *))(vt + 0x1C))(l->obj + *(s16 *)(vt + 0x18));
+}
 void fn_80336E04(void) {
 
 }
