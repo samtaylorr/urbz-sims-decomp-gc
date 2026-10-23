@@ -98,6 +98,14 @@ void fn_801286EC(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x1D4) = arg1;
 }
 
+void *fn_80128708(void *arg0) {
+    void fn_80149BC8(void *, s32);
+    extern char lbl_8040FD38[];
+    fn_80149BC8(arg0, 4);
+    *(void **)arg0 = lbl_8040FD38;
+    return arg0;
+}
+
 void fn_80128748(void) {
     void fn_80128408(s32, s32);
     fn_80128408(1, 0xFFFF);
