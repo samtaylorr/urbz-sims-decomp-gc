@@ -332,13 +332,10 @@ void fn_801860C8(void *arg0) {
 }
 
 s32 fn_801860D4(char *arg0) {
-    cXPersonImpl_Entry *begin = *(cXPersonImpl_Entry **)(arg0 + 0x4E8);
-    s32 n = *(cXPersonImpl_Entry **)(arg0 + 0x4EC) - begin;
-    if (n > 0) {
+    cXPersonImpl_EntryVec *v = (cXPersonImpl_EntryVec *)(arg0 + 0x4E8);
+    if (cXPersonImpl_EntryVec_Size(v) > 0) {
         s32 r = 0;
-        void *p;
-        n--;
-        p = cXPersonImpl_EntryAt(begin, n)->unk0;
+        void *p = cXPersonImpl_EntryVec_At(v, cXPersonImpl_EntryVec_Size(v) - 1)->unk0;
         if (p != 0) {
             r = *(s32 *)((char *)p + 4);
         }
