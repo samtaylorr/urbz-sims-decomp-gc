@@ -40,15 +40,20 @@ static inline void ERMLock_Unlock(ERMLock *l) {
 
 char *fn_80336E08(char *self, s32 key) {
     s32 fn_80338598(char *, s32, char **);
-    ERMLock lock;
+    char *lock[1];
     char *res;
+    char *vt;
     if (key != 0) {
-        ERMLock_Lock(&lock, self);
+        lock[0] = self;
+        vt = *(char **)self;
+        (*(void (**)(void *, s32))(vt + 0x14))(self + *(s16 *)(vt + 0x10), -1);
         if (fn_80338598(self + 0x40, key, &res) != 0 && *(s32 *)(res + 0xC) != 0) {
-            ERMLock_Unlock(&lock);
+            vt = *(char **)lock[0];
+            (*(void (**)(void *))(vt + 0x1C))(lock[0] + *(s16 *)(vt + 0x18));
             return res;
         }
-        ERMLock_Unlock(&lock);
+        vt = *(char **)lock[0];
+        (*(void (**)(void *))(vt + 0x1C))(lock[0] + *(s16 *)(vt + 0x18));
     }
     return 0;
 }
@@ -95,6 +100,7 @@ s32 fn_80337008(char *self, s32 arg1) {
 
 void fn_8033707C(char *arg0, s32 arg1) {
     s32 fn_80337008(char *, s32);
+    s32 fn_80337F14(s32);
     fn_80337008(arg0, fn_80337F14(arg1));
 }
 
