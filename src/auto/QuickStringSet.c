@@ -820,3 +820,8 @@ void fn_800FDFD4(void) {
     fn_800FDEB0(1, 0xFFFF);
 }
 
+void fn_800FE000(void) {
+    void fn_800FDEB0(s32, s32);
+    fn_800FDEB0(0, 0xFFFF);
+}
+
