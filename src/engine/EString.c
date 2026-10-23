@@ -29,15 +29,7 @@ void *fn_802D35D8(void *arg0, f32 *arg1) {
 }
 
 void *fn_802D360C(void *arg0, f32 *arg1) {
-    void *vt;
-    void *s;
-    f32 w;
-
-    s = fn_802D34B0(arg0, arg1);
-    vt = M2C_FIELD(s, void **, 0x18);
-    w = arg1[3];
-    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)((char *)s + M2C_FIELD(vt, s16 *, 0x38), &w, 4);
-    return s;
+    return EStream_WriteF32(fn_802D34B0(arg0, arg1), arg1[3]);
 }
 
 void *fn_802D3668(void *arg0, char *arg1) {
@@ -468,6 +460,11 @@ s32 *fn_802D49E4(s32 *arg0, s32 arg1) {
         }
     }
     return arg0;
+}
+
+void fn_802D4F00(s32 *arg0) {
+    s32 *fn_802D3CE4(s32 *, char *);
+    fn_802D3CE4(arg0, (char *)*arg0);
 }
 
 void fn_802D4F24(f64 farg0) {
