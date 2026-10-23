@@ -122,3 +122,8 @@ void fn_8028AB6C(void) {
     fn_8028AABC(1, 0xFFFF);
 }
 
+void fn_8028AB98(void) {
+    void fn_8028AABC(s32, s32);
+    fn_8028AABC(0, 0xFFFF);
+}
+
