@@ -852,6 +852,17 @@ s32 *fn_802D5890(s32 *arg0, u16 arg1) {
     return self;
 }
 
+static inline void EString_WUpper(u16 *p) {
+    u32 c;
+
+    while ((c = *p) != 0) {
+        if (c - 'a' <= 25) {
+            *p = c + 0xFFE0;
+        }
+        p++;
+    }
+}
+
 void fn_802D58E4(s32 *arg0) {
     s32 fn_802D5200(u16 *);
     fn_802D5200(*arg0);
