@@ -142,3 +142,8 @@ void fn_8029018C(void) {
     fn_8028FF8C(1, 0xFFFF);
 }
 
+void fn_802901B8(void) {
+    void fn_8028FF8C(s32, s32);
+    fn_8028FF8C(0, 0xFFFF);
+}
+
