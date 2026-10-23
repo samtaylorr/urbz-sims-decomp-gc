@@ -217,6 +217,13 @@ void fn_80307C0C(void) {
     }
 }
 
+void fn_80307C3C(void) {
+    extern s32 lbl_80494EB4;
+    if (lbl_80494EB4 != 0) {
+        ((void (*)(void))lbl_80494EB4)();
+    }
+}
+
 void fn_80307DF0(void) {
 
 }
