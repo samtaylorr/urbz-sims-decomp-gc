@@ -145,15 +145,15 @@ void fn_80014A9C(void) {
 }
 
 void *fn_80014B68(void *arg0) {
-    M2C_UNK fn_802E1BF4(void *, M2C_UNK *);
+    M2C_UNK fn_802E1BF4(void *);
     M2C_UNK fn_802E55C0(void *);
-    extern M2C_UNK lbl_80406C80;
+    extern u8 lbl_80406C80[];
     s32 var_ctr;
     s32 var_ctr_2;
 
     M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, M2C_UNK **, 4) = &lbl_80406C80;
-    fn_802E1BF4(arg0 + 0x18, &lbl_80406C80);
+    M2C_FIELD(arg0, u8 **, 4) = lbl_80406C80;
+    fn_802E1BF4(arg0 + 0x18);
     var_ctr = 4;
     do {
         var_ctr -= 1;
