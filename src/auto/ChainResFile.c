@@ -18,6 +18,8 @@ typedef struct ChainVec {
     s32 begin;
     s32 end;
     ChainVecAlloc alloc;
+    s32 unk10;
+    s32 unk14;
 } ChainVec;
 
 extern void fn_803997AC(void *, u32);
