@@ -555,6 +555,12 @@ s32 *fn_802D4A90(s32 *arg0, s32 arg1) {
     return arg0;
 }
 
+s32 *fn_802D4B04(s32 *arg0, s32 arg1) {
+    fn_802D4A90(arg0, arg1);
+    fn_802D49E4(arg0, arg1);
+    return arg0;
+}
+
 s32 *fn_802D4C6C(s32 *arg0, s32 arg1) {
     void fn_802D4BE8(s32 *, s32);
     void fn_802D4B44(s32 *, s32);
