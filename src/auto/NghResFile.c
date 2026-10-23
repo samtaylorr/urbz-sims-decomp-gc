@@ -37,6 +37,13 @@ s32 fn_80129420(s32 arg0) {
     return fn_8012A01C(fn_8012F7F0(lbl_8049440C), arg0) == 0;
 }
 
+s32 fn_80129460(s32 arg0) {
+    s32 fn_80129C5C(s32, s32);
+    M2C_UNK fn_8012F7F0(s32);
+    extern s32 lbl_8049440C;
+    return fn_80129C5C(fn_8012F7F0(lbl_8049440C), arg0) == 0;
+}
+
 s32 fn_801294A0(s32 arg0, s32 arg1) {
     s32 fn_80129C80(s32, s32, s32);
     M2C_UNK fn_8012F7F0(s32);
