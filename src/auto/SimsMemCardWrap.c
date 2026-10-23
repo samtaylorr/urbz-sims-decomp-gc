@@ -553,13 +553,13 @@ void fn_800AB8D0(s32 arg0) {
     }
 }
 
-void fn_800AB908(SMCVec3 *out) {
+SMCVec3 *fn_800AB908(SMCVec3 *out) {
     extern f32 lbl_803CE500[];
     extern f32 lbl_803CE504[];
     SMCVec3 t;
     SMCVec3_Set(&t, lbl_803CE500[0]);
     t.z = lbl_803CE504[0];
-    SMCVec3_Copy(out, &t);
+    return SMCVec3_Copy(out, &t);
 }
 
 void fn_800ABD50(s32 arg0, s32 arg1) {
