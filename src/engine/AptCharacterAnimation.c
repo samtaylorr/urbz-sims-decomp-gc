@@ -83,6 +83,24 @@ s32 fn_8028E05C(void *arg0) {
     return var_r3;
 }
 
+void fn_8028FF8C(s32 arg0, s32 arg1) {
+    extern u16 lbl_803FCE5C[];
+    extern u16 *lbl_80496104;
+    extern void **lbl_80494DA0;
+
+    if (arg1 == 0xFFFF) {
+        if (arg0 != 0) {
+            lbl_80496104 = lbl_803FCE5C;
+            lbl_803FCE5C[0]++;
+        } else {
+            u16 *p = lbl_80496104;
+            if (--*p == 0) {
+                ((void (*)(void *))lbl_80494DA0[1])(p);
+            }
+        }
+    }
+}
+
 s32 fn_80290008(s32 arg0) {
     return arg0 & 0xFFFFFFFE;
 }
