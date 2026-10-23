@@ -236,6 +236,26 @@ s32 fn_802D3DB0(s32 *arg0, s32 arg1) {
     return 1;
 }
 
+void fn_802D3E40(s32 *arg0) {
+    fn_802D39F0(arg0, *arg0);
+    fn_802D39E4((void *)arg0);
+}
+
+s32 fn_802D3E78(char **arg0, char *arg1) {
+    s32 fn_802486DC(char *, char *);
+    char *s = *arg0;
+    if (*s == 0) {
+        if (arg1 == 0 || *arg1 == 0) {
+            return 0;
+        }
+        return -1;
+    }
+    if (arg1 == 0 || *arg1 == 0) {
+        return 1;
+    }
+    return fn_802486DC(s, arg1);
+}
+
 s32 *fn_802D406C(s32 *arg0, s32 *arg1, s32 arg2, s32 arg3) {
     M2C_UNK fn_802D39F0(s32 *, s32);
     s32 *fn_802D40E4(s32 *, s32 *, s32);
