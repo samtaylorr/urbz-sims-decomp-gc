@@ -567,11 +567,13 @@ s32 *fn_802D4A90(s32 *arg0, s32 arg1) {
 
     start = (s8 *)*arg0;
     p = start;
-    while (*p == arg1) {
-        p++;
-    }
-    if (p != start) {
-        fn_802D3CE4(arg0, (char *)p);
+    if (*p == arg1) {
+        do {
+            p++;
+        } while (*p == arg1);
+        if (p != start) {
+            fn_802D3CE4(arg0, (char *)p);
+        }
     }
     return arg0;
 }
@@ -729,6 +731,16 @@ void fn_802D5238(M2C_UNK **arg0) {
 extern u8 lbl_803FD294[];
 void fn_802D5244(M2C_UNK **arg0) {
     *arg0 = &lbl_803FD294;
+}
+
+void fn_802D5254(s32 *arg0, s32 arg1) {
+    extern M2C_UNK lbl_80494DD4;
+    void fn_802D1A00(s32, s32);
+    s32 fn_802D0AB8(void);
+
+    if (arg1 != (s32)&lbl_80494DD4 && arg1 != (s32)lbl_803FD294) {
+        fn_802D1A00(fn_802D0AB8(), arg1);
+    }
 }
 
 s32 *fn_802D5564(s32 *arg0, u16 arg1) {
