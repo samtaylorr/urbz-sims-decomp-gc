@@ -292,13 +292,6 @@ typedef struct WallPartRange {
     char *vt;
 } WallPartRange;
 
-static inline void WallPartRange_Set(WallPartRange *p, f32 max, f32 min, f32 scale) {
-    p->max = max;
-    p->min = min;
-    p->scale = scale;
-    p->range = max - min;
-    p->inv = scale / p->range;
-}
 
 WallPartRange *fn_80039AB8(WallPartRange *arg0) {
     extern f32 lbl_803C5938[];
