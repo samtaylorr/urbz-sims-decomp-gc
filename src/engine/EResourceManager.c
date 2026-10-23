@@ -87,13 +87,13 @@ void fn_80338AF4(char *self, char *obj, s32 a, s32 b) {
     (*(void (**)(void *, s32, s32))(vt + 0x14))(obj + *(s16 *)(vt + 0x10), *(s32 *)(self + 0xC), 1);
 }
 
-s32 fn_80338BAC(char *self) {
-    char *obj = *(char **)(self + 8);
+s32 fn_80338BAC(s32 *self) {
+    char *obj = (char *)self[2];
     char *vt = *(char **)obj;
     (*(void (**)(void *))(vt + 0x1C))(obj + *(s16 *)(vt + 0x18));
-    *(s32 *)(self + 4) = 0;
-    *(char **)(self + 8) = NULL;
-    *(s32 *)(self + 0) = 0;
+    self[2] = 0;
+    self[0] = 0;
+    self[1] = 0;
     return 1;
 }
 
