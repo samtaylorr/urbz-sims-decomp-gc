@@ -205,6 +205,12 @@ void fn_80337C80(char *arg0, s32 arg1) {
     fn_80337CBC(arg0, fn_80337F14(arg1));
 }
 
+void fn_80337CF4(char *arg0, s32 arg1) {
+    s32 fn_80337D30(char *, s32);
+    s32 fn_80337F14(s32);
+    fn_80337D30(arg0, fn_80337F14(arg1));
+}
+
 s32 fn_80337F14(s32 arg0) {
     return fn_802C52EC(arg0);
 }
