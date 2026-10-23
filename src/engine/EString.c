@@ -570,6 +570,22 @@ s32 *fn_802D4C6C(s32 *arg0, s32 arg1) {
     return arg0;
 }
 
+s32 fn_802D4D78(s32 *arg0, s32 arg1, s8 arg2) {
+    void fn_8024839C(char *, char *, s32);
+    char *buf;
+    s32 size;
+
+    if (arg1 > fn_802D3D24(arg0)) {
+        arg1 = fn_802D3D24(arg0);
+    }
+    size = fn_802D3D24(arg0) + 1;
+    buf = (char *)fn_802D4EC4(arg0, size);
+    fn_8024839C(buf + arg1 + 1, buf + arg1, size - arg1);
+    buf[arg1] = arg2;
+    fn_802D4F00(arg0);
+    return size;
+}
+
 s32 fn_802D4EC4(s32 *arg0, s32 arg1) {
     s32 fn_802D3DB0(s32 *, s32);
     return fn_802D3DB0(arg0, arg1) != 0 ? *arg0 : 0;
@@ -709,6 +725,17 @@ s32 *fn_802D57BC(s32 *arg0, u16 *arg1) {
     s32 old = *self;
 
     fn_802D56C4(self, arg1);
+    fn_802D5254(self, old);
+    return self;
+}
+
+s32 *fn_802D57FC(s32 *arg0, char *arg1) {
+    void fn_802D5254(s32 *, s32);
+    void fn_802D544C(s32 *, char *);
+    s32 *self = arg0;
+    s32 old = *self;
+
+    fn_802D544C(self, arg1);
     fn_802D5254(self, old);
     return self;
 }
