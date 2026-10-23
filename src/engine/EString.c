@@ -62,8 +62,19 @@ void *fn_802D35D8(void *arg0, f32 *arg1) {
 }
 
 void *fn_802D360C(void *arg0, f32 *arg1) {
-    void *s = fn_802D34B0(arg0, arg1);
-    return EStream_WriteF32(s, arg1[3]);
+    void *s;
+    void *vt;
+    void (*f)(void *, void *, s32);
+    void *self;
+    f32 w;
+
+    s = fn_802D34B0(arg0, arg1);
+    vt = M2C_FIELD(s, void **, 0x18);
+    f = M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C);
+    self = (char *)s + M2C_FIELD(vt, s16 *, 0x38);
+    w = arg1[3];
+    f(self, &w, 4);
+    return s;
 }
 
 void *fn_802D3668(void *arg0, char *arg1) {
