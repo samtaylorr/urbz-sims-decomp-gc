@@ -149,6 +149,21 @@ void fn_80048DF8(void) {
     fn_80048D04();
 }
 
+void fn_800490B0(void) {
+    extern f32 lbl_803C6660;
+    extern u8 *lbl_80495050;
+    f32 v[3];
+    u8 *obj;
+    u8 *vt;
+
+    obj = lbl_80495050;
+    vt = *(u8 **)obj;
+    v[0] = lbl_803C6660;
+    v[2] = lbl_803C6660;
+    v[1] = lbl_803C6660;
+    (*(void (**)(void *, f32 *, s32, s32))(vt + 0x4C))(obj + *(s16 *)(vt + 0x48), v, 0xFF, 1);
+}
+
 extern u8 lbl_8041F94C[];
 void fn_8004E824(u8 *arg);
 void fn_8004910C(void) {
@@ -172,6 +187,7 @@ void fn_80049588(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     extern s32 lbl_80494F40;
     extern s32 lbl_80494F44;
     void fn_800DC198(void);
+    void fn_800495E8(s32, s32);
 
     fn_80047AF4(lbl_8041F754);
     if (arg3 != 0) {
