@@ -12,7 +12,16 @@ s32 fn_802D32A0(void) {
 }
 
 void *fn_802D34B0(void *arg0, f32 *arg1) {
-    EStream_WriteF32(arg0, arg1[0]);
+    void *vt;
+    void (*f)(void *, void *, s32);
+    void *self;
+    f32 v;
+
+    vt = M2C_FIELD(arg0, void **, 0x18);
+    f = M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C);
+    self = (char *)arg0 + M2C_FIELD(vt, s16 *, 0x38);
+    v = arg1[0];
+    f(self, &v, 4);
     EStream_WriteF32(arg0, arg1[1]);
     EStream_WriteF32(arg0, arg1[2]);
     return arg0;
@@ -123,8 +132,9 @@ s32 fn_802D3AE0(s32 *arg0, char *delim, void *out) {
     char *fn_80248B90(char *, char *);
     void fn_803B9FC4(void *, s32 *);
     char *fn_803B9FEC(s32 *);
+    void fn_802D39F0(s32 *, s32);
+    void fn_802D3C60(s32 *, char *);
     s32 buf;
-    s32 tok;
     char *p;
     s32 count;
 
@@ -134,6 +144,7 @@ s32 fn_802D3AE0(s32 *arg0, char *delim, void *out) {
     fn_802D3C60(&buf, fn_803B9FEC(arg0));
     p = fn_80248B90((char *)buf, delim);
     while (p != 0) {
+        s32 tok;
         fn_802D3C60(&tok, p);
         fn_803B9FC4(out, &tok);
         fn_802D39F0(&tok, tok);
@@ -590,6 +601,12 @@ s32 *fn_802D5564(s32 *arg0, u16 arg1) {
 void fn_802D58E4(s32 *arg0) {
     M2C_UNK fn_802D5200(s32);
     fn_802D5200(*arg0);
+}
+
+void fn_802D5A94(s32 *arg0) {
+    void fn_802D5254(s32 *, s32);
+    fn_802D5254(arg0, *arg0);
+    fn_802D5238((void *)arg0);
 }
 
 s32 fn_802D5EC8(s32 arg0, s32 *arg1, s32 arg2) {
