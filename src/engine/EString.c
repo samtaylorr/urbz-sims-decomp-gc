@@ -776,9 +776,40 @@ s32 *fn_802D583C(s32 *arg0, u16 arg1) {
     return self;
 }
 
+s32 *fn_802D5890(s32 *arg0, u16 arg1) {
+    void fn_802D5254(s32 *, s32);
+    void fn_802D56C4(s32 *, u16 *);
+    s32 *self = arg0;
+    u16 buf[2];
+    s32 old;
+
+    buf[0] = arg1;
+    buf[1] = 0;
+    old = *self;
+    fn_802D56C4(self, buf);
+    fn_802D5254(self, old);
+    return self;
+}
+
 void fn_802D58E4(s32 *arg0) {
     s32 fn_802D5200(u16 *);
     fn_802D5200(*arg0);
+}
+
+void fn_802D5908(u16 **arg0) {
+    u16 *p;
+    u16 c;
+
+    p = *arg0;
+    c = *p;
+    if (c != 0) {
+        do {
+            if ((u16)(c - 'a') <= 25) {
+                *p = c - 0x20;
+            }
+            c = *++p;
+        } while (c != 0);
+    }
 }
 
 void fn_802D5A94(s32 *arg0) {
