@@ -83,9 +83,9 @@ void fn_802FE85C(void) {
 
 }
 
-void fn_802FEAB4(s32 *arg0) {
-    M2C_UNK fn_8036375C(s32);
-    fn_8036375C(*arg0);
+void *fn_802FEAB4(s32 *arg0, s32 size, s32 align) {
+    void *fn_8036375C(s32, s32, s32);
+    return fn_8036375C(*arg0, size, align);
 }
 
 void fn_802FEAD8(s32 *arg0) {
