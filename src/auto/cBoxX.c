@@ -121,3 +121,8 @@ void fn_80102088(void) {
     fn_80102010(1, 0xFFFF);
 }
 
+void fn_801020B4(void) {
+    void fn_80102010(s32, s32);
+    fn_80102010(0, 0xFFFF);
+}
+
