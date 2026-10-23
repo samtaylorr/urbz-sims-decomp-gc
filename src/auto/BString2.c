@@ -114,6 +114,11 @@ s32 fn_800EFBFC(s32 arg0, s32 arg1) {
     return (u32)fn_800F4058(arg0, arg1, 0, -1) >> 31;
 }
 
+s32 fn_800EFC28(s32 arg0, s32 arg1) {
+    s32 fn_800F4150(s32, s32, s32);
+    return fn_800F4150(arg1, arg0, 0) > 0;
+}
+
 s32 fn_800F4150(s32, s32, s32);
 s32 fn_800EFCAC(s32 arg0, s32 arg1) {
     return (u32)fn_800F4150(arg0, arg1, 0) >> 31;
