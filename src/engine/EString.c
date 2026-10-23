@@ -804,8 +804,8 @@ void fn_802D5908(u16 **arg0) {
     c = *p;
     if (c != 0) {
         do {
-            if ((u16)(c - 'a') <= 25) {
-                *p = c - 0x20;
+            if ((u32)(c - 'a') <= 25) {
+                *p = c + 0xFFE0;
             }
             c = *++p;
         } while (c != 0);
@@ -820,7 +820,7 @@ void fn_802D5A94(s32 *arg0) {
 
 s32 fn_802D5EC8(s32 arg0, s32 *arg1, s32 arg2) {
     M2C_UNK fn_802D50BC(s32, s32, s32);
-    M2C_UNK fn_802D5254(s32 *, s32);
+    void fn_802D5254(s32 *, s32);
     M2C_UNK fn_802D544C(s32 *, s32);
     s32 sp8;
     s32 temp_r29;
