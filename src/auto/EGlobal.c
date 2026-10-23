@@ -368,3 +368,8 @@ void fn_8004F164(void) {
     fn_8004EDEC(1, 0xFFFF);
 }
 
+void fn_8004F190(void) {
+    M2C_UNK fn_8004EDEC(M2C_UNK, M2C_UNK);
+    fn_8004EDEC(0, 0xFFFF);
+}
+
