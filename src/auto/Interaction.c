@@ -733,3 +733,8 @@ void fn_8011787C(void) {
     fn_80117544(1, 0xFFFF);
 }
 
+void fn_801178A8(void) {
+    void fn_80117544(s32, s32);
+    fn_80117544(0, 0xFFFF);
+}
+
