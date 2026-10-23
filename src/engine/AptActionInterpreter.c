@@ -58,9 +58,9 @@ void fn_80282800(void *arg0, void *arg1) {
     void fn_8027BF7C(void *, s32, s32, char *, char *, s32, s32);
     s32 fn_802B71E8(void *);
     s32 i;
-    char **data = M2C_FIELD(arg0, char ***, 8);
-    s32 count = M2C_FIELD(arg0, s32 *, 0);
-    fn_8027BF7C(arg0, M2C_FIELD(arg1, s32 *, 4), M2C_FIELD(arg1, s32 *, 8), data[count - 2] + 8, data[count - 1], 0, 1);
+    fn_8027BF7C(arg0, M2C_FIELD(arg1, s32 *, 4), M2C_FIELD(arg1, s32 *, 8),
+                M2C_FIELD(arg0, char ***, 8)[M2C_FIELD(arg0, s32 *, 0) - 1 - 1] + 8,
+                M2C_FIELD(arg0, char ***, 8)[M2C_FIELD(arg0, s32 *, 0) - 1], 0, 1);
     for (i = 1; i <= 2; i++) {
         char *obj = M2C_FIELD(arg0, char ***, 8)[M2C_FIELD(arg0, s32 *, 0) - i];
         if (fn_802B71E8(obj) == 0) {
@@ -82,10 +82,10 @@ void fn_80283AD8(void *arg0, void *arg1) {
 
 void fn_80285004(void *arg0) {
     s32 fn_802B71E8(void *);
+    char *obj;
     s32 count = M2C_FIELD(arg0, s32 *, 0);
-    char **data = M2C_FIELD(arg0, char ***, 8);
-    char *obj = data[count - 1];
-    data[count] = obj;
+    obj = M2C_FIELD(arg0, char ***, 8)[count - 1];
+    M2C_FIELD(arg0, char ***, 8)[count] = obj;
     M2C_FIELD(arg0, s32 *, 0) = count + 1;
     if (fn_802B71E8(obj) == 0) {
         char *vt = *(char **)(obj + 4);
