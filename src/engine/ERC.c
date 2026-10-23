@@ -171,3 +171,8 @@ void fn_802FECF8(void) {
     fn_802FEBE0(1, 0xFFFF);
 }
 
+void fn_802FED24(void) {
+    void fn_802FEBE0(s32, s32);
+    fn_802FEBE0(0, 0xFFFF);
+}
+
