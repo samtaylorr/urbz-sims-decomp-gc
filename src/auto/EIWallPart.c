@@ -439,6 +439,13 @@ s32 fn_8003A0AC(void) {
     return 0;
 }
 
+void fn_8003A128(void *obj) {
+    if (obj != NULL) {
+        char *vt = *(char **)((char *)obj + 0x3C);
+        (*(void (**)(void *, s32))(vt + 0xC))((char *)obj + *(s16 *)(vt + 0x8), 3);
+    }
+}
+
 void fn_8003A178(void) {
     M2C_UNK fn_80039B84(M2C_UNK, M2C_UNK);
     fn_80039B84(1, 0xFFFF);
