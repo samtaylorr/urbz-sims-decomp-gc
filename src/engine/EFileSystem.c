@@ -214,3 +214,7 @@ void fn_802C66A4(void) {
     fn_802C6650(1, 0xFFFF);
 }
 
+void fn_802C66D0(void) {
+    fn_802C6650(0, 0xFFFF);
+}
+
