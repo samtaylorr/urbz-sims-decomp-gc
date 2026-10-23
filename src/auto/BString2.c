@@ -258,6 +258,12 @@ M2C_UNK fn_800F160C(s32 arg0) {
     return arg0;
 }
 
+void **fn_800F162C(void **arg0, s32 arg1, s32 arg2) {
+    void *fn_800EFF1C(void *mem, s32 arg1, s32 arg2);
+    *arg0 = fn_800EFF1C(BString2_Alloc(0x10, 4), arg1, arg2);
+    return arg0;
+}
+
 extern void fn_800EF8BC(s32);
 void fn_800F1A60(s32 self, s32 flags) {
     fn_800EF8BC(self);
