@@ -212,9 +212,7 @@ void fn_8028A06C(void *arg0, u8 **arg1) {
     void fn_80285078(void *, u8 **);
     char *obj;
     s32 count;
-    u8 *p = *arg1;
-    *arg1 = p + 1;
-    obj = M2C_FIELD(arg0, char ***, 0x4C)[*p];
+    obj = M2C_FIELD(arg0, char ***, 0x4C)[AptStream_ReadU8(arg1)];
     count = M2C_FIELD(arg0, s32 *, 0);
     M2C_FIELD(arg0, char ***, 8)[count] = obj;
     M2C_FIELD(arg0, s32 *, 0) = count + 1;
