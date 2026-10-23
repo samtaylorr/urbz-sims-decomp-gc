@@ -379,7 +379,7 @@ void fn_80105BAC(void *arg0, s32 *arg1, s32 *arg2, s32 *arg3) {
     *arg3 = (s32) (s8) M2C_FIELD(arg0, u8 *, 2);
 }
 
-s8 fn_80105BD4(void *arg0, s8 arg1) {
+s8 fn_80105BD4(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s8 *, 0) = arg1;
     return arg1;
 }
