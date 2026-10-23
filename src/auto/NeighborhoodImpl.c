@@ -103,3 +103,8 @@ void fn_80128748(void) {
     fn_80128408(1, 0xFFFF);
 }
 
+void fn_80128774(void) {
+    void fn_80128408(s32, s32);
+    fn_80128408(0, 0xFFFF);
+}
+
