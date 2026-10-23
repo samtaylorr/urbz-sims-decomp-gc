@@ -252,3 +252,8 @@ void fn_8016F824(void) {
     fn_8016F7D0(1, 0xFFFF);
 }
 
+void fn_8016F850(void) {
+    void fn_8016F7D0(s32, s32);
+    fn_8016F7D0(0, 0xFFFF);
+}
+
