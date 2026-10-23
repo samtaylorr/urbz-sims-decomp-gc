@@ -108,6 +108,21 @@ void fn_80337480(s32 arg0, s32 arg1) {
     fn_803370B8(arg0, fn_80337F14(arg1), 0, 0, 0);
 }
 
+void fn_8033775C(char *self, s32 key) {
+    void fn_80337510(char *, char *);
+    s32 fn_80338598(char *, s32, char **);
+    ERMLock lock;
+    char *res;
+
+    ERMLock_Lock(&lock, self);
+    res = 0;
+    fn_80338598(self + 0x40, key, &res);
+    if (res != 0) {
+        fn_80337510(self, res);
+    }
+    ERMLock_Unlock(&lock);
+}
+
 void fn_803377F0(char *arg0, s32 arg1) {
     s32 fn_80337F14(s32);
     fn_8033775C(arg0, fn_80337F14(arg1));
