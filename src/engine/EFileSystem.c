@@ -195,6 +195,20 @@ s32 fn_802C65B4(s32 arg0, s32 arg1, s32 *arg2) {
     return 1;
 }
 
+void fn_802C6650(s32 arg0, s32 arg1) {
+    extern u8 lbl_804448E8[];
+    void fn_802D7E20(void *);
+    void fn_802D7E5C(void *, s32);
+
+    if (arg1 == 0xFFFF) {
+        if (arg0 != 0) {
+            fn_802D7E20(lbl_804448E8);
+        } else {
+            fn_802D7E5C(lbl_804448E8, 2);
+        }
+    }
+}
+
 void fn_802C66A4(void) {
     void fn_802C6650(s32, s32);
     fn_802C6650(1, 0xFFFF);
