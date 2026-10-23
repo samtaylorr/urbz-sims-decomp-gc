@@ -17,6 +17,22 @@ void fn_80129158(s32 arg0, s32 arg1) {
     fn_80129194(arg0, fn_80129270(arg1));
 }
 
+void fn_80129194(s32 arg0, s32 arg1) {
+    void fn_8024839C(s32, s32, s32);
+    void *a = (void *)arg0;
+    void *b = (void *)arg1;
+    s32 n;
+
+    if (b != NULL && M2C_FIELD(b, s32 *, 0x14) == M2C_FIELD(a, s32 *, 0x14)
+        && M2C_FIELD(a, s32 *, 8) == M2C_FIELD(b, s32 *, 8)
+        && M2C_FIELD(a, s32 *, 4) == M2C_FIELD(b, s32 *, 4)) {
+        n = M2C_FIELD(a, s32 *, 8) * M2C_FIELD(a, s32 *, 4) * M2C_FIELD(b, s32 *, 0x14);
+        if (n > 0) {
+            fn_8024839C(*M2C_FIELD(a, s32 **, 0xC), *M2C_FIELD(b, s32 **, 0xC), n);
+        }
+    }
+}
+
 void fn_80129208(s32 arg0, s32 arg1) {
     void fn_80129194(s32, s32);
     fn_80129194(arg1, arg0);
