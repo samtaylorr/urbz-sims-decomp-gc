@@ -48,8 +48,9 @@ static inline void ChainVec_Dealloc(void *p, s32 end) {
 }
 
 static inline void ChainVec_Free(ChainVec *v) {
-    if (v->begin != 0) {
-        ChainVec_Dealloc((void *)v->begin, v->alloc.cap);
+    void *p = (void *)v->begin;
+    if (p != NULL) {
+        ChainVec_Dealloc(p, v->alloc.cap);
     }
 }
 void fn_801020E0(void **self, s32 flags) {
