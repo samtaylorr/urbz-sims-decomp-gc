@@ -320,3 +320,8 @@ void fn_80149474(void) {
     fn_801482C4(1, 0xFFFF);
 }
 
+void fn_801494A0(void) {
+    void fn_801482C4(s32, s32);
+    fn_801482C4(0, 0xFFFF);
+}
+
