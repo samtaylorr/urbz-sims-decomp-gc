@@ -205,6 +205,16 @@ void fn_80337C80(char *arg0, s32 arg1) {
     fn_80337CBC(arg0, fn_80337F14(arg1));
 }
 
+s32 fn_80337CBC(char *self, s32 key) {
+    s32 fn_803365B8(char *, s32, s32 *, s32 *);
+    s32 a;
+    s32 b;
+    if (fn_803365B8(self, key, &a, &b) == 0) {
+        return 0;
+    }
+    return a;
+}
+
 void fn_80337CF4(char *arg0, s32 arg1) {
     s32 fn_80337D30(char *, s32);
     s32 fn_80337F14(s32);
