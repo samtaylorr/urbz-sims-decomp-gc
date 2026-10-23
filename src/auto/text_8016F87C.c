@@ -599,3 +599,8 @@ void fn_80176500(void) {
     fn_80175B18(1, 0xFFFF);
 }
 
+void fn_8017652C(void) {
+    M2C_UNK fn_80175B18(M2C_UNK, M2C_UNK);
+    fn_80175B18(0, 0xFFFF);
+}
+
