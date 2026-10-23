@@ -38,7 +38,8 @@ static inline s32 ChainVec_Size(ChainVec *v) {
     return (v->end - v->begin) >> 2;
 }
 
-static inline void ChainVec_Dealloc(void *p, u32 size) {
+static inline void ChainVec_Dealloc(void *p, s32 end) {
+    u32 size = (u32)(end - (s32)p) & ~3;
     if (size > 0x80) {
         fn_802D20E8(p);
     } else {
