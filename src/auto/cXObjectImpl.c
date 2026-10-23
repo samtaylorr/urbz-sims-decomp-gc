@@ -318,12 +318,11 @@ s32 fn_80149404(void *arg0) {
 
 void fn_8014940C(u8 *arg0) {
     u8 *obj;
-    u8 *vt;
+    u8 *res;
 
     obj = *(u8 **)(arg0 + 0x58);
-    obj = (*(u8 *(**)(u8 *))(*(u8 **)obj + 0x9C))(obj + *(s16 *)(*(u8 **)obj + 0x98));
-    vt = *(u8 **)(obj + 4);
-    (*(void (**)(u8 *))(vt + 0x4D4))(obj + *(s16 *)(vt + 0x4D0));
+    res = (*(u8 *(**)(u8 *))(*(u8 **)obj + 0x9C))(obj + *(s16 *)(*(u8 **)obj + 0x98));
+    (*(void (**)(u8 *))(*(u8 **)(res + 4) + 0x4D4))(res + *(s16 *)(*(u8 **)(res + 4) + 0x4D0));
 }
 
 s32 fn_8014945C(void *arg0) {
