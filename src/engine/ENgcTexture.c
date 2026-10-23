@@ -243,6 +243,14 @@ void fn_80362568(s32 arg0) {
     fn_80338184(lbl_8045BAE8, arg0);
 }
 
+void *fn_80362594(void *arg0) {
+    void fn_80361408(void *, s32, s32, s32);
+    extern u8 lbl_8041D378[];
+    fn_80361408(arg0, 9, 8, 4);
+    M2C_FIELD(arg0, void **, 0x24) = lbl_8041D378;
+    return arg0;
+}
+
 void fn_803625DC(void *arg0, s32 arg1) {
     void fn_80361484(void *, s32);
     void fn_80338184(void *, void *);
