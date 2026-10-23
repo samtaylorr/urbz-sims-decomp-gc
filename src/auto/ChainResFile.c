@@ -384,7 +384,7 @@ s8 fn_80105BD4(void *arg0, s8 arg1) {
     return arg1;
 }
 
-s8 fn_80105BE0(void *arg0, s8 arg1) {
+s8 fn_80105BE0(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s8 *, 1) = arg1;
     return arg1;
 }
