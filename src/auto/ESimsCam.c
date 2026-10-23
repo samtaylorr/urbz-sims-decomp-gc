@@ -196,6 +196,10 @@ s32 fn_80014CE4(s32 arg0) {
     return arg0 + 0x434;
 }
 
+void fn_80014CEC(u8 *arg0, Vec3f *arg1) {
+    *(Vec3f *)(arg0 + 0x44C) = *arg1;
+}
+
 s32 fn_80014D0C(s32 arg0) {
     return arg0 + 0x18;
 }
