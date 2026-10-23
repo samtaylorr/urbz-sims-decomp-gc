@@ -20,10 +20,6 @@ static inline cXPersonImpl_Entry *cXPersonImpl_EntryVec_At(cXPersonImpl_EntryVec
     return &v->begin[i];
 }
 
-static inline cXPersonImpl_Entry *cXPersonImpl_EntryAt(cXPersonImpl_Entry *v, s32 i) {
-    return &v[i];
-}
-
 extern s32 lbl_80495C94;
 extern void fn_800F1A60(s32, s32);
 void fn_80176558(void) {
