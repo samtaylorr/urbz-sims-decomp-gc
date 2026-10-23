@@ -152,7 +152,7 @@ void fn_80289310(void *arg0) {
 void fn_8028937C(void *arg0, u8 **arg1) {
     s32 fn_802B71E8(void *);
     void fn_802828BC(void *, u8 **);
-    void fn_802BBE7C(void);
+    void fn_802BBE7C(void *);
     extern void *lbl_80494B48;
     char *obj;
     fn_802828BC(arg0, arg1);
@@ -163,19 +163,19 @@ void fn_8028937C(void *arg0, u8 **arg1) {
     }
     M2C_FIELD(arg0, s32 *, 0)--;
     if (M2C_FIELD(lbl_80494B48, s32 *, 4) != 0 && M2C_FIELD(arg0, s32 *, 0) == 0) {
-        fn_802BBE7C();
+        fn_802BBE7C(lbl_80494B48);
     }
 }
 
-void fn_8028940C(s32 *arg0, s32 arg1) {
-    void fn_802828BC(s32 *, s32);
-    void fn_802814D0(s32 *, s32);
-    void fn_802BBE7C(void);
+void fn_8028940C(void *arg0, u8 **arg1) {
+    void fn_802828BC(void *, u8 **);
+    void fn_802814D0(void *, u8 **);
+    void fn_802BBE7C(void *);
     extern void *lbl_80494B48;
     fn_802828BC(arg0, arg1);
     fn_802814D0(arg0, arg1);
-    if (M2C_FIELD(lbl_80494B48, s32 *, 4) != 0 && *arg0 == 0) {
-        fn_802BBE7C();
+    if (M2C_FIELD(lbl_80494B48, s32 *, 4) != 0 && M2C_FIELD(arg0, s32 *, 0) == 0) {
+        fn_802BBE7C(lbl_80494B48);
     }
 }
 
@@ -231,9 +231,7 @@ void fn_8028A1F8(void *arg0, u8 **arg1) {
     extern void *lbl_80494B48;
     char *obj;
     s32 count;
-    u8 idx = **arg1;
-    (*arg1)++;
-    obj = M2C_FIELD(arg0, char ***, 0x4C)[idx];
+    obj = M2C_FIELD(arg0, char ***, 0x4C)[AptStream_ReadU8(arg1)];
     count = M2C_FIELD(arg0, s32 *, 0);
     M2C_FIELD(arg0, char ***, 8)[count] = obj;
     M2C_FIELD(arg0, s32 *, 0) = count + 1;
