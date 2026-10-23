@@ -300,7 +300,7 @@ static inline void WallPartRange_Set(WallPartRange *p, f32 max, f32 min, f32 sca
     p->inv = scale / p->range;
 }
 
-void fn_80039AB8(WallPartRange *arg0) {
+WallPartRange *fn_80039AB8(WallPartRange *arg0) {
     extern f32 lbl_803C5938[];
     extern f32 lbl_803C593C[];
     extern f32 lbl_803C5940[];
@@ -318,19 +318,19 @@ void fn_80039AB8(WallPartRange *arg0) {
     f32 d = lbl_803C5948[0];
     f32 e = lbl_803C594C[0];
     f32 f = lbl_803C5950[0];
-    WallPartRange *p = arg0;
 
-    p->vt = lbl_80407C28;
-    p->flag = 1;
-    p->unkC = c;
-    p->unk14 = d;
-    p->unk18 = e;
-    p->unk1C = f;
-    p->max = max;
-    p->min = min;
-    p->scale = scale;
-    p->range = range;
-    p->inv = inv;
+    arg0->vt = lbl_80407C28;
+    arg0->flag = 1;
+    arg0->unkC = c;
+    arg0->unk14 = d;
+    arg0->unk18 = e;
+    arg0->unk1C = f;
+    arg0->max = max;
+    arg0->min = min;
+    arg0->scale = scale;
+    arg0->range = range;
+    arg0->inv = inv;
+    return arg0;
 }
 
 void fn_80039B38(f32 *arg0) {
