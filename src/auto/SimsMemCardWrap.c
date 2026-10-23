@@ -88,6 +88,18 @@ s32 fn_800A51C0(void) {
     return 0xD6000;
 }
 
+s32 fn_800A56DC(s32 arg0, s32 arg1) {
+    s32 fn_8012E150(void *, u8, s32);
+    M2C_UNK fn_800A4924(s32, s32);
+    extern void *lbl_8049440C;
+    extern s32 lbl_80494460;
+    s32 temp_r29;
+
+    temp_r29 = fn_8012E150(lbl_8049440C, arg0, arg1);
+    fn_800A4924(lbl_80494460, arg0);
+    return temp_r29;
+}
+
 s32 fn_800A6154(void) {
     return 0;
 }
