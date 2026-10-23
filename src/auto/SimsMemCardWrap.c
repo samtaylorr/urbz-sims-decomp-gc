@@ -9,10 +9,11 @@ static inline void SMCVec3_Set(SMCVec3 *v, f32 a) {
     v->z = a;
 }
 
-static inline void SMCVec3_Copy(SMCVec3 *d, const SMCVec3 *s) {
+static inline SMCVec3 *SMCVec3_Copy(SMCVec3 *d, const SMCVec3 *s) {
     d->x = s->x;
     d->y = s->y;
     d->z = s->z;
+    return d;
 }
 
 extern s32 lbl_80495930;
@@ -558,9 +559,7 @@ void fn_800AB908(SMCVec3 *out) {
     SMCVec3 t;
     SMCVec3_Set(&t, lbl_803CE500[0]);
     t.z = lbl_803CE504[0];
-    out->x = t.x;
-    out->y = t.y;
-    out->z = t.z;
+    SMCVec3_Copy(out, &t);
 }
 
 void fn_800ABD50(s32 arg0, s32 arg1) {
