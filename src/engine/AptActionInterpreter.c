@@ -5,6 +5,16 @@ static inline char *AptStack_Peek(void *s, s32 i) {
     return M2C_FIELD(s, char ***, 8)[M2C_FIELD(s, s32 *, 0) - i - 1];
 }
 
+static inline u8 AptStream_ReadU8(u8 **pp) {
+    return *(*pp)++;
+}
+
+static inline void AptTriple_Init(s32 *p) {
+    p[0] = 0;
+    p[1] = 0;
+    p[2] = 0;
+}
+
 void fn_8027AEC8(void);
 void fn_8027B774(void) {
     fn_8027AEC8();
