@@ -279,8 +279,9 @@ void fn_803081BC(u8 *self) {
     fn_8030951C(self);
 }
 
-void fn_803081EC(void) {
-    fn_80307CCC();
+void fn_803081EC(s32 arg0) {
+    void fn_80307CCC(s32);
+    fn_80307CCC(arg0);
 }
 
 void fn_8030824C(s32 arg0) {
