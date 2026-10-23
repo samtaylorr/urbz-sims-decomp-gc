@@ -1,6 +1,16 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+typedef struct cXPersonImpl_Entry {
+    void *unk0;
+    s32 unk4;
+    s32 unk8;
+} cXPersonImpl_Entry;
+
+static inline cXPersonImpl_Entry *cXPersonImpl_EntryAt(cXPersonImpl_Entry *v, s32 i) {
+    return &v[i];
+}
+
 extern s32 lbl_80495C94;
 extern void fn_800F1A60(s32, s32);
 void fn_80176558(void) {
@@ -317,11 +327,12 @@ s32 fn_801860D4(char *arg0) {
     struct Entry *begin = *(struct Entry **)(arg0 + 0x4E8);
     s32 n = *(struct Entry **)(arg0 + 0x4EC) - begin;
     if (n > 0) {
-        void *p = begin[n - 1].unk0;
+        s32 r = 0;
+        void *p = begin[(u32)(n - 1)].unk0;
         if (p != 0) {
-            return *(s32 *)((char *)p + 4);
+            r = *(s32 *)((char *)p + 4);
         }
-        return 0;
+        return r;
     }
     return **(s32 **)(arg0 + 4);
 }
