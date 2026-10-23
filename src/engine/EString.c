@@ -574,11 +574,11 @@ s32 *fn_802D4A90(s32 *arg0, s32 arg1) {
     s8 *p;
 
     start = (s8 *)*arg0;
-    p = start;
-    if (*p == arg1) {
-        do {
+    if (*start == arg1) {
+        p = start + 1;
+        while (*p == arg1) {
             p++;
-        } while (*p == arg1);
+        }
         if (p != start) {
             fn_802D3CE4(arg0, (char *)p);
         }
@@ -598,8 +598,8 @@ s32 *fn_802D4B44(s32 *arg0, s32 arg1) {
     s32 *fn_802D40E4(s32 *, s32 *, s32);
     char *fn_80248640(char *, char *);
     s32 sp8;
-    s32 len;
     s32 i;
+    s32 len;
 
     len = fn_802D3D24(arg0);
     if (len != 0) {
@@ -619,14 +619,18 @@ s32 *fn_802D4B44(s32 *arg0, s32 arg1) {
 s32 *fn_802D4BE8(s32 *arg0, s32 arg1) {
     s32 *fn_802D3CE4(s32 *, char *);
     char *fn_80248640(char *, char *);
+    s8 *start;
     s8 *p;
 
-    p = (s8 *)*arg0;
-    while (*p != 0 && fn_80248640((char *)arg1, (char *)(s32)*p) != 0) {
-        p++;
-    }
-    if (p != (s8 *)*arg0) {
-        fn_802D3CE4(arg0, (char *)p);
+    start = (s8 *)*arg0;
+    if (*start != 0) {
+        p = start;
+        while (*p != 0 && fn_80248640((char *)arg1, (char *)(s32)*p) != 0) {
+            p++;
+        }
+        if (p != (s8 *)*arg0) {
+            fn_802D3CE4(arg0, (char *)p);
+        }
     }
     return arg0;
 }
@@ -869,15 +873,7 @@ void fn_802D58E4(s32 *arg0) {
 }
 
 void fn_802D5908(u16 **arg0) {
-    u16 *p = *arg0;
-    u32 c;
-
-    while ((c = *p) != 0) {
-        if (c - 'a' <= 25) {
-            *p = c + 0xFFE0;
-        }
-        p++;
-    }
+    EString_WUpper(*arg0);
 }
 
 void fn_802D5A94(s32 *arg0) {
