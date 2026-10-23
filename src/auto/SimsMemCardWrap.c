@@ -506,7 +506,7 @@ f32 fn_800AB8A8(void) {
     return fn_800AB814() - lbl_804966B0;
 }
 
-void fn_800ABD50(void) {
+void fn_800ABD50(s32 arg0, s32 arg1) {
 
 }
 
