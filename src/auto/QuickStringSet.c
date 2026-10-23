@@ -152,6 +152,7 @@ void fn_800F7148(s32 arg0, s32 arg1) {
 }
 
 void fn_800F7188(s32 arg0, s32 arg1) {
+    void fn_800F71C8(s32, s32, s32);
     fn_800F7018((s16 **)arg0);
     fn_800F71C8(arg0, arg1, -1);
 }
