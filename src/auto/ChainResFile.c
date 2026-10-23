@@ -58,6 +58,11 @@ void fn_80102A50(void **obj) {
     }
 }
 
+void fn_80103810(void *obj, s32 arg1, s32 arg2, s32 arg3) {
+    char *vt = *(char **)((char *)obj + 0x10);
+    (*(void (**)(void *, s32, s32, s32, s32))(vt + 0x9C))((char *)obj + *(s16 *)(vt + 0x98), arg1, arg2, 0, arg3);
+}
+
 s32 fn_80103ED8(char *self, s32 arg1) {
     extern void fn_8018FA84(void *, s32);
     char *obj;
