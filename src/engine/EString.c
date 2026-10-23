@@ -501,13 +501,7 @@ s32 *fn_802D49E4(s32 *arg0, s32 arg1) {
 
 s32 fn_802D4EC4(s32 *arg0, s32 arg1) {
     s32 fn_802D3DB0(s32 *, s32);
-    s32 var_r3;
-
-    var_r3 = 0;
-    if (fn_802D3DB0(arg0, arg1) != 0) {
-        var_r3 = *arg0;
-    }
-    return var_r3;
+    return fn_802D3DB0(arg0, arg1) != 0 ? *arg0 : 0;
 }
 
 void fn_802D4F00(s32 *arg0) {
