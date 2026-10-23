@@ -155,6 +155,11 @@ s32 fn_8036F1F8(void) {
     return 0;
 }
 
+void fn_8036F200(char *self) {
+    char *vt = *(char **)(self + 0x24);
+    (*(void (**)(char *))(vt + 0x4C))(self + *(s16 *)(vt + 0x48));
+}
+
 void fn_8036F234(void *arg0) {
     M2C_FIELD(arg0, s32 *, 8) = (s32) (M2C_FIELD(arg0, s32 *, 8) & 0xFFFFFFFC);
 }
