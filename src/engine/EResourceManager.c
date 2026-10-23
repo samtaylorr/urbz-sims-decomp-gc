@@ -159,6 +159,12 @@ void fn_80337950(char *arg0, s32 arg1) {
     fn_8033789C(arg0, fn_80337F14(arg1));
 }
 
+void fn_8033798C(char *arg0, s32 arg1) {
+    void fn_803379C8(char *, s32);
+    s32 fn_80337F14(s32);
+    fn_803379C8(arg0, fn_80337F14(arg1));
+}
+
 s32 fn_80337F14(s32 arg0) {
     return fn_802C52EC(arg0);
 }
