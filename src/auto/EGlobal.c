@@ -297,10 +297,10 @@ u16 fn_8004E8D0(void *arg0) {
 
 s32 fn_8004E8F0(void *arg0, s32 arg1) {
     if (M2C_FIELD(arg0, s32 *, 0x2F4) == 0) {
-        if ((M2C_FIELD(arg0, u16 *, 0xAA) >> arg1) & 1) {
-            return 1;
+        if (!((M2C_FIELD(arg0, u16 *, 0xAA) >> arg1) & 1)) {
+            return 0;
         }
-        return 0;
+        return 1;
     }
     return 1;
 }
