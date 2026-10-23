@@ -592,6 +592,20 @@ void fn_802D51DC(f64 farg0) {
     fn_802D62F0((f32) farg0);
 }
 
+s32 fn_802D5200(u16 *arg0) {
+    s32 n;
+
+    if (arg0 == NULL) {
+        return 0;
+    }
+    n = 0;
+    while (*arg0 != 0) {
+        arg0++;
+        n++;
+    }
+    return n;
+}
+
 void fn_802D5238(M2C_UNK **arg0) {
     extern M2C_UNK lbl_80494DD4;
     *arg0 = &lbl_80494DD4;
