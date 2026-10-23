@@ -543,6 +543,16 @@ void fn_802D5050(u8 *arg0) {
     }
 }
 
+s32 *fn_802D507C(s32 *arg0, u16 arg1) {
+    M2C_UNK fn_802D56C4(s32 *, u16 *);
+    u16 sp8[2];
+
+    sp8[0] = arg1;
+    sp8[1] = 0;
+    fn_802D56C4(arg0, sp8);
+    return arg0;
+}
+
 void fn_802D51DC(f64 farg0) {
     M2C_UNK fn_802D62F0(f32);
     fn_802D62F0((f32) farg0);
