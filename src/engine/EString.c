@@ -585,7 +585,7 @@ s32 *fn_802D4B04(s32 *arg0, s32 arg1) {
 }
 
 s32 *fn_802D4B44(s32 *arg0, s32 arg1) {
-    M2C_UNK fn_802D39F0(s32 *, s32);
+    void fn_802D39F0(s32 *, s32);
     s32 *fn_802D3CE4(s32 *, char *);
     s32 *fn_802D40E4(s32 *, s32 *, s32);
     char *fn_80248640(char *, char *);
