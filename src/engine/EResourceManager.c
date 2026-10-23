@@ -165,6 +165,18 @@ void fn_8033798C(char *arg0, s32 arg1) {
     fn_803379C8(arg0, fn_80337F14(arg1));
 }
 
+void fn_80337C24(char *self, char *res) {
+    void fn_802CAB54(char *, s32);
+    void fn_802CAC04(char *);
+    void fn_80338858(char *, s32);
+    if (*(s32 *)(self + 0x5C) != 0) {
+        fn_802CAB54(self, -1);
+        fn_80338858(self + 0x40, *(s32 *)(res + 8));
+        *(s32 *)(res + 4) = 0;
+        fn_802CAC04(self);
+    }
+}
+
 s32 fn_80337F14(s32 arg0) {
     return fn_802C52EC(arg0);
 }
