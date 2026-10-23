@@ -162,9 +162,9 @@ void fn_802FEBE0(s32 arg0, s32 arg1) {
     }
 }
 
-void fn_802FEC50(char *self) {
+void fn_802FEC50(char *self, s32 arg1) {
     char *vt = *(char **)(self + 0x68);
-    (*(void (**)(char *, s32, s32))(vt + 0xE4))(self + *(s16 *)(vt + 0xE0), 0, 1);
+    (*(void (**)(char *, s32, s32))(vt + 0xE4))(self + *(s16 *)(vt + 0xE0), arg1, 1);
 }
 
 void fn_802FEC88(s32 *arg0) {
