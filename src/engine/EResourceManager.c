@@ -5,6 +5,7 @@ s32 fn_802C52EC(s32);
 
 typedef struct ResLock {
     char *obj;
+    s32 unk4;
 } ResLock;
 
 static inline void ResLock_Init(ResLock *l, char *obj) {
@@ -40,20 +41,17 @@ static inline void ERMLock_Unlock(ERMLock *l) {
 
 char *fn_80336E08(char *self, s32 key) {
     s32 fn_80338598(char *, s32, char **);
-    char *lock[1];
-    char *res;
-    char *vt;
+    struct {
+        ERMLock lock;
+        char *res;
+    } ctx;
     if (key != 0) {
-        lock[0] = self;
-        vt = *(char **)self;
-        (*(void (**)(void *, s32))(vt + 0x14))(self + *(s16 *)(vt + 0x10), -1);
-        if (fn_80338598(self + 0x40, key, &res) != 0 && *(s32 *)(res + 0xC) != 0) {
-            vt = *(char **)lock[0];
-            (*(void (**)(void *))(vt + 0x1C))(lock[0] + *(s16 *)(vt + 0x18));
-            return res;
+        ERMLock_Lock(&ctx.lock, self);
+        if (fn_80338598(self + 0x40, key, &ctx.res) != 0 && *(s32 *)(ctx.res + 0xC) != 0) {
+            ERMLock_Unlock(&ctx.lock);
+            return ctx.res;
         }
-        vt = *(char **)lock[0];
-        (*(void (**)(void *))(vt + 0x1C))(lock[0] + *(s16 *)(vt + 0x18));
+        ERMLock_Unlock(&ctx.lock);
     }
     return 0;
 }
