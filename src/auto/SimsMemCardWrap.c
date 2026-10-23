@@ -538,21 +538,23 @@ f32 fn_800AB8A8(void) {
     return fn_800AB814() - lbl_804966B0;
 }
 
-void fn_800AB8D0(void) {
-    void fn_800AB5B8(s32);
-    extern s32 lbl_8041FC68;
-    if (lbl_8041FC68 != 0) {
-        fn_800AB5B8(0x2AAD8FDB);
+void fn_800AB8D0(s32 arg0) {
+    void fn_800AB5B8(s32, s32);
+    extern s32 lbl_8041FC68[];
+    if (lbl_8041FC68[0] != 0) {
+        fn_800AB5B8(arg0, 0x2AAD8FDB);
     }
 }
 
 void fn_800AB908(SMCVec3 *out) {
-    extern f32 lbl_803CE500;
-    extern f32 lbl_803CE504;
+    extern f32 lbl_803CE500[];
+    extern f32 lbl_803CE504[];
     SMCVec3 t;
-    SMCVec3_Set(&t, lbl_803CE500);
-    t.z = lbl_803CE504;
-    *out = t;
+    SMCVec3_Set(&t, lbl_803CE500[0]);
+    t.z = lbl_803CE504[0];
+    out->x = t.x;
+    out->y = t.y;
+    out->z = t.z;
 }
 
 void fn_800ABD50(s32 arg0, s32 arg1) {
