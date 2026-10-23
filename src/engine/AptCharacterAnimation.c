@@ -52,6 +52,11 @@ void fn_8028D540(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x127C) = arg1;
 }
 
+void fn_8028DA5C(void) {
+    extern void (*lbl_80443310[])(void);
+    lbl_80443310[0]();
+}
+
 s32 fn_8028E05C(void *arg0) {
     s32 fn_802AEA9C(s32);
     s32 var_r3;
