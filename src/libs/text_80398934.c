@@ -607,6 +607,13 @@ void fn_8039B958(u8 *self, s32 flags) {
     }
 }
 
+void fn_8039B9D0(void *obj) {
+    if (obj != NULL) {
+        char *vt = *(char **)((char *)obj + 0x3C);
+        (*(void (**)(void *, s32))(vt + 0xC))((char *)obj + *(s16 *)(vt + 0x8), 3);
+    }
+}
+
 s32 fn_8039BA10(void) {
     return 0;
 }
