@@ -264,6 +264,15 @@ void **fn_800F162C(void **arg0, s32 arg1, s32 arg2) {
     return arg0;
 }
 
+void **fn_800F17E0(void **arg0, const u8 *arg1, u32 arg2, u32 arg3) {
+    void *fn_800F01FC(void *mem, const u8 *begin, u32 pos, u32 end);
+    if (arg2 >= ~arg3) {
+        fn_800EF8B4();
+    }
+    *arg0 = fn_800F01FC(BString2_Alloc(0x10, 4), arg1, arg2, arg2 + arg3);
+    return arg0;
+}
+
 extern void fn_800EF8BC(s32);
 void fn_800F1A60(s32 self, s32 flags) {
     fn_800EF8BC(self);
