@@ -57,6 +57,11 @@ void fn_8028DA5C(void) {
     lbl_80443310[0]();
 }
 
+void fn_8028DA88(void) {
+    extern void (*lbl_80443318[])(void);
+    lbl_80443318[0]();
+}
+
 s32 fn_8028E05C(void *arg0) {
     s32 fn_802AEA9C(s32);
     s32 var_r3;
