@@ -3,6 +3,13 @@
 
 extern s32 lbl_80495A94;
 extern s32 lbl_804943C0;
+
+typedef struct QSSAlloc { u8 *unk0; u8 *cap; } QSSAlloc;
+typedef struct QSSVec { u8 *begin; u8 *end; QSSAlloc alloc; } QSSVec;
+
+static inline void QSSAlloc_Clear(QSSAlloc *a) {
+    a->cap = 0;
+}
 s32 fn_800F6498(void *arg0) {
     return *(s32 *)((u8 *)arg0 + 0x114) != 0;
 }
