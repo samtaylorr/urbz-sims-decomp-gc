@@ -246,15 +246,11 @@ s32 fn_80337D90(char *arg0, s32 arg1) {
 
 s32 fn_80337DCC(char *self, s32 key) {
     s32 fn_80338598(char *, s32, char **);
-    struct { char *obj; u8 pad[3]; } lock;
-    char *vt;
+    ERMLock lock;
     s32 r;
-    lock.obj = self;
-    vt = *(char **)self;
-    (*(void (**)(void *, s32))(vt + 0x14))(self + *(s16 *)(vt + 0x10), -1);
+    ERMLock_Lock(&lock, self);
     r = fn_80338598(self + 0x40, key, 0);
-    vt = *(char **)lock.obj;
-    (*(void (**)(void *))(vt + 0x1C))(lock.obj + *(s16 *)(vt + 0x18));
+    ERMLock_Unlock(&lock);
     return r;
 }
 
