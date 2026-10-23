@@ -15,15 +15,25 @@ void *fn_802D34B0(void *arg0, f32 *arg1) {
     void *vt;
     void (*f)(void *, void *, s32);
     void *self;
-    f32 v;
+    f32 x;
+    f32 y;
+    f32 z;
 
     vt = M2C_FIELD(arg0, void **, 0x18);
     f = M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C);
     self = (char *)arg0 + M2C_FIELD(vt, s16 *, 0x38);
-    v = arg1[0];
-    f(self, &v, 4);
-    EStream_WriteF32(arg0, arg1[1]);
-    EStream_WriteF32(arg0, arg1[2]);
+    x = arg1[0];
+    f(self, &x, 4);
+    vt = M2C_FIELD(arg0, void **, 0x18);
+    f = M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C);
+    self = (char *)arg0 + M2C_FIELD(vt, s16 *, 0x38);
+    y = arg1[1];
+    f(self, &y, 4);
+    vt = M2C_FIELD(arg0, void **, 0x18);
+    f = M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C);
+    self = (char *)arg0 + M2C_FIELD(vt, s16 *, 0x38);
+    z = arg1[2];
+    f(self, &z, 4);
     return arg0;
 }
 
@@ -148,10 +158,10 @@ s32 fn_802D3AE0(s32 *arg0, char *delim, void *out) {
     fn_802D3C60(&buf, fn_803B9FEC(arg0));
     p = fn_80248B90((char *)buf, delim);
     while (p != 0) {
-        s32 tok;
-        fn_802D3C60(&tok, p);
-        fn_803B9FC4(out, &tok);
-        fn_802D39F0(&tok, tok);
+        struct { s32 p; } tok;
+        fn_802D3C60(&tok.p, p);
+        fn_803B9FC4(out, &tok.p);
+        fn_802D39F0(&tok.p, tok.p);
         p = fn_80248B90(0, delim);
     }
     count = M2C_FIELD(out, s32 *, 4);
