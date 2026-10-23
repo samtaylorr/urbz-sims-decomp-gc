@@ -262,13 +262,12 @@ s32 fn_80337E4C(char *arg0, s32 arg1) {
 void fn_80337E88(char *self, char *res) {
     s32 fn_80338598(char *, s32, char **);
     void fn_80338858(char *, s32);
-    ResLock lock;
-    char *tbl = self + 0x40;
-    ResLock_Init(&lock, self);
-    if (fn_80338598(tbl, *(s32 *)(res + 8), 0) != 0) {
-        fn_80338858(tbl, *(s32 *)(res + 8));
+    ERMLock lock;
+    ERMLock_Lock(&lock, self);
+    if (fn_80338598(self + 0x40, *(s32 *)(res + 8), 0) != 0) {
+        fn_80338858(self + 0x40, *(s32 *)(res + 8));
     }
-    ResLock_Release(&lock);
+    ERMLock_Unlock(&lock);
 }
 
 s32 fn_80337F14(s32 arg0) {
