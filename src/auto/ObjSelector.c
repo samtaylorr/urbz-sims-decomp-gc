@@ -243,8 +243,8 @@ void fn_8016F58C(void **arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
         *tail = node;
         arg0[1] = node;
     } else {
-        arg0[1] = node;
         arg0[0] = node;
+        arg0[1] = node;
     }
 }
 
