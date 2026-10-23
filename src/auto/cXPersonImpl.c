@@ -306,3 +306,8 @@ void fn_80186160(void) {
     fn_80185A90(1, 0xFFFF);
 }
 
+void fn_8018618C(void) {
+    void fn_80185A90(s32, s32);
+    fn_80185A90(0, 0xFFFF);
+}
+
