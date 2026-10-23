@@ -248,6 +248,72 @@ void fn_800382D0(s32 arg0, void **arg1) {
     }
 }
 
+s32 fn_80039620(void *arg0, s32 arg1, s32 arg2) {
+    s32 fn_80039584(void *, s32);
+    void ***slot;
+    void **list;
+    void **node;
+    void **p;
+    s32 i;
+    s32 ret;
+
+    slot = (void ***)((char *)arg0 + 0x70);
+    for (i = 0; i <= 3; i++) {
+        list = *slot++;
+        if (list != NULL) {
+            node = (void **)*list;
+            if (node != NULL && M2C_FIELD(*node, s32 *, 0x20) == arg1) {
+                p = node;
+                do {
+                    ret = fn_80039584(p[0], arg2);
+                    if (ret != 0) {
+                        return ret;
+                    }
+                    p = (void **)p[2];
+                } while (p != NULL);
+                return 0;
+            }
+        }
+    }
+    return 0;
+}
+
+void fn_80039AB8(void *arg0) {
+    extern f32 lbl_803C5938[];
+    extern f32 lbl_803C593C[];
+    extern f32 lbl_803C5940[];
+    extern f32 lbl_803C5944[];
+    extern f32 lbl_803C5948[];
+    extern f32 lbl_803C594C[];
+    extern f32 lbl_803C5950[];
+    extern char lbl_80407C28[];
+
+    M2C_FIELD(arg0, s32 *, 0) = 1;
+    M2C_FIELD(arg0, f32 *, 4) = lbl_803C5938[0];
+    M2C_FIELD(arg0, f32 *, 8) = lbl_803C593C[0];
+    M2C_FIELD(arg0, f32 *, 0xC) = lbl_803C5940[0];
+    M2C_FIELD(arg0, f32 *, 0x10) = lbl_803C5944[0];
+    M2C_FIELD(arg0, f32 *, 0x14) = lbl_803C5948[0];
+    M2C_FIELD(arg0, f32 *, 0x18) = lbl_803C594C[0];
+    M2C_FIELD(arg0, f32 *, 0x1C) = lbl_803C5950[0];
+    M2C_FIELD(arg0, f32 *, 0x20) = M2C_FIELD(arg0, f32 *, 4) - M2C_FIELD(arg0, f32 *, 8);
+    M2C_FIELD(arg0, f32 *, 0x24) = M2C_FIELD(arg0, f32 *, 0x10) / M2C_FIELD(arg0, f32 *, 0x20);
+    M2C_FIELD(arg0, char **, 0x28) = lbl_80407C28;
+}
+
+void fn_80039B38(f32 *arg0) {
+    extern f32 lbl_803C5954[];
+
+    if (arg0[6] < arg0[2]) {
+        arg0[7] = arg0[2];
+    }
+    if (arg0[1] < arg0[2]) {
+        arg0[1] = arg0[2];
+    }
+    arg0[8] = arg0[1] - arg0[2];
+    arg0[9] = lbl_803C5954[0] / arg0[8];
+}
+
 extern void *fn_80032AE0(u32);
 extern void fn_800331DC(void *);
 void *fn_80039DC8(u32 size, void *p);
