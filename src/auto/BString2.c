@@ -177,6 +177,11 @@ s32 fn_800EFE70(s32 arg0, s32 arg1) {
     return fn_800EFCD4(arg1, arg0) ^ 1;
 }
 
+s32 fn_800EFEA0(s32 arg0, s32 arg1) {
+    s32 fn_800EFC28(s32, s32);
+    return fn_800EFC28(arg1, arg0) ^ 1;
+}
+
 s32 fn_800EFF00(void) {
     return 0;
 }
