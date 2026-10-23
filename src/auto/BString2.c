@@ -273,6 +273,12 @@ void **fn_800F17E0(void **arg0, const u8 *arg1, u32 arg2, u32 arg3) {
     return arg0;
 }
 
+void **fn_800F1894(void **arg0, s32 arg1, s32 arg2) {
+    void *fn_800F0300(void *mem, s32 arg1, s32 arg2);
+    *arg0 = fn_800F0300(BString2_Alloc(0x10, 4), arg1, arg2);
+    return arg0;
+}
+
 extern void fn_800EF8BC(s32);
 void fn_800F1A60(s32 self, s32 flags) {
     fn_800EF8BC(self);
