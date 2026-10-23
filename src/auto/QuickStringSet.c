@@ -135,6 +135,12 @@ s32 fn_800F7140(s32 *self) {
     return *self;
 }
 
+void fn_800F7148(s32 arg0, s32 arg1) {
+    M2C_UNK fn_800F7028(s32, s32, s32);
+    fn_800F7018((s16 **)arg0);
+    fn_800F7028(arg0, arg1, -1);
+}
+
 void fn_800F71C8(s32 arg0, s32 arg1, s32 arg2) {
     M2C_UNK fn_800F7028(s32, s32, s32);
     fn_800F7028(arg0, fn_800F7138(arg1), arg2);
