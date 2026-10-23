@@ -321,6 +321,10 @@ void fn_800F3C2C(void) {
     fn_800F3938();
 }
 
+void fn_800F3C4C(s32 arg0, void **arg1, s32 arg2) {
+    ((void (*)(s32, s32, s32, s32))fn_800F1450)(arg0, (s32)BString2_Data(arg1), arg2, fn_800F4878(arg1));
+}
+
 u32 fn_800F1450(void **arg0, const u16 *arg1, u32 arg2, u32 arg3);
 void fn_800F3CB8(void) {
     ((void (*)(void))fn_800F1450)();
