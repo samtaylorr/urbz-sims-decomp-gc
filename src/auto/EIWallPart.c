@@ -292,7 +292,15 @@ typedef struct WallPartRange {
     char *vt;
 } WallPartRange;
 
-void fn_80039AB8(f32 *arg0) {
+static inline void WallPartRange_Set(WallPartRange *p, f32 max, f32 min, f32 scale) {
+    p->max = max;
+    p->min = min;
+    p->scale = scale;
+    p->range = max - min;
+    p->inv = scale / p->range;
+}
+
+void fn_80039AB8(WallPartRange *arg0) {
     extern f32 lbl_803C5938[];
     extern f32 lbl_803C593C[];
     extern f32 lbl_803C5940[];
@@ -310,18 +318,19 @@ void fn_80039AB8(f32 *arg0) {
     f32 d = lbl_803C5948[0];
     f32 e = lbl_803C594C[0];
     f32 f = lbl_803C5950[0];
+    WallPartRange *p = arg0;
 
-    *(char **)&arg0[10] = lbl_80407C28;
-    *(s32 *)&arg0[0] = 1;
-    arg0[3] = c;
-    arg0[5] = d;
-    arg0[6] = e;
-    arg0[7] = f;
-    arg0[1] = max;
-    arg0[2] = min;
-    arg0[4] = scale;
-    arg0[8] = range;
-    arg0[9] = inv;
+    p->vt = lbl_80407C28;
+    p->flag = 1;
+    p->unkC = c;
+    p->unk14 = d;
+    p->unk18 = e;
+    p->unk1C = f;
+    p->max = max;
+    p->min = min;
+    p->scale = scale;
+    p->range = range;
+    p->inv = inv;
 }
 
 void fn_80039B38(f32 *arg0) {
