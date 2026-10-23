@@ -228,6 +228,13 @@ s32 fn_80337D30(char *self, s32 key) {
     return b;
 }
 
+s32 fn_80337D68(char *self, s32 key) {
+    s32 fn_803365B8(char *, s32, s32 *, s32 *);
+    s32 a;
+    s32 b;
+    return fn_803365B8(self, key, &a, &b);
+}
+
 s32 fn_80337F14(s32 arg0) {
     return fn_802C52EC(arg0);
 }
