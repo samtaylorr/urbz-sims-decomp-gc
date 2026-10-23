@@ -315,6 +315,11 @@ void fn_80149468(void) {
 
 }
 
+void fn_8014946C(void *arg0, s16 arg1) {
+    extern s16 lbl_804944C4;
+    lbl_804944C4 = arg1;
+}
+
 void fn_80149474(void) {
     M2C_UNK fn_801482C4(M2C_UNK, M2C_UNK);
     fn_801482C4(1, 0xFFFF);
