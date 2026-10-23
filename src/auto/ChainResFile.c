@@ -39,19 +39,18 @@ static inline s32 ChainVec_Size(ChainVec *v) {
 }
 
 static inline void ChainVec_Dealloc(void *p, s32 end) {
-    u32 size = (u32)(end - (s32)p) & ~3;
-    if (size > 0x80) {
-        fn_802D20E8(p);
-    } else {
-        fn_803997AC(p, size);
+    if (p != NULL) {
+        u32 size = (u32)(end - (s32)p) & ~3;
+        if (size > 0x80) {
+            fn_802D20E8(p);
+        } else {
+            fn_803997AC(p, size);
+        }
     }
 }
 
 static inline void ChainVec_Free(ChainVec *v) {
-    void *p = (void *)v->begin;
-    if (p != NULL) {
-        ChainVec_Dealloc(p, v->alloc.cap);
-    }
+    ChainVec_Dealloc((void *)v->begin, v->alloc.cap);
 }
 void fn_801020E0(void **self, s32 flags) {
     *self = lbl_8040D690;
@@ -112,7 +111,7 @@ s16 fn_8010328C(void *self) {
     fn_8018FA84(self, 0);
     ChainVec_Init(&v);
     fn_80103320(self, &v);
-    count = ChainVec_Size(&v);
+    count = (v.end - v.begin) >> 2;
     ChainVec_Free(&v);
     return count;
 }
