@@ -122,6 +122,32 @@ void fn_802FEBA8(void) {
     M2C_FIELD(vt, void (**)(void *), 0x18C)(obj + M2C_FIELD(vt, s16 *, 0x188));
 }
 
+void fn_802FEBE0(s32 arg0, s32 arg1) {
+    extern f32 lbl_803F1580[];
+    extern f32 lbl_80454A00[];
+
+    if (arg1 == 0xFFFF && arg0 != 0) {
+        f32 *b;
+        f32 *q;
+        lbl_80454A00[0] = lbl_803F1580[0];
+        lbl_80454A00[2] = lbl_803F1580[0];
+        lbl_80454A00[1] = lbl_803F1580[0];
+        b = &lbl_80454A00[3];
+        b[2] = lbl_803F1580[0];
+        b[0] = lbl_803F1580[0];
+        b[1] = lbl_803F1580[0];
+        lbl_80454A00[6] = lbl_803F1580[0];
+        lbl_80454A00[7] = lbl_803F1580[0];
+        lbl_80454A00[8] = lbl_803F1580[0];
+        M2C_FIELD(lbl_80454A00, s32 *, 0x24) = 0;
+        q = &lbl_80454A00[10];
+        q[3] = lbl_803F1580[0];
+        q[2] = lbl_803F1580[0];
+        q[1] = lbl_803F1580[0];
+        q[0] = lbl_803F1580[0];
+    }
+}
+
 void fn_802FEC88(s32 *arg0) {
     M2C_UNK fn_8036B980(s32);
     fn_8036B980(*arg0);
