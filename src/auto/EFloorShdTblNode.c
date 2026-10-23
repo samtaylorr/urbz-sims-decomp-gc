@@ -224,6 +224,15 @@ void fn_8005895C(s32 arg0, s32 arg1) {
     fn_802E34F0(arg1, arg0 + 0x120);
 }
 
+s32 fn_80058AFC(s32 arg0) {
+    s32 fn_800418C8(s32);
+    extern s32 lbl_804940D0;
+    if (arg0 != 0) {
+        return fn_800418C8(arg0);
+    }
+    return lbl_804940D0;
+}
+
 void fn_80059100(void *arg0) {
     void fn_80059458(void *, s32);
     void fn_80325C50(void *, void *);
@@ -413,6 +422,7 @@ void fn_800598C0(void) {
 }
 
 void fn_800598EC(void) {
+    void fn_8005950C(s32, s32);
     fn_8005950C(0, 0xFFFF);
 }
 
