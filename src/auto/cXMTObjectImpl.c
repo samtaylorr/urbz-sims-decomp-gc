@@ -125,6 +125,26 @@ s16 fn_80122A44(void *arg0) {
     return M2C_FIELD(arg0, s16 *, 0x1C);
 }
 
+void fn_80122B38(void *arg0, void *arg1, s32 arg2) {
+    char *p;
+    char *vt;
+    s16 id;
+
+    if (arg1 != NULL) {
+        p = M2C_FIELD(arg0, char **, 0x10);
+        id = M2C_FIELD(arg1, s16 *, 4);
+        vt = *(char **)p;
+        if (((s32 (*)(void *, s32))M2C_FIELD(vt, void **, 0x24))(p + M2C_FIELD(vt, s16 *, 0x20), id) == 0) {
+            p = M2C_FIELD(arg0, char **, 0x10);
+            vt = *(char **)p;
+            ((void (*)(void *, s32, s32))M2C_FIELD(vt, void **, 0x2C))(p + M2C_FIELD(vt, s16 *, 0x28), id, 1);
+        }
+        p = M2C_FIELD(arg0, char **, 0x10);
+        vt = *(char **)p;
+        ((void (*)(void *, s32, s32, s32))M2C_FIELD(vt, void **, 0x4C))(p + M2C_FIELD(vt, s16 *, 0x48), id, 0, arg2);
+    }
+}
+
 void fn_80122BE4(void *arg0) {
     char *p;
     char *vt;
@@ -140,7 +160,7 @@ void fn_80123040(s32 arg0) {
 }
 
 void fn_80123108(void) {
-    M2C_UNK fn_80123064(M2C_UNK, M2C_UNK);
+    void fn_80123064(s32, s32);
     fn_80123064(1, 0xFFFF);
 }
 
