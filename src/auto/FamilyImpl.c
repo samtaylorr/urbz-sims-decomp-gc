@@ -546,6 +546,7 @@ void fn_8010D290(void) {
 }
 
 void fn_8010D2BC(void) {
+    void fn_8010D23C(s32, s32);
     fn_8010D23C(0, 0xFFFF);
 }
 
