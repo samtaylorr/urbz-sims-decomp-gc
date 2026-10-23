@@ -45,11 +45,15 @@ char *fn_80336E08(char *self, s32 key) {
         ERMLock lock;
         char *res;
     } ctx;
+    char *r;
     if (key != 0) {
         ERMLock_Lock(&ctx.lock, self);
-        if (fn_80338598(self + 0x40, key, &ctx.res) != 0 && *(s32 *)(ctx.res + 0xC) != 0) {
-            ERMLock_Unlock(&ctx.lock);
-            return ctx.res;
+        if (fn_80338598(self + 0x40, key, &ctx.res) != 0) {
+            r = ctx.res;
+            if (*(s32 *)(r + 0xC) != 0) {
+                ERMLock_Unlock(&ctx.lock);
+                return r;
+            }
         }
         ERMLock_Unlock(&ctx.lock);
     }
@@ -142,6 +146,7 @@ void fn_8033775C(char *self, s32 key) {
 
 void fn_803377F0(char *arg0, s32 arg1) {
     s32 fn_80337F14(s32);
+    void fn_8033775C(char *, s32);
     fn_8033775C(arg0, fn_80337F14(arg1));
 }
 
