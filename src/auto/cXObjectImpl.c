@@ -303,8 +303,27 @@ s16 fn_80149048(void *arg0) {
     return M2C_FIELD(M2C_FIELD(fn_8016CC44(M2C_FIELD(arg0, s32 *, 0x8C)), void **, 0x38), s16 *, 0x8A);
 }
 
+void fn_801493CC(u8 *arg0) {
+    u8 *obj;
+    u8 *vt;
+
+    obj = *(u8 **)(arg0 + 0x58);
+    vt = *(u8 **)obj;
+    (*(void (**)(u8 *))(vt + 0x9C))(obj + *(s16 *)(vt + 0x98));
+}
+
 s32 fn_80149404(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x5C);
+}
+
+void fn_8014940C(u8 *arg0) {
+    u8 *obj;
+    u8 *vt;
+
+    obj = *(u8 **)(arg0 + 0x58);
+    obj = (*(u8 *(**)(u8 *))(*(u8 **)obj + 0x9C))(obj + *(s16 *)(*(u8 **)obj + 0x98));
+    vt = *(u8 **)(obj + 4);
+    (*(void (**)(u8 *))(vt + 0x4D4))(obj + *(s16 *)(vt + 0x4D0));
 }
 
 s32 fn_8014945C(void *arg0) {
