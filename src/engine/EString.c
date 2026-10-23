@@ -289,7 +289,7 @@ s32 *fn_802D3D7C(s32 *arg0) {
 
 s32 fn_802D3DB0(s32 *arg0, s32 arg1) {
     M2C_UNK fn_802482F8();
-    M2C_UNK fn_802D39F0(s32 *, s32);
+    void fn_802D39F0(s32 *, s32);
     char *fn_802D3A1C(s32 *, s32);
     void fn_802D3E40(s32 *);
     char *buf;
@@ -797,10 +797,11 @@ void fn_802D58E4(s32 *arg0) {
 }
 
 void fn_802D5908(u16 **arg0) {
+    u16 **self = arg0;
     u16 *p;
     u16 c;
 
-    p = *arg0;
+    p = *self;
     c = *p;
     if (c != 0) {
         do {
