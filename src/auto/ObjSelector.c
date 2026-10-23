@@ -230,6 +230,43 @@ s32 fn_8016F500(M2C_UNK **arg0) {
     return var_r9;
 }
 
+void fn_8016F58C(void **arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    void *fn_8011677C(s32);
+    void **fn_80116D64(void *, s32, s32, s32, s32);
+    void **node;
+    void **tail;
+
+    node = fn_80116D64(fn_8011677C(0x58), arg1, arg2, arg3, arg4);
+    *node = NULL;
+    tail = (void **)arg0[1];
+    if (tail != NULL) {
+        *tail = node;
+        arg0[1] = node;
+    } else {
+        arg0[1] = node;
+        arg0[0] = node;
+    }
+}
+
+void fn_8016F714(s32 self) {
+    void **list = (void **)self;
+    char *node;
+    char *next;
+    char *vt;
+
+    next = (char *)list[0];
+    while (next != NULL) {
+        node = next;
+        next = *(char **)next;
+        if (node != NULL) {
+            vt = *(char **)(node + 0x54);
+            (*(void (**)(void *, s32))(vt + 0xC))(node + *(s16 *)(vt + 8), 3);
+        }
+    }
+    list[1] = NULL;
+    list[0] = NULL;
+}
+
 void fn_8016F784(M2C_UNK **arg0) {
     M2C_UNK *temp_r9;
 
