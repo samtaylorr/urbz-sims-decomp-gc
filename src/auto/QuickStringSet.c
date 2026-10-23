@@ -810,6 +810,10 @@ s32 fn_800FDF40(s32 *self) {
     return self[2];
 }
 
+s32 fn_800FDF9C(s32 *arg0) {
+    return arg0[0] == -1 && arg0[1] == -1;
+}
+
 void fn_800FDFC4(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0) = -1;
     M2C_FIELD(arg0, s32 *, 4) = -1;
