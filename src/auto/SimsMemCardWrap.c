@@ -533,3 +533,7 @@ void fn_800ABD50(s32 arg0, s32 arg1) {
 
 }
 
+void fn_800ABD54(void) {
+    fn_800ABD50(1, 0xFFFF);
+}
+
