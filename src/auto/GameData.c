@@ -104,7 +104,7 @@ void fn_80047AF0(void) {
 
 }
 
-void fn_80047AF4(void) {
+void fn_80047AF4(void *arg0) {
 
 }
 
