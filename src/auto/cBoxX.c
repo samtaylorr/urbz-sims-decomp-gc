@@ -122,9 +122,10 @@ void fn_80101C30(void *arg0) {
 }
 
 void fn_80101C50(void *arg0) {
+    s32 fn_80101BF8(void *);
     void fn_80101C90(void *, s32, f32);
-    extern f32 lbl_803D67B0;
-    fn_80101C90(arg0, fn_80101BF8(arg0), lbl_803D67B0);
+    extern f32 lbl_803D67B0[];
+    fn_80101C90(arg0, fn_80101BF8(arg0), lbl_803D67B0[0]);
 }
 
 void fn_80102010(s32 arg0, s32 arg1) {
