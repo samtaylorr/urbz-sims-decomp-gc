@@ -125,6 +125,15 @@ s16 fn_80122A44(void *arg0) {
     return M2C_FIELD(arg0, s16 *, 0x1C);
 }
 
+void fn_80122BE4(void *arg0) {
+    char *p;
+    char *vt;
+
+    p = M2C_FIELD(arg0, char **, 0x10);
+    vt = *(char **)p;
+    ((void (*)(void *))M2C_FIELD(vt, void **, 0x3C))(p + M2C_FIELD(vt, s16 *, 0x38));
+}
+
 void fn_80123040(s32 arg0) {
     M2C_UNK fn_8011D830(s32);
     fn_8011D830(arg0 + 0x6C);
