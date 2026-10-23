@@ -21,6 +21,25 @@ static inline s32 BString2_Ne(const u16 *a, const u16 *b) {
 }
 void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
+void *fn_802D197C(void *heap, u32 size, u32 align);
+void *fn_802DBBCC(void *heap, u32 size, u32 align);
+void *fn_802D0B3C(void);
+
+static inline void *BString2_Alloc(u32 size, u32 align) {
+    void *heap;
+    void *p;
+
+    heap = ((void *(*)(void))fn_802D0AB8)();
+    p = fn_802D197C(heap, size, align);
+    if (p == NULL) {
+        p = fn_802DBBCC(heap, size, 0);
+        if (p == NULL && heap == ((void *(*)(void))fn_802D0AB8)()) {
+            return fn_802DBBCC(fn_802D0B3C(), size, 0);
+        }
+    }
+    return p;
+}
+
 void fn_800EF838(u16 *dst, const u8 *src) {
     while (*src != 0) {
         *dst++ = *src++;
