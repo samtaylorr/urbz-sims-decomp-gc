@@ -484,7 +484,7 @@ void fn_8010D234(void (*cb)(void)) {
 }
 
 void fn_8010D290(void) {
-    M2C_UNK fn_8010D23C(M2C_UNK, M2C_UNK);
+    void fn_8010D23C(s32, s32);
     fn_8010D23C(1, 0xFFFF);
 }
 
