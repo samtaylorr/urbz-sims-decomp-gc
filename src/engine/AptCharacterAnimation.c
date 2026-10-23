@@ -91,6 +91,13 @@ s32 fn_80290010(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x24);
 }
 
+s32 fn_80290018(void *arg0, s32 arg1) {
+    if (M2C_FIELD(arg0, s32 **, 0x1C)[arg1] & 1) {
+        return 1;
+    }
+    return 0;
+}
+
 s32 fn_80290038(void *arg0, s32 arg1) {
     return (*(s32 **)((u8 *)arg0 + 0x1C))[arg1] & ~1;
 }
