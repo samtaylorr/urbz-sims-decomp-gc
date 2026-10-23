@@ -16,6 +16,13 @@ void fn_80129208(s32 arg0, s32 arg1) {
     fn_80129194(arg1, arg0);
 }
 
+s32 fn_80129420(s32 arg0) {
+    s32 fn_8012A01C(s32, s32);
+    M2C_UNK fn_8012F7F0(s32);
+    extern s32 lbl_8049440C;
+    return fn_8012A01C(fn_8012F7F0(lbl_8049440C), arg0) == 0;
+}
+
 void fn_801294E4(void) {
     M2C_UNK fn_801296E4();
     M2C_UNK fn_8012F7F0(s32);
