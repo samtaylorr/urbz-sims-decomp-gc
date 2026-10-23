@@ -155,7 +155,7 @@ void fn_8004910C(void) {
     fn_8004E824(lbl_8041F94C);
 }
 
-void fn_800495E8(void) {
+void fn_800495E8(s32 arg0, s32 arg1) {
 
 }
 
