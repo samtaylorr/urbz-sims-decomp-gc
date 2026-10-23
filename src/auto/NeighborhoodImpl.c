@@ -98,6 +98,10 @@ void fn_801286EC(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x1D4) = arg1;
 }
 
+s32 fn_801286F4(s32 arg0) {
+    return (u32)(arg0 - 10) <= 2;
+}
+
 void *fn_80128708(void *arg0) {
     void fn_80149BC8(void *, s32);
     extern char lbl_8040FD38[];
