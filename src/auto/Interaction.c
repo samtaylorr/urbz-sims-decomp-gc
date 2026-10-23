@@ -476,6 +476,20 @@ void fn_8011752C(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x44) = (s32) ((M2C_FIELD(arg0, s32 *, 0x44) & 0xFFFF8FFF) | (arg1 << 0xC));
 }
 
+void fn_80117544(s32 arg0, s32 arg1) {
+    void fn_802C7D1C(void *);
+    void fn_802C7D90(void *, s32);
+    if (arg1 == 0xFFFF) {
+        if (arg0 != 0) {
+            u8 *p = lbl_80434BD4;
+            fn_802C7D1C(p);
+            M2C_FIELD(p, s32 *, 8) = 0x58;
+        } else {
+            fn_802C7D90(lbl_80434BD4, 2);
+        }
+    }
+}
+
 s32 fn_801175AC(s32 *self) {
     return self[1];
 }
