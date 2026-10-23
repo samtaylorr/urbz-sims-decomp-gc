@@ -393,6 +393,11 @@ void fn_80114318(void *obj, s32 arg1, s32 arg2, s32 arg3) {
     (*(void (**)(void *, s32, s32, s32, s32))(vt + 0x9C))((char *)obj + *(s16 *)(vt + 0x98), arg1, arg2, 0, arg3);
 }
 
+void fn_80114EE4(char *self, s32 a1, s32 a2, s32 a3, s32 a4, s32 a5) {
+    char *vt = *(char **)(self + 0x10);
+    (*(void (**)(void *, s32, s32, s32, s32, s32, s32))(vt + 0x104))(self + *(s16 *)(vt + 0x100), a1, a2, a3, a4, 0, a5);
+}
+
 void fn_80116748(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x14C) = 1;
 }
