@@ -1,7 +1,7 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
-void fn_802C52EC(void);
+s32 fn_802C52EC(s32);
 void fn_80336E04(void) {
 
 }
@@ -12,8 +12,8 @@ void fn_80337480(s32 arg0, s32 arg1) {
     fn_803370B8(arg0, fn_80337F14(arg1), 0, 0, 0);
 }
 
-void fn_80337F14(void) {
-    fn_802C52EC();
+s32 fn_80337F14(s32 arg0) {
+    return fn_802C52EC(arg0);
 }
 
 s32 fn_80337F34(void) {
