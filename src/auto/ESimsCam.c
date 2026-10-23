@@ -1,6 +1,8 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+typedef struct { f32 x, y, z; } Vec3f;
+
 typedef struct Vec3 {
     f32 x, y, z;
 } Vec3;
@@ -128,8 +130,40 @@ void fn_80014164(void *arg0, s32 arg1) {
     }
 }
 
+s32 fn_800148B8(void *arg0) {
+    s32 fn_80049B6C(void *);
+    extern u8 lbl_8041F94C[];
+
+    if (M2C_FIELD(arg0, s32 *, 0x164) == 1) {
+        return fn_80049B6C(lbl_8041F94C) == 0;
+    }
+    return 0;
+}
+
 void fn_80014A9C(void) {
 
+}
+
+void *fn_80014B68(void *arg0) {
+    M2C_UNK fn_802E1BF4(void *, M2C_UNK *);
+    M2C_UNK fn_802E55C0(void *);
+    extern M2C_UNK lbl_80406C80;
+    s32 var_ctr;
+    s32 var_ctr_2;
+
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, M2C_UNK **, 4) = &lbl_80406C80;
+    fn_802E1BF4(arg0 + 0x18, &lbl_80406C80);
+    var_ctr = 4;
+    do {
+        var_ctr -= 1;
+    } while (var_ctr != 0);
+    var_ctr_2 = 4;
+    do {
+        var_ctr_2 -= 1;
+    } while (var_ctr_2 != 0);
+    fn_802E55C0(arg0 + 0x4F4);
+    return arg0;
 }
 
 void *fn_80014BD0(u32 size) {
