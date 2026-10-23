@@ -1,6 +1,13 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+void fn_802D3C60(s32 *, char *);
+
+static inline s32 *EString_Init(s32 *s, char *str) {
+    fn_802D3C60(s, str);
+    return s;
+}
+
 s32 fn_802D32A0(void) {
     return 0;
 }
@@ -165,6 +172,7 @@ s32 fn_802D3AE0(s32 *arg0, char *delim, void *out) {
     void fn_802D39F0(s32 *, s32);
     void fn_802D3C60(s32 *, char *);
     s32 buf[2];
+    s32 tok[2];
     char *p;
     s32 count;
 
@@ -172,15 +180,10 @@ s32 fn_802D3AE0(s32 *arg0, char *delim, void *out) {
         return 0;
     }
     fn_802D3C60(buf, fn_803B9FEC(arg0));
-    p = fn_80248B90((char *)buf[0], delim);
-    while (p != 0) {
-        s32 tok[2];
-        s32 *t;
+    for (p = fn_80248B90((char *)buf[0], delim); p != 0; p = fn_80248B90(0, delim)) {
         fn_802D3C60(tok, p);
-        t = tok;
-        fn_803B9FC4(out, t);
-        fn_802D39F0(t, *t);
-        p = fn_80248B90(0, delim);
+        fn_803B9FC4(out, tok);
+        fn_802D39F0(tok, tok[0]);
     }
     count = M2C_FIELD(out, s32 *, 4);
     fn_802D39F0(buf, buf[0]);
