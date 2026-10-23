@@ -156,14 +156,18 @@ void fn_800490B0(void) {
     f32 *p;
     u8 *obj;
     u8 *vt;
+    void (*f)(void *, f32 *, s32, s32);
+    void *self;
 
     obj = lbl_80495050;
     p = v;
     vt = *(u8 **)obj;
-    v[0] = lbl_803C6660[0];
-    p[2] = lbl_803C6660[0];
+    self = obj + *(s16 *)(vt + 0x48);
+    p[0] = lbl_803C6660[0];
     p[1] = lbl_803C6660[0];
-    (*(void (**)(void *, f32 *, s32, s32))(vt + 0x4C))(obj + *(s16 *)(vt + 0x48), p, 0xFF, 1);
+    p[2] = lbl_803C6660[0];
+    f = *(void (**)(void *, f32 *, s32, s32))(vt + 0x4C);
+    f(self, p, 0xFF, 1);
 }
 
 extern u8 lbl_8041F94C[];
