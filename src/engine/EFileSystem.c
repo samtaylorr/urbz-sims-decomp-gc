@@ -1,6 +1,10 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+static inline s32 ListCount(u8 *list) {
+    return *(s32 *)(list + 4);
+}
+
 void fn_802C46DC(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x1C) = 0;
 }
