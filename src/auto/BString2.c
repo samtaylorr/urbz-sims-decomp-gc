@@ -442,13 +442,15 @@ s32 fn_800F4890(s32 arg0, const char *arg1) {
     void *fn_802D2058(u32);
     void fn_802D211C(void *);
     extern char lbl_803D59E0[];
+    const char *s;
     u16 *buf;
 
-    if (arg1 == 0) {
-        arg1 = lbl_803D59E0;
+    s = arg1;
+    if (s == 0) {
+        s = lbl_803D59E0;
     }
-    buf = fn_802D2058((fn_80248808(arg1) + 1) * 2);
-    fn_800EF838(buf, (const u8 *)arg1);
+    buf = fn_802D2058((fn_80248808(s) + 1) * 2);
+    fn_800EF838(buf, (const u8 *)s);
     fn_800F22F0((void *)arg0, (const char *)buf);
     if (buf != 0) {
         fn_802D211C(buf);
@@ -477,6 +479,7 @@ void fn_800F4980(void) {
 }
 
 void fn_800F49AC(void) {
+    M2C_UNK fn_800F4910(M2C_UNK, M2C_UNK);
     fn_800F4910(0, 0xFFFF);
 }
 
