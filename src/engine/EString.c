@@ -141,6 +141,37 @@ void fn_802D39E4(M2C_UNK **arg0) {
     *arg0 = &lbl_80494DD0;
 }
 
+void fn_802D3AAC(void *self, void *arg1) {
+    void fn_802D1A00(s32, void *);
+    s32 fn_802D0AB8(void);
+    fn_802D1A00(fn_802D0AB8(), arg1);
+}
+
+s32 fn_802D3AE0(s32 *arg0, char *delim, void *out) {
+    char *fn_80248B90(char *, char *);
+    void fn_803B9FC4(void *, s32 *);
+    char *fn_803B9FEC(s32 *);
+    s32 buf;
+    s32 tok;
+    char *p;
+    s32 count;
+
+    if (*(char *)*arg0 == 0) {
+        return 0;
+    }
+    fn_802D3C60(&buf, fn_803B9FEC(arg0));
+    p = fn_80248B90((char *)buf, delim);
+    while (p != 0) {
+        fn_802D3C60(&tok, p);
+        fn_803B9FC4(out, &tok);
+        fn_802D39F0(&tok, tok);
+        p = fn_80248B90(0, delim);
+    }
+    count = M2C_FIELD(out, s32 *, 4);
+    fn_802D39F0(&buf, buf);
+    return count;
+}
+
 s32 fn_802D3BA0(s32 *arg0, s32 arg1) {
     void fn_802D39F0(s32 *, s32);
     void fn_802D3C60(s32 *, char *);
