@@ -248,7 +248,7 @@ s32 fn_8016F79C(s32 *arg0) {
 }
 
 void fn_8016F824(void) {
-    M2C_UNK fn_8016F7D0(M2C_UNK, M2C_UNK);
+    void fn_8016F7D0(s32, s32);
     fn_8016F7D0(1, 0xFFFF);
 }
 
