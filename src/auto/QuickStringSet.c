@@ -141,9 +141,40 @@ void fn_800F7148(s32 arg0, s32 arg1) {
     fn_800F7028(arg0, arg1, -1);
 }
 
+void fn_800F7188(s32 arg0, s32 arg1) {
+    fn_800F7018((s16 **)arg0);
+    fn_800F71C8(arg0, arg1, -1);
+}
+
 void fn_800F71C8(s32 arg0, s32 arg1, s32 arg2) {
     M2C_UNK fn_800F7028(s32, s32, s32);
     fn_800F7028(arg0, fn_800F7138(arg1), arg2);
+}
+
+s32 fn_800F72A0(s32 *self, u16 *other, s32 n) {
+    u16 *str = (u16 *)fn_800F7138(self);
+    s32 len = fn_800F6FF4(self);
+    s32 count = len;
+    s32 i;
+    if (count > n) {
+        count = n;
+    }
+    for (i = 0; i < count; i++) {
+        u16 a = str[i];
+        u16 b = other[i];
+        s32 d;
+        if ((u16)(a - 'A') <= 25) {
+            a += 0x20;
+        }
+        if ((u16)(b - 'A') <= 25) {
+            b += 0x20;
+        }
+        d = a - b;
+        if (d != 0) {
+            return d;
+        }
+    }
+    return len - n;
 }
 
 void fn_800F7708(s32 arg0, s32 arg1) {
@@ -817,17 +848,16 @@ s32 fn_800FDE40(void *arg0) {
 
 void fn_800FDEB0(s32 arg0, s32 arg1) {
     void fn_803997AC(void *, u32);
-    extern u8 *lbl_80434B28[4];
+    extern QSSVec lbl_80434B28;
     if (arg1 == 0xFFFF) {
         if (arg0 != 0) {
-            u8 **q = lbl_80434B28 + 2;
-            lbl_80434B28[0] = 0;
-            lbl_80434B28[1] = 0;
-            q[1] = 0;
+            lbl_80434B28.begin = 0;
+            lbl_80434B28.end = 0;
+            QSSAlloc_Clear(&lbl_80434B28.alloc);
         } else {
-            u8 *p = lbl_80434B28[0];
+            u8 *p = lbl_80434B28.begin;
             if (p != 0) {
-                u32 n = (lbl_80434B28[3] - p) & ~3;
+                u32 n = (lbl_80434B28.alloc.cap - p) & ~3;
                 if (n > 0x80) {
                     fn_802D20E8(p);
                 } else {
