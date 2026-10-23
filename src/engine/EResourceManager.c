@@ -82,10 +82,43 @@ void fn_8033707C(char *arg0, s32 arg1) {
     fn_80337008(arg0, fn_80337F14(arg1));
 }
 
+void fn_80337354(char *self, char *res, s32 arg2) {
+    s32 fn_8033860C(char *, s32, char *, s32);
+    char *lock;
+    char *vt;
+    if (res != NULL) {
+        lock = self;
+        vt = *(char **)self;
+        (*(void (**)(void *, s32))(vt + 0x14))(self + *(s16 *)(vt + 0x10), -1);
+        *(char **)(res + 4) = self;
+        *(s32 *)(res + 8) = arg2;
+        if (fn_8033860C(self + 0x40, arg2, res, *(s32 *)(self + 0x54)) == 0) {
+            *(s32 *)(res + 0xC) += 1;
+        }
+        vt = *(char **)res;
+        (*(void (**)(void *))(vt + 0x5C))(res + *(s16 *)(vt + 0x58));
+        vt = *(char **)lock;
+        (*(void (**)(void *))(vt + 0x1C))(lock + *(s16 *)(vt + 0x18));
+    }
+}
+
 void fn_80337480(s32 arg0, s32 arg1) {
     M2C_UNK fn_803370B8(s32, s32, M2C_UNK, M2C_UNK, M2C_UNK);
     s32 fn_80337F14(s32);
     fn_803370B8(arg0, fn_80337F14(arg1), 0, 0, 0);
+}
+
+void fn_803377F0(char *arg0, s32 arg1) {
+    s32 fn_80337F14(s32);
+    fn_8033775C(arg0, fn_80337F14(arg1));
+}
+
+void fn_8033782C(char *self, char *res) {
+    ERMLock lock;
+
+    ERMLock_Lock(&lock, self);
+    *(s32 *)(res + 0xC) += 1;
+    ERMLock_Unlock(&lock);
 }
 
 s32 fn_80337F14(s32 arg0) {
