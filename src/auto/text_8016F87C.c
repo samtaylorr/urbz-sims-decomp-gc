@@ -550,6 +550,26 @@ void fn_80176180(s32 arg0) {
     fn_8016F910((char *)arg0 + 0x1A0);
 }
 
+void fn_801761EC(void *arg0, s32 arg1) {
+    extern void fn_80174950(void *, s32);
+    extern void fn_801764D4(void *);
+    extern char lbl_80411B68[];
+    extern char lbl_80411D20[];
+    extern char lbl_804122E8[];
+
+    M2C_FIELD(arg0, char **, 0xBC) = lbl_80411B68;
+    fn_80174950((char *)arg0 + 0x28C, 2);
+    fn_80174950((char *)arg0 + 0x1E0, 2);
+    M2C_FIELD(arg0, char **, 0xBC) = lbl_80411D20;
+    fn_80174950((char *)arg0 + 0x17C, 2);
+    fn_80174950((char *)arg0 + 0xD0, 2);
+    M2C_FIELD(arg0, char **, 0xBC) = lbl_804122E8;
+    fn_80174950((char *)arg0 + 0x18, 2);
+    if (arg1 & 1) {
+        fn_801764D4(arg0);
+    }
+}
+
 s32 fn_80176288(s32 arg0) {
     return arg0 + 0x1E0;
 }
