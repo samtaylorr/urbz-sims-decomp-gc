@@ -99,6 +99,11 @@ s32 fn_800EFA74(s32 arg0, s32 arg1) {
     return fn_800F41B8(arg1, arg0, 0, 1) == 0;
 }
 
+s32 fn_800EFB90(s32 arg0, s32 arg1) {
+    s32 fn_800F4150(s32, s32, s32);
+    return fn_800F4150(arg0, arg1, 0) != 0;
+}
+
 s32 fn_800EFBC4(s32 arg0, s32 arg1) {
     s32 fn_800F41B8(s32, s32, s32, s32);
     return fn_800F41B8(arg0, arg1, 0, 1) != 0;
