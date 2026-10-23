@@ -164,24 +164,26 @@ s32 fn_802D3AE0(s32 *arg0, char *delim, void *out) {
     char *fn_803B9FEC(s32 *);
     void fn_802D39F0(s32 *, s32);
     void fn_802D3C60(s32 *, char *);
-    s32 buf;
+    s32 buf[2];
     char *p;
     s32 count;
 
     if (*(char *)*arg0 == 0) {
         return 0;
     }
-    fn_802D3C60(&buf, fn_803B9FEC(arg0));
-    p = fn_80248B90((char *)buf, delim);
+    fn_802D3C60(buf, fn_803B9FEC(arg0));
+    p = fn_80248B90((char *)buf[0], delim);
     while (p != 0) {
-        struct { s32 p; } tok;
-        fn_802D3C60(&tok.p, p);
-        fn_803B9FC4(out, &tok.p);
-        fn_802D39F0(&tok.p, tok.p);
+        s32 tok[2];
+        s32 *t;
+        fn_802D3C60(tok, p);
+        t = tok;
+        fn_803B9FC4(out, t);
+        fn_802D39F0(t, *t);
         p = fn_80248B90(0, delim);
     }
     count = M2C_FIELD(out, s32 *, 4);
-    fn_802D39F0(&buf, buf);
+    fn_802D39F0(buf, buf[0]);
     return count;
 }
 
@@ -299,6 +301,21 @@ s32 fn_802D3E78(char **arg0, char *arg1) {
         return 1;
     }
     return fn_802486DC(s, arg1);
+}
+
+s32 fn_802D3EE8(char **arg0, char *arg1) {
+    s32 fn_8024851C(char *, char *);
+    char *s = *arg0;
+    if (*s == 0) {
+        if (arg1 == 0 || *arg1 == 0) {
+            return 0;
+        }
+        return -1;
+    }
+    if (arg1 == 0 || *arg1 == 0) {
+        return 1;
+    }
+    return fn_8024851C(s, arg1);
 }
 
 s32 *fn_802D406C(s32 *arg0, s32 *arg1, s32 arg2, s32 arg3) {
