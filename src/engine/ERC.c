@@ -75,6 +75,20 @@ void fn_802FE734(void) {
 
 }
 
+void fn_802FE7C4(char *self, f32 value) {
+    char *vt;
+    char *p;
+
+    vt = *(char **)(self + 0x68);
+    (*(void (**)(char *, s32, s32))(vt + 0x2AC))(self + *(s16 *)(vt + 0x2A8), 0, 0);
+    vt = *(char **)(self + 0x68);
+    p = (*(char *(**)(char *, s32))(vt + 0x2A4))(self + *(s16 *)(vt + 0x2A0), 1);
+    *(f32 *)(p + 4) = value;
+    *(s8 *)p = 0x3F;
+    vt = *(char **)(self + 0x68);
+    (*(void (**)(char *))(vt + 0x2B4))(self + *(s16 *)(vt + 0x2B0));
+}
+
 void fn_802FE858(void) {
 
 }
@@ -146,6 +160,11 @@ void fn_802FEBE0(s32 arg0, s32 arg1) {
         q[1] = lbl_803F1580[0];
         q[0] = lbl_803F1580[0];
     }
+}
+
+void fn_802FEC50(char *self) {
+    char *vt = *(char **)(self + 0x68);
+    (*(void (**)(char *, s32, s32))(vt + 0xE4))(self + *(s16 *)(vt + 0xE0), 0, 1);
 }
 
 void fn_802FEC88(s32 *arg0) {
