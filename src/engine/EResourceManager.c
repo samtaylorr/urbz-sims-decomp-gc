@@ -58,6 +58,30 @@ void fn_80336F6C(char *arg0, s32 arg1, s32 arg2) {
     fn_80336F00(arg0, fn_80337F14(arg1), arg2);
 }
 
+void fn_80336FB0(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    extern char *lbl_80496220;
+    char *vt = *(char **)lbl_80496220;
+    (*(void (**)(void *, s32, s32, s32, s32, s32, s32))(vt + 0x8C))(lbl_80496220 + *(s16 *)(vt + 0x88), arg0, arg1, arg2, arg3, 1, 0);
+}
+
+s32 fn_80337008(char *self, s32 arg1) {
+    s32 fn_80337DCC(char *, s32);
+    void fn_803379C8(char *, s32);
+    char *vt;
+    if (fn_80337DCC(self, arg1) == 0) {
+        vt = *(char **)(self + 0xA4);
+        (*(void (**)(void *, s32))(vt + 0x24))(self + *(s16 *)(vt + 0x20), arg1);
+        fn_803379C8(self, arg1);
+        return fn_80337DCC(self, arg1);
+    }
+    return 1;
+}
+
+void fn_8033707C(char *arg0, s32 arg1) {
+    s32 fn_80337008(char *, s32);
+    fn_80337008(arg0, fn_80337F14(arg1));
+}
+
 void fn_80337480(s32 arg0, s32 arg1) {
     M2C_UNK fn_803370B8(s32, s32, M2C_UNK, M2C_UNK, M2C_UNK);
     s32 fn_80337F14(s32);
