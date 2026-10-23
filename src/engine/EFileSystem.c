@@ -158,6 +158,43 @@ s32 fn_802C6500(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x10);
 }
 
+s32 fn_802C6508(u8 *self, s32 arg1, s32 arg2, s32 arg3, s32 arg4, u8 *arg5) {
+    s32 fn_802C5F04(void *, u8 *);
+    void fn_803B9520(void *, void *);
+    u8 entry[0x14];
+    s32 i;
+
+    fn_802C5E8C(entry, (s32)arg5, arg1, arg2, arg3, (u8 *)arg4);
+    for (i = 0; i < ListCount(self + 4); i++) {
+        if (fn_802C5F04(entry, *(u8 **)(self + 4) + i * 0x14) != 0) {
+            return 1;
+        }
+    }
+    fn_803B9520(self + 4, entry);
+    return 1;
+}
+
+s32 fn_802C65B4(s32 arg0, s32 arg1, s32 *arg2) {
+    s32 fn_80248640(s32, s32);
+    s32 flags;
+
+    flags = 0;
+    if (fn_80248640(arg1, 'r') != 0) {
+        flags = 1;
+    }
+    if (fn_80248640(arg1, 'w') != 0) {
+        flags |= 0x10002;
+    }
+    if (fn_80248640(arg1, 'a') != 0) {
+        flags |= 6;
+    }
+    if (fn_80248640(arg1, '+') != 0) {
+        flags |= 3;
+    }
+    *arg2 = flags;
+    return 1;
+}
+
 void fn_802C66A4(void) {
     void fn_802C6650(s32, s32);
     fn_802C6650(1, 0xFFFF);
