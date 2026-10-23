@@ -166,6 +166,13 @@ s16 fn_80185EA4(void *arg0) {
     return M2C_FIELD(arg0, s16 *, 8);
 }
 
+s32 fn_80185EAC(void **arg0) {
+    char *obj = *(char **)((char *)*arg0 + 4);
+    char *vt = *(char **)(obj + 4);
+    char *r = (*(char *(**)(void *, s32))(vt + 0x27C))(obj + *(s16 *)(vt + 0x278), 0);
+    return *(s16 *)(r + 4) != 0;
+}
+
 s32 fn_80185F00(s32 arg0) {
     return arg0 + 0x4C0;
 }
@@ -299,6 +306,24 @@ void fn_801860C0(void *arg0, s32 arg1) {
 
 void fn_801860C8(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x604) = 0;
+}
+
+s32 fn_801860D4(char *arg0) {
+    struct Entry {
+        void *unk0;
+        s32 unk4;
+        s32 unk8;
+    };
+    struct Entry *begin = *(struct Entry **)(arg0 + 0x4E8);
+    s32 n = *(struct Entry **)(arg0 + 0x4EC) - begin;
+    if (n > 0) {
+        void *p = begin[n - 1].unk0;
+        if (p != 0) {
+            return *(s32 *)((char *)p + 4);
+        }
+        return 0;
+    }
+    return **(s32 **)(arg0 + 4);
 }
 
 void *fn_80186120(void *arg0) {
