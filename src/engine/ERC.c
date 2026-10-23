@@ -110,6 +110,13 @@ void *fn_802FEB4C(s32 *arg0, void *src, s32 size) {
     return p;
 }
 
+void fn_802FEBA8(void) {
+    extern char *lbl_80495050;
+    char *obj = lbl_80495050;
+    char *vt = *(char **)obj;
+    M2C_FIELD(vt, void (**)(void *), 0x18C)(obj + M2C_FIELD(vt, s16 *, 0x188));
+}
+
 void fn_802FEC88(s32 *arg0) {
     M2C_UNK fn_8036B980(s32);
     fn_8036B980(*arg0);
