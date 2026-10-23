@@ -5,8 +5,14 @@ typedef struct { f32 x, y, z; } SMCVec3;
 
 static inline void SMCVec3_Set(SMCVec3 *v, f32 a) {
     v->x = a;
-    v->z = a;
     v->y = a;
+    v->z = a;
+}
+
+static inline void SMCVec3_Copy(SMCVec3 *d, const SMCVec3 *s) {
+    d->x = s->x;
+    d->y = s->y;
+    d->z = s->z;
 }
 
 extern s32 lbl_80495930;
