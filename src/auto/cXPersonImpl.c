@@ -7,6 +7,19 @@ typedef struct cXPersonImpl_Entry {
     s32 unk8;
 } cXPersonImpl_Entry;
 
+typedef struct cXPersonImpl_EntryVec {
+    cXPersonImpl_Entry *begin;
+    cXPersonImpl_Entry *end;
+} cXPersonImpl_EntryVec;
+
+static inline s32 cXPersonImpl_EntryVec_Size(cXPersonImpl_EntryVec *v) {
+    return v->end - v->begin;
+}
+
+static inline cXPersonImpl_Entry *cXPersonImpl_EntryVec_At(cXPersonImpl_EntryVec *v, s32 i) {
+    return &v->begin[i];
+}
+
 static inline cXPersonImpl_Entry *cXPersonImpl_EntryAt(cXPersonImpl_Entry *v, s32 i) {
     return &v[i];
 }
@@ -319,16 +332,13 @@ void fn_801860C8(void *arg0) {
 }
 
 s32 fn_801860D4(char *arg0) {
-    struct Entry {
-        void *unk0;
-        s32 unk4;
-        s32 unk8;
-    };
-    struct Entry *begin = *(struct Entry **)(arg0 + 0x4E8);
-    s32 n = *(struct Entry **)(arg0 + 0x4EC) - begin;
+    cXPersonImpl_Entry *begin = *(cXPersonImpl_Entry **)(arg0 + 0x4E8);
+    s32 n = *(cXPersonImpl_Entry **)(arg0 + 0x4EC) - begin;
     if (n > 0) {
         s32 r = 0;
-        void *p = begin[(u32)(n - 1)].unk0;
+        void *p;
+        n--;
+        p = cXPersonImpl_EntryAt(begin, n)->unk0;
         if (p != 0) {
             r = *(s32 *)((char *)p + 4);
         }
