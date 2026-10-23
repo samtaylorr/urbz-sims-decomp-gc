@@ -93,11 +93,11 @@ void *fn_802D3668(void *arg0, char *arg1) {
 }
 
 void *fn_802D3840(void *arg0, void *arg1) {
-    void *fn_802D3714(void *);
+    void *fn_802D3714(void *, void *);
     void *temp_r3;
     void *temp_r9;
 
-    temp_r3 = fn_802D3714(arg0);
+    temp_r3 = fn_802D3714(arg0, arg1);
     temp_r9 = M2C_FIELD(temp_r3, void **, 0x18);
     M2C_FIELD(temp_r9, M2C_UNK (**)(void *, void *, s32), 0x34)((s8 *)temp_r3 + M2C_FIELD(temp_r9, s16 *, 0x30), (s8 *)arg1 + 0xC, 4);
     return temp_r3;
@@ -170,9 +170,7 @@ s32 fn_802D3AE0(s32 *arg0, char *delim, void *out) {
     void fn_803B9FC4(void *, s32 *);
     char *fn_803B9FEC(s32 *);
     void fn_802D39F0(s32 *, s32);
-    void fn_802D3C60(s32 *, char *);
     s32 buf[2];
-    s32 tok[2];
     char *p;
     s32 count;
 
@@ -180,10 +178,13 @@ s32 fn_802D3AE0(s32 *arg0, char *delim, void *out) {
         return 0;
     }
     fn_802D3C60(buf, fn_803B9FEC(arg0));
-    for (p = fn_80248B90((char *)buf[0], delim); p != 0; p = fn_80248B90(0, delim)) {
-        fn_802D3C60(tok, p);
-        fn_803B9FC4(out, tok);
-        fn_802D39F0(tok, tok[0]);
+    p = fn_80248B90((char *)buf[0], delim);
+    while (p != 0) {
+        s32 tok[2];
+        s32 *t = EString_Init(tok, p);
+        fn_803B9FC4(out, t);
+        fn_802D39F0(t, *t);
+        p = fn_80248B90(0, delim);
     }
     count = M2C_FIELD(out, s32 *, 4);
     fn_802D39F0(buf, buf[0]);
