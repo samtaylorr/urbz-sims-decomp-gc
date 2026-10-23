@@ -153,6 +153,15 @@ void fn_802FEC88(s32 *arg0) {
     fn_8036B980(*arg0);
 }
 
+f32 *fn_802FECAC(f32 *out, u8 *obj) {
+    f32 *p = (f32 *)(obj + 0x58);
+    out[0] = p[0];
+    out[1] = p[1];
+    out[2] = p[2];
+    out[3] = p[3];
+    return out;
+}
+
 s32 fn_802FECD8(void) {
     return 0;
 }
