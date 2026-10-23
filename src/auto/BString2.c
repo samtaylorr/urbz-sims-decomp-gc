@@ -8,6 +8,15 @@ static inline u16 *BString2_Data(void **s) {
     return fn_800F4878(s) ? *(u16 **)*s : 0;
 }
 
+extern char lbl_803D59E0[];
+
+static inline const char *BString2_NonNull(const char *s) {
+    if (s == 0) {
+        s = lbl_803D59E0;
+    }
+    return s;
+}
+
 static inline s32 BString2_Eq(const u16 *a, const u16 *b) {
     return *a == *b;
 }
@@ -445,10 +454,7 @@ s32 fn_800F4890(s32 arg0, const char *arg1) {
     const char *s;
     u16 *buf;
 
-    s = arg1;
-    if (s == 0) {
-        s = lbl_803D59E0;
-    }
+    s = arg1 ? arg1 : lbl_803D59E0;
     buf = fn_802D2058((fn_80248808(s) + 1) * 2);
     fn_800EF838(buf, (const u8 *)s);
     fn_800F22F0((void *)arg0, (const char *)buf);
