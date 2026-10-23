@@ -830,7 +830,7 @@ void fn_800FDFC4(void *arg0) {
 }
 
 void fn_800FDFD4(void) {
-    M2C_UNK fn_800FDEB0(M2C_UNK, M2C_UNK);
+    void fn_800FDEB0(s32, s32);
     fn_800FDEB0(1, 0xFFFF);
 }
 
