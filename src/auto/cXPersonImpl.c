@@ -301,6 +301,14 @@ void fn_801860C8(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x604) = 0;
 }
 
+void *fn_80186120(void *arg0) {
+    void fn_80149BC8(void *, s32);
+    extern char lbl_80412430[];
+    fn_80149BC8(arg0, 2);
+    *(void **)arg0 = lbl_80412430;
+    return arg0;
+}
+
 void fn_80186160(void) {
     M2C_UNK fn_80185A90(M2C_UNK, M2C_UNK);
     fn_80185A90(1, 0xFFFF);
