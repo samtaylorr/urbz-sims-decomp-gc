@@ -539,6 +539,31 @@ s32 *fn_802D49E4(s32 *arg0, s32 arg1) {
     return arg0;
 }
 
+s32 *fn_802D4A90(s32 *arg0, s32 arg1) {
+    s32 *fn_802D3CE4(s32 *, char *);
+    s8 *start;
+    s8 *p;
+
+    start = (s8 *)*arg0;
+    p = start;
+    while (*p == arg1) {
+        p++;
+    }
+    if (p != start) {
+        fn_802D3CE4(arg0, (char *)p);
+    }
+    return arg0;
+}
+
+s32 *fn_802D4C6C(s32 *arg0, s32 arg1) {
+    void fn_802D4BE8(s32 *, s32);
+    void fn_802D4B44(s32 *, s32);
+
+    fn_802D4BE8(arg0, arg1);
+    fn_802D4B44(arg0, arg1);
+    return arg0;
+}
+
 s32 fn_802D4EC4(s32 *arg0, s32 arg1) {
     s32 fn_802D3DB0(s32 *, s32);
     return fn_802D3DB0(arg0, arg1) != 0 ? *arg0 : 0;
@@ -669,6 +694,17 @@ s32 *fn_802D5564(s32 *arg0, u16 arg1) {
     sp8[1] = 0;
     fn_802D56C4(arg0, sp8);
     return arg0;
+}
+
+s32 *fn_802D57BC(s32 *arg0, u16 *arg1) {
+    void fn_802D5254(s32 *, s32);
+    void fn_802D56C4(s32 *, u16 *);
+    s32 *self = arg0;
+    s32 old = *self;
+
+    fn_802D56C4(self, arg1);
+    fn_802D5254(self, old);
+    return self;
 }
 
 void fn_802D58E4(s32 *arg0) {
