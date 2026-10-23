@@ -141,7 +141,7 @@ void fn_802FECEC(void *arg0) {
 }
 
 void fn_802FECF8(void) {
-    M2C_UNK fn_802FEBE0(M2C_UNK, M2C_UNK);
+    void fn_802FEBE0(s32, s32);
     fn_802FEBE0(1, 0xFFFF);
 }
 
