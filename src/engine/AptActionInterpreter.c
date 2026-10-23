@@ -63,8 +63,7 @@ void fn_80282800(void *arg0, void *arg1) {
     s32 fn_802B71E8(void *);
     s32 i;
     fn_8027BF7C(arg0, M2C_FIELD(arg1, s32 *, 4), M2C_FIELD(arg1, s32 *, 8),
-                (M2C_FIELD(arg0, char ***, 8) + (M2C_FIELD(arg0, s32 *, 0) - 1))[-1] + 8,
-                (M2C_FIELD(arg0, char ***, 8) + M2C_FIELD(arg0, s32 *, 0))[-1], 0, 1);
+                AptStack_Peek(arg0, 1) + 8, AptStack_Peek(arg0, 0), 0, 1);
     for (i = 1; i <= 2; i++) {
         char *obj = M2C_FIELD(arg0, char ***, 8)[M2C_FIELD(arg0, s32 *, 0) - i];
         if (fn_802B71E8(obj) == 0) {
