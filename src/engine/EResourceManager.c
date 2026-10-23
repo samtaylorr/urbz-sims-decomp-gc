@@ -115,3 +115,8 @@ void fn_80338C58(void) {
     fn_80338C04(1, 0xFFFF);
 }
 
+void fn_80338C84(void) {
+    void fn_80338C04(s32, s32);
+    fn_80338C04(0, 0xFFFF);
+}
+
