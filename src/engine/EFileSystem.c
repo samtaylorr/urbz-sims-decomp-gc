@@ -159,7 +159,7 @@ s32 fn_802C6500(void *arg0) {
 }
 
 void fn_802C66A4(void) {
-    M2C_UNK fn_802C6650(M2C_UNK, M2C_UNK);
+    void fn_802C6650(s32, s32);
     fn_802C6650(1, 0xFFFF);
 }
 
