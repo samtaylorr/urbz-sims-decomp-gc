@@ -70,6 +70,23 @@ void fn_80338970(void) {
     fn_803365B8();
 }
 
+void fn_80338AF4(char *self, char *obj, s32 a, s32 b) {
+    char *vt;
+    if (obj == *(char **)(self + 8)) {
+        vt = *(char **)obj;
+        (*(void (**)(void *, s32, s32))(vt + 0x14))(obj + *(s16 *)(vt + 0x10), *(s32 *)(self + 0xC), 0);
+    }
+    if (*(char **)(self + 8) != NULL) {
+        vt = *(char **)obj;
+        (*(void (**)(void *, s32, s32))(vt + 0x14))(obj + *(s16 *)(vt + 0x10), 0, 2);
+    }
+    *(s32 *)(self + 0) = a;
+    *(s32 *)(self + 4) = b;
+    *(char **)(self + 8) = obj;
+    vt = *(char **)obj;
+    (*(void (**)(void *, s32, s32))(vt + 0x14))(obj + *(s16 *)(vt + 0x10), *(s32 *)(self + 0xC), 1);
+}
+
 void fn_80338C58(void) {
     void fn_80338C04(s32, s32);
     fn_80338C04(1, 0xFFFF);
