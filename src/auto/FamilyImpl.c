@@ -483,8 +483,24 @@ void fn_8010D234(void (*cb)(void)) {
     lbl_8049441C = cb;
 }
 
+void fn_8010D23C(s32 arg0, s32 arg1) {
+    extern u8 lbl_80434B90[];
+    void fn_8010CF68(void *);
+    if (arg1 == 0xFFFF) {
+        if (arg0 != 0) {
+            fn_8010CF68(lbl_80434B90);
+        } else {
+            fn_8010CFA0(lbl_80434B90, 2);
+        }
+    }
+}
+
 void fn_8010D290(void) {
     void fn_8010D23C(s32, s32);
     fn_8010D23C(1, 0xFFFF);
+}
+
+void fn_8010D2BC(void) {
+    fn_8010D23C(0, 0xFFFF);
 }
 
