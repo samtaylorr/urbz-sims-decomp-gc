@@ -284,8 +284,8 @@ s32 fn_8004E81C(void) {
 }
 
 s32 fn_8004E8B8(void) {
-    extern s32 lbl_8041F9F8;
-    return lbl_8041F9F8 == 1;
+    extern s32 lbl_8041F9F8[];
+    return lbl_8041F9F8[0] == 1;
 }
 
 u16 fn_8004E8D0(void *arg0) {
