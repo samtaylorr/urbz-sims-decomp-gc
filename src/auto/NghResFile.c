@@ -30,6 +30,12 @@ s32 fn_80129420(s32 arg0) {
     return fn_8012A01C(fn_8012F7F0(lbl_8049440C), arg0) == 0;
 }
 
+s32 fn_801294A0(s32 arg0, s32 arg1) {
+    s32 fn_80129C80(s32, s32, s32);
+    M2C_UNK fn_8012F7F0(s32);
+    return fn_80129C80(fn_8012F7F0(arg0), arg1, arg0) == 0;
+}
+
 void fn_801294E4(void) {
     M2C_UNK fn_801296E4();
     M2C_UNK fn_8012F7F0(s32);
