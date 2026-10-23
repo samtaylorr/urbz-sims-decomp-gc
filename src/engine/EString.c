@@ -1,12 +1,6 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
-static inline void *EStream_WriteF32(void *s, f32 v) {
-    void *vt = M2C_FIELD(s, void **, 0x18);
-    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)((char *)s + M2C_FIELD(vt, s16 *, 0x38), &v, 4);
-    return s;
-}
-
 s32 fn_802D32A0(void) {
     return 0;
 }
