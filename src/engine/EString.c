@@ -593,6 +593,8 @@ s32 *fn_802D4C6C(s32 *arg0, s32 arg1) {
 
 s32 fn_802D4D78(s32 *arg0, s32 arg1, s8 arg2) {
     void fn_8024839C(char *, char *, s32);
+    s32 fn_802D4EC4(s32 *, s32);
+    void fn_802D4F00(s32 *);
     char *buf;
     s32 size;
 
