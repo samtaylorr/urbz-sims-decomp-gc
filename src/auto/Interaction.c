@@ -388,6 +388,11 @@ void fn_8011402C(s32 arg0) {
     fn_800F6498(arg0 + 0x14);
 }
 
+void fn_80114318(void *obj, s32 arg1, s32 arg2, s32 arg3) {
+    char *vt = *(char **)((char *)obj + 0x10);
+    (*(void (**)(void *, s32, s32, s32, s32))(vt + 0x9C))((char *)obj + *(s16 *)(vt + 0x98), arg1, arg2, 0, arg3);
+}
+
 void fn_80116748(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x14C) = 1;
 }
