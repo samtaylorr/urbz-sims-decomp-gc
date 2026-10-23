@@ -435,6 +435,18 @@ void fn_8003A030(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
 
+void *fn_8003A064(void *self) {
+    extern void fn_800331DC(void *);
+    extern u8 lbl_80407988[];
+    extern s32 lbl_80494048;
+    s32 n;
+    fn_800331DC(self);
+    n = lbl_80494048;
+    *(void **)self = lbl_80407988;
+    lbl_80494048 = n + 1;
+    return self;
+}
+
 s32 fn_8003A0AC(void) {
     return 0;
 }
@@ -444,18 +456,20 @@ void *fn_8003A0B4(char *self) {
     extern f32 lbl_803C5958[];
     extern u8 lbl_80407950[];
     s32 *p;
+    f32 f;
 
     *(void **)(self + 0x3C) = lbl_80407950;
     fn_80105508(self);
     fn_80105508(self + 3);
     p = (s32 *)(self + 0x14);
     p[1] = 0;
+    f = lbl_803C5958[0];
     p[0] = 0;
     p[2] = 1;
-    *(s32 *)(self + 0x30) = 0;
-    *(f32 *)(self + 0x38) = lbl_803C5958[0];
     *(s32 *)(self + 0x2C) = 0;
-    *(f32 *)(self + 0x34) = lbl_803C5958[0];
+    *(f32 *)(self + 0x34) = f;
+    *(s32 *)(self + 0x30) = 0;
+    *(f32 *)(self + 0x38) = f;
     return self;
 }
 
