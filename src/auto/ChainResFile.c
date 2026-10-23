@@ -61,31 +61,34 @@ void fn_80102A50(void **obj) {
 s32 fn_80103ED8(char *self, s32 arg1) {
     extern void fn_8018FA84(void *, s32);
     char *obj;
+    s32 ret;
     fn_8018FA84(self, 0);
     obj = *(char **)(self + 0x14);
     if (obj != 0) {
         char *vt = *(char **)(obj + 0x10);
-        return (*(s32 (**)(void *, s32))(vt + 0xD4))(obj + *(s16 *)(vt + 0xD0), arg1);
+        ret = (*(s32 (**)(void *, s32))(vt + 0xD4))(obj + *(s16 *)(vt + 0xD0), arg1);
+    } else {
+        ret = 0;
     }
-    return 0;
+    return ret;
 }
 
 void fn_80103F3C(char *self, s32 arg1) {
     extern void fn_8018FA84(void *, s32);
     extern s32 fn_8018FA7C(void *);
+    struct Entry { char *obj; s32 pad[5]; } *list;
     s32 i;
-    char **list;
 
     fn_8018FA84(self, 0);
     i = 0;
     fn_8018FA84(self, -0x63);
-    list = (char **)(self + 0x14);
-    while (list[i * 6] != 0) {
-        char *obj = list[i * 6];
+    list = (struct Entry *)(self + 0x14);
+    while (list[i].obj != 0) {
+        char *obj = list[i].obj;
         char *vt = *(char **)(obj + 0x10);
         (*(void (**)(void *, s32))(vt + 0xDC))(obj + *(s16 *)(vt + 0xD8), arg1);
-        fn_8018FA84(self, fn_8018FA7C(list[i * 6]));
-        if (fn_8018FA7C(list[i * 6]) == 0) break;
+        fn_8018FA84(self, fn_8018FA7C(list[i].obj));
+        if (fn_8018FA7C(list[i].obj) == 0) break;
         i++;
         if (i > 7) break;
     }
