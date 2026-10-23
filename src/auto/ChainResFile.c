@@ -53,6 +53,11 @@ void fn_80102A50(void **obj) {
     }
 }
 
+void fn_80103FF8(void *self) {
+    extern void fn_8018FA84(void *, s32);
+    fn_8018FA84(self, -0x5F);
+}
+
 void fn_801040E0(char *self, s32 a1, s32 a2, s32 a3, s32 a4, s32 a5) {
     char *vt = *(char **)(self + 0x10);
     (*(void (**)(void *, s32, s32, s32, s32, s32, s32))(vt + 0x104))(self + *(s16 *)(vt + 0x100), a1, a2, a3, a4, 0, a5);
