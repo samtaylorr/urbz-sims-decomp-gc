@@ -404,6 +404,17 @@ void fn_800F3CB8(void) {
     ((void (*)(void))fn_800F1450)();
 }
 
+void fn_800F3CD8(s32 arg0, s32 arg1, s32 arg2) {
+    s32 var_r6;
+
+    if (arg1 != 0) {
+        var_r6 = fn_800F8120(arg1);
+    } else {
+        var_r6 = 0;
+    }
+    fn_800F1450(arg0, arg1, arg2, var_r6);
+}
+
 void fn_800F1510(void);
 void fn_800F3E30(void) {
     fn_800F1510();
