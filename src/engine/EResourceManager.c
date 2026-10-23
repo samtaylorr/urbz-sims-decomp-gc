@@ -71,7 +71,7 @@ void fn_80338970(void) {
 }
 
 void fn_80338C58(void) {
-    M2C_UNK fn_80338C04(M2C_UNK, M2C_UNK);
+    void fn_80338C04(s32, s32);
     fn_80338C04(1, 0xFFFF);
 }
 
