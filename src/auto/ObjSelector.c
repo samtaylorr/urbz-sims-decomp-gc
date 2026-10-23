@@ -247,6 +247,19 @@ s32 fn_8016F79C(s32 *arg0) {
     return temp_r30;
 }
 
+void fn_8016F7D0(s32 arg0, s32 arg1) {
+    void fn_801A3204(u8 *);
+    void fn_801A3280(u8 *, s32);
+    extern u8 lbl_80434E48[];
+    if (arg1 == 0xFFFF) {
+        if (arg0 != 0) {
+            fn_801A3204(lbl_80434E48);
+        } else {
+            fn_801A3280(lbl_80434E48, 2);
+        }
+    }
+}
+
 void fn_8016F824(void) {
     void fn_8016F7D0(s32, s32);
     fn_8016F7D0(1, 0xFFFF);
