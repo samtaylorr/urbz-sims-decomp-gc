@@ -241,6 +241,21 @@ s32 fn_80337D90(char *arg0, s32 arg1) {
     return fn_80337D68(arg0, fn_80337F14(arg1));
 }
 
+s32 fn_80337DCC(char *self, s32 key) {
+    s32 fn_80338598(char *, s32, char **);
+    ERMLock lock;
+    s32 r;
+    ERMLock_Lock(&lock, self);
+    r = fn_80338598(self + 0x40, key, 0);
+    ERMLock_Unlock(&lock);
+    return r;
+}
+
+s32 fn_80337E4C(char *arg0, s32 arg1) {
+    s32 fn_80337F14(s32);
+    return fn_80337DCC(arg0, fn_80337F14(arg1));
+}
+
 s32 fn_80337F14(s32 arg0) {
     return fn_802C52EC(arg0);
 }
