@@ -102,8 +102,9 @@ void *fn_802D37A0(void *arg0, char *arg1) {
     return arg0;
 }
 
-void *fn_802D380C(void *arg0, char *arg1) {
-    return fn_802D3714(fn_802D3714(arg0, arg1), arg1 + 0xC);
+void *fn_802D380C(void *arg0, void *arg1) {
+    void *fn_802D3714(void *, void *);
+    return fn_802D3714(fn_802D3714(arg0, arg1), (char *)arg1 + 0xC);
 }
 
 void *fn_802D3840(void *arg0, void *arg1) {
