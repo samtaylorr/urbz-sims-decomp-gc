@@ -186,6 +186,14 @@ void fn_802D39E4(M2C_UNK **arg0) {
     *arg0 = &lbl_80494DD0;
 }
 
+void fn_802D39F0(s32 *self, s32 arg1) {
+    extern M2C_UNK lbl_80494DD0;
+    void fn_802D3AAC(void *, void *);
+    if (arg1 != (s32)&lbl_80494DD0) {
+        fn_802D3AAC(self, (void *)arg1);
+    }
+}
+
 void fn_802D3AAC(void *self, void *arg1) {
     void fn_802D1A00(s32, void *);
     s32 fn_802D0AB8(void);
@@ -850,12 +858,14 @@ void fn_802D58E4(s32 *arg0) {
 }
 
 void fn_802D5908(u16 **arg0) {
-    u16 *p;
+    u16 *p = *arg0;
+    u32 c;
 
-    for (p = *arg0; *p != 0; p++) {
-        if (*p >= 'a' && *p <= 'z') {
-            *p -= 0x20;
+    while ((c = *p) != 0) {
+        if (c - 'a' <= 25) {
+            *p = c + 0xFFE0;
         }
+        p++;
     }
 }
 
