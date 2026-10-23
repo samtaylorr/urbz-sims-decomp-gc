@@ -153,6 +153,12 @@ void fn_8033789C(char *self, s32 key) {
     ERMLock_Unlock(&lock);
 }
 
+void fn_80337950(char *arg0, s32 arg1) {
+    void fn_8033789C(char *, s32);
+    s32 fn_80337F14(s32);
+    fn_8033789C(arg0, fn_80337F14(arg1));
+}
+
 s32 fn_80337F14(s32 arg0) {
     return fn_802C52EC(arg0);
 }
