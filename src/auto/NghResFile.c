@@ -43,6 +43,19 @@ void fn_80129234(s32 arg0, s32 arg1) {
     fn_80129208(arg0, fn_80129270(arg1));
 }
 
+s32 fn_80129270(s32 arg0) {
+    s32 fn_800EF664(void *, s32);
+    extern M2C_UNK *lbl_80494448;
+    void **var_r31;
+
+    for (var_r31 = (void **)lbl_80494448; var_r31 != NULL; var_r31 = (void **)*var_r31) {
+        if (fn_800EF664((char *)var_r31 + 0x10, arg0) != 0) {
+            return (s32)var_r31;
+        }
+    }
+    return 0;
+}
+
 s32 fn_80129388(s32 arg0, s32 arg1) {
     s32 fn_8012A494(s32, s32, s32);
     M2C_UNK fn_8012F7F0(s32);
