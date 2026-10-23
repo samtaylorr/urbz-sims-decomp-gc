@@ -1,6 +1,10 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+static inline char *AptStack_Peek(void *s, s32 i) {
+    return M2C_FIELD(s, char ***, 8)[M2C_FIELD(s, s32 *, 0) - i - 1];
+}
+
 void fn_8027AEC8(void);
 void fn_8027B774(void) {
     fn_8027AEC8();
@@ -59,8 +63,8 @@ void fn_80282800(void *arg0, void *arg1) {
     s32 fn_802B71E8(void *);
     s32 i;
     fn_8027BF7C(arg0, M2C_FIELD(arg1, s32 *, 4), M2C_FIELD(arg1, s32 *, 8),
-                M2C_FIELD(arg0, char ***, 8)[M2C_FIELD(arg0, s32 *, 0) - 1 - 1] + 8,
-                M2C_FIELD(arg0, char ***, 8)[M2C_FIELD(arg0, s32 *, 0) - 1], 0, 1);
+                (M2C_FIELD(arg0, char ***, 8) + (M2C_FIELD(arg0, s32 *, 0) - 1))[-1] + 8,
+                (M2C_FIELD(arg0, char ***, 8) + M2C_FIELD(arg0, s32 *, 0))[-1], 0, 1);
     for (i = 1; i <= 2; i++) {
         char *obj = M2C_FIELD(arg0, char ***, 8)[M2C_FIELD(arg0, s32 *, 0) - i];
         if (fn_802B71E8(obj) == 0) {
