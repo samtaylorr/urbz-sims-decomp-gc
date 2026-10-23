@@ -350,7 +350,7 @@ s32 fn_802D3EE8(char **arg0, char *arg1) {
 }
 
 s32 *fn_802D406C(s32 *arg0, s32 *arg1, s32 arg2, s32 arg3) {
-    M2C_UNK fn_802D39F0(s32 *, s32);
+    void fn_802D39F0(s32 *, s32);
     s32 *fn_802D40E4(s32 *, s32 *, s32);
     s32 sp8;
 
