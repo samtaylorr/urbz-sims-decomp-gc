@@ -98,6 +98,11 @@ void fn_802FEAFC(s32 *arg0) {
     fn_8036375C(*arg0 + 0x14);
 }
 
+void fn_802FEB24(s32 *arg0) {
+    void fn_802CB634(s32);
+    fn_802CB634(*arg0 + 0x14);
+}
+
 void *fn_802FEB4C(s32 *arg0, void *src, s32 size) {
     void fn_802482F8(void *, void *, s32);
     void *p;
