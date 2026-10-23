@@ -558,6 +558,11 @@ s32 fn_80176290(s32 arg0) {
     return arg0 + 0x28C;
 }
 
+void fn_80176298(s32 arg0) {
+    M2C_UNK fn_80174A98(s32);
+    fn_80174A98(arg0 + 0x28C);
+}
+
 s32 fn_801762BC(void) {
     return 1;
 }
