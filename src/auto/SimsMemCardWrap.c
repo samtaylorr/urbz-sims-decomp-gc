@@ -100,11 +100,12 @@ void fn_800A617C(void *arg0, s32 *arg1) {
 }
 
 void *fn_800A61AC(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0x10) = 0;
+    void fn_800A6734(void *);
     M2C_FIELD(arg0, s16 *, 0) = 0x100;
     M2C_FIELD(arg0, s32 *, 4) = 0;
     M2C_FIELD(arg0, s32 *, 8) = 0;
     M2C_FIELD(arg0, s32 *, 0xC) = 0;
+    M2C_FIELD(arg0, s32 *, 0x10) = 0;
     fn_800A6734(arg0);
     return arg0;
 }
