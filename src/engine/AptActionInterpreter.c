@@ -255,25 +255,12 @@ void fn_8028AABC(s32 arg0, s32 arg1) {
     void fn_803B70D0(void *, s32);
     if (arg1 == 0xFFFF) {
         if (arg0 != 0) {
-            s32 *a = lbl_804433C4;
-            a[0] = 0;
-            a[1] = 0;
-            a[2] = 0;
-            (a + 3)[0] = 0;
-            (a + 3)[1] = 0;
-            (a + 3)[2] = 0;
-            (a + 6)[0] = 0;
-            (a + 6)[1] = 0;
-            (a + 6)[2] = 0;
-            (a + 9)[0] = 0;
-            (a + 9)[1] = 0;
-            (a + 9)[2] = 0;
-            (a + 12)[0] = 0;
-            (a + 12)[1] = 0;
-            (a + 12)[2] = 0;
-            (a + 15)[0] = 0;
-            (a + 15)[1] = 0;
-            (a + 15)[2] = 0;
+            AptTriple_Init(lbl_804433C4);
+            AptTriple_Init(lbl_804433C4 + 3);
+            AptTriple_Init(lbl_804433C4 + 6);
+            AptTriple_Init(lbl_804433C4 + 9);
+            AptTriple_Init(lbl_804433C4 + 12);
+            AptTriple_Init(lbl_804433C4 + 15);
         } else {
             fn_803B70D0(lbl_804433C4, 2);
         }
