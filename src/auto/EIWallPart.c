@@ -278,6 +278,20 @@ s32 fn_80039620(void *arg0, s32 arg1, s32 arg2) {
     return 0;
 }
 
+typedef struct WallPartRange {
+    s32 flag;
+    f32 max;
+    f32 min;
+    f32 unkC;
+    f32 scale;
+    f32 unk14;
+    f32 unk18;
+    f32 unk1C;
+    f32 range;
+    f32 inv;
+    char *vt;
+} WallPartRange;
+
 void fn_80039AB8(f32 *arg0) {
     extern f32 lbl_803C5938[];
     extern f32 lbl_803C593C[];
