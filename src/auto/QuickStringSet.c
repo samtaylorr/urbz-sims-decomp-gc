@@ -177,6 +177,13 @@ s32 fn_800F72A0(s32 *self, u16 *other, s32 n) {
     return len - n;
 }
 
+u16 fn_800F7350(s32 *self, s32 i) {
+    if (i >= 0 && i < fn_800F6FF4(self)) {
+        return ((u16 *)fn_800F7138(self))[i];
+    }
+    return 0;
+}
+
 void fn_800F7708(s32 arg0, s32 arg1) {
     M2C_UNK fn_800F7744(s32, s32);
     fn_800F7744(arg0, fn_800F69E8(arg1));
