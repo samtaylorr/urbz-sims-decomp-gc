@@ -133,11 +133,13 @@ void fn_80014164(void *arg0, s32 arg1) {
 s32 fn_800148B8(void *arg0) {
     s32 fn_80049B6C(void *);
     extern u8 lbl_8041F94C[];
+    s32 ret;
 
+    ret = 0;
     if (M2C_FIELD(arg0, s32 *, 0x164) == 1) {
-        return fn_80049B6C(lbl_8041F94C) == 0;
+        ret = fn_80049B6C(lbl_8041F94C) == 0;
     }
-    return 0;
+    return ret;
 }
 
 void fn_80014A9C(void) {
