@@ -1,6 +1,10 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+typedef struct {
+    s16 v[10];
+} S16Table10;
+
 extern s32 lbl_804944B0;
 void fn_800F68E0(void *);
 void fn_80149998(void *self, void *arg) {
