@@ -156,6 +156,11 @@ void fn_80298360(void) {
     lbl_80443310[0]();
 }
 
+void fn_8029838C(void) {
+    extern void (*lbl_80443314[])(void);
+    lbl_80443314[0]();
+}
+
 s32 fn_80298FF4(void *arg0);
 s32 fn_80298F64(void *arg0, void *arg1) {
     extern s32 fn_80299018(void *, s32);
