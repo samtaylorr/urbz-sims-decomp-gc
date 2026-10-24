@@ -969,7 +969,7 @@ void fn_801DE594(void *arg0, s32 arg1) {
 
 void fn_801DECDC(void *arg0, s32 arg1) {
     extern void fn_801D7CDC(void *, s32);
-    extern void fn_801D8B40(void *, void *);
+    extern s32 fn_801D8B40(void *, void *);
     extern void fn_801D9014(void *, void *);
     extern void fn_801D94DC(void *, void *);
     extern void fn_801DC030(void *, void *);
@@ -1838,12 +1838,24 @@ void fn_801F96A8(s32 arg0, s32 arg1) {
     fn_801E1868((u8 *)arg0 + (arg1 * 0x124 + 0x734));
 }
 
+void fn_801F97E4(s32 arg0, s32 arg1, s32 arg2) {
+    void fn_801E2A24(void *, s32);
+    s32 ok = *(s32 *)(arg1 * 0x318 + arg0 + 0x108) != 0;
+    if (ok) {
+        fn_801E2A24((u8 *)arg0 + (arg1 * 0x318 + 0x104), arg2);
+    }
+}
+
 void fn_801E14D4(void *);
 void fn_801E1868(void *);
 void fn_801E2A24(void *, s32);
 void fn_801E2BB4(void *);
 void fn_801F983C(s32 arg0, s32 arg1) {
-    s32 ok = *(s32 *)(arg1 * 0x318 + arg0 + 0x108) != 0;
+    void fn_801E2BB4(void *);
+    s32 ok = 1;
+    if (*(s32 *)(arg1 * 0x318 + arg0 + 0x108) == 0) {
+        ok = 0;
+    }
     if (ok) {
         fn_801E2BB4((u8 *)arg0 + (arg1 * 0x318 + 0x104));
     }
