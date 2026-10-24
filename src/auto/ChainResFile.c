@@ -84,6 +84,10 @@ s32 fn_80102414(void *arg0, s32 arg1) {
     return (s32) ((arg1 - M2C_FIELD(M2C_FIELD(arg0, void **, 8), s32 *, 4)) * 0xCCCCCCCD) >> 2;
 }
 
+s32 fn_8010287C(void *self, void *arg1) {
+    return (M2C_FIELD(arg1, s32 *, 0x48) + 0x17) % 24;
+}
+
 s32 fn_801028A8(void *self, void *arg1) {
     return M2C_FIELD(arg1, s32 *, 0x68);
 }
