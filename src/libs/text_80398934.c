@@ -593,6 +593,15 @@ void fn_8039B794(void **self, s32 flags) {
     }
 }
 
+void fn_8039B7C8(s32 *self, s32 flags) {
+    extern u8 lbl_80407628[];
+    extern void fn_802D20E8(void *);
+    self[7] = (s32)lbl_80407628;
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_8039B7FC(u8 *self, s32 flags) {
     *(void **)(self + 0x10) = lbl_80407900;
     if (flags & 1) {
