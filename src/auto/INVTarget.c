@@ -866,6 +866,19 @@ s32 fn_801DFA84(void **arg0, s32 arg1) {
     return var_r28;
 }
 
+s32 fn_801DFAF4(void **arg0, s32 arg1) {
+    void *it;
+    void *next;
+
+    for (it = *arg0; it != NULL; it = next) {
+        next = M2C_FIELD(it, void **, 4);
+        if (M2C_FIELD(it, s32 *, 0xC) == arg1) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
 void fn_801DFB28(void **arg0) {
     void *temp_r9;
     void *var_r31;
