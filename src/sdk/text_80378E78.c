@@ -740,6 +740,19 @@ s32 fn_8038C698(void) {
     return 0;
 }
 
+s32 fn_8038CE64(s32 *self, s32 arg1, s32 arg2, s32 arg3) {
+    s32 fn_803894A8(s32);
+    s32 fn_8038CD20(s32 *, s32, s32, s32, void *);
+    extern void fn_80387D34(void);
+    s32 result;
+
+    result = fn_8038CD20(self, arg1, arg2, arg3, fn_80387D34);
+    if (result < 0) {
+        return result;
+    }
+    return fn_803894A8(self[0]);
+}
+
 s32 fn_8038D358(s32 chan, s32 fileNo, void *callback);
 s32 fn_8038D484(s32 chan, s32 fileNo) {
     s32 fn_803894A8(s32);
