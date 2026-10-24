@@ -76,7 +76,7 @@ void fn_803726CC(s32 arg0, s32 arg1) {
     }
 }
 
-void fn_80372510(void);
+void fn_80372510();
 void fn_803727BC(void) {
     fn_80372510();
 }
