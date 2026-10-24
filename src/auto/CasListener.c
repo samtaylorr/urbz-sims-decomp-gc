@@ -228,6 +228,18 @@ void fn_801BF724(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x18) = (s32) (M2C_FIELD(arg0, s32 *, 0x18) & ~arg1);
 }
 
+void fn_801BF734(void *arg0, s32 arg1, s32 arg2) {
+    void *vt;
+
+    vt = M2C_FIELD(arg0, void **, 0x44);
+    ((void (*)(void *))M2C_FIELD(vt, void **, 0x54))((char *)arg0 + M2C_FIELD(vt, s16 *, 0x50));
+    if (arg2 != 0) {
+        M2C_FIELD(arg0, s32 *, 0x18) |= arg1;
+    } else {
+        M2C_FIELD(arg0, s32 *, 0x18) &= ~arg1;
+    }
+}
+
 void fn_801BF79C(void) {
     fn_803074F0();
 }
