@@ -50,9 +50,10 @@ void fn_802C686C(void *arg0, s8 *arg1, s32 arg2) {
     *arg1 = 0;
 }
 
-void fn_802C6A40(char **arg0, char arg1) {
+char **fn_802C6A40(char **arg0, char arg1) {
     (*arg0)[0] = arg1;
     (*arg0)[1] = 0;
+    return arg0;
 }
 
 s32 fn_802C6A5C(s32 *arg0) {
