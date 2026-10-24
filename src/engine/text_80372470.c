@@ -69,6 +69,16 @@ void fn_803725B8(void *arg0, void *arg1) {
     fn_803C0820(arg1, (u8 *)arg0 + 0x20);
 }
 
+extern void fn_8031E9B4(void *, void *);
+extern void fn_803C0B88(void *, void *);
+void fn_803725F4(void *arg0, void *arg1) {
+    extern u16 lbl_80493EAA[];
+    fn_8031E9B4(arg0, arg1);
+    if (lbl_80493EAA[0] == 0) {
+        fn_803C0B88(arg1, (u8 *)arg0 + 0x20);
+    }
+}
+
 void fn_80372640(void **arg0, char *arg1) {
     extern void fn_80364C90(void *);
     extern void fn_80364CB0(void *, s32);
