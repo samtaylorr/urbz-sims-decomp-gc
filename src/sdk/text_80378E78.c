@@ -812,21 +812,21 @@ s32 fn_8038D26C(s32 *self, s32 arg1, s32 arg2, s32 arg3) {
 void fn_8038D2B4(s32 chan, s32 result) {
     s32 fn_8038984C(s32, u16, void *);
     void fn_80389134(void *, s32);
+    register u8 *p;
     extern u8 lbl_804912A0[];
     void (*cb)(s32, s32);
-    u8 *p;
 
     p = lbl_804912A0 + chan * 0x110;
     cb = (void (*)(s32, s32)) M2C_FIELD(p, void **, 0xD0);
-    M2C_FIELD(p, void **, 0xD0) = 0;
+    M2C_FIELD((int)p, void **, 0xD0) = 0;
     if (result >= 0) {
         result = fn_8038984C(chan, M2C_FIELD(p, u16 *, 0xBE), cb);
-        if (result >= 0) {
+        if (0 <= result) {
             return;
         }
     }
     fn_80389134(p, result);
-    if (cb != 0) {
+    if (cb) {
         cb(chan, result);
     }
 }
