@@ -524,8 +524,10 @@ s32 fn_801DC084(void **arg0, s32 arg1) {
 
 s32 fn_801DC0F4(void **arg0, s32 arg1) {
     void *it;
+    void *next;
 
-    for (it = *arg0; it != NULL; it = M2C_FIELD(it, void **, 4)) {
+    for (it = *arg0; it != NULL; it = next) {
+        next = M2C_FIELD(it, void **, 4);
         if (M2C_FIELD(it, s32 *, 0xC) == arg1) {
             return 1;
         }
