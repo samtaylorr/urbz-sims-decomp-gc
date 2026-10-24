@@ -286,22 +286,22 @@ s32 fn_8031AE8C(void *arg0) {
 s32 fn_8031AEB4(u8 *self, s32 idx, f32 value) {
     f32 *arr = *(f32 **)(self + 0xA4);
 
-    if (arr[idx] == value) {
-        return *(s32 *)(self + 0xA0);
+    if (arr[idx] != value) {
+        arr[idx] = value;
+        *(s32 *)(self + 0xA0) = 1;
+        return 1;
     }
-    arr[idx] = value;
-    *(s32 *)(self + 0xA0) = 1;
-    return 1;
+    return *(s32 *)(self + 0xA0);
 }
 
 void fn_8031B228(f32 *out, f32 t) {
-    extern f32 lbl_803F2C88;
-    extern f32 lbl_803F2C8C;
+    extern f32 lbl_803F2C88[];
+    extern f32 lbl_803F2C8C[];
     f32 t2 = t * t;
     f32 t3 = t2 * t;
-    f32 a = (t3 + t3) - t2 * lbl_803F2C88;
+    f32 a = (t3 + t3) - t2 * lbl_803F2C88[0];
 
-    out[0] = a + lbl_803F2C8C;
+    out[0] = a + lbl_803F2C8C[0];
     out[3] = -t2 + t3;
     out[1] = -a;
     out[2] = (t - (t2 + t2)) + t3;
