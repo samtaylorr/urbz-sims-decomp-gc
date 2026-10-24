@@ -237,7 +237,7 @@ char *fn_801CEAF0(char *arg0, s32 arg1) {
     char *ret;
     char *p;
 
-    p = ((char **)(arg0 + 8))[arg1];
+    p = ((struct { s32 pad[2]; char *arr[1]; } *)arg0)->arr[arg1];
     ret = lbl_803DEB6C;
     if (p != NULL) {
         p = *(char **)(p + 0x134);
