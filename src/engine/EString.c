@@ -476,6 +476,17 @@ s32 fn_802D4364(char **arg0, char *arg1, s32 arg2) {
     return p != 0 ? p - *arg0 : -1;
 }
 
+s32 fn_802D453C(char **arg0) {
+    char *fn_80248ADC(char *);
+    char *p;
+
+    if (**arg0 == 0) {
+        return -1;
+    }
+    p = fn_80248ADC(*arg0);
+    return p != 0 ? p - *arg0 : -1;
+}
+
 s32 *fn_802D45E4(s32 *arg0, s32 arg1) {
     s32 fn_80245BB4(char *, const char *, ...);
     extern char lbl_803F032C[];
