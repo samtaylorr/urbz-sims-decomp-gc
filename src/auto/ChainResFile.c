@@ -384,6 +384,10 @@ s32 fn_801059F0(void *arg0, void *arg1) {
     return fn_801058D4(arg0) < fn_801058D4(arg1);
 }
 
+s32 fn_80105A34(void *arg0, void *arg1) {
+    return fn_801058D4(arg0) > fn_801058D4(arg1);
+}
+
 s8 fn_80105B78(u8 *arg0) {
     return (s8) *arg0;
 }
