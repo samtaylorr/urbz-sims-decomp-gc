@@ -303,6 +303,27 @@ block_4:
     return 0;
 }
 
+s32 fn_801D8F18(void **arg0, s32 arg1, s32 arg2) {
+    s32 fn_802486DC(s32, s32);
+    M2C_UNK fn_801D8E24(void **, s32, s32);
+    void *var_r31;
+
+    if (arg0[2] != NULL) {
+        var_r31 = arg0[0];
+        if (var_r31 != NULL) {
+            do {
+                if (fn_802486DC(M2C_FIELD(var_r31, s32 *, 8), arg1) == 0) {
+                    return 0;
+                }
+                var_r31 = M2C_FIELD(var_r31, void **, 4);
+            } while (var_r31 != NULL);
+        }
+        fn_801D8E24(arg0, arg1, arg2);
+        return 1;
+    }
+    return 0;
+}
+
 s32 fn_801D8F9C(void **arg0, s32 arg1) {
     s32 fn_802486DC(s32, s32);
     M2C_UNK fn_801D8E88(void **, void *);
@@ -2305,11 +2326,11 @@ s32 fn_8022D1E8(s32 arg0) {
     s32 obj;
 
     item = fn_80224E3C(fn_80225544(), arg0);
-    if (item != 0) {
-        obj = fn_80014F30(fn_80014EE0(), arg0);
-        if (obj == 0) {
-            return 0;
-        }
+    if (item == 0) {
+        return 0;
+    }
+    obj = fn_80014F30(fn_80014EE0(), arg0);
+    if (obj != 0) {
         fn_80011F24(obj, fn_80224A28(item));
         return 1;
     }
