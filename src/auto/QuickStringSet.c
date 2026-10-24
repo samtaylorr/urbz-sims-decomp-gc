@@ -727,6 +727,32 @@ s32 fn_800FC788(void *arg0, s32 arg1) {
     return -1;
 }
 
+s32 fn_800FC854(u32 arg0) {
+    if ((arg0 & 0xFFFF) <= 0xFF) {
+        return 0;
+    }
+    if (arg0 - 0x100 <= 0xEFF) {
+        return 1;
+    }
+    if (arg0 - 0x2000 <= 0x328) {
+        return 3;
+    }
+    return ((arg0 - 0x1000) <= 0xFFF) ? 2 : 2;
+}
+
+void fn_800FC8A8(s32 arg0, s32 arg1) {
+    void fn_800F69F8(s32, s32);
+    const char *str;
+    switch (arg0) {
+    case 0: str = "??"; break;
+    case 1: str = "??"; break;
+    case 2: str = "??"; break;
+    case 3: str = "??"; break;
+    default: str = "??"; break;
+    }
+    fn_800F69F8(arg1, (s32)str);
+}
+
 void fn_800FCA68(s32 arg0, s32 arg1) {
     s32 fn_80248808(s32);
     void fn_80248784(s32, s32);
@@ -735,12 +761,13 @@ void fn_800FCA68(s32 arg0, s32 arg1) {
     }
 }
 
+extern u8 lbl_80434B08[];
 void fn_800FCAB0(void) {
     void fn_802D20E8(void *);
     void fn_803997AC(void *, u32);
-    u8 *p = *(u8 **)0x80434B08;
+    u8 *p = *(u8 **)lbl_80434B08;
     if (p != 0) {
-        u32 size = (u32)(*(u32 *)((u8 *)0x80434B08 + 0xC) - (u32)p) & ~1;
+        u32 size = (u32)(*(u32 *)(lbl_80434B08 + 0xC) - (u32)p) & ~1;
         if (size > 0x80) {
             fn_802D20E8(p);
         } else {
