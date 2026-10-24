@@ -1441,7 +1441,7 @@ void fn_802B46B8(void *arg0, s32 arg1) {
 
 s32 fn_802B490C(void *arg0) {
     extern s32 fn_80246E00(s32);
-    u32 flags = M2C_FIELD(arg0, u32 *, 0);
+    s32 flags = M2C_FIELD(arg0, s32 *, 0);
 
     if (!((flags ^ 0x8000) & 0x8000)) {
         switch (flags & 0x3F) {
