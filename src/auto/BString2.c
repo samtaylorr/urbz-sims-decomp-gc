@@ -2,6 +2,8 @@
 #include "common.h"
 
 void fn_800F0FFC(void);
+void fn_800F1120(void);
+void fn_800F126C(void);
 void fn_800F134C(void);
 void fn_800F1510(void);
 s32 fn_800F4878(void **arg0);
