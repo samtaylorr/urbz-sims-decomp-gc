@@ -321,6 +321,13 @@ void fn_800F1A60(s32 self, s32 flags) {
     }
 }
 
+void *fn_800F1B80(void *arg0, const char *arg1) {
+    extern void fn_800F06A0(void *);
+    s32 fn_800F8120(const char *arg0);
+    ((void (*)(void *, const char *, s32))fn_800F06A0)(arg0, arg1, arg1 ? fn_800F8120(arg1) : 0);
+    return arg0;
+}
+
 extern void fn_800F07C4(void *);
 void *fn_800F1FA8(void *self) {
     fn_800F07C4(self);
