@@ -1273,6 +1273,18 @@ void *fn_801F0AC8(void **self, char *name) {
     return self;
 }
 
+void *fn_801F0B1C(void **self, char *name, void *arg2) {
+    extern u8 lbl_80417510[];
+    extern u8 lbl_804173D0[];
+    s32 fn_801F0834(char *);
+    self[2] = lbl_80417510;
+    self[0] = name;
+    self[1] = (void *)fn_801F0834(name);
+    self[3] = arg2;
+    self[2] = lbl_804173D0;
+    return self;
+}
+
 void *fn_801F0B78(void **self, char *name) {
     extern u8 lbl_80417510[];
     extern u8 lbl_80417390[];
