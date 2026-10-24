@@ -71,7 +71,7 @@ char **fn_802C6A80(char **arg0) {
     return arg0;
 }
 
-void fn_802C6AB4(char **arg0) {
+char **fn_802C6AB4(char **arg0) {
     char *p;
 
     for (p = *arg0; *p != 0; p++) {
@@ -79,6 +79,7 @@ void fn_802C6AB4(char **arg0) {
             *p += 0x20;
         }
     }
+    return arg0;
 }
 
 s32 fn_802C6AE8(char **arg0, const char *arg1) {
