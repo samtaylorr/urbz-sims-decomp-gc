@@ -293,6 +293,26 @@ void fn_800CD0DC(s32 *self) {
     }
 }
 
+void *fn_800CD660(void *self, s32 id, s32 n) {
+    s32 **end = M2C_FIELD(self, s32 ***, 0xC);
+    s32 i = 0;
+    s32 **it;
+    for (it = M2C_FIELD(self, s32 ***, 8); it != end; it++) {
+        if (**it == id) {
+            if (i == n) {
+                return *it;
+            }
+            i++;
+        }
+    }
+    return NULL;
+}
+
+M2C_UNK fn_800CD6A8(void *self, s32 id, s32 n, s32 arg3) {
+    M2C_UNK fn_800CCA68(void *, s32);
+    return fn_800CCA68(fn_800CD660(self, id, n), arg3);
+}
+
 void *fn_800CD660(void *self, s32 id, s32 n);
 
 void fn_800CD7F0(void *self, s32 id, s32 n, f32 farg0) {
