@@ -753,16 +753,18 @@ s32 fn_8038CE64(s32 *self, s32 arg1, s32 arg2, s32 arg3) {
     return fn_803894A8(self[0]);
 }
 
-s32 fn_8038CEAC(s32 *self) {
+s32 fn_8038CEAC(void *arg0) {
     s32 fn_8025465C(void);
     void fn_80254684(s32);
     extern u8 lbl_804912A0[];
+    s32 *self = arg0;
     u8 *p;
     s32 enabled;
-    s32 result = 0;
+    s32 result;
 
     enabled = fn_8025465C();
     p = lbl_804912A0 + self[0] * 0x110;
+    result = 0;
     if (M2C_FIELD(p, s32 *, 0) == 0) {
         result = -3;
     } else if (M2C_FIELD(p, s32 *, 4) == -1 && M2C_FIELD(p, void **, 0xC0) == (void *) self) {
