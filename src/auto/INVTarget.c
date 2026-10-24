@@ -746,6 +746,38 @@ void fn_801DECDC(void *arg0, s32 arg1) {
     }
 }
 
+void fn_801DEFF0(void) {
+    extern void fn_801DF44C(u8 *);
+    extern u8 *lbl_80494618;
+    if (lbl_80494618 != 0) {
+        u8 *obj;
+        fn_801DF44C(lbl_80494618);
+        obj = lbl_80494618;
+        if (obj != 0) {
+            u8 *vt = *(u8 **)(obj + 0xF8);
+            (*(void (**)(void *, s32))(vt + 0xc))(obj + *(s16 *)(vt + 8), 3);
+        }
+        lbl_80494618 = 0;
+    }
+}
+
+u8 *fn_801DF04C(u8 *self) {
+    extern u8 lbl_804170B0[];
+    extern f32 lbl_803E1348;
+    extern f32 lbl_803E134C;
+    s32 i;
+
+    *(u8 **)(self + 0xF8) = lbl_804170B0;
+    for (i = 0; i < 20; i++) {
+        ((s32 *)(self + 0x50))[i] = 0;
+        ((f32 *)(self + 0xA0))[i] = lbl_803E1348;
+    }
+    *(s32 *)(self + 0xF0) = 0;
+    *(s32 *)(self + 0xF4) = 3;
+    *(f32 *)(self + 0xB4) = lbl_803E134C;
+    return self;
+}
+
 void fn_801DF0A8(u8 *self, s32 flags) {
     extern u8 lbl_804170B0[];
     extern void fn_802D20E8(void *);
