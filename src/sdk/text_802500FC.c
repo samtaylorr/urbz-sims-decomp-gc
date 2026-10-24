@@ -587,6 +587,29 @@ void fn_80261C98(void) {
     fn_80266794(lbl_80495ED4[8], 0xA, fn_80261CCC);
 }
 
+void fn_80261CCC(u32 arg0) {
+    extern void fn_802652F4(u32);
+    extern void fn_80264274(void);
+    extern void fn_80261458(s32);
+    extern void fn_80266548(void (*)(void));
+    extern void fn_802616DC(void);
+    extern void fn_80261D34(s32);
+    extern s32 lbl_80495F04;
+
+    if (arg0 == 0x10) {
+        fn_802652F4(0x01234568);
+        fn_80264274();
+        fn_80261458(0);
+        return;
+    }
+    if (arg0 & 1) {
+        lbl_80495F04 = 0;
+        fn_80261D34((s32)lbl_80495ED0);
+        return;
+    }
+    fn_80266548(fn_802616DC);
+}
+
 void fn_80261D34(s32 arg0);
 void fn_80261D34(s32 arg0) {
     extern void fn_802660C0(void *, s32, s32, void (*)(void));
