@@ -254,7 +254,7 @@ s32 fn_803347A4(s32 arg0) {
     return 1 << arg0;
 }
 
-void fn_8033480C(void) {
+void fn_8033480C(char *self, s32 arg1) {
 
 }
 
