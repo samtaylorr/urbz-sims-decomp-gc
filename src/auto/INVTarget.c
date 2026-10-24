@@ -3,6 +3,10 @@
 
 void fn_800C3B48(void);
 s32 fn_801DFF98(void **arg0, s32 arg1);
+s32 fn_801F8708(s32, s32);
+void fn_801E1338(s32, s32, s32, s32, s32, s32, s32);
+void fn_801E1254(s32, s32, s32, s32, s32);
+s32 fn_801F9614(s32 arg0, s32 arg1);
 
 static inline s32 INVList_IsNotEmpty(void *list) {
     s32 r = 0;
@@ -2453,16 +2457,17 @@ s32 fn_8022D25C(s32 arg0) {
     extern s32 fn_80014F30(s32, s32);
     extern void *fn_80224E3C(s32, s32);
     s32 obj;
+    s32 ret;
 
-    if (fn_80224E3C(fn_80225544(), arg0) == 0) {
-        return 0;
+    ret = 0;
+    if (fn_80224E3C(fn_80225544(), arg0) != 0) {
+        obj = fn_80014F30(fn_80014EE0(), arg0);
+        if (obj != 0) {
+            fn_80011F38(obj);
+            ret = 1;
+        }
     }
-    obj = fn_80014F30(fn_80014EE0(), arg0);
-    if (obj != 0) {
-        fn_80011F38(obj);
-        return 1;
-    }
-    return 0;
+    return ret;
 }
 
 void fn_8022D8C4(void *arg0) {
