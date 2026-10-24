@@ -24,6 +24,16 @@ s32 fn_8036D518(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void **fn_8036D558(arg0)
+    void **arg0;
+{
+    M2C_UNK fn_802F04BC();
+    extern u8 lbl_8041D980[];
+    fn_802F04BC();
+    *arg0 = lbl_8041D980;
+    return arg0;
+}
+
 extern u8 lbl_8041D980[];
 void fn_8036D594(void **self, s32 flags) {
     M2C_UNK fn_802F05AC(void **);
