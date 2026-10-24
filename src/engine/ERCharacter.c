@@ -148,6 +148,17 @@ char *fn_80317EC4(s32 arg0, s32 arg1, char *buf) {
     return NULL;
 }
 
+char *fn_80317F24(s32 arg0, s32 arg1, char *buf) {
+    void fn_80248784(char *, char *);
+    s32 s = fn_80317758(arg0, 0, arg1, 0, 0);
+    if (s != 0) {
+        fn_80248784(buf, (char *)s);
+        return buf;
+    }
+    *buf = 0;
+    return NULL;
+}
+
 void fn_80317F84(void) {
     extern s16 *lbl_80496210;
     extern s16 *lbl_80496214;
