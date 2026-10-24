@@ -253,6 +253,29 @@ s32 fn_80365D6C(void *arg0, s32 arg1) {
     return sp8;
 }
 
+void fn_80365E6C(void *arg0, s32 arg1, s32 arg2, void *arg3, s32 arg4) {
+    extern void *fn_80366168(void *, s32, s32);
+    extern void *fn_80365EF8(void *, s32, s32, void *);
+    s32 bucketCount = M2C_FIELD(arg0, s32 *, 0xC);
+    s32 index = arg1 % bucketCount;
+    if (arg4 != 0) {
+        fn_80365EF8(arg0, index, arg2, arg3);
+    } else if (fn_80366168(arg0, index, arg2) == NULL) {
+        fn_80365EF8(arg0, index, arg2, arg3);
+    }
+}
+
+s32 fn_80365F8C(void *arg0, s32 arg1) {
+    extern void *fn_80366168(void *, s32, s32);
+    extern void fn_80366028(void *, s32, void *);
+    s32 bucketCount = M2C_FIELD(arg0, s32 *, 0xC);
+    s32 index = arg1 % bucketCount;
+    void *node = fn_80366168(arg0, index, arg1);
+    if (node == NULL) return 0;
+    fn_80366028(arg0, index, node);
+    return 1;
+}
+
 void fn_80365FEC(void *self, void *node) {
     void fn_80366028(void *, u32, void *);
     u32 key = M2C_FIELD(node, u32 *, 0xC);
@@ -411,24 +434,22 @@ s32 fn_80366414(void *arg0, void **arg1) {
     s32 countA;
     s32 countB;
     void *node;
-    s32 key;
     s32 found;
+    s32 key;
     s32 fn_8036625C(void **);
     s32 fn_803660C8(void *, s32, s32 *);
     countA = fn_8036625C((void **)arg0);
     countB = fn_8036625C(arg1);
-    if (countA == countB) {
-        node = *arg1;
-        while (node != NULL) {
-            key = M2C_FIELD(node, s32 *, 0x10);
-            found = fn_803660C8(arg0, M2C_FIELD(node, s32 *, 0xC), &found);
-            if (found == 0) break;
-            if (found != key) return 0;
-            node = M2C_FIELD(node, void **, 4);
-        }
-        return 1;
+    if (countA != countB) return 0;
+    node = *arg1;
+    while (node != NULL) {
+        key = M2C_FIELD(node, s32 *, 0x10);
+        found = fn_803660C8(arg0, M2C_FIELD(node, s32 *, 0xC), &found);
+        if (found == 0) return 0;
+        if (*(s32 *)((char *)&found + 0) != key) return 0;
+        node = M2C_FIELD(node, void **, 4);
     }
-    return 0;
+    return 1;
 }
 
 s32 fn_803669C0(void *arg0) {
@@ -459,6 +480,15 @@ void *fn_80366A7C(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x40) = 0;
     M2C_FIELD(arg0, s32 *, 0x44) = 0;
     return arg0;
+}
+
+void fn_80366AD0(void *arg0, s32 arg1) {
+    extern char lbl_8041D7D8[];
+    void fn_803BECF4(void *, s32);
+    void fn_802D20E8(void *);
+    M2C_FIELD(arg0, char **, 0x54) = lbl_8041D7D8;
+    fn_803BECF4((u8 *)arg0 + 0x48, 2);
+    if (arg1 & 1) fn_802D20E8(arg0);
 }
 
 void fn_80367258(void *arg0, void *arg1) {
