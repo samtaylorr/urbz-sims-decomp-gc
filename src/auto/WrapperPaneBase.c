@@ -424,23 +424,16 @@ void fn_800CDCA4(void *arg0) {
 }
 
 void fn_800CDCE4(void *arg0) {
-    void ***vec;
     void **it;
 
-    vec = (void ***)((u8 *)arg0 + 8);
-    it = M2C_FIELD(arg0, void ***, 8);
-    if (it != vec[1]) {
-        void ***v2 = vec;
-        do {
-            void *obj = *it;
-            void *vt = M2C_FIELD(obj, void **, 0x1C);
-            M2C_FIELD(vt, void (**)(void *), 0x1C)((u8 *)obj + M2C_FIELD(vt, s16 *, 0x18));
-            if (obj != NULL) {
-                vt = M2C_FIELD(obj, void **, 0x1C);
-                M2C_FIELD(vt, void (**)(void *, s32), 0xC)((u8 *)obj + M2C_FIELD(vt, s16 *, 8), 3);
-            }
-            it++;
-        } while (it != v2[1]);
+    for (it = M2C_FIELD(arg0, void ***, 8); it != WPBPtrVec_End((WPBPtrVec *)((u8 *)arg0 + 8)); it++) {
+        void *obj = *it;
+        void *vt = M2C_FIELD(obj, void **, 0x1C);
+        M2C_FIELD(vt, void (**)(void *), 0x1C)((u8 *)obj + M2C_FIELD(vt, s16 *, 0x18));
+        if (obj != NULL) {
+            vt = M2C_FIELD(obj, void **, 0x1C);
+            M2C_FIELD(vt, void (**)(void *, s32), 0xC)((u8 *)obj + M2C_FIELD(vt, s16 *, 8), 3);
+        }
     }
     M2C_FIELD(arg0, void ***, 0xC) = M2C_FIELD(arg0, void ***, 8);
 }
@@ -490,9 +483,9 @@ void fn_800CEDF8(void *arg0, s32 arg1) {
 void fn_800CEE00(void *arg0) {
     void fn_8000C218(s32);
     extern s32 lbl_8041FA1C[];
-    extern void *lbl_80494EB0;
-    extern void *lbl_80494EB4;
-    extern void *lbl_80494EB8;
+    extern s32 lbl_80494EB8;
+    extern s32 lbl_80494EB4;
+    extern s32 lbl_80494EB0;
     void ***vec;
     void **var_r30;
     void *temp_r31;
@@ -509,10 +502,10 @@ void fn_800CEE00(void *arg0) {
             M2C_FIELD(temp_r9_3, void (**)(void *, s32), 0xC)((char *)temp_r31 + M2C_FIELD(temp_r9_3, s16 *, 8), 3);
         }
     }
-    M2C_FIELD(arg0, void ***, 0x54) = M2C_FIELD(arg0, void ***, 0x50);
-    lbl_80494EB8 = NULL;
-    lbl_80494EB4 = NULL;
-    lbl_80494EB0 = NULL;
+    vec[1] = vec[0];
+    lbl_80494EB8 = 0;
+    lbl_80494EB4 = 0;
+    lbl_80494EB0 = 0;
     if (M2C_FIELD(arg0, s32 *, 0x4C) != 0) {
         fn_8000C218(lbl_8041FA1C[0]);
     }
