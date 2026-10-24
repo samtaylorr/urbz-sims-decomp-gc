@@ -7604,8 +7604,9 @@ void *fn_803BC324(void *self) {
 void fn_803BC354(u8 *p, s32 n) {
     while (--n != -1) {
         VtblEntry *vt = *(VtblEntry **)(p + 0xAC);
-        ((void (*)(void *, s32))vt[1].pfn)(p + vt[1].delta, 2);
+        u8 *q = p;
         p += 0xB0;
+        ((void (*)(void *, s32))vt[1].pfn)(q + vt[1].delta, 2);
     }
 }
 
