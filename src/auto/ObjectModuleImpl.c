@@ -206,6 +206,16 @@ void *fn_8014F83C(void *arg0, s32 arg1) {
     return NULL;
 }
 
+s32 fn_8014F894(s32 id, void **list) {
+    void *it;
+    for (it = *list; it != NULL; it = M2C_FIELD(it, void **, 8)) {
+        if (M2C_FIELD(it, s32 *, 0) == id) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
 void fn_8014FDD0(void) {
 
 }
