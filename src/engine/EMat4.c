@@ -152,6 +152,23 @@ s32 fn_802C6EAC(char **arg0, s32 arg1) {
     return -1;
 }
 
+s32 fn_802C6EEC(char **arg0, s32 arg1) {
+    s32 fn_802C7AAC(s32, s32);
+    char *p;
+    s32 i;
+
+    p = *arg0;
+    i = 0;
+    while (*p != 0) {
+        if (fn_802C7AAC(*p, arg1) != 0) {
+            return i;
+        }
+        p++;
+        i++;
+    }
+    return -1;
+}
+
 void fn_802C725C(u8 **arg0, s32 arg1, u8 arg2) {
     u8 *var_r3;
     u8 var_r0;
