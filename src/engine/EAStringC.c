@@ -223,6 +223,26 @@ s32 fn_80298FF4(void *arg0) {
     return n;
 }
 
+s32 fn_802999D4(void *arg0) {
+    extern s32 fn_802B70DC(void *);
+    extern s32 fn_802B72D4(void *);
+    s32 empty;
+    void *p;
+
+    empty = 0;
+    if (fn_802B70DC(arg0) == 0x13) {
+        empty = fn_802B72D4(arg0) == 0;
+    }
+    if (empty) {
+        return 0;
+    }
+    p = M2C_FIELD(arg0, void **, 0x50);
+    if (p != NULL && p != (void *)0xBAADF00D) {
+        return M2C_FIELD(p, s32 *, 0xC);
+    }
+    return 0;
+}
+
 void fn_80299A50(void *arg0) {
     extern s32 fn_802999D4(void *);
     fn_802999D4(arg0);
