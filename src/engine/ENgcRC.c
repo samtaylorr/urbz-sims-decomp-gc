@@ -429,16 +429,15 @@ s32 fn_80348420(s32 arg0, s32 arg1) {
     extern u8 lbl_8046B084[];
     extern s32 lbl_804962A0;
     extern s32 lbl_80495068;
-    void (*cb)(void);
+    s32 ok;
     s32 ret;
     if (arg1 != 0) {
-        cb = fn_8034862C;
+        ok = fn_80258CEC(lbl_80469D20, fn_8034862C, arg1, lbl_8046B038, 0x1000, arg0, 1);
     } else {
-        cb = fn_80348548;
-        arg1 = 0;
+        ok = fn_80258CEC(lbl_80469D20, fn_80348548, arg1, lbl_8046B038, 0x1000, arg0, 1);
     }
     ret = 0;
-    if (fn_80258CEC(lbl_80469D20, cb, arg1, lbl_8046B038, 0x1000, arg0, 1) != 0) {
+    if (ok != 0) {
         fn_8037A8D8(lbl_8046B038, lbl_8046B078, 3);
         fn_8037A8D8(lbl_8046B058, lbl_8046B084, 3);
         lbl_80495068 = 1;
@@ -744,6 +743,7 @@ void fn_803529FC(void *arg0, u8 *arg1) {
     s32 op;
     s32 idx;
     s32 d;
+    s32 adj;
 
     M2C_FIELD(arg0, u8 **, 0x4DC) = arg1;
     M2C_FIELD(arg0, s32 *, 0x4E0) = 0;
@@ -758,11 +758,9 @@ void fn_803529FC(void *arg0, u8 *arg1) {
         } else {
             fn = lbl_80401090[op].u.pfn;
         }
-        d = ent.delta + lbl_80401090[op].delta;
-        if (idx < 0) {
-            d = lbl_80401090[op].delta;
-        }
-        fn((u8 *) arg0 + d, pc);
+        d = lbl_80401090[op].delta;
+        adj = idx >= 0 ? ent.delta + d : d;
+        fn((u8 *) arg0 + adj, pc);
     } while (M2C_FIELD(arg0, s32 *, 0x4E0) == 0);
 }
 
