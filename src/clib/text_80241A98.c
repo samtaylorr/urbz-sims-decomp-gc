@@ -310,17 +310,17 @@ void fn_8024D474(char *arg0) {
     char *temp_r29;
 
     temp_r29 = arg0 + 0x1E4;
-    M2C_FIELD(arg0, void **, 0x3C) = fn_8024D784;
     M2C_FIELD(arg0, s32 *, 0x38) = 1;
+    M2C_FIELD(arg0, void **, 0x3C) = fn_8024D784;
     fn_8024D418(temp_r29, 4, 0, arg0);
     fn_8024D418(arg0 + 0x244, 9, 1, arg0);
     fn_8024D418(arg0 + 0x2A4, 0xA, 2, arg0);
+    M2C_FIELD(arg0, void **, 0x1D8) = &lbl_80440B04;
     M2C_FIELD(arg0, s32 *, 0x1DC) = 3;
     M2C_FIELD(arg0, void **, 0x1E0) = temp_r29;
-    M2C_FIELD(arg0, void **, 0x1D8) = &lbl_80440B04;
     lbl_80440B04.unk0 = 0;
-    lbl_80440B04.unk8 = lbl_80440744;
     lbl_80440B04.unk4 = 0xA;
+    lbl_80440B04.unk8 = lbl_80440744;
 }
 
 void fn_8024D754(s32 arg0, s32 arg1) {
