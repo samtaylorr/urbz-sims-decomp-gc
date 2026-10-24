@@ -414,6 +414,15 @@ void fn_8006D9D4(void *self, void *arg1) {
     fn_8006DBBC(self, M2C_FIELD(arg1, f32 *, 0xC8), M2C_FIELD(arg1, f32 *, 0xCC), M2C_FIELD(arg1, f32 *, 0xD0));
 }
 
+void fn_8006DBBC(void *self, f32 x, f32 y, f32 z) {
+    extern void fn_8006DC70(void *, s32, f32, f32, f32);
+    fn_8006DC70(self, 1, x, y, z);
+    fn_8006DC70(self, 2, x, y, z);
+    fn_8006DC70(self, 7, x, y, z);
+    fn_8006DC70(self, 0, x, y, z);
+    fn_8006DC70(self, 6, x, y, z);
+}
+
 extern s32 fn_802E0904(void *);
 extern s32 fn_802E091C(void *);
 extern void fn_8010CD4C(s32);
