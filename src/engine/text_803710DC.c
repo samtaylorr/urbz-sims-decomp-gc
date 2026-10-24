@@ -82,6 +82,12 @@ void fn_803711C0(void **arg0, s32 arg1) {
     }
 }
 
+void fn_8037121C(void *arg0) {
+    extern void *fn_802D0AB8();
+    fn_802D1A00(fn_802D0AB8(), M2C_FIELD(arg0, void **, 0x20));
+    M2C_FIELD(arg0, s32 *, 0x20) = 0;
+}
+
 void fn_80371258(void *self, void *stream) {
     extern void fn_8031E988(void *, void *);
     char *vt;
