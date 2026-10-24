@@ -276,10 +276,11 @@ s32 fn_802C7AAC(s32 a, s32 b) {
 extern s32 lbl_804935F0[];
 extern s32 lbl_80494DC0;
 void fn_802C7B28(s32 arg0, s32 arg1) {
-    s32 n = lbl_80494DC0;
-    lbl_804935F0[n * 2] = arg0;
-    lbl_804935F0[n * 2 + 1] = arg1;
-    lbl_80494DC0 = n + 1;
+    s32 *count = &lbl_80494DC0;
+    s32 *e = &lbl_804935F0[*count * 2];
+    e[0] = arg0;
+    e[1] = arg1;
+    *count += 1;
 }
 
 void *fn_802C7D1C(void *self) {
