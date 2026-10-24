@@ -7642,8 +7642,9 @@ void *fn_803BC458(void *self) {
 void fn_803BC488(u8 *p, s32 n) {
     while (--n != -1) {
         VtblEntry *vt = *(VtblEntry **)(p + 0x54);
-        ((void (*)(void *, s32))vt[1].pfn)(p + vt[1].delta, 2);
+        u8 *q = p;
         p += 0x58;
+        ((void (*)(void *, s32))vt[1].pfn)(q + vt[1].delta, 2);
     }
 }
 
