@@ -429,15 +429,20 @@ s32 fn_80348420(s32 arg0, s32 arg1) {
     extern u8 lbl_8046B084[];
     extern s32 lbl_804962A0;
     extern s32 lbl_80495068;
+    s32 ok;
     s32 ret;
-    if (fn_80258CEC(lbl_80469D20, arg1 ? fn_8034862C : fn_80348548, arg1, lbl_8046B038, 0x1000, arg0, 1) != 0) {
+    if (arg1 != 0) {
+        ok = fn_80258CEC(lbl_80469D20, fn_8034862C, arg1, lbl_8046B038, 0x1000, arg0, 1);
+    } else {
+        ok = fn_80258CEC(lbl_80469D20, fn_80348548, 0, lbl_8046B038, 0x1000, arg0, 1);
+    }
+    ret = 0;
+    if (ok != 0) {
         fn_8037A8D8(lbl_8046B038, lbl_8046B078, 3);
         fn_8037A8D8(lbl_8046B058, lbl_8046B084, 3);
-        lbl_804962A0 = 1;
         lbl_80495068 = 1;
+        lbl_804962A0 = 1;
         ret = 1;
-    } else {
-        ret = 0;
     }
     return ret;
 }
@@ -493,6 +498,7 @@ void fn_80348954(s32 arg0) {
 
 void fn_80348984(u8 *pads) {
     void fn_80348A2C(u8 *, u8 *, s32, f32, f32);
+    void fn_80348B8C(u8 *, u32, u8);
     extern f32 lbl_803F4320[];
     extern f32 lbl_803F4324[];
     extern f32 lbl_803F4328[];
@@ -707,6 +713,29 @@ void fn_8034F8BC(void) {
 void fn_8034F9CC(void *arg0) {
     M2C_UNK fn_8035C4A8(s32);
     fn_8035C4A8(M2C_FIELD(arg0, s32 *, 0x4D8));
+}
+
+void fn_803529FC(void *arg0, u8 *arg1) {
+    extern RCOpPtmf lbl_80401090[];
+    RCOpVtEnt ent;
+    RCOpFn fn;
+    u8 *pc;
+    s32 op;
+
+    M2C_FIELD(arg0, u8 **, 0x4DC) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x4E0) = 0;
+    do {
+        pc = M2C_FIELD(arg0, u8 **, 0x4DC);
+        M2C_FIELD(arg0, u8 **, 0x4DC) = pc + 8;
+        op = *pc;
+        if (lbl_80401090[op].index >= 0) {
+            ent = (*(RCOpVtEnt **) ((u8 *) arg0 + lbl_80401090[op].u.delta2))[lbl_80401090[op].index - 1];
+            fn = ent.fn;
+        } else {
+            fn = lbl_80401090[op].u.pfn;
+        }
+        fn((u8 *) arg0 + (lbl_80401090[op].index >= 0 ? ent.delta + lbl_80401090[op].delta : lbl_80401090[op].delta), pc);
+    } while (M2C_FIELD(arg0, s32 *, 0x4E0) == 0);
 }
 
 void fn_80352D04(void *arg0, void *arg1) {
