@@ -2532,14 +2532,15 @@ s32 fn_8022D1E8(s32 arg0) {
     s32 obj;
 
     item = fn_80224E3C(fn_80225544(), arg0);
-    if (item != 0) {
-        obj = fn_80014F30(fn_80014EE0(), arg0);
-        if (obj != 0) {
-            fn_80011F24(obj, fn_80224A28(item));
-            return 1;
-        }
+    if (item == 0) {
+        return 0;
     }
-    return 0;
+    obj = fn_80014F30(fn_80014EE0(), arg0);
+    if (obj == 0) {
+        return 0;
+    }
+    fn_80011F24(obj, fn_80224A28(item));
+    return 1;
 }
 
 s32 fn_8022D25C(s32 arg0) {
