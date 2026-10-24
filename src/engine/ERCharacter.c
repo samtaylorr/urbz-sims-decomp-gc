@@ -121,15 +121,43 @@ void fn_80317DAC(s32 arg0, char *arg1, s32 *arg2) {
     } while (arg1 != 0);
 }
 
+s32 fn_80317E3C(u8 *arg0) {
+    s32 ret = 0;
+    switch (fn_80317514(arg0)) {
+    case 1:
+        ret = (arg0[4] << 8) | arg0[5];
+        break;
+    case 2:
+    case 3:
+        ret = (arg0[8] << 24) | (arg0[9] << 16) | (arg0[10] << 8) | arg0[11];
+        break;
+    }
+    return ret;
+}
+
+char *fn_80317EC4(s32 arg0, s32 arg1, char *buf) {
+    void fn_80248784(char *, char *);
+    s32 s = fn_80317B98(arg0, 0, arg1, 0, 0);
+    if (s == 0) {
+        *buf = 0;
+        return NULL;
+    }
+    fn_80248784(buf, (char *)s);
+    return buf;
+}
+
 void fn_80317F84(void) {
     extern s16 *lbl_80496210;
     extern s16 *lbl_80496214;
+    s16 *p;
     s32 i;
+    p = lbl_80496210 + 0x1001;
     for (i = 0; i < 0x100; i++) {
-        lbl_80496210[0x1001 + i] = 0x1000;
+        *p++ = 0x1000;
     }
-    for (i = 0xFFF; i >= 0; i--) {
-        lbl_80496214[i] = 0x1000;
+    p = lbl_80496214 + 0xFFF;
+    for (i = 0; i < 0x1000; i++) {
+        *p-- = 0x1000;
     }
 }
 
