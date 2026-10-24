@@ -156,13 +156,15 @@ M2C_UNK fn_801D80E8(void **arg0, void *arg1p) {
     if (list->tail == node) {
         list->tail = node->prev;
     }
-    node->next = NULL;
     node->prev = NULL;
-    if (list->free != NULL) {
+    node->next = NULL;
+    if (list->free == NULL) {
+        list->free = node;
+    } else {
         node->next = list->free;
         list->free->prev = node;
+        list->free = node;
     }
-    list->free = node;
     list->free->unk8 = 0;
     list->free->unkC = 0;
     list->free->unk10 = 0;
