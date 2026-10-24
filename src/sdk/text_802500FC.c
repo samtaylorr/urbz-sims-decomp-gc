@@ -787,7 +787,11 @@ s32 fn_802655AC(s32 enable) {
     s32 old;
 
     enabled = fn_8025465C();
-    old = lbl_80495F28 ? 1 : 0;
+    if (lbl_80495F28 != NULL) {
+        old = 1;
+    } else {
+        old = 0;
+    }
     lbl_80495F28 = enable ? fn_80265520 : NULL;
     fn_80254684(enabled);
     return old;
