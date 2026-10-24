@@ -320,6 +320,15 @@ void fn_800CD910(f32 farg0) {
     M2C_FIELD(temp_r9, M2C_UNK (**)(void *, f32), 0x8C)(temp_r3 + M2C_FIELD(temp_r9, s16 *, 0x88), farg0);
 }
 
+M2C_UNK fn_800CD958(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    void *fn_800CD660(void *, s32, s32);
+    void *temp_r30;
+
+    temp_r30 = fn_800CD660(arg0, arg1, arg2);
+    fn_800CD09C(temp_r30);
+    fn_800CD05C(temp_r30, arg3);
+}
+
 s32 fn_800CD998(void) {
     void *fn_800CD660();
     return M2C_FIELD(fn_800CD660(), s32 *, 0x20);
@@ -406,11 +415,9 @@ void fn_800CDCA4(void *arg0) {
 }
 
 void fn_800CDCE4(void *arg0) {
-    void ***vec;
     void **it;
 
-    vec = (void ***)((u8 *)arg0 + 8);
-    for (it = vec[0]; it != vec[1]; it++) {
+    for (it = M2C_FIELD(arg0, void ***, 8); it != M2C_FIELD(arg0, void ***, 0xC); it++) {
         void *obj = *it;
         void *vt = M2C_FIELD(obj, void **, 0x1C);
         M2C_FIELD(vt, void (**)(void *), 0x1C)((u8 *)obj + M2C_FIELD(vt, s16 *, 0x18));
