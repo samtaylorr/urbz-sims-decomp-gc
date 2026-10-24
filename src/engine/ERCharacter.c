@@ -345,6 +345,20 @@ void *fn_8031B7A8(void *arg0) {
     return arg0;
 }
 
+void fn_8031B7EC(void *self, s32 flags) {
+    extern u8 lbl_8041B298[];
+    extern void fn_803BB98C(void *, s32);
+    extern void fn_8031E910(void *, s32);
+    void fn_80338184(void *, s32);
+    extern u8 lbl_8045B390[];
+    *(u8 **)self = lbl_8041B298;
+    fn_803BB98C((u8 *)self + 0x20, 2);
+    fn_8031E910(self, 0);
+    if (flags & 1) {
+        fn_80338184(lbl_8045B390, (s32)self);
+    }
+}
+
 s32 fn_8031BAD4(u8 *self, s32 arg1) {
     s32 fn_802D3EE8(void *, s32);
     s32 i;
