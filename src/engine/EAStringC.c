@@ -156,6 +156,26 @@ void fn_80298360(void) {
     lbl_80443310[0]();
 }
 
+s32 fn_80298FF4(void *arg0);
+s32 fn_80298F64(void *arg0, void *arg1) {
+    extern s32 fn_80299018(void *, s32);
+    s32 n;
+    s32 i;
+    s32 v;
+
+    n = fn_80298FF4(arg0);
+    if (arg0 == arg1 || n == 0) {
+        return 0;
+    }
+    for (i = 1; i <= n; i++) {
+        v = fn_80299018(arg0, i);
+        if (v > fn_80299018(arg1, i)) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
 void fn_80299A50(void) {
     fn_802999D4();
 }
