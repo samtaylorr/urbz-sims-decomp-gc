@@ -42,8 +42,8 @@ void *fn_8018F8C0(void *arg0) {
 void fn_8018F914(void *arg0, s32 arg1) {
     void fn_8018F884(void *);
     void fn_802D20E8(void *);
-    extern M2C_UNK lbl_804140F8;
-    M2C_FIELD(arg0, M2C_UNK **, 0x10) = &lbl_804140F8;
+    extern u8 lbl_804140F8[];
+    M2C_FIELD(arg0, u8 **, 0x10) = lbl_804140F8;
     fn_8018F884(arg0);
     if (arg1 & 1) {
         fn_802D20E8(arg0);
