@@ -448,6 +448,23 @@ s32 fn_802D4298(char **arg0, char *arg1, s32 arg2) {
     return p != 0 ? p - *arg0 : -1;
 }
 
+s32 fn_802D42F8(char **arg0, s32 arg1) {
+    s32 fn_802D4F48(s32, s32);
+    char *p;
+    s32 i;
+
+    p = *arg0;
+    i = 0;
+    while (*p != 0) {
+        if (fn_802D4F48(*p, arg1) != 0) {
+            return i;
+        }
+        p++;
+        i++;
+    }
+    return -1;
+}
+
 s32 fn_802D4364(char **arg0, char *arg1, s32 arg2) {
     char *fn_80248B28(char *, char *);
     char *p;
