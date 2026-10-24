@@ -1222,6 +1222,11 @@ void fn_802B3BD0(void *arg0) {
     }
 }
 
+void *fn_802B3C24(s32 size) {
+    extern void *(*lbl_80443310[])(s32);
+    return lbl_80443310[0](size);
+}
+
 extern void (*lbl_80443314[])(void);
 void fn_802B3CA8(void) {
     lbl_80443314[0]();
