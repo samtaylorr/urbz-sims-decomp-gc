@@ -268,7 +268,7 @@ void fn_80365E6C(void *arg0, s32 arg1, s32 arg2, void *arg3, s32 arg4) {
 s32 fn_80365F8C(void *arg0, s32 arg1) {
     extern void *fn_80366168(void *, s32, s32);
     extern void fn_80366028(void *, s32, void *);
-    s32 bucketCount = M2C_FIELD(arg0, s32 *, 0xC);
+    unsigned int bucketCount = M2C_FIELD(arg0, s32 *, 0xC);
     s32 index = arg1 % bucketCount;
     void *node = fn_80366168(arg0, index, arg1);
     if (node == NULL) return 0;
