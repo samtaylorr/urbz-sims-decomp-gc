@@ -1065,6 +1065,21 @@ void fn_8008C3A8(void *arg0) {
     M2C_FIELD(arg0, f32 *, 0x5C) = lbl_803CC224[0] / M2C_FIELD(arg0, f32 *, 0x28);
 }
 
+void fn_8008C3C0(s32 arg0, s32 arg1) {
+    extern void fn_8008C1D8(void *);
+    extern s32 lbl_80409BE0;
+    extern s32 lbl_8042EF54;
+    extern void *lbl_8042EFB4;
+
+    if (arg1 == 0xFFFF) {
+        if (arg0 != 0) {
+            fn_8008C1D8(&lbl_8042EF54);
+        } else {
+            lbl_8042EFB4 = &lbl_80409BE0;
+        }
+    }
+}
+
 void fn_8008C414(void) {
     void fn_8008C3C0(s32, s32);
     fn_8008C3C0(1, 0xFFFF);
