@@ -328,6 +328,12 @@ void *fn_800F1B80(void *arg0, const char *arg1) {
     return arg0;
 }
 
+void *fn_800F1CC4(void *arg0, void **arg1) {
+    extern void fn_800F07C4(void *);
+    ((void (*)(void *, u16 *, s32))fn_800F07C4)(arg0, BString2_Data(arg1), fn_800F4878(arg1));
+    return arg0;
+}
+
 extern void fn_800F07C4(void *);
 void *fn_800F1FA8(void *self) {
     fn_800F07C4(self);
