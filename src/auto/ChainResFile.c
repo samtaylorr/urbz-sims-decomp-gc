@@ -352,12 +352,24 @@ s32 fn_801056A4(void *arg0, void *arg1) {
     return var_r11;
 }
 
+s8 *fn_80105868(s8 *self, s32 k, s8 *src) {
+    fn_80105574(self, k * src[0], k * src[1], src[2]);
+    return self;
+}
+
 s32 fn_801058BC(void *arg0) {
     return (s8) M2C_FIELD(arg0, u8 *, 0) + (s8) M2C_FIELD(arg0, u8 *, 1);
 }
 
 s32 fn_801058D4(void *arg0) {
     return (s8) M2C_FIELD(arg0, u8 *, 0) - (s8) M2C_FIELD(arg0, u8 *, 1);
+}
+
+s32 fn_801058EC(void *arg0, void *arg1) {
+    if (fn_801058BC(arg0) != fn_801058BC(arg1)) {
+        return fn_801058BC(arg0) < fn_801058BC(arg1);
+    }
+    return fn_801058D4(arg0) < fn_801058D4(arg1);
 }
 
 s32 fn_80105968(void *arg0, void *arg1) {
