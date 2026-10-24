@@ -616,6 +616,35 @@ M2C_UNK fn_801D8E24(void **arg0, s32 arg1, s32 arg2) {
     node[3] = (void *)arg2;
 }
 
+s32 fn_801D8E88(void **arg0, void *arg1) {
+    INVNodeList *list = (INVNodeList *)arg0;
+    INVNode *node = arg1;
+
+    if (node->prev != NULL) {
+        node->prev->next = node->next;
+    }
+    if (node->next != NULL) {
+        node->next->prev = node->prev;
+    }
+    if (list->head == node) {
+        list->head = node->next;
+    }
+    if (list->tail == node) {
+        list->tail = node->prev;
+    }
+    node->prev = NULL;
+    node->next = NULL;
+    if (list->free == NULL) {
+        list->free = node;
+    } else {
+        node->next = list->free;
+        list->free->prev = node;
+        list->free = node;
+    }
+    list->free->unk8 = 0;
+    list->free->unkC = 0;
+}
+
 s32 fn_801D8F18(void **arg0, s32 arg1, s32 arg2) {
     s32 fn_802486DC(s32, s32);
     M2C_UNK fn_801D8E24(void **, s32, s32);
