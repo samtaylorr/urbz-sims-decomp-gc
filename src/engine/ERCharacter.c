@@ -123,13 +123,15 @@ void fn_80317DAC(s32 arg0, char *arg1, s32 *arg2) {
 
 s32 fn_80317E3C(u8 *arg0) {
     s32 ret = 0;
+    u8 *q;
     switch (fn_80317514(arg0)) {
     case 1:
         ret = (arg0[4] << 8) | arg0[5];
         break;
     case 2:
     case 3:
-        ret = (arg0[8] << 24) | (arg0[9] << 16) | (arg0[10] << 8) | arg0[11];
+        q = arg0 + 8;
+        ret = (q[0] << 24) | (q[1] << 16) | (q[2] << 8) | q[3];
         break;
     }
     return ret;
