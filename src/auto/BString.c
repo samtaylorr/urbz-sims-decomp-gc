@@ -4008,6 +4008,11 @@ s32 fn_800EF664(s32 arg0, s32 arg1) {
     return fn_800EEFC4(arg0, arg1, 0, -1) == 0;
 }
 
+s32 fn_800EF694(s32 arg0, s32 arg1) {
+    s32 fn_800EEFC4(s32, s32, s32, s32);
+    return fn_800EEFC4(arg0, arg1, 0, -1) != 0;
+}
+
 s32 fn_800EF6CC(s32 arg0, s32 arg1) {
     return (u32)fn_800EEFC4(arg0, arg1, 0, -1) >> 31;
 }
