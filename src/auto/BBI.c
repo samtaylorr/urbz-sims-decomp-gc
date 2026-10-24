@@ -850,6 +850,24 @@ void fn_80063AFC(void *arg0, void *arg1) {
     }
 }
 
+s32 fn_80063E00(char *obj) {
+    s32 ret = 0;
+
+    if (obj != NULL) {
+        char *vt = *(char **)(obj + 4);
+        if ((*(char *(**)(void *))(vt + 0x2D4))(obj + *(s16 *)(vt + 0x2D0)) != NULL) {
+            vt = *(char **)(obj + 4);
+            if (*(char **)((*(char *(**)(void *))(vt + 0x2D4))(obj + *(s16 *)(vt + 0x2D0)) + 0xC0) != NULL) {
+                vt = *(char **)(obj + 4);
+                if (*(u8 *)(*(char **)((*(char *(**)(void *))(vt + 0x2D4))(obj + *(s16 *)(vt + 0x2D0)) + 0xC0) + 7) != 0) {
+                    ret = 1;
+                }
+            }
+        }
+    }
+    return ret;
+}
+
 void fn_80063EA4(void) {
     M2C_UNK fn_80062EBC(M2C_UNK, M2C_UNK);
     fn_80062EBC(1, 0xFFFF);
