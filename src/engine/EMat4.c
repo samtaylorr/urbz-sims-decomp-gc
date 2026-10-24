@@ -248,7 +248,7 @@ void fn_802CAA50(char *self, s32 a, s32 b, s32 c) {
     (*(void (**)(char *, s32))(vt + 0x14))(self + *(s16 *)(vt + 0x10), c);
 }
 
-void fn_802CAA88(s32 arg0) {
+void fn_802CAA88(s32 arg0, s32 arg1) {
     M2C_UNK fn_802D8334(s32);
     fn_802D8334(arg0 + 4);
 }
