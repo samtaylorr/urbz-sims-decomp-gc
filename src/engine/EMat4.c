@@ -203,6 +203,21 @@ void fn_802C725C(u8 **arg0, s32 arg1, u8 arg2) {
     }
 }
 
+void fn_802C728C(char **arg0, char **arg1, s32 arg2) {
+    if (fn_802C6EAC(arg0, arg2) != -1) {
+        char *src = *arg0;
+        char *dst = *arg1;
+        while (*src != 0) {
+            if ((s8)*src != arg2) {
+                *dst++ = *src;
+            }
+            src++;
+        }
+        *dst = 0;
+        fn_802C69B0(arg0, *arg1);
+    }
+}
+
 char **fn_802C7874(char **arg0, s32 arg1) {
     M2C_UNK fn_802C69B0(s32, s32);
     char *p;
@@ -511,6 +526,22 @@ void *fn_802CAE18(void *arg0) {
     return arg0;
 }
 
+void fn_802CAE6C(void *arg0, s32 arg1) {
+    extern char lbl_804193D0[];
+    void fn_803B9648(void *, s32);
+    void fn_802D20E8(void *);
+    M2C_FIELD(arg0, char **, 0x54) = lbl_804193D0;
+    fn_803B9648((u8 *)arg0 + 0x48, 2);
+    if (arg1 & 1) fn_802D20E8(arg0);
+}
+
+void *fn_802CB22C(void *arg0, void *arg1) {
+    s16 offset = *(s16 *)(*(u8 **)arg1 + 0x20);
+    void (*func)(void *, void *) = *(void (**)(void *, void *))(*(u8 **)arg1 + 0x24);
+    func((u8 *)arg1 + offset, arg0);
+    return arg0;
+}
+
 void fn_802CB4E4(void *arg0, void *arg1) {
     M2C_UNK fn_80248A10(void *, void *, s32);
     fn_80248A10(arg0, arg1, 0x40);
@@ -741,6 +772,15 @@ void *fn_802CCDC8(void *arg0, u32 arg1) {
     return var_r3;
 }
 
+s32 fn_802CD218(void *self, s32 key) {
+    void *node = fn_802CD440(self, key, 0);
+    if (node != NULL) {
+        fn_802CD260(self, node);
+        return 1;
+    }
+    return 0;
+}
+
 EMat4Node *fn_802CD498(void *self, s32 key, s32 *out) {
     EMat4Node *fn_802CD440(void *, s32, s32);
     char *n;
@@ -817,10 +857,8 @@ s32 fn_802CD600(void **arg0) {
 
 void *fn_802CD66C(void *self, EMat4Node **other, s32 overwrite);
 void *fn_802CD628(EMat4Node **self, EMat4Node **other) {
-    EMat4Node **src = other;
-
     fn_802CD53C(self);
-    fn_802CD66C(self, src, 1);
+    fn_802CD66C(self, other, 1);
     return self;
 }
 
@@ -872,6 +910,15 @@ void fn_802CD7B0(void *arg0, s32 flags) {
     fn_802CD800(arg0);
     if (flags & 1) {
         fn_802D1A00(((void *(*)(void))fn_802D0AB8)(), arg0);
+    }
+}
+
+void fn_802CD800(void *self) {
+    void **p = (void **)self;
+    if (p[0x108c / 4] != NULL) {
+        ((void (*)(void))p[0x1084 / 4])();
+        p[0x108c / 4] = NULL;
+        *(u16 *)((u8 *)self + 0x108a) = 1;
     }
 }
 
