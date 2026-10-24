@@ -995,8 +995,17 @@ void fn_8008C388(void) {
     fn_8008C3A8();
 }
 
+void fn_8008C3A8(void *arg0) {
+    extern f32 lbl_803CC224[];
+    M2C_FIELD(arg0, f32 *, 0x5C) = lbl_803CC224[0] / M2C_FIELD(arg0, f32 *, 0x28);
+}
+
 void fn_8008C414(void) {
     M2C_UNK fn_8008C3C0(M2C_UNK, M2C_UNK);
     fn_8008C3C0(1, 0xFFFF);
+}
+
+void fn_8008C440(void) {
+    fn_8008C3C0(0, 0xFFFF);
 }
 
