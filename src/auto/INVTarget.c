@@ -2288,8 +2288,8 @@ void fn_8022D168(s32 arg0) {
 
 s32 fn_8022D19C(s32 arg0) {
     extern s32 fn_800120DC(s32);
-    extern s32 lbl_8041F94C[];
-    s32 p = lbl_8041F94C[0x58 + arg0];
+    extern struct { u8 pad[0x160]; s32 v[1]; } lbl_8041F94C;
+    s32 p = lbl_8041F94C.v[arg0];
     if (p != 0 && fn_800120DC(p) != 0) {
         return 1;
     }
