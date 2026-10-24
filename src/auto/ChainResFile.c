@@ -458,17 +458,19 @@ s32 fn_80105AC4(void *arg0, void *arg1) {
 }
 
 S32Pair fn_80105B10(s8 *arg1) {
-    S32Pair r = { arg1[0], arg1[1] };
+    S32Pair r;
+    s32 y = arg1[1];
+    s32 x = arg1[0];
+    r.b = y;
+    r.a = x;
     return r;
 }
 
 S32Pair fn_80105B30(s8 *arg1) {
-    S32Pair t;
-    S32Pair r;
-    t.a = (arg1[1] << 4) | 8;
-    t.b = (arg1[0] << 4) | 8;
-    r = t;
-    return r;
+    s32 t[2];
+    t[1] = (arg1[0] << 4) | 8;
+    t[0] = (arg1[1] << 4) | 8;
+    return *(S32Pair *)t;
 }
 
 s8 fn_80105B78(u8 *arg0) {
