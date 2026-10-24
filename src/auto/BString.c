@@ -1071,10 +1071,12 @@ void fn_800D72A8(s32 *self, s32 arg1) {
     fn_803349A8(lbl_8045B438, arg1);
 }
 
-void fn_800D72D4(s32 *self) {
-    if (SoundIsDone(self[6])) {
+s32 fn_800D72D4(s32 *self) {
+    s32 done = SoundIsDone(self[6]);
+    if (done) {
         self[6] = 0;
     }
+    return done;
 }
 
 void fn_800D732C(s32 *self) {
