@@ -280,6 +280,17 @@ f32 fn_80334A58(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0xA8);
 }
 
+void *fn_80334A60(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    void *fn_80371B64(void *);
+    void fn_80371C74(void *, s32, s32);
+    void *obj;
+
+    obj = fn_80371B64(Heap_Alloc(0x2C));
+    *(s32 *)((u8 *)obj + 8) = arg3;
+    fn_80371C74(obj, arg1, arg2);
+    return obj;
+}
+
 void fn_80334B04(void *arg0, f32 farg0) {
     M2C_FIELD(arg0, f32 *, 0xA8) = farg0;
 }
