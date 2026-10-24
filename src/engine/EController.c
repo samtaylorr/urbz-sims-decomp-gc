@@ -240,6 +240,11 @@ void fn_8031202C(void *arg0, s32 arg1, s32 arg2) {
     fn_80311404(arg0, arg1, a, fn_80311A4C(arg0, arg2), 1);
 }
 
+void fn_8031208C(void *arg0, s32 arg1, s32 arg2) {
+    s32 a = fn_80311ABC(arg0, arg2);
+    fn_80311404(arg0, arg1, a, fn_80311A4C(arg0, arg2), 1);
+}
+
 void fn_803120EC(void *arg0, s32 arg1, s32 arg2) {
     s32 a = fn_80311AF4(arg0, arg2);
     fn_80311404(arg0, arg1, a, fn_80311A84(arg0, arg2), 1);
