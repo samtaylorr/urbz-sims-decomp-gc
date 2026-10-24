@@ -2,6 +2,20 @@
 #include "common.h"
 
 void fn_802FB604(void);
+typedef void (*RCOpFn)(void *, u8 *);
+typedef struct {
+    s16 delta;
+    s16 index;
+    union {
+        RCOpFn pfn;
+        s16 delta2;
+    } u;
+} RCOpPtmf;
+typedef struct {
+    s16 delta;
+    s16 pad;
+    RCOpFn fn;
+} RCOpVtEnt;
 extern s32 lbl_80495198;
 extern s32 lbl_8049519C;
 extern s32 lbl_80495120;
