@@ -25,3 +25,13 @@ char *fn_8023EAB8(void) {
     return lbl_80436A68;
 }
 
+char *fn_8023EB00(void) {
+    int fn_80245BB4(char *, const char *, ...);
+    extern const char lbl_803EB9EC[];
+    extern const char lbl_803EBA00[];
+    extern char lbl_80436A68[];
+
+    fn_80245BB4(lbl_80436A68, lbl_803EB9EC, lbl_803EBA00);
+    return lbl_80436A68;
+}
+
