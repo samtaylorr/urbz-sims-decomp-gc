@@ -1066,7 +1066,7 @@ void fn_8008C3A8(void *arg0) {
 }
 
 void fn_8008C414(void) {
-    M2C_UNK fn_8008C3C0(M2C_UNK, M2C_UNK);
+    void fn_8008C3C0(s32, s32);
     fn_8008C3C0(1, 0xFFFF);
 }
 
