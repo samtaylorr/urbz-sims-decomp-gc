@@ -1130,12 +1130,12 @@ void fn_801F060C(void *arg0, s32 arg1) {
     void fn_8004384C(void);
     extern u8 *lbl_80494630;
     extern char lbl_803E2FF0[];
-    extern f32 lbl_803E300C;
+    extern f32 lbl_803E300C[];
     fn_80245C94(arg1, lbl_803E2FF0, lbl_80494630 + 0x98);
     if (*(s32 *)(lbl_80494630 + 0x98) == 1) {
-        fn_800439BC(lbl_803E300C);
-        fn_80043A58(lbl_803E300C);
-        fn_80043950(lbl_803E300C);
+        fn_800439BC(lbl_803E300C[0]);
+        fn_80043A58(lbl_803E300C[0]);
+        fn_80043950(lbl_803E300C[0]);
         fn_8004384C();
     }
 }
@@ -1555,6 +1555,29 @@ void fn_801F83C0(void) {
 
 void fn_801F83C4(void) {
 
+}
+
+void fn_801F9594(s32 arg0, s32 arg1) {
+    fn_801F9614(arg0, arg1);
+    fn_801E13BC((void *)(arg0 + ((arg1 * 0x124) + 0x734)));
+}
+
+s32 fn_801F8708(s32, s32);
+void fn_801E1338(s32, s32, s32, s32, s32, s32, s32);
+void fn_801E1254(s32, s32, s32, s32, s32);
+s32 fn_801F9614(s32 arg0, s32 arg1) {
+    s32 ret = 0;
+    if (!(fn_801F55E0(*(u8 *)(arg0 + 0xEF + arg1)) & 2)) {
+        u8 *p = (u8 *)(arg1 * 0x124 + arg0 + 0x734);
+        s32 ok = 0;
+        if (*(s32 *)(p + 8) != 0) {
+            ok = *(u8 *)(p + 0x69) == 1;
+        }
+        if (ok && fn_801F8708(arg0, arg1) != 0) {
+            ret = 1;
+        }
+    }
+    return ret;
 }
 
 void fn_801F9D38(s32 arg0) {
@@ -2232,6 +2255,16 @@ void fn_8022D168(s32 arg0) {
     fn_80232298(fn_8022554C(), arg0);
 }
 
+s32 fn_8022D19C(s32 arg0) {
+    extern s32 fn_800120DC(s32);
+    extern s32 lbl_8041F94C[];
+    s32 p = lbl_8041F94C[0x58 + arg0];
+    if (p != 0 && fn_800120DC(p) != 0) {
+        return 1;
+    }
+    return 0;
+}
+
 void fn_8022D8C4(void *arg0) {
     M2C_UNK fn_802D20E8(s32);
     fn_802D20E8(M2C_FIELD(arg0, s32 *, 0));
@@ -2247,6 +2280,14 @@ void fn_8022DA50(void) {
 
 void fn_8022E84C(void) {
     fn_802320F8();
+}
+
+void fn_8002B86C(s32, void *);
+extern s32 lbl_8041FA38;
+void fn_8022E86C(void **arg0, s32 *arg1) {
+    M2C_FIELD(arg0[*arg1], s32 *, 0x18) = *arg1;
+    M2C_FIELD(arg0[*arg1], void **, 0x8) = (u8 *)arg1 + 8;
+    fn_8002B86C(lbl_8041FA38, arg0[*arg1]);
 }
 
 void fn_8022F404(void) {
