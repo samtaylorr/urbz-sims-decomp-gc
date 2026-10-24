@@ -2757,6 +2757,14 @@ void fn_803AB624(void) {
     fn_8018EA6C();
 }
 
+void fn_803AB644(void *arg0, s32 arg1, s32 arg2) {
+    void fn_803AB52C(s32 *, s32, s32, s32);
+    s32 *temp_r3;
+
+    temp_r3 = *M2C_FIELD(arg0, s32 **, 4);
+    fn_803AB52C(temp_r3, *temp_r3, arg1, arg2);
+}
+
 s32 fn_803AB678(s32 *self) {
     return self[2];
 }
