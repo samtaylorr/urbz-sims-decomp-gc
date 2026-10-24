@@ -68,8 +68,8 @@ void fn_8018F99C(s32 *arg0, const char *name) {
     s32 hash = 0;
     s32 shift = 0;
     s32 *it;
-    char c;
-    for (c = *name; c != 0; c = *++name) {
+    for (; *name != 0; name++) {
+        char c = *name;
         if ((u32)(c - 'a') <= 25) {
             c -= 0x20;
         }
