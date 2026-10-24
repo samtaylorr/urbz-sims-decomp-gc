@@ -390,6 +390,7 @@ void fn_8006CD40(void) {
 s32 fn_8006D704(void *self, s32 arg1) {
     extern char *lbl_8049665C;
     extern f32 lbl_803C940C[];
+    extern s32 fn_8006D798(void *);
     char *vt;
     s32 n;
 
@@ -397,12 +398,12 @@ s32 fn_8006D704(void *self, s32 arg1) {
         return 0;
     }
     fn_8006D798(self);
-    if (M2C_FIELD(self, f32 *, 0x8) < lbl_803C940C[0]) {
-        vt = *(char **)lbl_8049665C;
-        n = (*(s32 (**)(char *, s32))(vt + 0x194))(lbl_8049665C + *(s16 *)(vt + 0x190), arg1);
-        return (u32)(M2C_FIELD(self, s32 *, 0x48) + n) <= (u32)M2C_FIELD(self, s32 *, 0x4C);
+    if (M2C_FIELD(self, f32 *, 0x8) >= lbl_803C940C[0]) {
+        return 0;
     }
-    return 0;
+    vt = *(char **)lbl_8049665C;
+    n = (*(s32 (**)(char *, s32))(vt + 0x194))(lbl_8049665C + *(s16 *)(vt + 0x190), arg1);
+    return (u32)(M2C_FIELD(self, s32 *, 0x48) + n) <= (u32)M2C_FIELD(self, s32 *, 0x4C);
 }
 
 void fn_8006D998(void) {
