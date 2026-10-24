@@ -1782,6 +1782,13 @@ void fn_800E0E00(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x18) = 0;
 }
 
+void fn_800E0E34(s32 *self) {
+    void fn_800C6958(s32);
+    if (((s32 *)self[2])[0x94 / 4] != 0) {
+        fn_800C6958(((s32 *)self[2])[0x94 / 4]);
+    }
+}
+
 void fn_800E1868(void) {
     fn_800E3BC0();
 }
@@ -3705,6 +3712,10 @@ s32 fn_800EB524(s32 arg0, s32 arg1) {
 
 s32 fn_800EB554(s32 arg0, s32 arg1) {
     return fn_800EB2DC(arg1, arg0) ^ 1;
+}
+
+s32 fn_800EB584(s32 arg0, s32 arg1) {
+    return fn_800EB31C(arg1, arg0) ^ 1;
 }
 
 s32 fn_800EB5B4(void) {
