@@ -1,6 +1,11 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+static inline void ObjSelector_ClearPair(s32 *p) {
+    p[0] = 0;
+    p[1] = 0;
+}
+
 void *fn_8016C00C(void *arg0, s32 arg1, u32 arg2) {
     M2C_UNK fn_8016C0B8(void *);
     s32 fn_802D2058(s32);
@@ -184,7 +189,6 @@ void fn_8016C894(void) {
 
 void *fn_8016C8BC(void *arg0) {
     void fn_801B3918(void *);
-    s32 *p;
     M2C_FIELD(arg0, s32 *, 0xC) = 0;
     M2C_FIELD(arg0, s32 *, 4) = -1;
     M2C_FIELD(arg0, s32 *, 8) = -1;
@@ -193,9 +197,7 @@ void *fn_8016C8BC(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x3C) = 0;
     M2C_FIELD(arg0, s32 *, 0x50) = 0;
     M2C_FIELD(arg0, s32 *, 0x54) = 0;
-    p = (s32 *)((char *)arg0 + 0x58);
-    p[0] = 0;
-    p[1] = 0;
+    M2C_FIELD(arg0, s64 *, 0x58) = 0;
     M2C_FIELD(arg0, s32 *, 0x78) = -1;
     M2C_FIELD(arg0, s32 *, 0x7C) = 0xFFFF0000;
     M2C_FIELD(arg0, s32 *, 0x4C) = 0;
