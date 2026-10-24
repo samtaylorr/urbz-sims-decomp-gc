@@ -49,6 +49,21 @@ M2C_UNK *fn_80177154(void) {
     return &lbl_80495CA0;
 }
 
+void fn_8017E10C(void) {
+    void fn_802D20E8(void *);
+    void fn_803997AC(void *, u32);
+    extern u8 lbl_80435188[];
+    u8 *p = *(u8 **)lbl_80435188;
+    if (p != NULL) {
+        u32 size = (*(u32 *)(lbl_80435188 + 0xC) - (u32)p) & ~3;
+        if (size > 0x80) {
+            fn_802D20E8(p);
+        } else {
+            fn_803997AC(p, size);
+        }
+    }
+}
+
 s32 fn_80181314(void) {
     return 0x50455253;
 }
@@ -72,8 +87,61 @@ s32 fn_80181A20(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x5FC) ^ 1;
 }
 
+void *fn_801820BC(void *arg0, s32 arg1, s32 arg2) {
+    void *list;
+    u32 index;
+    if (arg2 == 0 && M2C_FIELD(arg0, s32 *, 0x5FC) != 0) {
+        arg1 = arg1 + 1;
+        if (arg1 >= 0) {
+            list = arg0 + 0x130;
+            if ((u32)arg1 < (u32)(M2C_FIELD(list, u32 *, 0x374) - M2C_FIELD(list, u32 *, 0x370))) {
+                index = M2C_FIELD(list, u32 *, 0x370) + arg1;
+                return list + ((index % 10U) * 0x58);
+            }
+        }
+    }
+    return 0;
+}
+
+void *fn_80182124(void *arg0) {
+    extern s32 lbl_804352C0;
+    register void *list;
+    register u32 index;
+    if (M2C_FIELD(arg0, s32 *, 0x5FC) == 0) return &lbl_804352C0;
+    list = arg0 + 0x130;
+    index = M2C_FIELD(list, u32 *, 0x370);
+    return list + ((index % 10U) * 0x58);
+}
+
+void *fn_80182168(void *arg0) {
+    void *fn_80117474(void *);
+    void *list;
+    u32 index;
+    if (M2C_FIELD(arg0, s32 *, 0x5FC) != 0) return 0;
+    list = arg0 + 0x130;
+    index = M2C_FIELD(list, u32 *, 0x370);
+    return fn_80117474(list + ((index % 10U) * 0x58));
+}
+
 void fn_80182220(void) {
 
+}
+
+s32 fn_80182358(void *arg0, void *arg1) {
+    void *vec = arg0 + 0x4E8;
+    void **it = M2C_FIELD(vec, void **, 0);
+    void **end = M2C_FIELD(vec, void **, 4);
+    s16 wanted = M2C_FIELD(arg1, s16 *, 4);
+    while (it != end) {
+        void *p0 = *it;
+        void *p1 = M2C_FIELD(p0, void **, 4);
+        void *p2 = M2C_FIELD(p1, void **, 4);
+        s16 off = M2C_FIELD(p2, s16 *, 0x2E8);
+        void *fn = M2C_FIELD(p2, void **, 0x2EC);
+        if (((s16 (*)(void *))fn)(p1 + off) == wanted) return 1;
+        it = (void **)((u8 *)it + 0xC);
+    }
+    return 0;
 }
 
 void fn_80183830(void *arg0) {
