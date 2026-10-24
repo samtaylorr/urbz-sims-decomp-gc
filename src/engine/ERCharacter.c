@@ -337,10 +337,9 @@ void fn_8031BB5C(s32 arg0, s32 arg1) {
 }
 
 void fn_8031BBCC(void) {
-    M2C_UNK fn_8031B7A8();
-    M2C_UNK fn_8031BD40(M2C_UNK);
-    fn_8031BD40(0x40);
-    fn_8031B7A8();
+    void *fn_8031B7A8(void *);
+    void *fn_8031BD40(u32 size);
+    fn_8031B7A8(fn_8031BD40(0x40));
 }
 
 void fn_8031BBF4(void *self) {
