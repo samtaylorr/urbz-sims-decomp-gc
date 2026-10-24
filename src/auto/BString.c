@@ -1391,6 +1391,13 @@ void fn_800DB4F8(void) {
 
 }
 
+void fn_800DB55C(s32 *self) {
+    void fn_8006B274(s32);
+    if (((s32 *)self[2])[0x94 / 4] != 0) {
+        fn_8006B274(((s32 *)self[2])[0x94 / 4]);
+    }
+}
+
 extern f32 lbl_803D49B0[];
 void fn_800DB58C(s32 *self) {
     ((f32 *)self)[6] = lbl_803D49B0[0];
