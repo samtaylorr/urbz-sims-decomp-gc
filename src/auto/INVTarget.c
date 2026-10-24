@@ -395,6 +395,33 @@ void fn_801D8D84(void *arg0, s32 arg1) {
     }
 }
 
+M2C_UNK fn_801D8E24(void **arg0, s32 arg1, s32 arg2) {
+    void **node;
+    void **next;
+    void *head;
+
+    node = arg0[2];
+    next = node[1];
+    arg0[2] = next;
+    if (next != NULL) {
+        next[0] = NULL;
+    }
+    head = arg0[0];
+    if (head == NULL) {
+        arg0[0] = node;
+        node[0] = head;
+        arg0[1] = node;
+        node[1] = head;
+    } else {
+        ((void **)arg0[1])[1] = node;
+        node[0] = arg0[1];
+        arg0[1] = node;
+        node[1] = NULL;
+    }
+    node[2] = (void *)arg1;
+    node[3] = (void *)arg2;
+}
+
 s32 fn_801D8F18(void **arg0, s32 arg1, s32 arg2) {
     s32 fn_802486DC(s32, s32);
     M2C_UNK fn_801D8E24(void **, s32, s32);
