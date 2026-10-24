@@ -258,6 +258,17 @@ void fn_8033480C(char *self, s32 arg1) {
 
 }
 
+void fn_80334944(char *self, s32 arg1) {
+    s32 fn_80334E0C(char *, s32);
+    char *vt;
+    if (fn_80334E0C(self, arg1) == 0) {
+        vt = *(char **)(self + 0xA4);
+        (*(void (**)(void *, s32))(vt + 0x2C))(self + *(s16 *)(vt + 0x28), arg1);
+        return;
+    }
+    fn_8033480C(self, arg1);
+}
+
 s32 fn_803349A8(s32 arg0, s32 arg1) {
     s32 fn_80334B0C();
     s32 fn_803374C8(s32, s32);
