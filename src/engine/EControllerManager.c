@@ -308,10 +308,10 @@ void fn_80334B04(void *arg0, f32 farg0) {
 
 s32 fn_80334B0C(s32 arg0, s32 arg1) {
     extern s32 lbl_80494F64[];
-    s32 *p;
+    s32 i;
 
-    for (p = lbl_80494F64; p < lbl_80494F64 + 1; p++) {
-        if (*p == arg1) {
+    for (i = 0; i < 1; i++) {
+        if (lbl_80494F64[i] == arg1) {
             return 1;
         }
     }
@@ -371,8 +371,8 @@ s32 fn_80334D48(s32 arg0, s32 arg1) {
     s32 spC;
 
     if (((s32) lbl_80494F5C != 0) || (fn_80334B0C(arg0, arg1) != 0)) {
-        spC = 0;
         sp8 = 0;
+        spC = 0;
         if (fn_803365B8(arg0, arg1, &sp8, &spC) != 0) {
             return fn_80337008(arg0, arg1);
         }
