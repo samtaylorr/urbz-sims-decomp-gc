@@ -224,6 +224,18 @@ void fn_80175B08(void) {
     } while (var_ctr != 0);
 }
 
+void fn_80175C48(void *arg0, s32 arg1) {
+    extern char lbl_804122E8[];
+    extern void fn_80174950(void *, s32);
+    extern void fn_802D20E8(void *);
+
+    M2C_FIELD(arg0, char **, 0xBC) = lbl_804122E8;
+    fn_80174950((char *)arg0 + 0x18, 2);
+    if (arg1 & 1) {
+        fn_802D20E8(arg0);
+    }
+}
+
 s32 fn_80175C9C(s32 *self) {
     return self[2];
 }
