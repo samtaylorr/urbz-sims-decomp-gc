@@ -288,19 +288,19 @@ void fn_8024D418(void *arg0, s32 arg1, s32 arg2, void *arg3) {
     extern char fn_8024DDE0[];
     extern char fn_8024DE44[];
 
-    M2C_FIELD(arg0, void **, 0x5C) = arg3;
+    M2C_FIELD(arg0, s32 *, 0x0) = 0;
+    M2C_FIELD(arg0, s32 *, 0x4) = 0;
+    M2C_FIELD(arg0, s32 *, 0x8) = 0;
     M2C_FIELD(arg0, s16 *, 0xC) = arg1;
     M2C_FIELD(arg0, s16 *, 0xE) = arg2;
+    M2C_FIELD(arg0, s32 *, 0x10) = 0;
     M2C_FIELD(arg0, s32 *, 0x18) = 0;
+    M2C_FIELD(arg0, void **, 0x1C) = arg0;
     M2C_FIELD(arg0, void **, 0x20) = fn_8024DD0C;
     M2C_FIELD(arg0, void **, 0x24) = fn_8024DD70;
     M2C_FIELD(arg0, void **, 0x28) = fn_8024DDE0;
     M2C_FIELD(arg0, void **, 0x2C) = fn_8024DE44;
-    M2C_FIELD(arg0, s32 *, 0x10) = 0;
-    M2C_FIELD(arg0, s32 *, 0x8) = 0;
-    M2C_FIELD(arg0, s32 *, 0x4) = 0;
-    M2C_FIELD(arg0, s32 *, 0x0) = 0;
-    M2C_FIELD(arg0, void **, 0x1C) = arg0;
+    M2C_FIELD(arg0, void **, 0x5C) = arg3;
 }
 
 void fn_8024D474(char *arg0) {
