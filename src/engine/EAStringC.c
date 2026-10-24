@@ -223,7 +223,7 @@ s32 fn_80298FF4(void *arg0) {
     return n;
 }
 
-void fn_80299A50(void) {
+void fn_80299A50(void *arg0) {
     fn_802999D4();
 }
 
