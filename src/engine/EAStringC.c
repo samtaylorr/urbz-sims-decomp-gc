@@ -253,6 +253,11 @@ s32 fn_80299A70(void *arg0) {
     return fn_802999D4(arg0) != 0;
 }
 
+void fn_80299AA0(void *arg0, s32 arg1, s32 arg2) {
+    extern void fn_80295358(s32, s32);
+    fn_80295358(arg1, arg2);
+}
+
 void fn_80299AF4(s32 *arg0) {
     s32 temp_r0;
 
