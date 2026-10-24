@@ -334,6 +334,17 @@ s32 fn_8031B768(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void *fn_8031B7A8(void *arg0) {
+    extern void fn_8031E8B0(void *);
+    extern void fn_803BB814(void *);
+    extern u8 lbl_8041B298[];
+
+    fn_8031E8B0(arg0);
+    *(u8 **)arg0 = lbl_8041B298;
+    fn_803BB814((u8 *)arg0 + 0x20);
+    return arg0;
+}
+
 s32 fn_8031BAD4(u8 *self, s32 arg1) {
     s32 fn_802D3EE8(void *, s32);
     s32 i;
