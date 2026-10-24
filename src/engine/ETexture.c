@@ -76,8 +76,29 @@ void fn_8036EF84(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 8) = arg1;
 }
 
+s32 fn_8036EF8C(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    M2C_FIELD(arg0, s32 *, 0x18) = arg3;
+    M2C_FIELD(arg0, s32 *, 0) = arg1;
+    M2C_FIELD(arg0, s32 *, 4) = arg2;
+    return 1;
+}
+
+void fn_8036EFA4(void *arg0, void *arg1) {
+    extern f32 lbl_803F53E0[];
+    M2C_FIELD(arg1, f32 *, 4) = lbl_803F53E0[0];
+    M2C_FIELD(arg1, f32 *, 8) = M2C_FIELD(arg0, s32 *, 0) - 1;
+    M2C_FIELD(arg1, f32 *, 0) = lbl_803F53E0[0];
+    M2C_FIELD(arg1, f32 *, 0xC) = M2C_FIELD(arg0, s32 *, 4) - 1;
+}
+
 s32 fn_8036F018(s32 *self) {
     return self[2];
+}
+
+s32 fn_8036F0D0(void *arg0, void *arg1) {
+    struct Blk { s32 v[8]; };
+    *(struct Blk *)arg0 = *(struct Blk *)arg1;
+    return 1;
 }
 
 void fn_8036F130(void) {
