@@ -3008,6 +3008,14 @@ void fn_800E5B90(void) {
     lbl_8049664C = 1;
 }
 
+void fn_800E6108(void *arg0, s32 arg1) {
+    extern s32 lbl_8041F754[];
+    extern void fn_80048A48(void *);
+    extern void fn_80047AF8(void *, s32);
+    ((void (*)(void *, s32))fn_80048A48)(lbl_8041F754, arg1);
+    fn_80047AF8(lbl_8041F754, arg1);
+}
+
 void fn_800E64BC(void) {
 
 }
