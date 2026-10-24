@@ -395,6 +395,14 @@ void fn_8006D99C(s32 *self, s32 value) {
     *self = value;
 }
 
+void fn_8006D9A4(void *self, s32 flags) {
+    extern void fn_802D20E8(void *);
+    *(s32 *)self = 0;
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 extern s32 fn_802E0904(void *);
 extern s32 fn_802E091C(void *);
 extern void fn_8010CD4C(s32);
@@ -989,6 +997,22 @@ void fn_8008B42C(void *arg0) {
     if ((s32) M2C_FIELD(arg0, s32 *, 0x158) != 0) {
         M2C_FIELD(arg0, s32 *, 0x158) = 0;
     }
+}
+
+void fn_8008C160(void *arg0, s32 arg1) {
+    extern f32 lbl_803CC1C8[];
+    struct V { f32 x, y, z; } v;
+    struct V *a = (struct V *)((u8 *)arg0 + 0xC);
+
+    v.x = v.y = v.z = lbl_803CC1C8[0];
+    if (arg1 != 0) {
+        v.z = a->z;
+    }
+    *a = v;
+    if (arg1 != 0) {
+        v.z = a->z;
+    }
+    *(struct V *)((u8 *)arg0 + 0x18) = v;
 }
 
 void fn_8008C388(void) {
