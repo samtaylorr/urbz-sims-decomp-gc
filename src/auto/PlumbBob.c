@@ -403,6 +403,17 @@ void fn_8006D9A4(void *self, s32 flags) {
     }
 }
 
+void fn_8006D9D4(void *self, void *arg1) {
+    extern void fn_8006DA60(void *, s32, f32);
+    extern void fn_8006DBBC(void *, f32, f32, f32);
+    fn_8006DA60(self, 0, M2C_FIELD(arg1, f32 *, 0xB4));
+    fn_8006DA60(self, 1, M2C_FIELD(arg1, f32 *, 0xB8));
+    fn_8006DA60(self, 2, M2C_FIELD(arg1, f32 *, 0xBC));
+    fn_8006DA60(self, 3, M2C_FIELD(arg1, f32 *, 0xC0));
+    fn_8006DA60(self, 4, M2C_FIELD(arg1, f32 *, 0xC4));
+    fn_8006DBBC(self, M2C_FIELD(arg1, f32 *, 0xC8), M2C_FIELD(arg1, f32 *, 0xCC), M2C_FIELD(arg1, f32 *, 0xD0));
+}
+
 extern s32 fn_802E0904(void *);
 extern s32 fn_802E091C(void *);
 extern void fn_8010CD4C(s32);
