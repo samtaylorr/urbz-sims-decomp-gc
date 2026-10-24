@@ -84,9 +84,11 @@ void fn_800153B0(void *arg0) {
     M2C_UNK fn_8000C1EC(s32, void *);
     extern u8 lbl_803C2610[];
     extern u8 lbl_8041F94C[];
+    u8 *p;
     M2C_FIELD(arg0, s32 *, 0xED8) = 0;
-    fn_8000C1EC(M2C_FIELD(lbl_8041F94C, s32 *, 0xD0), arg0);
-    fn_8000B13C(M2C_FIELD(lbl_8041F94C, s32 *, 0xD0), lbl_803C2610, 0);
+    p = lbl_8041F94C;
+    fn_8000C1EC(M2C_FIELD(p, s32 *, 0xD0), arg0);
+    fn_8000B13C(M2C_FIELD(p, s32 *, 0xD0), lbl_803C2610, 0);
 }
 
 void fn_80015404(void) {
