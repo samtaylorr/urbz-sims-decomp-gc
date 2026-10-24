@@ -473,6 +473,30 @@ void fn_802DE598(void) {
 
 }
 
+void fn_802DEB5C(void *arg0, void *arg1) {
+    void *vt;
+    s32 size;
+    s32 count;
+
+    vt = M2C_FIELD(arg0, void **, 0x18);
+    ((void (*)(void *, void *, s32))M2C_FIELD(vt, void **, 0x34))((char *)arg0 + M2C_FIELD(vt, s16 *, 0x30), &size, 4);
+    fn_802DDDD8(arg1, size, 0);
+    count = fn_802DE1B0(arg1);
+    vt = M2C_FIELD(arg0, void **, 0x18);
+    ((void (*)(void *, void *, s32))M2C_FIELD(vt, void **, 0x34))((char *)arg0 + M2C_FIELD(vt, s16 *, 0x30), M2C_FIELD(arg1, void **, 0), count * 4);
+}
+
+void fn_802DEBE4(void *arg0, s32 arg1) {
+    extern void fn_802DDC18(void *);
+    extern void fn_802D20E8(s32);
+    extern u8 lbl_80419678[];
+    M2C_FIELD(arg0, u8 **, 0x10) = lbl_80419678;
+    fn_802DDC18(arg0);
+    if (arg1 & 1) {
+        fn_802D20E8((s32)arg0);
+    }
+}
+
 void fn_802DEC30(void *arg0) {
     extern void fn_802DDDD8(void *, s32, s32);
     fn_802DDDD8(arg0, M2C_FIELD(arg0, s32 *, 4), 0);
