@@ -30,13 +30,6 @@ static inline s32 INVList_IsNotEmpty(void *list) {
     }
     return r;
 }
-static inline s32 INVSlot_IsUsed(s32 base, s32 i) {
-    s32 r = 1;
-    if (*(s32 *)(i * 0x318 + base + 0x108) == 0) {
-        r = 0;
-    }
-    return r;
-}
 void *fn_801D7224(void **arg0, s32 arg1);
 void *fn_801D7224(void **arg0, s32 arg1) {
     s32 fn_802486DC(s32, s32);
