@@ -683,6 +683,15 @@ s32 fn_802DF924(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 4) ^ 1;
 }
 
+s32 fn_802DF984(void *arg0) {
+    if (M2C_FIELD(arg0, s32 *, 4) != 0) {
+        void *obj = M2C_FIELD(arg0, void **, 0);
+        void *vt = M2C_FIELD(obj, void **, 0);
+        M2C_FIELD(arg0, s32 *, 4) = M2C_FIELD(vt, s32 (**)(void *), 0x24)((u8 *)obj + M2C_FIELD(vt, s16 *, 0x20)) ^ 1;
+    }
+    return M2C_FIELD(arg0, s32 *, 4) ^ 1;
+}
+
 void fn_802DFB30(void) {
 
 }
