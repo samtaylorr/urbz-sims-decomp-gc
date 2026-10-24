@@ -1057,6 +1057,13 @@ void fn_800D72D4(s32 *self) {
     }
 }
 
+void fn_800D732C(s32 *self) {
+    extern s32 lbl_8045B438[];
+    extern void fn_80334CF8(void *, s32);
+    fn_80334CF8(lbl_8045B438, self[6]);
+    self[6] = 0;
+}
+
 void fn_800D7574(void) {
     extern s32 lbl_8041F7FC[];
     lbl_8041F7FC[0] = 0;
