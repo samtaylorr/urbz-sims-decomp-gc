@@ -1091,10 +1091,11 @@ void fn_800D5FAC(void) {
 void fn_800D631C(void *arg0) {
     extern u8 lbl_8040B9E0[];
     BStringHandle h;
+    void *self = arg0;
 
-    M2C_FIELD(arg0, void **, 8) = lbl_8040B9E0;
-    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(self, void **, 8) = lbl_8040B9E0;
     h.value = 0;
+    *(BStringHandle *)self = h;
 }
 
 void *fn_800D6344(u32 size) {
@@ -1150,9 +1151,10 @@ void fn_800D6444(void) {
     u32 *p;
 
     fn_8010DB20();
-    for (p = lbl_803F62AC; p <= &lbl_803F62AC[17]; p++) {
-        fn_8033740C(lbl_8045B0F0, *p, 0, 0);
-    }
+    p = lbl_803F62AC;
+    do {
+        fn_8033740C(lbl_8045B0F0, *p++, 0, 0);
+    } while (p <= &lbl_803F62AC[17]);
     fn_8033740C(lbl_8045B980, 0x71BB1EF7, 0, 0);
 }
 
