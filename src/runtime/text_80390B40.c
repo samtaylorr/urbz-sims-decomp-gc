@@ -65,7 +65,7 @@ void fn_803985F0(void) {
 }
 
 void fn_80398714(void) {
-    if (lbl_8049661C != 0) {
+    if ((void (*)(void))lbl_8049661C != NULL) {
         ((void (*)(void))lbl_8049661C)();
     }
 }
