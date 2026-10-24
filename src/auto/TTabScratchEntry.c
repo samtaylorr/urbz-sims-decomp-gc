@@ -820,6 +820,30 @@ s32 fn_801A0FD4(void) {
     return 0x168;
 }
 
+s32 fn_801A1028(s32 year, s32 month, s32 day) {
+    s32 i;
+    s32 days;
+
+    if (year <= 0x76B || (u32)(month - 1) > 0xB) {
+        return 0;
+    }
+    days = day - 1;
+    for (i = 1; i < month; i++) {
+        days += ((s32 (*)(s32, s32))fn_801A0FCC)(year, i);
+    }
+    return days + (year - 0x76C) * 0x168;
+}
+
+void fn_801A10A8(s32 *self, s32 arg1) {
+    s32 *v = self + 2;
+    self[2] = 0;
+    v[1] = 0;
+    (v + 2)[1] = 0;
+    self[6] = arg1;
+    self[1] = 0;
+    self[0] = 0;
+}
+
 void fn_801A10DC(s32 *self, s32 flags) {
     extern void fn_802D20E8(void *);
     extern void fn_802D211C(void *);
