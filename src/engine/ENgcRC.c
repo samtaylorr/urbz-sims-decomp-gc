@@ -927,8 +927,8 @@ void fn_8035BCFC(void *arg0, u8 *arg1, u8 *arg2, u8 *arg3) {
     *arg3 = M2C_FIELD(arg0, u8 *, 0x462E);
 }
 
+void fn_8035BC4C(s32 arg0, s32 arg1);
 void fn_8035BD18(void) {
-    M2C_UNK fn_8035BC4C(M2C_UNK, M2C_UNK);
     fn_8035BC4C(1, 0xFFFF);
 }
 
