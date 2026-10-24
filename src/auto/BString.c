@@ -344,6 +344,14 @@ void fn_800D26A8(void) {
 
 }
 
+void fn_800D26AC(s32 *self) {
+    extern s32 lbl_8041F754[];
+    extern f32 lbl_803D1778[];
+    extern void fn_80048834(void *, f32);
+    fn_80048834(lbl_8041F754, lbl_803D1778[0]);
+    self[6] = 0;
+}
+
 void fn_800D2778(void) {
 
 }
