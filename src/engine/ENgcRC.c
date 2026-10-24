@@ -429,15 +429,16 @@ s32 fn_80348420(s32 arg0, s32 arg1) {
     extern u8 lbl_8046B084[];
     extern s32 lbl_804962A0;
     extern s32 lbl_80495068;
-    s32 ok;
+    void (*cb)(void);
     s32 ret;
     if (arg1 != 0) {
-        ok = fn_80258CEC(lbl_80469D20, fn_8034862C, arg1, lbl_8046B038, 0x1000, arg0, 1);
+        cb = fn_8034862C;
     } else {
-        ok = fn_80258CEC(lbl_80469D20, fn_80348548, 0, lbl_8046B038, 0x1000, arg0, 1);
+        cb = fn_80348548;
+        arg1 = 0;
     }
     ret = 0;
-    if (ok != 0) {
+    if (fn_80258CEC(lbl_80469D20, cb, arg1, lbl_8046B038, 0x1000, arg0, 1) != 0) {
         fn_8037A8D8(lbl_8046B038, lbl_8046B078, 3);
         fn_8037A8D8(lbl_8046B058, lbl_8046B084, 3);
         lbl_80495068 = 1;
@@ -528,6 +529,26 @@ void fn_80348B8C(u8 *arg0, u32 arg1, u8 arg2) {
         *arg0 = arg2;
     }
     *arg0 -= arg1;
+}
+
+M2C_UNK fn_80348BC0(void) {
+    void fn_80270D34(void);
+    u32 fn_80276D44(void);
+    u32 fn_80276D70(void);
+    extern u8 lbl_80400D40[];
+    extern s32 lbl_80495090;
+    extern s32 lbl_80495094;
+    u32 d, c, b, a;
+
+    if (lbl_80495090 != 0) {
+        fn_80270D34();
+        a = fn_80276D44();
+        b = fn_80276D44();
+        c = fn_80276D70();
+        d = fn_80276D70();
+        *(u32 *)(lbl_80400D40 + lbl_80495094 * 0x40) = b > a ? a : b;
+        *(u32 *)(lbl_80400D40 + lbl_80495094 * 0x40 + 4) = d > c ? c : d;
+    }
 }
 
 void fn_80348D80(void *arg0, void *arg1) {
@@ -721,20 +742,27 @@ void fn_803529FC(void *arg0, u8 *arg1) {
     RCOpFn fn;
     u8 *pc;
     s32 op;
+    s32 idx;
+    s32 d;
 
     M2C_FIELD(arg0, u8 **, 0x4DC) = arg1;
     M2C_FIELD(arg0, s32 *, 0x4E0) = 0;
     do {
         pc = M2C_FIELD(arg0, u8 **, 0x4DC);
-        M2C_FIELD(arg0, u8 **, 0x4DC) = pc + 8;
         op = *pc;
-        if (lbl_80401090[op].index >= 0) {
-            ent = (*(RCOpVtEnt **) ((u8 *) arg0 + lbl_80401090[op].u.delta2))[lbl_80401090[op].index - 1];
+        M2C_FIELD(arg0, u8 **, 0x4DC) = pc + 8;
+        idx = lbl_80401090[op].index;
+        if (idx >= 0) {
+            ent = (*(RCOpVtEnt **) ((u8 *) arg0 + lbl_80401090[op].u.delta2))[idx - 1];
             fn = ent.fn;
         } else {
             fn = lbl_80401090[op].u.pfn;
         }
-        fn((u8 *) arg0 + (lbl_80401090[op].index >= 0 ? ent.delta + lbl_80401090[op].delta : lbl_80401090[op].delta), pc);
+        d = ent.delta + lbl_80401090[op].delta;
+        if (idx < 0) {
+            d = lbl_80401090[op].delta;
+        }
+        fn((u8 *) arg0 + d, pc);
     } while (M2C_FIELD(arg0, s32 *, 0x4E0) == 0);
 }
 
