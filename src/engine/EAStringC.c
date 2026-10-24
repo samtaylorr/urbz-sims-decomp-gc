@@ -176,6 +176,19 @@ s32 fn_80298F64(void *arg0, void *arg1) {
     return 0;
 }
 
+s32 fn_80298FF4(void *arg0) {
+    void *p;
+    s32 n;
+
+    p = M2C_FIELD(arg0, void **, 0x4C);
+    n = 0;
+    while (p != NULL) {
+        p = M2C_FIELD(p, void **, 0x4C);
+        n++;
+    }
+    return n;
+}
+
 void fn_80299A50(void) {
     fn_802999D4();
 }
