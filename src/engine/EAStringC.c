@@ -2074,6 +2074,11 @@ f32 fn_802BB9AC(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 8);
 }
 
+void fn_802BB9B4(void) {
+    extern void (*lbl_80443310[])(void);
+    lbl_80443310[0]();
+}
+
 void fn_802BBA38(void) {
     lbl_80443314[0]();
 }
