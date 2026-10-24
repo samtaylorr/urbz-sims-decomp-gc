@@ -3108,7 +3108,7 @@ void *fn_803ADAAC(void *arg0, char *arg1) {
         p = (char *)fn_8024839C(p, arg1, len) + len;
     }
     M2C_FIELD(arg0, char **, 4) = p;
-    *p = 0;
+    *p = '\0';
     return arg0;
 }
 
@@ -8395,6 +8395,15 @@ extern void fn_803C06EC(void *);
 void *fn_803C0700(void *self) {
     fn_803C06EC(self);
     return self;
+}
+
+void fn_803C0730(u8 *p, s32 n) {
+    while (--n != -1) {
+        VtblEntry *vt = *(VtblEntry **)(p + 0xAC);
+        u8 *q = p;
+        p += 0xB0;
+        ((void (*)(void *, s32))vt[1].pfn)(q + vt[1].delta, 2);
+    }
 }
 
 extern void fn_803C0794(s32);
