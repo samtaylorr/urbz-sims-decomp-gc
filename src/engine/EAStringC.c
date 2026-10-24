@@ -2179,6 +2179,11 @@ void fn_802BBD14(void) {
     lbl_80443310[0]();
 }
 
+void fn_802BBD40(void) {
+    extern void (*lbl_80443318[])(void);
+    lbl_80443318[0]();
+}
+
 void fn_802BBD98(void) {
     lbl_80443314[0]();
 }
