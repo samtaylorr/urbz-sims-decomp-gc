@@ -255,6 +255,17 @@ void fn_801D8508(s32 arg0) {
     } while (var_r31 <= 4);
 }
 
+s32 fn_801D8788(void) {
+    s32 fn_801D7E6C();
+    M2C_UNK fn_802D1FC8(M2C_UNK);
+    extern s32 lbl_80494600;
+    if ((s32) lbl_80494600 == 0) {
+        fn_802D1FC8(0x78);
+        lbl_80494600 = fn_801D7E6C();
+    }
+    return lbl_80494600;
+}
+
 void fn_801D87C4(void) {
     extern char *lbl_80494600;
     if (lbl_80494600 != NULL) {
@@ -262,6 +273,37 @@ void fn_801D87C4(void) {
         M2C_FIELD(vt, void (**)(void *, s32), 0xC)(lbl_80494600 + M2C_FIELD(vt, s16 *, 8), 3);
         lbl_80494600 = NULL;
     }
+}
+
+s32 fn_801D8810(void **arg0) {
+    M2C_UNK fn_802D1FC8(M2C_UNK);
+    extern u8 lbl_80416EC8[];
+    extern u8 lbl_80416EE0[];
+    void **prev;
+    s32 i;
+
+    arg0[3] = lbl_80416EC8;
+    arg0[2] = NULL;
+    arg0[0] = NULL;
+    prev = NULL;
+    arg0[1] = NULL;
+    i = 200;
+    do {
+        void **node = (void **)fn_802D1FC8(0x14);
+        node[4] = lbl_80416EE0;
+        node[0] = NULL;
+        node[1] = NULL;
+        node[2] = NULL;
+        node[3] = NULL;
+        if (arg0[2] == NULL) {
+            arg0[2] = node;
+        } else {
+            prev[1] = node;
+            node[0] = prev;
+        }
+        prev = node;
+    } while (--i != 0);
+    return (s32)arg0;
 }
 
 void fn_801D88B0(void *arg0, s32 arg1) {
@@ -1847,8 +1889,7 @@ void fn_801F96A8(s32 arg0, s32 arg1) {
 
 void fn_801F97E4(s32 arg0, s32 arg1, s32 arg2) {
     void fn_801E2A24(void *, s32);
-    s32 ok = *(s32 *)(arg1 * 0x318 + arg0 + 0x108) != 0;
-    if (ok) {
+    if (INVSlot_IsUsed(arg0, arg1)) {
         fn_801E2A24((u8 *)arg0 + (arg1 * 0x318 + 0x104), arg2);
     }
 }
