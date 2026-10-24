@@ -240,6 +240,21 @@ s32 fn_801B5F84(void *arg0) {
     return ret;
 }
 
+s32 fn_801B5FE0(void *arg0) {
+    s32 fn_801A375C(void *);
+    void *temp_r9;
+    s32 ret;
+
+    if (M2C_FIELD(arg0, void **, 4) != NULL) {
+        s16 temp = fn_801A375C(M2C_FIELD(arg0, void **, 4));
+        temp_r9 = M2C_FIELD(arg0, void **, 0);
+        ret = M2C_FIELD(temp_r9, s32 (**)(void *, s16), 0x7C)((char *)arg0 + M2C_FIELD(temp_r9, s16 *, 0x78), temp);
+    } else {
+        ret = 0;
+    }
+    return ret;
+}
+
 void fn_801B603C(void) {
     M2C_UNK fn_801B5A68();
     M2C_UNK fn_802D1FC8(M2C_UNK);
