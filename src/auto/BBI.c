@@ -472,6 +472,13 @@ void fn_80061824(void *arg0, s32 arg1, s32 arg2) {
     }
 }
 
+s32 fn_80061F9C(char *self) {
+    char *obj = *(char **)(self + 0x308);
+    char *vt = *(char **)(obj + 4);
+    char *r = (*(char *(**)(void *))(vt + 0x2D4))(obj + *(s16 *)(vt + 0x2D0));
+    return *(u8 *)(*(char **)(r + 0xC0) + 9) != 0;
+}
+
 void fn_80063054(void) {
     extern void fn_80248488(void *, s32, u32);
     extern void fn_8005B71C(void *);
