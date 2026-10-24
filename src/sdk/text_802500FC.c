@@ -735,6 +735,22 @@ s32 fn_802649F0(void) {
     return 0x80000000;
 }
 
+void *fn_802654A0(u8 *id, char *game, char *company, u8 diskNumber, u8 version) {
+    extern void *fn_80248488(void *, s32, u32);
+    extern char *fn_80248A10(char *, const char *, u32);
+
+    fn_80248488(id, 0, 0x20);
+    if (game != NULL) {
+        fn_80248A10((char *)id, game, 4);
+    }
+    if (company != NULL) {
+        fn_80248A10((char *)id + 4, company, 2);
+    }
+    id[6] = diskNumber;
+    id[7] = version;
+    return id;
+}
+
 s32 fn_802668EC(s32 arg0) {
     extern s32 lbl_80495F4C;
     s32 temp_r31;
