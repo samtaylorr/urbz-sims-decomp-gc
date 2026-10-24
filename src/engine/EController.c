@@ -184,6 +184,11 @@ void fn_80311B7C(void *arg0, s32 arg1, s32 arg2) {
     fn_80311404(arg0, arg1, a, fn_80311A4C(arg0, arg2), 0);
 }
 
+void fn_80311BDC(void *arg0, s32 arg1, s32 arg2) {
+    s32 a = fn_80311ABC(arg0, arg2);
+    fn_80311404(arg0, arg1, a, fn_80311A4C(arg0, arg2), 0);
+}
+
 void fn_80311C3C(void *arg0, s32 arg1, s32 arg2) {
     s32 a = fn_80311AF4(arg0, arg2);
     fn_80311404(arg0, arg1, a, fn_80311A84(arg0, arg2), 0);
