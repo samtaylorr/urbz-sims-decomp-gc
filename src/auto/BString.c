@@ -26,6 +26,14 @@ extern f32 lbl_803D14D0[];
 extern s32 lbl_8041F7B0[];
 extern s32 lbl_80434A9C[];
 void fn_800EAF5C(void);
+extern char lbl_803D59D8[];
+
+static inline const char *BString_NonNull(const char *s) {
+    if (s == 0) {
+        s = lbl_803D59D8;
+    }
+    return s;
+}
 extern s32 lbl_8045B438[];
 s32 fn_80334E70(void *, s32);
 static inline s32 SoundIsDone(s32 id) {
