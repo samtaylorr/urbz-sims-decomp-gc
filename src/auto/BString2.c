@@ -495,14 +495,7 @@ void fn_800F3CD8(s32 arg0, s32 arg1, s32 arg2) {
 }
 
 u32 fn_800F3D30(void **arg0, u16 arg1, u32 arg2) {
-    while (arg2 < fn_800F4878(arg0)) {
-        s32 ne = 1;
-        if (BString2_Eq(&BString2_Data(arg0)[arg2], &arg1)) {
-            ne = 0;
-        }
-        if (ne) {
-            break;
-        }
+    while (arg2 < fn_800F4878(arg0) && BString2_Eq(&BString2_Data(arg0)[arg2], &arg1)) {
         arg2++;
     }
     return arg2 < fn_800F4878(arg0) ? arg2 : -1;
