@@ -981,6 +981,11 @@ void fn_802D6A28(void **self, s32 flags) {
     }
 }
 
+void fn_802D6A5C(char *self) {
+    char *vt = *(char **)(self + 0x0);
+    (*(void (**)(char *))(vt + 0x1C))(self + *(s16 *)(vt + 0x18));
+}
+
 void *fn_802D6A90(void *arg0, s32 arg1, s32 arg2, s32 arg3, s16 arg4, s32 arg5, s32 arg6) {
     s32 fn_802C5240(s32);
     M2C_UNK fn_802D6B18(void *);
