@@ -266,13 +266,13 @@ void *fn_80366120(void *unused, void *node, void **out) {
     return NULL;
 }
 
-s32 fn_80366168(void *arg0, s32 index, s32 key) {
+void *fn_80366168(void *arg0, s32 index, s32 key) {
     void *node = ((void **)M2C_FIELD(arg0, void **, 8))[index];
     while (node != NULL) {
-        if (M2C_FIELD(node, s32 *, 0xC) == key) return 1;
+        if (M2C_FIELD(node, s32 *, 0xC) == key) return node;
         node = M2C_FIELD(node, void **, 8);
     }
-    return 0;
+    return NULL;
 }
 
 void fn_8036619C(void *arg0) {
@@ -297,13 +297,11 @@ void fn_803661F8(EMat4Node **list) {
     extern void *fn_802D0AB8(void);
     extern void fn_802D1A00(void *, void *);
     void *n = *list;
-    if (n != NULL) {
-        do {
-            void *value = M2C_FIELD(n, void **, 0x10);
-            fn_802D1A00(fn_802D0AB8(), value);
-            n = M2C_FIELD(n, void **, 4);
-        } while (n != NULL);
-    }
+    do {
+        void *value = M2C_FIELD(n, void **, 0x10);
+        fn_802D1A00(fn_802D0AB8(), value);
+        n = M2C_FIELD(n, void **, 4);
+    } while (n != NULL);
     fn_8036619C(list);
 }
 
@@ -337,8 +335,10 @@ void fn_803662D0(void *arg0) {
     void fn_80366328(void *, s32);
     count = fn_8036625C((void **)arg0);
     n = 1;
-    while (n < count) n += n;
-    if (n > 1) fn_80366328(arg0, n - 1);
+    if (n < count) {
+        do { n += n; } while (n < count);
+        if (n > 1) fn_80366328(arg0, n - 1);
+    }
 }
 
 void fn_80366328(void *arg0, s32 arg1) {
