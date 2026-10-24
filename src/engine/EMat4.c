@@ -136,6 +136,22 @@ char **fn_802C6E70(char **arg0, s32 arg1) {
     return arg0;
 }
 
+s32 fn_802C6EAC(char **arg0, s32 arg1) {
+    char *p;
+    s32 i;
+
+    p = *arg0;
+    i = 0;
+    while (*p != 0) {
+        if (*p == arg1) {
+            return i;
+        }
+        p++;
+        i++;
+    }
+    return -1;
+}
+
 void fn_802C725C(u8 **arg0, s32 arg1, u8 arg2) {
     u8 *var_r3;
     u8 var_r0;
