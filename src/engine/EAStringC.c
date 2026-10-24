@@ -224,7 +224,8 @@ s32 fn_80298FF4(void *arg0) {
 }
 
 void fn_80299A50(void *arg0) {
-    fn_802999D4();
+    extern s32 fn_802999D4(void *);
+    fn_802999D4(arg0);
 }
 
 void fn_80299AF4(s32 *arg0) {
