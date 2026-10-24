@@ -710,6 +710,40 @@ block_4:
     return 0;
 }
 
+s32 fn_801D91AC(void **arg0) {
+    void *fn_802D1FC8(s32);
+    extern char lbl_80416E68[];
+    extern char lbl_80416E80[];
+    INVNodeList *list = (INVNodeList *)arg0;
+    INVNode *prev;
+    s32 i;
+    INVNode *node;
+    INVNode *free;
+
+    list->unkC = lbl_80416E68;
+    list->head = NULL;
+    list->tail = NULL;
+    list->free = NULL;
+    prev = NULL;
+    for (i = 0; i < 100; i++) {
+        node = fn_802D1FC8(0x14);
+        free = list->free;
+        node->unk10 = lbl_80416E80;
+        node->prev = NULL;
+        node->next = NULL;
+        node->unk8 = 0;
+        node->unkC = 0;
+        if (free == NULL) {
+            list->free = node;
+        } else {
+            prev->next = node;
+            node->prev = prev;
+        }
+        prev = node;
+    }
+    return (s32)arg0;
+}
+
 void fn_801D924C(void *arg0, s32 arg1) {
     extern u8 lbl_80416E68[];
     void fn_802D20E8(void *);
