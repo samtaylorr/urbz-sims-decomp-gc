@@ -306,6 +306,18 @@ void fn_80334B04(void *arg0, f32 farg0) {
     M2C_FIELD(arg0, f32 *, 0xA8) = farg0;
 }
 
+s32 fn_80334B0C(s32 arg0, s32 arg1) {
+    extern s32 lbl_80494F64[];
+    s32 *p;
+
+    for (p = lbl_80494F64; p < lbl_80494F64 + 1; p++) {
+        if (*p == arg1) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
 void fn_80334B40(s32 arg0, void *arg1) {
     M2C_UNK fn_8033782C(s32, void *);
     if (((s32) lbl_80494F5C != 0) || (fn_80334B0C(arg0, M2C_FIELD(arg1, s32 *, 8)) != 0)) {
