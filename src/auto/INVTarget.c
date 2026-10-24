@@ -1602,6 +1602,12 @@ void fn_802055FC(void *arg0, char *arg1) {
     *(struct Str7 *)arg1 = *(struct Str7 *)lbl_803E60D8;
 }
 
+void fn_80205814(void *arg0, s32 arg1) {
+    void fn_80245BB4(s32, char *, ...);
+    extern char lbl_803E4E18[];
+    fn_80245BB4(arg1, lbl_803E4E18, M2C_FIELD(arg0, s32 *, 0xBC));
+}
+
 void fn_80205848(void *arg0, s32 arg1) {
     void fn_80245BB4(s32, char *, ...);
     extern char lbl_803E4E18[];
