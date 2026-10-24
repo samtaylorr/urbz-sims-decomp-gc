@@ -34,6 +34,21 @@ static inline s32 EMat4Node_Valid(EMat4Node *n) {
     return n != NULL;
 }
 
+typedef struct EMat4VtEnt {
+    s16 delta;
+    s16 pad;
+    void (*fn)(void *);
+} EMat4VtEnt;
+
+typedef struct EMat4Obj {
+    EMat4VtEnt *vtbl;
+} EMat4Obj;
+
+typedef struct EMat4AtExit {
+    EMat4Obj *obj;
+    s32 pad;
+} EMat4AtExit;
+
 void fn_802CD53C(EMat4Node **list);
 void fn_802CCE6C(void *self, s32 key, void *value, s32 arg3);
 void fn_802CCE08(void *self, s32 key, void *value);
@@ -373,20 +388,19 @@ void *fn_802CAB04(u8 *self) {
 
 s32 fn_802CAB54(u8 *self) {
     extern s32 fn_802D9124(void);
-    u8 *m = self + 0x1C;
 
 retry:
     fn_802CAA88((s32)self, -1);
     if (*(s32 *)(self + 0x3C) == 0 || *(s32 *)(self + 0x38) == fn_802D9124()) {
         if (*(s32 *)(self + 0x3C) == 0) {
-            fn_802CAA88((s32)self + 0x1C, -1);
+            fn_802CAA88((s32)(self + 0x1C), -1);
             *(s32 *)(self + 0x38) = fn_802D9124();
         }
         *(s32 *)(self + 0x3C) = *(s32 *)(self + 0x3C) + 1;
     } else {
         fn_802CAAAC((s32)self);
-        fn_802CAA88((s32)m, -1);
-        fn_802CAAAC((s32)m);
+        fn_802CAA88((s32)(self + 0x1C), -1);
+        fn_802CAAAC((s32)(self + 0x1C));
         goto retry;
     }
     fn_802CAAAC((s32)self);
