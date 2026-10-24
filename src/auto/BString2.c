@@ -541,6 +541,11 @@ void fn_800F3E30(void) {
     fn_800F1510();
 }
 
+void fn_800F3E50(s32 arg0, const char *arg1, s32 arg2) {
+    s32 fn_800F8120(const char *arg0);
+    ((void (*)(s32, s32, s32, s32))fn_800F1510)(arg0, (s32)arg1, arg2, arg1 ? fn_800F8120(arg1) : 0);
+}
+
 s32 fn_800F4058(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     M2C_UNK fn_800F0F2C(s32, s32, s32, s32, s32);
     u32 n;
