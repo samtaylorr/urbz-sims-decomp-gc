@@ -95,6 +95,17 @@ void **fn_801028C4(void **self) {
     return self;
 }
 
+void fn_801028D8(void **self, s32 flags) {
+    extern void fn_80102354(void *);
+    extern void fn_801029D8(void *);
+    *self = lbl_8040D608;
+    fn_80102354(self);
+    fn_801020E0(self, 0);
+    if (flags & 1) {
+        fn_801029D8(self);
+    }
+}
+
 extern void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
 void fn_801029D8(void *arg0) {
