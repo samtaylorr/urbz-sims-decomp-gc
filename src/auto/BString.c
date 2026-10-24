@@ -54,6 +54,12 @@ void *fn_802DBBCC(void *heap, u32 size, u32 align);
 void *fn_802D0B3C(void);
 void *fn_800EBA28(void *mem, s32 arg);
 void *fn_802D0AB8(void *);
+void *fn_802DC9F4(void *heap, u32 size, s32 arg2, s32 arg3);
+void fn_8010DB20(void);
+void fn_8033740C(void *, u32, s32, s32);
+typedef struct {
+    s32 value;
+} BStringHandle;
 
 static inline void *BString_Alloc(u32 size, u32 align) {
     void *heap;
