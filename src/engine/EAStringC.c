@@ -2437,6 +2437,7 @@ void fn_802BE5FC(u8 **arg0) {
     u32 hash;
     s8 *p;
     s32 c;
+    u16 h;
 
     hash = 0x811C9DC5;
     p = (s8 *)(*arg0 + 8);
@@ -2445,13 +2446,15 @@ void fn_802BE5FC(u8 **arg0) {
         if ((u32)(c - 'A') <= 25) {
             c += 0x20;
         }
-        hash = (hash ^ c) * 0x01000193;
+        hash ^= c;
+        hash *= 0x01000193;
         c = *p++;
     }
-    if ((u16)hash == 0) {
-        hash = 0x4567;
+    h = hash;
+    if (h == 0) {
+        h = 0x4567;
     }
-    *(u16 *)(*arg0 + 6) = hash;
+    *(u16 *)(*arg0 + 6) = h;
 }
 
 u8 **fn_802C4024(const char *arg0) {
@@ -2459,14 +2462,12 @@ u8 **fn_802C4024(const char *arg0) {
     extern s32 fn_8027A6AC(void *, const char *);
     extern u8 *lbl_80444628[];
     s32 len;
-    s32 i;
-    u8 *e;
+    u8 **p;
 
     len = fn_80248808(arg0);
-    for (i = 0; i <= 0xAF; i++) {
-        e = lbl_80444628[i];
-        if (*(u16 *)(e + 2) == len && fn_8027A6AC(e + 8, arg0) == 0) {
-            return &lbl_80444628[i];
+    for (p = lbl_80444628; p <= &lbl_80444628[0xAF]; p++) {
+        if (*(u16 *)(*p + 2) == len && fn_8027A6AC(*p + 8, arg0) == 0) {
+            return p;
         }
     }
     return NULL;
@@ -2502,11 +2503,11 @@ s32 fn_802C4440(void) {
     s32 cmp;
 
     for (i = 0; i <= 0xAF; i++) {
-        a = lbl_80444628[i];
-        if (a == lbl_803FCE5C) {
+        if (lbl_80444628[i] == lbl_803FCE5C) {
             return 0;
         }
         if (i + 1 <= 0xAF) {
+            a = lbl_80444628[i];
             b = lbl_80444628[i + 1];
             if (a == b) {
                 cmp = 0;
