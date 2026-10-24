@@ -7325,6 +7325,15 @@ void fn_803BB77C(s32 self, s32 flags) {
     }
 }
 
+void fn_803BB7BC(void *self, s32 flags) {
+    extern u8 lbl_8041ACA0[];
+    extern void fn_802D20E8(void *);
+    M2C_FIELD(self, void **, 0x24) = lbl_8041ACA0;
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_803BB7F0(void *self, s8 *p) {
     *p = 0;
 }
