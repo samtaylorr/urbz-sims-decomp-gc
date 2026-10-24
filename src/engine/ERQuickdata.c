@@ -64,9 +64,9 @@ void *fn_8032D344(void *arg0) {
     extern u8 lbl_8041BA38[];
 
     fn_8031E8B0(arg0);
-    M2C_FIELD(arg0, s32 *, 0x24) = 0;
-    M2C_FIELD(arg0, void **, 0x0) = lbl_8041BA38;
     M2C_FIELD(arg0, s32 *, 0x20) = 0;
+    M2C_FIELD(arg0, void **, 0x0) = lbl_8041BA38;
+    M2C_FIELD(arg0, s32 *, 0x24) = 0;
     return arg0;
 }
 
