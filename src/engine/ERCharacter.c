@@ -53,15 +53,11 @@ s32 fn_80317BF8(s32 arg0, s32 arg1) {
 }
 
 s32 fn_80317C38(s32 arg0, s32 arg1) {
-    s32 result;
     s32 sp8;
-    s32 found = fn_80317B98(arg0, 0, arg1, &sp8, 0);
-
-    result = 0;
-    if (found != 0) {
-        result = arg0 + sp8;
+    if (fn_80317B98(arg0, 0, arg1, &sp8, 0) != 0) {
+        return arg0 + sp8;
     }
-    return result;
+    return 0;
 }
 
 s32 fn_80317BB8(s32, s32);
