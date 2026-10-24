@@ -150,6 +150,19 @@ s32 fn_80311938(s32 arg0, s32 arg1) {
     return result;
 }
 
+s32 fn_80311990(void *arg0, s32 arg1) {
+    s32 i;
+
+    if (arg1 != 0) {
+        for (i = M2C_FIELD(arg0, s32 *, 8); i >= 0; i--) {
+            if (*(s32 *)((char *)arg0 + 0xC + i * 0xC) == arg1) {
+                return i;
+            }
+        }
+    }
+    return -1;
+}
+
 s32 fn_80311990();
 void fn_803112CC(void *arg0, s32 arg1, s32 arg2, s32 arg3);
 void fn_80311404(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
