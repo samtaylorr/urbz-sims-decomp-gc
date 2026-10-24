@@ -4090,6 +4090,17 @@ s32 fn_800EF710(s32 arg0, const char *arg1) {
     return arg0;
 }
 
+void fn_800EF78C(s32 arg0, s32 arg1) {
+    extern s32 lbl_80434AE8[];
+    if (arg1 == 0xFFFF) {
+        if (arg0 != 0) {
+            fn_800EB5BC(lbl_80434AE8);
+        } else {
+            fn_800EBC3C((s32)lbl_80434AE8, 2);
+        }
+    }
+}
+
 void fn_800EF7E0(void) {
     void fn_800EF78C(s32, s32);
     fn_800EF78C(1, 0xFFFF);
