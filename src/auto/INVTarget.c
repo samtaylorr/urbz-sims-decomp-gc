@@ -141,33 +141,31 @@ s32 fn_801D7DE4(void) {
 }
 
 M2C_UNK fn_801D80E8(void **arg0, void *arg1p) {
-    void **arg1 = arg1p;
-    void **t;
+    INVNodeList *list = (INVNodeList *)arg0;
+    INVNode *node = arg1p;
 
-    t = arg1[0];
-    if (t != NULL) {
-        t[1] = arg1[1];
+    if (node->prev != NULL) {
+        node->prev->next = node->next;
     }
-    t = arg1[1];
-    if (t != NULL) {
-        t[0] = arg1[0];
+    if (node->next != NULL) {
+        node->next->prev = node->prev;
     }
-    if (arg0[0] == arg1) {
-        arg0[0] = arg1[1];
+    if (list->head == node) {
+        list->head = node->next;
     }
-    if (arg0[1] == arg1) {
-        arg0[1] = arg1[0];
+    if (list->tail == node) {
+        list->tail = node->prev;
     }
-    arg1[1] = NULL;
-    arg1[0] = NULL;
-    if (arg0[2] != NULL) {
-        arg1[1] = arg0[2];
-        ((void **)arg0[2])[0] = arg1;
+    node->next = NULL;
+    node->prev = NULL;
+    if (list->free != NULL) {
+        node->next = list->free;
+        list->free->prev = node;
     }
-    arg0[2] = arg1;
-    ((s32 *)arg0[2])[2] = 0;
-    ((s32 *)arg0[2])[3] = 0;
-    ((s32 *)arg0[2])[4] = 0;
+    list->free = node;
+    list->free->unk8 = 0;
+    list->free->unkC = 0;
+    list->free->unk10 = 0;
 }
 
 s32 fn_801D8180(void **arg0, s32 arg1, s32 arg2, s32 arg3) {
@@ -355,14 +353,19 @@ s32 fn_801D8810(void **arg0) {
     prev = NULL;
     for (i = 200; i != 0; i--) {
         node = fn_802D1FC8(0x14);
-        node->unk10 = lbl_80416EE0;
-        M2C_FIELD(node, s32 *, 0) = 0;
-        M2C_FIELD(node, s32 *, 4) = 0;
-        node->unk8 = 0;
-        node->unkC = 0;
         if (list->free == NULL) {
+            node->unk10 = lbl_80416EE0;
+            node->prev = NULL;
+            node->next = NULL;
+            node->unk8 = 0;
+            node->unkC = 0;
             list->free = node;
         } else {
+            node->unk10 = lbl_80416EE0;
+            node->prev = NULL;
+            node->next = NULL;
+            node->unk8 = 0;
+            node->unkC = 0;
             prev->next = node;
             node->prev = prev;
         }
@@ -533,33 +536,36 @@ block_4:
 }
 
 s32 fn_801D8CE4(void **arg0) {
-    M2C_UNK fn_802D1FC8(M2C_UNK) __attribute__((malloc));
-    extern u8 lbl_80416E98[];
-    extern u8 lbl_80416EB0[];
+    void *fn_802D1FC8(s32);
+    extern char lbl_80416E98[];
+    extern char lbl_80416EB0[];
+    INVNodeList *list = (INVNodeList *)arg0;
+    INVNode *prev;
     s32 i;
-    s32 *prev;
+    INVNode *node;
+    INVNode *free;
 
-    arg0[3] = lbl_80416E98;
-    arg0[2] = NULL;
-    arg0[0] = NULL;
+    list->unkC = lbl_80416E98;
+    list->head = NULL;
+    list->tail = NULL;
+    list->free = NULL;
     prev = NULL;
-    arg0[1] = NULL;
-    i = 100;
-    do {
-        s32 *node = (s32 *)fn_802D1FC8(0x14);
-        node[4] = (s32)lbl_80416EB0;
-        node[0] = 0;
-        node[1] = 0;
-        node[2] = 0;
-        node[3] = 0;
-        if (arg0[2] == NULL) {
-            arg0[2] = node;
+    for (i = 0; i < 100; i++) {
+        node = fn_802D1FC8(0x14);
+        free = list->free;
+        node->unk10 = lbl_80416EB0;
+        node->prev = NULL;
+        node->next = NULL;
+        node->unk8 = 0;
+        node->unkC = 0;
+        if (free == NULL) {
+            list->free = node;
         } else {
-            prev[1] = (s32)node;
-            node[0] = (s32)prev;
+            prev->next = node;
+            node->prev = prev;
         }
         prev = node;
-    } while (--i != 0);
+    }
     return (s32)arg0;
 }
 
