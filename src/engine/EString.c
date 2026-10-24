@@ -931,6 +931,16 @@ void fn_802D5A94(s32 *arg0) {
     fn_802D5238((void *)arg0);
 }
 
+s32 fn_802D5E2C(s32 arg0, s32 *arg1, u16 arg2) {
+    M2C_UNK fn_802D50BC(s32, s32, s32);
+    u16 buf[2];
+
+    buf[0] = arg2;
+    buf[1] = 0;
+    fn_802D50BC(arg0, *arg1, (s32)buf);
+    return arg0;
+}
+
 s32 fn_802D5EC8(s32 arg0, s32 *arg1, s32 arg2) {
     M2C_UNK fn_802D50BC(s32, s32, s32);
     void fn_802D5254(s32 *, s32);
