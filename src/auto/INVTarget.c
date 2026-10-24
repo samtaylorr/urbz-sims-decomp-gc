@@ -1759,7 +1759,7 @@ void fn_801E1254(s32, s32, s32, s32, s32);
 s32 fn_801F9614(s32 arg0, s32 arg1);
 s32 fn_801F9614(s32 arg0, s32 arg1) {
     s32 ret = 0;
-    if (!(fn_801F55E0(((u8 *)(arg0 + 0xEF))[arg1]) & 2)) {
+    if (!(fn_801F55E0(*(u8 *)(arg1 + (arg0 + 0xEF))) & 2)) {
         u8 *p = (u8 *)(arg1 * 0x124 + arg0 + 0x734);
         s32 ok = 0;
         if (*(s32 *)(p + 8) != 0) {
@@ -2583,6 +2583,12 @@ s32 fn_802303F0(void) {
 
 void fn_80230448(void) {
     fn_802320F8();
+}
+
+void fn_80230468(void **arg0, s32 *arg1) {
+    M2C_FIELD(arg0[*arg1], s32 *, 0x18) = *arg1;
+    M2C_FIELD(arg0[*arg1], void **, 0x8) = (u8 *)arg1 + 8;
+    fn_8002B86C(lbl_8041FA38[0], arg0[*arg1]);
 }
 
 s32 fn_80230708(void) {
