@@ -117,12 +117,12 @@ void fn_8031185C(s32 arg0, s32 arg1, s32 arg2) {
 void fn_803118A0(s32 arg0, s32 arg1, s32 arg2) {
     s32 fn_80311990(s32, s32);
     s32 i;
-    char *base;
+    s32 *p;
 
     i = fn_80311990(arg0, arg1);
     if (i >= 0) {
-        base = (char *)arg0 + 0x14;
-        *(s32 *)(base + i * 0xC) |= arg2;
+        p = (s32 *)((char *)arg0 + 0x14 + i * 0xC);
+        *p |= arg2;
     }
 }
 
@@ -279,6 +279,10 @@ void fn_8031229C(void *arg0, s32 arg1, s32 arg2) {
 
 void fn_803122E4(void *arg0, s32 arg1, s32 arg2) {
     fn_80311310(arg0, fn_80311A84(arg0, arg2), 1, arg1);
+}
+
+void fn_8031232C(void *arg0, s32 arg1, s32 arg2) {
+    fn_803112CC(arg0, fn_80311ABC(arg0, arg2), 1, arg1);
 }
 
 void fn_803123BC(void *arg0, s32 arg1, s32 arg2) {
