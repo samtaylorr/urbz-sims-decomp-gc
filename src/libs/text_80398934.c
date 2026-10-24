@@ -471,7 +471,6 @@ void fn_8039B338(s32 *last, s32 val, s32 comp) {
     *last = val;
 }
 
-void fn_8024839C(void *dst, const void *src, u32 n);
 void fn_8039B3A4(s32 *first, s32 *last, s32 comp) {
     s32 *i;
 
