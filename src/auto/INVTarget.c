@@ -655,7 +655,7 @@ void fn_801D97CC(void) {
 
 void fn_801DB8B8(void *arg0, s32 arg1) {
     extern void fn_801D7CDC(void *, s32);
-    extern void fn_801D8B40(void *, void *);
+    extern s32 fn_801D8B40(void *, void *);
     extern void fn_801D9014(void *, void *);
     extern void fn_801D94DC(void *, void *);
     extern void fn_801DC030(void *, void *);
