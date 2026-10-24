@@ -1087,6 +1087,35 @@ void fn_800D5FAC(void) {
 
 }
 
+void fn_800D631C(void *arg0) {
+    extern u8 lbl_8040B9E0[];
+    BStringHandle h;
+
+    M2C_FIELD(arg0, void **, 8) = lbl_8040B9E0;
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    h.value = 0;
+}
+
+void *fn_800D6344(u32 size) {
+    void *heap;
+    void *p;
+
+    heap = ((void *(*)(void))fn_802D0AB8)();
+    if (size == 0) {
+        return NULL;
+    }
+    p = fn_802D197C(heap, size, 4);
+    if (p == NULL) {
+        p = fn_802DC9F4(heap, size, 1, 0);
+        if (p == NULL && heap == ((void *(*)(void))fn_802D0AB8)()) {
+            return fn_802DC9F4(fn_802D0B3C(), size, 1, 0);
+        }
+    } else {
+        fn_80248488(p, 0, size);
+    }
+    return p;
+}
+
 extern void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
 void fn_800D63EC(void *arg0) {
@@ -1095,6 +1124,10 @@ void fn_800D63EC(void *arg0) {
 
 void fn_800D6420(void) {
 
+}
+
+BStringHandle fn_800D6424(BStringHandle *src) {
+    return *src;
 }
 
 s32 fn_800D6434(void) {
