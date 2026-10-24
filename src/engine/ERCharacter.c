@@ -28,9 +28,9 @@ s32 fn_80317514(void *arg0) {
     return var_r7;
 }
 
-s32 fn_80317724(void) {
+s32 fn_80317724(s32 arg0) {
     s32 result = 0;
-    fn_80317624(0, &result, 0);
+    fn_80317624(arg0, &result, 0);
     return result;
 }
 
@@ -119,17 +119,13 @@ void fn_80317DAC(s32 arg0, char *arg1, s32 *arg2) {
 
     do {
         p = fn_80248640(arg1, ',');
-        if (p != 0) {
-            *p = 0;
-        }
+        if (p != 0) *p = 0;
         *arg2++ = fn_80317CD8(arg0, (s32)arg1);
-        if (p == 0) {
-            break;
-        }
+        if (p == 0) return;
         *p = ',';
-        arg1 = p + 1;
-        arg1 = (char *)((u32)arg1 - 1);
-    } while (arg1 != 0);
+        p++;
+        arg1 = p;
+    } while (p != 0);
 }
 
 s32 fn_80317E3C(u8 *arg0) {
