@@ -29,6 +29,7 @@ s32 fn_80317514(void *arg0) {
 }
 
 s32 fn_80317724(s32 arg0) {
+    void fn_80317624(s32, s32 *, s32);
     s32 result = 0;
     fn_80317624(arg0, &result, 0);
     return result;
