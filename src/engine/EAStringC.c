@@ -248,6 +248,11 @@ void fn_80299A50(void *arg0) {
     fn_802999D4(arg0);
 }
 
+s32 fn_80299A70(void *arg0) {
+    extern s32 fn_802999D4(void *);
+    return fn_802999D4(arg0) != 0;
+}
+
 void fn_80299AF4(s32 *arg0) {
     s32 temp_r0;
 
