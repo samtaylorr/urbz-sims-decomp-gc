@@ -356,6 +356,12 @@ void fn_800D2778(void) {
 
 }
 
+void fn_800D2884(void) {
+    extern s32 lbl_8041F754[];
+    extern void fn_80048A48(void *);
+    fn_80048A48(lbl_8041F754);
+}
+
 void fn_800D28E8(void *arg0) {
     M2C_UNK fn_800E18EC(M2C_UNK);
     struct G {
