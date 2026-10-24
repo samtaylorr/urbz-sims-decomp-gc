@@ -374,10 +374,31 @@ void *fn_800F22F0(void *arg0, const char *arg1) {
     return arg0;
 }
 
+void *fn_800F2474(void *arg0, s32 arg1, void **arg2, u32 arg3, u32 arg4) {
+    extern void fn_800F095C(void *);
+    if (arg3 > fn_800F4878(arg2)) {
+        fn_800EF8B8();
+    }
+    if (arg4 > fn_800F4878(arg2) - arg3) {
+        arg4 = fn_800F4878(arg2) - arg3;
+    }
+    ((void (*)(void *, s32, u16 *, u32))fn_800F095C)(arg0, arg1, BString2_Data(arg2) + arg3, arg4);
+    return arg0;
+}
+
 extern void fn_800F095C(void *);
 void *fn_800F251C(void *self) {
     fn_800F095C(self);
     return self;
+}
+
+const u16 *fn_800F3304(void **arg0) {
+    extern u16 lbl_803D59DC[];
+    const u16 *p = BString2_Data(arg0);
+    if (p == 0) {
+        p = lbl_803D59DC;
+    }
+    return p;
 }
 
 void fn_800F34EC(s32 arg0, s32 arg1) {
