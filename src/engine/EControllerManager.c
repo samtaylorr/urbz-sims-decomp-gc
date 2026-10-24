@@ -330,6 +330,7 @@ void fn_80334BE4(s32 arg0, s32 arg1) {
 }
 
 void fn_80334CF8(s32 arg0, s32 arg1) {
+    s32 fn_80334B0C();
     M2C_UNK fn_803379C8(s32, s32);
     if (((s32) lbl_80494F5C != 0) || (fn_80334B0C() != 0)) {
         fn_803379C8(arg0, arg1);
