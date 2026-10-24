@@ -681,6 +681,15 @@ void fn_8039B958(u8 *self, s32 flags) {
     }
 }
 
+extern void fn_80035CD4(void *);
+void fn_8039B98C(void *self, s32 flags) {
+    void fn_80035EF4(void *, s32);
+    fn_80035EF4(self, 0);
+    if (flags & 1) {
+        fn_80035CD4(self);
+    }
+}
+
 void fn_8039B9D0(void *obj) {
     if (obj != NULL) {
         char *vt = *(char **)((char *)obj + 0x3C);
