@@ -15,8 +15,9 @@ void fn_802D7E5C(M2C_UNK **arg0, s32 arg1) {
     M2C_UNK fn_802C7C90();
     extern M2C_UNK lbl_80419570[];
     extern s32 lbl_80494DBC;
+    s32 temp = lbl_80494DBC;
     *arg0 = lbl_80419570;
-    if ((s32) lbl_80494DBC == 0) {
+    if (temp == 0) {
         fn_802C7C90();
     }
     fn_802C5DB8(arg0, arg1);
