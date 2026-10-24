@@ -509,9 +509,8 @@ void fn_800D2C1C(void *arg0, s32 arg1) {
     extern s32 lbl_8041F754[];
     extern void fn_80048A48(void *);
     extern void fn_80047AF8(void *, s32);
-    s32 v = arg1;
-    fn_80048A48(lbl_8041F754);
-    fn_80047AF8(lbl_8041F754, v);
+    ((void (*)(void *, s32))fn_80048A48)(lbl_8041F754, arg1);
+    fn_80047AF8(lbl_8041F754, arg1);
 }
 
 void fn_800D2C5C(void) {
