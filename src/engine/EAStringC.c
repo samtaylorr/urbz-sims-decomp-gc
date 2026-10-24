@@ -2516,10 +2516,12 @@ u8 **fn_802C4024(const char *arg0) {
     u8 *e;
 
     len = fn_80248808(arg0);
-    for (i = 0; i < 0x2C0; i += 4) {
-        e = *(u8 **)((u8 *)lbl_80444628 + i);
-        if (*(u16 *)(e + 2) == len && fn_8027A6AC(e + 8, arg0) == 0) {
-            return (u8 **)((u8 *)lbl_80444628 + i);
+    for (i = 0; i <= 0xAF; i++) {
+        e = lbl_80444628[i];
+        if (*(u16 *)(e + 2) == len) {
+            if (fn_8027A6AC(e + 8, arg0) == 0) {
+                return lbl_80444628 + i;
+            }
         }
     }
     return NULL;
@@ -2555,12 +2557,12 @@ s32 fn_802C4440(void) {
     s32 cmp;
 
     for (i = 0; i <= 0xAF; i++) {
-        if (lbl_80444628[i] == lbl_803FCE5C) {
+        a = *(lbl_80444628 + i);
+        if (a == lbl_803FCE5C) {
             return 0;
         }
         if (i + 1 <= 0xAF) {
-            a = lbl_80444628[i];
-            b = lbl_80444628[i + 1];
+            b = *(lbl_80444628 + 1 + i);
             if (a == b) {
                 cmp = 0;
             } else {
