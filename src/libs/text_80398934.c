@@ -274,8 +274,54 @@ void fn_8039A7D4(s32 *self, s32 n) {
     }
 }
 
+f32 fn_8039AA70(f32 *arg0, s32 arg1) {
+    return arg0[arg1];
+}
+
+void fn_8039AA7C(void *arg0, s32 arg1) {
+    extern u8 lbl_80406BF0[];
+    char *node;
+    char *next;
+    char *vt;
+
+    node = M2C_FIELD(arg0, char **, 4);
+    M2C_FIELD(arg0, u8 **, 0xC) = lbl_80406BF0;
+    while (node != NULL) {
+        next = M2C_FIELD(node, char **, 0);
+        if (node != NULL) {
+            vt = M2C_FIELD(node, char **, 0x2C);
+            M2C_FIELD(vt, void (**)(void *, s32), 0xC)(node + M2C_FIELD(vt, s16 *, 8), 3);
+        }
+        node = next;
+    }
+    if (arg1 & 1) {
+        fn_802D20E8(arg0);
+    }
+}
+
 void fn_8039AB04(void) {
     fn_8030AD40();
+}
+
+void **fn_8039AB24(void **node) {
+    void **y;
+
+    if (node[3] != NULL) {
+        node = node[3];
+        while (node[2] != NULL) {
+            node = node[2];
+        }
+    } else {
+        y = node[1];
+        while (node == y[3]) {
+            node = y;
+            y = y[1];
+        }
+        if (node[3] != y) {
+            node = y;
+        }
+    }
+    return node;
 }
 
 void fn_8039AB7C(void *self, s32 flags) {
@@ -959,10 +1005,11 @@ void fn_8039C584(void **self, s32 flags) {
 }
 
 s32 fn_800A2B98(SortComp *comp, s32 a, s32 b);
+typedef s32 (*SortCompFn)(SortComp, s32, s32);
 void fn_8039CAD8(s32 *last, s32 val, SortComp comp) {
     s32 *next = last - 1;
 
-    while (fn_800A2B98(&comp, val, *next)) {
+    while (((SortCompFn)fn_800A2B98)(comp, val, *next)) {
         *last = *next;
         last = next;
         next--;
