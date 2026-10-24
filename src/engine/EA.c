@@ -312,8 +312,8 @@ void fn_802D9120(void) {
 
 }
 
-void fn_802D9124(void) {
-    fn_80258544();
+s32 fn_802D9124(void) {
+    return fn_80258544();
 }
 
 s32 fn_802D91D4(void *arg0, s32 arg1) {
