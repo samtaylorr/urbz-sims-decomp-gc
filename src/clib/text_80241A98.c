@@ -494,3 +494,15 @@ void fn_8024FA04(void) {
 
 }
 
+void fn_8024FA90(void) {
+    extern void (*lbl_803F7AD4[])(void);
+    lbl_803F7AD4[0]();
+}
+
+void fn_8024FAEC(void) {
+    extern void (*lbl_803F7AD4)(void);
+    extern void fn_8024FB20(void);
+    lbl_803F7AD4 = fn_8024FB20;
+    lbl_803F7AD4();
+}
+
