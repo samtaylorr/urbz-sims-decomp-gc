@@ -3078,6 +3078,15 @@ void fn_803ADE78(void) {
 
 }
 
+void fn_803ADEB0(void *self, s32 flags) {
+    extern u8 lbl_80416E20[];
+    extern void fn_802D20E8(void *);
+    M2C_FIELD(self, void **, 0x24) = lbl_80416E20;
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_803ADEE4(BoundPmf *b) {
     s16 index = b->index;
     char *obj = b->obj;
