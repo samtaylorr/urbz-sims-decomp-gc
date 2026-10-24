@@ -146,6 +146,14 @@ s32 fn_8031C3D8(u8 *self, s32 key) {
     return 0;
 }
 
+s32 fn_8031C444(u8 *self, s32 index) {
+    index--;
+    if (index < 0 || index >= *(s32 *)(self + 0x24)) {
+        return 0;
+    }
+    return (*(NameEntry **)(self + 0x28))[index].key;
+}
+
 s32 fn_8031C470(u8 *self, const char *name) {
     extern s32 fn_802486DC(const char *, const char *);
     u32 i;
