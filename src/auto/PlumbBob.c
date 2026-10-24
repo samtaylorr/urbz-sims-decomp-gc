@@ -387,6 +387,24 @@ void fn_8006CD40(void) {
     fn_8006D798();
 }
 
+s32 fn_8006D704(void *self, s32 arg1) {
+    extern char *lbl_8049665C;
+    extern f32 lbl_803C940C[];
+    char *vt;
+    s32 n;
+
+    if (arg1 == 0) {
+        return 0;
+    }
+    fn_8006D798(self);
+    if (M2C_FIELD(self, f32 *, 0x8) < lbl_803C940C[0]) {
+        vt = *(char **)lbl_8049665C;
+        n = (*(s32 (**)(char *, s32))(vt + 0x194))(lbl_8049665C + *(s16 *)(vt + 0x190), arg1);
+        return (u32)(M2C_FIELD(self, s32 *, 0x48) + n) <= (u32)M2C_FIELD(self, s32 *, 0x4C);
+    }
+    return 0;
+}
+
 void fn_8006D998(void) {
 
 }
@@ -1022,17 +1040,19 @@ void fn_8008B42C(void *arg0) {
 void fn_8008C160(void *arg0, s32 arg1) {
     extern f32 lbl_803CC1C8[];
     struct V { f32 x, y, z; } v;
-    struct V *a = (struct V *)((u8 *)arg0 + 0xC);
+    struct V *pv = &v;
+    struct V *a;
 
-    v.x = v.y = v.z = lbl_803CC1C8[0];
+    pv->x = pv->y = pv->z = lbl_803CC1C8[0];
+    if (arg1 != 0) {
+        v.z = M2C_FIELD(arg0, f32 *, 0x14);
+    }
+    a = (struct V *)((u8 *)arg0 + 0xC);
+    *a = *pv;
     if (arg1 != 0) {
         v.z = a->z;
     }
-    *a = v;
-    if (arg1 != 0) {
-        v.z = a->z;
-    }
-    *(struct V *)((u8 *)arg0 + 0x18) = v;
+    *(struct V *)((u8 *)arg0 + 0x18) = *pv;
 }
 
 void fn_8008C388(void) {
