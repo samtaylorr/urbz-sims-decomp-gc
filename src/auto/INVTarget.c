@@ -1807,6 +1807,12 @@ void fn_801F9594(s32 arg0, s32 arg1) {
     fn_801E13BC((u8 *)arg0 + (arg1 * 0x124 + 0x734));
 }
 
+void fn_801F95D4(s32 arg0, s32 arg1) {
+    void fn_801E14D4(void *);
+    fn_801F9614(arg0, arg1);
+    fn_801E14D4((u8 *)arg0 + (arg1 * 0x124 + 0x734));
+}
+
 s32 fn_801F8708(s32, s32);
 void fn_801E1338(s32, s32, s32, s32, s32, s32, s32);
 void fn_801E1254(s32, s32, s32, s32, s32);
