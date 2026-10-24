@@ -197,10 +197,7 @@ void *fn_8016C8BC(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x3C) = 0;
     M2C_FIELD(arg0, s32 *, 0x50) = 0;
     M2C_FIELD(arg0, s32 *, 0x54) = 0;
-    M2C_FIELD(arg0, s64 *, 0x58) = 0;
-    M2C_FIELD(arg0, s32 *, 0x78) = -1;
-    M2C_FIELD(arg0, s32 *, 0x7C) = 0xFFFF0000;
-    M2C_FIELD(arg0, s32 *, 0x4C) = 0;
+    ObjSelector_ClearPair((s32 *)((char *)arg0 + 0x58));
     M2C_FIELD(arg0, s32 *, 0x60) = 0;
     M2C_FIELD(arg0, s32 *, 0x64) = 0;
     M2C_FIELD(arg0, s32 *, 0x68) = 0;
@@ -220,6 +217,9 @@ void *fn_8016C8BC(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x40) = 0;
     M2C_FIELD(arg0, s32 *, 0x44) = 0;
     M2C_FIELD(arg0, s32 *, 0x48) = 0;
+    M2C_FIELD(arg0, s32 *, 0x78) = -1;
+    M2C_FIELD(arg0, s32 *, 0x7C) = 0xFFFF0000;
+    M2C_FIELD(arg0, s32 *, 0x4C) = 0;
     return arg0;
 }
 
