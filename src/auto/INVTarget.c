@@ -2599,6 +2599,12 @@ s32 fn_80230710(void) {
     return 1;
 }
 
+void fn_80230718(void **arg0, s32 *arg1) {
+    M2C_FIELD(arg0[*arg1], s32 *, 0x18) = *arg1;
+    M2C_FIELD(arg0[*arg1], void **, 0x8) = (u8 *)arg1 + 8;
+    fn_8002B86C(lbl_8041FA38[0], arg0[*arg1]);
+}
+
 void fn_802323C4(void) {
     M2C_UNK fn_80232338(M2C_UNK, M2C_UNK);
     fn_80232338(1, 0xFFFF);
