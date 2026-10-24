@@ -106,6 +106,11 @@ void fn_8014F414(void *arg0, s32 arg1) {
     fn_803A5154(arg0, arg1, 0x54415454, 1, 0);
 }
 
+void fn_8014F444(void *arg0, s32 arg1) {
+    void fn_803A51C0(void *, s32, s32, s32, s32);
+    fn_803A51C0(arg0, arg1, 0x54415454, 1, 0);
+}
+
 s32 fn_8014F698(void *arg0, s32 arg1) {
     void *vt;
 
