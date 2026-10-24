@@ -378,7 +378,7 @@ s32 fn_802D3EE8(char **arg0, char *arg1) {
 
 s32 *fn_802D406C(s32 *arg0, s32 *arg1, s32 arg2, s32 arg3) {
     void fn_802D39F0(s32 *, s32);
-    s32 *fn_802D40E4(s32 *, s32 *, s32);
+    void fn_802D40E4(s32 *, s32 *, s32);
     s32 sp8;
 
     if (arg3 == -1) {
@@ -410,11 +410,12 @@ s32 *fn_802D4158(s32 *arg0, s32 *arg1, s32 arg2) {
 
 s32 *fn_802D41A8(s32 *arg0, char *arg1) {
     void fn_802D39F0(s32 *, s32);
-    typedef struct { s32 p; } Str;
-    Str tmp = ((Str (*)(char *, char *))fn_802D3928)((char *)*arg0, arg1);
+    s32 tmp;
+    s32 *p = &tmp;
 
-    fn_802D3CE4(arg0, (char *)tmp.p);
-    fn_802D39F0(&tmp.p, tmp.p);
+    fn_802D3928(p, (char *)*arg0, arg1);
+    fn_802D3CE4(arg0, (char *)tmp);
+    fn_802D39F0(p, tmp);
     return arg0;
 }
 
@@ -429,9 +430,9 @@ s32 *fn_802D4200(s32 *arg0, s32 *arg1, s32 arg2) {
 s32 *fn_802D4240(s32 *arg0, s32 arg1) {
     void fn_802D39F0(s32 *, s32);
     s32 tmp;
-    s32 *p;
+    s32 *p = &tmp;
 
-    fn_802D4200(p = &tmp, arg0, arg1);
+    fn_802D4200(&tmp, arg0, arg1);
     fn_802D3CE4(arg0, (char *)tmp);
     fn_802D39F0(p, tmp);
     return arg0;
