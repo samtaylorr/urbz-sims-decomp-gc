@@ -17,6 +17,39 @@ void fn_8031F0B8(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x404) = 0;
 }
 
+void fn_8031F608(s32 arg0) {
+    M2C_UNK fn_802D81B8(void *);
+    M2C_UNK fn_802D8260(void *, s32);
+    M2C_UNK fn_802D82D4(void *, s32, s32);
+    M2C_UNK fn_802D8328(void *);
+    M2C_UNK fn_802D8334(void *, s32);
+    M2C_UNK fn_80366760(s32, void *, s32);
+    struct {
+        u8 pad[0x18];
+    } evt;
+    struct {
+        s32 unk0;
+        s32 unk4;
+        s32 unk8;
+        s32 unkC;
+        void *unk10;
+    } msg;
+    void *e;
+
+    e = &evt;
+    fn_802D81B8(e);
+    fn_802D82D4(e, 1, 0);
+    msg.unk10 = e;
+    msg.unk0 = 0;
+    msg.unkC = 0;
+    msg.unk8 = 0;
+    msg.unk4 = -1;
+    fn_80366760(arg0 + 0x38C, &msg, 1);
+    fn_802D8334(e, -1);
+    fn_802D8328(e);
+    fn_802D8260(e, 2);
+}
+
 void fn_8031F698(s32 arg0, s32 arg1, s32 arg2) {
     s32 fn_802C52EC(s32);
     M2C_UNK fn_8031F6DC(s32, s32, s32);
@@ -25,20 +58,28 @@ void fn_8031F698(s32 arg0, s32 arg1, s32 arg2) {
 
 M2C_UNK fn_8031F6DC(s32 arg0, s32 arg1, s32 arg2) {
     void *fn_802D1FC8(s32);
-    M2C_UNK fn_8031F608(s32);
+    void fn_8031F608(s32);
     M2C_UNK fn_80366760(s32, void *, s32);
     extern void **lbl_80496220;
-    void *temp_r30;
+    struct {
+        s32 unk0;
+        s32 unk4;
+        s32 unk8;
+        s32 unkC;
+        s32 unk10;
+    } *msg;
     void *temp_r9;
+    s32 r;
 
     fn_8031F608(arg0);
-    temp_r30 = fn_802D1FC8(0x14);
+    msg = fn_802D1FC8(0x14);
     temp_r9 = *lbl_80496220;
-    M2C_FIELD(temp_r30, s32 *, 0xC) = M2C_FIELD(temp_r9, s32 (**)(void *, s32), 0xAC)((char *)lbl_80496220 + M2C_FIELD(temp_r9, s16 *, 0xA8), arg1);
-    M2C_FIELD(temp_r30, s32 *, 0) = 1;
-    M2C_FIELD(temp_r30, s32 *, 4) = arg2;
-    M2C_FIELD(temp_r30, s32 *, 0x10) = 0;
-    fn_80366760(arg0 + 0x38C, temp_r30, 1);
+    r = M2C_FIELD(temp_r9, s32 (**)(void *, s32), 0xAC)((char *)lbl_80496220 + M2C_FIELD(temp_r9, s16 *, 0xA8), arg1);
+    msg->unk0 = 1;
+    msg->unk4 = arg2;
+    msg->unkC = r;
+    msg->unk10 = 0;
+    fn_80366760(arg0 + 0x38C, msg, 1);
 }
 
 void fn_8031F764(s32 arg0, s32 arg1, s32 arg2) {
