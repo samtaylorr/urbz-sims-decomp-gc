@@ -668,6 +668,12 @@ void fn_802DF890(void *arg0, s32 arg1) {
     }
 }
 
+void fn_802DF8DC(void *arg0) {
+    void *obj = M2C_FIELD(arg0, void **, 0);
+    void *vt = M2C_FIELD(obj, void **, 0);
+    M2C_FIELD(arg0, s32 *, 4) = M2C_FIELD(vt, s32 (**)(void *), 0x14)((u8 *)obj + M2C_FIELD(vt, s16 *, 0x10));
+}
+
 void fn_802DFB30(void) {
 
 }
