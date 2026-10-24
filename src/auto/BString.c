@@ -124,6 +124,24 @@ void fn_800D1ACC(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x18) = 0;
 }
 
+void fn_800D1AD8(s32 *self) {
+    extern s32 fn_800E18B8(s32);
+    extern s32 fn_800E18EC(s32);
+    extern f32 lbl_803D14D8[];
+    s32 state = self[6];
+    if (state == 0) {
+        fn_800E18B8(0xA);
+        self[6] = 1;
+    } else if (state == 1) {
+        s32 r = fn_800E18EC(0xA);
+        if (r == 1) {
+            fn_800E3B38(self, 0x29, lbl_803D14D8[0]);
+        } else if ((u32)(r - 2) <= 1) {
+            fn_800E3B80(self, 1);
+        }
+    }
+}
+
 void fn_800D1B68(void) {
     extern s32 lbl_8041F754[];
     extern void fn_80048A48(void *);
