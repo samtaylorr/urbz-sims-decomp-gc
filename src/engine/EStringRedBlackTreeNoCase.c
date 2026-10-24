@@ -167,30 +167,17 @@ s32 fn_80365A3C(void **arg0) {
 }
 
 s32 fn_80365B30(void **arg0, void **arg1) {
-    void *a;
-    void *b;
-    s32 flag;
+    void *a = *arg0;
+    void *b = *arg1;
 
-    a = *arg0;
-    b = *arg1;
-    do {
-        if (b == NULL) {
-            flag = 0;
-        } else {
-            flag = 1;
-        }
-        if (flag == 0) {
-            break;
-        }
-        if (M2C_FIELD(a, f32 *, 0x1C) != M2C_FIELD(b, f32 *, 0x1C)) {
-            return 0;
-        }
-        if (M2C_FIELD(a, s32 *, 0x18) != M2C_FIELD(b, s32 *, 0x18)) {
+    while (a != NULL) {
+        if (b == NULL || M2C_FIELD(a, f32 *, 0x1C) != M2C_FIELD(b, f32 *, 0x1C) ||
+            M2C_FIELD(a, s32 *, 0x18) != M2C_FIELD(b, s32 *, 0x18)) {
             return 0;
         }
         a = M2C_FIELD(a, void **, 0x10);
         b = M2C_FIELD(b, void **, 0x10);
-    } while (a != NULL);
+    }
     return b == NULL;
 }
 
@@ -284,6 +271,16 @@ void fn_8036619C(void *arg0) {
     fn_80365D3C(arg0);
 }
 
+void fn_803661F8(EMat4Node **list) {
+    extern void *fn_802D0AB8(void);
+    extern void fn_802D1A00(void *, void *);
+    EMat4Node *n;
+    for (n = *list; n != NULL; n = n->next) {
+        fn_802D1A00(fn_802D0AB8(), n->value);
+    }
+    fn_8036619C(list);
+}
+
 s32 fn_8036625C(void **arg0) {
     s32 var_r9;
     void *var_r3;
@@ -297,6 +294,15 @@ s32 fn_8036625C(void **arg0) {
         } while (var_r3 != NULL);
     }
     return var_r9;
+}
+
+void *fn_80366284(void *arg0, void *arg1) {
+    extern void fn_80366328(void *, s32);
+    extern void fn_803663B8(void *, void *);
+    fn_8036619C(arg0);
+    fn_80366328(arg0, M2C_FIELD(arg1, s32 *, 0xC));
+    fn_803663B8(arg0, arg1);
+    return arg0;
 }
 
 void fn_803662D0(void *arg0) {
@@ -315,20 +321,36 @@ void fn_803662D0(void *arg0) {
     }
 }
 
-s32 fn_803663B8(void *arg0, void **arg1) {
+void fn_80366328(void *arg0, s32 arg1) {
     void *node;
-    s32 result;
+    void fn_802D1A00(void *, void *);
+    void *fn_802D0AB8(void);
+    void fn_80365C8C(void *, s32);
+
+    if (M2C_FIELD(arg0, s32 *, 0xC) != arg1) {
+        fn_802D1A00(fn_802D0AB8(), M2C_FIELD(arg0, void **, 8));
+        fn_80365C8C(arg0, arg1);
+    }
+    node = *(void **)arg0;
+    if (node != NULL) {
+        u32 key = (u32)M2C_FIELD(node, s32 *, 0xC) % (u32)M2C_FIELD(arg0, s32 *, 0xC);
+        void **buckets = M2C_FIELD(arg0, void **, 8);
+        M2C_FIELD(node, void **, 8) = buckets[key];
+        buckets[key] = node;
+        node = M2C_FIELD(node, void **, 4);
+    }
+}
+
+void *fn_803663B8(void *arg0, void **arg1) {
+    void *node;
+    void fn_80365DFC(s32, void *);
 
     node = *arg1;
-    do {
-        result = 0;
-        if (node != NULL) {
-            result = fn_80365DFC(M2C_FIELD(node, s32 *, 0xC), M2C_FIELD(node, void **, 0x10));
-            node = M2C_FIELD(node, void **, 4);
-            result = result != 0;
-        }
-    } while (node != NULL && result == 0);
-    return result;
+    while (node != NULL) {
+        fn_80365DFC(M2C_FIELD(node, s32 *, 0xC), M2C_FIELD(node, void **, 0x10));
+        node = M2C_FIELD(node, void **, 4);
+    }
+    return arg0;
 }
 
 s32 fn_80366414(void *arg0, void **arg1) {
@@ -339,7 +361,6 @@ s32 fn_80366414(void *arg0, void **arg1) {
     s32 key;
     s32 fn_8036625C(void **);
     s32 fn_803660C8(void *, s32, s32 *);
-    s32 fn_80365DFC(s32, void *);
 
     countA = fn_8036625C((void **)arg0);
     countB = fn_8036625C(arg1);
@@ -347,18 +368,13 @@ s32 fn_80366414(void *arg0, void **arg1) {
         return 0;
     }
     node = *arg1;
-    do {
-        result = 0;
-        if (node != NULL) {
-            key = M2C_FIELD(node, s32 *, 0x10);
-            if (fn_803660C8(arg0, M2C_FIELD(node, s32 *, 0xC), &result) && result == key) {
-                result = 1;
-            } else {
-                result = 0;
-            }
-            node = M2C_FIELD(node, void **, 4);
-        }
-    } while (node != NULL && result != 0);
+    result = 1;
+    while (node != NULL && result) {
+        key = M2C_FIELD(node, s32 *, 0x10);
+        result = fn_803660C8(arg0, M2C_FIELD(node, s32 *, 0xC), &result);
+        if (result) result = key == result;
+        node = M2C_FIELD(node, void **, 4);
+    }
     return result;
 }
 
