@@ -50,9 +50,50 @@ void fn_802C686C(void *arg0, s8 *arg1, s32 arg2) {
     *arg1 = 0;
 }
 
+void fn_802C6A40(char **arg0, char arg1) {
+    (*arg0)[0] = arg1;
+    (*arg0)[1] = 0;
+}
+
 s32 fn_802C6A5C(s32 *arg0) {
     s32 fn_80248808(s32);
     return fn_80248808(*arg0);
+}
+
+void fn_802C6A80(char **arg0) {
+    char *p;
+
+    for (p = *arg0; *p != 0; p++) {
+        if (*p >= 'a' && *p <= 'z') {
+            *p -= 0x20;
+        }
+    }
+}
+
+void fn_802C6AB4(char **arg0) {
+    char *p;
+
+    for (p = *arg0; *p != 0; p++) {
+        if (*p >= 'A' && *p <= 'Z') {
+            *p += 0x20;
+        }
+    }
+}
+
+s32 fn_802C6AE8(char **arg0, const char *arg1) {
+    const char *p = *arg0;
+
+    do {
+        if (*p < *arg1) {
+            return -1;
+        }
+        if (*p > *arg1) {
+            return 1;
+        }
+        p++;
+        arg1++;
+    } while (*p != 0 || *arg1 != 0);
+    return 0;
 }
 
 void fn_802C6CCC(s32 *arg0, s32 arg1, s32 arg2, s32 arg3) {
