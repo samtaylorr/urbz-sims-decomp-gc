@@ -27,6 +27,13 @@ typedef struct S32Pair {
     s32 b;
 } S32Pair;
 
+static inline S32Pair S32Pair_Make(s32 a, s32 b) {
+    S32Pair r;
+    r.a = a;
+    r.b = b;
+    return r;
+}
+
 extern void fn_803997AC(void *, u32);
 
 static inline void ChainVecAlloc_Init(ChainVecAlloc *a) {
@@ -451,14 +458,16 @@ s32 fn_80105AC4(void *arg0, void *arg1) {
 }
 
 S32Pair fn_80105B10(s8 *arg1) {
-    S32Pair r;
-    r.a = arg1[0];
-    r.b = arg1[1];
+    S32Pair r = { arg1[0], arg1[1] };
     return r;
 }
 
 S32Pair fn_80105B30(s8 *arg1) {
-    S32Pair r = { (arg1[1] << 4) | 8, (arg1[0] << 4) | 8 };
+    S32Pair t;
+    S32Pair r;
+    t.a = (arg1[1] << 4) | 8;
+    t.b = (arg1[0] << 4) | 8;
+    r = t;
     return r;
 }
 
