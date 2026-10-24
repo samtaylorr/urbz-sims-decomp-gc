@@ -35,7 +35,7 @@ s32 fn_80292CBC(void *self) {
     extern s32 lbl_804960F4;
     extern struct { void *unk0; void (*free)(void *); } *lbl_80494DA0;
     void *obj;
-    u16 *name;
+    u16 *name[2];
     u16 *str;
     s32 mgr;
     u16 *p;
@@ -44,10 +44,10 @@ s32 fn_80292CBC(void *self) {
     if (obj != NULL) {
         fn_802A0890(M2C_FIELD(obj, s32 *, 0x50) + 0x24, self);
     } else {
-        fn_802BE53C(&name, lbl_803ECA4C);
+        fn_802BE53C(name, lbl_803ECA4C);
         mgr = lbl_804960F4;
         fn_802BE53C(&str, lbl_803EC8D8);
-        fn_802A5EE0(mgr, &str, &name);
+        fn_802A5EE0(mgr, &str, name);
         p = str;
         if (--*p == 0) {
             lbl_80494DA0->free(p);
@@ -126,6 +126,11 @@ s32 fn_80292E88(s32 arg0) {
 void fn_80298018(s32 arg0) {
     M2C_UNK fn_802A14A0(s32);
     fn_802A14A0(arg0 + 0x20);
+}
+
+void fn_80298308(void) {
+    extern void (*lbl_80443310[])(void);
+    lbl_80443310[0]();
 }
 
 void fn_80299A50(void) {
