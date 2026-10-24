@@ -91,6 +91,16 @@ void fn_8014DECC(void *arg0, void *arg1) {
     }
 }
 
+s32 *fn_8014F3DC(void *self, s32 id) {
+    s32 **it;
+    for (it = M2C_FIELD(self, s32 ***, 0x670); it != M2C_FIELD(self, s32 ***, 0x674); it++) {
+        if (**it == id) {
+            return *it;
+        }
+    }
+    return NULL;
+}
+
 void fn_8014F414(void *arg0, s32 arg1) {
     void fn_803A5154(void *, s32, s32, s32, s32);
     fn_803A5154(arg0, arg1, 0x54415454, 1, 0);
