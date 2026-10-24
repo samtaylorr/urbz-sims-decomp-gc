@@ -64,11 +64,11 @@ void fn_8032D38C(void **self, s32 flags) {
     }
 }
 
-void fn_8032D440(void) {
+void fn_8032D440(void *arg0) {
 
 }
 
-void fn_8032D444(void) {
+void fn_8032D444(void *arg0) {
 
 }
 
