@@ -3731,6 +3731,7 @@ s32 fn_800EB554(s32 arg0, s32 arg1) {
 }
 
 s32 fn_800EB584(s32 arg0, s32 arg1) {
+    s32 fn_800EB31C(s32, s32);
     return fn_800EB31C(arg1, arg0) ^ 1;
 }
 
