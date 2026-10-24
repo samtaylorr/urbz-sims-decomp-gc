@@ -308,7 +308,7 @@ void fn_802C7C90(void) {
         lbl_80494DBC = 1;
         lbl_80494DB8 = 0;
         while (lbl_80494DC4 > 0) {
-            EMat4Obj *o = ((EMat4AtExit *)lbl_804935F0)[lbl_80494DC4 - 1].obj;
+            EMat4Obj *o = *(EMat4Obj **)&lbl_804935F0[(lbl_80494DC4 - 1) * 2];
             o->vtbl[3].fn((u8 *)o + o->vtbl[3].delta);
             lbl_80494DC4--;
         }
@@ -322,10 +322,7 @@ void *fn_802C7D1C(void *self) {
 
 void *fn_802C7D4C(void *arg0, s32 arg1) {
     fn_802C7DD0(arg0);
-    if (arg1 < 4) {
-        arg1 = 4;
-    }
-    M2C_FIELD(arg0, s32 *, 8) = arg1;
+    M2C_FIELD(arg0, s32 *, 8) = arg1 < 4 ? 4 : arg1;
     return arg0;
 }
 
