@@ -640,10 +640,11 @@ void fn_8035345C(void *arg0, void *arg1) {
     M2C_UNK fn_803534B4(void *, s32, s32, s32, s32, s32, s32, s32, s32);
     u8 *p = arg1;
     s32 flag = 1;
+    s32 a = M2C_FIELD(p, s32 *, 4);
     if (p[1] == 0) {
         flag = 0;
     }
-    fn_803534B4(arg0, M2C_FIELD(p, s32 *, 4), M2C_FIELD(p, s32 *, 8), M2C_FIELD(p, s32 *, 0xC), M2C_FIELD(p, s32 *, 0x10), M2C_FIELD(p, s32 *, 0x14), M2C_FIELD(p, s32 *, 0x18), M2C_FIELD(p, s32 *, 0x1C), flag);
+    fn_803534B4(arg0, a, M2C_FIELD(p, s32 *, 8), M2C_FIELD(p, s32 *, 0xC), M2C_FIELD(p, s32 *, 0x10), M2C_FIELD(p, s32 *, 0x14), M2C_FIELD(p, s32 *, 0x18), M2C_FIELD(p, s32 *, 0x1C), flag);
 }
 
 void fn_803547B8(void *arg0, void *arg1) {
