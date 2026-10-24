@@ -245,10 +245,10 @@ char **fn_802C7A28(char **arg0, s32 arg1) {
 }
 
 s32 fn_802C7A68(s32 *arg0, s32 arg1) {
-    if (arg1 > arg0[1]) {
-        return 0;
+    if (arg1 <= arg0[1]) {
+        return arg0[0];
     }
-    return arg0[0];
+    return 0;
 }
 
 void fn_802C7A84(void) {
@@ -378,7 +378,7 @@ retry:
     fn_802CAA88((s32)self, -1);
     if (*(s32 *)(self + 0x3C) == 0 || *(s32 *)(self + 0x38) == fn_802D9124()) {
         if (*(s32 *)(self + 0x3C) == 0) {
-            fn_802CAA88((s32)(self + 0x1C), -1);
+            fn_802CAA88((s32)self + 0x1C, -1);
             *(s32 *)(self + 0x38) = fn_802D9124();
         }
         *(s32 *)(self + 0x3C) = *(s32 *)(self + 0x3C) + 1;
