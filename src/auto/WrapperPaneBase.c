@@ -439,7 +439,10 @@ s32 fn_800CED50(void *arg0) {
     void *temp_r3;
 
     temp_r3 = fn_800CD5C4(arg0, 1);
-    return temp_r3 != NULL ? M2C_FIELD(temp_r3, s32 *, 8) : -1;
+    if (temp_r3 == NULL) {
+        return -1;
+    }
+    return M2C_FIELD(temp_r3, s32 *, 8);
 }
 
 s32 fn_800CED88(void *arg0) {
