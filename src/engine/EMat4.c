@@ -269,8 +269,8 @@ void *fn_802CAB04(u8 *self) {
     fn_802CA9A8(self);
     *(u8 **)(self + 0x0) = lbl_80419350;
     fn_802CA9A8(self + 0x1C);
-    *(s32 *)(self + 0x3C) = 0;
     *(s32 *)(self + 0x38) = 0;
+    *(s32 *)(self + 0x3C) = 0;
     return self;
 }
 
