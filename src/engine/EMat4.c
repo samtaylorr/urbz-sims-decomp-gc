@@ -128,6 +128,14 @@ char **fn_802C6DE4(char **arg0, const char *arg1) {
     return arg0;
 }
 
+char **fn_802C6E70(char **arg0, s32 arg1) {
+    s16 c;
+
+    c = arg1 << 8;
+    fn_802C6DE4(arg0, (const char *)&c);
+    return arg0;
+}
+
 void fn_802C725C(u8 **arg0, s32 arg1, u8 arg2) {
     u8 *var_r3;
     u8 var_r0;
