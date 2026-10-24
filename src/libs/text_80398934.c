@@ -232,6 +232,12 @@ void fn_8039A2DC(u8 *dst, u8 *src, s32 n) {
     }
 }
 
+s32 fn_8039A4B8(s32 arg0, s32 arg1) {
+    fn_80399F34((void *)arg0);
+    fn_8039A290((s32 *)arg0, (s32 *)arg1);
+    return arg0;
+}
+
 void fn_8039A4F8(s32 *self, s32 n) {
     while (--n != -1) {
         self++;
