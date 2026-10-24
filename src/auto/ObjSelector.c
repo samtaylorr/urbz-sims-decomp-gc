@@ -137,8 +137,9 @@ void fn_8016C7A0(void *arg0, s32 arg1) {
     void fn_80197B90(void *, s32);
     extern char lbl_80411A38[];
     extern u8 *lbl_8049665C;
+    u8 *obj = lbl_8049665C;
     M2C_FIELD(arg0, void **, 0x10) = lbl_80411A38;
-    (*(void (**)(u8 *, void *))(*(u8 **)lbl_8049665C + 0x11C))(lbl_8049665C + *(s16 *)(*(u8 **)lbl_8049665C + 0x118), arg0);
+    (*(void (**)(u8 *, void *))(*(u8 **)obj + 0x11C))(obj + *(s16 *)(*(u8 **)obj + 0x118), arg0);
     fn_80197B90(arg0, arg1);
 }
 
@@ -154,9 +155,58 @@ s32 fn_8016C804(void *arg0) {
     return ret;
 }
 
+void *fn_8016C85C(void *arg0, s32 arg1) {
+    switch (arg1) {
+    case 0xC:
+    case 0xD:
+    case 0xE:
+    case 0xF:
+    case 0x10:
+        return arg0;
+    }
+    return NULL;
+}
+
 extern s32 lbl_80495C70;
 void fn_8016C894(void) {
     fn_800F1A60((s32)&lbl_80495C70, 2);
+}
+
+void *fn_8016C8BC(void *arg0) {
+    void fn_801B3918(void *);
+    M2C_FIELD(arg0, s32 *, 0xC) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = -1;
+    M2C_FIELD(arg0, s32 *, 8) = -1;
+    M2C_FIELD(arg0, s32 *, 0x10) = 0;
+    fn_801B3918((char *)arg0 + 0x1C);
+    M2C_FIELD(arg0, s32 *, 0x3C) = 0;
+    M2C_FIELD(arg0, s32 *, 0x50) = 0;
+    M2C_FIELD(arg0, s32 *, 0x54) = 0;
+    M2C_FIELD(arg0, s32 *, 0x58) = 0;
+    M2C_FIELD(arg0, s32 *, 0x5C) = 0;
+    M2C_FIELD(arg0, s32 *, 0x78) = -1;
+    M2C_FIELD(arg0, s32 *, 0x7C) = 0xFFFF0000;
+    M2C_FIELD(arg0, s32 *, 0x4C) = 0;
+    M2C_FIELD(arg0, s32 *, 0x60) = 0;
+    M2C_FIELD(arg0, s32 *, 0x64) = 0;
+    M2C_FIELD(arg0, s32 *, 0x68) = 0;
+    M2C_FIELD(arg0, s16 *, 0x6C) = 0;
+    M2C_FIELD(arg0, s32 *, 0x70) = -1;
+    M2C_FIELD(arg0, s32 *, 0x74) = -1;
+    M2C_FIELD(arg0, s32 *, 0x80) = 0;
+    M2C_FIELD(arg0, s32 *, 0x84) = 0;
+    M2C_FIELD(arg0, s32 *, 0x88) = 0;
+    M2C_FIELD(arg0, s32 *, 0x8C) = 0;
+    M2C_FIELD(arg0, s32 *, 0x90) = 0;
+    M2C_FIELD(arg0, s32 *, 0x94) = 0;
+    M2C_FIELD(arg0, s32 *, 0x98) = 0;
+    M2C_FIELD(arg0, s32 *, 0x9C) = 0;
+    M2C_FIELD(arg0, s32 *, 0xA0) = 0;
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 0x40) = 0;
+    M2C_FIELD(arg0, s32 *, 0x44) = 0;
+    M2C_FIELD(arg0, s32 *, 0x48) = 0;
+    return arg0;
 }
 
 s32 fn_8016CCE0(void *arg0) {
