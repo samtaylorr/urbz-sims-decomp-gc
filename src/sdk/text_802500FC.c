@@ -751,6 +751,33 @@ void *fn_802654A0(u8 *id, char *game, char *company, u8 diskNumber, u8 version) 
     return id;
 }
 
+void fn_80265520(void) {
+    typedef struct { u8 r, g, b, a; } Color;
+    extern u32 fn_80269364(void);
+    extern u16 fn_803798D8(void);
+    extern u8 fn_80257D64(void);
+    extern void fn_80378D0C(Color, Color, const char *);
+    extern const char *lbl_803EC2A8[];
+    extern const char *lbl_80494A80;
+    extern const char *lbl_80494A84;
+    extern Color lbl_80497480;
+    extern Color lbl_80497484;
+    const char *message;
+    Color bg = lbl_80497480;
+    Color fg = lbl_80497484;
+
+    if (fn_80269364() == 0) {
+        if (fn_803798D8() == 1) {
+            message = lbl_80494A80;
+        } else {
+            message = lbl_80494A84;
+        }
+    } else {
+        message = lbl_803EC2A8[fn_80257D64()];
+    }
+    fn_80378D0C(fg, bg, message);
+}
+
 s32 fn_802668EC(s32 arg0) {
     extern s32 lbl_80495F4C;
     s32 temp_r31;
