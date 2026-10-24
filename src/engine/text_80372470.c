@@ -97,7 +97,7 @@ void fn_80372640(void **arg0, char *arg1) {
 void fn_803726CC(s32 arg0, s32 arg1) {
     extern s32 fn_802D6A90(void *, void *, void *, void *, s32, void *, void *);
     extern void fn_8037273C(void);
-    extern void fn_803727BC(void);
+    extern void fn_803727BC(void *);
     extern void fn_803727DC(void *);
     extern u8 lbl_803F5658[];
     extern u8 lbl_80493858[];
