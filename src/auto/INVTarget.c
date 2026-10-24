@@ -459,20 +459,45 @@ void fn_801DB8B8(void *arg0, s32 arg1) {
     }
 }
 
+void fn_801DBF38(void **arg0, void *arg1) {
+    if (M2C_FIELD(arg1, void **, 0) != NULL) {
+        M2C_FIELD(M2C_FIELD(arg1, void **, 0), void **, 4) = M2C_FIELD(arg1, void **, 4);
+    }
+    if (M2C_FIELD(arg1, void **, 4) != NULL) {
+        M2C_FIELD(M2C_FIELD(arg1, void **, 4), void **, 0) = M2C_FIELD(arg1, void **, 0);
+    }
+    if (arg0[0] == arg1) {
+        arg0[0] = M2C_FIELD(arg1, void **, 4);
+    }
+    if (arg0[1] == arg1) {
+        arg0[1] = M2C_FIELD(arg1, void **, 0);
+    }
+    M2C_FIELD(arg1, void **, 4) = NULL;
+    M2C_FIELD(arg1, void **, 0) = NULL;
+    if (arg0[2] != NULL) {
+        M2C_FIELD(arg1, void **, 4) = arg0[2];
+        M2C_FIELD(arg0[2], void **, 0) = arg1;
+    }
+    arg0[2] = arg1;
+    M2C_FIELD(arg0[2], s32 *, 8) = 0x4B;
+    M2C_FIELD(arg0[2], s32 *, 0xC) = 0;
+    M2C_FIELD(arg0[2], s32 *, 0x10) = 0;
+}
+
 s32 fn_801DBFD4(void **arg0, s32 arg1, s32 arg2) {
     void fn_801DBE6C(void **, s32, s32);
     void *it;
 
-    if (arg0[2] == NULL) {
-        return 0;
-    }
-    for (it = arg0[0]; it != NULL; it = M2C_FIELD(it, void **, 4)) {
-        if (M2C_FIELD(it, s32 *, 0xC) == arg2) {
-            return 0;
+    if (arg0[2] != NULL) {
+        for (it = arg0[0]; it != NULL; it = M2C_FIELD(it, void **, 4)) {
+            if (M2C_FIELD(it, s32 *, 0xC) == arg2) {
+                return 0;
+            }
         }
+        fn_801DBE6C(arg0, arg1, arg2);
+        return 1;
     }
-    fn_801DBE6C(arg0, arg1, arg2);
-    return 1;
+    return 0;
 }
 
 s32 fn_801DC084(void **arg0, s32 arg1) {
@@ -747,13 +772,13 @@ void fn_801DECDC(void *arg0, s32 arg1) {
 }
 
 void fn_801DEFA8(void) {
-    extern s32 fn_801DF04C(void *);
+    extern u8 *fn_801DF04C(void *);
     extern void fn_801DF0DC(void);
     extern void fn_801DF3F8(s32);
     extern void *fn_802D1FC8(s32);
     extern s32 lbl_80494618;
     if (lbl_80494618 == 0) {
-        lbl_80494618 = fn_801DF04C(fn_802D1FC8(0xFC));
+        lbl_80494618 = (s32)fn_801DF04C(fn_802D1FC8(0xFC));
         fn_801DF0DC();
         fn_801DF3F8(lbl_80494618);
     }
