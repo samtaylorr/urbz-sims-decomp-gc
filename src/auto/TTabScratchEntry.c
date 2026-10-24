@@ -365,6 +365,12 @@ s32 fn_8019EF6C(void *arg0) {
     return n;
 }
 
+extern u8 lbl_80414830[];
+void fn_8019F040(void **self, s32 flags) {
+    *self = lbl_80414830;
+    fn_8019E5B0(self, flags);
+}
+
 s32 fn_8019F070(void) {
     return 0;
 }
