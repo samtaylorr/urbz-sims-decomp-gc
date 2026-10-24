@@ -310,8 +310,7 @@ s32 fn_803124DC(void *arg0, s32 arg1) {
 }
 
 s32 fn_803124EC(void *arg0, s32 arg1, s32 arg2) {
-    s32 *p = (s32 *)((u8 *)arg0 + 0x194);
-    return p[arg2 + arg1 * 2];
+    return ((struct { u8 pad[0x194]; s32 unk194[2][2]; } *)arg0)->unk194[arg1][arg2];
 }
 
 void fn_8031254C(void *arg0, void *arg1) {
