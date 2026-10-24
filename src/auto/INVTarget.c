@@ -2521,7 +2521,7 @@ void fn_8022E84C(void) {
 }
 
 void fn_8002B86C(s32, void *);
-extern s32 lbl_8041FA38;
+extern s32 lbl_8041FA38[];
 void fn_8022E86C(void **arg0, s32 *arg1) {
     M2C_FIELD(arg0[*arg1], s32 *, 0x18) = *arg1;
     M2C_FIELD(arg0[*arg1], void **, 0x8) = (u8 *)arg1 + 8;
