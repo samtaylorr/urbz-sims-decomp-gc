@@ -110,6 +110,31 @@ void fn_801028D8(void **self, s32 flags) {
     }
 }
 
+void *fn_80102930(u32 size) {
+    extern void *fn_802D0AB8(void *);
+    extern void *fn_802D197C(void *heap, u32 size, u32 align);
+    extern void *fn_802D0B3C(void);
+    extern void *fn_802DC9F4(void *heap, u32 size, s32 arg2, s32 arg3);
+    extern void fn_80248488(void *, s32, s32);
+    void *heap;
+    void *p;
+
+    heap = ((void *(*)(void))fn_802D0AB8)();
+    if (size == 0) {
+        return NULL;
+    }
+    p = fn_802D197C(heap, size, 4);
+    if (p == NULL) {
+        p = fn_802DC9F4(heap, size, 1, 0);
+        if (p == NULL && heap == ((void *(*)(void))fn_802D0AB8)()) {
+            return fn_802DC9F4(fn_802D0B3C(), size, 1, 0);
+        }
+    } else {
+        fn_80248488(p, 0, size);
+    }
+    return p;
+}
+
 extern void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
 void fn_801029D8(void *arg0) {
@@ -429,9 +454,7 @@ S32Pair fn_80105B10(s8 *arg1) {
 }
 
 S32Pair fn_80105B30(s8 *arg1) {
-    S32Pair r;
-    r.a = (arg1[1] << 4) | 8;
-    r.b = (arg1[0] << 4) | 8;
+    S32Pair r = { (arg1[1] << 4) | 8, (arg1[0] << 4) | 8 };
     return r;
 }
 
