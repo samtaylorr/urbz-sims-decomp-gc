@@ -2,6 +2,8 @@
 #include "common.h"
 
 void fn_800F0FFC(void);
+void fn_800F134C(void);
+void fn_800F1510(void);
 s32 fn_800F4878(void **arg0);
 
 static inline u16 *BString2_Data(void **s) {
