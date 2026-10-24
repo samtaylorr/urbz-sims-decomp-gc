@@ -120,6 +120,14 @@ void fn_800D196C(s32 *self) {
     }
 }
 
+void fn_800D19DC(void) {
+    extern s32 lbl_8041F754[];
+    extern void fn_800487EC(void *);
+    extern void fn_800D2AE4(void);
+    fn_800D2AE4();
+    fn_800487EC(lbl_8041F754);
+}
+
 void fn_800D1ACC(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x18) = 0;
 }
