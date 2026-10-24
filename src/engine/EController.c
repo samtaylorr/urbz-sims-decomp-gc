@@ -76,10 +76,47 @@ s32 fn_80311350(u32 *arg0, u32 *arg1) {
     return -1;
 }
 
+void fn_80311778(s32 arg0, s32 arg1, s32 arg2) {
+    s32 fn_80311990(s32, s32);
+    s32 i;
+
+    i = fn_80311990(arg0, arg1);
+    if (i >= 0) {
+        *(s32 *)(arg0 + 0x14 + i * 0xC) = arg2;
+    }
+}
+
 void fn_803117BC(s32 arg0, s32 arg1, s32 arg2) {
     void fn_803118A0(s32, s32, s32);
     s32 fn_80311938(s32, s32);
     fn_803118A0(arg0, arg1, fn_80311938(arg0, arg2));
+}
+
+void fn_80311800(s32 arg0, s32 arg1, s32 *arg2, s32 arg3) {
+    void fn_803117BC(s32, s32, s32);
+    s32 i;
+
+    for (i = 0; i < arg3; i++) {
+        fn_803117BC(arg0, arg1, *arg2++);
+    }
+}
+
+void fn_8031185C(s32 arg0, s32 arg1, s32 arg2) {
+    void fn_803118EC(s32, s32, s32);
+    s32 fn_80311938(s32, s32);
+    fn_803118EC(arg0, arg1, fn_80311938(arg0, arg2));
+}
+
+void fn_803118A0(s32 arg0, s32 arg1, s32 arg2) {
+    s32 fn_80311990(s32, s32);
+    s32 i;
+    s32 base;
+
+    i = fn_80311990(arg0, arg1);
+    if (i >= 0) {
+        base = arg0 + 0x14;
+        *(s32 *)(base + i * 0xC) |= arg2;
+    }
 }
 
 s32 fn_80311990();
