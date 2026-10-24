@@ -289,6 +289,17 @@ s32 fn_802D3D24(s32 *arg0) {
     return fn_80248808(*arg0);
 }
 
+char **fn_802D3D48(char **arg0) {
+    char *p;
+
+    for (p = *arg0; *p != 0; p++) {
+        if (*p >= 'a' && *p <= 'z') {
+            *p -= 0x20;
+        }
+    }
+    return arg0;
+}
+
 s32 *fn_802D3D7C(s32 *arg0) {
     M2C_UNK fn_803783F0(s32);
     fn_803783F0(*arg0);
@@ -573,11 +584,10 @@ s32 *fn_802D4A90(s32 *arg0, s32 arg1) {
     s8 *start;
     s8 *p;
 
-    start = (s8 *)*arg0;
-    if (*start == arg1) {
-        p = start + 1;
-        while (*p == arg1) {
-            p++;
+    p = (s8 *)*arg0;
+    if (*p == arg1) {
+        start = p;
+        for (p++; *p == arg1; p++) {
         }
         if (p != start) {
             fn_802D3CE4(arg0, (char *)p);
@@ -598,14 +608,15 @@ s32 *fn_802D4B44(s32 *arg0, s32 arg1) {
     s32 *fn_802D40E4(s32 *, s32 *, s32);
     char *fn_80248640(char *, char *);
     s32 sp8;
-    s32 i;
     s32 len;
+    s32 i;
 
     len = fn_802D3D24(arg0);
     if (len != 0) {
-        i = len;
-        while (i > 0 && fn_80248640((char *)arg1, (char *)(s32)((s8 *)*arg0)[i - 1]) != 0) {
-            i--;
+        for (i = len; i > 0; i--) {
+            if (fn_80248640((char *)arg1, (char *)(s32)((s8 *)*arg0)[i - 1]) == 0) {
+                break;
+            }
         }
         if (i != len) {
             fn_802D40E4(&sp8, arg0, i);
