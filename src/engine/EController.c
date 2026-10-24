@@ -117,12 +117,12 @@ void fn_8031185C(s32 arg0, s32 arg1, s32 arg2) {
 void fn_803118A0(s32 arg0, s32 arg1, s32 arg2) {
     s32 fn_80311990(s32, s32);
     s32 i;
-    s32 *p;
+    s32 base;
 
     i = fn_80311990(arg0, arg1);
     if (i >= 0) {
-        p = (s32 *)((char *)arg0 + 0x14 + i * 0xC);
-        *p |= arg2;
+        base = arg0 + 0x14;
+        *(s32 *)(base + i * 0xC) |= arg2;
     }
 }
 
@@ -303,6 +303,15 @@ void fn_8031244C(void *arg0, s32 arg1, s32 arg2) {
 
 void fn_80312494(void *arg0, s32 arg1, s32 arg2) {
     fn_80311310(arg0, fn_80311B2C(arg0, arg2), 1, arg1);
+}
+
+s32 fn_803124DC(void *arg0, s32 arg1) {
+    return ((struct { u8 pad[0x18C]; s32 unk18C[2]; } *)arg0)->unk18C[arg1];
+}
+
+s32 fn_803124EC(void *arg0, s32 arg1, s32 arg2) {
+    s32 *p = (s32 *)((u8 *)arg0 + 0x194);
+    return p[arg2 + arg1 * 2];
 }
 
 void fn_8031254C(void *arg0, void *arg1) {
