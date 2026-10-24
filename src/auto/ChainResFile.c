@@ -366,10 +366,10 @@ s32 fn_801058D4(void *arg0) {
 }
 
 s32 fn_801058EC(void *arg0, void *arg1) {
-    if (fn_801058BC(arg0) != fn_801058BC(arg1)) {
-        return fn_801058BC(arg0) < fn_801058BC(arg1);
+    if (fn_801058BC(arg0) == fn_801058BC(arg1)) {
+        return fn_801058D4(arg0) < fn_801058D4(arg1);
     }
-    return fn_801058D4(arg0) < fn_801058D4(arg1);
+    return fn_801058BC(arg0) < fn_801058BC(arg1);
 }
 
 s32 fn_80105968(void *arg0, void *arg1) {
