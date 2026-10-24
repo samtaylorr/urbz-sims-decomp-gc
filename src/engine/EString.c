@@ -150,6 +150,14 @@ s32 fn_802D38E4(s32 *self) {
     return *self;
 }
 
+char **fn_802D38EC(char **arg0, s32 arg1) {
+    s16 c;
+
+    c = arg1 << 8;
+    fn_802D3C60(arg0, (const char *)&c);
+    return arg0;
+}
+
 s32 *fn_802D3928(s32 *arg0, char *arg1, char *arg2) {
     M2C_UNK fn_802482F8();
     s32 fn_80248808(const char *);
