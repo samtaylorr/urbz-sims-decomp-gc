@@ -357,6 +357,11 @@ s32 fn_801056A4(void *arg0, void *arg1) {
     return var_r11;
 }
 
+s8 *fn_80105808(s8 *self, s8 *a, s8 *b) {
+    fn_80105574(self, a[0] - b[0], a[1] - b[1], a[2]);
+    return self;
+}
+
 s8 *fn_80105868(s8 *self, s32 k, s8 *src) {
     fn_80105574(self, k * src[0], k * src[1], src[2]);
     return self;
@@ -395,6 +400,20 @@ s32 fn_80105A34(void *arg0, void *arg1) {
 
 s32 fn_80105A78(void *arg0, void *arg1) {
     return (fn_801058BC(arg0) & 1) == (fn_801058BC(arg1) & 1);
+}
+
+S32Pair fn_80105B10(s8 *arg1) {
+    S32Pair r;
+    r.b = arg1[1];
+    r.a = arg1[0];
+    return r;
+}
+
+S32Pair fn_80105B30(s8 *arg1) {
+    S32Pair r;
+    r.a = (arg1[1] << 4) | 8;
+    r.b = (arg1[0] << 4) | 8;
+    return r;
 }
 
 s8 fn_80105B78(u8 *arg0) {
