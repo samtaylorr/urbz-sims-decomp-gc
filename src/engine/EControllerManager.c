@@ -353,6 +353,15 @@ s32 fn_80334E0C(s32 arg0, s32 arg1) {
     return fn_80336EC4(arg0, arg1);
 }
 
+s32 fn_80334E70(s32 arg0, s32 arg1) {
+    s32 fn_80334B0C();
+    s32 fn_80336E08(s32, s32);
+    if (lbl_80494F5C == 0 && fn_80334B0C() == 0) {
+        return 1;
+    }
+    return fn_80336E08(arg0, arg1);
+}
+
 void fn_80334EC4(void (*cb)(void)) {
     lbl_80494F5C = cb;
 }
