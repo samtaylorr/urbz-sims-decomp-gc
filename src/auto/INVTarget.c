@@ -2562,7 +2562,7 @@ void fn_8022F404(void) {
 void fn_8022F424(void **arg0, s32 *arg1) {
     M2C_FIELD(arg0[*arg1], s32 *, 0x18) = *arg1;
     M2C_FIELD(arg0[*arg1], void **, 0x8) = (u8 *)arg1 + 0x68;
-    fn_8002B86C(lbl_8041FA38, arg0[*arg1]);
+    fn_8002B86C(lbl_8041FA38[0], arg0[*arg1]);
 }
 
 s32 fn_802303F0(void) {
