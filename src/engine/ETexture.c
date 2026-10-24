@@ -58,6 +58,12 @@ void fn_8036EEE0(void *self, s32 flags) {
     }
 }
 
+s32 fn_8036EF14(void *arg0, void *arg1) {
+    struct Blk { s32 v[8]; };
+    *(struct Blk *)arg0 = *(struct Blk *)arg1;
+    return 1;
+}
+
 s32 fn_8036EF74(s32 *self) {
     return *self;
 }
