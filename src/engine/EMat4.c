@@ -233,8 +233,8 @@ char **fn_802C73A8(char **arg0) {
     s32 len = fn_802C6A5C((s32 *)arg0);
     if (len != 0 && (*arg0)[len - 1] != 0x5C) {
         fn_802C6E70(arg0, 0x5C);
+        return arg0;
     }
-    return arg0;
 }
 
 char **fn_802C7874(char **arg0, s32 arg1) {
@@ -647,11 +647,13 @@ void fn_802CB634(void *arg0, s32 arg1) {
 void fn_802CB69C(void *arg0, s32 arg1) {
     void *fn_802D1FC8(s32);
     void *node = fn_802D1FC8(0xC);
+    void *prev;
     if (node != 0) {
         M2C_FIELD(node, s32 *, 0) = arg1;
-        M2C_FIELD(node, void **, 4) = M2C_FIELD(arg0, void **, 4);
-        if (M2C_FIELD(arg0, void **, 4) != 0) {
-            M2C_FIELD(M2C_FIELD(arg0, void **, 4), void **, 8) = node;
+        prev = M2C_FIELD(arg0, void **, 4);
+        M2C_FIELD(node, void **, 4) = prev;
+        if (prev != 0) {
+            M2C_FIELD(prev, void **, 8) = node;
         } else {
             M2C_FIELD(arg0, void **, 0) = node;
         }
