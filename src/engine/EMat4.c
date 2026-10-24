@@ -327,6 +327,7 @@ void *fn_802C7D4C(void *arg0, s32 arg1) {
 }
 
 void fn_802C7D90(void *self, s32 flags) {
+    extern void fn_802D20E8(void *);
     fn_802C7F78(self);
     if (flags & 1) {
         fn_802D20E8(self);
