@@ -1122,6 +1122,15 @@ void fn_801F0498(void) {
 
 }
 
+void fn_801F06C4(void *arg0, s32 arg1) {
+    void fn_80245C94(s32, char *, ...);
+    void fn_80043374(s32);
+    extern u8 *lbl_80494630;
+    extern char lbl_803E2FF0[];
+    fn_80245C94(arg1, lbl_803E2FF0, lbl_80494630 + 0x90);
+    fn_80043374(*(s32 *)(lbl_80494630 + 0x90) - 1);
+}
+
 void fn_801F070C(void *arg0, s32 arg1) {
     void fn_80245C94(s32, char *, ...);
     extern u8 *lbl_80494630;
