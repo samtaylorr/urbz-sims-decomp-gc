@@ -12,35 +12,30 @@ typedef struct {
 
 void fn_803918D0(void) {
     extern void *lbl_80496610;
-    u8 *p;
 
     M2C_FIELD(lbl_80496610, u8 *, 0x6A9) = 1;
     M2C_FIELD(lbl_80496610, u8 **, 0x69C) += 2;
-    p = M2C_FIELD(lbl_80496610, u8 **, 0x69C);
-    M2C_FIELD(lbl_80496610, u16 *, 0x6AA) = (p[0] << 8) | p[1];
+    M2C_FIELD(lbl_80496610, u16 *, 0x6AA) = (M2C_FIELD(lbl_80496610, u8 **, 0x69C)[0] << 8) | M2C_FIELD(lbl_80496610, u8 **, 0x69C)[1];
     M2C_FIELD(lbl_80496610, u8 **, 0x69C) += 2;
     M2C_FIELD(lbl_80496610, u16 *, 0x6AC) = M2C_FIELD(lbl_80496610, u16 *, 0x6AA);
 }
 
-s32 fn_8039850C(void *arg0) {
-    s32 var_r5;
-    u8 *temp_r5;
+s32 fn_8039850C(Nibbles *n) {
+    s32 v;
 
-    if (!(M2C_FIELD(arg0, s32 *, 4) & 0xF)) {
-        M2C_FIELD(arg0, s8 *, 8) = (s8) (((u8) *M2C_FIELD(arg0, u8 **, 0) >> 4U) & 7);
-        M2C_FIELD(arg0, s8 *, 9) = (s8) (*M2C_FIELD(arg0, u8 **, 0) & 0xF);
-        M2C_FIELD(arg0, u8 **, 0) = (u8 *) (M2C_FIELD(arg0, u8 **, 0) + 1);
-        M2C_FIELD(arg0, s32 *, 4) = (s32) (M2C_FIELD(arg0, s32 *, 4) + 2);
+    if (!(n->pos & 0xF)) {
+        n->a = (*n->ptr >> 4) & 7;
+        n->b = *n->ptr & 0xF;
+        n->ptr++;
+        n->pos += 2;
     }
-    if (M2C_FIELD(arg0, s32 *, 4) & 1) {
-        temp_r5 = M2C_FIELD(arg0, u8 **, 0);
-        M2C_FIELD(arg0, u8 **, 0) = (u8 *) (temp_r5 + 1);
-        var_r5 = (s32) (*temp_r5 << 28) >> 28;
+    if (n->pos & 1) {
+        v = (s32)(*n->ptr++ << 28) >> 28;
     } else {
-        var_r5 = (s32) (*M2C_FIELD(arg0, u8 **, 0) << 24) >> 28;
+        v = (s32)(*n->ptr << 24) >> 28;
     }
-    M2C_FIELD(arg0, s32 *, 4) = (s32) (M2C_FIELD(arg0, s32 *, 4) + 1);
-    return var_r5;
+    n->pos++;
+    return v;
 }
 
 void fn_8039859C(void *arg0, u8 *arg1) {
