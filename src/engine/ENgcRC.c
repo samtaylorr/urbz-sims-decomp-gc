@@ -961,3 +961,7 @@ void fn_8035BD18(void) {
     fn_8035BC4C(1, 0xFFFF);
 }
 
+void fn_8035BD44(void) {
+    fn_8035BC4C(0, 0xFFFF);
+}
+
