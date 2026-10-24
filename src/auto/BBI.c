@@ -116,6 +116,20 @@ void fn_80059BF4(s32 self, s32 flags) {
     }
 }
 
+s32 fn_8005A2D4(s32 *arg0) {
+    s32 fn_8005A910(s32 *);
+    s32 idx;
+    s32 ret;
+
+    idx = fn_8005A910(arg0);
+    if (idx != -1) {
+        ret = arg0[idx];
+    } else {
+        ret = 0;
+    }
+    return ret;
+}
+
 s32 fn_8005A38C(void) {
     return 0x24;
 }
@@ -480,12 +494,12 @@ s32 fn_80061F9C(char *self) {
 }
 
 void fn_80063054(void) {
-    extern void fn_80248488(void *, u8, u32);
+    extern void fn_80248488();
     extern void fn_8005B71C(void *);
-    char *p;
+    void *p;
 
     p = BBI_AllocAligned(0x660);
-    fn_80248488(&p[0], 0, 0x660);
+    fn_80248488(p, 0, 0x660);
     fn_8005B71C(p);
 }
 
