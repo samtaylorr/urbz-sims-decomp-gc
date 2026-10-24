@@ -546,9 +546,37 @@ s32 fn_80261640(u32 resume) {
     return 0;
 }
 
+void fn_8026199C(u32 arg0) {
+    extern void fn_802652F4(u32);
+    extern void fn_80264274(void);
+    extern void fn_80261458(s32);
+    extern void fn_802664BC(void (*)(s32));
+
+    if (arg0 == 0x10) {
+        fn_802652F4(0x01234568);
+        fn_80264274();
+        fn_80261458(0);
+        return;
+    }
+    if (arg0 & 2) {
+        fn_802652F4(0x01234567);
+        fn_802664BC(fn_80261458);
+        return;
+    }
+    fn_802652F4(*(u32 *)(0xCC006000 + 0x20));
+    fn_802664BC(fn_80261458);
+}
+
 void fn_80261A44(void);
 void fn_80261A1C(void) {
     fn_802664BC(fn_80261A44);
+}
+
+void fn_80261C64(void) {
+    extern void fn_80266794(u8, s32, void (*)(void));
+    extern void fn_80261F40(void);
+    extern u8 *lbl_80495ED4;
+    fn_80266794(lbl_80495ED4[8], 0xA, fn_80261F40);
 }
 
 void fn_80261D34(s32 arg0);
