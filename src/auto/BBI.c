@@ -134,6 +134,20 @@ s32 fn_8005A38C(void) {
     return 0x24;
 }
 
+s32 fn_8005A574(s32 *arg0) {
+    s32 fn_8005A5B8(s32 *);
+    s32 idx;
+    s32 ret;
+
+    idx = fn_8005A5B8(arg0);
+    if (idx != -1) {
+        ret = arg0[idx];
+    } else {
+        ret = 0;
+    }
+    return ret;
+}
+
 void fn_8005B368(void) {
 
 }
