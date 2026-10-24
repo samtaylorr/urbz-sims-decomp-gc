@@ -7633,6 +7633,23 @@ void *fn_803BC458(void *self) {
     return self;
 }
 
+void fn_803BC488(u8 *p, s32 n) {
+    while (--n != -1) {
+        VtblEntry *vt = *(VtblEntry **)(p + 0x54);
+        ((void (*)(void *, s32))vt[1].pfn)(p + vt[1].delta, 2);
+        p += 0x58;
+    }
+}
+
+void fn_803BC4EC(s32 self) {
+    extern s32 lbl_8045B82C[];
+    extern void fn_80338184(void *, s32);
+    extern void fn_803BC444(void *);
+    fn_803BC488((u8 *)((s32 *)self)[0], ((s32 *)self)[1]);
+    fn_80338184(lbl_8045B82C, ((s32 *)self)[0]);
+    fn_803BC444((void *)self);
+}
+
 extern void fn_803BC4EC(s32);
 void fn_803BC538(s32 self, s32 flags) {
     fn_803BC4EC(self);
