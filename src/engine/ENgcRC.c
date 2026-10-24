@@ -550,6 +550,17 @@ M2C_UNK fn_80348BC0(void) {
     }
 }
 
+void *fn_80348CAC(void *arg0) {
+    extern void fn_8031E8B0(void *);
+    extern u8 lbl_8041CAC8[];
+
+    fn_8031E8B0(arg0);
+    M2C_FIELD(arg0, s32 *, 0x20) = 0;
+    M2C_FIELD(arg0, void **, 0x0) = lbl_8041CAC8;
+    M2C_FIELD(arg0, s32 *, 0x24) = 0;
+    return arg0;
+}
+
 void fn_80348D80(void *arg0, void *arg1) {
     void *fn_802D1FC8(M2C_UNK);
     s32 temp_r9_2;
