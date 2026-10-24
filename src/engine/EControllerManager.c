@@ -341,6 +341,14 @@ void fn_80334BE4(s32 arg0, s32 arg1) {
     }
 }
 
+void fn_80334C98(s32 arg0, s32 arg1) {
+    M2C_UNK fn_8033798C(s32, s32);
+    s32 fn_80337F14(s32);
+    if (((s32) lbl_80494F5C != 0) || (fn_80334B0C(arg0, fn_80337F14(arg1)) != 0)) {
+        fn_8033798C(arg0, arg1);
+    }
+}
+
 void fn_80334CF8(s32 arg0, s32 arg1) {
     s32 fn_80334B0C();
     M2C_UNK fn_803379C8(s32, s32);
@@ -352,8 +360,8 @@ void fn_80334CF8(s32 arg0, s32 arg1) {
 s32 fn_80334D48(s32 arg0, s32 arg1) {
     s32 fn_803365B8(s32, s32, s32 *, s32 *);
     s32 fn_80337008(s32, s32);
-    s32 spC;
     s32 sp8;
+    s32 spC;
 
     if (((s32) lbl_80494F5C != 0) || (fn_80334B0C(arg0, arg1) != 0)) {
         spC = 0;
