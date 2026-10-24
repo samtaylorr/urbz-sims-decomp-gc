@@ -1812,8 +1812,9 @@ void fn_801E1338(s32, s32, s32, s32, s32, s32, s32);
 void fn_801E1254(s32, s32, s32, s32, s32);
 s32 fn_801F9614(s32 arg0, s32 arg1);
 s32 fn_801F9614(s32 arg0, s32 arg1) {
+    u8 *flags = (u8 *)arg0 + 0xEF;
     s32 ret = 0;
-    if (!(fn_801F55E0(*(u8 *)(arg1 + (arg0 + 0xEF))) & 2)) {
+    if (!(fn_801F55E0(flags[arg1]) & 2)) {
         u8 *p = (u8 *)(arg1 * 0x124 + arg0 + 0x734);
         s32 ok = 0;
         if (*(s32 *)(p + 8) != 0) {
