@@ -459,6 +459,14 @@ s32 fn_8010C9E8(void) {
     return 3;
 }
 
+void fn_8010CDD4(void *arg0) {
+    extern s32 lbl_80495ADC;
+    void fn_800FF588(s32, s32, s32, s32, s32);
+    if (M2C_FIELD(arg0, s32 *, 0) != 0 && M2C_FIELD(arg0, s32 *, 8) != 0) {
+        fn_800FF588(lbl_80495ADC, 0x21, 0, 0, 0);
+    }
+}
+
 void fn_8010CFA0(void *self, s32 flags) {
     if (flags & 1) {
         fn_802D20E8(self);
