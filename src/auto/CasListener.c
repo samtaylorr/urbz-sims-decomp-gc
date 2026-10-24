@@ -7,6 +7,12 @@ typedef struct {
     u8 pad[3];
 } CasPair;
 
+/* virtual call through the vtable at 0x44: entry {s16 this-delta; fn} */
+static inline void CasListener_CallVirt(void *obj, s32 off) {
+    void *vt = M2C_FIELD(obj, void **, 0x44);
+    ((void (*)(void *))M2C_FIELD(vt, void **, off + 4))((char *)obj + M2C_FIELD(vt, s16 *, off));
+}
+
 void fn_803074F0(void);
 s32 fn_801B68E8(char *self) {
     return *(s32 *)(self + 0xC);
@@ -249,13 +255,11 @@ s32 fn_801BF7BC(void *arg0) {
 }
 
 void fn_801BF7C8(void) {
-    extern void *lbl_8041FA44;
-    void *obj;
+    extern void *lbl_8041FA44[];
     void *vt;
 
-    obj = lbl_8041FA44;
-    vt = M2C_FIELD(obj, void **, 0x44);
-    ((void (*)(void *))M2C_FIELD(vt, void **, 0x3C))((char *)obj + M2C_FIELD(vt, s16 *, 0x38));
+    vt = M2C_FIELD(lbl_8041FA44[0], void **, 0x44);
+    ((void (*)(void *))M2C_FIELD(vt, void **, 0x3C))((char *)lbl_8041FA44[0] + M2C_FIELD(vt, s16 *, 0x38));
 }
 
 void fn_801BF804(void *arg0, s32 arg1, s32 arg2) {
