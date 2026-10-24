@@ -52,7 +52,7 @@ void fn_8036D634(void) {
     fn_8036D558();
 }
 
-void fn_8036D558(void);
+void **fn_8036D558();
 void fn_8036D65C(void) {
     fn_8036D558();
 }
