@@ -2338,3 +2338,8 @@ void fn_802C45A0(void) {
     fn_802C44DC(1, 0xFFFF);
 }
 
+void fn_802C45CC(void) {
+    M2C_UNK fn_802C44DC(M2C_UNK, M2C_UNK);
+    fn_802C44DC(0, 0xFFFF);
+}
+
