@@ -528,16 +528,13 @@ void fn_800CEE00(void *arg0) {
     extern s32 lbl_80494EB0;
     extern s32 lbl_80494EB4;
     extern s32 lbl_80494EB8;
-    void ***vec;
     void **var_r30;
     void *temp_r31;
     void *temp_r9_2;
     void *temp_r9_3;
     s32 flag;
 
-    vec = (void ***)((char *)arg0 + 0x50);
-    var_r30 = vec[0];
-    while (var_r30 != vec[1]) {
+    for (var_r30 = M2C_FIELD(arg0, void ***, 0x50); var_r30 != WPBPtrVec_End((WPBPtrVec *)((u8 *)arg0 + 0x50)); var_r30++) {
         temp_r31 = *var_r30;
         temp_r9_2 = M2C_FIELD(temp_r31, void **, 0x5C);
         M2C_FIELD(temp_r9_2, void (**)(void *), 0x1C)((char *)temp_r31 + M2C_FIELD(temp_r9_2, s16 *, 0x18));
@@ -545,7 +542,6 @@ void fn_800CEE00(void *arg0) {
             temp_r9_3 = M2C_FIELD(temp_r31, void **, 0x5C);
             M2C_FIELD(temp_r9_3, void (**)(void *, s32), 0xC)((char *)temp_r31 + M2C_FIELD(temp_r9_3, s16 *, 8), 3);
         }
-        var_r30++;
     }
     M2C_FIELD(arg0, void ***, 0x54) = M2C_FIELD(arg0, void ***, 0x50);
     flag = M2C_FIELD(arg0, s32 *, 0x4C);
