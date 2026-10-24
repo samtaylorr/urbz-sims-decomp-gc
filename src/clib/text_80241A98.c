@@ -499,6 +499,11 @@ void fn_8024FA90(void) {
     lbl_803F7AD4[0]();
 }
 
+char *fn_8024FABC(void) {
+    extern void (*lbl_803F7AD4[])(void);
+    return ((char *(*)(void))lbl_803F7AD4[0])() + 8;
+}
+
 void fn_8024FAEC(void) {
     extern void (*lbl_803F7AD4)(void);
     extern void fn_8024FB20(void);
