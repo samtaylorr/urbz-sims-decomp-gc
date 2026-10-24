@@ -3083,6 +3083,30 @@ void fn_803AD158(void **self, s32 flags) {
     }
 }
 
+void *fn_803ADAAC(void *arg0, char *arg1) {
+    extern s32 fn_80248808(char *);
+    extern void fn_803ADA44(void *, s32);
+    char *end;
+    s32 len;
+    char *p;
+    void *alloc;
+
+    M2C_FIELD(arg0, char **, 0) = NULL;
+    M2C_FIELD(arg0, char **, 4) = NULL;
+    alloc = (char *)arg0 + 8;
+    M2C_FIELD(alloc, s32 *, 4) = 0;
+    end = arg1 + fn_80248808(arg1);
+    len = end - arg1;
+    fn_803ADA44(arg0, len + 1);
+    p = M2C_FIELD(arg0, char **, 0);
+    if (end != arg1) {
+        p = (char *)fn_8024839C(p, arg1, len) + len;
+    }
+    M2C_FIELD(arg0, char **, 4) = p;
+    *p = 0;
+    return arg0;
+}
+
 void fn_803ADB34(s32 arg0, void *arg1) {
     void *temp_r30;
     void *var_r31;
@@ -7570,6 +7594,23 @@ extern void fn_803BC310(void *);
 void *fn_803BC324(void *self) {
     fn_803BC310(self);
     return self;
+}
+
+void fn_803BC354(u8 *p, s32 n) {
+    while (--n != -1) {
+        VtblEntry *vt = *(VtblEntry **)(p + 0xAC);
+        ((void (*)(void *, s32))vt[1].pfn)(p + vt[1].delta, 2);
+        p += 0xB0;
+    }
+}
+
+void fn_803BC3B8(s32 self) {
+    extern s32 lbl_8045B82C[];
+    extern void fn_80338184(void *, s32);
+    extern void fn_803BC310(void *);
+    fn_803BC354((u8 *)((s32 *)self)[0], ((s32 *)self)[1]);
+    fn_80338184(lbl_8045B82C, ((s32 *)self)[0]);
+    fn_803BC310((void *)self);
 }
 
 extern void fn_803BC3B8(s32);
