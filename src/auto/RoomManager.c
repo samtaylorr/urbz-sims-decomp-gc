@@ -30,10 +30,10 @@ void fn_8018F874(void *arg0) {
 }
 
 void *fn_8018F8C0(void *arg0) {
-    extern M2C_UNK lbl_804140F8;
-    M2C_FIELD(arg0, M2C_UNK **, 0x10) = &lbl_804140F8;
-    M2C_FIELD(arg0, s32 *, 0) = 0;
+    extern u8 lbl_804140F8[];
+    M2C_FIELD(arg0, u8 **, 0x10) = lbl_804140F8;
     M2C_FIELD(arg0, s32 *, 0xC) = 0;
+    M2C_FIELD(arg0, s32 *, 0) = 0;
     fn_8018F874(arg0);
     fn_8018FA84(arg0, 0);
     return arg0;
@@ -68,8 +68,8 @@ void fn_8018F99C(s32 *arg0, const char *name) {
     s32 hash = 0;
     s32 shift = 0;
     s32 *it;
-    for (; *name != 0; name++) {
-        char c = *name;
+    char c;
+    for (c = *name; c != 0; c = *++name) {
         if ((u32)(c - 'a') <= 25) {
             c -= 0x20;
         }
@@ -77,7 +77,8 @@ void fn_8018F99C(s32 *arg0, const char *name) {
         if (shift > 24) {
             hash ^= (u32)c >> (32 - shift);
         }
-        shift = (shift + 3) % 32;
+        shift += 3;
+        shift %= 32;
     }
 again:
     for (it = lbl_80494534; it != NULL; it = (s32 *)it[1]) {
