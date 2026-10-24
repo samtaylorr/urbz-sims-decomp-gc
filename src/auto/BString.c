@@ -61,6 +61,11 @@ void fn_8033740C(void *, u32, s32, s32);
 typedef struct {
     s32 value;
 } BStringHandle;
+typedef struct {
+    BStringHandle handle;
+    s32 unk4;
+    void *unk8;
+} BStringRef;
 
 static inline void *BString_Alloc(u32 size, u32 align) {
     void *heap;
@@ -1091,11 +1096,11 @@ void fn_800D5FAC(void) {
 void fn_800D631C(void *arg0) {
     extern u8 lbl_8040B9E0[];
     BStringHandle h;
-    void *self = arg0;
+    BStringHandle *ph = &h;
 
-    M2C_FIELD(self, void **, 8) = lbl_8040B9E0;
-    h.value = 0;
-    *(BStringHandle *)self = h;
+    M2C_FIELD(arg0, void **, 8) = lbl_8040B9E0;
+    ph->value = 0;
+    *(BStringHandle *)arg0 = *ph;
 }
 
 void *fn_800D6344(u32 size) {
