@@ -82,6 +82,25 @@ void fn_803711C0(void **arg0, s32 arg1) {
     }
 }
 
+void fn_80371258(void *self, void *stream) {
+    extern void fn_8031E988(void *, void *);
+    char *vt;
+    void (*func)(void *, void *, s32);
+    void *obj;
+    s32 size;
+
+    fn_8031E988(self, stream);
+    vt = M2C_FIELD(stream, char **, 0x18);
+    func = (void (*)(void *, void *, s32))M2C_FIELD(vt, void **, 0x3C);
+    obj = (char *)stream + M2C_FIELD(vt, s16 *, 0x38);
+    size = M2C_FIELD(self, s32 *, 0x1C);
+    func(obj, &size, 4);
+    {
+        char *vt2 = M2C_FIELD(stream, char **, 0x18);
+        ((void (*)(void *, void *, s32))M2C_FIELD(vt2, void **, 0x3C))((char *)stream + M2C_FIELD(vt2, s16 *, 0x38), M2C_FIELD(self, void **, 0x20), M2C_FIELD(self, s32 *, 0x1C));
+    }
+}
+
 void fn_803712D0(void) {
 
 }
