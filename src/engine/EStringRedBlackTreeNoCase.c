@@ -166,12 +166,37 @@ s32 fn_80365A3C(void **arg0) {
     return var_r9;
 }
 
+s32 fn_80365B30(void **arg0, void **arg1) {
+    void *a = *arg0;
+    void *b = *arg1;
+
+    while (a != NULL) {
+        if (b == NULL || M2C_FIELD(a, f32 *, 0x1C) != M2C_FIELD(b, f32 *, 0x1C) ||
+            M2C_FIELD(a, s32 *, 0x18) != M2C_FIELD(b, s32 *, 0x18)) {
+            return 0;
+        }
+        a = M2C_FIELD(a, void **, 0x10);
+        b = M2C_FIELD(b, void **, 0x10);
+    }
+    return b == NULL;
+}
+
 void *fn_80365BB4(void *arg0) {
     M2C_UNK fn_80365C8C();
     M2C_FIELD(arg0, s32 *, 4) = 0;
     M2C_FIELD(arg0, s32 *, 0) = 0;
     fn_80365C8C();
     return arg0;
+}
+
+void fn_80365BF0(void *arg0, void *arg1) {
+    void fn_80365C8C(void *, s32);
+    void fn_803663B8(void *, void *);
+
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    fn_80365C8C(arg0, M2C_FIELD(arg1, s32 *, 0xC));
+    fn_803663B8(arg0, arg1);
 }
 
 void fn_80365C40(void *arg0, s32 arg1) {
@@ -185,6 +210,29 @@ void fn_80365C40(void *arg0, s32 arg1) {
     if (arg1 & 1) {
         fn_802D20E8(arg0);
     }
+}
+
+void fn_80365C8C(void *arg0, s32 arg1) {
+    void *heap;
+    void *p;
+    void *fn_802D0AB8(void);
+    void *fn_802D197C(void *, u32, s32);
+    void *fn_802DBBCC(void *, u32, s32);
+    void *fn_802D0B3C(void);
+    void fn_80365D3C(void *);
+
+    heap = fn_802D0AB8();
+    if (arg1 == 0) {
+        p = NULL;
+    } else {
+        p = fn_802D197C(heap, arg1 << 2, 4);
+        if (p == NULL && (p = fn_802DBBCC(heap, arg1 << 2, 0)) == NULL && heap == fn_802D0AB8()) {
+            p = fn_802DBBCC(fn_802D0B3C(), arg1 << 2, 0);
+        }
+    }
+    M2C_FIELD(arg0, s32 *, 0xC) = arg1;
+    M2C_FIELD(arg0, void **, 8) = p;
+    fn_80365D3C(arg0);
 }
 
 void fn_80365D3C(void *arg0) {
@@ -442,6 +490,19 @@ s32 fn_803698D8(void **arg0) {
         } while (var_r3 != NULL);
     }
     return var_r9;
+}
+
+void fn_80369AF4(void *arg0, s32 arg1) {
+    void fn_8036A180(void *);
+    void fn_802D20E8(void *);
+    void fn_802D1A00(void *, void *);
+    void *fn_802D0AB8(void);
+
+    fn_8036A180(arg0);
+    fn_802D1A00(fn_802D0AB8(), M2C_FIELD(arg0, void **, 8));
+    if (arg1 & 1) {
+        fn_802D20E8(arg0);
+    }
 }
 
 s32 fn_80369B40(void *arg0, u8 *arg1) {
