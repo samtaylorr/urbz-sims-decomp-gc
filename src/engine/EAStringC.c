@@ -167,6 +167,7 @@ void fn_80298EC4(void *arg0) {
     extern void fn_8028D580(s32, void *);
     s32 found;
     s32 ok;
+    s32 ok2;
 
     found = 0;
     ok = 0;
@@ -176,11 +177,11 @@ void fn_80298EC4(void *arg0) {
     if (ok) {
         found = 1;
     } else {
-        ok = 0;
+        ok2 = 0;
         if (fn_802B70DC(arg0) == 0x12) {
-            ok = fn_802B72D4(arg0) == 0;
+            ok2 = fn_802B72D4(arg0) == 0;
         }
-        if (ok) {
+        if (ok2) {
             found = 1;
         }
     }
