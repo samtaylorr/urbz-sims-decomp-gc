@@ -491,6 +491,14 @@ void fn_80366AD0(void *arg0, s32 arg1) {
     if (arg1 & 1) fn_802D20E8(arg0);
 }
 
+void *fn_80367098(void *arg0, void *arg1) {
+    u8 *vtable = *(u8 **)((u8 *)arg1 + 0x54);
+    s16 offset = *(s16 *)(vtable + 0x20);
+    void (*func)(void *, void *) = *(void (**)(void *, void *))(vtable + 0x24);
+    func((u8 *)arg1 + offset, arg0);
+    return arg0;
+}
+
 void fn_80367258(void *arg0, void *arg1) {
     M2C_UNK fn_80248A10(void *, void *, s32);
     fn_80248A10(arg0, arg1, 0x40);
