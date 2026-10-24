@@ -156,15 +156,25 @@ s32 fn_8016C804(void *arg0) {
 }
 
 void *fn_8016C85C(void *arg0, s32 arg1) {
-    switch (arg1) {
-    case 0xC:
-    case 0xD:
-    case 0xE:
-    case 0xF:
-    case 0x10:
+    void *ret;
+
+    if (arg1 == 0xC) {
         return arg0;
     }
-    return NULL;
+    if (arg1 == 0xD) {
+        return arg0;
+    }
+    if (arg1 == 0xE) {
+        return arg0;
+    }
+    if (arg1 == 0xF) {
+        return arg0;
+    }
+    ret = NULL;
+    if (arg1 == 0x10) {
+        ret = arg0;
+    }
+    return ret;
 }
 
 extern s32 lbl_80495C70;
@@ -174,6 +184,7 @@ void fn_8016C894(void) {
 
 void *fn_8016C8BC(void *arg0) {
     void fn_801B3918(void *);
+    s32 *p;
     M2C_FIELD(arg0, s32 *, 0xC) = 0;
     M2C_FIELD(arg0, s32 *, 4) = -1;
     M2C_FIELD(arg0, s32 *, 8) = -1;
@@ -182,8 +193,9 @@ void *fn_8016C8BC(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x3C) = 0;
     M2C_FIELD(arg0, s32 *, 0x50) = 0;
     M2C_FIELD(arg0, s32 *, 0x54) = 0;
-    M2C_FIELD(arg0, s32 *, 0x58) = 0;
-    M2C_FIELD(arg0, s32 *, 0x5C) = 0;
+    p = (s32 *)((char *)arg0 + 0x58);
+    p[0] = 0;
+    p[1] = 0;
     M2C_FIELD(arg0, s32 *, 0x78) = -1;
     M2C_FIELD(arg0, s32 *, 0x7C) = 0xFFFF0000;
     M2C_FIELD(arg0, s32 *, 0x4C) = 0;
