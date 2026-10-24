@@ -213,13 +213,16 @@ s32 fn_801B5DD0(void) {
 s32 fn_801B5F24(void *arg0, s32 arg1) {
     s32 fn_801A3698(void *, s16);
     void *temp_r9;
+    s32 ret;
 
     if (M2C_FIELD(arg0, void **, 4) != NULL) {
         s16 temp = fn_801A3698(M2C_FIELD(arg0, void **, 4), arg1);
         temp_r9 = M2C_FIELD(arg0, void **, 0);
-        return M2C_FIELD(temp_r9, s32 (**)(void *, s16), 0x7C)((char *)arg0 + M2C_FIELD(temp_r9, s16 *, 0x78), temp);
+        ret = M2C_FIELD(temp_r9, s32 (**)(void *, s16), 0x7C)((char *)arg0 + M2C_FIELD(temp_r9, s16 *, 0x78), temp);
+    } else {
+        ret = 0;
     }
-    return 0;
+    return ret;
 }
 
 s32 fn_801B5F84(void *arg0) {
