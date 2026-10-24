@@ -473,10 +473,15 @@ void fn_80061824(void *arg0, s32 arg1, s32 arg2) {
 }
 
 void fn_80063054(void) {
-    extern void *fn_80248488(void *, s32, u32);
+    extern void fn_80248488(void *, s32, u32);
     extern void fn_8005B71C(void *);
-    void *p = BBI_AllocAligned(0x660);
-    fn_8005B71C(fn_80248488(p, 0, 0x660) ? p : p);
+    void *p;
+
+    p = BBI_AllocAligned(0x660);
+    if (p != NULL) {
+    }
+    fn_80248488(p, 0, 0x660);
+    fn_8005B71C(p);
 }
 
 void fn_800630FC(void) {
@@ -830,6 +835,18 @@ void fn_80063AC0(void *arg0, s32 *arg1) {
         if (temp_r4 != 0) {
             fn_8005CBC8();
         }
+    }
+}
+
+void fn_80063AFC(void *arg0, void *arg1) {
+    void fn_8005D420(void *, s32, s32);
+    char *p = (char *)arg0 + 0x400;
+    s32 v = M2C_FIELD(arg1, s32 *, 0x10);
+
+    if (M2C_FIELD(p, s32 *, 0x10) != v && v != 0) {
+        M2C_FIELD(p, s32 *, 0x10) = v;
+        M2C_FIELD(p, s32 *, 0xC) = M2C_FIELD(arg1, s32 *, 0xC);
+        fn_8005D420(arg0, M2C_FIELD(arg1, s32 *, 0xC), M2C_FIELD(arg1, s32 *, 0x10));
     }
 }
 
