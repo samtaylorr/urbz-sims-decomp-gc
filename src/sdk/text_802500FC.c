@@ -778,6 +778,28 @@ void fn_80265520(void) {
     fn_80378D0C(fg, bg, message);
 }
 
+s32 fn_802655AC(s32 enable) {
+    extern void fn_80265520(void);
+    extern void (*lbl_80495F28)(void);
+    s32 fn_8025465C();
+    M2C_UNK fn_80254684(s32);
+    s32 enabled;
+    s32 old;
+
+    enabled = fn_8025465C();
+    old = lbl_80495F28 ? 1 : 0;
+    lbl_80495F28 = enable ? fn_80265520 : NULL;
+    fn_80254684(enabled);
+    return old;
+}
+
+void fn_8026561C(void) {
+    extern void (*lbl_80495F28)(void);
+    if (lbl_80495F28 != NULL) {
+        lbl_80495F28();
+    }
+}
+
 s32 fn_802668EC(s32 arg0) {
     extern s32 lbl_80495F4C;
     s32 temp_r31;
