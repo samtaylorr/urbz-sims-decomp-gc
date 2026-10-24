@@ -274,25 +274,29 @@ void fn_8039A7D4(s32 *self, s32 n) {
     }
 }
 
-f32 fn_8039AA70(f32 *arg0, s32 arg1) {
-    return arg0[arg1];
+f32 fn_8039AA70(s32 arg0, s32 arg1) {
+    return *(f32 *)(arg0 + arg1 * 4);
 }
 
 void fn_8039AA7C(void *arg0, s32 arg1) {
     extern u8 lbl_80406BF0[];
+    char *first;
     char *node;
     char *next;
     char *vt;
 
-    node = M2C_FIELD(arg0, char **, 4);
+    first = M2C_FIELD(arg0, char **, 4);
     M2C_FIELD(arg0, u8 **, 0xC) = lbl_80406BF0;
-    while (node != NULL) {
-        next = M2C_FIELD(node, char **, 0);
-        if (node != NULL) {
-            vt = M2C_FIELD(node, char **, 0x2C);
-            M2C_FIELD(vt, void (**)(void *, s32), 0xC)(node + M2C_FIELD(vt, s16 *, 8), 3);
-        }
-        node = next;
+    if (first != NULL) {
+        node = first;
+        do {
+            next = M2C_FIELD(node, char **, 0);
+            if (node != NULL) {
+                vt = M2C_FIELD(node, char **, 0x2C);
+                M2C_FIELD(vt, void (**)(void *, s32), 0xC)(node + M2C_FIELD(vt, s16 *, 8), 3);
+            }
+            node = next;
+        } while (node != NULL);
     }
     if (arg1 & 1) {
         fn_802D20E8(arg0);
