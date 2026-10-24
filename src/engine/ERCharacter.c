@@ -121,6 +121,27 @@ void fn_80317DAC(s32 arg0, char *arg1, s32 *arg2) {
     } while (arg1 != 0);
 }
 
+void fn_80317F84(void) {
+    extern s16 *lbl_80496210;
+    extern s16 *lbl_80496214;
+    s32 i;
+    for (i = 0; i < 0x100; i++) {
+        lbl_80496210[0x1001 + i] = 0x1000;
+    }
+    for (i = 0xFFF; i >= 0; i--) {
+        lbl_80496214[i] = 0x1000;
+    }
+}
+
+s32 fn_80318260(void) {
+    extern u8 *lbl_80494F04;
+    extern u8 *lbl_80494F08;
+    if (lbl_80494F04 == lbl_80494F08) {
+        return -1;
+    }
+    return *lbl_80494F04++;
+}
+
 void fn_803188C8(const char *arg0) {
     int fn_80245BB4(char *, const char *, ...);
     s32 fn_802D7F48(const char *, const char *);
@@ -232,6 +253,30 @@ s32 fn_8031AE8C(void *arg0) {
         return 0;
     }
     return temp_r3 - 1;
+}
+
+s32 fn_8031AEB4(u8 *self, s32 idx, f32 value) {
+    f32 *arr = *(f32 **)(self + 0xA4);
+
+    if (arr[idx] == value) {
+        return *(s32 *)(self + 0xA0);
+    }
+    arr[idx] = value;
+    *(s32 *)(self + 0xA0) = 1;
+    return 1;
+}
+
+void fn_8031B228(f32 *out, f32 t) {
+    extern f32 lbl_803F2C88;
+    extern f32 lbl_803F2C8C;
+    f32 t2 = t * t;
+    f32 t3 = t2 * t;
+    f32 a = (t3 + t3) - t2 * lbl_803F2C88;
+
+    out[0] = a + lbl_803F2C8C;
+    out[3] = -t2 + t3;
+    out[1] = -a;
+    out[2] = (t - (t2 + t2)) + t3;
 }
 
 s32 fn_8031B700(void *arg0) {
