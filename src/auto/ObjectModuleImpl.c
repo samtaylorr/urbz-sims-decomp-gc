@@ -395,6 +395,10 @@ void fn_8015A564(void) {
     fn_800F1A60((s32)&lbl_80495C30, 2);
 }
 
+s64 fn_80168EC0(void) {
+    return 0;
+}
+
 void fn_801690B0(void) {
 
 }
