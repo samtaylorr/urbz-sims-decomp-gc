@@ -379,6 +379,15 @@ void fn_800D2884(void) {
     fn_80048A48(lbl_8041F754);
 }
 
+void fn_800D28AC(void *arg0) {
+    extern s32 fn_800E18B8(s32);
+    s32 *self = arg0;
+    self[7] = 0;
+    self[6] = 0;
+    lbl_80434A9C[1] = 0;
+    fn_800E18B8(6);
+}
+
 void fn_800D28E8(void *arg0) {
     M2C_UNK fn_800E18EC(M2C_UNK);
     struct G {
@@ -3558,6 +3567,11 @@ s32 fn_800EB190(s32 arg0, s32 arg1) {
 s32 fn_800EB1C0(s32 arg0, s32 arg1) {
     s32 fn_800EF0A8(s32, s32, s32);
     return fn_800EF0A8(arg1, arg0, 0) != 0;
+}
+
+s32 fn_800EB200(s32 arg0, s32 arg1) {
+    s32 fn_800EF110(s32, s32, s32, s32);
+    return fn_800EF110(arg1, arg0, 0, 1) != 0;
 }
 
 s32 fn_800EB244(s32 arg0, s32 arg1) {
