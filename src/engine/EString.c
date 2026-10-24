@@ -476,6 +476,16 @@ s32 fn_802D4364(char **arg0, char *arg1, s32 arg2) {
     return p != 0 ? p - *arg0 : -1;
 }
 
+s32 *fn_802D45E4(s32 *arg0, s32 arg1) {
+    s32 fn_80245BB4(char *, const char *, ...);
+    extern char lbl_803F032C[];
+    char buf[40];
+
+    fn_80245BB4(buf, lbl_803F032C, arg1);
+    fn_802D3CE4(arg0, buf);
+    return arg0;
+}
+
 void fn_802D4634(u8 **arg0, s32 arg1, u8 arg2) {
     u8 *var_r3;
     u8 var_r0;
@@ -938,7 +948,7 @@ s32 *fn_802D5D08(s32 *arg0, s32 *arg1, s32 arg2) {
     s32 sp8;
 
     fn_802D56C4(&sp8, fn_803BA3EC(arg1));
-    ((u16 *)sp8)[arg2] = 0;
+    *(u16 *)(arg2 * 2 + sp8) = 0;
     fn_802D56C4(arg0, fn_803BA3EC(&sp8));
     fn_802D5254(&sp8, sp8);
     return arg0;
