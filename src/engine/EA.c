@@ -1,7 +1,7 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
-void fn_80258544(void);
+s32 fn_80258544(void);
 M2C_UNK **fn_802D7E20(M2C_UNK **arg0) {
     M2C_UNK fn_802C5D4C();
     extern M2C_UNK lbl_80419570[];
