@@ -397,8 +397,8 @@ void fn_800D28AC(void *arg0) {
     extern s32 fn_800E18B8(s32);
     s32 *self = arg0;
     self[6] = 0;
-    lbl_80434A9C[1] = 0;
     self[7] = 0;
+    lbl_80434A9C[1] = 0;
     fn_800E18B8(6);
 }
 
@@ -1072,9 +1072,7 @@ void fn_800D72A8(s32 *self, s32 arg1) {
 }
 
 void fn_800D72D4(s32 *self) {
-    extern s32 lbl_8045B438[];
-    extern s32 fn_80334E70(void *, s32);
-    if (fn_80334E70(lbl_8045B438, self[6]) != 0 ? 1 : 0) {
+    if (SoundIsDone(self[6])) {
         self[6] = 0;
     }
 }
