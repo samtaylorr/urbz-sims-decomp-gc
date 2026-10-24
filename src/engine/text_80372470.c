@@ -114,7 +114,6 @@ void fn_8037273C(void) {
     fn_80372510(Alloc(0x2C));
 }
 
-void fn_80372510(void *);
 void fn_803727BC(void *self) {
     fn_80372510(self);
 }
