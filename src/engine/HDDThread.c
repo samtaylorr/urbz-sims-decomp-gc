@@ -38,6 +38,21 @@ s32 fn_803326F0(void *arg0) {
     return 0;
 }
 
+s32 fn_80332718(void *arg0) {
+    s32 fn_80336474(s32);
+    extern char *lbl_80496220;
+    s32 r;
+
+    if (M2C_FIELD(arg0, s32 *, 4) != 0 && M2C_FIELD(arg0, s32 *, 0) != 0) {
+        char *vt = *(char **)lbl_80496220;
+        r = (*(s32 (**)(void *, s32))(vt + 0xAC))(lbl_80496220 + *(s16 *)(vt + 0xA8), M2C_FIELD(arg0, s32 *, 4));
+        if (r != 0) {
+            return fn_80336474(r);
+        }
+    }
+    return 0;
+}
+
 s32 fn_80332824(s32 *self) {
     return *self;
 }
