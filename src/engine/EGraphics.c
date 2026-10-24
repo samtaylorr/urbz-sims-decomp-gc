@@ -64,6 +64,17 @@ void fn_802ED9B4(char *self) {
     (*(void (**)(void *, void *))(vt + 0x74))(self + *(s16 *)(vt + 0x70), obj);
 }
 
+void fn_802EDA48(char *self) {
+    extern s32 lbl_80494DF8;
+    extern s32 lbl_80494EC0;
+    extern char *lbl_80495220;
+    char *obj = lbl_80495220;
+    char *vt = *(char **)(obj + 0x338);
+    (*(void (**)(void *, s32))(vt + 0x24))(obj + *(s16 *)(vt + 0x20), lbl_80494DF8);
+    lbl_80494EC0 = 0;
+    *(s32 *)(self + 4) = 1;
+}
+
 void fn_802EDB28(void) {
 
 }
