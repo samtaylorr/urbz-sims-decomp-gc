@@ -1051,7 +1051,8 @@ void fn_800D72A8(s32 *self, s32 arg1) {
 void fn_800D72D4(s32 *self) {
     extern s32 lbl_8045B438[];
     extern s32 fn_80334E70(void *, s32);
-    s32 done = fn_80334E70(lbl_8045B438, self[6]) != 0;
+    s32 done = fn_80334E70(lbl_8045B438, self[6]);
+    done = done != 0;
     if (done) {
         self[6] = 0;
     }
@@ -3552,6 +3553,11 @@ s32 fn_800EB164(s32 arg0, s32 arg1) {
 s32 fn_800EB190(s32 arg0, s32 arg1) {
     s32 fn_800EF110(s32, s32, s32, s32);
     return fn_800EF110(arg0, arg1, 0, 1) == 0;
+}
+
+s32 fn_800EB1C0(s32 arg0, s32 arg1) {
+    s32 fn_800EF0A8(s32, s32, s32);
+    return fn_800EF0A8(arg1, arg0, 0) != 0;
 }
 
 s32 fn_800EB244(s32 arg0, s32 arg1) {
