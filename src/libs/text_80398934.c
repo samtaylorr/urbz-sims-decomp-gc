@@ -279,8 +279,8 @@ void fn_8039A7D4(s32 *self, s32 n) {
     }
 }
 
-f32 fn_8039AA70(s32 arg0, s32 arg1) {
-    return *(f32 *)(arg0 + arg1 * 4);
+f32 fn_8039AA70(void *self, s32 i) {
+    return ((struct { f32 v[1]; } *)self)->v[i];
 }
 
 void fn_8039AA7C(void *arg0, s32 arg1) {
