@@ -243,6 +243,11 @@ void fn_802C96D4(void) {
 
 }
 
+void fn_802CAA50(char *self, s32 a, s32 b, s32 c) {
+    char *vt = *(char **)(self + 0x0);
+    (*(void (**)(char *, s32))(vt + 0x14))(self + *(s16 *)(vt + 0x10), c);
+}
+
 void fn_802CAA88(s32 arg0) {
     M2C_UNK fn_802D8334(s32);
     fn_802D8334(arg0 + 4);
@@ -256,6 +261,17 @@ void fn_802CAAAC(s32 arg0) {
 void fn_802CAAD0(char *self) {
     char *vt = *(char **)(self + 0x0);
     (*(void (**)(char *))(vt + 0x1C))(self + *(s16 *)(vt + 0x18));
+}
+
+void *fn_802CAB04(u8 *self) {
+    extern u8 lbl_80419350[];
+    extern void fn_802CA9A8(void *);
+    fn_802CA9A8(self);
+    *(u8 **)(self + 0x0) = lbl_80419350;
+    fn_802CA9A8(self + 0x1C);
+    *(s32 *)(self + 0x3C) = 0;
+    *(s32 *)(self + 0x38) = 0;
+    return self;
 }
 
 void fn_802CAC68(s32 arg0) {
