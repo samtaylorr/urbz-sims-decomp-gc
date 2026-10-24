@@ -476,7 +476,7 @@ s32 fn_801DBFD4(void **arg0, s32 arg1, s32 arg2) {
 }
 
 s32 fn_801DC084(void **arg0, s32 arg1) {
-    M2C_UNK fn_801DBF38(void **, void *);
+    void fn_801DBF38(void **, void *);
     s32 fn_802486DC(s32, s32);
     s32 var_r28;
     void *temp_r30;
@@ -776,18 +776,21 @@ void fn_801DEFF0(void) {
 
 u8 *fn_801DF04C(u8 *self) {
     extern u8 lbl_804170B0[];
-    extern f32 lbl_803E1348;
-    extern f32 lbl_803E134C;
+    extern f32 lbl_803E1348[];
+    extern f32 lbl_803E134C[];
     s32 i;
+    f32 *p;
 
     *(u8 **)(self + 0xF8) = lbl_804170B0;
-    for (i = 0; i < 20; i++) {
-        ((s32 *)(self + 0x50))[i] = 0;
-        ((f32 *)(self + 0xA0))[i] = lbl_803E1348;
+    p = (f32 *)(self + 0xA0);
+    for (i = 20; i != 0; i--) {
+        *(s32 *)((u8 *)p - 0x50) = 0;
+        *p = lbl_803E1348[0];
+        p++;
     }
     *(s32 *)(self + 0xF0) = 0;
     *(s32 *)(self + 0xF4) = 3;
-    *(f32 *)(self + 0xB4) = lbl_803E134C;
+    *(f32 *)(self + 0xB4) = lbl_803E134C[0];
     return self;
 }
 
