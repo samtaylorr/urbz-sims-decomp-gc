@@ -21,6 +21,8 @@ extern void fn_802D94C0(void *, s32);
 extern void fn_802D0D30(void *, void *);
 extern void fn_80246D44(void (*)(void));
 void fn_802D0A8C(void);
+void fn_802C7F78(void *self);
+void fn_802C7FE8(void *self);
 
 typedef struct EMat4Node {
     u8 pad0[0x10];
@@ -386,24 +388,25 @@ void *fn_802CAB04(u8 *self) {
     return self;
 }
 
-s32 fn_802CAB54(u8 *self) {
+s32 fn_802CAB54(s32 self) {
     extern s32 fn_802D9124(void);
+    s32 m = self + 0x1C;
 
 retry:
-    fn_802CAA88((s32)self, -1);
+    fn_802CAA88(self, -1);
     if (*(s32 *)(self + 0x3C) == 0 || *(s32 *)(self + 0x38) == fn_802D9124()) {
         if (*(s32 *)(self + 0x3C) == 0) {
-            fn_802CAA88((s32)(self + 0x1C), -1);
+            fn_802CAA88(self + 0x1C, -1);
             *(s32 *)(self + 0x38) = fn_802D9124();
         }
         *(s32 *)(self + 0x3C) = *(s32 *)(self + 0x3C) + 1;
     } else {
-        fn_802CAAAC((s32)self);
-        fn_802CAA88((s32)(self + 0x1C), -1);
-        fn_802CAAAC((s32)(self + 0x1C));
+        fn_802CAAAC(self);
+        fn_802CAA88(m, -1);
+        fn_802CAAAC(m);
         goto retry;
     }
-    fn_802CAAAC((s32)self);
+    fn_802CAAAC(self);
     return 1;
 }
 
