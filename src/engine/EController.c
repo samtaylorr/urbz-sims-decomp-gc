@@ -76,6 +76,12 @@ s32 fn_80311350(u32 *arg0, u32 *arg1) {
     return -1;
 }
 
+void fn_803117BC(s32 arg0, s32 arg1, s32 arg2) {
+    void fn_803118A0(s32, s32, s32);
+    s32 fn_80311938(s32, s32);
+    fn_803118A0(arg0, arg1, fn_80311938(arg0, arg2));
+}
+
 s32 fn_80311990();
 void fn_803112CC(void *arg0, s32 arg1, s32 arg2, s32 arg3);
 void fn_80311404(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
