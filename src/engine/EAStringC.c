@@ -133,6 +133,11 @@ void fn_80298308(void) {
     lbl_80443310[0]();
 }
 
+void fn_80298334(void) {
+    extern void (*lbl_80443318[])(void);
+    lbl_80443318[0]();
+}
+
 void fn_80299A50(void) {
     fn_802999D4();
 }
