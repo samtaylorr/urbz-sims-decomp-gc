@@ -504,6 +504,14 @@ void fn_802A66F0(void *arg0) {
     }
 }
 
+void fn_802A6DE4(void) {
+    void fn_802A6CE0();
+    extern s32 lbl_804966FC;
+
+    lbl_804966FC += 0x60;
+    fn_802A6CE0();
+}
+
 void fn_802A6E10(s32 arg0) {
     M2C_UNK fn_802A6CE0();
     s32 fn_802D2058(M2C_UNK);
@@ -2321,6 +2329,24 @@ void fn_802BD608(s32 arg0, s32 arg1) {
     M2C_UNK fn_802BD494(s32, s32);
     fn_802BD324();
     fn_802BD494(arg0, arg1);
+}
+
+u8 **fn_802C4024(const char *arg0) {
+    extern s32 fn_80248808(const char *);
+    extern s32 fn_8027A6AC(void *, const char *);
+    extern u8 *lbl_80444628[];
+    s32 len;
+    s32 i;
+    u8 *e;
+
+    len = fn_80248808(arg0);
+    for (i = 0; i <= 0xAF; i++) {
+        e = lbl_80444628[i];
+        if (*(u16 *)(e + 2) == len && fn_8027A6AC(e + 8, arg0) == 0) {
+            return &lbl_80444628[i];
+        }
+    }
+    return NULL;
 }
 
 void fn_802C43BC(void) {
