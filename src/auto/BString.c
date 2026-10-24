@@ -3665,6 +3665,7 @@ s32 fn_800EB2DC(s32 arg0, s32 arg1) {
 }
 
 s32 fn_800EB31C(s32 arg0, s32 arg1) {
+    s32 fn_800EF110(s32, s32, s32, s32);
     return fn_800EF110(arg1, arg0, 0, 1) > 0;
 }
 
