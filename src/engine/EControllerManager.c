@@ -267,6 +267,15 @@ s32 fn_803349A8(s32 arg0, s32 arg1) {
     return fn_803374C8(arg0, arg1);
 }
 
+s32 fn_803349FC(s32 arg0, s32 arg1, s32 arg2) {
+    s32 fn_80334B0C();
+    s32 fn_80336F00(s32, s32, s32);
+    if (lbl_80494F5C == 0 && fn_80334B0C() == 0) {
+        return 1;
+    }
+    return fn_80336F00(arg0, arg1, arg2);
+}
+
 f32 fn_80334A58(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0xA8);
 }
