@@ -519,13 +519,15 @@ void fn_800CEE00(void *arg0) {
     extern s32 lbl_80494EB0;
     extern s32 lbl_80494EB4;
     extern s32 lbl_80494EB8;
+    void ***vec;
     void **var_r30;
     void *temp_r31;
     void *temp_r9_2;
     void *temp_r9_3;
     s32 flag;
 
-    for (var_r30 = ((void ***)((char *)arg0 + 0x50))[0]; var_r30 != ((void ***)((char *)arg0 + 0x50))[1]; var_r30++) {
+    vec = (void ***)((char *)arg0 + 0x50);
+    for (var_r30 = vec[0]; var_r30 != vec[1]; var_r30++) {
         temp_r31 = *var_r30;
         temp_r9_2 = M2C_FIELD(temp_r31, void **, 0x5C);
         M2C_FIELD(temp_r9_2, void (**)(void *), 0x1C)((char *)temp_r31 + M2C_FIELD(temp_r9_2, s16 *, 0x18));
@@ -1003,9 +1005,9 @@ void fn_800D0318(void *arg0, s32 arg1, s32 arg2) {
     fn_800CD6DC(arg0, 0, arg1, arg2);
 }
 
-void fn_800D0344(void *arg0, s32 arg1) {
-    void *fn_800CD724(void *, s32, s32);
-    fn_800CD724(arg0, 0, arg1);
+void fn_800D0344(void *arg0, s32 arg1, f32 arg2) {
+    void fn_800CD724(void *, s32, s32, f32);
+    fn_800CD724(arg0, 0, arg1, arg2);
 }
 
 void fn_800D036C(void *arg0, s32 arg1, s32 arg2) {
