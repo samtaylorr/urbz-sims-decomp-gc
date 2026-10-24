@@ -713,6 +713,19 @@ void fn_802D4F24(f64 farg0) {
     fn_802D4598((f32) farg0);
 }
 
+s32 fn_802D4F48(s32 a, s32 b) {
+    if (a == b) {
+        return 1;
+    }
+    if ((u32)(a - 'a') <= 25 && b >= 'A' && b <= 'Z') {
+        return a - 0x20 == b;
+    }
+    if ((u32)(b - 'a') <= 25 && a >= 'A' && a <= 'Z') {
+        return b - 0x20 == a;
+    }
+    return 0;
+}
+
 void fn_802D4FC4(u8 **arg0) {
     u8 *var_r3;
     u8 var_r0;
