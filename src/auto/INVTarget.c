@@ -2,6 +2,21 @@
 #include "common.h"
 
 void fn_800C3B48(void);
+
+typedef struct INVNode {
+    struct INVNode *prev;
+    struct INVNode *next;
+    s32 unk8;
+    s32 unkC;
+    void *unk10;
+} INVNode;
+
+typedef struct INVNodeList {
+    INVNode *head;
+    INVNode *tail;
+    INVNode *free;
+    void *unkC;
+} INVNodeList;
 s32 fn_801DFF98(void **arg0, s32 arg1);
 s32 fn_801F8708(s32, s32);
 void fn_801E1338(s32, s32, s32, s32, s32, s32, s32);
@@ -521,6 +536,38 @@ loop_1:
     }
 block_4:
     return 0;
+}
+
+s32 fn_801D8CE4(void **arg0) {
+    void *fn_802D1FC8(s32);
+    extern char lbl_80416E98[];
+    extern char lbl_80416EB0[];
+    s32 var_r29;
+    void **temp_r3;
+    void **var_r28;
+
+    arg0[3] = lbl_80416E98;
+    arg0[2] = NULL;
+    arg0[0] = NULL;
+    arg0[1] = NULL;
+    var_r28 = NULL;
+    var_r29 = 100;
+    do {
+        temp_r3 = fn_802D1FC8(0x14);
+        temp_r3[4] = lbl_80416EB0;
+        temp_r3[0] = NULL;
+        temp_r3[1] = NULL;
+        temp_r3[2] = NULL;
+        temp_r3[3] = NULL;
+        if (arg0[2] == NULL) {
+            arg0[2] = temp_r3;
+        } else {
+            var_r28[1] = temp_r3;
+            temp_r3[0] = var_r28;
+        }
+        var_r28 = temp_r3;
+    } while (--var_r29 != 0);
+    return (s32)arg0;
 }
 
 void fn_801D8D84(void *arg0, s32 arg1) {
@@ -2005,7 +2052,11 @@ void fn_801E2A24(void *, s32);
 void fn_801E2BB4(void *);
 void fn_801F983C(s32 arg0, s32 arg1) {
     void fn_801E2BB4(void *);
-    if (INVSlot_IsUsed(arg0, arg1)) {
+    s32 ok = 1;
+    if (*(s32 *)((u8 *)arg0 + (arg1 * 0x318 + 0x104) + 4) == 0) {
+        ok = 0;
+    }
+    if (ok) {
         fn_801E2BB4((u8 *)arg0 + (arg1 * 0x318 + 0x104));
     }
 }
