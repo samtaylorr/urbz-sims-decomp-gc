@@ -7079,6 +7079,17 @@ void fn_803B9520(void *self, s32 arg1) {
     fn_803B9444(self, arg1, M2C_FIELD(self, s32 *, 4), 1);
 }
 
+void fn_803B9548(void **self, s32 flags) {
+    void fn_802D20E8(void *);
+    void fn_803B9594(void *);
+    extern u8 lbl_80419328[];
+    *self = lbl_80419328;
+    fn_803B9594(self);
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_803B9594(void) {
     M2C_UNK fn_802C7C90();
     extern s32 lbl_80494DBC;
