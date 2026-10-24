@@ -507,6 +507,33 @@ void fn_801D924C(void *arg0, s32 arg1) {
     }
 }
 
+M2C_UNK fn_801D92EC(void **arg0, s32 arg1, s32 arg2) {
+    void **node;
+    void **next;
+    void *head;
+
+    node = arg0[2];
+    next = node[1];
+    arg0[2] = next;
+    if (next != NULL) {
+        next[0] = NULL;
+    }
+    head = arg0[0];
+    if (head == NULL) {
+        arg0[0] = node;
+        node[0] = head;
+        arg0[1] = node;
+        node[1] = head;
+    } else {
+        ((void **)arg0[1])[1] = node;
+        node[0] = arg0[1];
+        arg0[1] = node;
+        node[1] = NULL;
+    }
+    node[2] = (void *)arg1;
+    node[3] = (void *)arg2;
+}
+
 s32 fn_801D93E0(void **arg0, s32 arg1, s32 arg2) {
     s32 fn_802486DC(s32, s32);
     M2C_UNK fn_801D92EC(void **, s32, s32);
@@ -2495,14 +2522,12 @@ s32 fn_8022D1E8(s32 arg0) {
     item = fn_80224E3C(fn_80225544(), arg0);
     if (item != 0) {
         obj = fn_80014F30(fn_80014EE0(), arg0);
-        if (!obj) {
-            return 0;
+        if (obj != 0) {
+            fn_80011F24(obj, fn_80224A28(item));
+            return 1;
         }
-        fn_80011F24(obj, fn_80224A28(item));
-        return 1;
-    } else {
-        return 0;
     }
+    return 0;
 }
 
 s32 fn_8022D25C(s32 arg0) {
