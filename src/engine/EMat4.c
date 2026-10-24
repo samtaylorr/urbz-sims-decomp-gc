@@ -253,6 +253,11 @@ void fn_802CAAAC(s32 arg0) {
     fn_802D838C(arg0 + 4);
 }
 
+void fn_802CAAD0(char *self) {
+    char *vt = *(char **)(self + 0x0);
+    (*(void (**)(char *))(vt + 0x1C))(self + *(s16 *)(vt + 0x18));
+}
+
 void fn_802CAC68(s32 arg0) {
     M2C_UNK fn_802D83EC(s32);
     fn_802D83EC(arg0 + 4);
