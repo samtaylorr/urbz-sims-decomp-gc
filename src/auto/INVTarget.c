@@ -1833,6 +1833,11 @@ s32 fn_801F9614(s32 arg0, s32 arg1) {
     return ret;
 }
 
+void fn_801F96A8(s32 arg0, s32 arg1) {
+    void fn_801E1868(void *);
+    fn_801E1868((u8 *)arg0 + (arg1 * 0x124 + 0x734));
+}
+
 void fn_801E14D4(void *);
 void fn_801E1868(void *);
 void fn_801E2A24(void *, s32);
