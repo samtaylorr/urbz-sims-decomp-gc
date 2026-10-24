@@ -546,6 +546,7 @@ s32 fn_80261640(u32 resume) {
     return 0;
 }
 
+volatile u32 __DIRegs[] : 0xCC006000;
 void fn_8026199C(u32 arg0) {
     extern void fn_802652F4(u32);
     extern void fn_80264274(void);
@@ -563,7 +564,7 @@ void fn_8026199C(u32 arg0) {
         fn_802664BC(fn_80261458);
         return;
     }
-    fn_802652F4(*(u32 *)(0xCC006000 + 0x20));
+    fn_802652F4(__DIRegs[8]);
     fn_802664BC(fn_80261458);
 }
 
