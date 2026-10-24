@@ -820,6 +820,28 @@ s32 fn_801A0FD4(void) {
     return 0x168;
 }
 
+void fn_801A10DC(s32 *self, s32 flags) {
+    extern void fn_802D20E8(void *);
+    extern void fn_802D211C(void *);
+    extern void fn_803997AC(void *, u32);
+    s32 *v;
+    if (self[0] != 0) {
+        fn_802D211C((void *)self[0]);
+    }
+    v = self + 2;
+    if (v[0] != 0) {
+        u32 size = (u32)(v[3] - v[0]) & ~3;
+        if (size > 0x80) {
+            fn_802D20E8((void *)v[0]);
+        } else {
+            fn_803997AC((void *)v[0], size);
+        }
+    }
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_801A1158(s32 *self, s32 flags) {
     extern u8 lbl_80414D70[];
     extern void fn_802D20E8(void *);
