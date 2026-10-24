@@ -975,6 +975,16 @@ s32 fn_802D5F24(s32 arg0, s32 *arg1, s32 *arg2) {
     return arg0;
 }
 
+s32 fn_802D5F80(s32 arg0, s32 *arg1, u16 arg2) {
+    M2C_UNK fn_802D50BC(s32, s32, s32);
+    u16 buf[2];
+
+    buf[0] = arg2;
+    buf[1] = 0;
+    fn_802D50BC(arg0, *arg1, (s32)buf);
+    return arg0;
+}
+
 u16 **fn_802D6934(u16 **arg0) {
     u16 *p;
 
