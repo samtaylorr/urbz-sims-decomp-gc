@@ -382,8 +382,8 @@ void fn_800D277C(void *arg0) {
     extern s32 fn_800E18B8(s32);
     s32 *self = arg0;
     self[6] = 0;
-    lbl_80434A9C[1] = 0;
     self[7] = 0;
+    lbl_80434A9C[1] = 0;
     fn_800E18B8(5);
 }
 
