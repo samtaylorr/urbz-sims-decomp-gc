@@ -28,6 +28,30 @@ void fn_8018F874(void *arg0) {
     lbl_80494534 = arg0;
 }
 
+void fn_8018F914(void *arg0, s32 arg1) {
+    void fn_8018F884(void *);
+    void fn_802D20E8(void *);
+    extern M2C_UNK lbl_804140F8;
+    M2C_FIELD(arg0, M2C_UNK **, 0x10) = &lbl_804140F8;
+    fn_8018F884(arg0);
+    if (arg1 & 1) {
+        fn_802D20E8(arg0);
+    }
+}
+
+void fn_8018F960(s32 *arg0, s32 id) {
+    extern void *lbl_80494534;
+    s32 *it;
+again:
+    for (it = lbl_80494534; it != NULL; it = (s32 *)it[1]) {
+        if (it != arg0 && it[0] == id) {
+            id++;
+            goto again;
+        }
+    }
+    *arg0 = id;
+}
+
 s32 fn_8018FA7C(s32 *self) {
     return self[2];
 }
