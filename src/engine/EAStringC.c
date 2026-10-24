@@ -128,6 +128,19 @@ void fn_80298018(s32 arg0) {
     fn_802A14A0(arg0 + 0x20);
 }
 
+void *fn_802982AC(void *arg0) {
+    extern void fn_802A0A08(void *);
+    extern u8 lbl_80418600[];
+    M2C_FIELD(arg0, s32 *, 0x10) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+    M2C_FIELD(arg0, s32 *, 0xC) = 0;
+    M2C_FIELD(arg0, s32 *, 0) = -1;
+    M2C_FIELD(arg0, void **, 0x14) = lbl_80418600;
+    fn_802A0A08((u8 *)arg0 + 0x20);
+    M2C_FIELD(arg0, s32 *, 0x18) = 0;
+    return arg0;
+}
+
 void fn_80298308(void) {
     extern void (*lbl_80443310[])(void);
     lbl_80443310[0]();
