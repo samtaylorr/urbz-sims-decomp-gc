@@ -341,6 +341,13 @@ void fn_80334BE4(s32 arg0, s32 arg1) {
     }
 }
 
+void fn_80334C44(s32 arg0, void *arg1) {
+    M2C_UNK fn_80337AEC(s32, void *);
+    if (((s32) lbl_80494F5C != 0) || (fn_80334B0C(arg0, M2C_FIELD(arg1, s32 *, 8)) != 0)) {
+        fn_80337AEC(arg0, arg1);
+    }
+}
+
 void fn_80334C98(s32 arg0, s32 arg1) {
     M2C_UNK fn_8033798C(s32, s32);
     s32 fn_80337F14(s32);
