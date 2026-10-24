@@ -42,6 +42,15 @@ void fn_8009B19C(s32 *self, s32 value) {
     *self = value;
 }
 
+extern void fn_802D20E8(void *);
+void fn_8009B1A4(void *self, s32 flags) {
+    extern void fn_802D20E8(void *);
+    *(s32 *)self = 0;
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_8009B580(void) {
 
 }
