@@ -1012,12 +1012,11 @@ void fn_8039C584(void **self, s32 flags) {
     }
 }
 
-s32 fn_800A2B98(SortComp *comp, s32 a, s32 b);
-typedef s32 (*SortCompFn)(SortComp, s32, s32);
+s32 fn_800A2B98(SortComp comp, s32 a, s32 b);
 void fn_8039CAD8(s32 *last, s32 val, SortComp comp) {
     s32 *next = last - 1;
 
-    while (((SortCompFn)fn_800A2B98)(comp, val, *next)) {
+    while (fn_800A2B98(comp, val, *next)) {
         *last = *next;
         last = next;
         next--;
@@ -1033,7 +1032,7 @@ void fn_8039CB38(s32 *first, s32 *last, SortComp comp) {
     }
     for (i = first + 1; i != last; i++) {
         s32 val = *i;
-        if (fn_800A2B98(&comp, val, *first)) {
+        if (fn_800A2B98(comp, val, *first)) {
             s32 *next = i + 1;
             s32 n = (char *)i - (char *)first;
             if (n > 0) {
@@ -3207,21 +3206,17 @@ void *fn_803ADAAC(void *arg0, char *arg1) {
     char *end;
     s32 len;
     char *p;
-    void *alloc;
 
     M2C_FIELD(arg0, char **, 0) = NULL;
     M2C_FIELD(arg0, char **, 4) = NULL;
-    alloc = (char *)arg0 + 8;
-    M2C_FIELD(alloc, s32 *, 4) = 0;
+    M2C_FIELD((char *)arg0 + 8, s32 *, 4) = 0;
     end = arg1 + fn_80248808(arg1);
     len = end - arg1;
     fn_803ADA44(arg0, len + 1);
     p = M2C_FIELD(arg0, char **, 0);
-    if (end != arg1) {
-        p = (char *)fn_8024839C(p, arg1, len) + len;
-    }
+    p = (end != arg1) ? (char *)fn_8024839C(p, arg1, len) + len : p;
     M2C_FIELD(arg0, char **, 4) = p;
-    *p = '\0';
+    *p = 0;
     return arg0;
 }
 
