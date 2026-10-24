@@ -85,14 +85,15 @@ void fn_8032D38C(void **self, s32 flags) {
 }
 
 void fn_8032D3EC(void *arg0) {
+    void fn_8032D440(void *);
     void fn_80338184(void *, s32);
     extern u8 lbl_8045B980[];
     if (M2C_FIELD(arg0, s32 *, 0x20) != 0) {
         fn_8032D440(arg0);
     }
     fn_80338184(lbl_8045B980, M2C_FIELD(arg0, s32 *, 0x20));
-    M2C_FIELD(arg0, s32 *, 0x24) = 0;
     M2C_FIELD(arg0, s32 *, 0x20) = 0;
+    M2C_FIELD(arg0, s32 *, 0x24) = 0;
 }
 
 void fn_8032D440(void *arg0) {
