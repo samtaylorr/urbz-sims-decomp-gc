@@ -54,13 +54,7 @@ void fn_8019968C(void *arg0) {
 }
 
 void fn_80199720(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 4) = 0;
-    M2C_FIELD(arg0, s32 *, 8) = 0;
-    SeqPair_Clear((s32 *)((char *)arg0 + 0xC));
-    M2C_FIELD(arg0, s32 *, 0x14) = 0;
-    SeqPair_Clear((s32 *)((char *)arg0 + 0x14));
-    SeqPair_Clear((s32 *)((char *)arg0 + 0x1C));
-    M2C_FIELD(arg0, s32 *, 0) = 0;
+    SeqRes_Init(arg0);
 }
 
 void fn_80199EB8(s32 *self) {

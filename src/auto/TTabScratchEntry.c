@@ -847,13 +847,10 @@ s32 fn_801A1028(s32 year, s32 month, s32 day) {
 }
 
 s32 *fn_801A10A8(s32 *self, s32 arg1) {
-    s32 *v = self + 2;
-    self[2] = 0;
-    v[1] = 0;
-    (v + 2)[1] = 0;
+    ScratchVec_Init(self + 2);
     self[6] = arg1;
-    self[1] = 0;
     self[0] = 0;
+    self[1] = 0;
     return self;
 }
 

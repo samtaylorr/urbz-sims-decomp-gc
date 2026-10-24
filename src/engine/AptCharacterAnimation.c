@@ -83,6 +83,26 @@ s32 fn_8028E05C(void *arg0) {
     return var_r3;
 }
 
+void *fn_8028FB40(u32 *self) {
+    extern void *lbl_80496130;
+    s32 ok;
+    s32 i;
+
+    ok = 0;
+    if ((self[0] & 0x3F) == 0x16) {
+        ok = (self[0] >> 15) & 1;
+    }
+    if (ok != 0) {
+        for (i = 0; i < (s32)self[9] / 2; i++) {
+            s32 tmp = ((s32 *)self[7])[i];
+            ((s32 *)self[7])[i] = ((s32 *)self[7])[self[9] - i - 1];
+            ((s32 *)self[7])[self[9] - i - 1] = tmp;
+        }
+        return self;
+    }
+    return lbl_80496130;
+}
+
 void fn_8028FF8C(s32 arg0, s32 arg1) {
     extern u16 lbl_803FCE5C[];
     extern u16 *lbl_80496104;

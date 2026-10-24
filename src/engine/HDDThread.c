@@ -50,6 +50,33 @@ s32 fn_80332834(char *self) {
     return *(s32 *)(self + 0xC);
 }
 
+void *fn_8033283C(void *arg0) {
+    void fn_80248488(void *, s32, s32);
+    void fn_802D8B34(void *);
+    void fn_803321EC(void *);
+    extern s32 lbl_8041BBD8;
+    s32 i;
+    char *p;
+
+    i = 0x1F;
+    p = (char *)arg0 + 0x340;
+    fn_802D8B34(arg0);
+    M2C_FIELD(arg0, s32 **, 0x338) = &lbl_8041BBD8;
+    do {
+        fn_803321EC(p);
+        p += 0x14;
+    } while (i-- != 0);
+    M2C_FIELD(arg0, s32 *, 0x5C0) = 0;
+    M2C_FIELD(arg0, s32 *, 0x5C4) = 1;
+    M2C_FIELD(arg0, s32 *, 0x5C8) = 0;
+    M2C_FIELD(arg0, s32 *, 0x5CC) = 0;
+    fn_80248488((char *)arg0 + 0x5D0, 0, 0x1C);
+    fn_80248488((char *)arg0 + 0x5EC, 0, 0x1C);
+    fn_80248488((char *)arg0 + 0x608, 0, 0x1C);
+    fn_80248488((char *)arg0 + 0x624, 0, 0x1C);
+    return arg0;
+}
+
 void fn_803328F0(void) {
 
 }

@@ -116,21 +116,23 @@ void fn_802530AC(void) {
     fn_80378324();
 }
 
-void fn_80253924(s32 arg0, s32 arg1, s32 arg2) {
-    void fn_80262FE0(void *, s32, s32, s32, s32, s32);
-    s32 fn_802642C0(void *);
+#pragma scheduling off
+#pragma peephole off
+void fn_80253924(void *arg0, s32 arg1, s32 arg2) {
+    s32 fn_802642C0(DVDCommandBlock *);
     s32 fn_802649F8(void);
     void fn_802560D4(s32);
-    u8 buf[0x30];
+    DVDCommandBlock block;
 
-    fn_80262FE0(buf, arg0, arg1, arg2, 0, 0);
-    while (fn_802642C0(buf)) {
+    fn_80262FE0(&block, arg0, arg1, arg2, NULL, 0);
+    while (fn_802642C0(&block)) {
         if (!fn_802649F8()) {
             fn_802560D4(0);
         }
     }
 }
-
+#pragma peephole reset
+#pragma scheduling reset
 void fn_80253990(void) {
     extern s32 lbl_80495E10;
     lbl_80495E10 = 1;

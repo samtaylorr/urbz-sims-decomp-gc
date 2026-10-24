@@ -30,9 +30,11 @@ s32 fn_8039850C(Nibbles *n) {
         n->pos += 2;
     }
     if (n->pos & 1) {
-        v = (s32)(*n->ptr++ << 28) >> 28;
+        u8 *p = n->ptr;
+        n->ptr = p + 1;
+        v = (s32)(*p << 28) >> 28;
     } else {
-        v = (s32)(*n->ptr << 24) >> 28;
+        v = (s32)((*n->ptr << 24) & 0xF0000000) >> 28;
     }
     n->pos++;
     return v;

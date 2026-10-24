@@ -41,6 +41,32 @@ s32 fn_802F1B34(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void *fn_802F1B74(void *self) {
+    extern void fn_802EFBA8(void *);
+    extern void fn_802F2378(void *);
+    extern f32 lbl_803F0F38[];
+    extern f32 lbl_803F0F3C[];
+    extern f32 lbl_803F0F40[];
+    extern u8 lbl_8041A218[];
+    Vec3f v;
+    f32 a, b;
+
+    fn_802EFBA8(self);
+    Vec3f_Set(&v, lbl_803F0F38[0], lbl_803F0F38[0], lbl_803F0F38[0]);
+    *(void **)self = lbl_8041A218;
+    *(Vec3f *)((u8 *)self + 0xC0) = v;
+    *(s32 *)((u8 *)self + 0xCC) = 0;
+    *(s32 *)((u8 *)self + 0xD4) = -1;
+    a = lbl_803F0F3C[0];
+    b = lbl_803F0F40[0];
+    *(f32 *)((u8 *)self + 0xD8) = a;
+    *(f32 *)((u8 *)self + 0xDC) = b;
+    *(s32 *)((u8 *)self + 0xE0) = 1;
+    *(s32 *)((u8 *)self + 0xD0) = 0;
+    fn_802F2378(self);
+    return self;
+}
+
 void fn_802F2468(s32 arg0, s32 arg1) {
     if (arg1 == 0xFFFF && arg0 != 0) {
         lbl_804961D4 = fn_802D6A90(lbl_80493790, fn_802F24D8, fn_802F2500, fn_802F2520, 0, lbl_803F0EF4, lbl_80493740);

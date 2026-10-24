@@ -1032,7 +1032,8 @@ void fn_8039CB38(s32 *first, s32 *last, SortComp comp) {
     }
     for (i = first + 1; i != last; i++) {
         s32 val = *i;
-        if (fn_800A2B98(comp, val, *first)) {
+        SortComp c = comp;
+        if (fn_800A2B98(c, val, *first)) {
             s32 *next = i + 1;
             s32 n = (char *)i - (char *)first;
             if (n > 0) {
@@ -1040,7 +1041,7 @@ void fn_8039CB38(s32 *first, s32 *last, SortComp comp) {
             }
             *first = val;
         } else {
-            fn_8039CAD8(i, val, comp);
+            fn_8039CAD8(i, val, c);
         }
     }
 }

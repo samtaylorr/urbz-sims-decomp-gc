@@ -92,6 +92,26 @@ void fn_8008FEE4(void) {
 
 }
 
+s32 fn_8008FEE8(void *arg0, void *arg1) {
+    void *obj = M2C_FIELD(arg0, void **, 4);
+    void *vt = M2C_FIELD(obj, void **, 4);
+    if (M2C_FIELD(vt, s32 (**)(void *), 0x1D4)(obj + M2C_FIELD(vt, s16 *, 0x1D0)) == 0 && M2C_FIELD(arg1, s32 *, 4) != 0) {
+        return M2C_FIELD(arg1, s32 *, 4);
+    }
+    return M2C_FIELD(arg1, s32 *, 0);
+}
+
+s32 fn_80090108(void *arg0, void *arg1) {
+    s32 fn_8008FEE8(void *arg0, void *arg1);
+    s32 fn_80337008(void *, s32);
+    extern u8 lbl_8045B82C[];
+    s32 s = fn_8008FEE8(arg0, arg1);
+    if (s != 0) {
+        return !!fn_80337008(lbl_8045B82C, s);
+    }
+    return 0;
+}
+
 void fn_80091980(void *arg0) {
     M2C_UNK fn_8000CD30(s32);
     void *var_r30;

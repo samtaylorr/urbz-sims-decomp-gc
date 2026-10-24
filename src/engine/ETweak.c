@@ -97,7 +97,7 @@ void fn_80314B90(s32 arg0) {
 
     list = (s8 *)arg0 + 0xC;
     node = M2C_FIELD(list, void **, 4);
-    while (node != NULL ? 1 : 0) {
+    while (ETweakNode_Valid(node)) {
         obj = M2C_FIELD(node, s32 **, 0);
         next = M2C_FIELD(node, void **, 4);
         if (M2C_FIELD(list, s32 *, 8) != 0 && obj != NULL) {

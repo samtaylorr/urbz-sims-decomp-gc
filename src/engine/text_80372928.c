@@ -50,6 +50,37 @@ void fn_80372A2C(void **self, s32 flags) {
     }
 }
 
+void fn_80372AE4(void *arg0) {
+    M2C_UNK fn_8031EA2C(void *);
+    s32 *var_r31;
+    s32 temp_r9;
+    s32 var_r28;
+    void **var_r29;
+    void *temp_r30;
+    void *temp_r9_2;
+
+    temp_r9 = M2C_FIELD(arg0, s32 *, 0x20);
+    if (temp_r9 != 0) {
+        var_r28 = 0;
+        if ((s32) M2C_FIELD(arg0, s32 *, 0x24) > 0) {
+            var_r29 = temp_r9 + 0x16C;
+            var_r31 = arg0 + 0x28;
+            do {
+                if ((s32) *var_r31 != 0) {
+                    temp_r9_2 = *var_r29;
+                    temp_r30 = M2C_FIELD(temp_r9_2, void **, 8);
+                    fn_8031EA2C(temp_r9_2);
+                    *var_r31 = 0;
+                    *var_r29 = temp_r30;
+                }
+                var_r28 += 1;
+                var_r29 += 0x84;
+                var_r31 += 4;
+            } while (var_r28 < (s32) M2C_FIELD(arg0, s32 *, 0x24));
+        }
+    }
+}
+
 void fn_8037379C(s32 arg0, s32 arg1) {
     if (arg1 == 0xFFFF && arg0 != 0) {
         lbl_8049631C = fn_802D6A90(lbl_80493EBC, fn_8037380C, fn_80373834, fn_80373860, 0, lbl_803F567C, lbl_80493858);

@@ -49,27 +49,23 @@ void fn_80064650(s32 *arg0, s32 arg1) {
 void fn_8006488C(void *arg0, s32 arg1) {
     M2C_UNK fn_802CD53C(void *);
     M2C_UNK fn_80325C50(s32, void *);
-    void *node;
-    void *obj;
-    void *vt;
     void **list;
     void *it;
-    void *o;
-    void *v;
+    void *node;
 
     for (node = M2C_FIELD(arg0, void **, 4); node != NULL; node = M2C_FIELD(node, void **, 0x10)) {
-        obj = M2C_FIELD(node, void **, 0x1C);
+        void *obj = M2C_FIELD(node, void **, 0x1C);
+        void *vt;
         fn_80325C50(arg1, obj);
         vt = *(void **)obj;
         M2C_FIELD(vt, void (**)(void *, s32), 0x16C)((char *)obj + M2C_FIELD(vt, s16 *, 0x168), arg1);
     }
     list = (void **)((char *)arg0 + 4);
     it = *list;
-    while ((it != NULL) != 0) {
-        o = M2C_FIELD(it, void **, 0x1C);
+    while (ISimInstance_IterValid(it)) {
+        void *obj = M2C_FIELD(it, void **, 0x1C);
         it = M2C_FIELD(it, void **, 0x10);
-        v = *(void **)o;
-        M2C_FIELD(v, void (**)(void *), 0xC)((char *)o + M2C_FIELD(v, s16 *, 8));
+        M2C_FIELD(*(void **)obj, void (**)(void *), 0xC)((char *)obj + M2C_FIELD(*(void **)obj, s16 *, 8));
     }
     fn_802CD53C(list);
 }

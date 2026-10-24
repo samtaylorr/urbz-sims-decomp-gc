@@ -476,8 +476,7 @@ void fn_80063054(void) {
     extern void *fn_80248488(void *, s32, u32);
     extern void fn_8005B71C(void *);
     void *p = BBI_AllocAligned(0x660);
-    fn_80248488(p, 0, 0x660);
-    fn_8005B71C(p);
+    fn_8005B71C(fn_80248488(p, 0, 0x660) ? p : p);
 }
 
 void fn_800630FC(void) {
@@ -705,10 +704,9 @@ void fn_800636D0(void) {
 }
 
 void fn_800636F0(void) {
-    extern void *fn_80248488(void *, s32, u32);
     extern void fn_80060CD0(void *);
     void *p = BBI_AllocAligned(0x690);
-    fn_80248488(p, 0, 0x688);
+    __builtin_memset(p, 0, 0x688);
     fn_80060CD0(p);
 }
 

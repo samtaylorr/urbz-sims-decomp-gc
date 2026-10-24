@@ -48,7 +48,30 @@ void fn_8000A468(s32 arg0, s32 arg1) {
 }
 
 void fn_8000A46C(void *arg0) {
-    AptBase_Init(arg0);
+    extern f32 lbl_803C17F8[];
+    extern f32 lbl_803C17FC[];
+    extern s32 lbl_80406C38[];
+    AptVec2 v;
+    AptVec2 *p;
+    AptVec2 a;
+    AptVec2 b;
+
+    p = &v;
+    p->x = lbl_803C17F8[0];
+    p->y = lbl_803C17F8[0];
+    a = *p;
+    p->x = lbl_803C17FC[0];
+    p->y = lbl_803C17FC[0];
+    b = *p;
+    M2C_FIELD(arg0, void **, 0x2C) = lbl_80406C38;
+    M2C_FIELD(arg0, s32 *, 0x18) = 0;
+    M2C_FIELD(arg0, AptVec2 *, 0x1C) = a;
+    M2C_FIELD(arg0, AptVec2 *, 0x24) = b;
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+    M2C_FIELD(arg0, s32 *, 0xC) = 0;
+    M2C_FIELD(arg0, s32 *, 0x10) = 0;
+    M2C_FIELD(arg0, s32 *, 0x14) = 0;
 }
 
 void fn_8000A4E8(void *arg0, s32 arg1) {
@@ -81,16 +104,24 @@ void fn_8000A598(void *arg0) {
     extern f32 lbl_803C1800[];
     extern f32 lbl_803C1804[];
     extern s32 lbl_80406C08[];
+    extern s32 lbl_80406C38[];
     AptVec2 v;
+    AptVec2 *p = &v;
 
-    AptBase_Init(arg0);
+    M2C_FIELD(arg0, void **, 0x2C) = lbl_80406C38;
+    M2C_FIELD(arg0, s32 *, 0x18) = 0;
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+    M2C_FIELD(arg0, s32 *, 0xC) = 0;
+    M2C_FIELD(arg0, s32 *, 0x10) = 0;
+    M2C_FIELD(arg0, s32 *, 0x14) = 0;
+    p->x = lbl_803C1800[0];
+    p->y = lbl_803C1800[0];
+    M2C_FIELD(arg0, AptVec2 *, 0x1C) = *p;
     M2C_FIELD(arg0, void **, 0x2C) = lbl_80406C08;
-    v.x = lbl_803C1800[0];
-    v.y = lbl_803C1800[0];
-    M2C_FIELD(arg0, AptVec2 *, 0x1C) = v;
-    v.x = lbl_803C1804[0];
-    v.y = lbl_803C1804[0];
-    M2C_FIELD(arg0, AptVec2 *, 0x24) = v;
+    p->x = lbl_803C1804[0];
+    p->y = lbl_803C1804[0];
+    M2C_FIELD(arg0, AptVec2 *, 0x24) = *p;
     M2C_FIELD(arg0, f32 *, 0x30) = lbl_803C1804[0];
 }
 

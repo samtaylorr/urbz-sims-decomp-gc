@@ -460,8 +460,6 @@ void fn_801DB8B8(void *arg0, s32 arg1) {
 }
 
 void fn_801DBF38(void **arg0, void *arg1) {
-    void *head;
-
     if (M2C_FIELD(arg1, void **, 0) != NULL) {
         M2C_FIELD(M2C_FIELD(arg1, void **, 0), void **, 4) = M2C_FIELD(arg1, void **, 4);
     }
@@ -474,7 +472,8 @@ void fn_801DBF38(void **arg0, void *arg1) {
     if (arg0[1] == arg1) {
         arg0[1] = M2C_FIELD(arg1, void **, 0);
     }
-    M2C_FIELD(arg1, void **, 4) = M2C_FIELD(arg1, void **, 0) = NULL;
+    M2C_FIELD(arg1, void **, 4) = NULL;
+    M2C_FIELD(arg1, void **, 0) = NULL;
     if (arg0[2] != NULL) {
         M2C_FIELD(arg1, void **, 4) = arg0[2];
         M2C_FIELD(arg0[2], void **, 0) = arg1;
@@ -781,8 +780,8 @@ void fn_801DEFA8(void) {
     extern void *fn_802D1FC8(s32);
     extern void *lbl_80494618;
     if (lbl_80494618 == 0) {
-        void *mem = fn_802D1FC8(0xFC);
-        lbl_80494618 = fn_801DF04C(mem);
+        lbl_80494618 = fn_802D1FC8(0xFC);
+        lbl_80494618 = fn_801DF04C(lbl_80494618);
         fn_801DF0DC();
         fn_801DF3F8(lbl_80494618);
     }
@@ -812,9 +811,9 @@ u8 *fn_801DF04C(u8 *self) {
 
     *(u8 **)(self + 0xF8) = lbl_804170B0;
     p = (f32 *)(self + 0xA0);
-    for (i = 0; i < 20; i++) {
-        ((s32 *)p)[i - 20] = 0;
-        p[i] = lbl_803E1348[0];
+    for (i = 20; --i != -1; p++) {
+        ((s32 *)p)[-20] = 0;
+        *p = lbl_803E1348[0];
     }
     *(s32 *)(self + 0xF0) = 0;
     *(s32 *)(self + 0xF4) = 3;
@@ -1398,10 +1397,11 @@ M2C_UNK fn_801F5420(s32 arg0) {
     extern void fn_800F2868(void *, s32, s32);
     extern void fn_801F4D1C(void *);
     extern void *lbl_8041FAC8[];
-    fn_800F2868((void *)(arg0 + 0x28), 0, -1);
-    fn_800F2868((void *)(arg0 + 0x30), 0, -1);
-    fn_800F2868((void *)(arg0 + 0x34), 0, -1);
-    fn_800F2868((void *)(arg0 + 0x38), 0, -1);
+    char *self = (char *)arg0;
+    fn_800F2868(self + 0x28, 0, -1);
+    fn_800F2868(self + 0x30, 0, -1);
+    fn_800F2868(self + 0x34, 0, -1);
+    fn_800F2868(self + 0x38, 0, -1);
     fn_801F4D1C(lbl_8041FAC8[0]);
 }
 

@@ -165,27 +165,32 @@ void fn_80123040(s32 arg0) {
 }
 
 void fn_80123064(s32 arg0, s32 arg1) {
-    extern char lbl_80434BE0[];
+    struct VecAlloc { s32 unk0; char *cap; };
+    struct Vec { char *begin; char *end; struct VecAlloc alloc; };
+    extern struct Vec lbl_80434BE0;
     M2C_UNK fn_802D20E8(void *, u32);
     M2C_UNK fn_803997AC(void *, u32);
+    struct Vec *v;
     char *it;
-    char *begin;
 
     if (arg1 == 0xFFFF) {
         if (arg0 != 0) {
-            M2C_FIELD(lbl_80434BE0, s32 *, 0) = 0;
-            M2C_FIELD(lbl_80434BE0, s32 *, 4) = 0;
-            M2C_FIELD(lbl_80434BE0 + 8, s32 *, 4) = 0;
+            struct VecAlloc *a;
+            v = &lbl_80434BE0;
+            v->begin = 0;
+            a = &v->alloc;
+            v->end = 0;
+            a->cap = 0;
         } else {
-            for (it = M2C_FIELD(lbl_80434BE0, char **, 0); it != M2C_FIELD(lbl_80434BE0, char **, 4); it += 8) {
+            v = &lbl_80434BE0;
+            for (it = v->begin; it != v->end; it += 8) {
             }
-            begin = M2C_FIELD(lbl_80434BE0, char **, 0);
-            if (begin != NULL) {
-                u32 size = (M2C_FIELD(lbl_80434BE0, char **, 0xC) - begin) & ~7;
+            if (v->begin != NULL) {
+                u32 size = (v->alloc.cap - v->begin) & ~7;
                 if (size > 0x80) {
-                    fn_802D20E8(begin, size);
+                    fn_802D20E8(v->begin, size);
                 } else {
-                    fn_803997AC(begin, size);
+                    fn_803997AC(v->begin, size);
                 }
             }
         }

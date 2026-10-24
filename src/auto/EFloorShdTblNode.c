@@ -414,13 +414,14 @@ u16 fn_80059894(void *arg0) {
 }
 
 u16 fn_8005989C(void *arg0, u32 arg1) {
-    u16 *ids;
+    u16 r;
 
     if (arg1 < M2C_FIELD(arg0, u32 *, 0x90)) {
-        ids = (u16 *)((u8 *)arg0 + 0x94);
-        return ids[arg1];
+        r = *(u16 *)((u8 *)arg0 + 0x94 + arg1 * 2);
+    } else {
+        r = 0;
     }
-    return 0;
+    return r;
 }
 
 void fn_800598C0(void) {

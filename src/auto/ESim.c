@@ -155,12 +155,13 @@ void fn_8003F79C(void *arg0, s32 arg1) {
 }
 
 void fn_8003F7F8(void) {
-    void fn_80248488(void *, s32, s32);
+    void *fn_80248488(void *, s32, u32);
     void *fn_8003F9E0(void *);
+    u32 size = 0x680;
     void *obj;
 
-    obj = ESim_AllocAligned(0x680);
-    fn_80248488(obj, 0, 0x680);
+    obj = ESim_AllocAligned(size);
+    fn_80248488(obj, 0, size);
     fn_8003F9E0(obj);
 }
 
