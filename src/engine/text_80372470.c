@@ -5,7 +5,7 @@ extern void *fn_802D0B3C(void);
 extern void *fn_802D197C(void *, u32, s32);
 extern void *fn_802DBBCC(void *, u32, s32);
 extern void *fn_802D0AB8();
-void fn_80372510(void *);
+void *fn_80372510(void *);
 
 static inline void *Alloc(u32 size) {
     void *heap;
