@@ -512,6 +512,26 @@ void fn_800AB044(void) {
 
 }
 
+void fn_800AB4EC(void *arg0, void *arg1) {
+    M2C_UNK fn_800AB2E0(void *, u8 *);
+    u8 sp8[0xE0];
+    s32 var_ctr;
+    s32 var_ctr_2;
+    void *temp_r9;
+
+    var_ctr = 3;
+    do {
+        var_ctr -= 1;
+    } while (var_ctr != 0);
+    var_ctr_2 = 4;
+    do {
+        var_ctr_2 -= 1;
+    } while (var_ctr_2 != 0);
+    fn_800AB2E0(arg0, sp8);
+    temp_r9 = M2C_FIELD(arg1, void **, 0x68);
+    M2C_FIELD(temp_r9, M2C_UNK (**)(void *, u8 *), 0x164)((u8 *)arg1 + M2C_FIELD(temp_r9, s16 *, 0x160), sp8);
+}
+
 void fn_800AB5B4(void) {
 
 }
