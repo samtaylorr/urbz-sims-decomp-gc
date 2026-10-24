@@ -244,6 +244,13 @@ char **fn_802C7A28(char **arg0, s32 arg1) {
     return arg0;
 }
 
+s32 fn_802C7A68(s32 *arg0, s32 arg1) {
+    if (arg1 > arg0[1]) {
+        return 0;
+    }
+    return arg0[0];
+}
+
 void fn_802C7A84(void) {
 
 }
@@ -251,6 +258,19 @@ void fn_802C7A84(void) {
 void fn_802C7A88(f64 farg0) {
     M2C_UNK fn_802C71B0(f32);
     fn_802C71B0((f32) farg0);
+}
+
+s32 fn_802C7AAC(s32 a, s32 b) {
+    if (a == b) {
+        return 1;
+    }
+    if ((u32)(a - 'a') <= 25 && b >= 'A' && b <= 'Z') {
+        return a - 0x20 == b;
+    }
+    if ((u32)(b - 'a') <= 25 && a >= 'A' && a <= 'Z') {
+        return b - 0x20 == a;
+    }
+    return 0;
 }
 
 extern s32 lbl_804935F0[];
