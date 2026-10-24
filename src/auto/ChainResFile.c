@@ -402,6 +402,10 @@ s32 fn_80105A78(void *arg0, void *arg1) {
     return (fn_801058BC(arg0) & 1) == (fn_801058BC(arg1) & 1);
 }
 
+s32 fn_80105AC4(void *arg0, void *arg1) {
+    return (fn_801058D4(arg0) & 1) == (fn_801058D4(arg1) & 1);
+}
+
 S32Pair fn_80105B10(s8 *arg1) {
     S32Pair r;
     r.b = arg1[1];
