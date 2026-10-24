@@ -1403,6 +1403,13 @@ void fn_800DB58C(s32 *self) {
     ((f32 *)self)[6] = lbl_803D49B0[0];
 }
 
+void fn_800DB59C(s32 *self) {
+    extern f32 lbl_803D49B4[];
+    extern s32 *lbl_80495050;
+    ((f32 *)self)[6] = lbl_803D49B4[0];
+    lbl_80495050[0x320 / 4] = 1;
+}
+
 extern f32 lbl_803D49CC[];
 void fn_800DB6F8(s32 *self) {
     ((f32 *)self)[6] = lbl_803D49CC[0];
