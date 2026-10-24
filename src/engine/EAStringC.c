@@ -258,6 +258,11 @@ void fn_80299AA0(void *arg0, s32 arg1, s32 arg2) {
     fn_80295358(arg1, arg2);
 }
 
+void fn_80299AC8(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    extern void fn_8029481C(s32, s32, s32);
+    fn_8029481C(arg1, arg2, arg3);
+}
+
 void fn_80299AF4(s32 *arg0) {
     s32 temp_r0;
 
@@ -2507,14 +2512,18 @@ u8 **fn_802C4024(const char *arg0) {
     extern s32 fn_8027A6AC(void *, const char *);
     extern u8 *lbl_80444628[];
     s32 len;
-    u8 **p;
+    s32 i;
+    u8 *e;
 
+    i = 0;
     len = fn_80248808(arg0);
-    for (p = lbl_80444628; p <= &lbl_80444628[0xAF]; p++) {
-        if (*(u16 *)(*p + 2) == len && fn_8027A6AC(*p + 8, arg0) == 0) {
-            return p;
+    do {
+        e = lbl_80444628[i];
+        if (*(u16 *)(e + 2) == len && fn_8027A6AC(e + 8, arg0) == 0) {
+            return &lbl_80444628[i];
         }
-    }
+        i++;
+    } while (i <= 0xAF);
     return NULL;
 }
 
