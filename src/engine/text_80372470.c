@@ -109,9 +109,13 @@ void fn_803726CC(s32 arg0, s32 arg1) {
     }
 }
 
-void fn_80372510();
-void fn_803727BC(void) {
-    fn_80372510();
+void fn_8037273C(void) {
+    fn_80372510(Alloc(0x2C));
+}
+
+void fn_80372510(void *);
+void fn_803727BC(void *self) {
+    fn_80372510(self);
 }
 
 void fn_803727DC(void *self) {
