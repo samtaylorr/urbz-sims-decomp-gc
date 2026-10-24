@@ -1395,6 +1395,13 @@ void fn_800DB390(s32 *self) {
     ((f32 *)self)[6] = lbl_803D4998[0];
 }
 
+void fn_800DB4DC(void) {
+    extern s32 lbl_8041F94C[];
+    extern s32 *lbl_80495050;
+    lbl_80495050[0x320 / 4] = 0;
+    lbl_8041F94C[0x388 / 4] = 0;
+}
+
 void fn_800DB4F8(void) {
 
 }
