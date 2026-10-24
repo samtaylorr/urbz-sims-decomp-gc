@@ -434,7 +434,7 @@ s32 fn_80348420(s32 arg0, s32 arg1) {
     if (arg1 != 0) {
         ok = fn_80258CEC(lbl_80469D20, fn_8034862C, arg1, lbl_8046B038, 0x1000, arg0, 1);
     } else {
-        ok = fn_80258CEC(lbl_80469D20, fn_80348548, arg1, lbl_8046B038, 0x1000, arg0, 1);
+        ok = fn_80258CEC(lbl_80469D20, fn_80348548, 0, lbl_8046B038, 0x1000, arg0, 1);
     }
     ret = 0;
     if (ok != 0) {
@@ -648,7 +648,7 @@ void fn_8034BDCC(void *arg0) {
 extern u8 lbl_8041CE98[];
 extern void *lbl_804950A8;
 extern void fn_8036EE30(void *);
-void fn_8034C028(u8 *self) {
+void fn_8034C028(u8 *self, s32 flags) {
     extern u8 lbl_8041CE98[];
     extern void *lbl_804950A8;
     extern void fn_8036EE30(void *);
