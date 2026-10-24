@@ -529,21 +529,27 @@ void fn_802D4664(s32 *arg0, s32 arg1) {
     char *fn_803B9FEC(s32 *);
     s32 sp8;
     s32 *p;
-    char *src;
-    char *dst;
-    char c;
+    char *var_r11;
+    u8 *var_r10;
+    u8 var_r9;
 
     if (fn_802D4298((char **)arg0, (char *)arg1, 0) != -1) {
         p = &sp8;
         fn_802D3C60(p, fn_803B9FEC(arg0));
-        src = (char *)*arg0;
-        dst = (char *)sp8;
-        for (c = *src; c != 0; c = *++src) {
-            if (c != arg1) {
-                *dst++ = c;
-            }
+        var_r10 = (u8 *)*arg0;
+        var_r11 = (char *)sp8;
+        var_r9 = *var_r10;
+        if ((s32) var_r9 != 0) {
+            do {
+                if ((s8) var_r9 != arg1) {
+                    *var_r11 = (s8) var_r9;
+                    var_r11 += 1;
+                }
+                var_r9 = M2C_FIELD(var_r10, u8 *, 1);
+                var_r10 += 1;
+            } while ((s32) var_r9 != 0);
         }
-        *dst = 0;
+        *var_r11 = 0;
         fn_802D3CE4(arg0, (char *)sp8);
         fn_802D39F0(p, sp8);
     }
@@ -1051,6 +1057,16 @@ s32 fn_802D5F80(s32 arg0, s32 *arg1, u16 arg2) {
     buf[0] = arg2;
     buf[1] = 0;
     fn_802D50BC(arg0, *arg1, (s32)buf);
+    return arg0;
+}
+
+s32 *fn_802D62F0(s32 *arg0, f32 arg1) {
+    s32 fn_80245BB4(char *, const char *, ...);
+    extern char lbl_803F0334[];
+    char buf[40];
+
+    fn_80245BB4(buf, lbl_803F0334, arg1);
+    fn_802D57FC(arg0, buf);
     return arg0;
 }
 
