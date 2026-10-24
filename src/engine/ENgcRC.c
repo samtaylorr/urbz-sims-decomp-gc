@@ -417,6 +417,31 @@ void fn_803483F0(s32 arg0) {
     fn_8037A938(lbl_8046C3C8, arg0, 1);
 }
 
+s32 fn_80348420(s32 arg0, s32 arg1) {
+    s32 fn_80258CEC(void *, void (*)(void), s32, void *, s32, s32, s32);
+    void fn_8037A8D8(void *, void *, s32);
+    void fn_8034862C(void);
+    void fn_80348548(void);
+    extern u8 lbl_80469D20[];
+    extern u8 lbl_8046B038[];
+    extern u8 lbl_8046B058[];
+    extern u8 lbl_8046B078[];
+    extern u8 lbl_8046B084[];
+    extern s32 lbl_804962A0;
+    extern s32 lbl_80495068;
+    s32 ret;
+    if (fn_80258CEC(lbl_80469D20, arg1 ? fn_8034862C : fn_80348548, arg1, lbl_8046B038, 0x1000, arg0, 1) != 0) {
+        fn_8037A8D8(lbl_8046B038, lbl_8046B078, 3);
+        fn_8037A8D8(lbl_8046B058, lbl_8046B084, 3);
+        lbl_804962A0 = 1;
+        lbl_80495068 = 1;
+        ret = 1;
+    } else {
+        ret = 0;
+    }
+    return ret;
+}
+
 void fn_803484D8(void) {
     void fn_80259354(void *);
     extern u8 lbl_80469D20[];
@@ -450,10 +475,39 @@ void fn_803488E4(s32 arg0) {
     fn_8037A938(lbl_8046B038, arg0, 0);
 }
 
+s32 fn_80348914(s32 arg0) {
+    s32 fn_8037AA00(void *, s32 *, s32);
+    extern u8 lbl_8046B058[];
+    s32 sp8;
+    if (fn_8037AA00(lbl_8046B058, &sp8, arg0) != 1) {
+        return 0;
+    }
+    return sp8;
+}
+
 void fn_80348954(s32 arg0) {
     void fn_8037A938(void *, s32, s32);
     extern u8 lbl_8046B058[];
     fn_8037A938(lbl_8046B058, arg0, 1);
+}
+
+void fn_80348984(u8 *pads) {
+    void fn_80348A2C(u8 *, u8 *, s32, f32, f32);
+    extern f32 lbl_803F4320[];
+    extern f32 lbl_803F4324[];
+    extern f32 lbl_803F4328[];
+    extern f32 lbl_803F432C[];
+    u32 i;
+
+    for (i = 0; i < 4; i++) {
+        if (*(s8 *)(pads + 0xA) == 0) {
+            fn_80348A2C(pads + 2, pads + 3, 0xF, lbl_803F4320[0], lbl_803F4324[0]);
+            fn_80348A2C(pads + 4, pads + 5, 0xF, lbl_803F4328[0], lbl_803F432C[0]);
+            fn_80348B8C(pads + 6, 0x1E, 0xB4);
+            fn_80348B8C(pads + 7, 0x1E, 0xB4);
+        }
+        pads += 0xC;
+    }
 }
 
 void fn_80348B8C(u8 *arg0, u32 arg1, u8 arg2) {
