@@ -931,9 +931,22 @@ void fn_802D5A94(s32 *arg0) {
     fn_802D5238((void *)arg0);
 }
 
+s32 *fn_802D5D08(s32 *arg0, s32 *arg1, s32 arg2) {
+    void fn_802D5254(s32 *, s32);
+    void fn_802D56C4(s32 *, u16 *);
+    u16 *fn_803BA3EC(s32 *);
+    s32 sp8;
+
+    fn_802D56C4(&sp8, fn_803BA3EC(arg1));
+    ((u16 *)sp8)[arg2] = 0;
+    fn_802D56C4(arg0, fn_803BA3EC(&sp8));
+    fn_802D5254(&sp8, sp8);
+    return arg0;
+}
+
 s32 *fn_802D5D80(s32 *arg0, s32 *arg1, s32 arg2) {
     void fn_802D56C4(s32 *, u16 *);
-    fn_802D56C4(arg0, (u16 *)*arg1 + (((s32 (*)(s32 *))fn_802D58E4)(arg1) - arg2));
+    fn_802D56C4(arg0, (u16 *)(((((s32 (*)(s32 *))fn_802D58E4)(arg1) - arg2) * 2) + *arg1));
     return arg0;
 }
 
