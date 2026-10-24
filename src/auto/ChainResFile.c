@@ -22,6 +22,11 @@ typedef struct ChainVec {
     s32 unk14;
 } ChainVec;
 
+typedef struct S32Pair {
+    s32 a;
+    s32 b;
+} S32Pair;
+
 extern void fn_803997AC(void *, u32);
 
 static inline void ChainVecAlloc_Init(ChainVecAlloc *a) {
