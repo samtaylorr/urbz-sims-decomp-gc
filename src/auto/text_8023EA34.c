@@ -14,3 +14,14 @@ char *fn_8023EA34(void) {
     fn_80245BB4(lbl_80436A68, lbl_803EB9BC, 1, t.v[1]);
     return lbl_80436A68;
 }
+
+char *fn_8023EAB8(void) {
+    int fn_80245BB4(char *, const char *, ...);
+    extern const char lbl_803EB9CC[];
+    extern const char lbl_803EB9E0[];
+    extern char lbl_80436A68[];
+
+    fn_80245BB4(lbl_80436A68, lbl_803EB9CC, lbl_803EB9E0);
+    return lbl_80436A68;
+}
+
