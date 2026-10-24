@@ -96,18 +96,21 @@ void fn_8000C7E8(void) {
     } lbl_8041F94C;
     extern s32 lbl_8041FA44[];
     extern s32 lbl_8049664C;
-    void *heap;
+    typeof(lbl_8041F94C) *g = &lbl_8041F94C;
     void *p;
+    void *heap;
 
     heap = fn_802D0AB8();
     p = fn_802D197C(heap, 0x29E0, 0x10);
     if (p == NULL) {
         p = fn_802DC3C0(heap, 0x29E0, 0x10, 0, 0);
         if (p == NULL && heap == fn_802D0AB8()) {
-            p = fn_802DC3C0(fn_802D0B3C(), 0x29E0, 0x10, 0, 0);
+            g->unkF8 = fn_80066DE4(fn_802DC3C0(fn_802D0B3C(), 0x29E0, 0x10, 0, 0));
+            goto done;
         }
     }
-    lbl_8041F94C.unkF8 = fn_80066DE4(p);
+    g->unkF8 = fn_80066DE4(p);
+done:
     fn_80067024(lbl_8041FA44[0]);
     lbl_8049664C = 1;
 }
