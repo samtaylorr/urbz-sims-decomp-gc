@@ -79,10 +79,12 @@ s32 fn_80311350(u32 *arg0, u32 *arg1) {
 void fn_80311778(s32 arg0, s32 arg1, s32 arg2) {
     s32 fn_80311990(s32, s32);
     s32 i;
+    char *base;
 
     i = fn_80311990(arg0, arg1);
     if (i >= 0) {
-        ((s32 (*)[3])(arg0 + 0x14))[i][0] = arg2;
+        base = (char *)arg0 + 0x14;
+        *(s32 *)(base + i * 0xC) = arg2;
     }
 }
 
