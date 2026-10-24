@@ -754,9 +754,9 @@ void fn_802D4F00(s32 *arg0) {
     fn_802D3CE4(arg0, (char *)*arg0);
 }
 
-void fn_802D4F24(f64 farg0) {
-    M2C_UNK fn_802D4598(f32);
-    fn_802D4598((f32) farg0);
+void fn_802D4F24(s32 *arg0, f64 farg0) {
+    s32 *fn_802D4598(s32 *, f32);
+    fn_802D4598(arg0, (f32) farg0);
 }
 
 s32 fn_802D4F48(s32 a, s32 b) {
@@ -981,12 +981,12 @@ s32 *fn_802D5D08(s32 *arg0, s32 *arg1, s32 arg2) {
     void fn_802D5254(s32 *, s32);
     void fn_802D56C4(s32 *, u16 *);
     u16 *fn_803BA3EC(s32 *);
-    s32 sp8;
+    u16 *sp8;
 
-    fn_802D56C4(&sp8, fn_803BA3EC(arg1));
-    *(u16 *)(arg2 * 2 + sp8) = 0;
-    fn_802D56C4(arg0, fn_803BA3EC(&sp8));
-    fn_802D5254(&sp8, sp8);
+    fn_802D56C4((s32 *)&sp8, fn_803BA3EC(arg1));
+    sp8[arg2] = 0;
+    fn_802D56C4(arg0, fn_803BA3EC((s32 *)&sp8));
+    fn_802D5254((s32 *)&sp8, (s32)sp8);
     return arg0;
 }
 
