@@ -2719,6 +2719,14 @@ s32 fn_800E4A78(u8 *self) {
     return *(s32 *)(self + 0x20);
 }
 
+void fn_800E4B80(void *arg0) {
+    M2C_UNK fn_8031EA2C(s32);
+    if (M2C_FIELD(arg0, s32 *, 0x18) != 0) {
+        fn_8031EA2C(M2C_FIELD(arg0, s32 *, 0x18));
+        M2C_FIELD(arg0, s32 *, 0x18) = 0;
+    }
+}
+
 void fn_800E4F34(void) {
 
 }
