@@ -959,6 +959,27 @@ void fn_8039CAD8(s32 *last, s32 val, SortComp comp) {
     *last = val;
 }
 
+void fn_8039CB38(s32 *first, s32 *last, SortComp comp) {
+    s32 *i;
+
+    if (first == last) {
+        return;
+    }
+    for (i = first + 1; i != last; i++) {
+        s32 val = *i;
+        if (fn_800A2B98(&comp, val, *first)) {
+            s32 *next = i + 1;
+            s32 n = (char *)i - (char *)first;
+            if (n > 0) {
+                fn_8024839C((char *)next - n, first, n);
+            }
+            *first = val;
+        } else {
+            fn_8039CAD8(i, val, comp);
+        }
+    }
+}
+
 void fn_8039CAD8(s32 *it, s32 val, SortComp comp);
 void fn_8039CB38(s32 *first, s32 *last, SortComp comp);
 void fn_8039C968(s32 *first, s32 *last, s32 *val, s32 depth, SortComp comp);
@@ -1049,6 +1070,13 @@ s32 fn_8039CE00(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     ret = fn_8018E70C(out, p, arg4, arg1, arg3);
     ((void (*)(void *, s32))fn_8018EA6C)(p, 2);
     return ret;
+}
+
+void fn_8039CE6C(s32 arg0, s32 arg1, s32 arg2) {
+    s32 *p = &arg0;
+
+    p[1] = arg2;
+    ((s32 (*)(s32, s32, s32))fn_8039CE00)((s32)p, arg1, arg2);
 }
 
 void fn_8039D338(void) {
