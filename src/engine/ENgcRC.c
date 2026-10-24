@@ -622,7 +622,7 @@ void fn_80348F58(void *self) {
     s16 delta;
     u32 fn;
     *(s32 *)(p + 0x14) = 1;
-    if (*(s32 *)(p + 0xC) == 0 && **(s32 **)p == 0) {
+    if (*(s32 *)(p + 0xC) == 0 && *(s32 *)(*(u8 **)p + 0x44) == 0) {
         op = *(void ***)(p + 0x68);
         delta = *(s16 *)((u8 *)op + 0x10);
         fn = *(u32 *)((u8 *)op + 0x14);
@@ -630,7 +630,7 @@ void fn_80348F58(void *self) {
     }
 }
 
-void fn_80348FB4(void *self, s32 size) {
+void fn_80348FB4(void *self, s32 unused, s32 size) {
     void fn_80352D2C(void *, s32);
     void fn_802FB8B0(s32);
     extern u8 lbl_8046DF78[];
