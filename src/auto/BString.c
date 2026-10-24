@@ -3544,6 +3544,11 @@ s32 fn_800EB128(s32 arg0, s32 arg1) {
     return fn_800EF110(arg1, arg0, 0, 1) == 0;
 }
 
+s32 fn_800EB164(s32 arg0, s32 arg1) {
+    s32 fn_800EF0A8(s32, s32, s32);
+    return fn_800EF0A8(arg0, arg1, 0) == 0;
+}
+
 s32 fn_800EB244(s32 arg0, s32 arg1) {
     return fn_800EF0A8(arg0, arg1, 0) != 0;
 }
