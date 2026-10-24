@@ -306,8 +306,8 @@ M2C_UNK fn_801D8950(void **arg0, s32 arg1, s32 arg2) {
         arg0[1] = node;
         node[1] = NULL;
     }
-    node[3] = (void *)arg2;
     node[2] = (void *)arg1;
+    node[3] = (void *)arg2;
 }
 
 s32 fn_801D8A44(void **arg0, s32 arg1, s32 arg2) {
