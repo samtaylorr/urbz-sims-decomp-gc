@@ -893,6 +893,7 @@ void fn_8039C07C(s32 *dst, s32 *src, s32 n) {
     }
 }
 
+void fn_8039BEF8(void *, s32, s32);
 void fn_8039C0B8(void *self, s32 arg1, s32 arg2, s32 arg3) {
     s32 size = M2C_FIELD(self, s32 *, 4);
     s32 newSize = size + arg3;
@@ -902,7 +903,7 @@ void fn_8039C0B8(void *self, s32 arg1, s32 arg2, s32 arg3) {
         while (cap < newSize) {
             cap += cap;
         }
-        fn_8039BEF8(self, newSize);
+        fn_8039BEF8(self, newSize, cap);
     } else {
         M2C_FIELD(self, s32 *, 4) = newSize;
         fn_8039BEB0(M2C_FIELD(self, s32 **, 0) + size, newSize - size);
