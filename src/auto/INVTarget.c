@@ -774,13 +774,14 @@ void fn_801DECDC(void *arg0, s32 arg1) {
 }
 
 void fn_801DEFA8(void) {
-    extern u8 *fn_801DF04C(void *);
-    extern void fn_801DF0DC(void);
-    extern void fn_801DF3F8(s32);
-    extern void *fn_802D1FC8(s32);
+    s32 fn_801DF04C();
+    M2C_UNK fn_801DF0DC();
+    M2C_UNK fn_801DF3F8(s32);
+    M2C_UNK fn_802D1FC8(M2C_UNK);
     extern s32 lbl_80494618;
-    if (lbl_80494618 == 0) {
-        lbl_80494618 = (s32)fn_801DF04C(fn_802D1FC8(0xFC));
+    if ((s32) lbl_80494618 == 0) {
+        fn_802D1FC8(0xFC);
+        lbl_80494618 = fn_801DF04C();
         fn_801DF0DC();
         fn_801DF3F8(lbl_80494618);
     }
@@ -806,14 +807,11 @@ u8 *fn_801DF04C(u8 *self) {
     extern f32 lbl_803E1348[];
     extern f32 lbl_803E134C[];
     s32 i;
-    f32 *p;
 
     *(u8 **)(self + 0xF8) = lbl_804170B0;
-    p = (f32 *)(self + 0xA0);
-    for (i = 20; i != 0; i--) {
-        *(s32 *)((u8 *)p - 0x50) = 0;
-        *p = lbl_803E1348[0];
-        p++;
+    for (i = 0; i < 20; i++) {
+        ((s32 *)(self + 0x50))[i] = 0;
+        ((f32 *)(self + 0xA0))[i] = lbl_803E1348[0];
     }
     *(s32 *)(self + 0xF0) = 0;
     *(s32 *)(self + 0xF4) = 3;
@@ -1589,6 +1587,12 @@ void fn_802055FC(void *arg0, char *arg1) {
     struct Str7 { char s[7]; };
     extern char lbl_803E60D8[];
     *(struct Str7 *)arg1 = *(struct Str7 *)lbl_803E60D8;
+}
+
+void fn_8020587C(void *arg0, s32 arg1) {
+    void fn_80245BB4(s32, char *, ...);
+    extern char lbl_803E4E18[];
+    fn_80245BB4(arg1, lbl_803E4E18, 1);
 }
 
 void fn_802059A8(void) {
