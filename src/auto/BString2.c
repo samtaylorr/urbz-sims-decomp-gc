@@ -425,6 +425,10 @@ u32 fn_800F37B0(void **arg0, u16 arg1, u32 arg2) {
     return arg2 < fn_800F4878(arg0) ? arg2 : -1;
 }
 
+void fn_800F3854(s32 arg0, void **arg1, s32 arg2) {
+    ((void (*)(s32, s32, s32, s32))fn_800F1120)(arg0, (s32)BString2_Data(arg1), arg2, fn_800F4878(arg1));
+}
+
 void fn_800F1120(void);
 void fn_800F38C0(void) {
     fn_800F1120();
