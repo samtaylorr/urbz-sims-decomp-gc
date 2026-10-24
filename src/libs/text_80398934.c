@@ -34,6 +34,11 @@ typedef struct {
 } SearchEntry;
 
 typedef struct {
+    s32 key;
+    s32 value;
+} SearchEntry8;
+
+typedef struct {
     s32 a, b, c;
 } Elem12;
 
