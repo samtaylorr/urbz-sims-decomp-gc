@@ -830,6 +830,22 @@ void fn_801DF0A8(u8 *self, s32 flags) {
     }
 }
 
+s32 fn_801DF9D4(void **arg0, s32 arg1, s32 arg2) {
+    void fn_801DF86C(void **, s32, s32);
+    void *it;
+
+    if (arg0[2] != NULL) {
+        for (it = arg0[0]; it != NULL; it = M2C_FIELD(it, void **, 4)) {
+            if (M2C_FIELD(it, s32 *, 0xC) == arg2) {
+                return 0;
+            }
+        }
+        fn_801DF86C(arg0, arg1, arg2);
+        return 1;
+    }
+    return 0;
+}
+
 s32 fn_801DFA84(void **arg0, s32 arg1) {
     M2C_UNK fn_801DF938(void **, void *);
     s32 fn_802486DC(s32, s32);
