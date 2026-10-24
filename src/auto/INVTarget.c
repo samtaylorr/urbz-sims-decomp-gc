@@ -295,14 +295,14 @@ void fn_801D8508(s32 arg0) {
 
 void fn_801D86F4(u8 *arg0, s32 arg1) {
     void fn_803379C8(s32, s32);
-    extern s32 lbl_8041FC68;
+    extern s32 lbl_8041FC68[];
     extern u8 *lbl_80494FA4;
     extern s32 lbl_8049627C;
     s32 *a;
     s32 *b;
     s32 off;
 
-    if (lbl_8041FC68 != 0) {
+    if (lbl_8041FC68[0] != 0) {
         off = arg1 * 4;
         a = (s32 *)(arg0 + 0x10);
         if (*(s32 *)((u8 *)a + off) != 0) {
@@ -311,7 +311,7 @@ void fn_801D86F4(u8 *arg0, s32 arg1) {
                 char *vt;
                 fn_803379C8(lbl_8049627C, *(s32 *)((u8 *)b + off));
                 *(s32 *)((u8 *)b + off) = 0;
-                *(s32 *)(arg0 + 0x24 + off) = 0;
+                *(s32 *)((u8 *)(s32 *)(arg0 + 0x24) + off) = 0;
                 vt = *(char **)lbl_80494FA4;
                 M2C_FIELD(vt, void (**)(void *, s32), 0xA4)(lbl_80494FA4 + M2C_FIELD(vt, s16 *, 0xA0), *(s32 *)((u8 *)a + off));
             }
@@ -340,11 +340,11 @@ void fn_801D87C4(void) {
 }
 
 s32 fn_801D8810(void **arg0) {
-    M2C_UNK fn_802D1FC8(M2C_UNK);
+    M2C_UNK fn_802D1FC8(M2C_UNK) __attribute__((malloc));
     extern u8 lbl_80416EC8[];
     extern u8 lbl_80416EE0[];
-    void **prev;
     s32 i;
+    s32 *prev;
 
     arg0[3] = lbl_80416EC8;
     arg0[2] = NULL;
@@ -353,17 +353,17 @@ s32 fn_801D8810(void **arg0) {
     arg0[1] = NULL;
     i = 200;
     do {
-        void **node = (void **)fn_802D1FC8(0x14);
-        node[4] = lbl_80416EE0;
-        node[0] = NULL;
-        node[1] = NULL;
-        node[2] = NULL;
-        node[3] = NULL;
+        s32 *node = (s32 *)fn_802D1FC8(0x14);
+        node[4] = (s32)lbl_80416EE0;
+        node[0] = 0;
+        node[1] = 0;
+        node[2] = 0;
+        node[3] = 0;
         if (arg0[2] == NULL) {
             arg0[2] = node;
         } else {
-            prev[1] = node;
-            node[0] = prev;
+            prev[1] = (s32)node;
+            node[0] = (s32)prev;
         }
         prev = node;
     } while (--i != 0);
@@ -424,32 +424,32 @@ M2C_UNK fn_801D8950(void **arg0, s32 arg1, s32 arg2) {
 }
 
 s32 fn_801D89B4(void **arg0, void *arg1) {
-    void **node = arg1;
-    void **temp_r9;
+    INVNodeList *list = (INVNodeList *)arg0;
+    INVNode *node = arg1;
 
-    temp_r9 = node[0];
-    if (temp_r9 != NULL) {
-        temp_r9[1] = node[1];
+    if (node->prev != NULL) {
+        node->prev->next = node->next;
     }
-    temp_r9 = node[1];
-    if (temp_r9 != NULL) {
-        temp_r9[0] = node[0];
+    if (node->next != NULL) {
+        node->next->prev = node->prev;
     }
-    if (arg0[0] == node) {
-        arg0[0] = node[1];
+    if (list->head == node) {
+        list->head = node->next;
     }
-    if (arg0[1] == node) {
-        arg0[1] = node[0];
+    if (list->tail == node) {
+        list->tail = node->prev;
     }
-    node[1] = NULL;
-    node[0] = NULL;
-    if (arg0[2] != NULL) {
-        node[1] = arg0[2];
-        M2C_FIELD(arg0[2], void **, 0) = node;
+    node->prev = NULL;
+    node->next = NULL;
+    if (list->free == NULL) {
+        list->free = node;
+    } else {
+        node->next = list->free;
+        list->free->prev = node;
+        list->free = node;
     }
-    arg0[2] = node;
-    M2C_FIELD(arg0[2], s32 *, 8) = 0;
-    M2C_FIELD(arg0[2], s32 *, 0xC) = 0;
+    list->free->unk8 = 0;
+    list->free->unkC = 0;
 }
 
 s32 fn_801D8A44(void **arg0, s32 arg1, s32 arg2) {
@@ -535,31 +535,31 @@ s32 fn_801D8CE4(void **arg0) {
     void *fn_802D1FC8(s32);
     extern char lbl_80416E98[];
     extern char lbl_80416EB0[];
-    s32 var_r29;
-    void **temp_r3;
-    void **var_r28;
+    INVNodeList *list = (INVNodeList *)arg0;
+    s32 i;
+    INVNode *prev;
+    INVNode *node;
 
-    arg0[3] = lbl_80416E98;
-    arg0[2] = NULL;
-    arg0[0] = NULL;
-    arg0[1] = NULL;
-    var_r28 = NULL;
-    var_r29 = 100;
-    do {
-        temp_r3 = fn_802D1FC8(0x14);
-        temp_r3[4] = lbl_80416EB0;
-        temp_r3[0] = NULL;
-        temp_r3[1] = NULL;
-        temp_r3[2] = NULL;
-        temp_r3[3] = NULL;
-        if (arg0[2] == NULL) {
-            arg0[2] = temp_r3;
+    list->unkC = lbl_80416E98;
+    list->free = NULL;
+    list->head = NULL;
+    list->tail = NULL;
+    prev = NULL;
+    for (i = 100; i != 0; i--) {
+        node = fn_802D1FC8(0x14);
+        node->unk10 = lbl_80416EB0;
+        M2C_FIELD(node, s32 *, 0) = 0;
+        M2C_FIELD(node, s32 *, 4) = 0;
+        node->unk8 = 0;
+        node->unkC = 0;
+        if (list->free == NULL) {
+            list->free = node;
         } else {
-            var_r28[1] = temp_r3;
-            temp_r3[0] = var_r28;
+            prev->next = node;
+            node->prev = prev;
         }
-        var_r28 = temp_r3;
-    } while (--var_r29 != 0);
+        prev = node;
+    }
     return (s32)arg0;
 }
 
