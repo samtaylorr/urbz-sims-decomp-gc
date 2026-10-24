@@ -154,12 +154,15 @@ void fn_802539D4(void *arg0) {
     }
 }
 
+#pragma scheduling off
+#pragma peephole off
 void fn_80253A14(void *arg0, void *arg1) {
     void fn_802482F8(void *, void *, u32);
     fn_802482F8(arg1, arg0, 0x1C);
     *(void **)0x800030F0 = arg1;
 }
-
+#pragma peephole reset
+#pragma scheduling reset
 s32 fn_80254A24(void) {
     return *(s32 *)0x800000C8;
 }
