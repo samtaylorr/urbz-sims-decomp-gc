@@ -2845,6 +2845,18 @@ void fn_803A6B48(s32 arg0, void *arg1) {
     }
 }
 
+void fn_803A706C(void *arg0, s32 arg1) {
+    extern char lbl_804122E8[];
+    extern void fn_80174950(void *, s32);
+    extern void fn_802D20E8(void *);
+
+    M2C_FIELD(arg0, char **, 0xBC) = lbl_804122E8;
+    fn_80174950((char *)arg0 + 0x18, 2);
+    if (arg1 & 1) {
+        fn_802D20E8(arg0);
+    }
+}
+
 void fn_803A87BC(void *arg0, void *arg1, void *arg2) {
     void **temp_r9;
 
