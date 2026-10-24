@@ -124,6 +124,12 @@ void fn_800D1ACC(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x18) = 0;
 }
 
+void fn_800D1B68(void) {
+    extern s32 lbl_8041F754[];
+    extern void fn_80048A48(void *);
+    fn_80048A48(lbl_8041F754);
+}
+
 void fn_800D1B90(u8 *self) {
     extern u8 lbl_8041F754[];
     extern u8 *lbl_80496660;
