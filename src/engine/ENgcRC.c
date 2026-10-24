@@ -943,6 +943,13 @@ void fn_8035BC4C(s32 arg0, s32 arg1) {
     }
 }
 
+void *fn_8035BCE0(void *arg0) {
+    if (M2C_FIELD(arg0, s32 *, 0x34C) != 0) {
+        return (u8 *)arg0 + 0x364;
+    }
+    return 0;
+}
+
 void fn_8035BCFC(void *arg0, u8 *arg1, u8 *arg2, u8 *arg3) {
     *arg1 = M2C_FIELD(arg0, u8 *, 0x462C);
     *arg2 = M2C_FIELD(arg0, u8 *, 0x462D);
