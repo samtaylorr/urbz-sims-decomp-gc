@@ -947,6 +947,18 @@ void fn_8039C584(void **self, s32 flags) {
     }
 }
 
+s32 fn_800A2B98(SortComp *comp, s32 a, s32 b);
+void fn_8039CAD8(s32 *last, s32 val, SortComp comp) {
+    s32 *next = last - 1;
+
+    while (fn_800A2B98(&comp, val, *next)) {
+        *last = *next;
+        last = next;
+        next--;
+    }
+    *last = val;
+}
+
 void fn_8039CAD8(s32 *it, s32 val, SortComp comp);
 void fn_8039CB38(s32 *first, s32 *last, SortComp comp);
 void fn_8039C968(s32 *first, s32 *last, s32 *val, s32 depth, SortComp comp);
@@ -2767,6 +2779,40 @@ void fn_803AB644(void *arg0, s32 arg1, s32 arg2) {
 
 s32 fn_803AB678(s32 *self) {
     return self[2];
+}
+
+SearchEntry *fn_803AB680(SearchEntry *lo, SearchEntry *hi, s32 key) {
+    for (;;) {
+        s32 n = hi - lo;
+        SearchEntry *mid;
+        s32 d;
+
+        if (n <= 0) {
+            return 0;
+        }
+        if (n == 1) {
+            if (lo->key == key) {
+                return lo;
+            }
+            return 0;
+        }
+        mid = lo + n / 2;
+        d = key - mid->key;
+        if (d == 0) {
+            return mid;
+        }
+        if (d > 0) {
+            lo = mid + 1;
+        } else {
+            hi = mid;
+        }
+    }
+}
+
+void *fn_803AB6E0(void *arg0, u8 *arg1) {
+    void fn_801B3824(void *, void *);
+    fn_801B3824(arg0, arg1 + 0x50);
+    return arg0;
 }
 
 s32 fn_803AB714(s32 arg0, s32 arg1) {
