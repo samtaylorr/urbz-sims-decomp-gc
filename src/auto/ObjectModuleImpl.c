@@ -395,6 +395,15 @@ void fn_8015A564(void) {
     fn_800F1A60((s32)&lbl_80495C30, 2);
 }
 
+void fn_80166A1C(void) {
+    extern void **lbl_80495C3C;
+    void **obj = lbl_80495C3C;
+    if (obj != NULL) {
+        char *vt = (char *)*obj;
+        (*(void (**)(void *))(vt + 0x1C))((char *)obj + *(s16 *)(vt + 0x18));
+    }
+}
+
 s64 fn_80168EC0(void) {
     return 0;
 }
