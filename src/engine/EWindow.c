@@ -385,6 +385,22 @@ void fn_8030A190(void *arg0, void *arg1, void *arg2) {
     M2C_FIELD(arg2, f32 *, 4) = (f32) ((M2C_FIELD(arg1, f32 *, 4) * M2C_FIELD(arg0, f32 *, 0x14)) + M2C_FIELD(arg0, f32 *, 0x34));
 }
 
+void fn_8030A40C(void *arg0) {
+    f32 temp_f10;
+    f32 temp_f7;
+    f32 temp_f8;
+    f32 temp_f9;
+
+    temp_f8 = M2C_FIELD(arg0, f32 *, 0x30);
+    temp_f7 = M2C_FIELD(arg0, f32 *, 0x34);
+    temp_f10 = M2C_FIELD(arg0, f32 *, 0);
+    temp_f9 = M2C_FIELD(arg0, f32 *, 0x14);
+    M2C_FIELD(arg0, f32 *, 0x60) = (M2C_FIELD(arg0, f32 *, 0x70) - temp_f8) / temp_f10;
+    M2C_FIELD(arg0, f32 *, 0x64) = (M2C_FIELD(arg0, f32 *, 0x74) - temp_f7) / temp_f9;
+    M2C_FIELD(arg0, f32 *, 0x68) = (M2C_FIELD(arg0, f32 *, 0x78) - temp_f8) / temp_f10;
+    M2C_FIELD(arg0, f32 *, 0x6C) = (M2C_FIELD(arg0, f32 *, 0x7C) - temp_f7) / temp_f9;
+}
+
 extern void *fn_802D197C(void *, u32, s32);
 extern void *fn_802DC3C0(void *, u32, s32, s32, s32);
 extern void *fn_802D0B3C(void);
@@ -417,6 +433,15 @@ void fn_8030A76C(s32 arg0, s32 arg1) {
     M2C_UNK fn_8030A4A8();
     M2C_UNK fn_8030A460(s32, s32);
     fn_8030A4A8();
+    fn_8030A460(arg0, arg1);
+}
+
+void fn_8030A7A8(s32 arg0, s32 arg1) {
+    M2C_UNK fn_8030A4A8();
+    M2C_UNK fn_8030A570(s32, s32);
+    M2C_UNK fn_8030A460(s32, s32);
+    fn_8030A4A8(arg0, arg1);
+    fn_8030A570(arg0, arg1);
     fn_8030A460(arg0, arg1);
 }
 
