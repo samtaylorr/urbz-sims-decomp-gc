@@ -228,9 +228,8 @@ s32 fn_8014FBCC(void *arg0, void *arg1) {
             var_r30 = M2C_FIELD(temp_r9, s32 *, 0x10);
         }
         if (fn_800F5530(M2C_FIELD(arg0, s32 *, 0x4C), M2C_FIELD(arg1, void **, 0x54)) == 0) {
-            temp_r9 = M2C_FIELD(arg1, void **, 0x54);
-            var_r30 += M2C_FIELD(temp_r9, s32 *, 0x3C);
-            var_r30 += M2C_FIELD(temp_r9, s32 *, 0x40);
+            var_r30 += M2C_FIELD(M2C_FIELD(arg1, void **, 0x54), s32 *, 0x3C);
+            var_r30 += M2C_FIELD(M2C_FIELD(arg1, void **, 0x54), s32 *, 0x40);
         }
     }
     return var_r30;
