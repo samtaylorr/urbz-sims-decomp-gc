@@ -524,8 +524,8 @@ void **fn_802A46A4(void **ret) {
     valid = p != NULL;
     if (valid && p[2] == 4) {
         *ret = p;
-        if (p != NULL) {
-            fn_802A661C(p);
+        if (*ret != NULL) {
+            fn_802A661C(*ret);
         }
         if (p != NULL && fn_802A6630(p) == 0) {
             fn_802A6644(p);
@@ -2515,15 +2515,13 @@ u8 **fn_802C4024(const char *arg0) {
     s32 i;
     u8 *e;
 
-    i = 0;
     len = fn_80248808(arg0);
-    do {
-        e = lbl_80444628[i];
+    for (i = 0; i < 0x2C0; i += 4) {
+        e = *(u8 **)((u8 *)lbl_80444628 + i);
         if (*(u16 *)(e + 2) == len && fn_8027A6AC(e + 8, arg0) == 0) {
-            return &lbl_80444628[i];
+            return (u8 **)((u8 *)lbl_80444628 + i);
         }
-        i++;
-    } while (i <= 0xAF);
+    }
     return NULL;
 }
 
