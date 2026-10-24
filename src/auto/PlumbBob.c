@@ -70,13 +70,10 @@ void fn_80068164(void *arg0, void *arg1) {
     extern void fn_800A1FF8(void *, s32, s32);
     extern void fn_80067AA4(void *, s32, s32);
     s32 index = M2C_FIELD(arg1, s32 *, 0x38);
-    void *item = *(void **)((char *)arg0 + 0x1FC + (index << 2));
-    fn_800A1FF8(item, 1, 1);
-    if (index == 0) {
-        fn_80067AA4(arg0, 0, 3);
-    } else {
-        fn_80067AA4(arg0, index, 4);
-    }
+    void **arr = (void **)((char *)arg0 + 0x1FC);
+    fn_800A1FF8(arr[index], 1, 1);
+    if (index == 0) fn_80067AA4(arg0, 0, 3);
+    else fn_80067AA4(arg0, index, 4);
 }
 
 void fn_800681D4(void *arg0, void *arg1) {
