@@ -400,6 +400,10 @@ void fn_800F38C0(void) {
     fn_800F1120();
 }
 
+void fn_800F38E0(s32 arg0, const char *arg1, s32 arg2) {
+    ((void (*)(s32, s32, s32, s32))fn_800F1120)(arg0, (s32)arg1, arg2, arg1 ? fn_800F8120(arg1) : 0);
+}
+
 void fn_800F126C(void);
 void fn_800F3AB0(void) {
     fn_800F126C();
