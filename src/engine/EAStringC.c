@@ -460,13 +460,17 @@ s32 fn_802A4354(void) {
 
 void fn_802A463C(void *self, s32 **arg1) {
     void fn_802A6754(s32 **);
+    extern s32 fn_802A661C(s32 *);
+    extern s32 fn_802A6630(s32 *);
+    extern void fn_802A6644(void *);
     s32 *p;
+    s32 **pp = &p;
 
-    p = *arg1;
-    if (p != NULL) {
-        fn_802A661C(p);
+    *pp = *arg1;
+    if (*pp != NULL) {
+        fn_802A661C(*pp);
     }
-    fn_802A6754(&p);
+    fn_802A6754(pp);
     if (*arg1 != NULL && fn_802A6630(*arg1) == 0) {
         fn_802A6644(*arg1);
     }
@@ -474,10 +478,15 @@ void fn_802A463C(void *self, s32 **arg1) {
 
 void **fn_802A46A4(void **ret) {
     void fn_802A43E0(s32 **);
+    extern s32 fn_802A661C(s32 *);
+    extern s32 fn_802A6630(s32 *);
+    extern void fn_802A6644(void *);
     s32 *p;
+    s32 valid;
 
     fn_802A43E0(&p);
-    if (p != NULL && p[2] == 4) {
+    valid = p != NULL;
+    if (valid && p[2] == 4) {
         *ret = p;
         if (p != NULL) {
             fn_802A661C(p);
