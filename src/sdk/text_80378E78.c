@@ -776,16 +776,16 @@ s32 fn_8038CEAC(void *arg0) {
 }
 
 void fn_8038D0A8(s32 chan, s32 result) {
-    s32 fn_8038F67C(s32, s32, s32, void *);
+    s32 fn_8038F67C(s32, s32, s32, s32, void *);
     void fn_80389134(void *, s32);
     extern void fn_8038CF38(void);
     extern u8 lbl_804912A0[];
-    void (*cb)(s32, s32);
     u8 *p;
+    void (*cb)(s32, s32);
 
     p = lbl_804912A0 + chan * 0x110;
     if (result >= 0) {
-        result = fn_8038F67C(chan, M2C_FIELD(p, s32 *, 0xC) * M2C_FIELD(M2C_FIELD(p, void **, 0xC0), u16 *, 0x10), M2C_FIELD(p, s32 *, 0xB4), fn_8038CF38);
+        result = fn_8038F67C(chan, M2C_FIELD(p, s32 *, 0xC) * M2C_FIELD(M2C_FIELD(p, void **, 0xC0), u16 *, 0x10), M2C_FIELD(p, s32 *, 0xC), M2C_FIELD(p, s32 *, 0xB4), fn_8038CF38);
         if (result >= 0) {
             return;
         }
