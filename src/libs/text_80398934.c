@@ -8364,6 +8364,15 @@ void *fn_803C0234(void *self) {
     return self;
 }
 
+void fn_803C0264(u8 *p, s32 n) {
+    while (--n != -1) {
+        VtblEntry *vt = *(VtblEntry **)(p + 0x54);
+        u8 *q = p;
+        p += 0x58;
+        ((void (*)(void *, s32))vt[1].pfn)(q + vt[1].delta, 2);
+    }
+}
+
 extern void fn_803C02C8(s32);
 void fn_803C0314(s32 self, s32 flags) {
     fn_803C02C8(self);
