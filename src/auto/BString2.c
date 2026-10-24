@@ -405,10 +405,10 @@ void *fn_800F251C(void *self) {
 const u16 *fn_800F3304(void **arg0) {
     extern u16 lbl_803D59DC[];
     const u16 *p = BString2_Data(arg0);
-    if (p == 0) {
-        p = lbl_803D59DC;
+    if (p != 0) {
+        return p;
     }
-    return p;
+    return lbl_803D59DC;
 }
 
 void fn_800F34EC(s32 arg0, s32 arg1) {
