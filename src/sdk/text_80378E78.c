@@ -753,6 +753,82 @@ s32 fn_8038CE64(s32 *self, s32 arg1, s32 arg2, s32 arg3) {
     return fn_803894A8(self[0]);
 }
 
+s32 fn_8038CEAC(s32 *self) {
+    s32 fn_8025465C(void);
+    void fn_80254684(s32);
+    extern u8 lbl_804912A0[];
+    u8 *p;
+    s32 enabled;
+    s32 result = 0;
+
+    enabled = fn_8025465C();
+    p = lbl_804912A0 + self[0] * 0x110;
+    if (M2C_FIELD(p, s32 *, 0) == 0) {
+        result = -3;
+    } else if (M2C_FIELD(p, s32 *, 4) == -1 && M2C_FIELD(p, void **, 0xC0) == (void *) self) {
+        self[3] = -1;
+        result = -0xe;
+    }
+    fn_80254684(enabled);
+    return result;
+}
+
+void fn_8038D0A8(s32 chan, s32 result) {
+    s32 fn_8038F67C(s32, s32, s32, void *);
+    void fn_80389134(void *, s32);
+    extern void fn_8038CF38(void);
+    extern u8 lbl_804912A0[];
+    void (*cb)(s32, s32);
+    u8 *p;
+
+    p = lbl_804912A0 + chan * 0x110;
+    if (result >= 0) {
+        result = fn_8038F67C(chan, M2C_FIELD(p, s32 *, 0xC) * M2C_FIELD(M2C_FIELD(p, void **, 0xC0), u16 *, 0x10), M2C_FIELD(p, s32 *, 0xB4), fn_8038CF38);
+        if (result >= 0) {
+            return;
+        }
+    }
+    cb = (void (*)(s32, s32)) M2C_FIELD(p, void **, 0xD0);
+    M2C_FIELD(p, void **, 0xD0) = 0;
+    fn_80389134(p, result);
+    cb(chan, result);
+}
+
+s32 fn_8038D26C(s32 *self, s32 arg1, s32 arg2, s32 arg3) {
+    s32 fn_803894A8(s32);
+    s32 fn_8038D158(s32 *, s32, s32, s32, void *);
+    extern void fn_80387D34(void);
+    s32 result;
+
+    result = fn_8038D158(self, arg1, arg2, arg3, fn_80387D34);
+    if (result < 0) {
+        return result;
+    }
+    return fn_803894A8(self[0]);
+}
+
+void fn_8038D2B4(s32 chan, s32 result) {
+    s32 fn_8038984C(s32, u16, void *);
+    void fn_80389134(void *, s32);
+    extern u8 lbl_804912A0[];
+    void (*cb)(s32, s32);
+    u8 *p;
+
+    p = lbl_804912A0 + chan * 0x110;
+    cb = (void (*)(s32, s32)) M2C_FIELD(p, void **, 0xD0);
+    M2C_FIELD(p, void **, 0xD0) = 0;
+    if (result >= 0) {
+        result = fn_8038984C(chan, M2C_FIELD(p, u16 *, 0xBE), cb);
+        if (result >= 0) {
+            return;
+        }
+    }
+    fn_80389134(p, result);
+    if (cb != 0) {
+        cb(chan, result);
+    }
+}
+
 s32 fn_8038D358(s32 chan, s32 fileNo, void *callback);
 s32 fn_8038D484(s32 chan, s32 fileNo) {
     s32 fn_803894A8(s32);
