@@ -3140,6 +3140,27 @@ void fn_803AD158(void **self, s32 flags) {
     }
 }
 
+void fn_803AD18C(void *self) {
+    extern void fn_803997AC(void *, u32);
+    struct LNode {
+        struct LNode *next;
+        struct LNode *prev;
+    } **list = (struct LNode **)self;
+    struct LNode *n;
+    struct LNode *cur;
+
+    n = list[1]->next;
+    while (n != list[1]) {
+        cur = n;
+        n = n->next;
+        if (cur != NULL) {
+            fn_803997AC(cur, 0xC);
+        }
+    }
+    list[1]->next = list[1];
+    list[1]->prev = list[1];
+}
+
 void *fn_803ADAAC(void *arg0, char *arg1) {
     extern s32 fn_80248808(char *);
     extern void fn_803ADA44(void *, s32);
