@@ -2819,10 +2819,10 @@ s32 fn_803AB678(s32 *self) {
     return self[2];
 }
 
-SearchEntry *fn_803AB680(SearchEntry *lo, SearchEntry *hi, s32 key) {
+SearchEntry8 *fn_803AB680(SearchEntry8 *lo, SearchEntry8 *hi, s32 key) {
     for (;;) {
         s32 n = hi - lo;
-        SearchEntry *mid;
+        SearchEntry8 *mid;
         s32 d;
 
         if (n <= 0) {
