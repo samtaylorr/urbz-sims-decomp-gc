@@ -611,6 +611,11 @@ void fn_80364084(void) {
     fn_802D2430();
 }
 
+s32 fn_803640A4(s32 arg0) {
+    s32 fn_802D2540(char *, s32 (*)());
+    return fn_802D2540((char *)arg0, (s32 (*)())lbl_80493920);
+}
+
 void fn_803640CC(void) {
     void fn_80363EE0(s32, s32);
     fn_80363EE0(1, 0xFFFF);
