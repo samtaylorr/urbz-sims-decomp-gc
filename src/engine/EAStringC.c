@@ -492,11 +492,14 @@ void **fn_802A46A4(void **ret) {
         if (p != NULL) {
             fn_802A661C(p);
         }
+        if (p != NULL && fn_802A6630(p) == 0) {
+            fn_802A6644(p);
+        }
     } else {
         *ret = NULL;
-    }
-    if (p != NULL && fn_802A6630(p) == 0) {
-        fn_802A6644(p);
+        if (p != NULL && fn_802A6630(p) == 0) {
+            fn_802A6644(p);
+        }
     }
     return ret;
 }
@@ -1436,7 +1439,7 @@ s32 fn_802B490C(void *arg0) {
 
 f32 fn_802B4998(void *arg0) {
     extern f32 fn_8027A688(s32);
-    u32 flags = M2C_FIELD(arg0, u32 *, 0);
+    s32 flags = M2C_FIELD(arg0, s32 *, 0);
 
     if (!((flags ^ 0x8000) & 0x8000)) {
         switch (flags & 0x3F) {
