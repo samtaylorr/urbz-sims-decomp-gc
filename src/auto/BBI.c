@@ -30,6 +30,13 @@ static inline void *BBI_AllocZero(s32 size) {
     return p;
 }
 
+static inline void BBI_Init660(void *self) {
+    void fn_80248488(void *, s32, u32);
+    void fn_8005B71C(void *);
+    fn_80248488(self, 0, 0x660);
+    fn_8005B71C(self);
+}
+
 void *fn_80059918(void *arg0) {
     extern u8 lbl_80408398[];
     M2C_FIELD(arg0, void **, 8) = lbl_80408398;
@@ -482,10 +489,20 @@ s32 fn_80061F9C(char *self) {
 void fn_80063054(void) {
     extern void fn_80248488(void *, s32, u32);
     extern void fn_8005B71C(void *);
+    void *fn_802D0AB8(void);
+    void *fn_802D0B3C(void);
+    void *fn_802D197C(void *, s32, s32);
+    void *fn_802DC3C0(void *, s32, s32, s32, s32);
+    void *heap;
     void *p;
 
-    p = BBI_AllocAligned(0x660);
-    if (p != NULL) {
+    heap = fn_802D0AB8();
+    p = fn_802D197C(heap, 0x660, 0x10);
+    if (p == NULL) {
+        p = fn_802DC3C0(heap, 0x660, 0x10, 0, 0);
+        if (p == NULL && heap == fn_802D0AB8()) {
+            p = fn_802DC3C0(fn_802D0B3C(), 0x660, 0x10, 0, 0);
+        }
     }
     fn_80248488(p, 0, 0x660);
     fn_8005B71C(p);
