@@ -185,6 +185,16 @@ s32 fn_8018CC54(void) {
     return 0;
 }
 
+void fn_8018CC98(void *arg0, s32 arg1) {
+    void fn_8018F914(void *, s32);
+    extern char lbl_80413EC0[];
+    extern u8 *lbl_8049665C;
+    u8 *obj = lbl_8049665C;
+    M2C_FIELD(arg0, void **, 0x10) = lbl_80413EC0;
+    (*(void (**)(u8 *, void *))(*(u8 **)obj + 0x11C))(obj + *(s16 *)(*(u8 **)obj + 0x118), arg0);
+    fn_8018F914(arg0, arg1);
+}
+
 s32 fn_8018CCFC(void) {
     return -0x5F;
 }
