@@ -33,6 +33,37 @@ void fn_802ED900(void) {
 
 }
 
+s32 fn_802ED904(char *self) {
+    extern const f32 lbl_803F0BEC;
+    extern char *lbl_80495220;
+    Vec3f v;
+    char *vt = *(char **)self;
+    char *obj;
+    *(s32 *)(self + 8) = 1;
+    v.x = lbl_803F0BEC;
+    v.z = lbl_803F0BEC;
+    v.y = lbl_803F0BEC;
+    (*(void (**)(void *, Vec3f *, s32, s32))(vt + 0x4C))(self + *(s16 *)(vt + 0x48), &v, 0xFF, 1);
+    vt = *(char **)self;
+    (*(void (**)(void *))(vt + 0x214))(self + *(s16 *)(vt + 0x210));
+    obj = lbl_80495220;
+    vt = *(char **)(obj + 0x338);
+    return (*(s32 (**)(void *))(vt + 0x1C))(obj + *(s16 *)(vt + 0x18)) != 0;
+}
+
+void fn_802ED9B4(char *self) {
+    char *vt = *(char **)self;
+    char *obj;
+    s32 i;
+    obj = (*(char *(**)(void *, s32))(vt + 0x6C))(self + *(s16 *)(vt + 0x68), 0);
+    for (i = 0; i < 2; i++) {
+        vt = *(char **)(obj + 0x68);
+        (*(void (**)(void *, s32, s32))(vt + 0x11C))(obj + *(s16 *)(vt + 0x118), 0, i);
+    }
+    vt = *(char **)self;
+    (*(void (**)(void *, void *))(vt + 0x74))(self + *(s16 *)(vt + 0x70), obj);
+}
+
 void fn_802EDB28(void) {
 
 }
