@@ -24,6 +24,27 @@ void fn_80186218(void *arg0) {
     M2C_FIELD(arg0, s32 *, 8) = 0;
 }
 
+void fn_80186224(void *arg0, s32 arg1) {
+    void *fn_802D2058(s32);
+    void fn_802D211C(void *);
+    if (M2C_FIELD(arg0, void **, 0) != NULL) {
+        fn_802D211C(M2C_FIELD(arg0, void **, 0));
+    }
+    M2C_FIELD(arg0, void **, 0) = NULL;
+    if (M2C_FIELD(arg0, void **, 4) != NULL) {
+        fn_802D211C(M2C_FIELD(arg0, void **, 4));
+    }
+    M2C_FIELD(arg0, void **, 4) = NULL;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+    M2C_FIELD(arg0, s32 *, 0xC) = arg1;
+    if (arg1 > 0) {
+        M2C_FIELD(arg0, void **, 0) = fn_802D2058(arg1 * 8);
+        M2C_FIELD(arg0, void **, 4) = fn_802D2058((M2C_FIELD(arg0, s32 *, 0xC) - 1) * 4);
+    } else {
+        M2C_FIELD(arg0, s32 *, 0xC) = 0;
+    }
+}
+
 void fn_80186668(s32 arg0, void *arg1, s32 arg2) {
     M2C_UNK fn_8005A838(s32, void *, s32);
     M2C_UNK fn_8010BADC();
