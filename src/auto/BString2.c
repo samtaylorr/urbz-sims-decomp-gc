@@ -453,6 +453,10 @@ void fn_800F3BB4(void) {
     fn_800F134C();
 }
 
+void fn_800F3BD4(s32 arg0, const char *arg1, s32 arg2) {
+    ((void (*)(s32, s32, s32, s32))fn_800F134C)(arg0, (s32)arg1, arg2, arg1 ? fn_800F8120(arg1) : 0);
+}
+
 void fn_800F3938(void);
 void fn_800F3C2C(void) {
     fn_800F3938();
