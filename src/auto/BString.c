@@ -4075,15 +4075,12 @@ s32 fn_800EF704(void **arg0) {
 }
 
 s32 fn_800EF710(s32 arg0, const char *arg1) {
-    extern char lbl_803D59D8[];
     s32 fn_800F8120(const char *);
     void *fn_802D2058(s32);
     void fn_802D211C(void *);
     char *buf;
 
-    if (arg1 == 0) {
-        arg1 = lbl_803D59D8;
-    }
+    arg1 = BString_NonNull(arg1);
     buf = fn_802D2058(fn_800F8120(arg1) + 1);
     fn_800EAED8((u8 *)buf, (u16 *)arg1);
     fn_800ED608((void *)arg0, buf);
