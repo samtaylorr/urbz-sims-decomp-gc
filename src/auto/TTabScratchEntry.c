@@ -52,6 +52,18 @@ static inline void ScratchPool_Free(ScratchPool *pool, void *p) {
     }
 }
 
+static inline s32 *ScratchPair_Init(s32 *p) {
+    p[1] = 0;
+    return p;
+}
+
+static inline s32 *ScratchVec_Init(s32 *v) {
+    v[0] = 0;
+    ScratchPair_Init(v);
+    ScratchPair_Init(v + 2);
+    return v;
+}
+
 void fn_801A1B50(void);
 void fn_8019A0A4(void) {
     M2C_UNK fn_8019A10C();
@@ -834,7 +846,7 @@ s32 fn_801A1028(s32 year, s32 month, s32 day) {
     return days + (year - 0x76C) * 0x168;
 }
 
-void fn_801A10A8(s32 *self, s32 arg1) {
+s32 *fn_801A10A8(s32 *self, s32 arg1) {
     s32 *v = self + 2;
     self[2] = 0;
     v[1] = 0;
@@ -842,6 +854,7 @@ void fn_801A10A8(s32 *self, s32 arg1) {
     self[6] = arg1;
     self[1] = 0;
     self[0] = 0;
+    return self;
 }
 
 void fn_801A10DC(s32 *self, s32 flags) {
