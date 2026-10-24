@@ -253,6 +253,37 @@ s32 fn_80365D6C(void *arg0, s32 arg1) {
     return sp8;
 }
 
+void fn_80365FEC(void *self, void *node) {
+    void fn_80366028(void *, u32, void *);
+    u32 key = M2C_FIELD(node, u32 *, 0xC);
+    u32 count = M2C_FIELD(self, u32 *, 0xC);
+    fn_80366028(self, key % count, node);
+}
+
+void fn_80366028(void *self, s32 bucket, void *node) {
+    extern void fn_802D20E8(void *);
+    void **link = (void **)((u8 *)M2C_FIELD(self, void **, 8) + bucket * 4);
+    void *current = *link;
+    while (current != NULL) {
+        void *next = M2C_FIELD(current, void **, 8);
+        if (current == node) {
+            *link = next;
+            if (M2C_FIELD(self, void **, 0) == node)
+                M2C_FIELD(self, void **, 0) = next;
+            else
+                M2C_FIELD(M2C_FIELD(node, void **, 4), void **, 8) = next;
+            if (M2C_FIELD(self, void **, 4) == node)
+                M2C_FIELD(self, void **, 4) = M2C_FIELD(node, void **, 4);
+            else
+                M2C_FIELD(M2C_FIELD(node, void **, 8), void **, 4) = M2C_FIELD(node, void **, 4);
+            fn_802D20E8(node);
+            return;
+        }
+        link = (void **)((u8 *)current + 8);
+        current = next;
+    }
+}
+
 void *fn_80366120(void *unused, void *node, void **out) {
     s32 key = M2C_FIELD(node, s32 *, 0xC);
     node = M2C_FIELD(node, void **, 8);
@@ -335,10 +366,8 @@ void fn_803662D0(void *arg0) {
     void fn_80366328(void *, s32);
     count = fn_8036625C((void **)arg0);
     n = 1;
-    if (n < count) {
-        do { n += n; } while (n < count);
-        if (n > 1) fn_80366328(arg0, n - 1);
-    }
+    while (n < count) n += n;
+    if (n > 1) fn_80366328(arg0, n - 1);
 }
 
 void fn_80366328(void *arg0, s32 arg1) {
@@ -352,24 +381,29 @@ void fn_80366328(void *arg0, s32 arg1) {
     }
     node = *(void **)arg0;
     if (node != NULL) {
-        s32 key = M2C_FIELD(node, s32 *, 0xC) % M2C_FIELD(arg0, s32 *, 0xC);
+        u32 value = M2C_FIELD(node, u32 *, 0xC);
+        u32 divisor = M2C_FIELD(arg0, u32 *, 0xC);
+        u32 key = value % divisor;
         void **buckets = M2C_FIELD(arg0, void **, 8);
         M2C_FIELD(node, void **, 8) = buckets[key];
         buckets[key] = node;
         node = M2C_FIELD(node, void **, 4);
         if (node != NULL) {
-            /* force traversal of linked nodes? */
+            node = node;
         }
     }
 }
 
 void *fn_803663B8(void *arg0, void **arg1) {
-    void *node = *arg1;
-    void fn_80365DFC(void *, s32, void *);
-    while (node != NULL) {
-        fn_80365DFC(NULL, M2C_FIELD(node, s32 *, 0xC), M2C_FIELD(node, void **, 0x10));
+    void *node;
+    s32 more = 1;
+    void fn_80365DFC(s32, void *);
+    node = *arg1;
+    do {
+        fn_80365DFC(M2C_FIELD(node, s32 *, 0xC), M2C_FIELD(node, void **, 0x10));
         node = M2C_FIELD(node, void **, 4);
-    }
+        more = node != NULL;
+    } while (more);
     return arg0;
 }
 
@@ -377,22 +411,24 @@ s32 fn_80366414(void *arg0, void **arg1) {
     s32 countA;
     s32 countB;
     void *node;
-    s32 found;
     s32 key;
+    s32 found;
     s32 fn_8036625C(void **);
     s32 fn_803660C8(void *, s32, s32 *);
     countA = fn_8036625C((void **)arg0);
     countB = fn_8036625C(arg1);
-    if (countA != countB) return 0;
-    node = *arg1;
-    while (node != NULL) {
-        key = M2C_FIELD(node, s32 *, 0x10);
-        found = fn_803660C8(arg0, M2C_FIELD(node, s32 *, 0xC), &found);
-        if (found == 0) return 0;
-        if (*(s32 *)((char *)&found + 0) != key) return 0;
-        node = M2C_FIELD(node, void **, 4);
+    if (countA == countB) {
+        node = *arg1;
+        while (node != NULL) {
+            key = M2C_FIELD(node, s32 *, 0x10);
+            found = fn_803660C8(arg0, M2C_FIELD(node, s32 *, 0xC), &found);
+            if (found == 0) break;
+            if (found != key) return 0;
+            node = M2C_FIELD(node, void **, 4);
+        }
+        return 1;
     }
-    return 1;
+    return 0;
 }
 
 s32 fn_803669C0(void *arg0) {
