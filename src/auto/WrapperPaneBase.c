@@ -321,6 +321,15 @@ M2C_UNK fn_800CD6DC(void *self, s32 id, s32 n, s32 arg3) {
     *(u32 *)(obj + 0x4) |= 2;
 }
 
+void fn_800CD724(void *self, s32 id, s32 n, f32 arg3) {
+    void fn_8039D8D8(void *);
+    u8 *obj = fn_800CD660(self, id, n);
+    u8 *p = obj + 0x20;
+    *(f32 *)(p + 0x34) = arg3;
+    fn_8039D8D8(p);
+    *(u32 *)(obj + 0x4) |= 2;
+}
+
 M2C_UNK fn_800CD774(void *self, s32 id, s32 n, s32 arg3) {
     M2C_UNK fn_800CCAB0(void *, s32);
     return fn_800CCAB0(fn_800CD660(self, id, n), arg3);
