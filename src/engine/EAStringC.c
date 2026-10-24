@@ -2174,6 +2174,11 @@ s32 fn_802BBD0C(s32 *self) {
     return self[2];
 }
 
+void fn_802BBD14(void) {
+    extern void (*lbl_80443310[])(void);
+    lbl_80443310[0]();
+}
+
 void fn_802BBD98(void) {
     lbl_80443314[0]();
 }
