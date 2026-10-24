@@ -29,6 +29,19 @@ void fn_8031F764(s32 arg0, s32 arg1, s32 arg2) {
     fn_8031F7A8(arg0, arg1, fn_802C52EC(arg2));
 }
 
+M2C_UNK fn_8031F904(s32 arg0, s32 arg1) {
+    M2C_UNK fn_8031EE78(void *);
+    M2C_UNK fn_8031EF04(void *, s32);
+    extern u8 lbl_8045A638[];
+    if (arg1 == 0xFFFF) {
+        if (arg0 != 0) {
+            fn_8031EE78(lbl_8045A638);
+        } else {
+            fn_8031EF04(lbl_8045A638, 2);
+        }
+    }
+}
+
 s32 fn_8031F958(void *arg0) {
     s32 fn_803669C0(void *);
     s32 var_r31;
