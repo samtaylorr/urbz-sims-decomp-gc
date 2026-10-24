@@ -501,9 +501,9 @@ void fn_800D2C1C(void *arg0, s32 arg1) {
     extern s32 lbl_8041F754[];
     extern void fn_80048A48(void *);
     extern void fn_80047AF8(void *, s32);
-    s32 *p = lbl_8041F754;
-    fn_80048A48(p);
-    fn_80047AF8(p, arg1);
+    s32 v = arg1;
+    fn_80048A48(lbl_8041F754);
+    fn_80047AF8(lbl_8041F754, v);
 }
 
 void fn_800D2C5C(void) {
@@ -4086,7 +4086,7 @@ s32 fn_800EF710(s32 arg0, const char *arg1) {
 }
 
 void fn_800EF7E0(void) {
-    M2C_UNK fn_800EF78C(M2C_UNK, M2C_UNK);
+    void fn_800EF78C(s32, s32);
     fn_800EF78C(1, 0xFFFF);
 }
 
