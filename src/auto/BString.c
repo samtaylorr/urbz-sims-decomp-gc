@@ -1122,6 +1122,14 @@ void fn_800D79D8(s32 *self, s32 arg1) {
     fn_803349A8(lbl_8045B438, arg1);
 }
 
+s32 fn_800D7A04(s32 *self) {
+    s32 done = SoundIsDone(self[6]);
+    if (done) {
+        self[6] = 0;
+    }
+    return done;
+}
+
 void fn_800D7A5C(s32 *self) {
     extern s32 lbl_8045B438[];
     extern void fn_80334CF8(void *, s32);
