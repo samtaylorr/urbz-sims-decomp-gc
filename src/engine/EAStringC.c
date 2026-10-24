@@ -1457,6 +1457,12 @@ s32 fn_802B4E80(void) {
     return lbl_80496130;
 }
 
+s32 fn_802B4E88(void) {
+    extern void *lbl_80496144;
+    void *p = lbl_80496144;
+    return p != 0 ? ((s32 (*)(void *))fn_802AEA9C)(p) : 0;
+}
+
 void fn_802B6E08(s32 *arg0) {
     s32 temp_r0;
 
