@@ -391,6 +391,12 @@ void fn_800CDB40(void) {
     M2C_FIELD(temp_r9, M2C_UNK (**)(void *), 0x94)(temp_r3 + M2C_FIELD(temp_r9, s16 *, 0x90));
 }
 
+void fn_800CDC64(void *arg0, u32 arg1) {
+    s32 fn_8033740C(void *, u32, s32, s32);
+    extern u8 lbl_8045BA40[];
+    M2C_FIELD(arg0, s32 *, 0x18) = fn_8033740C(lbl_8045BA40, arg1, 0, 0);
+}
+
 void fn_800CDCA4(void *arg0) {
     M2C_UNK fn_8031EA2C(s32);
     if (M2C_FIELD(arg0, s32 *, 0x18) != 0) {
