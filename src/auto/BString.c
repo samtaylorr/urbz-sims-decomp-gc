@@ -26,6 +26,11 @@ extern f32 lbl_803D14D0[];
 extern s32 lbl_8041F7B0[];
 extern s32 lbl_80434A9C[];
 void fn_800EAF5C(void);
+extern s32 lbl_8045B438[];
+s32 fn_80334E70(void *, s32);
+static inline s32 SoundIsDone(s32 id) {
+    return fn_80334E70(lbl_8045B438, id) != 0;
+}
 s32 fn_800EB360(s32, s32);
 s32 fn_800EF0A8(s32, s32, s32);
 u8 *fn_800EAFCC(void **arg0);
@@ -376,9 +381,9 @@ void fn_800D2778(void) {
 void fn_800D277C(void *arg0) {
     extern s32 fn_800E18B8(s32);
     s32 *self = arg0;
-    self[7] = 0;
     self[6] = 0;
     lbl_80434A9C[1] = 0;
+    self[7] = 0;
     fn_800E18B8(5);
 }
 
@@ -391,9 +396,9 @@ void fn_800D2884(void) {
 void fn_800D28AC(void *arg0) {
     extern s32 fn_800E18B8(s32);
     s32 *self = arg0;
-    self[7] = 0;
     self[6] = 0;
     lbl_80434A9C[1] = 0;
+    self[7] = 0;
     fn_800E18B8(6);
 }
 
@@ -1069,9 +1074,7 @@ void fn_800D72A8(s32 *self, s32 arg1) {
 void fn_800D72D4(s32 *self) {
     extern s32 lbl_8045B438[];
     extern s32 fn_80334E70(void *, s32);
-    s32 done = fn_80334E70(lbl_8045B438, self[6]);
-    done = done != 0;
-    if (done) {
+    if (fn_80334E70(lbl_8045B438, self[6]) != 0 ? 1 : 0) {
         self[6] = 0;
     }
 }
