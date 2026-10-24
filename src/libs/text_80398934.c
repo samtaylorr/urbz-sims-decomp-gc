@@ -2758,6 +2758,27 @@ void fn_803A6A70(void *self) {
     list[1]->prev = list[1];
 }
 
+void fn_803A6ADC(void *self) {
+    extern void fn_803997AC(void *, u32);
+    struct LNode {
+        struct LNode *next;
+        struct LNode *prev;
+    } **list = (struct LNode **)self;
+    struct LNode *n;
+    struct LNode *cur;
+
+    n = list[1]->next;
+    while (n != list[1]) {
+        cur = n;
+        n = n->next;
+        if (cur != NULL) {
+            fn_803997AC(cur, 0xC);
+        }
+    }
+    list[1]->next = list[1];
+    list[1]->prev = list[1];
+}
+
 void fn_803A6B48(s32 arg0, void *arg1) {
     void *temp_r30;
     void *var_r31;
