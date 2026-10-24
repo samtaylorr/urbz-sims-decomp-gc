@@ -3593,6 +3593,13 @@ s32 fn_800EB01C(s32 *arg0) {
     return *arg0 + 4;
 }
 
+s8 fn_800EB028(void **arg0, u32 arg1) {
+    if (arg1 >= (u32)fn_800EF6F8(arg0)) {
+        fn_800EAF5C();
+    }
+    return fn_800EAFCC(arg0)[arg1];
+}
+
 s8 fn_800EB074(void **arg0, u32 arg1) {
     if (arg1 < (u32)fn_800EF6F8(arg0)) {
         return fn_800EAFCC(arg0)[arg1];
@@ -3650,6 +3657,10 @@ s32 fn_800EB2B0(s32 arg0, s32 arg1) {
 
 s32 fn_800EB2DC(s32 arg0, s32 arg1) {
     return fn_800EF0A8(arg1, arg0, 0) > 0;
+}
+
+s32 fn_800EB31C(s32 arg0, s32 arg1) {
+    return fn_800EF110(arg1, arg0, 0, 1) > 0;
 }
 
 s32 fn_800EB360(s32 arg0, s32 arg1) {
