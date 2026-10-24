@@ -579,6 +579,13 @@ void fn_80261C64(void) {
     fn_80266794(lbl_80495ED4[8], 0xA, fn_80261F40);
 }
 
+void fn_80261C98(void) {
+    extern void fn_80266794(u8, s32, void (*)(void));
+    extern void fn_80261CCC(void);
+    extern u8 *lbl_80495ED4;
+    fn_80266794(lbl_80495ED4[8], 0xA, fn_80261CCC);
+}
+
 void fn_80261D34(s32 arg0);
 void fn_80261D34(s32 arg0) {
     extern void fn_802660C0(void *, s32, s32, void (*)(void));
