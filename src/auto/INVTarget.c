@@ -2536,17 +2536,16 @@ s32 fn_8022D25C(s32 arg0) {
     extern s32 fn_80014F30(s32, s32);
     extern void *fn_80224E3C(s32, s32);
     s32 obj;
-    s32 ret;
 
-    ret = 0;
-    if (fn_80224E3C(fn_80225544(), arg0) != 0) {
-        obj = fn_80014F30(fn_80014EE0(), arg0);
-        if (obj != 0) {
-            fn_80011F38(obj);
-            ret = 1;
-        }
+    if (fn_80224E3C(fn_80225544(), arg0) == 0) {
+        return 0;
     }
-    return ret;
+    obj = fn_80014F30(fn_80014EE0(), arg0);
+    if (obj == 0) {
+        return 0;
+    }
+    fn_80011F38(obj);
+    return 1;
 }
 
 void fn_8022D8C4(void *arg0) {
