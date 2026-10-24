@@ -112,6 +112,16 @@ s32 fn_80090108(void *arg0, void *arg1) {
     return 0;
 }
 
+u32 fn_80090244(void *arg0) {
+    void *a = M2C_FIELD(arg0, void **, 4);
+    void *b = M2C_FIELD(a, void **, 0);
+    void *c = M2C_FIELD(b, void **, 4);
+    s16 offset = M2C_FIELD(c, s16 *, 0x308);
+    void *func = M2C_FIELD(c, void **, 0x30C);
+    void *result = ((void *(*)(void *))func)((u8 *)b + offset);
+    return *(u32 *)((u8 *)result + 4);
+}
+
 u32 fn_80090284(void *arg0) {
     void *a = M2C_FIELD(arg0, void **, 4);
     void *b = M2C_FIELD(a, void **, 0);
