@@ -308,7 +308,8 @@ void fn_802C7C90(void) {
         lbl_80494DBC = 1;
         lbl_80494DB8 = 0;
         while (lbl_80494DC4 > 0) {
-            EMat4Obj *o = *(EMat4Obj **)&lbl_804935F0[(lbl_80494DC4 - 1) * 2];
+            s32 i = lbl_80494DC4 - 1;
+            EMat4Obj *o = ((EMat4AtExit *)lbl_804935F0)[i].obj;
             o->vtbl[3].fn((u8 *)o + o->vtbl[3].delta);
             lbl_80494DC4--;
         }
