@@ -18,6 +18,17 @@ extern const f32 lbl_803F0C8C[];
 typedef struct { f32 x, y, z; } EGraphicsVec3;
 extern const f32 lbl_803F0CA0[];
 extern const f32 lbl_803F0CB0[];
+void fn_802ED8B4(void **self, s32 flags) {
+    void fn_802D20E8(void *);
+    void fn_803B9594(void *);
+    extern u8 lbl_80419328[];
+    *self = lbl_80419328;
+    fn_803B9594(self);
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_802ED900(void) {
 
 }
