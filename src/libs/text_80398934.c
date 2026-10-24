@@ -2664,6 +2664,31 @@ s32 fn_803A647C(s32 *self) {
     return self[2];
 }
 
+Elem124 *fn_803A6484(Elem124 *lo, Elem124 *hi, s32 key) {
+    s32 n = hi - lo;
+    Elem124 *mid;
+    s32 d;
+
+    if (n <= 0) {
+        return 0;
+    }
+    if (n == 1) {
+        if (lo->a == key) {
+            return lo;
+        }
+        return 0;
+    }
+    mid = lo + n / 2;
+    d = key - mid->a;
+    if (d == 0) {
+        return mid;
+    }
+    if (d > 0) {
+        return fn_803A6484(mid + 1, hi, key);
+    }
+    return fn_803A6484(lo, mid, key);
+}
+
 extern u8 lbl_80411998[];
 void fn_803A64F4(void **self, s32 flags) {
     *self = lbl_80411998;
