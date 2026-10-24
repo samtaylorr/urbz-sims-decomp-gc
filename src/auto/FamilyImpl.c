@@ -481,6 +481,11 @@ void fn_8010CDD4(void *arg0) {
     }
 }
 
+s8 fn_8010CE6C(void) {
+    extern char *lbl_8041FAD0[];
+    return lbl_8041FAD0[0][0x1C];
+}
+
 void fn_8010CFA0(void *self, s32 flags) {
     if (flags & 1) {
         fn_802D20E8(self);
