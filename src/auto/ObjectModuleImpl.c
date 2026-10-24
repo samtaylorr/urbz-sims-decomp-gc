@@ -409,3 +409,8 @@ void fn_8016BFB4(void) {
     fn_8016BE04(1, 0xFFFF);
 }
 
+void fn_8016BFE0(void) {
+    M2C_UNK fn_8016BE04(M2C_UNK, M2C_UNK);
+    fn_8016BE04(0, 0xFFFF);
+}
+
