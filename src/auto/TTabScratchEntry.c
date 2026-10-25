@@ -795,10 +795,9 @@ void *fn_801A07C4(void *arg0) {
     return arg0;
 }
 
-s32 fn_801A07FC(void *arg0, void *arg1) {
-    struct Blk { s32 v[8]; };
+void fn_801A07FC(void *arg0, void *arg1) {
+    struct Blk { s32 v[14]; };
     *(struct Blk *)arg0 = *(struct Blk *)arg1;
-    return 1;
 }
 
 void fn_801A0858(void *self, s32 flags) {
