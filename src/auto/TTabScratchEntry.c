@@ -789,6 +789,16 @@ s32 fn_801A0558(s32 arg0) {
     }
 }
 
+s32 fn_801A0780(s32 arg0) {
+    s32 n = 0;
+    s32 t = arg0;
+    while (t != 0) {
+        t &= t - 1;
+        n++;
+    }
+    return n == 1 && arg0 <= 32;
+}
+
 void *fn_801A07C4(void *arg0) {
     void *fn_80248488(void *, s32, u32);
     fn_80248488(arg0, 0, 0x38);
