@@ -1518,7 +1518,7 @@ void fn_800DB2F0(s32 *self) {
     extern f32 lbl_803D4990[];
     extern f32 lbl_803D4994[];
     extern u8 *lbl_80495050;
-    extern s32 lbl_8041F800[];
+    extern s32 *lbl_8041F800;
     extern u8 *lbl_80496648;
     f32 v[3];
     f32 *p = v;
@@ -1527,7 +1527,7 @@ void fn_800DB2F0(s32 *self) {
 
     ((f32 *)self)[6] = lbl_803D4990[0];
     obj = lbl_80495050;
-    lbl_8041F800[0] = 1;
+    lbl_8041F800[0x3c / 4] = 1;
     v[0] = lbl_803D4994[0];
     p[1] = lbl_803D4994[0];
     p[2] = lbl_803D4994[0];
@@ -1684,6 +1684,23 @@ void fn_800DBC9C(void) {
     fn_800E3BC0();
 }
 
+s32 fn_800DBE90(s32 arg0) {
+    s32 *p = (s32 *)(arg0 + 0x9c);
+    if (p[0] != 0) {
+        return 0;
+    }
+    p[0] = 0;
+    return 1;
+}
+
+s32 fn_800DBEB8(s32 arg0) {
+    if (*(s32 *)(arg0 + 0xac) == 0) {
+        *(s32 *)(arg0 + 0xac) = 0;
+        return 1;
+    }
+    return 0;
+}
+
 void fn_800DBFDC(void *arg0) {
 
 }
@@ -1700,6 +1717,23 @@ void fn_800DC000(void *arg0) {
     s32 fn_800E3E50();
     if (fn_800E3E50() != 0) {
         M2C_FIELD(arg0, s32 *, 0xAC) = 1;
+    }
+}
+
+void fn_800DBEE0(s32, s32, s32, s32);
+void fn_800A54AC(s32, s32, s32);
+void fn_800DC6C8(void);
+void fn_800DC03C(s32 arg0) {
+    extern s32 lbl_804943B0[];
+    extern s32 lbl_8041F94C[];
+    s32 r5;
+
+    if (lbl_804943B0[0] != 0) {
+        r5 = 1;
+        if (lbl_8041F94C[0x3b] != 0) {
+            r5 = *(s32 *)(lbl_8041F94C[0x3b] + 0x6c);
+        }
+        fn_800DBEE0(lbl_804943B0[0], arg0, r5, lbl_8041F94C[0xef]);
     }
 }
 
@@ -3169,6 +3203,19 @@ void fn_800E54D0(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x1C) = 0;
 }
 
+void fn_800E5920(void *arg0) {
+    M2C_UNK fn_800490B0(M2C_UNK *);
+    extern s32 lbl_80494F40;
+    extern s32 lbl_80494F44;
+    extern s32 lbl_8041F754[];
+    if ((s32)M2C_FIELD(arg0, s32 *, 0x20) != 0) {
+        lbl_80494F40 = 1;
+        lbl_80494F44 = 1;
+        M2C_FIELD(arg0, s32 *, 0x20) = 0;
+    }
+    fn_800490B0(&lbl_8041F754);
+}
+
 void fn_800E5B8C(void) {
 
 }
@@ -3605,13 +3652,12 @@ void fn_800EA744(u64 *arg0) {
 }
 
 s32 fn_800EA758(s32 arg0, s32 arg1) {
-    Bits64 v = Bits64_Shr((Bits64 *)arg0, arg1);
-    u64 bit = 1;
-    s32 ret = 0;
-    if ((v.bits & bit) != 0) {
-        ret = 1;
+    extern u64 Bits64_Shr_impl(s32 *, s32);
+    u64 v = Bits64_Shr_impl((s32 *)arg0, arg1);
+    if (v & 1) {
+        return 1;
     }
-    return ret;
+    return 0;
 }
 
 void fn_800EA7F8(u64 *arg0, s32 arg1) {
