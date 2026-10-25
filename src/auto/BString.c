@@ -3475,6 +3475,10 @@ typedef struct Bits64 {
     u64 bits;
 } Bits64;
 
+typedef struct BitSet4096 {
+    u64 words[64];
+} BitSet4096;
+
 static inline Bits64 Bits64_Shr(Bits64 *a, s32 n) {
     Bits64 r;
     r.bits = a->bits >> n;
