@@ -427,6 +427,24 @@ void fn_8006A640(void) {
     fn_8006A5E8();
 }
 
+void fn_8006C18C(void *arg0, s32 arg1) {
+    extern void fn_802ED2F4(void *, s32, s32);
+    extern void fn_802ED32C(void *, s32, s32);
+    s32 index;
+    s32 itemIndex;
+
+    if (M2C_FIELD(arg0, s32 *, 0x3CC) != 0) {
+        index = M2C_FIELD(arg0, s32 *, 0x3D4);
+        itemIndex = M2C_FIELD(arg0, s32 *, 0x3D0);
+        if (index >= 0 && itemIndex >= 0) {
+            if (M2C_FIELD(arg0, void **, 0x3A8 + index * 4) != NULL) {
+                fn_802ED2F4(M2C_FIELD(arg0, void **, 0x3A8 + index * 4), itemIndex, 1);
+                fn_802ED32C(M2C_FIELD(arg0, void **, 0x3A8 + index * 4), itemIndex, arg1);
+            }
+        }
+    }
+}
+
 void fn_8006C208(void *arg0) {
     extern void fn_802ED2F4(void *, s32, s32);
     extern void fn_802ED32C(void *, s32, s32);
@@ -467,8 +485,8 @@ void fn_8006C274(void *arg0, char *arg1) {
 }
 
 void fn_8006C6B4(void *arg0) {
-    M2C_UNK fn_8006C130(void *);
-    M2C_UNK fn_8006C2F8();
+    void fn_8006C130(void *);
+    void fn_8006C2F8();
     M2C_UNK fn_8006C458(void *);
     extern s32 lbl_80494138;
     if ((s32) M2C_FIELD(arg0, s32 *, 0x3A4) == 9) {
