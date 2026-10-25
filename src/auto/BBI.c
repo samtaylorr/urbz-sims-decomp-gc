@@ -3,6 +3,7 @@
 
 struct BBI_Handle { s32 v; };
 struct BBI_Vec3 { s32 a; s32 b; s32 c; };
+typedef struct { f32 x, y, z, w; } BBI_Vec4f;
 
 static inline void *BBI_AllocAligned(s32 size) {
     void *fn_802D0AB8(void);
@@ -435,6 +436,19 @@ s32 fn_80060DAC(void) {
     return 0;
 }
 
+void fn_80060DB4(void *arg0, s32 arg1, s32 *arg2) {
+    s32 i;
+    s32 *dst;
+
+    M2C_FIELD(arg0, s32 *, 0x660) = arg1;
+    if (arg1 > 0) {
+        dst = (s32 *)((char *)arg0 + 0x664);
+        for (i = 0; i < arg1; i++) {
+            *dst++ = *arg2++;
+        }
+    }
+}
+
 void fn_800616D8(void) {
 
 }
@@ -508,11 +522,9 @@ s32 fn_80061F9C(char *self) {
 }
 
 void fn_80063054(void) {
-    extern void fn_80248488();
+    void fn_80248488(void *, s32, u32);
     extern void fn_8005B71C(void *);
-    void *p;
-
-    p = BBI_AllocAligned(0x660);
+    void *p = BBI_AllocAligned(0x660);
     fn_80248488(p, 0, 0x660);
     fn_8005B71C(p);
 }
@@ -742,9 +754,10 @@ void fn_800636D0(void) {
 }
 
 void fn_800636F0(void) {
+    void fn_80248488(void *, s32, u32);
     extern void fn_80060CD0(void *);
     void *p = BBI_AllocAligned(0x690);
-    __builtin_memset(p, 0, 0x688);
+    fn_80248488(p, 0, 0x688);
     fn_80060CD0(p);
 }
 
