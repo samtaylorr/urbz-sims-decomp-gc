@@ -261,6 +261,26 @@ char *fn_80248640(const char *s1, int i) {
     return 0;
 }
 
+char *fn_80248784(char *dst0, const char *src0) {
+    char *dst = dst0;
+    const char *src = src0;
+    long *aligned_dst;
+    const long *aligned_src;
+
+    if (!(((long)src | (long)dst) & 3)) {
+        aligned_dst = (long *)dst;
+        aligned_src = (const long *)src;
+        while (!((*aligned_src - 0x01010101) & ~*aligned_src & 0x80808080))
+            *aligned_dst++ = *aligned_src++;
+        dst = (char *)aligned_dst;
+        src = (const char *)aligned_src;
+    }
+
+    while ((*dst++ = *src++))
+        ;
+    return dst0;
+}
+
 void fn_8024928C(void *arg0) {
     M2C_UNK fn_802492BC(s16, M2C_UNK, M2C_UNK, M2C_UNK);
     fn_802492BC(M2C_FIELD(arg0, s16 *, 0xE), 0, 0, 2);
