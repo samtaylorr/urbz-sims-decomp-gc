@@ -1669,6 +1669,13 @@ void fn_800DB83C(void) {
 
 }
 
+void fn_800DBDE0(s32);
+extern f32 lbl_803D49E4[];
+void fn_800DB840(s32 *self) {
+    fn_800DBDE0((s32)self[2]);
+    fn_800E3B38(self, 0, lbl_803D49E4[0]);
+}
+
 void fn_800DB884(void) {
 
 }
