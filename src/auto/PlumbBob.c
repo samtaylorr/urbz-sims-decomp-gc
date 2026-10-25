@@ -498,7 +498,7 @@ void fn_8006C6B4(void *arg0) {
 }
 
 void fn_8006C704(void *arg0) {
-    M2C_UNK fn_8006C35C();
+    void fn_8006C35C();
     M2C_UNK fn_8006C3F4(void *);
     if ((s32) M2C_FIELD(arg0, s32 *, 0x3A4) == 9) {
         fn_8006C35C();
