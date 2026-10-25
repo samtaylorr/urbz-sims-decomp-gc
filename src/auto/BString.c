@@ -1509,8 +1509,8 @@ void fn_800DB2A8(s32 *self, s32 arg1) {
 
     v[0] = c;
     p[1] = c;
-    p[3] = t;
     p[2] = c;
+    p[3] = t;
     fn_800DAFF8(arg1, p);
 }
 
