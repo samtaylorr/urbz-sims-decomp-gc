@@ -1639,6 +1639,17 @@ void *fn_801B2400(void *arg0) {
     return arg0;
 }
 
+void fn_801B2444(void **self, s32 flags) {
+    extern u8 lbl_80415370[];
+    void fn_801B1774(void *, s32);
+    void fn_801B1AB4(void *);
+    *self = lbl_80415370;
+    fn_801B1774(self, 0);
+    if (flags & 1) {
+        fn_801B1AB4(self);
+    }
+}
+
 s32 fn_801B2494(void *arg0, s32 arg1) {
     void *p = M2C_FIELD(arg0, void **, 0x18);
     if (p != 0) {
