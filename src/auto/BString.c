@@ -1499,6 +1499,7 @@ void fn_800DB214(s32 *self, f32 dt) {
 
 void fn_800DAFF8(s32, f32 *);
 void fn_800DAFF8(s32, f32 *);
+void fn_800DAFF8(s32, f32 *);
 void fn_800DB2A8(s32 *self, s32 arg1) {
     extern f32 lbl_803D498C[];
     f32 v[4];
