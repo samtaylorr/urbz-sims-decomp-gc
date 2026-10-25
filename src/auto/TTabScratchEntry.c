@@ -789,6 +789,28 @@ s32 fn_801A0558(s32 arg0) {
     }
 }
 
+s32 fn_801A0708(s32 arg0, s32 *arg1) {
+    s32 r = 1 << arg0;
+    if (arg1 != NULL) {
+        *arg1 = 0;
+        if (r > 15) {
+            if (r == 16) {
+                *arg1 = 2;
+            } else if (r == 32) {
+                *arg1 = 4;
+                r = 16;
+            } else if (r == 64) {
+                *arg1 = 1;
+                r = 32;
+            } else if (r == 128) {
+                *arg1 = 3;
+                r = 32;
+            }
+        }
+    }
+    return r;
+}
+
 s32 fn_801A0780(s32 arg0) {
     s32 n = 0;
     s32 t = arg0;
