@@ -1620,6 +1620,23 @@ void *fn_801B23CC(void *arg0, u8 *arg1) {
     return arg0;
 }
 
+void *fn_801B2400(void *arg0) {
+    extern u8 lbl_80415370[];
+    void fn_801B1644(void *);
+    fn_801B1644(arg0);
+    M2C_FIELD(arg0, s32 *, 0x1C) = 0;
+    M2C_FIELD(arg0, void **, 0) = lbl_80415370;
+    return arg0;
+}
+
+s32 fn_801B2494(void *arg0, s32 arg1) {
+    void *p = M2C_FIELD(arg0, void **, 0x18);
+    if (p != 0) {
+        return M2C_FIELD(M2C_FIELD(p, u8 **, 4) + arg1 * 8, s16 *, 0);
+    }
+    return 0;
+}
+
 s32 fn_801B24B8(void) {
     return 0;
 }
