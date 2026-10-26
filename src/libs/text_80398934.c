@@ -1905,6 +1905,35 @@ void fn_803A059C(void **self, s32 flags) {
     }
 }
 
+s16 *fn_803A05D0(s16 *first, s16 *last, s16 *val) {
+    s32 trip = (last - first) >> 2;
+
+    for (; trip > 0; --trip) {
+        if (*first == *val) return first;
+        ++first;
+        if (*first == *val) return first;
+        ++first;
+        if (*first == *val) return first;
+        ++first;
+        if (*first == *val) return first;
+        ++first;
+    }
+    switch (last - first) {
+    case 3:
+        if (*first == *val) return first;
+        ++first;
+    case 2:
+        if (*first == *val) return first;
+        ++first;
+    case 1:
+        if (*first == *val) return first;
+        ++first;
+    case 0:
+    default:
+        return last;
+    }
+}
+
 s32 fn_803A0680(void) {
     return 0;
 }
