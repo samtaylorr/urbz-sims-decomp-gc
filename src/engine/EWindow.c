@@ -401,6 +401,22 @@ void fn_8030A40C(void *arg0) {
     M2C_FIELD(arg0, f32 *, 0x6C) = (M2C_FIELD(arg0, f32 *, 0x7C) - temp_f7) / temp_f9;
 }
 
+void fn_8030A638(s32 arg0, s32 arg1) {
+    extern f32 lbl_803F1EA8[];
+    extern f32 lbl_803F1EAC[];
+    extern f32 lbl_80454AF4[];
+    extern f32 lbl_80454B00[];
+
+    if (arg1 == 0xFFFF && arg0 != 0) {
+        lbl_80454AF4[2] = lbl_803F1EA8[0];
+        lbl_80454B00[2] = lbl_803F1EAC[0];
+        lbl_80454AF4[0] = lbl_803F1EA8[0];
+        lbl_80454B00[0] = lbl_803F1EAC[0];
+        lbl_80454AF4[1] = lbl_803F1EA8[0];
+        lbl_80454B00[1] = lbl_803F1EAC[0];
+    }
+}
+
 extern void *fn_802D197C(void *, u32, s32);
 extern void *fn_802DC3C0(void *, u32, s32, s32, s32);
 extern void *fn_802D0B3C(void);
@@ -474,6 +490,16 @@ void fn_8030A8BC(void *arg0, void *arg1, void *arg2) {
 void fn_8030A8E0(s32 a,f32 *b) {
  M2C_UNK fn_8030A908(s32,f32,f32);
  fn_8030A908(a,b[0],b[1]);
+}
+
+s32 fn_8030A950(u8 *self, f32 *rect) {
+    f32 *bounds = (f32 *)(self + 0x60);
+    s32 inside = 0;
+
+    if (rect[0] >= bounds[0] && rect[2] <= bounds[2] && rect[1] >= bounds[1] && rect[3] <= bounds[3]) {
+        inside = 1;
+    }
+    return inside ^ 1;
 }
 
 extern s32 lbl_80494EC0;
