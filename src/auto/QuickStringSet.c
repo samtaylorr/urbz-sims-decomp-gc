@@ -181,6 +181,32 @@ void fn_800F6D34(s32 self, s32 arg1) {
     fn_800F68F0(self, (s32)buf, -1);
 }
 
+s32 fn_800F6D9C(s32 *self, char *str, s32 start) {
+    s32 fn_80248808(s32);
+    s32 fn_800F6C00(s32 *, s32);
+    s32 len;
+    s32 end;
+    s32 i;
+    s32 j;
+    s32 found;
+
+    len = fn_80248808((s32)str);
+    end = fn_800F68BC(self) - len + 1;
+    for (i = start; i < end; i++) {
+        found = 1;
+        for (j = 0; j < len; j++) {
+            if (fn_800F6C00(self, i + j) != str[j]) {
+                found = 0;
+                break;
+            }
+        }
+        if (found) {
+            return i;
+        }
+    }
+    return -1;
+}
+
 void fn_800F6F88(u16 *dst, const u8 *src) {
     while (*src != 0) {
         *dst++ = *src++;
