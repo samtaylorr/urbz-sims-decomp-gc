@@ -402,6 +402,11 @@ void *fn_800F251C(void *self) {
     return self;
 }
 
+void *fn_800F254C(void *arg0, void *arg1, const char *arg2) {
+    ((void (*)(void *, void *, const char *, s32))fn_800F095C)(arg0, arg1, arg2, arg2 ? fn_800F8120(arg2) : 0);
+    return arg0;
+}
+
 const u16 *fn_800F3304(void **arg0) {
     extern u16 lbl_803D59DC[];
     const u16 *p = BString2_Data(arg0);
