@@ -146,6 +146,27 @@ s32 fn_801D7C98(void **arg0, s32 arg1) {
     return 0;
 }
 
+s32 fn_801D7CDC(void **arg0, s32 arg1) {
+    M2C_UNK fn_801D7A14(void **, void *);
+    s32 var_r3;
+    void *temp_r31;
+    void *var_r4;
+
+    var_r4 = *arg0;
+    var_r3 = 0;
+    if (var_r4 != NULL) {
+        do {
+            temp_r31 = M2C_FIELD(var_r4, void **, 4);
+            if (M2C_FIELD(var_r4, s32 *, 0x18) == arg1) {
+                fn_801D7A14(arg0, var_r4);
+                var_r3 = 1;
+            }
+            var_r4 = temp_r31;
+        } while (var_r4 != NULL);
+    }
+    return var_r3;
+}
+
 s32 fn_801D7D3C(void **arg0, s32 arg1) {
     void *fn_801D7BE0(void **, s32);
     return fn_801D7BE0(arg0, arg1) != 0;
