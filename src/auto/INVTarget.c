@@ -164,6 +164,14 @@ void fn_801D7D6C(void **arg0) {
     }
 }
 
+s32 fn_801D7DB0(void **arg0, s32 arg1) {
+    void *node = fn_801D7BE0(arg0, arg1);
+    if (node == NULL) {
+        return 0;
+    }
+    return M2C_FIELD(node, s32 *, 0x1C);
+}
+
 s32 fn_801D7DE4(void) {
     s32 fn_801D75D8();
     M2C_UNK fn_802D1FC8(M2C_UNK);
@@ -985,7 +993,7 @@ void fn_801D97CC(void) {
 }
 
 void fn_801DB8B8(void *arg0, s32 arg1) {
-    extern void fn_801D7CDC(void *, s32);
+    extern s32 fn_801D7CDC(void **, s32);
     extern s32 fn_801D8B40(void *, void *);
     extern void fn_801D9014(void *, void *);
     extern void fn_801D94DC(void *, void *);
@@ -1701,9 +1709,10 @@ void fn_801DFDAC(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
 s32 fn_801DFEE0(void **arg0, s32 arg1, s32 arg2, s32 arg3) {
     void *fn_801E0008(void **arg0, s32 arg1);
     void fn_802D20E8(void *);
+    s32 key = arg1;
 
-    if (arg0[2] != NULL && fn_801E0008(arg0, arg1) == NULL) {
-        fn_801DFDAC(arg0, arg1, arg2, arg3);
+    if (arg0[2] != NULL && fn_801E0008(arg0, key) == NULL) {
+        fn_801DFDAC(arg0, key, arg2, arg3);
         return 1;
     }
     fn_802D20E8((void *)arg2);
