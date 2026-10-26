@@ -44,6 +44,8 @@ s32 fn_800EF0A8(s32, s32, s32);
 u8 *fn_800EAFCC(void **arg0);
 void fn_800EC49C(s32, s32, s32, s32);
 s32 fn_800EF6F8(void **arg0);
+void fn_800EBF1C();
+void fn_800EC140();
 void fn_8024839C(void *dst, const void *src, u32 n);
 s32 fn_800DBE90(s32);
 void fn_800EBDA4(void *);
