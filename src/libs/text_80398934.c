@@ -9399,6 +9399,15 @@ void fn_803C0264(u8 *p, s32 n) {
     }
 }
 
+void fn_803C02C8(s32 self) {
+    void *p;
+
+    fn_803C0264((u8 *)((s32 *)self)[0], ((s32 *)self)[1]);
+    p = ((void **)self)[0];
+    fn_802D1A00(fn_802D0AB8(), p);
+    fn_803C0220((void *)self);
+}
+
 extern void fn_803C02C8(s32);
 void fn_803C0314(s32 self, s32 flags) {
     fn_803C02C8(self);
