@@ -9418,21 +9418,15 @@ void fn_803C0314(s32 self, s32 flags) {
 
 void *fn_803C0354(u8 *self, s32 *arr) {
     extern void fn_80367098(void *, s32);
-    u8 *vt;
     s32 count;
     s32 n;
-    s32 off;
+    s32 i;
 
-    vt = M2C_FIELD(self, u8 **, 0x18);
     count = arr[1];
     n = count;
-    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)(self + M2C_FIELD(vt, s16 *, 0x38), &n, 4);
-    if (count > 0) {
-        off = 0;
-        do {
-            fn_80367098(self, arr[0] + off);
-            off += 0x58;
-        } while (--count != 0);
+    M2C_FIELD(M2C_FIELD(self, u8 **, 0x18), void (**)(void *, void *, s32), 0x3C)(self + M2C_FIELD(M2C_FIELD(self, u8 **, 0x18), s16 *, 0x38), &n, 4);
+    for (i = 0; i < count; i++) {
+        fn_80367098(self, arr[0] + i * 0x58);
     }
     return self;
 }
@@ -9522,11 +9516,11 @@ void fn_803C07E0(s32 self, s32 flags) {
 void *fn_803C0820(u8 *self, s32 *arr) {
     extern void fn_8037475C(void *, void *);
     u8 *vt = M2C_FIELD(self, u8 **, 0x18);
-    s32 cnt = arr[1];
+    s32 cnt;
     s32 n;
     s32 off;
 
-    n = cnt;
+    n = cnt = arr[1];
     M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)(self + M2C_FIELD(vt, s16 *, 0x38), &n, 4);
     if (cnt > 0) {
         off = 0;
@@ -9597,6 +9591,15 @@ extern void fn_8039A024(void *);
 void *fn_803C0C20(void *self) {
     fn_8039A024(self);
     return self;
+}
+
+void fn_803C0C50(s32 self) {
+    s32 *p;
+
+    fn_80399FD4(((s32 **)self)[0], (s32)((s32 **)self)[1]);
+    p = ((s32 **)self)[0];
+    fn_802D1A00(fn_802D0AB8(), p);
+    fn_8039A024((void *)self);
 }
 
 extern void fn_803C0C50(s32);
