@@ -995,8 +995,8 @@ void fn_801D97CC(void) {
 void fn_801DB8B8(void *arg0, s32 arg1) {
     extern s32 fn_801D7CDC(void **, s32);
     extern s32 fn_801D8B40(void *, void *);
-    extern void fn_801D9014(void *, void *);
-    extern void fn_801D94DC(void *, void *);
+    extern s32 fn_801D9014(void *, void *);
+    extern s32 fn_801D94DC(void *, void *);
     extern s32 fn_801DC030(void *, void *);
     extern void fn_801DFA30(void *, void *);
     M2C_UNK fn_802D20E8(s32);
@@ -1486,6 +1486,16 @@ void fn_801DF0A8(u8 *self, s32 flags) {
     if (flags & 1) {
         fn_802D20E8(self);
     }
+}
+
+f32 fn_801DF514(s32 arg0) {
+    extern u8 *lbl_80494618;
+    extern f32 lbl_803E1350;
+
+    if (lbl_80494618 != 0) {
+        return ((f32 *)(lbl_80494618 + 0xA0))[arg0];
+    }
+    return lbl_803E1350;
 }
 
 s32 fn_801DF724(void **arg0) {
