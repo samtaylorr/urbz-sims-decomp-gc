@@ -4412,7 +4412,8 @@ void fn_800EEB3C(void **arg0, u8 arg1, u32 arg2) {
 
 void fn_800EC774(s32, s32, s32, s32);
 void fn_800EEBB4(void) {
-    fn_800EC774(0, 0, 0, 0);
+    void fn_800EC774();
+    fn_800EC774();
 }
 
 void fn_800EE994(void);
