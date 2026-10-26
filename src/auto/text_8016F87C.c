@@ -197,6 +197,32 @@ s32 fn_801746D0(void) {
     return 1;
 }
 
+s32 fn_801749B4(s32 *self, s32 count, s32 arg2) {
+    extern s32 *fn_802D2058(s32);
+    s32 i;
+    if (self[0] == 0) {
+        self[2] = arg2;
+        self[1] = count;
+        self[3] = (s32)fn_802D2058(count << 2);
+        self[6] = 1;
+        for (i = 0; i < self[1]; i++) {
+            ((s32 *)self[3])[i] = 0;
+        }
+        self[0] = 1;
+    }
+    return 1;
+}
+
+s32 fn_80174A44(s32 *self) {
+    extern void fn_802D211C(s32);
+    if (self[6] != 0 && self[3] != 0) {
+        fn_802D211C(self[3]);
+    }
+    self[0] = 0;
+    self[3] = 0;
+    return 1;
+}
+
 void fn_80174B5C(void *arg0, void *arg1) {
     s32 i = 0;
     s32 count = M2C_FIELD(arg0, s32 *, 4);
@@ -227,6 +253,22 @@ void fn_80174B98(void *arg0, s32 arg1, s32 arg2) {
 s32 fn_80174BFC(void *arg0) {
     if (M2C_FIELD(arg0, s32 *, 0) == 0) return 1;
     M2C_FIELD(arg0, s32 *, 0) = 0;
+    return 1;
+}
+
+s32 fn_80174C24(s32 *self, s32 count, s32 arg2) {
+    s32 i;
+    if (self[0] == 0) {
+        self[2] = arg2;
+        self[3] = (s32)(self + 7);
+        self[6] = 0;
+        self[42] = (s32)(self + 17);
+        self[1] = count;
+        for (i = 0; i < self[1]; i++) {
+            ((s32 *)self[3])[i] = 0x80000000;
+        }
+    }
+    self[0] = 1;
     return 1;
 }
 
