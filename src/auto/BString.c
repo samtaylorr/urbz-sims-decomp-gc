@@ -26,6 +26,7 @@ extern f32 lbl_803D14D0[];
 extern s32 lbl_8041F7B0[];
 extern s32 lbl_80434A9C[];
 void fn_800EAF5C(void);
+extern char lbl_803D59D4[];
 extern char lbl_803D59D8[];
 
 static inline const char *BString_NonNull(const char *s) {
