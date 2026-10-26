@@ -1259,8 +1259,8 @@ void fn_8008B444(void *arg0) {
     if (M2C_FIELD(arg0, s32 *, 0x158) != 0) {
         return;
     }
-    M2C_FIELD(arg0, s32 *, 0x158) = 2;
     M2C_FIELD(arg0, f32 *, 0x13C) = lbl_803CC180[0];
+    M2C_FIELD(arg0, s32 *, 0x158) = 2;
 }
 
 void fn_8008B468(void *arg0) {
