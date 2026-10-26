@@ -1999,11 +1999,7 @@ void *fn_803A0800(void *ret, void *self, u32 *key) {
 
     while (x != NULL) {
         y = x;
-        if (*key < x->key) {
-            x = x->left;
-        } else {
-            x = x->right;
-        }
+        x = (*key < x->key) ? x->left : x->right;
     }
     fn_803A06EC(ret, self, x, y, key, 0);
     return ret;
