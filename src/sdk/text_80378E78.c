@@ -293,16 +293,14 @@ void *fn_80381020(void);
 void fn_8038103C(void *);
 void fn_80380FCC(void *);
 void fn_80380DB0(void) {
-    extern void *lbl_80496388;
+    extern s32 lbl_80496388;
     extern s32 lbl_80476440[];
     extern s32 lbl_804763C0[];
     s32 i;
-    lbl_80496388 = 0;
-    i = 0;
-    do {
+    for (i = 0, lbl_80496388 = 0; i < 32; i++) {
         lbl_80476440[i] = 0;
         lbl_804763C0[i] = 0;
-    } while (++i < 32);
+    }
 }
 
 void fn_80380FCC(void *arg0) {

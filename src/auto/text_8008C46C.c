@@ -155,17 +155,18 @@ void fn_800906B8(void *arg0, f32 *arg1, f32 *arg2, f32 arg3) {
 
 void fn_8009115C(void *arg0, void *arg1) {
     typedef struct { s32 x, y; } Pt;
-    void fn_80091434(void *, void *, f32 *);
+    typedef struct { f32 x, y; } Ptf;
+    void fn_80091434(void *, void *, Ptf *);
     Pt **list = M2C_FIELD(arg0, Pt ***, 0xC);
     s32 i = M2C_FIELD(arg0, s32 *, 0x14);
     s32 j = i - 1;
-    s32 dy = (*list + i)->y - (*list + j)->y;
-    s32 dx = (*list + i)->x - (*list + j)->x;
+    s32 dy = (*list)[i].y - (*list)[j].y;
+    s32 dx = (*list)[i].x - (*list)[j].x;
     if (dy * dy + dx * dx > 3) {
-        f32 v[2];
-        v[0] = (*list + i)->y;
-        v[1] = (*list + i)->x;
-        fn_80091434(arg0, arg1, v);
+        Ptf v;
+        v.x = (*list)[i].y;
+        v.y = (*list)[i].x;
+        fn_80091434(arg0, arg1, &v);
     }
 }
 
@@ -239,10 +240,9 @@ void fn_80094EF4(void *arg0) {
 
 void fn_80094F44(void *arg0, s32 arg1, s32 arg2) {
     M2C_UNK fn_802EC15C(s32, s32, s32);
-    if (Obj_IsActive(M2C_FIELD(arg0, void **, 8))) {
-        Obj_Nop();
-    }
-    fn_802EC15C((s32)M2C_FIELD(arg0, void **, 8) + 0x314, arg2, arg1);
+    void *obj = M2C_FIELD(arg0, void **, 8);
+    volatile s32 status = M2C_FIELD(obj, s32 *, 0x334) != 0;
+    fn_802EC15C((s32)obj + 0x314, arg2, arg1);
 }
 
 s32 fn_80095A44(void) {
