@@ -507,6 +507,19 @@ void fn_80366554(u8 *self, s32 flags) {
     }
 }
 
+void fn_80366708(void *arg0) {
+    extern void fn_802D8328(void *);
+    extern void *fn_802D0AB8(void);
+    extern void fn_802D1A00(void *, void *);
+    M2C_FIELD(arg0, s32 *, 0x38) = 0;
+    fn_802D8328(arg0);
+    fn_802D8328((u8 *)arg0 + 0x18);
+    if (M2C_FIELD(arg0, s32 *, 0x40) != 0) {
+        fn_802D1A00(fn_802D0AB8(), M2C_FIELD(arg0, void **, 0x3C));
+        M2C_FIELD(arg0, s32 *, 0x40) = 0;
+    }
+}
+
 s32 fn_803669C0(void *arg0) {
     s32 temp_r11;
     s32 var_r3;
