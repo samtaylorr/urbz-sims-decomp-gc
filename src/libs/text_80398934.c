@@ -7831,6 +7831,15 @@ void fn_803BB890(s32 self, s32 flags) {
     }
 }
 
+void fn_803BB940(s32 self) {
+    extern s32 lbl_8045B390[];
+    extern void fn_80338184(void *, s32);
+    void fn_803BB8D0(u8 *, s32);
+    fn_803BB8D0((u8 *)((s32 *)self)[0], ((s32 *)self)[1]);
+    fn_80338184(lbl_8045B390, ((s32 *)self)[0]);
+    fn_803BB800((void *)self);
+}
+
 extern void fn_803BB940(s32);
 void fn_803BB98C(s32 self, s32 flags) {
     fn_803BB940(self);
