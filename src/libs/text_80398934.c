@@ -7106,8 +7106,8 @@ void fn_803B93E8(void *dst, void *src, s32 n) {
     struct Elem20 *d = (struct Elem20 *)dst;
     struct Elem20 *s = (struct Elem20 *)src;
 
-    d += n - 1;
     s += n - 1;
+    d += n - 1;
     while (--n != -1) {
         *d-- = *s--;
     }
