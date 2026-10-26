@@ -3576,6 +3576,34 @@ void fn_800E9F68(void *arg0) {
     fn_800D28AC(arg0);
 }
 
+void fn_800EA420(void *arg0) {
+    extern f32 lbl_803D59D0[];
+    extern s32 lbl_804943B4;
+    extern void fn_80047AA8(void *);
+    extern void fn_800D2AE8(void *);
+    s32 var_r9;
+    s32 var_r9_2;
+
+    fn_800D2AE8(arg0);
+    var_r9 = 0;
+    if ((M2C_FIELD(arg0, s32 *, 0x18) == 0) && (M2C_FIELD(arg0, s32 *, 0x1C) != 0)) {
+        var_r9 = 1;
+    }
+    if (var_r9 != 0) {
+        fn_80047AA8(lbl_8041F754);
+        fn_800E3B38(arg0, 0x11, lbl_803D59D0[0]);
+        return;
+    }
+    var_r9_2 = 0;
+    if ((M2C_FIELD(arg0, s32 *, 0x18) == 0) && (M2C_FIELD(arg0, s32 *, 0x20) != 0)) {
+        var_r9_2 = 1;
+    }
+    if (var_r9_2 != 0) {
+        lbl_804943B4 = 0;
+        fn_800E3B38(arg0, 0x15, lbl_803D59D0[0]);
+    }
+}
+
 void fn_800EA4DC(void) {
     M2C_UNK fn_800487EC(M2C_UNK *);
     fn_800D2AE4();
