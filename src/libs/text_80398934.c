@@ -7087,7 +7087,13 @@ void fn_803B910C(s32 *self, s32 n) {
     }
 }
 
-extern void fn_803B9128(s32);
+void fn_803B9128(s32 *self) {
+    fn_803B910C(self, self[1]);
+    fn_802D1A00(fn_802D0AB8(), self[0]);
+    fn_803B90C8(self);
+}
+
+extern void fn_803B9128(s32 *);
 void fn_803B9174(s32 self, s32 flags) {
     fn_803B9128(self);
     if (flags & 1) {
