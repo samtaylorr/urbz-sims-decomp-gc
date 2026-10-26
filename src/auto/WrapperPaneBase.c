@@ -834,10 +834,10 @@ f32 fn_800CF794(void *arg0) {
 
 void fn_800CF79C(void *self, s32 *v) {
     void fn_8039D8D8(void *);
-    s32 y = v[1];
     s32 x = v[0];
-    M2C_FIELD(self, s32 *, 0x30) = y;
+    s32 y = v[1];
     M2C_FIELD(self, s32 *, 0x2C) = x;
+    M2C_FIELD(self, s32 *, 0x30) = y;
     fn_8039D8D8((u8 *)self + 0x20);
 }
 
