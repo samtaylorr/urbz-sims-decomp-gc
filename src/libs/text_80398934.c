@@ -7069,6 +7069,27 @@ s32 fn_803B8EF0(s32 *arg0) {
     return *arg0 + 8;
 }
 
+u8 *fn_803B9024(u8 *src, u32 *out) {
+    u32 c = src[0];
+    u32 cp;
+    u8 *p;
+    if ((c & 0x80) == 0) {
+        cp = c;
+        p = src + 1;
+    } else if ((c & 0xE0) == 0xC0) {
+        cp = ((c & 0x1F) << 6) | (src[1] & 0x3F);
+        p = src + 2;
+    } else if ((c & 0xF0) == 0xE0) {
+        cp = ((c & 0x0F) << 12) | ((src[1] & 0x3F) << 6) | (src[2] & 0x3F);
+        p = src + 3;
+    } else {
+        cp = ((c & 0x07) << 18) | ((src[1] & 0x3F) << 12) | ((src[2] & 0x3F) << 6) | (src[3] & 0x3F);
+        p = src + 4;
+    }
+    *out = cp;
+    return p;
+}
+
 void fn_803B90C8(void *self) {
     ((s32 *)self)[0] = 0;
     ((s32 *)self)[2] = 0;
@@ -7095,11 +7116,34 @@ void fn_803B9128(s32 *self) {
     fn_803B90C8(self);
 }
 
+typedef struct {
+    s32 unk0;
+    s32 unk4;
+    s32 unk8;
+    s32 unkC;
+    s32 unk10;
+} Unk803B9200;
+
 extern void fn_803B9128(s32 *);
 void fn_803B9174(s32 self, s32 flags) {
     fn_803B9128(self);
     if (flags & 1) {
         fn_802D20E8(self);
+    }
+}
+
+void fn_803B91B4(u8 *p, s32 n) {
+    while (n-- > 0) {
+        fn_802C5E54(p);
+        p += 0x14;
+    }
+}
+
+void fn_803B9200(Unk803B9200 *dst, Unk803B9200 *src, s32 n) {
+    while (n-- > 0) {
+        *dst = *src;
+        dst++;
+        src++;
     }
 }
 
@@ -8708,12 +8752,11 @@ void fn_803BEE20(s32 **self) {
     s32 n = (s32)self[1];
     s32 *p = self[0];
 
-    while (n--) {
+    while (n != 0) {
         void *obj = (void *)*p++;
         char *vt = *(char **)obj;
-        s16 delta = *(s16 *)(vt + 0x8);
-        void (*fn)(void *) = *(void (**)(void *))(vt + 0xC);
-        fn((char *)obj + delta);
+        (*(void (**)(void *))(vt + 0xC))((char *)obj + *(s16 *)(vt + 0x8));
+        n--;
     }
     fn_803BED94((s32)self);
 }
@@ -8754,6 +8797,15 @@ extern void fn_803BF854(void *);
 void *fn_803BF868(void *self) {
     fn_803BF854(self);
     return self;
+}
+
+void fn_803BF8FC(s32 self) {
+    extern s32 lbl_8045B0F0[];
+    extern void fn_80338184(void *, s32);
+    void fn_803BF898(u8 *, s32);
+    fn_803BF898((u8 *)((s32 *)self)[0], ((s32 *)self)[1]);
+    fn_80338184(lbl_8045B0F0, ((s32 *)self)[0]);
+    fn_803BF854((void *)self);
 }
 
 extern void fn_803BF8FC(s32);
