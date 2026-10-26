@@ -1019,6 +1019,22 @@ void fn_8026561C(void) {
     }
 }
 
+void fn_80265C40(void) {
+    extern DVDCommandListEntry lbl_80442A48[];
+    extern s32 lbl_80495F84;
+    void fn_80265D98(void *, u32, u32, void *);
+    void fn_80266358(u32, void *);
+    s32 n = lbl_80495F84;
+
+    if (lbl_80442A48[n].command == 1) {
+        lbl_80495F84++;
+        fn_80265D98(lbl_80442A48[n].addr, lbl_80442A48[n].length, lbl_80442A48[n].offset, lbl_80442A48[n].callback);
+    } else if (lbl_80442A48[n].command == 2) {
+        lbl_80495F84++;
+        fn_80266358(lbl_80442A48[n].offset, lbl_80442A48[n].callback);
+    }
+}
+
 void fn_80265CC4(void *alarm, void *context) {
     M2C_UNK fn_80254AC0(M2C_UNK);
     void fn_80252AAC(void *);
@@ -1042,6 +1058,18 @@ void fn_80265CC4(void *alarm, void *context) {
 s32 fn_80265EA8(void) {
     u8 *fn_802649F0(void);
     if (fn_802649F0()[8]) {
+        return 1;
+    }
+    return 0;
+}
+
+s32 fn_80265EE0(void *cur, void *prev) {
+    u8 *fn_802649F0(void);
+    u32 prevEnd = (M2C_FIELD(prev, u32 *, 8) + M2C_FIELD(prev, u32 *, 4) - 1) >> 15;
+    u32 curStart = M2C_FIELD(cur, u32 *, 8) >> 15;
+    u32 blockSize = ((fn_802649F0()[8] ? 1 : 0) ? 5 : 15);
+
+    if (curStart > prevEnd - 2 || curStart < prevEnd + blockSize + 3) {
         return 1;
     }
     return 0;
