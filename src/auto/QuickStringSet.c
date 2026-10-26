@@ -264,6 +264,11 @@ s32 fn_800F720C(s32 *arg0, s32 *arg1) {
     return fn_800F8148(a, fn_800F7138(arg1));
 }
 
+void fn_800F7250(void *arg0, s32 *arg1) {
+    void fn_800F72A0(void *, s32, s32);
+    fn_800F72A0(arg0, fn_800F7138(arg1), fn_800F6FF4(arg1));
+}
+
 s32 fn_800F72A0(s32 *self, u16 *other, s32 n) {
     u16 *str = (u16 *)fn_800F7138(self);
     s32 len = fn_800F6FF4(self);
