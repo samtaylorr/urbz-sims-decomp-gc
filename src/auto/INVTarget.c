@@ -990,6 +990,41 @@ void fn_801DB8B8(void *arg0, s32 arg1) {
     }
 }
 
+s32 fn_801DBD24(void **arg0) {
+    void *fn_802D1FC8(s32);
+    extern char lbl_80416F78[];
+    extern char lbl_80416F90[];
+    INVNodeList *list = (INVNodeList *)arg0;
+    INVNode *prev;
+    s32 i;
+    INVNode *node;
+    INVNode *free;
+
+    list->unkC = lbl_80416F78;
+    list->head = NULL;
+    list->tail = NULL;
+    list->free = NULL;
+    prev = NULL;
+    for (i = 0; i < 64; i++) {
+        node = fn_802D1FC8(0x18);
+        free = list->free;
+        M2C_FIELD(node, char **, 0x14) = lbl_80416F90;
+        node->prev = NULL;
+        node->next = NULL;
+        node->unk8 = 0x4B;
+        node->unkC = 0;
+        node->unk10 = 0;
+        if (free == NULL) {
+            list->free = node;
+        } else {
+            prev->next = node;
+            node->prev = prev;
+        }
+        prev = node;
+    }
+    return (s32)arg0;
+}
+
 void fn_801DBDCC(void *arg0, s32 arg1) {
     extern u8 lbl_80416F78[];
     void fn_802D20E8(void *);
@@ -2378,16 +2413,13 @@ void fn_80205AE0(void *arg0, void *arg1) {
     s32 *sp14;
     s32 val;
     fn_80205CF8(arg0, M2C_FIELD(arg0, u8 *, 0x8C1), sp8, &sp10);
-    switch (sp10) {
-    case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8:
-    case 12: case 13: case 14:
+    if ((sp10 > 11 || sp10 < 9) && (u32)sp10 <= 14) {
         fn_8016CD4C(&sp14, sp8[0]);
         val = 0;
         if (sp14 != 0) {
             val = *sp14;
         }
         fn_800F8178(arg1, val);
-        break;
     }
 }
 
