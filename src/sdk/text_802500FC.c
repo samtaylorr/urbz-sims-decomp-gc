@@ -349,12 +349,14 @@ void fn_8025AE94(void) {
     PPCHalt();
 }
 
+#pragma push
+#pragma inline_depth(0)
 void fn_8025AEB4(void *arg0) {
     fn_80258534(arg0);
     M2C_FIELD(arg0, s32 *, 8) = 0;
     M2C_FIELD(arg0, s32 *, 0xC) = 0;
 }
-#pragma auto_inline reset
+#pragma pop
 void fn_8025B090(void *arg0) {
     typedef struct Mtx_ {
         s32 queue[2];
