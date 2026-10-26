@@ -7911,7 +7911,7 @@ Vec4f *fn_803B96B0(Vec4f *v, const Vec4f *src, f32 s) {
 }
 
 void *fn_803B96E8(void) {
-    M2C_UNK fn_802D1FC8(M2C_UNK);
+    void *fn_802D1FC8(u32);
     extern u8 lbl_804194A0[];
     void **p = (void **)fn_802D1FC8(4);
     *p = lbl_804194A0;
