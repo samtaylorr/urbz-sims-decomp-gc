@@ -4408,18 +4408,17 @@ void fn_800EECC4(s32 arg0, s32 arg1, s32 arg2) {
     fn_800EC848(arg0, arg1, arg2, var_r6);
 }
 
-void fn_800EC49C(s32 arg0, s32 arg1, s32 arg2, s32 arg3);
+void fn_800EC8E0(s32, s32, s32, s32);
 void fn_800EED94(s32 arg0, void **arg1, s32 arg2) {
-    fn_800EC49C(arg0, (s32)fn_800EAFCC(arg1), arg2, fn_800EF6F8(arg1));
+    fn_800EC8E0(arg0, (s32)fn_800EAFCC(arg1), arg2, fn_800EF6F8(arg1));
 }
 
-void fn_800EC8E0(void);
 void fn_800EEDEC(void) {
-    fn_800EC8E0();
+    fn_800EC8E0(0, 0, 0, 0);
 }
 
 void fn_800EEE0C(s32 arg0, const char *arg1, s32 arg2) {
-    fn_800EC49C(arg0, (s32)arg1, arg2, arg1 ? fn_80248808(arg1) : 0);
+    fn_800EC8E0(arg0, (s32)arg1, arg2, arg1 ? fn_80248808(arg1) : 0);
 }
 
 s32 fn_800EEF1C(s32 arg0, s32 arg1, u32 arg2, u32 arg3) {
