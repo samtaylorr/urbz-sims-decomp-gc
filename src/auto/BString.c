@@ -4452,7 +4452,8 @@ void fn_800EED94(s32 arg0, void **arg1, s32 arg2) {
 }
 
 void fn_800EEDEC(void) {
-    fn_800EC8E0(0, 0, 0, 0);
+    void fn_800EC8E0();
+    fn_800EC8E0();
 }
 
 void fn_800EEE0C(s32 arg0, const char *arg1, s32 arg2) {
