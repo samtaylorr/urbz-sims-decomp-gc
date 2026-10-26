@@ -3040,7 +3040,7 @@ s32 fn_8021BEF0(void *arg0) {
 }
 
 void fn_802200F8(void *arg0, s32 arg1) {
-    extern void fn_801D7CDC(void *, s32);
+    extern s32 fn_801D7CDC(void **, s32);
     extern s32 fn_801D8B40(void *, void *);
     extern void fn_801D9014(void *, void *);
     extern void fn_801D94DC(void *, void *);
