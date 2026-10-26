@@ -4334,12 +4334,14 @@ u32 fn_800EE83C(void **arg0, u8 arg1, u32 arg2) {
     return arg2 < fn_800EF6F8(arg0) ? arg2 : -1;
 }
 
+void fn_800EC59C(s32, s32, s32, s32);
+void fn_800EC6BC(s32, s32, s32, s32);
 void fn_800EE8C4(s32 arg0, void **arg1, s32 arg2) {
     fn_800EC59C(arg0, (s32)fn_800EAFCC(arg1), arg2, fn_800EF6F8(arg1));
 }
 
 void fn_800EE91C(void) {
-    fn_800EC59C();
+    fn_800EC59C(0, 0, 0, 0);
 }
 
 void fn_800EE93C(s32 arg0, const char *arg1, s32 arg2) {
@@ -4347,7 +4349,7 @@ void fn_800EE93C(s32 arg0, const char *arg1, s32 arg2) {
 }
 
 void fn_800EEAC4(void) {
-    fn_800EC6BC();
+    fn_800EC6BC(0, 0, 0, 0);
 }
 
 void fn_800EEA6C(s32 arg0, void **arg1, s32 arg2) {
