@@ -186,6 +186,14 @@ s32 fn_802C6EEC(char **arg0, s32 arg1) {
     return -1;
 }
 
+char **fn_802C7204(char **arg0, s32 arg1) {
+    extern char lbl_803F009C[];
+    s32 fn_80245BB4(char *, const char *, ...);
+    fn_80245BB4(*arg0, lbl_803F009C, arg1);
+    (*arg0)[M2C_FIELD(arg0, s32 *, 4) - 1] = 0;
+    return arg0;
+}
+
 void fn_802C725C(u8 **arg0, s32 arg1, u8 arg2) {
     u8 *var_r3;
     u8 var_r0;
