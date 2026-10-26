@@ -7088,8 +7088,10 @@ void fn_803B910C(s32 *self, s32 n) {
 }
 
 void fn_803B9128(s32 *self) {
-    fn_803B910C(self, self[1]);
-    fn_802D1A00(fn_802D0AB8(), self[0]);
+    void *p;
+    fn_803B910C((s32 *)self[0], self[1]);
+    p = (void *)self[0];
+    fn_802D1A00(fn_802D0AB8(), p);
     fn_803B90C8(self);
 }
 
@@ -8700,6 +8702,20 @@ void fn_803BEDE0(s32 self, s32 flags) {
     if (flags & 1) {
         fn_802D20E8(self);
     }
+}
+
+void fn_803BEE20(s32 **self) {
+    s32 n = (s32)self[1];
+    s32 *p = self[0];
+
+    while (n--) {
+        void *obj = (void *)*p++;
+        char *vt = *(char **)obj;
+        s16 delta = *(s16 *)(vt + 0x8);
+        void (*fn)(void *) = *(void (**)(void *))(vt + 0xC);
+        fn((char *)obj + delta);
+    }
+    fn_803BED94((s32)self);
 }
 
 void fn_803BF0C0(s32 *self, s32 n) {
