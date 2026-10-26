@@ -3710,6 +3710,10 @@ void fn_800EA7F8(u64 *arg0, s32 arg1) {
     *arg0 |= (u64)1 << arg1;
 }
 
+void fn_800EA84C(s32 arg0, s32 arg1) {
+    *(u64 *)arg0 &= ~((u64)1 << arg1);
+}
+
 Bits64 *fn_800EA8A8(Bits64 *self, Bits64 *other) {
     self->bits |= other->bits;
     return self;
