@@ -3725,9 +3725,7 @@ extern u64 fn_8024E114(u32 hi, u32 lo, s32 shift);
 extern u64 fn_8024E154(u32 hi, u32 lo, s32 shift);
 
 Bits64 *fn_800EA920(Bits64 *self, s32 shift) {
-    u32 *p = (u32 *)self;
-    u64 val = fn_8024E114(p[0], p[1], shift);
-    self->bits = val;
+    self->bits <<= shift;
     return self;
 }
 
