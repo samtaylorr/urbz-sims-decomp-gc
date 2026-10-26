@@ -927,6 +927,8 @@ void *fn_802CCDC8(void *arg0, u32 arg1) {
 }
 
 s32 fn_802CD218(void *self, s32 key) {
+    void *fn_802CD440(void *, s32, s32);
+    void fn_802CD260(void *, void *);
     void *node = fn_802CD440(self, key, 0);
     if (node != NULL) {
         fn_802CD260(self, node);
