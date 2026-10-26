@@ -7367,7 +7367,11 @@ void fn_803B9C58(s32 *self, s32 n) {
 void fn_803B9CA4(s32 *dst, s32 *src, s32 n) {
     extern void fn_802D3CE4(s32 *, s32);
     while (--n != -1) {
-        fn_802D3CE4(dst++, *src++);
+        s32 *d = dst;
+        s32 *s = src;
+        src++;
+        dst++;
+        fn_802D3CE4(d, *s);
     }
 }
 
@@ -7376,7 +7380,11 @@ void fn_803B9E84(s32 *dst, s32 *src, s32 n) {
     dst += n - 1;
     src += n - 1;
     while (--n != -1) {
-        fn_802D3CE4(dst--, *src--);
+        s32 *d = dst;
+        s32 *s = src;
+        dst--;
+        src--;
+        fn_802D3CE4(d, *s);
     }
 }
 
@@ -7450,13 +7458,12 @@ void fn_803BA4A0(s32 self, s32 flags) {
 }
 
 void fn_803BA4E0(s32 self) {
-    s32 i = M2C_FIELD(self, s32 *, 4);
+    s32 n = M2C_FIELD(self, s32 *, 4);
     s32 *p = M2C_FIELD(self, s32 **, 0);
 
-    while (i != 0) {
+    while (n--) {
         fn_802D1A00(fn_802D0AB8(), *p);
         p++;
-        i--;
     }
     fn_803BA454(self);
 }
