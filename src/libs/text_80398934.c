@@ -1441,6 +1441,24 @@ void fn_8039DBE0(void *arg0, f32 farg0) {
     M2C_FIELD(arg0, s32 *, 4) = (s32) (M2C_FIELD(arg0, s32 *, 4) & 0xFFFFFFFD);
 }
 
+f32 fn_8039DBF4(void *arg0) {
+    char *vt = M2C_FIELD(arg0, char **, 0x1C);
+    ((void (*)(void *))M2C_FIELD(vt, void **, 0x2C))((char *)arg0 + M2C_FIELD(vt, s16 *, 0x28));
+    return M2C_FIELD(arg0, f32 *, 0x18);
+}
+
+void fn_8039DC38(void *arg0, s32 arg1) {
+    extern u8 lbl_8040B118[];
+    void fn_8039DC8C();
+
+    M2C_FIELD(arg0, u8 **, 0x1C) = lbl_8040B118;
+    fn_8039DC8C(arg0);
+    fn_8039DAD8(arg0);
+    if (arg1 & 1) {
+        fn_802D20E8(arg0);
+    }
+}
+
 void fn_8039DC8C(void) {
 
 }
@@ -2532,13 +2550,9 @@ void fn_803A2EA8(void *arg0, u32 n) {
             }
             tmp = mem;
         }
-        {
-            Pair *newFinish = (Pair *)(oldSize * 8 + (s32)tmp);
-            Pair *newEos = (Pair *)(n * 8 + (u32)tmp);
-            v->eos = newEos;
-            v->start = tmp;
-            v->finish = newFinish;
-        }
+        v->finish = (Pair *)(oldSize * 8 + (s32)tmp);
+        v->eos = (Pair *)(n * 8 + (u32)tmp);
+        v->start = tmp;
     }
 }
 
