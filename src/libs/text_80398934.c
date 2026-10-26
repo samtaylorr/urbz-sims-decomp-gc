@@ -1302,6 +1302,32 @@ s32 *fn_8039D388(s32 *self, s32 *other) {
     return self;
 }
 
+void fn_8039D3D4(void **v, u32 n) {
+    void **start = (void **)v[0];
+    if ((u32)((void **)v[3] - start) < n) {
+        void **finish = (void **)v[1];
+        s32 size = finish - start;
+        void **tmp;
+        if (start != NULL) {
+            tmp = n != 0 ? (void **)PtrVec_Allocate(n * 4) : NULL;
+            if (finish != start) {
+                fn_8024839C(tmp, start, (char *)finish - (char *)start);
+            }
+            {
+                void **s = (void **)v[0];
+                u32 cnt = (void **)v[3] - s;
+                if (s != NULL) {
+                    PtrVec_Deallocate(s, cnt * 4);
+                }
+            }
+        } else {
+            void *p = n != 0 ? PtrVec_Allocate(n * 4) : NULL;
+            tmp = (void **)p;
+        }
+        PtrVec_Set(v, tmp, tmp + size, tmp + n);
+    }
+}
+
 void fn_8039D8D8(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x38) = (s32) (M2C_FIELD(arg0, s32 *, 0x38) | 0x10000000);
 }
