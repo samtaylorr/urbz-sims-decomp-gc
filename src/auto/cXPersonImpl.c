@@ -20,6 +20,26 @@ static inline cXPersonImpl_Entry *cXPersonImpl_EntryVec_At(cXPersonImpl_EntryVec
     return &v->begin[i];
 }
 
+typedef struct cXPersonImpl_QEntry {
+    u8 pad0[0x28];
+    s32 unk28;
+    u8 pad2C[0x2C];
+} cXPersonImpl_QEntry;
+
+typedef struct cXPersonImpl_Queue {
+    cXPersonImpl_QEntry items[10];
+    u32 head;
+    u32 tail;
+} cXPersonImpl_Queue;
+
+static inline u32 cXPersonImpl_Queue_Size(cXPersonImpl_Queue *q) {
+    return q->tail - q->head;
+}
+
+static inline cXPersonImpl_QEntry *cXPersonImpl_Queue_At(cXPersonImpl_Queue *q, u32 i) {
+    return &q->items[(q->head + i) % 10U];
+}
+
 extern s32 lbl_80495C94;
 extern void fn_800F1A60(s32, s32);
 void fn_80176558(void) {
@@ -98,18 +118,28 @@ s32 fn_80181A20(void *arg0) {
 
 s32 fn_80181F1C(void *arg0, s32 arg1) {
     struct Entry { u8 pad[0x28]; s32 id; u8 pad2[0x2C]; };
-    struct Queue { struct Entry items[10]; u32 head; u32 tail; } *q;
+    u8 *list;
     u32 start;
     u32 i;
+    u32 head;
+    u32 n;
     start = 0;
     if (M2C_FIELD(arg0, s32 *, 0x5FC) != 0) {
         start = 1;
     }
-    q = (struct Queue *)((u8 *)arg0 + 0x130);
-    for (i = start; i < q->tail - q->head; i++) {
-        if (q->items[(q->head + i) % 10U].id == arg1) {
-            return 1;
-        }
+    list = (u8 *)arg0 + 0x130;
+    i = start;
+    head = M2C_FIELD(list, u32 *, 0x370);
+    n = M2C_FIELD(list, u32 *, 0x374) - head;
+    if (i < n) {
+        u32 h = head;
+        u32 cnt = n;
+        do {
+            if (((struct Entry *)list)[(h + i) % 10U].id == arg1) {
+                return 1;
+            }
+            i++;
+        } while (i < cnt);
     }
     return 0;
 }
