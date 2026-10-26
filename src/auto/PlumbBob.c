@@ -1275,7 +1275,7 @@ void fn_8008C160(void *arg0, s32 arg1) {
 void fn_8008C3A8();
 
 void fn_8008C388(void) {
-    fn_8008C3A8(0);
+    fn_8008C3A8();
 }
 
 void fn_8008C3A8(void *arg0) {
