@@ -1852,6 +1852,35 @@ void fn_8039FE84(void **self, s32 flags) {
     }
 }
 
+void fn_803A044C(void *self) {
+    extern void fn_803997AC(void *, u32);
+    struct LNode {
+        struct LNode *next;
+        struct LNode *prev;
+        s32 unk8;
+        char *obj;
+    } **list = (struct LNode **)self;
+    struct LNode *n;
+    struct LNode *cur;
+
+    n = list[1]->next;
+    while (n != list[1]) {
+        char *obj;
+        cur = n;
+        obj = cur->obj;
+        n = n->next;
+        if (obj != NULL) {
+            char *vt = *(char **)obj;
+            (*(void (**)(void *))(vt + 0x1C))(obj + *(s16 *)(vt + 0x18));
+        }
+        if (cur != NULL) {
+            fn_803997AC(cur, 0x14);
+        }
+    }
+    list[1]->next = list[1];
+    list[1]->prev = list[1];
+}
+
 void fn_803A04E0(s32 arg0, void *arg1) {
     void *temp_r30;
     void *var_r31;
@@ -7242,12 +7271,37 @@ void fn_803B8CEC(void) {
 
 }
 
+s32 fn_803B8CF0(void *arg0, void *arg1, s32 *arg2, void *arg3) {
+    extern void *lbl_80443310[];
+    extern void fn_803B6F28(void *);
+    extern void fn_802B4ADC(void *, void *);
+    extern void fn_803B6F94(void *, s32);
+    s32 tmp[3];
+    s32 a;
+    fn_803B6F28(tmp);
+    fn_802B4ADC(arg3, tmp);
+    a = fn_803B8EE4(arg2);
+    ((void (*)(s32, s32))lbl_80443310[15])(a, fn_803B8EF0(tmp));
+    fn_803B6F94(tmp, 2);
+    return 1;
+}
+
 s32 fn_803B8D70(void) {
     return 0;
 }
 
 s32 fn_803B8D78(void) {
     return 0;
+}
+
+void fn_803B8D80(void *arg0, s32 arg1) {
+    extern char lbl_80418C70[];
+    extern void fn_802B709C(void *, s32);
+    M2C_FIELD(arg0, void **, 4) = lbl_80418C70;
+    fn_802B709C(arg0, 0);
+    if (arg1 & 1) {
+        ((void (*)(void *, s32))lbl_80443318[0])(arg0, 8);
+    }
 }
 
 void fn_803B8DE0(void) {
