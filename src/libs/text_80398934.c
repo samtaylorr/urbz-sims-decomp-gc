@@ -8570,6 +8570,18 @@ void fn_803BE780(void) {
     fn_80310774();
 }
 
+void fn_803BEB44(u8 *self, s32 flags) {
+    extern u8 lbl_8041C628[];
+    void fn_8036B904(void *, s32);
+    void fn_8036BAF0(void *);
+
+    *(u8 **)(self + 0x5C) = lbl_8041C628;
+    fn_8036B904(self, 0);
+    if (flags & 1) {
+        fn_8036BAF0(self);
+    }
+}
+
 extern u8 lbl_8041C9A8[];
 void fn_803BEB94(void **self, s32 flags) {
     *self = lbl_8041C9A8;
