@@ -7101,6 +7101,18 @@ void fn_803B9174(s32 self, s32 flags) {
     }
 }
 
+void fn_803B93E8(void *dst, void *src, s32 n) {
+    struct Elem20 { s32 a, b, c, d, e; };
+    struct Elem20 *d = (struct Elem20 *)dst;
+    struct Elem20 *s = (struct Elem20 *)src;
+
+    d += n - 1;
+    s += n - 1;
+    while (--n != -1) {
+        *d-- = *s--;
+    }
+}
+
 void fn_803B9444(void *, s32, s32, s32);
 void fn_803B9520(void *self, s32 arg1) {
     fn_803B9444(self, arg1, M2C_FIELD(self, s32 *, 4), 1);
@@ -7137,6 +7149,16 @@ extern void fn_8039A514(void *);
 void *fn_803B95CC(void *self) {
     fn_8039A514(self);
     return self;
+}
+
+void fn_803B95FC(s32 self) {
+    s32 *p = (s32 *)self;
+    void *ptr;
+
+    fn_8039A4F8((s32 *)p[0], p[1]);
+    ptr = (void *)p[0];
+    fn_802D1A00(fn_802D0AB8(), ptr);
+    fn_8039A514(p);
 }
 
 extern void fn_803B95FC(s32);
@@ -7249,6 +7271,13 @@ void fn_803B981C(void *self) {
     ((s32 *)self)[1] = 0;
 }
 
+void fn_803B9830(s32 self) {
+    s32 *p = (s32 *)self;
+    fn_803B9800((s32 *)p[0], p[1]);
+    fn_802D1A00(fn_802D0AB8(), (void *)p[0]);
+    fn_803B981C(p);
+}
+
 extern void fn_803B9830(s32);
 void fn_803B987C(s32 self, s32 flags) {
     fn_803B9830(self);
@@ -7307,6 +7336,14 @@ void fn_803B9AF4(void *self, s32 arg1, s32 arg2, s32 arg3) {
 void fn_803B9AF4(void *, s32, s32, s32);
 void fn_803B9BCC(void *self, s32 arg1) {
     fn_803B9AF4(self, arg1, M2C_FIELD(self, s32 *, 4), 1);
+}
+
+void fn_803B9BF4(s32 *self, s32 n) {
+    extern void fn_802D39F0(s32 *, s32);
+    while (--n != -1) {
+        fn_802D39F0(self, *self);
+        self++;
+    }
 }
 
 extern void fn_803B9C44(void *);
