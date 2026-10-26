@@ -321,22 +321,29 @@ void fn_8025AD58(void) {
     fn_8025AD78();
 }
 
+#pragma push
 #pragma scheduling off
+#pragma peephole off
 void fn_8025AD78(void) {
-    __init_cpp();
+    void (**ctor)(void);
+
+    for (ctor = lbl_80401390; *ctor; ctor++) {
+        (*ctor)();
+    }
 }
-#pragma scheduling reset
+#pragma pop
 void fn_8025AE20(void) {
     M2C_UNK fn_8025AE94();
     fn_8025AE94();
 }
 
-void fn_8025AE40(void) {
+void fn_8025AE40(s32 status) {
     void fn_8025AE94(void);
     __fini_cpp();
     fn_8025AE94();
 }
-
+#pragma peephole reset
+#pragma scheduling reset
 void fn_8025AE94(void) {
     M2C_UNK PPCHalt();
     PPCHalt();
@@ -1012,7 +1019,7 @@ void fn_8026561C(void) {
 
 void fn_80265C40(void) {
     extern DVDCommandListEntry lbl_80442A48[];
-    extern s32 lbl_80495F84;
+    extern volatile s32 lbl_80495F84;
     void fn_80265D98(void *, u32, u32, void *);
     void fn_80266358(u32, void *);
     s32 n = lbl_80495F84;
@@ -1046,6 +1053,15 @@ void fn_80265CC4(void *alarm, void *context) {
     fn_802528A4(context);
 }
 
+void fn_80265D34(s64 timeout) {
+    extern u8 lbl_80442AB0[];
+    void fn_80251224(void *, s64, void *);
+    void fn_80265CC4(void *, void *);
+
+    fn_80250FC4(lbl_80442AB0);
+    fn_80251224(lbl_80442AB0, timeout, fn_80265CC4);
+}
+#pragma dont_inline reset
 s32 fn_80265EA8(void) {
     u8 *fn_802649F0(void);
     if (fn_802649F0()[8]) {
