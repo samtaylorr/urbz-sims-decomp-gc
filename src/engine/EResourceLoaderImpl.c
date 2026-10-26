@@ -134,6 +134,20 @@ void fn_8031DBA0(char *self) {
     ERMLock_Unlock(&lock);
 }
 
+void fn_8031DC2C(char *self, s32 key) {
+    void *fn_8031D910(void *, s32);
+    void fn_80336D24(void *);
+    ERMLock lock;
+    void *res;
+
+    ERMLock_Lock(&lock, self + 0x360);
+    res = fn_8031D910(self, key);
+    if (res != NULL) {
+        fn_80336D24(res);
+    }
+    ERMLock_Unlock(&lock);
+}
+
 void fn_8031DDBC(void *arg0) {
     M2C_UNK fn_80337F84(void *);
     void *var_r31;
