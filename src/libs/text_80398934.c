@@ -7866,13 +7866,11 @@ void *fn_803BB9CC(void *self) {
 
 void fn_803BB9FC(u8 *p, s32 n) {
     extern void fn_802D39E4(void *);
-    u8 *q = p + 4;
-    u8 *r = p + 0xb4;
     while (--n != -1) {
-        fn_803BB9CC(q);
-        fn_802D39E4(r);
-        q += 0xb8;
-        r += 0xb8;
+        u8 *q = p;
+        p += 0xb8;
+        fn_803BB9CC(q + 4);
+        fn_802D39E4(q + 0xb4);
     }
 }
 
