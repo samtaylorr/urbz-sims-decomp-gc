@@ -349,6 +349,22 @@ void fn_8025F7F4(void) {
     fn_8025F710(lbl_80495EA0);
 }
 
+u32 fn_8025F8B4(u8 bit) {
+    extern u32 *lbl_80495EA8;
+    return lbl_80495EA8[1] & (1 << bit);
+}
+
+void fn_8025F8D0(u8 bit, s32 enable) {
+    extern u32 *lbl_80495EA8;
+    u32 mask = 1 << bit;
+
+    if (enable) {
+        lbl_80495EA8[1] |= mask;
+    } else {
+        lbl_80495EA8[1] &= ~mask;
+    }
+}
+
 void fn_8025F914(s32 arg0) {
     extern s32 *lbl_80495EA8;
     *lbl_80495EA8 = arg0;
