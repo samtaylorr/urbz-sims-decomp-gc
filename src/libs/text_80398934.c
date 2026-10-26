@@ -1908,13 +1908,13 @@ SearchEntry8 *fn_803A053C(SearchEntry8 *lo, SearchEntry8 *hi, s32 key) {
             return 0;
         }
         if (n == 1) {
-            if ((s16)lo->value == key) {
+            if (*(s16 *)&lo->value == key) {
                 return lo;
             }
             return 0;
         }
         mid = lo + n / 2;
-        d = key - (s16)mid->value;
+        d = key - *(s16 *)&mid->value;
         if (d == 0) {
             return mid;
         }
