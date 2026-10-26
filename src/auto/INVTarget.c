@@ -1391,7 +1391,7 @@ void fn_801DE594(void *arg0, s32 arg1) {
 }
 
 void fn_801DECDC(void *arg0, s32 arg1) {
-    extern void fn_801D7CDC(void *, s32);
+    extern s32 fn_801D7CDC(void **, s32);
     extern s32 fn_801D8B40(void *, void *);
     extern void fn_801D9014(void *, void *);
     extern void fn_801D94DC(void *, void *);
