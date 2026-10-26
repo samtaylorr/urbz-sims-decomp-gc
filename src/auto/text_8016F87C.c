@@ -208,8 +208,8 @@ s32 fn_801749B4(s32 *self, s32 count, s32 arg2) {
         for (i = 0; i < self[1]; i++) {
             ((s32 *)self[3])[i] = 0;
         }
-        self[0] = 1;
     }
+    self[0] = 1;
     return 1;
 }
 
