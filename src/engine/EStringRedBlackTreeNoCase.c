@@ -832,6 +832,7 @@ void fn_8036A180(void *arg0) {
 void fn_8036A1F4(EMat4Node **list) {
     extern void *fn_802D0AB8(void);
     extern void fn_802D1A00(void *, void *);
+    extern void fn_8036A180(void *);
     void *n;
 
     for (n = *list; EStrNode_Valid(n); n = M2C_FIELD(n, void **, 4)) {
