@@ -1492,7 +1492,7 @@ f32 fn_801DF514(s32 arg0) {
     extern u8 *lbl_80494618;
     extern f32 lbl_803E1350[];
 
-    return lbl_80494618 != 0 ? M2C_FIELD(lbl_80494618, f32 *, 0xA0 + arg0 * 4) : lbl_803E1350[0];
+    return lbl_80494618 != 0 ? ((f32 *)(lbl_80494618 + 0xA0))[arg0] : lbl_803E1350[0];
 }
 
 s32 fn_801DF724(void **arg0) {
@@ -2657,7 +2657,7 @@ u8 fn_80207074(void *arg0) {
 }
 
 void fn_802076D4(void *arg0, s32 arg1) {
-    extern void fn_801D7CDC(void *, s32);
+    extern s32 fn_801D7CDC(void **, s32);
     extern s32 fn_801D8B40(void *, void *);
     extern void fn_801D9014(void *, void *);
     extern void fn_801D94DC(void *, void *);
