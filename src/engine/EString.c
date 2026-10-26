@@ -8,8 +8,39 @@ static inline s32 *EString_Init(s32 *s, char *str) {
     return s;
 }
 
+static inline s32 *EString_Concat(s32 *s, char *a, char *b) {
+    s32 *fn_802D3928(s32 *, char *, char *);
+    fn_802D3928(s, a, b);
+    return s;
+}
+
+static inline s32 *EString_Left(s32 *s, s32 *src, s32 n) {
+    void fn_802D40E4(s32 *, s32 *, s32);
+    fn_802D40E4(s, src, n);
+    return s;
+}
+
 s32 fn_802D32A0(void) {
     return 0;
+}
+
+s32 fn_802D3340(void *arg0, u16 *arg1) {
+    void *vt;
+    s32 n;
+    u16 c;
+
+    n = 0;
+    while (*arg1 != 0) {
+        vt = M2C_FIELD(arg0, void **, 0x18);
+        c = *arg1;
+        n++;
+        M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x38), &c, 2);
+        arg1++;
+    }
+    vt = M2C_FIELD(arg0, void **, 0x18);
+    c = 0;
+    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x38), &c, 2);
+    return n + 1;
 }
 
 void *fn_802D34B0(void *arg0, f32 *arg1) {
@@ -413,7 +444,7 @@ s32 *fn_802D41A8(s32 *arg0, char *arg1) {
     s32 tmp;
     s32 *p = &tmp;
 
-    fn_802D3928(p, (char *)*arg0, arg1);
+    fn_802D3928(&tmp, (char *)*arg0, arg1);
     fn_802D3CE4(arg0, (char *)tmp);
     fn_802D39F0(p, tmp);
     return arg0;
@@ -673,13 +704,12 @@ s32 *fn_802D4A90(s32 *arg0, s32 arg1) {
     s8 *p;
 
     p = (s8 *)*arg0;
-    if (*p == arg1) {
-        start = p;
-        for (p++; *p == arg1; p++) {
-        }
-        if (p != start) {
-            fn_802D3CE4(arg0, (char *)p);
-        }
+    start = p;
+    while (*p == arg1) {
+        p++;
+    }
+    if (p != start) {
+        fn_802D3CE4(arg0, (char *)p);
     }
     return arg0;
 }
@@ -696,6 +726,7 @@ s32 *fn_802D4B44(s32 *arg0, s32 arg1) {
     s32 *fn_802D40E4(s32 *, s32 *, s32);
     char *fn_80248640(char *, char *);
     s32 sp8;
+    s32 *p;
     s32 len;
     s32 i;
 
@@ -707,9 +738,10 @@ s32 *fn_802D4B44(s32 *arg0, s32 arg1) {
             }
         }
         if (i != len) {
+            p = &sp8;
             fn_802D40E4(&sp8, arg0, i);
             fn_802D3CE4(arg0, (char *)sp8);
-            fn_802D39F0(&sp8, sp8);
+            fn_802D39F0(p, sp8);
         }
     }
     return arg0;
