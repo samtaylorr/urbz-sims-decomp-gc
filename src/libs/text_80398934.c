@@ -10,11 +10,6 @@ typedef struct {
 
 extern u8 lbl_8041CFA8[];
 
-static inline void Stream_WriteS32(u8 *self, s32 v) {
-    u8 *vt = *(u8 **)(self + 0x18);
-    (*(void (**)(void *, void *, s32))(vt + 0x3C))(self + *(s16 *)(vt + 0x38), &v, 4);
-}
-
 typedef struct {
     s16 delta;
     s16 index;
@@ -9423,13 +9418,11 @@ void fn_803C0314(s32 self, s32 flags) {
 
 void *fn_803C0354(u8 *self, s32 *arr) {
     extern void fn_80367098(void *, s32);
-    u8 *vt = M2C_FIELD(self, u8 **, 0x18);
-    s32 n;
     s32 count;
     s32 i;
 
-    n = count = arr[1];
-    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)(self + M2C_FIELD(vt, s16 *, 0x38), &n, 4);
+    count = arr[1];
+    Stream_WriteS32(self, count);
     for (i = 0; i < count; i++) {
         fn_80367098(self, arr[0] + i * 0x58);
     }
@@ -9624,5 +9617,11 @@ void fn_803C0D04(void) {
 
 void fn_803C0D24(M2C_UNK **arg0) {
     *arg0 = &lbl_804194A0;
+}
+
+void fn_803C0D34(void *arg0) {
+    extern u8 lbl_8041DE78[];
+    M2C_FIELD(arg0, void **, 0) = lbl_8041DE78;
+    M2C_FIELD(arg0, s32 *, 0x20) = 0;
 }
 
