@@ -2855,7 +2855,7 @@ void fn_802127FC(s32 arg0, s32 arg1) {
 }
 
 void fn_802144A8(void *arg0, s32 arg1) {
-    extern void fn_801D7CDC(void *, s32);
+    extern s32 fn_801D7CDC(void **, s32);
     extern s32 fn_801D8B40(void *, void *);
     extern void fn_801D9014(void *, void *);
     extern void fn_801D94DC(void *, void *);
