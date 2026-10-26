@@ -8,6 +8,10 @@ typedef struct EMat4Node {
     void *value;
 } EMat4Node;
 
+static inline s32 EStrNode_Valid(void *n) {
+    return n != NULL;
+}
+
 
 s32 fn_80364E64(void *arg0) {
     void *temp_r11;
@@ -422,13 +426,14 @@ void *fn_803663B8(void *arg0, void **arg1) {
     s32 more;
     void fn_80365DFC(void *, s32, void *);
     node = *arg1;
-    while (1) {
-        more = 1;
-        if (node == NULL) more = 0;
-        if (!more) break;
+    goto check;
+    do {
         fn_80365DFC(arg0, M2C_FIELD(node, s32 *, 0xC), M2C_FIELD(node, void **, 0x10));
         node = M2C_FIELD(node, void **, 4);
-    }
+check:
+        more = 1;
+        if (node == NULL) more = 0;
+    } while (more);
     return arg0;
 }
 
@@ -465,15 +470,15 @@ void *fn_803664B0(u8 *self) {
     return self;
 }
 
-void *fn_803664FC(u8 *self, void *arg1) {
+void *fn_803664FC(u8 *self, s32 arg1) {
     void fn_802D81B8(void *);
-    void fn_803665B8(void *, void *);
+    void fn_803665B8(void *, s32);
     fn_802D81B8(self);
     fn_802D81B8(self + 0x18);
     *(s32 *)(self + 0x38) = 0;
     fn_803665B8(self, arg1);
-    *(s32 *)(self + 0x48) = 0;
     *(s32 *)(self + 0x44) = 0;
+    *(s32 *)(self + 0x48) = 0;
     return self;
 }
 
