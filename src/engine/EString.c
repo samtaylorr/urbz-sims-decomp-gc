@@ -26,20 +26,29 @@ s32 fn_802D32A0(void) {
 
 s32 fn_802D3340(void *arg0, u16 *arg1) {
     void *vt;
+    void (*f)(void *, void *, s32);
+    void *self;
     s32 n;
     u16 c;
+    u16 *s;
 
     n = 0;
-    while (*arg1 != 0) {
-        vt = M2C_FIELD(arg0, void **, 0x18);
-        c = *arg1;
-        n++;
-        M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x38), &c, 2);
-        arg1++;
+    if (*arg1 != 0) {
+        s = arg1;
+        do {
+            vt = M2C_FIELD(arg0, void **, 0x18);
+            f = M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C);
+            self = (char *)arg0 + M2C_FIELD(vt, s16 *, 0x38);
+            c = *s;
+            n++;
+            f(self, &c, 2);
+        } while (*++s != 0);
     }
     vt = M2C_FIELD(arg0, void **, 0x18);
+    f = M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C);
+    self = (char *)arg0 + M2C_FIELD(vt, s16 *, 0x38);
     c = 0;
-    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x38), &c, 2);
+    f(self, &c, 2);
     return n + 1;
 }
 
@@ -442,11 +451,10 @@ s32 *fn_802D4158(s32 *arg0, s32 *arg1, s32 arg2) {
 s32 *fn_802D41A8(s32 *arg0, char *arg1) {
     void fn_802D39F0(s32 *, s32);
     s32 tmp;
-    s32 *p = &tmp;
+    s32 *p = EString_Concat(&tmp, (char *)*arg0, arg1);
 
-    fn_802D3928(&tmp, (char *)*arg0, arg1);
-    fn_802D3CE4(arg0, (char *)tmp);
-    fn_802D39F0(p, tmp);
+    fn_802D3CE4(arg0, (char *)*p);
+    fn_802D39F0(p, *p);
     return arg0;
 }
 
@@ -704,12 +712,13 @@ s32 *fn_802D4A90(s32 *arg0, s32 arg1) {
     s8 *p;
 
     p = (s8 *)*arg0;
-    start = p;
-    while (*p == arg1) {
-        p++;
-    }
-    if (p != start) {
-        fn_802D3CE4(arg0, (char *)p);
+    if (*p == arg1) {
+        start = p;
+        while (*++p == arg1) {
+        }
+        if (p != start) {
+            fn_802D3CE4(arg0, (char *)p);
+        }
     }
     return arg0;
 }
@@ -723,7 +732,6 @@ s32 *fn_802D4B04(s32 *arg0, s32 arg1) {
 s32 *fn_802D4B44(s32 *arg0, s32 arg1) {
     void fn_802D39F0(s32 *, s32);
     s32 *fn_802D3CE4(s32 *, char *);
-    s32 *fn_802D40E4(s32 *, s32 *, s32);
     char *fn_80248640(char *, char *);
     s32 sp8;
     s32 *p;
@@ -739,9 +747,9 @@ s32 *fn_802D4B44(s32 *arg0, s32 arg1) {
         }
         if (i != len) {
             p = &sp8;
-            fn_802D40E4(&sp8, arg0, i);
-            fn_802D3CE4(arg0, (char *)sp8);
-            fn_802D39F0(p, sp8);
+            fn_802D40E4(p, arg0, i);
+            fn_802D3CE4(arg0, (char *)*p);
+            fn_802D39F0(p, *p);
         }
     }
     return arg0;
