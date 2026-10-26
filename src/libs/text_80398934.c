@@ -8799,6 +8799,15 @@ void *fn_803BF868(void *self) {
     return self;
 }
 
+void fn_803BF898(u8 *p, s32 n) {
+    while (--n != -1) {
+        VtblEntry *vt = *(VtblEntry **)(p + 0x0);
+        u8 *q = p;
+        p += 0x24;
+        ((void (*)(void *, s32))vt[6].pfn)(q + vt[6].delta, 2);
+    }
+}
+
 void fn_803BF8FC(s32 self) {
     extern s32 lbl_8045B0F0[];
     extern void fn_80338184(void *, s32);
