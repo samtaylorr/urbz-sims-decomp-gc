@@ -894,6 +894,62 @@ void fn_8039BECC(s32 *dst, s32 *src, s32 n) {
     }
 }
 
+void fn_8039BEF8(void *self, s32 newSize, s32 cap) {
+    extern void *fn_802D197C(void *, u32, s32);
+    extern void *fn_802DBBCC(void *, u32, s32);
+    extern void *fn_802D0B3C(void);
+    s32 oldSize;
+    s32 *p;
+
+    if (cap == 0) {
+        cap = newSize;
+    }
+    oldSize = M2C_FIELD(self, s32 *, 4);
+    if (newSize < oldSize) {
+        fn_8039BD94(M2C_FIELD(self, s32 **, 0) + newSize, oldSize - newSize);
+    }
+    if (cap == 0) {
+        s32 *old = M2C_FIELD(self, s32 **, 0);
+        fn_802D1A00(fn_802D0AB8(), old);
+        fn_8039BD50(self);
+        return;
+    }
+    if (M2C_FIELD(self, s32 *, 8) != cap) {
+        void *heap = fn_802D0AB8();
+        u32 size = cap * 4;
+        if (size == 0) {
+            p = NULL;
+        } else {
+            void *q = fn_802D197C(heap, size, 4);
+            if (q == NULL && (q = fn_802DBBCC(heap, size, 0)) == NULL && heap == fn_802D0AB8()) {
+                p = fn_802DBBCC(fn_802D0B3C(), size, 0);
+            } else {
+                p = q;
+            }
+        }
+        if (p != NULL) {
+            if (M2C_FIELD(self, s32 **, 0) != NULL) {
+                s32 n = newSize;
+                s32 *old;
+                if (n > M2C_FIELD(self, s32 *, 4)) {
+                    n = M2C_FIELD(self, s32 *, 4);
+                }
+                fn_8039BEB0(p, n);
+                fn_8039BECC(p, M2C_FIELD(self, s32 **, 0), n);
+                fn_8039BD94(M2C_FIELD(self, s32 **, 0), M2C_FIELD(self, s32 *, 4));
+                old = M2C_FIELD(self, s32 **, 0);
+                fn_802D1A00(fn_802D0AB8(), old);
+            }
+            M2C_FIELD(self, s32 **, 0) = p;
+            M2C_FIELD(self, s32 *, 8) = cap;
+        }
+    }
+    M2C_FIELD(self, s32 *, 4) = newSize;
+    if (newSize > oldSize) {
+        fn_8039BEB0(M2C_FIELD(self, s32 **, 0) + oldSize, newSize - oldSize);
+    }
+}
+
 void fn_8039C07C(s32 *dst, s32 *src, s32 n) {
     src += n - 1;
     dst += n - 1;
@@ -2320,6 +2376,83 @@ void fn_803A29E8(void *arg0) {
 
 s32 fn_803A2A0C(s32 *self) {
     return self[2];
+}
+
+void fn_803A2EA8(void *arg0, u32 n) {
+    typedef struct Pair {
+        s32 a;
+        s32 b;
+    } Pair;
+    typedef struct Vec {
+        Pair *start;
+        Pair *finish;
+        s32 unk8;
+        Pair *eos;
+    } Vec;
+    extern void *fn_802D1FC8(u32);
+    extern void *fn_80399BE8(u32);
+    extern void fn_802D20E8(void *);
+    extern void fn_803997AC(void *, u32);
+    Vec *v = arg0;
+
+    if ((u32)(v->eos - v->start) < n) {
+        Pair *start = v->start;
+        Pair *finish = v->finish;
+        s32 oldSize = finish - start;
+        Pair *tmp;
+        u32 bytes;
+
+        if (start != NULL) {
+            Pair *src;
+            Pair *dst;
+            Pair *p;
+            Pair *end;
+            if (n != 0) {
+                bytes = n * sizeof(Pair);
+                if (bytes > 0x80) {
+                    tmp = fn_802D1FC8(bytes);
+                } else {
+                    tmp = fn_80399BE8(bytes);
+                }
+            } else {
+                tmp = NULL;
+                bytes = 0;
+            }
+            dst = tmp;
+            for (src = start; src != finish; src++) {
+                *dst = *src;
+                dst++;
+            }
+            p = v->start;
+            end = v->finish;
+            start = p;
+            for (; p != end; p++) {
+            }
+            if (start != NULL) {
+                u32 size = (v->eos - start) * sizeof(Pair);
+                if (size > 0x80) {
+                    fn_802D20E8(start);
+                } else {
+                    fn_803997AC(start, size);
+                }
+            }
+        } else {
+            if (n != 0) {
+                bytes = n * sizeof(Pair);
+                if (bytes > 0x80) {
+                    tmp = fn_802D1FC8(bytes);
+                } else {
+                    tmp = fn_80399BE8(bytes);
+                }
+            } else {
+                tmp = NULL;
+                bytes = 0;
+            }
+        }
+        v->eos = (Pair *)((u8 *)tmp + bytes);
+        v->start = tmp;
+        v->finish = tmp + oldSize;
+    }
 }
 
 s32 fn_803A3010(void *arg0) {
@@ -4231,6 +4364,23 @@ void fn_803AEC9C(s32 *self, s32 flags) {
     if (flags & 1) {
         fn_802D20E8(self);
     }
+}
+
+void fn_803AF018(s32 *dst, s32 a, s32 b, s32 p, s32 c) {
+    void fn_8031EAB8(s32);
+    void fn_8031EA2C(s32);
+
+    dst[0] = a;
+    dst[1] = b;
+    if (p != 0) {
+        fn_8031EAB8(p);
+    }
+    if (dst[2] != 0) {
+        fn_8031EA2C(dst[2]);
+        dst[2] = 0;
+    }
+    dst[2] = p;
+    dst[3] = c;
 }
 
 void fn_803AF07C(s32 *dst, s32 *src) {
