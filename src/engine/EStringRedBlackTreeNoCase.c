@@ -268,6 +268,18 @@ void **fn_80365D94(void *arg0, u32 key) {
     return (void **)((u8 *)node + 0x10);
 }
 
+void fn_80365DFC(void *arg0, s32 key, void *value) {
+    extern void *fn_80366168(void *, s32, s32);
+    extern void *fn_80365EF8(void *, s32, s32, void *);
+    s32 index = (u32)key % M2C_FIELD(arg0, u32 *, 0xC);
+    void *node = fn_80366168(arg0, index, key);
+    if (node != NULL) {
+        M2C_FIELD(node, void **, 0x10) = value;
+    } else {
+        fn_80365EF8(arg0, index, key, value);
+    }
+}
+
 void fn_80365E6C(void *arg0, s32 arg1, s32 arg2, void *arg3, s32 arg4) {
     extern void *fn_80366168(void *, s32, s32);
     extern void *fn_80365EF8(void *, s32, s32, void *);
@@ -434,18 +446,19 @@ void fn_80366328(void *arg0, s32 arg1) {
 
 void *fn_803663B8(void *arg0, void **arg1) {
     void *node;
+    void *ret;
     s32 more;
     void fn_80365DFC(void *, s32, void *);
     node = *arg1;
-    goto check;
-    do {
-        fn_80365DFC(arg0, M2C_FIELD(node, s32 *, 0xC), M2C_FIELD(node, void **, 0x10));
-        node = M2C_FIELD(node, void **, 4);
-check:
+    while (1) {
+        ret = arg0;
         more = 1;
         if (node == NULL) more = 0;
-    } while (more);
-    return arg0;
+        if (!more) break;
+        fn_80365DFC(ret, M2C_FIELD(node, s32 *, 0xC), M2C_FIELD(node, void **, 0x10));
+        node = M2C_FIELD(node, void **, 4);
+    }
+    return ret;
 }
 
 s32 fn_80366414(void *arg0, void **arg1) {
