@@ -335,7 +335,6 @@ s32 fn_80175BCC(s32 arg0, s32 arg1) {
 
 void *fn_80175BDC(void *arg0, s32 arg1) {
     extern char lbl_804122E8[];
-    extern void fn_80174B98(void *, s32, s32);
     M2C_FIELD(arg0, char **, 0xBC) = lbl_804122E8;
     M2C_FIELD(arg0, s32 *, 8) = arg1;
     M2C_FIELD(arg0, u32 *, 0) = 0xABADCAFE;
