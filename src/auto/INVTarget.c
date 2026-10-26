@@ -111,6 +111,29 @@ void fn_801D758C(void) {
     }
 }
 
+void *fn_801D7BE0(void **arg0, s32 arg1) {
+    s32 fn_802486DC(s32, s32);
+    void *var_r31;
+
+    var_r31 = arg0[0];
+    while (var_r31 != NULL && M2C_FIELD(var_r31, s32 *, 8) != arg1 && fn_802486DC(M2C_FIELD(var_r31, s32 *, 8), arg1) != 0) {
+        var_r31 = M2C_FIELD(var_r31, void **, 4);
+    }
+    if (var_r31 != NULL && var_r31 != arg0[0]) {
+        if (var_r31 == arg0[1]) {
+            arg0[1] = M2C_FIELD(var_r31, void **, 0);
+        } else {
+            M2C_FIELD(M2C_FIELD(var_r31, void **, 4), void **, 0) = M2C_FIELD(var_r31, void **, 0);
+        }
+        M2C_FIELD(M2C_FIELD(var_r31, void **, 0), void **, 4) = M2C_FIELD(var_r31, void **, 4);
+        M2C_FIELD(var_r31, void **, 0) = NULL;
+        M2C_FIELD(var_r31, void **, 4) = arg0[0];
+        M2C_FIELD(arg0[0], void **, 0) = var_r31;
+        arg0[0] = var_r31;
+    }
+    return var_r31;
+}
+
 s32 fn_801D7D3C(void **arg0, s32 arg1) {
     void *fn_801D7BE0(void **, s32);
     return fn_801D7BE0(arg0, arg1) != 0;
