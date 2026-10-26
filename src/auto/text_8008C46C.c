@@ -3,13 +3,6 @@
 
 typedef struct { s32 x, y, z; } Vec3i;
 
-static inline s32 Obj_IsActive(void *obj) {
-    return M2C_FIELD(obj, s32 *, 0x334) != 0;
-}
-
-static inline void Obj_Nop(void) {
-}
-
 void fn_8008CD40(void) {
     fn_803073C4();
 }
@@ -246,10 +239,8 @@ void fn_80094EF4(void *arg0) {
 
 void fn_80094F44(void *arg0, s32 arg1, s32 arg2) {
     M2C_UNK fn_802EC15C(s32, s32, s32);
-    s32 status = M2C_FIELD(M2C_FIELD(arg0, void **, 8), s32 *, 0x334) != 0;
-    switch (status) {
-    case 0:
-        break;
+    if (Obj_IsActive(M2C_FIELD(arg0, void **, 8))) {
+        Obj_Nop();
     }
     fn_802EC15C((s32)M2C_FIELD(arg0, void **, 8) + 0x314, arg2, arg1);
 }
