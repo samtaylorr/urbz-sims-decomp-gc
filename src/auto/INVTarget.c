@@ -1489,10 +1489,10 @@ void fn_801DF0A8(u8 *self, s32 flags) {
 }
 
 f32 fn_801DF514(s32 arg0) {
-    extern u8 *lbl_80494618;
+    extern struct { u8 pad[0xA0]; f32 vals[1]; } *lbl_80494618;
     extern f32 lbl_803E1350[];
 
-    return lbl_80494618 != 0 ? ((f32 *)(lbl_80494618 + 0xA0))[arg0] : lbl_803E1350[0];
+    return lbl_80494618 != 0 ? lbl_80494618->vals[arg0] : lbl_803E1350[0];
 }
 
 s32 fn_801DF724(void **arg0) {
