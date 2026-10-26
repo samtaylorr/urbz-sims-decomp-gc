@@ -4454,6 +4454,20 @@ void fn_800EF048(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     fn_800EC3E4(arg0, arg2, arg1, fn_800EF6F8(arg0) - arg2, arg3);
 }
 
+s32 fn_800EF0A8(s32 arg0, s32 arg1, s32 arg2) {
+    s32 fn_800EC3E4(s32, s32, s32, s32, s32);
+    s32 var_r7;
+    s32 var_r6;
+
+    var_r6 = fn_800EF6F8((void **)arg0) - arg2;
+    if (arg1 != 0) {
+        var_r7 = fn_80248808((const char *)arg1);
+    } else {
+        var_r7 = 0;
+    }
+    return fn_800EC3E4(arg0, arg2, arg1, var_r6, var_r7);
+}
+
 s32 fn_800EF664(s32 arg0, s32 arg1) {
     s32 fn_800EEFC4(s32, s32, s32, s32);
     return fn_800EEFC4(arg0, arg1, 0, -1) == 0;
