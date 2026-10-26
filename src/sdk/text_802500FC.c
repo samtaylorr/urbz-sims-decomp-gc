@@ -1101,7 +1101,7 @@ s32 fn_802668EC(s32 arg0) {
 }
 
 void fn_80266930(void) {
-    extern s32 lbl_80495F60;
+    extern volatile s32 lbl_80495F60;
     __DIRegs[0] |= 0x41;
     lbl_80495F60 = 1;
 }
