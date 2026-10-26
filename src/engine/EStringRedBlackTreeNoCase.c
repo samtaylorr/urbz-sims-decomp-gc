@@ -856,6 +856,13 @@ s32 fn_8036A258(void **arg0) {
     return var_r9;
 }
 
+void *fn_8036A280(void *arg0, void *arg1) {
+    extern void fn_8036A3C0(void *, void *);
+    fn_8036A180(arg0);
+    fn_8036A3C0(arg0, arg1);
+    return arg0;
+}
+
 void fn_8036A73C(void) {
     M2C_UNK fn_8036A6D4(M2C_UNK, M2C_UNK);
     fn_8036A6D4(1, 0xFFFF);
