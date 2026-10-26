@@ -7267,13 +7267,13 @@ void fn_803B8388(s32 *arg0) {
 
 void fn_803B8C04(u16 **arg0) {
     extern void **lbl_80494DA0;
-    extern u16 lbl_803FCE5C;
+    extern u16 lbl_803FCE5C[];
     u16 *p = *arg0;
     if (--*p == 0) {
         ((void (*)(void *))lbl_80494DA0[1])(p);
     }
-    *arg0 = &lbl_803FCE5C;
-    lbl_803FCE5C++;
+    *arg0 = lbl_803FCE5C;
+    lbl_803FCE5C[0]++;
 }
 
 void fn_803B8C70(void) {
