@@ -1865,13 +1865,11 @@ void fn_803A044C(void *self) {
 
     n = list[1]->next;
     while (n != list[1]) {
-        char *obj;
         cur = n;
-        obj = cur->obj;
         n = n->next;
-        if (obj != NULL) {
-            char *vt = *(char **)obj;
-            (*(void (**)(void *))(vt + 0x1C))(obj + *(s16 *)(vt + 0x18));
+        if (cur->obj != NULL) {
+            char *vt = *(char **)cur->obj;
+            (*(void (**)(void *))(vt + 0x1C))(cur->obj + *(s16 *)(vt + 0x18));
         }
         if (cur != NULL) {
             fn_803997AC(cur, 0x14);
@@ -7317,7 +7315,9 @@ s32 fn_803B8CF0(void *arg0, void *arg1, s32 *arg2, void *arg3) {
     extern void fn_803B6F28(void *);
     extern void fn_802B4ADC(void *, void *);
     extern void fn_803B6F94(void *, s32);
-    s32 tmp[3];
+    s32 fn_803B8EE4(s32 *);
+    s32 fn_803B8EF0(s32 *);
+    s32 tmp[2];
     s32 a;
     fn_803B6F28(tmp);
     fn_802B4ADC(arg3, tmp);
