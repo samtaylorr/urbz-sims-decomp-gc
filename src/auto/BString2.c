@@ -407,6 +407,14 @@ void *fn_800F254C(void *arg0, void *arg1, const char *arg2) {
     return arg0;
 }
 
+void fn_800F0BE8(void *, u32, u32, const void *, u32);
+void *fn_800F2B8C(void *arg0, u32 arg1, u32 arg2, void *arg3, u32 arg4) {
+    fn_800F0BE8(arg0,
+        arg2 > (u32)fn_800F4878(arg0) - arg1 ? (u32)fn_800F4878(arg0) - arg1 : arg2,
+        arg1, arg3, arg4);
+    return arg0;
+}
+
 const u16 *fn_800F3304(void **arg0) {
     extern u16 lbl_803D59DC[];
     const u16 *p = BString2_Data(arg0);
