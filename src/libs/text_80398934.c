@@ -1869,6 +1869,34 @@ void fn_803A04E0(s32 arg0, void *arg1) {
     }
 }
 
+SearchEntry8 *fn_803A053C(SearchEntry8 *lo, SearchEntry8 *hi, s32 key) {
+    for (;;) {
+        s32 n = hi - lo;
+        SearchEntry8 *mid;
+        s32 d;
+
+        if (n <= 0) {
+            return 0;
+        }
+        if (n == 1) {
+            if ((s16)lo->value == key) {
+                return lo;
+            }
+            return 0;
+        }
+        mid = lo + n / 2;
+        d = key - (s16)mid->value;
+        if (d == 0) {
+            return mid;
+        }
+        if (d > 0) {
+            lo = mid + 1;
+        } else {
+            hi = mid;
+        }
+    }
+}
+
 extern u8 lbl_8040D458[];
 void fn_803A059C(void **self, s32 flags) {
     *self = lbl_8040D458;
@@ -6975,6 +7003,28 @@ void fn_803B72E0(u8 *arg0, u8 *arg1) {
         p |= 1;
     }
     *(u32 *)(arg0 + 8) = p;
+}
+
+void fn_803B739C(u8 *arg0, u8 *arg1) {
+    u32 p;
+
+    p = *(u32 *)(arg0 + 0xC);
+    p &= ~1;
+    if (arg1 != 0) {
+        (*(void (**)(u8 *))(*(u8 **)(arg1 + 4) + 0xC))(arg1 + *(s16 *)(*(u8 **)(arg1 + 4) + 0x8));
+    }
+    if (p != 0) {
+        (*(void (**)(u8 *))(*(u8 **)(p + 4) + 0x14))((u8 *)p + *(s16 *)(*(u8 **)(p + 4) + 0x10));
+    }
+    if (arg1 == 0) {
+        *(u32 *)(arg0 + 0xC) = (u32)arg1;
+        return;
+    }
+    p = (u32)arg1;
+    if ((*(s32 (**)(u8 *))(*(u8 **)(p + 4) + 0x34))((u8 *)p + *(s16 *)(*(u8 **)(p + 4) + 0x30)) == 1) {
+        p |= 1;
+    }
+    *(u32 *)(arg0 + 0xC) = p;
 }
 
 void fn_802ADE44();
