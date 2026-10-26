@@ -9533,6 +9533,11 @@ void fn_803C08A0(u8 *p, s32 n) {
     }
 }
 
+static inline void Stream_WriteS32(u8 *self, s32 v) {
+    u8 *vt = M2C_FIELD(self, u8 **, 0x18);
+    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)(self + M2C_FIELD(vt, s16 *, 0x38), &v, 4);
+}
+
 void fn_8039A334(void *self, s32 n, s32 arg2);
 s32 *fn_803C08EC(s32 *self, s32 *other);
 s32 *fn_803C08EC(s32 *self, s32 *other) {
