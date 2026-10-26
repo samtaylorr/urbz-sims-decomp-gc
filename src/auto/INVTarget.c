@@ -1095,6 +1095,24 @@ s32 fn_801DBFD4(void **arg0, s32 arg1, s32 arg2) {
     return 0;
 }
 
+s32 fn_801DC030(void *arg0, void *arg1) {
+    void *next;
+    void *var_r4;
+
+    var_r4 = *(void **)arg0;
+    if (var_r4 != NULL) {
+        do {
+            next = M2C_FIELD(var_r4, void **, 4);
+            if (M2C_FIELD(var_r4, void **, 0xC) == arg1) {
+                fn_801DBF38(arg0, var_r4);
+                return 1;
+            }
+            var_r4 = next;
+        } while (var_r4 != NULL);
+    }
+    return 0;
+}
+
 s32 fn_801DC084(void **arg0, s32 arg1) {
     void fn_801DBF38(void **, void *);
     s32 fn_802486DC(s32, s32);
