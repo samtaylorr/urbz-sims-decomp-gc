@@ -2500,7 +2500,13 @@ void fn_80205AE0(void *arg0, void *arg1) {
     s32 *sp14;
     s32 val;
     fn_80205CF8(arg0, M2C_FIELD(arg0, u8 *, 0x8C1), sp8, &sp10);
-    if ((sp10 > 11 || sp10 < 9) && (u32)sp10 <= 14) {
+    switch (sp10) {
+    case 9:
+    case 10:
+    case 11:
+        return;
+    }
+    if ((u32)sp10 <= 14) {
         fn_8016CD4C(&sp14, sp8[0]);
         val = 0;
         if (sp14 != 0) {
@@ -2727,6 +2733,35 @@ s32 fn_8020F990(void) {
         var_r3 = 1;
     }
     return var_r3;
+}
+
+void fn_802127FC(s32 arg0, s32 arg1) {
+    extern u16 lbl_803F6B20[][20];
+    s32 idx;
+    s32 inserted;
+    s32 found;
+    s32 i;
+
+    idx = 1;
+    if (arg0 == 1) {
+        idx = 0;
+    }
+    inserted = 0;
+    found = 0;
+    for (i = 0; i <= 0x13 && !inserted && !found; i++) {
+        if (lbl_803F6B20[idx][i] == arg1) {
+            found = 1;
+        } else if (lbl_803F6B20[idx][i] == 0) {
+            lbl_803F6B20[idx][i] = arg1;
+            inserted = 1;
+        }
+    }
+    if (!found && !inserted) {
+        for (i = 0; i < 0x13; i++) {
+            lbl_803F6B20[idx][i] = lbl_803F6B20[idx][i + 1];
+        }
+        lbl_803F6B20[idx][0x13] = arg1;
+    }
 }
 
 void fn_802144A8(void *arg0, s32 arg1) {
