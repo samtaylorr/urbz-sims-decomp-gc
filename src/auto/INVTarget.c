@@ -2680,8 +2680,8 @@ u8 fn_80207074(void *arg0) {
 void fn_802076D4(void *arg0, s32 arg1) {
     extern s32 fn_801D7CDC(void **, s32);
     extern s32 fn_801D8B40(void *, void *);
-    extern void fn_801D9014(void *, void *);
-    extern void fn_801D94DC(void *, void *);
+    extern s32 fn_801D9014(void *, void *);
+    extern s32 fn_801D94DC(void *, void *);
     extern s32 fn_801DC030(void *, void *);
     extern void fn_801DFA30(void *, void *);
     M2C_UNK fn_802D20E8(s32);
