@@ -1471,7 +1471,7 @@ void fn_8039DC38(void *arg0, s32 arg1) {
     }
 }
 
-void fn_8039DC8C(void) {
+void fn_8039DC8C(void *self) {
 
 }
 
