@@ -1,6 +1,9 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+static inline void DBSetBits(u32 *p, u32 mask) { *p |= mask; }
+static inline void DBClearBits(u32 *p, u32 mask) { *p &= ~mask; }
+
 typedef struct DVDCommandBlock {
     void *next;
     void *prev;
@@ -355,13 +358,13 @@ u32 fn_8025F8B4(u8 bit) {
 }
 
 void fn_8025F8D0(u8 bit, s32 enable) {
-    extern u32 *lbl_80495EA8;
+    extern struct { u32 present; u32 exceptionMask; } *lbl_80495EA8;
     u32 mask = 1 << bit;
 
     if (enable) {
-        lbl_80495EA8[1] |= mask;
+        *(volatile u32 *)&lbl_80495EA8->exceptionMask |= mask;
     } else {
-        lbl_80495EA8[1] &= ~mask;
+        *(volatile u32 *)&lbl_80495EA8->exceptionMask &= ~mask;
     }
 }
 
