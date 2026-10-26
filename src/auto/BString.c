@@ -4401,6 +4401,7 @@ void fn_800EEB5C(s32 arg0, void **arg1, s32 arg2) {
 }
 
 void fn_800EEBD4(s32 arg0, const char *arg1, s32 arg2) {
+    void fn_800EC774(s32, s32, s32, s32);
     fn_800EC774(arg0, (s32)arg1, arg2, arg1 ? fn_80248808(arg1) : 0);
 }
 
