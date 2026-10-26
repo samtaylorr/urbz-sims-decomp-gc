@@ -117,29 +117,18 @@ s32 fn_80181A20(void *arg0) {
 }
 
 s32 fn_80181F1C(void *arg0, s32 arg1) {
-    struct Entry { u8 pad[0x28]; s32 id; u8 pad2[0x2C]; };
-    u8 *list;
+    cXPersonImpl_Queue *q;
     u32 start;
     u32 i;
-    u32 head;
-    u32 n;
     start = 0;
     if (M2C_FIELD(arg0, s32 *, 0x5FC) != 0) {
         start = 1;
     }
-    list = (u8 *)arg0 + 0x130;
-    i = start;
-    head = M2C_FIELD(list, u32 *, 0x370);
-    n = M2C_FIELD(list, u32 *, 0x374) - head;
-    if (i < n) {
-        u32 h = head;
-        u32 cnt = n;
-        do {
-            if (((struct Entry *)list)[(h + i) % 10U].id == arg1) {
-                return 1;
-            }
-            i++;
-        } while (i < cnt);
+    q = (cXPersonImpl_Queue *)((u8 *)arg0 + 0x130);
+    for (i = start; i < cXPersonImpl_Queue_Size(q); i++) {
+        if (cXPersonImpl_Queue_At(q, i)->unk28 == arg1) {
+            return 1;
+        }
     }
     return 0;
 }
