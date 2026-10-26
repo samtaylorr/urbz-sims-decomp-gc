@@ -218,8 +218,8 @@ s32 fn_80174A44(s32 *self) {
     if (self[6] != 0 && self[3] != 0) {
         fn_802D211C(self[3]);
     }
-    self[0] = 0;
     self[3] = 0;
+    self[0] = 0;
     return 1;
 }
 
