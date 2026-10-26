@@ -321,6 +321,14 @@ void fn_8033B664(s32 **arg0) {
     }
 }
 
+extern s32 lbl_803FD2CC[];
+void *fn_8033BB48(s32 a, s32 b, s32 c, s32 d, EyeToyRGB *col) {
+    extern s32 lbl_803FD2CC[];
+    void *fn_80339CE8(s32, s32, s32, s32, s32 *, s32, s32, s32, EyeToyRGB);
+    s32 sum = fn_80339CB4(lbl_803FD2CC, 9);
+    return fn_80339CE8(a, b, c, d, lbl_803FD2CC, sum, 3, 3, *col);
+}
+
 void fn_8033BBCC(void) {
     fn_802D0B3C();
 }
