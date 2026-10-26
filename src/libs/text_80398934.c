@@ -1461,7 +1461,7 @@ f32 fn_8039DBF4(void *arg0) {
 
 void fn_8039DC38(void *arg0, s32 arg1) {
     extern u8 lbl_8040B118[];
-    void fn_8039DC8C();
+    void fn_8039DC8C(void *);
 
     M2C_FIELD(arg0, u8 **, 0x1C) = lbl_8040B118;
     fn_8039DC8C(arg0);
