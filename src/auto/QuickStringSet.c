@@ -124,6 +124,12 @@ void fn_800F6A78(s32 arg0, s32 arg1, s32 arg2) {
     fn_800F68F0(arg0, fn_800F69E8(arg1), arg2);
 }
 
+s32 fn_800F6ABC(s32 *arg0, s32 *arg1) {
+    s32 fn_802486DC(s32, s32);
+    s32 a = fn_800F69E8(arg0);
+    return fn_802486DC(a, fn_800F69E8(arg1));
+}
+
 void fn_800F6F88(u16 *dst, const u8 *src) {
     while (*src != 0) {
         *dst++ = *src++;
