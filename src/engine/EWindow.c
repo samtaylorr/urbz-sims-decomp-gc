@@ -503,7 +503,7 @@ s32 fn_8030A9D0(void) {
 }
 
 void fn_8030A9D8(void) {
-    M2C_UNK fn_8030A638(M2C_UNK, M2C_UNK);
+    void fn_8030A638(s32, s32);
     fn_8030A638(1, 0xFFFF);
 }
 
