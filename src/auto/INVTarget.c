@@ -1069,11 +1069,13 @@ void fn_801DBF38(void **arg0, void *arg1) {
     }
     node->prev = NULL;
     node->next = NULL;
-    if (list->free != NULL) {
+    if (list->free == NULL) {
+        list->free = node;
+    } else {
         node->next = list->free;
         list->free->prev = node;
+        list->free = node;
     }
-    list->free = node;
     list->free->unk8 = 0x4B;
     list->free->unkC = 0;
     list->free->unk10 = 0;
