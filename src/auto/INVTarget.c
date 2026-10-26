@@ -1250,7 +1250,7 @@ void fn_801DD0E0(void *arg0, s32 arg1) {
     extern s32 fn_801D8B40(void *, void *);
     extern void fn_801D9014(void *, void *);
     extern void fn_801D94DC(void *, void *);
-    extern void fn_801DC030(void *, void *);
+    extern s32 fn_801DC030(void *, void *);
     extern void fn_801DFA30(void *, void *);
     M2C_UNK fn_802D20E8(s32);
     extern char lbl_80416FE8[];
@@ -2809,25 +2809,18 @@ void fn_80214DB0(void) {
 }
 
 f32 fn_80214DB4(void *arg0, s32 arg1) {
-    f32 ret;
-
-    if (arg1 < 0) {
-        ret = (f32)(arg1 + 25) / 25.0f * 0.5f;
-    } else {
-        ret = (f32)arg1 / 25.0f * 0.5f + 0.5f;
-    }
-    return ret;
+    return (arg1 >= 0) ? (f32)arg1 / 25.0f * 0.5f + 0.5f : (f32)(arg1 + 25) / 25.0f * 0.5f;
 }
 
 s8 fn_80214E48(f32 arg0) {
-    f32 v;
+    s8 ret;
 
-    if (!(arg0 < 0.5f)) {
-        v = (arg0 - 0.5f) * 2.0f * 25.0f + 0.5f;
+    if (arg0 >= 0.5f) {
+        ret = (arg0 - 0.5f) * 2.0f * 25.0f + 0.5f;
     } else {
-        v = (1.0f - arg0 * 2.0f) * -25.0f;
+        ret = (1.0f - arg0 * 2.0f) * -25.0f;
     }
-    return (s32)v;
+    return ret;
 }
 
 void fn_80214F9C(u8 *arg0) {
