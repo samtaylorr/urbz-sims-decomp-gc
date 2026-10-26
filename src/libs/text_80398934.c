@@ -9617,7 +9617,7 @@ void fn_803C0CDC(void) {
     fn_803C0D34();
 }
 
-void fn_803C0D34(void);
+void fn_803C0D34();
 void fn_803C0D04(void) {
     fn_803C0D34();
 }
