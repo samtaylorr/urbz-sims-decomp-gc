@@ -1019,6 +1019,26 @@ void fn_8026561C(void) {
     }
 }
 
+void fn_80265CC4(void *alarm, void *context) {
+    M2C_UNK fn_80254AC0(M2C_UNK);
+    void fn_80252AAC(void *);
+    void fn_802528A4(void *);
+    extern void (*lbl_80495F48)(s32);
+    void (*cb)(s32);
+    u8 ctx[0x2C8];
+
+    fn_80254AC0(0x400);
+    fn_80252AAC(ctx);
+    fn_802528A4(ctx);
+    cb = lbl_80495F48;
+    lbl_80495F48 = NULL;
+    if (cb != NULL) {
+        cb(0x10);
+    }
+    fn_80252AAC(ctx);
+    fn_802528A4(context);
+}
+
 s32 fn_80265EA8(void) {
     u8 *fn_802649F0(void);
     if (fn_802649F0()[8]) {
