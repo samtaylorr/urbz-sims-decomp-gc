@@ -4306,9 +4306,9 @@ void fn_800EE76C(s32 arg0, void **arg1, s32 arg2) {
 }
 
 void fn_800EC49C(s32, s32, s32, s32);
-void fn_800EC59C();
-void fn_800EC774();
-void fn_800EC6BC();
+void fn_800EC59C(s32, s32, s32, s32);
+void fn_800EC6BC(s32, s32, s32, s32);
+void fn_800EC774(s32, s32, s32, s32);
 void fn_800EE7C4(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     fn_800EC49C(arg0, arg1, arg2, arg3);
 }
@@ -4362,14 +4362,22 @@ void fn_800EEA6C(s32 arg0, void **arg1, s32 arg2) {
     fn_800EC6BC(arg0, (s32)fn_800EAFCC(arg1), arg2, fn_800EF6F8(arg1));
 }
 
+void fn_800EEB5C(s32 arg0, void **arg1, s32 arg2) {
+    fn_800EC774(arg0, (s32)fn_800EAFCC(arg1), arg2, fn_800EF6F8(arg1));
+}
+
+void fn_800EEBD4(s32 arg0, const char *arg1, s32 arg2) {
+    fn_800EC774(arg0, (s32)arg1, arg2, arg1 ? fn_80248808(arg1) : 0);
+}
+
 u32 fn_800EE83C(void **arg0, u8 arg1, u32 arg2);
 void fn_800EEB3C(void **arg0, u8 arg1, u32 arg2) {
     fn_800EE83C(arg0, arg1, arg2);
 }
 
-void fn_800EC774(void);
+void fn_800EC774(s32, s32, s32, s32);
 void fn_800EEBB4(void) {
-    fn_800EC774();
+    fn_800EC774(0, 0, 0, 0);
 }
 
 void fn_800EE994(void);
