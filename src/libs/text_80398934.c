@@ -9934,7 +9934,7 @@ void fn_803C0C9C(s32 self, s32 flags) {
 
 void fn_803C0CDC(void) {
     M2C_UNK fn_803C0D34();
-    M2C_UNK fn_802D1FC8(M2C_UNK);
+    void *fn_802D1FC8(u32);
     fn_802D1FC8(0x24);
     fn_803C0D34();
 }
