@@ -51,6 +51,25 @@ s32 fn_802630BC(void *, s32, void *, s32);
 void fn_80260A68(s32 result, DVDCommandBlock *block);
 void fn_80260C6C(s32 result, DVDCommandBlock *block);
 
+extern void (*lbl_80401390[])(void);
+extern void (*lbl_80401398[])(void);
+
+static inline void __init_cpp(void) {
+    void (**ctor)(void);
+
+    for (ctor = lbl_80401390; *ctor; ctor++) {
+        (*ctor)();
+    }
+}
+
+static inline void __fini_cpp(void) {
+    void (**dtor)(void);
+
+    for (dtor = lbl_80401398; *dtor; dtor++) {
+        (*dtor)();
+    }
+}
+
 unsigned long fn_8024FF70(void);
 void fn_8024FF78(unsigned long);
 void fn_802500FC(void) {
