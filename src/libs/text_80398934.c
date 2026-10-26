@@ -4233,6 +4233,22 @@ void fn_803AEC9C(s32 *self, s32 flags) {
     }
 }
 
+void fn_803AF07C(s32 *dst, s32 *src) {
+    void fn_8031EAB8(s32);
+    void fn_8031EA2C(s32);
+
+    dst[0] = src[0];
+    dst[1] = src[1];
+    if (src[2] != 0) {
+        fn_8031EAB8(src[2]);
+    }
+    if (dst[2] != 0) {
+        fn_8031EA2C(dst[2]);
+    }
+    dst[2] = src[2];
+    dst[3] = src[3];
+}
+
 void fn_803AF0E8(u8 *self) {
     extern void fn_801C5CBC(u8 *);
     extern u8 lbl_80417290[];
