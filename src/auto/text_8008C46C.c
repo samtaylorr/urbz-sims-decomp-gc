@@ -3,6 +3,13 @@
 
 typedef struct { s32 x, y, z; } Vec3i;
 
+static inline s32 Obj_IsActive(void *obj) {
+    return M2C_FIELD(obj, s32 *, 0x334) != 0;
+}
+
+static inline void Obj_Nop(void) {
+}
+
 void fn_8008CD40(void) {
     fn_803073C4();
 }
@@ -155,18 +162,17 @@ void fn_800906B8(void *arg0, f32 *arg1, f32 *arg2, f32 arg3) {
 
 void fn_8009115C(void *arg0, void *arg1) {
     typedef struct { s32 x, y; } Pt;
-    typedef struct { f32 x, y; } Ptf;
-    void fn_80091434(void *, void *, Ptf *);
+    void fn_80091434(void *, void *, f32 *);
     Pt **list = M2C_FIELD(arg0, Pt ***, 0xC);
     s32 i = M2C_FIELD(arg0, s32 *, 0x14);
     s32 j = i - 1;
-    s32 dy = (*list)[i].y - (*list)[j].y;
-    s32 dx = (*list)[i].x - (*list)[j].x;
+    s32 dy = (*list + i)->y - (*list + j)->y;
+    s32 dx = (*list + i)->x - (*list + j)->x;
     if (dy * dy + dx * dx > 3) {
-        Ptf v;
-        v.x = (*list)[i].y;
-        v.y = (*list)[i].x;
-        fn_80091434(arg0, arg1, &v);
+        f32 v[2];
+        v[0] = (*list + i)->y;
+        v[1] = (*list + i)->x;
+        fn_80091434(arg0, arg1, v);
     }
 }
 
