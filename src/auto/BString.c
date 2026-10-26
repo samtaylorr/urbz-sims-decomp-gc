@@ -4306,11 +4306,9 @@ void *fn_800EDDA0(void *arg0, u32 arg1, u32 arg2, void *arg3, u32 arg4) {
 }
 
 void *fn_800EDE14(void *arg0, u32 arg1, u32 arg2, const char *arg3) {
-    u32 n = arg2;
-    if (n > (u32)fn_800EF6F8(arg0) - arg1) {
-        n = (u32)fn_800EF6F8(arg0) - arg1;
-    }
-    fn_800EC140(arg0, n, arg1, arg3, arg3 ? (u32)fn_80248808(arg3) : 0);
+    fn_800EC140(arg0,
+        arg2 > (u32)fn_800EF6F8(arg0) - arg1 ? (u32)fn_800EF6F8(arg0) - arg1 : arg2,
+        arg1, arg3, arg3 ? (u32)fn_80248808(arg3) : 0);
     return arg0;
 }
 
