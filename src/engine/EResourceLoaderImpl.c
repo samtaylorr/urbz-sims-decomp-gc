@@ -102,6 +102,24 @@ block_4:
     return NULL;
 }
 
+void fn_8031DAF8(char *self) {
+    extern char lbl_803F2E00[];
+    s32 fn_802486DC(s32, char *);
+    void fn_80336988(char *);
+    void fn_80337F84(char *);
+    ERMLock lock;
+    char *res;
+
+    ERMLock_Lock(&lock, self + 0x360);
+    for (res = *(char **)(self + 0x348); res != NULL; res = *(char **)(res + 0xA0)) {
+        if (fn_802486DC(*(s32 *)(res + 0x54), lbl_803F2E00) != 0) {
+            fn_80336988(res);
+            fn_80337F84(res);
+        }
+    }
+    ERMLock_Unlock(&lock);
+}
+
 void fn_8031DDBC(void *arg0) {
     M2C_UNK fn_80337F84(void *);
     void *var_r31;
