@@ -217,8 +217,8 @@ void fn_802C728C(char **arg0, char **arg1, s32 arg2) {
 }
 
 void **fn_802C7314(void **arg0, void **arg1) {
-    char *vt = *arg0;
-    ((void (*)(void *))M2C_FIELD(vt, void **, 0x1C))((char *)arg0 + M2C_FIELD(vt, s16 *, 0x18));
+    char *vt = M2C_FIELD(arg0, char **, 0x18);
+    ((void (*)(void *, void *))M2C_FIELD(vt, void **, 0x1C))((char *)arg0 + M2C_FIELD(vt, s16 *, 0x18), *arg1);
     return arg0;
 }
 
