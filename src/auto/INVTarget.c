@@ -187,10 +187,10 @@ void fn_801D7D6C(void **arg0) {
 
 s32 fn_801D7DB0(void **arg0, s32 arg1) {
     void *node = fn_801D7BE0(arg0, arg1);
-    if (node == NULL) {
-        return 0;
+    if (node != NULL) {
+        return M2C_FIELD(node, s32 *, 0x1C);
     }
-    return M2C_FIELD(node, s32 *, 0x1C);
+    return 0;
 }
 
 s32 fn_801D7DE4(void) {
