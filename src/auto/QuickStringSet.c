@@ -136,6 +136,12 @@ s32 fn_800F6ABC(s32 *arg0, s32 *arg1) {
     return fn_802486DC(a, fn_800F69E8(arg1));
 }
 
+void *fn_800F6B00(void *arg0, s32 *arg1) {
+    void fn_800F6B50(void *, s32, s32);
+    fn_800F6B50(arg0, fn_800F69E8(arg1), fn_800F68BC(arg1));
+    return arg0;
+}
+
 void fn_800F6C54(s32 *self) {
     s32 len = fn_800F68BC(self);
     s32 i;
@@ -151,6 +157,16 @@ void fn_800F6CB4(s32 self, u8 c) {
     M2C_UNK fn_800F68F0(s32, s32, s32);
     u16 buf = c << 8;
     fn_800F68F0(self, (s32)&buf, -1);
+}
+
+void fn_800F6CE4(s32 self, s32 arg1) {
+    s32 fn_80245BB4(char *, const char *, ...);
+    M2C_UNK fn_800F68F0(s32, s32, s32);
+    extern char lbl_803D5A5C[];
+    char buf[32];
+
+    fn_80245BB4(buf, lbl_803D5A5C, arg1);
+    fn_800F68F0(self, (s32)buf, -1);
 }
 
 void fn_800F6F88(u16 *dst, const u8 *src) {
