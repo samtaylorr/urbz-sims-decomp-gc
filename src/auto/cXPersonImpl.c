@@ -73,7 +73,8 @@ void *fn_8018169C(void *arg0, s32 i) {
 }
 
 void fn_801816AC(void *arg0, s32 i, f32 v) {
-    ((f32 *)((u8 *)arg0 + 0xA8))[i] = v;
+    struct { u8 pad[0xA8]; f32 a[1]; } *p = arg0;
+    p->a[i] = v;
 }
 
 void fn_801816BC(void *arg0) {
@@ -97,20 +98,27 @@ s32 fn_80181A20(void *arg0) {
 
 s32 fn_80181F1C(void *arg0, s32 arg1) {
     u8 *list;
+    u32 start;
     u32 i;
     u32 head;
     u32 n;
-    i = 0;
+    start = 0;
     if (M2C_FIELD(arg0, s32 *, 0x5FC) != 0) {
-        i = 1;
+        start = 1;
     }
     list = (u8 *)arg0 + 0x130;
+    i = start;
     head = M2C_FIELD(list, u32 *, 0x370);
     n = M2C_FIELD(list, u32 *, 0x374) - head;
-    for (; i < n; i++) {
-        if (M2C_FIELD(list + ((head + i) % 10U) * 0x58, s32 *, 0x28) == arg1) {
-            return 1;
-        }
+    if (i < n) {
+        u32 h = head;
+        u32 cnt = n;
+        do {
+            if (M2C_FIELD(list + ((h + i) % 10U) * 0x58, s32 *, 0x28) == arg1) {
+                return 1;
+            }
+            i++;
+        } while (i < cnt);
     }
     return 0;
 }
@@ -145,11 +153,11 @@ void *fn_80182168(void *arg0) {
     void *fn_80117474(void *);
     void *list;
     void *ret;
-    if (M2C_FIELD(arg0, s32 *, 0x5FC) != 0) {
-        ret = 0;
-    } else {
+    if (M2C_FIELD(arg0, s32 *, 0x5FC) == 0) {
         list = arg0 + 0x130;
         ret = fn_80117474(list + ((M2C_FIELD(list, u32 *, 0x370) % 10U) * 0x58));
+    } else {
+        ret = 0;
     }
     return ret;
 }
