@@ -1102,7 +1102,8 @@ s32 fn_802668EC(s32 arg0) {
 
 void fn_80266930(void) {
     extern volatile s32 lbl_80495F60;
-    __DIRegs[0] |= 0x41;
+    u32 reg = __DIRegs[0];
+    __DIRegs[0] = reg | 0x41;
     lbl_80495F60 = 1;
 }
 
@@ -1116,6 +1117,18 @@ void fn_8026694C(void *alarm, void *context) {
         fn_802669C0(20 * ((*(u32 *)0x800000F8 / 4) / 1000));
     }
 }
+
+#pragma push
+#pragma inline_depth(0)
+void fn_802669C0(s64 timeout) {
+    extern u8 lbl_80442AD8[];
+    void fn_80251224(void *, s64, void *);
+    void fn_8026694C(void *, void *);
+
+    fn_80250FC4(lbl_80442AD8);
+    fn_80251224(lbl_80442AD8, timeout, fn_8026694C);
+}
+#pragma pop
 
 s32 fn_80266A24(void) {
     extern s32 lbl_80495F40;
