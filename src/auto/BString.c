@@ -45,7 +45,7 @@ u8 *fn_800EAFCC(void **arg0);
 void fn_800EC49C(s32, s32, s32, s32);
 s32 fn_800EF6F8(void **arg0);
 void fn_800EBF1C();
-void fn_800EC140();
+void fn_800EC140(void *, u32, u32, const void *, u32);
 void fn_8024839C(void *dst, const void *src, u32 n);
 s32 fn_800DBE90(s32);
 void fn_800EBDA4(void *);
@@ -4295,6 +4295,22 @@ void *fn_800ED814(void *self) {
 
 void *fn_800ED844(void *arg0, void *arg1, const char *arg2) {
     ((void (*)(void *, void *, const char *, s32))fn_800EBF1C)(arg0, arg1, arg2, arg2 ? fn_80248808(arg2) : 0);
+    return arg0;
+}
+
+void *fn_800EDDA0(void *arg0, u32 arg1, u32 arg2, void *arg3, u32 arg4) {
+    if (arg2 > (u32)fn_800EF6F8(arg0) - arg1) {
+        arg2 = (u32)fn_800EF6F8(arg0) - arg1;
+    }
+    fn_800EC140(arg0, arg2, arg1, arg3, arg4);
+    return arg0;
+}
+
+void *fn_800EDE14(void *arg0, u32 arg1, u32 arg2, const char *arg3) {
+    if (arg2 > (u32)fn_800EF6F8(arg0) - arg1) {
+        arg2 = (u32)fn_800EF6F8(arg0) - arg1;
+    }
+    fn_800EC140(arg0, arg2, arg1, arg3, arg3 ? (u32)fn_80248808(arg3) : 0);
     return arg0;
 }
 
