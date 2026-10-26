@@ -863,6 +863,13 @@ void *fn_8036A280(void *arg0, void *arg1) {
     return arg0;
 }
 
+void fn_8036A2C0(void *arg0, u32 arg1) {
+    extern void fn_8036A354(void *);
+    while (M2C_FIELD(arg0, u32 *, 0xC) < arg1) {
+        fn_8036A354(arg0);
+    }
+}
+
 void fn_8036A73C(void) {
     M2C_UNK fn_8036A6D4(M2C_UNK, M2C_UNK);
     fn_8036A6D4(1, 0xFFFF);
