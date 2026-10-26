@@ -1291,7 +1291,7 @@ void fn_801DE594(void *arg0, s32 arg1) {
     extern s32 fn_801D8B40(void *, void *);
     extern void fn_801D9014(void *, void *);
     extern void fn_801D94DC(void *, void *);
-    extern void fn_801DC030(void *, void *);
+    extern s32 fn_801DC030(void *, void *);
     extern void fn_801DFA30(void *, void *);
     M2C_UNK fn_802D20E8(s32);
     extern char lbl_80417108[];
@@ -2526,15 +2526,23 @@ void fn_80205B60(void *arg0, void *arg1) {
     extern char lbl_803E60E0[];
     extern char lbl_803E60EC[];
     char buf[0x208];
-    char *p = buf;
+    char *p;
+    char *name;
     s32 r;
-    if (arg1 != 0) {
-        r = fn_801FCF28();
-        fn_800F6FB4(p, p + 8, 0x100);
-        fn_800BD804(r, p, 1);
-        fn_800F8178(arg1, fn_800F7138(p));
-        fn_801DB32C(M2C_FIELD(arg0, s32 *, 0x84) == 0 ? lbl_803E60E0 : lbl_803E60EC, arg1);
+    if (arg1 == 0) {
+        return;
     }
+    p = buf;
+    r = fn_801FCF28();
+    fn_800F6FB4(p, p + 8, 0x100);
+    fn_800BD804(r, p, 1);
+    fn_800F8178(arg1, fn_800F7138(p));
+    if (M2C_FIELD(arg0, s32 *, 0x84) == 0) {
+        name = lbl_803E60E0;
+    } else {
+        name = lbl_803E60EC;
+    }
+    fn_801DB32C(name, arg1);
 }
 
 void fn_80205CB4(void *arg0, s32 arg1) {
