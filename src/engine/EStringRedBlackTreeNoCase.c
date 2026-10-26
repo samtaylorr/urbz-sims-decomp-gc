@@ -354,12 +354,12 @@ void fn_8036619C(void *arg0) {
 void fn_803661F8(EMat4Node **list) {
     extern void *fn_802D0AB8(void);
     extern void fn_802D1A00(void *, void *);
-    void *n = *list;
-    do {
+    void *n;
+
+    for (n = *list; EStrNode_Valid(n); n = M2C_FIELD(n, void **, 4)) {
         void *value = M2C_FIELD(n, void **, 0x10);
         fn_802D1A00(fn_802D0AB8(), value);
-        n = M2C_FIELD(n, void **, 4);
-    } while (n != NULL);
+    }
     fn_8036619C(list);
 }
 
