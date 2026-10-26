@@ -7525,6 +7525,15 @@ void fn_803BA874(void *arg0, s32 arg1) {
     }
 }
 
+void fn_803BA8A8(void *self, s32 flags) {
+    extern void fn_80309AE0(void *, s32);
+
+    fn_80309AE0(self, 0);
+    if (flags & 1) {
+        fn_802D1A00(fn_802D0AB8(), self);
+    }
+}
+
 void fn_802F05AC(void);
 void fn_803BAAB8(void) {
     fn_802F05AC();
