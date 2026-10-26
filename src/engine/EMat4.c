@@ -775,6 +775,21 @@ void fn_802CBB94(void) {
 
 }
 
+f32 *fn_802CC848(f32 *out, f32 *axis, f32 angle) {
+    extern f32 lbl_803F0194[];
+    f32 fn_80243694(f32);
+    f32 fn_802434CC(f32);
+    f32 half = angle * lbl_803F0194[0];
+    f32 s = fn_80243694(half);
+    f32 c = fn_802434CC(half);
+
+    out[0] = axis[0] * s;
+    out[1] = axis[1] * s;
+    out[2] = axis[2] * s;
+    out[3] = c;
+    return out;
+}
+
 void *fn_802CC9A0(void *arg0, char *arg1) {
     void *vt;
 
@@ -924,6 +939,18 @@ void *fn_802CCDC8(void *arg0, u32 arg1) {
         }
     }
     return var_r3;
+}
+
+void fn_802CCE08(void *self, s32 key, void *value) {
+    void *fn_802CCEEC(void *, void *, s32, void *);
+    char *n;
+
+    n = fn_802CCD80(self, key);
+    if (n != NULL && M2C_FIELD(n, s32 *, 0x18) == key) {
+        M2C_FIELD(n, void **, 0x1C) = value;
+        return;
+    }
+    fn_802CCEEC(self, n, key, value);
 }
 
 s32 fn_802CD218(void *self, s32 key) {
@@ -1101,6 +1128,20 @@ void *fn_802CDA8C(u32 size) {
 
 void fn_802CDB1C(void *arg0) {
     fn_802D1A00(fn_802D0C44(arg0), arg0);
+}
+
+void fn_802CDE04(void *self, u8 *color) {
+    void fn_802CDE6C(void *, u8 *, u8 *);
+    void fn_802CE234(void *, u8 *, s32);
+    u8 bgr[8];
+    u8 buf[16];
+    u32 c = *(u32 *)color;
+
+    bgr[0] = color[3];
+    bgr[1] = c >> 8;
+    bgr[2] = c >> 16;
+    fn_802CDE6C(self, bgr, buf);
+    fn_802CE234(self, buf, M2C_FIELD(color, s32 *, 4));
 }
 
 void fn_802CE738(void *arg0) {
