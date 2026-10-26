@@ -238,6 +238,28 @@ void fn_80339954(s32 arg0, s32 arg1) {
     M2C_FIELD(((arg0 * 0x24) + lbl_80494F8C), s32 *, 4) = arg1;
 }
 
+s32 fn_80339CB4(s32 *arr, s32 n) {
+    s32 i;
+    s32 sum = 0;
+
+    for (i = 0; i < n; i++) {
+        sum += arr[i];
+    }
+    if (sum == 0) {
+        sum = 1;
+    }
+    return sum;
+}
+
+extern s32 lbl_803FD368[];
+extern u32 lbl_803FD32C[];
+extern f32 lbl_803F3C48[];
+s32 fn_80339CB4(s32 *arr, s32 n);
+void *fn_80339CE8(s32 a, s32 b, s32 c, s32 d, s32 *tbl, s32 sum, s32 e, s32 f, EyeToyRGB col);
+void *fn_8033A02C(s32 a, s32 b, s32 c, s32 d, EyeToyRGB *col) {
+    return fn_80339CE8(a, b, c, d, lbl_803FD368, fn_80339CB4(lbl_803FD368, 9), 3, 3, *col);
+}
+
 extern s32 lbl_80494F88;
 s32 fn_8033A73C(void) {
     return lbl_80494F88;
