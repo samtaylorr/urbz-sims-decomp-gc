@@ -419,9 +419,15 @@ void fn_80366328(void *arg0, s32 arg1) {
 
 void *fn_803663B8(void *arg0, void **arg1) {
     void *node;
+    s32 more;
     void fn_80365DFC(void *, s32, void *);
-    for (node = *arg1; node != NULL ? 1 : 0; node = M2C_FIELD(node, void **, 4)) {
+    node = *arg1;
+    while (1) {
+        more = 1;
+        if (node == NULL) more = 0;
+        if (!more) break;
         fn_80365DFC(arg0, M2C_FIELD(node, s32 *, 0xC), M2C_FIELD(node, void **, 0x10));
+        node = M2C_FIELD(node, void **, 4);
     }
     return arg0;
 }
@@ -452,10 +458,10 @@ void *fn_803664B0(u8 *self) {
     void fn_802D81B8(void *);
     fn_802D81B8(self);
     fn_802D81B8(self + 0x18);
-    *(s32 *)(self + 0x48) = 0;
     *(s32 *)(self + 0x38) = 0;
     *(s32 *)(self + 0x40) = 0;
     *(s32 *)(self + 0x44) = 0;
+    *(s32 *)(self + 0x48) = 0;
     return self;
 }
 
