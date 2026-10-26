@@ -1988,6 +1988,29 @@ void fn_803A0690(s32 arg0, void *arg1) {
     }
 }
 
+void *fn_803A0800(void *ret, void *self, u32 *key) {
+    extern void fn_803A06EC(void *, void *, void *, void *, u32 *, s32);
+    struct TNode {
+        s32 color;
+        struct TNode *parent;
+        struct TNode *left;
+        struct TNode *right;
+        u32 key;
+    } *y = *(struct TNode **)((char *)self + 4);
+    struct TNode *x = y->parent;
+
+    while (x != NULL) {
+        y = x;
+        if (*key < x->key) {
+            x = x->left;
+        } else {
+            x = x->right;
+        }
+    }
+    fn_803A06EC(ret, self, x, y, key, 0);
+    return ret;
+}
+
 s32 fn_803A094C(s32 *arg0) {
     *arg0 = 0;
     return 1;
@@ -7785,6 +7808,27 @@ void fn_803BA284(s32 *dst, s32 *src, s32 n) {
         dst--;
         fn_802D57BC(d, *s);
     }
+}
+
+void fn_803BA100(void *, s32, s32);
+void fn_803BA2EC(void *self, s32 arg1, s32 arg2, s32 arg3) {
+    s32 size = M2C_FIELD(self, s32 *, 4);
+    s32 newSize = size + arg3;
+
+    if (newSize > M2C_FIELD(self, s32 *, 8)) {
+        s32 cap = 1;
+        while (cap < newSize) {
+            cap += cap;
+        }
+        fn_803BA100(self, newSize, cap);
+    } else {
+        M2C_FIELD(self, s32 *, 4) = newSize;
+        fn_803BA058(M2C_FIELD(self, s32 **, 0) + size, newSize - size);
+    }
+    if (arg2 != size) {
+        fn_803BA284(M2C_FIELD(self, s32 **, 0) + arg2 + arg3, M2C_FIELD(self, s32 **, 0) + arg2, size - arg2);
+    }
+    fn_803BA0A4(M2C_FIELD(self, s32 **, 0) + arg2, (s32 *)arg1, arg3);
 }
 
 void fn_803BA2EC(void *, s32, s32, s32);
