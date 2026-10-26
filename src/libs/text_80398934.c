@@ -2197,6 +2197,15 @@ s32 fn_803A2718(s32 arg0, s32 arg1) {
     return ret;
 }
 
+void fn_803A2774(void *arg0) {
+    extern u8 lbl_8040EE08[];
+    extern u8 lbl_8040EE20[];
+    void fn_801133E8(void *);
+    M2C_FIELD(arg0, void **, 0x138) = lbl_8040EE08;
+    M2C_FIELD(arg0, void **, 0x10) = lbl_8040EE20;
+    fn_801133E8(arg0);
+}
+
 void fn_803A29C8(void) {
     fn_8018EA6C();
 }
