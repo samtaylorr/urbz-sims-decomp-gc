@@ -8893,6 +8893,16 @@ void fn_803BFB20(s32 self, s32 flags) {
     }
 }
 
+void fn_803BFB60(void **p, s32 n) {
+    extern u8 lbl_8041DE78[];
+    while (--n != -1) {
+        void **q = p;
+        p = (void **)((u8 *)p + 0x24);
+        M2C_FIELD(q, void **, 0) = lbl_8041DE78;
+        M2C_FIELD(q, s32 *, 0x20) = 0;
+    }
+}
+
 void fn_803BFD58(s32 *self, s32 n) {
     while (--n != -1) {
         self++;
