@@ -234,20 +234,19 @@ void fn_80174B5C(void *arg0, void *arg1) {
     } while (i < M2C_FIELD(arg0, s32 *, 4));
 }
 
-void fn_80174B98(void *arg0, s32 arg1, s32 arg2) {
-    s32 i = 0;
-    if (M2C_FIELD(arg0, s32 *, 0) != 0) return;
-    M2C_FIELD(arg0, s32 *, 8) = arg2;
-    M2C_FIELD(arg0, s32 *, 0xC) = (s32)((char *)arg0 + 0x1C);
-    M2C_FIELD(arg0, s32 *, 0x18) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = arg1;
-    if (i < arg1) {
-        do {
-            M2C_FIELD(arg0, u32 *, 0x1C + i * 4) = 0x80000000;
-            i++;
-        } while (i < arg1);
+s32 fn_80174B98(s32 *self, s32 count, s32 arg2) {
+    s32 i;
+    if (self[0] == 0) {
+        self[2] = arg2;
+        self[3] = (s32)(self + 7);
+        self[6] = 0;
+        self[1] = count;
+        for (i = 0; i < self[1]; i++) {
+            ((s32 *)self[3])[i] = 0x80000000;
+        }
     }
-    M2C_FIELD(arg0, s32 *, 0) = 1;
+    self[0] = 1;
+    return 1;
 }
 
 s32 fn_80174BFC(void *arg0) {
