@@ -3725,8 +3725,8 @@ extern u64 fn_8024E114(u32 hi, u32 lo, s32 shift);
 extern u64 fn_8024E154(u32 hi, u32 lo, s32 shift);
 
 Bits64 *fn_800EA920(Bits64 *self, s32 shift) {
-    u64 val;
-    val = fn_8024E114((u32)(self->bits >> 32), (u32)self->bits, shift);
+    u32 *p = (u32 *)self;
+    u64 val = fn_8024E114(p[0], p[1], shift);
     self->bits = val;
     return self;
 }
@@ -4310,6 +4310,8 @@ void fn_800EE76C(s32 arg0, void **arg1, s32 arg2) {
 }
 
 void fn_800EC49C(s32, s32, s32, s32);
+void fn_800EC59C();
+void fn_800EC6BC();
 void fn_800EE7C4(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     fn_800EC49C(arg0, arg1, arg2, arg3);
 }
@@ -4336,14 +4338,24 @@ u32 fn_800EE83C(void **arg0, u8 arg1, u32 arg2) {
     return arg2 < fn_800EF6F8(arg0) ? arg2 : -1;
 }
 
-void fn_800EC59C(void);
+void fn_800EE8C4(s32 arg0, void **arg1, s32 arg2) {
+    fn_800EC59C(arg0, (s32)fn_800EAFCC(arg1), arg2, fn_800EF6F8(arg1));
+}
+
 void fn_800EE91C(void) {
     fn_800EC59C();
 }
 
-void fn_800EC6BC(void);
+void fn_800EE93C(s32 arg0, const char *arg1, s32 arg2) {
+    fn_800EC59C(arg0, (s32)arg1, arg2, arg1 ? fn_80248808(arg1) : 0);
+}
+
 void fn_800EEAC4(void) {
     fn_800EC6BC();
+}
+
+void fn_800EEA6C(s32 arg0, void **arg1, s32 arg2) {
+    fn_800EC6BC(arg0, (s32)fn_800EAFCC(arg1), arg2, fn_800EF6F8(arg1));
 }
 
 u32 fn_800EE83C(void **arg0, u8 arg1, u32 arg2);
