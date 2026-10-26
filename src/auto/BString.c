@@ -3730,9 +3730,7 @@ Bits64 *fn_800EA920(Bits64 *self, s32 shift) {
 }
 
 Bits64 *fn_800EA968(Bits64 *self, s32 shift) {
-    u64 val;
-    val = fn_8024E154((u32)(self->bits >> 32), (u32)self->bits, shift);
-    self->bits = val;
+    self->bits <<= shift;
     return self;
 }
 
