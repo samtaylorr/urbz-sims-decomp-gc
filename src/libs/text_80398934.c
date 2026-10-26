@@ -912,22 +912,23 @@ void fn_8039BEF8(void *self, s32 newSize, s32 cap) {
         s32 *old = M2C_FIELD(self, s32 **, 0);
         fn_802D1A00(fn_802D0AB8(), old);
         fn_8039BD50(self);
-        return;
-    }
-    if (M2C_FIELD(self, s32 *, 8) != cap) {
-        void *heap = fn_802D0AB8();
-        u32 size = cap * 4;
-        if (size == 0) {
-            p = NULL;
-        } else {
-            void *q = fn_802D197C(heap, size, 4);
-            if (q == NULL && (q = fn_802DBBCC(heap, size, 0)) == NULL && heap == fn_802D0AB8()) {
-                p = fn_802DBBCC(fn_802D0B3C(), size, 0);
+    } else {
+        if (M2C_FIELD(self, s32 *, 8) != cap) {
+            u32 size = cap * sizeof(s32);
+            void *heap = fn_802D0AB8();
+            if (size == 0) {
+                p = NULL;
             } else {
-                p = q;
+                void *q = fn_802D197C(heap, size, 4);
+                if (q == NULL && (q = fn_802DBBCC(heap, size, 0)) == NULL && heap == fn_802D0AB8()) {
+                    p = fn_802DBBCC(fn_802D0B3C(), size, 0);
+                } else {
+                    p = q;
+                }
             }
-        }
-        if (p != NULL) {
+            if (p == NULL) {
+                goto done;
+            }
             if (M2C_FIELD(self, s32 **, 0) != NULL) {
                 s32 n = newSize;
                 s32 *old;
@@ -943,8 +944,9 @@ void fn_8039BEF8(void *self, s32 newSize, s32 cap) {
             M2C_FIELD(self, s32 **, 0) = p;
             M2C_FIELD(self, s32 *, 8) = cap;
         }
+        M2C_FIELD(self, s32 *, 4) = newSize;
     }
-    M2C_FIELD(self, s32 *, 4) = newSize;
+done:
     if (newSize > oldSize) {
         fn_8039BEB0(M2C_FIELD(self, s32 **, 0) + oldSize, newSize - oldSize);
     }
@@ -1088,6 +1090,70 @@ void fn_8039C378(s32 *self) {
 }
 
 void fn_8039C3D0(const char *fmt, ...) {
+}
+
+void fn_8039C450(void **v, u32 n) {
+    extern void *fn_802D1FC8(u32);
+    extern void *fn_80399BE8(u32);
+    extern void fn_803997AC(void *, u32);
+    void **start = (void **)v[0];
+    if ((u32)((void **)v[3] - start) < n) {
+        void **finish = (void **)v[1];
+        s32 size = finish - start;
+        void **tmp;
+        u32 bytes;
+        if (start != NULL) {
+            if (n != 0) {
+                bytes = n * 4;
+                {
+                    u32 b = bytes;
+                    if (b > 0x80) {
+                        tmp = (void **)fn_802D1FC8(b);
+                    } else {
+                        tmp = (void **)fn_80399BE8(b);
+                    }
+                }
+            } else {
+                tmp = NULL;
+                bytes = 0;
+            }
+            if (finish != start) {
+                fn_8024839C(tmp, start, (char *)finish - (char *)start);
+            }
+            {
+                void **s = (void **)v[0];
+                u32 cnt = (void **)v[3] - s;
+                if (s != NULL) {
+                    u32 sz = cnt * 4;
+                    if (sz > 0x80) {
+                        fn_802D20E8(s);
+                    } else {
+                        fn_803997AC(s, sz);
+                    }
+                }
+            }
+        } else {
+            void *p;
+            if (n != 0) {
+                bytes = n * 4;
+                {
+                    u32 b = bytes;
+                    if (b > 0x80) {
+                        p = fn_802D1FC8(b);
+                    } else {
+                        p = fn_80399BE8(b);
+                    }
+                }
+            } else {
+                p = NULL;
+                bytes = 0;
+            }
+            tmp = (void **)p;
+        }
+        v[3] = (void *)(bytes + (char *)tmp);
+        v[0] = tmp;
+        v[1] = (void *)(size * 4 + (char *)tmp);
+    }
 }
 
 extern u8 lbl_80409DD8[];
@@ -2400,58 +2466,66 @@ void fn_803A2EA8(void *arg0, u32 n) {
         Pair *finish = v->finish;
         s32 oldSize = finish - start;
         Pair *tmp;
-        u32 bytes;
 
         if (start != NULL) {
-            Pair *src;
-            Pair *dst;
-            Pair *p;
-            Pair *end;
-            if (n != 0) {
-                bytes = n * sizeof(Pair);
-                if (bytes > 0x80) {
-                    tmp = fn_802D1FC8(bytes);
+            Pair *result;
+            {
+                Pair *src;
+                Pair *dst;
+                Pair *mem;
+                if (n != 0) {
+                    u32 bytes = n * sizeof(Pair);
+                    if (bytes > 0x80) {
+                        mem = fn_802D1FC8(bytes);
+                    } else {
+                        mem = fn_80399BE8(bytes);
+                    }
                 } else {
-                    tmp = fn_80399BE8(bytes);
+                    mem = NULL;
                 }
-            } else {
-                tmp = NULL;
-                bytes = 0;
+                dst = mem;
+                for (src = start; src != finish; src++) {
+                    *dst = *src;
+                    dst++;
+                }
+                result = mem;
             }
-            dst = tmp;
-            for (src = start; src != finish; src++) {
-                *dst = *src;
-                dst++;
+            tmp = result;
+            {
+                Pair *p = v->start;
+                Pair *end = v->finish;
+                for (; p != end; p++) {
+                }
             }
-            p = v->start;
-            end = v->finish;
-            start = p;
-            for (; p != end; p++) {
-            }
-            if (start != NULL) {
-                u32 size = (v->eos - start) * sizeof(Pair);
-                if (size > 0x80) {
-                    fn_802D20E8(start);
-                } else {
-                    fn_803997AC(start, size);
+            {
+                Pair *dp = v->start;
+                u32 dn = v->eos - dp;
+                if (dp != NULL) {
+                    u32 size = dn * sizeof(Pair);
+                    if (size > 0x80) {
+                        fn_802D20E8(dp);
+                    } else {
+                        fn_803997AC(dp, size);
+                    }
                 }
             }
         } else {
+            Pair *mem;
             if (n != 0) {
-                bytes = n * sizeof(Pair);
+                u32 bytes = n * sizeof(Pair);
                 if (bytes > 0x80) {
-                    tmp = fn_802D1FC8(bytes);
+                    mem = fn_802D1FC8(bytes);
                 } else {
-                    tmp = fn_80399BE8(bytes);
+                    mem = fn_80399BE8(bytes);
                 }
             } else {
-                tmp = NULL;
-                bytes = 0;
+                mem = NULL;
             }
+            tmp = mem;
         }
-        v->eos = (Pair *)((u8 *)tmp + bytes);
         v->start = tmp;
-        v->finish = tmp + oldSize;
+        v->finish = oldSize + tmp;
+        v->eos = n + v->start;
     }
 }
 
