@@ -448,7 +448,7 @@ s32 fn_801D8810(void **arg0) {
     list->tail = NULL;
     list->free = NULL;
     prev = NULL;
-    for (i = 200; i != 0; i--) {
+    for (i = 0; i < 200; i++) {
         node = fn_802D1FC8(0x14);
         free = list->free;
         node->unk10 = lbl_80416EE0;
