@@ -187,6 +187,20 @@ void fn_8031DDBC(void *arg0) {
     }
 }
 
+void fn_8031DE00(char *self, s32 key) {
+    void *fn_8031D910(void *, s32);
+    void fn_80337F84(void *);
+    ERMLock lock;
+    void *res;
+
+    ERMLock_Lock(&lock, self + 0x360);
+    res = fn_8031D910(self, key);
+    if (res != NULL) {
+        fn_80337F84(res);
+    }
+    ERMLock_Unlock(&lock);
+}
+
 s32 fn_8031DE84(void *arg0) {
     s32 fn_80337FDC(void *);
     s32 temp_r3;
