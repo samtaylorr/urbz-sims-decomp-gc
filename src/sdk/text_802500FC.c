@@ -331,6 +331,15 @@ void fn_8025AD78(void) {
         (*ctor)();
     }
 }
+
+void fn_8025ADCC(void) {
+    void (**ctor)(void);
+
+    for (ctor = lbl_80401398; *ctor; ctor++) {
+        (*ctor)();
+    }
+}
+
 #pragma pop
 void fn_8025AE20(void) {
     M2C_UNK fn_8025AE94();
