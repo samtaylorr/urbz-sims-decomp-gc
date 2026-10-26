@@ -4293,6 +4293,11 @@ void *fn_800ED814(void *self) {
     return self;
 }
 
+void *fn_800ED844(void *arg0, void *arg1, const char *arg2) {
+    ((void (*)(void *, void *, const char *, s32))fn_800EBF1C)(arg0, arg1, arg2, arg2 ? fn_80248808(arg2) : 0);
+    return arg0;
+}
+
 void fn_800EE5C4(s32 arg0, s32 arg1) {
     M2C_UNK fn_800EE454(s32, s32, s32);
     fn_800EE454(arg0, arg1, fn_800EBC7C());
