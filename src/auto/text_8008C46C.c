@@ -242,14 +242,14 @@ void fn_80095A4C(void *arg0, Vec3i *arg1, Vec3i *arg2, s32 arg3) {
 
 void fn_80095AB8(void *arg0, s32 arg1, Vec3i *arg2) {
     switch (arg1) {
-    case 0:
-        *arg2 = *(Vec3i *)((u8 *)arg0 + 0x134);
+    case 2:
+        *arg2 = *(Vec3i *)((u8 *)arg0 + 0x158);
         break;
     case 1:
         *arg2 = *(Vec3i *)((u8 *)arg0 + 0x14C);
         break;
-    case 2:
-        *arg2 = *(Vec3i *)((u8 *)arg0 + 0x158);
+    case 0:
+        *arg2 = *(Vec3i *)((u8 *)arg0 + 0x134);
         break;
     }
 }
