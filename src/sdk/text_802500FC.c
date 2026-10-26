@@ -354,6 +354,9 @@ void fn_8025F914(s32 arg0) {
     *lbl_80495EA8 = arg0;
 }
 
+void fn_8025F920(const char *fmt, ...) {
+}
+
 void fn_8025F970(void *arg0, void *arg1, void *arg2) {
     M2C_FIELD(arg2, f32 *, 0) = (f32) (M2C_FIELD(arg0, f32 *, 0) + M2C_FIELD(arg1, f32 *, 0));
     M2C_FIELD(arg2, f32 *, 4) = (f32) (M2C_FIELD(arg0, f32 *, 4) + M2C_FIELD(arg1, f32 *, 4));
