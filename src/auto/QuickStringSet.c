@@ -136,10 +136,9 @@ s32 fn_800F6ABC(s32 *arg0, s32 *arg1) {
     return fn_802486DC(a, fn_800F69E8(arg1));
 }
 
-void *fn_800F6B00(void *arg0, s32 *arg1) {
+void fn_800F6B00(void *arg0, s32 *arg1) {
     void fn_800F6B50(void *, s32, s32);
     fn_800F6B50(arg0, fn_800F69E8(arg1), fn_800F68BC(arg1));
-    return arg0;
 }
 
 void fn_800F6C54(s32 *self) {
