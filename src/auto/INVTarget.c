@@ -2821,9 +2821,9 @@ f32 fn_80214DB4(void *arg0, s32 arg1) {
 }
 
 s8 fn_80214E48(f32 arg0) {
-    s8 ret;
+    s32 ret;
 
-    if (arg0 >= 0.5f) {
+    if (!(arg0 < 0.5f)) {
         ret = (arg0 - 0.5f) * 2.0f * 25.0f + 0.5f;
     } else {
         ret = (1.0f - arg0 * 2.0f) * -25.0f;
