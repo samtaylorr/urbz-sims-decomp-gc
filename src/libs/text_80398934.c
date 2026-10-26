@@ -7377,13 +7377,13 @@ void fn_803B9CA4(s32 *dst, s32 *src, s32 n) {
 
 void fn_803B9E84(s32 *dst, s32 *src, s32 n) {
     extern void fn_802D3CE4(s32 *, s32);
-    dst += n - 1;
     src += n - 1;
+    dst += n - 1;
     while (--n != -1) {
-        s32 *d = dst;
         s32 *s = src;
-        dst--;
+        s32 *d = dst;
         src--;
+        dst--;
         fn_802D3CE4(d, *s);
     }
 }
