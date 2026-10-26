@@ -9513,12 +9513,10 @@ void fn_803C07E0(s32 self, s32 flags) {
 
 void *fn_803C0820(u8 *self, s32 *arr) {
     extern void fn_8037475C(void *, void *);
-    u8 *vt = M2C_FIELD(self, u8 **, 0x18);
-    s32 n = arr[1];
-    s32 cnt = n;
+    s32 cnt = arr[1];
     s32 i;
 
-    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)(self + M2C_FIELD(vt, s16 *, 0x38), &n, 4);
+    Stream_WriteS32(self, cnt);
     for (i = 0; i < cnt; i++) {
         fn_8037475C(self, (u8 *)arr[0] + i * 0xB0);
     }
@@ -9531,11 +9529,6 @@ void fn_803C08A0(u8 *p, s32 n) {
         fn_80374058(p);
         p += 0xB0;
     }
-}
-
-static inline void Stream_WriteS32(u8 *self, s32 v) {
-    u8 *vt = M2C_FIELD(self, u8 **, 0x18);
-    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)(self + M2C_FIELD(vt, s16 *, 0x38), &v, 4);
 }
 
 void fn_8039A334(void *self, s32 n, s32 arg2);
