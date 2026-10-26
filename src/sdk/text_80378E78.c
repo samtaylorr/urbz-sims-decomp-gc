@@ -273,6 +273,22 @@ s32 fn_80380D24(s32 arg0) {
     return lbl_804763C0[arg0];
 }
 
+void fn_80380D3C(void) {
+    void *fn_80381020(void);
+    void fn_8038103C(void *);
+    void fn_80380FCC(void *);
+    void *p;
+    for (p = fn_80381020(); p != NULL; p = fn_80381020()) {
+        if (M2C_FIELD(p, void **, 0xC) != NULL) {
+            if (M2C_FIELD(p, void (**)(void *), 0x10) != NULL) {
+                M2C_FIELD(p, void (**)(void *), 0x10)(p);
+            }
+            fn_8038103C(p);
+            fn_80380FCC(p);
+        }
+    }
+}
+
 void *fn_80381020(void);
 void fn_8038103C(void *);
 void fn_80380FCC(void *);
@@ -282,10 +298,11 @@ void fn_80380DB0(void) {
     extern s32 lbl_804763C0[];
     s32 i;
     lbl_80496388 = 0;
-    for (i = 0; i < 32; i++) {
+    i = 0;
+    do {
         lbl_80476440[i] = 0;
         lbl_804763C0[i] = 0;
-    }
+    } while (++i < 32);
 }
 
 void fn_80380FCC(void *arg0) {
