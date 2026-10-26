@@ -2277,6 +2277,27 @@ void fn_802055FC(void *arg0, char *arg1) {
     *(struct Str7 *)arg1 = *(struct Str7 *)lbl_803E60D8;
 }
 
+void fn_80205710(void *arg0, u16 *arg1) {
+    void fn_801FFAE4(void *, u16 *);
+    extern s32 lbl_8041FC0C;
+    extern u16 lbl_803E4CA4;
+    if (lbl_8041FC0C != 0) {
+        fn_801FFAE4(arg0, arg1);
+    } else {
+        *arg1 = lbl_803E4CA4;
+    }
+}
+
+void fn_80205750(void *arg0, s32 arg1) {
+    void fn_80245BB4(s32, char *, ...);
+    extern char lbl_803E4E18[];
+    s32 flag = 0;
+    if (M2C_FIELD(arg0, s32 *, 0x88) != 0) {
+        flag = 1;
+    }
+    fn_80245BB4(arg1, lbl_803E4E18, flag);
+}
+
 void fn_80205794(void *arg0, s32 arg1) {
     void fn_80245BB4(s32, char *, ...);
     extern char lbl_803E4E18[];
@@ -2317,6 +2338,48 @@ void fn_802059AC(void *arg0, s32 arg1) {
     void fn_80245BB4(s32, char *, ...);
     extern char lbl_803E4E18[];
     fn_80245BB4(arg1, lbl_803E4E18, 1);
+}
+
+void fn_80205AE0(void *arg0, void *arg1) {
+    void fn_80205CF8(void *, s32, s32 *, s32 *);
+    void fn_8016CD4C();
+    void fn_800F8178(void *, s32);
+    s32 sp8[2];
+    s32 sp10;
+    s32 *sp14;
+    s32 val;
+    fn_80205CF8(arg0, M2C_FIELD(arg0, u8 *, 0x8C1), sp8, &sp10);
+    switch (sp10) {
+    case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8:
+    case 12: case 13: case 14:
+        fn_8016CD4C(&sp14, sp8[0]);
+        val = 0;
+        if (sp14 != 0) {
+            val = *sp14;
+        }
+        fn_800F8178(arg1, val);
+        break;
+    }
+}
+
+void fn_80205B60(void *arg0, void *arg1) {
+    s32 fn_801FCF28(void);
+    void fn_800F6FB4(void *, void *, s32);
+    void fn_800BD804(s32, void *, s32);
+    s32 fn_800F7138(void *);
+    void fn_800F8178(void *, s32);
+    void fn_801DB32C(char *, void *);
+    extern char lbl_803E60E0[];
+    extern char lbl_803E60EC[];
+    char buf[0x208];
+    s32 r;
+    if (arg1 != 0) {
+        r = fn_801FCF28();
+        fn_800F6FB4(buf, buf + 8, 0x100);
+        fn_800BD804(r, buf, 1);
+        fn_800F8178(arg1, fn_800F7138(buf));
+        fn_801DB32C(M2C_FIELD(arg0, s32 *, 0x84) == 0 ? lbl_803E60E0 : lbl_803E60EC, arg1);
+    }
 }
 
 void fn_80206190(void) {
