@@ -7718,6 +7718,27 @@ void fn_803B9E84(s32 *dst, s32 *src, s32 n) {
     }
 }
 
+void fn_803B9D00(void *, s32, s32);
+void fn_803B9EEC(void *self, s32 arg1, s32 arg2, s32 arg3) {
+    s32 size = M2C_FIELD(self, s32 *, 4);
+    s32 newSize = size + arg3;
+
+    if (newSize > M2C_FIELD(self, s32 *, 8)) {
+        s32 cap = 1;
+        while (cap < newSize) {
+            cap += cap;
+        }
+        fn_803B9D00(self, newSize, cap);
+    } else {
+        M2C_FIELD(self, s32 *, 4) = newSize;
+        fn_803B9C58(M2C_FIELD(self, s32 **, 0) + size, newSize - size);
+    }
+    if (arg2 != size) {
+        fn_803B9E84(M2C_FIELD(self, s32 **, 0) + arg2 + arg3, M2C_FIELD(self, s32 **, 0) + arg2, size - arg2);
+    }
+    fn_803B9CA4(M2C_FIELD(self, s32 **, 0) + arg2, (s32 *)arg1, arg3);
+}
+
 void fn_803B9EEC(void *, s32, s32, s32);
 void fn_803B9FC4(void *self, s32 arg1) {
     fn_803B9EEC(self, arg1, M2C_FIELD(self, s32 *, 4), 1);
