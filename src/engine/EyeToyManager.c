@@ -238,6 +238,23 @@ void fn_80339954(s32 arg0, s32 arg1) {
     M2C_FIELD(((arg0 * 0x24) + lbl_80494F8C), s32 *, 4) = arg1;
 }
 
+void fn_80339C70(u8 *p) {
+    extern f32 lbl_803F3C48[];
+    f32 f = lbl_803F3C48[0];
+    p[0xB] = 0;
+    *(s16 *)(p + 4) = 0;
+    *(f32 *)(p + 0x18) = f;
+    p[2] = 0;
+    p[0] = 0;
+    p[1] = 0;
+    p[8] = 0;
+    p[9] = 0;
+    p[0xA] = 0;
+    *(f32 *)(p + 0xC) = f;
+    *(f32 *)(p + 0x10) = f;
+    *(f32 *)(p + 0x14) = f;
+}
+
 s32 fn_80339CB4(s32 *arr, s32 n) {
     s32 i;
     s32 sum = 0;
@@ -261,6 +278,14 @@ void *fn_8033A02C(s32 a, s32 b, s32 c, s32 d, EyeToyRGB *col) {
     void *fn_80339CE8(s32, s32, s32, s32, s32 *, s32, s32, s32, EyeToyRGB);
     s32 sum = fn_80339CB4(lbl_803FD368, 9);
     return fn_80339CE8(a, b, c, d, lbl_803FD368, sum, 3, 3, *col);
+}
+
+extern s32 lbl_803FD38C[];
+void *fn_8033A0B0(s32 a, s32 b, s32 c, s32 d, EyeToyRGB *col) {
+    extern s32 lbl_803FD38C[];
+    void *fn_80339CE8(s32, s32, s32, s32, s32 *, s32, s32, s32, EyeToyRGB);
+    s32 sum = fn_80339CB4(lbl_803FD38C, 9);
+    return fn_80339CE8(a, b, c, d, lbl_803FD38C, sum, 3, 3, *col);
 }
 
 extern s32 lbl_80494F88;
