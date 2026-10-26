@@ -1114,10 +1114,9 @@ void fn_8039C3D0(const char *fmt, ...) {
 }
 
 void fn_8039C450(void **v, u32 n) {
-    struct PtrVec { void **start; void **finish; void *pad; void **eos; } *self = (struct PtrVec *)v;
-    void **start = self->start;
-    if ((u32)(self->eos - start) < n) {
-        void **finish = self->finish;
+    void **start = (void **)v[0];
+    if ((u32)((void **)v[3] - start) < n) {
+        void **finish = (void **)v[1];
         s32 size = finish - start;
         void **tmp;
         if (start != NULL) {
@@ -1126,8 +1125,8 @@ void fn_8039C450(void **v, u32 n) {
                 fn_8024839C(tmp, start, (char *)finish - (char *)start);
             }
             {
-                void **s = self->start;
-                u32 cnt = self->eos - s;
+                void **s = (void **)v[0];
+                u32 cnt = (void **)v[3] - s;
                 if (s != NULL) {
                     PtrVec_Deallocate(s, cnt * 4);
                 }
@@ -1136,9 +1135,7 @@ void fn_8039C450(void **v, u32 n) {
             void *p = n != 0 ? PtrVec_Allocate(n * 4) : NULL;
             tmp = (void **)p;
         }
-        self->start = tmp;
-        self->finish = tmp + size;
-        self->eos = tmp + n;
+        PtrVec_Set(v, tmp, tmp + size, tmp + n);
     }
 }
 
@@ -2511,7 +2508,8 @@ void fn_803A2EA8(void *arg0, u32 n) {
         }
         {
             Pair *newFinish = (Pair *)(oldSize * 8 + (s32)tmp);
-            v->eos = (Pair *)(n * 8 + (u32)tmp);
+            Pair *newEos = (Pair *)(n * 8 + (u32)tmp);
+            v->eos = newEos;
             v->start = tmp;
             v->finish = newFinish;
         }
