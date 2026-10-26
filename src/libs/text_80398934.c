@@ -7133,17 +7133,23 @@ void fn_803B9174(s32 self, s32 flags) {
 }
 
 void fn_803B91B4(u8 *p, s32 n) {
-    while (n-- > 0) {
-        fn_802C5E54(p);
-        p += 0x14;
+    s32 i = n - 1;
+    if (n != 0) {
+        do {
+            fn_802C5E54(p);
+            p += 0x14;
+        } while (i-- != 0);
     }
 }
 
 void fn_803B9200(Unk803B9200 *dst, Unk803B9200 *src, s32 n) {
-    while (n-- > 0) {
-        *dst = *src;
-        dst++;
-        src++;
+    s32 i = n - 1;
+    if (n != 0) {
+        do {
+            *dst = *src;
+            dst++;
+            src++;
+        } while (i-- != 0);
     }
 }
 
@@ -8752,11 +8758,10 @@ void fn_803BEE20(s32 **self) {
     s32 n = (s32)self[1];
     s32 *p = self[0];
 
-    while (n != 0) {
+    while (--n != -1) {
         void *obj = (void *)*p++;
         char *vt = *(char **)obj;
         (*(void (**)(void *))(vt + 0xC))((char *)obj + *(s16 *)(vt + 0x8));
-        n--;
     }
     fn_803BED94((s32)self);
 }
@@ -8901,6 +8906,19 @@ void fn_803BFB60(void **p, s32 n) {
         M2C_FIELD(q, void **, 0) = lbl_8041DE78;
         M2C_FIELD(q, s32 *, 0x20) = 0;
     }
+}
+
+void *fn_803BFB94(s32 *dst, s32 *src, s32 n) {
+    struct Elem24 { s32 a, b, c, d, e, f, g, h, i; };
+    struct Elem24 *d = (struct Elem24 *)dst;
+    struct Elem24 *s = (struct Elem24 *)src;
+    s32 first = *dst;
+
+    while (--n != -1) {
+        *d = *s++;
+    }
+    *dst = first;
+    return d + 1;
 }
 
 void fn_803BFD58(s32 *self, s32 n) {
