@@ -7834,9 +7834,10 @@ void fn_803BB890(s32 self, s32 flags) {
 void fn_803BB8D0(u8 *p, s32 n) {
     extern void fn_802D39F0(void *, s32);
     while (--n != -1) {
-        fn_802D39F0(p + 0xb4, *(s32 *)(p + 0xb4));
-        fn_803BB890((s32)(p + 4), 2);
+        u8 *q = p;
         p += 0xb8;
+        fn_802D39F0(q + 0xb4, *(s32 *)(q + 0xb4));
+        fn_803BB890((s32)(q + 4), 2);
     }
 }
 
@@ -7865,10 +7866,13 @@ void *fn_803BB9CC(void *self) {
 
 void fn_803BB9FC(u8 *p, s32 n) {
     extern void fn_802D39E4(void *);
+    u8 *q = p + 4;
+    u8 *r = p + 0xb4;
     while (--n != -1) {
-        fn_803BB9CC(p + 4);
-        fn_802D39E4(p + 0xb4);
-        p += 0xb8;
+        fn_803BB9CC(q);
+        fn_802D39E4(r);
+        q += 0xb8;
+        r += 0xb8;
     }
 }
 
