@@ -9513,12 +9513,19 @@ void fn_803C07E0(s32 self, s32 flags) {
 
 void *fn_803C0820(u8 *self, s32 *arr) {
     extern void fn_8037475C(void *, void *);
+    u8 *vt = M2C_FIELD(self, u8 **, 0x18);
     s32 cnt = arr[1];
-    s32 i;
+    s32 n;
+    s32 off;
 
-    Stream_WriteS32(self, cnt);
-    for (i = 0; i < cnt; i++) {
-        fn_8037475C(self, (u8 *)arr[0] + i * 0xB0);
+    n = cnt;
+    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)(self + M2C_FIELD(vt, s16 *, 0x38), &n, 4);
+    if (cnt > 0) {
+        off = 0;
+        do {
+            fn_8037475C(self, (u8 *)arr[0] + off);
+            off += 0xB0;
+        } while (--cnt != 0);
     }
     return self;
 }
@@ -9608,7 +9615,7 @@ void fn_803C0CDC(void) {
     fn_803C0D34();
 }
 
-void fn_803C0D34();
+void *fn_803C0D34();
 void fn_803C0D04(void) {
     fn_803C0D34();
 }
@@ -9617,9 +9624,10 @@ void fn_803C0D24(M2C_UNK **arg0) {
     *arg0 = &lbl_804194A0;
 }
 
-void fn_803C0D34(void *arg0) {
+void *fn_803C0D34(void *arg0) {
     extern u8 lbl_8041DE78[];
     M2C_FIELD(arg0, void **, 0) = lbl_8041DE78;
     M2C_FIELD(arg0, s32 *, 0x20) = 0;
+    return arg0;
 }
 
