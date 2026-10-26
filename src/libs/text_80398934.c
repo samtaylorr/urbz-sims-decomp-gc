@@ -6922,6 +6922,18 @@ void fn_803B292C(BoundPmf *b) {
     f(obj + off);
 }
 
+void fn_803B29A4(void *arg0, s32 arg1) {
+    extern char lbl_80417BD8[];
+    void fn_800F1A60(s32, s32);
+    void fn_802D20E8(void *);
+
+    M2C_FIELD(arg0, char **, 0x18) = lbl_80417BD8;
+    fn_800F1A60((s32)((char *)arg0 + 0x14), 2);
+    if (arg1 & 1) {
+        fn_802D20E8(arg0);
+    }
+}
+
 void fn_803B29F8(BoundPmf *b) {
     s16 index = b->index;
     char *obj = b->obj;
