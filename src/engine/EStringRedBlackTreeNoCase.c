@@ -497,10 +497,12 @@ void *fn_803664B0(u8 *self) {
 void fn_803665B8(void *, void *);
 void *fn_803664FC(u8 *self, void *arg1) {
     void fn_802D81B8(void *);
+    void fn_803665B8(void *, void *);
+    u8 *p = self;
     fn_802D81B8(self);
     fn_802D81B8(self + 0x18);
     *(s32 *)(self + 0x38) = 0;
-    fn_803665B8(self, arg1);
+    fn_803665B8(p, arg1);
     *(s32 *)(self + 0x44) = 0;
     *(s32 *)(self + 0x48) = 0;
     return self;
@@ -803,6 +805,40 @@ s32 fn_80369C84(void *arg0, s32 arg1) {
 
     fn_8036A04C(arg0, arg1, &sp8);
     return sp8;
+}
+
+void fn_8036A180(void *arg0) {
+    extern void fn_802D39F0(s32 *, s32);
+    extern void fn_802D20E8(void *);
+    extern void fn_80369C48(void *);
+    void *node;
+    void *next;
+
+    node = M2C_FIELD(arg0, void **, 4);
+    while (node != NULL) {
+        next = *(void **)node;
+        if (node != NULL) {
+            fn_802D39F0((s32 *)((u8 *)node + 0xC), M2C_FIELD(node, s32 *, 0xC));
+            fn_802D20E8(node);
+        }
+        node = next;
+    }
+    M2C_FIELD(arg0, void **, 4) = NULL;
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    fn_80369C48(arg0);
+    M2C_FIELD(arg0, s32 *, 0x14) = 0;
+}
+
+void fn_8036A1F4(EMat4Node **list) {
+    extern void *fn_802D0AB8(void);
+    extern void fn_802D1A00(void *, void *);
+    void *n;
+
+    for (n = *list; EStrNode_Valid(n); n = M2C_FIELD(n, void **, 4)) {
+        void *value = M2C_FIELD(n, void **, 0x10);
+        fn_802D1A00(fn_802D0AB8(), value);
+    }
+    fn_8036A180(list);
 }
 
 s32 fn_8036A258(void **arg0) {
