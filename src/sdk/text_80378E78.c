@@ -288,6 +288,13 @@ void fn_80380DB0(void) {
     }
 }
 
+void fn_80380FCC(void *arg0) {
+    extern void *lbl_804763C0[];
+    M2C_FIELD(arg0, void **, 0) = lbl_804763C0[0];
+    lbl_804763C0[0] = arg0;
+    M2C_FIELD(arg0, s32 *, 0xC) = 0;
+}
+
 void fn_80381010(void *arg0) {
     extern void *lbl_80496388;
     M2C_FIELD(arg0, void **, 8) = (void *) lbl_80496388;
