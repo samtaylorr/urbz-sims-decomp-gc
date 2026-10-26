@@ -51,23 +51,25 @@ static inline void **WPBPtrVec_End(WPBPtrVec *v) {
 }
 
 void fn_800CD09C();
-void fn_800C54F0(void *self, s32 arg1) {
+void *fn_800C54F0(void *self, s32 arg1) {
     extern M2C_UNK lbl_803D05A8[];
     extern M2C_UNK lbl_8040AA10[];
     extern M2C_UNK lbl_8040A948[];
     extern f32 lbl_803D076C[];
     extern void fn_8030728C(void *);
-    s32 *v;
-    s32 *w;
+    M2C_UNK *p = lbl_803D05A8;
+    WrapperPanePoint *v;
+    WrapperPanePoint *w;
+    WrapperPanePoint z;
     fn_8030728C(self);
-    M2C_FIELD(self, M2C_UNK **, 0x48) = lbl_803D05A8;
+    M2C_FIELD(self, M2C_UNK **, 0x48) = p;
     M2C_FIELD(self, M2C_UNK **, 0x44) = lbl_8040AA10;
     M2C_FIELD(self, s32 *, 0x4C) = 0;
-    v = (s32 *)((u8 *)self + 0x50);
-    v[0] = 0;
-    v[1] = 0;
-    w = (s32 *)((u8 *)self + 0x58);
-    w[1] = 0;
+    v = (WrapperPanePoint *)((u8 *)self + 0x50);
+    v->x = 0;
+    v->y = 0;
+    w = (WrapperPanePoint *)((u8 *)self + 0x58);
+    w->y = 0;
     M2C_FIELD(self, s32 *, 0x64) = 1;
     M2C_FIELD(self, M2C_UNK **, 0x44) = lbl_8040A948;
     M2C_FIELD(self, s32 *, 0x68) = arg1;
@@ -82,6 +84,7 @@ void fn_800C54F0(void *self, s32 arg1) {
     M2C_FIELD(self, f32 *, 0x84) = lbl_803D076C[0];
     M2C_FIELD(self, f32 *, 0x80) = lbl_803D076C[0];
     M2C_FIELD(self, f32 *, 0x8C) = lbl_803D076C[0];
+    return self;
 }
 
 void fn_800C55A4(void *self, s32 arg1) {
@@ -967,6 +970,20 @@ void fn_800CFC34(void *arg0, s32 arg1) {
     if (temp_r30 != 0) {
         fn_802D1A00(fn_802D0AB8(), temp_r30);
     }
+    M2C_FIELD(arg0, M2C_UNK **, 0x1C) = lbl_8040B118;
+    fn_8039DC8C(arg0);
+    fn_8039DAD8(arg0);
+    if (arg1 & 1) {
+        fn_802D20E8(arg0);
+    }
+}
+
+void fn_800CFD4C(void *arg0, s32 arg1) {
+    M2C_UNK fn_802D20E8(void *);
+    M2C_UNK fn_8039DAD8(void *);
+    M2C_UNK fn_8039DC8C(void *);
+    extern M2C_UNK lbl_8040B118[];
+
     M2C_FIELD(arg0, M2C_UNK **, 0x1C) = lbl_8040B118;
     fn_8039DC8C(arg0);
     fn_8039DAD8(arg0);
