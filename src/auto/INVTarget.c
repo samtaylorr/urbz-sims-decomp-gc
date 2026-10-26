@@ -2817,16 +2817,10 @@ void fn_80214DB0(void) {
 }
 
 f32 fn_80214DB4(void *arg0, s32 arg1) {
-    f32 ret;
-
-    if (arg1 >= 0) {
-        ret = arg1;
-        ret = ret / 25.0f * 0.5f + 0.5f;
-    } else {
-        ret = arg1 + 25;
-        ret = ret / 25.0f * 0.5f;
+    if (arg1 < 0) {
+        return (f32)(arg1 + 25) / 25.0f * 0.5f;
     }
-    return ret;
+    return (f32)arg1 / 25.0f * 0.5f + 0.5f;
 }
 
 s8 fn_80214E48(f32 arg0) {
