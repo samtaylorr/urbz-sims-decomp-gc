@@ -238,6 +238,23 @@ char **fn_802C73A8(char **arg0) {
     }
 }
 
+void fn_802C73FC(char **arg0) {
+    M2C_UNK fn_802C6D20(s32, s32, s32);
+    s32 len = fn_802C6A5C((s32 *)arg0);
+    char *p;
+    u8 c;
+
+    if (len != 0 && (p = *arg0)[len - 1] == '\\' && len != 1) {
+        if (len == 3 && p[1] == ':') {
+            c = p[0];
+            if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) {
+                return;
+            }
+        }
+        fn_802C6D20((s32)arg0, (s32)arg0, len - 1);
+    }
+}
+
 char **fn_802C7874(char **arg0, s32 arg1) {
     M2C_UNK fn_802C69B0(s32, s32);
     char *p;
