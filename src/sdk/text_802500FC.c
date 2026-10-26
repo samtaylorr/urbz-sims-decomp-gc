@@ -18,6 +18,14 @@ typedef struct DVDCommandBlock {
 
 extern DVDCommandBlock *lbl_80495ED0;
 
+typedef struct DVDCommandListEntry {
+    s32 command;
+    void *addr;
+    u32 length;
+    u32 offset;
+    void *callback;
+} DVDCommandListEntry;
+
 typedef struct DVDFileInfo {
     DVDCommandBlock cb;
     u32 startAddr;
@@ -294,14 +302,72 @@ void fn_8025AD58(void) {
     fn_8025AD78();
 }
 
+#pragma scheduling off
+void fn_8025AD78(void) {
+    extern void (*lbl_80401390[])(void);
+    void (**ctor)(void);
+
+    for (ctor = lbl_80401390; *ctor; ctor++) {
+        (*ctor)();
+    }
+}
+#pragma scheduling reset
 void fn_8025AE20(void) {
     M2C_UNK fn_8025AE94();
+    fn_8025AE94();
+}
+
+void fn_8025AE40(void) {
+    extern void (*lbl_80401398[])(void);
+    void fn_8025AE94(void);
+    void (**dtor)(void);
+
+    for (dtor = lbl_80401398; *dtor; dtor++) {
+        (*dtor)();
+    }
     fn_8025AE94();
 }
 
 void fn_8025AE94(void) {
     M2C_UNK PPCHalt();
     PPCHalt();
+}
+
+void fn_8025AEB4(void *arg0) {
+    fn_80258534(arg0);
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+    M2C_FIELD(arg0, s32 *, 0xC) = 0;
+}
+#pragma dont_inline reset
+void fn_8025B090(void *arg0) {
+    typedef struct Mtx_ {
+        s32 queue[2];
+        void *thread;
+        s32 count;
+        struct Mtx_ *next;
+        struct Mtx_ *prev;
+    } Mtx_;
+    typedef struct {
+        u8 pad[0x2F4];
+        Mtx_ *head;
+        Mtx_ *tail;
+    } Thr_;
+    Thr_ *thread = arg0;
+    Mtx_ *mutex;
+    Mtx_ *next;
+
+    while ((mutex = thread->head) != NULL) {
+        next = mutex->next;
+        if (next == NULL) {
+            thread->tail = NULL;
+        } else {
+            next->prev = NULL;
+        }
+        thread->head = next;
+        mutex->count = 0;
+        mutex->thread = NULL;
+        fn_80259838(mutex);
+    }
 }
 
 void fn_8025B1BC(void) {
