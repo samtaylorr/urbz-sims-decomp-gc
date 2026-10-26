@@ -748,6 +748,17 @@ void *fn_80368F18(void *arg0, s32 arg1) {
     return var_r31;
 }
 
+s32 fn_803693D0(void *self, s32 key) {
+    void *fn_80369670(void *, s32, s32);
+    void fn_80369418(void *, void *);
+    void *node = fn_80369670(self, key, 0);
+    if (node != NULL) {
+        fn_80369418(self, node);
+        return 1;
+    }
+    return 0;
+}
+
 s32 fn_803698D8(void **arg0) {
     s32 var_r9;
     void *var_r3;
