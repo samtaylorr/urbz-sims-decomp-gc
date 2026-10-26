@@ -7831,6 +7831,15 @@ void fn_803BB890(s32 self, s32 flags) {
     }
 }
 
+void fn_803BB8D0(u8 *p, s32 n) {
+    extern void fn_802D39F0(void *, s32);
+    while (--n != -1) {
+        fn_802D39F0(p + 0xb4, *(s32 *)(p + 0xb4));
+        fn_803BB890((s32)(p + 4), 2);
+        p += 0xb8;
+    }
+}
+
 void fn_803BB940(s32 self) {
     extern s32 lbl_8045B390[];
     extern void fn_80338184(void *, s32);
@@ -7852,6 +7861,15 @@ extern void fn_80399CF0(void *);
 void *fn_803BB9CC(void *self) {
     fn_80399CF0(self);
     return self;
+}
+
+void fn_803BB9FC(u8 *p, s32 n) {
+    extern void fn_802D39E4(void *);
+    while (--n != -1) {
+        fn_803BB9CC(p + 4);
+        fn_802D39E4(p + 0xb4);
+        p += 0xb8;
+    }
 }
 
 s32 *fn_803BBA58(s32 *self, s32 *other);
@@ -7884,6 +7902,38 @@ void fn_803BBDDC(void) {
 
 void fn_803BBDE0(void) {
 
+}
+
+void *fn_803BBDE4(void *self, void *arg1) {
+    extern s32 fn_802CD600(void **);
+    extern void fn_802F041C(void *, s32);
+    s32 *node;
+    s32 more;
+    s32 val;
+
+    val = fn_802CD600((void **)arg1);
+    {
+        VtblEntry *vt = *(VtblEntry **)((char *)self + 0x18);
+        ((void (*)(void *, void *, s32))vt[7].pfn)((char *)self + vt[7].delta, &val, 4);
+    }
+    node = M2C_FIELD(arg1, s32 **, 0);
+    for (;;) {
+        more = 1;
+        if (node == NULL) {
+            more = 0;
+        }
+        if (!more) {
+            break;
+        }
+        {
+            s32 data = M2C_FIELD(node, s32 *, 0x18);
+            VtblEntry *vt = *(VtblEntry **)((char *)self + 0x18);
+            ((void (*)(void *, void *, s32))vt[7].pfn)((char *)self + vt[7].delta, &data, 4);
+        }
+        fn_802F041C(self, M2C_FIELD(node, s32 *, 0x1c));
+        node = M2C_FIELD(node, s32 **, 0x10);
+    }
+    return self;
 }
 
 void *fn_803BBF20(void *self, void *arg1) {
