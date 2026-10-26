@@ -130,6 +130,17 @@ s32 fn_800F6ABC(s32 *arg0, s32 *arg1) {
     return fn_802486DC(a, fn_800F69E8(arg1));
 }
 
+void fn_800F6C54(s32 *self) {
+    s32 len = fn_800F68BC(self);
+    s32 i;
+    for (i = 0; i < len; i++) {
+        u8 c = ((u8 *)*self)[i];
+        if ((u8)(c - 'A') <= 25) {
+            ((u8 *)*self)[i] = c + 0x20;
+        }
+    }
+}
+
 void fn_800F6F88(u16 *dst, const u8 *src) {
     while (*src != 0) {
         *dst++ = *src++;
