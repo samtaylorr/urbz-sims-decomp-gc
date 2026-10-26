@@ -3706,6 +3706,38 @@ void fn_800EA7F8(u64 *arg0, s32 arg1) {
     *arg0 |= (u64)1 << arg1;
 }
 
+Bits64 *fn_800EA8A8(Bits64 *self, Bits64 *other) {
+    self->bits |= other->bits;
+    return self;
+}
+
+Bits64 *fn_800EA8D0(Bits64 *self, Bits64 *other) {
+    self->bits &= other->bits;
+    return self;
+}
+
+Bits64 *fn_800EA8F8(Bits64 *self, Bits64 *other) {
+    self->bits ^= other->bits;
+    return self;
+}
+
+extern u64 fn_8024E114(u32 hi, u32 lo, s32 shift);
+extern u64 fn_8024E154(u32 hi, u32 lo, s32 shift);
+
+Bits64 *fn_800EA920(Bits64 *self, s32 shift) {
+    u64 val;
+    val = fn_8024E114((u32)(self->bits >> 32), (u32)self->bits, shift);
+    self->bits = val;
+    return self;
+}
+
+Bits64 *fn_800EA968(Bits64 *self, s32 shift) {
+    u64 val;
+    val = fn_8024E154((u32)(self->bits >> 32), (u32)self->bits, shift);
+    self->bits = val;
+    return self;
+}
+
 s32 fn_800EA9B0(s32 arg0) {
     s32 fn_800EA758(s32, s32);
     s32 temp_r3;
@@ -3722,6 +3754,30 @@ s32 fn_800EA9B0(s32 arg0) {
     return var_r30;
 }
 
+void fn_800EAA00(u64 *arg0) {
+    u64 *r31 = arg0 + 1;
+    s32 i = 63;
+    do {
+        fn_800EA6C0(r31);
+        r31++;
+        i--;
+    } while (i != -1);
+}
+
+void fn_800EA6C0(u64 *);
+void fn_800EAA4C(u64 *arg0, u64 *arg1) {
+    u64 *r31;
+    s32 i;
+    r31 = arg0 + 1;
+    i = 63;
+    do {
+        fn_800EA6C0(r31);
+        r31++;
+        i--;
+    } while (i != -1);
+    __builtin_memcpy(arg0, arg1, 0x1F8);
+}
+
 void fn_800EAAF8(s32 arg0, s32 arg1) {
     s32 var_r31;
 
@@ -3736,6 +3792,35 @@ void fn_800EAAF8(s32 arg0, s32 arg1) {
     }
     if (arg1 & 1) {
         fn_802D20E8(arg0);
+    }
+}
+
+void fn_800EAB5C(void *arg0, void *arg1) {
+    void *dst = arg0;
+    void *src = arg1;
+    if (dst == src) {
+        return;
+    }
+    {
+        register s32 r11 asm("r11");
+        register void *r9 asm("r9");
+        register void *r4 asm("r4");
+        r9 = dst;
+        r4 = src;
+        r11 = 0x1F8;
+        do {
+            r11 -= 24;
+            ((u32 *)r9)[0] = ((u32 *)r4)[0];
+            ((u32 *)r9)[1] = ((u32 *)r4)[1];
+            ((u32 *)r9)[2] = ((u32 *)r4)[2];
+            ((u32 *)r9)[3] = ((u32 *)r4)[3];
+            ((u32 *)r9)[4] = ((u32 *)r4)[4];
+            ((u32 *)r9)[5] = ((u32 *)r4)[5];
+            r4 = (char *)r4 + 24;
+            r9 = (char *)r9 + 24;
+        } while (r11 != 0);
+        ((u32 *)r9)[0] = ((u32 *)r4)[0];
+        ((u32 *)r9)[1] = ((u32 *)r4)[1];
     }
 }
 
@@ -3779,7 +3864,6 @@ void fn_800EACC8(void *self) {
 }
 
 s32 fn_800EACF0(s32 arg0, s32 arg1) {
-    M2C_UNK fn_800EA8D0(s32, s32);
     s32 temp_r29;
     s32 var_r30;
     s32 var_r31;
@@ -3788,7 +3872,7 @@ s32 fn_800EACF0(s32 arg0, s32 arg1) {
     temp_r29 = var_r31 + 0x1F8;
     var_r30 = arg0;
     do {
-        fn_800EA8D0(var_r30, var_r31);
+        fn_800EA8D0((Bits64 *)var_r30, (Bits64 *)var_r31);
         var_r31 += 8;
         var_r30 += 8;
     } while (var_r31 <= temp_r29);
@@ -3796,7 +3880,6 @@ s32 fn_800EACF0(s32 arg0, s32 arg1) {
 }
 
 s32 fn_800EAD44(s32 arg0, s32 arg1) {
-    M2C_UNK fn_800EA8A8(s32, s32);
     s32 temp_r29;
     s32 var_r30;
     s32 var_r31;
@@ -3805,7 +3888,7 @@ s32 fn_800EAD44(s32 arg0, s32 arg1) {
     temp_r29 = var_r31 + 0x1F8;
     var_r30 = arg0;
     do {
-        fn_800EA8A8(var_r30, var_r31);
+        fn_800EA8A8((Bits64 *)var_r30, (Bits64 *)var_r31);
         var_r31 += 8;
         var_r30 += 8;
     } while (var_r31 <= temp_r29);
@@ -3813,7 +3896,6 @@ s32 fn_800EAD44(s32 arg0, s32 arg1) {
 }
 
 s32 fn_800EAD98(s32 arg0, s32 arg1) {
-    M2C_UNK fn_800EA8F8(s32, s32);
     s32 temp_r29;
     s32 var_r30;
     s32 var_r31;
@@ -3822,7 +3904,7 @@ s32 fn_800EAD98(s32 arg0, s32 arg1) {
     temp_r29 = var_r31 + 0x1F8;
     var_r30 = arg0;
     do {
-        fn_800EA8F8(var_r30, var_r31);
+        fn_800EA8F8((Bits64 *)var_r30, (Bits64 *)var_r31);
         var_r31 += 8;
         var_r30 += 8;
     } while (var_r31 <= temp_r29);
@@ -3830,24 +3912,22 @@ s32 fn_800EAD98(s32 arg0, s32 arg1) {
 }
 
 s32 fn_800EADEC(s32 arg0, s32 arg1) {
-    M2C_UNK fn_800EA920(s32, s32);
     s32 var_r31;
 
     var_r31 = arg0;
     do {
-        fn_800EA920(var_r31, arg1);
+        fn_800EA920((Bits64 *)var_r31, arg1);
         var_r31 += 8;
     } while (var_r31 <= (s32) (arg0 + 0x1F8));
     return arg0;
 }
 
 s32 fn_800EAE3C(s32 arg0, s32 arg1) {
-    M2C_UNK fn_800EA968(s32, s32);
     s32 var_r31;
 
     var_r31 = arg0;
     do {
-        fn_800EA968(var_r31, arg1);
+        fn_800EA968((Bits64 *)var_r31, arg1);
         var_r31 += 8;
     } while (var_r31 <= (s32) (arg0 + 0x1F8));
     return arg0;
