@@ -2431,6 +2431,20 @@ void fn_80205AE0(void *arg0, void *arg1) {
     }
 }
 
+void fn_80205BF8(void *arg0, u16 *arg1) {
+    struct S {
+        u8 pad[0xD8];
+        s32 arr[1];
+    };
+    void fn_80204974(void *, s32, u16 *);
+    extern s32 lbl_80494648[2];
+
+    if (arg1 != NULL) {
+        *arg1 = 0;
+        fn_80204974(arg0, ((struct S *)arg0)->arr[lbl_80494648[M2C_FIELD(arg0, s32 *, 0x84)]], arg1);
+    }
+}
+
 void fn_80205CB4(void *arg0, s32 arg1) {
     void fn_80245BB4(s32, char *, ...);
     extern char lbl_803E4E18[];
