@@ -557,7 +557,7 @@ void fn_800AB5B4(void) {
 }
 
 void fn_800AB5B8(s32 arg0, s32 arg1) {
-    void fn_800AB5F8();
+    void fn_800AB5F8(s32, s32, s32);
     s32 temp_r4;
 
     temp_r4 = M2C_FIELD(arg0, s32 *, 0x7C) + 1;
@@ -573,7 +573,7 @@ void fn_800AB5FC(u8 *arg0) {
     extern f32 lbl_803CE4F8[];
     extern s32 lbl_8041FC68[];
     extern u8 *lbl_80494FA4;
-    struct { s32 flags; s32 pad[2]; f32 f; } sp8, *p;
+    struct { s32 flags; s32 pad[2]; f32 f; s32 pad2[2]; } sp8, *p;
     f32 temp_f31;
     s32 *var_r31;
     u8 *a;
