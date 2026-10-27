@@ -9479,6 +9479,14 @@ void fn_803BC66C(s32 self, s32 flags) {
     }
 }
 
+void fn_803BC6AC(u8 *p, s32 n) {
+    extern void fn_80319BA8(void *);
+    while (--n != -1) {
+        fn_80319BA8(p);
+        p += 0xe0;
+    }
+}
+
 void *fn_803BC8B4(u8 *self, s32 *arr) {
     extern void fn_803BC794(void *, s32, s32);
     extern void fn_8031A548(void *, void *);
