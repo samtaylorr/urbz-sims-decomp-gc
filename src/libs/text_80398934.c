@@ -7370,6 +7370,16 @@ s32 fn_803B9FEC(s32 *self) {
     return *self;
 }
 
+void fn_803B9FF4(s32 *self, s32 n) {
+    extern void fn_802D5254(s32 *, s32);
+    s32 i;
+    for (i = n - 1; i != -1; i--) {
+        s32 *p = self;
+        self++;
+        fn_802D5254(p, *p);
+    }
+}
+
 extern void fn_803BA044(void *);
 void fn_803BA044(void *self) {
     ((s32 *)self)[0] = 0;
