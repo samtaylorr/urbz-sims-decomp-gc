@@ -2,6 +2,9 @@
 #include "common.h"
 
 void fn_800C3B48(void);
+void fn_80200044(void *, u8 *, s32, s32);
+void fn_801FFFDC(void *, u8 *, s32, void *);
+void fn_802000A8(void *, u8 *, s32, u16);
 
 typedef struct INVNode {
     struct INVNode *prev;
@@ -2551,6 +2554,26 @@ void fn_801FE23C(s32 arg0) {
 
 void fn_801FE2C0(void) {
 
+}
+
+void fn_802000DC(void *self, void *arg1) {
+    extern void *fn_8016CC44(void *);
+    u8 *name = (u8 *)self + 0x38B;
+    void *obj;
+    void *info;
+    s32 *buf[2];
+    s32 v;
+
+    obj = fn_8016CC44(arg1);
+    info = M2C_FIELD(obj, void **, 0x38);
+    fn_8016CCF4(buf, obj);
+    v = 0;
+    if (buf[0] != NULL) {
+        v = *buf[0];
+    }
+    fn_80200044(self, name, 0x100, v);
+    fn_801FFFDC(self, (u8 *)self + 0x48B, 0x100, M2C_FIELD(obj, void **, 0x14));
+    fn_802000A8(self, (u8 *)self + 0x58B, 0x100, M2C_FIELD(info, u16 *, 0x24));
 }
 
 void fn_80200044(void *, u8 *, s32, s32);
