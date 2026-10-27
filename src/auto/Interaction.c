@@ -336,6 +336,29 @@ void fn_8010FC58(void *arg0) {
     fn_802D1A00(fn_802D0AB8(), arg0);
 }
 
+void *fn_8010FC8C(u32 size) {
+    void *fn_802D197C(void *heap, u32 size, u32 align);
+    void *fn_802D0B3C(void);
+    void *fn_802DC9F4(void *heap, u32 size, s32 arg2, s32 arg3);
+    void *heap;
+    void *p;
+
+    heap = fn_802D0AB8();
+    if (size == 0) {
+        return NULL;
+    }
+    p = fn_802D197C(heap, size, 4);
+    if (p == NULL) {
+        p = fn_802DC9F4(heap, size, 1, 0);
+        if (p == NULL && heap == fn_802D0AB8()) {
+            return fn_802DC9F4(fn_802D0B3C(), size, 1, 0);
+        }
+    } else {
+        fn_80248488((s32)p, 0, size);
+    }
+    return p;
+}
+
 void fn_8010FD34(void *arg0) {
     fn_802D1A00(fn_802D0AB8(), arg0);
 }
@@ -351,6 +374,43 @@ void fn_8010FD90(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
         (*(void (**)(void *, s32))(vt + 0xC))((char *)obj + *(s16 *)(vt + 0x8), 3);
+    }
+}
+
+s32 fn_8010FDD0(char *self) {
+    extern u8 lbl_8040ECC0[];
+    extern u8 lbl_8040EC00[];
+    extern u8 lbl_8040EC20[];
+    extern void fn_80105120(void *);
+    extern void fn_800EC9AC(void *);
+
+    M2C_FIELD(self, void **, 0) = lbl_8040ECC0;
+    fn_80105120(self + 4);
+    M2C_FIELD(self, void **, 0x10) = lbl_8040EC00;
+    M2C_FIELD(self, void **, 0) = lbl_8040EC20;
+    fn_800EC9AC(self + 0x18);
+    M2C_FIELD(self, s32 *, 0x20) = 0;
+    M2C_FIELD(self, s32 *, 0x14) = 0;
+    M2C_FIELD(self, s32 *, 0x1C) = 0;
+    return (s32)self;
+}
+
+void fn_8010FE40(char *self, s32 flags) {
+    extern u8 lbl_8040ECC0[];
+    extern u8 lbl_8040EC00[];
+    extern u8 lbl_8040EC20[];
+    extern void fn_801100B8(void *);
+    extern void fn_800ECE00(void *, s32);
+    extern void fn_8010515C(void *, s32);
+
+    M2C_FIELD(self, void **, 0x10) = lbl_8040EC00;
+    M2C_FIELD(self, void **, 0) = lbl_8040EC20;
+    fn_801100B8(self);
+    fn_800ECE00(self + 0x18, 2);
+    fn_8010515C(self + 4, 0);
+    M2C_FIELD(self, void **, 0) = lbl_8040ECC0;
+    if (flags & 1) {
+        fn_802D20E8(self);
     }
 }
 
