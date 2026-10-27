@@ -2997,12 +2997,30 @@ s32 fn_803A51C0(s32 arg0, s32 arg1, s32 arg2) {
     return ret;
 }
 
+void *fn_803A5B58(s32 *self) {
+    s32 *p;
+    self[1] = 0;
+    p = fn_80399BE8(0x1C);
+    self[2] = 0;
+    self[1] = (s32)p;
+    *(u8 *)&self[3] = 0;
+    p[0] = 0;
+    ((s32 *)self[1])[1] = 0;
+    ((s32 *)self[1])[2] = self[1];
+    ((s32 *)self[1])[3] = self[1];
+    return self;
+}
+
 extern u8 lbl_80411160[];
 void fn_803A5BC0(void **self, s32 flags) {
     *self = lbl_80411160;
     if (flags & 1) {
         fn_802D20E8(self);
     }
+}
+
+s32 fn_803A5F88(void *a, void *b) {
+    return *(s16 *)(*(u8 **)((u8 *)a + 0x38) + 0xBC) == *(s16 *)(*(u8 **)((u8 *)b + 0x38) + 0xBC);
 }
 
 void fn_803A5FA8(void) {
@@ -9880,7 +9898,7 @@ void fn_803BDA1C(void) {
 
 void fn_803BDD5C(void *first_, void *last_, s32 comp) {
     struct Elem12 { s32 a, b, c; };
-    extern void fn_803BDBC8(void *, s32, s32, struct Elem12, s32);
+    extern void fn_803BDBC8(void *, s32, s32, struct Elem12 *, s32);
     struct Elem12 *first = (struct Elem12 *)first_;
     s32 len = (struct Elem12 *)last_ - first;
     s32 parent;
@@ -9890,7 +9908,8 @@ void fn_803BDD5C(void *first_, void *last_, s32 comp) {
     }
     parent = (len - 2) / 2;
     while (1) {
-        fn_803BDBC8(first, parent, len, first[parent], comp);
+        struct Elem12 v = first[parent];
+        fn_803BDBC8(first, parent, len, &v, comp);
         if (parent == 0) {
             return;
         }
@@ -10038,10 +10057,11 @@ void fn_803BEA8C(s32 self) {
     switch (fn_8026430C(self)) {
     case 0:
     case 2:
+    case 8:
+        break;
     case 4:
     case 5:
     case 6:
-    case 8:
     case 11:
         lbl_80494FD0 = 1;
         break;
@@ -10205,11 +10225,13 @@ void *fn_803BEF64(void *self, s32 *vec) {
     void fn_8036C038(void *, s32);
     void *vt;
     s32 n;
+    s32 tmp;
     s32 i;
 
-    n = vec[1];
     vt = M2C_FIELD(self, void **, 0x18);
-    M2C_FIELD(vt, void (**)(void *, s32 *, s32), 0x3C)((char *)self + M2C_FIELD(vt, s16 *, 0x38), &n, 4);
+    n = vec[1];
+    tmp = n;
+    M2C_FIELD(vt, void (**)(void *, s32 *, s32), 0x3C)((char *)self + M2C_FIELD(vt, s16 *, 0x38), &tmp, 4);
     for (i = 0; i < n; i++) {
         fn_8036C038(self, ((s32 *)vec[0])[i]);
     }
