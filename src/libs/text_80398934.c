@@ -10273,6 +10273,12 @@ void fn_803BFD58(s32 *self, s32 n) {
     }
 }
 
+void fn_803BFD74(f32 *dst, f32 *src, s32 n) {
+    while (--n != -1) {
+        *dst++ = *src++;
+    }
+}
+
 void fn_803BFEC0(s32 *self, s32 n) {
     while (--n != -1) {
         self++;
