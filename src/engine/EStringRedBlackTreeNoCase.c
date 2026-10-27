@@ -8,6 +8,10 @@ typedef struct EMat4Node {
     void *value;
 } EMat4Node;
 
+static inline s32 EStrNode_Valid(void *n) {
+    return n != NULL;
+}
+
 typedef struct ScratchPool {
     u32 base;
     void *free;
