@@ -18,12 +18,10 @@ static inline void QSSVec_Init(QSSVec *v) {
 }
 
 static inline s32 QVec_Count(s32 **vec) {
-    s32 *arr = *vec;
-    s32 n = 0;
-    if (arr != NULL) {
-        n = arr[-1];
+    if (*vec != NULL) {
+        return (*vec)[-1];
     }
-    return n;
+    return 0;
 }
 
 static inline s32 QVec_At(s32 **vec, s32 i) {
