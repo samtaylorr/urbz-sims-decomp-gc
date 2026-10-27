@@ -2553,11 +2553,33 @@ void fn_801FE2C0(void) {
 
 }
 
+void fn_80200044(void *, u8 *, s32, s32);
+void fn_801FFFDC(void *, u8 *, s32, void *);
+void fn_802000A8(void *, u8 *, s32, u16);
+void fn_80200274(void *self, void **arg1) {
+    extern u8 lbl_803E4D48[];
+    s32 *p = M2C_FIELD(*arg1, s32 **, 4);
+    s32 v = 0;
+
+    if (p != NULL) {
+        v = *p;
+    }
+    fn_80200044(self, (u8 *)self + 0x38B, 0x100, v);
+    fn_801FFFDC(self, (u8 *)self + 0x48B, 0x100, lbl_803E4D48);
+    fn_802000A8(self, (u8 *)self + 0x58B, 0x100, M2C_FIELD(*arg1, u16 *, 2));
+}
+
 void fn_8020037C(s32 arg0) {
     M2C_UNK fn_80248488(s32, M2C_UNK, M2C_UNK);
     fn_80248488(arg0 + 0x38B, 0, 0x100);
     fn_80248488(arg0 + 0x48B, 0, 0x100);
     fn_80248488(arg0 + 0x58B, 0, 0x100);
+}
+
+void fn_802003D4(void *self, s32 arg1) {
+    void fn_80245BB4(s32, char *, ...);
+    extern char lbl_803E5720[];
+    fn_80245BB4((s32)((u8 *)self + 0x68B), lbl_803E5720, arg1);
 }
 
 void fn_8020064C(void) {
