@@ -616,8 +616,8 @@ void fn_802CB8D4(void *arg0) {
         fn_802D20E8(node);
         node = next;
     }
-    M2C_FIELD(arg0, void **, 0) = NULL;
     M2C_FIELD(arg0, void **, 4) = NULL;
+    M2C_FIELD(arg0, void **, 0) = NULL;
 }
 
 void fn_802CB930(void *arg0) {
