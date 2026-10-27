@@ -7,7 +7,10 @@ extern s32 lbl_804957B8;
 void fn_80041AB4(s32 *arg) {
     typedef struct { s32 size; s32 unk4; s32 unk8; f32 f0; f32 f1; f32 f2; f32 f3; } EyeToyParams;
     void fn_80248488(void *, s32, s32);
+    f32 fn_80043A40(void);
     f32 fn_8004387C(void);
+    f32 fn_80043984(void);
+    f32 fn_80043938(void);
     extern EyeToyParams lbl_8041F714;
     extern u8 lbl_8041F718[];
     extern u8 lbl_803F5DA8[];
