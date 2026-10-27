@@ -38,6 +38,13 @@ typedef struct {
     s32 value;
 } SearchEntry8;
 
+typedef struct Elem14 {
+    u8 data[0x10];
+    u8 unk10;
+    u8 unk11;
+    u8 pad[2];
+} Elem14;
+
 typedef struct {
     s32 a, b, c;
 } Elem12;
@@ -187,11 +194,13 @@ void *fn_80399B3C(u32 n) {
 
 void *fn_80399BE8(u32 n) {
     extern void **lbl_804069A8[];
-    void **r = lbl_804069A8[(n - 1) >> 3];
+    void ***fl = &lbl_804069A8[(n - 1) >> 3];
+    void **r = *fl;
     if (r == NULL) {
-        return fn_80399B3C(n);
+        r = fn_80399B3C(n);
+    } else {
+        *fl = *r;
     }
-    lbl_804069A8[(n - 1) >> 3] = *r;
     return r;
 }
 
