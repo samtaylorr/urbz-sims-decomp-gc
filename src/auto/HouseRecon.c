@@ -151,11 +151,14 @@ s32 fn_80052954(u32 *arg0) {
 s32 fn_80052960(s32 *arg0) {
     extern u8 lbl_8041F94C[];
     s32 fn_8004E8F0(void *, s32);
+    s32 r;
 
     if (fn_8004E8F0(lbl_8041F94C, 4) != 0) {
-        return 1;
+        r = 1;
+    } else {
+        r = *arg0 & 1;
     }
-    return *arg0 & 1;
+    return r;
 }
 
 s32 fn_800529B0(u32 *arg0) {
