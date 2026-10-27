@@ -57,6 +57,51 @@ s32 fn_803338C0(void *arg0, s32 i) {
     return self->unk10[i];
 }
 
+s32 fn_8033390C(void *mgr, s32 arg) {
+    extern s32 lbl_804939C0[];
+    s32 fn_803338F0(void *, s32);
+    s32 idx;
+    s32 ret;
+
+    idx = fn_803338F0(mgr, arg);
+    if (idx != -1) {
+        ret = lbl_804939C0[idx];
+    } else {
+        ret = 0;
+    }
+    return ret;
+}
+
+s32 fn_8033394C(void) {
+    extern void *lbl_804939C0[];
+    s32 fn_803105F0(void *);
+    s32 ret;
+    s32 i;
+
+    ret = -1;
+    for (i = 0; i <= 3; i++) {
+        if (fn_803105F0(lbl_804939C0[i]) != 0) {
+            ret = i;
+        }
+    }
+    return ret;
+}
+
+void fn_803339AC(void) {
+    extern char *lbl_804939C0[];
+    char **p;
+    char *obj;
+    char *vt;
+
+    p = lbl_804939C0;
+    do {
+        obj = *p;
+        p++;
+        vt = M2C_FIELD(obj, char **, 0x204);
+        (*(void (**)(void *))(vt + 0xAC))(obj + *(s16 *)(vt + 0xA8));
+    } while (p <= lbl_804939C0 + 3);
+}
+
 void fn_803338AC(s32, s32);
 static inline s32 ECtrl_NumPorts(void) {
     return 4;
