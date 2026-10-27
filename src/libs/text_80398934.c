@@ -894,6 +894,64 @@ void fn_8039BECC(s32 *dst, s32 *src, s32 n) {
     }
 }
 
+void fn_8039BEF8(void *self, s32 newSize, s32 cap) {
+    extern void *fn_802D197C(void *, u32, s32);
+    extern void *fn_802DBBCC(void *, u32, s32);
+    extern void *fn_802D0B3C(void);
+    s32 oldSize;
+    s32 *p;
+
+    if (cap == 0) {
+        cap = newSize;
+    }
+    oldSize = M2C_FIELD(self, s32 *, 4);
+    if (newSize < oldSize) {
+        fn_8039BD94(M2C_FIELD(self, s32 **, 0) + newSize, oldSize - newSize);
+    }
+    if (cap == 0) {
+        s32 *old = M2C_FIELD(self, s32 **, 0);
+        fn_802D1A00(fn_802D0AB8(), old);
+        fn_8039BD50(self);
+    } else {
+        if (M2C_FIELD(self, s32 *, 8) != cap) {
+            u32 size = cap * sizeof(s32);
+            void *heap = fn_802D0AB8();
+            if (size == 0) {
+                p = NULL;
+            } else {
+                void *q = fn_802D197C(heap, size, 4);
+                if (q == NULL && (q = fn_802DBBCC(heap, size, 0)) == NULL && heap == fn_802D0AB8()) {
+                    p = fn_802DBBCC(fn_802D0B3C(), size, 0);
+                } else {
+                    p = q;
+                }
+            }
+            if (p == NULL) {
+                goto done;
+            }
+            if (M2C_FIELD(self, s32 **, 0) != NULL) {
+                s32 n = newSize;
+                s32 *old;
+                if (n > M2C_FIELD(self, s32 *, 4)) {
+                    n = M2C_FIELD(self, s32 *, 4);
+                }
+                fn_8039BEB0(p, n);
+                fn_8039BECC(p, M2C_FIELD(self, s32 **, 0), n);
+                fn_8039BD94(M2C_FIELD(self, s32 **, 0), M2C_FIELD(self, s32 *, 4));
+                old = M2C_FIELD(self, s32 **, 0);
+                fn_802D1A00(fn_802D0AB8(), old);
+            }
+            M2C_FIELD(self, s32 **, 0) = p;
+            M2C_FIELD(self, s32 *, 8) = cap;
+        }
+        M2C_FIELD(self, s32 *, 4) = newSize;
+    }
+done:
+    if (newSize > oldSize) {
+        fn_8039BEB0(M2C_FIELD(self, s32 **, 0) + oldSize, newSize - oldSize);
+    }
+}
+
 void fn_8039C07C(s32 *dst, s32 *src, s32 n) {
     src += n - 1;
     dst += n - 1;
