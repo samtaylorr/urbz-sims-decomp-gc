@@ -42,6 +42,22 @@ s32 fn_801D5AB4(void) {
     return lbl_804945DC;
 }
 
+s32 fn_801D5B20(u8 *self, s32 arg1, Unk801D4CC0 *out, f32 *outf) {
+    extern s32 fn_801C9664(u8 *, u32, s32);
+    extern Unk801D4CC0 lbl_8043650C;
+    extern f32 lbl_803DFAFC[];
+    if (arg1 != 0 && fn_801C9664(self, 0x5B075161, arg1) == 0) {
+        return 0;
+    }
+    if (out != NULL) {
+        *out = lbl_8043650C;
+    }
+    if (outf != NULL) {
+        *outf = lbl_803DFAFC[0];
+    }
+    return 1;
+}
+
 void fn_801D5BB0(s32 init, s32 prio) {
     extern Vec801D4D50 lbl_804364DC[4];
     extern Vec801D4D50 lbl_8043650C;
