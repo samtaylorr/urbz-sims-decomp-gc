@@ -4156,6 +4156,15 @@ void *fn_800ED844(void *arg0, void *arg1, const char *arg2) {
     return arg0;
 }
 
+void *fn_800EDDA0(void *arg0, u32 arg1, u32 arg2, void *arg3, u32 arg4) {
+    void fn_800EC140(void *, u32, u32, const char *, s32);
+    u32 n;
+
+    n = arg2 > (u32)fn_800EF6F8((void **)arg0) - arg1 ? (u32)fn_800EF6F8((void **)arg0) - arg1 : arg2;
+    fn_800EC140(arg0, n, arg1, arg3, arg4);
+    return arg0;
+}
+
 void *fn_800EDE14(void *arg0, u32 arg1, u32 arg2, const char *arg3) {
     void fn_800EC140(void *, u32, u32, const char *, s32);
     u32 n;
