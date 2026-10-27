@@ -458,17 +458,17 @@ void fn_8016204C(void) {
 }
 
 void fn_80162914(void *arg0, s32 arg1) {
-    s32 fn_8015125C(s32, s32);
+    void *fn_8015125C(s32, s32);
     extern void *lbl_80496650;
     void *p;
     void *vt;
-    s32 result;
+    void *obj;
     p = M2C_FIELD(arg0, void **, 0x58);
     vt = *(void **)p;
     M2C_FIELD(vt, void (**)(void *, s32, s32), 0x64)(p + M2C_FIELD(vt, s16 *, 0x60), M2C_FIELD(arg0, s16 *, 0x64), arg1);
-    result = arg0 != NULL ? fn_8015125C(M2C_FIELD(M2C_FIELD(arg0, void **, 4), s32 *, 0), 2) : 0;
-    if (result != 0) {
-        M2C_FIELD(*(void **)lbl_80496650, void (**)(void *), 0x10C)((char *)lbl_80496650 + M2C_FIELD(*(void **)lbl_80496650, s16 *, 0x108));
+    obj = arg0 != NULL ? fn_8015125C(M2C_FIELD(M2C_FIELD(arg0, void **, 4), s32 *, 0), 2) : NULL;
+    if (obj != NULL) {
+        M2C_FIELD(*(void **)lbl_80496650, void (**)(void *, void *), 0x10C)((char *)lbl_80496650 + M2C_FIELD(*(void **)lbl_80496650, s16 *, 0x108), obj);
     }
 }
 
