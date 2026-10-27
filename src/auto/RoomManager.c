@@ -121,6 +121,18 @@ void fn_8018FA84(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 8) = arg1;
 }
 
+s32 fn_8018FCA8(char *self, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    s32 ret;
+    if (arg3 == 0) {
+        char *vt = *(char **)(self + 0x10);
+        ret = (*(s32 (**)(void *, s32, s32, s32))(vt + 0x84))(self + *(s16 *)(vt + 0x80), arg1, arg2, arg4);
+    } else {
+        fn_8018FA84(self, -0x5b);
+        ret = 0;
+    }
+    return ret;
+}
+
 s32 fn_8018FD00(s32 *self) {
     return *self;
 }
@@ -151,7 +163,7 @@ void fn_801905AC(char *self) {
 
     it.node = NULL;
     for (it.node = (*(RMMapNode **)(self + 4))->left;
-         end.node = *(RMMapNode **)(self + 4), RMMapIter_NotEqual(it, end);
+         end.node = *(RMMapNode **)(self + 4), RMMapIter_NotEqualP(&it, &end);
          it.node = (RMMapNode *)fn_8039AB24((void **)it.node)) {
         char *room = it.node->value;
         if (*(s32 *)(room + 0x34) != 0) {
