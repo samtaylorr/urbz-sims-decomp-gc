@@ -25,6 +25,12 @@ void fn_80375778(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x8C) = arg1;
 }
 
+void fn_80375780(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    M2C_FIELD(arg0, s32 *, 0x84) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x88) = arg2;
+    M2C_FIELD(arg0, s32 *, 0x8C) = arg3;
+}
+
 void fn_80375790(void *arg0, s32 arg1) {
     extern void fn_8039A334(void *, s32, s32);
     M2C_FIELD(arg0, s32 *, 0x90) = arg1;
