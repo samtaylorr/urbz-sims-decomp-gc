@@ -2059,6 +2059,10 @@ void fn_8039FE84(void **self, s32 flags) {
     }
 }
 
+s32 fn_8039FEB8(void *self, s32 i) {
+    return (i + 1) % 64;
+}
+
 void fn_803A044C(void *self) {
     extern void fn_803997AC(void *, u32);
     struct LNode {
