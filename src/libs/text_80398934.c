@@ -47,7 +47,7 @@ typedef struct {
     s32 second;
 } RbInsertPair;
 
-RbIter fn_8039F498(void **tree, void **x, void **y, u32 *v, s32 w);
+void fn_8039F498(RbIter *ret, void **tree, void **x, void **y, u32 *v, s32 w);
 void **fn_8039F5BC(void **node);
 
 typedef struct Elem14 {
@@ -2167,6 +2167,13 @@ void **fn_8039F5BC(void **node) {
         node = y;
     }
     return node;
+}
+
+RbInsertPair fn_8039F62C(void **tree, u32 *v) {
+    RbInsertPair ret;
+    ret.first = tree;
+    ret.second = 0;
+    return ret;
 }
 
 Elem12S16 *fn_8039FDA4(Elem12S16 *lo, Elem12S16 *hi, s32 key) {
@@ -4995,9 +5002,9 @@ void fn_803AEE2C(Elem14 *arr, u32 count, Elem14 *val, u32 pos) {
         arr[i].unk10 = arr[i - 1].unk10;
         arr[i].unk11 = arr[i - 1].unk11;
     }
-    fn_803AF07C((s32 *)&arr[pos], (s32 *)val);
-    arr[pos].unk10 = val->unk10;
-    arr[pos].unk11 = val->unk11;
+    fn_803AF07C((s32 *)(pos + arr), (s32 *)val);
+    (pos + arr)->unk10 = val->unk10;
+    (pos + arr)->unk11 = val->unk11;
 }
 
 void fn_803AEEEC(u32 *arr, u32 count, u32 *val, u32 pos) {
@@ -8021,16 +8028,12 @@ void fn_803B32E4(void *arg0, u32 n) {
                 Pair *src;
                 Pair *dst;
                 Pair *mem;
-                if (n != 0) {
-                    bytes = n * sizeof(Pair);
-                    mem = PtrVec_Allocate(bytes);
-                } else {
-                    mem = NULL;
-                    bytes = 0;
-                }
+                bytes = n * sizeof(Pair);
+                mem = n != 0 ? PtrVec_Allocate(bytes) : (bytes = 0, NULL);
                 dst = mem;
                 for (src = start; src != finish; src++) {
-                    *dst = *src;
+                    dst->a = src->a;
+                    dst->b = src->b;
                     dst++;
                 }
                 result = mem;
@@ -8051,13 +8054,8 @@ void fn_803B32E4(void *arg0, u32 n) {
             }
         } else {
             Pair *mem;
-            if (n != 0) {
-                bytes = n * sizeof(Pair);
-                mem = PtrVec_Allocate(bytes);
-            } else {
-                mem = NULL;
-                bytes = 0;
-            }
+            bytes = n * sizeof(Pair);
+            mem = n != 0 ? PtrVec_Allocate(bytes) : (bytes = 0, NULL);
             tmp = mem;
         }
         PtrVec_Set((void **)v, (void **)tmp, (void **)(oldSize * 8 + (s32)tmp), (void **)(bytes + (u32)tmp));
