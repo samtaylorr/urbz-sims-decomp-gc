@@ -196,7 +196,7 @@ void *fn_80399BE8(u32 n) {
     extern void **lbl_804069A8[];
     void ***fl = &lbl_804069A8[(n - 1) >> 3];
     void **r = *fl;
-    struct { s32 a; } lock[2];
+    s32 lock[16];
     if (r != NULL) {
         *fl = *r;
     } else {
@@ -553,6 +553,7 @@ void fn_8039B010(s32 *first, s32 *last, s32 comp) {
 
 void fn_8039B050(s32 *first, s32 *middle, s32 *last, s32 *val, s32 comp) {
     s32 *i;
+    s32 *end;
     s32 v;
 
     fn_8039AF90(first, middle, comp);
@@ -563,9 +564,10 @@ void fn_8039B050(s32 *first, s32 *middle, s32 *last, s32 *val, s32 comp) {
             fn_8039AE74(first, 0, middle - first, v, comp);
         }
     }
-    while (middle - first > 1) {
-        fn_8039B010(first, middle, comp);
-        middle--;
+    end = middle;
+    while (end - first > 1) {
+        fn_8039B010(first, end, comp);
+        end--;
     }
 }
 
@@ -4900,6 +4902,34 @@ void fn_803AED88(u32 *arr, u32 count, u32 pos, u32 n) {
     for (i = pos; i < count - n; i++) {
         arr[i] = arr[i + n];
     }
+}
+
+void fn_803AEE2C(Elem14 *arr, u32 count, Elem14 *val, u32 pos) {
+    Elem14 *dst;
+    Elem14 *src;
+    u32 i;
+
+    if (pos > count) {
+        if (fn_80240584() != 0) {
+            *(s32 *)0 = 0;
+        }
+    }
+    i = count - pos;
+    if (i != 0) {
+        dst = &arr[count];
+        src = &arr[count - 1];
+        do {
+            fn_803AF07C((s32 *)dst, (s32 *)src);
+            dst->unk10 = src->unk10;
+            dst->unk11 = src->unk11;
+            dst--;
+            src--;
+        } while (--i != 0);
+    }
+    dst = &arr[pos];
+    fn_803AF07C((s32 *)dst, (s32 *)val);
+    dst->unk10 = val->unk10;
+    dst->unk11 = val->unk11;
 }
 
 void fn_803AF018(s32 *dst, s32 a, s32 b, s32 p, s32 c) {
