@@ -66,6 +66,12 @@ s32 fn_8037583C(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x90);
 }
 
+void *fn_80375844(void *arg0, void *arg1, s32 arg2) {
+    extern void fn_8039A4B8(void *, void *);
+    fn_8039A4B8(arg0, (u8 *)M2C_FIELD(arg1, void **, 0x94) + arg2 * 0xC);
+    return arg0;
+}
+
 void fn_80375880(void) {
     fn_802D2FD0();
 }
