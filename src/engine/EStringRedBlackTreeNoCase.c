@@ -542,6 +542,19 @@ s32 fn_803698D8(void **arg0) {
     return var_r9;
 }
 
+void fn_80369AF4(void *arg0, s32 arg1) {
+    void fn_8036A180(void *);
+    void fn_802D20E8(void *);
+    void fn_802D1A00(void *, void *);
+    void *fn_802D0AB8(void);
+
+    fn_8036A180(arg0);
+    fn_802D1A00(fn_802D0AB8(), M2C_FIELD(arg0, void **, 8));
+    if (arg1 & 1) {
+        fn_802D20E8(arg0);
+    }
+}
+
 s32 fn_80369B40(void *arg0, u8 *arg1) {
     s32 var_r10;
     s8 var_r9;
