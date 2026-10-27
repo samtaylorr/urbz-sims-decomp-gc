@@ -3211,6 +3211,16 @@ void fn_800E6570(void) {
 
 }
 
+void fn_800E6574(s32 *self) {
+    extern s32 fn_8006F878(void *);
+    u8 *obj = (u8 *)self[0x18 / 4];
+    u8 *vt = *(u8 **)(obj + 0x44);
+    (*(void (**)(void *))(vt + 0x14))(obj + *(s16 *)(vt + 0x10));
+    if (fn_8006F878((void *)self[0x18 / 4]) != 0) {
+        fn_800E3B80(self, 1);
+    }
+}
+
 void fn_800E65D4(void *arg0, s32 arg1) {
     void *temp_r11;
     void *temp_r9;
