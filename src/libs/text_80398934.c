@@ -7136,6 +7136,18 @@ void fn_803B9174(s32 self, s32 flags) {
     }
 }
 
+void fn_803B93E8(void *dst, void *src, s32 n) {
+    struct Elem20 { s32 a, b, c, d, e; };
+    struct Elem20 *d = (struct Elem20 *)dst;
+    struct Elem20 *s = (struct Elem20 *)src;
+
+    s += n - 1;
+    d += n - 1;
+    while (--n != -1) {
+        *d-- = *s--;
+    }
+}
+
 void fn_803B9444(void *, s32, s32, s32);
 void fn_803B9520(void *self, s32 arg1) {
     fn_803B9444(self, arg1, M2C_FIELD(self, s32 *, 4), 1);
