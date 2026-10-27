@@ -9740,6 +9740,17 @@ void fn_803BD7F8(void) {
     fn_80335FD8();
 }
 
+void fn_803BD818(void **self, s32 flags) {
+    extern u8 lbl_8041BC88[];
+    void fn_8031E910(void *, s32);
+    void fn_803BD888(void *);
+    *self = lbl_8041BC88;
+    fn_8031E910(self, 0);
+    if (flags & 1) {
+        fn_803BD888(self);
+    }
+}
+
 void fn_803BD868(void) {
     fn_80335FD8();
 }
