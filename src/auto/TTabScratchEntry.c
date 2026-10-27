@@ -1155,6 +1155,20 @@ void fn_801A30AC(void) {
     fn_800F1A60((s32)&lbl_80495D3C, 2);
 }
 
+s32 fn_801A34D8(void *arg0, s32 arg1, void **arg2) {
+    void *temp_r9;
+
+    if (arg2 != NULL) {
+        if (arg1 == 1 || arg1 == 0x6BF32227) {
+            temp_r9 = M2C_FIELD(arg0, void **, 0);
+            M2C_FIELD(temp_r9, void (**)(void *), 0x14)((char *)arg0 + M2C_FIELD(temp_r9, s16 *, 0x10));
+            *arg2 = arg0;
+            return 1;
+        }
+    }
+    return 0;
+}
+
 s16 fn_801A375C(void **arg0, s32 arg1) {
     s32 var_r0;
     void *temp_r3;
