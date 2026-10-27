@@ -843,7 +843,7 @@ void fn_80072BE0(void *self, s32 flags) {
 void *fn_80072C7C(void *arg0, void *arg1) {
     extern void *fn_8016CC44(void *);
     M2C_UNK fn_802D1FC8(M2C_UNK);
-    extern void *fn_8007B398();
+    extern void *fn_8007B398(M2C_UNK);
     extern void fn_80304B30(void *, u32);
     extern void fn_80304BE4(void *, u32);
     void *a;
