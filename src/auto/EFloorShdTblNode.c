@@ -213,12 +213,10 @@ s32 fn_800568D0(void) {
     return lbl_80496694;
 }
 
-void fn_800568D8(s32 *arg0) {
-    s32 *q = arg0 + 1;
-    q[1] = 0;
-    q[0] = 0;
-    q[2] = 1;
+s32 *fn_800568D8(s32 *arg0) {
+    EFloorShd_InitList(arg0 + 1);
     arg0[0] = 0;
+    return arg0;
 }
 
 void fn_800568FC(s32 arg0, s32 arg1) {
