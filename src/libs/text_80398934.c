@@ -2053,6 +2053,34 @@ s32 fn_803A147C(s32 *self) {
     return self[2];
 }
 
+SearchEntry8 *fn_803A1484(SearchEntry8 *lo, SearchEntry8 *hi, s32 key) {
+    for (;;) {
+        s32 n = hi - lo;
+        SearchEntry8 *mid;
+        s32 d;
+
+        if (n <= 0) {
+            return 0;
+        }
+        if (n == 1) {
+            if (lo->value == key) {
+                return lo;
+            }
+            return 0;
+        }
+        mid = lo + n / 2;
+        d = key - mid->value;
+        if (d == 0) {
+            return mid;
+        }
+        if (d > 0) {
+            lo = mid + 1;
+        } else {
+            hi = mid;
+        }
+    }
+}
+
 extern u8 lbl_8040E940[];
 void fn_803A14E4(void **self, s32 flags) {
     *self = lbl_8040E940;
