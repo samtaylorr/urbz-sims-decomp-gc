@@ -2593,6 +2593,20 @@ void fn_80200274(void *self, void **arg1) {
     fn_802000A8(self, (u8 *)self + 0x58B, 0x100, M2C_FIELD(*arg1, u16 *, 2));
 }
 
+void fn_802002F8(void *self, void **arg1) {
+    extern u8 lbl_803E4D48[];
+    u8 *name = (u8 *)self + 0x38B;
+    s32 *p = M2C_FIELD(*arg1, s32 **, 4);
+    s32 v = 0;
+
+    if (p != NULL) {
+        v = *p;
+    }
+    fn_80200044(self, name, 0x100, v);
+    fn_801FFFDC(self, (u8 *)self + 0x48B, 0x100, lbl_803E4D48);
+    fn_802000A8(self, (u8 *)self + 0x58B, 0x100, M2C_FIELD(*arg1, u16 *, 2));
+}
+
 void fn_8020037C(s32 arg0) {
     M2C_UNK fn_80248488(s32, M2C_UNK, M2C_UNK);
     fn_80248488(arg0 + 0x38B, 0, 0x100);
