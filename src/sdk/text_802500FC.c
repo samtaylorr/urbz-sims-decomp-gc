@@ -1073,6 +1073,7 @@ void fn_8026694C(void *alarm, void *context) {
     }
 }
 
+#pragma dont_inline on
 void fn_802669C0(s64 timeout) {
     extern u8 lbl_80442AD8[];
     void fn_80251224(void *, s64, void *);
@@ -1101,6 +1102,19 @@ void *fn_80266A38(void) {
     lbl_80495F5C = 0;
     lbl_80495F48 = NULL;
     return cb;
+}
+
+s32 fn_80266A54(void) {
+    extern s64 lbl_80495F50;
+    s64 fn_8025A494(void);
+
+    if (fn_8025A494() - lbl_80495F50 < (s64)(100 * ((*(u32 *)0x800000F8 / 4) / 1000))) {
+        return 0;
+    }
+    if (__DIRegs[1] & 1) {
+        return 1;
+    }
+    return 2;
 }
 
 void fn_80266AE8(s32 arg0, s32 arg1) {
