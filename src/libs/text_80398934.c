@@ -2058,10 +2058,12 @@ void **fn_8039F5BC(void **node) {
             node = node[3];
         }
     } else {
-        do {
-            y = node;
-            node = node[1];
-        } while (y == node[2]);
+        y = node[1];
+        while (node == y[2]) {
+            node = y;
+            y = y[1];
+        }
+        node = y;
     }
     return node;
 }
