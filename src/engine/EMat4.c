@@ -1178,12 +1178,16 @@ void fn_802D0894(void *arg0) {
 }
 
 u16 fn_802D08C8(void *arg0) {
+    s32 off;
+    u8 *base;
     u16 idx = M2C_FIELD(arg0, u16 *, 0x1006);
 
     if (idx == 0) {
         return 0;
     }
-    M2C_FIELD(arg0, u16 *, 0x1006) = M2C_FIELD(arg0, EMat4Slot **, 0x1008)[idx].idx;
+    off = idx * 0x48;
+    base = (u8 *)M2C_FIELD(arg0, u32 *, 0x1008);
+    M2C_FIELD(arg0, u16 *, 0x1006) = *(u16 *)(base + off);
     return idx;
 }
 
