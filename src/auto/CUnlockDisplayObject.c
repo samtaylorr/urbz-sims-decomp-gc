@@ -67,11 +67,12 @@ s32 fn_800BAD38(u8 *self) {
 
 s32 fn_800BAD74(u8 *self) {
     s32 fn_8032C268(s32);
+    s32 fn_800BBAD4(void *);
     void **n;
     s32 res = 0;
 
     for (n = *(void ***)(self + 0x44C); n != NULL; n = (void **)*n) {
-        res = (res == 0 && fn_8032C268(fn_800BBAD4(n)) != 0);
+        res = (res != 0 || fn_8032C268(fn_800BBAD4(n)) != 0);
     }
     return res;
 }
@@ -93,6 +94,7 @@ void fn_800BAE28(u8 *self, f32 *vec, s32 val, s32 idx) {
     typedef struct { f32 x, y, z; } UnlockVec;
     extern f32 lbl_803CF948[];
     void fn_8025FB2C(f32 *, f32 *);
+    s32 *arr;
 
     if (idx > 2) {
         return;
@@ -100,7 +102,8 @@ void fn_800BAE28(u8 *self, f32 *vec, s32 val, s32 idx) {
     if (idx + 1 > *(s32 *)(self + 0x428)) {
         *(s32 *)(self + 0x428) = idx + 1;
     }
-    ((s32 *)(self + 0x490))[idx] = val;
+    arr = (s32 *)(self + 0x490);
+    *(s32 *)((u8 *)arr + idx * 4) = val;
     if (vec[0] != lbl_803CF948[0] || vec[1] != lbl_803CF948[0] || vec[2] != lbl_803CF948[0]) {
         fn_8025FB2C(vec, vec);
     }
