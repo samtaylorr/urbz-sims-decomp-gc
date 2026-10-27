@@ -38,6 +38,18 @@ typedef struct {
     s32 value;
 } SearchEntry8;
 
+typedef struct {
+    void **node;
+} RbIter;
+
+typedef struct {
+    void **first;
+    s32 second;
+} RbInsertPair;
+
+RbIter fn_8039F498(void **tree, void **x, void **y, u32 *v, s32 w);
+void **fn_8039F5BC(void **node);
+
 typedef struct Elem14 {
     u8 data[0x10];
     u8 unk10;
@@ -219,7 +231,7 @@ void *fn_80399C38(void *self, s32 **arg1) {
         ((void (*)(void *, void *, s32))vt[7].pfn)((char *)self + vt[7].delta, &tmp, 4);
     }
     for (i = 0; i < n; i++) {
-        s32 v = *(s32 *)((s32)arg1[0] + i * 4);
+        s32 v = *(s32 *)((char *)arg1[0] + i * 4);
         VtblEntry *vt = *(VtblEntry **)((char *)self + 0x18);
         ((void (*)(void *, void *, s32))vt[7].pfn)((char *)self + vt[7].delta, &v, 4);
     }
@@ -4931,27 +4943,22 @@ void fn_803AEC9C(s32 *self, s32 flags) {
     }
 }
 
+extern s32 fn_80240584(void);
 void fn_803AECD0(Elem14 *arr, u32 count, u32 pos, u32 n) {
-    Elem14 *dst;
-    Elem14 *src;
+    void fn_803AF07C(s32 *dst, s32 *src);
     u32 i;
+    u32 cnt;
 
     if (pos >= count || pos + n > count || n == 0) {
         if (fn_80240584() != 0) {
             *(s32 *)0 = 0;
         }
     }
-    i = count - pos - n;
-    if (i != 0) {
-        dst = &arr[pos];
-        src = &arr[pos + n];
-        do {
-            fn_803AF07C((s32 *)dst, (s32 *)src);
-            dst->unk10 = src->unk10;
-            dst->unk11 = src->unk11;
-            src++;
-            dst++;
-        } while (--i != 0);
+    i = pos;
+    for (cnt = count - i - n; cnt != 0; cnt--, i++) {
+        fn_803AF07C((s32 *)&arr[i], (s32 *)&arr[i + n]);
+        arr[i].unk10 = arr[i + n].unk10;
+        arr[i].unk11 = arr[i + n].unk11;
     }
 }
 
@@ -4959,54 +4966,51 @@ extern s32 fn_80240584(void);
 void fn_803AF07C(s32 *dst, s32 *src);
 void fn_803AED88(u32 *arr, u32 count, u32 pos, u32 n) {
     u32 i;
+    u32 cnt;
 
     if (pos >= count || pos + n > count || n == 0) {
         if (fn_80240584() != 0) {
             *(s32 *)0 = 0;
         }
     }
-    for (i = pos; i < count - n; i++) {
+    i = pos;
+    for (cnt = count - i - n; cnt != 0; cnt--, i++) {
         arr[i] = arr[i + n];
     }
 }
 
 void fn_803AEE2C(Elem14 *arr, u32 count, Elem14 *val, u32 pos) {
-    Elem14 *dst;
-    Elem14 *src;
+    void fn_803AF07C(s32 *dst, s32 *src);
     u32 i;
+    u32 cnt;
 
     if (pos > count) {
         if (fn_80240584() != 0) {
             *(s32 *)0 = 0;
         }
     }
-    i = count - pos;
-    if (i != 0) {
-        dst = &arr[count];
-        src = &arr[count - 1];
-        do {
-            fn_803AF07C((s32 *)dst, (s32 *)src);
-            dst->unk10 = src->unk10;
-            dst->unk11 = src->unk11;
-            dst--;
-            src--;
-        } while (--i != 0);
+    i = count;
+    for (cnt = i - pos; cnt != 0; cnt--, i--) {
+        fn_803AF07C((s32 *)&arr[i], (s32 *)&arr[i - 1]);
+        arr[i].unk10 = arr[i - 1].unk10;
+        arr[i].unk11 = arr[i - 1].unk11;
     }
-    dst = &arr[pos];
-    fn_803AF07C((s32 *)dst, (s32 *)val);
-    dst->unk10 = val->unk10;
-    dst->unk11 = val->unk11;
+    fn_803AF07C((s32 *)&arr[pos], (s32 *)val);
+    arr[pos].unk10 = val->unk10;
+    arr[pos].unk11 = val->unk11;
 }
 
 void fn_803AEEEC(u32 *arr, u32 count, u32 *val, u32 pos) {
     u32 i;
+    u32 cnt;
 
     if (pos > count) {
         if (fn_80240584() != 0) {
             *(s32 *)0 = 0;
         }
     }
-    for (i = count; i > pos; i--) {
+    i = count;
+    for (cnt = i - pos; cnt != 0; cnt--, i--) {
         arr[i] = arr[i - 1];
     }
     arr[pos] = *val;
@@ -7988,6 +7992,75 @@ void fn_803B2E44(void *arg0, u32 n) {
             tmp = mem;
         }
         PtrVec_Set((void **)v, (void **)tmp, (void **)(oldSize * 8 + (s32)tmp), (void **)(n * 8 + (u32)tmp));
+    }
+}
+
+void fn_803B32E4(void *arg0, u32 n) {
+    typedef struct Pair {
+        s32 a;
+        s32 b;
+    } Pair;
+    typedef struct Vec {
+        Pair *start;
+        Pair *finish;
+        s32 unk8;
+        Pair *eos;
+    } Vec;
+    Vec *v = arg0;
+
+    if ((u32)(v->eos - v->start) < n) {
+        Pair *start = v->start;
+        Pair *finish = v->finish;
+        s32 oldSize = finish - start;
+        Pair *tmp;
+        u32 bytes;
+
+        if (start != NULL) {
+            Pair *result;
+            {
+                Pair *src;
+                Pair *dst;
+                Pair *mem;
+                if (n != 0) {
+                    bytes = n * sizeof(Pair);
+                    mem = PtrVec_Allocate(bytes);
+                } else {
+                    mem = NULL;
+                    bytes = 0;
+                }
+                dst = mem;
+                for (src = start; src != finish; src++) {
+                    *dst = *src;
+                    dst++;
+                }
+                result = mem;
+            }
+            tmp = result;
+            {
+                Pair *p = v->start;
+                Pair *end = v->finish;
+                for (; p != end; p++) {
+                }
+            }
+            {
+                Pair *dp = v->start;
+                u32 dn = v->eos - dp;
+                if (dp != NULL) {
+                    PtrVec_Deallocate(dp, dn * sizeof(Pair));
+                }
+            }
+        } else {
+            Pair *mem;
+            if (n != 0) {
+                bytes = n * sizeof(Pair);
+                mem = PtrVec_Allocate(bytes);
+            } else {
+                mem = NULL;
+                bytes = 0;
+            }
+            tmp = mem;
+        }
+        PtrVec_Set((void **)v, (void **)tmp, (void **)(oldSize * 8 + (s32)tmp), (void **)(bytes + (u32)tmp));
     }
 }
 
