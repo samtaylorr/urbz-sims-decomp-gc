@@ -304,6 +304,17 @@ void fn_8036619C(void *arg0) {
     fn_80365D3C(arg0);
 }
 
+void fn_803661F8(void **list) {
+    extern void fn_802D1A00(void *, void *);
+    void *n;
+
+    for (n = *list; EStrNode_Valid(n); n = M2C_FIELD(n, void **, 4)) {
+        void *value = M2C_FIELD(n, void **, 0x10);
+        fn_802D1A00(fn_802D0AB8(), value);
+    }
+    fn_8036619C(list);
+}
+
 s32 fn_8036625C(void **arg0) {
     s32 var_r9;
     void *var_r3;
