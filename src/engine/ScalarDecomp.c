@@ -23,6 +23,18 @@ s32 fn_8036ACBC(void *arg0) {
     return (M2C_FIELD(arg0, s32 *, 0x18) * M2C_FIELD(arg0, s16 *, 0x1C)) + 0x63;
 }
 
+void fn_8036B20C(void *arg0) {
+    extern const f32 lbl_803F50C4[];
+    extern u32 fn_802DE634(s32, s32, s32);
+    void fn_8036B300(void *);
+
+    M2C_FIELD(arg0, s32 *, 0x8) = 0;
+    M2C_FIELD(arg0, s32 *, 0xC) = 0;
+    M2C_FIELD(arg0, f32 *, 0x28) = lbl_803F50C4[0];
+    M2C_FIELD(arg0, s32 *, 0x10) = fn_802DE634(M2C_FIELD(arg0, s32 *, 0x0), M2C_FIELD(arg0, s32 *, 0x4) + M2C_FIELD(arg0, s16 *, 0x1C), M2C_FIELD(arg0, s8 *, 0x1E)) + 1;
+    fn_8036B300(arg0);
+}
+
 void fn_8036BB88(s32 arg0, s32 arg1) {
     if (arg1 == 0xFFFF) {
         if (arg0 != 0) {
