@@ -9487,6 +9487,20 @@ void fn_803BC6AC(u8 *p, s32 n) {
     }
 }
 
+void fn_803BC6F8(s32 *dst, s32 *src, s32 n) {
+    struct Elem224 { s32 v[55]; s32 keep; };
+    struct Elem224 *d = (struct Elem224 *)dst;
+    struct Elem224 *s = (struct Elem224 *)src;
+
+    while (--n != -1) {
+        s32 keep = d->keep;
+        *d = *s;
+        d->keep = keep;
+        d++;
+        s++;
+    }
+}
+
 void *fn_803BC8B4(u8 *self, s32 *arr) {
     extern void fn_803BC794(void *, s32, s32);
     extern void fn_8031A548(void *, void *);
@@ -9888,6 +9902,18 @@ void fn_803BE760(void) {
 void fn_80310774(void);
 void fn_803BE780(void) {
     fn_80310774();
+}
+
+void fn_803BEB44(u8 *self, s32 flags) {
+    extern u8 lbl_8041C628[];
+    void fn_8036B904(void *, s32);
+    void fn_8036BAF0(void *);
+
+    *(u8 **)(self + 0x5C) = lbl_8041C628;
+    fn_8036B904(self, 0);
+    if (flags & 1) {
+        fn_8036BAF0(self);
+    }
 }
 
 extern u8 lbl_8041C9A8[];
