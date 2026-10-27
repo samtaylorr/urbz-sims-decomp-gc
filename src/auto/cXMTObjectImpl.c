@@ -50,6 +50,20 @@ s32 fn_8011B9EC(void *arg0) {
     return 1;
 }
 
+s32 fn_8011BC04(void *arg0) {
+    s32 fn_80138360(s32);
+    void *it;
+
+    arg0 = M2C_FIELD(arg0, void **, 4);
+    for (it = M2C_FIELD(M2C_FIELD(arg0, void **, 4), void *(**)(void *), 0x14)((u8 *)arg0 + M2C_FIELD(M2C_FIELD(arg0, void **, 4), s16 *, 0x10)); it != NULL;
+         it = M2C_FIELD(M2C_FIELD(it, void **, 4), void *(**)(void *), 0x1C)((u8 *)it + M2C_FIELD(M2C_FIELD(it, void **, 4), s16 *, 0x18))) {
+        if (fn_80138360(*M2C_FIELD(M2C_FIELD(it, void **, 4), s32 *(**)(void *), 0x5C)((u8 *)it + M2C_FIELD(M2C_FIELD(it, void **, 4), s16 *, 0x58))) == 0) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
 s32 fn_8011BC98(void *arg0, s32 arg1) {
     void *it;
 
