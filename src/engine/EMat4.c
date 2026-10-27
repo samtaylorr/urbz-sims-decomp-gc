@@ -1515,6 +1515,24 @@ void fn_802D1F94(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
 
+void *fn_802D1FC8(u32 size) {
+    void *heap;
+    void *p;
+
+    heap = ((void *(*)(void))fn_802D0AB8)();
+    if (size == 0) {
+        return NULL;
+    }
+    p = fn_802D197C(heap, size, 4);
+    if (p == NULL) {
+        p = fn_802DBBCC(heap, size, 0);
+        if (p == NULL && heap == ((void *(*)(void))fn_802D0AB8)()) {
+            return fn_802DBBCC(fn_802D0B3C(), size, 0);
+        }
+    }
+    return p;
+}
+
 extern void *fn_802DBBCC(void *heap, u32 size, s32 align);
 void *fn_802D2058(u32 size);
 void *fn_802D2058(u32 size) {
@@ -1564,6 +1582,28 @@ void *fn_802D2150(u32 size) {
 
 void fn_802D21E0(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
+}
+
+void *fn_802D2214(u32 n, u32 elsize) {
+    void *heap;
+    void *p;
+    u32 size = n * elsize;
+
+    heap = ((void *(*)(void))fn_802D0AB8)();
+    if (size == 0) {
+        heap = NULL;
+    } else {
+        p = fn_802D197C(heap, size, 4);
+        if (p == NULL && (p = fn_802DBBCC(heap, size, 0)) == NULL && heap == ((void *(*)(void))fn_802D0AB8)()) {
+            heap = fn_802DBBCC(fn_802D0B3C(), size, 0);
+        } else {
+            heap = p;
+        }
+    }
+    if (heap != NULL) {
+        fn_80248488(heap, 0, size);
+    }
+    return heap;
 }
 
 void *fn_802D2308(u32 align, u32 size) {
