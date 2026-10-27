@@ -397,6 +397,17 @@ void *fn_803672CC(void *arg0, void *arg1, s32 arg2) {
     return arg0;
 }
 
+void *fn_803674D8(u32 size) {
+    extern char lbl_80446F34[];
+    if (size == 0x70) {
+        void *p = ScratchPool_Alloc((ScratchPool *)lbl_80446F34);
+        if (p != NULL) {
+            return p;
+        }
+    }
+    return Heap_Alloc(size);
+}
+
 s32 fn_80367610(void *arg0) {
     return (M2C_FIELD(arg0, s32 *, 0x18) * M2C_FIELD(arg0, s16 *, 0x1C)) + 0x23;
 }
