@@ -40,7 +40,7 @@ typedef struct {
 
 typedef struct {
     void **node;
-    s32 unk4;
+    u8 pad4[4];
 } RbIter;
 
 typedef struct {
@@ -2179,9 +2179,9 @@ RbInsertPair fn_8039F62C(void **tree, u32 *v) {
     void **y = tree[1];
     void **x = y[1];
     s32 comp = 1;
-    RbIter j[1];
-    RbIter b;
     RbIter r;
+    RbIter b;
+    RbIter j;
     RbInsertPair ret;
 
     while (x != NULL) {
@@ -2189,24 +2189,24 @@ RbInsertPair fn_8039F62C(void **tree, u32 *v) {
         comp = *v < (u32)y[4];
         x = comp ? y[2] : y[3];
     }
-    j->node = y;
+    j.node = y;
     if (comp) {
         b.node = ((void **)tree[1])[2];
-        if (j->node == b.node) {
+        if (j.node == b.node) {
             fn_8039F498(&r, tree, x, y, v, 0);
             ret.first = r.node;
             ret.second = 1;
             return ret;
         }
-        RbIter_dec(j);
+        RbIter_dec(&j);
     }
-    if ((u32)j->node[4] < *v) {
+    if ((u32)j.node[4] < *v) {
         fn_8039F498(&b, tree, x, y, v, 0);
         ret.first = b.node;
         ret.second = 1;
         return ret;
     }
-    ret.first = j->node;
+    ret = *(RbInsertPair *)&j;
     ret.second = 0;
     return ret;
 }
