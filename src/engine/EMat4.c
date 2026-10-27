@@ -235,6 +235,7 @@ s32 fn_802C6F58(char **arg0, const char *arg1) {
 
 s32 fn_802C7008(char **arg0, const char *arg1) {
     s32 fn_80248808(const char *);
+    s32 fn_802C7AAC(s32, s32);
     s32 len;
     s32 end;
     s32 i;
@@ -1224,6 +1225,14 @@ void *fn_802CED98(u32 size) {
 extern void *fn_802D0AB8(void *);
 void fn_802CEE44(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
+}
+
+u16 fn_802CEEE4(void *arg0, void *p) {
+    typedef struct { u8 pad[0x38]; } Entry;
+    if (p != NULL) {
+        return (Entry *)p - M2C_FIELD(arg0, Entry **, 0x108C);
+    }
+    return 0;
 }
 
 void *fn_802CEF10(void *arg0) {
