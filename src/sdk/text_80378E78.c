@@ -312,6 +312,17 @@ void fn_80381010(void *arg0) {
     lbl_80496388 = arg0;
 }
 
+void **fn_80381020(void) {
+    extern void **lbl_80496388;
+    void **p;
+
+    p = lbl_80496388;
+    if (p != NULL) {
+        lbl_80496388 = p[2];
+    }
+    return p;
+}
+
 void fn_80381518(void) {
     extern s32 lbl_80496394;
     extern s32 lbl_80496390;
