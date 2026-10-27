@@ -73,6 +73,10 @@ static inline RMMapIter16 RMMap16_find(char *self, const u16 *k) {
     return it;
 }
 
+static inline void RMMapIter_Inc(RMMapIter *it) {
+    it->node = (RMMapNode *)fn_8039AB24((void **)it->node);
+}
+
 extern s32 lbl_80494538;
 void fn_8018FA84(void *arg0, s32 arg1);
 void fn_8018EDE0(void **obj) {
