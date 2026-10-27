@@ -2941,6 +2941,20 @@ s8 fn_80214E48(f32 arg0) {
     return ret;
 }
 
+void fn_80214F9C(u8 *arg0) {
+    extern struct { u8 pad[0x184]; u8 *p; } lbl_8041F94C;
+
+    arg0[0x84] = lbl_8041F94C.p[0x1C];
+    arg0[0x85] = lbl_8041F94C.p[0x1D];
+    arg0[0x86] = lbl_8041F94C.p[0x1F];
+    arg0[0x87] = lbl_8041F94C.p[0x20];
+    *(s32 *)(arg0 + 0x88) = *(s32 *)(lbl_8041F94C.p + 0x4);
+    *(s32 *)(arg0 + 0x8C) = *(s32 *)(lbl_8041F94C.p + 0x0);
+    *(s32 *)(arg0 + 0x90) = *(s32 *)(lbl_8041F94C.p + 0x14);
+    *(s32 *)(arg0 + 0x94) = *(s32 *)(lbl_8041F94C.p + 0x18);
+    *(s32 *)(arg0 + 0x98) = *(s32 *)(lbl_8041F94C.p + 0x10);
+}
+
 void fn_802178D4(void *arg0) {
     M2C_UNK fn_801F53A0(void *);
     if ((s32) M2C_FIELD(arg0, s32 *, 0x160) != 0) {
