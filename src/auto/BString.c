@@ -3681,6 +3681,16 @@ void fn_800EAC28(s32 arg0, s32 arg1) {
     fn_800EA7F8(temp_r30, fn_80105B78(arg1));
 }
 
+void fn_800EAC78(s32 arg0, s32 arg1) {
+    s32 fn_80105B78(s32);
+    s32 fn_80105B84(s32);
+    void fn_800EA84C(s32, s32);
+    s32 temp_r30;
+
+    temp_r30 = arg0 + (fn_80105B84(arg1) * 8);
+    fn_800EA84C(temp_r30, fn_80105B78(arg1));
+}
+
 void fn_800EACC8(void *self) {
     void fn_80248488(void *, s32, s32);
     fn_80248488(self, 0, 0x200);
