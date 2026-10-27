@@ -241,6 +241,23 @@ s32 fn_80339C58(s32 i) {
     return (lbl_803FD32C[i] >> 1) & 1;
 }
 
+void fn_80339C70(u8 *p) {
+    extern f32 lbl_803F3C48[];
+    f32 f = lbl_803F3C48[0];
+    p[2] = 0;
+    p[0] = 0;
+    p[1] = 0;
+    p[8] = 0;
+    p[9] = 0;
+    p[0xA] = 0;
+    p[0xB] = 0;
+    *(f32 *)(p + 0xC) = f;
+    *(f32 *)(p + 0x10) = f;
+    *(f32 *)(p + 0x14) = f;
+    *(f32 *)(p + 0x18) = f;
+    *(s16 *)(p + 4) = 0;
+}
+
 extern s32 lbl_80494F88;
 s32 fn_8033A73C(void) {
     return lbl_80494F88;
