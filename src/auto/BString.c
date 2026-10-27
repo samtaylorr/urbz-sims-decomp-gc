@@ -3288,11 +3288,14 @@ void fn_800E9314(void *arg0, s32 arg1) {
     s32 fn_80046F9C(void *);
     void fn_8004702C(void *, s32);
     void fn_800E3D4C();
+    s32 *g;
     if (fn_80046F9C(lbl_8041F754)) {
-        ((s32 *)lbl_8041F754)[0x60 / 4] = 1;
-        fn_800E3D4C(arg0, arg1);
+        g = (s32 *)&lbl_8041F754;
+        g[0x60 / 4] = 1;
+        ((void (*)(void *, s32))fn_800E3D4C)(arg0, arg1);
     } else {
-        ((s32 *)lbl_8041F754)[0x60 / 4] = 0;
+        g = (s32 *)&lbl_8041F754;
+        g[0x60 / 4] = 0;
     }
     fn_8004702C(lbl_8041F754, arg1);
 }
