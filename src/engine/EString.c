@@ -530,6 +530,32 @@ s32 fn_802D4364(char **arg0, char *arg1, s32 arg2) {
     return p != 0 ? p - *arg0 : -1;
 }
 
+s32 fn_802D43C4(char **arg0, const char *arg1) {
+    s32 fn_80248808(const char *);
+    s32 fn_802D4F48(s32, s32);
+    s32 len;
+    s32 end;
+    s32 i;
+    s32 j;
+    s32 found;
+
+    len = fn_80248808(arg1);
+    end = fn_802D3D24((s32 *)arg0) - len;
+    for (i = 0; i <= end; i++) {
+        found = 1;
+        for (j = 0; j < len; j++) {
+            if (fn_802D4F48((*arg0)[i + j], arg1[j]) == 0) {
+                found = 0;
+                break;
+            }
+        }
+        if (found) {
+            return i;
+        }
+    }
+    return -1;
+}
+
 s32 fn_802D453C(char **arg0) {
     char *fn_80248ADC(char *);
     char *p;
