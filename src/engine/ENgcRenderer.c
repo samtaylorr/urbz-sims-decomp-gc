@@ -211,16 +211,12 @@ void fn_8035EC18(void *self, f32 vol, s32 slot) {
     extern ENgcRendererSlot lbl_80473F7C[];
     void fn_80385F0C(s32, s32);
     s32 fn_8035ED3C(u8);
-    s32 v;
-    s32 h;
 
     if (slot != -1) {
         fn_8035EE7C();
-        v = vol * 127.0f;
-        lbl_80473F7C[slot].unk30 = v;
-        h = lbl_80473F7C[slot].unk0;
-        if (h != 0) {
-            fn_80385F0C(h, fn_8035ED3C(v));
+        lbl_80473F7C[slot].unk30 = vol * 127.0f;
+        if (lbl_80473F7C[slot].unk0 != 0) {
+            fn_80385F0C(lbl_80473F7C[slot].unk0, fn_8035ED3C(lbl_80473F7C[slot].unk30));
         }
         fn_8035EE3C();
     }
@@ -229,14 +225,16 @@ void fn_8035EC18(void *self, f32 vol, s32 slot) {
 void fn_8035ECAC(void *self, f32 pan, s32 slot) {
     extern ENgcRendererSlot lbl_80473F7C[];
     void fn_80385C8C(s32, u8);
-    s32 v;
+    ENgcRendererSlot *e;
+    u8 v;
 
     if (slot != -1) {
         fn_8035EE7C();
+        e = &lbl_80473F7C[slot];
         v = pan * 63.0f + 64.0f;
-        lbl_80473F7C[slot].unk31 = v;
-        if (lbl_80473F7C[slot].unk0 != 0) {
-            fn_80385C8C(lbl_80473F7C[slot].unk0, v);
+        e->unk31 = v;
+        if (e->unk0 != 0) {
+            fn_80385C8C(e->unk0, v);
         }
         fn_8035EE3C();
     }
