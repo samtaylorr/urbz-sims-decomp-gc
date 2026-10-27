@@ -149,6 +149,7 @@ void fn_80056754(void *arg0, s32 flags) {
     M2C_UNK fn_802D20E8(s32);
     void fn_803997AC(void *, u32);
     void fn_80307364(void *, s32);
+    void fn_80056888(void *);
     s32 *v;
     s32 *self = arg0;
     self[0x11] = (s32)lbl_804081E0;
