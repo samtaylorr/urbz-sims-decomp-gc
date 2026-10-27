@@ -174,6 +174,17 @@ void *fn_80365BB4(void *arg0) {
     return arg0;
 }
 
+void *fn_80365BF0(void *arg0, void *arg1) {
+    void fn_80365C8C(void *, s32);
+    void fn_803663B8(void *, void *);
+
+    *(volatile s32 *)((u8 *)arg0 + 0) = 0;
+    *(volatile s32 *)((u8 *)arg0 + 4) = 0;
+    fn_80365C8C(arg0, M2C_FIELD(arg1, s32 *, 0xC));
+    fn_803663B8(arg0, arg1);
+    return arg0;
+}
+
 void fn_80365C40(void *arg0, s32 arg1) {
     void fn_8036619C(void *);
     void fn_802D20E8(void *);
