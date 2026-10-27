@@ -297,6 +297,13 @@ void fn_80068690(void) {
 
 }
 
+void fn_80068694(void *arg0) {
+    extern void fn_80067AA4(void *, s32, s32);
+
+    fn_80067AA4(arg0, 0, 1);
+    fn_80067AA4(arg0, 1, 1);
+}
+
 void fn_800688B8(void) {
 
 }
