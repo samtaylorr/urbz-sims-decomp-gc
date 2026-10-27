@@ -325,14 +325,8 @@ void fn_8025AE20(void) {
 #pragma peephole off
 #pragma scheduling off
 void fn_8025AE40(s32 status) {
-    extern void (*lbl_80401398[])(void);
     void fn_8025AE94(void);
-    void (**dtor)(void) = lbl_80401398;
-
-    while (*dtor) {
-        (*dtor)();
-        dtor++;
-    }
+    fn_8025ADCC();
     fn_8025AE94();
 }
 #pragma pop
