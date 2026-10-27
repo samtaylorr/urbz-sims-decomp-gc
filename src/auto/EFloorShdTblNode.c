@@ -4,6 +4,12 @@
 extern s32 lbl_80496694;
 extern void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
+
+static inline void EFloorShd_InitList(s32 *list) {
+    list[1] = 0;
+    list[0] = 0;
+    list[2] = 1;
+}
 s32 fn_80052C50(void) {
     void fn_802D85A4(void *);
     void fn_802D8640(void *, s32);
@@ -208,9 +214,10 @@ s32 fn_800568D0(void) {
 }
 
 void fn_800568D8(s32 *arg0) {
-    arg0[2] = 0;
-    arg0[1] = 0;
-    arg0[3] = 1;
+    s32 *q = arg0 + 1;
+    q[1] = 0;
+    q[0] = 0;
+    q[2] = 1;
     arg0[0] = 0;
 }
 
