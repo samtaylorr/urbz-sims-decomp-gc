@@ -451,12 +451,12 @@ s32 fn_801C0A58(void *arg0) {
 }
 
 s32 fn_801C0C98(void *arg0, s32 arg1) {
-    extern void **lbl_8041FA50;
+    extern u8 *lbl_8041FA50[];
     void **arr;
     s32 count;
     s32 i;
 
-    arr = *(void ***)lbl_8041FA50;
+    arr = *(void ***)lbl_8041FA50[0];
     count = 0;
     if (arr != NULL) {
         count = ((s32 *)arr)[-1];
