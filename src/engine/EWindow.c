@@ -435,6 +435,22 @@ void fn_8030A40C(void *arg0) {
     M2C_FIELD(arg0, f32 *, 0x6C) = (M2C_FIELD(arg0, f32 *, 0x7C) - temp_f7) / temp_f9;
 }
 
+void fn_8030A638(s32 arg0, s32 arg1) {
+    extern f32 lbl_803F1EA8[];
+    extern f32 lbl_803F1EAC[];
+    extern f32 lbl_80454AF4[];
+    extern f32 lbl_80454B00[];
+
+    if (arg1 == 0xFFFF && arg0 != 0) {
+        lbl_80454AF4[1] = lbl_803F1EA8[0];
+        lbl_80454B00[1] = lbl_803F1EAC[0];
+        lbl_80454AF4[0] = lbl_803F1EA8[0];
+        lbl_80454B00[0] = lbl_803F1EAC[0];
+        lbl_80454AF4[2] = lbl_803F1EA8[0];
+        lbl_80454B00[2] = lbl_803F1EAC[0];
+    }
+}
+
 extern void *fn_802D197C(void *, u32, s32);
 extern void *fn_802DC3C0(void *, u32, s32, s32, s32);
 extern void *fn_802D0B3C(void);
