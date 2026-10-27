@@ -116,6 +116,19 @@ static inline void PtrVec_Deallocate(void *p, u32 size) {
     }
 }
 
+static inline void *PairVec_Allocate(u32 n, u32 *allocated) {
+    void *p;
+    if (n != 0) {
+        u32 size = n * 8;
+        p = PtrVec_Allocate(size);
+        *allocated = size;
+    } else {
+        p = NULL;
+        *allocated = 0;
+    }
+    return p;
+}
+
 static inline void PtrVec_Set(void **v, void **start, void **finish, void **end) {
     v[0] = start;
     v[1] = finish;
