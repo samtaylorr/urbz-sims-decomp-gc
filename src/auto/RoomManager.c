@@ -47,8 +47,13 @@ typedef struct RMMapNode16 {
 
 typedef struct {
     RMMapNode16 *node;
-    s32 pad;
 } RMMapIter16;
+
+static inline RMMapIter16 RMMap16_end(char *self) {
+    RMMapIter16 it;
+    it.node = *(RMMapNode16 **)(self + 4);
+    return it;
+}
 
 static inline s32 RMMapIter16_NotEqual(RMMapIter16 a, RMMapIter16 b) {
     return a.node != b.node;
@@ -265,7 +270,7 @@ void fn_80190474(char *self, u16 id) {
     RMMapIter16 end;
     it = RMMap16_find(self, &id);
     end.node = *(RMMapNode16 **)(self + 4);
-    if (RMMapIter16_Ne(&it, &end)) {
+    if (RMMapIter16_NotEqual(it, end)) {
         *(s32 *)((char *)it.node->value + 0x80) = 1;
     }
     *(s32 *)(self + 0x20) = 1;
@@ -319,7 +324,7 @@ u16 *fn_80190AA4(s32 self, u16 id) {
     }
     it = RMMap16_find((char *)self, &id);
     end.node = *(RMMapNode16 **)(self + 4);
-    if (RMMapIter16_Ne(&it, &end)) {
+    if (RMMapIter16_NotEqual(it, end)) {
         return it.node->value;
     }
     return NULL;
