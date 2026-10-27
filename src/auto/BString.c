@@ -3284,6 +3284,16 @@ void fn_800E82E8(void *arg0, s32 arg1) {
     M2C_FIELD(temp_r9, M2C_UNK (**)(void *, s32), 0x1C)(temp_r11 + M2C_FIELD(temp_r9, s16 *, 0x18), arg1);
 }
 
+void *fn_800E956C(s32 *self) {
+    extern u8 lbl_8040CBF8[];
+    struct { s32 a; s32 b; s32 c; } t;
+    self[2] = (s32)lbl_8040CBF8;
+    t.a = 0;
+    t.c = 2;
+    self[0] = t.c;
+    return self;
+}
+
 void fn_800E959C(void *self, s32 flags) {
     extern u8 lbl_8040CBF8[];
     extern void fn_800D5114(void *, s32);
