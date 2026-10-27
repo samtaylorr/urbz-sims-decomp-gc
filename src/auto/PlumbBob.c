@@ -1401,6 +1401,22 @@ void fn_8007BB2C(void) {
     fn_8030861C();
 }
 
+s32 fn_8007BB4C(s32 arg0) {
+    void *n = *(void **)arg0;
+    s32 found = 0;
+    void *res = NULL;
+
+    while (!found && n != NULL) {
+        void *d = M2C_FIELD(n, void **, 0);
+        if (M2C_FIELD(d, u32 *, 0x18) & 8) {
+            res = d;
+            found = 1;
+        }
+        n = M2C_FIELD(n, void **, 8);
+    }
+    return (s32)res;
+}
+
 void fn_8007BBDC(void **arg0) {
     void *var_r3;
 
