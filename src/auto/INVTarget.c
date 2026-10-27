@@ -2923,6 +2923,17 @@ void fn_80214DB0(void) {
 
 }
 
+s8 fn_80214E48(f32 arg0) {
+    s32 ret;
+
+    if (!(arg0 < 0.5f)) {
+        ret = (arg0 - 0.5f) * 2.0f * 25.0f + 0.5f;
+    } else {
+        ret = (1.0f - arg0 * 2.0f) * -25.0f;
+    }
+    return ret;
+}
+
 void fn_802178D4(void *arg0) {
     M2C_UNK fn_801F53A0(void *);
     if ((s32) M2C_FIELD(arg0, s32 *, 0x160) != 0) {
