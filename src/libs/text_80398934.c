@@ -10419,6 +10419,16 @@ void fn_803C0730(u8 *p, s32 n) {
     }
 }
 
+void fn_803C0794(s32 arg0) {
+    s32 **self = (s32 **)arg0;
+    s32 *p;
+
+    fn_803C0730((u8 *)self[0], (s32)self[1]);
+    p = self[0];
+    fn_802D1A00(fn_802D0AB8(), p);
+    fn_803C06EC(self);
+}
+
 extern void fn_803C0794(s32);
 void fn_803C07E0(s32 self, s32 flags) {
     fn_803C0794(self);
