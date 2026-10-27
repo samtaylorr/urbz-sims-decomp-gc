@@ -848,6 +848,27 @@ s32 fn_8038CEAC(void *arg0) {
     return result;
 }
 
+void fn_8038D0A8(s32 chan, s32 result) {
+    s32 fn_8038F67C(s32, s32, s32, s32, void *);
+    void fn_80389134(void *, s32);
+    extern void fn_8038CF38(void);
+    extern u8 lbl_804912A0[];
+    u8 *p;
+    void (*cb)(s32, s32);
+
+    p = lbl_804912A0 + chan * 0x110;
+    if (result >= 0) {
+        result = fn_8038F67C(chan, M2C_FIELD(p, s32 *, 0xC) * M2C_FIELD(M2C_FIELD(p, void **, 0xC0), u16 *, 0x10), M2C_FIELD(p, s32 *, 0xC), M2C_FIELD(p, s32 *, 0xB4), fn_8038CF38);
+        if (result >= 0) {
+            return;
+        }
+    }
+    cb = (void (*)(s32, s32)) M2C_FIELD(p, void **, 0xD0);
+    M2C_FIELD(p, void **, 0xD0) = 0;
+    fn_80389134(p, result);
+    cb(chan, result);
+}
+
 s32 fn_8038D358(s32 chan, s32 fileNo, void *callback);
 s32 fn_8038D484(s32 chan, s32 fileNo) {
     s32 fn_803894A8(s32);
