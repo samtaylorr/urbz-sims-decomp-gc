@@ -154,6 +154,18 @@ void fn_801905AC(char *self) {
     *(s32 *)(self + 0x20) = 1;
 }
 
+extern void fn_801906D4(char *self);
+void fn_80190CB0(char *self) {
+    extern void **lbl_80496688;
+    if (*(s32 *)(self + 0x20) != 0) {
+        fn_801906D4(self);
+        {
+            char *vt = (char *)*lbl_80496688;
+            (*(void (**)(void *))(vt + 0x74))((char *)lbl_80496688 + *(s16 *)(vt + 0x70));
+        }
+    }
+}
+
 void fn_80191460(void) {
 
 }
