@@ -2474,7 +2474,6 @@ void fn_803A2EA8(void *arg0, u32 n) {
         Pair *finish = v->finish;
         s32 oldSize = finish - start;
         Pair *tmp;
-        u32 allocated;
 
         if (start != NULL) {
             Pair *result;
@@ -2483,16 +2482,9 @@ void fn_803A2EA8(void *arg0, u32 n) {
                 Pair *dst;
                 Pair *mem;
                 if (n != 0) {
-                    u32 b = n * sizeof(Pair);
-                    if (b > 0x80) {
-                        mem = (Pair *)fn_802D1FC8(b);
-                    } else {
-                        mem = fn_80399BE8(b);
-                    }
-                    allocated = b / sizeof(Pair);
+                    mem = PtrVec_Allocate(n * sizeof(Pair));
                 } else {
                     mem = NULL;
-                    allocated = 0;
                 }
                 dst = mem;
                 for (src = start; src != finish; src++) {
@@ -2512,33 +2504,19 @@ void fn_803A2EA8(void *arg0, u32 n) {
                 Pair *dp = v->start;
                 u32 dn = v->eos - dp;
                 if (dp != NULL) {
-                    u32 size = dn * sizeof(Pair);
-                    if (size > 0x80) {
-                        fn_802D20E8(dp);
-                    } else {
-                        fn_803997AC(dp, size);
-                    }
+                    PtrVec_Deallocate(dp, dn * sizeof(Pair));
                 }
             }
         } else {
             Pair *mem;
             if (n != 0) {
-                u32 b = n * sizeof(Pair);
-                if (b > 0x80) {
-                    mem = (Pair *)fn_802D1FC8(b);
-                } else {
-                    mem = fn_80399BE8(b);
-                }
-                allocated = b / sizeof(Pair);
+                mem = PtrVec_Allocate(n * sizeof(Pair));
             } else {
                 mem = NULL;
-                allocated = 0;
             }
             tmp = mem;
         }
-        v->start = tmp;
-        v->finish = tmp + oldSize;
-        v->eos = tmp + allocated;
+        PtrVec_Set((void **)v, (void **)tmp, (void **)(oldSize * 8 + (s32)tmp), (void **)(n * 8 + (u32)tmp));
     }
 }
 
