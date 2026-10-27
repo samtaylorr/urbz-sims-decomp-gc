@@ -258,6 +258,19 @@ void fn_80339C70(u8 *p) {
     *(s16 *)(p + 4) = 0;
 }
 
+s32 fn_80339CB4(s32 *arr, s32 n) {
+    s32 i;
+    s32 sum = 0;
+
+    for (i = 0; i < n; i++) {
+        sum += arr[i];
+    }
+    if (sum == 0) {
+        sum = 1;
+    }
+    return sum;
+}
+
 extern s32 lbl_80494F88;
 s32 fn_8033A73C(void) {
     return lbl_80494F88;
