@@ -3346,6 +3346,18 @@ void fn_800E98BC(s32 *self, s32 flags) {
     }
 }
 
+s32 *fn_800E98F0(s32 *self, s32 a) {
+    extern s32 lbl_8040CE00[];
+    self[0] = a;
+    self[1] = -1;
+    self[2] = 0;
+    self[3] = -1;
+    self[4] = 1;
+    self[5] = (s32)lbl_8040CE00;
+    self[8] = 0;
+    return self;
+}
+
 void fn_800E9928(s32 *self, s32 flags) {
     self[5] = (s32)lbl_804093F8;
     if (flags & 1) {
@@ -3461,6 +3473,28 @@ void fn_800E9BD8(s32 *self) {
 
 void fn_800E9BFC(s32 *self) {
     fn_800E9554(self[2]);
+}
+
+s32 *fn_800E9C20(s32 *self, s32 arg1) {
+    s32 *p;
+    s32 *q;
+    self[0] = arg1;
+    self[1] = -1;
+    self[2] = 0;
+    self[3] = -1;
+    self[4] = 1;
+    self[5] = (s32)lbl_8040CC98;
+    self[6] = 0;
+    self[7] = 0;
+    self[8] = 0;
+    self[9] = 0;
+    self[10] = 0;
+    p = self + 11;
+    p[0] = 0;
+    p[1] = 0;
+    q = self + 13;
+    q[1] = 0;
+    return self;
 }
 
 s32 *fn_800E9D34(s32 *self, s32 a) {
