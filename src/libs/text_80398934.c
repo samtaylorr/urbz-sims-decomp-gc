@@ -9500,11 +9500,9 @@ void fn_803BC6F8(s32 *dst, s32 *src, s32 n) {
     struct Elem224 *s = (struct Elem224 *)src;
 
     while (--n != -1) {
-        s32 t;
-        s32 *pt = &t;
-        *pt = d->keep;
+        s32 keep = d->keep;
         *d = *s;
-        d->keep = *pt;
+        d->keep = keep;
         d++;
         s++;
     }
@@ -10128,6 +10126,22 @@ done:
     }
 }
 
+void *fn_803BF400(void *self, void *list) {
+    extern s32 fn_802CB994(void *);
+    extern void fn_8036C31C(void *, s32);
+    s32 n;
+    void *vt;
+    s32 *node;
+
+    n = fn_802CB994(list);
+    vt = M2C_FIELD(self, void **, 0x18);
+    M2C_FIELD(vt, void (**)(void *, s32 *, s32), 0x3C)((char *)self + M2C_FIELD(vt, s16 *, 0x38), &n, 4);
+    for (node = *(s32 **)list; node != 0; node = (s32 *)node[2]) {
+        fn_8036C31C(self, node[0]);
+    }
+    return self;
+}
+
 void *fn_803BF584(void *self, void *out) {
     extern void fn_802CB8D4(void *);
     extern void fn_8036C33C(void *, s32 *);
@@ -10374,6 +10388,15 @@ void fn_803C0264(u8 *p, s32 n) {
         p += 0x58;
         ((void (*)(void *, s32))vt[1].pfn)(q + vt[1].delta, 2);
     }
+}
+
+void fn_803C02C8(s32 self) {
+    void *p;
+
+    fn_803C0264((u8 *)((s32 *)self)[0], ((s32 *)self)[1]);
+    p = ((void **)self)[0];
+    fn_802D1A00(fn_802D0AB8(), p);
+    fn_803C0220((void *)self);
 }
 
 extern void fn_803C02C8(s32);
