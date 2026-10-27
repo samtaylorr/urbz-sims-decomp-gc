@@ -10036,6 +10036,18 @@ void fn_803BEDE0(s32 self, s32 flags) {
     }
 }
 
+void fn_803BEE20(s32 **self) {
+    s32 n = (s32)self[1];
+    s32 *p = self[0];
+
+    while (--n != -1) {
+        void *obj = (void *)*p++;
+        char *vt = *(char **)obj;
+        (*(void (**)(void *))(vt + 0xC))((char *)obj + *(s16 *)(vt + 0x8));
+    }
+    fn_803BED94((s32)self);
+}
+
 void fn_803BF0C0(s32 *self, s32 n) {
     while (--n != -1) {
         self++;
