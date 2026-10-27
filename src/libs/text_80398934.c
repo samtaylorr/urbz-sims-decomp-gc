@@ -9216,6 +9216,24 @@ void fn_803BBDE0(void) {
 
 }
 
+void *fn_803BBE98(void *self, void *out) {
+    extern void fn_802CB8D4(void *);
+    extern void fn_802F043C(void *, s32 *);
+    extern void fn_802CB69C(void *, s32);
+    s32 n;
+    s32 v;
+    void *vt;
+
+    fn_802CB8D4(out);
+    vt = M2C_FIELD(self, void **, 0x18);
+    M2C_FIELD(vt, void (**)(void *, s32 *, s32), 0x34)((char *)self + M2C_FIELD(vt, s16 *, 0x30), &n, 4);
+    while (--n != -1) {
+        fn_802F043C(self, &v);
+        fn_802CB69C(out, v);
+    }
+    return self;
+}
+
 void *fn_803BBF20(void *self, void *arg1) {
     extern void fn_802CD53C(void *);
     extern s32 fn_802F043C(s32, s32 *);
