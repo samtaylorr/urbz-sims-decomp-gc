@@ -107,6 +107,16 @@ s32 fn_801B2D08(void) {
     return 0;
 }
 
+void *fn_801B2D94(u32 size) {
+    if (size == 0x68) {
+        void *p = ScratchPool_Alloc((ScratchPool *)lbl_80435FB8);
+        if (p != NULL) {
+            return p;
+        }
+    }
+    return Heap_Alloc(size);
+}
+
 s32 fn_801B2ECC(void *self, s32 id, void **out) {
     void *vt;
 
