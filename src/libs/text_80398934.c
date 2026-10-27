@@ -3026,6 +3026,34 @@ void fn_803AAB88(void **self, s32 flags) {
     }
 }
 
+SearchEntry8 *fn_803AAD68(SearchEntry8 *lo, SearchEntry8 *hi, s32 key) {
+    for (;;) {
+        s32 n = hi - lo;
+        SearchEntry8 *mid;
+        s32 d;
+
+        if (n <= 0) {
+            return 0;
+        }
+        if (n == 1) {
+            if (lo->value == key) {
+                return lo;
+            }
+            return 0;
+        }
+        mid = lo + n / 2;
+        d = key - mid->value;
+        if (d == 0) {
+            return mid;
+        }
+        if (d > 0) {
+            lo = mid + 1;
+        } else {
+            hi = mid;
+        }
+    }
+}
+
 extern u8 lbl_804146E8[];
 s32 fn_803AADC8(s32 arg0, s32 arg1, s32 arg2) {
     struct {
