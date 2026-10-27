@@ -813,6 +813,19 @@ s32 fn_8038C698(void) {
     return 0;
 }
 
+s32 fn_8038C9F0(s32 chan, s32 arg1, s32 arg2, s32 arg3) {
+    s32 fn_803894A8(s32);
+    s32 fn_8038C7D0(s32, s32, s32, s32, void *);
+    extern void fn_80387D34(void);
+    s32 result;
+
+    result = fn_8038C7D0(chan, arg1, arg2, arg3, fn_80387D34);
+    if (result < 0) {
+        return result;
+    }
+    return fn_803894A8(chan);
+}
+
 s32 fn_8038CE64(s32 *self, s32 arg1, s32 arg2, s32 arg3) {
     s32 fn_803894A8(s32);
     s32 fn_8038CD20(s32 *, s32, s32, s32, void *);
