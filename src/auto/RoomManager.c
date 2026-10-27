@@ -125,6 +125,13 @@ s32 fn_8018FD00(s32 *self) {
     return *self;
 }
 
+void *fn_8018FD08(void *self, s32 id) {
+    if (id == 0x10) {
+        return self;
+    }
+    return NULL;
+}
+
 s32 fn_8018FD18(char *self) {
     return *(s32 *)(self + 0xC);
 }
