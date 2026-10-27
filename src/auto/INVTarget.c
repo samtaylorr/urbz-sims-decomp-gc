@@ -1883,6 +1883,30 @@ void *fn_801E0008(void **arg0, s32 arg1) {
     return var_r31;
 }
 
+void fn_801E0064(void **arg0, s32 arg1, s32 arg2) {
+    extern char lbl_80436A04[];
+    void *var_r3;
+    void *obj;
+
+    var_r3 = fn_801E0008(arg0, arg2);
+    if (var_r3 != NULL) {
+        if (var_r3 != arg0[0]) {
+            if (var_r3 == arg0[1]) {
+                arg0[1] = M2C_FIELD(var_r3, void **, 0);
+            } else {
+                M2C_FIELD(M2C_FIELD(var_r3, void **, 4), void **, 0) = M2C_FIELD(var_r3, void **, 0);
+            }
+            M2C_FIELD(M2C_FIELD(var_r3, void **, 0), void **, 4) = M2C_FIELD(var_r3, void **, 4);
+            M2C_FIELD(var_r3, void **, 0) = NULL;
+            M2C_FIELD(var_r3, void **, 4) = arg0[0];
+            M2C_FIELD(arg0[0], void **, 0) = var_r3;
+            arg0[0] = var_r3;
+        }
+        obj = M2C_FIELD(var_r3, void **, 0xC);
+        M2C_FIELD(obj, void (**)(void *, s32, char *), 0xC)(obj, arg1, lbl_80436A04);
+    }
+}
+
 s32 fn_801E0118(void) {
     s32 fn_801DFC68();
     M2C_UNK fn_802D1FC8(M2C_UNK);
