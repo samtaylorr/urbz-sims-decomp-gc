@@ -24,6 +24,18 @@ static inline s32 RMMapIter_NotEqualP(const RMMapIter *a, const RMMapIter *b) {
     return a->node != b->node;
 }
 
+static inline RMMapIter RMMap_Begin(char *map) {
+    RMMapIter r;
+    r.node = (*(RMMapNode **)(map + 4))->left;
+    return r;
+}
+
+static inline RMMapIter RMMap_End(char *map) {
+    RMMapIter r;
+    r.node = *(RMMapNode **)(map + 4);
+    return r;
+}
+
 extern s32 lbl_80494538;
 void fn_8018FA84(void *arg0, s32 arg1);
 void fn_8018EDE0(void **obj) {
