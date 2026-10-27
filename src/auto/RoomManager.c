@@ -234,33 +234,35 @@ M2C_UNK *fn_8018FD28(void) {
 
 void *fn_8019020C(char *self) {
     extern RMMapNode *fn_80399BE8(s32);
-    RMMapNode *node;
     char *map2 = self + 0x10;
+    RMMapIter tmp[8];
+    RMMapNode *hdr;
+    RMMapNode *hdr2;
 
     *(RMMapNode **)(self + 4) = NULL;
-    node = fn_80399BE8(0x18);
+    hdr = fn_80399BE8(0x18);
     *(s32 *)(self + 8) = 0;
-    *(RMMapNode **)(self + 4) = node;
+    *(RMMapNode **)(self + 4) = hdr;
     *(s8 *)(self + 0xC) = 0;
-    node->color = 0;
+    hdr->color = 0;
     (*(RMMapNode **)(self + 4))->parent = NULL;
     (*(RMMapNode **)(self + 4))->left = *(RMMapNode **)(self + 4);
     (*(RMMapNode **)(self + 4))->right = *(RMMapNode **)(self + 4);
 
     *(RMMapNode **)(map2 + 4) = NULL;
-    node = fn_80399BE8(0x24);
+    hdr2 = fn_80399BE8(0x24);
     *(s32 *)(map2 + 8) = 0;
-    *(RMMapNode **)(map2 + 4) = node;
+    *(RMMapNode **)(map2 + 4) = hdr2;
     *(s8 *)(map2 + 0xC) = 0;
-    node->color = 0;
+    hdr2->color = 0;
     (*(RMMapNode **)(map2 + 4))->parent = NULL;
     (*(RMMapNode **)(map2 + 4))->left = *(RMMapNode **)(map2 + 4);
     (*(RMMapNode **)(map2 + 4))->right = *(RMMapNode **)(map2 + 4);
 
-    *(s32 *)(self + 0x24) = 0;
-    *(f32 *)(self + 0x2C) = 0.0f;
     *(s32 *)(self + 0x20) = 0;
     *(f32 *)(self + 0x28) = 0.0f;
+    *(s32 *)(self + 0x24) = 0;
+    *(f32 *)(self + 0x2C) = 0.0f;
     lbl_80494538 = (s32)self;
     return self;
 }
