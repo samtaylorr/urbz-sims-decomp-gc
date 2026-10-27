@@ -274,6 +274,21 @@ void fn_80068F58(void) {
 
 }
 
+void fn_8006A078(u8 *self, s32 flags) {
+    extern u8 lbl_80409260[];
+    extern void fn_80067358(void *);
+    extern void fn_8006C8C4(void *, s32);
+    extern void fn_80081F74(void *, s32);
+    *(u8 **)(self + 0x44) = lbl_80409260;
+    fn_80067358(self);
+    fn_8006C8C4(self + 0x280C, 2);
+    fn_80081F74(self + 0x210, 2);
+    ((void (*)(void *, s32))fn_80307364)(self, 0);
+    if (flags & 1) {
+        fn_8006A194(self);
+    }
+}
+
 extern s32 *lbl_80491F0C[];
 extern s32 *fn_800B3420(s32);
 extern s32 fn_802D5ACC(s32 *, s32);
