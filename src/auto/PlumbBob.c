@@ -909,8 +909,8 @@ void fn_8006E758(void *arg0) {
     u8 *base = lbl_8041F94C;
 
     M2C_FIELD(arg0, s32 *, 0xD4) = M2C_FIELD(M2C_FIELD(base, void **, 0x184), s8 *, 0x1F);
-    M2C_FIELD(arg0, s32 *, 0x124) = 0;
     M2C_FIELD(arg0, s32 *, 0xD8) = M2C_FIELD(M2C_FIELD(base, void **, 0x184), s8 *, 0x20);
+    M2C_FIELD(arg0, s32 *, 0x124) = 0;
     fn_8006E7AC(arg0);
 }
 
