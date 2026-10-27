@@ -152,6 +152,15 @@ f32 fn_802F1558(void *arg0) {
     return vals[lbl_80494E5C];
 }
 
+extern s32 lbl_804961D0;
+extern u8 lbl_80491E1C[];
+extern u8 lbl_803F0DE4[];
+extern u8 lbl_804936F0[];
+extern s32 fn_802D6A90(void *, void *, void *, void *, s32, void *, void *);
+void fn_802F1604(void);
+void fn_802F162C(void);
+void fn_802F164C(void *);
+
 void fn_802F156C(void *arg0, s32 arg1) {
     s32 *vals = (s32 *)((char *)arg0 + 0x7C);
     vals[lbl_80494E5C] = arg1;
