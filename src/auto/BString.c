@@ -3343,26 +3343,36 @@ void fn_800E6658(s32 *self) {
     }
 }
 
+static inline void Vec4C_Clear(u8 **v) {
+    u8 *begin = v[0];
+    u8 *it;
+    for (it = begin; it != v[1]; it += 0x4C) {
+    }
+    v[1] = begin;
+}
+
 void fn_800E6FFC(u8 *self) {
     u8 *obj;
+    u8 **v;
     u8 *it;
     u8 *begin;
-    u8 *end;
 
     obj = *(u8 **)(self + 0x18);
     if (obj != NULL) {
         u8 *vt = *(u8 **)(obj + 0x44);
         (*(void (**)(void *, s32))(vt + 0xC))(obj + *(s16 *)(vt + 8), 3);
     }
-    *(s32 *)(self + 0x24) = 0;
     *(s32 *)(self + 0x18) = 0;
     *(s32 *)(self + 0x1C) = 0;
     *(s32 *)(self + 0x20) = 0;
+    *(s32 *)(self + 0x24) = 0;
     begin = *(u8 **)(self + 0x2C);
-    end = *(u8 **)(self + 0x30);
-    for (it = begin; it != end; it += 0x4C) {
+    v = (u8 **)(self + 0x2C);
+    it = begin;
+    while (it != v[1]) {
+        it += 0x4C;
     }
-    *(u8 **)(self + 0x30) = begin;
+    v[1] = begin;
 }
 
 f32 fn_800E7EC0(f32 x) {
