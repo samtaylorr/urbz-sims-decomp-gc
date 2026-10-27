@@ -176,14 +176,14 @@ void fn_802EB3E4(void *arg0, s32 arg1) {
     fn_802EB384(arg0, fn_802E5F90_inline(arg0, arg1));
 }
 
-void fn_802EB484(void *arg0, void *arg1);
-void fn_802EB4F0(void *arg0, s32 arg1) {
-    fn_802EB484(arg0, fn_802E5F90_inline(arg0, arg1));
+void fn_802EB484(void *arg0, void *arg1, f32 arg2, f32 arg3, f32 arg4);
+void fn_802EB4F0(void *arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4) {
+    fn_802EB484(arg0, fn_802E5F90_inline(arg0, arg1), arg2, arg3, arg4);
 }
 
-void fn_802EB650(void);
-void fn_802EB590(void) {
-    fn_802EB650();
+void fn_802EB650(void *arg0, void *arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5);
+void fn_802EB590(void *arg0, void *arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5) {
+    fn_802EB650(arg0, arg1, arg2, arg3, arg4, arg5);
 }
 
 void fn_802EC460(void *arg0, void *arg1);
