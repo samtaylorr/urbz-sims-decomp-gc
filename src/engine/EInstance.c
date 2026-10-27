@@ -157,6 +157,11 @@ void fn_802F156C(void *arg0, s32 arg1) {
     vals[lbl_80494E5C] = arg1;
 }
 
+s32 fn_802F1580(void *arg0) {
+    s32 *vals = (s32 *)((char *)arg0 + 0x7C);
+    return vals[lbl_80494E5C];
+}
+
 extern s32 lbl_804961D0;
 extern u8 lbl_80491E1C[];
 extern u8 lbl_803F0DE4[];
