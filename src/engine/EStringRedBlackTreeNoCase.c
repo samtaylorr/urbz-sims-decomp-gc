@@ -891,6 +891,23 @@ void fn_8036A2C0(void *arg0, u32 arg1) {
     }
 }
 
+s32 fn_8036A41C(void **arg0, void **arg1) {
+    extern void *fn_8036A04C(void *, s32, void **);
+    void *n;
+    void *found;
+
+    if (fn_8036A258(arg0) != fn_8036A258(arg1)) {
+        return 0;
+    }
+    for (n = *arg1; EStrNode_Valid(n); n = M2C_FIELD(n, void **, 4)) {
+        void *value = M2C_FIELD(n, void **, 0x10);
+        if (fn_8036A04C(arg0, M2C_FIELD(n, s32 *, 0xC), &found) == NULL || found != value) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
 void fn_8036A73C(void) {
     M2C_UNK fn_8036A6D4(M2C_UNK, M2C_UNK);
     fn_8036A6D4(1, 0xFFFF);
