@@ -122,8 +122,10 @@ void fn_80041EC0(s32 id, s32 *arg) {
 }
 
 void fn_80041F70(void) {
+    void fn_80043950(f32);
     void fn_80043A58(f32);
     void fn_800439BC(f32);
+    void fn_800438D0(f32);
     extern f32 lbl_803C60E0[];
     extern f32 lbl_803C60E4[];
 
