@@ -563,6 +563,14 @@ s32 *fn_802D4710(s32 *arg0, s32 arg1, s32 *arg2) {
     return arg0;
 }
 
+void *fn_802D4750(void *arg0, void **arg1) {
+    void *v = *arg1;
+    void *vt = M2C_FIELD(arg0, void **, 0x18);
+
+    ((void (*)(void *, void *))M2C_FIELD(vt, void **, 0x1C))((u8 *)arg0 + M2C_FIELD(vt, s16 *, 0x18), v);
+    return arg0;
+}
+
 void *fn_802D4798(void *arg0, s32 arg1) {
     s32 *fn_802D3CE4(s32 *, char *);
     char sp8[1024];
