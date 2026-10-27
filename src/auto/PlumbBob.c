@@ -3,6 +3,10 @@
 
 extern void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
+
+typedef struct { s32 a, b, c; } PBVec3;
+typedef struct { PBVec3 v; s32 w; } PBStackEntry;
+typedef struct { s32 n; PBStackEntry e[4]; } PBStack;
 s32 fn_800671A0(void *arg0) {
     extern s32 lbl_80494420;
     if ((s32) M2C_FIELD(arg0, s32 *, 0x28D4) == 0) {
@@ -258,6 +262,31 @@ void fn_80068978(s32 arg0) {
 
 void fn_80068F58(void) {
 
+}
+
+extern s32 *lbl_80491F0C[];
+extern s32 *fn_800B3420(s32);
+extern s32 fn_802D5ACC(s32 *, s32);
+extern void fn_802D57BC(s32 *, s32);
+extern void fn_800B3324(s32, s32, s32);
+extern void *fn_802DC3C0(void *, u32, s32, s32, s32);
+void *fn_8006A0E8(u32 size) {
+    void *heap;
+    void *p;
+
+    heap = ((void *(*)(void))fn_802D0AB8)();
+    if (size == 0) {
+        return NULL;
+    }
+    size = (size + 0xF) & ~0xF;
+    p = fn_802D197C(heap, size, 0x10);
+    if (p == NULL) {
+        p = fn_802DC3C0(heap, size, 0x10, 0, 0);
+        if (p == NULL && heap == ((void *(*)(void))fn_802D0AB8)()) {
+            return fn_802DC3C0(fn_802D0B3C(), size, 0x10, 0, 0);
+        }
+    }
+    return p;
 }
 
 void fn_8006A194(void *arg0) {
@@ -846,9 +875,36 @@ void *fn_80072C7C(void *arg0, void *arg1) {
     return obj;
 }
 
+void fn_8007321C(void *self) {
+    extern void fn_80077EDC(void *);
+    extern void fn_8007BE9C(void *);
+    extern void fn_8031EA2C(void *);
+    extern s32 lbl_8049416C;
+    u8 *p;
+    s32 i;
+
+    i = 0;
+    fn_80077EDC(self);
+    M2C_FIELD(M2C_FIELD(self, u8 *, 0x44), void (**)(void *), 0x84)((u8 *)self + M2C_FIELD(M2C_FIELD(self, u8 *, 0x44), s16 *, 0x80));
+    if (i < lbl_8049416C) {
+        p = (u8 *)self + 0xF4;
+        do {
+            i++;
+            fn_8007BE9C(p);
+            p += 0x19C;
+        } while (i < lbl_8049416C);
+    }
+    if (M2C_FIELD(self, void **, 0xFE8) != NULL) {
+        fn_8031EA2C(M2C_FIELD(self, void **, 0xFE8));
+        M2C_FIELD(self, void **, 0xFE8) = NULL;
+    }
+    lbl_8049416C = 0;
+}
+
 void fn_80075F04(s32 arg0) {
     extern s32 lbl_8049416C;
     extern void *fn_8007BB94(s32, s32);
+    extern s32 fn_80078160(s32);
     s32 i;
     s32 j;
     void *p;
@@ -856,7 +912,12 @@ void fn_80075F04(s32 arg0) {
 
     for (i = 0; i < lbl_8049416C; i++) {
         j = 0;
-        while ((p = fn_8007BB94(i * 0x19C + arg0 + 0x170, ++j)) != NULL) {
+        for (;;) {
+            j++;
+            p = fn_8007BB94(i * 0x19C + arg0 + 0x170, j);
+            if (p == NULL) {
+                break;
+            }
             q = M2C_FIELD(p, void **, 0x7C);
             if (q != NULL) {
                 q = M2C_FIELD(q, void **, 0x38);
