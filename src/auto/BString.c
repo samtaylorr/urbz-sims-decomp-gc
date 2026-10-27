@@ -1,7 +1,7 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
-extern void *lbl_8041F754;
+extern u8 lbl_8041F754[];
 extern s32 lbl_8041F768[];
 extern s32 lbl_8041FAD0[];
 extern s32 lbl_80434AC8[];
@@ -158,7 +158,7 @@ void fn_800D19DC(void) {
     extern void fn_800487EC(void *);
     extern void fn_800D2AE4(void);
     fn_800D2AE4();
-    fn_800487EC(lbl_8041F754);
+    fn_800487EC(&lbl_8041F754);
 }
 
 void fn_800D1ACC(void *arg0) {
@@ -192,7 +192,7 @@ void fn_800D1B90(u8 *self) {
     extern u8 *lbl_80496660;
     extern void fn_80047AA8(void *);
     u8 *p;
-    fn_80047AA8(lbl_8041F754);
+    fn_80047AA8(&lbl_8041F754);
     p = lbl_80496660;
     *(s32 *)(p + 0x354) = 1;
     *(s32 *)(p + 0x358) = -1;
@@ -793,7 +793,7 @@ void fn_800D4014(s32 *self, s32 flags) {
 
 void fn_800D4048(void *arg0) {
     extern void fn_800D28AC(void *);
-    ((s32 *)lbl_8041F754)[0] = 3;
+    *(s32 *)&lbl_8041F754 = 3;
     fn_800D28AC(arg0);
 }
 
@@ -829,8 +829,8 @@ void fn_800D4100(void *arg0) {
         var_r9 = 1;
     }
     if (var_r9 != 0) {
-        fn_8004594C(lbl_8041F754);
-        fn_80047AA8(lbl_8041F754);
+        fn_8004594C(&lbl_8041F754);
+        fn_80047AA8(&lbl_8041F754);
         fn_800E3B38(arg0, 0x11, lbl_803D19E4[0]);
         return;
     }
@@ -875,7 +875,7 @@ s32 *fn_800D41F0(s32 *self, s32 arg1) {
 
 void fn_800D423C(void *arg0) {
     extern void fn_800D277C(void *);
-    ((s32 *)lbl_8041F754)[0] = 2;
+    *(s32 *)&lbl_8041F754 = 2;
     fn_800D277C(arg0);
 }
 
