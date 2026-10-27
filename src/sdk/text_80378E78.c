@@ -664,13 +664,16 @@ s32 fn_80387188(void) {
 
 void fn_803871D8(void) {
     s32 enabled = fn_8025465C();
-    *(u16 *)0xCC00500A = (*(u16 *)0xCC00500A & ~0xA8) | 4;
+    volatile u16 *regs = (volatile u16 *)0xCC005000;
+    regs[5] = (regs[5] & ~0xA8) | 4;
     fn_80254684(enabled);
 }
 
+volatile u16 __DSPRegs[] : 0xCC005000;
 void fn_80387218(void) {
     s32 enabled = fn_8025465C();
-    *(u16 *)0xCC00500A = *(u16 *)0xCC00500A & ~0xAC;
+    u16 tmp = __DSPRegs[5];
+    __DSPRegs[5] = tmp & ~0xAC;
     fn_80254684(enabled);
 }
 
