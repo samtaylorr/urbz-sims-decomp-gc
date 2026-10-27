@@ -7330,6 +7330,14 @@ void fn_803B79BC(void) {
     lbl_80443318[0]();
 }
 
+void fn_803B79E8(void *arg0, s32 arg1) {
+    extern void fn_802ADDF4(void *, s32);
+    fn_802ADDF4(arg0, 0);
+    if (arg1 & 1) {
+        ((void (*)(void *, s32))lbl_80443318[0])(arg0, 0x10);
+    }
+}
+
 void fn_803B7A3C(void *arg0, s32 arg1) {
     extern char lbl_804185D8[];
     extern void fn_802ADDF4(void *, s32);
