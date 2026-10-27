@@ -331,6 +331,39 @@ void fn_8025AEB4(void *arg0) {
     *(s32 *)((u8 *)arg0 + 0xC) = 0;
 }
 
+void fn_8025B090(void *arg0) {
+    typedef struct Mtx_ {
+        s32 queue[2];
+        void *thread;
+        s32 count;
+        struct Mtx_ *next;
+        struct Mtx_ *prev;
+    } Mtx_;
+    typedef struct {
+        u8 pad[0x2F4];
+        Mtx_ *head;
+        Mtx_ *tail;
+    } Thr_;
+    void fn_80259838(void *);
+    Thr_ *thread = arg0;
+    Mtx_ *mutex;
+
+    while (thread->head) {
+        Mtx_ *next;
+        mutex = thread->head;
+        next = mutex->next;
+        if (next == NULL) {
+            thread->tail = NULL;
+        } else {
+            next->prev = NULL;
+        }
+        thread->head = next;
+        mutex->count = 0;
+        mutex->thread = NULL;
+        fn_80259838(mutex);
+    }
+}
+
 void fn_8025B1BC(void) {
     M2C_UNK fn_80258534();
     fn_80258534();
