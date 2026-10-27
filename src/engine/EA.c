@@ -444,6 +444,24 @@ void fn_802DBBA8(void *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 0x490) = 0;
 }
 
+void fn_802DC1C4(void *arg0, s32 arg1) {
+    extern void fn_802DC220(void *, s32);
+    void *volatile p;
+    void *q;
+    void *r;
+
+    q = M2C_FIELD(arg0, void **, 0x4FC);
+    p = q;
+    if (q != NULL) {
+        fn_802D9214(q);
+    }
+    fn_802DC220(arg0, arg1);
+    r = p;
+    if (r != NULL) {
+        fn_802D9244(r);
+    }
+}
+
 s32 fn_802DC3C0(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     extern s32 fn_802DC43C(void *, s32, s32, s32, s32);
     void *volatile p;
@@ -477,6 +495,28 @@ s32 fn_802DC6B4(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
         fn_802D9214(q);
     }
     ret = fn_802DC728(arg0, arg1, arg2, arg3);
+    r = p;
+    if (r != NULL) {
+        fn_802D9244(r);
+    }
+    return ret;
+}
+
+s32 fn_802DCB78(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    extern s32 fn_802DCC78(void *, s32, s32, s32 *, s32, s32);
+    void *volatile p;
+    void *q;
+    void *r;
+    s32 ret;
+    s32 sp;
+
+    sp = arg2;
+    q = M2C_FIELD(arg0, void **, 0x4FC);
+    p = q;
+    if (q != NULL) {
+        fn_802D9214(q);
+    }
+    ret = fn_802DCC78(arg0, arg1, 1, &sp, arg3, arg4);
     r = p;
     if (r != NULL) {
         fn_802D9244(r);
