@@ -185,9 +185,11 @@ void fn_8035DFB8(void *self, s32 flags) {
     }
 }
 
-void fn_8035EC18(void);
+void fn_8035EE3C(void);
+void fn_8035EE7C(void);
+void fn_8035EC18(void *self, f32 vol, s32 slot);
 void fn_8035EA70(void) {
-    fn_8035EC18();
+    ((void (*)(void))fn_8035EC18)();
 }
 
 void fn_8035EB9C(void *self, s32 slot, s32 arg2) {
