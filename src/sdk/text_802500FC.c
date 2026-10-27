@@ -294,6 +294,9 @@ void fn_8025AD58(void) {
     fn_8025AD78();
 }
 
+#pragma push
+#pragma peephole off
+#pragma scheduling off
 void fn_8025AD78(void) {
     extern void (*lbl_80401390[])(void);
     void (**ctor)(void);
@@ -302,7 +305,7 @@ void fn_8025AD78(void) {
         (*ctor)();
     }
 }
-
+#pragma pop
 void fn_8025AE20(void) {
     M2C_UNK fn_8025AE94();
     fn_8025AE94();
