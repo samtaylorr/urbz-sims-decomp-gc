@@ -4528,6 +4528,10 @@ void fn_800EE91C(void) {
     fn_800EC59C();
 }
 
+void fn_800EE93C(s32 arg0, const char *arg1, s32 arg2) {
+    ((void (*)(s32, s32, s32, s32))fn_800EC59C)(arg0, (s32)arg1, arg2, arg1 ? fn_80248808(arg1) : 0);
+}
+
 void fn_800EC6BC(void);
 void fn_800EEAC4(void) {
     fn_800EC6BC();
