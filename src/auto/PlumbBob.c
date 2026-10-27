@@ -66,6 +66,16 @@ s32 fn_80067A8C(void *arg0, s32 arg1) {
     return (M2C_FIELD(p, u32 *, 0x18) >> 1) & 1;
 }
 
+void fn_800680F4(void *arg0, void *arg1) {
+    extern void fn_800A1FF8(void *, s32, s32);
+    extern void fn_80067AA4(void *, s32, s32);
+    s32 index = M2C_FIELD(arg1, s32 *, 0x38);
+    void **arr = (void **)((char *)arg0 + 0x1FC);
+    fn_800A1FF8(arr[index], 2, 1);
+    if (index == 0) fn_80067AA4(arg0, 0, 3);
+    else fn_80067AA4(arg0, index, 4);
+}
+
 void fn_80068164(void *arg0, void *arg1) {
     extern void fn_800A1FF8(void *, s32, s32);
     extern void fn_80067AA4(void *, s32, s32);
