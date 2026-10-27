@@ -29,6 +29,17 @@ void fn_80335020(void) {
     fn_802D0C44();
 }
 
+void *fn_80335040(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    void *fn_8031BEA0(void *);
+    void fn_8031C004(void *, s32, s32);
+    void *obj;
+
+    obj = fn_8031BEA0(Heap_Alloc(0x2C));
+    *(s32 *)((u8 *)obj + 8) = arg3;
+    fn_8031C004(obj, arg1, arg2);
+    return obj;
+}
+
 extern u8 lbl_8045B4E4[];
 extern u8 lbl_8041BE68[];
 void fn_80335F5C(void *p);
