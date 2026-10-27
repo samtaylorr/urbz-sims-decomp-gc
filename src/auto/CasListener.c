@@ -250,7 +250,9 @@ s32 fn_801BF7BC(void *arg0) {
 
 void fn_801BF7C8(void) {
     extern void *lbl_8041FA44[];
-    CasListener_CallVirt(lbl_8041FA44[0], 0x38);
+    u8 *obj = (u8 *)lbl_8041FA44[0];
+    u8 *vt = *(u8 **)(obj + 0x44);
+    (*(void (**)(void *))(vt + 0x3C))(obj + *(s16 *)(vt + 0x38));
 }
 
 void fn_801BF804(void *arg0, s32 arg1, s32 arg2) {
@@ -313,6 +315,17 @@ void fn_801BFA04(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
 
     mgr = lbl_80494FCC;
     fn_80310FFC(fn_803338D0(mgr, fn_803338F0(mgr, M2C_FIELD(arg0, s32 *, 0x38))), arg1, arg2, arg3);
+}
+
+void fn_801BFA64(void *arg0, s32 arg1, s32 arg2) {
+    extern void fn_803110C8(void *, s32, s32, s32);
+    extern void *fn_803338D0(void *, s32);
+    extern s32 fn_803338F0(void *, s32);
+    extern void *lbl_80494FCC;
+    void *mgr;
+
+    mgr = lbl_80494FCC;
+    fn_803110C8(fn_803338D0(mgr, fn_803338F0(mgr, M2C_FIELD(arg0, s32 *, 0x38))), arg1, arg2, 0);
 }
 
 s32 fn_801BFD60(void *arg0) {
