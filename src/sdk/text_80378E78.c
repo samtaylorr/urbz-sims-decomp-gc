@@ -666,8 +666,8 @@ s32 fn_80387188(void) {
 
 void fn_803871D8(void) {
     s32 enabled = fn_8025465C();
-    volatile u16 *regs = (volatile u16 *)0xCC005000;
-    regs[5] = (regs[5] & ~0xA8) | 4;
+    u16 tmp = __DSPRegs[5];
+    __DSPRegs[5] = (tmp & ~0xA8) | 4;
     fn_80254684(enabled);
 }
 
