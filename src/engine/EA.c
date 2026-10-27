@@ -571,6 +571,16 @@ void fn_802DE598(void) {
 
 }
 
+void fn_802DEBE4(void *arg0, s32 arg1) {
+    extern void fn_802DDC18(void *);
+    extern u8 lbl_80419678[];
+    M2C_FIELD(arg0, u8 **, 0x10) = lbl_80419678;
+    fn_802DDC18(arg0);
+    if (arg1 & 1) {
+        fn_802D20E8((s32)arg0);
+    }
+}
+
 s32 fn_802DEC58(s32 *self) {
     return self[1];
 }
