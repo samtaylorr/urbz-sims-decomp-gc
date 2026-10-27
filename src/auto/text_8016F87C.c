@@ -249,6 +249,21 @@ s32 fn_80174C90(s32 *arg0) {
     return 1;
 }
 
+s32 fn_80174CA0(s32 *self, s32 count, s32 arg2) {
+    s32 i;
+    if (self[0] == 0) {
+        self[2] = arg2;
+        self[3] = (s32)(self + 7);
+        self[6] = 0;
+        self[1] = count;
+        for (i = 0; i < self[1]; i++) {
+            ((s32 *)self[3])[i] = 0x80000000;
+        }
+    }
+    self[0] = 1;
+    return 1;
+}
+
 s32 fn_80174D04(s32 *arg0) {
     *arg0 = 0;
     return 1;
