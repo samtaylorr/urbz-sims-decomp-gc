@@ -946,6 +946,20 @@ void fn_800CFC34(void *arg0, s32 arg1) {
     }
 }
 
+void fn_800CFD4C(void *arg0, s32 arg1) {
+    extern void fn_802D20E8(void *);
+    M2C_UNK fn_8039DAD8(void *);
+    M2C_UNK fn_8039DC8C(void *);
+    extern M2C_UNK lbl_8040B118[];
+
+    M2C_FIELD(arg0, M2C_UNK **, 0x1C) = lbl_8040B118;
+    fn_8039DC8C(arg0);
+    fn_8039DAD8(arg0);
+    if (arg1 & 1) {
+        fn_802D20E8(arg0);
+    }
+}
+
 void fn_800CFDA0(void *arg0, void *arg1) {
     *(WPBVec3 *)((char *)arg0 + 0x20) = *(WPBVec3 *)arg1;
     M2C_FIELD(arg0, f32 *, 0x2C) = M2C_FIELD(arg1, f32 *, 0xC);
