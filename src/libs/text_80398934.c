@@ -9865,6 +9865,18 @@ void fn_803BDFC8(s32 *first, s32 *middle, s32 *last, s32 comp) {
     fn_803BDE90(first, middle, last, 0, comp);
 }
 
+void fn_803BE44C(Elem12 *first, Elem12 *last, s32 comp) {
+    void fn_803BE2CC(Elem12 *, Elem12 *, s32);
+    void fn_803BE3DC(Elem12 *, Elem12 *, s32, s32);
+
+    if (last - first > 16) {
+        fn_803BE2CC(first, first + 16, comp);
+        fn_803BE3DC(first + 16, last, 0, comp);
+    } else {
+        fn_803BE2CC(first, last, comp);
+    }
+}
+
 void fn_803BE4C4(Elem12 *first, Elem12 *last, s32 comp) {
     void fn_803BE0B8(Elem12 *, Elem12 *, s32, s32, s32);
     void fn_803BE44C(Elem12 *, Elem12 *, s32);
