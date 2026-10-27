@@ -297,11 +297,12 @@ void fn_8010C1D4(void **obj) {
 
 extern u8 lbl_8040E8B8[];
 void *fn_8010C214(void **self) {
+    extern u8 lbl_8040E8B8[];
     void fn_801B3814(void *, s32, s32);
     *self = lbl_8040E8B8;
     fn_801B3814(self + 1, -1, 0);
-    self[4] = 0;
     self[3] = 0;
+    self[4] = 0;
     return self;
 }
 
