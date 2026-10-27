@@ -196,7 +196,7 @@ void *fn_80399BE8(u32 n) {
     extern void **lbl_804069A8[];
     void ***fl = &lbl_804069A8[(n - 1) >> 3];
     void **r = *fl;
-    s32 lock[16];
+    s32 lock[3];
     if (r != NULL) {
         *fl = *r;
     } else {
@@ -2904,6 +2904,26 @@ void fn_803A3998(s32 *first, s32 *last, s32 comp) {
     fn_803A37FC(first, 0, result - first, val, comp);
 }
 
+void fn_803A39D8(s32 *first, s32 *middle, s32 *last, s32 *val, s32 comp) {
+    s32 *i;
+    s32 *end;
+    s32 v;
+
+    fn_803A3918(first, middle, comp);
+    for (i = middle; i < last; i++) {
+        if (((s32 (*)(s32 *, s32 *))comp)(i, first)) {
+            v = *i;
+            *i = *first;
+            fn_803A37FC(first, 0, middle - first, v, comp);
+        }
+    }
+    end = middle;
+    while (end - first > 1) {
+        fn_803A3998(first, end, comp);
+        end--;
+    }
+}
+
 void fn_803A39D8(s32 *first, s32 *middle, s32 *last, s32 *val, s32 comp);
 void fn_803A3AA4(s32 *first, s32 *middle, s32 *last, s32 comp) {
     fn_803A39D8(first, middle, last, 0, comp);
@@ -4889,6 +4909,30 @@ void fn_803AEC9C(s32 *self, s32 flags) {
     }
 }
 
+void fn_803AECD0(Elem14 *arr, u32 count, u32 pos, u32 n) {
+    Elem14 *dst;
+    Elem14 *src;
+    u32 i;
+
+    if (pos >= count || pos + n > count || n == 0) {
+        if (fn_80240584() != 0) {
+            *(s32 *)0 = 0;
+        }
+    }
+    i = count - pos - n;
+    if (i != 0) {
+        dst = &arr[pos];
+        src = &arr[pos + n];
+        do {
+            fn_803AF07C((s32 *)dst, (s32 *)src);
+            dst->unk10 = src->unk10;
+            dst->unk11 = src->unk11;
+            src++;
+            dst++;
+        } while (--i != 0);
+    }
+}
+
 extern s32 fn_80240584(void);
 void fn_803AF07C(s32 *dst, s32 *src);
 void fn_803AED88(u32 *arr, u32 count, u32 pos, u32 n) {
@@ -4930,6 +4974,20 @@ void fn_803AEE2C(Elem14 *arr, u32 count, Elem14 *val, u32 pos) {
     fn_803AF07C((s32 *)dst, (s32 *)val);
     dst->unk10 = val->unk10;
     dst->unk11 = val->unk11;
+}
+
+void fn_803AEEEC(u32 *arr, u32 count, u32 *val, u32 pos) {
+    u32 i;
+
+    if (pos > count) {
+        if (fn_80240584() != 0) {
+            *(s32 *)0 = 0;
+        }
+    }
+    for (i = count; i > pos; i--) {
+        arr[i] = arr[i - 1];
+    }
+    arr[pos] = *val;
 }
 
 void fn_803AF018(s32 *dst, s32 a, s32 b, s32 p, s32 c) {
