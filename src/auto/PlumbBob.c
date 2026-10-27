@@ -1623,6 +1623,17 @@ void fn_8008A710(PBStack *stk, void *obj) {
     stk->n++;
 }
 
+void fn_8008A75C(PBStack *stk, void *obj) {
+    PBStackEntry *e;
+    if (stk->n == 0) {
+        return;
+    }
+    stk->n--;
+    e = &stk->e[stk->n];
+    M2C_FIELD(obj, s32 *, 0x17C) = e->w;
+    *(PBVec3 *)((u8 *)obj + 0x110) = e->v;
+}
+
 void fn_8008A7A4(s32 *arg0) {
     *arg0 = 0;
 }
