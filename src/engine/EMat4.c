@@ -1239,12 +1239,12 @@ void *fn_802CEF10(void *arg0) {
     extern char lbl_80419450[];
     s32 i;
 
+    M2C_FIELD(arg0, char **, 0) = lbl_80419450;
     for (i = 0x100; i != 0; i--) {
-        M2C_FIELD(arg0, char **, 0) = lbl_80419450;
     }
     M2C_FIELD(arg0, s16 *, 0x1006) = 1;
-    M2C_FIELD(arg0, s32 *, 0x1008) = 0;
     M2C_FIELD(arg0, s32 *, 0x100C) = 0;
+    M2C_FIELD(arg0, s32 *, 0x1008) = 0;
     return arg0;
 }
 
