@@ -2554,16 +2554,17 @@ s32 fn_802BC93C(void **self, s32 c, s32 start) {
     struct Buf { u16 ref; u16 len; s32 cap; char data[1]; };
     char *p;
 
-    if (start < ((struct Buf *)*self)->len) {
-        if (start < 0) {
-            start = 0;
-        }
-        p = fn_80248B28(&((struct Buf *)*self)->data[start], c);
-        if (p != 0) {
-            return p - ((struct Buf *)*self)->data;
-        }
+    if (start >= ((struct Buf *)*self)->len) {
+        return -1;
     }
-    return -1;
+    if (start < 0) {
+        start = 0;
+    }
+    p = fn_80248B28(((struct Buf *)*self)->data + start, c);
+    if (p == 0) {
+        return -1;
+    }
+    return p - ((struct Buf *)*self)->data;
 }
 
 s32 fn_802BCA14(void) {
@@ -2574,7 +2575,7 @@ s32 fn_802BCA1C(void) {
     return 0;
 }
 
-void fn_802BCB74(void **self, u8 c) {
+void fn_802BCB74(void **self, s32 c) {
     extern void fn_802BCBCC(void **, char *, char *);
     char buf[2] = "*";
 
