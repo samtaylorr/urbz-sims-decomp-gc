@@ -10312,6 +10312,12 @@ u16 fn_803C0158(void) {
     return lbl_80493E08[0];
 }
 
+void *fn_803C01C4(void *self, s32 n) {
+    extern s32 lbl_8045B0F0[];
+    extern void *fn_80338000(void *, s32, s32);
+    return fn_80338000(lbl_8045B0F0, n, 4);
+}
+
 void fn_803C01F0(void *self, s32 p) {
     extern s32 lbl_8045B0F0[];
     extern void fn_80338184(void *, s32);
