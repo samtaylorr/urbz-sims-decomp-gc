@@ -801,13 +801,12 @@ s32 fn_800FC788(void *arg0, s32 arg1) {
 }
 
 s32 fn_800FC814(s32 arg0) {
-    s32 r;
+    s32 r = 0;
     switch (arg0) {
-    case 0: r = 0; break;
+    case 0: break;
     case 1: r = 0xFFF; break;
     case 2: r = 0x1FFF; break;
     case 3: r = 0x2328; break;
-    default: r = 0; break;
     }
     return r;
 }
