@@ -94,13 +94,15 @@ void fn_8011BF84(void *arg0, s32 arg1) {
 }
 
 void fn_8011C01C(void *arg0, s32 arg1, s32 arg2) {
+    void *head;
     void *it;
     void *obj;
     void *vt;
 
+    head = M2C_FIELD(arg0, void **, 0xC);
     it = arg0;
-    if (M2C_FIELD(arg0, void **, 0xC) != NULL) {
-        it = M2C_FIELD(arg0, void **, 0xC);
+    if (head != NULL) {
+        it = head;
     }
     for (; it != NULL; it = M2C_FIELD(it, void **, 8)) {
         obj = M2C_FIELD(M2C_FIELD(it, void **, 0), void **, 4);
