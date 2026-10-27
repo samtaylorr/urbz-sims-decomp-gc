@@ -3007,6 +3007,7 @@ s32 fn_803A51C0(s32 arg0, s32 arg1, s32 arg2) {
 
 void *fn_803A5B58(s32 *self) {
     s32 *p;
+    char alloc[16];
     self[1] = 0;
     p = fn_80399BE8(0x1C);
     self[2] = 0;
@@ -10787,8 +10788,7 @@ void fn_803C0D24(M2C_UNK **arg0) {
 
 void fn_803C0D34(void *arg0) {
     extern u8 lbl_8041DE78[];
-    void **p = arg0;
-    p[0] = lbl_8041DE78;
-    p[8] = 0;
+    Obj_SetVtbl(arg0, lbl_8041DE78);
+    M2C_FIELD(arg0, s32 *, 0x20) = 0;
 }
 
