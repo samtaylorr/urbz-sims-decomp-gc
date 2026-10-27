@@ -211,6 +211,17 @@ s32 fn_80365D6C(void *arg0, s32 arg1) {
     return sp8;
 }
 
+void **fn_80365D94(void *arg0, u32 key) {
+    extern void *fn_80366168(void *, s32, s32);
+    extern void *fn_80365EF8(void *, s32, s32, void *);
+    u32 index = key % M2C_FIELD(arg0, u32 *, 0xC);
+    void *node = fn_80366168(arg0, index, key);
+    if (node == NULL) {
+        node = fn_80365EF8(arg0, index, key, NULL);
+    }
+    return (void **)((u8 *)node + 0x10);
+}
+
 void fn_8036619C(void *arg0) {
     M2C_UNK *var_r30;
     M2C_UNK fn_802D20E8(M2C_UNK *);
