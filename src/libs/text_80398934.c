@@ -7596,6 +7596,70 @@ void fn_803B63A4(void *arg0, u32 n) {
     }
 }
 
+void fn_803B650C(void *arg0, u32 n) {
+    typedef struct Pair {
+        s32 a;
+        s32 b;
+    } Pair;
+    typedef struct Vec {
+        Pair *start;
+        Pair *finish;
+        s32 unk8;
+        Pair *eos;
+    } Vec;
+    Vec *v = arg0;
+
+    if ((u32)(v->eos - v->start) < n) {
+        Pair *start = v->start;
+        Pair *finish = v->finish;
+        s32 oldSize = finish - start;
+        Pair *tmp;
+
+        if (start != NULL) {
+            Pair *result;
+            {
+                Pair *src;
+                Pair *dst;
+                Pair *mem;
+                if (n != 0) {
+                    mem = PtrVec_Allocate(n * sizeof(Pair));
+                } else {
+                    mem = NULL;
+                }
+                dst = mem;
+                for (src = start; src != finish; src++) {
+                    *dst = *src;
+                    dst++;
+                }
+                result = mem;
+            }
+            tmp = result;
+            {
+                Pair *p = v->start;
+                Pair *end = v->finish;
+                for (; p != end; p++) {
+                }
+            }
+            {
+                Pair *dp = v->start;
+                u32 dn = v->eos - dp;
+                if (dp != NULL) {
+                    PtrVec_Deallocate(dp, dn * sizeof(Pair));
+                }
+            }
+        } else {
+            Pair *mem;
+            if (n != 0) {
+                mem = PtrVec_Allocate(n * sizeof(Pair));
+            } else {
+                mem = NULL;
+            }
+            tmp = mem;
+        }
+        PtrVec_Set((void **)v, (void **)tmp, (void **)(oldSize * 8 + (s32)tmp), (void **)(n * 8 + (u32)tmp));
+    }
+}
+
 extern void fn_802BE53C(void *);
 void *fn_803B6F48(void *self) {
     fn_802BE53C(self);
