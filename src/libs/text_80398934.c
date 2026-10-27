@@ -1305,6 +1305,32 @@ s32 *fn_8039D388(s32 *self, s32 *other) {
     return self;
 }
 
+void fn_8039D3D4(void **v, u32 n) {
+    void **start = (void **)v[0];
+    if ((u32)((void **)v[3] - start) < n) {
+        void **finish = (void **)v[1];
+        s32 size = finish - start;
+        void **tmp;
+        if (start != NULL) {
+            tmp = n != 0 ? (void **)PtrVec_Allocate(n * 4) : NULL;
+            if (finish != start) {
+                fn_8024839C(tmp, start, (char *)finish - (char *)start);
+            }
+            {
+                void **s = (void **)v[0];
+                u32 cnt = (void **)v[3] - s;
+                if (s != NULL) {
+                    PtrVec_Deallocate(s, cnt * 4);
+                }
+            }
+        } else {
+            void *p = n != 0 ? PtrVec_Allocate(n * 4) : NULL;
+            tmp = (void **)p;
+        }
+        PtrVec_Set(v, tmp, tmp + size, (void **)((char *)tmp + n * 4));
+    }
+}
+
 void fn_8039D8D8(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x38) = (s32) (M2C_FIELD(arg0, s32 *, 0x38) | 0x10000000);
 }
@@ -2448,7 +2474,7 @@ void fn_803A2EA8(void *arg0, u32 n) {
         Pair *finish = v->finish;
         s32 oldSize = finish - start;
         Pair *tmp;
-        u32 bytes;
+        u32 allocated;
 
         if (start != NULL) {
             Pair *result;
@@ -2458,15 +2484,15 @@ void fn_803A2EA8(void *arg0, u32 n) {
                 Pair *mem;
                 if (n != 0) {
                     u32 b = n * sizeof(Pair);
-                    bytes = b;
                     if (b > 0x80) {
-                        mem = (Pair *)fn_802D1FC8(bytes);
+                        mem = (Pair *)fn_802D1FC8(b);
                     } else {
-                        mem = fn_80399BE8(bytes);
+                        mem = fn_80399BE8(b);
                     }
+                    allocated = b / sizeof(Pair);
                 } else {
                     mem = NULL;
-                    bytes = 0;
+                    allocated = 0;
                 }
                 dst = mem;
                 for (src = start; src != finish; src++) {
@@ -2498,24 +2524,21 @@ void fn_803A2EA8(void *arg0, u32 n) {
             Pair *mem;
             if (n != 0) {
                 u32 b = n * sizeof(Pair);
-                bytes = b;
                 if (b > 0x80) {
-                    mem = (Pair *)fn_802D1FC8(bytes);
+                    mem = (Pair *)fn_802D1FC8(b);
                 } else {
-                    mem = fn_80399BE8(bytes);
+                    mem = fn_80399BE8(b);
                 }
+                allocated = b / sizeof(Pair);
             } else {
                 mem = NULL;
-                bytes = 0;
+                allocated = 0;
             }
             tmp = mem;
         }
-        {
-            Pair *newFinish = (Pair *)(oldSize * 8 + (s32)tmp);
-            v->eos = (Pair *)(bytes + (u32)tmp);
-            v->start = tmp;
-            v->finish = newFinish;
-        }
+        v->start = tmp;
+        v->finish = tmp + oldSize;
+        v->eos = tmp + allocated;
     }
 }
 
