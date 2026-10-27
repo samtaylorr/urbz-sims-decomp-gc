@@ -41,6 +41,21 @@ s32 fn_801D65E4(void) {
     return lbl_804945EC;
 }
 
+u32 fn_801D65EC(u8 *self, s32 arg1) {
+    switch (arg1) {
+    case 0:
+        return 0xA4D039D8;
+    case 1:
+        return 0x48168CC9;
+    case 2:
+        return 0x968E96A1;
+    case 3:
+        return 0x845E509E;
+    default:
+        return 0;
+    }
+}
+
 void fn_801D6790(void) {
     extern void fn_801D66E0(s32, s32);
     fn_801D66E0(1, 0xFFFF);
