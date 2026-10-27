@@ -415,27 +415,24 @@ s32 fn_801D8810(void **arg0) {
     s32 i;
     INVNode *prev;
     INVNode *node;
+    INVNode *free;
 
     list->unkC = lbl_80416EC8;
-    list->free = NULL;
     list->head = NULL;
     list->tail = NULL;
+    list->free = NULL;
     prev = NULL;
-    for (i = 200; i != 0; i--) {
+    for (i = 0; i < 200; i++) {
         node = fn_802D1FC8(0x14);
-        if (list->free == NULL) {
-            node->unk10 = lbl_80416EE0;
-            node->prev = NULL;
-            node->next = NULL;
-            node->unk8 = 0;
-            node->unkC = 0;
+        free = list->free;
+        node->unk10 = lbl_80416EE0;
+        node->prev = NULL;
+        node->next = NULL;
+        node->unk8 = 0;
+        node->unkC = 0;
+        if (free == NULL) {
             list->free = node;
         } else {
-            node->unk10 = lbl_80416EE0;
-            node->prev = NULL;
-            node->next = NULL;
-            node->unk8 = 0;
-            node->unkC = 0;
             prev->next = node;
             node->prev = prev;
         }
