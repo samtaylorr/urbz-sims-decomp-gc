@@ -3185,6 +3185,16 @@ void fn_800E4F38(void) {
 
 }
 
+void fn_800E50A4(s32 *self) {
+    extern u8 lbl_8041E1C8[];
+    extern f32 lbl_803D5370[];
+    s32 fn_802E0904(void *);
+    s32 fn_802E091C(void *);
+    if (fn_802E0904(lbl_8041E1C8) == 0 && fn_802E091C(lbl_8041E1C8) == 0) {
+        fn_800E3B38(self, 3, lbl_803D5370[0]);
+    }
+}
+
 void fn_800E5104(void *arg0) {
     M2C_UNK fn_800490B0(M2C_UNK *);
     extern s32 lbl_80494F40;
