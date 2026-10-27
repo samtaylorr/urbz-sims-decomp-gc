@@ -4,6 +4,14 @@ typedef struct {
     s32 v[12];
 } Unk801D4BF0;
 
+typedef struct {
+    s32 v[3];
+} Unk801D4CC0;
+
+typedef struct {
+    f32 x, y, z;
+} Vec801D4D50;
+
 
 extern s32 lbl_804945E8;
 u8 *fn_801D626C(u8 *self) {
