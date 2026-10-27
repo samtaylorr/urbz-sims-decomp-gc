@@ -292,6 +292,15 @@ void fn_8010C1D4(void **obj) {
     }
 }
 
+extern u8 lbl_8040E940[];
+void fn_8010C268(void **self, s32 flags) {
+    self[3] = 0;
+    *self = lbl_8040E940;
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 s32 fn_8010C3F8(void *arg0, void *arg1) {
     s32 fn_803A1484(void *, void *);
     u8 *p;
