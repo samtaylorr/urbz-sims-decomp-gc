@@ -20,6 +20,10 @@ static inline s32 RMMapIter_NotEqual(RMMapIter a, RMMapIter b) {
     return a.node != b.node;
 }
 
+static inline s32 RMMapIter_NotEqualP(const RMMapIter *a, const RMMapIter *b) {
+    return a->node != b->node;
+}
+
 extern s32 lbl_80494538;
 void fn_8018FA84(void *arg0, s32 arg1);
 void fn_8018EDE0(void **obj) {
@@ -132,6 +136,22 @@ void fn_8018FD20(void *arg0, s32 arg1) {
 M2C_UNK *fn_8018FD28(void) {
     extern M2C_UNK lbl_80495CC0;
     return &lbl_80495CC0;
+}
+
+void fn_801905AC(char *self) {
+    RMMapIter it;
+    RMMapIter end;
+
+    it.node = NULL;
+    for (it.node = (*(RMMapNode **)(self + 4))->left;
+         end.node = *(RMMapNode **)(self + 4), RMMapIter_NotEqual(it, end);
+         it.node = (RMMapNode *)fn_8039AB24((void **)it.node)) {
+        char *room = it.node->value;
+        if (*(s32 *)(room + 0x34) != 0) {
+            *(s32 *)(room + 0x80) = 1;
+        }
+    }
+    *(s32 *)(self + 0x20) = 1;
 }
 
 void fn_80191460(void) {
