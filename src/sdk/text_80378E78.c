@@ -206,6 +206,21 @@ void fn_8037E07C(void *arg0, char arg1, f32 farg0) {
     cosA = fn_802434CC(farg0);
     fn_8037E208(arg0, arg1, sinA, cosA);
 }
+
+#pragma peephole off
+void fn_8037E4C4(void *arg0, char arg1, f32 farg0) {
+    f32 fn_802434CC(f32);
+    f32 fn_80243694(f32);
+    void fn_8037E408(void *, char, f32, f32);
+    f32 sinA;
+    f32 cosA;
+
+    sinA = fn_80243694(farg0);
+    cosA = fn_802434CC(farg0);
+    fn_8037E408(arg0, arg1, sinA, cosA);
+}
+#pragma peephole reset
+
 #pragma peephole reset
 #pragma peephole reset
 
