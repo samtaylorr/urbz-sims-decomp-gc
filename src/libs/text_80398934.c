@@ -50,6 +50,10 @@ typedef struct {
 void fn_8039F498(RbIter *ret, void **tree, void **x, void **y, u32 *v, s32 w);
 void **fn_8039F5BC(void **node);
 
+static inline void RbIter_dec(RbIter *it) {
+    it->node = fn_8039F5BC(it->node);
+}
+
 typedef struct Elem14 {
     u8 data[0x10];
     u8 unk10;
