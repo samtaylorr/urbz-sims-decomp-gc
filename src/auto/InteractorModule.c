@@ -133,6 +133,43 @@ void fn_80239EDC(s32 arg0, s32 arg1) {
     fn_8022F480(arg1, arg0);
 }
 
+s32 fn_8023B830(void) {
+    typedef struct { s16 delta; s16 idx; void (*fn)(void *, s32); } VtEnt;
+    extern u8 *lbl_80496658;
+    extern u8 *lbl_80496654;
+    extern s32 fn_80192850(void *);
+    extern void *fn_8039AB24(void *);
+    s32 count;
+    u8 *list;
+    void *node;
+    s32 more;
+
+    count = 0;
+    {
+        VtEnt *e = (VtEnt *)(*(u8 **)lbl_80496658 + 0x100);
+        e->fn(lbl_80496658 + e->delta, 0);
+    }
+    list = lbl_80496654;
+    node = M2C_FIELD(M2C_FIELD(list, void **, 4), void **, 8);
+    for (;;) {
+        more = 1;
+        if (node == M2C_FIELD(list, void **, 4)) {
+            more = 0;
+        }
+        if (!more) {
+            break;
+        }
+        {
+            void *d = M2C_FIELD(node, void **, 0x14);
+            if (M2C_FIELD(d, s32 *, 0x34) != 0 && fn_80192850(d) == 0) {
+                count++;
+            }
+        }
+        node = fn_8039AB24(node);
+    }
+    return count < 20;
+}
+
 s32 fn_8023C218(void *arg0) {
     return ((u32) M2C_FIELD(arg0, u32 *, 0xC0) >> 7U) & 1;
 }
