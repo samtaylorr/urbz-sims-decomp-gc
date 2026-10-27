@@ -288,8 +288,8 @@ void fn_8010FAD4(void *arg0) {
         void *obj = lbl_80494FA4;
         void *vt;
         M2C_FIELD(cur, s32 *, 8) = 0;
-        M2C_FIELD(g, s32 *, 0x418) = 0;
         M2C_FIELD(g, s32 *, 0x40C) = 0;
+        M2C_FIELD(g, s32 *, 0x418) = 0;
         vt = *(void **)obj;
         ((void (*)(void *))M2C_FIELD(vt, void **, 0x4C))((u8 *)obj + M2C_FIELD(vt, s16 *, 0x48));
     }
@@ -303,6 +303,30 @@ f32 fn_8010FB2C(void *arg0) {
 f32 fn_8010FB6C(void *arg0) {
     extern f32 lbl_803D7258[];
     return (f32) (M2C_FIELD(arg0, s32 *, 0x1C) - 0x200) * lbl_803D7258[0];
+}
+
+void *fn_8010FBB0(u32 size) {
+    extern void *fn_802D0AB8(void);
+    void *fn_802D197C(void *heap, u32 size, u32 align);
+    void *fn_802D0B3C(void);
+    void *fn_802DC9F4(void *heap, u32 size, s32 arg2, s32 arg3);
+    void *heap;
+    void *p;
+
+    heap = fn_802D0AB8();
+    if (size == 0) {
+        return NULL;
+    }
+    p = fn_802D197C(heap, size, 4);
+    if (p == NULL) {
+        p = fn_802DC9F4(heap, size, 1, 0);
+        if (p == NULL && heap == fn_802D0AB8()) {
+            return fn_802DC9F4(fn_802D0B3C(), size, 1, 0);
+        }
+    } else {
+        fn_80248488(p, 0, size);
+    }
+    return p;
 }
 
 extern void *fn_802D0AB8(void);
