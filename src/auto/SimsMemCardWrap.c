@@ -512,6 +512,20 @@ void fn_800AB044(void) {
 
 }
 
+void fn_800AB260(u8 *arg0, SMCVec3 *out) {
+    f32 fn_8025FC40(void *);
+    void fn_802F0A84(SMCVec3 *);
+    u8 *obj = *(u8 **)(arg0 + 0xE8);
+    SMCVec3 *v = (SMCVec3 *)(obj + 0xC0);
+    f32 s = fn_8025FC40(obj + 0xA4);
+    SMCVec3 tmp;
+    tmp.x = v->x * s;
+    tmp.y = v->y * s;
+    tmp.z = v->z * s;
+    *out = tmp;
+    fn_802F0A84(out);
+}
+
 void fn_800AB4EC(void *arg0, void *arg1) {
     M2C_UNK fn_800AB2E0(void *, u8 *);
     u8 sp8[0xE0];
@@ -588,7 +602,7 @@ void fn_800AB5FC(u8 *arg0) {
         var_r28 = 0;
         var_r29 = 6;
         do {
-            s32 v = *(s32 *)(a + var_r28);
+            s32 v = *(s32 *)(var_r28 + a);
             if (v != 0 && *var_r31 != 0) {
                 char *vt;
                 sp8.flags = 0;
@@ -629,6 +643,14 @@ void fn_800AB774(u8 *arg0, s32 arg1) {
             }
         }
     }
+}
+
+f32 fn_800AB814(void) {
+    extern u8 *lbl_80494FC4;
+    extern u8 lbl_80452418[];
+    u8 *obj = lbl_80494FC4;
+    u8 *vt = *(u8 **)obj;
+    return (*(f32 (**)(void *, void *))(vt + 0x2C))(obj + *(s16 *)(vt + 0x28), lbl_80452418);
 }
 
 f32 fn_800AB854(void) {
