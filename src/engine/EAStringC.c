@@ -718,15 +718,15 @@ void fn_802AB97C(void *arg0, s32 arg1) {
     }
 }
 
-void *fn_802ACAA4(void *arg0, s32 arg1, s32 arg2) {
+void *fn_802ACAA4(char *self, s32 arg1, s32 arg2) {
     extern char lbl_804189F0[];
     extern void fn_802B6FA8(void *, s32);
-    extern void fn_802ADDD8(s32 *, s32);
-    fn_802B6FA8(arg0, arg1);
-    M2C_FIELD(arg0, void **, 4) = lbl_804189F0;
-    fn_802ADDD8(&M2C_FIELD(arg0, s32 *, 8), arg2);
-    M2C_FIELD(arg0, s32 *, 0x18) = 0;
-    return arg0;
+    extern void fn_802ADDD8(void *, s32);
+    fn_802B6FA8(self, arg1);
+    *(char **)(self + 4) = lbl_804189F0;
+    fn_802ADDD8(self + 8, arg2);
+    *(s32 *)(self + 0x18) = 0;
+    return self;
 }
 
 void fn_802ACAF8(void *arg0, s32 arg1) {
@@ -2535,6 +2535,7 @@ void **fn_802BC658(void **self, char *s, u32 max) {
     u32 count;
     u32 len;
     char *p;
+    char *dst;
 
     count = 0;
     p = s;
@@ -2544,7 +2545,8 @@ void **fn_802BC658(void **self, char *s, u32 max) {
     if (count != 0) {
         len = ((struct Buf *)*self)->len;
         fn_802BE3D0(self, len + count, 0, len, 1, len + count);
-        fn_802482F8(((struct Buf *)*self)->data + len, s, count);
+        dst = ((struct Buf *)*self)->data;
+        fn_802482F8(dst + len, s, count);
     }
     return self;
 }
