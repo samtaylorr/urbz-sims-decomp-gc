@@ -380,6 +380,23 @@ s32 fn_803672C4(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x44);
 }
 
+void *fn_803672CC(void *arg0, void *arg1, s32 arg2) {
+    M2C_UNK fn_8039ABB0(void *, void *);
+    u8 *src = M2C_FIELD(arg1, u8 **, 0x48) + arg2 * 0x60;
+    f32 *d = (f32 *)((u8 *)arg0 + 4);
+    f32 *s = (f32 *)(src + 4);
+    M2C_FIELD(arg0, s32 *, 0) = M2C_FIELD(src, s32 *, 0);
+    d[0] = s[0];
+    d[1] = s[1];
+    d[2] = s[2];
+    fn_8039ABB0((u8 *)arg0 + 0x10, src + 0x10);
+    M2C_FIELD(arg0, f32 *, 0x50) = M2C_FIELD(src, f32 *, 0x50);
+    M2C_FIELD(arg0, f32 *, 0x54) = M2C_FIELD(src, f32 *, 0x54);
+    M2C_FIELD(arg0, f32 *, 0x58) = M2C_FIELD(src, f32 *, 0x58);
+    M2C_FIELD(arg0, f32 *, 0x5C) = M2C_FIELD(src, f32 *, 0x5C);
+    return arg0;
+}
+
 s32 fn_80367610(void *arg0) {
     return (M2C_FIELD(arg0, s32 *, 0x18) * M2C_FIELD(arg0, s16 *, 0x1C)) + 0x23;
 }
