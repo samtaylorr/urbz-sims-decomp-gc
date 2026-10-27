@@ -19,23 +19,6 @@ static inline void ResLock_Release(ResLock *l) {
     char *vt = *(char **)l->obj;
     (*(void (**)(void *))(vt + 0x1C))(l->obj + *(s16 *)(vt + 0x18));
 }
-void fn_80336CBC(char *self) {
-    void fn_8033789C(char *, s32);
-    u32 i;
-
-    for (i = 0; i < **(u32 **)(self + 0x60); i++) {
-        fn_8033789C(self, (*(s32 **)(self + 0x60))[i + 1]);
-    }
-}
-
-void fn_80336D24(char *self) {
-    void fn_80338940(char *, s32);
-    ResLock lock[1];
-
-    ResLock_Init(lock, self);
-    fn_80338940(self + 0x40, *(s32 *)(self + 0x54));
-    ResLock_Release(lock);
-}
 
 typedef struct ERMLock {
     char *obj;
@@ -54,6 +37,24 @@ static inline void ERMLock_Unlock(ERMLock *l) {
     (*(void (**)(void *))(vt + 0x1C))(l->obj + *(s16 *)(vt + 0x18));
 }
 
+void fn_80336CBC(char *self) {
+    void fn_8033789C(char *, s32);
+    u32 i;
+
+    for (i = 0; i < **(u32 **)(self + 0x60); i++) {
+        fn_8033789C(self, (*(s32 **)(self + 0x60))[i + 1]);
+    }
+}
+
+void fn_80336D24(char *self) {
+    void fn_80338940(char *, s32);
+    ERMLock lock[1];
+
+    ERMLock_Lock(lock, self);
+    fn_80338940(self + 0x40, *(s32 *)(self + 0x54));
+    ERMLock_Unlock(lock);
+}
+
 void fn_80336E04(void) {
 
 }
@@ -63,18 +64,18 @@ char *fn_80336E08(char *self, s32 key) {
     s32 fn_80338598(char *, s32, char **);
     struct {
         char *obj;
-    } lock;
-    char *res;
+        char *res;
+    } ctx;
     if (key != 0) {
-        ERMLock_Lock((ERMLock *)&lock, self);
-        if (fn_80338598(self + 0x40, key, &res) != 0) {
-            self = res;
+        ERMLock_Lock((ERMLock *)&ctx, self);
+        if (fn_80338598(self + 0x40, key, &ctx.res) != 0) {
+            self = ctx.res;
             if (*(s32 *)(self + 0xC) != 0) {
-                ERMLock_Unlock((ERMLock *)&lock);
+                ERMLock_Unlock((ERMLock *)&ctx);
                 return self;
             }
         }
-        ERMLock_Unlock((ERMLock *)&lock);
+        ERMLock_Unlock((ERMLock *)&ctx);
     }
     return 0;
 }
