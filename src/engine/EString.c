@@ -1,6 +1,12 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+typedef struct EStringVec3Scale {
+    u8 pad[0x5C];
+    f32 scale[3];
+    f32 offset[3];
+} EStringVec3Scale;
+
 void fn_802D3C60(s32 *, char *);
 
 static inline s32 *EString_Init(s32 *s, char *str) {
@@ -1373,9 +1379,10 @@ void fn_802D787C(void *arg0, s32 arg1, f32 *arg2) {
     f32 *p;
     s32 i;
 
-    p = (f32 *)((u8 *)arg0 + 0x5C);
+    p = (f32 *)((u8 *)arg0 + 0x68);
     for (i = 0; i < 3; i++) {
-        arg2[i] = (f32)fn_802DE634(M2C_FIELD(arg0, s32 *, 0x0), arg1, M2C_FIELD(arg0, s8 *, 0x1F)) * p[i] + p[i + 3];
+        arg2[i] = (f32)fn_802DE634(M2C_FIELD(arg0, s32 *, 0x0), arg1, M2C_FIELD(arg0, s8 *, 0x1F)) * p[-3] + p[0];
+        p++;
         arg1 += M2C_FIELD(arg0, s8 *, 0x1F);
     }
 }
