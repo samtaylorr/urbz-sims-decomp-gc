@@ -306,6 +306,23 @@ void fn_801BF904(void *arg0, s32 arg1, s32 arg2) {
     fn_80311404(res, arg1, a, fn_80311A4C(res, arg2), 1);
 }
 
+void fn_801BF984(void *arg0, s32 arg1, s32 arg2) {
+    extern void fn_80311404(void *, s32, s32, s32, s32);
+    extern s32 fn_80311A84(void *, s32);
+    extern s32 fn_80311AF4(void *, s32);
+    extern void *fn_803338D0(void *, s32);
+    extern s32 fn_803338F0(void *, s32);
+    extern void *lbl_80494FCC;
+    void *mgr;
+    void *res;
+    s32 a;
+
+    mgr = lbl_80494FCC;
+    res = fn_803338D0(mgr, fn_803338F0(mgr, M2C_FIELD(arg0, s32 *, 0x38)));
+    a = fn_80311AF4(res, arg2);
+    fn_80311404(res, arg1, a, fn_80311A84(res, arg2), 1);
+}
+
 void fn_801BFA04(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     extern void fn_80310FFC(void *, s32, s32, s32);
     extern void *fn_803338D0(void *, s32);
