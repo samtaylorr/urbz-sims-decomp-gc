@@ -832,8 +832,8 @@ void fn_800D4100(void *arg0) {
         var_r9 = 1;
     }
     if (var_r9 != 0) {
-        fn_8004594C(&lbl_8041F754);
-        fn_80047AA8(&lbl_8041F754);
+        fn_8004594C(lbl_8041F754);
+        fn_80047AA8(lbl_8041F754);
         fn_800E3B38(arg0, 0x11, lbl_803D19E4[0]);
         return;
     }
