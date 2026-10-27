@@ -1598,6 +1598,21 @@ void fn_800DB718(s32 *self, f32 dt) {
     }
 }
 
+void fn_800DB7D4(s32 *self, s32 arg1) {
+    extern f32 lbl_803D49E0[];
+    void fn_800DAFF8(s32, f32 *);
+    f32 v[4];
+    f32 *p = v;
+    f32 t = ((f32 *)self)[6];
+    f32 c = lbl_803D49E0[0];
+
+    v[0] = c;
+    p[1] = c;
+    p[2] = c;
+    p[3] = t;
+    fn_800DAFF8(arg1, p);
+}
+
 void fn_802D0F9C(void);
 void fn_800DB81C(void) {
     fn_802D0F9C();
@@ -1830,12 +1845,12 @@ void fn_800DC7A0(void) {
 
 void fn_800DC7E4(void) {
     extern s32 lbl_80495A74;
-    extern u8 *lbl_8041FA38;
+    extern u8 *lbl_8041FA38[];
     extern s32 fn_800A55AC(u8);
     s32 r;
 
     lbl_80495A74 = 0;
-    r = fn_800A55AC(lbl_8041FA38[0x6f]);
+    r = fn_800A55AC(lbl_8041FA38[0][0x6f]);
     if (r == 1) {
         lbl_80495A74 = r;
         fn_800DC6C8();
