@@ -128,6 +128,19 @@ void *fn_801B2D94(u32 size) {
     return Heap_Alloc(size);
 }
 
+void fn_802D1A00(void *, void *);
+extern u8 lbl_804154E8[];
+void fn_8031EA2C(void *);
+void fn_802D211C(void *);
+void fn_801B2E4C(void *p);
+void fn_801B2E4C(void *p) {
+    if (ScratchPool_Contains((ScratchPool *)lbl_80435FB8, p)) {
+        ScratchPool_Free((ScratchPool *)lbl_80435FB8, p);
+    } else {
+        fn_802D1A00(fn_802D0AB8(), p);
+    }
+}
+
 s32 fn_801B2ECC(void *self, s32 id, void **out) {
     void *vt;
 
