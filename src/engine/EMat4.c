@@ -459,13 +459,16 @@ retry:
     return 1;
 }
 
-s32 fn_802CAC04(void *arg0) {
-    fn_802CAA88((s32)arg0, -1);
-    if (M2C_FIELD(arg0, s32 *, 0x3C) == 1) {
-        fn_802CAAAC((s32)arg0 + 0x1C);
-        M2C_FIELD(arg0, s32 *, 0x38) = 0;
-        M2C_FIELD(arg0, s32 *, 0x3C) = M2C_FIELD(arg0, s32 *, 0x3C) - 1;
-        fn_802CAAAC((s32)arg0);
+s32 fn_802CAC04(s32 self) {
+    s32 p;
+
+    fn_802CAA88(self, -1);
+    if (*(s32 *)(self + 0x3C) == 1) {
+        fn_802CAAAC(self + 0x1C);
+        *(volatile s32 *)(self + 0x38) = 0;
+        *(volatile s32 *)(self + 0x3C) = *(volatile s32 *)(self + 0x3C) - 1;
+        p = self;
+        fn_802CAAAC(p);
     }
     return 1;
 }
@@ -519,6 +522,14 @@ void *fn_802CAE18(void *arg0) {
     M2C_FIELD(arg0, s8 *, 0) = 0;
     M2C_FIELD(arg0, s32 *, 0x40) = 0;
     M2C_FIELD(arg0, s32 *, 0x44) = 0;
+    return arg0;
+}
+
+void *fn_802CB22C(void *arg0, void *arg1) {
+    u8 *vt = *(u8 **)((u8 *)arg1 + 0x54);
+    s16 offset = *(s16 *)(vt + 0x20);
+    void (*func)(void *, void *) = *(void (**)(void *, void *))(vt + 0x24);
+    func((u8 *)arg1 + offset, arg0);
     return arg0;
 }
 
