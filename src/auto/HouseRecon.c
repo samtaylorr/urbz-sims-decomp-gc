@@ -49,8 +49,7 @@ s32 fn_800522E0(void *arg0, s32 arg1) {
 void fn_800523DC(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x3BC) = arg1;
     if (arg1 == 0x92D8AE4A || arg1 == 0x30AA9779 || arg1 == 0x6BCF6EE9) {
-        s32 hash = M2C_FIELD(arg0, s32 *, 0x3BC);
-        fn_802EA51C(M2C_FIELD(arg0, void **, 0x390), 1, hash, -1, 0, lbl_803C73BC[0]);
+        fn_802EA51C((void *) M2C_FIELD(arg0, s32 *, 0x390), 1, M2C_FIELD(arg0, s32 *, 0x3BC), -1, 0, lbl_803C73BC[0]);
     }
     fn_80050C6C(arg0);
     fn_80052468(arg0);
@@ -180,7 +179,15 @@ s32 fn_800529BC(u32 *arg0) {
 }
 
 s32 fn_800529C8(s32 *arg0) {
-    return fn_8004E8F0(lbl_8041F94C, 4) != 0 || *arg0 != 0;
+    s32 t;
+    s32 ret;
+
+    t = fn_8004E8F0(lbl_8041F94C, 4);
+    ret = 1;
+    if (t == 0 && *arg0 == 0) {
+        ret = 0;
+    }
+    return ret;
 }
 
 extern void fn_802EA51C(void *, s32, s32, s32, s32, f32);
