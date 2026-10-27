@@ -194,12 +194,17 @@ void *fn_80399B3C(u32 n) {
 
 void *fn_80399BE8(u32 n) {
     extern void **lbl_804069A8[];
-    void ***fl = &lbl_804069A8[(n - 1) >> 3];
-    void **r = *fl;
-    if (r != NULL) {
-        *fl = *r;
-    } else {
-        r = fn_80399B3C(n);
+    void ***fl;
+    void **r;
+    {
+        u8 lock[1];
+        fl = &lbl_804069A8[(n - 1) >> 3];
+        r = *fl;
+        if (r != NULL) {
+            *fl = *r;
+        } else {
+            r = fn_80399B3C(n);
+        }
     }
     return r;
 }
@@ -548,6 +553,25 @@ void fn_8039B010(s32 *first, s32 *last, s32 comp) {
     s32 val = *result;
     *result = *first;
     fn_8039AE74(first, 0, result - first, val, comp);
+}
+
+void fn_8039B050(s32 *first, s32 *middle, s32 *last, s32 *val, s32 comp) {
+    s32 *i;
+    s32 v;
+
+    fn_8039AF90(first, middle, comp);
+    for (i = middle; i < last; i++) {
+        if (((s32 (*)(s32 *, s32 *))comp)(i, first)) {
+            v = *i;
+            *i = *first;
+            fn_8039AE74(first, 0, middle - first, v, comp);
+        }
+    }
+    i = middle;
+    while (i - first > 1) {
+        fn_8039B010(first, i, comp);
+        i--;
+    }
 }
 
 void fn_8039AE74(s32 *first, s32 hole, s32 len, s32 val, s32 comp);
@@ -2783,6 +2807,29 @@ void fn_803A3320(s32 *first, s32 *middle, s32 *last, s32 comp) {
     fn_803A3254(first, middle, last, 0, comp);
 }
 
+void fn_803A35A4(s32 *first, s32 *last, s32 comp) {
+    void fn_803A3540(s32 *last, s32 val, s32 comp);
+    s32 *i;
+
+    if (first == last) {
+        return;
+    }
+    for (i = first + 1; i != last; i++) {
+        s32 val = *i;
+        s32 tmp = val;
+        if (((s32 (*)(s32 *, s32 *))comp)(&tmp, first)) {
+            s32 *next = i + 1;
+            s32 n = (char *)i - (char *)first;
+            if (n > 0) {
+                fn_8024839C((char *)next - n, first, n);
+            }
+            *first = val;
+        } else {
+            fn_803A3540(i, val, comp);
+        }
+    }
+}
+
 void fn_803A3540(s32 *last, s32 val, s32 comp);
 void fn_803A364C(s32 *first, s32 *last, s32 *val, s32 comp) {
     s32 *it;
@@ -3123,9 +3170,9 @@ void fn_803A4BB4(s32 *first, s32 *middle, s32 *last, s32 comp) {
 }
 
 s32 *fn_803A4BDC(s32 *first, s32 *last, s32 pivot, s32 (*comp)(s32, s32)) {
-    s32 tmp;
-
     while (1) {
+        s32 tmp;
+
         last--;
         while (comp(*first, pivot)) {
             first++;
