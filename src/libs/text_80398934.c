@@ -9992,6 +9992,16 @@ void fn_803BED78(s32 *self, s32 n) {
     }
 }
 
+void fn_803BED94(s32 self_) {
+    s32 **self = (s32 **)self_;
+    s32 *p;
+
+    fn_803BED78(self[0], (s32)self[1]);
+    p = self[0];
+    fn_802D1A00(fn_802D0AB8(), p);
+    fn_803BED34(self);
+}
+
 extern void fn_803BED94(s32);
 void fn_803BEDE0(s32 self, s32 flags) {
     fn_803BED94(self);
