@@ -2026,6 +2026,31 @@ void fn_8039F2D0(void *arg0, void **arg1) {
     M2C_FIELD(arg0, void **, 4) = temp_r11;
 }
 
+Elem12S16 *fn_8039FDA4(Elem12S16 *lo, Elem12S16 *hi, s32 key) {
+    s32 n = hi - lo;
+    Elem12S16 *mid;
+    s32 d;
+
+    if (n <= 0) {
+        return 0;
+    }
+    if (n == 1) {
+        if (lo->key == key) {
+            return lo;
+        }
+        return 0;
+    }
+    mid = lo + n / 2;
+    d = key - mid->key;
+    if (d == 0) {
+        return mid;
+    }
+    if (d > 0) {
+        return fn_8039FDA4(mid + 1, hi, key);
+    }
+    return fn_8039FDA4(lo, mid, key);
+}
+
 extern u8 lbl_8040D2A8[];
 void fn_8039FE84(void **self, s32 flags) {
     *self = lbl_8040D2A8;
