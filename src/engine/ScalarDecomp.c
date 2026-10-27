@@ -35,6 +35,24 @@ void fn_8036B20C(void *arg0) {
     fn_8036B300(arg0);
 }
 
+void fn_8036B278(void *arg0) {
+    extern const f32 lbl_803F50C8[];
+    extern u32 fn_802DE634(s32, s32, s32);
+    void fn_8036B300(void *);
+    s32 n;
+    s32 w;
+    s32 last;
+
+    n = M2C_FIELD(arg0, s32 *, 0x18);
+    M2C_FIELD(arg0, s32 *, 0x8) = n - 2;
+    M2C_FIELD(arg0, s32 *, 0x10) = M2C_FIELD(arg0, s32 *, 0x14) - 1;
+    M2C_FIELD(arg0, f32 *, 0x28) = lbl_803F50C8[0];
+    w = fn_802DE634(M2C_FIELD(arg0, s32 *, 0x0), M2C_FIELD(arg0, s32 *, 0x4) + (n - 1) * M2C_FIELD(arg0, s16 *, 0x1C), M2C_FIELD(arg0, s8 *, 0x1E));
+    last = M2C_FIELD(arg0, s32 *, 0x10) - 1;
+    M2C_FIELD(arg0, s32 *, 0xC) = last - w;
+    fn_8036B300(arg0);
+}
+
 void fn_8036BB88(s32 arg0, s32 arg1) {
     if (arg1 == 0xFFFF) {
         if (arg0 != 0) {
