@@ -1885,17 +1885,23 @@ void fn_8039ED08(void) {
 }
 
 void fn_8039EF90(void *self) {
+    typedef struct {
+        s32 *cur;
+        s32 *first;
+        s32 *last;
+        s32 **node;
+    } DequeIt;
+    DequeIt *it;
     s32 **node;
-    s32 *first;
 
     if (M2C_FIELD(self, s32 **, 0x14) != NULL) {
         fn_803997AC(M2C_FIELD(self, s32 **, 0x14), 0x80);
     }
     node = M2C_FIELD(self, s32 ***, 0x1C) - 1;
-    M2C_FIELD(self, s32 ***, 0x1C) = node;
-    first = *node;
-    M2C_FIELD(self, s32 **, 0x14) = first;
-    M2C_FIELD(self, s32 **, 0x18) = first + 32;
+    it = (DequeIt *)((u8 *)self + 0x10);
+    it->node = node;
+    it->first = *node;
+    it->last = it->first + 32;
     M2C_FIELD(self, s32 **, 0x10) = M2C_FIELD(self, s32 **, 0x18) - 1;
 }
 
@@ -2045,23 +2051,19 @@ void **fn_8039F5BC(void **node) {
     void **y;
 
     if (node[0] == NULL && ((void **)node[1])[1] == node) {
-        return node[3];
-    }
-    if (node[2] != NULL) {
+        node = node[3];
+    } else if (node[2] != NULL) {
         node = node[2];
         while (node[3] != NULL) {
             node = node[3];
         }
-        return node;
+    } else {
+        do {
+            y = node;
+            node = node[1];
+        } while (y == node[2]);
     }
-    for (;;) {
-        y = node[1];
-        if (node != y[2]) {
-            break;
-        }
-        node = y;
-    }
-    return y;
+    return node;
 }
 
 Elem12S16 *fn_8039FDA4(Elem12S16 *lo, Elem12S16 *hi, s32 key) {
