@@ -7074,6 +7074,28 @@ s32 fn_803B72D8(s32 arg0) {
     return arg0 & 0xFFFFFFFE;
 }
 
+void fn_803B72E0(u8 *arg0, u8 *arg1) {
+    u32 p;
+
+    p = *(u32 *)(arg0 + 8);
+    p &= ~1;
+    if (arg1 != 0) {
+        (*(void (**)(u8 *))(*(u8 **)(arg1 + 4) + 0xC))(arg1 + *(s16 *)(*(u8 **)(arg1 + 4) + 0x8));
+    }
+    if (p != 0) {
+        (*(void (**)(u8 *))(*(u8 **)(p + 4) + 0x14))((u8 *)p + *(s16 *)(*(u8 **)(p + 4) + 0x10));
+    }
+    if (arg1 == 0) {
+        *(u32 *)(arg0 + 8) = (u32)arg1;
+        return;
+    }
+    p = (u32)arg1;
+    if ((*(s32 (**)(u8 *))(*(u8 **)(p + 4) + 0x34))((u8 *)p + *(s16 *)(*(u8 **)(p + 4) + 0x30)) == 1) {
+        p |= 1;
+    }
+    *(u32 *)(arg0 + 8) = p;
+}
+
 void fn_802ADE44();
 void fn_803B7458(char *self) {
     extern void fn_802ADE44(void *);
