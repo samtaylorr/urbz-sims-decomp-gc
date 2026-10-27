@@ -4301,6 +4301,18 @@ s32 fn_800EEF1C(s32 arg0, s32 arg1, u32 arg2, u32 arg3) {
     return arg0;
 }
 
+s32 fn_800EEFC4(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    s32 fn_800EC3E4(s32, s32, s32, s32, s32);
+    u32 n;
+
+    if ((u32)arg3 > (u32)(fn_800EF6F8((void **)arg0) - arg2)) {
+        n = fn_800EF6F8((void **)arg0) - arg2;
+    } else {
+        n = arg3;
+    }
+    return fn_800EC3E4(arg0, arg2, (s32)fn_800EAFCC((void **)arg1), n, fn_800EF6F8((void **)arg1));
+}
+
 void fn_800EF048(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     M2C_UNK fn_800EC3E4(s32, s32, s32, s32, s32);
     if (arg3 == -1) {
