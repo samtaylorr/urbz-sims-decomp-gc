@@ -1,6 +1,25 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+typedef struct RMMapNode {
+    s32 color;
+    struct RMMapNode *parent;
+    struct RMMapNode *left;
+    struct RMMapNode *right;
+    s32 key;
+    void *value;
+} RMMapNode;
+
+typedef struct {
+    RMMapNode *node;
+} RMMapIter;
+
+void **fn_8039AB24(void **node);
+
+static inline s32 RMMapIter_NotEqual(RMMapIter a, RMMapIter b) {
+    return a.node != b.node;
+}
+
 extern s32 lbl_80494538;
 void fn_8018FA84(void *arg0, s32 arg1);
 void fn_8018EDE0(void **obj) {
