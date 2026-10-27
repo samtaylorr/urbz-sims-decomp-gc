@@ -3145,6 +3145,17 @@ void fn_800E44BC(void *arg0, f32 farg0) {
     M2C_FIELD(arg0, f32 *, 0x14) = (f32) (M2C_FIELD(arg0, f32 *, 0x14) + farg0);
 }
 
+void *fn_800E45E0(void *arg0, s32 arg1) {
+    void **it;
+
+    for (it = M2C_FIELD(arg0, void ***, 0); it != M2C_FIELD(arg0, void ***, 4); it++) {
+        if (M2C_FIELD(*it, s32 *, 0x18) == arg1) {
+            return *it;
+        }
+    }
+    return NULL;
+}
+
 s32 fn_800E4620(void *arg0, s32 arg1) {
     s32 *it;
 
