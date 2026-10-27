@@ -331,11 +331,11 @@ s32 fn_8036FFB8(s32 *self) {
 }
 
 s32 fn_8036FFC0(s32 *p) {
-    if (*p == 0) {
-        *p = 1;
-        return 1;
+    if (*p != 0) {
+        return 0;
     }
-    return 0;
+    *p = 1;
+    return 1;
 }
 
 s32 fn_8036FFE8(s32 *p) {
