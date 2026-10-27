@@ -3093,7 +3093,7 @@ void fn_800E4810(s32 arg0) {
 }
 
 void fn_800E4838(s32 arg0) {
-    M2C_UNK fn_800E47AC(s32, s32);
+    void fn_800E47AC(s32, s32);
     extern s32 lbl_80496640;
     fn_800E47AC(lbl_80496640, arg0);
 }
