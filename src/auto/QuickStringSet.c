@@ -789,6 +789,21 @@ void fn_800FCA68(s32 arg0, s32 arg1) {
     }
 }
 
+void fn_800FCAB0(void) {
+    extern u8 lbl_80434B08[];
+    void fn_802D20E8(void *);
+    void fn_803997AC(void *, u32);
+    u8 *p = *(u8 **)lbl_80434B08;
+    if (p != 0) {
+        u32 size = (u32)(*(u32 *)(lbl_80434B08 + 0xC) - (u32)p) & ~1;
+        if (size > 0x80) {
+            fn_802D20E8(p);
+        } else {
+            fn_803997AC(p, size);
+        }
+    }
+}
+
 s32 fn_800FD808(void *arg0, s32 arg1) {
     void *var_r9;
 
