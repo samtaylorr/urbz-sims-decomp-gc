@@ -880,6 +880,18 @@ void fn_800D423C(void *arg0) {
     fn_800D277C(arg0);
 }
 
+void fn_800D4268(s32 *self) {
+    extern f32 lbl_803D1B78[];
+    fn_800D27B8(self);
+    if (self[6] != 0) {
+        lbl_8041F7B0[0] = 0;
+        fn_800E3B38(self, 0xd, lbl_803D1B78[0]);
+        fn_800E3B38(self, 0xc, lbl_803D1B78[0]);
+    } else if (self[7] != 0) {
+        fn_800E3B80(self, 1);
+    }
+}
+
 void fn_800D4428(void) {
     fn_800D1F84();
 }
