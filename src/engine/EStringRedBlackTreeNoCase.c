@@ -345,6 +345,15 @@ void *fn_80366A7C(void *arg0) {
     return arg0;
 }
 
+void fn_80366AD0(void *arg0, s32 arg1) {
+    extern char lbl_8041D7D8[];
+    void fn_803BECF4(void *, s32);
+    void fn_802D20E8(void *);
+    M2C_FIELD(arg0, char **, 0x54) = lbl_8041D7D8;
+    fn_803BECF4((u8 *)arg0 + 0x48, 2);
+    if (arg1 & 1) fn_802D20E8(arg0);
+}
+
 void *fn_80367098(void *arg0, void *arg1) {
     u8 *vtable = *(u8 **)((u8 *)arg1 + 0x54);
     s16 offset = *(s16 *)(vtable + 0x20);
