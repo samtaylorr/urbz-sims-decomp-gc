@@ -9490,15 +9490,14 @@ void fn_803BC6AC(u8 *p, s32 n) {
 
 void fn_803BC6F8(s32 *dst, s32 *src, s32 n) {
     struct Elem224 { s32 v[55]; s32 keep; };
-    struct Keep { s32 x; };
     struct Elem224 *d = (struct Elem224 *)dst;
     struct Elem224 *s = (struct Elem224 *)src;
+    s32 t[1];
 
     while (--n != -1) {
-        struct Keep t;
-        t.x = d->keep;
+        t[0] = d->keep;
         *d = *s;
-        d->keep = t.x;
+        d->keep = t[0];
         d++;
         s++;
     }
@@ -10536,9 +10535,9 @@ void fn_803C0CDC(void) {
     fn_803C0D34();
 }
 
-void fn_803C0D34(void);
-void fn_803C0D04(void) {
-    fn_803C0D34();
+void fn_803C0D34(void *);
+void fn_803C0D04(void *self) {
+    fn_803C0D34(self);
 }
 
 void fn_803C0D24(M2C_UNK **arg0) {
