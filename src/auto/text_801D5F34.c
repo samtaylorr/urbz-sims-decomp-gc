@@ -51,7 +51,7 @@ s32 fn_801D6188(void) {
 }
 
 void fn_801D6240(void) {
-    M2C_UNK fn_801D6190(M2C_UNK, M2C_UNK);
+    extern void fn_801D6190(s32, s32);
     fn_801D6190(1, 0xFFFF);
 }
 
