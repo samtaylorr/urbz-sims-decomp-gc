@@ -447,40 +447,28 @@ void fn_8016204C(void) {
     extern struct { s32 a; s32 b; s32 c; } lbl_80434DB8[];
     s32 i;
     for (i = 0; i < 12; i++) {
-        switch (i) {
-        case 0:
-        case 10:
-        case 11:
-        case 12:
+        if (i == 0 || (u32)(i - 10) <= 2) {
             lbl_80434DB8[i].a = 1;
-            break;
-        default:
+        } else {
             lbl_80434DB8[i].a = 0;
-            break;
         }
-        lbl_80434DB8[i].b = 0;
-        lbl_80434DB8[i].c = 15;
+        lbl_80434DB8[i].b = 15;
+        lbl_80434DB8[i].c = 0;
     }
 }
 
 void fn_80162914(void *arg0, s32 arg1) {
     s32 fn_8015125C(s32, s32);
+    extern void *lbl_80496650;
     void *p;
     void *vt;
     s32 result;
     p = M2C_FIELD(arg0, void **, 0x58);
     vt = *(void **)p;
     M2C_FIELD(vt, void (**)(void *, s32, s32), 0x64)(p + M2C_FIELD(vt, s16 *, 0x60), M2C_FIELD(arg0, s16 *, 0x64), arg1);
-    if (arg0 != NULL) {
-        result = fn_8015125C(M2C_FIELD(M2C_FIELD(arg0, void **, 4), s32 *, 0), 2);
-    } else {
-        result = 0;
-    }
+    result = arg0 != NULL ? fn_8015125C(M2C_FIELD(M2C_FIELD(arg0, void **, 4), s32 *, 0), 2) : 0;
     if (result != 0) {
-        extern void *lbl_80496650;
-        p = lbl_80496650;
-        vt = *(void **)p;
-        M2C_FIELD(vt, void (**)(void *), 0x10C)(p + M2C_FIELD(vt, s16 *, 0x108));
+        M2C_FIELD(*(void **)lbl_80496650, void (**)(void *), 0x10C)((char *)lbl_80496650 + M2C_FIELD(*(void **)lbl_80496650, s16 *, 0x108));
     }
 }
 
