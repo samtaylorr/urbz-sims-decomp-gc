@@ -721,6 +721,21 @@ void fn_802CBB94(void) {
 
 }
 
+f32 *fn_802CC848(f32 *out, f32 *axis, f32 angle) {
+    extern f32 lbl_803F0194[];
+    f32 fn_80243694(f32);
+    f32 fn_802434CC(f32);
+    f32 half = angle * lbl_803F0194[0];
+    f32 s = fn_80243694(half);
+    f32 c = fn_802434CC(half);
+
+    out[0] = axis[0] * s;
+    out[1] = axis[1] * s;
+    out[2] = axis[2] * s;
+    out[3] = c;
+    return out;
+}
+
 void *fn_802CC9A0(void *arg0, char *arg1) {
     void *vt;
 
@@ -870,6 +885,18 @@ void *fn_802CCDC8(void *arg0, u32 arg1) {
         }
     }
     return var_r3;
+}
+
+void fn_802CCE08(void *self, s32 key, void *value) {
+    void *fn_802CCEEC(void *, void *, s32, void *);
+    char *n;
+
+    n = fn_802CCD80(self, key);
+    if (n != NULL && M2C_FIELD(n, s32 *, 0x18) == key) {
+        M2C_FIELD(n, void **, 0x1C) = value;
+        return;
+    }
+    fn_802CCEEC(self, n, key, value);
 }
 
 s32 fn_802CD218(void *arg0, s32 arg1) {
