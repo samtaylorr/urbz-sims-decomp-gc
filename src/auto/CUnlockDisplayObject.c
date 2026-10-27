@@ -55,6 +55,27 @@ void fn_800BA124(void *arg0, f32 farg0) {
     M2C_FIELD(arg0, f32 *, 0x480) = farg0;
 }
 
+s32 fn_800BAD38(u8 *self) {
+    void **n;
+    s32 res = 1;
+
+    for (n = *(void ***)(self + 0x44C); n != NULL; n = (void **)*n) {
+        res = (res != 0 && *(s32 *)((u8 *)n + 0x7C) != 0);
+    }
+    return res;
+}
+
+s32 fn_800BAD74(u8 *self) {
+    s32 fn_8032C268(s32);
+    void **n;
+    s32 res = 0;
+
+    for (n = *(void ***)(self + 0x44C); n != NULL; n = (void **)*n) {
+        res = (res == 0 && fn_8032C268(fn_800BBAD4(n)) != 0);
+    }
+    return res;
+}
+
 void fn_800BADDC(void *arg0, s32 arg1) {
     M2C_UNK fn_800BBADC(M2C_UNK *, s32);
     M2C_UNK *var_r31;
@@ -66,6 +87,24 @@ void fn_800BADDC(void *arg0, s32 arg1) {
             var_r31 = *var_r31;
         } while (var_r31 != NULL);
     }
+}
+
+void fn_800BAE28(u8 *self, f32 *vec, s32 val, s32 idx) {
+    typedef struct { f32 x, y, z; } UnlockVec;
+    extern f32 lbl_803CF948[];
+    void fn_8025FB2C(f32 *, f32 *);
+
+    if (idx > 2) {
+        return;
+    }
+    if (idx + 1 > *(s32 *)(self + 0x428)) {
+        *(s32 *)(self + 0x428) = idx + 1;
+    }
+    ((s32 *)(self + 0x490))[idx] = val;
+    if (vec[0] != lbl_803CF948[0] || vec[1] != lbl_803CF948[0] || vec[2] != lbl_803CF948[0]) {
+        fn_8025FB2C(vec, vec);
+    }
+    ((UnlockVec *)(self + 0x49C))[idx] = *(UnlockVec *)vec;
 }
 
 void fn_800BAEDC(void *arg0) {
@@ -86,6 +125,28 @@ void fn_800BB04C(void *arg0) {
 
 s32 fn_800BB058(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x438);
+}
+
+extern void *fn_802D197C(void *, u32, s32);
+extern void *fn_802DC3C0(void *, u32, s32, s32, s32);
+extern void *fn_802D0B3C(void);
+void *fn_800BB060(u32 size) {
+    void *heap;
+    void *p;
+
+    heap = fn_802D0AB8((void *)size);
+    if (size == 0) {
+        return NULL;
+    }
+    size = (size + 0xF) & ~0xF;
+    p = fn_802D197C(heap, size, 0x10);
+    if (p == NULL) {
+        p = fn_802DC3C0(heap, size, 0x10, 0, 0);
+        if (p == NULL && heap == fn_802D0AB8(p)) {
+            return fn_802DC3C0(fn_802D0B3C(), size, 0x10, 0, 0);
+        }
+    }
+    return p;
 }
 
 void fn_800BB10C(void *arg0) {
