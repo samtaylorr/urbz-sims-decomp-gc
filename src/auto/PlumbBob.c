@@ -885,6 +885,14 @@ void fn_8007B80C(u8 *self) {
     fn_80304AB4(self);
 }
 
+s32 fn_8007B92C(void *self) {
+    void *p = M2C_FIELD(self, void **, 0x7c);
+    if (p == NULL) {
+        return 0;
+    }
+    return M2C_FIELD(M2C_FIELD(p, void **, 0x38), s32 *, 0x1c);
+}
+
 void *fn_8007B94C(void *self, s32 arg1, s32 arg2) {
     extern void fn_803082CC(void *, s32, s32, s32, s32, s32);
     extern u8 lbl_80409818[];
@@ -907,6 +915,12 @@ void fn_8007B994(void *self, s32 flags) {
     M2C_FIELD(self, void **, 0xf8) = NULL;
     M2C_FIELD(self, void **, 0xfc) = NULL;
     fn_8030834C(self, flags);
+}
+
+void fn_8007BA04(void *self) {
+    u8 *obj = M2C_FIELD(self, u8 **, 0x10c);
+    u8 *vt = M2C_FIELD(obj, u8 **, 0x44);
+    (*(void (**)(void *))(vt + 0x3C))(obj + *(s16 *)(vt + 0x38));
 }
 
 void fn_8007BB0C(void) {
