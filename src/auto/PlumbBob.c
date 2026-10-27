@@ -949,7 +949,7 @@ void fn_8006F374(u8 *self) {
     if (h.value != NULL) {
         v = *h.value;
     }
-    if (fn_802D5ACC((s32 *)(idx * 0x18 + self + 0x140), v) == 0) {
+    if (fn_802D5ACC((s32 *)(idx * 0x18 + (s32)self + 0x140), v) == 0) {
         fn_8010CF10(lbl_80496644, o->e[o->idx].val);
     }
 }
