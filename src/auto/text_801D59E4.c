@@ -43,7 +43,7 @@ s32 fn_801D5AB4(void) {
 }
 
 void fn_801D5C60(void) {
-    M2C_UNK fn_801D5BB0(M2C_UNK, M2C_UNK);
+    extern void fn_801D5BB0(s32, s32);
     fn_801D5BB0(1, 0xFFFF);
 }
 
