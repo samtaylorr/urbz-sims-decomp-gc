@@ -55,6 +55,11 @@ typedef struct EMat4AtExit {
     s32 pad;
 } EMat4AtExit;
 
+typedef struct EMat4Slot {
+    u16 idx;
+    u8 pad[0x46];
+} EMat4Slot;
+
 void fn_802CD53C(EMat4Node **list);
 void fn_802CCE6C(void *self, s32 key, void *value, s32 arg3);
 
@@ -1170,6 +1175,30 @@ s32 fn_802D0334(void *arg0) {
 extern void *fn_802D0AB8(void *);
 void fn_802D0894(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
+}
+
+u16 fn_802D08C8(void *arg0) {
+    u16 idx = M2C_FIELD(arg0, u16 *, 0x1006);
+
+    if (idx == 0) {
+        return 0;
+    }
+    M2C_FIELD(arg0, u16 *, 0x1006) = *(u16 *)(M2C_FIELD(arg0, u32 *, 0x1008) + idx * 0x48);
+    return idx;
+}
+
+void fn_802D08F4(void *arg0, s32 arg1) {
+    if (arg1 != 0) {
+        *(u16 *)(M2C_FIELD(arg0, u32 *, 0x1008) + arg1 * 0x48) = M2C_FIELD(arg0, u16 *, 0x1006);
+        M2C_FIELD(arg0, u16 *, 0x1006) = arg1;
+    }
+}
+
+void *fn_802D0914(void *arg0, s32 arg1) {
+    if (arg1 == 0) {
+        return NULL;
+    }
+    return (void *)(M2C_FIELD(arg0, u32 *, 0x1008) + arg1 * 0x48);
 }
 
 void fn_802D0960(void *arg0, f32 *src, s16 *dst) {
