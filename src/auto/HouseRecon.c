@@ -22,9 +22,41 @@ s32 fn_80052248(void *arg0) {
     return var_r9;
 }
 
+s32 fn_800522A8(void *arg0) {
+    s32 var_r9;
+
+    var_r9 = 0;
+    if (M2C_FIELD(arg0, s32 *, 0x38C) == 0 && M2C_FIELD(arg0, s32 *, 0x388) != 0) {
+        var_r9 = (u32) (M2C_FIELD(arg0, s32 *, 0x380) - 5) < 3;
+    }
+    return var_r9;
+}
+
 s32 fn_800522E0(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x3D0) = arg1;
     return 1;
+}
+
+void fn_80052720(u8 *arg0, s32 arg1) {
+    extern s32 lbl_8041FC68[];
+    extern u8 *lbl_80494FA4;
+    u8 *a;
+    u8 *b;
+    s32 off;
+
+    if (lbl_8041FC68[0] != 0) {
+        off = arg1 * 4;
+        a = arg0 + 0x400;
+        if (*(s32 *)(a + off) != 0) {
+            b = arg0 + 0x404;
+            if (*(s32 *)(b + off) != 0) {
+                char *vt;
+                *(s32 *)(b + off) = 0;
+                vt = *(char **)lbl_80494FA4;
+                M2C_FIELD(vt, void (**)(void *, s32), 0xA4)(lbl_80494FA4 + M2C_FIELD(vt, s16 *, 0xA0), *(s32 *)(a + off));
+            }
+        }
+    }
 }
 
 extern void *fn_802D197C(void *, u32, s32);
@@ -89,12 +121,46 @@ s32 fn_80052954(u32 *arg0) {
     return ((u32) *arg0 >> 1U) & 1;
 }
 
+s32 fn_80052960(s32 *arg0) {
+    extern u8 lbl_8041F94C[];
+    s32 fn_8004E8F0(void *, s32);
+
+    if (fn_8004E8F0(lbl_8041F94C, 4) != 0) {
+        return 1;
+    }
+    return *arg0 & 1;
+}
+
 s32 fn_800529B0(u32 *arg0) {
     return ((u32) *arg0 >> 2U) & 1;
 }
 
 s32 fn_800529BC(u32 *arg0) {
     return ((u32) *arg0 >> 3U) & 1;
+}
+
+extern void fn_802EA51C(void *, s32, s32, s32, s32, f32);
+extern f32 lbl_803C73BC[];
+extern void fn_80050C6C(void *);
+extern void fn_80052468(void *);
+extern s32 fn_8004E8F0(void *, s32);
+void *fn_80052A1C(u32 size) {
+    void *heap;
+    void *p;
+
+    heap = fn_802D0AB8((void *) size);
+    if (size == 0) {
+        return NULL;
+    }
+    size = (size + 0xF) & ~0xF;
+    p = fn_802D197C(heap, size, 0x10);
+    if (p == NULL) {
+        p = fn_802DC3C0(heap, size, 0x10, 0, 0);
+        if (p == NULL && heap == fn_802D0AB8(p)) {
+            return fn_802DC3C0(fn_802D0B3C(), size, 0x10, 0, 0);
+        }
+    }
+    return p;
 }
 
 void fn_80052AC8(void *arg0) {
