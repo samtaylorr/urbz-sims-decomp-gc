@@ -147,6 +147,15 @@ void *fn_801B2FAC(void *self) {
     return self;
 }
 
+void *fn_801B2FF0(void *self, s32 n) {
+    fn_801B25A4(self);
+    *(void **)self = lbl_80415470;
+    M2C_FIELD(self, void **, 0x54) = fn_802D2058(n * 12 + 0x18);
+    M2C_FIELD(self, s32 *, 8) = 1;
+    M2C_FIELD(self, s32 *, 0x60) = 0;
+    return self;
+}
+
 void fn_801B31C4(void *arg0) {
     void *vt = M2C_FIELD(arg0, void **, 0);
     M2C_FIELD(vt, void (**)(void *), 0x34)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x30));
