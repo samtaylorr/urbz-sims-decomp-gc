@@ -13,6 +13,9 @@ typedef struct {
     s32 d;
 } FamilyQuad;
 
+s32 *fn_8010C464(s32 (*first)[2], s32 (*last)[2], s32 key);
+s32 fn_8010C3F8(void *arg0, void *arg1, s32 arg2);
+
 void fn_80106008(s32 *arg0) {
     M2C_UNK fn_8011AA6C(s32);
     fn_8011AA6C(*arg0);
