@@ -330,6 +330,16 @@ s32 fn_8036625C(void **arg0) {
     return var_r9;
 }
 
+void *fn_80366284(void *arg0, void *arg1) {
+    extern void fn_80366328(void *, s32);
+    extern void fn_803663B8(void *, void *);
+
+    fn_8036619C(arg0);
+    fn_80366328(arg0, M2C_FIELD(arg1, s32 *, 0xC));
+    fn_803663B8(arg0, arg1);
+    return arg0;
+}
+
 s32 fn_803668C0(void *self, s32 arg1) {
     s32 fn_802D83EC(void *);
     void fn_802D8424(void *);
