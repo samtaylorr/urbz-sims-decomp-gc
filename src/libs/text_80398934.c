@@ -3017,6 +3017,12 @@ void fn_803A5FE8(void) {
     fn_8018EA6C();
 }
 
+void fn_803A6008(void *self) {
+    u8 *obj = *(u8 **)((u8 *)self + 4);
+    u8 *vt = *(u8 **)obj;
+    (*(void (**)(void *))(vt + 0x144))(obj + *(s16 *)(vt + 0x140));
+}
+
 s32 fn_803A6040(s32 *self) {
     return self[2];
 }
