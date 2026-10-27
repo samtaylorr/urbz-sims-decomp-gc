@@ -7346,9 +7346,11 @@ void fn_803B9BCC(void *self, s32 arg1) {
 
 void fn_803B9BF4(s32 *self, s32 n) {
     extern void fn_802D39F0(s32 *, s32);
-    while (n--) {
-        fn_802D39F0(self, *self);
+    s32 i;
+    for (i = n - 1; i != -1; i--) {
+        s32 *p = self;
         self++;
+        fn_802D39F0(p, *p);
     }
 }
 
