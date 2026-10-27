@@ -160,6 +160,12 @@ void fn_800F6C54(s32 *self) {
     }
 }
 
+void fn_800F6CB4(s32 self, u8 c) {
+    M2C_UNK fn_800F68F0(s32, s32, s32);
+    u16 buf = c << 8;
+    fn_800F68F0(self, (s32)&buf, -1);
+}
+
 void fn_800F6F88(u16 *dst, const u8 *src) {
     while (*src != 0) {
         *dst++ = *src++;
