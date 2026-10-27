@@ -48,6 +48,11 @@ typedef struct {
 } Elem124;
 
 typedef struct {
+    s32 a, b;
+    s16 key;
+} Elem12S16;
+
+typedef struct {
     s32 v;
 } SortComp;
 
