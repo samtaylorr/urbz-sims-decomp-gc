@@ -112,6 +112,12 @@ s32 fn_800F68BC(s32 *arg0) {
     return fn_80248808(*arg0);
 }
 
+void fn_800F68E0(self)
+    void *self;
+{
+    **(u8 **)self = 0;
+}
+
 s32 fn_800F69E8(s32 *self) {
     return *self;
 }
@@ -323,7 +329,10 @@ void fn_800F791C(char *self) {
 
 s32 fn_800F7954(void *self, s32 idx) {
     s32 **vec = M2C_FIELD(self, s32 ***, 8);
-    if (vec != NULL && idx > 0 && idx <= QVec_Count(vec)) {
+    if (vec != NULL) {
+        if (idx <= 0 || idx > QVec_Count(vec)) {
+            return 0;
+        }
         return QVec_At(vec, idx - 1);
     }
     return 0;
