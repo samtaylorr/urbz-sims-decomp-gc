@@ -4274,6 +4274,10 @@ void fn_800EEDEC(void) {
     fn_800EC8E0();
 }
 
+void fn_800EEE0C(s32 arg0, const char *arg1, s32 arg2) {
+    ((void (*)(s32, s32, s32, s32))fn_800EC8E0)(arg0, (s32)arg1, arg2, arg1 ? fn_80248808(arg1) : 0);
+}
+
 s32 fn_800EEF1C(s32 arg0, s32 arg1, u32 arg2, u32 arg3) {
     M2C_UNK fn_800EC9AC(s32);
     M2C_UNK fn_800ECC34(s32, s32, u32);
