@@ -998,6 +998,7 @@ void fn_80265CC4(void *alarm, void *context) {
     fn_802528A4(context);
 }
 
+#pragma dont_inline on
 void fn_80265D34(s64 timeout) {
     extern u8 lbl_80442AB0[];
     void fn_80251224(void *, s64, void *);
@@ -1006,7 +1007,7 @@ void fn_80265D34(s64 timeout) {
     fn_80250FC4(lbl_80442AB0);
     fn_80251224(lbl_80442AB0, timeout, fn_80265CC4);
 }
-
+#pragma dont_inline reset
 s32 fn_80265EA8(void) {
     u8 *fn_802649F0(void);
     if (fn_802649F0()[8]) {
