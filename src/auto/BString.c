@@ -1989,8 +1989,40 @@ void fn_800DFFE4(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x20) = 0;
 }
 
+void fn_800DFFF4(s32 *self) {
+    char *obj;
+    char *vt;
+    switch (self[6]) {
+    case 7:
+        break;
+    case 9:
+        obj = M2C_FIELD(self[2], char **, 0x94);
+        vt = M2C_FIELD(obj, char **, 0x44);
+        M2C_FIELD(vt, void (**)(void *), 0x1C)(obj + M2C_FIELD(vt, s16 *, 0x18));
+        break;
+    }
+}
+
 void fn_800E023C(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x18) = 0;
+}
+
+void fn_800E0248(s32 *self) {
+    char *obj;
+    char *vt;
+    if ((u32)(self[6] - 1) <= 1) {
+        obj = M2C_FIELD(self[2], char **, 0x94);
+        vt = M2C_FIELD(obj, char **, 0x44);
+        M2C_FIELD(vt, void (**)(void *), 0x1C)(obj + M2C_FIELD(vt, s16 *, 0x18));
+    }
+}
+
+void fn_800E0294(s32 *self) {
+    extern s32 lbl_80434A9C[];
+    extern void fn_800A5048(s32);
+    extern void fn_800E3E40(s32, s32);
+    fn_800A5048(lbl_80434A9C[0]);
+    fn_800E3E40(self[2], 2);
 }
 
 void fn_800E02D4(void *arg0) {
