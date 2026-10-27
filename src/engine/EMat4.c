@@ -203,6 +203,14 @@ void fn_802C725C(u8 **arg0, s32 arg1, u8 arg2) {
     }
 }
 
+void *fn_802C7314(void *arg0, void **arg1) {
+    void *v = *arg1;
+    void *vt = M2C_FIELD(arg0, void **, 0x18);
+
+    ((void (*)(void *, void *))M2C_FIELD(vt, void **, 0x1C))((u8 *)arg0 + M2C_FIELD(vt, s16 *, 0x18), v);
+    return arg0;
+}
+
 char **fn_802C7874(char **arg0, s32 arg1) {
     M2C_UNK fn_802C69B0(s32, s32);
     char *p;
@@ -445,7 +453,7 @@ retry:
     fn_802CAA88(self, -1);
     if (*(s32 *)(self + 0x3C) == 0 || *(s32 *)(self + 0x38) == fn_802D9124()) {
         if (*(s32 *)(self + 0x3C) == 0) {
-            fn_802CAA88(self + 0x1C, -1);
+            fn_802CAA88(self + 0x1C, ~0);
             *(s32 *)(self + 0x38) = fn_802D9124();
         }
         *(s32 *)(self + 0x3C) = *(s32 *)(self + 0x3C) + 1;
