@@ -268,25 +268,32 @@ s32 fn_8010FA08(void) {
 }
 
 s32 fn_8010FA10(void *self, s32 arg1) {
+    typedef struct {
+        s16 off;
+        s16 pad;
+        void (*fn)(void *, f32);
+    } VEntry;
     extern void *lbl_80495AF8;
     extern void *lbl_80494FA4;
     extern f32 fn_8010FB2C(void *);
     extern f32 fn_8010FB6C(void *);
+    void *g;
     void *p;
-    void *obj;
-    void *vt;
 
+    g = lbl_80495AF8;
     M2C_FIELD(self, s32 *, 0x1C) = arg1;
-    p = M2C_FIELD(lbl_80495AF8, void **, 0x40C);
-    if (p == self && M2C_FIELD(lbl_80495AF8, s32 *, 0x410) == 0 && M2C_FIELD(p, s32 *, 0x20) == 0) {
-        obj = lbl_80494FA4;
-        vt = *(void **)obj;
-        ((void (*)(void *, f32))M2C_FIELD(vt, void **, 0x64))(
-            (u8 *)obj + M2C_FIELD(vt, s16 *, 0x60), fn_8010FB2C(p));
-        obj = lbl_80494FA4;
-        vt = *(void **)obj;
-        ((void (*)(void *, f32))M2C_FIELD(vt, void **, 0x74))(
-            (u8 *)obj + M2C_FIELD(vt, s16 *, 0x70), fn_8010FB6C(p));
+    p = M2C_FIELD(g, void **, 0x40C);
+    if (p == self && M2C_FIELD(g, s32 *, 0x410) == 0 && M2C_FIELD(p, s32 *, 0x20) == 0) {
+        {
+            u8 *obj = lbl_80494FA4;
+            VEntry *e = (VEntry *)((u8 *)*(void **)obj + 0x60);
+            e->fn(obj + e->off, fn_8010FB2C(p));
+        }
+        {
+            u8 *obj = lbl_80494FA4;
+            VEntry *e = (VEntry *)((u8 *)*(void **)obj + 0x70);
+            e->fn(obj + e->off, fn_8010FB6C(p));
+        }
     }
     return 1;
 }
@@ -411,12 +418,12 @@ s32 fn_8010FDD0(char *self) {
 
     M2C_FIELD(self, void **, 0) = lbl_8040ECC0;
     fn_80105120(self + 4);
-    M2C_FIELD(self, void **, 0x10) = lbl_8040EC00;
     M2C_FIELD(self, void **, 0) = lbl_8040EC20;
+    M2C_FIELD(self, void **, 0x10) = lbl_8040EC00;
     fn_800EC9AC(self + 0x18);
-    M2C_FIELD(self, s32 *, 0x20) = 0;
     M2C_FIELD(self, s32 *, 0x14) = 0;
     M2C_FIELD(self, s32 *, 0x1C) = 0;
+    M2C_FIELD(self, s32 *, 0x20) = 0;
     return (s32)self;
 }
 
