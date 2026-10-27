@@ -252,11 +252,11 @@ void fn_800F784C(void **obj) {
 s32 *fn_800F788C(s32 *self) {
     extern char lbl_8040D178[];
     extern s32 lbl_804943C4;
+    self[1] = 0;
     self[0] = (s32)lbl_8040D178;
     self[2] = 0;
     self[3] = (s32)&lbl_804943C4;
     self[4] = 0;
-    self[1] = 0;
     return self;
 }
 
@@ -289,6 +289,37 @@ s32 fn_800F78F0(void *arg0) {
 void fn_800F791C(char *self) {
     char *vt = *(char **)self;
     (*(void (**)(char *, s32))(vt + 0x74))(self + *(s16 *)(vt + 0x70), 0);
+}
+
+s32 fn_800F7954(void *self, s32 idx) {
+    s32 **vec = M2C_FIELD(self, s32 ***, 8);
+    if (vec != NULL && idx > 0) {
+        s32 *arr = *vec;
+        s32 n = 0;
+        if (arr != NULL) {
+            n = arr[-1];
+        }
+        if (idx <= n) {
+            return arr[(u32)(idx - 1)];
+        }
+    }
+    return 0;
+}
+
+void fn_800F79A4(s32 *out, void *self, s32 idx) {
+    s32 **vec = M2C_FIELD(self, s32 ***, 4);
+    if (vec != NULL && idx > 0) {
+        s32 *arr = *vec;
+        s32 n = 0;
+        if (arr != NULL) {
+            n = arr[-1];
+        }
+        if (idx <= n) {
+            *out = arr[(u32)(idx - 1)];
+            return;
+        }
+    }
+    *out = M2C_FIELD(self, s32 *, 0xC);
 }
 
 s32 fn_800F7A00(void *arg0) {
@@ -334,8 +365,9 @@ void fn_800F7A50(void) {
 void fn_800F7A54(void *arg0, void *arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
     extern u8 *lbl_8049665C;
     void fn_800F7C3C(void *, void *, s32, s32, s32, s32);
-    arg1 = (*(void *(**)(u8 *))(*(u8 **)lbl_8049665C + 0x3C))(lbl_8049665C + *(s16 *)(*(u8 **)lbl_8049665C + 0x38));
-    fn_800F7C3C(arg0, arg1, arg2, arg3, arg4, arg5);
+    void *obj;
+    obj = (*(void *(**)(u8 *))(*(u8 **)lbl_8049665C + 0x3C))(lbl_8049665C + *(s16 *)(*(u8 **)lbl_8049665C + 0x38));
+    fn_800F7C3C(arg0, obj, arg2, arg3, arg4, arg5);
 }
 
 void fn_800F7B34(void *arg0, s32 arg1, s32 arg2) {
@@ -725,6 +757,14 @@ s32 fn_800FC788(void *arg0, s32 arg1) {
         return M2C_FIELD(M2C_FIELD(arg0, void **, 4), s32 *, 8);
     }
     return -1;
+}
+
+void fn_800FCA68(s32 arg0, s32 arg1) {
+    s32 fn_80248808(s32);
+    void fn_80248784(s32, s32);
+    if ((u32)fn_80248808(arg1) <= 0x200) {
+        fn_80248784(arg0, arg1);
+    }
 }
 
 s32 fn_800FD808(void *arg0, s32 arg1) {
