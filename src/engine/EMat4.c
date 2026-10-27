@@ -1251,10 +1251,13 @@ void fn_802CEE44(void *arg0) {
 
 u16 fn_802CEEE4(void *arg0, void *p) {
     typedef struct { u8 pad[0x38]; } Entry;
-    if (p == NULL) {
-        return 0;
+    u16 idx;
+    if (p != NULL) {
+        idx = (Entry *)p - M2C_FIELD(arg0, Entry **, 0x108C);
+    } else {
+        idx = 0;
     }
-    return (u16)((Entry *)p - M2C_FIELD(arg0, Entry **, 0x108C));
+    return idx;
 }
 
 void *fn_802CEF10(void *arg0) {
