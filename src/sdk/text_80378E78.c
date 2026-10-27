@@ -672,9 +672,6 @@ void fn_803871D8(void) {
     fn_80254684(enabled);
 }
 
-#ifndef DSPREGS_DECLARED
-volatile u16 __DSPRegs[] : 0xCC005000;
-#endif
 void fn_80387218(void) {
     s32 enabled = fn_8025465C();
     u16 tmp = __DSPRegs[5];
