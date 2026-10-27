@@ -50,6 +50,41 @@ s32 fn_801D6188(void) {
     return 0;
 }
 
+void fn_801D6190(s32 init, s32 prio) {
+    extern Vec801D4D50 lbl_80436554[4];
+    extern Vec801D4D50 lbl_80436584;
+    extern const f32 lbl_803DFD30[];
+    extern const f32 lbl_803DFD34[];
+    extern const f32 lbl_803DFD38[];
+    extern const f32 lbl_803DFD3C[];
+    extern const f32 lbl_803DFD40[];
+    extern const f32 lbl_803DFD44[];
+    extern const f32 lbl_803DFD48[];
+    extern const f32 lbl_803DFD4C[];
+    extern const f32 lbl_803DFD50[];
+    if (prio == 0xFFFF && init != 0) {
+        Vec801D4D50 *p = lbl_80436554;
+        p->x = lbl_803DFD30[0];
+        p->y = lbl_803DFD34[0];
+        p->z = lbl_803DFD38[0];
+        p++;
+        p->x = lbl_803DFD3C[0];
+        p->y = lbl_803DFD40[0];
+        p->z = lbl_803DFD38[0];
+        p++;
+        p->x = lbl_803DFD3C[0];
+        p->y = lbl_803DFD40[0];
+        p->z = lbl_803DFD44[0];
+        p++;
+        p->x = lbl_803DFD30[0];
+        p->y = lbl_803DFD34[0];
+        p->z = lbl_803DFD44[0];
+        lbl_80436584.x = lbl_803DFD48[0];
+        lbl_80436584.y = lbl_803DFD4C[0];
+        lbl_80436584.z = lbl_803DFD50[0];
+    }
+}
+
 void fn_801D6240(void) {
     extern void fn_801D6190(s32, s32);
     fn_801D6190(1, 0xFFFF);
