@@ -1266,8 +1266,8 @@ void fn_802D6B18(void *n) {
     } else {
         lbl_80494DD8 = n;
     }
-    M2C_FIELD(n, void **, 0x1C) = NULL;
     M2C_FIELD(n, void **, 0x20) = NULL;
+    M2C_FIELD(n, void **, 0x1C) = NULL;
 }
 
 void *fn_802D6BA0(u32 arg0) {
