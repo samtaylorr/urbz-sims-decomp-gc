@@ -73,6 +73,30 @@ void fn_8039B3A4(s32 *first, s32 *last, s32 comp);
 void fn_8039B450(s32 *first, s32 *last, s32 *val, s32 comp);
 void fn_8039B338(s32 *last, s32 val, s32 comp);
 void *fn_8024839C(void *dst, const void *src, u32 n);
+M2C_UNK fn_802D1FC8(M2C_UNK);
+void *fn_80399BE8(u32);
+void fn_803997AC(void *, u32);
+
+static inline void *PtrVec_Allocate(u32 size) {
+    if (size > 0x80) {
+        return (void *)fn_802D1FC8(size);
+    }
+    return fn_80399BE8(size);
+}
+
+static inline void PtrVec_Deallocate(void *p, u32 size) {
+    if (size > 0x80) {
+        fn_802D20E8(p);
+    } else {
+        fn_803997AC(p, size);
+    }
+}
+
+static inline void PtrVec_Set(void **v, void **start, void **finish, void **end) {
+    v[3] = end;
+    v[0] = start;
+    v[1] = finish;
+}
 void fn_8039AE74(s32 *first, s32 hole, s32 len, s32 val, s32 comp);
 void fn_8039B050(s32 *first, s32 *middle, s32 *last, s32 *val, s32 comp);
 extern u8 lbl_80407128[];
