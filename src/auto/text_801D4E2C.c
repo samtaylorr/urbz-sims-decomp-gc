@@ -57,6 +57,22 @@ u32 fn_801D4F04(u8 *self, s32 arg1) {
     }
 }
 
+s32 fn_801D4F68(u8 *self, s32 arg1, Unk801D4CC0 *out, f32 *outf) {
+    extern s32 fn_801C9664(u8 *, u32, s32);
+    extern Unk801D4CC0 lbl_8043641C;
+    extern f32 lbl_803DF6A8[];
+    if (arg1 != 0 && fn_801C9664(self, 0x702F468C, arg1) == 0) {
+        return 0;
+    }
+    if (out != NULL) {
+        *out = lbl_8043641C;
+    }
+    if (outf != NULL) {
+        *outf = lbl_803DF6A8[0];
+    }
+    return 1;
+}
+
 void fn_801D50A8(void) {
     extern void fn_801D4FF8(s32, s32);
     fn_801D4FF8(1, 0xFFFF);
