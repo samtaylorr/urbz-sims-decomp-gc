@@ -872,6 +872,19 @@ void *fn_802CCDC8(void *arg0, u32 arg1) {
     return var_r3;
 }
 
+s32 fn_802CD218(void *arg0, s32 arg1) {
+    void *fn_802CD440(void *, s32, s32 *);
+    void fn_802CD260(void *, void *);
+    void *node;
+
+    node = fn_802CD440(arg0, arg1, 0);
+    if (node != NULL) {
+        fn_802CD260(arg0, node);
+        return 1;
+    }
+    return 0;
+}
+
 EMat4Node *fn_802CD498(void *self, s32 key, s32 *out) {
     EMat4Node *fn_802CD440(void *, s32, s32);
     char *n;
