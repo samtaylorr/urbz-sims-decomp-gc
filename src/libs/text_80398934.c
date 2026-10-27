@@ -10160,6 +10160,14 @@ void fn_803BF898(u8 *p, s32 n) {
     }
 }
 
+void fn_803BF8FC(s32 self) {
+    extern s32 lbl_8045B0F0[];
+    extern void fn_80338184(void *, s32);
+    fn_803BF898((u8 *)((s32 *)self)[0], ((s32 *)self)[1]);
+    fn_80338184(lbl_8045B0F0, ((s32 *)self)[0]);
+    fn_803BF854((void *)self);
+}
+
 extern void fn_803BF8FC(s32);
 void fn_803BF948(s32 self, s32 flags) {
     fn_803BF8FC(self);
