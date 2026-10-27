@@ -491,6 +491,11 @@ void fn_8030A8BC(void *arg0, void *arg1, void *arg2) {
     M2C_FIELD(arg2, f32 *, 4) = (f32) (M2C_FIELD(arg1, f32 *, 4) * M2C_FIELD(arg0, f32 *, 0x14));
 }
 
+void fn_8030A8E0(s32 a, f32 *b) {
+    extern s32 fn_8030A908(s32, f32, f32);
+    fn_8030A908(a, b[0], b[1]);
+}
+
 extern s32 lbl_80494EC0;
 s32 fn_8030A9B4(void) {
     return lbl_80494EC0;
