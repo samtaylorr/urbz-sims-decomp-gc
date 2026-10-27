@@ -304,6 +304,17 @@ void fn_801BF904(void *arg0, s32 arg1, s32 arg2) {
     fn_80311404(res, arg1, a, fn_80311A4C(res, arg2), 1);
 }
 
+void fn_801BFA04(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    extern void fn_80310FFC(void *, s32, s32, s32);
+    extern void *fn_803338D0(void *, s32);
+    extern s32 fn_803338F0(void *, s32);
+    extern void *lbl_80494FCC;
+    void *mgr;
+
+    mgr = lbl_80494FCC;
+    fn_80310FFC(fn_803338D0(mgr, fn_803338F0(mgr, M2C_FIELD(arg0, s32 *, 0x38))), arg1, arg2, arg3);
+}
+
 s32 fn_801BFD60(void *arg0) {
     return M2C_FIELD(M2C_FIELD(arg0, void **, 0x1C), s32 *, 0x38);
 }
