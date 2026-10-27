@@ -5,8 +5,16 @@ typedef struct {
 } Unk801D4BF0;
 
 typedef struct {
+    s32 v[3];
+} Unk801D4CC0;
+
+typedef struct {
     f32 x, y, z;
 } Vec801D4D50;
+
+typedef struct {
+    s32 v[58];
+} Unk801D5210;
 
 
 extern s32 lbl_804945D0;
