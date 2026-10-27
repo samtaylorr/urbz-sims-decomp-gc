@@ -310,6 +310,7 @@ void *fn_8010FBB0(u32 size) {
     void *fn_802D197C(void *heap, u32 size, u32 align);
     void *fn_802D0B3C(void);
     void *fn_802DC9F4(void *heap, u32 size, s32 arg2, s32 arg3);
+    void *fn_80248488(void *, s32, u32);
     void *heap;
     void *p;
 
