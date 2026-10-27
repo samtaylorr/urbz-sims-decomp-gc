@@ -186,6 +186,12 @@ void fn_802EB590(void *arg0, void *arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5)
     fn_802EB650(arg0, arg1, arg2, arg3, arg4, arg5);
 }
 
+void fn_802ED364(void *arg0, void *arg1, s32 arg2);
+void fn_802EAF44(void *arg0, void *arg1, s32 arg2, f32 arg3);
+void fn_802EB5B0(void *arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5) {
+    fn_802EB590(arg0, fn_802E5F90_inline(arg0, arg1), arg2, arg3, arg4, arg5);
+}
+
 void fn_802EC460(void *arg0, void *arg1);
 void fn_802EC4C8(void *arg0, s32 arg1) {
     fn_802EC460(arg0, fn_802E5F90_inline(arg0, arg1));
