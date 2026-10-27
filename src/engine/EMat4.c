@@ -459,6 +459,17 @@ retry:
     return 1;
 }
 
+s32 fn_802CAC04(void *arg0) {
+    fn_802CAA88((s32)arg0, -1);
+    if (M2C_FIELD(arg0, s32 *, 0x3C) == 1) {
+        fn_802CAAAC((s32)arg0 + 0x1C);
+        M2C_FIELD(arg0, s32 *, 0x38) = 0;
+        M2C_FIELD(arg0, s32 *, 0x3C) = M2C_FIELD(arg0, s32 *, 0x3C) - 1;
+        fn_802CAAAC((s32)arg0);
+    }
+    return 1;
+}
+
 void fn_802CAC68(s32 arg0) {
     M2C_UNK fn_802D83EC(s32);
     fn_802D83EC(arg0 + 4);
@@ -592,6 +603,32 @@ void fn_802CB634(void *arg0, s32 arg1) {
         M2C_FIELD(temp_r3, s32 *, 4) = 0;
         M2C_FIELD(arg0, void **, 0) = temp_r3;
     }
+}
+
+void fn_802CB8D4(void *arg0) {
+    extern void fn_802D20E8(void *);
+    EMat4Node *node;
+    EMat4Node *next;
+
+    node = M2C_FIELD(arg0, EMat4Node **, 4);
+    while (EMat4Node_Valid(node)) {
+        next = M2C_FIELD(node, EMat4Node **, 4);
+        fn_802D20E8(node);
+        node = next;
+    }
+    M2C_FIELD(arg0, void **, 0) = NULL;
+    M2C_FIELD(arg0, void **, 4) = NULL;
+}
+
+void fn_802CB930(void *arg0) {
+    extern void *fn_802D0AB8(void *);
+    EMat4Node *n;
+
+    for (n = M2C_FIELD(arg0, EMat4Node **, 4); EMat4Node_Valid(n); n = M2C_FIELD(n, EMat4Node **, 4)) {
+        void *value = M2C_FIELD(n, void **, 0);
+        fn_802D1A00(((void *(*)(void))fn_802D0AB8)(), value);
+    }
+    fn_802CB8D4(arg0);
 }
 
 void fn_802CBB94(void) {
