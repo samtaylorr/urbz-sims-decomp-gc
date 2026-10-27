@@ -53,6 +53,14 @@ static inline s32 RMMapIter16_NotEqual(RMMapIter16 a, RMMapIter16 b) {
     return a.node != b.node;
 }
 
+static inline s32 RMMapIter16_Ne(const RMMapIter16 *a, const RMMapIter16 *b) {
+    return a->node != b->node;
+}
+
+static inline s32 RMMapIter_Ne(const RMMapIter *a, const RMMapIter *b) {
+    return a->node != b->node;
+}
+
 static inline RMMapIter16 RMMap16_find(char *self, const u16 *k) {
     RMMapNode16 *end = *(RMMapNode16 **)(self + 4);
     RMMapNode16 *y = end;
@@ -210,18 +218,86 @@ M2C_UNK *fn_8018FD28(void) {
     return &lbl_80495CC0;
 }
 
+void *fn_8019020C(char *self) {
+    extern RMMapNode *fn_80399BE8(s32);
+    extern f32 lbl_803DAF50;
+    RMMapNode *node;
+    char *map2 = self + 0x10;
+
+    *(RMMapNode **)(self + 4) = NULL;
+    node = fn_80399BE8(0x18);
+    *(s32 *)(self + 8) = 0;
+    *(RMMapNode **)(self + 4) = node;
+    *(s8 *)(self + 0xC) = 0;
+    node->color = 0;
+    (*(RMMapNode **)(self + 4))->parent = NULL;
+    (*(RMMapNode **)(self + 4))->left = *(RMMapNode **)(self + 4);
+    (*(RMMapNode **)(self + 4))->right = *(RMMapNode **)(self + 4);
+
+    *(RMMapNode **)(map2 + 4) = NULL;
+    node = fn_80399BE8(0x24);
+    *(s32 *)(map2 + 8) = 0;
+    *(RMMapNode **)(map2 + 4) = node;
+    *(s8 *)(map2 + 0xC) = 0;
+    node->color = 0;
+    (*(RMMapNode **)(map2 + 4))->parent = NULL;
+    (*(RMMapNode **)(map2 + 4))->left = *(RMMapNode **)(map2 + 4);
+    (*(RMMapNode **)(map2 + 4))->right = *(RMMapNode **)(map2 + 4);
+
+    *(s32 *)(self + 0x24) = 0;
+    *(f32 *)(self + 0x2C) = lbl_803DAF50;
+    *(s32 *)(self + 0x20) = 0;
+    *(f32 *)(self + 0x28) = lbl_803DAF50;
+    lbl_80494538 = (s32)self;
+    return self;
+}
+
+void fn_80190474(char *self, u16 id) {
+    RMMapIter16 it;
+    RMMapIter16 end;
+    it = RMMap16_find(self, &id);
+    end.node = *(RMMapNode16 **)(self + 4);
+    if (RMMapIter16_NotEqual(it, end)) {
+        *(s32 *)((char *)it.node->value + 0x80) = 1;
+    }
+    *(s32 *)(self + 0x20) = 1;
+}
+
 void fn_801905AC(char *self) {
     RMMapIter it;
 
     it.node = NULL;
-    for (it = RMMap_Begin(self); RMMapIter_NotEqual(it, RMMap_End(self));
-         it.node = (RMMapNode *)fn_8039AB24((void **)it.node)) {
+    for (it = RMMap_Begin(self); RMMapIter_NotEqual(it, RMMap_End(self)); RMMapIter_Inc(&it)) {
         char *room = it.node->value;
         if (*(s32 *)(room + 0x34) != 0) {
             *(s32 *)(room + 0x80) = 1;
         }
     }
     *(s32 *)(self + 0x20) = 1;
+}
+
+void fn_801909E4(char *self) {
+    extern void *fn_800F5248(void *, const char *);
+    extern void *fn_800F52EC(void *, u16);
+    extern void fn_8019268C(void *);
+    extern s32 lbl_80495A90;
+    extern char lbl_803DAF60[];
+    extern char lbl_803DAF74[];
+    extern char lbl_803DAF88[];
+    RMMapIter it;
+    RMMapIter end;
+
+    it.node = NULL;
+    fn_800F5248(&lbl_80495A90, lbl_803DAF60);
+    for (it.node = (*(RMMapNode **)(self + 4))->left;
+         end.node = *(RMMapNode **)(self + 4), RMMapIter_NotEqual(it, end);
+         it.node = (RMMapNode *)fn_8039AB24((void **)it.node)) {
+        char *room = it.node->value;
+        if (*(s32 *)(room + 0x34) != 0) {
+            fn_800F5248(fn_800F52EC(fn_800F5248(&lbl_80495A90, lbl_803DAF74), *(u16 *)room), lbl_803DAF88);
+            fn_8019268C(room);
+        }
+    }
 }
 
 extern void fn_801906D4(char *self);
