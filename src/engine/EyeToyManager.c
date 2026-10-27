@@ -318,6 +318,15 @@ void fn_8033A744(void) {
 
 }
 
+void *fn_8033B274(s32 a, s32 b, s32 c, s32 d, EyeToyRGB *col) {
+    struct Kernel9 { s32 v[9]; };
+    extern struct Kernel9 lbl_803F3D88;
+    void *fn_80339CE8(s32, s32, s32, s32, s32 *, s32, s32, s32, EyeToyRGB);
+    struct Kernel9 k = lbl_803F3D88;
+    s32 sum = fn_80339CB4(k.v, 9);
+    return fn_80339CE8(a, b, c, d, k.v, sum, 3, 3, *col);
+}
+
 void fn_8033B664(s32 **arg0) {
     s32 *a;
     s32 *b;
