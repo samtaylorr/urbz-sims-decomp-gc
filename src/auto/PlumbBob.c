@@ -513,6 +513,35 @@ void fn_8006A2C8(void) {
 
 }
 
+void fn_8006A3F0(void *arg0, f32 arg1) {
+    extern f32 lbl_803C8E14;
+    extern f32 lbl_803C8E18;
+    extern f32 lbl_803C8E1C;
+    extern f32 lbl_803C8E20;
+    extern f32 lbl_803C8E24;
+    s32 v;
+
+    arg1 = arg1 * lbl_803C8E14;
+    if (arg1 < lbl_803C8E18) {
+        arg1 = lbl_803C8E18;
+    }
+    if (arg1 > lbl_803C8E14) {
+        arg1 = lbl_803C8E14;
+    }
+    M2C_FIELD(arg0, s32 *, 0x4C) = (s32)(arg1 + lbl_803C8E1C);
+    if (M2C_FIELD(arg0, s32 *, 0x4C) > 100) {
+        M2C_FIELD(arg0, s32 *, 0x4C) = 100;
+    }
+    if (arg1 >= lbl_803C8E20) {
+        v = 8;
+    } else {
+        v = (s32)(arg1 * lbl_803C8E24);
+    }
+    if (M2C_FIELD(arg0, s32 *, 0x50) < v) {
+        M2C_FIELD(arg0, s32 *, 0x50) = v;
+    }
+}
+
 void fn_8006A494(void *arg0) {
     if (M2C_FIELD(arg0, s32 *, 0x48) != 0) {
         M2C_FIELD(arg0, s32 *, 0x48) = 0;
@@ -646,6 +675,25 @@ void fn_8006C704(void *arg0) {
         fn_8006C35C();
         fn_8006C3F4(arg0);
     }
+}
+
+void *fn_8006C744(u32 size) {
+    void *heap;
+    void *p;
+
+    heap = ((void *(*)(void))fn_802D0AB8)();
+    if (size == 0) {
+        return NULL;
+    }
+    size = (size + 0xF) & ~0xF;
+    p = fn_802D197C(heap, size, 0x10);
+    if (p == NULL) {
+        p = fn_802DC3C0(heap, size, 0x10, 0, 0);
+        if (p == NULL && heap == ((void *(*)(void))fn_802D0AB8)()) {
+            return fn_802DC3C0(fn_802D0B3C(), size, 0x10, 0, 0);
+        }
+    }
+    return p;
 }
 
 void fn_8006C7F0(void *arg0) {
@@ -851,6 +899,16 @@ s32 *fn_8006E308(s32 *self, s32 a) {
     self[4] = 1;
     self[5] = (s32)lbl_804093B0;
     return self;
+}
+
+void fn_8006E758(void *arg0) {
+    extern u8 lbl_8041F94C[];
+    void fn_8006E7AC(void *);
+
+    M2C_FIELD(arg0, s32 *, 0xD4) = M2C_FIELD(M2C_FIELD(lbl_8041F94C, void **, 0x184), s8 *, 0x1F);
+    M2C_FIELD(arg0, s32 *, 0x124) = 0;
+    M2C_FIELD(arg0, s32 *, 0xD8) = M2C_FIELD(M2C_FIELD(lbl_8041F94C, void **, 0x184), s8 *, 0x20);
+    fn_8006E7AC(arg0);
 }
 
 void fn_8006E7AC(void) {
