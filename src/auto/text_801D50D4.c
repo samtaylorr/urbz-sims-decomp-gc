@@ -60,6 +60,29 @@ u32 fn_801D51AC(u8 *self, s32 arg1) {
     return 0;
 }
 
+s32 fn_801D5210(u8 *self, u8 *arg1, Unk801D4CC0 *out, f32 *outf) {
+    extern Unk801D5210 fn_801C9A9C(s32);
+    extern Unk801D4CC0 lbl_80436458;
+    extern f32 lbl_803DF7BC[];
+    if (arg1 != NULL) {
+        *(Unk801D5210 *)arg1 = fn_801C9A9C(0);
+        arg1[0x85] = 3;
+        arg1[0x87] = 1;
+        arg1[0x88] = 0x1D;
+        arg1[0x89] = 1;
+        arg1[0x8B] = 1;
+        arg1[0x8C] = 2;
+        arg1[0x8D] = 2;
+    }
+    if (out != NULL) {
+        *out = lbl_80436458;
+    }
+    if (outf != NULL) {
+        *outf = lbl_803DF7BC[0];
+    }
+    return 1;
+}
+
 void fn_801D5328(s32 init, s32 prio) {
     extern Vec801D4D50 lbl_80436428[4];
     extern Vec801D4D50 lbl_80436458;
