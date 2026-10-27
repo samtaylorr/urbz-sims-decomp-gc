@@ -7,7 +7,7 @@ extern s32 lbl_8041FAD0[];
 extern s32 lbl_80434AC8[];
 extern f32 lbl_803D5848;
 extern f32 lbl_803D5844;
-extern void *lbl_8040CC98;
+extern u8 lbl_8040CC98[];
 extern void *lbl_804093F8;
 
 typedef struct UnkDC234 {
@@ -3339,6 +3339,27 @@ void fn_800E982C(s32 *self, s32 flags) {
     }
 }
 
+s32 *fn_800E9860(s32 *self, s32 a) {
+    extern s32 lbl_8040CE48[];
+    extern f32 lbl_803D5610[];
+    f32 *p;
+    self[0] = a;
+    self[1] = -1;
+    self[2] = 0;
+    self[3] = -1;
+    self[4] = 1;
+    self[5] = (s32)lbl_8040CE48;
+    self[6] = 0;
+    self[7] = 0;
+    p = (f32 *)(self + 8);
+    p[0] = lbl_803D5610[0];
+    ((s32 *)p)[4] = 0;
+    p[2] = lbl_803D5610[0];
+    p[1] = lbl_803D5610[0];
+    ((s32 *)p)[3] = 0;
+    return self;
+}
+
 void fn_800E98BC(s32 *self, s32 flags) {
     self[5] = (s32)lbl_804093F8;
     if (flags & 1) {
@@ -3483,7 +3504,7 @@ s32 *fn_800E9C20(s32 *self, s32 arg1) {
     self[2] = 0;
     self[3] = -1;
     self[4] = 1;
-    self[5] = (s32)lbl_8040CC98;
+    self[5] = (s32)&lbl_8040CC98;
     self[6] = 0;
     self[7] = 0;
     self[8] = 0;
@@ -3775,10 +3796,11 @@ void fn_800EA744(u64 *arg0) {
 }
 
 s32 fn_800EA758(s32 arg0, s32 arg1) {
-    Bits64 v = Bits64_Shr((Bits64 *)arg0, arg1);
+    extern u64 fn_8024E154();
+    u64 v = fn_8024E154(*(u64 *)arg0, arg1);
     u64 bit = 1;
     s32 ret = 0;
-    if ((v.bits & bit) != 0) {
+    if ((v & bit) != 0) {
         ret = 1;
     }
     return ret;
