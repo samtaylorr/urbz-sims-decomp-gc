@@ -331,14 +331,14 @@ s32 fn_803668C0(void *self, s32 arg1) {
 s32 fn_80366938(void *self, s32 *arg1) {
     s32 fn_802D83EC(void *);
     void fn_802D8424(void *);
-    if (fn_802D83EC((u8 *)self + 0x18) != 0) {
+    if (fn_802D83EC((u8 *)self + 0x18) == 0) {
         return 0;
     }
     if (arg1 != NULL) {
         *arg1 = M2C_FIELD(self, s32 **, 0x3C)[M2C_FIELD(self, s32 *, 0x34)];
-        M2C_FIELD(self, s32 *, 0x34) =
-            (M2C_FIELD(self, s32 *, 0x34) + 1) % M2C_FIELD(self, s32 *, 0x38);
     }
+    M2C_FIELD(self, s32 *, 0x34) =
+        (M2C_FIELD(self, s32 *, 0x34) + 1) % M2C_FIELD(self, s32 *, 0x38);
     fn_802D8424(self);
     return 1;
 }
