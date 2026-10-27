@@ -386,6 +386,17 @@ s32 fn_80366414(void **arg0, void **arg1) {
     return 1;
 }
 
+void *fn_803664B0(u8 *self) {
+    void fn_802D81B8(void *);
+    fn_802D81B8(self);
+    fn_802D81B8(self + 0x18);
+    *(s32 *)(self + 0x38) = 0;
+    *(s32 *)(self + 0x40) = 0;
+    *(s32 *)(self + 0x44) = 0;
+    *(s32 *)(self + 0x48) = 0;
+    return self;
+}
+
 s32 fn_803668C0(void *self, s32 arg1) {
     s32 fn_802D83EC(void *);
     void fn_802D8424(void *);
