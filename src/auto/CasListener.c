@@ -421,17 +421,15 @@ void fn_801C089C(void) {
 void fn_801C08A0(void **arg0) {
     extern s32 fn_80049B6C(void *);
     extern u8 lbl_8041F94C[];
-    if (fn_801BFD60(*arg0) == 1) {
-        if (fn_80049B6C(lbl_8041F94C) != 0) {
-            if (fn_801BF7BC((void *)fn_801BFD7C(*arg0)) != 0) {
-                fn_801BFD6C(*arg0);
-            }
+    if (fn_801BFD60(*arg0) != 1 || fn_80049B6C(lbl_8041F94C) != 0) {
+        if (fn_801BF7BC((void *)fn_801BFD7C(*arg0)) != 0) {
+            fn_801BFD6C(*arg0);
         }
     }
 }
 
 void fn_801C0908(void *arg0) {
-    extern void fn_801051C8(s32, s32);
+    extern s32 fn_801051C8(s32, s32);
     extern void fn_8031EA2C(void *);
     fn_801051C8(0x91, 0);
     fn_801051C8(0xFC, 0);
