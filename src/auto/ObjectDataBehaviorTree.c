@@ -190,9 +190,25 @@ void *fn_801B2FF0(void *self, s32 n) {
     return self;
 }
 
+void fn_801B3050(void *self, s32 flags) {
+    *(void **)self = lbl_80415470;
+    if (M2C_FIELD(self, s32 *, 8) != 0) {
+        if (M2C_FIELD(self, void **, 0x54) != NULL) {
+            fn_802D211C(M2C_FIELD(self, void **, 0x54));
+            M2C_FIELD(self, void **, 0x54) = NULL;
+        }
+    }
+    fn_801B262C(self, flags);
+}
+
 void fn_801B31C4(void *arg0) {
     void *vt = M2C_FIELD(arg0, void **, 0);
     M2C_FIELD(vt, void (**)(void *), 0x34)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x30));
+}
+
+void fn_801B32F0(void *arg0) {
+    void *vt = M2C_FIELD(arg0, void **, 0);
+    M2C_FIELD(vt, void (**)(void *), 0x2C)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x28));
 }
 
 s32 fn_801B357C(void *self, s32 id, void **out) {
