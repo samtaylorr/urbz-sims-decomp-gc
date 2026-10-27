@@ -268,6 +268,21 @@ void fn_80380AFC(void) {
     fn_80380B20(0);
 }
 
+void fn_80380B6C(void) {
+    M2C_UNK fn_80380F18();
+    M2C_UNK fn_80383A20();
+    M2C_UNK fn_80382CE4();
+    M2C_UNK fn_80381518();
+    M2C_UNK fn_80382004();
+    M2C_UNK fn_803827A4();
+    fn_80380F18();
+    fn_80383A20();
+    fn_80382CE4();
+    fn_80381518();
+    fn_80382004();
+    fn_803827A4();
+}
+
 void fn_80380DB0(void) {
     extern void *lbl_80496388;
     extern void *lbl_80476440[32];
