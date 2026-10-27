@@ -1986,6 +1986,25 @@ void fn_803A0690(s32 arg0, void *arg1) {
     }
 }
 
+void *fn_803A0800(void *ret, void *self, u32 *key) {
+    extern void fn_803A06EC(void *, void *, void *, void *, u32 *, s32);
+    struct TNode {
+        s32 color;
+        struct TNode *parent;
+        struct TNode *left;
+        struct TNode *right;
+        u32 key;
+    } *y = *(struct TNode **)((char *)self + 4);
+    struct TNode *x = y->parent;
+
+    while (x != NULL) {
+        y = x;
+        x = (*key < x->key) ? x->left : x->right;
+    }
+    fn_803A06EC(ret, self, x, y, key, 0);
+    return ret;
+}
+
 s32 fn_803A094C(s32 *arg0) {
     *arg0 = 0;
     return 1;
