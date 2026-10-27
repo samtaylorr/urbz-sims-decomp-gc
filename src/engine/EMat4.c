@@ -27,6 +27,19 @@ extern u8 lbl_803F02D4[];
 extern s32 lbl_80496154;
 extern u8 lbl_804450CC[];
 void fn_802D0B10(void);
+extern u8 lbl_803F02E4[];
+extern s32 lbl_80496158;
+extern u8 lbl_8044588C[];
+void fn_802D0B94(void);
+extern void *fn_802D0AB8();
+extern void *fn_802D197C(void *, u32, s32);
+extern void *fn_802DC3C0(void *, u32, s32, s32, s32);
+extern s32 fn_802D9500(void *, void *, s32, s32, s32, s32, s32);
+extern void fn_802D1614(void);
+extern void fn_802D1314(void *);
+extern s32 fn_802D9214(void *);
+extern s32 fn_802D9244(void *);
+extern void fn_802DCE18(void *);
 
 typedef struct EMat4Node {
     u8 pad0[0x10];
@@ -1205,14 +1218,12 @@ void fn_802D08F4(void *arg0, s32 arg1) {
 
 void *fn_802D0914(void *arg0, s32 arg1) {
     s32 off;
-    u8 *base;
 
     if (arg1 == 0) {
         return NULL;
     }
     off = arg1 * 0x48;
-    base = (u8 *)M2C_FIELD(arg0, u32 *, 0x1008);
-    return base + off;
+    return (void *)(off + M2C_FIELD(arg0, u32 *, 0x1008));
 }
 
 void fn_802D0960(void *arg0, f32 *src, s16 *dst) {
