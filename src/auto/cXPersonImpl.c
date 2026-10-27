@@ -87,6 +87,19 @@ s32 fn_80181A20(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x5FC) ^ 1;
 }
 
+void *fn_80182168(void *arg0) {
+    void *fn_80117474(void *);
+    void *list;
+    void *ret;
+    if (M2C_FIELD(arg0, s32 *, 0x5FC) == 0) {
+        ret = 0;
+    } else {
+        list = arg0 + 0x130;
+        ret = fn_80117474(list + ((M2C_FIELD(list, u32 *, 0x370) % 10U) * 0x58));
+    }
+    return ret;
+}
+
 void fn_80182220(void) {
 
 }
