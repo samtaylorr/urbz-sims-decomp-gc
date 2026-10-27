@@ -9492,12 +9492,13 @@ void fn_803BC6F8(s32 *dst, s32 *src, s32 n) {
     struct Elem224 { s32 v[55]; s32 keep; };
     struct Elem224 *d = (struct Elem224 *)dst;
     struct Elem224 *s = (struct Elem224 *)src;
-    s32 t[1];
 
     while (--n != -1) {
-        t[0] = d->keep;
+        s32 t;
+        s32 *pt = &t;
+        *pt = d->keep;
         *d = *s;
-        d->keep = t[0];
+        d->keep = *pt;
         d++;
         s++;
     }
@@ -10518,6 +10519,15 @@ extern void fn_8039A024(void *);
 void *fn_803C0C20(void *self) {
     fn_8039A024(self);
     return self;
+}
+
+void fn_803C0C50(s32 self) {
+    s32 *p;
+
+    fn_80399FD4(((s32 **)self)[0], (s32)((s32 **)self)[1]);
+    p = ((s32 **)self)[0];
+    fn_802D1A00(fn_802D0AB8(), p);
+    fn_8039A024((void *)self);
 }
 
 extern void fn_803C0C50(s32);
