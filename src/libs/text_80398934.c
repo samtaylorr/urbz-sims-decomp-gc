@@ -8991,6 +8991,16 @@ void fn_803BAF14(u8 *p, s32 n) {
     }
 }
 
+void fn_803BAF84(s32 *dst, s32 *src, s32 n) {
+    struct Elem52 { s32 a, b, c, d, e, f, g, h, i, j, k, l, m; };
+    struct Elem52 *d = (struct Elem52 *)dst;
+    struct Elem52 *s = (struct Elem52 *)src;
+
+    while (--n != -1) {
+        *d++ = *s++;
+    }
+}
+
 void fn_803BAF84(s32 *dst, s32 *src, s32 n);
 void fn_803BB000(void *self, s32 n, s32 arg2);
 s32 *fn_803BB120(s32 *self, s32 *other);
