@@ -50,9 +50,9 @@ typedef struct {
 void fn_8039F498(RbIter *ret, void **tree, void **x, void **y, u32 *v, s32 w);
 void **fn_8039F5BC(void **node);
 
-static inline RbIter *RbIter_dec(RbIter *it) {
+static inline RbIter RbIter_dec(RbIter *it) {
     it->node = fn_8039F5BC(it->node);
-    return it;
+    return *it;
 }
 
 typedef struct Elem14 {
@@ -8064,8 +8064,8 @@ void fn_803B32E4(void *arg0, u32 n) {
                 Pair *mem;
                 if (n != 0) {
                     u32 sz = n * sizeof(Pair);
-                    mem = PtrVec_Allocate(sz);
                     bytes = sz;
+                    mem = PtrVec_Allocate(sz);
                 } else {
                     mem = NULL;
                     bytes = 0;
@@ -8096,8 +8096,8 @@ void fn_803B32E4(void *arg0, u32 n) {
             Pair *mem;
             if (n != 0) {
                 u32 sz = n * sizeof(Pair);
-                mem = PtrVec_Allocate(sz);
                 bytes = sz;
+                mem = PtrVec_Allocate(sz);
             } else {
                 mem = NULL;
                 bytes = 0;
