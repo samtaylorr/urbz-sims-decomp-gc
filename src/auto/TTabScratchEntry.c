@@ -804,13 +804,13 @@ s32 fn_801A0690(s32 arg0, s32 arg1) {
     case 0:
         break;
     case 1:
-        n += 2;
+    case 4:
+        n += 1;
         break;
     case 2:
         break;
     case 3:
-    case 4:
-        n += 1;
+        n += 2;
         break;
     }
     return n;
@@ -847,12 +847,14 @@ s32 fn_801A08F4(void *arg0) {
 s32 fn_801A090C(void *arg0, u32 arg1) {
     extern s32 fn_801A0CC4(void *, u32);
     u32 v;
-    u32 r;
+    s32 r;
+    s32 t;
 
     v = M2C_FIELD(arg0, u32 *, 0) & arg1;
     if (v == arg1) {
         r = fn_801A0CC4(arg0, v);
-        return !(r == 2 || r == 0xC || r == 0xD || r == 0xE);
+        t = (r == 2 || r == 0xC || r == 0xD || r == 0xE);
+        return !t;
     }
     return 0;
 }
@@ -865,9 +867,14 @@ s32 fn_801A0978(void *arg0, u32 arg1) {
     v = M2C_FIELD(arg0, u32 *, 0) & arg1;
     if (v == arg1) {
         r = fn_801A0CC4(arg0, v);
-        return (r == 2 || r == 0xC || r == 0xD || r == 0xE) ? 1 : 0;
+        if (r == 2 || r == 0xC || r == 0xD || r == 0xE) {
+            return 1;
+        } else {
+            return 0;
+        }
+    } else {
+        return 0;
     }
-    return 0;
 }
 
 void fn_801A0DFC(s32 *arg0, s32 arg1) {
