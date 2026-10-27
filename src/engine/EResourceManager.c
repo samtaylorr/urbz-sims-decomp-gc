@@ -19,6 +19,15 @@ static inline void ResLock_Release(ResLock *l) {
     char *vt = *(char **)l->obj;
     (*(void (**)(void *))(vt + 0x1C))(l->obj + *(s16 *)(vt + 0x18));
 }
+void fn_80336CBC(char *self) {
+    void fn_8033789C(char *, s32);
+    u32 i;
+
+    for (i = 0; i < **(u32 **)(self + 0x60); i++) {
+        fn_8033789C(self, (*(s32 **)(self + 0x60))[i + 1]);
+    }
+}
+
 void fn_80336E04(void) {
 
 }
