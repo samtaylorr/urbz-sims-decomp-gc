@@ -672,6 +672,17 @@ void *fn_802A8240(void *self, s32 arg1) {
     return fn_802A8240_new3(fn_80243694());
 }
 
+void *fn_802AB32C(void *arg0, void *arg1, void **arg2) {
+    extern char lbl_803ED934[];
+    extern void *lbl_80496148;
+    extern s32 fn_802486DC(void *, char *);
+
+    if (fn_802486DC((u8 *)*arg2 + 8, lbl_803ED934) == 0) {
+        return lbl_80496148;
+    }
+    return 0;
+}
+
 void fn_802AB97C(void *arg0, s32 arg1) {
     extern char lbl_804189F0[];
     extern void (*lbl_80443318[])(void *, s32);
