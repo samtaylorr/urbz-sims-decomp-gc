@@ -382,9 +382,11 @@ void fn_803701E8(void *self, s32 flags) {
     void fn_8031E910(void *, s32);
     void fn_80338184(void *, s32);
     u8 *p;
+    s32 count;
 
-    lbl_80495244--;
+    count = lbl_80495244;
     M2C_FIELD(self, void **, 0) = lbl_8041DDC8;
+    lbl_80495244 = count - 1;
     fn_803BFB20((u8 *)self + 0x90, 2);
     p = (u8 *)self + 0x58;
     M2C_FIELD(p, void **, 0x10) = lbl_8041DE50;
