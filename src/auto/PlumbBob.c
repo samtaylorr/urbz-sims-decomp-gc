@@ -919,6 +919,31 @@ void *fn_80078168(u8 *arg0) {
     return arg0;
 }
 
+void fn_80078840(u8 *arg0) {
+    extern s32 lbl_80494198;
+    extern void fn_8007B124(void *);
+    extern void fn_8007BE9C(void *);
+    extern void fn_8031EA2C(void *);
+    s32 i;
+    u8 *p;
+
+    fn_8007B124(arg0);
+    {
+        u8 *vt = *(u8 **)(arg0 + 0x44);
+        (*(void (**)(void *))(vt + 0x84))(arg0 + *(s16 *)(vt + 0x80));
+    }
+    p = arg0 + 0xF4;
+    for (i = 0; i < lbl_80494198; i++) {
+        fn_8007BE9C(p);
+        p += 0x19C;
+    }
+    if (M2C_FIELD(arg0, void **, 0xFE0) != NULL) {
+        fn_8031EA2C(M2C_FIELD(arg0, void **, 0xFE0));
+        M2C_FIELD(arg0, void **, 0xFE0) = NULL;
+    }
+    lbl_80494198 = 0;
+}
+
 void fn_8007A888(void *arg0) {
     extern void fn_80305EE0(void *, s32);
     fn_80305EE0(arg0, 1);
@@ -927,6 +952,41 @@ void fn_8007A888(void *arg0) {
 void fn_8007A8AC(void *arg0) {
     extern void fn_80305FE0(void *, s32);
     fn_80305FE0(arg0, 1);
+}
+
+void fn_8007AC00(s32 arg0, s32 arg1) {
+    extern s32 lbl_80494198;
+    extern void fn_803074F0(s32, s32, s32);
+    s32 i;
+    s32 p;
+
+    M2C_FIELD(arg0, s32 *, 0xFDC) = arg1;
+    p = arg0 + 0x170;
+    for (i = 0; i < lbl_80494198; i++) {
+        fn_803074F0(p, 4, arg1 != 1);
+        p += 0x19C;
+    }
+}
+
+s32 fn_8007AC7C(s32 arg0, s32 arg1) {
+    extern s32 lbl_80494198;
+    extern void *fn_8007C370(s32, s32);
+    s32 found;
+    s32 i;
+    s32 p;
+    void *r;
+
+    found = 0;
+    p = arg0 + 0xF4;
+    for (i = 0; i < lbl_80494198 && !found; i++) {
+        r = fn_8007C370(p, arg1);
+        if (r != NULL) {
+            M2C_FIELD(r, s32 *, 0x94) = 0;
+            found = 1;
+        }
+        p += 0x19C;
+    }
+    return found;
 }
 
 void fn_8007ACF8(void *arg0) {
@@ -952,6 +1012,20 @@ void fn_8007B124(void *arg0) {
         }
         M2C_FIELD(arg0, void **, 0xF70) = NULL;
     }
+}
+
+void fn_8007B1AC(s32 arg0) {
+    M2C_UNK fn_8007C278(s32);
+    s32 var_r30;
+    s32 var_r31;
+
+    var_r31 = arg0 + 0xF4;
+    var_r30 = 9;
+    do {
+        fn_8007C278(var_r31);
+        var_r31 += 0x19C;
+        var_r30 -= 1;
+    } while (var_r30 != 0);
 }
 
 void *fn_8007B2B0(u32 size) {
