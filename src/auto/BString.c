@@ -3297,6 +3297,14 @@ void fn_800E9314(void *arg0, s32 arg1) {
     fn_8004702C(lbl_8041F754, arg1);
 }
 
+void fn_800E94E8(s32 arg0) {
+    void fn_800CAFE8(void *);
+    u8 *self = (u8 *)arg0;
+    if (*(u8 **)(self + 0x98) != 0) {
+        fn_800CAFE8(*(u8 **)(self + 0x98));
+    }
+}
+
 void *fn_800E956C(s32 *self) {
     extern u8 lbl_8040CBF8[];
     struct { s32 a; s32 b; s32 c; } t;
