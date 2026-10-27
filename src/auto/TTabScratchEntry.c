@@ -1159,6 +1159,11 @@ void fn_801A30AC(void) {
     fn_800F1A60((s32)&lbl_80495D3C, 2);
 }
 
+void fn_801A34A8(void *arg0, s32 arg1) {
+    M2C_UNK fn_801A30D4(s32, s32, f32);
+    fn_801A30D4(arg1, M2C_FIELD(arg0, s32 *, 0x108), M2C_FIELD(arg0, f32 *, 0x10C));
+}
+
 s32 fn_801A34D8(void *arg0, s32 arg1, void **arg2) {
     void *temp_r9;
 
