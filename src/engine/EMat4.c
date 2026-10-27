@@ -1339,20 +1339,19 @@ M2C_UNK *fn_802D0CC8(void) {
 s32 fn_802D0EA4(void *arg0, void *arg1, s32 arg2) {
     s32 result;
 
-    if (arg1 == NULL || arg2 == 0) {
-        return 1;
+    if (arg1 != NULL && arg2 != 0) {
+        result = fn_802D9500(arg0, arg1, arg2, 0, 0, 0, 0);
+        if (result != 0) {
+            fn_802D1614();
+        }
+        fn_802D1314(arg0);
+        return result;
     }
-    result = fn_802D9500(arg0, arg1, arg2, 0, 0, 0, 0);
-    if (result == 0) {
-        return 1;
-    }
-    fn_802D1614();
-    fn_802D1314(arg0);
-    return result;
+    return 1;
 }
 
 void fn_802D0F10(void *arg0) {
-    void *p = M2C_FIELD(arg0, void **, 0x4FC);
+    void *volatile p = M2C_FIELD(arg0, void **, 0x4FC);
 
     if (p != NULL) {
         fn_802D9214(p);
