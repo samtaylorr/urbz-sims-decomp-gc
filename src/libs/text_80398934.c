@@ -97,6 +97,14 @@ static inline void PtrVec_Set(void **v, void **start, void **finish, void **end)
     v[1] = finish;
     v[3] = end;
 }
+
+static inline void Obj_SetVtbl(void **p, void *vtbl) {
+    p[0] = vtbl;
+}
+
+static inline s32 Slist_IterNe(s32 *a, s32 *b) {
+    return a != b;
+}
 void fn_8039AE74(s32 *first, s32 hole, s32 len, s32 val, s32 comp);
 void fn_8039B050(s32 *first, s32 *middle, s32 *last, s32 *val, s32 comp);
 extern u8 lbl_80407128[];
