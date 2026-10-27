@@ -6,6 +6,21 @@ static inline s32 ETweakNode_Valid(void *n) {
 }
 
 void fn_802435CC(void);
+
+typedef struct ETweakEntry {
+    s32 key;
+    s32 str;
+    s32 value;
+} ETweakEntry;
+
+static inline void ETweakEntry_Init(ETweakEntry *e, s32 key, s32 str, s32 value) {
+    void fn_802D39E4(void *);
+    void fn_802D3CE4(void *, s32);
+    fn_802D39E4(&e->str);
+    e->key = key;
+    e->value = value;
+    fn_802D3CE4(&e->str, str);
+}
 void fn_80313090(void *arg0, s32 arg1) {
     s32 fn_802D118C(s32);
     s32 fn_802D1194(s32);
@@ -141,15 +156,13 @@ void fn_80314A18(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     M2C_UNK fn_802D39E4(void *);
     M2C_UNK fn_802D3CE4(void *, s32);
     M2C_UNK fn_802CB69C(void *, void *);
-    s32 *obj;
-    s32 *str;
+    struct { s32 key; s32 str; s32 value; } *obj;
 
-    obj = (s32 *)fn_802D1FC8(0xC);
-    str = &obj[1];
-    fn_802D39E4(str);
-    obj[0] = arg1;
-    obj[2] = arg3;
-    fn_802D3CE4(str, arg2);
+    obj = fn_802D1FC8(0xC);
+    fn_802D39E4(&obj->str);
+    obj->key = arg1;
+    obj->value = arg3;
+    fn_802D3CE4(&obj->str, arg2);
     fn_802CB69C((s8 *)arg0 + 0xC, obj);
     M2C_FIELD(arg0, s32 *, 8)++;
 }
