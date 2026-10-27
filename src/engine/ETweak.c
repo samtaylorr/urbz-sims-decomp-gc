@@ -59,6 +59,73 @@ void fn_803145A0(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x30) = arg1;
 }
 
+M2C_UNK fn_8031461C(void *arg0) {
+    M2C_UNK fn_802D39E4(void *);
+    M2C_UNK fn_80369A74(void *);
+    extern const f32 lbl_803F2608;
+    s8 *list;
+
+    list = (s8 *)arg0 + 0xC;
+    M2C_FIELD(list, s32 *, 4) = 0;
+    M2C_FIELD(list, s32 *, 0) = 0;
+    M2C_FIELD(list, s32 *, 8) = 1;
+    fn_802D39E4((s8 *)arg0 + 0x18);
+    fn_802D39E4((s8 *)arg0 + 0x20);
+    list = (s8 *)arg0 + 0x24;
+    M2C_FIELD(list, s32 *, 4) = 0;
+    M2C_FIELD(list, s32 *, 0) = 0;
+    M2C_FIELD(list, s32 *, 8) = 1;
+    fn_80369A74((s8 *)arg0 + 0x30);
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+    M2C_FIELD(arg0, s32 *, 0x1C) = 0;
+    M2C_FIELD(arg0, f32 *, 0) = lbl_803F2608;
+    M2C_FIELD(arg0, f32 *, 4) = lbl_803F2608;
+    return (M2C_UNK)arg0;
+}
+
+s32 fn_80314784(void *arg0) {
+    M2C_UNK fn_80314808(void *);
+    extern const f32 lbl_803F260C[];
+    extern f32 lbl_80494E08;
+    s32 done;
+    f32 limit;
+    f32 t;
+
+    if (*M2C_FIELD(arg0, u8 **, 0x18) == 0) {
+        return 0;
+    }
+    limit = M2C_FIELD(arg0, f32 *, 4);
+    done = 0;
+    if (limit != lbl_803F260C[0]) {
+        t = M2C_FIELD(arg0, f32 *, 0) + lbl_80494E08;
+        M2C_FIELD(arg0, f32 *, 0) = t;
+        if (t > limit) {
+            M2C_FIELD(arg0, f32 *, 0) = lbl_803F260C[0];
+            done = 1;
+        }
+    }
+    if (done) {
+        fn_80314808(arg0);
+    }
+    return done;
+}
+
+void fn_80314A18(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    M2C_UNK fn_802D1FC8(M2C_UNK);
+    M2C_UNK fn_802D39E4(void *);
+    M2C_UNK fn_802D3CE4(void *, s32);
+    M2C_UNK fn_802CB69C(void *, void *);
+    s32 *obj;
+
+    obj = (s32 *)fn_802D1FC8(0xC);
+    fn_802D39E4(&obj[1]);
+    obj[2] = arg3;
+    obj[0] = arg1;
+    fn_802D3CE4(&obj[1], arg2);
+    fn_802CB69C((s8 *)arg0 + 0xC, obj);
+    M2C_FIELD(arg0, s32 *, 8)++;
+}
+
 void fn_80314B08(void *arg0, s32 arg1) {
     M2C_UNK fn_802CB5C4(void *, void *);
     M2C_UNK fn_802D20E8(void *);
@@ -92,19 +159,17 @@ void fn_80314B90(s32 arg0) {
     M2C_UNK fn_802D39F0(void *, s32);
     s8 *list;
     void *node;
-    s32 *obj;
     void *next;
+    s32 *obj;
 
     list = (s8 *)arg0 + 0xC;
-    node = M2C_FIELD(list, void **, 4);
-    while (ETweakNode_Valid(node)) {
+    for (node = M2C_FIELD(list, void **, 4); ETweakNode_Valid(node); node = next) {
         obj = M2C_FIELD(node, s32 **, 0);
         next = M2C_FIELD(node, void **, 4);
         if (M2C_FIELD(list, s32 *, 8) != 0 && obj != NULL) {
             fn_802D39F0(&obj[1], obj[1]);
             fn_802D20E8(obj);
         }
-        node = next;
     }
     fn_802CB8D4(list);
 }
