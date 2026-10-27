@@ -779,6 +779,39 @@ s32 fn_80369C84(void *arg0, s32 arg1) {
     return sp8;
 }
 
+void fn_8036A180(void *arg0) {
+    extern void fn_802D39F0(s32 *, s32);
+    extern void fn_802D20E8(void *);
+    extern void fn_80369C48(void *);
+    void *node;
+    void *next;
+
+    node = M2C_FIELD(arg0, void **, 4);
+    while (node != NULL) {
+        next = *(void **)node;
+        if (node != NULL) {
+            fn_802D39F0((s32 *)((u8 *)node + 0xC), M2C_FIELD(node, s32 *, 0xC));
+            fn_802D20E8(node);
+        }
+        node = next;
+    }
+    M2C_FIELD(arg0, void **, 4) = NULL;
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    fn_80369C48(arg0);
+    M2C_FIELD(arg0, s32 *, 0x14) = 0;
+}
+
+void fn_8036A1F4(void **list) {
+    extern void fn_802D1A00(void *, void *);
+    void *n;
+
+    for (n = *list; EStrNode_Valid(n); n = M2C_FIELD(n, void **, 4)) {
+        void *value = M2C_FIELD(n, void **, 0x10);
+        fn_802D1A00(fn_802D0AB8(), value);
+    }
+    fn_8036A180(list);
+}
+
 s32 fn_8036A258(void **arg0) {
     s32 var_r9;
     void *var_r3;
