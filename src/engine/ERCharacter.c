@@ -105,16 +105,13 @@ void fn_80317DAC(s32 arg0, char *arg1, s32 *arg2) {
 
     do {
         p = fn_80248640(arg1, ',');
-        if (p != 0) {
-            *p = 0;
-        }
+        if (p != 0) *p = 0;
         *arg2++ = fn_80317CD8(arg0, (s32)arg1);
-        if (p == 0) {
-            break;
-        }
+        if (p == 0) return;
         *p = ',';
-        arg1 = p + 1;
-    } while (arg1 != 0);
+        p++;
+        arg1 = p;
+    } while (p != 0);
 }
 
 s32 fn_80317E3C(u8 *arg0) {
