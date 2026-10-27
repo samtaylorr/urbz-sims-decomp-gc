@@ -192,7 +192,7 @@ void fn_800D1B90(u8 *self) {
     extern u8 *lbl_80496660;
     extern void fn_80047AA8(void *);
     u8 *p;
-    fn_80047AA8(&lbl_8041F754);
+    fn_80047AA8((s32 *)&lbl_8041F754);
     p = lbl_80496660;
     *(s32 *)(p + 0x354) = 1;
     *(s32 *)(p + 0x358) = -1;
