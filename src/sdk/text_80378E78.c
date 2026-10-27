@@ -673,6 +673,12 @@ void *fn_803872D4(void *arg0) {
     return arg0;
 }
 
+extern s32 lbl_80496494;
+void fn_80387B84(void *);
+void fn_803879F8(void *);
+void fn_803873DC(const char *fmt, ...) {
+}
+
 extern s32 lbl_80496498;
 s32 fn_8038742C(void) {
     return lbl_80496498;
