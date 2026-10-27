@@ -3618,6 +3618,10 @@ void fn_800EA7F8(u64 *arg0, s32 arg1) {
     *arg0 |= (u64)1 << arg1;
 }
 
+void fn_800EA84C(s32 arg0, s32 arg1) {
+    *(u64 *)arg0 &= ~((u64)1 << arg1);
+}
+
 s32 fn_800EA9B0(s32 arg0) {
     s32 fn_800EA758(s32, s32);
     s32 temp_r3;
