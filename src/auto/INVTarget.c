@@ -2743,6 +2743,39 @@ s32 fn_802043A0(void *arg0, s32 **arg1, s32 arg2, s32 arg3) {
     return 1;
 }
 
+s32 fn_80204458(void *arg0, s32 **arg1, s32 arg2, s32 arg3) {
+    extern char lbl_803E6034[];
+    extern char lbl_803E6044[];
+    void fn_802045DC(void *);
+    void fn_80248488();
+    s32 fn_80203A0C(s32, s32, s32);
+    void fn_801FCFE8(void *, s32, s32, char *);
+    void fn_801DB32C(char *, char *);
+    char buf[0x200];
+    char *p;
+    char *s;
+    s32 x;
+
+    if (arg1 == 0) {
+        return 0;
+    }
+    fn_802045DC(arg0);
+    p = (s32)buf;
+    fn_80248488(p, 0, 0x200);
+    x = **arg1;
+    if (arg3 == 0) {
+        x = fn_80203A0C(x, 0x14, arg2);
+    }
+    fn_801FCFE8(arg0, x, arg3, p);
+    if (M2C_FIELD(arg0, s32 *, 0x84) == 0) {
+        s = lbl_803E6034;
+    } else {
+        s = lbl_803E6044;
+    }
+    fn_801DB32C(s, buf);
+    return 1;
+}
+
 s32 fn_802046E0(void *arg0, void *arg1, s32 *arg2, s32 *arg3) {
     extern void *fn_8016CC44(void *);
     s32 fn_8016D80C(void *, s32);
