@@ -1274,6 +1274,15 @@ void fn_802D0B94(void) {
     fn_802D94C0(lbl_8044588C, 2);
 }
 
+void *fn_802D0BC0(void) {
+    if (lbl_80496158 == 0) {
+        fn_802D0D30(lbl_8044588C, lbl_803F02E4);
+        lbl_80496158 = 1;
+        fn_80246D44(fn_802D0B94);
+    }
+    return lbl_8044588C;
+}
+
 extern u8 lbl_8044604C[];
 void fn_802D0C18(void);
 void fn_802D0C18(void) {
