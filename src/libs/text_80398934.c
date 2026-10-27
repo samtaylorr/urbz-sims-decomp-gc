@@ -10458,6 +10458,14 @@ void fn_803C07E0(s32 self, s32 flags) {
     }
 }
 
+void fn_803C08A0(u8 *p, s32 n) {
+    extern void fn_80374058(void *);
+    while (--n != -1) {
+        fn_80374058(p);
+        p += 0xB0;
+    }
+}
+
 void fn_8039A334(void *self, s32 n, s32 arg2);
 s32 *fn_803C08EC(s32 *self, s32 *other);
 s32 *fn_803C08EC(s32 *self, s32 *other) {
