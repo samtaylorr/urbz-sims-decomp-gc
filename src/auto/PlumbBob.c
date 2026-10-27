@@ -1582,6 +1582,17 @@ s32 fn_8008A708(s32 *self) {
     return *self;
 }
 
+void fn_8008A710(PBStack *stk, void *obj) {
+    PBStackEntry *e;
+    if (stk->n > 3) {
+        return;
+    }
+    e = &stk->e[stk->n];
+    e->w = M2C_FIELD(obj, s32 *, 0x17C);
+    e->v = *(PBVec3 *)((u8 *)obj + 0x110);
+    stk->n++;
+}
+
 void fn_8008A7A4(s32 *arg0) {
     *arg0 = 0;
 }
