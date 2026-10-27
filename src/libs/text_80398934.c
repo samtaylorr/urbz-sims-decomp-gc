@@ -1852,6 +1852,33 @@ void fn_8039FE84(void **self, s32 flags) {
     }
 }
 
+void fn_803A044C(void *self) {
+    extern void fn_803997AC(void *, u32);
+    struct LNode {
+        struct LNode *next;
+        struct LNode *prev;
+        s32 unk8;
+        char *obj;
+    } **list = (struct LNode **)self;
+    struct LNode *n;
+    struct LNode *cur;
+
+    n = list[1]->next;
+    while (n != list[1]) {
+        cur = n;
+        n = n->next;
+        if (cur->obj != NULL) {
+            char *vt = *(char **)cur->obj;
+            (*(void (**)(void *))(vt + 0x1C))(cur->obj + *(s16 *)(vt + 0x18));
+        }
+        if (cur != NULL) {
+            fn_803997AC(cur, 0x14);
+        }
+    }
+    list[1]->next = list[1];
+    list[1]->prev = list[1];
+}
+
 void fn_803A04E0(s32 arg0, void *arg1) {
     void *temp_r30;
     void *var_r31;
