@@ -4213,6 +4213,10 @@ void fn_800EEAC4(void) {
     fn_800EC6BC();
 }
 
+void fn_800EEAE4(s32 arg0, const char *arg1, s32 arg2) {
+    ((void (*)(s32, s32, s32, s32))fn_800EC6BC)(arg0, (s32)arg1, arg2, arg1 ? fn_80248808(arg1) : 0);
+}
+
 u32 fn_800EE83C(void **arg0, u8 arg1, u32 arg2);
 void fn_800EEB3C(void **arg0, u8 arg1, u32 arg2) {
     fn_800EE83C(arg0, arg1, arg2);
