@@ -2,6 +2,9 @@
 #include "common.h"
 extern s32 lbl_80496468;
 
+#define DSPREGS_DECLARED
+volatile u16 __DSPRegs[] : 0xCC005000;
+
 extern s32 lbl_80496440;
 
 
