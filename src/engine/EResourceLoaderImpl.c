@@ -102,6 +102,20 @@ block_4:
     return NULL;
 }
 
+void fn_8031DBA0(char *self) {
+    void fn_80336D24(char *);
+    void fn_80336E04(void);
+    ERMLock lock;
+    char *res;
+
+    ERMLock_Lock(&lock, self + 0x360);
+    for (res = *(char **)(self + 0x348); res != NULL; res = *(char **)(res + 0xA0)) {
+        fn_80336D24(res);
+    }
+    fn_80336E04();
+    ERMLock_Unlock(&lock);
+}
+
 void fn_8031DC2C(char *self, s32 key) {
     void *fn_8031D910(void *, s32);
     void fn_80336D24(void *);
