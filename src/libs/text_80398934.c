@@ -194,17 +194,13 @@ void *fn_80399B3C(u32 n) {
 
 void *fn_80399BE8(u32 n) {
     extern void **lbl_804069A8[];
-    void ***fl;
-    void **r;
-    {
-        u8 lock[1];
-        fl = &lbl_804069A8[(n - 1) >> 3];
-        r = *fl;
-        if (r != NULL) {
-            *fl = *r;
-        } else {
-            r = fn_80399B3C(n);
-        }
+    void ***fl = &lbl_804069A8[(n - 1) >> 3];
+    void **r = *fl;
+    struct { s32 a; } lock[2];
+    if (r != NULL) {
+        *fl = *r;
+    } else {
+        r = fn_80399B3C(n);
     }
     return r;
 }
@@ -567,10 +563,9 @@ void fn_8039B050(s32 *first, s32 *middle, s32 *last, s32 *val, s32 comp) {
             fn_8039AE74(first, 0, middle - first, v, comp);
         }
     }
-    i = middle;
-    while (i - first > 1) {
-        fn_8039B010(first, i, comp);
-        i--;
+    while (middle - first > 1) {
+        fn_8039B010(first, middle, comp);
+        middle--;
     }
 }
 
@@ -3170,13 +3165,13 @@ void fn_803A4BB4(s32 *first, s32 *middle, s32 *last, s32 comp) {
 }
 
 s32 *fn_803A4BDC(s32 *first, s32 *last, s32 pivot, s32 (*comp)(s32, s32)) {
-    while (1) {
-        s32 tmp;
+    s32 tmp;
 
-        last--;
+    while (1) {
         while (comp(*first, pivot)) {
             first++;
         }
+        last--;
         while (comp(pivot, *last)) {
             last--;
         }
@@ -4889,6 +4884,21 @@ void fn_803AEC9C(s32 *self, s32 flags) {
     self[5] = (s32)lbl_80417190;
     if (flags & 1) {
         fn_802D20E8(self);
+    }
+}
+
+extern s32 fn_80240584(void);
+void fn_803AF07C(s32 *dst, s32 *src);
+void fn_803AED88(u32 *arr, u32 count, u32 pos, u32 n) {
+    u32 i;
+
+    if (pos >= count || pos + n > count || n == 0) {
+        if (fn_80240584() != 0) {
+            *(s32 *)0 = 0;
+        }
+    }
+    for (i = pos; i < count - n; i++) {
+        arr[i] = arr[i + n];
     }
 }
 
