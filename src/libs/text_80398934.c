@@ -1456,6 +1456,12 @@ void fn_8039DBE0(void *arg0, f32 farg0) {
     M2C_FIELD(arg0, s32 *, 4) = (s32) (M2C_FIELD(arg0, s32 *, 4) & 0xFFFFFFFD);
 }
 
+f32 fn_8039DBF4(void *arg0) {
+    char *vt = M2C_FIELD(arg0, char **, 0x1C);
+    ((void (*)(void *))M2C_FIELD(vt, void **, 0x2C))((char *)arg0 + M2C_FIELD(vt, s16 *, 0x28));
+    return M2C_FIELD(arg0, f32 *, 0x18);
+}
+
 void fn_8039DC8C(void) {
 
 }
@@ -10070,6 +10076,21 @@ void fn_803BEE20(s32 **self) {
         (*(void (**)(void *))(vt + 0xC))((char *)obj + *(s16 *)(vt + 0x8));
     }
     fn_803BED94((s32)self);
+}
+
+void *fn_803BEF64(void *self, s32 *vec) {
+    void fn_8036C038(void *, s32);
+    void *vt;
+    s32 n;
+    s32 i;
+
+    n = vec[1];
+    vt = M2C_FIELD(self, void **, 0x18);
+    M2C_FIELD(vt, void (**)(void *, s32 *, s32), 0x3C)((char *)self + M2C_FIELD(vt, s16 *, 0x38), &n, 4);
+    for (i = 0; i < n; i++) {
+        fn_8036C038(self, ((s32 *)vec[0])[i]);
+    }
+    return self;
 }
 
 void fn_803BF0C0(s32 *self, s32 n) {
