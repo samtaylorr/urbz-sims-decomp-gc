@@ -15,6 +15,27 @@ void fn_80118300(void) {
     fn_800F1A60((s32)&lbl_80495B6C, 2);
 }
 
+void fn_8011B5F0(void *arg0) {
+    void fn_80134C5C(void *);
+    void *head;
+    void *it;
+    void *obj;
+    void *vt;
+
+    head = M2C_FIELD(arg0, void **, 0xC);
+    if (head == NULL) {
+        head = arg0;
+    }
+    for (it = head; it != NULL; it = M2C_FIELD(it, void **, 8)) {
+        obj = M2C_FIELD(M2C_FIELD(it, void **, 0), void **, 4);
+        vt = M2C_FIELD(obj, void **, 4);
+        M2C_FIELD(vt, void (**)(void *, s32, s32, s32), 0xCC)((u8 *)obj + M2C_FIELD(vt, s16 *, 0xC8), 10, 0, 0);
+    }
+    for (it = head; it != NULL; it = M2C_FIELD(it, void **, 8)) {
+        fn_80134C5C(M2C_FIELD(it, void **, 0));
+    }
+}
+
 s32 fn_8011B9EC(void *arg0) {
     s32 fn_8013819C(s32);
     void *obj;
