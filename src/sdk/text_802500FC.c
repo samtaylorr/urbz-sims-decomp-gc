@@ -1060,9 +1060,15 @@ s32 fn_802668EC(s32 arg0) {
     return temp_r31;
 }
 
+void fn_80266930(void) {
+    extern volatile s32 lbl_80495F60;
+    __DIRegs[0] |= 0x41;
+    lbl_80495F60 = 1;
+}
+
 void fn_8026694C(void *alarm, void *context) {
     extern u32 lbl_80495F44;
-    extern s32 lbl_80495F60;
+    extern volatile s32 lbl_80495F60;
     void fn_802669C0(s64);
 
     if (__DIRegs[6] < lbl_80495F44) {
@@ -1107,8 +1113,10 @@ void *fn_80266A38(void) {
 s32 fn_80266A54(void) {
     extern s64 lbl_80495F50;
     s64 fn_8025A494(void);
+    s64 now;
 
-    if (fn_8025A494() - lbl_80495F50 < (s64)(100 * ((*(u32 *)0x800000F8 / 4) / 1000))) {
+    now = fn_8025A494();
+    if (now - lbl_80495F50 < (s64)(100 * ((*(u32 *)0x800000F8 / 4) / 1000))) {
         return 0;
     }
     if (__DIRegs[1] & 1) {
