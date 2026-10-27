@@ -8143,6 +8143,24 @@ void *fn_803B95CC(void *self) {
     return self;
 }
 
+void fn_803B910C(s32 *self, s32 n);
+void fn_803B90C8(void *self);
+void fn_803B9800(s32 *self, s32 n);
+void fn_803B981C(void *self);
+extern char lbl_80418BF0[];
+void fn_802ADDF4(void *, s32);
+void fn_802B709C(void *, s32);
+void fn_802A1EF0(void *);
+void fn_803B95FC(s32 self) {
+    s32 *p = (s32 *)self;
+    void *ptr;
+
+    fn_8039A4F8((s32 *)p[0], p[1]);
+    ptr = (void *)p[0];
+    fn_802D1A00(fn_802D0AB8(), ptr);
+    fn_8039A514(p);
+}
+
 extern void fn_803B95FC(s32);
 void fn_803B9648(s32 self, s32 flags) {
     fn_803B95FC(self);
