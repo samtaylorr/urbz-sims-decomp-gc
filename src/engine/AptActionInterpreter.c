@@ -277,8 +277,9 @@ void fn_80289FCC(void *arg0, u8 **arg1) {
     char *fn_8027D768(void *, s32, s32, char *, s32, s32);
     s32 fn_802B71E8(void *);
     char *obj;
+    u8 idx = AptStream_ReadU8(arg1);
     obj = fn_8027D768(arg0, M2C_FIELD(arg1, s32 *, 4), M2C_FIELD(arg1, s32 *, 8),
-                      M2C_FIELD(arg0, char ***, 0x4C)[AptStream_ReadU8(arg1)] + 8, 1, 1);
+                      M2C_FIELD(arg0, char ***, 0x4C)[idx] + 8, 1, 1);
     M2C_FIELD(arg0, char ***, 8)[M2C_FIELD(arg0, s32 *, 0)++] = obj;
     if (fn_802B71E8(obj) == 0) {
         char *vt = *(char **)(obj + 4);
