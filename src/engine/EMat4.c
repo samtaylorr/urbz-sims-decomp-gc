@@ -208,6 +208,31 @@ s32 fn_802C6EEC(char **arg0, s32 arg1) {
     return -1;
 }
 
+s32 fn_802C6F58(char **arg0, const char *arg1) {
+    s32 fn_80248808(const char *);
+    s32 len;
+    s32 end;
+    s32 i;
+    s32 j;
+    s32 found;
+
+    len = fn_80248808(arg1);
+    end = fn_802C6A5C((s32 *)arg0) - len;
+    for (i = 0; i <= end; i++) {
+        found = 1;
+        for (j = 0; j < len; j++) {
+            if (((u8 *)*arg0)[i + j] != ((u8 *)arg1)[j]) {
+                found = 0;
+                break;
+            }
+        }
+        if (found) {
+            return i;
+        }
+    }
+    return -1;
+}
+
 char **fn_802C71B0(char **arg0, f32 arg1) {
     extern char lbl_803F0098[];
     s32 fn_80245BB4(char *, const char *, ...);
