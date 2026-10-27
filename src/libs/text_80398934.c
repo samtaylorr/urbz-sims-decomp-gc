@@ -2077,6 +2077,12 @@ void fn_803A1424(void) {
     fn_8018EA6C();
 }
 
+void fn_803A1444(void *self) {
+    u8 *obj = *(u8 **)((u8 *)self + 4);
+    u8 *vt = *(u8 **)obj;
+    (*(void (**)(void *))(vt + 0x6C))(obj + *(s16 *)(vt + 0x68));
+}
+
 s32 fn_803A147C(s32 *self) {
     return self[2];
 }
