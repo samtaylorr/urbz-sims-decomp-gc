@@ -1138,7 +1138,7 @@ void fn_8039C450(void **v, u32 n) {
             void *p = n != 0 ? PtrVec_Allocate(n * 4) : NULL;
             tmp = (void **)p;
         }
-        PtrVec_Set(v, tmp, tmp + size, (void **)((char *)tmp + n * 4));
+        PtrVec_Set(v, tmp, tmp + size, tmp + n);
     }
 }
 
