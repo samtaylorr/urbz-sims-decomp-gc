@@ -247,6 +247,25 @@ u32 fn_8037E578(void) {
     return ret;
 }
 
+s32 fn_8037E6A4(s32 arg0) {
+    extern s32 lbl_80496348;
+    extern s32 lbl_8049634C;
+    extern s32 *lbl_80496350;
+    s32 fn_8025465C(void);
+    void fn_80254684(s32);
+    s32 enabled;
+    s32 ret;
+
+    enabled = fn_8025465C();
+    ret = lbl_80496348;
+    lbl_80496348 += arg0;
+    *lbl_80496350 = arg0;
+    lbl_80496350++;
+    lbl_8049634C--;
+    fn_80254684(enabled);
+    return ret;
+}
+
 s32 fn_8037E780(void) {
     return lbl_80496354;
 }
