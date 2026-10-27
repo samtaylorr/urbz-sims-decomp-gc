@@ -8709,6 +8709,17 @@ void fn_803BA4A0(s32 self, s32 flags) {
     }
 }
 
+void fn_803BA4E0(s32 self) {
+    s32 n = M2C_FIELD(self, s32 *, 4);
+    s32 *p = M2C_FIELD(self, s32 **, 0);
+
+    while (--n != -1) {
+        fn_802D1A00(fn_802D0AB8(), *p);
+        p++;
+    }
+    fn_803BA454(self);
+}
+
 void fn_803BA538(s32 *self, s32 n) {
     while (--n != -1) {
         self++;
