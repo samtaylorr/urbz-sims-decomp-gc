@@ -3318,8 +3318,7 @@ void fn_800E8274(s32 *self) {
     if (obj != 0) {
         u8 *vt = *(u8 **)(obj + 0x44);
         (*(void (**)(void *))(vt + 0x14))(obj + *(s16 *)(vt + 0x10));
-        obj = (u8 *)self[0x18 / 4];
-        if (obj != 0 && *(s32 *)(*(u8 **)(obj + 0x70) + 0x34) == 1) {
+        if (self[0x18 / 4] != 0 && *(s32 *)(*(u8 **)(self[0x18 / 4] + 0x70) + 0x34) == 1) {
             fn_800E3B80(self, 2);
         }
     }
