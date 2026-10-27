@@ -9160,6 +9160,16 @@ void *fn_803BB9CC(void *self) {
     return self;
 }
 
+void fn_803BB9FC(u8 *p, s32 n) {
+    extern void fn_802D39E4(void *);
+    while (--n != -1) {
+        u8 *q = p;
+        p += 0xb8;
+        fn_803BB9CC(q + 4);
+        fn_802D39E4(q + 0xb4);
+    }
+}
+
 s32 *fn_803BBA58(s32 *self, s32 *other);
 s32 *fn_803BBA58(s32 *self, s32 *other) {
     fn_80399D4C(self, other[1], 0);
