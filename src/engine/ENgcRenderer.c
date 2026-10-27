@@ -185,6 +185,53 @@ void fn_8035EA70(void) {
     fn_8035EC18();
 }
 
+void fn_8035EB9C(void *self, s32 slot, s32 arg2) {
+    extern ENgcRendererSlot lbl_80473F7C[];
+    void fn_80385F0C(s32, s32);
+    s32 *p;
+
+    if (slot != -1) {
+        fn_8035EE7C();
+        p = *(s32 **)((u8 *)&lbl_80473F7C[slot] + 0x38);
+        if (p != NULL) {
+            fn_80385F0C(*p, arg2 * 0x388 / 10000);
+        }
+        fn_8035EE3C();
+    }
+}
+
+void fn_8035ECAC(void *self, f32 pan, s32 slot) {
+    extern ENgcRendererSlot lbl_80473F7C[];
+    void fn_80385C8C(s32, u8);
+    u8 v;
+
+    if (slot != -1) {
+        fn_8035EE7C();
+        v = pan * 63.0f + 64.0f;
+        ((u8 *)&lbl_80473F7C[slot])[0x31] = v;
+        if (lbl_80473F7C[slot].unk0 != 0) {
+            fn_80385C8C(lbl_80473F7C[slot].unk0, v);
+        }
+        fn_8035EE3C();
+    }
+}
+
+s32 fn_8035ED3C(u8 v) {
+    double fn_80376420(double);
+    f32 f;
+    s32 r;
+
+    f = 1.0f - (f32)(0x7F - v) / 127.0f;
+    if (f < 0.1f) {
+        f = 0.1f;
+    }
+    r = (f32)fn_80376420(f) * 904.0f;
+    if (r > -0x388) {
+        r >>= 2;
+    }
+    return r;
+}
+
 s32 fn_8035EDD8(void) {
     extern ENgcRendererSlot lbl_80473F7C[];
     s32 i;
