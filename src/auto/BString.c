@@ -3160,6 +3160,14 @@ void fn_800E5B90(void) {
     lbl_8049664C = 1;
 }
 
+void fn_800E5BC0(void) {
+    extern s32 lbl_8049664C;
+    u8 *vt = *(u8 **)lbl_804961A4;
+    lbl_8049664C = 0;
+    (*(void (**)(void *, void (*)(void)))(vt + 0x44))(
+        lbl_804961A4 + *(s16 *)(vt + 0x40), fn_800E5B90);
+}
+
 void fn_800E6108(void *arg0, s32 arg1) {
     extern s32 lbl_8041F754[];
     extern void fn_80048A48(void *);
