@@ -3519,6 +3519,32 @@ void fn_803ABB10(void) {
     fn_800FC178();
 }
 
+void fn_803ABCCC(void **v, u32 n) {
+    void **start = (void **)v[0];
+    if ((u32)((void **)v[3] - start) < n) {
+        void **finish = (void **)v[1];
+        s32 size = finish - start;
+        void **tmp;
+        if (start != NULL) {
+            tmp = n != 0 ? (void **)PtrVec_Allocate(n * 4) : NULL;
+            if (finish != start) {
+                fn_8024839C(tmp, start, (char *)finish - (char *)start);
+            }
+            {
+                void **s = (void **)v[0];
+                u32 cnt = (void **)v[3] - s;
+                if (s != NULL) {
+                    PtrVec_Deallocate(s, cnt * 4);
+                }
+            }
+        } else {
+            void *p = n != 0 ? PtrVec_Allocate(n * 4) : NULL;
+            tmp = (void **)p;
+        }
+        PtrVec_Set(v, tmp, tmp + size, (void **)((char *)tmp + n * 4));
+    }
+}
+
 SearchEntry *fn_803ABF48(SearchEntry *lo, SearchEntry *hi, s32 key) {
     for (;;) {
         s32 n = hi - lo;
