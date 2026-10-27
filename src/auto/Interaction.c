@@ -300,6 +300,11 @@ f32 fn_8010FB2C(void *arg0) {
     return (f32) M2C_FIELD(arg0, s32 *, 0x18) * lbl_803D7248[0];
 }
 
+f32 fn_8010FB6C(void *arg0) {
+    extern f32 lbl_803D7258[];
+    return (f32) (M2C_FIELD(arg0, s32 *, 0x1C) - 0x200) * lbl_803D7258[0];
+}
+
 extern void *fn_802D0AB8(void);
 extern void fn_802D1A00(void *, void *);
 void fn_8010FC58(void *arg0) {
