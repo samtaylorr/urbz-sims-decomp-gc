@@ -172,9 +172,8 @@ void fn_80056754(void *arg0, s32 flags) {
 void *fn_800567DC(u32 size) {
     void *fn_802D197C(void *, u32, s32);
     void *fn_802DC3C0(void *, u32, s32, s32, s32);
-    void *fn_802D0B3C(void *);
+    void *fn_802D0B3C();
     void *heap;
-    void *h2;
     void *p;
 
     heap = fn_802D0AB8((void *)size);
@@ -185,8 +184,8 @@ void *fn_800567DC(u32 size) {
     p = fn_802D197C(heap, size, 0x10);
     if (p == NULL) {
         p = fn_802DC3C0(heap, size, 0x10, 0, 0);
-        if (p == NULL && heap == (h2 = fn_802D0AB8(p))) {
-            return fn_802DC3C0(fn_802D0B3C(h2), size, 0x10, 0, 0);
+        if (p == NULL && heap == ((void *(*)())fn_802D0AB8)()) {
+            return fn_802DC3C0(fn_802D0B3C(), size, 0x10, 0, 0);
         }
     }
     return p;
