@@ -48,6 +48,22 @@ void fn_8036023C(void) {
     }
 }
 
+s32 fn_80360468(u8 v) {
+    double fn_80376420(double);
+    f32 f;
+    s32 r;
+
+    f = 1.0f - (f32)(0x7F - v) / 127.0f;
+    if (f < 0.1f) {
+        f = 0.1f;
+    }
+    r = (f32)fn_80376420(f) * 904.0f;
+    if (r > -0x388) {
+        r >>= 2;
+    }
+    return r;
+}
+
 s32 fn_80361238(void *arg0) {
     return M2C_FIELD(M2C_FIELD(arg0, void **, 0x28), s32 *, 0x70);
 }
