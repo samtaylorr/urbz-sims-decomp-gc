@@ -556,8 +556,8 @@ s32 fn_800F7E18(void *arg0, void *arg1) {
     void *t;
 
     if (arg1 != NULL) {
-        M2C_FIELD(arg0, s32 *, 8) = 0;
         M2C_FIELD(arg0, s32 *, 4) = 0;
+        M2C_FIELD(arg0, s32 *, 8) = 0;
         t = M2C_FIELD(arg1, void **, 0xC);
         if (t != NULL) {
             p = M2C_FIELD(t, u8 **, 0x14);
