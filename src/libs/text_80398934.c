@@ -10290,6 +10290,14 @@ u16 fn_803C0158(void) {
     return lbl_80493E08[0];
 }
 
+void fn_803C01F0(void *self, s32 p) {
+    extern s32 lbl_8045B0F0[];
+    extern void fn_80338184(void *, s32);
+    if (p) {
+        fn_80338184(lbl_8045B0F0, p);
+    }
+}
+
 void fn_803C0220(void *self) {
     ((s32 *)self)[0] = 0;
     ((s32 *)self)[2] = 0;
