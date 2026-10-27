@@ -1,6 +1,23 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+typedef struct ERMLock {
+    char *obj;
+    u8 unk4[3];
+} ERMLock;
+
+static inline void ERMLock_Lock(ERMLock *l, char *obj) {
+    char *vt;
+    l->obj = obj;
+    vt = *(char **)obj;
+    (*(void (**)(void *, s32))(vt + 0x14))(obj + *(s16 *)(vt + 0x10), -1);
+}
+
+static inline void ERMLock_Unlock(ERMLock *l) {
+    char *vt = *(char **)l->obj;
+    (*(void (**)(void *))(vt + 0x1C))(l->obj + *(s16 *)(vt + 0x18));
+}
+
 extern u8 lbl_8041B4F0[];
 extern void fn_802D20E8(void *);
 void **fn_8031C754(void **self) {
