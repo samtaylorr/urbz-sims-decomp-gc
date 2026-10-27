@@ -17,6 +17,7 @@ typedef struct INVNodeList {
     INVNode *free;
     void *unkC;
 } INVNodeList;
+M2C_UNK fn_801D7A14(void **arg0, void *arg1);
 s32 fn_801DFF98(void **arg0, s32 arg1);
 s32 fn_801F8708(s32, s32);
 void fn_801E1338(s32, s32, s32, s32, s32, s32, s32);
