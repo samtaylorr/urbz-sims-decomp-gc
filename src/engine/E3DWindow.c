@@ -180,14 +180,14 @@ void fn_802EB3E4(void *arg0, s32 arg1) {
 }
 
 void fn_802EB484(void *arg0, void *arg1, f32 arg2, f32 arg3, f32 arg4) {
-    extern const f32 lbl_803F0A98;
+    extern const f32 lbl_803F0A98[];
     if (arg1 != NULL && M2C_FIELD(arg1, s32 *, 0xA8) == 1 && arg2 != M2C_FIELD(arg1, f32 *, 0x64)) {
         M2C_FIELD(arg1, u8 *, 0xA0) = 2;
         M2C_FIELD(arg1, f32 *, 0x58) = arg4;
         M2C_FIELD(arg1, f32 *, 0x68) = arg3;
         M2C_FIELD(arg1, f32 *, 0x64) = arg2;
         M2C_FIELD(arg1, f32 *, 0x54) = arg3;
-        if (arg2 != lbl_803F0A98) {
+        if (arg2 != lbl_803F0A98[0]) {
             fn_802ED364(arg0, arg1, 1);
         }
     }
@@ -237,8 +237,8 @@ void fn_802EB650(void *arg0, void *arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5)
 }
 
 void fn_802EB708(void *arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5) {
-    extern const f32 lbl_803F0AA0;
-    fn_802EB650(arg0, fn_802E5F90_inline(arg0, arg1), arg3, arg4, arg5, lbl_803F0AA0);
+    extern const f32 lbl_803F0AA0[];
+    fn_802EB650(arg0, fn_802E5F90_inline(arg0, arg1), arg3, arg4, arg5, lbl_803F0AA0[0]);
 }
 
 void fn_802EC460(void *arg0, void *arg1);
