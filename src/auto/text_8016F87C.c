@@ -212,6 +212,12 @@ s32 fn_80174B98(s32 *self, s32 count, s32 arg2) {
     return 1;
 }
 
+s32 fn_80174BFC(s32 *self) {
+    if (self[0] == 0) return 1;
+    self[0] = 0;
+    return 1;
+}
+
 s32 fn_80174C90(s32 *arg0) {
     *arg0 = 0;
     return 1;
