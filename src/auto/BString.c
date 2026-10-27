@@ -3209,6 +3209,19 @@ void fn_800E64C0(s32 *self) {
     self[6] = fn_8006E33C(fn_802D1FC8(0x230));
 }
 
+void fn_800E64FC(s32 *self) {
+    u8 *obj = (u8 *)self[0x18 / 4];
+    u8 *vt = *(u8 **)(obj + 0x44);
+    u8 *obj2;
+    (*(void (**)(void *))(vt + 0x8C))(obj + *(s16 *)(vt + 0x88));
+    obj2 = (u8 *)self[0x18 / 4];
+    if (obj2 != NULL) {
+        u8 *vt2 = *(u8 **)(obj2 + 0x44);
+        (*(void (**)(void *, s32))(vt2 + 0xC))(obj2 + *(s16 *)(vt2 + 0x8), 3);
+    }
+    self[0x18 / 4] = 0;
+}
+
 void fn_800E6570(void) {
 
 }
