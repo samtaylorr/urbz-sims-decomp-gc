@@ -829,7 +829,7 @@ void fn_80078158(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x1230) = arg1;
 }
 
-s32 fn_80078160(void) {
+s32 fn_80078160(s32 arg0) {
     return 0;
 }
 
