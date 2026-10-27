@@ -416,6 +416,19 @@ void *fn_80368F18(void *arg0, s32 arg1) {
     return var_r31;
 }
 
+s32 fn_803693D0(void *arg0, s32 arg1) {
+    void *fn_80369670(void *, s32, s32 *);
+    void fn_80369418(void *, void *);
+    void *node;
+
+    node = fn_80369670(arg0, arg1, 0);
+    if (node != NULL) {
+        fn_80369418(arg0, node);
+        return 1;
+    }
+    return 0;
+}
+
 void *fn_80369670(void *arg0, s32 arg1, s32 *arg2) {
     s32 fn_802D3EE8(s32, s32);
     char *node;
