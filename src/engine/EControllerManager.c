@@ -79,9 +79,10 @@ s32 fn_8033394C(void) {
     s32 i;
 
     ret = -1;
-    for (i = 0; i <= 3; i++) {
+    for (i = 0; i < ECtrl_NumPorts(); i++) {
         if (fn_803105F0(lbl_804939C0[i]) != 0) {
             ret = i;
+            break;
         }
     }
     return ret;
@@ -89,17 +90,15 @@ s32 fn_8033394C(void) {
 
 void fn_803339AC(void) {
     extern char *lbl_804939C0[];
-    char **p;
+    s32 i;
     char *obj;
     char *vt;
 
-    p = lbl_804939C0;
-    do {
-        obj = *p;
-        p++;
+    for (i = 0; i <= 3; i++) {
+        obj = lbl_804939C0[i];
         vt = M2C_FIELD(obj, char **, 0x204);
         (*(void (**)(void *))(vt + 0xAC))(obj + *(s16 *)(vt + 0xA8));
-    } while (p <= lbl_804939C0 + 3);
+    }
 }
 
 void fn_803338AC(s32, s32);
