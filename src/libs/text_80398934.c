@@ -9657,6 +9657,21 @@ s32 *fn_803BD14C(s32 *self, s32 *other) {
     return self;
 }
 
+void *fn_803BD328(u8 *self, s32 *arr) {
+    extern void fn_803BD208(void *, s32, s32);
+    extern void fn_802FFF70(void *, void *);
+    u8 *vt = M2C_FIELD(self, u8 **, 0x18);
+    s32 n;
+    s32 i;
+
+    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x34)(self + M2C_FIELD(vt, s16 *, 0x30), &n, 4);
+    fn_803BD208(arr, n, 0);
+    for (i = 0; i < n; i++) {
+        fn_802FFF70(self, (u8 *)*arr + i * 0x18);
+    }
+    return self;
+}
+
 s32 fn_803BD3C0(s32 *arr, u8 *data) {
     void *fn_802482F8(void *, const void *, u32);
     void fn_803BC794(void *, s32, s32);
@@ -10695,7 +10710,8 @@ void fn_803C0D24(M2C_UNK **arg0) {
 
 void fn_803C0D34(void *arg0) {
     extern u8 lbl_8041DE78[];
-    M2C_FIELD(arg0, void **, 0) = lbl_8041DE78;
-    M2C_FIELD(arg0, s32 *, 0x20) = 0;
+    void **p = arg0;
+    p[0] = lbl_8041DE78;
+    p[8] = 0;
 }
 
