@@ -2596,6 +2596,32 @@ found:
     }
 }
 
+s32 fn_802BC9A8(void **self, s32 c, s32 start) {
+    extern char *fn_80248640(char *, s32);
+    struct Buf { u16 ref; u16 len; s32 cap; char data[1]; };
+    char *p;
+    char *data;
+    s32 i;
+
+    if (start < ((struct Buf *)*self)->len) {
+        i = start;
+        if (i < 0) {
+            i = 0;
+        }
+        data = ((struct Buf *)*self)->data;
+        p = fn_80248640(data + i, c);
+        if (p != 0) {
+            goto found;
+        }
+    }
+    return -1;
+found:
+    {
+        char *base = ((struct Buf *)*self)->data;
+        return p - base;
+    }
+}
+
 s32 fn_802BCA14(void) {
     return 0;
 }
