@@ -6966,6 +6966,14 @@ void fn_803B79BC(void) {
     lbl_80443318[0]();
 }
 
+void fn_803B7BD4(void *arg0, s32 arg1) {
+    extern void fn_80290B74(void *, s32);
+    fn_80290B74(arg0, 0);
+    if (arg1 & 1) {
+        ((void (*)(void *, s32))lbl_80443318[0])(arg0, 0x30);
+    }
+}
+
 void fn_803B7D98(void) {
     lbl_80443318[0]();
 }
@@ -7289,6 +7297,14 @@ void fn_803B9AF4(void *self, s32 arg1, s32 arg2, s32 arg3) {
 void fn_803B9AF4(void *, s32, s32, s32);
 void fn_803B9BCC(void *self, s32 arg1) {
     fn_803B9AF4(self, arg1, M2C_FIELD(self, s32 *, 4), 1);
+}
+
+void fn_803B9BF4(s32 *self, s32 n) {
+    extern void fn_802D39F0(s32 *, s32);
+    while (n--) {
+        fn_802D39F0(self, *self);
+        self++;
+    }
 }
 
 extern void fn_803B9C44(void *);
