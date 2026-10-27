@@ -197,6 +197,16 @@ s32 fn_801746D0(void) {
     return 1;
 }
 
+s32 fn_80174A44(s32 *self) {
+    extern void fn_802D211C(s32);
+    if (self[6] != 0 && self[3] != 0) {
+        fn_802D211C(self[3]);
+    }
+    self[3] = 0;
+    self[0] = 0;
+    return 1;
+}
+
 s32 fn_80174B98(s32 *self, s32 count, s32 arg2) {
     s32 i;
     if (self[0] == 0) {
