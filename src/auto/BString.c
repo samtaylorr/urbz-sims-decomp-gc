@@ -4060,6 +4060,11 @@ Bits64 *fn_800EA920(Bits64 *self, s32 shift) {
     return self;
 }
 
+Bits64 *fn_800EA968(Bits64 *self, s32 shift) {
+    self->bits >>= shift;
+    return self;
+}
+
 void fn_800E9C84(void **self, s32 flags) {
     void fn_802D20E8(void *);
     void fn_803997AC(void *, u32);
