@@ -171,6 +171,12 @@ s32 fn_802F1580(void *arg0) {
     return vals[lbl_80494E5C];
 }
 
+M2C_UNK fn_802F1594(s32 arg0, s32 arg1) {
+    if (arg1 == 0xFFFF && arg0 != 0) {
+        lbl_804961D0 = fn_802D6A90(lbl_80491E1C, fn_802F1604, fn_802F162C, fn_802F164C, 1, lbl_803F0DE4, lbl_804936F0);
+    }
+}
+
 extern s32 lbl_804961D0;
 extern u8 lbl_80491E1C[];
 extern u8 lbl_803F0DE4[];
