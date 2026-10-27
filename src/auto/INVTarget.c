@@ -1056,29 +1056,34 @@ void fn_801DB8B8(void *arg0, s32 arg1) {
     }
 }
 
-void fn_801DBF38(void **arg0, void *arg1) {
-    if (M2C_FIELD(arg1, void **, 0) != NULL) {
-        M2C_FIELD(M2C_FIELD(arg1, void **, 0), void **, 4) = M2C_FIELD(arg1, void **, 4);
+void fn_801DBF38(void **arg0, void *arg1p) {
+    INVNodeList *list = (INVNodeList *)arg0;
+    INVNode *node = arg1p;
+
+    if (node->prev != NULL) {
+        node->prev->next = node->next;
     }
-    if (M2C_FIELD(arg1, void **, 4) != NULL) {
-        M2C_FIELD(M2C_FIELD(arg1, void **, 4), void **, 0) = M2C_FIELD(arg1, void **, 0);
+    if (node->next != NULL) {
+        node->next->prev = node->prev;
     }
-    if (arg0[0] == arg1) {
-        arg0[0] = M2C_FIELD(arg1, void **, 4);
+    if (list->head == node) {
+        list->head = node->next;
     }
-    if (arg0[1] == arg1) {
-        arg0[1] = M2C_FIELD(arg1, void **, 0);
+    if (list->tail == node) {
+        list->tail = node->prev;
     }
-    M2C_FIELD(arg1, void **, 4) = NULL;
-    M2C_FIELD(arg1, void **, 0) = NULL;
-    if (arg0[2] != NULL) {
-        M2C_FIELD(arg1, void **, 4) = arg0[2];
-        M2C_FIELD(arg0[2], void **, 0) = arg1;
+    node->prev = NULL;
+    node->next = NULL;
+    if (list->free == NULL) {
+        list->free = node;
+    } else {
+        node->next = list->free;
+        list->free->prev = node;
+        list->free = node;
     }
-    arg0[2] = arg1;
-    M2C_FIELD(arg0[2], s32 *, 8) = 0x4B;
-    M2C_FIELD(arg0[2], s32 *, 0xC) = 0;
-    M2C_FIELD(arg0[2], s32 *, 0x10) = 0;
+    list->free->unk8 = 0x4B;
+    list->free->unkC = 0;
+    list->free->unk10 = 0;
 }
 
 s32 fn_801DBFD4(void **arg0, s32 arg1, s32 arg2) {
