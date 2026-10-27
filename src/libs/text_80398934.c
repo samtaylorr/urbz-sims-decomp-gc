@@ -10319,6 +10319,20 @@ u16 fn_803C0158(void) {
     return lbl_80493E08[0];
 }
 
+void fn_803C0164(void *arg0, s32 arg1) {
+    extern char lbl_8041DE50[];
+    extern char lbl_80419678[];
+    extern void fn_802DDC18(void *);
+    extern void fn_802D20E8(void *);
+    M2C_FIELD(arg0, void **, 0x10) = lbl_8041DE50;
+    fn_802DDC18(arg0);
+    M2C_FIELD(arg0, void **, 0x10) = lbl_80419678;
+    fn_802DDC18(arg0);
+    if (arg1 & 1) {
+        fn_802D20E8(arg0);
+    }
+}
+
 void *fn_803C01C4(void *self, s32 n) {
     extern s32 lbl_8045B0F0[];
     extern void *fn_80338000(void *, s32, s32);
