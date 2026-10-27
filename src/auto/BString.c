@@ -158,7 +158,7 @@ void fn_800D19DC(void) {
     extern void fn_800487EC(void *);
     extern void fn_800D2AE4(void);
     fn_800D2AE4();
-    fn_800487EC(&lbl_8041F754);
+    fn_800487EC((s32 *)&lbl_8041F754);
 }
 
 void fn_800D1ACC(void *arg0) {
