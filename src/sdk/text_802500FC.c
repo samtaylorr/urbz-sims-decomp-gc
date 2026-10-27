@@ -305,23 +305,37 @@ void fn_8025AD78(void) {
         (*ctor)();
     }
 }
+
+void fn_8025ADCC(void) {
+    extern void (*lbl_80401398[])(void);
+    void (**ctor)(void);
+
+    for (ctor = lbl_80401398; *ctor; ctor++) {
+        (*ctor)();
+    }
+}
+
 #pragma pop
 void fn_8025AE20(void) {
     M2C_UNK fn_8025AE94();
     fn_8025AE94();
 }
 
+#pragma push
+#pragma peephole off
+#pragma scheduling off
 void fn_8025AE40(s32 status) {
     extern void (*lbl_80401398[])(void);
     void fn_8025AE94(void);
-    void (**dtor)(void);
+    void (**dtor)(void) = lbl_80401398;
 
-    for (dtor = lbl_80401398; *dtor; dtor++) {
+    while (*dtor) {
         (*dtor)();
+        dtor++;
     }
     fn_8025AE94();
 }
-
+#pragma pop
 void fn_8025AE94(void) {
     M2C_UNK PPCHalt();
     PPCHalt();
