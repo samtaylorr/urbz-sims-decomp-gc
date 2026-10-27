@@ -3274,6 +3274,15 @@ void fn_800E6658(s32 *self) {
     }
 }
 
+void fn_800E822C(void *arg0) {
+    void fn_80048770(void *, s32);
+    void fn_800C4E84(void *);
+    fn_80048770(lbl_8041F754, 0);
+    if (M2C_FIELD(arg0, void **, 0x18) != NULL) {
+        fn_800C4E84(M2C_FIELD(arg0, void **, 0x18));
+    }
+}
+
 void fn_800E8274(s32 *self) {
     u8 *obj = (u8 *)self[0x18 / 4];
     if (obj != 0) {
