@@ -2582,6 +2582,16 @@ void fn_802003D4(void *self, s32 arg1) {
     fn_80245BB4((s32)((u8 *)self + 0x68B), lbl_803E5720, arg1);
 }
 
+s32 fn_80200408(void *self, u16 *s) {
+    s32 n = 0;
+
+    while (*s != 0) {
+        s++;
+        n++;
+    }
+    return (n + 2) * 4;
+}
+
 void fn_8020064C(void) {
 
 }
