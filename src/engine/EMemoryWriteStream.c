@@ -89,7 +89,7 @@ s32 fn_803758E0(s32 arg0, s32 *out) {
 }
 
 void fn_80375C30(void) {
-    M2C_UNK fn_80375BC0(M2C_UNK, M2C_UNK);
+    void fn_80375BC0(s32, s32);
     fn_80375BC0(1, 0xFFFF);
 }
 
