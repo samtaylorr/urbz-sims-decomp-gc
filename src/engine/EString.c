@@ -1302,35 +1302,14 @@ s32 fn_802D6BD4(void *a, void *b) {
 }
 
 void *fn_802D6DC0(u32 size) {
-    extern void *lbl_80446F34[];
-    s32 fn_802D0AB8(void);
-    s32 fn_802D0B3C(void);
-    void *fn_802D197C(s32, u32, s32);
-    void *fn_802DBBCC(s32, u32, s32);
-    s32 heap;
-    void *p;
-
+    extern char lbl_80446F34[];
     if (size == 0x74) {
-        p = lbl_80446F34[1];
+        void *p = ScratchPool_Alloc((ScratchPool *)lbl_80446F34);
         if (p != NULL) {
-            lbl_80446F34[1] = *(void **)p;
-            if (p != NULL) {
-                return p;
-            }
+            return p;
         }
     }
-    heap = fn_802D0AB8();
-    if (size == 0) {
-        return NULL;
-    }
-    p = fn_802D197C(heap, size, 4);
-    if (p == NULL) {
-        p = fn_802DBBCC(heap, size, 0);
-        if (p == NULL && heap == fn_802D0AB8()) {
-            return fn_802DBBCC(fn_802D0B3C(), size, 0);
-        }
-    }
-    return p;
+    return Heap_Alloc(size);
 }
 
 void fn_802D6E78(void *p) {
