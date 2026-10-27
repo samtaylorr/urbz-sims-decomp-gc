@@ -118,6 +118,12 @@ void fn_80372214(s32 arg0, s32 arg1) {
     }
 }
 
+void fn_80372284(void) {
+    void *fn_80371B64(u8 *);
+
+    fn_80371B64(Alloc(0x2C));
+}
+
 void *fn_80371B64();
 void fn_80372304(void) {
     fn_80371B64();
