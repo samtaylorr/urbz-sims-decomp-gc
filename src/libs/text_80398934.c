@@ -9948,6 +9948,16 @@ void *fn_803BEC78(void *self) {
     return self;
 }
 
+void fn_803BECA8(s32 self_) {
+    s32 **self = (s32 **)self_;
+    s32 *p;
+
+    fn_8039A7A4(self[0], (s32)self[1]);
+    p = self[0];
+    fn_802D1A00(fn_802D0AB8(), p);
+    fn_8039A7C0(self);
+}
+
 extern void fn_803BECA8(s32);
 void fn_803BECF4(s32 self, s32 flags) {
     fn_803BECA8(self);
