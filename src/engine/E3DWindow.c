@@ -210,7 +210,7 @@ void fn_802EB5B0(void *arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5) {
 }
 
 void fn_802EB650(void *arg0, void *arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5) {
-    extern const f32 lbl_803F0A9C;
+    extern const f32 lbl_803F0A9C[];
     f32 diff;
     if (arg1 != NULL && M2C_FIELD(arg1, s32 *, 0xA8) == 1 && arg2 != M2C_FIELD(arg1, f32 *, 0x64)) {
         diff = M2C_FIELD(arg1, f32 *, 0x50) - arg2;
@@ -219,17 +219,17 @@ void fn_802EB650(void *arg0, void *arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5)
         M2C_FIELD(arg1, f32 *, 0x70) = arg5;
         M2C_FIELD(arg1, f32 *, 0x60) = M2C_FIELD(arg1, f32 *, 0x50);
         M2C_FIELD(arg1, f32 *, 0x64) = arg2;
-        M2C_FIELD(arg1, f32 *, 0x5C) = lbl_803F0A9C;
-        if (diff < lbl_803F0A9C) {
-            arg3 *= -diff;
-        } else {
+        M2C_FIELD(arg1, f32 *, 0x5C) = lbl_803F0A9C[0];
+        if (diff >= lbl_803F0A9C[0]) {
             arg3 *= diff;
+        } else {
+            arg3 *= -diff;
         }
-        if (arg3 == lbl_803F0A9C) {
+        if (arg3 == lbl_803F0A9C[0]) {
             fn_802EAF44(arg0, arg1, 1, arg2);
         } else {
             M2C_FIELD(arg1, f32 *, 0x68) = arg3;
-            if (arg2 != lbl_803F0A9C) {
+            if (arg2 != lbl_803F0A9C[0]) {
                 fn_802ED364(arg0, arg1, 1);
             }
         }
