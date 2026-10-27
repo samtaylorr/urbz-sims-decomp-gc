@@ -59,6 +59,21 @@ void fn_803145A0(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x30) = arg1;
 }
 
+f32 fn_803145A8(void *arg0) {
+    extern const f64 lbl_803F25F0[];
+    extern const f64 lbl_803F25F8[];
+    f64 v;
+    s32 n;
+
+    n = M2C_FIELD(arg0, s32 *, 0x2C);
+    if (n != 0) {
+        v = M2C_FIELD(arg0, f64 *, 0x18) / (f64)n;
+    } else {
+        v = lbl_803F25F0[0];
+    }
+    return v * lbl_803F25F8[0];
+}
+
 f32 fn_80314604(void *arg0) {
     extern const f64 lbl_803F2600[];
     return M2C_FIELD(arg0, f64 *, 0) * lbl_803F2600[0];
