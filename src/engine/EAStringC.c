@@ -2519,10 +2519,13 @@ void **fn_802BC580(void **self, void **other) {
     struct Buf { u16 ref; u16 len; u16 cap; u16 flags; char data[1]; };
     u32 len;
     char *dst;
+    char *src;
 
     len = ((struct Buf *)*other)->len;
     fn_802BC600(self, len);
-    fn_802482F8(dst = ((struct Buf *)*self)->data, ((struct Buf *)*other)->data, len);
+    src = ((struct Buf *)*other)->data;
+    dst = ((struct Buf *)*self)->data;
+    fn_802482F8(dst, src, len);
     dst[len] = 0;
     ((struct Buf *)*self)->len = len;
     ((struct Buf *)*self)->flags = ((struct Buf *)*other)->flags;
@@ -2571,19 +2574,26 @@ s32 fn_802BC93C(void **self, s32 c, s32 start) {
     extern char *fn_80248B28(char *, s32);
     struct Buf { u16 ref; u16 len; s32 cap; char data[1]; };
     char *p;
+    char *data;
+    s32 i;
 
     if (start < ((struct Buf *)*self)->len) {
-        if (start < 0) {
-            start = 0;
+        i = start;
+        if (i < 0) {
+            i = 0;
         }
-        p = fn_80248B28(((struct Buf *)*self)->data + start, c);
+        data = ((struct Buf *)*self)->data;
+        p = fn_80248B28(data + i, c);
         if (p != 0) {
             goto found;
         }
     }
     return -1;
 found:
-    return (s32)p - (s32)((struct Buf *)*self)->data;
+    {
+        char *base = ((struct Buf *)*self)->data;
+        return p - base;
+    }
 }
 
 s32 fn_802BCA14(void) {
