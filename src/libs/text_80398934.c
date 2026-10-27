@@ -10081,6 +10081,24 @@ done:
     }
 }
 
+void *fn_803BF584(void *self, void *out) {
+    extern void fn_802CB8D4(void *);
+    extern void fn_8036C33C(void *, s32 *);
+    extern void fn_802CB69C(void *, s32);
+    s32 n;
+    s32 v;
+    void *vt;
+
+    fn_802CB8D4(out);
+    vt = M2C_FIELD(self, void **, 0x18);
+    M2C_FIELD(vt, void (**)(void *, s32 *, s32), 0x34)((char *)self + M2C_FIELD(vt, s16 *, 0x30), &n, 4);
+    while (--n != -1) {
+        fn_8036C33C(self, &v);
+        fn_802CB69C(out, v);
+    }
+    return self;
+}
+
 void fn_803BF7EC(void **self, s32 flags) {
     *self = lbl_804194A0;
     if (flags & 1) {
