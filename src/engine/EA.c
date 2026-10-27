@@ -528,15 +528,13 @@ s32 fn_802DCB78(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     void *q;
     void *r;
     s32 ret;
-    s32 sp;
 
-    sp = arg2;
     q = M2C_FIELD(arg0, void **, 0x4FC);
     p = q;
     if (q != NULL) {
         fn_802D9214(q);
     }
-    ret = fn_802DCC78(arg0, arg1, 1, &sp, arg3, arg4);
+    ret = fn_802DCC78(arg0, arg1, 1, &arg2, arg3, arg4);
     r = p;
     if (r != NULL) {
         fn_802D9244(r);
