@@ -1,6 +1,48 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+extern u8 lbl_80415470[];
+extern char lbl_80435FB8[];
+void fn_801B25A4(void *);
+void *fn_802D2058(u32);
+
+typedef struct ScratchPool {
+    u32 base;
+    void *free;
+    u32 size;
+} ScratchPool;
+
+static inline void *ScratchPool_Alloc(ScratchPool *pool) {
+    void *p = pool->free;
+    if (p != NULL) {
+        pool->free = *(void **)p;
+    }
+    return p;
+}
+
+void *fn_802D0AB8(void);
+void *fn_802D0B3C(void);
+void *fn_802D197C(void *, u32, s32);
+void *fn_802DBBCC(void *, u32, s32);
+
+static inline void *Heap_Alloc(u32 size) {
+    void *heap;
+    void *p;
+
+    heap = fn_802D0AB8();
+    if (size == 0) {
+        return NULL;
+    }
+    p = fn_802D197C(heap, size, 4);
+    if (p == NULL) {
+        p = fn_802DBBCC(heap, size, 0);
+        if (p == NULL && heap == fn_802D0AB8()) {
+            return fn_802DBBCC(fn_802D0B3C(), size, 0);
+        }
+    }
+    return p;
+}
+
 extern u8 lbl_80415560[];
 extern void fn_802D20E8(void *);
 void fn_801B262C(void **self, s32 flags) {
