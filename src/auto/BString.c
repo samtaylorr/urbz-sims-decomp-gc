@@ -3170,12 +3170,15 @@ s32 fn_800E4620(void *arg0, s32 arg1) {
 void fn_800E465C(void) {
     void *fn_802D1FC8(s32);
     extern void *lbl_80496640;
+    u8 lock[5];
     s32 *p;
+    s32 *q;
 
     p = fn_802D1FC8(0x10);
     p[0] = 0;
     p[1] = 0;
-    (p + 2)[1] = 0;
+    q = p + 2;
+    q[1] = 0;
     lbl_80496640 = p;
 }
 
