@@ -268,6 +268,18 @@ void fn_80380AFC(void) {
     fn_80380B20(0);
 }
 
+void fn_80380DB0(void) {
+    extern void *lbl_80496388;
+    extern void *lbl_80476440[32];
+    extern void *lbl_804763C0[32];
+    int i;
+    lbl_80496388 = 0;
+    for (i = 0; i < 32; i++) {
+        lbl_80476440[i] = 0;
+        lbl_804763C0[i] = 0;
+    }
+}
+
 void fn_80381010(void *arg0) {
     extern void *lbl_80496388;
     M2C_FIELD(arg0, void **, 8) = (void *) lbl_80496388;
