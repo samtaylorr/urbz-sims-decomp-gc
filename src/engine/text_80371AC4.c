@@ -13,6 +13,28 @@ extern u8 lbl_80493E6C[];
 extern u8 lbl_803F5600[];
 extern u8 lbl_80493858[];
 extern s32 lbl_80496314;
+extern void *fn_802D0B3C(void);
+extern void *fn_802D197C(void *, u32, s32);
+extern void *fn_802DBBCC(void *, u32, s32);
+extern void *fn_802D0AB8();
+
+static inline void *Alloc(u32 size) {
+    void *heap;
+    void *p;
+
+    heap = fn_802D0AB8();
+    if (size == 0) {
+        return NULL;
+    }
+    p = fn_802D197C(heap, size, 4);
+    if (p == NULL) {
+        p = fn_802DBBCC(heap, size, 0);
+        if (p == NULL && heap == fn_802D0AB8()) {
+            return fn_802DBBCC(fn_802D0B3C(), size, 0);
+        }
+    }
+    return p;
+}
 
 void fn_802D2FD0(void);
 void fn_80371AC4(void) {
