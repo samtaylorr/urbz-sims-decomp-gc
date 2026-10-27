@@ -759,6 +759,19 @@ s32 fn_800FC788(void *arg0, s32 arg1) {
     return -1;
 }
 
+void fn_800FC8A8(s32 arg0, s32 arg1) {
+    void fn_800F69F8(s32, s32);
+    const char *str;
+    switch (arg0) {
+    case 0: str = "Primitives"; break;
+    case 1: str = "Global"; break;
+    case 2: str = "Private"; break;
+    case 3: str = "Semi-global"; break;
+    default: str = "unknown"; break;
+    }
+    fn_800F69F8(arg1, (s32)str);
+}
+
 void fn_800FCA68(s32 arg0, s32 arg1) {
     s32 fn_80248808(s32);
     void fn_80248784(s32, s32);
