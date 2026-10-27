@@ -2201,6 +2201,12 @@ void fn_803A161C(void) {
     fn_8018EA6C();
 }
 
+void fn_803A163C(void *self) {
+    u8 *obj = *(u8 **)((u8 *)self + 4);
+    u8 *vt = *(u8 **)obj;
+    (*(void (**)(void *))(vt + 0x64))(obj + *(s16 *)(vt + 0x60));
+}
+
 s32 fn_803A1674(s32 *self) {
     return self[2];
 }
