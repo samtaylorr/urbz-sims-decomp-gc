@@ -30,15 +30,11 @@ void fn_80336CBC(char *self) {
 
 void fn_80336D24(char *self) {
     void fn_80338940(char *, s32);
-    ResLock lock;
+    ResLock lock[1];
 
-    ResLock_Init(&lock, self);
+    ResLock_Init(lock, self);
     fn_80338940(self + 0x40, *(s32 *)(self + 0x54));
-    ResLock_Release(&lock);
-}
-
-void fn_80336E04(void) {
-
+    ResLock_Release(lock);
 }
 
 typedef struct ERMLock {
@@ -58,26 +54,27 @@ static inline void ERMLock_Unlock(ERMLock *l) {
     (*(void (**)(void *))(vt + 0x1C))(l->obj + *(s16 *)(vt + 0x18));
 }
 
+void fn_80336E04(void) {
+
+}
+
+
 char *fn_80336E08(char *self, s32 key) {
     s32 fn_80338598(char *, s32, char **);
     struct {
         char *obj;
-        char *res;
-    } ctx;
-    char *r;
-    char *vt;
+    } lock;
+    char *res;
     if (key != 0) {
-        ctx.obj = self;
-        vt = *(char **)self;
-        (*(void (**)(void *, s32))(vt + 0x14))(self + *(s16 *)(vt + 0x10), -1);
-        if (fn_80338598(self + 0x40, key, &ctx.res) != 0) {
-            r = ctx.res;
-            if (*(s32 *)(r + 0xC) != 0) {
-                ERMLock_Unlock((ERMLock *)&ctx);
-                return r;
+        ERMLock_Lock((ERMLock *)&lock, self);
+        if (fn_80338598(self + 0x40, key, &res) != 0) {
+            self = res;
+            if (*(s32 *)(self + 0xC) != 0) {
+                ERMLock_Unlock((ERMLock *)&lock);
+                return self;
             }
         }
-        ERMLock_Unlock((ERMLock *)&ctx);
+        ERMLock_Unlock((ERMLock *)&lock);
     }
     return 0;
 }
