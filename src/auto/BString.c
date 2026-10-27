@@ -878,7 +878,7 @@ s32 *fn_800D41F0(s32 *self, s32 arg1) {
 
 void fn_800D423C(void *arg0) {
     extern void fn_800D277C(void *);
-    *(s32 *)&lbl_8041F754 = 2;
+    ((s32 *)lbl_8041F754)[0] = 2;
     fn_800D277C(arg0);
 }
 
