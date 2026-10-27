@@ -53,7 +53,6 @@ typedef struct EMat4AtExit {
 
 void fn_802CD53C(EMat4Node **list);
 void fn_802CCE6C(void *self, s32 key, void *value, s32 arg3);
-void fn_802CCE08(void *self, s32 key, void *value);
 
 s32 *fn_802C66FC(s32 *arg0) {
     arg0[0] = 0;
@@ -1048,6 +1047,20 @@ void fn_802CD7B0(void *arg0, s32 flags) {
 
 void fn_802CDB1C(void *arg0) {
     fn_802D1A00(fn_802D0C44(arg0), arg0);
+}
+
+void fn_802CDE04(void *self, u8 *color) {
+    void fn_802CDE6C(void *, u8 *, u8 *);
+    void fn_802CE234(void *, u8 *, s32);
+    u8 buf[16];
+    u8 bgr[8];
+    u32 c = *(u32 *)color;
+
+    bgr[0] = color[3];
+    bgr[1] = c >> 8;
+    bgr[2] = c >> 16;
+    fn_802CDE6C(self, bgr, buf);
+    fn_802CE234(self, buf, M2C_FIELD(color, s32 *, 4));
 }
 
 void fn_802CE738(void *arg0) {
