@@ -176,7 +176,7 @@ void fn_80052B08(void *arg0) {
 }
 
 void fn_80052B14(void) {
-    M2C_UNK fn_80052798(M2C_UNK, M2C_UNK);
+    void fn_80052798(s32, s32);
     fn_80052798(1, 0xFFFF);
 }
 
