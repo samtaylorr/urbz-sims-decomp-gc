@@ -1576,6 +1576,13 @@ void fn_801DF0A8(u8 *self, s32 flags) {
     }
 }
 
+f32 fn_801DF514(s32 arg0) {
+    extern struct { u8 pad[0xA0]; f32 vals[1]; } *lbl_80494618;
+    extern f32 lbl_803E1350[];
+
+    return lbl_80494618 != 0 ? lbl_80494618->vals[arg0] : lbl_803E1350[0];
+}
+
 s32 fn_801DF724(void **arg0) {
     void *fn_802D1FC8(s32);
     extern char lbl_80417148[];
@@ -1649,6 +1656,25 @@ s32 fn_801DF9D4(void **arg0, s32 arg1, s32 arg2) {
         }
         fn_801DF86C(arg0, arg1, arg2);
         return 1;
+    }
+    return 0;
+}
+
+void fn_801DFA30(void *arg0, void *arg1) {
+    M2C_UNK fn_801DF938(void **, void *);
+    void *next;
+    void *var_r4;
+
+    var_r4 = *(void **)arg0;
+    if (var_r4 != NULL) {
+        do {
+            next = M2C_FIELD(var_r4, void **, 4);
+            if (M2C_FIELD(var_r4, void **, 0xC) == arg1) {
+                fn_801DF938(arg0, var_r4);
+                return 1;
+            }
+            var_r4 = next;
+        } while (var_r4 != NULL);
     }
     return 0;
 }
