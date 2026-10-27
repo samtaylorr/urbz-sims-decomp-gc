@@ -662,8 +662,35 @@ s32 fn_80387188(void) {
     return lbl_80496470;
 }
 
+void fn_803871D8(void) {
+    s32 enabled = fn_8025465C();
+    *(u16 *)0xCC00500A = (*(u16 *)0xCC00500A & ~0xA8) | 4;
+    fn_80254684(enabled);
+}
+
+void fn_80387218(void) {
+    s32 enabled = fn_8025465C();
+    *(u16 *)0xCC00500A = *(u16 *)0xCC00500A & ~0xAC;
+    fn_80254684(enabled);
+}
+
 s32 fn_80387254(void) {
     return *(u16 *)0xCC00500A & 0x200;
+}
+
+void *fn_80387264(void *arg0) {
+    extern s32 lbl_80496494;
+    void fn_80387B84(void *);
+    void fn_803879F8(void *);
+    s32 enabled = fn_8025465C();
+    fn_80387B84(arg0);
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 1;
+    fn_80254684(enabled);
+    if ((u32)arg0 == (u32)lbl_80496494) {
+        fn_803879F8(arg0);
+    }
+    return arg0;
 }
 
 void *fn_803872D4(void *arg0) {
