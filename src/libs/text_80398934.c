@@ -7051,6 +7051,17 @@ s32 fn_803B7200(void) {
     return 0;
 }
 
+void fn_803B7208(void *arg0, s32 arg1) {
+    extern char lbl_80418408[];
+    extern void (*lbl_80443318[])(void *, s32);
+    extern void fn_802B709C(void *, s32);
+    *(void **)((u8 *)arg0 + 4) = lbl_80418408;
+    fn_802B709C(arg0, 0);
+    if (arg1 & 1) {
+        lbl_80443318[0](arg0, 0xC);
+    }
+}
+
 s32 fn_803B7268(void) {
     return 0;
 }
