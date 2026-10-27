@@ -14,6 +14,12 @@ void fn_80335FD8(void *p, s32 n);
 extern u8 lbl_8045BBA0[];
 extern u8 lbl_8041C180[];
 
+typedef struct EyeToyRGB {
+    u8 r;
+    u8 g;
+    u8 b;
+} EyeToyRGB;
+
 static inline void *EyeToyAlloc(s32 count) {
     void *heap;
     void *p;
