@@ -1334,15 +1334,11 @@ void *fn_802D6DC0(u32 size) {
 }
 
 void fn_802D6E78(void *p) {
-    extern u32 lbl_80446F34[];
+    extern char lbl_80446F34[];
     void fn_802D1A00(s32, void *);
-    s32 fn_802D0AB8(void);
 
-    if ((u32)p >= lbl_80446F34[0] && (u32)p < lbl_80446F34[0] + lbl_80446F34[2]) {
-        if (p != NULL) {
-            *(u32 *)p = lbl_80446F34[1];
-            lbl_80446F34[1] = (u32)p;
-        }
+    if (ScratchPool_Contains((ScratchPool *)lbl_80446F34, p)) {
+        ScratchPool_Free((ScratchPool *)lbl_80446F34, p);
     } else {
         fn_802D1A00(fn_802D0AB8(), p);
     }
