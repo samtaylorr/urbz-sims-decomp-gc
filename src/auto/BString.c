@@ -3180,6 +3180,13 @@ void fn_800E64BC(void) {
 
 }
 
+void fn_800E64C0(s32 *self) {
+    void *fn_802D1FC8(s32);
+    s32 fn_8006E33C(void *);
+    fn_802D0F9C();
+    self[6] = fn_8006E33C(fn_802D1FC8(0x230));
+}
+
 void fn_800E6570(void) {
 
 }
