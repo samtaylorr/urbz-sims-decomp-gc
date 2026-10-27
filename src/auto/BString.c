@@ -3356,14 +3356,12 @@ void fn_800E9220(u8 *self) {
 }
 
 void fn_800E92B8(s32 arg0, f32 arg1) {
-    extern void *fn_80046880(void *);
+    extern s32 fn_80046880(void *);
     extern void fn_80046FE0(void *);
-    void *p = fn_80046880(lbl_8041F754);
-    if (p) {
+    if (fn_80046880(lbl_8041F754)) {
         ((void (*)(s32, f32))fn_800E3BC0)(arg0, arg1);
-        p = lbl_8041F754;
     }
-    fn_80046FE0(p);
+    fn_80046FE0(lbl_8041F754);
 }
 
 void fn_800E9314(void *arg0, s32 arg1) {
