@@ -83,6 +83,57 @@ s32 fn_8028E05C(void *arg0) {
     return var_r3;
 }
 
+void *fn_8028E0A0(void *arg0, s32 arg1) {
+    extern void *fn_802AEABC(void *, s32);
+    u32 v;
+    s32 owned;
+
+    if (arg1 < M2C_FIELD(arg0, s32 *, 0x24) && M2C_FIELD(arg0, u32 **, 0x1C) != NULL) {
+        v = M2C_FIELD(arg0, u32 **, 0x1C)[arg1];
+        if (v != 0) {
+            owned = 1;
+            if (!(v & 1)) {
+                owned = 0;
+            }
+            if (!owned) {
+                return NULL;
+            }
+        }
+        return (void *) (v & ~1);
+    }
+    return fn_802AEABC((u8 *) arg0 + 8, arg1 - M2C_FIELD(arg0, s32 *, 0x24));
+}
+
+void *fn_8028E2B8(void *arg0, s32 arg1) {
+    extern void *lbl_80496130;
+    void *p;
+
+    if (arg1 < 0 || arg1 >= M2C_FIELD(arg0, s32 *, 0x24)) {
+        return lbl_80496130;
+    }
+    p = (void *) (M2C_FIELD(arg0, u32 **, 0x1C)[arg1] & ~1);
+    if (p != NULL) {
+        return p;
+    }
+    return lbl_80496130;
+}
+
+void fn_8028E2F0(void *arg0, void *arg1) {
+    extern u16 lbl_803FCE5C[];
+    extern void **lbl_80494DA0;
+    extern void fn_8028E374(void *, u16 **);
+    extern void fn_80248784(void *, void *);
+    u16 *p;
+
+    p = lbl_803FCE5C;
+    lbl_803FCE5C[0]++;
+    fn_8028E374(arg0, &p);
+    fn_80248784(arg1, (u8 *) p + 8);
+    if (--*p == 0) {
+        ((void (*)(void *)) lbl_80494DA0[1])(p);
+    }
+}
+
 void *fn_8028FB40(u32 *self) {
     extern void *lbl_80496130;
     s32 ok;
