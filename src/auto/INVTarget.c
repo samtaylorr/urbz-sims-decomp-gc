@@ -2878,6 +2878,39 @@ s32 fn_8020F990(void) {
     return var_r3;
 }
 
+void fn_802127FC(s32 arg0, s32 arg1) {
+    extern u16 lbl_803F6B20[][20];
+    s32 idx;
+    s32 inserted;
+    s32 found;
+    s32 i;
+
+    idx = 1;
+    if (arg0 == 1) {
+        idx = 0;
+    }
+    inserted = 0;
+    found = 0;
+    for (i = 0; i < 0x14 && !inserted && !found; i++) {
+        if (lbl_803F6B20[idx][i] == arg1) {
+            found = 1;
+        } else if (lbl_803F6B20[idx][i] == 0) {
+            lbl_803F6B20[idx][i] = arg1;
+            inserted = 1;
+        }
+    }
+    if (found) {
+        return;
+    }
+    if (inserted) {
+        return;
+    }
+    for (i = 1; i < 0x14; i++) {
+        lbl_803F6B20[idx][i - 1] = lbl_803F6B20[idx][i];
+    }
+    lbl_803F6B20[idx][0x13] = arg1;
+}
+
 void fn_802144A8(void *arg0, s32 arg1) {
     extern s32 fn_801D7CDC(void *, s32);
     extern s32 fn_801D8B40(void *, void *);
