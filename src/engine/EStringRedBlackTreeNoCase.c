@@ -416,6 +416,23 @@ void *fn_80368F18(void *arg0, s32 arg1) {
     return var_r31;
 }
 
+void *fn_80369670(void *arg0, s32 arg1, s32 *arg2) {
+    s32 fn_802D3EE8(s32, s32);
+    char *node;
+
+    node = M2C_FIELD(arg0, char **, 8);
+    while (node != lbl_80401368) {
+        if (fn_802D3EE8((s32)(node + 0x1C), arg1) == 0) {
+            if (arg2 != NULL) {
+                *arg2 = M2C_FIELD(node, s32 *, 0x18);
+            }
+            return node;
+        }
+        node = fn_802D3EE8((s32)(node + 0x1C), arg1) > 0 ? M2C_FIELD(node, char **, 0) : M2C_FIELD(node, char **, 4);
+    }
+    return NULL;
+}
+
 s32 fn_803698D8(void **arg0) {
     s32 var_r9;
     void *var_r3;
