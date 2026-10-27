@@ -36,6 +36,43 @@ static inline RMMapIter RMMap_End(char *map) {
     return r;
 }
 
+typedef struct RMMapNode16 {
+    s32 color;
+    struct RMMapNode16 *parent;
+    struct RMMapNode16 *left;
+    struct RMMapNode16 *right;
+    u16 key;
+    void *value;
+} RMMapNode16;
+
+typedef struct {
+    RMMapNode16 *node;
+} RMMapIter16;
+
+static inline s32 RMMapIter16_NotEqual(RMMapIter16 a, RMMapIter16 b) {
+    return a.node != b.node;
+}
+
+static inline RMMapIter16 RMMap16_find(char *self, const u16 *k) {
+    RMMapNode16 *end = *(RMMapNode16 **)(self + 4);
+    RMMapNode16 *y = end;
+    RMMapNode16 *x = end->parent;
+    RMMapIter16 it;
+    while (x != NULL) {
+        if (!(x->key < *k)) {
+            y = x;
+            x = x->left;
+        } else {
+            x = x->right;
+        }
+    }
+    if (y == end || *k < y->key) {
+        y = end;
+    }
+    it.node = y;
+    return it;
+}
+
 extern s32 lbl_80494538;
 void fn_8018FA84(void *arg0, s32 arg1);
 void fn_8018EDE0(void **obj) {
@@ -171,11 +208,9 @@ M2C_UNK *fn_8018FD28(void) {
 
 void fn_801905AC(char *self) {
     RMMapIter it;
-    RMMapIter end;
 
     it.node = NULL;
-    for (it.node = (*(RMMapNode **)(self + 4))->left;
-         end.node = *(RMMapNode **)(self + 4), RMMapIter_NotEqualP(&it, &end);
+    for (it = RMMap_Begin(self); RMMapIter_NotEqual(it, RMMap_End(self));
          it.node = (RMMapNode *)fn_8039AB24((void **)it.node)) {
         char *room = it.node->value;
         if (*(s32 *)(room + 0x34) != 0) {
