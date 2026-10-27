@@ -3,6 +3,16 @@
 
 extern void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
+extern void *fn_802D197C(void *, u32, s32);
+extern void *fn_802D0B3C(void);
+extern void *fn_802DC3C0(void *, u32, s32, s32, s32);
+extern void fn_80307364(void *);
+void fn_8006A194(void *arg0);
+extern s32 *lbl_80491F0C[];
+extern s32 *fn_800B3420(s32);
+extern s32 fn_802D5ACC(s32 *, s32);
+extern void fn_802D57BC(s32 *, s32);
+extern void fn_800B3324(s32, s32, s32);
 
 typedef struct { s32 a, b, c; } PBVec3;
 typedef struct { PBVec3 v; s32 w; } PBStackEntry;
