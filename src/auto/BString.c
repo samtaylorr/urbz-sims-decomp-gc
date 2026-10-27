@@ -332,9 +332,9 @@ s32 *fn_800D1F50(s32 *self, s32 a) {
 }
 
 void fn_800D1F84(void) {
-    void fn_80319494(const char *, int);
+    void fn_80319494(char *, s32);
     void fn_80332C50(void *);
-    extern const char lbl_803D1698[];
+    extern char lbl_803D1698[];
     extern u8 lbl_8045AAB0[];
     fn_80332C50(lbl_8045AAB0);
     fn_80319494(lbl_803D1698, 151);
@@ -556,6 +556,15 @@ void fn_800D339C(void) {
     extern s32 lbl_8041F7C4[];
     if (lbl_8041F7C4[0] != 0) {
         fn_800D568C(lbl_8041E640[0]);
+    }
+}
+
+void fn_800D351C(void *self) {
+    char *obj = M2C_FIELD(self, char **, 0x18);
+    if (obj != NULL) {
+        char *vt = M2C_FIELD(obj, char **, 0x44);
+        M2C_FIELD(vt, void (**)(void *, s32), 0xC)(obj + M2C_FIELD(vt, s16 *, 8), 3);
+        M2C_FIELD(self, char **, 0x18) = NULL;
     }
 }
 
