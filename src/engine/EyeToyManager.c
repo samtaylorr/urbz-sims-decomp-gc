@@ -291,6 +291,15 @@ void *fn_8033A0B0(s32 a, s32 b, s32 c, s32 d, EyeToyRGB *col) {
     return fn_80339CE8(a, b, c, d, lbl_803FD38C, sum, 3, 3, *col);
 }
 
+void *fn_8033A220(s32 a, s32 b, s32 c, s32 d, EyeToyRGB *col) {
+    struct Kernel9 { s32 v[9]; };
+    extern struct Kernel9 lbl_803F3C70;
+    void *fn_80339CE8(s32, s32, s32, s32, s32 *, s32, s32, s32, EyeToyRGB);
+    struct Kernel9 k = lbl_803F3C70;
+    s32 sum = fn_80339CB4(k.v, 9);
+    return fn_80339CE8(a, b, c, d, k.v, sum, 3, 3, *col);
+}
+
 extern s32 lbl_80494F88;
 s32 fn_8033A73C(void) {
     return lbl_80494F88;
