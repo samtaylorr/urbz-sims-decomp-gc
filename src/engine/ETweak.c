@@ -13,15 +13,6 @@ typedef struct ETweakEntry {
     s32 value;
 } ETweakEntry;
 
-static inline void ETweakEntry_Init(ETweakEntry *e, s32 key, s32 str, s32 value) {
-    void fn_802D39E4(void *);
-    void fn_802D3CE4(void *, s32);
-    fn_802D39E4(&e->str);
-    e->key = key;
-    e->value = value;
-    fn_802D3CE4(&e->str, str);
-}
-
 static inline void ETweakEntry_Ctor(ETweakEntry *e, s32 key, s32 value) {
     void fn_802D39E4(void *);
     fn_802D39E4(&e->str);
@@ -160,11 +151,13 @@ s32 fn_80314784(void *arg0) {
 
 void fn_80314A18(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     M2C_UNK fn_802D1FC8(M2C_UNK);
+    M2C_UNK fn_802D3CE4(void *, s32);
     M2C_UNK fn_802CB69C(void *, void *);
     ETweakEntry *obj;
 
     obj = fn_802D1FC8(0xC);
-    ETweakEntry_Init(obj, arg1, arg2, arg3);
+    ETweakEntry_Ctor(obj, arg1, arg3);
+    fn_802D3CE4(&obj->str, arg2);
     fn_802CB69C((s8 *)arg0 + 0xC, obj);
     M2C_FIELD(arg0, s32 *, 8)++;
 }
