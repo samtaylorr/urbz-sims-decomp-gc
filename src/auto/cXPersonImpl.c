@@ -96,6 +96,25 @@ s32 fn_80181A20(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x5FC) ^ 1;
 }
 
+s32 fn_80181F1C(void *arg0, s32 arg1) {
+    u8 *q;
+    u8 *e;
+    u32 start;
+    u32 i;
+    start = 0;
+    if (M2C_FIELD(arg0, s32 *, 0x5FC) != 0) {
+        start = 1;
+    }
+    q = (u8 *)arg0 + 0x130;
+    for (i = start; i < M2C_FIELD(q, u32 *, 0x374) - M2C_FIELD(q, u32 *, 0x370); i++) {
+        e = &q[((M2C_FIELD(q, u32 *, 0x370) + i) % 10U) * 0x58];
+        if (M2C_FIELD(e, s32 *, 0x28) == arg1) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
 void *fn_80182168(void *arg0) {
     void *fn_80117474(void *);
     void *list;
