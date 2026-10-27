@@ -2941,6 +2941,13 @@ s8 fn_80214E48(f32 arg0) {
     return ret;
 }
 
+f32 fn_80214EA8(void *arg0, s32 arg1) {
+    if (arg1 < 0) {
+        return (f32)(arg1 + 25) / 25.0f * 0.5f;
+    }
+    return (f32)arg1 / 25.0f * 0.5f + 0.5f;
+}
+
 s8 fn_80214F3C(f32 arg0) {
     s32 ret;
 
