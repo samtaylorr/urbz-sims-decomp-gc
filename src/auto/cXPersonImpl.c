@@ -68,6 +68,11 @@ s32 fn_80181314(void) {
     return 0x50455253;
 }
 
+void fn_801816AC(void *arg0, s32 i, f32 v) {
+    struct { u8 pad[0xA8]; f32 a[1]; } *p = arg0;
+    p->a[i] = v;
+}
+
 void fn_801816BC(void *arg0) {
     M2C_UNK fn_80117E80(void *);
     s16 *fn_80141C5C(s32, M2C_UNK);
