@@ -867,12 +867,17 @@ s32 fn_801A0978(void *arg0, u32 arg1) {
     extern s32 fn_801A0CC4(void *, u32);
     u32 v;
     s32 r;
+    s32 ret;
 
     v = M2C_FIELD(arg0, u32 *, 0) & arg1;
     if (v == arg1) {
         r = fn_801A0CC4(arg0, v);
-        r = (r == 2 || r == 0xC || r == 0xD || r == 0xE);
-        return r;
+        if (r == 2 || r == 0xC || r == 0xD || r == 0xE) {
+            ret = 1;
+        } else {
+            ret = 0;
+        }
+        return ret;
     }
     return 0;
 }
