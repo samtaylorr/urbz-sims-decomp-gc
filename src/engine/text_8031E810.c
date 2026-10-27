@@ -96,15 +96,13 @@ void *fn_8031E9F0(void *arg0, void *arg1) {
 void fn_8031EA2C(void *arg0) {
     void fn_80337AEC(void *, void *);
     char *vt;
-    s32 *rc;
 
     if (M2C_FIELD(arg0, void **, 4) != NULL) {
         fn_80337AEC(M2C_FIELD(arg0, void **, 4), arg0);
         return;
     }
-    rc = &M2C_FIELD(arg0, s32 *, 0xC);
-    *rc = *rc - 1;
-    if (M2C_FIELD(arg0, s32 *, 0xC) == 0) {
+    M2C_FIELD(arg0, volatile s32 *, 0xC)--;
+    if (M2C_FIELD(arg0, volatile s32 *, 0xC) == 0) {
         vt = *(char **)arg0;
         (*(void (**)(void *))(vt + 0xC))((char *)arg0 + *(s16 *)(vt + 8));
     }
