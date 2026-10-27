@@ -70,17 +70,19 @@ s32 fn_802D32A8(void *arg0, u16 *arg1, s32 arg2) {
     void *vt;
     s32 n;
     u16 *s;
+    u16 *pc;
     u16 c;
 
     n = 0;
+    pc = &c;
     s = arg1;
     do {
         vt = M2C_FIELD(arg0, void **, 0x18);
-        M2C_FIELD(vt, void (**)(void *, void *, s32), 0x34)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x30), &c, 2);
+        M2C_FIELD(vt, void (**)(void *, void *, s32), 0x34)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x30), pc, 2);
         if (n < arg2) {
             *s = c;
-            s++;
         }
+        s++;
         n++;
     } while (c != 0);
     if (n > arg2) {
