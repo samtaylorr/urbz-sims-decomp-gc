@@ -294,8 +294,28 @@ void fn_8025AD58(void) {
     fn_8025AD78();
 }
 
+void fn_8025AD78(void) {
+    extern void (*lbl_80401390[])(void);
+    void (**ctor)(void);
+
+    for (ctor = lbl_80401390; *ctor; ctor++) {
+        (*ctor)();
+    }
+}
+
 void fn_8025AE20(void) {
     M2C_UNK fn_8025AE94();
+    fn_8025AE94();
+}
+
+void fn_8025AE40(s32 status) {
+    extern void (*lbl_80401398[])(void);
+    void fn_8025AE94(void);
+    void (**dtor)(void);
+
+    for (dtor = lbl_80401398; *dtor; dtor++) {
+        (*dtor)();
+    }
     fn_8025AE94();
 }
 
@@ -916,6 +936,35 @@ void fn_8026561C(void) {
     if (lbl_80495F28 != NULL) {
         lbl_80495F28();
     }
+}
+
+void fn_80265CC4(void *alarm, void *context) {
+    M2C_UNK fn_80254AC0(M2C_UNK);
+    void fn_80252AAC(void *);
+    void fn_802528A4(void *);
+    extern void (*lbl_80495F48)(s32);
+    void (*cb)(s32);
+    u8 ctx[0x2C8];
+
+    fn_80254AC0(0x400);
+    fn_80252AAC(ctx);
+    fn_802528A4(ctx);
+    cb = lbl_80495F48;
+    lbl_80495F48 = NULL;
+    if (cb != NULL) {
+        cb(0x10);
+    }
+    fn_80252AAC(ctx);
+    fn_802528A4(context);
+}
+
+void fn_80265D34(s64 timeout) {
+    extern u8 lbl_80442AB0[];
+    void fn_80251224(void *, s64, void *);
+    void fn_80265CC4(void *, void *);
+
+    fn_80250FC4(lbl_80442AB0);
+    fn_80251224(lbl_80442AB0, timeout, fn_80265CC4);
 }
 
 s32 fn_80265EA8(void) {
