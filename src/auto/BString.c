@@ -3274,6 +3274,23 @@ void fn_800E6658(s32 *self) {
     }
 }
 
+f32 fn_800E7EC0(f32 x) {
+    extern f32 lbl_803D55D8[];
+    extern f32 lbl_803D55DC[];
+    extern f32 lbl_803D55E0[];
+    extern f32 lbl_803D55E4[];
+    x = x * lbl_803D55D8[0] - lbl_803D55DC[0];
+    if (x >= lbl_803D55E0[0]) {
+        x = lbl_803D55E4[0] - x;
+    } else {
+        x = x + lbl_803D55E4[0];
+    }
+    if (x < lbl_803D55E0[0]) {
+        x = lbl_803D55E0[0];
+    }
+    return x;
+}
+
 void fn_800E81C0(void *arg0) {
     extern s32 fn_800E18B8(s32);
     extern s32 lbl_80434AA0[];
