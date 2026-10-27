@@ -2932,6 +2932,7 @@ void fn_803A4DD0(s32 *last, s32 val, s32 comp) {
 }
 
 void fn_803A4E30(s32 *first, s32 *last, s32 comp) {
+    void fn_803A4DD0(s32 *last, s32 val, s32 comp);
     s32 *i;
 
     if (first == last) {
