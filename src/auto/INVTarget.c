@@ -2726,8 +2726,8 @@ s32 fn_802043A0(void *arg0, s32 **arg1, s32 arg2, s32 arg3) {
     if (arg1 == 0) {
         return 0;
     }
-    p = buf;
     fn_802045DC(arg0);
+    p = (s32)buf;
     fn_80248488(p, 0, 0x200);
     x = **arg1;
     if (arg3 == 0) {
