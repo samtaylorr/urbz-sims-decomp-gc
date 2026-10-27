@@ -597,6 +597,14 @@ s32 fn_80348EC4(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x24);
 }
 
+void *fn_80348ECC(void *self) {
+    void fn_802FB578(void *);
+    extern u8 lbl_8041CB50[];
+    fn_802FB578(self);
+    *(u8 **)((u8 *)self + 0x68) = lbl_8041CB50;
+    return self;
+}
+
 void fn_80348F08(void *self) {
     void fn_802FB5D0(void *);
     extern u8 lbl_8041CB50[];
