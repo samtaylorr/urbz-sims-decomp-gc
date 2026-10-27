@@ -887,10 +887,10 @@ void fn_8007B80C(u8 *self) {
 
 s32 fn_8007B92C(void *self) {
     void *p = M2C_FIELD(self, void **, 0x7c);
-    if (p == NULL) {
-        return 0;
+    if (p != NULL) {
+        return M2C_FIELD(M2C_FIELD(p, void **, 0x38), s32 *, 0x1c);
     }
-    return M2C_FIELD(M2C_FIELD(p, void **, 0x38), s32 *, 0x1c);
+    return 0;
 }
 
 void *fn_8007B94C(void *self, s32 arg1, s32 arg2) {
