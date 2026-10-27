@@ -260,9 +260,10 @@ void fn_80289990(void *arg0, u8 **arg1) {
     char *obj;
     s32 count;
     u8 *p = *arg1;
-    u32 idx = (p[0] << 8) | p[1];
-    *arg1 = p + 2;
-    obj = M2C_FIELD(arg0, char ***, 0x4C)[idx];
+    u32 hi = *p;
+    u32 lo = *++p;
+    *arg1 = p + 1;
+    obj = M2C_FIELD(arg0, char ***, 0x4C)[lo | (hi << 8)];
     count = M2C_FIELD(arg0, s32 *, 0);
     M2C_FIELD(arg0, char ***, 8)[count] = obj;
     M2C_FIELD(arg0, s32 *, 0) = count + 1;
@@ -276,12 +277,9 @@ void fn_80289FCC(void *arg0, u8 **arg1) {
     char *fn_8027D768(void *, s32, s32, char *, s32, s32);
     s32 fn_802B71E8(void *);
     char *obj;
-    s32 count;
     obj = fn_8027D768(arg0, M2C_FIELD(arg1, s32 *, 4), M2C_FIELD(arg1, s32 *, 8),
                       M2C_FIELD(arg0, char ***, 0x4C)[AptStream_ReadU8(arg1)] + 8, 1, 1);
-    count = M2C_FIELD(arg0, s32 *, 0);
-    M2C_FIELD(arg0, char ***, 8)[count] = obj;
-    M2C_FIELD(arg0, s32 *, 0) = count + 1;
+    M2C_FIELD(arg0, char ***, 8)[M2C_FIELD(arg0, s32 *, 0)++] = obj;
     if (fn_802B71E8(obj) == 0) {
         char *vt = *(char **)(obj + 4);
         (*(void (**)(char *))(vt + 0xC))(obj + *(s16 *)(vt + 8));
