@@ -506,6 +506,17 @@ void fn_8006A494(void *arg0) {
     }
 }
 
+void fn_8006A4B0(void *arg0, void *arg1) {
+    extern s32 fn_802486DC(char *, void *);
+    extern char lbl_803C8E34[];
+
+    if (M2C_FIELD(arg0, s32 *, 0x48) != 0) {
+        if (fn_802486DC(arg1, lbl_803C8E34) == 0) {
+            M2C_FIELD(arg0, s32 *, 0x54) = 1;
+        }
+    }
+}
+
 void *fn_8006A504(void *arg0, void *arg1) {
     extern void *fn_800BF3FC(s32);
     extern s32 fn_802486DC(char *, void *);
