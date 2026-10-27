@@ -519,9 +519,12 @@ void fn_800AB260(u8 *arg0, SMCVec3 *out) {
     SMCVec3 *v = (SMCVec3 *)(obj + 0xC0);
     f32 s = fn_8025FC40(obj + 0xA4);
     SMCVec3 tmp;
-    tmp.x = v->x * s;
-    tmp.y = v->y * s;
-    tmp.z = v->z * s;
+    f32 x = v->x * s;
+    f32 y = v->y * s;
+    f32 z = v->z * s;
+    tmp.x = x;
+    tmp.y = y;
+    tmp.z = z;
     *out = tmp;
     fn_802F0A84(out);
 }
@@ -587,34 +590,21 @@ void fn_800AB5FC(u8 *arg0) {
     extern f32 lbl_803CE4F8[];
     extern s32 lbl_8041FC68[];
     extern u8 *lbl_80494FA4;
-    struct { s32 flags; s32 pad[2]; f32 f; s32 pad2[2]; } sp8, *p;
-    f32 temp_f31;
-    s32 *var_r31;
-    u8 *a;
-    s32 var_r28;
-    s32 var_r29;
+    struct { s32 flags; s32 pad[2]; f32 f; s32 pad2[2]; } sp8;
+    s32 i;
 
     if (lbl_8041FC68[0] != 0) {
-        var_r31 = (s32 *)(arg0 + 0x30);
-        temp_f31 = lbl_803CE4F8[0];
-        a = arg0 + 0x18;
-        p = &sp8;
-        var_r28 = 0;
-        var_r29 = 6;
-        do {
-            s32 v = *(s32 *)(var_r28 + a);
-            if (v != 0 && *var_r31 != 0) {
+        for (i = 0; i < 6; i++) {
+            s32 v = ((s32 *)(arg0 + 0x18))[i];
+            if (v != 0 && ((s32 *)(arg0 + 0x30))[i] != 0) {
                 char *vt;
                 sp8.flags = 0;
-                p->f = temp_f31;
+                sp8.f = lbl_803CE4F8[0];
                 sp8.flags |= 4;
                 vt = *(char **)lbl_80494FA4;
-                M2C_FIELD(vt, void (**)(void *, s32, void *), 0xB4)(lbl_80494FA4 + M2C_FIELD(vt, s16 *, 0xB0), v, p);
+                M2C_FIELD(vt, void (**)(void *, s32, void *), 0xB4)(lbl_80494FA4 + M2C_FIELD(vt, s16 *, 0xB0), v, &sp8);
             }
-            var_r31++;
-            var_r28 += 4;
-            var_r29 -= 1;
-        } while (var_r29 != 0);
+        }
     }
 }
 
