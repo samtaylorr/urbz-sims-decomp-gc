@@ -1050,17 +1050,19 @@ void fn_802CDB1C(void *arg0) {
 }
 
 void fn_802CDE04(void *self, u8 *color) {
-    void fn_802CDE6C(void *, u8 *, u8 *);
-    void fn_802CE234(void *, u8 *, s32);
-    u8 buf[16];
-    u8 bgr[8];
+    void fn_802CDE6C(void *, u8 *, f32 *);
+    void fn_802CE234(void *, f32 *, s32);
+    struct {
+        u8 bgr[8];
+        f32 buf[4];
+    } s;
     u32 c = *(u32 *)color;
 
-    bgr[0] = color[3];
-    bgr[1] = c >> 8;
-    bgr[2] = c >> 16;
-    fn_802CDE6C(self, bgr, buf);
-    fn_802CE234(self, buf, M2C_FIELD(color, s32 *, 4));
+    s.bgr[0] = color[3];
+    s.bgr[1] = c >> 8;
+    s.bgr[2] = c >> 16;
+    fn_802CDE6C(self, s.bgr, s.buf);
+    fn_802CE234(self, s.buf, M2C_FIELD(color, s32 *, 4));
 }
 
 void fn_802CE738(void *arg0) {
