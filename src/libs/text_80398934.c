@@ -138,6 +138,63 @@ void fn_80399218(void) {
 
 }
 
+extern void **lbl_804069A8[];
+void *fn_803999F8(u32, s32 *);
+void fn_80399924(void *, s32, s32);
+void fn_80399978(void *self, s32 flags) {
+    extern void fn_80399924(void *, s32, s32);
+    if (M2C_FIELD(self, s32 *, 0x24) != 0) {
+        void *p;
+        s32 n;
+        fn_80399924(self, M2C_FIELD(self, s32 *, 0xC), M2C_FIELD(self, s32 *, 0x1C) + 4);
+        p = M2C_FIELD(self, void **, 0x24);
+        n = M2C_FIELD(self, s32 *, 0x2C);
+        if (p != NULL) {
+            PtrVec_Deallocate(p, n * 4);
+        }
+    }
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
+void *fn_80399B3C(u32 n) {
+    extern void **lbl_804069A8[];
+    extern void *fn_803999F8(u32, s32 *);
+    s32 nobjs = 20;
+    void **chunk;
+    void **cur;
+    void **next;
+    s32 i;
+
+    n = (n + 7) & ~7;
+    chunk = fn_803999F8(n, &nobjs);
+    if (nobjs == 1) {
+        return chunk;
+    }
+    lbl_804069A8[(n - 1) >> 3] = next = (void **)((char *)chunk + n);
+    for (i = 1; ; i++) {
+        cur = next;
+        next = (void **)((char *)next + n);
+        if (nobjs - 1 == i) {
+            *cur = NULL;
+            break;
+        }
+        *cur = next;
+    }
+    return chunk;
+}
+
+void *fn_80399BE8(u32 n) {
+    extern void **lbl_804069A8[];
+    void **r = lbl_804069A8[(n - 1) >> 3];
+    if (r == NULL) {
+        return fn_80399B3C(n);
+    }
+    lbl_804069A8[(n - 1) >> 3] = *r;
+    return r;
+}
+
 void *fn_80399C38(void *self, s32 **arg1) {
     s32 n;
     s32 i;
@@ -150,7 +207,7 @@ void *fn_80399C38(void *self, s32 **arg1) {
         ((void (*)(void *, void *, s32))vt[7].pfn)((char *)self + vt[7].delta, &tmp, 4);
     }
     for (i = 0; i < n; i++) {
-        s32 v = arg1[0][i];
+        s32 v = *(s32 *)((s32)arg1[0] + i * 4);
         VtblEntry *vt = *(VtblEntry **)((char *)self + 0x18);
         ((void (*)(void *, void *, s32))vt[7].pfn)((char *)self + vt[7].delta, &v, 4);
     }
