@@ -28,6 +28,13 @@ s32 fn_80317514(void *arg0) {
     return var_r7;
 }
 
+s32 fn_80317724(s32 arg0) {
+    void fn_80317624(s32, s32 *, s32);
+    s32 result = 0;
+    fn_80317624(arg0, &result, 0);
+    return result;
+}
+
 s32 fn_80317B98(s32 arg0, s32 arg1, s32 arg2, s32 *arg3, s32 arg4) {
     return fn_80317758(arg0, arg1, arg2, arg3, arg4);
 }
