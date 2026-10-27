@@ -428,6 +428,21 @@ void fn_8015A564(void) {
     fn_800F1A60((s32)&lbl_80495C30, 2);
 }
 
+void fn_80161548(void) {
+    void fn_802D20E8(void *);
+    void fn_803997AC(void *, u32);
+    extern u8 lbl_80434C58[];
+    u8 *p = *(u8 **)lbl_80434C58;
+    if (p != NULL) {
+        u32 size = (*(u32 *)(lbl_80434C58 + 0xC) - (u32)p) & ~3;
+        if (size > 0x80) {
+            fn_802D20E8(p);
+        } else {
+            fn_803997AC(p, size);
+        }
+    }
+}
+
 void fn_80166A1C(void) {
     extern void **lbl_80495C3C;
     void **obj = lbl_80495C3C;
