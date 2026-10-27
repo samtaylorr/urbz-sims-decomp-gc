@@ -1434,6 +1434,12 @@ f32 fn_8039DB1C(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0x10);
 }
 
+void *fn_8039DB44(void *arg0) {
+    char *vt = M2C_FIELD(arg0, char **, 0x1C);
+    ((void (*)(void *))M2C_FIELD(vt, void **, 0x2C))((char *)arg0 + M2C_FIELD(vt, s16 *, 0x28));
+    return (char *)arg0 + 0x14;
+}
+
 void fn_8039DB88(void *arg0, f32 farg0) {
     M2C_FIELD(arg0, f32 *, 0x14) = farg0;
     M2C_FIELD(arg0, s32 *, 4) = (s32) (M2C_FIELD(arg0, s32 *, 4) & 0xFFFFFFFD);
@@ -10552,5 +10558,11 @@ void fn_803C0D04(void *self) {
 
 void fn_803C0D24(M2C_UNK **arg0) {
     *arg0 = &lbl_804194A0;
+}
+
+void fn_803C0D34(void *arg0) {
+    extern u8 lbl_8041DE78[];
+    M2C_FIELD(arg0, void **, 0) = lbl_8041DE78;
+    M2C_FIELD(arg0, s32 *, 0x20) = 0;
 }
 
