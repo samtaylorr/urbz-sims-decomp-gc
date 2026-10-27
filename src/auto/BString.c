@@ -1853,8 +1853,8 @@ void fn_800DC7E4(void) {
     r = fn_800A55AC(lbl_8041FA38[0][0x6f]);
     if (r == 1) {
         lbl_80495A74 = r;
-        fn_800DC6C8();
     }
+    fn_800DC6C8();
 }
 
 void fn_800DC7E4(void);
