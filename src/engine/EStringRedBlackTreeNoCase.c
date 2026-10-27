@@ -174,6 +174,19 @@ void *fn_80365BB4(void *arg0) {
     return arg0;
 }
 
+void fn_80365C40(void *arg0, s32 arg1) {
+    void fn_8036619C(void *);
+    void fn_802D20E8(void *);
+    void fn_802D1A00(void *, void *);
+    void *fn_802D0AB8(void);
+
+    fn_8036619C(arg0);
+    fn_802D1A00(fn_802D0AB8(), M2C_FIELD(arg0, void **, 8));
+    if (arg1 & 1) {
+        fn_802D20E8(arg0);
+    }
+}
+
 void fn_80365D3C(void *arg0) {
     M2C_UNK fn_80248488(s32, M2C_UNK, s32);
     fn_80248488(M2C_FIELD(arg0, s32 *, 8), 0, M2C_FIELD(arg0, s32 *, 0xC) * 4);
