@@ -171,6 +171,20 @@ void fn_801B31C4(void *arg0) {
     M2C_FIELD(vt, void (**)(void *), 0x34)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x30));
 }
 
+s32 fn_801B357C(void *self, s32 id, void **out) {
+    void *vt;
+
+    if (out != NULL) {
+        if (id == 1 || id == 0x2BEB2426) {
+            vt = M2C_FIELD(self, void **, 0);
+            M2C_FIELD(vt, void (**)(void *), 0x14)((char *)self + M2C_FIELD(vt, s16 *, 0x10));
+            *out = self;
+            return 1;
+        }
+    }
+    return 0;
+}
+
 s32 fn_801B35EC(void *arg0) {
     return ++M2C_FIELD(arg0, s32 *, 0x60);
 }
