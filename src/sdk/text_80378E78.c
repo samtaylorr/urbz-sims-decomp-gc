@@ -235,6 +235,18 @@ s32 fn_8037E534(s32 arg0) {
     return temp_r31;
 }
 
+u32 fn_8037E578(void) {
+    s32 fn_8025465C(void);
+    void fn_80254684(s32);
+    s32 enabled;
+    u32 ret;
+
+    enabled = fn_8025465C();
+    ret = *(volatile u16 *)0xCC00500A & 0x200;
+    fn_80254684(enabled);
+    return ret;
+}
+
 s32 fn_8037E780(void) {
     return lbl_80496354;
 }
