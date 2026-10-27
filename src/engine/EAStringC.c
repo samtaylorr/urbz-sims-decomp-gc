@@ -2482,6 +2482,17 @@ void fn_802BBD98(void) {
     lbl_80443314[0]();
 }
 
+void fn_802BC600(void **self, u32 n) {
+    extern void fn_802BE3D0(void **, u32, s32, u32, s32, u32);
+    u32 len;
+
+    len = M2C_FIELD(*self, u16 *, 2);
+    if (len > n) {
+        len = n;
+    }
+    fn_802BE3D0(self, n, 0, len, 1, len);
+}
+
 s32 fn_802BC640(void **arg0, u32 arg1) {
     return arg1 < (u16) M2C_FIELD(*arg0, u16 *, 4);
 }
