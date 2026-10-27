@@ -1493,6 +1493,41 @@ void fn_801DF0A8(u8 *self, s32 flags) {
     }
 }
 
+s32 fn_801DF724(void **arg0) {
+    void *fn_802D1FC8(s32);
+    extern char lbl_80417148[];
+    extern char lbl_80417160[];
+    INVNodeList *list = (INVNodeList *)arg0;
+    INVNode *prev;
+    s32 i;
+    INVNode *node;
+    INVNode *free;
+
+    list->unkC = lbl_80417148;
+    list->head = NULL;
+    list->tail = NULL;
+    list->free = NULL;
+    prev = NULL;
+    for (i = 0; i < 64; i++) {
+        node = fn_802D1FC8(0x18);
+        free = list->free;
+        M2C_FIELD(node, char **, 0x14) = lbl_80417160;
+        node->prev = NULL;
+        node->next = NULL;
+        node->unk8 = 0x4B;
+        node->unkC = 0;
+        node->unk10 = 0;
+        if (free == NULL) {
+            list->free = node;
+        } else {
+            prev->next = node;
+            node->prev = prev;
+        }
+        prev = node;
+    }
+    return (s32)arg0;
+}
+
 void fn_801DF7CC(void *arg0, s32 arg1) {
     extern u8 lbl_80417148[];
     void fn_802D20E8(void *);
