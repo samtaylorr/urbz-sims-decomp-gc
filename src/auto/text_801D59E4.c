@@ -42,6 +42,21 @@ s32 fn_801D5AB4(void) {
     return lbl_804945DC;
 }
 
+u32 fn_801D5ABC(u8 *self, s32 arg1) {
+    switch (arg1) {
+    case 0:
+        return 0xB719C67A;
+    case 1:
+        return 0xD48140DC;
+    case 2:
+        return 0x08442A65;
+    case 3:
+        return 0xE91F23B9;
+    default:
+        return 0;
+    }
+}
+
 s32 fn_801D5B20(u8 *self, s32 arg1, Unk801D4CC0 *out, f32 *outf) {
     extern s32 fn_801C9664(u8 *, u32, s32);
     extern Unk801D4CC0 lbl_8043650C;
