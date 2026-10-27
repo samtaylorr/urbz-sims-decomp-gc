@@ -966,6 +966,13 @@ s32 fn_8006FD2C(s32 arg0) {
     return arg0 + 0x70;
 }
 
+void fn_8006FD34(u8 *self, u32 arg1) {
+    s32 fn_8033740C(void *, u32, s32, s32);
+    extern u8 lbl_8045BA40[];
+
+    *(s32 *)(self + 0x4C) = fn_8033740C(lbl_8045BA40, arg1, 0, 0);
+}
+
 s32 fn_8006FDB4(s32 arg0) {
     M2C_UNK fn_8006FF58(s32);
     M2C_UNK fn_800F6FB4(s32, s32, M2C_UNK);
