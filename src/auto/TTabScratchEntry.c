@@ -1710,9 +1710,9 @@ s32 fn_801B24C8(void) {
     return 0;
 }
 
-void fn_801B2540(void **self) {
+void fn_801B2540(void **self, s32 flags) {
     *self = lbl_804152F0;
-    fn_801B1774(self, 0);
+    fn_801B1774(self, flags);
 }
 
 s32 fn_801B2570(void) {
@@ -1737,19 +1737,20 @@ s16 fn_801B23BC(void *arg0, s32 arg1) {
 }
 
 void *fn_801B24D0(void *arg0) {
-    void *r28 = (char *)arg0 + 0x18;
-    fn_801B1644(arg0);
-    *(void **)arg0 = lbl_804152F0;
-    fn_800F687C(r28, (char *)arg0 + 0x20, 0x40);
+    register void *r29 asm("r29") = arg0;
+    void *r28 = (char *)r29 + 0x18;
+    fn_801B1644(r29);
+    *(void **)r29 = lbl_804152F0;
+    fn_800F687C(r28, (char *)r29 + 0x20, 0x40);
     fn_800F68F0(r28, lbl_803DBDE0, -1);
-    *(s32 *)((char *)arg0 + 0x60) = 0;
-    return arg0;
+    *(s32 *)((char *)r29 + 0x60) = 0;
+    return r29;
 }
 
 s32 fn_801B2208(void *arg0, void *arg1) {
-    s32 r31 = (s32)arg0 + 0x18;
-    if (fn_800F68BC(r31)) {
-        fn_800F6A38((s32)arg1, r31);
+    void *p = (char *)arg0 + 0x18;
+    if (fn_800F68BC((s32)p)) {
+        fn_800F6A38((s32)arg1, (s32)p);
         return 1;
     }
     return 0;
