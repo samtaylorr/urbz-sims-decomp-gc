@@ -3057,6 +3057,35 @@ void fn_803A4804(s32 arg0, void *arg1) {
     }
 }
 
+s32 *fn_803A4860(s32 *first, s32 *last, s32 *val) {
+    s32 trip = (last - first) >> 2;
+
+    for (; trip > 0; --trip) {
+        if (*first == *val) return first;
+        ++first;
+        if (*first == *val) return first;
+        ++first;
+        if (*first == *val) return first;
+        ++first;
+        if (*first == *val) return first;
+        ++first;
+    }
+    switch (last - first) {
+    case 3:
+        if (*first == *val) return first;
+        ++first;
+    case 2:
+        if (*first == *val) return first;
+        ++first;
+    case 1:
+        if (*first == *val) return first;
+        ++first;
+    case 0:
+    default:
+        return last;
+    }
+}
+
 void fn_803A4910(s32 *first, s32 hole, s32 len, s32 val, s32 comp);
 void fn_803A4A28(s32 *first, s32 *last, s32 comp) {
     s32 len = last - first;
