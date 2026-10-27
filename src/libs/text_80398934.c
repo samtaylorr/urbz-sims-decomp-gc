@@ -196,10 +196,10 @@ void *fn_80399BE8(u32 n) {
     extern void **lbl_804069A8[];
     void ***fl = &lbl_804069A8[(n - 1) >> 3];
     void **r = *fl;
-    if (r == NULL) {
-        r = fn_80399B3C(n);
-    } else {
+    if (r != NULL) {
         *fl = *r;
+    } else {
+        r = fn_80399B3C(n);
     }
     return r;
 }
@@ -3114,6 +3114,27 @@ void fn_803A4AA8(s32 *first, s32 *last, s32 comp) {
 void fn_803A4AE8(s32 *first, s32 *middle, s32 *last, s32 *val, s32 comp);
 void fn_803A4BB4(s32 *first, s32 *middle, s32 *last, s32 comp) {
     fn_803A4AE8(first, middle, last, 0, comp);
+}
+
+s32 *fn_803A4BDC(s32 *first, s32 *last, s32 pivot, s32 (*comp)(s32, s32)) {
+    s32 tmp;
+
+    while (1) {
+        last--;
+        while (comp(*first, pivot)) {
+            first++;
+        }
+        while (comp(pivot, *last)) {
+            last--;
+        }
+        if (!(first < last)) {
+            return first;
+        }
+        tmp = *first;
+        *first = *last;
+        *last = tmp;
+        first++;
+    }
 }
 
 void fn_803A4DD0(s32 *last, s32 val, s32 comp) {
@@ -7794,6 +7815,35 @@ void fn_803B2E44(void *arg0, u32 n) {
             tmp = mem;
         }
         PtrVec_Set((void **)v, (void **)tmp, (void **)(oldSize * 8 + (s32)tmp), (void **)(n * 8 + (u32)tmp));
+    }
+}
+
+s32 *fn_803B4BE4(s32 *first, s32 *last, s32 *val) {
+    s32 trip = (last - first) >> 2;
+
+    for (; trip > 0; --trip) {
+        if (*first == *val) return first;
+        ++first;
+        if (*first == *val) return first;
+        ++first;
+        if (*first == *val) return first;
+        ++first;
+        if (*first == *val) return first;
+        ++first;
+    }
+    switch (last - first) {
+    case 3:
+        if (*first == *val) return first;
+        ++first;
+    case 2:
+        if (*first == *val) return first;
+        ++first;
+    case 1:
+        if (*first == *val) return first;
+        ++first;
+    case 0:
+    default:
+        return last;
     }
 }
 
