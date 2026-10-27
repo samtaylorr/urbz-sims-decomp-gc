@@ -186,7 +186,7 @@ void *fn_80052A1C(u32 size) {
     p = fn_802D197C(heap, size, 0x10);
     if (p == NULL) {
         p = fn_802DC3C0(heap, size, 0x10, 0, 0);
-        if (p == NULL && heap == fn_802D0AB8(p)) {
+        if (p == NULL && heap == ((void *(*)(void)) fn_802D0AB8)()) {
             return fn_802DC3C0(fn_802D0B3C(), size, 0x10, 0, 0);
         }
     }
