@@ -2343,6 +2343,17 @@ void fn_802055FC(void *arg0, char *arg1) {
     *(struct Str7 *)arg1 = *(struct Str7 *)lbl_803E60D8;
 }
 
+void fn_80205710(void *arg0, u16 *arg1) {
+    void fn_801FFAE4(void *, u16 *);
+    extern s32 lbl_8041FC0C[];
+    extern u16 lbl_803E4CA4[];
+    if (lbl_8041FC0C[0] != 0) {
+        fn_801FFAE4(arg0, arg1);
+    } else {
+        *arg1 = lbl_803E4CA4[0];
+    }
+}
+
 void fn_80205750(void *arg0, s32 arg1) {
     void fn_80245BB4(s32, char *, ...);
     extern char lbl_803E4E18[];
