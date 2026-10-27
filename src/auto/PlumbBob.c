@@ -1105,25 +1105,21 @@ void fn_8007AC00(s32 arg0, s32 arg1) {
     }
 }
 
-s32 fn_8007AC7C(s32 arg0, s32 arg1) {
+void fn_8007AC7C(s32 arg0, s32 arg1) {
     extern s32 lbl_80494198;
     extern void *fn_8007C370(s32, s32);
     s32 found;
     s32 i;
-    s32 p;
     void *r;
 
     found = 0;
-    p = arg0 + 0xF4;
     for (i = 0; i < lbl_80494198 && !found; i++) {
-        r = fn_8007C370(p, arg1);
+        r = fn_8007C370(arg0 + 0xF4 + i * 0x19C, arg1);
         if (r != NULL) {
             M2C_FIELD(r, s32 *, 0x94) = 0;
             found = 1;
         }
-        p += 0x19C;
     }
-    return found;
 }
 
 void fn_8007ACF8(void *arg0) {
