@@ -4264,6 +4264,11 @@ void fn_800EECC4(s32 arg0, s32 arg1, s32 arg2) {
     fn_800EC848(arg0, arg1, arg2, var_r6);
 }
 
+void fn_800EED94(s32 arg0, void **arg1, s32 arg2) {
+    void fn_800EC8E0(void);
+    ((void (*)(s32, s32, s32, s32))fn_800EC8E0)(arg0, (s32)fn_800EAFCC(arg1), arg2, fn_800EF6F8(arg1));
+}
+
 void fn_800EC8E0(void);
 void fn_800EEDEC(void) {
     fn_800EC8E0();
