@@ -79,7 +79,7 @@ s32 fn_8033394C(void) {
     s32 i;
 
     ret = -1;
-    for (i = 0; i < ECtrl_NumPorts(); i++) {
+    for (i = 0; i <= 3; i++) {
         if (fn_803105F0(lbl_804939C0[i]) != 0) {
             ret = i;
             break;
