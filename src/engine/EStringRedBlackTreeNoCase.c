@@ -452,6 +452,14 @@ void *fn_80367098(void *arg0, void *arg1) {
     return arg0;
 }
 
+void *fn_803670E4(void *arg0, void *arg1) {
+    void *vt;
+
+    vt = M2C_FIELD(arg1, void **, 0x54);
+    M2C_FIELD(vt, void (**)(void *, void *), 0x14)((u8 *)arg1 + M2C_FIELD(vt, s16 *, 0x10), arg0);
+    return arg0;
+}
+
 void fn_80367258(void *arg0, void *arg1) {
     M2C_UNK fn_80248A10(void *, void *, s32);
     fn_80248A10(arg0, arg1, 0x40);
