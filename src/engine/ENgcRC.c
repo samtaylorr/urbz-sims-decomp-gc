@@ -673,6 +673,17 @@ void fn_8034BAF8(void) {
     fn_803552E4(lbl_8046DF78);
 }
 
+void fn_8034BB5C(void *self, s32 size, s32 a2, s32 a3, s32 a4, s32 a5, s32 a6) {
+    void fn_8035613C(void *, s32, s32, s32, s32, s32, s32);
+    extern u8 lbl_8046DF78[];
+    u8 *obj;
+    if (size != 0) {
+        obj = *(u8 **)self;
+        *(s32 *)(obj + 0x4C) += size;
+        fn_8035613C(lbl_8046DF78, size, a2, a3, a4, a5, a6);
+    }
+}
+
 void fn_8034BBA8(void *self, s32 arg1, s32 size) {
     void fn_803547E0(void *, s32, s32);
     void fn_802FBC60(void *, s32, s32);
