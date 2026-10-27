@@ -1183,22 +1183,32 @@ u16 fn_802D08C8(void *arg0) {
     if (idx == 0) {
         return 0;
     }
-    M2C_FIELD(arg0, u16 *, 0x1006) = *(u16 *)(M2C_FIELD(arg0, u32 *, 0x1008) + idx * 0x48);
+    M2C_FIELD(arg0, u16 *, 0x1006) = M2C_FIELD(arg0, EMat4Slot **, 0x1008)[idx].idx;
     return idx;
 }
 
 void fn_802D08F4(void *arg0, s32 arg1) {
+    s32 off;
+    u8 *base;
+
     if (arg1 != 0) {
-        *(u16 *)(M2C_FIELD(arg0, u32 *, 0x1008) + arg1 * 0x48) = M2C_FIELD(arg0, u16 *, 0x1006);
+        off = arg1 * 0x48;
+        base = (u8 *)M2C_FIELD(arg0, u32 *, 0x1008);
+        *(u16 *)(base + off) = M2C_FIELD(arg0, u16 *, 0x1006);
         M2C_FIELD(arg0, u16 *, 0x1006) = arg1;
     }
 }
 
 void *fn_802D0914(void *arg0, s32 arg1) {
+    s32 off;
+    u8 *base;
+
     if (arg1 == 0) {
         return NULL;
     }
-    return (void *)(M2C_FIELD(arg0, u32 *, 0x1008) + arg1 * 0x48);
+    off = arg1 * 0x48;
+    base = (u8 *)M2C_FIELD(arg0, u32 *, 0x1008);
+    return base + off;
 }
 
 void fn_802D0960(void *arg0, f32 *src, s16 *dst) {
