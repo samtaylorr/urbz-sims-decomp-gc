@@ -17,6 +17,19 @@ static inline void QSSVec_Init(QSSVec *v) {
     QSSAlloc_Clear(&v->alloc);
 }
 
+static inline s32 QVec_Count(s32 **vec) {
+    s32 *arr = *vec;
+    s32 n = 0;
+    if (arr != NULL) {
+        n = arr[-1];
+    }
+    return n;
+}
+
+static inline s32 QVec_At(s32 **vec, s32 i) {
+    return (*vec)[i];
+}
+
 static inline void QSSVec_Dealloc(void *p, s32 end) {
     void fn_802D20E8(void *);
     void fn_803997AC(void *, u32);
@@ -757,6 +770,16 @@ s32 fn_800FC788(void *arg0, s32 arg1) {
         return M2C_FIELD(M2C_FIELD(arg0, void **, 4), s32 *, 8);
     }
     return -1;
+}
+
+s32 fn_800FC814(s32 arg0) {
+    s32 r = 0;
+    switch (arg0) {
+    case 1: r = 0xFFF; break;
+    case 2: r = 0x1FFF; break;
+    case 3: r = 0x2328; break;
+    }
+    return r;
 }
 
 void fn_800FC8A8(s32 arg0, s32 arg1) {
