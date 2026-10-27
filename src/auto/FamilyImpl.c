@@ -301,7 +301,48 @@ void fn_8010C268(void **self, s32 flags) {
     }
 }
 
-s32 fn_8010C3F8(void *arg0, void *arg1) {
+f32 fn_8010C2A4(void *arg0, s32 key, f32 def) {
+    u8 *t;
+    u8 *p;
+    s32 n;
+    f32 *r;
+
+    t = M2C_FIELD(arg0, u8 **, 0xC);
+    if (t != NULL) {
+        p = *(u8 **)t;
+        n = 0;
+        if (p != NULL) {
+            n = *(s32 *)(p - 4);
+        }
+        r = (f32 *)fn_8010C464((s32 (*)[2])p, (s32 (*)[2])(p + n * 8), key);
+        if (r != NULL) {
+            def = *r;
+        }
+    }
+    return def;
+}
+
+s32 fn_8010C30C(void *arg0, s32 key) {
+    u8 *t;
+    u8 *p;
+    s32 n;
+    s32 result = 0;
+
+    t = M2C_FIELD(arg0, u8 **, 0xC);
+    if (t != NULL) {
+        p = *(u8 **)t;
+        n = 0;
+        if (p != NULL) {
+            n = *(s32 *)(p - 4);
+        }
+        if (fn_8010C464((s32 (*)[2])p, (s32 (*)[2])(p + n * 8), key) != NULL) {
+            result = 1;
+        }
+    }
+    return result;
+}
+
+s32 fn_8010C3F8(void *arg0, void *arg1, s32 arg2) {
     s32 fn_803A1484(void *, void *);
     u8 *p;
     s32 n;
