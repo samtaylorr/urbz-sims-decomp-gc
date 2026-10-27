@@ -87,12 +87,12 @@ void fn_80052798(s32 arg0, s32 arg1) {
     extern f32 lbl_8041FDF4[];
 
     if (arg1 == 0xFFFF && arg0 != 0) {
-        lbl_8041FE00[0] = lbl_803C73D4[0];
-        lbl_8041FE00[1] = lbl_803C73D8[0];
-        lbl_8041FE00[2] = lbl_803C73DC[0];
         lbl_8041FDF4[0] = lbl_803C73D4[0];
         lbl_8041FDF4[1] = lbl_803C73D8[0];
         lbl_8041FDF4[2] = lbl_803C73DC[0];
+        lbl_8041FE00[0] = lbl_803C73D4[0];
+        lbl_8041FE00[1] = lbl_803C73D8[0];
+        lbl_8041FE00[2] = lbl_803C73DC[0];
     }
 }
 
