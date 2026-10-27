@@ -38,6 +38,21 @@ s32 fn_801D54D4(void) {
     return lbl_804945D4;
 }
 
+u32 fn_801D54DC(u8 *self, s32 arg1) {
+    switch (arg1) {
+    case 0:
+        return 0x404AEFEB;
+    case 1:
+        return 0x4C80B446;
+    case 2:
+        return 0xDB900C27;
+    case 3:
+        return 0xF95D5817;
+    default:
+        return 0;
+    }
+}
+
 s32 fn_801D5650(void) {
     return 0;
 }
