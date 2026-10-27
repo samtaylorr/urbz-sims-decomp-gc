@@ -3274,6 +3274,18 @@ void fn_800E6658(s32 *self) {
     }
 }
 
+void fn_800E8274(s32 *self) {
+    u8 *obj = (u8 *)self[0x18 / 4];
+    if (obj != 0) {
+        u8 *vt = *(u8 **)(obj + 0x44);
+        (*(void (**)(void *))(vt + 0x14))(obj + *(s16 *)(vt + 0x10));
+        obj = (u8 *)self[0x18 / 4];
+        if (obj != 0 && *(s32 *)(*(u8 **)(obj + 0x70) + 0x34) == 1) {
+            fn_800E3B80(self, 2);
+        }
+    }
+}
+
 void fn_800E82E8(void *arg0, s32 arg1) {
     void *temp_r11;
     void *temp_r9;
@@ -3282,6 +3294,35 @@ void fn_800E82E8(void *arg0, s32 arg1) {
     temp_r11 = M2C_FIELD(arg0, void **, 0x18);
     temp_r9 = M2C_FIELD(temp_r11, void **, 0x44);
     M2C_FIELD(temp_r9, M2C_UNK (**)(void *, s32), 0x1C)(temp_r11 + M2C_FIELD(temp_r9, s16 *, 0x18), arg1);
+}
+
+void fn_800E9220(u8 *self) {
+    u8 *obj;
+    u8 *vt;
+    s32 *g;
+    obj = *(u8 **)(self + 0x94);
+    if (obj != 0) {
+        vt = *(u8 **)(obj + 0x80);
+        (*(void (**)(void *, s32))(vt + 0xC))(obj + *(s16 *)(vt + 8), 3);
+        *(u8 **)(self + 0x94) = 0;
+    }
+    fn_800E44CC((s32)(self + 0x38));
+    g = (s32 *)lbl_8041F754;
+    obj = (u8 *)g[0x28 / 4];
+    if (obj != 0) {
+        vt = *(u8 **)(obj + 0x80);
+        (*(void (**)(void *, s32))(vt + 0xC))(obj + *(s16 *)(vt + 8), 3);
+        g[0x28 / 4] = 0;
+    }
+}
+
+void fn_800E92B8(s32 arg0, f32 arg1) {
+    extern s32 fn_80046880(void *);
+    extern void fn_80046FE0(void *);
+    if (fn_80046880(lbl_8041F754)) {
+        ((void (*)(s32, f32))fn_800E3BC0)(arg0, arg1);
+        fn_80046FE0(lbl_8041F754);
+    }
 }
 
 void fn_800E9314(void *arg0, s32 arg1) {
@@ -4530,6 +4571,11 @@ void fn_800EE91C(void) {
 
 void fn_800EE93C(s32 arg0, const char *arg1, s32 arg2) {
     ((void (*)(s32, s32, s32, s32))fn_800EC59C)(arg0, (s32)arg1, arg2, arg1 ? fn_80248808(arg1) : 0);
+}
+
+void fn_800EEA6C(s32 arg0, void **arg1, s32 arg2) {
+    void fn_800EC6BC(s32, s32, s32, s32);
+    fn_800EC6BC(arg0, (s32)fn_800EAFCC(arg1), arg2, fn_800EF6F8(arg1));
 }
 
 void fn_800EC6BC(void);
