@@ -3,6 +3,15 @@
 
 extern void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
+extern void fn_802EA51C(void *, s32, s32, s32, s32, f32);
+extern f32 lbl_803C73BC[];
+extern void fn_80050C6C(void *);
+extern void fn_80052468(void *);
+extern u8 lbl_8041F94C[];
+extern s32 fn_8004E8F0(void *, s32);
+extern void *fn_802D197C(void *, u32, s32);
+extern void *fn_802DC3C0(void *, u32, s32, s32, s32);
+extern void *fn_802D0B3C(void);
 void fn_80052238(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x384) = (s32) (M2C_FIELD(arg0, s32 *, 0x384) | arg1);
 }
