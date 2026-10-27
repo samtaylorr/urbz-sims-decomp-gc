@@ -9490,13 +9490,15 @@ void fn_803BC6AC(u8 *p, s32 n) {
 
 void fn_803BC6F8(s32 *dst, s32 *src, s32 n) {
     struct Elem224 { s32 v[55]; s32 keep; };
+    struct Keep { s32 x; };
     struct Elem224 *d = (struct Elem224 *)dst;
     struct Elem224 *s = (struct Elem224 *)src;
 
     while (--n != -1) {
-        s32 keep = d->keep;
+        struct Keep t;
+        t.x = d->keep;
         *d = *s;
-        d->keep = keep;
+        d->keep = t.x;
         d++;
         s++;
     }
@@ -10472,6 +10474,30 @@ s32 *fn_803C08EC(s32 *self, s32 *other) {
     fn_8039A334(self, other[1], 0);
     fn_8039A2DC((s32 *)self[0], (s32 *)other[0], other[1]);
     return self;
+}
+
+void fn_803C0938(u8 *dst, u8 *src, s32 n) {
+    while (--n != -1) {
+        u8 *d = dst;
+        u8 *s = src;
+        u8 *dp;
+        u8 *sp;
+        s32 i;
+        src += 0xB0;
+        dst += 0xB0;
+        dp = d;
+        sp = s;
+        for (i = 0x80; i != 0; i--) {
+            *dp++ = *sp++;
+        }
+        M2C_FIELD(d, s32 *, 0x80) = M2C_FIELD(s, s32 *, 0x80);
+        M2C_FIELD(d, s32 *, 0x84) = M2C_FIELD(s, s32 *, 0x84);
+        M2C_FIELD(d, s32 *, 0x88) = M2C_FIELD(s, s32 *, 0x88);
+        M2C_FIELD(d, s32 *, 0x8C) = M2C_FIELD(s, s32 *, 0x8C);
+        M2C_FIELD(d, s32 *, 0x90) = M2C_FIELD(s, s32 *, 0x90);
+        fn_803C08EC((s32 *)(d + 0x94), (s32 *)(s + 0x94));
+        fn_803C08EC((s32 *)(d + 0xA0), (s32 *)(s + 0xA0));
+    }
 }
 
 extern void fn_8039A024(void *);
