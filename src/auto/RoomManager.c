@@ -85,6 +85,14 @@ static inline void RMMapIter_Inc(RMMapIter *it) {
     it->node = (RMMapNode *)fn_8039AB24((void **)it->node);
 }
 
+static inline void RMMap_BeginP(RMMapIter *out, char *map) {
+    out->node = (*(RMMapNode **)(map + 4))->left;
+}
+
+static inline void RMMap_EndP(RMMapIter *out, char *map) {
+    out->node = *(RMMapNode **)(map + 4);
+}
+
 extern s32 lbl_80494538;
 void fn_8018FA84(void *arg0, s32 arg1);
 void fn_8018EDE0(void **obj) {
