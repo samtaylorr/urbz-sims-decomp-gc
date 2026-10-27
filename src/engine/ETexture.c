@@ -339,11 +339,11 @@ s32 fn_8036FFC0(s32 *p) {
 }
 
 s32 fn_8036FFE8(s32 *p) {
-    if (*p != 0) {
-        *p = 0;
-        return 1;
+    if (*p == 0) {
+        return 0;
     }
-    return 0;
+    *p = 0;
+    return 1;
 }
 
 void fn_802D2FD0(void);
@@ -383,8 +383,8 @@ void fn_803701E8(void *self, s32 flags) {
     void fn_80338184(void *, s32);
     u8 *p;
 
-    M2C_FIELD(self, void **, 0) = lbl_8041DDC8;
     lbl_80495244--;
+    M2C_FIELD(self, void **, 0) = lbl_8041DDC8;
     fn_803BFB20((u8 *)self + 0x90, 2);
     p = (u8 *)self + 0x58;
     M2C_FIELD(p, void **, 0x10) = lbl_8041DE50;
