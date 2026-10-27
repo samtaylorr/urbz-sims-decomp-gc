@@ -8,6 +8,54 @@ typedef struct EMat4Node {
     void *value;
 } EMat4Node;
 
+typedef struct ScratchPool {
+    u32 base;
+    void *free;
+    u32 size;
+} ScratchPool;
+
+void *fn_802D0AB8(void);
+void *fn_802D0B3C(void);
+void *fn_802D197C(void *, u32, s32);
+void *fn_802DBBCC(void *, u32, s32);
+
+static inline void *ScratchPool_Alloc(ScratchPool *pool) {
+    void *p = pool->free;
+    if (p != NULL) {
+        pool->free = *(void **)p;
+    }
+    return p;
+}
+
+static inline int ScratchPool_Contains(ScratchPool *pool, void *p) {
+    return (u32)p >= pool->base && (u32)p < pool->base + pool->size;
+}
+
+static inline void ScratchPool_Free(ScratchPool *pool, void *p) {
+    if (p != NULL) {
+        *(void **)p = pool->free;
+        pool->free = p;
+    }
+}
+
+static inline void *Heap_Alloc(u32 size) {
+    void *heap;
+    void *p;
+
+    heap = fn_802D0AB8();
+    if (size == 0) {
+        return NULL;
+    }
+    p = fn_802D197C(heap, size, 4);
+    if (p == NULL) {
+        p = fn_802DBBCC(heap, size, 0);
+        if (p == NULL && heap == fn_802D0AB8()) {
+            return fn_802DBBCC(fn_802D0B3C(), size, 0);
+        }
+    }
+    return p;
+}
+
 
 s32 fn_80364E64(void *arg0) {
     void *temp_r11;
