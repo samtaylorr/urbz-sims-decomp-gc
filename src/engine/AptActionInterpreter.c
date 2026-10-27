@@ -260,8 +260,8 @@ void fn_8028A06C(void *arg0, u8 **arg1) {
 void fn_8028A1F8(void *arg0, u8 **arg1) {
     s32 fn_802B71E8(void *);
     void fn_802828BC(void *, u8 **);
-    void *fn_802814D0(void *, u8 **);
-    void fn_802BBE7C(void);
+    void fn_802814D0(void *, u8 **);
+    void fn_802BBE7C(void *);
     extern void *lbl_80494B48;
     char *obj;
     s32 count;
@@ -276,7 +276,7 @@ void fn_8028A1F8(void *arg0, u8 **arg1) {
     fn_802828BC(arg0, arg1);
     fn_802814D0(arg0, arg1);
     if (M2C_FIELD(lbl_80494B48, s32 *, 4) != 0 && M2C_FIELD(arg0, s32 *, 0) == 0) {
-        fn_802BBE7C();
+        fn_802BBE7C(lbl_80494B48);
     }
 }
 
