@@ -280,6 +280,17 @@ void fn_80380DB0(void) {
     }
 }
 
+void **fn_80380FEC(void) {
+    extern void *lbl_804763C0[];
+    void **p;
+
+    p = lbl_804763C0[0];
+    if (p != NULL) {
+        lbl_804763C0[0] = *p;
+    }
+    return p;
+}
+
 void fn_80381010(void *arg0) {
     extern void *lbl_80496388;
     M2C_FIELD(arg0, void **, 8) = (void *) lbl_80496388;
