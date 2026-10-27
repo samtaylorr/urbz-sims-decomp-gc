@@ -1022,9 +1022,11 @@ void fn_800D4F0C(void) {
 
 void fn_800D4F1C(s32 *self) {
     extern void fn_800D2CE8(s32 *);
+    s32 *g;
     fn_800D2CE8(self);
-    if (((s32 *)lbl_8041F754)[0x78 / 4] != 0) {
-        ((s32 *)lbl_8041F754)[0x78 / 4] = 0;
+    g = (s32 *)&lbl_8041F754;
+    if (g[0x78 / 4] != 0) {
+        g[0x78 / 4] = 0;
         fn_800E3B80(self, 2);
     }
 }
