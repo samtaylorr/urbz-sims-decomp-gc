@@ -1376,13 +1376,12 @@ void fn_802D76DC(void *arg0) {
 
 void fn_802D787C(void *arg0, s32 arg1, f32 *arg2) {
     extern u32 fn_802DE634(s32, s32, s32);
-    f32 *p;
+    EStringVec3Scale *s;
     s32 i;
 
-    p = (f32 *)((u8 *)arg0 + 0x68);
+    s = arg0;
     for (i = 0; i < 3; i++) {
-        arg2[i] = (f32)fn_802DE634(M2C_FIELD(arg0, s32 *, 0x0), arg1, M2C_FIELD(arg0, s8 *, 0x1F)) * p[-3] + p[0];
-        p++;
+        arg2[i] = (f32)fn_802DE634(M2C_FIELD(arg0, s32 *, 0x0), arg1, M2C_FIELD(arg0, s8 *, 0x1F)) * s->scale[i] + s->offset[i];
         arg1 += M2C_FIELD(arg0, s8 *, 0x1F);
     }
 }
