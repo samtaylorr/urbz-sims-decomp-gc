@@ -55,6 +55,15 @@ void fn_80336D24(char *self) {
     ERMLock_Unlock(lock);
 }
 
+void fn_80336D94(char *self) {
+    void fn_80338944(char *, s32);
+    ERMLock lock[1];
+
+    ERMLock_Lock(lock, self);
+    fn_80338944(self + 0x40, *(s32 *)(self + 0x54));
+    ERMLock_Unlock(lock);
+}
+
 void fn_80336E04(void) {
 
 }
