@@ -496,6 +496,16 @@ void fn_8030A8E0(s32 a, f32 *b) {
     fn_8030A908(a, b[0], b[1]);
 }
 
+s32 fn_8030A950(u8 *self, f32 *rect) {
+    f32 *bounds = (f32 *)(self + 0x60);
+    s32 inside = 0;
+
+    if (rect[0] >= bounds[0] && rect[2] <= bounds[2] && rect[1] >= bounds[1] && rect[3] <= bounds[3]) {
+        inside = 1;
+    }
+    return inside ^ 1;
+}
+
 extern s32 lbl_80494EC0;
 s32 fn_8030A9B4(void) {
     return lbl_80494EC0;
