@@ -809,8 +809,6 @@ s32 fn_801A0690(s32 arg0, s32 arg1) {
     case 2:
         break;
     case 3:
-        n += 1;
-        break;
     case 4:
         n += 1;
         break;
@@ -833,6 +831,15 @@ void fn_801A0858(void *self, s32 flags) {
     }
 }
 
+void *fn_801A0880(void *arg0, void *arg1) {
+    struct Blk {
+        s32 v[14];
+    };
+
+    *(struct Blk *) arg0 = *(struct Blk *) arg1;
+    return arg0;
+}
+
 s32 fn_801A08F4(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0) != 0;
 }
@@ -840,14 +847,14 @@ s32 fn_801A08F4(void *arg0) {
 s32 fn_801A090C(void *arg0, u32 arg1) {
     extern s32 fn_801A0CC4(void *, u32);
     u32 v;
-    s32 r;
+    u32 r;
 
     v = M2C_FIELD(arg0, u32 *, 0) & arg1;
-    if (v != arg1) {
-        return 0;
+    if (v == arg1) {
+        r = fn_801A0CC4(arg0, v);
+        return !(r == 2 || r == 0xC || r == 0xD || r == 0xE);
     }
-    r = fn_801A0CC4(arg0, v);
-    return !(r == 2 || r == 0xC || r == 0xD || r == 0xE);
+    return 0;
 }
 
 s32 fn_801A0978(void *arg0, u32 arg1) {
@@ -856,12 +863,9 @@ s32 fn_801A0978(void *arg0, u32 arg1) {
     s32 r;
 
     v = M2C_FIELD(arg0, u32 *, 0) & arg1;
-    if (v != arg1) {
-        return 0;
-    }
-    r = fn_801A0CC4(arg0, v);
-    if (r == 2 || r == 0xC || r == 0xD || r == 0xE) {
-        return 1;
+    if (v == arg1) {
+        r = fn_801A0CC4(arg0, v);
+        return (r == 2 || r == 0xC || r == 0xD || r == 0xE) ? 1 : 0;
     }
     return 0;
 }
