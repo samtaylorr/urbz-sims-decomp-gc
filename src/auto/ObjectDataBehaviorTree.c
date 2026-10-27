@@ -210,12 +210,13 @@ void *fn_801B2FF0(void *self, s32 n) {
 }
 
 void fn_801B3050(void *self, s32 flags) {
+    extern void fn_802D211C(void *);
     *(void **)self = lbl_80415470;
     if (M2C_FIELD(self, s32 *, 8) != 0) {
         if (M2C_FIELD(self, void **, 0x54) != NULL) {
             fn_802D211C(M2C_FIELD(self, void **, 0x54));
-            M2C_FIELD(self, void **, 0x54) = NULL;
         }
+        M2C_FIELD(self, void **, 0x54) = NULL;
     }
     fn_801B262C(self, flags);
 }
