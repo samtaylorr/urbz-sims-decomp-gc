@@ -118,6 +118,25 @@ s32 fn_801B2D08(void) {
     return 0;
 }
 
+void fn_801B2D10(void *self, s32 flags) {
+    extern u8 lbl_804154E8[];
+    extern void fn_8031EA2C(void *);
+    extern void fn_801B2E4C(void *);
+    *(void **)self = lbl_804154E8;
+    if (M2C_FIELD(self, s32 *, 8) != 0) {
+        if (M2C_FIELD(self, void **, 0x60) != NULL) {
+            fn_8031EA2C(M2C_FIELD(self, void **, 0x60));
+            M2C_FIELD(self, void **, 0x60) = NULL;
+        }
+        M2C_FIELD(self, void **, 0x60) = NULL;
+        M2C_FIELD(self, s32 *, 8) = 0;
+    }
+    fn_801B262C(self, 0);
+    if (flags & 1) {
+        fn_801B2E4C(self);
+    }
+}
+
 void *fn_801B2D94(u32 size) {
     if (size == 0x68) {
         void *p = ScratchPool_Alloc((ScratchPool *)lbl_80435FB8);
