@@ -50,8 +50,9 @@ typedef struct {
 void fn_8039F498(RbIter *ret, void **tree, void **x, void **y, u32 *v, s32 w);
 void **fn_8039F5BC(void **node);
 
-static inline void RbIter_dec(RbIter *it) {
+static inline RbIter *RbIter_dec(RbIter *it) {
     it->node = fn_8039F5BC(it->node);
+    return it;
 }
 
 typedef struct Elem14 {
@@ -2196,7 +2197,7 @@ RbInsertPair fn_8039F62C(void **tree, u32 *v) {
             ret.second = 1;
             return ret;
         }
-        j.node = fn_8039F5BC(j.node);
+        RbIter_dec(&j);
     }
     if ((u32)j.node[4] < *v) {
         fn_8039F498(&b, tree, x, y, v, 0);
@@ -8061,7 +8062,14 @@ void fn_803B32E4(void *arg0, u32 n) {
                 Pair *src;
                 Pair *dst;
                 Pair *mem;
-                mem = PairVec_Allocate(n, &bytes);
+                if (n != 0) {
+                    u32 sz = n * sizeof(Pair);
+                    mem = PtrVec_Allocate(sz);
+                    bytes = sz;
+                } else {
+                    mem = NULL;
+                    bytes = 0;
+                }
                 dst = mem;
                 for (src = start; src != finish; src++) {
                     dst->a = src->a;
@@ -8085,7 +8093,16 @@ void fn_803B32E4(void *arg0, u32 n) {
                 }
             }
         } else {
-            tmp = PairVec_Allocate(n, &bytes);
+            Pair *mem;
+            if (n != 0) {
+                u32 sz = n * sizeof(Pair);
+                mem = PtrVec_Allocate(sz);
+                bytes = sz;
+            } else {
+                mem = NULL;
+                bytes = 0;
+            }
+            tmp = mem;
         }
         PtrVec_Set((void **)v, (void **)tmp, (void **)(oldSize * 8 + (s32)tmp), (void **)(bytes + (u32)tmp));
     }
