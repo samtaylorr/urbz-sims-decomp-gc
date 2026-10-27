@@ -4151,6 +4151,11 @@ void *fn_800ED814(void *self) {
     return self;
 }
 
+void *fn_800ED844(void *arg0, void *arg1, const char *arg2) {
+    ((void (*)(void *, void *, const char *, s32))fn_800EBF1C)(arg0, arg1, arg2, arg2 ? fn_80248808(arg2) : 0);
+    return arg0;
+}
+
 void *fn_800EDE14(void *arg0, u32 arg1, u32 arg2, const char *arg3) {
     void fn_800EC140(void *, u32, u32, const char *, s32);
     u32 n;
