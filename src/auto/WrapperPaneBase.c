@@ -88,6 +88,10 @@ s32 fn_800C5640(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x7C) > 0;
 }
 
+s32 fn_800C5658(void *arg0) {
+    return M2C_FIELD(M2C_FIELD(arg0, void **, 0x70), s32 *, 0x34) == 1;
+}
+
 void fn_800C56B4(void *arg0, f32 farg0) {
     M2C_FIELD(arg0, f32 *, 0x80) = farg0;
 }
