@@ -1956,6 +1956,12 @@ void fn_800DD0CC(s32 *self) {
     }
 }
 
+void fn_800DD140(s32 *self) {
+    extern f32 lbl_803D4C04[];
+    void fn_800E3DBC(s32, s32, f32);
+    fn_800E3DBC(self[2], 2, lbl_803D4C04[0]);
+}
+
 void fn_800DD170(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x18) = 0;
 }
