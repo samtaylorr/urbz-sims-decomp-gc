@@ -67,6 +67,14 @@ s32 fn_80317C38(s32 arg0, s32 arg1) {
     return 0;
 }
 
+s32 fn_80317C88(s32 arg0, s32 arg1) {
+    s32 sp8;
+    if (fn_80317758(arg0, 0, arg1, &sp8, 0) != 0) {
+        return arg0 + sp8;
+    }
+    return 0;
+}
+
 s32 fn_80317BB8(s32, s32);
 s32 fn_80317CD8(s32 arg0, s32 arg1) {
     s32 temp_r3;
