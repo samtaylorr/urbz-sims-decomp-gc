@@ -241,6 +241,28 @@ void fn_8031ED60(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x1C) = arg1;
 }
 
+void *fn_8031ED68(u32 size) {
+    void *fn_802D0AB8();
+    void *fn_802D197C(void *heap, u32 size, s32 align);
+    void *fn_802DBBCC(void *heap, u32 size, s32 align);
+    void *fn_802D0B3C(void);
+    void *heap;
+    void *p;
+
+    heap = fn_802D0AB8();
+    if (size == 0) {
+        return NULL;
+    }
+    p = fn_802D197C(heap, size, 4);
+    if (p == NULL) {
+        p = fn_802DBBCC(heap, size, 0);
+        if (p == NULL && heap == fn_802D0AB8()) {
+            return fn_802DBBCC(fn_802D0B3C(), size, 0);
+        }
+    }
+    return p;
+}
+
 void *fn_8031EDF8(u32 size, void *p);
 void *fn_8031EDF8(u32 size, void *p) {
     return p;
