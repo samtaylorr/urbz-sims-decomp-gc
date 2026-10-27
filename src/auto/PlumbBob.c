@@ -784,6 +784,23 @@ void fn_80077678(void *arg0) {
     M2C_FIELD(arg0, s8 *, 0xF80) = 1;
 }
 
+void fn_80077EDC(void *arg0) {
+    void fn_8000AA2C();
+    extern u8 lbl_803CA3C0[];
+    extern s32 lbl_8041FA1C[];
+
+    if (M2C_FIELD(arg0, void **, 0xF70) != NULL) {
+        u8 *obj;
+        fn_8000AA2C(lbl_8041FA1C[0], lbl_803CA3C0, 0, 0, 0);
+        obj = M2C_FIELD(arg0, u8 **, 0xF70);
+        if (obj != NULL) {
+            u8 *vt = *(u8 **)(obj + 0x44);
+            (*(void (**)(void *, s32))(vt + 0xc))(obj + *(s16 *)(vt + 8), 3);
+        }
+        M2C_FIELD(arg0, void **, 0xF70) = NULL;
+    }
+}
+
 void fn_80077F64(s32 arg0) {
     M2C_UNK fn_8007C278(s32);
     s32 var_r30;
