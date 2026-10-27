@@ -718,15 +718,15 @@ void fn_802AB97C(void *arg0, s32 arg1) {
     }
 }
 
-void *fn_802ACAA4(char *self, s32 arg1, s32 arg2) {
+void *fn_802ACAA4(void *arg0, s32 arg1, s32 arg2) {
     extern char lbl_804189F0[];
     extern void fn_802B6FA8(void *, s32);
     extern void fn_802ADDD8(void *, s32);
-    fn_802B6FA8(self, arg1);
-    *(char **)(self + 4) = lbl_804189F0;
-    fn_802ADDD8(self + 8, arg2);
-    *(s32 *)(self + 0x18) = 0;
-    return self;
+    fn_802B6FA8(arg0, arg1);
+    M2C_FIELD(arg0, void **, 4) = lbl_804189F0;
+    fn_802ADDD8((u8 *)arg0 + 8, arg2);
+    M2C_FIELD(arg0, s32 *, 0x18) = 0;
+    return arg0;
 }
 
 void fn_802ACAF8(void *arg0, s32 arg1) {
@@ -2513,6 +2513,22 @@ void fn_802BBD98(void) {
     lbl_80443314[0]();
 }
 
+void **fn_802BC580(void **self, void **other) {
+    extern void fn_802482F8();
+    struct Buf { u16 ref; u16 len; u16 cap; u16 flags; char data[1]; };
+    u32 len;
+    char *dst;
+
+    len = ((struct Buf *)*other)->len;
+    fn_802BC600(self, len);
+    dst = ((struct Buf *)*self)->data;
+    fn_802482F8(dst, ((struct Buf *)*other)->data, len);
+    dst[len] = 0;
+    ((struct Buf *)*self)->len = len;
+    ((struct Buf *)*self)->flags = ((struct Buf *)*other)->flags;
+    return self;
+}
+
 void fn_802BC600(void **self, u32 n) {
     extern void fn_802BE3D0(void **, u32, s32, u32, s32, u32);
     u32 len;
@@ -2555,18 +2571,19 @@ s32 fn_802BC93C(void **self, s32 c, s32 start) {
     extern char *fn_80248B28(char *, s32);
     struct Buf { u16 ref; u16 len; s32 cap; char data[1]; };
     char *p;
+    s32 i;
 
-    if (start >= ((struct Buf *)*self)->len) {
-        return -1;
+    if (start < ((struct Buf *)*self)->len) {
+        i = start;
+        if (i < 0) {
+            i = 0;
+        }
+        p = fn_80248B28(((struct Buf *)*self)->data + i, c);
+        if (p != 0) {
+            return p - ((struct Buf *)*self)->data;
+        }
     }
-    if (start < 0) {
-        start = 0;
-    }
-    p = fn_80248B28(((struct Buf *)*self)->data + start, c);
-    if (p == 0) {
-        return -1;
-    }
-    return p - ((struct Buf *)*self)->data;
+    return -1;
 }
 
 s32 fn_802BCA14(void) {
@@ -2590,6 +2607,18 @@ s32 fn_802BCBBC(void) {
 }
 
 s32 fn_802BCBC4(void) {
+    return 0;
+}
+
+s32 fn_802BCD9C(void **self, char *set, s32 c) {
+    extern char *fn_80248640(char *, char *);
+    struct Buf { u16 ref; u16 len; s32 cap; char data[1]; };
+    char *p;
+
+    p = ((struct Buf *)*self)->data;
+    while ((p = fn_80248640(p, set)) != 0) {
+        *p++ = c;
+    }
     return 0;
 }
 
