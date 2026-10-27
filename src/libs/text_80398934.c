@@ -3028,7 +3028,7 @@ void fn_803A5BC0(void **self, s32 flags) {
 }
 
 s32 fn_803A5F88(void *a, void *b) {
-    return *(s16 *)(*(u8 **)((u8 *)a + 0x38) + 0xBC) == *(s16 *)(*(u8 **)((u8 *)b + 0x38) + 0xBC);
+    return *(s16 *)(*(u8 **)((u8 *)a + 0x38) + 0xBC) < *(s16 *)(*(u8 **)((u8 *)b + 0x38) + 0xBC);
 }
 
 void fn_803A5FA8(void) {
@@ -9904,11 +9904,9 @@ void fn_803BDA1C(void) {
     fn_80335FD8();
 }
 
-void fn_803BDD5C(void *first_, void *last_, s32 comp) {
-    struct Elem12 { s32 a, b, c; };
-    extern void fn_803BDBC8(void *, s32, s32, struct Elem12 *, s32);
-    struct Elem12 *first = (struct Elem12 *)first_;
-    s32 len = (struct Elem12 *)last_ - first;
+void fn_803BDD5C(Elem12 *first, Elem12 *last, s32 comp) {
+    void fn_803BDBC8(Elem12 *, s32, s32, Elem12, s32);
+    s32 len = last - first;
     s32 parent;
 
     if (len < 2) {
@@ -9916,8 +9914,7 @@ void fn_803BDD5C(void *first_, void *last_, s32 comp) {
     }
     parent = (len - 2) / 2;
     while (1) {
-        struct Elem12 v = first[parent];
-        fn_803BDBC8(first, parent, len, &v, comp);
+        fn_803BDBC8(first, parent, len, first[parent], comp);
         if (parent == 0) {
             return;
         }
@@ -10229,7 +10226,7 @@ void fn_803BEE20(s32 **self) {
     fn_803BED94((s32)self);
 }
 
-void *fn_803BEF64(void *self, s32 *vec) {
+void *fn_803BEF64(void *self, s32 **vec) {
     void fn_8036C038(void *, s32);
     void *vt;
     s32 n;
@@ -10237,11 +10234,11 @@ void *fn_803BEF64(void *self, s32 *vec) {
     s32 i;
 
     vt = M2C_FIELD(self, void **, 0x18);
-    n = vec[1];
+    n = (s32)vec[1];
     tmp = n;
     M2C_FIELD(vt, void (**)(void *, s32 *, s32), 0x3C)((char *)self + M2C_FIELD(vt, s16 *, 0x38), &tmp, 4);
     for (i = 0; i < n; i++) {
-        fn_8036C038(self, ((s32 *)vec[0])[i]);
+        fn_8036C038(self, vec[0][i]);
     }
     return self;
 }
