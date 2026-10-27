@@ -41,6 +41,9 @@ static inline void *fn_802E5F90_inline(void *arg0, s32 arg1) {
     return NULL;
 }
 
+void fn_802ED364(void *arg0, void *arg1, s32 arg2);
+void fn_802EAF44(void *arg0, void *arg1, s32 arg2, f32 arg3);
+
 void fn_802E2390(void);
 void fn_802E2288(s32 arg0) {
     M2C_UNK fn_802C8A34(s32, s32);
@@ -176,6 +179,20 @@ void fn_802EB3E4(void *arg0, s32 arg1) {
     fn_802EB384(arg0, fn_802E5F90_inline(arg0, arg1));
 }
 
+void fn_802EB484(void *arg0, void *arg1, f32 arg2, f32 arg3, f32 arg4) {
+    extern const f32 lbl_803F0A98;
+    if (arg1 != NULL && M2C_FIELD(arg1, s32 *, 0xA8) == 1 && arg2 != M2C_FIELD(arg1, f32 *, 0x64)) {
+        M2C_FIELD(arg1, u8 *, 0xA0) = 2;
+        M2C_FIELD(arg1, f32 *, 0x58) = arg4;
+        M2C_FIELD(arg1, f32 *, 0x68) = arg3;
+        M2C_FIELD(arg1, f32 *, 0x64) = arg2;
+        M2C_FIELD(arg1, f32 *, 0x54) = arg3;
+        if (arg2 != lbl_803F0A98) {
+            fn_802ED364(arg0, arg1, 1);
+        }
+    }
+}
+
 void fn_802EB484(void *arg0, void *arg1, f32 arg2, f32 arg3, f32 arg4);
 void fn_802EB4F0(void *arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4) {
     fn_802EB484(arg0, fn_802E5F90_inline(arg0, arg1), arg2, arg3, arg4);
@@ -190,6 +207,38 @@ void fn_802ED364(void *arg0, void *arg1, s32 arg2);
 void fn_802EAF44(void *arg0, void *arg1, s32 arg2, f32 arg3);
 void fn_802EB5B0(void *arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5) {
     fn_802EB590(arg0, fn_802E5F90_inline(arg0, arg1), arg2, arg3, arg4, arg5);
+}
+
+void fn_802EB650(void *arg0, void *arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5) {
+    extern const f32 lbl_803F0A9C;
+    f32 diff;
+    if (arg1 != NULL && M2C_FIELD(arg1, s32 *, 0xA8) == 1 && arg2 != M2C_FIELD(arg1, f32 *, 0x64)) {
+        diff = M2C_FIELD(arg1, f32 *, 0x50) - arg2;
+        M2C_FIELD(arg1, u8 *, 0xA0) = 1;
+        M2C_FIELD(arg1, f32 *, 0x6C) = arg4;
+        M2C_FIELD(arg1, f32 *, 0x70) = arg5;
+        M2C_FIELD(arg1, f32 *, 0x60) = M2C_FIELD(arg1, f32 *, 0x50);
+        M2C_FIELD(arg1, f32 *, 0x64) = arg2;
+        M2C_FIELD(arg1, f32 *, 0x5C) = lbl_803F0A9C;
+        if (diff < lbl_803F0A9C) {
+            arg3 *= -diff;
+        } else {
+            arg3 *= diff;
+        }
+        if (arg3 == lbl_803F0A9C) {
+            fn_802EAF44(arg0, arg1, 1, arg2);
+        } else {
+            M2C_FIELD(arg1, f32 *, 0x68) = arg3;
+            if (arg2 != lbl_803F0A9C) {
+                fn_802ED364(arg0, arg1, 1);
+            }
+        }
+    }
+}
+
+void fn_802EB708(void *arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5) {
+    extern const f32 lbl_803F0AA0;
+    fn_802EB650(arg0, fn_802E5F90_inline(arg0, arg1), arg3, arg4, arg5, lbl_803F0AA0);
 }
 
 void fn_802EC460(void *arg0, void *arg1);
