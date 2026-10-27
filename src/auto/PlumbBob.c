@@ -365,6 +365,18 @@ void fn_8006C2F8(self) void *self; {
     fn_8006C274(self, lbl_803C915C);
 }
 
+s32 fn_8006C3F4(void *arg0) {
+    extern char lbl_803C9128[];
+    extern char lbl_803C913C[];
+    extern char lbl_803C9150[];
+    extern char lbl_803C915C[];
+    void fn_8006C4F0(void *, char *);
+    fn_8006C4F0(arg0, lbl_803C9128);
+    fn_8006C4F0(arg0, lbl_803C913C);
+    fn_8006C4F0(arg0, lbl_803C9150);
+    fn_8006C4F0(arg0, lbl_803C915C);
+}
+
 void fn_8006C6B4(void *arg0) {
     M2C_UNK fn_8006C130(void *);
     M2C_UNK fn_8006C458(void *);
