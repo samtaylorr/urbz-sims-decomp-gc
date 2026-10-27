@@ -357,14 +357,15 @@ s32 fn_8019E638(s32 arg0) {
 }
 
 s32 fn_8019E660(void *arg0, void *arg1) {
+    typedef struct { s32 a; s32 b; } Pair;
     void fn_801B383C(void *);
-    s32 *fn_803AAD68(void *, void *, u16);
+    Pair *fn_803AAD68(void *, void *, u16);
     extern void *lbl_8049665C;
     void *obj;
     void *vt;
     u8 *p;
     s32 n;
-    s32 *r;
+    Pair *r;
 
     fn_801B383C((char *)arg0 + 0x4C);
     obj = lbl_8049665C;
@@ -376,12 +377,11 @@ s32 fn_8019E660(void *arg0, void *arg1) {
         n = M2C_FIELD(p, s32 *, -4);
     }
     r = fn_803AAD68(p, p + n * 8, M2C_FIELD(arg1, u16 *, 4));
-    if (r == NULL) {
-        return 0;
+    if (r != NULL) {
+        M2C_FIELD(arg0, Pair *, 0x54) = *r;
+        return 1;
     }
-    M2C_FIELD(arg0, s32 *, 0x54) = r[0];
-    M2C_FIELD(arg0, s32 *, 0x58) = r[1];
-    return 1;
+    return 0;
 }
 
 s32 fn_8019E7C4(void *arg0, s32 arg1, void **arg2) {
@@ -1252,6 +1252,20 @@ s32 fn_801A355C(void *arg0) {
         return 0;
     }
     return var_r3;
+}
+
+s32 fn_801A35B8(void *arg0, s32 arg1, void **arg2) {
+    void *temp_r9;
+
+    if (arg2 != NULL) {
+        if (arg1 == 1 || arg1 == 0x6BF3222B) {
+            temp_r9 = M2C_FIELD(arg0, void **, 0);
+            M2C_FIELD(temp_r9, void (**)(void *), 0x14)((char *)arg0 + M2C_FIELD(temp_r9, s16 *, 0x10));
+            *arg2 = arg0;
+            return 1;
+        }
+    }
+    return 0;
 }
 
 s16 fn_801A375C(void **arg0, s32 arg1) {
