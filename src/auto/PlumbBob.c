@@ -1320,11 +1320,12 @@ void fn_8007B83C(void *self, s32 arg1) {
 }
 
 s32 fn_8007B878(void *self) {
-    extern void ***lbl_8041FA50;
+    extern void **lbl_8041FA50[];
+    void **t = lbl_8041FA50[0];
     s32 *p;
     s32 r = 0;
 
-    switch (M2C_FIELD(self, s32 *, 0x88)) {
+    switch ((u32)M2C_FIELD(self, s32 *, 0x88)) {
     case 0:
         p = M2C_FIELD(self, s32 **, 0x8C);
         goto check;
@@ -1339,13 +1340,13 @@ s32 fn_8007B878(void *self) {
         r = 0x46;
         break;
     case 3:
-        r = M2C_FIELD(M2C_FIELD(*lbl_8041FA50, void **, 0), s32 *, 4);
+        r = M2C_FIELD(M2C_FIELD(*t, void **, 0), s32 *, 4);
         break;
     case 4:
-        r = M2C_FIELD(M2C_FIELD(*lbl_8041FA50, void **, 4), s32 *, 4);
+        r = M2C_FIELD(M2C_FIELD(*t, void **, 4), s32 *, 4);
         break;
     case 5:
-        r = M2C_FIELD(M2C_FIELD(*lbl_8041FA50, void **, 8), s32 *, 4);
+        r = M2C_FIELD(M2C_FIELD(*t, void **, 8), s32 *, 4);
         break;
     case 6:
         r = M2C_FIELD(M2C_FIELD(M2C_FIELD(self, void **, 0x7C), void **, 0x38), s16 *, 0x24);
