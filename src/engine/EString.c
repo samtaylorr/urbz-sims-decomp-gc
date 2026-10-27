@@ -66,6 +66,34 @@ s32 fn_802D32A0(void) {
     return 0;
 }
 
+s32 fn_802D3340(void *arg0, u16 *arg1) {
+    void *vt;
+    void (*f)(void *, void *, s32);
+    void *self;
+    s32 n;
+    u16 c;
+    u16 *s;
+
+    n = 0;
+    if (*arg1 != 0) {
+        s = arg1;
+        do {
+            vt = M2C_FIELD(arg0, void **, 0x18);
+            f = M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C);
+            self = (char *)arg0 + M2C_FIELD(vt, s16 *, 0x38);
+            c = *s;
+            n++;
+            f(self, &c, 2);
+        } while (*++s != 0);
+    }
+    vt = M2C_FIELD(arg0, void **, 0x18);
+    f = M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C);
+    self = (char *)arg0 + M2C_FIELD(vt, s16 *, 0x38);
+    c = 0;
+    f(self, &c, 2);
+    return n + 1;
+}
+
 void *fn_802D34B0(void *arg0, f32 *arg1) {
     void *vt;
     void (*f)(void *, void *, s32);
