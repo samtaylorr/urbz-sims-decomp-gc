@@ -206,6 +206,34 @@ s32 fn_801D7DE4(void) {
     return lbl_804945FC;
 }
 
+M2C_UNK fn_801D8080(void **arg0, s32 arg1, s32 arg2, s32 arg3) {
+    void **node;
+    void **next;
+    void *head;
+
+    node = arg0[2];
+    next = node[1];
+    arg0[2] = next;
+    if (next != NULL) {
+        next[0] = NULL;
+    }
+    head = arg0[0];
+    if (head == NULL) {
+        arg0[0] = node;
+        node[0] = head;
+        arg0[1] = node;
+        node[1] = head;
+    } else {
+        ((void **)arg0[1])[1] = node;
+        node[0] = arg0[1];
+        arg0[1] = node;
+        node[1] = NULL;
+    }
+    node[2] = (void *)arg1;
+    node[3] = (void *)arg2;
+    node[4] = (void *)arg3;
+}
+
 M2C_UNK fn_801D80E8(void **arg0, void *arg1p) {
     INVNodeList *list = (INVNodeList *)arg0;
     INVNode *node = arg1p;
