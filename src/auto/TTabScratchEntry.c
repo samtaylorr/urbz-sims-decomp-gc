@@ -1268,6 +1268,10 @@ s32 fn_801A35B8(void *arg0, s32 arg1, void **arg2) {
     return 0;
 }
 
+s32 fn_801A3628(void *arg0) {
+    return ++M2C_FIELD(arg0, s32 *, 0x118);
+}
+
 s16 fn_801A375C(void **arg0, s32 arg1) {
     s32 var_r0;
     void *temp_r3;
