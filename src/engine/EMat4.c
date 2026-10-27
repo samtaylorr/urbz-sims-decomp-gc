@@ -34,6 +34,7 @@ void fn_802D0B94(void);
 extern void *fn_802D0AB8();
 extern void *fn_802D197C(void *, u32, s32);
 extern void *fn_802DC3C0(void *, u32, s32, s32, s32);
+extern void *fn_802DBBCC(void *heap, u32 size, s32 align);
 extern s32 fn_802D9500(void *, void *, s32, s32, s32, s32, s32);
 extern void fn_802D1614(void);
 extern void fn_802D1314(void *);
