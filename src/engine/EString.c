@@ -8,6 +8,54 @@ static inline s32 *EString_Init(s32 *s, char *str) {
     return s;
 }
 
+typedef struct ScratchPool {
+    u32 base;
+    void *free;
+    u32 size;
+} ScratchPool;
+
+s32 fn_802D0AB8(void);
+s32 fn_802D0B3C(void);
+void *fn_802D197C(s32, u32, s32);
+void *fn_802DBBCC(s32, u32, s32);
+
+static inline void *ScratchPool_Alloc(ScratchPool *pool) {
+    void *p = pool->free;
+    if (p != NULL) {
+        pool->free = *(void **)p;
+    }
+    return p;
+}
+
+static inline int ScratchPool_Contains(ScratchPool *pool, void *p) {
+    return (u32)p >= pool->base && (u32)p < pool->base + pool->size;
+}
+
+static inline void ScratchPool_Free(ScratchPool *pool, void *p) {
+    if (p != NULL) {
+        *(void **)p = pool->free;
+        pool->free = p;
+    }
+}
+
+static inline void *Heap_Alloc(u32 size) {
+    s32 heap;
+    void *p;
+
+    heap = fn_802D0AB8();
+    if (size == 0) {
+        return NULL;
+    }
+    p = fn_802D197C(heap, size, 4);
+    if (p == NULL) {
+        p = fn_802DBBCC(heap, size, 0);
+        if (p == NULL && heap == fn_802D0AB8()) {
+            return fn_802DBBCC(fn_802D0B3C(), size, 0);
+        }
+    }
+    return p;
+}
+
 s32 fn_802D32A0(void) {
     return 0;
 }
@@ -1186,6 +1234,40 @@ void *fn_802D6A90(void *arg0, s32 arg1, s32 arg2, s32 arg3, s16 arg4, s32 arg5, 
     lbl_80494DE0 += 1;
     fn_802D6B18(arg0);
     return arg0;
+}
+
+void fn_802D6B18(void *n) {
+    extern void *lbl_80494DD8;
+    extern void *lbl_80494DDC;
+    void *parent;
+    void *cur;
+
+    parent = NULL;
+    cur = lbl_80494DD8;
+    M2C_FIELD(n, void **, 0x24) = lbl_80494DDC;
+    lbl_80494DDC = n;
+    while (cur != NULL) {
+        if (M2C_FIELD(cur, u32 *, 0x10) == M2C_FIELD(n, u32 *, 0x10)) {
+            return;
+        }
+        parent = cur;
+        if (M2C_FIELD(n, u32 *, 0x10) < M2C_FIELD(cur, u32 *, 0x10)) {
+            cur = M2C_FIELD(cur, void **, 0x1C);
+        } else {
+            cur = M2C_FIELD(cur, void **, 0x20);
+        }
+    }
+    if (parent != NULL) {
+        if (M2C_FIELD(n, u32 *, 0x10) < M2C_FIELD(parent, u32 *, 0x10)) {
+            M2C_FIELD(parent, void **, 0x1C) = n;
+        } else {
+            M2C_FIELD(parent, void **, 0x20) = n;
+        }
+    } else {
+        lbl_80494DD8 = n;
+    }
+    M2C_FIELD(n, void **, 0x1C) = NULL;
+    M2C_FIELD(n, void **, 0x20) = NULL;
 }
 
 void *fn_802D6BA0(u32 arg0) {
