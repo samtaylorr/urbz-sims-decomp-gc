@@ -182,6 +182,33 @@ void fn_8037DEF0(void *arg0, void *arg1, f32 farg0, f32 farg1, f32 farg2) {
     M2C_FIELD(arg1, f32 *, 0x3C) = (f32) M2C_FIELD(arg0, f32 *, 0x3C);
 }
 
+#pragma peephole off
+void fn_8037E00C(void *arg0, char arg1, f32 farg0) {
+    f32 fn_802434CC(f32);
+    f32 fn_80243694(f32);
+    void fn_8037E0EC(void *, char, f32, f32);
+    f32 sinA;
+    f32 cosA;
+
+    sinA = fn_80243694(farg0);
+    cosA = fn_802434CC(farg0);
+    fn_8037E0EC(arg0, arg1, sinA, cosA);
+}
+
+void fn_8037E07C(void *arg0, char arg1, f32 farg0) {
+    f32 fn_802434CC(f32);
+    f32 fn_80243694(f32);
+    void fn_8037E208(void *, char, f32, f32);
+    f32 sinA;
+    f32 cosA;
+
+    sinA = fn_80243694(farg0);
+    cosA = fn_802434CC(farg0);
+    fn_8037E208(arg0, arg1, sinA, cosA);
+}
+#pragma peephole reset
+#pragma peephole reset
+
 s32 fn_8037E534(s32 arg0) {
     extern s32 lbl_80496338;
     s32 temp_r31;
