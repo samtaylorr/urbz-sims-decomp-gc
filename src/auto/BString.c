@@ -3080,6 +3080,18 @@ void fn_800E4698(void) {
     lbl_80496640 = NULL;
 }
 
+void fn_800E46B8(s32 arg0, f32 arg1) {
+    void **it;
+    void *obj;
+    void *vt;
+
+    for (it = M2C_FIELD(arg0, void ***, 0); it != M2C_FIELD(arg0, void ***, 4);) {
+        obj = *it++;
+        vt = M2C_FIELD(obj, void **, 0x14);
+        M2C_FIELD(vt, void (**)(void *, f32), 0x2C)((u8 *)obj + M2C_FIELD(vt, s16 *, 0x28), arg1);
+    }
+}
+
 void fn_800E4724(f32 arg0) {
     void fn_800E46B8(s32, f32);
     extern s32 lbl_80496640;
