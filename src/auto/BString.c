@@ -3176,6 +3176,19 @@ void fn_800E6108(void *arg0, s32 arg1) {
     fn_80047AF8(lbl_8041F754, arg1);
 }
 
+void fn_800E61B8(void) {
+    extern s32 lbl_8041FA1C[];
+    u8 *obj;
+
+    ((s32 *)lbl_8041FA1C[0])[0x3ac / 4] = -1;
+    obj = (u8 *)lbl_8041F754[0x28 / 4];
+    if (obj != NULL) {
+        u8 *vt = *(u8 **)(obj + 0x80);
+        (*(void (**)(void *, s32))(vt + 0xC))(obj + *(s16 *)(vt + 8), 3);
+        lbl_8041F754[0x28 / 4] = 0;
+    }
+}
+
 void fn_800E64BC(void) {
 
 }
