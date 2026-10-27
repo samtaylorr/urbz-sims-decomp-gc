@@ -4,6 +4,35 @@
 extern void (*lbl_804940B0)(void);
 
 extern s32 lbl_804957B8;
+void fn_80041C2C(s32 id, s32 *arg) {
+    void fn_80041AB4(s32 *);
+    void fn_80041B60(s32);
+    s32 mode = 0;
+
+    switch (id) {
+    case 0x45796531:
+        fn_80041AB4(arg);
+        return;
+    case 0x45796532:
+        break;
+    case 0x45796533:
+        mode = 1;
+        break;
+    case 0x45796534:
+        mode = 2;
+        break;
+    case 0x45796535:
+        mode = 3;
+        break;
+    case 0x45796536:
+        mode = 4;
+        break;
+    default:
+        return;
+    }
+    fn_80041B60(mode);
+}
+
 void fn_80041CDC(void) {
 
 }
