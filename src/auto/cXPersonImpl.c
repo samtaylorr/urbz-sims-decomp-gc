@@ -109,6 +109,19 @@ void *fn_80182168(void *arg0) {
     return ret;
 }
 
+void *fn_801821C4(void *arg0) {
+    void *fn_80117484(void *);
+    void *list;
+    void *ret;
+    if (M2C_FIELD(arg0, s32 *, 0x5FC) == 0) {
+        ret = 0;
+    } else {
+        list = arg0 + 0x130;
+        ret = fn_80117484(list + ((M2C_FIELD(list, u32 *, 0x370) % 10U) * 0x58));
+    }
+    return ret;
+}
+
 void fn_80182220(void) {
 
 }
