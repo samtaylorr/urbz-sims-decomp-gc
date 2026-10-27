@@ -369,6 +369,23 @@ void *fn_80366284(void *arg0, void *arg1) {
     return arg0;
 }
 
+s32 fn_80366414(void **arg0, void **arg1) {
+    extern void *fn_803660C8(void *, s32, void **);
+    void *n;
+    void *found;
+
+    if (fn_8036625C(arg0) != fn_8036625C(arg1)) {
+        return 0;
+    }
+    for (n = *arg1; EStrNode_Valid(n); n = M2C_FIELD(n, void **, 4)) {
+        void *value = M2C_FIELD(n, void **, 0x10);
+        if (fn_803660C8(arg0, M2C_FIELD(n, s32 *, 0xC), &found) == NULL || found != value) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
 s32 fn_803668C0(void *self, s32 arg1) {
     s32 fn_802D83EC(void *);
     void fn_802D8424(void *);
