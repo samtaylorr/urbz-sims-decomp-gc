@@ -1948,9 +1948,12 @@ void fn_800DC960(void *arg0) {
 
 void fn_800DC970(s32 *self) {
     char *obj;
+    char *vt;
     if ((u32)(self[6] - 5) <= 1 || self[6] == 8) {
-        obj = M2C_FIELD(self[2], char **, 0x94);
-        M2C_FIELD(M2C_FIELD(obj, char **, 0x44), void (**)(void *), 0x1C)(obj + M2C_FIELD(M2C_FIELD(obj, char **, 0x44), s16 *, 0x18));
+        char *b = (char *)self[2];
+        obj = M2C_FIELD(b, char **, 0x94);
+        vt = M2C_FIELD(obj, char **, 0x44);
+        M2C_FIELD(vt, void (**)(void *), 0x1C)(obj + M2C_FIELD(vt, s16 *, 0x18));
     }
 }
 
@@ -4712,6 +4715,13 @@ void **fn_800ECB80(void **arg0, const u8 *arg1, u32 arg2, u32 arg3) {
         fn_800EAF58();
     }
     *arg0 = fn_800EB848(BString_Alloc(0x10, 4), arg1, arg2, arg2 + arg3);
+    return arg0;
+}
+
+M2C_UNK fn_800ECC34(s32 arg0, s32 arg1, u32 arg2) {
+    void *fn_800EB930(void *mem, s32 arg1, s32 arg2);
+
+    *(void **)arg0 = fn_800EB930(BString_Alloc(0x10, 4), arg1, arg2);
     return arg0;
 }
 
