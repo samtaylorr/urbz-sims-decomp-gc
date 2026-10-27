@@ -4,6 +4,28 @@
 extern void (*lbl_804940B0)(void);
 
 extern s32 lbl_804957B8;
+void fn_80041AB4(s32 *arg) {
+    typedef struct { s32 size; s32 unk4; s32 unk8; f32 f0; f32 f1; f32 f2; f32 f3; } EyeToyParams;
+    void fn_80248488(void *, s32, s32);
+    f32 fn_8004387C(void);
+    extern EyeToyParams lbl_8041F714;
+    extern u8 lbl_8041F718[];
+    extern u8 lbl_803F5DA8[];
+    s32 i;
+
+    fn_80248488(&lbl_8041F714, 0, 0x1C);
+    lbl_8041F714.size = 0x1C;
+    for (i = 0; i < 5; i++) {
+        lbl_8041F718[i] = lbl_803F5DA8[i * 0xC + 0xB];
+    }
+    lbl_8041F714.f0 = fn_80043A40();
+    lbl_8041F714.f1 = fn_8004387C();
+    lbl_8041F714.f2 = fn_80043984();
+    lbl_8041F714.f3 = fn_80043938();
+    arg[1] = (s32)&lbl_8041F714;
+    arg[0] = lbl_8041F714.size;
+}
+
 void fn_80041C2C(s32 id, s32 *arg) {
     void fn_80041AB4(s32 *);
     void fn_80041B60(s32);
@@ -37,12 +59,73 @@ void fn_80041CDC(void) {
 
 }
 
+void fn_80041CE0(s32 *arg) {
+    typedef struct { s32 size; s32 unk4; s32 unk8; f32 f0; f32 f1; f32 f2; f32 f3; } EyeToyParams;
+    void fn_80248488(void *, s32, s32);
+    void fn_80043A58(f32);
+    void fn_800439BC(f32);
+    extern EyeToyParams lbl_8041F714;
+    EyeToyParams *p;
+
+    fn_80248488(&lbl_8041F714, 0, 0x1C);
+    lbl_8041F714.size = 0x1C;
+    p = (EyeToyParams *)arg[1];
+    if (p != 0 && p->size == 0x1C) {
+        lbl_8041F714 = *p;
+        fn_80043A58(lbl_8041F714.f0);
+        fn_800438D0(lbl_8041F714.f1);
+        fn_800439BC(lbl_8041F714.f2);
+        fn_80043950(lbl_8041F714.f3);
+    }
+}
+
 s32 fn_80041D94(void) {
     return lbl_804957B8;
 }
 
 void fn_80041D9C(void) {
 
+}
+
+void fn_80041EC0(s32 id, s32 *arg) {
+    void fn_80041CE0(s32 *);
+    void fn_80041DA0(s32);
+    s32 mode = 0;
+
+    switch (id) {
+    case 0x45796531:
+        fn_80041CE0(arg);
+        return;
+    case 0x45796532:
+        break;
+    case 0x45796533:
+        mode = 1;
+        break;
+    case 0x45796534:
+        mode = 2;
+        break;
+    case 0x45796535:
+        mode = 3;
+        break;
+    case 0x45796536:
+        mode = 4;
+        break;
+    default:
+        return;
+    }
+    fn_80041DA0(mode);
+}
+
+void fn_80041F70(void) {
+    void fn_80043A58(f32);
+    void fn_800439BC(f32);
+    extern f32 lbl_803C60E0[];
+    extern f32 lbl_803C60E4[];
+
+    fn_80043950(lbl_803C60E0[0]);
+    fn_80043A58(lbl_803C60E0[0]);
+    fn_800439BC(lbl_803C60E0[0]);
+    fn_800438D0(lbl_803C60E4[0]);
 }
 
 s32 fn_80041FBC(s32 arg0) {
