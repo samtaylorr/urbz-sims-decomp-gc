@@ -1060,12 +1060,47 @@ s32 fn_802668EC(s32 arg0) {
     return temp_r31;
 }
 
+void fn_8026694C(void *alarm, void *context) {
+    extern u32 lbl_80495F44;
+    extern s32 lbl_80495F60;
+    void fn_802669C0(s64);
+
+    if (__DIRegs[6] < lbl_80495F44) {
+        __DIRegs[0] |= 0x41;
+        lbl_80495F60 = 1;
+    } else {
+        fn_802669C0(20 * ((*(u32 *)0x800000F8 / 4) / 1000));
+    }
+}
+
+void fn_802669C0(s64 timeout) {
+    extern u8 lbl_80442AD8[];
+    void fn_80251224(void *, s64, void *);
+    void fn_8026694C(void *, void *);
+
+    fn_80250FC4(lbl_80442AD8);
+    fn_80251224(lbl_80442AD8, timeout, fn_8026694C);
+}
+#pragma dont_inline reset
+
 s32 fn_80266A24(void) {
     extern s32 lbl_80495F40;
     extern s32 lbl_80495F60;
     lbl_80495F40 = 1;
     lbl_80495F60 = 1;
     return 1;
+}
+
+void *fn_80266A38(void) {
+    extern void *lbl_80495F48;
+    extern s32 lbl_80495F5C;
+    void *cb;
+
+    __DIRegs[1] = 0;
+    cb = lbl_80495F48;
+    lbl_80495F5C = 0;
+    lbl_80495F48 = NULL;
+    return cb;
 }
 
 void fn_80266AE8(s32 arg0, s32 arg1) {
