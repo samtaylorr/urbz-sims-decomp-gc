@@ -982,6 +982,18 @@ s32 fn_80265EA8(void) {
     return 0;
 }
 
+s32 fn_80265EE0(void *cur, void *prev) {
+    u8 *fn_802649F0(void);
+    u32 prevEnd = (M2C_FIELD(prev, u32 *, 8) + M2C_FIELD(prev, u32 *, 4) - 1) >> 15;
+    u32 curStart = M2C_FIELD(cur, u32 *, 8) >> 15;
+    u32 blockSize = ((fn_802649F0()[8] ? 1 : 0) ? 5 : 15);
+
+    if (curStart > prevEnd - 2 || curStart < prevEnd + blockSize + 3) {
+        return 1;
+    }
+    return 0;
+}
+
 s32 fn_802668EC(s32 arg0) {
     extern s32 lbl_80495F4C;
     s32 temp_r31;
