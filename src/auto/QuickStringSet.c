@@ -18,14 +18,17 @@ static inline void QSSVec_Init(QSSVec *v) {
 }
 
 static inline s32 QVec_Count(s32 **vec) {
-    if (*vec != NULL) {
-        return (*vec)[-1];
+    s32 *arr = *vec;
+    s32 n = 0;
+    if (arr != NULL) {
+        n = arr[-1];
     }
-    return 0;
+    return n;
 }
 
 static inline s32 QVec_At(s32 **vec, s32 i) {
-    return (*vec)[i];
+    s32 *arr = *vec;
+    return arr[i];
 }
 
 static inline void QSSVec_Dealloc(void *p, s32 end) {
@@ -398,27 +401,25 @@ void fn_800F791C(char *self) {
 s32 fn_800F7954(void *self, s32 idx) {
     s32 **vec = M2C_FIELD(self, s32 ***, 8);
     if (vec != NULL) {
-        s32 *arr;
         if (idx <= 0 || idx > QVec_Count(vec)) {
             return 0;
         }
-        arr = *vec;
-        return arr[idx - 1];
+        return QVec_At(vec, idx - 1);
     }
     return 0;
 }
 
 void fn_800F79A4(s32 *out, void *self, s32 idx) {
     s32 **vec = M2C_FIELD(self, s32 ***, 4);
-    if (vec == NULL) {
-        *out = M2C_FIELD(self, s32 *, 0xC);
+    if (vec != NULL) {
+        if (idx <= 0 || idx > QVec_Count(vec)) {
+            *out = M2C_FIELD(self, s32 *, 0xC);
+            return;
+        }
+        *out = QVec_At(vec, idx - 1);
         return;
     }
-    if (idx <= 0 || idx > QVec_Count(vec)) {
-        *out = M2C_FIELD(self, s32 *, 0xC);
-        return;
-    }
-    *out = QVec_At(vec, idx - 1);
+    *out = M2C_FIELD(self, s32 *, 0xC);
 }
 
 s32 fn_800F7A00(void *arg0) {
