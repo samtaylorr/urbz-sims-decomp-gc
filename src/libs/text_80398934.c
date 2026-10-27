@@ -170,6 +170,7 @@ void *fn_80399B3C(u32 n) {
     extern void *fn_803999F8(u32, s32 *);
     s32 nobjs = 20;
     void **chunk;
+    void ***fl;
     void **cur;
     void **next;
     s32 i;
@@ -179,7 +180,8 @@ void *fn_80399B3C(u32 n) {
     if (nobjs == 1) {
         return chunk;
     }
-    lbl_804069A8[(n - 1) >> 3] = next = (void **)((char *)chunk + n);
+    fl = &lbl_804069A8[(n - 1) >> 3];
+    *fl = next = (void **)((char *)chunk + n);
     for (i = 1; ; i++) {
         cur = next;
         next = (void **)((char *)next + n);
