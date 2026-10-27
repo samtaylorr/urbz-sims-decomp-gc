@@ -2920,6 +2920,38 @@ void fn_803A4BB4(s32 *first, s32 *middle, s32 *last, s32 comp) {
     fn_803A4AE8(first, middle, last, 0, comp);
 }
 
+void fn_803A4DD0(s32 *last, s32 val, s32 comp) {
+    s32 *next = last - 1;
+
+    while (((s32 (*)(s32, s32))comp)(val, *next)) {
+        *last = *next;
+        last = next;
+        next--;
+    }
+    *last = val;
+}
+
+void fn_803A4E30(s32 *first, s32 *last, s32 comp) {
+    s32 *i;
+
+    if (first == last) {
+        return;
+    }
+    for (i = first + 1; i != last; i++) {
+        s32 val = *i;
+        if (((s32 (*)(s32, s32))comp)(val, *first)) {
+            s32 *next = i + 1;
+            s32 n = (char *)i - (char *)first;
+            if (n > 0) {
+                fn_8024839C((char *)next - n, first, n);
+            }
+            *first = val;
+        } else {
+            fn_803A4DD0(i, val, comp);
+        }
+    }
+}
+
 void fn_803A4DD0(s32 *last, s32 val, s32 comp);
 void fn_803A4ED4(s32 *first, s32 *last, s32 *val, s32 comp) {
     s32 *it;
