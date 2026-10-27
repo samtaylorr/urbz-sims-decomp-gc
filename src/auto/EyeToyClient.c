@@ -63,7 +63,9 @@ void fn_80041CE0(s32 *arg) {
     typedef struct { s32 size; s32 unk4; s32 unk8; f32 f0; f32 f1; f32 f2; f32 f3; } EyeToyParams;
     void fn_80248488(void *, s32, s32);
     void fn_80043A58(f32);
+    void fn_800438D0(f32);
     void fn_800439BC(f32);
+    void fn_80043950(f32);
     extern EyeToyParams lbl_8041F714;
     EyeToyParams *p;
 
