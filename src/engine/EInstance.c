@@ -184,8 +184,6 @@ extern u8 lbl_804936F0[];
 extern s32 fn_802D6A90(void *, void *, void *, void *, s32, void *, void *);
 void fn_802F1604(void);
 void fn_802F162C(void);
-void fn_802F164C(void *);
-
 void fn_802F1604(void) {
     M2C_UNK fn_802D1FC8(M2C_UNK);
     fn_802D1FC8(0x8C);
