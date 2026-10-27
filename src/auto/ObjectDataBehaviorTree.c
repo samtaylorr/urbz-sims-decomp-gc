@@ -140,6 +140,13 @@ s32 fn_801B2F50(void *arg0) {
     return n;
 }
 
+void *fn_801B2FAC(void *self) {
+    fn_801B25A4(self);
+    M2C_FIELD(self, s32 *, 0x60) = 0;
+    *(void **)self = lbl_80415470;
+    return self;
+}
+
 void fn_801B31C4(void *arg0) {
     void *vt = M2C_FIELD(arg0, void **, 0);
     M2C_FIELD(vt, void (**)(void *), 0x34)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x30));
