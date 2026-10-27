@@ -56,6 +56,11 @@ static inline RbIter RbIter_dec(RbIter *it) {
     return *it;
 }
 
+static inline void RbInsertPair_init(RbInsertPair *p, const RbIter *it, s32 ok) {
+    p->first = it->node;
+    p->second = ok;
+}
+
 typedef struct Elem14 {
     u8 data[0x10];
     u8 unk10;
@@ -2179,9 +2184,9 @@ RbInsertPair fn_8039F62C(void **tree, u32 *v) {
     void **y = tree[1];
     void **x = y[1];
     s32 comp = 1;
-    RbIter r;
-    RbIter b;
     RbIter j;
+    RbIter b;
+    RbIter r;
     RbInsertPair ret;
 
     while (x != NULL) {
@@ -2198,7 +2203,7 @@ RbInsertPair fn_8039F62C(void **tree, u32 *v) {
             ret.second = 1;
             return ret;
         }
-        RbIter_dec(&j);
+        j = RbIter_dec(&j);
     }
     if ((u32)j.node[4] < *v) {
         fn_8039F498(&b, tree, x, y, v, 0);
@@ -2206,7 +2211,7 @@ RbInsertPair fn_8039F62C(void **tree, u32 *v) {
         ret.second = 1;
         return ret;
     }
-    ret = *(RbInsertPair *)&j;
+    ret.first = j.node;
     ret.second = 0;
     return ret;
 }
