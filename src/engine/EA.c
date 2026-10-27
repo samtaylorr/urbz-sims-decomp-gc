@@ -581,6 +581,11 @@ void fn_802DEBE4(void *arg0, s32 arg1) {
     }
 }
 
+void fn_802DEC30(void *arg0) {
+    M2C_UNK fn_802DDDD8(void *, s32, s32);
+    fn_802DDDD8(arg0, M2C_FIELD(arg0, s32 *, 4), 0);
+}
+
 s32 fn_802DEC58(s32 *self) {
     return self[1];
 }
