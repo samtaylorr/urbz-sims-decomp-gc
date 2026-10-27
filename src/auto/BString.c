@@ -3327,7 +3327,8 @@ s32 fn_800E9708(void *arg0) {
 
 s32 *fn_800E9710(s32 *self, s32 a) {
     extern s32 lbl_8040CF20[];
-    extern f32 lbl_803D560C;
+    extern f32 lbl_803D560C[];
+    f32 f = lbl_803D560C[0];
     self[0] = a;
     self[1] = -1;
     self[2] = 0;
@@ -3335,8 +3336,8 @@ s32 *fn_800E9710(s32 *self, s32 a) {
     self[4] = 1;
     self[5] = (s32)lbl_8040CF20;
     self[6] = 0;
+    M2C_FIELD(self, f32 *, 0x48) = f;
     M2C_FIELD(self, s16 *, 0x1C) = 0;
-    M2C_FIELD(self, f32 *, 0x48) = lbl_803D560C;
     return self;
 }
 
