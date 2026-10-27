@@ -327,6 +327,14 @@ s32 fn_803669C0(void *arg0) {
     return var_r3 - temp_r11;
 }
 
+void fn_803669E4(void *self, s32 *arg1, s32 *arg2, s32 *arg3, s32 *arg4) {
+    s32 fn_803669C0(void *);
+    *arg1 = fn_803669C0(self);
+    *arg2 = M2C_FIELD(self, s32 *, 0x48);
+    *arg3 = M2C_FIELD(self, s32 *, 0x44);
+    *arg4 = M2C_FIELD(self, s32 *, 0x38);
+}
+
 void fn_80366A3C(s32 arg0) {
     s32 fn_80366820(s32, M2C_UNK, M2C_UNK);
     do {
