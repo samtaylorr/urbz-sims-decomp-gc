@@ -494,6 +494,7 @@ void fn_800D2A54(s32 *self) {
     M2C_UNK fn_800DC03C(M2C_UNK);
     M2C_UNK fn_80045500(void *);
     M2C_UNK fn_800E18B8(M2C_UNK);
+    s32 *g;
     s32 state;
 
     fn_800DC03C(0);
@@ -503,9 +504,10 @@ void fn_800D2A54(s32 *self) {
     self[6] = 0;
     self[9] = 0;
     self[10] = 0;
-    if (((s32 *)lbl_8041F754)[0x5C / 4] != 0) {
-        if (((s32 *)lbl_8041F754)[0x50 / 4] != 0) {
-            fn_80045500(lbl_8041F754);
+    g = (s32 *)lbl_8041F754;
+    if (g[0x5C / 4] != 0) {
+        if (g[0x50 / 4] != 0) {
+            fn_80045500(g);
         }
         state = 1;
     } else {
