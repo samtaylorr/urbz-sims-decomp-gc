@@ -912,8 +912,8 @@ void fn_8007B994(void *self, s32 flags) {
     if (M2C_FIELD(self, void **, 0xfc) != NULL) {
         fn_8031EA2C(M2C_FIELD(self, void **, 0xfc));
     }
-    M2C_FIELD(self, void **, 0xf8) = NULL;
     M2C_FIELD(self, void **, 0xfc) = NULL;
+    M2C_FIELD(self, void **, 0xf8) = NULL;
     fn_8030834C(self, flags);
 }
 
