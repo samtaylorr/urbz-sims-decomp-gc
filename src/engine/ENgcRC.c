@@ -735,6 +735,28 @@ void fn_8034BCEC(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
 
+void *fn_8034BD20(u32 size) {
+    extern void *fn_802D197C(void *heap, u32 size, s32 align);
+    extern void *fn_802DC3C0(void *, u32, s32, s32, s32);
+    extern void *fn_802D0B3C(void);
+    void *heap;
+    void *p;
+
+    heap = ((void *(*)(void))fn_802D0AB8)();
+    if (size == 0) {
+        return NULL;
+    }
+    size = (size + 0x1F) & ~0x1F;
+    p = fn_802D197C(heap, size, 0x20);
+    if (p == NULL) {
+        p = fn_802DC3C0(heap, size, 0x20, 0, 0);
+        if (p == NULL && heap == ((void *(*)(void))fn_802D0AB8)()) {
+            return fn_802DC3C0(fn_802D0B3C(), size, 0x20, 0, 0);
+        }
+    }
+    return p;
+}
+
 void fn_8034BDCC(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
