@@ -196,7 +196,7 @@ void *fn_80399BE8(u32 n) {
     extern void **lbl_804069A8[];
     void ***fl = &lbl_804069A8[(n - 1) >> 3];
     void **r = *fl;
-    s32 lock[3];
+    u8 lock[5];
     if (r != NULL) {
         *fl = *r;
     } else {
