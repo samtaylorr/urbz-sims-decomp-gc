@@ -1558,9 +1558,9 @@ void fn_800DB470(s32 *self, s32 arg1) {
     t = ((f32 *)self)[6];
     c = lbl_803D49A8[0];
     v[0] = c;
+    p[1] = c;
     p[2] = c;
     p[3] = t;
-    p[1] = c;
     fn_800DAFF8(arg1, p);
 }
 
