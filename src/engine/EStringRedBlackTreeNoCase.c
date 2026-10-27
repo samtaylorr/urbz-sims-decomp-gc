@@ -408,6 +408,16 @@ void *fn_803674D8(u32 size) {
     return Heap_Alloc(size);
 }
 
+void fn_80367590(void *p) {
+    extern char lbl_80446F34[];
+    void fn_802D1A00(void *, void *);
+    if (ScratchPool_Contains((ScratchPool *)lbl_80446F34, p)) {
+        ScratchPool_Free((ScratchPool *)lbl_80446F34, p);
+    } else {
+        fn_802D1A00(fn_802D0AB8(), p);
+    }
+}
+
 s32 fn_80367610(void *arg0) {
     return (M2C_FIELD(arg0, s32 *, 0x18) * M2C_FIELD(arg0, s16 *, 0x1C)) + 0x23;
 }
