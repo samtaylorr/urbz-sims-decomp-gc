@@ -7439,6 +7439,17 @@ void fn_803BA058(s32 *self, s32 n) {
     }
 }
 
+void fn_803BA0A4(s32 *dst, s32 *src, s32 n) {
+    extern void fn_802D57BC(s32 *, s32);
+    while (--n != -1) {
+        s32 *d = dst;
+        s32 *s = src;
+        src++;
+        dst++;
+        fn_802D57BC(d, *s);
+    }
+}
+
 void fn_803BA284(s32 *dst, s32 *src, s32 n) {
     extern void fn_802D57BC(s32 *, s32);
     src += n - 1;
