@@ -262,14 +262,14 @@ s32 fn_802C7008(char **arg0, const char *arg1) {
 s32 fn_802C70B8(char **arg0, char **arg1, const char *arg2, const char *arg3) {
     s32 fn_80248808(const char *);
     M2C_UNK fn_802C69B0(s32, s32);
-    M2C_UNK fn_802C6D20(s32, s32, s32);
+    void fn_802C6D20(char **, char **, s32);
     s32 idx;
 
     idx = fn_802C6F58(arg0, arg2);
     if (idx == -1) {
         return 0;
     }
-    fn_802C6D20((s32)arg0, (s32)arg1, idx);
+    fn_802C6D20(arg0, arg1, idx);
     fn_802C6DE4(arg1, arg3);
     fn_802C6DE4(arg1, *arg0 + (idx + fn_80248808(arg2)));
     fn_802C69B0((s32)arg0, (s32)*arg1);
