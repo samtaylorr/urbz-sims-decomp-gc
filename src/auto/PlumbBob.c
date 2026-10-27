@@ -304,6 +304,20 @@ void fn_80068694(void *arg0) {
     fn_80067AA4(arg0, 1, 1);
 }
 
+void fn_800686D8(void *arg0) {
+    extern void fn_80067AA4(void *, s32, s32);
+    void *p = M2C_FIELD(arg0, void **, 0x27F8);
+
+    if (p == NULL) {
+        fn_80067AA4(arg0, 0, 0);
+        fn_80067AA4(arg0, 1, 0);
+    } else {
+        M2C_FIELD(p, s32 *, 0xD4) = 0;
+        fn_80067AA4(arg0, 0, 0xB);
+        fn_80067AA4(arg0, 1, 0xB);
+    }
+}
+
 void fn_800688B8(void) {
 
 }
