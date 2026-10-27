@@ -2733,6 +2733,18 @@ s32 fn_802046E0(void *arg0, void *arg1, s32 *arg2, s32 *arg3) {
     return *arg2 <= 13;
 }
 
+s32 fn_8020490C(void *arg0, s32 arg1, s32 arg2) {
+    extern u8 *lbl_8049665C;
+    s32 fn_80204778(void *, void *, s32);
+    void *obj;
+
+    if (lbl_8049665C == 0) {
+        return 0;
+    }
+    obj = (*(void *(**)(u8 *))(*(u8 **)lbl_8049665C + 0x84))(lbl_8049665C + *(s16 *)(*(u8 **)lbl_8049665C + 0x80));
+    return fn_80204778(arg0, obj, arg2);
+}
+
 void fn_80204C00(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x88) = 0;
 }
