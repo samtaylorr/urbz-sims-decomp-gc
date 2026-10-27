@@ -41,6 +41,21 @@ s32 fn_801D6B34(void) {
     return lbl_804945F4;
 }
 
+u32 fn_801D6B3C(u8 *self, s32 arg1) {
+    switch (arg1) {
+    case 0:
+        return 0x9AC7C332;
+    case 1:
+        return 0x1F55BFF8;
+    case 2:
+        return 0xBD0882D5;
+    case 3:
+        return 0xD5D71397;
+    default:
+        return 0;
+    }
+}
+
 void fn_801D6CE0(void) {
     extern void fn_801D6C30(s32, s32);
     fn_801D6C30(1, 0xFFFF);
