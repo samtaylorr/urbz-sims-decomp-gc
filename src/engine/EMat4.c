@@ -525,6 +525,15 @@ void *fn_802CAE18(void *arg0) {
     return arg0;
 }
 
+void fn_802CAE6C(void *arg0, s32 arg1) {
+    extern char lbl_804193D0[];
+    void fn_803B9648(void *, s32);
+    void fn_802D20E8(void *);
+    M2C_FIELD(arg0, char **, 0x54) = lbl_804193D0;
+    fn_803B9648((u8 *)arg0 + 0x48, 2);
+    if (arg1 & 1) fn_802D20E8(arg0);
+}
+
 void *fn_802CB22C(void *arg0, void *arg1) {
     u8 *vt = *(u8 **)((u8 *)arg1 + 0x54);
     s16 offset = *(s16 *)(vt + 0x20);
