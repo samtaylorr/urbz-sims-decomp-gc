@@ -183,6 +183,18 @@ s32 fn_80318260(void) {
     return *lbl_80494F04++;
 }
 
+void fn_80318290(char arg0) {
+    extern u8 *lbl_80494F0C;
+    extern u8 *lbl_80494F10;
+    extern s32 lbl_80494F14;
+
+    if (lbl_80494F0C == lbl_80494F10) {
+        lbl_80494F14 = 1;
+    } else {
+        *lbl_80494F0C++ = arg0;
+    }
+}
+
 void fn_803188C8(const char *arg0) {
     int fn_80245BB4(char *, const char *, ...);
     s32 fn_802D7F48(const char *, const char *);
