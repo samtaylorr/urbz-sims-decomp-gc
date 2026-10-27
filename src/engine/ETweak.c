@@ -59,6 +59,11 @@ void fn_803145A0(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x30) = arg1;
 }
 
+f32 fn_80314604(void *arg0) {
+    extern const f64 lbl_803F2600[];
+    return M2C_FIELD(arg0, f64 *, 0) * lbl_803F2600[0];
+}
+
 M2C_UNK fn_8031461C(void *arg0) {
     M2C_UNK fn_802D39E4(void *);
     M2C_UNK fn_80369A74(void *);
@@ -110,18 +115,20 @@ s32 fn_80314784(void *arg0) {
     return done;
 }
 
-void fn_80314A18(void *arg0, s32 arg1, void *arg2, s32 arg3) {
+void fn_80314A18(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     M2C_UNK fn_802D1FC8(M2C_UNK);
     M2C_UNK fn_802D39E4(void *);
-    M2C_UNK fn_802D3CE4(void *, void *);
+    M2C_UNK fn_802D3CE4(void *, s32);
     M2C_UNK fn_802CB69C(void *, void *);
     s32 *obj;
+    s32 *str;
 
     obj = (s32 *)fn_802D1FC8(0xC);
-    fn_802D39E4(&obj[1]);
+    str = &obj[1];
+    fn_802D39E4(str);
     obj[0] = arg1;
     obj[2] = arg3;
-    fn_802D3CE4(&obj[1], arg2);
+    fn_802D3CE4(str, arg2);
     fn_802CB69C((s8 *)arg0 + 0xC, obj);
     M2C_FIELD(arg0, s32 *, 8)++;
 }
