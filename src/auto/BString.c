@@ -1984,6 +1984,18 @@ void fn_800DFC08(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x18) = 0;
 }
 
+void fn_800DFC14(s32 *self) {
+    char *obj;
+    char *vt;
+    if ((u32)(self[6] - 8) <= 1) {
+        M2C_FIELD(M2C_FIELD(self[2], char **, 0x94), s32 *, 0x8C) = 0;
+        obj = M2C_FIELD(self[2], char **, 0x94);
+        vt = M2C_FIELD(obj, char **, 0x44);
+        M2C_FIELD(vt, void (**)(void *), 0x1C)(obj + M2C_FIELD(vt, s16 *, 0x18));
+        M2C_FIELD(M2C_FIELD(self[2], char **, 0x94), s32 *, 0x8C) = 1;
+    }
+}
+
 void fn_800DFFE4(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x18) = 0;
     M2C_FIELD(arg0, s32 *, 0x20) = 0;
