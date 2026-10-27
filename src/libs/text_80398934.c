@@ -9202,6 +9202,30 @@ void fn_803BBDE0(void) {
 
 }
 
+void *fn_803BBF20(void *self, void *arg1) {
+    extern void fn_802CD53C(void *);
+    extern s32 fn_802F043C(s32, s32 *);
+    extern void *fn_802CCD20(void *, s32);
+    s32 n;
+    s32 idx;
+    s32 val;
+
+    fn_802CD53C(arg1);
+    {
+        VtblEntry *vt = *(VtblEntry **)((char *)self + 0x18);
+        ((void (*)(void *, void *, s32))vt[6].pfn)((char *)self + vt[6].delta, &n, 4);
+    }
+    while (--n != -1) {
+        {
+            VtblEntry *vt = *(VtblEntry **)((char *)self + 0x18);
+            ((void (*)(void *, void *, s32))vt[6].pfn)((char *)self + vt[6].delta, &idx, 4);
+        }
+        fn_802F043C((s32)self, &val);
+        *(s32 *)fn_802CCD20(arg1, idx) = val;
+    }
+    return self;
+}
+
 void fn_803BBFD0(void *self) {
     ((s32 *)self)[0] = 0;
     ((s32 *)self)[2] = 0;
