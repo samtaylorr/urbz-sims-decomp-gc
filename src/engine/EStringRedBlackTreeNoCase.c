@@ -397,6 +397,20 @@ void *fn_803664B0(u8 *self) {
     return self;
 }
 
+void fn_80366554(u8 *self, s32 flags) {
+    void fn_80366708(void *);
+    void fn_802D8260(void *, s32);
+    void fn_802D20E8(void *);
+    if (*(s32 *)(self + 0x38) != 0) {
+        fn_80366708(self);
+    }
+    fn_802D8260(self + 0x18, 2);
+    fn_802D8260(self, 2);
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 s32 fn_803668C0(void *self, s32 arg1) {
     s32 fn_802D83EC(void *);
     void fn_802D8424(void *);
