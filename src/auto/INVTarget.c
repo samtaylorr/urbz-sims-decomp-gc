@@ -2406,6 +2406,31 @@ void fn_802059AC(void *arg0, s32 arg1) {
     fn_80245BB4(arg1, lbl_803E4E18, 1);
 }
 
+void fn_80205AE0(void *arg0, void *arg1) {
+    void fn_80205CF8(void *, s32, s32 *, s32 *);
+    void fn_8016CD4C();
+    void fn_800F8178(void *, s32);
+    s32 sp8[2];
+    s32 sp10;
+    s32 *sp14;
+    s32 val;
+    fn_80205CF8(arg0, M2C_FIELD(arg0, u8 *, 0x8C1), sp8, &sp10);
+    switch (sp10) {
+    case 9:
+    case 10:
+    case 11:
+        return;
+    }
+    if ((u32)sp10 <= 14) {
+        fn_8016CD4C(&sp14, sp8[0]);
+        val = 0;
+        if (sp14 != 0) {
+            val = *sp14;
+        }
+        fn_800F8178(arg1, val);
+    }
+}
+
 void fn_80206190(void) {
 
 }
