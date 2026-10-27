@@ -3297,6 +3297,21 @@ void fn_800E9314(void *arg0, s32 arg1) {
     fn_8004702C(lbl_8041F754, arg1);
 }
 
+void fn_800E9480(s32 arg0) {
+    void fn_800CAF98(void *);
+    u8 *self = (u8 *)arg0;
+    if (*(u8 **)(self + 0x98) != 0) {
+        u8 *obj;
+        fn_800CAF98(*(u8 **)(self + 0x98));
+        obj = *(u8 **)(self + 0x98);
+        if (obj != 0) {
+            u8 *vt = *(u8 **)(obj + 0x44);
+            (*(void (**)(void *, s32))(vt + 0xc))(obj + *(s16 *)(vt + 8), 3);
+        }
+        *(u8 **)(self + 0x98) = 0;
+    }
+}
+
 void fn_800E94E8(s32 arg0) {
     void fn_800CAFE8(void *);
     u8 *self = (u8 *)arg0;
