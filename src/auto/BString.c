@@ -4040,6 +4040,29 @@ s32 fn_800EBC7C(void) {
     return 0;
 }
 
+s32 fn_800EC3E4(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    s32 fn_80248268(const char *, const char *, u32);
+    s32 ret;
+
+    if ((u32)arg1 > (u32)fn_800EF6F8((void **)arg0)) {
+        fn_800EAF5C();
+    }
+    if ((u32)arg3 > (u32)arg4) {
+        arg3 = arg4;
+    }
+    if (fn_800EF6F8((void **)arg0) == 0) {
+        if (arg2 != 0) {
+            return fn_800EBC7C() - *(const char *)arg2;
+        }
+        return fn_800EBC7C();
+    }
+    ret = fn_80248268((const char *)fn_800EAFCC((void **)arg0) + arg1, (const char *)arg2, arg3);
+    if (ret == 0) {
+        ret = fn_800EF6F8((void **)arg0) - arg1 - arg4;
+    }
+    return ret;
+}
+
 u32 fn_800EC848(void **arg0, const u8 *arg1, u32 arg2, u32 arg3) {
     u32 i;
     u32 pos = arg2;
