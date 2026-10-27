@@ -1402,8 +1402,87 @@ void fn_802D21E0(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
 
+void *fn_802D2308(u32 align, u32 size) {
+    void *heap;
+    void *p;
+
+    heap = ((void *(*)(void))fn_802D0AB8)();
+    if (size == 0) {
+        return NULL;
+    }
+    size = (size + align - 1) & -align;
+    p = fn_802D197C(heap, size, align);
+    if (p == NULL) {
+        p = fn_802DC3C0(heap, size, align, 0, 0);
+        if (p == NULL && heap == ((void *(*)(void))fn_802D0AB8)()) {
+            return fn_802DC3C0(fn_802D0B3C(), size, align, 0, 0);
+        }
+    }
+    return p;
+}
+
+void *fn_802D23C0(void *arg0, u8 *arg1, u32 arg2, u32 arg3) {
+    u32 i;
+    u8 *p;
+
+    M2C_FIELD(arg0, u32 *, 0xC) = arg3;
+    M2C_FIELD(arg0, void **, 4) = NULL;
+    M2C_FIELD(arg0, u32 *, 8) = arg3 * arg2;
+    M2C_FIELD(arg0, u8 **, 0) = arg1;
+    M2C_FIELD(arg0, u32 *, 0x10) = arg2;
+    M2C_FIELD(arg0, u32 *, 0x14) = arg3;
+    p = arg1;
+    for (i = 0; i < M2C_FIELD(arg0, u32 *, 0xC); i++) {
+        if (p != NULL) {
+            *(void **)p = M2C_FIELD(arg0, void **, 4);
+            M2C_FIELD(arg0, void **, 4) = p;
+        }
+        p += arg2;
+    }
+    M2C_FIELD(arg0, s32 *, 0x18) = 0;
+    M2C_FIELD(arg0, s32 *, 0x1C) = 0;
+    return arg0;
+}
+
+s32 fn_802D2430(void *arg0) {
+    extern void fn_802DEEB8(void *);
+    extern void fn_802D2FD0(void *, void *);
+    extern void *fn_802DF13C(void *);
+    extern void fn_802DEF04(void *, s32);
+    extern void fn_802D30D4(void *, s32 *);
+    extern void fn_802DF214(void *);
+    extern char lbl_80419730[];
+    extern char lbl_804194F8[];
+    u8 buf[0x30];
+    s32 result;
+    void *h;
+
+    fn_802DEEB8(buf);
+    fn_802D2FD0(buf, arg0);
+    h = fn_802DF13C(buf);
+    fn_802DEF04(buf, 2);
+    M2C_FIELD(buf, s32 *, 0x20) = 0;
+    M2C_FIELD(buf, char **, 0x18) = lbl_80419730;
+    M2C_FIELD(buf, s32 *, 0) = 0;
+    M2C_FIELD(buf, void **, 0x1C) = h;
+    fn_802D30D4(buf, &result);
+    M2C_FIELD(buf, char **, 0x18) = lbl_804194F8;
+    fn_802DF214(h);
+    return result;
+}
+
 void fn_802D24C8(void) {
     fn_802D24E8();
+}
+
+void *fn_802D259C(void *arg0) {
+    if (arg0 == NULL) {
+        return NULL;
+    }
+    if (((s32 (*)(void *))fn_802D24E8)(arg0) == 0) {
+        return NULL;
+    }
+    return arg0;
 }
 
 void fn_802D26A0(void) {
