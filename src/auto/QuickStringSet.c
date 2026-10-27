@@ -107,9 +107,9 @@ s32 fn_800F68B4(s32 *self) {
     return self[1];
 }
 
-void fn_800F68BC(s32 *arg0) {
-    M2C_UNK fn_80248808(s32);
-    fn_80248808(*arg0);
+s32 fn_800F68BC(s32 *arg0) {
+    s32 fn_80248808(s32);
+    return fn_80248808(*arg0);
 }
 
 s32 fn_800F69E8(s32 *self) {
@@ -306,31 +306,17 @@ void fn_800F791C(char *self) {
 
 s32 fn_800F7954(void *self, s32 idx) {
     s32 **vec = M2C_FIELD(self, s32 ***, 8);
-    if (vec != NULL && idx > 0) {
-        s32 *arr = *vec;
-        s32 n = 0;
-        if (arr != NULL) {
-            n = arr[-1];
-        }
-        if (idx <= n) {
-            return arr[(u32)(idx - 1)];
-        }
+    if (vec != NULL && idx > 0 && idx <= QVec_Count(vec)) {
+        return QVec_At(vec, idx - 1);
     }
     return 0;
 }
 
 void fn_800F79A4(s32 *out, void *self, s32 idx) {
     s32 **vec = M2C_FIELD(self, s32 ***, 4);
-    if (vec != NULL && idx > 0) {
-        s32 *arr = *vec;
-        s32 n = 0;
-        if (arr != NULL) {
-            n = arr[-1];
-        }
-        if (idx <= n) {
-            *out = arr[(u32)(idx - 1)];
-            return;
-        }
+    if (vec != NULL && idx > 0 && idx <= QVec_Count(vec)) {
+        *out = QVec_At(vec, idx - 1);
+        return;
     }
     *out = M2C_FIELD(self, s32 *, 0xC);
 }
