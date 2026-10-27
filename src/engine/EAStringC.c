@@ -2514,6 +2514,7 @@ void fn_802BBD98(void) {
 }
 
 void **fn_802BC580(void **self, void **other) {
+    extern void fn_802BC600(void **, u32);
     extern void fn_802482F8();
     struct Buf { u16 ref; u16 len; u16 cap; u16 flags; char data[1]; };
     u32 len;
@@ -2521,8 +2522,7 @@ void **fn_802BC580(void **self, void **other) {
 
     len = ((struct Buf *)*other)->len;
     fn_802BC600(self, len);
-    dst = ((struct Buf *)*self)->data;
-    fn_802482F8(dst, ((struct Buf *)*other)->data, len);
+    fn_802482F8(dst = ((struct Buf *)*self)->data, ((struct Buf *)*other)->data, len);
     dst[len] = 0;
     ((struct Buf *)*self)->len = len;
     ((struct Buf *)*self)->flags = ((struct Buf *)*other)->flags;
@@ -2571,19 +2571,19 @@ s32 fn_802BC93C(void **self, s32 c, s32 start) {
     extern char *fn_80248B28(char *, s32);
     struct Buf { u16 ref; u16 len; s32 cap; char data[1]; };
     char *p;
-    s32 i;
 
     if (start < ((struct Buf *)*self)->len) {
-        i = start;
-        if (i < 0) {
-            i = 0;
+        if (start < 0) {
+            start = 0;
         }
-        p = fn_80248B28(((struct Buf *)*self)->data + i, c);
+        p = fn_80248B28(((struct Buf *)*self)->data + start, c);
         if (p != 0) {
-            return p - ((struct Buf *)*self)->data;
+            goto found;
         }
     }
     return -1;
+found:
+    return (s32)p - (s32)((struct Buf *)*self)->data;
 }
 
 s32 fn_802BCA14(void) {
@@ -2620,6 +2620,28 @@ s32 fn_802BCD9C(void **self, char *set, s32 c) {
         *p++ = c;
     }
     return 0;
+}
+
+void **fn_802BD16C(void **self) {
+    extern void fn_802BE3D0(void **, u32, s32, u32, s32, u32);
+    extern const u8 lbl_803EBA39[];
+    struct Buf { u16 ref; u16 len; s32 cap; char data[1]; };
+    s32 len;
+    s32 i;
+    char *p;
+
+    len = ((struct Buf *)*self)->len;
+    fn_802BE3D0(self, len, 0, len, 1, len);
+    p = ((struct Buf *)*self)->data;
+    for (i = 0; i < len; i++) {
+        s32 ch = *p;
+        if (ch[lbl_803EBA39] & 1) {
+            ch += 0x20;
+        }
+        *p = ch;
+        p++;
+    }
+    return self;
 }
 
 void fn_802BD608(s32 arg0, s32 arg1) {
