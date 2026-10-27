@@ -673,6 +673,20 @@ void fn_8034BAF8(void) {
     fn_803552E4(lbl_8046DF78);
 }
 
+void fn_8034BB20(void *self, s32 arg, u8 value) {
+    struct {
+        u8 type;
+        u8 value;
+        s32 arg;
+    } cmd;
+    void fn_80355F58(void *, void *);
+    extern u8 lbl_8046DF78[];
+    cmd.arg = arg;
+    cmd.type = 0x2D;
+    cmd.value = value;
+    fn_80355F58(lbl_8046DF78, &cmd);
+}
+
 void fn_8034BB5C(void *self, s32 size, s32 a2, s32 a3, s32 a4, s32 a5, s32 a6) {
     void fn_8035613C(void *, s32, s32, s32, s32, s32, s32);
     extern u8 lbl_8046DF78[];
