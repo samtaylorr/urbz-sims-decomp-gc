@@ -800,6 +800,15 @@ f32 fn_800CF794(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0x28);
 }
 
+void fn_800CF79C(void *self, s32 *v) {
+    M2C_UNK fn_8039D8D8(void *);
+    s32 x = v[0];
+    s32 y = v[1];
+    M2C_FIELD(self, s32 *, 0x2C) = x;
+    M2C_FIELD(self, s32 *, 0x30) = y;
+    fn_8039D8D8((u8 *)self + 0x20);
+}
+
 s32 fn_800CF7D4(s32 arg0) {
     return arg0 + 0x2C;
 }
