@@ -71,20 +71,21 @@ void fn_80336E04(void) {
 
 char *fn_80336E08(char *self, s32 key) {
     s32 fn_80338598(char *, s32, char **);
+    char *res;
     struct {
         char *obj;
-        char *res;
-    } ctx;
+        u8 unk4[0];
+    } lock;
     if (key != 0) {
-        ERMLock_Lock((ERMLock *)&ctx, self);
-        if (fn_80338598(self + 0x40, key, &ctx.res) != 0) {
-            self = ctx.res;
+        ERMLock_Lock((ERMLock *)&lock, self);
+        if (fn_80338598(self + 0x40, key, &res) != 0) {
+            self = res;
             if (*(s32 *)(self + 0xC) != 0) {
-                ERMLock_Unlock((ERMLock *)&ctx);
+                ERMLock_Unlock((ERMLock *)&lock);
                 return self;
             }
         }
-        ERMLock_Unlock((ERMLock *)&ctx);
+        ERMLock_Unlock((ERMLock *)&lock);
     }
     return 0;
 }

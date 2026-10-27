@@ -249,10 +249,12 @@ s32 fn_801BF7BC(void *arg0) {
 }
 
 void fn_801BF7C8(void) {
-    extern void *lbl_8041FA44[];
-    u8 *obj = (u8 *)lbl_8041FA44[0];
-    u8 *vt = *(u8 **)(obj + 0x44);
-    (*(void (**)(void *))(vt + 0x3C))(obj + *(s16 *)(vt + 0x38));
+    typedef struct { s16 delta; s16 idx; void (*fn)(void *); } VtEnt;
+    typedef struct { u8 pad[0x44]; VtEnt *vt; } Obj;
+    extern Obj *lbl_8041FA44[];
+    Obj *obj = lbl_8041FA44[0];
+    VtEnt *e = (VtEnt *)((u8 *)obj->vt + 0x38);
+    e->fn((u8 *)obj + e->delta);
 }
 
 void fn_801BF804(void *arg0, s32 arg1, s32 arg2) {

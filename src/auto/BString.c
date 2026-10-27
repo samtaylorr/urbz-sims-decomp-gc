@@ -2002,15 +2002,16 @@ void fn_800DFFE4(void *arg0) {
 }
 
 void fn_800DFFF4(s32 *self) {
+    struct VEntry { s16 delta; s16 index; void (*fn)(void *); };
     char *obj;
-    char *vt;
+    struct VEntry *e;
     switch (self[6]) {
     case 7:
         break;
     case 9:
         obj = M2C_FIELD(self[2], char **, 0x94);
-        vt = M2C_FIELD(obj, char **, 0x44);
-        M2C_FIELD(vt, void (**)(void *), 0x1C)(obj + M2C_FIELD(vt, s16 *, 0x18));
+        e = (struct VEntry *)(M2C_FIELD(obj, char **, 0x44) + 0x18);
+        e->fn(obj + e->delta);
         break;
     }
 }
@@ -2023,9 +2024,9 @@ void fn_800E0248(s32 *self) {
     char *obj;
     char *vt;
     if ((u32)(self[6] - 1) <= 1) {
-        obj = M2C_FIELD(self[2], char **, 0x94);
-        vt = M2C_FIELD(obj, char **, 0x44);
-        M2C_FIELD(vt, void (**)(void *), 0x1C)(obj + M2C_FIELD(vt, s16 *, 0x18));
+        obj = *(char **)((char *)self[2] + 0x94);
+        vt = *(char **)(obj + 0x44);
+        (*(void (**)(void *))(vt + 0x1C))(obj + *(s16 *)(vt + 0x18));
     }
 }
 

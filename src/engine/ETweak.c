@@ -110,20 +110,18 @@ s32 fn_80314784(void *arg0) {
     return done;
 }
 
-void fn_80314A18(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+void fn_80314A18(void *arg0, s32 arg1, void *arg2, s32 arg3) {
     M2C_UNK fn_802D1FC8(M2C_UNK);
     M2C_UNK fn_802D39E4(void *);
-    M2C_UNK fn_802D3CE4(void *, s32);
+    M2C_UNK fn_802D3CE4(void *, void *);
     M2C_UNK fn_802CB69C(void *, void *);
     s32 *obj;
-    s32 *str;
 
     obj = (s32 *)fn_802D1FC8(0xC);
-    str = &obj[1];
-    fn_802D39E4(str);
+    fn_802D39E4(&obj[1]);
     obj[0] = arg1;
-    fn_802D3CE4(str, arg2);
     obj[2] = arg3;
+    fn_802D3CE4(&obj[1], arg2);
     fn_802CB69C((s8 *)arg0 + 0xC, obj);
     M2C_FIELD(arg0, s32 *, 8)++;
 }
@@ -155,25 +153,24 @@ void fn_80314B08(void *arg0, s32 arg1) {
     }
 }
 
-void fn_80314B90(s32 arg0) {
+void fn_80314B90(void *arg0) {
     M2C_UNK fn_802CB8D4(void *);
     M2C_UNK fn_802D20E8(void *);
     M2C_UNK fn_802D39F0(void *, s32);
     s8 *list;
-    s32 **node;
-    s32 **next;
+    void *node;
+    void *next;
     s32 *obj;
 
     list = (s8 *)arg0 + 0xC;
-    node = M2C_FIELD(list, s32 ***, 4);
-    while (ETweakNode_Valid(node)) {
-        obj = node[0];
-        next = (s32 **)node[1];
+    next = M2C_FIELD(list, void **, 4);
+    while (ETweakNode_Valid(node = next)) {
+        obj = M2C_FIELD(node, s32 **, 0);
+        next = M2C_FIELD(node, void **, 4);
         if (M2C_FIELD(list, s32 *, 8) != 0 && obj != NULL) {
             fn_802D39F0(&obj[1], obj[1]);
             fn_802D20E8(obj);
         }
-        node = next;
     }
     fn_802CB8D4(list);
 }

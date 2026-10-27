@@ -10336,9 +10336,11 @@ void *fn_803BF400(void *self, void *list) {
     extern s32 fn_802CB994(void *);
     extern void fn_8036C31C(void *, s32);
     s32 *node;
-    s32 n = fn_802CB994(list);
+    s32 n;
+    s32 len = fn_802CB994(list);
     void *vt = M2C_FIELD(self, void **, 0x18);
 
+    n = len;
     M2C_FIELD(vt, void (**)(void *, s32 *, s32), 0x3C)((char *)self + M2C_FIELD(vt, s16 *, 0x38), &n, 4);
     for (node = *(s32 **)list; Slist_IterNe(node, 0); node = (s32 *)node[2]) {
         fn_8036C31C(self, node[0]);
