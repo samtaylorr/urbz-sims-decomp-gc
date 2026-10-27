@@ -2431,6 +2431,16 @@ void fn_80205AE0(void *arg0, void *arg1) {
     }
 }
 
+void fn_80205CB4(void *arg0, s32 arg1) {
+    void fn_80245BB4(s32, char *, ...);
+    extern char lbl_803E4E18[];
+    s32 flag = 0;
+    if (M2C_FIELD(arg0, s32 *, 0x88) != 0) {
+        flag = 1;
+    }
+    fn_80245BB4(arg1, lbl_803E4E18, flag);
+}
+
 void fn_80206190(void) {
 
 }
