@@ -370,6 +370,10 @@ s32 fn_8019E7C4(void *arg0, s32 arg1, void **arg2) {
     return 0;
 }
 
+s32 fn_8019E834(void *arg0) {
+    return ++M2C_FIELD(arg0, s32 *, 0x5C);
+}
+
 void fn_8019EE44(void *arg0) {
     void *vt = M2C_FIELD(arg0, void **, 0);
     M2C_FIELD(vt, void (**)(void *), 0x34)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x30));
