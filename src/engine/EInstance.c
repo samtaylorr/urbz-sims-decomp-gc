@@ -302,8 +302,8 @@ void fn_802F17B4(void *arg0) {
     if (temp_r0 != NULL) {
         temp_r0(M2C_FIELD(arg0, s32 *, 0x30), 1, &a, &b);
     } else {
-        a = (u16) (s32) temp_r0;
         b = (u16) (s32) temp_r0;
+        a = (u16) (s32) temp_r0;
     }
     var_r11 = 1;
     if (M2C_FIELD(arg0, u16 *, 0x28) == a) {
