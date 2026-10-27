@@ -1579,15 +1579,15 @@ void fn_801DF0A8(u8 *self, s32 flags) {
 s32 fn_801DF4A0(s32 arg0) {
     extern void *fn_80336E08(void *, void *);
     extern u8 lbl_8045BA40[];
-    extern u8 *lbl_80494618;
+    extern struct { void *names[20]; void *objs[20]; } *lbl_80494618;
 
     if (lbl_80494618 == 0) {
         return 0;
     }
-    if (((void **)(lbl_80494618 + 0x50))[arg0] == 0) {
-        ((void **)(lbl_80494618 + 0x50))[arg0] = fn_80336E08(lbl_8045BA40, ((void **)lbl_80494618)[arg0]);
+    if (lbl_80494618->objs[arg0] == 0) {
+        lbl_80494618->objs[arg0] = fn_80336E08(lbl_8045BA40, lbl_80494618->names[arg0]);
     }
-    return (s32)((void **)(lbl_80494618 + 0x50))[arg0];
+    return (s32)lbl_80494618->objs[arg0];
 }
 
 f32 fn_801DF514(s32 arg0) {
