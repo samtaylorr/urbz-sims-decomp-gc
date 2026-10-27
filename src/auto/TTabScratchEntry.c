@@ -2,7 +2,20 @@
 #include "common.h"
 
 extern u8 lbl_80414770[];
+extern u8 lbl_80415370[];
+extern u8 lbl_804152F0[];
+extern char lbl_803DBDE0[];
+void fn_801B1774(void **, s32);
+void fn_801B1AB4(void *);
+void fn_801B1644(void *);
+void fn_800F687C(void *, void *, s32);
+void fn_800F68F0(void *, void *, s32);
+s32 fn_800F68BC(s32);
+void fn_800F6A38(s32, s32);
+extern u8 lbl_80415370[];
+extern u8 lbl_804152F0[];
 extern char lbl_80435418[];
+extern char lbl_803DBDE0[];
 
 typedef struct ScratchPool {
     u32 base;
@@ -339,8 +352,7 @@ void fn_8019E5B0(void **self, s32 flags) {
 }
 
 s32 fn_8019E638(s32 arg0) {
-    M2C_UNK fn_800F6A38(s32);
-    fn_800F6A38(arg0 + 4);
+    fn_800F6A38(arg0, arg0 + 4);
     return 1;
 }
 
@@ -1653,9 +1665,9 @@ void fn_801B1F0C(void *arg0) {
 extern char lbl_80435418[];
 extern char lbl_80435438[];
 void fn_802D23C0();
+void fn_800F6A38(s32, s32);
 s32 fn_801B225C(s32 arg0) {
-    M2C_UNK fn_800F6A38(s32);
-    fn_800F6A38(arg0 + 0x18);
+    fn_800F6A38(arg0, arg0 + 0x18);
     return 1;
 }
 
@@ -1698,11 +1710,9 @@ s32 fn_801B24C8(void) {
     return 0;
 }
 
-extern u8 lbl_804152F0[];
 void fn_801B2540(void **self) {
-    M2C_UNK fn_801B1774(void **);
     *self = lbl_804152F0;
-    fn_801B1774(self);
+    fn_801B1774(self, 0);
 }
 
 s32 fn_801B2570(void) {
@@ -1712,5 +1722,36 @@ s32 fn_801B2570(void) {
 void fn_801B2578(void) {
     M2C_UNK fn_801B2364(M2C_UNK, M2C_UNK);
     fn_801B2364(1, 0xFFFF);
+}
+
+void fn_801B2444(void **self, s32 flags) {
+    *self = lbl_80415370;
+    fn_801B1774(self, 0);
+    if (flags & 1) {
+        fn_801B1AB4(self);
+    }
+}
+
+s16 fn_801B23BC(void *arg0, s32 arg1) {
+    return ((s16 *)(M2C_FIELD(arg0, void **, 0x14)))[arg1];
+}
+
+void *fn_801B24D0(void *arg0) {
+    void *r28 = (char *)arg0 + 0x18;
+    fn_801B1644(arg0);
+    *(void **)arg0 = lbl_804152F0;
+    fn_800F687C(r28, (char *)arg0 + 0x20, 0x40);
+    fn_800F68F0(r28, lbl_803DBDE0, -1);
+    *(s32 *)((char *)arg0 + 0x60) = 0;
+    return arg0;
+}
+
+s32 fn_801B2208(void *arg0, void *arg1) {
+    s32 r31 = (s32)arg0 + 0x18;
+    if (fn_800F68BC(r31)) {
+        fn_800F6A38((s32)arg1, r31);
+        return 1;
+    }
+    return 0;
 }
 
