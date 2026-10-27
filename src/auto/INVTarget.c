@@ -111,9 +111,12 @@ void fn_801D758C(void) {
     }
 }
 
+void *fn_801D7BE0(void **arg0, s32 arg1);
+s32 fn_801D7CDC(void *arg0, s32 arg1);
+void fn_801D7A14(void **arg0, void *arg1);
+
 s32 fn_801D7D3C(void *arg0) {
-    s32 fn_801D7BE0(void *);
-    return fn_801D7BE0(arg0) != 0;
+    return ((s32 (*)(void *))fn_801D7BE0)(arg0) != 0;
 }
 
 void fn_801D7D6C(void **arg0) {
