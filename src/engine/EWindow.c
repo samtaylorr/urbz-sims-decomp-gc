@@ -321,6 +321,22 @@ s32 fn_803082C4(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0xA4);
 }
 
+void fn_8030834C(void *self, s32 flags) {
+    extern void fn_8031EA2C(void *);
+    extern void fn_80305AB0(void *, s32);
+    extern u8 lbl_8041AE10[];
+    M2C_FIELD(self, u8 **, 0x44) = lbl_8041AE10;
+    if (M2C_FIELD(self, void **, 0xf8) != NULL) {
+        fn_8031EA2C(M2C_FIELD(self, void **, 0xf8));
+    }
+    if (M2C_FIELD(self, void **, 0xfc) != NULL) {
+        fn_8031EA2C(M2C_FIELD(self, void **, 0xfc));
+    }
+    M2C_FIELD(self, void **, 0xfc) = NULL;
+    M2C_FIELD(self, void **, 0xf8) = NULL;
+    fn_80305AB0(self, flags);
+}
+
 void fn_803083BC(void *arg0) {
     M2C_UNK fn_80305B1C();
     fn_80305B1C();
