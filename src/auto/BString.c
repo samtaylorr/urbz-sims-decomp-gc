@@ -3241,6 +3241,15 @@ void fn_800E6630(void) {
     fn_803338AC(lbl_80494FCC, 0);
 }
 
+void fn_800E6658(s32 *self) {
+    if (((s32 (*)(s32))fn_800E9514)(self[2]) != 0) {
+        if (((s32 (*)(s32))fn_800E953C)(self[2]) == 1) {
+            fn_800E9554(self[2]);
+            fn_800E3B80(self, 1);
+        }
+    }
+}
+
 void fn_800E82E8(void *arg0, s32 arg1) {
     void *temp_r11;
     void *temp_r9;
