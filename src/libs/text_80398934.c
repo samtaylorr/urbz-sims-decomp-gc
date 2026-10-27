@@ -8271,6 +8271,16 @@ void fn_803B981C(void *self) {
     ((s32 *)self)[1] = 0;
 }
 
+void fn_803B9830(s32 self) {
+    s32 *p = (s32 *)self;
+    void *ptr;
+
+    fn_803B9800((s32 *)p[0], p[1]);
+    ptr = (void *)p[0];
+    fn_802D1A00(fn_802D0AB8(), ptr);
+    fn_803B981C(p);
+}
+
 extern void fn_803B9830(s32);
 void fn_803B987C(s32 self, s32 flags) {
     fn_803B9830(self);
