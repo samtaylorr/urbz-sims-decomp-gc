@@ -239,6 +239,29 @@ s32 fn_8014FA04(void *arg0, void *arg1) {
     return total;
 }
 
+s32 fn_8014FAE8(void *arg0, void *arg1) {
+    s32 fn_8016CC2C(void *, void *);
+    s32 fn_8014FC44(void *, void *);
+    s32 total;
+    s32 id;
+    void *it;
+
+    total = 0;
+    if (M2C_FIELD(M2C_FIELD(arg1, void **, 0x38), s32 *, 0xC0) == 0) {
+        id = M2C_FIELD(M2C_FIELD(arg1, void **, 0x38), s16 *, 0x14);
+        it = M2C_FIELD(*(void **)arg0, void *(**)(void *, void *), 0x7C)((char *)arg0 + M2C_FIELD(*(void **)arg0, s16 *, 0x78), NULL);
+        while (it != NULL) {
+            if (M2C_FIELD(M2C_FIELD(it, void **, 0x38), s16 *, 0x14) == id && M2C_FIELD(M2C_FIELD(it, void **, 0x38), s32 *, 0xC0) != 0 && fn_8016CC2C(it, arg1) != 0) {
+                total += fn_8014FC44(arg0, it);
+            }
+            it = M2C_FIELD(*(void **)arg0, void *(**)(void *, void *), 0x7C)((char *)arg0 + M2C_FIELD(*(void **)arg0, s16 *, 0x78), it);
+        }
+    } else {
+        total = fn_8014FC44(arg0, arg1);
+    }
+    return total;
+}
+
 s32 fn_8014FBCC(void *arg0, void *arg1) {
     s32 fn_800F5530(s32, void *);
     s32 var_r30;
