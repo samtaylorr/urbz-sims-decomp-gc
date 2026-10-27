@@ -49,6 +49,21 @@ M2C_UNK *fn_80177154(void) {
     return &lbl_80495CA0;
 }
 
+void fn_8017E10C(void) {
+    void fn_802D20E8(void *);
+    void fn_803997AC(void *, u32);
+    extern u8 lbl_80435188[];
+    u8 *p = *(u8 **)lbl_80435188;
+    if (p != NULL) {
+        u32 size = (*(u32 *)(lbl_80435188 + 0xC) - (u32)p) & ~3;
+        if (size > 0x80) {
+            fn_802D20E8(p);
+        } else {
+            fn_803997AC(p, size);
+        }
+    }
+}
+
 s32 fn_80181314(void) {
     return 0x50455253;
 }
