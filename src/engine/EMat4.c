@@ -1351,14 +1351,19 @@ s32 fn_802D0EA4(void *arg0, void *arg1, s32 arg2) {
 }
 
 void fn_802D0F10(void *arg0) {
-    void *volatile p = M2C_FIELD(arg0, void **, 0x4FC);
+    void *volatile p;
+    void *q;
+    void *r;
 
-    if (p != NULL) {
-        fn_802D9214(p);
+    q = M2C_FIELD(arg0, void **, 0x4FC);
+    p = q;
+    if (q != NULL) {
+        fn_802D9214(q);
     }
     fn_802DCE18(arg0);
-    if (p != NULL) {
-        fn_802D9244(p);
+    r = p;
+    if (r != NULL) {
+        fn_802D9244(r);
     }
 }
 
