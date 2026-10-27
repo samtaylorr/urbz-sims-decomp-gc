@@ -796,7 +796,7 @@ void fn_800D4014(s32 *self, s32 flags) {
 
 void fn_800D4048(void *arg0) {
     extern void fn_800D28AC(void *);
-    *(s32 *)&lbl_8041F754 = 3;
+    ((s32 *)lbl_8041F754)[0] = 3;
     fn_800D28AC(arg0);
 }
 
