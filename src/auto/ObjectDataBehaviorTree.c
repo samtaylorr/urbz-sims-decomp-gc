@@ -20,6 +20,17 @@ static inline void *ScratchPool_Alloc(ScratchPool *pool) {
     return p;
 }
 
+static inline int ScratchPool_Contains(ScratchPool *pool, void *p) {
+    return (u32)p >= pool->base && (u32)p < pool->base + pool->size;
+}
+
+static inline void ScratchPool_Free(ScratchPool *pool, void *p) {
+    if (p != NULL) {
+        *(void **)p = pool->free;
+        pool->free = p;
+    }
+}
+
 void *fn_802D0AB8(void);
 void *fn_802D0B3C(void);
 void *fn_802D197C(void *, u32, s32);
