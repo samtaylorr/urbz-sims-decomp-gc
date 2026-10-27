@@ -1027,6 +1027,16 @@ s32 fn_80265EE0(void *cur, void *prev) {
     return 0;
 }
 
+void fn_80265F80(s32 a, s32 b, s32 c, s32 d) {
+    extern s32 lbl_80442A48[];
+    extern s32 lbl_80495F84;
+    void fn_80265D98(s32, s32, s32, s32);
+
+    lbl_80442A48[0] = -1;
+    lbl_80495F84 = 0;
+    fn_80265D98(a, b, c, d);
+}
+
 s32 fn_802668EC(s32 arg0) {
     extern s32 lbl_80495F4C;
     s32 temp_r31;
