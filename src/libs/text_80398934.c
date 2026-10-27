@@ -7079,6 +7079,20 @@ void *fn_803B6F48(void *self) {
     return self;
 }
 
+s32 fn_803B7070(u8 **arg0, u8 **arg1) {
+    s32 fn_80248268(const void *, const void *, u32);
+    u8 *a = *arg0;
+    u8 *b = *arg1;
+
+    if (*(u16 *)(a + 2) != *(u16 *)(b + 2)) {
+        return 0;
+    }
+    if (a == b) {
+        return 1;
+    }
+    return fn_80248268(a + 8, b + 8, *(u16 *)(a + 2)) == 0;
+}
+
 s32 fn_803B71F8(void) {
     return 0;
 }
