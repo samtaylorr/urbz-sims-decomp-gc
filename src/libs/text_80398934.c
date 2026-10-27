@@ -9906,7 +9906,8 @@ void fn_803BDA1C(void) {
 }
 
 void fn_803BDD5C(Elem12 *first, Elem12 *last, s32 comp) {
-    void fn_803BDBC8(Elem12 *, s32, s32, Elem12, s32);
+    struct E { s32 v[3]; };
+    void fn_803BDBC8(Elem12 *, s32, s32, struct E, s32);
     s32 len = last - first;
     s32 parent;
 
@@ -9915,7 +9916,7 @@ void fn_803BDD5C(Elem12 *first, Elem12 *last, s32 comp) {
     }
     parent = (len - 2) / 2;
     while (1) {
-        fn_803BDBC8(first, parent, len, first[parent], comp);
+        fn_803BDBC8(first, parent, len, *(struct E *)&first[parent], comp);
         if (parent == 0) {
             return;
         }
@@ -10227,19 +10228,16 @@ void fn_803BEE20(s32 **self) {
     fn_803BED94((s32)self);
 }
 
-void *fn_803BEF64(void *self, s32 **vec) {
+void *fn_803BEF64(void *self, s32 *vec) {
     void fn_8036C038(void *, s32);
-    void *vt;
     s32 n;
     s32 tmp;
     s32 i;
 
-    vt = M2C_FIELD(self, void **, 0x18);
-    n = (s32)vec[1];
-    tmp = n;
-    M2C_FIELD(vt, void (**)(void *, s32 *, s32), 0x3C)((char *)self + M2C_FIELD(vt, s16 *, 0x38), &tmp, 4);
+    tmp = n = vec[1];
+    M2C_FIELD(M2C_FIELD(self, void **, 0x18), void (**)(void *, s32 *, s32), 0x3C)((char *)self + M2C_FIELD(M2C_FIELD(self, void **, 0x18), s16 *, 0x38), &tmp, 4);
     for (i = 0; i < n; i++) {
-        fn_8036C038(self, vec[0][i]);
+        fn_8036C038(self, ((s32 *)vec[0])[i]);
     }
     return self;
 }
@@ -10332,15 +10330,15 @@ void *fn_803BF28C(u8 *self, s32 *arr) {
 void *fn_803BF400(void *self, void *list) {
     extern s32 fn_802CB994(void *);
     extern void fn_8036C31C(void *, s32);
+    void *vt;
     s32 n;
     s32 *node;
 
     n = fn_802CB994(list);
-    M2C_FIELD(M2C_FIELD(self, void **, 0x18), void (**)(void *, s32 *, s32), 0x3C)((char *)self + M2C_FIELD(M2C_FIELD(self, void **, 0x18), s16 *, 0x38), &n, 4);
-    node = *(s32 **)list;
-    while ((node != 0) != 0) {
+    vt = M2C_FIELD(self, void **, 0x18);
+    M2C_FIELD(vt, void (**)(void *, s32 *, s32), 0x3C)((char *)self + M2C_FIELD(vt, s16 *, 0x38), &n, 4);
+    for (node = *(s32 **)list; Slist_IterNe(node, 0); node = (s32 *)node[2]) {
         fn_8036C31C(self, node[0]);
-        node = (s32 *)node[2];
     }
     return self;
 }
@@ -10777,7 +10775,7 @@ void fn_803C0CDC(void) {
     fn_803C0D34();
 }
 
-void fn_803C0D34(void *);
+void *fn_803C0D34(void *);
 void fn_803C0D04(void *self) {
     fn_803C0D34(self);
 }
@@ -10786,9 +10784,10 @@ void fn_803C0D24(M2C_UNK **arg0) {
     *arg0 = &lbl_804194A0;
 }
 
-void fn_803C0D34(void *arg0) {
+void *fn_803C0D34(void *arg0) {
     extern u8 lbl_8041DE78[];
-    Obj_SetVtbl(arg0, lbl_8041DE78);
+    M2C_FIELD(arg0, void **, 0) = lbl_8041DE78;
     M2C_FIELD(arg0, s32 *, 0x20) = 0;
+    return arg0;
 }
 
