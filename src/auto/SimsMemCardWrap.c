@@ -565,7 +565,7 @@ void fn_800AB5B8(s32 arg0, s32 arg1) {
     fn_800AB5F8(arg0, (temp_r4 - (temp_r4 & ~3)) + 2, arg1);
 }
 
-void fn_800AB5F8(void) {
+void fn_800AB5F8(s32 arg0, s32 arg1, s32 arg2) {
 
 }
 
