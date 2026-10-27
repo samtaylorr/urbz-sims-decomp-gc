@@ -759,11 +759,13 @@ s32 fn_800FC788(void *arg0, s32 arg1) {
 }
 
 s32 fn_800FC814(s32 arg0) {
-    s32 r = 0;
+    s32 r;
     switch (arg0) {
+    case 0: r = 0; break;
     case 1: r = 0xFFF; break;
     case 2: r = 0x1FFF; break;
     case 3: r = 0x2328; break;
+    default: r = 0; break;
     }
     return r;
 }
@@ -796,6 +798,21 @@ void fn_800FCAB0(void) {
     u8 *p = *(u8 **)lbl_80434B08;
     if (p != 0) {
         u32 size = (u32)(*(u32 *)(lbl_80434B08 + 0xC) - (u32)p) & ~1;
+        if (size > 0x80) {
+            fn_802D20E8(p);
+        } else {
+            fn_803997AC(p, size);
+        }
+    }
+}
+
+void fn_800FCB00(void) {
+    extern u8 lbl_80434B18[];
+    void fn_802D20E8(void *);
+    void fn_803997AC(void *, u32);
+    u8 *p = *(u8 **)lbl_80434B18;
+    if (p != 0) {
+        u32 size = (u32)(*(u32 *)(lbl_80434B18 + 0xC) - (u32)p) & ~1;
         if (size > 0x80) {
             fn_802D20E8(p);
         } else {
