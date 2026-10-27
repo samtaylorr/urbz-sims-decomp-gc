@@ -3355,10 +3355,10 @@ s32 *fn_800E9860(s32 *self, s32 a) {
     f = lbl_803D5610[0];
     p = (f32 *)(self + 8);
     p[0] = f;
-    ((s32 *)p)[4] = 0;
-    p[2] = f;
     p[1] = f;
+    p[2] = f;
     ((s32 *)p)[3] = 0;
+    ((s32 *)p)[4] = 0;
     return self;
 }
 
@@ -3500,7 +3500,7 @@ void fn_800E9BFC(s32 *self) {
 
 s32 *fn_800E9C20(s32 *self, s32 arg1) {
     s32 *p;
-    s32 z;
+    s32 z[1];
     self[0] = arg1;
     self[1] = -1;
     self[2] = 0;
@@ -3517,9 +3517,8 @@ s32 *fn_800E9C20(s32 *self, s32 arg1) {
     p[1] = 0;
     {
         s32 *q = self + 13;
-        s32 *zp = &z;
-        z = 0;
-        q[1] = *zp;
+        z[0] = 0;
+        q[1] = z[0];
     }
     return self;
 }
@@ -3804,10 +3803,12 @@ void fn_800EA744(u64 *arg0) {
 s32 fn_800EA758(s32 arg0, s32 arg1) {
     extern u64 fn_8024E154();
     Bits64 v;
-    s32 ret;
-    v.bits = fn_8024E154(*(u64 *)arg0, arg1);
-    ret = 0;
-    if ((v.bits & 1) != 0) {
+    Bits64 r;
+    u64 bit = 1;
+    s32 ret = 0;
+    r.bits = fn_8024E154(*(u64 *)arg0, arg1);
+    v = r;
+    if ((v.bits & bit) != 0) {
         ret = 1;
     }
     return ret;
