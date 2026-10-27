@@ -331,6 +331,13 @@ void fn_80068F58(void) {
 
 }
 
+void fn_80068FCC(void *arg0) {
+    extern void fn_80067AA4(void *, s32, s32);
+
+    fn_80067AA4(arg0, 0, 0);
+    fn_80067AA4(arg0, 1, 0);
+}
+
 void fn_80069040(void *arg0) {
     void fn_800A90C0(void *);
     if (M2C_FIELD(arg0, void **, 0x20C) != 0) {
