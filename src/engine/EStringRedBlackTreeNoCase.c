@@ -286,6 +286,22 @@ void fn_80365DFC(void *arg0, s32 key, void *value) {
     }
 }
 
+void *fn_80366120(void *unused, void *node, void **out) {
+    s32 key = M2C_FIELD(node, s32 *, 0xC);
+
+    node = M2C_FIELD(node, void **, 8);
+    while (node != NULL) {
+        if (M2C_FIELD(node, s32 *, 0xC) == key) {
+            if (out != NULL) {
+                *out = M2C_FIELD(node, void **, 0x10);
+            }
+            return node;
+        }
+        node = M2C_FIELD(node, void **, 8);
+    }
+    return NULL;
+}
+
 void *fn_80366168(void *arg0, s32 index, s32 key) {
     void **buckets = M2C_FIELD(arg0, void **, 8);
     void *node = buckets[index];
