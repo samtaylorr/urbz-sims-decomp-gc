@@ -10500,6 +10500,21 @@ void fn_803C0938(u8 *dst, u8 *src, s32 n) {
     }
 }
 
+void *fn_803C0B88(u8 *self, s32 *arr) {
+    extern void fn_803C09F4(void *, s32, s32);
+    extern void fn_803747A8(void *, void *);
+    u8 *vt = M2C_FIELD(self, u8 **, 0x18);
+    s32 n;
+    s32 i;
+
+    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x34)(self + M2C_FIELD(vt, s16 *, 0x30), &n, 4);
+    fn_803C09F4(arr, n, 0);
+    for (i = 0; i < n; i++) {
+        fn_803747A8(self, (u8 *)*arr + i * 0xB0);
+    }
+    return self;
+}
+
 extern void fn_8039A024(void *);
 void *fn_803C0C20(void *self) {
     fn_8039A024(self);
