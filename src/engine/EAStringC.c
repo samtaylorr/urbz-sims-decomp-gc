@@ -1548,6 +1548,24 @@ f32 fn_802B4998(void *arg0) {
     return 0.0f;
 }
 
+void fn_802B4A58(void *arg0, void *arg1) {
+    extern u16 lbl_803FCE5C[];
+    extern void **lbl_80494DA0;
+    extern void fn_802B4ADC(void *, u16 **);
+    extern void fn_80248784(void *, void *);
+    u16 *p;
+    u16 *q;
+
+    p = lbl_803FCE5C;
+    lbl_803FCE5C[0]++;
+    fn_802B4ADC(arg0, &p);
+    fn_80248784(arg1, (u8 *) p + 8);
+    q = p;
+    if (--*q == 0) {
+        ((void (*)(void *)) lbl_80494DA0[1])(q);
+    }
+}
+
 s32 fn_802B4E80(void) {
     return lbl_80496130;
 }
@@ -2519,14 +2537,11 @@ void **fn_802BC580(void **self, void **other) {
     struct Buf { u16 ref; u16 len; u16 cap; u16 flags; char data[1]; };
     u32 len;
     char *dst;
-    char *src;
 
     len = ((struct Buf *)*other)->len;
     fn_802BC600(self, len);
-    src = ((struct Buf *)*other)->data;
     dst = ((struct Buf *)*self)->data;
-    fn_802482F8(dst, src, len);
-    dst[len] = 0;
+    fn_802482F8(dst, ((struct Buf *)*other)->data, len), dst[len] = 0;
     ((struct Buf *)*self)->len = len;
     ((struct Buf *)*self)->flags = ((struct Buf *)*other)->flags;
     return self;
