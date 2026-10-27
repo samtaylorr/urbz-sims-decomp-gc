@@ -3023,9 +3023,9 @@ s32 *fn_800E31B0(s32 *self, s32 arg1) {
     return self;
 }
 
-extern void fn_800E3DBC(s32);
+extern void fn_800E3DBC(s32, s32, f32);
 void fn_800E3B38(s32 *self, s32 id, f32 time) {
-    fn_800E3DBC(self[2]);
+    fn_800E3DBC(self[2], id, time);
 }
 
 extern void fn_800E3E08(s32);
