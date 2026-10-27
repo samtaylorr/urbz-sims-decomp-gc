@@ -127,23 +127,21 @@ void fn_80068244(void *arg0, s32 arg1) {
     extern void fn_8000F6D0(void *);
     extern void fn_8006410C(s32);
     struct { char pad0[0x1E4]; void *arr2[6]; void *arr[1]; } *self = arg0;
-    char *base = lbl_8041F94C;
-    s32 *p;
+    char *base;
     s32 i;
 
-    fn_8004D1BC(base);
+    fn_8004D1BC(lbl_8041F94C);
     fn_800A3F74(self->arr[arg1]);
     fn_8000F6D0(self->arr2[arg1]);
+    base = lbl_8041F94C;
     fn_8006410C(M2C_FIELD(M2C_FIELD(base, void **, 0xEC), s32 *, 4));
     if (arg1 == 1) {
-        p = (s32 *)((char *)arg0 + 0x2914);
-        for (i = 0; i < 6; i++) {
-            *p-- = 1000;
+        for (i = 5; i >= 0; i--) {
+            ((s32 *)((char *)arg0 + 0x2900))[i] = 1000;
         }
     } else {
-        p = (s32 *)((char *)arg0 + 0x28FC);
-        for (i = 0; i < 6; i++) {
-            *p-- = 1000;
+        for (i = 5; i >= 0; i--) {
+            ((s32 *)((char *)arg0 + 0x28E8))[i] = 1000;
         }
     }
 }
@@ -331,6 +329,13 @@ void fn_80068978(s32 arg0) {
 
 void fn_80068F58(void) {
 
+}
+
+void fn_80069040(void *arg0) {
+    void fn_800A90C0(void *);
+    if (M2C_FIELD(arg0, void **, 0x20C) != 0) {
+        fn_800A90C0(M2C_FIELD(arg0, void **, 0x20C));
+    }
 }
 
 void fn_80069E40(u8 *self, s32 delta) {
@@ -920,23 +925,25 @@ void fn_8006E7AC(void) {
 
 void fn_8006F374(u8 *self) {
     typedef struct { s32 *value; } Handle;
-    typedef struct { s32 v[6]; } Entry;
+    typedef struct { s32 key[4]; s32 val; s32 pad; } Entry;
+    typedef struct { u8 pad[0xAC]; s32 idx; u8 pad2[0x90]; Entry e[1]; } Obj;
     Handle fn_8004BA7C();
     extern void fn_8010CF10(s32, s32);
     extern u8 lbl_8041F94C[];
     extern u8 lbl_803C98A4[];
+    Obj *o = (Obj *)self;
     s32 idx;
     Handle h;
     s32 v;
 
-    idx = *(s32 *)(self + 0xAC);
+    idx = o->idx;
     h = fn_8004BA7C(lbl_8041F94C, lbl_803C98A4);
     v = 0;
     if (h.value != NULL) {
         v = *h.value;
     }
-    if (fn_802D5ACC((s32 *)((Entry *)self + idx) + 0x50, v) == 0) {
-        fn_8010CF10(lbl_80496644, ((Entry *)(self + 0x150))[*(s32 *)(self + 0xAC)].v[0]);
+    if (fn_802D5ACC((s32 *)(idx * 0x18 + self + 0x140), v) == 0) {
+        fn_8010CF10(lbl_80496644, o->e[o->idx].val);
     }
 }
 
