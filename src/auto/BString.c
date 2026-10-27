@@ -533,7 +533,7 @@ void fn_800D2C5C(void) {
 }
 
 void fn_800D2C6C(void) {
-    s32 *g = lbl_8041F754;
+    s32 *g = (s32 *)lbl_8041F754;
     u8 *obj;
     lbl_80434A9C[0x28 / 4] = 0;
     lbl_80434A9C[0x2C / 4] = 0;
