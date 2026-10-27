@@ -7406,6 +7406,14 @@ void fn_803BA044(void *self) {
     ((s32 *)self)[1] = 0;
 }
 
+void fn_803BA058(s32 *self, s32 n) {
+    extern void fn_802D5238(void *);
+    while (--n != -1) {
+        fn_802D5238(self);
+        self++;
+    }
+}
+
 void fn_803BA2EC(void *, s32, s32, s32);
 void fn_803BA3C4(void *self, s32 arg1) {
     fn_803BA2EC(self, arg1, M2C_FIELD(self, s32 *, 4), 1);
