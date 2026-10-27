@@ -317,6 +317,12 @@ void **fn_800F1894(void **arg0, s32 arg1, s32 arg2) {
     return arg0;
 }
 
+void *fn_800F0410(void *mem, s32 arg);
+void *fn_800F1930(void **arg0, s32 arg1) {
+    *arg0 = fn_800F0410(BString2_Alloc(0x10, 4), arg1);
+    return arg0;
+}
+
 void **fn_800F19C4(void **arg0, s32 arg1, s32 arg2) {
     void *fn_800F052C(void *mem, s32 arg1, s32 arg2);
     *arg0 = fn_800F052C(BString2_Alloc(0x10, 4), arg1, arg2);
