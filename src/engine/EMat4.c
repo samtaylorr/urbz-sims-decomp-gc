@@ -886,16 +886,16 @@ void *fn_802CCDC8(void *arg0, u32 arg1) {
     return var_r3;
 }
 
-void fn_802CCE08(void *self, s32 key, void *value) {
+void *fn_802CCE08(void *self, s32 key, void *value) {
     void *fn_802CCEEC(void *, void *, s32, void *);
     char *n;
 
     n = fn_802CCD80(self, key);
     if (n != NULL && M2C_FIELD(n, s32 *, 0x18) == key) {
         M2C_FIELD(n, void **, 0x1C) = value;
-        return;
+        return n;
     }
-    fn_802CCEEC(self, n, key, value);
+    return fn_802CCEEC(self, n, key, value);
 }
 
 s32 fn_802CD218(void *arg0, s32 arg1) {
