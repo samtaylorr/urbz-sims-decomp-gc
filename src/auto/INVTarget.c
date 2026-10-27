@@ -1493,6 +1493,32 @@ void fn_801DF0A8(u8 *self, s32 flags) {
     }
 }
 
+void fn_801DF7CC(void *arg0, s32 arg1) {
+    extern u8 lbl_80417148[];
+    void fn_802D20E8(void *);
+    char *p;
+    char *next;
+
+    M2C_FIELD(arg0, void **, 0xC) = lbl_80417148;
+    p = M2C_FIELD(arg0, char **, 8);
+    if (M2C_FIELD(arg0, char **, 0) != NULL) {
+        M2C_FIELD(M2C_FIELD(arg0, char **, 4), char **, 4) = p;
+        M2C_FIELD(M2C_FIELD(arg0, char **, 8), char **, 0) = M2C_FIELD(arg0, char **, 4);
+        p = M2C_FIELD(arg0, char **, 0);
+    }
+    do {
+        next = M2C_FIELD(p, char **, 4);
+        if (p != NULL) {
+            char *vt = M2C_FIELD(p, char **, 0x14);
+            M2C_FIELD(vt, void (**)(void *, s32), 0xC)(p + M2C_FIELD(vt, s16 *, 8), 3);
+        }
+        p = next;
+    } while (p != NULL);
+    if (arg1 & 1) {
+        fn_802D20E8(arg0);
+    }
+}
+
 s32 fn_801DF9D4(void **arg0, s32 arg1, s32 arg2) {
     void fn_801DF86C(void **, s32, s32);
     void *it;
