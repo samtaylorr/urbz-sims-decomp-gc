@@ -4279,6 +4279,23 @@ void fn_803AEC9C(s32 *self, s32 flags) {
     }
 }
 
+void fn_803AF018(s32 *dst, s32 a, s32 b, s32 p, s32 c) {
+    void fn_8031EAB8(s32);
+    void fn_8031EA2C(s32);
+
+    dst[0] = a;
+    dst[1] = b;
+    if (p != 0) {
+        fn_8031EAB8(p);
+    }
+    if (dst[2] != 0) {
+        fn_8031EA2C(dst[2]);
+        dst[2] = 0;
+    }
+    dst[2] = p;
+    dst[3] = c;
+}
+
 void fn_803AF07C(s32 *dst, s32 *src) {
     void fn_8031EAB8(s32);
     void fn_8031EA2C(s32);
