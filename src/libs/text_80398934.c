@@ -4245,6 +4245,43 @@ void fn_803ADB34(s32 arg0, void *arg1) {
     }
 }
 
+void fn_803ADB90(RbIter *ret, void **tree, void **x, void **y, u32 *v, s32 w);
+RbInsertPair *fn_803ADC94(RbInsertPair *ret, void **tree, u32 *v) {
+    void **y = tree[1];
+    void **x = y[1];
+    s32 comp = 1;
+    u8 buf[24];
+    void **jn;
+
+    while (x != NULL) {
+        y = x;
+        comp = *v < (u32)y[4];
+        x = comp ? y[2] : y[3];
+    }
+    *(void **)(buf + 0) = y;
+    if (comp) {
+        *(void **)(buf + 8) = ((void **)tree[1])[2];
+        if (y == *(void **)(buf + 8)) {
+            fn_803ADB90((RbIter *)(buf + 16), tree, x, y, v, 0);
+            ret->first = *(void **)(buf + 16);
+            ret->second = 1;
+            goto out;
+        }
+        *(void **)(buf + 0) = fn_8039F5BC(y);
+    }
+    jn = *(void ** volatile *)(buf + 0);
+    if ((u32)jn[4] < *v) {
+        fn_803ADB90((RbIter *)(buf + 8), tree, x, y, v, 0);
+        ret->first = *(void **)(buf + 8);
+        ret->second = 1;
+        goto out;
+    }
+    ret->first = jn;
+    ret->second = 0;
+out:
+    return ret;
+}
+
 void fn_803ADDAC(u8 *self) {
     extern void fn_801C5CBC(u8 *);
     extern u8 lbl_80415FF8[];
