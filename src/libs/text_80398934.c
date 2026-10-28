@@ -2180,39 +2180,39 @@ void **fn_8039F5BC(void **node) {
     return node;
 }
 
-RbInsertPair fn_8039F62C(void **tree, u32 *v) {
+RbInsertPair *fn_8039F62C(RbInsertPair *ret, void **tree, u32 *v) {
     void **y = tree[1];
     void **x = y[1];
     s32 comp = 1;
-    RbIter j;
-    RbIter b;
-    RbIter r;
-    RbInsertPair ret;
+    u8 buf[24];
+    void **jn;
 
     while (x != NULL) {
         y = x;
         comp = *v < (u32)y[4];
         x = comp ? y[2] : y[3];
     }
-    j.node = y;
+    *(void **)(buf + 0) = y;
     if (comp) {
-        b.node = ((void **)tree[1])[2];
-        if (j.node == b.node) {
-            fn_8039F498(&r, tree, x, y, v, 0);
-            ret.first = r.node;
-            ret.second = 1;
-            return ret;
+        *(void **)(buf + 8) = ((void **)tree[1])[2];
+        if (y == *(void **)(buf + 8)) {
+            fn_8039F498((RbIter *)(buf + 16), tree, x, y, v, 0);
+            ret->first = *(void **)(buf + 16);
+            ret->second = 1;
+            goto out;
         }
-        j = RbIter_dec(&j);
+        *(void **)(buf + 0) = fn_8039F5BC(y);
     }
-    if ((u32)j.node[4] < *v) {
-        fn_8039F498(&b, tree, x, y, v, 0);
-        ret.first = b.node;
-        ret.second = 1;
-        return ret;
+    jn = *(void ** volatile *)(buf + 0);
+    if ((u32)jn[4] < *v) {
+        fn_8039F498((RbIter *)(buf + 8), tree, x, y, v, 0);
+        ret->first = *(void **)(buf + 8);
+        ret->second = 1;
+        goto out;
     }
-    ret.first = j.node;
-    ret.second = 0;
+    ret->first = jn;
+    ret->second = 0;
+out:
     return ret;
 }
 
