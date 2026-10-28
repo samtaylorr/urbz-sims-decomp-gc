@@ -218,7 +218,7 @@ s32 fn_8018FBF4(char *self, s32 arg1) {
 }
 
 void fn_8018FC30(char *self, void *a, void *b, void *c, s32 unused0, s32 unused1, void *e) {
-    void fn_800F687C(void *, void *, s32);
+    void *fn_800F687C(void *, void *, s32);
     u8 tmpbuf[0x48];
     u8 *p = tmpbuf;
     char *vt;
