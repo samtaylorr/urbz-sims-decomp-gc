@@ -168,6 +168,15 @@ void fn_80399218(void) {
 
 }
 
+void fn_80399924(void *self, s32 first, s32 last) {
+    void **cur;
+    for (cur = (void **)first; cur < (void **)last; cur++) {
+        if (*cur != NULL) {
+            fn_803997AC(*cur, 0x80);
+        }
+    }
+}
+
 extern void **lbl_804069A8[];
 void *fn_803999F8(u32, s32 *);
 void fn_80399924(void *, s32, s32);
@@ -241,8 +250,8 @@ void *fn_80399C38(void *self, s32 **arg1) {
         VtblEntry *vt = *(VtblEntry **)((char *)self + 0x18);
         ((void (*)(void *, void *, s32))vt[7].pfn)((char *)self + vt[7].delta, &tmp, 4);
     }
-    for (i = 0; i < n; i++) {
-        s32 v = *(s32 *)((char *)arg1[0] + i * 4);
+    for (i = n; i > 0; i--) {
+        s32 v = *arg1[0]++;
         VtblEntry *vt = *(VtblEntry **)((char *)self + 0x18);
         ((void (*)(void *, void *, s32))vt[7].pfn)((char *)self + vt[7].delta, &v, 4);
     }
