@@ -3449,6 +3449,43 @@ s32 fn_803A51C0(s32 arg0, s32 arg1, s32 arg2) {
     return ret;
 }
 
+void fn_803A5324(RbIter *ret, void **tree, void **x, void **y, u32 *v, s32 w);
+RbInsertPair *fn_803A5448(RbInsertPair *ret, void **tree, u32 *v) {
+    void **y = tree[1];
+    void **x = y[1];
+    s32 comp = 1;
+    u8 buf[24];
+    void **jn;
+
+    while (x != NULL) {
+        y = x;
+        comp = *v < (u32)y[4];
+        x = comp ? y[2] : y[3];
+    }
+    *(void **)(buf + 0) = y;
+    if (comp) {
+        *(void **)(buf + 8) = ((void **)tree[1])[2];
+        if (y == *(void **)(buf + 8)) {
+            fn_803A5324((RbIter *)(buf + 16), tree, x, y, v, 0);
+            ret->first = *(void **)(buf + 16);
+            ret->second = 1;
+            goto out;
+        }
+        *(void **)(buf + 0) = fn_8039F5BC(y);
+    }
+    jn = *(void ** volatile *)(buf + 0);
+    if ((u32)jn[4] < *v) {
+        fn_803A5324((RbIter *)(buf + 8), tree, x, y, v, 0);
+        ret->first = *(void **)(buf + 8);
+        ret->second = 1;
+        goto out;
+    }
+    ret->first = jn;
+    ret->second = 0;
+out:
+    return ret;
+}
+
 void *fn_803A5B58(s32 *self) {
     s32 *p;
     char alloc[16];
