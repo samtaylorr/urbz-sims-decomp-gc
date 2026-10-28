@@ -196,6 +196,20 @@ void fn_8018FA84(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 8) = arg1;
 }
 
+void fn_8018FA8C(char *self, char *arg1) {
+    void *fn_802D0AB8(void);
+    void fn_802D1A00(void *, void *);
+    char *vt = *(char **)(self + 0x10);
+
+    (*(void (**)(char *, char *))(vt + 0xDC))(self + *(s16 *)(vt + 0xD8), arg1);
+    if (fn_8018FA7C((s32 *)self) == 0 && arg1 != NULL) {
+        if (*(s32 *)(arg1 + 8) != 0) {
+            fn_802D1A00(fn_802D0AB8(), *(void **)(arg1 + 4));
+        }
+        fn_802D1A00(fn_802D0AB8(), arg1);
+    }
+}
+
 s32 fn_8018FBF4(char *self, s32 arg1) {
     char *vt = *(char **)(self + 0x10);
     s32 out;
