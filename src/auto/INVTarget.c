@@ -1582,12 +1582,11 @@ void fn_801DF0A8(u8 *self, s32 flags) {
 void fn_801DF3F8(void *self) {
     extern u8 lbl_8045BA40[];
     void fn_803374C8(void *, s32);
-    s32 *p = (s32 *)self;
-    s32 *end = (s32 *)((u8 *)self + 0x4C);
+    s32 i;
 
-    do {
-        fn_803374C8(lbl_8045BA40, *p++);
-    } while (p <= end);
+    for (i = 0; i < 20; i++) {
+        fn_803374C8(lbl_8045BA40, ((s32 *)self)[i]);
+    }
     *(s32 *)((u8 *)self + 0xF0) = 1;
 }
 
