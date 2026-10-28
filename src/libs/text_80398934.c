@@ -168,6 +168,14 @@ void fn_80399218(void) {
 
 }
 
+void fn_803997AC(void *p, u32 n) {
+    extern void **lbl_804069A8[];
+    void ***fl = &lbl_804069A8[(n - 1) >> 3];
+    u8 lock[5];
+    *(void ***)p = *fl;
+    *fl = (void **)p;
+}
+
 void fn_803997D4(void *self, s32 first, s32 last) {
     void **cur;
     for (cur = (void **)first; cur < (void **)last; cur++) {
@@ -249,18 +257,11 @@ void *fn_80399BE8(u32 n) {
 void *fn_80399C38(void *self, s32 **arg1) {
     s32 n;
     s32 i;
-    s32 tmp;
 
     n = (s32)arg1[1];
-    tmp = n;
-    {
-        VtblEntry *vt = *(VtblEntry **)((char *)self + 0x18);
-        ((void (*)(void *, void *, s32))vt[7].pfn)((char *)self + vt[7].delta, &tmp, 4);
-    }
-    for (i = n; i > 0; i--) {
-        s32 v = *arg1[0]++;
-        VtblEntry *vt = *(VtblEntry **)((char *)self + 0x18);
-        ((void (*)(void *, void *, s32))vt[7].pfn)((char *)self + vt[7].delta, &v, 4);
+    Stream_WriteS32(self, n);
+    for (i = 0; i < n; i++) {
+        Stream_WriteS32(self, arg1[0][i]);
     }
     return self;
 }
@@ -4267,6 +4268,20 @@ void fn_803ADA28(void) {
     extern void fn_80246D2C(void) __attribute__((noreturn));
     fn_80245AB8(lbl_803DDD5C);
     fn_80246D2C();
+}
+
+void fn_803ADA44(void *arg0, u32 arg1) {
+    extern void fn_803AC008(void *);
+    char *p;
+
+    if (arg1 != 0) {
+        p = (char *)PtrVec_Allocate(arg1);
+        M2C_FIELD(arg0, char **, 0) = p;
+        M2C_FIELD(arg0, char **, 0xC) = p + arg1;
+        M2C_FIELD(arg0, char **, 4) = p;
+    } else {
+        fn_803AC008(arg0);
+    }
 }
 
 void *fn_803ADAAC(void *arg0, char *arg1) {
