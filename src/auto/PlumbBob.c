@@ -1057,13 +1057,13 @@ void fn_800704F4(u8 *self) {
     M2C_FIELD(self, s32 *, 0x4) = M2C_FIELD(self, s32 *, 0x28);
     M2C_FIELD(self, s32 *, 0x8) = M2C_FIELD(self, s32 *, 0x2C);
     M2C_FIELD(self, s32 *, 0x10) = M2C_FIELD(self, s32 *, 0x30);
-    M2C_FIELD(self, s32 *, 0x14) = M2C_FIELD(self, s32 *, 0x34);
-    M2C_FIELD(self, s32 *, 0x18) = M2C_FIELD(self, s32 *, 0x38);
     M2C_FIELD(self, u8 *, 0x1C) = M2C_FIELD(self, u8 *, 0x3C);
     M2C_FIELD(self, u8 *, 0x1D) = M2C_FIELD(self, u8 *, 0x3D);
     M2C_FIELD(self, u8 *, 0x1E) = M2C_FIELD(self, u8 *, 0x3E);
     M2C_FIELD(self, u8 *, 0x1F) = M2C_FIELD(self, u8 *, 0x3F);
     M2C_FIELD(self, u8 *, 0x20) = M2C_FIELD(self, u8 *, 0x40);
+    M2C_FIELD(self, s32 *, 0x14) = M2C_FIELD(self, s32 *, 0x34);
+    M2C_FIELD(self, s32 *, 0x18) = M2C_FIELD(self, s32 *, 0x38);
 }
 
 void fn_80070560(void *arg0) {
