@@ -4276,9 +4276,9 @@ void fn_803ADA44(void *arg0, u32 arg1) {
 
     if (arg1 != 0) {
         p = (char *)PtrVec_Allocate(arg1);
-        M2C_FIELD(arg0, char **, 0) = p;
-        M2C_FIELD(arg0, char **, 0xC) = p + arg1;
         M2C_FIELD(arg0, char **, 4) = p;
+        M2C_FIELD(arg0, char **, 0xC) = p + arg1;
+        M2C_FIELD(arg0, char **, 0) = p;
     } else {
         fn_803AC008(arg0);
     }
