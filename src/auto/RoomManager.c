@@ -219,13 +219,14 @@ s32 fn_8018FBF4(char *self, s32 arg1) {
 
 void fn_8018FC30(char *self, void *a, void *b, void *c, s32 unused0, s32 unused1, void *e) {
     void fn_800F687C(void *, void *, s32);
-    u8 buf[0x48];
+    u8 tmpbuf[0x48];
+    u8 *p = tmpbuf;
     char *vt;
 
-    fn_800F687C(buf, buf + 8, 0x40);
+    fn_800F687C(p, p + 8, 0x40);
     vt = *(char **)(self + 0x10);
     (*(void (**)(char *, void *, void *, void *, void *, void *))(vt + 0xFC))(
-        self + *(s16 *)(vt + 0xF8), a, b, c, buf, e);
+        self + *(s16 *)(vt + 0xF8), a, b, c, p, e);
 }
 
 s32 fn_8018FCA8(char *self, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
@@ -312,14 +313,16 @@ void fn_80190474(char *self, u16 id) {
 
 void fn_801905AC(char *self) {
     u8 buf[16];
-    RMMapIter *it = (RMMapIter *)(buf + 0);
-    RMMapIter *tmp = (RMMapIter *)(buf + 8);
+    RMMapNode *b;
 
-    it->node = NULL;
-    RMMap_BeginP(it, self);
-    *tmp = *it;
-    for (; RMMap_EndP(tmp, self), RMMapIter_NotEqualP(it, tmp); RMMapIter_Inc(it)) {
-        char *room = it->node->value;
+    *(RMMapNode **)(buf + 0) = NULL;
+    b = (*(RMMapNode **)(self + 4))->left;
+    *(RMMapNode **)(buf + 8) = b;
+    *(RMMapNode **)(buf + 0) = b;
+    for (; RMMap_EndP((RMMapIter *)(buf + 8), self),
+           RMMapIter_NotEqualP((RMMapIter *)(buf + 0), (RMMapIter *)(buf + 8));
+         RMMapIter_Inc((RMMapIter *)(buf + 0))) {
+        char *room = (*(RMMapNode **)(buf + 0))->value;
         if (*(s32 *)(room + 0x34) != 0) {
             *(s32 *)(room + 0x80) = 1;
         }
