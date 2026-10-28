@@ -156,21 +156,22 @@ s32 fn_8010BD50(void) {
 }
 
 void fn_8010BF14(u8 *self, s32 key) {
+    FamilyVec *v = (FamilyVec *)(self + 0x24);
     s32 *it;
-    s32 *src;
-    s32 *dst;
-    s32 n;
 
-    for (it = *(s32 **)(self + 0x24); it != *(s32 **)(self + 0x28); it++) {
+    for (it = v->begin; it != v->end; it++) {
         if (*it == key) {
-            src = it + 1;
-            if (src != *(s32 **)(self + 0x28)) {
-                dst = it;
-                for (n = *(s32 **)(self + 0x28) - src; n > 0; n--) {
-                    *dst++ = *src++;
+            FamilyVec *w = (FamilyVec *)(self + 0x24);
+            s32 *src = it + 1;
+            if (src != w->end) {
+                s32 *s = src;
+                s32 *d = it;
+                s32 n;
+                for (n = w->end - s; n > 0; n--) {
+                    *d++ = *s++;
                 }
             }
-            *(s32 **)(self + 0x28) -= 1;
+            w->end--;
             return;
         }
     }
@@ -401,11 +402,11 @@ s32 fn_8010C374(void *arg0, s32 arg1, s32 arg2) {
 
     obj = (*(void *(**)(u8 *))(*(u8 **)lbl_8049665C + 0x3C))(lbl_8049665C + *(s16 *)(*(u8 **)lbl_8049665C + 0x38));
     result = fn_8010C3F8(arg0, obj, arg2);
-    if (result != 0) {
-        return result;
+    if (result == 0) {
+        u8 *p = (u8 *)arg0 + 4;
+        fn_801B3908(p, arg1);
+        fn_801B3910(p, arg2);
     }
-    fn_801B3908((u8 *)arg0 + 4, arg1);
-    fn_801B3910((u8 *)arg0 + 4, arg2);
     return result;
 }
 
