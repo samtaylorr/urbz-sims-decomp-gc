@@ -1521,6 +1521,28 @@ void fn_80078840(void *self) {
     lbl_80494198 = 0;
 }
 
+void fn_80079A88(s32 arg0) {
+    extern s32 lbl_80494198;
+    extern void *fn_8007BB94(s32, s32);
+    extern s32 fn_80078160(s32);
+    s32 i;
+    s32 j;
+    void *p;
+    void *q;
+
+    for (i = 0; i < lbl_80494198; i++) {
+        for (j = 0; (p = fn_8007BB94(i * 0x19C + arg0 + 0x170, j)) != NULL; j++) {
+            q = M2C_FIELD(p, void **, 0x7C);
+            if (q != NULL) {
+                q = M2C_FIELD(q, void **, 0x38);
+                if (!(M2C_FIELD(q, u16 *, 0xB6) & 8)) {
+                    M2C_FIELD(p, s32 *, 0x94) = fn_80078160(M2C_FIELD(q, s32 *, 0x1C));
+                }
+            }
+        }
+    }
+}
+
 void fn_8007A888(void *arg0) {
     extern void fn_80305EE0(void *, s32);
     fn_80305EE0(arg0, 1);
