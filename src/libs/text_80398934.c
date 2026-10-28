@@ -168,6 +168,13 @@ void fn_80399218(void) {
 
 }
 
+void fn_803997D4(void *self, s32 first, s32 last) {
+    void **cur;
+    for (cur = (void **)first; cur < (void **)last; cur++) {
+        *cur = fn_80399BE8(0x80);
+    }
+}
+
 void fn_80399924(void *self, s32 first, s32 last) {
     void **cur;
     for (cur = (void **)first; cur < (void **)last; cur++) {
