@@ -129,13 +129,14 @@ void fn_80068244(void *arg0, s32 arg1) {
     struct { char pad0[0x1E4]; void *arr2[6]; void *arr[1]; } *self = arg0;
     char *base;
     s32 i;
+    s32 which = arg1;
 
     fn_8004D1BC(lbl_8041F94C);
-    fn_800A3F74(self->arr[arg1]);
-    fn_8000F6D0(self->arr2[arg1]);
+    fn_800A3F74(self->arr[which]);
+    fn_8000F6D0(self->arr2[which]);
     base = lbl_8041F94C;
     fn_8006410C(M2C_FIELD(M2C_FIELD(base, void **, 0xEC), s32 *, 4));
-    if (arg1 == 1) {
+    if (which == 1) {
         for (i = 5; i >= 0; i--) {
             ((s32 *)((char *)arg0 + 0x2900))[i] = 1000;
         }
@@ -1025,6 +1026,30 @@ void fn_80070560(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x10) = (s32) M2C_FIELD(arg0, s32 *, 0x44);
 }
 
+void fn_80070778(void *self, s32 flags) {
+    extern u8 lbl_80409508[];
+    extern void fn_80070D80(void *);
+    extern void fn_8008CA7C(void *, s32);
+    extern void fn_80304AB4(void *, s32);
+    u8 *p;
+
+    M2C_FIELD(self, u8 **, 0x44) = lbl_80409508;
+    fn_80070D80(self);
+    fn_8008CA7C((u8 *)self + 0x1EC, 2);
+    if ((u8 *)self + 0x134 != NULL) {
+        p = (u8 *)self + 0x1EC;
+        while ((u8 *)self + 0x134 != p) {
+            p -= 0xB8;
+            M2C_FIELD(M2C_FIELD(p, u8 **, 0x44), void (**)(void *, s32), 0xC)(p + M2C_FIELD(M2C_FIELD(p, u8 **, 0x44), s16 *, 8), 0);
+        }
+    }
+    fn_80304AB4((u8 *)self + 0xB8, 2);
+    ((void (*)(void *, s32))fn_80307364)(self, 0);
+    if (flags & 1) {
+        fn_802D1A00(((void *(*)(void))fn_802D0AB8)(), self);
+    }
+}
+
 extern void *fn_802D197C(void *, u32, s32);
 extern void *fn_802DBBCC(void *, u32, s32);
 extern void *fn_802D0B3C(void);
@@ -1167,7 +1192,8 @@ void fn_80075F04(s32 arg0) {
     void *q;
 
     for (i = 0; i < lbl_8049416C; i++) {
-        for (j = 1; (p = fn_8007BB94(i * 0x19C + arg0 + 0x170, j)) != NULL; j++) {
+        j = 0;
+        while ((p = fn_8007BB94(i * 0x19C + arg0 + 0x170, ++j)) != NULL) {
             q = M2C_FIELD(p, void **, 0x7C);
             if (q != NULL) {
                 q = M2C_FIELD(q, void **, 0x38);
