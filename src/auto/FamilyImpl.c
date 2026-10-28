@@ -13,6 +13,11 @@ typedef struct {
     s32 d;
 } FamilyQuad;
 
+typedef struct {
+    s32 *begin;
+    s32 *end;
+} FamilyVec;
+
 s32 *fn_8010C464(s32 (*first)[2], s32 (*last)[2], s32 key);
 s32 fn_8010C3F8(void *arg0, void *arg1, s32 arg2);
 
@@ -148,6 +153,27 @@ void fn_8010BD14(s32 arg0, s32 arg1) {
 
 s32 fn_8010BD50(void) {
     return 0;
+}
+
+void fn_8010BF14(u8 *self, s32 key) {
+    s32 *it;
+    s32 *src;
+    s32 *dst;
+    s32 n;
+
+    for (it = *(s32 **)(self + 0x24); it != *(s32 **)(self + 0x28); it++) {
+        if (*it == key) {
+            src = it + 1;
+            if (src != *(s32 **)(self + 0x28)) {
+                dst = it;
+                for (n = *(s32 **)(self + 0x28) - src; n > 0; n--) {
+                    *dst++ = *src++;
+                }
+            }
+            *(s32 **)(self + 0x28) -= 1;
+            return;
+        }
+    }
 }
 
 void fn_8010BF98(s32 arg0, s32 arg1) {
@@ -539,6 +565,25 @@ void fn_8010C704(void *arg0, s32 arg1) {
     }
     if (arg1 & 1) {
         fn_802D20E8(arg0);
+    }
+}
+
+void fn_8010C858(s32 arg0) {
+    extern s32 lbl_80495ADC;
+    void fn_800FE620(s32);
+    u8 *self = (u8 *)arg0;
+    if (*(s32 *)(self + 8) != 0 && *(s32 *)self != 0) {
+        *(s32 *)self = 0;
+        if (lbl_80495ADC != 0) {
+            u8 *obj;
+            fn_800FE620(lbl_80495ADC);
+            obj = (u8 *)lbl_80495ADC;
+            if (obj != NULL) {
+                u8 *vt = *(u8 **)(obj + 0x8C);
+                (*(void (**)(void *, s32))(vt + 0xC))(obj + *(s16 *)(vt + 8), 3);
+            }
+            lbl_80495ADC = 0;
+        }
     }
 }
 
