@@ -574,10 +574,11 @@ void fn_8010C858(s32 arg0) {
     void fn_800FE620(s32);
     u8 *self = (u8 *)arg0;
     if (*(s32 *)(self + 8) != 0 && *(s32 *)self != 0) {
+        s32 mgr = lbl_80495ADC;
         *(s32 *)self = 0;
-        if (lbl_80495ADC != 0) {
+        if (mgr != 0) {
             u8 *obj;
-            fn_800FE620(lbl_80495ADC);
+            fn_800FE620(mgr);
             obj = (u8 *)lbl_80495ADC;
             if (obj != NULL) {
                 u8 *vt = *(u8 **)(obj + 0x8C);
