@@ -17,6 +17,19 @@ extern void fn_800B3324(s32, s32, s32);
 typedef struct { s32 a, b, c; } PBVec3;
 typedef struct { PBVec3 v; s32 w; } PBStackEntry;
 typedef struct { s32 n; PBStackEntry e[4]; } PBStack;
+typedef struct {
+    s16 delta;
+    s16 index;
+    void (*pfn)(void *);
+} PBVtblEntry;
+typedef struct {
+    s16 delta;
+    s16 index;
+    union {
+        void (*pfn)(void *);
+        s16 delta2;
+    } u;
+} PBPmf;
 s32 fn_800671A0(void *arg0) {
     extern s32 lbl_80494420;
     if ((s32) M2C_FIELD(arg0, s32 *, 0x28D4) == 0) {
@@ -1016,10 +1029,41 @@ s32 fn_80070464(void) {
     return 0;
 }
 
+void fn_8007046C(u8 *self) {
+    extern s32 lbl_80494164;
+
+    M2C_FIELD(self, s32 *, 0x24) = M2C_FIELD(self, s32 *, 0x0);
+    M2C_FIELD(self, s32 *, 0x28) = M2C_FIELD(self, s32 *, 0x4);
+    M2C_FIELD(self, s32 *, 0x2C) = M2C_FIELD(self, s32 *, 0x8);
+    M2C_FIELD(self, s32 *, 0x30) = M2C_FIELD(self, s32 *, 0x10);
+    M2C_FIELD(self, s32 *, 0x34) = M2C_FIELD(self, s32 *, 0x14);
+    M2C_FIELD(self, s32 *, 0x38) = M2C_FIELD(self, s32 *, 0x18);
+    M2C_FIELD(self, u8 *, 0x3C) = M2C_FIELD(self, u8 *, 0x1C);
+    M2C_FIELD(self, u8 *, 0x3D) = M2C_FIELD(self, u8 *, 0x1D);
+    M2C_FIELD(self, u8 *, 0x3E) = M2C_FIELD(self, u8 *, 0x1E);
+    M2C_FIELD(self, u8 *, 0x3F) = M2C_FIELD(self, u8 *, 0x1F);
+    M2C_FIELD(self, u8 *, 0x40) = M2C_FIELD(self, u8 *, 0x20);
+    lbl_80494164 = 1;
+}
+
 void fn_800704E0(void *arg0) {
     extern s32 lbl_80494168;
     M2C_FIELD(arg0, s32 *, 0x44) = (s32) M2C_FIELD(arg0, s32 *, 0x10);
     lbl_80494168 = 1;
+}
+
+void fn_800704F4(u8 *self) {
+    M2C_FIELD(self, s32 *, 0x0) = M2C_FIELD(self, s32 *, 0x24);
+    M2C_FIELD(self, s32 *, 0x4) = M2C_FIELD(self, s32 *, 0x28);
+    M2C_FIELD(self, s32 *, 0x8) = M2C_FIELD(self, s32 *, 0x2C);
+    M2C_FIELD(self, s32 *, 0x10) = M2C_FIELD(self, s32 *, 0x30);
+    M2C_FIELD(self, s32 *, 0x14) = M2C_FIELD(self, s32 *, 0x34);
+    M2C_FIELD(self, s32 *, 0x18) = M2C_FIELD(self, s32 *, 0x38);
+    M2C_FIELD(self, u8 *, 0x1C) = M2C_FIELD(self, u8 *, 0x3C);
+    M2C_FIELD(self, u8 *, 0x1D) = M2C_FIELD(self, u8 *, 0x3D);
+    M2C_FIELD(self, u8 *, 0x1E) = M2C_FIELD(self, u8 *, 0x3E);
+    M2C_FIELD(self, u8 *, 0x1F) = M2C_FIELD(self, u8 *, 0x3F);
+    M2C_FIELD(self, u8 *, 0x20) = M2C_FIELD(self, u8 *, 0x40);
 }
 
 void fn_80070560(void *arg0) {
