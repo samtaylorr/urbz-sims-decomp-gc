@@ -167,13 +167,13 @@ void fn_80068244(void *arg0, s32 arg1) {
     extern void fn_800A3F74(void *);
     extern void fn_8000F6D0(void *);
     extern void fn_8006410C(s32);
-    s32 off = arg1 << 2;
+    struct { char pad0[0x1E4]; void *arr2[6]; void *arr[1]; } *self = arg0;
     s32 *p;
     s32 i;
 
     fn_8004D1BC(lbl_8041F94C);
-    fn_800A3F74(*(void **)((char *)arg0 + 0x1FC + off));
-    fn_8000F6D0(*(void **)((char *)arg0 + 0x1E4 + off));
+    fn_800A3F74(self->arr[arg1]);
+    fn_8000F6D0(self->arr2[arg1]);
     fn_8006410C(M2C_FIELD(M2C_FIELD(lbl_8041F94C, void **, 0xEC), s32 *, 4));
     if (arg1 == 1) {
         p = (s32 *)((char *)arg0 + 0x2914);
@@ -375,17 +375,19 @@ void fn_800688BC(void *arg0, void *arg1) {
     extern void fn_800A9108(void *);
     extern void fn_800AC130(void *, s32);
     extern void fn_800F8CB4(void *);
+    char *base;
     char *vt;
 
     M2C_FIELD(arg0, s32 *, 0x29D0) = 1;
     fn_80085E44((char *)arg0 + 0x210);
-    M2C_FIELD(lbl_8041F94C, s32 *, 0x19C) = M2C_FIELD(arg1, s32 *, 0x38);
+    base = lbl_8041F94C;
+    M2C_FIELD(base, s32 *, 0x19C) = M2C_FIELD(arg1, s32 *, 0x38);
     lbl_80495840 = lbl_80494414;
     lbl_80494414 = 0;
     fn_80067AA4(arg0, 0, 9);
     fn_80067AA4(arg0, 1, 9);
     fn_800A9108(M2C_FIELD(arg0, void **, 0x20C));
-    fn_800AC130(M2C_FIELD(lbl_8041F94C, void **, 0x110), 1);
+    fn_800AC130(M2C_FIELD(base, void **, 0x110), 1);
     fn_800F8CB4(lbl_803C8A44);
     M2C_FIELD(arg0, s32 *, 0x28D0) = 0;
     vt = (char *)*lbl_80496688;
@@ -1291,10 +1293,11 @@ void fn_8007321C(void *arg0) {
     lbl_8049416C = 0;
 }
 
-void fn_80075F04(s32 arg0) {
+void fn_80075F04(u8 *arg0) {
     extern s32 lbl_8049416C;
-    extern void *fn_8007BB94(s32, s32);
+    extern void *fn_8007BB94(void *, s32);
     extern s32 fn_80078160(s32);
+    struct Elem { u8 pad[0x170]; u8 list[0x2C]; };
     s32 i;
     s32 j;
     void *p;
@@ -1304,7 +1307,7 @@ void fn_80075F04(s32 arg0) {
         j = 0;
         while (1) {
             j++;
-            p = fn_8007BB94(arg0 + i * 0x19C + 0x170, j);
+            p = fn_8007BB94(((struct Elem *)arg0)[i].list, j);
             if (p == NULL) {
                 break;
             }
