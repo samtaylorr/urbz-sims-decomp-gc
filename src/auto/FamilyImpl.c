@@ -155,6 +155,16 @@ void fn_8010BF98(s32 arg0, s32 arg1) {
     fn_8018D8DC(arg1, arg0, 1);
 }
 
+void fn_8010BFC8(u8 **self, void *arg1) {
+    extern char lbl_803D6D94[];
+    void fn_800F7028(void *, char *, s32);
+    void fn_800F7494(void *, void *);
+    u8 *vt = *self;
+    (*(void (**)(void *))(vt + 0x74))((u8 *)self + *(s16 *)(vt + 0x70));
+    fn_800F7028(arg1, lbl_803D6D94, -1);
+    fn_800F7494(arg1, self[2]);
+}
+
 void **fn_8010C02C(void **self) {
     *self = lbl_8040E770;
     return self;
@@ -365,10 +375,11 @@ s32 fn_8010C374(void *arg0, s32 arg1, s32 arg2) {
 
     obj = (*(void *(**)(u8 *))(*(u8 **)lbl_8049665C + 0x3C))(lbl_8049665C + *(s16 *)(*(u8 **)lbl_8049665C + 0x38));
     result = fn_8010C3F8(arg0, obj, arg2);
-    if (result == 0) {
-        fn_801B3908((u8 *)arg0 + 4, arg1);
-        fn_801B3910((u8 *)arg0 + 4, arg2);
+    if (result != 0) {
+        return result;
     }
+    fn_801B3908((u8 *)arg0 + 4, arg1);
+    fn_801B3910((u8 *)arg0 + 4, arg2);
     return result;
 }
 
