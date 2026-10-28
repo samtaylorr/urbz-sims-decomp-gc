@@ -4,6 +4,30 @@
 extern void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
 extern void fn_802D20E8(void *);
+extern void *fn_802D197C(void *, u32, s32);
+extern void *fn_802DC3C0(void *, u32, s32, s32, s32);
+extern void *fn_802D0B3C(void);
+extern void *fn_80248488(void *, s32, u32);
+
+static inline void *CameraManager_AllocAligned(u32 size) {
+    void *heap;
+    void *p;
+
+    heap = ((void *(*)(void))fn_802D0AB8)();
+    if (size == 0) {
+        return NULL;
+    }
+    size = (size + 0xF) & ~0xF;
+    p = fn_802D197C(heap, size, 0x10);
+    if (p == NULL) {
+        p = fn_802DC3C0(heap, size, 0x10, 0, 0);
+        if (p == NULL && heap == ((void *(*)(void))fn_802D0AB8)()) {
+            return fn_802DC3C0(fn_802D0B3C(), size, 0x10, 0, 0);
+        }
+    }
+    return p;
+}
+
 s32 *fn_80014DCC(s32 *arg0) {
     arg0[0] = 0;
     arg0[1] = 0;
