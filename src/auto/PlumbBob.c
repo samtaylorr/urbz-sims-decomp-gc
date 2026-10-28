@@ -94,31 +94,29 @@ s32 fn_80067A8C(void *arg0, s32 arg1) {
 }
 
 void fn_80067BBC(void *arg0, s32 arg1, u32 arg2) {
-    PBPmf *b;
+    struct { char pad[0x4C]; PBPmf arr[0x2F]; } *self = arg0;
     s16 index;
-    char *obj = arg0;
     PBVtblEntry e;
     void (*f)(void *);
     s16 delta;
     s32 off;
 
     if (arg2 > 0x2E) return;
-    b = (PBPmf *)(obj + 0x4C) + arg2;
-    index = b->index;
+    index = self->arr[arg2].index;
     if (index == 0) return;
     if (index >= 0) {
-        e = (*(PBVtblEntry **)(obj + b->u.delta2))[index - 1];
+        e = (*(PBVtblEntry **)((char *)self + self->arr[arg2].u.delta2))[index - 1];
         f = e.pfn;
     } else {
-        f = b->u.pfn;
+        f = self->arr[arg2].u.pfn;
     }
-    delta = b->delta;
+    delta = self->arr[arg2].delta;
     if (index >= 0) {
         off = e.delta + delta;
     } else {
         off = delta;
     }
-    f(obj + off);
+    f((char *)self + off);
 }
 
 void fn_80068084(void *arg0, void *arg1) {
@@ -1293,24 +1291,17 @@ void fn_8007321C(void *arg0) {
     lbl_8049416C = 0;
 }
 
-void fn_80075F04(u8 *arg0) {
+void fn_80075F04(s32 arg0) {
     extern s32 lbl_8049416C;
-    extern void *fn_8007BB94(void *, s32);
+    extern void *fn_8007BB94(s32, s32);
     extern s32 fn_80078160(s32);
-    struct Elem { u8 pad[0x170]; u8 list[0x2C]; };
     s32 i;
     s32 j;
     void *p;
     void *q;
 
     for (i = 0; i < lbl_8049416C; i++) {
-        j = 0;
-        while (1) {
-            j++;
-            p = fn_8007BB94(((struct Elem *)arg0)[i].list, j);
-            if (p == NULL) {
-                break;
-            }
+        for (j = 0; (p = fn_8007BB94(i * 0x19C + arg0 + 0x170, j)) != NULL; j++) {
             q = M2C_FIELD(p, void **, 0x7C);
             if (q != NULL) {
                 q = M2C_FIELD(q, void **, 0x38);
