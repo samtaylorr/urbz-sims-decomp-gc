@@ -1984,13 +1984,13 @@ void *fn_801E01A0(u8 *self) {
     void fn_800F160C(void *);
     fn_80116904(self + 4);
     fn_800F160C(self + 0x5C);
-    *(s32 *)(self + 0x74) = 0;
     *(s32 *)(self + 0x0) = 0;
     *(s32 *)(self + 0x60) = 0;
     *(s32 *)(self + 0x64) = 0;
     *(s32 *)(self + 0x68) = 0;
     *(s32 *)(self + 0x6C) = 0;
     *(s32 *)(self + 0x70) = 0;
+    *(s32 *)(self + 0x74) = 0;
     return self;
 }
 
