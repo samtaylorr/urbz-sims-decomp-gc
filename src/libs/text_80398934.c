@@ -4261,9 +4261,17 @@ void fn_803AD18C(void *self) {
     list[1]->prev = list[1];
 }
 
+void fn_803ADA28(void) {
+    extern char lbl_803DDD5C[];
+    extern void fn_80245AB8(char *);
+    extern void fn_80246D2C(void) __attribute__((noreturn));
+    fn_80245AB8(lbl_803DDD5C);
+    fn_80246D2C();
+}
+
 void *fn_803ADAAC(void *arg0, char *arg1) {
     extern s32 fn_80248808(char *);
-    extern void fn_803ADA44(void *, s32);
+    extern void fn_803ADA44(void *, u32);
     char *end;
     s32 len;
     char *p;
@@ -4275,7 +4283,9 @@ void *fn_803ADAAC(void *arg0, char *arg1) {
     len = end - arg1;
     fn_803ADA44(arg0, len + 1);
     p = M2C_FIELD(arg0, char **, 0);
-    p = (end != arg1) ? (char *)fn_8024839C(p, arg1, len) + len : p;
+    if (end != arg1) {
+        p = (char *)fn_8024839C(p, arg1, len) + len;
+    }
     M2C_FIELD(arg0, char **, 4) = p;
     *p = 0;
     return arg0;
