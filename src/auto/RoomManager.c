@@ -330,6 +330,25 @@ void fn_801905AC(char *self) {
     *(s32 *)(self + 0x20) = 1;
 }
 
+void fn_80190640(char *self) {
+    u8 buf[16];
+    RMMapNode *b;
+
+    *(RMMapNode **)(buf + 0) = NULL;
+    b = (*(RMMapNode **)(self + 4))->left;
+    *(RMMapNode **)(buf + 8) = b;
+    *(RMMapNode **)(buf + 0) = b;
+    for (; RMMap_EndP((RMMapIter *)(buf + 8), self),
+           RMMapIter_NotEqualP((RMMapIter *)(buf + 0), (RMMapIter *)(buf + 8));
+         RMMapIter_Inc((RMMapIter *)(buf + 0))) {
+        char *room = (*(RMMapNode **)(buf + 0))->value;
+        if (*(s32 *)(room + 0x34) != 0) {
+            *(s32 *)(room + 0x80) = 1;
+        }
+    }
+    *(s32 *)(self + 0x20) = 1;
+}
+
 void fn_801909E4(char *self) {
     extern void *fn_800F5248(void *, const char *);
     extern void *fn_800F52EC(void *, u16);
