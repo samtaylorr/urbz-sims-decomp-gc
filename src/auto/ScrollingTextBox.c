@@ -79,6 +79,13 @@ void fn_8009B580(void) {
 
 }
 
+void *fn_8009CAE0(u32 size) {
+    void *p = ScrollingTextBox_AllocAligned(size);
+
+    fn_80248488(p, 0, size);
+    return p;
+}
+
 void fn_8009CBA4(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
