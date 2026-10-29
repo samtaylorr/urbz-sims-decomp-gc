@@ -2803,6 +2803,25 @@ s32 fn_8008B208(char *self, s32 arg1) {
     return old;
 }
 
+s32 fn_8008B284(char *self, s32 arg1) {
+    extern void fn_8031EA2C(void *);
+    extern void *fn_8033740C(void *, s32, s32, s32);
+    extern u8 lbl_8045B82C[];
+    s32 old = *(s32 *)(self + 0x168);
+
+    if (arg1 != old) {
+        if (*(void **)(self + 0x164) != NULL) {
+            fn_8031EA2C(*(void **)(self + 0x164));
+            *(void **)(self + 0x164) = NULL;
+        }
+        if (arg1 != 0) {
+            *(void **)(self + 0x164) = fn_8033740C(lbl_8045B82C, arg1, 0, 0);
+        }
+        *(s32 *)(self + 0x168) = arg1;
+    }
+    return old;
+}
+
 void fn_8008B3A4(void *arg0, s32 arg1, f32 arg2) {
     extern char lbl_8041F94C[];
     extern f32 lbl_8042EF98[];
