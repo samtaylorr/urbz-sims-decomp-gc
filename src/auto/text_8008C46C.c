@@ -35,6 +35,18 @@ void fn_8008DCD4(void) {
 
 }
 
+s64 fn_8008DCD8(void *arg0) {
+    s32 fn_8003E48C(void *);
+    char *obj = M2C_FIELD(arg0, char **, 4);
+    char *vt = *(char **)(obj + 4);
+    s32 r = (*(s32 (**)(void *, s32))(vt + 0x10C))(obj + *(s16 *)(vt + 0x108), 8);
+    if (M2C_FIELD(arg0, s32 *, 0x130) == r && fn_8003E48C(M2C_FIELD(arg0, void **, 8)) == 0 &&
+        M2C_FIELD(M2C_FIELD(arg0, void **, 8), s32 *, 0x668) < 0) {
+        return 1;
+    }
+    return 2;
+}
+
 void fn_8008DD5C(void *arg0) {
     void fn_80093D00(void *arg0, void *arg1);
     if (M2C_FIELD(arg0, u32 *, 0x4D4) & 0x80000) {
