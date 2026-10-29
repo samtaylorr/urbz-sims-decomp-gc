@@ -61,9 +61,9 @@ s32 fn_80018DCC(s32 arg0) {
         if (p != NULL) {
             self[i] = NULL;
             do {
-                void **next = (void **)*p;
-                fn_802D20E8(p);
-                p = next;
+                void **cur = p;
+                p = (void **)*p;
+                fn_802D20E8(cur);
             } while (p != NULL);
         }
     }
