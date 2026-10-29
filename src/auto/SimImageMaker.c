@@ -91,6 +91,19 @@ void fn_8009D18C(char *self, s32 a, SimImgVec3 *b, SimImgVec3 *c, SimImgVec3 *d,
     *(f32 *)(self + 0x1EC) = f;
 }
 
+void fn_8009D1EC(char *self, void *name) {
+    extern void fn_8031EA2C(void *);
+    extern void *fn_8033740C(void *, void *, s32, s32);
+    extern u8 lbl_8045BAE8[];
+    if (*(void **)(self + 0x1F4) != NULL) {
+        fn_8031EA2C(*(void **)(self + 0x1F4));
+        *(void **)(self + 0x1F4) = NULL;
+    }
+    if (name != NULL) {
+        *(void **)(self + 0x1F4) = fn_8033740C(lbl_8045BAE8, name, 0, 0);
+    }
+}
+
 void fn_8009E9A8(void) {
     M2C_UNK fn_8009E964(M2C_UNK, M2C_UNK);
     fn_8009E964(1, 0xFFFF);
