@@ -561,9 +561,8 @@ void fn_800F7A50(void) {
 void fn_800F7A54(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
     extern u8 *lbl_8049665C;
     void fn_800F7C3C(void *, void *, s32, s32, s32, s32);
-    u8 *p = lbl_8049665C;
-    void *obj;
-    obj = (*(void *(**)(u8 *))(*(u8 **)p + 0x3C))(p + *(s16 *)(*(u8 **)p + 0x38));
+    u8 *e = *(u8 **)lbl_8049665C + 0x38;
+    void *obj = (*(void *(**)(u8 *))(e + 4))(lbl_8049665C + *(s16 *)e);
     fn_800F7C3C(arg0, obj, arg2, arg3, arg4, arg5);
 }
 
@@ -792,6 +791,28 @@ s32 fn_800F8120(u16 *s) {
         n++;
     }
     return n;
+}
+
+s32 fn_800F8148(u16 *a, u16 *b) {
+    s32 d;
+
+    for (;;) {
+        u16 c1 = *a;
+        u16 c2 = *b;
+        d = c1 - c2;
+        if (d != 0) {
+            break;
+        }
+        a++;
+        if (c1 == 0) {
+            break;
+        }
+        b++;
+        if (c2 == 0) {
+            break;
+        }
+    }
+    return d;
 }
 
 s32 fn_800F86C8(void *arg0, s32 arg1) {
