@@ -815,6 +815,16 @@ s32 fn_800F8148(u16 *a, u16 *b) {
     return d;
 }
 
+u16 *fn_800F8178(u16 *dst, const u16 *src) {
+    u16 *d = dst;
+
+    while (*src != 0) {
+        *d++ = *src++;
+    }
+    *d = 0;
+    return dst;
+}
+
 s32 fn_800F86C8(void *arg0, s32 arg1) {
     s32 temp_r9;
     s32 var_r3;
