@@ -191,6 +191,40 @@ void fn_8005BAE8(void *arg0, s32 arg1) {
     }
 }
 
+void fn_8005BB38(void *arg0) {
+    void *temp_r3;
+    void *temp_r9;
+    void *sub;
+    void *var_r31;
+
+    var_r31 = M2C_FIELD(arg0, void **, 0x430);
+    if (var_r31 != NULL) {
+        do {
+            temp_r3 = M2C_FIELD(var_r31, void **, 0);
+            sub = (u8 *)temp_r3 + 0x300;
+            temp_r9 = M2C_FIELD(sub, void **, 0);
+            M2C_FIELD(temp_r9, M2C_UNK (**)(void *, s32), 0x1C)((u8 *)sub + M2C_FIELD(temp_r9, s16 *, 0x18), M2C_FIELD(arg0, s32 *, 0x30C));
+            var_r31 = M2C_FIELD(var_r31, void **, 8);
+        } while (var_r31 != NULL);
+    }
+}
+
+void fn_8005CB90(void *arg0, void *arg1) {
+    s32 v;
+    void *p;
+
+    if (arg1 == NULL) {
+        return;
+    }
+    v = M2C_FIELD(arg1, s32 *, 0x14);
+    if (M2C_FIELD(arg0, s32 *, 0x414) == v) {
+        return;
+    }
+    M2C_FIELD(arg0, s32 *, 0x414) = v;
+    p = M2C_FIELD(arg0, void **, 0x440);
+    M2C_FIELD(p, s32 *, 0x9C) = v != 1;
+}
+
 void fn_8005CE50(char *self, s32 arg1) {
     extern void fn_802EA51C(void *, s32, s32, s32, s32, f32);
     extern f32 lbl_803C8068[];
@@ -659,11 +693,9 @@ s32 fn_80061F9C(char *self) {
 
 void fn_80063054(void) {
     extern void fn_8005B71C(void *);
-    void fn_80248488(void *, s32, u32);
     void *p;
 
-    p = BBI_AllocAligned(0x660);
-    fn_80248488(p, 0, 0x660);
+    p = BBI_AllocZero(0x660);
     fn_8005B71C(p);
 }
 
