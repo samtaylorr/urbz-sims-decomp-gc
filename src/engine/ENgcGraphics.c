@@ -46,6 +46,13 @@ void fn_8033FE0C(void) {
     fn_80348F08(lbl_8045F980, 2);
 }
 
+void fn_8033FF94(void *arg0, void *obj) {
+    if (obj != NULL) {
+        char *vt = *(char **)((char *)obj + 0xF0);
+        (*(void (**)(void *, s32))(vt + 0xC))((char *)obj + *(s16 *)(vt + 0x8), 3);
+    }
+}
+
 void fn_8033FFD4(void) {
     M2C_UNK fn_802D1FC8(M2C_UNK);
     M2C_UNK fn_8035D9C0();
