@@ -719,6 +719,24 @@ f32 fn_80096DF8(void *arg0, s32 arg1) {
     return lbl_803CCABC[0];
 }
 
+u8 fn_80096E60(f32 arg0) {
+    extern f32 lbl_803CCACC[];
+    extern f32 lbl_803CCAD0[];
+    extern f32 lbl_803CCAD4[];
+    u8 r;
+    if (arg0 > lbl_803CCACC[0]) {
+        arg0 = lbl_803CCACC[0];
+    }
+    if (arg0 < lbl_803CCAD0[0]) {
+        arg0 = lbl_803CCAD0[0];
+    }
+    r = (s32)(arg0 / lbl_803CCAD4[0]);
+    if (r > 3) {
+        r = 3;
+    }
+    return r;
+}
+
 extern void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
 extern void *fn_802D197C(void *, u32, s32);
