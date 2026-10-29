@@ -7,6 +7,14 @@ typedef struct {
     s32 d;
 } FamilyQuad;
 
+static inline FamilyQuad *FamilyQuad_Clear(FamilyQuad *q) {
+    q->a = 0;
+    q->b = 0;
+    q->c = 0;
+    q->d = 0;
+    return q;
+}
+
 
 extern s32 lbl_80494F54;
 FamilyQuad *fn_80331EA4(FamilyQuad *q) {
@@ -69,12 +77,13 @@ s32 fn_803321E4(void) {
 }
 
 void fn_803321EC(void *self) {
-    s32 *p = self;
-    p[4] = 0;
-    p[0] = 0;
-    p[1] = 0;
-    p[2] = 0;
-    p[3] = 0;
+    FamilyQuad *q;
+    M2C_FIELD(self, s32 *, 0x10) = 0;
+    q = self;
+    q->a = 0;
+    q->b = 0;
+    q->c = 0;
+    q->d = 0;
 }
 
 void fn_8033220C(s32 *self, s32 a, s32 b) {
