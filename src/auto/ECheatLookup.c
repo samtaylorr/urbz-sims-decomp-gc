@@ -21,6 +21,16 @@ void fn_800194C0(void) {
 
 }
 
+extern s32 lbl_80495714;
+extern u8 lbl_80495710;
+extern u8 lbl_8041FC64[];
+void fn_800194C4(void) {
+    if (lbl_80495714 == 0) {
+        lbl_80495714 = 1;
+        lbl_80495710 = lbl_8041FC64[0];
+    }
+}
+
 char *fn_8001991C(char *self) {
     *(s32 *)(self + 0x4) = -1;
     self[8] = 0;
