@@ -86,24 +86,25 @@ s32 fn_80005054(void *self, s32 *p) {
 
 s32 fn_80005078(void *self, s32 bits) {
     s32 found = 0;
-    s32 i;
+    s32 i = 0;
 
-    for (i = 0; i < 16; i++) {
+    do {
         if ((bits >> i) & 1) {
             if (found) {
                 return 0;
             }
             found = 1;
         }
-    }
+        i++;
+    } while (i <= 15);
     return found;
 }
 
 void fn_800050C8(void *self) {
     s32 i;
 
-    ((s32 *)self)[0x14 / 4] = 0;
     ((s32 *)self)[0x18 / 4] = 0;
+    ((s32 *)self)[0x14 / 4] = 0;
     for (i = 5; i >= 0; i--) {
         ((s16 *)((u8 *)self + 0x1C))[i] = 0;
     }
