@@ -167,6 +167,7 @@ s32 fn_80332834(char *self) {
     return *(s32 *)(self + 0xC);
 }
 
+void *memset(void *, int, unsigned long);
 void *fn_8033283C(void *arg0) {
     void fn_802D8B34(void *);
     void fn_803321EC(void *);
@@ -186,10 +187,10 @@ void *fn_8033283C(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x5CC) = 0;
     M2C_FIELD(arg0, s32 *, 0x5C0) = 0;
     M2C_FIELD(arg0, s32 *, 0x5C4) = 1;
-    __builtin_memset((char *)arg0 + 0x5D0, 0, 0x1C);
-    __builtin_memset((char *)arg0 + 0x5EC, 0, 0x1C);
-    __builtin_memset((char *)arg0 + 0x608, 0, 0x1C);
-    __builtin_memset((char *)arg0 + 0x624, 0, 0x1C);
+    memset((char *)arg0 + 0x5D0, 0, 0x1C);
+    memset((char *)arg0 + 0x5EC, 0, 0x1C);
+    memset((char *)arg0 + 0x608, 0, 0x1C);
+    memset((char *)arg0 + 0x624, 0, 0x1C);
     return arg0;
 }
 
