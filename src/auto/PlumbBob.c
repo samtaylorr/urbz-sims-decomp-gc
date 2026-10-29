@@ -2837,6 +2837,15 @@ void fn_8008B444(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x158) = 2;
 }
 
+void fn_8008B468(void *arg0) {
+    extern f32 lbl_803CC184[];
+    if (M2C_FIELD(arg0, s32 *, 0x158) != 0) {
+        return;
+    }
+    M2C_FIELD(arg0, f32 *, 0x13C) = lbl_803CC184[0];
+    M2C_FIELD(arg0, s32 *, 0x158) = 3;
+}
+
 void fn_8008C160(void *arg0, s32 arg1) {
     extern f32 lbl_803CC1C8[];
     struct V { f32 x, y, z; } v;
