@@ -71,6 +71,19 @@ void fn_80004408(void) {
     lbl_80493F14 += 1;
 }
 
+void fn_80004E0C(void *self, s32 a, s32 b) {
+    ((s32 *)self)[0x494 / 4] = 1;
+    ((s32 *)self)[0x49C / 4] = b;
+    ((s32 *)self)[0x498 / 4] = a;
+}
+
+s32 fn_80005054(void *self, s32 *p) {
+    if (++*p > 5) {
+        *p = 0;
+    }
+    return *p;
+}
+
 s32 fn_800050F0(u8 *self) {
     s32 result = 0;
     s32 i;
