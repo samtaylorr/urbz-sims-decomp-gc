@@ -73,6 +73,17 @@ s32 fn_803131C4(f32 x) {
     return sign * c;
 }
 
+s32 fn_8031322C(u32 n) {
+    u32 i;
+    s32 c;
+
+    c = 0;
+    for (i = 1; i < n; i <<= 1) {
+        c++;
+    }
+    return c;
+}
+
 void fn_80313298(s32 *p, s32 val, u32 size) {
     s32 *end = (s32 *)((u8 *)p + (size & ~3));
     while (p != end) {
