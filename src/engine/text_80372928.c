@@ -36,6 +36,20 @@ s32 fn_80372988(s32 arg0, s32 *out) {
     return arg0;
 }
 
+M2C_UNK fn_803729C8(void *self) {
+    extern u8 lbl_8041E0F0[];
+    extern void fn_8031E8B0(void *);
+    s32 i;
+    fn_8031E8B0(self);
+    *(u8 **)self = lbl_8041E0F0;
+    M2C_FIELD(self, s32 *, 0x24) = 0;
+    M2C_FIELD(self, s32 *, 0x20) = 0;
+    for (i = 7; i >= 0; i--) {
+        ((s32 *)((char *)self + 0x28))[i] = 0;
+    }
+    return (M2C_UNK)self;
+}
+
 void fn_80372A2C(void **self, s32 flags) {
     extern u8 lbl_8041E0F0[];
     extern void fn_80372A8C(void *);
@@ -60,32 +74,25 @@ void fn_80372A8C(void *self) {
 }
 
 void fn_80372AE4(void *arg0) {
-    M2C_UNK fn_8031EA2C(void *);
-    s32 *var_r31;
-    s32 temp_r9;
-    s32 var_r28;
-    void **var_r29;
-    void *temp_r30;
-    void *temp_r9_2;
+    extern void fn_8031EA2C(void *);
+    typedef struct { void *p; char pad[0x80]; } Slot;
+    s32 i;
+    char *base;
+    void *obj;
+    void *next;
 
-    temp_r9 = M2C_FIELD(arg0, s32 *, 0x20);
-    if (temp_r9 != 0) {
-        var_r28 = 0;
-        if ((s32) M2C_FIELD(arg0, s32 *, 0x24) > 0) {
-            var_r29 = temp_r9 + 0x16C;
-            var_r31 = arg0 + 0x28;
-            do {
-                if ((s32) *var_r31 != 0) {
-                    temp_r9_2 = *var_r29;
-                    temp_r30 = M2C_FIELD(temp_r9_2, void **, 8);
-                    fn_8031EA2C(temp_r9_2);
-                    *var_r31 = 0;
-                    *var_r29 = temp_r30;
-                }
-                var_r28 += 1;
-                var_r29 += 0x84;
-                var_r31 += 4;
-            } while (var_r28 < (s32) M2C_FIELD(arg0, s32 *, 0x24));
+    base = M2C_FIELD(arg0, char **, 0x20);
+    if (base != NULL) {
+        for (i = 0; i < M2C_FIELD(arg0, s32 *, 0x24); i++) {
+            s32 *flags = (s32 *)((char *)arg0 + 0x28);
+            Slot *slots = (Slot *)(base + 0x16C);
+            if (flags[i] != 0) {
+                obj = slots[i].p;
+                next = M2C_FIELD(obj, void **, 8);
+                fn_8031EA2C(obj);
+                flags[i] = 0;
+                slots[i].p = next;
+            }
         }
     }
 }
