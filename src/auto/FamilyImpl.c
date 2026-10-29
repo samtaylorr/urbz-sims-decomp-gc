@@ -20,6 +20,13 @@ typedef struct {
 
 s32 *fn_8010C464(s32 (*first)[2], s32 (*last)[2], s32 key);
 s32 fn_8010C3F8(void *arg0, void *arg1, s32 arg2);
+void fn_801B3908(void *, s32);
+void fn_801B3910(void *, u16);
+
+static inline void FamilyImpl_SetId(void *p, s32 a, u16 b) {
+    fn_801B3908(p, a);
+    fn_801B3910(p, b);
+}
 
 void fn_80106008(s32 *arg0) {
     M2C_UNK fn_8011AA6C(s32);
@@ -428,12 +435,13 @@ s32 fn_8010C374(void *arg0, s32 arg1, s32 arg2) {
     s32 result;
 
     result = fn_8010C3F8(arg0, (*(void *(**)(u8 *))(*(u8 **)lbl_8049665C + 0x3C))(lbl_8049665C + *(s16 *)(*(u8 **)lbl_8049665C + 0x38)), arg2);
-    if (result != 0) {
-        goto end;
+    if (result == 0) {
+        void *p = (u8 *)arg0 + 4;
+        s32 a = arg1;
+        u16 b = arg2;
+        fn_801B3908(p, a);
+        fn_801B3910(p, b);
     }
-    fn_801B3908((u8 *)arg0 + 4, arg1);
-    fn_801B3910((u8 *)arg0 + 4, arg2);
-end:
     return result;
 }
 
