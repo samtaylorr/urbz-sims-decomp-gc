@@ -2486,20 +2486,10 @@ static inline void Vec3_Set(f32 *v, f32 x, f32 y, f32 z) {
 void fn_80089650(f32 *arg0) {
     extern f32 lbl_803CBD00[];
     f32 z = lbl_803CBD00[0];
-    f32 *v1 = arg0 + 3;
-    f32 *v2 = arg0 + 6;
-    arg0[2] = z;
-    arg0[1] = z;
-    arg0[0] = z;
-    v1[1] = z;
-    v1[2] = z;
-    v1[0] = z;
-    v2[1] = z;
-    v2[2] = z;
-    arg0[11] = z;
-    v2[0] = z;
-    arg0[9] = z;
-    arg0[10] = z;
+    Vec3_Set(arg0, z, z, z);
+    Vec3_Set(arg0 + 3, z, z, z);
+    Vec3_Set(arg0 + 6, z, z, z);
+    Vec3_Set(arg0 + 9, z, z, z);
 }
 
 extern void fn_802D20E8(void *);
@@ -2700,6 +2690,25 @@ void fn_8008AB00(void *arg0, s32 arg1) {
     }
 }
 
+void fn_8008AB4C(void *arg0) {
+    void fn_8031EA2C(void *);
+    void fn_8008AFC0(void *);
+
+    fn_8008A7A4((s32 *)((char *)arg0 + 0x180));
+    M2C_FIELD(arg0, s32 *, 0x17C) = 0;
+    if (M2C_FIELD(arg0, void **, 0x15C) != NULL) {
+        fn_8031EA2C(M2C_FIELD(arg0, void **, 0x15C));
+        M2C_FIELD(arg0, s32 *, 0x15C) = 0;
+        M2C_FIELD(arg0, s32 *, 0x160) = 0;
+    }
+    if (M2C_FIELD(arg0, void **, 0x164) != NULL) {
+        fn_8031EA2C(M2C_FIELD(arg0, void **, 0x164));
+        M2C_FIELD(arg0, s32 *, 0x164) = 0;
+        M2C_FIELD(arg0, s32 *, 0x168) = 0;
+    }
+    fn_8008AFC0(arg0);
+}
+
 void fn_8008ABBC(s32 arg0, s32 arg1) {
     void fn_8008AB4C();
     s32 temp_r0;
@@ -2720,24 +2729,23 @@ void fn_8008ABBC(s32 arg0, s32 arg1) {
 
 void fn_8008AFC0(void *arg0) {
     void fn_8030AC1C(void *, s32, s32);
-    void **p;
+    struct { char pad[0x200]; void **arr[2]; s32 count; } *self = arg0;
     s32 i;
 
-    p = (void **)((char *)arg0 + 0x200);
-    for (i = 0; i < M2C_FIELD(arg0, s32 *, 0x208); i++, p++) {
-        if (*p != NULL) {
+    for (i = 0; i < self->count; i++) {
+        if (self->arr[i] != NULL) {
             void **v;
-            fn_8030AC1C(*p, 0x4000, 1);
-            fn_8030AC1C(*p, 8, 1);
-            v = *p;
+            fn_8030AC1C(self->arr[i], 0x4000, 1);
+            fn_8030AC1C(self->arr[i], 8, 1);
+            v = self->arr[i];
             if (v != NULL) {
                 char *vt = (char *)*v;
                 (*(void (**)(void *, s32))(vt + 0x34))((char *)v + *(s16 *)(vt + 0x30), 3);
             }
-            *p = NULL;
+            self->arr[i] = NULL;
         }
     }
-    M2C_FIELD(arg0, s32 *, 0x208) = 0;
+    self->count = 0;
 }
 
 void fn_8008B420(void *arg0) {
