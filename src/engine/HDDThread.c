@@ -7,12 +7,6 @@ typedef struct {
     s32 d;
 } FamilyQuad;
 
-void fn_80248488(void *, s32, s32);
-static inline void *HDD_Zero1C(void *p) {
-    fn_80248488(p, 0, 0x1C);
-    return p;
-}
-
 
 extern s32 lbl_80494F54;
 FamilyQuad *fn_80331EA4(FamilyQuad *q) {
