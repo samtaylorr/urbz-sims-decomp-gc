@@ -133,15 +133,15 @@ s32 fn_800246EC(char *self) {
     s32 item;
     s32 *node;
 
-    if (*(s32 *)(self + 4) != 0) {
-        node = *(s32 **)(self + 8);
-        item = *node;
-        fn_802CB5C4(self + 8, node);
-        *(s32 *)(self + 4) -= 1;
-        fn_800281D8(item, 1);
-        return item;
+    if (*(s32 *)(self + 4) == 0) {
+        return 0;
     }
-    return 0;
+    node = *(s32 **)(self + 8);
+    item = *node;
+    fn_802CB5C4(self + 8, node);
+    *(s32 *)(self + 4) -= 1;
+    fn_800281D8(item, 1);
+    return item;
 }
 
 void *fn_80024BCC(u8 *arg0, s32 id) {
