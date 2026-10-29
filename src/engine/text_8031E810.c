@@ -44,9 +44,7 @@ M2C_UNK fn_8031E8B0(void *arg0) {
     self[0] = (s32)lbl_8041B618;
     fn_802D39E4(&self[6]);
     self[3] = 1;
-    self[4] = 0;
-    self[1] = 0;
-    self[7] = 0;
+    self[4] = self[1] = self[7] = 0;
     self[5] = fn_802D0F94();
     return (s32)self;
 }

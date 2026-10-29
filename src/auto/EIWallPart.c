@@ -10,6 +10,31 @@ typedef struct {
 
 extern void fn_802D30D4(void *, s32 *);
 extern void fn_802E34F0(void *, void *);
+extern void *fn_802D0AB8(void *);
+extern void *fn_802D197C(void *, u32, s32);
+extern void *fn_802DC3C0(void *, u32, s32, s32, s32);
+extern void *fn_802D0B3C(void);
+extern void *fn_80248488(void *, s32, u32);
+
+static inline void *EIWallPart_AllocAligned(u32 size) {
+    void *heap;
+    void *p;
+
+    heap = ((void *(*)(void))fn_802D0AB8)();
+    if (size == 0) {
+        return NULL;
+    }
+    size = (size + 0xF) & ~0xF;
+    p = fn_802D197C(heap, size, 0x10);
+    if (p == NULL) {
+        p = fn_802DC3C0(heap, size, 0x10, 0, 0);
+        if (p == NULL && heap == ((void *(*)(void))fn_802D0AB8)()) {
+            return fn_802DC3C0(fn_802D0B3C(), size, 0x10, 0, 0);
+        }
+    }
+    return p;
+}
+
 void fn_8002DA3C(void) {
 
 }
@@ -159,6 +184,13 @@ s32 fn_80032934(EIWallPartFlags *self, s32 i) {
         }
     }
     return self->unk2C[i];
+}
+
+void *fn_80032AE0(u32 size) {
+    void *p = EIWallPart_AllocAligned(size);
+
+    fn_80248488(p, 0, size);
+    return p;
 }
 
 extern void *fn_802D0AB8(void *);

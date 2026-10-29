@@ -83,10 +83,9 @@ void fn_8028DFA0(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x20) = 0;
     if (M2C_FIELD(arg0, u32 **, 0x1C) != NULL) {
         for (i = 0; i < M2C_FIELD(arg0, s32 *, 0x24); i++) {
-            obj = (u8 *) (M2C_FIELD(arg0, u32 **, 0x1C)[i] & ~1);
-            if (obj != NULL) {
+            if ((obj = (u8 *) (M2C_FIELD(arg0, u32 **, 0x1C)[i] & ~1)) != NULL) {
                 owned = 1;
-                if (!(M2C_FIELD(arg0, u32 **, 0x1C)[i] & 1)) {
+                if (!(M2C_FIELD(arg0, s32 **, 0x1C)[i] & 1)) {
                     owned = 0;
                 }
                 if (owned) {
@@ -135,12 +134,12 @@ void *fn_8028E2B8(void *arg0, s32 arg1) {
     extern void *lbl_80496130;
     void *p;
 
-    if (arg1 < 0 || arg1 >= M2C_FIELD(arg0, s32 *, 0x24)) {
+    if (arg1 >= 0 && arg1 < M2C_FIELD(arg0, s32 *, 0x24)) {
+        p = (void *) (M2C_FIELD(arg0, u32 **, 0x1C)[arg1] & ~1);
+        if (p != NULL) {
+            return p;
+        }
         return lbl_80496130;
-    }
-    p = (void *) (M2C_FIELD(arg0, u32 **, 0x1C)[arg1] & ~1);
-    if (p != NULL) {
-        return p;
     }
     return lbl_80496130;
 }

@@ -20,6 +20,53 @@ static inline cXPersonImpl_Entry *cXPersonImpl_EntryVec_At(cXPersonImpl_EntryVec
     return &v->begin[i];
 }
 
+typedef struct cXPersonImpl_Res {
+    u8 pad[0x10];
+    s32 unk10;
+} cXPersonImpl_Res;
+
+typedef struct cXPersonImpl_ResVec {
+    cXPersonImpl_Res *data;
+    s32 count;
+} cXPersonImpl_ResVec;
+
+extern s32 lbl_803F6780[];
+void fn_80186224(void *, s32);
+
+static inline s32 cXPersonImpl_ResVec_Size(cXPersonImpl_ResVec *v) {
+    return v->count;
+}
+
+static inline cXPersonImpl_Res *cXPersonImpl_ResVec_At(cXPersonImpl_ResVec *v, s32 i) {
+    return &v->data[i];
+}
+
+extern s32 lbl_804944B0;
+void fn_801181F8(void *, s32, s32);
+
+static inline void cXPersonImpl_ResVec_Setup(cXPersonImpl_ResVec *v, s32 line) {
+    cXPersonImpl_Res *r;
+    s32 i;
+    for (i = 0; i < v->count; i++) {
+        fn_80186224(&v->data[i], 8);
+        r = &v->data[i];
+        r->unk10 = lbl_803F6780[i];
+    }
+    fn_801181F8(v, lbl_804944B0, line);
+}
+
+static inline void cXPersonImpl_ResVec_Init(cXPersonImpl_ResVec *vec, s32 line) {
+    cXPersonImpl_Res *r;
+    s32 i;
+    cXPersonImpl_ResVec *v = vec;
+    for (i = 0; i < v->count; i++) {
+        fn_80186224(&v->data[i], 8);
+        r = &v->data[i];
+        r->unk10 = lbl_803F6780[i];
+    }
+    fn_801181F8(v, lbl_804944B0, line);
+}
+
 extern s32 lbl_80495C94;
 extern void fn_800F1A60(s32, s32);
 void fn_80176558(void) {
@@ -42,6 +89,18 @@ s32 fn_80176A3C(void *arg0, u32 arg1) {
         fn_80176690(arg0, arg1);
     }
     return 1;
+}
+
+void fn_80176ED8(void) {
+    extern s32 lbl_80494518;
+    extern u8 lbl_80435198[];
+    extern u8 lbl_8043522C[];
+
+    if (lbl_80494518 == 0) {
+        cXPersonImpl_ResVec_Init((cXPersonImpl_ResVec *)lbl_80435198, 0x1f6);
+        cXPersonImpl_ResVec_Init((cXPersonImpl_ResVec *)lbl_8043522C, 0x1f8);
+        lbl_80494518 = 1;
+    }
 }
 
 M2C_UNK *fn_80177154(void) {

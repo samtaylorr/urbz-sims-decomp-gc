@@ -6,6 +6,64 @@ typedef struct TreeKey {
     u16 b;
 } TreeKey;
 
+typedef struct TTQDPtrVec {
+    void **begin;
+    void **end;
+    void *unk8;
+    void **cap;
+} TTQDPtrVec;
+
+static inline void TTQDPtrVec_DestroyRange(void **it, void **end) {
+    void *obj;
+    void *vt;
+    for (; it != end; it++) {
+        obj = *it;
+        if (obj != NULL) {
+            vt = *(void **)obj;
+            M2C_FIELD(vt, void (**)(void *), 0x1C)((char *)obj + M2C_FIELD(vt, s16 *, 0x18));
+        }
+    }
+}
+
+static inline void TTQDPtrVec_Erase(TTQDPtrVec *vec, void **first, void **last) {
+    TTQDPtrVec_DestroyRange(first, last);
+    vec->end = first;
+}
+
+static inline void TTQDPtrVec_Clear(TTQDPtrVec *vec) {
+    TTQDPtrVec_Erase(vec, vec->begin, vec->end);
+}
+
+static inline void TTQDPtrVec_Dtor(TTQDPtrVec *vec) {
+    extern void fn_802D20E8(void *);
+    extern void fn_803997AC(void *, u32);
+    void *p;
+    u32 size;
+    TTQDPtrVec_DestroyRange(vec->begin, vec->end);
+    p = vec->begin;
+    if (p != NULL) {
+        size = (u32)(vec->cap - (void **)p) * sizeof(void *);
+        if (size > 0x80) {
+            fn_802D20E8(p);
+        } else {
+            fn_803997AC(p, size);
+        }
+    }
+}
+
+static inline void TTQD_DtorBody(s32 *self) {
+    extern u8 lbl_80415928[];
+    self[0] = (s32)lbl_80415928;
+    self[1] = 0;
+    TTQDPtrVec_Clear((TTQDPtrVec *)(self + 2));
+}
+
+static inline void TTQD_Dtor(s32 *self) {
+    TTQDPtrVec *vec = (TTQDPtrVec *)(self + 2);
+    TTQD_DtorBody(self);
+    TTQDPtrVec_Dtor(vec);
+}
+
 void fn_800F77AC(void);
 extern s32 lbl_80495D68;
 extern void fn_800F1A60(s32, s32);
@@ -200,6 +258,57 @@ s32 fn_801B49B8(void *arg0) {
 extern s32 lbl_80495D88;
 void fn_801B5624(void) {
     fn_800F1A60((s32)&lbl_80495D88, 2);
+}
+
+void fn_801B57DC(void *arg0, s32 flags) {
+    extern u8 lbl_80415928[];
+    extern void fn_802D20E8(void *);
+    extern void fn_803997AC(void *, u32);
+    s32 *self = arg0;
+    void ***vec1;
+    void ***vec2;
+    void **begin;
+    void **end;
+    void **it;
+    void *obj;
+    void *vt;
+    void *p;
+    u32 size;
+
+    self[0] = (s32)lbl_80415928;
+    self[1] = 0;
+    vec1 = (void ***)(self + 2);
+    vec2 = (void ***)(self + 2);
+    begin = (void **)self[2];
+    end = vec1[1];
+    for (it = begin; it != end; it++) {
+        obj = *it;
+        if (obj != NULL) {
+            vt = *(void **)obj;
+            M2C_FIELD(vt, void (**)(void *), 0x1C)((char *)obj + M2C_FIELD(vt, s16 *, 0x18));
+        }
+    }
+    vec1[1] = begin;
+    end = vec2[1];
+    for (it = (void **)self[2]; it != end; it++) {
+        obj = *it;
+        if (obj != NULL) {
+            vt = *(void **)obj;
+            M2C_FIELD(vt, void (**)(void *), 0x1C)((char *)obj + M2C_FIELD(vt, s16 *, 0x18));
+        }
+    }
+    p = vec2[0];
+    if (p != NULL) {
+        size = (u32)(vec2[3] - (void **)p) * sizeof(void *);
+        if (size > 0x80) {
+            fn_802D20E8(p);
+        } else {
+            fn_803997AC(p, size);
+        }
+    }
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
 }
 
 s32 fn_801B5DC8(void) {

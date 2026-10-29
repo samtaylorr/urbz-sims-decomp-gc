@@ -49,7 +49,7 @@ s32 fn_800522E0(void *arg0, s32 arg1) {
 void fn_800523DC(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x3BC) = arg1;
     if (arg1 == 0x92D8AE4A || arg1 == 0x30AA9779 || arg1 == 0x6BCF6EE9) {
-        fn_802EA51C((void *) M2C_FIELD(arg0, s32 *, 0x390), 1, M2C_FIELD(arg0, s32 *, 0x3BC), -1, 0, lbl_803C73BC[0]);
+        fn_802EA51C(M2C_FIELD(arg0, void **, 0x390), 1, M2C_FIELD(arg0, s32 *, 0x3BC), -1, 0, lbl_803C73BC[0]);
     }
     fn_80050C6C(arg0);
     fn_80052468(arg0);

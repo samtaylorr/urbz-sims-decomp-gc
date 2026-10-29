@@ -846,6 +846,48 @@ s32 fn_8019F890(void) {
     return 0;
 }
 
+extern u8 lbl_80414248[];
+extern u8 lbl_80414B78[];
+extern char lbl_803DB840[];
+void fn_80102B5C(void *);
+void fn_80197AC8(void *);
+void fn_80197AD4(void *, s32, char *);
+typedef struct { u8 hdr[8]; u8 data[8]; } Str8_8019F898;
+static inline void *Str8_init(Str8_8019F898 *s) {
+    fn_800F687C(s, s->data, 8);
+    return s;
+}
+static inline void *Str8_init2(void *s, u8 *data) {
+    fn_800F687C(s, data, 8);
+    return s;
+}
+static inline void Str8_init3(void *s, u8 *data, s32 n) {
+    fn_800F687C(s, data, n);
+}
+void *fn_8019F898(void *self) {
+    Str8_8019F898 s;
+    char *p;
+    void *b;
+    s32 n;
+
+    n = 8;
+    p = (char *)self + 0xd4;
+    fn_80102B5C(self);
+    *(void **)((char *)self + 0x10) = lbl_80414248;
+    do {
+        fn_800F687C(p + 4, p + 0xc, 8);
+        p += 0x14;
+    } while (--n != -1);
+    *(s32 *)((char *)self + 0xd4) = 0;
+    b = Str8_init2(&s, s.data);
+    fn_800F68F0(b, 0, -1);
+    fn_800F6A38((s32)((char *)self + 0xd8), (s32)b);
+    *(void **)((char *)self + 0x10) = lbl_80414B78;
+    fn_80197AC8(self);
+    fn_80197AD4(self, 2, lbl_803DB840);
+    return self;
+}
+
 s32 fn_8019FC9C(void) {
     M2C_UNK fn_800C4744(M2C_UNK *);
     s32 fn_800C4820();

@@ -2,6 +2,46 @@
 #include "common.h"
 
 extern void fn_802D20E8(void *);
+f32 fn_800F49D8(f32 *arg0) {
+    f32 fn_80243100(f32);
+    extern f32 lbl_803D59E8[];
+    extern f64 lbl_803D59F0[];
+    static f32 scale;
+    static s32 init;
+
+    if (init == 0) {
+        f32 r = fn_80243100(lbl_803D59E8[0]);
+        init = 1;
+        scale = lbl_803D59F0[0] / (r + r);
+    }
+    return *arg0 * scale;
+}
+
+f32 fn_800F4A44(f32 *arg0) {
+    f32 fn_80243100(f32);
+    extern f32 lbl_803D59F8[];
+    static f32 scale;
+    static s32 init;
+
+    if (init == 0) {
+        f64 r = fn_80243100(lbl_803D59F8[0]);
+        init = 1;
+        scale = r + r;
+    }
+    return *arg0 * scale;
+}
+
+f32 fn_800F4AA4(s32 arg0) {
+    extern f32 lbl_803D59FC[];
+    return fn_800F49D8((f32 *)arg0) * lbl_803D59FC[0];
+}
+
+f32 fn_800F4AD0(f32 *arg0) {
+    extern f32 lbl_803D5A00[];
+    f32 tmp = *arg0 * lbl_803D5A00[0];
+    return fn_800F4A44(&tmp);
+}
+
 f32 *fn_800F4B08(f32 *out, f32 *arg1, f32 *arg2, s32 arg3) {
     f32 fn_800F4AA4(s32);
     extern f32 lbl_803D5A04[];

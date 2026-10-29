@@ -9,6 +9,20 @@ typedef struct AtExitBlock {
     s32 funcs[32];
 } AtExitBlock;
 
+typedef struct StrFile {
+    unsigned char *_p;
+    s32 _r;
+    s32 _w;
+    s16 _flags;
+    s16 _file;
+    unsigned char *_base;
+    s32 _size;
+    s32 pad[17];
+    s32 _data;
+} StrFile;
+
+s32 fn_80249390(StrFile *f, const char *fmt, void *ap);
+
 void fn_80242320(s32 arg0) {
     fn_802422DC();
     *(s32 *)0xCC006008 = 0x12000000;
@@ -29,6 +43,28 @@ void fn_802423A8(void) {
     fn_802422FC();
 }
 
+s32 fn_80245A30(s32 self, s32 str) {
+    extern char lbl_803EBB3C[];
+    s32 fn_80248808(const char *);
+    s32 fn_8024CAE8(void *, void *);
+    u8 buf[0x20];
+    s32 len;
+    register void *obj asm("r3");
+    s32 r;
+    len = fn_80248808((char *)str);
+    obj = *(void **)((char *)self + 8);
+    *(s32 *)(buf + 0x10) = str;
+    *(char **)(buf + 0x18) = lbl_803EBB3C;
+    *(s32 *)(buf + 0x1c) = 1;
+    *(s32 *)(buf + 8) = len + 1;
+    *(u8 **)(buf + 0) = buf + 0x10;
+    *(s32 *)(buf + 4) = 2;
+    *(s32 *)(buf + 0x14) = len;
+    r = fn_8024CAE8(obj, buf);
+    if (r == 0) return 10;
+    return -1;
+}
+
 void fn_80245AB8(s32 arg0) {
     M2C_UNK fn_80245A30(s32, s32);
     extern s32 lbl_80494988;
@@ -37,6 +73,36 @@ void fn_80245AB8(s32 arg0) {
 
 s32 fn_80245C8C(void) {
     return 0;
+}
+
+s32 fn_80246C5C(char *str, const char *fmt, void *ap) {
+    extern s32 lbl_80494988;
+    StrFile f;
+    s32 ret;
+    f._flags = 0x208;
+    f._base = f._p = (unsigned char *)str;
+    f._size = f._w = 0x7FFFFFFF;
+    f._data = lbl_80494988;
+    ret = fn_80249390(&f, fmt, ap);
+    *f._p = 0;
+    return ret;
+}
+
+s32 fn_80249390(StrFile *f, const char *fmt, void *ap);
+s32 fn_80246CB8(char *str, u32 size, const char *fmt, void *ap) {
+    extern s32 lbl_80494988;
+    StrFile f;
+    s32 ret;
+    f._flags = 0x208;
+    f._base = f._p = (unsigned char *)str;
+    f._size = f._w = size;
+    f._data = lbl_80494988;
+    ret = fn_80249390(&f, fmt, ap);
+    *f._p = 0;
+    if ((u32)ret > size) {
+        ret = -1;
+    }
+    return ret;
 }
 
 void fn_80246D2C(void) {
@@ -74,6 +140,27 @@ void fn_80246E00(s32 arg0) {
     fn_8024BE60(arg0, 0, 0xA);
 }
 
+s32 fn_80246EEC(s32 arg0, u32 *arg1, s32 arg2, u32 n, s32 arg4) {
+    extern s32 lbl_80494974;
+    s32 fn_80246F80(s32, u32 *, s32, s32, s32);
+    u32 *p = arg1;
+    u32 total = n;
+    s32 ret;
+
+    if (n != 0) {
+        do {
+            ret = fn_80246F80(arg0, p, arg2, lbl_80494974, arg4);
+            if (ret == -1)
+                return -1;
+            if (ret == 0)
+                return p - arg1;
+            arg2 += ret;
+            p++;
+        } while (--n != 0);
+    }
+    return total;
+}
+
 void fn_80247C28(s32 arg0) {
     extern s32 lbl_80494988;
     *(s32 *)(lbl_80494988 + 0x58) = arg0;
@@ -89,7 +176,7 @@ s32 fn_80247C34(void) {
 void fn_80247C58(void) {
     extern char lbl_803EBB7C[];
     s32 fn_802530CC();
-    register char *lr asm("lr");
+    register char *lr asm("r6");
     fn_802530CC(0, 0, lbl_803EBB7C, lr - 4);
 }
 
@@ -196,9 +283,207 @@ void *fn_80248488(void *m, s32 c, u32 len) {
     return m;
 }
 
+s32 fn_80248808(const char *str) {
+    const char *start = str;
+    const u32 *w;
+
+    if (((u32)str & 3) == 0) {
+        w = (const u32 *)str;
+        if (((*w - 0x01010101) & ~*w & 0x80808080) == 0) {
+            do {
+                str += 4;
+            } while (((*(u32 *)str - 0x01010101) & ~*(u32 *)str & 0x80808080) == 0);
+        }
+    }
+    while (*str)
+        str++;
+    return str - start;
+}
+
+s32 fn_80248874(const char *s1, const char *s2, u32 n) {
+    extern const u8 lbl_803EBA39[];
+#define TOLOWER(c) ({ int __x = (c); (__x[lbl_803EBA39] & 1) ? __x + 0x20 : __x; })
+
+    if (n == 0)
+        return 0;
+    while (n-- != 0 && TOLOWER(*s1) == TOLOWER(*s2)) {
+        if (n == 0 || *s1 == 0 || *s2 == 0)
+            break;
+        s1++;
+        s2++;
+    }
+    return TOLOWER(*(const u8 *)s1) - TOLOWER(*(const u8 *)s2);
+#undef TOLOWER
+}
+
+char *fn_80248ADC(const char *s, s32 i) {
+    const char *last = NULL;
+    char c = i;
+
+    while (*s != 0) {
+        if (*s == c) {
+            last = s;
+        }
+        s++;
+    }
+    if (*s == c) {
+        last = s;
+    }
+    return (char *)last;
+}
+
+char *fn_80248B28(const char *s1, const char *s2) {
+    if (*s1 == 0) {
+        if (*s2 != 0) {
+            return NULL;
+        }
+        return (char *)s1;
+    }
+    while (*s1 != 0) {
+        u32 i = 0;
+        while (1) {
+            if (s2[i] == 0) {
+                return (char *)s1;
+            }
+            if (s2[i] != s1[i]) {
+                break;
+            }
+            i++;
+        }
+        s1++;
+    }
+    return NULL;
+}
+
+char *fn_80248B90(char *s, const char *delim) {
+    extern s32 lbl_80494988;
+    char *fn_80248BB8(char *, const char *, char **);
+    return fn_80248BB8(s, delim, (char **)(lbl_80494988 + 0x5C));
+}
+
+s32 fn_80248C80(char *buf, s32 n) {
+    if (n > 0) {
+        n--;
+        if (buf[n] > '4') {
+            do {
+                buf[n] = '0';
+                if (--n <= 0) {
+                    break;
+                }
+            } while (buf[n] == '9');
+            if (buf[n] == '9') {
+                return 0;
+            }
+            buf[n]++;
+        }
+    }
+    return 1;
+}
+
+void fn_80248CDC(u8 *s) {
+    s32 i = 0;
+    s32 j;
+    while (s[i] != 0) {
+        i++;
+    }
+    j = 0;
+    i--;
+    if (j >= i) return;
+    do {
+        u8 a = s[i];
+        u8 b = s[j];
+        s[j] = a;
+        s[i] = b;
+        j++;
+        i--;
+    } while (j < i);
+}
+
+void fn_80248D28(s32 value, char *buf, s32 base) {
+    extern char lbl_803F774C[];
+    s32 neg = (u32)value >> 31;
+    s32 v = value;
+    s32 i;
+    if (neg) {
+        if (base == 10) {
+            v = -v;
+        }
+    }
+    i = 0;
+    do {
+        s32 q = (u32)v / (u32)base;
+        u32 rem = (u32)v - (u32)q * (u32)base;
+        buf[i++] = lbl_803F774C[rem];
+        v = q;
+    } while (v != 0);
+    if (neg) {
+        buf[i++] = '-';
+    }
+    buf[i] = 0;
+    fn_80248CDC((u8 *)buf);
+}
+
 void fn_8024928C(void *arg0) {
     M2C_UNK fn_802492BC(s16, M2C_UNK, M2C_UNK, M2C_UNK);
     fn_802492BC(M2C_FIELD(arg0, s16 *, 0xE), 0, 0, 2);
+}
+
+s32 fn_802492BC(s32 fd, u8 *src, u32 n, s32 flush) {
+    extern u8 lbl_80440644[];
+    extern s32 lbl_80494964;
+    extern u8 *lbl_80494968;
+    s32 fn_80375D08(s32, void *, s32);
+    u32 i;
+    s32 ret;
+
+    if (flush == 1) {
+        ret = fn_80375D08(fd, lbl_80440644, lbl_80494964);
+        lbl_80494964 = 0;
+        lbl_80494968 = lbl_80440644;
+        return ret;
+    }
+    for (i = 0; i < n; i++) {
+        *lbl_80494968 = src[i];
+        lbl_80494968++;
+        if (++lbl_80494964 > 0x7F) {
+            ret = fn_80375D08(fd, lbl_80440644, lbl_80494964);
+            lbl_80494968 = lbl_80440644;
+            lbl_80494964 = 0;
+            if (ret == 0) {
+                return 0;
+            }
+        }
+    }
+    return i;
+}
+
+s32 fn_8024A8AC(s32 fd, u8 *src, u32 n, s32 flush) {
+    extern u8 lbl_804406C4[];
+    extern s32 lbl_8049496C;
+    extern u8 *lbl_80494970;
+    s32 fn_80375D08(s32, void *, s32);
+    u32 i;
+    s32 ret;
+
+    if (flush == 1) {
+        ret = fn_80375D08(fd, lbl_804406C4, lbl_8049496C);
+        lbl_8049496C = 0;
+        lbl_80494970 = lbl_804406C4;
+        return ret;
+    }
+    for (i = 0; i < n; i++) {
+        *lbl_80494970 = src[i];
+        lbl_80494970++;
+        if (++lbl_8049496C > 0x7F) {
+            ret = fn_80375D08(fd, lbl_804406C4, lbl_8049496C);
+            lbl_80494970 = lbl_804406C4;
+            lbl_8049496C = 0;
+            if (ret == 0) {
+                return 0;
+            }
+        }
+    }
+    return i;
 }
 
 void fn_8024BE60(s32 arg0, s32 arg1, s32 arg2) {

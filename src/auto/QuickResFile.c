@@ -1,7 +1,7 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
-void fn_8018D8DC(void);
+void fn_8018D8DC(void *, s32 *, s32);
 extern u8 lbl_80413E80[];
 extern void fn_802D20E8(void *);
 
@@ -406,8 +406,119 @@ void fn_8018D56C(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x28) = 0;
 }
 
-void fn_8018D8BC(void) {
-    fn_8018D8DC();
+void fn_8018D8BC(void *arg0, s32 *arg1, s32 arg2) {
+    ((void (*)(void *, s32 *, s32))fn_8018D8DC)(arg0, arg1, arg2);
+}
+
+void fn_8018D8DC(void *arg0, s32 *arg1, s32 arg2) {
+    void fn_8018D1F4(void *, s32 *, char *);
+    extern char lbl_80435358[];
+    u8 *src;
+    u8 *dst;
+    s32 tmp;
+    s32 tmp2;
+
+    if (M2C_FIELD(arg0, s32 *, 0x18) != 0) {
+        if ((u32)(M2C_FIELD(arg0, s32 *, 0xC) - 1) <= 1) {
+            while (arg2-- > 0) {
+                tmp = *arg1;
+                arg1++;
+                fn_8018D1F4(arg0, &tmp, lbl_80435358);
+            }
+        } else {
+            while (arg2-- > 0) {
+                fn_8018D1F4(arg0, &tmp2, lbl_80435358);
+                *arg1 = tmp2;
+                arg1++;
+            }
+        }
+        return;
+    }
+    if (M2C_FIELD(arg0, s32 *, 0xC) == 2) {
+        M2C_FIELD(arg0, s32 *, 8) += arg2 * 4;
+        return;
+    }
+    if (M2C_FIELD(arg0, s32 *, 0xC) == 0) {
+        dst = (u8 *)arg1;
+        src = M2C_FIELD(arg0, u8 **, 0) + M2C_FIELD(arg0, s32 *, 8);
+    } else {
+        src = (u8 *)arg1;
+        dst = M2C_FIELD(arg0, u8 **, 0) + M2C_FIELD(arg0, s32 *, 8);
+    }
+    while (arg2-- > 0) {
+        if (M2C_FIELD(arg0, s32 *, 0x10) != 0) {
+            dst[0] = src[3];
+            dst[1] = src[2];
+            dst[2] = src[1];
+            dst[3] = src[0];
+            src += 4;
+            dst += 4;
+        } else {
+            *dst = *src;
+            *++dst = *++src;
+            *++dst = *++src;
+            *++dst = *++src;
+            src++;
+            dst++;
+        }
+        M2C_FIELD(arg0, s32 *, 8) += 4;
+    }
+}
+
+void fn_8018DA88(void *, s32 *, s32);
+void fn_8018DA88(void *arg0, s32 *arg1, s32 arg2) {
+    void fn_8018D1F4(void *, s32 *, char *);
+    extern char lbl_80435358[];
+    u8 *src;
+    u8 *dst;
+    s32 tmp;
+    s32 tmp2;
+
+    if (M2C_FIELD(arg0, s32 *, 0x18) != 0) {
+        if ((u32)(M2C_FIELD(arg0, s32 *, 0xC) - 1) <= 1) {
+            while (arg2-- > 0) {
+                tmp = *arg1;
+                arg1++;
+                fn_8018D1F4(arg0, &tmp, lbl_80435358);
+            }
+        } else {
+            while (arg2-- > 0) {
+                fn_8018D1F4(arg0, &tmp2, lbl_80435358);
+                *arg1 = tmp2;
+                arg1++;
+            }
+        }
+        return;
+    }
+    if (M2C_FIELD(arg0, s32 *, 0xC) == 2) {
+        M2C_FIELD(arg0, s32 *, 8) += arg2 * 4;
+        return;
+    }
+    if (M2C_FIELD(arg0, s32 *, 0xC) == 0) {
+        dst = (u8 *)arg1;
+        src = M2C_FIELD(arg0, u8 **, 0) + M2C_FIELD(arg0, s32 *, 8);
+    } else {
+        src = (u8 *)arg1;
+        dst = M2C_FIELD(arg0, u8 **, 0) + M2C_FIELD(arg0, s32 *, 8);
+    }
+    while (arg2-- > 0) {
+        if (M2C_FIELD(arg0, s32 *, 0x10) != 0) {
+            dst[0] = src[3];
+            dst[1] = src[2];
+            dst[2] = src[1];
+            dst[3] = src[0];
+            src += 4;
+            dst += 4;
+        } else {
+            *dst = *src;
+            *++dst = *++src;
+            *++dst = *++src;
+            *++dst = *++src;
+            src++;
+            dst++;
+        }
+        M2C_FIELD(arg0, s32 *, 8) += 4;
+    }
 }
 
 void fn_8018EA34(void *arg0, u8 *p) {

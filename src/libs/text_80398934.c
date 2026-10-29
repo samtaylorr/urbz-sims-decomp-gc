@@ -39,6 +39,13 @@ typedef struct {
 } SearchEntry8;
 
 typedef struct {
+    s16 unk0;
+    s16 unk2;
+    s16 unk4;
+    s16 unk6;
+} Elem8;
+
+typedef struct {
     void **node;
     u8 pad4[4];
 } RbIter;
@@ -59,6 +66,19 @@ static inline RbIter RbIter_dec(RbIter *it) {
 static inline void RbInsertPair_init(RbInsertPair *p, const RbIter *it, s32 ok) {
     p->first = it->node;
     p->second = ok;
+}
+
+void **fn_8039AB24(void **node);
+RbInsertPair *fn_8039F62C(RbInsertPair *ret, void **tree, u32 *v);
+
+static inline void RbIter_inc(RbIter *it) {
+    it->node = fn_8039AB24(it->node);
+}
+
+static inline RbInsertPair Rb_insertUniqueU(void **tree, u32 *v) {
+    RbInsertPair p;
+    fn_8039F62C(&p, tree, v);
+    return p;
 }
 
 typedef struct Elem14 {
@@ -107,6 +127,24 @@ void fn_8039B1E4(s32 *first, s32 *last, s32 *val, s32 depth, s32 comp);
 void fn_8039B3A4(s32 *first, s32 *last, s32 comp);
 void fn_8039B450(s32 *first, s32 *last, s32 *val, s32 comp);
 void fn_8039B338(s32 *last, s32 val, s32 comp);
+
+static inline s32 *Median3(s32 *a, s32 *b, s32 *c, s32 (*comp)(s32 *, s32 *)) {
+    if (comp(a, b)) {
+        if (comp(b, c)) {
+            return b;
+        } else if (comp(a, c)) {
+            return c;
+        } else {
+            return a;
+        }
+    } else if (comp(a, c)) {
+        return a;
+    } else if (comp(b, c)) {
+        return c;
+    } else {
+        return b;
+    }
+}
 void *fn_8024839C(void *dst, const void *src, u32 n);
 M2C_UNK fn_802D1FC8(M2C_UNK);
 void *fn_80399BE8(u32);
@@ -127,10 +165,366 @@ static inline void PtrVec_Deallocate(void *p, u32 size) {
     }
 }
 
+static inline void *PtrVec_AllocateN(u32 n, u32 elemSize, u32 *bytes) {
+    if (n != 0) {
+        u32 size = n * elemSize;
+        *bytes = size;
+        return PtrVec_Allocate(size);
+    }
+    *bytes = 0;
+    return NULL;
+}
+
+typedef struct { s32 a; s32 b; } Pair8;
+typedef struct { Pair8 *start; Pair8 *finish; s32 unk8; Pair8 *end; } Pair8Vec;
+
+static inline Pair8 *Pair8_Copy(Pair8 *first, Pair8 *last, Pair8 *result) {
+    s32 n;
+    for (n = last - first; n > 0; n--) {
+        s32 a = first->a;
+        s32 b = first->b;
+        result->a = a;
+        result->b = b;
+        first++;
+        result++;
+    }
+    return result;
+}
+
+static inline Pair8 *Pair8_UninitCopy(Pair8 *first, Pair8 *last, Pair8 *result) {
+    for (; first != last; first++, result++) {
+        result->a = first->a;
+        result->b = first->b;
+    }
+    return result;
+}
+
+static inline void Pair8_Destroy(Pair8 *first, Pair8 *last) {
+    for (; first != last; first++) {
+    }
+}
+
+static inline Pair8 *Pair8_UninitCopyS(Pair8 *first, Pair8 *last, Pair8 *result) {
+    for (; first != last; first++, result++) {
+        *result = *first;
+    }
+    return result;
+}
+
+static inline Pair8 *Pair8_CopyBackward(Pair8 *first, Pair8 *last, Pair8 *result) {
+    s32 n;
+    for (n = last - first; n > 0; n--) {
+        --last;
+        --result;
+        *result = *last;
+    }
+    return result;
+}
+
+static inline void Pair8_Fill(Pair8 *first, Pair8 *last, const Pair8 *val) {
+    for (; first != last; first++) {
+        *first = *val;
+    }
+}
+
+static inline Pair8 *Pair8_UninitFillN(Pair8 *first, u32 n, const Pair8 *val) {
+    for (; n > 0; n--) {
+        *first = *val;
+        first++;
+    }
+    return first;
+}
+
 static inline void PtrVec_Set(void **v, void **start, void **finish, void **end) {
     v[0] = start;
     v[1] = finish;
     v[3] = end;
+}
+
+static inline void **PtrVec_Copy(void **first, void **last, void **result) {
+    if (last != first) {
+        fn_8024839C(result, first, (char *)last - (char *)first);
+    }
+    return result + (last - first);
+}
+
+static inline void **PtrVec_CopyTrivial(void **first, void **last, void **result) {
+    u32 n = (char *)last - (char *)first;
+    return n ? (void **)((char *)fn_8024839C(result, first, n) + n) : result;
+}
+
+static inline void PtrVec_Fill(void **first, void **last, void *const *val) {
+    for (; first != last; first++) {
+        *first = *val;
+    }
+}
+
+static inline void **PtrVec_FillN(void **first, u32 n, void *const *val) {
+    for (; n > 0; n--) {
+        *first++ = *val;
+    }
+    return first;
+}
+
+static inline void **PtrVec_CopyPtr(void **first, void **last, void **result) {
+    if (last != first) {
+        u32 n = (char *)last - (char *)first;
+        return (void **)((char *)fn_8024839C(result, first, n) + n);
+    }
+    return result;
+}
+
+static inline const u32 *PtrVec_Max(const u32 *a, const u32 *b) {
+    return *a < *b ? b : a;
+}
+
+static inline void **PtrVec_CopyBackward(void **first, void **last, void **result) {
+    s32 n = (char *)last - (char *)first;
+    if (n > 0) {
+        fn_8024839C((char *)result - n, first, n);
+    }
+    return (void **)((char *)result - n);
+}
+
+static inline void PtrVec_InsertOverflow(void **v, void **pos, void *const *x, u32 fill_len) {
+    u32 old_size = (void **)v[1] - (void **)v[0];
+    u32 len = old_size + *PtrVec_Max(&old_size, &fill_len);
+    void **new_start = len != 0 ? (void **)PtrVec_Allocate(len * 4) : NULL;
+    void **new_finish = PtrVec_CopyTrivial((void **)v[0], pos, new_start);
+    new_finish = PtrVec_FillN(new_finish, fill_len, x);
+    new_finish = PtrVec_CopyTrivial(pos, (void **)v[1], new_finish);
+    {
+        void **s = (void **)v[0];
+        u32 c = (void **)v[3] - s;
+        if (s != NULL) {
+            PtrVec_Deallocate(s, c * 4);
+        }
+    }
+    PtrVec_Set(v, new_start, new_finish, new_start + len);
+}
+
+static inline void **Elem_UninitCopy(void **first, void **last, void **result) {
+    for (; first != last; first++, result++) {
+        *result = *first;
+    }
+    return result;
+}
+
+
+static inline void **Elem_CopyBackward(void **first, void **last, void **result) {
+    s32 n;
+    for (n = last - first; n > 0; n--) {
+        *--result = *--last;
+    }
+    return result;
+}
+
+static inline void **Elem_Allocate(u32 n) {
+    void *p;
+    if (n != 0) {
+        p = PtrVec_Allocate(n * 4);
+    } else {
+        p = NULL;
+    }
+    return (void **)p;
+}
+
+static inline void Elem_Destroy(void **first, void **last) {
+    for (; first != last; first++) {
+    }
+}
+
+static inline Pair8 *Pair8_Allocate(u32 n) {
+    return n != 0 ? (Pair8 *)PtrVec_Allocate(n * sizeof(Pair8)) : NULL;
+}
+
+static inline void Pair8Vec_InsertOverflow(Pair8Vec *v, Pair8 *pos, const Pair8 *x, u32 fill_len) {
+    u32 old_size = v->finish - v->start;
+    u32 len = old_size + *PtrVec_Max(&old_size, &fill_len);
+    Pair8 *new_start = Pair8_Allocate(len);
+    Pair8 *new_finish = Pair8_UninitCopyS(v->start, pos, new_start);
+    if (fill_len == 1) {
+        *new_finish = *x;
+        new_finish++;
+    } else {
+        new_finish = Pair8_UninitFillN(new_finish, fill_len, x);
+    }
+    new_finish = Pair8_UninitCopyS(pos, v->finish, new_finish);
+    Pair8_Destroy(v->start, v->finish);
+    {
+        Pair8 *s = v->start;
+        u32 c = v->end - s;
+        if (s != NULL) {
+            PtrVec_Deallocate(s, c * sizeof(Pair8));
+        }
+    }
+    v->start = new_start;
+    v->finish = new_finish;
+    v->end = new_start + len;
+}
+
+typedef struct { Elem12 *start; Elem12 *finish; s32 unk8; Elem12 *end; } Elem12Vec;
+
+static inline Elem12 *Elem12_Allocate(u32 n) {
+    void *p;
+    if (n != 0) {
+        p = PtrVec_Allocate(n * sizeof(Elem12));
+    } else {
+        p = NULL;
+    }
+    return (Elem12 *)p;
+}
+
+static inline Elem12 *Elem12_UninitCopy(Elem12 *first, Elem12 *last, Elem12 *result) {
+    for (; first != last; first++, result++) {
+        *result = *first;
+    }
+    return result;
+}
+
+static inline Elem12 *Elem12_CopyBackward(Elem12 *first, Elem12 *last, Elem12 *result) {
+    s32 n;
+    for (n = last - first; n > 0; n--) {
+        --last;
+        --result;
+        *result = *last;
+    }
+    return result;
+}
+
+static inline void Elem12_Fill(Elem12 *first, Elem12 *last, const Elem12 *val) {
+    for (; first != last; first++) {
+        *first = *val;
+    }
+}
+
+static inline Elem12 *Elem12_UninitFillN(Elem12 *first, u32 n, const Elem12 *val) {
+    for (; n > 0; n--) {
+        *first = *val;
+        first++;
+    }
+    return first;
+}
+
+static inline void Elem12_Destroy(Elem12 *first, Elem12 *last) {
+    for (; first != last; first++) {
+    }
+}
+
+
+static inline void Elem12Vec_InsertOverflow(Elem12Vec *v, Elem12 *pos, const Elem12 *x, u32 fill_len) {
+    u32 old_size = v->finish - v->start;
+    u32 len = old_size + *PtrVec_Max(&old_size, &fill_len);
+    u32 bytes;
+    Elem12 *new_start;
+    Elem12 *new_finish;
+    if (len != 0) {
+        bytes = len * sizeof(Elem12);
+        new_start = PtrVec_Allocate(bytes);
+    } else {
+        new_start = NULL;
+        bytes = 0;
+    }
+    new_finish = Elem12_UninitCopy(v->start, pos, new_start);
+    if (fill_len == 1) {
+        *new_finish = *x;
+        new_finish++;
+    } else {
+        new_finish = Elem12_UninitFillN(new_finish, fill_len, x);
+    }
+    new_finish = Elem12_UninitCopy(pos, v->finish, new_finish);
+    Elem12_Destroy(v->start, v->finish);
+    {
+        Elem12 *s = v->start;
+        u32 c = v->end - s;
+        if (s != NULL) {
+            PtrVec_Deallocate(s, c * sizeof(Elem12));
+        }
+    }
+    v->start = new_start;
+    v->finish = new_finish;
+    v->end = new_start + len;
+}
+
+typedef struct { char *p; } RcPtr;
+typedef struct { RcPtr *start; RcPtr *finish; s32 unk8; RcPtr *end; } RcPtrVec;
+
+static inline void RcPtr_AddRef(char *p) {
+    if (p != NULL) {
+        char *vt = *(char **)p;
+        (*(void (**)(void *))(vt + 0x14))(p + *(s16 *)(vt + 0x10));
+    }
+}
+
+static inline void RcPtr_Release(char *p) {
+    if (p != NULL) {
+        char *vt = *(char **)p;
+        (*(void (**)(void *))(vt + 0x1C))(p + *(s16 *)(vt + 0x18));
+    }
+}
+
+static inline void RcPtr_Construct(RcPtr *dst, const RcPtr *src) {
+    dst->p = src->p;
+    RcPtr_AddRef(dst->p);
+}
+
+static inline void RcPtr_Assign(RcPtr *dst, const RcPtr *src) {
+    if (src != dst) {
+        char *p = src->p;
+        if (p != dst->p) {
+            RcPtr_AddRef(p);
+            RcPtr_Release(dst->p);
+            dst->p = p;
+        }
+    }
+}
+
+static inline RcPtr *RcPtr_UninitCopy(RcPtr *first, RcPtr *last, RcPtr *result) {
+    RcPtr *cur = result;
+    for (; first != last; first++, cur++) {
+        RcPtr_Construct(cur, first);
+    }
+    return cur;
+}
+
+static inline RcPtr *RcPtr_UninitCopyRef(RcPtr *first, RcPtr **last, RcPtr *result) {
+    return RcPtr_UninitCopy(first, *last, result);
+}
+
+static inline RcPtr *RcPtr_CopyBackward(RcPtr *first, RcPtr *last, RcPtr *result) {
+    s32 n;
+    for (n = last - first; n > 0; n--) {
+        --result;
+        --last;
+        RcPtr_Assign(result, last);
+    }
+    return result;
+}
+
+static inline void RcPtr_Fill(RcPtr *first, RcPtr *last, const RcPtr *val) {
+    for (; first != last; first++) {
+        RcPtr_Assign(first, val);
+    }
+}
+
+static inline RcPtr *RcPtr_UninitFillN(RcPtr *first, u32 n, const RcPtr *val) {
+    for (; n > 0; n--) {
+        RcPtr_Construct(first, val);
+        first++;
+    }
+    return first;
+}
+
+static inline void RcPtr_Destroy(RcPtr *first, RcPtr *last) {
+    for (; first != last; first++) {
+        RcPtr_Release(first->p);
+    }
+}
+
+static inline void **PtrVec_AllocateAndCopy(u32 n, void **first, void **last) {
+    void **result = n != 0 ? (void **)PtrVec_Allocate(n * 4) : NULL;
+    PtrVec_Copy(first, last, result);
+    return result;
 }
 
 static inline void Obj_SetVtbl(void **p, void *vtbl) {
@@ -147,6 +541,16 @@ static inline s32 Slist_IterNe(s32 *a, s32 *b) {
 }
 void fn_8039AE74(s32 *first, s32 hole, s32 len, s32 val, s32 comp);
 void fn_8039B050(s32 *first, s32 *middle, s32 *last, s32 *val, s32 comp);
+
+static inline void Heap_Push(s32 *first, s32 hole, s32 top, s32 val, s32 (*comp)(s32 *, s32 *)) {
+    s32 parent = (hole - 1) / 2;
+    while (hole > top && comp(first + parent, &val)) {
+        first[hole] = first[parent];
+        hole = parent;
+        parent = (hole - 1) / 2;
+    }
+    first[hole] = val;
+}
 extern u8 lbl_80407128[];
 s32 fn_8018E850(void *out, void *obj, s32 arg);
 extern char *lbl_80495050;
@@ -298,6 +702,52 @@ void fn_80399D20(s32 *dst, s32 *src, s32 n) {
     }
 }
 
+void fn_80399D4C(s32 **arg, s32 n, s32 cap) {
+    extern s32 lbl_8045B390[];
+    extern void fn_80338184(void *, s32);
+    extern void *fn_80338000(void *, s32, s32);
+    s32 *self = (s32 *)arg;
+    s32 old;
+    s32 *p;
+    s32 m;
+
+    if (cap == 0) {
+        cap = n;
+    }
+    old = self[1];
+    if (n < old) {
+        fn_80399CD4((s32 *)self[0] + n, old - n);
+    }
+    if (cap == 0) {
+        fn_80338184(lbl_8045B390, self[0]);
+        fn_80399CF0(self);
+    } else {
+        if (self[2] != cap) {
+            p = fn_80338000(lbl_8045B390, cap * 4, 4);
+            if (p == NULL) {
+                goto done;
+            }
+            if (self[0] != 0) {
+                m = n;
+                if (n > self[1]) {
+                    m = self[1];
+                }
+                fn_80399D04(p, m);
+                fn_80399D20(p, (s32 *)self[0], m);
+                fn_80399CD4((s32 *)self[0], self[1]);
+                fn_80338184(lbl_8045B390, self[0]);
+            }
+            self[0] = (s32)p;
+            self[2] = cap;
+        }
+        self[1] = n;
+    }
+done:
+    if (n > old) {
+        fn_80399D04((s32 *)self[0] + old, n - old);
+    }
+}
+
 void *fn_80399E6C(void *self, s32 **arg1) {
     s32 n;
     s32 i;
@@ -382,6 +832,64 @@ void fn_8039A0D0(s32 *dst, s32 *src, s32 n) {
     }
 }
 
+void fn_8039A10C(void *self, s32 newSize, s32 cap) {
+    extern void *fn_802D197C(void *, u32, s32);
+    extern void *fn_802DBBCC(void *, u32, s32);
+    extern void *fn_802D0B3C(void);
+    s32 oldSize;
+    Elem12 *p;
+
+    if (cap == 0) {
+        cap = newSize;
+    }
+    oldSize = M2C_FIELD(self, s32 *, 4);
+    if (newSize < oldSize) {
+        fn_80399F18((s32 *)(M2C_FIELD(self, Elem12 **, 0) + newSize), oldSize - newSize);
+    }
+    if (cap == 0) {
+        Elem12 *old = M2C_FIELD(self, Elem12 **, 0);
+        fn_802D1A00(fn_802D0AB8(), old);
+        fn_80399F34(self);
+    } else {
+        if (M2C_FIELD(self, s32 *, 8) != cap) {
+            u32 size = cap * sizeof(Elem12);
+            void *heap = fn_802D0AB8();
+            if (size == 0) {
+                p = NULL;
+            } else {
+                void *q = fn_802D197C(heap, size, 4);
+                if (q == NULL && (q = fn_802DBBCC(heap, size, 0)) == NULL && heap == fn_802D0AB8()) {
+                    p = fn_802DBBCC(fn_802D0B3C(), size, 0);
+                } else {
+                    p = q;
+                }
+            }
+            if (p == NULL) {
+                goto done;
+            }
+            if (M2C_FIELD(self, Elem12 **, 0) != NULL) {
+                s32 n = newSize;
+                Elem12 *old;
+                if (n > M2C_FIELD(self, s32 *, 4)) {
+                    n = M2C_FIELD(self, s32 *, 4);
+                }
+                fn_8039A0B4((s32 *)p, n);
+                fn_8039A0D0((s32 *)p, M2C_FIELD(self, s32 **, 0), n);
+                fn_80399F18(M2C_FIELD(self, s32 **, 0), M2C_FIELD(self, s32 *, 4));
+                old = M2C_FIELD(self, Elem12 **, 0);
+                fn_802D1A00(fn_802D0AB8(), old);
+            }
+            M2C_FIELD(self, Elem12 **, 0) = p;
+            M2C_FIELD(self, s32 *, 8) = cap;
+        }
+        M2C_FIELD(self, s32 *, 4) = newSize;
+    }
+done:
+    if (newSize > oldSize) {
+        fn_8039A0B4((s32 *)(M2C_FIELD(self, Elem12 **, 0) + oldSize), newSize - oldSize);
+    }
+}
+
 s32 *fn_8039A290(s32 *self, s32 *other) {
     fn_8039A10C(self, other[1], 0);
     fn_8039A0D0((s32 *)self[0], (s32 *)other[0], other[1]);
@@ -393,6 +901,64 @@ void fn_8039A2DC(u8 *dst, u8 *src, s32 n) {
         fn_8039A290((s32 *)dst, (s32 *)src);
         src += 0xC;
         dst += 0xC;
+    }
+}
+
+void fn_8039A334(void *self, s32 newSize, s32 cap) {
+    extern void *fn_802D197C(void *, u32, s32);
+    extern void *fn_802DBBCC(void *, u32, s32);
+    extern void *fn_802D0B3C(void);
+    s32 oldSize;
+    Elem12 *p;
+
+    if (cap == 0) {
+        cap = newSize;
+    }
+    oldSize = M2C_FIELD(self, s32 *, 4);
+    if (newSize < oldSize) {
+        fn_80399FD4((s32 *)(M2C_FIELD(self, Elem12 **, 0) + newSize), oldSize - newSize);
+    }
+    if (cap == 0) {
+        Elem12 *old = M2C_FIELD(self, Elem12 **, 0);
+        fn_802D1A00(fn_802D0AB8(), old);
+        fn_8039A024(self);
+    } else {
+        if (M2C_FIELD(self, s32 *, 8) != cap) {
+            u32 size = cap * sizeof(Elem12);
+            void *heap = fn_802D0AB8();
+            if (size == 0) {
+                p = NULL;
+            } else {
+                void *q = fn_802D197C(heap, size, 4);
+                if (q == NULL && (q = fn_802DBBCC(heap, size, 0)) == NULL && heap == fn_802D0AB8()) {
+                    p = fn_802DBBCC(fn_802D0B3C(), size, 0);
+                } else {
+                    p = q;
+                }
+            }
+            if (p == NULL) {
+                goto done;
+            }
+            if (M2C_FIELD(self, Elem12 **, 0) != NULL) {
+                s32 n = newSize;
+                Elem12 *old;
+                if (n > M2C_FIELD(self, s32 *, 4)) {
+                    n = M2C_FIELD(self, s32 *, 4);
+                }
+                fn_8039A068((s32 *)p, n);
+                fn_8039A2DC((s32 *)p, M2C_FIELD(self, s32 **, 0), n);
+                fn_80399FD4(M2C_FIELD(self, s32 **, 0), M2C_FIELD(self, s32 *, 4));
+                old = M2C_FIELD(self, Elem12 **, 0);
+                fn_802D1A00(fn_802D0AB8(), old);
+            }
+            M2C_FIELD(self, Elem12 **, 0) = p;
+            M2C_FIELD(self, s32 *, 8) = cap;
+        }
+        M2C_FIELD(self, s32 *, 4) = newSize;
+    }
+done:
+    if (newSize > oldSize) {
+        fn_8039A068((s32 *)(M2C_FIELD(self, Elem12 **, 0) + oldSize), newSize - oldSize);
     }
 }
 
@@ -577,6 +1143,25 @@ void fn_8039AE08(void) {
 
 }
 
+void fn_8039AE74(s32 *first, s32 hole, s32 len, s32 val, s32 comp) {
+    s32 top = hole;
+    s32 second = 2 * top + 2;
+
+    while (second < len) {
+        if (((s32 (*)(s32 *, s32 *))comp)(first + second, first + (second - 1))) {
+            second--;
+        }
+        first[hole] = first[second];
+        hole = second;
+        second = 2 * (second + 1);
+    }
+    if (second == len) {
+        first[hole] = first[second - 1];
+        hole = second - 1;
+    }
+    Heap_Push(first, hole, top, val, (s32 (*)(s32 *, s32 *))comp);
+}
+
 void fn_8039AF90(s32 *first, s32 *last, s32 comp) {
     s32 len = last - first;
     s32 parent;
@@ -645,6 +1230,24 @@ s32 *fn_8039B144(s32 *first, s32 *last, s32 pivot, s32 (*comp)(s32 *, s32 *)) {
         *first = *last;
         *last = tmp;
         first++;
+    }
+}
+
+void fn_8039B1E4(s32 *first, s32 *last, s32 *val, s32 depth, s32 comp) {
+    s32 *cut;
+
+    while (last - first > 16) {
+        if (depth == 0) {
+            fn_8039B11C(first, last, last, comp);
+            return;
+        }
+        depth--;
+        cut = fn_8039B144(first, last,
+                          *Median3(first, first + (last - first) / 2, last - 1,
+                                   (s32 (*)(s32 *, s32 *))comp),
+                          (s32 (*)(s32 *, s32 *))comp);
+        fn_8039B1E4(cut, last, 0, depth, comp);
+        last = cut;
     }
 }
 
@@ -1438,6 +2041,43 @@ void fn_8039CE6C(s32 arg0, s32 arg1, s32 arg2) {
     ((s32 (*)(s32, s32, s32))fn_8039CE00)((s32)p, arg1, arg2);
 }
 
+void fn_8039CEA0(void **v, void **pos, u32 n, void *const *x) {
+    if (n != 0) {
+        if ((u32)((void **)v[3] - (void **)v[1]) >= n) {
+            void *x_copy = *x;
+            void **old_finish = (void **)v[1];
+            u32 elems_after = old_finish - pos;
+            if (elems_after > n) {
+                PtrVec_Copy(old_finish - n, old_finish, old_finish);
+                v[1] = (void **)v[1] + n;
+                PtrVec_CopyBackward(pos, old_finish - n, old_finish);
+                PtrVec_Fill(pos, pos + n, &x_copy);
+            } else {
+                PtrVec_FillN(old_finish, n - elems_after, &x_copy);
+                v[1] = (void **)v[1] + (n - elems_after);
+                PtrVec_Copy(pos, old_finish, (void **)v[1]);
+                v[1] = (void **)v[1] + elems_after;
+                PtrVec_Fill(pos, old_finish, &x_copy);
+            }
+        } else {
+            u32 fill_len = n;
+            u32 old_size = (void **)v[1] - (void **)v[0];
+            u32 len = old_size + *PtrVec_Max(&old_size, &fill_len);
+            void **new_start = len != 0 ? (void **)PtrVec_Allocate(len * 4) : NULL;
+            void **new_finish = PtrVec_CopyPtr(pos, (void **)v[1],
+                PtrVec_FillN(PtrVec_CopyPtr((void **)v[0], pos, new_start), fill_len, x));
+            {
+                void **s = (void **)v[0];
+                u32 c = (void **)v[3] - s;
+                if (s != NULL) {
+                    PtrVec_Deallocate(s, c * 4);
+                }
+            }
+            PtrVec_Set(v, new_start, new_finish, new_start + len);
+        }
+    }
+}
+
 void fn_8039D338(void) {
     fn_8018EA6C();
 }
@@ -1483,6 +2123,53 @@ void fn_8039D3D4(void **v, u32 n) {
             tmp = (void **)p;
         }
         PtrVec_Set(v, tmp, tmp + size, (void **)((char *)tmp + n * 4));
+    }
+}
+
+void fn_8039D508(Pair8Vec *v, Pair8 *pos, u32 n, const Pair8 *x) {
+    if (n != 0) {
+        if ((u32)(v->end - v->finish) >= n) {
+            Pair8 x_copy = *x;
+            Pair8 *old_finish = v->finish;
+            u32 elems_after = old_finish - pos;
+            if (elems_after > n) {
+                Pair8_UninitCopyS(old_finish - n, old_finish, old_finish);
+                v->finish += n;
+                Pair8_CopyBackward(pos, old_finish - n, old_finish);
+                Pair8_Fill(pos, pos + n, &x_copy);
+            } else {
+                Pair8_UninitFillN(old_finish, n - elems_after, &x_copy);
+                v->finish += n - elems_after;
+                Pair8_UninitCopyS(pos, old_finish, v->finish);
+                v->finish += elems_after;
+                Pair8_Fill(pos, old_finish, &x_copy);
+            }
+        } else {
+            u32 fill_len = n;
+            u32 old_size = v->finish - v->start;
+            u32 bytes;
+            u32 len = old_size + *PtrVec_Max(&old_size, &fill_len);
+            Pair8 *new_start = (Pair8 *)PtrVec_AllocateN(len, sizeof(Pair8), &bytes);
+            Pair8 *new_finish = Pair8_UninitCopyS(v->start, pos, new_start);
+            if (fill_len == 1) {
+                *new_finish = *x;
+                new_finish++;
+            } else {
+                new_finish = Pair8_UninitFillN(new_finish, fill_len, x);
+            }
+            new_finish = Pair8_UninitCopyS(pos, v->finish, new_finish);
+            Pair8_Destroy(v->start, v->finish);
+            {
+                Pair8 *s = v->start;
+                u32 c = v->end - s;
+                if (s != NULL) {
+                    PtrVec_Deallocate(s, c * sizeof(Pair8));
+                }
+            }
+            v->start = new_start;
+            v->finish = new_finish;
+            v->end = (Pair8 *)((char *)new_start + bytes);
+        }
     }
 }
 
@@ -2241,6 +2928,98 @@ out:
     return ret;
 }
 
+RbIter *fn_8039F744(RbIter *ret, void **tree, RbIter *pos, u32 *v) {
+    void **x;
+    void **y;
+    s32 comp_v_pos;
+    s32 comp_pos_v;
+    u8 buf[24];
+
+    if (pos->node == ((void **)tree[1])[2]) {
+        if (tree[2] == 0) {
+            fn_8039F62C((RbInsertPair *)(buf + 0), tree, v);
+            ret->node = *(void ***)(buf + 0);
+            return ret;
+        }
+        x = pos->node;
+        if (RbLessU(*v, RbKeyU(x))) {
+            goto insert_at;
+        }
+        if (!RbLessU(RbKeyU(x), *v)) {
+            ret->node = x;
+            return ret;
+        }
+        *(void ***)(buf + 0) = x;
+        *(void ***)(buf + 0) = fn_8039AB24(x);
+        if (*(void ***)(buf + 0) == tree[1]) {
+            y = pos->node;
+            goto insert_right;
+        }
+        x = *(void ***)(buf + 0);
+        if (RbLessU(*v, RbKeyU(x))) {
+            y = pos->node;
+            if (y[3] == NULL) {
+                goto insert_right;
+            }
+            goto insert_at;
+        }
+        fn_8039F62C((RbInsertPair *)(buf + 8), tree, v);
+        ret->node = *(void ***)(buf + 8);
+        return ret;
+    } else if (pos->node == tree[1]) {
+        if (RbLessU(RbKeyU(((void **)tree[1])[3]), *v)) {
+            fn_8039F498(ret, tree, NULL, ((void **)tree[1])[3], v, (s32)pos->node);
+            return ret;
+        }
+        fn_8039F62C((RbInsertPair *)(buf + 0), tree, v);
+        ret->node = *(void ***)(buf + 0);
+        return ret;
+    } else {
+        *(void ***)(buf + 0) = pos->node;
+        *(void ***)(buf + 0) = fn_8039F5BC(pos->node);
+        comp_v_pos = RbLessU(*v, RbKeyU(pos->node));
+        if (comp_v_pos) {
+            x = *(void ***)(buf + 0);
+            if (RbLessU(RbKeyU(x), *v)) {
+                if (x[3] == NULL) {
+                    y = x;
+                    goto insert_right;
+                }
+                x = pos->node;
+                goto insert_at;
+            }
+        }
+        *(void ***)(buf + 8) = pos->node;
+        *(void ***)(buf + 8) = fn_8039AB24(pos->node);
+        comp_pos_v = !comp_v_pos;
+        if (!comp_v_pos) {
+            y = pos->node;
+            comp_pos_v = RbLessU(RbKeyU(y), *v);
+            if (comp_pos_v && (*(void ***)(buf + 8) == tree[1] || RbLessU(*v, RbKeyU(*(void ***)(buf + 8))))) {
+                if (y[3] == NULL) {
+                    goto insert_right;
+                }
+                x = *(void ***)(buf + 8);
+                goto insert_at;
+            }
+        }
+        if (comp_v_pos == comp_pos_v) {
+            ret->node = pos->node;
+            return ret;
+        }
+        fn_8039F62C((RbInsertPair *)(buf + 16), tree, v);
+        ret->node = *(void ***)(buf + 16);
+        return ret;
+    }
+
+insert_right:
+    fn_8039F498(ret, tree, NULL, y, v, (s32)y);
+    return ret;
+insert_at:
+    fn_8039F498(ret, tree, x, x, v, 0);
+    return ret;
+}
+
 Elem12S16 *fn_8039FDA4(Elem12S16 *lo, Elem12S16 *hi, s32 key) {
     s32 n = hi - lo;
     Elem12S16 *mid;
@@ -2512,6 +3291,49 @@ void fn_803A0A10(void **self, s32 flags) {
     }
 }
 
+void **fn_803A0A44(void **self, void **other) {
+    if (other != self) {
+        void **finish = (void **)other[1];
+        void **start = (void **)other[0];
+        u32 xlen = finish - start;
+        u32 bytes;
+        if (xlen > (u32)((void **)self[3] - (void **)self[0])) {
+            void **tmp;
+            if (xlen != 0) {
+                u32 size = xlen * 4;
+                bytes = size;
+                if (size > 0x80) {
+                    tmp = (void **)fn_802D1FC8(bytes);
+                } else {
+                    tmp = (void **)fn_80399BE8(bytes);
+                }
+            } else {
+                tmp = NULL;
+                bytes = 0;
+            }
+            PtrVec_Copy(start, finish, tmp);
+            {
+                void **s = (void **)self[0];
+                u32 cnt = (void **)self[3] - s;
+                if (s != NULL) {
+                    PtrVec_Deallocate(s, cnt * 4);
+                }
+            }
+            self[0] = tmp;
+            self[3] = (char *)tmp + bytes;
+        } else if ((u32)((void **)self[1] - (void **)self[0]) >= xlen) {
+            PtrVec_Copy(start, finish, (void **)self[0]);
+            bytes = xlen * 4;
+        } else {
+            PtrVec_Copy(start, start + ((void **)self[1] - (void **)self[0]), (void **)self[0]);
+            bytes = xlen * 4;
+            PtrVec_Copy((void **)other[0] + ((void **)self[1] - (void **)self[0]), (void **)other[1], (void **)self[1]);
+        }
+        self[1] = (char *)self[0] + bytes;
+    }
+    return self;
+}
+
 s32 fn_803A0BC0(s32 *a, s32 *b) {
     return a[1] == b[1] && a[0] == b[0];
 }
@@ -2560,6 +3382,94 @@ void fn_803A0F14(BoundPmf *b) {
         off = delta;
     }
     f(obj + off);
+}
+
+void fn_803A0F8C(void **v, void *p, s32 count, void **x) {
+    void **pos = (void **)p;
+    u32 n = count;
+    if (n != 0) {
+        if ((u32)((void **)v[3] - (void **)v[1]) >= n) {
+            void *x_copy = *x;
+            void **old_finish = (void **)v[1];
+            u32 elems_after = old_finish - pos;
+            if (elems_after > n) {
+                Elem_UninitCopy(old_finish - n, old_finish, old_finish);
+                v[1] = (void **)v[1] + n;
+                Elem_CopyBackward(pos, old_finish - n, old_finish);
+                PtrVec_Fill(pos, pos + n, &x_copy);
+            } else {
+                PtrVec_FillN(old_finish, n - elems_after, &x_copy);
+                v[1] = (void **)v[1] + (n - elems_after);
+                Elem_UninitCopy(pos, old_finish, (void **)v[1]);
+                v[1] = (void **)v[1] + elems_after;
+                PtrVec_Fill(pos, old_finish, &x_copy);
+            }
+        } else {
+            u32 fill_len = n;
+            u32 old_size = (void **)v[1] - (void **)v[0];
+            u32 len = old_size + *PtrVec_Max(&old_size, &fill_len);
+            void **new_start = Elem_Allocate(len);
+            void **new_finish = new_start;
+            new_finish = Elem_UninitCopy((void **)v[0], pos, new_finish);
+            if (fill_len == 1) {
+                *new_finish++ = *x;
+            } else {
+                new_finish = PtrVec_FillN(new_finish, fill_len, x);
+            }
+            new_finish = Elem_UninitCopy(pos, (void **)v[1], new_finish);
+            Elem_Destroy((void **)v[0], (void **)v[1]);
+            {
+                void **s = (void **)v[0];
+                u32 c = (void **)v[3] - s;
+                if (s != NULL) {
+                    PtrVec_Deallocate(s, c * 4);
+                }
+            }
+            PtrVec_Set(v, new_start, new_finish, new_start + len);
+        }
+    }
+}
+
+static inline void **PtrVec_CopyN(void **first, void **last, void **result) {
+    s32 n;
+    for (n = last - first; n > 0; n--) {
+        *result++ = *first++;
+    }
+    return result;
+}
+
+static inline void PtrVec_Erase(void **v, void **const *first, void **const *last) {
+    void **i = PtrVec_CopyN(*last, (void **)v[1], *first);
+    void **q;
+    for (q = i; q != (void **)v[1]; q++) {
+    }
+    v[1] = i;
+}
+
+void fn_803A1274(void **self, void *unused, void *stream, void *arg3) {
+    extern void fn_8018D8DC(void *, s32 *, s32);
+    extern void fn_803A0F8C(void **, void *, s32, void **);
+    extern void fn_8010BF98(void *, void *, void *);
+    s32 n;
+    s32 size;
+    s32 d;
+    void **p;
+
+    n = (void **)self[1] - (void **)self[0];
+    fn_8018D8DC(stream, &n, 1);
+    size = (void **)self[1] - (void **)self[0];
+    d = size - n;
+    if (d < 0) {
+        void *zero = NULL;
+        fn_803A0F8C(self, self[1], n - size, &zero);
+    } else if (d > 0) {
+        void **first = (void **)self[1] - d;
+        void **last = self[1];
+        PtrVec_Erase(self, &first, &last);
+    }
+    for (p = self[0]; p != self[1]; p++) {
+        fn_8010BF98(p, stream, arg3);
+    }
 }
 
 extern u8 lbl_8040E600[];
@@ -2773,6 +3683,180 @@ s32 fn_803A2A0C(s32 *self) {
     return self[2];
 }
 
+void fn_8039F330(void **x, void **root);
+static inline void **RbNode_create8(s32 *v) {
+    void **n = fn_80399BE8(0x18);
+    n[4] = (void *)v[0];
+    n[5] = (void *)v[1];
+    return n;
+}
+RbIter *fn_803A2A14(RbIter *ret, void **tree, void **x, void **y, s32 *v, s32 w) {
+    void **z;
+
+    if (y == tree[1] || (w == 0 && (x != NULL || v[0] < (s32)y[4]))) {
+        z = RbNode_create8(v);
+        y[2] = z;
+        if (y == tree[1]) {
+            ((void **)tree[1])[1] = z;
+            ((void **)tree[1])[3] = z;
+        } else if (y == ((void **)tree[1])[2]) {
+            ((void **)tree[1])[2] = z;
+        }
+    } else {
+        z = RbNode_create8(v);
+        y[3] = z;
+        if (y == ((void **)tree[1])[3]) {
+            ((void **)tree[1])[3] = z;
+        }
+    }
+    z[1] = y;
+    z[2] = NULL;
+    z[3] = NULL;
+    fn_8039F330(z, (void **)tree[1] + 1);
+    tree[2] = (void *)((s32)tree[2] + 1);
+    ret->node = z;
+    return ret;
+}
+
+RbInsertPair *fn_803A2B28(RbInsertPair *ret, void **tree, s32 *v) {
+    void **y = tree[1];
+    void **x = y[1];
+    s32 comp = 1;
+    u8 buf[24];
+    void **jn;
+
+    while (x != NULL) {
+        y = x;
+        comp = *v < (s32)y[4];
+        x = comp ? y[2] : y[3];
+    }
+    *(void **)(buf + 0) = y;
+    if (comp) {
+        *(void **)(buf + 8) = ((void **)tree[1])[2];
+        if (y == *(void **)(buf + 8)) {
+            fn_803A2A14((RbIter *)(buf + 16), tree, x, y, v, 0);
+            ret->first = *(void **)(buf + 16);
+            ret->second = 1;
+            goto out;
+        }
+        *(void **)(buf + 0) = fn_8039F5BC(y);
+    }
+    jn = *(void ** volatile *)(buf + 0);
+    if ((s32)jn[4] < *v) {
+        fn_803A2A14((RbIter *)(buf + 8), tree, x, y, v, 0);
+        ret->first = *(void **)(buf + 8);
+        ret->second = 1;
+        goto out;
+    }
+    ret->first = jn;
+    ret->second = 0;
+out:
+    return ret;
+}
+
+static inline RbInsertPair Rb_insertUnique(void **tree, s32 *v) {
+    RbInsertPair p;
+    fn_803A2B28(&p, tree, v);
+    return p;
+}
+
+RbIter *fn_803A2C40(RbIter *ret, void **tree, RbIter *pos, s32 *v) {
+    void **x;
+    void **y;
+    void **res;
+    s32 comp_v_pos;
+    s32 comp_pos_v;
+    u8 buf[24];
+
+    if (pos->node == ((void **)tree[1])[2]) {
+        if (tree[2] == 0) {
+            fn_803A2B28((RbInsertPair *)(buf + 0), tree, v);
+            res = *(void ***)(buf + 0);
+            goto done;
+        }
+        x = pos->node;
+        if (RbKeyLess(v, (s32 *)&x[4])) {
+            goto insert_at;
+        }
+        if (!RbKeyLess((s32 *)&x[4], v)) {
+            ret->node = x;
+            return ret;
+        }
+        *(void ***)(buf + 0) = x;
+        *(void ***)(buf + 0) = fn_8039AB24(x);
+        if (*(void ***)(buf + 0) == tree[1]) {
+            y = pos->node;
+            goto insert_right;
+        }
+        x = *(void ***)(buf + 0);
+        if (RbKeyLess(v, (s32 *)&x[4])) {
+            y = pos->node;
+            if (y[3] == NULL) {
+                goto insert_right;
+            }
+            goto insert_at;
+        }
+        fn_803A2B28((RbInsertPair *)(buf + 8), tree, v);
+        res = *(void ***)(buf + 8);
+        goto done;
+    } else if (pos->node == tree[1]) {
+        if (RbKeyLess((s32 *)&((void **)((void **)tree[1])[3])[4], v)) {
+            fn_803A2A14(ret, tree, NULL, ((void **)tree[1])[3], v, (s32)pos->node);
+            return ret;
+        }
+        fn_803A2B28((RbInsertPair *)(buf + 0), tree, v);
+        ret->node = *(void ***)(buf + 0);
+        return ret;
+    } else {
+        *(void ***)(buf + 0) = pos->node;
+        *(void ***)(buf + 0) = fn_8039F5BC(pos->node);
+        comp_v_pos = RbKeyLess(v, (s32 *)&pos->node[4]);
+        if (comp_v_pos) {
+            x = *(void ***)(buf + 0);
+            if (RbKeyLess((s32 *)&x[4], v)) {
+                if (x[3] == NULL) {
+                    goto insert_right_x;
+                }
+                x = pos->node;
+                goto insert_at;
+            }
+        }
+        *(void ***)(buf + 8) = pos->node;
+        *(void ***)(buf + 8) = fn_8039AB24(pos->node);
+        comp_pos_v = !comp_v_pos;
+        if (!comp_v_pos) {
+            x = pos->node;
+            comp_pos_v = RbKeyLess((s32 *)&x[4], v);
+            if (comp_pos_v && (*(void ***)(buf + 8) == tree[1] || RbKeyLess(v, (s32 *)&(*(void ***)(buf + 8))[4]))) {
+                if (x[3] == NULL) {
+                    goto insert_right_x;
+                }
+                x = *(void ***)(buf + 8);
+                goto insert_at;
+            }
+        }
+        if (comp_v_pos == comp_pos_v) {
+            res = pos->node;
+            goto done;
+        }
+        fn_803A2B28((RbInsertPair *)(buf + 16), tree, v);
+        res = *(void ***)(buf + 16);
+        goto done;
+    }
+
+insert_right_x:
+    y = x;
+insert_right:
+    fn_803A2A14(ret, tree, NULL, y, v, (s32)y);
+    return ret;
+insert_at:
+    fn_803A2A14(ret, tree, x, x, v, 0);
+    return ret;
+done:
+    ret->node = res;
+    return ret;
+}
+
 void fn_803A2EA8(void *arg0, u32 n) {
     typedef struct Pair {
         s32 a;
@@ -2910,6 +3994,25 @@ void fn_803A3320(s32 *first, s32 *middle, s32 *last, s32 comp) {
     fn_803A3254(first, middle, last, 0, comp);
 }
 
+s32 *fn_803A3348(s32 *first, s32 *last, s32 pivot, s32 (*comp)(s32 *, s32 *));
+void fn_803A33EC(s32 *first, s32 *last, s32 *val, s32 depth, s32 comp) {
+    s32 *cut;
+
+    while (last - first > 16) {
+        if (depth == 0) {
+            fn_803A3320(first, last, last, comp);
+            return;
+        }
+        depth--;
+        cut = fn_803A3348(first, last,
+                          *Median3(first, first + (last - first) / 2, last - 1,
+                                   (s32 (*)(s32 *, s32 *))comp),
+                          (s32 (*)(s32 *, s32 *))comp);
+        fn_803A33EC(cut, last, 0, depth, comp);
+        last = cut;
+    }
+}
+
 void fn_803A35A4(s32 *first, s32 *last, s32 comp) {
     void fn_803A3540(s32 *last, s32 val, s32 comp);
     s32 *i;
@@ -2985,6 +4088,25 @@ s32 fn_803A3790(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     return ret;
 }
 
+void fn_803A37FC(s32 *first, s32 hole, s32 len, s32 val, s32 comp) {
+    s32 top = hole;
+    s32 second = 2 * top + 2;
+
+    while (second < len) {
+        if (((s32 (*)(s32 *, s32 *))comp)(first + second, first + (second - 1))) {
+            second--;
+        }
+        first[hole] = first[second];
+        hole = second;
+        second = 2 * (second + 1);
+    }
+    if (second == len) {
+        first[hole] = first[second - 1];
+        hole = second - 1;
+    }
+    Heap_Push(first, hole, top, val, (s32 (*)(s32 *, s32 *))comp);
+}
+
 void fn_803A37FC(s32 *first, s32 hole, s32 len, s32 val, s32 comp);
 void fn_803A3918(s32 *first, s32 *last, s32 comp) {
     s32 len = last - first;
@@ -3053,6 +4175,24 @@ s32 *fn_803A3ACC(s32 *first, s32 *last, s32 pivot, s32 (*comp)(s32 *, s32 *)) {
         *first = *last;
         *last = tmp;
         first++;
+    }
+}
+
+void fn_803A3B6C(s32 *first, s32 *last, s32 *val, s32 depth, s32 comp) {
+    s32 *cut;
+
+    while (last - first > 16) {
+        if (depth == 0) {
+            fn_803A3AA4(first, last, last, comp);
+            return;
+        }
+        depth--;
+        cut = fn_803A3ACC(first, last,
+                          *Median3(first, first + (last - first) / 2, last - 1,
+                                   (s32 (*)(s32 *, s32 *))comp),
+                          (s32 (*)(s32 *, s32 *))comp);
+        fn_803A3B6C(cut, last, 0, depth, comp);
+        last = cut;
     }
 }
 
@@ -3688,6 +4828,71 @@ void fn_803A6528(s32 arg0, s32 arg1, s32 arg2) {
     ((void (*)(void *, s32))fn_8018EA6C)(p, 2);
 }
 
+RbIter *fn_803A6580(RbIter *ret, void **tree, void **x, void **y, s32 *v, s32 w) {
+    void **z;
+
+    if (y == tree[1] || (w == 0 && (x != NULL || v[0] < (s32)y[4]))) {
+        z = RbNode_create8(v);
+        y[2] = z;
+        if (y == tree[1]) {
+            ((void **)tree[1])[1] = z;
+            ((void **)tree[1])[3] = z;
+        } else if (y == ((void **)tree[1])[2]) {
+            ((void **)tree[1])[2] = z;
+        }
+    } else {
+        z = RbNode_create8(v);
+        y[3] = z;
+        if (y == ((void **)tree[1])[3]) {
+            ((void **)tree[1])[3] = z;
+        }
+    }
+    z[1] = y;
+    z[2] = NULL;
+    z[3] = NULL;
+    fn_8039F330(z, (void **)tree[1] + 1);
+    tree[2] = (void *)((s32)tree[2] + 1);
+    ret->node = z;
+    return ret;
+}
+
+RbIter *fn_803A6580(RbIter *ret, void **tree, void **x, void **y, s32 *v, s32 w);
+RbInsertPair *fn_803A6694(RbInsertPair *ret, void **tree, s32 *v) {
+    void **y = tree[1];
+    void **x = y[1];
+    s32 comp = 1;
+    u8 buf[24];
+    void **jn;
+
+    while (x != NULL) {
+        y = x;
+        comp = *v < (s32)y[4];
+        x = comp ? y[2] : y[3];
+    }
+    *(void **)(buf + 0) = y;
+    if (comp) {
+        *(void **)(buf + 8) = ((void **)tree[1])[2];
+        if (y == *(void **)(buf + 8)) {
+            fn_803A6580((RbIter *)(buf + 16), tree, x, y, v, 0);
+            ret->first = *(void **)(buf + 16);
+            ret->second = 1;
+            goto out;
+        }
+        *(void **)(buf + 0) = fn_8039F5BC(y);
+    }
+    jn = *(void ** volatile *)(buf + 0);
+    if ((s32)jn[4] < *v) {
+        fn_803A6580((RbIter *)(buf + 8), tree, x, y, v, 0);
+        ret->first = *(void **)(buf + 8);
+        ret->second = 1;
+        goto out;
+    }
+    ret->first = jn;
+    ret->second = 0;
+out:
+    return ret;
+}
+
 void fn_803A6A14(s32 arg0, void *arg1) {
     void *temp_r30;
     void *var_r31;
@@ -3764,6 +4969,42 @@ void fn_803A6B48(s32 arg0, void *arg1) {
     }
 }
 
+s32 fn_80174E40(u32 *arg0, u32 *arg1);
+void fn_803A6BA4(RbIter *ret, void **tree, void **x, void **y, u32 *v, s32 w);
+RbInsertPair *fn_803A6CBC(RbInsertPair *ret, void **tree, u32 *v) {
+    void **y = tree[1];
+    void **x = y[1];
+    s32 comp = 1;
+    u8 buf[24];
+
+    while (x != NULL) {
+        y = x;
+        comp = fn_80174E40(v, (u32 *)(y + 4));
+        x = comp ? y[2] : y[3];
+    }
+    *(void **)(buf + 0) = y;
+    if (comp) {
+        *(void **)(buf + 8) = ((void **)tree[1])[2];
+        if (y == *(void **)(buf + 8)) {
+            fn_803A6BA4((RbIter *)(buf + 16), tree, x, y, v, 0);
+            ret->first = *(void **)(buf + 16);
+            ret->second = 1;
+            goto out;
+        }
+        *(void **)(buf + 0) = fn_8039F5BC(y);
+    }
+    if (fn_80174E40((u32 *)(*(void *** volatile)(buf + 0) + 4), v)) {
+        fn_803A6BA4((RbIter *)(buf + 8), tree, x, y, v, 0);
+        ret->first = *(void **)(buf + 8);
+        ret->second = 1;
+        goto out;
+    }
+    ret->first = *(void **)(buf + 0);
+    ret->second = 0;
+out:
+    return ret;
+}
+
 void fn_803A706C(void *arg0, s32 arg1) {
     extern char lbl_804122E8[];
     extern void fn_80174950(void *, s32);
@@ -3773,6 +5014,177 @@ void fn_803A706C(void *arg0, s32 arg1) {
     fn_80174950((char *)arg0 + 0x18, 2);
     if (arg1 & 1) {
         fn_802D20E8(arg0);
+    }
+}
+
+void fn_803A70C0(void *arg0, u32 n) {
+    typedef struct Elem {
+        s32 a;
+        s32 b;
+        s32 c;
+    } Elem;
+    typedef struct Vec {
+        Elem *start;
+        Elem *finish;
+        s32 unk8;
+        Elem *eos;
+    } Vec;
+    Vec *v = arg0;
+
+    if ((u32)(v->eos - v->start) < n) {
+        Elem *start = v->start;
+        Elem *finish = v->finish;
+        s32 oldSize = finish - start;
+        Elem *tmp;
+
+        if (start != NULL) {
+            Elem *result;
+            {
+                Elem *src;
+                Elem *dst;
+                Elem *mem;
+                if (n != 0) {
+                    mem = PtrVec_Allocate(n * sizeof(Elem));
+                } else {
+                    mem = NULL;
+                }
+                dst = mem;
+                for (src = start; src != finish; src++) {
+                    *dst = *src;
+                    dst++;
+                }
+                result = mem;
+            }
+            tmp = result;
+            {
+                Elem *p = v->start;
+                Elem *end = v->finish;
+                for (; p != end; p++) {
+                }
+            }
+            {
+                Elem *dp = v->start;
+                u32 dn = v->eos - dp;
+                if (dp != NULL) {
+                    PtrVec_Deallocate(dp, dn * sizeof(Elem));
+                }
+            }
+        } else {
+            Elem *mem;
+            if (n != 0) {
+                mem = PtrVec_Allocate(n * sizeof(Elem));
+            } else {
+                mem = NULL;
+            }
+            tmp = mem;
+        }
+        PtrVec_Set((void **)v, (void **)tmp, (void **)(oldSize * 12 + (s32)tmp), (void **)(n * 12 + (u32)tmp));
+    }
+}
+
+void fn_803A7DD0(Elem12Vec *v, Elem12 *pos, u32 n, const Elem12 *x) {
+    if (n != 0) {
+        if ((u32)(v->end - v->finish) >= n) {
+            Elem12 x_copy = *x;
+            Elem12 *old_finish = v->finish;
+            u32 elems_after = old_finish - pos;
+            if (elems_after > n) {
+                Elem12_UninitCopy(old_finish - n, old_finish, old_finish);
+                v->finish += n;
+                Elem12_CopyBackward(pos, old_finish - n, old_finish);
+                Elem12_Fill(pos, pos + n, &x_copy);
+            } else {
+                Elem12_UninitFillN(old_finish, n - elems_after, &x_copy);
+                v->finish += n - elems_after;
+                Elem12_UninitCopy(pos, old_finish, v->finish);
+                v->finish += elems_after;
+                Elem12_Fill(pos, old_finish, &x_copy);
+            }
+        } else {
+            u32 fill_len = n;
+            u32 old_size = v->finish - v->start;
+            u32 len = old_size + *PtrVec_Max(&old_size, &fill_len);
+            Elem12 *new_start = len != 0 ? (Elem12 *)PtrVec_Allocate(len * sizeof(Elem12)) : NULL;
+            Elem12 *new_finish = Elem12_UninitCopy(v->start, pos, new_start);
+            if (fill_len == 1) {
+                *new_finish = *x;
+                new_finish++;
+            } else {
+                new_finish = Elem12_UninitFillN(new_finish, fill_len, x);
+            }
+            new_finish = Elem12_UninitCopy(pos, v->finish, new_finish);
+            Elem12_Destroy(v->start, v->finish);
+            {
+                Elem12 *s = v->start;
+                u32 c = v->end - s;
+                if (s != NULL) {
+                    PtrVec_Deallocate(s, c * sizeof(Elem12));
+                }
+            }
+            v->start = new_start;
+            v->finish = new_finish;
+            v->end = new_start + len;
+        }
+    }
+}
+
+typedef struct { s32 a, b, c; } Vec12Elem;
+
+static inline void Vec12_EraseTail(u8 **v, Vec12Elem *first) {
+    Vec12Elem *q;
+    for (q = first; q != (Vec12Elem *)v[1]; q++) {
+    }
+    v[1] = (u8 *)first;
+}
+
+static inline void Vec12_Erase(u8 **v, Vec12Elem *first, Vec12Elem *last) {
+    Vec12Elem *i = first;
+    Vec12Elem *q;
+    s32 n;
+    for (n = (Vec12Elem *)v[1] - last; n > 0; n--) {
+        *i++ = *last++;
+    }
+    for (q = i; q != (Vec12Elem *)v[1]; q++) {
+    }
+    v[1] = (u8 *)i;
+}
+
+void fn_803A8188(u8 **self, void *unused, void *stream, void *arg3) {
+    extern void fn_8018D8DC(void *, s32 *, s32);
+    extern void fn_803A7DD0(Elem12Vec *, Elem12 *, u32, const Elem12 *);
+    extern void fn_80177470(void *, void *, void *);
+    extern void fn_80248488();
+    s32 n;
+    s32 size;
+    s32 d;
+    Elem12 *end;
+    Elem12 *p;
+
+    n = (Elem12 *)self[1] - (Elem12 *)self[0];
+    fn_8018D8DC(stream, &n, 1);
+    end = (Elem12 *)self[1];
+    size = end - (Elem12 *)self[0];
+    d = size - n;
+    if (d < 0) {
+        Elem12 zero;
+        Elem12 *zp = &zero;
+        s32 cnt = n - size;
+        fn_80248488(zp, 0, sizeof(zero));
+        fn_803A7DD0(self, end, cnt, zp);
+    } else if (d > 0) {
+        Elem12 *first = end - d;
+        Elem12 *src = end;
+        Elem12 *dst = first;
+        Elem12 *q;
+        while (src != (Elem12 *)self[1]) {
+            *dst++ = *src++;
+        }
+        for (q = dst; q != (Elem12 *)self[1]; q++) {
+        }
+        self[1] = (u8 *)dst;
+    }
+    for (p = (Elem12 *)self[0]; p != (Elem12 *)self[1]; p++) {
+        fn_80177470(p, stream, arg3);
     }
 }
 
@@ -3843,6 +5255,32 @@ void fn_803A92E4(void **self, s32 flags) {
     }
 }
 
+void fn_803A9AD8(void **self, void *unused, void *stream, void *arg3) {
+    extern void fn_8018D8DC(void *, s32 *, s32);
+    extern void fn_803A9318(void **, void *, s32, void **);
+    extern void fn_8018EE20(void *, void *, void *);
+    s32 n;
+    s32 size;
+    s32 d;
+    void **p;
+
+    n = (void **)self[1] - (void **)self[0];
+    fn_8018D8DC(stream, &n, 1);
+    size = (void **)self[1] - (void **)self[0];
+    d = size - n;
+    if (d < 0) {
+        void *zero = NULL;
+        fn_803A9318(self, self[1], n - size, &zero);
+    } else if (d > 0) {
+        void **first = (void **)self[1] - d;
+        void **last = self[1];
+        PtrVec_Erase(self, &first, &last);
+    }
+    for (p = self[0]; p != self[1]; p++) {
+        fn_8018EE20(p, stream, arg3);
+    }
+}
+
 extern u8 lbl_80414088[];
 void fn_803A9BB8(void **self, s32 flags) {
     *self = lbl_80414088;
@@ -3884,6 +5322,42 @@ void fn_803A9C48(s32 arg0, void *arg1) {
             var_r31 = temp_r30;
         } while (var_r31 != NULL);
     }
+}
+
+s32 fn_801056A4(u32 *arg0, u32 *arg1);
+void fn_803A9EDC(RbIter *ret, void **tree, void **x, void **y, u32 *v, s32 w);
+RbInsertPair *fn_803AA034(RbInsertPair *ret, void **tree, u32 *v) {
+    void **y = tree[1];
+    void **x = y[1];
+    s32 comp = 1;
+    u8 buf[24];
+
+    while (x != NULL) {
+        y = x;
+        comp = fn_801056A4(v, (u32 *)(y + 4));
+        x = comp ? y[2] : y[3];
+    }
+    *(void **)(buf + 0) = y;
+    if (comp) {
+        *(void **)(buf + 8) = ((void **)tree[1])[2];
+        if (y == *(void **)(buf + 8)) {
+            fn_803A9EDC((RbIter *)(buf + 16), tree, x, y, v, 0);
+            ret->first = *(void **)(buf + 16);
+            ret->second = 1;
+            goto out;
+        }
+        *(void **)(buf + 0) = fn_8039F5BC(y);
+    }
+    if (fn_801056A4((u32 *)(*(void *** volatile)(buf + 0) + 4), v)) {
+        fn_803A9EDC((RbIter *)(buf + 8), tree, x, y, v, 0);
+        ret->first = *(void **)(buf + 8);
+        ret->second = 1;
+        goto out;
+    }
+    ret->first = *(void **)(buf + 0);
+    ret->second = 0;
+out:
+    return ret;
 }
 
 extern u8 lbl_80414540[];
@@ -4197,11 +5671,118 @@ s32 fn_803AC408(void) {
     return 1;
 }
 
+void fn_803AC410(RcPtrVec *v, RcPtr *pos, u32 n, const RcPtr *x) {
+    if (n != 0) {
+        if ((u32)(v->end - v->finish) >= n) {
+            RcPtr x_copy;
+            RcPtr *old_finish;
+            u32 elems_after;
+            RcPtr_Construct(&x_copy, x);
+            old_finish = v->finish;
+            elems_after = old_finish - pos;
+            if (elems_after > n) {
+                RcPtr_UninitCopy(old_finish - n, old_finish, old_finish);
+                v->finish += n;
+                RcPtr_CopyBackward(pos, old_finish - n, old_finish);
+                RcPtr_Fill(pos, pos + n, &x_copy);
+            } else {
+                RcPtr_UninitFillN(old_finish, n - elems_after, &x_copy);
+                v->finish += n - elems_after;
+                RcPtr_UninitCopy(pos, old_finish, v->finish);
+                v->finish += elems_after;
+                RcPtr_Fill(pos, old_finish, &x_copy);
+            }
+            RcPtr_Release(x_copy.p);
+        } else {
+            u32 fill_len = n;
+            u32 old_size = v->finish - v->start;
+            u32 bytes;
+            u32 len = old_size + *PtrVec_Max(&old_size, &fill_len);
+            RcPtr *new_start = (RcPtr *)PtrVec_AllocateN(len, sizeof(RcPtr), &bytes);
+            RcPtr *new_finish = RcPtr_UninitCopy(v->start, pos, new_start);
+            if (fill_len == 1) {
+                RcPtr_Construct(new_finish, x);
+                new_finish++;
+            } else {
+                new_finish = RcPtr_UninitFillN(new_finish, fill_len, x);
+            }
+            new_finish = RcPtr_UninitCopy(pos, v->finish, new_finish);
+            RcPtr_Destroy(v->start, v->finish);
+            {
+                RcPtr *s = v->start;
+                u32 c = v->end - s;
+                if (s != NULL) {
+                    PtrVec_Deallocate(s, c * sizeof(RcPtr));
+                }
+            }
+            v->start = new_start;
+            v->finish = new_finish;
+            v->end = (RcPtr *)((char *)new_start + bytes);
+        }
+    }
+}
+
+extern s32 lbl_80495D84;
+extern Elem8 lbl_80495D7C;
+Elem8 *fn_803ACF18(void *self, s32 key) {
+    s32 i;
+
+    if (lbl_80495D84 == 0) {
+        Elem8 *d = &lbl_80495D7C;
+        d->unk0 = 0;
+        d->unk2 = 0;
+        d->unk4 = 0;
+        d->unk6 = 0;
+        lbl_80495D84 = 1;
+    }
+    i = 0;
+    {
+        Elem8 *arr = M2C_FIELD(self, Elem8 **, 4);
+        Elem8 *e;
+        s32 n;
+
+        goto check;
+    loop:
+        e = (Elem8 *)((u8 *)arr + i * 8);
+        if (e->unk6 == key) {
+            return e;
+        }
+        i++;
+    check:
+        if (arr != NULL) {
+            n = ((s32 *)arr)[-1];
+        } else {
+            n = 0;
+        }
+        if (i < n) {
+            goto loop;
+        }
+    }
+    return &lbl_80495D7C;
+}
+
 extern u8 lbl_80415BD0[];
 void fn_803ACF84(void **self, s32 flags) {
     *self = lbl_80415BD0;
     if (flags & 1) {
         fn_802D20E8(self);
+    }
+}
+
+void fn_803ACFB8(void *self) {
+    extern char *lbl_80495050;
+    if (M2C_FIELD(self, s32 *, 4) != 0) {
+        char *obj = lbl_80495050;
+        VtblEntry *vt = *(VtblEntry **)obj;
+        if (((s32 (*)(void *))vt[19].pfn)(obj + vt[19].delta) != 0) {
+            obj = lbl_80495050;
+            vt = *(VtblEntry **)obj;
+            vt[8].pfn(obj + vt[8].delta);
+        }
+        obj = lbl_80495050;
+        vt = *(VtblEntry **)obj;
+        ((void (*)(void *, s32))vt[18].pfn)(obj + vt[18].delta, M2C_FIELD(self, s32 *, 4));
+        M2C_FIELD(self, s32 *, 4) = 0;
     }
 }
 
@@ -4270,6 +5851,35 @@ void fn_803AD18C(void *self) {
     list[1]->prev = list[1];
 }
 
+void *fn_803AD1F8(void *arg0, void *arg1) {
+    struct Alloc { s32 unk0; char *eos; };
+    struct Str { char *start; char *finish; struct Alloc alloc; };
+    extern void fn_803ADA44(void *, u32);
+    struct Str *s = arg0;
+    struct Str *o = arg1;
+    struct Alloc *a;
+    char *first;
+    char *last;
+    u32 len;
+    char *p;
+
+    s->start = NULL;
+    s->finish = NULL;
+    a = &s->alloc;
+    a->eos = NULL;
+    first = o->start;
+    last = o->finish;
+    len = last - first;
+    fn_803ADA44(s, len + 1);
+    p = s->start;
+    if (last != first) {
+        p = (char *)fn_8024839C(p, first, len) + len;
+    }
+    s->finish = p;
+    *p = 0;
+    return s;
+}
+
 void fn_803ADA28(void) {
     extern char lbl_803DDD5C[];
     extern void fn_80245AB8(char *);
@@ -4293,25 +5903,30 @@ void fn_803ADA44(void *arg0, u32 arg1) {
 }
 
 void *fn_803ADAAC(void *arg0, char *arg1) {
+    struct Alloc { s32 unk0; char *eos; };
+    struct Str { char *start; char *finish; struct Alloc alloc; };
     extern s32 fn_80248808(char *);
     extern void fn_803ADA44(void *, u32);
+    struct Str *s = arg0;
+    struct Alloc *a;
     char *end;
-    s32 len;
+    u32 len;
     char *p;
 
-    M2C_FIELD(arg0, char **, 0) = NULL;
-    M2C_FIELD(arg0, char **, 4) = NULL;
-    M2C_FIELD((char *)arg0 + 8, s32 *, 4) = 0;
+    s->start = NULL;
+    s->finish = NULL;
+    a = &s->alloc;
+    a->eos = NULL;
     end = arg1 + fn_80248808(arg1);
     len = end - arg1;
-    fn_803ADA44(arg0, len + 1);
-    p = M2C_FIELD(arg0, char **, 0);
+    fn_803ADA44(s, len + 1);
+    p = s->start;
     if (end != arg1) {
         p = (char *)fn_8024839C(p, arg1, len) + len;
     }
-    M2C_FIELD(arg0, char **, 4) = p;
+    s->finish = p;
     *p = 0;
-    return arg0;
+    return s;
 }
 
 void fn_803ADB34(s32 arg0, void *arg1) {
@@ -8192,9 +9807,9 @@ void fn_803B32E4(void *arg0, u32 n) {
                 Pair *dst;
                 Pair *mem;
                 if (n != 0) {
-                    u32 sz = n * sizeof(Pair);
+                    register u32 sz = n * sizeof(Pair);
                     bytes = sz;
-                    mem = PtrVec_Allocate(sz);
+                    mem = PtrVec_Allocate(bytes);
                 } else {
                     mem = NULL;
                     bytes = 0;
@@ -8224,9 +9839,9 @@ void fn_803B32E4(void *arg0, u32 n) {
         } else {
             Pair *mem;
             if (n != 0) {
-                u32 sz = n * sizeof(Pair);
+                register u32 sz = n * sizeof(Pair);
                 bytes = sz;
-                mem = PtrVec_Allocate(sz);
+                mem = PtrVec_Allocate(bytes);
             } else {
                 mem = NULL;
                 bytes = 0;
@@ -8264,6 +9879,52 @@ s32 *fn_803B4BE4(s32 *first, s32 *last, s32 *val) {
     default:
         return last;
     }
+}
+
+Pair8Vec *fn_803B50DC(Pair8Vec *self, Pair8Vec *x) {
+    if (x != self) {
+        Pair8 *first = x->start;
+        Pair8 *start = self->start;
+        Pair8 *last = x->finish;
+        Pair8 *src = first;
+        Pair8 *dst = start;
+        u32 xlen = last - first;
+        if (xlen > (u32)(self->end - start)) {
+            Pair8 *tmp;
+            Pair8 *fin;
+            u32 n;
+            if (xlen != 0) {
+                tmp = (Pair8 *)PtrVec_Allocate(xlen * sizeof(Pair8));
+            } else {
+                tmp = NULL;
+            }
+            Pair8_UninitCopy(first, last, tmp);
+            fin = self->finish;
+            Pair8_Destroy(self->start, fin);
+            n = self->end - self->start;
+            if (self->start != NULL) {
+                PtrVec_Deallocate(self->start, n * sizeof(Pair8));
+            }
+            self->start = tmp;
+            self->end = tmp + xlen;
+        } else if ((u32)(self->finish - dst) >= xlen) {
+            s32 k;
+            for (k = last - src; k > 0; k--) {
+                s32 a = src->a;
+                s32 b = src->b;
+                dst->a = a;
+                dst->b = b;
+                src++;
+                dst++;
+            }
+            Pair8_Destroy(dst, self->finish);
+        } else {
+            Pair8_Copy(first, first + (self->finish - start), start);
+            Pair8_UninitCopy(x->start + (self->finish - self->start), x->finish, self->finish);
+        }
+        self->finish = self->start + xlen;
+    }
+    return self;
 }
 
 void fn_803B61D4(void *arg0, s32 arg1) {
@@ -9880,6 +11541,65 @@ void fn_803BB3BC(s32 *dst, s32 *src, s32 n) {
     }
 }
 
+void fn_803BB3E8(s32 **arg0, s32 newSize, s32 cap) {
+    extern void *fn_802D197C(void *, u32, s32);
+    extern void *fn_802DBBCC(void *, u32, s32);
+    extern void *fn_802D0B3C(void);
+    void *self = arg0;
+    s32 oldSize;
+    s32 *p;
+
+    if (cap == 0) {
+        cap = newSize;
+    }
+    oldSize = M2C_FIELD(self, s32 *, 4);
+    if (newSize < oldSize) {
+        fn_803BB370(M2C_FIELD(self, s32 **, 0) + newSize, oldSize - newSize);
+    }
+    if (cap == 0) {
+        s32 *old = M2C_FIELD(self, s32 **, 0);
+        fn_802D1A00(fn_802D0AB8(), old);
+        fn_803BB38C(self);
+    } else {
+        if (M2C_FIELD(self, s32 *, 8) != cap) {
+            u32 size = cap * sizeof(s32);
+            void *heap = fn_802D0AB8();
+            if (size == 0) {
+                p = NULL;
+            } else {
+                void *q = fn_802D197C(heap, size, 4);
+                if (q == NULL && (q = fn_802DBBCC(heap, size, 0)) == NULL && heap == fn_802D0AB8()) {
+                    p = fn_802DBBCC(fn_802D0B3C(), size, 0);
+                } else {
+                    p = q;
+                }
+            }
+            if (p == NULL) {
+                goto done;
+            }
+            if (M2C_FIELD(self, s32 **, 0) != NULL) {
+                s32 n = newSize;
+                s32 *old;
+                if (n > M2C_FIELD(self, s32 *, 4)) {
+                    n = M2C_FIELD(self, s32 *, 4);
+                }
+                fn_803BB3A0(p, n);
+                fn_803BB3BC(p, M2C_FIELD(self, s32 **, 0), n);
+                fn_803BB370(M2C_FIELD(self, s32 **, 0), M2C_FIELD(self, s32 *, 4));
+                old = M2C_FIELD(self, s32 **, 0);
+                fn_802D1A00(fn_802D0AB8(), old);
+            }
+            M2C_FIELD(self, s32 **, 0) = p;
+            M2C_FIELD(self, s32 *, 8) = cap;
+        }
+        M2C_FIELD(self, s32 *, 4) = newSize;
+    }
+done:
+    if (newSize > oldSize) {
+        fn_803BB3A0(M2C_FIELD(self, s32 **, 0) + oldSize, newSize - oldSize);
+    }
+}
+
 s32 *fn_803BB56C(s32 *self, s32 *other) {
     void fn_803BB3E8(s32 **, s32, s32);
 
@@ -10396,6 +12116,52 @@ void fn_803BC998(u8 *dst, u8 *src, s32 n) {
     }
 }
 
+void fn_803BCA30(void *arg, s32 n, s32 cap) {
+    extern s32 lbl_8045B82C[];
+    extern void fn_80338184(void *, s32);
+    extern void *fn_80338000(void *, s32, s32);
+    s32 *self = (s32 *)arg;
+    s32 old;
+    u8 *p;
+    s32 m;
+
+    if (cap == 0) {
+        cap = n;
+    }
+    old = self[1];
+    if (n < old) {
+        fn_803BC488((u8 *)self[0] + n * 0x58, old - n);
+    }
+    if (cap == 0) {
+        fn_80338184(lbl_8045B82C, self[0]);
+        fn_803BC444(self);
+    } else {
+        if (self[2] != cap) {
+            p = fn_80338000(lbl_8045B82C, cap * 0x58, 0x10);
+            if (p == NULL) {
+                goto done;
+            }
+            if (self[0] != 0) {
+                m = n;
+                if (n > self[1]) {
+                    m = self[1];
+                }
+                fn_803BC94C(p, m);
+                fn_803BC998(p, (u8 *)self[0], m);
+                fn_803BC488((u8 *)self[0], self[1]);
+                fn_80338184(lbl_8045B82C, self[0]);
+            }
+            self[0] = (s32)p;
+            self[2] = cap;
+        }
+        self[1] = n;
+    }
+done:
+    if (n > old) {
+        fn_803BC94C((u8 *)self[0] + old * 0x58, n - old);
+    }
+}
+
 void *fn_803BCB50(u8 *self, s32 *arr) {
     extern void fn_803BCA30(void *, s32, s32);
     extern void fn_802CB278(void *, void *);
@@ -10445,6 +12211,52 @@ void fn_803BCC80(u8 *dst, u8 *src, s32 n) {
         M2C_FIELD(d, s32 *, 0x40) = M2C_FIELD(s, s32 *, 0x40);
         M2C_FIELD(d, s32 *, 0x44) = M2C_FIELD(s, s32 *, 0x44);
         fn_803BCC34((s32 *)(d + 0x48), (s32 *)(s + 0x48));
+    }
+}
+
+void fn_803BCD18(void *arg, s32 n, s32 cap) {
+    extern s32 lbl_8045B82C[];
+    extern void fn_80338184(void *, s32);
+    extern void *fn_80338000(void *, s32, s32);
+    s32 *self = (s32 *)arg;
+    s32 old;
+    u8 *p;
+    s32 m;
+
+    if (cap == 0) {
+        cap = n;
+    }
+    old = self[1];
+    if (n < old) {
+        fn_803BC5BC((u8 *)self[0] + n * 0x58, old - n);
+    }
+    if (cap == 0) {
+        fn_80338184(lbl_8045B82C, self[0]);
+        fn_803BC578(self);
+    } else {
+        if (self[2] != cap) {
+            p = fn_80338000(lbl_8045B82C, cap * 0x58, 0x10);
+            if (p == NULL) {
+                goto done;
+            }
+            if (self[0] != 0) {
+                m = n;
+                if (n > self[1]) {
+                    m = self[1];
+                }
+                fn_803BCBE8(p, m);
+                fn_803BCC80(p, (u8 *)self[0], m);
+                fn_803BC5BC((u8 *)self[0], self[1]);
+                fn_80338184(lbl_8045B82C, self[0]);
+            }
+            self[0] = (s32)p;
+            self[2] = cap;
+        }
+        self[1] = n;
+    }
+done:
+    if (n > old) {
+        fn_803BCBE8((u8 *)self[0] + old * 0x58, n - old);
     }
 }
 
@@ -10679,6 +12491,71 @@ void fn_803BD9FC(void) {
 
 void fn_803BDA1C(void) {
     fn_80335FD8();
+}
+
+void fn_803BDA3C(void *arg0, u32 n) {
+    typedef struct Elem {
+        s32 a;
+        s32 b;
+        s32 c;
+    } Elem;
+    typedef struct Vec {
+        Elem *start;
+        Elem *finish;
+        s32 unk8;
+        Elem *eos;
+    } Vec;
+    Vec *v = arg0;
+
+    if ((u32)(v->eos - v->start) < n) {
+        Elem *start = v->start;
+        Elem *finish = v->finish;
+        s32 oldSize = finish - start;
+        Elem *tmp;
+
+        if (start != NULL) {
+            Elem *result;
+            {
+                Elem *src;
+                Elem *dst;
+                Elem *mem;
+                if (n != 0) {
+                    mem = PtrVec_Allocate(n * sizeof(Elem));
+                } else {
+                    mem = NULL;
+                }
+                dst = mem;
+                for (src = start; src != finish; src++) {
+                    *dst = *src;
+                    dst++;
+                }
+                result = mem;
+            }
+            tmp = result;
+            {
+                Elem *p = v->start;
+                Elem *end = v->finish;
+                for (; p != end; p++) {
+                }
+            }
+            {
+                Elem *dp = v->start;
+                u32 dn = v->eos - dp;
+                if (dp != NULL) {
+                    PtrVec_Deallocate(dp, dn * sizeof(Elem));
+                }
+            }
+        } else {
+            Elem *mem;
+            if (n != 0) {
+                mem = PtrVec_Allocate(n * sizeof(Elem));
+            } else {
+                mem = NULL;
+            }
+            tmp = mem;
+        }
+        PtrVec_Set((void **)v, (void **)tmp, (void **)(oldSize * 12 + (s32)tmp), (void **)(n * 12 + (u32)tmp));
+    }
 }
 
 void fn_803BDD5C(Elem12 *first, Elem12 *last, s32 comp) {
@@ -11275,6 +13152,53 @@ void fn_803BFD58(s32 *self, s32 n) {
 void fn_803BFD74(f32 *dst, f32 *src, s32 n) {
     while (--n != -1) {
         *dst++ = *src++;
+    }
+}
+
+void fn_803BFDA0(s32 **, s32, s32);
+void fn_803BFDA0(s32 **arg, s32 n, s32 cap) {
+    extern s32 lbl_8045B0F0[];
+    extern void fn_80338184(void *, s32);
+    extern void *fn_80338000(void *, s32, s32);
+    s32 *self = (s32 *)arg;
+    s32 old;
+    s32 *p;
+    s32 m;
+
+    if (cap == 0) {
+        cap = n;
+    }
+    old = self[1];
+    if (n < old) {
+        fn_803BF9CC((s32 *)self[0] + n, old - n);
+    }
+    if (cap == 0) {
+        fn_80338184(lbl_8045B0F0, self[0]);
+        fn_803BF988(self);
+    } else {
+        if (self[2] != cap) {
+            p = fn_80338000(lbl_8045B0F0, cap * 4, 4);
+            if (p == NULL) {
+                goto done;
+            }
+            if (self[0] != 0) {
+                m = n;
+                if (n > self[1]) {
+                    m = self[1];
+                }
+                fn_803BFD58(p, m);
+                fn_803BFD74(p, (s32 *)self[0], m);
+                fn_803BF9CC((s32 *)self[0], self[1]);
+                fn_80338184(lbl_8045B0F0, self[0]);
+            }
+            self[0] = (s32)p;
+            self[2] = cap;
+        }
+        self[1] = n;
+    }
+done:
+    if (n > old) {
+        fn_803BFD58((s32 *)self[0] + old, n - old);
     }
 }
 

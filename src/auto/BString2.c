@@ -296,9 +296,27 @@ M2C_UNK fn_800F160C(s32 arg0) {
     return arg0;
 }
 
+void *fn_800F00D4(void *mem, void **arg1, s32 arg2, s32 arg3);
 void **fn_800F162C(void **arg0, s32 arg1, s32 arg2) {
     void *fn_800EFF1C(void *mem, s32 arg1, s32 arg2);
     *arg0 = fn_800EFF1C(BString2_Alloc(0x10, 4), arg1, arg2);
+    return arg0;
+}
+
+void **fn_800F16C8(void **arg0, void **arg1, u32 arg2, u32 arg3) {
+    s32 n;
+
+    if (arg2 > (u32)fn_800F4878(arg1)) {
+        fn_800EF8B8();
+    }
+    n = arg3 > (u32)fn_800F4878(arg1) - arg2 ? (u32)fn_800F4878(arg1) - arg2 : arg3;
+    if (n == fn_800F4878(arg1) && fn_800EF91C(arg1) != -1) {
+        void *rep = *arg1;
+        *arg0 = rep;
+        M2C_FIELD(rep, s32 *, 0xC)++;
+    } else {
+        *arg0 = fn_800F00D4(BString2_Alloc(0x10, 4), arg1, arg2, n);
+    }
     return arg0;
 }
 
@@ -335,6 +353,21 @@ void fn_800F1A60(s32 self, s32 flags) {
     if (flags & 1) {
         fn_802D20E8(self);
     }
+}
+
+void *fn_800F00D4(void *mem, void **arg1, s32 arg2, s32 arg3);
+void **fn_800F1AA0(void **arg0, void **arg1) {
+    if (arg0 != arg1) {
+        fn_800EF8BC((s32)arg0);
+        if (fn_800EF91C(arg1) != -1) {
+            void *rep = *arg1;
+            *arg0 = rep;
+            M2C_FIELD(rep, s32 *, 0xC)++;
+        } else {
+            *arg0 = fn_800F00D4(BString2_Alloc(0x10, 4), arg1, 0, fn_800F4878(arg1));
+        }
+    }
+    return arg0;
 }
 
 void *fn_800F1B80(void *arg0, const char *arg1) {
@@ -473,14 +506,16 @@ void fn_800F3758(s32 arg0, const char *arg1, s32 arg2) {
 
 u32 fn_800F37B0(void **arg0, u16 arg1, u32 arg2) {
     while (arg2 < fn_800F4878(arg0)) {
+        u16 *p = BString2_Data(arg0);
         s32 ne = 1;
-        if (BString2_Eq(&BString2_Data(arg0)[arg2], &arg1)) {
+        if (p[arg2] == arg1) {
             ne = 0;
         }
-        if (!ne) {
+        if (ne) {
+            arg2++;
+        } else {
             break;
         }
-        arg2++;
     }
     return arg2 < fn_800F4878(arg0) ? arg2 : -1;
 }

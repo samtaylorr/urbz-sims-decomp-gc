@@ -32,6 +32,65 @@ s32 fn_802EF584(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void *fn_802EF5C4(void *arg0) {
+    extern f32 lbl_803F0D24[];
+    extern f32 lbl_803F0D28[];
+    extern u8 lbl_80419E08[];
+    M2C_UNK fn_802EFBA8(void *);
+    Vec3f *v;
+    f32 a;
+    f32 b;
+
+    fn_802EFBA8(arg0);
+    a = lbl_803F0D24[0];
+    b = lbl_803F0D28[0];
+    M2C_FIELD(arg0, u8 **, 0) = lbl_80419E08;
+    v = (Vec3f *)((u8 *)arg0 + 0xC0);
+    v->x = a;
+    v->z = b;
+    v->y = a;
+    return arg0;
+}
+
+void fn_802EF620(void *arg0, void *arg1) {
+    M2C_UNK fn_802EFC54(void *, void *);
+    M2C_UNK fn_802D34B0(void *, void *);
+    fn_802EFC54(arg0, arg1);
+    fn_802D34B0(arg1, (u8 *)arg0 + 0xC0);
+}
+
+void fn_802EF65C(void *arg0, void *arg1) {
+    extern u16 lbl_8049377E[];
+    M2C_UNK fn_802EFD68(void *, void *);
+    M2C_UNK fn_802D3714(void *, void *);
+    fn_802EFD68(arg0, arg1);
+    if (lbl_8049377E[0] == 0) {
+        fn_802D3714(arg1, (u8 *)arg0 + 0xC0);
+    }
+}
+
+void fn_802EF6A8(u8 *arg0, s32 arg1, Vec3f *arg2) {
+    extern f32 lbl_803F0D2C[];
+    char *vt;
+    Vec3f *dir;
+    f32 scale;
+    f32 zero;
+    Vec3f v;
+
+    zero = lbl_803F0D2C[0];
+    Vec3f_Set(&v, zero, zero, zero);
+    *arg2 = v;
+    vt = *(char **)arg0;
+    if ((*(s32 (**)(void *))(vt + 0x15C))(arg0 + *(s16 *)(vt + 0x158)) != 0) {
+        dir = (Vec3f *)(arg0 + 0xA4);
+        scale = *(f32 *)(arg0 + 0xA0);
+        v.x = scale * dir->x;
+        v.y = scale * dir->y;
+        v.z = scale * dir->z;
+        *arg2 = v;
+    }
+}
+
 void fn_802EF768(u8 *arg0, Vec3f *arg1, f32 *arg2, Vec3f *arg3, Vec3f *arg4) {
     extern f32 lbl_803F0D30[];
     Vec3f *dir;
@@ -67,15 +126,14 @@ void fn_802EF8D4(s32 arg0, s32 arg1) {
     }
 }
 
+void *fn_802EF5C4(void *);
 void fn_802EF944(void) {
-    M2C_UNK fn_802D1FC8(M2C_UNK);
-    fn_802D1FC8(0xCC);
-    fn_802EF5C4();
+    void *fn_802D1FC8(s32);
+    fn_802EF5C4(fn_802D1FC8(0xCC));
 }
 
-void fn_802EF5C4(void);
-void fn_802EF96C(void) {
-    fn_802EF5C4();
+void fn_802EF96C(void *arg0) {
+    fn_802EF5C4(arg0);
 }
 
 void fn_802EF98C(void *self) {

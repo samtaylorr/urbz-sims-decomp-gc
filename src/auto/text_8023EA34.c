@@ -35,3 +35,43 @@ char *fn_8023EB00(void) {
     return lbl_80436A68;
 }
 
+s32 fn_8023EB50(u8 *dst, u8 *src, u32 n) {
+    register u8 *ctx asm("r31");
+    register u32 v asm("r6") = 1;
+
+    *(volatile s32 *)(ctx + 0x6EC) = v;
+    if ((v = (u32)dst & 3) == 0 && (v = (u32)src & 3) == 0 && (v = n & 3) == 0) {
+        u32 *d = (u32 *)dst - 1;
+        u32 *s = (u32 *)src - 1;
+        n = n + (u32)s;
+        do {
+            v = *++s;
+            *++d = v;
+        } while ((u32)s < n);
+        v = 0;
+        *(volatile s32 *)(ctx + 0x6EC) = v;
+        return 1;
+    } else {
+        u8 *d = dst - 1;
+        u8 *s = src - 1;
+        n = n + (u32)s;
+        do {
+            v = *++s;
+            *++d = v;
+        } while ((u32)s < n);
+        v = 0;
+        *(volatile s32 *)(ctx + 0x6EC) = v;
+        return 1;
+    }
+}
+
+s32 fn_8023EBC8(void) {
+    register u8 *ctx asm("r31");
+    register s32 z asm("r6") = 0;
+    register s32 r asm("r3");
+
+    *(volatile s32 *)(ctx + 0x6EC) = z;
+    r = z;
+    return r;
+}
+

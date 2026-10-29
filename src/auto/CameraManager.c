@@ -200,6 +200,13 @@ void fn_800170FC(void) {
 
 }
 
+void *fn_80017618(u32 size) {
+    void *p = CameraManager_AllocAligned(size);
+
+    fn_80248488(p, 0, size);
+    return p;
+}
+
 void fn_800176DC(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }

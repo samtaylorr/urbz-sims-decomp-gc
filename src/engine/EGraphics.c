@@ -344,6 +344,30 @@ s32 fn_802EF070(s32 arg0, s32 *out) {
     return arg0;
 }
 
+extern void fn_802F09B8(void *, void *);
+extern const f32 lbl_803F0CEC[];
+extern const f32 lbl_803F0CF0[];
+extern const f32 lbl_803F0CF4[];
+
+void fn_802EF220(void *arg0) {
+    struct { Vec3f min; Vec3f max; } box;
+    Vec3f t;
+    Vec3f *p = &t;
+    t.x = lbl_803F0CEC[0];
+    t.z = lbl_803F0CEC[0];
+    t.y = lbl_803F0CEC[0];
+    box.min = box.max = t;
+    p->z = lbl_803F0CF0[0];
+    p->y = lbl_803F0CF0[0];
+    p->x = lbl_803F0CF0[0];
+    box.min = *p;
+    p->z = lbl_803F0CF4[0];
+    p->y = lbl_803F0CF4[0];
+    p->x = lbl_803F0CF4[0];
+    box.max = *p;
+    fn_802F09B8(arg0, &box);
+}
+
 void fn_802EF2E4(s32 arg0, s32 arg1) {
     if (arg1 == 0xFFFF && arg0 != 0) {
         lbl_804961C4 = fn_802D6A90(lbl_80493718, fn_802EF354, fn_802EF398, fn_802EF3D0, 0, lbl_803F0CD8, lbl_80493740);

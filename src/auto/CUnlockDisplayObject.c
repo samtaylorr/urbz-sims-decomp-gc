@@ -7,6 +7,37 @@ s32 fn_800B72E8(void) {
 
 extern void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
+extern void *fn_802D197C(void *, u32, s32);
+extern void *fn_802DC3C0(void *, u32, s32, s32, s32);
+extern void *fn_802D0B3C(void);
+extern void *fn_80248488(void *, s32, u32);
+
+static inline void *CUnlockDisplayObject_AllocAligned(u32 size) {
+    void *heap;
+    void *p;
+
+    heap = ((void *(*)(void))fn_802D0AB8)();
+    if (size == 0) {
+        return NULL;
+    }
+    size = (size + 0xF) & ~0xF;
+    p = fn_802D197C(heap, size, 0x10);
+    if (p == NULL) {
+        p = fn_802DC3C0(heap, size, 0x10, 0, 0);
+        if (p == NULL && heap == ((void *(*)(void))fn_802D0AB8)()) {
+            return fn_802DC3C0(fn_802D0B3C(), size, 0x10, 0, 0);
+        }
+    }
+    return p;
+}
+
+void *fn_800B9580(u32 size) {
+    void *p = CUnlockDisplayObject_AllocAligned(size);
+
+    fn_80248488(p, 0, size);
+    return p;
+}
+
 void fn_800B9644(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
@@ -103,7 +134,7 @@ void fn_800BAE28(u8 *self, f32 *vec, s32 val, s32 idx) {
         *(s32 *)(self + 0x428) = idx + 1;
     }
     arr = (s32 *)(self + 0x490);
-    *(s32 *)((u8 *)arr + idx * 4) = val;
+    arr[idx] = val;
     if (vec[0] != lbl_803CF948[0] || vec[1] != lbl_803CF948[0] || vec[2] != lbl_803CF948[0]) {
         fn_8025FB2C(vec, vec);
     }

@@ -62,6 +62,107 @@ static inline void *Heap_Alloc(u32 size) {
     return p;
 }
 
+char *fn_802D26CC(char *self, char *arg1) {
+    char *obj;
+    char *vt;
+    u16 sp8;
+
+    vt = *(char **)arg1;
+    obj = (*(char *(**)(void *))(vt + 0x14))(arg1 + *(s16 *)(vt + 0x10));
+    {
+        char *s = self;
+        u16 v = *(u16 *)(obj + 0x14);
+        sp8 = v;
+        vt = *(char **)(s + 0x18);
+        (*(void (**)(void *, void *, s32))(vt + 0x3C))(s + *(s16 *)(vt + 0x38), &sp8, 2);
+    }
+    if ((obj = *(char **)(obj + 0x18)) == 0) {
+        vt = *(char **)arg1;
+        (*(void (**)(void *, void *))(vt + 0x44))(arg1 + *(s16 *)(vt + 0x40), self);
+    }
+    return self;
+}
+
+char *fn_802D2768(char *self, char *arg1) {
+    char *vt = *(char **)arg1;
+    char *obj;
+    u16 sp8;
+    u16 *p = &sp8;
+
+    obj = (*(char *(**)(void *))(vt + 0x14))(arg1 + *(s16 *)(vt + 0x10));
+    vt = *(char **)(self + 0x18);
+    (*(void (**)(void *, void *, s32))(vt + 0x34))(self + *(s16 *)(vt + 0x30), p, 2);
+    *(u16 *)(obj + 0x16) = *p;
+    obj = *(char **)(obj + 0x18);
+    if (obj == 0) {
+        vt = *(char **)arg1;
+        (*(void (**)(void *, void *))(vt + 0x3C))(arg1 + *(s16 *)(vt + 0x38), self);
+    }
+    return self;
+}
+
+void *fn_802D30D4(void *arg0, s32 *arg1) {
+    s32 fn_802D2E0C(void *, s32);
+    void *vt;
+    s32 idx;
+
+    vt = M2C_FIELD(arg0, void **, 0x18);
+    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x34)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x30), &idx, 4);
+    if (idx != 0) {
+        if (M2C_FIELD(arg0, s32 *, 0x0) != 0) {
+            *arg1 = M2C_FIELD(arg0, s32 **, 0x14)[idx - 1];
+        } else {
+            *arg1 = fn_802D2E0C(arg0, idx);
+        }
+    } else {
+        *arg1 = idx;
+    }
+    return arg0;
+}
+
+s32 fn_802D3168(void *arg0, char *arg1, s32 arg2) {
+    void *vt;
+    s32 n;
+    char *pc;
+    char c;
+
+    n = 0;
+    pc = &c;
+    do {
+        vt = M2C_FIELD(arg0, void **, 0x18);
+        M2C_FIELD(vt, void (**)(void *, void *, s32), 0x34)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x30), pc, 1);
+        if (n < arg2) {
+            arg1[n] = c;
+        }
+        n++;
+    } while (c != 0);
+    if (n > arg2) {
+        if (arg2 > 0x50) {
+            arg2 = 0x50;
+        }
+        arg1[arg2 - 1] = 0;
+    }
+    return n;
+}
+
+s32 fn_802D3204(void *arg0, char *arg1) {
+    void *vt;
+    s32 n;
+    char c;
+
+    n = 0;
+    while (arg1[n] != 0) {
+        c = arg1[n];
+        n++;
+        vt = M2C_FIELD(arg0, void **, 0x18);
+        M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x38), &c, 1);
+    }
+    c = 0;
+    vt = M2C_FIELD(arg0, void **, 0x18);
+    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x38), &c, 1);
+    return n + 1;
+}
+
 s32 fn_802D32A0(void) {
     return 0;
 }
@@ -117,6 +218,38 @@ s32 fn_802D3340(void *arg0, u16 *arg1) {
     c = 0;
     f(self, &c, 2);
     return n + 1;
+}
+
+void *fn_802D33E0(void *arg0, f32 *arg1) {
+    void *vt;
+    void (*f)(void *, void *, s32);
+    void *self;
+    f32 x;
+    f32 y;
+    f32 z;
+    f32 w;
+
+    vt = M2C_FIELD(arg0, void **, 0x18);
+    f = M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C);
+    self = (char *)arg0 + M2C_FIELD(vt, s16 *, 0x38);
+    x = arg1[0];
+    f(self, &x, 4);
+    vt = M2C_FIELD(arg0, void **, 0x18);
+    f = M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C);
+    self = (char *)arg0 + M2C_FIELD(vt, s16 *, 0x38);
+    y = arg1[1];
+    f(self, &y, 4);
+    vt = M2C_FIELD(arg0, void **, 0x18);
+    f = M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C);
+    self = (char *)arg0 + M2C_FIELD(vt, s16 *, 0x38);
+    z = arg1[2];
+    f(self, &z, 4);
+    vt = M2C_FIELD(arg0, void **, 0x18);
+    f = M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C);
+    self = (char *)arg0 + M2C_FIELD(vt, s16 *, 0x38);
+    w = arg1[3];
+    f(self, &w, 4);
+    return arg0;
 }
 
 void *fn_802D34B0(void *arg0, f32 *arg1) {
@@ -307,6 +440,11 @@ void fn_802D39F0(s32 *self, s32 arg1) {
     if (arg1 != (s32)&lbl_80494DD0) {
         fn_802D3AAC(self, (void *)arg1);
     }
+}
+
+static inline s32 *EString_Ctor(s32 *s) {
+    fn_802D39E4((M2C_UNK **)s);
+    return s;
 }
 
 char *fn_802D3A1C(s32 *arg0, s32 size) {
@@ -501,6 +639,41 @@ s32 fn_802D3EE8(char **arg0, char *arg1) {
     return fn_8024851C(s, arg1);
 }
 
+s32 fn_802D3F58(char **arg0, char *arg1) {
+    char *a = *arg0;
+    char *b = arg1;
+    char c1;
+    char c2;
+
+    if ((u8)(*a - '0') <= 9 && *b == '_') {
+        b++;
+    } else if ((u8)(*b - '0') <= 9 && *a == '_') {
+        a++;
+    }
+    do {
+        c1 = *a;
+        if ((u32)(c1 - 'a') <= 25) {
+            c1 = c1 - 0x20;
+        } else if ((u32)(c1 - 'A') > 25 && (u32)(c1 - '0') > 9 && c1 != 0) {
+            c1 = '_';
+        }
+        c2 = *b;
+        if ((u32)(c2 - 'a') <= 25) {
+            c2 = c2 - 0x20;
+        } else if ((u32)(c2 - 'A') > 25 && (u32)(c2 - '0') > 9 && c2 != 0) {
+            c2 = '_';
+        }
+        if (c1 < c2) {
+            return -1;
+        }
+        if (c1 > c2) {
+            return 1;
+        }
+        b++;
+    } while (*++a != 0 || *b != 0);
+    return 0;
+}
+
 s32 *fn_802D406C(s32 *arg0, s32 *arg1, s32 arg2, s32 arg3) {
     void fn_802D39F0(s32 *, s32);
     void fn_802D40E4(s32 *, s32 *, s32);
@@ -535,11 +708,13 @@ s32 *fn_802D4158(s32 *arg0, s32 *arg1, s32 arg2) {
 
 s32 *fn_802D41A8(s32 *arg0, char *arg1) {
     void fn_802D39F0(s32 *, s32);
-    typedef struct { s32 p; } Str;
-    Str tmp = ((Str (*)(char *, char *))fn_802D3928)((char *)*arg0, arg1);
+    s32 tmp;
+    s32 *p;
 
-    fn_802D3CE4(arg0, (char *)tmp.p);
-    fn_802D39F0(&tmp.p, tmp.p);
+    fn_802D3928(&tmp, (char *)*arg0, arg1);
+    p = &tmp;
+    fn_802D3CE4(arg0, (char *)*p);
+    fn_802D39F0(p, *p);
     return arg0;
 }
 
@@ -551,14 +726,21 @@ s32 *fn_802D4200(s32 *arg0, s32 *arg1, s32 arg2) {
     return arg0;
 }
 
-s32 *fn_802D4240(s32 *arg0, s32 arg1) {
-    void fn_802D39F0(s32 *, s32);
-    s32 tmp;
-    s32 *p;
+static inline s32 *EString_InitAppendChar(s32 *s, s32 *src, s32 c) {
+    fn_802D4200(s, src, c);
+    return s;
+}
 
-    fn_802D4200(p = &tmp, arg0, arg1);
+s32 *fn_802D4240(s32 *arg0, s32 arg1) {
+    register s32 *p asm("r3");
+    register s32 *q asm("r29");
+    s32 tmp;
+
+    p = &tmp;
+    q = p;
+    fn_802D4200(p, arg0, arg1);
     fn_802D3CE4(arg0, (char *)tmp);
-    fn_802D39F0(p, tmp);
+    fn_802D39F0(q, tmp);
     return arg0;
 }
 
@@ -1142,8 +1324,30 @@ void fn_802D58E4(s32 *arg0) {
     fn_802D5200(*arg0);
 }
 
-void fn_802D5908(u16 **arg0) {
-    EString_WUpper(*arg0);
+u16 **fn_802D5908(u16 **arg0) {
+    u16 *p = *arg0;
+    u32 c;
+
+    while ((c = *p) != 0) {
+        if (c - 'a' <= 25) {
+            *p = c + 0xFFE0;
+        }
+        p++;
+    }
+    return arg0;
+}
+
+u16 **fn_802D5940(u16 **arg0) {
+    u16 *p = *arg0;
+    u32 c;
+
+    while ((c = *p) != 0) {
+        if (c - 'A' <= 25) {
+            *p = c + 0x20;
+        }
+        p++;
+    }
+    return arg0;
 }
 
 void fn_802D5A94(s32 *arg0) {
@@ -1152,14 +1356,107 @@ void fn_802D5A94(s32 *arg0) {
     fn_802D5238((void *)arg0);
 }
 
+s32 fn_802D5ACC(u16 **arg0, const u16 *arg1) {
+    const u16 *p = *arg0;
+
+    do {
+        if (*p < *arg1) {
+            return -1;
+        }
+        if (*p > *arg1) {
+            return 1;
+        }
+        p++;
+        arg1++;
+    } while (*p != 0 || *arg1 != 0);
+    return 0;
+}
+
+s32 fn_802D5B18(u16 **arg0, const char *arg1) {
+    const u16 *p = *arg0;
+
+    do {
+        if (*p < *arg1) {
+            return -1;
+        }
+        if (*p > *arg1) {
+            return 1;
+        }
+        p++;
+        arg1++;
+    } while (*p != 0 || *arg1 != 0);
+    return 0;
+}
+
+s32 *fn_802D5B68(s32 *arg0, s32 *arg1) {
+    char *fn_803B9FEC(s32 *);
+    s32 sp8;
+    s32 *p;
+    s32 len;
+    s32 i;
+
+    p = EString_Ctor(&sp8);
+    len = ((s32 (*)(s32 *))fn_802D58E4)(arg1);
+    fn_802D3DB0(p, len);
+    for (i = 0; i < len + 1; i++) {
+        ((char *)sp8)[i] = ((char *)*arg1)[i * 2 + 1];
+    }
+    fn_802D3C60(arg0, fn_803B9FEC(&sp8));
+    fn_802D39F0(&sp8, sp8);
+    return arg0;
+}
+
+s32 fn_802D5C14(u16 **arg0, const u16 *arg1) {
+    const u16 *p = *arg0;
+
+    do {
+        u16 c1 = *p;
+        u16 c2;
+        if ((u32)(c1 - 'a') <= 25) {
+            c1 = c1 - 0x20;
+        }
+        c2 = *arg1;
+        if ((u32)(c2 - 'a') <= 25) {
+            c2 = c2 - 0x20;
+        }
+        if (c1 < c2) {
+            return -1;
+        }
+        if (c1 > c2) {
+            return 1;
+        }
+        p++;
+        arg1++;
+    } while (*p != 0 || *arg1 != 0);
+    return 0;
+}
+
+s32 *fn_802D5C88(s32 *arg0, s32 *arg1, s32 arg2, s32 arg3) {
+    void fn_802D5254(s32 *, s32);
+    void fn_802D56C4(s32 *, u16 *);
+    void fn_802D5D08(s32 *, s32 *, s32);
+    s32 sp8;
+
+    if (arg3 == -1) {
+        fn_802D56C4(arg0, (u16 *)(arg2 * 2 + *arg1));
+    } else {
+        fn_802D56C4(&sp8, (u16 *)(arg2 * 2 + *arg1));
+        fn_802D5D08(arg0, &sp8, arg3);
+        fn_802D5254(&sp8, sp8);
+    }
+    return arg0;
+}
+
 s32 *fn_802D5D08(s32 *arg0, s32 *arg1, s32 arg2) {
     void fn_802D5254(s32 *, s32);
     void fn_802D56C4(s32 *, u16 *);
     u16 *fn_803BA3EC(s32 *);
     u16 *sp8;
+    s32 off;
 
     fn_802D56C4((s32 *)&sp8, fn_803BA3EC(arg1));
-    sp8[arg2] = 0;
+    off = arg2 * 2;
+    *(u16 *)((u8 *)sp8 + off) = 0;
     fn_802D56C4(arg0, fn_803BA3EC((s32 *)&sp8));
     fn_802D5254((s32 *)&sp8, (s32)sp8);
     return arg0;
@@ -1178,6 +1475,19 @@ s32 fn_802D5E2C(s32 arg0, s32 *arg1, u16 arg2) {
     buf[0] = arg2;
     buf[1] = 0;
     fn_802D50BC(arg0, *arg1, (s32)buf);
+    return arg0;
+}
+
+s32 *fn_802D5E70(s32 *arg0, s32 arg1) {
+    register s32 *p asm("r3");
+    register s32 *q asm("r29");
+    s32 tmp;
+
+    p = &tmp;
+    q = p;
+    ((s32 (*)(s32 *, s32 *, s32))fn_802D5E2C)(p, arg0, arg1);
+    fn_802D57BC(arg0, (u16 *)tmp);
+    fn_802D5254(q, tmp);
     return arg0;
 }
 
@@ -1219,6 +1529,102 @@ s32 fn_802D5F80(s32 arg0, s32 *arg1, u16 arg2) {
     return arg0;
 }
 
+s32 *fn_802D5FC4(s32 *arg0, s32 arg1) {
+    register s32 *p asm("r3");
+    register s32 *q asm("r29");
+    s32 tmp;
+
+    p = &tmp;
+    q = p;
+    fn_802D5F24(p, arg0, arg1);
+    fn_802D57BC(arg0, (char *)tmp);
+    fn_802D5254(q, tmp);
+    return arg0;
+}
+
+s32 *fn_802D601C(s32 *arg0, s32 arg1) {
+    register s32 *p asm("r3");
+    register s32 *q asm("r29");
+    s32 tmp;
+
+    p = &tmp;
+    q = p;
+    fn_802D5EC8(p, arg0, arg1);
+    fn_802D57BC(arg0, (char *)tmp);
+    fn_802D5254(q, tmp);
+    return arg0;
+}
+
+s32 *fn_802D6074(s32 *arg0, s32 arg1) {
+    register s32 *p asm("r3");
+    register s32 *q asm("r29");
+    s32 tmp;
+
+    p = &tmp;
+    q = p;
+    fn_802D5E2C((s32)p, arg0, arg1);
+    fn_802D57BC(arg0, (u16 *)tmp);
+    fn_802D5254(q, tmp);
+    return arg0;
+}
+
+s32 fn_802D60CC(u16 **arg0, s32 arg1) {
+    u16 *p;
+    s32 i;
+    s32 c;
+
+    p = *arg0;
+    i = 0;
+    while ((c = *p) != 0) {
+        if (c == arg1) {
+            return i;
+        }
+        p++;
+        i++;
+    }
+    return -1;
+}
+
+s32 fn_802D6108(u16 **arg0, u16 *arg1) {
+    s32 len;
+    s32 end;
+    s32 i;
+    s32 j;
+    s32 found;
+
+    len = fn_802D5200(arg1);
+    end = ((s32 (*)(u16 **))fn_802D58E4)(arg0) - len;
+    for (i = 0; i <= end; i++) {
+        found = 1;
+        for (j = 0; j < len; j++) {
+            if ((*arg0)[i + j] != arg1[j]) {
+                found = 0;
+                break;
+            }
+        }
+        if (found) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+s32 fn_802D628C(u16 **arg0, s32 arg1) {
+    s32 i;
+    s32 n;
+    u16 *p;
+
+    n = ((s32 (*)(u16 **))fn_802D58E4)(arg0);
+    p = *arg0 + (n - 1);
+    for (i = n - 1; i >= 0; i--) {
+        if (*p == arg1) {
+            return i;
+        }
+        p--;
+    }
+    return -1;
+}
+
 s32 *fn_802D62F0(s32 *arg0, f32 arg1) {
     s32 fn_80245BB4(char *, const char *, ...);
     extern char lbl_803F0334[];
@@ -1237,6 +1643,101 @@ s32 *fn_802D633C(s32 *arg0, s32 arg1) {
     fn_80245BB4(buf, lbl_803F0338, arg1);
     fn_802D57FC(arg0, buf);
     return arg0;
+}
+
+void fn_802D638C(u16 **arg0, s32 arg1, s32 arg2) {
+    u16 *p;
+    s32 c;
+
+    p = *arg0;
+    while ((c = *p) != 0) {
+        if (c == arg1) {
+            *p = arg2;
+        }
+        p++;
+    }
+}
+
+void fn_802D63B8(s32 *arg0, s32 arg1) {
+    s32 fn_802D60CC(u16 **, s32);
+    void fn_802D56C4(s32 *, u16 *);
+    u16 *fn_803BA3EC(s32 *);
+    void fn_802D5254(s32 *, s32);
+    s32 tmp;
+    u16 *src;
+    u16 *dst;
+    s32 c;
+
+    if (fn_802D60CC((u16 **)arg0, arg1) == -1) return;
+    fn_802D56C4(&tmp, fn_803BA3EC(arg0));
+    src = (u16 *)*arg0;
+    dst = (u16 *)tmp;
+    c = *src;
+    while (c != 0) {
+        if (c != arg1) {
+            *dst++ = c;
+        }
+        c = *++src;
+    }
+    *dst = 0;
+    fn_802D57BC(arg0, (u16 *)tmp);
+    fn_802D5254(&tmp, tmp);
+}
+
+void fn_802D645C(s32 *arg0, s32 arg1) {
+    register s32 *p asm("r3");
+    register s32 *q asm("r30");
+    s32 tmp;
+    u16 *str;
+    s32 n;
+
+    n = ((s32 (*)(s32 *))fn_802D58E4)(arg0);
+    if (n == 0) return;
+    str = (u16 *)*arg0;
+    if (str[n - 1] != arg1) return;
+    do {
+        if (str[n - 1] != arg1) break;
+        n--;
+    } while (n != 0);
+    p = &tmp;
+    q = p;
+    fn_802D5D08(p, arg0, n);
+    fn_802D57BC(arg0, (u16 *)tmp);
+    fn_802D5254(q, tmp);
+}
+
+s32 fn_802D64F8(s32 arg0, u16 arg1, s32 *arg2) {
+    s32 fn_802D50BC(s32, s32, s32);
+    u16 buf[2];
+
+    buf[0] = arg1;
+    buf[1] = 0;
+    fn_802D50BC(arg0, (s32)buf, *arg2);
+    return arg0;
+}
+
+s32 *fn_802D653C(s32 *arg0, s32 *arg1) {
+    fn_802D3340(arg0, (u16 *)*arg1);
+    return arg0;
+}
+
+s32 *fn_802D6570(s32 *arg0, s32 *arg1) {
+    u16 buf[0x1000];
+
+    fn_802D32A8(arg0, buf, 0x1000);
+    fn_802D57BC(arg1, buf);
+    return arg0;
+}
+
+void fn_802D65B8(s32 *arg0) {
+    s32 i;
+    s32 n;
+
+    n = ((s32 (*)(s32 *))fn_802D58E4)(arg0);
+    if (n == 0) return;
+    i = n - 1;
+    if (*(u16 *)((u8 *)*arg0 + (i + i)) == '\\') return;
+    fn_802D6074(arg0, '\\');
 }
 
 u16 **fn_802D6934(u16 **arg0) {

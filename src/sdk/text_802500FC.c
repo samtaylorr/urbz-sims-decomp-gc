@@ -101,10 +101,104 @@ void fn_80251E98(void) {
     fn_80254684(temp_r31);
 }
 
+void fn_80251F94(void *addr, u32 nBytes) {
+    s32 PPCMfhid2();
+    M2C_UNK fn_80251DCC();
+    s32 fn_8025465C();
+    M2C_UNK fn_80254684(s32);
+    void fn_80251F0C(s32, void *, u32);
+    u32 numBlocks = nBytes >> 5;
+
+    if (!(PPCMfhid2() & 0x10000000)) {
+        s32 enabled = fn_8025465C();
+        fn_80251DCC();
+        fn_80254684(enabled);
+    }
+    fn_80251F0C(1, addr, numBlocks);
+}
+
+void fn_80252004(void *addr, u32 nBytes) {
+    s32 PPCMfhid2();
+    M2C_UNK fn_80251DCC();
+    s32 fn_8025465C();
+    M2C_UNK fn_80254684(s32);
+    void fn_80251F0C(s32, void *, u32);
+    u32 numBlocks = nBytes >> 5;
+
+    if (!(PPCMfhid2() & 0x10000000)) {
+        s32 enabled = fn_8025465C();
+        fn_80251DCC();
+        fn_80254684(enabled);
+    }
+    fn_80251F0C(0, addr, numBlocks);
+}
+
+u32 fn_80252074(u8 *destAddr, u8 *srcAddr, u32 nBytes) {
+    void fn_80251F4C(void *, void *, u32);
+    u32 numBlocks = (nBytes + 31) / 32;
+    u32 numTransactions = (numBlocks + 128 - 1) / 128;
+
+    while (numBlocks > 0) {
+        if (numBlocks < 128) {
+            fn_80251F4C(destAddr, srcAddr, numBlocks);
+            numBlocks = 0;
+        } else {
+            fn_80251F4C(destAddr, srcAddr, 0);
+            numBlocks -= 128;
+            destAddr += 4096;
+            srcAddr += 4096;
+        }
+    }
+    return numTransactions;
+}
+
+void fn_802521EC(void) {
+    void fn_802500E4(s32);
+    void fn_802500EC(u32);
+    void fn_8024FFA8(void);
+    union {
+        struct {
+            u32 pad : 31;
+            u32 bit : 1;
+        } b;
+        u32 w;
+    } v;
+    v.w = 0;
+    v.b.bit = 1;
+    fn_802500E4(0);
+    fn_802500EC(v.w);
+    fn_8024FFA8();
+}
+
+void fn_80252234(void) {
+    u32 fn_8024FF3C(void);
+    void fn_8024FF44(u32);
+    void fn_802522AC(void);
+    void fn_802522DC(void);
+    u32 oldMSR;
+
+    oldMSR = fn_8024FF3C();
+    __sync();
+    fn_8024FF44(0x30);
+    __sync();
+    fn_802522AC();
+    fn_802522DC();
+    fn_8024FF44(oldMSR);
+}
+
 void fn_80252280(void) {
     s32 fn_8024FF88();
     M2C_UNK fn_8024FF90(s32);
     fn_8024FF90((fn_8024FF88() | 0x80000000) & 0xFFDFFFFF);
+}
+
+void fn_802522AC(void) {
+    u32 fn_8024FF88(void);
+    void fn_8024FF90(u32);
+
+    __sync();
+    fn_8024FF90(fn_8024FF88() & ~0x80000000);
+    __sync();
 }
 
 s32 fn_80252900(void) {
@@ -1062,7 +1156,8 @@ s32 fn_802668EC(s32 arg0) {
 
 void fn_80266930(void) {
     extern volatile s32 lbl_80495F60;
-    __DIRegs[0] |= 0x41;
+    volatile u32 *regs = (volatile u32 *)0xCC006000;
+    regs[0] |= 0x41;
     lbl_80495F60 = 1;
 }
 

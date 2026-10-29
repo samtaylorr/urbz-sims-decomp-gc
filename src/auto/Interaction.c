@@ -409,21 +409,30 @@ void fn_8010FD90(void **obj) {
     }
 }
 
-s32 fn_8010FDD0(char *self) {
+s32 fn_8010FDD0(void *arg0) {
+    struct {
+        void *vt;
+        u8 unk4[0xC];
+        void *vt10;
+        s32 unk14;
+        u8 unk18[4];
+        s32 unk1C;
+        s32 unk20;
+    } *self = arg0;
     extern u8 lbl_8040ECC0[];
     extern u8 lbl_8040EC00[];
     extern u8 lbl_8040EC20[];
     extern void fn_80105120(void *);
     extern void fn_800EC9AC(void *);
 
-    M2C_FIELD(self, void **, 0) = lbl_8040ECC0;
-    fn_80105120(self + 4);
-    M2C_FIELD(self, void **, 0) = lbl_8040EC20;
-    M2C_FIELD(self, void **, 0x10) = lbl_8040EC00;
-    fn_800EC9AC(self + 0x18);
-    M2C_FIELD(self, s32 *, 0x14) = 0;
-    M2C_FIELD(self, s32 *, 0x1C) = 0;
-    M2C_FIELD(self, s32 *, 0x20) = 0;
+    self->vt = lbl_8040ECC0;
+    fn_80105120(self->unk4);
+    self->vt10 = lbl_8040EC00;
+    self->vt = lbl_8040EC20;
+    fn_800EC9AC(self->unk18);
+    self->unk14 = 0;
+    self->unk1C = 0;
+    self->unk20 = 0;
     return (s32)self;
 }
 
