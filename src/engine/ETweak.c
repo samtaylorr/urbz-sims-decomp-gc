@@ -45,6 +45,13 @@ s32 fn_80313110(s32 arg0) {
     return var_r9;
 }
 
+void fn_80313298(s32 *p, s32 val, u32 size) {
+    s32 *end = (s32 *)((u8 *)p + (size & ~3));
+    while (p != end) {
+        *p++ = val;
+    }
+}
+
 f32 fn_8031347C(f32 a, f32 b) {
     extern const f32 lbl_803F243C[];
     extern const f32 lbl_803F2440[];
