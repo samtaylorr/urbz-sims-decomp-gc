@@ -5155,9 +5155,24 @@ static inline void Vec12_Erase(u8 **v, Vec12Elem *first, Vec12Elem *last) {
     v[1] = (u8 *)i;
 }
 
+static inline Vec12Elem *Vec12_CopyN(Vec12Elem *first, Vec12Elem *last, Vec12Elem *result) {
+    s32 n;
+    for (n = last - first; n > 0; n--) {
+        *result++ = *first++;
+    }
+    return result;
+}
+
+static inline void Vec12_EraseRef(u8 **v, Vec12Elem *const *first, Vec12Elem *const *last) {
+    Vec12Elem *i = Vec12_CopyN(*last, (Vec12Elem *)v[1], *first);
+    Vec12Elem *q;
+    for (q = i; q != (Vec12Elem *)v[1]; q++) {
+    }
+    v[1] = (u8 *)i;
+}
+
 void fn_803A8188(u8 **self, void *unused, void *stream, void *arg3) {
     extern void fn_8018D8DC(void *, s32 *, s32);
-    extern void fn_803A7DD0(Elem12Vec *, Elem12 *, u32, const Elem12 *);
     extern void fn_80177470(void *, void *, void *);
     extern void fn_80248488();
     s32 n;
@@ -5173,9 +5188,9 @@ void fn_803A8188(u8 **self, void *unused, void *stream, void *arg3) {
     d = size - n;
     if (d < 0) {
         Elem12 zero;
-        Elem12 *zp = &zero;
+        Elem12 *zp;
         s32 cnt = n - size;
-        fn_80248488(zp, 0, sizeof(zero));
+        fn_80248488(zp = &zero, 0, sizeof(zero));
         fn_803A7DD0(self, end, cnt, zp);
     } else if (d > 0) {
         Elem12 *first = end - d;
@@ -9854,9 +9869,12 @@ void fn_803B32E4(void *arg0, u32 n) {
                 Pair *dst;
                 Pair *mem;
                 if (n != 0) {
-                    register u32 sz = n * sizeof(Pair);
-                    bytes = sz;
-                    mem = PtrVec_Allocate(bytes);
+                    bytes = n * sizeof(Pair);
+                    if (n * sizeof(Pair) > 0x80) {
+                        mem = (Pair *)fn_802D1FC8(bytes);
+                    } else {
+                        mem = fn_80399BE8(bytes);
+                    }
                 } else {
                     mem = NULL;
                     bytes = 0;
@@ -9886,9 +9904,12 @@ void fn_803B32E4(void *arg0, u32 n) {
         } else {
             Pair *mem;
             if (n != 0) {
-                register u32 sz = n * sizeof(Pair);
-                bytes = sz;
-                mem = PtrVec_Allocate(bytes);
+                bytes = n * sizeof(Pair);
+                if (n * sizeof(Pair) > 0x80) {
+                    mem = (Pair *)fn_802D1FC8(bytes);
+                } else {
+                    mem = fn_80399BE8(bytes);
+                }
             } else {
                 mem = NULL;
                 bytes = 0;
