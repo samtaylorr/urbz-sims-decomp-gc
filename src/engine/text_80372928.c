@@ -42,8 +42,8 @@ M2C_UNK fn_803729C8(void *self) {
     s32 i;
     fn_8031E8B0(self);
     *(u8 **)self = lbl_8041E0F0;
-    M2C_FIELD(self, s32 *, 0x24) = 0;
     M2C_FIELD(self, s32 *, 0x20) = 0;
+    M2C_FIELD(self, s32 *, 0x24) = 0;
     for (i = 7; i >= 0; i--) {
         ((s32 *)((char *)self + 0x28))[i] = 0;
     }
