@@ -3306,13 +3306,8 @@ void **fn_803A0A44(void **self, void **other) {
         if (xlen > (u32)((void **)self[3] - (void **)self[0])) {
             void **tmp;
             if (xlen != 0) {
-                u32 size = xlen * 4;
-                bytes = size;
-                if (size > 0x80) {
-                    tmp = (void **)fn_802D1FC8(bytes);
-                } else {
-                    tmp = (void **)fn_80399BE8(bytes);
-                }
+                bytes = xlen * 4;
+                tmp = (void **)PtrVec_Allocate(xlen * 4);
             } else {
                 tmp = NULL;
                 bytes = 0;
@@ -5172,7 +5167,7 @@ static inline void Vec12_EraseRef(u8 **v, Vec12Elem *const *first, Vec12Elem *co
 }
 
 static inline Elem12 *Elem12_Zero(Elem12 *p) {
-    extern void fn_80248488();
+    extern void fn_80248488(void *, ...);
     fn_80248488(p, 0, sizeof(*p));
     return p;
 }
@@ -5180,7 +5175,6 @@ static inline Elem12 *Elem12_Zero(Elem12 *p) {
 void fn_803A8188(u8 **self, void *unused, void *stream, void *arg3) {
     extern void fn_8018D8DC(void *, s32 *, s32);
     extern void fn_80177470(void *, void *, void *);
-    extern void fn_80248488();
     s32 n;
     s32 size;
     s32 d;
@@ -5194,10 +5188,7 @@ void fn_803A8188(u8 **self, void *unused, void *stream, void *arg3) {
     d = size - n;
     if (d < 0) {
         Elem12 zero;
-        Elem12 *zp = &zero;
-        s32 cnt = n - size;
-        fn_80248488(zp, 0, sizeof(zero));
-        fn_803A7DD0(self, end, cnt, zp);
+        fn_803A7DD0(self, end, n - size, Elem12_Zero(&zero));
     } else if (d > 0) {
         Vec12Elem *first = (Vec12Elem *)self[1] - d;
         Vec12Elem *last = (Vec12Elem *)self[1];
