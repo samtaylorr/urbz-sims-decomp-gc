@@ -1741,6 +1741,24 @@ void fn_802D65B8(s32 *arg0) {
     fn_802D6074(arg0, '\\');
 }
 
+s32 *fn_802D6688(s32 *arg0, s32 *arg1) {
+    void fn_802D56C4(s32 *, u16 *);
+    u16 *fn_803BA3EC(s32 *);
+    s32 i1;
+    s32 i2;
+
+    i1 = fn_802D628C((u16 **)arg1, '\\');
+    i2 = fn_802D628C((u16 **)arg1, ':');
+    if (i1 != -1) {
+        fn_802D5C88(arg0, arg1, i1 + 1, -1);
+    } else if (i2 != -1) {
+        fn_802D5C88(arg0, arg1, i2 + 1, -1);
+    } else {
+        fn_802D56C4(arg0, fn_803BA3EC(arg1));
+    }
+    return arg0;
+}
+
 u16 **fn_802D6934(u16 **arg0) {
     u16 *p;
 
