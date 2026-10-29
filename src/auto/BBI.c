@@ -156,11 +156,10 @@ void *fn_8005ACF8(void *arg0, s32 arg1) {
     extern char lbl_8045BBA0[];
     void fn_803374C8(void *);
     void fn_8005AD4C(void *);
-    s32 v = arg1;
 
+    M2C_FIELD(arg0, s32 *, 0xC) = arg1;
     M2C_FIELD(arg0, s32 *, 8) = 0;
     M2C_FIELD(arg0, s32 *, 0x10) = 0;
-    M2C_FIELD(arg0, s32 *, 0xC) = v;
     fn_803374C8(lbl_8045BBA0);
     fn_8005AD4C(arg0);
     return arg0;
@@ -197,8 +196,8 @@ void fn_8005B368(void) {
 }
 
 s32 *fn_8005B36C(s32 *arg0) {
-    arg0[0] = 0;
     arg0[1] = 0;
+    arg0[0] = 0;
     arg0[2] = 1;
     arg0[3] = 0;
     return arg0;
