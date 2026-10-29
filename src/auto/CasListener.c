@@ -45,7 +45,9 @@ static inline CasIter *CasIter_begin(CasIter *p, void *list) {
     return p;
 }
 
-static inline u8 *CasIter_cur(CasIter *it) {
+static inline u8 *CasIter_first(CasIter *it, void *list) {
+    extern void fn_80151048(void *, void *, s32);
+    fn_80151048(it, list, 0);
     return it->cur;
 }
 
@@ -63,16 +65,11 @@ s32 fn_801B7C98(void *arg0, void *arg1, s32 arg2) {
         return 0;
     }
     if (arg2 != 0) {
-        CasIter_begin(&iter, arg1);
-        if (iter.cur != NULL) {
-            p = &iter;
-            do {
-                e2 = (CasVtEnt2 *)(*(u8 **)(p->cur + 4) + 0x220);
-                if ((e2->fn(p->cur + e2->delta, 0x2A) ^ 1) & 1) {
-                    return 0;
-                }
-                fn_80151110(p);
-            } while (p->cur != NULL);
+        for (p = CasIter_begin(&iter, arg1); CasIter_cur(p) != NULL; fn_80151110(p)) {
+            e2 = (CasVtEnt2 *)(*(u8 **)(p->cur + 4) + 0x220);
+            if ((e2->fn(p->cur + e2->delta, 0x2A) ^ 1) & 1) {
+                return 0;
+            }
         }
     }
     return 1;
@@ -249,16 +246,17 @@ s32 fn_801BD6DC(s32 arg0) {
     typedef struct { s16 delta; s16 idx; s32 (*fn)(void *, s32); } VtEnt;
     typedef struct { s16 delta; s16 idx; void (*fn)(void *, void *, s32); } VtEnt2;
     extern u8 *lbl_80496658;
+    extern u8 *lbl_80496654;
     extern void fn_801910C8(void *, s32, u16 **, void *, void *, void *);
     extern s32 fn_801A08DC(void *, s32);
     extern void fn_801A0858(void *, s32);
+    u8 *obj = lbl_80496658;
+    s32 ret;
+    u8 buf[0x38];
     u16 *a;
     s32 b;
     s32 c;
     s32 d;
-    u8 buf[0x38];
-    s32 ret;
-    u8 *obj = lbl_80496658;
 
     {
         VtEnt *e = (VtEnt *)(*(u8 **)obj + 0xD8);
@@ -268,8 +266,7 @@ s32 fn_801BD6DC(s32 arg0) {
         return 0;
     }
     if (ret == 0xFFFB) {
-        s32 id = arg0;
-        fn_801910C8(lbl_80496654, id, &a, &b, &c, &d);
+        fn_801910C8(lbl_80496654, arg0, &a, &b, &c, &d);
         {
             VtEnt2 *e = (VtEnt2 *)(*(u8 **)obj + 0xA8);
             e->fn(buf, obj + e->delta, arg0);
