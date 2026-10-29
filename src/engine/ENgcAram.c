@@ -26,24 +26,20 @@ void fn_80373A38(void) {
     M2C_UNK fn_80248488(void *, s32, s32);
     extern ARAMEntry lbl_804756E0[];
     u8 buf[0x480];
-    u8 *p;
-    u32 base;
     s32 i;
 
     if (lbl_80495250 == 0) {
         fn_8037E788(0, 0);
-        p = (u8 *)(((u32)buf + 0x1F) & ~0x1F);
         fn_803806E4();
         for (i = 0; i < 64; i++) {
             lbl_804756E0[i].unk24 = -1;
             lbl_804756E0[i].unk20 = 0;
         }
         lbl_80495250 = 1;
-        base = fn_8037E85C();
-        lbl_80495258 = base + 0x100;
-        lbl_80495254 = base;
-        fn_80248488(p, 0, 0x100);
-        fn_80373B58(p, lbl_80495254, 0x100);
+        lbl_80495254 = fn_8037E85C();
+        lbl_80495258 = lbl_80495254 + 0x100;
+        fn_80248488((void *)(((u32)buf + 0x1F) & ~0x1F), 0, 0x100);
+        fn_80373B58((void *)(((u32)buf + 0x1F) & ~0x1F), lbl_80495254, 0x100);
     }
 }
 
