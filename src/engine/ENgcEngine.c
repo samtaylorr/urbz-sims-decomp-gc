@@ -94,6 +94,21 @@ void fn_8033EF80(void) {
     }
 }
 
+void fn_8033F270(void) {
+    void *fn_802D0C44(void);
+    void fn_802D1A00(void *, s32);
+    extern s32 lbl_8049501C;
+    extern s32 lbl_80495024;
+    extern s32 lbl_80495028;
+
+    if (lbl_8049501C != 0) {
+        fn_802D1A00(fn_802D0C44(), lbl_8049501C);
+        lbl_8049501C = 0;
+    }
+    lbl_80495024 = 0;
+    lbl_80495028 = 0;
+}
+
 void fn_8033F2B8(s32 arg0, s32 arg1, s32 arg2) {
     extern s32 lbl_80495024;
     extern s32 lbl_80495028;
