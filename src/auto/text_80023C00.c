@@ -120,7 +120,7 @@ void *fn_80024BCC(u8 *arg0, s32 id) {
 }
 
 void fn_80024C04(u8 *arg0, u8 *arg1) {
-    void fn_8030770C(u8 *, u8 *);
+    void fn_8030770C(void *, void *);
     void *p;
 
     if (M2C_FIELD(arg0, u8 **, 0x48) == arg1) {
@@ -133,21 +133,22 @@ void fn_80024C04(u8 *arg0, u8 *arg1) {
             M2C_FIELD(vt, void (**)(void *, void *), 0xA4)(arg0 + M2C_FIELD(vt, s16 *, 0xA0), *(void **)M2C_FIELD(arg0, void **, 0));
         }
         if (M2C_FIELD(arg0, u8 **, 0x48) == arg1) {
-            M2C_FIELD(arg0, u8 **, 0x48) = 0;
+            M2C_FIELD(arg0, s32 *, 0x48) = 0;
             fn_8030770C(arg0, arg1);
         }
     }
 }
 
 void fn_80024CAC(u8 *arg0) {
-    extern f32 lbl_803C4CDC;
+    extern f32 lbl_803C4CDC[];
     u8 *it;
     u8 *obj;
     u8 *vt;
+    f32 zero = lbl_803C4CDC[0];
 
     M2C_FIELD(arg0, s32 *, 0x60) = 0;
-    M2C_FIELD(arg0, f32 *, 0x78) = lbl_803C4CDC;
-    M2C_FIELD(arg0, f32 *, 0x74) = lbl_803C4CDC;
+    M2C_FIELD(arg0, f32 *, 0x74) = zero;
+    M2C_FIELD(arg0, f32 *, 0x78) = zero;
     for (it = M2C_FIELD(arg0, u8 **, 0); it != NULL; it = M2C_FIELD(it, u8 **, 8)) {
         obj = M2C_FIELD(it, u8 **, 0);
         M2C_FIELD(obj, s32 *, 0x1C) = M2C_FIELD(arg0, s32 *, 0x60);
