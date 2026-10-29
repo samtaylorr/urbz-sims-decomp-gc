@@ -1,6 +1,10 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+typedef struct PlumbVec3 {
+    f32 x, y, z;
+} PlumbVec3;
+
 extern void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
 extern void *fn_802D197C(void *, u32, s32);
