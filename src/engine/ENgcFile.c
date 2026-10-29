@@ -31,24 +31,10 @@ static inline void fn_802E0150_start(char *p) {
 void *fn_802DFB9C(void *arg0) {
     extern char lbl_80419778[];
     extern void fn_802C5440(void *);
-    void *fn_802D0AB8(void);
-    void *fn_802D0B3C(void);
-    void *fn_802D197C(void *, s32, s32);
-    void *fn_802DC3C0(void *, s32, s32, s32, s32);
-    void *heap;
-    void *p;
 
     fn_802C5440(arg0);
     M2C_FIELD(arg0, char **, 0x28) = lbl_80419778;
-    heap = fn_802D0AB8();
-    p = fn_802D197C(heap, 0x1000, 0x800);
-    if (p == NULL) {
-        p = fn_802DC3C0(heap, 0x1000, 0x800, 0, 0);
-        if (p == NULL && heap == fn_802D0AB8()) {
-            p = fn_802DC3C0(fn_802D0B3C(), 0x1000, 0x800, 0, 0);
-        }
-    }
-    M2C_FIELD(arg0, void **, 0x6C) = p;
+    M2C_FIELD(arg0, void **, 0x6C) = Heap_AllocAligned(0x1000, 0x800);
     return arg0;
 }
 
@@ -240,14 +226,13 @@ void fn_802E010C(s32 arg0) {
 
 void fn_802E0150(char *self) {
     void fn_803665B8(void *, s32);
-    void fn_802D8CA4(void *, s32, s32, s32);
     void fn_802D8EF8(void *);
-    extern u8 lbl_803F04A0[];
+    char *p;
 
+    p = self + 8;
     fn_803665B8(self + 0x368, 0x20);
-    M2C_FIELD(self + 8, void **, 0x32C) = lbl_803F04A0;
-    fn_802D8CA4(self + 8, 0x19, 0x6000, 0);
-    fn_802D8EF8(self + 8);
+    fn_802E0150_start(p);
+    fn_802D8EF8(p);
     M2C_FIELD(self, s32 *, 0x348) = 1;
 }
 
