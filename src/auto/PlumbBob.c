@@ -2822,6 +2822,21 @@ s32 fn_8008B284(char *self, s32 arg1) {
     return old;
 }
 
+void fn_8008B300(char *self, PlumbVec3 *v) {
+    extern f32 lbl_8042EF78;
+    PlumbVec3 tmp;
+    *(PlumbVec3 *)(self + 0x40) = *v;
+    tmp.x = v->x * lbl_8042EF78;
+    tmp.y = v->y * lbl_8042EF78;
+    tmp.z = v->z * lbl_8042EF78;
+    *(PlumbVec3 *)(self + 0x30) = tmp;
+}
+
+void fn_8008B374(void *self, s32 idx) {
+    extern PlumbVec3 lbl_8042EF54[];
+    fn_8008B300(self, &lbl_8042EF54[idx]);
+}
+
 void fn_8008B3A4(void *arg0, s32 arg1, f32 arg2) {
     extern char lbl_8041F94C[];
     extern f32 lbl_8042EF98[];
