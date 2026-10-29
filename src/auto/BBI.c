@@ -23,6 +23,10 @@ static inline void *BBI_AllocAligned(s32 size) {
     return p;
 }
 
+static inline s32 BBI_ListValid(void *n) {
+    return n != NULL;
+}
+
 static inline void *BBI_AllocZero(s32 size) {
     void *fn_80248488(void *, s32, u32);
     void *p = BBI_AllocAligned(size);
