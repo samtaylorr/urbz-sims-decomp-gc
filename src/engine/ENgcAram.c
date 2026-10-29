@@ -1,28 +1,49 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+typedef struct {
+    u8 pad0[0x20];
+    void (*unk20)(s32);
+    s32 unk24;
+} ARAMEntry;
+
+extern s32 lbl_80495250;
+extern u32 lbl_80495254;
+extern u32 lbl_80495258;
+u32 fn_80373B44(void);
+void fn_80373B58(void *, u32, u32);
+void fn_80373BEC(void);
+
 void fn_802D0C44(void);
 void fn_80373A18(void) {
     fn_802D0C44();
 }
 
-extern s32 lbl_80495250;
 void fn_80373AE8(void) {
     if (lbl_80495250 != 0) {
         lbl_80495250 = 0;
     }
 }
 
+u32 fn_80373B00(u32 size) {
+    u32 addr;
+
+    if (fn_80373B44() < size) {
+        return -1;
+    }
+    addr = lbl_80495258;
+    lbl_80495258 = addr + size;
+    return addr;
+}
+
+u32 fn_80373B44(void) {
+    return lbl_80495254 - (lbl_80495258 - 0x1000000);
+}
+
 void fn_80373BEC(void) {
     extern s32 lbl_8049525C;
     lbl_8049525C = 0;
 }
-
-typedef struct {
-    u8 pad0[0x20];
-    void (*unk20)(s32);
-    s32 unk24;
-} ARAMEntry;
 
 void fn_80373CF0(void *arg0) {
     extern ARAMEntry lbl_804756E0[];
