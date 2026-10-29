@@ -5615,12 +5615,11 @@ SearchEntry *fn_803ABF48(SearchEntry *lo, SearchEntry *hi, s32 key) {
 void *fn_803ABFA8(void *arg0) {
     char *buf;
     char **cap;
-    struct { char dummy; } alloc;
+    struct { u8 c[6]; } tmp;
     M2C_FIELD(arg0, s32 *, 0) = 0;
     M2C_FIELD(arg0, s32 *, 4) = 0;
     cap = (char **)((char *)arg0 + 8);
     cap[1] = 0;
-    alloc.dummy = 0;
     buf = fn_80399BE8(8);
     M2C_FIELD(arg0, char **, 0) = buf;
     M2C_FIELD(arg0, char **, 0xC) = buf + 8;
