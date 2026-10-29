@@ -103,6 +103,12 @@ typedef struct {
 } Elem12S16;
 
 typedef struct {
+    s16 pad[3];
+    s16 key;
+    s32 b;
+} Elem12K6;
+
+typedef struct {
     s32 v;
 } SortComp;
 
