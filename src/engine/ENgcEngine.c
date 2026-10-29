@@ -19,6 +19,19 @@ void fn_8033E768(void) {
     lbl_80495040 = 1;
 }
 
+void *fn_8033E774(void *self) {
+    M2C_UNK fn_802E0B7C(void *);
+    M2C_UNK fn_802655AC(s32);
+    extern void *lbl_80494FDC;
+
+    fn_802E0B7C(self);
+    *(u8 **)self = lbl_8041C570;
+    lbl_80494FDC = self;
+    fn_802655AC(1);
+    M2C_FIELD(self, s32 *, 0x50) = 0;
+    return self;
+}
+
 extern u8 lbl_8041C570[];
 void fn_8033E7C4(void **self) {
     M2C_UNK fn_802E0CA0(void **);
