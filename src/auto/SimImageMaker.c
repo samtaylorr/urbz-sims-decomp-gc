@@ -83,6 +83,14 @@ void fn_8009D130(char *self, SimImgBlockE0 *src) {
     *(SimImgBlockE0 *)(self + 0xE8) = *src;
 }
 
+void fn_8009D18C(char *self, s32 a, SimImgVec3 *b, SimImgVec3 *c, SimImgVec3 *d, f32 f) {
+    *(s32 *)(self + 0x1F0) = a;
+    *(SimImgVec3 *)(self + 0x1C8) = *b;
+    *(SimImgVec3 *)(self + 0x1D4) = *c;
+    *(SimImgVec3 *)(self + 0x1E0) = *d;
+    *(f32 *)(self + 0x1EC) = f;
+}
+
 void fn_8009E9A8(void) {
     M2C_UNK fn_8009E964(M2C_UNK, M2C_UNK);
     fn_8009E964(1, 0xFFFF);
