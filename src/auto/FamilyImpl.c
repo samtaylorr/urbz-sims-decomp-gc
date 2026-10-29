@@ -145,6 +145,13 @@ s32 fn_8010B9DC(void *arg0) {
     return (s32) (M2C_FIELD(arg0, s32 *, 0x28) - M2C_FIELD(arg0, s32 *, 0x24)) >> 2;
 }
 
+void fn_8010BAC4(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 0xC) = 0;
+    M2C_FIELD(arg0, s32 *, 0x14) = 0;
+    M2C_FIELD(arg0, s32 *, 0x18) = 0;
+    M2C_FIELD(arg0, s32 *, 0x1C) = 0;
+}
+
 s32 fn_8010BC60(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 fn_803A1354(void *, s32, s32, s16, s32);
     struct { s32 *begin; s32 *end; } *v = (void *)((u8 *)arg0 + 0x24);
