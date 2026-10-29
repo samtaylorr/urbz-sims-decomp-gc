@@ -23,11 +23,6 @@ s32 fn_8010C3F8(void *arg0, void *arg1, s32 arg2);
 void fn_801B3908(void *, s32);
 void fn_801B3910(void *, u16);
 
-static inline void FamilyImpl_SetId(void *p, s32 a, s32 b) {
-    fn_801B3908(p, a);
-    fn_801B3910(p, b);
-}
-
 void fn_80106008(s32 *arg0) {
     M2C_UNK fn_8011AA6C(s32);
     fn_8011AA6C(*arg0);
