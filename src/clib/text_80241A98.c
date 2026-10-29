@@ -68,6 +68,12 @@ s32 fn_80245988(s32 c) {
     return c[lbl_803EBA39] & 4;
 }
 
+s32 fn_8024599C(StrFile *f, const char *fmt, ...) {
+    va_list ap;
+    va_start(ap, fmt);
+    return fn_80249390(f, fmt, ap);
+}
+
 s32 fn_80245A30(s32 self, s32 str) {
     extern char lbl_803EBB3C[];
     s32 fn_80248808(const char *);
