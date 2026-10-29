@@ -41,6 +41,12 @@ s32 fn_800C3FB4(void *self, s32 pos) {
     return 1;
 }
 
+s32 fn_800C3FE0(void *self, s32 pos) {
+    M2C_UNK fn_802D8040(s32, s32, M2C_UNK);
+    fn_802D8040(M2C_FIELD(self, s32 *, 0x110), pos, 0);
+    return 0;
+}
+
 s32 fn_800C4040(void) {
     return 0;
 }
