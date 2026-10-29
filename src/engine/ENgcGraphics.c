@@ -21,6 +21,13 @@ void fn_8033FA58(void **self, s32 flags) {
     fn_802ED8B4(self);
 }
 
+void fn_8033FCF8(void *self, s32 arg1, s32 arg2) {
+    extern void fn_802EDC38(void *, s32, s32, s32);
+    extern void fn_8034D53C(void *, s32, s32);
+    fn_802EDC38(self, arg1, arg2, 1);
+    fn_8034D53C(lbl_8046DF78, arg1, arg2);
+}
+
 void fn_8033FD40(void) {
 
 }
