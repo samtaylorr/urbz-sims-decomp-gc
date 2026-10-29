@@ -74,6 +74,11 @@ s32 fn_800C4050(void *self) {
     return 1;
 }
 
+s32 fn_800C4058(char *self) {
+    char *vt = *(char **)self;
+    return (*(s32 (**)(char *))(vt + 0x14))(self + *(s16 *)(vt + 0x10)) != 0;
+}
+
 s32 fn_800C409C(char *self, s32 arg1, s32 arg2) {
     char *vt = *(char **)self;
     return (*(s32 (**)(char *, s32, s32))(vt + 0x1C))(self + *(s16 *)(vt + 0x18), arg1, arg2) == arg2;
