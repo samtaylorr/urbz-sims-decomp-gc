@@ -302,6 +302,27 @@ s32 fn_80093598(void) {
     return 0;
 }
 
+void fn_80093D00(void *arg0, void *arg1) {
+    void fn_80093DC0(void *, void *);
+    void *var_r30;
+    void *var_r31;
+
+    var_r30 = M2C_FIELD(arg1, void **, 0);
+    if (var_r30 != NULL) {
+        do {
+            var_r31 = *M2C_FIELD(var_r30, void ***, 0x1C);
+            if (var_r31 != NULL) {
+                do {
+                    M2C_FIELD(M2C_FIELD(var_r31, void **, 0x1C), s32 *, 0x28) = 0;
+                    var_r31 = M2C_FIELD(var_r31, void **, 0x10);
+                } while (var_r31 != NULL);
+            }
+            var_r30 = M2C_FIELD(var_r30, void **, 0x10);
+        } while (var_r30 != NULL);
+    }
+    fn_80093DC0(arg0, arg1);
+}
+
 void fn_80093D60(void *arg0, void *arg1) {
     void fn_80093DC0(void *, void *);
     void *var_r30;
