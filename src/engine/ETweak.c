@@ -19,6 +19,12 @@ static inline void ETweakEntry_Ctor(ETweakEntry *e, s32 key, s32 value) {
     e->key = key;
     e->value = value;
 }
+
+static inline void ETweakEntry_Init(ETweakEntry *e, s32 key, s32 str, s32 value) {
+    s32 fn_802D3CE4(void *, s32);
+    ETweakEntry_Ctor(e, key, value);
+    fn_802D3CE4(&e->str, str);
+}
 void fn_80313090(void *arg0, s32 arg1) {
     s32 fn_802D118C(s32);
     s32 fn_802D1194(s32);
