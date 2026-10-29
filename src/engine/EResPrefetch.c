@@ -28,6 +28,41 @@ void fn_8031F47C(void *arg0, void *arg1) {
     }
 }
 
+void fn_8031F568(void *arg0) {
+    M2C_UNK fn_802D81B8(void *);
+    M2C_UNK fn_802D8260(void *, s32);
+    M2C_UNK fn_802D82D4(void *, s32, s32);
+    M2C_UNK fn_802D8328(void *);
+    M2C_UNK fn_802D8334(void *, s32);
+    M2C_UNK fn_80366760(void *, void *, s32);
+    struct {
+        u8 pad[0x18];
+    } evt;
+    struct {
+        s32 unk0;
+        s32 unk4;
+        s32 unk8;
+        s32 unkC;
+        void *unk10;
+    } msg;
+    void *e;
+
+    if (M2C_FIELD(arg0, s32 *, 0x414) != 0) {
+        e = &evt;
+        fn_802D81B8(e);
+        fn_802D82D4(e, 1, 0);
+        msg.unk10 = e;
+        msg.unk0 = 2;
+        msg.unkC = 0;
+        msg.unk8 = 0;
+        msg.unk4 = -1;
+        fn_80366760(arg0 + 0x38C, &msg, 1);
+        fn_802D8334(e, -1);
+        fn_802D8328(e);
+        fn_802D8260(e, 2);
+    }
+}
+
 void fn_8031F608(s32 arg0) {
     M2C_UNK fn_802D81B8(void *);
     M2C_UNK fn_802D8260(void *, s32);
