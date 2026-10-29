@@ -683,10 +683,10 @@ s32 fn_8010CAE4(void *arg0, void *arg1, s32 arg2) {
     if (M2C_FIELD(arg0, s32 *, 0) == 0 || M2C_FIELD(arg0, s32 *, 8) == 0) {
         return 1;
     }
-    if (arg1 == NULL || arg2 == -2) {
-        return 0;
+    if (arg1 != NULL && arg2 != -2 && fn_800FF538(lbl_80495ADC, arg1, arg2) != 0) {
+        return 1;
     }
-    return fn_800FF538(lbl_80495ADC, arg1, arg2) != 0;
+    return 0;
 }
 
 s32 fn_8010CB48(void *arg0, s32 arg1, s32 arg2) {
