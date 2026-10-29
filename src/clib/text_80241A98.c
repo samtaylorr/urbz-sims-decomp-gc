@@ -1,5 +1,6 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
+#include <stdarg.h>
 
 void fn_80247D48(void);
 
@@ -41,6 +42,14 @@ void fn_802423A8(void) {
     *(s32 *)0xCC006008 = 0;
     *(s32 *)0xCC00601C = 1;
     fn_802422FC();
+}
+
+f32 fn_80245954(f32 x, f32 y) {
+    union { f32 f; u32 i; } ux, uy;
+    ux.f = x;
+    uy.f = y;
+    ux.i = (ux.i & 0x7FFFFFFF) | (uy.i & 0x80000000);
+    return ux.f;
 }
 
 s32 fn_80245988(s32 c) {
