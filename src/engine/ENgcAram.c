@@ -37,7 +37,8 @@ u32 fn_80373B00(u32 size) {
 }
 
 u32 fn_80373B44(void) {
-    return lbl_80495254 - (lbl_80495258 - 0x1000000);
+    u32 base = lbl_80495258 - 0x1000000;
+    return lbl_80495254 - base;
 }
 
 void fn_80373BEC(void) {
