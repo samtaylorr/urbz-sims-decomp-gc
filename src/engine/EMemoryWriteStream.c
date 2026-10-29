@@ -17,6 +17,14 @@ void *fn_80374058(void *arg0) {
     return arg0;
 }
 
+void *fn_803747A8(void *arg0, void *arg1) {
+    void *vt;
+
+    vt = M2C_FIELD(arg1, void **, 0xAC);
+    M2C_FIELD(vt, void (**)(void *, void *), 0x14)((u8 *)arg1 + M2C_FIELD(vt, s16 *, 0x10), arg0);
+    return arg0;
+}
+
 void fn_803747F4(void *arg0, s32 arg1, void *arg2) {
     extern void fn_8039A334(void *, s32, s32);
     extern void fn_8039A290(void *, void *);
