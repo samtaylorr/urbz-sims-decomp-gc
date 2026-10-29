@@ -52,6 +52,28 @@ void fn_802423A8(void) {
     fn_802422FC();
 }
 
+f32 fn_80243E1C(f32 x, f32 y, s32 iy) {
+    extern f32 lbl_8049483C;
+    extern f32 lbl_80494840;
+    extern f32 lbl_80494844;
+    extern f32 lbl_80494848;
+    extern f32 lbl_8049484C;
+    extern f32 lbl_80494850;
+    extern f32 lbl_80494854;
+    f32 z, r, v;
+    s32 ix;
+    do { union { f32 value; u32 word; } gf_u; gf_u.value = x; ix = gf_u.word; } while (0);
+    ix &= 0x7fffffff;
+    if (ix < 0x32000000) {
+        if ((s32)x == 0) return x;
+    }
+    z = x * x;
+    v = z * x;
+    r = lbl_8049484C + z * (lbl_80494848 + z * (lbl_80494844 + z * (lbl_80494840 + z * lbl_8049483C)));
+    if (iy == 0) return x + v * (lbl_80494850 + z * r);
+    else return x - ((z * (y * lbl_80494854 - v * r) - y) - v * lbl_80494850);
+}
+
 f64 fn_80245904(f64 x, f64 y) {
     u32 hx, hy;
     do { union { f64 value; struct { u32 msw; u32 lsw; } parts; } gh_u; gh_u.value = x; hx = gh_u.parts.msw; } while (0);
