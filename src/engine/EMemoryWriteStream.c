@@ -17,6 +17,19 @@ void *fn_80374058(void *arg0) {
     return arg0;
 }
 
+void fn_803747F4(void *arg0, s32 arg1, void *arg2) {
+    extern void fn_8039A334(void *, s32, s32);
+    extern void fn_8039A290(void *, void *);
+    extern void fn_80399F94(void *, s32);
+    void *vec = (u8 *)arg0 + 0x94;
+
+    if (arg1 > M2C_FIELD(vec, s32 *, 0x4)) {
+        fn_8039A334(vec, arg1 + 1, 0);
+    }
+    fn_8039A290((u8 *)M2C_FIELD(arg0, void **, 0x94) + arg1 * 0xC, arg2);
+    fn_80399F94(arg2, 2);
+}
+
 s32 fn_80374B94(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 temp_r0;
 
