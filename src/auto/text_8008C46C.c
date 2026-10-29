@@ -322,6 +322,30 @@ void fn_800934F0(void *arg0) {
     fn_802ED144(M2C_FIELD(arg0, s32 *, 8) + 0x314);
 }
 
+void fn_80093518(void *arg0, s32 arg1, void *arg2, f32 *arg3) {
+    typedef struct {
+        s32 unk0;
+        void *unk4;
+        f32 x, y, z;
+    } Args;
+    s32 fn_802CD440(void *, s32, s32 *);
+    void fn_80093BC8(void *, Args *);
+    Args args;
+    s32 tmp;
+
+    if (arg2 != NULL) {
+        tmp = 0;
+        if (fn_802CD440((u8 *)arg0 + 0x458, arg1, &tmp) == 0) {
+            args.unk0 = arg1;
+            args.unk4 = arg2;
+            args.x = arg3[0];
+            args.y = arg3[1];
+            args.z = arg3[2];
+            fn_80093BC8(arg0, &args);
+        }
+    }
+}
+
 s32 fn_80093598(void) {
     return 0;
 }
