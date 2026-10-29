@@ -46,6 +46,16 @@ void fn_8033FE0C(void) {
     fn_80348F08(lbl_8045F980, 2);
 }
 
+extern u8 lbl_8045BAE8[];
+extern void *fn_80338000(void *, s32, s32);
+extern void fn_80360C04(void);
+extern u8 lbl_8045BA40[];
+extern void fn_8035F368(void);
+void fn_8033FF60(void) {
+    fn_80338000(lbl_8045BA40, 0xF4, 4);
+    fn_8035F368();
+}
+
 void fn_8033FF94(void *arg0, void *obj) {
     if (obj != NULL) {
         char *vt = *(char **)((char *)obj + 0xF0);
