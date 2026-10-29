@@ -17,6 +17,17 @@ void fn_8031F0B8(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x404) = 0;
 }
 
+void fn_8031F47C(void *arg0, void *arg1) {
+    M2C_UNK fn_8031F288(void *);
+    M2C_UNK fn_802D838C(s32);
+    while (M2C_FIELD(arg0, s32 *, 0x414) != 0) {
+        fn_8031F288(arg0);
+    }
+    if (M2C_FIELD(arg1, s32 *, 0x10) != 0) {
+        fn_802D838C(M2C_FIELD(arg1, s32 *, 0x10));
+    }
+}
+
 void fn_8031F608(s32 arg0) {
     M2C_UNK fn_802D81B8(void *);
     M2C_UNK fn_802D8260(void *, s32);
