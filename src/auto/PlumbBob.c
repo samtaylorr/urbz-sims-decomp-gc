@@ -2478,9 +2478,9 @@ f32 fn_80089648(void) {
 }
 
 static inline void Vec3_Set(f32 *v, f32 x, f32 y, f32 z) {
-    v[0] = x;
-    v[1] = y;
     v[2] = z;
+    v[1] = y;
+    v[0] = x;
 }
 
 void fn_80089650(f32 *arg0) {
