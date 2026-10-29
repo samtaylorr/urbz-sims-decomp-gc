@@ -825,6 +825,20 @@ u16 *fn_800F8178(u16 *dst, const u16 *src) {
     return dst;
 }
 
+u16 *fn_800F81A8(u16 *dst, const u16 *src, s32 n) {
+    u16 *ret = dst;
+
+    while (*src != 0 && n != 0) {
+        *dst++ = *src++;
+        n--;
+    }
+    while (n != 0) {
+        *dst++ = 0;
+        n--;
+    }
+    return ret;
+}
+
 s32 fn_800F86C8(void *arg0, s32 arg1) {
     s32 temp_r9;
     s32 var_r3;
