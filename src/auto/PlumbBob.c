@@ -2823,12 +2823,12 @@ s32 fn_8008B284(char *self, s32 arg1) {
 }
 
 void fn_8008B300(char *self, PlumbVec3 *v) {
-    extern f32 lbl_8042EF78;
+    extern f32 lbl_8042EF78[];
     PlumbVec3 tmp;
     *(PlumbVec3 *)(self + 0x40) = *v;
-    tmp.x = v->x * lbl_8042EF78;
-    tmp.y = v->y * lbl_8042EF78;
-    tmp.z = v->z * lbl_8042EF78;
+    tmp.x = v->x * lbl_8042EF78[0];
+    tmp.y = v->y * lbl_8042EF78[0];
+    tmp.z = v->z * lbl_8042EF78[0];
     *(PlumbVec3 *)(self + 0x30) = tmp;
 }
 
@@ -2842,14 +2842,13 @@ void fn_8008B3A4(void *arg0, s32 arg1, f32 arg2) {
     extern f32 lbl_8042EF98[];
     extern f32 lbl_803CC17C[];
     extern s32 fn_800120DC(void *);
-    f32 v;
+    void **tbl = (void **)(lbl_8041F94C + 0x160);
 
-    if (fn_800120DC(((void **)(lbl_8041F94C + 0x160))[arg1]) == 0) {
-        v = (lbl_8042EF98[0] - lbl_803CC17C[0]) * arg2 + lbl_803CC17C[0];
+    if (fn_800120DC(tbl[arg1]) == 0) {
+        M2C_FIELD(arg0, f32 *, 0x128) = (lbl_8042EF98[0] - lbl_803CC17C[0]) * arg2 + lbl_803CC17C[0];
     } else {
-        v = lbl_803CC17C[0];
+        M2C_FIELD(arg0, f32 *, 0x128) = lbl_803CC17C[0];
     }
-    M2C_FIELD(arg0, f32 *, 0x128) = v;
 }
 
 void fn_8008B420(void *arg0) {
