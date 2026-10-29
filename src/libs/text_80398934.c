@@ -5612,6 +5612,23 @@ SearchEntry *fn_803ABF48(SearchEntry *lo, SearchEntry *hi, s32 key) {
     }
 }
 
+void *fn_803ABFA8(void *arg0) {
+    char *buf;
+    char **cap;
+    struct { char dummy; } alloc;
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    cap = (char **)((char *)arg0 + 8);
+    cap[1] = 0;
+    alloc.dummy = 0;
+    buf = fn_80399BE8(8);
+    M2C_FIELD(arg0, char **, 0) = buf;
+    M2C_FIELD(arg0, char **, 0xC) = buf + 8;
+    M2C_FIELD(arg0, char **, 4) = buf;
+    *buf = 0;
+    return arg0;
+}
+
 void fn_803AC08C(s32 arg0, void *arg1) {
     void *temp_r30;
     void *var_r31;
@@ -5726,6 +5743,31 @@ void fn_803AC410(RcPtrVec *v, RcPtr *pos, u32 n, const RcPtr *x) {
             v->end = (RcPtr *)((char *)new_start + bytes);
         }
     }
+}
+
+Elem12K6 *fn_803AC95C(Elem12K6 *lo, Elem12K6 *hi, s32 key) {
+    s32 n = hi - lo;
+    Elem12K6 *mid;
+    s32 d;
+
+    if (n <= 0) {
+        return 0;
+    }
+    if (n == 1) {
+        if (lo->key == key) {
+            return lo;
+        }
+        return 0;
+    }
+    mid = lo + n / 2;
+    d = key - mid->key;
+    if (d == 0) {
+        return mid;
+    }
+    if (d > 0) {
+        return fn_803AC95C(mid + 1, hi, key);
+    }
+    return fn_803AC95C(lo, mid, key);
 }
 
 extern s32 lbl_80495D84;
