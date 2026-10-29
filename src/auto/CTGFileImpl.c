@@ -56,6 +56,12 @@ s32 fn_800C3FE0(void *self, s32 pos) {
     return 0;
 }
 
+s32 fn_800C400C(void *self) {
+    s32 fn_802D80A8(s32);
+    s32 f = M2C_FIELD(self, s32 *, 0x110);
+    return f != 0 ? fn_802D80A8(f) : 0;
+}
+
 s32 fn_800C4040(void) {
     return 0;
 }
