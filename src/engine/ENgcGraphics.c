@@ -60,6 +60,13 @@ void fn_8034003C(void) {
     fn_80345AF8();
 }
 
+void fn_80340064(void *arg0, void *obj) {
+    if (obj != NULL) {
+        char *vt = *(char **)((char *)obj + 0x8);
+        (*(void (**)(void *, s32))(vt + 0x3C))((char *)obj + *(s16 *)(vt + 0x38), 3);
+    }
+}
+
 void fn_803403B4(u8 *self, u8 *arg1) {
     s32 i;
 
