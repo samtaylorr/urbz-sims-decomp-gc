@@ -707,14 +707,15 @@ s32 *fn_802D4158(s32 *arg0, s32 *arg1, s32 arg2) {
 }
 
 s32 *fn_802D41A8(s32 *arg0, char *arg1) {
-    void fn_802D39F0(s32 *, s32);
+    register s32 *p asm("r3");
+    register s32 *q asm("r29");
     s32 tmp;
-    s32 *p;
 
-    fn_802D3928(&tmp, (char *)*arg0, arg1);
     p = &tmp;
-    fn_802D3CE4(arg0, (char *)*p);
-    fn_802D39F0(p, *p);
+    q = p;
+    fn_802D3928(p, (char *)*arg0, arg1);
+    fn_802D3CE4(arg0, (char *)tmp);
+    fn_802D39F0(q, tmp);
     return arg0;
 }
 
