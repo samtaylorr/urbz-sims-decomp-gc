@@ -53,6 +53,13 @@ void fn_8033FFD4(void) {
     fn_8035D9C0();
 }
 
+void fn_8034003C(void) {
+    M2C_UNK fn_802D1FC8(M2C_UNK);
+    M2C_UNK fn_80345AF8();
+    fn_802D1FC8(0x4C);
+    fn_80345AF8();
+}
+
 void fn_803403B4(u8 *self, u8 *arg1) {
     s32 i;
 
