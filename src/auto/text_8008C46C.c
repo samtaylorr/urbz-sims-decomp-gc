@@ -350,6 +350,48 @@ s32 fn_80093598(void) {
     return 0;
 }
 
+void fn_800935A0(void *arg0, f32 *a, f32 *out) {
+    extern const f32 lbl_803CC900[];
+    extern const f32 lbl_803CC904[];
+    out[0] = a[1] * lbl_803CC900[0];
+    out[1] = a[0] * lbl_803CC900[0];
+    out[2] = lbl_803CC904[0];
+}
+
+void fn_80093A24(void *arg0, void *arg1) {
+    s32 n;
+    s32 i;
+
+    n = 0;
+    if (M2C_FIELD(arg1, s32 **, 8) != NULL) {
+        n = M2C_FIELD(arg1, s32 **, 8)[-1];
+    }
+    for (i = 0; i < n; i++) {
+        u8 *e = (u8 *)M2C_FIELD(arg1, s32 **, 8) + i * 0xC;
+        if (*(s32 *)(e + 4) == 10 && *(void **)(e + 8) != NULL) {
+            fn_80093AA8(arg0, *(void **)(e + 8));
+        }
+    }
+}
+
+void fn_80093AA8(void *arg0, void *arg1) {
+    extern u8 lbl_8045BBA0[];
+    M2C_UNK fn_80337008(void *, s32);
+    s32 n;
+    s32 i;
+
+    n = 0;
+    if (M2C_FIELD(arg1, s32 **, 0) != NULL) {
+        n = M2C_FIELD(arg1, s32 **, 0)[-1];
+    }
+    for (i = 0; i < n; i++) {
+        s32 v = *(s32 *)((u8 *)M2C_FIELD(arg1, s32 **, 0) + i * 0x20);
+        if (v != 0) {
+            fn_80337008(lbl_8045BBA0, v);
+        }
+    }
+}
+
 void fn_80093B1C(s32 arg0, void *arg1) {
     typedef struct {
         s32 unk0;
