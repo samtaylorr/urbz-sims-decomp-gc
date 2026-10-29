@@ -52,6 +52,14 @@ void fn_802423A8(void) {
     fn_802422FC();
 }
 
+f64 fn_80245904(f64 x, f64 y) {
+    u32 hx, hy;
+    do { union { f64 value; struct { u32 msw; u32 lsw; } parts; } gh_u; gh_u.value = x; hx = gh_u.parts.msw; } while (0);
+    do { union { f64 value; struct { u32 msw; u32 lsw; } parts; } gh_u; gh_u.value = y; hy = gh_u.parts.msw; } while (0);
+    do { union { f64 value; struct { u32 msw; u32 lsw; } parts; } sh_u; sh_u.value = x; sh_u.parts.msw = (hx & 0x7FFFFFFF) | (hy & 0x80000000); x = sh_u.value; } while (0);
+    return x;
+}
+
 f32 fn_80245954(f32 x, f32 y) {
     u32 ix, iy;
     do { union { f32 value; u32 word; } gf_u; gf_u.value = x; ix = gf_u.word; } while (0);
