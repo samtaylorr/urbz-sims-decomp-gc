@@ -73,6 +73,16 @@ void fn_8009D108(void *arg0, s32 arg1, s32 arg2) {
     }
 }
 
+void fn_8009D120(s32 *self, s32 a, s32 b, s32 c) {
+    self[2] = c;
+    self[0] = a;
+    self[1] = b;
+}
+
+void fn_8009D130(char *self, SimImgBlockE0 *src) {
+    *(SimImgBlockE0 *)(self + 0xE8) = *src;
+}
+
 void fn_8009E9A8(void) {
     M2C_UNK fn_8009E964(M2C_UNK, M2C_UNK);
     fn_8009E964(1, 0xFFFF);
