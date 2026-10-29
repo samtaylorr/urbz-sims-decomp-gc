@@ -160,12 +160,13 @@ void fn_8005B38C(void *arg0, s32 arg1) {
     void fn_8005AF5C(void *, s32);
     void fn_802CB8D4(void *);
     void *node;
+    void *obj;
     void *next;
 
     node = M2C_FIELD(arg0, void **, 4);
     while (BBI_ListValid(node)) {
-        void *obj = M2C_FIELD(node, void **, 0);
         next = M2C_FIELD(node, void **, 4);
+        obj = M2C_FIELD(node, void **, 0);
         if (M2C_FIELD(arg0, s32 *, 8) != 0 && obj != NULL) {
             fn_8005AF5C(obj, 3);
         }
