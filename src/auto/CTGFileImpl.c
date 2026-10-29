@@ -14,6 +14,27 @@ void fn_800C3E20(void **self, s32 flags) {
     }
 }
 
+extern u8 lbl_8040A7D8[];
+s32 fn_800C4050(void *self);
+
+void **fn_800C3E54(void **self) {
+    extern void fn_800F687C(void *, void *, s32);
+    *self = lbl_8040A7D8;
+    fn_800F687C(self + 1, self + 3, 0x104);
+    self[0x44] = 0;
+    return self;
+}
+
+void fn_800C3EA4(void **self, s32 flags) {
+    *self = lbl_8040A7D8;
+    if (self[0x44] != 0) {
+        fn_802D7F94(self[0x44]);
+    }
+    self[0x44] = 0;
+    fn_800C4050(self);
+    fn_800C3E20(self, flags);
+}
+
 s32 fn_800C3F08(void *arg0) {
     M2C_UNK fn_802D8040(s32, s32, M2C_UNK);
     s32 fn_802D80A8(s32);
@@ -112,30 +133,28 @@ void fn_800C41D8(char *self, void *buf) {
 }
 
 void fn_800C4210(char *self, f32 val) {
-    f32 tmp = val;
     char *vt = *(char **)self;
-    (*(void (**)(char *, void *, s32))(vt + 0x54))(self + *(s16 *)(vt + 0x50), &tmp, 4);
+    (*(void (**)(char *, void *, s32))(vt + 0x54))(self + *(s16 *)(vt + 0x50), &val, 4);
 }
 
 s32 fn_800C4250(char *self, char *buf) {
     u8 b;
     s32 len;
     char *vt = *(char **)self;
-    if ((*(s32 (**)(char *, void *))(vt + 0x5C))(self + *(s16 *)(vt + 0x58), &b) == 0) {
-        return 0;
-    }
-    if (b == 0xFF) {
+    if ((*(s32 (**)(char *, void *))(vt + 0x5C))(self + *(s16 *)(vt + 0x58), &b) != 0) {
+        if (b == 0xFF) {
+            vt = *(char **)self;
+            (*(s32 (**)(char *, void *))(vt + 0x6C))(self + *(s16 *)(vt + 0x68), &len);
+        } else {
+            len = b;
+        }
         vt = *(char **)self;
-        (*(s32 (**)(char *, void *))(vt + 0x6C))(self + *(s16 *)(vt + 0x68), &len);
-    } else {
-        len = b;
+        if ((*(s32 (**)(char *, void *, s32))(vt + 0x4C))(self + *(s16 *)(vt + 0x48), buf, len) != 0) {
+            buf[len] = 0;
+            return 1;
+        }
     }
-    vt = *(char **)self;
-    if ((*(s32 (**)(char *, void *, s32))(vt + 0x4C))(self + *(s16 *)(vt + 0x48), buf, len) == 0) {
-        return 0;
-    }
-    buf[len] = 0;
-    return 1;
+    return 0;
 }
 
 void fn_800C43D4(void *self) {
