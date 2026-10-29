@@ -152,6 +152,47 @@ s32 fn_8005A574(s32 *arg0) {
     return ret;
 }
 
+s32 fn_8005AB08(void *arg0) {
+    if (arg0 == NULL) {
+        return 0;
+    }
+    if (M2C_FIELD(arg0, s16 *, 0x50) == 0x200) {
+        return 3;
+    }
+    switch (M2C_FIELD(arg0, s16 *, 0x12)) {
+    case 4:
+    case 15:
+        return 1;
+    case 8:
+        return 2;
+    }
+    return 0;
+}
+
+void *fn_8005AB88(s32 arg0) {
+    extern char *lbl_80496650;
+    char *obj;
+    char *e;
+
+    if (lbl_80496650 != NULL) {
+        e = *(char **)lbl_80496650 + 0x138;
+        obj = (*(char *(**)(void *, s32))(e + 4))(lbl_80496650 + *(s16 *)e, arg0);
+    } else {
+        obj = NULL;
+    }
+    if (obj != NULL) {
+        e = *(char **)obj + 0x120;
+        return (*(void *(**)(void *))(e + 4))(obj + *(s16 *)e);
+    }
+    return NULL;
+}
+
+s32 *fn_8005ACE4(s32 *arg0) {
+    arg0[1] = 0;
+    arg0[0] = 0;
+    return arg0;
+}
+
 void *fn_8005ACF8(void *arg0, void *arg1) {
     extern char lbl_8045BBA0[];
     void fn_803374C8(void *, void *);
@@ -763,9 +804,11 @@ s32 fn_80061F9C(char *self) {
 
 void fn_80063054(void) {
     extern void fn_8005B71C(void *);
+    void *memset(void *, int, unsigned long);
     void *p;
 
-    p = BBI_AllocZero(0x660);
+    p = BBI_AllocAligned(0x660);
+    memset(p, 0, 0x660);
     fn_8005B71C(p);
 }
 
