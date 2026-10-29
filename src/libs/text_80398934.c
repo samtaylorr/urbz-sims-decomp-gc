@@ -5171,6 +5171,12 @@ static inline void Vec12_EraseRef(u8 **v, Vec12Elem *const *first, Vec12Elem *co
     v[1] = (u8 *)i;
 }
 
+static inline Elem12 *Elem12_Zero(Elem12 *p) {
+    extern void fn_80248488();
+    fn_80248488(p, 0, sizeof(*p));
+    return p;
+}
+
 void fn_803A8188(u8 **self, void *unused, void *stream, void *arg3) {
     extern void fn_8018D8DC(void *, s32 *, s32);
     extern void fn_80177470(void *, void *, void *);
@@ -5188,21 +5194,14 @@ void fn_803A8188(u8 **self, void *unused, void *stream, void *arg3) {
     d = size - n;
     if (d < 0) {
         Elem12 zero;
-        Elem12 *zp;
+        Elem12 *zp = &zero;
         s32 cnt = n - size;
-        fn_80248488(zp = &zero, 0, sizeof(zero));
+        fn_80248488(zp, 0, sizeof(zero));
         fn_803A7DD0(self, end, cnt, zp);
     } else if (d > 0) {
-        Elem12 *first = end - d;
-        Elem12 *src = end;
-        Elem12 *dst = first;
-        Elem12 *q;
-        while (src != (Elem12 *)self[1]) {
-            *dst++ = *src++;
-        }
-        for (q = dst; q != (Elem12 *)self[1]; q++) {
-        }
-        self[1] = (u8 *)dst;
+        Vec12Elem *first = (Vec12Elem *)self[1] - d;
+        Vec12Elem *last = (Vec12Elem *)self[1];
+        Vec12_EraseRef(self, &first, &last);
     }
     for (p = (Elem12 *)self[0]; p != (Elem12 *)self[1]; p++) {
         fn_80177470(p, stream, arg3);
