@@ -13,12 +13,12 @@ extern u8 lbl_80407300[];
 extern f32 lbl_803C4B90[];
 void fn_80024440(void *arg0);
 
-static inline void Lookup_U16(s32 id, u16 *out) {
+static inline void Lookup_U16(u16 id, u16 *out) {
     void *fn_80190AA4(s32, u32);
     extern s32 lbl_80496654;
     void *e;
 
-    if (lbl_80496654 != 0 && (u16)id <= 0xFFFAU) {
+    if (lbl_80496654 != 0 && id <= 0xFFFAU) {
         e = fn_80190AA4(lbl_80496654, id);
         if (e != NULL) {
             *out = M2C_FIELD(e, u16 *, 2);
