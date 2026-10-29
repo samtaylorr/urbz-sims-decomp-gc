@@ -39,6 +39,16 @@ void fn_8033FD44(s32 arg0, s32 arg1) {
     fn_802EE234(arg0, arg1);
 }
 
+void *fn_8033FD84(void) {
+    extern void *fn_8036BA10(s32);
+    extern void fn_8036B878(void *, s32);
+    extern u8 lbl_8041C628[];
+    u8 *self = fn_8036BA10(0x60);
+    fn_8036B878(self, 0x400);
+    *(void **)(self + 0x5C) = lbl_8041C628;
+    return self;
+}
+
 void fn_8033FDCC(void *unused, char *obj) {
     if (obj != NULL) {
         char *vt = *(char **)(obj + 0x5C);
