@@ -537,6 +537,9 @@ void fn_800945A0(void *arg0) {
 }
 
 extern f32 lbl_803CC9A4[];
+static inline s32 Field334_IsSet(void *obj) {
+    return M2C_FIELD(obj, s32 *, 0x334) != 0;
+}
 extern void fn_802EC15C(s32, s32, s32);
 extern void fn_802ED00C(s32, s32, s32);
 void fn_80094F44(void *arg0, s32 arg1, s32 arg2) {
