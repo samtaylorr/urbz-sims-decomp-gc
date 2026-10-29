@@ -84,6 +84,26 @@ s32 fn_8031322C(u32 n) {
     return c;
 }
 
+f32 fn_80313254(s32 n) {
+    extern const f32 lbl_803F2418[];
+    f32 r = lbl_803F2418[0];
+    s32 a;
+    s32 i;
+
+    if (n > 0) {
+        a = n;
+    } else {
+        a = -n;
+    }
+    for (i = 0; i < a; i++) {
+        r *= 2.0f;
+    }
+    if (n < 0) {
+        r = lbl_803F2418[0] / r;
+    }
+    return r;
+}
+
 void fn_80313298(s32 *p, s32 val, u32 size) {
     s32 *end = (s32 *)((u8 *)p + (size & ~3));
     while (p != end) {
