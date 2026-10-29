@@ -1,6 +1,14 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
-#include <stdarg.h>
+typedef struct __va_list_tag {
+    char gpr;
+    char fpr;
+    char *overflow_arg_area;
+    char *reg_save_area;
+} va_list[1];
+
+#define va_start(AP, LASTARG) \
+    (__builtin_next_arg(LASTARG), *(AP) = *(struct __va_list_tag *)__builtin_saveregs())
 
 void fn_80247D48(void);
 
@@ -45,11 +53,14 @@ void fn_802423A8(void) {
 }
 
 f32 fn_80245954(f32 x, f32 y) {
-    union { f32 f; u32 i; } ux, uy;
-    ux.f = x;
-    uy.f = y;
-    ux.i = (ux.i & 0x7FFFFFFF) | (uy.i & 0x80000000);
-    return ux.f;
+    union { f32 f; u32 i; } u;
+    u32 hx, hy;
+    u.f = x;
+    hx = u.i;
+    u.f = y;
+    hy = u.i;
+    u.i = (hx & 0x7FFFFFFF) | (hy & 0x80000000);
+    return u.f;
 }
 
 s32 fn_80245988(s32 c) {
