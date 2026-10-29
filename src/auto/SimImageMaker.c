@@ -104,8 +104,20 @@ void fn_8009D1EC(char *self, void *name) {
     }
 }
 
+void fn_8009E964(s32 arg0, s32 arg1) {
+    extern f32 lbl_803CD358[];
+    extern f32 lbl_803CD35C[];
+    extern f32 lbl_8042EFC4[];
+    if (arg1 == 0xFFFF && arg0 != 0) {
+        f32 v = lbl_803CD358[0];
+        lbl_8042EFC4[0] = v;
+        lbl_8042EFC4[1] = lbl_803CD35C[0];
+        lbl_8042EFC4[2] = v;
+        lbl_8042EFC4[3] = v;
+    }
+}
+
 void fn_8009E9A8(void) {
-    M2C_UNK fn_8009E964(M2C_UNK, M2C_UNK);
     fn_8009E964(1, 0xFFFF);
 }
 
