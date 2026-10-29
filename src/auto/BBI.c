@@ -27,6 +27,12 @@ static inline s32 BBI_ListValid(void *n) {
     return n != NULL;
 }
 
+static inline void BBI_InitRef(s32 *self, s32 v) {
+    self[2] = 0;
+    self[4] = 0;
+    self[3] = v;
+}
+
 static inline void *BBI_AllocZero(s32 size) {
     void *fn_80248488(void *, s32, u32);
     void *p = BBI_AllocAligned(size);
@@ -152,14 +158,14 @@ s32 fn_8005A574(s32 *arg0) {
     return ret;
 }
 
-void *fn_8005ACF8(void *arg0, s32 arg1) {
+void *fn_8005ACF8(s32 *arg0, s32 arg1) {
     extern char lbl_8045BBA0[];
     void fn_803374C8(void *);
     void fn_8005AD4C(void *);
 
-    M2C_FIELD(arg0, s32 *, 0xC) = arg1;
-    M2C_FIELD(arg0, s32 *, 8) = 0;
-    M2C_FIELD(arg0, s32 *, 0x10) = 0;
+    arg0[2] = 0;
+    arg0[4] = 0;
+    arg0[3] = arg1;
     fn_803374C8(lbl_8045BBA0);
     fn_8005AD4C(arg0);
     return arg0;
