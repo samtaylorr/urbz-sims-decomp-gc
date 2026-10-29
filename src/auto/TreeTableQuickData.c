@@ -58,6 +58,14 @@ static inline void TTQD_DtorBody(s32 *self) {
     TTQDPtrVec_Clear((TTQDPtrVec *)(self + 2));
 }
 
+static inline void TTQD_DtorVecs(s32 *self, TTQDPtrVec *a, TTQDPtrVec *b) {
+    extern u8 lbl_80415928[];
+    self[0] = (s32)lbl_80415928;
+    self[1] = 0;
+    TTQDPtrVec_Clear(a);
+    TTQDPtrVec_Dtor(b);
+}
+
 static inline void TTQD_Dtor(s32 *self) {
     TTQDPtrVec *vec = (TTQDPtrVec *)(self + 2);
     TTQD_DtorBody(self);
