@@ -18,6 +18,15 @@ static inline void *PtrVec_At(PtrVec *v, u32 i) {
     return v->begin[i];
 }
 
+void fn_8008CA7C(char *self, s32 arg1) {
+    extern char lbl_80409BF8[];
+    void fn_8008CC24(void *);
+    void fn_80307364(void *, s32);
+    *(char **)(self + 0x44) = lbl_80409BF8;
+    fn_8008CC24(self);
+    fn_80307364(self, arg1);
+}
+
 void fn_8008CD40(void) {
     fn_803073C4();
 }
