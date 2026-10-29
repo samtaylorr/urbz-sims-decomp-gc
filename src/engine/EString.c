@@ -1741,6 +1741,25 @@ void fn_802D65B8(s32 *arg0) {
     fn_802D6074(arg0, '\\');
 }
 
+void fn_802D6610(s32 *arg0) {
+    s32 *fn_802D5D08(s32 *, s32 *, s32);
+    u16 *str;
+    s32 tmp;
+    s32 *p;
+    s32 *q;
+    s32 n;
+
+    n = ((s32 (*)(s32 *))fn_802D58E4)(arg0);
+    if (n <= 3) return;
+    str = (u16 *)*arg0;
+    if (str[n - 1] != '\\') return;
+    p = &tmp;
+    q = p;
+    fn_802D5D08(p, arg0, n - 1);
+    fn_802D57BC(arg0, (u16 *)tmp);
+    fn_802D5254(q, tmp);
+}
+
 s32 *fn_802D6688(s32 *arg0, s32 *arg1) {
     void fn_802D56C4(s32 *, u16 *);
     u16 *fn_803BA3EC(s32 *);
@@ -1755,6 +1774,27 @@ s32 *fn_802D6688(s32 *arg0, s32 *arg1) {
         fn_802D5C88(arg0, arg1, i2 + 1, -1);
     } else {
         fn_802D56C4(arg0, fn_803BA3EC(arg1));
+    }
+    return arg0;
+}
+
+s32 *fn_802D6820(s32 *arg0, s32 *arg1) {
+    extern char lbl_803F033C[];
+    s32 *fn_802D5D08(s32 *, s32 *, s32);
+    void fn_802D544C(s32 *, char *);
+    s32 i1;
+    s32 i2;
+
+    i1 = fn_802D628C((u16 **)arg1, '\\');
+    if (i1 == -1) {
+        i2 = fn_802D628C((u16 **)arg1, ':');
+        if (i2 == -1) {
+            fn_802D544C(arg0, lbl_803F033C);
+        } else {
+            fn_802D5D08(arg0, arg1, i2 + 1);
+        }
+    } else {
+        fn_802D5D08(arg0, arg1, i1 + 1);
     }
     return arg0;
 }
