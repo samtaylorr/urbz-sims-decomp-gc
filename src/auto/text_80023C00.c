@@ -13,13 +13,12 @@ extern u8 lbl_80407300[];
 extern f32 lbl_803C4B90[];
 void fn_80024440(void *arg0);
 
-static inline void Lookup_U16(u32 id, u16 *out) {
+static inline void Lookup_U16(s32 id, u16 *out) {
     void *fn_80190AA4(s32, u32);
     extern s32 lbl_80496654;
     void *e;
 
-    id &= 0xFFFFU;
-    if (lbl_80496654 != 0 && id <= 0xFFFAU) {
+    if (lbl_80496654 != 0 && (u16)id <= 0xFFFAU) {
         e = fn_80190AA4(lbl_80496654, id);
         if (e != NULL) {
             *out = M2C_FIELD(e, u16 *, 2);
@@ -116,6 +115,8 @@ void fn_8002510C(u8 *arg0) {
     extern f32 lbl_803C4D04[];
     f32 v[2];
     f32 *p;
+    u32 lo;
+    u32 hi;
 
     M2C_FIELD(arg0, s32 *, 0xFC) = 1;
     M2C_FIELD(arg0, s32 *, 0xF8) = 0;
@@ -125,7 +126,10 @@ void fn_8002510C(u8 *arg0) {
     p[1] = lbl_803C4D04[0];
     v[0] = lbl_803C4D04[0];
     M2C_FIELD(arg0, u32 *, 0x104) = 0xFF6EE7FA;
-    *(u64 *)(arg0 + 0x108) = *(u64 *)(void *)p;
+    lo = *(u32 *)(void *)&v[0];
+    hi = *(u32 *)(void *)&p[1];
+    M2C_FIELD(arg0, u32 *, 0x108) = lo;
+    M2C_FIELD(arg0, u32 *, 0x10C) = hi;
 }
 
 void fn_80025E60(u8 *arg0) {
@@ -482,11 +486,9 @@ void fn_8002AECC(void *arg0) {
 }
 
 void fn_8002B464(s32 arg0, s32 arg1, u16 *arg2, u16 *arg3) {
-    u32 id = arg0;
-
     *arg3 = arg0;
     *arg2 = arg0;
-    Lookup_U16(id, arg3);
+    Lookup_U16(arg0, arg3);
 }
 
 f32 fn_8002B6D0(void *arg0, s32 arg1) {
