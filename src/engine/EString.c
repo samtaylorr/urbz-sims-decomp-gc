@@ -1469,6 +1469,20 @@ s32 *fn_802D5D80(s32 *arg0, s32 *arg1, s32 arg2) {
     return arg0;
 }
 
+s32 *fn_802D5DD4(s32 *arg0, char *arg1) {
+    M2C_UNK fn_802D50BC(s32, s32, s32);
+    register s32 *p asm("r3");
+    register s32 *q asm("r29");
+    s32 tmp;
+
+    p = &tmp;
+    q = p;
+    fn_802D50BC((s32)p, *arg0, (s32)arg1);
+    fn_802D57BC(arg0, (u16 *)tmp);
+    fn_802D5254(q, tmp);
+    return arg0;
+}
+
 s32 fn_802D5E2C(s32 arg0, s32 *arg1, u16 arg2) {
     M2C_UNK fn_802D50BC(s32, s32, s32);
     u16 buf[2];
@@ -1746,18 +1760,15 @@ void fn_802D6610(s32 *arg0) {
     u16 *str;
     s32 tmp;
     s32 *p;
-    s32 *q;
     s32 n;
 
     n = ((s32 (*)(s32 *))fn_802D58E4)(arg0);
     if (n <= 3) return;
     str = (u16 *)*arg0;
     if (str[n - 1] != '\\') return;
-    p = &tmp;
-    q = p;
-    fn_802D5D08(p, arg0, n - 1);
+    fn_802D5D08(p = &tmp, arg0, n - 1);
     fn_802D57BC(arg0, (u16 *)tmp);
-    fn_802D5254(q, tmp);
+    fn_802D5254(p, tmp);
 }
 
 s32 *fn_802D6688(s32 *arg0, s32 *arg1) {
