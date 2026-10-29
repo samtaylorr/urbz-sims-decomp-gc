@@ -24,6 +24,11 @@ s32 fn_80374B94(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     return (arg1 * temp_r0 * M2C_FIELD(arg0, s32 *, 0x88)) + (arg2 * temp_r0) + arg3;
 }
 
+void fn_8037573C(void *arg0, void *arg1) {
+    extern void fn_80248A10(void *, void *, s32);
+    fn_80248A10(arg0, arg1, 0x80);
+}
+
 void fn_80375760(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x80) = arg1;
 }
