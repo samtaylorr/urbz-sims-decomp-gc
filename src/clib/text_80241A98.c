@@ -53,14 +53,11 @@ void fn_802423A8(void) {
 }
 
 f32 fn_80245954(f32 x, f32 y) {
-    union { f32 f; u32 i; } u;
-    u32 hx, hy;
-    u.f = x;
-    hx = u.i;
-    u.f = y;
-    hy = u.i;
-    u.i = (hx & 0x7FFFFFFF) | (hy & 0x80000000);
-    return u.f;
+    u32 ix, iy;
+    do { union { f32 value; u32 word; } gf_u; gf_u.value = x; ix = gf_u.word; } while (0);
+    do { union { f32 value; u32 word; } gf_u; gf_u.value = y; iy = gf_u.word; } while (0);
+    do { union { f32 value; u32 word; } sf_u; sf_u.word = (ix & 0x7FFFFFFF) | (iy & 0x80000000); x = sf_u.value; } while (0);
+    return x;
 }
 
 s32 fn_80245988(s32 c) {
