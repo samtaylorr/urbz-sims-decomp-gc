@@ -31,6 +31,15 @@ s32 fn_800C3F6C(void) {
     return 0;
 }
 
+s32 fn_800C3F74(void *self, void *buf, s32 size) {
+    s32 fn_802D7FC8(void *, s32, s32, s32);
+    s32 f = M2C_FIELD(self, s32 *, 0x110);
+    if (f == 0) {
+        return 0;
+    }
+    return fn_802D7FC8(buf, 1, size, f);
+}
+
 s32 fn_800C3FAC(void) {
     return 0;
 }
