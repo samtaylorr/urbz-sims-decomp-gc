@@ -522,6 +522,11 @@ s32 fn_8024A8AC(s32 fd, u8 *src, u32 n, s32 flush) {
     return i;
 }
 
+void fn_8024A980(s32 arg0, s32 arg1, s32 arg2) {
+    void fn_8024A9BC(s32, ...);
+    fn_8024A9BC(*(s32 *)(arg0 + 0x5c), arg0, arg1, arg2);
+}
+
 void fn_8024BE60(s32 arg0, s32 arg1, s32 arg2) {
     extern s32 lbl_80494988;
     void fn_8024BCB0(s32, s32, s32, s32);
