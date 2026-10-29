@@ -5518,6 +5518,13 @@ s32 fn_803AB714(s32 arg0, s32 arg1) {
     return 1;
 }
 
+s32 fn_803AB754(s32 arg0, s32 arg1) {
+    s32 fn_800F69E8(s32);
+    void fn_800F69F8(s32, s32);
+    fn_800F69F8(arg0 + 4, fn_800F69E8(arg1));
+    return 1;
+}
+
 void fn_80197B90(void);
 void fn_803AB794(void) {
     fn_80197B90();
