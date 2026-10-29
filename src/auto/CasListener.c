@@ -45,25 +45,31 @@ static inline CasIter *CasIter_begin(CasIter *p, void *list) {
     return p;
 }
 
+static inline s32 CasIter_init(CasIter *it, void *list) {
+    extern void fn_80151048(void *, void *, s32);
+    fn_80151048(it, list, 0);
+    return it->cur != NULL;
+}
+
 s32 fn_801B7C98(void *arg0, void *arg1, s32 arg2) {
     typedef struct { s16 delta; s16 idx; s32 (*fn)(void *); } VtEnt;
     extern u8 *lbl_80496658;
     extern void fn_80151110(void *);
+    VtEnt *e;
     CasIter iter;
     CasIter *p;
-    VtEnt *e;
-    CasVtEnt2 *e2;
+    CasIter *q;
 
     e = (VtEnt *)(*(u8 **)lbl_80496658 + 0xE8);
     if ((e->fn(lbl_80496658 + e->delta) & 0x21) != 1) {
         return 0;
     }
     if (arg2 != 0) {
-        CasIter_begin(&iter, arg1);
-        if (iter.cur != NULL) {
-            p = &iter;
+        q = CasIter_begin(&iter, arg1);
+        p = q;
+        if (q->cur != NULL) {
             do {
-                e2 = (CasVtEnt2 *)(*(u8 **)(p->cur + 4) + 0x220);
+                CasVtEnt2 *e2 = (CasVtEnt2 *)(*(u8 **)(p->cur + 4) + 0x220);
                 if ((e2->fn(p->cur + e2->delta, 0x2A) ^ 1) & 1) {
                     return 0;
                 }
@@ -245,6 +251,7 @@ s32 fn_801BD6DC(s32 arg0) {
     typedef struct { s16 delta; s16 idx; s32 (*fn)(void *, s32); } VtEnt;
     typedef struct { s16 delta; s16 idx; void (*fn)(void *, void *, s32); } VtEnt2;
     extern u8 *lbl_80496658;
+    extern void fn_801910C8(void *, s32, u16 **, void *, void *, void *);
     extern s32 fn_801A08DC(void *, s32);
     extern void fn_801A0858(void *, s32);
     u8 *obj = lbl_80496658;
@@ -263,7 +270,8 @@ s32 fn_801BD6DC(s32 arg0) {
         return 0;
     }
     if (ret == 0xFFFB) {
-        CasLookup(arg0, &a, &b, &c, &d);
+        u16 *p;
+        fn_801910C8(lbl_80496654, arg0, &a, &b, &c, &d);
         {
             VtEnt2 *e = (VtEnt2 *)(*(u8 **)obj + 0xA8);
             e->fn(buf, obj + e->delta, arg0);
@@ -271,8 +279,10 @@ s32 fn_801BD6DC(s32 arg0) {
         if (fn_801A08DC(buf, 0x20) == 0) {
             fn_801A08DC(buf, 0x10);
         }
-        ret = *a;
+        p = a;
+        ret = *p;
         fn_801A0858(buf, 2);
+        return ret;
     }
     return ret;
 }
