@@ -63,6 +63,22 @@ void fn_8033FE0C(void) {
     fn_80348F08(lbl_8045F980, 2);
 }
 
+void *fn_8033FE38(void *unused, s32 arg1) {
+    extern void *fn_802D1FC8(s32);
+    extern void *fn_80348ECC(void *);
+    extern void fn_80246D44(void (*)(void));
+    extern s32 lbl_8049628C;
+    if (arg1 == 1) {
+        return fn_80348ECC(fn_802D1FC8(0x6C));
+    }
+    if (lbl_8049628C == 0) {
+        fn_80348ECC(lbl_8045F980);
+        lbl_8049628C = 1;
+        fn_80246D44(fn_8033FE0C);
+    }
+    return lbl_8045F980;
+}
+
 void fn_8033FEA0(void *unused, char *obj, s32 flag) {
     if (flag == 1 && obj != NULL) {
         char *vt = *(char **)(obj + 0x68);
