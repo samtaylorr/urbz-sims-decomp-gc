@@ -27,6 +27,13 @@ static inline void *PlumbBob_AllocAligned(u32 size) {
     return p;
 }
 
+void fn_8008A7A4(s32 *arg0);
+
+static inline void PlumbBob_ResetRef(s32 *ref) {
+    fn_8008A7A4(ref + 1);
+    *ref = 0;
+}
+
 extern void fn_80307364(void *);
 void fn_8006A194(void *arg0);
 extern s32 *lbl_80491F0C[];
@@ -2494,13 +2501,7 @@ static inline void Mtx34_Zero(f32 *m, f32 z) {
 
 void fn_80089650(f32 *arg0) {
     extern f32 lbl_803CBD00[];
-    f32 z = lbl_803CBD00[0];
-    Vec3_Set(arg0, z, z, z);
-    Vec3_Set(arg0 + 3, z, z, z);
-    Vec3_Set(arg0 + 6, z, z, z);
-    arg0[9] = z;
-    arg0[10] = z;
-    arg0[11] = z;
+    Mtx34_Zero(arg0, lbl_803CBD00[0]);
 }
 
 extern void fn_802D20E8(void *);
@@ -2705,10 +2706,9 @@ void fn_8008AB4C(void *arg0) {
     void fn_8031EA2C(void *);
     void fn_8008AFC0(void *);
     struct { char pad[0x15C]; void *a; s32 an; void *b; s32 bn; char pad2[0x10]; s32 x; s32 y; } *self = arg0;
-    s32 *y = &self->y;
 
-    fn_8008A7A4(y);
-    y[-1] = 0;
+    fn_8008A7A4(&self->y);
+    ((s32 *)arg0)[0x5F] = 0;
     if (self->a != NULL) {
         fn_8031EA2C(self->a);
         self->a = NULL;
