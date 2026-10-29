@@ -2490,7 +2490,9 @@ static inline void Vec3_Set(f32 *v, f32 x, f32 y, f32 z) {
     v[0] = x;
 }
 
-static inline void Mtx34_Zero(f32 *m, f32 z) {
+extern f32 lbl_803CBD00[];
+static inline void Mtx34_Zero(f32 *m) {
+    f32 z = lbl_803CBD00[0];
     Vec3_Set(m, z, z, z);
     Vec3_Set(m + 3, z, z, z);
     Vec3_Set(m + 6, z, z, z);
@@ -2500,8 +2502,7 @@ static inline void Mtx34_Zero(f32 *m, f32 z) {
 }
 
 void fn_80089650(f32 *arg0) {
-    extern f32 lbl_803CBD00[];
-    Mtx34_Zero(arg0, lbl_803CBD00[0]);
+    Mtx34_Zero(arg0);
 }
 
 extern void fn_802D20E8(void *);
