@@ -45,10 +45,10 @@ static inline CasIter *CasIter_begin(CasIter *p, void *list) {
     return p;
 }
 
-static inline s32 CasIter_init(CasIter *it, void *list) {
+static inline u8 *CasIter_init(CasIter *it, void *list) {
     extern void fn_80151048(void *, void *, s32);
     fn_80151048(it, list, 0);
-    return it->cur != NULL;
+    return it->cur;
 }
 
 s32 fn_801B7C98(void *arg0, void *arg1, s32 arg2) {
@@ -58,16 +58,14 @@ s32 fn_801B7C98(void *arg0, void *arg1, s32 arg2) {
     VtEnt *e;
     CasIter iter;
     CasIter *p;
-    CasIter *q;
 
     e = (VtEnt *)(*(u8 **)lbl_80496658 + 0xE8);
     if ((e->fn(lbl_80496658 + e->delta) & 0x21) != 1) {
         return 0;
     }
     if (arg2 != 0) {
-        q = CasIter_begin(&iter, arg1);
-        p = q;
-        if (q->cur != NULL) {
+        if (CasIter_init(&iter, arg1)) {
+            p = &iter;
             do {
                 CasVtEnt2 *e2 = (CasVtEnt2 *)(*(u8 **)(p->cur + 4) + 0x220);
                 if ((e2->fn(p->cur + e2->delta, 0x2A) ^ 1) & 1) {
@@ -254,13 +252,13 @@ s32 fn_801BD6DC(s32 arg0) {
     extern void fn_801910C8(void *, s32, u16 **, void *, void *, void *);
     extern s32 fn_801A08DC(void *, s32);
     extern void fn_801A0858(void *, s32);
-    u8 *obj = lbl_80496658;
-    s32 ret;
-    u8 buf[0x38];
     u16 *a;
     s32 b;
     s32 c;
     s32 d;
+    u8 buf[0x38];
+    s32 ret;
+    u8 *obj = lbl_80496658;
 
     {
         VtEnt *e = (VtEnt *)(*(u8 **)obj + 0xD8);
@@ -270,8 +268,8 @@ s32 fn_801BD6DC(s32 arg0) {
         return 0;
     }
     if (ret == 0xFFFB) {
-        u16 *p;
-        fn_801910C8(lbl_80496654, arg0, &a, &b, &c, &d);
+        s32 id = arg0;
+        fn_801910C8(lbl_80496654, id, &a, &b, &c, &d);
         {
             VtEnt2 *e = (VtEnt2 *)(*(u8 **)obj + 0xA8);
             e->fn(buf, obj + e->delta, arg0);
@@ -279,10 +277,8 @@ s32 fn_801BD6DC(s32 arg0) {
         if (fn_801A08DC(buf, 0x20) == 0) {
             fn_801A08DC(buf, 0x10);
         }
-        p = a;
-        ret = *p;
+        ret = *a;
         fn_801A0858(buf, 2);
-        return ret;
     }
     return ret;
 }
