@@ -54,6 +54,13 @@ void fn_8033FEEC(void) {
     fn_80360C04();
 }
 
+void fn_8033FF20(void *unused, char *obj) {
+    if (obj != NULL) {
+        char *vt = *(char **)(obj + 0x24);
+        (*(void (**)(void *, s32))(vt + 0xC))(obj + *(s16 *)(vt + 0x8), 3);
+    }
+}
+
 extern u8 lbl_8045BAE8[];
 extern void *fn_80338000(void *, s32, s32);
 extern void fn_80360C04(void);
