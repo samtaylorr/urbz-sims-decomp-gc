@@ -46,6 +46,14 @@ void fn_8033FE0C(void) {
     fn_80348F08(lbl_8045F980, 2);
 }
 
+void fn_8033FEEC(void) {
+    extern u8 lbl_8045BAE8[];
+    extern void *fn_80338000(void *, s32, s32);
+    extern void fn_80360C04(void);
+    fn_80338000(lbl_8045BAE8, 0x2C, 4);
+    fn_80360C04();
+}
+
 extern u8 lbl_8045BAE8[];
 extern void *fn_80338000(void *, s32, s32);
 extern void fn_80360C04(void);
