@@ -5202,6 +5202,27 @@ void fn_803A8188(u8 **self, void *unused, void *stream, void *arg3) {
     }
 }
 
+void fn_803A8750(void *self) {
+    extern void fn_803997AC(void *, u32);
+    struct LNode {
+        struct LNode *next;
+        struct LNode *prev;
+    } **list = (struct LNode **)self;
+    struct LNode *n;
+    struct LNode *cur;
+
+    n = list[1]->next;
+    while (n != list[1]) {
+        cur = n;
+        n = n->next;
+        if (cur != NULL) {
+            fn_803997AC(cur, 0x24);
+        }
+    }
+    list[1]->next = list[1];
+    list[1]->prev = list[1];
+}
+
 void fn_803A87BC(void *arg0, void *arg1, void *arg2) {
     void **temp_r9;
 
