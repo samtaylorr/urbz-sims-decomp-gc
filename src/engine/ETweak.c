@@ -68,10 +68,7 @@ f32 fn_803132BC(f32 cur, f32 target, f32 rate, f32 eps) {
     }
     r = (cur - target) * t + target;
     d = r - cur;
-    if (d < lbl_803F2420[0]) {
-        d = -d;
-    }
-    if (d < eps) {
+    if ((d >= lbl_803F2420[0] ? d : -d) < eps) {
         return cur;
     }
     return r;
