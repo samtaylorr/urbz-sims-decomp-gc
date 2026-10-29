@@ -778,6 +778,22 @@ void fn_800F80B4(s16 *arg0) {
     arg0[1] = a;
 }
 
+void fn_800F810C(u8 *p) {
+    u8 t = p[1];
+    p[1] = p[0];
+    p[0] = t;
+}
+
+s32 fn_800F8120(u16 *s) {
+    s32 n = 0;
+
+    while (*s != 0) {
+        s++;
+        n++;
+    }
+    return n;
+}
+
 s32 fn_800F86C8(void *arg0, s32 arg1) {
     s32 temp_r9;
     s32 var_r3;
