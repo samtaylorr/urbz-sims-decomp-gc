@@ -110,6 +110,25 @@ void fn_800245B0(void) {
     lbl_80493FA0 = fn_800245DC();
 }
 
+void fn_80025E60(u8 *arg0) {
+    extern s32 lbl_80494EB8;
+    u8 *a;
+    void *p;
+
+    a = M2C_FIELD(arg0, u8 **, 0x48);
+    p = M2C_FIELD(M2C_FIELD(a, u8 **, 0x10), void **, 8);
+    if (p != NULL) {
+        u8 *vt = M2C_FIELD(arg0, u8 **, 0x44);
+        M2C_FIELD(vt, void (**)(void *, void *), 0xA4)(arg0 + M2C_FIELD(vt, s16 *, 0xA0), *(void **)p);
+    } else {
+        u8 *vt = M2C_FIELD(arg0, u8 **, 0x44);
+        M2C_FIELD(vt, void (**)(void *, void *), 0xA4)(arg0 + M2C_FIELD(vt, s16 *, 0xA0), *(void **)M2C_FIELD(arg0, void **, 0));
+    }
+    if (lbl_80494EB8 != 0) {
+        ((void (*)(void))lbl_80494EB8)();
+    }
+}
+
 void fn_80025EE8(u8 *arg0) {
     extern s32 lbl_80494EB8;
     u8 *a;
