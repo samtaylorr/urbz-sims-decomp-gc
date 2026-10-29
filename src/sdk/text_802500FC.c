@@ -90,6 +90,10 @@ void fn_80251884(s32 arg0) {
     lbl_804949A8 = arg0;
 }
 
+void fn_80251DC4(void) {
+    __isync();
+}
+
 void fn_80251E98(void) {
     M2C_UNK fn_80251DCC();
     s32 fn_8025465C();
@@ -199,6 +203,23 @@ void fn_802522AC(void) {
     __sync();
     fn_8024FF90(fn_8024FF88() & ~0x80000000);
     __sync();
+}
+
+void fn_802522DC(void) {
+    u32 fn_8024FF88(void);
+    void fn_8024FF90(u32);
+    void fn_8025F920(const char *fmt, ...);
+
+    __sync();
+    fn_8024FF90(fn_8024FF88() & ~0x80000000);
+    __sync();
+    fn_8024FF90(fn_8024FF88() | 0x00200000);
+    while (fn_8024FF88() & 0x00000001) {
+    }
+    fn_8024FF90(fn_8024FF88() & ~0x00200000);
+    while (fn_8024FF88() & 0x00000001) {
+        fn_8025F920(">>> L2 INVALIDATE : SHOULD NEVER HAPPEN\n");
+    }
 }
 
 s32 fn_80252900(void) {
