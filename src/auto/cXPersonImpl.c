@@ -55,11 +55,9 @@ static inline void cXPersonImpl_ResVec_Setup(cXPersonImpl_ResVec *v, s32 line) {
     fn_801181F8(v, lbl_804944B0, line);
 }
 
-static inline void cXPersonImpl_ResVec_Init(cXPersonImpl_ResVec *vec, s32 line) {
+static inline void cXPersonImpl_ResVec_Init(s32 i, cXPersonImpl_ResVec *v, s32 line) {
     cXPersonImpl_Res *r;
-    s32 i;
-    cXPersonImpl_ResVec *v = vec;
-    for (i = 0; i < v->count; i++) {
+    for (; i < v->count; i++) {
         fn_80186224(&v->data[i], 8);
         r = &v->data[i];
         r->unk10 = lbl_803F6780[i];
@@ -97,8 +95,21 @@ void fn_80176ED8(void) {
     extern u8 lbl_8043522C[];
 
     if (lbl_80494518 == 0) {
-        cXPersonImpl_ResVec_Init((cXPersonImpl_ResVec *)lbl_80435198, 0x1f6);
-        cXPersonImpl_ResVec_Init((cXPersonImpl_ResVec *)lbl_8043522C, 0x1f8);
+        s32 i;
+        cXPersonImpl_ResVec *v;
+        cXPersonImpl_Res *r;
+        for (i = 0, v = (cXPersonImpl_ResVec *)lbl_80435198; i < v->count; i++) {
+            fn_80186224(&v->data[i], 8);
+            r = &v->data[i];
+            r->unk10 = lbl_803F6780[i];
+        }
+        fn_801181F8(v, lbl_804944B0, 0x1f6);
+        for (i = 0, v = (cXPersonImpl_ResVec *)lbl_8043522C; i < v->count; i++) {
+            fn_80186224(&v->data[i], 8);
+            r = &v->data[i];
+            r->unk10 = lbl_803F6780[i];
+        }
+        fn_801181F8(v, lbl_804944B0, 0x1f8);
         lbl_80494518 = 1;
     }
 }
