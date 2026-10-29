@@ -359,6 +359,7 @@ void fn_800935A0(void *arg0, f32 *a, f32 *out) {
 }
 
 void fn_80093A24(void *arg0, void *arg1) {
+    void fn_80093AA8(void *, void *);
     s32 n;
     s32 i;
 
@@ -377,17 +378,17 @@ void fn_80093A24(void *arg0, void *arg1) {
 void fn_80093AA8(void *arg0, void *arg1) {
     extern u8 lbl_8045BBA0[];
     M2C_UNK fn_80337008(void *, s32);
+    typedef struct { s32 v; s32 pad[7]; } Elem;
     s32 n;
     s32 i;
 
     n = 0;
-    if (M2C_FIELD(arg1, s32 **, 0) != NULL) {
-        n = M2C_FIELD(arg1, s32 **, 0)[-1];
+    if (M2C_FIELD(arg1, Elem **, 0) != NULL) {
+        n = ((s32 *)M2C_FIELD(arg1, Elem **, 0))[-1];
     }
     for (i = 0; i < n; i++) {
-        s32 v = *(s32 *)((u8 *)M2C_FIELD(arg1, s32 **, 0) + i * 0x20);
-        if (v != 0) {
-            fn_80337008(lbl_8045BBA0, v);
+        if (M2C_FIELD(arg1, Elem **, 0)[i].v != 0) {
+            fn_80337008(lbl_8045BBA0, M2C_FIELD(arg1, Elem **, 0)[i].v);
         }
     }
 }
