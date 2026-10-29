@@ -74,9 +74,9 @@ void fn_8009D108(void *arg0, s32 arg1, s32 arg2) {
 }
 
 void fn_8009D120(s32 *self, s32 a, s32 b, s32 c) {
-    self[2] = c;
     self[0] = a;
     self[1] = b;
+    self[2] = c;
 }
 
 void fn_8009D130(char *self, SimImgBlockE0 *src) {
