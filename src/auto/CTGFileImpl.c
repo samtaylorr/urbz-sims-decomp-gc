@@ -7,11 +7,6 @@ extern u8 lbl_803D04CC[];
 extern u8 lbl_80495A30[];
 extern void *fn_802D7F48(const char *, void *);
 extern void fn_802D7F94(void *);
-
-static inline void CTGFile_Write(char *self, void *buf, s32 size) {
-    char *vt = *(char **)self;
-    (*(void (**)(char *, void *, s32))(vt + 0x54))(self + *(s16 *)(vt + 0x50), buf, size);
-}
 void fn_800C3E20(void **self, s32 flags) {
     *self = lbl_8040A890;
     if (flags & 1) {
@@ -138,10 +133,7 @@ void fn_800C41D8(char *self, void *buf) {
 }
 
 void fn_800C4210(char *self, f32 val) {
-    f32 tmp;
-    char *vt = *(char **)self;
-    tmp = val;
-    (*(void (**)(char *, void *, s32))(vt + 0x54))(self + *(s16 *)(vt + 0x50), &tmp, 4);
+    CTGFile_Write(self, &val, 4);
 }
 
 s32 fn_800C4250(char *self, char *buf) {
