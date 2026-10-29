@@ -180,11 +180,11 @@ void *fn_8005AB88(s32 arg0) {
     } else {
         obj = NULL;
     }
-    if (obj != NULL) {
-        e = *(char **)obj + 0x120;
-        return (*(void *(**)(void *))(e + 4))(obj + *(s16 *)e);
+    if (obj == NULL) {
+        return NULL;
     }
-    return NULL;
+    e = *(char **)obj + 0x120;
+    return (*(void *(**)(void *))(e + 4))(obj + *(s16 *)e);
 }
 
 s32 *fn_8005ACE4(s32 *arg0) {
