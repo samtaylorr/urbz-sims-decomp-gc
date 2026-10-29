@@ -112,13 +112,13 @@ void fn_8031FD08(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
 
 void fn_8031FD64(void *self, s32 a1, s32 a2, u8 *buf, s32 size, s32 len) {
     s32 fn_80337CBC(s32, s32);
-    M2C_FIELD(self, s32 *, 0x30) = buf;
-    M2C_FIELD(self, s32 *, 0x14) = size;
     M2C_FIELD(self, s32 *, 0x2C) = 0;
     M2C_FIELD(self, s32 *, 0x3C) = 0;
     M2C_FIELD(self, u8 **, 0x34) = buf;
     M2C_FIELD(self, s32 *, 0x38) = size;
     M2C_FIELD(self, s32 *, 0x40) = 0;
+    M2C_FIELD(self, u8 **, 0x30) = buf;
+    M2C_FIELD(self, s32 *, 0x14) = size;
     if (len == -1) {
         M2C_FIELD(self, s32 *, 0x3C) = fn_80337CBC(a1, a2);
     } else {
