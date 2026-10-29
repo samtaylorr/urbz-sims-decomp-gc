@@ -7,6 +7,12 @@ typedef struct {
     s32 d;
 } FamilyQuad;
 
+void fn_80248488(void *, s32, s32);
+static inline void *HDD_Zero1C(void *p) {
+    fn_80248488(p, 0, 0x1C);
+    return p;
+}
+
 
 extern s32 lbl_80494F54;
 FamilyQuad *fn_80331EA4(FamilyQuad *q) {
@@ -170,7 +176,8 @@ void *fn_8033283C(void *arg0) {
     } while (--i != -1);
     M2C_FIELD(arg0, s32 *, 0x5C0) = 0;
     M2C_FIELD(arg0, s32 *, 0x5C4) = 1;
-    M2C_FIELD(arg0, s32 *, 0x5C8) = M2C_FIELD(arg0, s32 *, 0x5CC) = 0;
+    M2C_FIELD(arg0, s32 *, 0x5C8) = 0;
+    M2C_FIELD(arg0, s32 *, 0x5CC) = 0;
     fn_80248488((char *)arg0 + 0x5D0, 0, 0x1C);
     fn_80248488((char *)arg0 + 0x5EC, 0, 0x1C);
     fn_80248488((char *)arg0 + 0x608, 0, 0x1C);
