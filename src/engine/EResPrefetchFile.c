@@ -22,8 +22,8 @@ void *fn_8031FAA0(void *self) {
     extern u8 lbl_8041B718[];
     fn_802C5440(self);
     M2C_FIELD(self, void **, 0x28) = lbl_8041B718;
-    M2C_FIELD(self, s32 *, 0x2C) = 0;
     M2C_FIELD(self, s32 *, 0x30) = 0;
+    M2C_FIELD(self, s32 *, 0x2C) = 0;
     M2C_FIELD(self, s32 *, 0x34) = 0;
     M2C_FIELD(self, s32 *, 0x38) = 0;
     M2C_FIELD(self, s32 *, 0x3C) = 0;
