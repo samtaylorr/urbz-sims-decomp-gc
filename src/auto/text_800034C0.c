@@ -73,8 +73,8 @@ void fn_80004408(void) {
 
 void fn_80004E0C(void *self, s32 a, s32 b) {
     ((s32 *)self)[0x494 / 4] = 1;
-    ((s32 *)self)[0x49C / 4] = b;
     ((s32 *)self)[0x498 / 4] = a;
+    ((s32 *)self)[0x49C / 4] = b;
 }
 
 s32 fn_80005054(void *self, s32 *p) {
@@ -82,6 +82,31 @@ s32 fn_80005054(void *self, s32 *p) {
         *p = 0;
     }
     return *p;
+}
+
+s32 fn_80005078(void *self, s32 bits) {
+    s32 found = 0;
+    s32 i;
+
+    for (i = 0; i < 16; i++) {
+        if ((bits >> i) & 1) {
+            if (found) {
+                return 0;
+            }
+            found = 1;
+        }
+    }
+    return found;
+}
+
+void fn_800050C8(void *self) {
+    s32 i;
+
+    ((s32 *)self)[0x14 / 4] = 0;
+    ((s32 *)self)[0x18 / 4] = 0;
+    for (i = 5; i >= 0; i--) {
+        ((s16 *)((u8 *)self + 0x1C))[i] = 0;
+    }
 }
 
 s32 fn_800050F0(u8 *self) {
