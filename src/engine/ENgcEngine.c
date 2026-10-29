@@ -65,6 +65,28 @@ s32 fn_8033EC8C(void) {
     return lbl_80495004;
 }
 
+void fn_8033EF10(void) {
+    s32 fn_8025465C(void);
+    void fn_80254684(s32);
+    void fn_80259354(void *);
+    extern u8 lbl_8045D2E0[];
+    extern s32 lbl_80494FA0;
+    s32 enabled;
+
+    enabled = 1;
+    if (fn_8025465C() == 0) {
+        enabled = 0;
+    }
+    fn_80259354(lbl_8045D2E0);
+    if (lbl_80494FA0 > 0) {
+        lbl_80494FA0 -= 10;
+        if (lbl_80494FA0 < 0) {
+            lbl_80494FA0 = 0;
+        }
+    }
+    fn_80254684(enabled);
+}
+
 void fn_8033EF80(void) {
     volatile s32 i = 0;
     for (;;) {
