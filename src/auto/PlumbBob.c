@@ -2769,6 +2769,16 @@ void fn_8008B070(char *self, s32 arg1) {
     *(s32 *)(self + 0x210) = arg1;
 }
 
+void fn_8008B0D8(char *self, s32 arg1) {
+    extern void fn_8030AC1C(void *, s32, s32);
+    s32 i;
+
+    for (i = 0; i < *(s32 *)(self + 0x208); i++) {
+        fn_8030AC1C(((void **)(self + 0x200))[i], 4, arg1);
+        *(s32 *)(self + 0x21C) = arg1;
+    }
+}
+
 void fn_8008B420(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x158) = 1;
 }
