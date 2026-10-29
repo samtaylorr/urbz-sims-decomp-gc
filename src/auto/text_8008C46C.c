@@ -737,6 +737,13 @@ u8 fn_80096E60(f32 arg0) {
     return r;
 }
 
+s32 fn_800979EC(void *arg0) {
+    extern f32 lbl_803CCB58[];
+    char *obj = M2C_FIELD(arg0, char **, 4);
+    char *vt = M2C_FIELD(obj, char **, 4);
+    return M2C_FIELD(vt, f32 (**)(void *, s32), 0x5C)(obj + M2C_FIELD(vt, s16 *, 0x58), 5) < lbl_803CCB58[0];
+}
+
 extern void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
 extern void *fn_802D197C(void *, u32, s32);
