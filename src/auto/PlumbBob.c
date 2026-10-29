@@ -2512,15 +2512,21 @@ u8 *fn_80089BF4(u8 *self) {
     extern void fn_802E1BF4(void *);
     extern void fn_8008A3B8(void *);
     extern s32 fn_80049BFC(void *);
-    extern s32 fn_8033740C(void *, s32, s32, s32);
-    extern void fn_80320680(s32, s32, f32, f32);
-    extern void fn_803233D4(s32);
+    extern void *fn_8033740C(void *, s32, s32, s32);
+    extern void fn_80320680(void *, s32, f32, f32);
+    extern void fn_803233D4(void *);
+    void *r;
+    f32 a, b;
     *(u8 **)(self + 0x478) = lbl_80409BC0;
     fn_802E1BF4(self + 0x120);
     fn_8008A3B8(self);
-    *(s32 *)(self + 0x470) = 0;
-    fn_80320680(*(s32 *)(self + 0x470) = fn_8033740C(lbl_8045B634, fn_80049BFC(lbl_8041F94C), 0, 0), 1, lbl_803CBF6C[0], lbl_803CBF70[0]);
-    fn_803233D4(*(s32 *)(self + 0x470));
+    *(void **)(self + 0x470) = 0;
+    r = fn_8033740C(lbl_8045B634, fn_80049BFC(lbl_8041F94C), 0, 0);
+    a = lbl_803CBF6C[0];
+    b = lbl_803CBF70[0];
+    *(void **)(self + 0x470) = r;
+    fn_80320680(r, 1, a, b);
+    fn_803233D4(*(void **)(self + 0x470));
     *(s16 *)(self + 0x474) = -1;
     return self;
 }
@@ -2629,6 +2635,7 @@ void fn_8008A9A4(void) {
     void fn_8008B374(void *, s32);
     s32 fn_80049B6C(void *);
     void **p;
+    void *v;
 
     if (lbl_804966A4 == NULL) {
         lbl_804966A4 = fn_8008A7DC(fn_802D1FC8(0x220));
@@ -2642,11 +2649,13 @@ void fn_8008A9A4(void) {
             fn_8008B374(lbl_804966A8, 1);
         }
     }
-    for (p = &lbl_804966A4; p <= &lbl_804966A8; p++) {
-        if (*p != NULL) {
-            fn_8008AAA0(*p);
+    p = &lbl_804966A4;
+    do {
+        v = *p++;
+        if (v != NULL) {
+            fn_8008AAA0(v);
         }
-    }
+    } while ((s32)p <= (s32)&lbl_804966A8);
 }
 
 void fn_8008AA58(void) {
@@ -2655,11 +2664,13 @@ void fn_8008AA58(void) {
     void fn_8008AB4C(void *);
     void **p;
 
-    for (p = &lbl_804966A4; p <= &lbl_804966A8; p++) {
+    p = &lbl_804966A4;
+    do {
         if (*p != NULL) {
             fn_8008AB4C(*p);
         }
-    }
+        p++;
+    } while ((s32)p <= (s32)&lbl_804966A8);
 }
 
 void fn_8008AAA0(void *arg0) {
