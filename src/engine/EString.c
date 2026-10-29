@@ -2073,6 +2073,7 @@ void fn_802D787C(void *arg0, s32 arg1, f32 *arg2) {
 s32 fn_802D7D9C(s32 arg0, s32 arg1) {
     extern char lbl_80446F34[];
     extern char lbl_80446F54[];
+    void fn_802D23C0(void *, void *, s32, s32);
 
     if ((arg1 == 0xFFFF) && (arg0 != 0)) {
         u32 p = (u32)lbl_80446F54;
