@@ -2483,13 +2483,24 @@ static inline void Vec3_Set(f32 *v, f32 x, f32 y, f32 z) {
     v[0] = x;
 }
 
+static inline void Mtx34_Zero(f32 *m, f32 z) {
+    Vec3_Set(m, z, z, z);
+    Vec3_Set(m + 3, z, z, z);
+    Vec3_Set(m + 6, z, z, z);
+    m[9] = z;
+    m[10] = z;
+    m[11] = z;
+}
+
 void fn_80089650(f32 *arg0) {
     extern f32 lbl_803CBD00[];
     f32 z = lbl_803CBD00[0];
     Vec3_Set(arg0, z, z, z);
     Vec3_Set(arg0 + 3, z, z, z);
     Vec3_Set(arg0 + 6, z, z, z);
-    Vec3_Set(arg0 + 9, z, z, z);
+    arg0[9] = z;
+    arg0[10] = z;
+    arg0[11] = z;
 }
 
 extern void fn_802D20E8(void *);
@@ -2693,18 +2704,20 @@ void fn_8008AB00(void *arg0, s32 arg1) {
 void fn_8008AB4C(void *arg0) {
     void fn_8031EA2C(void *);
     void fn_8008AFC0(void *);
+    struct { char pad[0x15C]; void *a; s32 an; void *b; s32 bn; char pad2[0x10]; s32 x; s32 y; } *self = arg0;
+    s32 *y = &self->y;
 
-    fn_8008A7A4((s32 *)((char *)arg0 + 0x180));
-    M2C_FIELD(arg0, s32 *, 0x17C) = 0;
-    if (M2C_FIELD(arg0, void **, 0x15C) != NULL) {
-        fn_8031EA2C(M2C_FIELD(arg0, void **, 0x15C));
-        M2C_FIELD(arg0, s32 *, 0x15C) = 0;
-        M2C_FIELD(arg0, s32 *, 0x160) = 0;
+    fn_8008A7A4(y);
+    y[-1] = 0;
+    if (self->a != NULL) {
+        fn_8031EA2C(self->a);
+        self->a = NULL;
+        self->an = 0;
     }
-    if (M2C_FIELD(arg0, void **, 0x164) != NULL) {
-        fn_8031EA2C(M2C_FIELD(arg0, void **, 0x164));
-        M2C_FIELD(arg0, s32 *, 0x164) = 0;
-        M2C_FIELD(arg0, s32 *, 0x168) = 0;
+    if (self->b != NULL) {
+        fn_8031EA2C(self->b);
+        self->bn = 0;
+        self->b = NULL;
     }
     fn_8008AFC0(arg0);
 }
