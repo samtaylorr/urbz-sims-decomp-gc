@@ -2059,9 +2059,9 @@ void fn_8039CEA0(void **v, void **pos, u32 n, void *const *x) {
             u32 elems_after = old_finish - pos;
             if (elems_after > n) {
                 PtrVec_Copy(old_finish - n, old_finish, old_finish);
-                v[1] = (void **)v[1] + n;
+                v[1] = (void **)((char *)v[1] + n * sizeof(void *));
                 PtrVec_CopyBackward(pos, old_finish - n, old_finish);
-                PtrVec_Fill(pos, pos + n, &x_copy);
+                PtrVec_Fill(pos, (void **)((char *)pos + n * sizeof(void *)), &x_copy);
             } else {
                 PtrVec_FillN(old_finish, n - elems_after, &x_copy);
                 v[1] = (void **)v[1] + (n - elems_after);
@@ -3309,15 +3309,14 @@ void **fn_803A0A44(void **self, void **other) {
         u32 bytes;
         if (xlen > (u32)((void **)self[3] - (void **)self[0])) {
             void **tmp;
-            u32 size;
             if (xlen != 0) {
-                size = xlen * 4;
+                u32 size = xlen * 4;
+                bytes = size;
                 tmp = (void **)PtrVec_Allocate(size);
             } else {
                 tmp = NULL;
-                size = 0;
+                bytes = 0;
             }
-            bytes = size;
             PtrVec_Copy(start, finish, tmp);
             {
                 void **s = (void **)self[0];
@@ -5189,8 +5188,10 @@ void fn_803A8188(u8 **self, void *unused, void *stream, void *arg3) {
     d = size - n;
     if (d < 0) {
         Elem12 zero;
-        fn_80248488(&zero, 0, sizeof(zero));
-        fn_803A7DD0(self, end, n - size, &zero);
+        Elem12 *zp = &zero;
+        s32 cnt = n - size;
+        fn_80248488(zp, 0, sizeof(zero));
+        fn_803A7DD0(self, end, cnt, zp);
     } else if (d > 0) {
         Vec12Elem *first = (Vec12Elem *)self[1] - d;
         Vec12Elem *last = (Vec12Elem *)self[1];
@@ -5549,6 +5550,41 @@ void fn_803AB7D4(void **v, u32 n) {
             tmp = (void **)p;
         }
         PtrVec_Set(v, tmp, tmp + size, (void **)((char *)tmp + n * 4));
+    }
+}
+
+void *fn_803AB908(void *lo_, void *hi_, s32 key) {
+    struct Entry32 {
+        s32 unk0[5];
+        s16 key;
+        s16 unk16;
+        s32 unk18[2];
+    } *lo = lo_, *hi = hi_;
+
+    for (;;) {
+        s32 n = hi - lo;
+        struct Entry32 *mid;
+        s32 d;
+
+        if (n <= 0) {
+            return 0;
+        }
+        if (n == 1) {
+            if (lo->key == key) {
+                return lo;
+            }
+            return 0;
+        }
+        mid = lo + n / 2;
+        d = key - mid->key;
+        if (d == 0) {
+            return mid;
+        }
+        if (d > 0) {
+            lo = mid + 1;
+        } else {
+            hi = mid;
+        }
     }
 }
 
