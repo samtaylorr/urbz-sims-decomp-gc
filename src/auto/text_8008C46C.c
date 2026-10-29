@@ -541,7 +541,8 @@ static inline s32 Field334_IsSet(void *obj) {
     return M2C_FIELD(obj, s32 *, 0x334) != 0;
 }
 static inline s32 Field314_Get(void *arg0) {
-    if (Field334_IsSet(M2C_FIELD(arg0, void **, 8))) {
+    s32 set = Field334_IsSet(M2C_FIELD(arg0, void **, 8));
+    if (set) {
         return (s32)M2C_FIELD(arg0, void **, 8) + 0x314;
     }
     return (s32)M2C_FIELD(arg0, void **, 8) + 0x314;
@@ -550,9 +551,7 @@ extern void fn_802EC15C(s32, s32, s32);
 extern void fn_802ED00C(s32, s32, s32);
 void fn_80094F44(void *arg0, s32 arg1, s32 arg2) {
     extern void fn_802EC15C(s32, s32, s32);
-    fn_802EC15C(Field334_IsSet(M2C_FIELD(arg0, void **, 8)) ? (s32)M2C_FIELD(arg0, void **, 8) + 0x314
-                                                            : (s32)M2C_FIELD(arg0, void **, 8) + 0x314,
-                arg2, arg1);
+    fn_802EC15C(Field314_Get(arg0), arg2, arg1);
 }
 
 s32 fn_80095A44(void) {
