@@ -316,6 +316,13 @@ u16 fn_800F7350(s32 *self, s32 i) {
     return 0;
 }
 
+u16 *fn_800F73A4(s32 *self, s32 i) {
+    if (i >= 0 && i < fn_800F6FF4(self)) {
+        return (u16 *)fn_800F7138(self) + i;
+    }
+    return 0;
+}
+
 void fn_800F73F8(s32 *self) {
     s32 len = fn_800F6FF4(self);
     s32 i;
