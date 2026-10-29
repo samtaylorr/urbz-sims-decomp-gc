@@ -165,8 +165,22 @@ s32 fn_8005AB08(void *arg0) {
         return 1;
     case 8:
         return 2;
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 5:
+    case 6:
+    case 7:
+    case 9:
+    case 10:
+    case 11:
+    case 12:
+    case 13:
+    case 14:
+    default:
+        return 0;
     }
-    return 0;
 }
 
 void *fn_8005AB88(s32 arg0) {
