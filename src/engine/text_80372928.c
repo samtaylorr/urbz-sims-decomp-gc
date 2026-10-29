@@ -50,6 +50,15 @@ void fn_80372A2C(void **self, s32 flags) {
     }
 }
 
+void fn_80372A8C(void *self) {
+    extern u8 lbl_8045BBA0[];
+    void fn_80338184(void *, s32);
+    char *vt = *(char **)self;
+    (*(void (**)(void *))(vt + 0x6C))((char *)self + *(s16 *)(vt + 0x68));
+    fn_80338184(lbl_8045BBA0, M2C_FIELD(self, s32 *, 0x20));
+    M2C_FIELD(self, s32 *, 0x20) = 0;
+}
+
 void fn_80372AE4(void *arg0) {
     M2C_UNK fn_8031EA2C(void *);
     s32 *var_r31;
