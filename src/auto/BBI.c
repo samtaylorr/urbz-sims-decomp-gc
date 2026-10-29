@@ -156,6 +156,28 @@ void fn_8005B368(void) {
 
 }
 
+void fn_8005B38C(void *arg0, s32 arg1) {
+    void fn_8005AF5C(void *, s32);
+    void fn_802CB8D4(void *);
+    void *node;
+    void *next;
+
+    node = M2C_FIELD(arg0, void **, 4);
+    while (BBI_ListValid(node)) {
+        void *obj = M2C_FIELD(node, void **, 0);
+        next = M2C_FIELD(node, void **, 4);
+        if (M2C_FIELD(arg0, s32 *, 8) != 0 && obj != NULL) {
+            fn_8005AF5C(obj, 3);
+        }
+        node = next;
+    }
+    fn_802CB8D4(arg0);
+    fn_802CB8D4(arg0);
+    if (arg1 & 1) {
+        fn_802D20E8(arg0);
+    }
+}
+
 void fn_8005B67C(void) {
     fn_802D2FD0();
 }
@@ -210,19 +232,19 @@ void fn_8005BB38(void *arg0) {
 }
 
 void fn_8005CB90(void *arg0, void *arg1) {
+    s32 *p;
     s32 v;
-    void *p;
 
     if (arg1 == NULL) {
         return;
     }
+    p = (s32 *)((u8 *)arg0 + 0x400);
     v = M2C_FIELD(arg1, s32 *, 0x14);
-    if (M2C_FIELD(arg0, s32 *, 0x414) == v) {
+    if (p[5] == v) {
         return;
     }
-    M2C_FIELD(arg0, s32 *, 0x414) = v;
-    p = M2C_FIELD(arg0, void **, 0x440);
-    M2C_FIELD(p, s32 *, 0x9C) = v != 1;
+    p[5] = v;
+    M2C_FIELD(M2C_FIELD(arg0, void **, 0x440), s32 *, 0x9C) = v == 1;
 }
 
 void fn_8005CE50(char *self, s32 arg1) {
