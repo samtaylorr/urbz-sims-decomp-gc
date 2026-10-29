@@ -45,23 +45,29 @@ static inline CasIter *CasIter_begin(CasIter *p, void *list) {
     return p;
 }
 
+static inline u8 *CasIter_cur(CasIter *it) {
+    return it->cur;
+}
+
 s32 fn_801B7C98(void *arg0, void *arg1, s32 arg2) {
     typedef struct { s16 delta; s16 idx; s32 (*fn)(void *); } VtEnt;
     extern u8 *lbl_80496658;
     extern void fn_80151110(void *);
-    VtEnt *e;
     CasIter iter;
     CasIter *p;
+    VtEnt *e;
+    CasVtEnt2 *e2;
 
     e = (VtEnt *)(*(u8 **)lbl_80496658 + 0xE8);
     if ((e->fn(lbl_80496658 + e->delta) & 0x21) != 1) {
         return 0;
     }
     if (arg2 != 0) {
-        if (CasIter_init(&iter, arg1) != NULL) {
+        CasIter_begin(&iter, arg1);
+        if (iter.cur != NULL) {
             p = &iter;
             do {
-                CasVtEnt2 *e2 = (CasVtEnt2 *)(*(u8 **)(p->cur + 4) + 0x220);
+                e2 = (CasVtEnt2 *)(*(u8 **)(p->cur + 4) + 0x220);
                 if ((e2->fn(p->cur + e2->delta, 0x2A) ^ 1) & 1) {
                     return 0;
                 }
