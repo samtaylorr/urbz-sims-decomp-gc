@@ -43,6 +43,11 @@ void fn_802423A8(void) {
     fn_802422FC();
 }
 
+s32 fn_80245988(s32 c) {
+    extern const u8 lbl_803EBA39[];
+    return c[lbl_803EBA39] & 4;
+}
+
 s32 fn_80245A30(s32 self, s32 str) {
     extern char lbl_803EBB3C[];
     s32 fn_80248808(const char *);
