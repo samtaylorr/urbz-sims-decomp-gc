@@ -669,6 +669,14 @@ void fn_8010CA4C(void *arg0, s32 arg1) {
     }
 }
 
+void fn_8010CA98(void *arg0) {
+    extern s32 lbl_80495ADC;
+    void fn_800FF588(s32, s32, s32, s32, s32);
+    if (M2C_FIELD(arg0, s32 *, 0) != 0 && M2C_FIELD(arg0, s32 *, 8) != 0) {
+        fn_800FF588(lbl_80495ADC, 0x14, 0, 0, 0);
+    }
+}
+
 void fn_8010CD4C(void *arg0) {
     extern s32 lbl_80495ADC;
     void fn_800FF588(s32, s32, s32, s32, s32);
