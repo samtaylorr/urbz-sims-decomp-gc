@@ -94,9 +94,10 @@ void fn_80332228(void *arg0) {
     vt = *(char **)lbl_80496220;
     r = (*(void *(**)(void *, s32))(vt + 0xAC))(lbl_80496220 + *(s16 *)(vt + 0xA8), M2C_FIELD(arg0, s32 *, 4));
     if (r != 0) {
+        char *obj = lbl_80496220;
         M2C_FIELD(arg0, s32 *, 0x10) = 1;
-        e = *(char **)lbl_80496220 + 0xB8;
-        (*(void (**)(void *, void *))(e + 4))(lbl_80496220 + *(s16 *)e, r);
+        e = *(char **)obj + 0xB8;
+        (*(void (**)(void *, void *))(e + 4))(obj + *(s16 *)e, r);
     }
 }
 
