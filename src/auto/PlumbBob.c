@@ -30,8 +30,8 @@ static inline void *PlumbBob_AllocAligned(u32 size) {
 void fn_8008A7A4(s32 *arg0);
 
 static inline void PlumbBob_ResetRef(s32 *ref) {
-    fn_8008A7A4(ref + 1);
-    *ref = 0;
+    fn_8008A7A4(ref);
+    ref[-1] = 0;
 }
 
 extern void fn_80307364(void *);
@@ -2708,8 +2708,7 @@ void fn_8008AB4C(void *arg0) {
     void fn_8008AFC0(void *);
     struct { char pad[0x15C]; void *a; s32 an; void *b; s32 bn; char pad2[0x10]; s32 x; s32 y; } *self = arg0;
 
-    fn_8008A7A4(&self->y);
-    ((s32 *)arg0)[0x5F] = 0;
+    PlumbBob_ResetRef(&self->x);
     if (self->a != NULL) {
         fn_8031EA2C(self->a);
         self->a = NULL;
