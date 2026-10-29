@@ -2,6 +2,21 @@
 #include "common.h"
 
 void fn_802D2FD0(void);
+void *fn_80374058(void *arg0) {
+    void fn_803C0C20(void *);
+    extern u8 lbl_8041E178[];
+    M2C_FIELD(arg0, void **, 0xAC) = lbl_8041E178;
+    fn_803C0C20((char *)arg0 + 0x94);
+    fn_803C0C20((char *)arg0 + 0xA0);
+    M2C_FIELD(arg0, s8 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 0x80) = 0;
+    M2C_FIELD(arg0, s32 *, 0x84) = 0;
+    M2C_FIELD(arg0, s32 *, 0x88) = 0;
+    M2C_FIELD(arg0, s32 *, 0x8C) = 0;
+    M2C_FIELD(arg0, s32 *, 0x90) = 0;
+    return arg0;
+}
+
 s32 fn_80374B94(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 temp_r0;
 
