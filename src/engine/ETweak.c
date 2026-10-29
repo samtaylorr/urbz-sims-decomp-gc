@@ -52,6 +52,59 @@ void fn_80313298(s32 *p, s32 val, u32 size) {
     }
 }
 
+f32 fn_803132BC(f32 cur, f32 target, f32 rate, f32 eps) {
+    extern f32 lbl_80494E08;
+    extern const f32 lbl_803F241C[];
+    extern const f32 lbl_803F2420[];
+    f32 t;
+    f32 r;
+    f32 d;
+    if (target == cur) {
+        return cur;
+    }
+    t = rate * lbl_80494E08;
+    if (t > lbl_803F241C[0]) {
+        t = lbl_803F241C[0];
+    }
+    r = (cur - target) * t + target;
+    d = r - cur;
+    if (d < lbl_803F2420[0]) {
+        d = -d;
+    }
+    if (d < eps) {
+        return cur;
+    }
+    return r;
+}
+
+f32 fn_803133E8(f32 a, f32 b) {
+    extern const f32 lbl_803F2430[];
+    extern const f32 lbl_803F2434[];
+    extern const f32 lbl_803F2438[];
+    f32 k = lbl_803F2430[0];
+    f32 d;
+    while (a > k) {
+        a -= k;
+    }
+    while (a < lbl_803F2434[0]) {
+        a += k;
+    }
+    while (b > k) {
+        b -= k;
+    }
+    while (b < lbl_803F2434[0]) {
+        b += k;
+    }
+    d = b - a;
+    if (d < lbl_803F2434[0]) {
+        d = -d;
+    }
+    if (d > lbl_803F2438[0]) {
+        d = k - d;
+    }
+    return d;
+}
+
 f32 fn_8031347C(f32 a, f32 b) {
     extern const f32 lbl_803F243C[];
     extern const f32 lbl_803F2440[];
