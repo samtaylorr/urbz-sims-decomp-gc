@@ -1,6 +1,9 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+typedef struct { s32 w[0xE0 / 4]; } SimImgBlockE0;
+typedef struct { f32 x, y, z; } SimImgVec3;
+
 void fn_8009CC04(u32 arg0, u8 *arg1) {
     u8 a = arg0 >> 24;
     u8 r = arg0 >> 16;
