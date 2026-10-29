@@ -181,6 +181,10 @@ static inline void *PtrVec_AllocateN(u32 n, u32 elemSize, u32 *bytes) {
     return NULL;
 }
 
+static inline void *PtrVec_AllocateElems(u32 n) {
+    return PtrVec_Allocate(n * 4);
+}
+
 typedef struct { s32 a; s32 b; } Pair8;
 typedef struct { Pair8 *start; Pair8 *finish; s32 unk8; Pair8 *end; } Pair8Vec;
 
