@@ -33,9 +33,9 @@ void fn_80017840(void **self, s32 flags) {
         if (p != NULL) {
             self[i] = NULL;
             do {
-                void **next = (void **)*p;
-                fn_802D20E8(p);
-                p = next;
+                void **cur = p;
+                p = (void **)*p;
+                fn_802D20E8(cur);
             } while (p != NULL);
         }
     }
