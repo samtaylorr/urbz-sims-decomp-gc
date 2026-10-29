@@ -32,6 +32,19 @@ s32 fn_802F047C(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void fn_802F05AC(void *arg0, s32 arg1) {
+    extern char lbl_8041A0E8[];
+    extern char lbl_804194A0[];
+    extern void fn_802F0A54(void *);
+    extern void fn_802D20E8(void *);
+    M2C_FIELD(arg0, void **, 0x0) = lbl_8041A0E8;
+    fn_802F0A54(arg0);
+    M2C_FIELD(arg0, void **, 0x0) = lbl_804194A0;
+    if (arg1 & 1) {
+        fn_802D20E8(arg0);
+    }
+}
+
 void fn_802F0604(void *self, void *stream) {
     extern void *fn_8032417C(void *, s32);
     extern void *fn_80363C8C(void *, s32);
