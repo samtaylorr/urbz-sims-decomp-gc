@@ -385,7 +385,7 @@ s32 fn_80334810(char *self, s32 arg1) {
 }
 
 s32 fn_80334880(char *self, s32 arg1) {
-    s32 fn_80334B0C();
+    s32 fn_80334B0C(char *, s32);
     s32 fn_80337F14(s32);
     s32 fn_80337480(char *, s32);
     fn_8033480C(self, arg1);
