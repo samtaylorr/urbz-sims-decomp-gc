@@ -103,6 +103,36 @@ void fn_800414B0(s32 *self) {
     self[1] = 1;
 }
 
+s32 *fn_800414BC(s32 *arg0) {
+    arg0[0] = 0;
+    arg0[2] = 1;
+    arg0[1] = 0;
+    return arg0;
+}
+
+void fn_800414D8(void *arg0, s32 arg1) {
+    void *node;
+    char *obj;
+    void *next;
+    char *e;
+
+    node = M2C_FIELD(arg0, void **, 4);
+    while (List_Valid(node)) {
+        next = M2C_FIELD(node, void **, 4);
+        obj = M2C_FIELD(node, char **, 0);
+        if (M2C_FIELD(arg0, s32 *, 8) != 0 && obj != NULL) {
+            e = M2C_FIELD(obj, char **, 0xE8) + 8;
+            (*(void (**)(void *, s32))(e + 4))(obj + *(s16 *)e, 3);
+        }
+        node = next;
+    }
+    fn_802CB8D4(arg0);
+    fn_802CB8D4(arg0);
+    if (arg1 & 1) {
+        fn_802D20E8(arg0);
+    }
+}
+
 void fn_80041580(void **arg0) {
     M2C_UNK fn_8003FE70(s32);
     M2C_UNK fn_800415D0(void **);
