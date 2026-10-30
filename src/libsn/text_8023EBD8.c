@@ -5,48 +5,97 @@ void fn_8023F0A4(void) {
 
 }
 
+s32 fn_80240E84(void);
+void fn_80240EB0(void) {
+    fn_80240E84();
+}
+
 void fn_80240EB4(void) {
 
+}
+
+void fn_80240EB8(void) {
+    fn_80240E84();
 }
 
 void fn_80240EBC(void) {
 
 }
 
+void fn_80240EC0(void) {
+    fn_80240E84();
+}
+
 void fn_80240EC4(void) {
 
+}
+
+void fn_80240EC8(void) {
+    fn_80240E84();
 }
 
 void fn_80240ECC(void) {
 
 }
 
+void fn_80240ED0(void) {
+    fn_80240E84();
+}
+
 void fn_80240ED4(void) {
 
+}
+
+void fn_80240ED8(void) {
+    fn_80240E84();
 }
 
 void fn_80240EDC(void) {
 
 }
 
+void fn_80240EE0(void) {
+    fn_80240E84();
+}
+
 void fn_80240EE4(void) {
 
+}
+
+void fn_80240EE8(void) {
+    fn_80240E84();
 }
 
 void fn_80240EEC(void) {
 
 }
 
+void fn_80240EF0(void) {
+    fn_80240E84();
+}
+
 void fn_80240EF4(void) {
 
+}
+
+void fn_80240EF8(void) {
+    fn_80240E84();
 }
 
 void fn_80240EFC(void) {
 
 }
 
+void fn_80240F00(void) {
+    fn_80240E84();
+}
+
 void fn_80240F04(void) {
 
+}
+
+void fn_80240F08(void) {
+    fn_80240E84();
 }
 
 void fn_80240F0C(void) {
