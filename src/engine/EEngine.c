@@ -64,7 +64,8 @@ void fn_802E04F0(u8 *self) {
 void fn_802E0648(u8 *self) {
     extern u8 lbl_803F0554[];
     u8 *vt = *(u8 **)(self + 0x338);
-    fn_802D8CA4(self, 0x18, (*(s32 (**)(void *))(vt + 0xC4))(self + *(s16 *)(vt + 0xC0)), 0);
+    s32 r = (*(s32 (**)(void *))(vt + 0xC4))(self + *(s16 *)(vt + 0xC0));
+    fn_802D8CA4(self, 0x18, r, 0);
     *(u8 **)(self + 0x32C) = lbl_803F0554;
     fn_802D8EF8(self);
 }
@@ -215,8 +216,9 @@ void fn_802E0CA0(u8 *self, s32 flags) {
     void fn_802D8260(void *, s32);
     void fn_803B9594(void *);
     void fn_802D20E8(void *);
+    s32 v = lbl_80494DBC;
     *(u8 **)self = lbl_80419970;
-    if (lbl_80494DBC == 0) {
+    if (v == 0) {
         fn_802C7C90();
     }
     fn_802D8328(self + 0x34);
