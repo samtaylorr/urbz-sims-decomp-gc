@@ -125,6 +125,34 @@ void fn_8036B4A0(void *arg0, s32 arg1, f32 *out) {
     *out = (f32)v * M2C_FIELD(arg0, f32 *, 0x3C) + M2C_FIELD(arg0, f32 *, 0x40);
 }
 
+void *fn_8036B878(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, void **, 0x5C) = lbl_8041D808;
+    fn_80363734(arg0, arg1);
+    fn_80363734((u8 *)arg0 + 0x14, arg1);
+    ScalarList_Init((ScalarList *)((u8 *)arg0 + 0x28));
+    ScalarList_Init((ScalarList *)((u8 *)arg0 + 0x34));
+    M2C_FIELD(arg0, s32 *, 0x44) = 0;
+    M2C_FIELD(arg0, s32 *, 0x40) = 0;
+    M2C_FIELD(arg0, s32 *, 0x48) = 0;
+    M2C_FIELD(arg0, s32 *, 0x4C) = 0;
+    M2C_FIELD(arg0, s32 *, 0x54) = 0;
+    M2C_FIELD(arg0, s32 *, 0x50) = 0;
+    return arg0;
+}
+
+void fn_8036B904(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, void **, 0x5C) = lbl_8041D808;
+    fn_802CB8D4((u8 *)arg0 + 0x34);
+    fn_802CB8D4((u8 *)arg0 + 0x28);
+    fn_8036391C((u8 *)arg0 + 0x14);
+    fn_802CB8D4((u8 *)arg0 + 0x14);
+    fn_8036391C(arg0);
+    fn_802CB8D4(arg0);
+    if (arg1 & 1) {
+        fn_8036BAF0(arg0);
+    }
+}
+
 void fn_8036B980(void *arg0) {
     void *it;
     void *obj;
