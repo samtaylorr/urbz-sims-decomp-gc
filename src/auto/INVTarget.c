@@ -16,6 +16,13 @@ static inline void INV_setStr(void *dst, void *key) {
     fn_800F1B80(dst, h.p != NULL ? (void *)*h.p : NULL);
 }
 
+static inline void *INV_getStr(void *key) {
+    INVHandle fn_8004C168();
+    extern u8 lbl_8041F94C[];
+    INVHandle h = fn_8004C168(lbl_8041F94C, key);
+    return h.p != NULL ? (void *)*h.p : NULL;
+}
+
 typedef struct INVNode {
     struct INVNode *prev;
     struct INVNode *next;
@@ -3393,7 +3400,7 @@ void fn_80209608(u8 *arg0) {
     extern u8 lbl_803E701C[];
     extern u8 lbl_803E7024[];
     extern u8 lbl_803E7034[];
-    INVHandle h;
+    void *key;
 
     fn_801F5420((s32)(arg0 + 0x84));
     switch (fn_8020DD5C(*(s32 *)(arg0 + 0x110))) {
@@ -3405,13 +3412,15 @@ void fn_80209608(u8 *arg0) {
     case 5:
     case 6:
     case 7:
-        INV_setStr(arg0 + 0xAC, lbl_803E7058);
-        break;
+        key = lbl_803E7058;
+        goto set;
     case -1:
-        INV_setStr(arg0 + 0xAC, NULL);
+        key = NULL;
+    set:
+        INV_setStr(arg0 + 0xAC, key);
         break;
     }
-    fn_800F1B80(arg0 + 0xB4, (h = fn_8004C168(lbl_8041F94C, lbl_803E7014)).p != NULL ? (void *)*h.p : NULL);
+    INV_setStr(arg0 + 0xB4, lbl_803E7014);
     if (*(s32 *)(arg0 + 0x120) & 1) {
         INV_setStr(arg0 + 0xB8, lbl_803E706C);
         INV_setStr(arg0 + 0xBC, lbl_803E701C);
@@ -3442,11 +3451,11 @@ void fn_8020A500(u8 *arg0) {
     extern u8 lbl_803E70EC[];
     extern u8 lbl_803E6F74[];
     extern u8 lbl_803E7034[];
-    INVHandle h1, h2, h3;
+    INVHandle h1, h3;
     s32 zero;
 
     fn_800F1B80(arg0 + 0xAC, (h1 = fn_8004C168(lbl_8041F94C, lbl_803E718C)).p != NULL ? (void *)*h1.p : NULL);
-    fn_800F1B80(arg0 + 0xB4, (void *)((h2 = fn_8004C168(lbl_8041F94C, lbl_803E70E8)).p != NULL ? *h2.p : 0));
+    INV_setStr(arg0 + 0xB4, lbl_803E70E8);
     fn_800F1B80(arg0 + 0xB8, (h3 = fn_8004C168(lbl_8041F94C, lbl_803E70EC)).p != NULL ? (void *)*h3.p : NULL);
     fn_800F1B80(arg0 + 0xBC, lbl_803E6F74);
     zero = 0;
@@ -3547,25 +3556,25 @@ void fn_8020ECF8(u8 *arg0) {
     extern u8 lbl_803E77A0[];
     extern u8 lbl_803E77A4[];
     extern u8 lbl_803E72BC[];
-    Handle h1, h2, h3;
+    Handle h1, h3;
     s32 zero;
 
     fn_800F1B80(arg0 + 0xAC, (h1 = fn_8004C168(lbl_8041F94C, lbl_803E791C)).p != NULL ? (void *)*h1.p : NULL);
-    fn_800F1B80(arg0 + 0xB4, (h2 = fn_8004C168(lbl_8041F94C, lbl_803E77A0)).p != NULL ? (void *)*h2.p : NULL);
-    fn_800F1B80(arg0 + 0xB8, (h3 = fn_8004C168(lbl_8041F94C, lbl_803E77A4)).p != NULL ? (void *)*h3.p : NULL);
+    INV_setStr(arg0 + 0xB4, lbl_803E77A0);
+    INV_setStr(arg0 + 0xB8, lbl_803E77A4);
     fn_800F1B80(arg0 + 0xBC, lbl_803E72BC);
     zero = 0;
     *(s32 *)(arg0 + 0xA0) = 1;
     *(s32 *)(arg0 + 0x84) = 2;
     *(s32 *)(arg0 + 0x88) = 1;
     *(s32 *)(arg0 + 0x8C) = 3;
-    *(s16 *)(arg0 + 0xC6) = zero;
     *(s32 *)(arg0 + 0x98) = zero;
     *(s32 *)(arg0 + 0xA4) = zero;
     *(s32 *)(arg0 + 0x94) = zero;
     *(s32 *)(arg0 + 0x90) = zero;
     *(s32 *)(arg0 + 0xC0) = zero;
     *(s16 *)(arg0 + 0xC4) = zero;
+    *(s16 *)(arg0 + 0xC6) = zero;
     if (fn_801DB18C(lbl_803E75EC) == 1) {
         *(s32 *)(arg0 + 0xC8) = 2;
     } else {
