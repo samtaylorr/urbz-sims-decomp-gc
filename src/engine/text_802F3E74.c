@@ -175,6 +175,12 @@ void fn_802F4A8C(char *self, void *arg1) {
     fn_802E34F0(arg1, self + 0x44);
 }
 
+s32 fn_802F5670(void *self) {
+    extern s32 fn_8032C268(void *);
+    void *p = M2C_FIELD(self, void **, 0x134);
+    return p != 0 ? fn_8032C268(p) : 0;
+}
+
 void fn_802F56A4(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x124) = arg1;
 }
