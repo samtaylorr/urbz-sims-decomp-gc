@@ -220,6 +220,15 @@ s32 fn_802E0FB4(void *arg0) {
     return 1;
 }
 
+void fn_802E0FCC(void) {
+    extern s32 fn_80339244(void);
+    extern char *lbl_80496220;
+    char *vt;
+    fn_80339244();
+    vt = *(char **)lbl_80496220;
+    (*(void (**)(void *))(vt + 0x114))(lbl_80496220 + *(s16 *)(vt + 0x110));
+}
+
 void fn_802E1008(void) {
     extern u8 *lbl_80496220;
     void fn_80339258(void);
