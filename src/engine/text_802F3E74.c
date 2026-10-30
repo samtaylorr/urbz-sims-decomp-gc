@@ -115,10 +115,18 @@ void fn_802F4104(void *self, void *out) {
 }
 
 void fn_802F412C(void *self, s32 arg1, s32 arg2) {
-    struct TMtx44Raw { s64 m[8]; };
     extern void fn_802F4520(void *, s32, s32);
     extern void fn_802F48A4(void *);
-    *(struct TMtx44Raw *)((char *)self + 0xD0) = *(struct TMtx44Raw *)((char *)self + 0x90);
+    s64 *src = (s64 *)((char *)self + 0x90);
+    s64 *dst = (s64 *)((char *)self + 0xD0);
+    dst[0] = src[0];
+    dst[1] = src[1];
+    dst[2] = src[2];
+    dst[3] = src[3];
+    dst[4] = src[4];
+    dst[5] = src[5];
+    dst[6] = src[6];
+    dst[7] = src[7];
     fn_802F4520(self, arg1, arg2);
     fn_802F48A4(self);
 }
