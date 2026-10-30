@@ -27,26 +27,26 @@ void *fn_8008C46C(s32 arg0, u32 idx) {
     void fn_8008B374(void *, u32);
     char *p;
 
-    if (idx > 1) {
-        return 0;
-    }
-    if (lbl_804966A4[idx] == 0) {
-        if (idx == 0 || fn_80049B6C(lbl_8041F94C) != 0) {
-            p = fn_8008A7DC(fn_802D1FC8(0x220));
-            lbl_804966A4[idx] = p;
-            if (p == 0) {
-                return 0;
-            }
-            fn_8008B374(p, idx);
-        }
+    if (idx <= 1) {
         if (lbl_804966A4[idx] == 0) {
-            return 0;
+            if (idx == 0 || fn_80049B6C(lbl_8041F94C) != 0) {
+                p = fn_8008A7DC(fn_802D1FC8(0x220));
+                lbl_804966A4[idx] = p;
+                if (p == 0) {
+                    goto out;
+                }
+                fn_8008B374(p, idx);
+            }
+            if (lbl_804966A4[idx] == 0) {
+                goto out;
+            }
+        }
+        p = lbl_804966A4[idx];
+        if (*(s32 *)(p + 0x17C) == arg0) {
+            return p;
         }
     }
-    p = lbl_804966A4[idx];
-    if (*(s32 *)(p + 0x17C) == arg0) {
-        return p;
-    }
+out:
     return 0;
 }
 
@@ -460,17 +460,16 @@ void fn_80093B1C(s32 arg0, void *arg1) {
         f32 x, y, z;
     } Args;
     void fn_80093BC8(s32, Args *);
+    void **arr;
     u8 *rec;
     s32 n;
     s32 i;
     Args args;
 
-    if (M2C_FIELD(arg1, void **, 0) == NULL) {
-        return;
-    }
-    n = ((s32 *)M2C_FIELD(arg1, void **, 0))[-1];
-    if (n <= 0) {
-        return;
+    n = 0;
+    arr = M2C_FIELD(arg1, void **, 0);
+    if (arr != NULL) {
+        n = ((s32 *)arr)[-1];
     }
     for (i = 0; i < n; i++) {
         rec = (u8 *)M2C_FIELD(arg1, void **, 0) + i * 0x20;
@@ -611,7 +610,14 @@ extern void fn_802EC15C(s32, s32, s32);
 extern void fn_802ED00C(s32, s32, s32);
 void fn_80094F44(void *arg0, s32 arg1, s32 arg2) {
     extern void fn_802EC15C(s32, s32, s32);
-    fn_802EC15C(Field314_Get(arg0), arg2, arg1);
+    s32 b;
+
+    b = M2C_FIELD(M2C_FIELD(arg0, void **, 8), s32 *, 0x334) != 0;
+    if (b) {
+        fn_802EC15C((s32)M2C_FIELD(arg0, void **, 8) + 0x314, arg2, arg1);
+    } else {
+        fn_802EC15C((s32)M2C_FIELD(arg0, void **, 8) + 0x314, arg2, arg1);
+    }
 }
 
 s32 fn_80095A44(void) {
