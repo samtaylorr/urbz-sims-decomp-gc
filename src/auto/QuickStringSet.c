@@ -867,6 +867,13 @@ s32 fn_800F8204(u16 *a, u16 *b, u32 n) {
     return d;
 }
 
+u16 *fn_800F8244(u16 *s, s32 c) {
+    while (*s != 0 && *s != c) {
+        s++;
+    }
+    return *s != 0 ? s : 0;
+}
+
 s32 fn_800F86C8(void *arg0, s32 arg1) {
     s32 temp_r9;
     s32 var_r3;
