@@ -909,12 +909,15 @@ s32 fn_80097D38(void *self, f32 f) {
     extern f32 lbl_80496738;
     extern s32 lbl_804941F0;
     s32 v;
+    register f32 t asm("fr0") = f;
+    register f32 c asm("fr1");
     M2C_FIELD(self, s32 *, 0x49C) = 0;
     if (M2C_FIELD(self, s32 *, 0x4D4) & 0x40) {
-        if (lbl_80496734 <= f) {
+        c = lbl_80496734;
+        if (t >= c) {
             M2C_FIELD(self, s32 *, 0x49C) = 1;
         }
-    } else if (lbl_804941F0 == 1 && lbl_80496738 <= f) {
+    } else if (lbl_804941F0 == 1 && t >= (c = lbl_80496738)) {
         M2C_FIELD(self, s32 *, 0x49C) = 1;
     }
     v = M2C_FIELD(self, s32 *, 0x49C);
