@@ -10345,6 +10345,13 @@ void *fn_803B6F48(void *self) {
     return self;
 }
 
+u16 **fn_803B6F78(u16 **arg0, u16 **arg1) {
+    u16 *p = *arg1;
+    *arg0 = p;
+    p[0]++;
+    return arg0;
+}
+
 s32 fn_803B7070(u8 **arg0, u8 **arg1) {
     s32 fn_80248268(const void *, const void *, u32);
     u8 *a = *arg0;
