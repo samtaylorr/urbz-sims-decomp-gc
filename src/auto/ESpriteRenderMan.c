@@ -148,6 +148,31 @@ void fn_80041580(void **arg0) {
     fn_800415D0(arg0);
 }
 
+void fn_800415D0(void **arg0) {
+    M2C_UNK fn_802CB5C4(void **, void *);
+    M2C_UNK fn_8004079C(void *);
+    void *node;
+    char *obj;
+    void *next;
+    char *e;
+
+    node = *arg0;
+    while (node != NULL) {
+        obj = M2C_FIELD(node, char **, 0);
+        next = M2C_FIELD(node, void **, 8);
+        if (M2C_FIELD(obj, s32 *, 0) != 0) {
+            fn_802CB5C4(arg0, node);
+            if (obj != NULL) {
+                e = M2C_FIELD(obj, char **, 0xE8) + 8;
+                (*(void (**)(void *, s32))(e + 4))(obj + *(s16 *)e, 3);
+            }
+        } else if (M2C_FIELD(obj, s32 *, 4) != 0) {
+            fn_8004079C(obj);
+        }
+        node = next;
+    }
+}
+
 void fn_80041664(void **arg0) {
     M2C_UNK fn_80040038(s32);
     void *var_r31;
@@ -174,6 +199,42 @@ void fn_800416A8(void *arg0, s32 arg1) {
     }
 }
 
+void fn_800416F4(void **arg0, void *arg1) {
+    void *node;
+    void *obj;
+
+    node = *arg0;
+    while (node != NULL) {
+        obj = M2C_FIELD(node, void **, 0);
+        if (M2C_FIELD(obj, s32 *, 8) == M2C_FIELD(arg1, s32 *, 0x64)) {
+            M2C_FIELD(obj, s32 *, 4) = 1;
+            return;
+        }
+        node = M2C_FIELD(node, void **, 8);
+    }
+}
+
+void *fn_8004174C(void *arg0, s32 arg1) {
+    extern void *fn_8003FC08(void *);
+    extern void fn_802CB69C(void *, void *);
+    void *heap;
+    void *p;
+    void *obj;
+
+    heap = ((void *(*)(void))fn_802D0AB8)();
+    p = fn_802D197C(heap, 0xF0, 0x10);
+    if (p == NULL) {
+        p = fn_802DC3C0(heap, 0xF0, 0x10, 0, 0);
+        if (p == NULL && heap == ((void *(*)(void))fn_802D0AB8)()) {
+            p = fn_802DC3C0(fn_802D0B3C(), 0xF0, 0x10, 0, 0);
+        }
+    }
+    obj = fn_8003FC08(p);
+    M2C_FIELD(obj, s32 *, 8) = arg1;
+    fn_802CB69C(arg0, obj);
+    return obj;
+}
+
 void fn_800417FC(void **arg0, s32 arg1) {
     void *temp_r9;
     void *var_r3;
@@ -188,6 +249,27 @@ void fn_800417FC(void **arg0, s32 arg1) {
             var_r3 = M2C_FIELD(var_r3, void **, 8);
         } while (var_r3 != NULL);
     }
+}
+
+void fn_80041830(f32 *m) {
+    f32 t0, t1, t2, t3, t4, t5, t6, t7;
+
+    t0 = m[0];
+    t1 = m[1];
+    t2 = m[4];
+    t3 = m[5];
+    t4 = m[8];
+    t5 = m[9];
+    t6 = m[12];
+    t7 = m[13];
+    m[13] = t6;
+    m[0] = t1;
+    m[1] = t0;
+    m[4] = t3;
+    m[5] = t2;
+    m[8] = t5;
+    m[9] = t4;
+    m[12] = t7;
 }
 
 extern s32 lbl_803F5B24[];
