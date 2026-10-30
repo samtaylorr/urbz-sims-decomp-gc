@@ -181,6 +181,16 @@ static inline void *PtrVec_AllocateN(u32 n, u32 elemSize, u32 *bytes) {
     return NULL;
 }
 
+static inline void **PtrVec_AllocateRef(u32 *n) {
+    if (*n != 0) {
+        u32 buf = *n * 4;
+        void **ret = (void **)PtrVec_Allocate(buf);
+        *n = buf / 4;
+        return ret;
+    }
+    return NULL;
+}
+
 static inline void *PtrVec_AllocateElems(u32 n) {
     return PtrVec_Allocate(n * 4);
 }
@@ -9917,7 +9927,7 @@ void fn_803B32E4(void *arg0, u32 n) {
         Pair *finish = v->finish;
         s32 oldSize = finish - start;
         Pair *tmp;
-        u32 bytes;
+        register u32 bytes asm("r31");
 
         if (start != NULL) {
             Pair *result;
@@ -9926,10 +9936,13 @@ void fn_803B32E4(void *arg0, u32 n) {
                 Pair *dst;
                 Pair *mem;
                 if (n != 0) {
-                    u32 sz = n * sizeof(Pair);
-                    u32 *psz = &sz;
-                    bytes = *psz;
-                    mem = PtrVec_Allocate(*psz);
+                    register u32 sz asm("r0") = n * sizeof(Pair);
+                    bytes = sz;
+                    if (sz > 0x80) {
+                        mem = (Pair *)fn_802D1FC8(bytes);
+                    } else {
+                        mem = fn_80399BE8(bytes);
+                    }
                 } else {
                     mem = NULL;
                     bytes = 0;
@@ -9959,10 +9972,13 @@ void fn_803B32E4(void *arg0, u32 n) {
         } else {
             Pair *mem;
             if (n != 0) {
-                u32 sz = n * sizeof(Pair);
-                u32 *psz = &sz;
-                bytes = *psz;
-                mem = PtrVec_Allocate(*psz);
+                register u32 sz asm("r0") = n * sizeof(Pair);
+                bytes = sz;
+                if (sz > 0x80) {
+                    mem = (Pair *)fn_802D1FC8(bytes);
+                } else {
+                    mem = fn_80399BE8(bytes);
+                }
             } else {
                 mem = NULL;
                 bytes = 0;
