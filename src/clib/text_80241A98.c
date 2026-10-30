@@ -78,27 +78,29 @@ u32 fn_80242850(s32 arg0) {
     extern s32 lbl_803F73C0[];
     extern u8 lbl_80440590[];
     extern u8 lbl_80440591[];
-    u8 zero = 0;
+    u32 ret = 0;
     if (lbl_803F73C0[0] != -0x8000) {
         return 0;
     }
     switch (arg0) {
     case 0:
-        lbl_80440591[0] = zero;
+        lbl_80440591[0] = 0;
         break;
     case 1:
         lbl_80440591[0] = 1;
         break;
     case 2:
-        lbl_80440590[0] = zero;
+        lbl_80440590[0] = 0;
         fn_802422DC();
+        ret = 0x80000000;
         break;
     case 3:
         lbl_80440590[0] = 1;
         fn_802422FC();
+        ret = 0x80000000;
         break;
     }
-    return (s32)0x80000000 | (lbl_80440590[0] << 8) | lbl_80440591[0];
+    return ret | (lbl_80440590[0] << 8) | lbl_80440591[0];
 }
 
 f32 fn_802435A8(f32 x) {
