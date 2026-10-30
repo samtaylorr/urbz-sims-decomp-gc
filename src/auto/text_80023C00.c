@@ -117,7 +117,7 @@ void fn_80024504(void *arg0, s32 arg1) {
 
     list = (char *)arg0 + 8;
     node = M2C_FIELD(list, void **, 4);
-    while ((node != NULL ? 1 : 0) != 0) {
+    while (List_Valid(node)) {
         next = M2C_FIELD(node, void **, 4);
         obj = M2C_FIELD(node, char **, 0);
         if (M2C_FIELD(list, s32 *, 8) != 0 && obj != NULL) {
