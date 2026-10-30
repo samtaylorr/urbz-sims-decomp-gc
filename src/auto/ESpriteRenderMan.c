@@ -190,6 +190,21 @@ void fn_800417FC(void **arg0, s32 arg1) {
     }
 }
 
+extern s32 lbl_803F5B24[];
+extern s32 lbl_803F5B3C[][9];
+extern s32 ***lbl_8041FA4C;
+extern s32 ***lbl_8041FA48;
+s32 fn_80041874(s32 arg0) {
+    s32 i;
+
+    for (i = 0; i < 6; i++) {
+        if (lbl_803F5B24[i] == arg0) {
+            return i;
+        }
+    }
+    return -1;
+}
+
 void fn_80041A5C(void) {
     M2C_UNK fn_8004198C(M2C_UNK, M2C_UNK);
     fn_8004198C(1, 0xFFFF);
