@@ -161,6 +161,19 @@ void fn_80041664(void **arg0) {
     }
 }
 
+void fn_800416A8(void *arg0, s32 arg1) {
+    M2C_UNK fn_800402E8(s32, s32);
+    void *it;
+
+    it = M2C_FIELD(arg0, void **, 0);
+    if (it != NULL) {
+        do {
+            fn_800402E8(M2C_FIELD(it, s32 *, 0), arg1);
+            it = M2C_FIELD(it, void **, 8);
+        } while (it != NULL);
+    }
+}
+
 void fn_800417FC(void **arg0, s32 arg1) {
     void *temp_r9;
     void *var_r3;
