@@ -112,6 +112,19 @@ void fn_8001E034(void *arg0, s32 arg1) {
     fn_80335FD8(arg0, arg1);
 }
 
+f32 fn_8001E06C(void *arg0) {
+    s32 total;
+
+    if (M2C_FIELD(arg0, s32 *, 0xA8) != 1) {
+        return 0.0f;
+    }
+    total = M2C_FIELD(arg0, s32 *, 0xB0);
+    if (total != 0) {
+        return (f32)M2C_FIELD(arg0, s32 *, 0xAC) / (f32)total;
+    }
+    return 1.0f;
+}
+
 void fn_8001E210(void *arg0, s32 arg1) {
     void fn_8001DD7C(void *, s32 *);
     M2C_UNK fn_802D838C(s32);
@@ -153,7 +166,7 @@ void fn_8001E674(void) {
 }
 
 M2C_UNK fn_8001E6AC(M2C_UNK arg0, M2C_UNK arg1) {
-    void fn_8001DFC8(void *);
+    void *fn_8001DFC8(void *);
     void fn_8001E034(void *, s32);
     void fn_802C5440(void *);
     void fn_802C5484(void *, s32);
