@@ -113,6 +113,28 @@ void fn_8033C8C4(void *arg0) {
     }
 }
 
+void fn_8033C934(void *arg0) {
+    extern s32 lbl_80494F98;
+    extern s32 lbl_80494FA8;
+    typedef struct { s32 id; char pad[0x3C]; s32 voice; } Snd;
+    extern Snd lbl_8045BD40[64];
+    void fn_8035FA8C(s32, s32);
+    Snd *p;
+    Snd *end;
+
+    if (lbl_80494F98 != 0) {
+        M2C_FIELD(arg0, s32 *, 0xC) = 0;
+        p = lbl_8045BD40;
+        end = &lbl_8045BD40[63];
+        do {
+            if (p->id != -1 && p->voice != -1) {
+                fn_8035FA8C(lbl_80494FA8, p->voice);
+            }
+            p++;
+        } while (p <= end);
+    }
+}
+
 void fn_8033C9A4(void *self, f32 v) {
     extern f32 lbl_803F3E9C[];
     extern f32 lbl_803F3EA0[];
