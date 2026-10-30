@@ -294,6 +294,26 @@ void fn_8005895C(s32 arg0, s32 arg1) {
     fn_802E34F0(arg1, arg0 + 0x120);
 }
 
+void fn_80058A94(s32 arg0, s32 arg1, u16 *arg2, u16 *arg3) {
+    void *fn_80190AA4(s32, u32);
+    extern s32 lbl_80496654;
+    void *e;
+    register u32 id asm("r4");
+
+    *arg3 = arg0;
+    *arg2 = arg0;
+    id = arg0;
+    if (lbl_80496654 != 0) {
+        id &= 0xFFFF;
+        if (id <= 0xFFFAU) {
+            e = fn_80190AA4(lbl_80496654, id);
+            if (e != NULL) {
+                *arg3 = M2C_FIELD(e, u16 *, 2);
+            }
+        }
+    }
+}
+
 s32 fn_80058AFC(s32 arg0) {
     s32 fn_800418C8(s32);
     extern s32 lbl_804940D0;
