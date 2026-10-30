@@ -50,7 +50,7 @@ void fn_8036D904(void **arg0, s32 arg1) {
     }
 }
 
-void fn_8036DBA8(void);
+void fn_8036DBA8();
 void fn_8036D960(void) {
     fn_8036DBA8();
 }
