@@ -16,11 +16,14 @@ M2C_UNK fn_8033BDB0(void *self) {
     extern f32 lbl_803F3E98[];
     extern void *lbl_80494FA4;
     extern void fn_802CA9A8(void *);
+    f32 a, b;
     M2C_FIELD(self, u8 **, 0) = lbl_8041C1C8;
     fn_802CA9A8((u8 *)self + 0x40);
     fn_802CA9A8((u8 *)self + 0x5C);
-    M2C_FIELD(self, f32 *, 4) = lbl_803F3E94[0];
-    M2C_FIELD(self, f32 *, 8) = lbl_803F3E98[0];
+    a = lbl_803F3E94[0];
+    b = lbl_803F3E98[0];
+    M2C_FIELD(self, f32 *, 4) = a;
+    M2C_FIELD(self, f32 *, 8) = b;
     lbl_80494FA4 = self;
     M2C_FIELD(self, s32 *, 0x38) = 0;
     M2C_FIELD(self, s32 *, 0x3C) = 0;
