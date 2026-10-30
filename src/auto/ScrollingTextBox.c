@@ -27,6 +27,26 @@ static inline void *ScrollingTextBox_AllocAligned(u32 size) {
     return p;
 }
 
+void fn_8009A904(void *arg0, f32 a, f32 b, f32 c, f32 d) {
+    M2C_FIELD(arg0, f32 *, 0x10) = d;
+    M2C_FIELD(arg0, f32 *, 0x4) = a;
+    M2C_FIELD(arg0, f32 *, 0x8) = c;
+    M2C_FIELD(arg0, f32 *, 0xC) = b;
+}
+
+void fn_8009A918(void *arg0, void *arg1, void *arg2) {
+    s32 a = M2C_FIELD(arg1, s32 *, 0);
+    s32 b = M2C_FIELD(arg1, s32 *, 4);
+    s32 c;
+    s32 d;
+    M2C_FIELD(arg0, s32 *, 0x8) = b;
+    M2C_FIELD(arg0, s32 *, 0x4) = a;
+    c = M2C_FIELD(arg2, s32 *, 0);
+    d = M2C_FIELD(arg2, s32 *, 4);
+    M2C_FIELD(arg0, s32 *, 0x10) = d;
+    M2C_FIELD(arg0, s32 *, 0xC) = c;
+}
+
 void fn_8009A93C(void *arg0, f32 farg0, f32 farg1) {
     M2C_FIELD(arg0, f32 *, 0x14) = farg0;
     M2C_FIELD(arg0, f32 *, 0x18) = farg1;
