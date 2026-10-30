@@ -13,6 +13,12 @@ extern void *lbl_8049444C;
 extern void *lbl_80494450;
 void *fn_8003FB24(u32 size);
 void fn_8003FBB4(void *arg0);
+void fn_802CB8D4(void *);
+void fn_802D20E8(void *);
+
+static inline s32 List_Valid(void *n) {
+    return n != NULL;
+}
 void *fn_8003FB24(u32 size) {
     void *heap;
     void *p;
