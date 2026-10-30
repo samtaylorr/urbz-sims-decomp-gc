@@ -149,8 +149,11 @@ void fn_8001C4BC(s32 init, s32 prio) {
     extern const f32 lbl_803C4130[];
     extern const f32 lbl_803C4134[];
     if (prio == 0xFFFF && init != 0) {
+        Vec2_8001C4BC *r = &lbl_80495718;
         Vec2_8001C4BC *p = lbl_8041ED34;
         Vec2_8001C4BC *q = lbl_8041ED4C;
+        r->x = lbl_803C4114[0];
+        r->y = lbl_803C4118[0];
         p->x = lbl_803C411C[0];
         q->x = lbl_803C4118[0];
         p->y = lbl_803C4120[0];
@@ -167,8 +170,6 @@ void fn_8001C4BC(s32 init, s32 prio) {
         q->x = lbl_803C4118[0];
         p->y = lbl_803C4130[0];
         q->y = lbl_803C4118[0];
-        lbl_80495718.x = lbl_803C4114[0];
-        lbl_80495718.y = lbl_803C4118[0];
     }
 }
 
