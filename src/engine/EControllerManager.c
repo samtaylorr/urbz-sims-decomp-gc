@@ -30,6 +30,12 @@ typedef struct {
     s32 a;
     s32 b;
 } ECtrlPair;
+char *fn_80333694(char *self) {
+    extern u8 lbl_8041BDE8[];
+    *(u8 **)(self + 0x20) = lbl_8041BDE8;
+    return self;
+}
+
 s32 fn_803336A8(void *arg0) {
     s32 var_ctr;
     s32 var_r9;
@@ -48,8 +54,28 @@ s32 fn_803336A8(void *arg0) {
     return 1;
 }
 
+void fn_803336D4(void) {
+    extern char *lbl_804939C0[];
+    char **p = lbl_804939C0;
+    char **end = p + 3;
+    char *obj;
+    char *vt;
+
+    do {
+        obj = *p;
+        p++;
+        vt = M2C_FIELD(obj, char **, 0x204);
+        (*(void (**)(void *))(vt + 0xB4))(obj + *(s16 *)(vt + 0xB0));
+    } while (p <= end);
+}
+
 void fn_8033372C(void) {
 
+}
+
+void fn_80333730(s32 *self, s32 idx, s32 val) {
+    self[idx] = val;
+    self[idx + 4] = 1;
 }
 
 s32 fn_803338C0(void *arg0, s32 i) {
