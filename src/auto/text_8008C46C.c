@@ -825,6 +825,11 @@ f32 fn_80097C08(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0xFC);
 }
 
+void fn_80097C10(s32 arg0, s32 arg1, s32 arg2) {
+    s32 off = arg1 << 2;
+    *(s32 *)(arg0 + 0x4C4 + off) = arg2;
+}
+
 void fn_80097C20(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x4C4) = arg1;
 }
@@ -932,7 +937,7 @@ block_6:
 }
 
 void fn_8009A724(void) {
-    M2C_UNK fn_80097A3C(M2C_UNK, M2C_UNK);
+    void fn_80097A3C(s32, s32);
     fn_80097A3C(1, 0xFFFF);
 }
 
