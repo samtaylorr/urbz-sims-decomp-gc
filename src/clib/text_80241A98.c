@@ -52,6 +52,55 @@ void fn_802423A8(void) {
     fn_802422FC();
 }
 
+void fn_802427D4(void) {
+    extern s32 lbl_803F73C0[];
+    extern s32 lbl_80440580[];
+    extern s32 lbl_80440584[];
+    extern s32 lbl_8044058C[];
+    extern u8 lbl_80440590[];
+    extern s32 lbl_80440540[];
+    extern u8 lbl_80440591[];
+    void fn_8024248C();
+    void fn_80250BDC(s32, void *);
+    if (lbl_803F73C0[0] == -0x8000) {
+        lbl_80440580[0] = 0;
+        lbl_80440540[0] = 0;
+        lbl_80440584[0] = -1;
+        lbl_8044058C[0] = 0;
+        lbl_80440591[0] = 1;
+        lbl_80440590[0] = 1;
+        fn_802422FC();
+        fn_80250BDC(2, fn_8024248C);
+    }
+}
+
+u32 fn_80242850(s32 arg0) {
+    extern s32 lbl_803F73C0[];
+    extern u8 lbl_80440590[];
+    extern u8 lbl_80440591[];
+    u8 zero = 0;
+    if (lbl_803F73C0[0] != -0x8000) {
+        return 0;
+    }
+    switch (arg0) {
+    case 0:
+        lbl_80440591[0] = zero;
+        break;
+    case 1:
+        lbl_80440591[0] = 1;
+        break;
+    case 2:
+        lbl_80440590[0] = zero;
+        fn_802422DC();
+        break;
+    case 3:
+        lbl_80440590[0] = 1;
+        fn_802422FC();
+        break;
+    }
+    return (s32)0x80000000 | (lbl_80440590[0] << 8) | lbl_80440591[0];
+}
+
 f32 fn_802435A8(f32 x) {
     u32 ix;
     do { union { f32 value; u32 word; } gf_u; gf_u.value = x; ix = gf_u.word; } while (0);
