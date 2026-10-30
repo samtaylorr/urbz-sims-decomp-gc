@@ -120,15 +120,18 @@ void *fn_801B2660(void *self, void *other) {
     return self;
 }
 
-s32 fn_801B271C(void *arg0, void *arg1) {
+s32 fn_801B271C(BTNode *self, void *arg1) {
     s32 fn_800F68BC(void *);
     void fn_800F6A38(void *, void *);
-    void *p = (char *)arg0 + 0xC;
+    s32 ret;
+    BTString *p = &self->name;
     if (fn_800F68BC(p) != 0) {
         fn_800F6A38(arg1, p);
-        return 1;
+        ret = 1;
+    } else {
+        ret = 0;
     }
-    return 0;
+    return ret;
 }
 
 s32 fn_801B2770(s32 arg0) {
