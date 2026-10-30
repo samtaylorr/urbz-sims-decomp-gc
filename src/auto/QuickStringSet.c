@@ -558,11 +558,11 @@ void fn_800F7A50(void) {
 
 }
 
-void fn_800F7A54(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
+void fn_800F7A54(void *arg0, void *arg1, void *arg2, void *arg3, void *arg4, void *arg5) {
     extern u8 *lbl_8049665C;
-    void fn_800F7C3C(void *, void *, s32, s32, s32, s32);
-    u8 *e = *(u8 **)lbl_8049665C + 0x38;
-    void *obj = (*(void *(**)(u8 *))(e + 4))(lbl_8049665C + *(s16 *)e);
+    void fn_800F7C3C();
+    void *obj;
+    obj = (*(void *(**)(u8 *))(*(u8 **)lbl_8049665C + 0x3C))(lbl_8049665C + *(s16 *)(*(u8 **)lbl_8049665C + 0x38));
     fn_800F7C3C(arg0, obj, arg2, arg3, arg4, arg5);
 }
 
@@ -837,6 +837,34 @@ u16 *fn_800F81A8(u16 *dst, const u16 *src, s32 n) {
         n--;
     }
     return ret;
+}
+
+s32 fn_800F8204(u16 *a, u16 *b, u32 n) {
+    s32 d;
+    u32 i = 0;
+
+    for (;;) {
+        u16 c1 = *a;
+        u16 c2;
+        i++;
+        c2 = *b;
+        d = c1 - c2;
+        if (d != 0) {
+            break;
+        }
+        a++;
+        if (c1 == 0) {
+            break;
+        }
+        b++;
+        if (c2 == 0) {
+            break;
+        }
+        if (i >= n) {
+            break;
+        }
+    }
+    return d;
 }
 
 s32 fn_800F86C8(void *arg0, s32 arg1) {
