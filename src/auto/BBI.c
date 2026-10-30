@@ -165,16 +165,15 @@ void *fn_8005A99C(void *arg0) {
     return fn_8005AA70(arg0, (*(void *(**)(void *))(e + 4))(obj + *(s16 *)e));
 }
 
-void *fn_8005A9FC(void *arg0, s8 arg1, s32 arg2) {
+s8 *fn_8005A9FC(void *arg0, s8 arg1, s32 arg2) {
     void *fn_802D1FC8(s32);
-    void fn_80059ACC(void *, s32);
-    void *p;
+    void fn_80059ACC(s8 *, s32);
+    s8 *p;
 
     if (arg1 == 0) {
         return NULL;
     }
-    p = fn_802D1FC8(0xc);
-    p = fn_80059918(p);
+    p = fn_80059918(fn_802D1FC8(0xc));
     if (p == NULL) {
         return NULL;
     }
@@ -190,24 +189,25 @@ void *fn_8005AA70(void *arg0, void *arg1) {
     s32 fn_8016CCE0(void *);
     s32 fn_8005AB08(void *);
     void *p;
+    void *o;
     s32 type;
 
     if (arg1 == NULL) {
         return NULL;
     }
-    if (M2C_FIELD(arg1, void **, 0x38) == NULL) {
-        return NULL;
-    }
-    type = fn_8005AB08(M2C_FIELD(arg1, void **, 0x38));
-    switch (type) {
-    case 1:
-    case 2:
-    case 3:
-        p = fn_80059918(fn_802D1FC8(0xc));
-        fn_8005997C(p, type);
-        fn_800599BC(p, 1);
-        fn_80059ACC(p, fn_8016CCE0(arg1));
-        return p;
+    o = M2C_FIELD(arg1, void **, 0x38);
+    if (o != NULL) {
+        type = fn_8005AB08(o);
+        switch (type) {
+        case 1:
+        case 2:
+        case 3:
+            p = fn_80059918(fn_802D1FC8(0xc));
+            fn_8005997C(p, type);
+            fn_800599BC(p, 1);
+            fn_80059ACC(p, fn_8016CCE0(arg1));
+            return p;
+        }
     }
     return NULL;
 }
@@ -596,6 +596,26 @@ void fn_8005EA88(void *arg0) {
     }
     if ((s32) M2C_FIELD(arg0, s32 *, 0x610) > 0) {
         fn_8005ED44(arg0);
+    }
+}
+
+void fn_8005F680(s32 arg0, s32 arg1, u16 *arg2, u16 *arg3) {
+    void *fn_80190AA4(s32, u32);
+    extern s32 lbl_80496654;
+    void *e;
+    register u32 id asm("r4");
+
+    *arg3 = arg0;
+    *arg2 = arg0;
+    id = arg0;
+    if (lbl_80496654 != 0) {
+        id &= 0xFFFF;
+        if (id <= 0xFFFAU) {
+            e = fn_80190AA4(lbl_80496654, id);
+            if (e != NULL) {
+                *arg3 = M2C_FIELD(e, u16 *, 2);
+            }
+        }
     }
 }
 
