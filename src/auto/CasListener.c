@@ -50,7 +50,6 @@ s32 fn_801B7C98(void *arg0, void *arg1, s32 arg2) {
     extern u8 *lbl_80496658;
     extern void fn_80151110(void *);
     CasIter iter;
-    CasIter *p;
     VtEnt *e;
     CasVtEnt2 *e2;
 
@@ -59,8 +58,13 @@ s32 fn_801B7C98(void *arg0, void *arg1, s32 arg2) {
         return 0;
     }
     if (arg2 != 0) {
-        if (CasIter_first(&iter, arg1) != NULL) {
-            p = &iter;
+        register CasIter *it asm("r30") = &iter;
+        register CasIter *p asm("r31");
+        u8 *cur;
+        CasIter_begin(it, arg1);
+        cur = it->cur;
+        p = it;
+        if (cur != NULL) {
             do {
                 e2 = (CasVtEnt2 *)(*(u8 **)(p->cur + 4) + 0x220);
                 if ((e2->fn(p->cur + e2->delta, 0x2A) ^ 1) & 1) {
