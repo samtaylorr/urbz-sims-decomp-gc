@@ -571,6 +571,19 @@ void fn_800F7A54(void *arg0, void *arg1, void *arg2, void *arg3, void *arg4, voi
     fn_800F7C3C(a0, obj, a2, a3, a4, a5);
 }
 
+void fn_800F7AC4(void *arg0, void *arg1, void *arg2, void *arg3, void *arg4, void *arg5) {
+    extern u8 *lbl_8049665C;
+    void fn_800F7CA8(void *, void *, void *, void *, void *, void *);
+    register void *a0 asm("r26") = arg0;
+    register void *a2 asm("r30") = arg2;
+    register void *a3 asm("r29") = arg3;
+    register void *a4 asm("r28") = arg4;
+    register void *a5 asm("r27") = arg5;
+    void *obj;
+    obj = (*(void *(**)(u8 *))(*(u8 **)lbl_8049665C + 0x3C))(lbl_8049665C + *(s16 *)(*(u8 **)lbl_8049665C + 0x38));
+    fn_800F7CA8(a0, obj, a2, a3, a4, a5);
+}
+
 void fn_800F7B34(void *arg0, s32 arg1, s32 arg2) {
     extern u8 *lbl_8049665C;
     void fn_800F7D14(void *, void *, s32);
@@ -882,20 +895,19 @@ u16 *fn_800F8244(u16 *s, s32 c) {
 u16 *fn_800F827C(u16 *str, u16 *find) {
     s32 len = fn_800F8120(find);
     u16 c = find[0];
+    u16 *p;
 
     if (len == 0) {
         return 0;
     }
-    for (;;) {
-        str = fn_800F8244(str + 1, c);
-        if (str == 0) {
-            break;
+    do {
+        p = fn_800F8244(str + 1, c);
+        str = p;
+        if (p == 0) {
+            return p;
         }
-        if (fn_800F8204(str, find, len) == 0) {
-            break;
-        }
-    }
-    return str;
+    } while (fn_800F8204(p, find, len) != 0);
+    return p;
 }
 
 s32 fn_800F86C8(void *arg0, s32 arg1) {
