@@ -96,6 +96,14 @@ void *fn_803338D0(s32 arg0, s32 i) {
     return ret;
 }
 
+s32 fn_803338F0(void *self, s32 i) {
+    s32 ret = -1;
+    if ((u32)i <= 3) {
+        ret = ((s32 *)self)[i];
+    }
+    return ret;
+}
+
 s32 fn_8033390C(void *mgr, s32 arg) {
     extern s32 lbl_804939C0[];
     s32 fn_803338F0(void *, s32);
