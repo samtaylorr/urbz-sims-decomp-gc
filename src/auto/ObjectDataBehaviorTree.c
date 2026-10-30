@@ -104,13 +104,16 @@ void fn_801B2830(void *arg0, s8 arg1) {
 }
 
 u8 fn_801B283C(void *arg0) {
-    u8 v;
+    u32 v;
     if (fn_801B2798(arg0) >= -0x7FFE) {
         return M2C_FIELD(M2C_FIELD(arg0, void **, 0x54), u8 *, 6);
     }
     if (fn_801B2798(arg0) == -0x7FFF) {
         v = M2C_FIELD(M2C_FIELD(arg0, void **, 0x54), u8 *, 6);
-        return v > 4 ? 4 : v;
+        if (v > 4) {
+            return 4;
+        }
+        return v;
     }
     return 0;
 }
@@ -301,6 +304,17 @@ s32 fn_801B3600(void *arg0) {
         return 0;
     }
     return var_r3;
+}
+
+s32 fn_801B365C(s32 arg0, s32 arg1) {
+    extern char lbl_80435FB8[];
+    extern char lbl_80435FD8[];
+    void fn_802D23C0(void *, void *, s32, s32);
+
+    if ((arg1 == 0xFFFF) && (arg0 != 0)) {
+        u32 p = (u32)lbl_80435FD8;
+        fn_802D23C0(lbl_80435FB8, (void *)((p + 0x3F) & ~0x3F), 0x68, 5);
+    }
 }
 
 void *fn_801B36B4(void *arg0, u8 *arg1) {
