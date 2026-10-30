@@ -347,6 +347,15 @@ s32 fn_803347A4(s32 arg0) {
     return 1 << arg0;
 }
 
+s32 fn_803347B0(s32 arg0, s32 arg1) {
+    s32 fn_80334B0C();
+    s32 fn_8033740C(s32, s32, s32, s32);
+    if (lbl_80494F5C == 0 && fn_80334B0C() == 0) {
+        return 0;
+    }
+    return fn_8033740C(arg0, arg1, 0, 0);
+}
+
 void fn_8033480C(char *self, s32 arg1) {
 
 }
