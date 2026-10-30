@@ -15,6 +15,12 @@ void fn_8036A91C(void *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 4) = arg2;
 }
 
+void fn_8036A928(s32 *arg0, f32 arg1) {
+    void fn_802DDC6C(s32, s32);
+
+    fn_802DDC6C(arg0[0], (s32)(arg0[1] + arg1));
+}
+
 s32 fn_8036A98C(s32 *self) {
     return self[2];
 }
