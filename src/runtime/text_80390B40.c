@@ -10,6 +10,20 @@ typedef struct {
     s8 b;
 } Nibbles;
 
+void fn_80390D84(void) {
+    extern u32 lbl_8049660C;
+    extern u32 lbl_80491BD8[];
+    u32 base;
+
+    base = (lbl_8049660C + 0x1F) & ~0x1F;
+    lbl_80491BD8[0] = base;
+    lbl_80491BD8[1] = base + 0x80;
+    lbl_80491BD8[2] = base + 0x100;
+    lbl_80491BD8[3] = base + 0x180;
+    lbl_80491BD8[4] = base + 0x200;
+    lbl_80491BD8[5] = base + 0x280;
+}
+
 void fn_803918D0(void) {
     extern void *lbl_80496610;
 
