@@ -203,16 +203,13 @@ void fn_800416F4(void **arg0, void *arg1) {
     void *node;
     void *obj;
 
-    node = *arg0;
-    if (node != NULL) {
-        do {
-            obj = M2C_FIELD(node, void **, 0);
-            if (M2C_FIELD(obj, s32 *, 8) == M2C_FIELD(arg1, s32 *, 0x64)) {
-                M2C_FIELD(obj, s32 *, 4) = 1;
-                return;
-            }
-            node = M2C_FIELD(node, void **, 8);
-        } while (node != NULL);
+    for (node = *arg0; node != NULL; node = M2C_FIELD(node, void **, 8)) {
+        obj = M2C_FIELD(node, void **, 0);
+        if (M2C_FIELD(obj, s32 *, 8) != M2C_FIELD(arg1, s32 *, 0x64)) {
+            continue;
+        }
+        M2C_FIELD(obj, s32 *, 4) = 1;
+        return;
     }
 }
 
@@ -254,12 +251,25 @@ void fn_800417FC(void **arg0, s32 arg1) {
 }
 
 void fn_80041830(f32 *m) {
-    f32 t;
+    f32 a0, a1, a2, a3;
+    f32 b0, b1, b2, b3;
 
-    t = m[0]; m[0] = m[1]; m[1] = t;
-    t = m[4]; m[4] = m[5]; m[5] = t;
-    t = m[8]; m[8] = m[9]; m[9] = t;
-    t = m[12]; m[12] = m[13]; m[13] = t;
+    a0 = m[0];
+    b0 = m[1];
+    a1 = m[4];
+    b1 = m[5];
+    a2 = m[8];
+    b2 = m[9];
+    a3 = m[12];
+    b3 = m[13];
+    m[0] = b0;
+    m[1] = a0;
+    m[4] = b1;
+    m[5] = a1;
+    m[8] = b2;
+    m[9] = a2;
+    m[12] = b3;
+    m[13] = a3;
 }
 
 extern s32 lbl_803F5B24[];
