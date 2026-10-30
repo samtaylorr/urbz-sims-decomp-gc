@@ -12,6 +12,8 @@ extern u8 lbl_80491E1C[];
 extern u8 lbl_80493D04[];
 extern s32 lbl_80496304;
 
+typedef struct { f32 x, y, z; } ECamVec3;
+
 void fn_802D2FD0(void);
 void fn_8036D7C8(void) {
     fn_802D2FD0();
