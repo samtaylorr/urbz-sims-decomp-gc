@@ -911,10 +911,10 @@ s32 fn_80097D38(void *self, f32 f) {
     s32 v;
     M2C_FIELD(self, s32 *, 0x49C) = 0;
     if (M2C_FIELD(self, s32 *, 0x4D4) & 0x40) {
-        if (f >= lbl_80496734) {
+        if (lbl_80496734 <= f) {
             M2C_FIELD(self, s32 *, 0x49C) = 1;
         }
-    } else if (lbl_804941F0 == 1 && f >= lbl_80496738) {
+    } else if (lbl_804941F0 == 1 && lbl_80496738 <= f) {
         M2C_FIELD(self, s32 *, 0x49C) = 1;
     }
     v = M2C_FIELD(self, s32 *, 0x49C);
@@ -941,13 +941,18 @@ s32 fn_80097DEC(void *self) {
 s32 fn_80097E5C(void *self, s32 id) {
     s32 **begin = M2C_FIELD(self, s32 ***, 0x170);
     s32 n = M2C_FIELD(self, s32 ***, 0x174) - begin;
-    s32 i;
-    for (i = 0; i < n; i++) {
-        if (*begin[i] == id) {
-            return i;
+    s32 **it = begin;
+    s32 i = 0;
+    s32 ret = -1;
+    while (i < n) {
+        if (**it == id) {
+            ret = i;
+            break;
         }
+        i++;
+        it++;
     }
-    return -1;
+    return ret;
 }
 
 void fn_80097F38(void *arg0) {
