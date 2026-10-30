@@ -19,6 +19,21 @@ void fn_802D20E8(void *);
 static inline s32 List_Valid(void *n) {
     return n != NULL;
 }
+
+static inline void *ESprite_Alloc(void) {
+    void *heap;
+    void *p;
+
+    heap = ((void *(*)(void))fn_802D0AB8)();
+    p = fn_802D197C(heap, 0xF0, 0x10);
+    if (p == NULL) {
+        p = fn_802DC3C0(heap, 0xF0, 0x10, 0, 0);
+        if (p == NULL && heap == ((void *(*)(void))fn_802D0AB8)()) {
+            return fn_802DC3C0(fn_802D0B3C(), 0xF0, 0x10, 0, 0);
+        }
+    }
+    return p;
+}
 void *fn_8003FB24(u32 size) {
     void *heap;
     void *p;
