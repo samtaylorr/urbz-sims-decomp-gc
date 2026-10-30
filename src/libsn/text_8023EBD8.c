@@ -5,7 +5,7 @@ void fn_8023F0A4(void) {
 
 }
 
-s32 fn_80240E84(void);
+void fn_80240E84(void);
 void fn_80240EB0(void) {
     fn_80240E84();
 }
