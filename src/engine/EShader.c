@@ -65,9 +65,8 @@ s32 fn_802FF608(void *arg0, s32 i) {
     struct { u8 pad[0x64]; struct { s32 a; u8 pad[0x3C]; } e[1]; } *p = arg0;
     if (M2C_FIELD(arg0, s32 *, 4) & 0x04000000) {
         u8 *q = (u8 *)arg0 + 0x64;
-        s32 *arr;
-        if (*(u8 *)(q + 0x24) != 0 && (arr = *(s32 **)(q + 4)) != NULL) {
-            return arr[M2C_FIELD(arg0, u8 *, 0xEC)];
+        if (*(u8 *)(q + 0x24) != 0 && *(s32 **)(q + 4) != NULL) {
+            return (*(s32 **)(q + 4))[M2C_FIELD(arg0, u8 *, 0xEC)];
         }
     } else {
         return p->e[i].a;
