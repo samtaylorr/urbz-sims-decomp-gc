@@ -104,11 +104,11 @@ void fn_801B2830(void *arg0, s8 arg1) {
 }
 
 u8 fn_801B283C(void *arg0) {
-    u32 v;
     if (fn_801B2798(arg0) >= -0x7FFE) {
         return M2C_FIELD(M2C_FIELD(arg0, void **, 0x54), u8 *, 6);
     }
     if (fn_801B2798(arg0) == -0x7FFF) {
+        register u8 v asm("r0");
         v = M2C_FIELD(M2C_FIELD(arg0, void **, 0x54), u8 *, 6);
         if (v > 4) {
             return 4;
