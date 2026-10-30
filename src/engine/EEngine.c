@@ -109,9 +109,10 @@ void *fn_802E0A18(void *self, void *key) {
     } else {
         for (i = 0; i < M2C_FIELD(self, s32 *, 0x348); i++) {
             u8 *s = M2C_FIELD(self, u8 ***, 0x34C)[i];
-            fn_802C686C(&str, str.buf, 0x200);
-            fn_802C69B0(&str, s);
-            if (fn_802C7008(&str, key) == 0) {
+            void *sp = &str;
+            fn_802C686C(sp, (u8 *)sp + 8, 0x200);
+            fn_802C69B0(sp, s);
+            if (fn_802C7008(sp, key) == 0) {
                 u8 **arr = M2C_FIELD(self, u8 ***, 0x34C);
                 result = arr[i] + fn_80248808(key);
                 goto done;
