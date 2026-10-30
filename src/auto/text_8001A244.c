@@ -1,6 +1,15 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+typedef struct {
+    f32 x;
+    f32 y;
+} Vec2_8001C4BC;
+
+static inline s32 fn_8001C418_isType(s32 t) {
+    return t == 9 || t == 11 || t == 12 || t == 10;
+}
+
 void fn_8001B088(void *arg0) {
     void fn_8031EA2C(void *);
     u8 *self = (u8 *)arg0;
