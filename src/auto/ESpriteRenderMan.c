@@ -288,7 +288,8 @@ s32 fn_80041874(s32 arg0) {
 }
 
 s32 fn_800418AC(s32 arg0) {
-    return (*(s32 ***)((u32)*lbl_8041FA4C[0] + arg0 * 4))[2];
+    s32 off = arg0 * 4;
+    return (*(s32 **)((char *)*lbl_8041FA4C[0] + off))[2];
 }
 
 s32 fn_800418C8(s32 arg0) {
