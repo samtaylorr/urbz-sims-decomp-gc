@@ -77,6 +77,11 @@ void fn_80333730(void *arg0, s32 idx, s32 val) {
     self->b[idx] = 1;
 }
 
+void fn_803338AC(s32 arg0, s32 idx) {
+    struct { s32 a[4]; s32 b[4]; } *self = (void *)arg0;
+    self->b[idx] = 0;
+}
+
 s32 fn_803338C0(void *arg0, s32 i) {
     struct TTabScratchEntryA { u8 pad[0x10]; s32 unk10[4]; } *self = arg0;
     return self->unk10[i];
