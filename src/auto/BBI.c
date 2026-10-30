@@ -23,6 +23,15 @@ static inline void *BBI_AllocAligned(s32 size) {
     return p;
 }
 
+static inline s32 BBI_GetType(void *arg1) {
+    s32 fn_8005AB08(void *);
+    void *o = M2C_FIELD(arg1, void **, 0x38);
+    if (o == NULL) {
+        return 0;
+    }
+    return fn_8005AB08(o);
+}
+
 static inline s32 BBI_ListValid(void *n) {
     return n != NULL;
 }
