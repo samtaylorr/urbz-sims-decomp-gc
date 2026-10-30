@@ -36,6 +36,10 @@ typedef struct SoundSlot {
     u32 id;
 } SoundSlot;
 
+static inline s32 List_Valid(void *n) {
+    return n != NULL;
+}
+
 static inline s32 CountedArr_Count(void *data) {
     return data != NULL ? ((s32 *)data)[-1] : 0;
 }
@@ -100,6 +104,33 @@ s32 fn_800244B4(u8 *data, s32 len) {
         shift = (shift + 3) & 0x1F;
     }
     return hash;
+}
+
+void fn_80024504(void *arg0, s32 arg1) {
+    void fn_802CB8D4(void *);
+    void fn_802D20E8(void *);
+    char *list;
+    void *node;
+    char *obj;
+    void *next;
+    char *e;
+
+    list = (char *)arg0 + 8;
+    node = M2C_FIELD(list, void **, 4);
+    while ((node != NULL ? 1 : 0) != 0) {
+        next = M2C_FIELD(node, void **, 4);
+        obj = M2C_FIELD(node, char **, 0);
+        if (M2C_FIELD(list, s32 *, 8) != 0 && obj != NULL) {
+            e = M2C_FIELD(obj, char **, 0x44) + 8;
+            (*(void (**)(void *, s32))(e + 4))(obj + *(s16 *)e, 3);
+        }
+        node = next;
+    }
+    fn_802CB8D4(list);
+    fn_802CB8D4((char *)arg0 + 8);
+    if (arg1 & 1) {
+        fn_802D20E8(arg0);
+    }
 }
 
 void fn_800245B0(void) {
