@@ -75,6 +75,10 @@ void fn_802E08F8(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x454) = 0;
 }
 
+s32 fn_802E0904(void *arg0) {
+    return (u32)(M2C_FIELD(arg0, s32 *, 0x454) - 1) <= 1;
+}
+
 void *fn_802E0AD8(void) {
     return fn_802D1E4C;
 }
