@@ -10332,6 +10332,13 @@ s32 fn_803B6F0C(u16 **arg0) {
     return *arg0 == lbl_803FCE5C;
 }
 
+u16 **fn_803B6F28(u16 **arg0) {
+    extern u16 lbl_803FCE5C[];
+    *arg0 = lbl_803FCE5C;
+    lbl_803FCE5C[0]++;
+    return arg0;
+}
+
 extern void fn_802BE53C(void *);
 void *fn_803B6F48(void *self) {
     fn_802BE53C(self);
