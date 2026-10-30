@@ -107,6 +107,13 @@ void fn_802F4088(void *arg0, void *arg1) {
     fn_802F412C(arg0, 0, 0);
 }
 
+void fn_802F4104(void *self, void *out) {
+    struct TVec3Raw { s32 x, y, z; };
+    char *p = (char *)self + 0x110;
+    *(struct TVec3Raw *)out = *(struct TVec3Raw *)p;
+    M2C_FIELD(out, f32 *, 0xC) = M2C_FIELD(p, f32 *, 0xC);
+}
+
 void fn_802F42E4(s32 arg0, s32 arg1) {
     M2C_UNK fn_802F42A8(s32, s32, M2C_UNK, M2C_UNK, M2C_UNK);
     s32 fn_80337F14(s32);
