@@ -208,9 +208,9 @@ void fn_80324018(void *arg0, s32 arg1) {
 void fn_80324088(void *arg0, f32 arg1) {
     f32 *v = (f32 *)((char *)arg0 + 0x64);
     v[0] = arg1;
-    v[3] = arg1;
     v[1] = arg1;
     v[2] = arg1;
+    v[3] = arg1;
 }
 
 s32 fn_803240A0(s32 arg0) {
