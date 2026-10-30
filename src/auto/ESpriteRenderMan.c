@@ -104,9 +104,9 @@ void fn_800414B0(s32 *self) {
 }
 
 s32 *fn_800414BC(s32 *arg0) {
-    arg0[0] = 0;
-    arg0[2] = 1;
     arg0[1] = 0;
+    arg0[2] = 1;
+    arg0[0] = 0;
     return arg0;
 }
 
