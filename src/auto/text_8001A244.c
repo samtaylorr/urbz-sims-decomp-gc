@@ -10,6 +10,17 @@ static inline s32 fn_8001C418_isType(s32 t) {
     return t == 9 || t == 11 || t == 12 || t == 10;
 }
 
+void *fn_8001A244(void *self) {
+    extern u8 lbl_80406E30[];
+    void *fn_800F6FB4(void *, void *, s32);
+    M2C_FIELD(self, void **, 0x88C) = lbl_80406E30;
+    fn_800F6FB4((u8 *)self + 0x14, (u8 *)self + 0x1C, 0x400);
+    M2C_FIELD(self, s32 *, 0x4) = 0;
+    M2C_FIELD(self, s32 *, 0x0) = 0;
+    M2C_FIELD(self, s32 *, 0x838) = 0;
+    return self;
+}
+
 void fn_8001A29C(void *self, s32 flags) {
     extern u8 lbl_80406E30[];
     void fn_8001B088(void *);
@@ -109,6 +120,14 @@ void fn_8001C3D8(void) {
 
 void fn_8001C3F8(void) {
     fn_8001C2A4();
+}
+
+void fn_8001C418(void *self, s32 a1, s32 a2, s32 a3, s32 a4, s32 a5, s32 a6, s32 a7,
+                 s32 a8, s32 a9, s32 a10, s32 a11, s32 a12, s32 a13) {
+    void fn_8001C4B8(s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32);
+    if (fn_8001C418_isType(*M2C_FIELD(self, s32 **, 0x48))) {
+        fn_8001C4B8(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13);
+    }
 }
 
 void fn_8001C4B8(s32 a1, s32 a2, s32 a3, s32 a4, s32 a5, s32 a6, s32 a7,
