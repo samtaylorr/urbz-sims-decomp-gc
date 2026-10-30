@@ -4782,6 +4782,53 @@ s32 fn_803A610C(s32 arg0, s32 arg1, s32 arg2) {
     return ret;
 }
 
+void fn_803A6170(void **v, void **pos, u32 n, void *const *x) {
+    if (n != 0) {
+        if ((u32)((void **)v[3] - (void **)v[1]) >= n) {
+            void *x_copy = *x;
+            void **old_finish = (void **)v[1];
+            u32 elems_after = old_finish - pos;
+            if (elems_after > n) {
+                void **src = old_finish - n;
+                register u32 nb asm("r27");
+                nb = n * sizeof(void *);
+                PtrVec_Copy(src, old_finish, old_finish);
+                v[1] = (void **)((char *)v[1] + nb);
+                PtrVec_CopyBackward(pos, src, old_finish);
+                {
+                    void **first = pos;
+                    register void **last asm("r0");
+                    last = (void **)(nb + (u32)first);
+                    for (; first != last; first++) {
+                        *first = x_copy;
+                    }
+                }
+            } else {
+                PtrVec_FillN(old_finish, n - elems_after, &x_copy);
+                v[1] = (void **)v[1] + (n - elems_after);
+                PtrVec_Copy(pos, old_finish, (void **)v[1]);
+                v[1] = (void **)v[1] + elems_after;
+                PtrVec_Fill(pos, old_finish, &x_copy);
+            }
+        } else {
+            u32 fill_len = n;
+            u32 old_size = (void **)v[1] - (void **)v[0];
+            u32 len = old_size + *PtrVec_Max(&old_size, &fill_len);
+            void **new_start = len != 0 ? (void **)PtrVec_Allocate(len * 4) : NULL;
+            void **new_finish = PtrVec_CopyPtr(pos, (void **)v[1],
+                PtrVec_FillN(PtrVec_CopyPtr((void **)v[0], pos, new_start), fill_len, x));
+            {
+                void **s = (void **)v[0];
+                u32 c = (void **)v[3] - s;
+                if (s != NULL) {
+                    PtrVec_Deallocate(s, c * 4);
+                }
+            }
+            PtrVec_Set(v, new_start, new_finish, new_start + len);
+        }
+    }
+}
+
 extern u8 lbl_80411680[];
 void fn_803A63F0(void **self, s32 flags) {
     *self = lbl_80411680;
