@@ -10,6 +10,17 @@ static inline s32 fn_8001C418_isType(s32 t) {
     return t == 9 || t == 11 || t == 12 || t == 10;
 }
 
+void fn_8001A29C(void *self, s32 flags) {
+    extern u8 lbl_80406E30[];
+    void fn_8001B088(void *);
+    void fn_802D20E8(void *);
+    M2C_FIELD(self, void **, 0x88C) = lbl_80406E30;
+    fn_8001B088(self);
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_8001B088(void *arg0) {
     void fn_8031EA2C(void *);
     u8 *self = (u8 *)arg0;
