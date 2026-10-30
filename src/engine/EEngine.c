@@ -71,6 +71,11 @@ void fn_802E0648(u8 *self) {
     fn_802D8EF8(self);
 }
 
+void fn_802E06B0(u8 *self) {
+    u8 *vt = *(u8 **)(self + 0x338);
+    (*(void (**)(void *))(vt + 0xA4))(self + *(s16 *)(vt + 0xA0));
+}
+
 void fn_802E08D8(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     if (arg1 != 0) {
         M2C_FIELD(arg0, s32 *, 0x45C) = arg1;
