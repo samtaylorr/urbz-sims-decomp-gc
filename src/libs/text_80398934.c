@@ -5254,10 +5254,10 @@ void fn_803A8188(u8 **self, void *unused, void *stream, void *arg3) {
     size = end - (Elem12 *)self[0];
     d = size - n;
     if (d < 0) {
-        s32 cnt = n - size;
         Elem12 zero;
-        Elem12 *zp = &zero;
-        fn_80248488(&zero, 0, sizeof(zero));
+        register Elem12 *zp asm("r30") = &zero;
+        s32 cnt = n - size;
+        fn_80248488(zp, 0, sizeof(zero));
         fn_803A7DD0(self, end, cnt, zp);
     } else if (d > 0) {
         Vec12Elem *first = (Vec12Elem *)self[1] - d;
@@ -10514,6 +10514,18 @@ u16 **fn_803B6F78(u16 **arg0, u16 **arg1) {
     *arg0 = p;
     p[0]++;
     return arg0;
+}
+
+void fn_803B6F94(u16 **self, s32 flags) {
+    extern void (**lbl_80494DA0)(void *);
+    u16 *ref = *self;
+
+    if (--*ref == 0) {
+        lbl_80494DA0[1](ref);
+    }
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
 }
 
 s32 fn_803B7070(u8 **arg0, u8 **arg1) {
