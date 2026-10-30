@@ -225,6 +225,12 @@ void fn_802E13B8(void) {
 
 }
 
+void fn_802E1538(void) {
+    extern u8 lbl_804448E8[];
+    void fn_802D7EB0(void *, u32);
+    fn_802D7EB0(lbl_804448E8, 0x80000000);
+}
+
 void fn_802E18CC(void *arg0, s32 arg1) {
     if ((s32) M2C_FIELD(arg0, s32 *, 0x30) == arg1) {
         M2C_FIELD(arg0, s32 *, 0x30) = 0;
