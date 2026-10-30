@@ -24,6 +24,26 @@ void fn_80390D84(void) {
     lbl_80491BD8[5] = base + 0x280;
 }
 
+void fn_803916AC(void) {
+    extern u8 *lbl_804965A8;
+    extern u16 *lbl_804965AC;
+    u8 si;
+    u16 k;
+    u16 code;
+
+    k = 0;
+    code = 0;
+    si = lbl_804965A8[0];
+    while (lbl_804965A8[k] != 0) {
+        while (lbl_804965A8[k] == si) {
+            lbl_804965AC[k++] = code;
+            code++;
+        }
+        code <<= 1;
+        si++;
+    }
+}
+
 void fn_803918D0(void) {
     extern void *lbl_80496610;
 
@@ -36,6 +56,7 @@ void fn_803918D0(void) {
 
 s32 fn_8039850C(Nibbles *n) {
     s32 v;
+    s32 c;
 
     if (!(n->pos & 0xF)) {
         n->a = (*n->ptr >> 4) & 7;
@@ -44,9 +65,9 @@ s32 fn_8039850C(Nibbles *n) {
         n->pos += 2;
     }
     if (n->pos & 1) {
-        u8 *p = n->ptr;
-        n->ptr = p + 1;
-        v = (s32)(*p << 28) >> 28;
+        c = *n->ptr;
+        n->ptr++;
+        v = (s32)(c << 28) >> 28;
     } else {
         v = (s32)((*n->ptr << 24) & 0xF0000000) >> 28;
     }
