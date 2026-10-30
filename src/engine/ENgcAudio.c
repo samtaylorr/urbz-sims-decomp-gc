@@ -249,10 +249,10 @@ void fn_8033CED8(void *arg0, void *p, s32 *out) {
 }
 
 void fn_8033D098(void *arg0, void *arg1, s32 *arg2) {
-    M2C_UNK fn_8035EA90(s32, s32, s32);
-    M2C_UNK fn_8035EB9C(s32, s32, s32);
+    void fn_8035EA90(void *, s32, s32);
+    void fn_8035EB9C(void *, s32, s32);
     extern s32 lbl_80494F98;
-    extern s32 lbl_80494FAC;
+    extern void *lbl_80494FAC;
 
     if (lbl_80494F98 != 0 && arg1 != NULL) {
         if (M2C_FIELD(arg1, s32 *, 0x1C) == 0) {
