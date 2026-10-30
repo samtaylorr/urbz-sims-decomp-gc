@@ -1,6 +1,12 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+static inline s32 ListCount(u8 *list) {
+    return *(s32 *)(list + 4);
+}
+
+extern u8 lbl_804194A0[];
+
 void fn_802D2FD0(void);
 void fn_8036BD54(void) {
     fn_802D2FD0();
