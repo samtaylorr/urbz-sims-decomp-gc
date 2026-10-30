@@ -133,6 +133,10 @@ void fn_802FFD20(void) {
 
 }
 
+s32 fn_802FFD24(void *arg0) {
+    return M2C_FIELD(arg0, u32 *, 0xE4) == 0x900DBEEF;
+}
+
 void fn_802FFD40(void) {
     void fn_802FFB7C(s32, s32);
     fn_802FFB7C(1, 0xFFFF);
