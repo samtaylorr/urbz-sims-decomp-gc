@@ -136,6 +136,18 @@ void fn_8009B3F4(void) {
     }
 }
 
+void fn_8009B464(void) {
+    extern void fn_8031EA2C(s32);
+    if (lbl_80494274 != 0) {
+        fn_8031EA2C(lbl_80494274);
+        lbl_80494274 = 0;
+    }
+    if (lbl_80494278 != 0) {
+        fn_8031EA2C(lbl_80494278);
+        lbl_80494278 = 0;
+    }
+}
+
 void fn_8009B580(void) {
 
 }
