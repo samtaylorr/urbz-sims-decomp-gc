@@ -177,6 +177,8 @@ void fn_8036C41C(void *self, s32 flags) {
 }
 
 void fn_8036C48C(void *self) {
+    void fn_8036619C(void *);
+    void fn_8036C56C(s32);
     char *list = (char *)self + 0x10;
     void *node = M2C_FIELD(list, void **, 0);
     void *next;
