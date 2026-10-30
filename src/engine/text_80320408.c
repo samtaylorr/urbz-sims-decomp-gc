@@ -29,6 +29,22 @@ s32 fn_80320468(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void fn_80320528(void *arg0, s32 arg1) {
+    extern void fn_8036C92C(void *, s32);
+    extern void fn_8031E910(void *, s32);
+    extern void *fn_802D0AB8();
+    extern void fn_802D1A00(void *, void *);
+    extern u8 lbl_8041B800[];
+
+    *(u8 **)arg0 = lbl_8041B800;
+    fn_80320590(arg0);
+    fn_8036C92C((u8 *)arg0 + 0x20, 2);
+    fn_8031E910(arg0, 0);
+    if (arg1 & 1) {
+        fn_802D1A00(fn_802D0AB8(), arg0);
+    }
+}
+
 void fn_80320590(void *arg0) {
     M2C_UNK fn_8036C508(s32);
     void *var_r31;
@@ -39,6 +55,43 @@ void fn_80320590(void *arg0) {
             fn_8036C508(M2C_FIELD(var_r31, s32 *, 0));
             var_r31 = M2C_FIELD(var_r31, void **, 8);
         } while (var_r31 != NULL);
+    }
+}
+
+void fn_803205D4(void *arg0, void *arg1) {
+    extern void fn_802D39E4(void *);
+    extern void fn_802C5B1C(void *, void *);
+    extern void fn_802D3CE4(void *, s32);
+    extern void fn_802C5BBC(void *, void *);
+    extern void fn_802D39F0(void *, s32);
+    struct {
+        s32 a;
+        s32 pad[3];
+    } buf;
+    void *p;
+
+    fn_80320590(arg0);
+    fn_802D39E4(&buf);
+    fn_802C5B1C(arg1, &buf);
+    fn_802D3CE4((char *)arg0 + 0x18, buf.a);
+    fn_802C5BBC(arg1, (char *)arg0 + 0x20);
+    p = M2C_FIELD(arg0, void **, 0x24);
+    if (p != NULL) {
+        p = *(void **)p;
+        M2C_FIELD(arg0, void **, 0x60) = p;
+        M2C_FIELD(arg0, f32 *, 0x58) = M2C_FIELD(p, s32 *, 4);
+    }
+    fn_802D39F0(&buf, buf.a);
+}
+
+void fn_80322898(s32 arg0, Vec2Arg *arg1, s32 arg2, s32 arg3) {
+    extern f32 lbl_803F301C[];
+
+    if (arg2 != 0) {
+        arg1->x = (s32)(arg1->x + lbl_803F301C[0]);
+    }
+    if (arg3 != 0) {
+        arg1->y = (s32)(arg1->y + lbl_803F301C[0]);
     }
 }
 
@@ -69,7 +122,7 @@ void fn_80323CB8(s32 arg0, s32 arg1) {
 }
 
 void fn_80323D3C(void) {
-    M2C_UNK fn_803204A8();
+    void *fn_803204A8();
     M2C_UNK fn_80323EB0(M2C_UNK);
     fn_80323EB0(0x78);
     fn_803204A8();
