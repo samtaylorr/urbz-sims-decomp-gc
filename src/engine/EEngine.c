@@ -216,6 +216,35 @@ s32 fn_802E0FB4(void *arg0) {
     return 1;
 }
 
+void fn_802E1008(void) {
+    extern u8 *lbl_80496220;
+    void fn_80339258(void);
+    u8 *obj = lbl_80496220;
+    u8 *vt = *(u8 **)obj;
+    (*(void (**)(void *))(vt + 0x11C))(obj + *(s16 *)(vt + 0x118));
+    fn_80339258();
+}
+
+void fn_802E12F8(u8 *self) {
+    extern u8 *lbl_80495050;
+    extern u8 *lbl_80494FC4;
+    extern f32 lbl_80494E18;
+    extern f32 lbl_80494E1C;
+    extern f32 lbl_80494E20;
+    void fn_802EE73C(void *);
+    u8 *obj;
+    u8 *vt;
+    fn_802EE73C(lbl_80495050);
+    obj = lbl_80495050;
+    vt = *(u8 **)obj;
+    (*(void (**)(void *))(vt + 0x3C))(obj + *(s16 *)(vt + 0x38));
+    obj = lbl_80494FC4;
+    vt = *(u8 **)obj;
+    lbl_80494E20 = lbl_80494E1C;
+    lbl_80494E1C = lbl_80494E18;
+    lbl_80494E18 = (*(f32 (**)(void *, void *))(vt + 0x2C))(obj + *(s16 *)(vt + 0x28), self + 0x20);
+}
+
 void fn_802E1378(u8 *self) {
     extern u8 *lbl_80495220;
     u8 *obj = lbl_80495220;
