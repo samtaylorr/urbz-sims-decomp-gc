@@ -93,6 +93,10 @@ void fn_802FFCAC(void *arg0, s32 arg1, s32 i) {
     p->e[i].a = arg1;
 }
 
+void fn_802FFCBC(void *arg0, s32 arg1, s32 i) {
+    M2C_FIELD(arg0, s32 **, 0x68)[i] = arg1;
+}
+
 void fn_802FFCCC(void *arg0) {
     M2C_FIELD(arg0, s32 *, 4) = (s32) (M2C_FIELD(arg0, s32 *, 4) & 0xFDFFFFFF);
 }
