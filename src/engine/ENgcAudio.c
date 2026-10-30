@@ -10,6 +10,34 @@ void fn_8033BD7C(void **self, s32 flags) {
     }
 }
 
+M2C_UNK fn_8033BE20(void *self, s32 flags) {
+    extern u8 lbl_8041C1C8[];
+    extern void fn_802CAA00(void *, s32);
+    M2C_FIELD(self, u8 **, 0) = lbl_8041C1C8;
+    fn_802CAA00((u8 *)self + 0x5C, 2);
+    fn_802CAA00((u8 *)self + 0x40, 2);
+    fn_8033BD7C(self, flags);
+}
+
+s32 *fn_8033BE7C(s32 *self, s32 arg1, s32 arg2) {
+    self[0] = arg1;
+    self[2] = -1;
+    self[4] = 0;
+    self[3] = arg2;
+    self[1] = 0;
+    return self;
+}
+
+s32 *fn_8033BEA0(s32 *self, s32 arg1, s32 arg2) {
+    s32 fn_80337F14(s32);
+    self[0] = fn_80337F14(arg1);
+    self[4] = 0;
+    self[2] = -1;
+    self[3] = arg2;
+    self[1] = 0;
+    return self;
+}
+
 void fn_8033BFF8(void) {
 
 }
