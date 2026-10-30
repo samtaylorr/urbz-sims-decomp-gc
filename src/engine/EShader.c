@@ -124,6 +124,11 @@ s32 fn_802FFD08(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0xE8);
 }
 
+void fn_802FFD10(void *arg0, s32 i, f32 v) {
+    struct { u8 pad[0x78]; struct { f32 a; u8 pad[0x3C]; } e[1]; } *p = arg0;
+    p->e[i].a = v;
+}
+
 void fn_802FFD20(void) {
 
 }
