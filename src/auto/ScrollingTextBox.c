@@ -124,6 +124,18 @@ void fn_8009B1A4(void *self, s32 flags) {
     }
 }
 
+extern s32 lbl_80494274;
+extern s32 lbl_80494278;
+void fn_8009B3F4(void) {
+    s32 fn_8033740C(void *, u32, s32, s32);
+    extern u8 lbl_8045BA40[];
+    if (lbl_80494274 == 0) {
+        u8 *p = lbl_8045BA40;
+        lbl_80494274 = fn_8033740C(p, 0x1A18CA65, 0, 0);
+        lbl_80494278 = fn_8033740C(p, 0x1239C594, 0, 0);
+    }
+}
+
 void fn_8009B580(void) {
 
 }
