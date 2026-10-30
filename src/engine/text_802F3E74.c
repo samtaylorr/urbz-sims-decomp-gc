@@ -148,6 +148,14 @@ void fn_802F41E8(void *self) {
     M2C_FIELD(self, s32 *, 0x124) = 0;
 }
 
+M2C_UNK fn_802F42A8(s32 self, s32 arg1, M2C_UNK arg2, M2C_UNK arg3, M2C_UNK arg4) {
+    extern void fn_802F412C(void *, s32, s32);
+    M2C_FIELD(self, s32 *, 0x120) = arg1;
+    M2C_FIELD(self, s32 *, 0x138) = arg2;
+    M2C_FIELD(self, s32 *, 0x18) = 0;
+    fn_802F412C((void *)self, arg3, arg4);
+}
+
 void fn_802F42E4(s32 arg0, s32 arg1) {
     M2C_UNK fn_802F42A8(s32, s32, M2C_UNK, M2C_UNK, M2C_UNK);
     s32 fn_80337F14(s32);
