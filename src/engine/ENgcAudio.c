@@ -50,8 +50,8 @@ s32 *fn_8033BEA0(s32 *self, s32 arg1, s32 arg2) {
     self[0] = fn_80337F14(arg1);
     self[1] = 0;
     self[2] = -1;
-    self[3] = arg2;
     self[4] = 0;
+    self[3] = arg2;
     return self;
 }
 
