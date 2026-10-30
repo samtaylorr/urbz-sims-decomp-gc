@@ -213,8 +213,7 @@ void fn_8036C508(u8 *self) {
     s32 i;
 
     for (i = 0; i < ListCount(self + 0x20); i++) {
-        u8 **data = *(u8 ***)(self + 0x20);
-        fn_8036C2DC(data[i]);
+        fn_8036C2DC(*(u8 **)(*(u32 *)(self + 0x20) + i * 4));
     }
 }
 
@@ -308,16 +307,17 @@ extern void fn_802CB8D4(void *);
 extern void fn_8036619C(void *);
 void fn_8036C998(char *self) {
     char *list = self + 4;
-    void ***node = *(void ****)(list + 4);
-    void ***next;
-    void **obj;
+    void *node = M2C_FIELD(list, void **, 4);
+    void *next;
+    char *obj;
+    char *vt;
 
-    while (node != NULL) {
-        obj = (void **)node[0];
-        next = (void ***)node[1];
-        if (*(s32 *)(list + 8) != 0) {
-            char *vt = (char *)*obj;
-            (*(void (**)(void *))(vt + 0xC))((char *)obj + *(s16 *)(vt + 8));
+    while (List_Valid(node)) {
+        next = M2C_FIELD(node, void **, 4);
+        obj = M2C_FIELD(node, char **, 0);
+        if (M2C_FIELD(list, s32 *, 8) != 0) {
+            vt = M2C_FIELD(obj, char **, 0);
+            (*(void (**)(void *))(vt + 0xC))(obj + *(s16 *)(vt + 8));
         }
         node = next;
     }
