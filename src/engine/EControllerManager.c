@@ -56,17 +56,15 @@ s32 fn_803336A8(void *arg0) {
 
 void fn_803336D4(void) {
     extern char *lbl_804939C0[];
-    char **p = lbl_804939C0;
-    char **end = p + 3;
+    s32 i;
     char *obj;
     char *vt;
 
-    do {
-        obj = *p;
-        p++;
+    for (i = 0; i <= 3; i++) {
+        obj = lbl_804939C0[i];
         vt = M2C_FIELD(obj, char **, 0x204);
         (*(void (**)(void *))(vt + 0xB4))(obj + *(s16 *)(vt + 0xB0));
-    } while (p <= end);
+    }
 }
 
 void fn_8033372C(void) {
