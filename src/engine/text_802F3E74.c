@@ -114,6 +114,40 @@ void fn_802F4104(void *self, void *out) {
     M2C_FIELD(out, f32 *, 0xC) = M2C_FIELD(p, f32 *, 0xC);
 }
 
+void fn_802F412C(void *self, s32 arg1, s32 arg2) {
+    struct TMtx44Raw { s64 m[8]; };
+    extern void fn_802F4520(void *, s32, s32);
+    extern void fn_802F48A4(void *);
+    *(struct TMtx44Raw *)((char *)self + 0xD0) = *(struct TMtx44Raw *)((char *)self + 0x90);
+    fn_802F4520(self, arg1, arg2);
+    fn_802F48A4(self);
+}
+
+void fn_802F41E8(void *self) {
+    extern void fn_8031EA2C(void *);
+    extern void *fn_802D0AB8();
+    extern void fn_802D1A00(void *, void *);
+    u32 i;
+
+    if (M2C_FIELD(self, void **, 0x134) != NULL) {
+        fn_8031EA2C(M2C_FIELD(self, void **, 0x134));
+        M2C_FIELD(self, void **, 0x134) = NULL;
+    }
+    if (M2C_FIELD(self, void **, 0x128) != NULL) {
+        fn_802D1A00(fn_802D0AB8(), M2C_FIELD(self, void **, 0x128));
+        M2C_FIELD(self, void **, 0x128) = NULL;
+    }
+    if (M2C_FIELD(self, void ***, 0x12C) != NULL) {
+        for (i = 0; i < M2C_FIELD(self, u32 *, 0x130); i++) {
+            fn_8031EA2C(M2C_FIELD(self, void ***, 0x12C)[i]);
+        }
+        fn_802D1A00(fn_802D0AB8(), M2C_FIELD(self, void ***, 0x12C));
+        M2C_FIELD(self, void ***, 0x12C) = NULL;
+    }
+    M2C_FIELD(self, s32 *, 0x130) = 0;
+    M2C_FIELD(self, s32 *, 0x124) = 0;
+}
+
 void fn_802F42E4(s32 arg0, s32 arg1) {
     M2C_UNK fn_802F42A8(s32, s32, M2C_UNK, M2C_UNK, M2C_UNK);
     s32 fn_80337F14(s32);
