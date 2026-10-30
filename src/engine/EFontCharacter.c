@@ -219,6 +219,24 @@ s32 fn_8036C878(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void fn_8036C92C(void *self, s32 flags) {
+    extern u8 lbl_8041D820[];
+    extern u8 lbl_804194A0[];
+    extern void fn_80365C40(void *, s32);
+    void fn_8036C998(char *);
+    void fn_802CB8D4(void *);
+    void fn_802D20E8(void *);
+
+    M2C_FIELD(self, void **, 0) = lbl_8041D820;
+    fn_8036C998(self);
+    fn_80365C40((char *)self + 0x28, 2);
+    fn_802CB8D4((char *)self + 4);
+    M2C_FIELD(self, void **, 0) = lbl_804194A0;
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 extern void fn_8036C41C(void *, s32);
 extern void fn_8036C92C(void *, s32);
 extern void fn_802CB8D4(void *);
