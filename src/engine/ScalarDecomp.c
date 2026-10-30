@@ -89,6 +89,14 @@ void fn_8036B300(void *arg0) {
     fn_8036B50C(arg0, 2, n, (u8 *)arg0 + 0x38);
 }
 
+void fn_8036B4A0(void *arg0, s32 arg1, f32 *out) {
+    extern u32 fn_802DE634(s32, s32, s32);
+    u32 v;
+
+    v = fn_802DE634(M2C_FIELD(arg0, s32 *, 0x0), arg1, M2C_FIELD(arg0, s8 *, 0x1F));
+    *out = (f32)v * M2C_FIELD(arg0, f32 *, 0x3C) + M2C_FIELD(arg0, f32 *, 0x40);
+}
+
 void fn_8036BB88(s32 arg0, s32 arg1) {
     if (arg1 == 0xFFFF) {
         if (arg0 != 0) {
