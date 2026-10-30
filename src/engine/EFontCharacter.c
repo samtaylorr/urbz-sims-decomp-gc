@@ -77,12 +77,13 @@ void fn_8036C0F8(void *self, void *stream) {
     M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)((char *)stream + M2C_FIELD(vt, s16 *, 0x38), &c, 4);
 }
 
+void fn_8036C2DC(u8 *self);
 void fn_8036C19C(char *self, void *stream) {
-    extern u16 lbl_80493D6A;
+    extern u16 lbl_80493D6A[];
     void *vt;
 
     fn_8036C2DC((u8 *)self);
-    if (lbl_80493D6A == 0) {
+    if (lbl_80493D6A[0] == 0) {
         vt = M2C_FIELD(stream, void **, 0x18);
         M2C_FIELD(vt, void (**)(void *, void *, s32), 0x34)((char *)stream + M2C_FIELD(vt, s16 *, 0x30), self + 4, 4);
         vt = M2C_FIELD(stream, void **, 0x18);
