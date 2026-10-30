@@ -76,26 +76,23 @@ s32 fn_802FF608(void *arg0, s32 i) {
 }
 
 s32 fn_802FF658(void *arg0) {
+    struct { u8 n; u8 pad[0x63]; struct { u8 *a; u8 pad[0x3C]; } e[1]; } *p = arg0;
     if (M2C_FIELD(arg0, s32 *, 4) & 0x04000000) {
         u8 *q = (u8 *)arg0 + 0x64;
-        s32 n = *(u8 *)(q + 0x24);
         u8 **arr;
         s32 i;
-        if (n != 0 && (arr = *(u8 ***)(q + 4)) != NULL) {
-            for (i = 0; i < n; i++) {
-                u8 *e = *arr++;
+        if (*(u8 *)(q + 0x24) != 0 && (arr = *(u8 ***)(q + 4)) != NULL) {
+            for (i = 0; i < *(u8 *)(q + 0x24); i++) {
+                u8 *e = arr[i];
                 if (e != NULL && (M2C_FIELD(e, s32 *, 8) & 0x20)) {
                     return 1;
                 }
             }
         }
     } else {
-        u32 n = *(u8 *)arg0;
         u32 i;
-        u8 **arr = (u8 **)((u8 *)arg0 + 0x64);
-        for (i = 0; i < n; i++) {
-            u8 *e = *arr;
-            arr += 0x10;
+        for (i = 0; i < p->n; i++) {
+            u8 *e = p->e[i].a;
             if (e != NULL && (M2C_FIELD(e, s32 *, 8) & 0x20)) {
                 return 1;
             }
