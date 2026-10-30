@@ -112,8 +112,7 @@ void *fn_802E0A18(void *self, void *key) {
             fn_802C686C(&str, str.buf, 0x200);
             fn_802C69B0(&str, s);
             if (fn_802C7008(&str, key) == 0) {
-                result = M2C_FIELD(self, u8 ***, 0x34C)[i] + fn_80248808(key);
-                break;
+                return M2C_FIELD(self, u8 ***, 0x34C)[i] + fn_80248808(key);
             }
         }
     }
@@ -215,6 +214,13 @@ s32 fn_802E0FB4(void *arg0) {
         return lbl_80494E04;
     }
     return 1;
+}
+
+void fn_802E1378(u8 *self) {
+    extern u8 *lbl_80495220;
+    u8 *obj = lbl_80495220;
+    u8 *vt = *(u8 **)(obj + 0x338);
+    (*(void (**)(void *, void *))(vt + 0x3C))(obj + *(s16 *)(vt + 0x38), self + 0x34);
 }
 
 void fn_802E13B4(void) {
