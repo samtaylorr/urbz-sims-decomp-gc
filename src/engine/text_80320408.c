@@ -29,6 +29,33 @@ s32 fn_80320468(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void *fn_803204A8(void *arg0) {
+    extern void fn_8031E8B0(void *);
+    extern void fn_8036C8B8(void *);
+    extern u8 lbl_8041B800[];
+    extern f32 lbl_803F2FB4[];
+    extern f32 lbl_803F2FB8[];
+    f32 *v;
+    f32 zero;
+    f32 one;
+
+    fn_8031E8B0(arg0);
+    M2C_FIELD(arg0, u8 **, 0) = lbl_8041B800;
+    fn_8036C8B8((char *)arg0 + 0x20);
+    zero = lbl_803F2FB4[0];
+    one = lbl_803F2FB8[0];
+    v = (f32 *)((char *)arg0 + 0x64);
+    M2C_FIELD(arg0, s32 *, 0x60) = 0;
+    M2C_FIELD(arg0, f32 *, 0x58) = one;
+    M2C_FIELD(arg0, f32 *, 0x5C) = zero;
+    v[3] = zero;
+    v[2] = zero;
+    v[1] = zero;
+    v[0] = zero;
+    M2C_FIELD(arg0, s32 *, 0x74) = -1;
+    return arg0;
+}
+
 void fn_80320528(void *arg0, s32 arg1) {
     extern void fn_80320590(void *);
     extern void fn_8036C92C(void *, s32);
@@ -69,11 +96,13 @@ void fn_803205D4(void *arg0, void *arg1) {
         s32 a;
         s32 pad[3];
     } buf;
+    register void *bp asm("r29");
     void *p;
 
+    bp = &buf;
     fn_80320590(arg0);
-    fn_802D39E4(&buf);
-    fn_802C5B1C(arg1, &buf);
+    fn_802D39E4(bp);
+    fn_802C5B1C(arg1, bp);
     fn_802D3CE4((char *)arg0 + 0x18, buf.a);
     fn_802C5BBC(arg1, (char *)arg0 + 0x20);
     p = M2C_FIELD(arg0, void **, 0x24);
@@ -82,17 +111,19 @@ void fn_803205D4(void *arg0, void *arg1) {
         M2C_FIELD(arg0, void **, 0x60) = p;
         M2C_FIELD(arg0, f32 *, 0x58) = M2C_FIELD(p, s32 *, 4);
     }
-    fn_802D39F0(&buf, buf.a);
+    fn_802D39F0(bp, buf.a);
 }
 
 void fn_80322898(s32 arg0, Vec2Arg *arg1, s32 arg2, s32 arg3) {
     extern f32 lbl_803F301C[];
 
-    if (arg2 != 0) {
-        arg1->x = (s32)(arg1->x + lbl_803F301C[0]);
-    }
-    if (arg3 != 0) {
-        arg1->y = (s32)(arg1->y + lbl_803F301C[0]);
+    if (arg2 != 0 || arg3 != 0) {
+        if (arg2 != 0) {
+            arg1->x = (s32)(arg1->x + lbl_803F301C[0]);
+        }
+        if (arg3 != 0) {
+            arg1->y = (s32)(arg1->y + lbl_803F301C[0]);
+        }
     }
 }
 
