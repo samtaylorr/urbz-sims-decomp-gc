@@ -10528,6 +10528,19 @@ void fn_803B6F94(u16 **self, s32 flags) {
     }
 }
 
+u16 **fn_803B6FFC(u16 **self, u16 **other) {
+    extern void (**lbl_80494DA0)(void *);
+    u16 *ref;
+
+    (**other)++;
+    ref = *self;
+    if (--*ref == 0) {
+        lbl_80494DA0[1](ref);
+    }
+    *self = *other;
+    return self;
+}
+
 s32 fn_803B7070(u8 **arg0, u8 **arg1) {
     s32 fn_80248268(const void *, const void *, u32);
     u8 *a = *arg0;
