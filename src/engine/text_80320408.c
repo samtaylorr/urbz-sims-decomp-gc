@@ -30,6 +30,7 @@ s32 fn_80320468(s32 arg0, s32 *out) {
 }
 
 void fn_80320528(void *arg0, s32 arg1) {
+    extern void fn_80320590(void *);
     extern void fn_8036C92C(void *, s32);
     extern void fn_8031E910(void *, s32);
     extern void *fn_802D0AB8();
