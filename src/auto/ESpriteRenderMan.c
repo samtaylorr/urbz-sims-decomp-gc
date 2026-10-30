@@ -231,19 +231,9 @@ void fn_800416F4(void **arg0, void *arg1) {
 void *fn_8004174C(void *arg0, s32 arg1) {
     extern void *fn_8003FC08(void *);
     extern void fn_802CB69C(void *, void *);
-    void *p;
-    void *heap;
     void *obj;
 
-    heap = ((void *(*)(void))fn_802D0AB8)();
-    p = fn_802D197C(heap, 0xF0, 0x10);
-    if (p == NULL) {
-        p = fn_802DC3C0(heap, 0xF0, 0x10, 0, 0);
-        if (p == NULL && heap == ((void *(*)(void))fn_802D0AB8)()) {
-            p = fn_802DC3C0(fn_802D0B3C(), 0xF0, 0x10, 0, 0);
-        }
-    }
-    obj = fn_8003FC08(p);
+    obj = fn_8003FC08(ESprite_Alloc());
     M2C_FIELD(obj, s32 *, 8) = arg1;
     fn_802CB69C(arg0, obj);
     return obj;
