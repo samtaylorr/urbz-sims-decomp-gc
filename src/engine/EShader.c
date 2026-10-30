@@ -23,6 +23,11 @@ s32 fn_802FEFA0(void *arg0) {
     return 1;
 }
 
+void fn_802FFB40(char *self, s32 arg1) {
+    char *vt = *(char **)(self + 0xF0);
+    (*(void (**)(char *, s32, s32))(vt + 0x14))(self + *(s16 *)(vt + 0x10), arg1, 0);
+}
+
 void fn_802FFB78(void) {
 
 }
