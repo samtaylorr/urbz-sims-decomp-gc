@@ -25,10 +25,10 @@ s32 fn_8036BDB4(s32 arg0, s32 *out) {
 }
 
 void fn_8036BF7C(char *self, void *stream) {
-    extern u16 lbl_80493D42;
+    extern u16 lbl_80493D42[];
     void *vt;
 
-    if (lbl_80493D42 == 0) {
+    if (lbl_80493D42[0] == 0) {
         vt = M2C_FIELD(stream, void **, 0x28);
         M2C_FIELD(vt, void (**)(void *, void *, s32), 0x1C)((char *)stream + M2C_FIELD(vt, s16 *, 0x18), self + 4, 4);
         vt = M2C_FIELD(stream, void **, 0x28);
