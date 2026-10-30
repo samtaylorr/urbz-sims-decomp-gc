@@ -204,21 +204,23 @@ void fn_800416F4(void **arg0, void *arg1) {
     void *obj;
 
     node = *arg0;
-    while (node != NULL) {
-        obj = M2C_FIELD(node, void **, 0);
-        if (M2C_FIELD(obj, s32 *, 8) == M2C_FIELD(arg1, s32 *, 0x64)) {
-            M2C_FIELD(obj, s32 *, 4) = 1;
-            return;
-        }
-        node = M2C_FIELD(node, void **, 8);
+    if (node != NULL) {
+        do {
+            obj = M2C_FIELD(node, void **, 0);
+            if (M2C_FIELD(obj, s32 *, 8) == M2C_FIELD(arg1, s32 *, 0x64)) {
+                M2C_FIELD(obj, s32 *, 4) = 1;
+                return;
+            }
+            node = M2C_FIELD(node, void **, 8);
+        } while (node != NULL);
     }
 }
 
 void *fn_8004174C(void *arg0, s32 arg1) {
     extern void *fn_8003FC08(void *);
     extern void fn_802CB69C(void *, void *);
-    void *heap;
     void *p;
+    void *heap;
     void *obj;
 
     heap = ((void *(*)(void))fn_802D0AB8)();
@@ -274,8 +276,8 @@ void fn_80041830(f32 *m) {
 
 extern s32 lbl_803F5B24[];
 extern s32 lbl_803F5B3C[][9];
-extern s32 ***lbl_8041FA4C;
-extern s32 ***lbl_8041FA48;
+extern s32 ***lbl_8041FA4C[];
+extern s32 ***lbl_8041FA48[];
 s32 fn_80041874(s32 arg0) {
     s32 i;
 
