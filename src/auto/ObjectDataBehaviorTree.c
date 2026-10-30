@@ -69,19 +69,33 @@ typedef struct BTNode {
     void *unk54;
     u8 unk58[1];
 } BTNode;
+
+void fn_800F687C(void *, void *, s32);
+
+static inline void BTString_Init(BTString *s) {
+    fn_800F687C(s, s->buf, 0x40);
+}
+
 extern void fn_802D20E8(void *);
 BTNode *fn_801B25A4(BTNode *self) {
     void fn_800F687C(void *, void *, s32);
     void fn_800F68F0(void *, const char *, s32);
     void fn_801B3814(void *, s32, s32);
     extern char lbl_803DBFF8[];
+    register s32 zero asm("r27") = 0;
+    register BTString *str asm("r28");
+    register const char *s asm("r29");
+    char *buf;
 
-    self->unk8 = 0;
+    self->unk8 = zero;
+    str = &self->name;
+    s = lbl_803DBFF8;
     self->vtable = lbl_80415560;
     self->unk4 = 0;
-    fn_800F687C(&self->name, self->name.buf, 0x40);
-    fn_800F68F0(&self->name, lbl_803DBFF8, -1);
-    self->unk54 = 0;
+    buf = self->name.buf;
+    fn_800F687C(str, buf, 0x40);
+    fn_800F68F0(str, s, -1);
+    self->unk54 = zero;
     fn_801B3814(self->unk58, 0, 0);
     return self;
 }
@@ -100,17 +114,19 @@ BTNode *fn_801B2660(BTNode *self, BTNode *other) {
     s16 fn_801B28E4(void *);
     void fn_801B28EC(void *, s16);
     BTString tmp;
+    register BTString *t asm("r29");
     void *vt;
 
     self->vtable = lbl_80415560;
     fn_800F687C(&self->name, self->name.buf, 0x40);
+    t = &tmp;
     fn_801B3814(self->unk58, 0, 0);
     self->unk8 = 0;
     self->unk54 = other->unk54;
-    fn_800F687C(&tmp, tmp.buf, 0x40);
+    fn_800F687C(t, t->buf, 0x40);
     vt = other->vtable;
-    M2C_FIELD(vt, void (**)(void *, void *), 0x44)((char *)other + M2C_FIELD(vt, s16 *, 0x40), &tmp);
-    ((s32 (*)(void *, void *))fn_801B2770)(self, &tmp);
+    M2C_FIELD(vt, void (**)(void *, void *), 0x44)((char *)other + M2C_FIELD(vt, s16 *, 0x40), t);
+    ((s32 (*)(void *, void *))fn_801B2770)(self, t);
     fn_801B28EC(self, fn_801B28E4(other));
     return self;
 }
