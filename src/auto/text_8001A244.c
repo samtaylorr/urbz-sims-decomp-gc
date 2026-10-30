@@ -100,7 +100,8 @@ void fn_8001C3F8(void) {
     fn_8001C2A4();
 }
 
-void fn_8001C4B8(void) {
+void fn_8001C4B8(s32 a1, s32 a2, s32 a3, s32 a4, s32 a5, s32 a6, s32 a7,
+                 s32 a8, s32 a9, s32 a10, s32 a11, s32 a12, s32 a13) {
 
 }
 
