@@ -151,8 +151,8 @@ void fn_8036DBA8(void *self) {
         fn_802D1A00(fn_802D0AB8(), M2C_FIELD(self, void ***, 0xAC));
         M2C_FIELD(self, void ***, 0xAC) = NULL;
     }
-    M2C_FIELD(self, s32 *, 0xB0) = 0;
     M2C_FIELD(self, s32 *, 0xA4) = 0;
+    M2C_FIELD(self, s32 *, 0xB0) = 0;
 }
 
 extern void fn_802E34F0(void *, void *);
