@@ -154,6 +154,7 @@ s32 fn_800245DC(void *arg0) {
 void fn_8002460C(void *arg0) {
     M2C_UNK fn_802D1FC8(M2C_UNK);
     void *fn_80026734();
+    s32 fn_80024688(s32 *self, void *item);
     s32 i;
     void *p;
 
