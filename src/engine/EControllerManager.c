@@ -83,6 +83,15 @@ s32 fn_803338C0(void *arg0, s32 i) {
     return self->unk10[i];
 }
 
+void *fn_803338D0(s32 arg0, s32 i) {
+    extern void *lbl_804939C0[];
+    void *ret = 0;
+    if (i <= 3) {
+        ret = lbl_804939C0[i];
+    }
+    return ret;
+}
+
 s32 fn_8033390C(void *mgr, s32 arg) {
     extern s32 lbl_804939C0[];
     s32 fn_803338F0(void *, s32);
