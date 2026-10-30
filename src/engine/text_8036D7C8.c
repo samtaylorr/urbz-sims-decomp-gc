@@ -91,16 +91,22 @@ void fn_8036D980(void *self, void *stream) {
     extern void fn_802F0604(void *, void *);
     extern void fn_802D360C(void *, void *);
     char *vt;
+    void (*func)(void *, void *, s32);
+    void *obj;
     s32 a;
     s32 b;
 
     fn_802F0604(self, stream);
     vt = M2C_FIELD(stream, char **, 0x18);
+    func = (void (*)(void *, void *, s32))M2C_FIELD(vt, void **, 0x3C);
+    obj = (char *)stream + M2C_FIELD(vt, s16 *, 0x38);
     a = M2C_FIELD(self, s32 *, 0xA0);
-    (*(void (**)(void *, void *, s32))(vt + 0x3C))((char *)stream + *(s16 *)(vt + 0x38), &a, 4);
+    func(obj, &a, 4);
     vt = M2C_FIELD(stream, char **, 0x18);
+    func = (void (*)(void *, void *, s32))M2C_FIELD(vt, void **, 0x3C);
+    obj = (char *)stream + M2C_FIELD(vt, s16 *, 0x38);
     b = M2C_FIELD(self, s32 *, 0x8C);
-    (*(void (**)(void *, void *, s32))(vt + 0x3C))((char *)stream + *(s16 *)(vt + 0x38), &b, 4);
+    func(obj, &b, 4);
     fn_802D360C(stream, (char *)self + 0x90);
 }
 
