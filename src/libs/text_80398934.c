@@ -10056,13 +10056,14 @@ void fn_803B5FE4(void *self) {
     typedef struct Tri {
         u32 a, b, c;
     } Tri;
-    void *obj = lbl_8049467C;
+    void *obj;
     void *vt;
     char *e;
     char *dst;
 
-    M2C_FIELD(self, s32 *, 0xF8) = 0;
     M2C_FIELD(self, s32 *, 0xF4) = 0;
+    M2C_FIELD(self, s32 *, 0xF8) = 0;
+    obj = lbl_8049467C;
     dst = (char *)self + 0x1C;
     *(Tri *)dst = *(Tri *)lbl_80436A2C;
     vt = M2C_FIELD(obj, void **, 0x68);
@@ -10280,24 +10281,26 @@ void fn_803B650C(void *arg0, u32 n) {
     }
 }
 
-void fn_803B67A0(void *arg0) {
+void *fn_803B67A0(void *arg0) {
     extern u8 lbl_80418130[];
-    s32 *self = arg0;
-    s32 *v;
+    volatile s32 z[6];
+    char *p1 = (char *)arg0 + 0x1C;
+    char *p2 = (char *)arg0 + 0x24;
+    char *p3 = (char *)arg0 + 0x2C;
+    char *p4 = (char *)arg0 + 0x34;
+    char *p5 = (char *)arg0 + 0x3C;
 
-    self[2] = (s32)lbl_80418130;
-    v = self + 5;
-    v[0] = 0;
-    v[1] = 0;
-    v[3] = 0;
-    v = self + 9;
-    v[0] = 0;
-    v[1] = 0;
-    v[3] = 0;
-    v = self + 0xD;
-    v[0] = 0;
-    v[1] = 0;
-    v[3] = 0;
+    M2C_FIELD(arg0, u8 **, 8) = lbl_80418130;
+    M2C_FIELD(arg0, s32 *, 0x14) = 0;
+    M2C_FIELD(arg0, s32 *, 0x18) = 0;
+    *(volatile s32 *)(p1 + 4) = 0;
+    M2C_FIELD(arg0, s32 *, 0x24) = 0;
+    *(volatile s32 *)(p2 + 4) = 0;
+    *(volatile s32 *)(p3 + 4) = 0;
+    M2C_FIELD(arg0, s32 *, 0x34) = 0;
+    *(volatile s32 *)(p4 + 4) = 0;
+    *(volatile s32 *)(p5 + 4) = 0;
+    return arg0;
 }
 
 void fn_803B67F8(void *arg0, s32 flags) {
