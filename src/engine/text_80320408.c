@@ -217,7 +217,7 @@ s32 fn_803240A0(s32 arg0) {
 }
 
 void fn_803240A8(s32 arg0, s32 arg1, s32 arg2, Vec2Arg *arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8, s32 arg9, s32 arg10) {
-    extern void fn_80322ACC();
+    extern void fn_80322ACC(s32, s32, s32, s32, Vec2Arg *, s32, s32, s32, s32, s32, s32, s32);
     Vec2Arg v;
 
     v.x = arg3->x;
