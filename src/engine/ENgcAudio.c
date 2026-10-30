@@ -103,6 +103,14 @@ void *fn_8033CBD0(void) {
     return temp_r3;
 }
 
+void fn_8033CC10(void **self, void *arg1) {
+    void *vt;
+
+    vt = *self;
+    ((void (*)(void *))M2C_FIELD(vt, void **, 0xA4))((char *)self + M2C_FIELD(vt, s16 *, 0xA0));
+    fn_802D20E8(arg1);
+}
+
 void fn_8033D098(void *arg0, void *arg1, s32 *arg2) {
     M2C_UNK fn_8035EA90(s32, s32, s32);
     M2C_UNK fn_8035EB9C(s32, s32, s32);
