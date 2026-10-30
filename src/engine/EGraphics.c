@@ -3,6 +3,13 @@
 
 typedef struct { f32 x, y, z; } Vec3f;
 
+static inline Vec3f *Vec3f_SetAll(Vec3f *v, f32 c) {
+    v->x = c;
+    v->z = c;
+    v->y = c;
+    return v;
+}
+
 void fn_802D2FD0(void);
 extern s32 lbl_804961C4;
 extern void fn_802EFBA8(void *);
@@ -351,12 +358,10 @@ extern const f32 lbl_803F0CF4[];
 
 void fn_802EF220(void *arg0) {
     struct { Vec3f min; Vec3f max; } box;
-    Vec3f t;
-    Vec3f *p = &t;
-    t.x = lbl_803F0CEC[0];
-    t.z = lbl_803F0CEC[0];
-    t.y = lbl_803F0CEC[0];
+    Vec3f t = { lbl_803F0CEC[0], lbl_803F0CEC[0], lbl_803F0CEC[0] };
+    Vec3f *p;
     box.min = box.max = t;
+    p = &t;
     p->z = lbl_803F0CF0[0];
     p->y = lbl_803F0CF0[0];
     p->x = lbl_803F0CF0[0];
