@@ -42,6 +42,38 @@ void fn_8001C2A0(void) {
 
 }
 
+void fn_8001C2A4(arg0, arg1)
+    void *arg0;
+    s32 arg1;
+{
+    extern struct { u8 pad[0xd8]; void *tbl[1]; } lbl_8041F94C;
+    void fn_8009C968(void *, s32, void *);
+    void *p;
+    u8 *obj;
+    void *r;
+
+    p = lbl_8041F94C.tbl[M2C_FIELD(arg0, s32 *, 0x38)];
+    obj = p != NULL ? M2C_FIELD(**(void ***)p, u8 **, 0x18) : NULL;
+    r = obj != NULL ? M2C_FIELD(obj, void **, 0x654) : NULL;
+    if (r != NULL) {
+        fn_8009C968(r, arg1, lbl_8041F94C.tbl[M2C_FIELD(arg0, s32 *, 0x38)]);
+    }
+}
+
+void fn_8001C32C(void *arg0, s32 arg1) {
+    extern u8 lbl_8041F94C[];
+    void *p;
+    u8 *obj;
+    void *r;
+
+    p = ((void **)(lbl_8041F94C + 0xd8))[M2C_FIELD(arg0, s32 *, 0x38)];
+    obj = p != NULL ? M2C_FIELD(**(void ***)p, u8 **, 0x18) : NULL;
+    r = obj != NULL ? M2C_FIELD(obj, void **, 0x654) : NULL;
+    if (r != NULL) {
+        fn_8001C2A4(arg0, arg1);
+    }
+}
+
 void fn_8001C398(void) {
     fn_8001C2A4();
 }
