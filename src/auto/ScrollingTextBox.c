@@ -52,6 +52,13 @@ void fn_8009A93C(void *arg0, f32 farg0, f32 farg1) {
     M2C_FIELD(arg0, f32 *, 0x18) = farg1;
 }
 
+void fn_8009A948(void *arg0, void *arg1) {
+    s32 a = M2C_FIELD(arg1, s32 *, 0);
+    s32 b = M2C_FIELD(arg1, s32 *, 4);
+    M2C_FIELD(arg0, s32 *, 0x18) = b;
+    M2C_FIELD(arg0, s32 *, 0x14) = a;
+}
+
 void fn_8009AA44(void *arg0, f32 farg0, f32 farg1, f32 farg2, f32 farg3) {
     void *temp_r9;
 
