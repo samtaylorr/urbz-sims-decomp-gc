@@ -1,6 +1,13 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+void fn_8001B7BC(void) {
+    extern s32 lbl_80493F34;
+    if (lbl_80493F34 == 0) {
+        lbl_80493F34 = 1;
+    }
+}
+
 void fn_8001B7D4(void) {
     extern s32 lbl_80493F34;
     lbl_80493F34 = 0;
