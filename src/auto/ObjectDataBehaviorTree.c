@@ -70,22 +70,19 @@ typedef struct BTNode {
     u8 unk58[1];
 } BTNode;
 extern void fn_802D20E8(void *);
-void *fn_801B25A4(void *self) {
+BTNode *fn_801B25A4(BTNode *self) {
     void fn_800F687C(void *, void *, s32);
     void fn_800F68F0(void *, const char *, s32);
     void fn_801B3814(void *, s32, s32);
     extern char lbl_803DBFF8[];
-    s32 zero = 0;
-    void *str = (char *)self + 0xC;
-    const char *s = lbl_803DBFF8;
 
-    M2C_FIELD(self, s32 *, 8) = zero;
-    *(void **)self = lbl_80415560;
-    M2C_FIELD(self, s16 *, 4) = 0;
-    fn_800F687C(str, (char *)self + 0x14, 0x40);
-    fn_800F68F0(str, s, -1);
-    M2C_FIELD(self, s32 *, 0x54) = zero;
-    fn_801B3814((char *)self + 0x58, 0, 0);
+    self->unk8 = 0;
+    self->vtable = lbl_80415560;
+    self->unk4 = 0;
+    fn_800F687C(&self->name, self->name.buf, 0x40);
+    fn_800F68F0(&self->name, lbl_803DBFF8, -1);
+    self->unk54 = 0;
+    fn_801B3814(self->unk58, 0, 0);
     return self;
 }
 
@@ -96,26 +93,24 @@ void fn_801B262C(void **self, s32 flags) {
     }
 }
 
-void *fn_801B2660(void *self, void *other) {
+BTNode *fn_801B2660(BTNode *self, BTNode *other) {
     void fn_800F687C(void *, void *, s32);
     void fn_801B3814(void *, s32, s32);
     s32 fn_801B2770(s32);
     s16 fn_801B28E4(void *);
     void fn_801B28EC(void *, s16);
-    char buf[0x48];
-    char *b;
+    BTString tmp;
     void *vt;
 
-    *(void **)self = lbl_80415560;
-    fn_800F687C((char *)self + 0xC, (char *)self + 0x14, 0x40);
-    fn_801B3814((char *)self + 0x58, 0, 0);
-    b = buf;
-    M2C_FIELD(self, s32 *, 8) = 0;
-    M2C_FIELD(self, void **, 0x54) = M2C_FIELD(other, void **, 0x54);
-    fn_800F687C(b, b + 8, 0x40);
-    vt = M2C_FIELD(other, void **, 0);
-    M2C_FIELD(vt, void (**)(void *, void *), 0x44)((char *)other + M2C_FIELD(vt, s16 *, 0x40), b);
-    ((s32 (*)(void *, void *))fn_801B2770)(self, b);
+    self->vtable = lbl_80415560;
+    fn_800F687C(&self->name, self->name.buf, 0x40);
+    fn_801B3814(self->unk58, 0, 0);
+    self->unk8 = 0;
+    self->unk54 = other->unk54;
+    fn_800F687C(&tmp, tmp.buf, 0x40);
+    vt = other->vtable;
+    M2C_FIELD(vt, void (**)(void *, void *), 0x44)((char *)other + M2C_FIELD(vt, s16 *, 0x40), &tmp);
+    ((s32 (*)(void *, void *))fn_801B2770)(self, &tmp);
     fn_801B28EC(self, fn_801B28E4(other));
     return self;
 }
@@ -157,14 +152,14 @@ void fn_801B27BC(void *arg0, s8 arg1) {
 }
 
 u8 fn_801B27C8(void *arg0) {
-    u32 v;
     if (fn_801B2798(arg0) >= -0x7FFE) {
         return M2C_FIELD(M2C_FIELD(arg0, void **, 0x54), u8 *, 5);
     }
     if (fn_801B2798(arg0) == -0x7FFF) {
+        register u8 v asm("r0");
         v = M2C_FIELD(M2C_FIELD(arg0, void **, 0x54), u8 *, 5);
         if (v > 4) {
-            v = 4;
+            return 4;
         }
         return v;
     }
