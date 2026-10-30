@@ -892,9 +892,9 @@ f32 fn_80097C84(void *arg0) {
     extern f32 lbl_803CCB80[];
     char *obj = *(char **)M2C_FIELD(arg0, char **, 0x4);
     char *vt = M2C_FIELD(obj, char **, 0x4);
-    f32 f = (f32)M2C_FIELD(vt, s32 (**)(void *, s32), 0x224)(obj + M2C_FIELD(vt, s16 *, 0x220), 1);
+    f32 f = (f32)M2C_FIELD(vt, s32 (**)(void *, s32), 0x224)(obj + M2C_FIELD(vt, s16 *, 0x220), 1) - lbl_803CCB70[0];
 
-    f = (f - lbl_803CCB70[0]) * lbl_803CCB74[0];
+    f *= lbl_803CCB74[0];
     if (f < lbl_803CCB78[0]) {
         f += lbl_803CCB7C[0];
     }
