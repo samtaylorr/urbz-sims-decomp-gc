@@ -237,8 +237,8 @@ void fn_8036C648(char *self, void *stream) {
         M2C_FIELD(vt, void (**)(void *, void *, s32), 0x34)((char *)stream + M2C_FIELD(vt, s16 *, 0x30), self + 8, 4);
         vt = M2C_FIELD(stream, void **, 0x18);
         M2C_FIELD(vt, void (**)(void *, void *, s32), 0x34)((char *)stream + M2C_FIELD(vt, s16 *, 0x30), self + 0xC, 4);
+        fn_803BF28C(fn_803BEFE4(stream, self + 0x10), self + 0x20);
     }
-    fn_803BF28C(fn_803BEFE4(stream, self + 0x10), self + 0x20);
 }
 
 void fn_8036C818(void) {
