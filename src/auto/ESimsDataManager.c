@@ -91,6 +91,27 @@ void fn_8001DD7C(void *arg0, s32 *arg1) {
     }
 }
 
+void fn_8001DE20(ESimsIdVec *arg0) {
+    extern void fn_80334B94(void *, s32);
+    extern u8 lbl_8045B438[];
+    s32 n;
+    s32 i;
+
+    n = arg0->end - arg0->begin;
+    for (i = 0; i < n; i++) {
+        fn_80334B94(lbl_8045B438, arg0->begin[i]);
+    }
+}
+
+void fn_8001E034(void *arg0, s32 arg1) {
+    extern void fn_80335FD8(void *, s32);
+    extern u8 lbl_804071B0[];
+
+    M2C_FIELD(arg0, void **, 0xA4) = lbl_804071B0;
+    M2C_FIELD(arg0, s32 *, 0x5C) = 0;
+    fn_80335FD8(arg0, arg1);
+}
+
 void fn_8001E210(void *arg0, s32 arg1) {
     void fn_8001DD7C(void *, s32 *);
     M2C_UNK fn_802D838C(s32);
