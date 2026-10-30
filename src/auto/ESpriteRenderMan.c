@@ -254,24 +254,12 @@ void fn_800417FC(void **arg0, s32 arg1) {
 }
 
 void fn_80041830(f32 *m) {
-    f32 t0, t1, t2, t3, t4, t5, t6, t7;
+    f32 t;
 
-    t0 = m[0];
-    t1 = m[1];
-    t2 = m[4];
-    t3 = m[5];
-    t4 = m[8];
-    t5 = m[9];
-    t6 = m[12];
-    t7 = m[13];
-    m[13] = t6;
-    m[0] = t1;
-    m[1] = t0;
-    m[4] = t3;
-    m[5] = t2;
-    m[8] = t5;
-    m[9] = t4;
-    m[12] = t7;
+    t = m[0]; m[0] = m[1]; m[1] = t;
+    t = m[4]; m[4] = m[5]; m[5] = t;
+    t = m[8]; m[8] = m[9]; m[9] = t;
+    t = m[12]; m[12] = m[13]; m[13] = t;
 }
 
 extern s32 lbl_803F5B24[];
@@ -290,11 +278,12 @@ s32 fn_80041874(s32 arg0) {
 }
 
 s32 fn_800418AC(s32 arg0) {
-    return (*lbl_8041FA4C)[arg0][2];
+    return (*(s32 ***)((u32)*lbl_8041FA4C[0] + arg0 * 4))[2];
 }
 
 s32 fn_800418C8(s32 arg0) {
-    return (*lbl_8041FA48)[arg0][3];
+    s32 off = arg0 * 4;
+    return (*(s32 **)((char *)*lbl_8041FA48[0] + off))[3];
 }
 
 s32 fn_800418E4(s32 arg0) {
