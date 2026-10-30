@@ -211,8 +211,8 @@ void fn_8009B4B0(void *arg0, s32 arg1) {
     y = lbl_803CD0A0[0];
     z = lbl_803CD0A4[0];
     M2C_FIELD(arg0, f32 *, 0x20) = x;
-    M2C_FIELD(arg0, f32 *, 0x28) = z;
     M2C_FIELD(arg0, f32 *, 0x24) = y;
+    M2C_FIELD(arg0, f32 *, 0x28) = z;
 }
 
 void fn_8009B51C(void *arg0, s32 arg1) {
@@ -242,15 +242,16 @@ void *fn_8009C8F4(f32 f) {
     extern u8 lbl_8041FD54[];
     extern u8 lbl_8041FD64[];
 
-    if (f > lbl_803CD10C[0]) {
-        if (f <= lbl_803CD110[0]) {
-            return lbl_8041FD54;
-        }
-        if (f > lbl_803CD110[0] && f <= lbl_803CD114[0]) {
-            return lbl_8041FD34;
-        }
-        return lbl_8041FD64;
+    if (f <= lbl_803CD10C[0]) {
+        return;
     }
+    if (f > lbl_803CD10C[0] && f <= lbl_803CD110[0]) {
+        return lbl_8041FD54;
+    }
+    if (f > lbl_803CD110[0] && f <= lbl_803CD114[0]) {
+        return lbl_8041FD34;
+    }
+    return lbl_8041FD64;
 }
 
 void *fn_8009CAE0(u32 size) {
