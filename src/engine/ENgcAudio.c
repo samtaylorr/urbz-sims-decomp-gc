@@ -146,6 +146,7 @@ void fn_8033C9A4(void *self, f32 v) {
     u8 *p;
     u8 *end;
     f32 k;
+    s32 on;
 
     if (v > lbl_803F3E9C[0]) {
         v = lbl_803F3E9C[0];
@@ -153,8 +154,9 @@ void fn_8033C9A4(void *self, f32 v) {
     if (v < lbl_803F3EA0[0]) {
         v = lbl_803F3EA0[0];
     }
+    on = lbl_80494F98;
     M2C_FIELD(self, f32 *, 4) = v;
-    if (lbl_80494F98 != 0) {
+    if (on != 0) {
         p = lbl_8045BD40;
         k = lbl_803F3EA4[0];
         end = p + 0x10bc;
@@ -254,8 +256,8 @@ void fn_8033D098(void *arg0, void *arg1, s32 *arg2) {
 
     if (lbl_80494F98 != 0 && arg1 != NULL) {
         if (M2C_FIELD(arg1, s32 *, 0x1C) == 0) {
-            fn_8035EA90(lbl_80494FAC, M2C_FIELD(arg1, s32 *, 8), *arg2);
-            fn_8035EB9C(lbl_80494FAC, M2C_FIELD(arg1, s32 *, 8), *(arg2 + 1));
+            fn_8035EA90(lbl_80494FAC, M2C_FIELD(arg1, s32 *, 8), arg2[0]);
+            fn_8035EB9C(lbl_80494FAC, M2C_FIELD(arg1, s32 *, 8), arg2[1]);
         }
     }
 }
