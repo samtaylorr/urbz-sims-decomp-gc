@@ -189,6 +189,11 @@ s32 fn_80323FA8(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     return arg0;
 }
 
+s32 fn_80323FE0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    fn_803227C4(arg0, arg1, arg2, 1, arg4, arg3);
+    return arg0;
+}
+
 void fn_80324018(void *arg0, s32 arg1) {
     f32 fn_8039AA70(s32, M2C_UNK);
     void *temp_r29;
@@ -200,8 +205,27 @@ void fn_80324018(void *arg0, s32 arg1) {
     M2C_FIELD(temp_r29, f32 *, 0xC) = fn_8039AA70(arg1, 3);
 }
 
+void fn_80324088(void *arg0, f32 arg1) {
+    f32 *v = (f32 *)((char *)arg0 + 0x64);
+    v[0] = arg1;
+    v[3] = arg1;
+    v[1] = arg1;
+    v[2] = arg1;
+}
+
 s32 fn_803240A0(s32 arg0) {
     return arg0 + 0x64;
+}
+
+void fn_803240A8(s32 arg0, s32 arg1, s32 arg2, Vec2Arg arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8, s32 arg9, s32 arg10) {
+    fn_80322ACC(arg0, arg1, arg2, 1, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+}
+
+u32 fn_80324120(s32 arg0, u8 *arg1, s32 arg2, s32 arg3) {
+    if (arg2 != 0) {
+        return ((u16 *)arg1)[arg3];
+    }
+    return arg1[arg3];
 }
 
 void fn_8032413C(void) {
