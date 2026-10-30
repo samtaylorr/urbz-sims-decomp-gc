@@ -62,6 +62,13 @@ void fn_8036DF8C(char *self, void *arg1) {
     fn_802E34F0(arg1, self + 0x44);
 }
 
+void fn_8036E318(char *self, char *obj) {
+    extern void fn_80300200(u8 *, char *);
+    char *vt = *(char **)(obj + 0x68);
+    (*(void (**)(void *))(vt + 0xEC))(obj + *(s16 *)(vt + 0xE8));
+    fn_80300200(*(u8 **)(*(char **)(self + 0xB4) + 0x20) + *(s32 *)(self + 0x8C) * 0x18, obj);
+}
+
 s32 fn_8036E97C(void *arg0) {
     u32 i;
     void **list;
