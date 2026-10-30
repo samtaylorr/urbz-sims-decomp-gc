@@ -10063,8 +10063,8 @@ void fn_803B5FE4(void *self) {
 
     M2C_FIELD(self, s32 *, 0xF4) = 0;
     M2C_FIELD(self, s32 *, 0xF8) = 0;
-    obj = lbl_8049467C;
     dst = (char *)self + 0x1C;
+    obj = lbl_8049467C;
     *(Tri *)dst = *(Tri *)lbl_80436A2C;
     vt = M2C_FIELD(obj, void **, 0x68);
     e = (char *)vt + 0x160;
@@ -10325,6 +10325,11 @@ void fn_803B67F8(void *arg0, s32 flags) {
     if (flags & 1) {
         fn_802D20E8(self);
     }
+}
+
+s32 fn_803B6F0C(u16 **arg0) {
+    extern u16 lbl_803FCE5C[];
+    return *arg0 == lbl_803FCE5C;
 }
 
 extern void fn_802BE53C(void *);
