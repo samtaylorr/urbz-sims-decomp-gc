@@ -144,14 +144,12 @@ s32 fn_8009B29C(void ***self, s32 idx, s32 arg2) {
 
 void fn_8009B308(void ***self, s32 idx, s32 arg2) {
     void *p = (*self)[idx];
-    void *vt;
+    void *q;
 
     if (p != NULL) {
-        vt = *(void **)p;
-        if (M2C_FIELD(vt, s32 (**)(void *), 0xFC)((u8 *)p + M2C_FIELD(vt, s16 *, 0xF8)) != 0) {
-            p = (*self)[idx];
-            vt = *(void **)p;
-            M2C_FIELD(vt, void (**)(void *, s32), 0x104)((u8 *)p + M2C_FIELD(vt, s16 *, 0x100), arg2);
+        if (M2C_FIELD(*(void **)p, s32 (**)(void *), 0xFC)((u8 *)p + M2C_FIELD(*(void **)p, s16 *, 0xF8)) != 0) {
+            q = (*self)[idx];
+            M2C_FIELD(*(void **)q, void (**)(void *, s32), 0x104)((u8 *)q + M2C_FIELD(*(void **)q, s16 *, 0x100), arg2);
         }
     }
 }
@@ -206,11 +204,15 @@ void fn_8009B4B0(void *arg0, s32 arg1) {
     extern f32 lbl_80494258;
     extern f32 lbl_8049425C;
     extern f32 lbl_80494260;
+    f32 x, y, z;
     M2C_FIELD(arg0, s32 *, 0x398) = arg1;
     fn_802E1CD8((u8 *)arg0 + 0x48, lbl_80494258, lbl_803CD098[0], lbl_8049425C, lbl_80494260);
-    M2C_FIELD(arg0, f32 *, 0x20) = lbl_803CD09C[0];
-    M2C_FIELD(arg0, f32 *, 0x24) = lbl_803CD0A0[0];
-    M2C_FIELD(arg0, f32 *, 0x28) = lbl_803CD0A4[0];
+    x = lbl_803CD09C[0];
+    y = lbl_803CD0A0[0];
+    z = lbl_803CD0A4[0];
+    M2C_FIELD(arg0, f32 *, 0x20) = x;
+    M2C_FIELD(arg0, f32 *, 0x28) = z;
+    M2C_FIELD(arg0, f32 *, 0x24) = y;
 }
 
 void fn_8009B51C(void *arg0, s32 arg1) {
@@ -230,6 +232,25 @@ void fn_8009B51C(void *arg0, s32 arg1) {
 
 void fn_8009B580(void) {
 
+}
+
+void *fn_8009C8F4(f32 f) {
+    extern f32 lbl_803CD10C[];
+    extern f32 lbl_803CD110[];
+    extern f32 lbl_803CD114[];
+    extern u8 lbl_8041FD34[];
+    extern u8 lbl_8041FD54[];
+    extern u8 lbl_8041FD64[];
+
+    if (f > lbl_803CD10C[0]) {
+        if (f <= lbl_803CD110[0]) {
+            return lbl_8041FD54;
+        }
+        if (f > lbl_803CD110[0] && f <= lbl_803CD114[0]) {
+            return lbl_8041FD34;
+        }
+        return lbl_8041FD64;
+    }
 }
 
 void *fn_8009CAE0(u32 size) {
