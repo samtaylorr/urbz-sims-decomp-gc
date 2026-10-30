@@ -6,6 +6,23 @@ typedef struct {
     s32 *end;
 } ESimsIdVec;
 
+typedef struct ERMLock {
+    char *obj;
+    u8 unk4[3];
+} ERMLock;
+
+static inline void ERMLock_Lock(ERMLock *l, char *obj) {
+    char *vt;
+    l->obj = obj;
+    vt = *(char **)obj;
+    (*(void (**)(void *, s32))(vt + 0x14))(obj + *(s16 *)(vt + 0x10), -1);
+}
+
+static inline void ERMLock_Unlock(ERMLock *l) {
+    char *vt = *(char **)l->obj;
+    (*(void (**)(void *))(vt + 0x1C))(l->obj + *(s16 *)(vt + 0x18));
+}
+
 void *fn_8001D654(u32 size, s32 arg1, void *p) {
     return p;
 }
