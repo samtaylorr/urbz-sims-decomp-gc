@@ -54,7 +54,7 @@ void fn_80059948(void *arg0, s32 arg1) {
     }
 }
 
-void fn_8005997C(s8 *arg0, s8 arg1) {
+void fn_8005997C(s8 *arg0, s32 arg1) {
     void fn_800599B0(s8 *);
     fn_800599B0(arg0);
     *arg0 = arg1;
