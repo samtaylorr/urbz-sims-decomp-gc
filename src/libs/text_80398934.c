@@ -2069,11 +2069,19 @@ void fn_8039CEA0(void **v, void **pos, u32 n, void *const *x) {
             u32 elems_after = old_finish - pos;
             if (elems_after > n) {
                 void **src = old_finish - n;
-                u32 nb = n * sizeof(void *);
+                register u32 nb asm("r27");
+                nb = n * sizeof(void *);
                 PtrVec_Copy(src, old_finish, old_finish);
                 v[1] = (void **)((char *)v[1] + nb);
                 PtrVec_CopyBackward(pos, src, old_finish);
-                PtrVec_Fill(pos, (void **)((char *)pos + nb), &x_copy);
+                {
+                    void **first = pos;
+                    register void **last asm("r0");
+                    last = (void **)(nb + (u32)first);
+                    for (; first != last; first++) {
+                        *first = x_copy;
+                    }
+                }
             } else {
                 PtrVec_FillN(old_finish, n - elems_after, &x_copy);
                 v[1] = (void **)v[1] + (n - elems_after);
@@ -3322,8 +3330,9 @@ void **fn_803A0A44(void **self, void **other) {
         if (xlen > (u32)((void **)self[3] - (void **)self[0])) {
             void **tmp;
             if (xlen != 0) {
-                bytes = xlen * 4;
-                tmp = (void **)PtrVec_Allocate(xlen * 4);
+                u32 size = xlen * 4;
+                bytes = size;
+                tmp = (void **)PtrVec_Allocate(size);
             } else {
                 tmp = NULL;
                 bytes = 0;
@@ -9927,7 +9936,7 @@ void fn_803B32E4(void *arg0, u32 n) {
         Pair *finish = v->finish;
         s32 oldSize = finish - start;
         Pair *tmp;
-        register u32 bytes asm("r31");
+        u32 bytes;
 
         if (start != NULL) {
             Pair *result;
@@ -10021,10 +10030,10 @@ s32 *fn_803B4BE4(s32 *first, s32 *last, s32 *val) {
 Pair8Vec *fn_803B50DC(Pair8Vec *self, Pair8Vec *x) {
     if (x != self) {
         Pair8 *first = x->start;
-        Pair8 *dst = self->start;
+        Pair8 *start = self->start;
         Pair8 *last = x->finish;
         Pair8 *src = first;
-        Pair8 *start = dst;
+        Pair8 *dst = start;
         u32 xlen = last - first;
         if (xlen > (u32)(self->end - start)) {
             Pair8 *tmp;
@@ -10044,22 +10053,20 @@ Pair8Vec *fn_803B50DC(Pair8Vec *self, Pair8Vec *x) {
             }
             self->start = tmp;
             self->end = tmp + xlen;
-        } else {
-            u32 size = self->finish - dst;
-            if (size >= xlen) {
-                Pair8_Destroy(Pair8_Copy(src, last, dst), self->finish);
-            } else {
-                s32 k;
-                for (k = size; k > 0; k--) {
-                    s32 a = src->a;
-                    s32 b = src->b;
-                    start->a = a;
-                    start->b = b;
-                    src++;
-                    start++;
-                }
-                Pair8_UninitCopy(x->start + (self->finish - self->start), x->finish, self->finish);
+        } else if ((u32)(self->finish - dst) >= xlen) {
+            s32 k;
+            for (k = last - src; k > 0; k--) {
+                s32 a = src->a;
+                s32 b = src->b;
+                dst->a = a;
+                dst->b = b;
+                src++;
+                dst++;
             }
+            Pair8_Destroy(dst, self->finish);
+        } else {
+            Pair8_Copy(first, first + (self->finish - start), start);
+            Pair8_UninitCopy(x->start + (self->finish - self->start), x->finish, self->finish);
         }
         self->finish = self->start + xlen;
     }
