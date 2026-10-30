@@ -220,6 +220,26 @@ s32 fn_80032C38(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void fn_80032FEC(s32 arg0, s32 arg1, u16 *arg2, u16 *arg3) {
+    void *fn_80190AA4(s32, u32);
+    extern s32 lbl_80496654;
+    void *e;
+    register u32 id asm("r4");
+
+    *arg3 = arg0;
+    *arg2 = arg0;
+    id = arg0;
+    if (lbl_80496654 != 0) {
+        id &= 0xFFFF;
+        if (id <= 0xFFFAU) {
+            e = fn_80190AA4(lbl_80496654, id);
+            if (e != NULL) {
+                *arg3 = M2C_FIELD(e, u16 *, 2);
+            }
+        }
+    }
+}
+
 void fn_80033054(void) {
     fn_802D2FD0();
 }
