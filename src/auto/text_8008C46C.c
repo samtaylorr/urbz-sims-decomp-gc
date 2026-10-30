@@ -837,8 +837,9 @@ f32 fn_80097C08(void *arg0) {
 }
 
 void fn_80097C10(s32 arg0, s32 arg1, s32 arg2) {
+    s32 off = arg1 << 2;
     s32 *p = (s32 *)(arg0 + 0x4C4);
-    p[arg1] = arg2;
+    *(s32 *)((char *)p + off) = arg2;
 }
 
 void fn_80097C20(void *arg0, s32 arg1) {
