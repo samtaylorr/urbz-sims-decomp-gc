@@ -129,7 +129,7 @@ void fn_80323D3C(void) {
 }
 
 void fn_80323D64(void *self) {
-    void fn_803204A8(void *);
+    void *fn_803204A8(void *);
     void *fn_80323F5C(u32 size, void *p);
     fn_803204A8(fn_80323F5C(0x78, self));
 }
