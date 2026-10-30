@@ -112,10 +112,13 @@ void *fn_802E0A18(void *self, void *key) {
             fn_802C686C(&str, str.buf, 0x200);
             fn_802C69B0(&str, s);
             if (fn_802C7008(&str, key) == 0) {
-                return M2C_FIELD(self, u8 ***, 0x34C)[i] + fn_80248808(key);
+                u8 **arr = M2C_FIELD(self, u8 ***, 0x34C);
+                result = arr[i] + fn_80248808(key);
+                goto done;
             }
         }
     }
+done:
     return result;
 }
 
@@ -234,15 +237,19 @@ void fn_802E12F8(u8 *self) {
     void fn_802EE73C(void *);
     u8 *obj;
     u8 *vt;
+    f32 (*fn)(void *, void *);
+    void *arg;
     fn_802EE73C(lbl_80495050);
     obj = lbl_80495050;
     vt = *(u8 **)obj;
     (*(void (**)(void *))(vt + 0x3C))(obj + *(s16 *)(vt + 0x38));
     obj = lbl_80494FC4;
     vt = *(u8 **)obj;
+    fn = *(f32 (**)(void *, void *))(vt + 0x2C);
+    arg = obj + *(s16 *)(vt + 0x28);
     lbl_80494E20 = lbl_80494E1C;
     lbl_80494E1C = lbl_80494E18;
-    lbl_80494E18 = (*(f32 (**)(void *, void *))(vt + 0x2C))(obj + *(s16 *)(vt + 0x28), self + 0x20);
+    lbl_80494E18 = fn(arg, self + 0x20);
 }
 
 void fn_802E1378(u8 *self) {
