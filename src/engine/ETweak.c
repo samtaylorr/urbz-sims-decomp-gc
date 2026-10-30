@@ -51,6 +51,24 @@ s32 fn_80313110(s32 arg0) {
     return var_r9;
 }
 
+void fn_80313128(f32 t) {
+    extern u8 *lbl_80494FC4;
+    u8 buf[16];
+    u8 *obj = lbl_80494FC4;
+    u8 *vt = *(u8 **)obj;
+    u8 *p;
+    (*(void (**)(void *, void *))(vt + 0x24))(obj + *(s16 *)(vt + 0x20), p = buf);
+    while ((*(f32 (**)(void *, void *))(*(u8 **)lbl_80494FC4 + 0x2C))(lbl_80494FC4 + *(s16 *)(*(u8 **)lbl_80494FC4 + 0x28), p) < t) {
+    }
+}
+
+void fn_803131A4(s32 *self, u32 size) {
+    s32 n = size >> 3;
+    while (--n != -1) {
+        self++;
+    }
+}
+
 s32 fn_803131C4(f32 x) {
     extern const f32 lbl_803F2410[];
     extern const f32 lbl_803F2414[];
@@ -402,9 +420,7 @@ void fn_80314A18(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
 
     obj = (s32 *)fn_802D1FC8(0xC);
     fn_802D39E4(&obj[1]);
-    obj[0] = arg1;
-    obj[2] = arg3;
-    fn_802D3CE4(&obj[1], arg2);
+    fn_802D3CE4(&obj[1], (obj[0] = arg1, obj[2] = arg3, arg2));
     fn_802CB69C((s8 *)arg0 + 0xC, obj);
     M2C_FIELD(arg0, s32 *, 8)++;
 }
