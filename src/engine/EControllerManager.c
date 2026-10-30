@@ -71,9 +71,10 @@ void fn_8033372C(void) {
 
 }
 
-void fn_80333730(s32 *self, s32 idx, s32 val) {
-    self[idx] = val;
-    self[idx + 4] = 1;
+void fn_80333730(void *arg0, s32 idx, s32 val) {
+    struct { s32 a[4]; s32 b[4]; } *self = arg0;
+    self->a[idx] = val;
+    self->b[idx] = 1;
 }
 
 s32 fn_803338C0(void *arg0, s32 i) {
