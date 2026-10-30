@@ -454,13 +454,17 @@ void fn_80334B04(void *arg0, f32 farg0) {
 
 s32 fn_80334B0C(s32 arg0, s32 arg1) {
     extern s32 lbl_80494F64[];
-    s32 *p;
+    s32 *p = lbl_80494F64;
+    s32 *end = lbl_80494F64 + 1;
 
-    for (p = lbl_80494F64; (s32)p < (s32)(lbl_80494F64 + 1); p++) {
-        if (*p == arg1) {
-            return 1;
+    do {
+        s32 v = *p;
+        p++;
+        if (v != arg1) {
+            continue;
         }
-    }
+        return 1;
+    } while ((s32)p < (s32)end);
     return 0;
 }
 
@@ -526,11 +530,10 @@ s32 fn_80334D48(s32 arg0, s32 arg1) {
     return 1;
 }
 
-s32 fn_80334DC8(char *self, s32 arg1) {
+s32 fn_80334DC8(s32 arg0, s32 arg1) {
     s32 fn_80337F14(s32);
-    s32 fn_80334D48();
-    fn_8033480C(self, arg1);
-    return fn_80334D48(self, fn_80337F14(arg1));
+    fn_8033480C((char *)arg0, arg1);
+    return fn_80334D48(arg0, fn_80337F14(arg1));
 }
 
 s32 fn_80334E0C(s32 arg0, s32 arg1) {
