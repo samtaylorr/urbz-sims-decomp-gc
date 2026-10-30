@@ -106,6 +106,13 @@ void fn_8009AA70(void *arg0, s32 arg1) {
     }
 }
 
+void fn_8009AAE4(void *arg0, void *arg1) {
+    s32 a = M2C_FIELD(arg1, s32 *, 0);
+    s32 b = M2C_FIELD(arg1, s32 *, 4);
+    M2C_FIELD(arg0, s32 *, 0x38) = b;
+    M2C_FIELD(arg0, s32 *, 0x34) = a;
+}
+
 void fn_8009AAF8(void *arg0, f32 farg0, f32 farg1) {
     M2C_FIELD(arg0, f32 *, 0x34) = farg0;
     M2C_FIELD(arg0, f32 *, 0x38) = farg1;
