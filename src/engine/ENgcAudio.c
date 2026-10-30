@@ -78,6 +78,22 @@ f32 fn_8033CB30(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 8);
 }
 
+s32 fn_8033CB38(void *arg0) {
+    s32 fn_8035FE10(s32);
+    extern s32 lbl_80494F98;
+    extern s32 lbl_80494FA8;
+    s32 r;
+
+    if (lbl_80494F98 == 0) {
+        return 0;
+    }
+    r = 0;
+    if (fn_8035FE10(lbl_80494FA8) != 0) {
+        r = M2C_FIELD(arg0, s32 *, 0xC) == 0;
+    }
+    return r;
+}
+
 void fn_8033CB94(void) {
     M2C_UNK fn_8035DFE0(s32);
     M2C_UNK fn_8035F938(s32);
