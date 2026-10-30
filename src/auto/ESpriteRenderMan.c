@@ -205,6 +205,30 @@ s32 fn_80041874(s32 arg0) {
     return -1;
 }
 
+s32 fn_800418AC(s32 arg0) {
+    return (*lbl_8041FA4C)[arg0][2];
+}
+
+s32 fn_800418C8(s32 arg0) {
+    return (*lbl_8041FA48)[arg0][3];
+}
+
+s32 fn_800418E4(s32 arg0) {
+    s32 i;
+
+    for (i = 0; i < 9; i++) {
+        if (lbl_803F5B3C[1][i] == arg0 || lbl_803F5B3C[2][i] == arg0 ||
+            lbl_803F5B3C[3][i] == arg0 || lbl_803F5B3C[4][i] == arg0 ||
+            lbl_803F5B3C[5][i] == arg0 || lbl_803F5B3C[6][i] == arg0 ||
+            lbl_803F5B3C[7][i] == arg0 || lbl_803F5B3C[8][i] == arg0 ||
+            lbl_803F5B3C[9][i] == arg0 || lbl_803F5B3C[10][i] == arg0 ||
+            lbl_803F5B3C[11][i] == arg0) {
+            return lbl_803F5B3C[0][i];
+        }
+    }
+    return arg0;
+}
+
 void fn_80041A5C(void) {
     M2C_UNK fn_8004198C(M2C_UNK, M2C_UNK);
     fn_8004198C(1, 0xFFFF);
