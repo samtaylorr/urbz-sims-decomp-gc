@@ -204,12 +204,11 @@ void fn_8036C48C(void *self) {
     fn_8036C56C((s32)self);
 }
 
-void fn_8036C508(void *self) {
-    char *list = (char *)self + 0x20;
+void fn_8036C508(u8 *self) {
     s32 i;
 
-    for (i = 0; i < M2C_FIELD(list, s32 *, 4); i++) {
-        fn_8036C2DC(M2C_FIELD(self, u8 ***, 0x20)[i]);
+    for (i = 0; i < ListCount(self + 0x20); i++) {
+        fn_8036C2DC((*(u8 ***)(self + 0x20))[i]);
     }
 }
 
@@ -251,12 +250,12 @@ void *self;
     M2C_FIELD(self, s32 *, 4) = 0;
     M2C_FIELD(list, s32 *, 8) = 1;
     fn_80365BB4((char *)self + 0x28, 0xED);
-    M2C_FIELD(self, s32 *, 0x24) = 0;
     M2C_FIELD(self, s32 *, 0x10) = 0;
     M2C_FIELD(self, s32 *, 0x14) = 0;
     M2C_FIELD(self, s32 *, 0x1C) = 0;
     M2C_FIELD(self, s32 *, 0x18) = 0;
     M2C_FIELD(self, s32 *, 0x20) = 0;
+    M2C_FIELD(self, s32 *, 0x24) = 0;
     return self;
 }
 
