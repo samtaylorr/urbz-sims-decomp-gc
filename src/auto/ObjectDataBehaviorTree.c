@@ -288,6 +288,21 @@ s32 fn_801B35EC(void *arg0) {
     return ++M2C_FIELD(arg0, s32 *, 0x60);
 }
 
+s32 fn_801B3600(void *arg0) {
+    s32 var_r3;
+    void *temp_r9;
+
+    var_r3 = --M2C_FIELD(arg0, s32 *, 0x60);
+    if (var_r3 == 0) {
+        if (arg0 != NULL) {
+            temp_r9 = M2C_FIELD(arg0, void **, 0);
+            M2C_FIELD(temp_r9, void (**)(void *, s32), 0x64)((char *)arg0 + M2C_FIELD(temp_r9, s16 *, 0x60), 3);
+        }
+        return 0;
+    }
+    return var_r3;
+}
+
 void *fn_801B36B4(void *arg0, u8 *arg1) {
     void fn_801B3824(void *, void *);
     fn_801B3824(arg0, arg1 + 0x58);
