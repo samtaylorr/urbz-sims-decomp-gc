@@ -217,15 +217,19 @@ s32 fn_803240A0(s32 arg0) {
     return arg0 + 0x64;
 }
 
-void fn_803240A8(s32 arg0, s32 arg1, s32 arg2, Vec2Arg arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8, s32 arg9, s32 arg10) {
-    fn_80322ACC(arg0, arg1, arg2, 1, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+void fn_803240A8(s32 arg0, s32 arg1, s32 arg2, Vec2Arg *arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg8, s32 arg9, s32 arg10) {
+    Vec2Arg v;
+
+    v.x = arg3->x;
+    v.y = arg3->y;
+    fn_80322ACC(arg0, arg1, arg2, 1, v, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
 }
 
 u32 fn_80324120(s32 arg0, u8 *arg1, s32 arg2, s32 arg3) {
-    if (arg2 != 0) {
-        return ((u16 *)arg1)[arg3];
+    if (arg2 == 0) {
+        return arg1[arg3];
     }
-    return arg1[arg3];
+    return ((u16 *)arg1)[arg3];
 }
 
 void fn_8032413C(void) {
