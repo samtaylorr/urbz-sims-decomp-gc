@@ -61,9 +61,9 @@ s32 fn_8036D868(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0xA8) = 0;
     M2C_FIELD(arg0, s32 *, 0xB0) = 0;
     M2C_FIELD(arg0, s32 *, 0xAC) = 0;
-    M2C_FIELD(q, f32 *, 0xC) = c;
     M2C_FIELD(arg0, s32 *, 0xB8) = 0;
     M2C_FIELD(arg0, s32 *, 0xA4) = 0;
+    M2C_FIELD(q, f32 *, 0xC) = c;
     return (s32)arg0;
 }
 
@@ -87,6 +87,23 @@ void fn_8036D960(void) {
     fn_8036DBA8();
 }
 
+void fn_8036D980(void *self, void *stream) {
+    extern void fn_802F0604(void *, void *);
+    extern void fn_802D360C(void *, void *);
+    char *vt;
+    s32 a;
+    s32 b;
+
+    fn_802F0604(self, stream);
+    vt = M2C_FIELD(stream, char **, 0x18);
+    a = M2C_FIELD(self, s32 *, 0xA0);
+    (*(void (**)(void *, void *, s32))(vt + 0x3C))((char *)stream + *(s16 *)(vt + 0x38), &a, 4);
+    vt = M2C_FIELD(stream, char **, 0x18);
+    b = M2C_FIELD(self, s32 *, 0x8C);
+    (*(void (**)(void *, void *, s32))(vt + 0x3C))((char *)stream + *(s16 *)(vt + 0x38), &b, 4);
+    fn_802D360C(stream, (char *)self + 0x90);
+}
+
 void fn_8036DA0C(void *self, void *stream) {
     extern void fn_802F06A4(void *, void *);
     extern void fn_802D3840(void *, void *);
@@ -108,8 +125,9 @@ void fn_8036DA0C(void *self, void *stream) {
 
 void fn_8036DB80(void *self, void *out) {
     struct TVec3Raw { s32 x, y, z; };
-    *(struct TVec3Raw *)out = *(struct TVec3Raw *)((char *)self + 0x90);
-    M2C_FIELD(out, f32 *, 0xC) = M2C_FIELD((char *)self + 0x90, f32 *, 0xC);
+    char *p = (char *)self + 0x90;
+    *(struct TVec3Raw *)out = *(struct TVec3Raw *)p;
+    M2C_FIELD(out, f32 *, 0xC) = M2C_FIELD(p, f32 *, 0xC);
 }
 
 void fn_8036DBA8(void *self) {
