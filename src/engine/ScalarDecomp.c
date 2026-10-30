@@ -10,6 +10,28 @@ void fn_8036BB88(s32 arg0, s32 arg1);
 extern u8 lbl_8047551C[];
 extern u8 lbl_80475558[];
 
+typedef struct ScalarList {
+    void *head;
+    void *tail;
+    s32 owns;
+} ScalarList;
+
+static inline void ScalarList_Init(ScalarList *l) {
+    l->tail = 0;
+    l->head = 0;
+    l->owns = 1;
+}
+
+typedef struct ScratchPool {
+    u32 base;
+    void *free;
+    u32 size;
+} ScratchPool;
+
+static inline int ScratchPool_Contains(ScratchPool *pool, void *p) {
+    return (u32)p >= pool->base && (u32)p < pool->base + pool->size;
+}
+
 void fn_8036A91C(void *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 0) = arg1;
     M2C_FIELD(arg0, s32 *, 4) = arg2;
@@ -31,15 +53,15 @@ s32 fn_8036AA70(u8 *dst, u8 *src) {
 
     fn_802482F8(dst, src, 2);
     src += 2;
-    fn_802482F8(dst + 2, src, 2);
+    fn_802482F8(&dst[2], src, 2);
     src += 2;
-    fn_802482F8(dst + 4, src, 4);
+    fn_802482F8(&dst[4], src, 4);
     src += 4;
-    fn_802482F8(dst + 8, src, 0xC);
+    fn_802482F8(&dst[8], src, 0xC);
     src += 0xC;
-    fn_802482F8(dst + 0x14, src, 4);
+    fn_802482F8(&dst[0x14], src, 4);
     src += 4;
-    fn_802482F8(dst + 0x18, src, 4);
+    fn_802482F8(&dst[0x18], src, 4);
     src += 4;
     return src - start;
 }
