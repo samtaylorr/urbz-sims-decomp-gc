@@ -161,6 +161,51 @@ s32 fn_8005A574(s32 *arg0) {
     return ret;
 }
 
+s32 fn_8005A838(void *arg0, void *arg1, s32 arg2) {
+    void fn_8018D8DC(void *, s32 *, s32);
+    s32 fn_8005A648(void *, void *, s32);
+    s32 fn_8005A700(void *, void *, s32);
+    s32 tag;
+
+    if (arg1 != NULL) {
+        tag = 0x494E5600;
+        fn_8018D8DC(arg1, &tag, 1);
+        switch (M2C_FIELD(arg1, s32 *, 0xc)) {
+        case 1:
+        case 2:
+            return fn_8005A648(arg0, arg1, arg2);
+        case 0:
+            return fn_8005A700(arg0, arg1, arg2);
+        }
+    }
+    return 0;
+}
+
+s32 fn_8005A8CC(s32 *arg0) {
+    u32 i;
+    s32 ret = -1;
+
+    for (i = 0; i < 0x24; i++) {
+        if (arg0[i] == 0) {
+            ret = i;
+            break;
+        }
+    }
+    return ret;
+}
+
+s32 fn_8005A910(s32 *arg0, s32 arg1, s32 arg2) {
+    u32 i;
+    u32 n = fn_8005A38C();
+
+    for (i = 0; i < n; i++) {
+        if (arg0[i] != 0 && fn_80059AC4((s32 *)arg0[i]) == arg1 && fn_80059B90((u8 *)arg0[i]) == arg2) {
+            return i;
+        }
+    }
+    return -1;
+}
+
 void *fn_8005A99C(void *arg0) {
     extern char *lbl_8049665C;
     void *fn_8005AA70(void *, void *);
@@ -174,10 +219,10 @@ void *fn_8005A99C(void *arg0) {
     return fn_8005AA70(arg0, (*(void *(**)(void *))(e + 4))(obj + *(s16 *)e));
 }
 
-s8 *fn_8005A9FC(void *arg0, s8 arg1, s32 arg2) {
+void *fn_8005A9FC(void *arg0, s8 arg1, s32 arg2) {
     void *fn_802D1FC8(s32);
-    void fn_80059ACC(s8 *, s32);
-    s8 *p;
+    void fn_80059ACC(void *, s32);
+    void *p;
 
     if (arg1 == 0) {
         return NULL;
@@ -196,27 +241,22 @@ void *fn_8005AA70(void *arg0, void *arg1) {
     void *fn_802D1FC8(s32);
     void fn_80059ACC(void *, s32);
     s32 fn_8016CCE0(void *);
-    s32 fn_8005AB08(void *);
     void *p;
-    void *o;
     s32 type;
 
     if (arg1 == NULL) {
         return NULL;
     }
-    o = M2C_FIELD(arg1, void **, 0x38);
-    if (o != NULL) {
-        type = fn_8005AB08(o);
-        switch (type) {
-        case 1:
-        case 2:
-        case 3:
-            p = fn_80059918(fn_802D1FC8(0xc));
-            fn_8005997C(p, type);
-            fn_800599BC(p, 1);
-            fn_80059ACC(p, fn_8016CCE0(arg1));
-            return p;
-        }
+    type = BBI_GetType(arg1);
+    switch (type) {
+    case 1:
+    case 2:
+    case 3:
+        p = fn_80059918(fn_802D1FC8(0xc));
+        fn_8005997C(p, type);
+        fn_800599BC(p, 1);
+        fn_80059ACC(p, fn_8016CCE0(arg1));
+        return p;
     }
     return NULL;
 }
