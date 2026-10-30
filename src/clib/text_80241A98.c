@@ -52,6 +52,44 @@ void fn_802423A8(void) {
     fn_802422FC();
 }
 
+f32 fn_80243770(f32 x) {
+    extern f32 lbl_8049473C;
+    f32 fn_80243EC8(f32 x, f32 y, s32 iy);
+    s32 fn_802440DC(f32 x, f32 *y);
+    f32 y[2], z = lbl_8049473C;
+    s32 n, ix;
+    do { union { f32 value; u32 word; } gf_u; gf_u.value = x; ix = gf_u.word; } while (0);
+    ix &= 0x7fffffff;
+    if (ix <= 0x3f490fda) return fn_80243EC8(x, z, 1);
+    else if (ix >= 0x7f800000) return x - x;
+    else {
+        n = fn_802440DC(x, y);
+        return fn_80243EC8(y[0], y[1], 1 - ((n & 1) << 1));
+    }
+}
+
+f64 fn_802438E4(f64 x, f64 y, s32 iy) {
+    extern f64 lbl_80494788;
+    extern f64 lbl_80494790;
+    extern f64 lbl_80494798;
+    extern f64 lbl_804947A0;
+    extern f64 lbl_804947A8;
+    extern f64 lbl_804947B0;
+    extern f64 lbl_804947B8;
+    f64 z, r, v;
+    s32 ix;
+    do { union { f64 value; struct { u32 msw; u32 lsw; } parts; } gh_u; gh_u.value = x; ix = gh_u.parts.msw; } while (0);
+    ix &= 0x7fffffff;
+    if (ix < 0x3e400000) {
+        if ((s32)x == 0) return x;
+    }
+    z = x * x;
+    v = z * x;
+    r = lbl_804947A8 + z * (lbl_804947A0 + z * (lbl_80494798 + z * (lbl_80494790 + z * lbl_80494788)));
+    if (iy == 0) return x + v * (lbl_804947B0 + z * r);
+    else return x - ((z * (y * lbl_804947B8 - v * r) - y) - v * lbl_804947B0);
+}
+
 f64 fn_80243CF4(f64 x) {
     u32 high;
     do { union { f64 value; struct { u32 msw; u32 lsw; } parts; } gh_u; gh_u.value = x; high = gh_u.parts.msw; } while (0);
