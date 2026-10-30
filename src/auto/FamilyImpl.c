@@ -425,13 +425,20 @@ s32 fn_8010C30C(void *arg0, s32 key) {
 
 s32 fn_8010C374(void *arg0, s32 arg1, s32 arg2) {
     extern u8 *lbl_8049665C;
+    void fn_801B3908(void *, s32);
+    void fn_801B3910(void *, u16);
+    register void *a0 asm("r30") = arg0;
+    register s32 a1 asm("r29") = arg1;
+    register s32 a2 asm("r28") = arg2;
     void *obj;
     s32 result;
 
     obj = (*(void *(**)(u8 *))(*(u8 **)lbl_8049665C + 0x3C))(lbl_8049665C + *(s16 *)(*(u8 **)lbl_8049665C + 0x38));
-    result = fn_8010C3F8(arg0, obj, arg2);
+    result = fn_8010C3F8(a0, obj, a2);
     if (result == 0) {
-        FamilyImpl_SetId((u8 *)arg0 + 4, arg1, arg2);
+        a0 = (u8 *)a0 + 4;
+        fn_801B3908(a0, a1);
+        fn_801B3910(a0, a2);
     }
     return result;
 }
