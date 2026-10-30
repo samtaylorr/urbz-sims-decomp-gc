@@ -10743,6 +10743,14 @@ void fn_803B7650(void *arg0, s32 arg1) {
     }
 }
 
+void fn_803B76C8(s32 *v, u32 *x) {
+    if (v[1] >= v[0]) {
+        *x &= ~0x40000000;
+    } else {
+        ((u32 **)v[2])[v[1]++] = x;
+    }
+}
+
 void fn_803B77EC(void *arg0, s32 arg1) {
     extern char lbl_804189F0[];
     extern void (*lbl_80443318[])(void *, s32);
