@@ -50,15 +50,15 @@ void fn_802FF1E0(f32 arg0) {
 
 s32 fn_802FF5CC(void *arg0, u32 arg1) {
     s32 flags = M2C_FIELD(arg0, s32 *, 4);
-    if (flags & 0x04000000) {
-        if (M2C_FIELD(arg0, u8 *, 0x88) > arg1) {
-            M2C_FIELD(arg0, u8 *, 0xEC) = arg1;
-            M2C_FIELD(arg0, s32 *, 4) = flags | 0x02000000;
-            return 1;
-        }
+    if (!(flags & 0x04000000)) {
         return 0;
     }
-    return 0;
+    if (M2C_FIELD(arg0, u8 *, 0x88) <= arg1) {
+        return 0;
+    }
+    M2C_FIELD(arg0, u8 *, 0xEC) = arg1;
+    M2C_FIELD(arg0, s32 *, 4) = flags | 0x02000000;
+    return 1;
 }
 
 s32 fn_802FF608(void *arg0, s32 i) {
