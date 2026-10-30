@@ -52,6 +52,13 @@ void fn_802423A8(void) {
     fn_802422FC();
 }
 
+f64 fn_80243CF4(f64 x) {
+    u32 high;
+    do { union { f64 value; struct { u32 msw; u32 lsw; } parts; } gh_u; gh_u.value = x; high = gh_u.parts.msw; } while (0);
+    do { union { f64 value; struct { u32 msw; u32 lsw; } parts; } sh_u; sh_u.value = x; sh_u.parts.msw = high & 0x7fffffff; x = sh_u.value; } while (0);
+    return x;
+}
+
 f32 fn_80243E1C(f32 x, f32 y, s32 iy) {
     extern f32 lbl_8049483C;
     extern f32 lbl_80494840;
