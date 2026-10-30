@@ -615,9 +615,9 @@ void fn_80094F44(void *arg0, s32 arg1, s32 arg2) {
     b = M2C_FIELD(M2C_FIELD(arg0, void **, 8), s32 *, 0x334) != 0;
     if (b) {
         fn_802EC15C((s32)M2C_FIELD(arg0, void **, 8) + 0x314, arg2, arg1);
-    } else {
-        fn_802EC15C((s32)M2C_FIELD(arg0, void **, 8) + 0x314, arg2, arg1);
+        return;
     }
+    fn_802EC15C((s32)M2C_FIELD(arg0, void **, 8) + 0x314, arg2, arg1);
 }
 
 s32 fn_80095A44(void) {
@@ -806,6 +806,11 @@ void fn_80097BA8(void *arg0) {
 
 s32 fn_80097BD8(s32 arg0) {
     return arg0 + 0x188;
+}
+
+s32 fn_80097BE0(void) {
+    extern s32 lbl_804941EC;
+    return lbl_804941EC != 0;
 }
 
 f32 fn_80097BF8(void *arg0, f32 farg0) {
