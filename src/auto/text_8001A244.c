@@ -1,6 +1,27 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+void fn_8001B088(void *arg0) {
+    void fn_8031EA2C(void *);
+    u8 *self = (u8 *)arg0;
+    u8 *obj;
+
+    if (*(void **)(self + 0x0) != NULL) {
+        fn_8031EA2C(*(void **)(self + 0x0));
+        *(void **)(self + 0x0) = NULL;
+    }
+    if (*(void **)(self + 0x4) != NULL) {
+        fn_8031EA2C(*(void **)(self + 0x4));
+        *(void **)(self + 0x4) = NULL;
+    }
+    obj = *(u8 **)(self + 0x838);
+    if (obj != NULL) {
+        u8 *vt = *(u8 **)(obj + 0x9c);
+        (*(void (**)(void *, s32))(vt + 0xc))(obj + *(s16 *)(vt + 8), 3);
+        *(u8 **)(self + 0x838) = NULL;
+    }
+}
+
 void fn_8001B7BC(void) {
     extern s32 lbl_80493F34;
     if (lbl_80493F34 == 0) {
