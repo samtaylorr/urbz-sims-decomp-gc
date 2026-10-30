@@ -3,7 +3,6 @@
 
 extern u8 lbl_80415470[];
 extern char lbl_80435FB8[];
-void fn_801B25A4(void *);
 void *fn_802D2058(u32);
 
 typedef struct ScratchPool {
@@ -56,11 +55,59 @@ static inline void *Heap_Alloc(u32 size) {
 
 extern u8 lbl_80415560[];
 extern void fn_802D20E8(void *);
+void fn_801B25A4(void *self) {
+    void fn_800F687C(void *, void *, s32);
+    void fn_800F68F0(void *, void *, s32);
+    void fn_801B3814(void *, s32, s32);
+    extern u8 lbl_803DBFF8[];
+
+    M2C_FIELD(self, s32 *, 8) = 0;
+    *(void **)self = lbl_80415560;
+    M2C_FIELD(self, s16 *, 4) = 0;
+    fn_800F687C((char *)self + 0xC, (char *)self + 0x14, 0x40);
+    fn_800F68F0((char *)self + 0xC, lbl_803DBFF8, -1);
+    M2C_FIELD(self, s32 *, 0x54) = 0;
+    fn_801B3814((char *)self + 0x58, 0, 0);
+}
+
 void fn_801B262C(void **self, s32 flags) {
     *self = lbl_80415560;
     if (flags & 1) {
         fn_802D20E8(self);
     }
+}
+
+void *fn_801B2660(void *self, void *other) {
+    void fn_800F687C(void *, void *, s32);
+    void fn_801B3814(void *, s32, s32);
+    s32 fn_801B2770(s32);
+    s16 fn_801B28E4(void *);
+    void fn_801B28EC(void *, s16);
+    char buf[0x48];
+    void *vt;
+
+    *(void **)self = lbl_80415560;
+    fn_800F687C((char *)self + 0xC, (char *)self + 0x14, 0x40);
+    fn_801B3814((char *)self + 0x58, 0, 0);
+    M2C_FIELD(self, s32 *, 8) = 0;
+    M2C_FIELD(self, void **, 0x54) = M2C_FIELD(other, void **, 0x54);
+    fn_800F687C(buf, buf + 8, 0x40);
+    vt = M2C_FIELD(other, void **, 0);
+    M2C_FIELD(vt, void (**)(void *, void *), 0x44)((char *)other + M2C_FIELD(vt, s16 *, 0x40), buf);
+    ((s32 (*)(void *, void *))fn_801B2770)(self, buf);
+    fn_801B28EC(self, fn_801B28E4(other));
+    return self;
+}
+
+s32 fn_801B271C(void *arg0, void *arg1) {
+    s32 fn_800F68BC(void *);
+    s32 fn_800F6A38();
+    void *p = (char *)arg0 + 0xC;
+    if (fn_800F68BC(p) != 0) {
+        fn_800F6A38(arg1, p);
+        return 1;
+    }
+    return 0;
 }
 
 s32 fn_801B2770(s32 arg0) {
@@ -86,15 +133,16 @@ void fn_801B27BC(void *arg0, s8 arg1) {
 }
 
 u8 fn_801B27C8(void *arg0) {
-    u8 v;
+    u32 v;
     if (fn_801B2798(arg0) >= -0x7FFE) {
         return M2C_FIELD(M2C_FIELD(arg0, void **, 0x54), u8 *, 5);
     }
     if (fn_801B2798(arg0) == -0x7FFF) {
         v = M2C_FIELD(M2C_FIELD(arg0, void **, 0x54), u8 *, 5);
-        if (v <= 4) {
-            return v;
+        if (v > 4) {
+            return 4;
         }
+        return v;
     }
     return 4;
 }
