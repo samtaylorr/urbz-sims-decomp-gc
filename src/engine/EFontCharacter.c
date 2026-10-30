@@ -1,6 +1,10 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+static inline s32 List_Valid(void *n) {
+    return n != NULL;
+}
+
 static inline s32 ListCount(u8 *list) {
     return *(s32 *)(list + 4);
 }
@@ -149,14 +153,15 @@ void *fn_8036C3BC(void *self) {
     extern u8 lbl_8041D878[];
     void fn_80365BB4(void *, s32);
     void fn_803BED48(void *);
+    char *p = self;
 
-    M2C_FIELD(self, void **, 0) = lbl_8041D878;
-    fn_80365BB4((char *)self + 0x10, 0xED);
-    fn_803BED48((char *)self + 0x20);
-    M2C_FIELD(self, s32 *, 8) = 0;
-    M2C_FIELD(self, s32 *, 4) = 0;
-    M2C_FIELD(self, s32 *, 0xC) = 1;
-    return self;
+    *(void **)p = lbl_8041D878;
+    fn_80365BB4(p + 0x10, 0xED);
+    fn_803BED48(p + 0x20);
+    *(s32 *)(p + 8) = 0;
+    *(s32 *)(p + 4) = 0;
+    *(s32 *)(p + 0xC) = 1;
+    return p;
 }
 
 void fn_8036C41C(void *self, s32 flags) {
@@ -208,13 +213,33 @@ void fn_8036C508(u8 *self) {
     s32 i;
 
     for (i = 0; i < ListCount(self + 0x20); i++) {
-        fn_8036C2DC((*(u8 ***)(self + 0x20))[i]);
+        u8 **data = *(u8 ***)(self + 0x20);
+        fn_8036C2DC(data[i]);
     }
 }
 
 void fn_8036C56C(s32 arg0) {
     M2C_UNK fn_803BEE20(s32);
     fn_803BEE20(arg0 + 0x20);
+}
+
+void fn_8036C648(char *self, void *stream) {
+    extern u16 lbl_80493D92[];
+    void fn_8036C48C(void *);
+    extern void *fn_803BEFE4(void *, void *);
+    extern void fn_803BF28C(void *, void *);
+    void *vt;
+
+    fn_8036C48C(self);
+    if (lbl_80493D92[0] == 0) {
+        vt = M2C_FIELD(stream, void **, 0x18);
+        M2C_FIELD(vt, void (**)(void *, void *, s32), 0x34)((char *)stream + M2C_FIELD(vt, s16 *, 0x30), self + 4, 4);
+        vt = M2C_FIELD(stream, void **, 0x18);
+        M2C_FIELD(vt, void (**)(void *, void *, s32), 0x34)((char *)stream + M2C_FIELD(vt, s16 *, 0x30), self + 8, 4);
+        vt = M2C_FIELD(stream, void **, 0x18);
+        M2C_FIELD(vt, void (**)(void *, void *, s32), 0x34)((char *)stream + M2C_FIELD(vt, s16 *, 0x30), self + 0xC, 4);
+    }
+    fn_803BF28C(fn_803BEFE4(stream, self + 0x10), self + 0x20);
 }
 
 void fn_8036C818(void) {
