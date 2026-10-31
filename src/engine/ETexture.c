@@ -80,6 +80,8 @@ s32 *fn_8036EE68(s32 *self) {
     extern f32 lbl_803F53D0[];
     Tex *p = (Tex *)self;
     V3 t;
+    s32 a, b, c;
+    s32 *d;
     p->h = 0x40;
     p->w = 0x40;
     p->vt = lbl_8041DC58;
@@ -87,7 +89,13 @@ s32 *fn_8036EE68(s32 *self) {
     p->a = 1;
     p->b = 1;
     t.x = t.y = t.z = lbl_803F53D0[0];
-    p->v = t;
+    d = (s32 *)&p->v;
+    a = ((s32 *)&t)[0];
+    b = ((s32 *)&t)[1];
+    c = ((s32 *)&t)[2];
+    d[0] = a;
+    d[2] = c;
+    d[1] = b;
     p->h = -1;
     p->w = -1;
     return self;
@@ -327,6 +335,14 @@ s32 fn_8036FBA8(void *arg0, s32 arg1) {
 
 s32 fn_8036FBC8(void *arg0, s32 arg1) {
     return (M2C_FIELD(arg0, s32 *, 0x80) & (1 << arg1)) != 0;
+}
+
+M2C_UNK fn_8036FBE8(void *arg0, s32 arg1, s32 arg2) {
+    if (arg2 != 0) {
+        M2C_FIELD(arg0, s32 *, 0x7C) |= 1 << arg1;
+        return;
+    }
+    M2C_FIELD(arg0, s32 *, 0x7C) &= ~(1 << arg1);
 }
 
 void fn_8036FE3C(void *arg0, void *arg1) {
