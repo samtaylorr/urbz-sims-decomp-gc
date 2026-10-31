@@ -75,13 +75,11 @@ void fn_80014E0C(void) {
 
 }
 
-s32 fn_80014EE0(void) {
+s32 *fn_80014EE0(void) {
     void *fn_802D1FC8(s32);
-    extern s32 lbl_80493F2C;
-    s32 *p;
-    if ((s32)lbl_80493F2C == 0) {
-        p = fn_80014DCC(fn_802D1FC8(8));
-        lbl_80493F2C = (s32)p;
+    extern s32 *lbl_80493F2C;
+    if (lbl_80493F2C == NULL) {
+        lbl_80493F2C = fn_80014DCC(fn_802D1FC8(8));
         fn_80014E08();
     }
     return lbl_80493F2C;
@@ -125,13 +123,13 @@ void fn_800150A8(void *arg0) {
 }
 
 void fn_800150CC(void *arg0) {
+    register void *p asm("r3") = arg0;
     void *vt;
-    if (M2C_FIELD(arg0, s32 *, 0xC) == 0) {
-        void *obj;
-        M2C_FIELD(arg0, s32 *, 0xC) = 1;
-        obj = M2C_FIELD(arg0, void **, 4);
-        vt = M2C_FIELD(obj, void **, 0x44);
-        ((void (*)(void *))M2C_FIELD(vt, void **, 0x1C))((char *)obj + M2C_FIELD(vt, s16 *, 0x18));
+    if (M2C_FIELD(p, s32 *, 0xC) == 0) {
+        M2C_FIELD(p, s32 *, 0xC) = 1;
+        p = M2C_FIELD(p, void **, 4);
+        vt = M2C_FIELD(p, void **, 0x44);
+        ((void (*)(void *))M2C_FIELD(vt, void **, 0x1C))((char *)p + M2C_FIELD(vt, s16 *, 0x18));
     }
 }
 
@@ -192,11 +190,11 @@ void fn_80015250(s32 arg0) {
     extern s32 lbl_80495704;
     extern void **lbl_804961A4;
     extern s32 lbl_8049664C;
-    char *vt = (char *)*lbl_804961A4;
+    void **obj = lbl_804961A4;
     lbl_8049664C = 0;
     lbl_80495704 = arg0;
-    (*(void (**)(void *, void (*)(void)))(vt + 0x44))(
-        (char *)lbl_804961A4 + *(s16 *)(vt + 0x40), fn_800151C0);
+    (*(void (**)(void *, void (*)(void)))((char *)*obj + 0x44))(
+        (char *)obj + *(s16 *)((char *)*obj + 0x40), fn_800151C0);
 }
 
 f32 fn_8001529C(void) {
@@ -266,15 +264,15 @@ void fn_80015720(void *arg0, void *arg1, s32 arg2) {
 
     M2C_FIELD(arg0, s32 *, 0x55C) = 1;
     M2C_FIELD(arg0, s32 *, 0xF24) = arg2;
-    M2C_FIELD(arg0, u8 *, 0x599) = 0;
-    M2C_FIELD(arg0, void **, 0x3FC) = arg1;
     M2C_FIELD(arg0, s32 *, 0xEF8) = 0;
     M2C_FIELD(arg0, s32 *, 0x560) = 0;
     M2C_FIELD(arg0, s32 *, 0x570) = 0;
     M2C_FIELD(arg0, u8 *, 0x59A) = 0;
     M2C_FIELD(arg0, s32 *, 0x558) = 0;
+    M2C_FIELD(arg0, u8 *, 0x599) = 0;
+    M2C_FIELD(arg0, void **, 0x3FC) = arg1;
     for (i = 0; i < 4; i++) {
-        M2C_FIELD(arg0, CameraManager_Slot **, 0x3FC)[i].unkFC = 0;
+        M2C_FIELD(arg0, CameraManager_Owner **, 0x3FC)->entries[i].unk0 = 0;
     }
     M2C_FIELD(arg0, CameraManager_Vec3i *, 0x3C8) = lbl_8041EB9C;
     M2C_FIELD(arg0, CameraManager_Vec3i *, 0x3EC) = lbl_8041EBA8;
