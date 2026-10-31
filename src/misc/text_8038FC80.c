@@ -193,10 +193,11 @@ void fn_803909CC(u32 arg0) {
 }
 
 u32 fn_803909E4(u32 arg0) {
-    u32 *tbl = lbl_804964DC;
-    u32 idx = (arg0 >> 12) & 0x1FFF;
+    register u32 *tbl asm("r4") = lbl_804964DC;
+    register u32 idx asm("r0") = ((arg0 >> 12) & 0x1FFF) * 4;
+    register u32 v asm("r0") = *(u32 *)((char *)tbl + idx);
 
-    return tbl[idx] >> 31;
+    return v >> 31;
 }
 
 void fn_803909F8(void) {
