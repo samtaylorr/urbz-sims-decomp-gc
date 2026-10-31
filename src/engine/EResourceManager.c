@@ -359,8 +359,6 @@ void fn_80337FDC(char *arg0) {
     fn_8033983C(arg0 + 0x6C);
 }
 
-s32 fn_80339644(char *, s32);
-s32 fn_8033983C(char *);
 void fn_80338184(char *self, s32 arg1) {
     void *fn_802D0B3C(void);
     s32 fn_802D0F64(void *, s32);
