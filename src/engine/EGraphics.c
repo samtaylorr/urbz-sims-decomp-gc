@@ -326,6 +326,23 @@ void fn_802EE2D8(char *self) {
     (*(void (**)(char *))(vt + 0x20C))(self + *(s16 *)(vt + 0x208));
 }
 
+void fn_802EE4F4(void *arg0, s32 arg1) {
+    void *fn_802D0B3C(void *);
+    s32 fn_802D0F64(void *, s32);
+    void fn_802D1A00(void *, s32);
+    void *fn_802D0AB8(void);
+    extern char *lbl_80495050;
+    void *p = fn_802D0B3C(arg0);
+    char *obj = lbl_80495050;
+    char *vt = *(char **)obj;
+    (*(void (**)(void *))(vt + 0x44))(obj + *(s16 *)(vt + 0x40));
+    if (fn_802D0F64(p, arg1) != 0) {
+        fn_802D1A00(p, arg1);
+    } else {
+        fn_802D1A00(fn_802D0AB8(), arg1);
+    }
+}
+
 s32 fn_802EEB54(void *arg0) {
     M2C_UNK fn_802EE6D0();
     fn_802EE6D0();
