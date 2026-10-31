@@ -5,10 +5,12 @@ typedef struct {
     s32 unk0;
     u8 pad4[0x20];
     s32 unk24;
-    u8 pad28[0x8];
+    u32 unk28;
+    u8 pad2C[0x4];
     u8 unk30;
     u8 unk31;
-    u8 pad32[0x6];
+    u8 pad32[0x2];
+    s32 unk34;
     s32 *unk38;
     u8 pad3C[0x4];
     u32 unk40_0 : 1;
@@ -394,11 +396,11 @@ s32 fn_8035F000(void *self) {
     extern u8 lbl_803F4A18[];
     if (fn_803665B8((u8 *)self + 0x348, 10) != 0) {
         M2C_FIELD(self, void **, 0x32C) = lbl_803F4A18;
-        if (fn_802D8CA4(self, 3, 0x4000, 0) == 0) {
-            return 0;
+        if (fn_802D8CA4(self, 3, 0x4000, 0) != 0) {
+            fn_802D8EF8(self);
+            return 1;
         }
-        fn_802D8EF8(self);
-        return 1;
+        return 0;
     }
     return 0;
 }
