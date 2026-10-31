@@ -404,6 +404,11 @@ loop_1:
     goto loop_1;
 }
 
+M2C_UNK fn_8035F18C(void *self, s32 *msg) {
+    M2C_UNK fn_80366760(void *, s32 *, s32);
+    return fn_80366760((u8 *)self + 0x348, msg, 1);
+}
+
 void *fn_8035F1B4(char *self) {
     void *fn_802C7DE4(void *);
     void **p;
