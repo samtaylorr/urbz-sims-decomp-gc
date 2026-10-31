@@ -219,6 +219,23 @@ void fn_8035EA70(void) {
     ((void (*)(void))fn_8035EC18)();
 }
 
+void fn_8035EB04(void *self, s32 slot, f32 vol) {
+    extern ENgcRendererSlot lbl_80473F7C[];
+    void fn_80385F0C(s32, s32);
+    s32 fn_8035ED3C(u8);
+    ENgcRendererSlot *e;
+
+    if (slot != -1) {
+        fn_8035EE7C();
+        e = &lbl_80473F7C[slot];
+        if (e->unk38 != NULL) {
+            ((u8 *)e->unk38)[0x30] = vol * 127.0f;
+            fn_80385F0C(*e->unk38, fn_8035ED3C(((u8 *)e->unk38)[0x30]));
+        }
+        fn_8035EE3C();
+    }
+}
+
 void fn_8035EB9C(void *self, s32 slot, s32 arg2) {
     extern ENgcRendererSlot lbl_80473F7C[];
     void fn_80385F0C(s32, s32);
