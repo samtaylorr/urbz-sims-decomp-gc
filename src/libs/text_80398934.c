@@ -151,6 +151,12 @@ static inline s32 *Median3(s32 *a, s32 *b, s32 *c, s32 (*comp)(s32 *, s32 *)) {
         return b;
     }
 }
+static inline s32 CompValL(s32 (*comp)(s32 *, s32 *), s32 a, s32 *b) {
+    return comp(&a, b);
+}
+static inline s32 CompValR(s32 (*comp)(s32 *, s32 *), s32 *a, s32 b) {
+    return comp(a, &b);
+}
 void *fn_8024839C(void *dst, const void *src, u32 n);
 M2C_UNK fn_802D1FC8(M2C_UNK);
 void *fn_80399BE8(u32);
@@ -4064,6 +4070,27 @@ void fn_803A3320(s32 *first, s32 *middle, s32 *last, s32 comp) {
     fn_803A3254(first, middle, last, 0, comp);
 }
 
+s32 *fn_803A3348(s32 *first, s32 *last, s32 pivot, s32 (*comp)(s32 *, s32 *)) {
+    s32 tmp;
+
+    while (1) {
+        while (comp(first, &(s32){pivot})) {
+            first++;
+        }
+        last--;
+        while (comp(&(s32){pivot}, last)) {
+            last--;
+        }
+        if (!(first < last)) {
+            return first;
+        }
+        tmp = *first;
+        *first = *last;
+        *last = tmp;
+        first++;
+    }
+}
+
 s32 *fn_803A3348(s32 *first, s32 *last, s32 pivot, s32 (*comp)(s32 *, s32 *));
 void fn_803A33EC(s32 *first, s32 *last, s32 *val, s32 depth, s32 comp) {
     s32 *cut;
@@ -4081,6 +4108,17 @@ void fn_803A33EC(s32 *first, s32 *last, s32 *val, s32 depth, s32 comp) {
         fn_803A33EC(cut, last, 0, depth, comp);
         last = cut;
     }
+}
+
+void fn_803A3540(s32 *last, s32 val, s32 comp) {
+    s32 *next = last - 1;
+
+    while (((s32 (*)(s32 *, s32 *))comp)(&(s32){val}, next)) {
+        *last = *next;
+        last = next;
+        next--;
+    }
+    *last = val;
 }
 
 void fn_803A35A4(s32 *first, s32 *last, s32 comp) {
