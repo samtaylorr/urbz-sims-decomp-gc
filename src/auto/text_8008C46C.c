@@ -1152,10 +1152,10 @@ f32 fn_80098AD0(void *arg0, f32 x) {
         x += lbl_803CCC18[0];
     }
     if (x >= lbl_803CCC24[0]) {
-        if (x >= lbl_803CCC28[0]) {
+        if (!(x < lbl_803CCC28[0])) {
             return x;
         }
-    } else if (-x >= lbl_803CCC28[0]) {
+    } else if (!(-x < lbl_803CCC28[0])) {
         return x;
     }
     return lbl_803CCC24[0];
