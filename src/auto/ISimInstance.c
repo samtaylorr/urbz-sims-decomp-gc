@@ -79,7 +79,7 @@ void fn_80063FA4(void *self, s32 flags) {
     u8 *obj;
     u8 *vt;
 
-    if (lbl_80494130 != NULL) {
+    if (ISimInstance_IterValid(lbl_80494130)) {
         if (ISimInstance_Call9C(lbl_80495050, lbl_80494130) != 0) {
             ISimInstance_Call44(lbl_80495050);
         }
@@ -189,23 +189,25 @@ void fn_80064650(s32 *arg0, s32 arg1) {
 void fn_8006488C(void *arg0, s32 arg1) {
     M2C_UNK fn_802CD53C(void *);
     M2C_UNK fn_80325C50(s32, void *);
-    void **list;
-    void *it;
     void *node;
+    char *list;
+    void *it;
 
     for (node = M2C_FIELD(arg0, void **, 4); node != NULL; node = M2C_FIELD(node, void **, 0x10)) {
-        void *obj = M2C_FIELD(node, void **, 0x1C);
-        void *vt;
+        char *obj = M2C_FIELD(node, char **, 0x1C);
+        char *vt;
         fn_80325C50(arg1, obj);
-        vt = *(void **)obj;
-        M2C_FIELD(vt, void (**)(void *, s32), 0x16C)((char *)obj + M2C_FIELD(vt, s16 *, 0x168), arg1);
+        vt = *(char **)obj;
+        (*(void (**)(void *, s32))(vt + 0x16C))(obj + *(s16 *)(vt + 0x168), arg1);
     }
-    list = (void **)((char *)arg0 + 4);
-    it = *list;
+    list = (char *)arg0 + 4;
+    it = M2C_FIELD(list, void **, 0);
     while (ISimInstance_IterValid(it)) {
-        void *obj = M2C_FIELD(it, void **, 0x1C);
-        it = M2C_FIELD(it, void **, 0x10);
-        M2C_FIELD(*(void **)obj, void (**)(void *), 0xC)((char *)obj + M2C_FIELD(*(void **)obj, s16 *, 8));
+        char *obj = M2C_FIELD(it, char **, 0x1C);
+        void *next = M2C_FIELD(it, void **, 0x10);
+        char *vt = *(char **)obj;
+        (*(void (**)(void *))(vt + 0xC))(obj + *(s16 *)(vt + 8));
+        it = next;
     }
     fn_802CD53C(list);
 }
