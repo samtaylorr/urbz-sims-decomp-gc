@@ -448,6 +448,7 @@ void fn_80319294(s32 arg0, s32 arg1, s32 arg2) {
 }
 
 void fn_803192E8(void *arg0, const char *arg1, s32 arg2) {
+    void fn_80318CC4(const char *, s32);
     void fn_803189F0(void);
     void fn_802D11A8(void *);
     void fn_80318A70(const char *fmt, ...);
@@ -580,12 +581,11 @@ void fn_8031B228(f32 *out, f32 t) {
     extern f32 lbl_803F2C8C[];
     f32 t2 = t * t;
     f32 t3 = t2 * t;
-    f32 a = (t3 + t3) - t2 * lbl_803F2C88[0];
 
-    out[0] = a + lbl_803F2C8C[0];
-    out[2] = (t - (t2 + t2)) + t3;
+    out[0] = (t3 + t3) - t2 * lbl_803F2C88[0] + lbl_803F2C8C[0];
     out[3] = -t2 + t3;
-    out[1] = -a;
+    out[1] = -((t3 + t3) - t2 * lbl_803F2C88[0]);
+    out[2] = (t - (t2 + t2)) + t3;
 }
 
 s32 fn_8031B700(void *arg0) {
