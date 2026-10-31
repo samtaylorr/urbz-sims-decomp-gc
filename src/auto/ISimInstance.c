@@ -49,14 +49,17 @@ void fn_80063F28(void) {
     extern void *lbl_80494130;
     extern const f32 lbl_803C8408[];
     extern void fn_802F8FC4(void *, f32, f32);
+    u8 *obj;
     u8 *vt;
     void *r;
 
-    vt = *(u8 **)lbl_80495050;
-    r = (*(void *(**)(void *, s32))(vt + 0x6C))(lbl_80495050 + *(s16 *)(vt + 0x68), 1);
+    obj = lbl_80495050;
+    vt = *(u8 **)obj;
+    r = (*(void *(**)(void *, s32))(vt + 0x6C))(obj + *(s16 *)(vt + 0x68), 1);
     fn_802F8FC4(r, lbl_803C8408[0], lbl_803C8408[0]);
-    vt = *(u8 **)lbl_80495050;
-    lbl_80494130 = (*(void *(**)(void *, void *))(vt + 0x74))(lbl_80495050 + *(s16 *)(vt + 0x70), r);
+    obj = lbl_80495050;
+    vt = *(u8 **)obj;
+    lbl_80494130 = (*(void *(**)(void *, void *))(vt + 0x74))(obj + *(s16 *)(vt + 0x70), r);
 }
 
 void fn_80063FA4(void *self, s32 flags) {
