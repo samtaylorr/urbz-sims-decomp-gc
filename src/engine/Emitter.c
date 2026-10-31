@@ -57,6 +57,21 @@ void fn_8030AAC8(void *arg0, void *arg1, s32 arg2) {
     }
 }
 
+void fn_8030AB24(void *arg0, void *arg1, s32 arg2) {
+    extern void fn_8030F938(void *, s32);
+    s32 p = M2C_FIELD(arg0, s32 *, 0x8C);
+    s32 mgr;
+    if (p != 0) {
+        fn_8030F938(arg1, p);
+        if (arg2 != 0) {
+            mgr = M2C_FIELD(lbl_80494FDC, s32 *, 0x30);
+            if (M2C_FIELD(arg0, s32 *, 4) != 0) {
+                fn_80325C50(mgr, arg0);
+            }
+        }
+    }
+}
+
 void fn_8030AB88(void *arg0, s32 arg1) {
     f32 *dst = M2C_FIELD(arg0, f32 **, 0x8C);
     f32 *p;
