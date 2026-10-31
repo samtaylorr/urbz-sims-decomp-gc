@@ -22,6 +22,25 @@ void fn_80007EBC(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x14) = (s32) (M2C_FIELD(arg0, s32 *, 0x14) + 1);
 }
 
+void fn_80007ECC(void *arg0, void *arg1) {
+    void *fn_802D1FC8(s32);
+    void *fn_80005214(void *, void *);
+    void fn_8000718C(void *, void *);
+
+    if (M2C_FIELD(arg0, void **, 0xC) == NULL) {
+        M2C_FIELD(arg0, void **, 0xC) = fn_80005214(fn_802D1FC8(0x90), arg0);
+        M2C_FIELD(arg0, void **, 0x10) = fn_80005214(fn_802D1FC8(0x90), arg0);
+    }
+    if (arg1 != NULL) {
+        if (M2C_FIELD(arg1, void **, 0xC) != NULL) {
+            fn_8000718C(M2C_FIELD(arg0, void **, 0xC), M2C_FIELD(arg1, void **, 0xC));
+        }
+        if (M2C_FIELD(arg1, void **, 0x10) != NULL) {
+            fn_8000718C(M2C_FIELD(arg0, void **, 0x10), M2C_FIELD(arg1, void **, 0x10));
+        }
+    }
+}
+
 f32 fn_80007F5C(void) {
     extern const f64 lbl_803C1660[];
     return lbl_803C1660[0];
