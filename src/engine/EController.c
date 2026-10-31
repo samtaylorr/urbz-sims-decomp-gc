@@ -328,11 +328,11 @@ void fn_80310F28(char *self, u32 mask) {
     if (fn_8036FBC8(*(void **)(self + 0x1FC), i) == 0) {
         fn_8036FC20(*(void **)(self + 0x1FC), i, 1);
         fn_8036FBE8(*(void **)(self + 0x1FC), i, 0);
-        M2C_FIELD(*(char **)(self + 0x1FC), u32 *, 0x8) |= mask;
-        M2C_FIELD(*(char **)(self + 0x1FC), u32 *, 0x10) |= mask;
-        M2C_FIELD(*(char **)(self + 0x1FC), u32 *, 0x20) |= mask;
-        M2C_FIELD(*(char **)(self + 0x1FC), u32 *, 0x0) &= ~mask;
     }
+    M2C_FIELD(*(char **)(self + 0x1FC), u32 *, 0x8) |= mask;
+    M2C_FIELD(*(char **)(self + 0x1FC), u32 *, 0x10) |= mask;
+    M2C_FIELD(*(char **)(self + 0x1FC), u32 *, 0x20) |= mask;
+    M2C_FIELD(*(char **)(self + 0x1FC), u32 *, 0x0) &= ~mask;
 }
 
 s32 fn_80310FE4(void *arg0) {
