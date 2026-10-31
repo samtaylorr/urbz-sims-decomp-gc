@@ -206,9 +206,12 @@ void fn_8032A710(u8 *self, s32 arg1) {
 void fn_8032AD74(f32 *out, u8 *self, void **src) {
     if (*(s32 *)(self + 0x78) != 0) {
         s16 *s = (s16 *)*src;
-        out[0] = s[0];
-        out[1] = s[1];
-        out[2] = s[2];
+        s32 x = s[0];
+        s32 y = s[1];
+        s32 z = s[2];
+        out[0] = x;
+        out[1] = y;
+        out[2] = z;
     } else {
         f32 *s = (f32 *)*src;
         out[0] = s[0];
@@ -267,8 +270,7 @@ s32 fn_8032BB20(u8 *self, s32 name, s32 idx) {
         return 0;
     }
     if (fn_8032BA68(self, res, idx) != 0) {
-        u8 *base = self + 0xA8;
-        *(s32 *)(base + (idx << 3)) = 1;
+        ((s32 *)(self + 0xA8))[idx * 2] = 1;
         return (s32)res;
     }
     fn_8031EA2C(res);
