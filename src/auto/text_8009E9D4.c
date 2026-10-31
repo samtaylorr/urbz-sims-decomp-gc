@@ -83,6 +83,16 @@ s32 fn_800A3038(void *arg0, void *arg1, s32 *arg2, s32 *arg3) {
     return 1;
 }
 
+void fn_800A3310(void *arg0, s32 arg1) {
+    void fn_80308448(void *);
+    void fn_8004B8F4(void *, s32);
+    extern struct { u8 pad[0xD8]; s32 arr[1]; } lbl_8041F94C;
+    if (M2C_FIELD(arg0, s32 *, 0x10C) != 0) {
+        fn_80308448(arg0);
+        fn_8004B8F4(&lbl_8041F94C, arg1);
+    }
+}
+
 void **fn_800A35E4(void) {
     extern void *lbl_8042F060[];
     void **p;
