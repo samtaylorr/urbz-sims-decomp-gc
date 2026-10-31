@@ -39,6 +39,19 @@ s32 *fn_8031C79C(s32 *self) {
     return self;
 }
 
+s32 *fn_8031C7B4(s32 *self) {
+    self[0] = 0;
+    self[1] = 0;
+    self[2] = 0;
+    self[3] = 0;
+    self[4] = 0;
+    self[5] = 0;
+    self[8] = 1;
+    self[9] = 1;
+    self[6] = 0;
+    return self;
+}
+
 s32 fn_8031C7E8(s32 arg0) {
     M2C_UNK fn_802CA9A8(s32);
     M2C_UNK fn_803664B0();
