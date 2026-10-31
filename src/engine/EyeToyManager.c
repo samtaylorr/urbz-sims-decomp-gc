@@ -30,7 +30,7 @@ static inline s32 EyeToyOpenDevice(void) {
     s32 ok = 0;
     s32 i;
 
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < 0; i++) {
     }
     return ok;
 }
