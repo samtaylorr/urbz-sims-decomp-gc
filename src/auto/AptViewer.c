@@ -97,7 +97,7 @@ void fn_8000AA2C(void *self, const char *fmt, s32 arg2, s32 arg3, s32 arg4, ...)
 }
 
 void fn_8000AC58(void) {
-    M2C_UNK fn_8000A798();
+    void fn_8000A798(void);
     M2C_UNK fn_8000B198();
     fn_8000B198();
     fn_8000A798();
@@ -277,17 +277,13 @@ void fn_8000C0D0(u8 *self, u32 index, s32 a, s32 b) {
 }
 
 s32 fn_8000C12C(u8 *self, u32 index) {
-    s32 *cur;
-    u8 *tbl;
     if (*(s32 *)(self + 0x3A8) == 0) {
         return -1;
     }
     if (index > 1) {
         index = 0;
     }
-    cur = (s32 *)(self + 0x450);
-    tbl = self + 0x3B0;
-    return *(s32 *)(tbl + (index * 0x50 + *(s32 *)((u8 *)cur + index * 4) * 8));
+    return *(s32 *)((self + 0x3B0) + (index * 0x50 + *(s32 *)((self + 0x450) + index * 4) * 8));
 }
 
 extern void *lbl_80494FCC;
