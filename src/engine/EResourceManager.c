@@ -258,11 +258,11 @@ void fn_803377F0(char *arg0, s32 arg1) {
 }
 
 void fn_8033782C(char *self, char *res) {
-    ResLock lock;
+    ERMLock lock[1];
 
-    ResLock_Init(&lock, self);
+    ERMLock_Lock(lock, self);
     *(s32 *)(res + 0xC) += 1;
-    ResLock_Release(&lock);
+    ERMLock_Unlock(lock);
 }
 
 void fn_8033789C(char *self, s32 key) {
