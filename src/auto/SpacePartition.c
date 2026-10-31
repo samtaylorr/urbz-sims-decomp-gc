@@ -36,6 +36,10 @@ typedef struct SPart {
     SPNode *nodesEnd;
 } SPart;
 
+s32 fn_8019334C(s32 arg0, s32 arg1) {
+    return (u32)(arg1 + 1) > 2;
+}
+
 void fn_80197794(void *arg0, s32 arg1) {
     s32 *vec;
     s32 begin;
