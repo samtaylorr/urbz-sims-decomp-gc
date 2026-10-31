@@ -23,9 +23,53 @@ s32 fn_8010C3F8(void *arg0, void *arg1, s32 arg2);
 void fn_801B3908(void *, s32);
 void fn_801B3910(void *, u16);
 
+static inline void FamilySub_Init(char *sub) {
+    M2C_FIELD(sub, s32 *, 4) = 0;
+}
+
 void fn_80106008(s32 *arg0) {
     M2C_UNK fn_8011AA6C(s32);
     fn_8011AA6C(*arg0);
+}
+
+void fn_80107B70(u8 **self) {
+    void *fn_8015125C(void *, s32);
+    u8 *obj;
+    u8 *n;
+    void *p;
+
+    if (self[2] != NULL) {
+        obj = *self;
+        n = *(u8 **)(obj + 0xC);
+        if (n == NULL) {
+            n = obj;
+        } else {
+            n = obj;
+        }
+        p = n != NULL ? fn_8015125C(***(void ****)(n + 4), 9) : NULL;
+        while (p != NULL) {
+            ((u8 **)p)[2] = NULL;
+            n = *(u8 **)(*(u8 **)p + 8);
+            p = n != NULL ? fn_8015125C(***(void ****)(n + 4), 9) : NULL;
+        }
+    }
+}
+
+void fn_80107C18(u8 **self) {
+    void fn_8011B5F0(u8 *);
+    u8 *c;
+
+    c = *(u8 **)(*(u8 **)(*self) + 4);
+    (*(void (**)(u8 *))(*(u8 **)(c + 4) + 0x294))(c + *(s16 *)(*(u8 **)(c + 4) + 0x290));
+    c = *(u8 **)(*(u8 **)(*self) + 4);
+    (*(void (**)(u8 *, s32))(*(u8 **)(c + 4) + 0x284))(c + *(s16 *)(*(u8 **)(c + 4) + 0x280), 0);
+    fn_8011B5F0(*self);
+    c = self[2];
+    if (c != NULL) {
+        u8 *o = *(u8 **)(c + 4);
+        char *vt = *(char **)(o + 4);
+        (*(void (**)(u8 *))(vt + 0xF4))(o + *(s16 *)(vt + 0xF0));
+    }
 }
 
 s32 fn_801099F0(void **self, s32 arg1, s32 arg2, s32 arg3) {
