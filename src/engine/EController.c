@@ -32,8 +32,8 @@ void fn_803105B8(void *arg0, s32 arg1) {
 }
 
 void fn_803105D0(void *arg0, s32 arg1, s32 arg2) {
-    s32 *p = &((struct { u8 pad[0x194]; s32 unk194[2][2]; } *)arg0)->unk194[arg1][arg2];
-    *p = -*p;
+    struct { u8 pad[0x194]; s32 unk194[2][2]; } *p = arg0;
+    p->unk194[arg1][arg2] = -p->unk194[arg1][arg2];
 }
 
 void fn_80310728(void *arg0) {
