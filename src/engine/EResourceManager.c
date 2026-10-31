@@ -668,7 +668,7 @@ void fn_80338448(void *arg0, s32 arg1) {
 s32 fn_8033849C(void *arg0, s32 arg1) {
     void *p;
 
-    p = ERM_Alloc(arg1 << 3);
+    p = ERM_Alloc(arg1);
     M2C_FIELD(arg0, void **, 0) = p;
     if (p == NULL) {
         return 0;
