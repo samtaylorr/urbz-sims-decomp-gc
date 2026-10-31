@@ -4074,11 +4074,11 @@ s32 *fn_803A3348(s32 *first, s32 *last, s32 pivot, s32 (*comp)(s32 *, s32 *)) {
     s32 tmp;
 
     while (1) {
-        while (comp(first, &(s32){pivot})) {
+        while (CompValR(comp, first, pivot)) {
             first++;
         }
         last--;
-        while (comp(&(s32){pivot}, last)) {
+        while (CompValL(comp, pivot, last)) {
             last--;
         }
         if (!(first < last)) {
@@ -4111,9 +4111,10 @@ void fn_803A33EC(s32 *first, s32 *last, s32 *val, s32 depth, s32 comp) {
 }
 
 void fn_803A3540(s32 *last, s32 val, s32 comp) {
+    typedef struct { s32 v; } Elem;
     s32 *next = last - 1;
 
-    while (((s32 (*)(s32 *, s32 *))comp)(&(s32){val}, next)) {
+    while (((s32 (*)(Elem, s32 *))comp)(*(Elem *)&val, next)) {
         *last = *next;
         last = next;
         next--;
