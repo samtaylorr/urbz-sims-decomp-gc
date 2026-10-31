@@ -3,10 +3,6 @@
 
 extern u32 *lbl_804964DC;
 
-static inline u32 *PageTableAt(u32 n) {
-    return lbl_804964DC + n;
-}
-
 extern s32 lbl_804964C4;
 s32 fn_8038FD1C(void) {
     return lbl_804964C4;
