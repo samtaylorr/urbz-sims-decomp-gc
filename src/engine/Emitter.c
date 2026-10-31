@@ -16,6 +16,26 @@ s32 fn_8030AA04(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s3
 void fn_8030AB88(void *arg0, s32 arg1);
 void fn_8030B800(void);
 void fn_8030B280(void);
+void fn_8030AC1C(void *arg0, u32 arg1, s32 arg2) {
+    u32 *p;
+    s32 mgr;
+
+    p = M2C_FIELD(arg0, u32 **, 0x8C);
+    if (p != NULL) {
+        if (arg2 != 0) {
+            p[0] |= arg1;
+        } else {
+            p[0] &= ~arg1;
+        }
+        if ((arg1 & 0x4000) && arg2 != 0) {
+            mgr = M2C_FIELD(lbl_80494FDC, s32 *, 0x30);
+            if (M2C_FIELD(arg0, s32 *, 4) != 0) {
+                fn_80325C50(mgr, arg0);
+            }
+        }
+    }
+}
+
 s32 fn_8030AC90(void *arg0) {
     void *p = M2C_FIELD(arg0, void **, 0x8C);
     if (p == NULL) {
@@ -26,6 +46,32 @@ s32 fn_8030AC90(void *arg0) {
 
 s32 fn_8030ACB0(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x8C);
+}
+
+void *fn_8030ACB8(void *arg0) {
+    s32 *p;
+    f32 f;
+
+    fn_802F04BC(arg0);
+    M2C_FIELD(arg0, s32 *, 0x9C) = 0;
+    M2C_FIELD(arg0, char **, 0) = lbl_8041B020;
+    p = (s32 *)((u8 *)arg0 + 0x9C);
+    p[1] = 0;
+    p[2] = 0;
+    p[3] = 0;
+    p[4] = 0;
+    p[5] = 0;
+    p[6] = 0;
+    p[7] = 0;
+    p[8] = 0;
+    p[9] = 0;
+    p[10] = 0;
+    f = lbl_803F1F64[0];
+    p[13] = 0;
+    ((f32 *)p)[12] = f;
+    ((f32 *)p)[11] = f;
+    M2C_FIELD(arg0, s32 *, 0x8C) = 0;
+    return arg0;
 }
 
 extern void *lbl_80494FDC;
