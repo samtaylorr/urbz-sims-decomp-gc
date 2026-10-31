@@ -164,12 +164,14 @@ void fn_8031185C(s32 arg0, s32 arg1, s32 arg2) {
 void fn_803118A0(s32 arg0, s32 arg1, s32 arg2) {
     s32 fn_80311990(s32, s32);
     s32 i;
+    s32 off;
     s32 base;
 
     i = fn_80311990(arg0, arg1);
     if (i >= 0) {
+        off = i * 0xC;
         base = arg0 + 0x14;
-        *(s32 *)(base + i * 0xC) |= arg2;
+        *(s32 *)(base + off) |= arg2;
     }
 }
 
