@@ -12,6 +12,86 @@ extern s32 fn_8004E8F0(void *, s32);
 extern void *fn_802D197C(void *, u32, s32);
 extern void *fn_802DC3C0(void *, u32, s32, s32, s32);
 extern void *fn_802D0B3C(void);
+
+typedef struct {
+    u8 pad0[0xC];
+    s16 unkC;
+    u8 padE[0x1C - 0xE];
+} HouseReconEntry;
+
+void *fn_8004FFDC(u8 **arg0, s32 arg1) {
+    u8 *base = *arg0;
+    s32 i;
+    for (i = 0; i < M2C_FIELD(base, s32 *, 0x16004); i++) {
+        u8 *e = base + 0x8004 + i * 0x1C;
+        if (M2C_FIELD(e, s16 *, 0xC) == arg1) {
+            return e;
+        }
+    }
+    return NULL;
+}
+
+void *fn_80050040(u8 *arg0) {
+    extern void fn_800EC9AC(void *);
+    u8 *p;
+    s32 i;
+    M2C_FIELD(arg0, s32 *, 0x8000) = 0;
+    p = arg0 + 0x8004;
+    i = 0x7FF;
+    do {
+        fn_800EC9AC(p + 0x10);
+        p += 0x1C;
+    } while (i-- != 0);
+    M2C_FIELD(arg0, s32 *, 0x16004) = 0;
+    return arg0;
+}
+
+void fn_800500A4(u8 *arg0, s32 arg1) {
+    extern void fn_800ECE00(void *, s32);
+    extern void fn_802D20E8(void *);
+    u8 *begin = arg0 + 0x8004;
+    if (begin != NULL) {
+        u8 *p = arg0 + 0x16004;
+        if (begin != p) {
+            do {
+                p -= 0x1C;
+                fn_800ECE00(p + 0x10, 2);
+            } while (begin != p);
+        }
+    }
+    if (arg1 & 1) {
+        fn_802D20E8(arg0);
+    }
+}
+
+s32 fn_80050114(u8 *arg0, s32 arg1) {
+    s32 i;
+    for (i = 0; i < M2C_FIELD(arg0, s32 *, 0x16004); i++) {
+        if (M2C_FIELD(arg0 + 0x8004 + i * 0x1C, s32 *, 0) == arg1) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+void fn_80050418(void *arg0) {
+    extern u8 lbl_804081C8[];
+    u8 *base;
+    s32 i;
+    s32 j;
+    s32 *p;
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, void **, 0x44) = lbl_804081C8;
+    base = (u8 *)arg0 + 4;
+    for (i = 0; i < 4; i++) {
+        p = (s32 *)(base + i * 16) + 1;
+        for (j = 1; j >= 0; j--) {
+            *p = 0;
+            p--;
+        }
+    }
+}
+
 void fn_80050468(void *arg0, s32 arg1) {
     extern u8 lbl_804081C8[];
     M2C_FIELD(arg0, void **, 0x44) = lbl_804081C8;
