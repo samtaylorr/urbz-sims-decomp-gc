@@ -236,6 +236,14 @@ s32 fn_8027A6AC(const char *a, const char *b) {
     return lenA > lenB;
 }
 
+void fn_8027A76C(void) {
+    extern u8 *lbl_804960E8;
+    extern void fn_802A0FD4(u8 *);
+    if (lbl_804960E8 != NULL) {
+        fn_802A0FD4(lbl_804960E8 + 0x122C);
+    }
+}
+
 void fn_8027A79C(s32 arg0) {
     extern s32 lbl_80494B58;
     if (arg0 != 0) {
