@@ -251,19 +251,20 @@ char *fn_802EDF3C(char *self, void *arg1) {
 void fn_802EDFE0(char *self, s32 arg1) {
     extern char *lbl_804950A8;
     s32 i;
-    char *vt;
     if (arg1 && lbl_804950A8) {
         for (i = 0; i <= 1; i++) {
             char *obj = lbl_804950A8;
-            vt = *(char **)(obj + 0x338);
-            if ((*(s32 (**)(void *, s32))(vt + 0x1C))(obj + *(s16 *)(vt + 0x18), i) == arg1) {
-                vt = *(char **)self;
+            char *ovt = *(char **)(obj + 0x338);
+            if ((*(s32 (**)(void *, s32))(ovt + 0x1C))(obj + *(s16 *)(ovt + 0x18), i) == arg1) {
+                char *vt = *(char **)self;
                 (*(void (**)(void *))(vt + 0x164))(self + *(s16 *)(vt + 0x160));
                 break;
             }
         }
-        vt = *(char **)self;
-        (*(void (**)(void *, s32))(vt + 0x1DC))(self + *(s16 *)(vt + 0x1D8), arg1);
+        {
+            char *vt = *(char **)self;
+            (*(void (**)(void *, s32))(vt + 0x1DC))(self + *(s16 *)(vt + 0x1D8), arg1);
+        }
         (*(s32 *)(self + 0x30))--;
     }
 }
