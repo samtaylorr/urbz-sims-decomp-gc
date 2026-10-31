@@ -177,6 +177,13 @@ void fn_802EED50(char *self, f32 a, f32 b, f32 c, f32 d) {
     (*(void (**)(char *))(vt + 0x21C))(self + *(s16 *)(vt + 0x218));
 }
 
+void fn_802EED94(void *arg0, f32 a, f32 b, f32 c, f32 d) {
+    M2C_FIELD(arg0, f32 *, 0x2FC) = d;
+    M2C_FIELD(arg0, f32 *, 0x2F0) = a;
+    M2C_FIELD(arg0, f32 *, 0x2F4) = b;
+    M2C_FIELD(arg0, f32 *, 0x2F8) = c;
+}
+
 void fn_802EEDA8(void *arg0, f32 *arg1, f32 *arg2, f32 *arg3, f32 *arg4) {
     *arg1 = M2C_FIELD(arg0, f32 *, 0x2AC);
     *arg2 = M2C_FIELD(arg0, f32 *, 0x2B0);
@@ -189,6 +196,11 @@ void fn_802EEDCC(void *arg0, f32 *arg1, f32 *arg2, f32 *arg3, f32 *arg4) {
     *arg2 = M2C_FIELD(arg0, f32 *, 0x2F4);
     *arg3 = M2C_FIELD(arg0, f32 *, 0x2F8);
     *arg4 = M2C_FIELD(arg0, f32 *, 0x2FC);
+}
+
+void fn_802EEDF0(void *arg0, EGraphicsVec3 *arg1, EGraphicsVec3 *arg2) {
+    M2C_FIELD(arg0, EGraphicsVec3 *, 0x300) = *arg1;
+    M2C_FIELD(arg0, EGraphicsVec3 *, 0x30C) = *arg2;
 }
 
 void fn_802EEE2C(void *arg0, EGraphicsVec3 *arg1, EGraphicsVec3 *arg2) {
