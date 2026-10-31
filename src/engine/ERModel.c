@@ -207,6 +207,23 @@ void fn_8032B9E4(void) {
 
 }
 
+s32 fn_8032BC70(u8 *self, s32 arg1) {
+    extern s32 fn_8032BBA8(u8 *, s32);
+    s32 found = 0;
+    s32 i;
+
+    for (i = 0; i <= 10; i++) {
+        if (arg1 == *(s32 *)(self + 0xAC + i * 8)) {
+            found = 1;
+            break;
+        }
+    }
+    if (found == 0) {
+        return 0;
+    }
+    return fn_8032BBA8(self, i);
+}
+
 s32 fn_8032BCE0(u8 *self, u32 idx, f32 value) {
     f32 *arr;
 
@@ -230,6 +247,22 @@ void fn_8032BD18(u8 *self) {
             fn_803003C4(*(u8 **)(self + 0x20) + i * 0x18);
         }
     }
+}
+
+s32 fn_8032BD88(u8 *self) {
+    extern s32 fn_80300420(u8 *, void *);
+    s32 ret = 0;
+    s32 i;
+
+    if (*(s32 *)(self + 0x12C) != 0) {
+        for (i = 0; i < ListCount(self + 0x20); i++) {
+            ret = fn_80300420(*(u8 **)(self + 0x20) + i * 0x18, self + 0x100);
+            if (ret == 0) {
+                return 0;
+            }
+        }
+    }
+    return ret;
 }
 
 void fn_8032BF88(s32 arg0) {
