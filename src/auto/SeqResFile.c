@@ -25,6 +25,87 @@ void fn_80197AC8(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0xD4) = 0;
 }
 
+s32 fn_80198314(void *arg0) {
+    s32 fn_80102E0C(void *);
+    void *fn_80102DAC(void *, s32);
+    void fn_80102CA0(void *, void *);
+    s32 fn_80102D70(void *);
+    s32 ret;
+    void *obj;
+    char *vt;
+
+    ret = fn_80102E0C(arg0);
+    while (fn_80102D70(arg0) != 0) {
+        obj = fn_80102DAC(arg0, 0);
+        fn_80102CA0(arg0, obj);
+        if (obj != NULL) {
+            vt = M2C_FIELD(obj, char **, 0x10);
+            M2C_FIELD(vt, void (**)(void *, s32), 0xC)((char *)obj + M2C_FIELD(vt, s16 *, 0x8), 3);
+        }
+    }
+    return ret;
+}
+
+void fn_8019839C(void *arg0, s32 arg1) {
+    void *fn_80102DAC(void *, s32);
+    void fn_800F687C(void *, void *, s32);
+    void fn_800F5A4C(void *, s32, void *);
+    char a[0x110];
+    char b[0x114];
+    char *vt;
+    void *obj;
+
+    vt = M2C_FIELD(arg0, char **, 0x10);
+    if (M2C_FIELD(vt, s32 (**)(void *), 0x64)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x60)) != 0) {
+        fn_800F687C(a, a + 8, 0x104);
+        fn_800F687C(b, b + 8, 0x104);
+        obj = fn_80102DAC(arg0, 0);
+        vt = M2C_FIELD(obj, char **, 0x10);
+        M2C_FIELD(vt, void (**)(void *, void *), 0x5C)((char *)obj + M2C_FIELD(vt, s16 *, 0x58), a);
+        fn_800F5A4C(a, arg1, b);
+    }
+}
+
+void *fn_80198444(void *arg0) {
+    void fn_80102B5C(void *);
+    void fn_800F687C(void *, void *, s32);
+    void fn_800F68F0(void *, s32, s32);
+    void fn_800F6A38(void *, void *);
+    extern s32 lbl_80414248[];
+    s32 i;
+    char *p;
+    char buf[0x10];
+
+    i = 8;
+    p = (char *)arg0 + 0xD4;
+    fn_80102B5C(arg0);
+    M2C_FIELD(arg0, s32 **, 0x10) = lbl_80414248;
+    do {
+        fn_800F687C(p + 4, p + 0xC, 8);
+        p += 0x14;
+    } while (i-- != 0);
+    M2C_FIELD(arg0, s32 *, 0xD4) = 0;
+    fn_800F687C(buf, buf + 8, 8);
+    fn_800F68F0(buf, 0, -1);
+    fn_800F6A38((char *)arg0 + 0xD8, buf);
+    return arg0;
+}
+
+s32 fn_801984E0(s32 arg0, s32 arg1) {
+    s32 var_r0;
+
+    if (arg1 != 0xE) {
+        if (arg1 != 0xF) {
+            var_r0 = 0;
+            if (arg1 == 0x10) {
+                var_r0 = arg0;
+            }
+            return var_r0;
+        }
+    }
+    return arg0;
+}
+
 void fn_8019882C(void) {
     fn_800F1A60((s32)&lbl_80495D10, 2);
 }
