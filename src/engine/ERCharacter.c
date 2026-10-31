@@ -409,8 +409,8 @@ void fn_80319B6C(f32 *a, f32 *b, f32 x, f32 y) {
 
 char *fn_80319BA8(char *self) {
     extern u8 lbl_8041B268[];
-    extern f32 lbl_803F2C3C[];
-    extern f32 lbl_803F2C40[];
+    extern const f32 lbl_803F2C3C[];
+    extern const f32 lbl_803F2C40[];
     void fn_80248488(void *, s32, s32);
     void fn_80319B6C(f32 *, f32 *, f32, f32);
 
@@ -418,9 +418,9 @@ char *fn_80319BA8(char *self) {
     *(u8 **)(self + 0xDC) = lbl_8041B268;
     *(s32 *)(self + 0xA0) = 1;
     fn_80248488(self, 0, 0x94);
-    *(s32 *)(self + 0x98) = 0;
     *(s32 *)(self + 0xA4) = 0;
     *(s32 *)(self + 0x94) = 0;
+    *(s32 *)(self + 0x98) = 0;
     fn_80319B6C((f32 *)(self + 0xCC), (f32 *)(self + 0xD0), lbl_803F2C3C[0], lbl_803F2C40[0]);
     *(f32 *)(self + 0xD4) = *(f32 *)(self + 0xCC) - *(f32 *)(self + 0xD0);
     *(f32 *)(self + 0xD8) = *(f32 *)(self + 0xD0) - *(f32 *)(self + 0xCC);
@@ -440,6 +440,14 @@ void fn_80319C3C(char *self, s32 flags) {
 
 void fn_8031A4F8(void) {
 
+}
+
+void *fn_8031A4FC(void *arg0, void *arg1) {
+    void *vt;
+
+    vt = M2C_FIELD(arg1, void **, 0xDC);
+    M2C_FIELD(vt, void (**)(void *, void *), 0x24)((u8 *)arg1 + M2C_FIELD(vt, s16 *, 0x20), arg0);
+    return arg0;
 }
 
 s32 fn_8031AE8C(void *arg0) {
