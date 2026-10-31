@@ -158,6 +158,12 @@ void fn_8033740C(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     fn_803370B8(arg0, arg1, arg2, arg3, 1);
 }
 
+void fn_80337430(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    M2C_UNK fn_803370B8(s32, s32, M2C_UNK, M2C_UNK, M2C_UNK);
+    s32 fn_80337F14(s32);
+    fn_803370B8(arg0, fn_80337F14(arg1), arg2, arg3, 1);
+}
+
 void fn_80337480(s32 arg0, s32 arg1) {
     M2C_UNK fn_803370B8(s32, s32, M2C_UNK, M2C_UNK, M2C_UNK);
     s32 fn_80337F14(s32);
