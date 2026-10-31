@@ -276,9 +276,13 @@ s32 fn_80043758(s32 arg0) {
 }
 
 s32 fn_80043770(s32 arg0, s32 arg1) {
+    typedef struct { s32 *list; s32 count; s32 state; } EyeToyEntry;
+    extern EyeToyEntry lbl_803F5DA8[];
     s32 fn_80043554(s32);
     s32 mask = fn_80043554(arg1);
-    return ((1 << arg0) & mask) && !fn_80043734(arg0);
+    s32 set = ((1 << arg0) & mask) ? 1 : 0;
+    s32 is1 = lbl_803F5DA8[arg0].state == 1;
+    return set && !is1;
 }
 
 void fn_800437E8(s32 arg0, s32 arg1) {
@@ -337,6 +341,11 @@ f32 fn_80043A40(void) {
     extern f32 lbl_803C6184[];
     extern f32 lbl_8041F65C[];
     return lbl_8041F65C[0] * lbl_803C6184[0];
+}
+
+s32 fn_80043A8C(s32 arg0) {
+    extern u8 lbl_803F5DA8[];
+    return *(s32 *)(lbl_803F5DA8 + arg0 * 0xC + 4);
 }
 
 void fn_80043BB4(void) {
