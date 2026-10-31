@@ -90,6 +90,34 @@ void fn_80251884(s32 arg0) {
     lbl_804949A8 = arg0;
 }
 
+void *fn_8025188C(u32 size, u32 align) {
+    void *ptr;
+    u32 arenaLo;
+
+    ptr = (void *)(((u32)lbl_804949A8 + align - 1) & ~(align - 1));
+    arenaLo = (u32)ptr + size;
+    arenaLo = (arenaLo + align - 1) & ~(align - 1);
+    lbl_804949A8 = arenaLo;
+    return ptr;
+}
+
+void fn_80251B7C(void) {
+    __sync();
+    __mtspr(1008, __mfspr(1008) | 0x4000);
+}
+
+void fn_80251B90(void) {
+    __sync();
+    __mtspr(1008, __mfspr(1008) & ~0x4000);
+}
+
+void fn_80251BA4(void) {
+    __sync();
+    __mtspr(1008, __mfspr(1008) | 0x1000);
+}
+
+void fn_80251BB8(void) { __mtspr(1008, __mfspr(1008) & ~0x1000); }
+
 void fn_80251BC8(void *addr) { __dcbt(addr, 0); }
 
 void fn_80251BD0(void *addr) { __dcbz(addr, 0); }
