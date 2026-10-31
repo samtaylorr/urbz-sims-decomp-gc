@@ -61,10 +61,6 @@ s32 fn_80338FD0(s32 arg0, s32 arg1) {
     return lbl_80494F7C;
 }
 
-static inline s32 EyeToyOpenDevice(void) {
-    return 0;
-}
-
 void fn_80339018(void) {
     extern s32 lbl_80494F7C;
     extern u32 lbl_80494F6C;
