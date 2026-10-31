@@ -68,8 +68,8 @@ void *fn_8030ACB8(void *arg0) {
     p[10] = 0;
     f = lbl_803F1F64[0];
     p[13] = 0;
-    ((f32 *)p)[12] = f;
     ((f32 *)p)[11] = f;
+    ((f32 *)p)[12] = f;
     M2C_FIELD(arg0, s32 *, 0x8C) = 0;
     return arg0;
 }
