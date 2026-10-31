@@ -22,6 +22,11 @@ void fn_80007EBC(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x14) = (s32) (M2C_FIELD(arg0, s32 *, 0x14) + 1);
 }
 
+f32 fn_80007F5C(void) {
+    extern const f64 lbl_803C1660[];
+    return lbl_803C1660[0];
+}
+
 void fn_800086CC(M2C_UNK **arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     M2C_UNK fn_80008658(M2C_UNK *, s32, s32, s32, s32);
     M2C_UNK *temp_r30;
