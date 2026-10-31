@@ -19,10 +19,41 @@ static inline void SeqRes_Init(void *self) {
     M2C_FIELD(self, s32 *, 0) = 0;
 }
 
+void fn_800F687C(void *, void *, s32);
+
+static inline void SeqStr_Init(char *s) {
+    fn_800F687C(s, s + 8, 0x104);
+}
+
+static inline void SeqStr8_Init(char *s) {
+    fn_800F687C(s, s + 8, 8);
+}
+
 extern s32 lbl_80495D10;
 extern void fn_800F1A60(s32, s32);
 void fn_80197AC8(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0xD4) = 0;
+}
+
+void fn_80197AD4(void *arg0, s32 arg1, s32 arg2) {
+    void fn_800F687C(void *, void *, s32);
+    void fn_800F68F0(void *, s32, s32);
+    void fn_800F6A38(void *, void *);
+    s32 i;
+    char buf[0x10];
+
+    i = 0;
+    while (*(s32 *)((char *)arg0 + 0xD4 + i * 0x14) != 0) {
+        i++;
+    }
+    if (i > 7 || arg1 > 4 || arg1 < 0) {
+        return;
+    }
+    *(s32 *)((char *)arg0 + 0xD4 + i * 0x14) = arg1;
+    fn_800F687C(buf, buf + 8, 8);
+    fn_800F68F0(buf, arg2, -1);
+    fn_800F6A38((char *)arg0 + i * 0x14 + 0xD8, buf);
+    *(s32 *)((char *)arg0 + 0xD4 + (i + 1) * 0x14) = 0;
 }
 
 void fn_80197B90(void *arg0, s32 arg1) {
