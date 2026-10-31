@@ -230,15 +230,18 @@ s32 fn_8032BB20(u8 *self, s32 name, s32 idx) {
 
 s32 fn_8032BC70(u8 *self, s32 arg1) {
     extern s32 fn_8032BBA8(u8 *, s32);
+    typedef struct { s32 key; s32 val; } Entry;
     s32 found = 0;
-    s32 i;
+    s32 i = 0;
 
-    for (i = 0; i <= 10; i++) {
-        if (arg1 == ((s32 (*)[2])(self + 0xAC))[i][0]) {
-            found = 1;
-            break;
+    while (arg1 != ((Entry *)(self + 0xAC))[i].key) {
+        i++;
+        if (i > 10) {
+            goto done;
         }
     }
+    found = 1;
+done:
     if (found == 0) {
         return 0;
     }
@@ -396,6 +399,21 @@ s32 fn_8032C268(u8 *self) {
         }
     }
     return 0;
+}
+
+s32 fn_8032C42C(u8 *self, void *arg1, u8 *obj, s32 arg3, s32 arg4, f32 arg5);
+s32 fn_8032C3B8(u8 *self, u8 *arg1, u8 *arg2, s32 arg3, s32 arg4) {
+    extern f32 lbl_803F33A4[];
+    f32 buf[16];
+    s32 ret;
+
+    ret = fn_8032C42C(self, buf, arg2, arg3, arg4, lbl_803F33A4[0]);
+    if (ret) {
+        char *vt = *(char **)(arg1 + 0x68);
+        (*(void (**)(void *, void *, s32))(vt + 0xE4))(arg1 + *(s16 *)(vt + 0xE0), buf, 1);
+        fn_8032A710(arg2, (s32)arg1);
+    }
+    return ret;
 }
 
 extern f32 lbl_803F33B4[];
