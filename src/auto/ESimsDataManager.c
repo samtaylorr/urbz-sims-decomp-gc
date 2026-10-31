@@ -126,6 +126,7 @@ void *fn_8001DFC8(void *arg0) {
     extern u8 lbl_803C4434[];
 
     fn_80335F5C(arg0);
+    M2C_FIELD(arg0, void **, 0xBC) = NULL;
     M2C_FIELD(arg0, void **, 0xA4) = lbl_804071B0;
     M2C_FIELD(arg0, s32 *, 0x5C) = 1;
     M2C_FIELD(arg0, void **, 0x54) = lbl_803C4434;
@@ -134,7 +135,6 @@ void *fn_8001DFC8(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0xB0) = 0;
     M2C_FIELD(arg0, s32 *, 0xB4) = 0;
     M2C_FIELD(arg0, s32 *, 0xB8) = 0;
-    M2C_FIELD(arg0, void **, 0xBC) = NULL;
     return arg0;
 }
 
@@ -194,6 +194,22 @@ void fn_8001E2F4(char *self) {
     ERMLock_Unlock(lock);
 }
 
+void fn_8001E370(void *arg0, void *arg1, s32 arg2) {
+    extern u8 lbl_8041EE24[];
+    extern void *lbl_80496220;
+    void *obj;
+    void *vt;
+
+    M2C_FIELD(arg1, s32 *, 0x98) = 1;
+    if (M2C_FIELD(arg0, s32 *, 0xA8) != 0 || M2C_FIELD(arg1, s32 *, 0x9C) != 1) {
+        fn_8001E284(arg0);
+        obj = lbl_80496220;
+        M2C_FIELD(arg0, s32 *, 0xA8) = 2;
+        vt = *(void **)obj;
+        ((void (*)(void *, void *, s32, void *, s32, void *, s32))M2C_FIELD(vt, void **, 0x64))((char *)obj + M2C_FIELD(vt, s16 *, 0x60), arg0, 1, lbl_8041EE24, 0, arg1, arg2);
+    }
+}
+
 void fn_8001E488(void *arg0, void *arg1);
 void fn_8001E408(void *arg0, void *arg1) {
     extern void *lbl_80496220;
@@ -215,20 +231,22 @@ void fn_8001E488(void *arg0, void *arg1) {
     extern void fn_802D20E8(void *);
     extern void fn_803997AC(void *, u32);
     s32 vec[4];
+    s32 *v;
 
     if (M2C_FIELD(arg1, s32 *, 0x9C) != 0) {
-        vec[1] = 0;
-        vec[3] = 0;
-        vec[0] = 0;
-        fn_8001D9B4(arg1, vec, 0);
-        fn_8001DE20((ESimsIdVec *)vec);
+        v = vec;
+        v[0] = 0;
+        v[1] = 0;
+        (v + 2)[1] = 0;
+        fn_8001D9B4(arg1, v, 0);
+        fn_8001DE20((ESimsIdVec *)v);
         M2C_FIELD(arg1, s32 *, 0x9C) = 0;
-        if (vec[0] != 0) {
-            u32 size = (u32)(vec[3] - vec[0]) & ~3;
+        if (v[0] != 0) {
+            u32 size = (u32)(v[3] - v[0]) & ~3;
             if (size > 0x80) {
-                fn_802D20E8((void *)vec[0]);
+                fn_802D20E8((void *)v[0]);
             } else {
-                fn_803997AC((void *)vec[0], size);
+                fn_803997AC((void *)v[0], size);
             }
         }
     }
