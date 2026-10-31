@@ -73,14 +73,16 @@ void *fn_80022D98(void *arg0) {
     void fn_802CB5C4(void *, void *);
     char *list;
     void *node;
+    void *next;
 
     list = (char *)arg0 + 8;
     node = M2C_FIELD(list, void **, 0);
-    if (node == NULL) {
-        return NULL;
+    if (node != NULL) {
+        next = M2C_FIELD(node, void **, 0);
+        fn_802CB5C4(list, node);
+        return next;
     }
-    fn_802CB5C4(list, node);
-    return M2C_FIELD(node, void **, 0);
+    return NULL;
 }
 
 void fn_800235FC(void *arg0, f32 farg0, f32 farg1, f32 farg2, f32 farg3) {
