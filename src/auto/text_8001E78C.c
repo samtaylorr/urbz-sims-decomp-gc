@@ -59,10 +59,10 @@ void fn_8002105C(u8 *self, void *arg1) {
     extern void fn_800F1930(void *, s32);
     extern void fn_800F1AA0(void *, void *);
     extern void fn_800F1A60(void *, s32);
-    s32 tmp[2];
-    fn_800F1930(tmp, *(s32 *)(self + 0x5c));
-    fn_800F1AA0(arg1, tmp);
-    fn_800F1A60(tmp, 2);
+    struct { s32 a; s32 b; } tmp;
+    fn_800F1930(&tmp, *(s32 *)(self + 0x5c));
+    fn_800F1AA0(arg1, &tmp);
+    fn_800F1A60(&tmp, 2);
 }
 
 void fn_800210AC(void *arg0, void *arg1) {
@@ -102,7 +102,10 @@ void fn_80021C20(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
 }
 
 s32 fn_80021CD8(s32 c) {
-    return c == ' ' || (u32)(c - 9) <= 4;
+    if (c == ' ') {
+        return 1;
+    }
+    return (u32)(c - 9) <= 4;
 }
 
 void fn_8002246C(void *arg0) {
