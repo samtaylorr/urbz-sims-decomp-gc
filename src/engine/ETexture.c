@@ -253,6 +253,25 @@ s32 fn_8036F290(void *arg0) {
     return M2C_FIELD(arg0, u32 *, 0x20) == 0x900DBEEF;
 }
 
+s32 fn_8036F2AC(void *arg0, void *arg1) {
+    extern void fn_8036F958(void *, void *, void *, s32);
+    extern s32 lbl_80495238;
+    extern s32 lbl_8049523C;
+    extern s32 lbl_80495240;
+    extern u8 lbl_803F5448[];
+    extern u8 lbl_803F544C[];
+    fn_8036F958(&lbl_80495238, lbl_803F5448, arg0, 0x98);
+    if (lbl_80495238 == 0) {
+        return -1;
+    }
+    fn_8036F958(&lbl_8049523C, lbl_803F544C, arg1, 0x34);
+    if (lbl_8049523C == 0) {
+        return -1;
+    }
+    lbl_80495240 = 0;
+    return 0;
+}
+
 s32 fn_8036F334(void) {
     M2C_UNK fn_8036FA90(M2C_UNK *);
     extern M2C_UNK lbl_80495238;
