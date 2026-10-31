@@ -241,6 +241,11 @@ void fn_8032C08C(void *arg0, s32 arg1, s32 arg2) {
     }
 }
 
+s32 fn_8032C168(void *arg0, s32 arg1) {
+    s32 fn_8031AE8C(void *);
+    return fn_8031AE8C((u8 *)M2C_FIELD(arg0, s32 *, 0x130) + arg1 * 0xE0);
+}
+
 s32 fn_8032C194(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x134);
 }
