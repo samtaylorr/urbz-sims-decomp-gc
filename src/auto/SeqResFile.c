@@ -21,12 +21,24 @@ static inline void SeqRes_Init(void *self) {
 
 void fn_800F687C(void *, void *, s32);
 
-static inline void SeqStr_Init(char *s) {
-    fn_800F687C(s, s + 8, 0x104);
+typedef struct SeqStr {
+    char *cur;
+    s32 len;
+    char buf[0x108];
+} SeqStr;
+
+typedef struct SeqStr8 {
+    char *cur;
+    s32 len;
+    char buf[8];
+} SeqStr8;
+
+static inline void SeqStr_Init(SeqStr *s) {
+    fn_800F687C(s, s->buf, 0x104);
 }
 
-static inline void SeqStr8_Init(char *s) {
-    fn_800F687C(s, s + 8, 8);
+static inline void SeqStr8_Init(SeqStr8 *s) {
+    fn_800F687C(s, s->buf, 8);
 }
 
 extern s32 lbl_80495D10;
