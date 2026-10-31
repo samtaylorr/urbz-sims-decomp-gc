@@ -14,6 +14,12 @@ static inline AptVec2 AptVec2_Make(f32 x, f32 y) {
     return v;
 }
 
+static inline AptVec2 *AptVec2_Init(AptVec2 *v, f32 x, f32 y) {
+    v->x = x;
+    v->y = y;
+    return v;
+}
+
 void fn_80007C90(void *arg0, f32 arg1) {
     extern f32 lbl_803C1650[];
     extern s32 lbl_80494378;
@@ -166,7 +172,7 @@ f32 fn_8000A334(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0x2C);
 }
 
-void fn_8000A33C(void *arg0, u16 *arg1, s32 arg2, s32 arg3) {
+s32 fn_8000A33C(void *arg0, u16 *arg1, s32 arg2, s32 arg3) {
     s32 fn_800F8120(u16 *);
     void fn_800F81A8(u16 *, u16 *, s32);
     u16 buf[12];
@@ -174,7 +180,7 @@ void fn_8000A33C(void *arg0, u16 *arg1, s32 arg2, s32 arg3) {
     s32 mul;
     s32 i;
     u32 d;
-    u32 c;
+    s32 c;
 
     fn_800F8120(arg1);
     result = 0;
@@ -183,17 +189,12 @@ void fn_8000A33C(void *arg0, u16 *arg1, s32 arg2, s32 arg3) {
     mul = 1;
     for (i = arg3 - 1; i >= 0; i--) {
         c = buf[i];
-        d = c - '0';
-        if (d > 9) {
-            d = c - 'A';
-            if (d <= 5) {
-                d = c - 'A' + 10;
-            } else {
-                d = c - 'a';
-                if (d <= 5) {
-                    d = c - 'a' + 10;
-                }
-            }
+        if ((u32)(c - '0') <= 9) {
+            d = c - '0';
+        } else if ((u32)(c - 'A') <= 5) {
+            d = c - 'A' + 10;
+        } else if ((u32)(c - 'a') <= 5) {
+            d = c - 'a' + 10;
         }
         result += d * mul;
         mul <<= 4;
@@ -225,20 +226,32 @@ void fn_8000A468(s32 arg0, s32 arg1) {
 
 }
 
-void fn_8000A46C(void *arg0) {
+void *fn_8000A46C(void *arg0) {
     extern f32 lbl_803C17F8[];
     extern f32 lbl_803C17FC[];
     extern s32 lbl_80406C38[];
+    AptVec2 v;
+    AptVec2 *p;
+    AptVec2 a;
+    AptVec2 b;
 
+    p = &v;
+    p->x = lbl_803C17F8[0];
+    p->y = lbl_803C17F8[0];
+    a = *p;
+    p->x = lbl_803C17FC[0];
+    p->y = lbl_803C17FC[0];
     M2C_FIELD(arg0, void **, 0x2C) = lbl_80406C38;
+    M2C_FIELD(arg0, s32 *, 0x18) = 0;
+    b = *p;
+    M2C_FIELD(arg0, AptVec2 *, 0x1C) = a;
+    M2C_FIELD(arg0, AptVec2 *, 0x24) = b;
     M2C_FIELD(arg0, s32 *, 0) = 0;
     M2C_FIELD(arg0, s32 *, 8) = 0;
     M2C_FIELD(arg0, s32 *, 0xC) = 0;
     M2C_FIELD(arg0, s32 *, 0x10) = 0;
     M2C_FIELD(arg0, s32 *, 0x14) = 0;
-    M2C_FIELD(arg0, s32 *, 0x18) = 0;
-    M2C_FIELD(arg0, AptVec2 *, 0x1C) = AptVec2_Make(lbl_803C17F8[0], lbl_803C17F8[0]);
-    M2C_FIELD(arg0, AptVec2 *, 0x24) = AptVec2_Make(lbl_803C17FC[0], lbl_803C17FC[0]);
+    return arg0;
 }
 
 void fn_8000A4E8(void *arg0, s32 arg1) {
@@ -267,11 +280,14 @@ void fn_8000A4E8(void *arg0, s32 arg1) {
     }
 }
 
-void fn_8000A598(void *arg0) {
+void *fn_8000A598(void *arg0) {
     extern f32 lbl_803C1800[];
     extern f32 lbl_803C1804[];
     extern s32 lbl_80406C08[];
     extern s32 lbl_80406C38[];
+    AptVec2 v;
+    AptVec2 w;
+    f32 f;
 
     M2C_FIELD(arg0, void **, 0x2C) = lbl_80406C38;
     M2C_FIELD(arg0, s32 *, 0x18) = 0;
@@ -280,10 +296,17 @@ void fn_8000A598(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0xC) = 0;
     M2C_FIELD(arg0, s32 *, 0x10) = 0;
     M2C_FIELD(arg0, s32 *, 0x14) = 0;
-    M2C_FIELD(arg0, AptVec2 *, 0x1C) = AptVec2_Make(lbl_803C1800[0], lbl_803C1800[0]);
+    f = lbl_803C1800[0];
+    v.y = f;
+    v.x = f;
+    M2C_FIELD(arg0, AptVec2 *, 0x1C) = v;
     M2C_FIELD(arg0, void **, 0x2C) = lbl_80406C08;
-    M2C_FIELD(arg0, AptVec2 *, 0x24) = AptVec2_Make(lbl_803C1804[0], lbl_803C1804[0]);
-    M2C_FIELD(arg0, f32 *, 0x30) = lbl_803C1804[0];
+    f = lbl_803C1804[0];
+    w.x = f;
+    w.y = f;
+    M2C_FIELD(arg0, AptVec2 *, 0x24) = w;
+    M2C_FIELD(arg0, f32 *, 0x30) = f;
+    return arg0;
 }
 
 void fn_8000A620(void *arg0, s32 arg1) {
