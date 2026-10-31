@@ -296,22 +296,25 @@ void fn_8035DFE0(void) {
     void fn_80383AE8(s32, s32);
     void fn_80385E84(s32);
     ENgcRendererSlot *e;
-    u32 i;
-    s32 f;
+    ENgcRendererSlot *end;
 
     fn_8035EE7C();
-    for (i = 0; i < 0x3E; i++) {
-        e = &lbl_80473F7C[i];
+    e = lbl_80473F7C;
+    end = &lbl_80473F7C[0x3D];
+    do {
         if (e->unk24 != 0 && e->unk0 != 0) {
-            f = ((s32 *)e)[0x10];
-            if (!(f & 0x20000000) && f < 0 && !(f & 0x40000000)
-                && (*(u32 *)((u8 *)e->unk0 + 0x1B2) >> 1) < e->unk28) {
-                fn_80383AE8(e->unk0, 7);
-                e->unk40_0 = 0;
-                fn_80385E84(e->unk0);
+            if (!e->unk40_2) {
+                if (e->unk40_0) {
+                    if (!e->unk40_1 && (*(u32 *)((u8 *)e->unk0 + 0x1B2) >> 1) < e->unk28) {
+                        fn_80383AE8(e->unk0, 7);
+                        e->unk40_0 = 0;
+                        fn_80385E84(e->unk0);
+                    }
+                }
             }
         }
-    }
+        e++;
+    } while (e <= end);
     fn_8035EE3C();
 }
 
@@ -330,12 +333,11 @@ s32 fn_8035E08C(void *self, s32 slot) {
 void fn_8035E9D4(void *self, s32 slot, f32 ratio) {
     extern ENgcRendererSlot lbl_80473F7C[];
     void fn_803844A8(s32, f32);
-    u8 *p;
 
     if (slot != -1 && lbl_80473F7C[slot].unk0 != 0) {
         fn_8035EE7C();
-        p = (u8 *)lbl_80473F7C[slot].unk24;
-        fn_803844A8(lbl_80473F7C[slot].unk0, (f32)*(u32 *)(p + 8) * ratio / 32028.66015625f);
+        fn_803844A8(lbl_80473F7C[slot].unk0,
+                    ((f32)*(u32 *)(lbl_80473F7C[slot].unk24 + 8) * ratio) / 32028.66015625f);
         fn_8035EE3C();
     }
 }
@@ -350,15 +352,15 @@ void fn_8035EA70(void) {
 void fn_8035EA90(void *self, s32 slot, s32 arg2) {
     extern ENgcRendererSlot lbl_80473F7C[];
     void fn_80385F0C(s32, s32);
+    ENgcRendererSlot *e;
     s32 v;
-    s32 h;
 
     if (slot != -1) {
         fn_8035EE7C();
         v = arg2 * 0x388 / 10000;
-        h = lbl_80473F7C[slot].unk0;
-        if (h != 0) {
-            fn_80385F0C(h, v);
+        e = &lbl_80473F7C[slot];
+        if (e->unk0 != 0) {
+            fn_80385F0C(e->unk0, v);
         }
         fn_8035EE3C();
     }
