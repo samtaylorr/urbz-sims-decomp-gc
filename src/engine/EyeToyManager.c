@@ -243,6 +243,18 @@ s32 fn_8033983C(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x24);
 }
 
+void fn_803398AC(void) {
+    extern s32 lbl_80494F8C;
+    extern s32 lbl_80494F90;
+    void fn_802D211C(void *);
+
+    if (lbl_80494F8C != 0) {
+        fn_802D211C((void *)lbl_80494F8C);
+        lbl_80494F8C = 0;
+    }
+    lbl_80494F90 = 0;
+}
+
 void fn_80339954(s32 arg0, s32 arg1) {
     extern s32 lbl_80494F8C;
     M2C_FIELD(((arg0 * 0x24) + lbl_80494F8C), s32 *, 4) = arg1;
