@@ -144,14 +144,12 @@ s32 fn_8005A2D4(s32 *arg0) {
 }
 
 s32 fn_8005A318(s32 **arg0, s32 arg1) {
-    u32 i;
-    u32 n;
+    s32 fn_8005A38C(void);
+    u32 i = 0;
+    u32 n = ((s32 (*)(void *))fn_8005A38C)(arg0);
 
-    i = 0;
-    n = fn_8005A38C();
     for (; i < n; i++) {
-        s32 *p = *arg0++;
-        if (p != NULL && fn_80059AC4(p) == arg1) {
+        if (arg0[i] != NULL && fn_80059AC4(arg0[i]) == arg1) {
             return 1;
         }
     }
