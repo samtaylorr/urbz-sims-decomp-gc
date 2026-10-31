@@ -104,7 +104,7 @@ void fn_8001DD7C(void *arg0, s32 *arg1) {
     if (n != 0) {
         fn_8039B510(M2C_FIELD(arg0, s32 **, 0), M2C_FIELD(arg0, s32 **, 4), fn_8001DD04);
         for (i = 0; i < n; i++) {
-            fn_803347B0(lbl_8045B438, i[M2C_FIELD(arg0, s32 **, 0)], 0, 0);
+            fn_803347B0(lbl_8045B438, *ESimsIdVec_at((ESimsIdVec *)arg0, i), 0, 0);
             if (arg1 != NULL) {
                 (*arg1)++;
             }
