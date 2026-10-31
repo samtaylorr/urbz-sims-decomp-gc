@@ -25,6 +25,28 @@ void fn_80197AC8(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0xD4) = 0;
 }
 
+void fn_80197B90(void *arg0, s32 arg1) {
+    s32 fn_80102D70(void *);
+    void *fn_80102DAC(void *, s16);
+    void fn_80102CA0(void *, void *);
+    void fn_80102BC8(void *, s32);
+    extern s32 lbl_80414248[];
+    s32 i;
+    void *obj;
+    char *vt;
+
+    M2C_FIELD(arg0, s32 **, 0x10) = lbl_80414248;
+    for (i = fn_80102D70(arg0) - 1; i >= 0; i--) {
+        obj = fn_80102DAC(arg0, i);
+        fn_80102CA0(arg0, obj);
+        if (obj != NULL) {
+            vt = M2C_FIELD(obj, char **, 0x10);
+            M2C_FIELD(vt, void (**)(void *, s32), 0xC)((char *)obj + M2C_FIELD(vt, s16 *, 0x8), 3);
+        }
+    }
+    fn_80102BC8(arg0, arg1);
+}
+
 s32 fn_80198314(void *arg0) {
     s32 fn_80102E0C(void *);
     void *fn_80102DAC(void *, s32);
