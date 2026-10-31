@@ -54,12 +54,9 @@ static inline void AptViewerParams_Init(AptViewerParams *p) {
 }
 void fn_8000AA2C(void *self, const char *fmt, s32 arg2, s32 arg3, s32 arg4, ...);
 void fn_8000A6FC(void) {
-    void *fn_8000A8D8(void *);
     extern void *lbl_804956BC;
-    void *p;
-    p = AptViewer_Alloc();
-    p = fn_8000A8D8(p);
-    lbl_804956BC = p;
+    void *p = AptViewer_Alloc();
+    lbl_804956BC = fn_8000A8D8(p);
 }
 
 void fn_8000A794(void) {
@@ -227,31 +224,35 @@ s32 fn_8000BF20(u8 *self, u32 index, s32 arg) {
     s32 n;
     s32 h;
     u8 *cnt;
-    u8 *a;
-    s32 i4;
     s32 i50;
+    u8 *a;
+    u8 *b;
+    s32 i4;
+    s32 off;
 
     if (*(s32 *)(self + 0x3A8) == 0) {
         return 0;
     }
+    h = 0;
     if (index > 1) {
         index = 0;
     }
     i4 = index * 4;
     cnt = self + 0x450;
     n = *(s32 *)(cnt + i4);
-    if (n > 9) {
-        return 0;
-    }
-    i50 = index * 0x50;
-    a = self + 0x3B0;
-    if (*(s32 *)(a + (n * 8 + i50)) != 0) {
-        n++;
+    if (n <= 9) {
+        a = self + 0x3B0;
+        i50 = index * 0x50;
+        if (*(s32 *)(a + (n * 8 + i50)) != 0) {
+            n++;
+        }
         *(s32 *)(cnt + i4) = n;
+        h = fn_803114D0(fn_8000C170(self, index), 0, arg, 100);
+        off = n * 8 + i50;
+        b = self + 0x3B4;
+        *(s32 *)(a + off) = h;
+        *(s32 *)(b + off) = arg;
     }
-    h = fn_803114D0(fn_8000C170(self, index), 0, arg, 100);
-    *(s32 *)(a + (n * 8 + i50)) = h;
-    *(s32 *)(self + 0x3B4 + (n * 8 + i50)) = arg;
     return h;
 }
 
