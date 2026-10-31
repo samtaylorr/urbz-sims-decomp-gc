@@ -168,6 +168,17 @@ void fn_8035BF60(void) {
     }
 }
 
+void *fn_8035D9C0(void *arg0) {
+    extern void fn_8036EE68(void *);
+    extern u8 lbl_8041CEC0[];
+
+    fn_8036EE68(arg0);
+    M2C_FIELD(arg0, void **, 0x20) = lbl_8041CEC0;
+    M2C_FIELD(arg0, s32 *, 0x24) = 0;
+    M2C_FIELD(arg0, s32 *, 0x28) = 0;
+    return arg0;
+}
+
 void fn_8035DA08(u8 *self) {
     extern u8 lbl_8041CEC0[];
     void fn_8036EEE0(u8 *);
@@ -395,12 +406,13 @@ s32 fn_8035F000(void *self) {
     extern void fn_802D8EF8(void *);
     extern u8 lbl_803F4A18[];
     if (fn_803665B8((u8 *)self + 0x348, 10) != 0) {
+        s32 ret = 0;
         M2C_FIELD(self, void **, 0x32C) = lbl_803F4A18;
         if (fn_802D8CA4(self, 3, 0x4000, 0) != 0) {
             fn_802D8EF8(self);
-            return 1;
+            ret = 1;
         }
-        return 0;
+        return ret;
     }
     return 0;
 }
