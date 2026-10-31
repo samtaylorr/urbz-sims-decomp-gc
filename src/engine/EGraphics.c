@@ -183,6 +183,13 @@ char *fn_802EDD34(char *self, s32 arg1) {
     return obj;
 }
 
+void fn_802EDE70(void) {
+    extern char *lbl_80495220;
+    char *obj = lbl_80495220;
+    char *vt = *(char **)(obj + 0x338);
+    (*(void (**)(void *))(vt + 0x2C))(obj + *(s16 *)(vt + 0x28));
+}
+
 void fn_802EDEA8(char *self, void *arg1) {
     char *vt = *(char **)self;
     (*(void (**)(void *, void *))(vt + 0x1B4))(self + *(s16 *)(vt + 0x1B0), arg1);
@@ -261,10 +268,11 @@ s32 fn_802EEB54(void *arg0) {
 
 void fn_802EEB84(void *self, s32 arg1, s32 *v) {
     extern void fn_802EE6D0(void *);
-    s32 y = v[1];
-    s32 x = v[0];
-    ((s32 *)((u8 *)self + 0x9C))[1] = y;
-    ((s32 *)((u8 *)self + 0x9C))[0] = x;
+    s32 x, y;
+    y = v[1];
+    x = v[0];
+    *(s32 *)((u8 *)self + 0xA0) = y;
+    *(s32 *)((u8 *)self + 0x9C) = x;
     if (arg1 != 0) {
         fn_802EE6D0(self);
         *(s32 *)((u8 *)self + 0x10) = arg1;
