@@ -733,6 +733,16 @@ u16 fn_80192C84(u16 arg0) {
     return arg0;
 }
 
+M2C_UNK fn_80192CE4(M2C_UNK arg0, M2C_UNK arg1) {
+    void fn_80149BC8(void *, s32);
+    extern char lbl_80414220[];
+    extern void *lbl_80495CC0;
+    if (arg1 == 0xFFFF && arg0 != 0) {
+        fn_80149BC8(&lbl_80495CC0, 3);
+        lbl_80495CC0 = lbl_80414220;
+    }
+}
+
 void fn_80192D70(void) {
     M2C_UNK fn_80192CE4(M2C_UNK, M2C_UNK);
     fn_80192CE4(1, 0xFFFF);
