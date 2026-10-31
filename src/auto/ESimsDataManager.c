@@ -126,15 +126,15 @@ void *fn_8001DFC8(void *arg0) {
     extern u8 lbl_803C4434[];
 
     fn_80335F5C(arg0);
-    M2C_FIELD(arg0, void **, 0xBC) = NULL;
     M2C_FIELD(arg0, void **, 0xA4) = lbl_804071B0;
-    M2C_FIELD(arg0, s32 *, 0x5C) = 1;
-    M2C_FIELD(arg0, void **, 0x54) = lbl_803C4434;
     M2C_FIELD(arg0, s32 *, 0xA8) = 0;
     M2C_FIELD(arg0, s32 *, 0xAC) = 0;
     M2C_FIELD(arg0, s32 *, 0xB0) = 0;
     M2C_FIELD(arg0, s32 *, 0xB4) = 0;
     M2C_FIELD(arg0, s32 *, 0xB8) = 0;
+    M2C_FIELD(arg0, void **, 0xBC) = NULL;
+    M2C_FIELD(arg0, s32 *, 0x5C) = 1;
+    M2C_FIELD(arg0, void **, 0x54) = lbl_803C4434;
     return arg0;
 }
 
