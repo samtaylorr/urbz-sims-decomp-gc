@@ -249,14 +249,14 @@ Vec2f *fn_802EEC58(Vec2f *self, s32 unused, Vec2f *v) {
 }
 
 void fn_802EEC70(void *self, f32 a, f32 b, f32 c, f32 d) {
-    extern f32 lbl_803F0C88;
+    extern const f32 lbl_803F0C88[];
     u8 *p = self;
     u8 *vt;
     *(f32 *)(p + 0x2AC) = a;
     *(f32 *)(p + 0x2B0) = b;
     *(f32 *)(p + 0x2B4) = c;
     *(f32 *)(p + 0x2B8) = d;
-    *(s32 *)(p + 0x2A8) = (a != lbl_803F0C88 || b != lbl_803F0C88 || c != lbl_803F0C88 || d != lbl_803F0C88);
+    *(s32 *)(p + 0x2A8) = (a != lbl_803F0C88[0] || b != lbl_803F0C88[0] || c != lbl_803F0C88[0] || d != lbl_803F0C88[0]);
     vt = *(u8 **)p;
     (*(void (**)(void *))(vt + 0x21C))(p + *(s16 *)(vt + 0x218));
 }
