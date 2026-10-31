@@ -9,6 +9,18 @@ extern void *fn_802DC3C0(void *, u32, s32, s32, s32);
 extern void *fn_802D0B3C(void);
 extern void *fn_80248488(void *, s32, u32);
 
+typedef struct {
+    s32 a;
+    s32 b;
+    s32 c;
+} CameraManager_Vec3i;
+
+typedef struct {
+    u8 pad[0xFC];
+    s32 unkFC;
+    u8 pad2[0x14C - 0x100];
+} CameraManager_Slot;
+
 static inline void *CameraManager_AllocAligned(u32 size) {
     void *heap;
     void *p;
