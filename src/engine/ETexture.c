@@ -322,6 +322,11 @@ s32 fn_8036F334(void) {
     return 0;
 }
 
+static inline void ETexture_Clear(void *p, u32 n) {
+    void fn_80248488(void *, s32, u32);
+    fn_80248488(p, 0, n);
+}
+
 s32 fn_8036F364(void *arg0) {
     extern s32 lbl_80495240;
     extern s32 lbl_80475658[];
@@ -343,21 +348,20 @@ s32 fn_8036F3A4(void *arg0) {
 }
 
 s32 fn_8036F3E0(void **arg0, char *arg1, s32 arg2) {
-    typedef struct { s32 pad0; char name[0x84]; s32 x88; s32 x8c; s32 x90; s32 x94; } Tex;
     void *fn_8036FACC(s32);
     void fn_80248488(void *, s32, u32);
     void fn_80248784(char *, char *);
     extern s32 lbl_80495238;
-    Tex *p = fn_8036FACC(lbl_80495238);
-    if (p == NULL) {
+    u8 *p;
+    if ((p = fn_8036FACC(lbl_80495238)) == NULL) {
         return -2;
     }
-    fn_80248488(p, 0, sizeof(Tex));
-    fn_80248784(p->name, arg1);
-    p->x94 = arg2;
-    p->x90 = 0;
-    p->x88 = 0;
-    p->x8c = 0;
+    fn_80248488(p, 0, 0x98);
+    fn_80248784((char *)(p + 4), arg1);
+    M2C_FIELD(p, s32 *, 0x94) = arg2;
+    M2C_FIELD(p, s32 *, 0x90) = 0;
+    M2C_FIELD(p, s32 *, 0x8C) = 0;
+    M2C_FIELD(p, s32 *, 0x88) = 0;
     *arg0 = p;
     return 0;
 }
@@ -381,19 +385,19 @@ void fn_8036F45C(void **arg0) {
 }
 
 void *fn_8036F4EC(void *arg0, char *arg1, s32 arg2, s32 arg3) {
-    typedef struct { s32 pad0; s32 pad4; s32 x8; s32 padc; char name[0x24]; } Node;
     void *fn_8036FACC(s32);
     void fn_80248488(void *, s32, u32);
     void fn_80248784(char *, char *);
     void fn_8036F7DC(void *, void *, s32);
     extern s32 lbl_8049523C;
-    Node *p = fn_8036FACC(lbl_8049523C);
-    if (p != NULL) {
-        fn_80248488(p, 0, sizeof(Node));
-        fn_80248784(p->name, arg1);
-        p->x8 = arg2;
-        fn_8036F7DC(arg0, p, arg3);
+    u8 *p;
+    if ((p = fn_8036FACC(lbl_8049523C)) == NULL) {
+        return NULL;
     }
+    fn_80248488(p, 0, 0x34);
+    fn_80248784((char *)(p + 0x10), arg1);
+    M2C_FIELD(p, s32 *, 8) = arg2;
+    fn_8036F7DC(arg0, p, arg3);
     return p;
 }
 
