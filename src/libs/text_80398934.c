@@ -151,12 +151,6 @@ static inline s32 *Median3(s32 *a, s32 *b, s32 *c, s32 (*comp)(s32 *, s32 *)) {
         return b;
     }
 }
-static inline s32 CompValL(s32 (*comp)(s32 *, s32 *), s32 a, s32 *b) {
-    return comp(&a, b);
-}
-static inline s32 CompValR(s32 (*comp)(s32 *, s32 *), s32 *a, s32 b) {
-    return comp(a, &b);
-}
 void *fn_8024839C(void *dst, const void *src, u32 n);
 M2C_UNK fn_802D1FC8(M2C_UNK);
 void *fn_80399BE8(u32);
