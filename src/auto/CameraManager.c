@@ -115,9 +115,13 @@ void fn_800150A8(void *arg0) {
 }
 
 void fn_800150CC(void *arg0) {
+    void *vt;
     if (M2C_FIELD(arg0, s32 *, 0xC) == 0) {
         M2C_FIELD(arg0, s32 *, 0xC) = 1;
-        CameraManager_CallStart(M2C_FIELD(arg0, void **, 4));
+        arg0 = M2C_FIELD(arg0, void **, 4);
+        vt = M2C_FIELD(arg0, void **, 0x44);
+        arg0 = (char *)arg0 + M2C_FIELD(vt, s16 *, 0x18);
+        M2C_FIELD(vt, void (**)(void *), 0x1C)(arg0);
     }
 }
 
@@ -157,18 +161,20 @@ void fn_800151C0(void) {
     void fn_800156E8(s32);
     extern s32 lbl_80495704;
     extern f32 lbl_8049570C;
-    extern f32 lbl_803C2604;
+    extern f32 lbl_803C2604[];
     extern s32 lbl_8049664C;
     s32 cam = lbl_80495704;
+    f32 step;
     fn_80015404(cam);
-    lbl_8049570C += lbl_803C2604;
+    step = lbl_803C2604[0];
+    lbl_8049570C += step;
     fn_80015408(cam);
-    lbl_8049570C += lbl_803C2604;
+    lbl_8049570C += step;
     fn_800154D8(cam);
-    lbl_8049570C += lbl_803C2604;
+    lbl_8049570C += step;
     fn_800156E8(cam);
     lbl_8049664C = 1;
-    lbl_8049570C += lbl_803C2604;
+    lbl_8049570C += step;
 }
 
 void fn_80015250(s32 arg0) {
@@ -177,8 +183,8 @@ void fn_80015250(s32 arg0) {
     extern void **lbl_804961A4;
     extern s32 lbl_8049664C;
     char *vt = (char *)*lbl_804961A4;
-    lbl_80495704 = arg0;
     lbl_8049664C = 0;
+    lbl_80495704 = arg0;
     (*(void (**)(void *, void (*)(void)))(vt + 0x44))(
         (char *)lbl_804961A4 + *(s16 *)(vt + 0x40), fn_800151C0);
 }
