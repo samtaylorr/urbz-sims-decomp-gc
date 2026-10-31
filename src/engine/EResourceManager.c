@@ -408,6 +408,19 @@ s32 fn_80338230(char *self, u32 max) {
     return total != 0;
 }
 
+void fn_80338448(void *arg0, s32 arg1) {
+    void fn_802D20E8(void *);
+    void fn_802D1A00(void *, void *);
+    void *fn_802D0AB8(void);
+
+    if (M2C_FIELD(arg0, void **, 0) != 0) {
+        fn_802D1A00(fn_802D0AB8(), M2C_FIELD(arg0, void **, 0));
+    }
+    if (arg1 & 1) {
+        fn_802D20E8(arg0);
+    }
+}
+
 s32 fn_8033854C(void *arg0, u32 arg1) {
     s32 lo = 0;
     s32 hi = M2C_FIELD(arg0, s32 *, 4);
