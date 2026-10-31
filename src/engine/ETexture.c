@@ -434,6 +434,25 @@ void fn_8036F65C(void *arg0, void **arg1) {
     arg1[1] = NULL;
 }
 
+void fn_8036F8E4(void *arg0) {
+    s32 fn_8036F364(void *);
+    s32 fn_8036F3A4(void *);
+    void fn_8036F65C(void *, void **);
+    s32 fn_8036FB28(void *, void *);
+    extern void *lbl_8049523C;
+    void **node;
+    fn_8036F364(arg0);
+    M2C_FIELD(arg0, void **, 0x90) = M2C_FIELD(arg0, void **, 0x88);
+    node = M2C_FIELD(arg0, void **, 0x88);
+    while (node != NULL) {
+        M2C_FIELD(arg0, void **, 0x90) = *M2C_FIELD(arg0, void ***, 0x90);
+        fn_8036F65C(arg0, node);
+        fn_8036FB28(lbl_8049523C, node);
+        node = M2C_FIELD(arg0, void **, 0x90);
+    }
+    fn_8036F3A4(arg0);
+}
+
 void fn_8036FA90(void **arg0) {
     extern void *fn_802D0AB8();
     void fn_802D1A00(void *, void *);
