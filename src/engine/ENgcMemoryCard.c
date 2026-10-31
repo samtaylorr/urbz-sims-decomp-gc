@@ -5,6 +5,9 @@ extern u8 lbl_8041C9A8[];
 extern void fn_802D20E8(void *);
 extern s32 lbl_80496298;
 extern void fn_80340634(void *);
+extern u8 lbl_8041C870[];
+extern void *lbl_80495060;
+extern void fn_80344100(void *, s32, u32 *);
 void fn_80340654(void **self, s32 flags) {
     *self = lbl_8041C9A8;
     if (flags & 1) {
@@ -62,6 +65,27 @@ s32 fn_80343C84(void) {
 
 s32 fn_80343C8C(void) {
     return 0;
+}
+
+s32 fn_8034456C(void *arg0, s32 arg1, u32 arg2, s32 *arg3) {
+    u32 size = 0;
+    void *vt = M2C_FIELD(arg0, void **, 0);
+    M2C_FIELD(vt, void (**)(void *, s32, u32 *), 0x104)((u8 *)arg0 + M2C_FIELD(vt, s16 *, 0x100), arg1, &size);
+    if (size >= arg2) {
+        *arg3 = 1;
+    } else {
+        *arg3 = 0;
+    }
+}
+
+s32 fn_803445D8(void *arg0, s32 arg1, u32 arg2, s32 *arg3) {
+    u32 size = 0;
+    fn_80344100(arg0, arg1, &size);
+    if (size >= arg2) {
+        *arg3 = 1;
+    } else {
+        *arg3 = 0;
+    }
 }
 
 extern u8 lbl_8041C870[];
