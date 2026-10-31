@@ -203,6 +203,43 @@ void fn_8032A710(u8 *self, s32 arg1) {
     }
 }
 
+void fn_8032AD74(f32 *out, u8 *self, void **src) {
+    if (*(s32 *)(self + 0x78) != 0) {
+        s16 *s = (s16 *)*src;
+        out[0] = s[0];
+        out[1] = s[1];
+        out[2] = s[2];
+    } else {
+        f32 *s = (f32 *)*src;
+        out[0] = s[0];
+        out[1] = s[1];
+        out[2] = s[2];
+    }
+}
+
+void fn_8032AE20(u8 *self, void **dst, f32 *src) {
+    extern const f32 lbl_803F3378[];
+    extern const f32 lbl_803F337C[];
+    extern const f32 lbl_803F3380[];
+    s32 i;
+
+    if (*(s32 *)(self + 0x78) != 0) {
+        s16 *d = (s16 *)*dst;
+        for (i = 0; i < 3; i++) {
+            f32 f = *src++;
+            if (f < lbl_803F3378[0]) {
+                f = f + lbl_803F337C[0];
+            } else {
+                f = f + lbl_803F3380[0];
+            }
+            *d++ = (s32)f;
+        }
+    } else {
+        typedef struct { f32 v[3]; } Vec3;
+        *(Vec3 *)*dst = *(Vec3 *)src;
+    }
+}
+
 void fn_8032B9E4(void) {
 
 }
@@ -213,15 +250,14 @@ s32 fn_8032BB20(u8 *self, s32 name, s32 idx) {
     extern void fn_8031EA2C(void *);
     extern u8 lbl_8045B82C[];
     void *res;
-    s32 *arr;
 
     res = fn_8033740C(lbl_8045B82C, name, 0, 0);
     if (res == 0) {
         return 0;
     }
     if (fn_8032BA68(self, res, idx) != 0) {
-        arr = (s32 *)(self + 0xA8);
-        arr[idx * 2] = 1;
+        u8 *base = self + 0xA8;
+        *(s32 *)(base + (idx << 3)) = 1;
         return (s32)res;
     }
     fn_8031EA2C(res);
