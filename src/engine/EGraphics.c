@@ -77,19 +77,21 @@ void fn_802EDA48(char *self) {
 }
 
 void fn_802EDAA0(char *self) {
+    typedef struct { s16 delta; s16 pad; void *pfn; } Ent;
     extern s32 lbl_80494FDC;
     extern s32 lbl_80494DF8;
     extern char *lbl_80495220;
     void fn_802E1378(s32);
     s32 fn_802E0FB4(s32);
-    char *vt = *(char **)self;
+    Ent *vt = *(Ent **)self;
+    Ent *e;
     char *obj;
-    (*(void (**)(void *))(vt + 0x164))(self + *(s16 *)(vt + 0x160));
+    ((void (*)(void *))vt[44].pfn)(self + vt[44].delta);
     *(s32 *)(self + 4) = 0;
     fn_802E1378(lbl_80494FDC);
     obj = lbl_80495220;
-    vt = *(char **)(obj + 0x338);
-    (*(void (**)(void *, s32, s32))(vt + 0x34))(obj + *(s16 *)(vt + 0x30), lbl_80494DF8, fn_802E0FB4(lbl_80494FDC));
+    e = &(*(Ent **)(obj + 0x338))[6];
+    ((void (*)(void *, s32, s32))e->pfn)(obj + e->delta, lbl_80494DF8, fn_802E0FB4(lbl_80494FDC));
 }
 
 void fn_802EDB28(void) {
@@ -120,7 +122,7 @@ void fn_802EDB30(void *arg0) {
 }
 
 void fn_802EDBA8(char *self, f32 *out) {
-    out[0] = out[1] = 0.0f;
+    out[1] = out[0] = 0.0f;
     out[2] = *(s32 *)(self + 0x14);
     out[3] = *(s32 *)(self + 0x18);
 }
@@ -259,7 +261,7 @@ void fn_802EEC70(void *self, f32 a, f32 b, f32 c, f32 d) {
 }
 
 void fn_802EECEC(void *arg0) {
-    f32 a, b, c, d;
+    f32 c, b, a, d;
 
     if (M2C_FIELD(arg0, s32 *, 0x2CC) == 0) {
         if (M2C_FIELD(arg0, s32 *, 0x2A8) != 0) {
@@ -273,12 +275,13 @@ void fn_802EECEC(void *arg0) {
             c = M2C_FIELD(arg0, f32 *, 0x2C4);
             d = M2C_FIELD(arg0, f32 *, 0x2C8);
         }
-    } else {
-        a = M2C_FIELD(arg0, f32 *, 0x2D0);
-        b = M2C_FIELD(arg0, f32 *, 0x2D4);
-        c = M2C_FIELD(arg0, f32 *, 0x2D8);
-        d = M2C_FIELD(arg0, f32 *, 0x2DC);
+        goto store;
     }
+    a = M2C_FIELD(arg0, f32 *, 0x2D0);
+    b = M2C_FIELD(arg0, f32 *, 0x2D4);
+    c = M2C_FIELD(arg0, f32 *, 0x2D8);
+    d = M2C_FIELD(arg0, f32 *, 0x2DC);
+store:
     M2C_FIELD(arg0, f32 *, 0x2EC) = d;
     M2C_FIELD(arg0, f32 *, 0x2E4) = b;
     M2C_FIELD(arg0, f32 *, 0x2E8) = c;
