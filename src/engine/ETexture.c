@@ -3,6 +3,24 @@
 
 extern u8 lbl_8041DC30[];
 void fn_802D8BEC(void *);
+void fn_8036ECE0(u8 *self) {
+    typedef struct { s16 delta; s16 pad; void *pfn; } Ent;
+    extern u8 *lbl_80495050;
+    u8 *obj;
+    u8 *r;
+    Ent *vt = *(Ent **)(self + 8);
+    if (((s32 (*)(void *))vt[5].pfn)(self + vt[5].delta) == 0) {
+        obj = lbl_80495050;
+        vt = *(Ent **)obj;
+        r = ((u8 *(*)(void *, s32))vt[13].pfn)(obj + vt[13].delta, 0);
+        vt = *(Ent **)(r + 0x68);
+        ((void (*)(void *, void *))vt[73].pfn)(r + vt[73].delta, self);
+        obj = lbl_80495050;
+        vt = *(Ent **)obj;
+        ((void (*)(void *, void *))vt[14].pfn)(obj + vt[14].delta, r);
+    }
+}
+
 s32 fn_8036ED88(void) {
     return 0;
 }
@@ -91,10 +109,13 @@ s32 fn_8036EF8C(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
 
 void fn_8036EFA4(void *arg0, void *arg1) {
     extern f32 lbl_803F53E0[];
-    M2C_FIELD(arg1, f32 *, 4) = lbl_803F53E0[0];
-    M2C_FIELD(arg1, f32 *, 8) = M2C_FIELD(arg0, s32 *, 0) - 1;
-    M2C_FIELD(arg1, f32 *, 0) = lbl_803F53E0[0];
-    M2C_FIELD(arg1, f32 *, 0xC) = M2C_FIELD(arg0, s32 *, 4) - 1;
+    s32 a = M2C_FIELD(arg0, s32 *, 0) - 1;
+    s32 b = M2C_FIELD(arg0, s32 *, 4) - 1;
+    f32 z = lbl_803F53E0[0];
+    M2C_FIELD(arg1, f32 *, 4) = z;
+    M2C_FIELD(arg1, f32 *, 8) = a;
+    M2C_FIELD(arg1, f32 *, 0) = z;
+    M2C_FIELD(arg1, f32 *, 0xC) = b;
 }
 
 s32 fn_8036F018(s32 *self) {
