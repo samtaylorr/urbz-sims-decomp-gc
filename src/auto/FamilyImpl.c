@@ -30,10 +30,10 @@ void fn_80106008(s32 *arg0) {
 
 s32 fn_801099F0(void **self, s32 arg1, s32 arg2, s32 arg3) {
     s32 fn_8011B268(void *, s32, s32, s32);
-    if (arg3 == 0) {
-        return fn_8011B268(*self, arg1, arg2, 0);
+    if (arg3 != 0) {
+        return 0;
     }
-    return 0;
+    return fn_8011B268(*self, arg1, arg2, 0);
 }
 
 s16 fn_80109A28(void *self) {
