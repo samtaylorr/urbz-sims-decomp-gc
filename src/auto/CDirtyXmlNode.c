@@ -170,6 +170,26 @@ void fn_800C06E0(void) {
     }
 }
 
+void fn_800C237C(s32 *self) {
+    extern void (*lbl_80443314[])(void *);
+    extern s32 lbl_80494380;
+    char *obj;
+    char *vt;
+
+    self[0] = 0;
+    if (self[8] != 0) {
+        lbl_80443314[0]((void *)self[8]);
+        self[8] = 0;
+    }
+    obj = (char *)self[9];
+    if (obj != NULL) {
+        vt = *(char **)(obj + 0x30);
+        (*(void (**)(void *, s32))(vt + 0xC))(obj + *(s16 *)(vt + 8), 3);
+        self[9] = 0;
+    }
+    lbl_80494380--;
+}
+
 void fn_800C2404(s32 arg0, s32 arg1) {
     s32 fn_800BEF88(s32, void *);
     extern s32 lbl_80495A18;
