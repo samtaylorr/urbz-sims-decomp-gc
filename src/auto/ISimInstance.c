@@ -105,6 +105,21 @@ s32 fn_80064064(void *self, void *obj) {
     return 0;
 }
 
+s32 fn_80064098(void) {
+    void *fn_80225508(void);
+    s32 fn_80225458(void *, s32, s32);
+    s32 fn_80049B6C(void *);
+    extern u8 lbl_8041F94C[];
+    s32 result = 1;
+
+    if (fn_80225458(fn_80225508(), 0, 0) == 0) {
+        result = 0;
+    } else if (fn_80049B6C(lbl_8041F94C) != 0 && fn_80225458(fn_80225508(), 1, 0) == 0) {
+        result = 0;
+    }
+    return result;
+}
+
 void fn_80064368(void *arg0, s32 arg1) {
     u32 mask;
     void *node;
