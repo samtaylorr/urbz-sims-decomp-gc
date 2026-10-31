@@ -183,6 +183,27 @@ char *fn_802EDD34(char *self, s32 arg1) {
     return obj;
 }
 
+char *fn_802EDDB8(char *self, char *arg1) {
+    extern void fn_8036B980(void *);
+    char *vt = *(char **)(arg1 + 0x68);
+    s32 flag;
+    char *res;
+    (*(void (**)(void *))(vt + 0x29C))(arg1 + *(s16 *)(vt + 0x298));
+    fn_8036B980(*(void **)arg1);
+    (*(s32 *)(self + 0x38))--;
+    vt = *(char **)self;
+    flag = *(s32 *)(arg1 + 0xC);
+    res = *(char **)arg1;
+    (*(void (**)(void *, void *, s32))(vt + 0x1CC))(self + *(s16 *)(vt + 0x1C8), arg1, flag);
+    if (flag) {
+        return res;
+    }
+    vt = *(char **)self;
+    (*(void (**)(void *, void *, s32))(vt + 0x8C))(self + *(s16 *)(vt + 0x88), res, 1);
+    *(s32 *)(self + 0x324) = flag;
+    return 0;
+}
+
 void fn_802EDE70(void) {
     extern char *lbl_80495220;
     char *obj = lbl_80495220;
@@ -219,6 +240,41 @@ char *fn_802EDF3C(char *self, void *arg1) {
         }
         vt = *(char **)self;
         (*(void (**)(void *, void *))(vt + 0xAC))(self + *(s16 *)(vt + 0xA8), obj);
+    }
+    return 0;
+}
+
+void fn_802EDFE0(char *self, s32 arg1) {
+    extern char *lbl_804950A8;
+    s32 i;
+    char *vt;
+    if (arg1 && lbl_804950A8) {
+        for (i = 0; i <= 1; i++) {
+            char *obj = lbl_804950A8;
+            vt = *(char **)(obj + 0x338);
+            if ((*(s32 (**)(void *, s32))(vt + 0x1C))(obj + *(s16 *)(vt + 0x18), i) == arg1) {
+                vt = *(char **)self;
+                (*(void (**)(void *))(vt + 0x164))(self + *(s16 *)(vt + 0x160));
+            }
+        }
+        vt = *(char **)self;
+        (*(void (**)(void *, s32))(vt + 0x1DC))(self + *(s16 *)(vt + 0x1D8), arg1);
+        (*(s32 *)(self + 0x30))--;
+    }
+}
+
+char *fn_802EE098(char *self, void *arg1) {
+    char *vt = *(char **)self;
+    char *obj = (*(char *(**)(void *))(vt + 0x1E4))(self + *(s16 *)(vt + 0x1E0));
+    if (obj) {
+        char *ovt;
+        (*(s32 *)(self + 0x34))++;
+        ovt = *(char **)(obj + 0xF0);
+        if ((*(s32 (**)(void *, void *))(ovt + 0x24))(obj + *(s16 *)(ovt + 0x20), arg1)) {
+            return obj;
+        }
+        vt = *(char **)self;
+        (*(void (**)(void *, void *))(vt + 0xFC))(self + *(s16 *)(vt + 0xF8), obj);
     }
     return 0;
 }
