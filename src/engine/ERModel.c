@@ -412,6 +412,18 @@ s32 fn_8032C2E0(u8 *self, s32 arg1) {
     return 0;
 }
 
+s32 fn_8032C368(u8 *self, s32 key, s8 *out) {
+    s32 i;
+
+    for (i = 0; i < *(s32 *)(self + 0x164); i++) {
+        if (*(s32 *)(*(u8 **)(self + 0x168) + i * 0x40 + 4) == key) {
+            *out = i;
+            return 1;
+        }
+    }
+    return 0;
+}
+
 s32 fn_8032C42C(u8 *self, void *arg1, u8 *obj, s32 arg3, s32 arg4, f32 arg5);
 s32 fn_8032C3B8(u8 *self, u8 *arg1, u8 *arg2, s32 arg3, s32 arg4) {
     extern f32 lbl_803F33A4[];
