@@ -155,6 +155,35 @@ M2C_UNK fn_8031D084(s32 self, s32 *msg) {
     return fn_8031CA50(self + 0x37C, msg, 1);
 }
 
+void fn_8031D0AC(char *self) {
+    extern s32 *fn_802D1FC8(s32);
+    extern void fn_802D81B8(void *);
+    extern void fn_802D82D4(void *, s32, s32);
+    extern void fn_802D8334(void *, s32);
+    extern void fn_802D8328(void *);
+    extern void fn_802D8260(void *, s32);
+    struct {
+        u8 pad[0x18];
+    } evt;
+    void *vt;
+    s32 *msg;
+    void *e;
+
+    vt = M2C_FIELD(self, void **, 0);
+    if (((s32 (*)(void *))M2C_FIELD(vt, void **, 0x2C))(self + M2C_FIELD(vt, s16 *, 0x28)) == 0) {
+        e = &evt;
+        fn_802D81B8(e);
+        fn_802D82D4(e, 1, 0);
+        msg = fn_8031C7B4(fn_802D1FC8(0x28));
+        msg[0] = 1;
+        msg[7] = (s32)e;
+        fn_8031D084((s32)self, msg);
+        fn_802D8334(e, -1);
+        fn_802D8328(e);
+        fn_802D8260(e, 2);
+    }
+}
+
 void fn_8031D300(s32 arg0) {
     M2C_UNK fn_8031C91C(s32);
     fn_8031C91C(arg0 + 0x37C);
