@@ -37,11 +37,10 @@ void *fn_80050040(u8 *arg0) {
     s32 i;
     M2C_FIELD(arg0, s32 *, 0x8000) = 0;
     p = arg0 + 0x8004;
-    i = 0x7FF;
-    do {
+    for (i = 0x7FF; i != -1; i--) {
         fn_800EC9AC(p + 0x10);
         p += 0x1C;
-    } while (i-- != 0);
+    }
     M2C_FIELD(arg0, s32 *, 0x16004) = 0;
     return arg0;
 }
@@ -51,12 +50,13 @@ void fn_800500A4(u8 *arg0, s32 arg1) {
     extern void fn_802D20E8(void *);
     u8 *begin = arg0 + 0x8004;
     if (begin != NULL) {
-        u8 *p = arg0 + 0x16004;
-        if (begin != p) {
+        u8 *p = begin + 0xE000;
+        u8 *b = begin;
+        if (b != p) {
             do {
                 p -= 0x1C;
                 fn_800ECE00(p + 0x10, 2);
-            } while (begin != p);
+            } while (b != p);
         }
     }
     if (arg1 & 1) {
@@ -66,10 +66,19 @@ void fn_800500A4(u8 *arg0, s32 arg1) {
 
 s32 fn_80050114(u8 *arg0, s32 arg1) {
     s32 i;
-    for (i = 0; i < M2C_FIELD(arg0, s32 *, 0x16004); i++) {
-        if (M2C_FIELD(arg0 + 0x8004 + i * 0x1C, s32 *, 0) == arg1) {
-            return i;
-        }
+    s32 n;
+    u8 *p;
+    i = 0;
+    n = M2C_FIELD(arg0, s32 *, 0x16004);
+    if (i < n) {
+        p = arg0 + 0x8004;
+        do {
+            if (M2C_FIELD(p, s32 *, 0) == arg1) {
+                return i;
+            }
+            p += 0x1C;
+            i++;
+        } while (i < n);
     }
     return -1;
 }
