@@ -6,6 +6,10 @@ typedef struct EVibratePort {
     u8 pad[0x40];
 } EVibratePort;
 
+static inline EVibratePort *EVibrate_PortAt(EVibratePort *ports, u32 n) {
+    return ports + n;
+}
+
 static inline EVibratePort *EVibrate_Port(void *self, u32 n) {
     return (EVibratePort *)((s8 *)self + 0x38) + n;
 }
@@ -34,13 +38,11 @@ void fn_80314D18(void *self, s32 flags) {
 
 void fn_80314D40(s32 *self) {
     if (fn_80314DB0(self) == 0) {
-        EVibratePort *ports;
         u8 i;
         self[1] = 0;
         self[0] = 1;
-        ports = (EVibratePort *)((s8 *)self + 0x38);
         for (i = 0; i <= 1; i++) {
-            ports[i].active = 0;
+            EVibrate_Port(self, i)->active = 0;
         }
     }
 }
@@ -77,11 +79,10 @@ void fn_80314E54(void *self, s32 idx) {
 }
 
 s32 fn_80314E68(void *self, u8 index) {
-    EVibratePort *ports = (EVibratePort *)((s8 *)self + 0x38);
     if (index > 1) {
         return 0;
     }
-    return ports[index].active;
+    return EVibrate_Port(self, index)->active;
 }
 
 void fn_80314E88(void *self) {
