@@ -286,7 +286,7 @@ s32 fn_8030C3C8(void *arg0, s32 arg1, s32 arg2, void *arg3) {
 }
 
 void fn_8030C490(void *arg0) {
-    ((void (*)(void *))fn_8030AA98)(arg0);
+    fn_8030AA98(arg0);
 }
 
 extern f32 lbl_803F2088[];
