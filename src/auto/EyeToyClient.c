@@ -309,6 +309,22 @@ void fn_8004384C(void) {
     }
 }
 
+f32 fn_8004387C(void) {
+    f32 *fn_803392D4(s32);
+    extern f32 lbl_803C6158[];
+    extern f32 lbl_804957B4;
+    f32 v;
+
+    if (lbl_8049407C != -1) {
+        v = fn_803392D4(lbl_8049407C)[1];
+        if (v != lbl_803C6158[0]) {
+            return v + v;
+        }
+        return lbl_803C6158[0];
+    }
+    return lbl_804957B4;
+}
+
 void fn_800438D0(f32 farg0) {
     void fn_803392AC(s32, s32, void *);
     extern f32 lbl_803C615C[];
