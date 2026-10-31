@@ -12491,6 +12491,38 @@ void fn_803BBDE0(void) {
 
 }
 
+void *fn_803BBDE4(void *self, void *arg1) {
+    extern s32 fn_802CD600(void **);
+    extern void fn_802F041C(void *, s32);
+    s32 *node;
+    s32 more;
+    s32 val;
+
+    val = fn_802CD600((void **)arg1);
+    {
+        VtblEntry *vt = *(VtblEntry **)((char *)self + 0x18);
+        ((void (*)(void *, void *, s32))vt[7].pfn)((char *)self + vt[7].delta, &val, 4);
+    }
+    node = M2C_FIELD(arg1, s32 **, 0);
+    for (;;) {
+        more = 1;
+        if (node == NULL) {
+            more = 0;
+        }
+        if (!more) {
+            break;
+        }
+        {
+            s32 data = M2C_FIELD(node, s32 *, 0x18);
+            VtblEntry *vt = *(VtblEntry **)((char *)self + 0x18);
+            ((void (*)(void *, void *, s32))vt[7].pfn)((char *)self + vt[7].delta, &data, 4);
+        }
+        fn_802F041C(self, M2C_FIELD(node, s32 *, 0x1c));
+        node = M2C_FIELD(node, s32 **, 0x10);
+    }
+    return self;
+}
+
 void *fn_803BBE98(void *self, void *out) {
     extern void fn_802CB8D4(void *);
     extern void fn_802F043C(void *, s32 *);
