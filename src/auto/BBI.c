@@ -120,7 +120,7 @@ s32 *fn_80059BD4(s32 *self) {
     return self;
 }
 
-extern void fn_8005A038(s32);
+extern s32 fn_8005A038(s32);
 extern void fn_802D20E8(s32);
 void fn_80059BF4(s32 self, s32 flags) {
     fn_8005A038(self);
