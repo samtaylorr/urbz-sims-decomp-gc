@@ -773,6 +773,17 @@ s8 fn_8010CE80(void) {
     return lbl_8041FAD0[0][0x1D];
 }
 
+void fn_8010CE94(void *arg0, s32 arg1) {
+    extern char *lbl_8041FAD0[];
+    extern s32 lbl_80495ADC;
+    void fn_800FF588(s32, s32, s32, s32, s32);
+    lbl_8041FAD0[0][0x1C] = arg1;
+    if (M2C_FIELD(arg0, s32 *, 0) != 0 && M2C_FIELD(arg0, s32 *, 8) != 0) {
+        fn_800FF588(lbl_80495ADC, 0x25, arg1, 0, 0);
+        fn_800FF588(lbl_80495ADC, 0x27, arg1, 0, 0);
+    }
+}
+
 void fn_8010CF10(void *arg0, s32 arg1) {
     extern char *lbl_8041FAD0[];
     extern s32 lbl_80495ADC;
