@@ -336,6 +336,30 @@ void fn_80337FDC(s32 arg0) {
     fn_8033983C(arg0 + 0x6C);
 }
 
+s32 fn_80339644(char *, s32);
+s32 fn_8033983C(char *);
+void fn_80338184(char *self, s32 arg1) {
+    void *fn_802D0B3C(void);
+    s32 fn_802D0F64(void *, s32);
+    void fn_802D1A00(void *, s32);
+    void *fn_802D0AB8(void);
+    void *p;
+    char *vt;
+
+    if (arg1 == 0) {
+        return;
+    }
+    vt = *(char **)(self + 0xA4);
+    p = (*(void *(**)(void *))(vt + 0x34))(self + *(s16 *)(vt + 0x30));
+    if (p != NULL && fn_802D0F64(p, arg1) != 0) {
+        fn_802D1A00(p, arg1);
+    } else if (p != fn_802D0B3C() && (p = fn_802D0B3C()) != NULL && fn_802D0F64(p, arg1) != 0) {
+        fn_802D1A00(p, arg1);
+    } else {
+        fn_802D1A00(fn_802D0AB8(), arg1);
+    }
+}
+
 s32 fn_8033854C(void *arg0, u32 arg1) {
     s32 lo = 0;
     s32 hi = M2C_FIELD(arg0, s32 *, 4);
@@ -355,13 +379,14 @@ s32 fn_8033854C(void *arg0, u32 arg1) {
 }
 
 s32 fn_80338598(void *arg0, s32 arg1, s32 *arg2) {
+    typedef struct { s32 key; s32 val; } Entry;
     s32 i = fn_8033854C(arg0, arg1);
 
     if (i < M2C_FIELD(arg0, s32 *, 4)) {
-        s32 *e = &M2C_FIELD(arg0, s32 **, 0)[i * 2];
-        if (e[0] == arg1) {
+        Entry *e = &M2C_FIELD(arg0, Entry **, 0)[i];
+        if (e->key == arg1) {
             if (arg2 != 0) {
-                *arg2 = e[1];
+                *arg2 = e->val;
             }
             return 1;
         }
