@@ -235,6 +235,17 @@ void fn_8031D324(s32 arg0) {
     fn_8031C820(arg0 + 0x37C);
 }
 
+void *fn_8031D890(char *self, s32 key) {
+    void *fn_8031D910(void *, s32);
+    ERMLock lock;
+    void *res;
+
+    ERMLock_Lock(&lock, self + 0x360);
+    res = fn_8031D910(self, key);
+    ERMLock_Unlock(&lock);
+    return res;
+}
+
 void *fn_8031D910(void *arg0, s32 arg1) {
     s32 fn_8024851C(s32, s32);
     void *var_r31;
