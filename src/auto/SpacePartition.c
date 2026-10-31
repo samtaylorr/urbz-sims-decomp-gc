@@ -36,6 +36,44 @@ typedef struct SPart {
     SPNode *nodesEnd;
 } SPart;
 
+s32 fn_801930C4(SPart *arg0, SPRect *r) {
+    SPCell *c;
+
+    for (c = arg0->cellsBegin; c != arg0->cellsEnd; c++) {
+        if (r->x0 < c->rect.x1 && r->x1 > c->rect.x0 && r->y0 < c->rect.y1 && r->y1 > c->rect.y0) {
+            return c - arg0->cellsBegin;
+        }
+    }
+    return -1;
+}
+
+void *fn_80193260(void *arg0, s32 arg1) {
+    SPart *sp = arg0;
+
+    if (arg1 >= 0 && (u32)arg1 < (u32)(sp->nodesEnd - sp->nodesBegin)) {
+        return &sp->nodesBegin[arg1];
+    }
+    return NULL;
+}
+
+s32 fn_801932A0(SPart *arg0, s32 arg1, SPRect *out) {
+    SPNode *n;
+    s32 idx;
+
+    if (arg1 == -1) {
+        return 0;
+    }
+    n = fn_80193260(arg0, arg1);
+    if (n != NULL) {
+        idx = n->cell;
+        if (idx >= 0 && (u32)idx < (u32)(arg0->cellsEnd - arg0->cellsBegin)) {
+            *out = arg0->cellsBegin[idx].rect;
+            return 1;
+        }
+    }
+    return 0;
+}
+
 s32 fn_8019334C(s32 arg0, s32 arg1) {
     return (u32)(arg1 + 1) > 2;
 }
