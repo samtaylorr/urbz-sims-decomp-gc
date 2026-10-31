@@ -55,6 +55,16 @@ void fn_8001FC54(void) {
 
 }
 
+void fn_8002105C(u8 *self, void *arg1) {
+    extern void fn_800F1930(void *, s32);
+    extern void fn_800F1AA0(void *, void *);
+    extern void fn_800F1A60(void *, s32);
+    s32 tmp[2];
+    fn_800F1930(tmp, *(s32 *)(self + 0x5c));
+    fn_800F1AA0(arg1, tmp);
+    fn_800F1A60(tmp, 2);
+}
+
 void fn_800210AC(void *arg0, void *arg1) {
     char *e;
 
@@ -141,6 +151,7 @@ void fn_800227CC(void *arg0) {
 }
 
 void fn_80022840(void *arg0) {
+    void *fn_80022D98(void *);
     char *obj;
     char *e;
 
