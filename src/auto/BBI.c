@@ -143,6 +143,21 @@ s32 fn_8005A2D4(s32 *arg0) {
     return ret;
 }
 
+s32 fn_8005A318(s32 **arg0, s32 arg1) {
+    u32 i;
+    u32 n;
+
+    i = 0;
+    n = fn_8005A38C();
+    for (; i < n; i++) {
+        s32 *p = *arg0++;
+        if (p != NULL && fn_80059AC4(p) == arg1) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
 s32 fn_8005A38C(void) {
     return 0x24;
 }
@@ -152,6 +167,24 @@ void *fn_8005A394(void **arg0, u32 arg1) {
         return NULL;
     }
     return arg0[arg1];
+}
+
+s32 fn_8005A3B0(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    extern void *fn_8005A574(void *);
+    extern s32 fn_8005A1A4(void *, s32);
+    void *p;
+
+    if (arg3 == 0) {
+        return 0;
+    }
+    p = fn_8005A574(arg0);
+    if (p != NULL) {
+        return (u32)(fn_80059B50(p) + arg3) <= 0x63;
+    }
+    if ((u32)(fn_8005A1A4(arg0, 2) + 1) > 0xC) {
+        return 0;
+    }
+    return (u32)arg3 <= 0x63;
 }
 
 s32 fn_8005A500(s32 *arg0, s32 arg1, s32 arg2, s32 arg3) {
