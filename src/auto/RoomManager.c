@@ -168,11 +168,10 @@ s32 fn_8018EF28(void *arg0, s32 id) {
 }
 
 s32 ***fn_8018F2C4(void *arg0, s32 id) {
-    s32 ***it;
-    for (it = M2C_FIELD(arg0, s32 ****, 4); it != M2C_FIELD(arg0, s32 ****, 8); it++) {
-        if (M2C_FIELD(*it, s32 *, 0x10) == id) {
-            return it;
-        }
+    s32 ***it = M2C_FIELD(arg0, s32 ****, 4);
+    s32 ***end = M2C_FIELD(arg0, s32 ****, 8);
+    while (it != end && M2C_FIELD(*it, s32 *, 0x10) != id) {
+        it++;
     }
     return it;
 }
