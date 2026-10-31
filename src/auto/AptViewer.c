@@ -96,7 +96,6 @@ s32 fn_8000C244(void) {
 
 void fn_8000C4BC(void *self, s32 arg) {
     extern char lbl_803C19EC[];
-    void fn_8000AA2C();
     fn_8000AA2C(self, lbl_803C19EC, 0, 0, 1, arg);
 }
 
