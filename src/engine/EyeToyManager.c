@@ -27,11 +27,10 @@ typedef struct EyeToyEntry {
 } EyeToyEntry;
 
 static inline s32 EyeToyOpenDevice(void) {
-    extern u32 lbl_80494F6C;
     s32 ok = 0;
-    u32 i;
+    s32 i;
 
-    for (i = 0; i < lbl_80494F6C; i++) {
+    for (i = 0; i < 4; i++) {
     }
     return ok;
 }
@@ -56,9 +55,9 @@ static inline void *EyeToyAlloc(s32 count) {
     return p;
 }
 
-s32 fn_80338FD0(s32 arg0, s32 arg1) {
+s32 fn_80338FD0(s32 arg0, u32 arg1) {
     extern s32 lbl_80494F7C;
-    extern s32 lbl_80494F6C;
+    extern u32 lbl_80494F6C;
     extern s32 lbl_80494F70;
 
     if (lbl_80494F7C == 0) {
