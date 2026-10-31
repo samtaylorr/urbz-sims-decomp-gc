@@ -212,6 +212,14 @@ void fn_800420F8(void *arg0) {
     }
 }
 
+void fn_800421DC(void *arg0) {
+    extern void **lbl_80495050;
+    if (arg0 != NULL) {
+        char *vt = (char *)*lbl_80495050;
+        (*(void (**)(void *, void *))(vt + 0xC4))((char *)lbl_80495050 + *(s16 *)(vt + 0xC0), arg0);
+    }
+}
+
 void fn_80042A60(void (*cb)(void)) {
     lbl_804940B0 = cb;
 }
