@@ -137,6 +137,19 @@ void fn_80279D70(void) {
     fn_80279D00();
 }
 
+void fn_80279FFC(s32 arg0, s32 arg1) {
+    extern void fn_802BE53C(u16 **, s32);
+    extern s32 fn_8027873C(s32);
+    extern s32 fn_8027D768(void *, s32, s32, u16 **, s32, s32);
+    extern void fn_802B4A58(s32, s32);
+    extern u8 lbl_804433C4[];
+    u16 *sp8;
+
+    fn_802BE53C(&sp8, arg0);
+    fn_802B4A58(fn_8027D768(lbl_804433C4, fn_8027873C(0), 0, &sp8, 1, 1), arg1);
+    RefRelease(sp8);
+}
+
 s32 fn_8027A564(void) {
     void *fn_8027873C();
     void *temp_r3;
