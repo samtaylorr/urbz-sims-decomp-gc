@@ -345,6 +345,14 @@ M2C_UNK fn_8036FBE8(void *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 0x7C) &= ~(1 << arg1);
 }
 
+M2C_UNK fn_8036FC20(void *arg0, s32 arg1, s32 arg2) {
+    if (arg2 != 0) {
+        M2C_FIELD(arg0, s32 *, 0x80) |= 1 << arg1;
+        return;
+    }
+    M2C_FIELD(arg0, s32 *, 0x80) &= ~(1 << arg1);
+}
+
 void fn_8036FE3C(void *arg0, void *arg1) {
     s32 fn_8036FBA8(void *, s32);
     s32 fn_8036FBC8(void *, s32);
