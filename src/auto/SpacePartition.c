@@ -55,6 +55,17 @@ SPCell *fn_80192DC8(SPCell *self, s32 y0, s32 x0, s32 y1, s32 x1, s32 arg5) {
     return self;
 }
 
+s32 fn_80192DE4(SPRect *r, SPCellVec *v) {
+    SPCell *c;
+
+    for (c = v->begin; c != v->end; c++) {
+        if (r->x0 < c->rect.x1 && r->x1 > c->rect.x0 && r->y0 < c->rect.y1 && r->y1 > c->rect.y0) {
+            return c - v->begin;
+        }
+    }
+    return -1;
+}
+
 s32 fn_801930C4(SPart *arg0, SPRect *r) {
     SPCell *c;
 
