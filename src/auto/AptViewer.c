@@ -211,9 +211,9 @@ void fn_8000B218(void *self, s32 a, s32 b) {
     extern s32 lbl_803F5800[][4];
     extern s32 lbl_803F57E0[][4];
 
-    lbl_803F5820[a][b] = 0;
-    lbl_803F5800[a][b] = 0x16;
     lbl_803F57E0[a][b] = 0;
+    lbl_803F5800[a][b] = 0x16;
+    lbl_803F5820[a][b] = 0;
 }
 
 s32 fn_803114D0(s32, s32, s32, s32);
