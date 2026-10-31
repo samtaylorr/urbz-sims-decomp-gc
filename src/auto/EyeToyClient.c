@@ -335,6 +335,7 @@ s32 fn_80043228(void) {
 }
 
 void fn_80043304(void) {
+    f32 fn_8004387C(void);
     void fn_803390C4(s32);
     extern s32 lbl_804957B0;
     extern f32 lbl_804957B4;
@@ -350,8 +351,8 @@ void fn_80043304(void) {
         fn_800420F8(lbl_804957AC);
         lbl_804957AC = 0;
         fn_800420F8((void *)lbl_804940A8);
-        lbl_8049409C = 0;
         lbl_804940A8 = 0;
+        lbl_8049409C = 0;
     }
 }
 
