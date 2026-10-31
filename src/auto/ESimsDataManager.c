@@ -120,8 +120,7 @@ void fn_8001DE20(ESimsIdVec *arg0) {
 
     n = arg0->end - arg0->begin;
     for (i = 0; i < n; i++) {
-        s32 *b = arg0->begin;
-        fn_80334B94(lbl_8045B438, b[i]);
+        fn_80334B94(lbl_8045B438, *ESimsIdVec_at(arg0, i));
     }
 }
 
