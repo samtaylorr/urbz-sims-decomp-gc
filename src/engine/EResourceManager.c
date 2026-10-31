@@ -228,17 +228,20 @@ void *fn_802D0B3C(void);
 void *fn_802D197C(void *, u32, s32);
 void *fn_802DBBCC(void *, u32, s32);
 
-static inline void *ERM_Alloc(u32 size) {
+static inline void *ERM_Alloc(s32 size) {
     void *heap = fn_802D0AB8();
     void *p;
     if (size == 0) {
         return 0;
     }
-    if ((p = fn_802D197C(heap, size, 4)) != 0 || (p = fn_802DBBCC(heap, size, 0)) != 0 ||
-        heap != fn_802D0AB8()) {
-        return p;
+    p = fn_802D197C(heap, size, 4);
+    if (p == 0) {
+        p = fn_802DBBCC(heap, size, 0);
+        if (p == 0 && heap == fn_802D0AB8()) {
+            return fn_802DBBCC(fn_802D0B3C(), size, 0);
+        }
     }
-    return fn_802DBBCC(fn_802D0B3C(), size, 0);
+    return p;
 }
 
 void fn_80336CBC(char *self) {
@@ -390,18 +393,23 @@ void fn_8033775C(char *self, s32 key) {
     char *volatile lock;
     char *res;
     char *vt;
+    void (*fn)(void *, s32);
+    void (*fn2)(void *);
+    char *o;
 
     lock = self;
     vt = *(char **)self;
     res = 0;
-    (*(void (**)(void *, s32))(vt + 0x14))(self + *(s16 *)(vt + 0x10), -1);
+    fn = *(void (**)(void *, s32))(vt + 0x14);
+    fn(self + *(s16 *)(vt + 0x10), -1);
     fn_80338598(self + 0x40, key, &res);
     if (res != 0) {
         fn_80337510(self, res);
     }
-    self = lock;
-    vt = *(char **)self;
-    (*(void (**)(void *))(vt + 0x1C))(self + *(s16 *)(vt + 0x18));
+    o = lock;
+    vt = *(char **)o;
+    fn2 = *(void (**)(void *))(vt + 0x1C);
+    fn2(o + *(s16 *)(vt + 0x18));
 }
 
 void fn_803377F0(char *arg0, s32 arg1) {
