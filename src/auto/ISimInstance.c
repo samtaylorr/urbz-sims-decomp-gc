@@ -233,6 +233,18 @@ s32 fn_80065D14(void *arg0) {
     return 0;
 }
 
+s32 fn_80065D60(void *arg0) {
+    void *temp_r11;
+    void *temp_r9;
+
+    temp_r11 = M2C_FIELD(arg0, void **, 0x308);
+    if (temp_r11 != NULL) {
+        temp_r9 = M2C_FIELD(temp_r11, void **, 4);
+        return M2C_FIELD(temp_r9, s32 (**)(void *), 0x32C)((char *)temp_r11 + M2C_FIELD(temp_r9, s16 *, 0x328));
+    }
+    return 0;
+}
+
 f32 *fn_80066A50(f32 *out, u8 *obj) {
     f32 *p = (f32 *)(obj + 0x110);
     out[0] = p[0];
