@@ -179,6 +179,7 @@ void *fn_8010B59C(void *self, void *arg1) {
     void fn_800F160C(void *);
     void fn_800F2868(void *, s32, s32);
     char *sub;
+    s32 tmp[2];
 
     M2C_FIELD(self, void **, 0) = lbl_8040E628;
     fn_800F160C((char *)self + 4);
@@ -283,16 +284,17 @@ s32 fn_8010BA2C(s32 arg0) {
     return (*(s32 (**)(void *, s32))(vt + 0x5C))(obj + *(s16 *)(vt + 0x58), arg0);
 }
 
+s32 fn_8010BC60(void *arg0, s32 arg1, s32 arg2, s32 arg3);
 s32 fn_8010BA68(void *self, s32 arg1, s32 arg2) {
     void fn_800F2868(void *, s32, s32);
     s32 tmp;
-    if (arg2 < 0) {
-        M2C_FIELD(self, s32 *, 8) = -1;
-        fn_800F2868((char *)self + 4, 0, -1);
-        return 0;
+    if (arg2 >= 0) {
+        tmp = 0;
+        return fn_8010BC60(self, arg1, arg2, (s32)&tmp);
     }
-    tmp = 0;
-    return fn_8010BC60(self, arg1, arg2, (s32)&tmp);
+    M2C_FIELD(self, s32 *, 8) = -1;
+    fn_800F2868((char *)self + 4, 0, -1);
+    return 0;
 }
 
 void fn_8010BAC4(void *arg0) {
