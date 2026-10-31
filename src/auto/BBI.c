@@ -147,6 +147,13 @@ s32 fn_8005A38C(void) {
     return 0x24;
 }
 
+void *fn_8005A394(void **arg0, u32 arg1) {
+    if (arg1 > 0x23) {
+        return NULL;
+    }
+    return arg0[arg1];
+}
+
 s32 fn_8005A500(s32 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 fn_8005A574(s32 *);
     void fn_80059B00(void *, s32);
@@ -183,8 +190,8 @@ s32 fn_8005A574(s32 *arg0) {
 }
 
 s32 fn_8005A5B8(s32 *arg0, s32 arg1, s32 arg2) {
-    u32 i;
     u32 count;
+    u32 i;
     void *p;
 
     count = fn_8005A38C();
@@ -200,8 +207,8 @@ s32 fn_8005A5B8(s32 *arg0, s32 arg1, s32 arg2) {
 s32 fn_8005A648(void *arg0, void *arg1, s32 arg2) {
     typedef struct { s16 delta; s16 idx; void (*fn)(void *, void *, s32); } VtEnt;
     void fn_8018D578(void *, u8 *, s32);
-    u32 i;
     u32 count;
+    u32 i;
     u8 *p;
     u8 b;
     VtEnt *e;
