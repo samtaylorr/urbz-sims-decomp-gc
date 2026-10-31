@@ -664,9 +664,9 @@ void fn_80191840(char *self, u16 id, u16 newid) {
 void *fn_801918DC(void *self, u16 id, s32 arg2) {
     extern f32 lbl_803DAF98[];
     M2C_UNK fn_80191B04(void *);
-    typedef struct { f32 x, y, z; } V3;
-    V3 tmp;
-    V3 *t;
+    RMVec3 pad[2];
+    RMVec3 tmp;
+    RMVec3 *t;
     char *p0C;
     char *p14;
     char *p1C;
@@ -686,18 +686,18 @@ void *fn_801918DC(void *self, u16 id, s32 arg2) {
     p24 = (char *)self + 0x24;
     M2C_FIELD(p24, s32 *, 0) = 0;
     M2C_FIELD(p24, s32 *, 4) = 0;
+    f = lbl_803DAF98[0];
     p2C = (char *)self + 0x2C;
     M2C_FIELD(p2C, s32 *, 4) = 0;
-    f = lbl_803DAF98[0];
     t = &tmp;
     t->z = f;
     t->y = f;
     t->x = f;
     M2C_FIELD(self, u16 *, 0) = id;
     M2C_FIELD(self, s32 *, 0x94) = arg2;
-    *(V3 *)((char *)self + 0x38) = *t;
     M2C_FIELD(self, u16 *, 2) = 0;
     M2C_FIELD(self, s32 *, 0x8C) = 0;
+    *(RMVec3 *)((char *)self + 0x38) = *t;
     M2C_FIELD(self, s32 *, 0x44) = 0;
     fn_80191B04(self);
     return self;
@@ -705,36 +705,36 @@ void *fn_801918DC(void *self, u16 id, s32 arg2) {
 
 M2C_UNK fn_80191B04(void *self) {
     extern f32 lbl_803DAF9C[];
-    char *v = (char *)self + 0x14;
-    char *begin;
-    char *p;
     f32 f = lbl_803DAF9C[0];
+    char **v = (char **)((char *)self + 0x14);
+    char *begin = v[0];
+    char *p;
+    s32 *s = self;
 
-    begin = M2C_FIELD(self, char **, 0x14);
-    M2C_FIELD(self, f32 *, 0x7C) = f;
-    M2C_FIELD(self, s32 *, 0x90) = 0;
-    M2C_FIELD(self, s32 *, 0x80) = 1;
-    M2C_FIELD(self, s32 *, 0x34) = 0;
-    M2C_FIELD(self, s32 *, 0x48) = 0;
-    M2C_FIELD(self, s32 *, 0x50) = 0;
-    M2C_FIELD(self, s32 *, 0x54) = 0;
-    M2C_FIELD(self, s32 *, 0x58) = 0;
-    M2C_FIELD(self, s32 *, 0x5C) = 0;
-    M2C_FIELD(self, s32 *, 0x60) = 0;
-    M2C_FIELD(self, s32 *, 0x64) = 0;
-    M2C_FIELD(self, s32 *, 0x68) = 0;
-    M2C_FIELD(self, s32 *, 0x6C) = 0;
-    M2C_FIELD(self, s32 *, 0x4C) = 0;
-    M2C_FIELD(self, s32 *, 0x70) = 0;
-    M2C_FIELD(self, s32 *, 0x74) = 0;
-    M2C_FIELD(self, f32 *, 0x78) = f;
-    M2C_FIELD(self, s32 *, 0x84) = 0;
-    M2C_FIELD(self, s32 *, 0x88) = 0;
-    M2C_FIELD(self, s32 *, 0x98) = 0;
-    M2C_FIELD(self, s32 *, 0x9C) = 0;
-    for (p = begin; p != M2C_FIELD(v, char **, 4); p += 12) {
+    *(f32 *)&s[0x1F] = f;
+    s[0x24] = 0;
+    s[0x20] = 1;
+    s[0xD] = 0;
+    s[0x12] = 0;
+    s[0x14] = 0;
+    s[0x15] = 0;
+    s[0x16] = 0;
+    s[0x17] = 0;
+    s[0x18] = 0;
+    s[0x19] = 0;
+    s[0x1A] = 0;
+    s[0x1B] = 0;
+    s[0x13] = 0;
+    s[0x1C] = 0;
+    s[0x1D] = 0;
+    *(f32 *)&s[0x1E] = f;
+    s[0x21] = 0;
+    s[0x22] = 0;
+    s[0x26] = 0;
+    s[0x27] = 0;
+    for (p = begin; p != v[1]; p += 12) {
     }
-    M2C_FIELD(v, char **, 4) = begin;
+    v[1] = begin;
 }
 
 void *fn_80191B94(void *arg0) {
