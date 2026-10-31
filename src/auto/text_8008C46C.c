@@ -1044,11 +1044,15 @@ void fn_800982B8(void *arg0) {
     extern f32 lbl_803CCBA4[];
     extern f32 lbl_803CCBA8[];
     extern f32 lbl_8049421C;
-    M2C_FIELD(arg0, u32 *, 0x4D4) &= ~0x2F;
+    u32 fl = M2C_FIELD(arg0, u32 *, 0x4D4);
+    s32 h = M2C_FIELD(arg0, s32 *, 0x4F0);
+    f32 f;
     M2C_FIELD(arg0, s32 *, 0x18) = 3;
-    M2C_FIELD(arg0, f32 *, 0x108) = lbl_803CCBA4[0];
-    if (M2C_FIELD(arg0, s32 *, 0x4F0) != 0) {
-        fn_802EB484((u8 *)M2C_FIELD(arg0, void **, 8) + 0x314, M2C_FIELD(arg0, s32 *, 0x4F0), lbl_803CCBA4[0], lbl_8049421C, lbl_803CCBA8[0]);
+    f = lbl_803CCBA4[0];
+    M2C_FIELD(arg0, f32 *, 0x108) = f;
+    M2C_FIELD(arg0, u32 *, 0x4D4) = fl & ~0x2F;
+    if (h != 0) {
+        fn_802EB484((u8 *)M2C_FIELD(arg0, void **, 8) + 0x314, h, f, lbl_8049421C, lbl_803CCBA8[0]);
         M2C_FIELD(arg0, s32 *, 0x4F0) = 0;
     }
 }
@@ -1058,11 +1062,15 @@ void fn_80098330(void *arg0) {
     extern f32 lbl_803CCBAC[];
     extern f32 lbl_803CCBB0[];
     extern f32 lbl_8049421C;
-    M2C_FIELD(arg0, u32 *, 0x4D4) = (M2C_FIELD(arg0, u32 *, 0x4D4) & ~0x2F) | 0x10;
+    u32 fl = M2C_FIELD(arg0, u32 *, 0x4D4);
+    s32 h = M2C_FIELD(arg0, s32 *, 0x4F0);
+    f32 f;
     M2C_FIELD(arg0, s32 *, 0x18) = 4;
-    M2C_FIELD(arg0, f32 *, 0x108) = lbl_803CCBAC[0];
-    if (M2C_FIELD(arg0, s32 *, 0x4F0) != 0) {
-        fn_802EB484((u8 *)M2C_FIELD(arg0, void **, 8) + 0x314, M2C_FIELD(arg0, s32 *, 0x4F0), lbl_803CCBAC[0], lbl_8049421C, lbl_803CCBB0[0]);
+    f = lbl_803CCBAC[0];
+    M2C_FIELD(arg0, f32 *, 0x108) = f;
+    M2C_FIELD(arg0, u32 *, 0x4D4) = (fl & ~0x2F) | 0x10;
+    if (h != 0) {
+        fn_802EB484((u8 *)M2C_FIELD(arg0, void **, 8) + 0x314, h, f, lbl_8049421C, lbl_803CCBB0[0]);
         M2C_FIELD(arg0, s32 *, 0x4F0) = 0;
     }
 }
@@ -1082,10 +1090,10 @@ f32 fn_800983B8(void *arg0, s32 arg1) {
         }
         return lbl_803CCBB8[0];
     }
-    if (arg1 == 1) {
-        return lbl_803CCBB4[0];
+    if (arg1 != 1) {
+        return lbl_803CCBBC[0];
     }
-    return lbl_803CCBBC[0];
+    return lbl_803CCBB4[0];
 }
 
 f32 fn_80098420(void *arg0, void *arg1) {
