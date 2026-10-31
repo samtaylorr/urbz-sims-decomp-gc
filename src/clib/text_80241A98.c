@@ -32,6 +32,13 @@ typedef struct StrFile {
 
 s32 fn_80249390(StrFile *f, const char *fmt, void *ap);
 
+s32 fn_802422C8(void) {
+    extern s32 lbl_80440518[];
+    s32 ret = lbl_80440518[0];
+    lbl_80440518[0] = 0;
+    return ret;
+}
+
 void fn_80242320(s32 arg0) {
     fn_802422DC();
     *(s32 *)0xCC006008 = 0x12000000;
