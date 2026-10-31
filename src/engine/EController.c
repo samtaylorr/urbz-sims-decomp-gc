@@ -199,15 +199,15 @@ s32 fn_80310A48(void *arg0, f32 farg0) {
 }
 
 s32 fn_80310A54(char *self) {
+    register char *vt = *(char **)(self + 0x204);
     extern f32 lbl_803F22C0[];
-    char *vt = *(char **)(self + 0x204);
-    f32 z;
+    register f32 z;
     if ((*(s32 (**)(char *))(vt + 0x1C))(self + *(s16 *)(vt + 0x18)) == 0) {
         return 0;
     }
     z = lbl_803F22C0[0];
-    M2C_FIELD(self, f32 *, 0x1E0) = z;
     M2C_FIELD(self, f32 *, 0x1E8) = z;
+    M2C_FIELD(self, f32 *, 0x1E0) = z;
     return 1;
 }
 
