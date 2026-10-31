@@ -26,6 +26,10 @@ typedef struct EyeToyEntry {
     s32 unk8[7];
 } EyeToyEntry;
 
+static inline s32 EyeToyOpenDevice(void) {
+    return 0;
+}
+
 static inline void *EyeToyAlloc(s32 count) {
     void *heap;
     void *p;
