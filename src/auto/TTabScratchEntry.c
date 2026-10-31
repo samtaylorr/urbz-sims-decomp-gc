@@ -864,6 +864,15 @@ static inline void *Str8_init2(void *s, u8 *data) {
 static inline void Str8_init3(void *s, u8 *data, s32 n) {
     fn_800F687C(s, data, n);
 }
+static inline void TTabScratch_ResetEntry0(char *e) {
+    Str8_8019F898 s;
+    void *b;
+
+    *(s32 *)e = 0;
+    b = Str8_init2(&s, s.data);
+    fn_800F68F0(b, 0, -1);
+    fn_800F6A38((s32)(e + 4), (s32)b);
+}
 void *fn_8019F898(void *self) {
     Str8_8019F898 s;
     char *p;
@@ -875,9 +884,9 @@ void *fn_8019F898(void *self) {
     fn_80102B5C(self);
     *(void **)((char *)self + 0x10) = lbl_80414248;
     do {
-        fn_800F687C(p + 4, p + 0xc, 8);
+        Str8_init((Str8_8019F898 *)(p + 4));
         p += 0x14;
-    } while (--n != -1);
+    } while (n-- != 0);
     *(s32 *)((char *)self + 0xd4) = 0;
     b = Str8_init2(&s, s.data);
     fn_800F68F0(b, 0, -1);
