@@ -81,16 +81,12 @@ void fn_80063FA4(void *self, s32 flags) {
     extern u8 *lbl_80495050;
     extern void *lbl_80494130;
     M2C_UNK fn_802CD53C(void *);
-    u8 *obj;
-    u8 *vt;
 
-    if (ISimInstance_IterValid(lbl_80494130)) {
+    if (lbl_80494130 != NULL) {
         if (ISimInstance_Call9C(lbl_80495050, lbl_80494130) != 0) {
             ISimInstance_Call44(lbl_80495050);
         }
-        obj = lbl_80495050;
-        vt = *(u8 **)obj;
-        (*(void (**)(void *, void *))(vt + 0x94))(obj + *(s16 *)(vt + 0x90), lbl_80494130);
+        ISimInstance_Call94(lbl_80495050, lbl_80494130);
         lbl_80494130 = NULL;
     }
     fn_802CD53C((char *)self + 4);
@@ -225,6 +221,62 @@ extern void fn_80064EC4(void *);
 void fn_80064EC4(void *self) {
     extern void *fn_800650DC(void *, s32);
     fn_800650DC(self, 0);
+}
+
+void fn_800650DC(void *arg0) {
+    s32 fn_80065D14(void *);
+    void *node;
+    u8 *obj;
+    u8 *sub;
+    void *vt;
+
+    for (node = M2C_FIELD(arg0, void **, 4); node != NULL; node = M2C_FIELD(node, void **, 0x10)) {
+        obj = M2C_FIELD(node, u8 **, 0x1C);
+        if (fn_80065D14(obj) == 0) {
+            sub = obj + 0x300;
+            vt = M2C_FIELD(sub, void **, 0);
+            M2C_FIELD(vt, void (**)(void *), 0x14)(sub + M2C_FIELD(vt, s16 *, 0x10));
+        }
+    }
+}
+
+s32 fn_80065148(s32 id) {
+    extern void *lbl_8041FA38;
+    void *p = lbl_8041FA38;
+    void *n;
+
+    if (p == NULL) {
+        return -1;
+    }
+    p = M2C_FIELD(p, void **, 4);
+    if (p == NULL) {
+        return -1;
+    }
+    for (n = M2C_FIELD(p, void **, 4); n != NULL; n = M2C_FIELD(n, void **, 0x10)) {
+        if (id == M2C_FIELD(n, s32 *, 0x1C)) {
+            return M2C_FIELD(n, s32 *, 0x18);
+        }
+    }
+    return -1;
+}
+
+void *fn_800651A8(s32 key) {
+    extern void *lbl_8041FA38;
+    s32 fn_802CD440(void *, s32, void **);
+    void *p = lbl_8041FA38;
+    void *result;
+
+    if (p == NULL || (p = M2C_FIELD(p, void **, 4)) == NULL) {
+        return NULL;
+    }
+    result = NULL;
+    if (fn_802CD440((u8 *)p + 4, key, &result) == 0) {
+        return NULL;
+    }
+    if (result == NULL) {
+        return NULL;
+    }
+    return result;
 }
 
 void fn_80065424(f32 *out, void *pos) {
