@@ -28,6 +28,11 @@ static inline void *CameraManager_AllocAligned(u32 size) {
     return p;
 }
 
+static inline void CameraManager_CallStart(void *obj) {
+    void *vt = M2C_FIELD(obj, void **, 0x44);
+    M2C_FIELD(vt, void (**)(void *), 0x1C)((char *)obj + M2C_FIELD(vt, s16 *, 0x18));
+}
+
 s32 *fn_80014DCC(s32 *arg0) {
     arg0[0] = 0;
     arg0[1] = 0;
@@ -98,14 +103,13 @@ void fn_800150A8(void *arg0) {
 }
 
 void fn_800150CC(void *arg0) {
-    void *temp_r3;
-    void *temp_r9;
-
     if (M2C_FIELD(arg0, s32 *, 0xC) == 0) {
+        void *obj;
+        void *vt;
         M2C_FIELD(arg0, s32 *, 0xC) = 1;
-        temp_r3 = M2C_FIELD(arg0, void **, 4);
-        temp_r9 = M2C_FIELD(temp_r3, void **, 0x44);
-        M2C_FIELD(temp_r9, void (**)(void *), 0x1C)((char *)temp_r3 + M2C_FIELD(temp_r9, s16 *, 0x18));
+        obj = M2C_FIELD(arg0, void **, 4);
+        vt = M2C_FIELD(obj, void **, 0x44);
+        M2C_FIELD(vt, void (**)(void *), 0x1C)((char *)obj + M2C_FIELD(vt, s16 *, 0x18));
     }
 }
 
@@ -277,9 +281,9 @@ void fn_80016A28(void *arg0) {
     extern u8 lbl_803C267C[];
     if ((s32) M2C_FIELD(arg0, s32 *, 0xF30) != 0) {
         fn_8000AA2C(M2C_FIELD(arg0, s32 *, 0xED4), lbl_803C267C, 0, 0, 0);
+        M2C_FIELD(arg0, volatile s32 *, 0xF30) = 0;
         M2C_FIELD(arg0, s32 *, 0x560) = 0;
         M2C_FIELD(arg0, s32 *, 0xF20) = 1;
-        M2C_FIELD(arg0, s32 *, 0xF30) = 0;
     }
 }
 
@@ -288,8 +292,8 @@ void fn_80016C14(void *arg0) {
     extern u8 lbl_803C2684[];
     if ((s32) M2C_FIELD(arg0, s32 *, 0xF34) != 0) {
         fn_8000AA2C(M2C_FIELD(arg0, s32 *, 0xED4), lbl_803C2684, 0, 0, 0);
+        M2C_FIELD(arg0, volatile s32 *, 0xF34) = 0;
         M2C_FIELD(arg0, s32 *, 0xF20) = 1;
-        M2C_FIELD(arg0, s32 *, 0xF34) = 0;
     }
 }
 
