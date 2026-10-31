@@ -195,13 +195,13 @@ char *fn_802EDDB8(char *self, char *arg1) {
     flag = *(s32 *)(arg1 + 0xC);
     res = *(char **)arg1;
     (*(void (**)(void *, void *, s32))(vt + 0x1CC))(self + *(s16 *)(vt + 0x1C8), arg1, flag);
-    if (flag) {
-        return res;
+    if (!flag) {
+        vt = *(char **)self;
+        (*(void (**)(void *, void *, s32))(vt + 0x8C))(self + *(s16 *)(vt + 0x88), res, 1);
+        *(s32 *)(self + 0x324) = flag;
+        return 0;
     }
-    vt = *(char **)self;
-    (*(void (**)(void *, void *, s32))(vt + 0x8C))(self + *(s16 *)(vt + 0x88), res, 1);
-    *(s32 *)(self + 0x324) = flag;
-    return 0;
+    return res;
 }
 
 void fn_802EDE70(void) {
@@ -255,6 +255,7 @@ void fn_802EDFE0(char *self, s32 arg1) {
             if ((*(s32 (**)(void *, s32))(vt + 0x1C))(obj + *(s16 *)(vt + 0x18), i) == arg1) {
                 vt = *(char **)self;
                 (*(void (**)(void *))(vt + 0x164))(self + *(s16 *)(vt + 0x160));
+                break;
             }
         }
         vt = *(char **)self;
@@ -277,6 +278,15 @@ char *fn_802EE098(char *self, void *arg1) {
         (*(void (**)(void *, void *))(vt + 0xFC))(self + *(s16 *)(vt + 0xF8), obj);
     }
     return 0;
+}
+
+void fn_802EE13C(char *self, s32 arg1) {
+    char *vt;
+    if (arg1 != 0) {
+        vt = *(char **)self;
+        (*(void (**)(void *, s32))(vt + 0x1EC))(self + *(s16 *)(vt + 0x1E8), arg1);
+        *(s32 *)(self + 0x34) -= 1;
+    }
 }
 
 char *fn_802EE190(char *self, void *arg1) {
@@ -324,11 +334,10 @@ s32 fn_802EEB54(void *arg0) {
 
 void fn_802EEB84(void *self, s32 arg1, s32 *v) {
     extern void fn_802EE6D0(void *);
-    s32 x, y;
-    y = v[1];
-    x = v[0];
-    *(s32 *)((u8 *)self + 0xA0) = y;
+    s32 x = v[0];
+    s32 y = v[1];
     *(s32 *)((u8 *)self + 0x9C) = x;
+    *(s32 *)((u8 *)self + 0xA0) = y;
     if (arg1 != 0) {
         fn_802EE6D0(self);
         *(s32 *)((u8 *)self + 0x10) = arg1;
