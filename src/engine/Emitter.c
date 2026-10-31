@@ -16,6 +16,31 @@ s32 fn_8030AA04(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s3
 void fn_8030AB88(void *arg0, s32 arg1);
 void fn_8030B800(void);
 void fn_8030B280(void);
+void fn_8030AB88(void *arg0, s32 arg1) {
+    f32 *dst = M2C_FIELD(arg0, f32 **, 0x8C);
+    f32 *p;
+
+    if (dst != NULL) {
+        p = (f32 *)arg1;
+        dst[2] = *p++;
+        dst[3] = *p++;
+        dst[4] = *p++;
+        dst[5] = *p++;
+        dst[6] = *p++;
+        dst[7] = *p++;
+        dst[8] = *p++;
+        dst[9] = *p++;
+        dst[10] = *p++;
+        dst[11] = *p++;
+        dst[12] = *p++;
+        dst[13] = *p++;
+        dst[14] = *p++;
+        dst[15] = *p++;
+        dst[16] = *p++;
+        dst[17] = *p;
+    }
+}
+
 void fn_8030AC1C(void *arg0, u32 arg1, s32 arg2) {
     u32 *p;
     s32 mgr;
