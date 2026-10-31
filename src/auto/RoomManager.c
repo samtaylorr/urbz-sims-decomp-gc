@@ -639,8 +639,8 @@ void fn_80191840(char *self, u16 id, u16 newid) {
         old = room[1];
         *(RMMapNode **)(buf + 0) = NULL;
         b = (*(RMMapNode **)(self + 4))->left;
-        *(RMMapNode **)(buf + 0) = b;
         *(RMMapNode **)(buf + 8) = b;
+        *(RMMapNode **)(buf + 0) = b;
         for (; RMMap_EndP((RMMapIter *)(buf + 8), self),
                RMMapIter_NotEqualP((RMMapIter *)(buf + 0), (RMMapIter *)(buf + 8));
              RMMapIter_Inc((RMMapIter *)(buf + 0))) {
