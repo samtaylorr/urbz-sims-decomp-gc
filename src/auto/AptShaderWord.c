@@ -108,14 +108,13 @@ void *fn_80008608(void *arg0, void *arg1) {
         }
         prev = it;
     }
-    if (it == NULL) {
-        return it;
+    if (it != NULL) {
+        if (prev != NULL) {
+            M2C_FIELD(prev, void **, 0) = M2C_FIELD(it, void **, 0);
+        } else {
+            M2C_FIELD(arg0, void **, 4) = M2C_FIELD(it, void **, 0);
+        }
     }
-    if (prev != NULL) {
-        M2C_FIELD(prev, void **, 0) = M2C_FIELD(it, void **, 0);
-        return it;
-    }
-    M2C_FIELD(arg0, void **, 4) = M2C_FIELD(it, void **, 0);
     return it;
 }
 
