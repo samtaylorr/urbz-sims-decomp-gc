@@ -153,6 +153,7 @@ s32 fn_8027A564(void) {
 }
 
 s32 fn_8027A5A4(s32 arg0) {
+    void *fn_8027873C(s32);
     void *obj = fn_8027873C(arg0);
     if (obj != NULL) {
         return M2C_FIELD(M2C_FIELD(M2C_FIELD(obj, void **, 0x50), void **, 8), s32 *, 8);
