@@ -4071,14 +4071,15 @@ void fn_803A3320(s32 *first, s32 *middle, s32 *last, s32 comp) {
 }
 
 s32 *fn_803A3348(s32 *first, s32 *last, s32 pivot, s32 (*comp)(s32 *, s32 *)) {
+    typedef struct { s32 v; } Elem;
     s32 tmp;
 
     while (1) {
-        while (CompValR(comp, first, pivot)) {
+        while (((s32 (*)(s32 *, Elem))comp)(first, *(Elem *)&pivot)) {
             first++;
         }
         last--;
-        while (CompValL(comp, pivot, last)) {
+        while (((s32 (*)(Elem, s32 *))comp)(*(Elem *)&pivot, last)) {
             last--;
         }
         if (!(first < last)) {
