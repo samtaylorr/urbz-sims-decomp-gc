@@ -168,6 +168,22 @@ void fn_8035BF60(void) {
     }
 }
 
+void fn_8035C4A8(u8 *self) {
+    typedef struct { s32 v[6]; } S18;
+    typedef struct { s32 v[4]; } S10;
+    extern S18 lbl_80493C3C[];
+    extern s32 lbl_80495214;
+    S10 *b;
+    S18 *a;
+
+    lbl_80495214--;
+    a = (S18 *)((u8 *)lbl_80493C3C + lbl_80495214 * 0x28);
+    b = (S10 *)((u8 *)lbl_80493C3C + 0x18 + lbl_80495214 * 0x28);
+    *(S18 *)(self + 0x9B0) = *a;
+    *(S10 *)(self + 0x9C8) = *b;
+    *(u32 *)(self + 0x6CC) |= 0x80000600;
+}
+
 void *fn_8035D9C0(void *arg0) {
     extern void fn_8036EE68(void *);
     extern u8 lbl_8041CEC0[];
@@ -280,13 +296,12 @@ void fn_8035DFE0(void) {
     void fn_80383AE8(s32, s32);
     void fn_80385E84(s32);
     ENgcRendererSlot *e;
-    ENgcRendererSlot *end;
+    u32 i;
     s32 f;
 
     fn_8035EE7C();
-    e = lbl_80473F7C;
-    end = e + 0x3D;
-    do {
+    for (i = 0; i < 0x3E; i++) {
+        e = &lbl_80473F7C[i];
         if (e->unk24 != 0 && e->unk0 != 0) {
             f = ((s32 *)e)[0x10];
             if (!(f & 0x20000000) && f < 0 && !(f & 0x40000000)
@@ -296,8 +311,7 @@ void fn_8035DFE0(void) {
                 fn_80385E84(e->unk0);
             }
         }
-        e++;
-    } while (e <= end);
+    }
     fn_8035EE3C();
 }
 
@@ -313,11 +327,41 @@ s32 fn_8035E08C(void *self, s32 slot) {
     return ret;
 }
 
+void fn_8035E9D4(void *self, s32 slot, f32 ratio) {
+    extern ENgcRendererSlot lbl_80473F7C[];
+    void fn_803844A8(s32, f32);
+    u8 *p;
+
+    if (slot != -1 && lbl_80473F7C[slot].unk0 != 0) {
+        fn_8035EE7C();
+        p = (u8 *)lbl_80473F7C[slot].unk24;
+        fn_803844A8(lbl_80473F7C[slot].unk0, (f32)*(u32 *)(p + 8) * ratio / 32028.66015625f);
+        fn_8035EE3C();
+    }
+}
+
 void fn_8035EE3C(void);
 void fn_8035EE7C(void);
 void fn_8035EC18(void *self, f32 vol, s32 slot);
 void fn_8035EA70(void) {
     ((void (*)(void))fn_8035EC18)();
+}
+
+void fn_8035EA90(void *self, s32 slot, s32 arg2) {
+    extern ENgcRendererSlot lbl_80473F7C[];
+    void fn_80385F0C(s32, s32);
+    s32 v;
+    s32 h;
+
+    if (slot != -1) {
+        fn_8035EE7C();
+        v = arg2 * 0x388 / 10000;
+        h = lbl_80473F7C[slot].unk0;
+        if (h != 0) {
+            fn_80385F0C(h, v);
+        }
+        fn_8035EE3C();
+    }
 }
 
 void fn_8035EB04(void *self, s32 slot, f32 vol) {
