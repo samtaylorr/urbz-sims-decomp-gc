@@ -76,6 +76,13 @@ void fn_800A22D4(void) {
 
 }
 
+s32 fn_800A3038(void *arg0, void *arg1, s32 *arg2, s32 *arg3) {
+    s32 fn_8011DCBC(void *);
+    *arg2 = fn_8011DCBC(arg0);
+    *arg3 = M2C_FIELD(arg1, s16 *, 4);
+    return 1;
+}
+
 void **fn_800A35E4(void) {
     extern void *lbl_8042F060[];
     void **p;
@@ -148,16 +155,17 @@ void fn_800A36B4(char *arg0, s32 arg1) {
 
 void fn_800A3EF0(char *arg0) {
     void fn_800A2EF0(s32, s32, void *);
-    void fn_800F6FB4(void *, void *, s32);
     void fn_800F7494(void *, s32);
     void *fn_800F7138(void *);
     void fn_800F22F0(void *, void *);
     void fn_803073C4(void *);
-    struct S { u8 hdr[8]; char buf[16]; } s;
-    struct S *sp = &s;
+    LocalStr8 s;
+    LocalStr8 *sp = &s;
+    char *b;
 
     fn_800A2EF0(M2C_FIELD(arg0, s32 *, 0x64), M2C_FIELD(arg0, s32 *, 0x68), arg0 + 0x6C);
-    fn_800F6FB4(sp, sp->buf, 8);
+    b = sp->buf;
+    fn_800F6FB4(sp, b, 8);
     fn_800F7494(sp, M2C_FIELD(arg0, s32 *, 0x6C));
     fn_800F22F0(arg0 + 0x60, fn_800F7138(sp));
     fn_803073C4(arg0);
