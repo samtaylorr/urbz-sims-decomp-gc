@@ -348,7 +348,7 @@ void fn_80310FF4(void *arg0, s32 arg1) {
 }
 
 s32 fn_803110C8(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
-    s32 fn_803119D4();
+    s32 fn_803119D4(void *, s32);
     s32 m;
 
     m = fn_803119D4(arg0, arg3);
@@ -410,6 +410,24 @@ s32 fn_80311350(u32 *arg0, u32 *arg1) {
         return temp_r9 > temp_r0;
     }
     return -1;
+}
+
+s32 *fn_80311370(void *arg0, s32 arg1) {
+    void *fn_80378358(const void *key, const void *base, u32 nmemb, u32 size, s32 (*compar)(const void *, const void *));
+    s32 *p;
+    s32 *base;
+
+    if (arg1 == 0) {
+        return NULL;
+    }
+    p = fn_80378358(&arg1, M2C_FIELD(arg0, void **, 0x1A4), M2C_FIELD(arg0, u32 *, 0x1A8), 8, (void *)fn_80311350);
+    if (p != NULL) {
+        base = M2C_FIELD(arg0, s32 **, 0x1A4);
+        while (p != base && p[-2] == arg1) {
+            p -= 2;
+        }
+    }
+    return p;
 }
 
 void fn_80311778(s32 arg0, s32 arg1, s32 arg2) {
