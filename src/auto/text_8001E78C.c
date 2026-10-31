@@ -22,6 +22,10 @@ s32 fn_80021248(void) {
     return 1;
 }
 
+s64 fn_80022CD0(s64 *arg0) {
+    return *arg0;
+}
+
 void fn_800235FC(void *arg0, f32 farg0, f32 farg1, f32 farg2, f32 farg3) {
     M2C_FIELD(M2C_FIELD(arg0, void **, 0x4C), f32 *, 0x10) = farg0;
     M2C_FIELD(M2C_FIELD(arg0, void **, 0x4C), f32 *, 0x14) = farg1;
