@@ -2,6 +2,16 @@
 #include "common.h"
 
 s32 fn_80375CB8(s32 arg0, s32 arg1, s32 arg2);
+s32 fn_80375CB8(s32 arg0, s32 arg1, s32 arg2) {
+    if ((u32)(arg0 - 1) <= 1) {
+        return fn_80375C5C(arg1, arg2);
+    }
+    if (arg0 == 0) {
+        return -1;
+    }
+    return fn_80240ED8(arg0);
+}
+
 void fn_80375D08(void) {
     ((void (*)(void))fn_80375CB8)();
 }
@@ -52,5 +62,13 @@ s32 fn_80375E44(void) {
 
 s32 fn_80375E4C(void) {
     return 0;
+}
+
+s32 fn_803781C0(s32 c) {
+    extern const u8 lbl_803EBA39[];
+    if (c[lbl_803EBA39] & 1) {
+        c += 0x20;
+    }
+    return c;
 }
 
