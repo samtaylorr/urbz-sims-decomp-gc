@@ -235,10 +235,11 @@ char *fn_802EE190(char *self, void *arg1) {
 void fn_802EE234(char *self, void *arg1) {
     if (arg1) {
         char *vt = *(char **)self;
+        char *vt2;
         (*(void (**)(void *))(vt + 0x44))(self + *(s16 *)(vt + 0x40));
+        vt2 = *(char **)self;
         (*(s32 *)(self + 0x2C))--;
-        vt = *(char **)self;
-        (*(void (**)(void *, void *))(vt + 0x1FC))(self + *(s16 *)(vt + 0x1F8), arg1);
+        (*(void (**)(void *, void *))(vt2 + 0x1FC))(self + *(s16 *)(vt2 + 0x1F8), arg1);
     }
 }
 
@@ -260,8 +261,10 @@ s32 fn_802EEB54(void *arg0) {
 
 void fn_802EEB84(void *self, s32 arg1, s32 *v) {
     extern void fn_802EE6D0(void *);
-    ((s32 *)((u8 *)self + 0x9C))[1] = v[1];
-    ((s32 *)((u8 *)self + 0x9C))[0] = v[0];
+    s32 y = v[1];
+    s32 x = v[0];
+    ((s32 *)((u8 *)self + 0x9C))[1] = y;
+    ((s32 *)((u8 *)self + 0x9C))[0] = x;
     if (arg1 != 0) {
         fn_802EE6D0(self);
         *(s32 *)((u8 *)self + 0x10) = arg1;
