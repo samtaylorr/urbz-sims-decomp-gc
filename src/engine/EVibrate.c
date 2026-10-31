@@ -87,6 +87,24 @@ void fn_80314E88(void *self) {
     M2C_FIELD(self, s32 *, 4) = 1;
 }
 
+void fn_80314F08(void *self) {
+    extern void *lbl_80494FCC;
+    void *fn_803338D0(void *, s32);
+    s32 i;
+    if (M2C_FIELD(self, s32 *, 4) != 0) {
+        M2C_FIELD(self, s32 *, 4) = 0;
+        for (i = 0; i < EVibrate_NumPorts(); i++) {
+            if (fn_80314E68(self, i) != 0) {
+                void *obj = fn_803338D0(lbl_80494FCC, i);
+                if (obj != NULL) {
+                    void *vt = M2C_FIELD(obj, void **, 0x204);
+                    M2C_FIELD(vt, void (**)(void *), 0xA4)((s8 *)obj + M2C_FIELD(vt, s16 *, 0xA0));
+                }
+            }
+        }
+    }
+}
+
 s32 fn_80314F94(void *self, s32 idx, f32 a) {
     extern void *lbl_80494FCC;
     void *fn_803338D0(void *, s32);
