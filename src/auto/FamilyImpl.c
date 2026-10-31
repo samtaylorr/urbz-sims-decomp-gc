@@ -148,6 +148,16 @@ s32 *fn_8010B8FC(void *self, s32 id) {
     return NULL;
 }
 
+s32 fn_8010B930(void *self, s32 id) {
+    s32 *it;
+    for (it = M2C_FIELD(self, s32 **, 0x24); it != M2C_FIELD(self, s32 **, 0x28); it++) {
+        if (*it == id) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
 void fn_8010B9A0(s32 arg0, s32 arg1) {
     s32 fn_800F3304(s32);
     M2C_UNK fn_800F7148(s32, s32);
