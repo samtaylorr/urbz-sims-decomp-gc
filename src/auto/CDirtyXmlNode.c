@@ -258,7 +258,7 @@ void fn_800C2970(void) {
 void fn_800C2D5C(void) {
     void fn_802D20E8(s32);
     void fn_802D1A00(void *, s32);
-    void fn_80248488();
+    void *fn_80248488(void *, s32, u32);
     void fn_8031EA2C(s32);
     void fn_8030FAAC(void *);
     extern s32 lbl_80494364;
@@ -428,7 +428,7 @@ void fn_800C3B48(u16 *src, s32 len, u8 *dst) {
             *dst = ((c >> 6) & 0x1F) | 0xC0;
             *++dst = (*src & 0x3F) | 0x80;
         } else {
-            *dst = ((c >> 12) & 0xF) | 0xE0;
+            *dst = ((c & 0xF000) >> 12) | 0xE0;
             *++dst = ((*src >> 6) & 0x3F) | 0x80;
             *++dst = (*src & 0x3F) | 0x80;
         }
@@ -438,9 +438,9 @@ void fn_800C3B48(u16 *src, s32 len, u8 *dst) {
 }
 
 void fn_800C3C04(u8 *src, s32 len, u16 *dst) {
-    u8 *end = src + len;
+    u8 *end;
 
-    while (src < end) {
+    for (end = src + len; src < end;) {
         if (!(*src & 0x80)) {
             *dst = *src;
             src++;
