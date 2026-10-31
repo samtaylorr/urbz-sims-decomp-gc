@@ -90,11 +90,11 @@ void fn_80021C20(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 fn_802D5200(s32);
     void fn_800F22F0(s32, s32);
     char *e = M2C_FIELD(arg0, char **, 0) + 0x88;
-    Handle h = (*(Handle (**)())(e + 4))((char *)arg0 + *(s16 *)e);
-    Handle *hp = &h;
+    Handle h;
 
-    if (Handle_Get(hp) != 0 && fn_802D5200(Handle_Get(hp)) != 0) {
-        fn_800F22F0(arg1, Handle_Get(hp));
+    (*(void (**)())(e + 4))(&h, (char *)arg0 + *(s16 *)e);
+    if (Handle_Get(&h) != 0 && fn_802D5200(Handle_Get(&h)) != 0) {
+        fn_800F22F0(arg1, Handle_Get(&h));
     } else if (arg3 != 0) {
         fn_800F22F0(arg1, arg3);
     }
