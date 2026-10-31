@@ -73,6 +73,29 @@ s32 fn_8036EE60(void) {
     return 0;
 }
 
+s32 *fn_8036EE68(s32 *self) {
+    typedef struct { f32 x, y, z; } V3;
+    typedef struct { s32 w, h, fmt; V3 v; s32 a, b; u8 *vt; } Tex;
+    extern u8 lbl_8041DC58[];
+    extern f32 lbl_803F53D0[];
+    Tex *p = (Tex *)self;
+    f32 f;
+    p->h = 0x40;
+    p->w = 0x40;
+    p->vt = lbl_8041DC58;
+    p->fmt = 3;
+    p->a = 1;
+    p->b = 1;
+    f = lbl_803F53D0[0];
+    {
+        V3 t = { f, f, f };
+        p->v = t;
+    }
+    p->h = -1;
+    p->w = -1;
+    return self;
+}
+
 extern u8 lbl_8041DC58[];
 void fn_802D20E8(void *);
 void fn_8036EEE0(void *self, s32 flags) {
@@ -224,6 +247,10 @@ void fn_8036F244(void *arg0) {
 
 void fn_8036F254(void *arg0) {
     M2C_FIELD(arg0, s32 *, 8) = (s32) (M2C_FIELD(arg0, s32 *, 8) | 0x80);
+}
+
+s32 fn_8036F290(void *arg0) {
+    return M2C_FIELD(arg0, u32 *, 0x20) == 0x900DBEEF;
 }
 
 s32 fn_8036F334(void) {
