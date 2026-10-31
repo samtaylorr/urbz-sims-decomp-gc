@@ -126,7 +126,8 @@ void fn_800C061C(void) {
 }
 
 s32 fn_800C0620(u8 *arg0, s32 arg1) {
-    return M2C_FIELD((arg1 * 8) + M2C_FIELD(arg0, s32 *, 0xC), s32 *, 4);
+    typedef struct { s32 key; s32 value; } Pair;
+    return M2C_FIELD(arg0, Pair **, 0xC)[arg1].value;
 }
 
 void fn_800C0634(void) {
@@ -167,6 +168,15 @@ void fn_800C06E0(void) {
     } else {
         M2C_FIELD(M2C_FIELD(lbl_80495A24, void **, 0x68), void (**)(void *, s32, s32, s32, s32), 0x1BC)((u8 *)lbl_80495A24 + M2C_FIELD(M2C_FIELD(lbl_80495A24, void **, 0x68), s16 *, 0x1B8), 0, 1, 1, 0);
     }
+}
+
+void fn_800C2404(s32 arg0, s32 arg1) {
+    s32 fn_800BEF88(s32, void *);
+    extern s32 lbl_80495A18;
+    extern s32 lbl_80495A1C;
+    extern s32 lbl_80495A20;
+    lbl_80495A18 = fn_800BEF88(arg0, &lbl_80495A1C);
+    lbl_80495A20 = arg1;
 }
 
 void fn_800C243C(void) {
