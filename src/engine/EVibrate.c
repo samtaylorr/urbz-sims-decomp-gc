@@ -66,8 +66,8 @@ void fn_80314E34(void *self, u8 index) {
 }
 
 void fn_80314E54(void *self, s32 idx) {
-    struct { s32 val; u8 pad[0x40]; } *ent = (void *)((u8 *)self + 0x38);
-    ent[idx].val = 0;
+    struct { u8 pad[0x38]; struct { s32 val; u8 pad[0x40]; } ent[4]; } *s = self;
+    s->ent[idx].val = 0;
 }
 
 s32 fn_80314E68(void *self, u8 index) {
