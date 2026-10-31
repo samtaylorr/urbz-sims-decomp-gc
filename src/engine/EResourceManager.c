@@ -487,10 +487,11 @@ void fn_80338970(void) {
 
 void fn_80338990(void *arg0) {
     register void *p asm("r9") = arg0;
-    M2C_FIELD(p, s32 *, 0xC) = 0;
-    M2C_FIELD(p, s32 *, 8) = 0;
-    M2C_FIELD(p, s32 *, 0) = 0;
-    M2C_FIELD(p, s32 *, 4) = 0;
+    register s32 z asm("r11") = 0;
+    M2C_FIELD(p, s32 *, 0xC) = z;
+    M2C_FIELD(p, s32 *, 8) = z;
+    M2C_FIELD(p, s32 *, 0) = z;
+    M2C_FIELD(p, s32 *, 4) = z;
     M2C_FIELD(p, u32 *, 0x10) = 0xDEADBEEF;
 }
 
