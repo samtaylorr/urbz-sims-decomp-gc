@@ -212,7 +212,6 @@ s32 fn_8032BB20(u8 *self, s32 name, s32 idx) {
     extern s32 fn_8032BA68(u8 *, void *, s32);
     extern void fn_8031EA2C(void *);
     extern u8 lbl_8045B82C[];
-    struct { s32 a; s32 b; } *arr;
     void *res;
 
     res = fn_8033740C(lbl_8045B82C, name, 0, 0);
@@ -220,8 +219,7 @@ s32 fn_8032BB20(u8 *self, s32 name, s32 idx) {
         return 0;
     }
     if (fn_8032BA68(self, res, idx) != 0) {
-        arr = (void *)(self + 0xA8);
-        arr[idx].a = 1;
+        ((s32 *)(self + 0xA8))[idx * 2] = 1;
         return (s32)res;
     }
     fn_8031EA2C(res);
@@ -230,18 +228,16 @@ s32 fn_8032BB20(u8 *self, s32 name, s32 idx) {
 
 s32 fn_8032BC70(u8 *self, s32 arg1) {
     extern s32 fn_8032BBA8(u8 *, s32);
-    typedef struct { s32 key; s32 val; } Entry;
+    struct { u8 pad[0xAC]; struct { s32 key; s32 val; } entries[11]; } *p = (void *)self;
     s32 found = 0;
-    s32 i = 0;
+    s32 i;
 
-    while (arg1 != ((Entry *)(self + 0xAC))[i].key) {
-        i++;
-        if (i > 10) {
-            goto done;
+    for (i = 0; i <= 10; i++) {
+        if (arg1 == p->entries[i].key) {
+            found = 1;
+            break;
         }
     }
-    found = 1;
-done:
     if (found == 0) {
         return 0;
     }
@@ -414,6 +410,23 @@ s32 fn_8032C3B8(u8 *self, u8 *arg1, u8 *arg2, s32 arg3, s32 arg4) {
         fn_8032A710(arg2, (s32)arg1);
     }
     return ret;
+}
+
+s32 fn_8032C42C(u8 *self, void *arg1, u8 *obj, s32 arg3, s32 arg4, f32 arg5) {
+    extern f32 lbl_803F33A8[];
+    extern s32 fn_8032C4D0(u8 *, void *, u8, s32, s32, f32, f32);
+    s8 idx;
+
+    if (obj == NULL || obj[0x160] == 0) {
+        return 0;
+    }
+    idx = obj[0x161];
+    if (!(idx < self[0x167] && idx >= 0)) {
+        if (!fn_8032C368(self, obj[0x160], (s8 *)(obj + 0x161))) {
+            return 0;
+        }
+    }
+    return fn_8032C4D0(self, arg1, obj[0x161], arg3, arg4, *(f32 *)(obj + 0x6C), lbl_803F33A8[0]);
 }
 
 extern f32 lbl_803F33B4[];
