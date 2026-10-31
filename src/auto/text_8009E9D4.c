@@ -191,9 +191,9 @@ s32 fn_800A437C(void) {
 void fn_800A4384(void *arg0) {
     extern f32 lbl_803CD9E0[];
     f32 v = lbl_803CD9E0[0];
-    M2C_FIELD(arg0, f32 *, 0x190) = v;
     M2C_FIELD(arg0, f32 *, 0x198) = v;
     M2C_FIELD(arg0, f32 *, 0x194) = v;
+    M2C_FIELD(arg0, f32 *, 0x190) = v;
 }
 
 void fn_800A439C(void) {
