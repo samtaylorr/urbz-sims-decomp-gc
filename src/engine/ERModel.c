@@ -213,13 +213,15 @@ s32 fn_8032BB20(u8 *self, s32 name, s32 idx) {
     extern void fn_8031EA2C(void *);
     extern u8 lbl_8045B82C[];
     void *res;
+    s32 *arr;
 
     res = fn_8033740C(lbl_8045B82C, name, 0, 0);
     if (res == 0) {
         return 0;
     }
     if (fn_8032BA68(self, res, idx) != 0) {
-        ((s32 *)(self + 0xA8))[idx * 2] = 1;
+        arr = (s32 *)(self + 0xA8);
+        arr[idx * 2] = 1;
         return (s32)res;
     }
     fn_8031EA2C(res);
@@ -392,6 +394,19 @@ s32 fn_8032C268(u8 *self) {
     for (i = 0; i < ListCount(self + 0x20); i++) {
         if (fn_803007AC(*(u8 **)(self + 0x20) + i * 0x18)) {
             return 1;
+        }
+    }
+    return 0;
+}
+
+s32 fn_8032C2E0(u8 *self, s32 arg1) {
+    extern s32 fn_803007AC(u8 *);
+    extern s32 fn_8030081C(u8 *, s32);
+    s32 i;
+
+    for (i = 0; i < ListCount(self + 0x20); i++) {
+        if (fn_803007AC(*(u8 **)(self + 0x20) + i * 0x18)) {
+            return fn_8030081C(*(u8 **)(self + 0x20) + i * 0x18, arg1);
         }
     }
     return 0;
