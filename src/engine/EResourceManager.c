@@ -37,6 +37,19 @@ static inline void ERMLock_Unlock(ERMLock *l) {
     (*(void (**)(void *))(vt + 0x1C))(l->obj + *(s16 *)(vt + 0x18));
 }
 
+s32 fn_80336474(char *self) {
+    ERMLock lock[1];
+    s32 ret;
+
+    ERMLock_Lock(lock, self);
+    ret = 1;
+    if (*(s32 *)(self + 0x64) == 0) {
+        ret = 0;
+    }
+    ERMLock_Unlock(lock);
+    return ret;
+}
+
 void fn_80336CBC(char *self) {
     void fn_8033789C(char *, s32);
     u32 i;
@@ -215,18 +228,21 @@ void fn_8033782C(char *self, char *res) {
 void fn_8033789C(char *self, s32 key) {
     void fn_80337AEC(char *, char *);
     s32 fn_80338598(char *, s32, char **);
-    ResLock lock;
+    struct {
+        char *obj;
+        u8 unk4[0];
+    } lock;
     char *res;
 
-    ResLock_Init(&lock, self);
     res = 0;
+    ERMLock_Lock((ERMLock *)&lock, self);
     fn_80338598(self + 0x40, key, &res);
     if (res == 0) {
-        ResLock_Release(&lock);
+        ERMLock_Unlock((ERMLock *)&lock);
         return;
     }
     fn_80337AEC(self, res);
-    ResLock_Release(&lock);
+    ERMLock_Unlock((ERMLock *)&lock);
 }
 
 void fn_80337950(char *arg0, s32 arg1) {
