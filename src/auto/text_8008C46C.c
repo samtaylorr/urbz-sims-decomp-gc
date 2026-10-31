@@ -1039,8 +1039,85 @@ void fn_8009827C(void *arg0) {
     fn_80098470(arg0);
 }
 
+void fn_800982B8(void *arg0) {
+    extern void fn_802EB484(void *, s32, f32, f32, f32);
+    extern f32 lbl_803CCBA4[];
+    extern f32 lbl_803CCBA8[];
+    extern f32 lbl_8049421C;
+    M2C_FIELD(arg0, u32 *, 0x4D4) &= ~0x2F;
+    M2C_FIELD(arg0, s32 *, 0x18) = 3;
+    M2C_FIELD(arg0, f32 *, 0x108) = lbl_803CCBA4[0];
+    if (M2C_FIELD(arg0, s32 *, 0x4F0) != 0) {
+        fn_802EB484((u8 *)M2C_FIELD(arg0, void **, 8) + 0x314, M2C_FIELD(arg0, s32 *, 0x4F0), lbl_803CCBA4[0], lbl_8049421C, lbl_803CCBA8[0]);
+        M2C_FIELD(arg0, s32 *, 0x4F0) = 0;
+    }
+}
+
+void fn_80098330(void *arg0) {
+    extern void fn_802EB484(void *, s32, f32, f32, f32);
+    extern f32 lbl_803CCBAC[];
+    extern f32 lbl_803CCBB0[];
+    extern f32 lbl_8049421C;
+    M2C_FIELD(arg0, u32 *, 0x4D4) = (M2C_FIELD(arg0, u32 *, 0x4D4) & ~0x2F) | 0x10;
+    M2C_FIELD(arg0, s32 *, 0x18) = 4;
+    M2C_FIELD(arg0, f32 *, 0x108) = lbl_803CCBAC[0];
+    if (M2C_FIELD(arg0, s32 *, 0x4F0) != 0) {
+        fn_802EB484((u8 *)M2C_FIELD(arg0, void **, 8) + 0x314, M2C_FIELD(arg0, s32 *, 0x4F0), lbl_803CCBAC[0], lbl_8049421C, lbl_803CCBB0[0]);
+        M2C_FIELD(arg0, s32 *, 0x4F0) = 0;
+    }
+}
+
 void fn_800983AC(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x18) = 5;
+}
+
+f32 fn_800983B8(void *arg0, s32 arg1) {
+    extern s32 fn_8003ADB0(void *);
+    extern f32 lbl_803CCBB4[];
+    extern f32 lbl_803CCBB8[];
+    extern f32 lbl_803CCBBC[];
+    if (fn_8003ADB0(M2C_FIELD(arg0, void **, 8)) != 0) {
+        if (arg1 == 1) {
+            return lbl_803CCBB4[0];
+        }
+        return lbl_803CCBB8[0];
+    }
+    if (arg1 == 1) {
+        return lbl_803CCBB4[0];
+    }
+    return lbl_803CCBBC[0];
+}
+
+f32 fn_80098420(void *arg0, void *arg1) {
+    extern f32 lbl_803CCBC0[];
+    f32 f = lbl_803CCBC0[0];
+    if (arg1 != 0) {
+        f = (f32)(M2C_FIELD(arg1, s32 *, 0x20) - 1) / M2C_FIELD(arg1, f32 *, 0x6C);
+    }
+    return f;
+}
+
+s32 fn_80098A40(f32 arg0) {
+    extern f32 lbl_803CCC0C[];
+    extern f32 lbl_803CCC10[];
+    extern f32 lbl_803CCC14[];
+    s32 n = (s32)(arg0 / lbl_803CCC0C[0]);
+    if (n != 4 && n != -4 && arg0 != lbl_803CCC10[0]) {
+        s32 m = (s32)(arg0 / lbl_803CCC14[0]);
+        if (m != 0) {
+            if (m > 0) {
+                n++;
+            } else {
+                n--;
+            }
+        }
+        if (arg0 < lbl_803CCC10[0]) {
+            n++;
+        } else {
+            n--;
+        }
+    }
+    return n;
 }
 
 s32 fn_8009A418(void *arg0) {
