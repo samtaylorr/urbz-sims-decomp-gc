@@ -163,6 +163,16 @@ void fn_80279D90(s32 arg0, s32 arg1) {
     }
 }
 
+void fn_80279DF0(s32 arg0, s32 arg1, s32 arg2) {
+    extern s32 lbl_804960FC;
+    extern s32 lbl_804433B0[];
+    extern s32 lbl_804960E8;
+    extern void fn_8028CC54(s32, s32, s32, s32);
+    if (lbl_804960FC != 0 && lbl_804433B0[0] == 0 && lbl_804960E8 != 0) {
+        fn_8028CC54(lbl_804960E8, arg0, arg1, arg2);
+    }
+}
+
 void fn_80279E4C(s32 *arg0) {
     extern s32 lbl_804960FC;
     extern s32 lbl_804433B0[];
