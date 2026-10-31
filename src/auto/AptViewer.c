@@ -144,7 +144,6 @@ void fn_8000C570(void) {
 }
 
 extern char lbl_803C19EC[];
-void fn_8000AA2C();
 extern f32 lbl_803C19FC[];
 extern f32 lbl_804956AC;
 extern f32 lbl_804956B0;
