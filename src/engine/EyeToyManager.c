@@ -242,6 +242,11 @@ void fn_80339954(s32 arg0, s32 arg1) {
     M2C_FIELD(((arg0 * 0x24) + lbl_80494F8C), s32 *, 4) = arg1;
 }
 
+s32 fn_80339C10(s32 i) {
+    extern u32 lbl_803FD32C[];
+    return lbl_803FD32C[i] & 1;
+}
+
 s32 fn_80339C58(s32 i) {
     extern u32 lbl_803FD32C[];
     return (lbl_803FD32C[i] >> 1) & 1;
