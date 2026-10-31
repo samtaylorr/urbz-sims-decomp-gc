@@ -112,9 +112,9 @@ void fn_8036EFA4(void *arg0, void *arg1) {
     s32 a = M2C_FIELD(arg0, s32 *, 0) - 1;
     s32 b = M2C_FIELD(arg0, s32 *, 4) - 1;
     f32 z = lbl_803F53E0[0];
-    M2C_FIELD(arg1, f32 *, 4) = z;
-    M2C_FIELD(arg1, f32 *, 8) = a;
     M2C_FIELD(arg1, f32 *, 0) = z;
+    M2C_FIELD(arg1, f32 *, 8) = a;
+    M2C_FIELD(arg1, f32 *, 4) = z;
     M2C_FIELD(arg1, f32 *, 0xC) = b;
 }
 
