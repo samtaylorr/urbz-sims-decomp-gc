@@ -20,6 +20,12 @@ typedef struct EyeToyRGB {
     u8 b;
 } EyeToyRGB;
 
+typedef struct EyeToyEntry {
+    s32 id;
+    s32 unk4;
+    s32 unk8[7];
+} EyeToyEntry;
+
 static inline void *EyeToyAlloc(s32 count) {
     void *heap;
     void *p;
