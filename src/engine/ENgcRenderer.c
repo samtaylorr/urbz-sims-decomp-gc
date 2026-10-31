@@ -243,11 +243,58 @@ void fn_8035DE78(u8 *arg0) {
     *(s32 *)(arg0 + 0x24) = 0;
 }
 
+void fn_8035EEC4(s32 arg0);
+void *fn_8035DF18(void *arg0) {
+    extern ENgcRendererSlot lbl_80473F7C[];
+    extern s32 lbl_804962D8;
+    s32 fn_80381218(s32, void (*)(s32), s32);
+    void fn_80384ACC(s32, s32, s32, s32, s32, s32, s32, s32);
+    void fn_80385E84(s32);
+    ENgcRendererSlot *e;
+    ENgcRendererSlot *end;
+
+    e = lbl_80473F7C;
+    end = &lbl_80473F7C[0x3D];
+    do {
+        e->unk24 = 0;
+        e->unk0 = fn_80381218(0xF, fn_8035EEC4, 0);
+        fn_80384ACC(e->unk0, 0, 0, -0x388, -0x388, 0x40, 0x7F, 0);
+        fn_80385E84(e->unk0);
+        e->unk34 = 0;
+        e->unk38 = 0;
+        e++;
+    } while (e <= end);
+    lbl_804962D8 = 0;
+    return arg0;
+}
+
 extern void fn_802D20E8(void *);
 void fn_8035DFB8(void *self, s32 flags) {
     if (flags & 1) {
         fn_802D20E8(self);
     }
+}
+
+void fn_8035DFE0(void) {
+    extern ENgcRendererSlot lbl_80473F7C[];
+    void fn_80383AE8(s32, s32);
+    void fn_80385E84(s32);
+    ENgcRendererSlot *e;
+    ENgcRendererSlot *end;
+
+    fn_8035EE7C();
+    e = lbl_80473F7C;
+    end = &lbl_80473F7C[0x3D];
+    do {
+        if (e->unk24 != 0 && e->unk0 != 0 && !e->unk40_2 && e->unk40_0 && !e->unk40_1
+            && (*(u32 *)((u8 *)e->unk0 + 0x1B2) >> 1) < e->unk28) {
+            fn_80383AE8(e->unk0, 7);
+            e->unk40_0 = 0;
+            fn_80385E84(e->unk0);
+        }
+        e++;
+    } while (e <= end);
+    fn_8035EE3C();
 }
 
 void fn_8035EE3C(void);
