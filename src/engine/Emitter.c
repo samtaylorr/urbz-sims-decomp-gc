@@ -16,6 +16,35 @@ s32 fn_8030AA04(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s3
 void fn_8030AB88(void *arg0, s32 arg1);
 void fn_8030B800(void);
 void fn_8030B280(void);
+s32 fn_8030AA04(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7) {
+    typedef struct { f32 x, y, z; } EmVec3;
+    extern s32 fn_8030F650(void *);
+    extern f32 lbl_803F1F5C[];
+    extern f32 lbl_803F1F60[];
+    EmVec3 v;
+    s32 r;
+
+    r = fn_8030F650((u8 *)arg0 + 0x8C);
+    v.x = v.y = v.z = lbl_803F1F60[0];
+    *(EmVec3 *)((u8 *)arg0 + 0x90) = v;
+    M2C_FIELD(arg0, f32 *, 0x68) = lbl_803F1F5C[0];
+    M2C_FIELD(arg0, f32 *, 0x6C) = lbl_803F1F5C[0];
+    M2C_FIELD(arg0, s32 *, 0x70) = 0;
+    M2C_FIELD(arg0, s32 *, 0x74) = 0;
+    M2C_FIELD(arg0, s32 *, 0x78) = 0;
+    if (r < 0) {
+        return -1;
+    }
+    return 0;
+}
+
+void fn_8030AA98(void *arg0) {
+    extern void fn_8030F818(void *);
+    if (M2C_FIELD(arg0, s32 *, 0x8C) != 0) {
+        fn_8030F818((u8 *)arg0 + 0x8C);
+    }
+}
+
 void fn_8030AB88(void *arg0, s32 arg1) {
     f32 *dst = M2C_FIELD(arg0, f32 **, 0x8C);
     f32 *p;
