@@ -141,6 +141,18 @@ s32 fn_8031505C(void *self, s32 idx, f32 a) {
     return 0;
 }
 
+s32 fn_803150B8(void *self, s32 idx, f32 a, f32 b) {
+    extern void *lbl_80494FCC;
+    void *fn_803338D0(void *, s32);
+    void *obj = fn_803338D0(lbl_80494FCC, idx);
+    void *vt;
+    if (obj != NULL) {
+        vt = M2C_FIELD(obj, void **, 0x204);
+        return M2C_FIELD(vt, s32 (**)(void *, f32, f32), 0x44)((s8 *)obj + M2C_FIELD(vt, s16 *, 0x40), a, b);
+    }
+    return 0;
+}
+
 s32 fn_80315190(void *self, s32 idx, f32 a, f32 b, f32 c, f32 d) {
     extern void *lbl_80494FCC;
     void *fn_803338D0(void *, s32);
