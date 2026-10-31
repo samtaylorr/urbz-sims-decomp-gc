@@ -398,21 +398,22 @@ s32 fn_80043AA4(s32 arg0, s32 arg1) {
 }
 
 void fn_80043AC4(void) {
+    typedef struct { s32 unk0; void *unk4; u8 pad[0x1C]; } EyeToySlot;
     void fn_803398E8(s32, void *);
     void fn_80042304(void);
-    extern u8 lbl_8041F660[];
+    extern EyeToySlot lbl_8041F660[];
     extern s32 lbl_804940B4;
     s32 i;
-    u8 *p;
+    EyeToySlot *p;
 
-    for (i = 0, p = lbl_8041F660; i <= 4; i++, p += 0x24) {
+    for (i = 0, p = lbl_8041F660; i <= 4; i++, p++) {
         fn_803398E8(i, p);
     }
     for (i = 4; i >= 0; i--) {
-        *(void **)(lbl_8041F660 + 4 + i * 0x24) = 0;
+        lbl_8041F660[i].unk4 = 0;
     }
     if (lbl_804940B4 != -1) {
-        *(void **)(lbl_8041F660 + 4 + lbl_804940B4 * 0x24) = (void *)fn_80042304;
+        lbl_8041F660[lbl_804940B4].unk4 = (void *)fn_80042304;
     }
 }
 
