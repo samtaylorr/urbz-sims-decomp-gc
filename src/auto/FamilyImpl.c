@@ -28,6 +28,37 @@ void fn_80106008(s32 *arg0) {
     fn_8011AA6C(*arg0);
 }
 
+s32 fn_801099F0(void **self, s32 arg1, s32 arg2, s32 arg3) {
+    s32 fn_8011B268(void *, s32, s32, s32);
+    if (arg3 == 0) {
+        return fn_8011B268(*self, arg1, arg2, 0);
+    }
+    return 0;
+}
+
+s16 fn_80109A28(void *self) {
+    void *fn_8016CC44(void *);
+    char *obj;
+    char *vt;
+
+    if (M2C_FIELD(self, void **, 8) == NULL) {
+        return 0;
+    }
+    obj = M2C_FIELD(M2C_FIELD(self, void **, 8), char **, 4);
+    vt = M2C_FIELD(obj, char **, 4);
+    if ((*(s32 (**)(void *))(vt + 0x354))(obj + *(s16 *)(vt + 0x350)) == 0) {
+        char *obj2 = M2C_FIELD(M2C_FIELD(self, void **, 8), char **, 4);
+        char *vt2 = M2C_FIELD(obj2, char **, 4);
+        char *r = (*(char *(**)(void *))(vt2 + 0x2D4))(obj2 + *(s16 *)(vt2 + 0x2D0));
+        return M2C_FIELD(r, s16 *, 0x24);
+    } else {
+        char *obj3 = M2C_FIELD(M2C_FIELD(self, void **, 8), char **, 4);
+        char *vt3 = M2C_FIELD(obj3, char **, 4);
+        char *r = fn_8016CC44((*(void *(**)(void *))(vt3 + 0x32C))(obj3 + *(s16 *)(vt3 + 0x328)));
+        return M2C_FIELD(M2C_FIELD(r, char **, 0x38), s16 *, 0x24);
+    }
+}
+
 s32 fn_8010A3E8(void) {
     return 0;
 }
@@ -121,6 +152,12 @@ s32 fn_8010B4E8(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x80);
 }
 
+void *fn_8010B4F0(void **arg0) {
+    void *fn_8010B59C(void *, void *);
+    void *fn_802D1FC8(s32);
+    return fn_8010B59C(fn_802D1FC8(0x38), *arg0);
+}
+
 void fn_8010B528(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
@@ -170,14 +207,13 @@ s32 fn_8010B930(void *self, s32 id) {
 
 s32 *fn_8010B96C(void *self, s32 idx) {
     s32 *begin;
-    if (idx < 0) {
-        return NULL;
+    if (idx >= 0) {
+        begin = M2C_FIELD(self, s32 **, 0x24);
+        if (idx < M2C_FIELD(self, s32 **, 0x28) - begin) {
+            return &begin[idx];
+        }
     }
-    begin = M2C_FIELD(self, s32 **, 0x24);
-    if (idx >= M2C_FIELD(self, s32 **, 0x28) - begin) {
-        return NULL;
-    }
-    return &begin[idx];
+    return NULL;
 }
 
 void fn_8010B9A0(s32 arg0, s32 arg1) {
