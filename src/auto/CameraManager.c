@@ -68,10 +68,10 @@ void fn_80014E0C(void) {
 s32 fn_80014EE0(void) {
     void *fn_802D1FC8(s32);
     extern s32 lbl_80493F2C;
-    s32 t;
+    s32 *p;
     if ((s32)lbl_80493F2C == 0) {
-        t = (s32)fn_80014DCC(fn_802D1FC8(8));
-        lbl_80493F2C = t;
+        p = fn_80014DCC(fn_802D1FC8(8));
+        lbl_80493F2C = (s32)p;
         fn_80014E08();
     }
     return lbl_80493F2C;
@@ -116,12 +116,8 @@ void fn_800150A8(void *arg0) {
 
 void fn_800150CC(void *arg0) {
     if (M2C_FIELD(arg0, s32 *, 0xC) == 0) {
-        void *obj;
-        void *vt;
         M2C_FIELD(arg0, s32 *, 0xC) = 1;
-        obj = M2C_FIELD(arg0, void **, 4);
-        vt = M2C_FIELD(obj, void **, 0x44);
-        M2C_FIELD(vt, void (**)(void *), 0x1C)((char *)obj + M2C_FIELD(vt, s16 *, 0x18));
+        CameraManager_CallStart(M2C_FIELD(arg0, void **, 4));
     }
 }
 
@@ -293,10 +289,10 @@ void fn_80016A28(void *arg0) {
     extern u8 lbl_803C267C[];
     if ((s32) M2C_FIELD(arg0, s32 *, 0xF30) != 0) {
         fn_8000AA2C(M2C_FIELD(arg0, s32 *, 0xED4), lbl_803C267C, 0, 0, 0);
-        M2C_FIELD(arg0, volatile s32 *, 0xF30) = 0;
-        M2C_FIELD(arg0, s32 *, 0x560) = 0;
-        M2C_FIELD(arg0, s32 *, 0xF20) = 1;
+        M2C_FIELD(arg0, s32 *, 0xF30) = 0;
     }
+    M2C_FIELD(arg0, s32 *, 0x560) = 0;
+    M2C_FIELD(arg0, s32 *, 0xF20) = 1;
 }
 
 void fn_80016C14(void *arg0) {
