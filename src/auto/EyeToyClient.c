@@ -154,6 +154,54 @@ s32 fn_8004200C(void) {
     return -1;
 }
 
+void fn_8004206C(s16 arg0, s16 arg1, u8 arg2) {
+    typedef struct {
+        s32 unk0;
+        s32 unk4;
+        s32 unk8;
+        s32 unkC;
+        s16 unk10;
+        s16 unk12;
+        s16 unk14;
+        s16 unk16;
+        u8 unk18;
+        u8 unk19;
+        u8 unk1A;
+        u8 unk1B;
+        s32 unk1C;
+    } EyeToyMsg;
+    extern void **lbl_80495050;
+    EyeToyMsg msg;
+    EyeToyMsg *m = &msg;
+    char *vt;
+
+    m->unk0 = 0;
+    m->unk1A = 0x20;
+    m->unk19 = 0;
+    m->unk1B = 0;
+    m->unk18 = 1;
+    m->unk10 = 0x40;
+    m->unk1C = 0;
+    m->unk4 = 0;
+    m->unk8 = 0;
+    m->unk12 = 0x40;
+    m->unk14 = 0;
+    m->unk16 = 0;
+    msg.unk10 = arg0;
+    msg.unk12 = arg1;
+    msg.unk1A = arg2;
+    vt = (char *)*lbl_80495050;
+    (*(void (**)(void *, EyeToyMsg *))(vt + 0xA4))((char *)lbl_80495050 + *(s16 *)(vt + 0xA0), m);
+}
+
+void fn_800420F8(void *arg0) {
+    extern void **lbl_80495050;
+    if (arg0 != NULL) {
+        char *vt = (char *)*lbl_80495050;
+        (*(void (**)(void *, void *))(vt + 0xAC))((char *)lbl_80495050 + *(s16 *)(vt + 0xA8), arg0);
+    }
+}
+
 void fn_80042A60(void (*cb)(void)) {
     lbl_804940B0 = cb;
 }
