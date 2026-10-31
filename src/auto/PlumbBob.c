@@ -270,6 +270,33 @@ void fn_80068244(void *arg0, s32 arg1) {
     }
 }
 
+void fn_800682EC(void *arg0, s32 arg1) {
+    extern struct { char pad[0xEC]; s32 *unkEC; } lbl_8041F94C;
+    extern void fn_8004CE08(void *);
+    extern void fn_800A3F74(void *);
+    extern void fn_8000F6D0(void *);
+    extern void fn_8006410C(s32);
+    struct { char pad0[0x1E4]; void *arr2[6]; void *arr[1]; } *self = arg0;
+    s32 *p;
+    s32 i;
+
+    ((void (*)(void *, s32))fn_8004CE08)(&lbl_8041F94C, arg1);
+    fn_800A3F74(self->arr[arg1]);
+    fn_8000F6D0(self->arr2[arg1]);
+    fn_8006410C(lbl_8041F94C.unkEC[1]);
+    if (arg1 == 1) {
+        p = (s32 *)((char *)arg0 + 0x2914);
+        for (i = 0; i < 6; i++) {
+            *p-- = 1000;
+        }
+    } else {
+        p = (s32 *)((char *)arg0 + 0x28FC);
+        for (i = 0; i < 6; i++) {
+            *p-- = 1000;
+        }
+    }
+}
+
 void fn_80068394(void *arg0, s32 arg1) {
     extern struct { char pad[0xEC]; s32 *unkEC; } lbl_8041F94C;
     extern void fn_8004D1BC(void *);
