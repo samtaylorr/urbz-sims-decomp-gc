@@ -51,6 +51,14 @@ void fn_8000A794(void) {
 
 }
 
+void fn_8000A798(void) {
+    void fn_800C2D5C(void);
+    void fn_802784F0(s32);
+    fn_800C2D5C();
+    fn_8000A794();
+    fn_802784F0(0);
+}
+
 void *fn_8000A8D8(void *);
 extern void *lbl_804956BC;
 void fn_8000A7C4(void) {
@@ -73,20 +81,18 @@ void fn_8000A7C4(void) {
 }
 
 void fn_8000A9B4(u8 *self, s32 flags) {
-    M2C_UNK fn_802CAA00(void *, s32);
+    M2C_UNK fn_802CAA00();
     M2C_UNK fn_80309AE0(void *, s32);
     void *fn_802D0AB8(void);
     M2C_UNK fn_802D1A00(void *, void *);
     void fn_802D20E8(void *);
-    void *sub;
     fn_8000B198();
     fn_8000A798();
     if (*(void **)(self + 0x374) != NULL) {
         fn_802D20E8(*(void **)(self + 0x374));
         *(void **)(self + 0x374) = NULL;
     }
-    sub = self + 0x358;
-    fn_802CAA00(sub, 2);
+    fn_802CAA00(self + 0x358, 2);
     fn_80309AE0(self, 0);
     if (flags & 1) {
         fn_802D1A00(fn_802D0AB8(), self);
@@ -189,37 +195,31 @@ s32 fn_8000BF20(u8 *self, u32 index, s32 arg) {
     s32 fn_8000C170(void *self, s32 arg);
     s32 n;
     s32 h;
-    s32 *counts;
-    s32 (*tbl)[2];
 
-    if (*(s32 *)(self + 0x3A8) == 0) {
-        return 0;
+    h = 0;
+    if (*(s32 *)(self + 0x3A8) != 0) {
+        h = 0;
+        if (index > 1) {
+            index = 0;
+        }
+        n = ((s32 *)(self + 0x450))[index];
+        if (n <= 9) {
+            if (((s32 (*)[10][2])(self + 0x3B0))[index][n][0] != 0) {
+                n++;
+                ((s32 *)(self + 0x450))[index] = n;
+            }
+            h = fn_803114D0(fn_8000C170(self, index), 0, arg, 100);
+            ((s32 (*)[10][2])(self + 0x3B0))[index][n][0] = h;
+            ((s32 (*)[10][2])(self + 0x3B0))[index][n][1] = arg;
+        }
     }
-    if (index > 1) {
-        index = 0;
-    }
-    counts = (s32 *)(self + 0x450);
-    n = counts[index];
-    if (n > 9) {
-        return 0;
-    }
-    tbl = ((s32 (*)[10][2])(self + 0x3B0))[index];
-    if (tbl[n][0] != 0) {
-        n++;
-        counts[index] = n;
-    }
-    h = fn_803114D0(fn_8000C170(self, index), 0, arg, 100);
-    tbl[n][0] = h;
-    tbl[n][1] = arg;
     return h;
 }
 
 void fn_8000BFD0(u8 *self, u32 index) {
     void fn_803115C0(s32, s32);
     s32 fn_8000C170(void *self, s32 arg);
-    s32 n;
-    s32 *counts;
-    s32 (*tbl)[2];
+    u32 n;
 
     if (*(s32 *)(self + 0x3A8) == 0) {
         return;
@@ -227,21 +227,18 @@ void fn_8000BFD0(u8 *self, u32 index) {
     if (index > 1) {
         index = 0;
     }
-    counts = (s32 *)(self + 0x450);
-    n = counts[index];
-    if ((u32)n > 9) {
+    n = ((u32 *)(self + 0x450))[index];
+    if (n > 9) {
         return;
     }
-    tbl = ((s32 (*)[10][2])(self + 0x3B0))[index];
-    if (tbl[n][0] == 0) {
+    if (((s32 (*)[10][2])(self + 0x3B0))[index][n][0] == 0) {
         return;
     }
-    fn_803115C0(fn_8000C170(self, index), tbl[n][0]);
-    tbl[n][0] = 0;
-    tbl[n][1] = 0;
-    n--;
-    if (n >= 0) {
-        counts[index] = n;
+    fn_803115C0(fn_8000C170(self, index), ((s32 (*)[10][2])(self + 0x3B0))[index][n][0]);
+    ((s32 (*)[10][2])(self + 0x3B0))[index][n][0] = 0;
+    ((s32 (*)[10][2])(self + 0x3B0))[index][n][1] = 0;
+    if ((s32)--n >= 0) {
+        ((u32 *)(self + 0x450))[index] = n;
     }
 }
 
@@ -277,13 +274,19 @@ void fn_8000C0D0(u8 *self, u32 index, s32 a, s32 b) {
 }
 
 s32 fn_8000C12C(u8 *self, u32 index) {
+    u8 *tbl;
+    s32 *cur;
+    s32 off;
     if (*(s32 *)(self + 0x3A8) == 0) {
         return -1;
     }
     if (index > 1) {
         index = 0;
     }
-    return *(s32 *)((self + 0x3B0) + (index * 0x50 + *(s32 *)((self + 0x450) + index * 4) * 8));
+    cur = (s32 *)(self + 0x450);
+    off = index * 0x50;
+    tbl = self + 0x3B0;
+    return *(s32 *)(tbl + (*(s32 *)((u8 *)cur + index * 4) * 8 + off));
 }
 
 extern void *lbl_80494FCC;
