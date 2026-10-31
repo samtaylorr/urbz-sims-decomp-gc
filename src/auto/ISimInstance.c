@@ -40,6 +40,10 @@ void *fn_80063ED0(void *arg0, s32 arg1) {
     return arg0;
 }
 
+s32 fn_80063F14(void *it) {
+    return it != NULL;
+}
+
 void fn_800645CC(void *arg0, void *arg1) {
     M2C_UNK fn_802CD218(void *, s32);
     void *node;
