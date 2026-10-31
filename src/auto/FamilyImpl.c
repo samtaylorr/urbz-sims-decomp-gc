@@ -18,13 +18,6 @@ typedef struct {
     s32 *end;
 } FamilyVec;
 
-static inline u8 *Family_GetFirst(u8 *o) {
-    if (*(u8 **)(o + 0xC) == NULL) {
-        return o;
-    }
-    return o;
-}
-
 s32 *fn_8010C464(s32 (*first)[2], s32 (*last)[2], s32 key);
 s32 fn_8010C3F8(void *arg0, void *arg1, s32 arg2);
 void fn_801B3908(void *, s32);
@@ -42,13 +35,11 @@ void fn_80106008(s32 *arg0) {
 
 void fn_80107B70(u8 **self) {
     void *fn_8015125C(void *, s32);
-    u8 *obj;
     u8 *n;
     void *p;
 
     if (self[2] != NULL) {
-        obj = *self;
-        n = *(u8 **)(obj + 0xC) != NULL ? *self : obj;
+        n = Family_GetFirst(*self);
         p = n != NULL ? fn_8015125C(***(void ****)(n + 4), 9) : NULL;
         while (p != NULL) {
             ((u8 **)p)[2] = NULL;
