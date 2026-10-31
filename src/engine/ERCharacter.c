@@ -313,6 +313,19 @@ void fn_80318C08(void) {
     fn_80318A70(lbl_803F2840, fn_802D0FA0());
 }
 
+void fn_80318C54(void *arg0) {
+    s32 fn_802D12C4(void *);
+    s32 fn_802DCFE0(void *);
+    s32 fn_802D118C(void *);
+    s32 fn_802D1194(void *);
+    void fn_80318A70(const char *fmt, ...);
+    extern char lbl_803F2860[];
+    s32 a = fn_802D12C4(arg0);
+    s32 b = fn_802DCFE0(arg0);
+    s32 c = fn_802D118C(arg0);
+    fn_80318A70(lbl_803F2860, a, b, c, fn_802D1194(arg0));
+}
+
 void fn_80319494(void) {
     extern char *lbl_80496220;
     extern char *lbl_80495050;
