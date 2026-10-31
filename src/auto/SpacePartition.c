@@ -45,6 +45,16 @@ static inline SPCell *SPart_Cell(SPart *sp, u32 n) {
     return sp->cellsBegin + n;
 }
 
+extern void fn_80192EEC(SPart *, SPNode *, SPNode *, SPRect *);
+SPCell *fn_80192DC8(SPCell *self, s32 y0, s32 x0, s32 y1, s32 x1, s32 arg5) {
+    self->rect.y0 = y0;
+    self->rect.y1 = y1;
+    self->rect.x0 = x0;
+    self->rect.x1 = x1;
+    self->unk10 = arg5;
+    return self;
+}
+
 s32 fn_801930C4(SPart *arg0, SPRect *r) {
     SPCell *c;
 
