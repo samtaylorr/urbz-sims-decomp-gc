@@ -26,6 +26,10 @@ static inline s32 Anim_CurFlags(void *p) {
     return 0;
 }
 
+static inline s32 Obj_CurAnimFlags(void *obj) {
+    return Anim_CurFlags((u8 *)obj + 0x314);
+}
+
 void *fn_8008C46C(s32 arg0, u32 idx) {
     extern char *lbl_804966A4[2];
     extern char lbl_8041F94C[];
@@ -1148,13 +1152,13 @@ f32 fn_80098AD0(void *arg0, f32 x) {
         x += lbl_803CCC18[0];
     }
     if (x >= lbl_803CCC24[0]) {
-        if (x < lbl_803CCC28[0]) {
-            x = lbl_803CCC24[0];
+        if (x >= lbl_803CCC28[0]) {
+            return x;
         }
-    } else if (-x < lbl_803CCC28[0]) {
-        x = lbl_803CCC24[0];
+    } else if (-x >= lbl_803CCC28[0]) {
+        return x;
     }
-    return x;
+    return lbl_803CCC24[0];
 }
 
 void fn_8009910C(void *arg0, s32 arg1) {
@@ -1173,12 +1177,9 @@ s32 fn_80099180(void *arg0) {
     extern s32 lbl_804941F0;
     s32 fn_8003ADB0(void *);
     s32 var_r30;
-    s32 temp_r9;
-    s32 var_r3;
     void *temp_r3;
     void *temp_r9_2;
     void *temp_r11;
-    void *temp_r10;
 
     var_r30 = 0;
     if (lbl_804941F0 != 0) {
@@ -1187,14 +1188,7 @@ s32 fn_80099180(void *arg0) {
         if (M2C_FIELD(temp_r9_2, s32 (**)(void *), 0x164)(temp_r3 + M2C_FIELD(temp_r9_2, s16 *, 0x160)) == 0) {
             if (M2C_FIELD(arg0, u8 *, 0x495) != 1) {
                 temp_r11 = M2C_FIELD(arg0, void **, 8);
-                temp_r10 = (u8 *)temp_r11 + 0x314;
-                temp_r9 = M2C_FIELD(temp_r10, s32 *, 4);
-                if (temp_r9 != -1) {
-                    var_r3 = M2C_FIELD(((temp_r9 * 0xB0) + M2C_FIELD(temp_r10, s32 *, 0x40)), s32 *, 0x30);
-                } else {
-                    var_r3 = 0;
-                }
-                if (!(var_r3 & 0x10)) {
+                if (!(Anim_CurFlags((u8 *)temp_r11 + 0x314) & 0x10)) {
                     if (fn_8003ADB0(temp_r11) == 1) {
                         var_r30 = 1;
                     }
