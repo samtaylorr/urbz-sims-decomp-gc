@@ -1,6 +1,10 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+typedef struct {
+    f32 x, y, z, w;
+} Quat4;
+
 static inline s32 List_Valid(void *n) {
     return n != NULL;
 }
