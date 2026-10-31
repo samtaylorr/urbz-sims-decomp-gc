@@ -127,6 +127,24 @@ s32 fn_80278974(void) {
     return 1;
 }
 
+void fn_80278BA4(void) {
+    extern s32 lbl_80494B40;
+    extern s32 lbl_804960E4;
+    extern s32 lbl_80443310[];
+    extern const char lbl_803EC338[];
+    extern s32 fn_80245BB4(char *, const char *, ...);
+    char buf[16];
+    s32 msg[2];
+
+    if (lbl_80494B40 != 0) {
+        fn_80245BB4(buf, lbl_803EC338, lbl_804960E4);
+        ((void (*)(char *))lbl_80443310[7])(buf);
+        msg[0] = lbl_804960E4;
+        msg[1] = 3;
+        ((void (*)(s32 *, s32))lbl_80443310[6])(msg, 5);
+    }
+}
+
 void fn_80279D00(void) {
     extern u8 *lbl_804960E8;
     extern s32 lbl_8049613C;
