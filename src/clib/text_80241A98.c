@@ -52,6 +52,18 @@ void fn_802423A8(void) {
     fn_802422FC();
 }
 
+s32 fn_8024246C(s32 arg0) {
+    if (arg0 > 0x5705FFFF) {
+        return 0x52100;
+    }
+    return 0;
+}
+
+void fn_8024252C(void) {
+    extern void fn_80242540(s32, s32, s32, s32) __attribute__((noreturn));
+    fn_80242540(0, 0, 0, 0);
+}
+
 void fn_802427B4(s32 arg0) {
     extern s32 lbl_803F73C0[];
     extern s32 lbl_803F710C[];
