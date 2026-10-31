@@ -354,9 +354,9 @@ void fn_802EE654(char *self) {
     extern const f32 lbl_803F0C14[];
     void fn_802C8814(void *, f32 *);
     void fn_802C9368(void *, f32 *);
-    char *q = self + 0x40;
     f32 v[3];
     f32 *p = v;
+    char *q = self + 0x40;
     v[0] = lbl_803F0C0C[0];
     p[2] = lbl_803F0C10[0];
     p[1] = lbl_803F0C0C[0];
@@ -372,8 +372,11 @@ void fn_802EE6D0(void *self) {
     s32 fn_80337430(void *, char *, s32, s32);
     extern u8 lbl_8045B634[];
     extern char lbl_803F0C18[];
-    if (*(s32 *)((u8 *)self + 0x90) == 0 && fn_80337D90(lbl_8045B634, lbl_803F0C18) != 0) {
-        *(s32 *)((u8 *)self + 0x90) = fn_80337430(lbl_8045B634, lbl_803F0C18, 0, 0);
+    if (*(s32 *)((u8 *)self + 0x90) == 0) {
+        char *name = lbl_803F0C18;
+        if (fn_80337D90(lbl_8045B634, name) != 0) {
+            *(s32 *)((u8 *)self + 0x90) = fn_80337430(lbl_8045B634, name, 0, 0);
+        }
     }
 }
 
