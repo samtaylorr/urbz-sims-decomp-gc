@@ -182,17 +182,13 @@ void fn_8031CFE8(char *self) {
 void fn_8031D00C(char *self) {
     extern u8 lbl_803F2DF0[];
     extern void fn_8031DFE0(void *);
-    extern void fn_803665B8(void *, s32);
-    extern void fn_802D8CA4(void *, s32, s32, s32);
     extern void fn_802D8EF8(void *);
     char *sub = self + 8;
-    char *q;
 
     fn_8031DFE0(self);
-    q = self + 0x37C;
-    fn_803665B8(q, 0x5DC);
+    ERL_QueueInit(self + 0x37C, 0x5DC);
     M2C_FIELD(sub, void **, 0x32C) = lbl_803F2DF0;
-    fn_802D8CA4(sub, 0x11, 0x6000, 0);
+    ERL_ThreadCreate(sub, 0x11, 0x6000, 0);
     fn_802D8EF8(sub);
     M2C_FIELD(self, s32 *, 0x3F0) = 0;
     M2C_FIELD(self, s32 *, 0x350) = 1;
@@ -434,7 +430,7 @@ void fn_8031DF64(char *self) {
     char *res;
 
     p = (void **)(self + 0x354);
-    for (i = 3; i != 0; i--) {
+    for (i = 0; i < 3; i++) {
         if (*p != NULL) {
             fn_802D1A00(fn_802D0C44(), *p);
             *p = NULL;
