@@ -367,8 +367,8 @@ void fn_802EE654(char *self) {
 }
 
 s32 fn_802EEB54(void *arg0) {
-    M2C_UNK fn_802EE6D0();
-    fn_802EE6D0();
+    void fn_802EE6D0(void *);
+    fn_802EE6D0(arg0);
     return M2C_FIELD(arg0, s32 *, 0x90);
 }
 
@@ -378,10 +378,11 @@ void fn_802EEB84(void *self, s32 arg1, s32 *v) {
     s32 y = v[1];
     *(s32 *)((u8 *)self + 0x9C) = x;
     *(s32 *)((u8 *)self + 0xA0) = y;
-    if (arg1 != 0) {
-        fn_802EE6D0(self);
-        *(s32 *)((u8 *)self + 0x10) = arg1;
+    if (arg1 == 0) {
+        return;
     }
+    fn_802EE6D0(self);
+    *(s32 *)((u8 *)self + 0x10) = arg1;
 }
 
 void fn_802EEBCC(void *self, Vec3f *a, Vec3f *b, s32 c) {
