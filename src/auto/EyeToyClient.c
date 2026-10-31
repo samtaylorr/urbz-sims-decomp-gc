@@ -230,20 +230,14 @@ void fn_80042138(s32 arg0, s32 arg1) {
     extern f32 lbl_803C60E8[];
     EyeToyReq req;
     EyeToyReq *r = &req;
-    EyeToyVec *d;
-    EyeToyVec v;
     char *vt;
 
     r->unk4 = 0x40;
     req.unk0 = 0x40;
     r->unk8 = 3;
-    d = &r->unkC;
     r->unk18 = 1;
     r->unk1C = 1;
-    v.x = lbl_803C60E8[0];
-    v.y = lbl_803C60E8[0];
-    v.z = lbl_803C60E8[0];
-    *d = v;
+    r->unkC = (EyeToyVec){lbl_803C60E8[0], lbl_803C60E8[0], lbl_803C60E8[0]};
     req.unk0 = arg0;
     req.unk4 = arg1;
     req.unk18 = 0;
@@ -428,11 +422,14 @@ s32 fn_800436B8(s32 arg0) {
     extern s32 lbl_803C6144[];
     s32 mask = fn_80043554(arg0);
     s32 count = 0;
-    s32 i;
+    s32 i = 0;
     s32 result;
 
-    for (i = 0; i <= 4 && ((mask >> i) & 1); i++) {
-        count++;
+    if (mask & 1) {
+        count = 1;
+        while (++i <= 4 && ((mask >> i) & 1)) {
+            count++;
+        }
     }
     result = 0;
     for (i = 0; i < count; i++) {
@@ -625,7 +622,7 @@ void fn_80043BB4(void) {
 }
 
 void fn_80043C14(void) {
-    M2C_UNK fn_80043BB8(M2C_UNK, M2C_UNK);
+    void fn_80043BB8(s32, s32);
     fn_80043BB8(1, 0xFFFF);
 }
 
