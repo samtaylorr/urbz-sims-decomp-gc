@@ -186,17 +186,17 @@ void fn_8004206C(s16 arg0, s16 arg1, u8 arg2) {
     char *vt;
 
     m->unk0 = 0;
-    m->unk4 = 0;
-    m->unk8 = 0;
-    m->unk1C = 0;
-    m->unk10 = 0x40;
-    m->unk12 = 0x40;
-    m->unk14 = 0;
-    m->unk16 = 0;
     m->unk18 = 1;
-    m->unk1A = 0x20;
     m->unk19 = 0;
     m->unk1B = 0;
+    m->unk1A = 0x20;
+    m->unk4 = 0;
+    m->unk8 = 0;
+    m->unk12 = 0x40;
+    m->unk14 = 0;
+    m->unk10 = 0x40;
+    m->unk16 = 0;
+    m->unk1C = 0;
     msg.unk10 = arg0;
     msg.unk12 = arg1;
     msg.unk1A = arg2;
@@ -230,18 +230,20 @@ void fn_80042138(s32 arg0, s32 arg1) {
     extern f32 lbl_803C60E8[];
     EyeToyReq req;
     EyeToyReq *r = &req;
+    EyeToyVec *d;
     EyeToyVec v;
     char *vt;
 
     r->unk4 = 0x40;
     req.unk0 = 0x40;
     r->unk8 = 3;
+    d = &r->unkC;
     r->unk18 = 1;
     r->unk1C = 1;
     v.x = lbl_803C60E8[0];
     v.y = lbl_803C60E8[0];
     v.z = lbl_803C60E8[0];
-    req.unkC = v;
+    *d = v;
     req.unk0 = arg0;
     req.unk4 = arg1;
     req.unk18 = 0;
@@ -419,6 +421,24 @@ s32 fn_800434F0(void) {
 s32 fn_80043520(void) {
     s32 fn_80339324(s32);
     return lbl_8049407C != -1 ? fn_80339324(lbl_8049407C) : 1;
+}
+
+s32 fn_800436B8(s32 arg0) {
+    s32 fn_80043554(s32);
+    extern s32 lbl_803C6144[];
+    s32 mask = fn_80043554(arg0);
+    s32 count = 0;
+    s32 i;
+    s32 result;
+
+    for (i = 0; i <= 4 && ((mask >> i) & 1); i++) {
+        count++;
+    }
+    result = 0;
+    for (i = 0; i < count; i++) {
+        result |= lbl_803C6144[i];
+    }
+    return result;
 }
 
 s32 fn_80043734(s32 arg0) {
