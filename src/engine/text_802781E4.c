@@ -156,8 +156,13 @@ s32 fn_80278B28(s32 *arg0) {
     extern s32 fn_802A6630(s32);
     extern void fn_802A6644(s32);
     s32 result = 0;
+    s32 p = *arg0;
+    s32 valid = 1;
 
-    if (*arg0 != 0 && *(s32 *)(*arg0 + 8) == 4) {
+    if (p == 0) {
+        valid = 0;
+    }
+    if (valid && *(s32 *)(p + 8) == 4) {
         result = 1;
     }
     if (*arg0 != 0 && fn_802A6630(*arg0) == 0) {
