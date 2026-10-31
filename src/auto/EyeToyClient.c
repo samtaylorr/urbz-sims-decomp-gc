@@ -296,6 +296,12 @@ s32 fn_8004380C(s32 arg0) {
     return *(s32 *)(*(u8 **)(*(u8 **)(list + 4) + 0x2C) + 0x20);
 }
 
+s32 fn_8004382C(s32 arg0) {
+    extern u8 lbl_803F5DA8[];
+    u8 *list = *(u8 **)(lbl_803F5DA8 + arg0 * 0xC);
+    return *(s32 *)(*(u8 **)(*(u8 **)(list + 4) + 0x2C) + 0x8);
+}
+
 void fn_800438D0(f32 farg0) {
     void fn_803392AC(s32, s32, void *);
     extern f32 lbl_803C615C[];
