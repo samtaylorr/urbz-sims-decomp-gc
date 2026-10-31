@@ -14,6 +14,23 @@ static inline AptVec2 AptVec2_Make(f32 x, f32 y) {
     return v;
 }
 
+void fn_80007C90(void *arg0, f32 arg1) {
+    extern f32 lbl_803C1650[];
+    extern s32 lbl_80494378;
+    void fn_80320680(s32, s32, f32, f32);
+    void fn_803227C4(AptVec2 *, s32, s32, s32, s32, s32);
+    void *obj;
+    AptVec2 v;
+
+    obj = M2C_FIELD(arg0, void **, 0xC);
+    if (obj != NULL && (M2C_FIELD(obj, s32 *, 0) != 0 || M2C_FIELD(obj, s32 *, 0xC) != 0)) {
+        fn_80320680(lbl_80494378, 1, M2C_FIELD(obj, f32 *, 0x24), lbl_803C1650[0]);
+        fn_803227C4(&v, lbl_80494378, M2C_FIELD(arg0, s32 *, 8), 1, 0, 0);
+        M2C_FIELD(arg0, AptVec2 *, 0x24) = v;
+        fn_80320680(lbl_80494378, 1, arg1, lbl_803C1650[0]);
+    }
+}
+
 void fn_80007EAC(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x18) = (s32) (M2C_FIELD(arg0, s32 *, 0x18) + 1);
 }
@@ -44,6 +61,40 @@ void fn_80007ECC(void *arg0, void *arg1) {
 f32 fn_80007F5C(void) {
     extern const f64 lbl_803C1660[];
     return lbl_803C1660[0];
+}
+
+void fn_800083A4(void *arg0, s32 arg1) {
+    extern s32 lbl_80494378;
+    extern s32 lbl_80495A7C[];
+    void fn_803227C4(AptVec2 *, s32, s32, s32, s32, s32);
+    s32 fn_800F3304(void *);
+    f32 fn_801DF514(s32);
+    f32 fn_80007F5C(void);
+    s32 lbl = lbl_80494378;
+    AptVec2 v;
+
+    M2C_FIELD(arg0, s32 *, 0x34) = arg1;
+    fn_803227C4(&v, lbl, fn_800F3304(lbl_80495A7C), 1, 0, 0);
+    M2C_FIELD(arg0, f32 *, 0x28) = v.y;
+    if (M2C_FIELD(arg0, f32 *, 0x28) < fn_801DF514(M2C_FIELD(arg0, s32 *, 0x34))) {
+        M2C_FIELD(arg0, f32 *, 0x28) = fn_801DF514(M2C_FIELD(arg0, s32 *, 0x34));
+    }
+    M2C_FIELD(arg0, f32 *, 0x24) = M2C_FIELD(arg0, f32 *, 0x28) / fn_80007F5C() + M2C_FIELD(arg0, f32 *, 0x30);
+}
+
+void fn_800085D0(void *arg0, void *arg1) {
+    void *it;
+
+    if (M2C_FIELD(arg0, void **, 4) == NULL) {
+        M2C_FIELD(arg0, void **, 4) = arg1;
+    } else {
+        it = M2C_FIELD(arg0, void **, 4);
+        while (M2C_FIELD(it, void **, 0) != NULL) {
+            it = M2C_FIELD(it, void **, 0);
+        }
+        M2C_FIELD(it, void **, 0) = arg1;
+    }
+    M2C_FIELD(arg1, void **, 4) = arg0;
 }
 
 void fn_800086CC(M2C_UNK **arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
