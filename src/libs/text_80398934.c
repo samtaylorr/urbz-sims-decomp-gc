@@ -3326,13 +3326,14 @@ void **fn_803A0A44(void **self, void **other) {
         void **finish = (void **)other[1];
         void **start = (void **)other[0];
         u32 xlen = finish - start;
-        u32 bytes;
+        register u32 bytes asm("r30");
         if (xlen > (u32)((void **)self[3] - (void **)self[0])) {
             void **tmp;
             if (xlen != 0) {
-                u32 size = xlen * 4;
+                register u32 size asm("r0");
+                size = xlen * 4;
                 bytes = size;
-                tmp = (void **)PtrVec_Allocate(size);
+                tmp = (void **)PtrVec_Allocate(bytes);
             } else {
                 tmp = NULL;
                 bytes = 0;
@@ -5255,9 +5256,10 @@ void fn_803A8188(u8 **self, void *unused, void *stream, void *arg3) {
     d = size - n;
     if (d < 0) {
         Elem12 zero;
-        register Elem12 *zp asm("r30") = &zero;
+        Elem12 *zp = &zero;
         s32 cnt = n - size;
-        fn_80248488(zp, 0, sizeof(zero));
+        s32 c = 0;
+        fn_80248488(zp, c, sizeof(zero));
         fn_803A7DD0(self, end, cnt, zp);
     } else if (d > 0) {
         Vec12Elem *first = (Vec12Elem *)self[1] - d;
@@ -10030,7 +10032,6 @@ void fn_803B32E4(void *arg0, u32 n) {
         Pair *finish = v->finish;
         s32 oldSize = finish - start;
         Pair *tmp;
-        u32 bytes;
 
         if (start != NULL) {
             Pair *result;
@@ -10039,16 +10040,9 @@ void fn_803B32E4(void *arg0, u32 n) {
                 Pair *dst;
                 Pair *mem;
                 if (n != 0) {
-                    register u32 sz asm("r0") = n * sizeof(Pair);
-                    bytes = sz;
-                    if (sz > 0x80) {
-                        mem = (Pair *)fn_802D1FC8(bytes);
-                    } else {
-                        mem = fn_80399BE8(bytes);
-                    }
+                    mem = PtrVec_Allocate(n * sizeof(Pair));
                 } else {
                     mem = NULL;
-                    bytes = 0;
                 }
                 dst = mem;
                 for (src = start; src != finish; src++) {
@@ -10075,20 +10069,13 @@ void fn_803B32E4(void *arg0, u32 n) {
         } else {
             Pair *mem;
             if (n != 0) {
-                register u32 sz asm("r0") = n * sizeof(Pair);
-                bytes = sz;
-                if (sz > 0x80) {
-                    mem = (Pair *)fn_802D1FC8(bytes);
-                } else {
-                    mem = fn_80399BE8(bytes);
-                }
+                mem = PtrVec_Allocate(n * sizeof(Pair));
             } else {
                 mem = NULL;
-                bytes = 0;
             }
             tmp = mem;
         }
-        PtrVec_Set((void **)v, (void **)tmp, (void **)(oldSize * 8 + (s32)tmp), (void **)(bytes + (u32)tmp));
+        PtrVec_Set((void **)v, (void **)tmp, (void **)(oldSize * 8 + (s32)tmp), (void **)(n * 8 + (u32)tmp));
     }
 }
 
