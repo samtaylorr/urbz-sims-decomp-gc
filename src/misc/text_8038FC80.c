@@ -143,6 +143,16 @@ void fn_803902E0(void) {
     }
 }
 
+void fn_80390994(s32 arg0) {
+    extern char lbl_80406900[];
+    int fn_80245BB4(char *, const char *, ...);
+    void PPCHalt(void);
+    char buf[0x400];
+
+    fn_80245BB4(buf, lbl_80406900, arg0);
+    PPCHalt();
+}
+
 extern u32 *lbl_804964DC;
 void fn_803909CC(u32 arg0) {
     lbl_804964DC[(arg0 >> 12) & 0x1FFF] |= 0x80000000;
@@ -155,16 +165,11 @@ u32 fn_803909E4(u32 arg0) {
 void fn_803909F8(void) {
     extern s32 fn_80251874(void);
     extern void fn_80251884(s32);
-    s32 i;
+    u32 i;
 
     lbl_804964DC = (u32 *)fn_80251874();
     fn_80251884((s32)lbl_804964DC + 0x8000);
     for (i = 0; i < 0x2000; i++) {
-        lbl_804964DC[i] = 0;
+        *(s32 *)PageTableAt(i) = 0;
     }
-}
-extern u32 *lbl_804964DC;
-
-static inline u32 *PageTableAt(u32 n) {
-    return lbl_804964DC + n;
 }
