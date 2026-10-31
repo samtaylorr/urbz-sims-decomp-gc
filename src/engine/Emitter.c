@@ -18,10 +18,10 @@ void fn_8030B800(void);
 void fn_8030B280(void);
 s32 fn_8030AC90(void *arg0) {
     void *p = M2C_FIELD(arg0, void **, 0x8C);
-    if (p != NULL) {
-        return M2C_FIELD(M2C_FIELD(p, void **, 4), s32 *, 0x84);
+    if (p == NULL) {
+        return 0;
     }
-    return 0;
+    return M2C_FIELD(M2C_FIELD(p, void **, 4), s32 *, 0x84);
 }
 
 s32 fn_8030ACB0(void *arg0) {
