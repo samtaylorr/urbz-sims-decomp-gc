@@ -36,6 +36,10 @@ typedef struct SPart {
     SPNode *nodesEnd;
 } SPart;
 
+static inline SPCell *SPart_Cell(SPart *sp, u32 n) {
+    return sp->cellsBegin + n;
+}
+
 s32 fn_801930C4(SPart *arg0, SPRect *r) {
     SPCell *c;
 
