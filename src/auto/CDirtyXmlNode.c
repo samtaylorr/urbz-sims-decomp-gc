@@ -127,7 +127,9 @@ void fn_800C061C(void) {
 
 s32 fn_800C0620(u8 *arg0, s32 arg1) {
     typedef struct { s32 key; s32 value; } Pair;
-    return M2C_FIELD(arg0, Pair **, 0xC)[arg1].value;
+    Pair *p = M2C_FIELD(arg0, Pair **, 0xC);
+    p += arg1;
+    return p->value;
 }
 
 void fn_800C0634(void) {
