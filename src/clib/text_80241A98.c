@@ -32,6 +32,22 @@ typedef struct StrFile {
 
 s32 fn_80249390(StrFile *f, const char *fmt, void *ap);
 
+void fn_80242258(void) {
+    s32 fn_8025465C(void);
+    void fn_802546A8(s32, void *);
+    void fn_80254B48(u32);
+    void fn_80254684(s32);
+    void fn_8024211C();
+    s32 level;
+
+    level = fn_8025465C();
+    fn_802546A8(0x10, fn_8024211C);
+    fn_80254B48(0x8000);
+    *(volatile u32 *)0xCC006828 |= 8;
+    *(volatile u32 *)0xCC006828 &= ~4;
+    fn_80254684(level);
+}
+
 s32 fn_802422C8(void) {
     extern s32 lbl_80440518[];
     s32 ret = lbl_80440518[0];
