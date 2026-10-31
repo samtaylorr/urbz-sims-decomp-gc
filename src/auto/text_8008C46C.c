@@ -627,20 +627,20 @@ static inline s32 Field314_Get(void *arg0) {
     }
     return (s32)M2C_FIELD(arg0, void **, 8) + 0x314;
 }
-static inline void Field334_Nop(s32 set) {
-}
 extern void fn_802EC15C(s32, s32, s32);
 extern void fn_802ED00C(s32, s32, s32);
 void fn_80094F44(void *arg0, s32 arg1, s32 arg2) {
-    extern void fn_802EC15C(s32, s32, s32);
     s32 b;
-    s32 x;
 
     b = M2C_FIELD(M2C_FIELD(arg0, void **, 8), s32 *, 0x334) != 0;
     if (b) {
-        x = arg1;
+        goto call;
     }
+call:
     fn_802EC15C((s32)M2C_FIELD(arg0, void **, 8) + 0x314, arg2, arg1);
+    if (b) {
+        return;
+    }
 }
 
 s32 fn_80095A44(void) {
