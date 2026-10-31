@@ -70,7 +70,7 @@ void fn_8031CC34(s32 arg0) {
     fn_803669C0(arg0 + 0x37C);
 }
 
-void fn_8031CC58(void *arg0) {
+void *fn_8031CC58(void *arg0) {
     extern u8 lbl_8041B3A8[];
     extern u8 lbl_8041B3C8[];
     extern char *lbl_80496220;
@@ -95,11 +95,12 @@ void fn_8031CC58(void *arg0) {
     for (i = 2; i >= 0; i--) {
         ((s32 *)(self + 0x354))[i] = 0;
     }
-    M2C_FIELD(self, s32 *, 0x3F0) = 0;
     M2C_FIELD(self, s32 *, 0x3E4) = 0;
     M2C_FIELD(self, s32 *, 0x3E8) = 0;
     M2C_FIELD(self, s32 *, 0x3EC) = 0;
+    M2C_FIELD(self, s32 *, 0x3F0) = 0;
     lbl_80496220 = self;
+    return self;
 }
 
 void fn_8031CD18(void *arg0, s32 flags) {
