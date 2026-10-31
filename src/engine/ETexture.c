@@ -441,6 +441,29 @@ void fn_8036FA90(void **arg0) {
     *arg0 = 0;
 }
 
+void *fn_8036FACC(s32 arg0) {
+    u8 *pool = (u8 *)arg0;
+    u8 *node;
+    u8 *head;
+    if (pool == NULL) {
+        return NULL;
+    }
+    node = M2C_FIELD(pool, u8 **, 0xC);
+    if (node == NULL) {
+        return NULL;
+    }
+    M2C_FIELD(pool, u8 **, 0xC) = M2C_FIELD(node, u8 **, 0);
+    M2C_FIELD(node, u8 **, 4) = NULL;
+    M2C_FIELD(node, u8 **, 0) = M2C_FIELD(pool, u8 **, 0x10);
+    head = M2C_FIELD(pool, u8 **, 0x10);
+    if (head != NULL) {
+        M2C_FIELD(head, u8 **, 4) = node;
+    }
+    M2C_FIELD(pool, u8 **, 0x10) = node;
+    M2C_FIELD(pool, s32 *, 8)++;
+    return node + 8;
+}
+
 s32 fn_8036FB28(void *arg0, void *arg1) {
     void **temp_r9;
     void *temp_r10;
