@@ -511,6 +511,26 @@ void fn_80312594(void *arg0, void *arg1) {
     }
 }
 
+M2C_UNK fn_80312D20(M2C_UNK arg0, M2C_UNK arg1) {
+    extern s32 lbl_80459F7C[];
+    extern f32 lbl_80459F98[];
+    extern f32 lbl_80459FA4[];
+    extern const f32 lbl_803F23A8[];
+    extern const f32 lbl_803F23AC[];
+    extern const f32 lbl_803F23B0[];
+    extern const f32 lbl_803F23B4[];
+
+    if (arg1 == 0xFFFF && arg0 != 0) {
+        fn_80312524(lbl_80459F7C);
+        lbl_80459F98[0] = lbl_803F23A8[0];
+        lbl_80459F98[1] = lbl_803F23AC[0];
+        lbl_80459F98[2] = lbl_803F23B0[0];
+        lbl_80459FA4[0] = lbl_803F23AC[0];
+        lbl_80459FA4[1] = lbl_803F23AC[0];
+        lbl_80459FA4[2] = lbl_803F23B4[0];
+    }
+}
+
 void fn_80312DA8(void) {
     M2C_UNK fn_80312D20(M2C_UNK, M2C_UNK);
     fn_80312D20(1, 0xFFFF);
