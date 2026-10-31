@@ -349,28 +349,17 @@ extern const f32 lbl_803F0CEC[];
 extern const f32 lbl_803F0CF0[];
 extern const f32 lbl_803F0CF4[];
 
-static inline Vec3f Vec3f_Splat(f32 c) {
-    Vec3f r;
-    r.z = c;
-    r.y = c;
-    r.x = c;
-    return r;
-}
-
 void fn_802EF220(void *arg0) {
     struct { Vec3f min; Vec3f max; } box;
     Vec3f t;
-    register Vec3f *p asm("r9");
-    f32 a = lbl_803F0CEC[0];
-    f32 b = lbl_803F0CF0[0];
-    t.x = a;
-    t.z = a;
-    t.y = a;
+    register Vec3f *p asm("r9") = &t;
+    t.x = lbl_803F0CEC[0];
+    t.z = lbl_803F0CEC[0];
+    t.y = lbl_803F0CEC[0];
     box.min = box.max = t;
-    p = &t;
-    p->z = b;
-    p->y = b;
-    p->x = b;
+    p->z = lbl_803F0CF0[0];
+    p->y = lbl_803F0CF0[0];
+    p->x = lbl_803F0CF0[0];
     box.min = *p;
     p->z = lbl_803F0CF4[0];
     p->y = lbl_803F0CF4[0];
