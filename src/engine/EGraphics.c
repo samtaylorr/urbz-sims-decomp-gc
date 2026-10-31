@@ -102,6 +102,13 @@ void fn_802EDB30(void *arg0) {
     }
 }
 
+void fn_802EDC14(void *unused, f32 *dst, f32 *src) {
+    dst[0] = src[0];
+    dst[1] = src[1];
+    dst[2] = src[2];
+    dst[3] = src[3];
+}
+
 void fn_802EDC38(u8 *arg0, Vec3f *arg1, s32 arg2, s32 arg3) {
     *(Vec3f *)(arg0 + 0x80) = *arg1;
     *(s32 *)(arg0 + 0x8C) = arg2;
