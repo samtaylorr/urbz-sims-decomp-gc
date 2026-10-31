@@ -120,9 +120,7 @@ void fn_802EDB30(void *arg0) {
 }
 
 void fn_802EDBA8(char *self, f32 *out) {
-    extern const f32 lbl_803F0BF0;
-    out[1] = lbl_803F0BF0;
-    out[0] = lbl_803F0BF0;
+    out[0] = out[1] = 0.0f;
     out[2] = *(s32 *)(self + 0x14);
     out[3] = *(s32 *)(self + 0x18);
 }
@@ -201,16 +199,16 @@ void fn_802EDF08(char *self, void *arg1, s32 arg2) {
 char *fn_802EDF3C(char *self, void *arg1) {
     char *vt = *(char **)self;
     char *obj = (*(char *(**)(void *))(vt + 0x1D4))(self + *(s16 *)(vt + 0x1D0));
-    if (obj == 0) {
-        return 0;
+    if (obj) {
+        char *ovt;
+        (*(s32 *)(self + 0x30))++;
+        ovt = *(char **)(obj + 0x24);
+        if ((*(s32 (**)(void *, void *))(ovt + 0x7C))(obj + *(s16 *)(ovt + 0x78), arg1)) {
+            return obj;
+        }
+        vt = *(char **)self;
+        (*(void (**)(void *, void *))(vt + 0xAC))(self + *(s16 *)(vt + 0xA8), obj);
     }
-    (*(s32 *)(self + 0x30))++;
-    vt = *(char **)(obj + 0x24);
-    if ((*(s32 (**)(void *, void *))(vt + 0x7C))(obj + *(s16 *)(vt + 0x78), arg1)) {
-        return obj;
-    }
-    vt = *(char **)self;
-    (*(void (**)(void *, void *))(vt + 0xAC))(self + *(s16 *)(vt + 0xA8), obj);
     return 0;
 }
 
