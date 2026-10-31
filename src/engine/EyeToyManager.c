@@ -54,7 +54,7 @@ s32 fn_80338FD0(s32 arg0, s32 arg1) {
     if (lbl_80494F7C == 0) {
         lbl_80494F6C = arg1;
         lbl_80494F70 = arg0;
-        if ((lbl_80494F7C = fn_8033909C()) == 0) {
+        if ((lbl_80494F7C = EyeToyOpenDevice()) == 0) {
             fn_80339018();
         }
     }
@@ -430,11 +430,12 @@ void *fn_8033B274(s32 a, s32 b, s32 c, s32 d, EyeToyRGB *col) {
 void fn_8033B58C(s16 *src, s16 *dst, s32 w, s32 h, s16 *param) {
     s32 i;
 
-    for (i = 0; i < w * h; i++) {
+    w *= h;
+    for (i = 0; i < w; i++) {
         s32 v = src[i];
         s32 b = v & 0x1F;
-        s32 r = (v >> 10) & 0x1F;
         s32 g = (v >> 5) & 0x1F;
+        s32 r = (v >> 10) & 0x1F;
         if (b >= param[2]) {
             b = ~b;
         }
