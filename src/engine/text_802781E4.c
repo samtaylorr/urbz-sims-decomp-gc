@@ -243,6 +243,14 @@ void fn_8027A79C(s32 arg0) {
     }
 }
 
+void fn_8027A7AC(void) {
+    extern s32 lbl_804433B0[];
+    extern u8 *lbl_804960E8;
+    if (lbl_804433B0[0] == 0 && lbl_804960E8 != NULL) {
+        *(s32 *)(lbl_804960E8 + 0x1238) = 0;
+    }
+}
+
 s32 fn_8027A7D0(void) {
     extern u8 *lbl_804960E8;
     return *(s32 *)(lbl_804960E8 + 0x124C) != 0;
