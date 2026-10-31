@@ -90,6 +90,80 @@ void fn_80251884(s32 arg0) {
     lbl_804949A8 = arg0;
 }
 
+void fn_80251BE0(void *addr) { __dcbf(addr, 0); }
+
+void fn_80251BE8(void *addr) { __dcbi(addr, 0); }
+
+void fn_80251BF0(void *addr, u32 nBytes) {
+    u32 n;
+
+    if (nBytes == 0) {
+        return;
+    }
+    n = (nBytes + ((u32)addr & 0x1F) + 0x1F) >> 5;
+    do {
+        __dcbi(addr, 0);
+        addr = (u8 *)addr + 0x20;
+    } while (--n);
+}
+
+#pragma optimize_for_size on
+void fn_80251C7C(void *addr, u32 nBytes) {
+    if (nBytes > 0) {
+        nBytes += (u32)addr & 0x1F;
+        nBytes = (nBytes + 0x1F) >> 5;
+        while (nBytes--) {
+            __dcbf(addr, 0);
+            addr = (char *)addr + 0x20;
+        }
+    }
+}
+#pragma optimize_for_size off
+
+#pragma optimize_for_size on
+void fn_80251CA8(void *addr, u32 nBytes) {
+    if (nBytes > 0) {
+        nBytes += (u32)addr & 0x1F;
+        nBytes = (nBytes + 0x1F) >> 5;
+        while (nBytes--) {
+            __dcbst(addr, 0);
+            addr = (char *)addr + 0x20;
+        }
+    }
+}
+#pragma optimize_for_size off
+
+#pragma opt_unroll_loops off
+void fn_80251CD4(void *addr, u32 nBytes) {
+    if (nBytes <= 0) {
+        return;
+    }
+    nBytes += (u32)addr & 0x1F;
+    nBytes = (nBytes + 0x1F) >> 5;
+    while (nBytes--) {
+        __dcbz(addr, 0);
+        addr = (char *)addr + 0x20;
+    }
+}
+#pragma opt_unroll_loops reset
+void fn_80251D84(void) {
+    __isync();
+    __mtspr(1008, __mfspr(1008) & ~0x10000);
+}
+
+void fn_80251D98(void) {
+    __isync();
+    __mtspr(1008, __mfspr(1008) | 0x2000);
+}
+
+void fn_80251DAC(void) {
+    __mtspr(1008, __mfspr(1008) & ~0x4000);
+}
+
+void fn_80251DBC(void *addr) {
+    __icbi(addr, 0);
+}
+
 void fn_80251DC4(void) {
     __isync();
 }
@@ -219,6 +293,29 @@ void fn_802522DC(void) {
     fn_8024FF90(fn_8024FF88() & ~0x00200000);
     while (fn_8024FF88() & 0x00000001) {
         fn_8025F920(">>> L2 INVALIDATE : SHOULD NEVER HAPPEN\n");
+    }
+}
+
+void fn_80252374(u8 arg0) {
+    s32 fn_8024FF88();
+    void fn_8024FF90(s32);
+    if (arg0) {
+        fn_8024FF90(fn_8024FF88() | 0x400000);
+    } else {
+        fn_8024FF90(fn_8024FF88() & ~0x400000);
+    }
+}
+
+void fn_802523B4(s32 enable) {
+    s32 fn_8024FF88();
+    M2C_UNK fn_8024FF90(s32);
+    s32 reg;
+    if (enable) {
+        reg = fn_8024FF88();
+        fn_8024FF90(reg | 0x80000);
+    } else {
+        reg = fn_8024FF88();
+        fn_8024FF90(reg & ~0x80000);
     }
 }
 
