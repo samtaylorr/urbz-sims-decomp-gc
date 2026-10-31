@@ -183,16 +183,19 @@ void fn_803374F4(char *self, s32 **arg1, s32 *arg2) {
 void fn_8033775C(char *self, s32 key) {
     void fn_80337510(char *, char *);
     s32 fn_80338598(char *, s32, char **);
-    ERMLock lock;
+    struct {
+        char *obj;
+        u8 unk4[0];
+    } lock;
     char *res;
 
-    ERMLock_Lock(&lock, self);
     res = 0;
+    ERMLock_Lock((ERMLock *)&lock, self);
     fn_80338598(self + 0x40, key, &res);
     if (res != 0) {
         fn_80337510(self, res);
     }
-    ERMLock_Unlock(&lock);
+    ERMLock_Unlock((ERMLock *)&lock);
 }
 
 void fn_803377F0(char *arg0, s32 arg1) {
@@ -331,6 +334,24 @@ s32 fn_80337F34(void) {
 void fn_80337FDC(s32 arg0) {
     M2C_UNK fn_8033983C(s32);
     fn_8033983C(arg0 + 0x6C);
+}
+
+s32 fn_8033854C(void *arg0, u32 arg1) {
+    s32 lo = 0;
+    s32 hi = M2C_FIELD(arg0, s32 *, 4);
+
+    while (lo < hi) {
+        s32 mid = (lo + hi) >> 1;
+        u32 key = M2C_FIELD(arg0, u32 **, 0)[mid * 2];
+        if (arg1 > key) {
+            lo = mid + 1;
+        } else if (arg1 >= key) {
+            return mid;
+        } else {
+            hi = mid;
+        }
+    }
+    return lo;
 }
 
 s32 fn_8033891C(s32 *self) {
