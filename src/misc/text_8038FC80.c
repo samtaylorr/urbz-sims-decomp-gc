@@ -6,9 +6,52 @@ s32 fn_8038FD1C(void) {
     return lbl_804964C4;
 }
 
+void fn_8038FD24(void) {
+    extern s32 lbl_804964C4;
+    extern s32 lbl_804964B0;
+    extern s32 lbl_804964B4;
+    extern s32 lbl_804964B8;
+    extern s32 lbl_80495670;
+    extern s32 lbl_804964BC;
+    extern s32 lbl_804964C0;
+    extern void fn_80398A00(void);
+    void fn_803902D8(void (*cb)(void));
+    void fn_803902D0(void (*cb)(void));
+    void fn_803902C0(s32 arg0);
+    if (lbl_804964C4 == 1) {
+        fn_80398A00();
+        fn_803902D8((void (*)(void))1);
+        fn_803902D0((void (*)(void))0);
+        fn_803902C0(1);
+        lbl_804964B0 = 0;
+        lbl_804964B4 = 0;
+        lbl_804964B8 = 0;
+        lbl_80495670 = 0x4000;
+        lbl_804964BC = 0;
+        lbl_804964C0 = 0;
+        lbl_804964C4 = 0;
+    }
+}
+
+void fn_8038FD8C(s32 arg0, s32 arg1) {
+    extern s32 lbl_80495670;
+    extern s32 lbl_804964B8;
+    extern void fn_803907FC(void);
+    lbl_80495670 = arg0;
+    lbl_804964B8 = arg1;
+    fn_803907FC();
+}
+
 extern s32 lbl_804964C0;
 void fn_8038FDB4(void (*cb)(void)) {
     lbl_804964C0 = cb;
+}
+
+s32 fn_8038FDBC(s32 arg0) {
+    extern s32 lbl_804964B4;
+    s32 base = lbl_804964B4;
+    s32 off = arg0 << 12;
+    return base + off;
 }
 
 extern s32 lbl_804964BC;
@@ -29,6 +72,15 @@ s32 fn_8038FDDC(void) {
 extern s32 lbl_804964B4;
 s32 fn_8038FDE4(void) {
     return lbl_804964B4;
+}
+
+void fn_8038FDEC(void) {
+    extern s32 lbl_804964B0;
+    extern s32 lbl_804964B4;
+    extern s32 fn_80251874(void);
+    extern void fn_80251884(s32);
+    lbl_804964B4 = fn_80251874();
+    fn_80251884(lbl_804964B4 + lbl_804964B0);
 }
 
 void fn_803902D8(void (*cb)(void));
@@ -91,3 +143,28 @@ void fn_803902E0(void) {
     }
 }
 
+extern u32 *lbl_804964DC;
+void fn_803909CC(u32 arg0) {
+    lbl_804964DC[(arg0 >> 12) & 0x1FFF] |= 0x80000000;
+}
+
+u32 fn_803909E4(u32 arg0) {
+    return lbl_804964DC[(arg0 >> 12) & 0x1FFF] >> 31;
+}
+
+void fn_803909F8(void) {
+    extern s32 fn_80251874(void);
+    extern void fn_80251884(s32);
+    s32 i;
+
+    lbl_804964DC = (u32 *)fn_80251874();
+    fn_80251884((s32)lbl_804964DC + 0x8000);
+    for (i = 0; i < 0x2000; i++) {
+        lbl_804964DC[i] = 0;
+    }
+}
+extern u32 *lbl_804964DC;
+
+static inline u32 *PageTableAt(u32 n) {
+    return lbl_804964DC + n;
+}
