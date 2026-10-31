@@ -239,8 +239,46 @@ s32 fn_80339380(void *arg0, s32 arg1) {
     return 1;
 }
 
+void fn_80339588(void *arg0, s32 arg1) {
+    void fn_802CAA88(void *, s32);
+    void fn_802CAAAC(void *);
+    s32 i;
+
+    fn_802CAA88(arg0, -1);
+    for (i = 0; i < M2C_FIELD(arg0, s32 *, 0x24); i++) {
+        if (M2C_FIELD(arg0, s32 **, 0x20)[i] == arg1) {
+            break;
+        }
+    }
+    for (; i < M2C_FIELD(arg0, s32 *, 0x24) - 1; i++) {
+        M2C_FIELD(arg0, s32 **, 0x20)[i] = M2C_FIELD(arg0, s32 **, 0x20)[i + 1];
+    }
+    M2C_FIELD(arg0, s32 *, 0x24) -= 1;
+    fn_802CAAAC(arg0);
+}
+
 s32 fn_8033983C(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x24);
+}
+
+void fn_80339844(s32 n) {
+    extern s32 lbl_80494F8C;
+    extern s32 lbl_80494F90;
+    void *fn_802D2058(s32);
+    EyeToyEntry *base;
+    EyeToyEntry *p;
+    s32 i;
+
+    lbl_80494F90 = n;
+    base = fn_802D2058(n * sizeof(EyeToyEntry));
+    p = base;
+    i = n;
+    while (i-- != 0) {
+        p->id = -1;
+        p->unk4 = 0;
+        p++;
+    }
+    lbl_80494F8C = (s32)base;
 }
 
 void fn_803398AC(void) {
