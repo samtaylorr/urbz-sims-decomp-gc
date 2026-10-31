@@ -1,6 +1,10 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+static inline s32 List_Valid(void *n) {
+    return n != NULL;
+}
+
 void fn_8001FC30(void) {
     fn_800A23A4();
 }
@@ -63,6 +67,20 @@ void fn_80022CDC(void *arg0) {
         (*(void (**)(void *, s32))(e + 4))(obj + *(s16 *)e, 3);
     }
     M2C_FIELD(arg0, void **, 0x14) = NULL;
+}
+
+void *fn_80022D98(void *arg0) {
+    void fn_802CB5C4(void *, void *);
+    char *list;
+    void *node;
+
+    list = (char *)arg0 + 8;
+    node = M2C_FIELD(list, void **, 0);
+    if (node == NULL) {
+        return NULL;
+    }
+    fn_802CB5C4(list, node);
+    return M2C_FIELD(node, void **, 0);
 }
 
 void fn_800235FC(void *arg0, f32 farg0, f32 farg1, f32 farg2, f32 farg3) {
