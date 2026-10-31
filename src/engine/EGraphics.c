@@ -102,6 +102,14 @@ void fn_802EDB30(void *arg0) {
     }
 }
 
+void fn_802EDBA8(char *self, f32 *out) {
+    extern const f32 lbl_803F0BF0;
+    out[1] = lbl_803F0BF0;
+    out[0] = lbl_803F0BF0;
+    out[2] = *(s32 *)(self + 0x14);
+    out[3] = *(s32 *)(self + 0x18);
+}
+
 void fn_802EDC14(void *unused, f32 *dst, f32 *src) {
     dst[0] = src[0];
     dst[1] = src[1];
@@ -140,6 +148,20 @@ void fn_802EDCF4(void *unused, char *obj) {
         char *vt = *(char **)(obj + 0x68);
         (*(void (**)(void *, s32))(vt + 0xC))(obj + *(s16 *)(vt + 0x8), 3);
     }
+}
+
+char *fn_802EDD34(char *self, s32 arg1) {
+    char *vt = *(char **)self;
+    char *obj = (*(char *(**)(void *))(vt + 0x1C4))(self + *(s16 *)(vt + 0x1C0));
+    if (obj != NULL) {
+        vt = *(char **)(obj + 0x68);
+        (*(void (**)(void *, s32))(vt + 0x294))(obj + *(s16 *)(vt + 0x290), arg1);
+        (*(s32 *)(self + 0x38))++;
+        if (arg1 == 0) {
+            *(char **)(self + 0x324) = obj;
+        }
+    }
+    return obj;
 }
 
 s32 fn_802EEB54(void *arg0) {
