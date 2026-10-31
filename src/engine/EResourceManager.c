@@ -270,17 +270,17 @@ void fn_8033789C(char *self, s32 key) {
     s32 fn_80338598(char *, s32, char **);
     struct {
         char *obj;
-        char *res;
     } lock;
+    char *res;
 
-    lock.res = 0;
+    res = 0;
     ERMLock_Lock((ERMLock *)&lock, self);
-    fn_80338598(self + 0x40, key, &lock.res);
-    if (lock.res == 0) {
+    fn_80338598(self + 0x40, key, &res);
+    if (res == 0) {
         ERMLock_Unlock((ERMLock *)&lock);
         return;
     }
-    fn_80337AEC(self, lock.res);
+    fn_80337AEC(self, res);
     ERMLock_Unlock((ERMLock *)&lock);
 }
 
@@ -601,7 +601,7 @@ s32 fn_80338968(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x5C);
 }
 
-void fn_803365B8(void);
+s32 fn_803365B8();
 void fn_80338970(void) {
     fn_803365B8();
 }
