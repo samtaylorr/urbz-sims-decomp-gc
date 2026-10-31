@@ -225,8 +225,8 @@ s32 fn_80105B78(void *);
 s32 fn_80105B84(void *);
 void fn_800654D4(f32 *out, f32 *in) {
     extern const f32 lbl_803C845C[];
-    f32 y = in[1];
     f32 x = in[0];
+    f32 y = in[1];
     f32 c = lbl_803C845C[0];
     out[0] = x - c;
     out[1] = x + c;
