@@ -155,10 +155,10 @@ char *fn_803783F0(char *s) {
 }
 
 void fn_80378434(void) {
-    extern void (**lbl_804013A0)(void);
-    while (*lbl_804013A0) {
-        lbl_804013A0++;
-        (*(lbl_804013A0 - 1))();
+    extern void (**lbl_804013A0[])(void);
+    while (*lbl_804013A0[0]) {
+        lbl_804013A0[0]++;
+        (*(lbl_804013A0[0] - 1))();
     }
 }
 
