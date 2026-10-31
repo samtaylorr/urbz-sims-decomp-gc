@@ -143,21 +143,52 @@ s32 fn_8005A124(s32 **arg0, s32 arg1) {
     return sum;
 }
 
-u32 fn_8005A234(u8 **arg0, s32 arg1, u8 **out, u32 max) {
+s32 fn_8005A1A4(void *arg0, s32 arg1) {
     s32 fn_8005A38C(void);
+    u8 **pp = arg0;
     u32 count;
     u32 i;
     u32 n;
+    u8 *p;
 
-    if (out == NULL) {
+    switch (arg1) {
+    case 1:
+    case 2:
+    case 3:
+        break;
+    default:
         return 0;
     }
     count = 0;
     n = ((s32 (*)(void *))fn_8005A38C)(arg0);
     for (i = 0; i < n; i++) {
+        p = *pp++;
+        if (p != NULL && fn_800599B0(p) == arg1) {
+            count++;
+        }
+    }
+    return count;
+}
+
+u32 fn_8005A234(u8 **arg0, s32 arg1, u8 **out, u32 max) {
+    s32 fn_8005A38C(void);
+    u32 count;
+    u32 i;
+    u32 n;
+    u8 **dst;
+
+    if (out == NULL) {
+        return 0;
+    }
+    dst = out;
+    n = ((s32 (*)(void *))fn_8005A38C)(arg0);
+    count = 0;
+    for (i = 0; i < n; i++) {
         if (arg0[i] != NULL && fn_800599B0(arg0[i]) == arg1) {
-            *out++ = arg0[i];
-            if (++count >= max) {
+            *dst = arg0[i];
+            count++;
+            dst++;
+            if (count >= max) {
                 break;
             }
         }
