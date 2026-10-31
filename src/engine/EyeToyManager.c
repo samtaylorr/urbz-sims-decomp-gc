@@ -272,8 +272,7 @@ void fn_80339844(s32 n) {
     lbl_80494F90 = n;
     base = fn_802D2058(n * sizeof(EyeToyEntry));
     p = base;
-    i = n;
-    while (i-- != 0) {
+    for (i = n - 1; i != -1; i--) {
         p->id = -1;
         p->unk4 = 0;
         p++;
