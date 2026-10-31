@@ -46,6 +46,25 @@ static inline void *EyeToyAlloc(s32 count) {
     return p;
 }
 
+s32 fn_80338FD0(s32 arg0, s32 arg1) {
+    extern s32 lbl_80494F7C;
+    extern s32 lbl_80494F6C;
+    extern s32 lbl_80494F70;
+
+    if (lbl_80494F7C == 0) {
+        lbl_80494F6C = arg1;
+        lbl_80494F70 = arg0;
+        if ((lbl_80494F7C = fn_8033909C()) == 0) {
+            fn_80339018();
+        }
+    }
+    return lbl_80494F7C;
+}
+
+static inline s32 EyeToyOpenDevice(void) {
+    return 0;
+}
+
 void fn_80339018(void) {
     extern s32 lbl_80494F7C;
     extern u32 lbl_80494F6C;
@@ -406,6 +425,49 @@ void *fn_8033B274(s32 a, s32 b, s32 c, s32 d, EyeToyRGB *col) {
     struct Kernel9 k = lbl_803F3D88;
     s32 sum = fn_80339CB4(k.v, 9);
     return fn_80339CE8(a, b, c, d, k.v, sum, 3, 3, *col);
+}
+
+void fn_8033B58C(s16 *src, s16 *dst, s32 w, s32 h, s16 *param) {
+    s32 i;
+
+    for (i = 0; i < w * h; i++) {
+        s32 v = src[i];
+        s32 b = v & 0x1F;
+        s32 r = (v >> 10) & 0x1F;
+        s32 g = (v >> 5) & 0x1F;
+        if (b >= param[2]) {
+            b = ~b;
+        }
+        if (g >= param[2]) {
+            g = ~g;
+        }
+        if (r >= param[2]) {
+            r = ~r;
+        }
+        dst[i] = ((r & 0x1F) << 10) | ((g & 0x1F) << 5) | (b & 0x1F);
+    }
+}
+
+void fn_8033B5F8(s16 *src, s16 *dst, s32 w, s32 h, s16 *param) {
+    s32 i;
+    s32 n = w * h;
+
+    for (i = 0; i < n; i++) {
+        s32 v = src[i];
+        s32 b = v & 0x1F;
+        s32 r = (v >> 10) & 0x1F;
+        s32 g = (v >> 5) & 0x1F;
+        if (b < param[2]) {
+            b = ~b;
+        }
+        if (g < param[2]) {
+            g = ~g;
+        }
+        if (r < param[2]) {
+            r = ~r;
+        }
+        dst[i] = ((r & 0x1F) << 10) | ((g & 0x1F) << 5) | (b & 0x1F);
+    }
 }
 
 void fn_8033B664(s32 **arg0) {
