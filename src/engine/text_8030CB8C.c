@@ -6,6 +6,31 @@ typedef struct {
 } Vec3f;
 
 void fn_8030DA64(void);
+s32 fn_8030CB8C(void) {
+    s32 fn_8036F2AC(s32, s32);
+    s32 fn_8030FAF0(s32, s32, s32);
+    extern s32 lbl_804961F4;
+    extern s32 lbl_804961F8;
+    extern s32 lbl_804961FC;
+    extern char lbl_803F20A8[];
+    extern char lbl_803F20B4[];
+    extern char lbl_803F20C0[];
+    extern Vec3f lbl_803F20CC;
+    Vec3f v;
+    if (fn_8036F2AC(0x84, 0x84) < 0) {
+        return -1;
+    }
+    if (fn_8030FAF0(4, 0x80, 0x1000) < 0) {
+        return -1;
+    }
+    fn_8030FA50(&lbl_804961F4, (s32)lbl_803F20A8);
+    fn_8030FA50(&lbl_804961F8, (s32)lbl_803F20B4);
+    fn_8030FA50(&lbl_804961FC, (s32)lbl_803F20C0);
+    v = lbl_803F20CC;
+    fn_8030FDFC((f32 *)&v);
+    return 0;
+}
+
 s32 fn_8030CC3C(void) {
     M2C_UNK fn_8030FAAC(M2C_UNK *);
     M2C_UNK fn_8030FDC4();
@@ -21,8 +46,59 @@ s32 fn_8030CC3C(void) {
     return 0;
 }
 
+void fn_8030D260(void *arg0, void *arg1, f32 t) {
+    extern f32 lbl_803F2104;
+    extern f32 lbl_803F2108;
+    s32 found = 0;
+    s32 i;
+    f32 sum = lbl_803F2108;
+    t *= lbl_803F2104;
+    for (i = 0; !found && i < M2C_FIELD(arg1, u32 *, 0x168); i++) {
+        sum += *(f32 *)((u8 *)arg1 + 0x18c + i * 0x84);
+        if (t < sum) {
+            M2C_FIELD(arg0, f32 *, 0x44) = i;
+            found = 1;
+            break;
+        }
+    }
+    if (!found) {
+        M2C_FIELD(arg0, f32 *, 0x44) = lbl_803F2108;
+    }
+}
+
 void fn_8030EF10(void) {
     fn_8030DA64();
+}
+
+void fn_8030F488(void **arg0) {
+    void fn_8030F5B8(void *);
+    void fn_8030F938(void *, void *);
+    void fn_8030F818(void **);
+    void *sp8;
+    void *n;
+
+    if (arg0 == NULL) {
+        return;
+    }
+    M2C_FIELD(*arg0, void **, 0x90) = M2C_FIELD(*arg0, void **, 0x88);
+    goto check;
+    do {
+        void *cur = sp8;
+        M2C_FIELD(*arg0, void **, 0x90) = *M2C_FIELD(*arg0, void ***, 0x90);
+        fn_8030F5B8(cur);
+        if (M2C_FIELD(sp8, void (**)(s32), 0xa4) != NULL) {
+            M2C_FIELD(sp8, void (**)(s32), 0xa4)(M2C_FIELD(sp8, s32 *, 0xa8));
+        }
+        fn_8030F938(arg0, sp8);
+        fn_8030F818(&sp8);
+    check:
+        n = M2C_FIELD(*arg0, void **, 0x90);
+        if (n != NULL) {
+            sp8 = M2C_FIELD(n, void **, 8);
+        } else {
+            sp8 = n;
+        }
+    } while (sp8 != NULL);
 }
 
 void fn_8030F538(void **arg0) {
@@ -50,6 +126,35 @@ void fn_8030F57C(s32 *arg0) {
     extern s32 lbl_80494EEC;
     fn_8036FB28(lbl_80494EEC, *arg0);
     *arg0 = 0;
+}
+
+void fn_8030F5B8(u32 *arg0) {
+    void fn_8036F65C(void *, void *);
+    M2C_UNK fn_8036FB28(s32, void *);
+    extern s32 lbl_80494EEC;
+    extern f32 lbl_803F2190[];
+    void *n;
+    f32 f;
+
+    M2C_FIELD(M2C_FIELD(arg0, void **, 4), void **, 0x90) = M2C_FIELD(M2C_FIELD(arg0, void **, 4), void **, 0x88);
+    n = M2C_FIELD(M2C_FIELD(arg0, void **, 4), void **, 0x90);
+    while (n != NULL) {
+        M2C_FIELD(M2C_FIELD(arg0, void **, 4), void **, 0x90) = *(void **)M2C_FIELD(M2C_FIELD(arg0, void **, 4), void **, 0x90);
+        fn_8036F65C(M2C_FIELD(arg0, void **, 4), n);
+        fn_8036FB28(lbl_80494EEC, n);
+        n = M2C_FIELD(M2C_FIELD(arg0, void **, 4), void **, 0x90);
+    }
+    f = lbl_803F2190[0];
+    arg0[0] |= 6;
+    M2C_FIELD(arg0, f32 *, 0x78) = f;
+    M2C_FIELD(arg0, f32 *, 0x84) = f;
+}
+
+void fn_8030F8EC(s32 *arg0, void *arg1) {
+    void *fn_8036F4EC(s32, void *, void *, s32);
+    extern u8 lbl_803F21B4[];
+    M2C_FIELD(arg1, void **, 0x8c) = fn_8036F4EC(*arg0, lbl_803F21B4, arg1, 1);
+    M2C_FIELD(arg1, s32 **, 0xb8) = arg0;
 }
 
 void fn_8030F938(void *arg0, void *arg1) {
@@ -98,14 +203,14 @@ s32 fn_8030FA44(void *arg0) {
 void fn_8030F818(void);
 s32 fn_8030FA50(s32 *arg0, s32 arg1) {
     s32 fn_8036FACC(s32);
-    M2C_UNK fn_8036F3E0();
+    void fn_8036F3E0(s32, s32, s32);
     void fn_8030F818(void);
     extern s32 lbl_80494EE4;
     s32 obj = fn_8036FACC(lbl_80494EE4);
     if (obj == 0) {
         return -1;
     }
-    fn_8036F3E0(obj, arg1, fn_8030F818);
+    fn_8036F3E0(obj, arg1, (s32)fn_8030F818);
     *arg0 = obj;
     return 0;
 }
