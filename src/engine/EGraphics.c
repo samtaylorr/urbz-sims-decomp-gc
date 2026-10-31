@@ -233,9 +233,8 @@ char *fn_802EE190(char *self, void *arg1) {
 }
 
 void fn_802EE234(char *self, void *arg1) {
-    char *vt;
     if (arg1) {
-        vt = *(char **)self;
+        char *vt = *(char **)self;
         (*(void (**)(void *))(vt + 0x44))(self + *(s16 *)(vt + 0x40));
         (*(s32 *)(self + 0x2C))--;
         vt = *(char **)self;
@@ -281,8 +280,8 @@ void fn_802EEBCC(void *self, Vec3f *a, Vec3f *b, s32 c) {
     Lights *p = self;
     if (p->count != 0x10) {
         p->used[p->count] = 1;
-        p->a[p->count] = *a;
-        p->b[p->count] = *b;
+        *(Vec3f *)((u8 *)p + p->count * 12 + 0xE4) = *a;
+        *(Vec3f *)((u8 *)p + p->count * 12 + 0x1A4) = *b;
         p->c[p->count] = c;
         p->count++;
     }
@@ -308,19 +307,36 @@ void fn_802EEC70(void *self, f32 a, f32 b, f32 c, f32 d) {
 }
 
 void fn_802EECEC(void *arg0) {
-    typedef struct { f32 x, y, z, w; } V4;
-    V4 v;
+    f32 a, b, c, d;
 
-    if (M2C_FIELD(arg0, s32 *, 0x2CC) == 0) {
-        if (M2C_FIELD(arg0, s32 *, 0x2A8) != 0) {
-            v = M2C_FIELD(arg0, V4 *, 0x2AC);
-        } else {
-            v = M2C_FIELD(arg0, V4 *, 0x2BC);
-        }
-    } else {
-        v = M2C_FIELD(arg0, V4 *, 0x2D0);
+    if (M2C_FIELD(arg0, s32 *, 0x2CC) != 0) {
+        goto custom;
     }
-    M2C_FIELD(arg0, V4 *, 0x2E0) = v;
+    if (M2C_FIELD(arg0, s32 *, 0x2A8) == 0) {
+        goto normal;
+    }
+    a = M2C_FIELD(arg0, f32 *, 0x2AC);
+    b = M2C_FIELD(arg0, f32 *, 0x2B0);
+    c = M2C_FIELD(arg0, f32 *, 0x2B4);
+    d = M2C_FIELD(arg0, f32 *, 0x2B8);
+store:
+    M2C_FIELD(arg0, f32 *, 0x2EC) = d;
+    M2C_FIELD(arg0, f32 *, 0x2E4) = b;
+    M2C_FIELD(arg0, f32 *, 0x2E8) = c;
+    M2C_FIELD(arg0, f32 *, 0x2E0) = a;
+    return;
+normal:
+    a = M2C_FIELD(arg0, f32 *, 0x2BC);
+    b = M2C_FIELD(arg0, f32 *, 0x2C0);
+    c = M2C_FIELD(arg0, f32 *, 0x2C4);
+    d = M2C_FIELD(arg0, f32 *, 0x2C8);
+    goto store;
+custom:
+    a = M2C_FIELD(arg0, f32 *, 0x2D0);
+    b = M2C_FIELD(arg0, f32 *, 0x2D4);
+    c = M2C_FIELD(arg0, f32 *, 0x2D8);
+    d = M2C_FIELD(arg0, f32 *, 0x2DC);
+    goto store;
 }
 
 void fn_802EED50(char *self, f32 a, f32 b, f32 c, f32 d) {
