@@ -21,6 +21,26 @@ void fn_8030EF10(void) {
     fn_8030DA64();
 }
 
+void fn_8030F538(void **arg0) {
+    void *n;
+
+    if (arg0 == NULL) {
+        return;
+    }
+    M2C_FIELD(*arg0, void **, 0x90) = M2C_FIELD(*arg0, void **, 0x88);
+    while (1) {
+        s32 data = 0;
+        n = M2C_FIELD(*arg0, void **, 0x90);
+        if (n != NULL) {
+            data = M2C_FIELD(n, s32 *, 8);
+        }
+        if (data == 0) {
+            break;
+        }
+        M2C_FIELD(*arg0, void **, 0x90) = *(void **)n;
+    }
+}
+
 void fn_8030F57C(s32 *arg0) {
     M2C_UNK fn_8036FB28(s32, s32);
     extern s32 lbl_80494EEC;
