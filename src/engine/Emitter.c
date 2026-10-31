@@ -132,6 +132,12 @@ void fn_8030AE60(void *arg0, s32 arg1, s32 arg2) {
     }
 }
 
+void fn_8030AEC8(void *arg0, s32 arg1, s32 arg2) {
+    if (M2C_FIELD(arg0, void **, 0x8C) != NULL) {
+        fn_8030ADA0(arg0, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, arg1, arg2);
+    }
+}
+
 void fn_8030AF3C(void *arg0) {
     void fn_8030F5B8(void *);
 
