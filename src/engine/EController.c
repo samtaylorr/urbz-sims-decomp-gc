@@ -25,8 +25,10 @@ void fn_80310418(void *arg0) {
     extern void *lbl_80494E00;
     extern void *lbl_80494F58;
     if (M2C_FIELD(arg0, s32 *, 0) == 0) {
+        void *p;
         lbl_80494F58 = lbl_80494E00;
-        fn_8036FD3C(M2C_FIELD(arg0, void **, 0x200), 0);
+        p = M2C_FIELD(arg0, void **, 0x200);
+        fn_8036FD3C(p, 0);
         fn_8036FE3C(M2C_FIELD(arg0, void **, 0x200), M2C_FIELD(arg0, void **, 0x1FC));
         fn_80310474(arg0);
     }
@@ -197,13 +199,13 @@ s32 fn_80310A48(void *arg0, f32 farg0) {
 }
 
 s32 fn_80310A54(char *self) {
-    extern f32 lbl_803F22C0;
+    extern f32 lbl_803F22C0[];
     char *vt = *(char **)(self + 0x204);
     if ((*(s32 (**)(char *))(vt + 0x1C))(self + *(s16 *)(vt + 0x18)) == 0) {
         return 0;
     }
-    M2C_FIELD(self, f32 *, 0x1E0) = lbl_803F22C0;
-    M2C_FIELD(self, f32 *, 0x1E8) = lbl_803F22C0;
+    M2C_FIELD(self, f32 *, 0x1E0) = lbl_803F22C0[0];
+    M2C_FIELD(self, f32 *, 0x1E8) = lbl_803F22C0[0];
     return 1;
 }
 
@@ -275,7 +277,7 @@ void fn_80310C98(void *arg0) {
 }
 
 void fn_80310DE4(char *self, s32 i, s32 j, f32 v) {
-    extern f32 lbl_803F22C8;
+    extern f32 lbl_803F22C8[];
     struct {
         u8 pad0[0x28];
         f32 a28[2][2];
@@ -292,7 +294,7 @@ void fn_80310DE4(char *self, s32 i, s32 j, f32 v) {
         d->a48[i][j] = v - d->a38[i][j];
     }
     d = *(void **)(self + 0x1FC);
-    if (d->a38[i][j] * v > lbl_803F22C8) {
+    if (!(d->a38[i][j] * v <= lbl_803F22C8[0])) {
         d->a68[i][j] = 1;
     }
 }
@@ -308,11 +310,11 @@ void fn_80310E6C(char *self, u32 mask) {
     if (fn_8036FBC8(*(void **)(self + 0x1FC), i) == 0) {
         fn_8036FC20(*(void **)(self + 0x1FC), i, 1);
         fn_8036FBE8(*(void **)(self + 0x1FC), i, 1);
-        M2C_FIELD(*(char **)(self + 0x1FC), u32 *, 0x8) |= mask;
-        M2C_FIELD(*(char **)(self + 0x1FC), u32 *, 0x10) |= mask;
-        M2C_FIELD(*(char **)(self + 0x1FC), u32 *, 0x18) |= mask;
-        M2C_FIELD(*(char **)(self + 0x1FC), u32 *, 0x0) |= mask;
     }
+    M2C_FIELD(*(char **)(self + 0x1FC), u32 *, 0x8) |= mask;
+    M2C_FIELD(*(char **)(self + 0x1FC), u32 *, 0x10) |= mask;
+    M2C_FIELD(*(char **)(self + 0x1FC), u32 *, 0x18) |= mask;
+    M2C_FIELD(*(char **)(self + 0x1FC), u32 *, 0x0) |= mask;
 }
 
 void fn_80310F28(char *self, u32 mask) {
