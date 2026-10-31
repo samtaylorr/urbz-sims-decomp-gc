@@ -23,6 +23,13 @@ s32 fn_8031054C(u32 *arg0, u32 *arg1) {
     return -1;
 }
 
+void fn_8031056C(void *arg0, s32 arg1, s32 arg2) {
+    void fn_8024729C(s32, s32, s32, s32 (*)(u32 *, u32 *));
+    M2C_FIELD(arg0, s32 *, 0x1A4) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x1A8) = arg2;
+    fn_8024729C(arg1, arg2, 8, fn_8031054C);
+}
+
 void fn_803105B0(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 4) = arg1;
 }
