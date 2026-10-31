@@ -592,6 +592,14 @@ void fn_80043AC4(void) {
     }
 }
 
+void fn_80043B5C(u8 *arg0) {
+    void fn_80043BB4(s32, s32, s32);
+    u8 *vt = *(u8 **)(arg0 + 0x24);
+    u8 buf[8];
+    s32 r = ((s32 (*)(void *, s32, void *, void *))*(void **)(vt + 0x44))(arg0 + *(s16 *)(vt + 0x40), 0, buf, buf);
+    fn_80043BB4(r, *(u16 *)(arg0 + 0x10), *(u16 *)(arg0 + 0x12));
+}
+
 void fn_80043BB4(void) {
 
 }
