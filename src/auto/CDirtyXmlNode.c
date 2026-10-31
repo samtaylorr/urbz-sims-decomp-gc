@@ -118,8 +118,36 @@ void fn_800C061C(void) {
 
 }
 
+s32 fn_800C0620(u8 *arg0, s32 arg1) {
+    return M2C_FIELD(M2C_FIELD(arg0, u8 *, 0xC) + arg1 * 8, s32 *, 4);
+}
+
 void fn_800C0634(void) {
 
+}
+
+void fn_800C0638(u8 *arg0, s32 arg1) {
+    void fn_800C3364(s32 *, s32);
+    void fn_800C3640(s32 *, s32);
+    void fn_800C30B4(s32 *, s32);
+    s32 i;
+    s32 *item;
+
+    for (i = 0; i < M2C_FIELD(arg0, s32 *, 4); i++) {
+        item = M2C_FIELD(arg0, s32 **, 8)[i];
+        switch (*item) {
+        case 1:
+            fn_800C3364(item, arg1);
+            break;
+        case 4:
+        case 5:
+            fn_800C3640(item, arg1);
+            break;
+        case 6:
+            fn_800C30B4(item, arg1);
+            break;
+        }
+    }
 }
 
 void fn_800C243C(void) {
