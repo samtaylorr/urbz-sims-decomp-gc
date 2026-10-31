@@ -282,6 +282,18 @@ void fn_80068394(void *arg0, s32 arg1) {
     fn_8006410C(lbl_8041F94C.unkEC[1]);
 }
 
+void fn_800683EC(void *arg0, s32 arg1) {
+    extern struct { char pad[0xEC]; s32 *unkEC; } lbl_8041F94C;
+    extern void fn_8004CE08(void *);
+    extern void fn_800A3F74(void *);
+    extern void fn_8006410C(s32);
+    struct { char pad[0x1FC]; void *arr[1]; } *self = arg0;
+
+    ((void (*)(void *, s32))fn_8004CE08)(&lbl_8041F94C, arg1);
+    fn_800A3F74(self->arr[arg1]);
+    fn_8006410C(lbl_8041F94C.unkEC[1]);
+}
+
 void fn_80068444(void) {
 
 }
