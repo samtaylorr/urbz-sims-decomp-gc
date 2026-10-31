@@ -13077,6 +13077,7 @@ void fn_803BCEEC(s32 *dst, s32 *src, s32 n) {
 
 void *fn_803BD068(u8 *self, s32 *arr) {
     extern void fn_8036A994(void *, void *);
+    extern void fn_803BCF48(void *, s32, s32);
     u8 *vt = M2C_FIELD(self, u8 **, 0x18);
     s32 n;
     s32 i;
