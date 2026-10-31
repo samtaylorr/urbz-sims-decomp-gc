@@ -92,12 +92,13 @@ void fn_800C0338(s32 arg0) {
     extern u8 *lbl_80432EF0[];
     extern s32 lbl_804339E0[];
     extern u8 *lbl_80495050;
-    u8 *vt;
     u8 *obj;
+    u8 *vt;
 
     if (lbl_80433468[arg0] != 0) {
-        vt = *(u8 **)lbl_80495050;
-        (*(void (**)(void *, s32))(vt + 0xFC))(lbl_80495050 + *(s16 *)(vt + 0xF8), lbl_80433468[arg0]);
+        obj = lbl_80495050;
+        vt = *(u8 **)obj;
+        (*(void (**)(void *, s32))(vt + 0xFC))(obj + *(s16 *)(vt + 0xF8), lbl_80433468[arg0]);
         lbl_80433468[arg0] = 0;
     }
     obj = lbl_80432EF0[arg0];
