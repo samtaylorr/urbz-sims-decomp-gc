@@ -228,6 +228,21 @@ static inline Pair8 *Pair8_CopyW(Pair8 *first, Pair8 *last, Pair8 *result) {
     return Pair8_CopyRA(first, last, result, (s32 *)0);
 }
 
+typedef struct { Pair8 *p; } Pair8It;
+
+static inline Pair8It Pair8_ItCopy(Pair8It first, Pair8It last, Pair8It result) {
+    s32 n;
+    for (n = last.p - first.p; n > 0; n--) {
+        s32 a = first.p->a;
+        s32 b = first.p->b;
+        result.p->a = a;
+        result.p->b = b;
+        first.p++;
+        result.p++;
+    }
+    return result;
+}
+
 static inline Pair8 *Pair8_UninitCopy(Pair8 *first, Pair8 *last, Pair8 *result) {
     for (; first != last; first++, result++) {
         result->a = first->a;
@@ -10379,6 +10394,7 @@ Pair8Vec *fn_803B50DC(Pair8Vec *self, Pair8Vec *x) {
         Pair8 *last = x->finish;
         Pair8 *src = first;
         Pair8 *dst = start;
+        Pair8 **pd = &dst;
         u32 xlen = last - first;
         if (xlen > (u32)(self->end - start)) {
             Pair8 *tmp;
@@ -10398,19 +10414,11 @@ Pair8Vec *fn_803B50DC(Pair8Vec *self, Pair8Vec *x) {
             }
             self->start = tmp;
             self->end = tmp + xlen;
-        } else if ((u32)(self->finish - dst) >= xlen) {
-            s32 k;
-            for (k = last - src; k > 0; k--) {
-                s32 a = src->a;
-                s32 b = src->b;
-                dst->a = a;
-                dst->b = b;
-                src++;
-                dst++;
-            }
-            Pair8_Destroy(dst, self->finish);
+        } else if ((u32)(self->finish - *pd) >= xlen) {
+            Pair8 *i = Pair8_CopyW(src, last, *pd);
+            Pair8_Destroy(i, self->finish);
         } else {
-            Pair8_Copy(first, first + (self->finish - start), start);
+            Pair8_CopyW(first, first + (self->finish - start), start);
             Pair8_UninitCopy(x->start + (self->finish - self->start), x->finish, self->finish);
         }
         self->finish = self->start + xlen;
