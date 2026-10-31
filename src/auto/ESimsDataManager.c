@@ -230,14 +230,16 @@ void fn_8001E488(void *arg0, void *arg1) {
     void fn_8001D9B4(void *, void *, s32);
     extern void fn_802D20E8(void *);
     extern void fn_803997AC(void *, u32);
-    s32 vec[4];
+    s32 vec[6];
     s32 *v;
+    s32 *p;
 
     if (M2C_FIELD(arg1, s32 *, 0x9C) != 0) {
         v = vec;
         v[0] = 0;
+        p = v + 2;
         v[1] = 0;
-        (v + 2)[1] = 0;
+        p[1] = 0;
         fn_8001D9B4(arg1, v, 0);
         fn_8001DE20((ESimsIdVec *)v);
         M2C_FIELD(arg1, s32 *, 0x9C) = 0;
