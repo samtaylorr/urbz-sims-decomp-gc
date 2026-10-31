@@ -166,6 +166,13 @@ void fn_8035BF60(void) {
     }
 }
 
+void fn_8035DA38(u8 *arg0) {
+    extern u8 *lbl_80495050;
+    u8 *obj = lbl_80495050;
+    u8 *vtbl = *(u8 **)obj;
+    ((void (*)(u8 *, s32))*(void **)(vtbl + 0xAC))(obj + *(s16 *)(vtbl + 0xA8), *(s32 *)(arg0 + 0x28));
+}
+
 s32 fn_8035DA74(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x28);
 }
