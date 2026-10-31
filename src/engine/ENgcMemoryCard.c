@@ -68,8 +68,8 @@ s32 fn_80343C8C(void) {
 }
 
 s32 fn_8034456C(void *arg0, s32 arg1, u32 arg2, s32 *arg3) {
-    u32 size = 0;
     void *vt = M2C_FIELD(arg0, void **, 0);
+    u32 size = 0;
     M2C_FIELD(vt, void (**)(void *, s32, u32 *), 0x104)((u8 *)arg0 + M2C_FIELD(vt, s16 *, 0x100), arg1, &size);
     if (size >= arg2) {
         *arg3 = 1;
