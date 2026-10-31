@@ -1,5 +1,14 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
+typedef struct __va_list_tag {
+    char gpr;
+    char fpr;
+    char *overflow_arg_area;
+    char *reg_save_area;
+} va_list[1];
+
+#define va_start(AP, LASTARG) \
+    (__builtin_next_arg(LASTARG), *(AP) = *(struct __va_list_tag *)__builtin_saveregs())
 
 s32 fn_80375C5C(s32, s32);
 s32 fn_80240ED8(s32);
@@ -8,13 +17,15 @@ s32 fn_80240EC0(s32, s32, s32);
 
 s32 fn_80375CB8(s32 arg0, s32 arg1, s32 arg2);
 s32 fn_80375CB8(s32 arg0, s32 arg1, s32 arg2) {
-    if ((u32)(arg0 - 1) <= 1) {
+    switch (arg0) {
+    case 1:
+    case 2:
         return fn_80375C5C(arg1, arg2);
-    }
-    if (arg0 == 0) {
+    case 0:
         return -1;
+    default:
+        return fn_80240ED8(arg0);
     }
-    return fn_80240ED8(arg0);
 }
 
 void fn_80375D08(void) {
