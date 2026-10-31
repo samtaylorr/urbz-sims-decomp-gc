@@ -5316,6 +5316,13 @@ static inline void Vec12_EraseRef(u8 **v, Vec12Elem *const *first, Vec12Elem *co
     v[1] = (u8 *)i;
 }
 
+static inline void Vec12_InsertZero(u8 **v, Elem12 *pos, s32 cnt) {
+    extern void fn_80248488();
+    Elem12 zero;
+    fn_80248488(&zero, 0, sizeof(zero));
+    fn_803A7DD0((Elem12Vec *)v, pos, cnt, &zero);
+}
+
 void fn_803A8188(u8 **self, void *unused, void *stream, void *arg3) {
     extern void fn_8018D8DC(void *, s32 *, s32);
     extern void fn_80177470(void *, void *, void *);
@@ -5334,9 +5341,9 @@ void fn_803A8188(u8 **self, void *unused, void *stream, void *arg3) {
     if (d < 0) {
         Elem12 zero;
         Elem12 *zp = &zero;
-        s32 cnt = n - size;
-        fn_80248488(zp, 0, 12, cnt);
-        fn_803A7DD0(self, end, cnt, zp);
+        n -= size;
+        fn_80248488(zp, 0, sizeof(zero));
+        fn_803A7DD0(self, end, n, zp);
     } else if (d > 0) {
         Vec12Elem *first = (Vec12Elem *)self[1] - d;
         Vec12Elem *last = (Vec12Elem *)self[1];
