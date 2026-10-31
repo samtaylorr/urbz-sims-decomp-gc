@@ -211,6 +211,23 @@ static inline Pair8 *Pair8_Copy(Pair8 *first, Pair8 *last, Pair8 *result) {
     return result;
 }
 
+static inline Pair8 *Pair8_CopyRA(Pair8 *first, Pair8 *last, Pair8 *result, s32 *dist) {
+    s32 n;
+    for (n = last - first; n > 0; n--) {
+        s32 a = first->a;
+        s32 b = first->b;
+        result->a = a;
+        result->b = b;
+        first++;
+        result++;
+    }
+    return result;
+}
+
+static inline Pair8 *Pair8_CopyW(Pair8 *first, Pair8 *last, Pair8 *result) {
+    return Pair8_CopyRA(first, last, result, (s32 *)0);
+}
+
 static inline Pair8 *Pair8_UninitCopy(Pair8 *first, Pair8 *last, Pair8 *result) {
     for (; first != last; first++, result++) {
         result->a = first->a;
@@ -3337,8 +3354,8 @@ void **fn_803A0A44(void **self, void **other) {
                     size = 0;
                     tmp = (void **)fn_802D1FC8(bytes);
                 } else {
-                    size = 0;
                     tmp = (void **)fn_80399BE8(bytes);
+                    size = 0;
                 }
             } else {
                 tmp = NULL;
@@ -5262,10 +5279,9 @@ void fn_803A8188(u8 **self, void *unused, void *stream, void *arg3) {
     d = size - n;
     if (d < 0) {
         Elem12 zero;
-        Elem12 *zp = &zero;
+        Elem12 *zp;
         s32 cnt = n - size;
-        s32 c = 0;
-        fn_80248488(zp, c, sizeof(zero));
+        fn_80248488(zp = &zero, 0, sizeof(zero));
         fn_803A7DD0(self, end, cnt, zp);
     } else if (d > 0) {
         Vec12Elem *first = (Vec12Elem *)self[1] - d;
