@@ -216,29 +216,54 @@ char *fn_802EDF3C(char *self, void *arg1) {
     return 0;
 }
 
+char *fn_802EE190(char *self, void *arg1) {
+    char *vt = *(char **)self;
+    char *obj = (*(char *(**)(void *))(vt + 0x1F4))(self + *(s16 *)(vt + 0x1F0));
+    if (obj) {
+        char *ovt;
+        (*(s32 *)(self + 0x2C))++;
+        ovt = *(char **)(obj + 0x20);
+        if ((*(s32 (**)(void *, void *))(ovt + 0x14))(obj + *(s16 *)(ovt + 0x10), arg1)) {
+            return obj;
+        }
+        vt = *(char **)self;
+        (*(void (**)(void *, void *))(vt + 0xC4))(self + *(s16 *)(vt + 0xC0), obj);
+    }
+    return 0;
+}
+
 s32 fn_802EEB54(void *arg0) {
     M2C_UNK fn_802EE6D0();
     fn_802EE6D0();
     return M2C_FIELD(arg0, s32 *, 0x90);
 }
 
-void fn_802EEB84(void *self, s32 arg1, Vec2f *v) {
-    extern void fn_802EE6D0(void *, s32);
-    *(Vec2f *)((u8 *)self + 0x9C) = *v;
+void fn_802EEB84(void *self, s32 arg1, s32 *v) {
+    extern void fn_802EE6D0(void *);
+    ((s32 *)((u8 *)self + 0x9C))[1] = v[1];
+    ((s32 *)((u8 *)self + 0x9C))[0] = v[0];
     if (arg1 != 0) {
-        fn_802EE6D0(self, arg1);
+        fn_802EE6D0(self);
         *(s32 *)((u8 *)self + 0x10) = arg1;
     }
 }
 
 void fn_802EEBCC(void *self, Vec3f *a, Vec3f *b, s32 c) {
-    u8 *p = self;
-    if (*(s32 *)(p + 0x2A4) != 0x10) {
-        ((s32 *)(p + 0xA4))[*(s32 *)(p + 0x2A4)] = 1;
-        ((Vec3f *)(p + 0xE4))[*(s32 *)(p + 0x2A4)] = *a;
-        ((Vec3f *)(p + 0x1A4))[*(s32 *)(p + 0x2A4)] = *b;
-        ((s32 *)(p + 0x264))[*(s32 *)(p + 0x2A4)] = c;
-        *(s32 *)(p + 0x2A4) += 1;
+    typedef struct {
+        u8 pad[0xA4];
+        s32 used[16];
+        Vec3f a[16];
+        Vec3f b[16];
+        s32 c[16];
+        s32 count;
+    } Lights;
+    Lights *p = self;
+    if (p->count != 0x10) {
+        p->used[p->count] = 1;
+        p->a[p->count] = *a;
+        p->b[p->count] = *b;
+        p->c[p->count] = c;
+        p->count++;
     }
 }
 
