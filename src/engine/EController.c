@@ -64,6 +64,22 @@ s32 fn_80310774(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0x1E0) > lbl_803F22B8[0];
 }
 
+s32 fn_80310790(char *self, f32 farg0) {
+    char *vt = *(char **)(self + 0x204);
+    if ((*(s32 (**)(char *))(vt + 0x1C))(self + *(s16 *)(vt + 0x18)) != 0) {
+        M2C_FIELD(self, f32 *, 0x1DC) = farg0;
+        return 1;
+    }
+    return 0;
+}
+
+void fn_803107F4(char *self, f32 farg0, f32 farg1) {
+    char *vt;
+    M2C_FIELD(self, f32 *, 0x1E4) = farg1;
+    vt = *(char **)(self + 0x204);
+    (*(void (**)(char *))(vt + 0x2C))(self + *(s16 *)(vt + 0x28));
+}
+
 s32 fn_80310A48(void *arg0, f32 farg0) {
     M2C_FIELD(arg0, f32 *, 0x1E4) = farg0;
     return 1;
@@ -386,6 +402,24 @@ s32 fn_803124DC(void *arg0, s32 arg1) {
 
 s32 fn_803124EC(void *arg0, s32 arg1, s32 arg2) {
     return ((struct { u8 pad[0x194]; s32 unk194[2][2]; } *)arg0)->unk194[arg1][arg2];
+}
+
+void *fn_80312504(void *arg0) {
+    extern char lbl_8041B210[];
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, void **, 8) = lbl_8041B210;
+    return arg0;
+}
+
+s32 *fn_80312524(s32 *self) {
+    self[5] = 0;
+    self[2] = 1;
+    self[4] = 0;
+    self[3] = 0;
+    self[0] = 1;
+    self[6] = 0;
+    return self;
 }
 
 void fn_8031254C(void *arg0, void *arg1) {
