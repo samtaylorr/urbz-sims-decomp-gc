@@ -1126,6 +1126,41 @@ s32 fn_80098A40(f32 arg0) {
     return n;
 }
 
+f32 fn_80098AD0(void *arg0, f32 x) {
+    extern const f32 lbl_803CCC18[];
+    extern const f32 lbl_803CCC1C[];
+    extern const f32 lbl_803CCC20[];
+    extern const f32 lbl_803CCC24[];
+    extern const f32 lbl_803CCC28[];
+    x -= M2C_FIELD(arg0, f32 *, 0x34);
+    while (x > lbl_803CCC1C[0]) {
+        x -= lbl_803CCC18[0];
+    }
+    while (x < lbl_803CCC20[0]) {
+        x += lbl_803CCC18[0];
+    }
+    if (x >= lbl_803CCC24[0]) {
+        if (x < lbl_803CCC28[0]) {
+            return lbl_803CCC24[0];
+        }
+    } else if (-x < lbl_803CCC28[0]) {
+        return lbl_803CCC24[0];
+    }
+    return x;
+}
+
+void fn_8009910C(void *arg0, s32 arg1) {
+    void fn_8019C10C(s32, s32, s32, s32);
+    s32 t = M2C_FIELD(arg0, s32 *, 0x100);
+    if (t == 2) {
+        fn_8019C10C(M2C_FIELD(arg0, s32 *, 4), 0x12, arg1, 1);
+    } else if (t == 1) {
+        fn_8019C10C(M2C_FIELD(arg0, s32 *, 4), 0x15, arg1, 1);
+    } else {
+        fn_8019C10C(M2C_FIELD(arg0, s32 *, 4), 0x14, arg1, !(M2C_FIELD(arg0, u32 *, 0x4D4) & 0x40));
+    }
+}
+
 s32 fn_80099818(void *arg0) {
     s32 result = 0;
     void *obj;
@@ -1148,15 +1183,19 @@ s32 fn_80099818(void *arg0) {
 }
 
 void fn_8009A1FC(void *arg0) {
-    extern f32 lbl_803CCCBC;
-    extern f32 lbl_803CCCC0;
+    extern f32 lbl_803CCCBC[];
+    extern f32 lbl_803CCCC0[];
+    extern f32 lbl_804941F4;
     extern void fn_802EB4F0(void *arg0, s32 arg1, f32 arg2, f32 arg3, f32 arg4);
-    s32 temp_r0;
+    u32 fl = M2C_FIELD(arg0, u32 *, 0x4D4);
 
-    temp_r0 = M2C_FIELD(arg0, s32 *, 0x4D4);
-    if (temp_r0 & 0x10000) {
-        M2C_FIELD(arg0, s32 *, 0x4D4) = temp_r0 & ~0x10000;
-        fn_802EB4F0((char *)M2C_FIELD(arg0, void **, 8) + 0x314, 0x40, lbl_803CCCBC, 0.0f, lbl_803CCCC0);
+    if (fl & 0x10000) {
+        u8 *obj = (u8 *)M2C_FIELD(arg0, void **, 8);
+        f32 a = lbl_803CCCBC[0];
+        f32 b = lbl_804941F4;
+        f32 c = lbl_803CCCC0[0];
+        M2C_FIELD(arg0, u32 *, 0x4D4) = fl & ~0x10000;
+        fn_802EB4F0(obj + 0x314, 0x40, a, b, c);
     }
 }
 
