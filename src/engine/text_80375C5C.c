@@ -17,15 +17,13 @@ s32 fn_80240EC0(s32, s32, s32);
 
 s32 fn_80375CB8(s32 arg0, s32 arg1, s32 arg2);
 s32 fn_80375CB8(s32 arg0, s32 arg1, s32 arg2) {
-    switch (arg0) {
-    case 1:
-    case 2:
-        return fn_80375C5C(arg1, arg2);
-    case 0:
-        return -1;
-    default:
+    if ((u32)(arg0 - 1) > 1) {
+        if (arg0 == 0) {
+            return -1;
+        }
         return fn_80240ED8(arg0);
     }
+    return fn_80375C5C(arg1, arg2);
 }
 
 void fn_80375D08(void) {
@@ -89,5 +87,16 @@ s32 fn_803781DC(char *f, const char *fmt, ...) {
     va_list ap;
     va_start(ap, fmt);
     return fn_80249468(f, *(s32 *)(f + 8), fmt, ap);
+}
+
+s32 fn_80378278(const char *fmt, ...) {
+    extern char *lbl_80494988;
+    s32 fn_80249390(void *, const char *, va_list);
+    va_list ap;
+    char *g;
+    va_start(ap, fmt);
+    g = lbl_80494988;
+    *(char **)(*(char **)(g + 8) + 0x5C) = g;
+    return fn_80249390(*(void **)(g + 8), fmt, ap);
 }
 
