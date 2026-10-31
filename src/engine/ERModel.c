@@ -263,6 +263,21 @@ s32 fn_8032BD88(u8 *self) {
     return ret;
 }
 
+void fn_8032BE10(u8 *self) {
+    extern void fn_8031AEE4(u8 *);
+    extern void fn_80300488(u8 *);
+    s32 i;
+
+    if (*(s32 *)(self + 0x12C) != 0) {
+        for (i = 0; i < ListCount(self + 0x130); i++) {
+            fn_8031AEE4(*(u8 **)(self + 0x130) + i * 0xE0);
+        }
+        for (i = 0; i < ListCount(self + 0x20); i++) {
+            fn_80300488(*(u8 **)(self + 0x20) + i * 0x18);
+        }
+    }
+}
+
 void fn_8032BEB8(u8 *self) {
     extern void fn_80300364(u8 *);
     s32 i;
