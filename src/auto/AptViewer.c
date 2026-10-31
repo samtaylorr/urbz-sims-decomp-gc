@@ -62,7 +62,7 @@ void fn_8000A798(void) {
 void *fn_8000A8D8(void *);
 extern void *lbl_804956BC;
 void fn_8000A7C4(void) {
-    extern u8 lbl_8041F94C[];
+    extern struct { u8 pad[0x378]; s32 unk378; } lbl_8041F94C;
     void fn_800C2950(void);
     s32 fn_800C2970(void);
     void fn_80279D50(s32);
@@ -77,7 +77,7 @@ void fn_8000A7C4(void) {
         n = 0x42;
     }
     fn_80279D50(n);
-    M2C_FIELD(lbl_8041F94C, s32 *, 0x378) += n;
+    lbl_8041F94C.unk378 += n;
 }
 
 void fn_8000A9B4(u8 *self, s32 flags) {
