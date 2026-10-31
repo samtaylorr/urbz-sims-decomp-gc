@@ -11029,6 +11029,22 @@ void fn_803B78AC(void) {
 
 }
 
+void fn_803B78B0(void *arg0, s32 arg1) {
+    extern char lbl_804185D8[];
+    extern void (*lbl_80443318[])(void *, s32);
+    extern void fn_802ADDF4(void *, s32);
+    void *p;
+    p = M2C_FIELD(arg0, void **, 0xc);
+    M2C_FIELD(arg0, void **, 0x14) = lbl_804185D8;
+    if (p) {
+        fn_802ADDF4(p, 0);
+        lbl_80443318[0](p, 0x10);
+    }
+    if (arg1 & 1) {
+        fn_802D20E8(arg0);
+    }
+}
+
 extern void (*lbl_80443318[])(void);
 void fn_803B79BC(void) {
     lbl_80443318[0]();
