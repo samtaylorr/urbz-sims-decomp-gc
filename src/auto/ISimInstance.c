@@ -105,6 +105,25 @@ s32 fn_80064064(void *self, void *obj) {
     return 0;
 }
 
+void fn_80064368(void *arg0, s32 arg1) {
+    u32 mask;
+    void *node;
+
+    mask = 0;
+    switch (arg1) {
+    case 0:
+        mask = 1;
+        break;
+    case 1:
+        mask = 8;
+        break;
+    }
+    for (node = M2C_FIELD(arg0, void **, 4); node != NULL; node = M2C_FIELD(node, void **, 0x10)) {
+        void *obj = M2C_FIELD(node, void **, 0x1C);
+        M2C_FIELD(obj, u32 *, 0x30C) &= ~mask;
+    }
+}
+
 void fn_800645CC(void *arg0, void *arg1) {
     M2C_UNK fn_802CD218(void *, s32);
     void *node;
