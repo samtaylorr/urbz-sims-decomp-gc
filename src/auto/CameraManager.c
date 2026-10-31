@@ -300,9 +300,9 @@ void fn_80016C14(void *arg0) {
     extern u8 lbl_803C2684[];
     if ((s32) M2C_FIELD(arg0, s32 *, 0xF34) != 0) {
         fn_8000AA2C(M2C_FIELD(arg0, s32 *, 0xED4), lbl_803C2684, 0, 0, 0);
-        M2C_FIELD(arg0, volatile s32 *, 0xF34) = 0;
-        M2C_FIELD(arg0, s32 *, 0xF20) = 1;
+        M2C_FIELD(arg0, s32 *, 0xF34) = 0;
     }
+    M2C_FIELD(arg0, s32 *, 0xF20) = 1;
 }
 
 void fn_80016C78(void) {
