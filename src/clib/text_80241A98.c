@@ -52,6 +52,15 @@ void fn_802423A8(void) {
     fn_802422FC();
 }
 
+void fn_802427B4(s32 arg0) {
+    extern s32 lbl_803F73C0[];
+    extern s32 lbl_803F710C[];
+    if (arg0 == -0x8000) {
+        lbl_803F73C0[0] = arg0;
+        lbl_803F710C[0] = 0;
+    }
+}
+
 void fn_802427D4(void) {
     extern s32 lbl_803F73C0[];
     extern s32 lbl_80440580[];
