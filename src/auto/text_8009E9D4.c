@@ -5,6 +5,17 @@ extern s32 lbl_804942B4;
 
 void fn_8031EA2C(void *);
 
+void fn_800F6FB4(void *, void *, s32);
+
+typedef struct LocalStr8 {
+    u8 hdr[8];
+    char buf[16];
+} LocalStr8;
+
+static inline void LocalStr8_Init(LocalStr8 *s) {
+    fn_800F6FB4(s, s->buf, 8);
+}
+
 static inline void ReleasePtr(void **pp) {
     if (*pp != NULL) {
         fn_8031EA2C(*pp);
@@ -120,22 +131,12 @@ void fn_800A36B4(char *arg0, s32 arg1) {
     void fn_800A3600(void **);
     void fn_800F1A60(void *, s32);
     void fn_80307364(void *, s32);
-    void fn_8031EA2C(void *);
     extern u8 lbl_8040A068[];
-    void **pp;
 
     M2C_FIELD(arg0, void **, 0x44) = lbl_8040A068;
-    M2C_FIELD(arg0, s32 *, 0x68) = 0;
-    pp = (void **)(arg0 + 0x88);
-    if (*pp != NULL) {
-        fn_8031EA2C(*pp);
-        *pp = NULL;
-    }
-    pp = (void **)(arg0 + 0x8C);
-    if (*pp != NULL) {
-        fn_8031EA2C(*pp);
-        *pp = NULL;
-    }
+    M2C_FIELD(arg0, void *volatile *, 0x68) = NULL;
+    ReleasePtr((void **)(arg0 + 0x88));
+    ReleasePtr((void **)(arg0 + 0x8C));
     fn_800F1A60(arg0 + 0x60, 2);
     fn_800F1A60(arg0 + 0x5C, 2);
     fn_800F1A60(arg0 + 0x58, 2);
@@ -152,11 +153,11 @@ void fn_800A3EF0(char *arg0) {
     void *fn_800F7138(void *);
     void fn_800F22F0(void *, void *);
     void fn_803073C4(void *);
-    struct { u8 hdr[8]; char buf[16]; } s;
-    char *sp = (char *)&s;
+    struct S { u8 hdr[8]; char buf[16]; } s;
+    struct S *sp = &s;
 
     fn_800A2EF0(M2C_FIELD(arg0, s32 *, 0x64), M2C_FIELD(arg0, s32 *, 0x68), arg0 + 0x6C);
-    fn_800F6FB4(sp, sp + 8, 8);
+    fn_800F6FB4(sp, sp->buf, 8);
     fn_800F7494(sp, M2C_FIELD(arg0, s32 *, 0x6C));
     fn_800F22F0(arg0 + 0x60, fn_800F7138(sp));
     fn_803073C4(arg0);
