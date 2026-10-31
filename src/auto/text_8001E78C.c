@@ -17,6 +17,11 @@ static inline s32 Handle_Get(Handle *h) {
     return h->p != NULL ? *h->p : 0;
 }
 
+static inline void State_Set(void *s, s32 a, s32 b) {
+    M2C_FIELD(s, s32 *, 0) = a;
+    M2C_FIELD(s, s32 *, 4) = b;
+}
+
 u8 *fn_8001E78C(u8 *self) {
     extern void fn_800F160C(void *);
     extern u8 lbl_803C49E4[];
@@ -109,7 +114,6 @@ s32 fn_80021CD8(s32 c) {
 
 void *fn_8002246C(void *arg0) {
     extern char lbl_804071F8[];
-    struct P { s32 a; s32 b; } t = { 0, 2 };
     char *list;
 
     M2C_FIELD(arg0, char **, 0x18) = lbl_804071F8;
@@ -117,8 +121,9 @@ void *fn_8002246C(void *arg0) {
     M2C_FIELD(list, s32 *, 4) = 0;
     M2C_FIELD(list, s32 *, 0) = 0;
     M2C_FIELD(list, s32 *, 8) = 1;
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 2;
     M2C_FIELD(arg0, s32 *, 0x14) = 0;
-    *(struct P *)arg0 = t;
     return arg0;
 }
 
@@ -141,7 +146,6 @@ void fn_800224AC(void *arg0, s32 flags) {
 
 void fn_800227CC(void *arg0) {
     void fn_802CBB10(void *, void *);
-    struct P { s32 a; s32 b; } t = { 0, 2 };
     char *obj;
     char *e;
 
@@ -151,8 +155,9 @@ void fn_800227CC(void *arg0) {
         e = M2C_FIELD(obj, char **, 0x44) + 8;
         (*(void (**)(void *, s32))(e + 4))(obj + *(s16 *)e, 3);
     }
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 2;
     M2C_FIELD(arg0, void **, 0x14) = NULL;
-    *(struct P *)arg0 = t;
 }
 
 void fn_80022840(void *arg0) {
