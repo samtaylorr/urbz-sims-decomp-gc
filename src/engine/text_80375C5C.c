@@ -1,6 +1,11 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+s32 fn_80375C5C(s32, s32);
+s32 fn_80240ED8(s32);
+s32 fn_80240EB8(s32, s32);
+s32 fn_80240EC0(s32, s32, s32);
+
 s32 fn_80375CB8(s32 arg0, s32 arg1, s32 arg2);
 s32 fn_80375CB8(s32 arg0, s32 arg1, s32 arg2) {
     if ((u32)(arg0 - 1) <= 1) {
