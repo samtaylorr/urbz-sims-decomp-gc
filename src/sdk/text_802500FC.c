@@ -90,6 +90,8 @@ void fn_80251884(s32 arg0) {
     lbl_804949A8 = arg0;
 }
 
+void fn_80251BD8(void *addr) { __dcbst(addr, 0); }
+
 void fn_80251BE0(void *addr) { __dcbf(addr, 0); }
 
 void fn_80251BE8(void *addr) { __dcbi(addr, 0); }
