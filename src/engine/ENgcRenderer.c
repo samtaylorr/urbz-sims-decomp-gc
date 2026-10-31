@@ -166,6 +166,13 @@ void fn_8035BF60(void) {
     }
 }
 
+void fn_8035DA08(u8 *self) {
+    extern u8 lbl_8041CEC0[];
+    void fn_8036EEE0(u8 *);
+    *(u8 **)(self + 0x20) = lbl_8041CEC0;
+    fn_8036EEE0(self);
+}
+
 void fn_8035DA38(u8 *arg0) {
     extern u8 *lbl_80495050;
     u8 *obj = lbl_80495050;
