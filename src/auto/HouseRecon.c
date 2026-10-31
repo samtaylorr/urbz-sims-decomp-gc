@@ -21,19 +21,16 @@ typedef struct {
 
 void *fn_8004FFDC(u8 **arg0, s32 arg1) {
     u8 *base = *arg0;
-    HouseReconEntry *e = (HouseReconEntry *)(base + 0x8004);
     s32 *count = (s32 *)(base + 0x16004);
+    HouseReconEntry *e = (HouseReconEntry *)(base + 0x8004);
     HouseReconEntry *r = NULL;
     s32 i = 0;
-    if (i < *count) {
-        if (e[0].unkC == arg1) {
-            return e;
+    while (i < *count) {
+        if (e[i].unkC == arg1) {
+            r = &e[i];
+            break;
         }
-        for (i = 1; i < *count; i++) {
-            if (e[i].unkC == arg1) {
-                return &e[i];
-            }
-        }
+        i++;
     }
     return r;
 }
@@ -55,15 +52,14 @@ void *fn_80050040(u8 *arg0) {
 void fn_800500A4(u8 *arg0, s32 arg1) {
     extern void fn_800ECE00(void *, s32);
     extern void fn_802D20E8(void *);
-    u8 *begin = arg0 + 0x8004;
+    HouseReconEntry *begin = (HouseReconEntry *)(arg0 + 0x8004);
     if (begin != NULL) {
-        u8 *p = begin + 0xE000;
-        u8 *b = begin;
-        if (b != p) {
+        HouseReconEntry *p = (HouseReconEntry *)(arg0 + 0x16004);
+        if (begin != p) {
             do {
-                p -= 0x1C;
-                fn_800ECE00(p + 0x10, 2);
-            } while (b != p);
+                p--;
+                fn_800ECE00((u8 *)p + 0x10, 2);
+            } while (begin != p);
         }
     }
     if (arg1 & 1) {
