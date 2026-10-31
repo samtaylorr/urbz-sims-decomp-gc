@@ -182,6 +182,12 @@ void fn_801D4A60(u8 *self, struct CasVec3 { f32 x, y, z; } *a, struct CasVec3 *b
     *b = *(struct CasVec3 *)(self + 0xEC);
 }
 
+void fn_801D4A9C(u8 *self, void *a, void *b) {
+    struct CasVec3b { f32 x, y, z; };
+    *(struct CasVec3b *)(self + 0xE0) = *(struct CasVec3b *)a;
+    *(struct CasVec3b *)(self + 0xEC) = *(struct CasVec3b *)b;
+}
+
 void fn_801D4AD8(s32 arg0, s32 arg1) {
     extern u8 lbl_804362B4[];
     if (arg1 == 0xFFFF) {
