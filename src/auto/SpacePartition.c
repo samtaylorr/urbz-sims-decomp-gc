@@ -46,6 +46,12 @@ static inline SPCell *SPart_Cell(SPart *sp, u32 n) {
 }
 
 extern void fn_80192EEC(SPart *, SPNode *, SPNode *, SPRect *);
+SPCell *fn_80192D9C(SPCell *self, SPRect *r, s32 arg2) {
+    self->rect = *r;
+    self->unk10 = arg2;
+    return self;
+}
+
 SPCell *fn_80192DC8(SPCell *self, s32 y0, s32 x0, s32 y1, s32 x1, s32 arg5) {
     self->rect.y0 = y0;
     self->rect.y1 = y1;
