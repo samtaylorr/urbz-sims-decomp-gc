@@ -68,7 +68,7 @@ s32 fn_8001D694(ESimsIdVec *arg0, s32 arg1) {
     found = 0;
     n = arg0->end - arg0->begin;
     for (i = 0; i < n; i++) {
-        if (*(s32 *)((u32)arg0->begin + i * 4) == arg1) {
+        if (*ESimsIdVec_at(arg0, i) == arg1) {
             found = 1;
             break;
         }
