@@ -64,6 +64,14 @@ s32 fn_80343C8C(void) {
     return 0;
 }
 
+extern u8 lbl_8041C870[];
+extern void *lbl_80495060;
+extern void fn_80344100(void *, s32, u32 *);
+s32 fn_80344630(s32 arg0, s32 arg1, s32 arg2, s32 *arg3) {
+    *arg3 = 0;
+    return 1;
+}
+
 s32 fn_80344640(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 *arg4) {
     *arg4 = 0;
     return 1;
