@@ -673,14 +673,14 @@ block_4:
 void fn_80192964(char *self, s32 arg1) {
     s32 fn_80192850(char *);
     void fn_801051C8(s32, u16);
-    extern f32 lbl_803DB008;
+    extern f32 lbl_803DB008[];
     s32 t;
 
     if (fn_80192850(self) == 0 && *(s32 *)(self + 0x8C) != arg1 &&
         *(s32 *)(self + 0x90) == 0) {
         t = *(s32 *)(self + 0x98);
         *(s32 *)(self + 0x8C) = arg1;
-        if (t == 0 && *(f32 *)(self + 0x7C) < lbl_803DB008) {
+        if (t == 0 && *(f32 *)(self + 0x7C) < lbl_803DB008[0]) {
             fn_801051C8(0xED, *(u16 *)self);
         }
     }
