@@ -86,9 +86,11 @@ void fn_802EDAA0(char *self) {
     Ent *vt = *(Ent **)self;
     Ent *e;
     char *obj;
+    s32 t;
     ((void (*)(void *))vt[44].pfn)(self + vt[44].delta);
+    t = lbl_80494FDC;
     *(s32 *)(self + 4) = 0;
-    fn_802E1378(lbl_80494FDC);
+    fn_802E1378(t);
     obj = lbl_80495220;
     e = &(*(Ent **)(obj + 0x338))[6];
     ((void (*)(void *, s32, s32))e->pfn)(obj + e->delta, lbl_80494DF8, fn_802E0FB4(lbl_80494FDC));
