@@ -110,12 +110,42 @@ void fn_8019882C(void) {
     fn_800F1A60((s32)&lbl_80495D10, 2);
 }
 
+s32 fn_80199004(s32 *self, char **obj) {
+    s32 fn_8016CCE0(s32);
+    s32 id = 0;
+    s32 sub = 0;
+    if (obj != NULL) {
+        char *o = *obj;
+        char *vt = *(char **)(o + 4);
+        id = fn_8016CCE0((*(s32 (**)(void *))(vt + 0x32C))(o + *(s16 *)(vt + 0x328)));
+        o = *obj;
+        vt = *(char **)(o + 4);
+        sub = (*(s32 (**)(void *))(vt + 0x2EC))(o + *(s16 *)(vt + 0x2E8));
+    }
+    return self[0] == id && *(s16 *)((char *)self + 4) == sub;
+}
+
 void fn_801991B4(void) {
 
 }
 
 void fn_801991B8(void) {
 
+}
+
+s32 fn_80199300(s32 *a, s32 *b) {
+    return b[2] == a[0] && b[4] == a[1];
+}
+
+void fn_8019964C(void) {
+    void *fn_800F5248(void *, char *);
+    void fn_80198C5C(void);
+    extern char lbl_803DB348[];
+    extern char lbl_803DB350[];
+    extern s32 lbl_80495A90;
+    fn_800F5248(&lbl_80495A90, lbl_803DB348);
+    fn_800F5248(&lbl_80495A90, lbl_803DB350);
+    fn_80198C5C();
 }
 
 void fn_8019968C(void *arg0) {
