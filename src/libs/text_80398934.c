@@ -10944,6 +10944,32 @@ s32 fn_803B7700(s32 *arg0) {
     return fn_802486DC(*arg0 + 8) == 0;
 }
 
+void fn_803B7730(u8 *self) {
+    s32 i;
+    s32 *list;
+    u8 *obj;
+    u8 *vt;
+
+    i = *(s32 *)(self + 0x14);
+    if (i > 0) {
+        list = (s32 *)(self + 0x14);
+        do {
+            obj = ((u8 **)list[2])[*(s32 *)(self + 0x14) - 1];
+            vt = *(u8 **)(obj + 4);
+            (*(void (**)(void *))(vt + 0x14))(obj + *(s16 *)(vt + 0x10));
+            *(s32 *)(self + 0x14) = *(s32 *)(self + 0x14) - 1;
+        } while (--i != 0);
+    }
+}
+
+void fn_803B77AC(u8 *self) {
+    extern void fn_802ADE44(s32);
+    if (*(s32 *)(self + 0xc) != 0) {
+        fn_802ADE44(*(s32 *)(self + 0xc));
+    }
+    *(s32 *)(self + 0x10) = 1;
+}
+
 void fn_803B77EC(void *arg0, s32 arg1) {
     extern char lbl_804189F0[];
     extern void (*lbl_80443318[])(void *, s32);
