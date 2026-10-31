@@ -24,8 +24,8 @@ void fn_801B3908(void *, s32);
 void fn_801B3910(void *, u16);
 
 static inline char *FamilySub_Init(char *sub) {
-    s32 tmp[2];
-    M2C_FIELD(sub, s32 *, 4) = 0;
+    char **pp = &sub;
+    M2C_FIELD(*pp, s32 *, 4) = 0;
     return sub;
 }
 
@@ -42,15 +42,11 @@ void fn_80107B70(u8 **self) {
 
     if (self[2] != NULL) {
         obj = *self;
-        if (*(u8 **)(obj + 0xC) != NULL) {
-            n = obj;
-        } else {
-            n = obj;
-        }
+        n = *(u8 **)(obj + 0xC) != NULL ? *self : obj;
         p = n != NULL ? fn_8015125C(***(void ****)(n + 4), 9) : NULL;
         while (p != NULL) {
-            n = *(u8 **)(*(u8 **)p + 8);
             ((u8 **)p)[2] = NULL;
+            n = *(u8 **)(*(u8 **)p + 8);
             p = n != NULL ? fn_8015125C(***(void ****)(n + 4), 9) : NULL;
         }
     }
@@ -219,14 +215,12 @@ void *fn_8010B59C(void *self, void *arg1) {
     extern u8 lbl_8040E628[];
     void fn_800F160C(void *);
     void fn_800F2868(void *, s32, s32);
-    FamilyPair p;
 
     M2C_FIELD(self, void **, 0) = lbl_8040E628;
     fn_800F160C((char *)self + 4);
     M2C_FIELD(self, void **, 8) = arg1;
-    p.a = 0;
-    p.b = 0;
-    M2C_FIELD(self, FamilyPair *, 0x24) = p;
+    M2C_FIELD(self, s32 *, 0x24) = 0;
+    M2C_FIELD(self, s32 *, 0x28) = 0;
     FamilySub_Init((char *)self + 0x2C);
     M2C_FIELD(self, s32 *, 0xC) = 0;
     M2C_FIELD(self, s32 *, 0x14) = 0;
