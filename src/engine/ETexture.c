@@ -249,6 +249,12 @@ void fn_8036F254(void *arg0) {
     M2C_FIELD(arg0, s32 *, 8) = (s32) (M2C_FIELD(arg0, s32 *, 8) | 0x80);
 }
 
+void fn_8036F264(void) {
+    extern void fn_80378278(const char *, ...);
+    extern char lbl_803F543C[];
+    fn_80378278(lbl_803F543C);
+}
+
 s32 fn_8036F290(void *arg0) {
     return M2C_FIELD(arg0, u32 *, 0x20) == 0x900DBEEF;
 }
