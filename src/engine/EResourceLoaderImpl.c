@@ -368,8 +368,6 @@ void *fn_8031E664(void *arg0, void *arg1, s32 arg2, void *arg3, s32 arg4, s32 ar
 
 void fn_8031E724(s32 arg0, s32 arg1) {
     extern u8 lbl_8045A228[];
-    void fn_8031CC58(void *);
-    void fn_8031CD18(void *, s32);
 
     if (arg1 == 0xFFFF) {
         if (arg0 != 0) {
