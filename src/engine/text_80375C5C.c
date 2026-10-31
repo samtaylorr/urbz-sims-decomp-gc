@@ -155,6 +155,19 @@ void fn_803783F0(char *s) {
     }
 }
 
+void fn_80378498(void) {
+    extern void (*lbl_803C0D60[])(void);
+    u32 nptrs = (u32)lbl_803C0D60[0];
+    u32 i;
+    if (nptrs == (u32)-1) {
+        for (nptrs = 0; lbl_803C0D60[nptrs + 1] != 0; nptrs++)
+            ;
+    }
+    for (i = nptrs; i >= 1; i--) {
+        lbl_803C0D60[i]();
+    }
+}
+
 typedef void (*func_ptr)(void);
 void fn_80378528(void) {
     extern s32 lbl_804760E0[];
