@@ -379,7 +379,7 @@ s32 fn_8036F568(void *arg0, s32 arg1) {
 }
 
 s32 fn_8036F5AC(void *arg0, s32 arg1) {
-    void *fn_8036F6E4();
+    void *fn_8036F6E4(void *, s32, s32);
     s32 var_r0;
     void *temp_r3;
 
