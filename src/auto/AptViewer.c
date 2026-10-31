@@ -146,6 +146,23 @@ void fn_8000B13C(void *self, u8 *arg1, s32 arg2) {
     }
 }
 
+void fn_8000B198(void *arg0) {
+    void fn_8027897C(char *, char *);
+    void fn_80279D50(s32);
+    extern char lbl_803C1954[];
+    extern char lbl_803C1958[];
+
+    if (M2C_FIELD(arg0, s32 *, 0x350) != 0) {
+        fn_8027897C(lbl_803C1954, lbl_803C1958);
+        fn_80279D50(500);
+        fn_80279D50(500);
+        fn_80279D50(500);
+        fn_80279D50(500);
+        fn_80279D50(500);
+        M2C_FIELD(arg0, s32 *, 0x350) = 0;
+    }
+}
+
 s32 fn_8000B210(void) {
     return 0;
 }
