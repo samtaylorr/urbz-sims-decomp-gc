@@ -2,6 +2,7 @@
 #include "common.h"
 
 void fn_800C3828(void *);
+void fn_8000AA2C(void *self, const char *fmt, s32 arg2, s32 arg3, s32 arg4, ...);
 void fn_8000A794(void) {
 
 }
