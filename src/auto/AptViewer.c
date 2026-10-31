@@ -221,6 +221,7 @@ void fn_8000C06C(u8 *self, u32 index, s32 a, s32 b) {
 
 void fn_8000C0D0(u8 *self, u32 index, s32 a, s32 b) {
     extern void fn_8031185C(s32, s32, s32);
+    s32 fn_8000C170(void *self, s32 arg);
     if (*(s32 *)(self + 0x3A8) != 0) {
         if (index > 1) {
             index = 0;
@@ -232,15 +233,17 @@ void fn_8000C0D0(u8 *self, u32 index, s32 a, s32 b) {
 }
 
 s32 fn_8000C12C(u8 *self, u32 index) {
-    s32 j;
+    s32 *tbl;
+    s32 *cur;
     if (*(s32 *)(self + 0x3A8) == 0) {
         return -1;
     }
     if (index > 1) {
         index = 0;
     }
-    j = ((s32 *)(self + 0x450))[index];
-    return *(s32 *)((self + 0x3B0) + (j * 8 + index * 0x50));
+    cur = (s32 *)(self + 0x450);
+    tbl = (s32 *)(self + 0x3B0);
+    return *(s32 *)((u8 *)tbl + (cur[index] * 8 + index * 0x50));
 }
 
 extern void *lbl_80494FCC;
