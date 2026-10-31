@@ -150,6 +150,25 @@ s32 fn_8036F018(s32 *self) {
     return self[2];
 }
 
+void *fn_8036F020(u8 *self) {
+    extern u8 lbl_8041DCC8[];
+    *(u8 **)(self + 0x24) = lbl_8041DCC8;
+    *(s32 *)(self + 0x0) = 0;
+    *(s32 *)(self + 0x4) = 0;
+    *(s32 *)(self + 0x8) = 0;
+    *(s16 *)(self + 0x12) = 0x40;
+    *(s16 *)(self + 0x10) = 0x40;
+    self[0x18] = 1;
+    self[0x19] = 0;
+    self[0x1A] = 0x20;
+    self[0x1B] = 0;
+    *(s16 *)(self + 0x14) = 0;
+    *(s16 *)(self + 0x16) = 0;
+    *(s32 *)(self + 0x1C) = 0;
+    *(u32 *)(self + 0x20) = 0x900DBEEF;
+    return self;
+}
+
 void fn_8036F080(void *arg0, s32 arg1) {
     void fn_80338184(void *, void *);
     extern u8 lbl_8041DCC8[];
@@ -324,20 +343,21 @@ s32 fn_8036F3A4(void *arg0) {
 }
 
 s32 fn_8036F3E0(void **arg0, char *arg1, s32 arg2) {
+    typedef struct { s32 pad0; char name[0x84]; s32 x88; s32 x8c; s32 x90; s32 x94; } Tex;
     void *fn_8036FACC(s32);
     void fn_80248488(void *, s32, u32);
     void fn_80248784(char *, char *);
     extern s32 lbl_80495238;
-    void *p = fn_8036FACC(lbl_80495238);
+    Tex *p = fn_8036FACC(lbl_80495238);
     if (p == NULL) {
         return -2;
     }
-    fn_80248488(p, 0, 0x98);
-    fn_80248784((char *)p + 4, arg1);
-    M2C_FIELD(p, s32 *, 0x94) = arg2;
-    M2C_FIELD(p, s32 *, 0x90) = 0;
-    M2C_FIELD(p, s32 *, 0x88) = 0;
-    M2C_FIELD(p, s32 *, 0x8C) = 0;
+    fn_80248488(p, 0, sizeof(Tex));
+    fn_80248784(p->name, arg1);
+    p->x94 = arg2;
+    p->x90 = 0;
+    p->x88 = 0;
+    p->x8c = 0;
     *arg0 = p;
     return 0;
 }
@@ -361,19 +381,19 @@ void fn_8036F45C(void **arg0) {
 }
 
 void *fn_8036F4EC(void *arg0, char *arg1, s32 arg2, s32 arg3) {
+    typedef struct { s32 pad0; s32 pad4; s32 x8; s32 padc; char name[0x24]; } Node;
     void *fn_8036FACC(s32);
     void fn_80248488(void *, s32, u32);
     void fn_80248784(char *, char *);
     void fn_8036F7DC(void *, void *, s32);
     extern s32 lbl_8049523C;
-    void *p = fn_8036FACC(lbl_8049523C);
-    if (p == NULL) {
-        return NULL;
+    Node *p = fn_8036FACC(lbl_8049523C);
+    if (p != NULL) {
+        fn_80248488(p, 0, sizeof(Node));
+        fn_80248784(p->name, arg1);
+        p->x8 = arg2;
+        fn_8036F7DC(arg0, p, arg3);
     }
-    fn_80248488(p, 0, 0x34);
-    fn_80248784((char *)p + 0x10, arg1);
-    M2C_FIELD(p, s32 *, 8) = arg2;
-    fn_8036F7DC(arg0, p, arg3);
     return p;
 }
 
