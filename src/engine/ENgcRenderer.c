@@ -218,6 +218,31 @@ void fn_8035DE6C(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x24) = 1;
 }
 
+void fn_8035DE78(u8 *arg0) {
+    void fn_80272038(s32, s32, s32, s32);
+    void fn_80271978(s32, s32, u16, u16);
+    s32 fn_80361238(u8 *);
+    void fn_80271A28(u16, u16, s32, s32);
+    void fn_802723BC(s32, s32);
+    void fn_80270DB4(void);
+    void fn_80273F88(void);
+    void fn_80270D34(void);
+    u8 *t;
+    u16 w, h;
+
+    fn_80272038(0, 0, 0, 0);
+    fn_80271978(0, 0, *(u16 *)(arg0 + 2), *(u16 *)(arg0 + 6));
+    t = *(u8 **)(arg0 + 0x28);
+    w = *(u16 *)(t + 0x10);
+    h = *(u16 *)(t + 0x12);
+    fn_80271A28(w, h, fn_80361238(t), 0);
+    fn_802723BC(*(s32 *)(*(u8 **)(*(u8 **)(arg0 + 0x28) + 0x28) + 0x74), 1);
+    fn_80270DB4();
+    fn_80273F88();
+    fn_80270D34();
+    *(s32 *)(arg0 + 0x24) = 0;
+}
+
 extern void fn_802D20E8(void *);
 void fn_8035DFB8(void *self, s32 flags) {
     if (flags & 1) {
