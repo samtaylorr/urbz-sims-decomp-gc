@@ -1,7 +1,7 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
-void fn_8030AA98(void);
+void fn_8030AA98(void *arg0);
 extern void *lbl_80494FDC;
 void fn_80325C50(s32 arg0, void *arg1);
 extern char lbl_8041B020[];
@@ -223,12 +223,12 @@ void fn_8030C1D8(void *arg0) {
     f32 z, a, b;
 
     z = lbl_803F2088[0];
-    a = lbl_803F208C[0];
-    b = lbl_803F2090[0];
     M2C_FIELD(arg0, f32 *, 0x38) = M2C_FIELD(g, f32 *, 0x280);
     M2C_FIELD(arg0, f32 *, 0x3C) = M2C_FIELD(g, f32 *, 0x284);
+    a = lbl_803F208C[0];
     M2C_FIELD(arg0, f32 *, 0x40) = z;
     M2C_FIELD(M2C_FIELD(arg0, void **, 0x88), f32 *, 0xD4) = a;
+    b = lbl_803F2090[0];
     M2C_FIELD(M2C_FIELD(arg0, void **, 0x88), f32 *, 0xD0) = a;
     M2C_FIELD(M2C_FIELD(arg0, void **, 0x88), f32 *, 0x110) = b;
     M2C_FIELD(M2C_FIELD(arg0, void **, 0x88), f32 *, 0x10C) = b;
