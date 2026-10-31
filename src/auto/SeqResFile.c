@@ -115,6 +115,16 @@ void fn_8019882C(void) {
     fn_800F1A60((s32)&lbl_80495D10, 2);
 }
 
+void *fn_80198A08(void *arg0) {
+    void fn_80198854(void *, s32);
+    fn_80198854(arg0, 0);
+    M2C_FIELD(arg0, s32 *, 0x28) = 0;
+    M2C_FIELD(arg0, s32 *, 0x2C) = 0;
+    M2C_FIELD(arg0, s32 *, 0x30) = 0;
+    M2C_FIELD(arg0, s32 *, 0x34) = 0;
+    return arg0;
+}
+
 s32 fn_80199004(s32 *self, char **obj) {
     s32 fn_8016CCE0(s32);
     s32 id = 0;
@@ -172,8 +182,10 @@ void fn_8019968C(void *arg0) {
 }
 
 void fn_80199720(void *arg0) {
-    volatile s32 z[4];
-    SeqRes_Init(arg0);
+    struct { s32 a, b, c, d; } tmp;
+    void *self = arg0;
+    *(volatile s32 *)&tmp;
+    SeqRes_Init(self);
 }
 
 void fn_80199EB8(s32 *self) {
