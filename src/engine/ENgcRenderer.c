@@ -174,6 +174,14 @@ void fn_8035DB44(void) {
     fn_8036EFA4();
 }
 
+extern u8 lbl_8041CEC0[];
+void fn_8036EEE0(u8 *);
+extern u8 *lbl_80495050;
+void fn_803635F8(s32, s32, s32, s32);
+void fn_8035DB84(s32 *arg0, s32 arg1) {
+    fn_803635F8(*(s32 *)(*(u8 **)((u8 *)arg0[10] + 0x28) + 0x74), arg0[0], arg0[1], arg1);
+}
+
 void fn_8035DE6C(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x24) = 1;
 }
