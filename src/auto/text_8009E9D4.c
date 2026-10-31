@@ -143,7 +143,7 @@ void fn_800A3F74(char *arg0) {
     void fn_800A2794(void *, s32);
     extern f32 lbl_803CD990[];
     extern u8 lbl_8042F020[];
-    extern s32 lbl_8041F94C[];
+    extern struct { u8 pad[0xD8]; s32 arr[1]; } lbl_8041F94C;
     char *p;
 
     M2C_FIELD(arg0, f32 *, 0x19C) = lbl_803CD990[0];
@@ -151,7 +151,7 @@ void fn_800A3F74(char *arg0) {
     if (M2C_FIELD(arg0, s32 *, 0x174) == 3) {
         p = arg0 + 0x4C;
         fn_800A2B08(p);
-        fn_800A2794(p, lbl_8041F94C[M2C_FIELD(arg0, s32 *, 0x38) + 0x36]);
+        fn_800A2794(p, lbl_8041F94C.arr[M2C_FIELD(arg0, s32 *, 0x38)]);
     }
 }
 
