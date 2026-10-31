@@ -105,25 +105,25 @@ void fn_80064EC4(void *self) {
 }
 
 void fn_8006572C(f32 *arg0, f32 arg1, f32 arg2) {
-    f32 d;
-    f32 t;
+    f32 dx;
+    f32 dy;
 
-    d = arg0[0] - arg0[1];
-    if (d >= 0.0f) {
-        t = 0.5f * (d * arg1);
+    dx = arg0[0] - arg0[1];
+    if (dx >= 0.0f) {
+        arg1 = 0.5f * (dx * arg1);
     } else {
-        t = (-d * arg1) * 0.5f;
+        arg1 = (-dx * arg1) * 0.5f;
     }
-    arg0[0] -= t;
-    arg0[1] += t;
-    d = arg0[3] - arg0[2];
-    if (d >= 0.0f) {
-        t = 0.5f * (d * arg2);
+    arg0[0] -= arg1;
+    arg0[1] += arg1;
+    dy = arg0[3] - arg0[2];
+    if (dy >= 0.0f) {
+        arg2 = 0.5f * (dy * arg2);
     } else {
-        t = (-d * arg2) * 0.5f;
+        arg2 = (-dy * arg2) * 0.5f;
     }
-    arg0[3] -= t;
-    arg0[2] += t;
+    arg0[3] -= arg2;
+    arg0[2] += arg2;
 }
 
 void fn_800659A0(void **self, s32 flags) {
