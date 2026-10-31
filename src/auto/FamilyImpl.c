@@ -253,6 +253,13 @@ s32 fn_8010B9F0(s32 arg0) {
     return (*(s32 (**)(void *, s32))(vt + 0x54))(obj + *(s16 *)(vt + 0x50), arg0);
 }
 
+s32 fn_8010BA2C(s32 arg0) {
+    extern s32 lbl_80496650;
+    char *obj = (char *)lbl_80496650;
+    char *vt = *(char **)obj;
+    return (*(s32 (**)(void *, s32))(vt + 0x5C))(obj + *(s16 *)(vt + 0x58), arg0);
+}
+
 void fn_8010BAC4(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0xC) = 0;
     M2C_FIELD(arg0, s32 *, 0x14) = 0;
