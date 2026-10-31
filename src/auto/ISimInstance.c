@@ -104,6 +104,28 @@ void fn_80064EC4(void *self) {
     fn_800650DC(self, 0);
 }
 
+void fn_8006572C(f32 *arg0, f32 arg1, f32 arg2) {
+    f32 d;
+    f32 t;
+
+    d = arg0[0] - arg0[1];
+    if (d >= 0.0f) {
+        t = 0.5f * (d * arg1);
+    } else {
+        t = (-d * arg1) * 0.5f;
+    }
+    arg0[0] -= t;
+    arg0[1] += t;
+    d = arg0[3] - arg0[2];
+    if (d >= 0.0f) {
+        t = 0.5f * (d * arg2);
+    } else {
+        t = (-d * arg2) * 0.5f;
+    }
+    arg0[3] -= t;
+    arg0[2] += t;
+}
+
 void fn_800659A0(void **self, s32 flags) {
     *self = lbl_80409228;
     if (flags & 1) {
@@ -343,6 +365,10 @@ void fn_80066D8C(void) {
 
 s32 fn_80066D90(void) {
     return 0;
+}
+
+s32 fn_80066D98(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x134) != 0;
 }
 
 s32 fn_80066DB0(s32 arg0) {
