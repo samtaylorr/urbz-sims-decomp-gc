@@ -286,6 +286,13 @@ void fn_80175B08(void) {
     } while (var_ctr != 0);
 }
 
+s32 fn_80175BCC(s32 arg0, s32 arg1) {
+    if (arg1 == 0x12) {
+        return arg0;
+    }
+    return 0;
+}
+
 void fn_802D20E8(void *);
 void fn_80175C48(void *arg0, s32 arg1) {
     extern char lbl_804122E8[];
