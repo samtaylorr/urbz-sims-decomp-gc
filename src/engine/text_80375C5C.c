@@ -17,11 +17,11 @@ s32 fn_80240EC0(s32, s32, s32);
 
 s32 fn_80375CB8(s32 arg0, s32 arg1, s32 arg2);
 s32 fn_80375C5C(s32 arg0, s32 arg1) {
-    extern s32 lbl_80401388;
+    extern s32 lbl_80401388[];
     void fn_8025D78C(s32);
     void fn_8025D89C(s32, s32);
-    if (lbl_80401388 != 0) {
-        lbl_80401388 = 0;
+    if (lbl_80401388[0] != 0) {
+        lbl_80401388[0] = 0;
         fn_8025D78C(0);
     }
     fn_8025D89C(arg0, arg1);
@@ -143,6 +143,16 @@ void *fn_80378358(const void *key, const void *base, u32 nmemb, u32 size, s32 (*
         }
     }
     return NULL;
+}
+
+void fn_803783F0(char *s) {
+    extern const u8 lbl_803EBA39[];
+    while (*s) {
+        if (lbl_803EBA39[(s32)*s] & 1) {
+            *s = *s + 0x20;
+        }
+        s++;
+    }
 }
 
 typedef void (*func_ptr)(void);
