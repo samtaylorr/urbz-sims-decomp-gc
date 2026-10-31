@@ -144,26 +144,28 @@ s32 fn_802EEB54(void *arg0) {
 void fn_802EECEC(void *arg0) {
     f32 a, b, c, d;
 
-    if (M2C_FIELD(arg0, s32 *, 0x2CC) != 0) {
+    if (M2C_FIELD(arg0, s32 *, 0x2CC) == 0) {
+        if (M2C_FIELD(arg0, s32 *, 0x2A8) != 0) {
+            a = M2C_FIELD(arg0, f32 *, 0x2AC);
+            b = M2C_FIELD(arg0, f32 *, 0x2B0);
+            c = M2C_FIELD(arg0, f32 *, 0x2B4);
+            d = M2C_FIELD(arg0, f32 *, 0x2B8);
+        } else {
+            a = M2C_FIELD(arg0, f32 *, 0x2BC);
+            b = M2C_FIELD(arg0, f32 *, 0x2C0);
+            c = M2C_FIELD(arg0, f32 *, 0x2C4);
+            d = M2C_FIELD(arg0, f32 *, 0x2C8);
+        }
+    } else {
         a = M2C_FIELD(arg0, f32 *, 0x2D0);
         b = M2C_FIELD(arg0, f32 *, 0x2D4);
         c = M2C_FIELD(arg0, f32 *, 0x2D8);
         d = M2C_FIELD(arg0, f32 *, 0x2DC);
-    } else if (M2C_FIELD(arg0, s32 *, 0x2A8) != 0) {
-        a = M2C_FIELD(arg0, f32 *, 0x2AC);
-        b = M2C_FIELD(arg0, f32 *, 0x2B0);
-        c = M2C_FIELD(arg0, f32 *, 0x2B4);
-        d = M2C_FIELD(arg0, f32 *, 0x2B8);
-    } else {
-        a = M2C_FIELD(arg0, f32 *, 0x2BC);
-        b = M2C_FIELD(arg0, f32 *, 0x2C0);
-        c = M2C_FIELD(arg0, f32 *, 0x2C4);
-        d = M2C_FIELD(arg0, f32 *, 0x2C8);
     }
     M2C_FIELD(arg0, f32 *, 0x2E0) = a;
-    M2C_FIELD(arg0, f32 *, 0x2EC) = d;
     M2C_FIELD(arg0, f32 *, 0x2E4) = b;
     M2C_FIELD(arg0, f32 *, 0x2E8) = c;
+    M2C_FIELD(arg0, f32 *, 0x2EC) = d;
 }
 
 void fn_802EED50(char *self, f32 a, f32 b, f32 c, f32 d) {
@@ -178,10 +180,10 @@ void fn_802EED50(char *self, f32 a, f32 b, f32 c, f32 d) {
 }
 
 void fn_802EED94(void *arg0, f32 a, f32 b, f32 c, f32 d) {
-    M2C_FIELD(arg0, f32 *, 0x2FC) = d;
     M2C_FIELD(arg0, f32 *, 0x2F0) = a;
     M2C_FIELD(arg0, f32 *, 0x2F4) = b;
     M2C_FIELD(arg0, f32 *, 0x2F8) = c;
+    M2C_FIELD(arg0, f32 *, 0x2FC) = d;
 }
 
 void fn_802EEDA8(void *arg0, f32 *arg1, f32 *arg2, f32 *arg3, f32 *arg4) {
