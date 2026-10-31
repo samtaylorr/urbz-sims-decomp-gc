@@ -16,6 +16,12 @@ static inline void INV_setStr(void *dst, void *key) {
     fn_800F1B80(dst, h.p != NULL ? (void *)*h.p : NULL);
 }
 
+static inline void INV_setStrT(void *dst, void *tbl, void *key) {
+    INVHandle fn_8004C168();
+    INVHandle h = fn_8004C168(tbl, key);
+    fn_800F1B80(dst, h.p != NULL ? (void *)*h.p : NULL);
+}
+
 static inline void *INV_getStr(void *key) {
     INVHandle fn_8004C168();
     extern u8 lbl_8041F94C[];
@@ -3459,14 +3465,13 @@ void fn_8020A500(u8 *arg0) {
     extern u8 lbl_803E6F74[];
     extern u8 lbl_803E7034[];
     INVHandle h1, h2, h3;
+    void *dst;
     s32 zero;
 
     fn_800F1B80(arg0 + 0xAC, (h1 = fn_8004C168(lbl_8041F94C, lbl_803E718C)).p != NULL ? (void *)*h1.p : NULL);
-    {
-        register u8 *t asm("r4");
-        t = lbl_8041F94C;
-        fn_800F1B80(arg0 + 0xB4, (h2 = fn_8004C168(t, lbl_803E70E8)).p != NULL ? (void *)*h2.p : NULL);
-    }
+    dst = arg0 + 0xB4;
+    h2 = fn_8004C168(lbl_8041F94C, lbl_803E70E8);
+    fn_800F1B80(dst, h2.p != NULL ? (void *)*h2.p : NULL);
     fn_800F1B80(arg0 + 0xB8, (h3 = fn_8004C168(lbl_8041F94C, lbl_803E70EC)).p != NULL ? (void *)*h3.p : NULL);
     fn_800F1B80(arg0 + 0xBC, lbl_803E6F74);
     zero = 0;
