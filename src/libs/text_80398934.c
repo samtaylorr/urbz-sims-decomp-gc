@@ -228,6 +228,11 @@ static inline Pair8 *Pair8_CopyW(Pair8 *first, Pair8 *last, Pair8 *result) {
     return Pair8_CopyRA(first, last, result, (s32 *)0);
 }
 
+static inline Pair8 *Pair8Vec_begin(Pair8Vec *v) { return v->start; }
+static inline Pair8 *Pair8Vec_end(Pair8Vec *v) { return v->finish; }
+static inline u32 Pair8Vec_size(Pair8Vec *v) { return Pair8Vec_end(v) - Pair8Vec_begin(v); }
+static inline u32 Pair8Vec_capacity(Pair8Vec *v) { return v->end - Pair8Vec_begin(v); }
+
 typedef struct { Pair8 *p; } Pair8It;
 
 static inline Pair8It Pair8_ItCopy(Pair8It first, Pair8It last, Pair8It result) {
@@ -3369,8 +3374,8 @@ void **fn_803A0A44(void **self, void **other) {
                     size = 0;
                     tmp = (void **)fn_802D1FC8(bytes);
                 } else {
-                    tmp = (void **)fn_80399BE8(bytes);
-                    size = 0;
+                    size = bytes;
+                    tmp = (void **)fn_80399BE8(size);
                 }
             } else {
                 tmp = NULL;
@@ -5294,9 +5299,9 @@ void fn_803A8188(u8 **self, void *unused, void *stream, void *arg3) {
     d = size - n;
     if (d < 0) {
         Elem12 zero;
-        Elem12 *zp;
+        Elem12 *zp = &zero;
         s32 cnt = n - size;
-        fn_80248488(zp = &zero, 0, sizeof(zero));
+        fn_80248488(zp, 0, 12, cnt);
         fn_803A7DD0(self, end, cnt, zp);
     } else if (d > 0) {
         Vec12Elem *first = (Vec12Elem *)self[1] - d;
