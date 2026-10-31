@@ -302,6 +302,13 @@ s32 fn_8004382C(s32 arg0) {
     return *(s32 *)(*(u8 **)(*(u8 **)(list + 4) + 0x2C) + 0x8);
 }
 
+void fn_8004384C(void) {
+    void fn_8033921C(s32, s32);
+    if (lbl_8049407C != -1) {
+        fn_8033921C(lbl_8049407C, -1);
+    }
+}
+
 void fn_800438D0(f32 farg0) {
     void fn_803392AC(s32, s32, void *);
     extern f32 lbl_803C615C[];
