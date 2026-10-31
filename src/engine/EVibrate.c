@@ -50,15 +50,15 @@ s32 fn_80314DB0(s32 *self) {
 s32 fn_80314DB8(void *self, s32 idx) {
     extern void *lbl_80494FCC;
     void *fn_803338D0(void *, s32);
-    struct { s32 val; u8 pad[0x40]; } *ent = (void *)((u8 *)self + 0x38);
+    struct { u8 pad[0x38]; struct { s32 val; u8 pad[0x40]; } ent[4]; } *s = self;
     void *obj = fn_803338D0(lbl_80494FCC, idx);
     if (obj != NULL) {
         void *vt = M2C_FIELD(obj, void **, 0x204);
-        ent[idx].val = M2C_FIELD(vt, s32 (**)(void *), 0x24)((s8 *)obj + M2C_FIELD(vt, s16 *, 0x20));
+        s->ent[idx].val = M2C_FIELD(vt, s32 (**)(void *), 0x24)((s8 *)obj + M2C_FIELD(vt, s16 *, 0x20));
     } else {
-        ent[idx].val = (s32)obj;
+        s->ent[idx].val = (s32)obj;
     }
-    return ent[idx].val;
+    return s->ent[idx].val;
 }
 
 void fn_80314E34(void *self, u8 index) {
