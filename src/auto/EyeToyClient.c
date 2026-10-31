@@ -264,8 +264,9 @@ s32 fn_80043520(void) {
 }
 
 s32 fn_80043734(s32 arg0) {
-    extern u8 lbl_803F5DA8[];
-    return *(s32 *)(lbl_803F5DA8 + arg0 * 0xC + 8) == 1;
+    typedef struct { s32 *list; s32 count; s32 state; } EyeToyEntry;
+    extern EyeToyEntry lbl_803F5DA8[];
+    return lbl_803F5DA8[arg0].state == 1;
 }
 
 s32 fn_80043758(s32 arg0) {
