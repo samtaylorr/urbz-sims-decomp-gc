@@ -169,17 +169,33 @@ void fn_80064EC4(void *self) {
     fn_800650DC(self, 0);
 }
 
+void fn_80065424(f32 *out, void *pos) {
+    extern const f32 lbl_803C8458[];
+    s32 fn_80105B78(void *);
+    s32 fn_80105B84(void *);
+    f32 x = (f32)fn_80105B78(pos);
+    f32 y = (f32)fn_80105B84(pos);
+    f32 c = lbl_803C8458[0];
+    out[0] = x - c;
+    out[1] = x + c;
+    out[2] = y - c;
+    out[3] = y + c;
+}
+
 extern const f32 lbl_803C8458[];
 extern const f32 lbl_803C845C[];
 extern const f32 lbl_803C8468[];
 s32 fn_80105B78(void *);
 s32 fn_80105B84(void *);
 void fn_800654D4(f32 *out, f32 *in) {
+    extern const f32 lbl_803C845C[];
+    f32 y = in[1];
+    f32 x = in[0];
     f32 c = lbl_803C845C[0];
-    out[0] = in[0] - c;
-    out[1] = in[0] + c;
-    out[2] = in[1] - c;
-    out[3] = in[1] + c;
+    out[0] = x - c;
+    out[1] = x + c;
+    out[2] = y - c;
+    out[3] = y + c;
 }
 
 s32 fn_80065508(f32 *rect, void *pos) {
