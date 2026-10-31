@@ -53,17 +53,14 @@ void fn_8030D260(void *arg0, void *arg1, f32 t) {
     extern f32 lbl_803F2108[];
     s32 found = 0;
     s32 i = 0;
-    f32 *p;
     f32 sum = lbl_803F2108[0];
     t *= lbl_803F2104[0];
-    p = (f32 *)((u8 *)arg1 + 0x18c);
     while (!found && i < M2C_FIELD(arg1, u32 *, 0x168)) {
-        sum += *p;
+        sum += *(f32 *)((u8 *)arg1 + 0x18c + i * 0x84);
         if (t < sum) {
             M2C_FIELD(arg0, f32 *, 0x44) = i;
             found = 1;
         } else {
-            p = (f32 *)((u8 *)p + 0x84);
             i++;
         }
     }
@@ -209,14 +206,14 @@ s32 fn_8030FA44(void *arg0) {
 void fn_8030F818(void);
 s32 fn_8030FA50(s32 *arg0, s32 arg1) {
     s32 fn_8036FACC(s32);
-    void fn_8036F3E0(s32, s32, s32);
+    M2C_UNK fn_8036F3E0();
     void fn_8030F818(void);
     extern s32 lbl_80494EE4;
     s32 obj = fn_8036FACC(lbl_80494EE4);
     if (obj == 0) {
         return -1;
     }
-    fn_8036F3E0(obj, arg1, (s32)fn_8030F818);
+    fn_8036F3E0(obj, arg1, fn_8030F818);
     *arg0 = obj;
     return 0;
 }
