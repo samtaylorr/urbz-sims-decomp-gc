@@ -230,6 +230,7 @@ void fn_80042138(s32 arg0, s32 arg1) {
     extern f32 lbl_803C60E8[];
     EyeToyReq req;
     EyeToyReq *r = &req;
+    EyeToyVec v;
     char *vt;
 
     r->unk4 = 0x40;
@@ -237,7 +238,10 @@ void fn_80042138(s32 arg0, s32 arg1) {
     r->unk8 = 3;
     r->unk18 = 1;
     r->unk1C = 1;
-    r->unkC = (EyeToyVec){lbl_803C60E8[0], lbl_803C60E8[0], lbl_803C60E8[0]};
+    v.x = lbl_803C60E8[0];
+    v.y = lbl_803C60E8[0];
+    v.z = lbl_803C60E8[0];
+    req.unkC = v;
     req.unk0 = arg0;
     req.unk4 = arg1;
     req.unk18 = 0;
@@ -619,6 +623,22 @@ void fn_80043B5C(u8 *arg0) {
 
 void fn_80043BB4(void) {
 
+}
+
+void fn_80043BB8(s32 arg0, s32 arg1) {
+    typedef struct { s32 unk0; void *unk4; u8 pad[0x1C]; } EyeToySlot;
+    extern f32 lbl_8041F63C[];
+    extern EyeToySlot lbl_8041F660[];
+    s32 i;
+
+    if (arg1 == 0xFFFF && arg0 != 0) {
+        ((s32 *)lbl_8041F63C)[0] = -1;
+        ((s32 *)lbl_8041F63C)[1] = 0;
+        for (i = 0; i < 5; i++) {
+            lbl_8041F660[i].unk0 = -1;
+            lbl_8041F660[i].unk4 = 0;
+        }
+    }
 }
 
 void fn_80043C14(void) {
