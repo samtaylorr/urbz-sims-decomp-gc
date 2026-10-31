@@ -71,7 +71,7 @@ s32 fn_801932A0(SPart *arg0, s32 arg1, SPRect *out) {
     if (n != NULL) {
         idx = n->cell;
         if (idx >= 0 && (u32)idx < (u32)(arg0->cellsEnd - arg0->cellsBegin)) {
-            *out = arg0->cellsBegin[idx].rect;
+            *out = SPart_Cell(arg0, idx)->rect;
             return 1;
         }
     }
