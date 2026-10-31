@@ -80,6 +80,22 @@ void fn_8000A7C4(void) {
     lbl_8041F94C.unk378 += n;
 }
 
+void fn_8000A824(void) {
+    extern void *lbl_80495050;
+    void fn_800C2990(s32, s32, s32);
+    void fn_802782BC(AptViewerParams *);
+    void fn_800C292C(void);
+    AptViewerParams params;
+
+    fn_800C2990(M2C_FIELD(lbl_80495050, s32 *, 0x14), M2C_FIELD(lbl_80495050, s32 *, 0x18), 0);
+    AptViewerParams_Init(&params);
+    params.v[12] = 0x80;
+    params.v[9] = 0x40;
+    params.v[16] = 0;
+    fn_802782BC(&params);
+    fn_800C292C();
+}
+
 void fn_8000A9B4(u8 *self, s32 flags) {
     M2C_UNK fn_802CAA00();
     M2C_UNK fn_80309AE0(void *, s32);
