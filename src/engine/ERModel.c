@@ -207,6 +207,31 @@ void fn_8032B9E4(void) {
 
 }
 
+s32 fn_8032BCE0(u8 *self, u32 idx, f32 value) {
+    f32 *arr;
+
+    if (idx > 11) {
+        return 0;
+    }
+    arr = (f32 *)(self + 0x100);
+    if (arr[idx] != value) {
+        arr[idx] = value;
+        *(s32 *)(self + 0x12C) = 1;
+    }
+    return 1;
+}
+
+void fn_8032BD18(u8 *self) {
+    extern void fn_803003C4(u8 *);
+    s32 i;
+
+    if (*(s32 *)(self + 0x12C) != 0) {
+        for (i = 0; i < ListCount(self + 0x20); i++) {
+            fn_803003C4(*(u8 **)(self + 0x20) + i * 0x18);
+        }
+    }
+}
+
 void fn_8032BF88(s32 arg0) {
     M2C_UNK fn_8032BF30();
     M2C_UNK fn_8032C204(s32);
