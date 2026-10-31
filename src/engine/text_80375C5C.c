@@ -29,15 +29,13 @@ s32 fn_80375C5C(s32 arg0, s32 arg1) {
 }
 
 s32 fn_80375CB8(s32 arg0, s32 arg1, s32 arg2) {
-    s32 ret;
-    if ((u32)(arg0 - 1) > 1) {
-        ret = -1;
-        if (arg0 != 0) {
-            ret = fn_80240ED8(arg0);
-        }
-        return ret;
+    if ((u32)(arg0 - 1) <= 1) {
+        return fn_80375C5C(arg1, arg2);
     }
-    return fn_80375C5C(arg1, arg2);
+    if (arg0 == 0) {
+        return -1;
+    }
+    return ((s32 (*)(s32, s32, s32))fn_80240ED8)(arg0, arg1, arg2);
 }
 
 void fn_80375D08(void) {
@@ -145,13 +143,22 @@ void *fn_80378358(const void *key, const void *base, u32 nmemb, u32 size, s32 (*
     return NULL;
 }
 
-void fn_803783F0(char *s) {
+char *fn_803783F0(char *s) {
     extern const u8 lbl_803EBA39[];
-    while (*s) {
-        if (lbl_803EBA39[(s32)*s] & 1) {
-            *s = *s + 0x20;
+    char *p;
+    for (p = s; *p; p++) {
+        if (lbl_803EBA39[(s32)*p] & 1) {
+            *p = *p + 0x20;
         }
-        s++;
+    }
+    return s;
+}
+
+void fn_80378434(void) {
+    extern void (**lbl_804013A0)(void);
+    while (*lbl_804013A0) {
+        lbl_804013A0++;
+        (*(lbl_804013A0 - 1))();
     }
 }
 
