@@ -55,14 +55,14 @@ void fn_8001FC54(void) {
 
 }
 
-void fn_8002105C(u8 *self, void *arg1) {
-    extern void fn_800F1930(void *, s32);
-    extern void fn_800F1AA0(void *, void *);
-    extern void fn_800F1A60(void *, s32);
-    struct { s32 a; s32 b; } tmp;
-    fn_800F1930(&tmp, *(s32 *)(self + 0x5c));
-    fn_800F1AA0(arg1, &tmp);
-    fn_800F1A60(&tmp, 2);
+void fn_8002105C(u8 *self, void **arg1) {
+    extern void *fn_800F1930(void **, s32);
+    extern void **fn_800F1AA0(void **, void **);
+    extern void fn_800F1A60(s32, s32);
+    void *volatile tmp;
+    fn_800F1930((void **)&tmp, *(s32 *)(self + 0x5c));
+    fn_800F1AA0(arg1, (void **)&tmp);
+    fn_800F1A60((s32)&tmp, 2);
 }
 
 void fn_800210AC(void *arg0, void *arg1) {
@@ -89,11 +89,15 @@ s32 fn_80021248(void) {
 void fn_80021C20(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 fn_802D5200(s32);
     void fn_800F22F0(s32, s32);
-    char *e = M2C_FIELD(arg0, char **, 0) + 0x88;
-    Handle h = (*(Handle (**)())(e + 4))((char *)arg0 + *(s16 *)e);
+    Handle h;
+    Handle *hp;
+    char *e;
 
-    if (Handle_Get(&h) != 0 && fn_802D5200(Handle_Get(&h)) != 0) {
-        fn_800F22F0(arg1, Handle_Get(&h));
+    e = M2C_FIELD(arg0, char **, 0) + 0x88;
+    h = (*(Handle (**)())(e + 4))((char *)arg0 + *(s16 *)e);
+    hp = &h;
+    if (Handle_Get(hp) != 0 && fn_802D5200(Handle_Get(hp)) != 0) {
+        fn_800F22F0(arg1, Handle_Get(hp));
     } else if (arg3 != 0) {
         fn_800F22F0(arg1, arg3);
     }
@@ -108,6 +112,7 @@ s32 fn_80021CD8(s32 c) {
 
 void *fn_8002246C(void *arg0) {
     extern char lbl_804071F8[];
+    struct P { s32 a; s32 b; } t = { 0, 2 };
     char *list;
 
     M2C_FIELD(arg0, char **, 0x18) = lbl_804071F8;
@@ -116,8 +121,7 @@ void *fn_8002246C(void *arg0) {
     M2C_FIELD(list, s32 *, 0) = 0;
     M2C_FIELD(list, s32 *, 8) = 1;
     M2C_FIELD(arg0, s32 *, 0x14) = 0;
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = 2;
+    *(struct P *)arg0 = t;
     return arg0;
 }
 
@@ -140,6 +144,7 @@ void fn_800224AC(void *arg0, s32 flags) {
 
 void fn_800227CC(void *arg0) {
     void fn_802CBB10(void *, void *);
+    struct P { s32 a; s32 b; } t = { 0, 2 };
     char *obj;
     char *e;
 
@@ -149,9 +154,8 @@ void fn_800227CC(void *arg0) {
         e = M2C_FIELD(obj, char **, 0x44) + 8;
         (*(void (**)(void *, s32))(e + 4))(obj + *(s16 *)e, 3);
     }
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = 2;
     M2C_FIELD(arg0, void **, 0x14) = NULL;
+    *(struct P *)arg0 = t;
 }
 
 void fn_80022840(void *arg0) {
@@ -243,14 +247,24 @@ void *fn_80022D98(void *arg0) {
 }
 
 Quat4 fn_80022DE4(u8 *obj) {
-    u8 *m = *(u8 **)(obj + 0x4C);
+    struct { u8 pad[0x10]; Quat4 q; } *src = *(void **)(obj + 0x4C);
     Quat4 q;
+    Quat4 r;
+    Quat4 *p = &q;
+    f32 x = src->q.x;
+    f32 w = src->q.w;
+    f32 y = src->q.y;
+    f32 z = src->q.z;
 
-    q.x = *(f32 *)(m + 0x10);
-    q.y = *(f32 *)(m + 0x14);
-    q.z = *(f32 *)(m + 0x18);
-    q.w = *(f32 *)(m + 0x1C);
-    return q;
+    p->x = x;
+    p->w = w;
+    p->y = y;
+    p->z = z;
+    r.y = q.y;
+    r.z = q.z;
+    r.x = q.x;
+    r.w = q.w;
+    return r;
 }
 
 void fn_8002357C(u8 *self) {
