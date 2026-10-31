@@ -38,6 +38,11 @@ static inline void ISimInstance_Call44(u8 *obj) {
     (*(void (**)(void *))(vt + 0x44))(obj + *(s16 *)(vt + 0x40));
 }
 
+static inline void ISimInstance_Call94(u8 *obj, void *g) {
+    u8 *vt = *(u8 **)obj;
+    (*(void (**)(void *, void *))(vt + 0x94))(obj + *(s16 *)(vt + 0x90), g);
+}
+
 static inline s32 ISimInstance_IterValid(void *it) {
     return it != NULL;
 }
