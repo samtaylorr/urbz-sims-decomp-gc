@@ -137,6 +137,16 @@ void fn_8010B568(void **self, s32 flags) {
     }
 }
 
+void fn_8010B898(u8 *self, u8 **arg1) {
+    extern s32 fn_8016CCE0(void *);
+    u8 *obj;
+    s32 r;
+
+    obj = *arg1;
+    r = fn_8016CCE0((*(void *(**)(u8 *))(*(u8 **)(obj + 4) + 0x334))(obj + *(s16 *)(*(u8 **)(obj + 4) + 0x330)));
+    (*(void (**)(u8 *, s32))(*(u8 **)self + 0x4C))(self + *(s16 *)(*(u8 **)self + 0x48), r);
+}
+
 s32 fn_8016CCE0(void *);
 s32 *fn_8010B8FC(void *self, s32 id) {
     s32 *it;
@@ -156,6 +166,18 @@ s32 fn_8010B930(void *self, s32 id) {
         }
     }
     return 0;
+}
+
+s32 *fn_8010B96C(void *self, s32 idx) {
+    s32 *begin;
+    if (idx < 0) {
+        return NULL;
+    }
+    begin = M2C_FIELD(self, s32 **, 0x24);
+    if (idx >= M2C_FIELD(self, s32 **, 0x28) - begin) {
+        return NULL;
+    }
+    return &begin[idx];
 }
 
 void fn_8010B9A0(s32 arg0, s32 arg1) {
