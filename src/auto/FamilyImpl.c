@@ -23,8 +23,9 @@ s32 fn_8010C3F8(void *arg0, void *arg1, s32 arg2);
 void fn_801B3908(void *, s32);
 void fn_801B3910(void *, u16);
 
-static inline void FamilySub_Init(char *sub) {
+static inline char *FamilySub_Init(char *sub) {
     M2C_FIELD(sub, s32 *, 4) = 0;
+    return sub;
 }
 
 void fn_80106008(s32 *arg0) {
@@ -222,16 +223,13 @@ void *fn_8010B59C(void *self, void *arg1) {
     extern u8 lbl_8040E628[];
     void fn_800F160C(void *);
     void fn_800F2868(void *, s32, s32);
-    char *sub;
-    s32 tmp[2];
 
     M2C_FIELD(self, void **, 0) = lbl_8040E628;
     fn_800F160C((char *)self + 4);
     M2C_FIELD(self, void **, 8) = arg1;
-    sub = (char *)self + 0x2C;
     M2C_FIELD(self, s32 *, 0x24) = 0;
     M2C_FIELD(self, s32 *, 0x28) = 0;
-    M2C_FIELD(sub, s32 *, 4) = 0;
+    FamilySub_Init((char *)self + 0x2C);
     M2C_FIELD(self, s32 *, 0xC) = 0;
     M2C_FIELD(self, s32 *, 0x14) = 0;
     M2C_FIELD(self, s32 *, 0x18) = 0;
