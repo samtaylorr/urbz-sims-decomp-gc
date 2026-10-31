@@ -150,6 +150,17 @@ s32 fn_8036F018(s32 *self) {
     return self[2];
 }
 
+void fn_8036F080(void *arg0, s32 arg1) {
+    void fn_80338184(void *, void *);
+    extern u8 lbl_8041DCC8[];
+    extern u8 lbl_8045BAE8[];
+    M2C_FIELD(arg0, s32 *, 0x20) = 0xDEADBEEF;
+    M2C_FIELD(arg0, void **, 0x24) = lbl_8041DCC8;
+    if (arg1 & 1) {
+        fn_80338184(lbl_8045BAE8, arg0);
+    }
+}
+
 s32 fn_8036F0D0(void *arg0, void *arg1) {
     struct Blk { s32 v[8]; };
     *(struct Blk *)arg0 = *(struct Blk *)arg1;
