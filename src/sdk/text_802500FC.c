@@ -101,6 +101,17 @@ void *fn_8025188C(u32 size, u32 align) {
     return ptr;
 }
 
+void *fn_802518B8(u32 size, u32 align) {
+    u32 arenaHi;
+    void *ptr;
+
+    arenaHi = (u32)lbl_80495E08 & ~(align - 1);
+    arenaHi -= size;
+    arenaHi = (u32)(ptr = (void *)(arenaHi & ~(align - 1)));
+    lbl_80495E08 = arenaHi;
+    return ptr;
+}
+
 void fn_80251B7C(void) {
     __sync();
     __mtspr(1008, __mfspr(1008) | 0x4000);
