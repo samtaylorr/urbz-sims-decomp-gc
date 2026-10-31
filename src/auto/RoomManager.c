@@ -670,8 +670,45 @@ block_4:
     return 0;
 }
 
+void fn_80192964(char *self, s32 arg1) {
+    s32 fn_80192850(char *);
+    void fn_801051C8(s32, u16);
+    extern f32 lbl_803DB008;
+    s32 t;
+
+    if (fn_80192850(self) == 0 && *(s32 *)(self + 0x8C) != arg1 &&
+        *(s32 *)(self + 0x90) == 0) {
+        t = *(s32 *)(self + 0x98);
+        *(s32 *)(self + 0x8C) = arg1;
+        if (t == 0 && *(f32 *)(self + 0x7C) < lbl_803DB008) {
+            fn_801051C8(0xED, *(u16 *)self);
+        }
+    }
+}
+
+f32 fn_80192AB4(char *self) {
+    extern f32 lbl_803DB00C[];
+    f32 val;
+
+    if (*(s32 *)(self + 0x90) == 0) {
+        val = *(f32 *)(self + 0x7C);
+        if (*(s32 *)(self + 0x8C) == 0 || *(s32 *)(self + 0x98) != 0 ||
+            *(s32 *)(self + 0x9C) <= 0) {
+            return val;
+        }
+        if (!(val < lbl_803DB00C[0])) {
+            return val;
+        }
+    }
+    return lbl_803DB00C[0];
+}
+
 s32 fn_80192B04(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x90);
+}
+
+s32 fn_80192B0C(s32 arg0, s32 arg1) {
+    return arg0 != 0 ? ((arg0 + (((4 - arg1) & 3) - 1)) & 3) + 1 : 0;
 }
 
 s32 fn_80192C7C(void) {
