@@ -42,7 +42,7 @@ void fn_80314D40(s32 *self) {
         self[1] = 0;
         self[0] = 1;
         for (i = 0; i <= 1; i++) {
-            EVibrate_Port(self, i)->active = 0;
+            EVibrate_PortAt((EVibratePort *)((s8 *)self + 0x38), i)->active = 0;
         }
     }
 }
@@ -82,7 +82,7 @@ s32 fn_80314E68(void *self, u8 index) {
     if (index > 1) {
         return 0;
     }
-    return EVibrate_Port(self, index)->active;
+    return EVibrate_PortAt((EVibratePort *)((s8 *)self + 0x38), index)->active;
 }
 
 void fn_80314E88(void *self) {
