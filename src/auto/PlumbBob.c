@@ -244,40 +244,42 @@ void fn_800681D4(void *arg0, void *arg1) {
 }
 
 void fn_80068244(void *arg0, s32 arg1) {
-    extern struct { char pad[0xEC]; s32 *p; } lbl_8041F94C;
+    extern char lbl_8041F94C[];
     extern void fn_8004D1BC(void *);
     extern void fn_800A3F74(void *);
     extern void fn_8000F6D0(void *);
     extern void fn_8006410C(s32);
-    struct { char pad0[0x1E4]; void *arr2[6]; void *arr[1]; char pad1[0x28E8 - 0x200]; s32 a[2][6]; } *self = arg0;
+    struct { char pad0[0x1E4]; void *arr2[6]; void *arr[1]; } *self = arg0;
+    s32 *p;
     s32 i;
 
-    fn_8004D1BC(&lbl_8041F94C);
+    fn_8004D1BC(lbl_8041F94C);
     fn_800A3F74(self->arr[arg1]);
     fn_8000F6D0(self->arr2[arg1]);
-    fn_8006410C(lbl_8041F94C.p[1]);
+    fn_8006410C(M2C_FIELD(M2C_FIELD(lbl_8041F94C, void **, 0xEC), s32 *, 4));
     if (arg1 == 1) {
-        for (i = 5; i >= 0; i--) {
-            self->a[arg1][i] = 1000;
+        p = (s32 *)((char *)arg0 + 0x2914);
+        for (i = 0; i < 6; i++) {
+            *p-- = 1000;
         }
     } else {
-        for (i = 5; i >= 0; i--) {
-            self->a[0][i] = 1000;
+        p = (s32 *)((char *)arg0 + 0x28FC);
+        for (i = 0; i < 6; i++) {
+            *p-- = 1000;
         }
     }
 }
 
 void fn_80068394(void *arg0, s32 arg1) {
-    extern char lbl_8041F94C[];
+    extern struct { char pad[0xEC]; s32 *unkEC; } lbl_8041F94C;
     extern void fn_8004D1BC(void *);
     extern void fn_800A3F74(void *);
     extern void fn_8006410C(s32);
     struct { char pad[0x1FC]; void *arr[1]; } *self = arg0;
-    s32 idx = arg1;
 
-    fn_8004D1BC(lbl_8041F94C);
-    fn_800A3F74(self->arr[idx]);
-    fn_8006410C(M2C_FIELD(M2C_FIELD(lbl_8041F94C, void **, 0xEC), s32 *, 4));
+    ((void (*)(void *, s32))fn_8004D1BC)(&lbl_8041F94C, arg1);
+    fn_800A3F74(self->arr[arg1]);
+    fn_8006410C(lbl_8041F94C.unkEC[1]);
 }
 
 void fn_80068444(void) {
