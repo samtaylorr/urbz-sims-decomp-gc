@@ -54,7 +54,7 @@ s32 fn_80375D98(s32 arg0, s32 arg1, ...) {
 }
 
 s32 fn_80375E3C(u32 arg0) {
-    return __cntlzw(arg0);
+    return __builtin_clz(arg0);
 }
 
 s32 fn_80375E44(void) {
