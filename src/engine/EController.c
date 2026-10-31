@@ -54,6 +54,11 @@ s32 fn_80310750(void) {
     return 0;
 }
 
+s32 fn_80310758(void *arg0) {
+    extern const f32 lbl_803F22B4[];
+    return M2C_FIELD(arg0, f32 *, 0x1DC) > lbl_803F22B4[0];
+}
+
 s32 fn_80310A48(void *arg0, f32 farg0) {
     M2C_FIELD(arg0, f32 *, 0x1E4) = farg0;
     return 1;
