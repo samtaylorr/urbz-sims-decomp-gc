@@ -30,14 +30,14 @@ s32 fn_80375C5C(s32 arg0, s32 arg1) {
 
 s32 fn_80375CB8(s32 arg0, s32 arg1, s32 arg2) {
     s32 ret;
-    if (arg0 == 1 || arg0 == 2) {
-        ret = fn_80375C5C(arg1, arg2);
-    } else if (arg0 == 0) {
+    if ((u32)(arg0 - 1) > 1) {
         ret = -1;
-    } else {
-        ret = fn_80240ED8(arg0);
+        if (arg0 != 0) {
+            ret = fn_80240ED8(arg0);
+        }
+        return ret;
     }
-    return ret;
+    return fn_80375C5C(arg1, arg2);
 }
 
 void fn_80375D08(void) {
@@ -157,9 +157,9 @@ void fn_803783F0(char *s) {
 
 typedef void (*func_ptr)(void);
 void fn_80378528(void) {
-    extern s32 lbl_804760E0;
-    if (lbl_804760E0 == 0) {
-        lbl_804760E0 = 1;
+    extern s32 lbl_804760E0[];
+    if (lbl_804760E0[0] == 0) {
+        lbl_804760E0[0] = 1;
         fn_80378498();
     }
 }
