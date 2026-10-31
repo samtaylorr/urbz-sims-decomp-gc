@@ -35,8 +35,8 @@ u8 *fn_8001E78C(u8 *self) {
 }
 
 void fn_8001EC68(void) {
-    extern u8 *lbl_8041FA44;
-    u8 *obj = lbl_8041FA44;
+    extern u8 *lbl_8041FA44[];
+    u8 *obj = lbl_8041FA44[0];
     if (obj != NULL) {
         u8 *vt = *(u8 **)(obj + 0x44);
         ((void (*)(void *, s32, s32))*(void **)(vt + 0x3c))(obj + *(s16 *)(vt + 0x38), 0, 0x1e);
@@ -145,9 +145,9 @@ void fn_800227CC(void *arg0) {
         e = M2C_FIELD(obj, char **, 0x44) + 8;
         (*(void (**)(void *, s32))(e + 4))(obj + *(s16 *)e, 3);
     }
-    M2C_FIELD(arg0, void **, 0x14) = NULL;
     M2C_FIELD(arg0, s32 *, 0) = 0;
     M2C_FIELD(arg0, s32 *, 4) = 2;
+    M2C_FIELD(arg0, void **, 0x14) = NULL;
 }
 
 void fn_80022840(void *arg0) {
