@@ -66,11 +66,11 @@ s32 fn_80310774(void *arg0) {
 
 s32 fn_80310790(char *self, f32 farg0) {
     char *vt = *(char **)(self + 0x204);
-    if ((*(s32 (**)(char *))(vt + 0x1C))(self + *(s16 *)(vt + 0x18)) != 0) {
-        M2C_FIELD(self, f32 *, 0x1DC) = farg0;
-        return 1;
+    if ((*(s32 (**)(char *))(vt + 0x1C))(self + *(s16 *)(vt + 0x18)) == 0) {
+        return 0;
     }
-    return 0;
+    M2C_FIELD(self, f32 *, 0x1DC) = farg0;
+    return 1;
 }
 
 void fn_803107F4(char *self, f32 farg0, f32 farg1) {
