@@ -369,6 +369,30 @@ void fn_80318DA4(void *arg0, s32 arg1, s32 arg2) {
     fn_802D11A4(arg0, arg1, arg2);
 }
 
+void fn_80318F5C(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    void fn_803189A8(void);
+    void fn_803189F0(void);
+    void fn_80318E94(s32, s32);
+    void fn_80318A70(const char *fmt, ...);
+    extern char lbl_803F2740[];
+    extern char lbl_803F293C[];
+    extern char lbl_803F2964[];
+    extern void *lbl_80496220;
+    void *obj;
+    char *vt;
+
+    obj = lbl_80496220;
+    vt = *(char **)obj;
+    ((void (*)(void *))*(void **)(vt + 0xEC))((char *)obj + *(s16 *)(vt + 0xE8));
+    fn_803189A8();
+    fn_80318A70(lbl_803F2740);
+    fn_80318A70(lbl_803F293C, arg0, arg1);
+    fn_80318E94(arg2, arg3);
+    fn_80318A70(lbl_803F2964, arg0, arg1);
+    fn_80318A70(lbl_803F2740);
+    fn_803189F0();
+}
+
 void fn_8031900C(s32 arg0, s32 arg1) {
     void fn_803189A8(void);
     void fn_803189F0(void);
