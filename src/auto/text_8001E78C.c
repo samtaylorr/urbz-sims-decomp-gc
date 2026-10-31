@@ -89,11 +89,9 @@ s32 fn_80021248(void) {
 void fn_80021C20(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 fn_802D5200(s32);
     void fn_800F22F0(s32, s32);
-    Handle h;
-    char *e;
+    char *e = M2C_FIELD(arg0, char **, 0) + 0x88;
+    Handle h = (*(Handle (**)())(e + 4))((char *)arg0 + *(s16 *)e);
 
-    e = M2C_FIELD(arg0, char **, 0) + 0x88;
-    h = (*(Handle (**)())(e + 4))((char *)arg0 + *(s16 *)e);
     if (Handle_Get(&h) != 0 && fn_802D5200(Handle_Get(&h)) != 0) {
         fn_800F22F0(arg1, Handle_Get(&h));
     } else if (arg3 != 0) {
@@ -108,25 +106,28 @@ s32 fn_80021CD8(s32 c) {
     return (u32)(c - 9) <= 4;
 }
 
-void fn_8002246C(void *arg0) {
+void *fn_8002246C(void *arg0) {
     extern char lbl_804071F8[];
     char *list;
 
     M2C_FIELD(arg0, char **, 0x18) = lbl_804071F8;
     list = (char *)arg0 + 8;
-    M2C_FIELD(list, s32 *, 0) = 0;
     M2C_FIELD(list, s32 *, 4) = 0;
+    M2C_FIELD(list, s32 *, 0) = 0;
     M2C_FIELD(list, s32 *, 8) = 1;
     M2C_FIELD(arg0, s32 *, 0x14) = 0;
     M2C_FIELD(arg0, s32 *, 0) = 0;
     M2C_FIELD(arg0, s32 *, 4) = 2;
+    return arg0;
 }
 
 void fn_800224AC(void *arg0, s32 flags) {
     extern char lbl_804071F8[];
+    void fn_80022CDC(void *);
     void fn_80022690(void);
     void fn_802CB8D4(void *);
     extern void *fn_802D0AB8(void *);
+    void fn_802D1A00(void *, void *);
 
     M2C_FIELD(arg0, char **, 0x18) = lbl_804071F8;
     fn_80022CDC(arg0);
@@ -241,18 +242,15 @@ void *fn_80022D98(void *arg0) {
     return NULL;
 }
 
-void fn_80022DE4(Quat4 *out, u8 *obj) {
-    Quat4 *src = (Quat4 *)(*(u8 **)(obj + 0x4C) + 0x10);
+Quat4 fn_80022DE4(u8 *obj) {
+    u8 *m = *(u8 **)(obj + 0x4C);
     Quat4 q;
 
-    q.x = src->x;
-    q.y = src->y;
-    q.z = src->z;
-    q.w = src->w;
-    out->x = q.x;
-    out->y = q.y;
-    out->z = q.z;
-    out->w = q.w;
+    q.x = *(f32 *)(m + 0x10);
+    q.y = *(f32 *)(m + 0x14);
+    q.z = *(f32 *)(m + 0x18);
+    q.w = *(f32 *)(m + 0x1C);
+    return q;
 }
 
 void fn_8002357C(u8 *self) {
