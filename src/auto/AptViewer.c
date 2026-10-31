@@ -104,7 +104,7 @@ void fn_8000AC58(void) {
 }
 
 void fn_8000AC7C(void *self, void *arg) {
-    M2C_UNK fn_8000A824();
+    void fn_8000A824(void);
     s32 *arr;
     s32 i;
     if (M2C_FIELD(self, s32 *, 0x3A0) == 0) {
