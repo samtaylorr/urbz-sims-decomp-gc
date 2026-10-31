@@ -450,19 +450,19 @@ s32 fn_803124EC(void *arg0, s32 arg1, s32 arg2) {
 
 void *fn_80312504(void *arg0) {
     extern char lbl_8041B210[];
-    M2C_FIELD(arg0, s32 *, 0) = 0;
     M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 0) = 0;
     M2C_FIELD(arg0, void **, 8) = lbl_8041B210;
     return arg0;
 }
 
 s32 *fn_80312524(s32 *self) {
-    self[5] = 0;
-    self[2] = 1;
     self[4] = 0;
     self[3] = 0;
     self[0] = 1;
     self[6] = 0;
+    self[2] = 1;
+    self[5] = 0;
     return self;
 }
 
