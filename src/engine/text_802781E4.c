@@ -163,6 +163,7 @@ s32 fn_8027A5A4(s32 arg0) {
 s32 fn_8027A5E0(s32 arg0) {
     extern s32 fn_802B70DC(void *);
     extern s32 fn_802B72D4(void *);
+    void *fn_8027873C(s32);
     void *obj = fn_8027873C(arg0);
     if (obj != NULL) {
         s32 empty = 0;
