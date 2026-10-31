@@ -186,10 +186,10 @@ void fn_80390994(char *arg0) {
 
 extern u32 *lbl_804964DC;
 void fn_803909CC(u32 arg0) {
-    u32 *tbl = lbl_804964DC;
-    u32 idx = (arg0 >> 12) & 0x1FFF;
+    register u32 *tbl asm("r4") = lbl_804964DC;
+    register u32 idx asm("r3") = ((arg0 >> 12) & 0x1FFF) * 4;
 
-    tbl[idx] |= 0x80000000;
+    *(u32 *)((char *)tbl + idx) |= 0x80000000;
 }
 
 u32 fn_803909E4(u32 arg0) {
