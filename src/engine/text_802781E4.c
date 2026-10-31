@@ -159,6 +159,14 @@ void fn_8027A650(s32 arg0) {
     lbl_804960E4 = 0;
 }
 
+void fn_8027A660(s32 arg0, s32 arg1) {
+    extern s32 lbl_804433B0[];
+    lbl_804433B0[4] = 0;
+    lbl_804433B0[0] = arg0;
+    lbl_804433B0[1] = arg0;
+    lbl_804433B0[2] = arg1;
+}
+
 extern s32 lbl_80496100;
 void fn_8027A680(void (*cb)(void)) {
     lbl_80496100 = cb;
@@ -167,6 +175,39 @@ void fn_8027A680(void (*cb)(void)) {
 f32 fn_8027A688(void) {
     f64 fn_80246DDC();
     return (f32) fn_80246DDC();
+}
+
+s32 fn_8027A6AC(const char *a, const char *b) {
+    extern s32 fn_80248808(const char *);
+    extern const u8 lbl_803EBA39[];
+    s32 lenA = fn_80248808(a);
+    s32 lenB = fn_80248808(b);
+    s32 n = lenB;
+    s32 i;
+    if (n > lenA) {
+        n = lenA;
+    }
+    for (i = 0; i < n; i++) {
+        s32 ca = a[i];
+        s32 cb;
+        if (ca[lbl_803EBA39] & 1) {
+            ca += 0x20;
+        }
+        cb = b[i];
+        if (cb[lbl_803EBA39] & 1) {
+            cb += 0x20;
+        }
+        if (ca < cb) {
+            return -1;
+        }
+        if (ca > cb) {
+            return -1;
+        }
+    }
+    if (lenA < lenB) {
+        return -1;
+    }
+    return lenA > lenB;
 }
 
 void fn_8027A79C(s32 arg0) {
