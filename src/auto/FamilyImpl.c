@@ -800,9 +800,10 @@ void fn_8010CFA0(void *self, s32 flags) {
     }
 }
 
-void fn_8010CFC8(s32 arg0) {
-    extern s32 lbl_80494408;
-    lbl_80494408 = arg0;
+void *fn_8010CFC8(void *self) {
+    extern void *lbl_80494408;
+    lbl_80494408 = self;
+    return self;
 }
 
 void fn_8010CFD4(void *self, s32 flags) {
