@@ -450,6 +450,14 @@ void *fn_8031A4FC(void *arg0, void *arg1) {
     return arg0;
 }
 
+void *fn_8031A548(void *arg0, void *arg1) {
+    void *vt;
+
+    vt = M2C_FIELD(arg1, void **, 0xDC);
+    M2C_FIELD(vt, void (**)(void *, void *), 0x14)((u8 *)arg1 + M2C_FIELD(vt, s16 *, 0x10), arg0);
+    return arg0;
+}
+
 s32 fn_8031AE8C(void *arg0) {
     s32 temp_r3;
 
