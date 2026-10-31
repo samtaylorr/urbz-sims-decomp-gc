@@ -213,7 +213,12 @@ void fn_80023B84(s64 *arg0, s64 arg1) {
 
 s32 fn_80023B90(u8 *self) {
     u8 *p = *(u8 **)(self + 0x14);
-    return p != NULL ? *(s32 *)(p + 0x98) == 0 : 0;
+    s32 ret = 0;
+
+    if (p != NULL) {
+        ret = *(s32 *)(p + 0x98) == 0;
+    }
+    return ret;
 }
 
 s32 fn_80023BB0(u8 *self) {
