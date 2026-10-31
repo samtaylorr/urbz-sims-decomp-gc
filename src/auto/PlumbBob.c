@@ -249,8 +249,7 @@ void fn_80068244(void *arg0, s32 arg1) {
     extern void fn_800A3F74(void *);
     extern void fn_8000F6D0(void *);
     extern void fn_8006410C(s32);
-    struct { char pad0[0x1E4]; void *arr2[6]; void *arr[1]; } *self = arg0;
-    s32 *p;
+    struct { char pad0[0x1E4]; void *arr2[6]; void *arr[1]; char pad1[0x28E8 - 0x200]; s32 a[2][6]; } *self = arg0;
     s32 i;
 
     fn_8004D1BC(&lbl_8041F94C);
@@ -258,14 +257,12 @@ void fn_80068244(void *arg0, s32 arg1) {
     fn_8000F6D0(self->arr2[arg1]);
     fn_8006410C(lbl_8041F94C.p[1]);
     if (arg1 == 1) {
-        p = (s32 *)((char *)arg0 + 0x2914);
-        for (i = 0; i < 6; i++) {
-            *p-- = 1000;
+        for (i = 5; i >= 0; i--) {
+            self->a[arg1][i] = 1000;
         }
     } else {
-        p = (s32 *)((char *)arg0 + 0x28FC);
-        for (i = 0; i < 6; i++) {
-            *p-- = 1000;
+        for (i = 5; i >= 0; i--) {
+            self->a[0][i] = 1000;
         }
     }
 }
@@ -890,6 +887,27 @@ s32 fn_8006C3F4(void *arg0) {
     fn_8006C4F0(arg0, lbl_803C913C);
     fn_8006C4F0(arg0, lbl_803C9150);
     fn_8006C4F0(arg0, lbl_803C915C);
+}
+
+M2C_UNK fn_8006C458(self) void *self; {
+    extern char lbl_803C9170[];
+    extern char lbl_803C9180[];
+    extern char lbl_803C9190[];
+    extern char lbl_803C919C[];
+    extern char lbl_803C911C[];
+    void fn_8006C4F0(void *, char *);
+    int fn_80245BB4(char *, const char *, ...);
+    char buf[16];
+    s32 i;
+
+    fn_8006C4F0(self, lbl_803C9170);
+    fn_8006C4F0(self, lbl_803C9180);
+    fn_8006C4F0(self, lbl_803C9190);
+    fn_8006C4F0(self, lbl_803C919C);
+    for (i = 0; i <= 12; i++) {
+        fn_80245BB4(buf, lbl_803C911C, i);
+        fn_8006C4F0(self, buf);
+    }
 }
 
 void fn_8006C6B4(void *arg0) {
