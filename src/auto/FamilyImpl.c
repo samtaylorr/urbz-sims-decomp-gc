@@ -31,8 +31,7 @@ void fn_801B3908(void *, s32);
 void fn_801B3910(void *, u16);
 
 static inline char *FamilySub_Init(char *sub) {
-    char **pp = &sub;
-    M2C_FIELD(*pp, s32 *, 4) = 0;
+    M2C_FIELD(sub, s32 *, 4) = 0;
     return sub;
 }
 
