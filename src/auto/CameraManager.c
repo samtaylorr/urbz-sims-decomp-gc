@@ -21,6 +21,16 @@ typedef struct {
     u8 pad2[0x14C - 0x100];
 } CameraManager_Slot;
 
+typedef struct {
+    s32 unk0;
+    u8 pad[0x14C - 0x4];
+} CameraManager_Entry;
+
+typedef struct {
+    u8 pad[0xFC];
+    CameraManager_Entry entries[4];
+} CameraManager_Owner;
+
 static inline void *CameraManager_AllocAligned(u32 size) {
     void *heap;
     void *p;
@@ -117,11 +127,11 @@ void fn_800150A8(void *arg0) {
 void fn_800150CC(void *arg0) {
     void *vt;
     if (M2C_FIELD(arg0, s32 *, 0xC) == 0) {
+        void *obj;
         M2C_FIELD(arg0, s32 *, 0xC) = 1;
-        arg0 = M2C_FIELD(arg0, void **, 4);
-        vt = M2C_FIELD(arg0, void **, 0x44);
-        arg0 = (char *)arg0 + M2C_FIELD(vt, s16 *, 0x18);
-        M2C_FIELD(vt, void (**)(void *), 0x1C)(arg0);
+        obj = M2C_FIELD(arg0, void **, 4);
+        vt = M2C_FIELD(obj, void **, 0x44);
+        ((void (*)(void *))M2C_FIELD(vt, void **, 0x1C))((char *)obj + M2C_FIELD(vt, s16 *, 0x18));
     }
 }
 
@@ -252,7 +262,6 @@ void fn_80015710(void) {
 void fn_80015720(void *arg0, void *arg1, s32 arg2) {
     extern CameraManager_Vec3i lbl_8041EB9C;
     extern CameraManager_Vec3i lbl_8041EBA8;
-    CameraManager_Slot *slots;
     s32 i;
 
     M2C_FIELD(arg0, s32 *, 0x55C) = 1;
@@ -264,9 +273,8 @@ void fn_80015720(void *arg0, void *arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 0x570) = 0;
     M2C_FIELD(arg0, u8 *, 0x59A) = 0;
     M2C_FIELD(arg0, s32 *, 0x558) = 0;
-    slots = M2C_FIELD(arg0, CameraManager_Slot **, 0x3FC);
     for (i = 0; i < 4; i++) {
-        slots[i].unkFC = 0;
+        M2C_FIELD(arg0, CameraManager_Slot **, 0x3FC)[i].unkFC = 0;
     }
     M2C_FIELD(arg0, CameraManager_Vec3i *, 0x3C8) = lbl_8041EB9C;
     M2C_FIELD(arg0, CameraManager_Vec3i *, 0x3EC) = lbl_8041EBA8;
