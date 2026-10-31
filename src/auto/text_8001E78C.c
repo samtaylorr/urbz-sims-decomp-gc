@@ -89,6 +89,21 @@ void *fn_80022D98(void *arg0) {
     return NULL;
 }
 
+void fn_8002357C(u8 *self) {
+    extern s32 fn_8000C1EC(s32, u8 *);
+    extern void fn_8000C4F8(s32, s32);
+    void fn_8000AA2C();
+    extern s32 lbl_8041F94C[];
+    extern u8 lbl_803C4988[];
+
+    if (*(s32 *)(self + 0xB0) == 0) {
+        *(s32 *)(self + 0xEC) = fn_8000C1EC(lbl_8041F94C[0xD0 / 4], self);
+        fn_8000C4F8(lbl_8041F94C[0xD0 / 4], 0);
+        fn_8000AA2C(lbl_8041F94C[0xD0 / 4], lbl_803C4988, 0, 0, 0);
+        *(s32 *)(self + 0xB0) = 1;
+    }
+}
+
 void fn_800235FC(void *arg0, f32 farg0, f32 farg1, f32 farg2, f32 farg3) {
     M2C_FIELD(M2C_FIELD(arg0, void **, 0x4C), f32 *, 0x10) = farg0;
     M2C_FIELD(M2C_FIELD(arg0, void **, 0x4C), f32 *, 0x14) = farg1;
