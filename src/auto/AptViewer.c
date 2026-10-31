@@ -2,6 +2,50 @@
 #include "common.h"
 
 void fn_800C3828(void *);
+
+void *fn_802D0AB8(void);
+void *fn_802D0B3C(void);
+void *fn_802D197C(void *, s32, s32);
+void *fn_802DC3C0(void *, s32, s32, s32, s32);
+
+static inline void *AptViewer_Alloc(void) {
+    void *heap;
+    void *p;
+
+    heap = fn_802D0AB8();
+    p = fn_802D197C(heap, 0x460, 0x10);
+    if (p == NULL) {
+        p = fn_802DC3C0(heap, 0x460, 0x10, 0, 0);
+        if (p == NULL && heap == fn_802D0AB8()) {
+            return fn_802DC3C0(fn_802D0B3C(), 0x460, 0x10, 0, 0);
+        }
+    }
+    return p;
+}
+
+typedef struct AptViewerParams {
+    s32 v[18];
+} AptViewerParams;
+
+static inline void AptViewerParams_Init(AptViewerParams *p) {
+    p->v[0] = 0x200;
+    p->v[1] = 0x200;
+    p->v[2] = 0x40;
+    p->v[3] = 0x100;
+    p->v[4] = 0x40;
+    p->v[5] = 0x100;
+    p->v[6] = 0x180;
+    p->v[7] = 0x40;
+    p->v[8] = 0x180;
+    p->v[9] = 0x20;
+    p->v[10] = 0x20;
+    p->v[11] = 0x20;
+    p->v[12] = 0x20;
+    p->v[13] = 0x400;
+    p->v[14] = 0x400;
+    p->v[15] = 0x100;
+    p->v[16] = 1;
+}
 void fn_8000AA2C(void *self, const char *fmt, s32 arg2, s32 arg3, s32 arg4, ...);
 void fn_8000A794(void) {
 
