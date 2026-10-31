@@ -150,6 +150,11 @@ void fn_8031D080(void) {
 
 }
 
+M2C_UNK fn_8031D084(s32 self, s32 *msg) {
+    M2C_UNK fn_8031CA50(s32, s32 *, s32);
+    return fn_8031CA50(self + 0x37C, msg, 1);
+}
+
 void fn_8031D300(s32 arg0) {
     M2C_UNK fn_8031C91C(s32);
     fn_8031C91C(arg0 + 0x37C);
