@@ -86,6 +86,26 @@ void fn_80335FD8(char *self, s32 arg1) {
     }
 }
 
+void fn_80336078(char *self) {
+    extern char *lbl_80496220;
+    s32 fn_80338924(void *);
+    void fn_80336D24(char *);
+    void fn_80338934(void *);
+    void fn_803364F0(char *);
+    char *p = self + 0x40;
+
+    if (fn_80338924(p) == 0) {
+        fn_80336D24(self);
+    }
+    fn_80338934(p);
+    if (lbl_80496220 != NULL) {
+        char *vt = *(char **)lbl_80496220;
+        (*(void (**)(void *, char *))(vt + 0x5C))(lbl_80496220 + *(s16 *)(vt + 0x58), self);
+    }
+    fn_803364F0(self);
+    *(s32 *)(self + 0x5C) = 0;
+}
+
 void fn_803360FC(char *self, s32 arg1, s32 arg2) {
     extern char *lbl_80496220;
     extern s32 fn_80240584(void);
