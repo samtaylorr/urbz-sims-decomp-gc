@@ -372,6 +372,23 @@ f32 fn_80043984(void) {
     return v / lbl_803C616C[0];
 }
 
+void fn_800439BC(f32 farg0) {
+    void fn_803398E8(s32, void *);
+    extern f32 lbl_803C6170[];
+    extern f32 lbl_803C6174[];
+    extern f32 lbl_803C6178[];
+    extern f32 lbl_803C617C[];
+    extern f32 lbl_803C6180[];
+    extern f32 lbl_8041F63C[];
+
+    if (farg0 < lbl_803C6170[0]) {
+        farg0 += (farg0 == lbl_803C6174[0]) ? lbl_803C6178[0] : lbl_803C617C[0];
+    }
+    farg0 -= lbl_803C6170[0];
+    lbl_8041F63C[6] = farg0 * lbl_803C6180[0];
+    fn_803398E8(0, lbl_8041F63C);
+}
+
 f32 fn_80043A40(void) {
     extern f32 lbl_803C6184[];
     extern f32 lbl_8041F65C[];
