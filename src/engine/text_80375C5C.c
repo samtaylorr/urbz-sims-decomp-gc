@@ -147,8 +147,9 @@ char *fn_803783F0(char *s) {
     extern const u8 lbl_803EBA39[];
     char *p;
     for (p = s; *p; p++) {
-        if (lbl_803EBA39[(s32)*p] & 1) {
-            *p = *p + 0x20;
+        s32 c = *p;
+        if (c[lbl_803EBA39] & 1) {
+            *p = c + 0x20;
         }
     }
     return s;
