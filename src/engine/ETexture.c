@@ -429,8 +429,8 @@ void fn_8036F65C(void *arg0, void **arg1) {
     if (--M2C_FIELD(arg0, s32 *, 0x84) < 0) {
         M2C_FIELD(arg0, s32 *, 0x84) = 0;
     }
-    arg1[1] = NULL;
     arg1[0] = NULL;
+    arg1[1] = NULL;
 }
 
 s32 fn_8036FB28(void *arg0, void *arg1) {
