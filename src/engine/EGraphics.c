@@ -374,7 +374,10 @@ void fn_802EEC70(void *self, f32 a, f32 b, f32 c, f32 d) {
 }
 
 void fn_802EECEC(void *arg0) {
-    f32 a, b, c, d;
+    register f32 a asm("fr13");
+    f32 b;
+    register f32 c asm("fr11");
+    f32 d;
 
     if (M2C_FIELD(arg0, s32 *, 0x2CC) != 0) {
         goto custom;
