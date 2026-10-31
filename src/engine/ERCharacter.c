@@ -311,10 +311,12 @@ void fn_80319494(void) {
     void fn_802D0BC0(void);
     void fn_802D0AB8(void);
     void fn_802D0F9C(void);
-    char *vt;
 
-    vt = *(char **)lbl_80496220;
-    (*(void (**)(void *))(vt + 0xEC))(lbl_80496220 + *(s16 *)(vt + 0xE8));
+    {
+        char *obj = lbl_80496220;
+        char *vt = *(char **)obj;
+        (*(void (**)(void *))(vt + 0xEC))(obj + *(s16 *)(vt + 0xE8));
+    }
     fn_802D0B3C();
     fn_802D0F10();
     fn_802D0BC0();
@@ -322,8 +324,11 @@ void fn_80319494(void) {
     fn_802D0AB8();
     fn_802D0F10();
     fn_802D0F9C();
-    vt = *(char **)lbl_80495050;
-    (*(void (**)(void *))(vt + 0x44))(lbl_80495050 + *(s16 *)(vt + 0x40));
+    {
+        char *obj = lbl_80495050;
+        char *vt = *(char **)obj;
+        (*(void (**)(void *))(vt + 0x44))(obj + *(s16 *)(vt + 0x40));
+    }
 }
 
 void fn_80319B6C(f32 *a, f32 *b, f32 x, f32 y) {
