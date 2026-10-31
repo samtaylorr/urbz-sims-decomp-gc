@@ -1187,9 +1187,8 @@ s32 fn_80099180(void *arg0) {
         temp_r9_2 = M2C_FIELD(temp_r3, void **, 4);
         if (M2C_FIELD(temp_r9_2, s32 (**)(void *), 0x164)(temp_r3 + M2C_FIELD(temp_r9_2, s16 *, 0x160)) == 0) {
             if (M2C_FIELD(arg0, u8 *, 0x495) != 1) {
-                temp_r11 = M2C_FIELD(arg0, void **, 8);
-                if (!(Anim_CurFlags((u8 *)temp_r11 + 0x314) & 0x10)) {
-                    if (fn_8003ADB0(temp_r11) == 1) {
+                if (!(Obj_CurAnimFlags(M2C_FIELD(arg0, void **, 8)) & 0x10)) {
+                    if (fn_8003ADB0(M2C_FIELD(arg0, void **, 8)) == 1) {
                         var_r30 = 1;
                     }
                 }
