@@ -408,6 +408,28 @@ s32 fn_80338230(char *self, u32 max) {
     return total != 0;
 }
 
+s32 fn_803383A8(char *self, u32 max, s32 arg2, s32 arg3) {
+    extern char lbl_8045B82C[];
+    extern char *lbl_80495050;
+    s32 fn_80337F3C(char *);
+    u32 total = 0;
+    s32 did;
+
+    do {
+        did = fn_80337F3C(lbl_8045B82C);
+        total += did;
+    } while (did != 0 && total < max);
+    if (total != 0) {
+        char *obj = lbl_80495050;
+        char *vt = *(char **)obj;
+        (*(void (**)(void *))(vt + 0x44))(obj + *(s16 *)(vt + 0x40));
+    }
+    if (total != 0) {
+        return 1;
+    }
+    return ((s32 (*)(char *, u32, s32, s32))fn_80338230)(self, max, arg2, arg3);
+}
+
 void fn_80338448(void *arg0, s32 arg1) {
     void fn_802D20E8(void *);
     void fn_802D1A00(void *, void *);
@@ -419,6 +441,35 @@ void fn_80338448(void *arg0, s32 arg1) {
     if (arg1 & 1) {
         fn_802D20E8(arg0);
     }
+}
+
+s32 fn_8033849C(void *arg0, s32 arg1) {
+    void *fn_802D0AB8(void);
+    void *fn_802D0B3C(void);
+    void *fn_802D197C(void *, u32, s32);
+    void *fn_802DBBCC(void *, u32, s32);
+    void *heap;
+    u32 size;
+    void *p;
+
+    heap = fn_802D0AB8();
+    size = arg1 << 3;
+    p = 0;
+    if (size != 0) {
+        p = fn_802D197C(heap, size, 4);
+        if (p == 0) {
+            p = fn_802DBBCC(heap, size, 0);
+            if (p == 0 && heap == fn_802D0AB8()) {
+                p = fn_802DBBCC(fn_802D0B3C(), size, 0);
+            }
+        }
+    }
+    M2C_FIELD(arg0, void **, 0) = p;
+    if (p == NULL) {
+        return 0;
+    }
+    M2C_FIELD(arg0, s32 *, 8) = arg1;
+    return 1;
 }
 
 s32 fn_8033854C(void *arg0, u32 arg1) {
