@@ -164,6 +164,11 @@ void fn_80337480(s32 arg0, s32 arg1) {
     fn_803370B8(arg0, fn_80337F14(arg1), 0, 0, 0);
 }
 
+void fn_803374F4(char *self, s32 **arg1, s32 *arg2) {
+    *arg2 = **(s32 **)(self + 0x60);
+    *arg1 = *(s32 **)(self + 0x60) + 1;
+}
+
 void fn_8033775C(char *self, s32 key) {
     void fn_80337510(char *, char *);
     s32 fn_80338598(char *, s32, char **);
