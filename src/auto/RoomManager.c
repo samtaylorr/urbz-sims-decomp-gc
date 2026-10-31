@@ -708,7 +708,12 @@ s32 fn_80192B04(void *arg0) {
 }
 
 s32 fn_80192B0C(s32 arg0, s32 arg1) {
-    return arg0 != 0 ? ((arg0 + (((4 - arg1) & 3) - 1)) & 3) + 1 : 0;
+    s32 t;
+    if (arg0 != 0) {
+        t = ((4 - arg1) & 3) - 1;
+        return ((arg0 + t) & 3) + 1;
+    }
+    return 0;
 }
 
 s32 fn_80192C7C(void) {
