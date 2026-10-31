@@ -140,6 +140,16 @@ s32 fn_80041FBC(s32 arg0) {
     return ((s32) lbl_8049408C >> arg0) & 1;
 }
 
+void fn_80041FCC(s32 arg0) {
+    extern s32 lbl_80494080;
+    extern s32 lbl_8049407C;
+    void fn_8033915C(s32);
+    if (lbl_80494080 == 0) {
+        fn_8033915C(lbl_8049407C);
+        lbl_80494080 = arg0;
+    }
+}
+
 s32 fn_8004200C(void) {
     s32 fn_803390A4(void);
     s32 fn_8033909C(s32);
