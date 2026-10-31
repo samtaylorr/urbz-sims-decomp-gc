@@ -127,7 +127,7 @@ s32 fn_80199004(s32 *self, char **obj) {
         vt = *(char **)(o + 4);
         sub = (*(s32 (**)(void *))(vt + 0x2EC))(o + *(s16 *)(vt + 0x2E8));
     }
-    return self[0] == id && *(s16 *)((char *)self + 4) == sub;
+    return id == self[0] && sub == *(s16 *)((char *)self + 4);
 }
 
 void fn_801991B4(void) {
