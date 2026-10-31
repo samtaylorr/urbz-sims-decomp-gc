@@ -17,6 +17,32 @@ static inline s32 Handle_Get(Handle *h) {
     return h->p != NULL ? *h->p : 0;
 }
 
+u8 *fn_8001E78C(u8 *self) {
+    extern void fn_800F160C(void *);
+    extern u8 lbl_803C49E4[];
+    *(s32 *)(self + 4) = 0;
+    *(s32 *)(self + 0) = 0;
+    *(s32 *)(self + 8) = 1;
+    fn_800F160C(self + 0x10);
+    fn_800F160C(self + 0x14);
+    fn_800F160C(self + 0x18);
+    fn_800F160C(self + 0x1c);
+    *(u8 **)(self + 0xc) = lbl_803C49E4;
+    *(s32 *)(self + 0x20) = 0;
+    *(s32 *)(self + 0x2c) = 0;
+    *(s32 *)(self + 0x30) = 0;
+    return self;
+}
+
+void fn_8001EC68(void) {
+    extern u8 *lbl_8041FA44;
+    u8 *obj = lbl_8041FA44;
+    if (obj != NULL) {
+        u8 *vt = *(u8 **)(obj + 0x44);
+        ((void (*)(void *, s32, s32))*(void **)(vt + 0x3c))(obj + *(s16 *)(vt + 0x38), 0, 0x1e);
+    }
+}
+
 void fn_8001FC30(void) {
     fn_800A23A4();
 }
@@ -201,20 +227,18 @@ void *fn_80022D98(void *arg0) {
     return NULL;
 }
 
-Quat4 fn_80022DE4(u8 *obj) {
+void fn_80022DE4(Quat4 *out, u8 *obj) {
     Quat4 *src = (Quat4 *)(*(u8 **)(obj + 0x4C) + 0x10);
     Quat4 q;
-    Quat4 r;
 
     q.x = src->x;
     q.y = src->y;
     q.z = src->z;
     q.w = src->w;
-    r.x = q.x;
-    r.y = q.y;
-    r.z = q.z;
-    r.w = q.w;
-    return r;
+    out->x = q.x;
+    out->y = q.y;
+    out->z = q.z;
+    out->w = q.w;
 }
 
 void fn_8002357C(u8 *self) {
