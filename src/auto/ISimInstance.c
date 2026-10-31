@@ -256,22 +256,16 @@ void fn_800650DC(void *arg0) {
 s32 fn_80065148(s32 id) {
     extern void *lbl_8041FA38[];
     void *p = lbl_8041FA38[0];
+    void *list;
 
     if (p == NULL) {
         return -1;
     }
-    p = M2C_FIELD(p, void **, 4);
-    if (p == NULL) {
+    list = M2C_FIELD(p, void **, 4);
+    if (list == NULL) {
         return -1;
     }
-    p = M2C_FIELD(p, void **, 4);
-    while (p != NULL) {
-        if (id == M2C_FIELD(p, s32 *, 0x1C)) {
-            return M2C_FIELD(p, s32 *, 0x18);
-        }
-        p = M2C_FIELD(p, void **, 0x10);
-    }
-    return -1;
+    return ISimInstance_FindId(list, id);
 }
 
 void *fn_800651A8(s32 key) {
