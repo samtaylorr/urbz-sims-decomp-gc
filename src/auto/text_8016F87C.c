@@ -518,6 +518,11 @@ s32 fn_80175E74(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0xD4);
 }
 
+s32 fn_80175E7C(void *arg0, s32 arg1, s32 arg2) {
+    extern void *fn_80175EA0(void *, s32, s32);
+    return M2C_FIELD(fn_80175EA0(arg0, arg1, arg2), s32 *, 0);
+}
+
 s32 fn_80175EA0(void) {
     return lbl_80495C90;
 }
