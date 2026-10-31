@@ -1100,7 +1100,8 @@ f32 fn_80098420(void *arg0, void *arg1) {
     extern f32 lbl_803CCBC0[];
     f32 f = lbl_803CCBC0[0];
     if (arg1 != 0) {
-        f = (f32)(M2C_FIELD(arg1, s32 *, 0x20) - 1) / M2C_FIELD(arg1, f32 *, 0x6C);
+        f = (f32)(M2C_FIELD(arg1, s32 *, 0x20) - 1);
+        f /= M2C_FIELD(arg1, f32 *, 0x6C);
     }
     return f;
 }
