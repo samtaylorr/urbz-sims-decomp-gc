@@ -255,6 +255,21 @@ block_4:
     return NULL;
 }
 
+void fn_8031D970(char *self) {
+    void fn_8033627C(char *);
+    ERMLock lock;
+    char *res;
+    char *vt;
+
+    vt = *(char **)self;
+    (*(void (**)(void *))(vt + 0x4C))(self + *(s16 *)(vt + 0x48));
+    ERMLock_Lock(&lock, self + 0x360);
+    for (res = *(char **)(self + 0x348); res != NULL; res = *(char **)(res + 0xA0)) {
+        fn_8033627C(res);
+    }
+    ERMLock_Unlock(&lock);
+}
+
 void fn_8031DAF8(char *self) {
     extern char lbl_803F2E00[];
     s32 fn_802486DC(s32, char *);
