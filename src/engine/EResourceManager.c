@@ -332,6 +332,8 @@ s32 fn_80337F34(void) {
 }
 
 s32 fn_80337F3C(char *self) {
+    s32 fn_8033983C(char *);
+    s32 fn_80339644(char *, s32);
     char *q = self + 0x6C;
     if (fn_8033983C(q) != 0) {
         return fn_80339644(q, 3);
