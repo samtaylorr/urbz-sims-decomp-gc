@@ -191,31 +191,32 @@ void fn_80193680(void *arg0, s32 *arg1, s32 *arg2) {
 s32 fn_80193C00(SPart *arg0, s32 arg1, s32 arg2) {
     s32 fn_80193694(SPart *);
     u8 *n;
-    s32 cnt;
 
-    cnt = fn_80193694(arg0);
-    if (arg2 < 0 || arg2 >= cnt || (n = fn_80193260(arg0, arg1)) == NULL) {
+    if (arg2 < 0 || arg2 >= fn_80193694(arg0) || (n = fn_80193260(arg0, arg1)) == NULL) {
         return -1;
     }
-    return *(s32 *)((u8 *)M2C_FIELD(arg0, s32 **, 0x3C) + (M2C_FIELD(n, s32 *, 0xC) + arg2) * 4);
+    return *SPart_Index(arg0, M2C_FIELD(n, s32 *, 0xC) + arg2);
 }
 
 void fn_80193C74(void *arg0) {
-    s32 begin = M2C_FIELD(arg0, s32 *, 0xC);
     s32 *v0c = (s32 *)((u8 *)arg0 + 0xC);
-    s32 end = v0c[1];
     s32 *v4c = (s32 *)((u8 *)arg0 + 0x4C);
     s32 *v1c = (s32 *)((u8 *)arg0 + 0x1C);
     s32 *v2c = (s32 *)((u8 *)arg0 + 0x2C);
     s32 *v3c = (s32 *)((u8 *)arg0 + 0x3C);
+    s32 begin;
     s32 p;
 
-    for (p = begin; p != end; p += 0x14) {
+    begin = M2C_FIELD(arg0, s32 *, 0xC);
+    p = begin;
+    while (p != v0c[1]) {
+        p += 0x14;
     }
     v0c[1] = begin;
     begin = M2C_FIELD(arg0, s32 *, 0x4C);
-    end = v4c[1];
-    for (p = begin; p != end; p += 0x2C) {
+    p = begin;
+    while (p != v4c[1]) {
+        p += 0x2C;
     }
     v4c[1] = begin;
     v1c[1] = M2C_FIELD(arg0, s32 *, 0x1C);
@@ -227,10 +228,10 @@ s32 fn_80193CEC(SPRect *a, SPRect *b) {
     if (b == NULL) {
         return 1;
     }
-    if (a->y0 < b->y0 || a->y1 > b->y1 || a->x0 < b->x0 || a->x1 > b->x1) {
-        return 0;
+    if (a->y0 >= b->y0 && a->y1 <= b->y1 && a->x0 >= b->x0 && a->x1 <= b->x1) {
+        return 1;
     }
-    return 1;
+    return 0;
 }
 
 void fn_80197794(void *arg0, s32 arg1) {
