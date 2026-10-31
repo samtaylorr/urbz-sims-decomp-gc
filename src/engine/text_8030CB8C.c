@@ -40,22 +40,23 @@ void fn_8030F938(void *arg0, void *arg1) {
 }
 
 void fn_8030F994(f32 *arg0, f32 *arg1) {
-    arg0[2] = *arg1++;
-    arg0[3] = *arg1++;
-    arg0[4] = *arg1++;
-    arg0[5] = *arg1++;
-    arg0[6] = *arg1++;
-    arg0[7] = *arg1++;
-    arg0[8] = *arg1++;
-    arg0[9] = *arg1++;
-    arg0[10] = *arg1++;
-    arg0[11] = *arg1++;
-    arg0[12] = *arg1++;
-    arg0[13] = *arg1++;
-    arg0[14] = *arg1++;
-    arg0[15] = *arg1++;
-    arg0[16] = *arg1++;
-    arg0[17] = *arg1;
+    f32 *p = arg1;
+    arg0[2] = *p++;
+    arg0[3] = *p++;
+    arg0[4] = *p++;
+    arg0[5] = *p++;
+    arg0[6] = *p++;
+    arg0[7] = *p++;
+    arg0[8] = *p++;
+    arg0[9] = *p++;
+    arg0[10] = *p++;
+    arg0[11] = *p++;
+    arg0[12] = *p++;
+    arg0[13] = *p++;
+    arg0[14] = *p++;
+    arg0[15] = *p++;
+    arg0[16] = *p++;
+    arg0[17] = *p;
 }
 
 void fn_8030FA1C(s32 *arg0, s32 arg1, s32 arg2) {
