@@ -4,9 +4,9 @@
 typedef struct { f32 x, y, z; } EmitterVec3;
 
 static inline void EmitterVec3_Set(EmitterVec3 *v, f32 x, f32 y, f32 z) {
-    v->x = x;
-    v->y = y;
     v->z = z;
+    v->y = y;
+    v->x = x;
 }
 
 void fn_8030AA98(void *arg0);
@@ -36,8 +36,8 @@ s32 fn_8030AA04(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s3
     r = fn_8030F650((u8 *)arg0 + 0x8C);
     EmitterVec3_Set(&v, lbl_803F1F60[0], lbl_803F1F60[0], lbl_803F1F60[0]);
     f = lbl_803F1F5C[0];
-    M2C_FIELD(arg0, f32 *, 0x6C) = f;
     M2C_FIELD(arg0, f32 *, 0x68) = f;
+    M2C_FIELD(arg0, f32 *, 0x6C) = f;
     M2C_FIELD(arg0, s32 *, 0x70) = 0;
     M2C_FIELD(arg0, s32 *, 0x74) = 0;
     M2C_FIELD(arg0, s32 *, 0x78) = 0;
