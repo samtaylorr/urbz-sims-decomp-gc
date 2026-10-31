@@ -445,12 +445,12 @@ void fn_803118EC(s32 arg0, s32 arg1, s32 arg2) {
 }
 
 s32 fn_80311938(s32 arg0, s32 arg1) {
-    s32 *fn_80311370(s32);
+    s32 *fn_80311370(void *, s32);
     s32 result;
     s32 *p;
 
     result = 0;
-    for (p = fn_80311370(arg0); p != NULL && p[0] == arg1; p += 2) {
+    for (p = fn_80311370((void *)arg0, arg1); p != NULL && p[0] == arg1; p += 2) {
         result |= p[1];
     }
     return result;
