@@ -651,6 +651,70 @@ void fn_80191840(char *self, u16 id, u16 newid) {
     }
 }
 
+void *fn_801918DC(void *self, u16 id, s32 arg2) {
+    extern f32 lbl_803DAF98;
+    M2C_UNK fn_80191B04();
+    typedef struct { f32 x, y, z; } V3;
+    V3 tmp;
+    f32 f;
+
+    M2C_FIELD(self, s32 *, 4) = 0;
+    M2C_FIELD(self, s32 *, 8) = 0;
+    M2C_FIELD((char *)self + 0xC, s32 *, 4) = 0;
+    M2C_FIELD(self, s32 *, 0x14) = 0;
+    M2C_FIELD((char *)self + 0x14, s32 *, 4) = 0;
+    M2C_FIELD((char *)self + 0x1C, s32 *, 4) = 0;
+    M2C_FIELD(self, s32 *, 0x24) = 0;
+    M2C_FIELD((char *)self + 0x24, s32 *, 4) = 0;
+    M2C_FIELD((char *)self + 0x2C, s32 *, 4) = 0;
+    f = lbl_803DAF98;
+    tmp.z = f;
+    tmp.y = f;
+    tmp.x = f;
+    M2C_FIELD(self, u16 *, 0) = id;
+    M2C_FIELD(self, s32 *, 0x94) = arg2;
+    *(V3 *)((char *)self + 0x38) = tmp;
+    M2C_FIELD(self, u16 *, 2) = 0;
+    M2C_FIELD(self, s32 *, 0x8C) = 0;
+    M2C_FIELD(self, s32 *, 0x44) = 0;
+    fn_80191B04(self);
+    return self;
+}
+
+M2C_UNK fn_80191B04(void *self) {
+    extern f32 lbl_803DAF9C;
+    char *v = (char *)self + 0x14;
+    char *begin;
+    char *p;
+    f32 f = lbl_803DAF9C;
+
+    begin = M2C_FIELD(self, char **, 0x14);
+    M2C_FIELD(self, f32 *, 0x7C) = f;
+    M2C_FIELD(self, s32 *, 0x90) = 0;
+    M2C_FIELD(self, s32 *, 0x80) = 1;
+    M2C_FIELD(self, s32 *, 0x34) = 0;
+    M2C_FIELD(self, s32 *, 0x48) = 0;
+    M2C_FIELD(self, s32 *, 0x50) = 0;
+    M2C_FIELD(self, s32 *, 0x54) = 0;
+    M2C_FIELD(self, s32 *, 0x58) = 0;
+    M2C_FIELD(self, s32 *, 0x5C) = 0;
+    M2C_FIELD(self, s32 *, 0x60) = 0;
+    M2C_FIELD(self, s32 *, 0x64) = 0;
+    M2C_FIELD(self, s32 *, 0x68) = 0;
+    M2C_FIELD(self, s32 *, 0x6C) = 0;
+    M2C_FIELD(self, s32 *, 0x4C) = 0;
+    M2C_FIELD(self, s32 *, 0x70) = 0;
+    M2C_FIELD(self, s32 *, 0x74) = 0;
+    M2C_FIELD(self, f32 *, 0x78) = f;
+    M2C_FIELD(self, s32 *, 0x84) = 0;
+    M2C_FIELD(self, s32 *, 0x88) = 0;
+    M2C_FIELD(self, s32 *, 0x98) = 0;
+    M2C_FIELD(self, s32 *, 0x9C) = 0;
+    for (p = begin; p != M2C_FIELD(v, char **, 4); p += 12) {
+    }
+    M2C_FIELD(v, char **, 4) = begin;
+}
+
 void *fn_80191B94(void *arg0) {
     M2C_UNK fn_801AD7B0(u16, void *);
     void *temp_r31;
@@ -700,6 +764,7 @@ void fn_8019268C(void *room) {
     extern char lbl_803DAFEC[];
     extern char lbl_803DAFF0[];
     extern char lbl_803DAF88[];
+    typedef struct { u8 a[3]; } Elem;
     void *s;
 
     s = fn_800F5248(&lbl_80495A90, lbl_803DAFD0);
@@ -707,7 +772,7 @@ void fn_8019268C(void *room) {
     s = fn_800F5248(s, lbl_803DAFD8);
     s = fn_800F5248(s, M2C_FIELD(room, s32 *, 0x34) != 0 ? lbl_803DAFE4 : lbl_803DAFEC);
     s = fn_800F5248(s, lbl_803DAFF0);
-    s = fn_800F5330(s, (M2C_FIELD(room, s32 *, 8) - M2C_FIELD(room, s32 *, 4)) / 12);
+    s = fn_800F5330(s, M2C_FIELD(room, Elem **, 8) - M2C_FIELD(room, Elem **, 4));
     fn_800F5248(s, lbl_803DAF88);
 }
 
