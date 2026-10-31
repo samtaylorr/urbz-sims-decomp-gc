@@ -287,6 +287,16 @@ s32 fn_8036F334(void) {
     return 0;
 }
 
+s32 fn_8036F364(void *arg0) {
+    extern s32 lbl_80495240;
+    extern s32 lbl_80475658[];
+    if (lbl_80495240 > 7) {
+        return -1;
+    }
+    lbl_80475658[lbl_80495240++] = M2C_FIELD(arg0, s32 *, 0x90);
+    return 0;
+}
+
 s32 fn_8036FB28(void *arg0, void *arg1) {
     void **temp_r9;
     void *temp_r10;
