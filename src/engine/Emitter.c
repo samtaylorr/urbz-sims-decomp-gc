@@ -25,25 +25,28 @@ void fn_8030AB88(void *arg0, s32 arg1);
 void fn_8030B800(void);
 void fn_8030B280(void);
 s32 fn_8030AA04(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7) {
-    typedef struct { f32 x, y, z; } EmVec3;
     extern s32 fn_8030F650(void *);
     extern f32 lbl_803F1F5C[];
     extern f32 lbl_803F1F60[];
-    EmVec3 v;
+    EmitterVec3 v;
     s32 r;
+    s32 ret;
+    f32 f;
 
     r = fn_8030F650((u8 *)arg0 + 0x8C);
-    v.x = v.y = v.z = lbl_803F1F60[0];
-    *(EmVec3 *)((u8 *)arg0 + 0x90) = v;
-    M2C_FIELD(arg0, f32 *, 0x68) = lbl_803F1F5C[0];
-    M2C_FIELD(arg0, f32 *, 0x6C) = lbl_803F1F5C[0];
+    EmitterVec3_Set(&v, lbl_803F1F60[0], lbl_803F1F60[0], lbl_803F1F60[0]);
+    f = lbl_803F1F5C[0];
+    M2C_FIELD(arg0, f32 *, 0x6C) = f;
+    M2C_FIELD(arg0, f32 *, 0x68) = f;
     M2C_FIELD(arg0, s32 *, 0x70) = 0;
     M2C_FIELD(arg0, s32 *, 0x74) = 0;
     M2C_FIELD(arg0, s32 *, 0x78) = 0;
+    *(EmitterVec3 *)((u8 *)arg0 + 0x90) = v;
+    ret = 0;
     if (r < 0) {
-        return -1;
+        ret = -1;
     }
-    return 0;
+    return ret;
 }
 
 void fn_8030AA98(void *arg0) {
@@ -280,6 +283,18 @@ void fn_8030AFD0(void *arg0) {
         }
         fn_802F14E0(arg0, (char *)arg0 + 0x9C);
     }
+}
+
+extern void *lbl_80494ED0;
+extern const f32 lbl_803F2080[];
+extern const f32 lbl_803F2084[];
+void fn_8030C18C(void *arg0) {
+    void *g = lbl_80494EC4;
+
+    M2C_FIELD(arg0, f32 *, 0x38) = M2C_FIELD(g, f32 *, 0x110);
+    M2C_FIELD(arg0, f32 *, 0x3C) = M2C_FIELD(g, f32 *, 0x114);
+    M2C_FIELD(arg0, f32 *, 0x40) = M2C_FIELD(g, f32 *, 0x118) + lbl_803F2084[0];
+    fn_8030C0E8(arg0);
 }
 
 void fn_8030C1D8(void *arg0) {
