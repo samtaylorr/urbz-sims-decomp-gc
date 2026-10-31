@@ -15,6 +15,23 @@ s32 fn_8030ACB0(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x8C);
 }
 
+extern void *lbl_80494FDC;
+void fn_80325C50(s32 arg0, void *arg1);
+extern char lbl_8041B020[];
+extern f32 lbl_803F1F64[];
+void fn_802F04BC(void *arg0);
+void fn_802F05AC(void *arg0, s32 arg1);
+void fn_8030AD40(void *arg0, s32 arg1) {
+    u32 *p;
+
+    M2C_FIELD(arg0, char **, 0) = lbl_8041B020;
+    p = M2C_FIELD(arg0, u32 **, 0x8C);
+    if (p != NULL && !(p[0] & 0x4000)) {
+        fn_8030AA98();
+    }
+    fn_802F05AC(arg0, arg1);
+}
+
 void fn_8030ADA0(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7, s32 arg_sp8, s32 arg_spC) {
     void *temp_r11;
 
