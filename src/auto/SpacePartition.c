@@ -9,6 +9,33 @@ extern void fn_801961D4(void *);
 extern s32 fn_80194D94(void *);
 void fn_801978E4(s32 arg0, s32 arg1);
 
+typedef struct SPRect {
+    s32 x0;
+    s32 y0;
+    s32 x1;
+    s32 y1;
+} SPRect;
+
+typedef struct SPCell {
+    SPRect rect;
+    s32 unk10;
+} SPCell;
+
+typedef struct SPNode {
+    u8 pad0[4];
+    s32 cell;
+    u8 pad8[0x24];
+} SPNode;
+
+typedef struct SPart {
+    u8 pad0[0xC];
+    SPCell *cellsBegin;
+    SPCell *cellsEnd;
+    u8 pad14[0x38];
+    SPNode *nodesBegin;
+    SPNode *nodesEnd;
+} SPart;
+
 void fn_80197794(void *arg0, s32 arg1) {
     s32 *vec;
     s32 begin;
