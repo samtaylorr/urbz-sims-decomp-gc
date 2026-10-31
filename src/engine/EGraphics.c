@@ -248,6 +248,11 @@ void fn_802EE2A4(char *self) {
     (*(void (**)(char *))(vt + 0x204))(self + *(s16 *)(vt + 0x200));
 }
 
+void fn_802EE2D8(char *self) {
+    char *vt = *(char **)self;
+    (*(void (**)(char *))(vt + 0x20C))(self + *(s16 *)(vt + 0x208));
+}
+
 s32 fn_802EEB54(void *arg0) {
     M2C_UNK fn_802EE6D0();
     fn_802EE6D0();
