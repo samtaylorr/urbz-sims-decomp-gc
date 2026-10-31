@@ -1,6 +1,11 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+void fn_803104FC(void *arg0) {
+    void fn_8036FC58(s32, s32);
+    fn_8036FC58(M2C_FIELD(arg0, s32 *, 0x1FC), (M2C_FIELD(arg0, u32 *, 4) >> 1) & 1);
+}
+
 void fn_80310528(void *arg0) {
     M2C_UNK fn_8036FC58(s32);
     fn_8036FC58(M2C_FIELD(arg0, s32 *, 0x200));
@@ -24,6 +29,11 @@ void fn_803105B0(void *arg0, s32 arg1) {
 
 void fn_803105B8(void *arg0, s32 arg1) {
     ((struct { u8 pad[0x18C]; s32 unk18C[2]; } *)arg0)->unk18C[arg1] ^= 1;
+}
+
+void fn_803105D0(void *arg0, s32 arg1, s32 arg2) {
+    s32 *p = &((struct { u8 pad[0x194]; s32 unk194[2][2]; } *)arg0)->unk194[arg1][arg2];
+    *p = -*p;
 }
 
 void fn_80310728(void *arg0) {
