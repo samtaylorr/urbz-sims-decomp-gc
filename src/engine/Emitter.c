@@ -1,6 +1,14 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+typedef struct { f32 x, y, z; } EmitterVec3;
+
+static inline void EmitterVec3_Set(EmitterVec3 *v, f32 x, f32 y, f32 z) {
+    v->x = x;
+    v->y = y;
+    v->z = z;
+}
+
 void fn_8030AA98(void *arg0);
 extern void *lbl_80494FDC;
 void fn_80325C50(s32 arg0, void *arg1);
