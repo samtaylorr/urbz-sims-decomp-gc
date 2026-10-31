@@ -126,6 +126,14 @@ void fn_8030ADA0(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s
     }
 }
 
+void fn_8030AF3C(void *arg0) {
+    void fn_8030F5B8(void *);
+
+    if (M2C_FIELD(arg0, void **, 0x8C) != NULL) {
+        fn_8030F5B8(M2C_FIELD(arg0, void **, 0x8C));
+    }
+}
+
 void fn_8030AF68(void *arg0, void *arg1) {
     typedef struct { f32 x, y, z; } Vec3f;
 
