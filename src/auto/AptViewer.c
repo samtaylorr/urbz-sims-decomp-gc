@@ -23,6 +23,12 @@ static inline void *AptViewer_Alloc(void) {
     return p;
 }
 
+void *fn_8000A8D8(void *);
+
+static inline void *AptViewer_New(void) {
+    return fn_8000A8D8(AptViewer_Alloc());
+}
+
 typedef struct AptViewerParams {
     s32 v[18];
 } AptViewerParams;
