@@ -84,3 +84,10 @@ s32 fn_803781C0(s32 c) {
     return c;
 }
 
+s32 fn_803781DC(char *f, const char *fmt, ...) {
+    s32 fn_80249468(void *, s32, const char *, va_list);
+    va_list ap;
+    va_start(ap, fmt);
+    return fn_80249468(f, *(s32 *)(f + 8), fmt, ap);
+}
+
