@@ -9,6 +9,8 @@ void fn_8030DA64(void);
 s32 fn_8030CB8C(void) {
     s32 fn_8036F2AC(s32, s32);
     s32 fn_8030FAF0(s32, s32, s32);
+    s32 fn_8030FA50(s32 *, s32);
+    void fn_8030FDFC(f32 *);
     extern s32 lbl_804961F4;
     extern s32 lbl_804961F8;
     extern s32 lbl_804961FC;
@@ -47,22 +49,26 @@ s32 fn_8030CC3C(void) {
 }
 
 void fn_8030D260(void *arg0, void *arg1, f32 t) {
-    extern f32 lbl_803F2104;
-    extern f32 lbl_803F2108;
+    extern f32 lbl_803F2104[];
+    extern f32 lbl_803F2108[];
     s32 found = 0;
-    s32 i;
-    f32 sum = lbl_803F2108;
-    t *= lbl_803F2104;
-    for (i = 0; !found && i < M2C_FIELD(arg1, u32 *, 0x168); i++) {
-        sum += *(f32 *)((u8 *)arg1 + 0x18c + i * 0x84);
+    s32 i = 0;
+    f32 *p;
+    f32 sum = lbl_803F2108[0];
+    t *= lbl_803F2104[0];
+    p = (f32 *)((u8 *)arg1 + 0x18c);
+    while (!found && i < M2C_FIELD(arg1, u32 *, 0x168)) {
+        sum += *p;
         if (t < sum) {
             M2C_FIELD(arg0, f32 *, 0x44) = i;
             found = 1;
-            break;
+        } else {
+            p = (f32 *)((u8 *)p + 0x84);
+            i++;
         }
     }
     if (!found) {
-        M2C_FIELD(arg0, f32 *, 0x44) = lbl_803F2108;
+        M2C_FIELD(arg0, f32 *, 0x44) = lbl_803F2108[0];
     }
 }
 
