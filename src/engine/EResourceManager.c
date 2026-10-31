@@ -37,6 +37,55 @@ static inline void ERMLock_Unlock(ERMLock *l) {
     (*(void (**)(void *))(vt + 0x1C))(l->obj + *(s16 *)(vt + 0x18));
 }
 
+char *fn_80335F5C(char *self) {
+    extern u8 lbl_8041C0A8[];
+    void fn_802CAB04(char *);
+    void fn_802D39E4(char *);
+    void fn_80339348(char *);
+    s32 *p;
+
+    *(u8 **)(self + 0xA4) = lbl_8041C0A8;
+    fn_802CAB04(self);
+    p = (s32 *)(self + 0x40);
+    p[0] = 0;
+    p[4] = 0;
+    p[1] = 0;
+    p[2] = 0;
+    p[3] = 0;
+    fn_802D39E4(self + 0x58);
+    fn_80339348(self + 0x6C);
+    *(s32 *)(self + 0x98) = 0;
+    *(s32 *)(self + 0x5C) = 0;
+    *(s32 *)(self + 0x64) = 0;
+    *(s32 *)(self + 0x60) = 0;
+    *(s32 *)(self + 0x68) = 0;
+    return self;
+}
+
+void fn_80335FD8(char *self, s32 arg1) {
+    extern u8 lbl_8041C0A8[];
+    extern u8 lbl_80419350[];
+    void fn_80336078(char *);
+    void fn_802CAA00(char *, s32);
+    void fn_802D39F0(char *, s32);
+    void fn_80338448(void *, s32);
+    void fn_802D20E8(void *);
+
+    *(u8 **)(self + 0xA4) = lbl_8041C0A8;
+    if (*(s32 *)(self + 0x5C) != 0) {
+        fn_80336078(self);
+    }
+    fn_802CAA00(self + 0x6C, 2);
+    fn_802D39F0(self + 0x58, *(s32 *)(self + 0x58));
+    fn_80338448(self + 0x40, 2);
+    *(u8 **)self = lbl_80419350;
+    fn_802CAA00(self + 0x1C, 2);
+    fn_802CAA00(self, 2);
+    if (arg1 & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_803360FC(char *self, s32 arg1, s32 arg2) {
     extern char *lbl_80496220;
     extern s32 fn_80240584(void);
@@ -134,7 +183,6 @@ s32 fn_803365B8(char *self, s32 key, s32 *out1, s32 *out2) {
     extern s32 fn_80240584(void);
     s32 fn_80336554(u32, u32 *, s32);
     s32 idx;
-    s32 off;
     s32 *tbl;
 
     if (*(s32 **)(self + 0x60) == 0) {
@@ -144,13 +192,15 @@ s32 fn_803365B8(char *self, s32 key, s32 *out1, s32 *out2) {
     }
     tbl = *(s32 **)(self + 0x60);
     idx = fn_80336554(key, (u32 *)(tbl + 1), tbl[0]);
-    if (idx == -1) {
-        return 0;
+    if (idx != -1) {
+        s32 i2 = idx * 2 + 1;
+        s32 *t = *(s32 **)(self + 0x60);
+        s32 off = t[0] + i2;
+        *out1 = t[off];
+        *out2 = (*(s32 **)(self + 0x60))[off + 1];
+        return 1;
     }
-    off = (*(s32 **)(self + 0x60))[0] + (idx * 2 + 1);
-    *out1 = (*(s32 **)(self + 0x60))[off];
-    *out2 = (*(s32 **)(self + 0x60))[off + 1];
-    return 1;
+    return 0;
 }
 
 void fn_80336CBC(char *self) {
@@ -299,18 +349,16 @@ void fn_803374F4(char *self, s32 **arg1, s32 *arg2) {
 void fn_8033775C(char *self, s32 key) {
     void fn_80337510(char *, char *);
     s32 fn_80338598(char *, s32, char **);
-    struct {
-        char *obj;
-    } lock[1];
+    ERMLock lock[1];
     char *res;
 
     res = 0;
-    ERMLock_Lock((ERMLock *)lock, self);
+    ERMLock_Lock(lock, self);
     fn_80338598(self + 0x40, key, &res);
     if (res != 0) {
         fn_80337510(self, res);
     }
-    ERMLock_Unlock((ERMLock *)lock);
+    ERMLock_Unlock(lock);
 }
 
 void fn_803377F0(char *arg0, s32 arg1) {
@@ -332,23 +380,23 @@ void fn_8033789C(char *self, s32 key) {
     s32 fn_80338598(char *, s32, char **);
     struct {
         char *obj;
-        char *volatile res;
+        char *res;
     } lock;
-    char *res;
     char *vt;
 
     lock.obj = self;
-    vt = *(char **)self;
     lock.res = 0;
+    vt = *(char **)self;
     (*(void (**)(void *, s32))(vt + 0x14))(self + *(s16 *)(vt + 0x10), -1);
-    fn_80338598(self + 0x40, key, (char **)&lock.res);
-    res = lock.res;
-    if (res == 0) {
-        ERMLock_Unlock((ERMLock *)&lock);
+    fn_80338598(self + 0x40, key, &lock.res);
+    if (lock.res == 0) {
+        vt = *(char **)lock.obj;
+        (*(void (**)(void *))(vt + 0x1C))(lock.obj + *(s16 *)(vt + 0x18));
         return;
     }
-    fn_80337AEC(self, res);
-    ERMLock_Unlock((ERMLock *)&lock);
+    fn_80337AEC(self, lock.res);
+    vt = *(char **)lock.obj;
+    (*(void (**)(void *))(vt + 0x1C))(lock.obj + *(s16 *)(vt + 0x18));
 }
 
 void fn_80337950(char *arg0, s32 arg1) {
@@ -576,15 +624,12 @@ s32 fn_8033849C(void *arg0, s32 arg1) {
 
     heap = fn_802D0AB8();
     size = arg1 << 3;
-    p = 0;
-    if (size != 0) {
-        p = fn_802D197C(heap, size, 4);
-        if (p == 0) {
-            p = fn_802DBBCC(heap, size, 0);
-            if (p == 0 && heap == fn_802D0AB8()) {
-                p = fn_802DBBCC(fn_802D0B3C(), size, 0);
-            }
-        }
+    if (size == 0) {
+        p = 0;
+    } else if ((p = fn_802D197C(heap, size, 4)) != 0) {
+    } else if ((p = fn_802DBBCC(heap, size, 0)) != 0) {
+    } else if (heap == fn_802D0AB8()) {
+        p = fn_802DBBCC(fn_802D0B3C(), size, 0);
     }
     M2C_FIELD(arg0, void **, 0) = p;
     if (p == NULL) {
