@@ -244,7 +244,7 @@ void fn_800681D4(void *arg0, void *arg1) {
 }
 
 void fn_80068244(void *arg0, s32 arg1) {
-    extern char lbl_8041F94C[];
+    extern struct { char pad[0xEC]; s32 *p; } lbl_8041F94C;
     extern void fn_8004D1BC(void *);
     extern void fn_800A3F74(void *);
     extern void fn_8000F6D0(void *);
@@ -253,10 +253,10 @@ void fn_80068244(void *arg0, s32 arg1) {
     s32 *p;
     s32 i;
 
-    fn_8004D1BC(lbl_8041F94C);
+    fn_8004D1BC(&lbl_8041F94C);
     fn_800A3F74(self->arr[arg1]);
     fn_8000F6D0(self->arr2[arg1]);
-    fn_8006410C(M2C_FIELD(M2C_FIELD(lbl_8041F94C, void **, 0xEC), s32 *, 4));
+    fn_8006410C(lbl_8041F94C.p[1]);
     if (arg1 == 1) {
         p = (s32 *)((char *)arg0 + 0x2914);
         for (i = 0; i < 6; i++) {
@@ -857,6 +857,27 @@ void fn_8006C2F8(self) void *self; {
     fn_8006C274(self, lbl_803C913C);
     fn_8006C274(self, lbl_803C9150);
     fn_8006C274(self, lbl_803C915C);
+}
+
+void fn_8006C35C(self) void *self; {
+    extern char lbl_803C9170[];
+    extern char lbl_803C9180[];
+    extern char lbl_803C9190[];
+    extern char lbl_803C919C[];
+    extern char lbl_803C911C[];
+    void fn_8006C274(void *, char *);
+    int fn_80245BB4(char *, const char *, ...);
+    char buf[16];
+    s32 i;
+
+    fn_8006C274(self, lbl_803C9170);
+    fn_8006C274(self, lbl_803C9180);
+    fn_8006C274(self, lbl_803C9190);
+    fn_8006C274(self, lbl_803C919C);
+    for (i = 0; i <= 12; i++) {
+        fn_80245BB4(buf, lbl_803C911C, i);
+        fn_8006C274(self, buf);
+    }
 }
 
 s32 fn_8006C3F4(void *arg0) {
