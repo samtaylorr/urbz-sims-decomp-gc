@@ -451,13 +451,13 @@ void fn_8033B58C(s16 *src, s16 *dst, s32 w, s32 h, s16 *param) {
 
 void fn_8033B5F8(s16 *src, s16 *dst, s32 w, s32 h, s16 *param) {
     s32 i;
-    s32 n = w * h;
 
-    for (i = 0; i < n; i++) {
+    w *= h;
+    for (i = 0; i < w; i++) {
         s32 v = src[i];
         s32 b = v & 0x1F;
-        s32 r = (v >> 10) & 0x1F;
         s32 g = (v >> 5) & 0x1F;
+        s32 r = (v >> 10) & 0x1F;
         if (b < param[2]) {
             b = ~b;
         }
