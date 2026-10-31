@@ -14,12 +14,6 @@ static inline AptVec2 AptVec2_Make(f32 x, f32 y) {
     return v;
 }
 
-static inline AptVec2 *AptVec2_Init(AptVec2 *v, f32 x, f32 y) {
-    v->x = x;
-    v->y = y;
-    return v;
-}
-
 void fn_80007C90(void *arg0, f32 arg1) {
     extern f32 lbl_803C1650[];
     extern s32 lbl_80494378;
@@ -232,20 +226,16 @@ void *fn_8000A46C(void *arg0) {
     extern s32 lbl_80406C38[];
     AptVec2 v;
     AptVec2 *p;
-    AptVec2 a;
-    AptVec2 b;
 
     p = &v;
-    p->x = lbl_803C17F8[0];
-    p->y = lbl_803C17F8[0];
-    a = *p;
-    p->x = lbl_803C17FC[0];
-    p->y = lbl_803C17FC[0];
     M2C_FIELD(arg0, void **, 0x2C) = lbl_80406C38;
     M2C_FIELD(arg0, s32 *, 0x18) = 0;
-    b = *p;
-    M2C_FIELD(arg0, AptVec2 *, 0x1C) = a;
-    M2C_FIELD(arg0, AptVec2 *, 0x24) = b;
+    p->x = lbl_803C17F8[0];
+    p->y = lbl_803C17F8[0];
+    M2C_FIELD(arg0, AptVec2 *, 0x1C) = *p;
+    p->x = lbl_803C17FC[0];
+    p->y = lbl_803C17FC[0];
+    M2C_FIELD(arg0, AptVec2 *, 0x24) = *p;
     M2C_FIELD(arg0, s32 *, 0) = 0;
     M2C_FIELD(arg0, s32 *, 8) = 0;
     M2C_FIELD(arg0, s32 *, 0xC) = 0;
