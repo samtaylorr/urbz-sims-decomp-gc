@@ -244,6 +244,17 @@ void fn_8032B9E4(void) {
 
 }
 
+void fn_8032B9E8(u8 *self, u8 *other) {
+    extern void fn_803005BC(u8 *, u8 *);
+    s32 i;
+
+    if (other != 0 && ListCount(other + 0x20) == ListCount(self + 0x20)) {
+        for (i = 0; i < ListCount(self + 0x20); i++) {
+            fn_803005BC(*(u8 **)(self + 0x20) + i * 0x18, *(u8 **)(other + 0x20) + i * 0x18);
+        }
+    }
+}
+
 s32 fn_8032BB20(u8 *self, s32 name, s32 idx) {
     extern void *fn_8033740C(void *, s32, s32, s32);
     extern s32 fn_8032BA68(u8 *, void *, s32);
