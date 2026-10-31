@@ -21,6 +21,11 @@ typedef struct SPCell {
     s32 unk10;
 } SPCell;
 
+typedef struct SPCellVec {
+    SPCell *begin;
+    SPCell *end;
+} SPCellVec;
+
 typedef struct SPNode {
     u8 pad0[4];
     s32 cell;
