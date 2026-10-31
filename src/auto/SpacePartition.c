@@ -65,13 +65,6 @@ static inline SPPoint *SPPoint_Init(SPPoint *p, s32 a, s32 b) {
 }
 
 extern void fn_80192EEC(SPart *, SPNode *, SPNode *, SPRect *);
-
-static inline SPRect SPart_NodesRect(SPart *sp, SPNode *na, SPNode *nb) {
-    SPRect r;
-
-    fn_80192EEC(sp, na, nb, &r);
-    return r;
-}
 SPCell *fn_80192D9C(SPCell *self, SPRect *r, s32 arg2) {
     self->rect = *r;
     self->unk10 = arg2;
@@ -115,13 +108,11 @@ void fn_80192E6C(SPart *sp, s32 a, s32 b, SPRect *out) {
 }
 
 SPPoint fn_80192FC8(SPart *sp, SPNode *na, SPNode *nb) {
+    SPRect r;
     SPPoint t;
-    {
-        SPRect r;
 
-        fn_80192EEC(sp, na, nb, &r);
-        return *SPPoint_Init(&t, (r.y1 + r.y0) / 2, (r.x1 + r.x0) / 2);
-    }
+    fn_80192EEC(sp, na, nb, &r);
+    return *SPPoint_Init(&t, (r.y1 + r.y0) / 2, (r.x1 + r.x0) / 2);
 }
 
 void fn_80193050(void *arg0) {
