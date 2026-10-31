@@ -331,6 +331,24 @@ s32 fn_80337F34(void) {
     return 0;
 }
 
+s32 fn_80337F3C(char *self) {
+    char *q = self + 0x6C;
+    if (fn_8033983C(q) != 0) {
+        return fn_80339644(q, 3);
+    }
+    return 0;
+}
+
+s32 fn_80337F84(char *self) {
+    char *q = self + 0x6C;
+    s32 r = 0;
+    while (fn_8033983C(q) != 0) {
+        r = 1;
+        fn_80339644(q, 0x7FFFFF);
+    }
+    return r;
+}
+
 s32 fn_8033983C(char *);
 
 void fn_80337FDC(char *arg0) {
@@ -365,6 +383,7 @@ s32 fn_80338230(char *self, u32 max) {
     extern char lbl_8045BAE8[];
     extern char lbl_8045B82C[];
     extern char *lbl_80495050;
+    s32 fn_80337F3C(char *);
     u32 total = 0;
     s32 did;
 
@@ -467,11 +486,12 @@ void fn_80338970(void) {
 }
 
 void fn_80338990(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0xC) = 0;
-    M2C_FIELD(arg0, s32 *, 8) = 0;
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
-    M2C_FIELD(arg0, u32 *, 0x10) = 0xDEADBEEF;
+    register void *p asm("r9") = arg0;
+    M2C_FIELD(p, s32 *, 0xC) = 0;
+    M2C_FIELD(p, s32 *, 8) = 0;
+    M2C_FIELD(p, s32 *, 0) = 0;
+    M2C_FIELD(p, s32 *, 4) = 0;
+    M2C_FIELD(p, u32 *, 0x10) = 0xDEADBEEF;
 }
 
 void fn_803389B8(void *arg0, s32 arg1) {
