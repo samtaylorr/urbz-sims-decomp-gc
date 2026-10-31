@@ -21,14 +21,21 @@ typedef struct {
 
 void *fn_8004FFDC(u8 **arg0, s32 arg1) {
     u8 *base = *arg0;
-    s32 i;
-    for (i = 0; i < M2C_FIELD(base, s32 *, 0x16004); i++) {
-        u8 *e = base + 0x8004 + i * 0x1C;
-        if (M2C_FIELD(e, s16 *, 0xC) == arg1) {
+    HouseReconEntry *e = (HouseReconEntry *)(base + 0x8004);
+    s32 *count = (s32 *)(base + 0x16004);
+    HouseReconEntry *r = NULL;
+    s32 i = 0;
+    if (i < *count) {
+        if (e[0].unkC == arg1) {
             return e;
         }
+        for (i = 1; i < *count; i++) {
+            if (e[i].unkC == arg1) {
+                return &e[i];
+            }
+        }
     }
-    return NULL;
+    return r;
 }
 
 void *fn_80050040(u8 *arg0) {
@@ -73,10 +80,11 @@ s32 fn_80050114(u8 *arg0, s32 arg1) {
     if (i < n) {
         p = arg0 + 0x8004;
         do {
-            if (M2C_FIELD(p, s32 *, 0) == arg1) {
+            s32 v = *(s32 *)p;
+            p += 0x1C;
+            if (v == arg1) {
                 return i;
             }
-            p += 0x1C;
             i++;
         } while (i < n);
     }
