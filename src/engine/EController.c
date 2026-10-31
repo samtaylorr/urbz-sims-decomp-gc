@@ -186,8 +186,8 @@ s32 fn_803109E4(char *self) {
     if ((*(s32 (**)(char *))(vt + 0x1C))(self + *(s16 *)(vt + 0x18)) == 0) {
         return 0;
     }
-    M2C_FIELD(self, f32 *, 0x1DC) = lbl_803F22BC[0];
     M2C_FIELD(self, f32 *, 0x1E4) = lbl_803F22BC[0];
+    M2C_FIELD(self, f32 *, 0x1DC) = lbl_803F22BC[0];
     return 1;
 }
 
