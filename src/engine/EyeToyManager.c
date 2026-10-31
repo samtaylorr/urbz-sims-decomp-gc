@@ -255,6 +255,11 @@ void fn_803398AC(void) {
     lbl_80494F90 = 0;
 }
 
+void fn_803398E8(s32 idx, EyeToyEntry *src) {
+    extern s32 lbl_80494F8C;
+    ((EyeToyEntry *)lbl_80494F8C)[idx] = *src;
+}
+
 void fn_80339954(s32 arg0, s32 arg1) {
     extern s32 lbl_80494F8C;
     M2C_FIELD(((arg0 * 0x24) + lbl_80494F8C), s32 *, 4) = arg1;
