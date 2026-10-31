@@ -137,6 +137,19 @@ void fn_80279D70(void) {
     fn_80279D00();
 }
 
+void fn_80279E4C(s32 *arg0) {
+    extern s32 lbl_804960FC;
+    extern s32 lbl_804433B0[];
+    extern u8 *lbl_804960E8;
+    extern void fn_8028CB54(u8 *, void *);
+    struct { s32 a, b, c, d; } sp8;
+
+    if (lbl_804960FC != 0 && lbl_804433B0[0] == 0 && lbl_804960E8 != NULL) {
+        sp8 = *(typeof(sp8) *)arg0;
+        fn_8028CB54(lbl_804960E8, &sp8);
+    }
+}
+
 void fn_80279FFC(s32 arg0, s32 arg1) {
     extern void fn_802BE53C(u16 **, s32);
     extern s32 fn_8027873C(s32);
