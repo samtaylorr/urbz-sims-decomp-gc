@@ -125,6 +125,30 @@ void *fn_80198A08(void *arg0) {
     return arg0;
 }
 
+s32 fn_80198DFC(void *arg0, void *arg1) {
+    void *fn_80117474(void *);
+    s32 fn_8016CC44(s32);
+    s32 fn_8016CCE0(s32);
+    void *obj;
+    char *vt;
+    s32 a;
+    s32 b;
+    s32 c;
+
+    a = 0;
+    obj = fn_80117474(arg1);
+    b = 0;
+    c = -1;
+    if (obj != NULL) {
+        vt = M2C_FIELD(obj, char **, 4);
+        a = fn_8016CCE0(fn_8016CC44(M2C_FIELD(vt, s32 (**)(void *), 0x32C)((char *)obj + M2C_FIELD(vt, s16 *, 0x328))));
+        vt = M2C_FIELD(obj, char **, 4);
+        b = M2C_FIELD(vt, s32 (**)(void *), 0x2EC)((char *)obj + M2C_FIELD(vt, s16 *, 0x2E8));
+        c = M2C_FIELD(arg1, s32 *, 0x14);
+    }
+    return a == M2C_FIELD(arg0, s32 *, 8) && b == M2C_FIELD(arg0, s16 *, 0xC) && c == M2C_FIELD(arg0, s32 *, 0x10);
+}
+
 s32 fn_80199004(s32 *self, char **obj) {
     s32 fn_8016CCE0(s32);
     s32 id = 0;
