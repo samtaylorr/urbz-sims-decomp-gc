@@ -1,6 +1,57 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+void fn_80310474(void *arg0);
+void fn_803103A0(void *arg0, s32 arg1) {
+    extern void fn_802D20E8(void *);
+    extern u8 lbl_8041B150[];
+    M2C_FIELD(arg0, u8 **, 0x204) = lbl_8041B150;
+    if (M2C_FIELD(arg0, void **, 0x1FC) != NULL) {
+        fn_802D20E8(M2C_FIELD(arg0, void **, 0x1FC));
+        M2C_FIELD(arg0, void **, 0x1FC) = NULL;
+    }
+    if (M2C_FIELD(arg0, void **, 0x200) != NULL) {
+        fn_802D20E8(M2C_FIELD(arg0, void **, 0x200));
+        M2C_FIELD(arg0, void **, 0x200) = NULL;
+    }
+    if (arg1 & 1) {
+        fn_802D20E8(arg0);
+    }
+}
+
+void fn_80310418(void *arg0) {
+    M2C_UNK fn_8036FD3C();
+    M2C_UNK fn_8036FE3C();
+    extern s32 lbl_80494E00;
+    extern s32 lbl_80494F58;
+    if (M2C_FIELD(arg0, s32 *, 0) == 0) {
+        lbl_80494F58 = lbl_80494E00;
+        fn_8036FD3C(M2C_FIELD(arg0, s32 *, 0x200), 0);
+        fn_8036FE3C(M2C_FIELD(arg0, s32 *, 0x200), M2C_FIELD(arg0, s32 *, 0x1FC));
+        fn_80310474(arg0);
+    }
+}
+
+void fn_80310474(void *arg0) {
+    s32 i;
+    u32 mask;
+    char *p;
+
+    M2C_FIELD(arg0, u32 *, 0x1B4) = M2C_FIELD(M2C_FIELD(arg0, char **, 0x200), u32 *, 0x18);
+    for (i = 0; i < 32; i++) {
+        mask = 1 << i;
+        p = M2C_FIELD(arg0, char **, 0x200);
+        if (!(M2C_FIELD(p, u32 *, 0x18) & mask) && (M2C_FIELD(p, u32 *, 8) & mask)) {
+            if (--((u8 *)arg0 + 0x1B8)[i] == 0) {
+                M2C_FIELD(arg0, u32 *, 0x1B4) |= mask;
+                ((u8 *)arg0 + 0x1B8)[i] = M2C_FIELD(arg0, u8 *, 0x1D9);
+            }
+        } else {
+            ((u8 *)arg0 + 0x1B8)[i] = M2C_FIELD(arg0, u8 *, 0x1D8);
+        }
+    }
+}
+
 void fn_803104FC(void *arg0) {
     void fn_8036FC58(s32, s32);
     fn_8036FC58(M2C_FIELD(arg0, s32 *, 0x1FC), (M2C_FIELD(arg0, u32 *, 4) >> 1) & 1);
