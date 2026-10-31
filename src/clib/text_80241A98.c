@@ -59,15 +59,15 @@ void fn_80241ED4(void) {
 }
 
 s32 fn_80242054(void) {
-    extern volatile s32 lbl_803F73B0;
+    extern volatile s32 lbl_803F73B0[];
     extern s32 lbl_80440518[];
     void fn_80241F7C(void);
     void fn_80241D50(void);
 
-    if (lbl_803F73B0 == 0) {
+    if (lbl_803F73B0[0] == 0) {
         return 0;
     }
-    if (lbl_803F73B0 == 5) {
+    if (lbl_803F73B0[0] == 5) {
         fn_80241F7C();
     } else {
         fn_80241D50();
