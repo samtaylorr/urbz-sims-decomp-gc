@@ -188,6 +188,11 @@ void fn_8035DB44(void) {
     fn_8036EFA4();
 }
 
+void fn_8035DB64(u8 *arg0, s32 *arg1) {
+    typedef struct { s32 x, y, z; } V3;
+    *(V3 *)(arg0 + 0xC) = *(V3 *)arg1;
+}
+
 extern u8 lbl_8041CEC0[];
 void fn_8036EEE0(u8 *);
 extern u8 *lbl_80495050;
