@@ -144,6 +144,16 @@ void fn_8030AF88(void *arg0, f32 farg0) {
     M2C_FIELD(M2C_FIELD(arg0, void **, 0x8C), f32 *, 0xBC) = farg0;
 }
 
+void fn_8030AF94(void *arg0, void *arg1) {
+    extern f32 lbl_80494E0C;
+    void fn_8030F350(void *, f32);
+    void *e = M2C_FIELD(M2C_FIELD(arg1, void **, 0x24), void **, 0x8C);
+
+    if (e != NULL) {
+        fn_8030F350(e, lbl_80494E0C);
+    }
+}
+
 s32 fn_8030AFC8(void) {
     return 0;
 }
