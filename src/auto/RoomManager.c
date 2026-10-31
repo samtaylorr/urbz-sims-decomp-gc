@@ -126,6 +126,22 @@ static inline void RMMap_EndP(RMMapIter *out, char *map) {
 
 extern s32 lbl_80494538;
 void fn_8018FA84(void *arg0, s32 arg1);
+void *fn_8018ED98(void) {
+    void *fn_802D1FC8(s32);
+    extern u8 lbl_80414018[];
+    u8 lock[5];
+    s32 *p;
+    s32 *q;
+
+    p = fn_802D1FC8(0x14);
+    p[0] = (s32)lbl_80414018;
+    p[1] = 0;
+    p[2] = 0;
+    q = p + 3;
+    q[1] = 0;
+    return p;
+}
+
 void fn_8018EDE0(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
@@ -140,6 +156,25 @@ void fn_8018EE20(s32 arg0, s32 arg1) {
 
 s32 fn_8018EE50(void) {
     return 1;
+}
+
+s32 fn_8018EF28(void *arg0, s32 id) {
+    s32 ***fn_8018F2C4(void *, s32);
+    s32 ***it = fn_8018F2C4(arg0, id);
+    if (it != M2C_FIELD(arg0, s32 ****, 8)) {
+        return ((**it)[1] - (**it)[0]) >> 2;
+    }
+    return 0;
+}
+
+s32 ***fn_8018F2C4(void *arg0, s32 id) {
+    s32 ***it;
+    for (it = M2C_FIELD(arg0, s32 ****, 4); it != M2C_FIELD(arg0, s32 ****, 8); it++) {
+        if ((**it)[4] == id) {
+            return it;
+        }
+    }
+    return it;
 }
 
 s32 fn_8018F304(void *arg0, s32 arg1, s32 arg2) {
@@ -591,6 +626,29 @@ void fn_801914E4(char *self) {
         for (p = begin; p != end; p += 0x14) {
         }
         vec[1] = begin;
+    }
+}
+
+void fn_80191840(char *self, u16 id, u16 newid) {
+    u8 buf[16];
+    RMMapNode *b;
+    u16 *room = fn_80190AA4((s32)self, id);
+    u16 old;
+
+    if (room != NULL) {
+        old = room[1];
+        *(RMMapNode **)(buf + 0) = NULL;
+        b = (*(RMMapNode **)(self + 4))->left;
+        *(RMMapNode **)(buf + 0) = b;
+        *(RMMapNode **)(buf + 8) = b;
+        for (; RMMap_EndP((RMMapIter *)(buf + 8), self),
+               RMMapIter_NotEqualP((RMMapIter *)(buf + 0), (RMMapIter *)(buf + 8));
+             RMMapIter_Inc((RMMapIter *)(buf + 0))) {
+            u16 *r = (*(RMMapNode **)(buf + 0))->value;
+            if (r[1] == old) {
+                r[1] = newid;
+            }
+        }
     }
 }
 
