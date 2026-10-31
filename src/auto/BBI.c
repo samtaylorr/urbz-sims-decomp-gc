@@ -147,6 +147,27 @@ s32 fn_8005A38C(void) {
     return 0x24;
 }
 
+s32 fn_8005A500(s32 *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    s32 fn_8005A574(s32 *);
+    void fn_80059B00(void *, s32);
+    void fn_80059EB4(s32 *, void *);
+    void *p;
+    s32 diff;
+
+    p = (void *)fn_8005A574(arg0);
+    if (p == NULL) {
+        return 0;
+    }
+    diff = fn_80059B50(p) - arg3;
+    if (diff > 0) {
+        fn_80059B00(p, diff);
+    } else {
+        arg3 = fn_80059B50(p);
+        fn_80059EB4(arg0, p);
+    }
+    return arg3;
+}
+
 s32 fn_8005A574(s32 *arg0) {
     s32 fn_8005A5B8(s32 *);
     s32 idx;
@@ -159,6 +180,46 @@ s32 fn_8005A574(s32 *arg0) {
         ret = 0;
     }
     return ret;
+}
+
+s32 fn_8005A5B8(s32 *arg0, s32 arg1, s32 arg2) {
+    u32 i;
+    u32 count;
+    void *p;
+
+    count = fn_8005A38C();
+    for (i = 0; i < count; i++) {
+        p = (void *)arg0[i];
+        if (p != NULL && fn_800599F0(p) == arg1 && fn_80059AC4(p) == arg2) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+s32 fn_8005A648(void *arg0, void *arg1, s32 arg2) {
+    typedef struct { s16 delta; s16 idx; void (*fn)(void *, void *, s32); } VtEnt;
+    void fn_8018D578(void *, u8 *, s32);
+    u32 i;
+    u32 count;
+    u8 *p;
+    u8 b;
+    VtEnt *e;
+
+    count = fn_8005A38C();
+    for (i = 0; i < count; i++) {
+        p = ((u8 **)arg0)[i];
+        if (p != NULL) {
+            b = 1;
+            fn_8018D578(arg1, &b, 1);
+            e = (VtEnt *)(M2C_FIELD(p, u8 **, 8) + 0x10);
+            e->fn(p + e->delta, arg1, arg2);
+        } else {
+            b = 0;
+            fn_8018D578(arg1, &b, 1);
+        }
+    }
+    return 1;
 }
 
 s32 fn_8005A838(void *arg0, void *arg1, s32 arg2) {
@@ -183,13 +244,16 @@ s32 fn_8005A838(void *arg0, void *arg1, s32 arg2) {
 
 s32 fn_8005A8CC(s32 *arg0) {
     u32 i;
-    s32 ret = -1;
+    s32 ret;
 
-    for (i = 0; i < 0x24; i++) {
+    i = 0;
+    ret = -1;
+    while (i < 0x24) {
         if (arg0[i] == 0) {
             ret = i;
             break;
         }
+        i++;
     }
     return ret;
 }
