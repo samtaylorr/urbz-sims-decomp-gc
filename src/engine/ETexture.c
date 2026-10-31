@@ -351,16 +351,16 @@ void fn_8036F45C(void **arg0) {
 
 void *fn_8036F4EC(void *arg0, char *arg1, s32 arg2, s32 arg3) {
     void *fn_8036FACC(s32);
-    void fn_80248488(void *, s32, s32);
-    void fn_80248784(void *, char *);
+    void fn_80248488(void *, s32, u32);
+    void fn_80248784(char *, char *);
     void fn_8036F7DC(void *, void *, s32);
     extern s32 lbl_8049523C;
-    u8 *p = fn_8036FACC(lbl_8049523C);
+    void *p = fn_8036FACC(lbl_8049523C);
     if (p == NULL) {
         return NULL;
     }
     fn_80248488(p, 0, 0x34);
-    fn_80248784(p + 0x10, arg1);
+    fn_80248784((char *)p + 0x10, arg1);
     M2C_FIELD(p, s32 *, 8) = arg2;
     fn_8036F7DC(arg0, p, arg3);
     return p;
@@ -432,6 +432,13 @@ void fn_8036F65C(void *arg0, void **arg1) {
     }
     arg1[0] = NULL;
     arg1[1] = NULL;
+}
+
+void fn_8036FA90(void **arg0) {
+    extern void *fn_802D0AB8();
+    void fn_802D1A00(void *, void *);
+    fn_802D1A00(fn_802D0AB8(), *arg0);
+    *arg0 = 0;
 }
 
 s32 fn_8036FB28(void *arg0, void *arg1) {
