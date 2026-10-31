@@ -354,16 +354,27 @@ void fn_802EE654(char *self) {
     extern const f32 lbl_803F0C14[];
     void fn_802C8814(void *, f32 *);
     void fn_802C9368(void *, f32 *);
+    char *q = self + 0x40;
     f32 v[3];
     f32 *p = v;
     v[0] = lbl_803F0C0C[0];
     p[2] = lbl_803F0C10[0];
     p[1] = lbl_803F0C0C[0];
-    fn_802C8814(self + 0x40, p);
+    fn_802C8814(q, p);
     v[0] = lbl_803F0C0C[0];
     p[1] = lbl_803F0C0C[0];
     p[2] = lbl_803F0C14[0];
-    fn_802C9368(self + 0x40, p);
+    fn_802C9368(q, p);
+}
+
+void fn_802EE6D0(void *self) {
+    s32 fn_80337D90(void *, char *);
+    s32 fn_80337430(void *, char *, s32, s32);
+    extern u8 lbl_8045B634[];
+    extern char lbl_803F0C18[];
+    if (*(s32 *)((u8 *)self + 0x90) == 0 && fn_80337D90(lbl_8045B634, lbl_803F0C18) != 0) {
+        *(s32 *)((u8 *)self + 0x90) = fn_80337430(lbl_8045B634, lbl_803F0C18, 0, 0);
+    }
 }
 
 s32 fn_802EEB54(void *arg0) {
@@ -378,10 +389,9 @@ void fn_802EEB84(void *self, s32 arg1, s32 *v) {
     s32 y = v[1];
     *(s32 *)((u8 *)self + 0x9C) = x;
     *(s32 *)((u8 *)self + 0xA0) = y;
-    if (arg1 == 0) {
-        return;
+    if (arg1 != 0) {
+        fn_802EE6D0(self);
     }
-    fn_802EE6D0(self);
     *(s32 *)((u8 *)self + 0x10) = arg1;
 }
 
