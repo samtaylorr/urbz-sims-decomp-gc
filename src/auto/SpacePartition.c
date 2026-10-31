@@ -72,6 +72,22 @@ s32 fn_80192DE4(SPRect *r, SPCellVec *v) {
     return -1;
 }
 
+void fn_80192E6C(SPart *sp, s32 a, s32 b, SPRect *out) {
+    SPNode *na;
+    SPNode *nb;
+
+    na = fn_80193260(sp, a);
+    nb = fn_80193260(sp, b);
+    if (na == NULL || nb == NULL) {
+        out->x1 = 0;
+        out->y0 = 0;
+        out->x0 = 0;
+        out->y1 = 0;
+    } else {
+        fn_80192EEC(sp, na, nb, out);
+    }
+}
+
 s32 fn_801930C4(SPart *arg0, SPRect *r) {
     SPCell *c;
 
@@ -112,6 +128,11 @@ s32 fn_801932A0(SPart *arg0, s32 arg1, SPRect *out) {
 
 s32 fn_8019334C(s32 arg0, s32 arg1) {
     return (u32)(arg1 + 1) > 2;
+}
+
+void fn_80193680(void *arg0, s32 *arg1, s32 *arg2) {
+    *arg1 = 0;
+    *arg2 = 1;
 }
 
 void fn_80197794(void *arg0, s32 arg1) {
