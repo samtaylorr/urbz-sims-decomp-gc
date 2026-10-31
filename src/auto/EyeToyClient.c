@@ -270,8 +270,9 @@ s32 fn_80043734(s32 arg0) {
 }
 
 s32 fn_80043758(s32 arg0) {
-    extern u8 lbl_803F5DA8[];
-    return **(s32 **)(lbl_803F5DA8 + arg0 * 0xC);
+    typedef struct { s32 *list; s32 count; s32 state; } EyeToyEntry;
+    extern EyeToyEntry lbl_803F5DA8[];
+    return *lbl_803F5DA8[arg0].list;
 }
 
 s32 fn_80043770(s32 arg0, s32 arg1) {
