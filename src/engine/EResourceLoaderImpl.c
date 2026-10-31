@@ -18,6 +18,17 @@ static inline void ERMLock_Unlock(ERMLock *l) {
     (*(void (**)(void *))(vt + 0x1C))(l->obj + *(s16 *)(vt + 0x18));
 }
 
+extern void fn_803665B8(void *, s32);
+extern void fn_802D8CA4(void *, s32, s32, s32);
+
+static inline void ERL_QueueInit(char *q, s32 n) {
+    fn_803665B8(q, n);
+}
+
+static inline void ERL_ThreadCreate(char *t, s32 prio, s32 stack, s32 arg) {
+    fn_802D8CA4(t, prio, stack, arg);
+}
+
 extern u8 lbl_8041B4F0[];
 extern void fn_802D20E8(void *);
 void **fn_8031C754(void **self) {
