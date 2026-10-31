@@ -27,15 +27,16 @@ void fn_8030F938(void *arg0, void *arg1) {
     if (p != NULL) {
         M2C_FIELD(p, u32 *, 0xc) |= 0x40000000;
         fn_8036F5E4(*M2C_FIELD(arg1, s32 **, 0xb8), M2C_FIELD(arg1, void **, 0x8c));
-        M2C_FIELD(arg1, s32 *, 0xb8) = 0;
         M2C_FIELD(arg1, void **, 0x8c) = 0;
+        M2C_FIELD(arg1, s32 *, 0xb8) = 0;
     }
 }
 
 void fn_8030F994(f32 *arg0, f32 *arg1) {
     s32 i;
+    f32 *d = arg0 + 2;
     for (i = 0; i < 16; i++) {
-        arg0[i + 2] = arg1[i];
+        *d++ = *arg1++;
     }
 }
 
@@ -55,6 +56,7 @@ void fn_8030F818(void);
 s32 fn_8030FA50(s32 *arg0, s32 arg1) {
     s32 fn_8036FACC(s32);
     void fn_8036F3E0(s32, s32, void (*)(void));
+    void fn_8030F818(void);
     extern s32 lbl_80494EE4;
     s32 obj = fn_8036FACC(lbl_80494EE4);
     if (obj == 0) {
