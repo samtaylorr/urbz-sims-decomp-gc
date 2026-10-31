@@ -22,6 +22,10 @@ void fn_803105B0(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 4) = arg1;
 }
 
+void fn_803105B8(void *arg0, s32 arg1) {
+    ((struct { u8 pad[0x18C]; s32 unk18C[2]; } *)arg0)->unk18C[arg1] ^= 1;
+}
+
 void fn_80310728(void *arg0) {
     M2C_FIELD(M2C_FIELD(arg0, void **, 0x200), s32 *, 0x20) = 0;
     M2C_FIELD(M2C_FIELD(arg0, void **, 0x200), s32 *, 0x18) = 0;
