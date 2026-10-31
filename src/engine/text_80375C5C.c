@@ -100,3 +100,9 @@ s32 fn_80378278(const char *fmt, ...) {
     return fn_80249390(*(void **)(g + 8), fmt, ap);
 }
 
+s32 fn_80378324(const char *fmt, va_list ap) {
+    extern char *lbl_80494988;
+    s32 fn_80249390(void *, const char *, va_list);
+    return fn_80249390(*(void **)(lbl_80494988 + 8), fmt, ap);
+}
+
