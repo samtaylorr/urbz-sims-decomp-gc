@@ -1,7 +1,13 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+typedef struct EVibratePort {
+    s32 active;
+    u8 pad[0x40];
+} EVibratePort;
+
 s32 fn_80314E68(void *self, u8 index);
+s32 fn_80314DB0(s32 *self);
 static inline s32 EVibrate_NumPorts(void) {
     return 4;
 }
@@ -44,16 +50,15 @@ s32 fn_80314DB0(s32 *self) {
 s32 fn_80314DB8(void *self, s32 idx) {
     extern void *lbl_80494FCC;
     void *fn_803338D0(void *, s32);
+    struct { s32 val; u8 pad[0x40]; } *ent = (void *)((u8 *)self + 0x38);
     void *obj = fn_803338D0(lbl_80494FCC, idx);
-    s32 *slot;
     if (obj != NULL) {
         void *vt = M2C_FIELD(obj, void **, 0x204);
-        s32 r = M2C_FIELD(vt, s32 (**)(void *), 0x24)((s8 *)obj + M2C_FIELD(vt, s16 *, 0x20));
-        *(s32 *)((u8 *)self + 0x38 + idx * 0x44) = r;
+        ent[idx].val = M2C_FIELD(vt, s32 (**)(void *), 0x24)((s8 *)obj + M2C_FIELD(vt, s16 *, 0x20));
     } else {
-        *(s32 *)((u8 *)self + 0x38 + idx * 0x44) = (s32)obj;
+        ent[idx].val = (s32)obj;
     }
-    return *(s32 *)((u8 *)self + 0x38 + idx * 0x44);
+    return ent[idx].val;
 }
 
 void fn_80314E34(void *self, u8 index) {
@@ -61,7 +66,8 @@ void fn_80314E34(void *self, u8 index) {
 }
 
 void fn_80314E54(void *self, s32 idx) {
-    *(s32 *)((u8 *)self + 0x38 + idx * 0x44) = 0;
+    struct { s32 val; u8 pad[0x40]; } *ent = (void *)((u8 *)self + 0x38);
+    ent[idx].val = 0;
 }
 
 s32 fn_80314E68(void *self, u8 index) {
