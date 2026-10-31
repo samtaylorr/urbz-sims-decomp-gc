@@ -220,15 +220,16 @@ void fn_8030AFD0(void *arg0) {
 
 void fn_8030C1D8(void *arg0) {
     void *g = lbl_80494EC4;
-    f32 a, b;
+    f32 z, a, b;
 
+    z = lbl_803F2088[0];
+    a = lbl_803F208C[0];
+    b = lbl_803F2090[0];
     M2C_FIELD(arg0, f32 *, 0x38) = M2C_FIELD(g, f32 *, 0x280);
     M2C_FIELD(arg0, f32 *, 0x3C) = M2C_FIELD(g, f32 *, 0x284);
-    M2C_FIELD(arg0, f32 *, 0x40) = lbl_803F2088[0];
-    a = lbl_803F208C[0];
+    M2C_FIELD(arg0, f32 *, 0x40) = z;
     M2C_FIELD(M2C_FIELD(arg0, void **, 0x88), f32 *, 0xD4) = a;
     M2C_FIELD(M2C_FIELD(arg0, void **, 0x88), f32 *, 0xD0) = a;
-    b = lbl_803F2090[0];
     M2C_FIELD(M2C_FIELD(arg0, void **, 0x88), f32 *, 0x110) = b;
     M2C_FIELD(M2C_FIELD(arg0, void **, 0x88), f32 *, 0x10C) = b;
     fn_8030C0E8(arg0);
@@ -284,8 +285,8 @@ s32 fn_8030C3C8(void *arg0, s32 arg1, s32 arg2, void *arg3) {
     return id;
 }
 
-void fn_8030C490(void) {
-    fn_8030AA98();
+void fn_8030C490(void *arg0) {
+    ((void (*)(void *))fn_8030AA98)(arg0);
 }
 
 extern f32 lbl_803F2088[];
