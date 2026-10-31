@@ -50,6 +50,22 @@ s32 fn_80336474(char *self) {
     return ret;
 }
 
+void fn_803364F0(char *self) {
+    void fn_802CAB54(char *, s32);
+    void fn_802CAC04(char *);
+    void fn_802C63E8(void *, s32 *);
+    extern u8 lbl_804448E8[];
+    s32 tmp;
+
+    fn_802CAB54(self, -1);
+    tmp = *(s32 *)(self + 0x64);
+    *(s32 *)(self + 0x64) = 0;
+    fn_802CAC04(self);
+    if (tmp != 0) {
+        fn_802C63E8(lbl_804448E8, &tmp);
+    }
+}
+
 void fn_80336CBC(char *self) {
     void fn_8033789C(char *, s32);
     u32 i;
