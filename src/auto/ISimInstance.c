@@ -28,6 +28,16 @@ static inline void *ISimInstance_AllocAligned(u32 size) {
     return p;
 }
 
+static inline s32 ISimInstance_Call9C(u8 *obj, void *g) {
+    u8 *vt = *(u8 **)obj;
+    return (*(s32 (**)(void *, void *))(vt + 0x9C))(obj + *(s16 *)(vt + 0x98), g);
+}
+
+static inline void ISimInstance_Call44(u8 *obj) {
+    u8 *vt = *(u8 **)obj;
+    (*(void (**)(void *))(vt + 0x44))(obj + *(s16 *)(vt + 0x40));
+}
+
 static inline s32 ISimInstance_IterValid(void *it) {
     return it != NULL;
 }
@@ -66,16 +76,22 @@ void fn_80063FA4(void *self, s32 flags) {
     extern u8 *lbl_80495050;
     extern void *lbl_80494130;
     M2C_UNK fn_802CD53C(void *);
+    u8 *obj;
     u8 *vt;
+    void *g;
 
-    if (lbl_80494130 != NULL) {
-        vt = *(u8 **)lbl_80495050;
-        if ((*(s32 (**)(void *, void *))(vt + 0x9C))(lbl_80495050 + *(s16 *)(vt + 0x98), lbl_80494130) != 0) {
-            vt = *(u8 **)lbl_80495050;
-            (*(void (**)(void *))(vt + 0x44))(lbl_80495050 + *(s16 *)(vt + 0x40));
+    g = lbl_80494130;
+    if (g != NULL) {
+        obj = lbl_80495050;
+        vt = *(u8 **)obj;
+        if ((*(s32 (**)(void *, void *))(vt + 0x9C))(obj + *(s16 *)(vt + 0x98), g) != 0) {
+            obj = lbl_80495050;
+            vt = *(u8 **)obj;
+            (*(void (**)(void *))(vt + 0x44))(obj + *(s16 *)(vt + 0x40));
         }
-        vt = *(u8 **)lbl_80495050;
-        (*(void (**)(void *, void *))(vt + 0x94))(lbl_80495050 + *(s16 *)(vt + 0x90), lbl_80494130);
+        obj = lbl_80495050;
+        vt = *(u8 **)obj;
+        (*(void (**)(void *, void *))(vt + 0x94))(obj + *(s16 *)(vt + 0x90), lbl_80494130);
         lbl_80494130 = NULL;
     }
     fn_802CD53C((char *)self + 4);
