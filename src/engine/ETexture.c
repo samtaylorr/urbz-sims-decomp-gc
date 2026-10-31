@@ -302,6 +302,83 @@ s32 fn_8036F364(void *arg0) {
     return 0;
 }
 
+s32 fn_8036F3A4(void *arg0) {
+    extern s32 lbl_80495240;
+    extern s32 lbl_80475658[];
+    if (lbl_80495240 == 0) {
+        return -1;
+    }
+    M2C_FIELD(arg0, s32 *, 0x90) = lbl_80475658[--lbl_80495240];
+    return 0;
+}
+
+s32 fn_8036F568(void *arg0, s32 arg1) {
+    void *fn_8036F6E4();
+    void fn_8036F5E4(void *, void *);
+    void *node;
+
+    node = fn_8036F6E4(arg0, arg1);
+    if (node == NULL) {
+        return -1;
+    }
+    fn_8036F5E4(arg0, node);
+    return 0;
+}
+
+s32 fn_8036F5AC(void *arg0, s32 arg1) {
+    void *fn_8036F6E4();
+    s32 var_r0;
+    void *temp_r3;
+
+    temp_r3 = fn_8036F6E4(arg0, arg1, 0);
+    var_r0 = 0;
+    if (temp_r3 != NULL) {
+        var_r0 = M2C_FIELD(temp_r3, s32 *, 8);
+    }
+    return var_r0;
+}
+
+void fn_8036F5E4(void *arg0, void *arg1) {
+    void fn_8036F65C(void *, void *);
+    extern void *lbl_8049523C;
+    void (*cb)(void *);
+
+    fn_8036F65C(arg0, arg1);
+    cb = M2C_FIELD(arg0, void (**)(void *), 0x94);
+    if (cb != NULL && M2C_FIELD(arg1, s32 *, 8) != 0 && ((u32)M2C_FIELD(arg1, s32 *, 0xC) >> 30) == 0) {
+        cb((u8 *)arg1 + 8);
+    }
+    if (M2C_FIELD(arg1, s32 *, 0xC) >= 0) {
+        fn_8036FB28(lbl_8049523C, arg1);
+    }
+}
+
+void fn_8036F65C(void *arg0, void **arg1) {
+    void **t;
+
+    if (arg1 == M2C_FIELD(arg0, void ***, 0x88)) {
+        M2C_FIELD(arg0, void **, 0x88) = arg1[0];
+        if (M2C_FIELD(arg0, void **, 0x88) == NULL) {
+            M2C_FIELD(arg0, void **, 0x8C) = NULL;
+        }
+    } else if (arg1 == M2C_FIELD(arg0, void ***, 0x8C)) {
+        M2C_FIELD(arg0, void **, 0x8C) = arg1[1];
+    }
+    t = arg1[1];
+    if (t != NULL) {
+        t[0] = arg1[0];
+    }
+    t = arg1[0];
+    if (t != NULL) {
+        t[1] = arg1[1];
+    }
+    if (--M2C_FIELD(arg0, s32 *, 0x84) < 0) {
+        M2C_FIELD(arg0, s32 *, 0x84) = 0;
+    }
+    arg1[1] = NULL;
+    arg1[0] = NULL;
+}
+
 s32 fn_8036FB28(void *arg0, void *arg1) {
     void **temp_r9;
     void *temp_r10;
