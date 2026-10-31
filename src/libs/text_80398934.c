@@ -98,6 +98,10 @@ typedef struct {
 } Elem124;
 
 typedef struct {
+    s32 a, b, c, d, e, f, g;
+} Elem28;
+
+typedef struct {
     s32 a, b;
     s16 key;
 } Elem12S16;
@@ -5331,6 +5335,7 @@ static inline void Vec12_InsertZeroAt(u8 **v, Elem12 *pos, s32 cnt, Elem12 *x) {
 void fn_803A8188(u8 **self, void *unused, void *stream, void *arg3) {
     extern void fn_8018D8DC(void *, s32 *, s32);
     extern void fn_80177470(void *, void *, void *);
+    extern void fn_80248488();
     s32 n;
     s32 size;
     s32 d;
@@ -5343,7 +5348,11 @@ void fn_803A8188(u8 **self, void *unused, void *stream, void *arg3) {
     size = end - (Elem12 *)self[0];
     d = size - n;
     if (d < 0) {
-        Vec12_InsertZero(self, end, n - size);
+        Elem12 zero;
+        Elem12 *zp;
+        s32 cnt;
+        fn_80248488(zp = &zero, 0, sizeof(zero), cnt = n - size);
+        fn_803A7DD0(self, end, cnt, zp);
     } else if (d > 0) {
         Vec12Elem *first = (Vec12Elem *)self[1] - d;
         Vec12Elem *last = (Vec12Elem *)self[1];
