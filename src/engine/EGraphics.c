@@ -2,6 +2,7 @@
 #include "common.h"
 
 typedef struct { f32 x, y, z; } Vec3f;
+typedef struct { f32 x, y; } Vec2f;
 
 void fn_802D2FD0(void);
 extern s32 lbl_804961C4;
@@ -73,6 +74,22 @@ void fn_802EDA48(char *self) {
     (*(void (**)(void *, s32))(vt + 0x24))(obj + *(s16 *)(vt + 0x20), lbl_80494DF8);
     lbl_80494EC0 = 0;
     *(s32 *)(self + 4) = 1;
+}
+
+void fn_802EDAA0(char *self) {
+    extern s32 lbl_80494FDC;
+    extern s32 lbl_80494DF8;
+    extern char *lbl_80495220;
+    void fn_802E1378(s32);
+    s32 fn_802E0FB4(s32);
+    char *vt = *(char **)self;
+    char *obj;
+    (*(void (**)(void *))(vt + 0x164))(self + *(s16 *)(vt + 0x160));
+    *(s32 *)(self + 4) = 0;
+    fn_802E1378(lbl_80494FDC);
+    obj = lbl_80495220;
+    vt = *(char **)(obj + 0x338);
+    (*(void (**)(void *, s32, s32))(vt + 0x34))(obj + *(s16 *)(vt + 0x30), lbl_80494DF8, fn_802E0FB4(lbl_80494FDC));
 }
 
 void fn_802EDB28(void) {
