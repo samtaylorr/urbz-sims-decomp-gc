@@ -10946,12 +10946,14 @@ s32 fn_803B7700(s32 *arg0) {
 
 void fn_803B7730(u8 *self) {
     s32 i;
+    s32 n;
     s32 *list;
     u8 *obj;
     u8 *vt;
 
-    i = *(s32 *)(self + 0x14);
-    if (i > 0) {
+    n = *(s32 *)(self + 0x14);
+    if (n > 0) {
+        i = n;
         list = (s32 *)(self + 0x14);
         do {
             obj = ((u8 **)list[2])[*(s32 *)(self + 0x14) - 1];
