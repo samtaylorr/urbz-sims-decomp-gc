@@ -21,6 +21,13 @@ void fn_8030EF10(void) {
     fn_8030DA64();
 }
 
+void fn_8030F57C(s32 *arg0) {
+    M2C_UNK fn_8036FB28(s32, s32);
+    extern s32 lbl_80494EEC;
+    fn_8036FB28(lbl_80494EEC, *arg0);
+    *arg0 = 0;
+}
+
 void fn_8030F938(void *arg0, void *arg1) {
     void fn_8036F5E4(s32, void *);
     void *p = M2C_FIELD(arg1, void **, 0x8c);
@@ -33,11 +40,22 @@ void fn_8030F938(void *arg0, void *arg1) {
 }
 
 void fn_8030F994(f32 *arg0, f32 *arg1) {
-    s32 i;
-    f32 *d = arg0 + 2;
-    for (i = 0; i < 16; i++) {
-        *d++ = *arg1++;
-    }
+    arg0[2] = *arg1++;
+    arg0[3] = *arg1++;
+    arg0[4] = *arg1++;
+    arg0[5] = *arg1++;
+    arg0[6] = *arg1++;
+    arg0[7] = *arg1++;
+    arg0[8] = *arg1++;
+    arg0[9] = *arg1++;
+    arg0[10] = *arg1++;
+    arg0[11] = *arg1++;
+    arg0[12] = *arg1++;
+    arg0[13] = *arg1++;
+    arg0[14] = *arg1++;
+    arg0[15] = *arg1++;
+    arg0[16] = *arg1++;
+    arg0[17] = *arg1;
 }
 
 void fn_8030FA1C(s32 *arg0, s32 arg1, s32 arg2) {
@@ -53,13 +71,13 @@ s32 fn_8030FA44(void *arg0) {
 }
 
 void fn_8030F818(void);
-s32 fn_8030FA50(s32 *arg0, s32 arg1) {
-    s32 fn_8036FACC(s32);
-    void fn_8036F3E0(s32, s32, void (*)(void));
+s32 fn_8030FA50(void **arg0, s32 arg1) {
+    void *fn_8036FACC(s32);
+    void fn_8036F3E0(void *, s32, void (*)(void));
     void fn_8030F818(void);
     extern s32 lbl_80494EE4;
-    s32 obj = fn_8036FACC(lbl_80494EE4);
-    if (obj == 0) {
+    void *obj = fn_8036FACC(lbl_80494EE4);
+    if (obj == NULL) {
         return -1;
     }
     fn_8036F3E0(obj, arg1, fn_8030F818);
