@@ -79,6 +79,13 @@ void fn_800BFBD0(void) {
 
 }
 
+void fn_800C0548(Struct16_800BF7FC *arg0) {
+    extern Struct16_800BF7FC lbl_80432AA8;
+    extern Struct16_800BF7FC lbl_80432AB8;
+    lbl_80432AA8 = arg0[0];
+    lbl_80432AB8 = arg0[1];
+}
+
 extern u8 lbl_80431650[];
 void fn_802C876C(u8 *arg);
 void fn_800C05A0(void) {
