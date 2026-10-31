@@ -242,11 +242,10 @@ void fn_802EEBCC(void *self, Vec3f *a, Vec3f *b, s32 c) {
     }
 }
 
-Vec2f fn_802EEC58(void *self, Vec2f *v) {
-    Vec2f r;
-    r.x = v->x;
-    r.y = v->y;
-    return r;
+Vec2f *fn_802EEC58(Vec2f *self, s32 unused, Vec2f *v) {
+    self->x = v->x;
+    self->y = v->y;
+    return self;
 }
 
 void fn_802EEC70(void *self, f32 a, f32 b, f32 c, f32 d) {
@@ -263,31 +262,19 @@ void fn_802EEC70(void *self, f32 a, f32 b, f32 c, f32 d) {
 }
 
 void fn_802EECEC(void *arg0) {
-    f32 c, b, a, d;
+    typedef struct { f32 x, y, z, w; } V4;
+    V4 v;
 
     if (M2C_FIELD(arg0, s32 *, 0x2CC) == 0) {
         if (M2C_FIELD(arg0, s32 *, 0x2A8) != 0) {
-            a = M2C_FIELD(arg0, f32 *, 0x2AC);
-            b = M2C_FIELD(arg0, f32 *, 0x2B0);
-            c = M2C_FIELD(arg0, f32 *, 0x2B4);
-            d = M2C_FIELD(arg0, f32 *, 0x2B8);
+            v = M2C_FIELD(arg0, V4 *, 0x2AC);
         } else {
-            a = M2C_FIELD(arg0, f32 *, 0x2BC);
-            b = M2C_FIELD(arg0, f32 *, 0x2C0);
-            c = M2C_FIELD(arg0, f32 *, 0x2C4);
-            d = M2C_FIELD(arg0, f32 *, 0x2C8);
+            v = M2C_FIELD(arg0, V4 *, 0x2BC);
         }
-        goto store;
+    } else {
+        v = M2C_FIELD(arg0, V4 *, 0x2D0);
     }
-    a = M2C_FIELD(arg0, f32 *, 0x2D0);
-    b = M2C_FIELD(arg0, f32 *, 0x2D4);
-    c = M2C_FIELD(arg0, f32 *, 0x2D8);
-    d = M2C_FIELD(arg0, f32 *, 0x2DC);
-store:
-    M2C_FIELD(arg0, f32 *, 0x2EC) = d;
-    M2C_FIELD(arg0, f32 *, 0x2E4) = b;
-    M2C_FIELD(arg0, f32 *, 0x2E8) = c;
-    M2C_FIELD(arg0, f32 *, 0x2E0) = a;
+    M2C_FIELD(arg0, V4 *, 0x2E0) = v;
 }
 
 void fn_802EED50(char *self, f32 a, f32 b, f32 c, f32 d) {
