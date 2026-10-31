@@ -194,6 +194,14 @@ s32 fn_80310AB8(void *arg0, f32 farg0) {
     return 1;
 }
 
+void fn_80310BF4(char *self) {
+    struct Quad { s32 a, b, c, d; };
+    char *vt;
+    *(struct Quad *)(self + 0x1EC) = *(struct Quad *)(self + 0x1DC);
+    vt = *(char **)(self + 0x204);
+    (*(void (**)(char *))(vt + 0x7C))(self + *(s16 *)(vt + 0x78));
+}
+
 void fn_80310C50(char *self) {
     char *vt = *(char **)(self + 0x204);
     (*(void (**)(char *, f32, f32, f32, f32))(vt + 0x54))(self + *(s16 *)(vt + 0x50),
