@@ -80,6 +80,18 @@ void fn_80014F48(void *self, s32 flags) {
     }
 }
 
+void fn_80015050(void *arg0) {
+    void *temp_r11;
+    void *temp_r9;
+
+    temp_r11 = M2C_FIELD(arg0, void **, 4);
+    if (temp_r11 != NULL) {
+        temp_r9 = M2C_FIELD(temp_r11, void **, 0x44);
+        M2C_FIELD(temp_r9, void (**)(void *, s32), 0xC)((char *)temp_r11 + M2C_FIELD(temp_r9, s16 *, 8), 3);
+    }
+    M2C_FIELD(arg0, void **, 4) = NULL;
+}
+
 void fn_800150A8(void *arg0) {
     M2C_UNK fn_800159F4(s32);
     fn_800159F4(M2C_FIELD(arg0, s32 *, 4));
