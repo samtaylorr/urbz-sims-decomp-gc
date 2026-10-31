@@ -129,6 +129,42 @@ void fn_80059BF4(s32 self, s32 flags) {
     }
 }
 
+s32 fn_8005A124(s32 **arg0, s32 arg1) {
+    s32 fn_8005A38C(void);
+    s32 sum = 0;
+    u32 i = 0;
+    u32 n = ((s32 (*)(void *))fn_8005A38C)(arg0);
+
+    for (; i < n; i++) {
+        if (arg0[i] != NULL && fn_80059AC4(arg0[i]) == arg1) {
+            sum += fn_80059B50(arg0[i]);
+        }
+    }
+    return sum;
+}
+
+u32 fn_8005A234(u8 **arg0, s32 arg1, u8 **out, u32 max) {
+    s32 fn_8005A38C(void);
+    u32 count;
+    u32 i;
+    u32 n;
+
+    if (out == NULL) {
+        return 0;
+    }
+    count = 0;
+    n = ((s32 (*)(void *))fn_8005A38C)(arg0);
+    for (i = 0; i < n; i++) {
+        if (arg0[i] != NULL && fn_800599B0(arg0[i]) == arg1) {
+            *out++ = arg0[i];
+            if (++count >= max) {
+                break;
+            }
+        }
+    }
+    return count;
+}
+
 s32 fn_8005A2D4(s32 *arg0) {
     s32 fn_8005A910(s32 *);
     s32 idx;
@@ -1049,11 +1085,23 @@ s32 fn_80061F9C(char *self) {
 
 void fn_80063054(void) {
     extern void fn_8005B71C(void *);
-    void *memset(void *, int, unsigned long);
+    void *fn_80248488(void *, s32, u32);
+    void *fn_802D0AB8(void);
+    void *fn_802D0B3C(void);
+    void *fn_802D197C(void *, s32, s32);
+    void *fn_802DC3C0(void *, s32, s32, s32, s32);
+    void *heap;
     void *p;
 
-    p = BBI_AllocAligned(0x660);
-    memset(p, 0, 0x660);
+    heap = fn_802D0AB8();
+    p = fn_802D197C(heap, 0x660, 0x10);
+    if (p == NULL) {
+        p = fn_802DC3C0(heap, 0x660, 0x10, 0, 0);
+        if (p == NULL && heap == fn_802D0AB8()) {
+            p = fn_802DC3C0(fn_802D0B3C(), 0x660, 0x10, 0, 0);
+        }
+    }
+    fn_80248488(p, 0, 0x660);
     fn_8005B71C(p);
 }
 
