@@ -383,10 +383,10 @@ s32 fn_80338598(void *arg0, s32 arg1, s32 *arg2) {
     s32 i = fn_8033854C(arg0, arg1);
 
     if (i < M2C_FIELD(arg0, s32 *, 4)) {
-        Entry *e = &M2C_FIELD(arg0, Entry **, 0)[i];
-        if (e->key == arg1) {
+        Entry *arr = M2C_FIELD(arg0, Entry **, 0);
+        if (arr[i].key == arg1) {
             if (arg2 != 0) {
-                *arg2 = e->val;
+                *arg2 = arr[i].val;
             }
             return 1;
         }
