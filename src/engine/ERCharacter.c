@@ -303,6 +303,16 @@ void fn_80318ABC(s32 arg0) {
     fn_803189F0();
 }
 
+void fn_80318C08(void) {
+    s32 fn_802D0F94(void);
+    s32 fn_802D0FA0(void);
+    void fn_80318A70(const char *fmt, ...);
+    extern char lbl_803F2828[];
+    extern char lbl_803F2840[];
+    fn_80318A70(lbl_803F2828, fn_802D0F94());
+    fn_80318A70(lbl_803F2840, fn_802D0FA0());
+}
+
 void fn_80319494(void) {
     extern char *lbl_80496220;
     extern char *lbl_80495050;
