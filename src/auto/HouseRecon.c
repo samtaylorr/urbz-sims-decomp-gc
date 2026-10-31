@@ -12,6 +12,11 @@ extern s32 fn_8004E8F0(void *, s32);
 extern void *fn_802D197C(void *, u32, s32);
 extern void *fn_802DC3C0(void *, u32, s32, s32, s32);
 extern void *fn_802D0B3C(void);
+void fn_80050C44(void *arg0) {
+    void fn_8031BAD4(s32);
+    fn_8031BAD4(M2C_FIELD(M2C_FIELD(arg0, void **, 0x390), s32 *, 0x20));
+}
+
 void fn_80052238(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x384) = (s32) (M2C_FIELD(arg0, s32 *, 0x384) | arg1);
 }
