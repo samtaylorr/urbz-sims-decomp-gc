@@ -228,8 +228,9 @@ void *fn_802D0B3C(void);
 void *fn_802D197C(void *, u32, s32);
 void *fn_802DBBCC(void *, u32, s32);
 
-static inline void *ERM_Alloc(s32 size) {
+static inline void *ERM_Alloc(s32 count) {
     void *heap = fn_802D0AB8();
+    s32 size = count * 8;
     void *p;
     if (size == 0) {
         return 0;
