@@ -31,6 +31,10 @@ s32 fn_80052248(void *arg0) {
     return var_r9;
 }
 
+s32 fn_8005228C(void *arg0) {
+    return M2C_FIELD(arg0, u32 *, 0x3BC) == 0x30AA9779;
+}
+
 s32 fn_800522A8(void *arg0) {
     s32 var_r9;
 
