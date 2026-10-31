@@ -111,7 +111,7 @@ void fn_8030AD40(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, char **, 0) = lbl_8041B020;
     p = M2C_FIELD(arg0, u32 **, 0x8C);
     if (p != NULL && !(p[0] & 0x4000)) {
-        ((void (*)(void *))fn_8030AA98)(arg0);
+        fn_8030AA98(arg0);
     }
     fn_802F05AC(arg0, arg1);
 }
