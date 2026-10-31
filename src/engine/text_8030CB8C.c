@@ -1,6 +1,10 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+typedef struct {
+    f32 x, y, z;
+} Vec3f;
+
 void fn_8030DA64(void);
 s32 fn_8030CC3C(void) {
     M2C_UNK fn_8030FAAC(M2C_UNK *);
@@ -92,13 +96,13 @@ s32 fn_8030FA44(void *arg0) {
 }
 
 void fn_8030F818(void);
-s32 fn_8030FA50(void **arg0, s32 arg1) {
-    void *fn_8036FACC(s32);
-    void fn_8036F3E0(void *, s32, void (*)(void));
+s32 fn_8030FA50(s32 *arg0, s32 arg1) {
+    s32 fn_8036FACC(s32);
+    M2C_UNK fn_8036F3E0();
     void fn_8030F818(void);
     extern s32 lbl_80494EE4;
-    void *obj = fn_8036FACC(lbl_80494EE4);
-    if (obj == NULL) {
+    s32 obj = fn_8036FACC(lbl_80494EE4);
+    if (obj == 0) {
         return -1;
     }
     fn_8036F3E0(obj, arg1, fn_8030F818);
