@@ -223,6 +223,31 @@ s32 fn_803365B8(char *self, s32 key, s32 *out1, s32 *out2) {
     return 0;
 }
 
+void *fn_802D0AB8(void);
+void *fn_802D0B3C(void);
+void *fn_802D197C(void *, u32, s32);
+void *fn_802DBBCC(void *, u32, s32);
+
+static inline void *ERM_Alloc(u32 size) {
+    void *heap = fn_802D0AB8();
+    void *p;
+    if (size == 0) {
+        return 0;
+    }
+    p = fn_802D197C(heap, size, 4);
+    if (p != 0) {
+        return p;
+    }
+    p = fn_802DBBCC(heap, size, 0);
+    if (p != 0) {
+        return p;
+    }
+    if (heap == fn_802D0AB8()) {
+        return fn_802DBBCC(fn_802D0B3C(), size, 0);
+    }
+    return p;
+}
+
 void fn_80336CBC(char *self) {
     void fn_8033789C(char *, s32);
     u32 i;
