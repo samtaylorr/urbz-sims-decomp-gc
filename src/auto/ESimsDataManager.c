@@ -184,6 +184,16 @@ void fn_8001E284(char *self) {
     ERMLock_Unlock(lock);
 }
 
+void fn_8001E2F4(char *self) {
+    ERMLock lock[1];
+
+    ERMLock_Lock(lock, self);
+    if (--M2C_FIELD(self, s32 *, 0xB4) == 0) {
+        M2C_FIELD(self, s32 *, 0xA8) = 0;
+    }
+    ERMLock_Unlock(lock);
+}
+
 void fn_8001E488(void *arg0, void *arg1);
 void fn_8001E408(void *arg0, void *arg1) {
     extern void *lbl_80496220;
