@@ -94,16 +94,17 @@ void *fn_80198444(void *arg0) {
 s32 fn_801984E0(s32 arg0, s32 arg1) {
     s32 var_r0;
 
-    if (arg1 != 0xE) {
-        if (arg1 != 0xF) {
-            var_r0 = 0;
-            if (arg1 == 0x10) {
-                var_r0 = arg0;
-            }
-            return var_r0;
-        }
+    if (arg1 == 0xE) {
+        return arg0;
     }
-    return arg0;
+    if (arg1 == 0xF) {
+        return arg0;
+    }
+    var_r0 = 0;
+    if (arg1 == 0x10) {
+        var_r0 = arg0;
+    }
+    return var_r0;
 }
 
 void fn_8019882C(void) {
@@ -165,6 +166,7 @@ void fn_8019968C(void *arg0) {
 }
 
 void fn_80199720(void *arg0) {
+    volatile s32 z[4];
     SeqRes_Init(arg0);
 }
 
