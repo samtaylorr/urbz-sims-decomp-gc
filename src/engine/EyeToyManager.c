@@ -27,12 +27,7 @@ typedef struct EyeToyEntry {
 } EyeToyEntry;
 
 static inline s32 EyeToyOpenDevice(void) {
-    s32 ok = 0;
-    s32 i;
-
-    for (i = 0; i < 0; i++) {
-    }
-    return ok;
+    return 0;
 }
 
 static inline void *EyeToyAlloc(s32 count) {
