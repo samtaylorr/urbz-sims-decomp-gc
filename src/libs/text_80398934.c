@@ -3333,7 +3333,13 @@ void **fn_803A0A44(void **self, void **other) {
                 register u32 size asm("r0");
                 size = xlen * 4;
                 bytes = size;
-                tmp = (void **)PtrVec_Allocate(bytes);
+                if (size > 0x80) {
+                    size = 0;
+                    tmp = (void **)fn_802D1FC8(bytes);
+                } else {
+                    size = 0;
+                    tmp = (void **)fn_80399BE8(bytes);
+                }
             } else {
                 tmp = NULL;
                 bytes = 0;
@@ -10931,6 +10937,11 @@ void fn_803B76C8(s32 *v, u32 *x) {
     } else {
         ((u32 **)v[2])[v[1]++] = x;
     }
+}
+
+s32 fn_803B7700(s32 *arg0) {
+    extern s32 fn_802486DC(s32);
+    return fn_802486DC(*arg0 + 8) == 0;
 }
 
 void fn_803B77EC(void *arg0, s32 arg1) {
