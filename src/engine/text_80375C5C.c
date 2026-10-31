@@ -16,14 +16,28 @@ s32 fn_80240EB8(s32, s32);
 s32 fn_80240EC0(s32, s32, s32);
 
 s32 fn_80375CB8(s32 arg0, s32 arg1, s32 arg2);
-s32 fn_80375CB8(s32 arg0, s32 arg1, s32 arg2) {
-    if ((u32)(arg0 - 1) > 1) {
-        if (arg0 == 0) {
-            return -1;
-        }
-        return fn_80240ED8(arg0);
+s32 fn_80375C5C(s32 arg0, s32 arg1) {
+    extern s32 lbl_80401388;
+    void fn_8025D78C(s32);
+    void fn_8025D89C(s32, s32);
+    if (lbl_80401388 != 0) {
+        lbl_80401388 = 0;
+        fn_8025D78C(0);
     }
-    return fn_80375C5C(arg1, arg2);
+    fn_8025D89C(arg0, arg1);
+    return arg1;
+}
+
+s32 fn_80375CB8(s32 arg0, s32 arg1, s32 arg2) {
+    s32 ret;
+    if (arg0 == 1 || arg0 == 2) {
+        ret = fn_80375C5C(arg1, arg2);
+    } else if (arg0 == 0) {
+        ret = -1;
+    } else {
+        ret = fn_80240ED8(arg0);
+    }
+    return ret;
 }
 
 void fn_80375D08(void) {
@@ -104,5 +118,39 @@ s32 fn_80378324(const char *fmt, va_list ap) {
     extern char *lbl_80494988;
     s32 fn_80249390(void *, const char *, va_list);
     return fn_80249390(*(void **)(lbl_80494988 + 8), fmt, ap);
+}
+
+void *fn_80378358(const void *key, const void *base, u32 nmemb, u32 size, s32 (*compar)(const void *, const void *)) {
+    u32 lo = 0;
+    u32 hi = nmemb;
+    u32 mid;
+    const u8 *p;
+    s32 c;
+
+    if (nmemb == 0 || size == 0) {
+        return NULL;
+    }
+    while (lo < hi) {
+        mid = (lo + hi) >> 1;
+        p = (const u8 *)base + mid * size;
+        c = compar(key, p);
+        if (c < 0) {
+            hi = mid;
+        } else if (c > 0) {
+            lo = mid + 1;
+        } else {
+            return (void *)p;
+        }
+    }
+    return NULL;
+}
+
+typedef void (*func_ptr)(void);
+void fn_80378528(void) {
+    extern s32 lbl_804760E0;
+    if (lbl_804760E0 == 0) {
+        lbl_804760E0 = 1;
+        fn_80378498();
+    }
 }
 
