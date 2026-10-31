@@ -80,6 +80,15 @@ void fn_803107F4(char *self, f32 farg0, f32 farg1) {
     (*(void (**)(char *))(vt + 0x2C))(self + *(s16 *)(vt + 0x28));
 }
 
+s32 fn_8031082C(char *self, f32 farg0) {
+    char *vt = *(char **)(self + 0x204);
+    if ((*(s32 (**)(char *))(vt + 0x1C))(self + *(s16 *)(vt + 0x18)) == 0) {
+        return 0;
+    }
+    M2C_FIELD(self, f32 *, 0x1E0) = farg0;
+    return 1;
+}
+
 void fn_80310890(char *self, f32 farg0, f32 farg1) {
     char *vt;
     M2C_FIELD(self, f32 *, 0x1E8) = farg1;
