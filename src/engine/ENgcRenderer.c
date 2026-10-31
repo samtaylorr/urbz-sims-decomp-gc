@@ -430,16 +430,15 @@ s32 fn_8035F000(void *self) {
     extern s32 fn_802D8CA4(void *, s32, s32, s32);
     extern void fn_802D8EF8(void *);
     extern u8 lbl_803F4A18[];
-    if (fn_803665B8((u8 *)self + 0x348, 10) != 0) {
-        s32 ret = 0;
-        M2C_FIELD(self, void **, 0x32C) = lbl_803F4A18;
-        if (fn_802D8CA4(self, 3, 0x4000, 0) != 0) {
-            fn_802D8EF8(self);
-            ret = 1;
-        }
-        return ret;
+    if (fn_803665B8((u8 *)self + 0x348, 10) == 0) {
+        return 0;
     }
-    return 0;
+    M2C_FIELD(self, void **, 0x32C) = lbl_803F4A18;
+    if (fn_802D8CA4(self, 3, 0x4000, 0) == 0) {
+        return 0;
+    }
+    fn_802D8EF8(self);
+    return 1;
 }
 
 extern u8 lbl_8046DF78[];
