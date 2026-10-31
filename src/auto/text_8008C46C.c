@@ -313,8 +313,8 @@ void fn_800906B8(void *arg0, f32 *arg1, f32 *arg2, f32 arg3) {
     void fn_80090F90(void *, f32, f32, f32);
     if (!(M2C_FIELD(arg0, u32 *, 0x4D4) & 0x20)) {
         fn_80098880(arg0, *arg2);
-        fn_80090F90(arg0, arg3, *arg1, *arg2);
     }
+    fn_80090F90(arg0, arg3, *arg1, *arg2);
 }
 
 void fn_8009121C(void *arg0, s32 arg1) {
