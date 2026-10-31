@@ -263,6 +263,27 @@ s32 fn_80043520(void) {
     return lbl_8049407C != -1 ? fn_80339324(lbl_8049407C) : 1;
 }
 
+s32 fn_80043734(s32 arg0) {
+    extern u8 lbl_803F5DA8[];
+    return *(s32 *)(lbl_803F5DA8 + arg0 * 0xC + 8) == 1;
+}
+
+s32 fn_80043758(s32 arg0) {
+    extern u8 lbl_803F5DA8[];
+    return **(s32 **)(lbl_803F5DA8 + arg0 * 0xC);
+}
+
+s32 fn_80043770(s32 arg0, s32 arg1) {
+    s32 fn_80043554(s32);
+    s32 mask = fn_80043554(arg1);
+    return ((1 << arg0) & mask) && !fn_80043734(arg0);
+}
+
+void fn_800437E8(s32 arg0, s32 arg1) {
+    void fn_800433A4(s32, s32, s32);
+    fn_800433A4(arg0, arg1, 2);
+}
+
 void fn_800438D0(f32 farg0) {
     void fn_803392AC(s32, s32, void *);
     extern f32 lbl_803C615C[];
