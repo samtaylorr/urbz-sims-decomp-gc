@@ -83,7 +83,8 @@ void fn_80063FA4(void *self, s32 flags) {
     M2C_UNK fn_802CD53C(void *);
     register void *g asm("r4");
 
-    if ((g = lbl_80494130) != NULL) {
+    if (lbl_80494130 != NULL) {
+        g = lbl_80494130;
         if (ISimInstance_Call9C(lbl_80495050, g) != 0) {
             ISimInstance_Call44(lbl_80495050);
         }
@@ -244,7 +245,6 @@ void fn_800650DC(void *arg0) {
 s32 fn_80065148(s32 id) {
     extern void *lbl_8041FA38[];
     void *p = lbl_8041FA38[0];
-    void *n;
 
     if (p == NULL) {
         return -1;
@@ -253,10 +253,12 @@ s32 fn_80065148(s32 id) {
     if (p == NULL) {
         return -1;
     }
-    for (n = M2C_FIELD(p, void **, 4); n != NULL; n = M2C_FIELD(n, void **, 0x10)) {
-        if (id == M2C_FIELD(n, s32 *, 0x1C)) {
-            return M2C_FIELD(n, s32 *, 0x18);
+    p = M2C_FIELD(p, void **, 4);
+    while (p != NULL) {
+        if (id == M2C_FIELD(p, s32 *, 0x1C)) {
+            return M2C_FIELD(p, s32 *, 0x18);
         }
+        p = M2C_FIELD(p, void **, 0x10);
     }
     return -1;
 }
@@ -278,12 +280,15 @@ void *fn_800651A8(s32 key) {
 }
 
 void fn_8006521C(f32 *rect, void *pos) {
-    f32 r[4];
+    s32 fn_80065508(f32 *, void *);
+    void fn_80065424(f32 *, void *);
 
     if (fn_80065508(rect, pos) == 0) {
-        fn_80065424(r, pos);
+        f32 r[4];
+        f32 *pr = r;
+        fn_80065424(pr, pos);
         rect[0] = rect[0] < r[0] ? rect[0] : r[0];
-        rect[2] = rect[2] < r[2] ? rect[2] : r[2];
+        rect[2] = rect[2] < pr[2] ? rect[2] : pr[2];
         rect[1] = rect[1] > r[1] ? rect[1] : r[1];
         rect[3] = rect[3] > r[3] ? rect[3] : r[3];
     }
