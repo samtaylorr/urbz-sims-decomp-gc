@@ -1044,13 +1044,12 @@ void fn_800982B8(void *arg0) {
     extern f32 lbl_803CCBA4[];
     extern f32 lbl_803CCBA8[];
     extern f32 lbl_8049421C;
-    u32 fl = M2C_FIELD(arg0, u32 *, 0x4D4);
+    u32 fl = M2C_FIELD(arg0, u32 *, 0x4D4) & ~0x2F;
     s32 h = M2C_FIELD(arg0, s32 *, 0x4F0);
-    f32 f;
+    f32 f = lbl_803CCBA4[0];
     M2C_FIELD(arg0, s32 *, 0x18) = 3;
-    f = lbl_803CCBA4[0];
     M2C_FIELD(arg0, f32 *, 0x108) = f;
-    M2C_FIELD(arg0, u32 *, 0x4D4) = fl & ~0x2F;
+    M2C_FIELD(arg0, u32 *, 0x4D4) = fl;
     if (h != 0) {
         fn_802EB484((u8 *)M2C_FIELD(arg0, void **, 8) + 0x314, h, f, lbl_8049421C, lbl_803CCBA8[0]);
         M2C_FIELD(arg0, s32 *, 0x4F0) = 0;
@@ -1062,13 +1061,11 @@ void fn_80098330(void *arg0) {
     extern f32 lbl_803CCBAC[];
     extern f32 lbl_803CCBB0[];
     extern f32 lbl_8049421C;
-    u32 fl = M2C_FIELD(arg0, u32 *, 0x4D4);
     s32 h = M2C_FIELD(arg0, s32 *, 0x4F0);
-    f32 f;
+    f32 f = lbl_803CCBAC[0];
+    M2C_FIELD(arg0, u32 *, 0x4D4) = (M2C_FIELD(arg0, u32 *, 0x4D4) & ~0x2F) | 0x10;
     M2C_FIELD(arg0, s32 *, 0x18) = 4;
-    f = lbl_803CCBAC[0];
     M2C_FIELD(arg0, f32 *, 0x108) = f;
-    M2C_FIELD(arg0, u32 *, 0x4D4) = (fl & ~0x2F) | 0x10;
     if (h != 0) {
         fn_802EB484((u8 *)M2C_FIELD(arg0, void **, 8) + 0x314, h, f, lbl_8049421C, lbl_803CCBB0[0]);
         M2C_FIELD(arg0, s32 *, 0x4F0) = 0;
@@ -1127,6 +1124,27 @@ s32 fn_80098A40(f32 arg0) {
         }
     }
     return n;
+}
+
+s32 fn_80099818(void *arg0) {
+    s32 result = 0;
+    void *obj;
+
+    if (M2C_FIELD(arg0, s32 *, 0x49C) != 0 && fn_800979EC(arg0) == 0) {
+        obj = M2C_FIELD(arg0, void **, 4);
+        if ((*(s32 (**)(void *))(*(char **)((char *)obj + 4) + 0x164))((char *)obj + *(s16 *)(*(char **)((char *)obj + 4) + 0x160)) == 0) {
+            if (M2C_FIELD(arg0, s32 *, 0x100) != 1) {
+                M2C_FIELD(arg0, s32 *, 0x100) = 1;
+                result = 1;
+            }
+        } else {
+            if (M2C_FIELD(arg0, s32 *, 0x100) != 0) {
+                M2C_FIELD(arg0, s32 *, 0x100) = 0;
+                result = 1;
+            }
+        }
+    }
+    return result;
 }
 
 s32 fn_8009A418(void *arg0) {
