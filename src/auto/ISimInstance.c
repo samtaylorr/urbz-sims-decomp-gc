@@ -33,6 +33,17 @@ static inline s32 ISimInstance_Call9C(u8 *obj, void *g) {
     return (*(s32 (**)(void *, void *))(vt + 0x9C))(obj + *(s16 *)(vt + 0x98), g);
 }
 
+static inline s32 ISimInstance_FindId(void *list, s32 id) {
+    void *p;
+
+    for (p = *(void **)((u8 *)list + 4); p != NULL; p = *(void **)((u8 *)p + 0x10)) {
+        if (id == *(s32 *)((u8 *)p + 0x1C)) {
+            return *(s32 *)((u8 *)p + 0x18);
+        }
+    }
+    return -1;
+}
+
 static inline void ISimInstance_Call44(u8 *obj) {
     u8 *vt = *(u8 **)obj;
     (*(void (**)(void *))(vt + 0x44))(obj + *(s16 *)(vt + 0x40));
@@ -83,8 +94,8 @@ void fn_80063FA4(void *self, s32 flags) {
     M2C_UNK fn_802CD53C(void *);
     register void *g asm("r4");
 
-    if (lbl_80494130 != NULL) {
-        g = lbl_80494130;
+    g = lbl_80494130;
+    if (g != NULL) {
         if (ISimInstance_Call9C(lbl_80495050, g) != 0) {
             ISimInstance_Call44(lbl_80495050);
         }
