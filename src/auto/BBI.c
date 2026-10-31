@@ -129,6 +129,27 @@ void fn_80059BF4(s32 self, s32 flags) {
     }
 }
 
+s32 fn_80059E3C(s32 *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    s32 fn_8005A2D4(s32 *, s32, s32);
+    void fn_80059B00(void *, s32);
+    void fn_80059EB4(s32 *, void *);
+    void *p;
+    s32 diff;
+
+    p = (void *)fn_8005A2D4(arg0, arg1, arg3);
+    if (p == NULL) {
+        return 0;
+    }
+    diff = fn_80059B50(p) - arg2;
+    if (diff > 0) {
+        fn_80059B00(p, diff);
+    } else {
+        arg2 = fn_80059B50(p);
+        fn_80059EB4(arg0, p);
+    }
+    return arg2;
+}
+
 s32 fn_8005A124(s32 **arg0, s32 arg1) {
     s32 fn_8005A38C(void);
     s32 sum = 0;
@@ -175,20 +196,16 @@ u32 fn_8005A234(u8 **arg0, s32 arg1, u8 **out, u32 max) {
     u32 count;
     u32 i;
     u32 n;
-    u8 **dst;
 
     if (out == NULL) {
         return 0;
     }
-    dst = out;
-    n = ((s32 (*)(void *))fn_8005A38C)(arg0);
     count = 0;
+    n = ((s32 (*)(void *))fn_8005A38C)(arg0);
     for (i = 0; i < n; i++) {
         if (arg0[i] != NULL && fn_800599B0(arg0[i]) == arg1) {
-            *dst = arg0[i];
-            count++;
-            dst++;
-            if (count >= max) {
+            *out++ = arg0[i];
+            if (++count >= max) {
                 break;
             }
         }
@@ -1116,22 +1133,10 @@ s32 fn_80061F9C(char *self) {
 
 void fn_80063054(void) {
     extern void fn_8005B71C(void *);
-    void *fn_80248488(void *, s32, u32);
-    void *fn_802D0AB8(void);
-    void *fn_802D0B3C(void);
-    void *fn_802D197C(void *, s32, s32);
-    void *fn_802DC3C0(void *, s32, s32, s32, s32);
-    void *heap;
+    void fn_80248488(void *, s32, u32);
     void *p;
 
-    heap = fn_802D0AB8();
-    p = fn_802D197C(heap, 0x660, 0x10);
-    if (p == NULL) {
-        p = fn_802DC3C0(heap, 0x660, 0x10, 0, 0);
-        if (p == NULL && heap == fn_802D0AB8()) {
-            p = fn_802DC3C0(fn_802D0B3C(), 0x660, 0x10, 0, 0);
-        }
-    }
+    p = BBI_AllocAligned(0x660);
     fn_80248488(p, 0, 0x660);
     fn_8005B71C(p);
 }
