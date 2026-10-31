@@ -54,10 +54,10 @@ s32 fn_801930C4(SPart *arg0, SPRect *r) {
 void *fn_80193260(void *arg0, s32 arg1) {
     SPart *sp = arg0;
 
-    if (arg1 >= 0 && (u32)arg1 < (u32)(sp->nodesEnd - sp->nodesBegin)) {
-        return &sp->nodesBegin[arg1];
+    if (arg1 < 0 || (u32)arg1 >= (u32)(sp->nodesEnd - sp->nodesBegin)) {
+        return NULL;
     }
-    return NULL;
+    return &sp->nodesBegin[arg1];
 }
 
 s32 fn_801932A0(SPart *arg0, s32 arg1, SPRect *out) {
