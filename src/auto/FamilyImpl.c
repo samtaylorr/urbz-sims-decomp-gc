@@ -871,7 +871,7 @@ void fn_8010D234(void (*cb)(void)) {
 
 void fn_8010D23C(s32 arg0, s32 arg1) {
     extern u8 lbl_80434B90[];
-    void fn_8010CF68(void *);
+    void *fn_8010CF68(void *);
     if (arg1 == 0xFFFF) {
         if (arg0 != 0) {
             fn_8010CF68(lbl_80434B90);
