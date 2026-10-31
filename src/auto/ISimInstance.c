@@ -78,16 +78,10 @@ void fn_80063FA4(void *self, s32 flags) {
     M2C_UNK fn_802CD53C(void *);
     u8 *obj;
     u8 *vt;
-    void *g;
 
-    g = lbl_80494130;
-    if (g != NULL) {
-        obj = lbl_80495050;
-        vt = *(u8 **)obj;
-        if ((*(s32 (**)(void *, void *))(vt + 0x9C))(obj + *(s16 *)(vt + 0x98), g) != 0) {
-            obj = lbl_80495050;
-            vt = *(u8 **)obj;
-            (*(void (**)(void *))(vt + 0x44))(obj + *(s16 *)(vt + 0x40));
+    if (lbl_80494130 != NULL) {
+        if (ISimInstance_Call9C(lbl_80495050, lbl_80494130) != 0) {
+            ISimInstance_Call44(lbl_80495050);
         }
         obj = lbl_80495050;
         vt = *(u8 **)obj;
@@ -192,6 +186,12 @@ s32 fn_80065508(f32 *rect, void *pos) {
     f32 x = (f32)fn_80105B78(pos);
     f32 y = (f32)fn_80105B84(pos);
     return x > rect[0] && x < rect[1] && y > rect[2] && y < rect[3];
+}
+
+void fn_800655C8(f32 *rect, f32 *out) {
+    f32 c = lbl_803C8468[0];
+    out[0] = (rect[1] - rect[0]) * c + rect[0];
+    out[1] = (rect[3] - rect[2]) * c + rect[2];
 }
 
 void fn_8006572C(f32 *arg0, f32 arg1, f32 arg2) {
