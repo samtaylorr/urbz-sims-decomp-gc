@@ -124,6 +124,23 @@ void fn_80064368(void *arg0, s32 arg1) {
     }
 }
 
+void fn_800643BC(void *arg0, s32 arg1, void *arg2) {
+    M2C_UNK fn_802CB69C(void *, void *);
+    u32 mask;
+    void *node;
+
+    mask = 8;
+    if (arg1 == 0) {
+        mask = 1;
+    }
+    for (node = M2C_FIELD(arg0, void **, 4); node != NULL; node = M2C_FIELD(node, void **, 0x10)) {
+        void *obj = M2C_FIELD(node, void **, 0x1C);
+        if (M2C_FIELD(obj, u32 *, 0x30C) & mask) {
+            fn_802CB69C(arg2, obj);
+        }
+    }
+}
+
 void fn_800645CC(void *arg0, void *arg1) {
     M2C_UNK fn_802CD218(void *, s32);
     void *node;
