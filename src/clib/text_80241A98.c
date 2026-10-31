@@ -52,6 +52,23 @@ void fn_802423A8(void) {
     fn_802422FC();
 }
 
+void fn_802423EC(s32 arg0) {
+    extern s32 lbl_80440580[];
+    extern s32 lbl_80440584[];
+    extern s32 lbl_80440588[];
+    extern u8 lbl_80440560[];
+    s32 size = (arg0 + 0x1F) & ~0x1F;
+    if (size == lbl_80440588[0]) {
+        lbl_80440580[0] = 0;
+        lbl_80440584[0] += size;
+        fn_80242320((s32)lbl_80440560);
+    } else {
+        lbl_80440584[0] = -1;
+        lbl_80440580[0] = 0x31100;
+        fn_802423A8();
+    }
+}
+
 s32 fn_8024246C(s32 arg0) {
     if (arg0 > 0x5705FFFF) {
         return 0x52100;
