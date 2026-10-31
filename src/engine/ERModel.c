@@ -107,7 +107,7 @@ s32 fn_80329DDC(u8 *self, s32 data) {
     if (*(s32 *)(self + 0x164) != 0) {
         *(void **)(self + 0x168) = fn_80338000(lbl_8045B82C, *(s32 *)(self + 0x164) << 6, 0x10);
         size = *(s32 *)(self + 0x164) << 6;
-        fn_802482F8(*(void **)(self + 0x168), (void *)data, size);
+        ((void (*)(void *, void *, u32))fn_802482F8)(*(void **)(self + 0x168), (void *)data, size);
         data += size;
     }
     return data - start;
@@ -285,8 +285,7 @@ void fn_8032B9E8(u8 *self, u8 *other) {
 s32 fn_8032BA68(u8 *self, void *other, s32 idx) {
     extern void fn_803004E4(u8 *, u8 *, u32);
     extern const f32 lbl_803F3398[];
-    void **res;
-    f32 *weights;
+    struct { u8 pad[0xA8]; struct { s32 flag; void *res; } entries[11]; f32 weights[12]; } *p = (void *)self;
     s32 i;
 
     if ((u32)idx > 11) {
@@ -295,13 +294,11 @@ s32 fn_8032BA68(u8 *self, void *other, s32 idx) {
     if (ListCount(self + 0x20) != ListCount((u8 *)other + 0x20)) {
         return 0;
     }
-    res = (void **)(self + 0xAC);
-    weights = (f32 *)(self + 0x100);
     for (i = 0; i < ListCount(self + 0x20); i++) {
         fn_803004E4(*(u8 **)(self + 0x20) + i * 0x18, *(u8 **)((u8 *)other + 0x20) + i * 0x18, idx);
     }
-    res[idx * 2] = other;
-    weights[idx] = lbl_803F3398[0];
+    p->entries[idx].res = other;
+    p->weights[idx] = lbl_803F3398[0];
     return 1;
 }
 
