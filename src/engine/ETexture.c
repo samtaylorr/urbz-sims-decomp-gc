@@ -33,6 +33,12 @@ void fn_8036EDAC(void *arg0, s32 arg1) {
     }
 }
 
+void *fn_8036EDE0(void *arg0) {
+    extern u8 lbl_8041DBE8[];
+    M2C_FIELD(arg0, void **, 8) = lbl_8041DBE8;
+    return arg0;
+}
+
 void *fn_8036EDF4(void *arg0) {
     M2C_UNK fn_802D8B34();
     fn_802D8B34();
