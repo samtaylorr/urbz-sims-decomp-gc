@@ -232,6 +232,22 @@ char *fn_802EE190(char *self, void *arg1) {
     return 0;
 }
 
+void fn_802EE234(char *self, void *arg1) {
+    char *vt;
+    if (arg1) {
+        vt = *(char **)self;
+        (*(void (**)(void *))(vt + 0x44))(self + *(s16 *)(vt + 0x40));
+        (*(s32 *)(self + 0x2C))--;
+        vt = *(char **)self;
+        (*(void (**)(void *, void *))(vt + 0x1FC))(self + *(s16 *)(vt + 0x1F8), arg1);
+    }
+}
+
+void fn_802EE2A4(char *self) {
+    char *vt = *(char **)self;
+    (*(void (**)(char *))(vt + 0x204))(self + *(s16 *)(vt + 0x200));
+}
+
 s32 fn_802EEB54(void *arg0) {
     M2C_UNK fn_802EE6D0();
     fn_802EE6D0();
