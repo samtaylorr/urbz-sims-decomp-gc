@@ -207,14 +207,34 @@ void fn_8032B9E4(void) {
 
 }
 
+s32 fn_8032BB20(u8 *self, s32 name, s32 idx) {
+    extern void *fn_8033740C(void *, s32, s32, s32);
+    extern s32 fn_8032BA68(u8 *, void *, s32);
+    extern void fn_8031EA2C(void *);
+    extern u8 lbl_8045B82C[];
+    struct { s32 a; s32 b; } *arr;
+    void *res;
+
+    res = fn_8033740C(lbl_8045B82C, name, 0, 0);
+    if (res == 0) {
+        return 0;
+    }
+    if (fn_8032BA68(self, res, idx) != 0) {
+        arr = (void *)(self + 0xA8);
+        arr[idx].a = 1;
+        return (s32)res;
+    }
+    fn_8031EA2C(res);
+    return 0;
+}
+
 s32 fn_8032BC70(u8 *self, s32 arg1) {
     extern s32 fn_8032BBA8(u8 *, s32);
-    s32 *arr = (s32 *)(self + 0xAC);
     s32 found = 0;
     s32 i;
 
     for (i = 0; i <= 10; i++) {
-        if (arg1 == arr[i * 2]) {
+        if (arg1 == ((s32 (*)[2])(self + 0xAC))[i][0]) {
             found = 1;
             break;
         }
@@ -226,11 +246,13 @@ s32 fn_8032BC70(u8 *self, s32 arg1) {
 }
 
 s32 fn_8032BCE0(u8 *self, u32 idx, f32 value) {
+    struct { u8 pad[0x100]; f32 arr[12]; } *p = (void *)self;
+
     if (idx > 11) {
         return 0;
     }
-    if (*(f32 *)(self + 0x100 + idx * 4) != value) {
-        *(f32 *)(self + 0x100 + idx * 4) = value;
+    if (p->arr[idx] != value) {
+        p->arr[idx] = value;
         *(s32 *)(self + 0x12C) = 1;
     }
     return 1;
