@@ -32,6 +32,69 @@ typedef struct StrFile {
 
 s32 fn_80249390(StrFile *f, const char *fmt, void *ap);
 
+void fn_80241ED4(void) {
+    extern u8 lbl_80440520[];
+    extern s32 lbl_80440518[];
+    extern s32 lbl_803F73B0;
+    extern void (*lbl_803F73B4)(s32);
+    s32 fn_802410AC(void);
+    void fn_80241134(void *, s32);
+    void fn_802412F0(void *, s32);
+    u8 *s = lbl_80440520;
+    s32 r;
+
+    r = fn_802410AC();
+    if (r != 0) {
+        fn_80241134(s, r);
+        *(u16 *)(s + 2) = 0;
+        lbl_80440518[0] = *(s32 *)(s + 8);
+        fn_802412F0(s, 8);
+        lbl_803F73B0 = 0;
+        if (lbl_803F73B4 != 0) {
+            lbl_803F73B4(lbl_80440518[0]);
+            lbl_803F73B4 = 0;
+        }
+    }
+    *(volatile u32 *)0xCC003000 = 0x1000;
+}
+
+s32 fn_80242054(void) {
+    extern volatile s32 lbl_803F73B0;
+    extern s32 lbl_80440518[];
+    void fn_80241F7C(void);
+    void fn_80241D50(void);
+
+    if (lbl_803F73B0 == 0) {
+        return 0;
+    }
+    if (lbl_803F73B0 == 5) {
+        fn_80241F7C();
+    } else {
+        fn_80241D50();
+    }
+    return lbl_80440518[0];
+}
+
+void fn_802420A8(u32 arg0) {
+    extern s32 lbl_803F73BC[];
+    void fn_80241B80(void);
+
+    switch (arg0) {
+    case 1:
+        fn_80241B80();
+        break;
+    case 2:
+    case 4:
+        lbl_803F73BC[0]++;
+        break;
+    case 3:
+        break;
+    case 5:
+        fn_80241ED4();
+        break;
+    }
+}
+
 void fn_80242258(void) {
     s32 fn_8025465C(void);
     void fn_802546A8(s32, void *);
