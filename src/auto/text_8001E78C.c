@@ -9,6 +9,14 @@ static inline s32 List_Valid(void *n) {
     return n != NULL;
 }
 
+typedef struct {
+    s32 *p;
+} Handle;
+
+static inline s32 Handle_Get(Handle *h) {
+    return h->p != NULL ? *h->p : 0;
+}
+
 void fn_8001FC30(void) {
     fn_800A23A4();
 }
@@ -87,6 +95,11 @@ void *fn_80022D98(void *arg0) {
         return next;
     }
     return NULL;
+}
+
+Quat4 fn_80022DE4(u8 *obj) {
+    Quat4 q = *(Quat4 *)(*(u8 **)(obj + 0x4C) + 0x10);
+    return q;
 }
 
 void fn_8002357C(u8 *self) {
