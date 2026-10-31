@@ -174,6 +174,30 @@ void fn_8010B568(void **self, s32 flags) {
     }
 }
 
+void *fn_8010B59C(void *self, void *arg1) {
+    extern u8 lbl_8040E628[];
+    void fn_800F160C(void *);
+    void fn_800F2868(void *, s32, s32);
+    char *sub;
+
+    M2C_FIELD(self, void **, 0) = lbl_8040E628;
+    fn_800F160C((char *)self + 4);
+    M2C_FIELD(self, void **, 8) = arg1;
+    sub = (char *)self + 0x2C;
+    M2C_FIELD(self, s32 *, 0x24) = 0;
+    M2C_FIELD(self, s32 *, 0x28) = 0;
+    M2C_FIELD(sub, s32 *, 4) = 0;
+    M2C_FIELD(self, s32 *, 0xC) = 0;
+    M2C_FIELD(self, s32 *, 0x14) = 0;
+    M2C_FIELD(self, s32 *, 0x18) = 0;
+    M2C_FIELD(self, s32 *, 0x1C) = 0;
+    M2C_FIELD(self, s32 *, 0x10) = -1;
+    fn_800F2868((char *)self + 4, 0, -1);
+    M2C_FIELD(self, s32 *, 0x34) = 0;
+    M2C_FIELD(self, s32 *, 0x20) = 1;
+    return self;
+}
+
 void fn_8010B898(u8 *self, u8 **arg1) {
     extern s32 fn_8016CCE0(void *);
     u8 *obj;
@@ -206,14 +230,10 @@ s32 fn_8010B930(void *self, s32 id) {
 }
 
 s32 *fn_8010B96C(void *self, s32 idx) {
-    s32 *begin;
-    if (idx >= 0) {
-        begin = M2C_FIELD(self, s32 **, 0x24);
-        if (idx < M2C_FIELD(self, s32 **, 0x28) - begin) {
-            return &begin[idx];
-        }
+    if (idx < 0 || idx >= M2C_FIELD(self, s32 **, 0x28) - M2C_FIELD(self, s32 **, 0x24)) {
+        return NULL;
     }
-    return NULL;
+    return &M2C_FIELD(self, s32 **, 0x24)[idx];
 }
 
 void fn_8010B9A0(s32 arg0, s32 arg1) {
