@@ -141,6 +141,42 @@ s32 fn_802EEB54(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x90);
 }
 
+void fn_802EECEC(void *arg0) {
+    f32 a, b, c, d;
+
+    if (M2C_FIELD(arg0, s32 *, 0x2CC) != 0) {
+        a = M2C_FIELD(arg0, f32 *, 0x2D0);
+        b = M2C_FIELD(arg0, f32 *, 0x2D4);
+        c = M2C_FIELD(arg0, f32 *, 0x2D8);
+        d = M2C_FIELD(arg0, f32 *, 0x2DC);
+    } else if (M2C_FIELD(arg0, s32 *, 0x2A8) != 0) {
+        a = M2C_FIELD(arg0, f32 *, 0x2AC);
+        b = M2C_FIELD(arg0, f32 *, 0x2B0);
+        c = M2C_FIELD(arg0, f32 *, 0x2B4);
+        d = M2C_FIELD(arg0, f32 *, 0x2B8);
+    } else {
+        a = M2C_FIELD(arg0, f32 *, 0x2BC);
+        b = M2C_FIELD(arg0, f32 *, 0x2C0);
+        c = M2C_FIELD(arg0, f32 *, 0x2C4);
+        d = M2C_FIELD(arg0, f32 *, 0x2C8);
+    }
+    M2C_FIELD(arg0, f32 *, 0x2E0) = a;
+    M2C_FIELD(arg0, f32 *, 0x2EC) = d;
+    M2C_FIELD(arg0, f32 *, 0x2E4) = b;
+    M2C_FIELD(arg0, f32 *, 0x2E8) = c;
+}
+
+void fn_802EED50(char *self, f32 a, f32 b, f32 c, f32 d) {
+    char *vt;
+
+    M2C_FIELD(self, f32 *, 0x2BC) = a;
+    M2C_FIELD(self, f32 *, 0x2C0) = b;
+    M2C_FIELD(self, f32 *, 0x2C4) = c;
+    M2C_FIELD(self, f32 *, 0x2C8) = d;
+    vt = *(char **)self;
+    (*(void (**)(char *))(vt + 0x21C))(self + *(s16 *)(vt + 0x218));
+}
+
 void fn_802EEDA8(void *arg0, f32 *arg1, f32 *arg2, f32 *arg3, f32 *arg4) {
     *arg1 = M2C_FIELD(arg0, f32 *, 0x2AC);
     *arg2 = M2C_FIELD(arg0, f32 *, 0x2B0);
@@ -353,17 +389,21 @@ void fn_802EF220(void *arg0) {
     struct { Vec3f min; Vec3f max; } box;
     Vec3f t;
     register Vec3f *p asm("r9") = &t;
+    register f32 lo asm("fr13");
+    register f32 hi asm("fr0");
     t.x = lbl_803F0CEC[0];
     t.z = lbl_803F0CEC[0];
     t.y = lbl_803F0CEC[0];
+    lo = lbl_803F0CF0[0];
     box.min = box.max = t;
-    p->z = lbl_803F0CF0[0];
-    p->y = lbl_803F0CF0[0];
-    p->x = lbl_803F0CF0[0];
+    hi = lbl_803F0CF4[0];
+    p->z = lo;
+    p->y = lo;
+    p->x = lo;
     box.min = *p;
-    p->z = lbl_803F0CF4[0];
-    p->y = lbl_803F0CF4[0];
-    p->x = lbl_803F0CF4[0];
+    p->z = hi;
+    p->y = hi;
+    p->x = hi;
     box.max = *p;
     fn_802F09B8(arg0, &box);
 }
