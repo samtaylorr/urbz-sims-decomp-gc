@@ -6,6 +6,10 @@ typedef struct {
     s32 *end;
 } ESimsIdVec;
 
+static inline s32 *ESimsIdVec_at(ESimsIdVec *v, u32 n) {
+    return v->begin + n;
+}
+
 typedef struct ERMLock {
     char *obj;
     u8 unk4[3];
@@ -116,7 +120,8 @@ void fn_8001DE20(ESimsIdVec *arg0) {
 
     n = arg0->end - arg0->begin;
     for (i = 0; i < n; i++) {
-        fn_80334B94(lbl_8045B438, *(arg0->begin + (u32)i));
+        s32 *b = arg0->begin;
+        fn_80334B94(lbl_8045B438, b[i]);
     }
 }
 
