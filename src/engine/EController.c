@@ -368,6 +368,22 @@ void fn_803112BC(void *arg0) {
     M2C_FIELD(M2C_FIELD(arg0, void **, 0x200), s32 *, 0x78) = 1;
 }
 
+s32 fn_803112CC(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    void *p;
+
+    if ((arg1 & arg3) == arg3) {
+        if (arg2 == 0) {
+            return 1;
+        }
+        p = M2C_FIELD(arg0, void **, 0x200);
+        if (M2C_FIELD(p, s32 *, 0x78) == 0) {
+            M2C_FIELD(p, s32 *, 0x78) = 1;
+            return 1;
+        }
+    }
+    return 0;
+}
+
 s32 fn_80311310(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     void *p;
 
