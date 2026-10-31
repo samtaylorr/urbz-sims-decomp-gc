@@ -794,6 +794,12 @@ void fn_8010CF10(void *arg0, s32 arg1) {
     }
 }
 
+void *fn_8010CF68(void *self) {
+    void fn_80248488(void *, s32, s32);
+    fn_80248488(self, 0, 0x44);
+    return self;
+}
+
 void fn_8010CFA0(void *self, s32 flags) {
     if (flags & 1) {
         fn_802D20E8(self);
