@@ -150,6 +150,20 @@ s32 fn_80059E3C(s32 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     return arg2;
 }
 
+s32 fn_8005A0BC(s32 **arg0) {
+    s32 fn_8005A38C(void);
+    u32 count = 0;
+    u32 i;
+    u32 n = ((s32 (*)(void *))fn_8005A38C)(arg0);
+
+    for (i = 0; i < n; i++) {
+        if (arg0[i] != NULL) {
+            count++;
+        }
+    }
+    return count;
+}
+
 s32 fn_8005A124(s32 **arg0, s32 arg1) {
     s32 fn_8005A38C(void);
     s32 sum = 0;
