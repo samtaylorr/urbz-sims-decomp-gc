@@ -109,6 +109,19 @@ s32 fn_803108C8(char *self, f32 farg0, f32 farg1) {
     return result;
 }
 
+s32 fn_8031094C(char *self, f32 farg0, f32 farg1, f32 farg2, f32 farg3) {
+    char *vt;
+    s32 result = 0;
+    vt = *(char **)(self + 0x204);
+    if ((*(s32 (**)(char *, f32, f32))(vt + 0x34))(self + *(s16 *)(vt + 0x30), farg0, farg2) != 0) {
+        vt = *(char **)(self + 0x204);
+        if ((*(s32 (**)(char *, f32, f32))(vt + 0x44))(self + *(s16 *)(vt + 0x40), farg1, farg3) != 0) {
+            result = 1;
+        }
+    }
+    return result;
+}
+
 s32 fn_80310A48(void *arg0, f32 farg0) {
     M2C_FIELD(arg0, f32 *, 0x1E4) = farg0;
     return 1;
