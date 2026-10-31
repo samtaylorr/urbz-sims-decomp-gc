@@ -281,20 +281,36 @@ void fn_8035DFE0(void) {
     void fn_80385E84(s32);
     ENgcRendererSlot *e;
     ENgcRendererSlot *end;
+    s32 f;
 
     fn_8035EE7C();
     e = lbl_80473F7C;
-    end = &lbl_80473F7C[0x3D];
+    end = e + 0x3D;
     do {
-        if (e->unk24 != 0 && e->unk0 != 0 && !e->unk40_2 && e->unk40_0 && !e->unk40_1
-            && (*(u32 *)((u8 *)e->unk0 + 0x1B2) >> 1) < e->unk28) {
-            fn_80383AE8(e->unk0, 7);
-            e->unk40_0 = 0;
-            fn_80385E84(e->unk0);
+        if (e->unk24 != 0 && e->unk0 != 0) {
+            f = ((s32 *)e)[0x10];
+            if (!(f & 0x20000000) && f < 0 && !(f & 0x40000000)
+                && (*(u32 *)((u8 *)e->unk0 + 0x1B2) >> 1) < e->unk28) {
+                fn_80383AE8(e->unk0, 7);
+                e->unk40_0 = 0;
+                fn_80385E84(e->unk0);
+            }
         }
         e++;
     } while (e <= end);
     fn_8035EE3C();
+}
+
+s32 fn_8035E08C(void *self, s32 slot) {
+    extern ENgcRendererSlot lbl_80473F7C[];
+    s32 ret = 1;
+
+    fn_8035EE7C();
+    if (!lbl_80473F7C[slot].unk40_0) {
+        ret = 0;
+    }
+    fn_8035EE3C();
+    return ret;
 }
 
 void fn_8035EE3C(void);
