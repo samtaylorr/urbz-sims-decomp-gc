@@ -201,11 +201,13 @@ s32 fn_80310A48(void *arg0, f32 farg0) {
 s32 fn_80310A54(char *self) {
     extern f32 lbl_803F22C0[];
     char *vt = *(char **)(self + 0x204);
+    f32 z;
     if ((*(s32 (**)(char *))(vt + 0x1C))(self + *(s16 *)(vt + 0x18)) == 0) {
         return 0;
     }
-    M2C_FIELD(self, f32 *, 0x1E0) = lbl_803F22C0[0];
-    M2C_FIELD(self, f32 *, 0x1E8) = lbl_803F22C0[0];
+    z = lbl_803F22C0[0];
+    M2C_FIELD(self, f32 *, 0x1E0) = z;
+    M2C_FIELD(self, f32 *, 0x1E8) = z;
     return 1;
 }
 
@@ -278,24 +280,22 @@ void fn_80310C98(void *arg0) {
 
 void fn_80310DE4(char *self, s32 i, s32 j, f32 v) {
     extern f32 lbl_803F22C8[];
-    struct {
+    struct Data {
         u8 pad0[0x28];
         f32 a28[2][2];
         f32 a38[2][2];
         f32 a48[2][2];
         u8 pad58[0x10];
         s32 a68[2][2];
-    } *d;
+    };
 
-    d = *(void **)(self + 0x1FC);
-    if (__builtin_fabsf(d->a28[i][j] - d->a38[i][j]) < __builtin_fabsf(v - d->a38[i][j])) {
-        d->a28[i][j] = v;
-        d = *(void **)(self + 0x1FC);
-        d->a48[i][j] = v - d->a38[i][j];
+    if (__builtin_fabsf((*(struct Data **)(self + 0x1FC))->a28[i][j] - (*(struct Data **)(self + 0x1FC))->a38[i][j]) <
+        __builtin_fabsf(v - (*(struct Data **)(self + 0x1FC))->a38[i][j])) {
+        (*(struct Data **)(self + 0x1FC))->a28[i][j] = v;
+        (*(struct Data **)(self + 0x1FC))->a48[i][j] = v - (*(struct Data **)(self + 0x1FC))->a38[i][j];
     }
-    d = *(void **)(self + 0x1FC);
-    if (!(d->a38[i][j] * v <= lbl_803F22C8[0])) {
-        d->a68[i][j] = 1;
+    if (!((*(struct Data **)(self + 0x1FC))->a38[i][j] * v > lbl_803F22C8[0])) {
+        (*(struct Data **)(self + 0x1FC))->a68[i][j] = 1;
     }
 }
 
@@ -417,17 +417,17 @@ s32 *fn_80311370(void *arg0, s32 arg1) {
     s32 *p;
     s32 *base;
 
-    if (arg1 == 0) {
-        return NULL;
-    }
-    p = fn_80378358(&arg1, M2C_FIELD(arg0, void **, 0x1A4), M2C_FIELD(arg0, u32 *, 0x1A8), 8, (void *)fn_80311350);
-    if (p != NULL) {
-        base = M2C_FIELD(arg0, s32 **, 0x1A4);
-        while (p != base && p[-2] == arg1) {
-            p -= 2;
+    if (arg1 != 0) {
+        p = fn_80378358(&arg1, M2C_FIELD(arg0, void **, 0x1A4), M2C_FIELD(arg0, u32 *, 0x1A8), 8, (void *)fn_80311350);
+        if (p != NULL) {
+            base = M2C_FIELD(arg0, s32 **, 0x1A4);
+            while (p != base && p[-2] == arg1) {
+                p -= 2;
+            }
         }
+        return p;
     }
-    return p;
+    return NULL;
 }
 
 void fn_80311778(s32 arg0, s32 arg1, s32 arg2) {
