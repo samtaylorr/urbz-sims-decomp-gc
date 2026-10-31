@@ -181,6 +181,13 @@ char *fn_802EDD34(char *self, s32 arg1) {
     return obj;
 }
 
+void fn_802EDF08(char *self, void *arg1, s32 arg2);
+void fn_802EDEDC(char *self, void *arg1) {
+    if (arg1) {
+        fn_802EDF08(self, arg1, 1);
+    }
+}
+
 s32 fn_802EEB54(void *arg0) {
     M2C_UNK fn_802EE6D0();
     fn_802EE6D0();
