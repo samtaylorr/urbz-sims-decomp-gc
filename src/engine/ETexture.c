@@ -393,6 +393,7 @@ s32 fn_8036F5AC(void *arg0, s32 arg1) {
 
 void fn_8036F5E4(void *arg0, void *arg1) {
     void fn_8036F65C(void *, void *);
+    s32 fn_8036FB28(void *, void *);
     extern void *lbl_8049523C;
     void (*cb)(void *);
 
