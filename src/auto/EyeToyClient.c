@@ -343,9 +343,21 @@ f32 fn_80043A40(void) {
     return lbl_8041F65C[0] * lbl_803C6184[0];
 }
 
+void fn_80043A58(f32 farg0) {
+    void fn_803398E8(s32, void *);
+    extern f32 lbl_8041F63C[];
+    lbl_8041F63C[8] = farg0 + farg0;
+    fn_803398E8(0, lbl_8041F63C);
+}
+
 s32 fn_80043A8C(s32 arg0) {
     extern u8 lbl_803F5DA8[];
     return *(s32 *)(lbl_803F5DA8 + arg0 * 0xC + 4);
+}
+
+s32 fn_80043AA4(s32 arg0, s32 arg1) {
+    extern u8 lbl_803F5DA8[];
+    return *(s32 *)(*(u8 **)(lbl_803F5DA8 + arg0 * 0xC) + arg1 * 8 + 4);
 }
 
 void fn_80043BB4(void) {
