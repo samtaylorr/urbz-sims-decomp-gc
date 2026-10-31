@@ -247,6 +247,11 @@ s32 fn_80339C10(s32 i) {
     return lbl_803FD32C[i] & 1;
 }
 
+s32 fn_80339C28(s32 i) {
+    extern u32 lbl_803FD32C[];
+    return (lbl_803FD32C[i] >> 2) & 1;
+}
+
 s32 fn_80339C58(s32 i) {
     extern u32 lbl_803FD32C[];
     return (lbl_803FD32C[i] >> 1) & 1;
