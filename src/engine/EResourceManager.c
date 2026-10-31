@@ -48,17 +48,17 @@ char *fn_80335F5C(char *self) {
     fn_802CAB04(self);
     p = (s32 *)(self + 0x40);
     p[0] = 0;
-    p[4] = 0;
     p[1] = 0;
     p[2] = 0;
     p[3] = 0;
+    p[4] = 0;
     fn_802D39E4(self + 0x58);
     fn_80339348(self + 0x6C);
-    *(s32 *)(self + 0x98) = 0;
     *(s32 *)(self + 0x5C) = 0;
     *(s32 *)(self + 0x64) = 0;
     *(s32 *)(self + 0x60) = 0;
     *(s32 *)(self + 0x68) = 0;
+    *(s32 *)(self + 0x98) = 0;
     return self;
 }
 
