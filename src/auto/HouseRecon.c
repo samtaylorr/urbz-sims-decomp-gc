@@ -24,8 +24,19 @@ s32 fn_80050918(void) {
     s32 fn_80336E08(void *, u32);
     extern u8 lbl_8045B82C[];
     extern u8 lbl_8045B0F0[];
-    return fn_80336E08(lbl_8045B82C, 0x050AE831) && fn_80336E08(lbl_8045B0F0, 0x92D8AE4A)
-        && fn_80336E08(lbl_8045B0F0, 0x30AA9779) && fn_80336E08(lbl_8045B82C, 0x1BAFBA8B);
+    if (!fn_80336E08(lbl_8045B82C, 0x050AE831)) {
+        return 0;
+    }
+    if (!fn_80336E08(lbl_8045B0F0, 0x92D8AE4A)) {
+        return 0;
+    }
+    if (!fn_80336E08(lbl_8045B0F0, 0x30AA9779)) {
+        return 0;
+    }
+    if (!fn_80336E08(lbl_8045B82C, 0x1BAFBA8B)) {
+        return 0;
+    }
+    return 1;
 }
 
 void fn_80050C44(void *arg0) {
