@@ -89,13 +89,10 @@ s32 fn_80021248(void) {
 void fn_80021C20(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 fn_802D5200(s32);
     void fn_800F22F0(s32, s32);
-    Handle h;
-    Handle *hp;
-    char *e;
+    char *e = M2C_FIELD(arg0, char **, 0) + 0x88;
+    Handle h = (*(Handle (**)())(e + 4))((char *)arg0 + *(s16 *)e);
+    Handle *hp = &h;
 
-    e = M2C_FIELD(arg0, char **, 0) + 0x88;
-    h = (*(Handle (**)())(e + 4))((char *)arg0 + *(s16 *)e);
-    hp = &h;
     if (Handle_Get(hp) != 0 && fn_802D5200(Handle_Get(hp)) != 0) {
         fn_800F22F0(arg1, Handle_Get(hp));
     } else if (arg3 != 0) {
@@ -246,25 +243,24 @@ void *fn_80022D98(void *arg0) {
     return NULL;
 }
 
-Quat4 fn_80022DE4(u8 *obj) {
+Quat4 *fn_80022DE4(Quat4 *out, u8 *obj) {
     struct { u8 pad[0x10]; Quat4 q; } *src = *(void **)(obj + 0x4C);
     Quat4 q;
-    Quat4 r;
     Quat4 *p = &q;
     f32 x = src->q.x;
-    f32 w = src->q.w;
     f32 y = src->q.y;
     f32 z = src->q.z;
+    f32 w = src->q.w;
 
-    p->x = x;
-    p->w = w;
+    q.x = x;
     p->y = y;
     p->z = z;
-    r.y = q.y;
-    r.z = q.z;
-    r.x = q.x;
-    r.w = q.w;
-    return r;
+    p->w = w;
+    out->x = q.x;
+    out->y = p->y;
+    out->z = p->z;
+    out->w = p->w;
+    return out;
 }
 
 void fn_8002357C(u8 *self) {
