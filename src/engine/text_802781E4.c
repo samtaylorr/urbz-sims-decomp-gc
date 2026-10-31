@@ -149,11 +149,11 @@ void fn_80279D00(void) {
     extern u8 *lbl_804960E8;
     extern s32 lbl_8049613C;
     extern s32 lbl_804966FC;
-    extern void fn_8028D378(void);
+    extern void fn_8028D378(u8 *);
     extern void fn_802A6DE4(void);
     extern void fn_802A1028(void *, s32, s32);
     if (lbl_804960E8 != 0) {
-        fn_8028D378();
+        fn_8028D378(lbl_804960E8);
         fn_802A6DE4();
         fn_802A1028(lbl_804960E8 + 0x122C, lbl_8049613C, 0);
         lbl_804966FC -= 0x60;
