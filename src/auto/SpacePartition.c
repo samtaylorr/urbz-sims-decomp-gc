@@ -45,6 +45,15 @@ static inline SPCell *SPart_Cell(SPart *sp, u32 n) {
     return sp->cellsBegin + n;
 }
 
+static inline s32 *SPart_At(s32 *v, u32 n) {
+    return v + n;
+}
+
+typedef struct SPPoint {
+    s32 a;
+    s32 b;
+} SPPoint;
+
 extern void fn_80192EEC(SPart *, SPNode *, SPNode *, SPRect *);
 SPCell *fn_80192D9C(SPCell *self, SPRect *r, s32 arg2) {
     self->rect = *r;
@@ -90,29 +99,30 @@ void fn_80192E6C(SPart *sp, s32 a, s32 b, SPRect *out) {
 
 void fn_80193050(void *arg0) {
     volatile s32 z[10];
-    char *p14 = (char *)arg0 + 0x14;
-    char *p1c = (char *)arg0 + 0x1C;
-    char *p24 = (char *)arg0 + 0x24;
-    char *p2c = (char *)arg0 + 0x2C;
-    char *p34 = (char *)arg0 + 0x34;
-    char *p3c = (char *)arg0 + 0x3C;
-    char *p44 = (char *)arg0 + 0x44;
-    char *p4c = (char *)arg0 + 0x4C;
-    char *p54 = (char *)arg0 + 0x54;
+    char *self = arg0;
+    char *p14 = self + 0x14;
+    char *p1c = self + 0x1C;
+    char *p24 = self + 0x24;
+    char *p2c = self + 0x2C;
+    char *p34 = self + 0x34;
+    char *p3c = self + 0x3C;
+    char *p44 = self + 0x44;
+    char *p4c = self + 0x4C;
+    char *p54 = self + 0x54;
 
-    M2C_FIELD(arg0, s32 *, 0xC) = 0;
-    M2C_FIELD(arg0, s32 *, 0x10) = 0;
+    *(volatile s32 *)(self + 0xC) = 0;
+    *(volatile s32 *)(self + 0x10) = 0;
     *(volatile s32 *)(p14 + 4) = 0;
-    M2C_FIELD(arg0, s32 *, 0x1C) = 0;
+    *(volatile s32 *)(self + 0x1C) = 0;
     *(volatile s32 *)(p1c + 4) = 0;
     *(volatile s32 *)(p24 + 4) = 0;
-    M2C_FIELD(arg0, s32 *, 0x2C) = 0;
+    *(volatile s32 *)(self + 0x2C) = 0;
     *(volatile s32 *)(p2c + 4) = 0;
     *(volatile s32 *)(p34 + 4) = 0;
-    M2C_FIELD(arg0, s32 *, 0x3C) = 0;
+    *(volatile s32 *)(self + 0x3C) = 0;
     *(volatile s32 *)(p3c + 4) = 0;
     *(volatile s32 *)(p44 + 4) = 0;
-    M2C_FIELD(arg0, s32 *, 0x4C) = 0;
+    *(volatile s32 *)(self + 0x4C) = 0;
     *(volatile s32 *)(p4c + 4) = 0;
     *(volatile s32 *)(p54 + 4) = 0;
 }
@@ -167,40 +177,43 @@ void fn_80193680(void *arg0, s32 *arg1, s32 *arg2) {
 s32 fn_80193C00(SPart *arg0, s32 arg1, s32 arg2) {
     s32 fn_80193694(SPart *);
     u8 *n;
+    s32 cnt;
 
-    if (arg2 >= 0 && arg2 < fn_80193694(arg0)) {
+    cnt = fn_80193694(arg0);
+    if (arg2 >= 0 && arg2 < cnt) {
         n = fn_80193260(arg0, arg1);
-        if (n == NULL) {
-            return -1;
-        }
-        return M2C_FIELD(arg0, s32 **, 0x3C)[M2C_FIELD(n, s32 *, 0xC) + arg2];
+    } else {
+        n = NULL;
     }
-    return -1;
+    if (n == NULL) {
+        return -1;
+    }
+    return *(M2C_FIELD(arg0, s32 **, 0x3C) + (u32)(M2C_FIELD(n, s32 *, 0xC) + arg2));
 }
 
 void fn_80193C74(void *arg0) {
     s32 *v0c = (s32 *)((u8 *)arg0 + 0xC);
+    s32 *v4c = (s32 *)((u8 *)arg0 + 0x4C);
     s32 *v1c = (s32 *)((u8 *)arg0 + 0x1C);
     s32 *v2c = (s32 *)((u8 *)arg0 + 0x2C);
     s32 *v3c = (s32 *)((u8 *)arg0 + 0x3C);
-    s32 *v4c = (s32 *)((u8 *)arg0 + 0x4C);
     s32 begin;
     s32 end;
     s32 p;
 
-    begin = v0c[0];
+    begin = M2C_FIELD(arg0, s32 *, 0xC);
     end = v0c[1];
     for (p = begin; p != end; p += 0x14) {
     }
     v0c[1] = begin;
-    begin = v4c[0];
+    begin = M2C_FIELD(arg0, s32 *, 0x4C);
     end = v4c[1];
     for (p = begin; p != end; p += 0x2C) {
     }
     v4c[1] = begin;
-    v1c[1] = v1c[0];
-    v2c[1] = v2c[0];
-    v3c[1] = v3c[0];
+    v1c[1] = M2C_FIELD(arg0, s32 *, 0x1C);
+    v2c[1] = M2C_FIELD(arg0, s32 *, 0x2C);
+    v3c[1] = M2C_FIELD(arg0, s32 *, 0x3C);
 }
 
 void fn_80197794(void *arg0, s32 arg1) {
