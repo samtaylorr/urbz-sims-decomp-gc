@@ -81,9 +81,10 @@ void fn_80063FA4(void *self, s32 flags) {
     extern u8 *lbl_80495050;
     extern void *lbl_80494130;
     M2C_UNK fn_802CD53C(void *);
+    register void *g asm("r4");
 
-    if (lbl_80494130 != NULL) {
-        if (ISimInstance_Call9C(lbl_80495050, lbl_80494130) != 0) {
+    if ((g = lbl_80494130) != NULL) {
+        if (ISimInstance_Call9C(lbl_80495050, g) != 0) {
             ISimInstance_Call44(lbl_80495050);
         }
         ISimInstance_Call94(lbl_80495050, lbl_80494130);
@@ -241,8 +242,8 @@ void fn_800650DC(void *arg0) {
 }
 
 s32 fn_80065148(s32 id) {
-    extern void *lbl_8041FA38;
-    void *p = lbl_8041FA38;
+    extern void *lbl_8041FA38[];
+    void *p = lbl_8041FA38[0];
     void *n;
 
     if (p == NULL) {
@@ -261,22 +262,31 @@ s32 fn_80065148(s32 id) {
 }
 
 void *fn_800651A8(s32 key) {
-    extern void *lbl_8041FA38;
+    extern void *lbl_8041FA38[];
     s32 fn_802CD440(void *, s32, void **);
-    void *p = lbl_8041FA38;
+    void *p = lbl_8041FA38[0];
     void *result;
 
     if (p == NULL || (p = M2C_FIELD(p, void **, 4)) == NULL) {
         return NULL;
     }
     result = NULL;
-    if (fn_802CD440((u8 *)p + 4, key, &result) == 0) {
-        return NULL;
+    if (fn_802CD440((u8 *)p + 4, key, &result) != 0 && result != NULL) {
+        return result;
     }
-    if (result == NULL) {
-        return NULL;
+    return NULL;
+}
+
+void fn_8006521C(f32 *rect, void *pos) {
+    f32 r[4];
+
+    if (fn_80065508(rect, pos) == 0) {
+        fn_80065424(r, pos);
+        rect[0] = rect[0] < r[0] ? rect[0] : r[0];
+        rect[2] = rect[2] < r[2] ? rect[2] : r[2];
+        rect[1] = rect[1] > r[1] ? rect[1] : r[1];
+        rect[3] = rect[3] > r[3] ? rect[3] : r[3];
     }
-    return result;
 }
 
 void fn_80065424(f32 *out, void *pos) {
