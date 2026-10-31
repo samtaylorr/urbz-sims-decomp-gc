@@ -369,6 +369,15 @@ void fn_80318DA4(void *arg0, s32 arg1, s32 arg2) {
     fn_802D11A4(arg0, arg1, arg2);
 }
 
+void fn_80319294(s32 arg0, s32 arg1, s32 arg2) {
+    void fn_803191A4(s32);
+    void fn_80318A70(const char *fmt, ...);
+    extern char lbl_803F2A50[];
+
+    fn_803191A4(arg2);
+    fn_80318A70(lbl_803F2A50, arg0, arg1, arg2);
+}
+
 void fn_80319494(void) {
     extern char *lbl_80496220;
     extern char *lbl_80495050;
@@ -414,9 +423,9 @@ char *fn_80319BA8(char *self) {
     void fn_80248488(void *, s32, s32);
     void fn_80319B6C(f32 *, f32 *, f32, f32);
 
+    *(s32 *)(self + 0xA0) = 1;
     *(s32 *)(self + 0x9C) = 0;
     *(u8 **)(self + 0xDC) = lbl_8041B268;
-    *(s32 *)(self + 0xA0) = 1;
     fn_80248488(self, 0, 0x94);
     *(s32 *)(self + 0xA4) = 0;
     *(s32 *)(self + 0x94) = 0;
@@ -484,11 +493,12 @@ void fn_8031B228(f32 *out, f32 t) {
     f32 t2 = t * t;
     f32 t3 = t2 * t;
     f32 a = (t3 + t3) - t2 * lbl_803F2C88[0];
+    f32 b = t - (t2 + t2);
 
     out[0] = a + lbl_803F2C8C[0];
     out[3] = -t2 + t3;
     out[1] = -a;
-    out[2] = (t - (t2 + t2)) + t3;
+    out[2] = b + t3;
 }
 
 s32 fn_8031B700(void *arg0) {
