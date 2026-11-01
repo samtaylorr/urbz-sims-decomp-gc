@@ -87,6 +87,17 @@ s32 fn_80059AC4(s32 *self) {
     return self[1];
 }
 
+void fn_80059B00(void *self, s32 arg1) {
+    s8 fn_80059B50(void *);
+    fn_80059B50(self);
+    if (arg1 < 0) {
+        arg1 = 0;
+    } else if ((u32)arg1 > 0x63) {
+        arg1 = 0x63;
+    }
+    M2C_FIELD(self, u8 *, 1) = arg1;
+}
+
 s8 fn_80059B50(void *arg0) {
     return (s8) M2C_FIELD(arg0, u8 *, 1);
 }
@@ -102,14 +113,12 @@ u8 fn_80059B90(u8 *self) {
 }
 
 s32 fn_80059B98(s32 *self, struct BBI_Vec3 *out) {
+    struct BBI_Pair { s32 a; s32 b; };
     struct BBI_Vec3 tmp;
 
     if (out != 0) {
-        tmp = *out;
-        tmp.a = self[0];
-        tmp.b = self[1];
-        out->a = tmp.a;
-        out->b = tmp.b;
+        *(struct BBI_Pair *)out = *(struct BBI_Pair *)self;
+        tmp.c = out->c;
         return 1;
     }
     return 0;
