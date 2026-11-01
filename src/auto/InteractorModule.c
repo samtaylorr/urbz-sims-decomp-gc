@@ -330,6 +330,10 @@ void fn_8023E8F4(u8 *arg0, Vec3f *arg1) {
     *(Vec3f *)(arg0 + 0x68) = *arg1;
 }
 
+void fn_8023E914(u8 *arg0, Vec3f *arg1) {
+    *(Vec3f *)(arg0 + 0x74) = *arg1;
+}
+
 s32 fn_8023E934(s32 arg0) {
     return arg0 + 0x5C;
 }
