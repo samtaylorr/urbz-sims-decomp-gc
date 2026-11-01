@@ -130,10 +130,6 @@ TreeKey *fn_801B3814(TreeKey *self, s32 a, s16 b) {
     return self;
 }
 
-static inline void TreeKey_Init(TreeKey *self, s32 a, s16 b) {
-    fn_801B3814(self, a, b);
-}
-
 TreeKey *fn_801B3824(TreeKey *self, TreeKey *src) {
     self->a = src->a;
     self->b = src->b;
@@ -509,12 +505,14 @@ s32 fn_801B49CC(void *arg0) {
 }
 
 void fn_801B4CC4(u8 *arg0, s32 arg1, s32 arg2, s32 arg3) {
-    TreeKey key;
     u8 *vt;
+    u8 *obj;
+    TreeKey key[1];
 
-    fn_801B3814(&key, arg2, 0);
     vt = *(u8 **)arg0 + 0x20;
-    (*(void (**)(u8 *, s32, TreeKey *, s32))(vt + 4))(arg0 + *(s16 *)vt, arg1, &key, arg3);
+    obj = arg0 + *(s16 *)vt;
+    fn_801B3814(key, arg2, 0);
+    (*(void (**)(u8 *, s32, TreeKey *, s32))(vt + 4))(obj, arg1, key, arg3);
 }
 
 s32 fn_801B4D30(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
