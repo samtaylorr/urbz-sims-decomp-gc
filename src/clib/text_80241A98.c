@@ -33,16 +33,13 @@ typedef struct StrFile {
 s32 fn_80249390(StrFile *f, const char *fmt, void *ap);
 
 void fn_80241B24(void) {
-    extern u32 lbl_80440510[];
+    extern volatile u32 lbl_80440510[];
     extern s32 lbl_803F73B0[];
     extern u32 lbl_80440508[];
     extern u32 lbl_8044050C[];
     u32 n;
 
-    n = lbl_80440510[0];
-    if (n > 0x1FC00) {
-        n = 0x1FC00;
-    }
+    n = lbl_80440510[0] > 0x1FC00 ? 0x1FC00 : lbl_80440510[0];
     lbl_80440510[0] -= n;
     lbl_803F73B0[0] = 2;
     lbl_80440508[0] = n >> 10;
@@ -63,9 +60,9 @@ void fn_80241B80(void) {
     *(volatile u32 *)0xCC003000 = 0x1000;
     fn_80241B24();
     if (lbl_80440508[0] != 0) {
-        lbl_80440508[0]--;
         lbl_80440504[0] += 0x400;
         len = 0x400;
+        lbl_80440508[0]--;
     } else {
         len = lbl_8044050C[0];
         lbl_8044050C[0] = 0;
