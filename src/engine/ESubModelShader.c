@@ -261,6 +261,28 @@ void fn_80302230(void) {
 
 }
 
+void fn_803023C4(u8 *self, s32 idx) {
+    ((s32 *)(self + 0x38))[idx] = 0;
+}
+
+void fn_803023D8(u8 *self) {
+    extern void fn_80248488(void *, s32, s32);
+    s32 n = *(s32 *)(self + 0x30);
+    s32 i;
+
+    if (n != 0) {
+        for (i = 0; i < n; i++) {
+            u8 *e = *(u8 **)(self + 0x2C) + i * 0x34;
+            s32 cnt = *(s32 *)(e + 0x18);
+            if (*(s32 *)(self + 0x10) & 0x10) {
+                fn_80248488(*(void **)e, 0, cnt * 8);
+            } else {
+                fn_80248488(*(void **)e, 0, cnt * 16);
+            }
+        }
+    }
+}
+
 s32 fn_8030417C(void *arg0) {
     void *temp_r11;
 
