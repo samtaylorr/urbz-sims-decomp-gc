@@ -68,9 +68,9 @@ s32 fn_802C46E8(void *self, u32 *a, s32 *b, u32 *c) {
             obj = (char *)a[7];
             vt = *(char **)obj;
             (*(void (**)(void *, s32, s32))(vt + 0x2C))(obj + *(s16 *)(vt + 0x28), b[0] + 8, c[2] + 8);
-            return 1;
         }
     }
+    return 1;
 }
 
 s32 fn_802C4764(s32 arg0) {
@@ -376,14 +376,14 @@ void *fn_802C5B1C(void *self, void *stream) {
 void *fn_802C5BBC(void *arg0, void *arg1) {
     void *vt;
     void *obj;
-    u16 val;
+    s16 val;
 
     vt = M2C_FIELD(arg1, void **, 0x0);
     obj = M2C_FIELD(vt, void *(**)(void *), 0x14)((char *)arg1 + M2C_FIELD(vt, s16 *, 0x10));
     vt = M2C_FIELD(arg0, void **, 0x28);
     M2C_FIELD(vt, void (**)(void *, void *, s32), 0x1C)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x18), &val, 2);
-    M2C_FIELD(obj, u16 *, 0x16) = val;
-    if (M2C_FIELD(obj, s32 *, 0x18) == 0) {
+    M2C_FIELD(obj, s16 *, 0x16) = val;
+    if (M2C_FIELD(obj, void **, 0x18) == 0) {
         vt = M2C_FIELD(arg1, void **, 0x0);
         M2C_FIELD(vt, void (**)(void *, void *), 0x4C)((char *)arg1 + M2C_FIELD(vt, s16 *, 0x48), arg0);
     }
