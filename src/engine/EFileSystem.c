@@ -120,6 +120,13 @@ s32 fn_802C605C(s32 *self) {
     return *self;
 }
 
+void fn_802C63E8(void *self, void **p) {
+    char *obj = (char *)*p;
+    char *vt = *(char **)(obj + 0x28);
+    (*(void (**)(void *))(vt + 0x14))(obj + *(s16 *)(vt + 0x10));
+    *p = 0;
+}
+
 s32 fn_802C6434(void *arg0, s32 arg1) {
     M2C_UNK fn_802C7B54();
     extern s32 lbl_80494DB8;
