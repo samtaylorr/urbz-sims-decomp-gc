@@ -5364,6 +5364,38 @@ void fn_803A8188(u8 **self, void *unused, void *stream, void *arg3) {
     }
 }
 
+void fn_803A8290(Elem12Vec *v, Elem12 *pos, u32 n, const Elem12 *x);
+void fn_803A8648(u8 **self, void *unused, void *stream, void *arg3) {
+    extern void fn_8018D8DC(void *, s32 *, s32);
+    extern void fn_801770F8(void *, void *, void *);
+    extern void *fn_80248488();
+    s32 n;
+    s32 size;
+    s32 d;
+    Elem12 *end;
+    Elem12 *p;
+
+    n = (Elem12 *)self[1] - (Elem12 *)self[0];
+    fn_8018D8DC(stream, &n, 1);
+    end = (Elem12 *)self[1];
+    size = end - (Elem12 *)self[0];
+    d = size - n;
+    if (d < 0) {
+        Elem12 zero;
+        Elem12 *zp = &zero;
+        s32 cnt = n - size;
+        fn_80248488(zp, 0, sizeof(zero));
+        fn_803A8290((Elem12Vec *)self, end, cnt, zp);
+    } else if (d > 0) {
+        Vec12Elem *first = (Vec12Elem *)self[1] - d;
+        Vec12Elem *last = (Vec12Elem *)self[1];
+        Vec12_EraseRef(self, &first, &last);
+    }
+    for (p = (Elem12 *)self[0]; p != (Elem12 *)self[1]; p++) {
+        fn_801770F8(p, stream, arg3);
+    }
+}
+
 void fn_803A8750(void *self) {
     extern void fn_803997AC(void *, u32);
     struct LNode {
@@ -13108,6 +13140,15 @@ s32 *fn_803BD14C(s32 *self, s32 *other) {
     return self;
 }
 
+void fn_803BD198(u8 *dst, u8 *src, s32 n) {
+    while (n-- != 0) {
+        fn_803BD14C((s32 *)dst, (s32 *)src);
+        *(Elem12 *)(dst + 0xC) = *(Elem12 *)(src + 0xC);
+        dst += 0x18;
+        src += 0x18;
+    }
+}
+
 void *fn_803BD328(u8 *self, s32 *arr) {
     extern void fn_803BD208(void *, s32, s32);
     extern void fn_802FFF70(void *, void *);
@@ -13395,9 +13436,28 @@ void fn_803BDD5C(Elem12 *first, Elem12 *last, s32 comp) {
     }
 }
 
+void fn_803BDE00(Elem12 *first, Elem12 *last, s32 comp) {
+    struct E { s32 v[3]; };
+    void fn_803BDBC8(Elem12 *, s32, s32, struct E, s32);
+    Elem12 *result = last - 1;
+    struct E val = *(struct E *)result;
+    *result = *first;
+    fn_803BDBC8(first, 0, result - first, val, comp);
+}
+
 void fn_803BDE90(s32 *first, s32 *middle, s32 *last, s32 *val, s32 comp);
 void fn_803BDFC8(s32 *first, s32 *middle, s32 *last, s32 comp) {
     fn_803BDE90(first, middle, last, 0, comp);
+}
+
+void fn_803BE248(Elem12 *last, Elem12 *val, s32 (*comp)(Elem12 *, Elem12 *)) {
+    Elem12 v = *val;
+    Elem12 *next;
+    while (next = last - 1, comp(val, next)) {
+        *last = *next;
+        last = next;
+    }
+    *last = *val;
 }
 
 void fn_803BE44C(Elem12 *first, Elem12 *last, s32 comp) {
