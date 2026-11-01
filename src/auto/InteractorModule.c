@@ -39,6 +39,10 @@ static inline s32 *IMTimer_Init(s32 *p) {
     return p;
 }
 
+static inline void *IMSlot_At(IMSlot *s, u32 i) {
+    return ((void **) s->a)[i];
+}
+
 extern void *fn_8022554C(void *);
 extern void fn_8022F404(void *, void *);
 void *fn_80237A00(void *arg0) {
