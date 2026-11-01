@@ -33,16 +33,19 @@ void fn_800FE28C(void *arg0, s32 arg1) {
     extern void fn_8031EA2C(void *);
     M2C_UNK fn_803A0690(void *, s32);
     M2C_UNK fn_803997AC(void *, s32);
+    void fn_802D20E8(void *);
     extern s32 lbl_804943F0;
     extern char lbl_8040D5E8[];
     void *p;
     void *temp_r9;
     void *temp_r9_2;
+    void *t;
 
+    t = M2C_FIELD(arg0, void **, 0x7C);
     M2C_FIELD(arg0, void **, 0x8C) = lbl_8040D5E8;
     lbl_804943F0 = 0;
-    if (M2C_FIELD(arg0, void **, 0x7C) != NULL) {
-        fn_8031EA2C(M2C_FIELD(arg0, void **, 0x7C));
+    if (t != NULL) {
+        fn_8031EA2C(t);
         M2C_FIELD(arg0, void **, 0x7C) = NULL;
     }
     p = (char *)arg0 + 0x3C;
