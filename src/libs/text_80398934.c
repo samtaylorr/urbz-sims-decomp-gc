@@ -13141,11 +13141,11 @@ s32 *fn_803BD14C(s32 *self, s32 *other) {
 }
 
 void fn_803BD198(u8 *dst, u8 *src, s32 n) {
-    while (n-- != 0) {
+    while (--n != -1) {
         fn_803BD14C((s32 *)dst, (s32 *)src);
-        *(Elem12 *)(dst + 0xC) = *(Elem12 *)(src + 0xC);
-        dst += 0x18;
         src += 0x18;
+        dst += 0x18;
+        *(Elem12 *)(dst - 0xC) = *(Elem12 *)(src - 0xC);
     }
 }
 
@@ -13440,8 +13440,9 @@ void fn_803BDE00(Elem12 *first, Elem12 *last, s32 comp) {
     struct E { s32 v[3]; };
     void fn_803BDBC8(Elem12 *, s32, s32, struct E, s32);
     Elem12 *result = last - 1;
+    Elem12 tmp = *first;
     struct E val = *(struct E *)result;
-    *result = *first;
+    *result = tmp;
     fn_803BDBC8(first, 0, result - first, val, comp);
 }
 
@@ -13451,11 +13452,11 @@ void fn_803BDFC8(s32 *first, s32 *middle, s32 *last, s32 comp) {
 }
 
 void fn_803BE248(Elem12 *last, Elem12 *val, s32 (*comp)(Elem12 *, Elem12 *)) {
-    Elem12 v = *val;
-    Elem12 *next;
-    while (next = last - 1, comp(val, next)) {
+    Elem12 *next = last - 1;
+    while (comp(val, next)) {
         *last = *next;
         last = next;
+        next = last - 1;
     }
     *last = *val;
 }
