@@ -383,10 +383,10 @@ void fn_8003EBB4(void *arg0) {
 void fn_8003EC20(void *arg0) {
     s32 fn_8003AD54(void *);
     void fn_802F52DC(s32, u32, s32);
-    u32 color;
     s32 *arr;
-    s32 *p;
     s32 i;
+    s32 *p;
+    u32 color;
 
     color = 0x955B73F2;
     if (fn_8003AD54(arg0) != 0) {
@@ -395,11 +395,12 @@ void fn_8003EC20(void *arg0) {
     arr = (s32 *)((char *)arg0 + 0x3B4);
     p = arr;
     for (i = 0; i <= 0x16; i++) {
-        if (*p++ != 0) {
+        s32 v = *p++;
+        if (v != 0) {
             if (i == 4) {
                 fn_802F52DC(arr[4], color, M2C_FIELD(M2C_FIELD(arg0, void **, 0x678), s32 *, 8));
             } else {
-                fn_802F52DC(p[-1], color, M2C_FIELD(M2C_FIELD(arg0, void **, 0x674), s32 *, 8));
+                fn_802F52DC(v, color, M2C_FIELD(M2C_FIELD(arg0, void **, 0x674), s32 *, 8));
             }
         }
     }
@@ -410,10 +411,14 @@ void fn_8003ECBC(void *arg0, s32 *arg1) {
 }
 
 void fn_8003ECEC(u32 arg0, u8 *arg1) {
-    arg1[0] = arg0;
-    arg1[1] = arg0 >> 8;
-    arg1[2] = arg0 >> 16;
-    arg1[3] = arg0 >> 24;
+    u8 a = arg0;
+    u8 b = arg0 >> 8;
+    u8 c = arg0 >> 16;
+    u8 d = arg0 >> 24;
+    arg1[0] = a;
+    arg1[1] = b;
+    arg1[2] = c;
+    arg1[3] = d;
 }
 
 u32 fn_8003ED0C(u8 *arg0, u32 arg1, u32 arg2, u32 arg3, u32 arg4) {
@@ -426,7 +431,11 @@ u32 fn_8003ED0C(u8 *arg0, u32 arg1, u32 arg2, u32 arg3, u32 arg4) {
 
     for (y = arg1; y < arg1 + arg3; y++) {
         for (p = arg0; p < arg0 + arg3; p++) {
-            r += p[y * arg4 + arg2];
+            u8 c = p[y * arg4 + arg2];
+            r += c & 0xFF;
+            g += (c >> 8) & 0xFF;
+            b += (c >> 16) & 0xFF;
+            a += (c >> 24) & 0xFF;
         }
     }
     arg3 *= arg3;
