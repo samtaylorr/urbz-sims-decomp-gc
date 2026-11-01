@@ -149,6 +149,15 @@ void fn_803003C4(u8 *self) {
     }
 }
 
+void fn_80300420(u8 *self, s32 arg1) {
+    extern void fn_80302D94(u8 *, s32);
+    s32 i;
+
+    for (i = 0; i < *(s32 *)(self + 4); i++) {
+        fn_80302D94(*(u8 **)self + i * 0x6C, arg1);
+    }
+}
+
 void fn_80300488(u8 *self) {
     extern void fn_803038CC(u8 *);
     s32 i;
@@ -158,12 +167,31 @@ void fn_80300488(u8 *self) {
     }
 }
 
+void fn_803004E4(u8 *self, u8 *other, s32 idx) {
+    s32 i;
+
+    for (i = 0; i < *(s32 *)(self + 4); i++) {
+        fn_8030230C(*(u8 **)self + i * 0x6C, *(u8 **)other + i * 0x6C, idx);
+    }
+}
+
 void fn_80300558(u8 *self, s32 arg1) {
     extern void fn_803023C4(u8 *, s32);
     s32 i;
 
     for (i = 0; i < *(s32 *)(self + 4); i++) {
         fn_803023C4(*(u8 **)self + i * 0x6C, arg1);
+    }
+}
+
+void fn_803005BC(u8 *self, u8 *other) {
+    extern void fn_80302A7C(u8 *, u8 *);
+    s32 i;
+
+    if (other != 0 && *(s32 *)(other + 4) == *(s32 *)(self + 4)) {
+        for (i = 0; i < *(s32 *)(self + 4); i++) {
+            fn_80302A7C(*(u8 **)self + i * 0x6C, *(u8 **)other + i * 0x6C);
+        }
     }
 }
 
@@ -402,30 +430,34 @@ s32 fn_80304198(u8 *self, s32 idx) {
     return p->a[idx];
 }
 
-void fn_803041B0(u8 *self) {
+u8 *fn_803041B0(u8 *self) {
     extern const f32 lbl_803F1878[];
     extern const f32 lbl_803F187C[];
     extern const f32 lbl_803F1880[];
     extern const f32 lbl_803F1884[];
     extern const f32 lbl_803F1888[];
-    Vec3f *a = (Vec3f *)self;
     Vec3f *b = (Vec3f *)(self + 0xC);
     Vec3f *c = (Vec3f *)(self + 0x18);
+    f32 zero;
+    f32 one;
 
     *(f32 *)(self + 0x24) = lbl_803F1878[0];
     *(f32 *)(self + 0x28) = lbl_803F187C[0] * lbl_803F1880[0];
+    zero = lbl_803F1884[0];
+    one = lbl_803F1888[0];
     *(s32 *)(self + 0x30) = 1;
     *(s32 *)(self + 0x34) = 0;
     *(s32 *)(self + 0x2C) = 0;
-    a->x = lbl_803F1884[0];
-    a->y = lbl_803F1884[0];
-    a->z = lbl_803F1884[0];
-    b->x = lbl_803F1884[0];
-    b->z = lbl_803F1884[0];
-    b->y = lbl_803F1888[0];
-    c->x = lbl_803F1884[0];
-    c->z = lbl_803F1888[0];
-    c->y = lbl_803F1884[0];
+    ((Vec3f *)self)->x = zero;
+    ((Vec3f *)self)->y = zero;
+    ((Vec3f *)self)->z = zero;
+    b->x = zero;
+    b->z = zero;
+    b->y = one;
+    c->x = zero;
+    c->z = one;
+    c->y = zero;
+    return self;
 }
 
 void fn_8030422C(u8 *self, Vec3f *a, Vec3f *b, Vec3f *c) {
