@@ -232,7 +232,6 @@ void fn_801B3C50(void) {
 void *fn_801B3C54(void *self, void *arg1) {
     extern u8 lbl_804155D8[];
     extern void fn_803ABFA8(void *);
-    extern void fn_800F687C(void *, void *, s32);
     extern void fn_801B4598(void *, void *);
     s16 fn_801B47D4(void *);
     void fn_801B47DC(void *, s16);
@@ -244,7 +243,7 @@ void *fn_801B3C54(void *self, void *arg1) {
     s = buf;
     M2C_FIELD(self, void **, 0x1C) = M2C_FIELD(arg1, void **, 0x1C);
     M2C_FIELD(self, s8 *, 0x1A) = 0;
-    fn_800F687C(s, s + 8, 0x40);
+    TTQDString_Init(s);
     vt = M2C_FIELD(arg1, void **, 0);
     M2C_FIELD(vt, void (**)(void *, void *), 0x24)((char *)arg1 + M2C_FIELD(vt, s16 *, 0x20), s);
     fn_801B4598(self, s);
@@ -255,15 +254,16 @@ void *fn_801B3C54(void *self, void *arg1) {
 
 void *fn_801B3D00(void *self, void *arg1) {
     extern void fn_801B3C08(void *);
-    extern void fn_800F687C(void *, void *, s32);
+    extern void *fn_800F687C(void *, void *, s32);
     extern void fn_801B4598(void *, void *);
     s16 fn_801B47D4(void *);
     void fn_801B47DC(void *, s16);
-    struct { s32 hdr[2]; char buf[0x40]; } str, *s = &str;
+    char buf[0x48];
+    char *s = buf;
     void *vt;
     fn_801B3C08(self);
     M2C_FIELD(self, void **, 0x1C) = M2C_FIELD(arg1, void **, 0x1C);
-    fn_800F687C(s, s->buf, 0x40);
+    fn_800F687C(s, s + 8, 0x40);
     vt = M2C_FIELD(arg1, void **, 0);
     M2C_FIELD(vt, void (**)(void *, void *), 0x24)((char *)arg1 + M2C_FIELD(vt, s16 *, 0x20), s);
     fn_801B4598(self, s);
