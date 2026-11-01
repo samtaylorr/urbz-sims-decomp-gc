@@ -245,10 +245,11 @@ void fn_80100534(s32 arg0, s32 arg1) {
 }
 
 void fn_80100560(void **out, void *arg1, u32 key) {
+    const u32 *k = &key;
     void *y = M2C_FIELD(arg1, void **, 0x40);
     void *x = M2C_FIELD(y, void **, 4);
     while (x != NULL) {
-        if (!(M2C_FIELD(x, u32 *, 0x10) < key)) {
+        if (!(M2C_FIELD(x, u32 *, 0x10) < *k)) {
             y = x;
             x = M2C_FIELD(y, void **, 8);
         } else {
@@ -335,13 +336,16 @@ void fn_8010120C(void) {
 
 void fn_80101244(s32 *arg0) {
     extern void *lbl_80494FA4;
+    char *obj;
     void *vt;
 
     if (arg0[0] != 3) {
-        vt = *(void **)lbl_80494FA4;
-        ((void (*)(void *))M2C_FIELD(vt, void **, 0x54))((char *)lbl_80494FA4 + M2C_FIELD(vt, s16 *, 0x50));
-        vt = *(void **)lbl_80494FA4;
-        ((void (*)(void *, s32))M2C_FIELD(vt, void **, 0x2C))((char *)lbl_80494FA4 + M2C_FIELD(vt, s16 *, 0x28), 1);
+        obj = lbl_80494FA4;
+        vt = *(void **)obj;
+        ((void (*)(void *))M2C_FIELD(vt, void **, 0x54))(obj + M2C_FIELD(vt, s16 *, 0x50));
+        obj = lbl_80494FA4;
+        vt = *(void **)obj;
+        ((void (*)(void *, s32))M2C_FIELD(vt, void **, 0x2C))(obj + M2C_FIELD(vt, s16 *, 0x28), 1);
     }
 }
 
