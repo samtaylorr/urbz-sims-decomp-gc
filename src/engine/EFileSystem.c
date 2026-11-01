@@ -73,13 +73,20 @@ void fn_802C4D24(EBox *box, EVec3 *pts, s32 n) {
 
 void fn_802C5148(EBox *box, EVec3 *c, f32 r) {
     EVec3 *mx;
-    box->min.x = c->x - r;
-    box->min.y = c->y - r;
-    box->min.z = c->z - r;
+    f32 x, y, z;
+    x = c->x - r;
+    y = c->y - r;
+    z = c->z - r;
+    box->min.x = x;
+    box->min.y = y;
+    box->min.z = z;
     mx = &box->max;
-    mx->x = c->x + r;
-    mx->z = c->z + r;
-    mx->y = c->y + r;
+    x = c->x + r;
+    z = c->z + r;
+    y = c->y + r;
+    mx->x = x;
+    mx->z = z;
+    mx->y = y;
 }
 
 u32 fn_802C51F0(u8 *p, s32 len) {
@@ -177,6 +184,22 @@ s32 *fn_802C5440(s32 *self) {
     self[10] = (s32)lbl_80419270;
     self[9] = 0;
     return self;
+}
+
+void fn_802C5484(void *self, s32 flags) {
+    extern u8 lbl_80419270[];
+    extern void *fn_802D0AB8(void);
+    void fn_802D1A00(void *, void *);
+    void fn_802D20E8(void *);
+
+    M2C_FIELD(self, u8 **, 0x28) = lbl_80419270;
+    fn_802D1A00(fn_802D0AB8(), M2C_FIELD(self, void **, 0x18));
+    fn_802D1A00(fn_802D0AB8(), M2C_FIELD(self, void **, 0x1C));
+    fn_802D1A00(fn_802D0AB8(), M2C_FIELD(self, void **, 0x20));
+    fn_802D1A00(fn_802D0AB8(), M2C_FIELD(self, void **, 0x24));
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
 }
 
 extern s32 lbl_80494DB0;
