@@ -317,6 +317,11 @@ s32 fn_801B5A4C(void *arg0) {
     return p != NULL ? *p : 0;
 }
 
+void *fn_801B5BDC(void *arg0, u8 *arg1) {
+    fn_801B3824(arg0, (TreeKey *)(arg1 + 0x18));
+    return arg0;
+}
+
 s32 fn_801B5DC8(void) {
     return 0;
 }
