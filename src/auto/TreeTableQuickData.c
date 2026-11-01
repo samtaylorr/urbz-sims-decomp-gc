@@ -312,6 +312,11 @@ void fn_801B57DC(void *arg0, s32 flags) {
     }
 }
 
+s32 fn_801B5A4C(void *arg0) {
+    s32 *p = M2C_FIELD(M2C_FIELD(arg0, void **, 4), s32 **, 0x1C);
+    return p != NULL ? *p : 0;
+}
+
 s32 fn_801B5DC8(void) {
     return 0;
 }
@@ -546,15 +551,15 @@ s16 fn_801B6428(void *arg0) {
 s32 fn_801B6434(void *arg0) {
     void *p = M2C_FIELD(arg0, void **, 4);
     s32 ret = 0;
-    if (!(M2C_FIELD(p, s32 *, 0x10) & 0x80)) {
-        void **q = M2C_FIELD(p, void ***, 0x1C);
-        void *r = NULL;
+    void **q;
+    void *r;
+    if ((M2C_FIELD(p, s32 *, 0x10) & 0x80) == 0) {
+        q = M2C_FIELD(p, void ***, 0x1C);
+        r = NULL;
         if (q != NULL) {
             r = *q;
         }
-        if (*(u16 *)r == 0x21) {
-            ret = 1;
-        }
+        ret = *(u16 *)r == 0x21;
     }
     return ret;
 }
@@ -729,6 +734,14 @@ s32 fn_801B65F4(void) {
 }
 
 s32 fn_801B65FC(void) {
+    return 0;
+}
+
+s32 fn_801B6604(void *arg0) {
+    void *p = M2C_FIELD(arg0, void **, 4);
+    if (p != NULL) {
+        return M2C_FIELD(p, s16 *, 6);
+    }
     return 0;
 }
 
