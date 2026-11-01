@@ -464,9 +464,14 @@ void fn_8003F410(void *arg0) {
         s16 pad;
         void *fn;
     } VEntry;
+    typedef struct {
+        char pad[8];
+        u8 unk8;
+        char pad2[0x13];
+    } Entry;
     extern void fn_801CAFCC(void *);
     extern void fn_801CB05C(void *, s32);
-    extern char **fn_801CB188(void *);
+    extern Entry **fn_801CB188(void *);
     extern s32 fn_801CB6F8(void *, s32, s32);
     extern void fn_801CB130(void *, s32);
     extern void fn_8003F4C0(void *, s32);
@@ -480,7 +485,7 @@ void fn_8003F410(void *arg0) {
     }
     fn_801CAFCC(buf);
     fn_801CB05C(buf, M2C_FIELD(info, s32 *, 0x80));
-    if ((*fn_801CB188(buf))[*(s8 *)(info + 0x89) * 0x1C + 8] != 0) {
+    if ((*fn_801CB188(buf))[*(s8 *)(info + 0x89)].unk8 != 0) {
         fn_8003F4C0(arg0, fn_801CB6F8(buf, 0xC, *(s8 *)(info + 0x8A)));
     }
     fn_801CB130(buf, 2);
@@ -488,14 +493,16 @@ void fn_8003F410(void *arg0) {
 
 s32 fn_8003F614(void *self) {
     extern u8 lbl_8041F94C[];
+    u8 *t = lbl_8041F94C;
     void *v = *(void **)((u8 *)self + 0x3B0);
-    if (v == *(void **)(lbl_8041F94C + 0xD8)) {
+    s32 r = -1;
+    if (v == *(void **)(t + 0xD8)) {
         return 0;
     }
-    if (v == *(void **)(lbl_8041F94C + 0xDC)) {
-        return 1;
+    if (v == *(void **)(t + 0xDC)) {
+        r = 1;
     }
-    return -1;
+    return r;
 }
 
 void *fn_8003F758(void *arg0, s32 arg1) {
