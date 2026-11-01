@@ -374,6 +374,18 @@ void fn_80236F4C(void *arg0, s32 arg1) {
     }
 }
 
+void fn_80237044(void *arg0, s32 arg1, f32 arg2) {
+    if (arg1 == 7) {
+        M2C_FIELD(arg0, f32 *, 0x34) = arg2;
+    } else if (arg1 == 8) {
+        M2C_FIELD(arg0, f32 *, 0x38) = arg2;
+    } else if (arg1 == 0xB) {
+        M2C_FIELD(arg0, f32 *, 0x3C) = arg2;
+    } else if (arg1 == 0xC) {
+        M2C_FIELD(arg0, f32 *, 0x40) = arg2;
+    }
+}
+
 void fn_80237084(void *arg0) {
     M2C_UNK fn_80223348(void *);
     fn_80223348(arg0);
