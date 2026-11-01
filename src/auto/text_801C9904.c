@@ -386,9 +386,9 @@ void fn_801CE8BC(s32 arg0) {
     fn_801CB3E4(arg0 + 0xF8);
 }
 
-void fn_801CE8E0(s32 arg0) {
-    M2C_UNK fn_801CB6F8(s32);
-    fn_801CB6F8(arg0 + 0xF8);
+s32 fn_801CE8E0(void *arg0, s32 arg1, u32 arg2) {
+    s32 fn_801CB6F8(void *, s32, u32);
+    return fn_801CB6F8((char *)arg0 + 0xF8, arg1, arg2);
 }
 
 void fn_801CE904(s32 arg0) {
