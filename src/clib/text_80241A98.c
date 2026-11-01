@@ -32,6 +32,58 @@ typedef struct StrFile {
 
 s32 fn_80249390(StrFile *f, const char *fmt, void *ap);
 
+s32 fn_80241C0C(s32 arg0, u32 arg1, u32 arg2, s32 arg3, s32 arg4, s32 arg5) {
+    extern s32 lbl_80440500;
+    extern s32 lbl_80440504;
+    extern s32 lbl_80440510;
+    extern s32 lbl_80440514;
+    extern s32 lbl_803F73B0;
+    extern s32 lbl_803F73B4;
+    void fn_80242054(void);
+    void fn_80241A98(s32, u32, u32, s32);
+
+    if ((arg1 & 0x1F) || (arg2 & 0x1F)) {
+        return -1;
+    }
+    fn_80242054();
+    lbl_80440514 = arg5;
+    lbl_803F73B4 = arg3;
+    fn_80241A98(arg0, arg1, arg2, arg4);
+    lbl_80440510 = arg2;
+    lbl_80440500 = arg0;
+    lbl_80440504 = arg1;
+    lbl_803F73B0 = 1;
+    return 0;
+}
+
+void fn_80241CB0(void) {
+    extern s32 lbl_80440504;
+    extern s32 lbl_80440508;
+    extern s32 lbl_8044050C;
+    s32 fn_802410AC(void);
+    void fn_80241B24(void);
+    void fn_8024162C(void);
+    void fn_802416EC(s32, s32);
+    s32 addr;
+    s32 len;
+
+    addr = lbl_80440504;
+    while (fn_802410AC() == 0) {
+    }
+    *(volatile u32 *)0xCC003000 = 0x1000;
+    fn_80241B24();
+    if (lbl_80440508 != 0) {
+        lbl_80440508--;
+        lbl_80440504 += 0x400;
+        len = 0x400;
+    } else {
+        len = lbl_8044050C;
+        lbl_8044050C = 0;
+    }
+    fn_8024162C();
+    fn_802416EC(addr, len);
+}
+
 void fn_80241ED4(void) {
     extern u8 lbl_80440520[];
     extern s32 lbl_80440518[];
@@ -934,6 +986,19 @@ s32 fn_8024DBB4(char *arg0, s32 (*arg1)()) {
         }
     }
     return var_r28;
+}
+
+s32 fn_8024DD0C(void *arg0, s32 arg1, s32 arg2) {
+    s32 fn_8024DFC8(s32 *, s32, s32, s32);
+    s32 ret;
+
+    ret = fn_8024DFC8(M2C_FIELD(arg0, s32 **, 0x5C), M2C_FIELD(arg0, s16 *, 0xE), arg1, arg2);
+    if (ret >= 0) {
+        M2C_FIELD(arg0, s32 *, 0x58) += ret;
+    } else {
+        M2C_FIELD(arg0, s16 *, 0xC) &= ~0x1000;
+    }
+    return ret;
 }
 
 s32 fn_8024DDE0(void *arg0, s32 arg1, s32 arg2) {
