@@ -193,6 +193,19 @@ void fn_80300750(u8 *self) {
     }
 }
 
+s32 fn_8030081C(u8 *self, s32 arg1) {
+    extern s32 fn_8030417C(void *);
+    extern s32 fn_80304198(u8 *, s32);
+    s32 i;
+
+    for (i = 0; i < *(s32 *)(self + 4); i++) {
+        if (fn_8030417C(*(u8 **)self + i * 0x6C)) {
+            return fn_80304198(*(u8 **)self + i * 0x6C, arg1);
+        }
+    }
+    return 0;
+}
+
 void fn_8030089C(void) {
 
 }
