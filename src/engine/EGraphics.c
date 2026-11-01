@@ -4,6 +4,12 @@
 typedef struct { f32 x, y, z; } Vec3f;
 typedef struct { f32 x, y; } Vec2f;
 
+static inline void Vec3f_Set(Vec3f *v, f32 x, f32 y, f32 z) {
+    v->z = z;
+    v->y = y;
+    v->x = x;
+}
+
 void fn_802D2FD0(void);
 extern s32 lbl_804961C4;
 extern void fn_802EFBA8(void *);
@@ -356,15 +362,14 @@ void fn_802EE654(char *self) {
     void fn_802C9368(void *, f32 *);
     f32 v[3];
     f32 *p = v;
-    char *q = self + 0x40;
     v[0] = lbl_803F0C0C[0];
     p[2] = lbl_803F0C10[0];
     p[1] = lbl_803F0C0C[0];
-    fn_802C8814(q, p);
+    fn_802C8814(self + 0x40, v);
     v[0] = lbl_803F0C0C[0];
     p[1] = lbl_803F0C0C[0];
     p[2] = lbl_803F0C14[0];
-    fn_802C9368(q, p);
+    fn_802C9368(self + 0x40, p);
 }
 
 void fn_802EE6D0(void *self) {
@@ -713,7 +718,8 @@ void fn_802EF220(void *arg0) {
     t.z = lbl_803F0CEC[0];
     t.y = lbl_803F0CEC[0];
     lo = lbl_803F0CF0[0];
-    box.min = box.max = t;
+    box.max = *(Vec3f *)&t.x;
+    box.min = box.max;
     hi = lbl_803F0CF4[0];
     p->z = lo;
     p->y = lo;
