@@ -259,11 +259,7 @@ void fn_80325FD8(void *arg0, Vec3_80325FD8 *dst, Vec3_80325FD8 *src, s32 *first)
     }
     mx = dst[1].v;
     for (i = 0; i < 3; i++) {
-        f32 m = src[0].v[i];
-        if (dst[0].v[i] < m) {
-            m = dst[0].v[i];
-        }
-        dst[0].v[i] = m;
+        dst[0].v[i] = src[0].v[i] > dst[0].v[i] ? dst[0].v[i] : src[0].v[i];
         *mx = dst[1].v[i] > src[1].v[i] ? dst[1].v[i] : src[1].v[i];
         mx++;
     }
@@ -389,7 +385,7 @@ void fn_80327A68(s32 arg0) {
 void fn_80327A9C(void *arg0, void *arg1) {
     char *vt = M2C_FIELD(arg1, char **, 0);
     u8 r = (*(u8 (**)(void *, void *))(vt + 0x74))((char *)arg1 + *(s16 *)(vt + 0x70), M2C_FIELD(arg0, void **, 0x4909C));
-    if (!(r & 1)) {
+    if ((r ^ 1) & 1) {
         vt = M2C_FIELD(arg1, char **, 0);
         (*(void (**)(void *, void *))(vt + 0x84))((char *)arg1 + *(s16 *)(vt + 0x80), M2C_FIELD(arg0, void **, 0x49098));
     }
