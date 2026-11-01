@@ -888,6 +888,31 @@ void *fn_8019F898(void *self) {
     return self;
 }
 
+extern u8 lbl_80414A48[];
+void *fn_8019FB7C(void *self) {
+    Str8_8019F898 s;
+    char *p;
+    void *b;
+    s32 n;
+
+    n = 8;
+    p = (char *)self + 0xd4;
+    fn_80102B5C(self);
+    *(void **)((char *)self + 0x10) = lbl_80414248;
+    do {
+        fn_800F687C(p + 4, p + 0xc, 8);
+        p += 0x14;
+    } while (--n != -1);
+    *(s32 *)((char *)self + 0xd4) = 0;
+    b = Str8_init2(&s, s.data);
+    fn_800F68F0(b, 0, -1);
+    fn_800F6A38((s32)((char *)self + 0xd8), (s32)b);
+    *(void **)((char *)self + 0x10) = lbl_80414A48;
+    fn_80197AC8(self);
+    fn_80197AD4(self, 2, lbl_803DB840);
+    return self;
+}
+
 s32 fn_8019FC9C(void) {
     M2C_UNK fn_800C4744(M2C_UNK *);
     s32 fn_800C4820();
