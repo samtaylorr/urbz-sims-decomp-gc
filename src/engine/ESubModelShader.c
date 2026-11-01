@@ -494,9 +494,9 @@ void fn_80304AB4(void *self, s32 flags) {
     if (M2C_FIELD(self, void **, 0x78) != NULL) {
         fn_8031EA2C(M2C_FIELD(self, void **, 0x78));
     }
-    M2C_FIELD(self, void **, 0x78) = NULL;
-    M2C_FIELD(self, u8 **, 0x58) = lbl_80407900;
     M2C_FIELD(self, void **, 0x74) = NULL;
+    M2C_FIELD(self, u8 **, 0x58) = lbl_80407900;
+    M2C_FIELD(self, void **, 0x78) = NULL;
     fn_80307364(self, flags);
 }
 
