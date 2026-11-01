@@ -7,6 +7,24 @@ typedef struct { s32 w[7]; } Struct1A8_7;
 typedef struct { s32 v; } Struct1B8;
 typedef struct { u8 b[4]; } Struct1B8b;
 typedef struct { s32 w[3]; } Vec3i;
+
+typedef struct {
+    s32 unk0;
+    s32 unk4;
+    void *vtbl;
+} Event1A8;
+
+typedef struct {
+    s32 pad[2];
+    s32 data;
+    void (*fn)(Event1A8 *);
+} Callback1A8;
+
+static inline void Event1A8_Init(Event1A8 *ev, void *vtbl, Callback1A8 *cb) {
+    ev->vtbl = vtbl;
+    ev->unk0 = 3;
+    ev->unk4 = cb->data;
+}
 typedef struct { s16 h[3]; } Elem6;
 typedef struct { Elem6 *begin; Elem6 *end; } VecElem6;
 
@@ -483,10 +501,12 @@ void fn_80234618(void *arg0, void *arg1) {
         void *vt = M2C_FIELD(obj, void **, 0x4);
         char *g = lbl_80496668;
         char *ent = *(char **)g + 0x58;
+        VecElem6 *v;
 
         M2C_FIELD(ent, void (**)(void *, void *), 0x4)(g + *(s16 *)ent,
             M2C_FIELD(vt, void *(**)(void *), 0x2EC)((char *)obj + M2C_FIELD(vt, s16 *, 0x2E8)));
-        VecElem6_EraseToEnd((VecElem6 *)((char *)arg0 + 0x14), M2C_FIELD(arg0, Elem6 **, 0x14));
+        v = (VecElem6 *)((char *)arg0 + 0x14);
+        VecElem6_Erase(v, v->begin, v->end);
         *h = NULL;
     }
 }
