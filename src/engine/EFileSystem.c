@@ -143,6 +143,16 @@ void *fn_802C5E8C(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, u8 *arg5) 
     return arg0;
 }
 
+s32 fn_802C5F64(void *self, s32 a, s32 b, s32 c) {
+    if (a == b) {
+        return c;
+    }
+    if (a == (s32)0x80000000) {
+        return 0;
+    }
+    return 0x80000000;
+}
+
 s32 fn_802C605C(s32 *self) {
     return *self;
 }
