@@ -10,11 +10,11 @@ typedef struct { s32 w[3]; } Vec3i;
 typedef struct { s16 h[3]; } Elem6;
 typedef struct { Elem6 *begin; Elem6 *end; } VecElem6;
 
-static inline void VecElem6_EraseToEnd(VecElem6 *v, Elem6 *begin) {
+static inline void VecElem6_Erase(VecElem6 *v, Elem6 *first, Elem6 *last) {
     Elem6 *p;
-    for (p = begin; p != v->end; p++) {
+    for (p = first; p != last; p++) {
     }
-    v->end = begin;
+    v->end = first;
 }
 
 extern void *fn_8022554C(void *);
@@ -237,11 +237,13 @@ void fn_80232E74(u8 *arg0, Struct1A8_7 *arg1) {
     s32 fn_802337C8(void **, s32, s32);
     extern s32 lbl_8041FC0C[];
     Struct1B8 saved;
+    Struct1B8 *sp;
 
     if (arg1 != NULL) {
-        saved = *(Struct1B8 *)(arg0 + 0x1B8);
+        sp = &saved;
+        *sp = *(Struct1B8 *)(arg0 + 0x1B8);
         *(Struct1A8_7 *)(arg0 + 0x1A8) = *arg1;
-        *(Struct1B8 *)(arg0 + 0x1B8) = saved;
+        *(Struct1B8 *)(arg0 + 0x1B8) = *sp;
         if (fn_802337C8((void **)(arg0 + 0x60), *(s32 *)(arg0 + 0x1BC), *(u8 *)(arg0 + 0x1C0)) != 0) {
             if (lbl_8041FC0C[0] != 0) {
                 fn_80232C74(arg0, *(u8 **)(arg0 + 0x60));
@@ -364,15 +366,16 @@ void fn_802333E4(u8 *arg0) {
         s32 pad[3];
     } tmp, *p;
     s32 *dvt = lbl_80417CF0;
-    u8 *self = arg0;
-    struct { s32 pad[2]; s32 data; void (*fn)(void *); } *cb;
+    u8 *self;
+    s32 *cb;
 
     p = &tmp;
     p->vtbl = lbl_80417F18;
-    tmp.unk0 = 3;
-    cb = (void *)(self + 0x1A8);
-    p->unk4 = cb->data;
-    cb->fn(p);
+    self = arg0;
+    p->unk0 = 3;
+    cb = (s32 *)(self + 0x1A8);
+    p->unk4 = cb[2];
+    ((void (*)(void *))cb[3])(p);
     fn_80234BE8(self + 0x60);
     fn_80232D2C(self, 1);
     p->vtbl = dvt;
@@ -483,7 +486,7 @@ void fn_80234618(void *arg0, void *arg1) {
 
         M2C_FIELD(ent, void (**)(void *, void *), 0x4)(g + *(s16 *)ent,
             M2C_FIELD(vt, void *(**)(void *), 0x2EC)((char *)obj + M2C_FIELD(vt, s16 *, 0x2E8)));
-        VecElem6_Clear((VecElem6 *)((char *)arg0 + 0x14));
+        VecElem6_EraseToEnd((VecElem6 *)((char *)arg0 + 0x14), M2C_FIELD(arg0, Elem6 **, 0x14));
         *h = NULL;
     }
 }
