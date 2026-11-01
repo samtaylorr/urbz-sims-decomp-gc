@@ -356,6 +356,20 @@ void fn_801B48AC(void *self, s32 arg1) {
     }
 }
 
+s32 fn_801B4948(void *arg0, s32 arg1, void **arg2) {
+    void *temp_r9;
+
+    if (arg2 != NULL) {
+        if (arg1 == 1 || arg1 == 0x0BC37D68) {
+            temp_r9 = M2C_FIELD(arg0, void **, 0);
+            M2C_FIELD(temp_r9, void (**)(void *), 0x14)((char *)arg0 + M2C_FIELD(temp_r9, s16 *, 0x10));
+            *arg2 = arg0;
+            return 1;
+        }
+    }
+    return 0;
+}
+
 s32 fn_801B49B8(void *arg0) {
     return ++M2C_FIELD(arg0, s32 *, 0x14);
 }
