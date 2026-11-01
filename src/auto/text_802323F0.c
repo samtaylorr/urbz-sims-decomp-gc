@@ -450,8 +450,8 @@ void fn_80234D3C(void *arg0) {
     q = t.w;
     q[1] = 0;
     t.w[0] = -1;
-    M2C_FIELD(arg0, s32 *, 0) = 0;
     M2C_FIELD(arg0, s32 *, 0x28) = 0;
+    M2C_FIELD(arg0, s32 *, 0) = 0;
     q[1] <<= 4;
     t.w[0] <<= 4;
     M2C_FIELD(arg0, Struct803EB1D8 *, 0x2C) = t;
