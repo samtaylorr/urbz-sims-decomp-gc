@@ -359,6 +359,11 @@ s32 fn_80305908(s32 arg0) {
     return arg0 + 0x48;
 }
 
+f32 *fn_80305988(s32 i) {
+    extern f32 lbl_80454A54[];
+    return &lbl_80454A54[i * 4];
+}
+
 void fn_8030599C(void) {
     fn_8030582C(1, 0xFFFF);
 }
