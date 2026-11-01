@@ -20,6 +20,17 @@ static inline void *ESim_AllocAligned(s32 size) {
     return p;
 }
 
+static inline void ESim_Apply9B19C(void *arg0, s32 v) {
+    extern void fn_8009B19C(void *, s32);
+    extern void fn_8009B1D4(void *, s32);
+    extern void fn_8009B1A4(void *, s32);
+    s32 buf[2];
+
+    fn_8009B19C(buf, (s32)((char *)arg0 + 0x3B4));
+    fn_8009B1D4(buf, v);
+    fn_8009B1A4(buf, 2);
+}
+
 void fn_8003A1D0(void) {
     fn_802D2FD0();
 }
@@ -200,11 +211,11 @@ void fn_8003D024(void) {
 
 }
 
-void fn_8003DAB4(void *self, s32 arg1) {
+void fn_8003DAB4(void *self, void *arg1) {
     extern f32 lbl_803C5CC4[];
-    void fn_802EAD40(void *, s32, s32);
+    void fn_802EAD40(void *, u8, void *);
     void fn_802EC790(void *, s32, f32);
-    u8 *p = (u8 *)self + 0x314;
+    void *p = (u8 *)self + 0x314;
     fn_802EAD40(p, 1, arg1);
     fn_802EC790(p, 0x1000, lbl_803C5CC4[0]);
 }
@@ -368,18 +379,17 @@ void fn_8003EB40(void *arg0) {
     }
 }
 
-void fn_8003EBB4(void *arg0) {
-    extern void fn_8009B19C(void *, s32);
+void fn_8003EBB4(char *arg0) {
+    extern void fn_8009B19C(void *, void *);
     extern void fn_8009B1D4(void *, s32);
     extern void fn_8009B1A4(void *, s32);
-    char *o = M2C_FIELD(arg0, char **, 0x3B0);
-    s32 v = ((s32 (*)(void *))M2C_FIELD(*(char **)(o + 4), void **, 0x124))(o + M2C_FIELD(*(char **)(o + 4), s16 *, 0x120));
-    {
-        s32 buf[2];
-        fn_8009B19C(buf, (s32)((char *)arg0 + 0x3B4));
-        fn_8009B1D4(buf, v);
-        fn_8009B1A4(buf, 2);
-    }
+    char buf[8];
+    char *o = *(char **)(arg0 + 0x3B0);
+    char *vt = *(char **)(o + 4);
+    s32 v = ((s32 (*)(void *))*(void **)(vt + 0x124))(o + *(s16 *)(vt + 0x120));
+    fn_8009B19C(buf, arg0 + 0x3B4);
+    fn_8009B1D4(buf, v);
+    fn_8009B1A4(buf, 2);
 }
 
 void fn_8003EC20(void *arg0) {
