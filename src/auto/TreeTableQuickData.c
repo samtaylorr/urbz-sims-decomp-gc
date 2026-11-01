@@ -215,8 +215,60 @@ void fn_801B3BFC(void *arg0) {
     M2C_FIELD(arg0, s8 *, 0x1A) = 0;
 }
 
+void fn_801B3C08(void *self) {
+    extern void fn_802D20E8(void *);
+    if (M2C_FIELD(self, u8 *, 0x1A) != 0) {
+        fn_802D20E8(M2C_FIELD(self, void **, 0x1C));
+        M2C_FIELD(self, u8 *, 0x1A) = 0;
+        M2C_FIELD(self, void **, 0x1C) = 0;
+    }
+}
+
 void fn_801B3C50(void) {
 
+}
+
+void *fn_801B3C54(void *self, void *arg1) {
+    extern u8 lbl_804155D8[];
+    extern void fn_803ABFA8(void *);
+    extern void fn_800F687C(void *, void *, s32);
+    extern void fn_801B4598(void *, void *);
+    s16 fn_801B47D4(void *);
+    void fn_801B47DC(void *, s16);
+    char buf[0x48];
+    char *s;
+    void *vt;
+    M2C_FIELD(self, void **, 0) = lbl_804155D8;
+    fn_803ABFA8((char *)self + 4);
+    s = buf;
+    M2C_FIELD(self, void **, 0x1C) = M2C_FIELD(arg1, void **, 0x1C);
+    M2C_FIELD(self, s8 *, 0x1A) = 0;
+    fn_800F687C(s, s + 8, 0x40);
+    vt = M2C_FIELD(arg1, void **, 0);
+    M2C_FIELD(vt, void (**)(void *, void *), 0x24)((char *)arg1 + M2C_FIELD(vt, s16 *, 0x20), s);
+    fn_801B4598(self, s);
+    fn_801B47DC(self, fn_801B47D4(arg1));
+    M2C_FIELD(self, s32 *, 0x14) = 0;
+    return self;
+}
+
+void *fn_801B3D00(void *self, void *arg1) {
+    extern void fn_801B3C08(void *);
+    extern void fn_800F687C(void *, void *, s32);
+    extern void fn_801B4598(void *, void *);
+    s16 fn_801B47D4(void *);
+    void fn_801B47DC(void *, s16);
+    char buf[0x48];
+    char *s = buf;
+    void *vt;
+    fn_801B3C08(self);
+    M2C_FIELD(self, void **, 0x1C) = M2C_FIELD(arg1, void **, 0x1C);
+    fn_800F687C(s, s + 8, 0x40);
+    vt = M2C_FIELD(arg1, void **, 0);
+    M2C_FIELD(vt, void (**)(void *, void *), 0x24)((char *)arg1 + M2C_FIELD(vt, s16 *, 0x20), s);
+    fn_801B4598(self, s);
+    fn_801B47DC(self, fn_801B47D4(arg1));
+    return self;
 }
 
 void *fn_801B3D8C(void *self, void *arg1) {
@@ -284,6 +336,25 @@ s32 fn_801B3EC4(void *self, s32 arg1) {
 
 s32 fn_801B3F08(void) {
     return 0x4F424A44;
+}
+
+s32 fn_801B3F14(void *self, s32 arg1, s32 arg2) {
+    extern u8 *lbl_8049665C;
+    extern void fn_801B3C08(void *);
+    void **fn_803AC024(s32 *, s32 *, s32);
+    void *fn_801B3D8C(void *, void *);
+    u8 *obj;
+    s32 *p;
+    s32 n;
+    fn_801B3C08(self);
+    obj = (*(u8 *(**)(u8 *, s32))(*(u8 **)lbl_8049665C + 0x3C))(lbl_8049665C + *(s16 *)(*(u8 **)lbl_8049665C + 0x38), arg1);
+    p = *(s32 **)*(u8 **)(obj + 0xC);
+    n = 0;
+    if (p != NULL) {
+        n = p[-1];
+    }
+    fn_801B3D8C(self, *fn_803AC024(p, p + n, arg2));
+    return 1;
 }
 
 s32 fn_801B44A8(void) {
@@ -394,13 +465,12 @@ s32 fn_801B49B8(void *arg0) {
 }
 
 void fn_801B4CC4(u8 *arg0, s32 arg1, s32 arg2, s32 arg3) {
-    u8 *vt;
-    u8 *obj;
     TreeKey key;
+    u8 *vt;
 
+    fn_801B3814(&key, arg2, 0);
     vt = *(u8 **)arg0 + 0x20;
-    obj = arg0 + *(s16 *)vt;
-    (*(void (**)(u8 *, s32, TreeKey *, s32))(vt + 4))(obj, arg1, (fn_801B3814(&key, arg2, 0), &key), arg3);
+    (*(void (**)(u8 *, s32, TreeKey *, s32))(vt + 4))(arg0 + *(s16 *)vt, arg1, &key, arg3);
 }
 
 s32 fn_801B4D30(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
@@ -504,9 +574,10 @@ s32 fn_801B5A4C(void *arg0) {
 
 M2C_UNK fn_801B5A68(void *arg0) {
     extern u8 lbl_80415808[];
-    TreeKey pad[1];
+    TreeKey pad;
     s32 *vec;
     s32 *alloc;
+    (void)&pad;
     M2C_FIELD(arg0, void **, 0) = lbl_80415808;
     M2C_FIELD(arg0, s32 *, 4) = 0;
     vec = (s32 *)((u8 *)arg0 + 8);
@@ -533,12 +604,12 @@ s32 fn_801B5DD0(void) {
 }
 
 s32 fn_801B5DD8(void *arg0, s32 arg1, s32 arg2) {
-    TreeKey key[1];
+    TreeKey key;
     void *vt;
 
-    ((TreeKey *(*)(TreeKey *, s32, u16))fn_801B3814)(key, arg1, arg2);
+    ((TreeKey *(*)(TreeKey *, s32, u16))fn_801B3814)(&key, arg1, arg2);
     vt = M2C_FIELD(arg0, void **, 0);
-    if (M2C_FIELD(vt, s32 (**)(void *, TreeKey *), 0x2C)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x28), key) == 0) {
+    if (M2C_FIELD(vt, s32 (**)(void *, void *), 0x2C)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x28), &key.a) == 0) {
         return -0x32;
     }
     return 0;
