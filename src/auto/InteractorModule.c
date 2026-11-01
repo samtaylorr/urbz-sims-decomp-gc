@@ -272,17 +272,15 @@ s32 fn_8023B830(void) {
 }
 
 void fn_8023C194(void *arg0, s32 arg1) {
+    extern void *fn_803B67A0(void *);
     extern void fn_803B6674(void *, s32);
     s32 buf[18];
-    s32 *e = IMEvent_Init(buf);
-    IMCallback *cb;
 
-    e[4] = arg1;
-    e[0] = 5;
-    cb = (IMCallback *) ((u8 *) arg0 + 0xDC);
-    e[1] = cb->ctx;
-    cb->fn(e);
-    fn_803B6674(e, 2);
+    fn_803B67A0(buf);
+    buf[4] = arg1;
+    buf[0] = 5;
+    IMCallback_Call((IMCallback *) ((u8 *) arg0 + 0xDC), buf);
+    fn_803B6674(buf, 2);
 }
 
 s32 fn_8023C200(void *arg0) {
