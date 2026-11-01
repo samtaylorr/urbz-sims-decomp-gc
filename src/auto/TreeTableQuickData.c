@@ -215,8 +215,8 @@ void fn_801B3C08(void *self) {
     extern void fn_802D20E8(void *);
     if (M2C_FIELD(self, u8 *, 0x1A) != 0) {
         fn_802D20E8(M2C_FIELD(self, void **, 0x1C));
-        M2C_FIELD(self, u8 *, 0x1A) = 0;
         M2C_FIELD(self, void **, 0x1C) = 0;
+        M2C_FIELD(self, u8 *, 0x1A) = 0;
     }
 }
 
