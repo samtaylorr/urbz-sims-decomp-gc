@@ -65,6 +65,71 @@ void fn_8003D024(void) {
 
 }
 
+void fn_8003E19C(void *arg0, s32 arg1, s32 arg2) {
+    M2C_FIELD(arg0, s32 *, 0x660) = arg2;
+    M2C_FIELD(arg0, s32 *, 0x668) = 0;
+    M2C_FIELD(arg0, s32 *, 0x65C) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x66C) = arg1;
+}
+
+void fn_8003E1B4(void *arg0, s32 arg1) {
+    extern void fn_800A61AC(void *);
+    extern void fn_800A61F8(void *, s32);
+    extern void fn_800A6238(void *, s32, s32, s32, s32);
+    char buf[0x18];
+    char *obj;
+    char *vt;
+
+    fn_800A61AC(buf);
+    obj = M2C_FIELD(arg0, char **, 0x3B0);
+    vt = *(char **)(obj + 4);
+    fn_800A6238(buf, M2C_FIELD(M2C_FIELD(arg0, void **, 0x674), s32 *, 0x20),
+                (*(s32 (**)(void *))(vt + 0x124))(obj + *(s16 *)(vt + 0x120)), arg1, 1);
+    obj = M2C_FIELD(arg0, char **, 0x3B0);
+    vt = *(char **)(obj + 4);
+    (*(void (**)(void *, s32, s32))(vt + 0x114))(obj + *(s16 *)(vt + 0x110), 0x3C,
+        *(s8 *)((*(char *(**)(void *))(vt + 0x124))(obj + *(s16 *)(vt + 0x120)) + 0xA8));
+    fn_800A61F8(buf, 2);
+}
+
+void fn_8003E3A0(void *arg0, s32 arg1) {
+    extern void fn_8009CCE4(void *);
+    extern void fn_8009CD40(void *, s32);
+    extern void fn_8009D0F8(void *, s32);
+    extern void fn_8009D108(void *, s32, s32);
+    extern void fn_8009E244(void *, s32);
+    s32 fn_8003AD54();
+    u8 buf[0x1F8];
+    s32 *p;
+    s32 i;
+    s32 v;
+
+    p = (s32 *)((char *)arg0 + 0x410);
+    fn_8009CCE4(buf);
+    fn_8009D0F8(buf, fn_8003AD54(arg0));
+    for (i = 0; i <= 0x16; i++) {
+        v = *p++;
+        if (v != 0) {
+            fn_8009D108(buf, i, v);
+        }
+    }
+    fn_8009E244(buf, arg1);
+    fn_8009CD40(buf, 2);
+}
+
+void fn_8003E430(void *arg0, s32 arg1) {
+    extern void fn_8003AF00(void *);
+    switch (arg1) {
+    case 0:
+        fn_8003AF00(arg0);
+        break;
+    case 1:
+        fn_8003E1B4(arg0, M2C_FIELD(arg0, s32 *, 0x658));
+        M2C_FIELD(arg0, s32 *, 0x658) = 0;
+        break;
+    }
+}
+
 void fn_8003E4A8(void *arg0) {
     M2C_UNK fn_8003E50C(void *);
     M2C_UNK fn_802D8F90(s32);
