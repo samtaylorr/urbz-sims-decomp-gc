@@ -276,6 +276,26 @@ u32 fn_80252074(u8 *destAddr, u8 *srcAddr, u32 nBytes) {
     }
     return numTransactions;
 }
+
+u32 fn_80252120(u8 *destAddr, u8 *srcAddr, u32 nBytes) {
+    void fn_80251F70(void *, void *, u32);
+    u32 numBlocks = (nBytes + 31) / 32;
+    u32 numTransactions = (numBlocks + 128 - 1) / 128;
+
+    while (numBlocks > 0) {
+        if (numBlocks < 128) {
+            fn_80251F70(destAddr, srcAddr, numBlocks);
+            numBlocks = 0;
+        } else {
+            fn_80251F70(destAddr, srcAddr, 0);
+            numBlocks -= 128;
+            destAddr += 4096;
+            srcAddr += 4096;
+        }
+    }
+    return numTransactions;
+}
+
 #pragma pop
 void fn_802521EC(void) {
     void fn_802500E4(s32);
