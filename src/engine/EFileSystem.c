@@ -4,6 +4,17 @@
 typedef struct { f32 x, y, z; } EVec3;
 typedef struct { EVec3 min; EVec3 max; } EBox;
 
+static inline void EBox_AddPoint(EBox *box, EVec3 *p) {
+    s32 j;
+    for (j = 0; j < 3; j++) {
+        if ((&p->x)[j] < (&box->min.x)[j]) {
+            (&box->min.x)[j] = (&p->x)[j];
+        } else if ((&p->x)[j] > (&box->max.x)[j]) {
+            (&box->max.x)[j] = (&p->x)[j];
+        }
+    }
+}
+
 static inline s32 ListCount(u8 *list) {
     return *(s32 *)(list + 4);
 }
