@@ -57,9 +57,9 @@ s32 fn_80241C0C(s32 arg0, u32 arg1, u32 arg2, s32 arg3, s32 arg4, s32 arg5) {
 }
 
 void fn_80241CB0(void) {
-    extern s32 lbl_80440504;
-    extern s32 lbl_80440508;
-    extern s32 lbl_8044050C;
+    extern s32 lbl_80440504[];
+    extern volatile s32 lbl_80440508[];
+    extern s32 lbl_8044050C[];
     s32 fn_802410AC(void);
     void fn_80241B24(void);
     void fn_8024162C(void);
@@ -67,18 +67,18 @@ void fn_80241CB0(void) {
     s32 addr;
     s32 len;
 
-    addr = lbl_80440504;
+    addr = lbl_80440504[0];
     while (fn_802410AC() == 0) {
     }
     *(volatile u32 *)0xCC003000 = 0x1000;
     fn_80241B24();
-    if (lbl_80440508 != 0) {
-        lbl_80440508--;
-        lbl_80440504 += 0x400;
+    if (lbl_80440508[0] != 0) {
+        lbl_80440508[0]--;
+        lbl_80440504[0] += 0x400;
         len = 0x400;
     } else {
-        len = lbl_8044050C;
-        lbl_8044050C = 0;
+        len = lbl_8044050C[0];
+        lbl_8044050C[0] = 0;
     }
     fn_8024162C();
     fn_802416EC(addr, len);
