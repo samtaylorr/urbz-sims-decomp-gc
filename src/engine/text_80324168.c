@@ -64,11 +64,17 @@ void fn_8032434C(void *self, s32 flags) {
     }
 }
 
+void fn_803243FC(void *arg0, Vec3_80325FD8 *arg1, Vec3_80325FD8 *arg2) {
+    *arg1 = *(Vec3_80325FD8 *)((char *)arg0 + 0x6050);
+    arg2[0] = *(Vec3_80325FD8 *)((char *)arg0 + 0x6070);
+    arg2[1] = *(Vec3_80325FD8 *)((char *)arg0 + 0x6060);
+}
+
 void fn_803246DC(void *arg0, void **arg1) {
     void **node;
 
     for (node = *arg1; node != NULL; node = node[2]) {
-        M2C_FIELD(arg0, void **, 0x49120 + M2C_FIELD(arg0, s32 *, 0x4B120) * 4) = node[0];
+        ((void **)((char *)arg0 + 0x49120))[M2C_FIELD(arg0, s32 *, 0x4B120)] = node[0];
         M2C_FIELD(arg0, s32 *, 0x4B120)++;
     }
 }
@@ -89,7 +95,7 @@ void fn_8032471C(void *arg0, void *arg1) {
         } else {
             M2C_FIELD(arg1, s32 *, 0x40) = r;
             M2C_FIELD(arg1, u32 *, 0x64) &= ~0x80;
-            M2C_FIELD(arg0, void **, 0x49120 + M2C_FIELD(arg0, s32 *, 0x4B120) * 4) = arg1;
+            ((void **)((char *)arg0 + 0x49120))[M2C_FIELD(arg0, s32 *, 0x4B120)] = arg1;
             M2C_FIELD(arg0, s32 *, 0x4B120)++;
         }
     }
