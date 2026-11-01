@@ -290,13 +290,13 @@ void fn_80302230(void) {
 s32 fn_8030230C(u8 *self, u8 *other, s32 idx) {
     extern void fn_80302234(u8 *);
     extern void fn_803023D8(u8 *);
-    s32 n = *(s32 *)(self + 0x18);
+    struct { u8 pad[0x38]; u8 *a[4]; } *p = (void *)self;
     s32 i;
 
-    if (n != *(s32 *)(other + 0x18)) {
+    if (*(s32 *)(self + 0x18) != *(s32 *)(other + 0x18)) {
         return 0;
     }
-    for (i = 0; i < n; i++) {
+    for (i = 0; i < *(s32 *)(self + 0x18); i++) {
         if (*(s32 *)(*(u8 **)(self + 0x14) + i * 0x34 + 0x18) != *(s32 *)(*(u8 **)(other + 0x14) + i * 0x34 + 0x18)) {
             return 0;
         }
@@ -305,7 +305,7 @@ s32 fn_8030230C(u8 *self, u8 *other, s32 idx) {
         fn_80302234(self);
         fn_803023D8(self);
     }
-    ((u8 **)(self + 0x38))[idx] = other;
+    p->a[idx] = other;
     return 1;
 }
 
