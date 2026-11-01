@@ -7,11 +7,15 @@ static inline s32 TreeIt_ne(const It_80100494 *a, const It_80100494 *b) {
     return a->node != b->node;
 }
 
+static inline s32 TreeIt_node(It_80100494 *it) {
+    return it->node;
+}
+
 static inline void Tree_erase(char *tree, It_80100494 pos) {
     void *fn_8039F9B0(s32, void *, void *, void *);
     M2C_UNK fn_803997AC(void *, s32);
     char *hdr = M2C_FIELD(tree, char **, 4);
-    void *p = fn_8039F9B0(pos.node, hdr + 4, hdr + 8, hdr + 0xC);
+    void *p = fn_8039F9B0(TreeIt_node(&pos), hdr + 4, hdr + 8, hdr + 0xC);
     if (p != NULL) {
         fn_803997AC(p, 0x18);
     }
@@ -19,7 +23,13 @@ static inline void Tree_erase(char *tree, It_80100494 pos) {
 }
 
 static inline void Map_erase(char *tree, It_80100494 pos) {
-    Tree_erase(tree, pos);
+    Tree_erase(tree, *&pos);
+}
+
+static inline It_80100494 Tree_end(char *tree) {
+    It_80100494 it;
+    it.node = M2C_FIELD(tree, s32 *, 4);
+    return it;
 }
 
 s32 fn_800FE02C(s32 arg0, s32 arg1, s32 arg2) {
@@ -318,36 +328,15 @@ void fn_80100268(void *arg0, s32 arg1, s32 arg2) {
 }
 
 void fn_80100494(void *arg0, s32 arg1, s32 arg2) {
-    void fn_80100100(s32 *, void *, s32, s32);
-    void *fn_8039F9B0(s32, void *, void *, void *);
-    void fn_803997AC(void *, s32);
+    void fn_80100100(It_80100494 *, void *, s32, s32);
     char *tree = (char *)arg0 + 0x3C;
-    s32 it[2];
-    s32 end;
-    s32 pos;
-    s32 node;
-    const s32 *a;
-    const s32 *b;
-    s32 *pp;
-    s32 *np;
-    char *hdr;
-    void *p;
+    It_80100494 it[2];
+    It_80100494 end;
 
     fn_80100100(it, arg0, arg1, arg2);
-    end = M2C_FIELD(tree, s32 *, 4);
-    a = &it[0];
-    b = &end;
-    if (*a != *b) {
-        pos = it[0];
-        pp = &pos;
-        node = *pp;
-        np = &node;
-        hdr = M2C_FIELD(tree, char **, 4);
-        p = fn_8039F9B0(*np, hdr + 4, hdr + 8, hdr + 0xC);
-        if (p != NULL) {
-            fn_803997AC(p, 0x18);
-        }
-        M2C_FIELD(tree, s32 *, 8) = M2C_FIELD(tree, s32 *, 8) - 1;
+    end.node = M2C_FIELD(tree, s32 *, 4);
+    if (TreeIt_ne(&it[0], &end)) {
+        Map_erase(tree, it[0]);
     }
 }
 
