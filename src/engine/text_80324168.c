@@ -1,6 +1,8 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+typedef struct { f32 v[3]; } Vec3_80325FD8;
+
 void fn_8032421C(void *);
 
 void fn_802D2FD0(void);
@@ -136,14 +138,14 @@ void fn_803257E8(void *arg0, void *arg1) {
 void fn_8032582C(void *arg0, void *arg1) {
     void *fn_802CBB10(void *);
     void fn_802CB5C4(void *, void *);
-    void *self = arg0;
-    void *list = self + 0x48EFC;
-    void *node = fn_802CBB10(list);
+    void *node = fn_802CBB10(arg0 + 0x48EFC);
     if (node != 0) {
-        fn_802CB5C4(list, node);
+        fn_802CB5C4(arg0 + 0x48EFC, node);
         M2C_FIELD(arg1, s32 *, 0x88) = 0;
+        M2C_FIELD(arg0, s32 *, 0x28) = 1;
+    } else {
+        M2C_FIELD(arg0, s32 *, 0x28) = 1;
     }
-    M2C_FIELD(self, s32 *, 0x28) = 1;
 }
 
 void fn_80325888(void) {
