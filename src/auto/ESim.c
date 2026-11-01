@@ -344,7 +344,8 @@ s32 fn_8003FA8C(void *arg0) {
 }
 
 s32 fn_8003FA94(void *arg0, s32 i) {
-    return ((s32 *)((u8 *)arg0 + 0x3B4))[i];
+    typedef struct { u8 pad[0x3B4]; s32 arr[1]; } S;
+    return ((S *)arg0)->arr[i];
 }
 
 s32 fn_8003FAA4(void *arg0) {
