@@ -18,6 +18,10 @@ static inline IMSlot *IMSlot_Init(IMSlot *s) {
     return s;
 }
 
+static inline u32 IMSlot_Size(IMSlot *s) {
+    return (s32 *) s->b - (s32 *) s->a;
+}
+
 extern void *fn_8022554C(void *);
 extern void fn_8022F404(void *, void *);
 void *fn_80237A00(void *arg0) {
