@@ -141,6 +141,15 @@ void fn_8003F3CC(void *arg0) {
     }
 }
 
+void *fn_8003F758(void *arg0, s32 arg1) {
+    void *fn_802F3F14(void *);
+    extern u8 lbl_80407E40[];
+    fn_802F3F14(arg0);
+    M2C_FIELD(arg0, s32 *, 0x300) = arg1;
+    M2C_FIELD(arg0, void **, 0) = lbl_80407E40;
+    return arg0;
+}
+
 void fn_8003F79C(void *arg0, s32 arg1) {
     void fn_802F3FC8(void *, s32);
     void *fn_802D0AB8(void);
@@ -155,7 +164,7 @@ void fn_8003F79C(void *arg0, s32 arg1) {
 }
 
 void fn_8003F7F8(void) {
-    void *fn_80248488(void *, s32, u32);
+    void fn_80248488(void *, s32, u32);
     void *fn_8003F9E0(void *);
     u32 size = 0x680;
     void *obj;
