@@ -256,6 +256,8 @@ void fn_80252004(void *addr, u32 nBytes) {
     fn_80251F0C(0, addr, numBlocks);
 }
 
+#pragma push
+#pragma peephole off
 u32 fn_80252074(u8 *destAddr, u8 *srcAddr, u32 nBytes) {
     void fn_80251F4C(void *, void *, u32);
     u32 numBlocks = (nBytes + 31) / 32;
@@ -274,7 +276,7 @@ u32 fn_80252074(u8 *destAddr, u8 *srcAddr, u32 nBytes) {
     }
     return numTransactions;
 }
-
+#pragma pop
 void fn_802521EC(void) {
     void fn_802500E4(s32);
     void fn_802500EC(u32);
@@ -362,6 +364,12 @@ void fn_802523B4(s32 enable) {
         reg = fn_8024FF88();
         fn_8024FF90(reg & ~0x80000);
     }
+}
+
+void fn_80252648(void *, void *);
+void fn_8025276C(void *, void *, void *);
+void fn_8025289C(void *a, void *b) {
+    fn_8025276C(a, b, a);
 }
 
 s32 fn_80252900(void) {
