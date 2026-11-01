@@ -460,10 +460,11 @@ void fn_80234D3C(void *arg0) {
 void fn_80234DCC(void *arg0) {
     extern s32 lbl_80494424;
     extern void fn_8022BF14(s32, void *);
+    void *p = M2C_FIELD(arg0, void **, 0x0);
 
-    if (M2C_FIELD(arg0, void **, 0x0) != NULL) {
+    if (p != NULL) {
         lbl_80494424 = 1;
-        fn_8022BF14(M2C_FIELD(arg0, s16 *, 0x10), M2C_FIELD(arg0, void **, 0x0));
+        fn_8022BF14(M2C_FIELD(arg0, s16 *, 0x10), p);
         lbl_80494424 = 0;
     }
 }
@@ -471,10 +472,11 @@ void fn_80234DCC(void *arg0) {
 void fn_80234E0C(void *arg0, s32 arg1) {
     extern s32 lbl_80494424;
     extern void fn_8022BF14(s32, void *);
+    void *p = M2C_FIELD(arg0, void **, 0x0);
 
-    if (M2C_FIELD(arg0, void **, 0x0) != NULL) {
+    if (p != NULL) {
         lbl_80494424 = 1;
-        fn_8022BF14(arg1, M2C_FIELD(arg0, void **, 0x0));
+        fn_8022BF14(arg1, p);
         lbl_80494424 = 0;
     }
 }
