@@ -1,6 +1,9 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+typedef struct { f32 x, y, z; } EVec3;
+typedef struct { EVec3 min; EVec3 max; } EBox;
+
 static inline s32 ListCount(u8 *list) {
     return *(s32 *)(list + 4);
 }
@@ -35,12 +38,13 @@ void fn_802C47FC(void) {
 
 }
 
-u32 fn_802C51F0(u8 *p, s32 len) {
+u32 fn_802C51F0(u8 *p, u32 len) {
     extern u32 lbl_803FCE68[];
     u32 crc = -1;
 
     while (len-- != 0) {
-        crc = (crc >> 8) ^ lbl_803FCE68[(u8)crc ^ *p++];
+        crc = (crc >> 8) ^ lbl_803FCE68[(crc & 0xFF) ^ *p];
+        p++;
     }
     return ~crc;
 }
