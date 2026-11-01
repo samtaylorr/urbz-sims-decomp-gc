@@ -310,7 +310,8 @@ s32 fn_8030230C(u8 *self, u8 *other, s32 idx) {
 }
 
 void fn_803023C4(u8 *self, s32 idx) {
-    ((s32 *)(self + 0x38))[idx] = 0;
+    struct { u8 pad[0x38]; s32 a[4]; } *p = (void *)self;
+    p->a[idx] = 0;
 }
 
 void fn_803023D8(u8 *self) {
