@@ -224,10 +224,12 @@ void fn_802C5198(f32 *out, f32 *in) {
 u32 fn_802C51F0(u8 *p, s32 len) {
     extern u32 lbl_803FCE68[];
     u32 crc = -1;
+    s32 i;
 
-    while (len != 0) {
-        len--;
-        crc = (crc >> 8) ^ lbl_803FCE68[(crc & 0xFF) ^ *p++];
+    for (i = len - 1; len != 0; len = i--) {
+        u32 idx = crc & 0xFF;
+        idx ^= *p++;
+        crc = (crc >> 8) ^ lbl_803FCE68[idx];
     }
     return ~crc;
 }
@@ -351,17 +353,32 @@ void *fn_802C5B1C(void *self, void *stream) {
         if (buf[i] == 0) {
             break;
         }
-        if (i == 0x3E) {
-            i++;
+        i++;
+        if (i == 0x3F) {
             buf[63] = 0;
             fn_802D41A8(stream, buf);
             i = 0;
-        } else {
-            i++;
         }
     }
     fn_802D41A8(stream, buf);
     return self;
+}
+
+void *fn_802C5BBC(void *arg0, void *arg1) {
+    void *vt;
+    void *obj;
+    u16 val;
+
+    vt = M2C_FIELD(arg1, void **, 0x0);
+    obj = M2C_FIELD(vt, void *(**)(void *), 0x14)((char *)arg1 + M2C_FIELD(vt, s16 *, 0x10));
+    vt = M2C_FIELD(arg0, void **, 0x28);
+    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x1C)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x18), &val, 2);
+    M2C_FIELD(obj, u16 *, 0x16) = val;
+    if (M2C_FIELD(obj, s32 *, 0x18) == 0) {
+        vt = M2C_FIELD(arg1, void **, 0x0);
+        M2C_FIELD(vt, void (**)(void *, void *), 0x4C)((char *)arg1 + M2C_FIELD(vt, s16 *, 0x48), arg0);
+    }
+    return arg0;
 }
 
 void *fn_802C5C58(void *arg0, s32 *arg1) {
