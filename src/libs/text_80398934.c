@@ -2775,6 +2775,12 @@ void fn_8039ECCC(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x18) = 0;
 }
 
+void fn_8039ECD8(s32 *self) {
+    extern f32 lbl_803D5024[];
+    void fn_800E3B38(s32, s32, f32);
+    fn_800E3B38(self[2], 6, lbl_803D5024[0]);
+}
+
 void fn_8039ED08(void) {
     fn_80048A48(lbl_8041F754);
 }
@@ -13457,13 +13463,7 @@ static inline void Elem12_PopHeapAux(Elem12 *first, Elem12 *last, Elem12 *result
 }
 
 void fn_803BDE00(Elem12 *first, Elem12 *last, s32 comp) {
-    struct E { s32 v[3]; };
-    void fn_803BDBC8(Elem12 *, s32, s32, struct E, s32);
-    Elem12 *result = last - 1;
-    Elem12 tmp = *first;
-    struct E val = *(struct E *)result;
-    *result = tmp;
-    fn_803BDBC8(first, 0, result - first, val, comp);
+    Elem12_PopHeapAux(first, last - 1, last - 1, *(struct Elem12Val *)(last - 1), comp);
 }
 
 void fn_803BDE90(s32 *first, s32 *middle, s32 *last, s32 *val, s32 comp);
@@ -13479,6 +13479,15 @@ void fn_803BE248(Elem12 *last, Elem12 *val, s32 (*comp)(Elem12 *, Elem12 *)) {
         next = last - 1;
     }
     *last = *val;
+}
+
+void fn_803BE3DC(Elem12 *first, Elem12 *last, s32 unused, s32 comp) {
+    Elem12 tmp;
+
+    for (; first != last; first++) {
+        tmp = *first;
+        fn_803BE248(first, &tmp, (s32 (*)(Elem12 *, Elem12 *))comp);
+    }
 }
 
 void fn_803BE44C(Elem12 *first, Elem12 *last, s32 comp) {
