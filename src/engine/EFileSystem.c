@@ -105,7 +105,10 @@ void fn_802C4D24(EBox *box, EVec3 *pts, s32 n) {
     } else {
         EVec3 tmp;
         EVec3 *t = &tmp;
-        t->z = t->y = t->x = lbl_803F007C[0];
+        f32 f = lbl_803F007C[0];
+        t->z = f;
+        t->y = f;
+        tmp.x = f;
         box->max = *t;
         box->min = box->max;
     }
@@ -134,20 +137,20 @@ void fn_802C5198(f32 *out, f32 *in) {
     f32 r, x, y, z;
 
     r = in[3];
-    x = in[0];
-    y = in[1];
-    z = in[2];
-    out[0] = x - r;
-    out[1] = y - r;
-    out[2] = z - r;
+    x = in[0] - r;
+    y = in[1] - r;
+    z = in[2] - r;
+    out[0] = x;
+    out[1] = y;
+    out[2] = z;
     max = out + 3;
     r = in[3];
-    x = in[0];
-    z = in[2];
-    y = in[1];
-    max[0] = x + r;
-    max[2] = z + r;
-    max[1] = y + r;
+    x = in[0] + r;
+    z = in[2] + r;
+    y = in[1] + r;
+    max[0] = x;
+    max[2] = z;
+    max[1] = y;
 }
 
 u32 fn_802C51F0(u8 *p, s32 len) {
