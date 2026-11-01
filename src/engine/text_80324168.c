@@ -327,9 +327,10 @@ s32 fn_803262D8(void *a, void *b) {
 
 void fn_80326328(void *arg0, void *arg1) {
     char *vt = *(char **)arg1;
-    if (!(*(u8 (**)(void *, s32))(vt + 0x74))(arg1 + *(s16 *)(vt + 0x70), M2C_FIELD(arg0, s32 *, 0x4909C))) {
+    u8 (*fn)(void *, s32) = *(u8 (**)(void *, s32))(vt + 0x74);
+    if ((fn((char *)arg1 + *(s16 *)(vt + 0x70), M2C_FIELD(arg0, s32 *, 0x4909C)) ^ 1) & 1) {
         vt = *(char **)arg1;
-        (*(void (**)(void *, s32, s32))(vt + 0x7C))(arg1 + *(s16 *)(vt + 0x78), M2C_FIELD(arg0, s32 *, 0x49098), M2C_FIELD(arg0, s32 *, 0x4909C));
+        (*(void (**)(void *, s32, s32))(vt + 0x7C))((char *)arg1 + *(s16 *)(vt + 0x78), M2C_FIELD(arg0, s32 *, 0x49098), M2C_FIELD(arg0, s32 *, 0x4909C));
     }
 }
 
