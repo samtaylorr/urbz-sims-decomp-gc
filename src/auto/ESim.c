@@ -20,6 +20,13 @@ static inline void *ESim_AllocAligned(s32 size) {
     return p;
 }
 
+static inline void *ESim_AllocZeroed(s32 size) {
+    void *fn_80248488(void *, s32, u32);
+    void *p = ESim_AllocAligned(size);
+    fn_80248488(p, 0, size);
+    return p;
+}
+
 void fn_8003A1D0(void) {
     fn_802D2FD0();
 }
@@ -66,9 +73,19 @@ void fn_8003D024(void) {
 }
 
 void fn_8003E19C(void *arg0, s32 arg1, s32 arg2) {
-    M2C_FIELD(arg0, s32 *, 0x660) = arg2;
-    M2C_FIELD(arg0, s32 *, 0x668) = 0;
-    M2C_FIELD(arg0, s32 *, 0x66C) = M2C_FIELD(arg0, s32 *, 0x65C) = arg1;
+    typedef struct {
+        char pad[0x65C];
+        s32 a;
+        s32 b;
+        s32 c;
+        s32 d;
+        s32 e;
+    } S;
+    S *s = (S *)arg0;
+    s->b = arg2;
+    s->d = 0;
+    s->a = arg1;
+    s->e = arg1;
 }
 
 void fn_8003E1B4(void *arg0, s32 arg1) {
@@ -237,13 +254,25 @@ void fn_8003F79C(void *arg0, s32 arg1) {
 }
 
 void fn_8003F7F8(void) {
-    void fn_80248488();
+    void *fn_80248488(void *, s32, u32);
     void *fn_8003F9E0(void *);
-    void *obj;
+    void *fn_802D0AB8(void);
+    void *fn_802D0B3C(void);
+    void *fn_802D197C(void *, s32, s32);
+    void *fn_802DC3C0(void *, s32, s32, s32, s32);
+    void *heap;
+    void *p;
 
-    obj = ESim_AllocAligned(0x680);
-    fn_80248488(obj, 0, 0x680);
-    fn_8003F9E0(obj);
+    heap = fn_802D0AB8();
+    p = fn_802D197C(heap, 0x680, 0x10);
+    if (p == NULL) {
+        p = fn_802DC3C0(heap, 0x680, 0x10, 0, 0);
+        if (p == NULL && heap == fn_802D0AB8()) {
+            p = fn_802DC3C0(fn_802D0B3C(), 0x680, 0x10, 0, 0);
+        }
+    }
+    fn_80248488(p, 0, 0x680);
+    fn_8003F9E0(p);
 }
 
 void fn_8003F8A0(void) {
