@@ -346,6 +346,38 @@ s32 fn_80304198(u8 *self, s32 idx) {
     return p->a[idx];
 }
 
+void fn_803041B0(u8 *self) {
+    extern const f32 lbl_803F1878[];
+    extern const f32 lbl_803F187C[];
+    extern const f32 lbl_803F1880[];
+    extern const f32 lbl_803F1884[];
+    extern const f32 lbl_803F1888[];
+    Vec3f *a = (Vec3f *)self;
+    Vec3f *b = (Vec3f *)(self + 0xC);
+    Vec3f *c = (Vec3f *)(self + 0x18);
+
+    *(f32 *)(self + 0x24) = lbl_803F1878[0];
+    *(f32 *)(self + 0x28) = lbl_803F187C[0] * lbl_803F1880[0];
+    *(s32 *)(self + 0x30) = 1;
+    *(s32 *)(self + 0x34) = 0;
+    *(s32 *)(self + 0x2C) = 0;
+    a->x = lbl_803F1884[0];
+    a->y = lbl_803F1884[0];
+    a->z = lbl_803F1884[0];
+    b->x = lbl_803F1884[0];
+    b->z = lbl_803F1884[0];
+    b->y = lbl_803F1888[0];
+    c->x = lbl_803F1884[0];
+    c->z = lbl_803F1888[0];
+    c->y = lbl_803F1884[0];
+}
+
+void fn_8030422C(u8 *self, Vec3f *a, Vec3f *b, Vec3f *c) {
+    *(Vec3f *)(self + 0x0) = *a;
+    *(Vec3f *)(self + 0xC) = *b;
+    *(Vec3f *)(self + 0x18) = *c;
+}
+
 void fn_803042D4(s32 arg0, s32 arg1) {
     M2C_UNK fn_802E2288(s32, s32, s32, s32);
     fn_802E2288(arg1, arg0, arg0 + 0xC, arg0 + 0x18);
@@ -378,10 +410,10 @@ void fn_80305854(void *self, s32 arg1, s32 arg2) {
 
 void fn_803058C4(u8 *self, void *src) {
     struct blk { s32 w[5]; };
-    struct one { u32 a : 8; u32 b : 24; };
-    struct one saved = *(struct one *)(self + 0x58);
+    union one { s32 i; f32 f; };
+    union one saved = *(union one *)(self + 0x58);
     *(struct blk *)(self + 0x48) = *(struct blk *)src;
-    *(struct one *)(self + 0x58) = saved;
+    *(union one *)(self + 0x58) = saved;
 }
 
 s32 fn_80305908(s32 arg0) {
