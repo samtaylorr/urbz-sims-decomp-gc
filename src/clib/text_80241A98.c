@@ -32,28 +32,70 @@ typedef struct StrFile {
 
 s32 fn_80249390(StrFile *f, const char *fmt, void *ap);
 
+void fn_80241B24(void) {
+    extern u32 lbl_80440510[];
+    extern s32 lbl_803F73B0[];
+    extern u32 lbl_80440508[];
+    extern u32 lbl_8044050C[];
+    u32 n;
+
+    n = lbl_80440510[0];
+    if (n > 0x1FC00) {
+        n = 0x1FC00;
+    }
+    lbl_80440510[0] -= n;
+    lbl_803F73B0[0] = 2;
+    lbl_80440508[0] = n >> 10;
+    lbl_8044050C[0] = n & 0x3FF;
+}
+
+void fn_80241B80(void) {
+    extern s32 lbl_80440504[];
+    extern volatile s32 lbl_80440508[];
+    extern s32 lbl_8044050C[];
+    void fn_80241B24(void);
+    void fn_8024162C(void);
+    void fn_8024167C(s32, s32);
+    s32 addr;
+    s32 len;
+
+    addr = lbl_80440504[0];
+    *(volatile u32 *)0xCC003000 = 0x1000;
+    fn_80241B24();
+    if (lbl_80440508[0] != 0) {
+        lbl_80440508[0]--;
+        lbl_80440504[0] += 0x400;
+        len = 0x400;
+    } else {
+        len = lbl_8044050C[0];
+        lbl_8044050C[0] = 0;
+    }
+    fn_8024162C();
+    fn_8024167C(addr, len);
+}
+
 s32 fn_80241C0C(s32 arg0, u32 arg1, u32 arg2, s32 arg3, s32 arg4, s32 arg5) {
-    extern s32 lbl_80440500;
-    extern s32 lbl_80440504;
-    extern s32 lbl_80440510;
-    extern s32 lbl_80440514;
-    extern s32 lbl_803F73B0;
-    extern s32 lbl_803F73B4;
+    extern s32 lbl_80440500[];
+    extern s32 lbl_80440504[];
+    extern volatile s32 lbl_80440510[];
+    extern s32 lbl_80440514[];
+    extern s32 lbl_803F73B0[];
+    extern s32 lbl_803F73B4[];
     void fn_80242054(void);
     void fn_80241A98(s32, u32, u32, s32);
 
-    if ((arg1 & 0x1F) || (arg2 & 0x1F)) {
-        return -1;
+    if (!(arg1 & 0x1F) && !(arg2 & 0x1F)) {
+        fn_80242054();
+        lbl_80440514[0] = arg5;
+        lbl_803F73B4[0] = arg3;
+        fn_80241A98(arg0, arg1, arg2, arg4);
+        lbl_80440510[0] = arg2;
+        lbl_80440500[0] = arg0;
+        lbl_80440504[0] = arg1;
+        lbl_803F73B0[0] = 1;
+        return 0;
     }
-    fn_80242054();
-    lbl_80440514 = arg5;
-    lbl_803F73B4 = arg3;
-    fn_80241A98(arg0, arg1, arg2, arg4);
-    lbl_80440510 = arg2;
-    lbl_80440500 = arg0;
-    lbl_80440504 = arg1;
-    lbl_803F73B0 = 1;
-    return 0;
+    return -1;
 }
 
 void fn_80241CB0(void) {
@@ -999,6 +1041,16 @@ s32 fn_8024DD0C(void *arg0, s32 arg1, s32 arg2) {
         M2C_FIELD(arg0, s16 *, 0xC) &= ~0x1000;
     }
     return ret;
+}
+
+s32 fn_8024DD70(char *f, s32 buf, s32 n) {
+    s32 fn_8024DF14(s32, s32, s32, s32);
+    s32 fn_8024E020(s32, s32, s32, s32);
+    if (*(s16 *)(f + 0xc) & 0x100) {
+        fn_8024DF14(*(s32 *)(f + 0x5c), *(s16 *)(f + 0xe), 0, 2);
+    }
+    *(s16 *)(f + 0xc) &= ~0x1000;
+    return fn_8024E020(*(s32 *)(f + 0x5c), *(s16 *)(f + 0xe), buf, n);
 }
 
 s32 fn_8024DDE0(void *arg0, s32 arg1, s32 arg2) {
