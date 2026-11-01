@@ -81,6 +81,7 @@ void fn_803246DC(void *arg0, void **arg1) {
 }
 
 void fn_8032471C(void *arg0, void *arg1) {
+    typedef struct { char pad[0x49120]; void *items[0x800]; s32 count; } Stack;
     extern s32 fn_802D2540(void *, void *);
     extern u8 lbl_80493920[];
     char *vt;
@@ -96,8 +97,8 @@ void fn_8032471C(void *arg0, void *arg1) {
         } else {
             M2C_FIELD(arg1, s32 *, 0x40) = r;
             M2C_FIELD(arg1, u32 *, 0x64) &= ~0x80;
-            ((void **)((char *)arg0 + 0x49120))[M2C_FIELD(arg0, s32 *, 0x4B120)] = arg1;
-            M2C_FIELD(arg0, s32 *, 0x4B120)++;
+            ((Stack *)arg0)->items[((Stack *)arg0)->count] = arg1;
+            ((Stack *)arg0)->count++;
         }
     }
 }
