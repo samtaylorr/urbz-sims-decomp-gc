@@ -220,13 +220,15 @@ void *fn_801B3D8C(void *self, void *arg1) {
     extern void fn_800F687C(void *, void *, s32);
     extern void fn_800F68F0(void *, const char *, s32);
     extern void fn_801B4598(void *, void *);
+    void fn_801B47DC(void *, s16);
     extern char lbl_803DC200[];
     char buf[0x48];
+    char *s = buf;
     fn_801B3C08(self);
     M2C_FIELD(self, void **, 0x1C) = arg1;
-    fn_800F687C(buf, buf + 8, 0x40);
-    fn_800F68F0(buf, lbl_803DC200, -1);
-    fn_801B4598(self, buf);
+    fn_800F687C(s, s + 8, 0x40);
+    fn_800F68F0(s, lbl_803DC200, -1);
+    fn_801B4598(self, s);
     fn_801B47DC(self, M2C_FIELD(arg1, s16 *, 0xBC));
     return self;
 }
@@ -246,24 +248,30 @@ void fn_801B3E38(void *self, void *arg1) {
     extern void fn_800F687C(void *, void *, s32);
     extern void fn_800F68F0(void *, const char *, s32);
     extern void fn_801B4598(void *, void *);
+    void fn_801B47DC(void *, s16);
     extern char lbl_803DC214[];
     char buf[0x48];
+    char *s;
     fn_801B3C08(self);
     M2C_FIELD(self, void **, 0x1C) = arg1;
     M2C_FIELD(self, s8 *, 0x1A) = arg1 != 0;
-    fn_800F687C(buf, buf + 8, 0x40);
-    fn_800F68F0(buf, lbl_803DC214, -1);
-    fn_801B4598(self, buf);
+    s = buf;
+    fn_800F687C(s, s + 8, 0x40);
+    fn_800F68F0(s, lbl_803DC214, -1);
+    fn_801B4598(self, s);
     fn_801B47DC(self, M2C_FIELD(arg1, s16 *, 0xBC));
 }
 
 s32 fn_801B3EC4(void *self, s32 arg1) {
     extern void fn_800F69F8(s32, s32);
+    s32 r;
     if (M2C_FIELD(self, s32 *, 0x8) != M2C_FIELD(self, s32 *, 0x4)) {
         fn_800F69F8(arg1, M2C_FIELD(self, s32 *, 0x4));
-        return 1;
+        r = 1;
+    } else {
+        r = 0;
     }
-    return 0;
+    return r;
 }
 
 s32 fn_801B3F08(void) {
@@ -302,15 +310,15 @@ s32 fn_801B49B8(void *arg0) {
     return ++M2C_FIELD(arg0, s32 *, 0x14);
 }
 
-void fn_801B4CC4(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+void fn_801B4CC4(u8 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     TreeKey key;
-    void *vt;
-    char *obj;
+    u8 *vt;
+    u8 *obj;
 
-    vt = M2C_FIELD(arg0, void **, 0);
-    obj = (char *)arg0 + M2C_FIELD(vt, s16 *, 0x20);
+    vt = *(u8 **)arg0 + 0x20;
+    obj = arg0 + *(s16 *)vt;
     fn_801B3814(&key, arg2, 0);
-    M2C_FIELD(vt, void (**)(void *, s32, TreeKey *, s32), 0x24)(obj, arg1, &key, arg3);
+    (*(void (**)(u8 *, s32, TreeKey, s32))(vt + 4))(obj, arg1, key, arg3);
 }
 
 s32 fn_801B4D30(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
@@ -414,13 +422,16 @@ s32 fn_801B5A4C(void *arg0) {
 
 M2C_UNK fn_801B5A68(void *arg0) {
     extern u8 lbl_80415808[];
-    TTQDPtrVec *vec;
+    TreeKey pad;
+    s32 *vec;
+    s32 *alloc;
     M2C_FIELD(arg0, void **, 0) = lbl_80415808;
     M2C_FIELD(arg0, s32 *, 4) = 0;
-    vec = (TTQDPtrVec *)((u8 *)arg0 + 8);
-    vec->begin = NULL;
-    vec->end = NULL;
-    vec->cap = NULL;
+    vec = (s32 *)((u8 *)arg0 + 8);
+    alloc = vec + 2;
+    vec[0] = 0;
+    vec[1] = 0;
+    alloc[1] = 0;
     fn_801B3814((TreeKey *)((u8 *)arg0 + 0x18), 0, 0);
     M2C_FIELD(arg0, s32 *, 0x20) = 0;
     return (M2C_UNK)arg0;
@@ -445,7 +456,7 @@ s32 fn_801B5DD8(void *arg0, s32 arg1, s32 arg2) {
 
     ((TreeKey *(*)(TreeKey *, s32, u16))fn_801B3814)(&key, arg1, arg2);
     vt = M2C_FIELD(arg0, void **, 0);
-    if (M2C_FIELD(vt, s32 (**)(void *, TreeKey *), 0x2C)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x28), &key) == 0) {
+    if (M2C_FIELD(vt, s32 (**)(void *, TreeKey), 0x2C)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x28), key) == 0) {
         return -0x32;
     }
     return 0;
@@ -912,12 +923,13 @@ s32 fn_801B6638(void *arg0) {
     return 0;
 }
 
-s16 fn_801B6664(void *arg0) {
-    void *p = M2C_FIELD(arg0, void **, 4);
+s32 fn_801B6664(void *arg0) {
+    s16 *p = M2C_FIELD(arg0, s16 **, 4);
     if (p != NULL) {
-        return M2C_FIELD(p, s16 *, 8);
+        return p[4];
+    } else {
+        return 0;
     }
-    return 0;
 }
 
 void fn_801B6680(void) {
