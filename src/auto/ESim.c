@@ -20,13 +20,6 @@ static inline void *ESim_AllocAligned(s32 size) {
     return p;
 }
 
-static inline void *ESim_AllocZeroed(s32 size) {
-    void *fn_80248488(void *, s32, u32);
-    void *p = ESim_AllocAligned(size);
-    fn_80248488(p, 0, size);
-    return p;
-}
-
 void fn_8003A1D0(void) {
     fn_802D2FD0();
 }
@@ -245,9 +238,15 @@ void fn_8003F79C(void *arg0, s32 arg1) {
 }
 
 void fn_8003F7F8(void) {
+    void *fn_80248488(void *, s32, u32);
     void *fn_8003F9E0(void *);
+    void *obj;
 
-    fn_8003F9E0(ESim_AllocZeroed(0x680));
+    obj = ESim_AllocAligned(0x680);
+    if (obj != NULL) {
+    }
+    fn_80248488(obj, 0, 0x680);
+    fn_8003F9E0(obj);
 }
 
 void fn_8003F8A0(void) {
