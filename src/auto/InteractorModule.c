@@ -55,6 +55,7 @@ void *fn_80237A00(void *arg0) {
     extern s32 lbl_80417710[];
     extern s32 lbl_80418088[];
     s32 *p;
+    s32 buf[8];
 
     fn_8022315C(arg0);
     M2C_FIELD(arg0, s32 **, 0x58) = lbl_80418088;
