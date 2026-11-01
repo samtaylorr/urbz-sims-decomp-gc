@@ -221,7 +221,7 @@ void fn_801B3C50(void) {
 
 void *fn_801B3D8C(void *self, void *arg1) {
     extern void fn_801B3C08(void *);
-    extern void fn_800F687C(void *, void *, s32);
+    extern void *fn_800F687C(void *, void *, s32);
     extern void fn_800F68F0(void *, const char *, s32);
     extern void fn_801B4598(void *, void *);
     void fn_801B47DC(void *, s16);
