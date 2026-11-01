@@ -137,12 +137,12 @@ s32 *fn_801CAFCC(s32 *self) {
     s32 *fn_8032D5C8(s32, void *);
     s32 *q;
 
-    self[3] = 1;
-    self[5] = 0;
     self[0] = 0;
     self[1] = 0;
     self[2] = 0;
+    self[3] = 1;
     self[4] = 0;
+    self[5] = 0;
     self[0] = fn_8033740C(lbl_8045B980, 0x2A2AF469, 0, 0);
     q = fn_8032D5C8(self[0], lbl_803DE9C4);
     self[4] = q[1];
