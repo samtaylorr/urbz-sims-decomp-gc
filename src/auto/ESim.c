@@ -106,6 +106,18 @@ void fn_8003AEC8(void *self) {
     (*(void (**)(void *))(vt + 0x1B4))(obj + *(s16 *)(vt + 0x1B0));
 }
 
+void fn_8003CA1C(u8 *self, void *arg1) {
+    extern void fn_802F4DA4(void *, void *);
+    extern void fn_80095CDC(void *, void *);
+    u8 *obj;
+    u8 *vt;
+
+    fn_802F4DA4(self, arg1);
+    obj = *(u8 **)(self + 0x300);
+    vt = *(u8 **)(obj + 4);
+    fn_80095CDC((*(void *(**)(void *))(vt + 0x14C))(obj + *(s16 *)(vt + 0x148)), arg1);
+}
+
 void fn_8003CA70(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     M2C_UNK fn_800A43F4(s32, s32, M2C_UNK, s32, s32, M2C_UNK);
     fn_800A43F4(arg1, arg0 + 0x410, 0, arg2, arg3, 0);
