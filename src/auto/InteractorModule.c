@@ -363,6 +363,20 @@ M2C_UNK fn_8023C758(void *self) {
     return fn_8023C77C(self, 3);
 }
 
+void fn_8023D260(void *arg0) {
+    extern f32 lbl_803EB88C[];
+
+    if (M2C_FIELD(arg0, f32 *, 0x34) != lbl_803EB88C[0] || M2C_FIELD(arg0, f32 *, 0x38) != lbl_803EB88C[0]) {
+        if (M2C_FIELD(arg0, u32 *, 0x84) & 0x100) {
+            M2C_FIELD(arg0, u32 *, 0x84) &= ~0x200;
+        } else {
+            M2C_FIELD(arg0, u32 *, 0x84) |= 0x300;
+        }
+    } else {
+        M2C_FIELD(arg0, u32 *, 0x84) &= ~0x300;
+    }
+}
+
 void fn_8023D840(void *arg0, s32 arg1, f32 farg0) {
     switch (arg1) {                                 /* irregular */
     case 7:
