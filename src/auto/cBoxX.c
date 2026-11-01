@@ -132,10 +132,10 @@ void fn_800FE588(void *arg0) {
 }
 
 void fn_800FE5D4(void *arg0) {
-    extern s32 fn_8032D5C8(void *, void *);
+    extern void *fn_8032D5C8(void *, void *);
     extern char lbl_803D62F0[];
-    s32 *p = (s32 *)((char *)arg0 + 0x30);
-    s32 r = fn_8032D5C8(M2C_FIELD(arg0, void **, 0x7C), lbl_803D62F0);
+    void **p = (void **)((char *)arg0 + 0x30);
+    void *r = fn_8032D5C8(M2C_FIELD(arg0, void **, 0x7C), lbl_803D62F0);
     if (p != NULL) {
         *p = r;
     }
@@ -147,6 +147,7 @@ s32 fn_800FE620(void *arg0) {
     M2C_UNK fn_8017041C(void *);
     M2C_UNK fn_801702E4(void *, s32);
     M2C_UNK fn_803A094C(void *);
+    void fn_802D20E8(void *);
     extern void *lbl_80495C90;
     extern s32 lbl_804943F0;
 
