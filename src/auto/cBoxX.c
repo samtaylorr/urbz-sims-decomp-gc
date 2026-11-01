@@ -64,12 +64,18 @@ void fn_800FE28C(void *arg0, s32 arg1) {
 }
 
 void fn_800FE438(void *arg0) {
-    s32 *fn_8032D5C8(s32, void *);
+    s32 fn_8032D5C8(s32, void *);
     extern u8 lbl_803D62A0[];
-    s32 **p = (s32 **)((u8 *)arg0 + 0x1C);
-    s32 *v = fn_8032D5C8(M2C_FIELD(arg0, s32 *, 0x7C), lbl_803D62A0);
-    if (p != NULL) {
-        *p = v != NULL ? v : NULL;
+    s32 *p = (s32 *)((u8 *)arg0 + 0x1C);
+    s32 v = fn_8032D5C8(M2C_FIELD(arg0, s32 *, 0x7C), lbl_803D62A0);
+    if (v != 0) {
+        if (p != NULL) {
+            *p = v;
+        }
+    } else {
+        if (p != NULL) {
+            *p = 0;
+        }
     }
 }
 
@@ -219,12 +225,14 @@ void fn_80100494(void *arg0, s32 arg1, s32 arg2) {
     s32 it[3];
     s32 pos[2];
     s32 node[2];
+    s32 found;
     char *hdr;
     void *p;
 
     fn_80100100(it, arg0, arg1, arg2);
     it[2] = M2C_FIELD(tree, s32 *, 4);
-    if (it[0] != it[2]) {
+    found = it[0] != it[2];
+    if (found) {
         pos[0] = it[0];
         node[0] = it[0];
         hdr = M2C_FIELD(tree, char **, 4);
