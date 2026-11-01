@@ -22,6 +22,23 @@ static inline u32 IMSlot_Size(IMSlot *s) {
     return (s32 *) s->b - (s32 *) s->a;
 }
 
+typedef struct { s32 a; s32 b; s32 ctx; void (*fn)(void *); } IMCallback;
+
+static inline s32 *IMEvent_Init(s32 *e) {
+    extern void *fn_803B67A0(void *);
+    fn_803B67A0(e);
+    return e;
+}
+
+static inline s32 *IMTimer_Init(s32 *p) {
+    extern s32 lbl_804176F8[];
+    p[4] = (s32) lbl_804176F8;
+    p[0] = 3;
+    p[5] = 0;
+    p[8] = 0;
+    return p;
+}
+
 extern void *fn_8022554C(void *);
 extern void fn_8022F404(void *, void *);
 void *fn_80237A00(void *arg0) {
@@ -125,13 +142,13 @@ void fn_802399F8(void *arg0) {
 }
 
 void fn_80239A4C(void *arg0) {
-    void ***vec = (void ***)((char *)arg0 + 0xA4);
+    IMSlot *slot = (IMSlot *) ((u8 *) arg0 + 0xA4);
     u32 i;
 
-    for (i = 0; i < (u32)(vec[1] - M2C_FIELD(arg0, void ***, 0xA4)); i++) {
-        M2C_FIELD(M2C_FIELD(arg0, void ***, 0xA4)[i], s32 *, 0x378) = 0;
+    for (i = 0; i < IMSlot_Size(slot); i++) {
+        M2C_FIELD(((void **) slot->a)[i], s32 *, 0x378) = 0;
     }
-    M2C_FIELD(arg0, void ***, 0xA8) = M2C_FIELD(arg0, void ***, 0xA4);
+    slot->b = slot->a;
 }
 
 void fn_80239DB8(void *arg0, s32 arg1) {
