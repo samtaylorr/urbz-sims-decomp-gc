@@ -429,21 +429,21 @@ void fn_80233538(u8 *arg0) {
     p->ev.vtbl = dvt;
 }
 
-void fn_802335BC(s32 *arg0) {
+s32 *fn_802335BC(s32 *arg0) {
     struct { s32 w[6]; } tmp;
-    s32 *self = arg0;
     s32 *v;
     s32 *a;
 
-    self[0] = 0;
-    v = self + 5;
-    self[1] = 0;
-    a = self + 7;
-    self[5] = 0;
+    arg0[0] = 0;
+    v = arg0 + 5;
+    arg0[1] = 0;
+    a = arg0 + 7;
+    arg0[5] = 0;
     v[1] = 0;
     a[1] = 0;
     *(u8 *)(v + 4) = 0;
-    self[10] = 0;
+    arg0[10] = 0;
+    return arg0;
 }
 
 void fn_802335F4(void *arg0, s32 flags) {
