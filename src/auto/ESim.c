@@ -269,6 +269,10 @@ s32 fn_8003FA8C(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x3B0);
 }
 
+s32 fn_8003FA94(void *arg0, s32 i) {
+    return ((s32 *)((u8 *)arg0 + 0x3B4))[i];
+}
+
 s32 fn_8003FAA4(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x654);
 }
@@ -285,6 +289,10 @@ s32 fn_8003FAB8(void *arg0, s32 *arg1) {
 
 f32 fn_8003FAC8(void *arg0) {
     return M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x3BC), void **, 0x134), f32 *, 0x6C);
+}
+
+void *fn_8003FAD8(void *arg0, s32 i) {
+    return (u8 *)arg0 + (i * 8 + 0x558);
 }
 
 s32 fn_8003FAE8(void *arg0) {
