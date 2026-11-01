@@ -132,7 +132,7 @@ s32 fn_801CB188(s32 *self) {
     return self[1];
 }
 
-void fn_801CD968(void) {
+void fn_801CD968(void *self) {
 
 }
 
