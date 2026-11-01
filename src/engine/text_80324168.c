@@ -173,16 +173,15 @@ void fn_80325A04(s32 arg0, void *arg1) {
     s32 fn_803660C8(s32, s32, void **);
     s32 fn_80366120(s32, s32, void **);
     void fn_80365FEC(s32, s32);
-    s32 h = M2C_FIELD(arg1, s32 *, 0x60);
+    void *obj;
+    s32 it = M2C_FIELD(arg1, s32 *, 0x60);
 
-    if (h != 0) {
-        void *obj;
-        s32 it = fn_803660C8(arg0 + 0x490B0, h, &obj);
-
+    if (it != 0) {
+        it = fn_803660C8(arg0 + 0x490B0, it, &obj);
         while (it != 0) {
             if (obj == arg1) {
                 fn_80365FEC(arg0 + 0x490B0, it);
-                return;
+                break;
             }
             it = fn_80366120(arg0 + 0x490B0, it, &obj);
         }
