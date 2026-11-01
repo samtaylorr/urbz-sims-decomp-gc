@@ -33,6 +33,14 @@ void fn_800FE830(s32 arg0) {
     }
 }
 
+void fn_801000A0(void *arg0) {
+    void fn_800F98E0(void *);
+
+    if (M2C_FIELD(arg0, void **, 0x78) != NULL) {
+        fn_800F98E0(M2C_FIELD(arg0, void **, 0x78));
+    }
+}
+
 void fn_80100534(s32 arg0, s32 arg1) {
     M2C_UNK fn_803A0874(s32, s32 *);
     s32 sp8;
