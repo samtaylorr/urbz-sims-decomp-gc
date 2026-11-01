@@ -6,6 +6,11 @@ typedef struct TreeKey {
     u16 b;
 } TreeKey;
 
+static inline void TTQDString_Init(char *s) {
+    extern void fn_800F687C(void *, void *, s32);
+    fn_800F687C(s, s + 8, 0x40);
+}
+
 typedef struct TTQDPtrVec {
     void **begin;
     void **end;
@@ -254,12 +259,11 @@ void *fn_801B3D00(void *self, void *arg1) {
     extern void fn_801B4598(void *, void *);
     s16 fn_801B47D4(void *);
     void fn_801B47DC(void *, s16);
-    char buf[0x48];
-    char *s = buf;
+    struct { s32 hdr[2]; char buf[0x40]; } str, *s = &str;
     void *vt;
     fn_801B3C08(self);
     M2C_FIELD(self, void **, 0x1C) = M2C_FIELD(arg1, void **, 0x1C);
-    fn_800F687C(s, s + 8, 0x40);
+    fn_800F687C(s, s->buf, 0x40);
     vt = M2C_FIELD(arg1, void **, 0);
     M2C_FIELD(vt, void (**)(void *, void *), 0x24)((char *)arg1 + M2C_FIELD(vt, s16 *, 0x20), s);
     fn_801B4598(self, s);
@@ -507,12 +511,11 @@ s32 fn_801B49CC(void *arg0) {
 void fn_801B4CC4(u8 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     u8 *vt;
     u8 *obj;
-    TreeKey key[1];
+    TreeKey key;
 
     vt = *(u8 **)arg0 + 0x20;
     obj = arg0 + *(s16 *)vt;
-    fn_801B3814(key, arg2, 0);
-    (*(void (**)(u8 *, s32, TreeKey *, s32))(vt + 4))(obj, arg1, key, arg3);
+    (*(void (**)(u8 *, s32, TreeKey *, s32))(vt + 4))(obj, arg1, fn_801B3814(&key, arg2, 0), arg3);
 }
 
 s32 fn_801B4D30(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
@@ -616,10 +619,9 @@ s32 fn_801B5A4C(void *arg0) {
 
 M2C_UNK fn_801B5A68(void *arg0) {
     extern u8 lbl_80415808[];
-    TreeKey pad;
+    char pad[8];
     s32 *vec;
     s32 *alloc;
-    (void)&pad;
     M2C_FIELD(arg0, void **, 0) = lbl_80415808;
     M2C_FIELD(arg0, s32 *, 4) = 0;
     vec = (s32 *)((u8 *)arg0 + 8);
@@ -651,7 +653,7 @@ s32 fn_801B5DD8(void *arg0, s32 arg1, s32 arg2) {
 
     ((TreeKey *(*)(TreeKey *, s32, u16))fn_801B3814)(&key, arg1, arg2);
     vt = M2C_FIELD(arg0, void **, 0);
-    if (M2C_FIELD(vt, s32 (**)(void *, void *), 0x2C)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x28), &key.a) == 0) {
+    if (M2C_FIELD(vt, s32 (**)(void *, TreeKey *), 0x2C)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x28), &key) == 0) {
         return -0x32;
     }
     return 0;
