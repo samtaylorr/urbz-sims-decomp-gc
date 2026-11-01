@@ -413,12 +413,10 @@ void fn_80100EDC(void *arg0) {
 
 void fn_80100F1C(void *arg0) {
     void fn_800F97E8(void *, s32);
-    s32 temp_r0;
+    s32 n = M2C_FIELD(arg0, s32 *, 0x88);
 
-    if (M2C_FIELD(arg0, s32 *, 0x88) != 0) {
-        temp_r0 = M2C_FIELD(arg0, s32 *, 0x88) - 1;
-        M2C_FIELD(arg0, s32 *, 0x88) = temp_r0;
-        if (temp_r0 == 0 && M2C_FIELD(arg0, void **, 0x78) != NULL) {
+    if (n == 0 || (M2C_FIELD(arg0, s32 *, 0x88) = n - 1) == 0) {
+        if (M2C_FIELD(arg0, void **, 0x78) != NULL) {
             fn_800F97E8(M2C_FIELD(arg0, void **, 0x78), 0);
         }
     }
