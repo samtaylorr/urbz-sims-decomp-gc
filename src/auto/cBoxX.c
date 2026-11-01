@@ -368,10 +368,13 @@ void fn_80100560(void **out, void *arg1, u32 key) {
 }
 
 void fn_801005A4(void **out, void *arg1, u32 key) {
-    u32 k = key;
     void *y = M2C_FIELD(arg1, void **, 0x40);
-    const u32 *kp = &k;
-    void *x = M2C_FIELD(y, void **, 4);
+    u32 k;
+    const u32 *kp;
+    void *x;
+    k = key;
+    kp = &k;
+    x = M2C_FIELD(y, void **, 4);
     while (x != NULL) {
         if (*kp < M2C_FIELD(x, u32 *, 0x10)) {
             y = x;
