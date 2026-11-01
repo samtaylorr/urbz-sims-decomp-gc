@@ -297,16 +297,17 @@ void fn_803261C8(void *arg0) {
 }
 
 void fn_80326260(f32 arg0, f32 arg1, f32 arg2) {
-    extern f32 lbl_803F3228;
-    extern f32 lbl_803F322C;
+    extern f32 lbl_803F3228[];
+    extern f32 lbl_803F322C[];
     f32 fn_80243770(f32);
     f32 fn_8025FC40(void *);
-    f32 v[3];
-    f32 t = fn_80243770(arg0 * lbl_803F3228 * lbl_803F322C) * arg1;
+    f32 v[4];
+    f32 *p = v;
+    f32 t = fn_80243770(arg0 * lbl_803F3228[0] * lbl_803F322C[0]) * arg1;
     v[1] = t;
     v[0] = t * arg2;
-    v[2] = arg1;
-    fn_8025FC40(v);
+    p[2] = arg1;
+    fn_8025FC40(p);
 }
 
 s32 fn_803262D8(void *a, void *b) {
