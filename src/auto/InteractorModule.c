@@ -106,6 +106,30 @@ void fn_802396D4(s32 arg0) {
     fn_8022A394(arg0 + 8, arg0 + 0x20, 2);
 }
 
+void fn_802399F8(void *arg0) {
+    extern f32 lbl_803EB67C[];
+
+    if (M2C_FIELD(arg0, f32 *, 0x34) != lbl_803EB67C[0] || M2C_FIELD(arg0, f32 *, 0x38) != lbl_803EB67C[0]) {
+        if (M2C_FIELD(arg0, u32 *, 0xC0) & 0x400) {
+            M2C_FIELD(arg0, u32 *, 0xC0) &= ~0x800;
+        } else {
+            M2C_FIELD(arg0, u32 *, 0xC0) |= 0xC00;
+        }
+    } else {
+        M2C_FIELD(arg0, u32 *, 0xC0) &= ~0xC00;
+    }
+}
+
+void fn_80239A4C(void *arg0) {
+    void ***vec = (void ***)((char *)arg0 + 0xA4);
+    u32 i;
+
+    for (i = 0; i < (u32)(vec[1] - vec[0]); i++) {
+        M2C_FIELD(vec[0][i], s32 *, 0x378) = 0;
+    }
+    vec[1] = vec[0];
+}
+
 void fn_80239DB8(void *arg0, s32 arg1) {
     extern f32 lbl_803EB688[];
 
