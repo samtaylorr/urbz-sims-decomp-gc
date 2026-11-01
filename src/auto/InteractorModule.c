@@ -176,10 +176,7 @@ void fn_80239E3C(void *arg0, s32 arg1, f32 farg0) {
 s32 fn_80239E88(void *arg0) {
     s32 flags = M2C_FIELD(arg0, s32 *, 0xC0);
     if (flags & 0x80) {
-        if (flags & 0x4) {
-            return 2;
-        }
-        return 0;
+        return (flags & 0x4) ? 2 : 0;
     }
     return 0;
 }
@@ -361,6 +358,20 @@ void fn_8023C71C(s32 *arg0) {
 M2C_UNK fn_8023C758(void *self) {
     M2C_UNK fn_8023C77C(void *, s32);
     return fn_8023C77C(self, 3);
+}
+
+void fn_8023CCA8(void *arg0) {
+    extern char lbl_803EB854[];
+    extern char lbl_803EB878[];
+
+    if (M2C_FIELD(arg0, u32 *, 0x84) & 1) {
+        M2C_FIELD(arg0, u32 *, 0x84) &= ~0x41;
+        ((void (*)(const char *, ...))fn_8023C2F0)(lbl_803EB854);
+    } else {
+        M2C_FIELD(arg0, u32 *, 0x84) = 0;
+        ((void (*)(const char *, ...))fn_8023C2F0)(lbl_803EB878);
+    }
+    fn_8023C758(arg0);
 }
 
 void fn_8023D260(void *arg0) {
