@@ -59,6 +59,12 @@ void fn_8003ACD4(void *self) {
     M2C_FIELD(self, s32 *, 0x5D8) = 0;
 }
 
+s32 fn_8003AD54(void *self) {
+    u8 *obj = *(u8 **)((u8 *)self + 0x3B0);
+    u8 *vt = *(u8 **)(obj + 4);
+    return (*(s32 (**)(void *))(vt + 0x1C4))(obj + *(s16 *)(vt + 0x1C0));
+}
+
 s32 fn_8003AD8C(void) {
     s32 fn_8003AD54();
     return fn_8003AD54() ^ 1;
@@ -265,33 +271,30 @@ void fn_8003EB40(void *arg0) {
     extern void fn_8006D99C(void *, s32);
     extern void fn_8006D9D4(void *, s32);
     extern void fn_8006D9A4(void *, s32);
-    struct { s32 a; s32 b; } obj;
-    s32 v;
+    char *o = M2C_FIELD(arg0, char **, 0x3B0);
+    char *vt = *(char **)(o + 4);
+    s32 v = ((s32 (*)(void *))M2C_FIELD(vt, void **, 0x124))(o + M2C_FIELD(vt, s16 *, 0x120));
     {
-        char *o = M2C_FIELD(arg0, char **, 0x3B0);
-        char *vt = *(char **)(o + 4);
-        v = ((s32 (*)(void *))M2C_FIELD(vt, void **, 0x124))(o + M2C_FIELD(vt, s16 *, 0x120));
+        s32 buf[2];
+        fn_8006D99C(buf, (s32)((char *)arg0 + 0x3B4));
+        fn_8006D9D4(buf, v);
+        M2C_FIELD(arg0, s32 *, 0x650) = 1;
+        fn_8006D9A4(buf, 2);
     }
-    fn_8006D99C(&obj, (s32)((char *)arg0 + 0x3B4));
-    fn_8006D9D4(&obj, v);
-    M2C_FIELD(arg0, s32 *, 0x650) = 1;
-    fn_8006D9A4(&obj, 2);
 }
 
 void fn_8003EBB4(void *arg0) {
     extern void fn_8009B19C(void *, s32);
     extern void fn_8009B1D4(void *, s32);
     extern void fn_8009B1A4(void *, s32);
-    struct { s32 a; s32 b; } obj;
-    s32 v;
+    char *o = M2C_FIELD(arg0, char **, 0x3B0);
+    s32 v = ((s32 (*)(void *))M2C_FIELD(*(char **)(o + 4), void **, 0x124))(o + M2C_FIELD(*(char **)(o + 4), s16 *, 0x120));
     {
-        char *o = M2C_FIELD(arg0, char **, 0x3B0);
-        char *vt = *(char **)(o + 4);
-        v = ((s32 (*)(void *))M2C_FIELD(vt, void **, 0x124))(o + M2C_FIELD(vt, s16 *, 0x120));
+        s32 buf[2];
+        fn_8009B19C(buf, (s32)((char *)arg0 + 0x3B4));
+        fn_8009B1D4(buf, v);
+        fn_8009B1A4(buf, 2);
     }
-    fn_8009B19C(&obj, (s32)((char *)arg0 + 0x3B4));
-    fn_8009B1D4(&obj, v);
-    fn_8009B1A4(&obj, 2);
 }
 
 void fn_8003EC20(void *arg0) {
