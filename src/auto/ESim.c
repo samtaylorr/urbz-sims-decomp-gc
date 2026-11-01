@@ -66,10 +66,9 @@ void fn_8003D024(void) {
 }
 
 void fn_8003E19C(void *arg0, s32 arg1, s32 arg2) {
-    M2C_FIELD(arg0, s32 *, 0x65C) = arg1;
     M2C_FIELD(arg0, s32 *, 0x660) = arg2;
     M2C_FIELD(arg0, s32 *, 0x668) = 0;
-    M2C_FIELD(arg0, s32 *, 0x66C) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x66C) = M2C_FIELD(arg0, s32 *, 0x65C) = arg1;
 }
 
 void fn_8003E1B4(void *arg0, s32 arg1) {
@@ -82,21 +81,22 @@ void fn_8003E1B4(void *arg0, s32 arg1) {
     extern void fn_800A61F8(void *, s32);
     extern void fn_800A6238(void *, s32, s32, s32, s32);
     char buf[0x18];
-    char *obj;
-    char *vt;
-    VEntry *e;
 
     fn_800A61AC(buf);
-    obj = M2C_FIELD(arg0, char **, 0x3B0);
-    vt = *(char **)(obj + 4);
-    e = (VEntry *)(vt + 0x120);
-    fn_800A6238(buf, M2C_FIELD(M2C_FIELD(arg0, void **, 0x674), s32 *, 0x20),
-                ((s32 (*)(void *))e->fn)(obj + e->adj), arg1, 1);
-    obj = M2C_FIELD(arg0, char **, 0x3B0);
-    vt = *(char **)(obj + 4);
-    e = (VEntry *)(vt + 0x110);
-    ((void (*)(void *, s32, s32))e->fn)(obj + e->adj, 0x3C,
-        *(s8 *)(((char *(*)(void *))((VEntry *)(vt + 0x120))->fn)(obj + ((VEntry *)(vt + 0x120))->adj) + 0xA8));
+    {
+        char *obj = M2C_FIELD(arg0, char **, 0x3B0);
+        VEntry *e = (VEntry *)(*(char **)(obj + 4) + 0x120);
+        fn_800A6238(buf, M2C_FIELD(M2C_FIELD(arg0, void **, 0x674), s32 *, 0x20),
+                    ((s32 (*)(void *))e->fn)(obj + e->adj), arg1, 1);
+    }
+    {
+        char *obj = M2C_FIELD(arg0, char **, 0x3B0);
+        char *vt = *(char **)(obj + 4);
+        VEntry *e = (VEntry *)(vt + 0x110);
+        VEntry *g = (VEntry *)(vt + 0x120);
+        ((void (*)(void *, s32, s32))e->fn)(obj + e->adj, 0x3C,
+            *(s8 *)(((char *(*)(void *))g->fn)(obj + g->adj) + 0xA8));
+    }
     fn_800A61F8(buf, 2);
 }
 
@@ -237,11 +237,12 @@ void fn_8003F79C(void *arg0, s32 arg1) {
 }
 
 void fn_8003F7F8(void) {
-    void *fn_80248488(void *, s32, u32);
+    void fn_80248488();
     void *fn_8003F9E0(void *);
     void *obj;
 
-    fn_80248488(obj = ESim_AllocAligned(0x680), 0, 0x680);
+    obj = ESim_AllocAligned(0x680);
+    fn_80248488(obj, 0, 0x680);
     fn_8003F9E0(obj);
 }
 
