@@ -415,13 +415,15 @@ void fn_80328C30(u8 *self, s32 idx, Vec3_80325FD8 *v) {
     u8 *grp;
     u8 *obj;
     s32 i;
+    Elem_80328 *arr;
 
     if (idx < 0 || idx > *(s32 *)(self + 0x4911C)) {
         return;
     }
+    arr = (Elem_80328 *)(self + 0x3C);
     grp = self + idx * 0x50 + 0x6040;
     for (i = *(s32 *)(grp + 0x48); i < *(s32 *)(grp + 0x4C); i++) {
-        obj = ((Elem_80328 *)(self + 0x3C))[i].obj;
+        obj = arr[i].obj;
         *(Vec3_80325FD8 *)(obj + 0xB0) = *v;
         *(s32 *)(obj + 0xBC) = 1;
     }
