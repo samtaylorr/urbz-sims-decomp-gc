@@ -306,19 +306,68 @@ s32 fn_801B47EC(s32 *self) {
     return self[7];
 }
 
+void *fn_801B4830(void *self);
+void *fn_801B4830(void *self) {
+    extern void *fn_80399BE8(s32);
+    extern char lbl_804157C0[];
+    s32 *list;
+    s32 *p;
+
+    M2C_FIELD(self, void **, 0) = lbl_804157C0;
+    list = (s32 *)((char *)self + 4);
+    list[1] = 0;
+    p = fn_80399BE8(0x20);
+    list[2] = 0;
+    list[1] = (s32)p;
+    *(u8 *)&list[3] = 0;
+    p[0] = 0;
+    ((s32 *)list[1])[1] = 0;
+    ((s32 *)list[1])[2] = list[1];
+    ((s32 *)list[1])[3] = list[1];
+    M2C_FIELD(self, s32 *, 0x14) = 0;
+    return self;
+}
+
+void fn_801B48AC(void *self, s32 arg1) {
+    extern void fn_803AC08C(void *, s32);
+    extern void fn_803997AC(void *, u32);
+    extern void fn_802D20E8(void *);
+    extern char lbl_804157C0[];
+    void *list;
+    void *temp_r9;
+    void *temp_r9_2;
+
+    M2C_FIELD(self, void **, 0) = lbl_804157C0;
+    list = (char *)self + 4;
+    if (M2C_FIELD(list, s32 *, 8) != 0) {
+        fn_803AC08C(list, M2C_FIELD(M2C_FIELD(list, void **, 4), s32 *, 4));
+        temp_r9 = M2C_FIELD(list, void **, 4);
+        M2C_FIELD(temp_r9, void **, 8) = temp_r9;
+        M2C_FIELD(M2C_FIELD(list, void **, 4), s32 *, 4) = 0;
+        temp_r9_2 = M2C_FIELD(list, void **, 4);
+        M2C_FIELD(temp_r9_2, void **, 0xC) = temp_r9_2;
+        M2C_FIELD(list, s32 *, 8) = 0;
+    }
+    if (M2C_FIELD(list, void **, 4) != NULL) {
+        fn_803997AC(M2C_FIELD(list, void **, 4), 0x20);
+    }
+    if (arg1 & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 s32 fn_801B49B8(void *arg0) {
     return ++M2C_FIELD(arg0, s32 *, 0x14);
 }
 
 void fn_801B4CC4(u8 *arg0, s32 arg1, s32 arg2, s32 arg3) {
-    TreeKey key;
     u8 *vt;
     u8 *obj;
+    TreeKey key;
 
     vt = *(u8 **)arg0 + 0x20;
     obj = arg0 + *(s16 *)vt;
-    fn_801B3814(&key, arg2, 0);
-    (*(void (**)(u8 *, s32, TreeKey, s32))(vt + 4))(obj, arg1, key, arg3);
+    (*(void (**)(u8 *, s32, TreeKey *, s32))(vt + 4))(obj, arg1, fn_801B3814(&key, arg2, 0), arg3);
 }
 
 s32 fn_801B4D30(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
