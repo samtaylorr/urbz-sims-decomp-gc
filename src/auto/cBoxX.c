@@ -130,28 +130,32 @@ void fn_800FE518(void *arg0) {
     s32 fn_8032D5C8(s32, void *);
     extern u8 lbl_803D62E4[];
     extern u8 lbl_803D62F0[];
-    s32 *p;
-    s32 v;
-    p = (s32 *)((u8 *)arg0 + 0x2C);
-    v = fn_8032D5C8(M2C_FIELD(arg0, s32 *, 0x7C), lbl_803D62E4);
-    if (v != 0) {
-        if (p != NULL) {
-            *p = v;
-        }
-    } else {
-        if (p != NULL) {
-            *p = 0;
+    {
+        u8 *name = lbl_803D62E4;
+        s32 *p = (s32 *)((u8 *)arg0 + 0x2C);
+        s32 v = fn_8032D5C8(M2C_FIELD(arg0, s32 *, 0x7C), name);
+        if (v != 0) {
+            if (p != NULL) {
+                *p = v;
+            }
+        } else {
+            if (p != NULL) {
+                *p = 0;
+            }
         }
     }
-    p = (s32 *)((u8 *)arg0 + 0x30);
-    v = fn_8032D5C8(M2C_FIELD(arg0, s32 *, 0x7C), lbl_803D62F0);
-    if (v != 0) {
-        if (p != NULL) {
-            *p = v;
-        }
-    } else {
-        if (p != NULL) {
-            *p = 0;
+    {
+        u8 *name = lbl_803D62F0;
+        s32 *p = (s32 *)((u8 *)arg0 + 0x30);
+        s32 v = fn_8032D5C8(M2C_FIELD(arg0, s32 *, 0x7C), name);
+        if (v != 0) {
+            if (p != NULL) {
+                *p = v;
+            }
+        } else {
+            if (p != NULL) {
+                *p = 0;
+            }
         }
     }
 }
@@ -288,25 +292,24 @@ void fn_80100268(void *arg0, s32 arg1, s32 arg2) {
 }
 
 void fn_80100494(void *arg0, s32 arg1, s32 arg2) {
-    void fn_80100100(s32 *, void *, s32, s32);
-    void *fn_8039F9B0(s32, void *, void *, void *);
+    void fn_80100100(It_80100494 *, void *, s32, s32);
+    void *fn_8039F9B0(It_80100494, void *, void *, void *);
     void fn_803997AC(void *, s32);
     char *tree = (char *)arg0 + 0x3C;
-    s32 it[3];
-    s32 pos[2];
-    s32 node[2];
-    s32 found;
+    It_80100494 it[2];
+    It_80100494 end;
+    It_80100494 pos;
+    It_80100494 node;
     char *hdr;
     void *p;
 
     fn_80100100(it, arg0, arg1, arg2);
-    it[2] = M2C_FIELD(tree, s32 *, 4);
-    found = it[0] != it[2];
-    if (found) {
-        pos[0] = it[0];
-        node[0] = it[0];
+    end.node = M2C_FIELD(tree, s32 *, 4);
+    if (it[0].node != end.node) {
+        pos = it[0];
+        node = pos;
         hdr = M2C_FIELD(tree, char **, 4);
-        p = fn_8039F9B0(node[0], hdr + 4, hdr + 8, hdr + 0xC);
+        p = fn_8039F9B0(node, hdr + 4, hdr + 8, hdr + 0xC);
         if (p != NULL) {
             fn_803997AC(p, 0x18);
         }
@@ -323,8 +326,8 @@ void fn_80100534(s32 arg0, s32 arg1) {
 }
 
 void fn_80100560(void **out, void *arg1, u32 key) {
-    const u32 *k = &key;
     void *y = M2C_FIELD(arg1, void **, 0x40);
+    const u32 *k = &key;
     void *x = M2C_FIELD(y, void **, 4);
     while (x != NULL) {
         if (!(M2C_FIELD(x, u32 *, 0x10) < *k)) {
@@ -338,11 +341,12 @@ void fn_80100560(void **out, void *arg1, u32 key) {
 }
 
 void fn_801005A4(void **out, void *arg1, u32 key) {
-    const u32 *k = &key;
+    u32 k = key;
     void *y = M2C_FIELD(arg1, void **, 0x40);
+    const u32 *kp = &k;
     void *x = M2C_FIELD(y, void **, 4);
     while (x != NULL) {
-        if (*k < M2C_FIELD(x, u32 *, 0x10)) {
+        if (*kp < M2C_FIELD(x, u32 *, 0x10)) {
             y = x;
             x = M2C_FIELD(y, void **, 8);
         } else {
