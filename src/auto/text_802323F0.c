@@ -714,6 +714,8 @@ void fn_802359A8(void *arg0) {
 }
 
 void fn_80235B7C(u32 *arg0) {
+    M2C_UNK fn_80224E10(M2C_UNK, s32);
+    M2C_UNK fn_80225544(void);
     extern void *fn_8008C46C(s32, u32);
     M2C_UNK fn_8008B140(void *, s32);
     void *p;
