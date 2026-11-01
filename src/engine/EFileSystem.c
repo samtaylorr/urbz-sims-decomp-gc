@@ -99,14 +99,19 @@ void fn_802C47FC(void) {
 
 }
 
-void fn_802C4800(EBox *box, EVec3 *out) {
+void fn_802C4800(f32 *box, f32 *out) {
+    f32 *max = box + 3;
     s32 i;
 
     for (i = 0; i < 8; i++) {
-        out->x = (i & 1) ? box->max.x : box->min.x;
-        out->y = (i & 2) ? box->max.y : box->min.y;
-        out->z = (i & 4) ? box->max.z : box->min.z;
-        out++;
+        f32 x, y, z;
+        x = (i & 1) ? box[3] : box[0];
+        y = ((i >> 1) & 1) ? max[1] : box[1];
+        z = ((i >> 2) & 1) ? max[2] : box[2];
+        out[0] = x;
+        out[1] = y;
+        out[2] = z;
+        out += 3;
     }
 }
 
@@ -154,22 +159,15 @@ void fn_802C4A28(EBox *box, EVec3 *pts, s32 n) {
     }
 }
 
-void fn_802C4A90(f32 (*box)[3], f32 (*pts)[4], s32 n) {
+void fn_802C4A90(EBox *box, f32 (*pts)[4], s32 n) {
     s32 i;
-    s32 j;
     for (i = 0; i < n; i++) {
         EVec3 p;
         EVec3 *q = &p;
         q->x = pts[i][0];
         q->y = pts[i][1];
         q->z = pts[i][2];
-        for (j = 0; j < 3; j++) {
-            if ((&q->x)[j] < box[0][j]) {
-                box[0][j] = (&q->x)[j];
-            } else if ((&q->x)[j] > box[1][j]) {
-                box[1][j] = (&q->x)[j];
-            }
-        }
+        EBox_AddPoint(box, q);
     }
 }
 
@@ -469,9 +467,9 @@ void *fn_802C5D4C(u8 *self) {
     *(u8 **)(self + 0x0) = lbl_804192D0;
     fn_803B90DC(self + 4);
     *(s32 *)(self + 0x14) = 0;
-    *(s32 *)(self + 0x20) = 4;
     *(s32 *)(self + 0x18) = 4;
     *(s32 *)(self + 0x1C) = 4;
+    *(s32 *)(self + 0x20) = 4;
     return self;
 }
 
