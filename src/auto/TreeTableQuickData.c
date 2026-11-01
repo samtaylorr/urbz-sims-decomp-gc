@@ -251,7 +251,7 @@ s32 fn_801B3E30(void) {
 
 void fn_801B3E38(void *self, void *arg1) {
     extern void fn_801B3C08(void *);
-    extern void fn_800F687C(void *, void *, s32);
+    extern void *fn_800F687C(void *, void *, s32);
     extern void fn_800F68F0(void *, const char *, s32);
     extern void fn_801B4598(void *, void *);
     void fn_801B47DC(void *, s16);
