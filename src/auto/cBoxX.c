@@ -241,7 +241,7 @@ s32 fn_800FF538(void *arg0, s8 *arg1, s32 arg2) {
 
 s32 fn_800FF588(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     extern char lbl_80434B38[];
-    extern void fn_802CAB54(void *, s32);
+    extern void *fn_802CAB54(void *, s32);
     extern void fn_802CAC04(void *);
     extern s32 fn_800FF5F8(void *, s32, s32, s32, s32);
     s32 ret;
