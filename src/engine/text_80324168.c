@@ -118,10 +118,11 @@ s32 fn_80325374(void *arg0) {
 }
 
 void fn_803253EC(void *arg0) {
+    typedef struct { char pad[0x49120]; void *items[0x800]; s32 count; } Stack;
     s32 i;
 
-    for (i = 0; i < M2C_FIELD(arg0, s32 *, 0x4B120); i++) {
-        M2C_FIELD(((void **)((char *)arg0 + 0x49120))[i], u32 *, 0x64) &= ~0x4000;
+    for (i = 0; i < ((Stack *)arg0)->count; i++) {
+        M2C_FIELD(((Stack *)arg0)->items[i], u32 *, 0x64) &= ~0x4000;
     }
 }
 
