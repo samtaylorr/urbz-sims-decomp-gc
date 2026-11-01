@@ -356,6 +356,13 @@ f32 fn_8023E954(void) {
     return lbl_80496774;
 }
 
+void fn_8023E95C(u8 *arg0, Vec3f *arg1) {
+    if (!(*(s32 *)(arg0 + 0x84) & 0x1000)) {
+        *(Vec3f *)(arg0 + 0x74) = *arg1;
+        *(s32 *)(arg0 + 0x84) |= 0x1000;
+    }
+}
+
 void fn_8023EA08(void) {
     M2C_UNK fn_8023E850(M2C_UNK, M2C_UNK);
     fn_8023E850(1, 0xFFFF);
