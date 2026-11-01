@@ -317,6 +317,18 @@ s32 fn_801B5A4C(void *arg0) {
     return p != NULL ? *p : 0;
 }
 
+M2C_UNK fn_801B5A68(void *arg0) {
+    extern u8 lbl_80415808[];
+    M2C_FIELD(arg0, void **, 0) = lbl_80415808;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+    M2C_FIELD(arg0, s32 *, 0xC) = 0;
+    M2C_FIELD(arg0, s32 *, 0x14) = 0;
+    fn_801B3814((TreeKey *)((u8 *)arg0 + 0x18), 0, 0);
+    M2C_FIELD(arg0, s32 *, 0x20) = 0;
+    return (M2C_UNK)arg0;
+}
+
 void *fn_801B5BDC(void *arg0, u8 *arg1) {
     fn_801B3824(arg0, (TreeKey *)(arg1 + 0x18));
     return arg0;
@@ -334,7 +346,7 @@ s32 fn_801B5DD8(void *arg0, s32 arg1, u16 arg2) {
     TreeKey key;
     void *vt;
 
-    fn_801B3814(&key, arg1, arg2);
+    ((TreeKey *(*)(TreeKey *, s32, u16))fn_801B3814)(&key, arg1, arg2);
     vt = M2C_FIELD(arg0, void **, 0);
     if (M2C_FIELD(vt, s32 (**)(void *, TreeKey *), 0x2C)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x28), &key) == 0) {
         return -0x32;
@@ -584,11 +596,9 @@ s32 fn_801B6434(void *arg0) {
     void *p = M2C_FIELD(arg0, void **, 4);
     s32 ret = 0;
     void **q;
-    if (!(M2C_FIELD(p, s32 *, 0x10) & 0x80)) {
-        q = M2C_FIELD(p, void ***, 0x1C);
-        if (*(u16 *)(q != NULL ? *q : NULL) == 0x21) {
-            ret = 1;
-        }
+    if (!(M2C_FIELD(p, s32 *, 0x10) & 0x80) &&
+        *(u16 *)((q = M2C_FIELD(p, void ***, 0x1C)) != NULL ? *q : NULL) == 0x21) {
+        ret = 1;
     }
     return ret;
 }
@@ -859,7 +869,7 @@ s32 fn_801B66D8(s32 *self) {
 }
 
 void fn_801B66E0(void) {
-    M2C_UNK fn_801B6304(M2C_UNK, M2C_UNK);
+    void fn_801B6304(s32, s32);
     fn_801B6304(1, 0xFFFF);
 }
 
