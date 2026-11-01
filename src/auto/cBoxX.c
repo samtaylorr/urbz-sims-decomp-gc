@@ -1,6 +1,8 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+typedef struct { s32 node; } It_80100494;
+
 s32 fn_800FE02C(s32 arg0, s32 arg1, s32 arg2) {
     extern s32 lbl_804943E4;
     extern s32 lbl_80495AD0;
@@ -91,18 +93,36 @@ void fn_800FE484(void *arg0) {
     s32 v;
     p = (s32 *)((u8 *)arg0 + 0x20);
     v = fn_8032D5C8(M2C_FIELD(arg0, s32 *, 0x7C), lbl_803D62B4);
-    if (p != NULL) {
-        *p = v;
+    if (v != 0) {
+        if (p != NULL) {
+            *p = v;
+        }
+    } else {
+        if (p != NULL) {
+            *p = 0;
+        }
     }
     p = (s32 *)((u8 *)arg0 + 0x24);
     v = fn_8032D5C8(M2C_FIELD(arg0, s32 *, 0x7C), lbl_803D62C4);
-    if (p != NULL) {
-        *p = v;
+    if (v != 0) {
+        if (p != NULL) {
+            *p = v;
+        }
+    } else {
+        if (p != NULL) {
+            *p = 0;
+        }
     }
     p = (s32 *)((u8 *)arg0 + 0x28);
     v = fn_8032D5C8(M2C_FIELD(arg0, s32 *, 0x7C), lbl_803D62D8);
-    if (p != NULL) {
-        *p = v;
+    if (v != 0) {
+        if (p != NULL) {
+            *p = v;
+        }
+    } else {
+        if (p != NULL) {
+            *p = 0;
+        }
     }
 }
 
@@ -114,13 +134,25 @@ void fn_800FE518(void *arg0) {
     s32 v;
     p = (s32 *)((u8 *)arg0 + 0x2C);
     v = fn_8032D5C8(M2C_FIELD(arg0, s32 *, 0x7C), lbl_803D62E4);
-    if (p != NULL) {
-        *p = v;
+    if (v != 0) {
+        if (p != NULL) {
+            *p = v;
+        }
+    } else {
+        if (p != NULL) {
+            *p = 0;
+        }
     }
     p = (s32 *)((u8 *)arg0 + 0x30);
     v = fn_8032D5C8(M2C_FIELD(arg0, s32 *, 0x7C), lbl_803D62F0);
-    if (p != NULL) {
-        *p = v;
+    if (v != 0) {
+        if (p != NULL) {
+            *p = v;
+        }
+    } else {
+        if (p != NULL) {
+            *p = 0;
+        }
     }
 }
 
@@ -140,7 +172,7 @@ void fn_800FE5D4(void *arg0) {
     void **p = (void **)((char *)arg0 + 0x30);
     void *r = fn_8032D5C8(M2C_FIELD(arg0, void **, 0x7C), lbl_803D62F0);
     if (p != NULL) {
-        *p = r;
+        *p = r != NULL ? r : NULL;
     }
 }
 
@@ -322,6 +354,44 @@ void fn_80100EDC(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x88) = (s32) (M2C_FIELD(arg0, s32 *, 0x88) + 1);
     if (temp_r0 != 0) {
         fn_800F97E8(temp_r0, 1);
+    }
+}
+
+void fn_80100F1C(void *arg0) {
+    void fn_800F97E8(void *, s32);
+    s32 temp_r0;
+
+    if (M2C_FIELD(arg0, s32 *, 0x88) != 0) {
+        temp_r0 = M2C_FIELD(arg0, s32 *, 0x88) - 1;
+        M2C_FIELD(arg0, s32 *, 0x88) = temp_r0;
+        if (temp_r0 == 0 && M2C_FIELD(arg0, void **, 0x78) != NULL) {
+            fn_800F97E8(M2C_FIELD(arg0, void **, 0x78), 0);
+        }
+    }
+}
+
+void fn_80100F68(void *arg0) {
+    extern void *lbl_80495C90;
+    void fn_801756D4(void *, s32);
+    void fn_80101244(void *);
+    M2C_FIELD(arg0, s32 *, 0x84) = M2C_FIELD(arg0, s32 *, 0x84) + 1;
+    fn_801756D4(M2C_FIELD(lbl_80495C90, void **, 0x58), 2);
+    fn_80101244((char *)arg0 + 0x4C);
+}
+
+void fn_80100FB4(void *arg0) {
+    extern void *lbl_80495C90;
+    void fn_8017579C(void *, s32);
+    void fn_801012A8(void *);
+    s32 temp_r0;
+
+    if (M2C_FIELD(arg0, s32 *, 0x84) != 0) {
+        temp_r0 = M2C_FIELD(arg0, s32 *, 0x84) - 1;
+        M2C_FIELD(arg0, s32 *, 0x84) = temp_r0;
+        if (temp_r0 == 0) {
+            fn_8017579C(M2C_FIELD(lbl_80495C90, void **, 0x58), 2);
+            fn_801012A8((char *)arg0 + 0x4C);
+        }
     }
 }
 
