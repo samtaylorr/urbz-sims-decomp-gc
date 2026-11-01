@@ -766,6 +766,27 @@ s16 fn_801B6620(void *arg0) {
     return 0;
 }
 
+s32 fn_801B6638(void *arg0) {
+    s32 *p = M2C_FIELD(arg0, s32 **, 4);
+    if (p != NULL) {
+        s32 *q = *(s32 **)p;
+        s32 r = 0;
+        if (q != NULL) {
+            r = q[-1];
+        }
+        return r;
+    }
+    return 0;
+}
+
+s32 fn_801B6664(void *arg0) {
+    void *p = M2C_FIELD(arg0, void **, 4);
+    if (p == NULL) {
+        return 0;
+    }
+    return M2C_FIELD(p, s16 *, 8);
+}
+
 void fn_801B6680(void) {
 
 }
