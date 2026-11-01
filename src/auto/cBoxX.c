@@ -334,7 +334,7 @@ void fn_80100494(void *arg0, s32 arg1, s32 arg2) {
     It_80100494 end;
 
     fn_80100100(it, arg0, arg1, arg2);
-    end.node = M2C_FIELD(tree, s32 *, 4);
+    end = Tree_end(tree);
     if (TreeIt_ne(&it[0], &end)) {
         Map_erase(tree, it[0]);
     }
@@ -350,10 +350,14 @@ void fn_80100534(s32 arg0, s32 arg1) {
 
 void fn_80100560(void **out, void *arg1, u32 key) {
     void *y = M2C_FIELD(arg1, void **, 0x40);
-    const u32 *k = &key;
-    void *x = M2C_FIELD(y, void **, 4);
+    u32 k;
+    const u32 *kp;
+    void *x;
+    k = key;
+    kp = &k;
+    x = M2C_FIELD(y, void **, 4);
     while (x != NULL) {
-        if (!(M2C_FIELD(x, u32 *, 0x10) < *k)) {
+        if (!(M2C_FIELD(x, u32 *, 0x10) < *kp)) {
             y = x;
             x = M2C_FIELD(y, void **, 8);
         } else {
