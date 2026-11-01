@@ -2785,6 +2785,32 @@ void fn_8039ED08(void) {
     fn_80048A48(lbl_8041F754);
 }
 
+void fn_8039EEF8(void *self, s32 *val) {
+    typedef struct {
+        s32 *cur;
+        s32 *first;
+        s32 *last;
+        s32 **node;
+    } DequeIt;
+    void fn_8039ED30(void *, s32, s32);
+    void *fn_80399BE8(u32);
+    s32 v = *val;
+    DequeIt *it;
+    s32 **node;
+
+    if (2 > M2C_FIELD(self, u32 *, 0x2C) - (M2C_FIELD(self, s32 ***, 0x1C) - M2C_FIELD(self, s32 ***, 0x24))) {
+        fn_8039ED30(self, 1, 0);
+    }
+    M2C_FIELD(self, s32 ***, 0x1C)[1] = fn_80399BE8(0x80);
+    *M2C_FIELD(self, s32 **, 0x10) = v;
+    node = M2C_FIELD(self, s32 ***, 0x1C) + 1;
+    it = (DequeIt *)((u8 *)self + 0x10);
+    it->node = node;
+    it->first = *node;
+    it->last = it->first + 32;
+    M2C_FIELD(self, s32 **, 0x10) = M2C_FIELD(self, s32 **, 0x14);
+}
+
 void fn_8039EF90(void *self) {
     typedef struct {
         s32 *cur;
