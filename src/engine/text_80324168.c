@@ -259,7 +259,11 @@ void fn_80325FD8(void *arg0, Vec3_80325FD8 *dst, Vec3_80325FD8 *src, s32 *first)
     }
     mx = dst[1].v;
     for (i = 0; i < 3; i++) {
-        dst[0].v[i] = dst[0].v[i] < src[0].v[i] ? dst[0].v[i] : src[0].v[i];
+        f32 m = src[0].v[i];
+        if (dst[0].v[i] < m) {
+            m = dst[0].v[i];
+        }
+        dst[0].v[i] = m;
         *mx = dst[1].v[i] > src[1].v[i] ? dst[1].v[i] : src[1].v[i];
         mx++;
     }
@@ -334,10 +338,10 @@ void fn_80326328(void *arg0, void *arg1) {
 }
 
 void fn_803269D8(void *arg0, void *arg1) {
-    extern f32 lbl_803F3244;
+    extern f32 lbl_803F3244[];
     void fn_80327DDC(void *, void *, s32 *, s32 *, void *);
-    s32 b = 0;
     s32 a = 0;
+    s32 b = 0;
     char *obj = M2C_FIELD(arg0, char **, 0x49098);
     char *vt;
     while (arg1 != 0) {
@@ -346,12 +350,12 @@ void fn_803269D8(void *arg0, void *arg1) {
         arg1 = next;
     }
     vt = M2C_FIELD(obj, char **, 0x68);
-    (*(void (**)(void *, f32))(vt + 0x254))(obj + *(s16 *)(vt + 0x250), lbl_803F3244);
+    (*(void (**)(void *, f32))(vt + 0x254))(obj + *(s16 *)(vt + 0x250), lbl_803F3244[0]);
 }
 
 void fn_80326A60(void *arg0, void *arg1) {
     extern s32 lbl_80494F38;
-    extern f32 lbl_803F3248;
+    extern f32 lbl_803F3248[];
     void *obj = M2C_FIELD(arg0, void **, 0x49098);
     void *prev = NULL;
     void *next;
@@ -372,7 +376,7 @@ void fn_80326A60(void *arg0, void *arg1) {
         (*M2C_FIELD(arg1, void (**)(void *, void *), 0x14))(obj, arg1);
     }
     vt = M2C_FIELD(obj, char **, 0x68);
-    (*(void (**)(void *, f32))(vt + 0x254))((char *)obj + *(s16 *)(vt + 0x250), lbl_803F3248);
+    (*(void (**)(void *, f32))(vt + 0x254))((char *)obj + *(s16 *)(vt + 0x250), lbl_803F3248[0]);
     lbl_80494F38 = 0;
 }
 
@@ -385,7 +389,7 @@ void fn_80327A68(s32 arg0) {
 void fn_80327A9C(void *arg0, void *arg1) {
     char *vt = M2C_FIELD(arg1, char **, 0);
     u8 r = (*(u8 (**)(void *, void *))(vt + 0x74))((char *)arg1 + *(s16 *)(vt + 0x70), M2C_FIELD(arg0, void **, 0x4909C));
-    if (!r) {
+    if (!(r & 1)) {
         vt = M2C_FIELD(arg1, char **, 0);
         (*(void (**)(void *, void *))(vt + 0x84))((char *)arg1 + *(s16 *)(vt + 0x80), M2C_FIELD(arg0, void **, 0x49098));
     }
