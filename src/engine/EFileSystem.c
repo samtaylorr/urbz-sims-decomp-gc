@@ -35,6 +35,75 @@ void fn_802C47FC(void) {
 
 }
 
+u32 fn_802C51F0(u8 *p, s32 len) {
+    extern u32 lbl_803FCE68[];
+    u32 crc = -1;
+
+    while (len-- != 0) {
+        crc = (crc >> 8) ^ lbl_803FCE68[(u8)crc ^ *p++];
+    }
+    return ~crc;
+}
+
+u32 fn_802C5240(char *s) {
+    extern u32 lbl_803FCE68[];
+    u32 crc = -1;
+
+    while (*s != 0) {
+        crc = (crc >> 8) ^ lbl_803FCE68[(u8)crc ^ (s32)*s++];
+    }
+    return ~crc;
+}
+
+u32 fn_802C528C(char *s) {
+    extern u32 lbl_803FCE68[];
+    u32 crc = -1;
+    char c;
+
+    while (*s != 0) {
+        c = *s;
+        if ((u32)(c - 'a') <= 25) {
+            c -= 0x20;
+        }
+        crc = (crc >> 8) ^ lbl_803FCE68[(u8)crc ^ c];
+        s++;
+    }
+    return ~crc;
+}
+
+extern u32 lbl_803FD0E8;
+extern const u32 lbl_803FCE68[];
+extern u8 lbl_80419270[];
+u32 fn_802C5390(const char *s, u32 h) {
+    while (*s) {
+        h = (h * 0x1000193) ^ *s;
+        s++;
+    }
+    return h;
+}
+
+u64 fn_802C53C8(const char *s, u64 h) {
+    while (*s) {
+        h = (h * 0x100000001B3ULL) ^ (s64)*s;
+        s++;
+    }
+    return h;
+}
+
+void fn_802C5440(s32 *self) {
+    self[8] = 0;
+    self[4] = 0x80000000;
+    self[10] = (s32)lbl_80419270;
+    self[9] = 0;
+    self[0] = 0;
+    self[1] = 0;
+    self[2] = 0x80000000;
+    self[3] = 0x80000000;
+    self[5] = 0;
+    self[6] = 0;
+    self[7] = 0;
+}
+
 extern s32 lbl_80494DB0;
 void fn_802C54FC(void (*cb)(void)) {
     lbl_80494DB0 = cb;
