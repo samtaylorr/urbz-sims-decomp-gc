@@ -389,12 +389,15 @@ void fn_802333E4(u8 *arg0) {
     void fn_80234BE8(void *);
     extern s32 lbl_80417F18[];
     extern s32 lbl_80417CF0[];
-    Event1A8 tmp, *p;
-    u8 pad[9];
+    struct {
+        Event1A8 ev;
+        s32 unkC[3];
+    } tmp;
+    Event1A8 *p;
     s32 *dvt = lbl_80417CF0;
     Callback1A8 *cb;
 
-    p = &tmp;
+    p = &tmp.ev;
     Event1A8_Init(p, lbl_80417F18, (Callback1A8 *)(arg0 + 0x1A8));
     cb = (Callback1A8 *)(arg0 + 0x1A8);
     cb->fn(p);
@@ -503,10 +506,12 @@ void fn_80234618(void *arg0, void *arg1) {
         void *vt = M2C_FIELD(obj, void **, 0x4);
         char *g = lbl_80496668;
         char *ent = *(char **)g + 0x58;
+        Elem6 *first;
 
         M2C_FIELD(ent, void (**)(void *, void *), 0x4)(g + *(s16 *)ent,
             M2C_FIELD(vt, void *(**)(void *), 0x2EC)((char *)obj + M2C_FIELD(vt, s16 *, 0x2E8)));
-        VecElem6_Clear((VecElem6 *)((char *)arg0 + 0x14));
+        first = M2C_FIELD(arg0, Elem6 **, 0x14);
+        VecElem6_Erase((VecElem6 *)((char *)arg0 + 0x14), first, M2C_FIELD(arg0, Elem6 **, 0x18));
         *h = NULL;
     }
 }
