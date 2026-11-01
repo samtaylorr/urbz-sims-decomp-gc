@@ -507,6 +507,14 @@ s16 fn_801B6398(void *arg0) {
     return M2C_FIELD(M2C_FIELD(arg0, void **, 4), s16 *, 0x1A);
 }
 
+s32 fn_801B63A4(void *arg0) {
+    s32 ret = 0;
+    if (M2C_FIELD(M2C_FIELD(arg0, void **, 4), s32 *, 0x10) & 1) {
+        ret = 1;
+    }
+    return ret;
+}
+
 s32 fn_801B63C0(void *arg0) {
     return ((u32) M2C_FIELD(M2C_FIELD(arg0, void **, 4), u32 *, 0x10) >> 1U) & 1;
 }
@@ -533,6 +541,22 @@ s32 fn_801B6418(void *arg0) {
 
 s16 fn_801B6428(void *arg0) {
     return M2C_FIELD(M2C_FIELD(arg0, void **, 4), s16 *, 0x18);
+}
+
+s32 fn_801B6434(void *arg0) {
+    void *p = M2C_FIELD(arg0, void **, 4);
+    s32 ret = 0;
+    if (!(M2C_FIELD(p, s32 *, 0x10) & 0x80)) {
+        void **q = M2C_FIELD(p, void ***, 0x1C);
+        void *r = NULL;
+        if (q != NULL) {
+            r = *q;
+        }
+        if (*(u16 *)r == 0x21) {
+            ret = 1;
+        }
+    }
+    return ret;
 }
 
 s32 fn_801B6470(void *arg0) {
