@@ -10,8 +10,7 @@ typedef struct { s32 w[3]; } Vec3i;
 typedef struct { s16 h[3]; } Elem6;
 typedef struct { Elem6 *begin; Elem6 *end; } VecElem6;
 
-static inline void VecElem6_Clear(VecElem6 *v) {
-    Elem6 *begin = v->begin;
+static inline void VecElem6_EraseToEnd(VecElem6 *v, Elem6 *begin) {
     Elem6 *p;
     for (p = begin; p != v->end; p++) {
     }
@@ -262,6 +261,68 @@ void fn_802330E0(u8 *arg0) {
     if (lbl_8041FC0C[0] != 0) {
         fn_80232C74(arg0, 0);
     }
+}
+
+void fn_80233138(u8 *arg0) {
+    void fn_80232C74(u8 *, u8 *);
+    s32 fn_80234AF4(void *);
+    extern s32 lbl_8041FC0C[];
+    extern s32 lbl_80417F18[];
+    extern s32 lbl_80417CF0[];
+    struct {
+        s32 unk0;
+        s32 unk4;
+        void *vtbl;
+    } tmp, *p;
+    s32 *dvt;
+    s32 *cb;
+    s32 ok;
+
+    ok = 1;
+    if (*(s32 *)(arg0 + 0x60) == 0) {
+        ok = 0;
+    }
+    if (ok && fn_80234AF4(arg0 + 0x60)) {
+        dvt = lbl_80417CF0;
+        p = &tmp;
+        p->vtbl = lbl_80417F18;
+        tmp.unk0 = 0;
+        cb = (s32 *)(arg0 + 0x1A8);
+        p->unk4 = cb[2];
+        ((void (*)(void *))cb[3])(p);
+        if (lbl_8041FC0C[0] != 0) {
+            fn_80232C74(arg0, 0);
+        }
+        fn_80232D2C(arg0, 1);
+        p->vtbl = dvt;
+    }
+}
+
+void fn_8023334C(u8 *arg0) {
+    void fn_80234D3C(void *);
+    void fn_80232C74(u8 *, u8 *);
+    extern s32 lbl_8041FC0C[];
+    extern s32 lbl_80417F18[];
+    extern s32 lbl_80417CF0[];
+    struct {
+        s32 unk0;
+        s32 unk4;
+        void *vtbl;
+    } tmp, *p;
+    s32 *cb;
+
+    p = &tmp;
+    p->vtbl = lbl_80417F18;
+    tmp.unk0 = 1;
+    cb = (s32 *)(arg0 + 0x1A8);
+    p->unk4 = cb[2];
+    ((void (*)(void *))cb[3])(p);
+    fn_80234D3C(arg0 + 0x60);
+    fn_80232D2C(arg0, 1);
+    if (lbl_8041FC0C[0] != 0) {
+        fn_80232C74(arg0, 0);
+    }
+    p->vtbl = lbl_80417CF0;
 }
 
 void fn_802333E4(u8 *arg0) {
