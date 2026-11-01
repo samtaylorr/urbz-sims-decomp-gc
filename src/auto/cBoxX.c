@@ -387,16 +387,12 @@ void fn_80100E14(void *arg0) {
 void fn_80100E74(void *arg0) {
     extern void *lbl_80495C90;
     void fn_8017579C(void *, s32);
-    s32 temp_r0;
+    s32 n = M2C_FIELD(arg0, s32 *, 0x80);
 
-    if (M2C_FIELD(arg0, s32 *, 0x80) != 0) {
-        temp_r0 = M2C_FIELD(arg0, s32 *, 0x80) - 1;
-        M2C_FIELD(arg0, s32 *, 0x80) = temp_r0;
-        if (temp_r0 == 0) {
-            fn_8017579C(M2C_FIELD(lbl_80495C90, void **, 0x58), 0);
-            fn_8017579C(M2C_FIELD(lbl_80495C90, void **, 0x58), 1);
-            fn_8017579C(M2C_FIELD(lbl_80495C90, void **, 0x58), 3);
-        }
+    if (n == 0 || (M2C_FIELD(arg0, s32 *, 0x80) = n - 1) == 0) {
+        fn_8017579C(M2C_FIELD(lbl_80495C90, void **, 0x58), 0);
+        fn_8017579C(M2C_FIELD(lbl_80495C90, void **, 0x58), 1);
+        fn_8017579C(M2C_FIELD(lbl_80495C90, void **, 0x58), 3);
     }
 }
 
