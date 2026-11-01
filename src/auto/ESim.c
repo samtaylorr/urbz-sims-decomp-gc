@@ -139,6 +139,13 @@ void fn_8003E430(void *arg0, s32 arg1) {
     }
 }
 
+s32 fn_8003E48C(void *arg0) {
+    if ((s32) M2C_FIELD(arg0, s32 *, 0x600) > 0) {
+        return 1;
+    }
+    return M2C_FIELD(arg0, s32 *, 0x63C);
+}
+
 void fn_8003E4A8(void *arg0) {
     M2C_UNK fn_8003E50C(void *);
     M2C_UNK fn_802D8F90(s32);
@@ -238,13 +245,11 @@ void fn_8003F79C(void *arg0, s32 arg1) {
 }
 
 void fn_8003F7F8(void) {
-    void *fn_80248488(void *, s32, u32);
+    void fn_80248488();
     void *fn_8003F9E0(void *);
     void *obj;
 
     obj = ESim_AllocAligned(0x680);
-    if (obj != NULL) {
-    }
     fn_80248488(obj, 0, 0x680);
     fn_8003F9E0(obj);
 }
