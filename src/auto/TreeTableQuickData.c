@@ -6,11 +6,6 @@ typedef struct TreeKey {
     u16 b;
 } TreeKey;
 
-static inline void TTQDString_Init(char *s) {
-    extern void fn_800F687C(void *, void *, s32);
-    fn_800F687C(s, s + 8, 0x40);
-}
-
 typedef struct TTQDPtrVec {
     void **begin;
     void **end;
