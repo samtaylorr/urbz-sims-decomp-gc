@@ -261,20 +261,8 @@ void fn_80325FD8(void *arg0, Vec3_80325FD8 *dst, Vec3_80325FD8 *src, s32 *first)
         return;
     }
     for (i = 0; i < 3; i++) {
-        f32 s = src[0].v[i];
-        f32 d = dst[0].v[i];
-        f32 m = s;
-        if (d < s) {
-            m = d;
-        }
-        dst[0].v[i] = m;
-        s = src[1].v[i];
-        d = dst[1].v[i];
-        m = s;
-        if (d > s) {
-            m = d;
-        }
-        dst[1].v[i] = m;
+        dst[0].v[i] = dst[0].v[i] < src[0].v[i] ? dst[0].v[i] : src[0].v[i];
+        dst[1].v[i] = dst[1].v[i] > src[1].v[i] ? dst[1].v[i] : src[1].v[i];
     }
 }
 
@@ -284,6 +272,7 @@ void fn_80326190(void *arg0) {
 }
 
 void fn_803261C8(void *arg0) {
+    void fn_80327A68(void *);
     s32 last = 0;
     void *node;
     void *next;
@@ -291,21 +280,37 @@ void fn_803261C8(void *arg0) {
     void *vt;
 
     fn_80326190(arg0);
-    fn_80327A68((s32)arg0);
+    fn_80327A68(arg0);
     node = M2C_FIELD(arg0, void **, 0x490C0);
     while (node != NULL) {
-        if (M2C_FIELD(node, s32 *, 0x18) != last) {
+        if (M2C_FIELD(node, s32 *, 0x18) == last) {
+            obj = M2C_FIELD(node, void **, 0x1C);
+            next = M2C_FIELD(node, void **, 0x10);
+            if (!(M2C_FIELD(obj, s32 *, 0x64) & 0x10)) {
+                vt = M2C_FIELD(obj, void **, 0);
+                M2C_FIELD(vt, void (**)(void *), 0x5C)((char *)obj + M2C_FIELD(vt, s16 *, 0x58));
+            }
+            node = next;
+        } else {
             last = M2C_FIELD(node, s32 *, 0x18);
-            continue;
         }
-        obj = M2C_FIELD(node, void **, 0x1C);
-        next = M2C_FIELD(node, void **, 0x10);
-        if (!(M2C_FIELD(obj, s32 *, 0x64) & 0x10)) {
-            vt = M2C_FIELD(obj, void **, 0);
-            M2C_FIELD(vt, void (**)(void *), 0x5C)((char *)obj + M2C_FIELD(vt, s16 *, 0x58));
-        }
-        node = next;
     }
+}
+
+s32 fn_803262D8(void *a, void *b) {
+    if (M2C_FIELD(a, f32 *, 4) < M2C_FIELD(b, f32 *, 4)) {
+        return 1;
+    }
+    if (M2C_FIELD(a, f32 *, 4) > M2C_FIELD(b, f32 *, 4)) {
+        return -1;
+    }
+    if (M2C_FIELD(a, f32 *, 8) < M2C_FIELD(b, f32 *, 8)) {
+        return 1;
+    }
+    if (M2C_FIELD(a, f32 *, 8) > M2C_FIELD(b, f32 *, 8)) {
+        return -1;
+    }
+    return M2C_FIELD(a, s32 *, 0) - M2C_FIELD(b, s32 *, 0);
 }
 
 void fn_80326A60(void *arg0, void *arg1) {
