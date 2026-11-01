@@ -224,6 +224,15 @@ void fn_800FE830(s32 arg0) {
     }
 }
 
+s32 fn_800FF588(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+s32 fn_800FF538(void *arg0, s8 *arg1, s32 arg2) {
+    s32 c = arg1[0];
+    if (c == 0) {
+        return 1;
+    }
+    return fn_800FF588(arg0, c, 0, arg2, M2C_FIELD(arg1, s32 *, 4)) == 0;
+}
+
 void fn_801000A0(void *arg0) {
     void fn_800F98E0(void *);
 
