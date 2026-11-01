@@ -13140,6 +13140,11 @@ s32 *fn_803BD14C(s32 *self, s32 *other) {
     return self;
 }
 
+static inline void Elem24_Assign(u8 *self, u8 *other) {
+    fn_803BD14C((s32 *)self, (s32 *)other);
+    *(Elem12 *)(self + 0xC) = *(Elem12 *)(other + 0xC);
+}
+
 void fn_803BD198(u8 *dst, u8 *src, s32 n) {
     while (--n != -1) {
         fn_803BD14C((s32 *)dst, (s32 *)src);
