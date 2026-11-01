@@ -78,10 +78,10 @@ u32 fn_802C528C(char *s) {
 extern u32 lbl_803FD0E8;
 extern const u32 lbl_803FCE68[];
 extern u8 lbl_80419270[];
-u32 fn_802C5390(const char *s, u32 h) {
-    while (*s) {
-        h = (h * 0x1000193) ^ *s;
-        s++;
+u32 fn_802C5390(char *s, u32 h) {
+    while (*s != 0) {
+        h *= 0x1000193;
+        h ^= *s++;
     }
     return h;
 }
