@@ -365,6 +365,20 @@ s32 fn_801B44B0(void) {
     return 0;
 }
 
+s32 fn_801B44B8(void *arg0, s32 arg1, void **arg2) {
+    void *temp_r9;
+
+    if (arg2 != NULL) {
+        if (arg1 == 1 || arg1 == 0x4BFB20D4) {
+            temp_r9 = M2C_FIELD(arg0, void **, 0);
+            M2C_FIELD(temp_r9, void (**)(void *), 0x14)((char *)arg0 + M2C_FIELD(temp_r9, s16 *, 0x10));
+            *arg2 = arg0;
+            return 1;
+        }
+    }
+    return 0;
+}
+
 s32 fn_801B4528(void *arg0) {
     return ++M2C_FIELD(arg0, s32 *, 0x14);
 }
