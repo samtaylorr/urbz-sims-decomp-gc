@@ -130,6 +130,20 @@ void fn_801C9DC0(void *arg0, s32 arg1, s8 arg2) {
     }
 }
 
+void fn_801CB130(s32 *self, s32 flags) {
+    void fn_8031EA2C(s32);
+    void fn_802D20E8(void *);
+
+    self[1] = 0;
+    if (self[0] != 0) {
+        fn_8031EA2C(self[0]);
+        self[0] = 0;
+    }
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 s32 fn_801CB188(s32 *self) {
     return self[1];
 }
