@@ -3378,7 +3378,8 @@ void **fn_803A0A44(void **self, void **other) {
                     size = 0;
                     tmp = (void **)fn_802D1FC8(bytes);
                 } else {
-                    tmp = (void **)fn_80399BE8(size > 0x80 ? 0 : bytes);
+                    size = 0;
+                    tmp = (void **)fn_80399BE8(bytes);
                 }
             } else {
                 tmp = NULL;
@@ -5335,7 +5336,7 @@ static inline void Vec12_InsertZeroAt(u8 **v, Elem12 *pos, s32 cnt, Elem12 *x) {
 void fn_803A8188(u8 **self, void *unused, void *stream, void *arg3) {
     extern void fn_8018D8DC(void *, s32 *, s32);
     extern void fn_80177470(void *, void *, void *);
-    extern void fn_80248488();
+    extern void *fn_80248488();
     s32 n;
     s32 size;
     s32 d;
@@ -5349,9 +5350,9 @@ void fn_803A8188(u8 **self, void *unused, void *stream, void *arg3) {
     d = size - n;
     if (d < 0) {
         Elem12 zero;
-        Elem12 *zp;
-        s32 cnt;
-        fn_80248488(zp = &zero, 0, sizeof(zero), cnt = n - size);
+        Elem12 *zp = &zero;
+        s32 cnt = n - size;
+        fn_80248488(zp, 0, sizeof(zero));
         fn_803A7DD0(self, end, cnt, zp);
     } else if (d > 0) {
         Vec12Elem *first = (Vec12Elem *)self[1] - d;
