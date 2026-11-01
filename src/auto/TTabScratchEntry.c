@@ -8,7 +8,7 @@ extern char lbl_803DBDE0[];
 void fn_801B1774(void **, s32);
 void fn_801B1AB4(void *);
 void fn_801B1644(void *);
-void fn_800F687C(void *, void *, s32);
+void *fn_800F687C(void *, void *, s32);
 void fn_800F68F0(void *, void *, s32);
 s32 fn_800F68BC(s32);
 void fn_800F6A38(s32, s32);
@@ -875,12 +875,12 @@ void *fn_8019F898(void *self) {
     fn_80102B5C(self);
     *(void **)((char *)self + 0x10) = lbl_80414248;
     do {
-        Str8_init((Str8_8019F898 *)(p + 4));
+        fn_800F687C(p + 4, p + 0xc, 8);
         p += 0x14;
     } while (--n != -1);
     *(s32 *)((char *)self + 0xd4) = 0;
+    ((void *(*)(void *, void *, s32))fn_800F687C)(&s, s.data, 8);
     b = &s;
-    Str8_init3(b, s.data, 8);
     fn_800F68F0(b, 0, -1);
     fn_800F6A38((s32)((char *)self + 0xd8), (s32)b);
     *(void **)((char *)self + 0x10) = lbl_80414B78;
