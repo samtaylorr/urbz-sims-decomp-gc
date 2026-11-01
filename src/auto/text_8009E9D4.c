@@ -79,6 +79,7 @@ void fn_800A0FE0(void *arg0) {
     M2C_UNK fn_800A19EC(void *);
     extern void (*lbl_80494EB8)(void);
     s32 v;
+    s32 r;
     if (fn_800A19EC(arg0) != 0) {
         if (lbl_80494EB8 != NULL) {
             lbl_80494EB8();
@@ -86,7 +87,12 @@ void fn_800A0FE0(void *arg0) {
         return;
     }
     v = M2C_FIELD(arg0, s32 *, 0x1A0);
-    M2C_FIELD(arg0, s32 *, 0x1A0) = (v < 0) ? 4 : ((v > 4) ? 0 : v);
+    if (v >= 0) {
+        r = (v > 4) ? 0 : v;
+    } else {
+        r = 4;
+    }
+    M2C_FIELD(arg0, s32 *, 0x1A0) = r;
 }
 
 void fn_800A1054(void *arg0) {
