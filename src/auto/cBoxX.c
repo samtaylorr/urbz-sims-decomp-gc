@@ -436,15 +436,11 @@ void fn_80100FB4(void *arg0) {
     extern void *lbl_80495C90;
     void fn_8017579C(void *, s32);
     void fn_801012A8(void *);
-    s32 temp_r0;
+    s32 n = M2C_FIELD(arg0, s32 *, 0x84);
 
-    if (M2C_FIELD(arg0, s32 *, 0x84) != 0) {
-        temp_r0 = M2C_FIELD(arg0, s32 *, 0x84) - 1;
-        M2C_FIELD(arg0, s32 *, 0x84) = temp_r0;
-        if (temp_r0 == 0) {
-            fn_8017579C(M2C_FIELD(lbl_80495C90, void **, 0x58), 2);
-            fn_801012A8((char *)arg0 + 0x4C);
-        }
+    if (n == 0 || (M2C_FIELD(arg0, s32 *, 0x84) = n - 1) == 0) {
+        fn_8017579C(M2C_FIELD(lbl_80495C90, void **, 0x58), 2);
+        fn_801012A8((char *)arg0 + 0x4C);
     }
 }
 
