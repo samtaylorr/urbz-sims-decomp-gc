@@ -215,6 +215,22 @@ void fn_801B3C50(void) {
 
 }
 
+void *fn_801B3D8C(void *self, void *arg1) {
+    extern void fn_801B3C08(void *);
+    extern void fn_800F687C(void *, void *, s32);
+    extern void fn_800F68F0(void *, const char *, s32);
+    extern void fn_801B4598(void *, void *);
+    extern char lbl_803DC200[];
+    char buf[0x48];
+    fn_801B3C08(self);
+    M2C_FIELD(self, void **, 0x1C) = arg1;
+    fn_800F687C(buf, buf + 8, 0x40);
+    fn_800F68F0(buf, lbl_803DC200, -1);
+    fn_801B4598(self, buf);
+    fn_801B47DC(self, M2C_FIELD(arg1, s16 *, 0xBC));
+    return self;
+}
+
 s32 fn_801B3E08(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     M2C_UNK fn_800F68E0(s32);
     fn_800F68E0(arg3);
@@ -222,6 +238,31 @@ s32 fn_801B3E08(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
 }
 
 s32 fn_801B3E30(void) {
+    return 0;
+}
+
+void fn_801B3E38(void *self, void *arg1) {
+    extern void fn_801B3C08(void *);
+    extern void fn_800F687C(void *, void *, s32);
+    extern void fn_800F68F0(void *, const char *, s32);
+    extern void fn_801B4598(void *, void *);
+    extern char lbl_803DC214[];
+    char buf[0x48];
+    fn_801B3C08(self);
+    M2C_FIELD(self, void **, 0x1C) = arg1;
+    M2C_FIELD(self, s8 *, 0x1A) = arg1 != 0;
+    fn_800F687C(buf, buf + 8, 0x40);
+    fn_800F68F0(buf, lbl_803DC214, -1);
+    fn_801B4598(self, buf);
+    fn_801B47DC(self, M2C_FIELD(arg1, s16 *, 0xBC));
+}
+
+s32 fn_801B3EC4(void *self, s32 arg1) {
+    extern void fn_800F69F8(s32, s32);
+    if (M2C_FIELD(self, s32 *, 0x8) != M2C_FIELD(self, s32 *, 0x4)) {
+        fn_800F69F8(arg1, M2C_FIELD(self, s32 *, 0x4));
+        return 1;
+    }
     return 0;
 }
 
@@ -372,11 +413,13 @@ s32 fn_801B5A4C(void *arg0) {
 
 M2C_UNK fn_801B5A68(void *arg0) {
     extern u8 lbl_80415808[];
+    TTQDPtrVec *vec;
     M2C_FIELD(arg0, void **, 0) = lbl_80415808;
     M2C_FIELD(arg0, s32 *, 4) = 0;
-    M2C_FIELD(arg0, s32 *, 8) = 0;
-    M2C_FIELD(arg0, s32 *, 0xC) = 0;
-    M2C_FIELD(arg0, s32 *, 0x14) = 0;
+    vec = (TTQDPtrVec *)((u8 *)arg0 + 8);
+    vec->begin = NULL;
+    vec->end = NULL;
+    vec->cap = NULL;
     fn_801B3814((TreeKey *)((u8 *)arg0 + 0x18), 0, 0);
     M2C_FIELD(arg0, s32 *, 0x20) = 0;
     return (M2C_UNK)arg0;
@@ -395,7 +438,7 @@ s32 fn_801B5DD0(void) {
     return 1;
 }
 
-s32 fn_801B5DD8(void *arg0, s32 arg1, u16 arg2) {
+s32 fn_801B5DD8(void *arg0, s32 arg1, s32 arg2) {
     TreeKey key;
     void *vt;
 
@@ -562,10 +605,10 @@ void fn_801B6304(s32 arg0, s32 arg1) {
     extern s16 lbl_80495D90[4];
     if ((arg1 == 0xFFFF) && (arg0 != 0)) {
         s16 *p = lbl_80495D90;
-        p[3] = 0;
         p[0] = 0;
         p[1] = 0;
         p[2] = 0;
+        p[3] = 0;
     }
 }
 
