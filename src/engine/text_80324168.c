@@ -281,7 +281,7 @@ void fn_803261C8(void *arg0) {
     fn_80326190(arg0);
     fn_80327A68(arg0);
     node = M2C_FIELD(arg0, void **, 0x490C0);
-    while (node != NULL) {
+    for (;;) {
         while (node != NULL && M2C_FIELD(node, s32 *, 0x18) == last) {
             obj = M2C_FIELD(node, void **, 0x1C);
             next = M2C_FIELD(node, void **, 0x10);
