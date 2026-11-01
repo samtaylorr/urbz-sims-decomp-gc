@@ -38,6 +38,39 @@ void fn_802C47FC(void) {
 
 }
 
+void fn_802C4A90(EBox *box, f32 *pts, s32 n) {
+    s32 i;
+    s32 j;
+    for (i = 0; i < n; i++) {
+        f32 p[3];
+        p[0] = pts[i * 4 + 0];
+        p[1] = pts[i * 4 + 1];
+        p[2] = pts[i * 4 + 2];
+        for (j = 0; j < 3; j++) {
+            if (p[j] < ((f32 *)&box->min)[j]) {
+                ((f32 *)&box->min)[j] = p[j];
+            } else if (p[j] > ((f32 *)&box->max)[j]) {
+                ((f32 *)&box->max)[j] = p[j];
+            }
+        }
+    }
+}
+
+void fn_802C4D24(EBox *box, EVec3 *pts, s32 n) {
+    extern const f32 lbl_803F007C[];
+    void fn_802C4A28(EBox *, EVec3 *, s32);
+    if (n != 0) {
+        box->max = *pts;
+        box->min = box->max;
+        fn_802C4A28(box, pts + 1, n - 1);
+    } else {
+        EVec3 t;
+        t.z = t.y = t.x = lbl_803F007C[0];
+        box->max = t;
+        box->min = box->max;
+    }
+}
+
 void fn_802C5148(EBox *box, EVec3 *c, f32 r) {
     EVec3 *mx;
     box->min.x = c->x - r;
@@ -49,12 +82,12 @@ void fn_802C5148(EBox *box, EVec3 *c, f32 r) {
     mx->y = c->y + r;
 }
 
-u32 fn_802C51F0(u8 *p, u32 len) {
+u32 fn_802C51F0(u8 *p, s32 len) {
     extern u32 lbl_803FCE68[];
     u32 crc = -1;
 
-    while (len-- != 0) {
-        crc = (crc >> 8) ^ lbl_803FCE68[(crc & 0xFF) ^ *p];
+    for (; len != 0; len--) {
+        crc = (crc >> 8) ^ lbl_803FCE68[(u8)crc ^ *p];
         p++;
     }
     return ~crc;
@@ -89,17 +122,17 @@ u32 fn_802C528C(char *s) {
     return ~crc;
 }
 
-u32 fn_802C52EC(char *s) {
+u32 fn_802C52EC(u8 *s) {
     extern u32 lbl_803FCE68[];
-    extern u32 lbl_803FD0E8;
+    extern u32 lbl_803FD0E8[];
     u32 crc = -1;
     char c;
 
     if ((u32)(*s - '0') <= 9) {
-        crc = lbl_803FD0E8 ^ 0xFFFFFF;
+        crc = lbl_803FD0E8[0] ^ 0xFFFFFF;
     }
     while (*s != 0) {
-        c = *s++;
+        c = *s;
         if ((u32)(c - 'a') <= 25) {
             c -= 0x20;
         } else if ((u32)(c - 'A') <= 25) {
@@ -108,6 +141,7 @@ u32 fn_802C52EC(char *s) {
             c = '_';
         }
         crc = (crc >> 8) ^ lbl_803FCE68[(u8)crc ^ c];
+        s++;
     }
     return ~crc;
 }
@@ -137,13 +171,13 @@ s32 *fn_802C5440(s32 *self) {
     self[1] = 0;
     self[2] = 0x80000000;
     self[3] = 0x80000000;
-    self[4] = 0x80000000;
     self[5] = 0;
     self[6] = 0;
     self[7] = 0;
     self[8] = 0;
-    self[9] = 0;
+    self[4] = 0x80000000;
     self[10] = (s32)lbl_80419270;
+    self[9] = 0;
     return self;
 }
 
