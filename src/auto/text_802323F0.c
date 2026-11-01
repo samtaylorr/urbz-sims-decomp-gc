@@ -374,6 +374,22 @@ void fn_80236F4C(void *arg0, s32 arg1) {
     }
 }
 
+void fn_80237190(void *arg0, Vec3i *arg1) {
+    extern void *fn_8008C46C(s32, u32);
+    M2C_UNK fn_8008B140(void *, s32);
+    M2C_UNK fn_800101C0(s32, Vec3i *);
+    void *p;
+    M2C_FIELD(arg0, s32 *, 0x68) = 1;
+    p = fn_8008C46C((s32)arg0 + 0x5C, M2C_FIELD(arg0, u32 *, 0));
+    if (p != NULL) {
+        *(Vec3i *)((char *)p + 0x110) = *arg1;
+        *(Vec3i *)p = *arg1;
+        fn_8008B140(p, 0);
+    }
+    *(Vec3i *)((char *)arg0 + 8) = *arg1;
+    fn_800101C0(M2C_FIELD(arg0, s32 *, 4), arg1);
+}
+
 void fn_8023739C(void *arg0) {
     extern f32 lbl_8041E80C[];
     f32 z = lbl_8041E80C[0];
