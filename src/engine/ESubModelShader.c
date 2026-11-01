@@ -1,6 +1,8 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+typedef struct { f32 x, y, z; } Vec3f;
+
 void *fn_802FFD98(void *arg0) {
     M2C_UNK fn_803BAD8C();
     fn_803BAD8C();
@@ -376,9 +378,10 @@ void fn_80305854(void *self, s32 arg1, s32 arg2) {
 
 void fn_803058C4(u8 *self, void *src) {
     struct blk { s32 w[5]; };
-    s32 saved = *(s32 *)(self + 0x58);
+    struct one { u32 a : 8; u32 b : 24; };
+    struct one saved = *(struct one *)(self + 0x58);
     *(struct blk *)(self + 0x48) = *(struct blk *)src;
-    *(s32 *)(self + 0x58) = saved;
+    *(struct one *)(self + 0x58) = saved;
 }
 
 s32 fn_80305908(s32 arg0) {
