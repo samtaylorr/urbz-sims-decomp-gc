@@ -4,6 +4,12 @@
 typedef struct { f32 x, y, z; } EVec3;
 typedef struct { EVec3 min; EVec3 max; } EBox;
 
+static inline void EVec3_Set(EVec3 *v, f32 x, f32 y, f32 z) {
+    v->x = x;
+    v->y = y;
+    v->z = z;
+}
+
 static inline f32 *EVec3_At(EVec3 *v, s32 i) {
     return &(&v->x)[i];
 }
@@ -97,21 +103,12 @@ void fn_802C4800(f32 *box, f32 *out) {
     s32 i;
 
     for (i = 0; i < 8; i++) {
-        if (i & 1) {
-            out[0] = box[3];
-        } else {
-            out[0] = box[0];
-        }
-        if (i & 2) {
-            out[1] = max[1];
-        } else {
-            out[1] = box[1];
-        }
-        if (i & 4) {
-            out[2] = max[2];
-        } else {
-            out[2] = box[2];
-        }
+        f32 x = (i & 1) ? box[3] : box[0];
+        f32 y = (i & 2) ? max[1] : box[1];
+        f32 z = (i & 4) ? max[2] : box[2];
+        out[0] = x;
+        out[1] = y;
+        out[2] = z;
         out += 3;
     }
 }
@@ -150,11 +147,13 @@ void fn_802C4A28(EBox *box, EVec3 *pts, s32 n) {
     s32 j;
 
     for (i = 0; i < n; i++) {
+        f32 *p = (f32 *)&pts[i];
+        f32 *b = (f32 *)box;
         for (j = 0; j < 3; j++) {
-            if (((f32 *)pts)[i * 3 + j] < ((f32 *)box)[j]) {
-                ((f32 *)box)[j] = ((f32 *)pts)[i * 3 + j];
-            } else if (((f32 *)pts)[i * 3 + j] > ((f32 *)box)[j + 3]) {
-                ((f32 *)box)[j + 3] = ((f32 *)pts)[i * 3 + j];
+            if (p[j] < b[j]) {
+                b[j] = p[j];
+            } else if (p[j] > b[j + 3]) {
+                b[j + 3] = p[j];
             }
         }
     }
@@ -202,18 +201,18 @@ void fn_802C5148(EBox *box, EVec3 *c, f32 r) {
     EVec3 *mx;
     f32 x, y, z;
     x = c->x - r;
-    y = c->y - r;
     z = c->z - r;
+    y = c->y - r;
     box->min.x = x;
     box->min.y = y;
     box->min.z = z;
     mx = &box->max;
     x = c->x + r;
-    z = c->z + r;
     y = c->y + r;
+    z = c->z + r;
     mx->x = x;
-    mx->z = z;
     mx->y = y;
+    mx->z = z;
 }
 
 void fn_802C5198(f32 *out, f32 *in) {
@@ -387,7 +386,7 @@ void *fn_802C5BBC(void *arg0, void *arg1) {
     s16 val;
 
     vt = M2C_FIELD(arg1, void **, 0x0);
-    obj = M2C_FIELD(vt, void *(**)(void *), 0x14)((char *)arg1 + M2C_FIELD(vt, s16 *, 0x10));
+    obj = (*(void *(**)(void *))((char *)vt + 0x14))((char *)arg1 + *(s16 *)((char *)vt + 0x10));
     vt = M2C_FIELD(arg0, void **, 0x28);
     M2C_FIELD(vt, void (**)(void *, void *, s32), 0x1C)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x18), &val, 2);
     M2C_FIELD(obj, s16 *, 0x16) = val;
