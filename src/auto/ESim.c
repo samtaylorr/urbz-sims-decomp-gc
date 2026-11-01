@@ -47,6 +47,12 @@ s32 fn_8003AD8C(void) {
     return fn_8003AD54() ^ 1;
 }
 
+void fn_8003ADB0(void *self) {
+    u8 *obj = *(u8 **)((u8 *)self + 0x3B0);
+    u8 *vt = *(u8 **)(obj + 4);
+    (*(void (**)(void *))(vt + 0x1D4))(obj + *(s16 *)(vt + 0x1D0));
+}
+
 void fn_8003CA70(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     M2C_UNK fn_800A43F4(s32, s32, M2C_UNK, s32, s32, M2C_UNK);
     fn_800A43F4(arg1, arg0 + 0x410, 0, arg2, arg3, 0);
@@ -209,20 +215,20 @@ void fn_8003E5E0(void *arg0, s32 arg1) {
 }
 
 void fn_8003EB40(void *arg0) {
-    extern void fn_8006D99C(s32 *, s32);
-    extern void fn_8006D9D4(s32 *, s32);
-    extern void fn_8006D9A4(s32 *, s32);
-    s32 buf[2];
+    extern void fn_8006D99C(void *, s32);
+    extern void fn_8006D9D4(void *, s32);
+    extern void fn_8006D9A4(void *, s32);
+    struct { s32 a; s32 b; } obj;
     s32 v;
     {
-        char *obj = M2C_FIELD(arg0, char **, 0x3B0);
-        char *vt = *(char **)(obj + 4);
-        v = ((s32 (*)(void *))M2C_FIELD(vt, void **, 0x124))(obj + M2C_FIELD(vt, s16 *, 0x120));
+        char *o = M2C_FIELD(arg0, char **, 0x3B0);
+        char *vt = *(char **)(o + 4);
+        v = ((s32 (*)(void *))M2C_FIELD(vt, void **, 0x124))(o + M2C_FIELD(vt, s16 *, 0x120));
     }
-    fn_8006D99C(buf, (s32)((char *)arg0 + 0x3B4));
-    fn_8006D9D4(buf, v);
+    fn_8006D99C(&obj, (s32)((char *)arg0 + 0x3B4));
+    fn_8006D9D4(&obj, v);
     M2C_FIELD(arg0, s32 *, 0x650) = 1;
-    fn_8006D9A4(buf, 2);
+    fn_8006D9A4(&obj, 2);
 }
 
 void fn_8003EBB4(void *arg0) {
@@ -243,6 +249,30 @@ void fn_8003EBB4(void *arg0) {
 
 void fn_8003ECBC(void *arg0, s32 *arg1) {
     *arg1 = M2C_FIELD(arg0, u8 *, 0) | (M2C_FIELD(arg0, u8 *, 1) << 8) | (M2C_FIELD(arg0, u8 *, 2) << 0x10) | (M2C_FIELD(arg0, u8 *, 3) << 0x18);
+}
+
+void fn_8003ECEC(u32 arg0, u8 *arg1) {
+    arg1[0] = arg0;
+    arg1[1] = arg0 >> 8;
+    arg1[2] = arg0 >> 16;
+    arg1[3] = arg0 >> 24;
+}
+
+u32 fn_8003ED0C(u8 *arg0, u32 arg1, u32 arg2, u32 arg3, u32 arg4) {
+    u32 r = 0;
+    u32 g = 0;
+    u32 b = 0;
+    u32 a = 0;
+    u32 y;
+    u8 *p;
+
+    for (y = arg1; y < arg1 + arg3; y++) {
+        for (p = arg0; p < arg0 + arg3; p++) {
+            r += p[y * arg4 + arg2];
+        }
+    }
+    arg3 *= arg3;
+    return (r / arg3) | ((g / arg3) << 8) | ((b / arg3) << 16) | ((a / arg3) << 24);
 }
 
 void fn_8003F3CC(void *arg0) {
