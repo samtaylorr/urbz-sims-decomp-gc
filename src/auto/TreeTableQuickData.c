@@ -130,6 +130,10 @@ TreeKey *fn_801B3814(TreeKey *self, s32 a, s16 b) {
     return self;
 }
 
+static inline void TreeKey_Init(TreeKey *self, s32 a, s16 b) {
+    fn_801B3814(self, a, b);
+}
+
 TreeKey *fn_801B3824(TreeKey *self, TreeKey *src) {
     self->a = src->a;
     self->b = src->b;
