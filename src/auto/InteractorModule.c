@@ -112,9 +112,10 @@ void fn_8023961C(void *arg0) {
     void *fn_801D7E6C();
     void fn_801D841C(void *, u32);
     M2C_UNK fn_8023800C(void *, s32);
+    void *g = lbl_80494600;
 
     M2C_FIELD(arg0, u32 *, 0xC0) = 0;
-    if (lbl_80494600 == 0) {
+    if (g == 0) {
         fn_802D1FC8(0x78);
         lbl_80494600 = fn_801D7E6C();
     }
@@ -165,8 +166,7 @@ void fn_80239A4C(void *arg0) {
     u32 i;
 
     for (i = 0; i < IMSlot_Size((IMSlot *) ((u8 *) arg0 + 0xA4)); i++) {
-        void **begin = M2C_FIELD(arg0, void ***, 0xA4);
-        M2C_FIELD(*(begin + i), s32 *, 0x378) = 0;
+        M2C_FIELD(IMSlot_At((IMSlot *) ((u8 *) arg0 + 0xA4), i), s32 *, 0x378) = 0;
     }
     M2C_FIELD(arg0, s32 *, 0xA8) = M2C_FIELD(arg0, s32 *, 0xA4);
 }
