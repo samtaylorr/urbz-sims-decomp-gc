@@ -2,6 +2,7 @@
 #include "common.h"
 
 typedef struct { f32 v[3]; } Vec3_80325FD8;
+typedef struct { u8 pad[0x1C]; u8 *obj; } Elem_80328;
 
 void fn_8032421C(void *);
 
@@ -237,9 +238,61 @@ void fn_80325B1C(s32 arg0) {
     fn_80366120(arg0 + 0x490B0);
 }
 
+void fn_80325FD8(void *arg0, Vec3_80325FD8 *dst, Vec3_80325FD8 *src, s32 *first) {
+    s32 i;
+
+    if (*first != 0) {
+        *first = 0;
+        dst[0] = src[0];
+        dst[1] = src[1];
+        return;
+    }
+    for (i = 0; i < 3; i++) {
+        f32 s = src[0].v[i];
+        f32 d = dst[0].v[i];
+        f32 m = s;
+        if (d < s) {
+            m = d;
+        }
+        dst[0].v[i] = m;
+        s = src[1].v[i];
+        d = dst[1].v[i];
+        m = s;
+        if (d > s) {
+            m = d;
+        }
+        dst[1].v[i] = m;
+    }
+}
+
 void fn_80326190(void *arg0) {
     M2C_UNK fn_802F5D80(void *, void *, void *, s32, s32);
     fn_802F5D80(arg0 + 0x28, arg0 + 0x48EFC, arg0 + 0x49120, M2C_FIELD(arg0, s32 *, 0x4B120), M2C_FIELD(arg0, s32 *, 0x4911C));
+}
+
+void fn_803261C8(void *arg0) {
+    s32 last = 0;
+    void *node;
+    void *next;
+    void *obj;
+    void *vt;
+
+    fn_80326190(arg0);
+    fn_80327A68((s32)arg0);
+    node = M2C_FIELD(arg0, void **, 0x490C0);
+    while (node != NULL) {
+        if (M2C_FIELD(node, s32 *, 0x18) != last) {
+            last = M2C_FIELD(node, s32 *, 0x18);
+            continue;
+        }
+        obj = M2C_FIELD(node, void **, 0x1C);
+        next = M2C_FIELD(node, void **, 0x10);
+        if (!(M2C_FIELD(obj, s32 *, 0x64) & 0x10)) {
+            vt = M2C_FIELD(obj, void **, 0);
+            M2C_FIELD(vt, void (**)(void *), 0x5C)((char *)obj + M2C_FIELD(vt, s16 *, 0x58));
+        }
+        node = next;
+    }
 }
 
 void fn_80327A68(s32 arg0) {
