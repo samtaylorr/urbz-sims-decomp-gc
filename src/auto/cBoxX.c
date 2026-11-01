@@ -311,7 +311,6 @@ void fn_80100EDC(void *arg0) {
 }
 
 s32 *fn_801011D4(s32 *arg0) {
-    arg0[10] = 0;
     arg0[0] = 0;
     arg0[1] = 0;
     arg0[2] = 0;
@@ -322,6 +321,7 @@ s32 *fn_801011D4(s32 *arg0) {
     arg0[7] = 0;
     arg0[8] = 0;
     arg0[9] = 0;
+    arg0[10] = 0;
     return arg0;
 }
 
