@@ -374,6 +374,13 @@ void fn_80236F4C(void *arg0, s32 arg1) {
     }
 }
 
+void fn_8023739C(void *arg0) {
+    extern f32 lbl_8041E80C[];
+    f32 z = lbl_8041E80C[0];
+    M2C_FIELD(arg0, s32 *, 0x74) = 0;
+    M2C_FIELD(arg0, f32 *, 0x60) = z;
+}
+
 s32 fn_80237978(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0xEC);
 }
