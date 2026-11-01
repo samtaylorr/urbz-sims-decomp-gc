@@ -224,10 +224,12 @@ void *fn_801B3D8C(void *self, void *arg1) {
     extern char lbl_803DC200[];
     char buf[0x48];
     char *s = buf;
+    const char *str;
     fn_801B3C08(self);
     M2C_FIELD(self, void **, 0x1C) = arg1;
+    str = lbl_803DC200;
     fn_800F687C(s, s + 8, 0x40);
-    fn_800F68F0(s, lbl_803DC200, -1);
+    fn_800F68F0(s, str, -1);
     fn_801B4598(self, s);
     fn_801B47DC(self, M2C_FIELD(arg1, s16 *, 0xBC));
     return self;
@@ -252,12 +254,14 @@ void fn_801B3E38(void *self, void *arg1) {
     extern char lbl_803DC214[];
     char buf[0x48];
     char *s;
+    const char *str;
     fn_801B3C08(self);
     M2C_FIELD(self, void **, 0x1C) = arg1;
     M2C_FIELD(self, s8 *, 0x1A) = arg1 != 0;
     s = buf;
+    str = lbl_803DC214;
     fn_800F687C(s, s + 8, 0x40);
-    fn_800F68F0(s, lbl_803DC214, -1);
+    fn_800F68F0(s, str, -1);
     fn_801B4598(self, s);
     fn_801B47DC(self, M2C_FIELD(arg1, s16 *, 0xBC));
 }
@@ -306,12 +310,22 @@ s32 fn_801B47EC(s32 *self) {
     return self[7];
 }
 
+s32 fn_801B47F4(void) {
+    void *fn_802D1FC8(s32);
+    extern s32 lbl_8049458C;
+    if ((s32) lbl_8049458C == 0) {
+        lbl_8049458C = (s32) fn_801B4830(fn_802D1FC8(0x18));
+    }
+    return lbl_8049458C;
+}
+
 void *fn_801B4830(void *self);
 void *fn_801B4830(void *self) {
     extern void *fn_80399BE8(s32);
     extern char lbl_804157C0[];
     s32 *list;
     s32 *p;
+    char alloc[16];
 
     M2C_FIELD(self, void **, 0) = lbl_804157C0;
     list = (s32 *)((char *)self + 4);
@@ -381,7 +395,7 @@ void fn_801B4CC4(u8 *arg0, s32 arg1, s32 arg2, s32 arg3) {
 
     vt = *(u8 **)arg0 + 0x20;
     obj = arg0 + *(s16 *)vt;
-    (*(void (**)(u8 *, s32, TreeKey *, s32))(vt + 4))(obj, arg1, fn_801B3814(&key, arg2, 0), arg3);
+    (*(void (**)(u8 *, s32, TreeKey *, s32))(vt + 4))(obj, arg1, (fn_801B3814(&key, arg2, 0), &key), arg3);
 }
 
 s32 fn_801B4D30(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
@@ -485,7 +499,7 @@ s32 fn_801B5A4C(void *arg0) {
 
 M2C_UNK fn_801B5A68(void *arg0) {
     extern u8 lbl_80415808[];
-    TreeKey pad;
+    TreeKey pad[1];
     s32 *vec;
     s32 *alloc;
     M2C_FIELD(arg0, void **, 0) = lbl_80415808;
@@ -514,12 +528,12 @@ s32 fn_801B5DD0(void) {
 }
 
 s32 fn_801B5DD8(void *arg0, s32 arg1, s32 arg2) {
-    TreeKey key;
+    TreeKey key[1];
     void *vt;
 
-    ((TreeKey *(*)(TreeKey *, s32, u16))fn_801B3814)(&key, arg1, arg2);
+    ((TreeKey *(*)(TreeKey *, s32, u16))fn_801B3814)(key, arg1, arg2);
     vt = M2C_FIELD(arg0, void **, 0);
-    if (M2C_FIELD(vt, s32 (**)(void *, TreeKey), 0x2C)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x28), key) == 0) {
+    if (M2C_FIELD(vt, s32 (**)(void *, TreeKey *), 0x2C)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x28), key) == 0) {
         return -0x32;
     }
     return 0;
