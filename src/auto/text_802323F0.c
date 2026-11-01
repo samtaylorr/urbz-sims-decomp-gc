@@ -7,6 +7,16 @@ typedef struct { s32 w[7]; } Struct1A8_7;
 typedef struct { s32 v; } Struct1B8;
 typedef struct { u8 b[4]; } Struct1B8b;
 typedef struct { s32 w[3]; } Vec3i;
+typedef struct { s16 h[3]; } Elem6;
+typedef struct { Elem6 *begin; Elem6 *end; } VecElem6;
+
+static inline void VecElem6_Clear(VecElem6 *v) {
+    Elem6 *begin = v->begin;
+    Elem6 *p;
+    for (p = begin; p != v->end; p++) {
+    }
+    v->end = begin;
+}
 
 extern void *fn_8022554C(void *);
 extern void fn_802303F0(void *, void *);
@@ -250,19 +260,20 @@ void fn_802333E4(u8 *arg0) {
         s32 unk0;
         s32 unk4;
         void *vtbl;
+        s32 pad[3];
     } tmp, *p;
-    u8 out[8];
     s32 *dvt = lbl_80417CF0;
-    s32 *cb;
+    u8 *self = arg0;
+    struct { s32 pad[2]; s32 data; void (*fn)(void *); } *cb;
 
     p = &tmp;
     p->vtbl = lbl_80417F18;
     tmp.unk0 = 3;
-    cb = (s32 *)(arg0 + 0x1A8);
-    p->unk4 = cb[2];
-    ((void (*)(void *))cb[3])(p);
-    fn_80234BE8(arg0 + 0x60);
-    fn_80232D2C(arg0, 1);
+    cb = (void *)(self + 0x1A8);
+    p->unk4 = cb->data;
+    cb->fn(p);
+    fn_80234BE8(self + 0x60);
+    fn_80232D2C(self, 1);
     p->vtbl = dvt;
 }
 
@@ -281,17 +292,18 @@ void fn_80233538(u8 *arg0) {
         s32 unkC;
     } tmp, *p;
     s32 *dvt = lbl_80417CF0;
-    s32 *cb;
+    u8 *self = arg0;
+    struct { s32 pad[2]; s32 data; void (*fn)(void *); } *cb;
 
     p = &tmp;
     p->vtbl = lbl_80417E58;
     p->unkC = 0;
     tmp.unk0 = 3;
-    cb = (s32 *)(arg0 + 0x1A8);
-    p->unk4 = cb[2];
-    ((void (*)(void *))cb[3])(p);
-    fn_80234C90(arg0 + 0x60);
-    fn_80232D2C(arg0, 1);
+    cb = (void *)(self + 0x1A8);
+    p->unk4 = cb->data;
+    cb->fn(p);
+    fn_80234C90(self + 0x60);
+    fn_80232D2C(self, 1);
     p->vtbl = dvt;
 }
 
@@ -360,21 +372,21 @@ s32 fn_802337C8(void **arg0, s32 arg1, s32 arg2) {
 
 void fn_80234618(void *arg0, void *arg1) {
     extern char *lbl_80496668;
-    void **h = (void **)arg1;
+    void ***h = (void ***)arg1;
 
     if (*h != NULL) {
-        void *obj = M2C_FIELD(*h, void **, 0x4);
+        void *obj = M2C_FIELD(**h, void **, 0x4);
         void *vt = M2C_FIELD(obj, void **, 0x4);
-        void *r = M2C_FIELD(vt, void *(**)(void *), 0x2EC)((char *)obj + M2C_FIELD(vt, s16 *, 0x2E8));
         char *g = lbl_80496668;
-        void *gvt = *(void **)g;
+        char *ent = *(char **)g + 0x58;
         u8 **vec;
         u8 *begin;
         u8 *p;
 
-        M2C_FIELD(gvt, void (**)(void *, void *), 0x5C)(g + M2C_FIELD(gvt, s16 *, 0x58), r);
+        M2C_FIELD(ent, void (**)(void *, void *), 0x4)(g + *(s16 *)ent,
+            M2C_FIELD(vt, void *(**)(void *), 0x2EC)((char *)obj + M2C_FIELD(vt, s16 *, 0x2E8)));
+        begin = M2C_FIELD(arg0, u8 **, 0x14);
         vec = (u8 **)((char *)arg0 + 0x14);
-        begin = vec[0];
         for (p = begin; p != vec[1]; p += 6) {
         }
         vec[1] = begin;
@@ -409,16 +421,23 @@ s32 fn_802348F8(s32 *arg0, s32 arg1, s32 arg2) {
 }
 
 void fn_80234BE8(void *arg0) {
+    typedef struct {
+        s16 v[3];
+    } Elem6;
+    typedef struct {
+        Elem6 *begin;
+        Elem6 *end;
+    } Vec6;
     Struct803EB1D8 t;
     s32 *q;
-    char **v = (char **)((char *)arg0 + 0x14);
-    char *b = v[0];
-    char *e = v[1];
-    char *p;
+    Elem6 *b = M2C_FIELD(arg0, Elem6 **, 0x14);
+    Vec6 *v = (Vec6 *)((char *)arg0 + 0x14);
+    Elem6 *p = b;
 
-    for (p = b; p != e; p += 6) {
+    while (p != v->end) {
+        p++;
     }
-    v[1] = b;
+    v->end = b;
     q = t.w;
     q[1] = 0;
     t.w[0] = -1;
