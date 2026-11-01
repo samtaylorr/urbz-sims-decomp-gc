@@ -161,6 +161,21 @@ void fn_800A1FF8(char *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 0x174) = arg1;
 }
 
+void fn_800A20A8(char *arg0, s32 arg1) {
+    void fn_800A1534(char *);
+
+    *M2C_FIELD(arg0, s32 **, 0x48) = arg1;
+    switch (arg1) {
+    case 3:
+    case 4:
+        break;
+    default:
+        fn_800A1FF8(arg0, M2C_FIELD(arg0, s32 *, 0x174), 0);
+        fn_800A1534(arg0);
+        break;
+    }
+}
+
 void fn_800A22D4(void) {
 
 }
