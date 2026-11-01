@@ -128,6 +128,30 @@ void fn_800A13DC(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x1A0) = arg1;
 }
 
+void fn_800A1534(char *arg0) {
+    void fn_800A13E4(char *, void *, s32);
+    extern const f32 lbl_803CD800[];
+    extern const f32 lbl_803CD804[];
+    extern const f32 lbl_803CD808[];
+    extern const f32 lbl_803CD80C[];
+    extern u8 lbl_8042EFE0[];
+    f32 a, b, c, d;
+
+    M2C_FIELD(arg0, s32 *, 0x178) = 0;
+    a = lbl_803CD800[0];
+    b = lbl_803CD804[0];
+    c = lbl_803CD808[0];
+    d = lbl_803CD80C[0];
+    M2C_FIELD(arg0, f32 *, 0x190) = a;
+    M2C_FIELD(arg0, f32 *, 0x188) = b;
+    M2C_FIELD(arg0, f32 *, 0x18C) = c;
+    M2C_FIELD(arg0, f32 *, 0x19C) = d;
+    M2C_FIELD(arg0, f32 *, 0x198) = a;
+    M2C_FIELD(arg0, f32 *, 0x194) = a;
+    M2C_FIELD(arg0, f32 *, 0x184) = b;
+    fn_800A13E4(arg0, lbl_8042EFE0 + M2C_FIELD(arg0, s32 *, 0x38) * 32, 1);
+}
+
 s32 fn_800A18A8(void *arg0, s32 arg1) {
     s32 temp_r0;
 
@@ -241,17 +265,24 @@ void fn_800A2B08(void *arg0) {
     char *node;
     char *obj;
     char *vt;
+    s32 more;
 
     node = M2C_FIELD(self, char **, 0);
-    while (node != NULL) {
+    goto check;
+    do {
         obj = M2C_FIELD(node, char **, 0);
         vt = M2C_FIELD(self, char **, 0x44);
         node = M2C_FIELD(node, char **, 8);
         (*(void (**)(char *, char *))(vt + 0x7C))(self + *(s16 *)(vt + 0x78), obj);
         vt = M2C_FIELD(obj, char **, 0x44);
         (*(void (**)(char *))(vt + 0x84))(obj + *(s16 *)(vt + 0x80));
-    }
-    M2C_FIELD(self, s32 *, 0x48) = 0;
+    check:
+        more = 1;
+        if (node == NULL) {
+            more = 0;
+        }
+    } while (more != 0);
+    M2C_FIELD(self, s32 *, 0x48) = more;
     M2C_FIELD(self, s32 *, 0x114) = M2C_FIELD(self, s32 *, 0x110);
 }
 
@@ -273,13 +304,15 @@ void fn_800A3310(void *arg0, s32 arg1) {
 }
 
 void fn_800A3544(char *arg0, s32 arg1, s32 arg2) {
-    void **fn_800A35E4();
+    void *fn_800A35E4(s32);
     void *fn_800A361C(char *);
     void fn_800A375C(void *, s32, s32);
     void fn_803074F0(void *, s32, s32);
     void fn_803077CC(void *, s32);
     extern const f32 lbl_803CD8E8[];
-    struct { f32 x, y, z; } v;
+    f32 v[3];
+    f32 *vp;
+    f32 z;
     char *p;
     char *vt;
 
@@ -287,9 +320,13 @@ void fn_800A3544(char *arg0, s32 arg1, s32 arg2) {
     fn_800A375C(p, arg1, arg2);
     fn_803074F0(p, 4, 0);
     fn_803077CC(p, M2C_FIELD(arg0, s32 *, 0x38));
-    v.x = v.y = v.z = lbl_803CD8E8[0];
+    z = lbl_803CD8E8[0];
+    vp = v;
+    vp[2] = z;
+    vp[1] = z;
+    v[0] = z;
     vt = M2C_FIELD(arg0, char **, 0x44);
-    (*(void (**)(char *, void *, void *))(vt + 0x94))(arg0 + *(s16 *)(vt + 0x90), p, &v);
+    (*(void (**)(char *, void *, void *))(vt + 0x94))(arg0 + *(s16 *)(vt + 0x90), p, vp);
 }
 
 void **fn_800A35E4(void) {
