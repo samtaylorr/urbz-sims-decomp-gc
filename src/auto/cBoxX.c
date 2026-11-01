@@ -177,8 +177,14 @@ void fn_800FE5D4(void *arg0) {
     extern char lbl_803D62F0[];
     void **p = (void **)((char *)arg0 + 0x30);
     void *r = fn_8032D5C8(M2C_FIELD(arg0, void **, 0x7C), lbl_803D62F0);
-    if (p != NULL) {
-        *p = r != NULL ? r : NULL;
+    if (r != NULL) {
+        if (p != NULL) {
+            *p = r;
+        }
+    } else {
+        if (p != NULL) {
+            *p = NULL;
+        }
     }
 }
 
@@ -231,6 +237,19 @@ s32 fn_800FF538(void *arg0, s8 *arg1, s32 arg2) {
         return 1;
     }
     return fn_800FF588(arg0, c, 0, arg2, M2C_FIELD(arg1, s32 *, 4)) == 0;
+}
+
+s32 fn_800FF588(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    extern char lbl_80434B38[];
+    extern void fn_802CAB54(void *, s32);
+    extern void fn_802CAC04(void *);
+    extern s32 fn_800FF5F8(void *, s32, s32, s32, s32);
+    s32 ret;
+
+    fn_802CAB54(lbl_80434B38, -1);
+    ret = fn_800FF5F8(arg0, arg1, arg2, arg3, arg4);
+    fn_802CAC04(lbl_80434B38);
+    return ret;
 }
 
 void fn_801000A0(void *arg0) {
