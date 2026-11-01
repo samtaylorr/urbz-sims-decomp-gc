@@ -265,12 +265,12 @@ void fn_80232E74(u8 *arg0, Struct1A8_7 *arg1) {
     void fn_80232C74(u8 *, u8 *);
     s32 fn_802337C8(void **, s32, s32);
     extern s32 lbl_8041FC0C[];
-    Struct1B8b saved;
+    struct { s32 v; s32 pad; } saved;
 
     if (arg1 != NULL) {
-        saved = *(Struct1B8b *)(arg0 + 0x1B8);
+        saved.v = *(s32 *)(arg0 + 0x1B8);
         *(Struct1A8_7 *)(arg0 + 0x1A8) = *arg1;
-        *(Struct1B8b *)(arg0 + 0x1B8) = saved;
+        *(s32 *)(arg0 + 0x1B8) = saved.v;
         if (fn_802337C8((void **)(arg0 + 0x60), *(s32 *)(arg0 + 0x1BC), *(u8 *)(arg0 + 0x1C0)) != 0) {
             if (lbl_8041FC0C[0] != 0) {
                 fn_80232C74(arg0, *(u8 **)(arg0 + 0x60));
@@ -330,7 +330,7 @@ void fn_80233138(u8 *arg0) {
         s32 unk0;
         s32 unk4;
         void *vtbl;
-        s32 unkC;
+        s32 unkC[3];
     } tmp, *p;
     s32 *dvt;
     s32 *cb;
@@ -342,11 +342,11 @@ void fn_80233138(u8 *arg0) {
         ok = 0;
     }
     if (ok && fn_80234AF4(h)) {
-        dvt = lbl_80417CF0;
         p = &tmp;
         p->vtbl = lbl_80417F18;
         tmp.unk0 = 0;
         cb = (s32 *)(arg0 + 0x1A8);
+        dvt = lbl_80417CF0;
         p->unk4 = cb[2];
         ((void (*)(void *))cb[3])(p);
         if (lbl_8041FC0C[0] != 0) {
@@ -364,25 +364,22 @@ void fn_8023334C(u8 *arg0) {
     extern s32 lbl_80417F18[];
     extern s32 lbl_80417CF0[];
     struct {
-        s32 unk0;
-        s32 unk4;
-        void *vtbl;
-        s32 unkC[4];
-    } tmp, *p;
-    s32 *cb;
+        Event1A8 ev;
+        s32 pad[4];
+    } tmp;
+    Event1A8 *p = &tmp.ev;
+    void *vt;
 
-    p = &tmp;
     p->vtbl = lbl_80417F18;
-    tmp.unk0 = 1;
-    cb = (s32 *)(arg0 + 0x1A8);
-    p->unk4 = cb[2];
-    ((void (*)(void *))cb[3])(p);
+    tmp.ev.unk0 = 1;
+    vt = lbl_80417CF0;
+    Callback1A8_Call((Callback1A8 *)(arg0 + 0x1A8), p);
     fn_80234D3C(arg0 + 0x60);
     fn_80232D2C(arg0, 1);
     if (lbl_8041FC0C[0] != 0) {
         fn_80232C74(arg0, 0);
     }
-    p->vtbl = lbl_80417CF0;
+    p->vtbl = vt;
 }
 
 void fn_802333E4(u8 *arg0) {
@@ -417,21 +414,19 @@ void fn_80233538(u8 *arg0) {
     struct {
         Event1A8 ev;
         s32 unkC;
-    } tmp;
-    Event1A8 *p;
+    } tmp, *p;
     s32 *dvt = lbl_80417CF0;
     Callback1A8 *cb;
 
-    p = &tmp.ev;
-    p->vtbl = lbl_80417E58;
-    tmp.unkC = 0;
-    p->unk0 = 3;
+    p = &tmp;
+    p->ev.vtbl = lbl_80417E58;
+    p->unkC = 0;
+    Event1A8_Init(&p->ev, lbl_80417E58, (Callback1A8 *)(arg0 + 0x1A8));
     cb = (Callback1A8 *)(arg0 + 0x1A8);
-    p->unk4 = cb->data;
-    cb->fn(p);
+    cb->fn(&p->ev);
     fn_80234C90(arg0 + 0x60);
     fn_80232D2C(arg0, 1);
-    p->vtbl = dvt;
+    p->ev.vtbl = dvt;
 }
 
 void fn_802335BC(s32 *arg0) {
@@ -752,10 +747,13 @@ void fn_80236E98(u8 *arg0, f32 *arg1) {
     f32 *p = fn_8022B564(M2C_FIELD(arg0, s32 *, 0));
 
     if (p != NULL) {
+        s32 a, b;
         arg1[0] = p[0];
         arg1[1] = p[1];
-        M2C_FIELD(arg1, s32 *, 0x8) = M2C_FIELD(arg0, s32 *, 0x50);
-        M2C_FIELD(arg1, s32 *, 0xC) = M2C_FIELD(arg0, s32 *, 0x54);
+        b = M2C_FIELD(arg0, s32 *, 0x54);
+        a = M2C_FIELD(arg0, s32 *, 0x50);
+        M2C_FIELD(arg1, s32 *, 0xC) = b;
+        M2C_FIELD(arg1, s32 *, 0x8) = a;
     }
 }
 
