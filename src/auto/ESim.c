@@ -70,6 +70,12 @@ void fn_8003ADB0(void *self) {
     (*(void (**)(void *))(vt + 0x1D4))(obj + *(s16 *)(vt + 0x1D0));
 }
 
+void fn_8003ADE8(void *self) {
+    u8 *obj = *(u8 **)((u8 *)self + 0x3B0);
+    u8 *vt = *(u8 **)(obj + 4);
+    (*(void (**)(void *))(vt + 0x1BC))(obj + *(s16 *)(vt + 0x1B8));
+}
+
 void fn_8003AE20(void *self) {
     u8 *obj = *(u8 **)((u8 *)self + 0x3B0);
     u8 *vt = *(u8 **)(obj + 4);
@@ -343,6 +349,34 @@ void fn_8003F3CC(void *arg0) {
         fn_8003F10C();
         return;
     }
+}
+
+void fn_8003F410(void *arg0) {
+    typedef struct {
+        s16 adj;
+        s16 pad;
+        void *fn;
+    } VEntry;
+    extern void fn_801CAFCC(void *);
+    extern void fn_801CB05C(void *, s32);
+    extern char **fn_801CB188(void *);
+    extern s32 fn_801CB6F8(void *, s32, s32);
+    extern void fn_801CB130(void *, s32);
+    extern void fn_8003F4C0(void *, s32);
+    char buf[0x18];
+    char *info;
+
+    {
+        char *obj = M2C_FIELD(arg0, char **, 0x3B0);
+        VEntry *e = (VEntry *)(*(char **)(obj + 4) + 0x120);
+        info = ((char *(*)(void *))e->fn)(obj + e->adj);
+    }
+    fn_801CAFCC(buf);
+    fn_801CB05C(buf, M2C_FIELD(info, s32 *, 0x80));
+    if ((*fn_801CB188(buf))[*(s8 *)(info + 0x89) * 0x1C + 8] != 0) {
+        fn_8003F4C0(arg0, fn_801CB6F8(buf, 0xC, *(s8 *)(info + 0x8A)));
+    }
+    fn_801CB130(buf, 2);
 }
 
 void *fn_8003F758(void *arg0, s32 arg1) {
