@@ -378,6 +378,12 @@ void fn_8030422C(u8 *self, Vec3f *a, Vec3f *b, Vec3f *c) {
     *(Vec3f *)(self + 0x18) = *c;
 }
 
+void fn_80304280(u8 *self, Vec3f *a, Vec3f *b, Vec3f *c) {
+    *a = *(Vec3f *)(self + 0x0);
+    *b = *(Vec3f *)(self + 0xC);
+    *c = *(Vec3f *)(self + 0x18);
+}
+
 void fn_803042D4(s32 arg0, s32 arg1) {
     M2C_UNK fn_802E2288(s32, s32, s32, s32);
     fn_802E2288(arg1, arg0, arg0 + 0xC, arg0 + 0x18);
