@@ -384,9 +384,9 @@ s32 fn_802348F8(s32 *arg0, s32 arg1, s32 arg2) {
 void fn_80234BE8(void *arg0) {
     Struct803EB1D8 t;
     s32 *q;
-    char **v = (char **)((char *)arg0 + 0x14);
-    char *b = v[0];
+    char *b = M2C_FIELD(arg0, char **, 0x14);
     char *p = b;
+    char **v = (char **)((char *)arg0 + 0x14);
 
     while (p != v[1]) {
         p += 6;
@@ -414,16 +414,17 @@ s32 fn_80234C90(void *arg0) {
     Struct803EB1D8 t;
     s32 *q;
     s32 r = 0;
+    void *h = M2C_FIELD(arg0, void **, 0);
 
-    if (M2C_FIELD(arg0, void **, 0) != 0) {
+    if (h != 0) {
         lbl_80494424 = 1;
-        r = fn_8022AFB8(M2C_FIELD(arg0, void **, 0));
+        r = fn_8022AFB8(h);
         q = t.w;
         q[1] = 0;
         t.w[0] = -1;
         lbl_80494424 = 0;
-        M2C_FIELD(arg0, s32 *, 0) = 0;
         M2C_FIELD(arg0, s32 *, 0x28) = 0;
+        M2C_FIELD(arg0, s32 *, 0) = 0;
         q[1] <<= 4;
         t.w[0] <<= 4;
         M2C_FIELD(arg0, Struct803EB1D8 *, 0x2C) = t;
