@@ -423,27 +423,23 @@ void fn_8003ECBC(void *arg0, s32 *arg1) {
 }
 
 void fn_8003ECEC(u32 arg0, u8 *arg1) {
-    u8 a = arg0;
-    u8 b = arg0 >> 8;
-    u8 c = arg0 >> 16;
-    u8 d = arg0 >> 24;
-    arg1[0] = a;
-    arg1[1] = b;
-    arg1[2] = c;
-    arg1[3] = d;
+    arg1[0] = arg0;
+    arg1[1] = (arg0 >> 8) & 0xFF;
+    arg1[2] = (arg0 >> 16) & 0xFF;
+    arg1[3] = arg0 >> 24;
 }
 
-u32 fn_8003ED0C(u8 *arg0, u32 arg1, u32 arg2, u32 arg3, u32 arg4) {
+u32 fn_8003ED0C(u32 arg0, u32 arg1, u8 *arg2, u32 arg3, u32 arg4) {
     u32 r = 0;
     u32 g = 0;
     u32 b = 0;
     u32 a = 0;
+    u32 x;
     u32 y;
-    u8 *p;
 
     for (y = arg1; y < arg1 + arg3; y++) {
-        for (p = arg0; p < arg0 + arg3; p++) {
-            u8 c = p[y * arg4 + arg2];
+        for (x = arg0; x < arg0 + arg3; x++) {
+            u8 c = arg2[y * arg4 + x];
             r += c & 0xFF;
             g += (c >> 8) & 0xFF;
             b += (c >> 16) & 0xFF;
