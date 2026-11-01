@@ -145,16 +145,18 @@ void fn_8003CAAC(void *arg0, void *arg1) {
     u8 *obj = *(u8 **)((u8 *)arg1 + 0x24);
     if (*(s32 *)(obj + 0x644) != 0) {
         u8 buf[0x40];
-        u8 *vt = *(u8 **)obj;
-        u8 *o2;
-        u8 *p;
-        (*(void (**)(void *, void *))(vt + 0xF4))(obj + *(s16 *)(vt + 0xF0), buf);
+        {
+            u8 *vt = *(u8 **)obj;
+            (*(void (**)(void *, void *))(vt + 0xF4))(obj + *(s16 *)(vt + 0xF0), buf);
+        }
         fn_802ECD34(obj + 0x314, arg0, *(s32 *)(obj + 0x134), buf);
-        o2 = *(u8 **)(obj + 0x3B0);
-        vt = *(u8 **)(o2 + 4);
-        p = (*(u8 *(**)(void *))(vt + 0x14C))(o2 + *(s16 *)(vt + 0x148));
-        vt = *(u8 **)p;
-        (*(void (**)(void *, void *, s32, s32))(vt + 0xFC))(p + *(s16 *)(vt + 0xF8), arg0, 0, 0);
+        {
+            u8 *o2 = *(u8 **)(obj + 0x3B0);
+            u8 *vt2 = *(u8 **)(o2 + 4);
+            u8 *p = (*(u8 *(**)(void *))(vt2 + 0x14C))(o2 + *(s16 *)(vt2 + 0x148));
+            u8 *vt3 = *(u8 **)p;
+            (*(void (**)(void *, void *, s32, s32))(vt3 + 0xFC))(p + *(s16 *)(vt3 + 0xF8), arg0, 0, 0);
+        }
     }
     fn_8003CB60(obj, arg0);
 }
