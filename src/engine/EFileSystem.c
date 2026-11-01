@@ -158,6 +158,10 @@ s32 fn_802C64D4(s32 *self) {
     return self[7];
 }
 
+s32 fn_802C64DC(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x20) == 11;
+}
+
 s32 fn_802C64F0(u8 *self) {
     return *(s32 *)(self + 0x20);
 }
