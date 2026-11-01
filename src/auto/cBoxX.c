@@ -302,8 +302,9 @@ void fn_80100E14(void *arg0) {
     extern void *lbl_80495C90;
     void fn_801756D4(void *, s32);
     void fn_80170F1C(void *);
+    void *g = lbl_80495C90;
     M2C_FIELD(arg0, s32 *, 0x80) = M2C_FIELD(arg0, s32 *, 0x80) + 1;
-    fn_801756D4(M2C_FIELD(lbl_80495C90, void **, 0x58), 0);
+    fn_801756D4(M2C_FIELD(g, void **, 0x58), 0);
     fn_801756D4(M2C_FIELD(lbl_80495C90, void **, 0x58), 1);
     fn_801756D4(M2C_FIELD(lbl_80495C90, void **, 0x58), 3);
     fn_80170F1C(lbl_80495C90);
