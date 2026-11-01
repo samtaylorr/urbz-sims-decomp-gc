@@ -316,9 +316,10 @@ s32 fn_801B47EC(s32 *self) {
 
 s32 fn_801B47F4(void) {
     void *fn_802D1FC8(s32);
+    s32 fn_801B4830(void *);
     extern s32 lbl_8049458C;
     if ((s32) lbl_8049458C == 0) {
-        lbl_8049458C = (s32) fn_801B4830(fn_802D1FC8(0x18));
+        lbl_8049458C = fn_801B4830(fn_802D1FC8(0x18));
     }
     return lbl_8049458C;
 }
