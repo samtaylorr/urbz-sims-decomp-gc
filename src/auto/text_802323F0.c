@@ -25,6 +25,10 @@ static inline void Event1A8_Init(Event1A8 *ev, void *vtbl, Callback1A8 *cb) {
     ev->unk0 = 3;
     ev->unk4 = cb->data;
 }
+static inline void Callback1A8_Call(Callback1A8 *cb, Event1A8 *ev) {
+    ev->unk4 = cb->data;
+    cb->fn(ev);
+}
 typedef struct { s16 h[3]; } Elem6;
 typedef struct { Elem6 *begin; Elem6 *end; } VecElem6;
 
@@ -386,7 +390,7 @@ void fn_802333E4(u8 *arg0) {
     extern s32 lbl_80417F18[];
     extern s32 lbl_80417CF0[];
     Event1A8 tmp, *p;
-    s32 pad[2];
+    u8 pad[9];
     s32 *dvt = lbl_80417CF0;
     Callback1A8 *cb;
 
@@ -499,14 +503,10 @@ void fn_80234618(void *arg0, void *arg1) {
         void *vt = M2C_FIELD(obj, void **, 0x4);
         char *g = lbl_80496668;
         char *ent = *(char **)g + 0x58;
-        Elem6 *first;
-        VecElem6 *v;
 
         M2C_FIELD(ent, void (**)(void *, void *), 0x4)(g + *(s16 *)ent,
             M2C_FIELD(vt, void *(**)(void *), 0x2EC)((char *)obj + M2C_FIELD(vt, s16 *, 0x2E8)));
-        first = M2C_FIELD(arg0, Elem6 **, 0x14);
-        v = (VecElem6 *)((char *)arg0 + 0x14);
-        VecElem6_Erase(v, first, v->end);
+        VecElem6_Clear((VecElem6 *)((char *)arg0 + 0x14));
         *h = NULL;
     }
 }
