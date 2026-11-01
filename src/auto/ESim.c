@@ -160,12 +160,12 @@ void fn_8003CAAC(void *arg0, void *arg1) {
 }
 
 void fn_8003CCA8(void *arg0, void *arg1) {
-    extern void *lbl_8041FA5C;
+    extern void *lbl_8041FA5C[];
     s32 fn_800AC4D0(void *, void *);
     void fn_8003BB8C(void *, void *);
     void fn_8003BDD0(void *, void *);
     u8 *obj = *(u8 **)((u8 *)arg1 + 0x24);
-    if (fn_800AC4D0(lbl_8041FA5C, *(void **)(obj + 0x3B0)) == 0) {
+    if (fn_800AC4D0(lbl_8041FA5C[0], *(void **)(obj + 0x3B0)) == 0) {
         switch (*(u32 *)(obj + 0x53C)) {
         case 0:
         case 3:
@@ -199,12 +199,12 @@ void fn_8003D024(void) {
 }
 
 void fn_8003DAB4(void *self, s32 arg1) {
-    extern f32 lbl_803C5CC4;
+    extern f32 lbl_803C5CC4[];
     void fn_802EAD40(void *, s32, s32);
     void fn_802EC790(void *, s32, f32);
     u8 *p = (u8 *)self + 0x314;
     fn_802EAD40(p, 1, arg1);
-    fn_802EC790(p, 0x1000, lbl_803C5CC4);
+    fn_802EC790(p, 0x1000, lbl_803C5CC4[0]);
 }
 
 void fn_8003E19C(void *arg0, s32 arg1, s32 arg2) {
