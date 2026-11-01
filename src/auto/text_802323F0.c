@@ -365,7 +365,7 @@ void fn_8023334C(u8 *arg0) {
     extern s32 lbl_80417CF0[];
     struct {
         Event1A8 ev;
-        s32 pad[4];
+        s32 pad[2];
     } tmp;
     Event1A8 *p = &tmp.ev;
     void *vt;
@@ -430,17 +430,20 @@ void fn_80233538(u8 *arg0) {
 }
 
 void fn_802335BC(s32 *arg0) {
-    struct { s32 a, b, c, d; } tmp;
-    s32 *v = arg0 + 5;
-    s32 *a = arg0 + 7;
+    struct { s32 w[6]; } tmp;
+    s32 *self = arg0;
+    s32 *v;
+    s32 *a;
 
-    arg0[0] = 0;
-    arg0[1] = 0;
-    v[0] = 0;
+    self[0] = 0;
+    v = self + 5;
+    self[1] = 0;
+    a = self + 7;
+    self[5] = 0;
     v[1] = 0;
     a[1] = 0;
     *(u8 *)(v + 4) = 0;
-    arg0[10] = 0;
+    self[10] = 0;
 }
 
 void fn_802335F4(void *arg0, s32 flags) {
@@ -750,8 +753,8 @@ void fn_80236E98(u8 *arg0, f32 *arg1) {
         s32 a, b;
         arg1[0] = p[0];
         arg1[1] = p[1];
-        b = M2C_FIELD(arg0, s32 *, 0x54);
         a = M2C_FIELD(arg0, s32 *, 0x50);
+        b = M2C_FIELD(arg0, s32 *, 0x54);
         M2C_FIELD(arg1, s32 *, 0xC) = b;
         M2C_FIELD(arg1, s32 *, 0x8) = a;
     }
