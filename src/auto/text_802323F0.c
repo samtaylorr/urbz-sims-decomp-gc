@@ -347,8 +347,8 @@ void fn_80233138(u8 *arg0) {
         tmp.unk0 = 0;
         cb = (s32 *)(arg0 + 0x1A8);
         dvt = lbl_80417CF0;
-        p->unk4 = cb[2];
-        ((void (*)(void *))cb[3])(p);
+        p->unk4 = ((volatile s32 *)cb)[2];
+        ((void (*)(void *))((volatile s32 *)cb)[3])(p);
         if (lbl_8041FC0C[0] != 0) {
             fn_80232C74(arg0, 0);
         }
@@ -748,16 +748,16 @@ void fn_80235BCC(u8 *arg0) {
 void fn_80236E98(u8 *arg0, f32 *arg1) {
     extern f32 *fn_8022B564(s32);
     f32 *p = fn_8022B564(M2C_FIELD(arg0, s32 *, 0));
+    s32 a, b;
 
     if (p != NULL) {
-        s32 a, b;
         arg1[0] = p[0];
         arg1[1] = p[1];
-        a = M2C_FIELD(arg0, s32 *, 0x50);
-        b = M2C_FIELD(arg0, s32 *, 0x54);
-        M2C_FIELD(arg1, s32 *, 0xC) = b;
-        M2C_FIELD(arg1, s32 *, 0x8) = a;
     }
+    a = M2C_FIELD(arg0, s32 *, 0x50);
+    b = M2C_FIELD(arg0, s32 *, 0x54);
+    M2C_FIELD(arg1, s32 *, 0xC) = b;
+    M2C_FIELD(arg1, s32 *, 0x8) = a;
 }
 
 void fn_80236EF4(s32 arg0, s32 arg1) {
