@@ -374,6 +374,14 @@ void fn_80236F4C(void *arg0, s32 arg1) {
     }
 }
 
+void fn_80237084(void *arg0) {
+    M2C_UNK fn_80223348(void *);
+    fn_80223348(arg0);
+    M2C_FIELD(arg0, s32 *, 0x30) = 0;
+    M2C_FIELD(arg0, s32 *, 0x64) = 0;
+    M2C_FIELD(arg0, s32 *, 0xEC) = 0;
+}
+
 void fn_80237190(void *arg0, Vec3i *arg1) {
     extern void *fn_8008C46C(s32, u32);
     M2C_UNK fn_8008B140(void *, s32);
