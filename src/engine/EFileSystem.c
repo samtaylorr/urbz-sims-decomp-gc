@@ -114,6 +114,12 @@ void fn_802C5E30(s32 arg0) {
     fn_803B9128(arg0 + 4);
 }
 
+void *fn_802C5E54(void *self) {
+    void *fn_80248488(void *, s32, u32);
+    fn_80248488(self, 0, 4);
+    return self;
+}
+
 void *fn_802C5E8C(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, u8 *arg5) {
     M2C_UNK fn_80248A10(void *, u8 *, M2C_UNK);
     u8 *var_r4;
