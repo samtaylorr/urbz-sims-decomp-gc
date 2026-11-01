@@ -377,26 +377,16 @@ void fn_802333E4(u8 *arg0) {
     void fn_80234BE8(void *);
     extern s32 lbl_80417F18[];
     extern s32 lbl_80417CF0[];
-    struct {
-        s32 unk0;
-        s32 unk4;
-        void *vtbl;
-        s32 pad[3];
-    } tmp, *p;
-    s32 *dvt = lbl_80417CF0;
-    u8 *self;
-    s32 *cb;
+    Event1A8 tmp;
+    s32 pad[3];
+    Callback1A8 *cb;
 
-    p = &tmp;
-    p->vtbl = lbl_80417F18;
-    self = arg0;
-    p->unk0 = 3;
-    cb = (s32 *)(self + 0x1A8);
-    p->unk4 = cb[2];
-    ((void (*)(void *))cb[3])(p);
-    fn_80234BE8(self + 0x60);
-    fn_80232D2C(self, 1);
-    p->vtbl = dvt;
+    Event1A8_Init(&tmp, lbl_80417F18, (Callback1A8 *)(arg0 + 0x1A8));
+    cb = (Callback1A8 *)(arg0 + 0x1A8);
+    cb->fn(&tmp);
+    fn_80234BE8(arg0 + 0x60);
+    fn_80232D2C(arg0, 1);
+    tmp.vtbl = lbl_80417CF0;
 }
 
 s32 fn_80233460(s32 arg0) {
@@ -730,8 +720,8 @@ void fn_80235B7C(u32 *arg0) {
 void fn_80235BCC(u8 *arg0) {
     extern f32 lbl_8041E804[];
 
-    M2C_FIELD(arg0, s32 *, 0x44) = 0;
     M2C_FIELD(arg0, s32 *, 0x48) = 0;
+    M2C_FIELD(arg0, s32 *, 0x44) = 0;
     if (__builtin_fabsf(M2C_FIELD(arg0, f32 *, 0x34)) < lbl_8041E804[0] &&
         __builtin_fabsf(M2C_FIELD(arg0, f32 *, 0x38)) < lbl_8041E804[0]) {
         M2C_FIELD(arg0, s32 *, 0x44) = 1;
