@@ -251,6 +251,8 @@ void fn_802333E4(u8 *arg0) {
         s32 unk4;
         void *vtbl;
     } tmp, *p;
+    u8 out[8];
+    s32 *dvt = lbl_80417CF0;
     s32 *cb;
 
     p = &tmp;
@@ -261,7 +263,7 @@ void fn_802333E4(u8 *arg0) {
     ((void (*)(void *))cb[3])(p);
     fn_80234BE8(arg0 + 0x60);
     fn_80232D2C(arg0, 1);
-    p->vtbl = lbl_80417CF0;
+    p->vtbl = dvt;
 }
 
 s32 fn_80233460(s32 arg0) {
@@ -278,6 +280,7 @@ void fn_80233538(u8 *arg0) {
         void *vtbl;
         s32 unkC;
     } tmp, *p;
+    s32 *dvt = lbl_80417CF0;
     s32 *cb;
 
     p = &tmp;
@@ -289,7 +292,7 @@ void fn_80233538(u8 *arg0) {
     ((void (*)(void *))cb[3])(p);
     fn_80234C90(arg0 + 0x60);
     fn_80232D2C(arg0, 1);
-    p->vtbl = lbl_80417CF0;
+    p->vtbl = dvt;
 }
 
 void fn_802335BC(s32 *arg0) {
@@ -355,6 +358,30 @@ s32 fn_802337C8(void **arg0, s32 arg1, s32 arg2) {
     return var_r3;
 }
 
+void fn_80234618(void *arg0, void *arg1) {
+    extern char *lbl_80496668;
+    void **h = (void **)arg1;
+
+    if (*h != NULL) {
+        void *obj = M2C_FIELD(*h, void **, 0x4);
+        void *vt = M2C_FIELD(obj, void **, 0x4);
+        void *r = M2C_FIELD(vt, void *(**)(void *), 0x2EC)((char *)obj + M2C_FIELD(vt, s16 *, 0x2E8));
+        char *g = lbl_80496668;
+        void *gvt = *(void **)g;
+        u8 **vec;
+        u8 *begin;
+        u8 *p;
+
+        M2C_FIELD(gvt, void (**)(void *, void *), 0x5C)(g + M2C_FIELD(gvt, s16 *, 0x58), r);
+        vec = (u8 **)((char *)arg0 + 0x14);
+        begin = vec[0];
+        for (p = begin; p != vec[1]; p += 6) {
+        }
+        vec[1] = begin;
+        *h = NULL;
+    }
+}
+
 s32 fn_802346C8(void *arg0, void *arg1) {
     void *obj;
     void *vt;
@@ -384,12 +411,12 @@ s32 fn_802348F8(s32 *arg0, s32 arg1, s32 arg2) {
 void fn_80234BE8(void *arg0) {
     Struct803EB1D8 t;
     s32 *q;
-    char *b = M2C_FIELD(arg0, char **, 0x14);
-    char *p = b;
     char **v = (char **)((char *)arg0 + 0x14);
+    char *b = v[0];
+    char *e = v[1];
+    char *p;
 
-    while (p != v[1]) {
-        p += 6;
+    for (p = b; p != e; p += 6) {
     }
     v[1] = b;
     q = t.w;
@@ -463,8 +490,9 @@ void fn_80234DCC(void *arg0) {
     void *p = M2C_FIELD(arg0, void **, 0x0);
 
     if (p != NULL) {
+        s32 id = M2C_FIELD(arg0, s16 *, 0x10);
         lbl_80494424 = 1;
-        fn_8022BF14(M2C_FIELD(arg0, s16 *, 0x10), p);
+        fn_8022BF14(id, p);
         lbl_80494424 = 0;
     }
 }
