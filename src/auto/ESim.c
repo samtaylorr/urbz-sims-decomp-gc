@@ -54,8 +54,8 @@ void fn_8003ACD4(void *self) {
     if (M2C_FIELD(self, s32 *, 0x5E0) != 0) {
         fn_803379C8(lbl_8045B82C, M2C_FIELD(self, s32 *, 0x5E0));
     }
-    M2C_FIELD(self, s32 *, 0x5DC) = 0;
     M2C_FIELD(self, s32 *, 0x5E0) = 0;
+    M2C_FIELD(self, s32 *, 0x5DC) = 0;
     M2C_FIELD(self, s32 *, 0x5D8) = 0;
 }
 
