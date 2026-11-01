@@ -13482,11 +13482,12 @@ void fn_803BE248(Elem12 *last, Elem12 *val, s32 (*comp)(Elem12 *, Elem12 *)) {
 }
 
 void fn_803BE3DC(Elem12 *first, Elem12 *last, s32 unused, s32 comp) {
+    Elem12 *it;
     Elem12 tmp;
 
-    for (; first != last; first++) {
-        tmp = *first;
-        fn_803BE248(first, &tmp, (s32 (*)(Elem12 *, Elem12 *))comp);
+    for (it = first; it != last; it++) {
+        tmp = *it;
+        fn_803BE248(it, &tmp, (s32 (*)(Elem12 *, Elem12 *))comp);
     }
 }
 
