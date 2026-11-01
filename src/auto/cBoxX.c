@@ -41,6 +41,12 @@ void fn_801000A0(void *arg0) {
     }
 }
 
+s32 fn_801000CC(void *arg0) {
+    extern s32 fn_800F98EC(void *);
+    void *p = M2C_FIELD(arg0, void **, 0x78);
+    return p != 0 ? fn_800F98EC(p) : 0;
+}
+
 void fn_80100534(s32 arg0, s32 arg1) {
     M2C_UNK fn_803A0874(s32, s32 *);
     s32 sp8;
