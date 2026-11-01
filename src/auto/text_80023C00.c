@@ -44,6 +44,13 @@ static inline s32 CountedArr_Count(void *data) {
     return data != NULL ? ((s32 *)data)[-1] : 0;
 }
 
+void fn_80023DE4(void *arg0) {
+    extern f32 lbl_803C4B58[];
+    f32 z = lbl_803C4B58[0];
+    M2C_FIELD(arg0, s32 *, 0xF4) = 1;
+    M2C_FIELD(arg0, f32 *, 0xF8) = z;
+}
+
 void *fn_800242F4(void *arg0) {
     fn_8001E804(arg0);
     M2C_FIELD(arg0, f32 *, 0xF8) = lbl_803C4B90[0];
