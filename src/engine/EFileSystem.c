@@ -42,6 +42,26 @@ void fn_802C46DC(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x1C) = 0;
 }
 
+s32 fn_802C46E8(void *self, u32 *a, s32 *b, u32 *c) {
+    s32 ok;
+    u32 v;
+    char *obj;
+    char *vt;
+    if ((a[0] & 0x3F) == 0x22) {
+        v = c[0];
+        ok = 0;
+        if ((v & 0x3F) == 1) {
+            ok = (v >> 15) & 1;
+        }
+        if (ok) {
+            obj = (char *)a[7];
+            vt = *(char **)obj;
+            (*(void (**)(void *, s32, s32))(vt + 0x2C))(obj + *(s16 *)(vt + 0x28), b[0] + 8, c[2] + 8);
+            return 1;
+        }
+    }
+}
+
 s32 fn_802C4764(s32 arg0) {
     extern s32 (*lbl_80443310[])(s32);
     extern void fn_802A1E98(s32);
@@ -68,18 +88,14 @@ void fn_802C47FC(void) {
 
 }
 
-void fn_802C4800(f32 *box, f32 *out) {
-    f32 *max = box + 3;
+void fn_802C4800(EBox *box, EVec3 *out) {
     s32 i;
 
     for (i = 0; i < 8; i++) {
-        f32 x = (i & 1) ? box[3] : box[0];
-        f32 y = (i & 2) ? max[1] : box[1];
-        f32 z = (i & 4) ? max[2] : box[2];
-        out[0] = x;
-        out[1] = y;
-        out[2] = z;
-        out += 3;
+        out->x = (i & 1) ? box->max.x : box->min.x;
+        out->y = (i & 2) ? box->max.y : box->min.y;
+        out->z = (i & 4) ? box->max.z : box->min.z;
+        out++;
     }
 }
 
@@ -87,11 +103,12 @@ void fn_802C4868(f32 *box, f32 *out) {
     extern const f32 lbl_803F0078[];
     f32 *max = box + 3;
     s32 i;
+    f32 x, y, z;
 
     for (i = 0; i < 8; i++) {
-        f32 x = (i & 1) ? box[3] : box[0];
-        f32 y = (i & 2) ? max[1] : box[1];
-        f32 z = (i & 4) ? max[2] : box[2];
+        if (i & 1) x = box[3]; else x = box[0];
+        if (i & 2) y = max[1]; else y = box[1];
+        if (i & 4) z = max[2]; else z = box[2];
         out[0] = x;
         out[1] = y;
         out[2] = z;
@@ -116,34 +133,30 @@ void fn_802C4A28(EBox *box, EVec3 *pts, s32 n) {
     s32 j;
 
     for (i = 0; i < n; i++) {
-        f32 *p = (f32 *)&pts[i];
-        f32 *b = (f32 *)box;
         for (j = 0; j < 3; j++) {
-            if (p[j] < b[j]) {
-                b[j] = p[j];
-            } else if (p[j] > b[j + 3]) {
-                b[j + 3] = p[j];
+            if (((f32 *)pts)[i * 3 + j] < ((f32 *)box)[j]) {
+                ((f32 *)box)[j] = ((f32 *)pts)[i * 3 + j];
+            } else if (((f32 *)pts)[i * 3 + j] > ((f32 *)box)[j + 3]) {
+                ((f32 *)box)[j + 3] = ((f32 *)pts)[i * 3 + j];
             }
         }
     }
 }
 
-void fn_802C4A90(EBox *box, EVec3 *pts, s32 n) {
+void fn_802C4A90(f32 (*box)[3], f32 (*pts)[4], s32 n) {
     s32 i;
     s32 j;
     for (i = 0; i < n; i++) {
         EVec3 p;
         EVec3 *q = &p;
-        f32 *src = (f32 *)((u8 *)pts + i * 16);
-        q->x = src[0];
-        q->y = src[1];
-        q->z = src[2];
+        q->x = pts[i][0];
+        q->y = pts[i][1];
+        q->z = pts[i][2];
         for (j = 0; j < 3; j++) {
-            f32 v = ((f32 *)q)[j];
-            if (v < ((f32 *)box)[j]) {
-                ((f32 *)box)[j] = v;
-            } else if (v > ((f32 *)&box->max)[j]) {
-                ((f32 *)&box->max)[j] = v;
+            if ((&q->x)[j] < box[0][j]) {
+                box[0][j] = (&q->x)[j];
+            } else if ((&q->x)[j] > box[1][j]) {
+                box[1][j] = (&q->x)[j];
             }
         }
     }
@@ -210,15 +223,11 @@ void fn_802C5198(f32 *out, f32 *in) {
 
 u32 fn_802C51F0(u8 *p, s32 len) {
     extern u32 lbl_803FCE68[];
-    u32 crc;
-    s32 i;
+    u32 crc = -1;
 
-    crc = -1;
-    i = len - 1;
     while (len != 0) {
-        crc = (crc >> 8) ^ lbl_803FCE68[(crc & 0xFF) ^ (u32)*p];
-        p++;
-        len = i--;
+        len--;
+        crc = (crc >> 8) ^ lbl_803FCE68[(crc & 0xFF) ^ *p++];
     }
     return ~crc;
 }
@@ -328,6 +337,52 @@ void fn_802C54FC(void (*cb)(void)) {
     lbl_80494DB0 = cb;
 }
 
+void *fn_802C5B1C(void *self, void *stream) {
+    extern void fn_802D3E40(void *);
+    extern void fn_802D41A8(void *, char *);
+    char buf[64];
+    char *vt;
+    s32 i;
+    i = 0;
+    fn_802D3E40(stream);
+    for (;;) {
+        vt = M2C_FIELD(self, char **, 0x28);
+        (*(void (**)(void *, char *, s32))(vt + 0x1C))((char *)self + *(s16 *)(vt + 0x18), buf + i, 1);
+        if (buf[i] == 0) {
+            break;
+        }
+        if (i == 0x3E) {
+            i++;
+            buf[63] = 0;
+            fn_802D41A8(stream, buf);
+            i = 0;
+        } else {
+            i++;
+        }
+    }
+    fn_802D41A8(stream, buf);
+    return self;
+}
+
+void *fn_802C5C58(void *arg0, s32 *arg1) {
+    s32 fn_802C5954(void *, s32);
+    void *vt;
+    s32 idx;
+
+    vt = M2C_FIELD(arg0, void **, 0x28);
+    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x1C)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x18), &idx, 4);
+    if (idx != 0) {
+        if (M2C_FIELD(arg0, s32 *, 0x0) != 0) {
+            *arg1 = M2C_FIELD(arg0, s32 **, 0x4)[idx - 1];
+        } else {
+            *arg1 = fn_802C5954(arg0, idx);
+        }
+    } else {
+        *arg1 = idx;
+    }
+    return arg0;
+}
+
 s32 fn_802C5CEC(void) {
     return 0;
 }
@@ -374,6 +429,22 @@ void fn_802C5D3C(void *arg0, s32 arg1) {
 
 void fn_802C5D44(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 8) = arg1;
+}
+
+void *fn_802C5D4C(u8 *self) {
+    extern u8 lbl_80419328[];
+    extern u8 lbl_804192D0[];
+    extern void fn_802C7B28(void *, s32);
+    extern void fn_803B90DC(void *);
+    *(u8 **)(self + 0x0) = lbl_80419328;
+    fn_802C7B28(self, 3);
+    *(u8 **)(self + 0x0) = lbl_804192D0;
+    fn_803B90DC(self + 4);
+    *(s32 *)(self + 0x14) = 0;
+    *(s32 *)(self + 0x20) = 4;
+    *(s32 *)(self + 0x18) = 4;
+    *(s32 *)(self + 0x1C) = 4;
+    return self;
 }
 
 void fn_802C5DB8(u8 *self, s32 flags) {
