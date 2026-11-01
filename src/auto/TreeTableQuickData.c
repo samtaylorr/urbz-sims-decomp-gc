@@ -261,11 +261,53 @@ void fn_801B5624(void) {
 }
 
 void fn_801B57DC(void *arg0, s32 flags) {
+    extern u8 lbl_80415928[];
     extern void fn_802D20E8(void *);
-    s32 *self = arg0;
+    extern void fn_803997AC(void *, u32);
+    register s32 *self asm("r29") = arg0;
+    register s32 fl asm("r25");
+    register void ***vec1 asm("r26");
+    void ***vec2;
+    register void **begin asm("r28");
+    register void **end asm("r30");
+    register void **it asm("r31");
+    void *obj;
+    void *vt;
+    void *p;
+    u32 size;
 
-    TTQD_DtorVecs(self, (TTQDPtrVec *)(self + 2), (TTQDPtrVec *)(self + 2));
-    if (flags & 1) {
+    begin = (void **)self[2];
+    vec1 = (void ***)(self + 2);
+    self[0] = (s32)lbl_80415928;
+    fl = flags;
+    self[1] = 0;
+    end = vec1[1];
+    for (it = begin; vec2 = (void ***)(self + 2), it != end; it++) {
+        obj = *it;
+        if (obj != NULL) {
+            vt = *(void **)obj;
+            M2C_FIELD(vt, void (**)(void *), 0x1C)((char *)obj + M2C_FIELD(vt, s16 *, 0x18));
+        }
+    }
+    vec1[1] = begin;
+    end = vec2[1];
+    for (it = (void **)self[2]; it != end; it++) {
+        obj = *it;
+        if (obj != NULL) {
+            vt = *(void **)obj;
+            M2C_FIELD(vt, void (**)(void *), 0x1C)((char *)obj + M2C_FIELD(vt, s16 *, 0x18));
+        }
+    }
+    p = vec2[0];
+    if (p != NULL) {
+        size = (u32)(vec2[3] - (void **)p) * sizeof(void *);
+        if (size > 0x80) {
+            fn_802D20E8(p);
+        } else {
+            fn_803997AC(p, size);
+        }
+    }
+    if (fl & 1) {
         fn_802D20E8(self);
     }
 }
@@ -375,6 +417,10 @@ s32 fn_801B6144(void *arg0, s32 arg1, void **arg2) {
         }
     }
     return 0;
+}
+
+s32 fn_801B61B4(void *arg0) {
+    return ++M2C_FIELD(arg0, s32 *, 0x18);
 }
 
 s16 fn_801B6338(void *arg0) {
