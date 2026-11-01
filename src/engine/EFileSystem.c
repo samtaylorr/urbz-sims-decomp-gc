@@ -86,10 +86,10 @@ u32 fn_802C5390(char *s, u32 h) {
     return h;
 }
 
-u64 fn_802C53C8(const char *s, u64 h) {
-    while (*s) {
-        h = (h * 0x100000001B3ULL) ^ (s64)*s;
-        s++;
+u64 fn_802C53C8(char *s, u64 h) {
+    while (*s != 0) {
+        h *= 0x100000001B3ULL;
+        h ^= (s64)*s++;
     }
     return h;
 }
