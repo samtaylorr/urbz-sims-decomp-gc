@@ -87,6 +87,11 @@ s32 fn_80059AC4(s32 *self) {
     return self[1];
 }
 
+void fn_80059ACC(void *arg0, s32 arg1) {
+    fn_80059AC4(arg0);
+    M2C_FIELD(arg0, s32 *, 4) = arg1;
+}
+
 void fn_80059B00(void *self, s32 arg1) {
     s8 fn_80059B50(void *);
     fn_80059B50(self);
@@ -113,15 +118,18 @@ u8 fn_80059B90(u8 *self) {
 }
 
 s32 fn_80059B98(s32 *self, struct BBI_Vec3 *out) {
-    struct BBI_Pair { s32 a; s32 b; };
-    struct BBI_Vec3 tmp;
+    struct { s8 c[8]; } tmp;
+    s32 ret;
 
     if (out != 0) {
-        *(struct BBI_Pair *)out = *(struct BBI_Pair *)self;
-        tmp.c = out->c;
-        return 1;
+        out->a = self[0];
+        out->b = self[1];
+        *(s32 *)tmp.c = out->c;
+        ret = 1;
+    } else {
+        ret = 0;
     }
-    return 0;
+    return ret;
 }
 
 s32 *fn_80059BD4(s32 *self) {
@@ -1178,8 +1186,9 @@ s32 fn_80061F9C(char *self) {
 void fn_80063054(void) {
     extern void fn_8005B71C(void *);
     void *fn_80248488(void *, s32, u32);
-    void *p = BBI_AllocAligned(0x660);
-    fn_8005B71C((fn_80248488(p, 0, 0x660), p));
+    u8 *p = BBI_AllocAligned(0x660);
+    fn_80248488(p, 0, 0x660);
+    fn_8005B71C(p);
 }
 
 void fn_800630FC(void) {
