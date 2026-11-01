@@ -355,6 +355,27 @@ void fn_8030582C(s32 arg0, s32 arg1) {
     }
 }
 
+void fn_80305854(void *self, s32 arg1, s32 arg2) {
+    extern u8 lbl_8045BA40[];
+    s32 fn_80337D68(void *, s32);
+    void fn_80304B30(void *, s32);
+    void fn_80304BE4(void *, s32);
+
+    if (fn_80337D68(lbl_8045BA40, arg1) != 0) {
+        fn_80304B30(self, arg1);
+    }
+    if (fn_80337D68(lbl_8045BA40, arg2) != 0) {
+        fn_80304BE4(self, arg2);
+    }
+}
+
+void fn_803058C4(u8 *self, void *src) {
+    struct blk { s32 w[5]; };
+    s32 saved = *(s32 *)(self + 0x58);
+    *(struct blk *)(self + 0x48) = *(struct blk *)src;
+    *(s32 *)(self + 0x58) = saved;
+}
+
 s32 fn_80305908(s32 arg0) {
     return arg0 + 0x48;
 }
