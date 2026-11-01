@@ -39,8 +39,12 @@ void fn_803256E0(s32 arg0, s32 arg1, s32 arg2) {
     fn_80325978(arg0, arg1);
 }
 
-u8 fn_8032571C(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x4B120) == 0x67F;
+s32 fn_8032571C(void *arg0) {
+    s32 r = 0;
+    if (M2C_FIELD(arg0, s32 *, 0x4B120) == 0x67F) {
+        r = 1;
+    }
+    return r;
 }
 
 void fn_80325734(void *arg0, void *arg1, s32 arg2) {
@@ -77,12 +81,21 @@ void fn_8032582C(void *arg0, void *arg1) {
     if (node != 0) {
         fn_802CB5C4(list, node);
         M2C_FIELD(arg1, s32 *, 0x88) = 0;
-        M2C_FIELD(arg0, s32 *, 0x28) = 1;
     }
+    M2C_FIELD(arg0, s32 *, 0x28) = 1;
 }
 
 void fn_80325888(void) {
 
+}
+
+void fn_803259C8(s32 arg0, void *arg1) {
+    void fn_80365E6C(s32, s32, void *, s32);
+    s32 h = M2C_FIELD(arg1, s32 *, 0x60);
+
+    if (h != 0) {
+        fn_80365E6C(arg0 + 0x490B0, h, arg1, 1);
+    }
 }
 
 void fn_80325A7C(s32 arg0, s32 arg1) {
