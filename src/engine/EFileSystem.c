@@ -198,21 +198,8 @@ void fn_802C4D24(EBox *box, EVec3 *pts, s32 n) {
 }
 
 void fn_802C5148(EBox *box, EVec3 *c, f32 r) {
-    EVec3 *mx;
-    f32 x, y, z;
-    x = c->x - r;
-    z = c->z - r;
-    y = c->y - r;
-    box->min.x = x;
-    box->min.y = y;
-    box->min.z = z;
-    mx = &box->max;
-    x = c->x + r;
-    y = c->y + r;
-    z = c->z + r;
-    mx->x = x;
-    mx->y = y;
-    mx->z = z;
+    EVec3_Set(&box->min, c->x - r, c->y - r, c->z - r);
+    EVec3_Set(&box->max, c->x + r, c->y + r, c->z + r);
 }
 
 void fn_802C5198(f32 *out, f32 *in) {
