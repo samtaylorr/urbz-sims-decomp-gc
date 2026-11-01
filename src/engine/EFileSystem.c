@@ -85,8 +85,9 @@ void fn_802C5148(EBox *box, EVec3 *c, f32 r) {
 u32 fn_802C51F0(u8 *p, s32 len) {
     extern u32 lbl_803FCE68[];
     u32 crc = -1;
+    s32 i;
 
-    while (len-- != 0) {
+    for (i = len - 1; len != 0; len = i--) {
         u32 idx = crc & 0xFF;
         idx ^= *p++;
         crc = (crc >> 8) ^ lbl_803FCE68[idx];
@@ -146,9 +147,6 @@ u32 fn_802C52EC(u8 *s) {
     return ~crc;
 }
 
-extern u32 lbl_803FD0E8;
-extern const u32 lbl_803FCE68[];
-extern u8 lbl_80419270[];
 u32 fn_802C5390(char *s, u32 h) {
     while (*s != 0) {
         h *= 0x1000193;
