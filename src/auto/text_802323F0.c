@@ -648,7 +648,11 @@ s32 fn_8023790C(s32 *arg0) {
     char *obj = lbl_80496648;
     void *vt = *(void **) obj;
 
-    return M2C_FIELD(vt, f32 (**)(void *), 0x14)(obj + M2C_FIELD(vt, s16 *, 0x10)) == lbl_803EB4BC[0] && fn_8023788C(arg0) != 0;
+    if (M2C_FIELD(vt, f32 (**)(void *), 0x14)(obj + M2C_FIELD(vt, s16 *, 0x10)) == lbl_803EB4BC[0]
+        && fn_8023788C(arg0) != 0) {
+        return 1;
+    }
+    return 0;
 }
 
 s32 fn_80237978(void *arg0) {
