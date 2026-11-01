@@ -232,15 +232,16 @@ void fn_8023C194(void *arg0, s32 arg1) {
     extern void *fn_803B67A0(void *);
     extern void fn_803B6674(void *, s32);
     s32 buf[18];
+    s32 *e = buf;
     s32 *p;
 
-    fn_803B67A0(buf);
-    buf[4] = arg1;
-    buf[0] = 5;
+    fn_803B67A0(e);
+    e[4] = arg1;
+    e[0] = 5;
     p = (s32 *) ((u8 *) arg0 + 0xDC);
-    buf[1] = p[2];
-    ((void (*)(void *)) p[3])(buf);
-    fn_803B6674(buf, 2);
+    e[1] = p[2];
+    ((void (*)(void *)) p[3])(e);
+    fn_803B6674(e, 2);
 }
 
 s32 fn_8023C200(void *arg0) {
@@ -303,11 +304,7 @@ f32 fn_8023C2D0(void) {
 f32 fn_8023C2D8(void *arg0) {
     extern f32 lbl_80496764;
     extern f32 lbl_80496768;
-    f32 ret = lbl_80496768;
-    if (!(M2C_FIELD(arg0, u32 *, 0xC0) & 0x100)) {
-        ret = lbl_80496764;
-    }
-    return ret;
+    return (M2C_FIELD(arg0, u32 *, 0xC0) & 0x100) ? lbl_80496768 : lbl_80496764;
 }
 
 void fn_8023C2F0(void) {
@@ -319,6 +316,7 @@ void *fn_8023C2F4(void *arg0) {
     extern s32 lbl_80418148[];
     extern s32 lbl_804176F8[];
     s32 *p;
+    s32 pad[2];
 
     fn_8022315C(arg0);
     M2C_FIELD(arg0, s32 **, 0x58) = lbl_80418148;
@@ -326,8 +324,8 @@ void *fn_8023C2F4(void *arg0) {
     p = (s32 *) ((u8 *) arg0 + 0xA8);
     p[4] = (s32) lbl_804176F8;
     p[0] = 3;
-    p[8] = 0;
     p[5] = 0;
+    p[8] = 0;
     return arg0;
 }
 
@@ -463,7 +461,7 @@ void fn_8023E95C(u8 *arg0, Vec3f *arg1) {
 }
 
 void fn_8023EA08(void) {
-    M2C_UNK fn_8023E850(M2C_UNK, M2C_UNK);
+    void fn_8023E850(s32, s32);
     fn_8023E850(1, 0xFFFF);
 }
 
