@@ -47,6 +47,15 @@ s32 fn_801000CC(void *arg0) {
     return p != 0 ? fn_800F98EC(p) : 0;
 }
 
+s32 fn_80100210(void *arg0, s32 arg1, s32 arg2) {
+    void fn_80100100(s32 *, void *, s32, s32);
+    s32 it[3];
+
+    fn_80100100(it, arg0, arg1, arg2);
+    it[2] = M2C_FIELD(arg0, s32 *, 0x40);
+    return it[0] != it[2];
+}
+
 void fn_80100534(s32 arg0, s32 arg1) {
     M2C_UNK fn_803A0874(s32, s32 *);
     s32 sp8;
