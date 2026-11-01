@@ -348,8 +348,8 @@ void *fn_801B564C(void *arg0, s32 arg1) {
 void fn_801B566C(void *arg0, s32 flags) {
     extern u8 lbl_80415AF0[];
     extern void fn_802D20E8(void *);
-    M2C_FIELD(arg0, s32 *, 4) = 0;
     M2C_FIELD(arg0, u8 **, 0) = lbl_80415AF0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
     if (flags & 1) {
         fn_802D20E8(arg0);
     }
@@ -912,10 +912,10 @@ s32 fn_801B6638(void *arg0) {
     return 0;
 }
 
-s32 fn_801B6664(void *arg0) {
-    arg0 = M2C_FIELD(arg0, void **, 4);
-    if (arg0 != NULL) {
-        return M2C_FIELD(arg0, s16 *, 8);
+s16 fn_801B6664(void *arg0) {
+    void *p = M2C_FIELD(arg0, void **, 4);
+    if (p != NULL) {
+        return M2C_FIELD(p, s16 *, 8);
     }
     return 0;
 }
