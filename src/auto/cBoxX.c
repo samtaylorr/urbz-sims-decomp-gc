@@ -426,8 +426,9 @@ void fn_80100F68(void *arg0) {
     extern void *lbl_80495C90;
     void fn_801756D4(void *, s32);
     void fn_80101244(void *);
+    void *g = lbl_80495C90;
     M2C_FIELD(arg0, s32 *, 0x84) = M2C_FIELD(arg0, s32 *, 0x84) + 1;
-    fn_801756D4(M2C_FIELD(lbl_80495C90, void **, 0x58), 2);
+    fn_801756D4(M2C_FIELD(g, void **, 0x58), 2);
     fn_80101244((char *)arg0 + 0x4C);
 }
 
