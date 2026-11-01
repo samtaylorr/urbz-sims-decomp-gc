@@ -30,6 +30,11 @@ static inline s32 *IMEvent_Init(s32 *e) {
     return e;
 }
 
+static inline void IMCallback_Call(IMCallback *cb, s32 *e) {
+    e[1] = cb->ctx;
+    cb->fn(e);
+}
+
 static inline s32 *IMTimer_Init(s32 *p) {
     extern s32 lbl_804176F8[];
     p[4] = (s32) lbl_804176F8;
@@ -163,10 +168,10 @@ void fn_802399F8(void *arg0) {
 }
 
 void fn_80239A4C(void *arg0) {
-    u32 i;
+    s32 i;
 
-    for (i = 0; i < IMSlot_Size((IMSlot *) ((u8 *) arg0 + 0xA4)); i++) {
-        M2C_FIELD(IMSlot_At((IMSlot *) ((u8 *) arg0 + 0xA4), i), s32 *, 0x378) = 0;
+    for (i = 0; (u32) i < IMSlot_Size((IMSlot *) ((u8 *) arg0 + 0xA4)); i++) {
+        M2C_FIELD(M2C_FIELD(arg0, void ***, 0xA4)[i], s32 *, 0x378) = 0;
     }
     M2C_FIELD(arg0, s32 *, 0xA8) = M2C_FIELD(arg0, s32 *, 0xA4);
 }
