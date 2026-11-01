@@ -201,6 +201,12 @@ void fn_803008A0(void) {
 
 }
 
+u8 *fn_803008A4(u8 *self, s32 size, const char *file, s32 line, const char *name) {
+    extern void **lbl_80495050;
+    char *vt = (char *)*lbl_80495050;
+    return (*(u8 *(**)(void *, s32, const char *, s32, const char *))(vt + 0x10C))((char *)lbl_80495050 + *(s16 *)(vt + 0x108), size, file, line, name);
+}
+
 extern u8 lbl_8045B82C[];
 void fn_80338000(u8 *arg);
 void fn_8030091C(void) {
