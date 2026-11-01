@@ -103,7 +103,6 @@ void fn_80241CB0(void) {
     extern volatile s32 lbl_80440508[];
     extern s32 lbl_8044050C[];
     s32 fn_802410AC(void);
-    void fn_80241B24(void);
     void fn_8024162C(void);
     void fn_802416EC(s32, s32);
     s32 addr;
@@ -113,7 +112,7 @@ void fn_80241CB0(void) {
     while (fn_802410AC() == 0) {
     }
     *(volatile u32 *)0xCC003000 = 0x1000;
-    fn_80241B24();
+    ((void (*)(void))fn_80241B24)();
     if (lbl_80440508[0] != 0) {
         lbl_80440508[0]--;
         lbl_80440504[0] += 0x400;
