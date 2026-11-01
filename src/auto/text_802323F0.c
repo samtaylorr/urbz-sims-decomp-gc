@@ -664,9 +664,9 @@ M2C_UNK fn_80237980(M2C_UNK arg0, M2C_UNK arg1) {
     extern f32 lbl_80436A5C[];
     if (arg1 == 0xFFFF && arg0 != 0) {
         f32 f = lbl_803EB4C0[0];
-        lbl_80436A5C[0] = f;
-        lbl_80436A5C[1] = f;
         lbl_80436A5C[2] = f;
+        lbl_80436A5C[1] = f;
+        lbl_80436A5C[0] = f;
     }
 }
 
