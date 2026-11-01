@@ -88,6 +88,12 @@ void fn_8003AE58(void *self) {
     (*(void (**)(void *))(vt + 0x1A4))(obj + *(s16 *)(vt + 0x1A0));
 }
 
+void fn_8003AE90(void *self) {
+    u8 *obj = *(u8 **)((u8 *)self + 0x3B0);
+    u8 *vt = *(u8 **)(obj + 4);
+    (*(void (**)(void *))(vt + 0x1AC))(obj + *(s16 *)(vt + 0x1A8));
+}
+
 void fn_8003CA70(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     M2C_UNK fn_800A43F4(s32, s32, M2C_UNK, s32, s32, M2C_UNK);
     fn_800A43F4(arg1, arg0 + 0x410, 0, arg2, arg3, 0);
