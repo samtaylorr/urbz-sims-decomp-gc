@@ -56,6 +56,18 @@ s32 fn_80100210(void *arg0, s32 arg1, s32 arg2) {
     return it[0] != it[2];
 }
 
+void fn_80100268(void *arg0, s32 arg1, s32 arg2) {
+    void fn_803A0800(void *, void *, s32 *);
+    s32 pair[2];
+    s32 res[2];
+
+    if (fn_80100210(arg0, arg1, arg2) == 0) {
+        pair[0] = arg1;
+        pair[1] = arg2;
+        fn_803A0800(res, (char *)arg0 + 0x3C, pair);
+    }
+}
+
 void fn_80100534(s32 arg0, s32 arg1) {
     M2C_UNK fn_803A0874(s32, s32 *);
     s32 sp8;
