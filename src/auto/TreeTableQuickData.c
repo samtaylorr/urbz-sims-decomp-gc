@@ -543,6 +543,10 @@ s32 fn_801B6480(void *arg0) {
     return ((u32) M2C_FIELD(M2C_FIELD(arg0, void **, 4), u32 *, 0x10) >> 9U) & 1;
 }
 
+s32 fn_801B6490(void *arg0) {
+    return M2C_FIELD(M2C_FIELD(arg0, void **, 4), s16 *, 0x16) > 0x63;
+}
+
 s32 fn_801B64A8(void) {
     return 0x10;
 }
