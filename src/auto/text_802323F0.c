@@ -6,6 +6,7 @@ typedef struct { s32 w[5]; } Struct1A8_5;
 typedef struct { s32 w[7]; } Struct1A8_7;
 typedef struct { s32 v; } Struct1B8;
 typedef struct { u8 b[4]; } Struct1B8b;
+typedef struct { s32 w[3]; } Vec3i;
 
 extern void *fn_8022554C(void *);
 extern void fn_802303F0(void *, void *);
