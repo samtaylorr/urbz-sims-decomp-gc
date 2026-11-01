@@ -360,6 +360,24 @@ M2C_UNK fn_8023C758(void *self) {
     return fn_8023C77C(self, 3);
 }
 
+void fn_8023CC30(void *arg0) {
+    extern char lbl_803EB848[];
+    extern void *lbl_80494600;
+    M2C_UNK fn_802D1FC8(M2C_UNK);
+    void *fn_801D7E6C();
+    void fn_801D841C(void *, u32);
+    M2C_UNK fn_8023C77C(void *, s32);
+
+    M2C_FIELD(arg0, u32 *, 0x84) = 0;
+    ((void (*)(const char *, ...))fn_8023C2F0)(lbl_803EB848);
+    if (lbl_80494600 == 0) {
+        fn_802D1FC8(0x78);
+        lbl_80494600 = fn_801D7E6C();
+    }
+    fn_801D841C(lbl_80494600, 0x64AC15);
+    fn_8023C77C(arg0, 4);
+}
+
 void fn_8023CCA8(void *arg0) {
     extern char lbl_803EB854[];
     extern char lbl_803EB878[];
