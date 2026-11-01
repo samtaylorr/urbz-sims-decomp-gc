@@ -97,13 +97,21 @@ void fn_802C4800(f32 *box, f32 *out) {
     s32 i;
 
     for (i = 0; i < 8; i++) {
-        f32 x, y, z;
-        x = (i & 1) ? box[3] : box[0];
-        y = ((i >> 1) & 1) ? max[1] : box[1];
-        z = ((i >> 2) & 1) ? max[2] : box[2];
-        out[0] = x;
-        out[1] = y;
-        out[2] = z;
+        if (i & 1) {
+            out[0] = box[3];
+        } else {
+            out[0] = box[0];
+        }
+        if (i & 2) {
+            out[1] = max[1];
+        } else {
+            out[1] = box[1];
+        }
+        if (i & 4) {
+            out[2] = max[2];
+        } else {
+            out[2] = box[2];
+        }
         out += 3;
     }
 }
@@ -154,13 +162,20 @@ void fn_802C4A28(EBox *box, EVec3 *pts, s32 n) {
 
 void fn_802C4A90(EBox *box, f32 (*pts)[4], s32 n) {
     s32 i;
+    s32 j;
     for (i = 0; i < n; i++) {
         EVec3 p;
         EVec3 *q = &p;
         q->x = pts[i][0];
         q->y = pts[i][1];
         q->z = pts[i][2];
-        EBox_AddPoint(box, q);
+        for (j = 0; j < 3; j++) {
+            if (*EVec3_At(q, j) < *EVec3_At(&box->min, j)) {
+                *EVec3_At(&box->min, j) = *EVec3_At(q, j);
+            } else if (*EVec3_At(q, j) > *EVec3_At(&box->max, j)) {
+                *EVec3_At(&box->max, j) = *EVec3_At(q, j);
+            }
+        }
     }
 }
 
@@ -367,8 +382,8 @@ void *fn_802C5B1C(void *self, void *stream) {
 }
 
 void *fn_802C5BBC(void *arg0, void *arg1) {
-    void *vt;
     void *obj;
+    void *vt;
     s16 val;
 
     vt = M2C_FIELD(arg1, void **, 0x0);
@@ -376,7 +391,8 @@ void *fn_802C5BBC(void *arg0, void *arg1) {
     vt = M2C_FIELD(arg0, void **, 0x28);
     M2C_FIELD(vt, void (**)(void *, void *, s32), 0x1C)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x18), &val, 2);
     M2C_FIELD(obj, s16 *, 0x16) = val;
-    if (M2C_FIELD(obj, void **, 0x18) == 0) {
+    obj = M2C_FIELD(obj, void **, 0x18);
+    if (obj == 0) {
         vt = M2C_FIELD(arg1, void **, 0x0);
         M2C_FIELD(vt, void (**)(void *, void *), 0x4C)((char *)arg1 + M2C_FIELD(vt, s16 *, 0x48), arg0);
     }
