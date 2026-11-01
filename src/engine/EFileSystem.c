@@ -86,9 +86,10 @@ u32 fn_802C51F0(u8 *p, s32 len) {
     extern u32 lbl_803FCE68[];
     u32 crc = -1;
 
-    for (; len != 0; len--) {
-        crc = (crc >> 8) ^ lbl_803FCE68[(u8)crc ^ *p];
-        p++;
+    while (len-- != 0) {
+        u32 idx = crc & 0xFF;
+        idx ^= *p++;
+        crc = (crc >> 8) ^ lbl_803FCE68[idx];
     }
     return ~crc;
 }
@@ -124,12 +125,11 @@ u32 fn_802C528C(char *s) {
 
 u32 fn_802C52EC(u8 *s) {
     extern u32 lbl_803FCE68[];
-    extern u32 lbl_803FD0E8[];
     u32 crc = -1;
     char c;
 
     if ((u32)(*s - '0') <= 9) {
-        crc = lbl_803FD0E8[0] ^ 0xFFFFFF;
+        crc = (crc >> 8) ^ lbl_803FCE68[(u8)crc ^ '_'];
     }
     while (*s != 0) {
         c = *s;
