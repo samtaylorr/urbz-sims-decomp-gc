@@ -28,11 +28,18 @@ static inline void Event1A8_Init(Event1A8 *ev, void *vtbl, Callback1A8 *cb) {
 typedef struct { s16 h[3]; } Elem6;
 typedef struct { Elem6 *begin; Elem6 *end; } VecElem6;
 
-static inline void VecElem6_Erase(VecElem6 *v, Elem6 *first, Elem6 *last) {
-    Elem6 *p;
-    for (p = first; p != last; p++) {
+static inline void Elem6_Destroy(Elem6 *first, Elem6 *last) {
+    for (; first != last; first++) {
     }
+}
+
+static inline void VecElem6_Erase(VecElem6 *v, Elem6 *first, Elem6 *last) {
+    Elem6_Destroy(first, last);
     v->end = first;
+}
+
+static inline void VecElem6_Clear(VecElem6 *v) {
+    VecElem6_Erase(v, v->begin, v->end);
 }
 
 extern void *fn_8022554C(void *);
@@ -254,14 +261,12 @@ void fn_80232E74(u8 *arg0, Struct1A8_7 *arg1) {
     void fn_80232C74(u8 *, u8 *);
     s32 fn_802337C8(void **, s32, s32);
     extern s32 lbl_8041FC0C[];
-    Struct1B8 saved;
-    Struct1B8 *sp;
+    Struct1B8b saved;
 
     if (arg1 != NULL) {
-        sp = &saved;
-        *sp = *(Struct1B8 *)(arg0 + 0x1B8);
+        saved = *(Struct1B8b *)(arg0 + 0x1B8);
         *(Struct1A8_7 *)(arg0 + 0x1A8) = *arg1;
-        *(Struct1B8 *)(arg0 + 0x1B8) = *sp;
+        *(Struct1B8b *)(arg0 + 0x1B8) = saved;
         if (fn_802337C8((void **)(arg0 + 0x60), *(s32 *)(arg0 + 0x1BC), *(u8 *)(arg0 + 0x1C0)) != 0) {
             if (lbl_8041FC0C[0] != 0) {
                 fn_80232C74(arg0, *(u8 **)(arg0 + 0x60));
@@ -321,16 +326,18 @@ void fn_80233138(u8 *arg0) {
         s32 unk0;
         s32 unk4;
         void *vtbl;
+        s32 unkC;
     } tmp, *p;
     s32 *dvt;
     s32 *cb;
+    s32 *h = (s32 *)(arg0 + 0x60);
     s32 ok;
 
     ok = 1;
-    if (*(s32 *)(arg0 + 0x60) == 0) {
+    if (*h == 0) {
         ok = 0;
     }
-    if (ok && fn_80234AF4(arg0 + 0x60)) {
+    if (ok && fn_80234AF4(h)) {
         dvt = lbl_80417CF0;
         p = &tmp;
         p->vtbl = lbl_80417F18;
@@ -356,6 +363,7 @@ void fn_8023334C(u8 *arg0) {
         s32 unk0;
         s32 unk4;
         void *vtbl;
+        s32 unkC[4];
     } tmp, *p;
     s32 *cb;
 
@@ -377,16 +385,18 @@ void fn_802333E4(u8 *arg0) {
     void fn_80234BE8(void *);
     extern s32 lbl_80417F18[];
     extern s32 lbl_80417CF0[];
-    Event1A8 tmp;
-    s32 pad[3];
+    Event1A8 tmp, *p;
+    s32 pad[2];
+    s32 *dvt = lbl_80417CF0;
     Callback1A8 *cb;
 
-    Event1A8_Init(&tmp, lbl_80417F18, (Callback1A8 *)(arg0 + 0x1A8));
+    p = &tmp;
+    Event1A8_Init(p, lbl_80417F18, (Callback1A8 *)(arg0 + 0x1A8));
     cb = (Callback1A8 *)(arg0 + 0x1A8);
-    cb->fn(&tmp);
+    cb->fn(p);
     fn_80234BE8(arg0 + 0x60);
     fn_80232D2C(arg0, 1);
-    tmp.vtbl = lbl_80417CF0;
+    p->vtbl = dvt;
 }
 
 s32 fn_80233460(s32 arg0) {
@@ -398,24 +408,22 @@ void fn_80233538(u8 *arg0) {
     extern s32 lbl_80417E58[];
     extern s32 lbl_80417CF0[];
     struct {
-        s32 unk0;
-        s32 unk4;
-        void *vtbl;
+        Event1A8 ev;
         s32 unkC;
-    } tmp, *p;
+    } tmp;
+    Event1A8 *p;
     s32 *dvt = lbl_80417CF0;
-    u8 *self = arg0;
-    struct { s32 pad[2]; s32 data; void (*fn)(void *); } *cb;
+    Callback1A8 *cb;
 
-    p = &tmp;
+    p = &tmp.ev;
     p->vtbl = lbl_80417E58;
-    p->unkC = 0;
-    tmp.unk0 = 3;
-    cb = (void *)(self + 0x1A8);
+    tmp.unkC = 0;
+    p->unk0 = 3;
+    cb = (Callback1A8 *)(arg0 + 0x1A8);
     p->unk4 = cb->data;
     cb->fn(p);
-    fn_80234C90(self + 0x60);
-    fn_80232D2C(self, 1);
+    fn_80234C90(arg0 + 0x60);
+    fn_80232D2C(arg0, 1);
     p->vtbl = dvt;
 }
 
@@ -491,12 +499,14 @@ void fn_80234618(void *arg0, void *arg1) {
         void *vt = M2C_FIELD(obj, void **, 0x4);
         char *g = lbl_80496668;
         char *ent = *(char **)g + 0x58;
+        Elem6 *first;
         VecElem6 *v;
 
         M2C_FIELD(ent, void (**)(void *, void *), 0x4)(g + *(s16 *)ent,
             M2C_FIELD(vt, void *(**)(void *), 0x2EC)((char *)obj + M2C_FIELD(vt, s16 *, 0x2E8)));
+        first = M2C_FIELD(arg0, Elem6 **, 0x14);
         v = (VecElem6 *)((char *)arg0 + 0x14);
-        VecElem6_Erase(v, v->begin, v->end);
+        VecElem6_Erase(v, first, v->end);
         *h = NULL;
     }
 }
@@ -739,8 +749,8 @@ void fn_80236E98(u8 *arg0, f32 *arg1) {
     if (p != NULL) {
         arg1[0] = p[0];
         arg1[1] = p[1];
-        M2C_FIELD(arg1, s32 *, 0xC) = M2C_FIELD(arg0, s32 *, 0x54);
         M2C_FIELD(arg1, s32 *, 0x8) = M2C_FIELD(arg0, s32 *, 0x50);
+        M2C_FIELD(arg1, s32 *, 0xC) = M2C_FIELD(arg0, s32 *, 0x54);
     }
 }
 
