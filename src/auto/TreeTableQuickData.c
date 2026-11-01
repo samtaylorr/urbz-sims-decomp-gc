@@ -337,11 +337,12 @@ void fn_801B5624(void) {
     fn_800F1A60((s32)&lbl_80495D88, 2);
 }
 
-void fn_801B564C(void *arg0, s32 arg1) {
+void *fn_801B564C(void *arg0, s32 arg1) {
     extern u8 lbl_80415AF0[];
     M2C_FIELD(arg0, u8 **, 0) = lbl_80415AF0;
     M2C_FIELD(arg0, s32 *, 4) = arg1;
     M2C_FIELD(arg0, s32 *, 8) = 0;
+    return arg0;
 }
 
 void fn_801B566C(void *arg0, s32 flags) {
