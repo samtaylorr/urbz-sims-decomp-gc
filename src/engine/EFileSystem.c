@@ -8,6 +8,20 @@ static inline s32 ListCount(u8 *list) {
     return *(s32 *)(list + 4);
 }
 
+void *fn_802C45F8(void *self, s32 arg1, s32 arg2) {
+    extern u8 lbl_804189F0[];
+    extern u8 lbl_804191F0[];
+    extern void fn_802B6FA8(void *, s32);
+    extern void fn_802ADDD8(void *, s32);
+    fn_802B6FA8(self, arg1);
+    M2C_FIELD(self, u8 **, 4) = lbl_804189F0;
+    fn_802ADDD8((u8 *)self + 8, 8);
+    M2C_FIELD(self, s32 *, 0x18) = 0;
+    M2C_FIELD(self, u8 **, 4) = lbl_804191F0;
+    M2C_FIELD(self, s32 *, 0x1C) = arg2;
+    return self;
+}
+
 void fn_802C46DC(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x1C) = 0;
 }
