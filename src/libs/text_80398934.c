@@ -13145,12 +13145,19 @@ static inline void Elem24_Assign(u8 *self, u8 *other) {
     *(Elem12 *)(self + 0xC) = *(Elem12 *)(other + 0xC);
 }
 
-void fn_803BD198(u8 *dst, u8 *src, s32 n) {
-    while (--n != -1) {
-        fn_803BD14C((s32 *)dst, (s32 *)src);
-        src += 0x18;
-        dst += 0x18;
-        *(Elem12 *)(dst - 0xC) = *(Elem12 *)(src - 0xC);
+void fn_803BD198(s32 *dst, s32 *src, s32 n) {
+    s32 i = n - 1;
+    if (n != 0) {
+        s32 *d = dst;
+        s32 *s = src;
+        do {
+            fn_803BD14C(d, s);
+            s += 6;
+            d += 6;
+            d[-3] = s[-3];
+            d[-2] = s[-2];
+            d[-1] = s[-1];
+        } while (--i != -1);
     }
 }
 
@@ -13439,6 +13446,14 @@ void fn_803BDD5C(Elem12 *first, Elem12 *last, s32 comp) {
         }
         parent--;
     }
+}
+
+struct Elem12Val { s32 v[3]; };
+
+static inline void Elem12_PopHeapAux(Elem12 *first, Elem12 *last, Elem12 *result, struct Elem12Val val, s32 comp) {
+    void fn_803BDBC8(Elem12 *, s32, s32, struct Elem12Val, s32);
+    *result = *first;
+    fn_803BDBC8(first, 0, last - first, val, comp);
 }
 
 void fn_803BDE00(Elem12 *first, Elem12 *last, s32 comp) {
