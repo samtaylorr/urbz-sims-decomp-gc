@@ -170,6 +170,14 @@ s32 fn_8023B830(void) {
     return count < 20;
 }
 
+s32 fn_8023C200(void *arg0) {
+    s32 ret = 0;
+    if (M2C_FIELD(arg0, s32 *, 0xC0) & 1) {
+        ret = 1;
+    }
+    return ret;
+}
+
 s32 fn_8023C218(void *arg0) {
     return ((u32) M2C_FIELD(arg0, u32 *, 0xC0) >> 7U) & 1;
 }
