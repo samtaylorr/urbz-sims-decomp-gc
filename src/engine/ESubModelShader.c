@@ -369,7 +369,7 @@ void fn_80300D24(u8 *self) {
     extern void fn_80248488(void *, s32, s32);
     s32 i;
 
-    for (i = 0; i < *(s32 *)(self + 0x30); i++) {
+    for (i = 0; i < ListCount(self + 0x2C); i++) {
         u8 *e = *(u8 **)(self + 0x2C) + i * 0x34;
         *(s32 *)(e + 0xC) = 0;
         *(s32 *)(e + 0x14) = 0;
