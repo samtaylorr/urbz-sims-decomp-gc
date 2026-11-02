@@ -183,14 +183,11 @@ loop_2:
 s32 fn_800ACEC0(void *self) {
     s32 fn_800ABF0C(void *);
     s32 i;
-    u8 *slot;
 
-    slot = (u8 *)self + 0x3C;
     for (i = 0; i < M2C_FIELD(self, s32 *, 0x38); i++) {
-        if (fn_800ABF0C(slot) == 0) {
+        if (fn_800ABF0C((u8 *)self + 0x3C + i * 8) == 0) {
             return 0;
         }
-        slot += 8;
     }
     return 1;
 }
