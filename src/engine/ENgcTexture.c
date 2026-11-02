@@ -164,7 +164,7 @@ u32 fn_80360948(s32 arg0, u32 arg1, s32 arg2, u32 arg3, void *arg4) {
         r = 0;
         if (arg1 + arg3 >= M2C_FIELD(arg4, u32 *, 0x70) / 2) {
             fn_80360750(arg4);
-            r = M2C_FIELD(arg4, u32 *, 0x70) / 2;
+            return M2C_FIELD(arg4, u32 *, 0x70) / 2;
         }
     } else {
         fn_803608C0(arg4);
@@ -322,6 +322,15 @@ void fn_803612D8(u8 *self) {
     obj = *(u8 **)(self + 0x28);
     vtbl = *(u8 **)(obj + 0x24);
     ((void (*)(u8 *))*(void **)(vtbl + 0x5C))(obj + *(s16 *)(vtbl + 0x58));
+}
+
+void fn_8036131C(u8 *self) {
+    u8 *obj;
+    u8 *vtbl;
+    *(s32 *)(self + 0x8) &= ~0x80;
+    obj = *(u8 **)(self + 0x28);
+    vtbl = *(u8 **)(obj + 0x24);
+    ((void (*)(u8 *))*(void **)(vtbl + 0x64))(obj + *(s16 *)(vtbl + 0x60));
 }
 
 void fn_80361360(u8 *self) {
