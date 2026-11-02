@@ -421,6 +421,14 @@ void *fn_8016CCF4(void *arg0, void *arg1) {
     return arg0;
 }
 
+void *fn_8016CDA4(void *arg0, void *arg1) {
+    char *fn_8016DA34(void *);
+    char *obj = fn_8016DA34(arg1);
+    char *vt = *(char **)obj;
+    M2C_FIELD(vt, void (**)(), 0x2C)(arg0, obj + M2C_FIELD(vt, s16 *, 0x28));
+    return arg0;
+}
+
 extern s32 lbl_80495C78;
 void fn_8016CDFC(void) {
     fn_800F1A60((s32)&lbl_80495C78, 2);
