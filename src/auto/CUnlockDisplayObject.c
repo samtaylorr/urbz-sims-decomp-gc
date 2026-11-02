@@ -82,8 +82,32 @@ void fn_800B9EF0(void *arg0) {
     fn_800B99CC();
 }
 
+void fn_800BA0DC(void *arg0, f32 farg0) {
+    if (farg0 < M2C_FIELD(arg0, f32 *, 0x45C)) {
+        M2C_FIELD(arg0, f32 *, 0x454) = farg0;
+    }
+}
+
+void fn_800BA0F4(void *arg0, f32 farg0) {
+    if (farg0 > M2C_FIELD(arg0, f32 *, 0x450)) {
+        M2C_FIELD(arg0, f32 *, 0x458) = farg0;
+    }
+}
+
+void fn_800BA10C(void *arg0, f32 farg0) {
+    if (farg0 > M2C_FIELD(arg0, f32 *, 0x454)) {
+        M2C_FIELD(arg0, f32 *, 0x45C) = farg0;
+    }
+}
+
 void fn_800BA124(void *arg0, f32 farg0) {
     M2C_FIELD(arg0, f32 *, 0x480) = farg0;
+}
+
+void fn_800BA12C(void *arg0, f32 farg0, f32 farg1, f32 farg2) {
+    M2C_FIELD(arg0, f32 *, 0x484) = farg0;
+    M2C_FIELD(arg0, f32 *, 0x488) = farg1;
+    M2C_FIELD(arg0, f32 *, 0x48C) = farg2;
 }
 
 s32 fn_800BAD38(u8 *self) {
