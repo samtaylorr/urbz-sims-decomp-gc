@@ -75,6 +75,19 @@ s32 fn_800A4FCC(s32 arg0, s32 *arg1) {
     return temp_r3;
 }
 
+s32 fn_800A5090(void *arg0) {
+    s32 fn_80070188(void *);
+    extern void *lbl_8041FAD0;
+    void *self = arg0;
+    s32 ret;
+
+    ret = fn_80070188(lbl_8041FAD0);
+    if (ret != 1) {
+        ((s32 (*)(void *))fn_800A4964)(self);
+    }
+    return ret;
+}
+
 void fn_800A50DC(void *arg0, s32 arg1) {
     M2C_UNK fn_8007046C(void *, s32);
     extern void *lbl_8041FAD0[];
@@ -514,6 +527,25 @@ void fn_800AAE10(void) {
 
 void fn_800AAE74(void) {
 
+}
+
+void fn_800AAF10(f32 *out, f32 angle, f32 a, f32 b) {
+    f32 fn_802434CC(f32);
+    f32 fn_80243100(f32);
+    *out = fn_80243100(a * a + b * b - (a + a) * b * fn_802434CC(angle));
+}
+
+void fn_800AAF74(f32 a, f32 b, f32 c, f32 *outA, f32 *outB, f32 *outC) {
+    extern f32 lbl_803CE4D0[];
+    f32 fn_80242ACC(f32);
+    f32 aa = a * a;
+    f32 bb = b * b;
+    f32 cc = c * c;
+    f32 angA = fn_80242ACC((bb + cc - aa) / ((b + b) * c));
+    f32 angB = fn_80242ACC((aa + cc - bb) / ((a + a) * c));
+    *outA = angA;
+    *outB = angB;
+    *outC = lbl_803CE4D0[0] - (angA + angB);
 }
 
 s32 fn_800AB030(void) {
