@@ -414,10 +414,7 @@ s32 fn_803010C4(u8 *self, u8 *buf, u8 *obj) {
         if (flags & 0x40) {
             a = 4;
         }
-        b = 4;
-        if (flags & 0x10) {
-            b = 2;
-        }
+        b = (flags & 0x10) ? 2 : 4;
         size = *(s32 *)(obj + 0x18) * a * b;
         *(u8 **)(obj + 4) = fn_803008A4(self, size, lbl_803F172C, 0x6B6, lbl_803F1774);
         fn_802482F8(*(u8 **)(obj + 4), buf, size);
@@ -630,11 +627,11 @@ void fn_80304BE4(void *self, s32 arg1) {
         fn_8031EA2C(M2C_FIELD(self, void **, 0x78));
     }
     obj = (u8 *)fn_8033740C(lbl_8045BA40, arg1, 0, 0);
+    i = 2;
     M2C_FIELD(self, u32 *, 0x70) = 0;
     M2C_FIELD(self, u8 **, 0x78) = obj;
     M2C_FIELD(self, u32 *, 0x6c) = 0;
     p = (u8 **)(obj + 0x2c);
-    i = 2;
     do {
         u8 *q = *p++;
         if (q != NULL) {
@@ -655,8 +652,10 @@ void fn_803052AC(void *self, s32 arg1) {
     extern void fn_80307478(void *, s32);
     if (M2C_FIELD(self, s32 *, 0x18) & 2) {
         fn_803051DC(self, arg1);
+        fn_80307478(self, arg1);
+    } else {
+        fn_80307478(self, arg1);
     }
-    fn_80307478(self, arg1);
 }
 
 void fn_8030582C(s32 arg0, s32 arg1) {
