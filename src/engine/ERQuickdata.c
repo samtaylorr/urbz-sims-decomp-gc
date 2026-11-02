@@ -156,6 +156,46 @@ void fn_8032D448(void *arg0, s32 arg1) {
     fn_8032D444(arg0);
 }
 
+void *fn_8032D8E0(void *arg0, u32 arg1, u32 *out) {
+    s32 fn_8032D7DC(void *, s32, s32, u32);
+    s32 idx;
+    void *result;
+    char *base;
+    u32 step;
+    u32 diff;
+    u32 q;
+
+    idx = fn_8032D7DC(arg0, 0, M2C_FIELD(M2C_FIELD(arg0, void **, 0x20), s32 *, 8) - 1, arg1);
+    result = NULL;
+    if (idx >= 0) {
+        base = M2C_FIELD(arg0, char **, 0x20);
+        step = *(u32 *)(base + idx * 0x14 + 0x28);
+        if (step == 0) {
+            step = 1;
+        }
+        diff = arg1 - *(u32 *)(base + idx * 0x14 + 0x1C);
+        q = diff / step;
+        if (diff == q * step) {
+            *out = q;
+            result = base + idx * 0x14 + 0x18;
+        }
+    }
+    return result;
+}
+
+s32 fn_8032D97C(void *arg0, u32 arg1, s32 *out) {
+    s32 fn_8032D7DC(void *, s32, s32, u32);
+    s32 idx;
+
+    idx = fn_8032D7DC(arg0, 0, M2C_FIELD(M2C_FIELD(arg0, void **, 0x20), s32 *, 8) - 1, arg1);
+    if (idx < 0) {
+        *out = 0;
+        return 0;
+    }
+    *out = *(s32 *)(M2C_FIELD(arg0, char **, 0x20) + 0x18 + idx * 0x14);
+    return 1;
+}
+
 s32 fn_8032D9F0(void *arg0) {
     void *temp_r9;
 
@@ -164,6 +204,24 @@ s32 fn_8032D9F0(void *arg0) {
         return M2C_FIELD(temp_r9, s32 *, 0xC);
     }
     return 0;
+}
+
+s32 fn_8032DD4C(s32 arg0, s32 arg1) {
+    s32 fn_802C6290(void *, s32 *, s32, void *, s32, s32, s32);
+    void fn_802C63E8(void *, s32 *);
+    s32 fn_8032DDD4(s32, s32);
+    extern u8 lbl_804448E8[];
+    extern char lbl_803F3438[];
+    s32 tmp;
+    s32 result;
+
+    tmp = 0;
+    result = 0;
+    if (fn_802C6290(lbl_804448E8, &tmp, arg0, lbl_803F3438, 0x80000000, 0x80000000, 0) != 0) {
+        result = fn_8032DDD4(tmp, arg1);
+        fn_802C63E8(lbl_804448E8, &tmp);
+    }
+    return result;
 }
 
 void fn_8032E124(s32 arg0) {
