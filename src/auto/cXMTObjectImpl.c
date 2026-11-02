@@ -127,6 +127,12 @@ void fn_8011C01C(void *arg0, s32 arg1, s32 arg2) {
     }
 }
 
+s32 fn_8011C3C8(void *arg0) {
+    void *obj = M2C_FIELD(M2C_FIELD(arg0, void **, 0), void **, 4);
+    void *vt = M2C_FIELD(obj, void **, 4);
+    return M2C_FIELD(vt, s32 (**)(void *, s32), 0x194)((u8 *)obj + M2C_FIELD(vt, s16 *, 0x190), 8) != 0;
+}
+
 void fn_8011CCA8(void ***arg0, s32 arg1) {
     M2C_FIELD(**arg0, s32 *, 8) = arg1;
 }
