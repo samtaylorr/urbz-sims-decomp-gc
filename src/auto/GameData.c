@@ -96,6 +96,17 @@ void fn_80047A84(void *arg0) {
     }
 }
 
+void fn_80047AA8(void) {
+    extern void *lbl_8041E640[];
+    extern s32 lbl_8041F7C4[];
+    extern void fn_800D53B8(void *, s32 *);
+    s32 sp8;
+
+    lbl_8041F7C4[0] = 0;
+    sp8 = 1;
+    fn_800D53B8(lbl_8041E640[0], &sp8);
+}
+
 void fn_80047AE8(void) {
 
 }
