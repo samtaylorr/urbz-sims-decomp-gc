@@ -174,24 +174,24 @@ void *fn_8032D8E0(void *arg0, u32 arg1, u32 *out) {
     s32 fn_8032D7DC(void *, s32, s32, u32);
     s32 idx;
     void *result;
-    char *base;
+    ERQdTable *tbl;
     u32 step;
     u32 diff;
     u32 q;
 
-    idx = fn_8032D7DC(arg0, 0, M2C_FIELD(M2C_FIELD(arg0, void **, 0x20), s32 *, 8) - 1, arg1);
+    idx = fn_8032D7DC(arg0, 0, M2C_FIELD(arg0, ERQdTable **, 0x20)->unk8 - 1, arg1);
     result = NULL;
     if (idx >= 0) {
-        base = M2C_FIELD(arg0, char **, 0x20);
-        step = *(u32 *)(base + idx * 0x14 + 0x28);
+        tbl = M2C_FIELD(arg0, ERQdTable **, 0x20);
+        step = tbl->entries[idx].unk10;
         if (step == 0) {
             step = 1;
         }
-        diff = arg1 - *(u32 *)(base + idx * 0x14 + 0x1C);
+        diff = arg1 - tbl->entries[idx].unk4;
         q = diff / step;
         if (diff == q * step) {
             *out = q;
-            result = base + idx * 0x14 + 0x18;
+            result = &tbl->entries[idx];
         }
     }
     return result;
