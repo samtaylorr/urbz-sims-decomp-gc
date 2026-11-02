@@ -1305,6 +1305,15 @@ s32 fn_80063314(void *arg0, s32 arg1) {
     return arg1 == 0;
 }
 
+void *fn_80063320(void) {
+    void *fn_80248488(void *, s32, u32);
+    void *fn_8005FB70(void *);
+    void *p = BBI_AllocAligned(0x660);
+
+    fn_80248488(p, 0, 0x660);
+    return fn_8005FB70(p);
+}
+
 void fn_800633C8(void) {
     fn_8005FB70();
 }
