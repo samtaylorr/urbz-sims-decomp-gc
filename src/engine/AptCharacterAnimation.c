@@ -26,20 +26,10 @@ s32 fn_8028B10C(void *arg0, s32 arg1) {
 
 s32 fn_8028B150(void *arg0, s32 arg1) {
     s32 i;
-    s32 n;
-    u8 *p;
-    i = 0;
-    n = M2C_FIELD(arg0, s32 *, 0x20);
-    if (i < n) {
-        p = M2C_FIELD(arg0, u8 **, 0x24) + 8;
-        do {
-            s32 v = *(s32 *)p;
-            p += 0x10;
-            if (v == arg1) {
-                return 1;
-            }
-            i++;
-        } while (i < n);
+    for (i = 0; i < M2C_FIELD(arg0, s32 *, 0x20); i++) {
+        if (*(s32 *)(M2C_FIELD(arg0, u8 **, 0x24) + i * 0x10 + 8) == arg1) {
+            return 1;
+        }
     }
     return 0;
 }
