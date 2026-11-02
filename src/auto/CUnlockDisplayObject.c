@@ -92,6 +92,12 @@ void fn_800B9EF0(void *arg0) {
     fn_800B99CC();
 }
 
+void fn_800BA0C4(void *arg0, f32 farg0) {
+    if (!(farg0 >= M2C_FIELD(arg0, f32 *, 0x458))) {
+        M2C_FIELD(arg0, f32 *, 0x450) = farg0;
+    }
+}
+
 void fn_800BA0DC(void *arg0, f32 farg0) {
     if (!(farg0 >= M2C_FIELD(arg0, f32 *, 0x45C))) {
         M2C_FIELD(arg0, f32 *, 0x454) = farg0;
