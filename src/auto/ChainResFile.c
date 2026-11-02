@@ -452,7 +452,7 @@ s8 *fn_80105710(s8 *self, s8 *src) {
     return self;
 }
 
-s8 *fn_80105738(s8 *self, s32 k) {
+u8 *fn_80105738(u8 *self, s32 k) {
     self[0] *= k;
     self[1] *= k;
     return self;
