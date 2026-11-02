@@ -108,10 +108,11 @@ void fn_80186668(s32 arg0, void *arg1, s32 arg2) {
 }
 
 s32 fn_80186714(void *arg0, u32 arg1) {
+    typedef struct { u8 pad[0x18D0]; s16 arr[25]; } S;
     if (arg1 > 0x18) {
         return 0;
     }
-    return *(s16 *)((u8 *)arg0 + 0x18D0 + arg1 * 2);
+    return ((S *)arg0)->arr[arg1];
 }
 
 s32 fn_80186734(void *arg0, u32 arg1, s16 **arg2) {
@@ -272,17 +273,10 @@ s32 fn_8018CB6C(void *arg0, s32 arg1, s32 arg2) {
 }
 
 s32 fn_8018CBF4(void *arg0, s32 arg1) {
-    s32 **q;
-    s32 *p;
-    s32 n;
-    q = M2C_FIELD(arg0, s32 ***, 4);
-    n = 0;
-    p = *q;
-    if (p != NULL) {
-        n = p[-1];
-    }
+    s32 *p = *M2C_FIELD(arg0, s32 **, 4);
+    s32 n = p != NULL ? p[-1] : 0;
     if (arg1 < n) {
-        return (*q)[arg1];
+        return p[arg1];
     }
     return 0;
 }
@@ -548,6 +542,55 @@ void fn_8018CFE4(void *arg0) {
     }
     if (arg0 != NULL) {
         lbl_80494530 = fn_802D7F48(arg0, lbl_803DACA8);
+    }
+}
+
+s32 *fn_8018D044(s32 *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    arg0[0] = arg1;
+    arg0[1] = arg2;
+    arg0[3] = arg3;
+    arg0[2] = 0;
+    arg0[4] = 1;
+    arg0[5] = 0;
+    arg0[6] = 0;
+    arg0[7] = 0;
+    arg0[8] = 0;
+    arg0[10] = 0;
+    arg0[11] = 0;
+    return arg0;
+}
+
+s32 *fn_8018D080(s32 *arg0) {
+    arg0[3] = 2;
+    arg0[0] = 0;
+    arg0[4] = 1;
+    arg0[1] = 0;
+    arg0[2] = 0;
+    arg0[5] = 0;
+    arg0[6] = 0;
+    arg0[7] = 0;
+    arg0[8] = 0;
+    arg0[10] = 0;
+    arg0[11] = 0;
+    return arg0;
+}
+
+void fn_8018D0C0(void *arg0, s32 arg1) {
+    void fn_800F784C(void *);
+    void fn_802D20E8(void *);
+
+    if (M2C_FIELD(arg0, s32 *, 0xC) == 1) {
+        char *p = M2C_FIELD(arg0, char **, 0x1C);
+        if (p != NULL) {
+            char *vt = *(char **)p;
+            char *self = p + M2C_FIELD(vt, s16 *, 0x108);
+            M2C_FIELD(vt, void (**)(void *), 0x10C)(self);
+            fn_800F784C(M2C_FIELD(arg0, void **, 0x1C));
+            M2C_FIELD(arg0, void **, 0x1C) = NULL;
+        }
+    }
+    if (arg1 & 1) {
+        fn_802D20E8(arg0);
     }
 }
 
