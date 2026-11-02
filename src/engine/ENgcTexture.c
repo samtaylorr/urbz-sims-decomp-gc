@@ -19,6 +19,22 @@ static inline void ENgcTexture_SetUnk(s32 *r, s32 n) {
     r[4] = n * 2;
 }
 
+typedef struct {
+    s16 delta;
+    s16 index;
+    void *func;
+} VtEntry_8035F3FC;
+
+typedef struct {
+    u8 pad0[4];
+    void *unk4;
+    u8 pad8[0x14];
+    void *unk1C;
+    u8 pad20[0x48];
+    void *unk68;
+    u8 pad6C[0xC];
+} Entry_8035F8AC;
+
 void fn_802FF4EC(void);
 void fn_8035F6E4(void) {
     fn_802FF4EC();
@@ -721,20 +737,12 @@ void fn_80363540(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 stride = bw * 8;
     s32 y;
     s32 x;
-    s32 i;
     for (y = 0; y < bh; y++) {
         u8 *row = (u8 *)arg3 + y * bw * 32;
         for (x = 0; x < bw; x++) {
-            u32 *s = src;
-            u8 *p = row;
-            for (i = 0; i < 4; i++) {
-                ((u32 *)p)[0] = s[0];
-                ((u32 *)p)[1] = s[1];
-                s += 2;
-                p += stride;
-            }
-            row += 8;
+            ENgcTexture_CopyTile8(src, row, stride);
             src += 8;
+            row += 8;
         }
     }
 }
@@ -750,11 +758,7 @@ void fn_80363724(void) {
 }
 
 s32 *fn_80363734(s32 *arg0, s32 arg1) {
-    arg0[0] = 0;
-    arg0[2] = 1;
-    arg0[4] = arg1 * 2;
-    arg0[1] = 0;
-    arg0[3] = arg1;
+    ENgcTexture_SetUnk(arg0, arg1);
     return arg0;
 }
 
