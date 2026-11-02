@@ -150,6 +150,18 @@ s32 fn_80364500(void *self, s32 key) {
     return 0;
 }
 
+char *fn_8036458C(void *self, void *key, char *def) {
+    extern void *fn_8036A04C(void *, void *, void **);
+    extern s32 fn_802D4298(void *, s32, s32);
+    void *found;
+    char **str;
+    if (fn_8036A04C((u8 *)self + 0x14, key, &found) == NULL) {
+        return def;
+    }
+    str = *(char ***)found;
+    return *str + fn_802D4298(str, '=', 0) + 1;
+}
+
 void fn_803645F4(void *arg0, void *arg1, s32 arg2) {
     s32 fn_80245BB4(char *, const char *, ...);
     void fn_80364414(void *, void *, char *);
@@ -197,22 +209,23 @@ s32 fn_803646E8(void *arg0, void *arg1, s32 arg2) {
 }
 
 void fn_8036475C(void *arg0, void *arg1) {
-    s32 fn_80245BB4(char *, const char *, ...);
+    s32 fn_80245BB4();
     void fn_80364414(void *, void *, char *);
     extern char lbl_803F4F70[];
-    char buf[132];
+    char buf[128];
 
     fn_80245BB4(buf, lbl_803F4F70);
     fn_80364414(arg0, arg1, buf);
 }
 
-f32 fn_803647AC(void *self, s32 key, f32 def) {
-    extern double fn_80246DDC(const char *);
-    char *s = fn_8036458C(self, key, NULL);
-    if (s == NULL) {
-        return def;
+f32 fn_803647AC(void *arg0, void *arg1, f32 arg2) {
+    char *fn_8036458C(void *, void *, char *);
+    double fn_80246DDC(const char *);
+    char *s = fn_8036458C(arg0, arg1, NULL);
+    if (s != NULL) {
+        return fn_80246DDC(s);
     }
-    return fn_80246DDC(s);
+    return arg2;
 }
 
 void fn_803647F4(void *self, s32 key) {
@@ -1116,9 +1129,9 @@ void fn_80367F88(void *arg0) {
     extern u32 fn_802DE634(s32, s32, s32);
     void fn_8036807C(void *);
 
-    M2C_FIELD(arg0, s32 *, 0x8) = 0;
-    M2C_FIELD(arg0, f32 *, 0x2C) = lbl_803F4FC4[0];
     M2C_FIELD(arg0, s32 *, 0x14) = 0;
+    M2C_FIELD(arg0, f32 *, 0x2C) = lbl_803F4FC4[0];
+    M2C_FIELD(arg0, s32 *, 0x8) = 0;
     M2C_FIELD(arg0, s32 *, 0xC) = fn_802DE634(M2C_FIELD(arg0, s32 *, 0x0), M2C_FIELD(arg0, s32 *, 0x4) + M2C_FIELD(arg0, s16 *, 0x1C), M2C_FIELD(arg0, s8 *, 0x1E)) + 1;
     fn_8036807C(arg0);
 }
