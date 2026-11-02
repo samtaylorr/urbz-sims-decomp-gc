@@ -110,6 +110,23 @@ void fn_800ABFD4(void *self) {
     s->unk10 = 0;
 }
 
+void fn_800AC130(void *self, s32 arg1) {
+    u8 i;
+
+    if (M2C_FIELD(self, s32 *, 0xC) != arg1) {
+        M2C_FIELD(self, s32 *, 0xC) = arg1;
+        if (M2C_FIELD(self, u8 *, 8) != 0) {
+            for (i = 0; i <= 1; i++) {
+                void *p = *(void **)((u8 *)self + i * 4);
+                if (p != NULL) {
+                    char *vt = M2C_FIELD(p, char **, 0x440);
+                    (*(void (**)(void *, s32))(vt + 0x6C))((char *)p + *(s16 *)(vt + 0x68), arg1);
+                }
+            }
+        }
+    }
+}
+
 void fn_800AC988(void *arg0) {
     void *temp_r9;
 
