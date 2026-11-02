@@ -380,6 +380,16 @@ void fn_800489CC(void *arg0, f32 arg1) {
     }
 }
 
+void fn_80048A48(void *arg0, void *arg1) {
+    void fn_800CEF00(void *, void *);
+    char *vt = M2C_FIELD(arg1, char **, 0x68);
+    void (*f)(void *) = M2C_FIELD(vt, void (**)(void *), 0x1DC);
+    f((char *)arg1 + M2C_FIELD(vt, s16 *, 0x1D8));
+    if (M2C_FIELD(arg0, void **, 0x104) != 0) {
+        fn_800CEF00(M2C_FIELD(arg0, void **, 0x104), arg1);
+    }
+}
+
 void fn_80048AA0(s32 arg0) {
     void fn_800CEE00(void *);
     u8 *self = (u8 *)arg0;
