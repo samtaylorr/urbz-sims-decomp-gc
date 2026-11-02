@@ -163,8 +163,11 @@ s32 fn_800A4C58(s32 arg0, s32 *arg1) {
     char *obj = lbl_80495060;
     char *vt = *(char **)obj;
     s32 buf;
-    s32 r = (*(s32 (**)(void *, s32, s32 *))(vt + 0xB4))(obj + *(s16 *)(vt + 0xB0), arg0, &buf);
-    *arg1 = r == -8 ? 1 : 0;
+    if ((*(s32 (**)(void *, s32, s32 *))(vt + 0xB4))(obj + *(s16 *)(vt + 0xB0), arg0, &buf) == -8) {
+        *arg1 = 1;
+    } else {
+        *arg1 = 0;
+    }
     return 1;
 }
 
