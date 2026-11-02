@@ -196,6 +196,19 @@ void fn_803609F4(void *arg0) {
     }
 }
 
+void fn_80360A60(void *arg0) {
+    extern Entry_8035F8AC lbl_804753B8[];
+    void fn_80385948(void *);
+    u32 i;
+
+    for (i = 0; i < 2; i++) {
+        if (lbl_804753B8[i].unk1C == arg0) {
+            fn_80385948(arg0);
+            lbl_804753B8[i].unk1C = 0;
+        }
+    }
+}
+
 void fn_80360E74(void *self) {
     u8 *obj = *(u8 **)((u8 *)self + 0x28);
     u8 *vt = *(u8 **)(obj + 0x24);
