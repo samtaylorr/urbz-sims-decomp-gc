@@ -147,18 +147,10 @@ void *fn_801024F8(void *self, s32 i) {
 }
 
 void *fn_8010280C(void *self, void *arg1, s32 arg2) {
-    if (arg2 != 0) {
-        u16 **p = M2C_FIELD(arg1, u16 ***, 0x5C);
-        u16 *s = NULL;
-        if (p != NULL) {
-            s = *p;
-        }
-        if (*s == 0) {
-            return (char *)arg1 + 0x58;
-        }
-        return (char *)arg1 + 0x5C;
+    if (arg2 == 0 || *({ u16 **p = M2C_FIELD(arg1, u16 ***, 0x5C); u16 *s = NULL; if (p != NULL) s = *p; s; }) == 0) {
+        return (char *)arg1 + 0x58;
     }
-    return (char *)arg1 + 0x58;
+    return (char *)arg1 + 0x5C;
 }
 
 void *fn_80102844(void *self, void *arg1, s32 arg2) {
@@ -595,6 +587,12 @@ s32 fn_80105314(s32 *self) {
 
 s32 fn_8010531C(s32 *self) {
     return *self;
+}
+
+void fn_80105324(u8 *out, f32 *in) {
+    out[0] = (s32)in[0];
+    out[2] = 1;
+    out[1] = (s32)in[1];
 }
 
 f32 fn_80105498(u8 *arg0) {
