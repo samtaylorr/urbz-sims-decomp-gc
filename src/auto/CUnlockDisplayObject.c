@@ -27,12 +27,14 @@ void fn_800B8F80(u8 *self) {
 
 f32 fn_800B9024(void *arg0, s32 arg1) {
     extern void fn_80320680(s32, s32, f32, f32);
-    extern Vec3f fn_803227C4(s32, s32, s32, s32, s32);
+    extern void fn_803227C4(void *, s32, s32, s32, s32, s32);
     extern f32 lbl_803CF520[];
     extern f32 lbl_803CF524[];
+    f32 v[2];
 
     fn_80320680(M2C_FIELD(arg0, s32 *, 0x160), 1, lbl_803CF520[0], lbl_803CF524[0]);
-    return fn_803227C4(M2C_FIELD(arg0, s32 *, 0x160), arg1, 1, 1, 0).x;
+    fn_803227C4(v, M2C_FIELD(arg0, s32 *, 0x160), arg1, 1, 1, 0);
+    return v[0];
 }
 
 extern void *fn_802D0AB8(void *);
@@ -312,13 +314,17 @@ void fn_800BB4C4(void *arg0) {
     extern void *fn_802D1FC8(s32);
     extern void *fn_802E55C0(void *);
     extern void fn_802E58E4(void *, s32, s32, s32);
-    void fn_802F42A8();
+    extern void fn_802F42A8(s32, s32, s32, s32, s32);
+    s32 a;
+    s32 b;
 
     if (M2C_FIELD(arg0, s32 *, 0x80) == 0) {
         M2C_FIELD(arg0, void **, 0x10) = fn_802E55C0(fn_802D1FC8(0x78));
         fn_802E58E4(M2C_FIELD(arg0, void **, 0x10), M2C_FIELD(arg0, s32 *, 0x30), 1, 0);
         M2C_FIELD(M2C_FIELD(arg0, void **, 0x10), f32 *, 0x54) = M2C_FIELD(M2C_FIELD(arg0, void **, 0x14), f32 *, 0x6C);
-        fn_802F42A8(M2C_FIELD(arg0, s32 *, 0x1C), M2C_FIELD(arg0, s32 *, 0x2C), 0, 0, 0);
+        b = M2C_FIELD(arg0, s32 *, 0x2C);
+        a = M2C_FIELD(arg0, s32 *, 0x1C);
+        fn_802F42A8(a, b, 0, 0, 0);
     }
 }
 
@@ -600,12 +606,12 @@ s32 fn_800BD284(void *arg0, void *arg1, void *arg2, void *arg3) {
     fn_800F1930(buf, arg0);
     fn_800F2868(arg3, 0, -1);
     fn_800F1F00(arg3, buf, 0, -1);
-    do {
-        r = fn_800BD3D8(fn_800F3304(arg3), arg1, arg2, arg3);
-        if (found == 0 && r != 0) {
-            found = 1;
-        }
-    } while (r != 0);
+loop:
+    r = fn_800BD3D8(fn_800F3304(arg3), arg1, arg2, arg3);
+    if (found == 0 && r != 0) {
+        found = 1;
+    }
+    if (r != 0) goto loop;
     fn_800F1A60(buf, 2);
     return found;
 }
