@@ -211,6 +211,15 @@ void fn_80360A60(void *arg0) {
     }
 }
 
+void *fn_80360C04(void *self) {
+    extern void fn_8036F020(void *);
+    extern u8 lbl_8041D098[];
+    fn_8036F020(self);
+    M2C_FIELD(self, s32 *, 0x28) = 0;
+    M2C_FIELD(self, void **, 0x24) = lbl_8041D098;
+    return self;
+}
+
 void fn_80360E74(void *self) {
     u8 *obj = *(u8 **)((u8 *)self + 0x28);
     u8 *vt = *(u8 **)(obj + 0x24);
