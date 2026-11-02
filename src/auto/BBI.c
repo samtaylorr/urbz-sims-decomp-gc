@@ -1521,7 +1521,7 @@ u16 fn_80063A40(void) {
     return lbl_80491EFA[0];
 }
 
-extern void fn_800638D8(void);
+extern void *fn_800638D8(void);
 extern void fn_800639A0(void *);
 extern u8 lbl_803C7F44[];
 void fn_80063A4C(s32 arg0) {
