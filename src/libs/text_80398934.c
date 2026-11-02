@@ -2028,7 +2028,7 @@ void fn_8039CC48(s32 *first, s32 *last, SortComp *comp) {
             *(volatile SortComp *)&c = c;
         }
     } else {
-        fn_8039CB38(first, last, *comp);
+        ((void (*)(s32 *, s32 *, SortComp))fn_8039CB38)(first, last, *comp);
     }
 }
 
