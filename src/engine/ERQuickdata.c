@@ -336,6 +336,13 @@ void fn_80331244(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x64) = (s32) (temp_r0 & 0xFFFFFF7F);
 }
 
+s32 fn_803312A0(void *arg0) {
+    if (M2C_FIELD(arg0, u32 *, 0x64) & 2) {
+        arg0 = M2C_FIELD(arg0, void **, 0x24);
+    }
+    return (M2C_FIELD(arg0, u32 *, 0x64) >> 7) & 1;
+}
+
 s32 fn_803312C8(void *arg0) {
     return ((u32) M2C_FIELD(arg0, u32 *, 0x64) >> 5U) & 1;
 }
@@ -363,11 +370,11 @@ u8 fn_80331314(void *arg0) {
 }
 
 u8 fn_80331330(void *arg0, u32 arg1) {
-    if (!(M2C_FIELD(arg0, u32 *, 0x64) & 2)) {
+    if (M2C_FIELD(arg0, u32 *, 0x64) & 2) {
+        if (M2C_FIELD(arg0, u8 *, 0x50) > arg1) {
+            return M2C_FIELD(arg0, u8 **, 0x54)[arg1];
+        }
         return 0;
-    }
-    if (M2C_FIELD(arg0, u8 *, 0x50) > arg1) {
-        return M2C_FIELD(arg0, u8 **, 0x54)[arg1];
     }
     return 0;
 }
