@@ -120,6 +120,20 @@ s32 fn_80186788(s32 arg0) {
     return arg0 + 0x1904;
 }
 
+void *fn_80186790(void *arg0) {
+    void fn_8011D9C0(void *);
+    void fn_801C9904(void *);
+    s32 fn_8018ED98(void);
+    ((void *(*)(void *, s32))fn_80186538)((u8 *)arg0 + 0xC, -1);
+    fn_8011D9C0((u8 *)arg0 + 0x1964);
+    fn_801C9904((u8 *)arg0 + 0x1AF8);
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+    M2C_FIELD(arg0, s32 *, 0x1AF4) = fn_8018ED98();
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    return arg0;
+}
+
 s32 fn_80186884(void *arg0) {
     s32 *fn_8010B96C(void *, M2C_UNK);
     void *temp_r31;
