@@ -40,6 +40,30 @@ typedef union {
     long long ll;
 } DIunion;
 
+void fn_80241A98(s32 arg0, u32 arg1, u32 arg2, s32 arg3) {
+    extern s32 lbl_80440514[];
+    void fn_80241754(s32);
+    void fn_80241890(void *, s32);
+    u8 buf[0x18];
+    s32 i;
+
+    for (i = 0; i < 0x18; i++) {
+        buf[i] = 0;
+    }
+    buf[0] = 9;
+    *(u16 *)(buf + 2) = 0x10 << 8;
+    if (lbl_80440514[0] != 0) {
+        buf[8] = 9;
+    } else {
+        buf[8] = 0xB;
+    }
+    *(s32 *)(buf + 0xC) = arg0;
+    *(s32 *)(buf + 0x10) = arg3;
+    *(u32 *)(buf + 0x14) = arg2;
+    fn_80241754(0x18);
+    fn_80241890(buf, 0x18);
+}
+
 void fn_80241B24(void) {
     extern volatile u32 lbl_80440510[];
     extern s32 lbl_803F73B0[];
@@ -1138,6 +1162,37 @@ s32 fn_8024E020(s32 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     if ((ret = fn_80375D08(arg1, arg2, arg3)) == -1 && lbl_804966F8 != 0) {
         *arg0 = lbl_804966F8;
     }
+    return ret;
+}
+
+s32 fn_8024E078(s32 *ptr, const char *mode, s32 *optr) {
+    s32 ret, m, o;
+
+    switch (mode[0]) {
+    case 'r':
+        ret = 4;
+        m = 0;
+        o = 0;
+        break;
+    case 'w':
+        ret = 8;
+        m = 1;
+        o = 0x600;
+        break;
+    case 'a':
+        ret = 0x108;
+        m = 1;
+        o = 0x208;
+        break;
+    default:
+        *ptr = 0x16;
+        return 0;
+    }
+    if (mode[1] == '+' || mode[2] == '+') {
+        ret = 0x10;
+        m = 2;
+    }
+    *optr = m | o;
     return ret;
 }
 
