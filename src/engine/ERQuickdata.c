@@ -235,6 +235,54 @@ ERQdEntry *fn_8032D5C8(void *arg0, s32 key) {
     return result;
 }
 
+s32 fn_8032D630(s32 lo, s32 hi, s32 key, s32 *keys) {
+    s32 fn_802486DC(s32, s32);
+    s32 n;
+    s32 mid;
+    s32 c;
+
+    if (key == 0 || keys == NULL) {
+        return -1;
+    }
+    n = hi - lo;
+    if (n < 0) {
+        return -1;
+    }
+    if (n == 0) {
+        if (fn_802486DC(key, keys[lo]) == 0) {
+            return lo;
+        }
+        return -1;
+    }
+    mid = lo + n / 2;
+    c = fn_802486DC(key, keys[mid]);
+    if (c == 0) {
+        return mid;
+    }
+    if (c > 0) {
+        return fn_8032D630(mid + 1, hi, key, keys);
+    }
+    return fn_8032D630(lo, mid - 1, key, keys);
+}
+
+u32 fn_8032D6E8(void *arg0, ERQdEntry *e, s32 key) {
+    u32 result = 0;
+    s32 stride;
+    s32 idx;
+
+    if (e != NULL && key != 0 && e->unk8 != 0) {
+        stride = e->unk10;
+        if (stride == 0) {
+            stride = 1;
+        }
+        idx = fn_8032D630(0, e->unkC - 1, key, (s32 *)e->unk8);
+        if (idx >= 0) {
+            result = e->unk4 + idx * stride;
+        }
+    }
+    return result;
+}
+
 void *fn_8032D8E0(void *arg0, u32 arg1, u32 *out) {
     s32 fn_8032D7DC(void *, s32, s32, u32);
     s32 idx;
@@ -496,11 +544,9 @@ void fn_80330D4C(u8 *self, s32 a, s32 b) {
     s32 n = self[0x50];
     s32 found = 0;
     s32 i;
-    u8 v = b / 15 + a * 4;
 
     for (i = 0; i < n; i++) {
-        u8 *arr = M2C_FIELD(self, u8 **, 0x54);
-        if (arr[i] <= v) {
+        if (M2C_FIELD(self, u8 **, 0x54)[i] <= (u8)(a * 4 + b / 15)) {
             found = i;
         } else {
             break;
