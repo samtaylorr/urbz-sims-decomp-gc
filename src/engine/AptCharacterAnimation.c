@@ -6,9 +6,45 @@ void fn_8028B998(s32 arg0) {
     fn_802A1420(arg0 + 0x24);
 }
 
+void fn_8028CB54(void *arg0, void *arg1) {
+    void fn_8028CBD8(void *, u32);
+    s32 type = M2C_FIELD(arg1, s32 *, 0xC);
+
+    if (type == 0x1F5) {
+        M2C_FIELD(arg0, f32 *, 0x125C) = M2C_FIELD(arg1, f32 *, 0x0);
+        M2C_FIELD(arg0, f32 *, 0x1260) = M2C_FIELD(arg1, f32 *, 0x4);
+        M2C_FIELD(arg0, u8 *, 0x1264) = M2C_FIELD(arg1, u8 *, 0x8);
+    } else if (type == 0x1F6) {
+        M2C_FIELD(arg0, f32 *, 0x126C) = M2C_FIELD(arg1, f32 *, 0x0);
+        M2C_FIELD(arg0, f32 *, 0x1270) = M2C_FIELD(arg1, f32 *, 0x4);
+        M2C_FIELD(arg0, u8 *, 0x1274) = M2C_FIELD(arg1, u8 *, 0x8);
+    }
+    fn_8028CBD8(arg0, (M2C_FIELD(arg1, s32 *, 0xC) << 17) | (M2C_FIELD(arg1, u8 *, 0x8) << 2) | 1);
+}
+
+void fn_8028CBD8(void *arg0, u32 arg1) {
+    extern const s32 lbl_80494B40;
+    extern s32 lbl_804960E4;
+    extern void (*lbl_80443328[])(void *, s32);
+    struct {
+        s32 type;
+        u32 value;
+    } msg;
+
+    if (M2C_FIELD(arg0, s32 *, 0x1238) < M2C_FIELD(arg0, s32 *, 0x1288)) {
+        M2C_FIELD(arg0, u32 **, 0x123C)[M2C_FIELD(arg0, s32 *, 0x1238)] = arg1;
+        M2C_FIELD(arg0, s32 *, 0x1238)++;
+        if (lbl_80494B40 != 0) {
+            msg.type = lbl_804960E4;
+            msg.value = arg1;
+            lbl_80443328[0](&msg, 8);
+        }
+    }
+}
+
 void fn_8028CC54(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     void fn_8028CBD8(void *, u32);
-    fn_8028CBD8(arg0, (arg1 << 17) | ((arg2 & 0x7F) << 10) | 1 | ((arg3 & 0xFF) << 2));
+    fn_8028CBD8(arg0, (arg1 << 17) | (((arg2 & 0x7F) << 10) | 1) | ((arg3 & 0xFF) << 2));
 }
 
 void fn_8028CC8C(void *arg0, s32 arg1, s32 arg2) {
