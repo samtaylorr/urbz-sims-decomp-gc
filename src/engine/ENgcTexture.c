@@ -90,6 +90,25 @@ void fn_803613DC(s32 arg0) {
     fn_80338184(lbl_8045BAE8, arg0);
 }
 
+void fn_80361568(u8 *self, s32 arg1) {
+    extern s32 fn_80361C4C(void *, u32, void *, void *);
+    extern void fn_80251C1C(s32, s32);
+    extern void fn_80251C7C(s32, s32);
+    s32 a;
+    s32 b;
+    u32 n = 1;
+    s32 r;
+    if (*(u16 *)(self + 0x16) > 1) {
+        n = *(u16 *)(self + 0x16);
+    }
+    r = fn_80361C4C(self, n, &a, &b);
+    if (arg1 != 0) {
+        fn_80251C1C(*(s32 *)(self + 0x74), r);
+    } else {
+        fn_80251C7C(*(s32 *)(self + 0x74), r);
+    }
+}
+
 s32 fn_803615D8(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x44) = (s32) (M2C_FIELD(arg0, s32 *, 0x44) + 1);
     return 1;
