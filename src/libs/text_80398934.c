@@ -2754,18 +2754,26 @@ void fn_8039E788(s32 *self, s32 flags) {
 }
 
 void fn_8039E7BC(void *self) {
+    typedef struct {
+        u8 pad[0x114];
+        u32 hi : 24;
+        u32 mode : 4;
+        u32 lo : 4;
+    } Ctx8041F754;
     extern u8 *lbl_80495A78;
     extern u8 lbl_8045AAB0[];
     extern f32 lbl_803D4FFC[];
     void fn_80332C50(void *);
     u8 *g;
+    f32 f;
     fn_80332C50(lbl_8045AAB0);
+    f = lbl_803D4FFC[0];
     g = lbl_80495A78;
     *(s32 *)(g + 0x2C) = 1;
-    *(f32 *)(g + 0x8) = lbl_803D4FFC[0];
-    *(f32 *)(g + 0x0) = lbl_803D4FFC[0];
+    *(f32 *)(g + 0x8) = f;
+    *(f32 *)(g + 0x0) = f;
     *(s32 *)(g + 0xC) = 1;
-    *(u32 *)(lbl_8041F754 + 0x114) = (*(u32 *)(lbl_8041F754 + 0x114) & ~0xF0) | 0x10;
+    ((Ctx8041F754 *)lbl_8041F754)->mode = 1;
     M2C_FIELD(self, s32 *, 0x18) = 0;
 }
 
@@ -2794,10 +2802,11 @@ void fn_8039EAC4(void) {
     extern u8 *lbl_80495A78;
     extern void **lbl_80494FA4;
     extern f32 lbl_803D5014[];
+    void **obj = lbl_80494FA4;
     char *vt;
     *(f32 *)(lbl_80495A78 + 4) = lbl_803D5014[0];
-    vt = (char *)*lbl_80494FA4;
-    (*(void (**)(void *))(vt + 0x4C))((char *)lbl_80494FA4 + *(s16 *)(vt + 0x48));
+    vt = (char *)*obj;
+    (*(void (**)(void *))(vt + 0x4C))((char *)obj + *(s16 *)(vt + 0x48));
     *(s32 *)(lbl_80495A78 + 0x28) = 0;
 }
 
