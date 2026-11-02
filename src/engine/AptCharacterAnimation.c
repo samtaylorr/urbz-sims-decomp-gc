@@ -308,15 +308,13 @@ void *fn_8028E0A0(void *arg0, s32 arg1) {
 
 void *fn_8028E2B8(void *arg0, s32 arg1) {
     extern void *lbl_80496130;
-    void *p = NULL;
+    void *p;
 
-    if (arg1 >= 0 && arg1 < M2C_FIELD(arg0, s32 *, 0x24)) {
-        p = (void *) (M2C_FIELD(arg0, u32 **, 0x1C)[arg1] & ~1);
+    if (arg1 < 0 || arg1 >= M2C_FIELD(arg0, s32 *, 0x24)) {
+        return lbl_80496130;
     }
-    if (p != NULL) {
-        return p;
-    }
-    return lbl_80496130;
+    p = (void *) (M2C_FIELD(arg0, u32 **, 0x1C)[arg1] & ~1);
+    return p != NULL ? p : lbl_80496130;
 }
 
 void fn_8028E2F0(void *arg0, void *arg1) {
