@@ -57,6 +57,18 @@ static inline CRF3 CRF3_make(f32 x, f32 y, f32 z) {
     return r;
 }
 
+static inline void CRB3_set(CRB3 *r, s32 a, s32 b) {
+    r->a = a;
+    r->c = 1;
+    r->b = b;
+}
+
+static inline void CRF3_set(CRF3 *r, f32 x, f32 y, f32 z) {
+    r->x = x;
+    r->y = y;
+    r->z = z;
+}
+
 static inline void ChainRes_Unlink(void **p, void *self) {
     while (*p != NULL) {
         if (*p == self) {
