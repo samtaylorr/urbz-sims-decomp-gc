@@ -155,11 +155,11 @@ char *fn_8036458C(void *self, void *key, char *def) {
     extern s32 fn_802D4298(void *, s32, s32);
     void *found;
     char **str;
-    if (fn_8036A04C((u8 *)self + 0x14, key, &found) == NULL) {
-        return def;
+    if (fn_8036A04C((u8 *)self + 0x14, key, &found) != NULL) {
+        str = *(char ***)found;
+        return *str + (fn_802D4298(str, '=', 0) + 1);
     }
-    str = *(char ***)found;
-    return *str + fn_802D4298(str, '=', 0) + 1;
+    return def;
 }
 
 void fn_803645F4(void *arg0, void *arg1, s32 arg2) {
@@ -1744,6 +1744,18 @@ void fn_8036A304(void *arg0) {
         M2C_FIELD(arg0, s32 *, 0xC) = 1;
         fn_802D1A00(fn_802D0AB8(), M2C_FIELD(arg0, void **, 8));
         M2C_FIELD(arg0, void **, 8) = p;
+    }
+}
+
+void fn_8036A354(void *arg0) {
+    void *n;
+
+    fn_80369B8C(arg0, M2C_FIELD(arg0, s32 *, 0xC) << 1);
+    for (n = M2C_FIELD(arg0, void **, 0); n != NULL; n = M2C_FIELD(n, void **, 4)) {
+        s32 index = fn_80369B40(arg0, M2C_FIELD(n, u8 **, 0xC));
+        void **table = M2C_FIELD(arg0, void ***, 8);
+        M2C_FIELD(n, void **, 8) = table[index];
+        table[index] = n;
     }
 }
 
