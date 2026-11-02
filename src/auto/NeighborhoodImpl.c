@@ -125,12 +125,16 @@ void fn_801285FC(char *self, void *arg1) {
     fn_800F6A38(arg1, self + 4);
 }
 
-s32 fn_80128628(char *self, s32 i) {
-    return ((s16 *)(self + 0x168))[i];
+s32 fn_80128628(void *self, s32 i) {
+    return ((struct { u8 pad[0x168]; s16 a[1]; } *)self)->a[i];
 }
 
 void *fn_80128638(void *arg0, s32 i) {
     return (u8 *)arg0 + (i * 2 + 0x168);
+}
+
+void fn_80128648(char *self, s32 i, s16 v) {
+    ((s16 *)(self + 0x168))[i] = v;
 }
 
 s32 fn_801286A0(void *arg0) {
