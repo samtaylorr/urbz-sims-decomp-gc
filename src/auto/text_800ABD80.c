@@ -16,6 +16,17 @@ void fn_800ABD94(s32 self, s32 flags) {
     }
 }
 
+void fn_800ABE24(s32 self) {
+    void fn_803379C8(void *, s32);
+    extern u8 lbl_8045B82C[];
+    if (M2C_FIELD(self, s32 *, 0) != 0) {
+        fn_803379C8(lbl_8045B82C, M2C_FIELD(self, s32 *, 0));
+        M2C_FIELD(self, s32 *, 0) = 0;
+        *M2C_FIELD(self, s32 **, 4) = 0;
+        M2C_FIELD(self, s32 **, 4) = NULL;
+    }
+}
+
 s32 fn_800ABE78(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0) == 0;
 }
