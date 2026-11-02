@@ -31,6 +31,10 @@ s32 fn_800ABE78(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0) == 0;
 }
 
+s32 fn_800ABE88(s32 arg0, s32 arg1) {
+    return M2C_FIELD(arg0, s32 *, 4) == arg1;
+}
+
 s32 fn_800ABE9C(void *self) {
     s32 fn_80336E08(void *, s32);
     extern u8 lbl_8045B82C[];
