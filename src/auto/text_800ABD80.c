@@ -90,6 +90,13 @@ void fn_800ACA1C(void) {
 
 }
 
+void fn_800ACA20(void *arg0, s16 arg1, s8 arg2, s8 arg3, s8 arg4) {
+    M2C_FIELD(arg0, s16 *, 0x1E) = arg1;
+    M2C_FIELD(arg0, s8 *, 0x20) = arg2;
+    M2C_FIELD(arg0, s8 *, 0x21) = arg3;
+    M2C_FIELD(arg0, s8 *, 0x22) = arg4;
+}
+
 void fn_800ACBE8(void) {
 
 }
