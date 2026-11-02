@@ -1996,19 +1996,21 @@ static inline void SortComp_InsertOne(s32 *first, s32 *i, SortComp comp) {
         }
         *first = val;
     } else {
-        SortComp_LinearInsert(i, val, comp);
+        ((void (*)(s32 *, s32, SortComp))fn_8039CAD8)(i, val, comp);
     }
 }
 
 void fn_8039CB38(s32 *first, s32 *last, SortComp *comp) {
     s32 *i;
+    SortComp c;
 
     if (first == last) {
         return;
     }
     for (i = first + 1; i != last; i++) {
-        SortComp c = *comp;
-        s32 val = *i;
+        s32 val;
+        c = *comp;
+        val = *i;
         if (((s32 (*)(SortComp *, s32, s32))fn_800A2B98)(&c, val, *first)) {
             s32 *next = i + 1;
             s32 n = (char *)i - (char *)first;
@@ -2017,7 +2019,7 @@ void fn_8039CB38(s32 *first, s32 *last, SortComp *comp) {
             }
             *first = val;
         } else {
-            SortComp_LinearInsert(i, val, c);
+            ((void (*)(s32 *, s32, SortComp))fn_8039CAD8)(i, val, c);
         }
     }
 }
