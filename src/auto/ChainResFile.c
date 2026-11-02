@@ -117,6 +117,13 @@ typedef struct ChainSlot {
     ChainVecAlloc alloc;
     s32 flag;
 } ChainSlot;
+
+static inline void ChainSlot_DestroyRange(ChainSlot *first, ChainSlot *last) {
+    while (first != last) {
+        last--;
+        ChainVec_Free((ChainVec *)&last->begin);
+    }
+}
 void fn_801020E0(void **self, s32 flags) {
     *self = lbl_8040D690;
     if (flags & 1) {
