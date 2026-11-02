@@ -193,22 +193,9 @@ void fn_80052F5C(void) {
 }
 
 void fn_80052F60(void *self) {
-    void *fn_802D197C(void *, u32, s32);
-    void *fn_802DC3C0(void *, u32, s32, s32, s32);
-    void *fn_802D0B3C();
     void *fn_800504B0(void *);
-    void *heap;
-    void *p;
 
-    heap = ((void *(*)())fn_802D0AB8)();
-    p = fn_802D197C(heap, 0x420, 0x10);
-    if (p == NULL) {
-        p = fn_802DC3C0(heap, 0x420, 0x10, 0, 0);
-        if (p == NULL && heap == ((void *(*)())fn_802D0AB8)()) {
-            p = fn_802DC3C0(fn_802D0B3C(), 0x420, 0x10, 0, 0);
-        }
-    }
-    M2C_FIELD(self, void **, 0x1B4) = fn_800504B0(p);
+    M2C_FIELD(self, void **, 0x1B4) = fn_800504B0(EFloorShd_Alloc(0x420));
 }
 
 s32 fn_80053428(void *arg0) {
@@ -330,16 +317,19 @@ void fn_80054D08(void) {
 
 }
 
-void fn_800555D8(void *self, s32 arg1, s32 arg2, EFloorShdVec2 pos, s32 arg4, s32 arg5, s32 arg6) {
+void fn_800555D8(void *self, s32 arg1, s32 arg2, EFloorShdVec2 *pos, s32 arg4, s32 arg5, s32 arg6) {
     extern f32 lbl_803C7A4C[];
     extern f32 lbl_803C7A50[];
-    void fn_8032314C(void *, s32, s32, EFloorShdVec2, s32, s32, s32, s32, f32, f32);
+    void fn_8032314C(void *, s32, s32, EFloorShdVec2 *, s32, s32, s32, s32, f32, f32);
     void fn_80322ACC(void *, s32, s32, s32, EFloorShdVec2, s32, s32, s32, s32, s32, s32, s32);
+    EFloorShdVec2 v;
 
     if (arg6 == 0) {
         fn_8032314C(M2C_FIELD(self, void **, 0x19C), arg1, arg2, pos, arg4, arg5, 0, 1, lbl_803C7A4C[0], lbl_803C7A50[0]);
     } else {
-        fn_80322ACC(M2C_FIELD(self, void **, 0x19C), arg1, arg2, 1, pos, arg4, arg5, 0, 0, 0, 0, 1);
+        v.y = pos->y;
+        v.x = pos->x;
+        fn_80322ACC(M2C_FIELD(self, void **, 0x19C), arg1, arg2, 1, v, arg4, arg5, 0, 0, 0, 0, 1);
     }
 }
 
