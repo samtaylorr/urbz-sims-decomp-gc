@@ -354,6 +354,26 @@ void *fn_8036524C(void *self, f32 key) {
     return (char *)fn_8036542C(self, n, key, 0) + 0x18;
 }
 
+void *fn_803652B4(void *arg0, f32 key) {
+    void *var_r11;
+    void *var_r3;
+
+    var_r3 = M2C_FIELD(arg0, void **, 8);
+    var_r11 = NULL;
+    while (var_r3 != lbl_80401348) {
+        if (key == M2C_FIELD(var_r3, f32 *, 0x1C)) {
+            return var_r3;
+        }
+        var_r11 = var_r3;
+        if (key < M2C_FIELD(var_r3, f32 *, 0x1C)) {
+            var_r3 = M2C_FIELD(var_r11, void **, 0);
+        } else {
+            var_r3 = M2C_FIELD(var_r11, void **, 4);
+        }
+    }
+    return var_r11;
+}
+
 void *fn_803652B4(void *self, f32 key);
 void *fn_8036542C(void *self, void *parent, f32 key, s32 value);
 void *fn_803652F8(void *arg0, f32 key) {
