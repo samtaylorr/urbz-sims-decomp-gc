@@ -351,6 +351,24 @@ void fn_80380AFC(void) {
     fn_80380B20(0);
 }
 
+void fn_80380B20(s32 arg0) {
+    extern char *lbl_80495640;
+    void OSRegisterVersion(const char *);
+    M2C_UNK fn_80380E64();
+    M2C_UNK fn_8038381C();
+    M2C_UNK fn_80382CB8();
+    M2C_UNK fn_80381434();
+    M2C_UNK fn_80381FE0();
+    M2C_UNK fn_80382404(s32);
+    OSRegisterVersion(lbl_80495640);
+    fn_80380E64();
+    fn_8038381C();
+    fn_80382CB8();
+    fn_80381434();
+    fn_80381FE0();
+    fn_80382404(arg0);
+}
+
 void fn_80380B6C(void) {
     M2C_UNK fn_80380F18();
     M2C_UNK fn_80383A20();
