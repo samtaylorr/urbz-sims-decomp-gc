@@ -408,7 +408,8 @@ s32 fn_80331410(void *arg0) {
 }
 
 s32 fn_80331428(u8 *self, s32 idx) {
-    return (*(s32 **)(self + 0x20) + 0x10)[idx];
+    struct { u8 pad[0x40]; s32 a[4]; } *p = *(void **)(self + 0x20);
+    return p->a[idx];
 }
 
 void fn_8033143C(void) {
