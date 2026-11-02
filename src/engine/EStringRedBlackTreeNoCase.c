@@ -80,8 +80,10 @@ char *fn_80364BEC(char *buf, s32 n, void *stream) {
         if (c == '\n') {
             goto done;
         }
-        *p++ = c;
-        if (--n == 0) {
+        *p = c;
+        p++;
+        n--;
+        if (n == 0) {
             goto done;
         }
     }
@@ -178,16 +180,15 @@ s32 fn_80364DDC(void *arg0, void *arg1, s32 arg2) {
     if (temp_r11 == NULL) {
         return 0;
     }
-    if (arg1 != NULL) {
+    if (arg1 == NULL) {
         temp_r9 = M2C_FIELD(temp_r11, void **, 0x28);
-        return M2C_FIELD(temp_r9, s32 (**)(void *, void *, s32), 0x1C)((char *)temp_r11 + M2C_FIELD(temp_r9, s16 *, 0x18), arg1, arg2);
-    } else {
-        temp_r9 = M2C_FIELD(temp_r11, void **, 0x28);
-        if (M2C_FIELD(temp_r9, s32 (**)(void *, s32, s32), 0x2C)((char *)temp_r11 + M2C_FIELD(temp_r9, s16 *, 0x28), arg2, 1) != 0) {
-            return 0;
+        if (M2C_FIELD(temp_r9, s32 (**)(void *, s32, s32), 0x2C)((char *)temp_r11 + M2C_FIELD(temp_r9, s16 *, 0x28), arg2, 1) == 0) {
+            return arg2;
         }
-        return arg2;
+        return 0;
     }
+    temp_r9 = M2C_FIELD(temp_r11, void **, 0x28);
+    return M2C_FIELD(temp_r9, s32 (**)(void *, void *), 0x1C)((char *)temp_r11 + M2C_FIELD(temp_r9, s16 *, 0x18), arg1);
 }
 
 s32 fn_80364E64(void *arg0) {
