@@ -343,23 +343,18 @@ s32 fn_800A51CC(s32 arg0) {
     extern s32 lbl_80494428;
     extern s32 lbl_80494460;
     s32 ret;
+    u8 *obj;
+    u8 *vt;
 
-    {
-        u8 *obj = lbl_80496650;
-        u8 *vt = *(u8 **)obj;
-        (*(void (**)(void *, s32, s32))(vt + 0xAC))(obj + *(s16 *)(vt + 0xA8), 7, 10);
-    }
-    {
-        u8 *obj = lbl_80496650;
-        u8 *vt = *(u8 **)obj;
-        (*(void (**)(void *, void *, s32))(vt + 0x8C))(obj + *(s16 *)(vt + 0x88), lbl_8049440C, lbl_80494428);
-    }
-    ret = fn_8012E974(lbl_8049440C, lbl_80494460, arg0);
-    if (ret == 1) {
+    while (obj = lbl_80496650, vt = *(u8 **)obj,
+           (*(void (**)(void *, s32, s32))(vt + 0xAC))(obj + *(s16 *)(vt + 0xA8), 7, 10),
+           obj = lbl_80496650, vt = *(u8 **)obj,
+           (*(void (**)(void *, void *, s32))(vt + 0x8C))(obj + *(s16 *)(vt + 0x88), lbl_8049440C, lbl_80494428),
+           (ret = fn_8012E974(lbl_8049440C, lbl_80494460, arg0)) == 1) {
         ret = fn_800A5090((void *)arg0);
-    } else {
-        fn_800A4924(lbl_80494460, arg0);
+        break;
     }
+    fn_800A4924(lbl_80494460, arg0);
     return ret;
 }
 
@@ -380,6 +375,21 @@ s32 fn_800A527C(s32 arg0) {
     ret = fn_800F7138(*(u8 **)(p + 0x184) + 0x4C);
     q->b[q->idx] = ret;
     ret = fn_8012E230(lbl_80494460, arg0);
+    fn_800A4924(lbl_80494460, arg0);
+    return ret;
+}
+
+s32 fn_800A5678(s32 arg0, s32 arg1) {
+    s32 fn_8012E048(void *, u8, s32);
+    M2C_UNK fn_800A4924(s32, s32);
+    extern struct { s32 unk0, unk4, unk8, unkC; } *lbl_80494FDC;
+    extern void *lbl_8049440C;
+    extern s32 lbl_80494460;
+    s32 ret;
+
+    lbl_80494FDC->unkC = 0;
+    ret = fn_8012E048(lbl_8049440C, arg0, arg1);
+    lbl_80494FDC->unkC = 1;
     fn_800A4924(lbl_80494460, arg0);
     return ret;
 }
