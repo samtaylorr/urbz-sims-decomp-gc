@@ -456,7 +456,7 @@ s32 fn_800BC124(void) {
     return 1;
 }
 
-void fn_800BCD18(const u16 *a, const u16 *b, u16 *dst, u32 n) {
+u32 fn_800BCD18(const u16 *a, const u16 *b, u16 *dst, u32 n) {
     u32 i = 0;
     while (*a != 0 && i < n - 1) {
         *dst++ = *a++;
@@ -467,13 +467,15 @@ void fn_800BCD18(const u16 *a, const u16 *b, u16 *dst, u32 n) {
         i++;
     }
     *dst = 0;
+    return i;
 }
 
 u32 fn_800BCDA0(const u16 *src, u16 *dst, u32 n) {
     u32 len = 0;
     u32 count;
-    u16 *p;
-    while (dst[len] != 0) {
+    u16 *p = dst;
+    while (*p != 0) {
+        p++;
         len++;
     }
     p = dst + len;
@@ -497,11 +499,7 @@ u32 fn_800BCE20(u16 *dst, u32 n, f32 val) {
     return fn_800BCFBC(lbl_804315EC, dst, n);
 }
 
-extern char lbl_804315EC[];
-extern char lbl_803D0060[];
-extern int fn_80245BB4(char *, const char *, ...);
-void fn_800BCFBC(const char *src, u16 *dst, u32 n);
-void fn_800BCFBC(const char *src, u16 *dst, u32 n) {
+u32 fn_800BCFBC(const char *src, u16 *dst, u32 n) {
     u32 i = 0;
     while (*src != 0 && i < n - 1) {
         *dst++ = *src++;
