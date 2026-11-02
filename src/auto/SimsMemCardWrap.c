@@ -163,11 +163,8 @@ s32 fn_800A4C58(s32 arg0, s32 *arg1) {
     char *obj = lbl_80495060;
     char *vt = *(char **)obj;
     s32 buf;
-    s32 v = 0;
-    if ((*(s32 (**)(void *, s32, s32 *))(vt + 0xB4))(obj + *(s16 *)(vt + 0xB0), arg0, &buf) == -8) {
-        v = 1;
-    }
-    *arg1 = v;
+    s32 r = (*(s32 (**)(void *, s32, s32 *))(vt + 0xB4))(obj + *(s16 *)(vt + 0xB0), arg0, &buf);
+    *arg1 = r == -8 ? 1 : 0;
     return 1;
 }
 
@@ -355,15 +352,16 @@ void fn_800A90C0(char *arg0) {
 void fn_800A9108(void) {
     extern char *lbl_80496648;
     extern void *lbl_80496644;
-    extern s32 lbl_8041FAA4;
+    extern s32 lbl_8041FAA4[];
     void fn_8010CCC4(void *);
     void fn_803153B8(s32);
     char *obj = lbl_80496648;
     char *vt = *(char **)obj;
-    (*(void (**)(void *))(vt + 0x54))(obj + *(s16 *)(vt + 0x50));
+    void (*fp)(void *) = *(void (**)(void *))(vt + 0x54);
+    fp(obj + *(s16 *)(vt + 0x50));
     fn_8010CCC4(lbl_80496644);
-    if (lbl_8041FAA4 != 0) {
-        fn_803153B8(lbl_8041FAA4);
+    if (lbl_8041FAA4[0] != 0) {
+        fn_803153B8(lbl_8041FAA4[0]);
     }
 }
 
@@ -600,8 +598,7 @@ void fn_800AA388(void) {
         (*(void (**)(void *))(vt + 0x94))(obj + *(s16 *)(vt + 0x90));
     }
     p = lbl_8041F94C;
-    *(s32 *)(p + 0x330) = -1;
-    *(s32 *)(p + 0x358) = -1;
+    *(s32 *)(p + 0x358) = *(s32 *)(p + 0x330) = -1;
     {
         u8 *obj = lbl_80496650;
         u8 *vt = *(u8 **)obj;
@@ -808,13 +805,18 @@ s32 fn_800AB1CC(u8 *arg0) {
     extern f32 lbl_803CE4D8[];
     u8 *obj = *(u8 **)(arg0 + 0xE8);
     f32 k = lbl_803CE4D4[0];
+    f32 v[3];
+    f32 *p = (f32 *)(obj + 0xA4);
     f32 lim = lbl_803CE4D8[0];
-    SMCVec3 v = *(SMCVec3 *)(obj + 0xA4);
-    f32 s = *(f32 *)(obj + 0xA0);
-    v.x *= s;
-    v.y *= s;
-    v.z *= s;
-    return (v.x + v.y + v.z) * k < lim;
+    f32 s;
+    v[0] = p[0];
+    v[1] = p[1];
+    v[2] = p[2];
+    s = *(f32 *)(obj + 0xA0);
+    v[0] *= s;
+    v[1] *= s;
+    v[2] *= s;
+    return (v[0] + v[1] + v[2]) * k < lim;
 }
 
 void fn_800AB250(f32 x) {
