@@ -69,6 +69,16 @@ static inline void CRF3_set(CRF3 *r, f32 x, f32 y, f32 z) {
     r->z = z;
 }
 
+static inline void CRB3_setv(CRB3 *r, f32 *v) {
+    r->a = (s32)v[0];
+    r->c = 1;
+    r->b = (s32)v[1];
+}
+
+static inline void CRF3_setv(CRF3 *r, s8 *v) {
+    CRF3_set(r, v[0], v[1], v[2]);
+}
+
 static inline void ChainRes_Unlink(void **p, void *self) {
     while (*p != NULL) {
         if (*p == self) {
@@ -361,7 +371,8 @@ s32 fn_80102A90(void *self, void *arg1, s32 key) {
 
     if (tbl != NULL) {
         hi = ((s32 *)tbl)[-1];
-        hi = (s32)tbl + hi * 16;
+        hi <<= 4;
+        hi += (s32)tbl;
     }
     e = fn_803A097C(tbl, (SearchEntry *)hi, key);
     if (e != NULL) {
@@ -436,11 +447,11 @@ void fn_80102BC8(void *self, s32 flags) {
 void fn_80102C60(void *self, void *obj) {
     ChainEntry *e = (ChainEntry *)((char *)self + 0x14);
     s32 i;
-    for (i = 0; i < 8; i++, e++) {
-        if (e->obj == NULL) {
-            e->obj = obj;
-            *(s32 *)(e->pad + 4) = *(s32 *)(e->pad + 0);
-            *(s32 *)(e->pad + 0x10) = 1;
+    for (i = 0; i < 8; i++) {
+        if (e[i].obj == NULL) {
+            e[i].obj = obj;
+            *(s32 *)(e[i].pad + 4) = *(s32 *)(e[i].pad + 0);
+            *(s32 *)(e[i].pad + 0x10) = 1;
             return;
         }
     }
@@ -481,10 +492,9 @@ s32 fn_80102E0C(void *self) {
 
     ret = 0;
     fn_8018FA84(self, 0);
-    i = 0;
     e = (ChainEntry *)((char *)self + 0x14);
-    for (e += ret; i < 8 && e->obj != NULL; i++, e++) {
-        void *o = e->obj;
+    for (i = 0; i < 8 && e[i].obj != NULL; i++) {
+        void *o = e[i].obj;
         char *vt = *(char **)((char *)o + 0x10);
         r = (*(s32 (**)(void *))(vt + 0x44))((char *)o + *(s16 *)(vt + 0x40));
         if (r != 0) {
