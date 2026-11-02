@@ -252,6 +252,27 @@ void fn_8018CB38(void **self, s32 flags) {
     }
 }
 
+s32 fn_8018CB6C(void *arg0, s32 arg1, s32 arg2) {
+    extern u8 *lbl_8049665C;
+    s32 fn_803A9284(u8 *, u8 *, s32);
+    u8 *obj;
+    u8 *p;
+    s32 n;
+    s32 r;
+    obj = (*(u8 *(**)(u8 *))(*(u8 **)lbl_8049665C + 0x3C))(lbl_8049665C + *(s16 *)(*(u8 **)lbl_8049665C + 0x38));
+    p = *(u8 **)(*(u8 **)(obj + 0xC) + 8);
+    n = 0;
+    if (p != NULL) {
+        n = *(s32 *)(p - 4);
+    }
+    r = fn_803A9284(p, p + n * 8, arg2);
+    if (r != 0) {
+        *(s32 *)((u8 *)arg0 + 4) = r;
+        return 0;
+    }
+    return -1;
+}
+
 s32 fn_8018CBF4(void *arg0, s32 arg1) {
     s32 *p;
     s32 n;
