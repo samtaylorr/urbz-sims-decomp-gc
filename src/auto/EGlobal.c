@@ -296,19 +296,20 @@ s32 fn_8004CB8C(void *arg0, void *arg1, void *arg2, s32 arg3) {
     s32 i;
     s32 count;
 
-    if (arg3 != 0) {
-        {
-            char *vt = *(char **)arg2;
-            count = M2C_FIELD(vt, s32 (**)(void *), 0x2C)((char *)arg2 + M2C_FIELD(vt, s16 *, 0x28));
-        }
-        for (i = 0; i < count; i++) {
-            char *vt = *(char **)arg2;
-            char *vt1 = *(char **)arg1 + 0xE8;
-            char *o = (char *)arg1 + *(s16 *)vt1;
-            s32 *item = M2C_FIELD(vt, s32 *(**)(void *, s32), 0x34)((char *)arg2 + M2C_FIELD(vt, s16 *, 0x30), i);
-            if ((*(s32 (**)(void *, s32))(vt1 + 4))(o, *item) == arg3) {
-                return i;
-            }
+    if (arg3 == 0) {
+        return -1;
+    }
+    {
+        char *vt = *(char **)arg2;
+        count = M2C_FIELD(vt, s32 (**)(void *), 0x2C)((char *)arg2 + M2C_FIELD(vt, s16 *, 0x28));
+    }
+    for (i = 0; i < count; i++) {
+        char *vt = *(char **)arg2;
+        char *vt1 = *(char **)arg1 + 0xE8;
+        char *o = (char *)arg1 + *(s16 *)vt1;
+        s32 *item = M2C_FIELD(vt, s32 *(**)(void *, s32), 0x34)((char *)arg2 + M2C_FIELD(vt, s16 *, 0x30), i);
+        if ((*(s32 (**)(void *, s32))(vt1 + 4))(o, *item) == arg3) {
+            return i;
         }
     }
     return -1;
