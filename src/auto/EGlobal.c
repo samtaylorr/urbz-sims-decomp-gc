@@ -695,10 +695,59 @@ void fn_8004DED8(void *arg0, s32 arg1, s32 arg2) {
     }
 }
 
+s32 fn_8004E204(void *self, void *list, void *exclude) {
+    typedef struct { void *a; u8 *cur; s32 b; s32 c; } It;
+    typedef struct { s16 delta; s16 idx; u8 *(*fn)(void *); } VtEnt;
+    extern void fn_80151048(It *, void *, s32);
+    extern void fn_80151110(It *);
+    It iter;
+    register It *it asm("r30") = &iter;
+    register It *p asm("r31");
+    VtEnt *e;
+    u8 *cur;
+
+    fn_80151048(it, list, 0);
+    cur = it->cur;
+    p = it;
+    if (cur != NULL) {
+        do {
+            if (p->cur != exclude) {
+                e = (VtEnt *)(*(u8 **)(p->cur + 4) + 0x2D0);
+                if (*(u16 *)(e->fn(p->cur + e->delta) + 0xB6) & 6) {
+                    return 1;
+                }
+            }
+            fn_80151110(p);
+        } while (p->cur != NULL);
+    }
+    return 0;
+}
+
 s32 fn_8004E29C(void *self, char *obj) {
     char *vt = *(char **)(obj + 4);
     char *r = (*(char *(**)(void *))(vt + 0x2D4))(obj + *(s16 *)(vt + 0x2D0));
     return (*(u16 *)(r + 0xB6) & 6) != 0;
+}
+
+void fn_8004E5DC(void *self, f32 x, f32 y, f32 z) {
+    extern u8 *lbl_80495050;
+    f32 v[3];
+    f32 *p;
+    u8 *obj;
+    u8 *vt;
+    void (*f)(void *, f32 *, s32, s32);
+    void *o;
+
+    obj = lbl_80495050;
+    p = v;
+    vt = *(u8 **)obj;
+    o = obj + *(s16 *)(vt + 0x48);
+    p[0] = x;
+    p[1] = y;
+    p[2] = z;
+    f = *(void (**)(void *, f32 *, s32, s32))(vt + 0x4C);
+    f(o, p, 0xFF, 1);
+    M2C_FIELD(self, s32 *, 0x380) = 0;
 }
 
 s32 fn_8004E644(void) {
