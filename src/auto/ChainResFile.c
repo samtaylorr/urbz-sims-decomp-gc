@@ -165,11 +165,11 @@ void fn_80102A50(void **obj) {
 
 void *fn_80102B08(void *arg0) {
     extern char lbl_8040D718[];
-    extern char lbl_804943F8[];
+    extern char lbl_804943F8[4];
     M2C_FIELD(arg0, char **, 0) = lbl_8040D718;
-    M2C_FIELD(arg0, char **, 0xC) = lbl_804943F8;
     M2C_FIELD(arg0, char **, 4) = lbl_804943F8;
     M2C_FIELD(arg0, char **, 8) = lbl_804943F8;
+    M2C_FIELD(arg0, char **, 0xC) = lbl_804943F8;
     return arg0;
 }
 
