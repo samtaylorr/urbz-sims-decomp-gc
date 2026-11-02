@@ -26,6 +26,9 @@ extern s32 lbl_80495810;
 extern s32 lbl_8045B438[];
 extern void fn_800A9720(void);
 void fn_8003E5E0(s32, s32);
+s32 fn_8012BAAC(s32, u8, s32 *);
+void fn_803445D8(void *, s32, s32, s32 *);
+s32 fn_800A51C0(void);
 extern u8 *lbl_80496668;
 extern u8 *lbl_804961A4;
 void fn_800AA018(void);
@@ -169,6 +172,22 @@ s32 fn_800A4C58(s32 arg0, s32 *arg1) {
         *arg1 = 0;
     }
     return 1;
+}
+
+s32 fn_8012BAAC(s32, u8, s32 *);
+void fn_803445D8(void *, s32, s32, s32 *);
+s32 fn_800A51C0(void);
+void fn_800A4E0C(s32 arg0, s32 *arg1, s32 *arg2) {
+    extern char *lbl_80495060;
+    if (arg2 != 0) {
+        *arg2 = 0;
+    }
+    fn_803445D8(lbl_80495060, arg0, 1, arg1);
+    if (*arg1 != 0) {
+        char *obj = lbl_80495060;
+        char *vt = *(char **)obj;
+        (*(void (**)(void *, s32, s32, s32 *))(vt + 0x84))(obj + *(s16 *)(vt + 0x80), arg0, fn_800A51C0(), arg1);
+    }
 }
 
 s32 fn_800A4FCC(s32 arg0, s32 *arg1) {
@@ -388,8 +407,8 @@ s32 fn_800A9628(s32 arg0) {
     u8 *obj = lbl_80494FC4;
     u8 *vt;
     f32 f;
-    lbl_80494324 = arg0;
     vt = *(u8 **)obj;
+    lbl_80494324 = arg0;
     (*(void (**)(void *, s32))(vt + 0x24))(obj + *(s16 *)(vt + 0x20), arg0);
     obj = lbl_80494FC4;
     vt = *(u8 **)obj;
@@ -788,9 +807,9 @@ void fn_800AAE14(void *self, f32 *a, f32 *b, f32 *c) {
     f32 b2 = lbl_803CE4C4[0];
     f32 c0 = lbl_803CE4C8[0];
 
+    a[2] = a2;
     a[0] = a0;
     a[1] = a1;
-    a[2] = a2;
     b[0] = b0;
     b[1] = b1;
     b[2] = b2;
@@ -820,19 +839,14 @@ void fn_800AAF10(f32 *out, f32 angle, f32 a, f32 b) {
     *out = fn_80243100(a * a + b * b - (a + a) * b * fn_802434CC(angle));
 }
 
-void fn_800AAF74(f32 a, f32 b, f32 c, f32 *outA, f32 *outB, f32 *outC) {
+void fn_800AAF74(f32 *outA, f32 *outB, f32 *outC, f32 a, f32 b, f32 c) {
     extern f32 lbl_803CE4D0[];
     f32 fn_80242ACC(f32);
-    f32 bb = b * b;
-    f32 cc = c * c;
-    f32 aa = a * a;
-    f32 angA;
-    f32 angB;
-    angA = fn_80242ACC((bb + cc - aa) / ((b + b) * c));
-    angB = fn_80242ACC((aa + cc - bb) / ((a + a) * c));
+    f32 angA = fn_80242ACC((b * b + c * c - a * a) / ((b + b) * c));
+    f32 angB = fn_80242ACC((a * a + c * c - b * b) / ((a + a) * c));
     *outA = angA;
     *outB = angB;
-    *outC = lbl_803CE4D0[0] - (*outA + *outB);
+    *outC = lbl_803CE4D0[0] - (angA + angB);
 }
 
 s32 fn_800AB030(void) {
@@ -855,11 +869,9 @@ s32 fn_800AB1CC(u8 *arg0) {
     extern f32 lbl_803CE4D4[];
     extern f32 lbl_803CE4D8[];
     u8 *obj = *(u8 **)(arg0 + 0xE8);
-    f32 k = lbl_803CE4D4[0];
     f32 v[3];
     f32 *d = v;
     f32 *p = (f32 *)(obj + 0xA4);
-    f32 lim = lbl_803CE4D8[0];
     f32 s;
     d[0] = p[0];
     d[1] = p[1];
@@ -868,7 +880,7 @@ s32 fn_800AB1CC(u8 *arg0) {
     d[0] *= s;
     d[1] *= s;
     d[2] *= s;
-    return (d[0] + d[1] + d[2]) * k < lim;
+    return (d[0] + d[1] + d[2]) * lbl_803CE4D4[0] < lbl_803CE4D8[0];
 }
 
 void fn_800AB250(f32 x) {
