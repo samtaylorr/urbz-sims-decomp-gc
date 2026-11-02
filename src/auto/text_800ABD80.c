@@ -117,12 +117,36 @@ loop_2:
     }
 }
 
+s32 fn_800ACEC0(void *self) {
+    s32 fn_800ABF0C(void *);
+    s32 i;
+    u8 *slot;
+
+    slot = (u8 *)self + 0x3C;
+    for (i = 0; i < M2C_FIELD(self, s32 *, 0x38); i++) {
+        if (fn_800ABF0C(slot) == 0) {
+            return 0;
+        }
+        slot += 8;
+    }
+    return 1;
+}
+
 void fn_800ACF2C(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x14) = 4;
 }
 
 s32 fn_800ACF38(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x14) == 4;
+}
+
+void fn_800AD044(void *self, s32 arg1) {
+    extern char lbl_8040A410[];
+    void fn_800ADF90(void *);
+    void fn_800AC8B0(void *, s32);
+    *(char **)((u8 *)self + 0x440) = lbl_8040A410;
+    fn_800ADF90(self);
+    fn_800AC8B0(self, arg1);
 }
 
 void fn_800ADBEC(void) {
