@@ -98,18 +98,19 @@ s32 fn_8016C258(void) {
 s16 fn_8016C260(void *arg0, u32 arg1) {
     struct { u8 pad[4]; s16 a[1]; } *p;
     struct { u8 pad[4]; s16 a[1]; } *q;
-    if (arg1 > 0x1D) {
-        return 0;
+    s16 ret = 0;
+    if (arg1 <= 0x1D) {
+        p = M2C_FIELD(arg0, void **, 0xC);
+        if (p != NULL) {
+            ret = p->a[arg1];
+        } else {
+            q = M2C_FIELD(arg0, void **, 0x10);
+            if (q != NULL) {
+                ret = q->a[arg1];
+            }
+        }
     }
-    p = M2C_FIELD(arg0, void **, 0xC);
-    if (p != NULL) {
-        return p->a[arg1];
-    }
-    q = M2C_FIELD(arg0, void **, 0x10);
-    if (q != NULL) {
-        return q->a[arg1];
-    }
-    return 0;
+    return ret;
 }
 
 s16 fn_8016C2A4(void *arg0, u32 arg1) {
@@ -517,8 +518,10 @@ void fn_8016D218(void *arg0, s32 arg1) {
             M2C_FIELD(vt, void (**)(void *, s32), 0xAC)(lbl_80495050 + M2C_FIELD(vt, s16 *, 0xA8), cur);
         }
     } else {
-        M2C_FIELD(arg0, void **, 0x94) = fn_8032E230(fn_80338000(lbl_8045BA40, 0x78, 4));
-        fn_8032EBA4(M2C_FIELD(arg0, void *volatile *, 0x94), arg1);
+        void *o;
+        M2C_FIELD(arg0, void *volatile *, 0x94) = fn_8032E230(fn_80338000(lbl_8045BA40, 0x78, 4));
+        o = M2C_FIELD(arg0, void *volatile *, 0x94);
+        fn_8032EBA4(o, arg1);
     }
 }
 
@@ -637,13 +640,12 @@ void fn_8016DCC0(void *arg0) {
     void fn_800FB720(void *);
     s16 i;
 
-    for (i = 0; i < 4; i++) {
-        if (((struct { u8 pad[0x40]; void *a[1]; } *)arg0)->a[i] != NULL) {
-            fn_800FB720(((struct { u8 pad[0x40]; void *a[1]; } *)arg0)->a[i]);
-            ((struct { u8 pad[0x40]; void *a[1]; } *)arg0)->a[i] = NULL;
-        } else {
-            ((struct { u8 pad[0x40]; void *a[1]; } *)arg0)->a[i] = NULL;
+    for (i = 0; i <= 3; i++) {
+        void **pp = &((struct { u8 pad[0x40]; void *a[1]; } *)arg0)->a[i];
+        if (*pp != NULL) {
+            fn_800FB720(*pp);
         }
+        *pp = NULL;
     }
 }
 
