@@ -1259,6 +1259,15 @@ s32 fn_8024E194(long long a, long long b) {
     return 1;
 }
 
+long long fn_8024E754(double a) {
+    extern f32 lbl_803EC07C[];
+    unsigned long long fn_8024E798(double);
+    if (a < lbl_803EC07C[0]) {
+        return -fn_8024E798(-a);
+    }
+    return fn_8024E798(a);
+}
+
 void fn_8024F99C(void);
 void fn_8024EF20(void) {
     fn_8024F99C();
