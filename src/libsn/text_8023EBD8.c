@@ -215,8 +215,9 @@ void fn_80241510(void) {
     p = (u8 *)0xCC000000;
     v = *(volatile s32 *)(p + 0x6828) & 5;
     *(volatile s32 *)(p + 0x6828) = v;
-    for (i = 6; i != 0; i--) {
-    }
+    i = 6;
+    do {
+    } while (--i);
     v |= 0xD0;
     *(volatile s32 *)(p + 0x6828) = v;
 }
@@ -227,8 +228,19 @@ void fn_80241538(void) {
     p = (u8 *)0xCC000000;
     do {
         v = *(volatile u32 *)(p + 0x6834);
-        v &= 1;
+        v = v << 31 >> 31;
     } while (v != 0);
+}
+
+void fn_8024162C(void) {
+    fn_802414E4();
+    while (fn_8024154C() == 0) {
+    }
+    do {
+        fn_80241510();
+    } while (fn_8024154C() == 0xff);
+    fn_80241510();
+    fn_8024158C(2);
 }
 
 void fn_80241934(void) {
