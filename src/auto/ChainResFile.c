@@ -90,9 +90,9 @@ void fn_801021BC(void **obj) {
 }
 
 ChainKeyEntry *fn_801021FC(void **self, s32 id, s32 key) {
-    ChainKeyEntry *r;
     ChainKeyEntry *arr = (ChainKeyEntry *)*self;
     s32 n = 0;
+    ChainKeyEntry *r;
     ChainKeyEntry *e;
     s32 i;
     if (arr != NULL) {
@@ -104,13 +104,18 @@ ChainKeyEntry *fn_801021FC(void **self, s32 id, s32 key) {
         e = NULL;
     }
     i = 0;
-    while (i < n) {
+    goto cond;
+    for (;;) {
+        i++;
+        e++;
+    cond:
+        if (i >= n) {
+            break;
+        }
         if (e->unk4 == key && e->unk8 == id) {
             r = e;
             break;
         }
-        i++;
-        e++;
     }
     return r;
 }
@@ -157,16 +162,13 @@ s32 fn_80102414(void *arg0, s32 arg1) {
 void *fn_801024F8(void *self, s32 i) {
     s32 *arr = *M2C_FIELD(self, s32 ***, 0xC);
     s32 n = 0;
-    void *r;
     if (arr != NULL) {
         n = arr[-1];
     }
     if (i < n) {
-        r = &arr[i];
-    } else {
-        r = (char *)self + 0x1C;
+        return &arr[i];
     }
-    return r;
+    return (char *)self + 0x1C;
 }
 
 void *fn_8010280C(void *self, void *arg1, s32 arg2) {
@@ -529,11 +531,13 @@ void fn_8010515C(void *self, s32 flags) {
     void **p;
 
     M2C_FIELD(self, void **, 0xC) = lbl_8040D8B8;
-    for (p = &lbl_804943FC; *p != NULL; p = (void **)*p) {
+    p = &lbl_804943FC;
+    while (*p != NULL) {
         if (*p == self) {
             *p = M2C_FIELD(self, void **, 0x0);
             break;
         }
+        p = (void **)*p;
     }
     if (flags & 1) {
         fn_802D20E8(self);
@@ -606,15 +610,20 @@ s32 fn_8010531C(s32 *self) {
 }
 
 void fn_80105324(u8 *out, f32 *in) {
-    out[0] = (s32)in[0];
-    out[2] = 1;
-    out[1] = (s32)in[1];
+    s32 a, b;
+    u8 *o = out;
+    a = (s32)in[0];
+    o[0] = a;
+    o[2] = 1;
+    b = (s32)in[1];
+    o[1] = b;
 }
 
 void fn_80105368(f32 *out, s8 *in) {
-    out[0] = in[0];
-    out[1] = in[1];
-    out[2] = in[2];
+    f32 *o = out;
+    o[0] = in[0];
+    o[1] = in[1];
+    o[2] = in[2];
 }
 
 void fn_80105400(f32 *out, s8 *in) {
