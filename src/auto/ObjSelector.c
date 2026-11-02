@@ -421,16 +421,14 @@ void *fn_8016E620(void *self, s32 a, void *obj, s32 b) {
 
 void fn_8016E668(void *self, s32 flags) {
     void fn_802D20E8(void *);
-    s16 *p;
     s32 i;
 
     if (M2C_FIELD(self, void **, 0x1C) != NULL) {
-        p = (s16 *)((char *)self + 0xC);
         for (i = 0; i < 8; i++) {
             char *obj = *M2C_FIELD(self, char ***, 0x1C);
             char *vt = M2C_FIELD(obj, char **, 4);
             void (*f)(void *, s32, s16) = M2C_FIELD(vt, void (**)(void *, s32, s16), 0x1B4);
-            f(obj + M2C_FIELD(vt, s16 *, 0x1B0), i, *p++);
+            f(obj + M2C_FIELD(vt, s16 *, 0x1B0), i, ((s16 *)((char *)self + 0xC))[i]);
         }
         M2C_FIELD(self, void **, 0x1C) = NULL;
     }
