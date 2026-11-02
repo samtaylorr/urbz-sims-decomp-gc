@@ -137,6 +137,26 @@ void fn_8011CCC8(void ***arg0, s32 arg1) {
     M2C_FIELD(**arg0, s32 *, 0x10) = arg1;
 }
 
+s32 fn_8011CCD8(void *arg0) {
+    char *vt;
+
+    if (arg0 == NULL) {
+        return 0;
+    }
+    vt = M2C_FIELD(arg0, char **, 4);
+    return ((s32 (*)(void *))M2C_FIELD(vt, void **, 0x5C))((char *)arg0 + M2C_FIELD(vt, s16 *, 0x58));
+}
+
+s32 fn_8011CD1C(void *arg0) {
+    void *p;
+
+    p = M2C_FIELD(arg0, void **, 0xC) != NULL ? M2C_FIELD(arg0, void **, 0xC) : arg0;
+    if (p == NULL) {
+        return 0;
+    }
+    return M2C_FIELD(p, s32 *, 4);
+}
+
 s32 fn_8011CD4C(u8 *self) {
     u8 *p = *(u8 **)(self + 8);
     return p != NULL ? *(s32 *)(p + 4) : 0;
@@ -149,6 +169,18 @@ void fn_8011CD64(void) {
 void fn_8011CD68(void *arg0) {
     void fn_801A15F0(s32);
     fn_801A15F0(*M2C_FIELD(arg0, s32 **, 0));
+}
+
+s32 fn_8011CD90(void *arg0) {
+    char *p;
+    char *vt;
+
+    if (arg0 == NULL) {
+        return 0;
+    }
+    p = M2C_FIELD(arg0, char **, 4);
+    vt = M2C_FIELD(p, char **, 4);
+    return ((s32 (*)(void *))M2C_FIELD(vt, void **, 0x5C))(p + M2C_FIELD(vt, s16 *, 0x58));
 }
 
 void fn_8011CECC(void *arg0, s32 arg1) {
@@ -199,8 +231,8 @@ void fn_8011CFA4(void *self, s32 key, void *list) {
             }
         }
         *(char **)(buf + 0x10) = *(char **)(buf + 0);
-        *(char **)(buf + 8) = *(char **)(buf + 0);
-        *(char **)(buf + 0) = **(char ***)(buf + 0);
+        *(char **)(buf + 0) = **(char ***)(buf + 0x10);
+        *(char **)(buf + 8) = *(char **)(buf + 0x10);
     }
 }
 
