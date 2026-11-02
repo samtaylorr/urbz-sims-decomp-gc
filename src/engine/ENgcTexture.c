@@ -155,15 +155,18 @@ void fn_8035FA8C(void *self, void *tex) {
     extern Entry_8035F8AC lbl_804753B8[];
     void fn_80383AE8(void *, s32);
     void fn_80385F0C(void *, s32);
+    s32 fn_80360468(u8);
     s32 i;
+    Entry_8035F8AC *e;
 
     fn_8036023C();
     i = fn_803609B4(tex);
     if (i != -1) {
-        M2C_FIELD(&lbl_804753B8[i], u32 *, 0x74) &= ~0x400000;
+        e = &lbl_804753B8[i];
+        M2C_FIELD(e, u32 *, 0x74) &= ~0x400000;
         if (lbl_804753B8[i].unk1C != NULL) {
             fn_80383AE8(lbl_804753B8[i].unk1C, 1);
-            fn_80385F0C(lbl_804753B8[i].unk1C, fn_80360468(M2C_FIELD(&lbl_804753B8[i], u8 *, 0x14)));
+            fn_80385F0C(lbl_804753B8[i].unk1C, fn_80360468(M2C_FIELD(e, u8 *, 0x14)));
         }
     }
     fn_803601FC();
