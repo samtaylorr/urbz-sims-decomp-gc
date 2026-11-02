@@ -241,28 +241,27 @@ s32 fn_8032D630(s32 lo, s32 hi, s32 key, s32 *keys) {
     s32 mid;
     s32 c;
 
-    if (key == 0 || keys == NULL) {
-        return -1;
-    }
-    n = hi - lo;
-    if (n < 0) {
-        return -1;
-    }
-    if (n == 0) {
-        if (fn_802486DC(key, keys[lo]) == 0) {
-            return lo;
+    if (key != 0 && keys != NULL) {
+        n = hi - lo;
+        if (n >= 0) {
+            if (n == 0) {
+                if (fn_802486DC(key, keys[lo]) == 0) {
+                    return lo;
+                }
+            } else {
+                mid = lo + n / 2;
+                c = fn_802486DC(key, keys[mid]);
+                if (c == 0) {
+                    return mid;
+                }
+                if (c > 0) {
+                    return fn_8032D630(mid + 1, hi, key, keys);
+                }
+                return fn_8032D630(lo, mid - 1, key, keys);
+            }
         }
-        return -1;
     }
-    mid = lo + n / 2;
-    c = fn_802486DC(key, keys[mid]);
-    if (c == 0) {
-        return mid;
-    }
-    if (c > 0) {
-        return fn_8032D630(mid + 1, hi, key, keys);
-    }
-    return fn_8032D630(lo, mid - 1, key, keys);
+    return -1;
 }
 
 u32 fn_8032D6E8(void *arg0, ERQdEntry *e, s32 key) {
@@ -284,22 +283,22 @@ u32 fn_8032D6E8(void *arg0, ERQdEntry *e, s32 key) {
 }
 
 u32 fn_8032D764(void *arg0, s32 idx) {
-    ERQdTable *tbl = M2C_FIELD(arg0, ERQdTable **, 0x20);
-    u32 p;
     s32 stride;
+    u32 p;
+    ERQdTable *tbl = M2C_FIELD(arg0, ERQdTable **, 0x20);
 
-    p = tbl->entries[idx].unk4;
-    if (p != 0) {
-        return p;
+    if (tbl->entries[idx].unk4 != 0) {
+        return tbl->entries[idx].unk4;
     }
     while (idx-- > 0) {
-        p = tbl->entries[idx].unk4;
+        ERQdEntry *e = &tbl->entries[idx];
+        p = e->unk4;
         if (p != 0) {
-            stride = tbl->entries[idx].unk10;
+            stride = e->unk10;
             if (stride == 0) {
                 stride = 1;
             }
-            return p + stride * tbl->entries[idx].unkC;
+            return p + stride * e->unkC;
         }
     }
     return p;
@@ -578,13 +577,14 @@ void fn_80330380(u8 *self, f32 dt) {
 }
 
 void fn_80330D4C(u8 *self, s32 a, s32 b) {
-    void fn_8032F3B0(void *, u8);
-    s32 n = self[0x50];
+    register s32 n = self[0x50];
+    u8 v;
     s32 found = 0;
+    void fn_8032F3B0(void *, u8);
     s32 i;
-    u32 v = (u8)(a * 4 + b / 15);
 
-    for (i = 0; i < n; i++) {
+    v = b / 15 + a * 4;
+    for (i = 0; i < (unsigned short)n; i++) {
         if (M2C_FIELD(self, u8 **, 0x54)[i] <= v) {
             found = i;
         } else {
