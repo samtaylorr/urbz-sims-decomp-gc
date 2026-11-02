@@ -362,6 +362,14 @@ void fn_8016E5DC(void) {
     fn_800F1A60((s32)&lbl_80495C88, 2);
 }
 
+void *fn_8016E604(void *self, s32 a, s32 b) {
+    M2C_FIELD(self, s32 *, 0) = a;
+    M2C_FIELD(self, s32 *, 4) = 0;
+    M2C_FIELD(self, s32 *, 8) = b;
+    M2C_FIELD(self, s32 *, 0x1C) = 0;
+    return self;
+}
+
 s32 *fn_8016F4AC(s32 *arg0) {
     arg0[0] = 0;
     arg0[1] = 0;
