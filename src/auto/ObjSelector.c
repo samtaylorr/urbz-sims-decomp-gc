@@ -648,18 +648,22 @@ char *fn_8016DA34(void *arg0) {
 }
 
 void fn_8016DAB4(void *arg0, void *arg1) {
-    typedef struct { u8 hdr[8]; char buf[0x104]; } Str;
+    typedef struct { u8 hdr[8]; char buf[0x104]; s32 pad; } Str;
     void fn_800F687C(void *, char *, s32);
     void fn_800F68F0(void *, s32, s32);
     void fn_800F59D8(void *, void *);
     void fn_800F6A38(void *, void *);
     Str a;
     Str b;
-    fn_800F687C(&a, a.buf, 0x104);
-    fn_800F68F0(&a, M2C_FIELD(arg0, s32 *, 0x18), -1);
+    Str *p = &a;
+    s32 v = M2C_FIELD(arg0, s32 *, 0x18);
+    Str *q;
+    fn_800F687C(p, p->buf, 0x104);
+    q = &b;
+    fn_800F68F0(p, v, -1);
     fn_800F687C(&b, b.buf, 0x104);
-    fn_800F59D8(&a, &b);
-    fn_800F6A38(arg1, &b);
+    fn_800F59D8(p, q);
+    fn_800F6A38(arg1, q);
 }
 
 s32 fn_8016DB30(void *arg0) {
@@ -675,10 +679,10 @@ s32 fn_8016DB30(void *arg0) {
     obj = M2C_FIELD(arg0, char **, 0x50);
     vt = *(char **)obj;
     r = M2C_FIELD(vt, char *(**)(void *, s32), 0xBC)(obj + M2C_FIELD(vt, s16 *, 0xB8), id);
-    if (r != NULL) {
-        return M2C_FIELD(r, s32 *, 4);
+    if (r == NULL) {
+        return 0;
     }
-    return 0;
+    return M2C_FIELD(r, s32 *, 4);
 }
 
 s32 fn_8016DB90(void *arg0) {
@@ -694,10 +698,7 @@ s32 fn_8016DB90(void *arg0) {
     obj = M2C_FIELD(arg0, char **, 0x50);
     vt = *(char **)obj;
     r = M2C_FIELD(vt, char *(**)(void *, s32), 0xBC)(obj + M2C_FIELD(vt, s16 *, 0xB8), id);
-    if (r != NULL) {
-        return M2C_FIELD(r, s32 *, 8);
-    }
-    return 0;
+    return r != NULL ? M2C_FIELD(r, s32 *, 8) : 0;
 }
 
 void *fn_8016DBF0(arg0)
