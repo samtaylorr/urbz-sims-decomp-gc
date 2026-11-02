@@ -179,6 +179,12 @@ ChainResHandle fn_80102B2C(void *arg0) {
     return h;
 }
 
+ChainResHandle fn_80102B3C(void *arg0) {
+    ChainResHandle h;
+    h.value = M2C_FIELD(arg0, s32 *, 8);
+    return h;
+}
+
 s16 fn_8010328C(void *self) {
     extern void fn_8018FA84(void *, s32);
     extern void fn_80103320(void *, ChainVec *);
