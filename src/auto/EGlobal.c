@@ -307,13 +307,13 @@ void fn_8004D954(void *self, void *arg1) {
     fn_8039BA50(M2C_FIELD(r, char **, 0x4), M2C_FIELD(r, char **, 0x4) + M2C_FIELD(r, s32 *, 0xC) * 0xC, arg1);
 }
 
-s32 fn_8004D9A4(void *self) {
+void *fn_8004D9A4(void *self) {
     extern char lbl_803C6D6C[];
-    s32 fn_8032D5C8(s32, void *);
-    s32 key;
+    char *fn_8032D5C8(void *, char *);
+    char *s = lbl_803C6D6C;
+    void *t = M2C_FIELD(self, void **, 0x120);
 
-    key = fn_8032D5C8(M2C_FIELD(self, s32 *, 0x120), lbl_803C6D6C);
-    return M2C_FIELD(key, s32 *, 0x4);
+    return M2C_FIELD(fn_8032D5C8(t, s), void **, 0x4);
 }
 
 extern u8 lbl_8041ED64[];
