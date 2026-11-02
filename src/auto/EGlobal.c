@@ -333,6 +333,24 @@ s32 fn_8004C78C(void *arg0, s32 arg1) {
     return 0;
 }
 
+s32 fn_8004C7D4(void *arg0, s32 arg1) {
+    s32 *arr;
+    s32 count;
+    s32 i;
+
+    arr = *M2C_FIELD(arg0, s32 **, 0x100);
+    count = 0;
+    if (arr != NULL) {
+        count = arr[-1];
+    }
+    for (i = 0; i < count; i++) {
+        if (*arr++ == arg1) {
+            return i;
+        }
+    }
+    return 0;
+}
+
 s32 fn_8004C81C(void *arg0, s32 arg1) {
     s32 *arr;
     s32 count;
