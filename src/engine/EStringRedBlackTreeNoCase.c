@@ -63,6 +63,70 @@ static inline void *Heap_Alloc(u32 size) {
     return p;
 }
 
+char *fn_80364BEC(char *buf, s32 n, void *stream) {
+    char *p;
+    void *vt;
+    char c;
+
+    p = buf;
+    if (n <= 0) {
+        return NULL;
+    }
+    while (1) {
+        vt = M2C_FIELD(stream, void **, 0x28);
+        if (M2C_FIELD(vt, s32 (**)(void *, char *, s32), 0x1C)((char *)stream + M2C_FIELD(vt, s16 *, 0x18), &c, 1) == 0) {
+            if (p == buf) {
+                return NULL;
+            }
+            break;
+        }
+        if (c == '\r') {
+            continue;
+        }
+        if (c == '\n') {
+            break;
+        }
+        *p++ = c;
+        if (--n == 0) {
+            break;
+        }
+    }
+    *p = 0;
+    return buf;
+}
+
+void *fn_80364C90(void *arg0) {
+    extern char lbl_8041D790[];
+    M2C_FIELD(arg0, void **, 0x18) = lbl_8041D790;
+    M2C_FIELD(arg0, s32 *, 0x1C) = 0;
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    return arg0;
+}
+
+void fn_80364CB0(void *arg0, s32 arg1) {
+    extern char lbl_8041D790[];
+    extern char lbl_804194F8[];
+    M2C_UNK fn_80364D84();
+    extern void fn_802D20E8(void *);
+    M2C_FIELD(arg0, void **, 0x18) = lbl_8041D790;
+    fn_80364D84(arg0);
+    M2C_FIELD(arg0, void **, 0x18) = lbl_804194F8;
+    if (arg1 & 1) {
+        fn_802D20E8(arg0);
+    }
+}
+
+void fn_80364D08(void *arg0, s32 arg1, s32 arg2) {
+    M2C_UNK fn_80364D84();
+    s32 fn_802C6290(void *, s32 *, s32, void *, s32, s32, s32);
+    extern M2C_UNK lbl_804448E8[];
+    extern char lbl_803F4F78[];
+    extern char lbl_803F4F7C[];
+    fn_80364D84(arg0);
+    M2C_FIELD(arg0, s32 *, 0x20) = arg2;
+    M2C_FIELD(arg0, s32 *, 0x24) = 1;
+    fn_802C6290(lbl_804448E8, (s32 *)((char *)arg0 + 0x1C), arg1, arg2 == 0 ? lbl_803F4F78 : lbl_803F4F7C, 0x80000000, 0x80000000, 0);
+}
 
 s32 fn_80364E64(void *arg0) {
     void *temp_r11;
