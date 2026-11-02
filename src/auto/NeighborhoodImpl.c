@@ -222,6 +222,20 @@ s32 fn_80126110(void *arg0, void *arg1, s32 arg2) {
     return 0;
 }
 
+s32 fn_80126B98(char *self, char *obj) {
+    extern f32 lbl_80495B7C;
+    char *vt = *(char **)obj;
+    s32 a;
+    s32 b;
+    s32 c;
+    a = M2C_FIELD(vt, s32 (**)(void *), 0x11C)(obj + M2C_FIELD(vt, s16 *, 0x118));
+    vt = *(char **)obj;
+    b = M2C_FIELD(vt, s32 (**)(void *), 0x13C)(obj + M2C_FIELD(vt, s16 *, 0x138));
+    vt = *(char **)obj;
+    c = M2C_FIELD(vt, s32 (**)(void *), 0x12C)(obj + M2C_FIELD(vt, s16 *, 0x128));
+    return a + b + (s32)(lbl_80495B7C * (f32)c);
+}
+
 s32 fn_80126D54(char *self, s32 arg1, s32 arg2) {
     s32 fn_80126C54(void *, void *, s32, s32);
     char *vt = *(char **)self;
@@ -293,8 +307,8 @@ void fn_80128074(char *self) {
     extern char lbl_803D86C4[];
     char *vt;
     char str[0x110];
-    char *p = str;
     char *s = lbl_803D86C4;
+    char *p = str;
     fn_800F687C(p, p + 8, 0x104);
     fn_800F68F0(p, s, -1);
     vt = *(char **)self;
