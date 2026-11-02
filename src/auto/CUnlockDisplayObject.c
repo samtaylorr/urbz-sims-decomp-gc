@@ -487,6 +487,16 @@ u32 fn_800BCDA0(const u16 *src, u16 *dst, u32 n) {
     return count;
 }
 
+u32 fn_800BCE20(u16 *dst, u32 n, f32 val) {
+    extern char lbl_804315EC[];
+    extern char lbl_803D0060[];
+    extern int fn_80245BB4(char *, const char *, ...);
+    extern u32 fn_800BCFBC(const char *src, u16 *dst, u32 n);
+    fn_80248488(lbl_804315EC, 0, 0x20);
+    fn_80245BB4(lbl_804315EC, lbl_803D0060, val);
+    return fn_800BCFBC(lbl_804315EC, dst, n);
+}
+
 extern char lbl_804315EC[];
 extern char lbl_803D0060[];
 extern int fn_80245BB4(char *, const char *, ...);
@@ -498,6 +508,64 @@ void fn_800BCFBC(const char *src, u16 *dst, u32 n) {
         i++;
     }
     *dst = 0;
+}
+
+void fn_800BD00C(u16 *src, u8 *dst, u32 n) {
+    u32 i = 0;
+    while (*src != 0 && i < n - 1) {
+        *dst++ = *src++;
+        i++;
+    }
+    *dst = 0;
+}
+
+s32 fn_800BD284(void *arg0, void *arg1, void *arg2, void *arg3) {
+    char buf[8];
+    s32 found = 0;
+    s32 r;
+    fn_800F1930(buf, arg0);
+    fn_800F2868(arg3, 0, -1);
+    fn_800F1F00(arg3, buf, 0, -1);
+    do {
+        r = fn_800BD3D8(fn_800F3304(arg3), arg1, arg2, arg3);
+        if (found == 0 && r != 0) {
+            found = 1;
+        }
+    } while (r != 0);
+    fn_800F1A60(buf, 2);
+    return found;
+}
+
+void fn_8033E8B4(void);
+void fn_800F1930(void *, void *);
+void fn_800F2868(void *, s32, s32);
+void fn_800F1F00(void *, void *, s32, s32);
+void *fn_800F3304(void *);
+void fn_800F1A60(void *, s32);
+void fn_800F6FB4(void *, void *, s32);
+void fn_800F7028(void *, void *, s32);
+void fn_800F7018(void *);
+void fn_800F71C8(void *, void *, s32);
+void *fn_800F7138(void *);
+s32 fn_800BD3D8(void *, void *, void *, void *);
+s32 fn_800BD05C(void *, void *, void *, void *);
+s32 fn_800BD32C(void *arg0, void *arg1, void *arg2, void *arg3) {
+    char buf[0x208];
+    char *s = buf;
+    s32 found;
+    s32 r;
+    fn_800F6FB4(s, s + 8, 0x100);
+    found = 0;
+    fn_800F7028(s, arg0, -1);
+    fn_800F7018(arg3);
+    fn_800F71C8(arg3, s, -1);
+    do {
+        r = fn_800BD05C(fn_800F7138(arg3), arg1, arg2, arg3);
+        if (found == 0 && r != 0) {
+            found = 1;
+        }
+    } while (r != 0);
+    return found;
 }
 
 void fn_800BEF10(void) {
