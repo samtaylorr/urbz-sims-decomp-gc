@@ -13,10 +13,6 @@ static inline s32 ListCount(u8 *list) {
     return *(s32 *)(list + 4);
 }
 
-static inline u8 *ShaderAt(u8 *list, s32 i) {
-    return *(u8 **)list + i * 0x6C;
-}
-
 void *fn_802FFD98(void *arg0) {
     M2C_UNK fn_803BAD8C();
     fn_803BAD8C();
@@ -167,7 +163,7 @@ void fn_80300420(u8 *self, s32 arg1) {
     extern void fn_80302D94(u8 *, s32);
     s32 i;
 
-    for (i = 0; ListInRange(self, i); i++) {
+    for (i = 0; ListCount(self) > i; i++) {
         fn_80302D94(*(u8 **)self + i * 0x6C, arg1);
     }
 }
@@ -185,7 +181,7 @@ void fn_803004E4(u8 *self, u8 *other, s32 idx) {
     s32 fn_8030230C(u8 *self, u8 *other, s32 idx);
     s32 i;
 
-    for (i = 0; ListInRange(self, i); i++) {
+    for (i = 0; ListCount(self) > i; i++) {
         fn_8030230C(*(u8 **)self + i * 0x6C, *(u8 **)other + i * 0x6C, idx);
     }
 }
@@ -310,11 +306,11 @@ u8 *fn_8030096C(u8 *self) {
     extern f32 lbl_803F1728[];
     fn_803BB700(self + 0x14);
     fn_803BB700(self + 0x2C);
+    *(f32 *)(self + 0x24) = lbl_803F1728[0];
     *(s32 *)(self + 0x28) = 0;
     *(s32 *)(self + 0xC) = 0;
     *(s32 *)(self + 0x10) = 0;
     *(s32 *)(self + 0x8) = 0;
-    *(f32 *)(self + 0x24) = lbl_803F1728[0];
     *(s32 *)(self + 0x0) = 0;
     fn_80248488(self + 0x38, 0, 0x2C);
     *(s32 *)(self + 0x64) = 0;
@@ -529,25 +525,26 @@ s32 fn_80304198(u8 *self, s32 idx) {
     return p->a[idx];
 }
 
-void fn_803041B0(u8 *self) {
-    extern const f32 lbl_803F1878[];
-    extern const f32 lbl_803F187C[];
-    extern const f32 lbl_803F1880[];
-    extern const f32 lbl_803F1884[];
-    extern const f32 lbl_803F1888[];
+u8 *fn_803041B0(u8 *self) {
+    extern f32 lbl_803F1878[];
+    extern f32 lbl_803F187C[];
+    extern f32 lbl_803F1880[];
+    extern f32 lbl_803F1884[];
+    extern f32 lbl_803F1888[];
     f32 zero;
     f32 one;
 
     *(f32 *)(self + 0x24) = lbl_803F1878[0];
     zero = lbl_803F1884[0];
     one = lbl_803F1888[0];
-    *(f32 *)(self + 0x28) = lbl_803F187C[0] * lbl_803F1880[0];
     *(s32 *)(self + 0x30) = 1;
+    *(f32 *)(self + 0x28) = lbl_803F187C[0] * lbl_803F1880[0];
     *(s32 *)(self + 0x34) = 0;
     *(s32 *)(self + 0x2C) = 0;
     Vec3f_Set((Vec3f *)self, zero, zero, zero);
     Vec3f_Set((Vec3f *)(self + 0xC), zero, one, zero);
     Vec3f_Set((Vec3f *)(self + 0x18), zero, zero, one);
+    return self;
 }
 
 void fn_8030422C(u8 *self, Vec3f *a, Vec3f *b, Vec3f *c) {
