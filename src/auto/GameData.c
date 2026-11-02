@@ -170,10 +170,13 @@ void fn_8004681C(void *arg0) {
     s32 i;
     s32 found;
     found = 0;
-    for (i = 0; i < 4 && !found; i++) {
+    i = 0;
+    while (i < 4) {
         if (((s32 *)((u8 *)M2C_FIELD(arg0, void **, 0x38) + 0x530))[i] != 0) {
             found = 1;
+            break;
         }
+        i++;
     }
     if (found) {
         fn_80045ED4(arg0);
@@ -304,8 +307,8 @@ void fn_80048770(void *arg0, s32 arg1) {
         fn_800CE474(p);
         M2C_FIELD(M2C_FIELD(arg0, void **, 0x108), f32 *, 0x30) = lbl_803C6620[0];
         ((void (*)(void *))fn_8004876C)(arg0);
+        fn_80047EF8(arg0, M2C_FIELD(arg0, s32 *, 0x10C), arg1);
     }
-    fn_80047EF8(arg0, M2C_FIELD(arg0, s32 *, 0x10C), arg1);
 }
 
 void fn_800487EC(void *arg0) {
