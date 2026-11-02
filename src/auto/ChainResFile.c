@@ -163,6 +163,22 @@ void fn_80102A50(void **obj) {
     }
 }
 
+void *fn_80102B08(void *arg0) {
+    extern char lbl_8040D718[];
+    extern char lbl_804943F8[];
+    M2C_FIELD(arg0, char **, 0) = lbl_8040D718;
+    M2C_FIELD(arg0, char **, 0xC) = lbl_804943F8;
+    M2C_FIELD(arg0, char **, 4) = lbl_804943F8;
+    M2C_FIELD(arg0, char **, 8) = lbl_804943F8;
+    return arg0;
+}
+
+ChainResHandle fn_80102B2C(void *arg0) {
+    ChainResHandle h;
+    h.value = M2C_FIELD(arg0, s32 *, 4);
+    return h;
+}
+
 s16 fn_8010328C(void *self) {
     extern void fn_8018FA84(void *, s32);
     extern void fn_80103320(void *, ChainVec *);
