@@ -88,17 +88,15 @@ void fn_800AC988(void *arg0) {
 
 void fn_800AC9C4(void *arg0) {
     char *var_r31;
-    s32 var_r30;
+    s32 i;
 
     var_r31 = (char *)arg0 + 0x3C;
-    var_r30 = 0x80;
-    do {
+    for (i = 0; i < 0x80; i++) {
         if (fn_800ABE78(var_r31) == 0) {
             fn_800ABE9C(var_r31);
         }
         var_r31 += 8;
-        var_r30 -= 1;
-    } while (var_r30 != 0);
+    }
 }
 
 void fn_800ACA14(void) {
@@ -321,6 +319,10 @@ s32 fn_800B2708(void *arg0) {
 
 s32 fn_800B2764(s32 arg0, s32 *arg1) {
     return arg0 + (*arg1 * 0x6C);
+}
+
+s32 fn_800B2EAC(void *arg0) {
+    return M2C_FIELD(arg0, u8 *, 8) != 0;
 }
 
 s32 fn_800B2EF4(char *self) {
