@@ -99,7 +99,10 @@ ChainKeyEntry *fn_801021FC(void **self, s32 id, s32 key) {
         n = ((s32 *)arr)[-1];
     }
     r = NULL;
-    e = n != 0 ? arr : NULL;
+    e = arr;
+    if (n == 0) {
+        e = NULL;
+    }
     for (i = 0; i < n; i++, e++) {
         if (e->unk4 == key && e->unk8 == id) {
             r = e;
@@ -107,6 +110,18 @@ ChainKeyEntry *fn_801021FC(void **self, s32 id, s32 key) {
         }
     }
     return r;
+}
+
+void fn_80102354(void *arg0) {
+    extern void fn_8031EA2C(s32);
+    s32 *self = arg0;
+    if (self[1] != 0) {
+        fn_8031EA2C(self[1]);
+        self[1] = 0;
+        self[2] = 0;
+        self[3] = 0;
+        self[4] = 0;
+    }
 }
 
 s32 *fn_801023A0(void *self, s32 key) {
@@ -139,10 +154,16 @@ s32 fn_80102414(void *arg0, s32 arg1) {
 void *fn_801024F8(void *self, s32 i) {
     s32 *arr = *M2C_FIELD(self, s32 ***, 0xC);
     s32 n = 0;
+    void *r;
     if (arr != NULL) {
         n = arr[-1];
     }
-    return i < n ? (void *)&arr[i] : (void *)((char *)self + 0x1C);
+    if (i < n) {
+        r = &arr[i];
+    } else {
+        r = (char *)self + 0x1C;
+    }
+    return r;
 }
 
 void *fn_8010280C(void *self, void *arg1, s32 arg2) {
@@ -248,14 +269,14 @@ s32 fn_80102A90(void *self, void *arg1, s32 key) {
     } SearchEntry;
     SearchEntry *fn_803A097C(SearchEntry *lo, SearchEntry *hi, s32 key);
     SearchEntry *tbl = M2C_FIELD(M2C_FIELD(arg1, void **, 0x54), SearchEntry **, 0x1C);
-    SearchEntry *hi = NULL;
     SearchEntry *e;
+    s32 hi = 0;
 
     if (tbl != NULL) {
-        s32 n = ((s32 *)tbl)[-1];
-        hi = tbl + n;
+        hi = ((s32 *)tbl)[-1];
+        hi = (s32)(tbl + hi);
     }
-    e = fn_803A097C(tbl, hi, key);
+    e = fn_803A097C(tbl, (SearchEntry *)hi, key);
     if (e != NULL) {
         M2C_FIELD(self, s32 *, 4) = e->unk4;
         M2C_FIELD(self, s32 *, 8) = e->unk8;
@@ -295,13 +316,14 @@ ChainResHandle fn_80102B4C(void *arg0) {
 
 void fn_80102C60(void *self, void *obj) {
     ChainEntry *e = (ChainEntry *)((char *)self + 0x14);
-    s32 i = 0;
-    for (; i <= 7; i++) {
-        if (e[i].obj == NULL) {
-            e[i].obj = obj;
-            *(s32 *)(e[i].pad + 4) = *(s32 *)(e[i].pad + 0);
-            *(s32 *)(e[i].pad + 0x10) = 1;
-            return;
+    s32 i;
+    for (i = 0; i < 8; i++) {
+        ChainEntry *p = &e[i];
+        if (p->obj == NULL) {
+            p->obj = obj;
+            *(s32 *)(p->pad + 4) = *(s32 *)(p->pad + 0);
+            *(s32 *)(p->pad + 0x10) = 1;
+            break;
         }
     }
 }
@@ -309,12 +331,9 @@ void fn_80102C60(void *self, void *obj) {
 s16 fn_80102D70(void *self) {
     ChainEntry *e = (ChainEntry *)((char *)self + 0x14);
     s32 i;
-    s32 count = 0;
-    i = 0;
-    for (e += i; e->obj != NULL; e++) {
+    s16 count = 0;
+    for (i = 0; i < 8 && e[count].obj != NULL; i++) {
         count++;
-        i++;
-        if (i > 7) break;
     }
     return count;
 }
@@ -322,14 +341,11 @@ s16 fn_80102D70(void *self) {
 void *fn_80102DAC(void *self, s32 idx) {
     ChainEntry *e = (ChainEntry *)((char *)self + 0x14);
     s32 count = 0;
-    s32 i = 0;
-    while (e[i].obj != NULL) {
+    s32 i;
+    for (i = 0; i < 8 && e[i].obj != NULL; i++, count++) {
         if (count == idx) {
             return e[i].obj;
         }
-        i++;
-        count++;
-        if (i > 7) break;
     }
     return NULL;
 }
@@ -341,19 +357,16 @@ s32 fn_80102E0C(void *self) {
     s32 ret;
     s32 r;
 
-    ret = 0;
     fn_8018FA84(self, 0);
-    i = 0;
+    ret = 0;
     e = (ChainEntry *)((char *)self + 0x14);
-    for (e += ret; e->obj != NULL; e++) {
-        void *o = e->obj;
+    for (i = 0; i < 8 && e[i].obj != NULL; i++) {
+        void *o = e[i].obj;
         char *vt = *(char **)((char *)o + 0x10);
         r = (*(s32 (**)(void *))(vt + 0x44))((char *)o + *(s16 *)(vt + 0x40));
         if (r != 0) {
             ret = r;
         }
-        i++;
-        if (i > 7) break;
     }
     return ret;
 }
