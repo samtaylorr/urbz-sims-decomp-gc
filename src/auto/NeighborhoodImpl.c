@@ -20,6 +20,21 @@ M2C_UNK *fn_801231C8(void) {
     return &lbl_80495B74;
 }
 
+void fn_80123694(void *arg0, void *arg1) {
+    void *r;
+
+    M2C_FIELD(arg1, s32 *, 0x20) = 1;
+    {
+        char *p = arg0;
+        char *vt = *(char **)p;
+        void *(*f)(void *, s32) = M2C_FIELD(vt, void *(**)(void *, s32), 0x13C);
+        r = f(p + M2C_FIELD(vt, s16 *, 0x138), M2C_FIELD(arg1, s16 *, 0xE6));
+    }
+    if (r != NULL) {
+        M2C_FIELD(r, s32 *, 0x20) = 1;
+    }
+}
+
 void fn_801236E8(void) {
 
 }
