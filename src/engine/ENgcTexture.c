@@ -220,6 +220,26 @@ void *fn_80360C04(void *self) {
     return self;
 }
 
+void fn_80360C48(void *self, s32 flags) {
+    extern u8 lbl_8041D098[];
+    extern u8 lbl_8045BAE8[];
+    extern void fn_8036F080(void *, s32);
+    extern void fn_80338184(void *, void *);
+    char *obj;
+
+    M2C_FIELD(self, void **, 0x24) = lbl_8041D098;
+    obj = M2C_FIELD(self, char **, 0x28);
+    if (obj != NULL) {
+        char *vt = M2C_FIELD(obj, char **, 0x24);
+        (*(void (**)(void *, s32))(vt + 0xC))(obj + *(s16 *)(vt + 8), 3);
+        M2C_FIELD(self, s32 *, 0x28) = 0;
+    }
+    fn_8036F080(self, 0);
+    if (flags & 1) {
+        fn_80338184(lbl_8045BAE8, self);
+    }
+}
+
 void fn_80360E74(void *self) {
     u8 *obj = *(u8 **)((u8 *)self + 0x28);
     u8 *vt = *(u8 **)(obj + 0x24);
