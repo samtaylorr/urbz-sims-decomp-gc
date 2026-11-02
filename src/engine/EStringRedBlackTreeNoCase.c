@@ -206,6 +206,15 @@ void fn_8036475C(void *arg0, void *arg1) {
     fn_80364414(arg0, arg1, buf);
 }
 
+f32 fn_803647AC(void *self, s32 key, f32 def) {
+    extern double fn_80246DDC(const char *);
+    char *s = fn_8036458C(self, key, NULL);
+    if (s == NULL) {
+        return def;
+    }
+    return fn_80246DDC(s);
+}
+
 void fn_80364A1C(void *self) {
     extern void fn_802D39F0(s32 *, s32);
     extern void fn_802D20E8(void *);
