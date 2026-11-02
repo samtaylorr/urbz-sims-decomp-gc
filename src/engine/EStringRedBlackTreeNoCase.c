@@ -1930,8 +1930,27 @@ void fn_8036A674(f32 *dst, s8 *src) {
     }
 }
 
+void fn_8036A6D4(s32 arg0, s32 arg1) {
+    extern f32 lbl_803F5054[];
+    extern f32 lbl_803F5058[];
+    extern f32 lbl_804754A8[];
+    extern f32 lbl_804754B4[];
+    extern f32 lbl_804754C0[];
+
+    if (arg1 == 0xFFFF && arg0 != 0) {
+        lbl_804754A8[0] = lbl_803F5054[0];
+        lbl_804754A8[1] = lbl_803F5058[0];
+        lbl_804754A8[2] = lbl_803F5058[0];
+        lbl_804754B4[0] = lbl_803F5058[0];
+        lbl_804754B4[1] = lbl_803F5054[0];
+        lbl_804754B4[2] = lbl_803F5058[0];
+        lbl_804754C0[0] = lbl_803F5058[0];
+        lbl_804754C0[1] = lbl_803F5058[0];
+        lbl_804754C0[2] = lbl_803F5054[0];
+    }
+}
+
 void fn_8036A73C(void) {
-    M2C_UNK fn_8036A6D4(M2C_UNK, M2C_UNK);
     fn_8036A6D4(1, 0xFFFF);
 }
 
