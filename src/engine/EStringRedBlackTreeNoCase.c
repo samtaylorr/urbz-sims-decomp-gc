@@ -80,10 +80,8 @@ char *fn_80364BEC(char *buf, s32 n, void *stream) {
         if (c == '\n') {
             goto done;
         }
-        *p = c;
-        p++;
-        n--;
-        if (n == 0) {
+        *p++ = c;
+        if (--n == 0) {
             goto done;
         }
     }
@@ -1464,6 +1462,41 @@ s32 fn_8036A41C(void **arg0, void **arg1) {
         }
     }
     return 1;
+}
+
+void fn_8036A4B8(f32 *v) {
+    extern char lbl_803F5010[];
+    void fn_802DD600(char *, ...);
+    fn_802DD600(lbl_803F5010, v[0], v[1]);
+}
+
+void fn_8036A4F0(f32 *v) {
+    extern char lbl_803F5018[];
+    void fn_802DD600(char *, ...);
+    fn_802DD600(lbl_803F5018, v[0], v[1], v[2]);
+}
+
+void fn_8036A52C(f32 *src, u8 *dst) {
+    s32 i;
+
+    for (i = 0; i < 3; i++) {
+        f32 v = src[i] * 255.0f;
+        if (v < 0.0f) {
+            dst[i] = 0;
+        } else if (v > 255.0f) {
+            dst[i] = 255;
+        } else {
+            dst[i] = (s32)v;
+        }
+    }
+}
+
+void fn_8036A5A4(f32 *dst, u8 *src) {
+    s32 i;
+
+    for (i = 0; i < 3; i++) {
+        dst[i] = (u32)src[i] * (1.0f / 255.0f);
+    }
 }
 
 void fn_8036A73C(void) {
