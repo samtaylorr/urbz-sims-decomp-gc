@@ -239,8 +239,8 @@ void fn_800A4E0C(s32 arg0, s32 *arg1, s32 *arg2) {
     fn_803445D8(lbl_80495060, arg0, 1, arg1);
     if (*arg1 != 0) {
         char *obj = lbl_80495060;
-        char *vt = *(char **)obj;
-        (*(void (**)(void *, s32, s32, s32 *))(vt + 0x84))(obj + *(s16 *)(vt + 0x80), arg0, fn_800A51C0(), arg1);
+        char *ent = *(char **)obj + 0x80;
+        (*(void (**)(void *, s32, s32, s32 *))(ent + 4))(obj + *(s16 *)ent, arg0, fn_800A51C0(), arg1);
     }
 }
 
