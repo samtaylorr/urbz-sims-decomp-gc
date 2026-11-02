@@ -4,6 +4,14 @@
 typedef struct { f32 x, y, z; } Vec3f;
 typedef struct { f32 x, y; } Vec2f;
 
+static inline Vec3f Vec3f_Make(f32 x, f32 y, f32 z) {
+    Vec3f v;
+    v.z = z;
+    v.y = y;
+    v.x = x;
+    return v;
+}
+
 static inline void Vec3f_Set(Vec3f *v, f32 x, f32 y, f32 z) {
     v->z = z;
     v->y = y;
@@ -718,15 +726,23 @@ extern const f32 lbl_803F0CF4[];
 void fn_802EF220(void *arg0) {
     struct { Vec3f min; Vec3f max; } box;
     Vec3f t;
+    register Vec3f *p asm("r9") = &t;
+    register f32 lo asm("fr13");
+    register f32 hi asm("fr0");
     t.x = lbl_803F0CEC[0];
     t.z = lbl_803F0CEC[0];
     t.y = lbl_803F0CEC[0];
-    box.max = t;
-    box.min = box.max;
-    Vec3f_Set(&t, lbl_803F0CF0[0], lbl_803F0CF0[0], lbl_803F0CF0[0]);
-    box.min = t;
-    Vec3f_Set(&t, lbl_803F0CF4[0], lbl_803F0CF4[0], lbl_803F0CF4[0]);
-    box.max = t;
+    lo = lbl_803F0CF0[0];
+    box.min = box.max = t;
+    hi = lbl_803F0CF4[0];
+    p->z = lo;
+    p->y = lo;
+    p->x = lo;
+    box.min = *p;
+    p->z = hi;
+    p->y = hi;
+    p->x = hi;
+    box.max = *p;
     fn_802F09B8(arg0, &box);
 }
 
