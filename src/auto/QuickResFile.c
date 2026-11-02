@@ -272,6 +272,13 @@ void fn_8018B774(char *self, void *arg1, f32 arg2) {
     }
 }
 
+s16 fn_8018C4A4(void *arg0) {
+    char *obj = M2C_FIELD(**(char ***)arg0, char **, 4);
+    char *vt = M2C_FIELD(obj, char **, 4);
+    char *r = ((char *(*)(void *))M2C_FIELD(vt, void **, 0x2D4))(obj + M2C_FIELD(vt, s16 *, 0x2D0));
+    return M2C_FIELD(r, s16 *, 0xA2);
+}
+
 void fn_8018C4E8(s32 *arg0, s32 arg1) {
     M2C_UNK fn_8011BF84(s32);
     M2C_UNK fn_8018A0E0(s32 *, M2C_UNK);
