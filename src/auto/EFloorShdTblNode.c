@@ -198,6 +198,20 @@ s32 fn_80053A38(void *self) {
     return result;
 }
 
+f32 fn_80053AC8(void *self, void *p) {
+    extern f32 lbl_803C7728[];
+    extern f32 lbl_803C772C[];
+    f32 max = lbl_803C7728[0];
+
+    while (p != NULL) {
+        if (M2C_FIELD(p, f32 *, 0x10) > max) {
+            max = M2C_FIELD(p, f32 *, 0x10);
+        }
+        p = M2C_FIELD(p, void **, 0x14);
+    }
+    return max + lbl_803C772C[0];
+}
+
 void fn_80053DF8(void) {
 
 }
@@ -357,6 +371,19 @@ void fn_80058900(void *arg0, void *arg1) {
 void fn_8005895C(s32 arg0, s32 arg1) {
     M2C_UNK fn_802E34F0(s32, s32);
     fn_802E34F0(arg1, arg0 + 0x120);
+}
+
+void fn_800589C4(void *p) {
+    extern void **lbl_804940C0;
+    extern s32 lbl_804940C4;
+    void **pool = lbl_804940C0;
+
+    if (pool != NULL && p != NULL) {
+        if (--lbl_804940C4 != 0) {
+            *(void **)p = *pool;
+            *pool = p;
+        }
+    }
 }
 
 void fn_800589F8(void) {
