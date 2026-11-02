@@ -1341,6 +1341,34 @@ void *fn_80368F18(void *arg0, s32 arg1) {
     return var_r31;
 }
 
+void *fn_80368F8C(void *arg0, s32 key, void *value) {
+    s32 fn_802D3EE8(s32, s32);
+    void *fn_80369088(void *, void *, s32, void *);
+    char *node;
+
+    node = fn_80368E80(arg0, key);
+    if (node != NULL && fn_802D3EE8((s32)(node + 0x1C), key) == 0) {
+        M2C_FIELD(node, void **, 0x18) = value;
+        return node;
+    }
+    return fn_80369088(arg0, node, key, value);
+}
+
+void *fn_80368FFC(void *arg0, s32 key, void *value, s32 multi) {
+    s32 fn_802D3EE8(s32, s32);
+    void *fn_80369088(void *, void *, s32, void *);
+    char *node;
+
+    if (multi != 0) {
+        return fn_80369088(arg0, fn_80368F18(arg0, key), key, value);
+    }
+    node = fn_80368E80(arg0, key);
+    if (node != NULL && fn_802D3EE8((s32)(node + 0x1C), key) == 0) {
+        return NULL;
+    }
+    return fn_80369088(arg0, node, key, value);
+}
+
 void fn_803691F4(void *arg0, void *arg1) {
     void *w;
 
