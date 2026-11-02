@@ -120,6 +120,11 @@ s16 fn_801285F4(void *arg0) {
     return M2C_FIELD(arg0, s16 *, 0x168);
 }
 
+void fn_801285FC(char *self, void *arg1) {
+    void fn_800F6A38(void *, void *);
+    fn_800F6A38(arg1, self + 4);
+}
+
 s32 fn_801286A0(void *arg0) {
     return (s32) (M2C_FIELD(arg0, s32 *, 0x15C) - M2C_FIELD(arg0, s32 *, 0x158)) >> 2;
 }
