@@ -185,14 +185,13 @@ void *fn_80361408(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     *(s32 *)(self + 0x70) = arg1;
     *(u8 *)(self + 0x7C) = arg2;
     *(u8 *)(self + 0x7D) = arg3;
-    *(s32 *)(self + 0x90) = 0;
     *(s32 *)(self + 0x44) = 0;
     *(s32 *)(self + 0x68) = 0;
     *(s32 *)(self + 0x6C) = 0;
     *(s32 *)(self + 0x74) = 0;
     *(s32 *)(self + 0x78) = 0;
-    *(s8 *)(self + 0x80) = 0;
     *(s32 *)(self + 0x80) = 0;
+    *(s32 *)(self + 0x90) = 0;
     return self;
 }
 
@@ -708,16 +707,16 @@ void fn_80363540(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     for (y = 0; y < bh; y++) {
         u8 *row = (u8 *)arg3 + y * bw * 32;
         for (x = 0; x < bw; x++) {
-            u8 *p = row;
             u32 *s = src;
+            u8 *p = row;
             for (i = 0; i < 4; i++) {
                 ((u32 *)p)[0] = s[0];
                 ((u32 *)p)[1] = s[1];
                 s += 2;
                 p += stride;
             }
-            src += 8;
             row += 8;
+            src += 8;
         }
     }
 }
