@@ -25,6 +25,12 @@ typedef struct {
     s32 b[2];
 } SMCSlotInfo;
 
+extern s32 *lbl_80494FDC;
+
+static inline void SMC_SetBusy(s32 v) {
+    lbl_80494FDC[3] = v;
+}
+
 extern s32 lbl_80495930;
 extern f32 lbl_803CE168[];
 extern f32 lbl_80494320;
@@ -382,16 +388,15 @@ s32 fn_800A527C(s32 arg0) {
 s32 fn_800A5678(s32 arg0, s32 arg1) {
     s32 fn_8012E048(void *, u8, s32);
     M2C_UNK fn_800A4924(s32, s32);
-    extern struct { s32 unk0, unk4, unk8, unkC; } *lbl_80494FDC;
+    extern s32 *lbl_80494FDC;
     extern void *lbl_8049440C;
     extern s32 lbl_80494460;
     s32 ret;
 
-    lbl_80494FDC->unkC = 0;
+    lbl_80494FDC[3] = 0;
     ret = fn_8012E048(lbl_8049440C, arg0, arg1);
-    lbl_80494FDC->unkC = 1;
-    fn_800A4924(lbl_80494460, arg0);
-    return ret;
+    lbl_80494FDC[3] = 1;
+    return fn_800A4924(lbl_80494460, arg0), ret;
 }
 
 s32 fn_800A56DC(s32 arg0, s32 arg1) {
