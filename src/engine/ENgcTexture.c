@@ -19,6 +19,15 @@ static inline void ENgcTexture_SetUnk(s32 *r, s32 n) {
     r[4] = n * 2;
 }
 
+static inline u32 ENgcTexture_CheckHalf(void *e, u32 a, u32 b) {
+    void fn_80360750(void *);
+    if (a + b < M2C_FIELD(e, u32 *, 0x70) / 2) {
+        return 0;
+    }
+    fn_80360750(e);
+    return M2C_FIELD(e, u32 *, 0x70) / 2;
+}
+
 typedef struct {
     s16 delta;
     s16 index;
@@ -902,6 +911,28 @@ void fn_80363148(s32 arg0) {
     fn_80338184(lbl_8045BAE8, arg0);
 }
 
+void fn_80363174(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    u32 *src = (u32 *)arg0;
+    u32 *dst = (u32 *)arg3;
+    s32 w = arg1 / 4;
+    s32 h = arg2 / 4;
+    s32 x, y, i;
+
+    for (y = 0; y < h; y++) {
+        for (x = 0; x < w; x++) {
+            u32 *s = src;
+            for (i = 0; i < 4; i++) {
+                dst[0] = s[0];
+                dst[1] = s[1];
+                dst += 2;
+                s += w * 2;
+            }
+            src += 2;
+        }
+        src += w * 6;
+    }
+}
+
 void fn_80363540(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     u32 *src = (u32 *)arg0;
     s32 bw = arg1 / 8;
@@ -976,14 +1007,14 @@ void fn_803639A8(void *arg0) {
 
 void *fn_80363C08(void *arg0) {
     typedef struct { f32 x, y, z; } V3;
-    extern f32 lbl_803F4F20;
+    extern f32 lbl_803F4F20[];
     void fn_802C4D24(V3 *);
     void fn_802C5070(V3 *, void *);
     V3 b;
     V3 a;
     V3 t;
 
-    t.x = t.y = t.z = lbl_803F4F20;
+    t.x = t.y = t.z = lbl_803F4F20[0];
     a = t;
     b = a;
     fn_802C4D24(&b);
@@ -1011,6 +1042,24 @@ s32 fn_80363CEC(s32 arg0, s32 *out) {
 
     fn_802C5C58((void *)arg0, &tmp);
     *out = tmp;
+    return arg0;
+}
+
+void *fn_80363D2C(void *arg0) {
+    typedef struct { f32 x, y, z; } V3;
+    typedef struct { void *vt; V3 a; V3 b; s32 c; s32 d; s32 e; } Obj;
+    extern u8 lbl_8041D738[];
+    extern f32 lbl_803F4F40[];
+    Obj *p = (Obj *)arg0;
+    V3 t;
+
+    p->vt = lbl_8041D738;
+    t.x = t.y = t.z = lbl_803F4F40[0];
+    p->b = t;
+    p->a = p->b;
+    p->d = 0;
+    p->c = 0;
+    p->e = 0;
     return arg0;
 }
 
