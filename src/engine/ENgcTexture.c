@@ -221,7 +221,6 @@ void fn_80361F28(void) {
 }
 
 void *fn_80361F2C(void *arg0) {
-    void fn_80361408(void *, s32, s32, s32);
     extern u8 lbl_8041D1F8[];
     fn_80361408(arg0, 8, 8, 8);
     M2C_FIELD(arg0, void **, 0x24) = lbl_8041D1F8;
@@ -648,24 +647,22 @@ void fn_80363148(s32 arg0) {
 }
 
 void fn_80363540(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
-    u32 *src = (u32 *)arg0;
+    typedef struct { u32 a, b; } Blk;
+    Blk *src = (Blk *)arg0;
     s32 bw = arg1 / 8;
     s32 bh = arg2 / 4;
-    s32 stride = bw * 8;
     s32 y;
     s32 x;
     s32 i;
     for (y = 0; y < bh; y++) {
-        u8 *row = (u8 *)arg3 + y * bw * 32;
+        Blk *row = (Blk *)arg3 + y * bw * 4;
         for (x = 0; x < bw; x++) {
-            u8 *p = row;
+            Blk *p = row;
             for (i = 0; i < 4; i++) {
-                ((u32 *)p)[0] = src[0];
-                ((u32 *)p)[1] = src[1];
-                src += 2;
-                p += stride;
+                *p = *src++;
+                p += bw;
             }
-            row += 8;
+            row++;
         }
     }
 }
