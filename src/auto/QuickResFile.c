@@ -193,6 +193,16 @@ void fn_8018A070(s32 *arg0) {
     fn_8011AA6C(*arg0);
 }
 
+void fn_8018A094(void **arg0) {
+    extern void fn_8011B408(void *);
+    extern void fn_8018A0E0(void *, s32);
+    extern void fn_8018AC24(void *);
+
+    fn_8011B408(arg0[0]);
+    fn_8018A0E0(arg0, 1);
+    fn_8018AC24(M2C_FIELD(*(void **)arg0[0], void **, 0x58));
+}
+
 s32 fn_8018A844(void) {
     return 0x444F4F52;
 }
