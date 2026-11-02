@@ -1478,6 +1478,26 @@ void *fn_8036979C(void *self, void *node, s32 *out) {
     return NULL;
 }
 
+void fn_80369800(EMat4Node **list) {
+    extern void fn_802D39F0(s32 *, s32);
+    extern void fn_802D20E8(void *);
+    void *node;
+    void *next;
+
+    node = M2C_FIELD(list, void **, 4);
+    while (node != NULL) {
+        next = M2C_FIELD(node, void **, 0xC);
+        if (node != NULL) {
+            fn_802D39F0((s32 *)((u8 *)node + 0x1C), M2C_FIELD(node, s32 *, 0x1C));
+            fn_802D20E8(node);
+        }
+        node = next;
+    }
+    M2C_FIELD(list, s32 *, 4) = 0;
+    M2C_FIELD(list, s32 *, 0) = 0;
+    M2C_FIELD(list, void **, 8) = lbl_80401368;
+}
+
 s32 fn_803698D8(void **arg0) {
     s32 var_r9;
     void *var_r3;
