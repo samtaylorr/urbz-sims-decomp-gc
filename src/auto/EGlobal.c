@@ -110,6 +110,19 @@ void fn_8004B8B0(void *arg0) {
     }
 }
 
+void fn_8004B8F4(void *arg0, s32 arg1) {
+    char *obj;
+    char *vt;
+
+    if (M2C_FIELD(arg0, s32 *, 0xF4) != 0) {
+        obj = M2C_FIELD(arg0, char **, 0xF4) + 0x18;
+        if (obj != NULL && arg1 != 0) {
+            vt = M2C_FIELD(obj, char **, 0x9C);
+            ((void (*)(void *))M2C_FIELD(vt, void **, 0x14))(obj + M2C_FIELD(vt, s16 *, 0x10));
+        }
+    }
+}
+
 s32 fn_8004B944(void *arg0) {
     s32 temp_r3;
 
