@@ -333,6 +333,14 @@ s32 fn_8018CD04(void) {
     return -0x5F;
 }
 
+s32 fn_8018CD0C(s32 arg0) {
+    extern u8 *lbl_8049665C;
+    char *obj = (char *)lbl_8049665C;
+    char *vt = *(char **)obj;
+    (*(void (**)(void *, s32))(vt + 0x114))(obj + *(s16 *)(vt + 0x110), arg0);
+    return 0;
+}
+
 s32 fn_8018CD4C(void) {
     return 0;
 }
