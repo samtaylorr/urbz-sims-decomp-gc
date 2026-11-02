@@ -149,8 +149,12 @@ s32 fn_800A4BF4(s32 arg0, s32 *arg1) {
     extern char *lbl_80495060;
     char *obj = lbl_80495060;
     char *vt = *(char **)obj;
-    s32 buf[2];
-    *arg1 = (*(s32 (**)(void *, s32, s32 *))(vt + 0xB4))(obj + *(s16 *)(vt + 0xB0), arg0, buf) == -4;
+    s32 buf;
+    s32 v = 0;
+    if ((*(s32 (**)(void *, s32, s32 *))(vt + 0xB4))(obj + *(s16 *)(vt + 0xB0), arg0, &buf) == -4) {
+        v = 1;
+    }
+    *arg1 = v;
     return 1;
 }
 
@@ -158,8 +162,12 @@ s32 fn_800A4C58(s32 arg0, s32 *arg1) {
     extern char *lbl_80495060;
     char *obj = lbl_80495060;
     char *vt = *(char **)obj;
-    s32 buf[2];
-    *arg1 = (*(s32 (**)(void *, s32, s32 *))(vt + 0xB4))(obj + *(s16 *)(vt + 0xB0), arg0, buf) == -8;
+    s32 buf;
+    s32 v = 0;
+    if ((*(s32 (**)(void *, s32, s32 *))(vt + 0xB4))(obj + *(s16 *)(vt + 0xB0), arg0, &buf) == -8) {
+        v = 1;
+    }
+    *arg1 = v;
     return 1;
 }
 
@@ -332,6 +340,30 @@ extern void fn_802D20E8(void *);
 void fn_800A73CC(void *self, s32 flags) {
     if (flags & 1) {
         fn_802D20E8(self);
+    }
+}
+
+void fn_800A90C0(char *arg0) {
+    extern char *lbl_80496648;
+    if (*(s32 *)(arg0 + 0x30) == 0) {
+        char *obj = lbl_80496648;
+        char *vt = *(char **)obj;
+        (*(void (**)(void *, s32))(vt + 0x44))(obj + *(s16 *)(vt + 0x40), 0);
+    }
+}
+
+void fn_800A9108(void) {
+    extern char *lbl_80496648;
+    extern void *lbl_80496644;
+    extern s32 lbl_8041FAA4;
+    void fn_8010CCC4(void *);
+    void fn_803153B8(s32);
+    char *obj = lbl_80496648;
+    char *vt = *(char **)obj;
+    (*(void (**)(void *))(vt + 0x54))(obj + *(s16 *)(vt + 0x50));
+    fn_8010CCC4(lbl_80496644);
+    if (lbl_8041FAA4 != 0) {
+        fn_803153B8(lbl_8041FAA4);
     }
 }
 
