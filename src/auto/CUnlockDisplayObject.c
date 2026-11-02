@@ -567,7 +567,7 @@ s32 fn_800BD32C(void *arg0, void *arg1, void *arg2, void *arg3) {
 }
 
 void fn_800BEF10(void) {
-    M2C_UNK fn_800BEED8(M2C_UNK, M2C_UNK);
+    void fn_800BEED8(s32, s32);
     fn_800BEED8(1, 0xFFFF);
 }
 
