@@ -405,11 +405,11 @@ void *fn_800BBD80(u8 *self) {
     fn_800BB140(self);
     *(u8 **)(self + 0x84) = lbl_8040A790;
     fn_801C9904(self + 0x90);
+    *(s32 *)(self + 0x10) = 0;
     *(s32 *)(self + 0x4) = 2;
     *(s32 *)(self + 0x178) = 0;
     *(s32 *)(self + 0x88) = 0;
     *(s32 *)(self + 0x8C) = 0;
-    *(s32 *)(self + 0x10) = 0;
     return self;
 }
 
@@ -423,8 +423,8 @@ void fn_800BBDE0(void *self, s32 flags) {
     M2C_FIELD(self, s32 *, 0x10) = 0;
     if (p != NULL) {
         M2C_FIELD(*(void **)p, void (**)(void *, s32), 0x34)((u8 *)p + M2C_FIELD(*(void **)p, s16 *, 0x30), 3);
+        M2C_FIELD(self, void **, 0x8C) = NULL;
     }
-    M2C_FIELD(self, void **, 0x8C) = NULL;
     fn_800BB31C(self, flags);
 }
 
