@@ -48,6 +48,16 @@ s32 fn_800ABE9C(void *self) {
     return 0;
 }
 
+void fn_800ABFD4(void *self);
+void fn_800ABF78(void *self, s32 flags) {
+    extern u8 lbl_8040A5C8[];
+    M2C_FIELD(self, void **, 0x18) = lbl_8040A5C8;
+    fn_800ABFD4(self);
+    if (flags & 1) {
+        fn_802D20E8((s32)self);
+    }
+}
+
 void fn_800ACA14(void) {
 
 }
