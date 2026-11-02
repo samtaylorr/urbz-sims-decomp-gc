@@ -205,7 +205,8 @@ s32 fn_800A4D00(s32 arg0, s32 *arg1) {
     if (r != 1) {
         return r;
     }
-    if (a != 0) {
+    v = a;
+    if (v != 0) {
         b = r;
         r = fn_8012BAAC(lbl_80494460, arg0, &b);
         if (r != 1) {
@@ -215,10 +216,10 @@ s32 fn_800A4D00(s32 arg0, s32 *arg1) {
             *arg1 = b;
             return 1;
         }
-    }
-    v = 0;
-    if (a != 0) {
-        v = 1;
+        v = 0;
+        if (a != 0) {
+            v = 1;
+        }
     }
     *arg1 = v;
     return 1;
@@ -267,6 +268,18 @@ s32 fn_800A4FCC(s32 arg0, s32 *arg1) {
     }
     fn_800A4924(lbl_80494460, arg0);
     return temp_r3;
+}
+
+s32 fn_800A5048(s32 arg0) {
+    s32 fn_80070300(s32, s32);
+    M2C_UNK fn_800704E0(s32);
+    extern u8 lbl_8041F94C[];
+    u8 *p = lbl_8041F94C;
+    s32 ret;
+
+    ret = fn_80070300(*(s32 *)(p + 0x184), arg0);
+    fn_800704E0(*(s32 *)(p + 0x184));
+    return ret;
 }
 
 s32 fn_800A5090(void *arg0) {
