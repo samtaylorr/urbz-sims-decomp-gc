@@ -87,15 +87,12 @@ void fn_800AC988(void *arg0) {
 }
 
 void fn_800AC9C4(void *arg0) {
-    char *var_r31;
     s32 i;
 
-    var_r31 = (char *)arg0 + 0x3C;
     for (i = 0; i < 0x80; i++) {
-        if (fn_800ABE78(var_r31) == 0) {
-            fn_800ABE9C(var_r31);
+        if (fn_800ABE78((char *)arg0 + 0x3C + i * 8) == 0) {
+            fn_800ABE9C((char *)arg0 + 0x3C + i * 8);
         }
-        var_r31 += 8;
     }
 }
 
@@ -256,6 +253,14 @@ void fn_800B20E8(void *arg0) {
     }
     if (fn_800B2750(arg0 + 0x444, &sp8) == 0) {
         fn_800B2384(arg0, sp8);
+    }
+}
+
+void fn_800B259C(void *arg0, void *arg1) {
+    u8 i;
+
+    for (i = 0; i < M2C_FIELD(arg0, u8 *, 0x20); i++) {
+        fn_800ACE5C((s32)arg0, (s32)arg1 + (i * 0xC + 0x30));
     }
 }
 
