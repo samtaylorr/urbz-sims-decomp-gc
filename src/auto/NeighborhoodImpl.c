@@ -150,6 +150,15 @@ s32 fn_80125698(char *self, s32 arg1) {
     return -1;
 }
 
+s32 fn_80125F98(void *arg0, void *arg1) {
+    void fn_80126924(void *, void *);
+
+    if (M2C_FIELD(arg1, s32 *, 0x20) != 0) {
+        fn_80126924(arg0, arg1);
+    }
+    return M2C_FIELD(arg1, s32 *, 0x1C);
+}
+
 s32 fn_80127CA0(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x1D4);
 }
@@ -233,6 +242,10 @@ s32 fn_80128658(char *self) {
 
 s32 fn_801286A0(void *arg0) {
     return (s32) (M2C_FIELD(arg0, s32 *, 0x15C) - M2C_FIELD(arg0, s32 *, 0x158)) >> 2;
+}
+
+s32 fn_801286B4(void *arg0, s32 arg1) {
+    return M2C_FIELD(arg0, s32 **, 0x158)[arg1];
 }
 
 s16 fn_801286C4(void *arg0) {
