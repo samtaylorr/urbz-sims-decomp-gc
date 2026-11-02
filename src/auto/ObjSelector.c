@@ -73,9 +73,9 @@ void *fn_8016C1A4(void **self) {
     void fn_801B3814(void *, s32, s32);
     *self = lbl_804118F8;
     fn_801B3814(self + 1, -1, 0);
-    self[4] = 0;
     self[5] = 0;
     self[3] = 0;
+    self[4] = 0;
     return self;
 }
 
