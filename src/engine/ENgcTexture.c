@@ -210,13 +210,11 @@ void fn_8035FF98(void *self, void *tex, u8 v) {
     extern Entry_8035F8AC lbl_804753B8[];
     void fn_80385C8C(void *, u8);
     s32 i;
-    Entry_8035F8AC *e;
 
     fn_8036023C();
     i = fn_803609B4(tex);
-    if (i != -1 && M2C_FIELD(&lbl_804753B8[i], s32 *, 0) != 0) {
-        e = &lbl_804753B8[i];
-        M2C_FIELD(e, u8 *, 0x15) = v;
+    if (i != -1 && lbl_804753B8[i].unk0 != 0) {
+        lbl_804753B8[i].unk15 = v;
         if (lbl_804753B8[i].unk1C != NULL) {
             fn_80385C8C(lbl_804753B8[i].unk1C, v);
         }
