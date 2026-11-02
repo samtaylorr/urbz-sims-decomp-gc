@@ -48,6 +48,24 @@ void fn_8028CE18(void *arg0) {
     M2C_FIELD(arg0, void **, 4) = temp_r0_2;
 }
 
+void fn_8028D490(void *arg0, void *arg1) {
+    typedef struct {
+        void *obj;
+        u8 pad4[0x18];
+    } Entry;
+    void fn_8024839C(void *, void *, s32);
+    s32 i;
+
+    for (i = 0; i <= M2C_FIELD(arg0, s32 *, 0x818) - 1; i++) {
+        if (arg1 == M2C_FIELD(arg0, Entry **, 0x81C)[i].obj) {
+            char *vt = M2C_FIELD(arg1, char **, 4);
+            (*(void (**)(void *))(vt + 0x14))((char *)arg1 + *(s16 *)(vt + 0x10));
+            fn_8024839C(&M2C_FIELD(arg0, Entry **, 0x81C)[i], &M2C_FIELD(arg0, Entry **, 0x81C)[i + 1], (M2C_FIELD(arg0, s32 *, 0x818) - i) * sizeof(Entry));
+            M2C_FIELD(arg0, s32 *, 0x818)--;
+        }
+    }
+}
+
 void fn_8028D540(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x127C) = arg1;
 }
@@ -70,7 +88,7 @@ s32 fn_8028D548(void *arg0, void *arg1) {
 s32 fn_8028D6E0(void *arg0) {
     s32 n = (s32)((M2C_FIELD(arg0, s32 *, 0x8) - M2C_FIELD(arg0, s32 *, 0x4)) * 0xCCCCCCCD) >> 2;
     if (n < 0) {
-        return n + M2C_FIELD(arg0, s32 *, 0x1290);
+        n += M2C_FIELD(arg0, s32 *, 0x1290);
     }
     return n;
 }
@@ -78,10 +96,9 @@ s32 fn_8028D6E0(void *arg0) {
 s32 fn_8028D714(void *arg0, s32 arg1) {
     s32 base = M2C_FIELD(arg0, s32 *, 0x0);
     s32 cap = M2C_FIELD(arg0, s32 *, 0x1290);
-    s32 i = ((s32)((M2C_FIELD(arg0, s32 *, 0x4) - base) * 0xCCCCCCCD) >> 2) + arg1;
-    i %= cap;
+    s32 i = (((s32)((M2C_FIELD(arg0, s32 *, 0x4) - base) * 0xCCCCCCCD) >> 2) + arg1) % cap;
     if (i < 0) {
-        i += cap;
+        return base + (i + cap) * 0x14;
     }
     return base + i * 0x14;
 }
