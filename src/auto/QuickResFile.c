@@ -710,9 +710,7 @@ void fn_8018D56C(void *arg0) {
 
 void fn_8018D6D8(void *arg0, s32 *arg1) {
     void fn_8018D578(void *, u8 *, s32);
-    s32 t = *arg1;
-    u8 v;
-    v = t;
+    u8 v = *(volatile s32 *)arg1;
     fn_8018D578(arg0, &v, 1);
     *arg1 = v != 0;
 }
