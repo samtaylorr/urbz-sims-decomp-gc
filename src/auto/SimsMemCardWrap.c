@@ -484,6 +484,11 @@ void fn_800A9C84(s32 self, s32 flags) {
     }
 }
 
+void fn_800A9E74(void *self, u8 *arg1) {
+    u8 *vt = *(u8 **)(arg1 + 4);
+    (*(void (**)(void *, s32, s32))(vt + 0x1AC))(arg1 + *(s16 *)(vt + 0x1A8), 0x22, 1);
+}
+
 void fn_800A9EB4(void *self, u8 **arg1) {
     u8 *obj = *arg1;
     u8 *vt = *(u8 **)(obj + 4);
