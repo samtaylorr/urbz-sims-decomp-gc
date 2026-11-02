@@ -474,13 +474,13 @@ void fn_8033033C(u8 *self) {
 }
 
 void fn_80330380(u8 *self, f32 dt) {
-    extern f32 lbl_803F353C;
+    extern f32 lbl_803F353C[];
     extern u8 lbl_8045BA40[];
     void fn_80338184(void *, s32);
     void fn_80330414(void *, f32);
     f32 t;
 
-    if (dt != lbl_803F353C) {
+    if (dt != lbl_803F353C[0]) {
         t = M2C_FIELD(self, f32 *, 0x6C) + dt;
         M2C_FIELD(self, f32 *, 0x6C) = t;
         if (t >= M2C_FIELD(self, f32 *, 0x4C)) {
