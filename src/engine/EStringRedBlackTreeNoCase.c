@@ -1464,6 +1464,20 @@ void *fn_80369724(void *self, s32 key, s32 *out) {
     return (void *)n;
 }
 
+void *fn_8036979C(void *self, void *node, s32 *out) {
+    s32 fn_802D3EE8(s32, s32);
+    char *next;
+
+    next = M2C_FIELD(node, char **, 0x10);
+    if (next != NULL && fn_802D3EE8((s32)(next + 0x1C), M2C_FIELD(node, s32 *, 0x1C)) == 0) {
+        if (out != NULL) {
+            *out = M2C_FIELD(next, s32 *, 0x18);
+        }
+        return next;
+    }
+    return NULL;
+}
+
 s32 fn_803698D8(void **arg0) {
     s32 var_r9;
     void *var_r3;
