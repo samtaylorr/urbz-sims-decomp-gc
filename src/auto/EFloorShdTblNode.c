@@ -258,7 +258,8 @@ void fn_800555D8(void *self, s32 arg1, s32 arg2, EFloorShdVec2 *pos, s32 arg4, s
     if (arg6 == 0) {
         fn_8032314C(M2C_FIELD(self, void **, 0x19C), arg1, arg2, pos, arg4, arg5, 0, 1, lbl_803C7A4C[0], lbl_803C7A50[0]);
     } else {
-        tmp = *pos;
+        tmp.y = pos->y;
+        tmp.x = pos->x;
         fn_80322ACC(M2C_FIELD(self, void **, 0x19C), arg1, arg2, 1, &tmp, arg4, arg5, 0, 0, 0, 0, 1);
     }
 }
@@ -297,7 +298,7 @@ void fn_80055E40(void *self, void *obj, void *out) {
 
     if (obj != NULL) {
         s = buf;
-        fn_800F6FB4(s, s + 8, 0x20);
+        fn_800F6FB4(buf, s + 8, 0x20);
         vt = M2C_FIELD(obj, void **, 0);
         M2C_FIELD(vt, void (**)(void *, void *), 0x74)((char *)obj + M2C_FIELD(vt, s16 *, 0x70), s);
         fn_800F22F0(out, fn_800F7138(s));
@@ -526,14 +527,19 @@ void fn_8005895C(s32 arg0, s32 arg1) {
 void *fn_80058988(u32 size) {
     extern void **lbl_804940C0;
     extern s32 lbl_804940C4;
-    void *p;
+    void **pool = lbl_804940C0;
+    void **p;
 
-    if (lbl_804940C0 != NULL) {
-        p = EFloorShd_PoolGet(lbl_804940C0);
+    if (pool != NULL) {
+        p = (void **)*pool;
         if (p == NULL) {
-            return p;
+            p = NULL;
+        } else {
+            *pool = *p;
         }
-        lbl_804940C4++;
+        if (p != NULL) {
+            lbl_804940C4++;
+        }
         return p;
     }
     return NULL;
@@ -557,25 +563,19 @@ void fn_800589F8(void) {
     extern void fn_802CD53C(void *);
     extern void fn_802C6710(void *, s32);
     extern void *fn_802D0C44(void);
+    int more;
+    void *node;
     void **list = lbl_804226B8;
-    void *node = list[0];
     void *pool;
     char *obj;
-    char *e;
-    int more;
+    char *vt;
 
-    for (;;) {
-        more = 1;
-        if (node == NULL) {
-            more = 0;
-        }
-        if (!more) {
-            break;
-        }
+    node = list[0];
+    while (more = 1, node == NULL ? more = 0 : 0, more) {
         obj = M2C_FIELD(node, char **, 0x1c);
         node = M2C_FIELD(node, void **, 0x10);
-        e = *(char **)obj + 8;
-        (*(void (**)(void *))(e + 4))(obj + *(s16 *)e);
+        vt = *(char **)obj;
+        (*(void (**)(void *))(vt + 0xC))(obj + *(s16 *)(vt + 8));
     }
     fn_802CD53C(list);
     pool = lbl_804940C0;
