@@ -270,7 +270,8 @@ void fn_8005595C(void *self, void *arg1, s32 arg2, EFloorShdVec2 *pos, f32 arg4,
     EFloorShdVec2 tmp;
 
     r = (*(void *(**)(u8 *, s32))(*(u8 **)lbl_80496650 + 0x144))(lbl_80496650 + *(s16 *)(*(u8 **)lbl_80496650 + 0x140), arg2 + 1);
-    tmp = *pos;
+    tmp.x = pos->x;
+    tmp.y = pos->y;
     fn_80055668(self, arg1, r, &tmp, 0, arg4, arg5);
 }
 
