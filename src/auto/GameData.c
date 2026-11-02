@@ -46,6 +46,17 @@ u8 fn_800451AC(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 0xB);
 }
 
+void fn_800451B4(s32 self, s32 flags) {
+    void fn_80048AA0(s32);
+    void fn_80047AEC(s32);
+    void fn_802D20E8(s32);
+    fn_80048AA0(self);
+    fn_80047AEC(self);
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_800454E0(s32 *self) {
     self[0x4C / 4] = 0;
     lbl_80495B9C = 0;
