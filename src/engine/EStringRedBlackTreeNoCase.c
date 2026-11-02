@@ -1117,6 +1117,17 @@ void fn_80367FF4(void *arg0) {
     fn_8036807C(arg0);
 }
 
+void fn_8036807C(void *arg0) {
+    extern void fn_80368320(void *, s32, s32, void *);
+    s32 n;
+
+    fn_80368320(arg0, 2, M2C_FIELD(arg0, s32 *, 0x14), (u8 *)arg0 + 0x30);
+    fn_80368320(arg0, 1, M2C_FIELD(arg0, s32 *, 0x14), (u8 *)arg0 + 0x40);
+    n = M2C_FIELD(arg0, s32 *, 0x14) + 1;
+    fn_80368320(arg0, 0, n, (u8 *)arg0 + 0x50);
+    fn_80368320(arg0, 2, n, (u8 *)arg0 + 0x60);
+}
+
 void *fn_80368B40(void *arg0) {
     extern char lbl_80401368[];
     M2C_FIELD(arg0, s32 *, 4) = 0;
