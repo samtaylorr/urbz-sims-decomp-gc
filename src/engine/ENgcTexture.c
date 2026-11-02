@@ -45,6 +45,10 @@ typedef struct {
 } Entry_8035F8AC;
 
 void fn_802FF4EC(void);
+void fn_803601FC(void);
+void fn_8036023C(void);
+s32 fn_803609B4(void *arg0);
+void fn_803609F4(void *arg0);
 void *fn_8035F368(void *arg0) {
     void fn_802FED50(void *);
     extern u8 lbl_8041D018[];
@@ -1058,21 +1062,16 @@ void fn_80363174(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
         for (x = 0; x < w; x++) {
             u32 *s = src;
             u32 *d = dst;
-            u32 a, b;
-            a = s[0]; b = s[1];
-            d[0] = a; d[1] = b;
+            d[0] = s[0]; d[1] = s[1];
             s += stride;
             d += 2;
-            a = s[0]; b = s[1];
-            d[0] = a; d[1] = b;
+            d[0] = s[0]; d[1] = s[1];
             s += stride;
             d += 2;
-            a = s[0]; b = s[1];
-            d[0] = a; d[1] = b;
+            d[0] = s[0]; d[1] = s[1];
             s += stride;
             d += 2;
-            a = s[0]; b = s[1];
-            d[0] = a; d[1] = b;
+            d[0] = s[0]; d[1] = s[1];
             src += 2;
             dst += 8;
         }
