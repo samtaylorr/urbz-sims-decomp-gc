@@ -347,6 +347,14 @@ void fn_8016CECC(void) {
     fn_800F1A60((s32)&lbl_80495C80, 2);
 }
 
+void fn_8016D2D8(void *arg0) {
+    char *p = M2C_FIELD(arg0, char **, 0x94);
+    if (p != NULL && M2C_FIELD(p, s32 *, 0xC) != 0) {
+        fn_8031EA2C(p);
+        M2C_FIELD(arg0, s32 *, 0x94) = 0;
+    }
+}
+
 s16 fn_8016D328(void *arg0) {
     return M2C_FIELD(M2C_FIELD(arg0, void **, 0x38), s16 *, 0x96);
 }
@@ -409,6 +417,16 @@ s32 fn_8016D468(void *arg0) {
         M2C_FIELD(arg0, s32 *, 0x74) = fn_800FCB50(M2C_FIELD(arg0, s32 *, 0xC), v);
     }
     return M2C_FIELD(arg0, s32 *, 0x74);
+}
+
+s32 fn_8016D4D0(void *arg0) {
+    if (M2C_FIELD(arg0, s32 *, 0x78) == -1) {
+        char *obj = fn_8016D954();
+        char *vt = *(char **)obj;
+        s32 v = M2C_FIELD(vt, s32 (**)(void *, s32), 0x74)(obj + M2C_FIELD(vt, s16 *, 0x70), 1);
+        M2C_FIELD(arg0, s32 *, 0x78) = fn_800FCB50(M2C_FIELD(arg0, s32 *, 0xC), v);
+    }
+    return M2C_FIELD(arg0, s32 *, 0x78);
 }
 
 extern s32 lbl_80495C88;
