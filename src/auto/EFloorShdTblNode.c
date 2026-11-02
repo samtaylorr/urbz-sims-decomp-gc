@@ -1,6 +1,11 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+typedef struct {
+    f32 x;
+    f32 y;
+} EFloorShdVec2;
+
 extern s32 lbl_80496694;
 extern void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
@@ -243,6 +248,30 @@ void fn_80054D08(void) {
 
 }
 
+void *fn_80056068(void *self, s32 unused) {
+    extern s32 lbl_80495810;
+    void *p = M2C_FIELD(self, void **, 0x138);
+
+    switch (lbl_80495810) {
+    case 1:
+        p = M2C_FIELD(self, void **, 0x13C);
+        break;
+    case 2:
+        p = M2C_FIELD(self, void **, 0x140);
+        break;
+    case 3:
+        p = M2C_FIELD(self, void **, 0x144);
+        break;
+    case 4:
+        p = M2C_FIELD(self, void **, 0x148);
+        break;
+    case 5:
+        p = M2C_FIELD(self, void **, 0x14C);
+        break;
+    }
+    return p;
+}
+
 void fn_80056754(void *arg0, s32 flags) {
     extern u8 lbl_804081E0[];
     void fn_800536AC(void *);
@@ -332,6 +361,28 @@ void fn_80056940(s32 *arg0) {
     }
 }
 
+void fn_80056A58(s32 idx, void *arg1) {
+    typedef struct { u8 b[16]; } Ent;
+    extern Ent lbl_804226C8[];
+    extern void fn_802CB69C(void *, s32);
+    extern s32 lbl_804940CC;
+    union { u8 idx; s32 v; } k;
+
+    k.v = M2C_FIELD(arg1, s32 *, 0x0);
+    fn_802CB69C(&lbl_804226C8[idx], k.v);
+    lbl_804940CC++;
+}
+
+void fn_80056AA0(void *arg0) {
+    typedef struct { u8 b[12]; } Ent;
+    extern Ent lbl_80422AC4[];
+    extern void fn_802CB69C(void *, s32);
+    union { u8 idx; s32 v; } k;
+
+    k.v = M2C_FIELD(arg0, s32 *, 0x0);
+    fn_802CB69C(&lbl_80422AC4[M2C_FIELD(arg0, u8 *, 0x0)], k.v);
+}
+
 s32 fn_80056AE0(s32 arg0) {
     switch (arg0) {                                 /* irregular */
     case 1:
@@ -393,14 +444,14 @@ void *fn_80058988(u32 size) {
     extern s32 lbl_804940C4;
     void *p;
 
-    if (lbl_804940C0 != NULL) {
-        p = EFloorShd_PoolGet(lbl_804940C0);
-        if (p != NULL) {
-            lbl_804940C4++;
-        }
-        return p;
+    if (lbl_804940C0 == NULL) {
+        return NULL;
     }
-    return NULL;
+    p = EFloorShd_PoolGet(lbl_804940C0);
+    if (p != NULL) {
+        lbl_804940C4++;
+    }
+    return p;
 }
 
 void fn_800589C4(void *p) {
@@ -421,12 +472,12 @@ void fn_800589F8(void) {
     extern void fn_802CD53C(void *);
     extern void fn_802C6710(void *, s32);
     extern void *fn_802D0C44(void);
+    int more;
     void **list = lbl_804226B8;
     void *node = list[0];
     void *pool;
     char *obj;
     char *vt;
-    int more;
 
     for (;;) {
         more = 1;
