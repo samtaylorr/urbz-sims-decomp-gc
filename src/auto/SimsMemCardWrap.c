@@ -95,6 +95,18 @@ void fn_800A49AC(void) {
     (*(void (**)(void *, s32, s32))(vt + 0xBC))(obj + *(s16 *)(vt + 0xB8), 2, 0xD6000);
 }
 
+s32 fn_800A4B14(s32 arg0, s32 *arg1);
+s32 fn_800A4A38(void) {
+    s32 buf[2];
+    s32 ret = 1;
+    s32 i;
+    for (i = 0; i <= 1; i++) {
+        ret = fn_800A4B14(i, buf);
+        if (ret != 1) break;
+    }
+    return ret;
+}
+
 s32 fn_800A4FCC(s32 arg0, s32 *arg1) {
     M2C_UNK fn_800A4924(s32, s32);
     s32 fn_8012EB5C(void *, s32, s32 *);
