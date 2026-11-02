@@ -1354,14 +1354,14 @@ void *fn_80369A74(void *arg0) {
     return arg0;
 }
 
-void *fn_80369A9C(void *arg0, void **arg1) {
+void *fn_80369A9C(void *arg0, void *arg1) {
     void fn_80369B8C(void *, s32);
-    void *fn_8036A3C0(void *, void **);
+    extern void fn_8036A3C0(void *, void *);
 
-    M2C_FIELD(arg0, s32 *, 8) = 0;
     M2C_FIELD(arg0, s32 *, 4) = 0;
     M2C_FIELD(arg0, s32 *, 0) = 0;
     M2C_FIELD(arg0, s32 *, 0x14) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
     fn_80369B8C(arg0, M2C_FIELD(arg1, s32 *, 0xC));
     fn_8036A3C0(arg0, arg1);
     return arg0;
