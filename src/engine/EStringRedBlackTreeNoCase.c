@@ -1822,6 +1822,21 @@ void fn_8036A5A4(f32 *dst, u8 *src) {
     }
 }
 
+void fn_8036A5FC(f32 *src, s8 *dst) {
+    s32 i;
+
+    for (i = 0; i < 3; i++) {
+        f32 v = src[i] * 127.0f;
+        if (v < -127.0f) {
+            dst[i] = -127;
+        } else if (v > 127.0f) {
+            dst[i] = 127;
+        } else {
+            dst[i] = (s32)v;
+        }
+    }
+}
+
 void fn_8036A73C(void) {
     M2C_UNK fn_8036A6D4(M2C_UNK, M2C_UNK);
     fn_8036A6D4(1, 0xFFFF);
