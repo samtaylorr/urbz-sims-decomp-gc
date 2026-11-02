@@ -134,6 +134,30 @@ void *fn_80186790(void *arg0) {
     return arg0;
 }
 
+void fn_801867F0(void *arg0, s32 flags) {
+    void fn_8031EA2C(void *);
+    void fn_8018EDE0(void *);
+    void *fn_802D0AB8(void);
+    void fn_802D1A00(void *, void *);
+    void fn_8011DA34(void *, s32);
+    void fn_80186598(void *, s32);
+    if (M2C_FIELD(arg0, void **, 8) != NULL) {
+        fn_8031EA2C(M2C_FIELD(arg0, void **, 8));
+        M2C_FIELD(arg0, void **, 8) = NULL;
+    }
+    if (M2C_FIELD(arg0, void **, 0x1AF4) != NULL) {
+        fn_8018EDE0(M2C_FIELD(arg0, void **, 0x1AF4));
+    }
+    if (M2C_FIELD(arg0, void **, 0) != NULL) {
+        fn_802D1A00(fn_802D0AB8(), M2C_FIELD(arg0, void **, 0));
+    }
+    fn_8011DA34((u8 *)arg0 + 0x1964, 2);
+    fn_80186598((u8 *)arg0 + 0xC, 2);
+    if (flags & 1) {
+        fn_802D20E8(arg0);
+    }
+}
+
 s32 fn_80186884(void *arg0) {
     s32 *fn_8010B96C(void *, M2C_UNK);
     void *temp_r31;
