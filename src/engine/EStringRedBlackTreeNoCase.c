@@ -1735,6 +1735,18 @@ void fn_8036A2C0(void *arg0, u32 arg1) {
     }
 }
 
+void fn_8036A304(void *arg0) {
+    extern void fn_802D1A00(void *, void *);
+    void *p = M2C_FIELD(arg0, void **, 0x14);
+
+    if (p == NULL) {
+        M2C_FIELD(arg0, void **, 0x10) = p;
+        M2C_FIELD(arg0, s32 *, 0xC) = 1;
+        fn_802D1A00(fn_802D0AB8(), M2C_FIELD(arg0, void **, 8));
+        M2C_FIELD(arg0, void **, 8) = p;
+    }
+}
+
 void *fn_8036A3C0(void *arg0, void **arg1) {
     void fn_80369D10(void *, s32, void *);
     void *n;
