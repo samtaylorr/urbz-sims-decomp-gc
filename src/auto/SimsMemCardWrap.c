@@ -114,6 +114,14 @@ s32 fn_800A4A88(s32 arg0) {
     return (*(s32 (**)(void *, s32))(vt + 0x94))(obj + *(s16 *)(vt + 0x90), arg0);
 }
 
+s32 fn_800A4AC4(s32 arg0, s32 *arg1) {
+    extern char *lbl_80495060;
+    char *obj = lbl_80495060;
+    char *vt = *(char **)obj;
+    *arg1 = (*(s32 (**)(void *, s32))(vt + 0x9C))(obj + *(s16 *)(vt + 0x98), arg0);
+    return 1;
+}
+
 s32 fn_800A4B14(s32 arg0, s32 *arg1) {
     extern char *lbl_80495060;
     char *obj = lbl_80495060;
