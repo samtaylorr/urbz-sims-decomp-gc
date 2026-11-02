@@ -20,6 +20,20 @@ typedef struct ERQdLookup {
     u32 unk64;
 } ERQdLookup;
 
+typedef struct {
+    s32 unk0;
+    u32 unk4;
+    s32 unk8;
+    s32 unkC;
+    u32 unk10;
+} ERQdEntry;
+
+typedef struct {
+    u8 pad0[0x8];
+    s32 unk8;
+    u8 padC[0x18 - 0xC];
+    ERQdEntry entries[1];
+} ERQdTable;
 
 void fn_802D2FD0(void);
 extern void *fn_802D0AB8(void *);
