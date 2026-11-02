@@ -86,6 +86,25 @@ void fn_80046FFC(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x154) = (s32) (M2C_FIELD(arg0, s32 *, 0x154) | (1 << arg1));
 }
 
+void fn_80047014(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, s32 *, 0x154) &= ~(1 << arg1);
+}
+
+s32 fn_80047A08(void *arg0, s32 arg1) {
+    extern void *lbl_80494FCC;
+    extern s32 fn_803338C0(void *);
+    s32 ret = 0;
+
+    if (fn_803338C0(lbl_80494FCC) != 0) {
+        if (arg1 != 0) {
+            ret = M2C_FIELD(arg0, s32 *, 0xC) == 0;
+        } else if (M2C_FIELD(arg0, s32 *, 8) == 0) {
+            ret = 1;
+        }
+    }
+    return ret;
+}
+
 s32 fn_80047A74(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x50) == 0;
 }
