@@ -432,7 +432,20 @@ void fn_800AA2AC(void) {
     (*(void (**)(void *, void (*)(void)))(vt + 0x44))(obj + *(s16 *)(vt + 0x40), fn_800AA098);
 }
 
-void fn_800AA2F0(void);
+void fn_800AA2F0(void) {
+    void fn_8004B8B0(void *);
+    void fn_8004B828(void *, s32);
+    void fn_8012ACB0(void *, s32);
+    extern u8 lbl_8041F94C[];
+    extern void *lbl_8049440C;
+    u8 *p = lbl_8041F94C;
+    s32 v = *(s32 *)(p + 0x35C);
+    fn_8004B8B0(p);
+    fn_8004B828(p, v);
+    fn_8012ACB0(lbl_8049440C, v);
+    fn_800AA00C();
+}
+
 void fn_800AA344(void) {
     u8 *obj;
     u8 *vt;
