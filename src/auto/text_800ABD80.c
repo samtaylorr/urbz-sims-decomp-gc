@@ -304,7 +304,7 @@ void fn_800B259C(void *arg0, void *arg1) {
     u8 i;
 
     for (i = 0; i < M2C_FIELD(arg0, u8 *, 0x20); i++) {
-        fn_800ACE5C((s32)arg0, (s32)arg1 + (i * 0xC + 0x30));
+        fn_800ACE5C((s32)arg0, (s32)&((u8 (*)[0xC])((u8 *)arg1 + 0x30))[i]);
     }
 }
 
