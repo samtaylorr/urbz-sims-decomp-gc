@@ -165,19 +165,13 @@ s32 fn_80125D6C(void *arg0, void **arg1) {
 s32 fn_80125F28(void *arg0) {
     s32 fn_801224F0(void *);
     void **p;
-    void *range;
     s32 count;
 
-    range = (char *)arg0 + 0x1B0;
-    p = M2C_FIELD(arg0, void ***, 0x1B0);
     count = 0;
-    if (p != M2C_FIELD(range, void ***, 4)) {
-        do {
-            if (*p != NULL && fn_801224F0(*p) != 0) {
-                count++;
-            }
-            p++;
-        } while (p != M2C_FIELD(range, void ***, 4));
+    for (p = M2C_FIELD(arg0, void ***, 0x1B0); p != M2C_FIELD((char *)arg0 + 0x1B0, void ***, 4); p++) {
+        if (*p != NULL && fn_801224F0(*p) != 0) {
+            count++;
+        }
     }
     return count;
 }
@@ -221,14 +215,14 @@ void fn_80127CA8(void) {
 }
 
 void fn_80127CAC(void *arg0, s32 arg1, s32 *arg2, s32 *arg3) {
-    extern s32 lbl_80434BF0[];
+    extern struct { s32 a; s32 b; } lbl_80434BF0[];
     if ((u32)(arg1 - 1) > 8) {
         *arg3 = 0;
         *arg2 = 0;
         return;
     }
-    *arg2 = lbl_80434BF0[arg1 * 2];
-    *arg3 = lbl_80434BF0[arg1 * 2 + 1];
+    *arg2 = lbl_80434BF0[arg1].a;
+    *arg3 = lbl_80434BF0[arg1].b;
 }
 
 void fn_80127ED8(void) {
