@@ -205,7 +205,7 @@ void fn_8028CFA0(void *arg0, void *arg1, char *arg2, s32 arg3) {
 
     prev = M2C_FIELD(arg0, AptAnimCmd **, 4) - 1;
     if (prev < M2C_FIELD(arg0, AptAnimCmd **, 0)) {
-        prev = M2C_FIELD(arg0, AptAnimCmd **, 0) + M2C_FIELD(arg0, s32 *, 0x1290) - 1;
+        prev = M2C_FIELD(arg0, AptAnimCmd **, 0) + (M2C_FIELD(arg0, s32 *, 0x1290) - 1);
     }
     if ((s32)prev != M2C_FIELD(arg0, s32 *, 8)) {
         char *vt;
@@ -338,22 +338,16 @@ void fn_8028DFA0(void *arg0) {
     extern void fn_802ADE44(void *);
     s32 i;
     u8 *obj;
-    s32 owned;
     u8 *vt;
 
     fn_802ADE44((u8 *) arg0 + 8);
     M2C_FIELD(arg0, s32 *, 0x20) = 0;
     if (M2C_FIELD(arg0, u32 **, 0x1C) != NULL) {
         for (i = 0; i < M2C_FIELD(arg0, s32 *, 0x24); i++) {
-            if ((obj = (u8 *) (M2C_FIELD(arg0, u32 **, 0x1C)[i] & ~1)) != NULL) {
-                owned = 1;
-                if (!(M2C_FIELD(arg0, s32 **, 0x1C)[i] & 1)) {
-                    owned = 0;
-                }
-                if (owned) {
-                    vt = *(u8 **) (obj + 4);
-                    (*(void (**)(void *)) (vt + 0x14))(obj + *(s16 *) (vt + 0x10));
-                }
+            obj = AptSlot_Ptr(&M2C_FIELD(arg0, u32 **, 0x1C)[i]);
+            if (obj != NULL && AptSlot_Owned(&M2C_FIELD(arg0, u32 **, 0x1C)[i])) {
+                vt = *(u8 **) (obj + 4);
+                (*(void (**)(void *)) (vt + 0x14))(obj + *(s16 *) (vt + 0x10));
             }
             M2C_FIELD(arg0, u32 **, 0x1C)[i] = 0;
         }
