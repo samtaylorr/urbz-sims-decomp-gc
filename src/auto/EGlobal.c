@@ -216,8 +216,8 @@ s32 fn_8004B974(void *arg0, s32 arg1, f32 *arg2) {
         }
     } else {
         f32 a = lbl_803C6C20[0];
-        arg2[0] = a;
         arg2[1] = a;
+        arg2[0] = a;
     }
     return ret;
 }
@@ -768,6 +768,38 @@ s32 fn_8004E814(void) {
 
 s32 fn_8004E81C(void) {
     return 0;
+}
+
+void fn_8004E824(void *self) {
+    extern char *lbl_8041FAD0[];
+    extern struct { u8 pad[0x184]; s8 *p; } lbl_8041F94C;
+    extern u8 *lbl_80495050;
+    s32 changed = 0;
+    s32 x;
+    s32 y;
+
+    x = (s8)lbl_8041FAD0[0][0x1F];
+    if (x < -25) {
+        x = -25;
+        changed = 1;
+    } else if (x > 25) {
+        x = 25;
+        changed = 1;
+    }
+    y = (s8)lbl_8041FAD0[0][0x20];
+    if (y < -25) {
+        y = -25;
+        changed = 1;
+    } else if (y > 25) {
+        y = 25;
+        changed = 1;
+    }
+    if (changed) {
+        lbl_8041F94C.p[0x1F] = x;
+        lbl_8041F94C.p[0x20] = y;
+    }
+    *(s32 *)(lbl_80495050 + 0x20) = y;
+    *(s32 *)(lbl_80495050 + 0x1C) = x;
 }
 
 s32 fn_8004E8B8(void) {
