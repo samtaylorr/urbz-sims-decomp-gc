@@ -791,6 +791,17 @@ void fn_80363954(void *arg0, void *arg1) {
     fn_802CBB48(arg0, arg1);
 }
 
+void fn_803639A8(void *arg0) {
+    void *fn_802CBB10(void *);
+    void fn_802CB5C4(void *, void *);
+    void *node;
+
+    node = fn_802CBB10(arg0);
+    if (node != NULL) {
+        fn_802CB5C4(arg0, node);
+    }
+}
+
 void fn_802D2FD0(void);
 void fn_80363C8C(void) {
     fn_802D2FD0();
