@@ -1970,10 +1970,10 @@ void fn_8039C584(void **self, s32 flags) {
 }
 
 s32 fn_800A2B98(SortComp comp, s32 a, s32 b);
-void fn_8039CAD8(s32 *last, s32 val, SortComp comp) {
+void fn_8039CAD8(s32 *last, s32 val, SortComp *comp) {
     s32 *next = last - 1;
 
-    while (((s32 (*)(SortComp *, s32, s32))fn_800A2B98)(&comp, val, *next)) {
+    while (((s32 (*)(SortComp *, s32, s32))fn_800A2B98)(comp, val, *next)) {
         *last = *next;
         last = next;
         next--;
@@ -1981,7 +1981,7 @@ void fn_8039CAD8(s32 *last, s32 val, SortComp comp) {
     *last = val;
 }
 
-void fn_8039CB38(s32 *first, s32 *last, SortComp comp) {
+void fn_8039CB38(s32 *first, s32 *last, SortComp *comp) {
     s32 *i;
 
     if (first == last) {
@@ -1989,7 +1989,7 @@ void fn_8039CB38(s32 *first, s32 *last, SortComp comp) {
     }
     for (i = first + 1; i != last; i++) {
         s32 val = *i;
-        if (fn_800A2B98(comp, val, *first)) {
+        if (fn_800A2B98(*comp, val, *first)) {
             s32 *next = i + 1;
             s32 n = (char *)i - (char *)first;
             if (n > 0) {
@@ -1997,7 +1997,7 @@ void fn_8039CB38(s32 *first, s32 *last, SortComp comp) {
             }
             *first = val;
         } else {
-            fn_8039CAD8(i, val, comp);
+            ((void (*)(s32 *, s32, SortComp))fn_8039CAD8)(i, val, *comp);
         }
     }
 }
@@ -3519,14 +3519,10 @@ void **fn_803A0A44(void **self, void **other) {
         if (xlen > (u32)((void **)self[3] - (void **)self[0])) {
             void **tmp;
             if (xlen != 0) {
-                u32 size = xlen * 4;
+                register u32 size asm("r0");
+                size = xlen * 4;
                 bytes = size;
-                if (size > 0x80) {
-                    tmp = (void **)fn_802D1FC8(bytes);
-                } else {
-                    tmp = (void **)fn_80399BE8(bytes);
-                }
-                bytes = bytes;
+                tmp = (void **)PtrVec_Allocate(size);
             } else {
                 tmp = NULL;
                 bytes = 0;
