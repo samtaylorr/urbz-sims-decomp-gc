@@ -133,6 +133,21 @@ void fn_80053948(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x48) = 1;
 }
 
+s32 fn_8005397C(void *self, void *p) {
+    s32 n = 0;
+
+    if (p == NULL) {
+        return n;
+    }
+    do {
+        if (M2C_FIELD(p, s32 *, 0x0) != 0) {
+            n++;
+        }
+        p = M2C_FIELD(p, void **, 0x14);
+    } while (p != NULL);
+    return n;
+}
+
 void fn_80053DF8(void) {
 
 }
