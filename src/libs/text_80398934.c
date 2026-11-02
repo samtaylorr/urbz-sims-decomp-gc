@@ -2754,26 +2754,22 @@ void fn_8039E788(s32 *self, s32 flags) {
 }
 
 void fn_8039E7BC(void *self) {
-    typedef struct {
-        u8 pad[0x114];
-        u32 hi : 24;
-        u32 mode : 4;
-        u32 lo : 4;
-    } Ctx8041F754;
     extern u8 *lbl_80495A78;
     extern u8 lbl_8045AAB0[];
     extern f32 lbl_803D4FFC[];
     void fn_80332C50(void *);
     u8 *g;
+    u8 *p;
     f32 f;
     fn_80332C50(lbl_8045AAB0);
     f = lbl_803D4FFC[0];
     g = lbl_80495A78;
-    *(s32 *)(g + 0x2C) = 1;
-    *(f32 *)(g + 0x8) = f;
+    p = lbl_8041F754;
     *(f32 *)(g + 0x0) = f;
     *(s32 *)(g + 0xC) = 1;
-    ((Ctx8041F754 *)lbl_8041F754)->mode = 1;
+    *(f32 *)(g + 0x8) = f;
+    *(s32 *)(g + 0x2C) = 1;
+    *(u32 *)(p + 0x114) = (*(u32 *)(p + 0x114) & ~0xE0) | 0x10;
     M2C_FIELD(self, s32 *, 0x18) = 0;
 }
 
