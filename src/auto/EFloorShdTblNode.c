@@ -5,6 +5,21 @@ extern s32 lbl_80496694;
 extern void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
 
+static inline void *EFloorShd_PoolGet(void **pool) {
+    void **p = (void **)*pool;
+    if (p != NULL) {
+        *pool = *p;
+    }
+    return p;
+}
+
+static inline void EFloorShd_PoolPut(void **pool, void *p) {
+    if (p != NULL) {
+        *(void **)p = *pool;
+        *pool = p;
+    }
+}
+
 static inline void EFloorShd_InitList(s32 *list) {
     list[1] = 0;
     list[0] = 0;
@@ -371,6 +386,25 @@ void fn_80058900(void *arg0, void *arg1) {
 void fn_8005895C(s32 arg0, s32 arg1) {
     M2C_UNK fn_802E34F0(s32, s32);
     fn_802E34F0(arg1, arg0 + 0x120);
+}
+
+void *fn_80058988(u32 size) {
+    extern void **lbl_804940C0;
+    extern s32 lbl_804940C4;
+    void **pool = lbl_804940C0;
+    void **p;
+
+    if (pool != NULL) {
+        p = (void **)*pool;
+        if (p != NULL) {
+            *pool = *p;
+        }
+        if (p != NULL) {
+            lbl_804940C4++;
+        }
+        return p;
+    }
+    return NULL;
 }
 
 void fn_800589C4(void *p) {
