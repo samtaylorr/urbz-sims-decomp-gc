@@ -5,6 +5,16 @@ typedef struct EGlobalHandle {
     s32 value;
 } EGlobalHandle;
 
+s32 fn_80049BD4(void *self, s32 which) {
+    if (which == 0) {
+        return M2C_FIELD(self, s32 *, 0x338);
+    }
+    if (which == 1) {
+        return M2C_FIELD(self, s32 *, 0x33C);
+    }
+    return 1;
+}
+
 s32 fn_80049BFC(void) {
     return 0x67F664FB;
 }
