@@ -645,6 +645,26 @@ void fn_800AB044(void) {
 
 }
 
+s32 fn_800AB1CC(u8 *arg0) {
+    extern f32 lbl_803CE4D4[];
+    extern f32 lbl_803CE4D8[];
+    u8 *obj = *(u8 **)(arg0 + 0xE8);
+    f32 k = lbl_803CE4D4[0];
+    f32 lim = lbl_803CE4D8[0];
+    SMCVec3 v = *(SMCVec3 *)(obj + 0xA4);
+    f32 s = *(f32 *)(obj + 0xA0);
+    v.x *= s;
+    v.y *= s;
+    v.z *= s;
+    return (v.x + v.y + v.z) * k < lim;
+}
+
+void fn_800AB250(f32 x) {
+    extern f32 lbl_803CE4DC[];
+    if (x == lbl_803CE4DC[0]) {
+    }
+}
+
 void fn_800AB260(u8 *arg0, SMCVec3 *out) {
     f32 fn_8025FC40(void *);
     void fn_802F0A84(SMCVec3 *);
