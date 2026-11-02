@@ -255,6 +255,14 @@ s32 fn_80049014(void) {
     return 0xDAA5754C;
 }
 
+s32 fn_80049034(void) {
+    extern s32 lbl_8049761C;
+    if (lbl_8049761C == 1) {
+        return 0xE8AFAC33;
+    }
+    return 0x6BB97944;
+}
+
 void fn_800490B0(void) {
     extern f32 lbl_803C6660[];
     extern u8 *lbl_80495050;
