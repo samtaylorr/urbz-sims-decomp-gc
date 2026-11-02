@@ -170,6 +170,7 @@ s32 fn_8004B974(void *arg0, s32 arg1, f32 *arg2) {
     void *vt;
     void *obj;
     s32 ret;
+    f32 a, b;
 
     vt = M2C_FIELD(arg0, void **, 0x3A4);
     obj = ((void *(*)(void *))M2C_FIELD(vt, void **, 0xE4))((char *)arg0 + M2C_FIELD(vt, s16 *, 0xE0));
@@ -177,12 +178,15 @@ s32 fn_8004B974(void *arg0, s32 arg1, f32 *arg2) {
     if (obj != NULL) {
         ret = fn_802E4030(obj, arg1, arg2);
         if (ret == 0) {
-            arg2[0] = lbl_803C6C20[0];
-            arg2[1] = lbl_803C6C24[0];
+            a = lbl_803C6C20[0];
+            b = lbl_803C6C24[0];
+            arg2[0] = a;
+            arg2[1] = b;
         }
     } else {
-        arg2[0] = lbl_803C6C20[0];
-        arg2[1] = lbl_803C6C20[0];
+        a = lbl_803C6C20[0];
+        arg2[0] = a;
+        arg2[1] = a;
     }
     return ret;
 }
@@ -309,6 +313,24 @@ EGlobalHandle fn_8004C168(void *arg1, s32 arg2) {
 
 void fn_8004C614(void) {
 
+}
+
+s32 fn_8004C78C(void *arg0, s32 arg1) {
+    s32 *arr;
+    s32 count;
+    s32 i;
+
+    arr = *M2C_FIELD(arg0, s32 **, 0xFC);
+    count = 0;
+    if (arr != NULL) {
+        count = arr[-1];
+    }
+    for (i = 0; i < count; i++) {
+        if (*arr++ == arg1) {
+            return i;
+        }
+    }
+    return 0;
 }
 
 s32 fn_8004C81C(void *arg0, s32 arg1) {
