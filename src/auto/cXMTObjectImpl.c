@@ -173,6 +173,11 @@ s32 fn_8011DCBC(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x10);
 }
 
+s32 fn_80122274(s32 arg0) {
+    extern s32 lbl_80434BE0[];
+    return lbl_80434BE0[0] + arg0 * 8;
+}
+
 s32 fn_80122288(void) {
     return 7;
 }
