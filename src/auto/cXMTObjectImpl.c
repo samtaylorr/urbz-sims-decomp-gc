@@ -146,6 +146,11 @@ void fn_8011CD64(void) {
 
 }
 
+void fn_8011D014(void *arg0, s32 arg1) {
+    void fn_8011CFA4(void *, s32, void *);
+    fn_8011CFA4(arg0, arg1, (u8 *)arg0 + 8);
+}
+
 s32 fn_8011D7D0(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x30);
 }
@@ -196,13 +201,15 @@ void *fn_8012243C(void *arg0) {
     s32 count;
     void *temp_r31;
     void *vt;
+    void *mgr;
 
     i = 0;
     vt = M2C_FIELD(lbl_80496650, void **, 0);
     count = M2C_FIELD(vt, s32 (**)(void *), 0x12C)(lbl_80496650 + M2C_FIELD(vt, s16 *, 0x128));
     for (; i < count; i++) {
-        vt = M2C_FIELD(lbl_80496650, void **, 0);
-        temp_r31 = M2C_FIELD(vt, void *(**)(void *, s32), 0x134)(lbl_80496650 + M2C_FIELD(vt, s16 *, 0x130), i);
+        mgr = lbl_80496650;
+        vt = M2C_FIELD(mgr, void **, 0);
+        temp_r31 = M2C_FIELD(vt, void *(**)(void *, s32), 0x134)(mgr + M2C_FIELD(vt, s16 *, 0x130), i);
         vt = M2C_FIELD(temp_r31, void **, 0);
         if (M2C_FIELD(vt, s32 (**)(void *, s32), 0x4C)(temp_r31 + M2C_FIELD(vt, s16 *, 0x48), M2C_FIELD(arg0, s32 *, 8)) != 0) {
             return temp_r31;
@@ -247,6 +254,36 @@ s16 fn_80122A44(void *arg0) {
         fn_80122700();
     }
     return M2C_FIELD(arg0, s16 *, 0x1C);
+}
+
+s32 fn_80122A80(void *arg0, void *arg1, s32 *arg2) {
+    void *obj;
+    void *vt;
+    s32 id;
+    s32 res;
+
+    if (arg1 == NULL) {
+        if (arg2 != NULL) {
+            *arg2 = 0;
+        }
+        return 0;
+    }
+    obj = M2C_FIELD(arg0, void **, 0x10);
+    id = M2C_FIELD(arg1, s16 *, 4);
+    vt = M2C_FIELD(obj, void **, 0);
+    res = M2C_FIELD(vt, s32 (**)(void *, s32), 0x24)((char *)obj + M2C_FIELD(vt, s16 *, 0x20), id);
+    if (res == 0) {
+        if (arg2 != NULL) {
+            *arg2 = 0;
+        }
+        return 0;
+    }
+    if (arg2 != NULL) {
+        obj = M2C_FIELD(arg0, void **, 0x10);
+        vt = M2C_FIELD(obj, void **, 0);
+        *arg2 = M2C_FIELD(vt, s32 (**)(void *, s32, s32), 0x44)((char *)obj + M2C_FIELD(vt, s16 *, 0x40), id, 0);
+    }
+    return 1;
 }
 
 void fn_80122B38(void *arg0, void *arg1, s32 arg2) {
