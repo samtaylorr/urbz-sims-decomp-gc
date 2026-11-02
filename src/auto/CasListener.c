@@ -35,8 +35,9 @@ void fn_801B7C94(void) {
 
 typedef struct { s16 delta; s16 idx; s32 (*fn)(void *, s32); } CasVtEnt2;
 
-static inline u16 CasReadU16(u16 **pp) {
-    return **pp;
+static inline void CasBufDtor(u8 *p) {
+    extern void fn_801A0858(void *, s32);
+    fn_801A0858(p, 2);
 }
 
 extern u8 *lbl_80496654;
@@ -279,11 +280,8 @@ s32 fn_801BD6DC(s32 arg0) {
         if (fn_801A08DC(buf, 0x20) == 0) {
             fn_801A08DC(buf, 0x10);
         }
-        {
-            u16 *p = a;
-            ret = *p;
-            fn_801A0858(buf, 2);
-        }
+        ret = CasReadU16(&a);
+        ((void *(*)(void *, s32))fn_801A0858)(buf, 2);
     }
     return ret;
 }
