@@ -16,6 +16,15 @@ static inline SMCVec3 *SMCVec3_Copy(SMCVec3 *d, const SMCVec3 *s) {
     return d;
 }
 
+typedef struct {
+    s32 unk0;
+    s32 idx;
+    s32 unk8;
+    s32 unkC;
+    s32 a[2];
+    s32 b[2];
+} SMCSlotInfo;
+
 extern s32 lbl_80495930;
 extern f32 lbl_803CE168[];
 extern f32 lbl_80494320;
@@ -190,6 +199,7 @@ s32 fn_800A4D00(s32 arg0, s32 *arg1) {
     s32 a;
     s32 b;
     s32 r;
+    s32 v;
 
     r = (*(s32 (**)(void *, s32, s32, s32 *))(vt + 0xCC))(obj + *(s16 *)(vt + 0xC8), lbl_80494460, arg0, &a);
     if (r != 1) {
@@ -206,7 +216,11 @@ s32 fn_800A4D00(s32 arg0, s32 *arg1) {
             return 1;
         }
     }
-    *arg1 = a != 0;
+    v = 0;
+    if (a != 0) {
+        v = 1;
+    }
+    *arg1 = v;
     return 1;
 }
 
@@ -893,20 +907,23 @@ void fn_800AAE14(void *self, f32 *a, f32 *b, f32 *c) {
     extern f32 lbl_803CE4C0[];
     extern f32 lbl_803CE4C4[];
     extern f32 lbl_803CE4C8[];
-    f32 a1 = lbl_803CE4B4[0];
     f32 a0 = lbl_803CE4B0[0];
-    f32 b2 = lbl_803CE4C4[0];
+    f32 a1 = lbl_803CE4B4[0];
+    f32 a2 = lbl_803CE4B8[0];
     f32 b0 = lbl_803CE4BC[0];
     f32 b1 = lbl_803CE4C0[0];
+    f32 b2 = lbl_803CE4C4[0];
+    f32 c0 = lbl_803CE4C8[0];
 
-    a[2] = lbl_803CE4B8[0];
     a[0] = a0;
     a[1] = a1;
+    a[2] = a2;
     b[0] = b0;
     b[1] = b1;
     b[2] = b2;
     c[2] = b2;
-    c[0] = c[1] = lbl_803CE4C8[0];
+    c[1] = c0;
+    c[0] = c0;
 }
 
 void fn_800AAE74(void) {
