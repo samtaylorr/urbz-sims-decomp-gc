@@ -1,8 +1,31 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+void fn_8023EF7C(void) {
+    register s32 v asm("r4");
+    register u8 *p asm("r3");
+    p = (u8 *)0x80437CA0;
+    v = 1;
+    *(s32 *)(p + 0x6d4) = v;
+}
+
 void fn_8023F0A4(void) {
 
+}
+
+void fn_8023F530(void) {
+    register s32 *p asm("r4");
+    register s32 v asm("r5");
+    p = (s32 *)0x803F711C;
+    v = 0;
+    *(volatile s32 *)p = v;
+}
+
+void fn_8023F584(volatile u32 *arg0) {
+    register u32 v asm("r4");
+    while ((v = *arg0 & 0x14) == 0) {
+    }
+    *arg0 = v;
 }
 
 s32 fn_80240584(void) {
@@ -168,9 +191,10 @@ void fn_80241934(void) {
 }
 
 u32 fn_80241938(double x) {
-    extern const double lbl_803EBA18;
-    if (x >= lbl_803EBA18) {
-        return (s32)(x - lbl_803EBA18) ^ 0x80000000;
+    extern const double lbl_803EBA18[];
+    register const double *p = lbl_803EBA18;
+    if (x >= *p) {
+        return (s32)(x - *p) ^ 0x80000000;
     }
     return (s32)x;
 }
