@@ -422,18 +422,16 @@ void fn_8032F480(void *self, void *other) {
 
 s32 fn_8032F52C(void *self, s32 id) {
     s32 i;
-    u8 n;
 
     if (!(M2C_FIELD(self, u32 *, 0x64) & 2)) {
         return 0;
     }
-    n = M2C_FIELD(self, u8 *, 0x50);
-    for (i = 0; i < n; i++) {
+    for (i = 0; i < M2C_FIELD(self, u8 *, 0x50); i++) {
         if (M2C_FIELD(self, u8 **, 0x54)[i] == id) {
             break;
         }
     }
-    if (i == n) {
+    if (i == M2C_FIELD(self, u8 *, 0x50)) {
         return 0;
     }
     return M2C_FIELD(self, s32 **, 0x58)[i];
