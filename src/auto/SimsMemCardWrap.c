@@ -307,6 +307,13 @@ void fn_800A9C84(s32 self, s32 flags) {
     }
 }
 
+void fn_800A9EB4(void *self, u8 **arg1) {
+    u8 *obj = *arg1;
+    u8 *vt = *(u8 **)(obj + 4);
+    (*(void (**)(void *, s32, s32))(vt + 0x1AC))(obj + *(s16 *)(vt + 0x1A8), 0x22, 1);
+    fn_8003E5E0(*(s32 *)(**(u8 ***)arg1 + 0x18), 0);
+}
+
 void fn_800A9F14(void *self, u8 *arg1) {
     u8 *vt = *(u8 **)(arg1 + 4);
     (*(void (**)(void *, s32, s32))(vt + 0x1AC))(arg1 + *(s16 *)(vt + 0x1A8), 0x22, 0);
