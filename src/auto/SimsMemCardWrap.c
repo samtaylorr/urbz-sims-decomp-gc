@@ -180,6 +180,14 @@ s32 fn_800A4C58(s32 arg0, s32 *arg1) {
     return 1;
 }
 
+s32 fn_800A4CBC(s32 arg0, s32 *arg1) {
+    extern char *lbl_80495060;
+    extern s32 lbl_80494460;
+    char *obj = lbl_80495060;
+    char *vt = *(char **)obj;
+    return (*(s32 (**)(void *, s32, s32, s32 *))(vt + 0xCC))(obj + *(s16 *)(vt + 0xC8), lbl_80494460, arg0, arg1);
+}
+
 s32 fn_8012BAAC(s32, u8, s32 *);
 void fn_803445D8(void *, s32, s32, s32 *);
 s32 fn_800A51C0(void);
