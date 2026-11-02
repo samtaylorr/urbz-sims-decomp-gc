@@ -290,6 +290,14 @@ void fn_800BBC4C(u8 *arg0, Vec3f *arg1) {
     *(Vec3f *)(arg0 + 0x54) = *arg1;
 }
 
+f32 *fn_800BBC6C(f32 *out, u8 *obj) {
+    f32 *p = (f32 *)(obj + 0x54);
+    out[0] = p[0];
+    out[1] = p[1];
+    out[2] = p[2];
+    return out;
+}
+
 void fn_800BBC90(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x38) = arg1;
 }
