@@ -344,6 +344,17 @@ s32 fn_803312D4(EIWallPartFlags *self, s32 i) {
     return self->unk2C[i];
 }
 
+s32 fn_803312E4(void *arg0) {
+    if (!(M2C_FIELD(arg0, u32 *, 0x64) & 2)) {
+        return 0;
+    }
+    return M2C_FIELD(arg0, s32 *, 0x24);
+}
+
+s32 fn_80331300(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x48) == 2;
+}
+
 u8 fn_80331364(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 0x5C);
 }
