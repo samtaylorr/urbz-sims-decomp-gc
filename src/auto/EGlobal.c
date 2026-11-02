@@ -273,6 +273,16 @@ void fn_8004D930(void *arg0) {
     fn_800416F4(M2C_FIELD(arg0, s32 *, 0x150));
 }
 
+void fn_8004D954(void *self, void *arg1) {
+    extern char lbl_803C6D58[];
+    char *fn_8032D5C8(void *, char *);
+    void fn_8039BA50(void *, void *, void *);
+    char *r;
+
+    r = fn_8032D5C8(M2C_FIELD(self, void **, 0x120), lbl_803C6D58);
+    fn_8039BA50(M2C_FIELD(r, char **, 0x4), M2C_FIELD(r, char **, 0x4) + M2C_FIELD(r, s32 *, 0xC) * 0xC, arg1);
+}
+
 extern u8 lbl_8041ED64[];
 void fn_8001E370(u8 *arg);
 void fn_8004D9D4(void) {
