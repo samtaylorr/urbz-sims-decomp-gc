@@ -346,6 +346,17 @@ s32 fn_800B2708(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x360);
 }
 
+s32 fn_800B2710(void *arg0, s32 *arg1) {
+    s32 v = *arg1;
+    if (v == -1) {
+        return -1;
+    }
+    if (v == M2C_FIELD(arg0, s32 *, 0x364)) {
+        return -1;
+    }
+    return (v + 1) % 8;
+}
+
 s32 fn_800B2750(void *arg0, s32 *arg1) {
     return *arg1 == -1;
 }
