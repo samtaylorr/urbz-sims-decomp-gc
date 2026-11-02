@@ -318,19 +318,24 @@ s32 fn_80128348(void) {
 extern char lbl_8041F94C[];
 s32 fn_80049BD4(char *);
 s32 fn_80128350(char *self) {
+    extern char lbl_8041F94C[];
+    s32 fn_80049BD4(char *);
     s32 count = 0;
-    char *vt = *(char **)self;
+    char *e = *(char **)self + 0x138;
     char *obj;
-    char *obj2;
-    s32 r;
     s32 i;
 
-    obj = M2C_FIELD(vt, char *(**)(void *, s32), 0x13C)(self + M2C_FIELD(vt, s16 *, 0x138), fn_80049BD4(lbl_8041F94C));
+    obj = (*(char *(**)(void *, s32))(e + 4))(self + *(s16 *)e, fn_80049BD4(lbl_8041F94C));
     for (i = 16; i <= 28; i++) {
-        vt = *(char **)obj;
+        char *vt = *(char **)obj;
+        char *obj2;
+        s32 r;
         obj2 = M2C_FIELD(vt, char *(**)(void *), 0x12C)(obj + M2C_FIELD(vt, s16 *, 0x128));
-        vt = *(char **)obj2;
-        r = M2C_FIELD(vt, s32 (**)(void *, s32), 0xC)(obj2 + M2C_FIELD(vt, s16 *, 0x8), i);
+        {
+            char *vt2 = *(char **)obj2;
+            s32 (*f)(void *, s32) = M2C_FIELD(vt2, s32 (**)(void *, s32), 0xC);
+            r = f(obj2 + M2C_FIELD(vt2, s16 *, 0x8), i);
+        }
         if (r != 0) {
             count += fn_80128308(r);
         }
