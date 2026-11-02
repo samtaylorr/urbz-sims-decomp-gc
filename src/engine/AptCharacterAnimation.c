@@ -191,6 +191,16 @@ void fn_8028D378(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x818) = 0;
 }
 
+void fn_8028D3F0(void *arg0, char *arg1, AptAnimEntryData *arg2) {
+    char *vt;
+
+    M2C_FIELD(arg0, AptAnimEntry **, 0x81C)[M2C_FIELD(arg0, s32 *, 0x818)].obj = arg1;
+    vt = M2C_FIELD(arg1, char **, 4);
+    (*(void (**)(void *))(vt + 0xC))(arg1 + *(s16 *)(vt + 8));
+    M2C_FIELD(arg0, AptAnimEntry **, 0x81C)[M2C_FIELD(arg0, s32 *, 0x818)].data = *arg2;
+    M2C_FIELD(arg0, s32 *, 0x818)++;
+}
+
 void fn_8028D490(void *arg0, void *arg1) {
     typedef struct {
         void *obj;
