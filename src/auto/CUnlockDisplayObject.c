@@ -69,6 +69,7 @@ void fn_800B96C0(void *arg0, s32 arg1) {
 
 void fn_800B9970(void *arg0, s32 arg1) {
     extern u8 lbl_8040A748[];
+    extern void fn_800B9ABC(void *);
     extern void fn_80309AE0(void *, s32);
 
     M2C_FIELD(arg0, void **, 0x4C0) = lbl_8040A748;
