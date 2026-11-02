@@ -140,21 +140,20 @@ void fn_8011CCC8(void ***arg0, s32 arg1) {
 s32 fn_8011CCD8(void *arg0) {
     char *vt;
 
-    if (arg0 == NULL) {
-        return 0;
+    if (arg0 != NULL) {
+        vt = M2C_FIELD(arg0, char **, 4);
+        return ((s32 (*)(void *))M2C_FIELD(vt, void **, 0x5C))((char *)arg0 + M2C_FIELD(vt, s16 *, 0x58));
     }
-    vt = M2C_FIELD(arg0, char **, 4);
-    return ((s32 (*)(void *))M2C_FIELD(vt, void **, 0x5C))((char *)arg0 + M2C_FIELD(vt, s16 *, 0x58));
+    return 0;
 }
 
 s32 fn_8011CD1C(void *arg0) {
-    void *p;
+    void *c = M2C_FIELD(arg0, void **, 0xC);
 
-    p = M2C_FIELD(arg0, void **, 0xC) != NULL ? M2C_FIELD(arg0, void **, 0xC) : arg0;
-    if (p == NULL) {
-        return 0;
+    if (c != NULL || arg0 != NULL) {
+        return M2C_FIELD(c != NULL ? c : arg0, s32 *, 4);
     }
-    return M2C_FIELD(p, s32 *, 4);
+    return 0;
 }
 
 s32 fn_8011CD4C(u8 *self) {
