@@ -127,6 +127,12 @@ void fn_80361244(void *arg0) {
     fn_80361568(M2C_FIELD(arg0, s32 *, 0x28));
 }
 
+void fn_80361268(void *self) {
+    u8 *obj = *(u8 **)((u8 *)self + 0x28);
+    u8 *vt = *(u8 **)(obj + 0x24);
+    (*(void (**)(void *))(vt + 0x94))(obj + *(s16 *)(vt + 0x90));
+}
+
 void fn_80361360(u8 *self) {
     u8 *obj;
     u8 *vtbl;
