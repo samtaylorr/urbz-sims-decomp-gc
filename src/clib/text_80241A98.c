@@ -1219,6 +1219,27 @@ long long fn_8024E114(long long u, s32 b) {
     return w.ll;
 }
 
+long long fn_8024E154(long long u, s32 b) {
+    DIunion w;
+    s32 bm;
+    DIunion uu;
+
+    if (b == 0) {
+        return u;
+    }
+    uu.ll = u;
+    bm = 32 - b;
+    if (bm <= 0) {
+        w.s.high = uu.s.high >> 31;
+        w.s.low = uu.s.high >> -bm;
+    } else {
+        u32 carries = (u32)uu.s.high << bm;
+        w.s.high = uu.s.high >> b;
+        w.s.low = ((u32)uu.s.low >> b) | carries;
+    }
+    return w.ll;
+}
+
 void fn_8024F99C(void);
 void fn_8024EF20(void) {
     fn_8024F99C();
