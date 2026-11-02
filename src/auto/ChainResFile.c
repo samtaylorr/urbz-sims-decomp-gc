@@ -109,11 +109,43 @@ static inline void ChainVec_Free(ChainVec *v) {
         ChainVec_Dealloc(p, v->alloc.cap);
     }
 }
+
+typedef struct ChainSlot {
+    void *obj;
+    s32 begin;
+    s32 end;
+    ChainVecAlloc alloc;
+    s32 flag;
+} ChainSlot;
 void fn_801020E0(void **self, s32 flags) {
     *self = lbl_8040D690;
     if (flags & 1) {
         fn_802D20E8(self);
     }
+}
+
+void *fn_80102114(void) {
+    extern void *fn_802D0AB8(void *);
+    extern void *fn_802D197C(void *heap, u32 size, u32 align);
+    extern void *fn_802D0B3C(void);
+    extern void *fn_802DC9F4(void *heap, u32 size, s32 arg2, s32 arg3);
+    extern void fn_80248488(void *, s32, s32);
+    extern u8 lbl_8040D608[];
+    void *heap;
+    void **p;
+
+    heap = ((void *(*)(void))fn_802D0AB8)();
+    p = fn_802D197C(heap, 0x20, 4);
+    if (p == NULL) {
+        p = fn_802DC9F4(heap, 0x20, 1, 0);
+        if (p == NULL && heap == ((void *(*)(void))fn_802D0AB8)()) {
+            p = fn_802DC9F4(fn_802D0B3C(), 0x20, 1, 0);
+        }
+    } else {
+        fn_80248488(p, 0, 0x20);
+    }
+    *p = lbl_8040D608;
+    return p;
 }
 
 void fn_801021BC(void **obj) {
@@ -309,12 +341,13 @@ s32 fn_80102A90(void *self, void *arg1, s32 key) {
     SearchEntry *fn_803A097C(SearchEntry *lo, SearchEntry *hi, s32 key);
     SearchEntry *tbl = M2C_FIELD(M2C_FIELD(arg1, void **, 0x54), SearchEntry **, 0x1C);
     SearchEntry *e;
-    SearchEntry *hi = NULL;
+    s32 hi = 0;
 
     if (tbl != NULL) {
-        hi = tbl + ((s32 *)tbl)[-1];
+        hi = ((s32 *)tbl)[-1];
+        hi = (s32)tbl + hi * 16;
     }
-    e = fn_803A097C(tbl, hi, key);
+    e = fn_803A097C(tbl, (SearchEntry *)hi, key);
     if (e != NULL) {
         M2C_FIELD(self, s32 *, 4) = e->unk4;
         M2C_FIELD(self, s32 *, 8) = e->unk8;
