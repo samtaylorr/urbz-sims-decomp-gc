@@ -73,6 +73,15 @@ void fn_80361244(void *arg0) {
     fn_80361568(M2C_FIELD(arg0, s32 *, 0x28));
 }
 
+void fn_80361360(u8 *self) {
+    u8 *obj;
+    u8 *vtbl;
+    *(s32 *)(self + 0x8) |= 0x80;
+    obj = *(u8 **)(self + 0x28);
+    vtbl = *(u8 **)(obj + 0x24);
+    ((void (*)(u8 *))*(void **)(vtbl + 0x6C))(obj + *(s16 *)(vtbl + 0x68));
+}
+
 void fn_803613A4(s32 arg0) {
     void fn_80338000(void *, s32, s32);
     extern u8 lbl_8045BAE8[];
