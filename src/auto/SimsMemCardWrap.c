@@ -509,7 +509,13 @@ void fn_800AA438(void) {
     (*(void (**)(void *, void (*)(void)))(vt + 0x44))(obj + *(s16 *)(vt + 0x40), fn_800AA388);
 }
 
-void fn_800AA47C(void);
+void fn_800AA47C(void) {
+    void fn_80028FE0(s32);
+    extern s32 lbl_8041FA38;
+    fn_80028FE0(lbl_8041FA38);
+    fn_800AA00C();
+}
+
 void fn_800AA4A8(void) {
     u8 *obj;
     u8 *vt;
