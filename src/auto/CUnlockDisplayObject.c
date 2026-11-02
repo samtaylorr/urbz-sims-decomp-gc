@@ -28,13 +28,11 @@ void fn_800B8F80(u8 *self) {
 f32 fn_800B9024(void *arg0, s32 arg1) {
     extern void fn_80320680(s32, s32, f32, f32);
     extern Vec3f fn_803227C4(s32, s32, s32, s32, s32);
-    extern f32 lbl_803CF520;
-    extern f32 lbl_803CF524;
-    Vec3f v;
+    extern f32 lbl_803CF520[];
+    extern f32 lbl_803CF524[];
 
-    fn_80320680(M2C_FIELD(arg0, s32 *, 0x160), 1, lbl_803CF520, lbl_803CF524);
-    v = fn_803227C4(M2C_FIELD(arg0, s32 *, 0x160), arg1, 1, 1, 0);
-    return v.x;
+    fn_80320680(M2C_FIELD(arg0, s32 *, 0x160), 1, lbl_803CF520[0], lbl_803CF524[0]);
+    return fn_803227C4(M2C_FIELD(arg0, s32 *, 0x160), arg1, 1, 1, 0).x;
 }
 
 extern void *fn_802D0AB8(void *);
@@ -314,13 +312,11 @@ void fn_800BB4C4(void *arg0) {
     extern void *fn_802D1FC8(s32);
     extern void *fn_802E55C0(void *);
     extern void fn_802E58E4(void *, s32, s32, s32);
-    extern void fn_802F42A8(s32, s32, s32, s32, s32);
-    void *p;
+    void fn_802F42A8();
 
     if (M2C_FIELD(arg0, s32 *, 0x80) == 0) {
-        p = fn_802E55C0(fn_802D1FC8(0x78));
-        M2C_FIELD(arg0, void **, 0x10) = p;
-        fn_802E58E4(p, M2C_FIELD(arg0, s32 *, 0x30), 1, 0);
+        M2C_FIELD(arg0, void **, 0x10) = fn_802E55C0(fn_802D1FC8(0x78));
+        fn_802E58E4(M2C_FIELD(arg0, void **, 0x10), M2C_FIELD(arg0, s32 *, 0x30), 1, 0);
         M2C_FIELD(M2C_FIELD(arg0, void **, 0x10), f32 *, 0x54) = M2C_FIELD(M2C_FIELD(arg0, void **, 0x14), f32 *, 0x6C);
         fn_802F42A8(M2C_FIELD(arg0, s32 *, 0x1C), M2C_FIELD(arg0, s32 *, 0x2C), 0, 0, 0);
     }
@@ -614,19 +610,6 @@ s32 fn_800BD284(void *arg0, void *arg1, void *arg2, void *arg3) {
     return found;
 }
 
-void fn_8033E8B4(void);
-void fn_800F1930(void *, void *);
-void fn_800F2868(void *, s32, s32);
-void fn_800F1F00(void *, void *, s32, s32);
-void *fn_800F3304(void *);
-void fn_800F1A60(void *, s32);
-void fn_800F6FB4(void *, void *, s32);
-void fn_800F7028(void *, void *, s32);
-void fn_800F7018(void *);
-void fn_800F71C8(void *, void *, s32);
-void *fn_800F7138(void *);
-s32 fn_800BD3D8(void *, void *, void *, void *);
-s32 fn_800BD05C(void *, void *, void *, void *);
 s32 fn_800BD32C(void *arg0, void *arg1, void *arg2, void *arg3) {
     char buf[0x208];
     char *s = buf;
