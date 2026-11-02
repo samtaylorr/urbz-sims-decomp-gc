@@ -416,6 +416,16 @@ s8 *fn_80105624(s8 *self, s8 *other) {
     return self;
 }
 
+s32 fn_80105644(void *arg0, void *arg1) {
+    s32 var_r11;
+
+    var_r11 = 0;
+    if (((s32) M2C_FIELD(arg1, u8 *, 0) == (s32) M2C_FIELD(arg0, u8 *, 0)) && ((s32) M2C_FIELD(arg1, u8 *, 1) == (s32) M2C_FIELD(arg0, u8 *, 1))) {
+        var_r11 = 1;
+    }
+    return var_r11;
+}
+
 s32 fn_80105674(void *arg0, void *arg1) {
     s32 var_r11;
 
