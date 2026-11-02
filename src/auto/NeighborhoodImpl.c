@@ -266,25 +266,30 @@ void fn_80128074(char *self) {
         s32 unk4;
         char buf[0x104];
     } str;
-    fn_800F687C(&str, str.buf, 0x104);
-    fn_800F68F0(&str, lbl_803D86C4, -1);
+    void *p = &str;
+    fn_800F687C(p, str.buf, 0x104);
+    fn_800F68F0(p, lbl_803D86C4, -1);
     vt = *(char **)self;
-    (*(void (**)(void *, void *))(vt + 0x2C))(self + *(s16 *)(vt + 0x28), &str);
+    (*(void (**)(void *, void *))(vt + 0x2C))(self + *(s16 *)(vt + 0x28), p);
 }
 
 s32 fn_801280E4(char *self) {
     char *vt;
     char *a;
     s32 *b;
+    s32 ret;
     vt = *(char **)self;
     a = (*(char *(**)(void *))(vt + 0x13C))(self + *(s16 *)(vt + 0x138));
     vt = *(char **)a;
     b = (*(s32 *(**)(void *, s32))(vt + 0x34))(a + *(s16 *)(vt + 0x30), 0);
-    if (b == NULL) {
-        return 0;
+    ret = 0;
+    if (b != NULL) {
+        s32 (*f)(void *, s32);
+        vt = *(char **)self;
+        f = *(s32 (**)(void *, s32))(vt + 0xE4);
+        ret = f(self + *(s16 *)(vt + 0xE0), *b);
     }
-    vt = *(char **)self;
-    return (*(s32 (**)(void *, s32))(vt + 0xE4))(self + *(s16 *)(vt + 0xE0), *b);
+    return ret;
 }
 
 s32 fn_80128308(s32 arg0) {
