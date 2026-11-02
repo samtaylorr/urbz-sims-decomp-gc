@@ -101,6 +101,15 @@ void fn_8004AF40(void) {
 
 }
 
+void fn_8004B8B0(void *arg0) {
+    extern void fn_80028F80(void *, s32);
+
+    if (M2C_FIELD(arg0, void **, 0xEC) != NULL) {
+        fn_80028F80(M2C_FIELD(arg0, void **, 0xEC), 3);
+        M2C_FIELD(arg0, void **, 0xEC) = NULL;
+    }
+}
+
 s32 fn_8004B944(void *arg0) {
     s32 temp_r3;
 
