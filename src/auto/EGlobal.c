@@ -41,18 +41,14 @@ void *fn_80049AC4(void) {
 s32 fn_80049B6C(void *self) {
     void *fn_801DB3C8(void *, s32);
     extern char lbl_803C6958[];
-    s32 ret;
 
     if (M2C_FIELD(self, void **, 0x3A0) == NULL) {
-        if ((M2C_FIELD(self, void **, 0x3A0) = fn_801DB3C8(lbl_803C6958, 0x69)) == NULL) {
-            return 0;
-        }
+        M2C_FIELD(self, void **, 0x3A0) = fn_801DB3C8(lbl_803C6958, 0x69);
     }
-    ret = 1;
-    if (M2C_FIELD(M2C_FIELD(self, char **, 0x3A0), s32 *, 8) != 1) {
-        ret = 0;
+    if (M2C_FIELD(self, void **, 0x3A0) != NULL && M2C_FIELD(M2C_FIELD(self, char **, 0x3A0), s32 *, 8) == 1) {
+        return 1;
     }
-    return ret;
+    return 0;
 }
 
 s32 fn_80049BD4(void *self, s32 which) {
