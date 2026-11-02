@@ -1973,7 +1973,7 @@ s32 fn_800A2B98(SortComp comp, s32 a, s32 b);
 void fn_8039CAD8(s32 *last, s32 val, SortComp comp) {
     s32 *next = last - 1;
 
-    while (fn_800A2B98(comp, val, *next)) {
+    while (((s32 (*)(SortComp *, s32, s32))fn_800A2B98)(&comp, val, *next)) {
         *last = *next;
         last = next;
         next--;
@@ -1989,8 +1989,7 @@ void fn_8039CB38(s32 *first, s32 *last, SortComp comp) {
     }
     for (i = first + 1; i != last; i++) {
         s32 val = *i;
-        SortComp c = comp;
-        if (fn_800A2B98(c, val, *first)) {
+        if (fn_800A2B98(comp, val, *first)) {
             s32 *next = i + 1;
             s32 n = (char *)i - (char *)first;
             if (n > 0) {
@@ -1998,19 +1997,18 @@ void fn_8039CB38(s32 *first, s32 *last, SortComp comp) {
             }
             *first = val;
         } else {
-            fn_8039CAD8(i, val, c);
+            fn_8039CAD8(i, val, comp);
         }
     }
 }
 
-void fn_8039CAD8(s32 *it, s32 val, SortComp comp);
 void fn_8039CB38(s32 *first, s32 *last, SortComp comp);
 void fn_8039C968(s32 *first, s32 *last, s32 *val, s32 depth, SortComp comp);
 void fn_8039CBEC(s32 *first, s32 *last, s32 *val, SortComp *comp) {
     s32 *it;
 
     for (it = first; it != last; it++) {
-        fn_8039CAD8(it, *it, *comp);
+        ((void (*)(s32 *, s32, SortComp))fn_8039CAD8)(it, *it, *comp);
     }
 }
 
@@ -3529,8 +3527,8 @@ void **fn_803A0A44(void **self, void **other) {
                     size = 0;
                     tmp = (void **)fn_802D1FC8(bytes);
                 } else {
-                    tmp = (void **)fn_80399BE8(bytes);
                     size = 0;
+                    tmp = (void **)fn_80399BE8(bytes);
                 }
             } else {
                 tmp = NULL;
