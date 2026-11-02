@@ -278,17 +278,18 @@ s32 fn_8011D7D0(void *arg0) {
 void *fn_8011D904(void *arg0) {
     void fn_801C9A9C(void *, s32);
     s32 i;
+    s32 *p;
 
     fn_801C9A9C((u8 *)arg0 + 0x14, 0);
     M2C_FIELD(arg0, s32 *, 0x138) = 0;
     M2C_FIELD(arg0, u8 *, 0xC) = 0;
-    M2C_FIELD(arg0, s16 *, 0) = 0;
-    M2C_FIELD(arg0, s16 *, 2) = 0;
-    M2C_FIELD(arg0, s16 *, 4) = 0;
-    M2C_FIELD(arg0, s16 *, 6) = 0;
-    M2C_FIELD(arg0, s16 *, 8) = 0;
-    M2C_FIELD(arg0, s16 *, 0xA) = 0;
-    M2C_FIELD(arg0, s32 *, 0x10) = 0;
+    M2C_FIELD(arg0, u16 *, 0) = 0;
+    M2C_FIELD(arg0, u16 *, 2) = 0;
+    M2C_FIELD(arg0, u16 *, 4) = 0;
+    M2C_FIELD(arg0, u16 *, 6) = 0;
+    M2C_FIELD(arg0, u16 *, 8) = 0;
+    M2C_FIELD(arg0, u16 *, 0xA) = 0;
+    M2C_FIELD(arg0, void **, 0x10) = NULL;
     M2C_FIELD(arg0, s32 *, 0xFC) = 0;
     M2C_FIELD(arg0, s32 *, 0x100) = 0;
     M2C_FIELD(arg0, s32 *, 0x104) = 0;
@@ -304,8 +305,9 @@ void *fn_8011D904(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x12C) = 0;
     M2C_FIELD(arg0, s32 *, 0x130) = 0;
     M2C_FIELD(arg0, s32 *, 0x134) = 0;
-    for (i = 3; i >= 0; i--) {
-        ((s32 *)((u8 *)arg0 + 0x13C))[i] = 0;
+    p = (s32 *)((u8 *)arg0 + 0x148);
+    for (i = 4; i != 0; i--) {
+        *p-- = 0;
     }
     return arg0;
 }
@@ -316,10 +318,10 @@ void *fn_8011D9C0(void *arg0) {
     s32 fn_8018ED98();
     void *temp_r29;
 
-    M2C_FIELD(arg0, s16 *, 0x1E) = 0;
     M2C_FIELD(arg0, s16 *, 0x18) = 0;
     M2C_FIELD(arg0, s16 *, 0x1A) = 0;
     M2C_FIELD(arg0, s16 *, 0x1C) = 0;
+    M2C_FIELD(arg0, s16 *, 0x1E) = 0;
     temp_r29 = (u8 *)arg0 + 0x10C;
     fn_800F687C((u8 *)arg0 + 0x24, (u8 *)arg0 + 0x2C, 0x40);
     fn_80117DE4(temp_r29);
