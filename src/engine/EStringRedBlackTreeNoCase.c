@@ -1498,6 +1498,17 @@ void fn_80369800(EMat4Node **list) {
     M2C_FIELD(list, void **, 8) = lbl_80401368;
 }
 
+void fn_80369874(void **list) {
+    extern void fn_802D1A00(void *, void *);
+    void *n;
+
+    for (n = *list; EStrNode_Valid(n); n = M2C_FIELD(n, void **, 0x10)) {
+        void *value = M2C_FIELD(n, void **, 0x18);
+        fn_802D1A00(fn_802D0AB8(), value);
+    }
+    fn_80369800((EMat4Node **)list);
+}
+
 s32 fn_803698D8(void **arg0) {
     s32 var_r9;
     void *var_r3;
