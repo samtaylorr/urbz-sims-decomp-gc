@@ -99,16 +99,14 @@ void fn_8035F8AC(void *arg0, s32 arg1) {
     void *fn_802D0AB8(void);
     void fn_802D1A00(void *, void *);
     void fn_802D20E8(void *);
-    Entry_8035F8AC *e;
     s32 i;
 
-    e = &lbl_804753B8[1];
-    for (i = 1; i >= 0; i--, e--) {
-        fn_80385948(e->unk1C);
-        fn_80381198(e->unk1C);
-        fn_8035FD24(arg0, e->unk4);
+    for (i = 1; i >= 0; i--) {
+        fn_80385948(lbl_804753B8[i].unk1C);
+        fn_80381198(lbl_804753B8[i].unk1C);
+        fn_8035FD24(arg0, lbl_804753B8[i].unk4);
         if (fn_8033EC8C() == 0) {
-            fn_802D1A00(fn_802D0AB8(), e->unk68);
+            fn_802D1A00(fn_802D0AB8(), lbl_804753B8[i].unk68);
         }
     }
     if (arg1 & 1) {
@@ -800,14 +798,16 @@ void fn_80363540(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     for (y = 0; y < bh; y++) {
         u8 *row = (u8 *)arg3 + y * bw * 32;
         for (x = 0; x < bw; x++) {
+            u32 *s = src;
             u8 *p = row;
-            row += 8;
             for (i = 0; i < 4; i++) {
-                ((u32 *)p)[0] = src[0];
-                ((u32 *)p)[1] = src[1];
-                src += 2;
+                ((u32 *)p)[0] = s[0];
+                ((u32 *)p)[1] = s[1];
+                s += 2;
                 p += stride;
             }
+            row += 8;
+            src += 8;
         }
     }
 }
