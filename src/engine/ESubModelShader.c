@@ -13,6 +13,10 @@ static inline s32 ListCount(u8 *list) {
     return *(s32 *)(list + 4);
 }
 
+static inline s32 ListInRange(u8 *list, s32 i) {
+    return i < *(s32 *)(list + 4);
+}
+
 void *fn_802FFD98(void *arg0) {
     M2C_UNK fn_803BAD8C();
     fn_803BAD8C();
@@ -180,8 +184,9 @@ void fn_80300488(u8 *self) {
 void fn_803004E4(u8 *self, u8 *other, s32 idx) {
     s32 fn_8030230C(u8 *self, u8 *other, s32 idx);
     s32 i;
+    s32 j;
 
-    for (i = 0; ListCount(self) > i; i++) {
+    for (i = 0, j = 0; j < ListCount(self); i++, j++) {
         fn_8030230C(*(u8 **)self + i * 0x6C, *(u8 **)other + i * 0x6C, idx);
     }
 }
@@ -531,27 +536,15 @@ void fn_803041B0(u8 *self) {
     extern const f32 lbl_803F1880[];
     extern const f32 lbl_803F1884[];
     extern const f32 lbl_803F1888[];
-    Vec3f *b = (Vec3f *)(self + 0xC);
-    Vec3f *c = (Vec3f *)(self + 0x18);
-    f32 zero;
-    f32 one;
 
     *(f32 *)(self + 0x24) = lbl_803F1878[0];
-    zero = lbl_803F1884[0];
     *(f32 *)(self + 0x28) = lbl_803F187C[0] * lbl_803F1880[0];
-    one = lbl_803F1888[0];
     *(s32 *)(self + 0x30) = 1;
     *(s32 *)(self + 0x34) = 0;
     *(s32 *)(self + 0x2C) = 0;
-    ((Vec3f *)self)->x = zero;
-    ((Vec3f *)self)->y = zero;
-    ((Vec3f *)self)->z = zero;
-    b->x = zero;
-    b->z = zero;
-    b->y = one;
-    c->x = zero;
-    c->z = one;
-    c->y = zero;
+    Vec3f_Set((Vec3f *)self, lbl_803F1884[0], lbl_803F1884[0], lbl_803F1884[0]);
+    Vec3f_Set((Vec3f *)(self + 0xC), lbl_803F1884[0], lbl_803F1888[0], lbl_803F1884[0]);
+    Vec3f_Set((Vec3f *)(self + 0x18), lbl_803F1884[0], lbl_803F1884[0], lbl_803F1888[0]);
 }
 
 void fn_8030422C(u8 *self, Vec3f *a, Vec3f *b, Vec3f *c) {
