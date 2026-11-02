@@ -683,10 +683,12 @@ void fn_8036391C(void *arg0) {
 
 void fn_80363954(void *arg0, void *arg1) {
     void fn_802CBB48(void *, void *);
+    s32 c;
     fn_8036391C(arg0);
     M2C_FIELD(arg0, s32 *, 0x10) = M2C_FIELD(arg1, s32 *, 0x10);
-    M2C_FIELD(arg0, s32 *, 0xC) = M2C_FIELD(arg1, s32 *, 0xC);
-    M2C_FIELD(arg1, s32 *, 0x10) = M2C_FIELD(arg1, s32 *, 0xC) * 2;
+    c = M2C_FIELD(arg1, s32 *, 0xC);
+    M2C_FIELD(arg0, s32 *, 0xC) = c;
+    M2C_FIELD(arg1, s32 *, 0x10) = c * 2;
     fn_802CBB48(arg0, arg1);
 }
 
