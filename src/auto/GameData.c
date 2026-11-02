@@ -32,6 +32,12 @@ void fn_80044A38(s32 *self) {
     self[1] = 1;
 }
 
+void *fn_80045190(void *arg0) {
+    extern u8 lbl_80407FA0[];
+    M2C_FIELD(arg0, void **, 0xC) = lbl_80407FA0;
+    return arg0;
+}
+
 u8 fn_800451AC(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 0xB);
 }
@@ -93,8 +99,9 @@ void fn_80047014(void *arg0, s32 arg1) {
 s32 fn_80047A08(void *arg0, s32 arg1) {
     extern void *lbl_80494FCC;
     extern s32 fn_803338C0(void *);
-    s32 ret = 0;
+    s32 ret;
 
+    ret = 0;
     if (fn_803338C0(lbl_80494FCC) != 0) {
         if (arg1 != 0) {
             ret = M2C_FIELD(arg0, s32 *, 0xC) == 0;
