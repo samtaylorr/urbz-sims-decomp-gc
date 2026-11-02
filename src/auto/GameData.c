@@ -9,6 +9,21 @@ extern s32 lbl_80494428;
 extern s32 lbl_8041F7A0[];
 void fn_801238C4(u8 *obj, s32 arg);
 
+s16 fn_80043F84(void *arg0) {
+    extern void **lbl_8041F730[];
+    s32 fn_800F8148(void *, void *);
+    void ***slot = lbl_8041F730;
+    s32 i;
+
+    for (i = 0; i <= 8; i++) {
+        void **p = *slot++;
+        if (fn_800F8148(p != NULL ? *p : NULL, arg0) == 0) {
+            return i;
+        }
+    }
+    return 0;
+}
+
 s32 fn_80043FF8(void) {
     M2C_UNK fn_80043C40();
     fn_80043C40();
