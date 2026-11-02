@@ -178,6 +178,21 @@ void fn_8032D448(void *arg0, s32 arg1) {
     fn_8032D444(arg0);
 }
 
+void fn_8032D498(void *arg0, s32 arg1, s32 arg2) {
+    extern s32 fn_8032DE08(s32, s32, void *, s32);
+    void fn_802D3CE4(void *, s32);
+    s32 res;
+
+    fn_8032D3EC(arg0);
+    res = fn_8032DE08(arg1, M2C_FIELD(arg0, s32 *, 0x20), (char *)arg0 + 0x24, arg2);
+    M2C_FIELD(arg0, s32 *, 0x20) = res;
+    if (res != 0) {
+        fn_802D3CE4((char *)arg0 + 0x18, M2C_FIELD(res, s32 *, 4));
+        M2C_FIELD(arg0, s32 *, 0x1C) = M2C_FIELD(arg0, s32 *, 0x24);
+    }
+    fn_8032D444(arg0);
+}
+
 void *fn_8032D8E0(void *arg0, u32 arg1, u32 *out) {
     s32 fn_8032D7DC(void *, s32, s32, u32);
     s32 idx;
