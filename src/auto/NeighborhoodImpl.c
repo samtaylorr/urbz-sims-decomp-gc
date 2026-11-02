@@ -81,26 +81,11 @@ void fn_8012373C(s32 arg0) {
 void fn_80123824(void *arg0) {
     extern u8 *lbl_8049665C;
     void fn_80123450(void *);
-    void fn_8010B528(void *);
-    void **p;
-    void *temp_r9;
 
     fn_80123450((char *)arg0 + 0x1B0);
     (*(void (**)(u8 *))(*(u8 **)lbl_8049665C + 0x54))(lbl_8049665C + *(s16 *)(*(u8 **)lbl_8049665C + 0x50));
     (*(void (**)(u8 *))(*(u8 **)lbl_8049665C + 0x5C))(lbl_8049665C + *(s16 *)(*(u8 **)lbl_8049665C + 0x58));
-    temp_r9 = (char *)arg0 + 0x1C0;
-    p = M2C_FIELD(arg0, void ***, 0x1C0);
-    if (p != M2C_FIELD(temp_r9, void ***, 4)) {
-loop_1:
-        fn_8010B528(*p);
-        p++;
-        if (p == M2C_FIELD(temp_r9, void ***, 4)) {
-            goto block_2;
-        }
-        goto loop_1;
-    }
-block_2:
-    M2C_FIELD(arg0, void ***, 0x1C4) = M2C_FIELD(arg0, void ***, 0x1C0);
+    PtrVec_DestroyAll((PtrVec *)((char *)arg0 + 0x1C0));
 }
 
 void fn_801245D0(s32 arg0) {
@@ -203,6 +188,22 @@ void fn_80124D98(char *self, char *obj) {
         } while (it != w->end);
     }
     fn_80122BE4(obj);
+}
+
+typedef struct { void **begin; void **end; } NbhdPtrVec;
+
+static inline void NbhdPtrVec_Notify(NbhdPtrVec *v, s32 n) {
+    char *fn_8011DCBC(void *);
+    void **it;
+
+    for (it = v->begin; it != v->end; it++) {
+        if (*it != NULL) {
+            char *p = fn_8011DCBC(*it);
+            char *vt = *(char **)p;
+            void (*f)(void *, s32) = M2C_FIELD(vt, void (**)(void *, s32), 0x34);
+            f(p + M2C_FIELD(vt, s16 *, 0x30), n);
+        }
+    }
 }
 
 void fn_80124E20(char *self, char *obj) {
