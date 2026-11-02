@@ -18,6 +18,14 @@ typedef struct {
     AptAnimEntryData data;
 } AptAnimEntry;
 
+static inline u8 *AptSlot_Ptr(u32 *slot) {
+    return (u8 *) (*slot & ~1);
+}
+
+static inline s32 AptSlot_Owned(u32 *slot) {
+    return (*slot & 1) ? 1 : 0;
+}
+
 void fn_8028B0A4(void *arg0, void *arg1, u8 *arg2) {
     void fn_8028ABC4(void *, void *, u8 *);
     if (M2C_FIELD(arg2, s32 *, 0x1C) != 0) {
