@@ -437,7 +437,7 @@ void fn_80056AA0(void *arg0) {
     extern void fn_802CB69C(void *, s32);
     Key k = *(Key *)arg0;
 
-    fn_802CB69C(&lbl_80422AC4[k.idx], *(s32 *)&k);
+    fn_802CB69C(&lbl_80422AC4[((Key *)arg0)->idx], *(s32 *)&k);
 }
 
 s32 fn_80056AE0(s32 arg0) {
