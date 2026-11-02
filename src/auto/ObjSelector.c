@@ -360,6 +360,21 @@ s32 fn_8016D364(void) {
     return ((u32) (M2C_FIELD(M2C_FIELD(fn_8016CC44(), void **, 0x38), u16 *, 0x98) ^ 2) >> 1U) & 1;
 }
 
+extern char *lbl_80495050;
+extern char lbl_8045BA40[];
+void *fn_80338000(char *, s32, s32);
+void *fn_8032E230(void *);
+void fn_8032EBA4(void *, s32);
+s32 fn_802FF608(s32, s32);
+void fn_8031EA2C(void *);
+s32 fn_8016D394(void *arg0) {
+    char *p = M2C_FIELD(arg0, char **, 0x38);
+    if (M2C_FIELD(p, s16 *, 0x14) != 0) {
+        return 1;
+    }
+    return M2C_FIELD(p, s16 *, 0x8) != 0;
+}
+
 s32 fn_8016D3C4(void) {
     char *obj = fn_8016DBF0();
     char *vt;
