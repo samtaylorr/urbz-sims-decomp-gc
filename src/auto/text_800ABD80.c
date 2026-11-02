@@ -58,6 +58,11 @@ void fn_800ABF78(void *self, s32 flags) {
     }
 }
 
+void fn_800ABFC4(void *self) {
+    extern s32 lbl_8041FA1C[];
+    M2C_FIELD(self, s32 *, 0x14) = lbl_8041FA1C[0];
+}
+
 void fn_800ACA14(void) {
 
 }
