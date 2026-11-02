@@ -127,6 +127,16 @@ void fn_80364D08(void *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 0x24) = 1;
     fn_802C6290(lbl_804448E8, (s32 *)((char *)arg0 + 0x1C), arg1, mode, 0x80000000, 0x80000000, 0);
 }
+void fn_803645F4(void *arg0, void *arg1, s32 arg2) {
+    s32 fn_80245BB4(char *, const char *, ...);
+    void fn_80364414(void *, void *, char *);
+    extern char lbl_803F4F5C[];
+    char buf[128];
+
+    fn_80245BB4(buf, lbl_803F4F5C, arg2);
+    fn_80364414(arg0, arg1, buf);
+}
+
 void fn_80364A1C(void *self) {
     extern void fn_802D39F0(s32 *, s32);
     extern void fn_802D20E8(void *);
