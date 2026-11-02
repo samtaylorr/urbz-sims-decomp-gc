@@ -410,13 +410,12 @@ void *fn_80058988(u32 size) {
 void fn_800589C4(void *p) {
     extern void **lbl_804940C0;
     extern s32 lbl_804940C4;
-    void **pool = lbl_804940C0;
 
-    if (pool != NULL && p != NULL) {
-        if (--lbl_804940C4 != 0) {
-            *(void **)p = *pool;
-            *pool = p;
+    if (lbl_804940C0 != NULL) {
+        if (p != NULL) {
+            lbl_804940C4--;
         }
+        EFloorShd_PoolPut(lbl_804940C0, p);
     }
 }
 
@@ -426,7 +425,8 @@ void fn_800589F8(void) {
     extern void fn_802CD53C(void *);
     extern void fn_802C6710(void *, s32);
     extern void *fn_802D0C44(void);
-    void *node = lbl_804226B8[0];
+    void **list = lbl_804226B8;
+    void *node = list[0];
     void *pool;
     char *obj;
     char *vt;
@@ -445,7 +445,7 @@ void fn_800589F8(void) {
         vt = *(char **)obj;
         (*(void (**)(void *))(vt + 0xC))(obj + *(s16 *)(vt + 8));
     }
-    fn_802CD53C(lbl_804226B8);
+    fn_802CD53C(list);
     pool = lbl_804940C0;
     if (pool != NULL) {
         fn_802C6710(pool, 0);
@@ -664,10 +664,14 @@ u16 fn_80059894(void *arg0) {
 }
 
 u16 fn_8005989C(void *arg0, u32 arg1) {
+    u16 r;
+
     if (arg1 < M2C_FIELD(arg0, u32 *, 0x90)) {
-        return ((u16 *)((u8 *)arg0 + 0x94))[arg1];
+        r = ((u16 *)((u8 *)arg0 + 0x94))[arg1];
+    } else {
+        r = 0;
     }
-    return 0;
+    return r;
 }
 
 void fn_800598C0(void) {
