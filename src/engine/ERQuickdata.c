@@ -86,6 +86,14 @@ void fn_8032D1A4(void *self) {
     }
 }
 
+void fn_8032D1E4(void *self) {
+    char *obj = M2C_FIELD(self, char **, 0x30);
+    if (obj != NULL) {
+        char *vt = M2C_FIELD(obj, char **, 8);
+        (*(void (**)(void *))(vt + 0x34))(obj + *(s16 *)(vt + 0x30));
+    }
+}
+
 s32 fn_8032D224(void *arg0) {
     char *obj = M2C_FIELD(arg0, char **, 0x30);
     s32 result = 0;
