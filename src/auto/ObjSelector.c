@@ -698,7 +698,10 @@ s32 fn_8016DB90(void *arg0) {
     obj = M2C_FIELD(arg0, char **, 0x50);
     vt = *(char **)obj;
     r = M2C_FIELD(vt, char *(**)(void *, s32), 0xBC)(obj + M2C_FIELD(vt, s16 *, 0xB8), id);
-    return r != NULL ? M2C_FIELD(r, s32 *, 8) : 0;
+    if (r == NULL) {
+        return 0;
+    }
+    return M2C_FIELD(r, s32 *, 8);
 }
 
 void *fn_8016DBF0(arg0)
