@@ -355,6 +355,64 @@ EGlobalHandle fn_8004BD48(void *arg1, s32 arg2) {
     return lbl_80495804;
 }
 
+void *fn_8004BEDC(void *arg1, u32 arg2) {
+    char *fn_8032D5C8(s32, void *);
+    extern u8 lbl_803C6C9C[];
+    char *r;
+    char *t;
+    u32 *e;
+    u32 n;
+    u32 i;
+
+    r = fn_8032D5C8(*(s32 *)((char *)arg1 + 0x11C), lbl_803C6C9C);
+    t = r ? r : NULL;
+    if (t != NULL) {
+        n = *(u32 *)(t + 0xC);
+        e = *(u32 **)(t + 0x4);
+        for (i = 0; i < n; i++) {
+            if (*e == arg2) {
+                return e;
+            }
+            e += 3;
+        }
+    }
+    return NULL;
+}
+
+void *fn_8004BF5C(void *arg1, u32 arg2) {
+    char *fn_8032D5C8(s32, void *);
+    extern u8 lbl_803C6CA8[];
+    char *r;
+    char *t;
+    u32 *best = NULL;
+    u32 *e;
+    char *arr;
+    u32 n;
+    u32 i;
+
+    r = fn_8032D5C8(*(s32 *)((char *)arg1 + 0x11C), lbl_803C6CA8);
+    t = r ? r : NULL;
+    if (t != NULL) {
+        n = *(u32 *)(t + 0xC);
+        arr = *(char **)(t + 0x4);
+        for (i = 0; i < n; i++) {
+            if (best == NULL) {
+                best = (u32 *)(arr + i * 0x1C);
+            }
+            e = (u32 *)(arr + i * 0x1C);
+            if (*e == arg2) {
+                return e;
+            }
+            if (*e > arg2) {
+                break;
+            }
+            best = e;
+        }
+        return best;
+    }
+    return NULL;
+}
+
 EGlobalHandle fn_8004C168(void *arg1, s32 arg2) {
     s32 fn_8032D5C8(s32, void *);
     EGlobalHandle *fn_8032D6E8(s32, s32, s32);
@@ -697,6 +755,7 @@ s32 fn_8004E204(void *self, void *list, void *exclude) {
     extern void fn_80151048(It *, void *, s32);
     extern void fn_80151110(It *);
     It iter;
+    register void *ex asm("r29") = exclude;
     register It *it asm("r30") = &iter;
     register It *p asm("r31");
     VtEnt *e;
@@ -707,7 +766,7 @@ s32 fn_8004E204(void *self, void *list, void *exclude) {
     p = it;
     if (cur != NULL) {
         do {
-            if (p->cur != exclude) {
+            if (p->cur != ex) {
                 e = (VtEnt *)(*(u8 **)(p->cur + 4) + 0x2D0);
                 if (*(u16 *)(e->fn(p->cur + e->delta) + 0xB6) & 6) {
                     return 1;
