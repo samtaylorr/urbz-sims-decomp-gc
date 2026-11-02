@@ -1330,6 +1330,16 @@ void *fn_80369988(EMat4Node **self, EMat4Node **other) {
     return self;
 }
 
+void *fn_80369A74(void *arg0) {
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+    M2C_FIELD(arg0, s32 *, 0xC) = 1;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 0x10) = 0;
+    M2C_FIELD(arg0, s32 *, 0x14) = 0;
+    return arg0;
+}
+
 void fn_80369AF4(void *arg0, s32 arg1) {
     void fn_8036A180(void *);
     void fn_802D20E8(void *);
@@ -1379,6 +1389,17 @@ s32 fn_80369C84(void *arg0, s32 arg1) {
 
     fn_8036A04C(arg0, arg1, &sp8);
     return sp8;
+}
+
+void **fn_80369CAC(void *arg0, s32 key) {
+    extern void *fn_8036A0FC(void *, s32, s32);
+    extern void *fn_80369DE4(void *, s32, s32, void *);
+    s32 index = fn_80369B40(arg0, (u8 *)key);
+    void *node = fn_8036A0FC(arg0, index, key);
+    if (node == NULL) {
+        node = fn_80369DE4(arg0, index, key, NULL);
+    }
+    return (void **)((u8 *)node + 0x10);
 }
 
 void fn_8036A180(void *arg0) {
