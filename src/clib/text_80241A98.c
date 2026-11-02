@@ -32,6 +32,14 @@ typedef struct StrFile {
 
 s32 fn_80249390(StrFile *f, const char *fmt, void *ap);
 
+typedef union {
+    struct {
+        s32 high;
+        u32 low;
+    } s;
+    long long ll;
+} DIunion;
+
 void fn_80241B24(void) {
     extern volatile u32 lbl_80440510[];
     extern s32 lbl_803F73B0[];
