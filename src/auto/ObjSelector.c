@@ -21,6 +21,17 @@ void *fn_8016C00C(void *arg0, s32 arg1, u32 arg2) {
     return arg0;
 }
 
+void fn_8016C06C(void *arg0, s32 arg1) {
+    M2C_UNK fn_802D211C();
+    void fn_802D20E8(void *);
+    if (M2C_FIELD(arg0, s32 *, 8) != 0) {
+        fn_802D211C();
+    }
+    if (arg1 & 1) {
+        fn_802D20E8(arg0);
+    }
+}
+
 void fn_8016C0B8(void *arg0) {
     s32 i;
 
@@ -55,6 +66,17 @@ void fn_8016C164(void **obj) {
         char *vt = (char *)*obj;
         (*(void (**)(void *, s32))(vt + 0x64))((char *)obj + *(s16 *)(vt + 0x60), 3);
     }
+}
+
+void *fn_8016C1A4(void **self) {
+    extern u8 lbl_804118F8[];
+    void fn_801B3814(void *, s32, s32);
+    *self = lbl_804118F8;
+    fn_801B3814(self + 1, -1, 0);
+    self[4] = 0;
+    self[5] = 0;
+    self[3] = 0;
+    return self;
 }
 
 s32 fn_8016C258(void) {
@@ -511,6 +533,20 @@ void fn_8016E6FC(void *self, char *obj) {
     M2C_FIELD(self, char **, 4) = obj;
 }
 
+void fn_8016F098(void *arg0, void *arg1, void *arg2) {
+    extern void *lbl_804966F4;
+    void fn_8016E74C(void *, void *, s32, s32, s32);
+    void fn_8016F528(void *, void *);
+    s32 n;
+
+    lbl_804966F4 = arg2;
+    n = fn_8016F500(arg1);
+    fn_8016E74C(arg0, arg2, 0, 0, 1);
+    if (n == fn_8016F500(arg1) && !(M2C_FIELD(arg2, s32 *, 0x44) & 0x10) && (M2C_FIELD(arg2, s32 *, 0x44) & 8)) {
+        fn_8016F528(arg1, arg2);
+    }
+}
+
 s32 fn_8016F120(void) {
     extern s32 lbl_804944E0;
     extern s32 lbl_804966F0;
@@ -546,6 +582,24 @@ s32 fn_8016F500(M2C_UNK **arg0) {
         } while (var_r3 != NULL);
     }
     return var_r9;
+}
+
+void fn_8016F528(void **arg0, void *arg1) {
+    void *fn_8011677C(s32);
+    void **fn_801169A0(void *, void *);
+    void **node;
+    void **tail;
+
+    node = fn_801169A0(fn_8011677C(0x58), arg1);
+    *node = NULL;
+    tail = (void **)arg0[1];
+    if (tail != NULL) {
+        *tail = node;
+        arg0[1] = node;
+    } else {
+        arg0[0] = node;
+        arg0[1] = node;
+    }
 }
 
 void fn_8016F58C(void **arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
