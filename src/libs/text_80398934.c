@@ -2248,6 +2248,35 @@ void fn_8039D508(Pair8Vec *v, Pair8 *pos, u32 n, const Pair8 *x) {
     }
 }
 
+void fn_8039D840(void *arg0, s32 arg1) {
+    extern u8 lbl_8040A7C0[];
+    char *first;
+    char *node;
+    char *next;
+    char *vt;
+    void *heap;
+    void *p;
+
+    first = M2C_FIELD(arg0, char **, 0);
+    M2C_FIELD(arg0, u8 **, 0x30) = lbl_8040A7C0;
+    if (first != NULL) {
+        node = first;
+        do {
+            next = M2C_FIELD(node, char **, 0);
+            if (node != NULL) {
+                vt = M2C_FIELD(node, char **, 0xC);
+                M2C_FIELD(vt, void (**)(void *, s32), 0xC)(node + M2C_FIELD(vt, s16 *, 8), 3);
+            }
+            node = next;
+        } while (node != NULL);
+    }
+    p = M2C_FIELD(arg0, void **, 0xC);
+    fn_802D1A00(fn_802D0AB8(), p);
+    if (arg1 & 1) {
+        fn_802D20E8(arg0);
+    }
+}
+
 void fn_8039D8D8(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x38) = (s32) (M2C_FIELD(arg0, s32 *, 0x38) | 0x10000000);
 }
