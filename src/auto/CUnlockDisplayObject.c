@@ -517,17 +517,24 @@ u32 fn_800BCFBC(const char *src, u16 *dst, u32 n) {
     return i;
 }
 
-void fn_800BD00C(u16 *src, u8 *dst, u32 n) {
+u32 fn_800BD00C(u16 *src, u8 *dst, u32 n) {
     u32 i = 0;
     while (*src != 0 && i < n - 1) {
         *dst++ = *src++;
         i++;
     }
     *dst = 0;
+    return i;
 }
 
 s32 fn_800BD284(void *arg0, void *arg1, void *arg2, void *arg3) {
-    char buf[8];
+    extern void *fn_800F1930(void *, void *);
+    extern void fn_800F2868(void *, s32, s32);
+    extern void *fn_800F1F00(void *, void *, s32, s32);
+    extern void *fn_800F3304(void *);
+    extern void fn_800F1A60(void *, s32);
+    extern s32 fn_800BD3D8(void *, void *, void *, void *);
+    void *buf[2];
     s32 found = 0;
     s32 r;
     fn_800F1930(buf, arg0);
