@@ -1076,6 +1076,24 @@ void fn_80367F88(void *arg0) {
     fn_8036807C(arg0);
 }
 
+void fn_80367FF4(void *arg0) {
+    extern const f32 lbl_803F4FC8[];
+    extern u32 fn_802DE634(s32, s32, s32);
+    void fn_8036807C(void *);
+    s32 n;
+    s32 w;
+    s32 last;
+
+    n = M2C_FIELD(arg0, s32 *, 0x18);
+    M2C_FIELD(arg0, s32 *, 0x14) = n - 2;
+    M2C_FIELD(arg0, s32 *, 0xC) = M2C_FIELD(arg0, s32 *, 0x10) - 1;
+    M2C_FIELD(arg0, f32 *, 0x2C) = lbl_803F4FC8[0];
+    w = fn_802DE634(M2C_FIELD(arg0, s32 *, 0x0), M2C_FIELD(arg0, s32 *, 0x4) + (n - 1) * M2C_FIELD(arg0, s16 *, 0x1C), M2C_FIELD(arg0, s8 *, 0x1E));
+    last = M2C_FIELD(arg0, s32 *, 0xC) - 1;
+    M2C_FIELD(arg0, s32 *, 0x8) = last - w;
+    fn_8036807C(arg0);
+}
+
 void *fn_80368B40(void *arg0) {
     extern char lbl_80401368[];
     M2C_FIELD(arg0, s32 *, 4) = 0;
