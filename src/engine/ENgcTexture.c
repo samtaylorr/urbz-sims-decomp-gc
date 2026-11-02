@@ -1003,7 +1003,7 @@ void fn_80363E44(void **obj) {
 void fn_80363EE0(s32 arg0, s32 arg1) {
     extern s32 fn_802D6A90(void *, void *, void *, void *, s32, void *, void *);
     extern void fn_80363F50(void);
-    extern void fn_80363F78(void);
+    extern void fn_80363F78(void *);
     extern void fn_80363F98(void **);
     extern u8 lbl_80493920[];
     extern u8 lbl_803F4F30[];
