@@ -38,10 +38,17 @@ typedef struct NbhdPath { s32 a; s32 b; char buf[0x104]; } NbhdPath;
 
 static inline NbhdPath *NbhdPath_Init(NbhdPath *p) {
     void fn_800F687C(void *, void *, s32);
-    char *buf = p->buf;
-    s32 n = 0x104;
-    fn_800F687C(p, buf, n);
+    fn_800F687C(p, p->buf, 0x104);
     return p;
+}
+
+static inline void NbhdS16_Clear(s16 *a, s32 n) {
+    s16 *p = a + n - 1;
+    s32 i;
+    for (i = n - 1; i >= 0; i--) {
+        *p = 0;
+        p--;
+    }
 }
 
 void fn_80123160(void) {
