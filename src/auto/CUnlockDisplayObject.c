@@ -280,6 +280,10 @@ f32 *fn_800BBC28(f32 *out, u8 *obj) {
     return out;
 }
 
+void fn_800BBC4C(u8 *arg0, Vec3f *arg1) {
+    *(Vec3f *)(arg0 + 0x54) = *arg1;
+}
+
 void fn_800BBC90(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x38) = arg1;
 }
