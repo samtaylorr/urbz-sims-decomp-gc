@@ -123,7 +123,7 @@ s32 fn_80125014(void *arg0) {
 s16 fn_8012505C(void *self, s16 arg1) {
     while ((u32)arg1 < (u32)(M2C_FIELD(self, s32 **, 0x1B4) - M2C_FIELD(self, s32 **, 0x1B0))) {
         arg1++;
-        if (M2C_FIELD(self, s32 **, 0x1B0)[(u16)arg1 - 1] != 0) {
+        if (M2C_FIELD(self, s32 **, 0x1B0)[(u32)(arg1 - 1)] != 0) {
             return arg1;
         }
     }
@@ -170,18 +170,26 @@ s32 fn_80125D6C(void *arg0, void **arg1) {
 
 s32 fn_80125F28(void *arg0) {
     s32 fn_801224F0(void *);
-    struct { void **begin; void **end; } *v;
-    void **p;
-    s32 count;
+    s32 var_r30;
+    void **var_r31;
+    void *temp_r9;
 
-    count = 0;
-    v = (void *)((char *)arg0 + 0x1B0);
-    for (p = v->begin; p != v->end; p++) {
-        if (*p != NULL && fn_801224F0(*p) != 0) {
-            count++;
+    temp_r9 = (char *)arg0 + 0x1B0;
+    var_r31 = M2C_FIELD(arg0, void ***, 0x1B0);
+    var_r30 = 0;
+    if (var_r31 != M2C_FIELD(temp_r9, void ***, 4)) {
+loop_1:
+        if (*var_r31 != NULL && fn_801224F0(*var_r31) != 0) {
+            var_r30 += 1;
         }
+        var_r31 += 1;
+        if (var_r31 == M2C_FIELD(temp_r9, void ***, 4)) {
+            goto block_6;
+        }
+        goto loop_1;
     }
-    return count;
+block_6:
+    return var_r30;
 }
 
 s32 fn_80125F98(void *arg0, void *arg1) {
@@ -212,6 +220,11 @@ s32 fn_80126110(void *arg0, void *arg1, s32 arg2) {
         f(p + M2C_FIELD(vt, s16 *, 0xA0), arg2);
     }
     return 0;
+}
+
+void fn_80126E8C(char *self, s32 arg1, char *p) {
+    char *vt = *(char **)self;
+    M2C_FIELD(vt, void (**)(void *, s32, void *, void *, void *, void *), 0x84)(self + M2C_FIELD(vt, s16 *, 0x80), arg1, p + 0xC, p + 4, p + 8, p);
 }
 
 s32 fn_80127CA0(void *arg0) {
@@ -269,14 +282,11 @@ void fn_80128074(char *self) {
     void fn_800F68F0(void *, char *, s32);
     extern char lbl_803D86C4[];
     char *vt;
-    struct {
-        s32 unk0;
-        s32 unk4;
-        char buf[0x104];
-    } str;
-    void *p = &str;
-    fn_800F687C(p, str.buf, 0x104);
-    fn_800F68F0(p, lbl_803D86C4, -1);
+    char str[0x110];
+    char *p = str;
+    char *s = lbl_803D86C4;
+    fn_800F687C(p, p + 8, 0x104);
+    fn_800F68F0(p, s, -1);
     vt = *(char **)self;
     (*(void (**)(void *, void *))(vt + 0x2C))(self + *(s16 *)(vt + 0x28), p);
 }
