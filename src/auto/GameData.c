@@ -148,14 +148,14 @@ void fn_80044938(void *self) {
 
 void fn_800449B4(void *self) {
     void *fn_801BFD7C(void *);
-    extern u8 lbl_8041F94C[];
+    extern struct { u8 pad[0xE4]; void *arr[1]; } lbl_8041F94C;
 
     if (M2C_FIELD(self, s32 *, 4) != 0) {
         void *obj;
         void *vt;
         fn_80044938(self);
         ((void (*)(void *))fn_800440B4)(self);
-        obj = fn_801BFD7C(*(void **)(lbl_8041F94C + M2C_FIELD(self, s32 *, 8) * 4 + 0xE4));
+        obj = fn_801BFD7C(lbl_8041F94C.arr[M2C_FIELD(self, s32 *, 8)]);
         vt = M2C_FIELD(obj, void **, 0x44);
         M2C_FIELD(vt, void (**)(void *, s32, s32), 0x3C)((u8 *)obj + M2C_FIELD(vt, s16 *, 0x38), 0, 0x1D);
         M2C_FIELD(self, s32 *, 4) = 0;
@@ -414,9 +414,9 @@ void fn_80048834(void *arg0, f32 arg1) {
     p = (f32 *)((u8 *)arg0 + 0x130);
     p[2] = arg1;
     p[0] = arg1;
+    p[1] = lbl_803C6624[0] / arg1;
     M2C_FIELD(p, s32 *, 0x10) = 1;
     M2C_FIELD(p, s32 *, 0xC) = 0;
-    p[1] = lbl_803C6624[0] / arg1;
     fn_80048900(arg0, lbl_803C6628[0]);
 }
 
