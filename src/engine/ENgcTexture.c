@@ -123,6 +123,21 @@ void fn_8035F8AC(void *arg0, s32 arg1) {
     }
 }
 
+s32 fn_8035FE10(void) {
+    extern Entry_8035F8AC lbl_804753B8[];
+    u32 i;
+
+    fn_8036023C();
+    for (i = 0; i < 2; i++) {
+        if (M2C_FIELD(&lbl_804753B8[i], s32 *, 0) != 0) {
+            fn_803601FC();
+            return 1;
+        }
+    }
+    fn_803601FC();
+    return 0;
+}
+
 void fn_803601FC(void) {
     M2C_UNK fn_80254684(s32);
     extern s32 lbl_804962E0;
@@ -1047,9 +1062,17 @@ void *fn_80363C08(void *arg0) {
     V3 b;
     V3 a;
     V3 t;
+    s32 *d;
+    s32 x, y, z;
 
     t.x = t.y = t.z = lbl_803F4F20[0];
-    a = t;
+    d = (s32 *)&a;
+    x = ((s32 *)&t)[0];
+    y = ((s32 *)&t)[1];
+    z = ((s32 *)&t)[2];
+    d[0] = x;
+    d[1] = y;
+    d[2] = z;
     b = a;
     fn_802C4D24(&b);
     fn_802C5070(&b, arg0);
@@ -1086,14 +1109,22 @@ void *fn_80363D2C(void *arg0) {
     extern f32 lbl_803F4F40[];
     Obj *p = (Obj *)arg0;
     V3 t;
+    s32 *d;
+    s32 x, y, z;
 
     p->vt = lbl_8041D738;
     t.x = t.y = t.z = lbl_803F4F40[0];
-    p->b = t;
+    d = (s32 *)&p->b;
+    x = ((s32 *)&t)[0];
+    y = ((s32 *)&t)[1];
+    z = ((s32 *)&t)[2];
+    d[0] = x;
+    d[1] = y;
+    d[2] = z;
     p->a = p->b;
-    p->d = 0;
-    p->c = 0;
     p->e = 0;
+    p->c = 0;
+    p->d = 0;
     return arg0;
 }
 
