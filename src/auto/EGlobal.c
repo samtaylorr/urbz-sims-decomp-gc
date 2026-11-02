@@ -410,6 +410,23 @@ void fn_8004DDE0(char *self) {
     (*(void (**)(char *, s32, s32))(vt + 0x1C))(self + *(s16 *)(vt + 0x18), 0, 0x2B);
 }
 
+void fn_8004DE1C(char *self, s32 idx, s32 a, s32 b, s32 c, s32 d) {
+    if (c != 0) {
+        char *obj = ((struct { u8 pad[0x148]; char *a[1]; } *)self)->a[idx];
+        char *vt = *(char **)(obj + 0x44);
+        (*(void (**)(char *, s32))(vt + 0x94))(obj + *(s16 *)(vt + 0x90), c);
+    } else if (d != 0) {
+        char *obj = ((struct { u8 pad[0x148]; char *a[1]; } *)self)->a[idx];
+        char *vt = *(char **)(obj + 0x44);
+        (*(void (**)(char *, s32))(vt + 0x9C))(obj + *(s16 *)(vt + 0x98), d);
+    }
+    {
+        char *obj = ((struct { u8 pad[0x148]; char *a[1]; } *)self)->a[idx];
+        char *vt = *(char **)(obj + 0x44);
+        (*(void (**)(char *, s32, s32))(vt + 0xBC))(obj + *(s16 *)(vt + 0xB8), a, b);
+    }
+}
+
 s32 fn_8004E644(void) {
     return 0;
 }
