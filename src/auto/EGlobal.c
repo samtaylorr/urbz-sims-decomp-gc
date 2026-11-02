@@ -262,6 +262,24 @@ void fn_8004C614(void) {
 
 }
 
+s32 fn_8004C81C(void *arg0, s32 arg1) {
+    s32 *arr;
+    s32 count;
+    s32 i;
+
+    arr = *M2C_FIELD(arg0, s32 **, 0x104);
+    count = 0;
+    if (arr != NULL) {
+        count = arr[-1];
+    }
+    for (i = 0; i < count; i++) {
+        if (*arr++ == arg1) {
+            return i;
+        }
+    }
+    return 0;
+}
+
 void fn_8004C864(void *arg0) {
     M2C_FIELD(arg0, void **, 0xD4) = fn_8032421C(EGlobal_Alloc(0x4D140));
 }
@@ -287,6 +305,28 @@ s32 fn_8004C960(void *arg0, s32 arg1, s32 arg2) {
         return arg2 == M2C_FIELD(arg0, s32 *, 0xDC);
     }
     return arg2 == M2C_FIELD(arg0, s32 *, 0xD8);
+}
+
+s32 fn_8004CB8C(void *arg0, void *arg1, void *arg2, s32 arg3) {
+    s32 i;
+    s32 count;
+
+    if (arg3 != 0) {
+        {
+            char *vt = *(char **)arg2;
+            count = M2C_FIELD(vt, s32 (**)(void *), 0x2C)((char *)arg2 + M2C_FIELD(vt, s16 *, 0x28));
+        }
+        for (i = 0; i < count; i++) {
+            char *vt = *(char **)arg2;
+            char *vt1 = *(char **)arg1 + 0xE8;
+            char *o = (char *)arg1 + *(s16 *)vt1;
+            s32 *item = M2C_FIELD(vt, s32 *(**)(void *, s32), 0x34)((char *)arg2 + M2C_FIELD(vt, s16 *, 0x30), i);
+            if ((*(s32 (**)(void *, s32))(vt1 + 4))(o, *item) == arg3) {
+                return i;
+            }
+        }
+    }
+    return -1;
 }
 
 void fn_8004D3A8(void *arg0) {
