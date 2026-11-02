@@ -416,36 +416,29 @@ static inline void fn_80048834_SetSpeed(void *arg0, f32 speed, s32 a, s32 b, f32
     p[1] = num / speed;
 }
 
+static inline void fn_80048834_SetSpeedRate(void *arg0, f32 speed, s32 a, s32 b, f32 num, f32 rate) {
+    f32 *p = (f32 *)((u8 *)arg0 + 0x130);
+    p[2] = speed;
+    p[0] = speed;
+    M2C_FIELD(p, s32 *, 0x10) = a;
+    M2C_FIELD(p, s32 *, 0xC) = b;
+    p[1] = num / speed;
+    fn_80048900(arg0, rate);
+}
+
 void fn_80048834(void *arg0, f32 arg1) {
     extern f32 lbl_803C6624[];
-    extern f32 lbl_803C6628[];
-    f32 *p;
-    f32 d, c;
+    extern const f32 lbl_803C6628[];
     fn_80048770(arg0, 0);
-    d = lbl_803C6628[0];
-    c = lbl_803C6624[0];
-    p = (f32 *)((u8 *)arg0 + 0x130);
-    p[2] = arg1;
-    p[0] = arg1;
-    M2C_FIELD(p, s32 *, 0x10) = 1;
-    M2C_FIELD(p, s32 *, 0xC) = 0;
-    p[1] = c / arg1;
-    fn_80048900(arg0, d);
+    fn_80048834_SetSpeed(arg0, arg1, 1, 0, lbl_803C6624[0]);
+    fn_80048900(arg0, lbl_803C6628[0]);
 }
 
 void fn_800488AC(void *arg0, f32 arg1) {
     extern f32 lbl_803C662C[];
-    extern f32 lbl_803C6630[];
-    f32 *p;
-    f32 d = lbl_803C6630[0];
-    f32 c = lbl_803C662C[0];
-    p = (f32 *)((u8 *)arg0 + 0x130);
-    p[2] = arg1;
-    p[0] = arg1;
-    M2C_FIELD(p, s32 *, 0x10) = 1;
-    M2C_FIELD(p, s32 *, 0xC) = 1;
-    p[1] = c / arg1;
-    fn_80048900(arg0, d);
+    extern const f32 lbl_803C6630[];
+    fn_80048834_SetSpeed(arg0, arg1, 1, 1, lbl_803C662C[0]);
+    fn_80048900(arg0, lbl_803C6630[0]);
 }
 
 void fn_800489CC(void *arg0, f32 arg1) {
