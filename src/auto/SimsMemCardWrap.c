@@ -99,6 +99,14 @@ s32 fn_800A513C(s32 arg0) {
     return (*(s32 (**)(void *, s32))(vt + 0x6C))(obj + *(s16 *)(vt + 0x68), arg0);
 }
 
+s32 fn_800A5178(s32 arg0) {
+    extern char *lbl_80495060;
+    extern s32 lbl_80494460;
+    char *obj = lbl_80495060;
+    char *vt = *(char **)obj;
+    return (*(s32 (**)(void *, s32, s32, s32))(vt + 0x5C))(obj + *(s16 *)(vt + 0x58), lbl_80494460, arg0, 0);
+}
+
 void fn_800A51BC(void) {
 
 }
