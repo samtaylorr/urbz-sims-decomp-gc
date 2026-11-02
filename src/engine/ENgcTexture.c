@@ -64,6 +64,12 @@ s32 fn_80360468(u8 v) {
     return r;
 }
 
+void fn_80360E74(void *self) {
+    u8 *obj = *(u8 **)((u8 *)self + 0x28);
+    u8 *vt = *(u8 **)(obj + 0x24);
+    (*(void (**)(void *))(vt + 0x1C))(obj + *(s16 *)(vt + 0x18));
+}
+
 s32 fn_80361238(void *arg0) {
     return M2C_FIELD(M2C_FIELD(arg0, void **, 0x28), s32 *, 0x70);
 }
@@ -97,6 +103,26 @@ void fn_803613DC(s32 arg0) {
     void fn_80338184(void *, s32);
     extern u8 lbl_8045BAE8[];
     fn_80338184(lbl_8045BAE8, arg0);
+}
+
+void fn_80361408(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    extern u8 lbl_8041D138[];
+    extern void fn_8036F020(void *);
+    extern void fn_802CA9A8(void *);
+    u8 *self = arg0;
+    fn_8036F020(self);
+    *(u8 **)(self + 0x24) = lbl_8041D138;
+    fn_802CA9A8(self + 0x28);
+    *(s32 *)(self + 0x70) = arg1;
+    *(u8 *)(self + 0x7C) = arg2;
+    *(u8 *)(self + 0x7D) = arg3;
+    *(s32 *)(self + 0x90) = 0;
+    *(s32 *)(self + 0x44) = 0;
+    *(s32 *)(self + 0x68) = 0;
+    *(s32 *)(self + 0x6C) = 0;
+    *(s32 *)(self + 0x74) = 0;
+    *(s32 *)(self + 0x78) = 0;
+    *(s32 *)(self + 0x80) = 0;
 }
 
 void fn_80361568(u8 *self, s32 arg1) {
@@ -607,20 +633,21 @@ void fn_80363540(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     u32 *src = (u32 *)arg0;
     s32 bw = arg1 / 8;
     s32 bh = arg2 / 4;
+    s32 stride = bw * 8;
     s32 y;
     s32 x;
     s32 i;
     for (y = 0; y < bh; y++) {
-        u32 *row = (u32 *)arg3 + y * bw * 8;
+        u8 *row = (u8 *)arg3 + y * bw * 32;
         for (x = 0; x < bw; x++) {
-            u32 *p = row;
+            u8 *p = row;
             for (i = 0; i < 4; i++) {
-                p[0] = src[0];
-                p[1] = src[1];
+                ((u32 *)p)[0] = src[0];
+                ((u32 *)p)[1] = src[1];
                 src += 2;
-                p += bw * 2;
+                p += stride;
             }
-            row += 2;
+            row += 8;
         }
     }
 }
@@ -635,12 +662,13 @@ void fn_80363724(void) {
     lbl_804962E8 = lbl_80493D04;
 }
 
-void fn_80363734(s32 *arg0, s32 arg1) {
+s32 *fn_80363734(s32 *arg0, s32 arg1) {
     arg0[0] = 0;
     arg0[2] = 1;
     arg0[4] = arg1 * 2;
     arg0[1] = 0;
     arg0[3] = arg1;
+    return arg0;
 }
 
 void fn_80363918(void) {
