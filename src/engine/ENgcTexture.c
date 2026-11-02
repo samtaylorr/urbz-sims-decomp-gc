@@ -133,6 +133,12 @@ void fn_80361268(void *self) {
     (*(void (**)(void *))(vt + 0x94))(obj + *(s16 *)(vt + 0x90));
 }
 
+void fn_803612A0(void *self) {
+    u8 *obj = *(u8 **)((u8 *)self + 0x28);
+    u8 *vt = *(u8 **)(obj + 0x24);
+    (*(void (**)(void *))(vt + 0x9C))(obj + *(s16 *)(vt + 0x98));
+}
+
 void fn_80361360(u8 *self) {
     u8 *obj;
     u8 *vtbl;
