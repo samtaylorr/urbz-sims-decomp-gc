@@ -477,6 +477,16 @@ M2C_UNK *fn_8016CEF4(void *arg0) {
     return var_r3;
 }
 
+void fn_8016CF48(void *arg0, s32 arg1) {
+    void *fn_802D1FC8(s32);
+    void *fn_800F160C(void *);
+    void fn_800F1AA0(void *, s32);
+    if (M2C_FIELD(arg0, void **, 0x88) == NULL) {
+        M2C_FIELD(arg0, void **, 0x88) = fn_800F160C(fn_802D1FC8(4));
+    }
+    fn_800F1AA0(M2C_FIELD(arg0, void **, 0x88), arg1);
+}
+
 void fn_8016D218(void *arg0, s32 arg1) {
     extern char *lbl_80495050;
     extern char lbl_8045BA40[];
