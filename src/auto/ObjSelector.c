@@ -444,6 +444,16 @@ M2C_UNK *fn_8016CE24(void *arg0) {
     return var_r3;
 }
 
+void fn_8016CE78(void *arg0, s32 arg1) {
+    void *fn_802D1FC8(s32);
+    void *fn_800F160C(void *);
+    void fn_800F1AA0(void *, s32);
+    if (M2C_FIELD(arg0, void **, 0x84) == NULL) {
+        M2C_FIELD(arg0, void **, 0x84) = fn_800F160C(fn_802D1FC8(4));
+    }
+    fn_800F1AA0(M2C_FIELD(arg0, void **, 0x84), arg1);
+}
+
 extern s32 lbl_80495C80;
 void fn_8016CECC(void) {
     fn_800F1A60((s32)&lbl_80495C80, 2);
@@ -469,7 +479,7 @@ void fn_8016D218(void *arg0, s32 arg1) {
             M2C_FIELD(vt, void (**)(void *, s32), 0xAC)(lbl_80495050 + M2C_FIELD(vt, s16 *, 0xA8), cur);
         }
     } else {
-        M2C_FIELD(arg0, void *volatile *, 0x94) = fn_8032E230(fn_80338000(lbl_8045BA40, 0x78, 4));
+        M2C_FIELD(arg0, void **, 0x94) = fn_8032E230(fn_80338000(lbl_8045BA40, 0x78, 4));
         fn_8032EBA4(M2C_FIELD(arg0, void *volatile *, 0x94), arg1);
     }
 }
@@ -589,12 +599,13 @@ void fn_8016DCC0(void *arg0) {
     void fn_800FB720(void *);
     s16 i;
 
-    for (i = 0; i <= 3; i++) {
-        void *p = ((struct { u8 pad[0x40]; void *a[1]; } *)arg0)->a[i];
-        if (p != NULL) {
-            fn_800FB720(p);
+    for (i = 0; i < 4; i++) {
+        if (((struct { u8 pad[0x40]; void *a[1]; } *)arg0)->a[i] != NULL) {
+            fn_800FB720(((struct { u8 pad[0x40]; void *a[1]; } *)arg0)->a[i]);
+            ((struct { u8 pad[0x40]; void *a[1]; } *)arg0)->a[i] = NULL;
+        } else {
+            ((struct { u8 pad[0x40]; void *a[1]; } *)arg0)->a[i] = NULL;
         }
-        ((struct { u8 pad[0x40]; void *a[1]; } *)arg0)->a[i] = NULL;
     }
 }
 
