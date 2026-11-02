@@ -188,6 +188,46 @@ s32 fn_800A4CBC(s32 arg0, s32 *arg1) {
     return (*(s32 (**)(void *, s32, s32, s32 *))(vt + 0xCC))(obj + *(s16 *)(vt + 0xC8), lbl_80494460, arg0, arg1);
 }
 
+s32 fn_800A4D00(s32 arg0, s32 *arg1) {
+    extern char *lbl_80495060;
+    extern s32 lbl_80494460;
+    char *obj = lbl_80495060;
+    char *vt = *(char **)obj;
+    s32 a;
+    s32 b;
+    s32 r;
+
+    r = (*(s32 (**)(void *, s32, s32, s32 *))(vt + 0xCC))(obj + *(s16 *)(vt + 0xC8), lbl_80494460, arg0, &a);
+    if (r != 1) {
+        return r;
+    }
+    if (a != 0) {
+        b = 1;
+        r = fn_8012BAAC(lbl_80494460, arg0, &b);
+        if (r != 1) {
+            return r;
+        }
+        if (b == 0) {
+            *arg1 = 0;
+            return 1;
+        }
+    }
+    if (a != 0) {
+        *arg1 = 1;
+    } else {
+        *arg1 = 0;
+    }
+    return 1;
+}
+
+s32 fn_800A4DBC(s32 arg0, s32 *arg1) {
+    extern s32 lbl_80494460;
+    s32 b = 1;
+    s32 r = fn_8012BAAC(lbl_80494460, arg0, &b);
+    *arg1 = b ^ 1;
+    return r;
+}
+
 s32 fn_8012BAAC(s32, u8, s32 *);
 void fn_803445D8(void *, s32, s32, s32 *);
 s32 fn_800A51C0(void);
