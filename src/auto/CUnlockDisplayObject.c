@@ -139,6 +139,17 @@ void fn_800BA12C(void *arg0, f32 farg0, f32 farg1, f32 farg2) {
     M2C_FIELD(arg0, f32 *, 0x48C) = farg2;
 }
 
+void fn_800BACA4(void *arg0, s32 arg1, f32 x, f32 y, f32 z) {
+    if (arg1 <= 2) {
+        CUnlockVec3 v;
+        if (arg1 + 1 > M2C_FIELD(arg0, s32 *, 0x428)) {
+            M2C_FIELD(arg0, s32 *, 0x428) = arg1 + 1;
+        }
+        CUnlockVec3_Set(&v, x, y, z);
+        ((CUnlockVec3 *)((char *)arg0 + 0x360))[arg1 * 2] = v;
+    }
+}
+
 s32 fn_800BAD38(u8 *self) {
     void **n;
     s32 res = 1;
