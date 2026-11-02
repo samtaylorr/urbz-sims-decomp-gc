@@ -16,12 +16,6 @@ static inline SMCVec3 *SMCVec3_Copy(SMCVec3 *d, const SMCVec3 *s) {
     return d;
 }
 
-static inline void SMCVec3_Set3(f32 *v, f32 x, f32 y, f32 z) {
-    v[0] = x;
-    v[1] = y;
-    v[2] = z;
-}
-
 extern s32 lbl_80495930;
 extern f32 lbl_803CE168[];
 extern f32 lbl_80494320;
@@ -202,21 +196,17 @@ s32 fn_800A4D00(s32 arg0, s32 *arg1) {
         return r;
     }
     if (a != 0) {
-        b = 1;
+        b = r;
         r = fn_8012BAAC(lbl_80494460, arg0, &b);
         if (r != 1) {
             return r;
         }
         if (b == 0) {
-            *arg1 = 0;
+            *arg1 = b;
             return 1;
         }
     }
-    if (a != 0) {
-        *arg1 = 1;
-    } else {
-        *arg1 = 0;
-    }
+    *arg1 = a != 0;
     return 1;
 }
 
@@ -903,10 +893,20 @@ void fn_800AAE14(void *self, f32 *a, f32 *b, f32 *c) {
     extern f32 lbl_803CE4C0[];
     extern f32 lbl_803CE4C4[];
     extern f32 lbl_803CE4C8[];
+    f32 a1 = lbl_803CE4B4[0];
+    f32 a0 = lbl_803CE4B0[0];
+    f32 b2 = lbl_803CE4C4[0];
+    f32 b0 = lbl_803CE4BC[0];
+    f32 b1 = lbl_803CE4C0[0];
 
-    SMCVec3_Set3(a, lbl_803CE4B0[0], lbl_803CE4B4[0], lbl_803CE4B8[0]);
-    SMCVec3_Set3(b, lbl_803CE4BC[0], lbl_803CE4C0[0], lbl_803CE4C4[0]);
-    SMCVec3_Set3(c, lbl_803CE4C8[0], lbl_803CE4C8[0], lbl_803CE4C4[0]);
+    a[2] = lbl_803CE4B8[0];
+    a[0] = a0;
+    a[1] = a1;
+    b[0] = b0;
+    b[1] = b1;
+    b[2] = b2;
+    c[2] = b2;
+    c[0] = c[1] = lbl_803CE4C8[0];
 }
 
 void fn_800AAE74(void) {
