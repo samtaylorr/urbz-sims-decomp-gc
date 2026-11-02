@@ -246,6 +246,10 @@ void *fn_8016C8BC(void *arg0) {
     return arg0;
 }
 
+s32 fn_8016CC2C(void *arg0, void *arg1) {
+    return M2C_FIELD(arg0, s32 *, 4) == M2C_FIELD(arg1, s32 *, 4);
+}
+
 s32 fn_8016CCE0(void *arg0) {
     return M2C_FIELD(M2C_FIELD(arg0, void **, 0x38), s32 *, 0x1C);
 }
