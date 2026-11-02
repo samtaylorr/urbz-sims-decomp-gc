@@ -158,17 +158,19 @@ s32 fn_80360468(u8 v) {
 u32 fn_80360948(s32 arg0, u32 arg1, s32 arg2, u32 arg3, void *arg4) {
     void fn_80360750(void *);
     void fn_803608C0(void *);
+    u32 r;
 
     if (!(M2C_FIELD(arg4, u32 *, 0x74) & 0x200000)) {
-        if (arg1 + arg3 < M2C_FIELD(arg4, u32 *, 0x70) / 2) {
-            return 0;
+        r = 0;
+        if (arg1 + arg3 >= M2C_FIELD(arg4, u32 *, 0x70) / 2) {
+            fn_80360750(arg4);
+            r = M2C_FIELD(arg4, u32 *, 0x70) / 2;
         }
-        fn_80360750(arg4);
-        return M2C_FIELD(arg4, u32 *, 0x70) / 2;
     } else {
         fn_803608C0(arg4);
-        return 0;
+        r = 0;
     }
+    return r;
 }
 
 s32 fn_803609B4(void *arg0) {
@@ -176,7 +178,7 @@ s32 fn_803609B4(void *arg0) {
     u32 i;
 
     for (i = 0; i < 2; i++) {
-        if (M2C_FIELD(&lbl_804753B8[i], s32 *, 0) != 0 && lbl_804753B8[i].unk4 == arg0) {
+        if (M2C_FIELD(&lbl_804753B8[i], s32 *, 0) != 0 && arg0 == lbl_804753B8[i].unk4) {
             return i;
         }
     }
