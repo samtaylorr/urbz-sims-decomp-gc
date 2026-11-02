@@ -355,6 +355,26 @@ void fn_8004D9FC(void *self, s32 arg1) {
     fn_8001E408(lbl_8041ED64, arg1, 1);
 }
 
+s32 fn_8004DA28(void *arg0, void *arg1) {
+    extern char *lbl_80496668;
+    s32 fn_8016CCE0(void *);
+    void fn_8003E274(void *);
+    char *g = lbl_80496668;
+    char *vt = *(char **)g + 0xE8;
+    char *o = g + *(s16 *)vt;
+    void ***r;
+
+    r = (*(void ***(**)(void *, s32))(vt + 4))(o, fn_8016CCE0(arg1));
+    if (r != NULL) {
+        void *p = M2C_FIELD(**r, void **, 0x18);
+        if (p != NULL) {
+            fn_8003E274(p);
+            return 1;
+        }
+    }
+    return 0;
+}
+
 void fn_8004DAA8(char **self) {
     char *obj = *self;
     char *vt = *(char **)(obj + 0x1C);
