@@ -1130,8 +1130,8 @@ void fn_80367F88(void *arg0) {
     void fn_8036807C(void *);
 
     M2C_FIELD(arg0, s32 *, 0x14) = 0;
-    M2C_FIELD(arg0, f32 *, 0x2C) = lbl_803F4FC4[0];
     M2C_FIELD(arg0, s32 *, 0x8) = 0;
+    M2C_FIELD(arg0, f32 *, 0x2C) = lbl_803F4FC4[0];
     M2C_FIELD(arg0, s32 *, 0xC) = fn_802DE634(M2C_FIELD(arg0, s32 *, 0x0), M2C_FIELD(arg0, s32 *, 0x4) + M2C_FIELD(arg0, s16 *, 0x1C), M2C_FIELD(arg0, s8 *, 0x1E)) + 1;
     fn_8036807C(arg0);
 }
@@ -1826,9 +1826,8 @@ void fn_8036A354(void *arg0) {
     fn_80369B8C(arg0, M2C_FIELD(arg0, s32 *, 0xC) << 1);
     for (n = M2C_FIELD(arg0, void **, 0); n != NULL; n = M2C_FIELD(n, void **, 4)) {
         s32 index = fn_80369B40(arg0, M2C_FIELD(n, u8 **, 0xC));
-        void **table = M2C_FIELD(arg0, void ***, 8);
-        M2C_FIELD(n, void **, 8) = table[index];
-        table[index] = n;
+        M2C_FIELD(n, void **, 8) = M2C_FIELD(arg0, void ***, 8)[index];
+        M2C_FIELD(arg0, void ***, 8)[index] = n;
     }
 }
 
