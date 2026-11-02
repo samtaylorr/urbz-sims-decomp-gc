@@ -79,6 +79,18 @@ void *fn_8016C1A4(void **self) {
     return self;
 }
 
+void fn_8016C1FC(void *arg0, s32 arg1) {
+    extern char lbl_804118F8[];
+    extern char lbl_80411998[];
+    void fn_802D20E8(void *);
+    M2C_FIELD(arg0, void **, 0x0) = lbl_804118F8;
+    fn_802D20E8(M2C_FIELD(arg0, void **, 0x10));
+    M2C_FIELD(arg0, void **, 0x0) = lbl_80411998;
+    if (arg1 & 1) {
+        fn_802D20E8(arg0);
+    }
+}
+
 s32 fn_8016C258(void) {
     return 1;
 }
