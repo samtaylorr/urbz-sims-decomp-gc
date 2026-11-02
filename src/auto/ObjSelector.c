@@ -781,6 +781,19 @@ void *fn_8016DDDC(void *arg0) {
     return M2C_FIELD(arg0, void **, 0x48);
 }
 
+void *fn_8016DE3C(void *arg0) {
+    char *fn_800FB6F8(void);
+
+    if (M2C_FIELD(arg0, void **, 0x4C) == NULL) {
+        char *obj = fn_800FB6F8();
+        char *vt;
+        M2C_FIELD(arg0, void **, 0x4C) = obj;
+        vt = *(char **)obj;
+        M2C_FIELD(vt, void (**)(void *, s32, s32), 0x14)(obj + M2C_FIELD(vt, s16 *, 0x10), M2C_FIELD(arg0, s32 *, 4), 0x84);
+    }
+    return M2C_FIELD(arg0, void **, 0x4C);
+}
+
 extern s32 lbl_80495C88;
 void fn_8016E5DC(void) {
     fn_800F1A60((s32)&lbl_80495C88, 2);
