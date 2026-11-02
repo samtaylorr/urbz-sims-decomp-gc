@@ -823,6 +823,16 @@ void fn_8018DA88(void *arg0, s32 *arg1, s32 arg2) {
     }
 }
 
+void fn_8018DD40(void *arg0) {
+    void fn_8018D56C(void *);
+    if (M2C_FIELD(arg0, s32 *, 0x18) != 0) {
+        fn_8018D56C(arg0);
+    }
+    if (M2C_FIELD(arg0, s32 *, 0xC) == 0) {
+        M2C_FIELD(arg0, s32 *, 0x8) = M2C_FIELD(arg0, s32 *, 0x2C);
+    }
+}
+
 void fn_8018E9F4(char *arg0) {
     void fn_800F80B4(void *);
     *(u8 *)arg0 = 1;
