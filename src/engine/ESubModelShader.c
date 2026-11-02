@@ -13,8 +13,8 @@ static inline s32 ListCount(u8 *list) {
     return *(s32 *)(list + 4);
 }
 
-static inline s32 ListInRange(u8 *list, s32 i) {
-    return i < *(s32 *)(list + 4);
+static inline u8 *ShaderAt(u8 *list, s32 i) {
+    return *(u8 **)list + i * 0x6C;
 }
 
 void *fn_802FFD98(void *arg0) {
