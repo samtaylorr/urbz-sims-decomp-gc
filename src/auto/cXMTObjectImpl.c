@@ -175,12 +175,12 @@ s32 fn_8011CD90(void *arg0) {
     char *p;
     char *vt;
 
-    if (arg0 == NULL) {
-        return 0;
+    if (arg0 != NULL) {
+        p = M2C_FIELD(arg0, char **, 4);
+        vt = M2C_FIELD(p, char **, 4);
+        return ((s32 (*)(void *))M2C_FIELD(vt, void **, 0x5C))(p + M2C_FIELD(vt, s16 *, 0x58));
     }
-    p = M2C_FIELD(arg0, char **, 4);
-    vt = M2C_FIELD(p, char **, 4);
-    return ((s32 (*)(void *))M2C_FIELD(vt, void **, 0x5C))(p + M2C_FIELD(vt, s16 *, 0x58));
+    return 0;
 }
 
 void fn_8011CECC(void *arg0, s32 arg1) {
