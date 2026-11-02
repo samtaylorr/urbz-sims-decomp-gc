@@ -388,6 +388,18 @@ u8 fn_80331378(void *arg0) {
     return (u8) ((M2C_FIELD(arg0, u8 *, 0x72) * 4) + (M2C_FIELD(arg0, u8 *, 0x73) / 15));
 }
 
+void fn_803313A0(void *self) {
+    u8 *obj = *(u8 **)((u8 *)self + 0x20);
+    u8 *vt = *(u8 **)(obj + 0xF0);
+    (*(void (**)(void *))(vt + 0x14))(obj + *(s16 *)(vt + 0x10));
+}
+
+void fn_803313D8(void *self) {
+    u8 *obj = *(u8 **)((u8 *)self + 0x20);
+    u8 *vt = *(u8 **)(obj + 0xF0);
+    (*(void (**)(void *))(vt + 0x1C))(obj + *(s16 *)(vt + 0x18));
+}
+
 s32 fn_80331410(void *arg0) {
     void *temp_r9;
 
