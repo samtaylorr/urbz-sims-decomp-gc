@@ -180,6 +180,46 @@ void fn_8028CE18(void *arg0) {
     M2C_FIELD(arg0, void **, 4) = temp_r0_2;
 }
 
+void fn_8028CEF8(void *arg0, void *arg1, char *arg2, s32 arg3) {
+    AptAnimCmd *next;
+
+    next = (AptAnimCmd *)((s32)M2C_FIELD(arg0, AptAnimCmd **, 8) + 0x14);
+    if ((s32)next == M2C_FIELD(arg0, s32 *, 0) + M2C_FIELD(arg0, s32 *, 0x1290) * 0x14) {
+        next = M2C_FIELD(arg0, AptAnimCmd **, 0);
+    }
+    if ((s32)next != M2C_FIELD(arg0, s32 *, 4)) {
+        char *vt;
+        M2C_FIELD(arg0, AptAnimCmd **, 8)->type = 0;
+        M2C_FIELD(arg0, AptAnimCmd **, 8)->unk8 = M2C_FIELD(M2C_FIELD(arg2, char **, 0x50), s32 *, 0x28);
+        M2C_FIELD(arg0, AptAnimCmd **, 8)->unkC = arg1;
+        M2C_FIELD(arg0, AptAnimCmd **, 8)->obj = arg2;
+        vt = M2C_FIELD(arg2, char **, 4);
+        (*(void (**)(void *))(vt + 0xC))(arg2 + *(s16 *)(vt + 8));
+        M2C_FIELD(arg0, AptAnimCmd **, 8)->unk4 = arg3;
+        M2C_FIELD(arg0, AptAnimCmd **, 8) = next;
+    }
+}
+
+void fn_8028CFA0(void *arg0, void *arg1, char *arg2, s32 arg3) {
+    AptAnimCmd *prev;
+
+    prev = M2C_FIELD(arg0, AptAnimCmd **, 4) - 1;
+    if (prev < M2C_FIELD(arg0, AptAnimCmd **, 0)) {
+        prev = M2C_FIELD(arg0, AptAnimCmd **, 0) + M2C_FIELD(arg0, s32 *, 0x1290) - 1;
+    }
+    if ((s32)prev != M2C_FIELD(arg0, s32 *, 8)) {
+        char *vt;
+        M2C_FIELD(arg0, AptAnimCmd **, 4) = prev;
+        prev->unk8 = M2C_FIELD(M2C_FIELD(arg2, char **, 0x50), s32 *, 0x28);
+        M2C_FIELD(arg0, AptAnimCmd **, 4)->type = 0;
+        M2C_FIELD(arg0, AptAnimCmd **, 4)->unkC = arg1;
+        M2C_FIELD(arg0, AptAnimCmd **, 4)->obj = arg2;
+        vt = M2C_FIELD(arg2, char **, 4);
+        (*(void (**)(void *))(vt + 0xC))(arg2 + *(s16 *)(vt + 8));
+        M2C_FIELD(arg0, AptAnimCmd **, 4)->unk4 = arg3;
+    }
+}
+
 void fn_8028D378(void *arg0) {
     s32 i;
 
