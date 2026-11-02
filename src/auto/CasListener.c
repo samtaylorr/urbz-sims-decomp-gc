@@ -35,6 +35,10 @@ void fn_801B7C94(void) {
 
 typedef struct { s16 delta; s16 idx; s32 (*fn)(void *, s32); } CasVtEnt2;
 
+static inline u16 CasReadU16(u16 **pp) {
+    return **pp;
+}
+
 extern u8 *lbl_80496654;
 extern void fn_801910C8(void *, s32, u16 **, void *, void *, void *);
 typedef struct { void *a; u8 *cur; s32 b; s32 c; } CasIter;
@@ -249,7 +253,6 @@ s32 fn_801BD6DC(s32 arg0) {
     typedef struct { s16 delta; s16 idx; void (*fn)(void *, void *, s32); } VtEnt2;
     extern u8 *lbl_80496658;
     extern u8 *lbl_80496654;
-    extern void fn_801910C8(void *, s32, u16 **, void *, void *, void *);
     extern s32 fn_801A08DC(void *, s32);
     extern void fn_801A0858(void *, s32);
     u8 *obj = lbl_80496658;
@@ -268,7 +271,7 @@ s32 fn_801BD6DC(s32 arg0) {
         return 0;
     }
     if (ret == 0xFFFB) {
-        fn_801910C8(lbl_80496654, arg0, &a, &b, &c, &d);
+        ((void *(*)(void *, s32, u16 **, void *, void *, void *))fn_801910C8)(lbl_80496654, arg0, &a, &b, &c, &d);
         {
             VtEnt2 *e = (VtEnt2 *)(*(u8 **)obj + 0xA8);
             e->fn(buf, obj + e->delta, arg0);
@@ -276,8 +279,11 @@ s32 fn_801BD6DC(s32 arg0) {
         if (fn_801A08DC(buf, 0x20) == 0) {
             fn_801A08DC(buf, 0x10);
         }
-        ret = *a;
-        fn_801A0858(buf, 2);
+        {
+            u16 *p = a;
+            ret = *p;
+            fn_801A0858(buf, 2);
+        }
     }
     return ret;
 }
