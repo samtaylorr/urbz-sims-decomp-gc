@@ -34,6 +34,13 @@ static inline void NbhdPair_Init(NbhdPair *p) {
     p->b = 0;
 }
 
+typedef struct NbhdPath { s32 a; s32 b; char buf[0x104]; } NbhdPath;
+
+static inline void NbhdPath_Init(NbhdPath *p) {
+    void fn_800F687C(void *, void *, s32);
+    fn_800F687C(p, p->buf, 0x104);
+}
+
 void fn_80123160(void) {
     M2C_UNK fn_801234B4();
     M2C_UNK fn_802D1FC8(M2C_UNK);
@@ -71,7 +78,6 @@ void *fn_801234B4(void *self) {
     extern u8 lbl_8040FD60[];
     void fn_800F687C(void *, void *, s32);
     void fn_800F6FB4(void *, void *, s32);
-    typedef struct { s32 a; s32 b; } Pair;
     s16 *p;
     s32 i;
 
@@ -80,13 +86,11 @@ void *fn_801234B4(void *self) {
     fn_800F6FB4((char *)self + 0x110, (char *)self + 0x118, 0x20);
     M2C_FIELD(self, s32 *, 0x158) = 0;
     M2C_FIELD(self, s32 *, 0x15C) = 0;
-    ((Pair *)((char *)self + 0x160))->b = 0;
-    ((Pair *)((char *)self + 0x1B0))->a = 0;
-    ((Pair *)((char *)self + 0x1B0))->b = 0;
-    ((Pair *)((char *)self + 0x1B8))->b = 0;
-    ((Pair *)((char *)self + 0x1C0))->a = 0;
-    ((Pair *)((char *)self + 0x1C0))->b = 0;
-    ((Pair *)((char *)self + 0x1C8))->b = 0;
+    NbhdPair_InitB((NbhdPair *)((char *)self + 0x160));
+    NbhdPair_Init((NbhdPair *)((char *)self + 0x1B0));
+    NbhdPair_InitB((NbhdPair *)((char *)self + 0x1B8));
+    NbhdPair_Init((NbhdPair *)((char *)self + 0x1C0));
+    NbhdPair_InitB((NbhdPair *)((char *)self + 0x1C8));
     p = (s16 *)((char *)self + 0x1AE);
     for (i = 0x23; i >= 0; i--) {
         *p = 0;
