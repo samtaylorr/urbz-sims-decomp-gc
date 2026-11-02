@@ -23,7 +23,11 @@ static inline u8 *AptSlot_Ptr(u32 *slot) {
 }
 
 static inline s32 AptSlot_Owned(u32 *slot) {
-    return (*slot & 1) ? 1 : 0;
+    s32 owned = 1;
+    if (!(*slot & 1)) {
+        owned = 0;
+    }
+    return owned;
 }
 
 void fn_8028B0A4(void *arg0, void *arg1, u8 *arg2) {
@@ -338,6 +342,7 @@ void fn_8028DFA0(void *arg0) {
     extern void fn_802ADE44(void *);
     s32 i;
     u8 *obj;
+    s32 owned;
     u8 *vt;
 
     fn_802ADE44((u8 *) arg0 + 8);
@@ -345,9 +350,15 @@ void fn_8028DFA0(void *arg0) {
     if (M2C_FIELD(arg0, u32 **, 0x1C) != NULL) {
         for (i = 0; i < M2C_FIELD(arg0, s32 *, 0x24); i++) {
             obj = AptSlot_Ptr(&M2C_FIELD(arg0, u32 **, 0x1C)[i]);
-            if (obj != NULL && AptSlot_Owned(&M2C_FIELD(arg0, u32 **, 0x1C)[i])) {
-                vt = *(u8 **) (obj + 4);
-                (*(void (**)(void *)) (vt + 0x14))(obj + *(s16 *) (vt + 0x10));
+            if (obj != NULL) {
+                owned = 1;
+                if (!(M2C_FIELD(arg0, u32 **, 0x1C)[i] & 1)) {
+                    owned = 0;
+                }
+                if (owned) {
+                    vt = *(u8 **) (obj + 4);
+                    (*(void (**)(void *)) (vt + 0x14))(obj + *(s16 *) (vt + 0x10));
+                }
             }
             M2C_FIELD(arg0, u32 **, 0x1C)[i] = 0;
         }
