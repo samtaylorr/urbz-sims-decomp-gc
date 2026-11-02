@@ -35,9 +35,13 @@ typedef struct {
 } VtEntry_8035F3FC;
 
 typedef struct {
-    u8 pad0[4];
+    s32 unk0;
     void *unk4;
-    u8 pad8[0x14];
+    void *unk8;
+    void *unkC;
+    u8 pad10[5];
+    u8 unk15;
+    u8 pad16[6];
     void *unk1C;
     u8 pad20[0x48];
     void *unk68;
@@ -1087,7 +1091,7 @@ void fn_80363174(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
         for (x = 0; x < w; x++) {
             u32 *s = src;
             u32 *d = dst;
-            u32 a, b;
+            u32 b, a;
             a = s[0]; b = s[1];
             d[0] = a; d[1] = b;
             s = (u32 *)((u8 *)s + stride);
