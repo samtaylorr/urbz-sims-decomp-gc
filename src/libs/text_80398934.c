@@ -2002,7 +2002,6 @@ void fn_8039CB38(s32 *first, s32 *last, SortComp comp) {
     }
 }
 
-void fn_8039CB38(s32 *first, s32 *last, SortComp comp);
 void fn_8039C968(s32 *first, s32 *last, s32 *val, s32 depth, SortComp comp);
 void fn_8039CBEC(s32 *first, s32 *last, s32 *val, SortComp *comp) {
     s32 *it;
