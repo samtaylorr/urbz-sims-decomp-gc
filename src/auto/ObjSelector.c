@@ -263,6 +263,17 @@ s32 fn_8016CC2C(void *arg0, void *arg1) {
     return M2C_FIELD(arg0, s32 *, 4) == M2C_FIELD(arg1, s32 *, 4);
 }
 
+void *fn_8016CC44(arg0)
+    void *arg0;
+{
+    if (M2C_FIELD(arg0, void **, 0x60) == NULL) {
+        char *obj = M2C_FIELD(arg0, char **, 0x50);
+        char *vt = *(char **)obj;
+        M2C_FIELD(arg0, void **, 0x60) = M2C_FIELD(vt, void *(**)(void *, void *), 0xAC)(obj + M2C_FIELD(vt, s16 *, 0xA8), arg0);
+    }
+    return M2C_FIELD(arg0, void **, 0x60);
+}
+
 void fn_8016CCA0(void *arg0) {
     char *obj = M2C_FIELD(arg0, char **, 0x50);
     char *vt = *(char **)obj;
