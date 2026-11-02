@@ -275,11 +275,11 @@ void fn_8005595C(void *self, void *arg1, s32 arg2, EFloorShdVec2 *pos, f32 arg4,
 }
 
 void fn_800559F4(void) {
-    extern s32 lbl_8041FC14;
+    extern s32 lbl_8041FC14[];
     extern s32 lbl_80434DB8[][3];
     s32 i;
 
-    if (lbl_8041FC14 != 0) {
+    if (lbl_8041FC14[0] != 0) {
         for (i = 11; i >= 0; i--) {
             lbl_80434DB8[i][0] = 1;
         }
