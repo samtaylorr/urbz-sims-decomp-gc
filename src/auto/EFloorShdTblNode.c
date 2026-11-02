@@ -137,9 +137,9 @@ void fn_80052E0C(void *self, void *p) {
 
     if (p != NULL) {
         do {
-            next = M2C_FIELD(p, void **, 0x14);
-            if (next == NULL) {
-                next = NULL;
+            next = NULL;
+            if (M2C_FIELD(p, void **, 0x14) != NULL) {
+                next = M2C_FIELD(p, void **, 0x14);
             }
             fn_802D20E8(p);
             p = next;
@@ -335,16 +335,16 @@ void fn_80054D08(void) {
 
 }
 
-void fn_800555D8(void *self, s32 arg1, s32 arg2, EFloorShdVec2 *pos, s32 arg4, s32 arg5, s32 arg6) {
+void fn_800555D8(void *self, s32 arg1, s32 arg2, EFloorShdVec2 pos, s32 arg4, s32 arg5, s32 arg6) {
     extern f32 lbl_803C7A4C[];
     extern f32 lbl_803C7A50[];
-    void fn_8032314C(void *, s32, s32, EFloorShdVec2 *, s32, s32, s32, s32, f32, f32);
+    void fn_8032314C(void *, s32, s32, EFloorShdVec2, s32, s32, s32, s32, f32, f32);
     void fn_80322ACC(void *, s32, s32, s32, EFloorShdVec2, s32, s32, s32, s32, s32, s32, s32);
 
     if (arg6 == 0) {
         fn_8032314C(M2C_FIELD(self, void **, 0x19C), arg1, arg2, pos, arg4, arg5, 0, 1, lbl_803C7A4C[0], lbl_803C7A50[0]);
     } else {
-        fn_80322ACC(M2C_FIELD(self, void **, 0x19C), arg1, arg2, 1, *pos, arg4, arg5, 0, 0, 0, 0, 1);
+        fn_80322ACC(M2C_FIELD(self, void **, 0x19C), arg1, arg2, 1, pos, arg4, arg5, 0, 0, 0, 0, 1);
     }
 }
 
