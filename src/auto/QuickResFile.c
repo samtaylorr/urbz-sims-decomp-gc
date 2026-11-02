@@ -708,6 +708,15 @@ void fn_8018D56C(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x28) = 0;
 }
 
+void fn_8018D6D8(void *arg0, s32 *arg1) {
+    void fn_8018D578(void *, u8 *, s32);
+    s32 t = *arg1;
+    u8 v;
+    v = t;
+    fn_8018D578(arg0, &v, 1);
+    *arg1 = v != 0;
+}
+
 void fn_8018D8BC(void *arg0, s32 *arg1, s32 arg2) {
     ((void (*)(void *, s32 *, s32))fn_8018D8DC)(arg0, arg1, arg2);
 }
@@ -831,6 +840,27 @@ void fn_8018DD40(void *arg0) {
     if (M2C_FIELD(arg0, s32 *, 0xC) == 0) {
         M2C_FIELD(arg0, s32 *, 0x8) = M2C_FIELD(arg0, s32 *, 0x2C);
     }
+}
+
+s32 fn_8018E850(void *arg0, char *arg1, char *arg2, s32 arg3, s32 arg4) {
+    s32 fn_8018FA7C(void *);
+    void fn_8018E8F8(void *, void *, void *, s32);
+    void fn_8018E9F4(char *);
+    char *vt = *(char **)(arg2 + 0x10) + 0x80;
+    char *obj = arg2 + *(s16 *)vt;
+    void *x;
+    void *r;
+    {
+        char *vt1 = *(char **)arg1;
+        void *(*f)(void *) = *(void *(**)(void *))(vt1 + 0x1C);
+        x = f(arg1 + *(s16 *)(vt1 + 0x18));
+    }
+    r = (*(void *(**)(void *, void *, s32, void (*)(char *)))(vt + 4))(obj, x, arg3, fn_8018E9F4);
+    if (r != NULL) {
+        fn_8018E8F8(arg0, arg1, r, arg4);
+        return 0;
+    }
+    return fn_8018FA7C(arg2);
 }
 
 void fn_8018E9F4(char *arg0) {
