@@ -252,6 +252,20 @@ void fn_8018CB38(void **self, s32 flags) {
     }
 }
 
+s32 fn_8018CBF4(void *arg0, s32 arg1) {
+    s32 *p;
+    s32 n;
+    p = **(s32 ***)((u8 *)arg0 + 4);
+    n = 0;
+    if (p != NULL) {
+        n = p[-1];
+    }
+    if (arg1 < n) {
+        return p[arg1];
+    }
+    return 0;
+}
+
 s16 fn_8018CC28(void *arg0) {
     return M2C_FIELD(M2C_FIELD(arg0, void **, 4), s16 *, 4);
 }
@@ -270,6 +284,14 @@ s16 fn_8018CC34(void *arg0) {
 
 s32 fn_8018CC54(void) {
     return 0;
+}
+
+void **fn_8018CC5C(void **arg0) {
+    M2C_UNK fn_8018F8C0();
+    extern u8 lbl_80413EC0[];
+    fn_8018F8C0();
+    arg0[4] = lbl_80413EC0;
+    return arg0;
 }
 
 void fn_8018CC98(void *arg0, s32 arg1) {
