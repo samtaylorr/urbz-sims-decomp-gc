@@ -150,6 +150,12 @@ void fn_800BACA4(void *arg0, s32 arg1, f32 x, f32 y, f32 z) {
     }
 }
 
+void fn_800BAD00(void *arg0, f32 x, f32 y, f32 z) {
+    CUnlockVec3 v;
+    CUnlockVec3_Set(&v, x, y, z);
+    M2C_FIELD(arg0, CUnlockVec3 *, 0x350) = v;
+}
+
 s32 fn_800BAD38(u8 *self) {
     void **n;
     s32 res = 1;
