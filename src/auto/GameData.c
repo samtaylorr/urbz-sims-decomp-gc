@@ -38,6 +38,10 @@ void *fn_80045190(void *arg0) {
     return arg0;
 }
 
+s32 fn_800451A4(s32 self, s32 flags) {
+    return (flags >> 2) & 1;
+}
+
 u8 fn_800451AC(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 0xB);
 }
