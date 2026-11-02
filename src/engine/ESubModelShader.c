@@ -167,7 +167,7 @@ void fn_80300420(u8 *self, s32 arg1) {
     extern void fn_80302D94(u8 *, s32);
     s32 i;
 
-    for (i = 0; ListCount(self) > i; i++) {
+    for (i = 0; ListInRange(self, i); i++) {
         fn_80302D94(*(u8 **)self + i * 0x6C, arg1);
     }
 }
@@ -184,9 +184,8 @@ void fn_80300488(u8 *self) {
 void fn_803004E4(u8 *self, u8 *other, s32 idx) {
     s32 fn_8030230C(u8 *self, u8 *other, s32 idx);
     s32 i;
-    s32 j;
 
-    for (i = 0, j = 0; j < ListCount(self); i++, j++) {
+    for (i = 0; ListInRange(self, i); i++) {
         fn_8030230C(*(u8 **)self + i * 0x6C, *(u8 **)other + i * 0x6C, idx);
     }
 }
@@ -404,8 +403,8 @@ void fn_80300DC0(u8 *self) {
             }
         }
         ((void (*)(u8 *, void *))fn_80300944)(self, *(void **)(self + 0x64));
+        *(void **)(self + 0x64) = NULL;
     }
-    *(s32 *)(self + 0x64) = 0;
     *(s32 *)(self + 0x68) = 0;
 }
 
@@ -536,15 +535,19 @@ void fn_803041B0(u8 *self) {
     extern const f32 lbl_803F1880[];
     extern const f32 lbl_803F1884[];
     extern const f32 lbl_803F1888[];
+    f32 zero;
+    f32 one;
 
     *(f32 *)(self + 0x24) = lbl_803F1878[0];
+    zero = lbl_803F1884[0];
+    one = lbl_803F1888[0];
     *(f32 *)(self + 0x28) = lbl_803F187C[0] * lbl_803F1880[0];
     *(s32 *)(self + 0x30) = 1;
     *(s32 *)(self + 0x34) = 0;
     *(s32 *)(self + 0x2C) = 0;
-    Vec3f_Set((Vec3f *)self, lbl_803F1884[0], lbl_803F1884[0], lbl_803F1884[0]);
-    Vec3f_Set((Vec3f *)(self + 0xC), lbl_803F1884[0], lbl_803F1888[0], lbl_803F1884[0]);
-    Vec3f_Set((Vec3f *)(self + 0x18), lbl_803F1884[0], lbl_803F1884[0], lbl_803F1888[0]);
+    Vec3f_Set((Vec3f *)self, zero, zero, zero);
+    Vec3f_Set((Vec3f *)(self + 0xC), zero, one, zero);
+    Vec3f_Set((Vec3f *)(self + 0x18), zero, zero, one);
 }
 
 void fn_8030422C(u8 *self, Vec3f *a, Vec3f *b, Vec3f *c) {
