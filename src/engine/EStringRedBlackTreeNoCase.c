@@ -1330,6 +1330,20 @@ void *fn_80369988(EMat4Node **self, EMat4Node **other) {
     return self;
 }
 
+s32 fn_803699CC(void **arg0, void **arg1) {
+    s32 fn_802D3EE8(void *, s32);
+    void *na = *arg0;
+    void *nb = *arg1;
+
+    for (; EStrNode_Valid(na); na = M2C_FIELD(na, void **, 0x10), nb = M2C_FIELD(nb, void **, 0x10)) {
+        if (!EStrNode_Valid(nb) || fn_802D3EE8((char *)na + 0x1C, M2C_FIELD(nb, s32 *, 0x1C)) != 0 ||
+            M2C_FIELD(na, s32 *, 0x18) != M2C_FIELD(nb, s32 *, 0x18)) {
+            return 0;
+        }
+    }
+    return !EStrNode_Valid(nb);
+}
+
 void *fn_80369A74(void *arg0) {
     M2C_FIELD(arg0, s32 *, 8) = 0;
     M2C_FIELD(arg0, s32 *, 0xC) = 1;
