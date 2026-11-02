@@ -427,6 +427,15 @@ void fn_8004DE1C(char *self, s32 idx, s32 a, s32 b, s32 c, s32 d) {
     }
 }
 
+void fn_8004DED8(void *arg0, s32 arg1, s32 arg2) {
+    extern struct { u8 pad[0xD8]; s32 v[1]; } lbl_8041F94C;
+    void fn_8004DF1C(void *, s32, s32);
+    s32 p;
+    if (arg0 != NULL && (p = lbl_8041F94C.v[arg2]) != 0) {
+        fn_8004DF1C(arg0, arg1, p);
+    }
+}
+
 s32 fn_8004E644(void) {
     return 0;
 }
