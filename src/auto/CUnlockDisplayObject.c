@@ -611,6 +611,12 @@ s32 fn_800BD284(void *arg0, void *arg1, void *arg2, void *arg3) {
 }
 
 s32 fn_800BD32C(void *arg0, void *arg1, void *arg2, void *arg3) {
+    extern void *fn_800F6FB4(void *, void *, s32);
+    extern void fn_800F7028(void *, void *, s32);
+    extern void fn_800F7018(void *);
+    extern void fn_800F71C8(void *, void *, s32);
+    extern void *fn_800F7138(void *);
+    extern s32 fn_800BD05C(void *, void *, void *, void *);
     char buf[0x208];
     char *s = buf;
     s32 found;
