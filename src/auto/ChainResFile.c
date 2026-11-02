@@ -41,28 +41,6 @@ typedef struct CRF3 {
     f32 x, y, z;
 } CRF3;
 
-static inline CRB3 CRB3_make(s32 a, s32 b) {
-    CRB3 r;
-    r.a = a;
-    r.c = 1;
-    r.b = b;
-    return r;
-}
-
-static inline CRF3 CRF3_make(f32 x, f32 y, f32 z) {
-    CRF3 r;
-    r.x = x;
-    r.y = y;
-    r.z = z;
-    return r;
-}
-
-static inline void CRB3_set(CRB3 *r, s32 a, s32 b) {
-    r->a = a;
-    r->c = 1;
-    r->b = b;
-}
-
 static inline void CRF3_set(CRF3 *r, f32 x, f32 y, f32 z) {
     r->x = x;
     r->y = y;
@@ -367,14 +345,13 @@ s32 fn_80102A90(void *self, void *arg1, s32 key) {
     SearchEntry *fn_803A097C(SearchEntry *lo, SearchEntry *hi, s32 key);
     SearchEntry *tbl = M2C_FIELD(M2C_FIELD(arg1, void **, 0x54), SearchEntry **, 0x1C);
     SearchEntry *e;
-    SearchEntry *hi = NULL;
+    s32 hi = 0;
 
     if (tbl != NULL) {
-        s32 n = ((s32 *)tbl)[-1];
-        n <<= 4;
-        hi = (SearchEntry *)((char *)tbl + n);
+        hi = ((s32 *)tbl)[-1];
+        hi = (s32)&tbl[hi];
     }
-    e = fn_803A097C(tbl, hi, key);
+    e = fn_803A097C(tbl, (SearchEntry *)hi, key);
     if (e != NULL) {
         M2C_FIELD(self, s32 *, 4) = e->unk4;
         M2C_FIELD(self, s32 *, 8) = e->unk8;
