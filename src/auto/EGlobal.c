@@ -109,15 +109,11 @@ void fn_8004A01C(void *arg0) {
 void fn_8004AEA8(void *arg0, void *arg1) {
     s32 fn_802D0F64(void *, void *);
     void fn_802D1A00(void *, void *);
-    void *heap;
 
     if (M2C_FIELD(arg0, void **, 0x190) != NULL && M2C_FIELD(arg0, void **, 0x18C) != NULL
         && fn_802D0F64(M2C_FIELD(arg0, void **, 0x190), arg1)) {
-        heap = M2C_FIELD(arg0, void **, 0x190);
-    } else {
-        heap = fn_802D0B3C();
-    }
-    if (fn_802D0F64(heap, arg1)) {
+        fn_802D1A00(M2C_FIELD(arg0, void **, 0x190), arg1);
+    } else if (fn_802D0F64(fn_802D0B3C(), arg1)) {
         fn_802D1A00(fn_802D0B3C(), arg1);
     } else {
         fn_802D0F64(fn_802D0AB8(), arg1);
