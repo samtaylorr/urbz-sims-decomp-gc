@@ -761,8 +761,39 @@ void fn_800AAE10(void) {
 
 }
 
+void fn_800AAE14(void *self, f32 *a, f32 *b, f32 *c) {
+    extern f32 lbl_803CE4B0[];
+    extern f32 lbl_803CE4B4[];
+    extern f32 lbl_803CE4B8[];
+    extern f32 lbl_803CE4BC[];
+    extern f32 lbl_803CE4C0[];
+    extern f32 lbl_803CE4C4[];
+    extern f32 lbl_803CE4C8[];
+
+    a[0] = lbl_803CE4B0[0];
+    a[1] = lbl_803CE4B4[0];
+    a[2] = lbl_803CE4B8[0];
+    b[0] = lbl_803CE4BC[0];
+    b[1] = lbl_803CE4C0[0];
+    b[2] = lbl_803CE4C4[0];
+    c[2] = lbl_803CE4C4[0];
+    c[1] = lbl_803CE4C8[0];
+    c[0] = lbl_803CE4C8[0];
+}
+
 void fn_800AAE74(void) {
 
+}
+
+void fn_800AAE78(f32 *outA, f32 *outB, f32 a, f32 b, f32 c) {
+    extern f32 lbl_803CE4CC[];
+    f32 fn_80243694(f32);
+    f32 rest = lbl_803CE4CC[0] - (a + b);
+    f32 sa = fn_80243694(a);
+    f32 sb = fn_80243694(b);
+    f32 sr = fn_80243694(rest);
+    *outA = c * sa / sr;
+    *outB = c * sb / sr;
 }
 
 void fn_800AAF10(f32 *out, f32 angle, f32 a, f32 b) {
@@ -821,8 +852,7 @@ s32 fn_800AB1CC(u8 *arg0) {
 
 void fn_800AB250(f32 x) {
     extern f32 lbl_803CE4DC[];
-    if (x == lbl_803CE4DC[0]) {
-    }
+    s32 r = (x == lbl_803CE4DC[0]);
 }
 
 void fn_800AB260(u8 *arg0, SMCVec3 *out) {
