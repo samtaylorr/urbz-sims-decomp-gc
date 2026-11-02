@@ -335,6 +335,55 @@ s32 fn_800A51C0(void) {
     return 0xD6000;
 }
 
+s32 fn_800A51CC(s32 arg0) {
+    s32 fn_8012E974(void *, s32, u8);
+    M2C_UNK fn_800A4924(s32, s32);
+    extern u8 *lbl_80496650;
+    extern void *lbl_8049440C;
+    extern s32 lbl_80494428;
+    extern s32 lbl_80494460;
+    s32 ret;
+
+    {
+        u8 *obj = lbl_80496650;
+        u8 *vt = *(u8 **)obj;
+        (*(void (**)(void *, s32, s32))(vt + 0xAC))(obj + *(s16 *)(vt + 0xA8), 7, 10);
+    }
+    {
+        u8 *obj = lbl_80496650;
+        u8 *vt = *(u8 **)obj;
+        (*(void (**)(void *, void *, s32))(vt + 0x8C))(obj + *(s16 *)(vt + 0x88), lbl_8049440C, lbl_80494428);
+    }
+    ret = fn_8012E974(lbl_8049440C, lbl_80494460, arg0);
+    if (ret == 1) {
+        ret = fn_800A5090((void *)arg0);
+    } else {
+        fn_800A4924(lbl_80494460, arg0);
+    }
+    return ret;
+}
+
+s32 fn_800A527C(s32 arg0) {
+    s32 fn_800F7138(void *);
+    s32 fn_8012E230(s32, s32);
+    M2C_UNK fn_800A4924(s32, s32);
+    extern u8 lbl_8041F94C[];
+    extern SMCSlotInfo lbl_80434A9C[];
+    extern s32 lbl_80494460;
+    u8 *p = lbl_8041F94C;
+    SMCSlotInfo *q;
+    s32 ret;
+
+    ret = fn_800F7138(*(u8 **)(p + 0x184) + 0x94);
+    q = lbl_80434A9C;
+    q->a[q->idx] = ret;
+    ret = fn_800F7138(*(u8 **)(p + 0x184) + 0x4C);
+    q->b[q->idx] = ret;
+    ret = fn_8012E230(lbl_80494460, arg0);
+    fn_800A4924(lbl_80494460, arg0);
+    return ret;
+}
+
 s32 fn_800A56DC(s32 arg0, s32 arg1) {
     s32 fn_8012E150(void *, u8, s32);
     M2C_UNK fn_800A4924(s32, s32);
