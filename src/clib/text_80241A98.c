@@ -1268,14 +1268,25 @@ long long fn_8024E754(double a) {
     return fn_8024E798(a);
 }
 
-double fn_8024E950(long long u) {
-    DIunion uu;
+double fn_8024E950(s32 hi, u32 lo) {
+    extern double lbl_803EC098;
+    extern double lbl_803EC0A0;
+    extern double lbl_803EC0A8;
+    union {
+        double d;
+        struct {
+            u32 hi;
+            u32 lo;
+        } s;
+    } u;
     double d;
 
-    uu.ll = u;
-    d = (double)uu.s.high * 65536.0 * 65536.0;
-    d += (u32)uu.s.low;
-    return d;
+    u.s.lo = hi ^ 0x80000000;
+    u.s.hi = 0x43300000;
+    d = (u.d - lbl_803EC098) * lbl_803EC0A0;
+    u.s.lo = lo;
+    u.s.hi = 0x43300000;
+    return d * lbl_803EC0A0 + (u.d - lbl_803EC0A8);
 }
 
 long long fn_8024E9AC(long long u, s32 b) {
@@ -1382,7 +1393,8 @@ char *fn_8024FABC(void) {
 void fn_8024FAEC(void) {
     extern void (*lbl_803F7AD4[])(void);
     extern void fn_8024FB20(void);
-    lbl_803F7AD4[0] = fn_8024FB20;
-    lbl_803F7AD4[0]();
+    register void (*f)(void) asm("r3") = fn_8024FB20;
+    lbl_803F7AD4[0] = f;
+    f();
 }
 
