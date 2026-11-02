@@ -345,14 +345,31 @@ s32 fn_803312D4(EIWallPartFlags *self, s32 i) {
 }
 
 s32 fn_803312E4(void *arg0) {
-    if (!(M2C_FIELD(arg0, u32 *, 0x64) & 2)) {
-        return 0;
+    if (M2C_FIELD(arg0, u32 *, 0x64) & 2) {
+        return M2C_FIELD(arg0, s32 *, 0x24);
     }
-    return M2C_FIELD(arg0, s32 *, 0x24);
+    return 0;
 }
 
 s32 fn_80331300(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x48) == 2;
+}
+
+u8 fn_80331314(void *arg0) {
+    if (M2C_FIELD(arg0, u32 *, 0x64) & 2) {
+        return M2C_FIELD(arg0, u8 *, 0x50);
+    }
+    return 0;
+}
+
+u8 fn_80331330(void *arg0, u32 arg1) {
+    if (!(M2C_FIELD(arg0, u32 *, 0x64) & 2)) {
+        return 0;
+    }
+    if (M2C_FIELD(arg0, u8 *, 0x50) > arg1) {
+        return M2C_FIELD(arg0, u8 **, 0x54)[arg1];
+    }
+    return 0;
 }
 
 u8 fn_80331364(void *arg0) {
