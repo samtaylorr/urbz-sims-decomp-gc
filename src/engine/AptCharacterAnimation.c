@@ -1,16 +1,6 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
-s32 fn_802A661C(s32 *);
-
-static inline void AptRefAssign(s32 **dst, s32 **src) {
-    if (dst != src) {
-        if ((*dst = *src) != NULL) {
-            fn_802A661C(*dst);
-        }
-    }
-}
-
 void fn_8028B0A4(void *arg0, void *arg1, u8 *arg2) {
     void fn_8028ABC4(void *, void *, u8 *);
     if (M2C_FIELD(arg2, s32 *, 0x1C) != 0) {
@@ -46,24 +36,15 @@ s32 fn_8028B150(void *arg0, s32 arg1) {
 
 void *fn_8028B87C(u8 *self, s32 **arg1) {
     void fn_80290A8C(void *);
-    extern s32 fn_802A661C(s32 *);
     extern s32 fn_802A6630(s32 *);
     extern void fn_802A6644(void *);
     extern u8 lbl_80418488[];
-    s32 **dst;
 
     fn_80290A8C(self);
     M2C_FIELD(self, void **, 0x14) = lbl_80418488;
     M2C_FIELD(self, s32 *, 0x30) = 0;
     M2C_FIELD(self, s32 **, 0x34) = NULL;
-    dst = (s32 **)(self + 0x34);
-    if (arg1 != dst) {
-        s32 *p = *arg1;
-        *dst = p;
-        if (p != NULL) {
-            fn_802A661C(p);
-        }
-    }
+    AptRefAssign((s32 **)(self + 0x34), arg1);
     M2C_FIELD(self, s32 *, 0x8) = (*arg1)[4];
     if (*arg1 != NULL && fn_802A6630(*arg1) == 0) {
         fn_802A6644(*arg1);
@@ -320,15 +301,11 @@ void *fn_8028E0A0(void *arg0, s32 arg1) {
 
 void *fn_8028E2B8(void *arg0, s32 arg1) {
     extern void *lbl_80496130;
-    void *p;
+    void *p = NULL;
 
-    if (arg1 < 0) {
-        return lbl_80496130;
+    if (arg1 >= 0 && arg1 < M2C_FIELD(arg0, s32 *, 0x24)) {
+        p = (void *) (M2C_FIELD(arg0, u32 **, 0x1C)[arg1] & ~1);
     }
-    if (arg1 >= M2C_FIELD(arg0, s32 *, 0x24)) {
-        return lbl_80496130;
-    }
-    p = (void *) (M2C_FIELD(arg0, u32 **, 0x1C)[arg1] & ~1);
     if (p != NULL) {
         return p;
     }
