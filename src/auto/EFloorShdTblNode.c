@@ -150,22 +150,17 @@ void fn_80052E0C(void *self, void *p) {
 void fn_80052E58(void *self, void *arg1, s32 arg2, s32 arg3) {
     void fn_80320680(void *, s32, f32, f32);
     void fn_803227C4(EFloorShdVec2 *, void *, s32, s32, s32, s32);
-    extern f32 lbl_803C7660;
-    extern f32 lbl_803C7664;
+    extern f32 lbl_803C7660[];
+    extern f32 lbl_803C7664[];
     EFloorShdVec2 a;
     EFloorShdVec2 b;
-    f32 m;
 
     M2C_FIELD(arg1, s32 *, 0x8) = arg2;
     M2C_FIELD(arg1, s32 *, 0xC) = arg3;
-    fn_80320680(M2C_FIELD(self, void **, 0x19C), 1, lbl_803C7660, lbl_803C7664);
+    fn_80320680(M2C_FIELD(self, void **, 0x19C), 1, lbl_803C7660[0], lbl_803C7664[0]);
     fn_803227C4(&a, M2C_FIELD(self, void **, 0x19C), M2C_FIELD(arg1, s32 *, 0x8), 1, 1, 0);
     fn_803227C4(&b, M2C_FIELD(self, void **, 0x19C), M2C_FIELD(arg1, s32 *, 0xC), 1, 1, 0);
-    m = b.x;
-    if (a.x > b.x) {
-        m = a.x;
-    }
-    M2C_FIELD(arg1, f32 *, 0x10) = m;
+    M2C_FIELD(arg1, f32 *, 0x10) = (a.x > b.x) ? a.x : b.x;
 }
 
 void fn_80052EFC(void) {
@@ -187,8 +182,8 @@ void fn_80052F08(void *self) {
     extern u8 lbl_8045B634[];
 
     if (M2C_FIELD(self, s32 *, 0x4C) == 0) {
-        M2C_FIELD(self, s32 *, 0x19C) = 0;
         M2C_FIELD(self, s32 *, 0x4C) = 1;
+        M2C_FIELD(self, s32 *, 0x19C) = 0;
         fn_803374C8(lbl_8045B634, fn_80049BFC(lbl_8041F94C));
     }
 }
