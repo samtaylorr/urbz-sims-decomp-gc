@@ -1381,8 +1381,8 @@ char *fn_8024FABC(void) {
 
 void fn_8024FAEC(void) {
     extern void (*lbl_803F7AD4[])(void);
-    extern void fn_8024FB20(void);
-    register void (*f)(void) asm("r3") = fn_8024FB20;
+    extern char *fn_8024FB20(void);
+    register void (*f)(void) asm("r3") = (void (*)(void))fn_8024FB20;
     lbl_803F7AD4[0] = f;
     f();
 }
