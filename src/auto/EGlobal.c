@@ -34,25 +34,10 @@ void fn_80049790(void *self, s32 flags) {
 }
 
 void *fn_80049AC4(void) {
-    void *fn_802D0AB8();
-    void *fn_802D0B3C(void);
-    void *fn_802D197C(void *, u32, s32);
-    void *fn_802DC3C0(void *, u32, s32, s32, s32);
     void fn_80248488(void *, s32, s32);
     void *fn_8008D5C0(void *);
-    void *heap = fn_802D0AB8();
-    void *p = fn_802D197C(heap, 0x500, 0x10);
-    void *r;
+    void *r = EGlobal_AllocAligned(0x500);
 
-    if (p == NULL) {
-        p = fn_802DC3C0(heap, 0x500, 0x10, 0, 0);
-        if (p == NULL && heap == fn_802D0AB8()) {
-            r = fn_802DC3C0(fn_802D0B3C(), 0x500, 0x10, 0, 0);
-            goto done;
-        }
-    }
-    r = p;
-done:
     fn_80248488(r, 0, 0x4F8);
     return fn_8008D5C0(r);
 }
@@ -416,15 +401,17 @@ s32 fn_8004DA28(void *arg0, void *arg1) {
 }
 
 void fn_8004DAA8(char **self) {
-    char *obj = *self;
-    char *vt = *(char **)(obj + 0x1C);
-    s32 (*f)(char *) = *(s32 (**)(char *))(vt + 0x8C);
-    if (f(obj + *(s16 *)(vt + 0x88)) != 0) {
-        char *r;
-        obj = *self;
-        vt = *(char **)(obj + 0x1C);
-        r = (*(char *(**)(char *))(vt + 0x8C))(obj + *(s16 *)(vt + 0x88)) + 0x300;
-        vt = *(char **)r;
+    if (({
+            char *o = *self;
+            char *v = *(char **)(o + 0x1C);
+            (*(s32 (**)(char *))(v + 0x8C))(o + *(s16 *)(v + 0x88));
+        }) != 0) {
+        char *r = ({
+            char *o = *self;
+            char *v = *(char **)(o + 0x1C);
+            (*(char *(**)(char *))(v + 0x8C))(o + *(s16 *)(v + 0x88));
+        }) + 0x300;
+        char *vt = *(char **)r;
         (*(void (**)(char *))(vt + 0x14))(r + *(s16 *)(vt + 0x10));
     }
 }
