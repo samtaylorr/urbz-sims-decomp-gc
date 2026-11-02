@@ -224,6 +224,12 @@ s32 fn_8032DD4C(s32 arg0, s32 arg1) {
     return result;
 }
 
+s32 fn_8032DDD4(s32 arg0, s32 arg1) {
+    extern s32 fn_8032DE08(s32, s32, void *, s32);
+    s32 tmp = 0;
+    return fn_8032DE08(arg0, 0, &tmp, arg1);
+}
+
 void fn_8032E124(s32 arg0) {
     void fn_80338000(void *, s32, s32);
     extern u8 lbl_8045B980[];
