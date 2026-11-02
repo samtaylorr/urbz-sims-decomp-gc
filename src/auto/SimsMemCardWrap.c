@@ -150,11 +150,11 @@ s32 fn_800A4BF4(s32 arg0, s32 *arg1) {
     char *obj = lbl_80495060;
     char *vt = *(char **)obj;
     s32 buf;
-    s32 v = 0;
     if ((*(s32 (**)(void *, s32, s32 *))(vt + 0xB4))(obj + *(s16 *)(vt + 0xB0), arg0, &buf) == -4) {
-        v = 1;
+        *arg1 = 1;
+    } else {
+        *arg1 = 0;
     }
-    *arg1 = v;
     return 1;
 }
 
@@ -772,9 +772,9 @@ void fn_800AAF10(f32 *out, f32 angle, f32 a, f32 b) {
 void fn_800AAF74(f32 a, f32 b, f32 c, f32 *outA, f32 *outB, f32 *outC) {
     extern f32 lbl_803CE4D0[];
     f32 fn_80242ACC(f32);
-    f32 aa = a * a;
     f32 bb = b * b;
     f32 cc = c * c;
+    f32 aa = a * a;
     f32 angA = fn_80242ACC((bb + cc - aa) / ((b + b) * c));
     f32 angB = fn_80242ACC((aa + cc - bb) / ((a + a) * c));
     *outA = angA;
