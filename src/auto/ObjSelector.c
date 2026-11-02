@@ -95,6 +95,23 @@ s32 fn_8016C258(void) {
     return 1;
 }
 
+s16 fn_8016C260(void *arg0, u32 arg1) {
+    struct { u8 pad[4]; s16 a[1]; } *p;
+    s16 ret = 0;
+    if (arg1 <= 0x1D) {
+        p = M2C_FIELD(arg0, void **, 0xC);
+        if (p != NULL) {
+            ret = p->a[arg1];
+        } else {
+            p = M2C_FIELD(arg0, void **, 0x10);
+            if (p != NULL) {
+                ret = p->a[arg1];
+            }
+        }
+    }
+    return ret;
+}
+
 void fn_8016C2E8(void) {
 
 }
@@ -498,6 +515,17 @@ s32 fn_8016D4D0(void *arg0) {
         M2C_FIELD(arg0, s32 *, 0x78) = fn_800FCB50(M2C_FIELD(arg0, s32 *, 0xC), v);
     }
     return M2C_FIELD(arg0, s32 *, 0x78);
+}
+
+void *fn_8016DBF0(arg0)
+    void *arg0;
+{
+    if (M2C_FIELD(arg0, void **, 0x3C) == NULL) {
+        char *obj = M2C_FIELD(arg0, char **, 0x50);
+        char *vt = *(char **)obj;
+        M2C_FIELD(vt, void (**)(void *, void *), 0x164)(obj + M2C_FIELD(vt, s16 *, 0x160), arg0);
+    }
+    return M2C_FIELD(arg0, void **, 0x3C);
 }
 
 s32 fn_8016DC48(s32 arg0) {
