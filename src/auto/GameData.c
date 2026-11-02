@@ -272,9 +272,9 @@ void fn_80048AA0(s32 arg0) {
             u8 *vt = *(u8 **)(obj + 0x44);
             (*(void (**)(void *, s32))(vt + 0xc))(obj + *(s16 *)(vt + 8), 3);
         }
-        *(s32 *)(self + 0x10C) = 0;
         *(s32 *)(self + 0x104) = 0;
         *(s32 *)(self + 0x108) = 0;
+        *(s32 *)(self + 0x10C) = 0;
     }
 }
 
