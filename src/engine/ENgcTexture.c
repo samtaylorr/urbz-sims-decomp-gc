@@ -56,6 +56,19 @@ void fn_8035F3A4(void *arg0, s32 arg1) {
     }
 }
 
+void fn_8035F3FC(u8 *arg0, u8 *arg1, s32 arg2) {
+    void *fn_802FF608(u8 *, s32);
+    s32 i;
+    VtEntry_8035F3FC *e;
+
+    for (i = 0; i < arg0[0]; i++) {
+        e = (VtEntry_8035F3FC *)(M2C_FIELD(arg1, u8 *, 0x68) + 0x118);
+        ((void (*)(u8 *, void *, s32))e->func)(arg1 + e->delta, fn_802FF608(arg0, i), i);
+    }
+    e = (VtEntry_8035F3FC *)(M2C_FIELD(arg1, u8 *, 0x68) + 0x330);
+    ((void (*)(u8 *, u8 *, s32))e->func)(arg1 + e->delta, arg0, arg2);
+}
+
 void fn_8035F6E4(void) {
     fn_802FF4EC();
 }
@@ -761,8 +774,8 @@ void fn_80363540(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
         u8 *row = (u8 *)arg3 + y * bw * 32;
         for (x = 0; x < bw; x++) {
             ENgcTexture_CopyTile8(src, row, stride);
-            src += 8;
             row += 8;
+            src += 8;
         }
     }
 }
@@ -812,6 +825,23 @@ void fn_803639A8(void *arg0) {
     if (node != NULL) {
         fn_802CB5C4(arg0, node);
     }
+}
+
+void *fn_80363C08(void *arg0) {
+    typedef struct { f32 x, y, z; } V3;
+    extern f32 lbl_803F4F20;
+    void fn_802C4D24(V3 *);
+    void fn_802C5070(V3 *, void *);
+    V3 b;
+    V3 a;
+    V3 t;
+
+    t.x = t.y = t.z = lbl_803F4F20;
+    a = t;
+    b = a;
+    fn_802C4D24(&b);
+    fn_802C5070(&b, arg0);
+    return arg0;
 }
 
 void fn_802D2FD0(void);
