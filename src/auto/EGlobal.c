@@ -283,10 +283,24 @@ void fn_8004D954(void *self, void *arg1) {
     fn_8039BA50(M2C_FIELD(r, char **, 0x4), M2C_FIELD(r, char **, 0x4) + M2C_FIELD(r, s32 *, 0xC) * 0xC, arg1);
 }
 
+void *fn_8004D9A4(void *self) {
+    extern char lbl_803C6D6C[];
+    char *fn_8032D5C8(void *, char *);
+
+    return M2C_FIELD(fn_8032D5C8(M2C_FIELD(self, void **, 0x120), lbl_803C6D6C), void **, 0x4);
+}
+
 extern u8 lbl_8041ED64[];
 void fn_8001E370(u8 *arg);
 void fn_8004D9D4(void) {
     fn_8001E370(lbl_8041ED64);
+}
+
+void fn_8004D9FC(void *self, s32 arg1) {
+    extern u8 lbl_8041ED64[];
+    void fn_8001E408(void *, s32, s32);
+
+    fn_8001E408(lbl_8041ED64, arg1, 1);
 }
 
 s32 fn_8004DB2C(void **arg0) {
