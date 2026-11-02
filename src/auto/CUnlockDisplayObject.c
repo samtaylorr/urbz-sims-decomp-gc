@@ -95,7 +95,7 @@ void fn_800BA0F4(void *arg0, f32 farg0) {
 }
 
 void fn_800BA10C(void *arg0, f32 farg0) {
-    if (farg0 > M2C_FIELD(arg0, f32 *, 0x454)) {
+    if (!(farg0 <= M2C_FIELD(arg0, f32 *, 0x454))) {
         M2C_FIELD(arg0, f32 *, 0x45C) = farg0;
     }
 }
