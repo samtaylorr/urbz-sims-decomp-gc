@@ -36,15 +36,22 @@ s32 fn_8028B150(void *arg0, s32 arg1) {
 
 void *fn_8028B87C(u8 *self, s32 **arg1) {
     void fn_80290A8C(void *);
+    extern s32 fn_802A661C(s32 *);
     extern s32 fn_802A6630(s32 *);
     extern void fn_802A6644(void *);
     extern u8 lbl_80418488[];
+    s32 **dst;
 
     fn_80290A8C(self);
     M2C_FIELD(self, void **, 0x14) = lbl_80418488;
+    dst = (s32 **)(self + 0x34);
     M2C_FIELD(self, s32 *, 0x30) = 0;
-    M2C_FIELD(self, s32 **, 0x34) = NULL;
-    AptRefAssign((s32 **)(self + 0x34), arg1);
+    *dst = NULL;
+    if (arg1 != dst) {
+        if ((*dst = *arg1) != NULL) {
+            fn_802A661C(*dst);
+        }
+    }
     M2C_FIELD(self, s32 *, 0x8) = (*arg1)[4];
     if (*arg1 != NULL && fn_802A6630(*arg1) == 0) {
         fn_802A6644(*arg1);
@@ -336,6 +343,18 @@ s32 fn_8028EDE8(char *s) {
         return *s == '0';
     }
     return 1;
+}
+
+s32 fn_8028EE34(void *arg0, void *arg1, char **arg2, void *arg3) {
+    extern void *lbl_80496130;
+    extern s32 fn_80246E00(char *);
+    extern void fn_8028E1EC(void *, s32, void *);
+
+    if (fn_8028EDE8(*arg2 + 8)) {
+        fn_8028E1EC(arg1, fn_80246E00(*arg2 + 8), arg3 ? arg3 : lbl_80496130);
+        return 1;
+    }
+    return 0;
 }
 
 void *fn_8028FB40(u32 *self) {
