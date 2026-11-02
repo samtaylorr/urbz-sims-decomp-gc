@@ -188,9 +188,11 @@ s32 fn_80046F9C(void) {
     case 5:
     case 6:
     case 11:
-        return 0;
+        break;
+    default:
+        return 1;
     }
-    return 1;
+    return 0;
 }
 
 void fn_80046FE0(void) {
