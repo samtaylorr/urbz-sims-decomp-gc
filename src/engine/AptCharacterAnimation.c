@@ -6,6 +6,19 @@ void fn_8028B998(s32 arg0) {
     fn_802A1420(arg0 + 0x24);
 }
 
+void fn_8028CC54(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    void fn_8028CBD8(void *, u32);
+    fn_8028CBD8(arg0, (arg1 << 17) | ((arg2 & 0x7F) << 10) | 1 | ((arg3 & 0xFF) << 2));
+}
+
+void fn_8028CC8C(void *arg0, s32 arg1, s32 arg2) {
+    extern s32 lbl_80494B54;
+    void fn_8028CBD8(void *, u32);
+    if (lbl_80494B54 != 0) {
+        fn_8028CBD8(arg0, (arg1 << 17) | ((arg2 & 0x7FFF) << 2));
+    }
+}
+
 void fn_8028CE18(void *arg0) {
     void *var_r9;
     void *temp_r0_2;
