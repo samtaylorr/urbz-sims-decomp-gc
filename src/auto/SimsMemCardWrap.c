@@ -16,6 +16,12 @@ static inline SMCVec3 *SMCVec3_Copy(SMCVec3 *d, const SMCVec3 *s) {
     return d;
 }
 
+static inline void SMCVec3_Set3(f32 *v, f32 x, f32 y, f32 z) {
+    v[0] = x;
+    v[1] = y;
+    v[2] = z;
+}
+
 extern s32 lbl_80495930;
 extern f32 lbl_803CE168[];
 extern f32 lbl_80494320;
@@ -919,18 +925,18 @@ s32 fn_800AB1CC(u8 *arg0) {
     extern f32 lbl_803CE4D4[];
     extern f32 lbl_803CE4D8[];
     u8 *obj = *(u8 **)(arg0 + 0xE8);
-    f32 v[3];
-    f32 *d = v;
-    f32 *p = (f32 *)(obj + 0xA4);
+    SMCVec3 v;
+    SMCVec3 *d = &v;
+    SMCVec3 *p = (SMCVec3 *)(obj + 0xA4);
     f32 s;
-    d[0] = p[0];
-    d[1] = p[1];
-    d[2] = p[2];
+    d->x = p->x;
+    d->y = p->y;
+    d->z = p->z;
     s = *(f32 *)(obj + 0xA0);
-    d[0] *= s;
-    d[1] *= s;
-    d[2] *= s;
-    return (d[0] + d[1] + d[2]) * lbl_803CE4D4[0] < lbl_803CE4D8[0];
+    d->x *= s;
+    d->y *= s;
+    d->z *= s;
+    return (d->x + d->y + d->z) * lbl_803CE4D4[0] < lbl_803CE4D8[0];
 }
 
 void fn_800AB250(f32 x) {
