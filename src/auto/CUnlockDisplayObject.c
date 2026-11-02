@@ -83,7 +83,7 @@ void fn_800B9EF0(void *arg0) {
 }
 
 void fn_800BA0DC(void *arg0, f32 farg0) {
-    if (farg0 < M2C_FIELD(arg0, f32 *, 0x45C)) {
+    if (!(farg0 >= M2C_FIELD(arg0, f32 *, 0x45C))) {
         M2C_FIELD(arg0, f32 *, 0x454) = farg0;
     }
 }
