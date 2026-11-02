@@ -89,6 +89,25 @@ void fn_80186668(s32 arg0, void *arg1, s32 arg2) {
     }
 }
 
+s32 fn_80186714(void *arg0, u32 arg1) {
+    if (arg1 > 0x18) {
+        return 0;
+    }
+    return ((s16 *)((u8 *)arg0 + 0x18D0))[arg1];
+}
+
+s32 fn_80186734(void *arg0, u32 arg1, s16 **arg2) {
+    if (arg2 == NULL) {
+        return 0;
+    }
+    if (arg1 > 0x18) {
+        *arg2 = NULL;
+        return 0;
+    }
+    *arg2 = (s16 *)((u8 *)arg0 + 0x18D0) + arg1;
+    return 1;
+}
+
 s32 fn_80186778(s32 arg0) {
     return arg0 + 0xC8;
 }
