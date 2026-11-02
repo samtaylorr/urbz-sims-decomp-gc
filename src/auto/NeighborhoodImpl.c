@@ -133,8 +133,8 @@ void *fn_80128638(void *arg0, s32 i) {
     return (u8 *)arg0 + (i * 2 + 0x168);
 }
 
-void fn_80128648(char *self, s32 i, s16 v) {
-    ((s16 *)(self + 0x168))[i] = v;
+void fn_80128648(void *self, s32 i, s16 v) {
+    ((struct { u8 pad[0x168]; s16 a[1]; } *)self)->a[i] = v;
 }
 
 s32 fn_801286A0(void *arg0) {
