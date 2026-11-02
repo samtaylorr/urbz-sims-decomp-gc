@@ -19,14 +19,8 @@ static inline void NbhdPtrVec_Notify(NbhdPtrVec *v, s32 n) {
 
 typedef struct PtrVec { void **begin; void **end; } PtrVec;
 
-static inline void PtrVec_DestroyAll(PtrVec *v) {
-    void fn_8010B528(void *);
-    void **it;
-
-    for (it = v->begin; it != v->end; it++) {
-        fn_8010B528(*it);
-    }
-    v->end = v->begin;
+static inline void **PtrVec_End(PtrVec *v) {
+    return v->end;
 }
 
 void fn_80123160(void) {
