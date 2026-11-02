@@ -97,7 +97,7 @@ void fn_80123824(void *arg0) {
     fn_80123450((char *)arg0 + 0x1B0);
     (*(void (**)(u8 *))(*(u8 **)lbl_8049665C + 0x54))(lbl_8049665C + *(s16 *)(*(u8 **)lbl_8049665C + 0x50));
     (*(void (**)(u8 *))(*(u8 **)lbl_8049665C + 0x5C))(lbl_8049665C + *(s16 *)(*(u8 **)lbl_8049665C + 0x58));
-    for (p = M2C_FIELD(arg0, void ***, 0x1C0); p != ({ PtrVec *t = (PtrVec *)((char *)arg0 + 0x1C0); t->end; }); p++) {
+    for (p = M2C_FIELD(arg0, void ***, 0x1C0); p != PtrVec_End((PtrVec *)((char *)arg0 + 0x1C0)); p++) {
         fn_8010B528(*p);
     }
     M2C_FIELD(arg0, void ***, 0x1C4) = M2C_FIELD(arg0, void ***, 0x1C0);
