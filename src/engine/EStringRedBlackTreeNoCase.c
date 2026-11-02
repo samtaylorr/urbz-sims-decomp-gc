@@ -147,6 +147,16 @@ s32 fn_80364644(void *arg0, void *arg1, s32 arg2) {
     return arg2;
 }
 
+void fn_80364688(void *arg0, void *arg1, s32 arg2) {
+    s32 fn_80245BB4(char *, const char *, ...);
+    void fn_80364414(void *, void *, char *);
+    extern char lbl_803F4F60[];
+    char buf[128];
+
+    fn_80245BB4(buf, lbl_803F4F60, arg2 ? '1' : '0');
+    fn_80364414(arg0, arg1, buf);
+}
+
 void fn_80364A1C(void *self) {
     extern void fn_802D39F0(s32 *, s32);
     extern void fn_802D20E8(void *);
