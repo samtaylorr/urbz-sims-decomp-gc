@@ -150,8 +150,8 @@ void fn_80052E0C(void *self, void *p) {
 void fn_80052E58(void *self, void *arg1, s32 arg2, s32 arg3) {
     void fn_80320680(void *, s32, f32, f32);
     void fn_803227C4(EFloorShdVec2 *, void *, s32, s32, s32, s32);
-    extern f32 lbl_803C7660[];
-    extern f32 lbl_803C7664[];
+    extern const f32 lbl_803C7660[];
+    extern const f32 lbl_803C7664[];
     EFloorShdVec2 a;
     EFloorShdVec2 b;
 
