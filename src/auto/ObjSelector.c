@@ -635,6 +635,18 @@ s32 fn_8016D4D0(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x78);
 }
 
+char *fn_8016DA34(void *arg0) {
+    char *fn_80102A0C(void);
+    if (M2C_FIELD(arg0, char **, 0x80) == NULL) {
+        s16 a = M2C_FIELD(M2C_FIELD(arg0, char **, 0x38), s16 *, 0x52);
+        char *obj = fn_80102A0C();
+        char *vt = *(char **)obj + 0x10;
+        M2C_FIELD(vt, void (**)(void *, void *, s32, s32), 0x4)(obj + *(s16 *)vt, arg0, a, fn_8016D444(arg0));
+        M2C_FIELD(arg0, char **, 0x80) = obj;
+    }
+    return M2C_FIELD(arg0, char **, 0x80);
+}
+
 void *fn_8016DBF0(arg0)
     void *arg0;
 {
