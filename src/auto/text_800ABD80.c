@@ -338,6 +338,10 @@ block_6:
     return 1;
 }
 
+s32 fn_800B26F4(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x360) == -1;
+}
+
 s32 fn_800B2708(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x360);
 }
