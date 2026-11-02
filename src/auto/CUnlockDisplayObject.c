@@ -14,6 +14,14 @@ extern void *fn_802DC3C0(void *, u32, s32, s32, s32);
 extern void *fn_802D0B3C(void);
 extern void *fn_80248488(void *, s32, u32);
 
+typedef struct { f32 x, y, z; } CUnlockVec3;
+
+static inline void CUnlockVec3_Set(CUnlockVec3 *v, f32 x, f32 y, f32 z) {
+    v->x = x;
+    v->y = y;
+    v->z = z;
+}
+
 static inline void *CUnlockDisplayObject_AllocAligned(u32 size) {
     void *heap;
     void *p;
