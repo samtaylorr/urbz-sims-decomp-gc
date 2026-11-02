@@ -356,10 +356,10 @@ s32 fn_80331300(void *arg0) {
 }
 
 u8 fn_80331314(void *arg0) {
-    if (M2C_FIELD(arg0, u32 *, 0x64) & 2) {
-        return M2C_FIELD(arg0, u8 *, 0x50);
+    if (!(M2C_FIELD(arg0, u32 *, 0x64) & 2)) {
+        return 0;
     }
-    return 0;
+    return M2C_FIELD(arg0, u8 *, 0x50);
 }
 
 u8 fn_80331330(void *arg0, u32 arg1) {
