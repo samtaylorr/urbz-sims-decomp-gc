@@ -215,6 +215,21 @@ f32 fn_803647AC(void *self, s32 key, f32 def) {
     return fn_80246DDC(s);
 }
 
+void fn_803647F4(void *self, s32 key) {
+    extern void *fn_802D1FC8(u32);
+    extern void fn_802D39E4(void *);
+    extern void fn_802D3CE4(void *, const char *);
+    extern void fn_802D41A8(void *, s32);
+    extern void fn_802CB69C(void *, void *);
+    extern char lbl_803F4F74[];
+    void *obj = fn_802D1FC8(4);
+    fn_802D39E4(obj);
+    fn_802D3CE4(obj, lbl_803F4F74);
+    fn_802D41A8(obj, key);
+    fn_802CB69C((u8 *)self + 8, obj);
+    M2C_FIELD(self, s32 *, 0) = 1;
+}
+
 void fn_80364A1C(void *self) {
     extern void fn_802D39F0(s32 *, s32);
     extern void fn_802D20E8(void *);
