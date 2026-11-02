@@ -270,26 +270,16 @@ s32 fn_80125D6C(void *arg0, void **arg1) {
 
 s32 fn_80125F28(void *arg0) {
     s32 fn_801224F0(void *);
-    s32 var_r30;
-    void **var_r31;
-    void *temp_r9;
+    void **p;
+    s32 count;
 
-    temp_r9 = (char *)arg0 + 0x1B0;
-    var_r31 = M2C_FIELD(arg0, void ***, 0x1B0);
-    var_r30 = 0;
-    if (var_r31 != M2C_FIELD(temp_r9, void ***, 4)) {
-loop_1:
-        if (*var_r31 != NULL && fn_801224F0(*var_r31) != 0) {
-            var_r30 += 1;
+    count = 0;
+    for (p = M2C_FIELD(arg0, void ***, 0x1B0); p != PtrVec_End((PtrVec *)((char *)arg0 + 0x1B0)); p++) {
+        if (*p != NULL && fn_801224F0(*p) != 0) {
+            count++;
         }
-        var_r31 += 1;
-        if (var_r31 == M2C_FIELD(temp_r9, void ***, 4)) {
-            goto block_6;
-        }
-        goto loop_1;
     }
-block_6:
-    return var_r30;
+    return count;
 }
 
 s32 fn_80125F98(void *arg0, void *arg1) {
