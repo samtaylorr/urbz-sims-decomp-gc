@@ -20,6 +20,19 @@ s32 fn_800ABE78(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0) == 0;
 }
 
+s32 fn_800ABE9C(void *self) {
+    s32 fn_80336E08(void *, s32);
+    extern u8 lbl_8045B82C[];
+    if (*M2C_FIELD(self, s32 **, 4) != 0) {
+        return 1;
+    }
+    *M2C_FIELD(self, s32 **, 4) = fn_80336E08(lbl_8045B82C, M2C_FIELD(self, s32 *, 0));
+    if (*M2C_FIELD(self, s32 **, 4) != 0) {
+        return 1;
+    }
+    return 0;
+}
+
 void fn_800ACA14(void) {
 
 }
