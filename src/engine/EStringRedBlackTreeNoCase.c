@@ -336,6 +336,14 @@ void fn_803650DC(void *arg0, void *arg1) {
     M2C_FIELD(M2C_FIELD(arg0, void **, 8), s32 *, 0x14) = 0;
 }
 
+s32 fn_80365224(void *arg0) {
+    void fn_80365988(void *, s32 *);
+    s32 sp8;
+
+    fn_80365988(arg0, &sp8);
+    return sp8;
+}
+
 void *fn_803652B4(void *self, f32 key);
 void *fn_8036542C(void *self, void *parent, f32 key, s32 value);
 void *fn_803652F8(void *arg0, f32 key) {
