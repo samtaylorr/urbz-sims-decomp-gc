@@ -335,6 +335,16 @@ void fn_800A73CC(void *self, s32 flags) {
     }
 }
 
+void fn_800A915C(void) {
+    extern char *lbl_80496648;
+    extern void *lbl_80496644;
+    void fn_8010CD4C(void *);
+    char *obj = lbl_80496648;
+    char *vt = *(char **)obj;
+    (*(void (**)(void *))(vt + 0x5C))(obj + *(s16 *)(vt + 0x58));
+    fn_8010CD4C(lbl_80496644);
+}
+
 void fn_800A9624(void) {
 
 }
