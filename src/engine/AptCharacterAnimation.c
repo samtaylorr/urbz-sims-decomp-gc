@@ -44,10 +44,10 @@ void *fn_8028B87C(u8 *self, s32 **arg1) {
 
     fn_80290A8C(self);
     M2C_FIELD(self, void **, 0x14) = lbl_80418488;
-    dst = (s32 **)(self + 0x34);
     M2C_FIELD(self, s32 *, 0x30) = 0;
-    *dst = NULL;
-    if (arg1 != dst) {
+    M2C_FIELD(self, s32 **, 0x34) = NULL;
+    dst = (s32 **)(self + 0x34);
+    if (dst != arg1) {
         if ((*dst = *arg1) != NULL) {
             fn_802A661C(*dst);
         }
@@ -102,7 +102,7 @@ void fn_8028CBD8(void *arg0, u32 arg1) {
 
 void fn_8028CC54(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     void fn_8028CBD8(void *, u32);
-    fn_8028CBD8(arg0, ((((arg2 & 0x7F) << 10) | 1) | (arg1 << 17)) | ((arg3 & 0xFF) << 2));
+    fn_8028CBD8(arg0, (arg1 << 17) | 1 | ((arg2 & 0x7F) << 10) | ((arg3 & 0xFF) << 2));
 }
 
 void fn_8028CC8C(void *arg0, s32 arg1, s32 arg2) {
