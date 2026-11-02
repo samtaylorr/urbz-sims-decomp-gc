@@ -440,6 +440,17 @@ s32 fn_801056A4(void *arg0, void *arg1) {
     return var_r11;
 }
 
+s8 *fn_80105738(s8 *self, s32 k) {
+    self[0] *= k;
+    self[1] *= k;
+    return self;
+}
+
+s8 *fn_80105758(s8 *self, s8 *src, s32 k) {
+    fn_80105574(self, k * src[0], k * src[1], src[2]);
+    return self;
+}
+
 s8 *fn_80105808(s8 *self, s8 *a, s8 *b) {
     fn_80105574(self, a[0] - b[0], a[1] - b[1], a[2]);
     return self;
