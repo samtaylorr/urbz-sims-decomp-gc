@@ -154,18 +154,10 @@ void *fn_8010280C(void *self, void *arg1, s32 arg2) {
 }
 
 void *fn_80102844(void *self, void *arg1, s32 arg2) {
-    if (arg2 != 0) {
-        u16 **p = M2C_FIELD(arg1, u16 ***, 0x64);
-        u16 *s = NULL;
-        if (p != NULL) {
-            s = *p;
-        }
-        if (*s == 0) {
-            return (char *)arg1 + 0x60;
-        }
-        return (char *)arg1 + 0x64;
+    if (arg2 == 0 || *({ u16 **p = M2C_FIELD(arg1, u16 ***, 0x64); u16 *s = NULL; if (p != NULL) s = *p; s; }) == 0) {
+        return (char *)arg1 + 0x60;
     }
-    return (char *)arg1 + 0x60;
+    return (char *)arg1 + 0x64;
 }
 
 s32 fn_8010287C(void *self, void *arg1) {
