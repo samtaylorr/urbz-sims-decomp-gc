@@ -1055,23 +1055,28 @@ void fn_80363174(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     u32 *dst = (u32 *)arg3;
     s32 w = arg1 / 4;
     s32 h = arg2 / 4;
-    s32 stride = w * 2;
+    s32 stride = w * 8;
     s32 x, y;
 
     for (y = 0; y < h; y++) {
         for (x = 0; x < w; x++) {
             u32 *s = src;
             u32 *d = dst;
-            d[0] = s[0]; d[1] = s[1];
-            s += stride;
+            u32 a, b;
+            a = s[0]; b = s[1];
+            d[0] = a; d[1] = b;
+            s = (u32 *)((u8 *)s + stride);
             d += 2;
-            d[0] = s[0]; d[1] = s[1];
-            s += stride;
+            a = s[0]; b = s[1];
+            d[0] = a; d[1] = b;
+            s = (u32 *)((u8 *)s + stride);
             d += 2;
-            d[0] = s[0]; d[1] = s[1];
-            s += stride;
+            a = s[0]; b = s[1];
+            d[0] = a; d[1] = b;
+            s = (u32 *)((u8 *)s + stride);
             d += 2;
-            d[0] = s[0]; d[1] = s[1];
+            a = s[0]; b = s[1];
+            d[0] = a; d[1] = b;
             src += 2;
             dst += 8;
         }
