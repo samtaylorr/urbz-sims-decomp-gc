@@ -180,6 +180,17 @@ void fn_8028CE18(void *arg0) {
     M2C_FIELD(arg0, void **, 4) = temp_r0_2;
 }
 
+void fn_8028D378(void *arg0) {
+    s32 i;
+
+    for (i = 0; i < M2C_FIELD(arg0, s32 *, 0x818); i++) {
+        char *obj = M2C_FIELD(arg0, AptAnimEntry **, 0x81C)[i].obj;
+        char *vt = M2C_FIELD(obj, char **, 4);
+        (*(void (**)(void *))(vt + 0x14))(obj + *(s16 *)(vt + 0x10));
+    }
+    M2C_FIELD(arg0, s32 *, 0x818) = 0;
+}
+
 void fn_8028D490(void *arg0, void *arg1) {
     typedef struct {
         void *obj;
