@@ -432,8 +432,9 @@ void *fn_8028F870(u32 *self, s32 arg1) {
             fn_8024729C(self[7], self[9], 4, fn_8028F64C);
         } else {
             void *x = ((void **)lbl_804433C4[2])[lbl_804433C4[0] - 1];
+            s32 y = M2C_FIELD(x, s32 *, 0x28);
             lbl_80494B78 = x;
-            lbl_80494B7C = M2C_FIELD(x, s32 *, 0x28);
+            lbl_80494B7C = y;
             fn_8024729C(self[7], self[9], 4, fn_8028F724);
         }
     }
