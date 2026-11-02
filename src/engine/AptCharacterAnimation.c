@@ -357,6 +357,24 @@ s32 fn_8028EE34(void *arg0, void *arg1, char **arg2, void *arg3) {
     return 0;
 }
 
+void *fn_8028F208(u32 *self) {
+    extern void *lbl_80496130;
+    void *r;
+    s32 ok;
+
+    ok = 0;
+    r = lbl_80496130;
+    if ((self[0] & 0x3F) == 0x16) {
+        ok = (self[0] >> 15) & 1;
+    }
+    if (ok != 0 && (s32)self[9] > 0) {
+        r = fn_8028E2B8(self, self[9] - 1);
+        self[9]--;
+        ((s32 *)self[7])[self[9]] = 0;
+    }
+    return r;
+}
+
 void *fn_8028FB40(u32 *self) {
     extern void *lbl_80496130;
     s32 ok;
