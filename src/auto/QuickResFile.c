@@ -823,6 +823,13 @@ void fn_8018DA88(void *arg0, s32 *arg1, s32 arg2) {
     }
 }
 
+void fn_8018E9F4(char *arg0) {
+    void fn_800F80B4(void *);
+    *(u8 *)arg0 = 1;
+    fn_800F80B4(arg0 + 4);
+    fn_800F80B4(arg0 + 8);
+}
+
 void fn_8018EA34(void *arg0, u8 *p) {
     u8 t = p[1];
     p[1] = p[0];
