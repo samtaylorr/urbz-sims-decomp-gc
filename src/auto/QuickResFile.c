@@ -655,14 +655,14 @@ s32 *fn_8018D044(s32 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     arg0[0] = arg1;
     arg0[1] = arg2;
     arg0[3] = arg3;
-    arg0[11] = 0;
-    arg0[4] = 1;
     arg0[2] = 0;
     arg0[5] = 0;
     arg0[6] = 0;
     arg0[7] = 0;
     arg0[8] = 0;
     arg0[10] = 0;
+    arg0[11] = 0;
+    arg0[4] = 1;
     return arg0;
 }
 
