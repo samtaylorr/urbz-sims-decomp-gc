@@ -1404,3 +1404,12 @@ char *fn_8024FB8C(void) {
     return ((char *(*)(void))lbl_803F7AD4[0])() + 4;
 }
 
+s32 fn_8024FED8(void *arg0) {
+    void **obj = *(void ***)fn_8024FABC();
+    s32 (*f)(void *, void *, s32) = (s32 (*)(void *, void *, s32))obj[0];
+    if (f == NULL) {
+        return 0;
+    }
+    return f(obj, arg0, 0) != 0;
+}
+
