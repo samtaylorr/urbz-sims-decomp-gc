@@ -208,13 +208,13 @@ s32 fn_803646E8(void *arg0, void *arg1, s32 arg2) {
     return arg2;
 }
 
-void fn_8036475C(void *arg0, void *arg1) {
-    s32 fn_80245BB4();
+void fn_8036475C(void *arg0, void *arg1, f32 arg2) {
+    s32 fn_80245BB4(char *, const char *, ...);
     void fn_80364414(void *, void *, char *);
     extern char lbl_803F4F70[];
     char buf[128];
 
-    fn_80245BB4(buf, lbl_803F4F70);
+    fn_80245BB4(buf, lbl_803F4F70, arg2);
     fn_80364414(arg0, arg1, buf);
 }
 
