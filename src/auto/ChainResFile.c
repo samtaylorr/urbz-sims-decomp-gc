@@ -440,6 +440,12 @@ s32 fn_801056A4(void *arg0, void *arg1) {
     return var_r11;
 }
 
+s8 *fn_801056E8(s8 *self, s8 *src) {
+    self[0] += src[0];
+    self[1] += src[1];
+    return self;
+}
+
 s8 *fn_80105710(s8 *self, s8 *src) {
     self[0] -= src[0];
     self[1] -= src[1];
