@@ -63,6 +63,21 @@ void fn_800ABFC4(void *self) {
     M2C_FIELD(self, s32 *, 0x14) = lbl_8041FA1C[0];
 }
 
+void fn_800ABFD4(void *self) {
+    void **arr = (void **)self;
+    u8 i;
+
+    for (i = 0; i <= 1; i++) {
+        if (arr[i] != NULL) {
+            char *vt = M2C_FIELD(arr[i], char **, 0x440);
+            (*(void (**)(void *, s32))(vt + 0xC))((char *)arr[i] + *(s16 *)(vt + 8), 3);
+        }
+        arr[i] = NULL;
+    }
+    M2C_FIELD(self, s16 *, 0x10) = 0;
+    M2C_FIELD(self, u8 *, 8) = 0;
+}
+
 void fn_800ACA14(void) {
 
 }
@@ -104,6 +119,10 @@ loop_2:
 
 void fn_800ACF2C(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x14) = 4;
+}
+
+s32 fn_800ACF38(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x14) == 4;
 }
 
 void fn_800ADBEC(void) {
