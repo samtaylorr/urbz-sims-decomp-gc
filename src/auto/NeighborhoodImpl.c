@@ -222,6 +222,16 @@ s32 fn_80126110(void *arg0, void *arg1, s32 arg2) {
     return 0;
 }
 
+s32 fn_80126D54(char *self, s32 arg1, s32 arg2) {
+    s32 fn_80126C54(void *, void *, s32, s32);
+    char *vt = *(char **)self;
+    void *obj = M2C_FIELD(vt, void *(**)(void *), 0x13C)(self + M2C_FIELD(vt, s16 *, 0x138));
+    if (obj == NULL) {
+        return 0;
+    }
+    return fn_80126C54(self, obj, arg2, 1);
+}
+
 void fn_80126E8C(char *self, s32 arg1, char *p) {
     char *vt = *(char **)self;
     M2C_FIELD(vt, void (**)(void *, s32, void *, void *, void *, void *), 0x84)(self + M2C_FIELD(vt, s16 *, 0x80), arg1, p + 0xC, p + 4, p + 8, p);
