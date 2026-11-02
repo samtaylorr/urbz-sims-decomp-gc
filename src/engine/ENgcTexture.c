@@ -127,22 +127,45 @@ void fn_8035F8AC(void *arg0, s32 arg1) {
     }
 }
 
+s32 fn_8035FB18(void *self, void *a, s32 b, s32 c) {
+    s32 fn_80360014(Entry_8035F8AC **);
+    s32 fn_8036012C(Entry_8035F8AC *, void *, s32, s32);
+    void fn_802604AC(void *, void *);
+    void fn_802609A8(void *, void *, s32, s32, void *, s32);
+    void fn_80360284();
+    extern u8 lbl_803F4AE8[];
+    Entry_8035F8AC *e;
+    s32 i;
+    s32 r;
+
+    fn_8036023C();
+    i = fn_80360014(&e);
+    if (i != -1) {
+        r = fn_8036012C(e, a, b, c);
+        fn_803601FC();
+        fn_802604AC(lbl_803F4AE8, (u8 *)e + 0x24);
+        fn_802609A8((u8 *)e + 0x24, e->unk68, r, M2C_FIELD(M2C_FIELD(e, void **, 0x10), s32 *, 8), fn_80360284, 1);
+    } else {
+        fn_803601FC();
+    }
+    M2C_FIELD(a, s32 *, 0x40) = i;
+    return i;
+}
+
 s32 fn_8035FD24(void *self, void *tex) {
     extern Entry_8035F8AC lbl_804753B8[];
     s32 ret = 0;
     s32 i;
-    Entry_8035F8AC *e;
 
     fn_8036023C();
     i = fn_803609B4(tex);
     if (i != -1) {
-        e = &lbl_804753B8[i];
-        fn_803609F4(e);
-        if (M2C_FIELD(e, void **, 8) != NULL) {
-            fn_803609F4(M2C_FIELD(e, void **, 8));
+        fn_803609F4(&lbl_804753B8[i]);
+        if (M2C_FIELD(&lbl_804753B8[i], void **, 8) != NULL) {
+            fn_803609F4(M2C_FIELD(&lbl_804753B8[i], void **, 8));
         }
-        if (M2C_FIELD(e, void **, 0xC) != NULL) {
-            fn_803609F4(M2C_FIELD(e, void **, 0xC));
+        if (M2C_FIELD(&lbl_804753B8[i], void **, 0xC) != NULL) {
+            fn_803609F4(M2C_FIELD(&lbl_804753B8[i], void **, 0xC));
         }
         ret = 1;
     }
@@ -183,11 +206,13 @@ void fn_8035FF98(void *self, void *tex, u8 v) {
     extern Entry_8035F8AC lbl_804753B8[];
     void fn_80385C8C(void *, u8);
     s32 i;
+    Entry_8035F8AC *e;
 
     fn_8036023C();
     i = fn_803609B4(tex);
     if (i != -1 && M2C_FIELD(&lbl_804753B8[i], s32 *, 0) != 0) {
-        M2C_FIELD(&lbl_804753B8[i], u8 *, 0x15) = v;
+        e = &lbl_804753B8[i];
+        M2C_FIELD(e, u8 *, 0x15) = v;
         if (lbl_804753B8[i].unk1C != NULL) {
             fn_80385C8C(lbl_804753B8[i].unk1C, v);
         }
