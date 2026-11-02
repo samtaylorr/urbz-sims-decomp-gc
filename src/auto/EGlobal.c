@@ -34,7 +34,7 @@ void fn_80049790(void *self, s32 flags) {
 }
 
 void *fn_80049AC4(void) {
-    void fn_80248488(void *, s32, s32);
+    void *fn_80248488(void *, s32, u32);
     void *fn_8008D5C0(void *);
     void *r = EGlobal_AllocAligned(0x500);
 
