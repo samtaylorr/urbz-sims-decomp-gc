@@ -5,6 +5,11 @@ void fn_8023F0A4(void) {
 
 }
 
+s32 fn_80240584(void) {
+    register s32 *p asm("r3") = (s32 *)0x80437CA0;
+    return p[0x1B4];
+}
+
 s32 fn_80240E84(void) {
     void fn_8025302C(void *);
     fn_8025302C((void *)0x803F7351);
@@ -160,6 +165,49 @@ void fn_8024148C(void) {
 
 void fn_80241934(void) {
 
+}
+
+u32 fn_80241938(double x) {
+    extern const double lbl_803EBA18;
+    if (x >= lbl_803EBA18) {
+        return (s32)(x - lbl_803EBA18) ^ 0x80000000;
+    }
+    return (s32)x;
+}
+
+long long fn_80241980(long long u, s32 b) {
+    long long fn_8024E9AC(long long, s32);
+    return fn_8024E9AC(u, b);
+}
+
+void fn_80241984(void) {
+    fn_8024E1D0();
+    return;
+}
+
+long long fn_80241988(long long u, s32 b) {
+    long long fn_8024E114(long long, s32);
+    return fn_8024E114(u, b);
+}
+
+void fn_8024198C(void) {
+    void fn_8024E9EC(void);
+    fn_8024E9EC();
+}
+
+long long fn_80241990(long long u, long long v) {
+    long long fn_8024E154(long long, long long);
+    return fn_8024E154(u, v);
+}
+
+long long fn_80241994(long long u, long long v) {
+    long long fn_8024EF40(long long, long long);
+    return fn_8024EF40(u, v);
+}
+
+long long fn_80241998(long long u, long long v) {
+    long long fn_8024F424(long long, long long);
+    return fn_8024F424(u, v);
 }
 
 s32 fn_80241A90(void) {
