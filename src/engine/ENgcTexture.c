@@ -36,6 +36,14 @@ typedef struct {
 } Entry_8035F8AC;
 
 void fn_802FF4EC(void);
+void *fn_8035F368(void *arg0) {
+    void fn_802FED50(void *);
+    extern u8 lbl_8041D018[];
+    fn_802FED50(arg0);
+    M2C_FIELD(arg0, void **, 0xF0) = lbl_8041D018;
+    return arg0;
+}
+
 void fn_8035F6E4(void) {
     fn_802FF4EC();
 }
