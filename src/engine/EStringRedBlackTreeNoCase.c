@@ -72,25 +72,23 @@ char *fn_80364BEC(char *buf, s32 n, void *stream) {
     if (n <= 0) {
         return NULL;
     }
-    while (1) {
-        vt = M2C_FIELD(stream, void **, 0x28);
-        if (M2C_FIELD(vt, s32 (**)(void *, char *, s32), 0x1C)((char *)stream + M2C_FIELD(vt, s16 *, 0x18), &c, 1) == 0) {
-            if (p == buf) {
-                return NULL;
-            }
-            break;
-        }
+    while (vt = M2C_FIELD(stream, void **, 0x28),
+           M2C_FIELD(vt, s32 (**)(void *, char *, s32), 0x1C)((char *)stream + M2C_FIELD(vt, s16 *, 0x18), &c, 1) != 0) {
         if (c == '\r') {
             continue;
         }
         if (c == '\n') {
-            break;
+            goto done;
         }
         *p++ = c;
         if (--n == 0) {
-            break;
+            goto done;
         }
     }
+    if (p == buf) {
+        return NULL;
+    }
+done:
     *p = 0;
     return buf;
 }
@@ -140,8 +138,8 @@ void fn_80364A1C(void *self) {
     s32 *obj;
 
     while (EStrNode_Valid(node)) {
-        obj = M2C_FIELD(node, s32 **, 0);
         next = M2C_FIELD(node, void **, 4);
+        obj = M2C_FIELD(node, s32 **, 0);
         if (M2C_FIELD(list, s32 *, 8) != 0 && obj != NULL) {
             fn_802D39F0(obj, *obj);
             fn_802D20E8(obj);
