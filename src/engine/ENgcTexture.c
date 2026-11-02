@@ -112,6 +112,12 @@ void fn_80360FFC(void *self) {
     (*(void (**)(void *))(vt + 0x74))(obj + *(s16 *)(vt + 0x70));
 }
 
+void fn_80361200(void *self) {
+    u8 *obj = *(u8 **)((u8 *)self + 0x28);
+    u8 *vt = *(u8 **)(obj + 0x24);
+    (*(void (**)(void *))(vt + 0xA4))(obj + *(s16 *)(vt + 0xA0));
+}
+
 s32 fn_80361238(void *arg0) {
     return M2C_FIELD(M2C_FIELD(arg0, void **, 0x28), s32 *, 0x70);
 }
@@ -164,6 +170,7 @@ void *fn_80361408(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     *(s32 *)(self + 0x6C) = 0;
     *(s32 *)(self + 0x74) = 0;
     *(s32 *)(self + 0x78) = 0;
+    *(s8 *)(self + 0x80) = 0;
     *(s32 *)(self + 0x80) = 0;
     return self;
 }
@@ -673,21 +680,23 @@ void fn_80363540(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     u32 *src = (u32 *)arg0;
     s32 bw = arg1 / 8;
     s32 bh = arg2 / 4;
-    s32 stride = bw * 2;
+    s32 stride = bw * 8;
     s32 y;
     s32 x;
     s32 i;
     for (y = 0; y < bh; y++) {
-        u32 *row = (u32 *)arg3 + y * bw * 8;
+        u8 *row = (u8 *)arg3 + y * bw * 32;
         for (x = 0; x < bw; x++) {
-            u32 *p = row;
+            u8 *p = row;
+            u32 *s = src;
             for (i = 0; i < 4; i++) {
-                p[0] = src[i * 2];
-                p[1] = src[i * 2 + 1];
+                ((u32 *)p)[0] = s[0];
+                ((u32 *)p)[1] = s[1];
+                s += 2;
                 p += stride;
             }
             src += 8;
-            row += 2;
+            row += 8;
         }
     }
 }
