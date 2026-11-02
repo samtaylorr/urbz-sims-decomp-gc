@@ -1240,6 +1240,25 @@ long long fn_8024E154(long long u, s32 b) {
     return w.ll;
 }
 
+s32 fn_8024E194(long long a, long long b) {
+    DIunion au;
+    DIunion bu;
+
+    au.ll = a;
+    bu.ll = b;
+    if (au.s.high < bu.s.high) {
+        return 0;
+    } else if (au.s.high > bu.s.high) {
+        return 2;
+    }
+    if ((u32)au.s.low < (u32)bu.s.low) {
+        return 0;
+    } else if ((u32)au.s.low > (u32)bu.s.low) {
+        return 2;
+    }
+    return 1;
+}
+
 void fn_8024F99C(void);
 void fn_8024EF20(void) {
     fn_8024F99C();
