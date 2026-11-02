@@ -260,6 +260,14 @@ void fn_8004D8E0(void *arg0) {
     fn_8004174C(M2C_FIELD(arg0, s32 *, 0x150));
 }
 
+void fn_8004D904(void *self) {
+    void fn_800417FC(void *);
+
+    if (M2C_FIELD(self, void **, 0x150) != NULL) {
+        fn_800417FC(M2C_FIELD(self, void **, 0x150));
+    }
+}
+
 void fn_8004D930(void *arg0) {
     M2C_UNK fn_800416F4(s32);
     fn_800416F4(M2C_FIELD(arg0, s32 *, 0x150));
