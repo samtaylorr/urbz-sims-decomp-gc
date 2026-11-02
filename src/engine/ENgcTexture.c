@@ -11,6 +11,14 @@ static inline void ENgcTexture_CopyTile8(u32 *src, u8 *dst, s32 stride) {
     }
 }
 
+static inline void ENgcTexture_CopyColumn8(u32 *dst, u32 *src, s32 stride) {
+    s32 k;
+    for (k = 0; k < 8; k++) {
+        *dst++ = *src;
+        src = (u32 *)((u8 *)src + stride);
+    }
+}
+
 static inline void ENgcTexture_SetUnk(s32 *r, s32 n) {
     r[1] = 0;
     r[0] = 0;
@@ -308,26 +316,17 @@ void fn_803608C0(void *self) {
     extern void fn_80385F0C(s32, s32);
     extern void fn_80383AE8(s32, s32);
     extern void fn_80260574(void *);
-    struct {
-        u8 pad[0x75];
-        u8 b80 : 3;
-        u8 b10 : 1;
-        u8 b08 : 1;
-        u8 rest : 3;
-    } *p = self;
-    s32 t;
 
-    if (M2C_FIELD(self, s32 *, 0x0) != 0 && !p->b08) {
+    if (M2C_FIELD(self, s32 *, 0x0) != 0 && !(M2C_FIELD(self, u8 *, 0x75) & 8)) {
         if (M2C_FIELD(self, s32 *, 0x1C) != 0) {
             fn_80385F0C(M2C_FIELD(self, s32 *, 0x1C), -0x388);
             fn_80383AE8(M2C_FIELD(self, s32 *, 0x1C), 0);
         }
-        t = M2C_FIELD(self, u8 *, 0x75) & 0x10;
-        if (t == 0) {
+        if (!(M2C_FIELD(self, u8 *, 0x75) & 0x10)) {
             fn_80260574((char *)self + 0x24);
-            M2C_FIELD(self, s32 *, 0x0) = t;
+            M2C_FIELD(self, s32 *, 0x0) = 0;
         } else {
-            p->b08 = 1;
+            M2C_FIELD(self, u8 *, 0x75) |= 8;
         }
     }
 }
@@ -1170,23 +1169,25 @@ void fn_80363174(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     }
 }
 
-void fn_80363220(s32 src, s32 w, s32 h, s32 dst) {
-    u32 *out = (u32 *)dst;
+void fn_80363220(u32 *src, s32 w, s32 h, u32 *out) {
     u32 *row;
     u32 *p;
+    u32 *q;
     s32 x, y, k;
+    s32 bw = w / 8;
+    s32 bh = h / 8;
+    s32 stride = bw * 4;
 
-    w /= 8;
-    h /= 8;
-    for (y = 0; y < h; y++) {
-        row = (u32 *)src + y * w * 8;
-        for (x = 0; x < w; x++) {
-            p = row;
+    for (y = 0; y < bh; y++) {
+        row = src + y * bw * 8;
+        for (x = 0; x < bw; x++) {
+            p = row++;
+            q = out;
+            out += 8;
             for (k = 0; k < 8; k++) {
-                *out++ = *p;
-                p += w;
+                *q++ = *p;
+                p = (u32 *)((u8 *)p + stride);
             }
-            row++;
         }
     }
 }
