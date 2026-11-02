@@ -113,13 +113,15 @@ s32 *fn_801023A0(void *self, s32 key) {
     char *t = M2C_FIELD(self, char **, 8);
     u32 n = M2C_FIELD(t, u32 *, 0xC);
     s32 *e = M2C_FIELD(t, s32 **, 4);
+    s32 *r = NULL;
     u32 i;
     for (i = 0; i < n; i++, e += 5) {
         if (*e == key) {
-            return e;
+            r = e;
+            break;
         }
     }
-    return NULL;
+    return r;
 }
 
 s32 fn_801023F4(void *arg0) {
@@ -140,10 +142,7 @@ void *fn_801024F8(void *self, s32 i) {
     if (arr != NULL) {
         n = arr[-1];
     }
-    if (i < n) {
-        return &arr[i];
-    }
-    return (char *)self + 0x1C;
+    return i < n ? (void *)&arr[i] : (void *)((char *)self + 0x1C);
 }
 
 void *fn_8010280C(void *self, void *arg1, s32 arg2) {
@@ -253,7 +252,8 @@ s32 fn_80102A90(void *self, void *arg1, s32 key) {
     SearchEntry *e;
 
     if (tbl != NULL) {
-        hi = tbl + ((s32 *)tbl)[-1];
+        s32 n = ((s32 *)tbl)[-1];
+        hi = tbl + n;
     }
     e = fn_803A097C(tbl, hi, key);
     if (e != NULL) {
