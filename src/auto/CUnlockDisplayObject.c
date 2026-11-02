@@ -310,6 +310,12 @@ s32 fn_800BB424(void *arg0) {
     return result;
 }
 
+extern void fn_802F42A8(s32, s32, s32, s32, s32);
+
+static inline void CUnlockDisplayObject_Play(s32 a, s32 b) {
+    fn_802F42A8(a, b, 0, 0, 0);
+}
+
 void fn_800BB4C4(void *arg0) {
     extern void *fn_802D1FC8(s32);
     extern void *fn_802E55C0(void *);
