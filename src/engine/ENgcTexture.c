@@ -165,11 +165,11 @@ s32 fn_8035FD24(void *self, void *tex) {
     i = fn_803609B4(tex);
     if (i != -1) {
         fn_803609F4(&lbl_804753B8[i]);
-        if (M2C_FIELD(&lbl_804753B8[i], void **, 8) != NULL) {
-            fn_803609F4(M2C_FIELD(&lbl_804753B8[i], void **, 8));
+        if (lbl_804753B8[i].unk8 != NULL) {
+            fn_803609F4(lbl_804753B8[i].unk8);
         }
-        if (M2C_FIELD(&lbl_804753B8[i], void **, 0xC) != NULL) {
-            fn_803609F4(M2C_FIELD(&lbl_804753B8[i], void **, 0xC));
+        if (lbl_804753B8[i].unkC != NULL) {
+            fn_803609F4(lbl_804753B8[i].unkC);
         }
         ret = 1;
     }
@@ -1091,21 +1091,16 @@ void fn_80363174(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
         for (x = 0; x < w; x++) {
             u32 *s = src;
             u32 *d = dst;
-            u32 b, a;
-            a = s[0]; b = s[1];
-            d[0] = a; d[1] = b;
+            d[0] = s[0]; d[1] = s[1];
             s = (u32 *)((u8 *)s + stride);
             d += 2;
-            a = s[0]; b = s[1];
-            d[0] = a; d[1] = b;
+            d[0] = s[0]; d[1] = s[1];
             s = (u32 *)((u8 *)s + stride);
             d += 2;
-            a = s[0]; b = s[1];
-            d[0] = a; d[1] = b;
+            d[0] = s[0]; d[1] = s[1];
             s = (u32 *)((u8 *)s + stride);
             d += 2;
-            a = s[0]; b = s[1];
-            d[0] = a; d[1] = b;
+            d[0] = s[0]; d[1] = s[1];
             src += 2;
             dst += 8;
         }
