@@ -127,6 +127,19 @@ void fn_8011C01C(void *arg0, s32 arg1, s32 arg2) {
     }
 }
 
+Unk8011C094 fn_8011C094(void) {
+    void fn_80105534(void *);
+    Unk8011C094 fn_80151048(void *, s32);
+    void fn_801055FC(void *, s32);
+    u8 buf[8];
+    Unk8011C094 r;
+
+    fn_80105534(buf);
+    r = fn_80151048(buf, 0);
+    fn_801055FC(buf, 2);
+    return r;
+}
+
 s32 fn_8011C3C8(void *arg0) {
     void *obj = M2C_FIELD(M2C_FIELD(arg0, void **, 0), void **, 4);
     void *vt = M2C_FIELD(obj, void **, 4);
@@ -281,6 +294,20 @@ void fn_8011D038(void *arg0) {
 
 s32 fn_8011D7D0(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x30);
+}
+
+void fn_8011D7D8(void *arg0, void *arg1) {
+    void fn_8031EA2C(void *);
+    void fn_8031EAB8(void *);
+    void *cur = M2C_FIELD(arg0, void **, 0x30);
+
+    if (cur != NULL && cur != arg1) {
+        fn_8031EA2C(cur);
+    }
+    M2C_FIELD(arg0, void **, 0x30) = arg1;
+    if (arg1 != NULL) {
+        fn_8031EAB8(arg1);
+    }
 }
 
 void *fn_8011D904(void *arg0) {
