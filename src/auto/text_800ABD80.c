@@ -147,7 +147,7 @@ void fn_800ACDDC(void *self, s32 arg1, s32 arg2) {
 
     idx = M2C_FIELD(self, s32 *, 0x38);
     for (i = 0; i <= 0x7F; i++) {
-        slot = (u8 *)self + idx * 8 + 0x3C;
+        slot = (u8 *)self + (idx * 8 + 0x3C);
         if (fn_800ABE78(slot) != 0) {
             fn_800ABDD4(slot, arg1, arg2);
             M2C_FIELD(self, s32 *, 0x38) = idx;
