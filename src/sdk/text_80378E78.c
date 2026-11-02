@@ -384,6 +384,27 @@ void fn_80380B6C(void) {
     fn_803827A4();
 }
 
+void *fn_80380D24(s32 arg0) {
+    extern void *lbl_804763C0[32];
+    return lbl_804763C0[arg0];
+}
+
+void fn_80380D3C(void) {
+    void *fn_80381020(void);
+    void fn_8038103C(void *);
+    void fn_80380FCC(void *);
+    void *p;
+    for (p = fn_80381020(); p != NULL; p = fn_80381020()) {
+        if (M2C_FIELD(p, void **, 0xC) != NULL) {
+            if (M2C_FIELD(p, void (**)(void *), 0x10) != NULL) {
+                M2C_FIELD(p, void (**)(void *), 0x10)(p);
+            }
+            fn_8038103C(p);
+            fn_80380FCC(p);
+        }
+    }
+}
+
 void fn_80380DB0(void) {
     extern void *lbl_80496388;
     extern void *lbl_80476440[32];
