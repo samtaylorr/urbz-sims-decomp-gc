@@ -334,6 +334,14 @@ void fn_800A6734(void *arg0) {
     }
 }
 
+u32 fn_800A72D8(void *self, u32 arg0, u32 arg1, u32 arg2, u32 arg3) {
+    u32 b = (arg0 & 0xFF) + (arg1 & 0xFF) + (arg2 & 0xFF) + (arg3 & 0xFF);
+    u32 g = ((arg0 >> 8) & 0xFF) + ((arg1 >> 8) & 0xFF) + ((arg2 >> 8) & 0xFF) + ((arg3 >> 8) & 0xFF);
+    u32 r = ((arg0 >> 16) & 0xFF) + ((arg1 >> 16) & 0xFF) + ((arg2 >> 16) & 0xFF) + ((arg3 >> 16) & 0xFF);
+    u32 a = (arg0 >> 24) + (arg1 >> 24) + (arg2 >> 24) + (arg3 >> 24);
+    return (b >> 2) | ((g << 6) & 0x1FF00) | ((r << 14) & 0x1FF0000) | ((a >> 2) << 24);
+}
+
 void fn_800A7368(u32 arg0, u8 *arg1) {
     u8 a = arg0 >> 24;
     u8 r = arg0 >> 16;
