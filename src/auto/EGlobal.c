@@ -365,7 +365,10 @@ void *fn_8004BEDC(void *arg1, u32 arg2) {
     u32 i;
 
     r = fn_8032D5C8(*(s32 *)((char *)arg1 + 0x11C), lbl_803C6C9C);
-    t = r ? r : NULL;
+    t = NULL;
+    if (r != NULL) {
+        t = r;
+    }
     if (t != NULL) {
         n = *(u32 *)(t + 0xC);
         e = *(u32 **)(t + 0x4);
@@ -826,9 +829,10 @@ s32 fn_8004E81C(void) {
 }
 
 void fn_8004E824(void *self) {
+    typedef struct { u8 pad[0x1C]; s32 x; s32 y; } G;
     extern char *lbl_8041FAD0[];
     extern struct { u8 pad[0x184]; s8 *p; } lbl_8041F94C;
-    extern u8 *lbl_80495050;
+    extern G *lbl_80495050;
     s32 changed = 0;
     s32 x;
     s32 y;
@@ -853,8 +857,8 @@ void fn_8004E824(void *self) {
         lbl_8041F94C.p[0x1F] = x;
         lbl_8041F94C.p[0x20] = y;
     }
-    *(s32 *)(lbl_80495050 + 0x20) = y;
-    *(s32 *)(lbl_80495050 + 0x1C) = x;
+    lbl_80495050->x = x;
+    lbl_80495050->y = y;
 }
 
 s32 fn_8004E8B8(void) {
