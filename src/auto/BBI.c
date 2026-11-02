@@ -1495,6 +1495,15 @@ void fn_800638B8(void) {
     fn_802D2430();
 }
 
+void *fn_800638D8(void) {
+    void *fn_80248488(void *, s32, u32);
+    void *fn_8006177C(void *);
+    void *p = BBI_AllocAligned(0x660);
+
+    fn_80248488(p, 0, 0x660);
+    return fn_8006177C(p);
+}
+
 void fn_80063980(void) {
     fn_8006177C();
 }
