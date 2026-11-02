@@ -40,10 +40,6 @@ typedef union {
     long long ll;
 } DIunion;
 
-static inline void SetLen16(u8 *p, s32 len) {
-    *(u16 *)(p + 2) = len << 8;
-}
-
 void fn_80241A98(s32 arg0, u32 arg1, u32 arg2, s32 arg3) {
     extern s32 lbl_80440514[];
     void fn_80241754(s32);
@@ -51,15 +47,13 @@ void fn_80241A98(s32 arg0, u32 arg1, u32 arg2, s32 arg3) {
     u8 buf[0x18];
     u8 *p;
     s32 i;
-    s32 len;
 
     p = buf;
     for (i = 0x18; i != 0; i--) {
         *p++ = 0;
     }
-    len = 0x10;
     buf[0] = 9;
-    *(u16 *)(buf + 2) = len << 8;
+    *(u16 *)(buf + 2) = (u16)(0x10 << 8);
     if (lbl_80440514[0] != 0) {
         buf[8] = 9;
     } else {
