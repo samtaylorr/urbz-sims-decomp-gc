@@ -2359,8 +2359,8 @@ void fn_8039DB24(void *arg0, void *arg1) {
     s32 a = M2C_FIELD(arg1, s32 *, 0);
     s32 b = M2C_FIELD(arg1, s32 *, 4);
     M2C_FIELD(arg0, u32 *, 4) &= ~2;
-    M2C_FIELD(arg0, s32 *, 0x14) = a;
     M2C_FIELD(arg0, s32 *, 0x18) = b;
+    M2C_FIELD(arg0, s32 *, 0x14) = a;
 }
 
 void *fn_8039DB44(void *arg0) {
