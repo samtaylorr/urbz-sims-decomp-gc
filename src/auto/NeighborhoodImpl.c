@@ -36,9 +36,12 @@ static inline void NbhdPair_Init(NbhdPair *p) {
 
 typedef struct NbhdPath { s32 a; s32 b; char buf[0x104]; } NbhdPath;
 
-static inline void NbhdPath_Init(NbhdPath *p) {
+static inline NbhdPath *NbhdPath_Init(NbhdPath *p) {
     void fn_800F687C(void *, void *, s32);
-    fn_800F687C(p, p->buf, 0x104);
+    char *buf = p->buf;
+    s32 n = 0x104;
+    fn_800F687C(p, buf, n);
+    return p;
 }
 
 void fn_80123160(void) {
@@ -76,13 +79,12 @@ void fn_80123450(void *self) {
 
 void *fn_801234B4(void *self) {
     extern u8 lbl_8040FD60[];
-    void fn_800F687C(void *, void *, s32);
     void fn_800F6FB4(void *, void *, s32);
     s16 *p;
     s32 i;
 
     M2C_FIELD(self, void **, 0) = lbl_8040FD60;
-    fn_800F687C((char *)self + 4, (char *)self + 0xC, 0x104);
+    NbhdPath_Init((NbhdPath *)((char *)self + 4));
     fn_800F6FB4((char *)self + 0x110, (char *)self + 0x118, 0x20);
     M2C_FIELD(self, s32 *, 0x158) = 0;
     M2C_FIELD(self, s32 *, 0x15C) = 0;
