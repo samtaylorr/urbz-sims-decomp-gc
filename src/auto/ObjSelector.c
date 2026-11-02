@@ -381,6 +381,16 @@ void *fn_8016E604(void *self, s32 a, s32 b) {
     return self;
 }
 
+void *fn_8016E620(void *self, s32 a, void *obj, s32 b) {
+    void fn_8016E6FC(void *, void *);
+    M2C_FIELD(self, s32 *, 0) = a;
+    M2C_FIELD(self, s32 *, 4) = 0;
+    M2C_FIELD(self, s32 *, 8) = b;
+    M2C_FIELD(self, s32 *, 0x1C) = 0;
+    fn_8016E6FC(self, obj);
+    return self;
+}
+
 s32 *fn_8016F4AC(s32 *arg0) {
     arg0[0] = 0;
     arg0[1] = 0;
