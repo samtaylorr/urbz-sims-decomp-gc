@@ -71,8 +71,8 @@ static inline void CRF3_set(CRF3 *r, f32 x, f32 y, f32 z) {
 
 static inline void CRB3_setv(CRB3 *r, f32 *v) {
     r->a = (s32)v[0];
-    r->c = 1;
     r->b = (s32)v[1];
+    r->c = 1;
 }
 
 static inline void CRF3_setv(CRF3 *r, s8 *v) {
@@ -421,8 +421,11 @@ void *fn_80102B5C(void *self) {
     M2C_FIELD(self, u8 **, 0x10) = lbl_8040D788;
     e = (ChainSlot *)((char *)self + 0x14);
     for (i = 8; i != 0; i--, e++) {
+        S32Pair p = S32Pair_Make(0, 0);
         e->obj = NULL;
-        ChainVec_Init((ChainVec *)&e->begin);
+        e->begin = p.a;
+        e->end = p.b;
+        ChainVecAlloc_Init(&e->alloc);
         e->flag = 1;
     }
     return self;
@@ -436,9 +439,11 @@ void fn_80102BC8(void *self, s32 flags) {
     begin = (ChainSlot *)((char *)self + 0x14);
     if (begin != NULL) {
         ChainSlot *p = begin + 8;
-        while (p != begin) {
-            p--;
-            ChainVec_Free((ChainVec *)&p->begin);
+        if (begin != p) {
+            do {
+                p--;
+                ChainVec_Free((ChainVec *)&p->begin);
+            } while (begin != p);
         }
     }
     fn_8018F914(self, flags);
@@ -513,13 +518,18 @@ s32 fn_80102EA0(void *self) {
 
     fn_8018FA84(self, 0);
     ret = 0;
+    i = 0;
     e = (ChainEntry *)((char *)self + 0x14);
-    for (i = 0; i < 8 && e[i].obj != NULL; i++) {
+    while (e[i].obj != NULL) {
         void *o = e[i].obj;
         char *vt = *(char **)((char *)o + 0x10);
         r = (*(s32 (**)(void *))(vt + 0x34))((char *)o + *(s16 *)(vt + 0x30));
         if (r != 0) {
             ret = r;
+        }
+        i++;
+        if (i > 7) {
+            break;
         }
     }
     return ret;
