@@ -1,6 +1,18 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+typedef struct PtrVec { void **begin; void **end; } PtrVec;
+
+static inline void PtrVec_DestroyAll(PtrVec *v) {
+    void fn_8010B528(void *);
+    void **it;
+
+    for (it = v->begin; it != v->end; it++) {
+        fn_8010B528(*it);
+    }
+    v->end = v->begin;
+}
+
 void fn_80123160(void) {
     M2C_UNK fn_801234B4();
     M2C_UNK fn_802D1FC8(M2C_UNK);
@@ -78,9 +90,16 @@ void fn_80123824(void *arg0) {
     (*(void (**)(u8 *))(*(u8 **)lbl_8049665C + 0x5C))(lbl_8049665C + *(s16 *)(*(u8 **)lbl_8049665C + 0x58));
     temp_r9 = (char *)arg0 + 0x1C0;
     p = M2C_FIELD(arg0, void ***, 0x1C0);
-    while (p != M2C_FIELD(temp_r9, void ***, 4)) {
-        fn_8010B528(*p++);
+    if (p != M2C_FIELD(temp_r9, void ***, 4)) {
+loop_1:
+        fn_8010B528(*p);
+        p++;
+        if (p == M2C_FIELD(temp_r9, void ***, 4)) {
+            goto block_2;
+        }
+        goto loop_1;
     }
+block_2:
     M2C_FIELD(arg0, void ***, 0x1C4) = M2C_FIELD(arg0, void ***, 0x1C0);
 }
 
@@ -99,16 +118,18 @@ void fn_80124758(char *self, s32 arg1, void *arg2) {
     typedef struct { s32 a; s32 b; char buf[0x104]; } Path;
     Path p1;
     Path p2;
+    Path *a = &p1;
+    Path *b = &p2;
+    char *vt;
+    char *s;
 
-    fn_800F687C(&p1, p1.buf, 0x104);
+    fn_800F687C(a, a->buf, 0x104);
     fn_800F687C(&p2, p2.buf, 0x104);
-    {
-        char *vt = *(char **)self;
-        void (*f)(void *, void *) = M2C_FIELD(vt, void (**)(void *, void *), 0x3C);
-        f(self + M2C_FIELD(vt, s16 *, 0x38), &p2);
-    }
-    fn_80245BB4(fn_800F69F0(&p1), lbl_803D8640, fn_800F69E8(&p2), arg1);
-    fn_800F6A38(arg2, &p1);
+    vt = *(char **)self;
+    M2C_FIELD(vt, void (**)(void *, void *), 0x3C)(self + M2C_FIELD(vt, s16 *, 0x38), b);
+    s = fn_800F69F0(a);
+    fn_80245BB4(s, lbl_803D8640, fn_800F69E8(b), arg1);
+    fn_800F6A38(arg2, a);
 }
 
 s32 fn_80124808(void) {
@@ -159,6 +180,29 @@ void *fn_801248D0(void *self, s32 id) {
         }
     }
     return found;
+}
+
+void fn_80124D98(char *self, char *obj) {
+    char *fn_8011DCBC(void *);
+    void fn_80122BE4(void *);
+    typedef struct { void **begin; void **end; } V;
+    V *v = (V *)(self + 0x1B0);
+    void **it = v->begin;
+    s32 n = *(s16 *)(obj + 4);
+
+    if (it != v->end) {
+        V *w = v;
+        do {
+            if (*it != NULL) {
+                char *p = fn_8011DCBC(*it);
+                char *vt = *(char **)p;
+                void (*f)(void *, s32) = M2C_FIELD(vt, void (**)(void *, s32), 0x34);
+                f(p + M2C_FIELD(vt, s16 *, 0x30), n);
+            }
+            it++;
+        } while (it != w->end);
+    }
+    fn_80122BE4(obj);
 }
 
 void fn_80124E20(char *self, char *obj) {
