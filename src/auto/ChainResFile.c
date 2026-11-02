@@ -565,18 +565,9 @@ void *fn_80105120(void *self) {
 void fn_8010515C(void *self, s32 flags) {
     extern void *lbl_804943FC;
     extern u8 lbl_8040D8B8[];
-    void fn_802D20E8(void *);
-    void **p;
 
     M2C_FIELD(self, void **, 0xC) = lbl_8040D8B8;
-    p = &lbl_804943FC;
-    while (*p != NULL) {
-        if (*p == self) {
-            *p = M2C_FIELD(self, void **, 0x0);
-            break;
-        }
-        p = (void **)*p;
-    }
+    ChainRes_Unlink(&lbl_804943FC, self);
     if (flags & 1) {
         fn_802D20E8(self);
     }
