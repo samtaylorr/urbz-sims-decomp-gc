@@ -1268,6 +1268,37 @@ long long fn_8024E754(double a) {
     return fn_8024E798(a);
 }
 
+double fn_8024E950(long long u) {
+    DIunion uu;
+    double d;
+
+    uu.ll = u;
+    d = (double)uu.s.high * 65536.0 * 65536.0;
+    d += (u32)uu.s.low;
+    return d;
+}
+
+long long fn_8024E9AC(long long u, s32 b) {
+    DIunion w;
+    s32 bm;
+    DIunion uu;
+
+    if (b == 0) {
+        return u;
+    }
+    uu.ll = u;
+    bm = 32 - b;
+    if (bm <= 0) {
+        w.s.high = 0;
+        w.s.low = (u32)uu.s.high >> -bm;
+    } else {
+        u32 carries = (u32)uu.s.high << bm;
+        w.s.high = (u32)uu.s.high >> b;
+        w.s.low = ((u32)uu.s.low >> b) | carries;
+    }
+    return w.ll;
+}
+
 void fn_8024F99C(void);
 void fn_8024EF20(void) {
     fn_8024F99C();
