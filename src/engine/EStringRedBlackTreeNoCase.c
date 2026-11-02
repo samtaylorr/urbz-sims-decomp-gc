@@ -1552,6 +1552,19 @@ s32 fn_803698D8(void **arg0) {
     return var_r9;
 }
 
+void fn_80369900(void *self, void *other, s32 overwrite) {
+    void *n;
+
+    for (n = *(void **)other; EStrNode_Valid(n); n = M2C_FIELD(n, void **, 0x10)) {
+        void *value = M2C_FIELD(n, void **, 0x18);
+        if (overwrite) {
+            fn_80368FFC(self, M2C_FIELD(n, s32 *, 0x1C), value, 1);
+        } else {
+            fn_80368F8C(self, M2C_FIELD(n, s32 *, 0x1C), value);
+        }
+    }
+}
+
 void fn_80369800(EMat4Node **list);
 void *fn_80369988(EMat4Node **self, EMat4Node **other) {
     void fn_80369900(void *, void *, s32);
