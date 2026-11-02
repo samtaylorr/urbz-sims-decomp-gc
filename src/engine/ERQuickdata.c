@@ -370,13 +370,10 @@ u8 fn_80331314(void *arg0) {
 }
 
 u8 fn_80331330(void *arg0, u32 arg1) {
-    if (M2C_FIELD(arg0, u32 *, 0x64) & 2) {
-        if (M2C_FIELD(arg0, u8 *, 0x50) > arg1) {
-            return M2C_FIELD(arg0, u8 **, 0x54)[arg1];
-        }
+    if (!(M2C_FIELD(arg0, u32 *, 0x64) & 2)) {
         return 0;
     }
-    return 0;
+    return (M2C_FIELD(arg0, u8 *, 0x50) > arg1) ? M2C_FIELD(arg0, u8 **, 0x54)[arg1] : 0;
 }
 
 u8 fn_80331364(void *arg0) {
