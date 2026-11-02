@@ -164,10 +164,11 @@ s32 fn_803646E8(void *arg0, void *arg1, s32 arg2) {
     extern char lbl_803F4F6C[];
     char *s = fn_8036458C(arg0, arg1, NULL);
     if (s != NULL) {
+        s32 result = 0;
         if (fn_802486DC(s, lbl_803F4F64) == 0 || fn_802486DC(s, lbl_803F4F6C) == 0) {
-            return 1;
+            result = 1;
         }
-        return 0;
+        return result;
     }
     return arg2;
 }
