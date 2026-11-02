@@ -193,6 +193,48 @@ void fn_8032D498(void *arg0, s32 arg1, s32 arg2) {
     fn_8032D444(arg0);
 }
 
+s32 fn_8032D508(void *arg0, s32 lo, s32 hi, s32 key) {
+    s32 fn_802486DC(s32, s32);
+    s32 n;
+    s32 mid;
+    s32 c;
+
+    if (key != 0) {
+        while ((n = hi - lo) >= 0) {
+            if (n == 0) {
+                if (fn_802486DC(key, M2C_FIELD(arg0, ERQdTable **, 0x20)->entries[lo].unk0) == 0) {
+                    return lo;
+                }
+                break;
+            }
+            mid = lo + n / 2;
+            c = fn_802486DC(key, M2C_FIELD(arg0, ERQdTable **, 0x20)->entries[mid].unk0);
+            if (c == 0) {
+                return mid;
+            }
+            if (c > 0) {
+                lo = mid + 1;
+            } else {
+                hi = mid - 1;
+            }
+        }
+    }
+    return -1;
+}
+
+ERQdEntry *fn_8032D5C8(void *arg0, s32 key) {
+    ERQdEntry *result = NULL;
+    s32 idx;
+
+    if (key != 0) {
+        idx = fn_8032D508(arg0, 0, M2C_FIELD(arg0, ERQdTable **, 0x20)->unk8 - 1, key);
+        if (idx >= 0) {
+            result = &M2C_FIELD(arg0, ERQdTable **, 0x20)->entries[idx];
+        }
+    }
+    return result;
+}
+
 void *fn_8032D8E0(void *arg0, u32 arg1, u32 *out) {
     s32 fn_8032D7DC(void *, s32, s32, u32);
     s32 idx;
