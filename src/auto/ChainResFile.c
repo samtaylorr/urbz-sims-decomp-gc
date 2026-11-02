@@ -199,10 +199,10 @@ void *fn_801024F8(void *self, s32 i) {
     if (arr != NULL) {
         n = arr[-1];
     }
-    if (i < n) {
-        return &arr[i];
+    if (i >= n) {
+        return (char *)self + 0x1C;
     }
-    return (char *)self + 0x1C;
+    return &arr[i];
 }
 
 void *fn_8010280C(void *self, void *arg1, s32 arg2) {
@@ -639,20 +639,11 @@ s32 fn_8010531C(s32 *self) {
 }
 
 void fn_80105324(u8 *out, f32 *in) {
-    s32 a, b;
-    u8 *o = out;
-    a = (s32)in[0];
-    o[0] = a;
-    o[2] = 1;
-    b = (s32)in[1];
-    o[1] = b;
+    *(CRB3 *)out = CRB3_make((s32)in[0], (s32)in[1]);
 }
 
 void fn_80105368(f32 *out, s8 *in) {
-    f32 *o = out;
-    o[0] = in[0];
-    o[1] = in[1];
-    o[2] = in[2];
+    *(CRF3 *)out = CRF3_make(in[0], in[1], in[2]);
 }
 
 void fn_80105400(f32 *out, s8 *in) {
