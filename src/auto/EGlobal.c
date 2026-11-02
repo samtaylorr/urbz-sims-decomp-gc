@@ -405,6 +405,11 @@ void fn_8004DD34(void) {
     }
 }
 
+void fn_8004DDE0(char *self) {
+    char *vt = *(char **)(self + 0x3A4);
+    (*(void (**)(char *, s32, s32))(vt + 0x1C))(self + *(s16 *)(vt + 0x18), 0, 0x2B);
+}
+
 s32 fn_8004E644(void) {
     return 0;
 }
