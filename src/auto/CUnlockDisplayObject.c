@@ -474,21 +474,26 @@ u32 fn_800BCD18(const u16 *a, const u16 *b, u16 *dst, u32 n) {
 }
 
 u32 fn_800BCDA0(const u16 *src, u16 *dst, u32 n) {
+    const u16 *s;
+    const u16 *p;
+    u16 *d;
     u32 count;
-    u32 len = 0;
-    u16 *p = dst;
+    u32 len;
+    p = dst;
+    len = 0;
     while (*p != 0) {
         p++;
         len++;
     }
-    p = dst + len;
+    s = src;
+    d = dst + len;
     count = 0;
-    while (*src != 0 && len < n - 1) {
-        *p++ = *src++;
+    while (*s != 0 && len < n - 1) {
+        *d++ = *s++;
         len++;
         count++;
     }
-    *p = 0;
+    *d = 0;
     return count;
 }
 
@@ -568,6 +573,13 @@ s32 fn_800BD32C(void *arg0, void *arg1, void *arg2, void *arg3) {
         }
     } while (r != 0);
     return found;
+}
+
+void fn_800BEED8(s32 arg0, s32 arg1) {
+    extern void fn_8033E8B4(void);
+    if (arg1 == 0xFFFF && arg0 != 0) {
+        fn_8033E8B4();
+    }
 }
 
 void fn_800BEF10(void) {
