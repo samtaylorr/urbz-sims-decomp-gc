@@ -246,8 +246,26 @@ void *fn_8016C8BC(void *arg0) {
     return arg0;
 }
 
+s16 fn_8016CBE0(void *arg0) {
+    s16 x = M2C_FIELD(M2C_FIELD(arg0, char **, 0x38), s16 *, 0xE);
+    if (x < 0) {
+        if (x != -1) {
+            return 0;
+        }
+        arg0 = fn_8016CC44(arg0);
+        return M2C_FIELD(M2C_FIELD(arg0, char **, 0x38), s16 *, 0xE);
+    }
+    return x;
+}
+
 s32 fn_8016CC2C(void *arg0, void *arg1) {
     return M2C_FIELD(arg0, s32 *, 4) == M2C_FIELD(arg1, s32 *, 4);
+}
+
+void fn_8016CCA0(void *arg0) {
+    char *obj = M2C_FIELD(arg0, char **, 0x50);
+    char *vt = *(char **)obj;
+    M2C_FIELD(vt, void (**)(void *, s32), 0x84)(obj + M2C_FIELD(vt, s16 *, 0x80), M2C_FIELD(M2C_FIELD(arg0, char **, 0x38), s32 *, 0x8C));
 }
 
 s32 fn_8016CCE0(void *arg0) {
