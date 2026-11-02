@@ -33,6 +33,40 @@ typedef struct ChainKeyEntry {
     s16 unk8;
 } ChainKeyEntry;
 
+typedef struct CRB3 {
+    u8 a, b, c;
+} CRB3;
+
+typedef struct CRF3 {
+    f32 x, y, z;
+} CRF3;
+
+static inline CRB3 CRB3_make(s32 a, s32 b) {
+    CRB3 r;
+    r.a = a;
+    r.c = 1;
+    r.b = b;
+    return r;
+}
+
+static inline CRF3 CRF3_make(f32 x, f32 y, f32 z) {
+    CRF3 r;
+    r.x = x;
+    r.y = y;
+    r.z = z;
+    return r;
+}
+
+static inline void ChainRes_Unlink(void **p, void *self) {
+    while (*p != NULL) {
+        if (*p == self) {
+            *p = *(void **)self;
+            return;
+        }
+        p = (void **)*p;
+    }
+}
+
 typedef struct ChainResHandle {
     s32 value;
 } ChainResHandle;
@@ -275,13 +309,12 @@ s32 fn_80102A90(void *self, void *arg1, s32 key) {
     SearchEntry *fn_803A097C(SearchEntry *lo, SearchEntry *hi, s32 key);
     SearchEntry *tbl = M2C_FIELD(M2C_FIELD(arg1, void **, 0x54), SearchEntry **, 0x1C);
     SearchEntry *e;
-    s32 hi = 0;
+    SearchEntry *hi = NULL;
 
     if (tbl != NULL) {
-        hi = ((s32 *)tbl)[-1];
-        hi = (s32)(tbl + hi);
+        hi = tbl + ((s32 *)tbl)[-1];
     }
-    e = fn_803A097C(tbl, (SearchEntry *)hi, key);
+    e = fn_803A097C(tbl, hi, key);
     if (e != NULL) {
         M2C_FIELD(self, s32 *, 4) = e->unk4;
         M2C_FIELD(self, s32 *, 8) = e->unk8;
@@ -322,13 +355,12 @@ ChainResHandle fn_80102B4C(void *arg0) {
 void fn_80102C60(void *self, void *obj) {
     ChainEntry *e = (ChainEntry *)((char *)self + 0x14);
     s32 i;
-    for (i = 0; i < 8; i++) {
-        ChainEntry *p = &e[i];
-        if (p->obj == NULL) {
-            p->obj = obj;
-            *(s32 *)(p->pad + 4) = *(s32 *)(p->pad + 0);
-            *(s32 *)(p->pad + 0x10) = 1;
-            break;
+    for (i = 0; i < 8; i++, e++) {
+        if (e->obj == NULL) {
+            e->obj = obj;
+            *(s32 *)(e->pad + 4) = *(s32 *)(e->pad + 0);
+            *(s32 *)(e->pad + 0x10) = 1;
+            return;
         }
     }
 }
@@ -336,8 +368,8 @@ void fn_80102C60(void *self, void *obj) {
 s16 fn_80102D70(void *self) {
     ChainEntry *e = (ChainEntry *)((char *)self + 0x14);
     s32 i;
-    s16 count = 0;
-    for (i = 0; i < 8 && e[count].obj != NULL; i++) {
+    s32 count = 0;
+    for (i = 0, e += count; i < 8 && e->obj != NULL; i++, e++) {
         count++;
     }
     return count;
@@ -346,10 +378,15 @@ s16 fn_80102D70(void *self) {
 void *fn_80102DAC(void *self, s32 idx) {
     ChainEntry *e = (ChainEntry *)((char *)self + 0x14);
     s32 count = 0;
-    s32 i;
-    for (i = 0; i < 8 && e[i].obj != NULL; i++, count++) {
+    s32 i = 0;
+    while (e[i].obj != NULL) {
         if (count == idx) {
             return e[i].obj;
+        }
+        i++;
+        count++;
+        if (i > 7) {
+            return NULL;
         }
     }
     return NULL;
@@ -362,11 +399,12 @@ s32 fn_80102E0C(void *self) {
     s32 ret;
     s32 r;
 
-    fn_8018FA84(self, 0);
     ret = 0;
+    fn_8018FA84(self, 0);
+    i = 0;
     e = (ChainEntry *)((char *)self + 0x14);
-    for (i = 0; i < 8 && e[i].obj != NULL; i++) {
-        void *o = e[i].obj;
+    for (e += ret; i < 8 && e->obj != NULL; i++, e++) {
+        void *o = e->obj;
         char *vt = *(char **)((char *)o + 0x10);
         r = (*(s32 (**)(void *))(vt + 0x44))((char *)o + *(s16 *)(vt + 0x40));
         if (r != 0) {
