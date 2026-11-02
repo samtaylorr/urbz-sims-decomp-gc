@@ -201,13 +201,13 @@ s32 fn_8032D97C(void *arg0, u32 arg1, s32 *out) {
     s32 fn_8032D7DC(void *, s32, s32, u32);
     s32 idx;
 
-    idx = fn_8032D7DC(arg0, 0, M2C_FIELD(M2C_FIELD(arg0, void **, 0x20), s32 *, 8) - 1, arg1);
-    if (idx < 0) {
-        *out = 0;
-        return 0;
+    idx = fn_8032D7DC(arg0, 0, M2C_FIELD(arg0, ERQdTable **, 0x20)->unk8 - 1, arg1);
+    if (idx >= 0) {
+        *out = M2C_FIELD(arg0, ERQdTable **, 0x20)->entries[idx].unk0;
+        return 1;
     }
-    *out = *(s32 *)(M2C_FIELD(arg0, char **, 0x20) + 0x18 + idx * 0x14);
-    return 1;
+    *out = 0;
+    return 0;
 }
 
 s32 fn_8032D9F0(void *arg0) {
