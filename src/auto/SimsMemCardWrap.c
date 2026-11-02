@@ -154,6 +154,15 @@ s32 fn_800A4BF4(s32 arg0, s32 *arg1) {
     return 1;
 }
 
+s32 fn_800A4C58(s32 arg0, s32 *arg1) {
+    extern char *lbl_80495060;
+    char *obj = lbl_80495060;
+    char *vt = *(char **)obj;
+    s32 buf[2];
+    *arg1 = (*(s32 (**)(void *, s32, s32 *))(vt + 0xB4))(obj + *(s16 *)(vt + 0xB0), arg0, buf) == -8;
+    return 1;
+}
+
 s32 fn_800A4FCC(s32 arg0, s32 *arg1) {
     M2C_UNK fn_800A4924(s32, s32);
     s32 fn_8012EB5C(void *, s32, s32 *);
