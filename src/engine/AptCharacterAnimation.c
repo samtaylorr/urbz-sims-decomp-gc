@@ -87,10 +87,10 @@ s32 fn_8028D548(void *arg0, void *arg1) {
 
 s32 fn_8028D6E0(void *arg0) {
     s32 n = (s32)((M2C_FIELD(arg0, s32 *, 0x8) - M2C_FIELD(arg0, s32 *, 0x4)) * 0xCCCCCCCD) >> 2;
-    if (n < 0) {
-        n += M2C_FIELD(arg0, s32 *, 0x1290);
+    if (n >= 0) {
+        return n;
     }
-    return n;
+    return n + M2C_FIELD(arg0, s32 *, 0x1290);
 }
 
 s32 fn_8028D714(void *arg0, s32 arg1) {
