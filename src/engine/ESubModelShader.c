@@ -300,12 +300,12 @@ u8 *fn_8030096C(u8 *self) {
     extern f32 lbl_803F1728[];
     fn_803BB700(self + 0x14);
     fn_803BB700(self + 0x2C);
+    *(s32 *)(self + 0x28) = 0;
+    *(s32 *)(self + 0xC) = 0;
+    *(s32 *)(self + 0x10) = 0;
+    *(s32 *)(self + 0x8) = 0;
     *(f32 *)(self + 0x24) = lbl_803F1728[0];
     *(s32 *)(self + 0x0) = 0;
-    *(s32 *)(self + 0x8) = 0;
-    *(s32 *)(self + 0x10) = 0;
-    *(s32 *)(self + 0xC) = 0;
-    *(s32 *)(self + 0x28) = 0;
     fn_80248488(self + 0x38, 0, 0x2C);
     *(s32 *)(self + 0x64) = 0;
     *(s32 *)(self + 0x68) = 0;
@@ -357,7 +357,7 @@ void fn_80300CB4(u8 *self) {
     extern void fn_803BB730(void *);
     s32 i;
 
-    for (i = 0; i < *(s32 *)(self + 0x18); i++) {
+    for (i = 0; i < ListCount(self + 0x14); i++) {
         fn_80300B18(self, *(u8 **)(self + 0x14) + i * 0x34);
     }
     fn_803BB730(self + 0x14);
