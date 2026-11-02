@@ -44,7 +44,7 @@ void fn_8032D098(void **self, s32 flags) {
     }
     fn_8031E910(self, 0);
     if (flags & 1) {
-        fn_802D1A00(fn_802D0AB8(self), self);
+        fn_802D1A00(((void *(*)(void))fn_802D0AB8)(), self);
     }
 }
 
