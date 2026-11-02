@@ -414,7 +414,7 @@ void fn_8016D2D8(void *arg0) {
     void fn_8031EA2C(void *);
     char *p = M2C_FIELD(arg0, char **, 0x94);
     if (p != NULL) {
-        s32 t = M2C_FIELD(p, s32 *, 0xC);
+        s32 t = M2C_FIELD(p, volatile s32 *, 0xC);
         if (M2C_FIELD(p, volatile s32 *, 0xC) != 0) {
             fn_8031EA2C(p);
             M2C_FIELD(arg0, s32 *, 0x94) = 0;
