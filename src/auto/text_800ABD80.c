@@ -48,19 +48,31 @@ s32 fn_800ABE9C(void *self) {
     return 0;
 }
 
+s32 fn_800ABF0C(void *self) {
+    return *M2C_FIELD(self, s32 **, 4) != 0;
+}
+
 void *fn_800ABF28(void *self) {
     extern u8 lbl_8040A5C8[];
+    struct ABF28 {
+        void *items[2];
+        u8 unk8;
+        s32 unkC;
+        s16 unk10;
+        s32 unk14;
+        void *vtbl;
+    } *s = self;
     u8 i;
 
-    M2C_FIELD(self, void **, 0x18) = lbl_8040A5C8;
+    s->vtbl = lbl_8040A5C8;
     for (i = 0; i <= 1; i++) {
-        ((void **)self)[i] = NULL;
+        s->items[i] = NULL;
     }
-    M2C_FIELD(self, u8 *, 8) = 0;
-    M2C_FIELD(self, s16 *, 0x10) = 0;
-    M2C_FIELD(self, s32 *, 0xC) = 0;
-    M2C_FIELD(self, s32 *, 0x14) = 0;
-    return self;
+    s->unk8 = 0;
+    s->unk10 = 0;
+    s->unk14 = 0;
+    s->unkC = 0;
+    return s;
 }
 
 void fn_800ABFD4(void *self);
@@ -79,18 +91,23 @@ void fn_800ABFC4(void *self) {
 }
 
 void fn_800ABFD4(void *self) {
+    struct ABF28 {
+        char *items[2];
+        u8 unk8;
+        s32 unkC;
+        s16 unk10;
+    } *s = self;
     u8 i;
 
     for (i = 0; i <= 1; i++) {
-        void **slot = &((void **)self)[i];
-        if (*slot != NULL) {
-            char *vt = M2C_FIELD(*slot, char **, 0x440);
-            (*(void (**)(void *, s32))(vt + 0xC))((char *)*slot + *(s16 *)(vt + 8), 3);
+        if (s->items[i] != NULL) {
+            char *vt = M2C_FIELD(s->items[i], char **, 0x440);
+            (*(void (**)(void *, s32))(vt + 0xC))(s->items[i] + *(s16 *)(vt + 8), 3);
         }
-        *slot = NULL;
+        s->items[i] = NULL;
     }
-    M2C_FIELD(self, u8 *, 8) = 0;
-    M2C_FIELD(self, s16 *, 0x10) = 0;
+    s->unk8 = 0;
+    s->unk10 = 0;
 }
 
 void fn_800AC988(void *arg0) {
@@ -272,16 +289,19 @@ void fn_800B20E8(void *arg0) {
 }
 
 void fn_800B24D4(void *arg0, void *arg1) {
-    extern f32 lbl_803CEA6C;
+    extern f32 lbl_803CEA6C[];
     u8 i;
 
     M2C_FIELD(arg1, s32 *, 0x64) = 4;
     for (i = 0; i < M2C_FIELD(arg0, u8 *, 0x20); i++) {
-        if (M2C_FIELD((char *)arg1 + i * 0xC, u32 *, 4) <= 1) {
-            M2C_FIELD((char *)arg1 + i * 0xC, f32 *, 8) = lbl_803CEA6C;
-            M2C_FIELD((char *)arg1 + i * 0xC, s32 *, 4) = 2;
-            M2C_FIELD((char *)arg1 + i * 0xC + 0x30, f32 *, 8) = lbl_803CEA6C;
-            M2C_FIELD((char *)arg1 + i * 0xC + 0x30, s32 *, 4) = 4;
+        f32 f = lbl_803CEA6C[0];
+        char *a = (char *)arg1 + i * 0xC;
+        char *b = (char *)arg1 + (i * 0xC + 0x30);
+        if (M2C_FIELD(a, u32 *, 4) <= 1) {
+            M2C_FIELD(a, f32 *, 8) = f;
+            M2C_FIELD(a, s32 *, 4) = 2;
+            M2C_FIELD(b, f32 *, 8) = f;
+            M2C_FIELD(b, s32 *, 4) = 4;
         }
     }
 }
@@ -309,8 +329,9 @@ void fn_800B259C(void *arg0, void *arg1) {
 }
 
 void fn_800B2600(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0x364) = -1;
-    M2C_FIELD(arg0, s32 *, 0x360) = -1;
+    s32 *p = (s32 *)arg0 + 0xD8;
+    p[1] = -1;
+    p[0] = -1;
 }
 
 void *fn_800B2614(void *arg0) {
@@ -397,16 +418,16 @@ s32 fn_800B2764(s32 arg0, s32 *arg1) {
 s32 fn_800B2C1C(void *arg0) {
     s32 fn_800B26F4(void *);
     extern s32 lbl_803CEADC[];
-    char *e;
+    struct { u8 id; u8 pad[11]; } *e;
 
     if (fn_800B26F4((char *)arg0 + 0x444) != 0) {
         return 0;
     }
-    e = (char *)fn_800B2764((s32)((char *)arg0 + 0x444), (s32 *)((char *)arg0 + 0x7AC));
-    if (M2C_FIELD(e, s32 *, 0x64) == 2) {
-        return lbl_803CEADC[*(u8 *)(e + M2C_FIELD(e, u8 *, 0x68) * 0xC)];
+    e = (void *)fn_800B2764((s32)((char *)arg0 + 0x444), (s32 *)((char *)arg0 + 0x7AC));
+    if (M2C_FIELD(e, s32 *, 0x64) != 2) {
+        return 0;
     }
-    return 0;
+    return lbl_803CEADC[e[M2C_FIELD(e, u8 *, 0x68)].id];
 }
 
 s32 fn_800B2EAC(void *arg0) {
@@ -414,12 +435,11 @@ s32 fn_800B2EAC(void *arg0) {
 }
 
 s32 fn_800B2EC4(s32 *arg0, s32 arg1) {
-    s32 *p = arg0;
-    if (arg1 <= 1) {
-        if (p[arg1] != 0) {
-            return 1;
-        }
+    if (arg1 > 1) {
         return 0;
+    }
+    if (arg0[arg1] != 0) {
+        return 1;
     }
     return 0;
 }
