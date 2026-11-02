@@ -96,6 +96,23 @@ void fn_800440B4(void) {
 
 }
 
+void fn_80044390(void *arg0) {
+    s32 fn_800F37B0(void *, s32, s32);
+    void fn_800F2868(void *, s32, s32);
+    s32 start;
+    s32 end;
+
+    start = fn_800F37B0(arg0, '<', 0);
+    while (start != -1) {
+        end = fn_800F37B0(arg0, '>', start + 1);
+        if (end == -1) {
+            break;
+        }
+        fn_800F2868(arg0, start, end - start + 1);
+        start = fn_800F37B0(arg0, '<', start);
+    }
+}
+
 s32 fn_80044524(s32 a, s32 b) {
     if (a == b) {
         return 0;
@@ -113,6 +130,36 @@ s32 fn_80044524(s32 a, s32 b) {
         return 0;
     }
     return a > b;
+}
+
+void fn_80044938(void *self) {
+    extern void *lbl_80496668;
+    void *obj = M2C_FIELD(self, void **, 0);
+
+    if (obj != NULL) {
+        void *vt = M2C_FIELD(obj, void **, 4);
+        void *g = lbl_80496668;
+        u8 *e = M2C_FIELD(g, u8 **, 0) + 0x58;
+        M2C_FIELD(e, void (**)(void *, void *), 4)((u8 *)g + *(s16 *)e,
+            M2C_FIELD(vt, void *(**)(void *), 0x2EC)((u8 *)obj + M2C_FIELD(vt, s16 *, 0x2E8)));
+    }
+    M2C_FIELD(self, void **, 0) = NULL;
+}
+
+void fn_800449B4(void *self) {
+    void *fn_801BFD7C(void *);
+    extern u8 lbl_8041F94C[];
+
+    if (M2C_FIELD(self, s32 *, 4) != 0) {
+        void *obj;
+        void *vt;
+        fn_80044938(self);
+        ((void (*)(void *))fn_800440B4)(self);
+        obj = fn_801BFD7C(*(void **)(lbl_8041F94C + M2C_FIELD(self, s32 *, 8) * 4 + 0xE4));
+        vt = M2C_FIELD(obj, void **, 0x44);
+        M2C_FIELD(vt, void (**)(void *, s32, s32), 0x3C)((u8 *)obj + M2C_FIELD(vt, s16 *, 0x38), 0, 0x1D);
+        M2C_FIELD(self, s32 *, 4) = 0;
+    }
 }
 
 void fn_80044A38(s32 *self) {
@@ -201,10 +248,13 @@ void fn_800458E8(void) {
 
 void fn_8004681C(void *arg0) {
     void fn_80045ED4(void *);
+    s32 found;
     s32 i;
-    s32 found = 0;
+    s32 *a;
+    found = 0;
     for (i = 0; i < 4; i++) {
-        if (*(s32 *)((u8 *)M2C_FIELD(arg0, void **, 0x38) + 0x530 + i * 4) != 0) {
+        a = (s32 *)((u8 *)M2C_FIELD(arg0, void **, 0x38) + 0x530);
+        if (*(a + i) != 0) {
             found = 1;
             break;
         }
