@@ -1,6 +1,24 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+static inline void ENgcTexture_CopyTile8(u32 *src, u8 *dst, s32 stride) {
+    s32 i;
+    for (i = 0; i < 4; i++) {
+        ((u32 *)dst)[0] = src[0];
+        ((u32 *)dst)[1] = src[1];
+        src += 2;
+        dst += stride;
+    }
+}
+
+static inline void ENgcTexture_SetUnk(s32 *r, s32 n) {
+    r[0] = 0;
+    r[1] = 0;
+    r[2] = 1;
+    r[3] = n;
+    r[4] = n * 2;
+}
+
 void fn_802FF4EC(void);
 void fn_8035F6E4(void) {
     fn_802FF4EC();
