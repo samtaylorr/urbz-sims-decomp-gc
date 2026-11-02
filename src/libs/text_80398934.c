@@ -1988,7 +1988,7 @@ static inline void SortComp_LinearInsert(s32 *i, s32 val, SortComp comp) {
 static inline void SortComp_InsertOne(s32 *first, s32 *i, SortComp comp) {
     s32 val = *i;
 
-    if (fn_800A2B98(comp, val, *first)) {
+    if (((s32 (*)(SortComp *, s32, s32))fn_800A2B98)(&comp, val, *first)) {
         s32 *next = i + 1;
         s32 n = (char *)i - (char *)first;
         if (n > 0) {
