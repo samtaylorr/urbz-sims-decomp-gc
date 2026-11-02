@@ -9,14 +9,14 @@ extern s32 lbl_80494428;
 extern s32 lbl_8041F7A0[];
 void fn_801238C4(u8 *obj, s32 arg);
 
-void fn_80043EA8(s16 *out, u16 idx) {
+void fn_80043EA8(s16 *out, s32 idx) {
     extern f32 lbl_803F5DF8[][5];
     extern const f32 lbl_803C61D0[];
     extern const f32 lbl_803C61D4[];
     f32 *src;
     s32 i;
 
-    if (idx <= 8) {
+    if ((u16)idx <= 8) {
         src = lbl_803F5DF8[idx];
         for (i = 0; i < 5; i++) {
             *out++ = *src++ * lbl_803C61D0[0] + lbl_803C61D4[0];
