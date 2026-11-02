@@ -2021,7 +2021,7 @@ static inline void SortComp_UnguardedInsertionSort(s32 *first, s32 *last, SortCo
 
 void fn_8039CC48(s32 *first, s32 *last, SortComp *comp) {
     if (last - first > 16) {
-        fn_8039CB38(first, first + 16, *comp);
+        ((void (*)(s32 *, s32 *, SortComp))fn_8039CB38)(first, first + 16, *comp);
         {
             SortComp c = *comp;
             ((void (*)(s32 *, s32 *, s32 *, SortComp))fn_8039CBEC)(first + 16, last, 0, c);
@@ -3519,16 +3519,14 @@ void **fn_803A0A44(void **self, void **other) {
         if (xlen > (u32)((void **)self[3] - (void **)self[0])) {
             void **tmp;
             if (xlen != 0) {
-                register u32 size asm("r0");
-                size = xlen * 4;
+                u32 size = xlen * 4;
                 bytes = size;
                 if (size > 0x80) {
-                    size = 0;
                     tmp = (void **)fn_802D1FC8(bytes);
                 } else {
-                    size = 0;
                     tmp = (void **)fn_80399BE8(bytes);
                 }
+                bytes = bytes;
             } else {
                 tmp = NULL;
                 bytes = 0;
