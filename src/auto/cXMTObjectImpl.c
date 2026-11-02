@@ -151,7 +151,11 @@ s32 fn_8011CD1C(void *arg0) {
     void *c = M2C_FIELD(arg0, void **, 0xC);
 
     if (c != NULL || arg0 != NULL) {
-        return M2C_FIELD(c != NULL ? c : arg0, s32 *, 4);
+        void *p = c;
+        if (c == NULL) {
+            p = arg0;
+        }
+        return M2C_FIELD(p, s32 *, 4);
     }
     return 0;
 }
