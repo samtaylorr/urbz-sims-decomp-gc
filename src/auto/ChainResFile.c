@@ -90,9 +90,9 @@ void fn_801021BC(void **obj) {
 }
 
 ChainKeyEntry *fn_801021FC(void **self, s32 id, s32 key) {
+    ChainKeyEntry *r;
     ChainKeyEntry *arr = (ChainKeyEntry *)*self;
     s32 n = 0;
-    ChainKeyEntry *r;
     ChainKeyEntry *e;
     s32 i;
     if (arr != NULL) {
@@ -103,11 +103,14 @@ ChainKeyEntry *fn_801021FC(void **self, s32 id, s32 key) {
     if (n == 0) {
         e = NULL;
     }
-    for (i = 0; i < n; i++, e++) {
+    i = 0;
+    while (i < n) {
         if (e->unk4 == key && e->unk8 == id) {
             r = e;
             break;
         }
+        i++;
+        e++;
     }
     return r;
 }
@@ -496,6 +499,13 @@ s32 fn_80104A5C(s32 arg0, s32 arg1) {
         return var_r0;
     }
     return arg0;
+}
+
+void fn_80104BD0(void) {
+    extern u8 *lbl_8049665C;
+    u8 *obj = lbl_8049665C;
+    u8 *vt = *(u8 **)obj;
+    (*(void (**)(void *, u32))(vt + 0x84))(obj + *(s16 *)(vt + 0x80), 0xF3AAA62F);
 }
 
 void *fn_80105120(void *self) {
