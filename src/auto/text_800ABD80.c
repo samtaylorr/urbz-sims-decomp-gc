@@ -16,6 +16,10 @@ void fn_800ABD94(s32 self, s32 flags) {
     }
 }
 
+s32 fn_800ABE78(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0) == 0;
+}
+
 void fn_800ACA14(void) {
 
 }
