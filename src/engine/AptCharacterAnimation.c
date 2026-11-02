@@ -375,6 +375,29 @@ void *fn_8028F208(u32 *self) {
     return r;
 }
 
+void *fn_8028F3F0(u32 *self) {
+    extern void *lbl_80496130;
+    void fn_8024839C(void *, void *, s32);
+    void *r;
+    s32 ok;
+    s32 n;
+
+    r = lbl_80496130;
+    ok = 0;
+    if ((self[0] & 0x3F) == 0x16) {
+        ok = (self[0] >> 15) & 1;
+    }
+    if (ok != 0 && (s32)self[9] > 0) {
+        r = fn_8028E2B8(self, 0);
+        n = --self[9];
+        if (n != 0) {
+            fn_8024839C((s32 *)self[7], (s32 *)self[7] + 1, n * 4);
+        }
+        ((s32 *)self[7])[self[9]] = 0;
+    }
+    return r;
+}
+
 void *fn_8028FB40(u32 *self) {
     extern void *lbl_80496130;
     s32 ok;
