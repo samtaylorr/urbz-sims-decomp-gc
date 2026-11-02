@@ -1183,13 +1183,13 @@ s32 fn_80061F9C(char *self) {
     return *(u8 *)(*(char **)(r + 0xC0) + 9) != 0;
 }
 
-void fn_80063054(void) {
+void *fn_80063054(void) {
     void *fn_80248488(void *, s32, u32);
-    extern void fn_8005B71C(void *);
+    void *fn_8005B71C(void *);
     void *p = BBI_AllocAligned(0x660);
 
     fn_80248488(p, 0, 0x660);
-    fn_8005B71C(p);
+    return fn_8005B71C(p);
 }
 
 void fn_800630FC(void) {
