@@ -1441,6 +1441,16 @@ void fn_80369D10(void *arg0, s32 key, void *value) {
     }
 }
 
+void *fn_80369D7C(void *arg0, s32 key, void *value) {
+    extern void *fn_8036A0FC(void *, s32, s32);
+    extern void *fn_80369DE4(void *, s32, s32, void *);
+    s32 index = fn_80369B40(arg0, (u8 *)key);
+    if (fn_8036A0FC(arg0, index, key) != NULL) {
+        return NULL;
+    }
+    return fn_80369DE4(arg0, index, key, value);
+}
+
 void fn_8036A180(void *arg0) {
     extern void fn_802D39F0(s32 *, s32);
     extern void fn_802D20E8(void *);
