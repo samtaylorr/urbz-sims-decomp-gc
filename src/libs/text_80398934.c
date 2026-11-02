@@ -1981,6 +1981,10 @@ void fn_8039CAD8(s32 *last, s32 val, SortComp *comp) {
     *last = val;
 }
 
+static inline void SortComp_LinearInsert(s32 *i, s32 val, SortComp comp) {
+    fn_8039CAD8(i, val, &comp);
+}
+
 void fn_8039CB38(s32 *first, s32 *last, SortComp *comp) {
     s32 *i;
 
@@ -1988,8 +1992,9 @@ void fn_8039CB38(s32 *first, s32 *last, SortComp *comp) {
         return;
     }
     for (i = first + 1; i != last; i++) {
+        SortComp c = *comp;
         s32 val = *i;
-        if (fn_800A2B98(*comp, val, *first)) {
+        if (((s32 (*)(SortComp *, s32, s32))fn_800A2B98)(&c, val, *first)) {
             s32 *next = i + 1;
             s32 n = (char *)i - (char *)first;
             if (n > 0) {
@@ -1997,7 +2002,8 @@ void fn_8039CB38(s32 *first, s32 *last, SortComp *comp) {
             }
             *first = val;
         } else {
-            ((void (*)(s32 *, s32, SortComp))fn_8039CAD8)(i, val, *comp);
+            SortComp c2 = c;
+            fn_8039CAD8(i, val, &c2);
         }
     }
 }
@@ -3522,7 +3528,13 @@ void **fn_803A0A44(void **self, void **other) {
                 register u32 size asm("r0");
                 size = xlen * 4;
                 bytes = size;
-                tmp = (void **)PtrVec_Allocate(size);
+                if (size > 0x80) {
+                    size = 0;
+                    tmp = (void **)fn_802D1FC8(bytes);
+                } else {
+                    size = 0;
+                    tmp = (void **)fn_80399BE8(bytes);
+                }
             } else {
                 tmp = NULL;
                 bytes = 0;
