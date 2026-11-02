@@ -187,7 +187,12 @@ void fn_8024148C(void) {
 }
 
 void fn_802414E4(void) {
-    *(volatile s32 *)0xCC006828 = (*(volatile s32 *)0xCC006828 & 5) | 0xD0;
+    register u8 *p asm("r4");
+    register s32 v asm("r3");
+    p = (u8 *)0xCC000000;
+    v = *(volatile s32 *)(p + 0x6828) & 5;
+    v |= 0xD0;
+    *(volatile s32 *)(p + 0x6828) = v;
 }
 
 void fn_802414FC(void) {
@@ -199,13 +204,16 @@ void fn_802414FC(void) {
 }
 
 void fn_80241510(void) {
-    s32 v;
-    s32 i;
-    v = *(volatile s32 *)0xCC006828 & 5;
-    *(volatile s32 *)0xCC006828 = v;
+    register u8 *p asm("r4");
+    register s32 v asm("r5");
+    register s32 i asm("r3");
+    p = (u8 *)0xCC000000;
+    v = *(volatile s32 *)(p + 0x6828) & 5;
+    *(volatile s32 *)(p + 0x6828) = v;
     for (i = 6; i != 0; i--) {
     }
-    *(volatile s32 *)0xCC006828 = v | 0xD0;
+    v |= 0xD0;
+    *(volatile s32 *)(p + 0x6828) = v;
 }
 
 void fn_80241538(void) {
