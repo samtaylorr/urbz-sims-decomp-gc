@@ -106,6 +106,12 @@ void fn_80360FC4(void *self) {
     (*(void (**)(void *))(vt + 0x54))(obj + *(s16 *)(vt + 0x50));
 }
 
+void fn_80360FFC(void *self) {
+    u8 *obj = *(u8 **)((u8 *)self + 0x28);
+    u8 *vt = *(u8 **)(obj + 0x24);
+    (*(void (**)(void *))(vt + 0x74))(obj + *(s16 *)(vt + 0x70));
+}
+
 s32 fn_80361238(void *arg0) {
     return M2C_FIELD(M2C_FIELD(arg0, void **, 0x28), s32 *, 0x70);
 }
