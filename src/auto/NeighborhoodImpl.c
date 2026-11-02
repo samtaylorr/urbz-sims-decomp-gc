@@ -125,6 +125,14 @@ void fn_801285FC(char *self, void *arg1) {
     fn_800F6A38(arg1, self + 4);
 }
 
+s32 fn_80128628(char *self, s32 i) {
+    return ((s16 *)(self + 0x168))[i];
+}
+
+void *fn_80128638(void *arg0, s32 i) {
+    return (u8 *)arg0 + (i * 2 + 0x168);
+}
+
 s32 fn_801286A0(void *arg0) {
     return (s32) (M2C_FIELD(arg0, s32 *, 0x15C) - M2C_FIELD(arg0, s32 *, 0x158)) >> 2;
 }
