@@ -141,10 +141,10 @@ s32 fn_80364E64(void *arg0) {
 }
 
 void fn_80364EAC(void *arg0, void *arg1, s32 arg2, s32 arg3, s32 arg4) {
-    M2C_UNK fn_80364D84();
+    void fn_80364D84(void *);
     void *temp_r9;
 
-    fn_80364D84();
+    fn_80364D84(arg0);
     M2C_FIELD(arg0, s32 *, 0x24) = arg4;
     M2C_FIELD(arg0, s32 *, 0x20) = arg2;
     M2C_FIELD(arg0, void **, 0x1C) = arg1;
