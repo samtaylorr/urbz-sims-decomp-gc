@@ -219,6 +219,26 @@ void fn_8018C9D4(void ****arg0, s32 arg1) {
     M2C_FIELD(***arg0, s32 *, 0x10) = arg1;
 }
 
+f32 fn_8018CA2C(void *arg0, s32 arg1) {
+    extern const f32 lbl_803DAADC[];
+    f32 *begin;
+
+    if (arg1 > 0) {
+        begin = M2C_FIELD(arg0, f32 **, 8);
+        if ((u16)arg1 <= (u32)(M2C_FIELD(arg0, f32 **, 0xC) - begin)) {
+            return begin[arg1 - 1];
+        }
+    }
+    return lbl_803DAADC[0];
+}
+
+s16 fn_8018CA6C(void *arg0) {
+    char *obj = M2C_FIELD(**(char ***)arg0, char **, 4);
+    char *vt = M2C_FIELD(obj, char **, 4);
+    char *r = ((char *(*)(void *))M2C_FIELD(vt, void **, 0x2D4))(obj + M2C_FIELD(vt, s16 *, 0x2D0));
+    return M2C_FIELD(r, s16 *, 0x5C);
+}
+
 void fn_8018CAB0(void) {
 
 }
