@@ -1403,6 +1403,17 @@ s32 fn_80369B40(void *arg0, u8 *arg1) {
     return var_r10 & M2C_FIELD(arg0, s32 *, 0x10);
 }
 
+void fn_80369B8C(void *arg0, s32 arg1) {
+    void fn_802D1A00(void *, void *);
+    void fn_80369C48(void *);
+
+    fn_802D1A00(fn_802D0AB8(), M2C_FIELD(arg0, void **, 8));
+    M2C_FIELD(arg0, void **, 8) = Heap_Alloc(arg1 * 4);
+    M2C_FIELD(arg0, s32 *, 0xC) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x10) = arg1 - 1;
+    fn_80369C48(arg0);
+}
+
 void fn_80369C48(void *arg0) {
     extern void fn_80248488(void *, s32, s32);
     if (M2C_FIELD(arg0, void **, 8) != NULL) {
