@@ -507,6 +507,23 @@ void fn_8016CF48(void *arg0, s32 arg1) {
     fn_800F1AA0(M2C_FIELD(arg0, void **, 0x88), arg1);
 }
 
+void *fn_8016CF9C(s32 arg0, s32 arg1) {
+    extern char lbl_8041F94C[];
+    char *fn_8004BDB8(void *, s32);
+    char *r = fn_8004BDB8(lbl_8041F94C, arg0);
+    void *v;
+    if (r == NULL) {
+        return NULL;
+    }
+    if (arg1 != 0) {
+        v = M2C_FIELD(r, void **, 0x8);
+        if (v != NULL) {
+            return v;
+        }
+    }
+    return M2C_FIELD(r, void **, 0x4);
+}
+
 void fn_8016D218(void *arg0, s32 arg1) {
     extern char *lbl_80495050;
     extern char lbl_8045BA40[];
