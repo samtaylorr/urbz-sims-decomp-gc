@@ -146,6 +146,11 @@ void fn_8011CD64(void) {
 
 }
 
+void fn_8011CECC(void *arg0, s32 arg1) {
+    void fn_8011D0D0(void *, s32, void *, s32, s32);
+    fn_8011D0D0(arg0, arg1, (u8 *)arg0 + 0x10, 0xEBD8CAB4, 3);
+}
+
 void fn_8011CEFC(void *arg0, s32 arg1) {
     void fn_8011D0D0(void *, s32, void *, s32, s32);
     fn_8011D0D0(arg0, arg1, (u8 *)arg0 + 0x18, 0x6BF17876, 1);
