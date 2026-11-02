@@ -146,6 +146,11 @@ void fn_8011CD64(void) {
 
 }
 
+void fn_8011CD68(void *arg0) {
+    void fn_801A15F0(s32);
+    fn_801A15F0(*M2C_FIELD(arg0, s32 **, 0));
+}
+
 void fn_8011CECC(void *arg0, s32 arg1) {
     void fn_8011D0D0(void *, s32, void *, s32, s32);
     fn_8011D0D0(arg0, arg1, (u8 *)arg0 + 0x10, 0xEBD8CAB4, 3);
@@ -169,6 +174,34 @@ void fn_8011CF5C(char *self, s32 arg1) {
 void fn_8011CF80(char *self, s32 arg1) {
     void fn_8011CFA4(char *, s32, void *);
     fn_8011CFA4(self, arg1, self + 0x18);
+}
+
+void fn_8011CFA4(void *self, s32 key, void *list) {
+    char buf[0x18];
+    s32 ne;
+
+    *(char **)(buf + 0) = **(char ***)((char *)list + 4);
+    for (;;) {
+        *(char **)(buf + 8) = *(char **)((char *)list + 4);
+        ne = 1;
+        if (*(char **)(buf + 0) == *(char **)(buf + 8)) {
+            ne = 0;
+        }
+        if (ne == 0) {
+            break;
+        }
+        {
+            char *e = *(char **)(buf + 0) + 8;
+            if (*(u16 *)e == key) {
+                *(s32 *)(e + 8) = 0;
+                *(u16 *)(*(char **)(buf + 0) + 8) = 0;
+                return;
+            }
+        }
+        *(char **)(buf + 0x10) = *(char **)(buf + 0);
+        *(char **)(buf + 8) = *(char **)(buf + 0);
+        *(char **)(buf + 0) = **(char ***)(buf + 0);
+    }
 }
 
 void fn_8011D014(void *arg0, s32 arg1) {
