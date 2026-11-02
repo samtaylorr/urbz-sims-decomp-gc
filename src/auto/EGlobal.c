@@ -106,6 +106,25 @@ void fn_8004A01C(void *arg0) {
     fn_800178C8(p, arg0);
 }
 
+void fn_8004AEA8(void *arg0, void *arg1) {
+    s32 fn_802D0F64(void *, void *);
+    void fn_802D1A00(void *, void *);
+    void *heap;
+
+    if (M2C_FIELD(arg0, void **, 0x190) != NULL && M2C_FIELD(arg0, void **, 0x18C) != NULL
+        && fn_802D0F64(M2C_FIELD(arg0, void **, 0x190), arg1)) {
+        heap = M2C_FIELD(arg0, void **, 0x190);
+    } else {
+        heap = fn_802D0B3C();
+    }
+    if (fn_802D0F64(heap, arg1)) {
+        fn_802D1A00(fn_802D0B3C(), arg1);
+    } else {
+        fn_802D0F64(fn_802D0AB8(), arg1);
+        fn_802D1A00(fn_802D0AB8(), arg1);
+    }
+}
+
 void fn_8004AF3C(void) {
 
 }
@@ -262,6 +281,24 @@ EGlobalHandle fn_8004BB6C(void) {
     EGlobalHandle h;
     h.value = lbl_80495804;
     return h;
+}
+
+s32 fn_8004BB7C(void *arg1, s32 arg2) {
+    s32 fn_8032D5C8(s32, void *);
+    s32 *fn_8032D6E8(s32, s32, s32);
+    extern u8 lbl_803C6C28[];
+    extern s32 lbl_8041FA68[];
+    s32 *p;
+    s32 key;
+
+    if (arg2 != 0) {
+        key = fn_8032D5C8(M2C_FIELD(arg1, s32 *, 0x11C), lbl_803C6C28);
+        p = fn_8032D6E8(lbl_8041FA68[0], key, arg2);
+        if (p != NULL) {
+            return p[9];
+        }
+    }
+    return 0;
 }
 
 EGlobalHandle fn_8004BC44(void *arg1, s32 arg2) {
