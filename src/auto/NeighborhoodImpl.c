@@ -99,19 +99,12 @@ void fn_80123824(void *arg0) {
     void fn_80123450(void *);
     void fn_8010B528(void *);
     void **p;
-    PtrVec *v;
 
     fn_80123450((char *)arg0 + 0x1B0);
     (*(void (**)(u8 *))(*(u8 **)lbl_8049665C + 0x54))(lbl_8049665C + *(s16 *)(*(u8 **)lbl_8049665C + 0x50));
     (*(void (**)(u8 *))(*(u8 **)lbl_8049665C + 0x5C))(lbl_8049665C + *(s16 *)(*(u8 **)lbl_8049665C + 0x58));
-    v = (PtrVec *)((char *)arg0 + 0x1C0);
-    p = M2C_FIELD(arg0, void ***, 0x1C0);
-    if (p != v->end) {
-        PtrVec *v2 = v;
-        do {
-            fn_8010B528(*p);
-            p++;
-        } while (p != v2->end);
+    for (p = M2C_FIELD(arg0, void ***, 0x1C0); p != ({ PtrVec *t = (PtrVec *)((char *)arg0 + 0x1C0); t->end; }); p++) {
+        fn_8010B528(*p);
     }
     M2C_FIELD(arg0, void ***, 0x1C4) = M2C_FIELD(arg0, void ***, 0x1C0);
 }
@@ -196,25 +189,9 @@ void *fn_801248D0(void *self, s32 id) {
 }
 
 void fn_80124D98(char *self, char *obj) {
-    char *fn_8011DCBC(void *);
     void fn_80122BE4(void *);
-    typedef struct { void **begin; void **end; } V;
-    V *v = (V *)(self + 0x1B0);
-    void **it = v->begin;
-    s32 n = *(s16 *)(obj + 4);
 
-    if (it != v->end) {
-        V *w = v;
-        do {
-            if (*it != NULL) {
-                char *p = fn_8011DCBC(*it);
-                char *vt = *(char **)p;
-                void (*f)(void *, s32) = M2C_FIELD(vt, void (**)(void *, s32), 0x34);
-                f(p + M2C_FIELD(vt, s16 *, 0x30), n);
-            }
-            it++;
-        } while (it != w->end);
-    }
+    NbhdPtrVec_Notify((NbhdPtrVec *)(self + 0x1B0), *(s16 *)(obj + 4));
     fn_80122BE4(obj);
 }
 
