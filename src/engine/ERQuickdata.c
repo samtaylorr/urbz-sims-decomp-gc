@@ -337,10 +337,11 @@ void fn_80331244(void *arg0, s32 arg1) {
 }
 
 s32 fn_803312A0(void *arg0) {
-    if (M2C_FIELD(arg0, u32 *, 0x64) & 2) {
-        arg0 = M2C_FIELD(arg0, void **, 0x24);
+    u32 flags = M2C_FIELD(arg0, u32 *, 0x64);
+    if (flags & 2) {
+        return (M2C_FIELD(M2C_FIELD(arg0, void **, 0x24), u32 *, 0x64) >> 7) & 1;
     }
-    return (M2C_FIELD(arg0, u32 *, 0x64) >> 7) & 1;
+    return (flags >> 7) & 1;
 }
 
 s32 fn_803312C8(void *arg0) {
