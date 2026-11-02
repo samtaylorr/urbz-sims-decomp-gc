@@ -230,21 +230,24 @@ void fn_80127ED8(void) {
     extern char lbl_803D86B4[];
     char *g = lbl_80496668;
     char *r;
-    char *vt;
     {
-        vt = *(char **)g;
+        char *vt = *(char **)g;
         r = (*(char *(**)(void *))(vt + 0x1D4))(g + *(s16 *)(vt + 0x1D0));
     }
     if (r != NULL) {
         char *gvt;
         char *obj;
         void *x;
-        vt = *(char **)(r + 4);
-        (*(void (**)(void *, char *))(vt + 0xC4))(r + *(s16 *)(vt + 0xC0), lbl_803D86B4);
-        vt = *(char **)(r + 4);
-        gvt = *(char **)g + 0x58;
-        obj = g + *(s16 *)gvt;
-        x = (*(void *(**)(void *))(vt + 0x2EC))(r + *(s16 *)(vt + 0x2E8));
+        {
+            char *vt = *(char **)(r + 4);
+            (*(void (**)(void *, char *))(vt + 0xC4))(r + *(s16 *)(vt + 0xC0), lbl_803D86B4);
+        }
+        {
+            char *vt = *(char **)(r + 4);
+            gvt = *(char **)g + 0x58;
+            obj = g + *(s16 *)gvt;
+            x = (*(void *(**)(void *))(vt + 0x2EC))(r + *(s16 *)(vt + 0x2E8));
+        }
         (*(void (**)(void *, void *))(gvt + 4))(obj, x);
     }
 }
