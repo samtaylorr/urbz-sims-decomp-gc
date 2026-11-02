@@ -363,7 +363,8 @@ s32 fn_8016D468(void *arg0) {
     if (M2C_FIELD(arg0, s32 *, 0x74) == -1) {
         char *obj = fn_8016D954();
         char *vt = *(char **)obj;
-        M2C_FIELD(arg0, s32 *, 0x74) = fn_800FCB50(M2C_FIELD(arg0, s32 *, 0xC), M2C_FIELD(vt, s32 (**)(void *, s32), 0x74)(obj + M2C_FIELD(vt, s16 *, 0x70), 0));
+        s32 v = M2C_FIELD(vt, s32 (**)(void *, s32), 0x74)(obj + M2C_FIELD(vt, s16 *, 0x70), 0);
+        M2C_FIELD(arg0, s32 *, 0x74) = fn_800FCB50(M2C_FIELD(arg0, s32 *, 0xC), v);
     }
     return M2C_FIELD(arg0, s32 *, 0x74);
 }
