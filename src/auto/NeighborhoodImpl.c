@@ -1,6 +1,22 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+typedef struct { void **begin; void **end; } NbhdPtrVec;
+
+static inline void NbhdPtrVec_Notify(NbhdPtrVec *v, s32 n) {
+    char *fn_8011DCBC(void *);
+    void **it;
+
+    for (it = v->begin; it != v->end; it++) {
+        if (*it != NULL) {
+            char *p = fn_8011DCBC(*it);
+            char *vt = *(char **)p;
+            void (*f)(void *, s32) = M2C_FIELD(vt, void (**)(void *, s32), 0x34);
+            f(p + M2C_FIELD(vt, s16 *, 0x30), n);
+        }
+    }
+}
+
 typedef struct PtrVec { void **begin; void **end; } PtrVec;
 
 static inline void PtrVec_DestroyAll(PtrVec *v) {
