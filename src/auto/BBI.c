@@ -1184,9 +1184,10 @@ s32 fn_80061F9C(char *self) {
 }
 
 void fn_80063054(void) {
-    extern void fn_8005B71C(void *);
     void *fn_80248488(void *, s32, u32);
-    u8 *p = BBI_AllocAligned(0x660);
+    extern void fn_8005B71C(void *);
+    void *p = BBI_AllocAligned(0x660);
+
     fn_80248488(p, 0, 0x660);
     fn_8005B71C(p);
 }
@@ -1237,7 +1238,6 @@ u16 fn_800631BC(void) {
 }
 
 extern void fn_802D6A90(void *, void *, void *, void *, s32, void *, void *);
-extern void fn_80063054(void);
 extern void fn_8006311C(void *);
 extern u8 lbl_803C7EE4[];
 extern u8 lbl_80491CA0[];
