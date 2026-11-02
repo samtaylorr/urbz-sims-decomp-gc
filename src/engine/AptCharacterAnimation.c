@@ -1,6 +1,23 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+typedef struct {
+    s32 type;
+    s32 unk4;
+    s32 unk8;
+    void *unkC;
+    char *obj;
+} AptAnimCmd;
+
+typedef struct {
+    s32 data[6];
+} AptAnimEntryData;
+
+typedef struct {
+    char *obj;
+    AptAnimEntryData data;
+} AptAnimEntry;
+
 void fn_8028B0A4(void *arg0, void *arg1, u8 *arg2) {
     void fn_8028ABC4(void *, void *, u8 *);
     if (M2C_FIELD(arg2, s32 *, 0x1C) != 0) {
@@ -394,6 +411,33 @@ void *fn_8028F3F0(u32 *self) {
         ((s32 *)self[7])[self[9]] = 0;
     }
     return r;
+}
+
+void *fn_8028F870(u32 *self, s32 arg1) {
+    extern void *lbl_80496130;
+    extern s32 lbl_804433C4[];
+    extern void *lbl_80494B78;
+    extern s32 lbl_80494B7C;
+    extern s32 fn_8028F64C(void *, void *);
+    extern s32 fn_8028F724(void *, void *);
+    extern void fn_8024729C(s32, s32, s32, s32 (*)(void *, void *));
+    s32 ok;
+
+    ok = 0;
+    if ((self[0] & 0x3F) == 0x16) {
+        ok = (self[0] >> 15) & 1;
+    }
+    if (ok != 0) {
+        if (arg1 == 0) {
+            fn_8024729C(self[7], self[9], 4, fn_8028F64C);
+        } else {
+            void *x = ((void **)lbl_804433C4[2])[lbl_804433C4[0] - 1];
+            lbl_80494B78 = x;
+            lbl_80494B7C = M2C_FIELD(x, s32 *, 0x28);
+            fn_8024729C(self[7], self[9], 4, fn_8028F724);
+        }
+    }
+    return lbl_80496130;
 }
 
 void *fn_8028FB40(u32 *self) {
