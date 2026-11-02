@@ -116,6 +116,10 @@ void fn_80046FE0(void) {
 
 }
 
+s32 fn_80046FE4(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x154) != 0;
+}
+
 void fn_80046FFC(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x154) = (s32) (M2C_FIELD(arg0, s32 *, 0x154) | (1 << arg1));
 }
