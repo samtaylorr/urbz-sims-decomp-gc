@@ -381,7 +381,7 @@ s32 fn_801286A0(void *arg0) {
 }
 
 s32 fn_801286B4(void *arg0, s32 arg1) {
-    return *(s32 *)(M2C_FIELD(arg0, char *, 0x158) + (arg1 << 2));
+    return *(s32 *)(M2C_FIELD(arg0, char **, 0x158) + (arg1 << 2));
 }
 
 s16 fn_801286C4(void *arg0) {
