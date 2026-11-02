@@ -105,7 +105,7 @@ void fn_8032D444(void *arg0) {
 }
 
 void fn_8032D448(void *arg0, s32 arg1) {
-    extern void fn_8032DE08(s32, s32, void *, s32);
+    extern s32 fn_8032DE08(s32, s32, void *, s32);
     extern s32 lbl_8045BA28[];
     fn_8032D440(arg0);
     fn_8032DE08(arg1, M2C_FIELD(arg0, s32 *, 0x20), (char *)arg0 + 0x24, lbl_8045BA28[0]);
