@@ -2025,7 +2025,11 @@ static inline void SortComp_UnguardedInsertionSort(s32 *first, s32 *last, SortCo
 void fn_8039CC48(s32 *first, s32 *last, SortComp *comp) {
     if (last - first > 16) {
         fn_8039CB38(first, first + 16, *comp);
-        SortComp_UnguardedInsertionSort(first + 16, last, *comp);
+        {
+            SortComp c = *comp;
+            ((void (*)(s32 *, s32 *, s32 *, SortComp))fn_8039CBEC)(first + 16, last, 0, c);
+            *(volatile SortComp *)&c = c;
+        }
     } else {
         fn_8039CB38(first, last, *comp);
     }
@@ -2269,6 +2273,28 @@ void fn_8039D8E8(void *arg0, s32 flags) {
     if (flags & 1) {
         fn_802D20E8(self);
     }
+}
+
+void fn_8039D964(char *arg0, s32 flags) {
+    extern u8 lbl_8040AA10[];
+    extern void fn_802D20E8(void *);
+    extern void fn_803997AC(void *, u32);
+    void fn_800CEE00(void *);
+    void fn_80307364(void *, s32);
+    s32 *v;
+
+    M2C_FIELD(arg0, void **, 0x44) = lbl_8040AA10;
+    fn_800CEE00(arg0);
+    v = (s32 *)(arg0 + 0x50);
+    if (v[0] != 0) {
+        u32 size = (u32)(v[3] - v[0]) & ~3;
+        if (size > 0x80) {
+            fn_802D20E8((void *)v[0]);
+        } else {
+            fn_803997AC((void *)v[0], size);
+        }
+    }
+    fn_80307364(arg0, flags);
 }
 
 void fn_8039D9DC(void *arg0, s32 flags) {
@@ -3474,8 +3500,8 @@ void **fn_803A0A44(void **self, void **other) {
                     size = 0;
                     tmp = (void **)fn_802D1FC8(bytes);
                 } else {
-                    size = 0;
                     tmp = (void **)fn_80399BE8(bytes);
+                    size = 0;
                 }
             } else {
                 tmp = NULL;
