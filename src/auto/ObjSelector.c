@@ -247,6 +247,7 @@ void *fn_8016C8BC(void *arg0) {
 }
 
 s16 fn_8016CBE0(void *arg0) {
+    void *fn_8016CC44(void *);
     s16 x = M2C_FIELD(M2C_FIELD(arg0, char **, 0x38), s16 *, 0xE);
     if (x < 0) {
         if (x != -1) {
