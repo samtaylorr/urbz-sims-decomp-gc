@@ -256,6 +256,10 @@ void fn_800BBB9C(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x80) = var_r9;
 }
 
+void fn_800BBBC4(u8 *arg0, Vec3f *arg1) {
+    *(Vec3f *)(arg0 + 0x3C) = *arg1;
+}
+
 void fn_800BBC90(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x38) = arg1;
 }
