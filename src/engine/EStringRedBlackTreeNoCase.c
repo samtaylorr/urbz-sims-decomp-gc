@@ -344,6 +344,16 @@ s32 fn_80365224(void *arg0) {
     return sp8;
 }
 
+void *fn_8036524C(void *self, f32 key) {
+    char *n;
+
+    n = fn_803652B4(self, key);
+    if (n != NULL && M2C_FIELD(n, f32 *, 0x1C) == key) {
+        return n + 0x18;
+    }
+    return (char *)fn_8036542C(self, n, key, 0) + 0x18;
+}
+
 void *fn_803652B4(void *self, f32 key);
 void *fn_8036542C(void *self, void *parent, f32 key, s32 value);
 void *fn_803652F8(void *arg0, f32 key) {
