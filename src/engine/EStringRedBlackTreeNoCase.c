@@ -127,6 +127,29 @@ void fn_80364D08(void *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 0x24) = 1;
     fn_802C6290(lbl_804448E8, (s32 *)((char *)arg0 + 0x1C), arg1, mode, 0x80000000, 0x80000000, 0);
 }
+s32 fn_80364500(void *self, s32 key) {
+    extern void *fn_8036A04C(void *, s32, void **);
+    extern void fn_802CB5C4(void *, void *);
+    extern void fn_80369F20(void *, void *);
+    extern void fn_802D39F0(s32 *, s32);
+    extern void fn_802D20E8(void *);
+    void *tree = (u8 *)self + 0x14;
+    void *found;
+    void *node = fn_8036A04C(tree, key, &found);
+    if (node != NULL) {
+        s32 *obj = *(s32 **)found;
+        fn_802CB5C4((u8 *)self + 8, found);
+        fn_80369F20(tree, node);
+        if (obj != NULL) {
+            fn_802D39F0(obj, *obj);
+            fn_802D20E8(obj);
+        }
+        M2C_FIELD(self, s32 *, 0) = 1;
+        return 1;
+    }
+    return 0;
+}
+
 void fn_803645F4(void *arg0, void *arg1, s32 arg2) {
     s32 fn_80245BB4(char *, const char *, ...);
     void fn_80364414(void *, void *, char *);
