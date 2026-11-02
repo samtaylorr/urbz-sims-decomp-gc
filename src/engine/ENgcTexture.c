@@ -600,6 +600,12 @@ void fn_80363720(void) {
 
 }
 
+void fn_80363724(void) {
+    extern u8 lbl_80493D04[];
+    extern void *lbl_804962E8;
+    lbl_804962E8 = lbl_80493D04;
+}
+
 void fn_80363918(void) {
 
 }
