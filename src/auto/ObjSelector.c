@@ -511,6 +511,13 @@ void fn_8016E6FC(void *self, char *obj) {
     M2C_FIELD(self, char **, 4) = obj;
 }
 
+s32 fn_8016F120(void) {
+    extern s32 lbl_804944E0;
+    extern s32 lbl_804966F0;
+    extern s32 lbl_804966F4;
+    return lbl_804944E0 != 0 && lbl_804966F0 != 0 && lbl_804966F4 != 0;
+}
+
 s32 *fn_8016F4AC(s32 *arg0) {
     arg0[0] = 0;
     arg0[1] = 0;
