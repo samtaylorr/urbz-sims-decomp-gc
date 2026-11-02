@@ -403,6 +403,14 @@ void fn_80105574(s8 *self, s32 a, s32 b, s8 c) {
     self[2] = c;
 }
 
+s8 *fn_801055B0(s8 *self, s32 idx, s8 c) {
+    extern s8 lbl_80434B78[];
+    s8 *fn_80105624(s8 *self, s8 *other);
+    fn_80105624(self, &lbl_80434B78[idx * 3]);
+    self[2] = c;
+    return self;
+}
+
 void fn_801055FC(void *self, s32 flags) {
     if (flags & 1) {
         fn_802D20E8(self);
@@ -528,7 +536,10 @@ s32 fn_80105AC4(void *arg0, void *arg1) {
 }
 
 S32Pair fn_80105B10(s8 *arg1) {
-    return S32Pair_Make(arg1[0], arg1[1]);
+    S32Pair r;
+    r.b = arg1[1];
+    r.a = arg1[0];
+    return r;
 }
 
 S32Pair fn_80105B30(s8 *arg1) {
