@@ -96,6 +96,25 @@ void fn_800440B4(void) {
 
 }
 
+s32 fn_80044524(s32 a, s32 b) {
+    if (a == b) {
+        return 0;
+    }
+    if (a == 4) {
+        return 1;
+    }
+    if (b == 4) {
+        return 0;
+    }
+    if (a == 0) {
+        return 1;
+    }
+    if (b == 0) {
+        return 0;
+    }
+    return a > b;
+}
+
 void fn_80044A38(s32 *self) {
     self[1] = 1;
 }
@@ -182,12 +201,10 @@ void fn_800458E8(void) {
 
 void fn_8004681C(void *arg0) {
     void fn_80045ED4(void *);
-    s32 found;
     s32 i;
-    found = 0;
+    s32 found = 0;
     for (i = 0; i < 4; i++) {
-        s32 *a = (s32 *)((u8 *)M2C_FIELD(arg0, void **, 0x38) + 0x530);
-        if (a[i] != 0) {
+        if (*(s32 *)((u8 *)M2C_FIELD(arg0, void **, 0x38) + 0x530 + i * 4) != 0) {
             found = 1;
             break;
         }
