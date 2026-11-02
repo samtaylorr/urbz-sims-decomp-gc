@@ -44,6 +44,18 @@ void *fn_8035F368(void *arg0) {
     return arg0;
 }
 
+void fn_8035F3A4(void *arg0, s32 arg1) {
+    void fn_802FEF40(void *, s32);
+    void fn_80338184(void *, void *);
+    extern u8 lbl_8041D018[];
+    extern u8 lbl_8045BA40[];
+    M2C_FIELD(arg0, void **, 0xF0) = lbl_8041D018;
+    fn_802FEF40(arg0, 0);
+    if (arg1 & 1) {
+        fn_80338184(lbl_8045BA40, arg0);
+    }
+}
+
 void fn_8035F6E4(void) {
     fn_802FF4EC();
 }
