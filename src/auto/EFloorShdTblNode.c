@@ -25,6 +25,24 @@ static inline void EFloorShd_PoolPut(void **pool, void *p) {
     }
 }
 
+static inline void *EFloorShd_Alloc(u32 size) {
+    void *fn_802D197C(void *, u32, s32);
+    void *fn_802DC3C0(void *, u32, s32, s32, s32);
+    void *fn_802D0B3C();
+    void *heap;
+    void *p;
+
+    heap = ((void *(*)())fn_802D0AB8)();
+    p = fn_802D197C(heap, size, 0x10);
+    if (p == NULL) {
+        p = fn_802DC3C0(heap, size, 0x10, 0, 0);
+        if (p == NULL && heap == ((void *(*)())fn_802D0AB8)()) {
+            return fn_802DC3C0(fn_802D0B3C(), size, 0x10, 0, 0);
+        }
+    }
+    return p;
+}
+
 static inline void EFloorShd_InitList(s32 *list) {
     list[1] = 0;
     list[0] = 0;
@@ -113,6 +131,43 @@ void *fn_80052D64(void *self, s32 count) {
     return head;
 }
 
+void fn_80052E0C(void *self, void *p) {
+    void fn_802D20E8(void *);
+    void *next;
+
+    if (p != NULL) {
+        do {
+            next = M2C_FIELD(p, void **, 0x14);
+            if (next == NULL) {
+                next = NULL;
+            }
+            fn_802D20E8(p);
+            p = next;
+        } while (p != NULL);
+    }
+}
+
+void fn_80052E58(void *self, void *arg1, s32 arg2, s32 arg3) {
+    void fn_80320680(void *, s32, f32, f32);
+    void fn_803227C4(EFloorShdVec2 *, void *, s32, s32, s32, s32);
+    extern f32 lbl_803C7660;
+    extern f32 lbl_803C7664;
+    EFloorShdVec2 a;
+    EFloorShdVec2 b;
+    f32 m;
+
+    M2C_FIELD(arg1, s32 *, 0x8) = arg2;
+    M2C_FIELD(arg1, s32 *, 0xC) = arg3;
+    fn_80320680(M2C_FIELD(self, void **, 0x19C), 1, lbl_803C7660, lbl_803C7664);
+    fn_803227C4(&a, M2C_FIELD(self, void **, 0x19C), M2C_FIELD(arg1, s32 *, 0x8), 1, 1, 0);
+    fn_803227C4(&b, M2C_FIELD(self, void **, 0x19C), M2C_FIELD(arg1, s32 *, 0xC), 1, 1, 0);
+    m = b.x;
+    if (a.x > b.x) {
+        m = a.x;
+    }
+    M2C_FIELD(arg1, f32 *, 0x10) = m;
+}
+
 void fn_80052EFC(void) {
 
 }
@@ -125,8 +180,40 @@ void fn_80052F04(void) {
 
 }
 
+void fn_80052F08(void *self) {
+    s32 fn_80049BFC(void *);
+    void fn_803374C8(void *, s32);
+    extern u8 lbl_8041F94C[];
+    extern u8 lbl_8045B634[];
+
+    if (M2C_FIELD(self, s32 *, 0x4C) == 0) {
+        M2C_FIELD(self, s32 *, 0x19C) = 0;
+        M2C_FIELD(self, s32 *, 0x4C) = 1;
+        fn_803374C8(lbl_8045B634, fn_80049BFC(lbl_8041F94C));
+    }
+}
+
 void fn_80052F5C(void) {
 
+}
+
+void fn_80052F60(void *self) {
+    void *fn_802D197C(void *, u32, s32);
+    void *fn_802DC3C0(void *, u32, s32, s32, s32);
+    void *fn_802D0B3C();
+    void *fn_800504B0(void *);
+    void *heap;
+    void *p;
+
+    heap = ((void *(*)())fn_802D0AB8)();
+    p = fn_802D197C(heap, 0x420, 0x10);
+    if (p == NULL) {
+        p = fn_802DC3C0(heap, 0x420, 0x10, 0, 0);
+        if (p == NULL && heap == ((void *(*)())fn_802D0AB8)()) {
+            p = fn_802DC3C0(fn_802D0B3C(), 0x420, 0x10, 0, 0);
+        }
+    }
+    M2C_FIELD(self, void **, 0x1B4) = fn_800504B0(p);
 }
 
 s32 fn_80053428(void *arg0) {
@@ -252,15 +339,12 @@ void fn_800555D8(void *self, s32 arg1, s32 arg2, EFloorShdVec2 *pos, s32 arg4, s
     extern f32 lbl_803C7A4C[];
     extern f32 lbl_803C7A50[];
     void fn_8032314C(void *, s32, s32, EFloorShdVec2 *, s32, s32, s32, s32, f32, f32);
-    void fn_80322ACC(void *, s32, s32, s32, EFloorShdVec2 *, s32, s32, s32, s32, s32, s32, s32);
-    EFloorShdVec2 tmp;
+    void fn_80322ACC(void *, s32, s32, s32, EFloorShdVec2, s32, s32, s32, s32, s32, s32, s32);
 
     if (arg6 == 0) {
         fn_8032314C(M2C_FIELD(self, void **, 0x19C), arg1, arg2, pos, arg4, arg5, 0, 1, lbl_803C7A4C[0], lbl_803C7A50[0]);
     } else {
-        tmp.y = pos->y;
-        tmp.x = pos->x;
-        fn_80322ACC(M2C_FIELD(self, void **, 0x19C), arg1, arg2, 1, &tmp, arg4, arg5, 0, 0, 0, 0, 1);
+        fn_80322ACC(M2C_FIELD(self, void **, 0x19C), arg1, arg2, 1, *pos, arg4, arg5, 0, 0, 0, 0, 1);
     }
 }
 
@@ -292,13 +376,16 @@ void fn_80055E40(void *self, void *obj, void *out) {
     void fn_800F6FB4(void *, void *, s32);
     void *fn_800F7138(void *);
     void fn_800F22F0(void *, void *);
-    char buf[0x48];
-    char *s;
+    struct {
+        u8 hdr[8];
+        char str[0x40];
+    } buf;
+    void *s;
     void *vt;
 
     if (obj != NULL) {
-        s = buf;
-        fn_800F6FB4(buf, s + 8, 0x20);
+        s = &buf;
+        fn_800F6FB4(s, ((char *)s) + 8, 0x20);
         vt = M2C_FIELD(obj, void **, 0);
         M2C_FIELD(vt, void (**)(void *, void *), 0x74)((char *)obj + M2C_FIELD(vt, s16 *, 0x70), s);
         fn_800F22F0(out, fn_800F7138(s));
@@ -563,19 +650,23 @@ void fn_800589F8(void) {
     extern void fn_802CD53C(void *);
     extern void fn_802C6710(void *, s32);
     extern void *fn_802D0C44(void);
-    int more;
-    void *node;
     void **list = lbl_804226B8;
+    void *node = list[0];
     void *pool;
     char *obj;
-    char *vt;
+    int more;
 
-    node = list[0];
-    while (more = 1, node == NULL ? more = 0 : 0, more) {
+    for (;;) {
+        more = 1;
+        if (node == NULL) {
+            more = 0;
+        }
+        if (!more) {
+            break;
+        }
         obj = M2C_FIELD(node, char **, 0x1c);
         node = M2C_FIELD(node, void **, 0x10);
-        vt = *(char **)obj;
-        (*(void (**)(void *))(vt + 0xC))(obj + *(s16 *)(vt + 8));
+        (*(void (**)(void *))(*(char **)obj + 0xC))(obj + *(s16 *)(*(char **)obj + 8));
     }
     fn_802CD53C(list);
     pool = lbl_804940C0;
