@@ -496,6 +496,13 @@ s32 fn_8016D4D0(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x78);
 }
 
+s32 fn_8016DC48(s32 arg0) {
+    extern char *lbl_8049665C;
+    char *obj = lbl_8049665C;
+    char *vt = *(char **)obj;
+    return (*(s32 (**)(void *, s32))(vt + 0x174))(obj + *(s16 *)(vt + 0x170), arg0);
+}
+
 extern s32 lbl_80495C88;
 void fn_8016E5DC(void) {
     fn_800F1A60((s32)&lbl_80495C88, 2);
