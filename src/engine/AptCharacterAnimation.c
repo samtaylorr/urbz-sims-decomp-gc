@@ -77,7 +77,7 @@ void fn_8028CB54(void *arg0, void *arg1) {
         M2C_FIELD(arg0, f32 *, 0x1270) = M2C_FIELD(arg1, f32 *, 0x4);
         M2C_FIELD(arg0, u8 *, 0x1274) = M2C_FIELD(arg1, u8 *, 0x8);
     }
-    fn_8028CBD8(arg0, ((M2C_FIELD(arg1, u8 *, 0x8) << 2) | 1) | (M2C_FIELD(arg1, s32 *, 0xC) << 17));
+    fn_8028CBD8(arg0, (M2C_FIELD(arg1, s32 *, 0xC) << 17) | 1 | (M2C_FIELD(arg1, u8 *, 0x8) << 2));
 }
 
 void fn_8028CBD8(void *arg0, u32 arg1) {
