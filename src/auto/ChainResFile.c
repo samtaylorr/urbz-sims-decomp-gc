@@ -144,20 +144,24 @@ void *fn_80102114(void) {
     extern void fn_80248488(void *, s32, s32);
     extern u8 lbl_8040D608[];
     void *heap;
-    void **p;
+    void *p;
+    void **r;
 
     heap = ((void *(*)(void))fn_802D0AB8)();
     p = fn_802D197C(heap, 0x20, 4);
     if (p == NULL) {
         p = fn_802DC9F4(heap, 0x20, 1, 0);
         if (p == NULL && heap == ((void *(*)(void))fn_802D0AB8)()) {
-            p = fn_802DC9F4(fn_802D0B3C(), 0x20, 1, 0);
+            r = fn_802DC9F4(fn_802D0B3C(), 0x20, 1, 0);
+            goto done;
         }
     } else {
         fn_80248488(p, 0, 0x20);
     }
-    *p = lbl_8040D608;
-    return p;
+    r = p;
+done:
+    *r = lbl_8040D608;
+    return r;
 }
 
 void fn_801021BC(void **obj) {
@@ -397,6 +401,38 @@ ChainResHandle fn_80102B4C(void *arg0) {
     return h;
 }
 
+void *fn_80102B5C(void *self) {
+    extern void fn_8018F8C0(void *);
+    extern u8 lbl_8040D788[];
+    ChainSlot *e;
+    s32 i;
+    fn_8018F8C0(self);
+    M2C_FIELD(self, u8 **, 0x10) = lbl_8040D788;
+    e = (ChainSlot *)((char *)self + 0x14);
+    for (i = 8; i != 0; i--, e++) {
+        e->obj = NULL;
+        ChainVec_Init((ChainVec *)&e->begin);
+        e->flag = 1;
+    }
+    return self;
+}
+
+void fn_80102BC8(void *self, s32 flags) {
+    extern void fn_8018F914(void *, s32);
+    extern u8 lbl_8040D788[];
+    ChainSlot *begin;
+    M2C_FIELD(self, u8 **, 0x10) = lbl_8040D788;
+    begin = (ChainSlot *)((char *)self + 0x14);
+    if (begin != NULL) {
+        ChainSlot *p = begin + 8;
+        while (p != begin) {
+            p--;
+            ChainVec_Free((ChainVec *)&p->begin);
+        }
+    }
+    fn_8018F914(self, flags);
+}
+
 void fn_80102C60(void *self, void *obj) {
     ChainEntry *e = (ChainEntry *)((char *)self + 0x14);
     s32 i;
@@ -414,19 +450,18 @@ s16 fn_80102D70(void *self) {
     ChainEntry *e = (ChainEntry *)((char *)self + 0x14);
     s32 i;
     s32 count = 0;
-    for (i = 0, e += count; i < 8 && e->obj != NULL; i++, e++) {
+    for (i = 0; i < 8 && e[count].obj != NULL; i++) {
         count++;
     }
     return count;
 }
 
 void *fn_80102DAC(void *self, s32 idx) {
-    ChainEntry *e = (ChainEntry *)((char *)self + 0x14);
     s32 count = 0;
     s32 i = 0;
-    while (e[i].obj != NULL) {
+    while (((ChainEntry *)((char *)self + 0x14))[i].obj != NULL) {
         if (count == idx) {
-            return e[i].obj;
+            return ((ChainEntry *)((char *)self + 0x14))[i].obj;
         }
         i++;
         count++;
@@ -452,6 +487,48 @@ s32 fn_80102E0C(void *self) {
         void *o = e->obj;
         char *vt = *(char **)((char *)o + 0x10);
         r = (*(s32 (**)(void *))(vt + 0x44))((char *)o + *(s16 *)(vt + 0x40));
+        if (r != 0) {
+            ret = r;
+        }
+    }
+    return ret;
+}
+
+s32 fn_80102EA0(void *self) {
+    extern void fn_8018FA84(void *, s32);
+    ChainEntry *e;
+    s32 i;
+    s32 ret;
+    s32 r;
+
+    fn_8018FA84(self, 0);
+    ret = 0;
+    e = (ChainEntry *)((char *)self + 0x14);
+    for (i = 0; i < 8 && e[i].obj != NULL; i++) {
+        void *o = e[i].obj;
+        char *vt = *(char **)((char *)o + 0x10);
+        r = (*(s32 (**)(void *))(vt + 0x34))((char *)o + *(s16 *)(vt + 0x30));
+        if (r != 0) {
+            ret = r;
+        }
+    }
+    return ret;
+}
+
+s32 fn_80102F34(void *self) {
+    extern void fn_8018FA84(void *, s32);
+    ChainEntry *e;
+    s32 i;
+    s32 ret;
+    s32 r;
+
+    fn_8018FA84(self, 0);
+    ret = 0;
+    e = (ChainEntry *)((char *)self + 0x14);
+    for (i = 0; i < 8 && e[i].obj != NULL; i++) {
+        void *o = e[i].obj;
+        char *vt = *(char **)((char *)o + 0x10);
+        r = (*(s32 (**)(void *))(vt + 0x3C))((char *)o + *(s16 *)(vt + 0x38));
         if (r != 0) {
             ret = r;
         }
@@ -684,11 +761,11 @@ s32 fn_8010531C(s32 *self) {
 }
 
 void fn_80105324(u8 *out, f32 *in) {
-    *(CRB3 *)out = CRB3_make((s32)in[0], (s32)in[1]);
+    CRB3_set((CRB3 *)out, (s32)in[0], (s32)in[1]);
 }
 
 void fn_80105368(f32 *out, s8 *in) {
-    *(CRF3 *)out = CRF3_make(in[0], in[1], in[2]);
+    CRF3_set((CRF3 *)out, in[0], in[1], in[2]);
 }
 
 void fn_80105400(f32 *out, s8 *in) {
