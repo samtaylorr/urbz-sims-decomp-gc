@@ -52,6 +52,40 @@ void fn_8028D540(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x127C) = arg1;
 }
 
+s32 fn_8028D548(void *arg0, void *arg1) {
+    void *sel = M2C_FIELD(arg0, void **, 0x127C);
+    void *it;
+
+    if (sel == NULL) {
+        return 0;
+    }
+    for (it = arg1; it != NULL; it = M2C_FIELD(it, void **, 0x4C)) {
+        if (it == sel) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+s32 fn_8028D6E0(void *arg0) {
+    s32 n = (s32)((M2C_FIELD(arg0, s32 *, 0x8) - M2C_FIELD(arg0, s32 *, 0x4)) * 0xCCCCCCCD) >> 2;
+    if (n < 0) {
+        return n + M2C_FIELD(arg0, s32 *, 0x1290);
+    }
+    return n;
+}
+
+s32 fn_8028D714(void *arg0, s32 arg1) {
+    s32 base = M2C_FIELD(arg0, s32 *, 0x0);
+    s32 cap = M2C_FIELD(arg0, s32 *, 0x1290);
+    s32 i = ((s32)((M2C_FIELD(arg0, s32 *, 0x4) - base) * 0xCCCCCCCD) >> 2) + arg1;
+    i %= cap;
+    if (i < 0) {
+        i += cap;
+    }
+    return base + i * 0x14;
+}
+
 void fn_8028DA5C(void) {
     extern void (*lbl_80443310[])(void);
     lbl_80443310[0]();
