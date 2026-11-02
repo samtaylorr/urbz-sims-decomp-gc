@@ -367,14 +367,14 @@ s32 fn_80102A90(void *self, void *arg1, s32 key) {
     SearchEntry *fn_803A097C(SearchEntry *lo, SearchEntry *hi, s32 key);
     SearchEntry *tbl = M2C_FIELD(M2C_FIELD(arg1, void **, 0x54), SearchEntry **, 0x1C);
     SearchEntry *e;
-    s32 hi = 0;
+    SearchEntry *hi = NULL;
 
     if (tbl != NULL) {
-        hi = ((s32 *)tbl)[-1];
-        hi <<= 4;
-        hi += (s32)tbl;
+        s32 n = ((s32 *)tbl)[-1];
+        n <<= 4;
+        hi = (SearchEntry *)((char *)tbl + n);
     }
-    e = fn_803A097C(tbl, (SearchEntry *)hi, key);
+    e = fn_803A097C(tbl, hi, key);
     if (e != NULL) {
         M2C_FIELD(self, s32 *, 4) = e->unk4;
         M2C_FIELD(self, s32 *, 8) = e->unk8;
@@ -770,12 +770,14 @@ s32 fn_8010531C(s32 *self) {
     return *self;
 }
 
-void fn_80105324(u8 *out, f32 *in) {
-    CRB3_set((CRB3 *)out, (s32)in[0], (s32)in[1]);
+u8 *fn_80105324(u8 *out, f32 *in) {
+    CRB3_setv((CRB3 *)out, in);
+    return out;
 }
 
-void fn_80105368(f32 *out, s8 *in) {
-    CRF3_set((CRF3 *)out, in[0], in[1], in[2]);
+f32 *fn_80105368(f32 *out, s8 *in) {
+    CRF3_setv((CRF3 *)out, in);
+    return out;
 }
 
 void fn_80105400(f32 *out, s8 *in) {
