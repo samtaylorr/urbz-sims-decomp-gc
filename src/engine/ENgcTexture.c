@@ -164,6 +164,27 @@ s32 fn_80360468(u8 v) {
     return r;
 }
 
+void fn_803608C0(void *self) {
+    extern void fn_80385F0C(s32, s32);
+    extern void fn_80383AE8(s32, s32);
+    extern void fn_80260574(void *);
+    s32 t;
+
+    if (M2C_FIELD(self, s32 *, 0x0) != 0 && !(M2C_FIELD(self, u8 *, 0x75) & 8)) {
+        if (M2C_FIELD(self, s32 *, 0x1C) != 0) {
+            fn_80385F0C(M2C_FIELD(self, s32 *, 0x1C), -0x388);
+            fn_80383AE8(M2C_FIELD(self, s32 *, 0x1C), 0);
+        }
+        t = M2C_FIELD(self, u8 *, 0x75) & 0x10;
+        if (t == 0) {
+            fn_80260574((char *)self + 0x24);
+            M2C_FIELD(self, s32 *, 0x0) = t;
+        } else {
+            M2C_FIELD(self, u8 *, 0x75) |= 8;
+        }
+    }
+}
+
 u32 fn_80360948(s32 arg0, u32 arg1, s32 arg2, u32 arg3, void *arg4) {
     void fn_80360750(void *);
     void fn_803608C0(void *);
@@ -171,9 +192,10 @@ u32 fn_80360948(s32 arg0, u32 arg1, s32 arg2, u32 arg3, void *arg4) {
 
     if (!(M2C_FIELD(arg4, u32 *, 0x74) & 0x200000)) {
         r = 0;
-        if (arg1 + arg3 >= M2C_FIELD(arg4, u32 *, 0x70) / 2) {
+        if (arg1 + arg3 >= M2C_FIELD(arg4, u32 *, 0x70) >> 1) {
             fn_80360750(arg4);
-            return M2C_FIELD(arg4, u32 *, 0x70) / 2;
+            r = M2C_FIELD(arg4, u32 *, 0x70);
+            r >>= 1;
         }
     } else {
         fn_803608C0(arg4);
@@ -916,18 +938,30 @@ void fn_80363174(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     u32 *dst = (u32 *)arg3;
     s32 w = arg1 / 4;
     s32 h = arg2 / 4;
-    s32 x, y, i;
+    s32 stride = w * 2;
+    s32 x, y;
 
     for (y = 0; y < h; y++) {
         for (x = 0; x < w; x++) {
             u32 *s = src;
-            for (i = 0; i < 4; i++) {
-                dst[0] = s[0];
-                dst[1] = s[1];
-                dst += 2;
-                s += w * 2;
-            }
+            u32 *d = dst;
+            u32 a, b;
+            a = s[0]; b = s[1];
+            d[0] = a; d[1] = b;
+            s += stride;
+            d += 2;
+            a = s[0]; b = s[1];
+            d[0] = a; d[1] = b;
+            s += stride;
+            d += 2;
+            a = s[0]; b = s[1];
+            d[0] = a; d[1] = b;
+            s += stride;
+            d += 2;
+            a = s[0]; b = s[1];
+            d[0] = a; d[1] = b;
             src += 2;
+            dst += 8;
         }
         src += w * 6;
     }
