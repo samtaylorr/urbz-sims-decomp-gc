@@ -62,10 +62,10 @@ void fn_8035F3FC(u8 *arg0, u8 *arg1, s32 arg2) {
     VtEntry_8035F3FC *e;
 
     for (i = 0; i < arg0[0]; i++) {
-        e = (VtEntry_8035F3FC *)(M2C_FIELD(arg1, u8 *, 0x68) + 0x118);
+        e = (VtEntry_8035F3FC *)(M2C_FIELD(arg1, u8 **, 0x68) + 0x118);
         ((void (*)(u8 *, void *, s32))e->func)(arg1 + e->delta, fn_802FF608(arg0, i), i);
     }
-    e = (VtEntry_8035F3FC *)(M2C_FIELD(arg1, u8 *, 0x68) + 0x330);
+    e = (VtEntry_8035F3FC *)(M2C_FIELD(arg1, u8 **, 0x68) + 0x330);
     ((void (*)(u8 *, u8 *, s32))e->func)(arg1 + e->delta, arg0, arg2);
 }
 
@@ -796,12 +796,18 @@ void fn_80363540(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 stride = bw * 8;
     s32 y;
     s32 x;
+    s32 i;
     for (y = 0; y < bh; y++) {
         u8 *row = (u8 *)arg3 + y * bw * 32;
         for (x = 0; x < bw; x++) {
-            ENgcTexture_CopyTile8(src, row, stride);
+            u8 *p = row;
             row += 8;
-            src += 8;
+            for (i = 0; i < 4; i++) {
+                ((u32 *)p)[0] = src[0];
+                ((u32 *)p)[1] = src[1];
+                src += 2;
+                p += stride;
+            }
         }
     }
 }
