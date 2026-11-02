@@ -903,23 +903,10 @@ void fn_800AAE14(void *self, f32 *a, f32 *b, f32 *c) {
     extern f32 lbl_803CE4C0[];
     extern f32 lbl_803CE4C4[];
     extern f32 lbl_803CE4C8[];
-    f32 a0 = lbl_803CE4B0[0];
-    f32 a1 = lbl_803CE4B4[0];
-    f32 a2 = lbl_803CE4B8[0];
-    f32 b0 = lbl_803CE4BC[0];
-    f32 b1 = lbl_803CE4C0[0];
-    f32 b2 = lbl_803CE4C4[0];
-    f32 c0 = lbl_803CE4C8[0];
 
-    a[2] = a2;
-    a[0] = a0;
-    a[1] = a1;
-    b[0] = b0;
-    b[1] = b1;
-    b[2] = b2;
-    c[2] = b2;
-    c[1] = c0;
-    c[0] = c0;
+    SMCVec3_Set3(a, lbl_803CE4B0[0], lbl_803CE4B4[0], lbl_803CE4B8[0]);
+    SMCVec3_Set3(b, lbl_803CE4BC[0], lbl_803CE4C0[0], lbl_803CE4C4[0]);
+    SMCVec3_Set3(c, lbl_803CE4C8[0], lbl_803CE4C8[0], lbl_803CE4C4[0]);
 }
 
 void fn_800AAE74(void) {
