@@ -288,6 +288,28 @@ void fn_800BB10C(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
 
+s32 fn_800BB424(void *arg0) {
+    extern s32 fn_80336E08(void *, s32);
+    extern u8 lbl_8045B82C[];
+    extern u8 lbl_8045B0F0[];
+    s32 result = 0;
+
+    if (M2C_FIELD(arg0, s32 *, 0x14) == 0) {
+        M2C_FIELD(arg0, s32 *, 0x14) = fn_80336E08(lbl_8045B82C, M2C_FIELD(arg0, s32 *, 0x2C));
+    }
+    if (M2C_FIELD(arg0, s32 *, 0x80) == 0) {
+        if (M2C_FIELD(arg0, s32 *, 0x20) == 0) {
+            M2C_FIELD(arg0, s32 *, 0x20) = fn_80336E08(lbl_8045B0F0, M2C_FIELD(arg0, s32 *, 0x34));
+        }
+        if (M2C_FIELD(arg0, s32 *, 0x14) != 0 && M2C_FIELD(arg0, s32 *, 0x20) != 0) {
+            result = 1;
+        }
+    } else if (M2C_FIELD(arg0, s32 *, 0x14) != 0) {
+        result = 1;
+    }
+    return result;
+}
+
 s32 fn_800BBAB0(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0xC) != 0 && M2C_FIELD(arg0, s32 *, 0x78) == 0;
 }
