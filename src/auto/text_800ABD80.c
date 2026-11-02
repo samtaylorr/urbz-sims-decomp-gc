@@ -78,6 +78,29 @@ void fn_800ABFD4(void *self) {
     M2C_FIELD(self, u8 *, 8) = 0;
 }
 
+void fn_800AC988(void *arg0) {
+    void *temp_r9;
+
+    M2C_FIELD(arg0, s32 *, 0x14) = 1;
+    temp_r9 = M2C_FIELD(arg0, void **, 0x440);
+    M2C_FIELD(temp_r9, void (**)(void *), 0x74)((char *)arg0 + M2C_FIELD(temp_r9, s16 *, 0x70));
+}
+
+void fn_800AC9C4(void *arg0) {
+    char *var_r31;
+    s32 var_r30;
+
+    var_r31 = (char *)arg0 + 0x3C;
+    var_r30 = 0x80;
+    do {
+        if (fn_800ABE78(var_r31) == 0) {
+            fn_800ABE9C(var_r31);
+        }
+        var_r31 += 8;
+        var_r30 -= 1;
+    } while (var_r30 != 0);
+}
+
 void fn_800ACA14(void) {
 
 }
