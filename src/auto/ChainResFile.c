@@ -27,6 +27,12 @@ typedef struct S32Pair {
     s32 b;
 } S32Pair;
 
+typedef struct ChainKeyEntry {
+    s32 unk0;
+    s32 unk4;
+    s16 unk8;
+} ChainKeyEntry;
+
 typedef struct ChainResHandle {
     s32 value;
 } ChainResHandle;
@@ -189,6 +195,63 @@ ChainResHandle fn_80102B4C(void *arg0) {
     ChainResHandle h;
     h.value = M2C_FIELD(arg0, s32 *, 0xC);
     return h;
+}
+
+void fn_80102C60(void *self, void *obj) {
+    ChainEntry *e = (ChainEntry *)((char *)self + 0x14);
+    s32 i;
+    for (i = 0; i < 8; i++, e++) {
+        if (e->obj == NULL) {
+            e->obj = obj;
+            *(s32 *)(e->pad + 4) = *(s32 *)(e->pad + 0);
+            *(s32 *)(e->pad + 0x10) = 1;
+            return;
+        }
+    }
+}
+
+s16 fn_80102D70(void *self) {
+    ChainEntry *e = (ChainEntry *)((char *)self + 0x14);
+    s32 i;
+    s32 count = 0;
+    for (i = 0; i < 8 && e[i].obj != NULL; i++) {
+        count++;
+    }
+    return count;
+}
+
+void *fn_80102DAC(void *self, s32 idx) {
+    ChainEntry *e = (ChainEntry *)((char *)self + 0x14);
+    s32 i;
+    s32 count = 0;
+    for (i = 0; i < 8 && e[i].obj != NULL; i++) {
+        if (count == idx) {
+            return e[i].obj;
+        }
+        count++;
+    }
+    return NULL;
+}
+
+s32 fn_80102E0C(void *self) {
+    extern void fn_8018FA84(void *, s32);
+    ChainEntry *e;
+    s32 i;
+    s32 ret;
+    s32 r;
+
+    ret = 0;
+    fn_8018FA84(self, 0);
+    e = (ChainEntry *)((char *)self + 0x14);
+    for (i = 0; i < 8 && e->obj != NULL; i++, e++) {
+        void *o = e->obj;
+        char *vt = *(char **)((char *)o + 0x10);
+        r = (*(s32 (**)(void *))(vt + 0x44))((char *)o + *(s16 *)(vt + 0x40));
+        if (r != 0) {
+            ret = r;
+        }
+    }
+    return ret;
 }
 
 s16 fn_8010328C(void *self) {
@@ -537,8 +600,10 @@ s32 fn_80105AC4(void *arg0, void *arg1) {
 
 S32Pair fn_80105B10(s8 *arg1) {
     S32Pair r;
-    r.b = arg1[1];
-    r.a = arg1[0];
+    s8 x = arg1[0];
+    s8 y = arg1[1];
+    r.b = y;
+    r.a = x;
     return r;
 }
 
