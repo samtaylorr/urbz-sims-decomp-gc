@@ -391,14 +391,10 @@ void fn_8005895C(s32 arg0, s32 arg1) {
 void *fn_80058988(u32 size) {
     extern void **lbl_804940C0;
     extern s32 lbl_804940C4;
-    void **pool = lbl_804940C0;
-    void **p;
+    void *p;
 
-    if (pool != NULL) {
-        p = (void **)*pool;
-        if (p != NULL) {
-            *pool = *p;
-        }
+    if (lbl_804940C0 != NULL) {
+        p = EFloorShd_PoolGet(lbl_804940C0);
         if (p != NULL) {
             lbl_804940C4++;
         }
@@ -664,10 +660,15 @@ u16 fn_80059894(void *arg0) {
 }
 
 u16 fn_8005989C(void *arg0, u32 arg1) {
+    struct {
+        u8 pad[0x90];
+        u32 count;
+        u16 ids[1];
+    } *s = arg0;
     u16 r;
 
-    if (arg1 < M2C_FIELD(arg0, u32 *, 0x90)) {
-        r = ((u16 *)((u8 *)arg0 + 0x94))[arg1];
+    if (arg1 < s->count) {
+        r = s->ids[arg1];
     } else {
         r = 0;
     }
