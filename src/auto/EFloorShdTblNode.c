@@ -308,6 +308,8 @@ void *fn_80056068(void *self, s32 unused) {
     void *p = M2C_FIELD(self, void **, 0x138);
 
     switch (lbl_80495810) {
+    case 0:
+        break;
     case 1:
         p = M2C_FIELD(self, void **, 0x13C);
         break;
