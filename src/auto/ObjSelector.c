@@ -22,10 +22,10 @@ void *fn_8016C00C(void *arg0, s32 arg1, u32 arg2) {
 }
 
 void fn_8016C06C(void *arg0, s32 arg1) {
-    M2C_UNK fn_802D211C();
+    void fn_802D211C(void *);
     void fn_802D20E8(void *);
-    if (M2C_FIELD(arg0, s32 *, 8) != 0) {
-        fn_802D211C();
+    if (M2C_FIELD(arg0, void **, 8) != NULL) {
+        fn_802D211C(M2C_FIELD(arg0, void **, 8));
     }
     if (arg1 & 1) {
         fn_802D20E8(arg0);
