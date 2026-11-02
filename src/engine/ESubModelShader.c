@@ -3,6 +3,12 @@
 
 typedef struct { f32 x, y, z; } Vec3f;
 
+static inline void Vec3f_Set(Vec3f *v, f32 x, f32 y, f32 z) {
+    v->x = x;
+    v->y = y;
+    v->z = z;
+}
+
 static inline s32 ListCount(u8 *list) {
     return *(s32 *)(list + 4);
 }
@@ -155,11 +161,10 @@ void fn_803003C4(u8 *self) {
 
 void fn_80300420(u8 *self, s32 arg1) {
     extern void fn_80302D94(u8 *, s32);
-    s32 i = 0;
+    s32 i;
 
-    while (i < ListCount(self)) {
+    for (i = 0; ListCount(self) > i; i++) {
         fn_80302D94(*(u8 **)self + i * 0x6C, arg1);
-        i++;
     }
 }
 
