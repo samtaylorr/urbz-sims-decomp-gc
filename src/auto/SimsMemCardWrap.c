@@ -92,6 +92,13 @@ s32 fn_800A512C(void) {
     return M2C_FIELD(lbl_8041FAD0[0], s32 *, 0xC);
 }
 
+s32 fn_800A513C(s32 arg0) {
+    extern char *lbl_80495060;
+    char *obj = lbl_80495060;
+    char *vt = *(char **)obj;
+    return (*(s32 (**)(void *, s32))(vt + 0x6C))(obj + *(s16 *)(vt + 0x68), arg0);
+}
+
 void fn_800A51BC(void) {
 
 }
