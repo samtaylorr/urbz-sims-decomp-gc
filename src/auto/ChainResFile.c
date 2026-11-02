@@ -463,7 +463,7 @@ void fn_80103F3C(void *self, s32 arg1) {
     i = 0;
     fn_8018FA84(self, -0x63);
     e = (ChainEntry *)((char *)self + 0x14);
-    for (; e[i].obj != NULL; ) {
+    while (e[i].obj != NULL) {
         void *o = e[i].obj;
         char *vt = *(char **)((char *)o + 0x10);
         (*(void (**)(void *, s32))(vt + 0xDC))((char *)o + *(s16 *)(vt + 0xD8), arg1);
@@ -512,10 +512,11 @@ void *fn_80105120(void *self) {
     extern void *lbl_804943FC;
     extern s32 lbl_80494400;
     extern u8 lbl_8040D8B8[];
+    void *head = lbl_804943FC;
 
     M2C_FIELD(self, void **, 0xC) = lbl_8040D8B8;
     M2C_FIELD(self, s32 *, 0x4) = 0;
-    M2C_FIELD(self, void **, 0x0) = lbl_804943FC;
+    M2C_FIELD(self, void **, 0x0) = head;
     M2C_FIELD(self, s32 *, 0x8) = lbl_80494400++;
     lbl_804943FC = self;
     return self;
@@ -608,6 +609,18 @@ void fn_80105324(u8 *out, f32 *in) {
     out[0] = (s32)in[0];
     out[2] = 1;
     out[1] = (s32)in[1];
+}
+
+void fn_80105368(f32 *out, s8 *in) {
+    out[0] = in[0];
+    out[1] = in[1];
+    out[2] = in[2];
+}
+
+void fn_80105400(f32 *out, s8 *in) {
+    out[0] = in[1];
+    out[1] = in[0];
+    out[2] = in[2];
 }
 
 f32 fn_80105498(u8 *arg0) {
