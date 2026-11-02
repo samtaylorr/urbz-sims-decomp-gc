@@ -246,6 +246,11 @@ void *fn_8016C8BC(void *arg0) {
     return arg0;
 }
 
+s32 fn_8016CB30(void *arg0) {
+    u8 *p = M2C_FIELD(M2C_FIELD(arg0, char **, 0x38), u8 **, 0xC0);
+    return p != NULL && p[4] != 0;
+}
+
 s16 fn_8016CBE0(void *arg0) {
     void *fn_8016CC44(void *);
     s16 x = M2C_FIELD(M2C_FIELD(arg0, char **, 0x38), s16 *, 0xE);
@@ -394,15 +399,15 @@ void *fn_8016E620(void *self, s32 a, void *obj, s32 b) {
 
 void fn_8016E668(void *self, s32 flags) {
     void fn_802D20E8(void *);
-    s32 i;
     s16 *p;
+    s32 i;
 
     if (M2C_FIELD(self, void **, 0x1C) != NULL) {
         p = (s16 *)((char *)self + 0xC);
         for (i = 0; i < 8; i++) {
             char *obj = *M2C_FIELD(self, char ***, 0x1C);
             char *vt = M2C_FIELD(obj, char **, 4);
-            void (*f)(void *, s32, s32) = M2C_FIELD(vt, void (**)(void *, s32, s32), 0x1B4);
+            void (*f)(void *, s32, s16) = M2C_FIELD(vt, void (**)(void *, s32, s16), 0x1B4);
             f(obj + M2C_FIELD(vt, s16 *, 0x1B0), i, *p++);
         }
         M2C_FIELD(self, void **, 0x1C) = NULL;
