@@ -405,11 +405,11 @@ void *fn_800BBD80(u8 *self) {
     fn_800BB140(self);
     *(u8 **)(self + 0x84) = lbl_8040A790;
     fn_801C9904(self + 0x90);
-    *(s32 *)(self + 0x10) = 0;
     *(s32 *)(self + 0x4) = 2;
-    *(s32 *)(self + 0x178) = 0;
     *(s32 *)(self + 0x88) = 0;
     *(s32 *)(self + 0x8C) = 0;
+    *(s32 *)(self + 0x10) = 0;
+    *(s32 *)(self + 0x178) = 0;
     return self;
 }
 
@@ -454,6 +454,50 @@ s32 fn_800BC118(void *arg0) {
 
 s32 fn_800BC124(void) {
     return 1;
+}
+
+void fn_800BCD18(const u16 *a, const u16 *b, u16 *dst, u32 n) {
+    u32 i = 0;
+    while (*a != 0 && i < n - 1) {
+        *dst++ = *a++;
+        i++;
+    }
+    while (*b != 0 && i < n - 1) {
+        *dst++ = *b++;
+        i++;
+    }
+    *dst = 0;
+}
+
+u32 fn_800BCDA0(const u16 *src, u16 *dst, u32 n) {
+    u32 len = 0;
+    u32 count;
+    u16 *p;
+    while (dst[len] != 0) {
+        len++;
+    }
+    p = dst + len;
+    count = 0;
+    while (*src != 0 && len < n - 1) {
+        *p++ = *src++;
+        len++;
+        count++;
+    }
+    *p = 0;
+    return count;
+}
+
+extern char lbl_804315EC[];
+extern char lbl_803D0060[];
+extern int fn_80245BB4(char *, const char *, ...);
+void fn_800BCFBC(const char *src, u16 *dst, u32 n);
+void fn_800BCFBC(const char *src, u16 *dst, u32 n) {
+    u32 i = 0;
+    while (*src != 0 && i < n - 1) {
+        *dst++ = *src++;
+        i++;
+    }
+    *dst = 0;
 }
 
 void fn_800BEF10(void) {
