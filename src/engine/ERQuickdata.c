@@ -200,7 +200,11 @@ s32 fn_8032D508(void *arg0, s32 lo, s32 hi, s32 key) {
     s32 c;
 
     if (key != 0) {
-        while ((n = hi - lo) >= 0) {
+        for (;;) {
+            n = hi - lo;
+            if (n < 0) {
+                break;
+            }
             if (n == 0) {
                 if (fn_802486DC(key, M2C_FIELD(arg0, ERQdTable **, 0x20)->entries[lo].unk0) == 0) {
                     return lo;
@@ -349,6 +353,18 @@ s32 fn_8032E1F0(s32 arg0, s32 *out) {
     fn_802C5C58((void *)arg0, &tmp);
     *out = tmp;
     return arg0;
+}
+
+void fn_8032EE3C(void *self, void *obj) {
+    char *vt;
+    void *r;
+
+    vt = M2C_FIELD(obj, char **, 0x18);
+    r = (*(void *(**)(void *))(vt + 0x24))((char *)obj + *(s16 *)(vt + 0x20));
+    if (r != 0) {
+        vt = *(char **)self;
+        (*(void (**)(void *, void *))(vt + 0x4c))((char *)self + *(s16 *)(vt + 0x48), r);
+    }
 }
 
 void fn_8032F0BC(s8 arg0) {
