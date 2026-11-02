@@ -87,6 +87,11 @@ void fn_800A5104(void *arg0, s32 arg1) {
     fn_800704F4(lbl_8041FAD0[0], arg1);
 }
 
+s32 fn_800A512C(void) {
+    extern void *lbl_8041FAD0[];
+    return M2C_FIELD(lbl_8041FAD0[0], s32 *, 0xC);
+}
+
 void fn_800A51BC(void) {
 
 }
