@@ -209,8 +209,10 @@ s32 fn_8004B974(void *arg0, s32 arg1, f32 *arg2) {
     if (obj != NULL) {
         ret = fn_802E4030(obj, arg1, arg2);
         if (ret == 0) {
-            arg2[0] = lbl_803C6C20[0];
-            arg2[1] = lbl_803C6C24[0];
+            f32 a = lbl_803C6C20[0];
+            f32 b = lbl_803C6C24[0];
+            arg2[0] = a;
+            arg2[1] = b;
         }
     } else {
         f32 a = lbl_803C6C20[0];
@@ -691,6 +693,12 @@ void fn_8004DED8(void *arg0, s32 arg1, s32 arg2) {
     if (arg0 != NULL && (p = lbl_8041F94C.v[arg2]) != 0) {
         fn_8004DF1C(arg0, arg1, p);
     }
+}
+
+s32 fn_8004E29C(void *self, char *obj) {
+    char *vt = *(char **)(obj + 4);
+    char *r = (*(char *(**)(void *))(vt + 0x2D4))(obj + *(s16 *)(vt + 0x2D0));
+    return (*(u16 *)(r + 0xB6) & 6) != 0;
 }
 
 s32 fn_8004E644(void) {
