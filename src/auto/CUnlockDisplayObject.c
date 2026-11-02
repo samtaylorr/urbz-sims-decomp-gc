@@ -358,6 +358,14 @@ f32 fn_800BBD44(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0x28);
 }
 
+f32 *fn_800BBD4C(f32 *out, u8 *obj) {
+    f32 *p = (f32 *)(obj + 0x60);
+    out[0] = p[0];
+    out[1] = p[1];
+    out[2] = p[2];
+    return out;
+}
+
 s32 fn_800BBD70(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x7C);
 }
