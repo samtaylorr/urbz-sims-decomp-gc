@@ -222,7 +222,7 @@ s32 fn_8018A844(void) {
 s32 fn_8018ACF8(void *self, char *arg1) {
     void *fn_8018AAE8(void *);
     void fn_8018B774(void *, void *, f32);
-    extern f32 lbl_803DAA34;
+    extern f32 lbl_803DAA34[];
     void *obj;
 
     {
@@ -238,7 +238,7 @@ s32 fn_8018ACF8(void *self, char *arg1) {
             f(arg1 + M2C_FIELD(vt, s16 *, 0x1A8), 6, obj);
         }
     }
-    fn_8018B774(self, obj, lbl_803DAA34);
+    fn_8018B774(self, obj, lbl_803DAA34[0]);
     return 1;
 }
 
@@ -690,10 +690,10 @@ void fn_8018D0C0(void *arg0, s32 arg1) {
         obj = M2C_FIELD(arg0, void ***, 0x1C);
         if (obj != NULL) {
             char *vt = (char *)*obj;
-            ((void (*)(void *))*(void **)(vt + 0x10C))((char *)obj + *(s16 *)(vt + 0x108));
-            fn_800F784C(M2C_FIELD(arg0, void **, 0x1C));
-            M2C_FIELD(arg0, void ***, 0x1C) = NULL;
+            (*(void (**)(void *))(vt + 0x10C))((char *)obj + *(s16 *)(vt + 0x108));
         }
+        fn_800F784C(M2C_FIELD(arg0, void **, 0x1C));
+        M2C_FIELD(arg0, void ***, 0x1C) = NULL;
     }
     if (arg1 & 1) {
         fn_802D20E8(arg0);
