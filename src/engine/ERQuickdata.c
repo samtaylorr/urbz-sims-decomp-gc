@@ -437,6 +437,28 @@ s32 fn_8032F52C(void *self, s32 id) {
     return M2C_FIELD(self, s32 **, 0x58)[i];
 }
 
+s32 fn_803302A0(void *self, ERQdLookup *a, ERQdLookup *b) {
+    s32 i;
+    s32 n;
+
+    if (a == NULL || b == NULL) {
+        return 0;
+    }
+    if (b->unk20[1] & 0x4000000) {
+        return 0;
+    }
+    n = *(u8 *)a->unk20;
+    if (n != *(u8 *)b->unk20) {
+        return 0;
+    }
+    for (i = 0; i < n; i++) {
+        if (a->unk34[i] != b->unk34[i]) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
 void fn_8032F5A0(void);
 void fn_8033031C(void) {
     fn_8032F5A0();
