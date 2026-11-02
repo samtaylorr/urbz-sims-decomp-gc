@@ -27,6 +27,10 @@ typedef struct S32Pair {
     s32 b;
 } S32Pair;
 
+typedef struct ChainResHandle {
+    s32 value;
+} ChainResHandle;
+
 static inline S32Pair S32Pair_Make(s32 a, s32 b) {
     S32Pair r;
     r.a = a;
