@@ -146,6 +146,11 @@ void fn_8011CD64(void) {
 
 }
 
+void fn_8011CF5C(char *self, s32 arg1) {
+    void fn_8011CFA4(char *, s32, void *);
+    fn_8011CFA4(self, arg1, self + 0x10);
+}
+
 void fn_8011D014(void *arg0, s32 arg1) {
     void fn_8011CFA4(void *, s32, void *);
     fn_8011CFA4(arg0, arg1, (u8 *)arg0 + 8);
