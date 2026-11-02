@@ -545,6 +545,26 @@ void fn_8016E6FC(void *self, char *obj) {
     M2C_FIELD(self, char **, 4) = obj;
 }
 
+void fn_8016ECF0(void *self, void *arg1) {
+    void fn_8016F238(void *, void *);
+    void fn_8016ED90(void *, void *);
+    char *obj = M2C_FIELD(self, char **, 4);
+    char *vt = M2C_FIELD(obj, char **, 4);
+    if (M2C_FIELD(vt, s32 (**)(void *), 0x354)(obj + M2C_FIELD(vt, s16 *, 0x350)) != 0) {
+        char *obj2 = M2C_FIELD(self, char **, 4);
+        char *vt2 = M2C_FIELD(obj2, char **, 4);
+        char *(*f)(void *) = M2C_FIELD(vt2, char *(**)(void *), 0x2D4);
+        if (M2C_FIELD(f(obj2 + M2C_FIELD(vt2, s16 *, 0x2D0)), s16 *, 0x10) > 0) {
+            return;
+        }
+    }
+    if (M2C_FIELD(self, s32 *, 8) != 0) {
+        fn_8016F238(self, arg1);
+    } else {
+        fn_8016ED90(self, arg1);
+    }
+}
+
 void fn_8016F098(void *arg0, void *arg1, void *arg2) {
     extern void *lbl_804966F4;
     void fn_8016E74C(void *, void *, s32, s32, s32);
