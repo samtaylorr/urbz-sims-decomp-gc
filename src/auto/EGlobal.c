@@ -247,6 +247,10 @@ void fn_8004C614(void) {
 
 }
 
+void fn_8004C864(void *arg0) {
+    M2C_FIELD(arg0, void **, 0xD4) = fn_8032421C(EGlobal_Alloc(0x4D140));
+}
+
 void fn_8004C8F8(void *arg0) {
     void *temp_r11;
     void *temp_r9;
