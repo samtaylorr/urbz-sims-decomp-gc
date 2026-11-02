@@ -9,6 +9,10 @@ typedef struct ChainEntry {
     u8 pad[0x14];
 } ChainEntry;
 
+static inline ChainEntry *Chain_Entry(void *self, s32 i) {
+    return &((ChainEntry *)((char *)self + 0x14))[i];
+}
+
 typedef struct ChainVecAlloc {
     s32 unk0;
     s32 cap;
@@ -405,11 +409,12 @@ void *fn_80102B5C(void *self) {
     M2C_FIELD(self, u8 **, 0x10) = lbl_8040D788;
     e = (ChainSlot *)((char *)self + 0x14);
     for (i = 8; i != 0; i--, e++) {
-        S32Pair p = S32Pair_Make(0, 0);
+        ChainVecAlloc a;
+        a.cap = 0;
         e->obj = NULL;
-        e->begin = p.a;
-        e->end = p.b;
-        ChainVecAlloc_Init(&e->alloc);
+        e->begin = 0;
+        e->end = 0;
+        e->alloc.cap = a.cap;
         e->flag = 1;
     }
     return self;
@@ -418,16 +423,15 @@ void *fn_80102B5C(void *self) {
 void fn_80102BC8(void *self, s32 flags) {
     extern void fn_8018F914(void *, s32);
     extern u8 lbl_8040D788[];
-    ChainSlot *begin;
+    ChainSlot *arr;
     M2C_FIELD(self, u8 **, 0x10) = lbl_8040D788;
-    begin = (ChainSlot *)((char *)self + 0x14);
-    if (begin != NULL) {
-        ChainSlot *p = begin + 8;
-        if (begin != p) {
-            do {
-                p--;
-                ChainVec_Free((ChainVec *)&p->begin);
-            } while (begin != p);
+    arr = (ChainSlot *)((char *)self + 0x14);
+    if (arr != NULL) {
+        ChainSlot *first = arr;
+        ChainSlot *last = arr + 8;
+        while (first != last) {
+            last--;
+            ChainVec_Free((ChainVec *)&last->begin);
         }
     }
     fn_8018F914(self, flags);
@@ -450,7 +454,10 @@ s16 fn_80102D70(void *self) {
     ChainEntry *e = (ChainEntry *)((char *)self + 0x14);
     s32 i;
     s32 count = 0;
-    for (i = 0; i < 8 && e[count].obj != NULL; i++) {
+    for (i = 0; i < 8; i++) {
+        if (e[count].obj == NULL) {
+            break;
+        }
         count++;
     }
     return count;
@@ -482,8 +489,8 @@ s32 fn_80102E0C(void *self) {
     ret = 0;
     fn_8018FA84(self, 0);
     e = (ChainEntry *)((char *)self + 0x14);
-    for (i = 0; i < 8 && e[i].obj != NULL; i++) {
-        void *o = e[i].obj;
+    for (i = 0, e += ret; i < 8 && e->obj != NULL; i++, e++) {
+        void *o = e->obj;
         char *vt = *(char **)((char *)o + 0x10);
         r = (*(s32 (**)(void *))(vt + 0x44))((char *)o + *(s16 *)(vt + 0x40));
         if (r != 0) {
@@ -513,7 +520,7 @@ s32 fn_80102EA0(void *self) {
         }
         i++;
         if (i > 7) {
-            break;
+            return ret;
         }
     }
     return ret;
