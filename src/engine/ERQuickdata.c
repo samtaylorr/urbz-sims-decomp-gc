@@ -200,32 +200,27 @@ s32 fn_8032D508(void *arg0, s32 lo, s32 hi, s32 key) {
     s32 c;
 
     if (key == 0) {
-        goto fail;
+        return -1;
     }
-loop:
-    n = hi - lo;
-    if (n < 0) {
-        goto fail;
-    }
-    if (n == 0) {
-        if (fn_802486DC(key, M2C_FIELD(arg0, ERQdTable **, 0x20)->entries[lo].unk0) == 0) {
-            return lo;
+    for (;;) {
+        n = hi - lo;
+        if (n < 0) {
+            return -1;
         }
-        goto fail;
+        if (n == 0) {
+            return fn_802486DC(key, M2C_FIELD(arg0, ERQdTable **, 0x20)->entries[lo].unk0) == 0 ? lo : -1;
+        }
+        mid = lo + n / 2;
+        c = fn_802486DC(key, M2C_FIELD(arg0, ERQdTable **, 0x20)->entries[mid].unk0);
+        if (c == 0) {
+            return mid;
+        }
+        if (c > 0) {
+            lo = mid + 1;
+        } else {
+            hi = mid - 1;
+        }
     }
-    mid = lo + n / 2;
-    c = fn_802486DC(key, M2C_FIELD(arg0, ERQdTable **, 0x20)->entries[mid].unk0);
-    if (c == 0) {
-        return mid;
-    }
-    if (c > 0) {
-        lo = mid + 1;
-    } else {
-        hi = mid - 1;
-    }
-    goto loop;
-fail:
-    return -1;
 }
 
 ERQdEntry *fn_8032D5C8(void *arg0, s32 key) {
@@ -398,6 +393,9 @@ void fn_8032F0BC(s8 arg0) {
 void fn_8032F480(void *self, void *other) {
     extern void fn_80337AEC(void *, void *);
     extern u8 lbl_8045BA40[];
+    u8 **dst;
+    u8 **src;
+    s32 *d2;
     s32 i;
 
     if (M2C_FIELD(self, void **, 0x24) != NULL) {
@@ -405,13 +403,17 @@ void fn_8032F480(void *self, void *other) {
         M2C_FIELD(self, void **, 0x24) = NULL;
     }
     M2C_FIELD(self, void **, 0x24) = other;
+    dst = (u8 **)((u8 *)self + 0x2c);
+    src = (u8 **)((u8 *)other + 0x2c);
+    d2 = (s32 *)((u8 *)self + 0x34);
     M2C_FIELD(self, s32 *, 0x20) = M2C_FIELD(other, s32 *, 0x20);
     for (i = 0; i < 2; i++) {
-        u8 *q = ((u8 **)((u8 *)other + 0x2c))[i];
-        ((u8 **)((u8 *)self + 0x2c))[i] = q;
+        u8 *q = src[i];
+        dst[i] = q;
         if (q != NULL) {
-            ((s32 *)((u8 *)self + 0x34))[i] = *(s32 *)(q + 8);
+            *d2 = *(s32 *)(q + 8);
         }
+        d2++;
     }
     M2C_FIELD(self, s32 *, 0x3c) = M2C_FIELD(other, s32 *, 0x3c);
     M2C_FIELD(self, s32 *, 0x40) = M2C_FIELD(other, s32 *, 0x40);
@@ -466,6 +468,26 @@ void fn_8033031C(void) {
 
 void fn_8033033C(u8 *self) {
     ((void (*)(u8 *, u8))fn_8032F5A0)(self, self[0x72] * 4 + self[0x73] / 15);
+}
+
+void fn_80330D4C(u8 *self, s32 a, s32 b) {
+    void fn_8032F3B0(void *, u8);
+    u8 v = a * 4 + b / 15;
+    s32 n = self[0x50];
+    u8 *arr;
+    s32 found = 0;
+    s32 i;
+
+    for (i = 0; i < n; i++) {
+        arr = M2C_FIELD(self, u8 **, 0x54);
+        if (arr[i] > v) {
+            break;
+        }
+        found = i;
+    }
+    if (i != self[0x50]) {
+        fn_8032F3B0(self, M2C_FIELD(self, u8 **, 0x54)[found]);
+    }
 }
 
 s32 fn_80330F38(ERQdLookup *self, s32 id) {
