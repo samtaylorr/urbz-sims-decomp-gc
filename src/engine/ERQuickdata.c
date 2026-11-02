@@ -407,6 +407,10 @@ s32 fn_80331410(void *arg0) {
     return ((u32) (M2C_FIELD(temp_r9, s32 *, 0x74) | M2C_FIELD(temp_r9, s32 *, 0xB4)) >> 5U) & 1;
 }
 
+s32 fn_80331428(u8 *self, s32 idx) {
+    return (*(s32 **)(self + 0x20) + 0x10)[idx];
+}
+
 void fn_8033143C(void) {
     void fn_80330FC4(s32, s32);
     fn_80330FC4(1, 0xFFFF);
