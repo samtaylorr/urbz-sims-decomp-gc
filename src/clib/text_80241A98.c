@@ -1388,13 +1388,14 @@ void fn_8024FAEC(void) {
 }
 
 char *fn_8024FB20(void) {
-    extern s32 lbl_80440B20;
+    extern s32 lbl_80440B20[];
     extern char lbl_80440B10[];
     extern char lbl_80440B24[];
-    if (lbl_80440B20 == 0) {
-        lbl_80440B20 = 1;
-        ((void (*)())fn_80248488)(lbl_80440B10, 0, 0x10);
-        *(char **)(lbl_80440B10 + 4) = lbl_80440B24;
+    if (lbl_80440B20[0] == 0) {
+        char *p = lbl_80440B10;
+        lbl_80440B20[0] = 1;
+        ((void (*)())fn_80248488)(p, 0, 0x10);
+        *(char **)(p + 4) = lbl_80440B24;
     }
     return lbl_80440B10;
 }
