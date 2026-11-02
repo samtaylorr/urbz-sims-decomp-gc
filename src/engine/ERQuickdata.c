@@ -283,6 +283,28 @@ u32 fn_8032D6E8(void *arg0, ERQdEntry *e, s32 key) {
     return result;
 }
 
+u32 fn_8032D764(void *arg0, s32 idx) {
+    ERQdTable *tbl = M2C_FIELD(arg0, ERQdTable **, 0x20);
+    u32 p;
+    s32 stride;
+
+    p = tbl->entries[idx].unk4;
+    if (p != 0) {
+        return p;
+    }
+    while (idx-- > 0) {
+        p = tbl->entries[idx].unk4;
+        if (p != 0) {
+            stride = tbl->entries[idx].unk10;
+            if (stride == 0) {
+                stride = 1;
+            }
+            return p + stride * tbl->entries[idx].unkC;
+        }
+    }
+    return p;
+}
+
 void *fn_8032D8E0(void *arg0, u32 arg1, u32 *out) {
     s32 fn_8032D7DC(void *, s32, s32, u32);
     s32 idx;
@@ -397,6 +419,22 @@ s32 fn_8032E1F0(s32 arg0, s32 *out) {
     fn_802C5C58((void *)arg0, &tmp);
     *out = tmp;
     return arg0;
+}
+
+void fn_8032E2F4(void *self, s32 flags) {
+    extern u8 lbl_8041BAC0[];
+    extern void fn_8032E35C(void *);
+    extern void fn_803BD770(void *);
+    extern void fn_8031E910(void *, s32);
+    void fn_80338184(void *, s32);
+    extern u8 lbl_8045BA40[];
+    *(u8 **)self = lbl_8041BAC0;
+    fn_8032E35C(self);
+    fn_803BD770((u8 *)self + 0x48);
+    fn_8031E910(self, 0);
+    if (flags & 1) {
+        fn_80338184(lbl_8045BA40, (s32)self);
+    }
 }
 
 void fn_8032E58C(void *self) {
@@ -544,9 +582,10 @@ void fn_80330D4C(u8 *self, s32 a, s32 b) {
     s32 n = self[0x50];
     s32 found = 0;
     s32 i;
+    u32 v = (u8)(a * 4 + b / 15);
 
     for (i = 0; i < n; i++) {
-        if (M2C_FIELD(self, u8 **, 0x54)[i] <= (u8)(a * 4 + b / 15)) {
+        if (M2C_FIELD(self, u8 **, 0x54)[i] <= v) {
             found = i;
         } else {
             break;
