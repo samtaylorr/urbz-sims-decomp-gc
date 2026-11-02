@@ -115,15 +115,16 @@ s16 fn_8016C260(void *arg0, u32 arg1) {
 
 s16 fn_8016C2A4(void *arg0, u32 arg1) {
     struct { u8 pad[0x40]; s16 a[1]; } *p;
+    struct { u8 pad[0x40]; s16 a[1]; } *q;
     s16 ret = 0;
     if (arg1 <= 0x1D) {
         p = M2C_FIELD(arg0, void **, 0xC);
         if (p != NULL) {
             ret = p->a[arg1];
         } else {
-            p = M2C_FIELD(arg0, void **, 0x10);
-            if (p != NULL) {
-                ret = p->a[arg1];
+            q = M2C_FIELD(arg0, void **, 0x10);
+            if (q != NULL) {
+                ret = q->a[arg1];
             }
         }
     }
