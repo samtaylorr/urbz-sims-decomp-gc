@@ -506,6 +506,7 @@ u32 fn_800BCFBC(const char *src, u16 *dst, u32 n) {
         i++;
     }
     *dst = 0;
+    return i;
 }
 
 void fn_800BD00C(u16 *src, u8 *dst, u32 n) {
