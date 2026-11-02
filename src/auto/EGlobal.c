@@ -5,6 +5,48 @@ typedef struct EGlobalHandle {
     s32 value;
 } EGlobalHandle;
 
+void fn_80049790(void *self, s32 flags) {
+    extern char lbl_80407FC0[];
+    void fn_802D20E8(void *);
+
+    M2C_FIELD(self, void **, 0x3A4) = lbl_80407FC0;
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
+void *fn_80049AC4(void) {
+    void *fn_802D0AB8(void);
+    void *fn_802D0B3C(void);
+    void *fn_802D197C(void *, s32, s32);
+    void *fn_802DC3C0(void *, s32, s32, s32, s32);
+    void fn_80248488(void *, s32, s32);
+    void *fn_8008D5C0(void *);
+    void *heap = fn_802D0AB8();
+    void *p = fn_802D197C(heap, 0x500, 0x10);
+
+    if (p == NULL) {
+        p = fn_802DC3C0(heap, 0x500, 0x10, 0, 0);
+        if (p == NULL && heap == fn_802D0AB8()) {
+            p = fn_802DC3C0(fn_802D0B3C(), 0x500, 0x10, 0, 0);
+        }
+    }
+    fn_80248488(p, 0, 0x4F8);
+    return fn_8008D5C0(p);
+}
+
+s32 fn_80049B6C(void *self) {
+    void *fn_801DB3C8(void *, s32);
+    extern char lbl_803C6958[];
+
+    if (M2C_FIELD(self, void **, 0x3A0) == NULL) {
+        if ((M2C_FIELD(self, void **, 0x3A0) = fn_801DB3C8(lbl_803C6958, 0x69)) == NULL) {
+            return 0;
+        }
+    }
+    return M2C_FIELD(M2C_FIELD(self, char **, 0x3A0), s32 *, 8) == 1;
+}
+
 s32 fn_80049BD4(void *self, s32 which) {
     if (which == 0) {
         return M2C_FIELD(self, s32 *, 0x338);
