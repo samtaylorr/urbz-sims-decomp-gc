@@ -329,6 +329,14 @@ void fn_80380A94(void) {
 }
 
 extern s32 lbl_80496380;
+void fn_80380ACC(s32 arg0) {
+    if (arg0 & 0x1F) {
+        lbl_80496380 = arg0 + (0x20 - (arg0 & 0x1F));
+    } else {
+        lbl_80496380 = arg0;
+    }
+}
+
 s32 fn_80380AEC(void) {
     return lbl_80496380;
 }
