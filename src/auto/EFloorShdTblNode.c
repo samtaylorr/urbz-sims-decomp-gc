@@ -464,10 +464,12 @@ s32 fn_800574F0(void *list) {
     register It *it asm("r30") = &iter;
     register It *p asm("r31");
     VtEnt *e;
+    u8 *cur;
 
     fn_80151048(it, list, 0);
+    cur = it->cur;
     p = it;
-    if (it->cur != NULL) {
+    if (cur != NULL) {
         do {
             e = (VtEnt *)(*(u8 **)(p->cur + 4) + 0x2D0);
             if (*(u16 *)(e->fn(p->cur + e->delta) + 0xB6) & 6) {
