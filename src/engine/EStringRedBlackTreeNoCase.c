@@ -1825,9 +1825,9 @@ void fn_8036A354(void *arg0) {
 
     fn_80369B8C(arg0, M2C_FIELD(arg0, s32 *, 0xC) << 1);
     for (n = M2C_FIELD(arg0, void **, 0); n != NULL; n = M2C_FIELD(n, void **, 4)) {
-        s32 index = fn_80369B40(arg0, M2C_FIELD(n, u8 **, 0xC));
-        M2C_FIELD(n, void **, 8) = M2C_FIELD(arg0, void ***, 8)[index];
-        M2C_FIELD(arg0, void ***, 8)[index] = n;
+        void **slot = &M2C_FIELD(arg0, void ***, 8)[fn_80369B40(arg0, M2C_FIELD(n, u8 **, 0xC))];
+        M2C_FIELD(n, void **, 8) = *slot;
+        *slot = n;
     }
 }
 
