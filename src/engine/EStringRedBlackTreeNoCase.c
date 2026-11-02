@@ -117,15 +117,17 @@ void fn_80364CB0(void *arg0, s32 arg1) {
 }
 
 void fn_80364D08(void *arg0, s32 arg1, s32 arg2) {
-    M2C_UNK fn_80364D84();
+    void fn_80364D84(void *);
     s32 fn_802C6290(void *, s32 *, s32, void *, s32, s32, s32);
     extern M2C_UNK lbl_804448E8[];
     extern char lbl_803F4F78[];
     extern char lbl_803F4F7C[];
+    char *mode;
     fn_80364D84(arg0);
     M2C_FIELD(arg0, s32 *, 0x20) = arg2;
+    mode = arg2 == 0 ? lbl_803F4F78 : lbl_803F4F7C;
     M2C_FIELD(arg0, s32 *, 0x24) = 1;
-    fn_802C6290(lbl_804448E8, (s32 *)((char *)arg0 + 0x1C), arg1, arg2 == 0 ? lbl_803F4F78 : lbl_803F4F7C, 0x80000000, 0x80000000, 0);
+    fn_802C6290(lbl_804448E8, (s32 *)((char *)arg0 + 0x1C), arg1, mode, 0x80000000, 0x80000000, 0);
 }
 void fn_80364A1C(void *self) {
     extern void fn_802D39F0(s32 *, s32);
