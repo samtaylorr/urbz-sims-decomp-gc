@@ -23,6 +23,17 @@ static inline void **PtrVec_End(PtrVec *v) {
     return v->end;
 }
 
+typedef struct NbhdPair { s32 a; s32 b; } NbhdPair;
+
+static inline void NbhdPair_InitB(NbhdPair *p) {
+    p->b = 0;
+}
+
+static inline void NbhdPair_Init(NbhdPair *p) {
+    p->a = 0;
+    p->b = 0;
+}
+
 void fn_80123160(void) {
     M2C_UNK fn_801234B4();
     M2C_UNK fn_802D1FC8(M2C_UNK);
@@ -54,6 +65,35 @@ void fn_80123450(void *self) {
         }
     }
     v->end = v->begin;
+}
+
+void *fn_801234B4(void *self) {
+    extern u8 lbl_8040FD60[];
+    void fn_800F687C(void *, void *, s32);
+    void fn_800F6FB4(void *, void *, s32);
+    typedef struct { s32 a; s32 b; } Pair;
+    s16 *p;
+    s32 i;
+
+    M2C_FIELD(self, void **, 0) = lbl_8040FD60;
+    fn_800F687C((char *)self + 4, (char *)self + 0xC, 0x104);
+    fn_800F6FB4((char *)self + 0x110, (char *)self + 0x118, 0x20);
+    M2C_FIELD(self, s32 *, 0x158) = 0;
+    M2C_FIELD(self, s32 *, 0x15C) = 0;
+    ((Pair *)((char *)self + 0x160))->b = 0;
+    ((Pair *)((char *)self + 0x1B0))->a = 0;
+    ((Pair *)((char *)self + 0x1B0))->b = 0;
+    ((Pair *)((char *)self + 0x1B8))->b = 0;
+    ((Pair *)((char *)self + 0x1C0))->a = 0;
+    ((Pair *)((char *)self + 0x1C0))->b = 0;
+    ((Pair *)((char *)self + 0x1C8))->b = 0;
+    p = (s16 *)((char *)self + 0x1AE);
+    for (i = 0x23; i >= 0; i--) {
+        *p = 0;
+        p--;
+    }
+    M2C_FIELD(self, s32 *, 0x1D4) = 0;
+    return self;
 }
 
 void fn_80123694(void *arg0, void *arg1) {
