@@ -1056,14 +1056,14 @@ void fn_80363EE0(s32 arg0, s32 arg1) {
 }
 
 void fn_80363F50(void) {
-    M2C_UNK fn_802D1FC8(M2C_UNK);
-    fn_802D1FC8(0x28);
-    fn_80363D2C();
+    void *fn_802D1FC8(s32);
+    void *fn_80363D2C(void *);
+    fn_80363D2C(fn_802D1FC8(0x28));
 }
 
-void fn_80363D2C(void);
-void fn_80363F78(void) {
-    fn_80363D2C();
+void fn_80363F78(void *arg0) {
+    void *fn_80363D2C(void *);
+    fn_80363D2C(arg0);
 }
 
 void fn_80363F98(void **arg0) {
