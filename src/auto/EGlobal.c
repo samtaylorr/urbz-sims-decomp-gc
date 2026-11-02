@@ -28,12 +28,13 @@ void *fn_80049AC4(void) {
 
     if (p == NULL) {
         p = fn_802DC3C0(heap, 0x500, 0x10, 0, 0);
+        if (p == NULL && heap == fn_802D0AB8()) {
+            r = fn_802DC3C0(fn_802D0B3C(), 0x500, 0x10, 0, 0);
+            goto done;
+        }
     }
-    if (p == NULL && heap == fn_802D0AB8()) {
-        r = fn_802DC3C0(fn_802D0B3C(), 0x500, 0x10, 0, 0);
-    } else {
-        r = p;
-    }
+    r = p;
+done:
     fn_80248488(r, 0, 0x4F8);
     return fn_8008D5C0(r);
 }
@@ -260,7 +261,7 @@ void fn_8004C8F8(void *arg0) {
 }
 
 s32 fn_8004C950(void *arg0, s32 i) {
-    return ((s32 *)((char *)arg0 + 0xD8))[i];
+    return ((struct { u8 pad[0xD8]; s32 a[1]; } *)arg0)->a[i];
 }
 
 s32 fn_8004C960(void *arg0, s32 arg1, s32 arg2) {
