@@ -313,7 +313,7 @@ void fn_80307C9C(void) {
 }
 
 void fn_80307CCC(s32 arg0) {
-    void fn_803076D4(void);
+    void fn_803076D4();
     void fn_80307D00(s32);
     fn_803076D4();
     fn_80307D00(arg0);
