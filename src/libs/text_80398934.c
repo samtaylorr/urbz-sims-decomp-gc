@@ -1,6 +1,8 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 typedef struct { s32 v; } Comp4;
+void fn_8039C5B8(s32 *first, s32 hole, s32 len, s32 val, Comp4 comp);
+void fn_8039C7AC(s32 *first, s32 *middle, s32 *last, s32 *dummy, Comp4 comp);
 typedef struct {
     u8 pad0[0x14];
     void *unk14;
@@ -1968,6 +1970,30 @@ void fn_8039C584(void **self, s32 flags) {
     if (flags & 1) {
         fn_802D20E8(self);
     }
+}
+
+void fn_8039C6D0(s32 *first, s32 *last, Comp4 comp) {
+    s32 len = last - first;
+    s32 parent;
+
+    if (len < 2) {
+        return;
+    }
+    parent = (len - 2) / 2;
+    while (1) {
+        fn_8039C5B8(first, parent, len, first[parent], comp);
+        if (parent == 0) {
+            return;
+        }
+        parent--;
+    }
+}
+
+void fn_8039C75C(s32 *first, s32 *last, Comp4 comp) {
+    s32 *result = last - 1;
+    s32 val = *result;
+    *result = *first;
+    fn_8039C5B8(first, 0, result - first, val, comp);
 }
 
 void fn_8039C5B8(s32 *first, s32 hole, s32 len, s32 val, Comp4 comp);
