@@ -31,6 +31,14 @@ static inline void EWinAnim_Init(EWinAnim *p) {
     p->e = 0;
 }
 
+static inline char *EWin_NextItem(char *p) {
+    char **link = *(char ***)(*(char **)(p + 0x10) + 8);
+    if (link != NULL) {
+        return *link;
+    }
+    return NULL;
+}
+
 static inline void EWinAnim_Copy(EWinAnimDst *d, EWinAnim *s) {
     d->a = s->a;
     d->b = s->b;
@@ -79,8 +87,12 @@ void fn_80305CB4(char *self, s32 n) {
         p = **(char ***)self;
         if (p != NULL) {
             for (i = 0; i < n; i++) {
-                p = *(char **)(*(char **)(p + 0x10) + 8);
-                p = (p != NULL) ? *(char **)p : NULL;
+                char **link = *(char ***)(*(char **)(p + 0x10) + 8);
+                if (link == NULL) {
+                    p = NULL;
+                } else {
+                    p = *link;
+                }
             }
             if (M2C_FIELD(p, s32 *, 0x18) & 0x10) {
                 vt = *(char **)(self + 0x44);
@@ -354,6 +366,22 @@ void fn_8030744C(void *arg0) {
     void fn_80307478(void *);
     if (M2C_FIELD(arg0, s32 *, 0x18) & 2) {
         fn_80307478(arg0);
+    }
+}
+
+void fn_803074F0(void *self, s32 flags, s32 set) {
+    void *vt;
+    void *p;
+
+    vt = M2C_FIELD(self, void **, 0x44);
+    ((void (*)(void *))M2C_FIELD(vt, void **, 0x54))((char *)self + M2C_FIELD(vt, s16 *, 0x50));
+    if (set != 0) {
+        M2C_FIELD(self, s32 *, 0x18) |= flags;
+    } else {
+        M2C_FIELD(self, s32 *, 0x18) &= ~flags;
+    }
+    for (p = M2C_FIELD(self, void **, 0); p != NULL; p = M2C_FIELD(p, void **, 8)) {
+        fn_803074F0(M2C_FIELD(p, void **, 0), flags, set);
     }
 }
 
@@ -812,11 +840,11 @@ void *fn_803082CC(void *self, s32 a1, s32 a2, s32 a3, s32 a4, s32 a5) {
     M2C_FIELD(self, s32 *, 0xFC) = 0;
     M2C_FIELD(self, u8 **, 0x44) = lbl_8041AE10;
     fn_80308BF8(self, a3, a4);
+    M2C_FIELD(self, s32 *, 0x108) = a5;
     M2C_FIELD(self, f32 *, 0x104) = lbl_803F1D38[0];
     M2C_FIELD(self, s32 *, 0x48) = 0;
     M2C_FIELD(self, s32 *, 0xF4) = 0;
     M2C_FIELD(self, s32 *, 0x100) = 0;
-    M2C_FIELD(self, s32 *, 0x108) = a5;
     return self;
 }
 
