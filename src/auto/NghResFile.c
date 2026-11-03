@@ -154,11 +154,11 @@ s32 fn_8012A5D4(s32 arg0) {
 }
 
 s32 fn_8012A60C(s32 arg0) {
-    extern s32 lbl_80494454[];
+    extern s32 lbl_80494454[2];
     s32 i;
 
     for (i = 0; i < 2; i++) {
-        if (lbl_80494454[i] == arg0) {
+        if (arg0 == lbl_80494454[i]) {
             return i;
         }
     }
