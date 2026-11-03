@@ -860,8 +860,8 @@ void fn_8030834C(void *self, s32 flags) {
 }
 
 void fn_803083BC(void *arg0) {
-    M2C_UNK fn_80305B1C();
-    fn_80305B1C();
+    void fn_80305B1C(void *);
+    fn_80305B1C(arg0);
     M2C_FIELD(arg0, s32 *, 0xF4) = 0;
     M2C_FIELD(arg0, s32 *, 0x100) = 0;
 }
