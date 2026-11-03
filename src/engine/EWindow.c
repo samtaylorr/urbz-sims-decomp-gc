@@ -56,11 +56,11 @@ void fn_803064E4(void *self) {
         case 0:
             fn_80306544(self);
             break;
-        case 1:
-            fn_80306824(self);
-            break;
         case 2:
             fn_80306B3C(self);
+            break;
+        case 1:
+            fn_80306824(self);
             break;
         }
     }
@@ -622,13 +622,13 @@ void fn_803081EC(s32 arg0) {
 void fn_8030820C(void *self, s32 *v) {
     M2C_UNK fn_80307D00(void *);
     s32 x = v[0];
-    s32 z = v[2];
     s32 y = v[1];
+    s32 z = v[2];
     s32 *d;
     M2C_FIELD(self, s32 *, 0x20) = x;
     d = (s32 *)((u8 *)self + 0x20);
-    d[2] = z;
     d[1] = y;
+    d[2] = z;
     fn_80307D00(self);
 }
 
@@ -813,20 +813,21 @@ void fn_80309B50(void *arg0, void *arg1, s32 arg2) {
     struct { u8 pad[0x90]; void *obj; s32 id; } *self = arg0;
     f32 buf[4];
 
-    if (self->obj != arg1 || self->id != arg2) {
-        self->obj = arg1;
-        self->id = arg2;
-        if (arg1 != NULL) {
-            void *vt = M2C_FIELD(arg1, void **, 0x20);
-            M2C_FIELD(vt, M2C_UNK (**)(void *, void *), 0x1C)((char *)arg1 + M2C_FIELD(vt, s16 *, 0x18), buf);
-        } else {
-            void *obj = lbl_80495050;
-            void *vt = M2C_FIELD(obj, void **, 0);
-            M2C_FIELD(vt, M2C_UNK (**)(void *, void *), 0x54)((char *)obj + M2C_FIELD(vt, s16 *, 0x50), buf);
-        }
-        fn_80309D70(buf);
-        fn_8030A570((s32)self, (s32)buf);
+    if (self->obj == arg1 && self->id == arg2) {
+        return;
     }
+    self->obj = arg1;
+    M2C_FIELD(self, s32 *, 0x94) = arg2;
+    if (arg1 != NULL) {
+        void *vt = M2C_FIELD(arg1, void **, 0x20);
+        M2C_FIELD(vt, M2C_UNK (**)(void *, void *), 0x1C)((char *)arg1 + M2C_FIELD(vt, s16 *, 0x18), buf);
+    } else {
+        void *obj = lbl_80495050;
+        void *vt = M2C_FIELD(obj, void **, 0);
+        M2C_FIELD(vt, M2C_UNK (**)(void *, void *), 0x54)((char *)obj + M2C_FIELD(vt, s16 *, 0x50), buf);
+    }
+    fn_80309D70(buf);
+    fn_8030A570((s32)self, (s32)buf);
 }
 
 void fn_80309DF4(f32 *rect, f32 *src) {
