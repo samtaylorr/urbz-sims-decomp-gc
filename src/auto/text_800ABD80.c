@@ -279,6 +279,21 @@ void fn_800AD044(void *self, s32 arg1) {
     fn_800AC8B0(self, arg1);
 }
 
+s32 fn_800AD1A4(void *arg0) {
+    extern u8 lbl_8045B82C[];
+    extern u32 lbl_803CEAD0[];
+    s32 fn_80336E08(void *, s32);
+    s32 ret = 0;
+
+    if (fn_80336E08(lbl_8045B82C, 0x0E1FA277) != 0 &&
+        fn_80336E08(lbl_8045B82C, 0x175ED7D7) != 0 &&
+        fn_80336E08(lbl_8045B82C, 0x7CE0699A) != 0 &&
+        fn_80336E08(lbl_8045B82C, lbl_803CEAD0[M2C_FIELD(arg0, u8 *, 0x46C)]) != 0) {
+        ret = 1;
+    }
+    return ret;
+}
+
 void fn_800ADBEC(void) {
 
 }
