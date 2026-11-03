@@ -452,10 +452,16 @@ void fn_803081EC(s32 arg0) {
     fn_80307CCC(arg0);
 }
 
+void fn_8030820C(void *self, s32 *v) {
+}
+
 void fn_8030824C(s32 arg0) {
     M2C_UNK fn_80307D00(s32);
     fn_803075C8();
     fn_80307D00(arg0);
+}
+
+void fn_80308280(void *self, f32 *v) {
 }
 
 f32 fn_803082B4(void *arg0) {
