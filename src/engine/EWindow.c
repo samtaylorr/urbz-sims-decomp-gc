@@ -69,6 +69,28 @@ void fn_8030744C(void *arg0) {
     }
 }
 
+void *fn_8030758C(void *self, s32 id) {
+    void *node = M2C_FIELD(self, void **, 0);
+    void *obj;
+    int more;
+
+    for (;;) {
+        more = 1;
+        if (node == NULL) {
+            more = 0;
+        }
+        if (!more) {
+            break;
+        }
+        obj = M2C_FIELD(node, void **, 0);
+        if (M2C_FIELD(obj, s32 *, 0x1C) == id) {
+            return obj;
+        }
+        node = M2C_FIELD(node, void **, 8);
+    }
+    return NULL;
+}
+
 void fn_803076CC(void *arg0, void *arg1, s32 arg2) {
     M2C_FIELD(arg1, s32 *, 0x10) = arg2;
 }
