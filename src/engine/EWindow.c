@@ -4,6 +4,16 @@
 typedef struct { f32 x, y, z; } Vec3f;
 
 void fn_80307CCC();
+void fn_80305C5C(void *self, void *arg1) {
+    extern void fn_803074F0(void *, s32, s32);
+
+    if (M2C_FIELD(self, void **, 0x48) != NULL) {
+        fn_803074F0(M2C_FIELD(self, void **, 0x48), 8, 0);
+    }
+    M2C_FIELD(self, void **, 0x48) = arg1;
+    fn_803074F0(arg1, 8, 1);
+}
+
 void fn_80306450(char *self, Vec3f *arg1) {
     char *vt;
     *(Vec3f *)(self + 0x20) = *arg1;
@@ -59,9 +69,14 @@ void fn_80306D28(void) {
 
 }
 
-void fn_80306D2C(char *arg0) {
-    char *vt = *(char **)(arg0 + 0x44);
-    (*(void (**)(void *))(vt + 0xE4))(arg0 + *(s16 *)(vt + 0xE0));
+void fn_80306D2C(void *arg0) {
+    void *self = arg0;
+    void *temp_r9;
+
+    if (self != NULL || self == NULL) {
+        temp_r9 = M2C_FIELD(self, void **, 0x44);
+        M2C_FIELD(temp_r9, M2C_UNK (**)(void *), 0xE4)(self + M2C_FIELD(temp_r9, s16 *, 0xE0));
+    }
 }
 
 void fn_80306D64(void *arg0, s32 arg1) {
