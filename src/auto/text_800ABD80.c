@@ -293,6 +293,13 @@ s32 fn_800ADD3C(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x14) == 4 && M2C_FIELD(arg0, s32 *, 0x470) == 4;
 }
 
+void fn_800ADF90(void *arg0) {
+    fn_800ACE5C((s32)arg0, (s32)arg0 + 0x444);
+    fn_800ACE5C((s32)arg0, (s32)arg0 + 0x448);
+    fn_800ACE5C((s32)arg0, (s32)arg0 + 0x44C);
+    fn_800ACE5C((s32)arg0, (s32)arg0 + 0x450);
+}
+
 s32 fn_800AEB28(void) {
     return 1;
 }
