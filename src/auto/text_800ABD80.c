@@ -262,10 +262,10 @@ void fn_800ACAD4(void *self, void *out) {
     void fn_801055FC(void *, s32);
     u8 *obj = M2C_FIELD(self, u8 **, 8);
     u8 *vt = *(u8 **)(obj + 4);
-    f32 dy = *(f32 *)(lbl_8041FA38[0] + 0x68);
-    f32 dx = *(f32 *)(lbl_8041FA38[0] + 0x64);
-    Tile tile;
+    f32 dx = *(f32 *)(lbl_8041FA38[0] + 0x68);
+    f32 dy = *(f32 *)(lbl_8041FA38[0] + 0x64);
     Pos pos;
+    Tile tile;
 
     tile = (*(Tile (**)(void *))(vt + 0x31C))(obj + *(s16 *)(vt + 0x318));
     fn_80105400((f32 *)&pos, (s8 *)&tile);
@@ -575,8 +575,8 @@ void fn_800B24D4(void *arg0, void *arg1) {
         if (M2C_FIELD(a, u32 *, 4) <= 1) {
             M2C_FIELD(a, s32 *, 4) = 2;
             M2C_FIELD(a, f32 *, 8) = lbl_803CEA6C[0];
-            M2C_FIELD(b, f32 *, 8) = lbl_803CEA6C[0];
             M2C_FIELD(b, s32 *, 4) = 4;
+            M2C_FIELD(b, f32 *, 8) = lbl_803CEA6C[0];
         }
     }
 }
