@@ -977,14 +977,14 @@ void fn_8030994C(s32 arg0) {
     fn_80309214(arg0 + 0x9C);
 }
 
-void fn_80309970(s32 arg0) {
-    M2C_UNK fn_8030935C(s32);
-    fn_8030935C(arg0 + 0x9C);
+void fn_80309970(u8 *arg0, void **arg1) {
+    void *fn_8030935C(void *, void **);
+    fn_8030935C(arg0 + 0x9C, arg1);
 }
 
-void fn_80309994(s32 arg0) {
-    M2C_UNK fn_8030935C(s32);
-    fn_8030935C(arg0 + 0x9C);
+void fn_80309994(u8 *arg0, void **arg1) {
+    void *fn_8030935C(void *, void **);
+    fn_8030935C(arg0 + 0x9C, arg1);
 }
 
 s32 fn_803099B8(void *arg0) {
