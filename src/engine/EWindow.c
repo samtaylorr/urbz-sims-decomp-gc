@@ -4,12 +4,39 @@
 typedef struct { f32 x, y, z; } Vec3f;
 
 void fn_80307CCC();
+void fn_80306450(char *self, Vec3f *arg1) {
+    char *vt;
+    *(Vec3f *)(self + 0x20) = *arg1;
+    vt = *(char **)(self + 0x44);
+    (*(void (**)(char *))(vt + 0x9C))(self + *(s16 *)(vt + 0x98));
+}
+
 void fn_803064A0(char *self, f32 *arg1) {
     char *vt;
     *(f32 *)(self + 0x20) = arg1[0];
     vt = *(char **)(self + 0x44);
     *(f32 *)(self + 0x28) = arg1[1];
     (*(void (**)(char *))(vt + 0x9C))(self + *(s16 *)(vt + 0x98));
+}
+
+void fn_803064E4(void *self) {
+    extern void fn_80306544(void *);
+    extern void fn_80306B3C(void *);
+    extern void fn_80306824(void *);
+
+    if (M2C_FIELD(self, s32 *, 0) != 0) {
+        switch (M2C_FIELD(self, s32 *, 0x5C)) {
+        case 0:
+            fn_80306544(self);
+            break;
+        case 1:
+            fn_80306824(self);
+            break;
+        case 2:
+            fn_80306B3C(self);
+            break;
+        }
+    }
 }
 
 void fn_80306CAC(void *arg0) {
