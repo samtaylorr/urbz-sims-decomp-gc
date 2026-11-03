@@ -476,6 +476,86 @@ void **fn_80381020(void) {
     return p;
 }
 
+void fn_8038103C(void *arg0) {
+    typedef struct QNode_ {
+        struct QNode_ *next;
+        struct QNode_ *prev;
+        void *unk8;
+        u32 idx;
+    } QNode_;
+    extern QNode_ *lbl_804763C0[32];
+    extern QNode_ *lbl_80476440[32];
+    QNode_ *node = arg0;
+    QNode_ **head = &lbl_804763C0[node->idx];
+    QNode_ **tail = &lbl_80476440[node->idx];
+
+    if (*head == *tail) {
+        *tail = NULL;
+        *head = NULL;
+    } else if (node == *head) {
+        *head = node->next;
+        (*head)->prev = NULL;
+    } else if (node == *tail) {
+        *tail = node->prev;
+        (*tail)->next = NULL;
+    } else {
+        node->prev->next = node->next;
+        node->next->prev = node->prev;
+    }
+}
+
+void fn_803810D0(void *arg0, u32 idx) {
+    typedef struct QNode_ {
+        struct QNode_ *next;
+        struct QNode_ *prev;
+        void *unk8;
+        u32 idx;
+    } QNode_;
+    extern QNode_ *lbl_804763C0[32];
+    extern QNode_ *lbl_80476440[32];
+    QNode_ *node = arg0;
+
+    node->next = lbl_804763C0[idx];
+    node->prev = NULL;
+    if (node->next != NULL) {
+        lbl_804763C0[idx]->prev = node;
+        lbl_804763C0[idx] = node;
+    } else {
+        lbl_80476440[idx] = node;
+        lbl_804763C0[idx] = node;
+    }
+    node->idx = idx;
+}
+
+void *fn_80381128(u32 idx) {
+    typedef struct QNode_ {
+        struct QNode_ *next;
+        struct QNode_ *prev;
+        void *unk8;
+        u32 idx;
+    } QNode_;
+    extern QNode_ *lbl_804763C0[32];
+    extern QNode_ *lbl_80476440[32];
+    QNode_ *head = lbl_804763C0[idx];
+    QNode_ *tail;
+
+    if (head == NULL) {
+        return NULL;
+    }
+    tail = lbl_80476440[idx];
+    if (head == tail) {
+        lbl_80476440[idx] = NULL;
+        lbl_804763C0[idx] = NULL;
+        return head;
+    }
+    if (tail == NULL) {
+        return NULL;
+    }
+    lbl_80476440[idx] = tail->prev;
+    lbl_80476440[idx]->next = NULL;
+    return tail;
+}
+
 void fn_80381518(void) {
     extern s32 lbl_80496394;
     extern s32 lbl_80496390;
