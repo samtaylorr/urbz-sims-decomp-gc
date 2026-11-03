@@ -1,6 +1,6 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
-typedef struct { s32 v; } Comp4;
+typedef struct { s32 v[1]; } Comp4;
 void fn_8039C5B8(s32 *first, s32 hole, s32 len, s32 val, Comp4 comp);
 void fn_8039C7AC(s32 *first, s32 *middle, s32 *last, s32 *dummy, Comp4 comp);
 
@@ -1999,30 +1999,11 @@ void fn_8039C584(void **self, s32 flags) {
 }
 
 void fn_8039C6D0(s32 *first, s32 *last, Comp4 comp) {
-    Comp4 c = comp;
-    s32 len = last - first;
-    s32 parent;
-
-    if (len < 2) {
-        return;
-    }
-    parent = (len - 2) / 2;
-    while (1) {
-        fn_8039C5B8(first, parent, len, first[parent], c);
-        if (parent == 0) {
-            return;
-        }
-        parent--;
-    }
+    Comp4_make_heap(first, last, comp);
 }
 
 void fn_8039C75C(s32 *first, s32 *last, Comp4 comp) {
-    Comp4 c1 = comp;
-    Comp4 c2 = c1;
-    s32 *result = last - 1;
-    s32 val = *result;
-    *result = *first;
-    fn_8039C5B8(first, 0, result - first, val, c2);
+    Comp4_pop_heap_aux(first, last, comp);
 }
 
 void fn_8039C5B8(s32 *first, s32 hole, s32 len, s32 val, Comp4 comp);
@@ -3586,9 +3567,24 @@ void **fn_803A0A44(void **self, void **other) {
         void **finish = (void **)other[1];
         void **start = (void **)other[0];
         u32 xlen = finish - start;
-        u32 bytes;
+        register u32 bytes asm("r30");
         if (xlen > (u32)((void **)self[3] - (void **)self[0])) {
-            void **tmp = (void **)PtrVec_AllocateN(xlen, 4, &bytes);
+            void **tmp;
+            if (xlen != 0) {
+                register volatile u32 size asm("r0");
+                size = xlen * 4;
+                bytes = size;
+                if (size > 0x80) {
+                    size = 0;
+                    tmp = (void **)fn_802D1FC8(bytes);
+                } else {
+                    size = 0;
+                    tmp = (void **)fn_80399BE8(bytes);
+                }
+            } else {
+                tmp = NULL;
+                bytes = 0;
+            }
             PtrVec_Copy(start, finish, tmp);
             {
                 void **s = (void **)self[0];
