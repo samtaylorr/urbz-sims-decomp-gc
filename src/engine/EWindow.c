@@ -166,6 +166,14 @@ void fn_8030793C(void *arg0, void *arg1) {
     M2C_FIELD(arg0, f32 *, 0x28) = (f32) M2C_FIELD(arg1, f32 *, 4);
 }
 
+void fn_80307950(void *self) {
+    char *obj = M2C_FIELD(self, char **, 0xC);
+    if (obj != NULL) {
+        char *vt = M2C_FIELD(obj, char **, 0x44);
+        (*(void (**)(void *, void *))(vt + 0x3C))(obj + *(s16 *)(vt + 0x38), self);
+    }
+}
+
 void fn_80307994(void) {
 
 }
