@@ -714,6 +714,14 @@ void fn_8025F818(void) {
     lbl_80495EAC = 1;
 }
 
+u32 fn_8025F840(void) {
+    extern u32 *lbl_80495EA8;
+    if (lbl_80495EA8 == NULL) {
+        return 0;
+    }
+    return lbl_80495EA8[0];
+}
+
 void fn_8025F914(s32 arg0) {
     extern s32 *lbl_80495EA8;
     *lbl_80495EA8 = arg0;
