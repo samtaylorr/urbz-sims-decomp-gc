@@ -146,7 +146,7 @@ s32 fn_8012A5D4(s32 arg0) {
     s32 i;
 
     for (i = 0; i < 6; i++) {
-        if (lbl_803F66D8[i] == arg0) {
+        if (arg0 == lbl_803F66D8[i]) {
             return i;
         }
     }
