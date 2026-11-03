@@ -441,6 +441,13 @@ void fn_80380F18(void) {
     }
 }
 
+void fn_80380FCC(void *arg0) {
+    extern void *lbl_804763C0[];
+    M2C_FIELD(arg0, void **, 0) = lbl_804763C0[0];
+    lbl_804763C0[0] = arg0;
+    M2C_FIELD(arg0, s32 *, 0xC) = 0;
+}
+
 void **fn_80380FEC(void) {
     extern void *lbl_804763C0[];
     void **p;
