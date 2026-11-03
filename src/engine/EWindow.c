@@ -3,6 +3,23 @@
 
 typedef struct { f32 x, y, z; } Vec3f;
 
+typedef struct {
+    f32 a;
+    f32 b;
+    s32 c;
+    s32 d;
+    s32 e;
+} EWinAnim;
+
+typedef struct {
+    f32 a;
+    f32 b;
+    s32 c;
+    s32 d;
+    s32 pad[2];
+    s32 e;
+} EWinAnimDst;
+
 void fn_80307CCC();
 void fn_80305C5C(void *self, void *arg1) {
     extern void fn_803074F0(void *, s32, s32);
