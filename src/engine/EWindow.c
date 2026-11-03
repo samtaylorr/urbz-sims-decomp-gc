@@ -183,6 +183,10 @@ void fn_80307834(void *self) {
     M2C_FIELD(self, s32 *, 0x18) &= ~0x40;
 }
 
+void fn_8030791C(u8 *arg0, Vec3f *arg1) {
+    *(Vec3f *)(arg0 + 0x20) = *arg1;
+}
+
 void fn_8030793C(void *arg0, void *arg1) {
     M2C_FIELD(arg0, f32 *, 0x20) = (f32) M2C_FIELD(arg1, f32 *, 0);
     M2C_FIELD(arg0, f32 *, 0x28) = (f32) M2C_FIELD(arg1, f32 *, 4);
