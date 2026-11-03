@@ -358,6 +358,18 @@ void fn_800AFD2C(void) {
 
 }
 
+void fn_800B0120(void *self) {
+    fn_800ACE5C((s32)self, (s32)self + 0x444);
+    fn_800ACE5C((s32)self, (s32)self + 0x448);
+    fn_800ACE5C((s32)self, (s32)self + 0x44C);
+    fn_800ACE5C((s32)self, (s32)self + 0x450);
+    fn_800ACE5C((s32)self, (s32)self + 0x454);
+    fn_800ACE5C((s32)self, (s32)self + 0x458);
+    fn_800ACE5C((s32)self, (s32)self + 0x45C);
+    fn_800ACE5C((s32)self, (s32)self + 0x48C);
+    fn_800ACE5C((s32)self, (s32)self + 0x48C);
+}
+
 void fn_800B01B4(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x4E0) = 3;
     M2C_FIELD(arg0, s32 *, 0x14) = 4;
