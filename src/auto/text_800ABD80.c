@@ -181,14 +181,15 @@ s32 fn_800AC4D0(void *arg0, char **arg1) {
 
 void fn_800AC540(void *arg0, s32 arg1) {
     void fn_800AC69C(void *, s32);
-    char **p;
     char *obj;
     char *vt;
     s32 i;
+    char **p;
 
     if (arg1 != 0) {
+        i = 0;
         p = (char **)arg0;
-        for (i = 0; i <= 1; i++) {
+        do {
             obj = *p++;
             if (obj != NULL) {
                 vt = M2C_FIELD(obj, char **, 0x440);
@@ -196,7 +197,8 @@ void fn_800AC540(void *arg0, s32 arg1) {
                     fn_800AC69C(arg0, i);
                 }
             }
-        }
+            i++;
+        } while (i <= 1);
     }
 }
 
