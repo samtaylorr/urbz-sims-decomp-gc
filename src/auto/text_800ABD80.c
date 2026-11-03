@@ -253,6 +253,19 @@ void fn_800ACBE8(void) {
 
 }
 
+void fn_800ACBEC(void *self) {
+    extern struct { u8 pad[0xE4]; void *arr[1]; } lbl_8041F94C;
+    void *fn_801BFD6C(void *);
+    void fn_800113C4(void *, s32, s32, s32, s32);
+    s32 set = 1;
+    if (!(M2C_FIELD(self, u8 *, 0x10) & 1)) {
+        set = 0;
+    }
+    if (set == 0) {
+        fn_800113C4(fn_801BFD6C(lbl_8041F94C.arr[M2C_FIELD(self, s32 *, 0xC)]), 0, 0, 0, 1);
+    }
+}
+
 void fn_800ACDA4(void) {
     extern u8 *lbl_80496648;
     u8 *obj = lbl_80496648;
