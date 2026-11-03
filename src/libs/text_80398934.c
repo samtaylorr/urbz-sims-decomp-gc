@@ -1970,6 +1970,12 @@ void fn_8039C584(void **self, s32 flags) {
     }
 }
 
+void fn_8039C5B8(s32 *first, s32 hole, s32 len, s32 val, Comp4 comp);
+void fn_8039C7AC(s32 *first, s32 *middle, s32 *last, s32 *dummy, Comp4 comp);
+void fn_8039C89C(s32 *first, s32 *middle, s32 *last, Comp4 comp) {
+    fn_8039C7AC(first, middle, last, 0, comp);
+}
+
 s32 fn_800A2B98(SortComp comp, s32 a, s32 b);
 void fn_8039CAD8(s32 *last, s32 val, SortComp *comp) {
     s32 *next = last - 1;
