@@ -78,10 +78,10 @@ void *fn_800ABF28(void *self) {
     for (i = 0; i <= 1; i++) {
         s->items[i] = NULL;
     }
-    s->unk10 = 0;
+    s->unk8 = 0;
     s->unkC = 0;
     s->unk14 = 0;
-    s->unk8 = 0;
+    s->unk10 = 0;
     return s;
 }
 
@@ -570,8 +570,8 @@ void fn_800B24D4(void *arg0, void *arg1) {
 
     M2C_FIELD(arg1, s32 *, 0x64) = 4;
     for (i = 0; i < M2C_FIELD(arg0, u8 *, 0x20); i++) {
-        char *a = (char *)arg1 + i * 0xC;
         char *b = (char *)arg1 + (i * 0xC + 0x30);
+        char *a = (char *)arg1 + i * 0xC;
         if (M2C_FIELD(a, u32 *, 4) <= 1) {
             M2C_FIELD(a, s32 *, 4) = 2;
             M2C_FIELD(a, f32 *, 8) = lbl_803CEA6C[0];
