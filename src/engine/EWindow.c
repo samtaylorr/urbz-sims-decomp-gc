@@ -65,6 +65,14 @@ f32 fn_80306F84(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0x7C);
 }
 
+void fn_80306F8C(char *self, s32 arg1, s32 arg2) {
+    char *vt;
+    M2C_FIELD(self, s32 *, 0x64) = arg1;
+    M2C_FIELD(self, s32 *, 0x68) = arg2;
+    vt = *(char **)(self + 0x44);
+    (*(void (**)(char *))(vt + 0x9C))(self + *(s16 *)(vt + 0x98));
+}
+
 void fn_80306FC8(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x58) = arg1;
 }
