@@ -149,6 +149,8 @@ void fn_803064E4(void *self) {
 
     if (M2C_FIELD(self, s32 *, 0) != 0) {
         switch (M2C_FIELD(self, s32 *, 0x5C)) {
+        case -1:
+            break;
         case 0:
             fn_80306544(self);
             break;
@@ -763,8 +765,8 @@ void *fn_803082CC(void *self, s32 a1, s32 a2, s32 a3, s32 a4, s32 a5) {
     M2C_FIELD(self, s32 *, 0xFC) = 0;
     M2C_FIELD(self, u8 **, 0x44) = lbl_8041AE10;
     fn_80308BF8(self, a3, a4);
-    M2C_FIELD(self, s32 *, 0x108) = a5;
     M2C_FIELD(self, f32 *, 0x104) = lbl_803F1D38[0];
+    M2C_FIELD(self, s32 *, 0x108) = a5;
     M2C_FIELD(self, s32 *, 0x48) = 0;
     M2C_FIELD(self, s32 *, 0xF4) = 0;
     M2C_FIELD(self, s32 *, 0x100) = 0;
@@ -800,7 +802,9 @@ void fn_803083F4(void *self, s32 arg1, Vec3f *v) {
         Vec3f t;
         M2C_FIELD(self, s32 *, 0xF4) = arg1;
         M2C_FIELD(self, s32 *, 0x100) = arg1;
-        t = *v;
+        t.x = v->x;
+        t.y = v->y;
+        t.z = v->z;
         fn_80306294(self, arg1, &t);
     }
 }
@@ -908,8 +912,8 @@ void fn_80309B50(void *arg0, void *arg1, s32 arg2) {
     if (self->obj == arg1 && self->id == arg2) {
         return;
     }
-    self->obj = arg1;
-    M2C_FIELD(self, s32 *, 0x94) = arg2;
+    self->id = arg2;
+    M2C_FIELD(self, void **, 0x90) = arg1;
     if (arg1 != NULL) {
         void *vt = M2C_FIELD(arg1, void **, 0x20);
         M2C_FIELD(vt, M2C_UNK (**)(void *, void *), 0x1C)((char *)arg1 + M2C_FIELD(vt, s16 *, 0x18), buf);
