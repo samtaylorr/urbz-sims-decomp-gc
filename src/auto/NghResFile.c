@@ -134,7 +134,7 @@ s32 fn_8012A59C(s32 arg0) {
     s32 i;
 
     for (i = 0; i < 4; i++) {
-        if (lbl_803F66C8[i] == arg0) {
+        if (arg0 == lbl_803F66C8[i]) {
             return i;
         }
     }
