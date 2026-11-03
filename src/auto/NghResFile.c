@@ -210,8 +210,8 @@ void *fn_8012A9FC(void *arg0, s32 arg1, s32 arg2) {
     void **p;
     s16 i;
 
-    i = 1;
-    for (p = *fn_8012B080(arg0, arg1); p != NULL; p = *p) {
+    p = *fn_8012B080(arg0, arg1);
+    for (i = 1; p != NULL; p = *p) {
         if (i == arg2) {
             M2C_FIELD(arg0, void ***, 0x174) = p;
             return p[1];
@@ -301,6 +301,33 @@ u16 fn_8012C3B0(void *arg0, s32 arg1) {
         }
     }
     return 0;
+}
+
+s32 fn_8012D438(void *self, char *buf) {
+    s32 fn_8012BC60(void *, char *, s32);
+    s32 fn_8012C0C0(void *, char *, s32);
+    s32 fn_8012C3EC(void *, char *, s32);
+    s32 fn_8012D4F4(void *, s32, char *, s32);
+    char *p;
+    s32 i;
+
+    if (fn_8012BC60(self, buf + 0x6000, 0) != 1) {
+        return 0;
+    }
+    if (fn_8012C0C0(self, buf + 0x8000, 0) != 1) {
+        return 0;
+    }
+    if (fn_8012C3EC(self, buf + 0x12000, 0) != 1) {
+        return 0;
+    }
+    p = buf + 0x14000;
+    for (i = 1; i < 12; i++) {
+        if (fn_8012D4F4(self, i, p, 0) != 1) {
+            return 0;
+        }
+        p += 0x10000;
+    }
+    return 1;
 }
 
 s32 fn_8012F7A8(s32 arg0, s32 arg1) {
