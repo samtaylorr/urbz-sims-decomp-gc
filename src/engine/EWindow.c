@@ -910,6 +910,35 @@ s32 *fn_803091B8(s32 *arg0) {
     return arg0;
 }
 
+void fn_80309584(char *self, s32 arg1) {
+    extern void fn_803051DC(char *, s32, s32);
+    extern void fn_80307478(char *, s32);
+    char *vt;
+    if (M2C_FIELD(self, s32 *, 0x18) & 2) {
+        fn_803051DC(self, arg1, -1);
+        vt = *(char **)(self + 0x44);
+        (*(void (**)(void *, s32))(vt + 0xC4))(self + *(s16 *)(vt + 0xC0), arg1);
+    }
+    fn_80307478(self, arg1);
+}
+
+void fn_803095EC(void *self, char *name) {
+    extern void fn_8031EA2C(void *);
+    s32 fn_80337D68(void *, char *);
+    s32 fn_8033740C(void *, char *, s32, s32);
+    extern u8 lbl_8045B634[];
+    s32 r;
+    if (M2C_FIELD(self, void **, 0x7C) != NULL) {
+        fn_8031EA2C(M2C_FIELD(self, void **, 0x7C));
+    }
+    if (fn_80337D68(lbl_8045B634, name) != 0) {
+        r = fn_8033740C(lbl_8045B634, name, 0, 0);
+    } else {
+        r = 0;
+    }
+    M2C_FIELD(self, s32 *, 0x7C) = r;
+}
+
 void fn_803098E8(void *arg0, void *arg1) {
     struct Unk1C { s32 a[7]; };
     M2C_FIELD(arg0, struct Unk1C *, 0x80) = *(struct Unk1C *)arg1;
