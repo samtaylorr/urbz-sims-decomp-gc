@@ -1,5 +1,6 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
+typedef struct { s32 v; } Comp4;
 typedef struct {
     u8 pad0[0x14];
     void *unk14;
