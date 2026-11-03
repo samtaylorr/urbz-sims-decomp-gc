@@ -776,10 +776,10 @@ void fn_80307DF0(void) {
 }
 
 extern u8 lbl_8041AD40[];
-extern void fn_8030951C(void *);
-void fn_803081BC(u8 *self) {
+extern void fn_8030951C(void *, s32);
+void fn_803081BC(u8 *self, s32 flags) {
     *(u8 **)(self + 0x44) = lbl_8041AD40;
-    fn_8030951C(self);
+    fn_8030951C(self, flags);
 }
 
 void fn_803081EC(s32 arg0) {
