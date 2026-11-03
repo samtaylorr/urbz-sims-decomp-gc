@@ -87,7 +87,12 @@ void fn_80305CB4(char *self, s32 n) {
         p = **(char ***)self;
         if (p != NULL) {
             for (i = 0; i < n; i++) {
-                p = EWin_NextItem(p);
+                p = *(char **)(*(char **)(p + 0x10) + 8);
+                if (p != NULL) {
+                    p = *(char **)p;
+                } else {
+                    p = 0;
+                }
             }
             if (M2C_FIELD(p, s32 *, 0x18) & 0x10) {
                 vt = *(char **)(self + 0x44);
@@ -367,6 +372,7 @@ void fn_8030744C(void *arg0) {
 void fn_803074F0(void *self, s32 flags, s32 set) {
     void *vt;
     void *p;
+    s32 more;
 
     vt = M2C_FIELD(self, void **, 0x44);
     ((void (*)(void *))M2C_FIELD(vt, void **, 0x54))((char *)self + M2C_FIELD(vt, s16 *, 0x50));
@@ -375,9 +381,17 @@ void fn_803074F0(void *self, s32 flags, s32 set) {
     } else {
         M2C_FIELD(self, s32 *, 0x18) &= ~flags;
     }
-    for (p = M2C_FIELD(self, void **, 0); p != NULL; p = M2C_FIELD(p, void **, 8)) {
+    p = M2C_FIELD(self, void **, 0);
+    goto check;
+    do {
         fn_803074F0(M2C_FIELD(p, void **, 0), flags, set);
-    }
+        p = M2C_FIELD(p, void **, 8);
+    check:
+        more = 1;
+        if (p == NULL) {
+            more = 0;
+        }
+    } while (more != 0);
 }
 
 void *fn_8030758C(void *self, s32 id) {
