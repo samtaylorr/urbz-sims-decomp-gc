@@ -363,6 +363,10 @@ void fn_800B01B4(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x14) = 4;
 }
 
+s32 fn_800B01C8(void *self) {
+    return M2C_FIELD(self, s32 *, 0x14) == 4 && M2C_FIELD(self, s32 *, 0x4E0) == 4;
+}
+
 void fn_800B1DCC(void) {
 
 }
@@ -532,10 +536,13 @@ s32 fn_800B2EAC(void *arg0) {
 }
 
 s32 fn_800B2EC4(s32 *arg0, s32 arg1) {
-    if (arg1 > 1) {
+    if (arg1 <= 1) {
+        if (arg0[arg1] != 0) {
+            return 1;
+        }
         return 0;
     }
-    return arg0[arg1] != 0;
+    return 0;
 }
 
 s32 fn_800B2EF4(char *self) {
