@@ -125,8 +125,8 @@ s32 fn_80129630(s32 arg0) {
     return var_r30;
 }
 
-s32 fn_8012A57C(s32 arg0, u8 arg1, u8 arg2, u8 arg3) {
-    return (arg0 << 24) | (arg1 << 16) | (arg2 << 8) | arg3;
+s32 fn_8012A57C(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
+    return (arg0 << 24) | ((u8)arg1 << 16) | ((u8)arg2 << 8) | (u8)arg3;
 }
 
 s32 fn_8012A59C(s32 arg0) {
@@ -321,14 +321,14 @@ void fn_8012ACB0(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x28) = (s32) (arg1 - 1);
 }
 
-void fn_8012C388(void *arg0, u32 arg1, s32 arg2) {
+void fn_8012C388(void *arg0, s32 arg1, s32 arg2) {
     s32 *vals = (s32 *)((char *)arg0 + 0x188);
-    vals[arg1 - 1] = arg2;
+    *(s32 *)((char *)vals + (arg1 - 1) * 4) = arg2;
 }
 
-s32 fn_8012C39C(void *arg0, u32 arg1) {
+s32 fn_8012C39C(void *arg0, s32 arg1) {
     s32 *vals = (s32 *)((char *)arg0 + 0x188);
-    return vals[arg1 - 1];
+    return *(s32 *)((char *)vals + (arg1 - 1) * 4);
 }
 
 u16 fn_8012C3B0(void *arg0, s32 arg1) {
