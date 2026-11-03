@@ -83,6 +83,27 @@ void fn_80307748(void *arg0, void *arg1) {
     M2C_FIELD(arg0, s32 *, 0x18) = (s32) (M2C_FIELD(arg0, s32 *, 0x18) | 0x40);
 }
 
+void fn_80307764(void *self) {
+    void *node = M2C_FIELD(self, void **, 0);
+    void *next;
+    char *vt;
+    int more;
+
+    for (;;) {
+        more = 1;
+        if (node == NULL) {
+            more = 0;
+        }
+        if (!more) {
+            break;
+        }
+        vt = M2C_FIELD(self, char **, 0x44);
+        next = M2C_FIELD(node, void **, 8);
+        (*(void (**)(void *, s32))(vt + 0x7C))((char *)self + *(s16 *)(vt + 0x78), M2C_FIELD(node, s32 *, 0));
+        node = next;
+    }
+}
+
 void fn_8030793C(void *arg0, void *arg1) {
     M2C_FIELD(arg0, f32 *, 0x20) = (f32) M2C_FIELD(arg1, f32 *, 0);
     M2C_FIELD(arg0, f32 *, 0x28) = (f32) M2C_FIELD(arg1, f32 *, 4);
