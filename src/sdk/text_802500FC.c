@@ -705,6 +705,15 @@ void fn_8025F7F4(void) {
     fn_8025F710(lbl_80495EA0);
 }
 
+void fn_8025F818(void) {
+    extern void fn_8025F8A4(void);
+    extern u32 *lbl_80495EA8;
+    extern s32 lbl_80495EAC;
+    lbl_80495EA8 = (u32 *)0x80000040;
+    *(u32 *)0x80000048 = (u32)fn_8025F8A4 + 0x80000000;
+    lbl_80495EAC = 1;
+}
+
 void fn_8025F914(s32 arg0) {
     extern s32 *lbl_80495EA8;
     *lbl_80495EA8 = arg0;
