@@ -253,6 +253,13 @@ void fn_800ACBE8(void) {
 
 }
 
+void fn_800ACDA4(void) {
+    extern u8 *lbl_80496648;
+    u8 *obj = lbl_80496648;
+    u8 *vt = *(u8 **)obj;
+    (*(void (**)(void *))(vt + 0x14))(obj + *(s16 *)(vt + 0x10));
+}
+
 void fn_800ACDDC(void *self, s32 arg1, s32 arg2) {
     void fn_800ABDD4(void *, s32, s32);
     s32 idx;
