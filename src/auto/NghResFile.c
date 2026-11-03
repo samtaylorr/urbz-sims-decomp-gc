@@ -125,6 +125,46 @@ s32 fn_80129630(s32 arg0) {
     return var_r30;
 }
 
+s32 fn_8012A57C(s32 arg0, u8 arg1, u8 arg2, u8 arg3) {
+    return (arg0 << 24) | (arg1 << 16) | (arg2 << 8) | arg3;
+}
+
+s32 fn_8012A59C(s32 arg0) {
+    extern s32 lbl_803F66C8[];
+    s32 i;
+
+    for (i = 0; i < 4; i++) {
+        if (lbl_803F66C8[i] == arg0) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+s32 fn_8012A5D4(s32 arg0) {
+    extern s32 lbl_803F66D8[];
+    s32 i;
+
+    for (i = 0; i < 6; i++) {
+        if (lbl_803F66D8[i] == arg0) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+s32 fn_8012A60C(s32 arg0) {
+    extern s32 lbl_80494454[];
+    s32 i;
+
+    for (i = 0; i < 2; i++) {
+        if (lbl_80494454[i] == arg0) {
+            return i;
+        }
+    }
+    return -1;
+}
+
 s32 fn_8012A8C0(void) {
     M2C_UNK fn_8012AF90();
     fn_8012AF90();
