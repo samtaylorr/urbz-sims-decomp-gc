@@ -798,21 +798,18 @@ void fn_803083BC(void *arg0) {
 
 void fn_803083F4(void *self, s32 arg1, f32 *v) {
     extern void fn_80306294(void *, s32, f32 *);
-    if (M2C_FIELD(self, s32 *, 0) == 0) {
-        f32 t[3];
-        f32 *p;
-        f32 x, y, z;
-        M2C_FIELD(self, s32 *, 0xF4) = arg1;
-        M2C_FIELD(self, s32 *, 0x100) = arg1;
-        x = v[0];
-        y = v[1];
-        z = v[2];
-        p = t;
-        t[0] = x;
-        p[1] = y;
-        p[2] = z;
-        fn_80306294(self, arg1, p);
+    f32 t[3];
+    f32 *p;
+    if (M2C_FIELD(self, s32 *, 0) != 0) {
+        return;
     }
+    M2C_FIELD(self, s32 *, 0xF4) = arg1;
+    M2C_FIELD(self, s32 *, 0x100) = arg1;
+    t[0] = v[0];
+    p = t;
+    p[1] = v[1];
+    p[2] = v[2];
+    fn_80306294(self, arg1, p);
 }
 
 void fn_803090EC(void *arg0) {
