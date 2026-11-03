@@ -109,13 +109,14 @@ void fn_800ABFD4(void *self) {
     } *s = self;
     u8 i;
 
-    for (i = 0; i <= 1; i++) {
+    i = 0;
+    while (i <= 1) {
         char *p = s->items[i];
         if (p != NULL) {
             char *vt = M2C_FIELD(p, char **, 0x440);
             (*(void (**)(void *, s32))(vt + 0xC))(p + *(s16 *)(vt + 8), 3);
         }
-        s->items[i] = NULL;
+        s->items[i++] = NULL;
     }
     s->unk8 = 0;
     s->unk10 = 0;
@@ -144,21 +145,24 @@ void fn_800AC1B8(void *self, s32 idx) {
     s32 fn_80311ABC(void *, s32);
     s32 fn_80311A84(void *, s32);
     extern s32 lbl_80494FCC;
+    struct AC1B8 {
+        char *items[2];
+    } *s = self;
     s32 mgr = lbl_80494FCC;
     void *obj;
     s32 r;
 
     obj = fn_803338D0(mgr, fn_803338F0(mgr));
     if (obj != NULL) {
-        r = fn_80311ABC(obj, M2C_FIELD(*(char **)((char *)self + idx * 4), s32 *, 0x30));
+        r = fn_80311ABC(obj, M2C_FIELD(s->items[idx], s32 *, 0x30));
         if (r != 0) {
-            char *p = *(char **)((char *)self + idx * 4);
+            char *p = s->items[idx];
             char *vt = M2C_FIELD(p, char **, 0x440);
             (*(void (**)(void *, s32))(vt + 0x2C))(p + *(s16 *)(vt + 0x28), r);
         } else {
             r = fn_80311A84(obj, 0);
             if (r != 0) {
-                char *p = *(char **)((char *)self + idx * 4);
+                char *p = s->items[idx];
                 char *vt = M2C_FIELD(p, char **, 0x440);
                 (*(void (**)(void *, s32))(vt + 0x34))(p + *(s16 *)(vt + 0x30), r);
             }
@@ -570,8 +574,8 @@ void fn_800B24D4(void *arg0, void *arg1) {
 
     M2C_FIELD(arg1, s32 *, 0x64) = 4;
     for (i = 0; i < M2C_FIELD(arg0, u8 *, 0x20); i++) {
-        char *b = (char *)arg1 + (i * 0xC + 0x30);
-        char *a = (char *)arg1 + i * 0xC;
+        u8 *a = ((u8 (*)[0xC])arg1)[i];
+        u8 *b = ((u8 (*)[0xC])((u8 *)arg1 + 0x30))[i];
         if (M2C_FIELD(a, u32 *, 4) <= 1) {
             M2C_FIELD(a, s32 *, 4) = 2;
             M2C_FIELD(a, f32 *, 8) = lbl_803CEA6C[0];
@@ -710,11 +714,11 @@ s32 fn_800B2EAC(void *arg0) {
 }
 
 s32 fn_800B2EC4(s32 *arg0, s32 arg1) {
-    if (arg1 <= 1) {
-        if (arg0[arg1] != 0) {
-            return 1;
-        }
+    if (arg1 > 1) {
         return 0;
+    }
+    if (arg0[arg1] != 0) {
+        return 1;
     }
     return 0;
 }
