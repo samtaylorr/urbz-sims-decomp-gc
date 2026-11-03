@@ -87,12 +87,7 @@ void fn_80305CB4(char *self, s32 n) {
         p = **(char ***)self;
         if (p != NULL) {
             for (i = 0; i < n; i++) {
-                char **link = *(char ***)(*(char **)(p + 0x10) + 8);
-                if (link == NULL) {
-                    p = NULL;
-                } else {
-                    p = *link;
-                }
+                p = EWin_NextItem(p);
             }
             if (M2C_FIELD(p, s32 *, 0x18) & 0x10) {
                 vt = *(char **)(self + 0x44);
@@ -946,8 +941,8 @@ void fn_80309584(char *self, s32 arg1) {
         fn_803051DC(self, arg1, -1);
         vt = *(char **)(self + 0x44);
         (*(void (**)(void *, s32))(vt + 0xC4))(self + *(s16 *)(vt + 0xC0), arg1);
+        fn_80307478(self, arg1);
     }
-    fn_80307478(self, arg1);
 }
 
 void fn_803095EC(void *self, char *name) {
