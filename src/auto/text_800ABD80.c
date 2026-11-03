@@ -390,6 +390,19 @@ s32 fn_800B01C8(void *self) {
     return M2C_FIELD(self, s32 *, 0x14) == 4 && M2C_FIELD(self, s32 *, 0x4E0) == 4;
 }
 
+s32 fn_800B0D60(void) {
+    s32 fn_80336E08(void *, s32);
+    extern u8 lbl_8045B82C[];
+    extern s32 lbl_803CEAD0[];
+    s32 ok = 1;
+    s32 i;
+
+    for (i = 0; i < 3; i++) {
+        ok = fn_80336E08(lbl_8045B82C, lbl_803CEAD0[i]) && ok;
+    }
+    return ok;
+}
+
 void fn_800B1DCC(void) {
 
 }
