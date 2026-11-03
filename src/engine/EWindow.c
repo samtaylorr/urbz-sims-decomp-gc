@@ -112,6 +112,33 @@ void fn_80307764(void *self) {
     }
 }
 
+void fn_80307834(void *self) {
+    void *node = M2C_FIELD(self, void **, 0);
+    void *next;
+    void *obj;
+    char *vt;
+    int more;
+
+    for (;;) {
+        more = 1;
+        if (node == NULL) {
+            more = 0;
+        }
+        if (!more) {
+            break;
+        }
+        obj = M2C_FIELD(node, void **, 0);
+        next = M2C_FIELD(node, void **, 8);
+        if (M2C_FIELD(obj, s32 *, 0x18) & 0x20) {
+            M2C_FIELD(obj, s32 *, 0x18) &= ~0x20;
+            vt = M2C_FIELD(self, char **, 0x44);
+            (*(void (**)(void *, void *))(vt + 0x7C))((char *)self + *(s16 *)(vt + 0x78), obj);
+        }
+        node = next;
+    }
+    M2C_FIELD(self, s32 *, 0x18) &= ~0x40;
+}
+
 void fn_8030793C(void *arg0, void *arg1) {
     M2C_FIELD(arg0, f32 *, 0x20) = (f32) M2C_FIELD(arg1, f32 *, 0);
     M2C_FIELD(arg0, f32 *, 0x28) = (f32) M2C_FIELD(arg1, f32 *, 4);
