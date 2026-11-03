@@ -486,19 +486,25 @@ void fn_8038103C(void *arg0) {
     extern QNode_ *lbl_804763C0[32];
     extern QNode_ *lbl_80476440[32];
     QNode_ *node = arg0;
+    QNode_ **head = &lbl_804763C0[node->idx];
+    QNode_ **tail = &lbl_80476440[node->idx];
+    QNode_ *prev;
+    QNode_ *next;
 
-    if (lbl_804763C0[node->idx] == lbl_80476440[node->idx]) {
-        lbl_80476440[node->idx] = NULL;
-        lbl_804763C0[node->idx] = NULL;
-    } else if (node == lbl_804763C0[node->idx]) {
-        lbl_804763C0[node->idx] = node->next;
-        lbl_804763C0[node->idx]->prev = NULL;
-    } else if (node == lbl_80476440[node->idx]) {
-        lbl_80476440[node->idx] = node->prev;
-        lbl_80476440[node->idx]->next = NULL;
+    if (*head == *tail) {
+        *tail = NULL;
+        *head = NULL;
+    } else if (node == *head) {
+        *head = node->next;
+        (*head)->prev = NULL;
+    } else if (node == *tail) {
+        *tail = node->prev;
+        (*tail)->next = NULL;
     } else {
-        node->prev->next = node->next;
-        node->next->prev = node->prev;
+        prev = node->prev;
+        next = node->next;
+        prev->next = next;
+        next->prev = prev;
     }
 }
 
