@@ -536,24 +536,20 @@ void *fn_80381128(u32 idx) {
     } QNode_;
     extern QNode_ *lbl_804763C0[32];
     extern QNode_ *lbl_80476440[32];
-    QNode_ *head = lbl_804763C0[idx];
-    QNode_ *tail;
+    QNode_ *ret = NULL;
 
-    if (head == NULL) {
-        return NULL;
+    if (lbl_804763C0[idx] != NULL) {
+        if (lbl_804763C0[idx] == lbl_80476440[idx]) {
+            ret = lbl_804763C0[idx];
+            lbl_80476440[idx] = NULL;
+            lbl_804763C0[idx] = NULL;
+        } else if (lbl_80476440[idx] != NULL) {
+            ret = lbl_80476440[idx];
+            lbl_80476440[idx] = ret->prev;
+            lbl_80476440[idx]->next = NULL;
+        }
     }
-    tail = lbl_80476440[idx];
-    if (head == tail) {
-        lbl_80476440[idx] = NULL;
-        lbl_804763C0[idx] = NULL;
-        return head;
-    }
-    if (tail == NULL) {
-        return NULL;
-    }
-    lbl_80476440[idx] = tail->prev;
-    lbl_80476440[idx]->next = NULL;
-    return tail;
+    return ret;
 }
 
 void fn_80381518(void) {
