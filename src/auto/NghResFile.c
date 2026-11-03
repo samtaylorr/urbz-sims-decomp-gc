@@ -179,10 +179,10 @@ s32 fn_8012A954(void) {
 s16 fn_8012A95C(void *arg0, s32 arg1) {
     void **fn_8012B080(void *, s32);
     void **p;
-    s16 n;
+    s32 n;
 
-    n = 0;
-    for (p = *fn_8012B080(arg0, arg1); p != NULL; p = *p) {
+    p = *fn_8012B080(arg0, arg1);
+    for (n = 0; p != NULL; p = *p) {
         n++;
     }
     return n;
