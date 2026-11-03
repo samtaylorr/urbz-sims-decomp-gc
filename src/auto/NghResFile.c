@@ -176,8 +176,37 @@ s32 fn_8012A954(void) {
     return 0;
 }
 
+void *fn_8012A9A0(void *arg0, s32 arg1, s32 arg2) {
+    void **fn_8012B080(void *, s32);
+    void **p;
+
+    p = fn_8012B080(arg0, arg1);
+    while ((p = *p) != NULL) {
+        if (M2C_FIELD(p, u16 *, 0x8) == arg2) {
+            return p[1];
+        }
+    }
+    return NULL;
+}
+
 s32 fn_8012A9F4(void) {
     return 0;
+}
+
+void *fn_8012A9FC(void *arg0, s32 arg1, s32 arg2) {
+    void **fn_8012B080(void *, s32);
+    void **p;
+    s16 i;
+
+    i = 1;
+    for (p = *fn_8012B080(arg0, arg1); p != NULL; p = *p) {
+        if (i == arg2) {
+            M2C_FIELD(arg0, void ***, 0x174) = p;
+            return p[1];
+        }
+        i++;
+    }
+    return NULL;
 }
 
 void fn_8012AA68(void) {
