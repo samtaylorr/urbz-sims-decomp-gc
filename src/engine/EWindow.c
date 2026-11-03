@@ -216,6 +216,22 @@ void fn_80307ADC(s32 arg0, void *arg1) {
     M2C_FIELD(arg1, s32 *, 0xC) = arg0;
 }
 
+void fn_80307AE4(s32 arg0, void *arg1) {
+    M2C_FIELD(arg1, s32 *, 0xC) = 0;
+}
+
+s32 fn_80307AF0(s32 arg0, void *arg1) {
+    return M2C_FIELD(M2C_FIELD(arg1, void **, 0x10), s32 *, 4) != 0;
+}
+
+s32 fn_80307B0C(s32 arg0, void *arg1) {
+    return M2C_FIELD(M2C_FIELD(arg1, void **, 0x10), s32 *, 8) != 0;
+}
+
+s32 fn_80307B28(s32 arg0, void *arg1) {
+    return M2C_FIELD(arg1, s32 *, 0xC) == arg0;
+}
+
 s32 fn_80307B58(void *arg0) {
     s32 *temp_r3;
 
