@@ -234,6 +234,16 @@ s32 fn_80307B28(s32 arg0, void *arg1) {
     return M2C_FIELD(arg1, s32 *, 0xC) == arg0;
 }
 
+s32 fn_80307B3C(void *arg0) {
+    s32 *temp_r3;
+
+    temp_r3 = M2C_FIELD(arg0, s32 **, 0);
+    if (temp_r3 != NULL) {
+        return *temp_r3;
+    }
+    return 0;
+}
+
 s32 fn_80307B58(void *arg0) {
     s32 *temp_r3;
 
