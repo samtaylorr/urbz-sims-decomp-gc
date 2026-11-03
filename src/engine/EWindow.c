@@ -181,6 +181,10 @@ s32 fn_803079E4(s32 *self) {
     return self[6];
 }
 
+s32 fn_803079EC(void *arg0, s32 arg1) {
+    return (M2C_FIELD(arg0, s32 *, 0x18) & arg1) != 0;
+}
+
 void fn_80307A04(void *arg0, s32 arg1, s32 arg2) {
     void *vt;
 
