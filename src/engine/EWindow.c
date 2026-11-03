@@ -521,6 +521,9 @@ void fn_803083BC(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x100) = 0;
 }
 
+void fn_803083F4(void *self, s32 arg1, f32 *v) {
+}
+
 void fn_803090EC(void *arg0) {
     void *temp_r9;
 
