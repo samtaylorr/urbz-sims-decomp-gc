@@ -265,15 +265,18 @@ void fn_803078C4(char *self, f32 *arg1) {
     f32 *p;
     char *vt;
     f32 x, z;
+    void (*f)(void *, f32 *);
 
     vt = M2C_FIELD(self, char **, 0x44);
     x = arg1[0];
+    self += *(s16 *)(vt + 0x20);
     z = arg1[1];
     p = v;
     p[0] = x;
     p[1] = lbl_803F1BE0[0];
     p[2] = z;
-    (*(void (**)(void *, f32 *))(vt + 0x24))(self + *(s16 *)(vt + 0x20), p);
+    f = *(void (**)(void *, f32 *))(vt + 0x24);
+    f(self, p);
 }
 
 void fn_8030791C(u8 *arg0, Vec3f *arg1) {
@@ -630,11 +633,12 @@ void fn_803083BC(void *arg0) {
 
 void fn_803083F4(void *self, s32 arg1, f32 *v) {
     extern void fn_80306294(void *, s32, f32 *);
-    f32 t[3];
-    f32 *p = t;
     if (M2C_FIELD(self, s32 *, 0) == 0) {
+        f32 t[3];
+        f32 *p;
         M2C_FIELD(self, s32 *, 0xF4) = arg1;
         M2C_FIELD(self, s32 *, 0x100) = arg1;
+        p = t;
         t[0] = v[0];
         p[1] = v[1];
         p[2] = v[2];
