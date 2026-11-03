@@ -29,6 +29,14 @@ static inline void Comp4_pop_heap(s32 *first, s32 *last, s32 *result, s32 val, C
 static inline void Comp4_pop_heap_aux(s32 *first, s32 *last, Comp4 comp) {
     Comp4_pop_heap(first, last - 1, last - 1, *(last - 1), comp);
 }
+
+static inline void Comp4_make_heap_outer(s32 *first, s32 *last, Comp4 comp) {
+    Comp4_make_heap(first, last, comp);
+}
+
+static inline void Comp4_pop_heap_outer(s32 *first, s32 *last, Comp4 comp) {
+    Comp4_pop_heap_aux(first, last, comp);
+}
 typedef struct {
     u8 pad0[0x14];
     void *unk14;
@@ -3571,7 +3579,7 @@ void **fn_803A0A44(void **self, void **other) {
         if (xlen > (u32)((void **)self[3] - (void **)self[0])) {
             void **tmp;
             if (xlen != 0) {
-                register volatile u32 size asm("r0");
+                register u32 size asm("r0");
                 size = xlen * 4;
                 bytes = size;
                 if (size > 0x80) {
@@ -10680,8 +10688,8 @@ Pair8Vec *fn_803B50DC(Pair8Vec *self, Pair8Vec *x) {
         Pair8 *first = x->start;
         Pair8 *start = self->start;
         Pair8 *last = x->finish;
-        Pair8 *src = first;
-        Pair8 *dst = start;
+        register Pair8 *src asm("r10") = first;
+        register Pair8 *dst asm("r7") = start;
         u32 xlen = last - first;
         if (xlen > (u32)(self->end - start)) {
             Pair8 *tmp;
@@ -10703,15 +10711,16 @@ Pair8Vec *fn_803B50DC(Pair8Vec *self, Pair8Vec *x) {
             self->end = tmp + xlen;
         } else if ((u32)(self->finish - dst) >= xlen) {
             s32 k;
+            Pair8 *d = dst;
             for (k = last - src; k > 0; k--) {
                 s32 a = src->a;
                 s32 b = src->b;
-                dst->a = a;
-                dst->b = b;
+                d->a = a;
+                d->b = b;
                 src++;
-                dst++;
+                d++;
             }
-            Pair8_Destroy(dst, self->finish);
+            Pair8_Destroy(d, self->finish);
         } else {
             Pair8_Copy(first, first + (self->finish - start), start);
             Pair8_UninitCopy(x->start + (self->finish - self->start), x->finish, self->finish);
