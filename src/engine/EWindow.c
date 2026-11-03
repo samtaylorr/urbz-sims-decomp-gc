@@ -4,6 +4,14 @@
 typedef struct { f32 x, y, z; } Vec3f;
 
 void fn_80307CCC();
+void fn_803064A0(char *self, f32 *arg1) {
+    char *vt;
+    *(f32 *)(self + 0x20) = arg1[0];
+    vt = *(char **)(self + 0x44);
+    *(f32 *)(self + 0x28) = arg1[1];
+    (*(void (**)(char *))(vt + 0x9C))(self + *(s16 *)(vt + 0x98));
+}
+
 void fn_80306CAC(void *arg0) {
     s32 fn_80307224(void *);
     void *temp_r9;
@@ -24,9 +32,9 @@ void fn_80306D28(void) {
 
 }
 
-s32 fn_80306D2C(void *arg0) {
-    void *temp_r9 = M2C_FIELD(arg0, void **, 0x44);
-    return M2C_FIELD(temp_r9, s32 (**)(void *), 0xE4)(arg0 + M2C_FIELD(temp_r9, s16 *, 0xE0));
+void fn_80306D2C(char *arg0) {
+    char *vt = *(char **)(arg0 + 0x44);
+    (*(void (**)(void *))(vt + 0xE4))(arg0 + *(s16 *)(vt + 0xE0));
 }
 
 void fn_80306D64(void *arg0, s32 arg1) {
@@ -743,24 +751,23 @@ void fn_80309B50(void *arg0, void *arg1, s32 arg2) {
     extern void *lbl_80495050;
     M2C_UNK fn_80309D70(void *);
     M2C_UNK fn_8030A570(s32, s32);
-    void *vt;
+    struct { u8 pad[0x90]; void *obj; s32 id; } *self = arg0;
     f32 buf[4];
 
-    if (M2C_FIELD(arg0, void **, 0x90) == arg1 && M2C_FIELD(arg0, s32 *, 0x94) == arg2) {
-        return;
+    if (self->obj != arg1 || self->id != arg2) {
+        self->obj = arg1;
+        self->id = arg2;
+        if (arg1 != NULL) {
+            void *vt = M2C_FIELD(arg1, void **, 0x20);
+            M2C_FIELD(vt, M2C_UNK (**)(void *, void *), 0x1C)((char *)arg1 + M2C_FIELD(vt, s16 *, 0x18), buf);
+        } else {
+            void *obj = lbl_80495050;
+            void *vt = M2C_FIELD(obj, void **, 0);
+            M2C_FIELD(vt, M2C_UNK (**)(void *, void *), 0x54)((char *)obj + M2C_FIELD(vt, s16 *, 0x50), buf);
+        }
+        fn_80309D70(buf);
+        fn_8030A570((s32)self, (s32)buf);
     }
-    M2C_FIELD(arg0, s32 *, 0x94) = arg2;
-    M2C_FIELD(arg0, void **, 0x90) = arg1;
-    if (arg1 != NULL) {
-        vt = M2C_FIELD(arg1, void **, 0x20);
-        M2C_FIELD(vt, M2C_UNK (**)(void *, void *), 0x1C)((char *)arg1 + M2C_FIELD(vt, s16 *, 0x18), buf);
-    } else {
-        void *obj = lbl_80495050;
-        vt = M2C_FIELD(obj, void **, 0);
-        M2C_FIELD(vt, M2C_UNK (**)(void *, void *), 0x54)((char *)obj + M2C_FIELD(vt, s16 *, 0x50), buf);
-    }
-    fn_80309D70(buf);
-    fn_8030A570((s32)arg0, (s32)buf);
 }
 
 void fn_80309DF4(f32 *rect, f32 *src) {
