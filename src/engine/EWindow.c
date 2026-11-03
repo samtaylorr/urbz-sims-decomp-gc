@@ -550,6 +550,12 @@ void fn_803081EC(s32 arg0) {
 }
 
 void fn_8030820C(void *self, s32 *v) {
+    M2C_UNK fn_80307D00(void *);
+    s32 *d = (s32 *)((u8 *)self + 0x20);
+    d[0] = v[0];
+    d[2] = v[2];
+    d[1] = v[1];
+    fn_80307D00(self);
 }
 
 void fn_8030824C(s32 arg0) {
@@ -559,6 +565,10 @@ void fn_8030824C(s32 arg0) {
 }
 
 void fn_80308280(void *self, f32 *v) {
+    M2C_UNK fn_80307D00(void *);
+    M2C_FIELD(self, f32 *, 0x20) = v[0];
+    M2C_FIELD(self, f32 *, 0x28) = v[1];
+    fn_80307D00(self);
 }
 
 f32 fn_803082B4(void *arg0) {
