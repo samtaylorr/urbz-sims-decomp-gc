@@ -192,6 +192,10 @@ s32 fn_8012AA74(void) {
     return 0x1C004;
 }
 
+void fn_8012AA80(void *arg0, s32 arg1, u16 *arg2) {
+    *arg2 = M2C_FIELD(M2C_FIELD(arg0, void **, 0x174), u16 *, 0x8);
+}
+
 void fn_8012AA90(void) {
 
 }
