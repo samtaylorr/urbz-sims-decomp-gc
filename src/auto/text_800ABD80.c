@@ -276,10 +276,11 @@ void fn_800ACAD4(void *self, void *out) {
 }
 
 void fn_800ACB8C(void *self, s32 arg1) {
-    u8 *vt = M2C_FIELD(self, u8 **, 0x440);
     if (arg1 == 0) {
+        u8 *vt = M2C_FIELD(self, u8 **, 0x440);
         (*(void (**)(void *))(vt + 0x74))((u8 *)self + *(s16 *)(vt + 0x70));
     } else {
+        u8 *vt = M2C_FIELD(self, u8 **, 0x440);
         (*(void (**)(void *))(vt + 0x7C))((u8 *)self + *(s16 *)(vt + 0x78));
     }
 }
@@ -572,9 +573,9 @@ void fn_800B24D4(void *arg0, void *arg1) {
         char *a = (char *)arg1 + i * 0xC;
         char *b = (char *)arg1 + (i * 0xC + 0x30);
         if (M2C_FIELD(a, u32 *, 4) <= 1) {
+            M2C_FIELD(a, s32 *, 4) = 2;
             M2C_FIELD(a, f32 *, 8) = lbl_803CEA6C[0];
             M2C_FIELD(b, f32 *, 8) = lbl_803CEA6C[0];
-            M2C_FIELD(a, s32 *, 4) = 2;
             M2C_FIELD(b, s32 *, 4) = 4;
         }
     }
