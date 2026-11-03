@@ -31,6 +31,34 @@ void fn_80305C5C(void *self, void *arg1) {
     fn_803074F0(arg1, 8, 1);
 }
 
+void fn_80305CB4(char *self, s32 n) {
+    s32 count;
+    char *p;
+    char *vt;
+
+    count = M2C_FIELD(self, s32 *, 0x60);
+    if (count > 1 && n >= 0) {
+        if (n > count) {
+            n = count;
+        }
+        p = **(char ***)self;
+        if (p != NULL) {
+            for (; n > 0; n--) {
+                p = *(char **)(*(char **)(p + 0x10) + 8);
+                if (p != NULL) {
+                    p = *(char **)p;
+                } else {
+                    p = NULL;
+                }
+            }
+            if (M2C_FIELD(p, s32 *, 0x18) & 0x10) {
+                vt = *(char **)(self + 0x44);
+                (*(void (**)(char *, char *))(vt + 0xA4))(self + *(s16 *)(vt + 0xA0), p);
+            }
+        }
+    }
+}
+
 void fn_80305D58(char *self, s32 arg1, s32 arg2, s32 arg3) {
     char *vt;
     M2C_FIELD(self, s32 *, 0x5C) = arg1;
@@ -38,6 +66,65 @@ void fn_80305D58(char *self, s32 arg1, s32 arg2, s32 arg3) {
     M2C_FIELD(self, s32 *, 0x68) = arg3;
     vt = *(char **)(self + 0x44);
     (*(void (**)(char *))(vt + 0x9C))(self + *(s16 *)(vt + 0x98));
+}
+
+void fn_80305D98(char *self, s32 arg1, s32 arg2, f32 x, f32 y) {
+    extern f32 lbl_803F1A24;
+    extern f32 lbl_803F1A28;
+    EWinAnim t;
+    EWinAnimDst *d;
+
+    M2C_FIELD(self, s32 *, 0x94) = arg1;
+    M2C_FIELD(self, s32 *, 0x90) = arg2;
+    t.a = lbl_803F1A24;
+    t.b = lbl_803F1A28;
+    t.c = 0;
+    t.d = 1;
+    t.e = 0;
+    t.c = arg2;
+    t.a = x;
+    t.b = y;
+    t.e = M2C_FIELD(self, s32 *, 0x38);
+    t.d = 1;
+    d = (EWinAnimDst *)(self + 0xA4);
+    d->a = t.a;
+    d->b = t.b;
+    d->c = t.c;
+    d->d = t.d;
+    d->e = t.e;
+    t.c = arg1;
+    d = (EWinAnimDst *)(self + 0xCC);
+    d->a = t.a;
+    d->b = t.b;
+    d->c = t.c;
+    d->d = t.d;
+    d->e = t.e;
+}
+
+void fn_80305E4C(char *self) {
+    void fn_80307078(char *);
+    void fn_80306D2C(void *);
+    void fn_80307834(char *);
+    char *old;
+    char *obj;
+    char *vt;
+
+    if (M2C_FIELD(self, s32 *, 0x18) & 4) {
+        fn_80307078(self + 0xA4);
+        fn_80307078(self + 0xCC);
+        if (M2C_FIELD(self, s32 *, 0) != 0) {
+            old = M2C_FIELD(self, char **, 0x48);
+            fn_80306D2C(self);
+            obj = M2C_FIELD(self, char **, 0x48);
+            if (obj == old) {
+                vt = *(char **)(obj + 0x44);
+                (*(void (**)(char *))(vt + 0x14))(obj + *(s16 *)(vt + 0x10));
+            }
+            if (M2C_FIELD(self, s32 *, 0x18) & 0x40) {
+                fn_80307834(self);
+            }
+        }
+    }
 }
 
 void fn_80306450(char *self, Vec3f *arg1) {
