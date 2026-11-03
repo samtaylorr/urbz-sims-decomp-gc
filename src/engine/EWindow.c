@@ -725,16 +725,17 @@ void fn_80309AE0(void *arg0, s32 arg1) {
     extern s32 lbl_80494EC4;
     extern void *fn_802D0AB8(void *);
     extern void fn_802D1A00(void *, void *);
+    struct { u8 pad[0x9C]; void *vt; } *self = arg0;
 
-    M2C_FIELD(arg0, void **, 0x9C) = lbl_8041AFD8;
-    if (lbl_80494EC0 == (s32)arg0) {
+    self->vt = lbl_8041AFD8;
+    if (lbl_80494EC0 == (s32)self) {
         lbl_80494EC0 = 0;
     }
-    if (lbl_80494EC4 == (s32)arg0) {
+    if (lbl_80494EC4 == (s32)self) {
         lbl_80494EC4 = 0;
     }
     if (arg1 & 1) {
-        fn_802D1A00(((void *(*)(void))fn_802D0AB8)(), arg0);
+        fn_802D1A00(((void *(*)(void))fn_802D0AB8)(), self);
     }
 }
 
