@@ -727,7 +727,10 @@ void fn_8025F85C(void) {
     void fn_8025302C(char *, ...);
     void fn_80252B8C(u32);
     void PPCHalt(void);
-    u32 addr = *(u32 *)0xC0 + 0x80000000;
+    u32 phys;
+    u32 addr;
+    phys = *(u32 *)0xC0;
+    addr = phys + 0x80000000;
     fn_8025302C(lbl_803F9290);
     fn_80252B8C(addr);
     PPCHalt();
