@@ -20,6 +20,25 @@ typedef struct {
     s32 e;
 } EWinAnimDst;
 
+extern f32 lbl_803F1A24;
+extern f32 lbl_803F1A28;
+
+static inline void EWinAnim_Init(EWinAnim *p) {
+    p->a = lbl_803F1A24;
+    p->b = lbl_803F1A28;
+    p->c = 0;
+    p->d = 1;
+    p->e = 0;
+}
+
+static inline void EWinAnim_Copy(EWinAnimDst *d, EWinAnim *s) {
+    d->a = s->a;
+    d->b = s->b;
+    d->c = s->c;
+    d->d = s->d;
+    d->e = s->e;
+}
+
 void fn_80307CCC();
 void fn_80305C5C(void *self, void *arg1) {
     extern void fn_803074F0(void *, s32, s32);
