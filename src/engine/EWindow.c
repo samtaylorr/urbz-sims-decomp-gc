@@ -20,12 +20,12 @@ typedef struct {
     s32 e;
 } EWinAnimDst;
 
-extern f32 lbl_803F1A24;
-extern f32 lbl_803F1A28;
+extern f32 lbl_803F1A24[];
+extern f32 lbl_803F1A28[];
 
 static inline void EWinAnim_Init(EWinAnim *p) {
-    p->a = lbl_803F1A24;
-    p->b = lbl_803F1A28;
+    p->a = lbl_803F1A24[0];
+    p->b = lbl_803F1A28[0];
     p->c = 0;
     p->d = 1;
     p->e = 0;
@@ -52,7 +52,9 @@ void fn_80305C5C(void *self, void *arg1) {
 
 void fn_80305CB4(char *self, s32 n) {
     s32 count;
+    s32 i;
     char *p;
+    char **q;
     char *vt;
 
     count = M2C_FIELD(self, s32 *, 0x60);
@@ -62,13 +64,9 @@ void fn_80305CB4(char *self, s32 n) {
         }
         p = **(char ***)self;
         if (p != NULL) {
-            for (; n > 0; n--) {
-                p = *(char **)(*(char **)(p + 0x10) + 8);
-                if (p != NULL) {
-                    p = *(char **)p;
-                } else {
-                    p = NULL;
-                }
+            for (i = 0; i < n; i++) {
+                q = *(char ***)(*(char **)(p + 0x10) + 8);
+                p = (q != NULL) ? *q : NULL;
             }
             if (M2C_FIELD(p, s32 *, 0x18) & 0x10) {
                 vt = *(char **)(self + 0x44);
@@ -88,36 +86,19 @@ void fn_80305D58(char *self, s32 arg1, s32 arg2, s32 arg3) {
 }
 
 void fn_80305D98(char *self, s32 arg1, s32 arg2, f32 x, f32 y) {
-    extern f32 lbl_803F1A24;
-    extern f32 lbl_803F1A28;
     EWinAnim t;
-    EWinAnimDst *d;
 
     M2C_FIELD(self, s32 *, 0x94) = arg1;
     M2C_FIELD(self, s32 *, 0x90) = arg2;
-    t.a = lbl_803F1A24;
-    t.b = lbl_803F1A28;
-    t.c = 0;
-    t.d = 1;
-    t.e = 0;
+    EWinAnim_Init(&t);
     t.c = arg2;
     t.a = x;
     t.b = y;
     t.e = M2C_FIELD(self, s32 *, 0x38);
     t.d = 1;
-    d = (EWinAnimDst *)(self + 0xA4);
-    d->a = t.a;
-    d->b = t.b;
-    d->c = t.c;
-    d->d = t.d;
-    d->e = t.e;
+    EWinAnim_Copy((EWinAnimDst *)(self + 0xA4), &t);
     t.c = arg1;
-    d = (EWinAnimDst *)(self + 0xCC);
-    d->a = t.a;
-    d->b = t.b;
-    d->c = t.c;
-    d->d = t.d;
-    d->e = t.e;
+    EWinAnim_Copy((EWinAnimDst *)(self + 0xCC), &t);
 }
 
 void fn_80305E4C(char *self) {
@@ -784,8 +765,8 @@ void *fn_803082CC(void *self, s32 a1, s32 a2, s32 a3, s32 a4, s32 a5) {
     M2C_FIELD(self, s32 *, 0xFC) = 0;
     M2C_FIELD(self, u8 **, 0x44) = lbl_8041AE10;
     fn_80308BF8(self, a3, a4);
-    M2C_FIELD(self, f32 *, 0x104) = lbl_803F1D38[0];
     M2C_FIELD(self, s32 *, 0x108) = a5;
+    M2C_FIELD(self, f32 *, 0x104) = lbl_803F1D38[0];
     M2C_FIELD(self, s32 *, 0x48) = 0;
     M2C_FIELD(self, s32 *, 0xF4) = 0;
     M2C_FIELD(self, s32 *, 0x100) = 0;
@@ -815,16 +796,22 @@ void fn_803083BC(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x100) = 0;
 }
 
-void fn_803083F4(void *self, s32 arg1, Vec3f *v) {
-    extern void fn_80306294(void *, s32, Vec3f *);
+void fn_803083F4(void *self, s32 arg1, f32 *v) {
+    extern void fn_80306294(void *, s32, f32 *);
     if (M2C_FIELD(self, s32 *, 0) == 0) {
-        Vec3f t;
+        f32 t[3];
+        f32 *p;
+        f32 x, y, z;
         M2C_FIELD(self, s32 *, 0xF4) = arg1;
         M2C_FIELD(self, s32 *, 0x100) = arg1;
-        t.x = v->x;
-        t.y = v->y;
-        t.z = v->z;
-        fn_80306294(self, arg1, &t);
+        x = v[0];
+        y = v[1];
+        z = v[2];
+        p = t;
+        t[0] = x;
+        p[1] = y;
+        p[2] = z;
+        fn_80306294(self, arg1, p);
     }
 }
 
