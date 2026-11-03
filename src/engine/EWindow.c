@@ -38,6 +38,13 @@ void fn_80306EF4(char *self, f32 farg0) {
     (*(void (**)(char *))(vt + 0x9C))(self + *(s16 *)(vt + 0x98));
 }
 
+void fn_80306F2C(char *self, f32 farg0) {
+    char *vt;
+    M2C_FIELD(self, f32 *, 0x84) = farg0;
+    vt = *(char **)(self + 0x44);
+    (*(void (**)(char *))(vt + 0x9C))(self + *(s16 *)(vt + 0x98));
+}
+
 void fn_80306F64(void *arg0, f32 farg0) {
     M2C_FIELD(arg0, f32 *, 0x88) = farg0;
 }
