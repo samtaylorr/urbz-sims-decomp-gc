@@ -722,6 +722,22 @@ u32 fn_8025F840(void) {
     return lbl_80495EA8[0];
 }
 
+void fn_8025F85C(void) {
+    extern char lbl_803F9290[];
+    void fn_8025302C(char *, ...);
+    void fn_80252B8C(u32);
+    void PPCHalt(void);
+    u32 addr = *(u32 *)0xC0 + 0x80000000;
+    fn_8025302C(lbl_803F9290);
+    fn_80252B8C(addr);
+    PPCHalt();
+}
+
+u32 fn_8025F8B4(u8 bit) {
+    extern u32 *lbl_80495EA8;
+    return lbl_80495EA8[1] & (1 << bit);
+}
+
 void fn_8025F914(s32 arg0) {
     extern s32 *lbl_80495EA8;
     *lbl_80495EA8 = arg0;
