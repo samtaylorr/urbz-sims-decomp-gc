@@ -249,6 +249,36 @@ void fn_800ACA34(void *arg0, void *arg1, void *arg2) {
     fn_802C9294(arg2, -x);
 }
 
+void fn_800ACAD4(void *self, void *out) {
+    typedef struct { s8 x; s8 y; s8 z; } Tile;
+    typedef struct { f32 x; f32 y; f32 z; } Pos;
+    extern u8 *lbl_8041FA38[];
+    void fn_80105400(f32 *, s8 *);
+    void fn_801055FC(void *, s32);
+    u8 *obj = M2C_FIELD(self, u8 **, 8);
+    u8 *vt = *(u8 **)(obj + 4);
+    f32 dy = *(f32 *)(lbl_8041FA38[0] + 0x68);
+    f32 dx = *(f32 *)(lbl_8041FA38[0] + 0x64);
+    Tile tile;
+    Pos pos;
+
+    tile = (*(Tile (**)(void *))(vt + 0x31C))(obj + *(s16 *)(vt + 0x318));
+    fn_80105400((f32 *)&pos, (s8 *)&tile);
+    *(Pos *)out = pos;
+    fn_801055FC(&tile, 2);
+    ((Pos *)out)->x += dx;
+    ((Pos *)out)->y += dy;
+}
+
+void fn_800ACB8C(void *self, s32 arg1) {
+    u8 *vt = M2C_FIELD(self, u8 **, 0x440);
+    if (arg1 == 0) {
+        (*(void (**)(void *))(vt + 0x74))((u8 *)self + *(s16 *)(vt + 0x70));
+    } else {
+        (*(void (**)(void *))(vt + 0x7C))((u8 *)self + *(s16 *)(vt + 0x78));
+    }
+}
+
 void fn_800ACBE8(void) {
 
 }
