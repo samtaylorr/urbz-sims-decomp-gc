@@ -83,11 +83,12 @@ void fn_8000D664(s32 *self) {
     void fn_8000D7E4(s32 *);
     void fn_8000D558(s32 *);
     switch (*self) {
-    case 0:
-        fn_8000D558(self);
-        break;
     case 1:
         fn_8000D7E4(self);
+        break;
+    case 0:
+    default:
+        fn_8000D558(self);
         break;
     }
 }
