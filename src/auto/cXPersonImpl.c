@@ -381,6 +381,12 @@ s32 fn_80185E08(void *arg0, s32 arg1) {
     return temp_r3;
 }
 
+void *fn_80185E50(void *self) {
+    struct Ring { struct { u8 d[0x58]; } e[10]; u32 n; };
+    struct Ring *r = (struct Ring *)((u8 *)self + 0x130);
+    return &r->e[r->n % 10];
+}
+
 s32 fn_80185E7C(void *self, s32 i) {
     return ((struct { u8 pad[0x8]; s16 a[1]; } *)self)->a[i];
 }
