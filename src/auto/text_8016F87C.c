@@ -413,12 +413,15 @@ s32 fn_8017204C(char *self) {
 s32 fn_80172204(char *self) {
     char *vt;
     char *obj;
+    char *obj2;
+    char *vt2;
     obj = M2C_FIELD(self, char **, 0x1DC);
     if (obj != NULL) {
         vt = M2C_FIELD(obj, char **, 0xBC);
         if (M2C_FIELD(vt, s32 (**)(void *), 0x54)(obj + M2C_FIELD(vt, s16 *, 0x50)) != 0) {
-            vt = M2C_FIELD(M2C_FIELD(self, char **, 0x1DC), char **, 0xBC);
-            M2C_FIELD(vt, void (**)(void *), 0xEC)(M2C_FIELD(self, char **, 0x1DC) + M2C_FIELD(vt, s16 *, 0xE8));
+            obj2 = M2C_FIELD(self, char **, 0x1DC);
+            vt2 = M2C_FIELD(obj2, char **, 0xBC);
+            M2C_FIELD(vt2, void (**)(void *), 0xEC)(obj2 + M2C_FIELD(vt2, s16 *, 0xE8));
         }
     }
     return 1;
