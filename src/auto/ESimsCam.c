@@ -225,8 +225,13 @@ void fn_8000E7F0(void *arg0, f32 arg1) {
     max = M2C_FIELD(t, f32 *, 8);
     v = M2C_FIELD(arg0, f32 *, 0x458) - arg1;
     M2C_FIELD(arg0, f32 *, 0x458) = v;
-    min = M2C_FIELD(t, f32 *, 4);
-    r = (v < min) ? min : ((v > max) ? max : v);
+    r = M2C_FIELD(t, f32 *, 4);
+    if (!(v < r)) {
+        r = v;
+        if (v > max) {
+            r = max;
+        }
+    }
     M2C_FIELD(arg0, f32 *, 0x458) = r;
     t = M2C_FIELD(arg0, void **, 8);
     min = M2C_FIELD(t, f32 *, 4);
@@ -265,22 +270,22 @@ s32 fn_80010228(char *self, Vec3 *pos) {
 }
 
 s32 fn_8001025C(char *self, Vec3 *pos, f32 minX, f32 minY, f32 maxX, f32 maxY) {
-    extern void fn_802E4030(void *, Vec3 *, f32 *);
-    f32 out[3];
+    extern void fn_802E4030(void *, Vec3 *, void *);
+    struct { f32 x, y; } out;
     s32 flags;
 
-    fn_802E4030(self + 0x18, pos, out);
+    fn_802E4030(self + 0x18, pos, &out);
     flags = 0;
-    if (out[0] < minX) {
+    if (out.x < minX) {
         flags = 1;
     }
-    if (out[0] > maxX) {
+    if (out.x > maxX) {
         flags |= 2;
     }
-    if (out[1] < minY) {
+    if (out.y < minY) {
         flags |= 4;
     }
-    if (out[1] > maxY) {
+    if (out.y > maxY) {
         flags |= 8;
     }
     return flags;
@@ -416,7 +421,7 @@ s32 fn_80013450(void *arg0, f32 arg1, s32 arg2, s32 arg3) {
 
 void fn_80013AB4(void *arg0, f32 arg1) {
     extern const f32 lbl_803C212C[];
-    void fn_8000DC30(void *);
+    void fn_8000DC30(void *, f32);
     void *temp_r9;
 
     arg1 *= lbl_803C212C[0];
@@ -428,7 +433,7 @@ void fn_80013AB4(void *arg0, f32 arg1) {
     if (arg1 < M2C_FIELD(temp_r9, f32 *, 0x28)) {
         M2C_FIELD(temp_r9, f32 *, 0x28) = arg1;
     }
-    fn_8000DC30(M2C_FIELD(arg0, void **, 0x168));
+    fn_8000DC30(M2C_FIELD(arg0, void **, 0x168), arg1);
 }
 
 void fn_80013B14(void *arg0, s32 arg1) {
