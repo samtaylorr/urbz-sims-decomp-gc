@@ -1031,34 +1031,32 @@ M2C_UNK fn_80174F84(s32 arg0, void *item) {
     s32 *self = (s32 *)arg0;
     char *list = (char *)self + 0x104;
     s32 i;
+    s32 off;
     *(void **)item = *(void **)(list + 8);
     *(void **)(list + 8) = item;
-    for (i = 0; i < 0x40; i++) {
-        if (self[i] == (s32)item) {
-            break;
+    i = 0;
+    while (off = i << 2, *(s32 *)((char *)self + off) != (s32)item) {
+        i++;
+        if (i > 0x3f) {
+            return;
         }
     }
-    if (i < 0x40) {
-        self[i] = 0;
-    }
+    *(s32 *)((char *)self + off) = 0;
 }
 
 void fn_80174FD4(char **self) {
-    s32 i;
-    char *obj;
     char *vt;
+    s32 i;
     for (i = 0; i < 0x40; i++) {
-        obj = self[i];
-        if (obj != NULL) {
-            vt = *(char **)(obj + 0xbc);
-            (*(void (**)(void *))(vt + 0xa4))(obj + *(s16 *)(vt + 0xa0));
+        if (self[i] != NULL) {
+            vt = *(char **)(self[i] + 0xbc);
+            (*(void (**)(void *))(vt + 0xa4))(self[i] + *(s16 *)(vt + 0xa0));
+            if (self[i] != NULL) {
+                vt = *(char **)(self[i] + 0xbc);
+                (*(void (**)(void *, s32))(vt + 0x14))(self[i] + *(s16 *)(vt + 0x10), 3);
+            }
+            self[i] = NULL;
         }
-        obj = self[i];
-        if (obj != NULL) {
-            vt = *(char **)(obj + 0xbc);
-            (*(void (**)(void *, s32))(vt + 0x14))(obj + *(s16 *)(vt + 0x10), 3);
-        }
-        self[i] = NULL;
     }
 }
 
