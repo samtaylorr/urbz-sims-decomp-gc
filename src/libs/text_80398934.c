@@ -2004,7 +2004,30 @@ void fn_8039C378(s32 *self) {
     }
 }
 
+void fn_8039C398(f32 *self) {
+    extern const f32 lbl_803CA3DC[];
+    extern const f32 lbl_803CA3E0[];
+    f32 zero = lbl_803CA3E0[0];
+
+    *(s32 *)&self[0] = 0;
+    self[1] = lbl_803CA3DC[0];
+    self[3] = zero;
+    self[2] = zero;
+    self[5] = zero;
+    self[4] = zero;
+    self[7] = zero;
+    self[6] = zero;
+}
+
 void fn_8039C3D0(const char *fmt, ...) {
+}
+
+extern u8 lbl_80409BE0[];
+void fn_8039C41C(s32 *self, s32 flags) {
+    self[24] = (s32)lbl_80409BE0;
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
 }
 
 void fn_8039C450(void **v, u32 n) {
