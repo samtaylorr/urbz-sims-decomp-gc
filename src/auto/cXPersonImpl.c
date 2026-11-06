@@ -458,6 +458,20 @@ void fn_8018596C(void *arg0) {
     }
 }
 
+s32 fn_801859E8(char *self) {
+    extern s32 fn_801A2F28(char *);
+    extern void *fn_801A2EF4(char *, s32);
+    extern s32 fn_801A2F3C(void *);
+    s32 i;
+    for (i = fn_801A2F28(**(char ***)self + 8) - 1; i >= 0; i--) {
+        if (fn_801A2F3C(fn_801A2EF4(**(char ***)self + 8, i)) == 0x189) {
+            *(u16 *)(self + 0x9C) |= 1;
+            return 1;
+        }
+    }
+    return 0;
+}
+
 void fn_80185A68(char *self, s32 arg1) {
     extern void fn_801767DC(char *, s32, s32);
     fn_801767DC(self + 0x130, arg1, 0);
