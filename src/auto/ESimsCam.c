@@ -381,14 +381,12 @@ f32 fn_800111D4(void *arg0) {
     f32 lo;
     f32 t;
     f32 a;
-    f32 b;
 
     temp_r9 = M2C_FIELD(arg0, void **, 8);
     lo = M2C_FIELD(temp_r9, f32 *, 4);
-    t = (M2C_FIELD(arg0, f32 *, 0x458) - lo) / (M2C_FIELD(temp_r9, f32 *, 8) - lo);
     a = lbl_8041E7B8[0x90 / 4];
-    b = lbl_8041E7B8[0x94 / 4];
-    return (b - a) * t + a;
+    t = (M2C_FIELD(arg0, f32 *, 0x458) - lo) / (M2C_FIELD(temp_r9, f32 *, 8) - lo);
+    return (lbl_8041E7B8[0x94 / 4] - a) * t + a;
 }
 
 f32 fn_8001120C(void *arg0) {
@@ -607,6 +605,27 @@ char *fn_80014348(char *self, void *key) {
         }
     }
     return p;
+}
+
+void fn_800147C4(void *arg0) {
+    extern void *lbl_80495050;
+    extern const f32 lbl_803C2178[];
+    extern const f32 lbl_803C217C[];
+    void fn_802EED94(void *, f32, f32, f32, f32);
+    f32 t;
+    f32 one;
+
+    one = lbl_803C217C[0];
+    t = M2C_FIELD(arg0, f32 *, 0x248) * lbl_803C2178[0];
+    if (t >= one) {
+        M2C_FIELD(arg0, u32 *, 0x28C) &= ~2;
+        t = one;
+    }
+    fn_802EED94(lbl_80495050,
+        (one - t) * M2C_FIELD(arg0, f32 *, 0x26C) + t * M2C_FIELD(arg0, f32 *, 0x27C),
+        (one - t) * M2C_FIELD(arg0, f32 *, 0x270) + t * M2C_FIELD(arg0, f32 *, 0x280),
+        (one - t) * M2C_FIELD(arg0, f32 *, 0x274) + t * M2C_FIELD(arg0, f32 *, 0x284),
+        (one - t) * M2C_FIELD(arg0, f32 *, 0x278) + t * M2C_FIELD(arg0, f32 *, 0x288));
 }
 
 void fn_80014860(void *arg0, s32 arg1) {
