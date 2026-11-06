@@ -10,6 +10,17 @@ void fn_802F7104(u8 *self, s32 idx, void *src) {
     ((struct ERCVec12 *)(self + 4))[idx] = *(struct ERCVec12 *)src;
 }
 
+void fn_802F7128(u8 *self, void *name) {
+    extern void fn_8031EA2C(void *);
+    extern void *fn_8033740C(void *, void *, s32, s32);
+    extern u8 lbl_8045BA40[];
+    if (*(void **)(self + 0x44) != NULL) {
+        fn_8031EA2C(*(void **)(self + 0x44));
+        *(void **)(self + 0x44) = NULL;
+    }
+    *(void **)(self + 0x44) = fn_8033740C(lbl_8045BA40, name, 0, 0);
+}
+
 void fn_802F7188(f32 *arg0, f32 farg0) {
     *arg0 = farg0;
 }
