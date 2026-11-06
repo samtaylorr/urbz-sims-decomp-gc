@@ -107,8 +107,8 @@ s32 fn_802F6DA8(void *arg0, f32 *pos, s32 id) {
     s32 y;
     s32 i;
 
-    x = (s32)(pos[0] + *(f32 *)&lbl_803F1284);
-    y = (s32)(pos[1] + *(f32 *)&lbl_803F1284);
+    x = (s32)(pos[0] + lbl_803F1284[0]);
+    y = (s32)(pos[1] + lbl_803F1284[0]);
     if (x >= 0 && x <= 62 && y >= 0 && y <= 62) {
         cell = (s8 *)arg0 + 0x6C98 + x * 0x10BC + y * 0x44;
         for (i = 0; i < 4; i++) {
@@ -253,6 +253,26 @@ void fn_802FB688(char *self, s32 arg1) {
     }
 }
 
+void *fn_802FB800(s32 *self, s32 n) {
+    char *p;
+
+    if (self[1] > n) {
+        p = (char *)self[2];
+        self[1] -= n;
+    } else {
+        p = fn_802FEAFC(self, 0x1000, 0x20);
+        if (p == NULL) {
+            self[2] = 0;
+            return NULL;
+        }
+        self[7]++;
+        fn_802FB8A0((void *)self[2], (s32)p);
+        self[1] = 0x200 - n;
+    }
+    self[2] = (s32)(p + n * 8);
+    return p;
+}
+
 void fn_802FB8A0(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 4) = arg1;
     M2C_FIELD(arg0, s8 *, 0) = 7;
@@ -329,7 +349,7 @@ void fn_802FBD14(char *self, void *src, s32 count) {
     void *fn_802FEB4C(s32 *, void *, s32);
     char *vt;
     char *p;
-    void *data;
+    void *data = src;
 
     if (count == 0) {
         return;
@@ -355,7 +375,7 @@ void fn_802FBEF8(char *self, void *src, s32 count) {
     void *fn_802FEB4C(s32 *, void *, s32);
     char *vt;
     char *p;
-    void *data;
+    void *data = src;
 
     if (count == 0) {
         return;
