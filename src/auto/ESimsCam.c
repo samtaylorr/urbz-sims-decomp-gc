@@ -258,6 +258,11 @@ void fn_80012108(void *arg0, s32 arg1, s32 arg2) {
     }
 }
 
+void fn_80013B14(void *arg0, s32 arg1) {
+    void fn_802E58E4(void *, s32, s32, s32);
+    fn_802E58E4((char *)arg0 + 0x19C, arg1, 2, 0);
+}
+
 void fn_80014164(void *arg0, s32 arg1) {
     if ((M2C_FIELD(arg0, s32 *, 0x238) ^ 1) & 1) {
         M2C_FIELD(arg0, s32 *, 0x22C) = arg1;
