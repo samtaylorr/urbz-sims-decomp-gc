@@ -283,7 +283,7 @@ void fn_802E7C44(void *arg0, s32 arg1, s32 arg2) {
     s32 has;
     char *src;
     char *dst;
-    s32 n;
+    u32 n;
     u8 *g;
 
     fn_802E77F0(arg0, arg1);
@@ -340,6 +340,13 @@ void fn_802E8E7C(void *arg0) {
 void fn_802E9D34(void *arg0, void *arg1);
 void fn_802EA264(void *arg0, s32 arg1) {
     fn_802E9D34(arg0, fn_802E5F90_inline(arg0, arg1));
+}
+
+void fn_802EAD40(void *arg0, s32 arg1, s32 arg2) {
+    extern const f32 lbl_803F0A6C[];
+    s32 fn_80337F14(s32);
+    void fn_802EA51C(void *, s32, s32, s32, s32, f32);
+    fn_802EA51C(arg0, arg1, fn_80337F14(arg2), -1, 0, lbl_803F0A6C[0]);
 }
 
 void fn_802EB384(void *arg0, void *arg1);
