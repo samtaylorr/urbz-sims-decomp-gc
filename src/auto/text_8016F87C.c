@@ -245,12 +245,12 @@ s32 fn_80170E8C(void *self) {
     return max;
 }
 
-void fn_801710CC(char *arg0) {
+s32 fn_801710CC(char *arg0) {
     if (M2C_FIELD(arg0, s32 *, 0x10) == 0) {
         void *vt = M2C_FIELD(arg0, void **, 0xBC);
         M2C_FIELD(vt, void (**)(void *), 0xAC)(arg0 + M2C_FIELD(vt, s16 *, 0xA8));
     }
-    M2C_FIELD(arg0, s32 *, 0x10)++;
+    return ++M2C_FIELD(arg0, s32 *, 0x10);
 }
 
 s32 fn_80171124(char *arg0) {
