@@ -167,6 +167,47 @@ void fn_80172464(s32 arg0) {
     fn_80174A98(arg0 + 0x18);
 }
 
+void fn_801737C8(char *arg0, s32 a, s32 b) {
+    M2C_FIELD(arg0, s32 *, 0x1D0) = a < b;
+    M2C_FIELD(arg0, s32 *, 0x1C8) = a == b;
+    M2C_FIELD(arg0, s32 *, 0x1CC) = a > b;
+}
+
+s32 fn_80173AC8(void *arg0) {
+    void *temp_r11;
+    void *temp_r9;
+
+    temp_r11 = M2C_FIELD(arg0, void **, 0x1DC);
+    if (temp_r11 == NULL) {
+        return 1;
+    }
+    temp_r9 = M2C_FIELD(temp_r11, void **, 0xBC);
+    return M2C_FIELD(temp_r9, s32 (**)(void *), 0x14C)((char *)temp_r11 + M2C_FIELD(temp_r9, s16 *, 0x148));
+}
+
+s32 fn_80173B10(char *arg0) {
+    char *obj;
+    void *vt;
+    s32 t;
+
+    if (M2C_FIELD(arg0, void **, 0x1DC) != NULL) {
+        obj = M2C_FIELD(arg0, char **, 0xC0);
+        t = M2C_FIELD(arg0, s32 *, 0x44);
+        vt = M2C_FIELD(obj, void **, 0xBC);
+        t += M2C_FIELD(vt, s32 (**)(void *, s32), 0x74)(obj + M2C_FIELD(vt, s16 *, 0x70), 0x15);
+        obj = M2C_FIELD(arg0, char **, 0x1DC);
+        vt = M2C_FIELD(obj, void **, 0xBC);
+        M2C_FIELD(vt, void (**)(void *, s32), 0xC4)(obj + M2C_FIELD(vt, s16 *, 0xC0), t - 0xE10);
+        return 1;
+    }
+    return 0;
+}
+
+void fn_80173B98(char *self, s32 a1) {
+    void *vt = M2C_FIELD(self, void **, 0xBC);
+    M2C_FIELD(vt, void (**)(void *, s32, s32, s32), 0x6C)(self + M2C_FIELD(vt, s16 *, 0x68), 0x13, a1, 0);
+}
+
 s32 fn_80173E64(void) {
     return 1;
 }
