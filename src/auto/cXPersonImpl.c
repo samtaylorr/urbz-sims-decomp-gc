@@ -372,7 +372,8 @@ s32 fn_80185428(void *arg0) {
     struct VEntry *e;
     obj = M2C_FIELD(arg0, char **, 4);
     e = (struct VEntry *)(M2C_FIELD(obj, char **, 4) + 0x120);
-    if (e->fn(obj + e->delta) != 0) {
+    obj += e->delta;
+    if (e->fn(obj) != 0) {
         return 0;
     }
     obj = M2C_FIELD(arg0, char **, 4);
@@ -454,6 +455,11 @@ void fn_8018596C(void *arg0) {
         temp_r30 = M2C_FIELD(temp_r9_2, void *(**)(void *), 0x14C)(temp_r11 + M2C_FIELD(temp_r9_2, s16 *, 0x148));
         M2C_FIELD(temp_r30, f32 *, 0x34) = fn_80097C84();
     }
+}
+
+void fn_80185A68(char *self, s32 arg1) {
+    extern void fn_801767DC(char *, s32, s32);
+    fn_801767DC(self + 0x130, arg1, 0);
 }
 
 void fn_80185DA8(void ***arg0, s32 arg1) {
