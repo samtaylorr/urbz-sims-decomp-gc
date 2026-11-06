@@ -5,10 +5,23 @@ void fn_801288B4(void) {
 
 }
 
+void *fn_801288B8(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    return arg0;
+}
+
+void fn_80128944(void *arg0, s32 arg1) {
+}
+
 void fn_801289C4(M2C_UNK *arg0) {
     extern M2C_UNK *lbl_80494448;
     *arg0 = lbl_80494448;
     lbl_80494448 = arg0;
+}
+
+void fn_801289D4(void *arg0) {
+}
+
+void fn_80128CEC(void *arg0, s32 arg1) {
 }
 
 void fn_80129158(s32 arg0, s32 arg1) {
@@ -613,13 +626,12 @@ void fn_8012DFD8(void *self) {
 }
 
 s32 fn_8012E01C(void *self, s32 idx) {
-    void **tbl;
+    char *tbl;
     s32 ret;
 
-    idx--;
-    tbl = (void **)((char *)self + 0x140);
+    tbl = (char *)self + 0x140;
     ret = 1;
-    if (M2C_FIELD(idx[tbl], s32 *, 8) == 0) {
+    if (M2C_FIELD(((void **)tbl)[idx - 1], s32 *, 8) == 0) {
         ret = 0;
     }
     return ret;
