@@ -244,11 +244,11 @@ s32 fn_80173AC8(void *arg0) {
     void *temp_r9;
 
     temp_r11 = M2C_FIELD(arg0, void **, 0x1DC);
-    if (temp_r11 == NULL) {
-        return 1;
+    if (temp_r11 != NULL) {
+        temp_r9 = M2C_FIELD(temp_r11, void **, 0xBC);
+        return M2C_FIELD(temp_r9, s32 (**)(void *), 0x14C)((char *)temp_r11 + M2C_FIELD(temp_r9, s16 *, 0x148));
     }
-    temp_r9 = M2C_FIELD(temp_r11, void **, 0xBC);
-    return M2C_FIELD(temp_r9, s32 (**)(void *), 0x14C)((char *)temp_r11 + M2C_FIELD(temp_r9, s16 *, 0x148));
+    return 1;
 }
 
 s32 fn_80173B10(char *arg0) {
