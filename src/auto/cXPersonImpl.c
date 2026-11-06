@@ -448,14 +448,18 @@ s32 fn_80183E50(void *arg0) {
     extern void *lbl_80496650;
     void *obj;
     void *vt;
+    void *vt2;
+    s32 r;
 
     vt = *(void **)lbl_80496650;
     obj = M2C_FIELD(vt, void *(**)(void *), 0x13C)((char *)lbl_80496650 + M2C_FIELD(vt, s16 *, 0x138));
     if (obj != 0) {
-        vt = M2C_FIELD(obj, void **, 0);
-        return M2C_FIELD(vt, s32 (**)(void *, s32), 0x44)(obj + M2C_FIELD(vt, s16 *, 0x40), M2C_FIELD(arg0, s32 *, 4));
+        vt2 = M2C_FIELD(obj, void **, 0);
+        r = M2C_FIELD(vt2, s32 (**)(void *, s32), 0x44)(obj + M2C_FIELD(vt2, s16 *, 0x40), M2C_FIELD(arg0, s32 *, 4));
+    } else {
+        r = 0;
     }
-    return 0;
+    return r;
 }
 
 void fn_80183EC0(void *arg0) {
@@ -611,9 +615,9 @@ s32 fn_801857B8(char *self) {
 }
 
 void fn_80185834(char *self) {
+    struct { char *begin; char *end; } *vec = (void *)(self + 0x4D4);
     char *it;
-    self += 0x4D4;
-    for (it = *(char **)self; it != ((char **)self)[1]; it += 0xA4) {
+    for (it = vec->begin; it != vec->end; it += 0xA4) {
         *(s32 *)(it + 0x7C) = 0;
     }
 }
