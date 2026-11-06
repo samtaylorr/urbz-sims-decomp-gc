@@ -247,6 +247,13 @@ void fn_802EC15C(void *arg0, void *arg1, s32 arg2) {
     }
 }
 
+void fn_802EC178(void *arg0, s32 arg1, s32 arg2) {
+    void *win = fn_802E5F90_inline(arg0, arg1);
+    if (win != NULL && M2C_FIELD(win, s32 *, 0xA8) == 1) {
+        M2C_FIELD(win, s32 *, 0x9C) = arg2;
+    }
+}
+
 void fn_802EC460(void *arg0, void *arg1);
 void fn_802EC4C8(void *arg0, s32 arg1) {
     fn_802EC460(arg0, fn_802E5F90_inline(arg0, arg1));
