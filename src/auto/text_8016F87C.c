@@ -386,6 +386,12 @@ s32 fn_80174E40(u32 *arg0, u32 *arg1) {
     return (u32) *arg0 < (u32) *arg1;
 }
 
+void fn_80174E58(void *arg0) {
+    extern s32 lbl_80495C90;
+    M2C_UNK fn_80175ACC(s32, s32);
+    fn_80175ACC(M2C_FIELD(lbl_80495C90, s32 *, 0x58), M2C_FIELD(arg0, s32 *, 0));
+}
+
 void fn_80174E84(s32 *self, s32 value) {
     *self = value;
 }
