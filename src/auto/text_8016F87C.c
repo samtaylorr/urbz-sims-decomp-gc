@@ -543,6 +543,17 @@ void fn_8017474C(void *arg0) {
     (*(void (**)(void *))(vt + 0x15C))(obj + *(s16 *)(vt + 0x158));
 }
 
+void fn_80174784(char *self) {
+    char *obj;
+    char *vt;
+    obj = M2C_FIELD(self, char **, 0xC4);
+    vt = *(char **)obj;
+    M2C_FIELD(vt, void (**)(void *, s32), 0x94)(obj + M2C_FIELD(vt, s16 *, 0x90), 0);
+    obj = M2C_FIELD(self, char **, 0xC4);
+    vt = *(char **)obj;
+    M2C_FIELD(vt, void (**)(void *), 0x24)(obj + M2C_FIELD(vt, s16 *, 0x20));
+}
+
 s32 fn_80174A44(s32 *self) {
     extern void fn_802D211C(s32);
     if (self[6] != 0 && self[3] != 0) {
