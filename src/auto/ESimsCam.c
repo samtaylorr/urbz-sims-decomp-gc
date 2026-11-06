@@ -45,6 +45,12 @@ void fn_8000D48C(void *arg0) {
     M2C_FIELD(arg0, f32 *, 0x80) = (f32) M2C_FIELD(arg0, f32 *, 4);
 }
 
+s32 *fn_8000D4B4(s32 *self, s32 value) {
+    self[0] = 0;
+    self[1] = value;
+    return self;
+}
+
 void fn_8000D4C8(void *self, s32 flags) {
     if (flags & 1) {
         fn_802D20E8(self);
