@@ -310,19 +310,6 @@ static inline Pair8It Pair8_ItCopy(Pair8It first, Pair8It last, Pair8It result) 
     return result;
 }
 
-static inline Pair8It Pair8_CopyToIt(Pair8 *first, Pair8 *last, Pair8It result) {
-    s32 n;
-    for (n = last - first; n > 0; n--) {
-        s32 a = first->a;
-        s32 b = first->b;
-        result.p->a = a;
-        result.p->b = b;
-        first++;
-        result.p++;
-    }
-    return result;
-}
-
 static inline Pair8 *Pair8_UninitCopy(Pair8 *first, Pair8 *last, Pair8 *result) {
     for (; first != last; first++, result++) {
         result->a = first->a;
@@ -10832,18 +10819,29 @@ Pair8Vec *fn_803B50DC(Pair8Vec *self, Pair8Vec *x) {
             self->start = tmp;
             self->end = tmp + xlen;
         } else if ((u32)(self->finish - dst) >= xlen) {
+            Pair8 *d = dst;
             s32 k;
-            for (k = last - src; k > 0; k--) {
+            for (k = xlen; k > 0; k--) {
                 s32 a = src->a;
                 s32 b = src->b;
-                dst->a = a;
-                dst->b = b;
+                d->a = a;
+                d->b = b;
                 src++;
-                dst++;
+                d++;
             }
+            dst = d;
             Pair8_Destroy(dst, self->finish);
         } else {
-            Pair8_Copy(first, first + (self->finish - start), start);
+            Pair8 *s = first;
+            s32 k;
+            for (k = self->finish - dst; k > 0; k--) {
+                s32 a = s->a;
+                s32 b = s->b;
+                start->a = a;
+                start->b = b;
+                s++;
+                start++;
+            }
             Pair8_UninitCopy(x->start + (self->finish - self->start), x->finish, self->finish);
         }
         self->finish = self->start + xlen;
