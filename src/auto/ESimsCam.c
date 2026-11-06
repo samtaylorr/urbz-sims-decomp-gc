@@ -633,6 +633,24 @@ void fn_80012408(void *arg0) {
     }
 }
 
+void fn_800124A8(void *arg0) {
+    extern void *lbl_80494FCC;
+    void *mgr;
+    void *obj;
+
+    if (M2C_FIELD(arg0, s32 *, 0x23C) != 0 && M2C_FIELD(arg0, void **, 0x168) != NULL) {
+        if (fn_803338C0(lbl_80494FCC, M2C_FIELD(arg0, s32 *, 0x240)) != 0) {
+            mgr = lbl_80494FCC;
+            obj = fn_803338D0(mgr, fn_803338F0(mgr, M2C_FIELD(arg0, s32 *, 0x240)));
+            if (obj != NULL) {
+                fn_803115C0(obj, M2C_FIELD(arg0, s32 *, 0x23C));
+                M2C_FIELD(arg0, s32 *, 0x23C) = 0;
+                M2C_FIELD(arg0, s32 *, 0x240) = 0;
+            }
+        }
+    }
+}
+
 s32 fn_80013450(void *arg0, f32 arg1, s32 arg2, s32 arg3) {
     extern const f32 lbl_803C2118[];
     void fn_800134E4(void *);
