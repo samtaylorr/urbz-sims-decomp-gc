@@ -138,12 +138,12 @@ u32 fn_80129558(void) {
 }
 
 s32 fn_801295A4(void) {
-    NghResEntry *e;
+    s32 i;
     s32 sum;
 
     sum = 0;
-    for (e = lbl_803F66F0; e->a != 0; e++) {
-        sum += e->a;
+    for (i = 0; lbl_803F66F0[i].a != 0; i++) {
+        sum += lbl_803F66F0[i].a;
     }
     return sum;
 }
