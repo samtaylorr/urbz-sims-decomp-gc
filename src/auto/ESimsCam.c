@@ -173,6 +173,10 @@ s32 fn_80011F38(void *arg0) {
     return 1;
 }
 
+s32 fn_800120F4(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x160) == 1;
+}
+
 void fn_80012108(void *arg0, s32 arg1, s32 arg2) {
     M2C_UNK fn_80012148();
     if (((arg1 != 0) && ((s32) M2C_FIELD(arg0, s32 *, 0x168) != arg1)) || (arg2 != 0)) {
