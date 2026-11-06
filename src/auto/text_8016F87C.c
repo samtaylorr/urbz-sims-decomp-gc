@@ -290,6 +290,11 @@ void fn_80173B98(char *self, s32 a1) {
     M2C_FIELD(vt, void (**)(void *, s32, s32, s32), 0x6C)(self + M2C_FIELD(vt, s16 *, 0x68), 0x13, a1, 0);
 }
 
+void fn_80173BD8(char *self, s32 a1) {
+    void *vt = M2C_FIELD(self, void **, 0xBC);
+    M2C_FIELD(vt, void (**)(void *, s32, s32, s32), 0x6C)(self + M2C_FIELD(vt, s16 *, 0x68), 0x15, a1, 0);
+}
+
 s32 fn_80173DE0(char *arg0) {
     s32 fn_80173C58(char *);
     char *obj;
