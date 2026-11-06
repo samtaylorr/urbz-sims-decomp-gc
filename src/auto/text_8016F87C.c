@@ -447,24 +447,19 @@ void fn_80172464(s32 arg0) {
     fn_80174A98(arg0 + 0x18);
 }
 
-void fn_80172488(char *obj, s32 a, s32 b, s32 c) {
+s32 fn_80172488(char *obj, s32 a, s32 b, s32 c) {
     extern char *fn_80174E10(void *);
     char *vt;
     char *o;
-    void (*fn)(void *, s32, s32, s32);
     void *p = obj + 0xcc;
     s32 v = *(s32 *)p;
     if (v == *(s32 *)(obj + 4) || v == 0 || a == 0x35) {
         vt = *(char **)(obj + 0xbc);
-        o = obj + *(s16 *)(vt + 0x140);
-        fn = *(void (**)(void *, s32, s32, s32))(vt + 0x144);
-    } else {
-        o = fn_80174E10(p);
-        vt = *(char **)(o + 0xbc);
-        o = o + *(s16 *)(vt + 0x68);
-        fn = *(void (**)(void *, s32, s32, s32))(vt + 0x6c);
+        return (*(s32 (**)(void *, s32, s32, s32))(vt + 0x144))(obj + *(s16 *)(vt + 0x140), a, b, c);
     }
-    fn(o, a, b, c);
+    o = fn_80174E10(p);
+    vt = *(char **)(o + 0xbc);
+    return (*(s32 (**)(void *, s32, s32, s32))(vt + 0x6c))(o + *(s16 *)(vt + 0x68), a, b, c);
 }
 
 void *fn_8017252C(void *ret, char *obj, s32 id) {
