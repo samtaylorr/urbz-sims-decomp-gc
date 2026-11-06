@@ -155,6 +155,19 @@ f32 fn_8000DBE4(void *arg0) {
     return M2C_FIELD(temp_r11, f32 *, 0x2C) * t + M2C_FIELD(temp_r11, f32 *, 0x28) * (lbl_803C1EF8[0] - t);
 }
 
+void fn_8000DC30(void *arg0, f32 arg1) {
+    f32 temp_f11;
+    f32 temp_f13;
+    f32 temp_f10;
+    void *temp_r9;
+
+    temp_r9 = M2C_FIELD(arg0, void **, 8);
+    temp_f11 = M2C_FIELD(temp_r9, f32 *, 0x28);
+    temp_f10 = M2C_FIELD(temp_r9, f32 *, 4);
+    temp_f13 = M2C_FIELD(temp_r9, f32 *, 0x2C) - temp_f11;
+    M2C_FIELD(arg0, f32 *, 0x458) = ((arg1 - temp_f11) * (M2C_FIELD(temp_r9, f32 *, 8) - temp_f10) + temp_f10 * temp_f13) / temp_f13;
+}
+
 void fn_8000DC64(void *arg0) {
     s32 fn_80049B6C(void *);
     void fn_800108BC(void *, void *);
@@ -174,8 +187,8 @@ void fn_8000DC64(void *arg0) {
         v = buf;
         buf[0] = zero;
         v[1] = zero;
-        v[3] = one;
         v[2] = one;
+        v[3] = one;
         fn_802E22D0((u8 *)arg0 + 0x18, v);
     }
 }
@@ -226,10 +239,10 @@ void fn_8000E7F0(void *arg0, f32 arg1) {
     v = M2C_FIELD(arg0, f32 *, 0x458) - arg1;
     M2C_FIELD(arg0, f32 *, 0x458) = v;
     r = M2C_FIELD(t, f32 *, 4);
-    if (!(v < r)) {
-        r = v;
-        if (v > max) {
-            r = max;
+    if (v >= r) {
+        r = max;
+        if (v <= max) {
+            r = v;
         }
     }
     M2C_FIELD(arg0, f32 *, 0x458) = r;
@@ -270,22 +283,21 @@ s32 fn_80010228(char *self, Vec3 *pos) {
 }
 
 s32 fn_8001025C(char *self, Vec3 *pos, f32 minX, f32 minY, f32 maxX, f32 maxY) {
-    extern void fn_802E4030(void *, Vec3 *, void *);
-    struct { f32 x, y; } out;
-    s32 flags;
+    extern void fn_802E4030(void *, Vec3 *, f32 *);
+    f32 out[2];
+    s32 flags = 0;
 
-    fn_802E4030(self + 0x18, pos, &out);
-    flags = 0;
-    if (out.x < minX) {
+    fn_802E4030(self + 0x18, pos, &out[0]);
+    if (out[0] < minX) {
         flags = 1;
     }
-    if (out.x > maxX) {
+    if (out[0] > maxX) {
         flags |= 2;
     }
-    if (out.y < minY) {
+    if (out[1] < minY) {
         flags |= 4;
     }
-    if (out.y > maxY) {
+    if (out[1] > maxY) {
         flags |= 8;
     }
     return flags;
