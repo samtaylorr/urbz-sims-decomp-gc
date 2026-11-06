@@ -388,7 +388,7 @@ f32 fn_800111D4(void *arg0) {
     t = (M2C_FIELD(arg0, f32 *, 0x458) - lo) / (M2C_FIELD(temp_r9, f32 *, 8) - lo);
     a = lbl_8041E7B8[0x90 / 4];
     b = lbl_8041E7B8[0x94 / 4];
-    return t * (b - a) + a;
+    return (b - a) * t + a;
 }
 
 f32 fn_8001120C(void *arg0) {
@@ -607,6 +607,17 @@ char *fn_80014348(char *self, void *key) {
         }
     }
     return p;
+}
+
+void fn_80014860(void *arg0, s32 arg1) {
+    s32 fn_80049B6C(void *);
+    extern u8 lbl_8041F94C[];
+
+    if (arg1 == 1 && fn_80049B6C(lbl_8041F94C) == 0) {
+        M2C_FIELD(arg0, s32 *, 0x164) = arg1;
+    } else {
+        M2C_FIELD(arg0, s32 *, 0x164) = 0;
+    }
 }
 
 s32 fn_800148B8(void *arg0) {
