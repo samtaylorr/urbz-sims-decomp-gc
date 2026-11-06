@@ -15,13 +15,6 @@ extern void *fn_802DC3C0(void *, u32, s32, s32, s32);
 extern void *fn_802D0B3C(void);
 extern void *fn_80248488(void *, s32, u32);
 
-static inline void ESimsCam_InitState(char *p, s32 v) {
-    *(s32 *)(p + 0x28) = 0;
-    *(s32 *)(p + 0x20) = 0;
-    *(s32 *)(p + 0x24) = 0;
-    *(s32 *)(p + 0x1C) = v;
-}
-
 static inline void *ESimsCam_AllocAligned(u32 size) {
     void *heap;
     void *p;
@@ -383,24 +376,24 @@ f32 fn_80010C3C(Vec3f *arg0) {
     extern f32 lbl_803C1FDC[];
     Vec3f v;
     Vec3f *pv;
+    f32 len;
     f32 zero;
     f32 a;
-    f32 len;
 
     len = fn_8025FC40(arg0);
     if (len < lbl_803C1FD4[0]) {
-        return lbl_803C1FD8[0];
-    }
-    pv = &v;
-    v.x = arg0->x;
-    pv->z = arg0->z;
-    pv->y = arg0->y;
-    zero = lbl_803C1FD8[0];
-    v.z = zero;
-    a = fn_8025FC40(pv);
-    a = fn_80242ACC(a / len);
-    if (arg0->z > zero) {
-        a = lbl_803C1FDC[0] - a;
+        a = lbl_803C1FD8[0];
+    } else {
+        pv = &v;
+        v.x = arg0->x;
+        pv->y = arg0->y;
+        pv->z = arg0->z;
+        zero = lbl_803C1FD8[0];
+        v.z = zero;
+        a = fn_80242ACC(fn_8025FC40(pv) / len);
+        if (arg0->z > zero) {
+            a = lbl_803C1FDC[0] - a;
+        }
     }
     return a;
 }
