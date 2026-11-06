@@ -5,6 +5,17 @@ typedef struct ERCVec3 {
     f32 x, y, z;
 } ERCVec3;
 
+void fn_802F6278(void *, s32, s32);
+void fn_802F6618(void *);
+void fn_802F6700(void *, s32, s32);
+void fn_802F6670(void *);
+void fn_802F676C(void *, void *, void *);
+void fn_802F65CC(void *arg0) {
+    fn_802F6278(arg0, M2C_FIELD(arg0, s32 *, 0xC), M2C_FIELD(arg0, s32 *, 0x10));
+    fn_802F6618(arg0);
+    fn_802F6700(arg0, M2C_FIELD(arg0, s32 *, 0x4), M2C_FIELD(arg0, s32 *, 0x8));
+}
+
 void fn_802F7054(u8 *self, s32 flags) {
     extern void fn_8031EA2C(void *);
     extern void *fn_802D0AB8(void);
@@ -150,17 +161,15 @@ void fn_802FB8B0(char *self, void *src, s32 count) {
     (*(void (**)(char *))(vt + 0x2B4))(self + *(s16 *)(vt + 0x2B0));
 }
 
-void fn_802FBAA0(s32 *self) {
-    char *vt = (char *)self[0x68 / 4];
-    (*(void (**)(void *))(vt + 0x24))((char *)self + *(s16 *)(vt + 0x20));
+void fn_802FBAA0(char *self) {
+    char *vt = *(char **)(self + 0x68);
+    (*(void (**)())(vt + 0x24))(self + *(s16 *)(vt + 0x20));
 }
 
 void fn_802FBC20(char *self) {
-    void (*fn)(char *);
-    char *vt = *(char **)(self + 0x68);
-    s16 off = *(s16 *)(vt + 0x30);
-    fn = *(void (**)(char *))(vt + 0x34);
-    fn(self + off);
+    struct VEntry { s16 delta; s16 idx; void (*fn)(char *); };
+    struct VEntry *e = (struct VEntry *)(*(char **)(self + 0x68) + 0x30);
+    e->fn(self + e->delta);
 }
 
 void fn_802FBC54(void) {
@@ -211,6 +220,27 @@ s32 fn_802FC0DC(void) {
 
 void fn_802FC0E4(void) {
 
+}
+
+void fn_802FC0E8(char *self, s32 count, void *src) {
+    void *fn_802FEB4C(s32 *, void *, s32);
+    char *vt;
+    char *p;
+
+    if (count == 0) {
+        return;
+    }
+    src = fn_802FEB4C((s32 *)self, src, count << 6);
+    vt = *(char **)(self + 0x68);
+    (*(void (**)(char *, s32, s32))(vt + 0x2AC))(self + *(s16 *)(vt + 0x2A8), 0, 0xC);
+    M2C_FIELD(*(char **)self, s32 *, 0x4C) += count * 2;
+    vt = *(char **)(self + 0x68);
+    p = (*(char *(**)(char *, s32))(vt + 0x2A4))(self + *(s16 *)(vt + 0x2A0), 1);
+    *(void **)(p + 4) = src;
+    *(s8 *)p = 0x3C;
+    *(s16 *)(p + 2) = count;
+    vt = *(char **)(self + 0x68);
+    (*(void (**)(char *))(vt + 0x2B4))(self + *(s16 *)(vt + 0x2B0));
 }
 
 void fn_802FC2E8(char *self, s32 count, void *src) {
@@ -269,22 +299,21 @@ void fn_802FC904(u8 *self, s32 idx, s32 val) {
     vt = *(char **)(self + 0x68);
     (*(void (**)(void *, s32, s32))(vt + 0x2AC))(self + *(s16 *)(vt + 0x2A8), 1, 0);
     arr = self + 0x20;
-    *(s32 *)(arr + idx * 4) = val;
+    *(s32 *)(idx * 4 + arr) = val;
     *(s32 *)(self + 0x30) = 1;
 }
 
 void fn_802FC980(u8 *self, s32 unused, s32 n) {
     char *vt;
     s32 i;
-    s32 last;
     vt = *(char **)(self + 0x68);
     (*(void (**)(void *))(vt + 0xD4))(self + *(s16 *)(vt + 0xD0));
     for (i = 0; i < n; i++) {
         ((s32 *)(self + 0x20))[i] = i;
     }
-    last = n - 1;
-    if (last > *(s32 *)(self + 0x40)) {
-        *(s32 *)(self + 0x40) = last;
+    n--;
+    if (n > *(s32 *)(self + 0x40)) {
+        *(s32 *)(self + 0x40) = n;
     }
     *(s32 *)(self + 0x30) = 1;
 }
