@@ -361,6 +361,53 @@ void fn_80184F48(void *arg0) {
     }
 }
 
+s32 fn_8018540C(void *arg0) {
+    extern const f32 lbl_803DA840[];
+    return M2C_FIELD(arg0, f32 *, 0xD4) < lbl_803DA840[0];
+}
+
+s32 fn_80185428(void *arg0) {
+    struct VEntry { s16 delta; s16 index; void *(*fn)(void *); };
+    char *obj;
+    struct VEntry *e;
+    obj = M2C_FIELD(arg0, char **, 4);
+    e = (struct VEntry *)(M2C_FIELD(obj, char **, 4) + 0x120);
+    if (e->fn(obj + e->delta) != 0) {
+        return 0;
+    }
+    obj = M2C_FIELD(arg0, char **, 4);
+    e = (struct VEntry *)(M2C_FIELD(obj, char **, 4) + 0x128);
+    return M2C_FIELD(e->fn(obj + e->delta), s32 *, 4) == 2;
+}
+
+s32 fn_801854A8(void *arg0) {
+    struct VEntry { s16 delta; s16 index; void *(*fn)(void *); };
+    char *obj;
+    struct VEntry *e;
+    obj = M2C_FIELD(arg0, char **, 4);
+    e = (struct VEntry *)(M2C_FIELD(obj, char **, 4) + 0x120);
+    if (e->fn(obj + e->delta) != 0) {
+        return 0;
+    }
+    obj = M2C_FIELD(arg0, char **, 4);
+    e = (struct VEntry *)(M2C_FIELD(obj, char **, 4) + 0x128);
+    return M2C_FIELD(e->fn(obj + e->delta), s32 *, 4) == 3;
+}
+
+s32 fn_80185528(void *arg0) {
+    struct VEntry { s16 delta; s16 index; void *(*fn)(void *); };
+    char *obj;
+    struct VEntry *e;
+    obj = M2C_FIELD(arg0, char **, 4);
+    e = (struct VEntry *)(M2C_FIELD(obj, char **, 4) + 0x120);
+    if (e->fn(obj + e->delta) != 0) {
+        return 0;
+    }
+    obj = M2C_FIELD(arg0, char **, 4);
+    e = (struct VEntry *)(M2C_FIELD(obj, char **, 4) + 0x128);
+    return M2C_FIELD(e->fn(obj + e->delta), s32 *, 4) == 4;
+}
+
 void fn_80185868(void) {
 
 }
