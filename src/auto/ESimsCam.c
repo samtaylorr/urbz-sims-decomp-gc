@@ -509,7 +509,9 @@ s32 fn_80011450(void *arg0) {
         if (M2C_FIELD(r, s32 *, 0x44) != 0 || M2C_FIELD(r, s32 *, 0x48) != 0) {
             b = 1;
         }
-        return b != 0;
+        if (b != 0) {
+            return 1;
+        }
     }
     return 0;
 }
