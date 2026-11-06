@@ -17,6 +17,13 @@ static inline Vec3f *Vec3f_Splat(Vec3f *v, f32 s) {
     return v;
 }
 
+static inline void Vec3f_SplatCopy(Vec3f *dst, Vec3f *tmp, f32 s) {
+    tmp->z = s;
+    tmp->y = s;
+    tmp->x = s;
+    *dst = *tmp;
+}
+
 void fn_802D2FD0(void);
 extern s32 lbl_804961C4;
 extern void fn_802EFBA8(void *);
@@ -717,19 +724,21 @@ extern const f32 lbl_803F0CF4[];
 
 void fn_802EF220(void *arg0) {
     struct { Vec3f min; Vec3f max; } box;
-    f32 lo;
+    Vec3f t = { lbl_803F0CEC[0], lbl_803F0CEC[0], lbl_803F0CEC[0] };
+    Vec3f *p;
+    f32 lo = lbl_803F0CF0[0];
     f32 hi;
-    {
-        Vec3f t0 = { lbl_803F0CEC[0], lbl_803F0CEC[0], lbl_803F0CEC[0] };
-        lo = lbl_803F0CF0[0];
-        box.min = box.max = t0;
-    }
+    box.min = box.max = t;
     hi = lbl_803F0CF4[0];
-    {
-        Vec3f t;
-        box.min = *Vec3f_Splat(&t, lo);
-        box.max = *Vec3f_Splat(&t, hi);
-    }
+    p = &t;
+    p->z = lo;
+    p->y = lo;
+    p->x = lo;
+    box.min = *p;
+    p->z = hi;
+    p->y = hi;
+    p->x = hi;
+    box.max = *p;
     fn_802F09B8(arg0, &box);
 }
 
