@@ -263,7 +263,7 @@ s32 fn_80171124(char *arg0) {
         }
         return 0;
     }
-    M2C_FIELD(arg0, s32 *, 0x10)--;
+    return --M2C_FIELD(arg0, s32 *, 0x10);
 }
 
 s32 fn_80171678(char *arg0) {
