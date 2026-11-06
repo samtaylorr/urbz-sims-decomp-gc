@@ -3462,7 +3462,7 @@ void fn_8020A500(u8 *arg0) {
     s32 zero;
 
     fn_800F1B80(arg0 + 0xAC, (h1 = fn_8004C168(lbl_8041F94C, lbl_803E718C)).p != NULL ? (void *)*h1.p : NULL);
-    INV_setStrT(arg0 + 0xB4, lbl_8041F94C, lbl_803E70E8);
+    INV_setStr(arg0 + 0xB4, lbl_803E70E8);
     fn_800F1B80(arg0 + 0xB8, (h3 = fn_8004C168(lbl_8041F94C, lbl_803E70EC)).p != NULL ? (void *)*h3.p : NULL);
     fn_800F1B80(arg0 + 0xBC, lbl_803E6F74);
     zero = 0;
@@ -3905,12 +3905,8 @@ void fn_8021CCC0(u8 *arg0) {
     extern u8 lbl_803E9D7C[];
     Handle h;
     void *dst;
-    u8 *name;
-    s32 t;
 
-    t = fn_8020DD5C(*(s32 *)(arg0 + 0x10C));
-    name = lbl_8041F94C;
-    switch (t) {
+    switch (fn_8020DD5C(*(s32 *)(arg0 + 0x10C))) {
     case 0:
     case 1:
     case 2:
@@ -3919,7 +3915,7 @@ void fn_8021CCC0(u8 *arg0) {
     case 5:
     case 6:
     case 7:
-        h = fn_8004C168(name, lbl_803E9E48);
+        h = fn_8004C168(lbl_8041F94C, lbl_803E9E48);
         dst = arg0 + 0xAC;
         fn_800F1B80(dst, h.p != NULL ? (void *)*h.p : NULL);
         break;
@@ -4197,6 +4193,47 @@ s32 fn_80225554(s32 *self) {
 
 s32 fn_80229F5C(void *arg0) {
     return (s32) ((M2C_FIELD(arg0, s32 *, 0x70) - M2C_FIELD(arg0, s32 *, 0x6C)) * 0xB6DB6DB7) >> 3;
+}
+
+extern u8 *lbl_80496654;
+extern void fn_801910C8(void *, s32, u16 **, void *, void *, void *);
+s32 fn_8022CC90(s32 arg0) {
+    typedef struct { s16 delta; s16 idx; s32 (*fn)(void *, s32); } VtEnt;
+    typedef struct { s16 delta; s16 idx; void (*fn)(void *, void *, s32); } VtEnt2;
+    extern u8 *lbl_80496658;
+    extern u8 *lbl_80496654;
+    extern s32 fn_801A08DC(void *, s32);
+    extern void fn_801A0858(void *, s32);
+    u8 *obj = lbl_80496658;
+    s32 ret;
+    u8 buf[0x38];
+    u16 *a;
+    s32 b;
+    s32 c;
+    s32 d;
+
+    {
+        VtEnt *e = (VtEnt *)(*(u8 **)obj + 0xD8);
+        ret = e->fn(obj + e->delta, arg0);
+    }
+    if (lbl_80496654 == NULL) {
+        return 0;
+    }
+    if (ret == 0xFFFB) {
+        ((void *(*)(void *, s32, u16 **, void *, void *, void *))fn_801910C8)(lbl_80496654, arg0, &a, &b, &c, &d);
+        {
+            VtEnt2 *e = (VtEnt2 *)(*(u8 **)obj + 0xA8);
+            e->fn(buf, obj + e->delta, arg0);
+        }
+        if (fn_801A08DC(buf, 0x20) == 0) {
+            fn_801A08DC(buf, 0x10);
+            ret = *a;
+        } else {
+            ret = *a;
+        }
+        fn_801A0858(buf, 2);
+    }
+    return ret;
 }
 
 void fn_8022D168(s32 arg0) {
