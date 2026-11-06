@@ -49,21 +49,14 @@ char *fn_8000CA9C(char *self, s32 arg1, s32 arg2, char *arg3) {
     f32 x, y, z;
 
     *(s32 *)(self + 0x4) = *(s32 *)(arg3 + 0x0);
-    x = *(f32 *)(arg3 + 0x8);
-    y = *(f32 *)(arg3 + 0xC);
     z = *(f32 *)(arg3 + 0x10);
+    y = *(f32 *)(arg3 + 0xC);
+    x = *(f32 *)(arg3 + 0x8);
     dst->x = x;
     dst->z = z;
     dst->y = y;
     *(s32 *)(self + 0x0) = arg2;
-    {
-        char *p = self;
-        s32 v = arg1;
-        *(s32 *)(p + 0x28) = 0;
-        *(s32 *)(p + 0x20) = 0;
-        *(s32 *)(p + 0x24) = 0;
-        *(s32 *)(p + 0x1C) = v;
-    }
+    ESimsCam_InitState(self, arg1);
     fn_803374C8(lbl_8045BBA0);
     fn_8000CB1C(self);
     return self;
@@ -390,8 +383,9 @@ f32 fn_80010C3C(Vec3f *arg0) {
     extern f32 lbl_803C1FDC[];
     Vec3f v;
     Vec3f *pv;
-    f32 len;
+    f32 zero;
     f32 a;
+    f32 len;
 
     len = fn_8025FC40(arg0);
     if (len < lbl_803C1FD4[0]) {
@@ -401,9 +395,11 @@ f32 fn_80010C3C(Vec3f *arg0) {
     v.x = arg0->x;
     pv->z = arg0->z;
     pv->y = arg0->y;
-    v.z = lbl_803C1FD8[0];
-    a = fn_80242ACC(fn_8025FC40(pv) / len);
-    if (arg0->z > lbl_803C1FD8[0]) {
+    zero = lbl_803C1FD8[0];
+    v.z = zero;
+    a = fn_8025FC40(pv);
+    a = fn_80242ACC(a / len);
+    if (arg0->z > zero) {
         a = lbl_803C1FDC[0] - a;
     }
     return a;
@@ -699,19 +695,20 @@ void fn_80012534(void *arg0, void *arg1, void *arg2) {
             M2C_FIELD(arg0, void **, 0x11C) = (u8 *)arg0 + 0x120;
         }
         M2C_FIELD(arg0, f32 *, 0x224) = lbl_803C20E8[0];
+        M2C_FIELD(arg0, s32 *, 0x228) = 1;
         M2C_FIELD(arg0, s32 *, 0x160) = 1;
         M2C_FIELD(arg0, s32 *, 0x218) = 0;
-        M2C_FIELD(arg0, s32 *, 0x228) = 1;
         fn_80012408(arg0);
     }
 }
 
 s32 fn_800132EC(void *arg0) {
-    if (M2C_FIELD(arg0, s32 *, 0x230) != 2 && !((M2C_FIELD(arg0, u32 *, 0x238) ^ 1) & 1)) {
-        return 0;
+    s32 ok = 0;
+    if (M2C_FIELD(arg0, s32 *, 0x230) == 2 || ((M2C_FIELD(arg0, u32 *, 0x238) ^ 1) & 1)) {
+        fn_80012288(arg0);
+        ok = 1;
     }
-    fn_80012288(arg0);
-    return 1;
+    return ok;
 }
 
 s32 fn_80013450(void *arg0, f32 arg1, s32 arg2, s32 arg3) {
