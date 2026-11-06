@@ -125,7 +125,6 @@ static inline s32 NghResFile_NameTaken(char *name) {
 void fn_801292D0(void *arg0, s32 arg1) {
     void fn_801289D4(void *);
     void fn_800ECE40(char *, s32);
-    s32 fn_800EF6F8(char *);
     s32 fn_800EE424(s32);
     void fn_80245BB4(char *, char *, ...);
     void fn_800ECF20(char *, char *);
@@ -138,10 +137,12 @@ void fn_801292D0(void *arg0, s32 arg1) {
     fn_801289D4(arg0);
     fn_800ECE40(name, arg1);
     i = 0;
-    while (({ char *p = name; s32 r; if (fn_800EF6F8(p) == 0) { r = 1; } else { r = fn_80129270((s32)p) != 0; } r; })) {
+loop:
+    if (NghResFile_NameTaken(name)) {
         fn_80245BB4(buf, lbl_803D8710, fn_800EE424(arg1), i);
         i++;
         fn_800ECF20((char *)arg0 + 0x10, buf);
+        goto loop;
     }
     fn_801289C4(arg0);
 }
@@ -938,7 +939,16 @@ typedef struct NghResHandler {
 } NghResHandler;
 
 s32 fn_8012FAD0(void *self, s32 id, void *out) {
-    return 0;
+    NghResHandler *p;
+    s32 found = 0;
+    for (p = M2C_FIELD(self, NghResHandler **, 0x14); p < M2C_FIELD(self, NghResHandler **, 0x18); p++) {
+        if (p->id == id) {
+            found = 1;
+            *(NghResHandler *)out = *p;
+            break;
+        }
+    }
+    return found;
 }
 
 void fn_8012FB50(void *self, s32 id, void *a, void *b) {
