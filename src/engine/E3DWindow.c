@@ -74,11 +74,12 @@ void fn_802E3EF4(void) {
 }
 
 void fn_802E4608(void *arg0, f32 *arg1, f32 *arg2) {
-    extern f32 lbl_803F0890;
+    extern f32 lbl_803F0890[];
     f32 a = M2C_FIELD(arg0, f32 *, 0x188);
     f32 b = M2C_FIELD(arg0, f32 *, 0x198);
-    *arg1 = -(a * b + b) / (lbl_803F0890 - a * a);
-    *arg2 = b / (a + lbl_803F0890);
+    f32 one = lbl_803F0890[0];
+    *arg1 = -(a * b + b) / (one - a * a);
+    *arg2 = b / (a + one);
 }
 
 void fn_802E463C(void *arg0, f32 *arg1, f32 *arg2) {
