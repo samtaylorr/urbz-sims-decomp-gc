@@ -413,8 +413,8 @@ Vec3f *fn_80010DAC(Vec3f *out, void *arg1) {
     }
     v.z = M2C_FIELD(M2C_FIELD(arg1, void **, 8), f32 *, 0x54);
     out->x = v.x;
-    out->z = pv->z;
     out->y = pv->y;
+    out->z = pv->z;
     return out;
 }
 
