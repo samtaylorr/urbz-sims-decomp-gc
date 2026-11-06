@@ -335,8 +335,8 @@ void fn_8012C388(void *arg0, s32 arg1, s32 arg2) {
 }
 
 s32 fn_8012C39C(void *arg0, s32 arg1) {
-    s32 *vals = (s32 *)((char *)arg0 + 0x188);
-    return *(s32 *)((char *)vals + (arg1 - 1) * 4);
+    struct { u8 pad[0x188]; s32 vals[4]; } *self = arg0;
+    return self->vals[arg1 - 1];
 }
 
 u16 fn_8012C3B0(void *arg0, s32 arg1) {
