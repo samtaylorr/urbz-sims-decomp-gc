@@ -208,6 +208,39 @@ f32 fn_802E71B4(void *arg0, void *arg1, s32 arg2) {
     return fn_8025FC40(v);
 }
 
+f32 fn_802E7618(void *arg0, void *arg1) {
+    extern const f32 lbl_803F0A04[];
+    f32 fn_802E751C(void *, void *);
+    f32 a = ((f32 (*)(void *, void *))fn_802E71B4)(arg0, arg1);
+    f32 b = fn_802E751C(arg0, arg1);
+    if (b == lbl_803F0A04[0]) {
+        return lbl_803F0A04[0];
+    }
+    return a / b;
+}
+
+s32 fn_802E767C(void *arg0) {
+    s32 idx = M2C_FIELD(arg0, s32 *, 4);
+    u32 i;
+    if (idx != -1) {
+        s32 valid = M2C_FIELD(M2C_FIELD(arg0, char **, 0x40) + idx * 0xB0, void **, 0x7C) != NULL;
+        if (valid) {
+            return idx;
+        }
+    }
+    for (i = 0; i < M2C_FIELD(arg0, u32 *, 0x6C); i++) {
+        s32 j = M2C_FIELD(arg0, s8 **, 0x70)[i];
+        char *win = M2C_FIELD(arg0, char **, 0x40) + j * 0xB0;
+        if (M2C_FIELD(win, s32 *, 0xA8) != 0) {
+            s32 valid = M2C_FIELD(win, void **, 0x7C) != NULL;
+            if (valid) {
+                return j;
+            }
+        }
+    }
+    return -1;
+}
+
 void fn_802E7720(void *arg0) {
     s32 temp_r0;
     s32 var_ctr;
