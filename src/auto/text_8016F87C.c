@@ -321,6 +321,12 @@ void fn_80174028(void *self) {
     (*(void (**)(void *))(vt + 0xCC))(obj + *(s16 *)(vt + 0xC8));
 }
 
+void fn_80174060(char *self) {
+    char *obj = *(char **)(self + 0xC8);
+    char *vt = *(char **)(obj + 0xBC);
+    (*(void (**)(char *))(vt + 0xF4))(obj + *(s16 *)(vt + 0xF0));
+}
+
 void fn_80174098(char *arg0) {
     char *obj = M2C_FIELD(arg0, char **, 0xC8);
     void *vt = M2C_FIELD(obj, void **, 0xBC);
