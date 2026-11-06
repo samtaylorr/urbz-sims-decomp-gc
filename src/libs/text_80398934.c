@@ -1688,6 +1688,12 @@ void fn_8039BB90(void) {
     fn_8018EA6C();
 }
 
+void fn_8039BBB0(void *self) {
+    u8 *obj = *(u8 **)((u8 *)self + 4);
+    u8 *vt = *(u8 **)obj;
+    (*(void (**)(void *))(vt + 0x9C))(obj + *(s16 *)(vt + 0x98));
+}
+
 s32 fn_8039BBE8(s32 *self) {
     return self[2];
 }
