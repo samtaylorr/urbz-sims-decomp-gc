@@ -127,20 +127,13 @@ void fn_801292D0(void *arg0, s32 arg1) {
     extern char lbl_803D8710[];
     char buf[0x200];
     char *name;
-    char *p;
     s32 i;
-    s32 used;
 
     name = (char *)arg0 + 0x10;
     fn_801289D4(arg0);
-    p = name;
     fn_800ECE40(name, arg1);
     i = 0;
-    for (;;) {
-        used = fn_800EF6F8(p) == 0 || fn_80129270((s32)p) != 0;
-        if (!used) {
-            break;
-        }
+    while (({ char *p = name; s32 r; if (fn_800EF6F8(p) == 0) { r = 1; } else { r = fn_80129270((s32)p) != 0; } r; })) {
         fn_80245BB4(buf, lbl_803D8710, fn_800EE424(arg1), i);
         i++;
         fn_800ECF20((char *)arg0 + 0x10, buf);
@@ -402,7 +395,8 @@ void fn_8012A63C(void *arg0) {
     void **next;
     void *res;
 
-    for (p = arg0; p != NULL; p = next) {
+    next = arg0;
+    while ((p = next) != NULL) {
         next = (void **)*p;
         if (p != NULL) {
             res = p[1];
