@@ -333,6 +333,16 @@ void fn_80174098(char *arg0) {
     M2C_FIELD(vt, void (**)(void *), 0xFC)(obj + M2C_FIELD(vt, s16 *, 0xF8));
 }
 
+s32 fn_801740D0(char *self) {
+    extern void fn_80174B98(void *, s32, s32);
+    extern char lbl_80435040[];
+    char *p = self + 0x18;
+    fn_80174B98(p, 0x1F, 0x11);
+    M2C_FIELD(p, s32 *, 0x10) = 0;
+    M2C_FIELD(p, char **, 0x14) = lbl_80435040;
+    return 1;
+}
+
 s32 fn_80174314(char *arg0) {
     void fn_80174BFC(void *);
     void *vt = M2C_FIELD(arg0, void **, 0xBC);
