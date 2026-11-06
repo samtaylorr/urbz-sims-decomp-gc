@@ -34,6 +34,14 @@ static inline void *ESimsCam_AllocAligned(u32 size) {
     return p;
 }
 
+void fn_8000D458(void *self, s32 flags) {
+    extern u8 lbl_80406CC8[];
+    M2C_FIELD(self, void **, 0x18C) = lbl_80406CC8;
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_8000D48C(void *arg0) {
     f32 temp_f13;
 
