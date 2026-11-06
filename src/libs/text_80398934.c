@@ -1783,6 +1783,20 @@ void fn_8039BDFC(s32 self, s32 flags) {
     }
 }
 
+void fn_8039BE3C(s32 **self) {
+    s32 n = (s32)self[1];
+    s32 *p = self[0];
+
+    while (n--) {
+        void *obj = (void *)*p++;
+        if (obj != NULL) {
+            char *vt = *(char **)obj;
+            (*(void (**)(void *, s32))(vt + 0x34))((char *)obj + *(s16 *)(vt + 0x30), 3);
+        }
+    }
+    fn_8039BDB0(self);
+}
+
 void fn_8039BEB0(s32 *self, s32 n) {
     while (--n != -1) {
         self++;
@@ -2027,12 +2041,29 @@ void fn_8039C584(void **self, s32 flags) {
     }
 }
 
-void fn_8039C6D0(s32 *first, s32 *last, Comp4 *comp) {
-    Comp4_make_heap(first, last, *comp);
+void fn_8039C6D0(s32 *first, s32 *last, Comp4 comp) {
+    Comp4 c = comp;
+    s32 len = last - first;
+    s32 parent;
+
+    if (len < 2) {
+        return;
+    }
+    parent = (len - 2) / 2;
+    while (1) {
+        fn_8039C5B8(first, parent, len, first[parent], c);
+        if (parent == 0) {
+            return;
+        }
+        parent--;
+    }
 }
 
-void fn_8039C75C(s32 *first, s32 *last, Comp4 *comp) {
-    Comp4_pop_heap_outer(first, last, *comp);
+void fn_8039C75C(s32 *first, s32 *last, Comp4 comp) {
+    s32 *result = last - 1;
+    s32 val = *result;
+    *result = *first;
+    fn_8039C5B8(first, 0, result - first, val, comp);
 }
 
 void fn_8039C5B8(s32 *first, s32 hole, s32 len, s32 val, Comp4 comp);
@@ -10707,10 +10738,10 @@ void fn_803B4DFC(void *arg0, u32 n) {
 Pair8Vec *fn_803B50DC(Pair8Vec *self, Pair8Vec *x) {
     if (x != self) {
         Pair8 *first = x->start;
-        register Pair8 *start asm("r11") = self->start;
+        Pair8 *start = self->start;
         Pair8 *last = x->finish;
-        register Pair8 *src asm("r10") = first;
-        register Pair8 *dst asm("r7") = start;
+        Pair8 *src = first;
+        Pair8 *dst = start;
         u32 xlen = last - first;
         if (xlen > (u32)(self->end - start)) {
             Pair8 *tmp;
@@ -10732,16 +10763,15 @@ Pair8Vec *fn_803B50DC(Pair8Vec *self, Pair8Vec *x) {
             self->end = tmp + xlen;
         } else if ((u32)(self->finish - dst) >= xlen) {
             s32 k;
-            start = dst;
             for (k = last - src; k > 0; k--) {
                 s32 a = src->a;
                 s32 b = src->b;
-                start->a = a;
-                start->b = b;
+                dst->a = a;
+                dst->b = b;
                 src++;
-                start++;
+                dst++;
             }
-            Pair8_Destroy(start, self->finish);
+            Pair8_Destroy(dst, self->finish);
         } else {
             Pair8_Copy(first, first + (self->finish - start), start);
             Pair8_UninitCopy(x->start + (self->finish - self->start), x->finish, self->finish);
