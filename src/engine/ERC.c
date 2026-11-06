@@ -24,6 +24,31 @@ void fn_802F6618(void *arg0) {
     }
 }
 
+void fn_802F6670(void *arg0) {
+    void *obj;
+    void *vt;
+    u8 sp8[8];
+
+    obj = M2C_FIELD(arg0, void **, 0x1C);
+    if (obj != NULL) {
+        vt = M2C_FIELD(obj, void **, 0);
+        M2C_FIELD(vt, void (**)(void *, void *, void *, void *, void *), 0x134)((char *)obj + M2C_FIELD(vt, s16 *, 0x130), arg0, (char *)arg0 + 0xC, arg0, (char *)arg0 + 0x10);
+    }
+    obj = M2C_FIELD(arg0, void **, 0x3C);
+    if (obj != NULL) {
+        vt = M2C_FIELD(obj, void **, 0);
+        M2C_FIELD(vt, void (**)(void *, void *, void *, void *, void *), 0x134)((char *)obj + M2C_FIELD(vt, s16 *, 0x130), (char *)arg0 + 0x20, (char *)arg0 + 0x2C, sp8, (char *)arg0 + 0x30);
+    }
+}
+
+void fn_802F6700(void *arg0, s32 start, s32 end) {
+    s32 i;
+
+    for (i = start; i < end; i++) {
+        fn_802F676C(arg0, (char *)arg0 + 0x14 + i * 0x20, (char *)arg0 + 0x4014 + i * 0x20);
+    }
+}
+
 void fn_802F7054(u8 *self, s32 flags) {
     extern void fn_8031EA2C(void *);
     extern void *fn_802D0AB8(void);
