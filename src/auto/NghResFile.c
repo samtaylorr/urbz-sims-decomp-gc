@@ -122,14 +122,14 @@ s32 fn_80129550(void) {
 
 u32 fn_80129558(void) {
     extern u32 lbl_8049445C;
-    NghResEntry *e;
+    s32 i;
     u32 max;
 
     if (lbl_8049445C == (u32)-1) {
         max = 0;
-        for (e = lbl_803F66F0; e->a != 0; e++) {
-            if (max < (u32)e->b) {
-                max = e->b;
+        for (i = 0; lbl_803F66F0[i].a != 0; i++) {
+            if (max < (u32)lbl_803F66F0[i].b) {
+                max = lbl_803F66F0[i].b;
             }
         }
         lbl_8049445C = max;
@@ -588,18 +588,20 @@ s32 fn_8012D438(void *self, char *buf) {
     return 1;
 }
 
-void fn_8012DF54(void *self, u32 idx) {
+void fn_8012DF54(void *self, s32 idx) {
     void fn_8012A63C(void *);
-    void **tbl = (void **)((char *)self + 0x140);
+    void **tbl;
 
-    fn_8012A63C(M2C_FIELD(tbl[idx - 1], void **, 8));
-    M2C_FIELD(tbl[idx - 1], void **, 8) = NULL;
-    fn_8012A63C(M2C_FIELD(tbl[idx - 1], void **, 0xC));
-    M2C_FIELD(tbl[idx - 1], void **, 0xC) = NULL;
-    fn_8012A63C(M2C_FIELD(tbl[idx - 1], void **, 0x10));
-    M2C_FIELD(tbl[idx - 1], void **, 0x10) = NULL;
-    fn_8012A63C(M2C_FIELD(tbl[idx - 1], void **, 0x14));
-    M2C_FIELD(tbl[idx - 1], void **, 0x14) = NULL;
+    idx--;
+    tbl = (void **)((char *)self + 0x140);
+    fn_8012A63C(M2C_FIELD(idx[tbl], void **, 8));
+    M2C_FIELD(idx[tbl], void **, 8) = NULL;
+    fn_8012A63C(M2C_FIELD(idx[tbl], void **, 0xC));
+    M2C_FIELD(idx[tbl], void **, 0xC) = NULL;
+    fn_8012A63C(M2C_FIELD(idx[tbl], void **, 0x10));
+    M2C_FIELD(idx[tbl], void **, 0x10) = NULL;
+    fn_8012A63C(M2C_FIELD(idx[tbl], void **, 0x14));
+    M2C_FIELD(idx[tbl], void **, 0x14) = NULL;
 }
 
 void fn_8012DFD8(void *self) {
@@ -617,7 +619,7 @@ s32 fn_8012E01C(void *self, s32 idx) {
     idx--;
     tbl = (void **)((char *)self + 0x140);
     ret = 1;
-    if (M2C_FIELD(tbl[idx], s32 *, 8) == 0) {
+    if (M2C_FIELD(idx[tbl], s32 *, 8) == 0) {
         ret = 0;
     }
     return ret;
