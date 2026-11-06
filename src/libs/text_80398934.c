@@ -310,6 +310,19 @@ static inline Pair8It Pair8_ItCopy(Pair8It first, Pair8It last, Pair8It result) 
     return result;
 }
 
+static inline Pair8It Pair8_CopyToIt(Pair8 *first, Pair8 *last, Pair8It result) {
+    s32 n;
+    for (n = last - first; n > 0; n--) {
+        s32 a = first->a;
+        s32 b = first->b;
+        result.p->a = a;
+        result.p->b = b;
+        first++;
+        result.p++;
+    }
+    return result;
+}
+
 static inline Pair8 *Pair8_UninitCopy(Pair8 *first, Pair8 *last, Pair8 *result) {
     for (; first != last; first++, result++) {
         result->a = first->a;
@@ -3690,7 +3703,7 @@ void **fn_803A0A44(void **self, void **other) {
             if (xlen != 0) {
                 register u32 size asm("r0");
                 size = xlen * 4;
-                bytes = xlen * 4;
+                bytes = size;
                 if (size > 0x80) {
                     size = 0;
                     tmp = (void **)fn_802D1FC8(bytes);
