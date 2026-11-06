@@ -19,6 +19,16 @@ void fn_801289C4(M2C_UNK *arg0) {
 }
 
 void fn_801289D4(void *arg0) {
+    extern M2C_UNK *lbl_80494448;
+    void **pp = (void **)&lbl_80494448;
+
+    while (*pp != NULL) {
+        if (*pp == arg0) {
+            *pp = *(void **)*pp;
+            return;
+        }
+        pp = (void **)*pp;
+    }
 }
 
 void fn_80128CEC(void *arg0, s32 arg1) {
@@ -626,12 +636,12 @@ void fn_8012DFD8(void *self) {
 }
 
 s32 fn_8012E01C(void *self, s32 idx) {
-    char *tbl;
+    void **tbl;
     s32 ret;
 
-    tbl = (char *)self + 0x140;
+    tbl = (void **)((char *)self + 0x140);
     ret = 1;
-    if (M2C_FIELD(((void **)tbl)[idx - 1], s32 *, 8) == 0) {
+    if (M2C_FIELD(*(tbl + (idx - 1)), s32 *, 8) == 0) {
         ret = 0;
     }
     return ret;
@@ -658,9 +668,8 @@ s32 fn_8012E44C(void *self) {
     if (ret == 1) {
         ret = fn_8012CA90(self, 0);
     }
-    obj = lbl_80494FCC;
-    vt = M2C_FIELD(obj, char **, 0x20);
-    (*(void (**)(void *))(vt + 0x2C))(obj + *(s16 *)(vt + 0x28));
+    vt = M2C_FIELD(lbl_80494FCC, char **, 0x20);
+    (*(void (**)(void *))(vt + 0x2C))(lbl_80494FCC + *(s16 *)(vt + 0x28));
     return ret;
 }
 
