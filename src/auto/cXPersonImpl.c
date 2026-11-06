@@ -77,23 +77,22 @@ void *fn_80176580(void *arg0) {
     s32 n;
 
     p = arg0;
-    for (n = 9; n >= 0; n--) {
+    for (n = 9; n != -1; n--) {
         fn_80116904(p);
         p = (u8 *)p + 0x58;
     }
     M2C_FIELD(arg0, s32 *, 0x374) = 0;
-    M2C_FIELD(arg0, u8 *, 0x378) = 1;
     M2C_FIELD(arg0, s32 *, 0x370) = 0;
+    M2C_FIELD(arg0, u8 *, 0x378) = 1;
     return arg0;
 }
 
 s32 fn_801765E0(void *arg0) {
     s32 fn_80176904(void *, void *);
-    s32 n;
     s16 last;
     u32 i;
+    u32 n;
     void *e;
-    s32 v;
 
     last = 0;
     i = 0;
@@ -102,10 +101,10 @@ s32 fn_801765E0(void *arg0) {
         do {
             e = arg0 + (((M2C_FIELD(arg0, u32 *, 0x370) + i) % 10U) * 0x58);
             if (fn_80176904(arg0, e) != 0) {
-                v = M2C_FIELD(e, s32 *, 0x40);
+                s32 v = M2C_FIELD(e, s32 *, 0x40);
                 if (last != v) {
-                    last = v;
                     n++;
+                    last = v;
                 }
             }
             i++;
