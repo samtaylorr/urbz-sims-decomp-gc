@@ -1,8 +1,40 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+void fn_802F7054(u8 *self, s32 flags) {
+    extern void fn_8031EA2C(void *);
+    extern void *fn_802D0AB8(void);
+    extern void fn_802D1A00(void *, void *);
+    extern void fn_802D20E8(void *);
+    if (*(void **)(self + 0x44) != NULL) {
+        fn_8031EA2C(*(void **)(self + 0x44));
+        *(void **)(self + 0x44) = NULL;
+    }
+    fn_802D1A00(fn_802D0AB8(), *(void **)(self + 0x34));
+    {
+        void *p = *(void **)(self + 0x40);
+        fn_802D1A00(fn_802D0AB8(), p);
+    }
+    {
+        void *q = *(void **)(self + 0x3C);
+        fn_802D1A00(fn_802D0AB8(), q);
+    }
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_802F70D4(void *arg0, s8 arg1) {
     M2C_FIELD(arg0, s8 *, 0x38) = arg1;
+}
+
+f32 *fn_802F70DC(f32 *out, u8 *obj, s32 idx) {
+    struct ERCVec { f32 x, y, z; };
+    struct ERCVec *p = &((struct ERCVec *)(obj + 4))[idx];
+    out[0] = p->x;
+    out[1] = p->y;
+    out[2] = p->z;
+    return out;
 }
 
 void fn_802F7104(u8 *self, s32 idx, void *src) {
