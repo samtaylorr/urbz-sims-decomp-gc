@@ -387,6 +387,13 @@ void fn_8012ACB0(void *arg0, s32 arg1) {
 }
 
 void fn_8012ADB4(void *arg0) {
+    void fn_8012A63C(void *);
+    s32 i;
+
+    for (i = 0; i < 4; i++) {
+        fn_8012A63C(M2C_FIELD(arg0, void ***, 0x13C)[i]);
+        M2C_FIELD(arg0, void ***, 0x13C)[i] = NULL;
+    }
 }
 
 void fn_8012AE08(void *arg0) {
