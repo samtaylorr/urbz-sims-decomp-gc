@@ -384,6 +384,19 @@ void fn_80174E84(s32 *self, s32 value) {
     *self = value;
 }
 
+void *fn_80174E8C(void *arg0) {
+    M2C_UNK fn_80248488(void *, s32, s32);
+    char *a = (char *)arg0 + 0x104;
+    char *b = (char *)arg0 + 0x110;
+    M2C_FIELD(a, s32 *, 4) = 0;
+    M2C_FIELD(a, s32 *, 8) = 0;
+    M2C_FIELD(b, s32 *, 4) = 0;
+    M2C_FIELD(b, s32 *, 8) = 0;
+    fn_80248488(arg0, 0, 0x100);
+    M2C_FIELD(arg0, s32 *, 0x100) = 0;
+    return arg0;
+}
+
 void fn_80175678(void **arg0) {
     u8 *p = (u8 *)arg0;
     u8 *end = p + 0xFC;
