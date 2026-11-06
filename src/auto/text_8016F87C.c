@@ -655,6 +655,11 @@ void fn_80176118(char *self) {
     (*(void (**)(char *))(vt + 0xE4))(self + *(s16 *)(vt + 0xE0));
 }
 
+s32 *fn_8017614C(s32 *arg0, char *arg1) {
+    fn_8016F8A4(arg0, (s32 *)(arg1 + 0x1A0));
+    return arg0;
+}
+
 void fn_80176180(s32 arg0) {
     void *fn_8016F910(void *);
     fn_8016F910((char *)arg0 + 0x1A0);
