@@ -277,6 +277,21 @@ void fn_80174E84(s32 *self, s32 value) {
     *self = value;
 }
 
+void fn_80175678(void **arg0) {
+    u8 *p = (u8 *)arg0;
+    u8 *end = p + 0xFC;
+    do {
+        void *r11 = *(void **)p;
+        p += 4;
+        if (r11 != 0) {
+            u8 *r9 = *(u8 **)((u8 *)r11 + 0xBC);
+            s16 offset = *(s16 *)(r9 + 0xE8);
+            void (*method)(void *) = *(void (**)(void *))(r9 + 0xEC);
+            method((u8 *)r11 + offset);
+        }
+    } while ((s32)p <= (s32)end);
+}
+
 void fn_80175B08(void) {
     s32 var_ctr;
 
@@ -663,6 +678,15 @@ s32 *fn_8017614C(s32 *arg0, char *arg1) {
 void fn_80176180(s32 arg0) {
     void *fn_8016F910(void *);
     fn_8016F910((char *)arg0 + 0x1A0);
+}
+
+s32 fn_801761A4(s32 arg0, s32 arg1) {
+    extern char lbl_803DA090[];
+    if (arg1 <= 0x7F) {
+        return arg1;
+    }
+    fn_8016FA28((void *)lbl_80495C90, arg0, (s32)lbl_803DA090);
+    return 1;
 }
 
 void fn_801761EC(void *arg0, s32 arg1) {
