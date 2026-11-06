@@ -185,6 +185,37 @@ s32 fn_80170868(void *self, void *obj) {
     return 1;
 }
 
+s32 fn_80170E8C(void *self) {
+    void **fn_8039AB24(void **node);
+    u8 buf[32];
+    s32 max;
+    char *map;
+    void **node;
+    s32 more;
+
+    map = (char *)self + 0x44;
+    max = 0;
+    *(void ***)(buf + 0) = M2C_FIELD(map, void ***, 4);
+    *(void ***)(buf + 8) = M2C_FIELD(M2C_FIELD(map, void ***, 4), void ***, 8);
+    for (;;) {
+        more = 1;
+        if (*(void ***)(buf + 8) == *(void ***)(buf + 0)) {
+            more = 0;
+        }
+        if (!more) {
+            break;
+        }
+        node = *(void ***)(buf + 8);
+        if (max < M2C_FIELD(node, s32 *, 0x14)) {
+            max = M2C_FIELD(node, s32 *, 0x14);
+        }
+        *(void ***)(buf + 0x18) = node;
+        *(void ***)(buf + 8) = fn_8039AB24(node);
+        *(void ***)(buf + 0x10) = *(void ***)(buf + 0x18);
+    }
+    return max;
+}
+
 s32 fn_80171718(void *arg0) {
     return M2C_FIELD(M2C_FIELD(arg0, void **, 0x328), s32 *, 0x18);
 }
@@ -203,9 +234,9 @@ void fn_80172464(s32 arg0) {
 }
 
 void fn_801737C8(char *arg0, s32 a, s32 b) {
-    M2C_FIELD(arg0, s32 *, 0x1D0) = a < b;
     M2C_FIELD(arg0, s32 *, 0x1C8) = a == b;
     M2C_FIELD(arg0, s32 *, 0x1CC) = a > b;
+    M2C_FIELD(arg0, s32 *, 0x1D0) = a < b;
 }
 
 s32 fn_80173AC8(void *arg0) {
