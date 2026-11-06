@@ -257,23 +257,18 @@ void fn_802E7720(void *arg0) {
 s32 fn_802E7738(void *arg0, void *arg1, s32 arg2, s32 arg3) {
     extern f32 lbl_803F0A08[];
     void fn_802E86DC(void *, void *);
-    void (*cb)(s32, void *, s32, s32, s32);
     s32 ret = 0;
     s32 has;
 
     if (!(M2C_FIELD(arg1, u32 *, 0x30) & 0x08000000)) {
-        if (M2C_FIELD(arg1, s32 *, 0xA8) == 1) {
-            has = M2C_FIELD(arg1, s32 *, 0x7C) != 0;
-            if (has && M2C_FIELD(arg1, f32 *, 0x50) > lbl_803F0A08[0]) {
-                ret = 1;
-                fn_802E86DC(arg0, arg1);
-                return ret;
-            }
-        }
-        cb = M2C_FIELD(arg1, void (**)(s32, void *, s32, s32, s32), 0x28);
-        if (cb != 0) {
-            cb(M2C_FIELD(arg1, s32 *, 0x2C), arg1, arg3, M2C_FIELD(arg0, s32 *, 0x20),
-               M2C_FIELD(arg0, s32 *, 8));
+        if (M2C_FIELD(arg1, s32 *, 0xA8) == 1 && (has = M2C_FIELD(arg1, s32 *, 0x7C) != 0, has) &&
+            M2C_FIELD(arg1, f32 *, 0x50) > lbl_803F0A08[0]) {
+            ret = 1;
+            fn_802E86DC(arg0, arg1);
+        } else if (M2C_FIELD(arg1, void **, 0x28) != 0) {
+            M2C_FIELD(arg1, void (**)(s32, void *, s32, s32, s32), 0x28)(
+                M2C_FIELD(arg1, s32 *, 0x2C), arg1, arg3, M2C_FIELD(arg0, s32 *, 0x20),
+                M2C_FIELD(arg0, s32 *, 8));
         }
     }
     return ret;
@@ -451,6 +446,13 @@ f32 fn_802EC2D4(void *arg0, s32 arg1) {
 void fn_802EC460(void *arg0, void *arg1);
 void fn_802EC4C8(void *arg0, s32 arg1) {
     fn_802EC460(arg0, fn_802E5F90_inline(arg0, arg1));
+}
+
+void fn_802EC618(void *arg0, s32 arg1) {
+    void *win = fn_802E5F90_inline(arg0, arg1);
+    if (win != NULL && M2C_FIELD(win, s32 *, 0xA8) == 1) {
+        M2C_FIELD(win, s32 *, 0xA4) = 0;
+    }
 }
 
 void fn_802EC74C(void *arg0, void *arg1, f32 arg2);
