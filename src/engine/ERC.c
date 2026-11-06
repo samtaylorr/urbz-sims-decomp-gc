@@ -62,6 +62,15 @@ void fn_802F79A8(void *arg0, s32 arg1) {
     fn_802E2108(arg1, M2C_FIELD(arg0, s32 *, 0x3C));
 }
 
+void fn_802FB5D0(s32 *self, s32 flags) {
+    extern char lbl_8041A7C0[];
+    extern void fn_802D20E8(void *);
+    self[0x68 / 4] = (s32)lbl_8041A7C0;
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_802FB8A0(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 4) = arg1;
     M2C_FIELD(arg0, s8 *, 0) = 7;
