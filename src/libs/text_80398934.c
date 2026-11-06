@@ -1270,6 +1270,25 @@ void fn_8039AE08(void) {
 
 }
 
+s32 fn_8039AE0C(u32 *mask, s32 def) {
+    u32 i;
+    s32 j;
+    u32 w;
+
+    for (i = 0; i <= 2; i++) {
+        w = *mask++;
+        if (w != 0) {
+            for (j = 0; j < 4; j++) {
+                if ((u8)w != 0) {
+                    return i * 32 + j * 8 + lbl_80407008[(u8)w];
+                }
+                w >>= 8;
+            }
+        }
+    }
+    return def;
+}
+
 void fn_8039AE74(s32 *first, s32 hole, s32 len, s32 val, s32 comp) {
     s32 top = hole;
     s32 second = 2 * top + 2;
