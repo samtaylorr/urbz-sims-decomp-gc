@@ -1258,6 +1258,14 @@ void fn_8039AD8C(void *arg0, s32 arg1) {
     }
 }
 
+extern u8 lbl_80407008[];
+extern char lbl_803C2A08[];
+char *fn_80248A10(char *dst, const char *src, int n);
+void fn_8039ADC0(void *self, char *buf, int size) {
+    fn_80248A10(buf, lbl_803C2A08, size);
+    buf[size - 1] = 0;
+}
+
 void fn_8039AE08(void) {
 
 }
@@ -3656,7 +3664,9 @@ void **fn_803A0A44(void **self, void **other) {
             void **tmp;
             if (xlen != 0) {
                 register u32 size asm("r0");
-                if ((size = xlen * 4, bytes = size, size) > 0x80) {
+                size = xlen * 4;
+                bytes = xlen * 4;
+                if (size > 0x80) {
                     size = 0;
                     tmp = (void **)fn_802D1FC8(bytes);
                 } else {
