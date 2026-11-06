@@ -203,6 +203,11 @@ void fn_802FC0E4(void) {
 
 }
 
+void fn_802FCA04(char *self) {
+    char *vt = *(char **)(self + 0x68);
+    (*(void (**)(char *, s32, s32))(vt + 0xDC))(self + *(s16 *)(vt + 0xD8), 0, 0xFE);
+}
+
 void fn_802FD370(void) {
 
 }
