@@ -137,12 +137,10 @@ void fn_801292D0(void *arg0, s32 arg1) {
     fn_801289D4(arg0);
     fn_800ECE40(name, arg1);
     i = 0;
-loop:
-    if (NghResFile_NameTaken(name)) {
+    while (NghResFile_NameTaken(name)) {
         fn_80245BB4(buf, lbl_803D8710, fn_800EE424(arg1), i);
         i++;
         fn_800ECF20((char *)arg0 + 0x10, buf);
-        goto loop;
     }
     fn_801289C4(arg0);
 }
@@ -952,12 +950,39 @@ s32 fn_8012FAD0(void *self, s32 id, void *out) {
 }
 
 void fn_8012FB50(void *self, s32 id, void *a, void *b) {
+    NghResHandler s, *ps;
+    ps = &s;
+    s.id = 0;
+    ps->a = 0;
+    ps->b = 0;
+    ps->c = 0;
+    if (fn_8012FAD0(self, id, ps) && s.a) {
+        s.a(a, b);
+    }
 }
 
 void fn_8012FBC0(void *self, s32 id, void *a, void *b) {
+    NghResHandler s, *ps;
+    ps = &s;
+    s.id = 0;
+    ps->c = 0;
+    ps->a = 0;
+    ps->b = 0;
+    if (fn_8012FAD0(self, id, ps) && s.c) {
+        s.c(a, b);
+    }
 }
 
 void fn_8012FC30(void *self, s32 id, void *a, void *b) {
+    NghResHandler s, *ps;
+    ps = &s;
+    s.id = 0;
+    ps->c = 0;
+    ps->a = 0;
+    ps->b = 0;
+    if (fn_8012FAD0(self, id, ps) && s.b) {
+        s.b(a, b);
+    }
 }
 
 void fn_8012FE00(void *arg0, s32 arg1) {
