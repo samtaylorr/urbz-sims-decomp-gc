@@ -57,6 +57,13 @@ void fn_802E2288(s32 arg0) {
     fn_802E3CB4(arg0);
 }
 
+void fn_802E3DB0(void *arg0) {
+    void fn_802C829C(void *, void *, void *);
+    void fn_802E2460(void *);
+    fn_802C829C((char *)arg0 + 0x120, (char *)arg0 + 0xA0, (char *)arg0 + 0x160);
+    fn_802E2460(arg0);
+}
+
 void fn_802E3ED4(void) {
     fn_802E2390();
 }
@@ -64,6 +71,20 @@ void fn_802E3ED4(void) {
 void fn_802E232C(void);
 void fn_802E3EF4(void) {
     fn_802E232C();
+}
+
+void fn_802E4608(void *arg0, f32 *arg1, f32 *arg2) {
+    extern f32 lbl_803F0890;
+    f32 a = M2C_FIELD(arg0, f32 *, 0x188);
+    f32 b = M2C_FIELD(arg0, f32 *, 0x198);
+    *arg1 = -(a * b + b) / (lbl_803F0890 - a * a);
+    *arg2 = b / (a + lbl_803F0890);
+}
+
+void fn_802E463C(void *arg0, f32 *arg1, f32 *arg2) {
+    extern f32 lbl_803F0894;
+    *arg2 = lbl_803F0894 / M2C_FIELD(arg0, f32 *, 0x174);
+    *arg1 = lbl_803F0894 / M2C_FIELD(arg0, f32 *, 0x160);
 }
 
 void fn_802E4660(void *arg0, s32 arg1) {
