@@ -291,6 +291,22 @@ void fn_80183830(void *arg0) {
     M2C_FIELD(temp_r9, M2C_UNK (**)(void *), 0x16C)(temp_r11 + M2C_FIELD(temp_r9, s16 *, 0x168));
 }
 
+void fn_80183DDC(char *self, s32 arg1);
+void fn_8013220C(void *, s32);
+void fn_80183AEC(char *self, s32 arg1) {
+    s32 bits = arg1 & 0x1F;
+    if (bits != 0) {
+        if ((M2C_FIELD(M2C_FIELD(self, char **, 0), s32 *, 0x84) & 0x1F) == 0) {
+            fn_80183DDC(self, 1);
+        }
+    } else {
+        if ((M2C_FIELD(M2C_FIELD(self, char **, 0), s32 *, 0x84) & 0x1F) != 0) {
+            fn_80183DDC(self, 0);
+        }
+    }
+    fn_8013220C(M2C_FIELD(self, void **, 0), bits);
+}
+
 s32 fn_80183B60(void **arg0) {
     return ((u32) M2C_FIELD(*arg0, u32 *, 0x84) >> 1U) & 1;
 }
