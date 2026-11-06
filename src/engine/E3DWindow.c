@@ -393,6 +393,23 @@ void fn_802ED32C(void *arg0, s32 arg1, s32 arg2) {
     *(s32 *)(M2C_FIELD(arg0, u8 **, 8) + arg1 * 0x44) &= ~0x8;
 }
 
+void fn_802ED5B4(f32 arg0, f32 arg1, f32 arg2, f32 *arg3, f32 *arg4, f32 *arg5, f32 *arg6) {
+    extern const f32 lbl_803F0B10[];
+    extern const f32 lbl_803F0B14[];
+    f32 p = arg1 * arg2;
+    f32 v;
+
+    *arg3 = arg0;
+    *arg4 = arg0 * arg1;
+    if (p == lbl_803F0B10[0]) {
+        v = lbl_803F0B14[0];
+    } else {
+        v = arg0 * (p - arg2) / (p - lbl_803F0B10[0]);
+    }
+    *arg5 = v;
+    *arg6 = arg0 * p;
+}
+
 void fn_802ED6F4(void) {
     M2C_UNK fn_802ED604(M2C_UNK, M2C_UNK);
     fn_802ED604(1, 0xFFFF);
