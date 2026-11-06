@@ -454,6 +454,16 @@ void fn_80183DDC(char *self, s32 arg1) {
     }
 }
 
+void fn_80183EC0(void *arg0) {
+    void *obj;
+    void *vt;
+
+    obj = M2C_FIELD(arg0, void **, 0x4BC);
+    vt = M2C_FIELD(obj, void **, 0);
+    M2C_FIELD(vt, void (**)(void *), 0x44)(obj + M2C_FIELD(vt, s16 *, 0x40));
+    M2C_FIELD(arg0, s16 *, 0x88) = 0;
+}
+
 void fn_80184444(void *arg0, s32 arg1) {
     M2C_UNK fn_80176AD8(void *, s32, s32);
     M2C_UNK fn_80184488(void *);
