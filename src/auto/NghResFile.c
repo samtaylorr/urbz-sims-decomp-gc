@@ -127,13 +127,20 @@ void fn_801292D0(void *arg0, s32 arg1) {
     extern char lbl_803D8710[];
     char buf[0x200];
     char *name;
+    char *p;
     s32 i;
+    s32 used;
 
     name = (char *)arg0 + 0x10;
     fn_801289D4(arg0);
+    p = name;
     fn_800ECE40(name, arg1);
     i = 0;
-    while (fn_800EF6F8(name) == 0 || fn_80129270((s32)name) != 0) {
+    for (;;) {
+        used = fn_800EF6F8(p) == 0 || fn_80129270((s32)p) != 0;
+        if (!used) {
+            break;
+        }
         fn_80245BB4(buf, lbl_803D8710, fn_800EE424(arg1), i);
         i++;
         fn_800ECF20((char *)arg0 + 0x10, buf);
