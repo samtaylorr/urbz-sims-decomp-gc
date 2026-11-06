@@ -1787,7 +1787,7 @@ void fn_8039BE3C(s32 **self) {
     s32 n = (s32)self[1];
     s32 *p = self[0];
 
-    while (n--) {
+    while (--n != -1) {
         void *obj = (void *)*p++;
         if (obj != NULL) {
             char *vt = *(char **)obj;
@@ -3656,9 +3656,7 @@ void **fn_803A0A44(void **self, void **other) {
             void **tmp;
             if (xlen != 0) {
                 register u32 size asm("r0");
-                size = xlen * 4;
-                bytes = size;
-                if (size > 0x80) {
+                if ((size = xlen * 4, bytes = size, size) > 0x80) {
                     size = 0;
                     tmp = (void **)fn_802D1FC8(bytes);
                 } else {
