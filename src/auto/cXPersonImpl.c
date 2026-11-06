@@ -161,6 +161,12 @@ M2C_UNK *fn_80177154(void) {
     return &lbl_80495CA0;
 }
 
+void fn_801774D8(void *arg0) {
+    u8 *obj = M2C_FIELD(arg0, u8 **, 0x4BC);
+    u8 *vt = *(u8 **)obj;
+    (*(void (**)(void *))(vt + 0x1C))(obj + *(s16 *)(vt + 0x18));
+}
+
 void fn_8017E10C(void) {
     void fn_802D20E8(void *);
     void fn_803997AC(void *, u32);
