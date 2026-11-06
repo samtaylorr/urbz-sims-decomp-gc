@@ -326,7 +326,39 @@ s32 fn_8012B134(void *arg0) {
 }
 
 s32 fn_8012B290(void *arg0, u32 arg1) {
-    return 0;
+    s32 fn_8012E01C(void *, s32);
+    s32 r = 0;
+    s32 i;
+
+    switch (arg1) {
+    case 0:
+        if (M2C_FIELD(M2C_FIELD(arg0, void **, 0x13C), s32 *, 0x8) == 0) {
+            for (i = 0; i < 12; i++) {
+            }
+            r = 0;
+        } else {
+            for (i = 0; i < 12; i++) {
+            }
+            r = 1;
+        }
+        break;
+    case 1:
+        r = 1;
+        if (M2C_FIELD(M2C_FIELD(arg0, void **, 0x13C), s32 *, 0x0) == 0) {
+            r = 0;
+        }
+        break;
+    case 2:
+        r = 1;
+        if (M2C_FIELD(M2C_FIELD(arg0, void **, 0x170), s32 *, 0x4) == 0) {
+            r = 0;
+        }
+        break;
+    case 3:
+        r = fn_8012E01C(arg0, M2C_FIELD(arg0, s32 *, 0x28) + 1);
+        break;
+    }
+    return r;
 }
 
 void fn_8012C388(void *arg0, s32 arg1, s32 arg2) {
