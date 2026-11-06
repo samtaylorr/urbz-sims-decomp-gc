@@ -303,12 +303,12 @@ void fn_8000E860(void *arg0, f32 arg1) {
 }
 
 void fn_8000F53C(char *self) {
-    extern u8 lbl_8041F94C[];
+    extern struct { u8 pad[0x160]; void *tbl[1]; } lbl_8041F94C;
     s32 fn_800120DC(void *);
     void fn_800108BC(char *, char *);
     void *p;
 
-    p = ((void **)(lbl_8041F94C + 0x160))[*(s32 *)(self + 0xC)];
+    p = lbl_8041F94C.tbl[*(s32 *)(self + 0xC)];
     if (p != NULL && fn_800120DC(p) != 0) {
         fn_800108BC(self, self + 0x18);
     } else {
