@@ -68,16 +68,16 @@ void fn_802F79A8(void *arg0, s32 arg1) {
 s32 *fn_802FB578(s32 *self) {
     extern char lbl_8041A7C0[];
     s32 i;
-    s32 *p;
     self[7] = 0;
     self[0x68 / 4] = (s32)lbl_8041A7C0;
-    p = &self[11];
-    for (i = 4; i != 0; i--) {
-        *p = 0xFF;
-        p--;
+    for (i = 3; i >= 0; i--) {
+        self[8 + i] = 0xFF;
     }
     self[0x54 / 4] = 0;
-    self[0x30 / 4] = self[0x34 / 4] = self[0x38 / 4] = self[0x3C / 4] = 0;
+    self[0x30 / 4] = 0;
+    self[0x34 / 4] = 0;
+    self[0x38 / 4] = 0;
+    self[0x3C / 4] = 0;
     self[0x50 / 4] = 0;
     return self;
 }
@@ -94,19 +94,19 @@ void fn_802FB5D0(s32 *self, s32 flags) {
 void fn_802FB604(s32 *self, s32 arg1) {
     extern char *lbl_80495050;
     extern s32 fn_802EDEA8(char *);
-    void *fn_802FEAFC(s32 *, s32, s32);
+    void *fn_802FEAB4(s32 *, s32, s32);
     s32 p;
     self[3] = arg1;
     self[0] = fn_802EDEA8(lbl_80495050);
-    p = (s32)fn_802FEAFC(self, 0x1000, 0x20);
+    p = (s32)fn_802FEAB4(self, 0x1000, 0x20);
     self[7]++;
     ((s32 *)self[0])[0x10] = p;
     self[0x10] = -1;
     self[1] = 0x200;
     self[2] = p;
-    self[4] = 0;
-    self[5] = 0;
     self[6] = 0;
+    self[5] = 0;
+    self[4] = 0;
 }
 
 void fn_802FB688(char *self, s32 arg1) {
@@ -134,17 +134,18 @@ void fn_802FB8B0(char *self, void *src, s32 count) {
     char *p;
     void *data;
 
-    if (count != 0) {
-        data = fn_802FEB4C((s32 *)self, src, count * 0x50);
+    if (count == 0) {
+        return;
     }
+    data = fn_802FEB4C((s32 *)self, src, count * 0x50);
     vt = *(char **)(self + 0x68);
     (*(void (**)(char *, s32, s32))(vt + 0x2AC))(self + *(s16 *)(vt + 0x2A8), 2, 1);
-    M2C_FIELD(*(char **)self, s32 *, 0x4C) += count;
+    (*(s32 **)self)[0x4C / 4] += count;
     vt = *(char **)(self + 0x68);
     p = (*(char *(**)(char *, s32))(vt + 0x2A4))(self + *(s16 *)(vt + 0x2A0), 1);
-    *(void **)(p + 4) = data;
     *(s8 *)p = 0;
     *(s16 *)(p + 2) = count;
+    *(void **)(p + 4) = data;
     vt = *(char **)(self + 0x68);
     (*(void (**)(char *))(vt + 0x2B4))(self + *(s16 *)(vt + 0x2B0));
 }
@@ -178,18 +179,20 @@ void fn_802FBC60(char *self, void *src, s32 count) {
     void *fn_802FEB4C(s32 *, void *, s32);
     char *vt;
     char *p;
+    void *data = src;
 
-    if (count != 0) {
-        src = fn_802FEB4C((s32 *)self, src, count * 0x50);
+    if (count == 0) {
+        return;
     }
+    data = fn_802FEB4C((s32 *)self, src, count * 0x50);
     vt = *(char **)(self + 0x68);
     (*(void (**)(char *, s32, s32))(vt + 0x2AC))(self + *(s16 *)(vt + 0x2A8), 2, 5);
-    M2C_FIELD(*(char **)self, s32 *, 0x4C) += count;
+    (*(s32 **)self)[0x4C / 4] += count;
     vt = *(char **)(self + 0x68);
     p = (*(char *(**)(char *, s32))(vt + 0x2A4))(self + *(s16 *)(vt + 0x2A0), 1);
     *(s8 *)p = 0x1A;
     *(s16 *)(p + 2) = count;
-    *(void **)(p + 4) = src;
+    *(void **)(p + 4) = data;
     vt = *(char **)(self + 0x68);
     (*(void (**)(char *))(vt + 0x2B4))(self + *(s16 *)(vt + 0x2B0));
 }
@@ -210,31 +213,37 @@ void fn_802FC0E4(void) {
 
 }
 
+void fn_802FC3A4(s32 *self, s32 arg1) {
+    void fn_802CB69C(s32, s32);
+    fn_802CB69C(*self + 0x34, arg1);
+    fn_802CB69C(*self + 0x28, 0);
+}
+
 void fn_802FC904(u8 *self, s32 idx, s32 val) {
     char *vt;
-    s32 *arr;
+    u8 *arr;
     if ((u32)val <= 0xF7 && val > *(s32 *)(self + 0x40)) {
         *(s32 *)(self + 0x40) = val;
     }
     vt = *(char **)(self + 0x68);
     (*(void (**)(void *, s32, s32))(vt + 0x2AC))(self + *(s16 *)(vt + 0x2A8), 1, 0);
-    arr = (s32 *)(self + 0x20);
-    arr[idx] = val;
+    arr = self + 0x20;
+    *(s32 *)(arr + idx * 4) = val;
     *(s32 *)(self + 0x30) = 1;
 }
 
 void fn_802FC980(u8 *self, s32 unused, s32 n) {
     char *vt;
     s32 i;
-    s32 *arr;
+    s32 last;
     vt = *(char **)(self + 0x68);
     (*(void (**)(void *))(vt + 0xD4))(self + *(s16 *)(vt + 0xD0));
-    arr = (s32 *)(self + 0x20);
     for (i = 0; i < n; i++) {
-        arr[i] = i;
+        ((s32 *)(self + 0x20))[i] = i;
     }
-    if (n - 1 > *(s32 *)(self + 0x40)) {
-        *(s32 *)(self + 0x40) = n - 1;
+    last = n - 1;
+    if (last > *(s32 *)(self + 0x40)) {
+        *(s32 *)(self + 0x40) = last;
     }
     *(s32 *)(self + 0x30) = 1;
 }
