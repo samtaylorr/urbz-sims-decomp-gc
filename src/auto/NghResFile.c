@@ -7,14 +7,16 @@ void fn_801288B4(void) {
 
 void *fn_801288B8(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     void fn_800EC9AC(void *);
+    void fn_801289C4(M2C_UNK *);
     void fn_801292D0(void *, s32);
     void fn_80128D38(void *, s32, s32);
+    void fn_80128CEC(void *, s32);
 
     fn_800EC9AC((char *)arg0 + 0x10);
     M2C_FIELD(arg0, s32 *, 0x14) = arg1;
-    M2C_FIELD(arg0, s32 *, 0x8) = -1;
-    M2C_FIELD(arg0, s32 *, 0xC) = 0;
     M2C_FIELD(arg0, s32 *, 0x4) = -1;
+    M2C_FIELD(arg0, s32 *, 0xC) = 0;
+    M2C_FIELD(arg0, s32 *, 0x8) = -1;
     fn_801289C4(arg0);
     fn_801292D0(arg0, arg4);
     fn_80128D38(arg0, arg2, arg3);
@@ -729,7 +731,7 @@ s32 fn_8012E44C(void *self) {
     void fn_800F6E48(void *, s32, s32);
     s32 fn_8012C674(void *, s32);
     s32 fn_8012CA90(void *, s32);
-    struct { u8 pad[0x178]; s16 unk178; } *s = self;
+    struct { u8 pad[0x2C]; u8 unk2C[0x14C]; s16 unk178; } *s = self;
     char *obj;
     struct VtEnt *e;
     s32 ret;
@@ -738,14 +740,14 @@ s32 fn_8012E44C(void *self) {
     e = (struct VtEnt *)(M2C_FIELD(obj, char **, 0x3A4) + 0x130);
     e->fn(obj + e->delta);
     s->unk178 = 0;
-    fn_800F6E48((char *)self + 0x2C, lbl_8049446C, 0);
+    fn_800F6E48(s->unk2C, lbl_8049446C, 0);
     ret = fn_8012C674(self, 0);
     if (ret == 1) {
         ret = fn_8012CA90(self, 0);
     }
     obj = lbl_80494FCC;
     e = (struct VtEnt *)(M2C_FIELD(obj, char **, 0x20) + 0x28);
-    e->fn(obj + e->delta);
+    e->fn(e->delta + obj);
     return ret;
 }
 
