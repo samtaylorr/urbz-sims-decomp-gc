@@ -117,6 +117,11 @@ s32 fn_80129270(s32 arg0) {
     return 0;
 }
 
+static inline s32 NghResFile_NameTaken(char *name) {
+    s32 fn_800EF6F8(char *);
+    return fn_800EF6F8(name) == 0 || fn_80129270((s32)name) != 0;
+}
+
 void fn_801292D0(void *arg0, s32 arg1) {
     void fn_801289D4(void *);
     void fn_800ECE40(char *, s32);
