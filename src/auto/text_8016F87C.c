@@ -447,6 +447,49 @@ void fn_80172464(s32 arg0) {
     fn_80174A98(arg0 + 0x18);
 }
 
+void fn_80172488(char *obj, s32 a, s32 b, s32 c) {
+    extern char *fn_80174E10(void *);
+    char *vt;
+    char *o;
+    void (*fn)(void *, s32, s32, s32);
+    void *p = obj + 0xcc;
+    s32 v = *(s32 *)p;
+    if (v == *(s32 *)(obj + 4) || v == 0 || a == 0x35) {
+        vt = *(char **)(obj + 0xbc);
+        o = obj + *(s16 *)(vt + 0x140);
+        fn = *(void (**)(void *, s32, s32, s32))(vt + 0x144);
+    } else {
+        o = fn_80174E10(p);
+        vt = *(char **)(o + 0xbc);
+        o = o + *(s16 *)(vt + 0x68);
+        fn = *(void (**)(void *, s32, s32, s32))(vt + 0x6c);
+    }
+    fn(o, a, b, c);
+}
+
+void *fn_8017252C(void *ret, char *obj, s32 id) {
+    extern char *lbl_8049665C;
+    extern char lbl_803DA234[];
+    extern void fn_80174E84(void *, void *);
+    char *vt;
+    void *x = NULL;
+    switch (id) {
+    case 0:
+        vt = *(char **)(obj + 0xbc);
+        fn_80174E84(ret, (*(void *(**)(void *))(vt + 0x19c))(obj + *(s16 *)(vt + 0x198)));
+        return ret;
+    case 0x14cb:
+        x = (*(void *(**)(void *, char *))(*(char **)lbl_8049665C + 0x1c4))(lbl_8049665C + *(s16 *)(*(char **)lbl_8049665C + 0x1c0), lbl_803DA234);
+        break;
+    }
+    if (x != NULL) {
+        fn_80174E84(ret, x);
+    } else {
+        fn_80174E84(ret, NULL);
+    }
+    return ret;
+}
+
 s32 fn_80172758(char *obj, s32 idx) {
     char *vt = *(char **)(obj + 0xbc);
     s32 **p = (*(s32 **(**)(void *))(vt + 0x194))(obj + *(s16 *)(vt + 0x190));
@@ -986,6 +1029,41 @@ void fn_80174EE4(void *arg0, s32 arg1) {
     M2C_FIELD(list2, void **, 8) = NULL;
     if (arg1 & 1) {
         fn_802D20E8(arg0);
+    }
+}
+
+M2C_UNK fn_80174F84(s32 arg0, void *item) {
+    s32 *self = (s32 *)arg0;
+    char *list = (char *)self + 0x104;
+    s32 i;
+    *(void **)item = *(void **)(list + 8);
+    *(void **)(list + 8) = item;
+    for (i = 0; i < 0x40; i++) {
+        if (self[i] == (s32)item) {
+            break;
+        }
+    }
+    if (i < 0x40) {
+        self[i] = 0;
+    }
+}
+
+void fn_80174FD4(char **self) {
+    s32 i;
+    char *obj;
+    char *vt;
+    for (i = 0; i < 0x40; i++) {
+        obj = self[i];
+        if (obj != NULL) {
+            vt = *(char **)(obj + 0xbc);
+            (*(void (**)(void *))(vt + 0xa4))(obj + *(s16 *)(vt + 0xa0));
+        }
+        obj = self[i];
+        if (obj != NULL) {
+            vt = *(char **)(obj + 0xbc);
+            (*(void (**)(void *, s32))(vt + 0x14))(obj + *(s16 *)(vt + 0x10), 3);
+        }
+        self[i] = NULL;
     }
 }
 
