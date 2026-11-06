@@ -136,6 +136,16 @@ s32 fn_8016FE18(void) {
     return 1;
 }
 
+void fn_80170714(void *arg0, s32 arg1, s32 arg2) {
+    s32 *vals = (s32 *)((char *)arg0 + 0x5C);
+    vals[arg1 + 10] = arg2;
+}
+
+s32 fn_80170728(void *arg0, s32 arg1) {
+    s32 *vals = (s32 *)((char *)arg0 + 0x5C);
+    return vals[arg1 + 10];
+}
+
 extern u8 lbl_80434F64[];
 void fn_80174B18(u8 *arg);
 void fn_8017073C(void) {
@@ -148,6 +158,31 @@ s32 fn_80170764(void) {
 
 s32 fn_8017076C(void) {
     return 0;
+}
+
+s32 fn_80170868(void *self, void *obj) {
+    void fn_801708F4(void *, void *);
+    void *fn_80399BE8(u32);
+    u8 buf[24];
+    void *vt;
+    void **head;
+    void **prev;
+    void **node;
+
+    fn_801708F4(self, obj);
+    vt = M2C_FIELD(obj, void **, 0xBC);
+    M2C_FIELD(vt, void (**)(), 0x16C)(buf + 0x10, (char *)obj + M2C_FIELD(vt, s16 *, 0x168));
+    *(void **)(buf + 8) = M2C_FIELD(self, void **, 8);
+    node = fn_80399BE8(0xC);
+    node[2] = *(void **)(buf + 0x10);
+    head = *(void ***)(buf + 8);
+    prev = head[1];
+    node[0] = head;
+    node[1] = prev;
+    prev[0] = node;
+    head[1] = node;
+    *(void ***)(buf + 0) = node;
+    return 1;
 }
 
 s32 fn_80171718(void *arg0) {
