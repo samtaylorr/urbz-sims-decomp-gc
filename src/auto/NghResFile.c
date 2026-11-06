@@ -977,9 +977,9 @@ void fn_8012FC30(void *self, s32 id, void *a, void *b) {
     NghResHandler s, *ps;
     ps = &s;
     s.id = 0;
-    ps->c = 0;
     ps->a = 0;
     ps->b = 0;
+    ps->c = 0;
     if (fn_8012FAD0(self, id, ps) && s.b) {
         s.b(a, b);
     }
