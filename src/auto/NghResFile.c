@@ -125,6 +125,12 @@ s32 fn_80129630(s32 arg0) {
     return var_r30;
 }
 
+s32 fn_80129C5C(s32 arg0, s32 arg1) {
+    s32 fn_80129C80(s32, s32, s32);
+    extern s32 lbl_8049440C;
+    return fn_80129C80(arg0, arg1, lbl_8049440C);
+}
+
 s32 fn_8012A57C(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     return (arg0 << 24) | ((u8)arg1 << 16) | ((u8)arg2 << 8) | (u8)arg3;
 }
@@ -427,6 +433,30 @@ s32 fn_8012D438(void *self, char *buf) {
         p += 0x10000;
     }
     return 1;
+}
+
+void fn_8012DF54(void *self, s32 idx) {
+    void fn_8012A63C(void *);
+    void **tbl = (void **)((char *)self + 0x140);
+
+    fn_8012A63C(M2C_FIELD(tbl[idx - 1], void **, 8));
+    M2C_FIELD(tbl[idx - 1], void **, 8) = NULL;
+    fn_8012A63C(M2C_FIELD(tbl[idx - 1], void **, 0xC));
+    M2C_FIELD(tbl[idx - 1], void **, 0xC) = NULL;
+    fn_8012A63C(M2C_FIELD(tbl[idx - 1], void **, 0x10));
+    M2C_FIELD(tbl[idx - 1], void **, 0x10) = NULL;
+    fn_8012A63C(M2C_FIELD(tbl[idx - 1], void **, 0x14));
+    M2C_FIELD(tbl[idx - 1], void **, 0x14) = NULL;
+}
+
+void fn_8012DFD8(void *self) {
+    s32 i;
+
+    i = 0;
+    do {
+        i += 1;
+        fn_8012DF54(self, i);
+    } while (i <= 0xB);
 }
 
 s32 fn_8012F7A8(s32 arg0, s32 arg1) {
