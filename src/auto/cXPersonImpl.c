@@ -168,11 +168,11 @@ s32 fn_8017F6A8(void *arg0) {
     Elem *begin = M2C_FIELD(arg0, Elem **, 0x4D4);
     s32 n = M2C_FIELD(arg0, Elem **, 0x4D8) - begin;
 
-    if (n == 0) {
-        return 0;
+    if (n != 0) {
+        n--;
+        return (s32)&begin[n];
     }
-    n--;
-    return (s32)&begin[n];
+    return 0;
 }
 
 s64 fn_80180E24(void *arg0, s32 arg1, s32 arg2) {
