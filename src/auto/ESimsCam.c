@@ -195,19 +195,19 @@ void fn_8000DC64(void *arg0) {
 
 void fn_8000DD64(void *arg0) {
     extern const f32 lbl_803C1F08[];
-    void fn_8000CF8C(void *);
+    void *fn_8000CF8C(void *);
     void fn_8000F5AC(void *, f32);
-    struct { u8 pad[0x578]; s32 unk578; } *self = arg0;
-    struct { u8 pad[0x28]; f32 unk28, unk2C, unk30, unk34, unk38; u8 pad2[0x190 - 0x3C]; } buf;
+    u8 buf[0x190];
+    void *cam;
 
-    self->unk578 = 0;
-    fn_8000CF8C(&buf);
-    M2C_FIELD(M2C_FIELD(arg0, void **, 8), f32 *, 0x2C) = buf.unk2C;
-    M2C_FIELD(M2C_FIELD(arg0, void **, 8), f32 *, 0x28) = buf.unk28;
-    M2C_FIELD(M2C_FIELD(arg0, void **, 8), f32 *, 0x38) = buf.unk38;
-    M2C_FIELD(M2C_FIELD(arg0, void **, 8), f32 *, 0x34) = buf.unk34;
+    M2C_FIELD(arg0, s32 *, 0x578) = 0;
+    cam = fn_8000CF8C(buf);
+    M2C_FIELD(M2C_FIELD(arg0, void **, 8), f32 *, 0x2C) = M2C_FIELD(buf, f32 *, 0x2C);
+    M2C_FIELD(M2C_FIELD(arg0, void **, 8), f32 *, 0x28) = M2C_FIELD(buf, f32 *, 0x28);
+    M2C_FIELD(M2C_FIELD(arg0, void **, 8), f32 *, 0x38) = M2C_FIELD(buf, f32 *, 0x38);
+    M2C_FIELD(M2C_FIELD(arg0, void **, 8), f32 *, 0x34) = M2C_FIELD(buf, f32 *, 0x34);
     fn_8000F5AC(arg0, lbl_803C1F08[0]);
-    fn_8000D458(&buf, 2);
+    fn_8000D458(buf, 2);
 }
 
 void fn_8000E7A8(void *arg0, f32 arg1) {
