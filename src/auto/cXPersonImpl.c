@@ -161,6 +161,17 @@ M2C_UNK *fn_80177154(void) {
     return &lbl_80495CA0;
 }
 
+void fn_80177470(void *arg0, void *arg1) {
+    extern u8 *lbl_80496668;
+    void fn_8018D8BC(void *, void *, s32);
+    void fn_8018D6D8(void *, void *);
+    u8 *obj = lbl_80496668;
+    u8 *vt = *(u8 **)obj;
+    (*(void (**)(void *, void *, void *))(vt + 0x1C4))(obj + *(s16 *)(vt + 0x1C0), arg1, arg0);
+    fn_8018D8BC(arg1, arg0 + 4, 1);
+    fn_8018D6D8(arg1, arg0 + 8);
+}
+
 void fn_801774D8(void *arg0) {
     u8 *obj = M2C_FIELD(arg0, u8 **, 0x4BC);
     u8 *vt = *(u8 **)obj;
@@ -462,9 +473,13 @@ s32 fn_801857B8(char *self) {
 
 void fn_80185834(char *self) {
     struct { char *begin; char *end; } *vec = (void *)(self + 0x4D4);
-    char *it;
-    for (it = vec->begin; it != vec->end; it += 0xA4) {
-        *(s32 *)(it + 0x7C) = 0;
+    char *it = vec->begin;
+    if (it != vec->end) {
+        self = (char *)vec;
+        do {
+            *(s32 *)(it + 0x7C) = 0;
+            it += 0xA4;
+        } while (it != ((char **)self)[1]);
     }
 }
 
