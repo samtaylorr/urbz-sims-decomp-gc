@@ -75,12 +75,14 @@ s32 fn_8017699C(void *arg0, u32 arg1) {
     s32 fn_80176904(void *, void *);
     void *e;
 
-    while (arg1 < (u32)(M2C_FIELD(arg0, s32 *, 0x374) - M2C_FIELD(arg0, s32 *, 0x370))) {
-        e = arg0 + (((M2C_FIELD(arg0, u32 *, 0x370) + arg1) % 10U) * 0x58);
-        if (fn_80176904(arg0, e) != 0) {
-            return M2C_FIELD(e, s32 *, 0x40);
-        }
-        arg1++;
+    if (arg1 < (u32)(M2C_FIELD(arg0, s32 *, 0x374) - M2C_FIELD(arg0, s32 *, 0x370))) {
+        do {
+            e = arg0 + (((M2C_FIELD(arg0, u32 *, 0x370) + arg1) % 10U) * 0x58);
+            if (fn_80176904(arg0, e) != 0) {
+                return M2C_FIELD(e, s32 *, 0x40);
+            }
+            arg1++;
+        } while (arg1 < (u32)(M2C_FIELD(arg0, s32 *, 0x374) - M2C_FIELD(arg0, s32 *, 0x370)));
     }
     return 0;
 }
