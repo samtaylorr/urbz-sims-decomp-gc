@@ -380,6 +380,7 @@ s32 fn_8017204C(char *self) {
     extern s32 lbl_80495C90;
     char *vt;
     char *obj;
+    char *g;
     M2C_FIELD(self, s32 *, 0x1C4) = 0;
     vt = M2C_FIELD(self, char **, 0xBC);
     if (M2C_FIELD(vt, s32 (**)(void *), 0x54)(self + M2C_FIELD(vt, s16 *, 0x50)) != 0) {
@@ -388,8 +389,9 @@ s32 fn_8017204C(char *self) {
             vt = M2C_FIELD(obj, char **, 0xBC);
             M2C_FIELD(vt, void (**)(void *), 0xDC)(obj + M2C_FIELD(vt, s16 *, 0xD8));
         }
-        M2C_FIELD(self, s32 *, 0x19C) = M2C_FIELD(lbl_80495C90, s32 *, 0x14);
-        fn_80170868((void *)lbl_80495C90, self);
+        g = (char *)lbl_80495C90;
+        M2C_FIELD(self, s32 *, 0x19C) = M2C_FIELD(g, s32 *, 0x14);
+        fn_80170868(g, self);
     }
     return 1;
 }
