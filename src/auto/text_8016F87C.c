@@ -621,6 +621,18 @@ s32 fn_801748EC(void *arg0) {
     return 1;
 }
 
+void fn_80174950(void *arg0, s32 arg1) {
+    void fn_802D20E8(void *);
+    void fn_802D211C(void *);
+
+    if (M2C_FIELD(arg0, void **, 0) != 0 && M2C_FIELD(arg0, void **, 0x18) != 0 && M2C_FIELD(arg0, void **, 0xC) != 0) {
+        fn_802D211C(M2C_FIELD(arg0, void **, 0xC));
+    }
+    if (arg1 & 1) {
+        fn_802D20E8(arg0);
+    }
+}
+
 s32 fn_80174A44(s32 *self) {
     extern void fn_802D211C(s32);
     if (self[6] != 0 && self[3] != 0) {
