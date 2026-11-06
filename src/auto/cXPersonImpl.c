@@ -163,6 +163,22 @@ void fn_8017E10C(void) {
     }
 }
 
+s64 fn_80180E24(void *arg0, s32 arg1, s32 arg2) {
+    M2C_UNK fn_801362CC(s32, s32 *, s32);
+    void *temp_r11;
+    void *temp_r9;
+    void *temp_r3;
+    void *temp_r9_2;
+
+    fn_801362CC(M2C_FIELD(arg0, s32 *, 0), &arg2, 1);
+    temp_r11 = M2C_FIELD(arg0, void **, 4);
+    temp_r9 = M2C_FIELD(temp_r11, void **, 4);
+    temp_r3 = M2C_FIELD(temp_r9, void *(**)(void *), 0x14C)(temp_r11 + M2C_FIELD(temp_r9, s16 *, 0x148));
+    temp_r9_2 = M2C_FIELD(temp_r3, void **, 0);
+    M2C_FIELD(temp_r9_2, void (**)(void *), 0x44)(temp_r3 + M2C_FIELD(temp_r9_2, s16 *, 0x40));
+    return 1;
+}
+
 s32 fn_80181314(void) {
     return 0x50455253;
 }
