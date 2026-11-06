@@ -30,18 +30,6 @@ typedef struct cXPersonImpl_ResVec {
     s32 count;
 } cXPersonImpl_ResVec;
 
-typedef struct cXPersonImpl_A4Vec {
-    char *begin;
-    char *end;
-} cXPersonImpl_A4Vec;
-
-static inline void cXPersonImpl_A4Vec_Clear7C(cXPersonImpl_A4Vec *vec) {
-    char *it;
-    for (it = vec->begin; it != vec->end; it += 0xA4) {
-        *(s32 *)(it + 0x7C) = 0;
-    }
-}
-
 extern s32 lbl_803F6780[];
 void fn_80186224(void *, s32);
 
