@@ -337,10 +337,10 @@ s32 fn_8012B114(void *arg0) {
 
 s32 fn_8012B134(void *arg0) {
     extern s32 lbl_80494468;
-    if (--M2C_FIELD(arg0, s16 *, 0x178) <= 0) {
-        lbl_80494468 = 0;
+    if (--M2C_FIELD(arg0, s16 *, 0x178) > 0) {
         return 1;
     }
+    lbl_80494468 = 0;
     return 1;
 }
 
