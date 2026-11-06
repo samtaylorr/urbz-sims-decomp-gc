@@ -296,6 +296,12 @@ void fn_80173FB8(void *self) {
     (*(void (**)(void *))(vt + 0xBC))(obj + *(s16 *)(vt + 0xB8));
 }
 
+void fn_80173FF0(void *self) {
+    u8 *obj = *(u8 **)((u8 *)self + 0xC8);
+    u8 *vt = *(u8 **)(obj + 0xBC);
+    (*(void (**)(void *))(vt + 0xC4))(obj + *(s16 *)(vt + 0xC0));
+}
+
 s32 fn_80174400(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0xD0) = (s32) (M2C_FIELD(arg0, s32 *, 0xD0) + 1);
     return 1;
