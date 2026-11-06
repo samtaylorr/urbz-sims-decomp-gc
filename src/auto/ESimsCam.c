@@ -280,6 +280,19 @@ void fn_80013B14(void *arg0, s32 arg1) {
     fn_802E58E4((char *)arg0 + 0x19C, arg1, 2, 0);
 }
 
+s32 fn_80013DC8(void *arg0, s32 *arg1) {
+    s32 fn_80013B40(void *, s32);
+    s32 ret;
+
+    if (fn_80013B40(arg0, *arg1) != 0) {
+        M2C_FIELD(arg0, s32 **, 0x218) = arg1;
+        ret = 1;
+    } else {
+        ret = 0;
+    }
+    return ret;
+}
+
 void fn_80014164(void *arg0, s32 arg1) {
     if ((M2C_FIELD(arg0, s32 *, 0x238) ^ 1) & 1) {
         M2C_FIELD(arg0, s32 *, 0x22C) = arg1;
