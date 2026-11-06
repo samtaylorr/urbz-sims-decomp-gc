@@ -114,6 +114,30 @@ s32 fn_80129270(s32 arg0) {
     return 0;
 }
 
+void fn_801292D0(void *arg0, s32 arg1) {
+    void fn_801289D4(void *);
+    void fn_800ECE40(char *, s32);
+    s32 fn_800EF6F8(char *);
+    s32 fn_800EE424(s32);
+    void fn_80245BB4(char *, char *, ...);
+    void fn_800ECF20(char *, char *);
+    extern char lbl_803D8710[];
+    char buf[0x200];
+    char *name;
+    s32 i;
+
+    name = (char *)arg0 + 0x10;
+    fn_801289D4(arg0);
+    fn_800ECE40(name, arg1);
+    i = 0;
+    while (fn_800EF6F8(name) == 0 || fn_80129270((s32)name) != 0) {
+        fn_80245BB4(buf, lbl_803D8710, fn_800EE424(arg1), i);
+        i++;
+        fn_800ECF20((char *)arg0 + 0x10, buf);
+    }
+    fn_801289C4(arg0);
+}
+
 s32 fn_80129388(s32 arg0, s32 arg1) {
     s32 fn_8012A494(s32, s32, s32);
     M2C_UNK fn_8012F7F0(s32);
@@ -683,6 +707,7 @@ s32 fn_8012E01C(void *self, s32 idx) {
 }
 
 s32 fn_8012E44C(void *self) {
+    struct VtEnt { s16 delta; s16 pad; void (*fn)(void *); };
     extern char *lbl_80496660;
     extern s32 lbl_8049446C;
     extern char *lbl_80494FCC;
@@ -691,20 +716,21 @@ s32 fn_8012E44C(void *self) {
     s32 fn_8012CA90(void *, s32);
     struct { u8 pad[0x178]; s16 unk178; } *s = self;
     char *obj;
-    char *vt;
+    struct VtEnt *e;
     s32 ret;
 
     obj = lbl_80496660;
-    vt = M2C_FIELD(obj, char **, 0x3A4);
-    (*(void (**)(void *))(vt + 0x134))(obj + *(s16 *)(vt + 0x130));
+    e = (struct VtEnt *)(M2C_FIELD(obj, char **, 0x3A4) + 0x130);
+    e->fn(obj + e->delta);
     s->unk178 = 0;
     fn_800F6E48((char *)self + 0x2C, lbl_8049446C, 0);
     ret = fn_8012C674(self, 0);
     if (ret == 1) {
         ret = fn_8012CA90(self, 0);
     }
-    vt = M2C_FIELD(lbl_80494FCC, char **, 0x20);
-    (*(void (**)(void *))(vt + 0x2C))(lbl_80494FCC + *(s16 *)(vt + 0x28));
+    obj = lbl_80494FCC;
+    e = (struct VtEnt *)(M2C_FIELD(obj, char **, 0x20) + 0x28);
+    e->fn(obj + e->delta);
     return ret;
 }
 
