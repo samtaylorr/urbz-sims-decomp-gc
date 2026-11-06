@@ -284,6 +284,22 @@ s32 fn_801836B8(void *a, void *b) {
     return M2C_FIELD(a, f32 *, 0x8) > M2C_FIELD(b, f32 *, 0x8);
 }
 
+void fn_801836D0(char *self) {
+    if (({
+            char *o = *(char **)(self + 4);
+            char *v = *(char **)(o + 0x4);
+            (*(s32 (**)(char *))(v + 0x14C))(o + *(s16 *)(v + 0x148));
+        }) != 0) {
+        char *r = ({
+            char *o = *(char **)(self + 4);
+            char *v = *(char **)(o + 0x4);
+            (*(char *(**)(char *))(v + 0x14C))(o + *(s16 *)(v + 0x148));
+        });
+        char *vt = *(char **)r;
+        (*(void (**)(char *))(vt + 0xCC))(r + *(s16 *)(vt + 0xC8));
+    }
+}
+
 void fn_80183830(void *arg0) {
     M2C_UNK fn_80134F20(s32);
     void *temp_r11;
