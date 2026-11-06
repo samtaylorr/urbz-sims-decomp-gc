@@ -480,6 +480,19 @@ void fn_802EC790(void *arg0, s32 arg1, f32 arg2) {
     fn_802EC74C(arg0, fn_802E5F90_inline(arg0, arg1), arg2);
 }
 
+void fn_802EC830(void *arg0, f32 arg1) {
+    extern const f32 lbl_803F0AF4[];
+    s32 i;
+    for (i = 0; i < M2C_FIELD(arg0, s32 *, 0x3C); i++) {
+        char *w = (char *)(i * 0xB0) + M2C_FIELD(arg0, s32 *, 0x40);
+        if ((M2C_FIELD(w, u32 *, 0x30) & 0x4000000) ? !(arg1 > lbl_803F0AF4[0]) : (arg1 > lbl_803F0AF4[0])) {
+            M2C_FIELD(w, f32 *, 0x4C) = arg1;
+        } else {
+            M2C_FIELD(w, f32 *, 0x4C) = -arg1;
+        }
+    }
+}
+
 void *fn_802ECFAC(void *arg0, s32 arg1) {
     extern s32 lbl_804961C0;
     extern u8 lbl_80452768[];
