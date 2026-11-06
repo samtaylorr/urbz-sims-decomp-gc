@@ -250,6 +250,7 @@ s32 fn_801BD6DC(s32 arg0) {
     extern u8 *lbl_80496658;
     extern u8 *lbl_80496654;
     extern s32 fn_801A08DC(void *, s32);
+    extern void fn_801A0858(void *, s32);
     u8 *obj = lbl_80496658;
     s32 ret;
     u8 buf[0x38];
@@ -273,9 +274,11 @@ s32 fn_801BD6DC(s32 arg0) {
         }
         if (fn_801A08DC(buf, 0x20) == 0) {
             fn_801A08DC(buf, 0x10);
+            ret = *a;
+        } else {
+            ret = *a;
         }
-        ret = *a;
-        CasBufDtor(buf);
+        fn_801A0858(buf, 2);
     }
     return ret;
 }
