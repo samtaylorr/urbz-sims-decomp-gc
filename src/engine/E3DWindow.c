@@ -377,6 +377,14 @@ void fn_802EC790(void *arg0, s32 arg1) {
     fn_802EC74C(arg0, fn_802E5F90_inline(arg0, arg1));
 }
 
+void fn_802ED2F4(void *arg0, s32 arg1, s32 arg2) {
+    if (arg2 != 0) {
+        *(s32 *)(M2C_FIELD(arg0, u8 **, 8) + arg1 * 0x44) |= 0x10;
+        return;
+    }
+    *(s32 *)(M2C_FIELD(arg0, u8 **, 8) + arg1 * 0x44) &= ~0x10;
+}
+
 void fn_802ED6F4(void) {
     M2C_UNK fn_802ED604(M2C_UNK, M2C_UNK);
     fn_802ED604(1, 0xFFFF);
