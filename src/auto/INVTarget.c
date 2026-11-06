@@ -16,12 +16,6 @@ static inline void INV_setStr(void *dst, void *key) {
     fn_800F1B80(dst, h.p != NULL ? (void *)*h.p : NULL);
 }
 
-static inline void INV_setStrT(void *dst, void *tbl, void *key) {
-    INVHandle fn_8004C168();
-    INVHandle h = fn_8004C168(tbl, key);
-    fn_800F1B80(dst, h.p != NULL ? (void *)*h.p : NULL);
-}
-
 static inline void *INV_getStr(void *key) {
     INVHandle fn_8004C168();
     extern u8 lbl_8041F94C[];
@@ -3468,7 +3462,7 @@ void fn_8020A500(u8 *arg0) {
     s32 zero;
 
     fn_800F1B80(arg0 + 0xAC, (h1 = fn_8004C168(lbl_8041F94C, lbl_803E718C)).p != NULL ? (void *)*h1.p : NULL);
-    INV_setStr(arg0 + 0xB4, lbl_803E70E8);
+    INV_setStrT(arg0 + 0xB4, lbl_8041F94C, lbl_803E70E8);
     fn_800F1B80(arg0 + 0xB8, (h3 = fn_8004C168(lbl_8041F94C, lbl_803E70EC)).p != NULL ? (void *)*h3.p : NULL);
     fn_800F1B80(arg0 + 0xBC, lbl_803E6F74);
     zero = 0;
@@ -3573,11 +3567,7 @@ void fn_8020ECF8(u8 *arg0) {
     s32 zero;
 
     fn_800F1B80(arg0 + 0xAC, (h1 = fn_8004C168(lbl_8041F94C, lbl_803E791C)).p != NULL ? (void *)*h1.p : NULL);
-    {
-        u8 *s = lbl_803E77A0;
-        u8 *m = lbl_8041F94C;
-        fn_800F1B80(arg0 + 0xB4, (h2 = fn_8004C168(m, s)).p != NULL ? (void *)*h2.p : NULL);
-    }
+    fn_800F1B80(arg0 + 0xB4, (h2 = fn_8004C168(lbl_8041F94C, lbl_803E77A0)).p != NULL ? (void *)*h2.p : NULL);
     fn_800F1B80(arg0 + 0xB8, (h3 = fn_8004C168(lbl_8041F94C, lbl_803E77A4)).p != NULL ? (void *)*h3.p : NULL);
     fn_800F1B80(arg0 + 0xBC, lbl_803E72BC);
     zero = 0;
@@ -3916,8 +3906,11 @@ void fn_8021CCC0(u8 *arg0) {
     Handle h;
     void *dst;
     u8 *name;
+    s32 t;
 
-    switch (fn_8020DD5C(*(s32 *)(arg0 + 0x10C))) {
+    t = fn_8020DD5C(*(s32 *)(arg0 + 0x10C));
+    name = lbl_8041F94C;
+    switch (t) {
     case 0:
     case 1:
     case 2:
@@ -3926,7 +3919,6 @@ void fn_8021CCC0(u8 *arg0) {
     case 5:
     case 6:
     case 7:
-        name = lbl_8041F94C;
         h = fn_8004C168(name, lbl_803E9E48);
         dst = arg0 + 0xAC;
         fn_800F1B80(dst, h.p != NULL ? (void *)*h.p : NULL);
