@@ -581,6 +581,32 @@ void fn_8012ACB0(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x28) = (s32) (arg1 - 1);
 }
 
+void fn_8012ACBC(void *arg0, s32 arg1) {
+    struct { u8 pad[0x140]; void **vals[4]; } *self = arg0;
+    s32 i;
+
+    for (i = 0; i < 6; i++) {
+        fn_8012A63C(self->vals[arg1 - 1][i]);
+        self->vals[arg1 - 1][i] = NULL;
+    }
+}
+
+void fn_8012AD18(void *arg0, s32 arg1) {
+    s32 i;
+
+    for (i = 0; i <= 1; i++) {
+        if (arg1 != 0 || i != 1) {
+            fn_8012A63C(M2C_FIELD(arg0, void ***, 0x170)[i]);
+            M2C_FIELD(arg0, void ***, 0x170)[i] = NULL;
+        }
+    }
+    if (arg1 != 0) {
+        for (i = 3; i >= 0; i--) {
+            M2C_FIELD(arg0, s32 *, 0x188 + i * 4) = 0;
+        }
+    }
+}
+
 void fn_8012ADB4(void *arg0) {
     void fn_8012A63C(void *);
     s32 i;
@@ -750,12 +776,12 @@ void fn_8012DFD8(void *self) {
 }
 
 s32 fn_8012E01C(void *self, s32 idx) {
-    void **tbl;
+    void **tbl = (void **)((char *)self + 0x140);
     s32 ret;
 
-    tbl = (void **)((char *)self + 0x140);
+    idx--;
     ret = 1;
-    if (M2C_FIELD(*(tbl + (idx - 1)), s32 *, 8) == 0) {
+    if (M2C_FIELD(tbl[idx], s32 *, 8) == 0) {
         ret = 0;
     }
     return ret;
