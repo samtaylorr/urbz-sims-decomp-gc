@@ -455,6 +455,14 @@ void fn_802EC618(void *arg0, s32 arg1) {
     }
 }
 
+void *fn_802EC6B8(void *arg0, s32 arg1) {
+    void *win = fn_802E5F90_inline(arg0, arg1);
+    if (win != NULL) {
+        return win;
+    }
+    return NULL;
+}
+
 void fn_802EC74C(void *arg0, void *arg1, f32 arg2);
 void fn_802EC790(void *arg0, s32 arg1, f32 arg2) {
     fn_802EC74C(arg0, fn_802E5F90_inline(arg0, arg1), arg2);
