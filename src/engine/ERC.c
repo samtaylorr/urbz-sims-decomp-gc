@@ -32,8 +32,8 @@ void fn_802F70D4(void *arg0, s8 arg1) {
     M2C_FIELD(arg0, s8 *, 0x38) = arg1;
 }
 
-f32 *fn_802F70DC(f32 *out, f32 *obj, s32 idx) {
-    f32 *p = &obj[idx * 3 + 1];
+f32 *fn_802F70DC(f32 *out, u8 *obj, s32 idx) {
+    f32 *p = (f32 *)(obj + idx * 12) + 1;
     out[0] = p[0];
     out[1] = p[1];
     out[2] = p[2];
@@ -104,7 +104,9 @@ void fn_802FB604(s32 *self, s32 arg1) {
     self[0x10] = -1;
     self[1] = 0x200;
     self[2] = p;
-    self[4] = self[5] = self[6] = 0;
+    self[4] = 0;
+    self[5] = 0;
+    self[6] = 0;
 }
 
 void fn_802FB688(char *self, s32 arg1) {
@@ -147,12 +149,17 @@ void fn_802FB8B0(char *self, void *src, s32 count) {
     (*(void (**)(char *))(vt + 0x2B4))(self + *(s16 *)(vt + 0x2B0));
 }
 
-void fn_802FBAA0(char *self) {
-    (*(void (**)(char *))(*(char **)(self + 0x68) + 0x24))(self + *(s16 *)(*(char **)(self + 0x68) + 0x20));
+void fn_802FBAA0(s32 *self) {
+    char *vt = (char *)self[0x68 / 4];
+    (*(void (**)(void *))(vt + 0x24))((char *)self + *(s16 *)(vt + 0x20));
 }
 
 void fn_802FBC20(char *self) {
-    (*(void (**)(char *))(*(char **)(self + 0x68) + 0x34))(self + *(s16 *)(*(char **)(self + 0x68) + 0x30));
+    void (*fn)(char *);
+    char *vt = *(char **)(self + 0x68);
+    s16 off = *(s16 *)(vt + 0x30);
+    fn = *(void (**)(char *))(vt + 0x34);
+    fn(self + off);
 }
 
 void fn_802FBC54(void) {
@@ -180,9 +187,9 @@ void fn_802FBC60(char *self, void *src, s32 count) {
     M2C_FIELD(*(char **)self, s32 *, 0x4C) += count;
     vt = *(char **)(self + 0x68);
     p = (*(char *(**)(char *, s32))(vt + 0x2A4))(self + *(s16 *)(vt + 0x2A0), 1);
-    *(void **)(p + 4) = src;
     *(s8 *)p = 0x1A;
     *(s16 *)(p + 2) = count;
+    *(void **)(p + 4) = src;
     vt = *(char **)(self + 0x68);
     (*(void (**)(char *))(vt + 0x2B4))(self + *(s16 *)(vt + 0x2B0));
 }
@@ -203,9 +210,54 @@ void fn_802FC0E4(void) {
 
 }
 
+void fn_802FC904(u8 *self, s32 idx, s32 val) {
+    char *vt;
+    s32 *arr;
+    if ((u32)val <= 0xF7 && val > *(s32 *)(self + 0x40)) {
+        *(s32 *)(self + 0x40) = val;
+    }
+    vt = *(char **)(self + 0x68);
+    (*(void (**)(void *, s32, s32))(vt + 0x2AC))(self + *(s16 *)(vt + 0x2A8), 1, 0);
+    arr = (s32 *)(self + 0x20);
+    arr[idx] = val;
+    *(s32 *)(self + 0x30) = 1;
+}
+
+void fn_802FC980(u8 *self, s32 unused, s32 n) {
+    char *vt;
+    s32 i;
+    s32 *arr;
+    vt = *(char **)(self + 0x68);
+    (*(void (**)(void *))(vt + 0xD4))(self + *(s16 *)(vt + 0xD0));
+    arr = (s32 *)(self + 0x20);
+    for (i = 0; i < n; i++) {
+        arr[i] = i;
+    }
+    if (n - 1 > *(s32 *)(self + 0x40)) {
+        *(s32 *)(self + 0x40) = n - 1;
+    }
+    *(s32 *)(self + 0x30) = 1;
+}
+
 void fn_802FCA04(char *self) {
     char *vt = *(char **)(self + 0x68);
     (*(void (**)(char *, s32, s32))(vt + 0xDC))(self + *(s16 *)(vt + 0xD8), 0, 0xFE);
+}
+
+void fn_802FCB50(u8 *self, void *src) {
+    void *fn_802FEB4C(s32 *arg0, void *src, s32 size);
+    char *vt;
+    void *data;
+    u8 *p;
+    data = fn_802FEB4C((s32 *)self, src, 0x40);
+    vt = *(char **)(self + 0x68);
+    (*(void (**)(void *, s32, s32))(vt + 0x2AC))(self + *(s16 *)(vt + 0x2A8), 0, 0);
+    vt = *(char **)(self + 0x68);
+    p = (*(u8 *(**)(void *, s32))(vt + 0x2A4))(self + *(s16 *)(vt + 0x2A0), 1);
+    *(void **)(p + 4) = data;
+    *p = 0xD;
+    vt = *(char **)(self + 0x68);
+    (*(void (**)(void *))(vt + 0x2B4))(self + *(s16 *)(vt + 0x2B0));
 }
 
 void fn_802FD370(void) {
