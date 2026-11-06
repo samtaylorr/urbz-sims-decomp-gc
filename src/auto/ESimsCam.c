@@ -131,6 +131,16 @@ f32 fn_8000DB6C(void *arg0) {
     return (M2C_FIELD(arg0, f32 *, 0x458) - temp_f13) / (M2C_FIELD(temp_r9, f32 *, 8) - temp_f13);
 }
 
+f32 fn_8000DB8C(void *arg0) {
+    extern const f32 lbl_803C1EF4[];
+    f32 t;
+    void *temp_r11;
+
+    t = fn_8000DB6C(arg0);
+    temp_r11 = M2C_FIELD(arg0, void **, 8);
+    return M2C_FIELD(temp_r11, f32 *, 0x38) * t + M2C_FIELD(temp_r11, f32 *, 0x34) * (lbl_803C1EF4[0] - t);
+}
+
 f32 fn_8000DBD8(void *arg0) {
     return M2C_FIELD(M2C_FIELD(arg0, void **, 8), f32 *, 0x30);
 }
