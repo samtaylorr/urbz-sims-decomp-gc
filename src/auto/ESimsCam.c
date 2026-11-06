@@ -258,6 +258,23 @@ void fn_80012108(void *arg0, s32 arg1, s32 arg2) {
     }
 }
 
+void fn_80013AB4(void *arg0, f32 arg1) {
+    extern const f32 lbl_803C212C[];
+    void fn_8000DC30(void *);
+    void *temp_r9;
+
+    arg1 *= lbl_803C212C[0];
+    temp_r9 = M2C_FIELD(M2C_FIELD(arg0, void **, 0x168), void **, 8);
+    if (arg1 > M2C_FIELD(temp_r9, f32 *, 0x2C)) {
+        M2C_FIELD(temp_r9, f32 *, 0x2C) = arg1;
+    }
+    temp_r9 = M2C_FIELD(M2C_FIELD(arg0, void **, 0x168), void **, 8);
+    if (arg1 < M2C_FIELD(temp_r9, f32 *, 0x28)) {
+        M2C_FIELD(temp_r9, f32 *, 0x28) = arg1;
+    }
+    fn_8000DC30(M2C_FIELD(arg0, void **, 0x168));
+}
+
 void fn_80013B14(void *arg0, s32 arg1) {
     void fn_802E58E4(void *, s32, s32, s32);
     fn_802E58E4((char *)arg0 + 0x19C, arg1, 2, 0);
