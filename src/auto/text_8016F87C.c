@@ -245,6 +245,20 @@ s32 fn_80170E8C(void *self) {
     return max;
 }
 
+s32 fn_80171060(void *arg0) {
+    extern u8 *lbl_8049665C;
+    void fn_80174E84(s32 *, s32);
+    void fn_80174E10(void *);
+    s32 obj;
+    s32 tmp;
+    obj = (*(s32 (**)(u8 *, void *))(*(u8 **)lbl_8049665C + 0x1C4))(lbl_8049665C + *(s16 *)(*(u8 **)lbl_8049665C + 0x1C0), arg0);
+    if (obj == 0) {
+        return 0;
+    }
+    fn_80174E84(&tmp, obj);
+    fn_80174E10(&tmp);
+}
+
 s32 fn_801710CC(char *arg0) {
     if (M2C_FIELD(arg0, s32 *, 0x10) == 0) {
         void *vt = M2C_FIELD(arg0, void **, 0xBC);
