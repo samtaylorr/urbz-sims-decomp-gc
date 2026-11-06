@@ -2007,10 +2007,11 @@ void fn_8039C378(s32 *self) {
 void fn_8039C398(f32 *self) {
     extern const f32 lbl_803CA3DC[];
     extern const f32 lbl_803CA3E0[];
+    f32 one = lbl_803CA3DC[0];
     f32 zero = lbl_803CA3E0[0];
 
     *(s32 *)&self[0] = 0;
-    self[1] = lbl_803CA3DC[0];
+    self[1] = one;
     self[3] = zero;
     self[2] = zero;
     self[5] = zero;
