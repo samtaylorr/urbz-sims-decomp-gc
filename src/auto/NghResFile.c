@@ -751,6 +751,61 @@ s32 fn_8012E44C(void *self) {
     return ret;
 }
 
+typedef struct NghResPath {
+    s32 unk0;
+    s32 unk4;
+    char buf[0x104];
+} NghResPath;
+
+void fn_8012F71C(void *arg0, char *arg1, NghResPath *arg2);
+
+s32 fn_8012E4F0(void *arg0, char *arg1) {
+    void fn_800F687C(void *, char *, s32);
+    char *fn_800F69E8(void *);
+    void *fn_802D7F48(char *, char *);
+    void fn_8012D2B4(void *, void **, s32 *);
+    void fn_802D8004(void *, s32, s32, void *);
+    void *fn_802D0C44(void);
+    void fn_802D1A00(void *, void *);
+    void fn_802D7F94(void *);
+    extern char lbl_803D87EC[];
+    NghResPath path;
+    void *data;
+    s32 size;
+    void *f;
+
+    fn_800F687C(&path, path.buf, 0x104);
+    fn_8012F71C(arg0, arg1, &path);
+    f = fn_802D7F48(fn_800F69E8(&path), lbl_803D87EC);
+    if (f == NULL) {
+        return -0x2A;
+    }
+    fn_8012D2B4(arg0, &data, &size);
+    fn_802D8004(data, size, 1, f);
+    fn_802D1A00(fn_802D0C44(), data);
+    fn_802D7F94(f);
+    return 0;
+}
+
+void fn_8012F71C(void *arg0, char *arg1, NghResPath *arg2) {
+    void fn_800F687C(void *, char *, s32);
+    void fn_800F68F0(void *, char *, s32);
+    void fn_800F6A38(void *, void *);
+    extern char *lbl_80494DF0;
+    NghResPath path;
+    char *obj;
+    char *vt;
+    char *dir;
+
+    obj = lbl_80494DF0;
+    vt = M2C_FIELD(obj, char **, 0x338);
+    dir = (*(char *(**)(void *))(vt + 0x24))(obj + *(s16 *)(vt + 0x20));
+    fn_800F687C(&path, path.buf, 0x104);
+    fn_800F68F0(&path, dir, -1);
+    fn_800F6A38(arg2, &path);
+    fn_800F68F0(arg2, arg1, -1);
+}
+
 s32 fn_8012F7A8(s32 arg0, s32 arg1) {
     M2C_UNK fn_800F68E0(s32);
     M2C_UNK fn_800F68F0(s32, s32, M2C_UNK);
