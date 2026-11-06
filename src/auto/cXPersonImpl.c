@@ -311,6 +311,26 @@ s32 fn_80183B60(void **arg0) {
     return ((u32) M2C_FIELD(*arg0, u32 *, 0x84) >> 1U) & 1;
 }
 
+void fn_80183DDC(char *self, s32 arg1) {
+    extern struct { u8 pad[0xD8]; s32 a; s32 b; } lbl_8041F94C;
+    extern void fn_80176E28(void *, s32);
+    extern void fn_80176DCC(void *, s32);
+    s32 x = M2C_FIELD(self, s32 *, 4);
+    s32 t = 0;
+    if (x != lbl_8041F94C.a) {
+        if (x == lbl_8041F94C.b) {
+            t = 1;
+        } else {
+            arg1 = 0;
+        }
+    }
+    if (arg1 != 0) {
+        fn_80176E28(self + 0x130, t);
+    } else {
+        fn_80176DCC(self + 0x130, t);
+    }
+}
+
 void fn_80184F48(void *arg0) {
     M2C_UNK fn_80176C18(void *, M2C_UNK);
     M2C_UNK fn_80184488(void *);
