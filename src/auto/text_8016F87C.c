@@ -257,6 +257,8 @@ s32 fn_80171678(char *arg0) {
 
 s32 fn_801716BC(char *arg0) {
     s32 fn_801718C8(char *);
+    s32 fn_80174BFC(s32 *);
+    s32 fn_80174C90(s32 *);
     void *vt = M2C_FIELD(arg0, void **, 0xBC);
     M2C_FIELD(vt, void (**)(void *), 0x12C)(arg0 + M2C_FIELD(vt, s16 *, 0x128));
     fn_801718C8(arg0);
@@ -306,12 +308,21 @@ s32 fn_80172758(char *obj, s32 idx) {
     char *vt = *(char **)(obj + 0xbc);
     s32 **p = (*(s32 **(**)(void *))(vt + 0x194))(obj + *(s16 *)(vt + 0x190));
     s32 *arr;
+    s32 n;
     if (idx < 0) {
         idx = 0;
     }
     arr = *p;
-    if (idx >= (arr ? arr[-1] : 0)) {
-        idx = (arr ? arr[-1] : 0) - 1;
+    n = 0;
+    if (arr != NULL) {
+        n = arr[-1];
+    }
+    if (idx >= n) {
+        n = 0;
+        if (arr != NULL) {
+            n = arr[-1];
+        }
+        idx = n - 1;
     }
     return arr[idx];
 }
