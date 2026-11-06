@@ -321,6 +321,14 @@ void fn_8012ACB0(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x28) = (s32) (arg1 - 1);
 }
 
+s32 fn_8012B134(void *arg0) {
+    return 1;
+}
+
+s32 fn_8012B290(void *arg0, u32 arg1) {
+    return 0;
+}
+
 void fn_8012C388(void *arg0, s32 arg1, s32 arg2) {
     s32 *vals = (s32 *)((char *)arg0 + 0x188);
     *(s32 *)((char *)vals + (arg1 - 1) * 4) = arg2;
