@@ -930,6 +930,13 @@ void fn_8012F868(void *arg0, void *arg1) {
     fn_8012FAD0(arg0, arg1, ps);
 }
 
+typedef struct NghResHandler {
+    s32 id;
+    void (*a)(void *, void *);
+    void (*b)(void *, void *);
+    void (*c)(void *, void *);
+} NghResHandler;
+
 s32 fn_8012FAD0(void *self, s32 id, void *out) {
     return 0;
 }
