@@ -5,6 +5,11 @@ void fn_802F70D4(void *arg0, s8 arg1) {
     M2C_FIELD(arg0, s8 *, 0x38) = arg1;
 }
 
+void fn_802F7104(u8 *self, s32 idx, void *src) {
+    struct ERCVec12 { s32 a, b, c; };
+    ((struct ERCVec12 *)(self + 4))[idx] = *(struct ERCVec12 *)src;
+}
+
 void fn_802F7188(f32 *arg0, f32 farg0) {
     *arg0 = farg0;
 }
