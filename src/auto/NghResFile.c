@@ -321,7 +321,26 @@ void fn_8012ACB0(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x28) = (s32) (arg1 - 1);
 }
 
+void fn_8012ADB4(void *arg0) {
+}
+
+void fn_8012AE08(void *arg0) {
+}
+
+void **fn_8012B080(void *arg0, s32 arg1) {
+    return 0;
+}
+
+s32 fn_8012B114(void *arg0) {
+    return 1;
+}
+
 s32 fn_8012B134(void *arg0) {
+    extern s32 lbl_80494468;
+    if (--M2C_FIELD(arg0, s16 *, 0x178) <= 0) {
+        lbl_80494468 = 0;
+        return 1;
+    }
     return 1;
 }
 
