@@ -246,6 +246,12 @@ void fn_8000E860(void *arg0, f32 arg1) {
     fn_8000E7F0(arg0, lbl_803C1F38[0]);
 }
 
+void fn_8000FCF8(char *self, Vec3 *a, Vec3 *b, Vec3 *c) {
+    *a = *(Vec3 *)(self + 0x428);
+    *b = *(Vec3 *)(self + 0x44C);
+    *c = *(Vec3 *)(self + 0x434);
+}
+
 void fn_800101C0(char *self, Vec3 *pos) {
     void fn_8000F238(char *, Vec3 *, Vec3 *);
     void fn_80010038(char *, Vec3 *, Vec3 *, Vec3 *);
