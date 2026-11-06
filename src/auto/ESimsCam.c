@@ -79,6 +79,48 @@ void fn_8000D500(char *self, Vec3 *a, Vec3 *b, Vec3 *c) {
     *(Vec3 *)(self + 0x20) = *c;
 }
 
+void fn_8000D664(s32 *self) {
+    void fn_8000D7E4(s32 *);
+    void fn_8000D558(s32 *);
+    switch (*self) {
+    case 0:
+        fn_8000D558(self);
+        break;
+    case 1:
+        fn_8000D7E4(self);
+        break;
+    }
+}
+
+void fn_8000DAD4(void *arg0, s32 flags) {
+    extern u8 lbl_80406C80[];
+    extern u8 lbl_80406CE0[];
+    void fn_802E5EA4(void *);
+    void fn_802E56A0(void *, s32);
+    void fn_80309AE0(void *, s32);
+    struct {
+        u8 pad0[0x4];
+        void *vt;
+        s32 unk8;
+        u8 pad1[0x4F4 - 0xC];
+        u8 unk4F4[0x57C - 0x4F4];
+        void *unk57C;
+    } *self = arg0;
+
+    self->vt = lbl_80406C80;
+    if (self->unk57C != NULL) {
+        fn_8000D4C8(self->unk57C, 3);
+    }
+    fn_802E5EA4(self->unk4F4);
+    self->unk8 = 0;
+    fn_802E56A0(self->unk4F4, 2);
+    fn_80309AE0((u8 *)self + 0x18, 0);
+    self->vt = lbl_80406CE0;
+    if (flags & 1) {
+        fn_802D1A00(((void *(*)(void))fn_802D0AB8)(), self);
+    }
+}
+
 f32 fn_8000DB6C(void *arg0) {
     f32 temp_f13;
     void *temp_r9;
