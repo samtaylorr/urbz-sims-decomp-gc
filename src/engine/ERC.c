@@ -12,6 +12,8 @@ void fn_802F6670(void *);
 void fn_802F676C(void *, void *, void *);
 void fn_802F6E44(void *);
 void fn_802F5BD0(void *);
+void *fn_802FEAFC(s32 *, s32, s32);
+void fn_802FB8A0(void *, s32);
 extern s16 lbl_804549F0[8];
 extern f32 lbl_803F1284;
 void *fn_802F5B60(void *arg0) {
