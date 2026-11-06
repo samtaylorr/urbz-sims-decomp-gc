@@ -390,6 +390,19 @@ void fn_8012ADB4(void *arg0) {
 }
 
 void fn_8012AE08(void *arg0) {
+    void fn_8012B34C(void *, s32);
+    void fn_801298B8(void *);
+    void fn_8012DFD8(void *);
+    void fn_8012AD18(void *, s32);
+
+    fn_8012B34C(arg0, 0);
+    fn_8012B34C(arg0, 1);
+    fn_8012B34C(arg0, 2);
+    fn_8012B34C(arg0, 3);
+    fn_801298B8(M2C_FIELD(arg0, void **, 0x184));
+    fn_8012DFD8(arg0);
+    fn_8012AD18(arg0, 1);
+    fn_8012ADB4(arg0);
 }
 
 void **fn_8012B080(void *arg0, s32 arg1) {
