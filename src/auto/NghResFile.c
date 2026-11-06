@@ -26,15 +26,16 @@ void fn_80128944(void *arg0, s32 arg1) {
     extern void (*lbl_80494450)(void *);
     void fn_800ECE00(void *, s32);
     void fn_802D20E8(void *);
+    void fn_801289D4(void *);
 
     if (M2C_FIELD(arg0, void **, 0xC) != NULL) {
         lbl_80494450(M2C_FIELD(arg0, void **, 0xC));
     }
     fn_801289D4(arg0);
-    M2C_FIELD(arg0, s32 *, 0x14) = 0;
     M2C_FIELD(arg0, s32 *, 0xC) = 0;
-    M2C_FIELD(arg0, s32 *, 0x8) = -1;
+    M2C_FIELD(arg0, s32 *, 0x14) = 0;
     M2C_FIELD(arg0, s32 *, 0x4) = -1;
+    M2C_FIELD(arg0, s32 *, 0x8) = -1;
     fn_800ECE00((char *)arg0 + 0x10, 2);
     if (arg1 & 1) {
         fn_802D20E8(arg0);
