@@ -372,15 +372,12 @@ s32 fn_8017E950(void *arg0) {
 
 s32 fn_8017E9CC(void *arg0) {
     s32 fn_8017E950(void *);
-    void *o;
     s32 n;
 
-    o = M2C_FIELD(arg0, void **, 4);
-    n = M2C_FIELD(M2C_FIELD(o, void **, 4), s32 (**)(void *, s32), 0xAC)((char *)o + M2C_FIELD(M2C_FIELD(o, void **, 4), s16 *, 0xA8), 1);
+    n = M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 4), void **, 4), s32 (**)(void *, s32), 0xAC)((char *)M2C_FIELD(arg0, void **, 4) + M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 4), void **, 4), s16 *, 0xA8), 1);
     while (n != 0) {
         n--;
-        o = M2C_FIELD(arg0, void **, 4);
-        if (fn_8017E950(M2C_FIELD(M2C_FIELD(o, void **, 4), void *(**)(void *, s32, s32), 0xB4)((char *)o + M2C_FIELD(M2C_FIELD(o, void **, 4), s16 *, 0xB0), n, 1)) != 0) {
+        if (fn_8017E950(M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 4), void **, 4), void *(**)(void *, s32, s32), 0xB4)((char *)M2C_FIELD(arg0, void **, 4) + M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 4), void **, 4), s16 *, 0xB0), n, 1)) != 0) {
             return 1;
         }
     }
