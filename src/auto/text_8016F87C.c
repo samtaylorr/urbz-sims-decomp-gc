@@ -421,6 +421,12 @@ s32 fn_80174418(void *arg0) {
     return 1;
 }
 
+void *fn_80174468(void *arg0, s32 arg1);
+void *fn_80174430(s32 arg0) {
+    extern void *fn_802D1FC8(s32);
+    return fn_80174468(fn_802D1FC8(0xC8), arg0);
+}
+
 s32 fn_801746D0(void) {
     return 1;
 }
