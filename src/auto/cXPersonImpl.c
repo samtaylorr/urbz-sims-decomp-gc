@@ -167,6 +167,20 @@ void fn_801774D8(void *arg0) {
     (*(void (**)(void *))(vt + 0x1C))(obj + *(s16 *)(vt + 0x18));
 }
 
+void fn_80177510(void *arg0, s32 arg1) {
+    void *fn_801170B0(void *);
+    void fn_800F3304(void *);
+    void *list;
+    s32 n;
+
+    n = 0;
+    if (M2C_FIELD(arg0, s32 *, 0x5FC) != 0) {
+        n = 1;
+    }
+    list = arg0 + 0x130;
+    fn_800F3304(fn_801170B0(list + (((M2C_FIELD(list, u32 *, 0x370) + (arg1 + n)) % 10U) * 0x58)));
+}
+
 void fn_8017E10C(void) {
     void fn_802D20E8(void *);
     void fn_803997AC(void *, u32);
