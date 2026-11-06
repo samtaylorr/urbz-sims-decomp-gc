@@ -15,6 +15,13 @@ extern void *fn_802DC3C0(void *, u32, s32, s32, s32);
 extern void *fn_802D0B3C(void);
 extern void *fn_80248488(void *, s32, u32);
 
+static inline void ESimsCam_InitState(char *p, s32 v) {
+    *(s32 *)(p + 0x28) = 0;
+    *(s32 *)(p + 0x20) = 0;
+    *(s32 *)(p + 0x24) = 0;
+    *(s32 *)(p + 0x1C) = v;
+}
+
 static inline void *ESimsCam_AllocAligned(u32 size) {
     void *heap;
     void *p;
@@ -39,17 +46,24 @@ char *fn_8000CA9C(char *self, s32 arg1, s32 arg2, char *arg3) {
     extern void fn_803374C8(void *);
     void fn_8000CB1C(char *);
     Vec3 *dst = (Vec3 *)(self + 0x10);
-    Vec3 *src = (Vec3 *)(arg3 + 0x8);
+    f32 x, y, z;
 
     *(s32 *)(self + 0x4) = *(s32 *)(arg3 + 0x0);
-    dst->x = src->x;
-    dst->y = src->y;
-    dst->z = src->z;
+    x = *(f32 *)(arg3 + 0x8);
+    y = *(f32 *)(arg3 + 0xC);
+    z = *(f32 *)(arg3 + 0x10);
+    dst->x = x;
+    dst->z = z;
+    dst->y = y;
     *(s32 *)(self + 0x0) = arg2;
-    *(s32 *)(self + 0x28) = 0;
-    *(s32 *)(self + 0x20) = 0;
-    *(s32 *)(self + 0x24) = 0;
-    *(s32 *)(self + 0x1C) = arg1;
+    {
+        char *p = self;
+        s32 v = arg1;
+        *(s32 *)(p + 0x28) = 0;
+        *(s32 *)(p + 0x20) = 0;
+        *(s32 *)(p + 0x24) = 0;
+        *(s32 *)(p + 0x1C) = v;
+    }
     fn_803374C8(lbl_8045BBA0);
     fn_8000CB1C(self);
     return self;
@@ -228,11 +242,11 @@ void fn_8000DCE0(char *self) {
     *(s32 *)(self + 0x580) = 0;
     *(s32 *)(self + 0x584) = 0;
     fn_8000F5AC(self, lbl_803C1F04[0]);
+    *(s32 *)(self + 0x3DC) = 0;
     if (lbl_8041FBC4[0] != 0) {
         lbl_80493F20 = 1;
     }
     v = lbl_80493F20;
-    *(s32 *)(self + 0x3DC) = 0;
     *(s32 *)(self + 0x49C) = -1;
     *(s32 *)(self + 0x3D8) = v;
     *(s32 *)(self + 0x3D4) = v;
@@ -385,8 +399,8 @@ f32 fn_80010C3C(Vec3f *arg0) {
     }
     pv = &v;
     v.x = arg0->x;
-    pv->y = arg0->y;
     pv->z = arg0->z;
+    pv->y = arg0->y;
     v.z = lbl_803C1FD8[0];
     a = fn_80242ACC(fn_8025FC40(pv) / len);
     if (arg0->z > lbl_803C1FD8[0]) {
@@ -666,9 +680,9 @@ extern s32 fn_803114D0(void *, s32, char *, s32);
 extern void fn_803115C0(void *, s32);
 extern void fn_80012288(void *);
 void fn_80012534(void *arg0, void *arg1, void *arg2) {
-    extern f32 lbl_803C20E8;
+    extern f32 lbl_803C20E8[];
 
-    if (M2C_FIELD(arg0, s32 *, 0x230) != 2 && !(M2C_FIELD(arg0, u32 *, 0x238) & 1)) {
+    if (M2C_FIELD(arg0, s32 *, 0x230) != 2 && ((M2C_FIELD(arg0, u32 *, 0x238) ^ 1) & 1)) {
         if (arg1 == NULL && arg2 == NULL) {
             M2C_FIELD(arg0, void **, 0x118) = arg2;
             M2C_FIELD(arg0, void **, 0x11C) = arg2;
@@ -684,8 +698,8 @@ void fn_80012534(void *arg0, void *arg1, void *arg2) {
         } else {
             M2C_FIELD(arg0, void **, 0x11C) = (u8 *)arg0 + 0x120;
         }
+        M2C_FIELD(arg0, f32 *, 0x224) = lbl_803C20E8[0];
         M2C_FIELD(arg0, s32 *, 0x160) = 1;
-        M2C_FIELD(arg0, f32 *, 0x224) = lbl_803C20E8;
         M2C_FIELD(arg0, s32 *, 0x218) = 0;
         M2C_FIELD(arg0, s32 *, 0x228) = 1;
         fn_80012408(arg0);
@@ -693,11 +707,11 @@ void fn_80012534(void *arg0, void *arg1, void *arg2) {
 }
 
 s32 fn_800132EC(void *arg0) {
-    if (M2C_FIELD(arg0, s32 *, 0x230) == 2 || !(M2C_FIELD(arg0, u32 *, 0x238) & 1)) {
-        fn_80012288(arg0);
-        return 1;
+    if (M2C_FIELD(arg0, s32 *, 0x230) != 2 && !((M2C_FIELD(arg0, u32 *, 0x238) ^ 1) & 1)) {
+        return 0;
     }
-    return 0;
+    fn_80012288(arg0);
+    return 1;
 }
 
 s32 fn_80013450(void *arg0, f32 arg1, s32 arg2, s32 arg3) {
