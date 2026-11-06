@@ -152,13 +152,13 @@ s32 fn_801295D8(s32 *arg0) {
     s32 n;
     s32 r;
 
-    n = lbl_803F66F0[arg0[0]].a;
     r = lbl_803F66F0[arg0[0]].b;
+    n = lbl_803F66F0[arg0[0]].a;
     if ((u32)arg0[1] < (u32)(n - 1)) {
         arg0[1]++;
     } else if (n != 0) {
-        arg0[1] = 0;
         arg0[0]++;
+        arg0[1] = 0;
     }
     return r;
 }
