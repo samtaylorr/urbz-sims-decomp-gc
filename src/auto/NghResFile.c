@@ -418,7 +418,8 @@ s32 fn_8012A6B8(void **arg0, s32 *arg1) {
 
     for (p = arg0; p != NULL; p = (void **)*p) {
         if (p[1] != NULL) {
-            size = ((size + 3) & ~3) + *(s32 *)p[1];
+            size = (size + 3) & ~3;
+            size += *(s32 *)p[1];
             n++;
         }
     }
