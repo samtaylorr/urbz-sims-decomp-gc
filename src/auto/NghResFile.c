@@ -265,6 +265,20 @@ s32 fn_80129630(s32 arg0) {
     return var_r30;
 }
 
+s32 fn_8012968C(u32 arg0) {
+    s32 i;
+    u32 sum;
+
+    sum = 0;
+    for (i = 0; lbl_803F66F0[i].a != 0; i++) {
+        sum += lbl_803F66F0[i].a;
+        if (arg0 < sum) {
+            return lbl_803F66F0[i].b;
+        }
+    }
+    return 0;
+}
+
 s32 fn_801296E4(void *arg0) {
     s32 fn_80129748(void *, u32);
     s32 sum;
