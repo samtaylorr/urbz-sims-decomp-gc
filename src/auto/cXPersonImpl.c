@@ -516,6 +516,22 @@ s32 fn_80185528(void *arg0) {
     return M2C_FIELD(M2C_FIELD(temp_r9_2, void *(**)(void *), 0x12C)(temp_r11 + M2C_FIELD(temp_r9_2, s16 *, 0x128)), s32 *, 4) == 4;
 }
 
+s32 fn_80185680(void *arg0) {
+    void *temp_r11;
+    void *temp_r3;
+    void *temp_r9;
+    void *temp_r9_2;
+
+    temp_r3 = M2C_FIELD(arg0, void **, 4);
+    temp_r9 = M2C_FIELD(temp_r3, void **, 4);
+    if (M2C_FIELD(temp_r9, s32 (**)(void *), 0x124)(temp_r3 + M2C_FIELD(temp_r9, s16 *, 0x120)) != 0) {
+        return 0;
+    }
+    temp_r11 = M2C_FIELD(arg0, void **, 4);
+    temp_r9_2 = M2C_FIELD(temp_r11, void **, 4);
+    return M2C_FIELD(M2C_FIELD(temp_r9_2, void *(**)(void *), 0x12C)(temp_r11 + M2C_FIELD(temp_r9_2, s16 *, 0x128)), s32 *, 4) == 1;
+}
+
 s32 fn_80185700(void *arg0) {
     void *temp_r11;
     void *temp_r3;
