@@ -419,7 +419,8 @@ void **fn_8012B080(void *arg0, s32 arg1) {
     if ((i = fn_8012A59C(arg1)) >= 0) {
         ret = M2C_FIELD(arg0, void ***, 0x13C) + i;
     } else if ((i = fn_8012A5D4(arg1)) >= 0) {
-        ret = ((void ***)((char *)arg0 + 0x140))[M2C_FIELD(arg0, s32 *, 0x28)] + i;
+        void ***tbl = (void ***)((char *)arg0 + 0x140);
+        ret = tbl[M2C_FIELD(arg0, s32 *, 0x28)] + i;
     } else if ((i = fn_8012A60C(arg1)) >= 0) {
         ret = M2C_FIELD(arg0, void ***, 0x170) + i;
     }
@@ -427,7 +428,9 @@ void **fn_8012B080(void *arg0, s32 arg1) {
 }
 
 s32 fn_8012B114(void *arg0) {
-    return ++M2C_FIELD(arg0, s16 *, 0x178) == 1;
+    if (++M2C_FIELD(arg0, s16 *, 0x178) == 1) {
+    }
+    return 1;
 }
 
 s32 fn_8012B134(void *arg0) {
