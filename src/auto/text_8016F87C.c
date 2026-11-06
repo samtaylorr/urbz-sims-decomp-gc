@@ -247,6 +247,7 @@ s32 fn_80170E8C(void *self) {
 
 s32 fn_80171678(char *arg0) {
     s32 fn_80171818(char *);
+    void fn_80174E84(s32 *, s32);
     s32 tmp;
     fn_80171818(arg0);
     fn_80174E84(&tmp, M2C_FIELD(arg0, s32 *, 0x328));
@@ -299,6 +300,20 @@ s32 fn_80171960(void) {
 void fn_80172464(s32 arg0) {
     M2C_UNK fn_80174A98(s32);
     fn_80174A98(arg0 + 0x18);
+}
+
+s32 fn_80172758(char *obj, s32 idx) {
+    char *vt = *(char **)(obj + 0xbc);
+    s32 **p = (*(s32 **(**)(void *))(vt + 0x194))(obj + *(s16 *)(vt + 0x190));
+    s32 *arr;
+    if (idx < 0) {
+        idx = 0;
+    }
+    arr = *p;
+    if (idx >= (arr ? arr[-1] : 0)) {
+        idx = (arr ? arr[-1] : 0) - 1;
+    }
+    return arr[idx];
 }
 
 void fn_801737C8(char *arg0, s32 a, s32 b) {
