@@ -163,6 +163,18 @@ void fn_8017E10C(void) {
     }
 }
 
+s32 fn_8017F6A8(void *arg0) {
+    typedef struct { u8 data[0xA4]; } Elem;
+    Elem *begin = M2C_FIELD(arg0, Elem **, 0x4D4);
+    s32 n = M2C_FIELD(arg0, Elem **, 0x4D8) - begin;
+
+    if (n == 0) {
+        return 0;
+    }
+    n--;
+    return (s32)&begin[n];
+}
+
 s64 fn_80180E24(void *arg0, s32 arg1, s32 arg2) {
     M2C_UNK fn_801362CC(s32, s32 *, s32);
     void *temp_r11;
@@ -367,6 +379,10 @@ s32 fn_80185E08(void *arg0, s32 arg1) {
         return temp_r3 - 1;
     }
     return temp_r3;
+}
+
+s32 fn_80185E7C(void *self, s32 i) {
+    return ((struct { u8 pad[0x8]; s16 a[1]; } *)self)->a[i];
 }
 
 u8 *fn_80185E9C(u8 *self) {
