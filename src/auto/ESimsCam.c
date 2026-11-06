@@ -163,8 +163,8 @@ void fn_8000DC30(void *arg0, f32 arg1) {
 
     temp_r9 = M2C_FIELD(arg0, void **, 8);
     temp_f11 = M2C_FIELD(temp_r9, f32 *, 0x28);
-    temp_f13 = M2C_FIELD(temp_r9, f32 *, 0x2C) - temp_f11;
     temp_f10 = M2C_FIELD(temp_r9, f32 *, 4);
+    temp_f13 = M2C_FIELD(temp_r9, f32 *, 0x2C) - temp_f11;
     M2C_FIELD(arg0, f32 *, 0x458) = ((arg1 - temp_f11) * (M2C_FIELD(temp_r9, f32 *, 8) - temp_f10) + temp_f10 * temp_f13) / temp_f13;
 }
 
@@ -239,9 +239,10 @@ void fn_8000E7F0(void *arg0, f32 arg1) {
     v = M2C_FIELD(arg0, f32 *, 0x458) - arg1;
     M2C_FIELD(arg0, f32 *, 0x458) = v;
     r = M2C_FIELD(t, f32 *, 4);
-    if (v >= r) {
+    if (v < r) {
+    } else {
         r = max;
-        if (v <= max) {
+        if (!(v > max)) {
             r = v;
         }
     }
@@ -284,10 +285,11 @@ s32 fn_80010228(char *self, Vec3 *pos) {
 
 s32 fn_8001025C(char *self, Vec3 *pos, f32 minX, f32 minY, f32 maxX, f32 maxY) {
     extern void fn_802E4030(void *, Vec3 *, f32 *);
-    f32 out[2];
-    s32 flags = 0;
+    f32 out[3];
+    s32 flags;
 
-    fn_802E4030(self + 0x18, pos, &out[0]);
+    fn_802E4030(self + 0x18, pos, out);
+    flags = 0;
     if (out[0] < minX) {
         flags = 1;
     }
@@ -320,48 +322,48 @@ f32 fn_800111A4(void *arg0) {
 
 f32 fn_800111D4(void *arg0) {
     extern f32 lbl_8041E7B8[];
-    f32 temp_f11;
-    f32 temp_f12;
     void *temp_r9;
+    f32 lo;
+    f32 a;
+    f32 t;
 
     temp_r9 = M2C_FIELD(arg0, void **, 8);
-    temp_f11 = M2C_FIELD(temp_r9, f32 *, 4);
-    temp_f12 = lbl_8041E7B8[0x90 / 4];
-    return (((M2C_FIELD(arg0, f32 *, 0x458) - temp_f11) / (M2C_FIELD(temp_r9, f32 *, 8) - temp_f11)) * (lbl_8041E7B8[0x94 / 4] - temp_f12)) + temp_f12;
+    lo = M2C_FIELD(temp_r9, f32 *, 4);
+    t = (M2C_FIELD(arg0, f32 *, 0x458) - lo) / (M2C_FIELD(temp_r9, f32 *, 8) - lo);
+    a = lbl_8041E7B8[0x90 / 4];
+    return a + t * (lbl_8041E7B8[0x94 / 4] - a);
 }
 
 f32 fn_8001120C(void *arg0) {
     extern f32 lbl_8041E7B8[];
-    f32 temp_f11;
-    f32 temp_f12;
     void *temp_r9;
+    f32 lo;
+    f32 t;
 
     temp_r9 = M2C_FIELD(arg0, void **, 8);
-    temp_f11 = M2C_FIELD(temp_r9, f32 *, 4);
-    temp_f12 = lbl_8041E7B8[0x98 / 4];
-    return (((M2C_FIELD(arg0, f32 *, 0x458) - temp_f11) / (M2C_FIELD(temp_r9, f32 *, 8) - temp_f11)) * (lbl_8041E7B8[0x9C / 4] - temp_f12)) + temp_f12;
+    lo = M2C_FIELD(temp_r9, f32 *, 4);
+    t = (M2C_FIELD(arg0, f32 *, 0x458) - lo) / (M2C_FIELD(temp_r9, f32 *, 8) - lo);
+    return t * (lbl_8041E7B8[0x9C / 4] - lbl_8041E7B8[0x98 / 4]) + lbl_8041E7B8[0x98 / 4];
 }
 
 void fn_80011244(void *arg0, Vec3f *out, void **arg2) {
     extern f32 lbl_803C200C[];
+    typedef struct { s16 delta; s16 index; char *(*func)(void *); } VtEnt;
+    typedef struct { s16 delta; s16 index; void (*func)(void *, void *); } VtEnt2;
     char *obj;
-    char *vt;
-    f32 zero;
     Vec3f v;
+    Vec3f *pv;
     f32 m[4][4];
 
-    zero = lbl_803C200C[0];
-    v.z = zero;
-    v.y = zero;
-    v.x = zero;
+    pv = &v;
+    pv->x = lbl_803C200C[0];
+    pv->y = lbl_803C200C[0];
+    pv->z = lbl_803C200C[0];
     *out = v;
     if (arg2 != NULL) {
-        obj = *(char **)arg2;
-        vt = *(char **)(obj + 0x1C);
-        obj = (*(char *(**)(void *))(vt + 0x8C))(obj + *(s16 *)(vt + 0x88));
+        obj = ((VtEnt *)(*(char **)((char *)*arg2 + 0x1C) + 0x88))->func((char *)*arg2 + ((VtEnt *)(*(char **)((char *)*arg2 + 0x1C) + 0x88))->delta);
         if (obj != NULL) {
-            vt = *(char **)obj;
-            (*(void (**)(void *, void *))(vt + 0xF4))(obj + *(s16 *)(vt + 0xF0), m);
+            ((VtEnt2 *)(*(char **)obj + 0xF0))->func(obj + ((VtEnt2 *)(*(char **)obj + 0xF0))->delta, m);
             *out = *(Vec3f *)m[3];
         }
     }
