@@ -399,17 +399,27 @@ s32 fn_801854A8(void *arg0) {
 }
 
 s32 fn_80185528(void *arg0) {
-    struct VEntry { s16 delta; s16 index; void *(*fn)(void *); };
-    char *obj;
-    struct VEntry *e;
-    obj = M2C_FIELD(arg0, char **, 4);
-    e = (struct VEntry *)(M2C_FIELD(obj, char **, 4) + 0x120);
-    if (e->fn(obj + e->delta) != 0) {
+    void *temp_r11;
+    void *temp_r3;
+    void *temp_r9;
+    void *temp_r9_2;
+
+    temp_r3 = M2C_FIELD(arg0, void **, 4);
+    temp_r9 = M2C_FIELD(temp_r3, void **, 4);
+    if (M2C_FIELD(temp_r9, s32 (**)(void *), 0x124)(temp_r3 + M2C_FIELD(temp_r9, s16 *, 0x120)) != 0) {
         return 0;
     }
-    obj = M2C_FIELD(arg0, char **, 4);
-    e = (struct VEntry *)(M2C_FIELD(obj, char **, 4) + 0x128);
-    return M2C_FIELD(e->fn(obj + e->delta), s32 *, 4) == 4;
+    temp_r11 = M2C_FIELD(arg0, void **, 4);
+    temp_r9_2 = M2C_FIELD(temp_r11, void **, 4);
+    return M2C_FIELD(M2C_FIELD(temp_r9_2, void *(**)(void *), 0x12C)(temp_r11 + M2C_FIELD(temp_r9_2, s16 *, 0x128)), s32 *, 4) == 4;
+}
+
+void fn_80185834(char *self) {
+    struct { char *begin; char *end; } *vec = (void *)(self + 0x4D4);
+    char *it;
+    for (it = vec->begin; it != vec->end; it += 0xA4) {
+        *(s32 *)(it + 0x7C) = 0;
+    }
 }
 
 void fn_80185868(void) {
