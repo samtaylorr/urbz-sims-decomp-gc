@@ -37,10 +37,10 @@ void *fn_802F5B60(void *arg0) {
 void fn_802F5C98(void *arg0) {
     fn_802F6E44((char *)arg0 + 0x20);
     fn_802F6E44(arg0);
+    M2C_FIELD(arg0, s32 *, 0x4C) = 0x100;
+    M2C_FIELD(arg0, s32 *, 0x44) = 0;
     M2C_FIELD(arg0, s32 *, 0x40) = 0;
     M2C_FIELD(arg0, s32 *, 0x48) = 0x100;
-    M2C_FIELD(arg0, s32 *, 0x44) = 0;
-    M2C_FIELD(arg0, s32 *, 0x4C) = 0x100;
 }
 
 void fn_802F5CE8(void *arg0, s32 x, s32 y, s32 id) {
@@ -58,13 +58,12 @@ void fn_802F5CE8(void *arg0, s32 x, s32 y, s32 id) {
             break;
         }
     }
-    if (i > 3) {
-        return;
-    }
-    p = (s16 *)(cell + 4 + i * 0x10);
-    cell[i] = id;
-    for (j = 7; j >= 0; j--) {
-        p[j] = -1;
+    if (i <= 3) {
+        p = (s16 *)(cell + 4 + i * 0x10);
+        cell[i] = id;
+        for (j = 7; j >= 0; j--) {
+            p[j] = -1;
+        }
     }
     M2C_FIELD(arg0, s32 *, 0) = 1;
 }
