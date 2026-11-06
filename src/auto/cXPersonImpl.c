@@ -167,6 +167,10 @@ s32 fn_80181314(void) {
     return 0x50455253;
 }
 
+f32 fn_8018167C(void *self, s32 i) {
+    return ((struct { u8 pad[0xA8]; f32 vals[1]; } *)self)->vals[i];
+}
+
 void *fn_8018169C(void *arg0, s32 i) {
     return (u8 *)arg0 + (i * 4 + 0xE8);
 }
