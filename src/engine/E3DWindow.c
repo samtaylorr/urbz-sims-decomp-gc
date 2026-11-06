@@ -266,6 +266,15 @@ s32 fn_802EC214(void *arg0, s32 arg1) {
     return 0;
 }
 
+f32 fn_802EC2D4(void *arg0, s32 arg1) {
+    extern const f32 lbl_803F0AD4[];
+    void *win = fn_802E5F90_inline(arg0, arg1);
+    if (win != NULL && M2C_FIELD(win, s32 *, 0xA8) == 1) {
+        return M2C_FIELD(win, f32 *, 0x40);
+    }
+    return lbl_803F0AD4[0];
+}
+
 void fn_802EC460(void *arg0, void *arg1);
 void fn_802EC4C8(void *arg0, s32 arg1) {
     fn_802EC460(arg0, fn_802E5F90_inline(arg0, arg1));
