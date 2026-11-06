@@ -504,6 +504,15 @@ s32 fn_80185528(void *arg0) {
     return M2C_FIELD(M2C_FIELD(temp_r9_2, void *(**)(void *), 0x12C)(temp_r11 + M2C_FIELD(temp_r9_2, s16 *, 0x128)), s32 *, 4) == 4;
 }
 
+s32 fn_8018577C(void *arg0) {
+    void *temp_r3;
+    void *temp_r9;
+
+    temp_r3 = M2C_FIELD(arg0, void **, 4);
+    temp_r9 = M2C_FIELD(temp_r3, void **, 4);
+    return M2C_FIELD(temp_r9, s32 (**)(void *), 0x1C4)(temp_r3 + M2C_FIELD(temp_r9, s16 *, 0x1C0)) ^ 1;
+}
+
 s32 fn_801857B8(char *self) {
     if ((*(s32 (**)(char *))(*(char **)(*(char **)(self + 4) + 4) + 0x124))(
             *(char **)(self + 4) + *(s16 *)(*(char **)(*(char **)(self + 4) + 4) + 0x120)) != 0) {
