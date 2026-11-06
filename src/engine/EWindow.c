@@ -383,6 +383,12 @@ s32 fn_80307224(void *self) {
     return ret;
 }
 
+void fn_80307364(void *self, s32 arg1) {
+}
+
+void fn_803073C4(void *self) {
+}
+
 void fn_8030744C(void *arg0) {
     void fn_80307478(void *);
     if (M2C_FIELD(arg0, s32 *, 0x18) & 2) {
