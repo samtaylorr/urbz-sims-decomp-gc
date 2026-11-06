@@ -207,12 +207,12 @@ void fn_80176FE8(void) {
     }
 }
 
-void fn_801770F8(void *arg0, void *arg1, void *arg2) {
-    s32 fn_8018D8BC(void *, void *, s32);
-    s32 fn_8018DA88(void *, void *, s32);
-    fn_8018D8BC(arg1, (u8 *)arg0 + 0, 1);
-    fn_8018DA88(arg1, (u8 *)arg0 + 4, 1);
-    fn_8018DA88(arg1, (u8 *)arg0 + 8, 1);
+void fn_801770F8(s32 *arg0, void *arg1, void *arg2) {
+    void fn_8018D8BC(void *, s32 *, s32);
+    void fn_8018DA88(void *, s32 *, s32);
+    fn_8018D8BC(arg1, &arg0[0], 1);
+    fn_8018DA88(arg1, &arg0[1], 1);
+    fn_8018DA88(arg1, &arg0[2], 1);
 }
 
 M2C_UNK *fn_80177154(void) {
