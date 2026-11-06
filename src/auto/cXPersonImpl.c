@@ -120,14 +120,14 @@ void fn_80176D9C(void *arg0, s32 arg1) {
 }
 
 void fn_80176DCC(void *arg0, s32 arg1) {
-    extern void *lbl_8041F774;
+    extern void *lbl_8041F754[];
     M2C_UNK fn_801F983C(void *, u8);
     if (M2C_FIELD(arg0, u8 *, 0x378) == 0) {
-        if (lbl_8041F774 != NULL) {
-            fn_801F983C(lbl_8041F774, M2C_FIELD(arg0, u8 *, 0x379));
+        if (lbl_8041F754[8] != NULL) {
+            fn_801F983C(lbl_8041F754[8], M2C_FIELD(arg0, u8 *, 0x379));
         }
-        M2C_FIELD(arg0, u8 *, 0x379) = 0xFF;
         M2C_FIELD(arg0, u8 *, 0x378) = 1;
+        M2C_FIELD(arg0, u8 *, 0x379) = 0xFF;
     }
 }
 
@@ -573,15 +573,7 @@ s32 fn_801857B8(char *self) {
 }
 
 void fn_80185834(char *self) {
-    struct { char *begin; char *end; } *vec = (void *)(self + 0x4D4);
-    char *it = vec->begin;
-    if (it != vec->end) {
-        self = (char *)vec;
-        do {
-            *(s32 *)(it + 0x7C) = 0;
-            it += 0xA4;
-        } while (it != ((char **)self)[1]);
-    }
+    cXPersonImpl_A4Vec_Clear7C((cXPersonImpl_A4Vec *)(self + 0x4D4));
 }
 
 void fn_80185868(void) {
