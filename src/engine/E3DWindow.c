@@ -189,6 +189,17 @@ void fn_802E66F8(s32 arg0, s32 arg1, f32 farg0, f32 farg1) {
     }
 }
 
+f32 fn_802E711C(void *arg0, void *arg1, void *arg2) {
+    extern const f32 lbl_803F09E0[];
+    f32 a = M2C_FIELD(M2C_FIELD(arg1, void **, 0x7C), s32 *, 0x20) - 1;
+    f32 b = M2C_FIELD(M2C_FIELD(arg2, void **, 0x7C), s32 *, 0x20) - 1;
+    f32 t = M2C_FIELD(arg2, f32 *, 0x40) / b + M2C_FIELD(arg1, f32 *, 0x78);
+    while (t > lbl_803F09E0[0]) {
+        t -= lbl_803F09E0[0];
+    }
+    return t * a;
+}
+
 f32 fn_802E71B4(void *arg0, void *arg1, s32 arg2) {
     void fn_802E730C(void *, void *, f32 *, s32);
     f32 fn_8025FC40(f32 *);
