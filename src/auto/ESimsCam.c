@@ -607,6 +607,40 @@ char *fn_80014348(char *self, void *key) {
     return p;
 }
 
+void fn_80014694(void *arg0, Vec3f *arg1) {
+    extern void *lbl_80495050;
+    extern const f32 lbl_803C216C[];
+    void fn_802EEDA8(void *, f32 *, f32 *, f32 *, f32 *);
+    typedef struct { f32 v[4]; } Col;
+
+    fn_802EEDA8(lbl_80495050, (f32 *)((u8 *)arg0 + 0x24C), (f32 *)((u8 *)arg0 + 0x250), (f32 *)((u8 *)arg0 + 0x254), (f32 *)((u8 *)arg0 + 0x258));
+    *(Col *)((u8 *)arg0 + 0x25C) = *(Col *)arg1;
+    M2C_FIELD(arg0, f32 *, 0x244) = lbl_803C216C[0];
+    M2C_FIELD(arg0, u32 *, 0x28C) |= 1;
+}
+
+void fn_80014714(void *arg0) {
+    extern u8 *lbl_80495050;
+    extern const f32 lbl_803C2170[];
+    extern const f32 lbl_803C2174[];
+    f32 t;
+    f32 one;
+    u8 *vt;
+
+    one = lbl_803C2174[0];
+    t = M2C_FIELD(arg0, f32 *, 0x244) * lbl_803C2170[0];
+    if (t >= one) {
+        M2C_FIELD(arg0, u32 *, 0x28C) &= ~1;
+        t = one;
+    }
+    vt = *(u8 **)lbl_80495050;
+    (*(void (**)(void *, f32, f32, f32, f32))(vt + 0x194))(lbl_80495050 + *(s16 *)(vt + 0x190),
+        (one - t) * M2C_FIELD(arg0, f32 *, 0x24C) + t * M2C_FIELD(arg0, f32 *, 0x25C),
+        (one - t) * M2C_FIELD(arg0, f32 *, 0x250) + t * M2C_FIELD(arg0, f32 *, 0x260),
+        (one - t) * M2C_FIELD(arg0, f32 *, 0x254) + t * M2C_FIELD(arg0, f32 *, 0x264),
+        (one - t) * M2C_FIELD(arg0, f32 *, 0x258) + t * M2C_FIELD(arg0, f32 *, 0x268));
+}
+
 void fn_800147C4(void *arg0) {
     extern void *lbl_80495050;
     extern const f32 lbl_803C2178[];
