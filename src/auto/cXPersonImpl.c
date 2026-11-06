@@ -385,6 +385,10 @@ s32 fn_80185E7C(void *self, s32 i) {
     return ((struct { u8 pad[0x8]; s16 a[1]; } *)self)->a[i];
 }
 
+void fn_80185E8C(void *self, s32 i, s16 v) {
+    ((struct { u8 pad[0x8]; s16 a[1]; } *)self)->a[i] = v;
+}
+
 u8 *fn_80185E9C(u8 *self) {
     return self + 8;
 }
