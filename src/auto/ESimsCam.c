@@ -219,7 +219,11 @@ void fn_80012020(void *arg0) {
 }
 
 s32 fn_800120DC(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0x160) != 0;
+    s32 ret = 0;
+    if (M2C_FIELD(arg0, s32 *, 0x160) != 0) {
+        ret = 1;
+    }
+    return ret;
 }
 
 s32 fn_800120F4(void *arg0) {
