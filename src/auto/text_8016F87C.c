@@ -317,6 +317,12 @@ void fn_80173FF0(void *self) {
     (*(void (**)(void *))(vt + 0xC4))(obj + *(s16 *)(vt + 0xC0));
 }
 
+void fn_80174028(void *self) {
+    u8 *obj = *(u8 **)((u8 *)self + 0xC8);
+    u8 *vt = *(u8 **)(obj + 0xBC);
+    (*(void (**)(void *))(vt + 0xCC))(obj + *(s16 *)(vt + 0xC8));
+}
+
 s32 fn_80174400(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0xD0) = (s32) (M2C_FIELD(arg0, s32 *, 0xD0) + 1);
     return 1;
@@ -441,22 +447,22 @@ void fn_80174EE4(void *arg0, s32 arg1) {
     extern void *fn_802D0AB8(void);
     extern void fn_802D1A00(void *, void *);
     extern void fn_802D20E8(void *);
-    char *list;
+    char *list1 = (char *)arg0 + 0x110;
+    char *list2;
     void *n;
 
-    list = (char *)arg0 + 0x110;
     fn_80174FD4(arg0, arg1);
-    while ((n = M2C_FIELD(list, void **, 4)) != NULL) {
-        M2C_FIELD(list, void **, 4) = *(void **)n;
+    while ((n = M2C_FIELD(list1, void **, 4)) != NULL) {
+        M2C_FIELD(list1, void **, 4) = *(void **)n;
         fn_802D1A00(fn_802D0AB8(), n);
     }
-    M2C_FIELD(list, void **, 8) = NULL;
-    list = (char *)arg0 + 0x104;
-    while ((n = M2C_FIELD(list, void **, 4)) != NULL) {
-        M2C_FIELD(list, void **, 4) = *(void **)n;
+    M2C_FIELD(list1, void **, 8) = NULL;
+    list2 = (char *)arg0 + 0x104;
+    while ((n = M2C_FIELD(list2, void **, 4)) != NULL) {
+        M2C_FIELD(list2, void **, 4) = *(void **)n;
         fn_802D1A00(fn_802D0AB8(), n);
     }
-    M2C_FIELD(list, void **, 8) = NULL;
+    M2C_FIELD(list2, void **, 8) = NULL;
     if (arg1 & 1) {
         fn_802D20E8(arg0);
     }
