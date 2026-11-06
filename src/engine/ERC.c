@@ -15,7 +15,7 @@ void fn_802F5BD0(void *);
 void *fn_802FEAFC(s32 *, s32, s32);
 void fn_802FB8A0(void *, s32);
 extern s16 lbl_804549F0[8];
-extern f32 lbl_803F1284;
+extern const f32 lbl_803F1284[];
 void *fn_802F5B60(void *arg0) {
     s32 i;
 
@@ -107,15 +107,14 @@ s32 fn_802F6DA8(void *arg0, f32 *pos, s32 id) {
     s32 y;
     s32 i;
 
-    x = (s32)(pos[0] + lbl_803F1284);
-    y = (s32)(pos[1] + lbl_803F1284);
-    if (x < 0 || x > 62 || y < 0 || y > 62) {
-        return 0;
-    }
-    cell = (s8 *)arg0 + 0x6C98 + x * 0x10BC + y * 0x44;
-    for (i = 0; i < 4; i++) {
-        if (cell[i] == id) {
-            return 1;
+    x = (s32)(pos[0] + *(f32 *)&lbl_803F1284);
+    y = (s32)(pos[1] + *(f32 *)&lbl_803F1284);
+    if (x >= 0 && x <= 62 && y >= 0 && y <= 62) {
+        cell = (s8 *)arg0 + 0x6C98 + x * 0x10BC + y * 0x44;
+        for (i = 0; i < 4; i++) {
+            if (cell[i] == id) {
+                return 1;
+            }
         }
     }
     return 0;
