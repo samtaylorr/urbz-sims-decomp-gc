@@ -605,6 +605,22 @@ s32 fn_80174888(void *arg0) {
     return 1;
 }
 
+s32 fn_801748EC(void *arg0) {
+    void *obj;
+    void *vt;
+
+    obj = M2C_FIELD(arg0, void **, 0xC0);
+    if (obj != NULL) {
+        vt = M2C_FIELD(obj, void **, 0xBC);
+        obj = M2C_FIELD(vt, void *(**)(void *), 0x15C)((char *)obj + M2C_FIELD(vt, s16 *, 0x158));
+        if (obj != NULL) {
+            vt = M2C_FIELD(obj, void **, 0);
+            M2C_FIELD(vt, void (**)(void *), 0x44)((char *)obj + M2C_FIELD(vt, s16 *, 0x40));
+        }
+    }
+    return 1;
+}
+
 s32 fn_80174A44(s32 *self) {
     extern void fn_802D211C(s32);
     if (self[6] != 0 && self[3] != 0) {
