@@ -397,11 +397,13 @@ s32 fn_80174290(char *self) {
         M2C_FIELD(self, s32 *, 0xCC) = 1;
         (*(void (**)(char *))(vt + 0x10C))(self + *(s16 *)(vt + 0x108));
     }
-    obj = *(char **)(self + 0xE0);
-    if (obj != NULL) {
-        char *vt2 = *(char **)obj;
-        void (*fp)(char *) = *(void (**)(char *))(vt2 + 0x1C);
-        fp(obj + *(s16 *)(vt2 + 0x18));
+    if (*(char **)(self + 0xE0) != NULL) {
+        register char *p asm("r3");
+        char *vt2;
+        obj = *(char **)(self + 0xE0);
+        vt2 = *(char **)obj;
+        p = obj + *(s16 *)(vt2 + 0x18);
+        (*(void (**)(char *))(vt2 + 0x1C))(p);
     }
     *(char **)(self + 0xE0) = NULL;
     return 1;
@@ -489,6 +491,12 @@ void fn_8017450C(void *arg0, s32 arg1) {
     if (arg1 & 1) {
         fn_802D20E8(arg0);
     }
+}
+
+s32 fn_801745C4(void *arg0) {
+    void *vt = M2C_FIELD(arg0, void **, 0xBC);
+    M2C_FIELD(vt, void (**)(void *), 0xEC)((char *)arg0 + M2C_FIELD(vt, s16 *, 0xE8));
+    return 1;
 }
 
 s32 fn_801746D0(void) {
