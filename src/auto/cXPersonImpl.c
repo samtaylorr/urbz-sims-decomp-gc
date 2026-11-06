@@ -359,10 +359,15 @@ s32 fn_8017E950(void *arg0) {
     void *obj;
     void *vt;
 
-    return fn_80117474(arg0) != NULL &&
-           (obj = fn_80117474(arg0), vt = M2C_FIELD(obj, void **, 4),
-            fn_8016CCE0(M2C_FIELD(vt, s32 (**)(void *), 0x32C)((char *)obj + M2C_FIELD(vt, s16 *, 0x328))) == 0x7C4) &&
-           M2C_FIELD(arg0, s32 *, 0x14) == 3;
+    if (fn_80117474(arg0) == NULL) {
+        return 0;
+    }
+    obj = fn_80117474(arg0);
+    vt = M2C_FIELD(obj, void **, 4);
+    if (fn_8016CCE0(M2C_FIELD(vt, s32 (**)(void *), 0x32C)((char *)obj + M2C_FIELD(vt, s16 *, 0x328))) != 0x7C4) {
+        return 0;
+    }
+    return M2C_FIELD(arg0, s32 *, 0x14) == 3;
 }
 
 s32 fn_8017E9CC(void *arg0) {
