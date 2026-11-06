@@ -150,10 +150,10 @@ s32 fn_80176904(void *arg0, void *arg1) {
     r = 0;
     if (fn_80117484(arg1) != 0) {
         r = !M2C_FIELD(arg1, struct Flags *, 0x44).b4;
-        if (r != 0 && M2C_FIELD(arg1, struct Flags *, 0x44).b1 &&
-            arg1 != (char *)arg0 + (M2C_FIELD(arg0, u32 *, 0x370) % 10U) * 0x58) {
-            r = 0;
-        }
+    }
+    if (r != 0 && M2C_FIELD(arg1, struct Flags *, 0x44).b1 &&
+        arg1 != (char *)arg0 + (M2C_FIELD(arg0, u32 *, 0x370) % 10U) * 0x58) {
+        r = 0;
     }
     return r;
 }
