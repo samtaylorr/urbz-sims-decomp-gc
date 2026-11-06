@@ -165,8 +165,9 @@ s32 fn_8016FE18(void) {
 }
 
 void fn_80170714(void *arg0, s32 arg1, s32 arg2) {
-    s32 (*vals)[10] = (s32 (*)[10])((char *)arg0 + 0x5C);
-    vals[1][arg1] = arg2;
+    s32 *vals = (s32 *)((char *)arg0 + 0x5C);
+    s32 *p = &vals[10];
+    p[arg1] = arg2;
 }
 
 s32 fn_80170728(void *arg0, s32 arg1) {
@@ -214,20 +215,32 @@ s32 fn_80170868(void *self, void *obj) {
 }
 
 s32 fn_80170E8C(void *self) {
-    struct XMap { void *unk0; void ***header; } *map;
-    XMapIter end;
-    XMapIter it;
+    void **fn_8039AB24(void **node);
+    u8 buf[32];
     s32 max;
+    char *map;
+    void **node;
+    s32 more;
 
-    map = (struct XMap *)((char *)self + 0x44);
+    map = (char *)self + 0x44;
     max = 0;
-    end.node = (void **)map->header;
-    it.node = map->header[2];
-    while (XMapIter_NotEqual(&it, &end)) {
-        if (max < M2C_FIELD(it.node, s32 *, 0x14)) {
-            max = M2C_FIELD(it.node, s32 *, 0x14);
+    *(void ***)(buf + 0) = M2C_FIELD(map, void ***, 4);
+    *(void ***)(buf + 8) = M2C_FIELD(M2C_FIELD(map, void ***, 4), void ***, 8);
+    for (;;) {
+        more = 1;
+        if (*(void ***)(buf + 8) == *(void ***)(buf + 0)) {
+            more = 0;
         }
-        XMapIter_PostInc(&it);
+        if (!more) {
+            break;
+        }
+        node = *(void ***)(buf + 8);
+        if (max < M2C_FIELD(node, s32 *, 0x14)) {
+            max = M2C_FIELD(node, s32 *, 0x14);
+        }
+        *(void ***)(buf + 0x18) = node;
+        *(void ***)(buf + 8) = fn_8039AB24(node);
+        *(void ***)(buf + 0x10) = *(void ***)(buf + 0x18);
     }
     return max;
 }
@@ -562,6 +575,18 @@ s32 fn_801747E8(char *self) {
         M2C_FIELD(self, char **, 0xC4) = NULL;
     }
     return 1;
+}
+
+s32 fn_80174840(void *arg0) {
+    void *temp_r11;
+    void *temp_r9;
+
+    temp_r11 = M2C_FIELD(arg0, void **, 0xC4);
+    if (temp_r11 != NULL) {
+        temp_r9 = M2C_FIELD(temp_r11, void **, 0);
+        return M2C_FIELD(temp_r9, s32 (**)(void *), 0x2C)((char *)temp_r11 + M2C_FIELD(temp_r9, s16 *, 0x28));
+    }
+    return 0;
 }
 
 s32 fn_80174A44(s32 *self) {
