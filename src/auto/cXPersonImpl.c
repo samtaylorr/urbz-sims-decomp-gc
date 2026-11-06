@@ -280,6 +280,10 @@ void fn_80182220(void) {
 
 }
 
+s32 fn_801836B8(void *a, void *b) {
+    return M2C_FIELD(a, f32 *, 0x8) > M2C_FIELD(b, f32 *, 0x8);
+}
+
 void fn_80183830(void *arg0) {
     M2C_UNK fn_80134F20(s32);
     void *temp_r11;
