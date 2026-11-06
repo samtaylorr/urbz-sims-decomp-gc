@@ -381,6 +381,14 @@ s32 fn_80185E08(void *arg0, s32 arg1) {
     return temp_r3;
 }
 
+s32 fn_80185E38(void *arg0) {
+    s32 ret = 0;
+    if (M2C_FIELD(arg0, s32 *, 0x5FC) != 0) {
+        ret = 1;
+    }
+    return ret;
+}
+
 void *fn_80185E50(void *self) {
     struct Ring { struct { u8 d[0x58]; } e[10]; u32 n; };
     struct Ring *r = (struct Ring *)((u8 *)self + 0x130);
