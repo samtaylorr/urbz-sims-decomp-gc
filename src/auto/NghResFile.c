@@ -930,6 +930,19 @@ void fn_8012F868(void *arg0, void *arg1) {
     fn_8012FAD0(arg0, arg1, ps);
 }
 
+s32 fn_8012FAD0(void *self, s32 id, void *out) {
+    return 0;
+}
+
+void fn_8012FB50(void *self, s32 id, void *a, void *b) {
+}
+
+void fn_8012FBC0(void *self, s32 id, void *a, void *b) {
+}
+
+void fn_8012FC30(void *self, s32 id, void *a, void *b) {
+}
+
 void fn_8012FE00(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x180) = arg1;
 }
