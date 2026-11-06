@@ -16,6 +16,14 @@ void fn_802F65CC(void *arg0) {
     fn_802F6700(arg0, M2C_FIELD(arg0, s32 *, 0x4), M2C_FIELD(arg0, s32 *, 0x8));
 }
 
+void fn_802F6618(void *arg0) {
+    s32 i;
+
+    for (i = 0; i < M2C_FIELD(arg0, s32 *, 0x6014); i++) {
+        fn_802F6670((char *)arg0 + 0x6018 + i * 0x50);
+    }
+}
+
 void fn_802F7054(u8 *self, s32 flags) {
     extern void fn_8031EA2C(void *);
     extern void *fn_802D0AB8(void);
