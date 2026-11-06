@@ -659,6 +659,16 @@ void fn_80185DB8(void) {
 
 }
 
+s32 fn_80185DBC(void *arg0) {
+    char *vt;
+
+    if (arg0 != NULL) {
+        vt = M2C_FIELD(arg0, char **, 4);
+        return ((s32 (*)(void *))M2C_FIELD(vt, void **, 0x29C))((char *)arg0 + M2C_FIELD(vt, s16 *, 0x298));
+    }
+    return 0;
+}
+
 void fn_80185E00(void) {
 
 }
