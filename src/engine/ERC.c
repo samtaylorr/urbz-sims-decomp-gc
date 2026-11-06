@@ -1,6 +1,10 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+typedef struct ERCVec3 {
+    f32 x, y, z;
+} ERCVec3;
+
 void fn_802F7054(u8 *self, s32 flags) {
     extern void fn_8031EA2C(void *);
     extern void *fn_802D0AB8(void);
@@ -28,12 +32,11 @@ void fn_802F70D4(void *arg0, s8 arg1) {
     M2C_FIELD(arg0, s8 *, 0x38) = arg1;
 }
 
-f32 *fn_802F70DC(f32 *out, u8 *obj, s32 idx) {
-    struct ERCVec { f32 x, y, z; };
-    struct ERCVec *p = &((struct ERCVec *)(obj + 4))[idx];
-    out[0] = p->x;
-    out[1] = p->y;
-    out[2] = p->z;
+f32 *fn_802F70DC(f32 *out, f32 *obj, s32 idx) {
+    f32 *p = &obj[idx * 3 + 1];
+    out[0] = p[0];
+    out[1] = p[1];
+    out[2] = p[2];
     return out;
 }
 
@@ -65,16 +68,16 @@ void fn_802F79A8(void *arg0, s32 arg1) {
 s32 *fn_802FB578(s32 *self) {
     extern char lbl_8041A7C0[];
     s32 i;
+    s32 *p;
     self[7] = 0;
     self[0x68 / 4] = (s32)lbl_8041A7C0;
-    for (i = 3; i >= 0; i--) {
-        self[8 + i] = 0xFF;
+    p = &self[11];
+    for (i = 4; i != 0; i--) {
+        *p = 0xFF;
+        p--;
     }
     self[0x54 / 4] = 0;
-    self[0x30 / 4] = 0;
-    self[0x34 / 4] = 0;
-    self[0x38 / 4] = 0;
-    self[0x3C / 4] = 0;
+    self[0x30 / 4] = self[0x34 / 4] = self[0x38 / 4] = self[0x3C / 4] = 0;
     self[0x50 / 4] = 0;
     return self;
 }
@@ -91,19 +94,17 @@ void fn_802FB5D0(s32 *self, s32 flags) {
 void fn_802FB604(s32 *self, s32 arg1) {
     extern char *lbl_80495050;
     extern s32 fn_802EDEA8(char *);
-    void *fn_802FEAB4(s32 *, s32, s32);
+    void *fn_802FEAFC(s32 *, s32, s32);
     s32 p;
     self[3] = arg1;
     self[0] = fn_802EDEA8(lbl_80495050);
-    p = (s32)fn_802FEAB4(self, 0x1000, 0x20);
+    p = (s32)fn_802FEAFC(self, 0x1000, 0x20);
     self[7]++;
     ((s32 *)self[0])[0x10] = p;
     self[0x10] = -1;
     self[1] = 0x200;
     self[2] = p;
-    self[6] = 0;
-    self[5] = 0;
-    self[4] = 0;
+    self[4] = self[5] = self[6] = 0;
 }
 
 void fn_802FB688(char *self, s32 arg1) {
@@ -125,9 +126,33 @@ void fn_802FB8A0(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s8 *, 0) = 7;
 }
 
+void fn_802FB8B0(char *self, void *src, s32 count) {
+    void *fn_802FEB4C(s32 *, void *, s32);
+    char *vt;
+    char *p;
+    void *data;
+
+    if (count != 0) {
+        data = fn_802FEB4C((s32 *)self, src, count * 0x50);
+    }
+    vt = *(char **)(self + 0x68);
+    (*(void (**)(char *, s32, s32))(vt + 0x2AC))(self + *(s16 *)(vt + 0x2A8), 2, 1);
+    M2C_FIELD(*(char **)self, s32 *, 0x4C) += count;
+    vt = *(char **)(self + 0x68);
+    p = (*(char *(**)(char *, s32))(vt + 0x2A4))(self + *(s16 *)(vt + 0x2A0), 1);
+    *(void **)(p + 4) = data;
+    *(s8 *)p = 0;
+    *(s16 *)(p + 2) = count;
+    vt = *(char **)(self + 0x68);
+    (*(void (**)(char *))(vt + 0x2B4))(self + *(s16 *)(vt + 0x2B0));
+}
+
 void fn_802FBAA0(char *self) {
-    char *vt = *(char **)(self + 0x68);
-    (*(void (**)(char *))(vt + 0x24))(self + *(s16 *)(vt + 0x20));
+    (*(void (**)(char *))(*(char **)(self + 0x68) + 0x24))(self + *(s16 *)(*(char **)(self + 0x68) + 0x20));
+}
+
+void fn_802FBC20(char *self) {
+    (*(void (**)(char *))(*(char **)(self + 0x68) + 0x34))(self + *(s16 *)(*(char **)(self + 0x68) + 0x30));
 }
 
 void fn_802FBC54(void) {
@@ -140,6 +165,26 @@ void fn_802FBC58(void) {
 
 void fn_802FBC5C(void) {
 
+}
+
+void fn_802FBC60(char *self, void *src, s32 count) {
+    void *fn_802FEB4C(s32 *, void *, s32);
+    char *vt;
+    char *p;
+
+    if (count != 0) {
+        src = fn_802FEB4C((s32 *)self, src, count * 0x50);
+    }
+    vt = *(char **)(self + 0x68);
+    (*(void (**)(char *, s32, s32))(vt + 0x2AC))(self + *(s16 *)(vt + 0x2A8), 2, 5);
+    M2C_FIELD(*(char **)self, s32 *, 0x4C) += count;
+    vt = *(char **)(self + 0x68);
+    p = (*(char *(**)(char *, s32))(vt + 0x2A4))(self + *(s16 *)(vt + 0x2A0), 1);
+    *(void **)(p + 4) = src;
+    *(s8 *)p = 0x1A;
+    *(s16 *)(p + 2) = count;
+    vt = *(char **)(self + 0x68);
+    (*(void (**)(char *))(vt + 0x2B4))(self + *(s16 *)(vt + 0x2B0));
 }
 
 void fn_802FBDC8(void) {
