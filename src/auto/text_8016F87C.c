@@ -682,11 +682,11 @@ void fn_80176180(s32 arg0) {
 
 s32 fn_801761A4(s32 arg0, s32 arg1) {
     extern char lbl_803DA090[];
-    if (arg1 <= 0x7F) {
-        return arg1;
+    if (arg1 > 0x7F) {
+        fn_8016FA28((void *)lbl_80495C90, arg0, (s32)lbl_803DA090);
+        return 1;
     }
-    fn_8016FA28((void *)lbl_80495C90, arg0, (s32)lbl_803DA090);
-    return 1;
+    return arg1;
 }
 
 void fn_801761EC(void *arg0, s32 arg1) {
