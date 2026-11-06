@@ -241,6 +241,16 @@ void fn_80177510(void *arg0, s32 arg1) {
     fn_800F3304(fn_801170B0(list + (((M2C_FIELD(list, u32 *, 0x370) + (arg1 + n)) % 10U) * 0x58)));
 }
 
+void fn_8017B218(void *arg0) {
+    extern void *lbl_80496650;
+    M2C_UNK fn_80131DA4(s32);
+    void *vt;
+
+    fn_80131DA4(M2C_FIELD(arg0, s32 *, 0));
+    vt = *(void **)lbl_80496650;
+    M2C_FIELD(vt, void (**)(void *, s32), 0x10C)((char *)lbl_80496650 + M2C_FIELD(vt, s16 *, 0x108), M2C_FIELD(arg0, s32 *, 4));
+}
+
 void fn_8017E10C(void) {
     void fn_802D20E8(void *);
     void fn_803997AC(void *, u32);
