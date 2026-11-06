@@ -189,6 +189,14 @@ void fn_802E66F8(s32 arg0, s32 arg1, f32 farg0, f32 farg1) {
     }
 }
 
+f32 fn_802E71B4(void *arg0, void *arg1, s32 arg2) {
+    void fn_802E730C(void *, void *, f32 *, s32);
+    f32 fn_8025FC40(f32 *);
+    f32 v[3];
+    fn_802E730C(arg0, arg1, v, arg2);
+    return fn_8025FC40(v);
+}
+
 void fn_802E7720(void *arg0) {
     s32 temp_r0;
     s32 var_ctr;
