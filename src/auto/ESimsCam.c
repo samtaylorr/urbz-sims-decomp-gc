@@ -169,9 +169,36 @@ void fn_8000E7A8(void *arg0, f32 arg1) {
 }
 
 void fn_8000E7F0(void *arg0, f32 arg1) {
+    void *t;
+    f32 v;
+    f32 min;
+    f32 max;
+    f32 r;
+
+    t = M2C_FIELD(arg0, void **, 8);
+    max = M2C_FIELD(t, f32 *, 8);
+    v = M2C_FIELD(arg0, f32 *, 0x458) -= arg1;
+    min = M2C_FIELD(t, f32 *, 4);
+    if (v < min) {
+        r = min;
+    } else if (v > max) {
+        r = max;
+    } else {
+        r = v;
+    }
+    M2C_FIELD(arg0, f32 *, 0x458) = r;
+    t = M2C_FIELD(arg0, void **, 8);
+    min = M2C_FIELD(t, f32 *, 4);
+    M2C_FIELD(arg0, f32 *, 0x460) = (r - min) / (max - min);
+    M2C_FIELD(arg0, f32 *, 0x460) *= M2C_FIELD(t, f32 *, 0x10) - M2C_FIELD(t, f32 *, 0xC);
+    M2C_FIELD(arg0, f32 *, 0x460) += M2C_FIELD(t, f32 *, 0xC);
 }
 
 void fn_8000E860(void *arg0, f32 arg1) {
+    extern const f32 lbl_803C1F38[];
+
+    M2C_FIELD(arg0, f32 *, 0x458) = arg1;
+    fn_8000E7F0(arg0, lbl_803C1F38[0]);
 }
 
 void fn_800108B8(void) {
