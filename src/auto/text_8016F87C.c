@@ -275,7 +275,36 @@ s32 fn_80171724(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x328) + 0x10;
 }
 
+s32 fn_80171818(char *arg0) {
+    s32 fn_80174B98(s32 *, s32, s32);
+    s32 fn_80174C24(s32 *, s32, s32);
+    s32 fn_801749B4(void *, s32, s32);
+    void fn_80174E84(s32 *, s32);
+    extern char lbl_80435040[];
+    extern char lbl_804350DC[];
+    extern u8 lbl_80434F64[];
+    char *a = arg0 + 0x18;
+    char *b = arg0 + 0xD0;
+    char *c = arg0 + 0x17C;
+    s32 tmp;
+    fn_80174B98((s32 *)a, 0x1F, 0x11);
+    fn_80174C24((s32 *)b, 9, 0x32);
+    fn_801749B4(c, 0xC, 1);
+    M2C_FIELD(a, char **, 0x10) = b;
+    M2C_FIELD(a, char **, 0x14) = lbl_80435040;
+    M2C_FIELD(b, char **, 0x14) = lbl_804350DC;
+    M2C_FIELD(b, char **, 0x10) = c;
+    M2C_FIELD(c, char **, 0x14) = 0;
+    M2C_FIELD(c, u8 **, 0x10) = lbl_80434F64;
+    fn_80174E84(&tmp, 0);
+    M2C_FIELD(arg0, s32 *, 0xC8) = tmp;
+    return 1;
+}
+
 s32 fn_801718C8(char *arg0) {
+    s32 fn_80174BFC(s32 *);
+    s32 fn_80174C90(s32 *);
+    s32 fn_80174A44(s32 *);
     char *obj;
     char *vt;
     fn_80174BFC((s32 *)(arg0 + 0x18));
