@@ -463,6 +463,18 @@ void *fn_802EC6B8(void *arg0, s32 arg1) {
     return NULL;
 }
 
+void fn_802EC74C(void *arg0, void *arg1, f32 arg2) {
+    extern const f32 lbl_803F0AF0[];
+    if (arg1 != NULL && M2C_FIELD(arg1, s32 *, 0xA8) == 1) {
+        if (arg2 < lbl_803F0AF0[0]) {
+            M2C_FIELD(arg1, u32 *, 0x30) |= 0x4000000;
+        } else {
+            M2C_FIELD(arg1, u32 *, 0x30) &= ~0x4000000;
+        }
+        M2C_FIELD(arg1, f32 *, 0x4C) = arg2;
+    }
+}
+
 void fn_802EC74C(void *arg0, void *arg1, f32 arg2);
 void fn_802EC790(void *arg0, s32 arg1, f32 arg2) {
     fn_802EC74C(arg0, fn_802E5F90_inline(arg0, arg1), arg2);
