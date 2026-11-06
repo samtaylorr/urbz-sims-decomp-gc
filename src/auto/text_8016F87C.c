@@ -214,18 +214,20 @@ s32 fn_80170868(void *self, void *obj) {
 }
 
 s32 fn_80170E8C(void *self) {
-    char *map;
+    struct XMap { void *unk0; void ***header; } *map;
     XMapIter end;
     XMapIter it;
     s32 max;
 
-    map = (char *)self + 0x44;
+    map = (struct XMap *)((char *)self + 0x44);
     max = 0;
-    end = XMap_End(map);
-    for (it = XMap_Begin(map); XMapIter_NotEqual(&it, &end); XMapIter_PostInc(&it)) {
+    end.node = (void **)map->header;
+    it.node = map->header[2];
+    while (XMapIter_NotEqual(&it, &end)) {
         if (max < M2C_FIELD(it.node, s32 *, 0x14)) {
             max = M2C_FIELD(it.node, s32 *, 0x14);
         }
+        XMapIter_PostInc(&it);
     }
     return max;
 }
@@ -451,8 +453,8 @@ void *fn_80174430(s32 arg0) {
 }
 
 void *fn_80174468(void *arg0, s32 arg1) {
-    extern void fn_80174B98(void *, s32, s32);
-    extern void fn_801745FC(void *, s32);
+    extern void *fn_80174B98(void *, s32, s32);
+    extern void *fn_801745FC(void *, s32);
     extern char lbl_80411ED0[];
     extern char lbl_804122E8[];
     u32 hash = 0xA3CD9627;
