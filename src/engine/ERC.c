@@ -37,8 +37,8 @@ void *fn_802F5B60(void *arg0) {
 void fn_802F5C98(void *arg0) {
     fn_802F6E44((char *)arg0 + 0x20);
     fn_802F6E44(arg0);
-    M2C_FIELD(arg0, s32 *, 0x4C) = 0x100;
     M2C_FIELD(arg0, s32 *, 0x44) = 0;
+    M2C_FIELD(arg0, s32 *, 0x4C) = 0x100;
     M2C_FIELD(arg0, s32 *, 0x40) = 0;
     M2C_FIELD(arg0, s32 *, 0x48) = 0x100;
 }
@@ -123,16 +123,16 @@ s32 fn_802F6DA8(void *arg0, f32 *pos, s32 id) {
 void fn_802F6E44(void *arg0) {
     typedef struct { f32 x, y, z; } V3;
     typedef struct { V3 a; f32 c; V3 b; s32 d; } Obj;
-    extern f32 lbl_803F1288;
+    extern f32 lbl_803F1288[];
     Obj *p = (Obj *)arg0;
     V3 t;
 
-    t.x = t.y = t.z = lbl_803F1288;
+    t.x = t.y = t.z = lbl_803F1288[0];
     p->a = t;
-    t.x = t.y = t.z = lbl_803F1288;
+    t.x = t.y = t.z = lbl_803F1288[0];
     p->b = t;
     p->d = 0;
-    p->c = lbl_803F1288;
+    p->c = lbl_803F1288[0];
 }
 
 void fn_802F7054(u8 *self, s32 flags) {
