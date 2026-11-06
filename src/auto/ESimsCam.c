@@ -458,6 +458,20 @@ s32 fn_80011F38(void *arg0) {
     return 1;
 }
 
+void *fn_80011F48(void *arg0) {
+    extern void fn_802E55C0(void *);
+    extern void fn_802C876C(void *);
+    extern void fn_80013B14(void *, u32);
+    extern void fn_80012020(void *);
+    fn_802E55C0((u8 *)arg0 + 0x19C);
+    fn_802C876C((u8 *)arg0 + 0x120);
+    M2C_FIELD(arg0, s32 *, 0x168) = 0;
+    M2C_FIELD(arg0, s32 *, 0x23C) = 0;
+    fn_80013B14(arg0, 0xFEACE9CB);
+    fn_80012020(arg0);
+    return arg0;
+}
+
 void fn_80011FA8(void *arg0, s32 arg1) {
     extern void fn_802E5EA4(void *);
     extern void fn_8031EA2C(void *);
