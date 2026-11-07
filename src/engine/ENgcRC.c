@@ -797,8 +797,8 @@ void fn_8034BABC(void *self, s32 arg, s16 value) {
     fn_803563F4(lbl_8046DF78, &cmd);
 }
 
-void fn_803552E4(u8 *arg);
 void fn_8034BAF8(void) {
+    void fn_803552E4(u8 *arg);
     fn_803552E4(lbl_8046DF78);
 }
 
@@ -976,6 +976,20 @@ s32 fn_8034D58C(void *arg0) {
 
 s32 fn_8034D5AC(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x34C);
+}
+
+M2C_UNK fn_8034D5B4(void *arg0) {
+    void fn_80268ED0(s32);
+    void fn_80268DA0(void);
+    void fn_802678D0(void);
+    s32 idx;
+
+    fn_80268ED0(M2C_FIELD(arg0, s32 *, 0x34C));
+    idx = (M2C_FIELD(arg0, s32 *, 0x340) + 1) % 2;
+    M2C_FIELD(arg0, s32 *, 0x340) = idx;
+    M2C_FIELD(arg0, s32 *, 0x34C) = ((s32 *)((u8 *)arg0 + 0x344))[idx];
+    fn_80268DA0();
+    fn_802678D0();
 }
 
 void fn_8034D8E8(void) {
