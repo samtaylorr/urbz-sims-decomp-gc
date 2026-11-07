@@ -930,13 +930,16 @@ s32 fn_802DB2EC(void *arg0, s32 (*arg1)(s32, s32), s32 arg2, s32 arg3, s32 arg4,
 
 void *fn_802DB3A4(void *arg0, s32 *arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
     extern s32 *fn_802DB6B8(void *, s32, s32, s32, s32);
-    s32 *p;
-    if (arg1 != 0) {
-        return (arg1[0] == 0x534E4150) ? arg1 : 0;
-    }
-    p = fn_802DB6B8(arg0, arg2, arg3, arg4, arg5);
+    s32 *p = arg1;
     if (p != 0) {
-        p[4] = 1;
+        if (0x534E4150 != p[0]) {
+            p = 0;
+        }
+    } else {
+        p = fn_802DB6B8(arg0, arg2, arg3, arg4, arg5);
+        if (p != 0) {
+            p[4] = 1;
+        }
     }
     return p;
 }
@@ -1486,8 +1489,9 @@ void fn_802DE290(u32 **self, u32 **other) {
     u32 n = fn_802DE1B0(self);
     u32 *dst = *self;
     u32 *src = *other;
+    u32 i;
 
-    while (n-- != 0) {
+    for (i = 0; i < n; i++) {
         *dst++ ^= *src++;
     }
 }
@@ -1497,6 +1501,7 @@ s32 fn_802DE2F8(u32 **self, u32 **other) {
     u32 n;
     u32 *a;
     u32 *b;
+    u32 i;
 
     if (M2C_FIELD(self, s32 *, 4) != M2C_FIELD(other, s32 *, 4)) {
         return 0;
@@ -1504,7 +1509,7 @@ s32 fn_802DE2F8(u32 **self, u32 **other) {
     n = fn_802DE1B0(self);
     a = *self;
     b = *other;
-    while (n-- != 0) {
+    for (i = 0; i < n; i++) {
         if (*a++ != *b++) {
             return 0;
         }
@@ -1517,8 +1522,9 @@ s32 fn_802DE384(u32 **self, u32 **other) {
     u32 n = fn_802DE1B0(self);
     u32 *a = *self;
     u32 *b = *other;
+    u32 i;
 
-    while (n-- != 0) {
+    for (i = 0; i < n; i++) {
         if (*a++ & *b++) {
             return 1;
         }
@@ -1741,7 +1747,7 @@ void fn_802DED64(void *self, void *arg1) {
 
 extern void fn_802DED88(void *);
 void fn_802DED88(void *self) {
-    extern void *fn_802DDCE8(void *, s32);
+    extern void fn_802DDCE8(void *, s32);
     fn_802DDCE8(self, 0);
 }
 
