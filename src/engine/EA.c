@@ -286,9 +286,8 @@ void fn_802D85FC(void *arg0, s32 arg1) {
 
 void fn_802D8640(void *arg0, s32 arg1) {
     typedef struct { u8 pad[0xF8]; u32 busClock; } BootInfo;
-    void fn_80251224(void *, u32, u32, u32, void (*)(void *));
-    u32 ticks = arg1 * (((BootInfo *)0x80000000)->busClock / 4000);
-    fn_80251224((char *)arg0 + 0x18, ticks, 0, ticks, fn_802D8580);
+    void fn_80251224(void *, s64, void *);
+    fn_80251224((char *)arg0 + 0x18, arg1 * (((BootInfo *)0x80000000)->busClock / 4000), fn_802D8580);
     fn_802D8334(arg0, -1);
 }
 
@@ -682,6 +681,27 @@ s32 fn_802D9278(char *self) {
     return *(s32 *)(self + 0xC);
 }
 
+s32 fn_802D9280(u8 *arg0, u32 arg1, s32 arg2) {
+    u8 *end = arg0 + arg1;
+    u8 *wend = arg0 + (arg1 & ~3);
+    if (arg1 > 3 && ((u32)arg0 & 3) == 0) {
+        s32 pat = (arg2 << 24) | (arg2 << 16) | (arg2 << 8) | arg2;
+        while (arg0 < wend) {
+            if (*(s32 *)arg0 != pat) {
+                return 0;
+            }
+            arg0 += 4;
+        }
+    }
+    while (arg0 < end) {
+        if (*arg0 != arg2) {
+            return 0;
+        }
+        arg0++;
+    }
+    return 1;
+}
+
 extern void fn_802D96A8(s32);
 extern void fn_802D20E8(s32);
 void fn_802D94C0(s32 self, s32 flags) {
@@ -897,6 +917,21 @@ s32 fn_802DB2EC(void *arg0, s32 (*arg1)(s32, s32), s32 arg2, s32 arg3, s32 arg4,
         fn_802DB5F0(arg0, p);
     }
     return result;
+}
+
+void *fn_802DB3A4(void *arg0, s32 *arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
+    extern s32 *fn_802DB6B8(void *, s32, s32, s32, s32);
+    if (arg1 != 0) {
+        if (arg1[0] != 0x534E4150) {
+            arg1 = 0;
+        }
+    } else {
+        arg1 = fn_802DB6B8(arg0, arg2, arg3, arg4, arg5);
+        if (arg1 != 0) {
+            arg1[4] = 1;
+        }
+    }
+    return arg1;
 }
 
 void fn_802DB5F0(void *arg0, s32 *arg1) {
@@ -1253,6 +1288,20 @@ void *fn_802DDA8C(void *arg0, s32 arg1, s32 arg2) {
     fn_802DDDC8(arg0, arg2);
     fn_802DDDD8(arg0, arg1, 0);
     return arg0;
+}
+
+void *fn_802DDAF0(void *arg0, s32 arg1) {
+    extern u8 lbl_80419678[];
+    void fn_802DDDC8(void *, s32);
+    extern void fn_802DE158(void *, s32);
+    void *self = arg0;
+    M2C_FIELD(self, u8 **, 0x10) = lbl_80419678;
+    M2C_FIELD(self, s32 *, 0) = 0;
+    M2C_FIELD(self, s32 *, 8) = 0;
+    M2C_FIELD(self, s32 *, 4) = 0;
+    fn_802DDDC8(self, 0x1000);
+    fn_802DE158(self, arg1);
+    return self;
 }
 
 s32 fn_802D0B3C(void);
