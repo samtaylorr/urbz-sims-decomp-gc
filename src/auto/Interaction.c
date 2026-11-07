@@ -340,7 +340,6 @@ s32 fn_8010EDCC(void *arg0) {
     extern void *lbl_80494FA4;
     void *t;
     s32 r;
-    s32 b;
 
     if (M2C_FIELD(arg0, s32 *, 0x1C) != 0) {
         s32 q[6];
@@ -358,12 +357,8 @@ s32 fn_8010EDCC(void *arg0) {
         return 0;
     }
     r = M2C_FIELD(arg0, s32 *, 0xC);
-    if (r == 0) {
-        return r;
-    }
-    b = (u32)(M2C_FIELD(t, s32 *, 0x14) - 1) <= 0xFFFFFFEFu;
-    if (b != 0) {
-        return 0;
+    if (r != 0 && (u32)(M2C_FIELD(t, s32 *, 0x14) - 1) <= 0xFFFFFFEFu) {
+        r = 0;
     }
     return r;
 }
@@ -707,9 +702,9 @@ void fn_801117B8(void *self, void *arg1, s32 arg2) {
             fn_8018D8DC(arg1, buf, 1);
             fn_8018D8DC(arg1, buf, 1);
         }
+        fn_8018D8DC(arg1, buf, 1);
+        fn_8018D8DC(arg1, buf, 1);
     }
-    fn_8018D8DC(arg1, buf, 1);
-    fn_8018D8DC(arg1, buf, 1);
 }
 
 extern void *lbl_80496648;
