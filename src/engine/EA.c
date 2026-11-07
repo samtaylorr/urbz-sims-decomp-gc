@@ -941,6 +941,23 @@ s32 fn_802DCB78(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     return ret;
 }
 
+u32 fn_802DCFA0(void *arg0, char *arg1) {
+    char *h;
+    u32 size;
+
+    if (arg1 != NULL) {
+        h = arg1 - 8;
+        size = *(u32 *)(h + 4) & ~7;
+        if (*(u32 *)(h + 4) & 2) {
+            return size - 8;
+        }
+        if (*(u32 *)(h + size + 4) & 1) {
+            return size - 4;
+        }
+    }
+    return 0;
+}
+
 s32 fn_802DCFE0(void *arg0) {
     void *it;
     s32 total;
