@@ -26,6 +26,8 @@ void fn_80351084(u8 *self);
 void *fn_80348E8C(u32 size, void *p);
 void fn_8034F840(void *arg0, void *arg1);
 void fn_8034F8BC(void *arg0, void *arg1);
+void fn_8034F534(void *arg0, void *arg1);
+void fn_8034F58C(void *arg0, void *arg1);
 void fn_80345EA8(void *arg0, s32 arg1, s32 arg2) {
     M2C_UNK fn_80346A88(void *);
     u16 temp_r0;
@@ -1501,10 +1503,15 @@ void fn_80356100(u8 *self, s32 *arg) {
 }
 
 void fn_803563F4(u8 *self, u8 *arg) {
+    struct {
+        u8 pad[0x569];
+        u8 val;
+        u8 pad2[0x3E];
+    } *e;
     s32 val = *(s32 *)(arg + 4);
-    u32 idx = *(u16 *)(arg + 2);
 
-    self[0x569 + idx * 0x40] = val;
+    e = (void *)self;
+    e[*(u16 *)(arg + 2)].val = val;
     *(s32 *)(self + 0x510) = 1;
 }
 
