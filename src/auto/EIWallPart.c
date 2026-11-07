@@ -35,6 +35,22 @@ static inline void *EIWallPart_AllocAligned(u32 size) {
     return p;
 }
 
+static inline void *EIWallPart_Alloc(u32 size) {
+    extern void *fn_802DBBCC(void *, u32, s32);
+    void *heap;
+    void *p;
+
+    heap = ((void *(*)(void))fn_802D0AB8)();
+    p = fn_802D197C(heap, size, 4);
+    if (p == NULL) {
+        p = fn_802DBBCC(heap, size, 0);
+        if (p == NULL && heap == ((void *(*)(void))fn_802D0AB8)()) {
+            return fn_802DBBCC(fn_802D0B3C(), size, 0);
+        }
+    }
+    return p;
+}
+
 void fn_8002D378(void *self, s32 flags) {
     extern u8 lbl_80407738[];
     extern void fn_800F1A60(void *, s32);
@@ -386,6 +402,28 @@ void fn_800382D0(s32 arg0, void **arg1) {
     }
 }
 
+void fn_80038438(void *self) {
+    extern void fn_800384E0(void *, s32, s32 *, s32 *, s32);
+    extern void fn_80038784(void *, s32 *, s32 *, s32);
+    extern void fn_8003755C(void *);
+    extern void fn_80038110(void *, s32);
+    extern void *lbl_8041FA38[];
+    extern s32 lbl_80494044;
+    extern s32 lbl_80494040;
+    s32 b;
+    s32 a;
+
+    a = 0;
+    b = 0;
+    fn_800384E0(self, 1, &b, &a, 1);
+    fn_800384E0(self, 0, &b, &a, 1);
+    fn_80038784(self, &b, &a, 1);
+    fn_8003755C(self);
+    lbl_80494044 = b;
+    lbl_80494040 = a;
+    fn_80038110(self, M2C_FIELD(lbl_8041FA38[0], s32 *, 0x24));
+}
+
 s32 fn_8003904C(void *self) {
     void **p = M2C_FIELD(self, void **, 0x14);
     s32 n = 0;
@@ -414,6 +452,30 @@ void *fn_80039510(void *self, void **list, s32 arg2, s32 arg3, s32 arg4) {
         }
     }
     return NULL;
+}
+
+s32 fn_80039584(void *self, s32 arg1) {
+    typedef struct { u8 x; u8 y; u8 z; } Tile;
+    extern void fn_80105508(void *);
+    extern void fn_801055FC(void *, s32);
+    extern void fn_80034F94(void *, void *);
+    u8 *pos = (u8 *)arg1;
+    void **p;
+    void *obj;
+    Tile tile;
+
+    for (p = M2C_FIELD(self, void **, 0x14); p != NULL; ) {
+        obj = p[0];
+        fn_80105508(&tile);
+        fn_80034F94(obj, &tile);
+        if (pos[0] == tile.x && pos[1] == tile.y) {
+            fn_801055FC(&tile, 2);
+            return (s32)obj;
+        }
+        p = (void **)p[2];
+        fn_801055FC(&tile, 2);
+    }
+    return 0;
 }
 
 s32 fn_80039620(void *arg0, s32 arg1, s32 arg2) {
