@@ -218,6 +218,10 @@ void fn_801489AC(void *arg0, s32 i, s16 v) {
     ((struct { u8 pad[0x16]; s16 a[1]; } *)arg0)->a[i] = v;
 }
 
+void fn_801489BC(void *arg0, s32 i, s16 v) {
+    M2C_FIELD(arg0, s16 **, 0x8)[i] = v;
+}
+
 s32 fn_801489CC(void) {
     return 0;
 }
