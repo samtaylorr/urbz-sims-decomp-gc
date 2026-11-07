@@ -706,6 +706,24 @@ void fn_800CD0DC(s32 *self) {
     }
 }
 
+void fn_800CD55C(void *arg0, s32 id, s32 n) {
+    s32 i = 0;
+    s32 **it;
+
+    for (it = M2C_FIELD(arg0, s32 ***, 8); it != (s32 **)WPBPtrVec_End((WPBPtrVec *)((u8 *)arg0 + 8)); it++) {
+        s32 *e = *it;
+        if (e[0] == id) {
+            e[1] &= ~4;
+            if (e[1] & 1) {
+                if (i == n) {
+                    e[1] |= 4;
+                }
+                i++;
+            }
+        }
+    }
+}
+
 void *fn_800CD5C4(void *arg0, s32 id) {
     s32 **it;
     s32 **end = M2C_FIELD(arg0, s32 ***, 0xC);
