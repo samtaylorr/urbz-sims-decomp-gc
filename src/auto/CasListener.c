@@ -588,15 +588,13 @@ f32 fn_801BECA0(f32 *p, s32 arg1) {
     extern const f32 lbl_803DD1C0[];
     extern const f32 lbl_803DD1C4[];
     f32 v[2];
-    f32 dot;
     f32 d;
     f32 r;
 
     v[0] = lbl_803DD1B8[0];
     v[1] = lbl_803DD1BC[0];
-    dot = p[1] * v[1] + v[0] * p[0];
-    d = dot;
-    if (!(dot >= lbl_803DD1BC[0])) {
+    d = v[0] * p[0] + v[1] * p[1];
+    if (!(d >= lbl_803DD1BC[0])) {
         d = -d;
     }
     if (p[1] * p[0] >= lbl_803DD1BC[0]) {
@@ -832,6 +830,13 @@ s32 fn_801BFD84(void *arg0) {
     default:
         return M2C_FIELD(arg0, s32 *, 0);
     }
+}
+
+void fn_801BFEEC(void *self, s32 arg1, s32 arg2) {
+    extern void fn_801C02C4(void *, s32);
+    extern void fn_801C096C(void *, s32, s32);
+    fn_801C02C4(self, 3);
+    fn_801C096C(M2C_FIELD(self, void **, 0xC), arg1, arg2);
 }
 
 void fn_801BFF74(void *self, void *arg1) {
