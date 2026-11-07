@@ -685,6 +685,12 @@ void fn_80148AA4(void *self) {
     (*(void (**)(void *, s32))(vt + 0x224))(obj + *(s16 *)(vt + 0x220), *(s16 *)((u8 *)self + 0x64));
 }
 
+s32 fn_80148AE0(void *self, s32 arg1) {
+    u8 *obj = M2C_FIELD(self, u8 **, 0x58);
+    u8 *vt = *(u8 **)obj;
+    return (*(s32 (**)(void *, s32, s32))(vt + 0x214))(obj + *(s16 *)(vt + 0x210), M2C_FIELD(self, s16 *, 0x64), arg1);
+}
+
 void fn_80148B20(void *self) {
     u8 *obj = *(u8 **)((u8 *)self + 0x58);
     u8 *vt = *(u8 **)obj;
