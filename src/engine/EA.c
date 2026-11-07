@@ -211,6 +211,14 @@ void fn_802D83EC(char *self) {
     (*(void (**)(char *, s32))(vt + 0x14))(self + *(s16 *)(vt + 0x10), 0);
 }
 
+M2C_UNK fn_802D8424(s32 arg0) {
+    extern void fn_8037ACCC(void *);
+
+    if (M2C_FIELD(arg0, s32 *, 0xC) < M2C_FIELD(arg0, s32 *, 0x8)) {
+        fn_8037ACCC((char *)arg0 + 0xC);
+    }
+}
+
 s32 fn_802D8458(char *self) {
     return *(s32 *)(self + 0xC);
 }
