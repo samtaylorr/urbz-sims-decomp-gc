@@ -403,22 +403,25 @@ char *fn_802D9A44(void *arg0, char *arg1) {
 }
 
 u32 fn_802D9AC4(u32 size) {
-    if ((size >> 6) <= 32) {
-        return (size >> 6) + 0x38;
+    u32 t;
+    t = size >> 6;
+    if (t <= 32) {
+        return t + 0x38;
     }
-    if ((size >> 9) <= 20) {
-        return (size >> 9) + 0x5B;
+    t = size >> 9;
+    if (t <= 20) {
+        return t + 0x5B;
     }
-    if ((size >> 12) <= 10) {
-        return (size >> 12) + 0x6E;
+    t = size >> 12;
+    if (t <= 10) {
+        return t + 0x6E;
     }
-    if ((size >> 15) <= 4) {
-        return (size >> 15) + 0x77;
+    t = size >> 15;
+    if (t <= 4) {
+        return t + 0x77;
     }
-    if ((size >> 18) <= 2) {
-        return (size >> 18) + 0x7C;
-    }
-    return 0x7E;
+    t = size >> 18;
+    return t <= 2 ? t + 0x7C : 0x7E;
 }
 
 s32 fn_802D9C00(void *arg0, char *arg1) {
@@ -486,21 +489,24 @@ s32 fn_802D9E44(void *arg0, s32 arg1) {
 void fn_802D9E8C(char *arg0, s32 arg1) {
     *(s32 *)(arg0 + arg1) = arg1;
     arg0 += arg1;
-    *(s32 *)(arg0 + 0xC) = 9;
-    *(s32 *)(arg0 + 8) = 8;
     *(s32 *)(arg0 + 4) = 8;
+    *(s32 *)(arg0 + 8) = 8;
+    *(s32 *)(arg0 + 0xC) = 9;
 }
 
 void fn_802D9EAC(char *arg0, s32 arg1) {
     s32 v = *(s32 *)(arg0 + 4);
     s32 size = (v & ~7) - 0x10;
     s32 next;
+    char *p;
     *(s32 *)(arg0 + 4) = (v & 7) | size;
-    next = size + 8;
+    p = arg0 + size;
     *(s32 *)(arg0 + size) = size;
-    *(s32 *)(arg0 + size + 4) = arg1 | 8;
+    next = size + 8;
+    *(s32 *)(p + 4) = arg1 | 8;
+    p = arg0 + next;
     *(s32 *)(arg0 + next) = 8;
-    *(s32 *)(arg0 + next + 4) = 9;
+    *(s32 *)(p + 4) = 9;
 }
 
 char *fn_802D9EF0(char *arg0, s32 arg1, s32 arg2) {
@@ -511,10 +517,10 @@ char *fn_802D9EF0(char *arg0, s32 arg1, s32 arg2) {
 }
 
 void fn_802D9F34(void *arg0, u32 *arg1, u32 *arg2) {
-    *(u8 *)((char *)arg2 + 0x10) = 8;
-    arg2[0] = arg1[0];
+    struct S { u32 a; u32 b; };
     arg2[5] = 0;
-    arg2[1] = arg1[1];
+    *(u8 *)((char *)arg2 + 0x10) = 8;
+    *(struct S *)arg2 = *(struct S *)arg1;
 }
 
 void fn_802DB018(void);
