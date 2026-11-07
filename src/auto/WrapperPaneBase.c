@@ -730,33 +730,12 @@ void fn_800C962C(void *arg0, s32 arg1) {
 
 void *fn_800CA8C8(void *self) {
     extern char lbl_803D0804[];
-    extern char lbl_8040AA10[];
     extern char lbl_8040AA98[];
-    extern void fn_8030728C(void *);
-    char *name;
-    s32 *a;
-    s32 *b;
-    s32 *c;
 
-    name = lbl_803D0804;
-    fn_8030728C(self);
-    M2C_FIELD(self, char **, 0x48) = name;
-    M2C_FIELD(self, char **, 0x44) = lbl_8040AA10;
-    M2C_FIELD(self, s32 *, 0x4C) = 0;
-    a = (s32 *)((char *)self + 0x50);
-    a[0] = 0;
-    a[1] = 0;
-    b = (s32 *)((char *)self + 0x58);
-    b[1] = 0;
-    M2C_FIELD(self, s32 *, 0x64) = 1;
+    WPB_InitBase(self, lbl_803D0804);
     M2C_FIELD(self, char **, 0x44) = lbl_8040AA98;
     M2C_FIELD(self, s32 *, 0xC8) = 0;
-    c = (s32 *)self;
-    {
-        s32 one[2];
-        one[0] = 1;
-        c[0x60 / 4] = one[0];
-    }
+    M2C_FIELD(self, s32 *, 0x60) = 1;
     M2C_FIELD(self, s32 *, 0x68) = 0;
     M2C_FIELD(self, s32 *, 0x6C) = 0;
     M2C_FIELD(self, s32 *, 0x84) = 0;
@@ -830,12 +809,15 @@ void fn_800CB2EC(void *arg0, s32 arg1) {
     extern u8 lbl_8041F754[];
     extern void fn_80048A48(void *);
     void fn_800CEF00(void *, s32);
-    s32 *g = (s32 *)&lbl_8041F754;
     s32 v;
-    fn_80048A48(g);
+    s32 *g;
+    fn_80048A48(lbl_8041F754);
     v = 0;
-    if (M2C_FIELD(arg0, s32 *, 0x74) == 0 && g[0x8C / 4] != 0) {
-        v = arg1;
+    if (M2C_FIELD(arg0, s32 *, 0x74) == 0) {
+        g = (s32 *)lbl_8041F754;
+        if (g[0x8C / 4] != 0) {
+            v = arg1;
+        }
     }
     fn_800CEF00(arg0, v);
 }
@@ -2195,6 +2177,16 @@ void fn_800D095C(u8 *self, s32 i, s32 arg2) {
     fn_8039D8D8(t);
     M2C_FIELD(obj, s32 *, 4) |= 2;
     fn_800CE954(self, i);
+}
+
+void fn_800D0A1C(u8 *self, s32 i, s32 arg2) {
+    s32 off = i * 4;
+    void **arr = (void **)(self + 0x40);
+    u8 *obj = *(u8 **)((u8 *)arr + off);
+    u8 *vt = *(u8 **)(obj + 0x1C);
+    (*(void (**)(void *, s32))(vt + 0x3C))(obj + *(s16 *)(vt + 0x38), arg2);
+    fn_800CE8F4(self, i);
+    fn_800CE924(self, i);
 }
 
 void fn_800D0A88(u8 *self, s32 i) {
