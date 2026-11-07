@@ -257,10 +257,10 @@ s32 fn_802C6BB8(char **arg0, char *arg1) {
 
 void fn_802C6CCC(s32 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     M2C_UNK fn_802C69B0(s32, s32);
-    M2C_UNK fn_802C6D20(s32, s32, s32);
+    void fn_802C6D20(char **, char **, s32);
     fn_802C69B0(arg1, *arg0 + arg2);
     if (arg3 != -1) {
-        fn_802C6D20(arg1, arg1, arg3);
+        fn_802C6D20((char **)arg1, (char **)arg1, arg3);
     }
 }
 
@@ -935,15 +935,15 @@ f32 *fn_802C85E8(f32 *m) {
     return m;
 }
 
-f32 *fn_802C8688(f32 *dst, f32 *src) {
+f32 *fn_802C8688(f32 (*dst)[4], f32 (*src)[4]) {
     s32 i;
     s32 j;
     for (i = 0; i <= 3; i++) {
-        for (j = 0; j <= 3; j++) {
-            dst[i * 4 + j] = src[j * 4 + i];
+        for (j = 0; j < 4; j++) {
+            dst[i][j] = src[j][i];
         }
     }
-    return src;
+    return (f32 *)src;
 }
 
 void fn_802C86D4(f32 *m) {
