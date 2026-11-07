@@ -800,11 +800,11 @@ void fn_8034AE84(char *self, s32 arg1, s32 count) {
     char *vt;
     s32 i;
 
-    i = 0;
-    while (i < count) {
+    vt = *(char **)(self + 0x68);
+    (*(void (**)(char *, s32, s32))(vt + 0xD4))(self + *(s16 *)(vt + 0xD0), arg1, count);
+    for (i = 0; i < count; i++) {
         vt = *(char **)(self + 0x68);
         (*(void (**)(char *, s32, s32))(vt + 0xDC))(self + *(s16 *)(vt + 0xD8), i, i);
-        i++;
     }
     if (count - 1 > M2C_FIELD(self, s32 *, 0x40)) {
         M2C_FIELD(self, s32 *, 0x40) = count - 1;
