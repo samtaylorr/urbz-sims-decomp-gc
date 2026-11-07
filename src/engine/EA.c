@@ -80,6 +80,16 @@ s32 fn_802D8004(void *buf, s32 size, s32 n, char *f) {
     return (*(s32 (**)(char *, void *, s32))(vt + 0x24))(f + *(s16 *)(vt + 0x20), buf, size * n);
 }
 
+void fn_802D8040(char *self, s32 pos, s32 whence) {
+    extern s32 lbl_803FD2A4[];
+    char *vt = *(char **)(self + 0x28);
+    char *vt2;
+
+    (*(void (**)(char *, s32, s32))(vt + 0x2C))(self + *(s16 *)(vt + 0x28), pos, lbl_803FD2A4[whence]);
+    vt2 = *(char **)(self + 0x28);
+    (*(void (**)(char *))(vt2 + 0x44))(self + *(s16 *)(vt2 + 0x40));
+}
+
 s32 fn_802D80A8(char *self) {
     char *vt = *(char **)(self + 0x28);
     return (*(s32 (**)(char *))(vt + 0x34))(self + *(s16 *)(vt + 0x30));
@@ -88,6 +98,43 @@ s32 fn_802D80A8(char *self) {
 s32 fn_802D80DC(char *self) {
     char *vt = *(char **)(self + 0x28);
     return (*(s32 (**)(char *))(vt + 0x3C))(self + *(s16 *)(vt + 0x38));
+}
+
+char *fn_802D8110(char *buf, s32 n, char *stream) {
+    char *ret = buf;
+    char *p = ret;
+    char c;
+
+    if (n <= 0) {
+        return 0;
+    }
+    while (--n != 0) {
+        char *vt = *(char **)(stream + 0x28);
+        if ((*(s32 (**)(char *, char *, s32))(vt + 0x1C))(stream + *(s16 *)(vt + 0x18), &c, 1) == 0) {
+            if (p == buf) {
+                ret = 0;
+                goto end;
+            }
+            break;
+        }
+        if ((*p++ = c) == '\n') {
+            break;
+        }
+    }
+    *p = 0;
+end:
+    return ret;
+}
+
+void *fn_802D81B8(void *arg0) {
+    extern void **fn_802D6A14(void **);
+    extern u8 lbl_804195C8[];
+
+    fn_802D6A14(arg0);
+    M2C_FIELD(arg0, s32 *, 0x8) = 0;
+    M2C_FIELD(arg0, void **, 0x0) = lbl_804195C8;
+    M2C_FIELD(arg0, s32 *, 0x4) = 0;
+    return arg0;
 }
 
 void fn_802D8260(void *arg0, s32 arg1) {
