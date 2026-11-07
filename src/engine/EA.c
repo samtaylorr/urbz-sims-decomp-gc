@@ -1150,6 +1150,13 @@ s32 fn_802DD3DC(void *arg0, void *arg1) {
     return ret;
 }
 
+void fn_802DD568(void *self, s32 arg1, s32 *out) {
+    void *fn_802D2150(u32 size);
+    if (fn_802D2150(arg1) != NULL && out != NULL) {
+        *out = arg1;
+    }
+}
+
 void fn_802D21E0(void *);
 void fn_802DD5B0(void *self, void *arg) {
     fn_802D21E0(arg);
@@ -1165,6 +1172,14 @@ void fn_802DD5D4(void) {
 void fn_802DD82C(void *arg0, s32 arg1) {
     M2C_UNK fn_802DDCAC(s32, s32, s32);
     fn_802DDCAC(M2C_FIELD(arg0, s32 *, 0), M2C_FIELD(arg0, s32 *, 4), arg1);
+}
+
+void fn_802DD858(s32 *arg0, s32 arg1) {
+    s32 fn_802DDC6C(s32, s32);
+    M2C_UNK fn_802DDCAC(s32, s32, s32);
+    s32 a = arg0[0];
+    s32 b = arg0[1];
+    fn_802DDCAC(a, b, (fn_802DDC6C(a, b) != 0) | (arg1 != 0));
 }
 
 void fn_802DD930(s32 *arg0, s32 arg1) {
@@ -1240,9 +1255,20 @@ void fn_802DDC18(void *arg0) {
     s32 *self = arg0;
     char *vt = *(char **)((char *)self + 0x10);
     (*(void (**)(void *, s32))(vt + 0x1C))((char *)self + *(s16 *)(vt + 0x18), self[0]);
-    self[1] = 0;
-    self[0] = 0;
     self[2] = 0;
+    self[0] = 0;
+    self[1] = 0;
+}
+
+s32 fn_802DDC6C(arg0, i)
+    s32 arg0;
+    s32 i;
+{
+    u32 **self = (u32 **)arg0;
+    if (i >= ((s32 *)self)[1]) {
+        return 0;
+    }
+    return (self[0][i >> 5] & (1 << (i & 31))) != 0;
 }
 
 M2C_UNK fn_802DDCAC(s32 arg0, s32 i, s32 set) {
