@@ -53,6 +53,14 @@ static inline void **WPBPtrVec_End(WPBPtrVec *v) {
 }
 
 void fn_800CD09C();
+s64 fn_800C46A4(void *arg0) {
+    extern s64 fn_8024E1D0();
+    void fn_800C4744(s64 *out);
+    s64 now;
+    s64 t = M2C_FIELD(arg0, s32 *, 0x18) != 0 ? (fn_800C4744(&now), now) : M2C_FIELD(arg0, s64 *, 8);
+    return fn_8024E1D0((t - M2C_FIELD(arg0, s64 *, 0)) * 1000000, M2C_FIELD(arg0, s64 *, 0x10));
+}
+
 s32 fn_800C472C(s64 *arg0) {
     *arg0 = 0x3F0D;
     return 1;
@@ -217,6 +225,12 @@ f32 fn_800C57D0(void *arg0) {
 
 f32 fn_800C57E0(void *arg0) {
     return M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x70), void **, 0x64), f32 *, 0x38);
+}
+
+f32 fn_800C57F0(void *arg0) {
+    u8 *obj = M2C_FIELD(M2C_FIELD(arg0, void **, 0x70), u8 **, 0x60);
+    u8 *vtbl = M2C_FIELD(obj, u8 **, 0x1C);
+    return *((f32 *(*)(u8 *))*(void **)(vtbl + 0x74))(obj + *(s16 *)(vtbl + 0x70));
 }
 
 void fn_800C5FEC(void *arg0, s32 arg1) {
