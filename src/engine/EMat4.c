@@ -1718,6 +1718,44 @@ void fn_802CF2BC(void *arg0) {
     fn_802D1A00(fn_802D0C44(arg0), arg0);
 }
 
+void fn_802CFEC4(void *self, u8 *node) {
+    void fn_802CFF68(void *, u8 *);
+    typedef struct { u8 pad[0x48]; } Entry;
+    u32 i;
+    u16 *p;
+
+    if (M2C_FIELD(node, u16 *, 0x3A) != 0) {
+        for (i = 0, p = (u16 *)(node + 0x1A); i <= 15; i++, p++) {
+            if (((s32)M2C_FIELD(node, u16 *, 0x3A) >> i) & 1) {
+                fn_802CFEC4(self, *p != 0 ? (u8 *)(M2C_FIELD(self, Entry **, 0x1008) + *p) : NULL);
+            }
+        }
+    }
+    if (node[0x44] == M2C_FIELD(self, s32 *, 0x101C)) {
+        fn_802CFF68(self, node);
+    }
+}
+
+void fn_802D003C(u8 *self) {
+    void fn_802CF60C(void *, void *);
+    void fn_802D0240(void *, void *);
+    s32 i;
+    u8 *p;
+    u16 idx;
+
+    for (i = 0x1FF, p = self + 4; i != 0; i--, p += 8) {
+        if (M2C_FIELD(p, s32 *, 4) != 0) {
+            fn_802CF60C(self, p);
+        }
+        M2C_FIELD(p, s32 *, 4) = -1;
+    }
+    fn_802D00D4(self);
+    M2C_FIELD(self, s32 *, 0x1024) = 0;
+    idx = M2C_FIELD(self, u16 *, 0x1004);
+    fn_802D0240(self, idx != 0 ? (u8 *)(M2C_FIELD(self, s32 *, 0x1008) + idx * 0x48) : NULL);
+    M2C_FIELD(self, s32 *, 0x100C) = 2;
+}
+
 void fn_802D00D4(void *arg0) {
     M2C_UNK fn_802D0164(void *, s32);
     s32 var_r4;
