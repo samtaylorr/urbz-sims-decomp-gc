@@ -77,6 +77,48 @@ void fn_80345FB0(void) {
 
 }
 
+s32 fn_803465D0(void) {
+    void fn_80260574(void *);
+    extern u8 lbl_8046C400[];
+    u8 *p = lbl_8046C400;
+
+    if (M2C_FIELD(p, s32 *, 0xA0) != 0 && M2C_FIELD(p, u8 *, 0xA4) == 0) {
+        M2C_FIELD(p, s32 *, 0xA0) = 0;
+        fn_80260574(p);
+        return 1;
+    }
+    return 0;
+}
+
+u32 fn_80346620(void) {
+    extern u8 lbl_8046C400[];
+    u8 *p = lbl_8046C400;
+    u32 size;
+    u32 pixels;
+    u32 a;
+    u32 b;
+
+    if (M2C_FIELD(p, s32 *, 0xA0) == 0) {
+        return 0;
+    }
+    if (M2C_FIELD(p, s32 *, 0xB0) != 0) {
+        size = (M2C_FIELD(p, u32 *, 0x58) + 0x1F) & ~0x1F;
+    } else {
+        size = ((M2C_FIELD(p, u32 *, 0x44) + 0x1F) & ~0x1F) * 10;
+    }
+    p = lbl_8046C400;
+    pixels = M2C_FIELD(p, u32 *, 0x80) * M2C_FIELD(p, u32 *, 0x84);
+    a = (pixels + 0x1F) & ~0x1F;
+    b = ((pixels >> 2) + 0x1F) & ~0x1F;
+    size += a * 3;
+    size += b * 3;
+    size += b * 3;
+    if (M2C_FIELD(p, u8 *, 0xA7) != 0) {
+        size += ((M2C_FIELD(p, u32 *, 0x48) * 4 + 0x1F) & ~0x1F) * 3;
+    }
+    return size + 0x1000;
+}
+
 s32 fn_80346A88(void) {
     extern u8 lbl_8046C400[];
     u8 *p = lbl_8046C400;
@@ -129,8 +171,8 @@ s32 fn_80346B90(void) {
     extern u8 lbl_8046C400[];
     u8 *p = lbl_8046C400;
     if (*(s32 *)(p + 0xA0) != 0 && p[0xA4] == 2) {
-        p[0xA4] = 4;
         p[0xA5] = 4;
+        p[0xA4] = 4;
         return 1;
     }
     return 0;
@@ -1820,10 +1862,11 @@ void fn_80354C18(void *arg0, void *arg1) {
 
 void fn_80354C40(void *self, s64 *src, u32 count) {
     s64 *dst;
-    u32 i;
+    s64 *end;
     *(u32 *)((char *)self + 0x4558) = count;
     dst = (s64 *)((char *)self + 0x758);
-    for (i = 0; i < count * 8; i++) {
+    end = dst + count * 8;
+    while (dst != end) {
         *dst++ = *src++;
     }
     *(s32 *)((char *)self + 0x510) = 1;
@@ -1839,21 +1882,11 @@ void fn_80354D90(void *self, void *arg) {
 }
 
 void fn_80354F6C(void *self, void *arg) {
+    typedef struct { f32 m[16]; } Mtx44;
     extern s32 lbl_80495194;
     if (lbl_80495194 != 0) {
-        s64 *src;
-        s64 *dst;
         lbl_80495194 = 0;
-        src = *(s64 **)((char *)arg + 4);
-        dst = (s64 *)((char *)self + 0x498);
-        dst[0] = src[0];
-        dst[1] = src[1];
-        dst[2] = src[2];
-        dst[3] = src[3];
-        dst[4] = src[4];
-        dst[5] = src[5];
-        dst[6] = src[6];
-        dst[7] = src[7];
+        *(Mtx44 *)((char *)self + 0x498) = **(Mtx44 **)((char *)arg + 4);
     }
 }
 
