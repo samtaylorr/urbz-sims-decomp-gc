@@ -233,6 +233,11 @@ f32 fn_800C57F0(void *arg0) {
     return *((f32 *(*)(u8 *))*(void **)(vtbl + 0x74))(obj + *(s16 *)(vtbl + 0x70));
 }
 
+void fn_800C5830(void *arg0) {
+    void fn_800CCA68(void *);
+    fn_800CCA68(M2C_FIELD(M2C_FIELD(arg0, void **, 0x70), void **, 0x60));
+}
+
 void fn_800C5FEC(void *arg0, s32 arg1) {
     s32 var_r3;
     void *temp_r31;
