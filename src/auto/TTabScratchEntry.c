@@ -943,6 +943,26 @@ s32 fn_801A0558(s32 arg0) {
     }
 }
 
+s32 fn_801A0618(s32 arg0) {
+    switch (arg0) {
+    case 0:
+        return 2;
+    case 1:
+        return 8;
+    case 2:
+        return 1;
+    case 3:
+        return 4;
+    case 4:
+        return 0x20;
+    case 6:
+    case 7:
+        return 0x10;
+    default:
+        return 0;
+    }
+}
+
 s32 fn_801A0690(s32 arg0, s32 arg1) {
     s32 n;
     s32 mask;
