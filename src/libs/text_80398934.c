@@ -1186,6 +1186,20 @@ void fn_8039AB7C(void *self, s32 flags) {
     }
 }
 
+void *fn_8039ABB0(void *arg0, void *arg1) {
+    s64 *src = arg1;
+    s64 *dst = arg0;
+    dst[0] = src[0];
+    dst[1] = src[1];
+    dst[2] = src[2];
+    dst[3] = src[3];
+    dst[4] = src[4];
+    dst[5] = src[5];
+    dst[6] = src[6];
+    dst[7] = src[7];
+    return arg0;
+}
+
 void fn_8039AC38(void *self, s32 flags) {
     M2C_FIELD(self, void **, 0xC0) = lbl_80406CB0;
     if (flags & 1) {
@@ -10819,29 +10833,18 @@ Pair8Vec *fn_803B50DC(Pair8Vec *self, Pair8Vec *x) {
             self->start = tmp;
             self->end = tmp + xlen;
         } else if ((u32)(self->finish - dst) >= xlen) {
-            Pair8 *d = dst;
             s32 k;
-            for (k = xlen; k > 0; k--) {
+            for (k = last - src; k > 0; k--) {
                 s32 a = src->a;
                 s32 b = src->b;
-                d->a = a;
-                d->b = b;
+                dst->a = a;
+                dst->b = b;
                 src++;
-                d++;
+                dst++;
             }
-            dst = d;
             Pair8_Destroy(dst, self->finish);
         } else {
-            Pair8 *s = first;
-            s32 k;
-            for (k = self->finish - dst; k > 0; k--) {
-                s32 a = s->a;
-                s32 b = s->b;
-                start->a = a;
-                start->b = b;
-                s++;
-                start++;
-            }
+            Pair8_Copy(first, first + (self->finish - start), start);
             Pair8_UninitCopy(x->start + (self->finish - self->start), x->finish, self->finish);
         }
         self->finish = self->start + xlen;
