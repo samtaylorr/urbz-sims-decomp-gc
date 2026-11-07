@@ -673,12 +673,13 @@ s32 fn_80111624(void *self, u8 *arg1) {
 }
 
 void fn_801116E0(void *self) {
+    char *obj;
     char *vt;
     fn_801914E4(lbl_80496654);
     fn_80190640(lbl_80496654);
     fn_801906D4(lbl_80496654);
-    vt = *(char **)lbl_80496668;
-    M2C_FIELD(vt, void (**)(void *), 0x184)((char *)lbl_80496668 + M2C_FIELD(vt, s16 *, 0x180));
+    obj = lbl_80496668;
+    M2C_FIELD(*(char **)obj, void (**)(void *), 0x184)(obj + M2C_FIELD(*(char **)obj, s16 *, 0x180));
     vt = *(char **)self;
     M2C_FIELD(vt, void (**)(void *), 0x8C)((char *)self + M2C_FIELD(vt, s16 *, 0x88));
 }
