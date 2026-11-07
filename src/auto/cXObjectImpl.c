@@ -239,9 +239,9 @@ void *fn_80133AE4(void *self, s32 idx) {
 
 void fn_80133C74(char *self, s32 idx) {
     char *obj = M2C_FIELD(self, char **, 4);
+    char *entry = M2C_FIELD(self, char **, 0x90) + idx * 32;
     char *vt = M2C_FIELD(obj, char **, 4);
-    (*(void (**)(void *, s32))(vt + 0x44C))(obj + *(s16 *)(vt + 0x448),
-        *(s16 *)(M2C_FIELD(self, char **, 0x90) + idx * 32 + 4));
+    (*(void (**)(void *, s32))(vt + 0x44C))(obj + *(s16 *)(vt + 0x448), *(s16 *)(entry + 4));
 }
 
 s32 fn_80133F68(s32 arg0) {
