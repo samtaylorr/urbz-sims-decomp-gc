@@ -89,11 +89,12 @@ f32 fn_80346EBC(void) {
 
 s32 fn_80346EE4(void) {
     extern u8 lbl_8046C400[];
+    u8 *p = lbl_8046C400;
 
-    if (M2C_FIELD(lbl_8046C400, s32 *, 0xA0) == 0) {
+    if (M2C_FIELD(p, s32 *, 0xA0) == 0) {
         return 0;
     }
-    return M2C_FIELD(lbl_8046C400, s32 *, 0x50);
+    return M2C_FIELD(p, s32 *, 0x50);
 }
 
 u8 fn_80346F04(void) {
