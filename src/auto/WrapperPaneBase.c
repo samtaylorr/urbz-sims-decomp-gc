@@ -507,6 +507,15 @@ void fn_800C7BD0(s32 arg0) {
     fn_800C8614(arg0);
 }
 
+void fn_800C85CC(void *self) {
+    extern u8 lbl_803D0AF8[];
+    void fn_800CF02C();
+    if (M2C_FIELD(self, s32 *, 0x88) == 0) {
+        fn_800CF02C(self, lbl_803D0AF8);
+        M2C_FIELD(self, s32 *, 0x88) = 1;
+    }
+}
+
 void fn_800C9604(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x78) = arg1;
     M2C_FIELD(arg0, s32 *, 0x7C) = 0;
@@ -1846,7 +1855,9 @@ void fn_800D0890(u8 *self, s32 i) {
 }
 
 void fn_800D08D0(u8 *self, s32 i) {
-    u8 *obj = ((u8 **)(self + 0x40))[i];
+    s32 off = i * 4;
+    void **arr = (void **)(self + 0x40);
+    u8 *obj = *(u8 **)((u8 *)arr + off);
     u8 *vt = *(u8 **)(obj + 0x1C);
     (*(void (**)(void *))(vt + 0xE4))(obj + *(s16 *)(vt + 0xE0));
 }
@@ -1870,15 +1881,15 @@ void fn_800D0A88(u8 *self, s32 i) {
 
 void fn_800D0AE4(u8 *self, s32 i) {
     void fn_800CE924(void *, s32);
-    u8 *vt;
-    u8 *obj;
+    void *obj;
+    void *vt;
     {
         s32 off = i * 4;
         void **arr = (void **)(self + 0x40);
-        obj = *(u8 **)((u8 *)arr + off);
+        obj = *(void **)((u8 *)arr + off);
     }
-    vt = *(u8 **)(obj + 0x1C);
-    (*(void (**)(void *))(vt + 0x5C))(obj + *(s16 *)(vt + 0x58));
+    vt = M2C_FIELD(obj, void **, 0x1C);
+    M2C_FIELD(vt, void (**)(void *), 0x5C)((u8 *)obj + M2C_FIELD(vt, s16 *, 0x58));
     fn_800CE924(self, i);
 }
 
