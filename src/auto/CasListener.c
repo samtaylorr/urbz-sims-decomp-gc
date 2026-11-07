@@ -261,6 +261,19 @@ void fn_801BB5F0(void) {
 
 }
 
+void fn_801BB708(void *self, s32 flags) {
+    extern u8 lbl_80415CB8[];
+    void fn_801BD690(void *, s32);
+    void *p;
+
+    M2C_FIELD(self, u8 **, 8) = lbl_80415CB8;
+    p = M2C_FIELD(self, void **, 0xC);
+    if (p != NULL) {
+        M2C_FIELD(*(void **)p, void (**)(void *, s32), 0xC)((u8 *)p + M2C_FIELD(*(void **)p, s16 *, 8), 3);
+    }
+    fn_801BD690(self, flags);
+}
+
 s32 fn_801BB774(char *self) {
     return *(s32 *)(self + 0xC);
 }
@@ -436,13 +449,15 @@ f32 fn_801BECA0(f32 *p, s32 arg1) {
     extern const f32 lbl_803DD1C0[];
     extern const f32 lbl_803DD1C4[];
     f32 v[2];
+    f32 dot;
     f32 d;
     f32 r;
 
     v[0] = lbl_803DD1B8[0];
     v[1] = lbl_803DD1BC[0];
-    d = v[0] * p[0] + v[1] * p[1];
-    if (!(d >= lbl_803DD1BC[0])) {
+    dot = v[0] * p[0] + v[1] * p[1];
+    d = dot;
+    if (!(dot >= lbl_803DD1BC[0])) {
         d = -d;
     }
     if (p[1] * p[0] >= lbl_803DD1BC[0]) {
