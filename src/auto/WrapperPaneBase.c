@@ -58,21 +58,19 @@ s32 fn_800C472C(s64 *arg0) {
     return 1;
 }
 
-WPBTime64 fn_800C4744(void) {
+void fn_800C4744(s64 *out) {
     extern s32 lbl_80495A34;
     extern u8 *lbl_80494FC4;
     extern u8 lbl_804349A8[];
-    extern f32 lbl_803D050C;
+    extern f32 lbl_803D050C[];
     extern long long fn_8024E754();
-    WPBTime64 r;
     if (lbl_80495A34 == 0) {
-        r.v = 0;
+        *out = 0;
     } else {
         u8 *obj = lbl_80494FC4;
         u8 *vt = *(u8 **)obj;
-        r.v = fn_8024E754((*(f32 (**)(void *, void *))(vt + 0x2C))(obj + *(s16 *)(vt + 0x28), lbl_804349A8) * lbl_803D050C);
+        *out = fn_8024E754((*(f32 (**)(void *, void *))(vt + 0x2C))(obj + *(s16 *)(vt + 0x28), lbl_804349A8) * lbl_803D050C[0]);
     }
-    return r;
 }
 
 void fn_800C47CC(void) {
