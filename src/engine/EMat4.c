@@ -496,6 +496,22 @@ void fn_802C748C(char **arg0) {
     }
 }
 
+void fn_802C7500(char **arg0, char **arg1) {
+    M2C_UNK fn_802C69B0(s32, s32);
+    s32 i1;
+    s32 i2;
+
+    i1 = fn_802C714C(arg0, '\\');
+    i2 = fn_802C714C(arg0, ':');
+    if (i1 != -1) {
+        fn_802C6CCC((s32 *)arg0, (s32)arg1, i1 + 1, -1);
+    } else if (i2 != -1) {
+        fn_802C6CCC((s32 *)arg0, (s32)arg1, i2 + 1, -1);
+    } else {
+        fn_802C69B0((s32)arg1, (s32)*arg0);
+    }
+}
+
 char **fn_802C774C(char **arg0) {
     char *p;
 
