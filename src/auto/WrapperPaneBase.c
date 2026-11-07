@@ -259,10 +259,27 @@ void fn_800C589C(void *arg0) {
     fn_800CCA68(M2C_FIELD(M2C_FIELD(arg0, void **, 0x70), void **, 0x64));
 }
 
+void fn_800C594C(void *arg0, f32 *arg1) {
+    char *obj;
+    char *vt;
+    f32 t[2];
+    t[0] = arg1[0];
+    t[1] = arg1[1];
+    obj = M2C_FIELD(M2C_FIELD(arg0, char **, 0x70), char **, 0x64);
+    vt = M2C_FIELD(obj, char **, 0x1C);
+    (*(void (**)(void *, f32 *))(vt + 0x3C))(obj + *(s16 *)(vt + 0x38), t);
+}
+
 void fn_800C59A4(void *arg0) {
     char *obj = M2C_FIELD(M2C_FIELD(arg0, char **, 0x70), char **, 0x64);
     char *vt = M2C_FIELD(obj, char **, 0x1C);
     (*(void (**)(void *))(vt + 0x4C))(obj + *(s16 *)(vt + 0x48));
+}
+
+void fn_800C59E0(void *arg0) {
+    char *obj = M2C_FIELD(M2C_FIELD(arg0, char **, 0x70), char **, 0x64);
+    char *vt = M2C_FIELD(obj, char **, 0x1C);
+    (*(void (**)(void *))(vt + 0x5C))(obj + *(s16 *)(vt + 0x58));
 }
 
 void fn_800C5F10(void *arg0) {
