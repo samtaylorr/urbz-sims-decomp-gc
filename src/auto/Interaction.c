@@ -164,6 +164,7 @@ void *fn_8010D9B8(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     void *fn_8010F4B0(void *);
     void *heap;
     void *p;
+    void *q;
     void *r;
 
     heap = ((void *(*)(void))fn_802D0AB8)();
@@ -171,14 +172,15 @@ void *fn_8010D9B8(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     if (p == NULL) {
         p = fn_802DC9F4(heap, 0x28, 1, 0);
         if (p == NULL && heap == ((void *(*)(void))fn_802D0AB8)()) {
-            p = fn_802DC9F4(fn_802D0B3C(), 0x28, 1, 0);
+            q = fn_802DC9F4(fn_802D0B3C(), 0x28, 1, 0);
             goto done;
         }
     } else {
         fn_80248488(p, 0, 0x28);
     }
+    q = p;
 done:
-    r = fn_8010F4B0(p);
+    r = fn_8010F4B0(q);
     M2C_FIELD(r, s32 *, 0x14) = arg1;
     M2C_FIELD(r, s32 *, 0xC) = arg2;
     M2C_FIELD(r, s32 *, 0x10) = arg3;
