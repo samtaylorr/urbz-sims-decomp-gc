@@ -817,15 +817,15 @@ f32 *fn_802C91E0(f32 *m, f32 angle) {
     f32 fn_802434CC(f32);
     f32 s = fn_80243694(angle);
     f32 c = fn_802434CC(angle);
-    f32 a, b;
-    s32 i;
+    f32 a0 = m[0], a1 = m[1], a2 = m[2];
+    f32 b0 = m[4], b1 = m[5], b2 = m[6];
 
-    for (i = 0; i < 3; i++) {
-        a = m[i];
-        b = m[i + 4];
-        m[i + 4] = c * b + -s * a;
-        m[i] = c * a + s * b;
-    }
+    m[4] = -s * a0 + c * b0;
+    m[0] = c * a0 + s * b0;
+    m[5] = -s * a1 + c * b1;
+    m[1] = c * a1 + s * b1;
+    m[6] = -s * a2 + c * b2;
+    m[2] = c * a2 + s * b2;
     return m;
 }
 
@@ -912,7 +912,7 @@ void fn_802CAAD0(char *self) {
 
 void *fn_802CAB04(u8 *self) {
     extern u8 lbl_80419350[];
-    extern void fn_802CA9A8(void *);
+    extern void *fn_802CA9A8(void *);
     fn_802CA9A8(self);
     *(u8 **)(self + 0x0) = lbl_80419350;
     fn_802CA9A8(self + 0x1C);
