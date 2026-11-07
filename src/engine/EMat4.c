@@ -1022,10 +1022,10 @@ f32 *fn_802C89C8(f32 *m, f32 angle) {
     fn_802C876C(m);
     s = fn_80243694(angle);
     c = fn_802434CC(angle);
-    m[0] = c;
     m[1] = s;
-    m[4] = -s;
     m[5] = c;
+    m[4] = -s;
+    m[0] = c;
     return m;
 }
 
