@@ -669,6 +669,15 @@ s16 fn_80149048(void *arg0) {
     return M2C_FIELD(M2C_FIELD(fn_8016CC44(M2C_FIELD(arg0, s32 *, 0x8C)), void **, 0x38), s16 *, 0x8A);
 }
 
+s32 fn_80149074(void *arg0) {
+    void *temp_r3;
+    void *temp_r9;
+
+    temp_r3 = M2C_FIELD(arg0, void **, 4);
+    temp_r9 = M2C_FIELD(temp_r3, void **, 4);
+    return M2C_FIELD(temp_r9, s32 (**)(void *), 0x3BC)(temp_r3 + M2C_FIELD(temp_r9, s16 *, 0x3B8)) == 6;
+}
+
 s32 fn_801490B8(void *self) {
     s16 *fn_80141C5C(s32, s32);
     return (*(u16 *)fn_80141C5C((s32)self + 0x28, 0x28) >> 10) & 1;
