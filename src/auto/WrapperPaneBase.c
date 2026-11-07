@@ -111,6 +111,7 @@ void fn_800C4E30(void *arg0) {
 
 void fn_800C4E84(void *arg0) {
     void fn_800C511C(void *);
+    void fn_800CEEC8(void *);
     M2C_FIELD(arg0, s32 *, 0x7C) = 0;
     M2C_FIELD(M2C_FIELD(arg0, char **, 0x70), s32 *, 0x34) = 0;
     fn_800CEEC8(arg0);
