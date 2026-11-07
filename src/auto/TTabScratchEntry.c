@@ -970,6 +970,12 @@ s32 fn_801A0690(s32 arg0, s32 arg1) {
     return n;
 }
 
+void *fn_801A07C4(void *arg0) {
+    void *fn_80248488(void *, s32, u32);
+    fn_80248488(arg0, 0, 0x38);
+    return arg0;
+}
+
 void *fn_801A07FC(void *arg0, void *arg1) {
     struct Blk {
         s32 v[14];
