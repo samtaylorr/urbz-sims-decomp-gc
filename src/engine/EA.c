@@ -1106,8 +1106,8 @@ void fn_802DD82C(void *arg0, s32 arg1) {
 }
 
 void fn_802DD930(s32 *arg0, s32 arg1) {
-    s32 fn_802DDC6C();
-    void fn_802DDCAC();
+    s32 fn_802DDC6C(s32, s32);
+    M2C_UNK fn_802DDCAC(s32, s32, s32);
     s32 a = arg0[0];
     s32 b = arg0[1];
     u8 has = fn_802DDC6C(a, b) != 0;
