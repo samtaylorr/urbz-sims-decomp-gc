@@ -102,6 +102,20 @@ static inline CasListIter CasList_Begin(void *self) {
     return r;
 }
 
+typedef struct {
+    s32 a;
+    s32 b;
+} CasPairInit;
+
+static inline void CasPairInit_Both(CasPairInit *p) {
+    p->a = 0;
+    p->b = 0;
+}
+
+static inline void CasPairInit_Second(CasPairInit *p) {
+    p->b = 0;
+}
+
 static inline s32 CasArr_Size(u32 **a) {
     return a != NULL ? ((s32 *)a)[-1] : 0;
 }
