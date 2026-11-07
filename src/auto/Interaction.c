@@ -381,17 +381,18 @@ s32 fn_8010EDCC(void *arg0) {
         return q[4];
     }
     t = M2C_FIELD(arg0, void **, 0x18);
-    r = 0;
     if (t != NULL) {
         r = M2C_FIELD(arg0, s32 *, 0xC);
         if (r != 0) {
             b = (u32)(M2C_FIELD(t, s32 *, 0x14) - 1) <= 0xFFFFFFEFu;
             if (b != 0) {
-                r = 0;
+                goto zero;
             }
         }
+        return r;
     }
-    return r;
+zero:
+    return 0;
 }
 
 s32 fn_8010F020(void) {
@@ -836,21 +837,17 @@ void *fn_80112010(void *self) {
 }
 
 void fn_80112034(void *self, s32 id) {
-    extern struct { s32 id; s32 val; } lbl_803F63D4[];
-    s32 i = 0;
-    if (lbl_803F63D4[i].id == id) {
-        goto found;
+    extern s32 lbl_803F63D4[][2];
+    s32 i;
+    for (i = 0; i <= 11; i++) {
+        if (lbl_803F63D4[i][0] == id) {
+            break;
+        }
     }
-next:
-    if (++i > 11) {
-        return;
+    if (i <= 11) {
+        M2C_FIELD(self, s32 **, 0xC) = lbl_803F63D4[i];
+        M2C_FIELD(self, s32 *, 0x4) = id;
     }
-    if (lbl_803F63D4[i].id != id) {
-        goto next;
-    }
-found:
-    M2C_FIELD(self, void **, 0xC) = &lbl_803F63D4[i];
-    M2C_FIELD(self, s32 *, 0x4) = id;
 }
 
 void fn_8011208C(void *self, s32 flags) {
@@ -891,16 +888,27 @@ s32 fn_80112F68(void *arg0) {
 }
 
 s32 fn_80112F88(IntGroupVec *self, s32 n) {
-    if (n > 0 && n <= self->end - self->begin) {
-        return (self->begin + n)[-1].unk10;
+    IntGroup *b;
+    if (n <= 0) {
+        return 0;
     }
-    return 0;
+    b = self->begin;
+    if (n > self->end - b) {
+        return 0;
+    }
+    return b[n - 1].unk10;
 }
 
 s32 fn_80112FCC(IntGroupVec *self, s32 id) {
     IntGroup *fn_80112480(IntGroupVec *, s32, s32);
     IntGroup *it = fn_80112480(self, id, 0);
-    return it != self->end ? it->end - it->begin : 0;
+    s32 r;
+    if (it != self->end) {
+        r = it->end - it->begin;
+    } else {
+        r = 0;
+    }
+    return r;
 }
 
 void fn_8011302C(IntGroupVec *self) {
@@ -1054,9 +1062,10 @@ void *fn_8011677C(void) {
 
     if (p != NULL) {
         *head = *p;
-        return p;
+    } else {
+        p = fn_802C7DE4(head);
     }
-    return fn_802C7DE4(head);
+    return p;
 }
 
 void fn_801167C0(void **arg0) {
