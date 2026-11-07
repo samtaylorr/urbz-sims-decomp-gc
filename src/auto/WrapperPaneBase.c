@@ -123,6 +123,7 @@ void fn_800C5080(void *arg0, s32 arg1) {
     extern char lbl_803D0658[];
     extern char lbl_803D066C[];
     void fn_800CEF00(void *, s32);
+    void fn_800CF02C(void *, char *);
     if (M2C_FIELD(arg0, s32 *, 0x78) != 0) {
         fn_800CF02C(arg0, lbl_803D0658);
         fn_800CEF00(arg0, arg1);
