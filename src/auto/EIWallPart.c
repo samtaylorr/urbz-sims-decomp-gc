@@ -412,16 +412,18 @@ void fn_80038438(void *self) {
     extern s32 lbl_80494040;
     s32 b;
     s32 a;
+    s32 v;
 
-    a = 0;
     b = 0;
+    a = 0;
     fn_800384E0(self, 1, &b, &a, 1);
     fn_800384E0(self, 0, &b, &a, 1);
     fn_80038784(self, &b, &a, 1);
     fn_8003755C(self);
+    v = M2C_FIELD(lbl_8041FA38[0], s32 *, 0x24);
     lbl_80494044 = b;
     lbl_80494040 = a;
-    fn_80038110(self, M2C_FIELD(lbl_8041FA38[0], s32 *, 0x24));
+    fn_80038110(self, v);
 }
 
 s32 fn_8003904C(void *self) {
@@ -461,11 +463,11 @@ s32 fn_80039584(void *self, s32 arg1) {
     extern void fn_80034F94(void *, void *);
     u8 *pos = (u8 *)arg1;
     void **p;
-    void *obj;
-    Tile tile;
 
     for (p = M2C_FIELD(self, void **, 0x14); p != NULL; ) {
-        obj = p[0];
+        void *obj = p[0];
+        Tile tile;
+
         fn_80105508(&tile);
         fn_80034F94(obj, &tile);
         if (pos[0] == tile.x && pos[1] == tile.y) {
