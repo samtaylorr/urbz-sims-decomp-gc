@@ -2265,6 +2265,14 @@ void fn_800D0DB8(void *arg0, f32 arg1) {
     fn_800CE954(arg0, 1);
 }
 
+void fn_800D0E0C(u8 *self) {
+    u8 *obj = *(u8 **)(self + 0x44);
+    u8 *vt = *(u8 **)(obj + 0x1C);
+    (*(void (**)(void *))(vt + 0x3C))(obj + *(s16 *)(vt + 0x38));
+    fn_800CE8F4(self, 1);
+    fn_800CE924(self, 1);
+}
+
 s32 fn_800D0F08(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x48);
 }
