@@ -59,6 +59,11 @@ static inline void QSSVec_Free(QSSVec *v) {
     }
 }
 typedef struct QSSStrBuf { s32 unk0; s32 unk4; char buf[0x104]; } QSSStrBuf;
+
+static inline void QSSStrBuf_Init(QSSStrBuf *s) {
+    void *fn_800F687C(void *, void *, s32);
+    fn_800F687C(s, s->buf, 0x104);
+}
 typedef struct QSSElem1C { u8 b[0x1C]; } QSSElem1C;
 typedef struct QSSVec1C { QSSElem1C *begin; QSSElem1C *end; } QSSVec1C;
 
@@ -188,10 +193,12 @@ s32 fn_800F5FBC(void *arg0, s32 *arg1) {
     if (fn_800C4568(f, fn_800F69E8(arg1)) == 0) {
         if (fn_800C4548(f, fn_800F69E8(arg1)) == 0) {
             return -0x2A;
+        } else {
+            return 0;
         }
-        return 0;
+    } else {
+        return -0x2B;
     }
-    return -0x2B;
 }
 
 s32 fn_800F6048(void *arg0, s32 *arg1) {
@@ -204,13 +211,13 @@ s32 fn_800F6048(void *arg0, s32 *arg1) {
         return -0x2F;
     }
     f = lbl_80495A30;
-    if (fn_800C4568(f, fn_800F69E8(arg1)) != 0) {
-        if (fn_800C4550(f, fn_800F69E8(arg1)) == 0) {
-            return -0x27;
-        }
-        return 0;
+    if (fn_800C4568(f, fn_800F69E8(arg1)) == 0) {
+        return -0x28;
     }
-    return -0x28;
+    if (fn_800C4550(f, fn_800F69E8(arg1)) == 0) {
+        return -0x27;
+    }
+    return 0;
 }
 
 void *fn_800F60D4(void *arg0) {
@@ -1578,17 +1585,17 @@ s32 fn_800FB7B0(void *arg0, s32 arg1, s32 arg2) {
     return -1;
 }
 
-s32 fn_800FB838(void *arg0, s32 arg1) {
-    void **p = *M2C_FIELD(arg0, void ***, 4);
+s32 fn_800FB838(void *arg0, u32 arg1) {
+    s32 **p = *M2C_FIELD(arg0, s32 ***, 4);
     s32 n = 0;
-    void *q;
+    s32 *q;
     if (p != NULL) {
-        n = M2C_FIELD(p, s32 *, -4);
+        n = ((s32 *)p)[-1];
     }
-    if (arg1 < n) {
-        q = *(void **)((u8 *)p + arg1 * 4);
+    if ((s32)arg1 < n) {
+        q = p[arg1];
         if (q != NULL) {
-            return *(s32 *)q;
+            return *q;
         }
     }
     return 0;
