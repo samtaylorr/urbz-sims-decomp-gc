@@ -22,6 +22,20 @@ static inline s32 CasMapIter_NotEqual(const CasMapIter *a, void *b) {
     return a->node != b;
 }
 
+typedef struct CasListNode {
+    struct CasListNode *next;
+    struct CasListNode *prev;
+    s32 value;
+} CasListNode;
+
+typedef struct {
+    CasListNode *node;
+} CasListIter;
+
+static inline s32 CasListIter_NotEqual(const CasListIter *a, const CasListIter *b) {
+    return a->node != b->node;
+}
+
 static inline s32 CasArr_Size(u32 **a) {
     return a != NULL ? ((s32 *)a)[-1] : 0;
 }
@@ -238,17 +252,12 @@ void *fn_801B861C(void *self) {
     M2C_FIELD(self, u8 **, 8) = lbl_80415BE8;
     p = (char *)self + 0x30;
     M2C_FIELD(p, s32 *, 4) = 0;
-    {
-        void *tmp = fn_802D1FC8(0x14);
-        if (tmp != NULL) {
-            M2C_FIELD(tmp, u8 **, 0) = lbl_80415C38;
-        }
-        obj = tmp;
-    }
+    obj = fn_802D1FC8(0x14);
     M2C_FIELD(self, void **, 0xC) = obj;
-    M2C_FIELD(self, s32 *, 0x18) = 0;
+    M2C_FIELD(obj, u8 **, 0) = lbl_80415C38;
     M2C_FIELD(self, s32 *, 0x10) = 0;
     M2C_FIELD(self, s32 *, 0x14) = 0;
+    M2C_FIELD(self, s32 *, 0x18) = 0;
     return self;
 }
 
@@ -1131,10 +1140,9 @@ void fn_801C5750(void *self, s32 flags) {
     }
 }
 
-void fn_801C5AC4(void *arg0, s32 arg1, s32 arg2, u32 arg3, s32 arg4) {
+void fn_801C5AC4(CasBits *arg0, s32 arg1, s32 arg2, u32 arg3, s32 arg4) {
     s32 idx;
     u32 mask;
-    u32 (*bits)[16][32];
 
     if (arg3 > 0x3FF) {
         return;
@@ -1145,11 +1153,10 @@ void fn_801C5AC4(void *arg0, s32 arg1, s32 arg2, u32 arg3, s32 arg4) {
     }
     mask = 1 << (arg3 & 0x1F);
     arg3 >>= 5;
-    bits = (u32 (*)[16][32])((u8 *)arg0 + 0x808);
     if (arg4 != 0) {
-        bits[idx][arg2][arg3] |= mask;
+        arg0->bits[idx][arg2][arg3] |= mask;
     } else {
-        bits[idx][arg2][arg3] &= ~mask;
+        arg0->bits[idx][arg2][arg3] &= ~mask;
     }
 }
 
@@ -1284,13 +1291,12 @@ void fn_801C5F20(void *arg0, s32 arg1) {
 
 extern CasPair fn_803ADC94(s32, void **);
 void fn_801C5FB0(s32 arg0, void *arg1) {
+    CasPair copy;
     void *key;
     void *temp_r9;
 
     key = arg1;
-    {
-        CasPair copy = fn_803ADC94(arg0, &key);
-    }
+    copy = CasMap_Insert(arg0, &key);
     temp_r9 = M2C_FIELD(arg1, void **, 4);
     M2C_FIELD(temp_r9, M2C_UNK (**)(void *, s32), 0x1C)((u8 *)arg1 + M2C_FIELD(temp_r9, s16 *, 0x18), arg0);
 }
