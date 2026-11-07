@@ -1033,6 +1033,26 @@ s32 fn_802CB9C8(void *self) {
     return count;
 }
 
+void *fn_802CBB10(void *self, s32 id) {
+    void *node = M2C_FIELD(self, void **, 0);
+    int more;
+
+    for (;;) {
+        more = 1;
+        if (node == NULL) {
+            more = 0;
+        }
+        if (!more) {
+            break;
+        }
+        if (M2C_FIELD(node, s32 *, 0) == id) {
+            return node;
+        }
+        node = M2C_FIELD(node, void **, 8);
+    }
+    return NULL;
+}
+
 void fn_802CBB94(void) {
 
 }
