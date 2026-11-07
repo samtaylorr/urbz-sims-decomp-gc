@@ -1532,20 +1532,20 @@ s32 fn_800F89E0(void *self, u32 idx, s32 val) {
     } *s = self;
     void fn_800F8CB4(char *);
     extern char lbl_803D5B58[];
-    s32 ok;
+    s32 ret;
     if (idx + 2 <= 1) {
-        ok = 0;
-    } else {
-        if (idx > 0x9FF) {
-            fn_800F8CB4(lbl_803D5B58);
-        }
-        ok = (s->used[idx >> 5] >> (idx & 31)) & 1;
-    }
-    if (!ok) {
         return 0;
     }
-    s->data[idx] = val;
-    return 1;
+    if (idx > 0x9FF) {
+        fn_800F8CB4(lbl_803D5B58);
+    }
+    if (!((s->used[idx >> 5] >> (idx & 31)) & 1)) {
+        ret = 0;
+    } else {
+        s->data[idx] = val;
+        ret = 1;
+    }
+    return ret;
 }
 
 s32 fn_800F8A60(void *self, u32 idx) {
