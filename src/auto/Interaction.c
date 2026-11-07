@@ -438,7 +438,7 @@ s32 fn_8010EF20(void *self) {
         s32 pad2[2];
     } Q;
     extern void *lbl_80494FA4;
-    extern f32 lbl_803D71F0;
+    extern f32 lbl_803D71F0[];
 
     if (M2C_FIELD(self, s32 *, 0x1C) != 0) {
         Q q;
@@ -446,7 +446,7 @@ s32 fn_8010EF20(void *self) {
         void *obj;
         void *vt;
         q.flags = 0;
-        p->z = lbl_803D71F0;
+        p->z = lbl_803D71F0[0];
         obj = lbl_80494FA4;
         q.flags |= 4;
         vt = *(void **)obj;
