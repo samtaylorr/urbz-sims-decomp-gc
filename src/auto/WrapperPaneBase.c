@@ -727,6 +727,17 @@ s32 fn_800CAA04(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x68);
 }
 
+void fn_800CAF98(void *arg0) {
+    extern void fn_8031EA2C(void *);
+    void fn_800CEE00(void *);
+    if (M2C_FIELD(arg0, void **, 0x68) != NULL) {
+        fn_8031EA2C(M2C_FIELD(arg0, void **, 0x68));
+        M2C_FIELD(arg0, void **, 0x68) = NULL;
+    }
+    fn_800CEE00(arg0);
+    M2C_FIELD(arg0, s32 *, 0x6C) = 0;
+}
+
 void fn_800CAFE8(void *arg0) {
     M2C_UNK fn_800CB350(void *);
     M2C_UNK fn_800CB514(void *);
