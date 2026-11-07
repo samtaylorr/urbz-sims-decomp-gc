@@ -808,10 +808,10 @@ s32 fn_802DBB54(void *arg0) {
 
     if (old == 0) {
         M2C_FIELD(arg0, s32 *, 0x494) = 1;
-        ret = fn_802DA824(arg0) == 0;
+        ret = fn_802DA824(arg0);
         M2C_FIELD(arg0, s32 *, 0x494) = old;
     }
-    return ret;
+    return ret == 0;
 }
 
 void fn_802DBBA8(void *arg0, s32 arg1, s32 arg2) {
