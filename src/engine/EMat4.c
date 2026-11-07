@@ -1015,7 +1015,6 @@ f32 *fn_802C895C(f32 *m, f32 angle) {
 }
 
 f32 *fn_802C89C8(f32 *m, f32 angle) {
-    void fn_802C876C(void *);
     f32 fn_80243694(f32);
     f32 fn_802434CC(f32);
     f32 s, c;
@@ -1162,7 +1161,7 @@ f32 fn_802C96D8(f32 (*m)[4]) {
     for (i = 0; i < 3; i++) {
         sum = 0.0f;
         for (j = 0; j < 3; j++) {
-            sum += __builtin_fabsf(*(f32 *)(i * 4 + (char *)m[j]));
+            sum += __builtin_fabsf((*(m + j))[i]);
         }
         if (sum > max) {
             max = sum;
