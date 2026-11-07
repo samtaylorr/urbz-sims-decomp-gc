@@ -1011,6 +1011,13 @@ void fn_800CD838(void *self, s32 id, s32 n, f32 farg0) {
     M2C_FIELD(temp_r9, M2C_UNK (**)(void *, f32), 0x5C)(temp_r3 + M2C_FIELD(temp_r9, s16 *, 0x58), farg0);
 }
 
+M2C_UNK fn_800CD880(void *self, s32 id, s32 n, s32 arg3) {
+    void *fn_800CD660(void *self, s32 id, s32 n);
+    u8 *obj = fn_800CD660(self, id, n);
+    u8 *vt = *(u8 **)(obj + 0x1C);
+    return (*(M2C_UNK (**)(void *, s32))(vt + 0x6C))(obj + *(s16 *)(vt + 0x68), arg3);
+}
+
 void fn_800CD8C8(void *self, s32 id, s32 n, f32 farg0) {
     void *temp_r3;
     void *temp_r9;
