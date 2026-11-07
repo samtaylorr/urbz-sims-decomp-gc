@@ -1019,6 +1019,14 @@ void fn_801C6790(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 8) = arg1;
 }
 
+void fn_801C7A44(void *arg0, s32 arg1) {
+    void fn_801C601C(s32, s32);
+    if (arg1 == 0 && M2C_FIELD(arg0, s32 *, 0x4BC) != 0) {
+        fn_801C601C(M2C_FIELD(arg0, s32 *, 0x0), M2C_FIELD(arg0, s32 *, 0x4BC));
+    }
+    M2C_FIELD(arg0, s32 *, 0x0) = arg1;
+}
+
 void fn_801C8640(void *arg0, f32 farg0, f32 farg1, f32 farg2) {
     M2C_FIELD(arg0, f32 *, 0x4F8) = farg2;
     M2C_FIELD(arg0, f32 *, 0x4A4) = farg0;
