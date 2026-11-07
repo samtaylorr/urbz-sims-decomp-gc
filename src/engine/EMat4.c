@@ -692,8 +692,28 @@ void *fn_802C8814(void *arg0, void *arg1) {
     return arg0;
 }
 
+f32 fn_802C8860(f32 *m) {
+    f32 fn_8025FC40(f32 *);
+    f32 v[3];
+    fn_802C8530(m, 0, v);
+    return fn_8025FC40(v);
+}
+
 void fn_802C96D4(void) {
 
+}
+
+f32 fn_802CA924(void) {
+    extern u32 lbl_80494DC8;
+    extern f32 lbl_803F0138;
+    lbl_80494DC8 = lbl_80494DC8 * 0x41C64E6F + 0x303B;
+    return (f32)((lbl_80494DC8 >> 16) & 0x7FFF) * lbl_803F0138;
+}
+
+f32 fn_802CA978(void) {
+    extern f32 lbl_803F013C;
+    f32 r = fn_802CA924();
+    return (r + r) - lbl_803F013C;
 }
 
 void fn_802CAA50(char *self, s32 a, s32 b, s32 c) {
