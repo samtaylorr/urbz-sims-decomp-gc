@@ -21,6 +21,16 @@ extern s32 lbl_8049519C;
 extern s32 lbl_80495120;
 extern s32 lbl_80495124;
 extern s32 lbl_803F4668[];
+
+static inline void RC_SetFog(u8 *p, u8 enable, s32 type, u8 color) {
+    p[0x3C9] = enable;
+    *(s32 *)(p + 0x3B8) = type;
+    p[0x3BC] = color;
+    *(s32 *)(p + 0x3C4) = 7;
+    *(u32 *)(p + 0x6CC) |= 0x80000000 | 0x40;
+    *(s32 *)(p + 0x3C0) = enable;
+    p[0x3C8] = 0;
+}
 void fn_8034F9F0(u8 *self);
 void fn_80351084(u8 *self);
 void *fn_80348E8C(u32 size, void *p);
