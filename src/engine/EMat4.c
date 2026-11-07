@@ -995,6 +995,25 @@ void fn_802CB930(void *arg0) {
     fn_802CB8D4(arg0);
 }
 
+s32 fn_802CB994(void *self) {
+    void *node = M2C_FIELD(self, void **, 0);
+    s32 count = 0;
+    int more;
+
+    for (;;) {
+        more = 1;
+        if (node == NULL) {
+            more = 0;
+        }
+        if (!more) {
+            break;
+        }
+        node = M2C_FIELD(node, void **, 8);
+        count++;
+    }
+    return count;
+}
+
 s32 fn_802CB9C8(void *self) {
     void *node = M2C_FIELD(self, void **, 4);
     s32 count = 0;
