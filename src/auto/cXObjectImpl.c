@@ -180,6 +180,16 @@ void *fn_80133A58(void *arg0, void *arg1, s32 arg2) {
     return arg0;
 }
 
+void fn_80133A8C(char *arg0) {
+    char *obj;
+    char *e;
+    s16 *fn_80141C5C(s32, s32);
+
+    obj = M2C_FIELD(arg0, char **, 4);
+    e = M2C_FIELD(obj, char **, 4) + 0x448;
+    (*(void (**)(void *, s32))(e + 4))(obj + *(s16 *)e, *fn_80141C5C((s32)arg0 + 0x28, 0x1A));
+}
+
 s32 fn_80133F68(s32 arg0) {
     struct {
         s32 a;
