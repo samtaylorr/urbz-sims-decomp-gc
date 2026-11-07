@@ -629,7 +629,7 @@ s32 fn_802C78D0(s32 arg0, s32 arg1) {
 
 char **fn_802C7910(char **arg0, s32 arg1) {
     s32 fn_80248640(s32, s32);
-    M2C_UNK fn_802C6D20(s32, s32, s32);
+    void fn_802C6D20(char **, char **, s32);
     s32 n;
 
     n = fn_802C6A5C((s32 *)arg0);
