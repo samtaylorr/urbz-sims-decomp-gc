@@ -1317,6 +1317,38 @@ void fn_801C95D4(void *arg0, s32 arg1) {
     }
 }
 
+void fn_801C97B0(s32 arg0, s32 arg1) {
+    extern const f32 lbl_803DE3AC[];
+    extern const f32 lbl_803DE3B0[];
+    extern const f32 lbl_803DE3B4[];
+    extern const f32 lbl_803DE3B8[];
+    extern const f32 lbl_803DE3BC[];
+    extern const f32 lbl_803DE3C0[];
+    extern f32 lbl_80436260[];
+    extern f32 lbl_8043626C[];
+    extern f32 lbl_80436278[];
+    extern f32 lbl_80436284[];
+    extern f32 lbl_80436290[];
+
+    if (arg1 == 0xFFFF && arg0 != 0) {
+        lbl_80436260[0] = lbl_803DE3AC[0];
+        lbl_80436260[1] = lbl_803DE3AC[0];
+        lbl_80436260[2] = lbl_803DE3B0[0];
+        lbl_8043626C[0] = lbl_803DE3B4[0];
+        lbl_8043626C[1] = lbl_803DE3AC[0];
+        lbl_8043626C[2] = lbl_803DE3B0[0];
+        lbl_80436278[0] = lbl_803DE3B8[0];
+        lbl_80436278[1] = lbl_803DE3AC[0];
+        lbl_80436278[2] = lbl_803DE3B0[0];
+        lbl_80436284[0] = lbl_803DE3BC[0];
+        lbl_80436284[1] = lbl_803DE3C0[0];
+        lbl_80436284[2] = lbl_803DE3BC[0];
+        lbl_80436290[0] = lbl_803DE3BC[0];
+        lbl_80436290[1] = lbl_803DE3BC[0];
+        lbl_80436290[2] = lbl_803DE3BC[0];
+    }
+}
+
 void fn_801C9870(void *arg0, CasListenerVec3 *arg1, CasListenerVec3 *arg2) {
     *arg1 = M2C_FIELD(arg0, CasListenerVec3 *, 0x480);
     *arg2 = M2C_FIELD(arg0, CasListenerVec3 *, 0x48C);
