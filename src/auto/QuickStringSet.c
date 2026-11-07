@@ -307,11 +307,11 @@ s32 fn_800F6440(void *arg0, s32 arg1) {
     if (fn_800F6498(arg0) == 0) {
         return -0x31;
     }
-    if (arg1 >= 0) {
-        *(s32 *)((u8 *)arg0 + 0x11C) = arg1;
-        return 0;
+    if (arg1 < 0) {
+        return -0x32;
     }
-    return -0x32;
+    *(s32 *)((u8 *)arg0 + 0x11C) = arg1;
+    return 0;
 }
 
 s32 fn_800F6498(void *arg0) {
@@ -1275,6 +1275,24 @@ void fn_800F83B8(void *self, s32 flags) {
     if (flags & 1) {
         fn_802D20E8(self);
     }
+}
+
+void fn_800F8424(void *self, s32 arg1) {
+    void fn_802D211C(void *);
+    void fn_80248488(void *, s32, s32);
+    void **p;
+    s32 i;
+
+    p = (void **)((u8 *)self + 8);
+    for (i = 0; i < 0x80; i++) {
+        if (p[0] != NULL) {
+            fn_802D211C(p[0]);
+        }
+        p += 2;
+    }
+    fn_80248488((u8 *)self + 8, 0, 0x400);
+    M2C_FIELD(self, s32 *, 4) = 0;
+    M2C_FIELD(self, s32 *, 0) = arg1;
 }
 
 s32 fn_800F86C8(void *arg0, s32 arg1) {
