@@ -68,6 +68,7 @@ static inline void *WPB_InitBase(void *self, char *name) {
     b = (s32 *)((char *)self + 0x58);
     b[1] = 0;
     M2C_FIELD(self, s32 *, 0x64) = 1;
+    return self;
 }
 
 void fn_800CD09C();
@@ -812,16 +813,19 @@ void fn_800CB2EC(void *arg0, s32 arg1) {
     extern void fn_80048A48(void *);
     void fn_800CEF00(void *, s32);
     s32 *g;
+    s32 v;
     fn_80048A48(lbl_8041F754);
+    v = 0;
     if (M2C_FIELD(arg0, s32 *, 0x74) == 0) {
         g = (s32 *)lbl_8041F754;
         if (g[0x8C / 4] != 0) {
-            goto on;
+            v = 1;
         }
     }
-    arg1 = 0;
-on:
-    fn_800CEF00(arg0, arg1);
+    if (v) {
+        v = arg1;
+    }
+    fn_800CEF00(arg0, v);
 }
 
 void fn_800CB350(void *arg0) {
@@ -909,8 +913,8 @@ void *fn_800CBD64(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, 
     f32 v[2];
     f32 *p = v;
     f32 c = lbl_803D1078[0];
-    p[1] = c;
     v[0] = c;
+    p[1] = c;
     fn_800CBE0C(arg0, arg1, arg2, p, arg3, arg4, arg5, arg6, arg7);
     return arg0;
 }
