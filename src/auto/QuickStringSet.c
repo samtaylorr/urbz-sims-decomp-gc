@@ -94,12 +94,13 @@ void fn_800F66A0(void (*cb)(void)) {
 u16 fn_800F66A8(u32 arg0) {
     u16 *p = (u16 *)&lbl_804943C0;
     u32 v;
+    u16 r;
     v = p[1];
     v = v * 0x4E6D + 0x3039;
     *(s32 *)p = v;
     v = p[0] & 0x7FFF;
-    v = v % arg0;
-    return v;
+    r = v % arg0;
+    return r;
 }
 
 s32 fn_800F66D8(void) {
@@ -989,7 +990,7 @@ void *fn_800F8744(void *arg0, s32 arg1) {
     if (var_r9 < 0) {
         var_r9 += 0x80;
     }
-    return arg0 + ((var_r9 * 8) + 8);
+    return (char *)arg0 + var_r9 * 8 + 8;
 }
 
 void *fn_800F8788(void *arg0) {
@@ -1017,30 +1018,35 @@ void fn_800F8820(void (*cb)(void)) {
 }
 
 s32 fn_800F8828(void *self, s32 val, s32 flag) {
+    struct QSS {
+        s32 data[0xA00];
+        u32 used[0x50];
+        u32 mask[0x50];
+    } *s = self;
     u32 i;
-    if (lbl_804943C8 == 0) {
-        return -2;
-    }
-    i = 0;
-    if (flag) {
-        i = 0x40;
-    }
-    for (; i <= 0x4F; i++) {
-        u32 bits = M2C_FIELD(self, u32 *, 0x2940 + i * 4) | M2C_FIELD(self, u32 *, 0x2800 + i * 4);
-        if (bits != -1) {
-            s32 n = 0;
-            u32 m = 1;
-            while (bits & m) {
-                m <<= 1;
-                n++;
-            }
-            M2C_FIELD(self, u32 *, 0x2800 + i * 4) |= m;
-            n = i * 32 + n;
-            ((s32 *)self)[n] = val;
-            return n;
+    if (lbl_804943C8 != 0) {
+        i = 0;
+        if (flag) {
+            i = 0x40;
         }
+        for (; i <= 0x4F; i++) {
+            u32 bits = s->mask[i] | s->used[i];
+            if (bits != -1) {
+                s32 n = 0;
+                u32 m = 1;
+                while (bits & m) {
+                    m <<= 1;
+                    n++;
+                }
+                s->used[i] |= m;
+                n = i * 32 + n;
+                s->data[n] = val;
+                return n;
+            }
+        }
+        return -1;
     }
-    return -1;
+    return -2;
 }
 
 void fn_800F8BF4(s32 arg0) {
@@ -1312,6 +1318,11 @@ void fn_800FCB00(void) {
             fn_803997AC(p, size);
         }
     }
+}
+
+void fn_800FD290(char *self) {
+    char *vt = *(char **)self;
+    (*(void (**)(char *))(vt + 0x4C))(self + *(s16 *)(vt + 0x48));
 }
 
 extern u8 lbl_8040D4F0[];
