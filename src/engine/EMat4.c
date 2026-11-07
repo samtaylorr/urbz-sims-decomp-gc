@@ -761,17 +761,13 @@ f32 *fn_802C8688(f32 *dst, f32 *src) {
 }
 
 void fn_802C86D4(f32 *m) {
-    s32 i;
-    s32 j;
     f32 t;
-    for (i = 0; i < 4; i++) {
-        for (j = i + 1; j < 4; j++) {
-            t = m[j * 4 + i];
-            m[j * 4 + i] = m[i * 4 + j];
-            m[i * 4 + j] = m[j * 4 + i];
-            m[j * 4 + i] = t;
-        }
-    }
+    t = m[4]; m[4] = m[1]; m[1] = m[4]; m[4] = t;
+    t = m[8]; m[8] = m[2]; m[2] = m[8]; m[8] = t;
+    t = m[12]; m[12] = m[3]; m[3] = m[12]; m[12] = t;
+    t = m[9]; m[9] = m[6]; m[6] = m[9]; m[9] = t;
+    t = m[13]; m[13] = m[7]; m[7] = m[13]; m[13] = t;
+    t = m[14]; m[14] = m[11]; m[11] = m[14]; m[14] = t;
 }
 
 void *fn_802C87C4(void *arg0, void *arg1) {
@@ -864,6 +860,23 @@ void fn_802C96D4(void) {
 
 }
 
+f32 fn_802C96D8(f32 *m) {
+    f32 max = 0.0f;
+    f32 sum;
+    int i, j;
+
+    for (i = 0; i < 3; i++) {
+        sum = 0.0f;
+        for (j = 0; j < 3; j++) {
+            sum += __builtin_fabsf(m[j * 4 + i]);
+        }
+        if (sum > max) {
+            max = sum;
+        }
+    }
+    return max;
+}
+
 void fn_802C9730(f32 *m, f32 *x, f32 *y, f32 *z) {
     f32 fn_80242D18(f32, f32);
     f32 fn_80243100(f32);
@@ -893,6 +906,18 @@ f32 fn_802CA978(void) {
     extern const f32 lbl_803F013C[];
     f32 r = fn_802CA924();
     return (r + r) - lbl_803F013C[0];
+}
+
+void *fn_802CA9A8(void *self) {
+    extern u8 lbl_80419390[];
+    void **fn_802D6A14(void **);
+    void fn_802D81B8(void *);
+    void fn_802D82D4(void *, s32, s32);
+    fn_802D6A14(self);
+    *(void **)self = lbl_80419390;
+    fn_802D81B8((char *)self + 4);
+    fn_802D82D4((char *)self + 4, 1, -1);
+    return self;
 }
 
 void fn_802CAA00(void *self, s32 flags) {
