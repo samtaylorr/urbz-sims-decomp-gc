@@ -124,10 +124,13 @@ void fn_80345FB0(void) {
 s32 fn_80345FB4(void *arg0) {
     s32 fn_80346F04(void *);
     extern s32 lbl_80495088;
-    if (lbl_80495088 == 0 && fn_80346F04(arg0) != 1 && fn_80346F04(arg0) == 2) {
-        return 0;
+    s32 ret;
+    if (lbl_80495088 != 0 || fn_80346F04(arg0) == 1 || fn_80346F04(arg0) != 2) {
+        ret = 1;
+    } else {
+        ret = 0;
     }
-    return 1;
+    return ret;
 }
 
 void fn_80346258(void *self) {
@@ -153,14 +156,11 @@ void fn_80346258(void *self) {
 s32 fn_803465D0(void) {
     void fn_80260574(void *);
     extern u8 lbl_8046C400[];
-    register u8 *p asm("r3") = lbl_8046C400;
 
-    if (M2C_FIELD(p, s32 *, 0xA0) != 0) {
-        if (M2C_FIELD(p, u8 *, 0xA4) == 0) {
-            M2C_FIELD(p, s32 *, 0xA0) = 0;
-            fn_80260574(p);
-            return 1;
-        }
+    if (M2C_FIELD(lbl_8046C400, s32 *, 0xA0) != 0 && M2C_FIELD(lbl_8046C400, u8 *, 0xA4) == 0) {
+        M2C_FIELD(lbl_8046C400, s32 *, 0xA0) = 0;
+        fn_80260574(lbl_8046C400);
+        return 1;
     }
     return 0;
 }
@@ -200,11 +200,9 @@ s32 fn_80346A88(void) {
     u8 *p = lbl_8046C400;
     if (*(s32 *)(p + 0xA0) != 0) {
         if (p[0xA4] == 1 || p[0xA4] == 4) {
-            *(s32 *)(p + 0xD0) = 0;
-            *(s32 *)(p + 0xD4) = 0;
-            *(s32 *)(p + 0xCC) = -1;
-            *(s32 *)(p + 0xC8) = -1;
             p[0xA4] = 2;
+            *(s64 *)(p + 0xC8) = -1;
+            *(s64 *)(p + 0xD0) = 0;
             return 1;
         }
     }
@@ -253,19 +251,20 @@ s32 fn_80346B90(void) {
     return 0;
 }
 
-u32 fn_80346D78(void *self, s32 arg1, s16 x, s16 y, s16 w, s16 h) {
-    void fn_80346F5C();
+s32 fn_80346D78(void *self, s32 arg1, s32 x, s32 y, s32 w, s32 h) {
+    void fn_80346F5C(s32);
     void fn_80346F60(s32, s32, s32, s16, s16, s16, s16, s16, s16);
     extern u8 lbl_8046C400[];
     u8 *p = lbl_8046C400;
     s32 *buf;
-    if (*(s32 *)(p + 0xA0) == 0 || p[0xA4] == 0 || *(s32 **)(p + 0xF8) == 0) {
-        return -1;
+    s32 ret = -1;
+    if (*(s32 *)(p + 0xA0) != 0 && p[0xA4] != 0 && *(s32 **)(p + 0xF8) != 0) {
+        fn_80346F5C(arg1);
+        buf = *(s32 **)(p + 0xF8);
+        fn_80346F60(buf[0], buf[1], buf[2], x, y, *(s16 *)(p + 0x82), *(s16 *)(p + 0x86), w, h);
+        ret = (*(u32 *)(*(u8 **)(p + 0xF8) + 0xC) + *(u32 *)(p + 0xC0)) % *(u32 *)(p + 0x50);
     }
-    fn_80346F5C(arg1);
-    buf = *(s32 **)(p + 0xF8);
-    fn_80346F60(buf[0], buf[1], buf[2], x, y, *(s16 *)(p + 0x82), *(s16 *)(p + 0x86), w, h);
-    return (*(u32 *)(*(u8 **)(p + 0xF8) + 0xC) + *(u32 *)(p + 0xC0)) % *(u32 *)(p + 0x50);
+    return ret;
 }
 
 s32 fn_80346E34(s32 arg0, void *arg1) {
@@ -525,13 +524,21 @@ s32 fn_8034809C(s32 arg0, s32 arg1) {
     extern u8 lbl_8046C3E8[];
     extern u8 lbl_8046C3F4[];
     extern s32 lbl_8049506C;
-    if (fn_80258CEC(lbl_8046B090, arg1 ? fn_803481E8 : fn_803481C0, arg1, lbl_8046C3A8, 0x1000, arg0, 1) == 0) {
-        return 0;
+    s32 ok;
+    s32 ret;
+    if (arg1 != 0) {
+        ok = fn_80258CEC(lbl_8046B090, fn_803481E8, arg1, lbl_8046C3A8, 0x1000, arg0, 1);
+    } else {
+        ok = fn_80258CEC(lbl_8046B090, fn_803481C0, 0, lbl_8046C3A8, 0x1000, arg0, 1);
     }
-    fn_8037A8D8(lbl_8046C3A8, lbl_8046C3E8, 3);
-    fn_8037A8D8(lbl_8046C3C8, lbl_8046C3F4, 3);
-    lbl_8049506C = 1;
-    return 1;
+    ret = 0;
+    if (ok != 0) {
+        fn_8037A8D8(lbl_8046C3A8, lbl_8046C3E8, 3);
+        fn_8037A8D8(lbl_8046C3C8, lbl_8046C3F4, 3);
+        lbl_8049506C = 1;
+        ret = 1;
+    }
+    return ret;
 }
 
 void fn_80348150(void) {
@@ -1336,25 +1343,9 @@ void fn_8034B58C(void *self, s32 arg1, s32 arg2, s32 arg3) {
 }
 
 void fn_8034B620(void *self, void *obj, u8 arg2, s32 arg3, s32 arg4, s32 arg5) {
-    struct {
-        u8 type;
-        u8 value;
-        u8 flags;
-        void *obj;
-    } cmd;
-    void fn_8035500C(void *, void *);
-    extern u8 lbl_8046DF78[];
     RCOpVtEnt *e;
-    u32 flags;
     if (obj != NULL) {
-        flags = arg5 ? 0x100 : 0x80;
-        if (arg3) flags |= 0x200;
-        if (arg4) flags |= 0x400;
-        cmd.obj = obj;
-        cmd.type = 0x10;
-        cmd.value = arg2;
-        cmd.flags = flags >> 7;
-        fn_8035500C(lbl_8046DF78, &cmd);
+        RC_SetTexture(obj, arg2, arg3, arg4, arg5);
     } else {
         e = (RCOpVtEnt *)(M2C_FIELD(self, u8 **, 0x68) + 0x128);
         ((void (*)(void *, s32))e->fn)((u8 *)self + e->delta, arg5 ? 0x100 : 0x80);
@@ -1949,11 +1940,11 @@ void fn_80354C18(void *arg0, void *arg1) {
 
 void fn_80354C40(void *self, s64 *src, u32 count) {
     s64 *dst;
-    s32 i;
+    u32 i;
     *(u32 *)((char *)self + 0x4558) = count;
     dst = (s64 *)((char *)self + 0x758);
-    for (i = 0; i < count * 8; i++) {
-        dst[i] = src[i];
+    for (i = 0; i < count * 64; i += 8) {
+        *dst++ = *src++;
     }
     *(s32 *)((char *)self + 0x510) = 1;
 }
