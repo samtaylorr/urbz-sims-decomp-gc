@@ -55,6 +55,7 @@ void fn_8002D378(void *self, s32 flags) {
     extern u8 lbl_80407738[];
     extern void fn_800F1A60(void *, s32);
     extern void fn_8030834C(void *, s32);
+    void fn_8002D3CC(void *);
     M2C_FIELD(self, u8 **, 0x44) = lbl_80407738;
     fn_8002D3CC(self);
     fn_800F1A60((u8 *)self + 0x110, 2);
