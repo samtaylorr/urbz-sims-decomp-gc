@@ -140,6 +140,16 @@ void fn_801338AC(void *self) {
     fn_80133C74(self, 0);
 }
 
+s32 fn_801338D0(char *self) {
+    s16 *fn_80141C5C(s32, s32);
+    void fn_80133A8C(char *);
+
+    if (*fn_80141C5C((s32)self + 0x28, 0xE) != 0) {
+        return 0;
+    }
+    return ((s32 (*)(char *))fn_80133A8C)(self);
+}
+
 s32 fn_8013391C(s32 arg0, s32 arg1) {
     M2C_UNK fn_801336D8(s32, s32);
     fn_801336D8(arg1, arg0);
