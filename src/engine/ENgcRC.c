@@ -1385,14 +1385,14 @@ void fn_803563F4(u8 *self, u8 *arg) {
 }
 
 void fn_80356414(u8 *self, u8 *arg) {
-    s32 val = *(s32 *)(arg + 4);
+    u32 val = *(u32 *)(arg + 4);
 
     *(s32 *)(self + 0x510) = 1;
-    self[0x565] = (val >> 2) & 3;
     self[0x564] = val & 3;
+    self[0x565] = (val >> 2) & 3;
     self[0x566] = (val >> 4) & 3;
     self[0x567] = (val >> 6) & 3;
-    self[0x568] = val >> 8;
+    self[0x568] = (val >> 8) & 0xFF;
 }
 
 void fn_80273F88(void);
@@ -1405,6 +1405,11 @@ void fn_80358C9C(void) {
     extern s32 lbl_804950EC;
     fn_80348BC0();
     lbl_804950EC = 1;
+}
+
+void fn_80358CC4(void *self, void *arg1) {
+    void fn_80358CEC(void *, s32, s32);
+    fn_80358CEC(self, M2C_FIELD(arg1, s32 *, 4), -1);
 }
 
 void fn_80359520(void) {
