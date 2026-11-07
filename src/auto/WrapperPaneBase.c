@@ -706,6 +706,19 @@ void fn_800CD0DC(s32 *self) {
     }
 }
 
+void *fn_800CD5C4(void *arg0, s32 id) {
+    s32 **it;
+    s32 **end = M2C_FIELD(arg0, s32 ***, 0xC);
+
+    for (it = M2C_FIELD(arg0, s32 ***, 8); it != end; it++) {
+        s32 *e = *it;
+        if (e[0] == id && (e[1] & 4)) {
+            return e;
+        }
+    }
+    return NULL;
+}
+
 void *fn_800CD660(void *self, s32 id, s32 n) {
     s32 i = 0;
     s32 **it;
@@ -1047,7 +1060,7 @@ void fn_800CEE00(void *arg0) {
     }
 }
 
-void fn_800CEEC0(void) {
+void fn_800CEEC0() {
 
 }
 
@@ -1055,7 +1068,7 @@ void fn_800CEEC4(void) {
 
 }
 
-void fn_800CEEC8(void) {
+void fn_800CEEC8() {
 
 }
 
@@ -1766,17 +1779,44 @@ f32 fn_800D083C(WrapperPaneBase *self, s32 i) {
     return M2C_FIELD(self->unk40[i], f32 *, 0x54);
 }
 
+void fn_800D0850(u8 *self, s32 i) {
+    u8 *obj = ((u8 **)(self + 0x40))[i];
+    u8 *vt = *(u8 **)(obj + 0x1C);
+    (*(void (**)(void *))(vt + 0x44))(obj + *(s16 *)(vt + 0x40));
+}
+
+void fn_800D0890(u8 *self, s32 i) {
+    u8 *obj = ((u8 **)(self + 0x40))[i];
+    u8 *vt = *(u8 **)(obj + 0x1C);
+    (*(void (**)(void *))(vt + 0xDC))(obj + *(s16 *)(vt + 0xD8));
+}
+
+void fn_800D08D0(u8 *self, s32 i) {
+    u8 *obj = ((u8 **)(self + 0x40))[i];
+    u8 *vt = *(u8 **)(obj + 0x1C);
+    (*(void (**)(void *))(vt + 0xE4))(obj + *(s16 *)(vt + 0xE0));
+}
+
+void fn_800D0910(u8 *self, s32 i, s32 arg2) {
+    void fn_800CCA68(void *, s32);
+    void fn_800CE954(void *, s32);
+    fn_800CCA68(((void **)(self + 0x40))[i], arg2);
+    fn_800CE954(self, i);
+}
+
 void fn_800D0A88(u8 *self, s32 i) {
     void fn_800CE8F4(void *, s32);
-    u8 *obj = ((u8 **)(self + 0x40))[i];
+    s32 off = i * 4;
+    void **arr = (void **)(self + 0x40);
+    u8 *obj = *(u8 **)((u8 *)arr + off);
     (*(void (**)(void *))(*(u8 **)(obj + 0x1C) + 0x4C))(obj + *(s16 *)(*(u8 **)(obj + 0x1C) + 0x48));
     fn_800CE8F4(self, i);
 }
 
 void fn_800D0AE4(u8 *self, s32 i) {
     void fn_800CE924(void *, s32);
-    u8 *obj;
     u8 *vt;
+    u8 *obj;
     {
         s32 off = i * 4;
         void **arr = (void **)(self + 0x40);
