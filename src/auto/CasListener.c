@@ -53,6 +53,12 @@ typedef struct {
     char *p;
 } CasVecIt;
 
+static inline void CasBufVec_Destroy(CasVecIt first, CasVecIt last) {
+    for (; first.p != last.p; first.p += 0x10) {
+        CasBuf_Free((char **)first.p);
+    }
+}
+
 static inline void CasMapIter_Inc(CasMapIter *it) {
     extern void *fn_8039AB24(void *);
     it->node = fn_8039AB24(it->node);
@@ -1261,9 +1267,11 @@ void fn_801C3850(void *self, s32 arg1) {
     extern void fn_802D20E8(void *);
     CasListIter end;
     CasListIter it;
+    CasListIter *pend;
 
     end = CasList_End(self);
-    for (it = CasList_Begin(self); CasListIter_NotEqual(&it, &end); CasListIter_Inc(&it)) {
+    pend = &end;
+    for (it = CasList_Begin(self); CasListIter_NotEqual(&it, pend); CasListIter_Inc(&it)) {
     }
     fn_803AD18C(self);
     if (M2C_FIELD(self, void **, 4) != NULL) {
@@ -1278,15 +1286,18 @@ s32 fn_801C38E4(void *self) {
     CasListIter begin;
     CasListIter end;
     CasListIter it;
+    CasListIter *pend;
     s32 n;
     s32 ret;
 
     end = CasList_End(self);
+    pend = &end;
     n = 0;
-    for (it = CasList_Begin(self); CasListIter_NotEqual(&it, &end); CasListIter_Inc(&it)) {
+    for (it = CasList_Begin(self); CasListIter_NotEqual(&it, pend); CasListIter_Inc(&it)) {
         n++;
     }
     if (n != 0) {
+        CasListIter_Inc(&begin);
         begin = CasList_Begin(self);
         ret = 1;
         if (begin.node->value != 1) {
@@ -1310,16 +1321,16 @@ void *fn_801C4040(void *self) {
     return self;
 }
 
-void *fn_801C40A0(void *self, void *arg) {
-    void fn_803ABFA8(void *, void *);
-    void fn_801C4170(void *, void *);
+void *fn_801C40A0(void *self, s32 arg) {
+    void fn_803ABFA8(void *, s32);
+    void fn_801C4170(void *, s32);
     s32 pad[4];
     fn_803ABFA8(self, arg);
-    M2C_FIELD(self, s32 *, 0x14) = 0;
-    M2C_FIELD(self, s32 *, 0x18) = 0;
     CasSlot_Init((s32 *)((u8 *)self + 0x1C));
     CasSlot_InitBoth((s32 *)((u8 *)self + 0x24));
     CasSlot_Init((s32 *)((u8 *)self + 0x2C));
+    M2C_FIELD(self, s32 *, 0x14) = 0;
+    M2C_FIELD(self, s32 *, 0x18) = 0;
     fn_801C4170(self, arg);
     return self;
 }
