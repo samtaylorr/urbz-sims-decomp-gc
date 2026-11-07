@@ -607,10 +607,14 @@ s32 fn_802D90A4(u32 arg0, u32 arg1) {
             if (end > base) {
                 u32 top = base + M2C_FIELD(it, u32 *, 0x320);
                 if (arg0 < top) {
-                    return arg0 >= base && end <= top;
+                    if (arg0 >= base && end <= top) {
+                        return 1;
+                    }
+                    return 0;
                 }
             }
         }
+        return 1;
     }
     return 1;
 }
@@ -1223,6 +1227,25 @@ void fn_802DDBE0(void *arg0, void *arg1) {
 
     if (arg1 != NULL) {
         fn_802D1A00(fn_802D0AB8(arg0), arg1);
+    }
+}
+
+void fn_802DDC18(void *arg0) {
+    s32 *self = arg0;
+    char *vt = *(char **)((char *)self + 0x10);
+    (*(void (**)(void *, s32))(vt + 0x1C))((char *)self + *(s16 *)(vt + 0x18), self[0]);
+    self[1] = 0;
+    self[0] = 0;
+    self[2] = 0;
+}
+
+M2C_UNK fn_802DDCAC(s32 arg0, s32 i, s32 set) {
+    u32 *bits = *(u32 **)arg0;
+    u32 mask = 1 << (i & 31);
+    if (set != 0) {
+        bits[(u32)i >> 5] |= mask;
+    } else {
+        bits[(u32)i >> 5] &= ~mask;
     }
 }
 
