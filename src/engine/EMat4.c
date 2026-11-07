@@ -1053,6 +1053,17 @@ void *fn_802CBB10(void *self, s32 id) {
     return NULL;
 }
 
+void fn_802CBB48(void *self, void *other) {
+    s32 a, b;
+    fn_802CB8D4(self);
+    a = M2C_FIELD(other, s32 *, 0);
+    b = M2C_FIELD(other, s32 *, 4);
+    M2C_FIELD(self, s32 *, 0) = a;
+    M2C_FIELD(self, s32 *, 4) = b;
+    M2C_FIELD(other, s32 *, 0) = 0;
+    M2C_FIELD(other, s32 *, 4) = 0;
+}
+
 void fn_802CBB94(void) {
 
 }
