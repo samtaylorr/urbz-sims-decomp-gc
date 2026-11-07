@@ -580,8 +580,8 @@ void fn_800C85CC(void *self) {
 }
 
 void fn_800C8614(void *self) {
-    extern u8 lbl_803D0B08[];
-    void fn_800CF02C();
+    extern char lbl_803D0B08[];
+    void fn_800CF02C(void *, char *);
     if (M2C_FIELD(self, s32 *, 0x88) != 0) {
         fn_800CF02C(self, lbl_803D0B08);
         M2C_FIELD(self, s32 *, 0x88) = 0;
