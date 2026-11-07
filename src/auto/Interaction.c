@@ -829,23 +829,22 @@ s32 fn_80111D68(void) {
 }
 
 s32 fn_80111DB8(char *self) {
-    extern const f64 lbl_803D7B50;
-    extern const f32 lbl_803D7B58;
-    extern const f32 lbl_803D7B5C;
-    extern const f32 lbl_803D7B60;
+    extern const f32 lbl_803D7B58[];
+    extern const f32 lbl_803D7B5C[];
+    extern const f32 lbl_803D7B60[];
     s32 total = *(s32 *)(self + 0x24);
     f32 t;
     if (total == 0) {
         return 0;
     }
     t = (f32)(total - *(s32 *)(self + 0x20)) / (f32)total;
-    if (t < lbl_803D7B58) {
-        t = lbl_803D7B58;
+    if (t < lbl_803D7B58[0]) {
+        t = lbl_803D7B58[0];
     }
-    if (t > lbl_803D7B5C) {
-        t = lbl_803D7B5C;
+    if (t > lbl_803D7B5C[0]) {
+        t = lbl_803D7B5C[0];
     }
-    return (s32)(t * lbl_803D7B60);
+    return (s32)(t * lbl_803D7B60[0]);
 }
 
 s32 fn_80111F5C(s32 *self) {
@@ -1417,6 +1416,19 @@ void fn_80116FA4(char *self, u16 *src, s32 n) {
     for (i = 0; i < *(s32 *)(self + 0x20); i++) {
         (*(u16 **)(self + 0x24))[i] = src[i];
     }
+}
+
+char *fn_8011702C(char *self) {
+    char *obj = *(char **)(self + 0xC);
+    char *vt;
+    char *r;
+    if (obj != 0) {
+        vt = *(char **)(obj + 4);
+        r = (*(char *(**)(void *))(vt + 0x324))(obj + *(s16 *)(vt + 0x320));
+        vt = *(char **)r;
+        return (*(char *(**)(void *, s32))(vt + 0x8C))(r + *(s16 *)(vt + 0x88), *(s32 *)(self + 0x14));
+    }
+    return 0;
 }
 
 void fn_8011709C(void *arg0) {
