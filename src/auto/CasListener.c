@@ -157,6 +157,18 @@ s32 fn_801BA094(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x18) != 0;
 }
 
+s32 fn_801BA0AC(void *arg0) {
+    void *temp_r11;
+    void *temp_r9;
+
+    temp_r11 = M2C_FIELD(arg0, void **, 0x18);
+    if (temp_r11 != NULL) {
+        temp_r9 = M2C_FIELD(temp_r11, void **, 0x4);
+        return M2C_FIELD(temp_r9, s32 (**)(void *), 0x44)((char *)temp_r11 + M2C_FIELD(temp_r9, s16 *, 0x40));
+    }
+    return 0;
+}
+
 s32 fn_801BA274(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x18) == 0;
 }
