@@ -129,15 +129,18 @@ f32 fn_800C56D4(void *arg0) {
 
 void fn_800C56DC(void *arg0, s32 *arg1) {
     M2C_UNK fn_8039D8D8(void *);
-    struct { s32 a, b; } *d = (void *)((u8 *)arg0 + 0x88);
     u8 *p;
-    s32 a, b;
-    *d = *(typeof(d))arg1;
+    s32 a = arg1[0];
+    s32 b = arg1[1];
+    M2C_FIELD(arg0, s32 *, 0x88) = a;
+    M2C_FIELD(arg0, s32 *, 0x8C) = b;
     p = M2C_FIELD(M2C_FIELD(arg0, void **, 0x70), u8 **, 0x64);
-    a = arg1[0];
-    b = arg1[1];
-    M2C_FIELD(p, s32 *, 0x30) = b;
-    M2C_FIELD(p, s32 *, 0x2C) = a;
+    {
+        s32 c = arg1[0];
+        s32 d = arg1[1];
+        M2C_FIELD(p, s32 *, 0x30) = d;
+        M2C_FIELD(p, s32 *, 0x2C) = c;
+    }
     fn_8039D8D8(p + 0x20);
 }
 
