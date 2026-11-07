@@ -625,9 +625,9 @@ f32 fn_802EC2D4(void *arg0, s32 arg1) {
     return lbl_803F0AD4[0];
 }
 
-void fn_802EC460(void *arg0, void *arg1);
-void fn_802EC4C8(void *arg0, s32 arg1) {
-    fn_802EC460(arg0, fn_802E5F90_inline(arg0, arg1));
+void fn_802EC460(void *arg0, void *arg1, f32 arg2, s32 arg3);
+void fn_802EC4C8(void *arg0, s32 arg1, f32 arg2, s32 arg3) {
+    fn_802EC460(arg0, fn_802E5F90_inline(arg0, arg1), arg2, arg3);
 }
 
 void fn_802EC618(void *arg0, s32 arg1) {
