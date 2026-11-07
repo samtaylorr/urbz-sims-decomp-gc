@@ -825,8 +825,12 @@ void fn_8034AE84(char *self, s32 arg1, s32 count) {
 void fn_8034AF84(void *self, void *arg1) {
     extern u8 lbl_8046DF78[];
     void fn_8035504C(void *, void *);
-    if (arg1 != NULL && M2C_FIELD(arg1, s32 *, 0x20) == 0x900DBEEF) {
-        fn_8035504C(lbl_8046DF78, arg1);
+    s32 ok;
+    if (arg1 != NULL) {
+        ok = M2C_FIELD(arg1, s32 *, 0x20) == 0x900DBEEF;
+        if (ok) {
+            fn_8035504C(lbl_8046DF78, arg1);
+        }
     }
 }
 
@@ -1078,6 +1082,7 @@ void fn_8034B444(void *self, s16 id, s32 arg, f32 *v, f32 f) {
         s32 arg;
         f32 v[4];
         f32 f;
+        s32 pad[2];
     } cmd;
     void fn_803575B0(void *, void *);
     extern u8 lbl_8046DF78[];
