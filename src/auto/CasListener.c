@@ -342,8 +342,8 @@ void *fn_801BD670(void *arg0, s32 arg1) {
 void fn_801BD690(void *arg0, s32 flags) {
     extern u8 lbl_80415D88[];
     extern void fn_802D20E8(void *);
-    M2C_FIELD(arg0, s32 *, 0) = 0;
     M2C_FIELD(arg0, u8 **, 8) = lbl_80415D88;
+    M2C_FIELD(arg0, s32 *, 0) = 0;
     if (flags & 1) {
         fn_802D20E8(arg0);
     }
