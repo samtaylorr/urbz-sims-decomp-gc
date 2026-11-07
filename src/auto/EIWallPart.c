@@ -199,7 +199,6 @@ void fn_8002E320(void *self) {
     extern void fn_80064368(s32, s32);
     void fn_8002F724(void *);
     extern void *lbl_8041FA38[];
-    extern f32 lbl_803C55A4[];
     extern f32 lbl_80494018;
     s32 flag;
     void *old;
@@ -215,9 +214,9 @@ void fn_8002E320(void *self) {
             fn_80064368(M2C_FIELD(lbl_8041FA38[0], s32 *, 4), M2C_FIELD(self, s32 *, 0x38));
             obj = M2C_FIELD(self, void **, 0x48);
             M2C_FIELD(M2C_FIELD(obj, void **, 0x44), void (**)(void *), 0x14)((u8 *)obj + M2C_FIELD(M2C_FIELD(obj, void **, 0x44), s16 *, 0x10));
-            if (old != (obj = M2C_FIELD(self, void **, 0x48))) {
-                lbl_80494018 = lbl_803C55A4[0];
-                fn_8002DA10(obj);
+            if (old != M2C_FIELD(self, void **, 0x48)) {
+                lbl_80494018 = 0.0f;
+                fn_8002DA10(M2C_FIELD(self, void **, 0x48));
             }
             fn_8002F724(self);
         }
@@ -779,15 +778,13 @@ f32 fn_80037B30(void *self, s32 key, s32 idx) {
 s32 fn_80037B90(void *self, s32 key, s32 idx) {
     void *fn_802CD440(void *, s32, s32);
     void *p;
-    u8 *q;
-    u8 *r;
+    EIWallPartTbl *t;
 
     p = fn_802CD440((u8 *)self + 0xA0, key, 0);
-    if (p == NULL || (q = M2C_FIELD(p, u8 **, 0x1C)) == NULL) {
+    if (p == NULL || (t = M2C_FIELD(p, EIWallPartTbl **, 0x1C)) == NULL) {
         return 0;
     }
-    r = q + 0x18;
-    return *(s32 *)(r + idx * 4);
+    return t->i18[idx];
 }
 
 void fn_800380B8(s32 on, void **list) {
