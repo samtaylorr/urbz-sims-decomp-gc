@@ -382,6 +382,45 @@ s32 fn_802D9A3C(void) {
     return 0x1000;
 }
 
+char *fn_802D9A44(void *arg0, char *arg1) {
+    char **fn_802DD058(void *, void *);
+    char **h;
+    char *q;
+    char *next;
+    if (*(s32 *)arg1 != 0) {
+        h = fn_802DD058(arg0, arg1);
+        if (h != NULL) {
+            q = *h;
+            if (arg1 > q) {
+                while ((next = q + (*(u32 *)(q + 4) & ~7)) < arg1) {
+                    q = next;
+                }
+                return q;
+            }
+        }
+    }
+    return 0;
+}
+
+u32 fn_802D9AC4(u32 size) {
+    if ((size >> 6) <= 32) {
+        return (size >> 6) + 0x38;
+    }
+    if ((size >> 9) <= 20) {
+        return (size >> 9) + 0x5B;
+    }
+    if ((size >> 12) <= 10) {
+        return (size >> 12) + 0x6E;
+    }
+    if ((size >> 15) <= 4) {
+        return (size >> 15) + 0x77;
+    }
+    if ((size >> 18) <= 2) {
+        return (size >> 18) + 0x7C;
+    }
+    return 0x7E;
+}
+
 s32 fn_802D9C00(void *arg0, char *arg1) {
     char *fn_802DD058(void *, void *);
     char *h;
