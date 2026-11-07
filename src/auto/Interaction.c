@@ -1258,6 +1258,22 @@ void fn_80114EE4(char *self, s32 a1, s32 a2, s32 a3, s32 a4, s32 a5) {
     (*(void (**)(void *, s32, s32, s32, s32, s32, s32))(vt + 0x104))(self + *(s16 *)(vt + 0x100), a1, a2, a3, a4, 0, a5);
 }
 
+s32 fn_80115688(void *self, s32 b) {
+    extern s32 fn_80115954(void *, void *, s32);
+    extern s32 fn_801159B8(void *, void *, s32);
+    u8 buf[0x50];
+    s32 r;
+
+    r = fn_80115954(self, buf, b);
+    if (r != 0) {
+        return r;
+    }
+    *(s32 *)buf = 0x58585858;
+    *(u16 *)(buf + 0xA) |= 4;
+    M2C_FIELD(M2C_FIELD(self, void **, 0x13C), s32 *, 0x10) += *(s32 *)(buf + 4);
+    return fn_801159B8(self, buf, b);
+}
+
 s32 fn_801159B8(void *self, void *in, s32 b) {
     extern s32 fn_801139A0(void *, void *, s32);
     extern s32 fn_800F6440(void *, s32);
@@ -1284,17 +1300,21 @@ s32 fn_801159B8(void *self, void *in, s32 b) {
 
 s32 fn_8011608C(void *self, u32 n, s32 arg2) {
     s32 *fn_80112D1C(s32, s32, s32, s32);
-    s32 fn_80115954(void *, s32 *, s32);
-    s32 buf[20];
+    s32 fn_80115954(void *, void *, s32);
+    struct {
+        s32 unk0;
+        s32 unk4;
+        u8 pad[0x48];
+    } info;
     s32 total = 0;
     u16 i;
 
     for (i = 1; i <= n; i++) {
         s32 *p = fn_80112D1C(M2C_FIELD(self, s32 *, 0x13C), arg2, i, 0);
-        if (p == NULL || fn_80115954(self, buf, *p) != 0) {
-            return total;
+        if (p == NULL || fn_80115954(self, &info, *p) != 0) {
+            break;
         }
-        total += buf[1];
+        total += info.unk4;
     }
     return total;
 }
