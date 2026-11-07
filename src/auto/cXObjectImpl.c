@@ -257,6 +257,10 @@ s16 fn_80148B64(s32 arg0) {
     return *fn_80141C5C(arg0 + 0x28);
 }
 
+s16 fn_80148B8C(void *self, s32 i) {
+    return ((struct { u8 pad[0x16]; s16 a[1]; } *)self)->a[i];
+}
+
 s32 fn_80148BAC(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x58);
 }
