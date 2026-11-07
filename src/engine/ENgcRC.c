@@ -912,6 +912,16 @@ void fn_8034B2AC(void) {
     fn_80354978(lbl_8046DF78, &cmd);
 }
 
+void fn_8034B2E0(void) {
+    struct {
+        u8 type;
+    } cmd;
+    void fn_8035499C(void *, void *);
+    extern u8 lbl_8046DF78[];
+    cmd.type = 0x1D;
+    fn_8035499C(lbl_8046DF78, &cmd);
+}
+
 void fn_8034B314(void *self, void *obj) {
     struct {
         u8 type;
