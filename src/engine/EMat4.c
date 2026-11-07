@@ -858,6 +858,26 @@ f32 fn_802C88C0(f32 *m) {
     return fn_8025FC40(v);
 }
 
+f32 *fn_802C8ED0(f32 *m, f32 angle) {
+    f32 fn_80243694(f32);
+    f32 fn_802434CC(f32);
+    f32 s = fn_80243694(angle);
+    f32 c = fn_802434CC(angle);
+    f32 b0 = m[8], b1 = m[9], b2 = m[10];
+    f32 a;
+
+    a = m[4];
+    m[4] = c * a + s * b0;
+    m[8] = -s * a + c * b0;
+    a = m[5];
+    m[5] = c * a + s * b1;
+    m[9] = -s * a + c * b1;
+    a = m[6];
+    m[6] = c * a + s * b2;
+    m[10] = -s * a + c * b2;
+    return m;
+}
+
 f32 *fn_802C9058(f32 *m, f32 angle) {
     f32 fn_80243694(f32);
     f32 fn_802434CC(f32);
@@ -985,6 +1005,19 @@ f32 *fn_802C9AD4(f32 *m) {
     fn_802C98D8(m);
     fn_8039ABB0(tmp, m);
     fn_802C8A34(m, tmp);
+    return m;
+}
+
+f32 *fn_802CA5BC(f32 *m, f32 a, f32 b, f32 c, f32 d) {
+    extern f32 lbl_803F0124[];
+    void fn_802C93A0(f32 *, f32 *);
+    f32 v[3];
+
+    fn_802C9AD4(m);
+    v[2] = lbl_803F0124[0];
+    v[1] = d / b;
+    v[0] = c / a;
+    fn_802C93A0(m, v);
     return m;
 }
 
