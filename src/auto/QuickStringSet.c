@@ -975,24 +975,20 @@ s32 fn_800F873C(void) {
     return 0;
 }
 
-void *fn_800F8744(void *arg0, s32 arg1) {
-    struct QSSRing {
-        s32 head;
-        s32 start;
-        struct { s32 a; s32 b; } e[0x80];
-    } *r = arg0;
+void *fn_800F8744(u8 *arg0, s32 arg1) {
     s32 temp_r9;
     s32 var_r9;
 
-    temp_r9 = r->head;
+    temp_r9 = M2C_FIELD(arg0, s32 *, 0);
     if ((arg1 > temp_r9) || (arg1 <= (s32) (temp_r9 - 0x80))) {
         return NULL;
     }
-    var_r9 = (r->start + arg1) - temp_r9;
+    var_r9 = (M2C_FIELD(arg0, s32 *, 4) + arg1) - temp_r9;
     if (var_r9 < 0) {
         var_r9 += 0x80;
     }
-    return &r->e[var_r9];
+    arg0 += var_r9 * 8 + 8;
+    return arg0;
 }
 
 void *fn_800F8788(void *arg0) {
@@ -1032,7 +1028,7 @@ s32 fn_800F8828(void *self, s32 val, s32 flag) {
             i = 0x40;
         }
         for (; i <= 0x4F; i++) {
-            u32 bits = s->mask[i] | s->used[i];
+            u32 bits = s->used[i] | s->mask[i];
             if (bits != -1) {
                 s32 n = 0;
                 u32 m = 1;
@@ -1041,9 +1037,8 @@ s32 fn_800F8828(void *self, s32 val, s32 flag) {
                     n++;
                 }
                 s->used[i] |= m;
-                n = i * 32 + n;
-                s->data[n] = val;
-                return n;
+                s->data[i * 32 + n] = val;
+                return i * 32 + n;
             }
         }
         return -1;
@@ -1072,6 +1067,15 @@ s32 fn_800F96C4(void *arg0) {
     s32 fn_800C488C();
     M2C_FIELD(arg0, s32 *, 0x38) = fn_800C488C();
     M2C_FIELD(arg0, s32 *, 0) = 1;
+    return 1;
+}
+
+s32 fn_800F9700(s32 *arg0) {
+    s32 fn_800F9D50(s32 *);
+    *arg0 = 0;
+    if (fn_800F9D50(arg0) == 0) {
+        return 0;
+    }
     return 1;
 }
 
@@ -1338,8 +1342,7 @@ s32 fn_800FD3C8(u8 *self, s32 arg1, u8 **arg2) {
     vt = *(u8 **)self;
     a = (*(void *(**)(u8 *))(vt + 0x34))(self + *(s16 *)(vt + 0x30));
     b = (*(void *(**)(u8 *, void *))(*(u8 **)lbl_8049665C + 0x1FC))(lbl_8049665C + *(s16 *)(*(u8 **)lbl_8049665C + 0x1F8), a);
-    obj = fn_8011CECC(b, arg1);
-    *arg2 = obj;
+    obj = *arg2 = fn_8011CECC(b, arg1);
     if (obj != NULL) {
         vt = *(u8 **)obj;
         (*(void (**)(u8 *))(vt + 0x14))(obj + *(s16 *)(vt + 0x10));
@@ -1361,7 +1364,7 @@ void **fn_800FD650(void **self) {
 void fn_800FD6A0(void **self, s32 arg1) {
     extern void fn_8031EA2C(void *);
     M2C_UNK fn_800FC1C0(void **, s32);
-    self[0] = lbl_8040D4F0;
+    self[0] = (void *)lbl_8040D4F0;
     if (self[4] != NULL) {
         fn_8031EA2C(self[4]);
         self[4] = NULL;
