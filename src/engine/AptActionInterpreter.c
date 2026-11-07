@@ -18,6 +18,10 @@ static inline void AptTriple_Init(s32 *p) {
 }
 
 void fn_8027AEC8(void);
+void fn_8027B74C(void *arg0, void *arg1, void *arg2) {
+    ((void (*)(void *, void *, s32, void *))fn_8027AEC8)(arg0, arg1, 0, arg2);
+}
+
 void fn_8027B774(void) {
     fn_8027AEC8();
 }
