@@ -476,7 +476,7 @@ void fn_802C73FC(char **arg0) {
                     return;
                 }
             }
-            fn_802C6D20((s32)arg0, (s32)arg0, len - 1);
+            fn_802C6D20(arg0, arg0, len - 1);
         }
     }
 }
