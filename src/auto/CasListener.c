@@ -244,15 +244,18 @@ s32 fn_801B7C98(void *arg0, void *arg1, s32 arg2) {
 s32 fn_801B7D68(void *arg0, s32 idx) {
     extern void *lbl_8041FA48[];
     register void *p asm("r10");
+    register void *mgr asm("r11");
     s32 n = 0;
 
-    arg0 = lbl_8041FA48[0];
-    p = *(void **)arg0;
+    mgr = lbl_8041FA48[0];
+    arg0 = mgr;
+    p = *(void **)mgr;
     if (p != NULL) {
         n = ((s32 *)p)[-1];
     }
     if (idx < n - 1) {
-        p = *(void **)((u32)idx * 4 + (char *)p);
+        s32 off = idx * 4;
+        p = *(void **)((char *)p + off);
         return (f32)*(u32 *)p * 0.8f;
     }
     return 0;
@@ -269,7 +272,8 @@ s32 fn_801B7EC8(void *arg0, s32 idx) {
         n = ((s32 *)p)[-1];
     }
     if (idx < n) {
-        p = *(void **)((u32)idx * 4 + (char *)p);
+        s32 off = idx * 4;
+        p = *(void **)((char *)p + off);
         return *(s32 *)p;
     }
     return 0;
@@ -1265,12 +1269,13 @@ void fn_801C3850(void *self, s32 arg1) {
     extern void fn_803AD18C(void *);
     extern void fn_803997AC(void *, s32);
     extern void fn_802D20E8(void *);
-    CasListIter it[2];
+    CasListIter end[1];
+    CasListIter it[1];
 
-    it[0] = CasList_End(self);
-    it[1] = CasList_Begin(self);
-    while (CasListIter_NotEqual(&it[1], &it[0])) {
-        it[1].node = it[1].node->next;
+    end[0] = CasList_End(self);
+    it[0] = CasList_Begin(self);
+    while (CasListIter_NotEqual(it, end)) {
+        it[0].node = it[0].node->next;
     }
     fn_803AD18C(self);
     if (M2C_FIELD(self, void **, 4) != NULL) {
@@ -1283,15 +1288,16 @@ void fn_801C3850(void *self, s32 arg1) {
 
 s32 fn_801C38E4(void *self) {
     CasListIter begin[2];
-    CasListIter it[2];
+    CasListIter end[1];
+    CasListIter it[1];
     s32 n;
     s32 ret;
 
-    it[0] = CasList_End(self);
+    end[0] = CasList_End(self);
     n = 0;
-    it[1] = CasList_Begin(self);
-    while (CasListIter_NotEqual(&it[1], &it[0])) {
-        it[1].node = it[1].node->next;
+    it[0] = CasList_Begin(self);
+    while (CasListIter_NotEqual(it, end)) {
+        it[0].node = it[0].node->next;
         n++;
     }
     if (n != 0) {
@@ -1396,10 +1402,18 @@ s32 fn_801C5998(CasFlags *self, s32 which, s32 row, u32 idx) {
 }
 
 s32 fn_801C59F0(CasFlags *self, s32 which, s32 row, u32 idx) {
+    s32 sel;
+    u32 mask;
+
     if (idx > 0x3FF) {
         return 0;
     }
-    return (self->big[which ? 1 : 0][row][idx >> 5] & (1 << (idx & 31))) != 0;
+    sel = 0;
+    if (which != 0) {
+        sel = 1;
+    }
+    mask = 1U << (idx & 31);
+    return (self->big[sel][row][idx >> 5] & mask) != 0;
 }
 
 void fn_801C5A4C(CasFlags *self, s32 which, s32 row, u32 idx, s32 on) {
@@ -1409,8 +1423,11 @@ void fn_801C5A4C(CasFlags *self, s32 which, s32 row, u32 idx, s32 on) {
     if (idx > 0xFF) {
         return;
     }
-    sel = which ? 1 : 0;
-    mask = 1 << (idx & 31);
+    sel = 0;
+    if (which != 0) {
+        sel = 1;
+    }
+    mask = 1U << (idx & 31);
     idx >>= 5;
     if (on) {
         self->small[sel][row][idx] |= mask;
