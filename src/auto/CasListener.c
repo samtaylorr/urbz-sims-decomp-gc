@@ -1036,11 +1036,12 @@ void fn_801C8880(void *arg0, s32 arg1) {
     s32 fn_8032D5C8(s32, void *);
     s32 fn_8032D6E8(s32, s32, s32);
     extern u8 lbl_803DE330[];
+    u8 *name = lbl_803DE330;
     s32 *dst = &M2C_FIELD(arg0, s32 *, 0x478);
     s32 key;
     s32 p;
 
-    key = fn_8032D5C8(M2C_FIELD(arg0, s32 *, 0x47C), lbl_803DE330);
+    key = fn_8032D5C8(M2C_FIELD(arg0, s32 *, 0x47C), name);
     p = fn_8032D6E8(M2C_FIELD(arg0, s32 *, 0x47C), key, arg1);
     if (dst != NULL) {
         *dst = p;
