@@ -1527,17 +1527,18 @@ s32 fn_800F8964(void *self, u32 idx) {
     return 0;
 }
 
-s32 fn_800F8AF4(s32 *self, s32 (*cb)(s32, s32), s32 arg) {
-    s32 *p;
-    s32 *end = self + 0x9FF;
-    for (p = self; p <= end; p++) {
-        if (*p != 0) {
-            if (cb(*p, arg) == 0) {
-                return 0;
+s32 fn_800F8AF4(s32 self, s32 (*cb)(s32, s32), s32 arg) {
+    s32 ret = 1;
+    s32 p = self;
+    s32 end = p + 0x27FC;
+    for (; p <= end; p += 4) {
+        if (*(s32 *)p != 0) {
+            if ((ret = cb(*(s32 *)p, arg)) == 0) {
+                break;
             }
         }
     }
-    return 1;
+    return ret;
 }
 
 s32 fn_800F8B60(char *arg0) {
@@ -2473,22 +2474,11 @@ s32 fn_800FDE54(void *arg0) {
 
 void fn_800FDEB0(s32 arg0, s32 arg1) {
     extern QSSVec lbl_80434B28;
-    void fn_802D20E8(void *);
-    void fn_803997AC(void *, u32);
     if (arg1 == 0xFFFF) {
         if (arg0 != 0) {
             QSSVec_Init(&lbl_80434B28);
         } else {
-            void *p = lbl_80434B28.begin;
-            if (p != 0) {
-                u32 size = (u32)((s32)lbl_80434B28.alloc.cap - (s32)p) & ~3;
-                u32 *ps = &size;
-                if (*ps > 0x80) {
-                    fn_802D20E8(p);
-                } else {
-                    fn_803997AC(p, *ps);
-                }
-            }
+            QSSVec_FreeBytes(&lbl_80434B28);
         }
     }
 }
