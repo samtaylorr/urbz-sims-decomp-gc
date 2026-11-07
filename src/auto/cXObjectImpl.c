@@ -534,7 +534,7 @@ s32 fn_80148EF8(void *arg0) {
     return M2C_FIELD(M2C_FIELD(arg0, void **, 0x8C), s32 *, 0xC);
 }
 
-void fn_8016CB94(void *);
+s32 fn_8016CB94(void *);
 void fn_80148F04(void *arg0) {
     void *p = M2C_FIELD(arg0, void **, 0x8C);
     if (M2C_FIELD(p, s32 *, 0) == 0) {
