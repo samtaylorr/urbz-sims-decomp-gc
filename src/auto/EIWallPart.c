@@ -394,13 +394,10 @@ s32 fn_800308AC(char *self) {
         return 0;
     }
     arr = (s32 *)(self + 0x30C);
-    if (arr[((s32 (*)(void))fn_802F150C)()] == 0x1F) {
+    if (*(s32 *)((char *)arr + ((s32 (*)(void))fn_802F150C)() * 4) == 0x1F) {
         return 0;
     }
-    if (arr[((s32 (*)(void))fn_802F150C)()] != 0x15) {
-        return 1;
-    }
-    return 0;
+    return *(s32 *)((char *)arr + ((s32 (*)(void))fn_802F150C)() * 4) == 0x15 ? 0 : 1;
 }
 
 s32 fn_800322E8(s32 arg0) {
@@ -693,6 +690,8 @@ void fn_80036514(char *self, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
 }
 
 s32 fn_80037930(void *arg0, void *arg1, s32 arg2, s32 arg3) {
+    void *fn_802CD440(void *, s32, s32);
+    s32 fn_80036CBC(void *, void *, s32);
     void *vt;
     void **it;
     void *r;
@@ -703,11 +702,22 @@ s32 fn_80037930(void *arg0, void *arg1, s32 arg2, s32 arg3) {
     M2C_FIELD(vt, void (**)(void *), 0xEC)((u8 *)arg1 + M2C_FIELD(vt, s16 *, 0xE8));
     r = fn_802CD440((u8 *)arg0 + 0x94, arg2, 0);
     if (r != NULL && M2C_FIELD(r, void **, 0x1C) != NULL) {
-        for (it = *M2C_FIELD(r, void ***, 0x1C); it != NULL; it = M2C_FIELD(it, void **, 8)) {
+        for (it = *M2C_FIELD(r, void ****, 0x1C); it != NULL; it = M2C_FIELD(it, void ***, 8)) {
             sum += fn_80036CBC(*it, arg1, arg3);
         }
     }
     return sum;
+}
+
+s32 fn_800379D4(void *arg0, s32 arg1, s32 arg2) {
+    void *fn_802CD440(void *, s32, s32);
+    void *r;
+
+    r = fn_802CD440((u8 *)arg0 + 0xA0, arg1, 0);
+    if (r == NULL || M2C_FIELD(r, void **, 0x1C) == NULL) {
+        return 0;
+    }
+    return ((s32 *)(M2C_FIELD(r, u8 **, 0x1C) + 0x10))[arg2];
 }
 
 void *fn_802CD440(void *, s32, s32);
@@ -723,9 +733,9 @@ void fn_80037A30(void *arg0, s32 arg1) {
     a = M2C_FIELD(arg0, void **, 0x94);
     b = M2C_FIELD(arg0, void **, 0xA0);
     while (a != NULL) {
-        arr = (s32 *)(M2C_FIELD(b, u8 *, 0x1C) + 0x10);
+        arr = (s32 *)(M2C_FIELD(b, u8 **, 0x1C) + 0x10);
         arr[arg1] = 1;
-        for (it = *M2C_FIELD(a, void ***, 0x1C); it != NULL; it = M2C_FIELD(it, void **, 8)) {
+        for (it = *M2C_FIELD(a, void ****, 0x1C); it != NULL; it = M2C_FIELD(it, void ***, 8)) {
             obj = *it;
             vt = M2C_FIELD(obj, void **, 0x3C);
             if (M2C_FIELD(vt, s32 (**)(void *, s32), 0x24)((u8 *)obj + M2C_FIELD(vt, s16 *, 0x20), arg1) == 0) {
