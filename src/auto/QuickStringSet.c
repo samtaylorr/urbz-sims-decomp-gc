@@ -48,6 +48,20 @@ static inline void QSSVec_Free(QSSVec *v) {
         QSSVec_Dealloc(p, (s32)v->alloc.cap);
     }
 }
+typedef struct QSSElem1C { u8 b[0x1C]; } QSSElem1C;
+typedef struct QSSVec1C { QSSElem1C *begin; QSSElem1C *end; } QSSVec1C;
+
+static inline u32 QSSVec1C_Size(QSSVec1C *v) {
+    return v->end - v->begin;
+}
+
+static inline void QSSVec1C_Erase(QSSVec1C *v, QSSElem1C *first, QSSElem1C *last) {
+    QSSElem1C *p;
+    for (p = first; p != last; p++) {
+    }
+    v->end = first;
+}
+
 s32 fn_800F6498(void *arg0) {
     return *(s32 *)((u8 *)arg0 + 0x114) != 0;
 }
