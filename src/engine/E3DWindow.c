@@ -668,6 +668,17 @@ f32 fn_802EC2D4(void *arg0, s32 arg1) {
     return lbl_803F0AD4[0];
 }
 
+void fn_802EC460(void *arg0, void *arg1, f32 arg2, s32 arg3) {
+    extern s32 lbl_80494DFC;
+    if (arg1 != NULL && M2C_FIELD(arg1, s32 *, 0xA8) == 1) {
+        void *p = M2C_FIELD(arg1, void **, 0x7C);
+        M2C_FIELD(arg1, f32 *, 0x40) = arg2 * (f32)(M2C_FIELD(p, s32 *, 0x20) - 1);
+        if (arg3 != 0) {
+            M2C_FIELD(arg1, s32 *, 0x38) = lbl_80494DFC;
+        }
+    }
+}
+
 void fn_802EC460(void *arg0, void *arg1, f32 arg2, s32 arg3);
 void fn_802EC4C8(void *arg0, s32 arg1, f32 arg2, s32 arg3) {
     fn_802EC460(arg0, fn_802E5F90_inline(arg0, arg1), arg2, arg3);
