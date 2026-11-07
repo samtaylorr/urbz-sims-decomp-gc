@@ -517,9 +517,9 @@ char *fn_802D9EF0(char *arg0, s32 arg1, s32 arg2) {
 
 void fn_802D9F34(void *arg0, u32 *arg1, u32 *arg2) {
     *(u8 *)((char *)arg2 + 0x10) = 8;
-    arg2[5] = 0;
     arg2[0] = arg1[0];
     arg2[1] = arg1[1];
+    arg2[5] = 0;
 }
 
 void fn_802DB018(void);
