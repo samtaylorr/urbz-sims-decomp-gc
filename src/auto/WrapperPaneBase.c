@@ -97,6 +97,18 @@ void fn_800C47CC(void) {
     }
 }
 
+void fn_800C4E30(void *arg0) {
+    void fn_800C5194(void *);
+    void fn_8031EA2C(s32);
+    fn_800C5194(arg0);
+    fn_800CEE00(arg0);
+    if (M2C_FIELD(arg0, s32 *, 0x6C) != 0) {
+        fn_8031EA2C(M2C_FIELD(arg0, s32 *, 0x6C));
+        M2C_FIELD(arg0, s32 *, 0x6C) = 0;
+    }
+    M2C_FIELD(arg0, s32 *, 0x74) = 0;
+}
+
 void fn_800C4E84(void *arg0) {
     void fn_800C511C(void *);
     M2C_FIELD(arg0, s32 *, 0x7C) = 0;
@@ -551,6 +563,35 @@ void fn_800C962C(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, (s32)0x80) = arg1;
 }
 
+void *fn_800CA8C8(void *self) {
+    extern u8 lbl_803D0804[];
+    extern M2C_UNK lbl_8040AA10[];
+    extern M2C_UNK lbl_8040AA98[];
+    extern void fn_8030728C(void *);
+    s32 *v;
+    fn_8030728C(self);
+    M2C_FIELD(self, u8 **, 0x48) = lbl_803D0804;
+    M2C_FIELD(self, M2C_UNK **, 0x44) = lbl_8040AA10;
+    M2C_FIELD(self, s32 *, 0x4C) = 0;
+    v = (s32 *)((u8 *)self + 0x50);
+    v[0] = 0;
+    v[1] = 0;
+    v[3] = 0;
+    M2C_FIELD(self, s32 *, 0x64) = 1;
+    M2C_FIELD(self, M2C_UNK **, 0x44) = lbl_8040AA98;
+    M2C_FIELD(self, s32 *, 0xC8) = 0;
+    M2C_FIELD(self, s32 *, 0x60) = 1;
+    M2C_FIELD(self, s32 *, 0x68) = 0;
+    M2C_FIELD(self, s32 *, 0x6C) = 0;
+    M2C_FIELD(self, s32 *, 0x84) = 0;
+    M2C_FIELD(self, s32 *, 0x88) = 0;
+    M2C_FIELD(self, s32 *, 0xB8) = 0;
+    M2C_FIELD(self, s32 *, 0xBC) = 0;
+    M2C_FIELD(self, s32 *, 0xC0) = 0;
+    M2C_FIELD(self, s32 *, 0xC4) = 0;
+    return self;
+}
+
 void fn_800CA968(void *self, s32 arg1) {
     extern M2C_UNK lbl_8040AA98[];
     extern M2C_UNK lbl_8040AA10[];
@@ -780,9 +821,8 @@ void *fn_800CD5C4(void *arg0, s32 id) {
 s32 fn_800CD608(void *arg0, s32 id, s32 val) {
     s32 i = 0;
     s32 **it;
-    s32 **end = M2C_FIELD(arg0, s32 ***, 0xC);
 
-    for (it = M2C_FIELD(arg0, s32 ***, 8); it != end; it++) {
+    for (it = M2C_FIELD(arg0, s32 ***, 8); it != M2C_FIELD(arg0, s32 ***, 0xC); it++) {
         s32 *e = *it;
         if (e[0] == id && (e[1] & 1)) {
             if (e[2] == val) {
