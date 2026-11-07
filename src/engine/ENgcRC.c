@@ -62,29 +62,27 @@ void fn_80345FB0(void) {
 
 }
 
-s32 fn_80346E74(s32 arg0, u32 *arg1) {
+s32 fn_80346E74(s32 arg0, void *arg1) {
+    typedef struct { u32 w[4]; } Blk16;
     extern u8 lbl_8046C400[];
-    u32 *src;
+    u8 *p = lbl_8046C400;
 
-    if (M2C_FIELD(lbl_8046C400, s32 *, 0xA0) == 0) {
-        return 0;
+    if (M2C_FIELD(p, s32 *, 0xA0) != 0) {
+        *(Blk16 *)arg1 = *(Blk16 *)(p + 0x8C);
+        return 1;
     }
-    src = (u32 *)(lbl_8046C400 + 0x8C);
-    arg1[0] = src[0];
-    arg1[1] = src[1];
-    arg1[2] = src[2];
-    arg1[3] = src[3];
-    return 1;
+    return 0;
 }
 
 f32 fn_80346EBC(void) {
     extern u8 lbl_8046C400[];
-    extern const f32 lbl_803F430C;
+    extern const f32 lbl_803F430C[];
+    u8 *p = lbl_8046C400;
 
-    if (M2C_FIELD(lbl_8046C400, s32 *, 0xA0) == 0) {
-        return lbl_803F430C;
+    if (M2C_FIELD(p, s32 *, 0xA0) == 0) {
+        return lbl_803F430C[0];
     }
-    return M2C_FIELD(lbl_8046C400, f32 *, 0x4C);
+    return M2C_FIELD(p, f32 *, 0x4C);
 }
 
 s32 fn_80346EE4(void) {
