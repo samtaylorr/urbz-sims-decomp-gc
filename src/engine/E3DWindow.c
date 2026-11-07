@@ -483,8 +483,8 @@ void fn_802EAF44(void *arg0, void *arg1, s32 arg2, f32 arg3) {
         M2C_FIELD(arg1, f32 *, 0x60) = arg3;
         M2C_FIELD(arg1, u8 *, 0xA0) = 0;
         M2C_FIELD(arg1, f32 *, 0x64) = arg3;
-        M2C_FIELD(arg1, f32 *, 0x50) = arg3;
     }
+    M2C_FIELD(arg1, f32 *, 0x50) = arg3;
     if (arg3 != lbl_803F0A78[0]) {
         fn_802ED364(arg0, arg1, 1);
         M2C_FIELD(arg1, f32 *, 0x48) = lbl_803F0A80[0];
@@ -496,7 +496,7 @@ void fn_802EAF44(void *arg0, void *arg1, s32 arg2, f32 arg3) {
 void fn_802EAFF0(void *arg0, f32 arg1) {
     s32 i;
     for (i = 0; i < M2C_FIELD(arg0, s32 *, 0x3C); i++) {
-        char *win = M2C_FIELD(arg0, char **, 0x40) + i * 0xB0;
+        char *win = i * 0xB0 + M2C_FIELD(arg0, char **, 0x40);
         if (M2C_FIELD(win, s32 *, 0xA8) == 1) {
             fn_802EAF44(arg0, win, 1, arg1);
         }
