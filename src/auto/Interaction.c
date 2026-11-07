@@ -1583,10 +1583,10 @@ s32 fn_80113E34(char *self) {
     void fn_802D20E8(void *);
     s32 fn_800F68BC(void *);
     Str a;
-    void *s = *(void **)(self + 0x150);
     Str *p = &a;
+    void *s = *(void **)(self + 0x150);
     s32 ret;
-    fn_800F687C(p, p->buf, 0x104);
+    fn_800F687C(&a, a.buf, 0x104);
     fn_800F6A78(p, s, -1);
     fn_802D20E8(*(void **)(self + 0x150));
     *(void **)(self + 0x150) = 0;
@@ -1622,6 +1622,7 @@ void fn_80114318(void *obj, s32 arg1, s32 arg2, s32 arg3) {
 s16 fn_801149D4(char *self, s32 arg1) {
     void fn_8018FA84(char *, s32);
     s32 fn_8018FA7C(char *);
+    s16 r;
     char *vt = *(char **)(self + 0x10);
     if ((*(s32 (**)(void *))(vt + 0x64))(self + *(s16 *)(vt + 0x60)) == 0) {
         fn_8018FA84(self, -0x31);
@@ -1629,9 +1630,11 @@ s16 fn_801149D4(char *self, s32 arg1) {
         fn_8018FA84(self, 0);
     }
     if (fn_8018FA7C(self) == 0) {
-        return fn_801132B0(*(char **)(self + 0x13C), arg1, 0x80) + 1;
+        r = fn_801132B0(*(char **)(self + 0x13C), arg1, 0x80) + 1;
+    } else {
+        r = 0;
     }
-    return 0;
+    return r;
 }
 
 void fn_80114B50(char *self) {
@@ -1674,17 +1677,16 @@ s32 fn_80114BD0(char *self, IntObj *arg1) {
 void fn_80114C90(char *self, s32 arg1, s32 arg2) {
     extern void fn_800F687C(void *, void *, s32);
     char buf[0x48];
-    char *b = buf;
     s32 r;
     char *vt;
-    fn_800F687C(b, b + 8, 0x40);
+    fn_800F687C(buf, buf + 8, 0x40);
     vt = *(char **)(self + 0x10);
-    (*(void (**)(void *, s32, void *))(vt + 0xA4))(self + *(s16 *)(vt + 0xA0), arg1, b);
+    (*(void (**)(void *, s32, void *))(vt + 0xA4))(self + *(s16 *)(vt + 0xA0), arg1, buf);
     vt = *(char **)(self + 0x10);
     r = (*(s32 (**)(void *, s32))(vt + 0xC4))(self + *(s16 *)(vt + 0xC0), arg1);
     if (*(s32 *)(self + 8) == 0) {
         vt = *(char **)(self + 0x10);
-        (*(void (**)(void *, s32, s32, void *, s32))(vt + 0x11C))(self + *(s16 *)(vt + 0x118), arg1, arg2, b, r);
+        (*(void (**)(void *, s32, s32, void *, s32))(vt + 0x11C))(self + *(s16 *)(vt + 0x118), arg1, arg2, buf, r);
     }
 }
 
