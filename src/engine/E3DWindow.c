@@ -247,16 +247,16 @@ void fn_802E60D4(void *arg0, f32 *arg1, void *arg2, void *arg3) {
     extern void fn_802C910C(void *, f32);
     extern void fn_802C9294(void *, f32);
     extern void fn_802C9368(void *, void *);
-    extern const f32 lbl_803F09A8;
+    extern const f32 lbl_803F09A8[];
 
     fn_802C8814(arg3, arg2);
-    if (arg1[0] != lbl_803F09A8) {
+    if (arg1[0] != lbl_803F09A8[0]) {
         fn_802C8F84(arg3, arg1[0]);
     }
-    if (arg1[1] != lbl_803F09A8) {
+    if (arg1[1] != lbl_803F09A8[0]) {
         fn_802C910C(arg3, arg1[1]);
     }
-    if (arg1[2] != lbl_803F09A8) {
+    if (arg1[2] != lbl_803F09A8[0]) {
         fn_802C9294(arg3, arg1[2]);
     }
     fn_802C9368(arg3, arg0);
