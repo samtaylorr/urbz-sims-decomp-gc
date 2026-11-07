@@ -93,12 +93,10 @@ void *fn_8002D2B8(void *self, s32 arg1) {
     extern void fn_800F160C(void *);
     void fn_8002F668(void);
     s32 fn_8033740C(void *, u32, s32, s32);
-    extern f32 lbl_803C5524[];
-    extern f32 lbl_803C5528[];
     extern u8 lbl_80407738[];
     extern u8 lbl_8045BA40[];
     u8 *tbl;
-    fn_803082CC(self, lbl_803C5524[0], lbl_803C5528[0], lbl_803C5528[0], -1, -1, -1, -1, 1);
+    fn_803082CC(self, 0.05f, 0.0f, 0.0f, -1, -1, -1, -1, 1);
     M2C_FIELD(self, u8 **, 0x44) = lbl_80407738;
     fn_800F160C((u8 *)self + 0x110);
     fn_8002F668();
@@ -391,9 +389,8 @@ s32 fn_80030804(s32 arg0) {
 s32 fn_800308AC(char *self) {
     extern f32 fn_802F1558(void *);
     extern s32 fn_802F150C(void *);
-    s32 *arr = (s32 *)(self + 0x30C);
-    if (fn_802F1558(self) < 0.0f || arr[((s32 (*)(void))fn_802F150C)()] == 0x1F ||
-        arr[((s32 (*)(void))fn_802F150C)()] == 0x15) {
+    if (fn_802F1558(self) < 0.0f || ((s32 *)(self + 0x30C))[((s32 (*)(void))fn_802F150C)()] == 0x1F ||
+        ((s32 *)(self + 0x30C))[((s32 (*)(void))fn_802F150C)()] == 0x15) {
         return 0;
     }
     return 1;
@@ -578,17 +575,18 @@ s16 fn_80034F8C(void *arg0) {
 }
 
 void fn_800358D8(void *self, s32 arg1) {
-    extern void *fn_8033740C(s32, s32, s32, s32);
+    extern void *fn_8033740C(void *, s32, s32, s32);
     extern void fn_802F52DC(void *, s32, s32);
     extern void fn_8031EA2C(void *);
     extern u8 lbl_8045BA40[];
-    void *obj;
+    void *obj = fn_8033740C(lbl_8045BA40, arg1, 0, 0);
+    void *old;
 
-    obj = fn_8033740C((s32)lbl_8045BA40, arg1, 0, 0);
     fn_802F52DC(self, 0x2B7EF272, arg1);
     fn_802F52DC(self, 0xC26D593A, arg1);
-    if (M2C_FIELD(self, void **, 0x368) != NULL) {
-        fn_8031EA2C(M2C_FIELD(self, void **, 0x368));
+    old = M2C_FIELD(self, void **, 0x368);
+    if (old != NULL) {
+        fn_8031EA2C(old);
         M2C_FIELD(self, void **, 0x368) = NULL;
     }
     M2C_FIELD(self, void **, 0x368) = obj;
@@ -678,13 +676,13 @@ void fn_80036514(char *self, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
     extern void fn_80105624(void *);
     extern void *fn_80032AE0(u32);
     extern void *fn_80033528(void *, s32, s32, s32, s32);
-    extern void fn_802CB69C(s32, void *);
+    extern void fn_802CB69C(void *, void *);
     void *p;
 
     fn_80105624(self + 3);
     if (arg5 != 0) {
         p = fn_80033528(fn_80032AE0(0x380), arg2, arg3, arg4, arg1);
-        fn_802CB69C((s32)self + 0x14, p);
+        fn_802CB69C(self + 0x14, p);
     }
 }
 
