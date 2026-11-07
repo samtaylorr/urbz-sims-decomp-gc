@@ -1279,19 +1279,23 @@ void fn_800F83B8(void *self, s32 flags) {
 void fn_800F8424(void *self, s32 arg1) {
     void fn_802D211C(void *);
     void fn_80248488(void *, s32, s32);
+    void **arr;
     void **p;
+    void *q;
     s32 i;
 
-    p = (void **)((u8 *)self + 8);
+    arr = (void **)((u8 *)self + 8);
+    p = arr;
     for (i = 0; i < 0x80; i++) {
-        if (p[0] != NULL) {
-            fn_802D211C(p[0]);
-        }
+        q = p[0];
         p += 2;
+        if (q != NULL) {
+            fn_802D211C(q);
+        }
     }
-    fn_80248488((u8 *)self + 8, 0, 0x400);
-    M2C_FIELD(self, s32 *, 4) = 0;
+    fn_80248488(arr, 0, 0x400);
     M2C_FIELD(self, s32 *, 0) = arg1;
+    M2C_FIELD(self, s32 *, 4) = 0;
 }
 
 s32 fn_800F86C8(void *arg0, s32 arg1) {
