@@ -52,6 +52,24 @@ static inline void **WPBPtrVec_End(WPBPtrVec *v) {
     return v->end;
 }
 
+static inline void WPB_InitBase(void *self, char *name) {
+    extern char lbl_8040AA10[];
+    extern void fn_8030728C(void *);
+    s32 *a;
+    s32 *b;
+
+    fn_8030728C(self);
+    M2C_FIELD(self, char **, 0x48) = name;
+    M2C_FIELD(self, char **, 0x44) = lbl_8040AA10;
+    M2C_FIELD(self, s32 *, 0x4C) = 0;
+    a = (s32 *)((char *)self + 0x50);
+    a[0] = 0;
+    a[1] = 0;
+    b = (s32 *)((char *)self + 0x58);
+    b[1] = 0;
+    M2C_FIELD(self, s32 *, 0x64) = 1;
+}
+
 void fn_800CD09C();
 s64 fn_800C46A4(void *arg0) {
     extern s64 fn_8024E1D0();
@@ -812,10 +830,11 @@ void fn_800CB2EC(void *arg0, s32 arg1) {
     extern u8 lbl_8041F754[];
     extern void fn_80048A48(void *);
     void fn_800CEF00(void *, s32);
+    s32 *g = (s32 *)&lbl_8041F754;
     s32 v;
-    fn_80048A48(lbl_8041F754);
+    fn_80048A48(g);
     v = 0;
-    if (M2C_FIELD(arg0, s32 *, 0x74) == 0 && M2C_FIELD(lbl_8041F754, s32 *, 0x8C) != 0) {
+    if (M2C_FIELD(arg0, s32 *, 0x74) == 0 && g[0x8C / 4] != 0) {
         v = arg1;
     }
     fn_800CEF00(arg0, v);
@@ -903,9 +922,11 @@ void *fn_800CBD64(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, 
     M2C_UNK fn_800CBE0C(void *, s32, s32, f32 *, s32, s32, s32, s32, s32);
     extern f32 lbl_803D1078[];
     f32 v[2];
-    v[0] = lbl_803D1078[0];
-    v[1] = lbl_803D1078[0];
-    fn_800CBE0C(arg0, arg1, arg2, v, arg3, arg4, arg5, arg6, arg7);
+    f32 *p = v;
+    f32 c = lbl_803D1078[0];
+    p[1] = c;
+    p[0] = c;
+    fn_800CBE0C(arg0, arg1, arg2, p, arg3, arg4, arg5, arg6, arg7);
     return arg0;
 }
 
