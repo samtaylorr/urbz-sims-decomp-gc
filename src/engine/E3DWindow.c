@@ -64,22 +64,12 @@ void fn_802E2108(void *self, s64 *src) {
     fn_802E3CB4(self);
 }
 
-void fn_802E21C8(void *arg0, void *arg1) {
+void fn_802E21C8(void *arg0, E3DMtx64 *arg1) {
     extern void fn_802C8A34(void *);
     extern void fn_802E3CB4(void *);
-    s64 *src = (s64 *)arg1;
-    void *self = arg0;
-    s64 *dst = (s64 *)((char *)self + 0xE0);
-    dst[0] = src[0];
-    dst[1] = src[1];
-    dst[2] = src[2];
-    dst[3] = src[3];
-    dst[4] = src[4];
-    dst[5] = src[5];
-    dst[6] = src[6];
-    dst[7] = src[7];
-    fn_802C8A34((char *)self + 0xA0);
-    fn_802E3CB4(self);
+    *(E3DMtx64 *)((char *)arg0 + 0xE0) = *arg1;
+    fn_802C8A34((char *)arg0 + 0xA0);
+    fn_802E3CB4(arg0);
 }
 
 void fn_802E2288(s32 arg0) {
@@ -94,18 +84,11 @@ void fn_802E2288(s32 arg0) {
     fn_802E3CB4(arg0);
 }
 
-void fn_802E22D0(void *arg0, f32 *arg1) {
+void fn_802E22D0(void *arg0, E3DRect *arg1) {
     extern void fn_8030A460(void *);
-    void fn_802E232C(void *);
-    f32 *src = arg1;
-    void *self = arg0;
-    f32 *dst = (f32 *)((char *)self + 0x220);
-    dst[0] = src[0];
-    dst[1] = src[1];
-    dst[2] = src[2];
-    dst[3] = src[3];
-    fn_8030A460(self);
-    fn_802E232C(self);
+    *(E3DRect *)((char *)arg0 + 0x220) = *arg1;
+    fn_8030A460(arg0);
+    fn_802E232C(arg0);
 }
 
 void fn_802E2404(u8 *arg0, u8 *arg1, f32 *arg2) {
@@ -372,6 +355,7 @@ void fn_802E7C44(void *arg0, s32 arg1, s32 arg2) {
     s32 has;
     char *src;
     char *dst;
+    s32 n;
     u8 *g;
 
     fn_802E77F0(arg0, arg1);
@@ -379,15 +363,16 @@ void fn_802E7C44(void *arg0, s32 arg1, s32 arg2) {
         M2C_FIELD(arg0, s32 *, 0x30) = arg2;
         p = M2C_FIELD(arg0, void **, 0x20);
         has = p != 0;
-        arg2 = 0;
+        n = 0;
         if (has) {
-            arg2 = M2C_FIELD(p, s32 *, 0x24);
+            n = M2C_FIELD(p, s32 *, 0x24);
         }
         g = lbl_80459FB0;
-        dst = fn_8036375C(g + (M2C_FIELD(g, s32 *, 0x2C) * 0x14 + 4), arg2 << 6, 0x10);
+        dst = fn_8036375C(g + (M2C_FIELD(g, s32 *, 0x2C) * 0x14 + 4), n << 6, 0x10);
         M2C_FIELD(arg0, char **, 0x10) = dst;
         src = M2C_FIELD(arg0, char **, 0xC);
-        while (arg2--) {
+        while (n != 0) {
+            n--;
             fn_802C8A34(dst, src);
             dst += 0x40;
             src += 0x40;
@@ -407,13 +392,18 @@ void fn_802E7D04(void *arg0, s32 arg1) {
 void fn_802E80D0(void *arg0, void *arg1) {
     f32 *out = (f32 *)((char *)arg1 + 0x14);
     s32 i;
+    f32 *src;
 
-    for (i = 0; i < 3; i++) {
+    i = 0;
+    src = (f32 *)((char *)arg0 + 0x80);
+    do {
         if (M2C_FIELD(arg0, s32 *, 8) & (1 << i)) {
-            *out = ((f32 *)((char *)arg0 + 0x80))[i];
+            *out = *src;
         }
         out++;
-    }
+        src++;
+        i++;
+    } while (i < 3);
 }
 
 void fn_802E8E7C(void *arg0) {
