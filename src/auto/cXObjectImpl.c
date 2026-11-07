@@ -180,8 +180,8 @@ void *fn_80133A28(void *arg0, void *arg1, void *arg2, s32 arg3) {
     M2C_FIELD(arg0, void **, 0xC) = arg1;
     d = (void *)((char *)arg0 + 4);
     *d = *(typeof(d))arg2;
-    M2C_FIELD(arg0, s32 *, 0) = 1;
     M2C_FIELD(arg0, s32 *, 0x14) = M2C_FIELD(arg1, s32 *, 0x80);
+    M2C_FIELD(arg0, s32 *, 0) = 1;
     return arg0;
 }
 
