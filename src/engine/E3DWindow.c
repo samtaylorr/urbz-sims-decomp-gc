@@ -447,6 +447,18 @@ void fn_802EA264(void *arg0, s32 arg1) {
     fn_802E9D34(arg0, fn_802E5F90_inline(arg0, arg1));
 }
 
+s32 fn_802EA45C(void *arg0, s32 arg1) {
+    void *win = fn_802E5F90_inline(arg0, arg1);
+    if (win != NULL && M2C_FIELD(win, s32 *, 0xA8) == 1) {
+        void *p = M2C_FIELD(win, void **, 0x7C);
+        s32 valid = p != NULL;
+        if (valid) {
+            return M2C_FIELD(p, s32 *, 0x8);
+        }
+    }
+    return 0;
+}
+
 void fn_802EAD40(void *arg0, s32 arg1, s32 arg2) {
     extern const f32 lbl_803F0A6C[];
     s32 fn_80337F14(s32);
