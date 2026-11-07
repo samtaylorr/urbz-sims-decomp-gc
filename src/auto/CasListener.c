@@ -145,15 +145,11 @@ s32 fn_801B7D68(void *arg0, s32 idx) {
 
 s32 fn_801B7EC8(void *arg0, s32 idx) {
     extern void *lbl_8041FA48[];
-    s32 **arr;
-    s32 n = 0;
+    u32 **arr;
 
     arg0 = lbl_8041FA48[0];
-    arr = *(s32 ***)arg0;
-    if (arr != NULL) {
-        n = ((s32 *)arr)[-1];
-    }
-    if (idx < n) {
+    arr = *(u32 ***)arg0;
+    if (idx < CasArr_Size(arr)) {
         return *arr[idx];
     }
     return 0;
@@ -892,6 +888,17 @@ void fn_801BFF74(void *self, void *arg1) {
 
 void fn_801C0120(void) {
 
+}
+
+void fn_801C0124(void *self) {
+    u8 *obj = (u8 *)fn_801BFD84(self);
+    u8 *vt = M2C_FIELD(obj, u8 **, 8);
+    (*(void (**)(void *))(vt + 0x1C))(obj + *(s16 *)(vt + 0x18));
+    if ((u8 *)fn_801BFD84(self) == obj) {
+        u8 *o2 = (u8 *)fn_801BFD84(self);
+        u8 *vt2 = M2C_FIELD(o2, u8 **, 8);
+        (*(void (**)(void *))(vt2 + 0x24))(o2 + *(s16 *)(vt2 + 0x20));
+    }
 }
 
 void fn_801C019C(void) {
