@@ -405,6 +405,13 @@ void fn_802D9DE8(void *arg0, void *arg1, s32 arg2) {
     }
 }
 
+void fn_802D9E24(s32 arg0, char *arg1, s32 arg2) {
+    *(char **)(arg1 + 0xC) = arg1;
+    *(s32 *)(arg1 + 4) = arg2 | 1;
+    *(char **)(arg1 + 8) = arg1;
+    *(s32 *)(arg1 + arg2) = arg2;
+}
+
 s32 fn_802D9E3C(void) {
     return 1;
 }
