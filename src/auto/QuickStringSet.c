@@ -1576,6 +1576,31 @@ s32 fn_800F99F8(u8 *self, s32 arg1) {
     return 0;
 }
 
+u8 *fn_800F9C98(u8 *arg0, QSSVec1C *arg1, s32 arg2, s32 arg3) {
+    s32 fn_800F66D8();
+    u8 *fn_800F9E08(u8 *, s32);
+    s32 r;
+    u8 **it;
+    u32 d;
+
+    if (arg2 > 99 || arg3 != 0) {
+        r = (u32)fn_800F66D8() % (u32)arg2;
+    } else {
+        d = 100;
+        r = (u32)fn_800F66D8() % d;
+    }
+    if (r > arg2) {
+        return 0;
+    }
+    for (it = (u8 **)arg1->begin; it != (u8 **)arg1->end; it++) {
+        if (r <= (*it)[0x1F]) {
+            return fn_800F9E08(arg0, (s32)*it);
+        }
+        r -= (*it)[0x1F];
+    }
+    return 0;
+}
+
 s32 fn_800F9D50(u8 *self) {
     s32 fn_800FB678(void *);
     s32 fn_800FA500(void *);
