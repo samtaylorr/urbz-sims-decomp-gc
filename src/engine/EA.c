@@ -1065,10 +1065,9 @@ void fn_802DD03C(void *arg0, void *arg1) {
 }
 
 char **fn_802DD058(void *arg0, void *arg1) {
-    char *end = (char *)arg0 + 0x44C;
     char *it;
 
-    for (it = M2C_FIELD(arg0, char **, 0x46C); it != end; it = *(char **)(it + 0x20)) {
+    for (it = M2C_FIELD(arg0, char **, 0x46C); it != (char *)arg0 + 0x44C; it = *(char **)(it + 0x20)) {
         if ((u32)arg1 >= (u32)it && (u32)arg1 < (u32)(it + *(s32 *)(it + 4))) {
             return (char **)it;
         }
