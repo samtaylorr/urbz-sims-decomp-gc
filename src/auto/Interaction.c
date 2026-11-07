@@ -485,6 +485,17 @@ s32 fn_8010F77C(char *self) {
     return 1;
 }
 
+s32 fn_8010F7D4(char *self) {
+    extern void *lbl_80495AF8;
+    extern void *lbl_80494FA4;
+    if (M2C_FIELD(lbl_80495AF8, char **, 0x40C) == self) {
+        char *vt = *(char **)lbl_80494FA4;
+        (*(void (**)(void *))(vt + 0x5C))((char *)lbl_80494FA4 + *(s16 *)(vt + 0x58));
+        M2C_FIELD(lbl_80495AF8, s32 *, 0x418) = 0;
+    }
+    return 1;
+}
+
 s32 fn_8010F82C(void) {
     return 1;
 }
@@ -914,15 +925,11 @@ s32 fn_80112F68(void *arg0) {
 }
 
 s32 fn_80112F88(IntGroupVec *self, s32 n) {
-    IntGroup *b;
-    if (n <= 0) {
-        return 0;
+    IntGroup *b = self->begin;
+    if (n > 0 && n <= self->end - b) {
+        return b[n - 1].unk10;
     }
-    b = self->begin;
-    if (n > self->end - b) {
-        return 0;
-    }
-    return b[n - 1].unk10;
+    return 0;
 }
 
 s32 fn_80112FCC(IntGroupVec *self, s32 id) {
