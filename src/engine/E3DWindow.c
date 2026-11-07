@@ -738,24 +738,7 @@ void fn_802EC4C8(void *arg0, s32 arg1, f32 arg2, s32 arg3) {
 }
 
 s32 fn_802EC568(void *arg0, s32 arg1) {
-    char *win;
-    s32 i;
-
-    if (arg1 & 0x103F) {
-        if (fn_802E5F90_flags(arg0, M2C_FIELD(arg0, s32 *, 4)) & 0x1000) {
-            win = M2C_FIELD(arg0, char **, 0x40) + M2C_FIELD(arg0, s32 *, 4) * 0xB0;
-        } else {
-            win = NULL;
-        }
-    } else {
-        win = NULL;
-        for (i = M2C_FIELD(arg0, s32 *, 0x34); i < M2C_FIELD(arg0, s32 *, 0x3C); i++) {
-            if ((arg1 >> i) & 1) {
-                win = M2C_FIELD(arg0, char **, 0x40) + i * 0xB0;
-                break;
-            }
-        }
-    }
+    void *win = fn_802E5F90_inline1000(arg0, arg1);
     if (win != NULL && (M2C_FIELD(win, s32 *, 0x30) & arg1) && M2C_FIELD(win, s32 *, 0xA8) == 1) {
         return M2C_FIELD(win, s32 *, 0xA4);
     }
