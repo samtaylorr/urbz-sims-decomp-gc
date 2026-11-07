@@ -57,7 +57,7 @@ static inline CasPair CasMap_Insert(s32 map, void **key) {
 
 typedef struct {
     u8 pad[0x808];
-    u32 bits[2][32][32];
+    u32 bits[2][16][32];
 } CasBits;
 
 void fn_803074F0(void);
