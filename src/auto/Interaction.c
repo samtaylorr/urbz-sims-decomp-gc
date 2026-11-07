@@ -917,6 +917,18 @@ void fn_8011208C(void *self, s32 flags) {
     }
 }
 
+s32 fn_80112104(void *self, s32 n) {
+    extern s16 lbl_803D7C62[];
+    s16 *e = M2C_FIELD(self, s16 **, 0xC);
+    if (e != NULL && e[2] != -1) {
+        return (s16)(e[2] + n);
+    }
+    if (M2C_FIELD(self, s32 *, 0x4) == 0 && n >= 0 && n <= 18) {
+        return lbl_803D7C62[n];
+    }
+    return 0;
+}
+
 void fn_80112168(void) {
 
 }
@@ -950,15 +962,14 @@ s32 fn_80112F88(IntGroupVec *self, s32 n) {
 s32 fn_80112FCC(IntGroupVec *self, s32 id) {
     IntGroup *fn_80112480(IntGroupVec *, s32, s32);
     IntGroup *it = fn_80112480(self, id, 0);
-    s32 r;
-    if (it != self->end) {
-        IntItem *b = it->begin;
-        IntItem *e = it->end;
-        r = e - b;
-    } else {
-        r = 0;
+    IntItem *b;
+    IntItem *e;
+    if (it == self->end) {
+        return 0;
     }
-    return r;
+    b = it->begin;
+    e = it->end;
+    return e - b;
 }
 
 void fn_8011302C(IntGroupVec *self) {
@@ -1104,6 +1115,19 @@ s32 fn_80113AA4(char *self, s32 arg1) {
     return fn_800F6048(self + 0x14, arg1);
 }
 
+void fn_80113DCC(char *self) {
+    void *fn_802D1FC8(s32);
+    void fn_800F687C(void *, void *, s32);
+    void fn_800F65C4(void *, void *);
+    char *obj = fn_802D1FC8(0x10C);
+    char *vt;
+    fn_800F687C(obj, obj + 8, 0x104);
+    *(char **)(self + 0x150) = obj;
+    fn_800F65C4(self + 0x14, obj);
+    vt = *(char **)(self + 0x10);
+    (*(void (**)(void *))(vt + 0x44))(self + *(s16 *)(vt + 0x40));
+}
+
 s32 fn_80114000(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x120);
 }
@@ -1133,20 +1157,14 @@ s32 fn_8011608C(void *self, u32 n, s32 arg2) {
     s32 fn_80115954(void *, s32 *, s32);
     s32 buf[20];
     s32 total = 0;
-    u16 i = 1;
+    u16 i;
 
-    if (i <= n) {
-        do {
-            s32 *p = fn_80112D1C(M2C_FIELD(self, s32 *, 0x13C), arg2, i, 0);
-            if (p == NULL) {
-                break;
-            }
-            if (fn_80115954(self, buf, *p) != 0) {
-                break;
-            }
-            total += buf[1];
-            i++;
-        } while (i <= n);
+    for (i = 1; i <= n; i++) {
+        s32 *p = fn_80112D1C(M2C_FIELD(self, s32 *, 0x13C), arg2, i, 0);
+        if (p == NULL || fn_80115954(self, buf, *p) != 0) {
+            return total;
+        }
+        total += buf[1];
     }
     return total;
 }
