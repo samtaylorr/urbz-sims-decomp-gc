@@ -102,6 +102,18 @@ void fn_802C686C(void *arg0, s8 *arg1, s32 arg2) {
     *arg1 = 0;
 }
 
+void fn_802C6958(s32 arg0, s32 arg1, u8 c) {
+    M2C_UNK fn_802C6880();
+    u16 buf = c << 8;
+    fn_802C6880(arg0, arg1, &buf);
+}
+
+void fn_802C6984(s32 arg0, u8 c) {
+    M2C_UNK fn_802C6880();
+    u16 buf = c << 8;
+    fn_802C6880(arg0, &buf);
+}
+
 char **fn_802C6A40(char **arg0, char arg1) {
     (*arg0)[0] = arg1;
     (*arg0)[1] = 0;
@@ -590,41 +602,36 @@ loop_2:
 }
 
 void fn_802C84E8(f32 *m, f32 v) {
-    m[0] = v;
-    m[1] = v;
-    m[2] = v;
-    m[3] = v;
-    m[4] = v;
-    m[5] = v;
-    m[6] = v;
-    m[7] = v;
-    m[8] = v;
-    m[9] = v;
-    m[10] = v;
-    m[11] = v;
-    m[12] = v;
-    m[13] = v;
-    m[14] = v;
-    m[15] = v;
+    m[0] = m[1] = m[2] = m[3] = m[4] = m[5] = m[6] = m[7] = m[8] = m[9] = m[10] = m[11] = m[12] = m[13] = m[14] = m[15] = v;
 }
 
-void fn_802C8530(f32 (*m)[4], s32 col, f32 *out) {
-    out[0] = m[0][col];
-    out[1] = m[1][col];
-    out[2] = m[2][col];
+void fn_802C8530(f32 *m, s32 col, f32 *out) {
+    f32 *r0 = m;
+    f32 *r1 = m + 4;
+    f32 *r2 = m + 8;
+    out[0] = *(f32 *)((char *)r0 + col * 4);
+    out[1] = *(f32 *)((char *)r1 + col * 4);
+    out[2] = *(f32 *)((char *)r2 + col * 4);
 }
 
-void fn_802C8558(f32 (*m)[4], s32 col, f32 *out) {
-    out[0] = m[0][col];
-    out[1] = m[1][col];
-    out[2] = m[2][col];
-    out[3] = m[3][col];
+void fn_802C8558(f32 *m, s32 col, f32 *out) {
+    f32 *r0 = m;
+    f32 *r1 = m + 4;
+    f32 *r2 = m + 8;
+    f32 *r3 = m + 12;
+    out[0] = *(r0 + col);
+    out[1] = *(r1 + col);
+    out[2] = *(r2 + col);
+    out[3] = *(r3 + col);
 }
 
-void fn_802C858C(f32 (*m)[4], s32 col, f32 *in) {
-    m[0][col] = in[0];
-    m[1][col] = in[1];
-    m[2][col] = in[2];
+void fn_802C858C(f32 *m, s32 col, f32 *in) {
+    f32 *r1 = m + 4;
+    f32 *r2 = m + 8;
+    col *= 4;
+    *(f32 *)((char *)m + col) = in[0];
+    *(f32 *)((char *)r1 + col) = in[1];
+    *(f32 *)((char *)r2 + col) = in[2];
 }
 
 void *fn_802C87C4(void *arg0, void *arg1) {
