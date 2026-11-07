@@ -251,6 +251,7 @@ void *fn_801B861C(void *self) {
     void *fn_802D1FC8(s32);
     char *p;
     void *obj;
+    u8 pad[5];
 
     fn_801BD670(self);
     M2C_FIELD(self, s32 *, 0x28) = 0;
