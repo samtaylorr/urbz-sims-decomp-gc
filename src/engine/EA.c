@@ -291,9 +291,7 @@ void fn_802D8640(void *arg0, s32 arg1) {
     fn_802D8334(arg0, -1);
 }
 
-void *fn_802D86A8(void *arg0) {
-    extern char lbl_804195F8[];
-    extern void fn_802C5440(void *);
+static inline void *EA_AllocAligned800(void) {
     s32 fn_802D0AB8();
     s32 fn_802D0B3C(void);
     void *fn_802D197C(s32, u32, s32);
@@ -301,17 +299,25 @@ void *fn_802D86A8(void *arg0) {
     s32 heap;
     void *p;
 
-    fn_802C5440(arg0);
-    M2C_FIELD(arg0, char **, 0x28) = lbl_804195F8;
     heap = fn_802D0AB8();
     p = fn_802D197C(heap, 0x800, 0x20);
-    if (p == NULL) {
-        p = (void *)fn_802DC3C0((void *)heap, 0x800, 0x20, 0, 0);
-        if (p == NULL && heap == fn_802D0AB8()) {
-            p = (void *)fn_802DC3C0((void *)fn_802D0B3C(), 0x800, 0x20, 0, 0);
-        }
+    if (p != NULL) {
+        return p;
     }
-    M2C_FIELD(arg0, void **, 0x34) = p;
+    p = (void *)fn_802DC3C0((void *)heap, 0x800, 0x20, 0, 0);
+    if (p == NULL && heap == fn_802D0AB8()) {
+        return (void *)fn_802DC3C0((void *)fn_802D0B3C(), 0x800, 0x20, 0, 0);
+    }
+    return p;
+}
+
+void *fn_802D86A8(void *arg0) {
+    extern char lbl_804195F8[];
+    extern void fn_802C5440(void *);
+
+    fn_802C5440(arg0);
+    M2C_FIELD(arg0, char **, 0x28) = lbl_804195F8;
+    M2C_FIELD(arg0, void **, 0x34) = EA_AllocAligned800();
     return arg0;
 }
 
