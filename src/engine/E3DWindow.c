@@ -60,6 +60,14 @@ static inline void *fn_802E5F90_inline1000(void *arg0, s32 arg1) {
 
 typedef struct { f32 x, y, z; } E3DVec3;
 
+static inline E3DVec3 E3DVec3_make(f32 x, f32 y, f32 z) {
+    E3DVec3 r;
+    r.x = x;
+    r.z = z;
+    r.y = y;
+    return r;
+}
+
 void fn_802ED364(void *arg0, void *arg1, s32 arg2);
 void fn_802EAF44(void *arg0, void *arg1, s32 arg2, f32 arg3);
 
@@ -791,45 +799,39 @@ void fn_802EC830(void *arg0, f32 arg1) {
 }
 
 s32 fn_802EC898(void *arg0, void *arg1) {
-    typedef struct { f32 x, y, z; } E3DVec;
     extern void *lbl_80494EC4;
     extern const f32 lbl_803F0AF8[];
-    void fn_802E7F64(void *, void *, void *, s32);
-    s32 fn_802E34F0(void *, void *);
+    void fn_802E7F64(void *, void *, E3DVec3 *, s32);
+    s32 fn_802E34F0(void *, E3DVec3 *);
     void *g = lbl_80494EC4;
-    E3DVec t, u, v;
+    E3DVec3 v, u, t;
 
     if (g == NULL) {
         return 0;
+    } else {
+        t.x = lbl_803F0AF8[0];
+        t.z = lbl_803F0AF8[0];
+        t.y = lbl_803F0AF8[0];
+        u = t;
+        v = u;
+        fn_802E7F64(arg0, arg1, &v, 0);
+        return fn_802E34F0(g, &v);
     }
-    t.x = lbl_803F0AF8[0];
-    t.z = lbl_803F0AF8[0];
-    t.y = lbl_803F0AF8[0];
-    u = t;
-    v = u;
-    fn_802E7F64(arg0, arg1, &v, 0);
-    return fn_802E34F0(g, &v);
 }
 
 void fn_802ECD34(void *arg0, void *arg1, void *arg2, void *arg3) {
     extern s32 lbl_80494DFC;
-    M2C_UNK fn_802E77F0();
+    void fn_802E77F0(void *, void *, s32);
     void fn_8032AB10(void *, void *, void *, void *, s32);
     void *p;
     s32 has;
-    s32 n;
 
     if (M2C_FIELD(arg0, s32 *, 0x60) != 0) {
         fn_802E77F0(arg0, arg3, lbl_80494DFC);
     }
     p = M2C_FIELD(arg0, void **, 0x20);
     has = p != 0;
-    if (has) {
-        n = M2C_FIELD(p, s32 *, 0x24);
-    } else {
-        n = 0;
-    }
-    fn_8032AB10(arg2, arg1, M2C_FIELD(arg0, void **, 0xC), M2C_FIELD(arg0, void **, 0x8), n);
+    fn_8032AB10(arg2, arg1, M2C_FIELD(arg0, void **, 0xC), M2C_FIELD(arg0, void **, 0x8), has ? M2C_FIELD(p, s32 *, 0x24) : 0);
 }
 
 void *fn_802ECFAC(void *arg0, s32 arg1) {
