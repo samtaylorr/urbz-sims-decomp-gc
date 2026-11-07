@@ -37,21 +37,19 @@ void fn_802D7E5C(M2C_UNK **arg0, s32 arg1) {
     fn_802C5DB8(arg0, arg1);
 }
 
-s32 fn_802D7EB0(s32 arg0, s32 arg1) {
+void *fn_802D7EB0(void *arg0, s32 arg1) {
     M2C_UNK fn_80261278();
-    s32 fn_802C6434(s32, s32);
-    s32 fn_802C6508(s32, s32, s32, s32, s32, void (*)());
+    void *fn_802C6434(void *, s32);
+    s32 fn_802C6508(void *, s32, s32, s32, s32, void (*)());
     void fn_802D87A0();
     void fn_802DFC94();
-    s32 temp_r3;
-    s32 var_r31;
+    void *temp_r3;
 
-    var_r31 = arg1;
     fn_80261278();
-    if (var_r31 == 0x80000000) {
-        var_r31 = 3;
+    if (arg1 == 0x80000000) {
+        arg1 = 3;
     }
-    temp_r3 = fn_802C6434(arg0, var_r31);
+    temp_r3 = fn_802C6434(arg0, arg1);
     if (temp_r3 != 0) {
         fn_802C6508(arg0, 0x80000000, 0x80000000, 0x80000000, 0, fn_802DFC94);
         fn_802C6508(arg0, 0x80000000, 2, 0x80000000, 0, fn_802D87A0);
@@ -1381,7 +1379,7 @@ M2C_UNK fn_802DDCAC(s32 arg0, s32 i, s32 set) {
 
 void fn_802DDD70(void *self) {
     u32 fn_802DE1B0(void *arg0);
-    u32 n = fn_802DE1B0(self);
+    s32 n = fn_802DE1B0(self);
     s32 *p = *(s32 **)self;
     while (n--) {
         *p = ~*p;
@@ -1487,12 +1485,11 @@ void fn_802DE228(u32 **arg0, u32 **arg1) {
 
 void fn_802DE290(u32 **self, u32 **other) {
     u32 fn_802DE1B0(void *);
-    u32 n = fn_802DE1B0(self);
+    s32 i = fn_802DE1B0(self) - 1;
     u32 *dst = *self;
     u32 *src = *other;
-    u32 i;
 
-    for (i = 0; i < n; i++) {
+    for (; i != -1; i--) {
         *dst++ ^= *src++;
     }
 }
