@@ -1130,6 +1130,59 @@ s32 fn_801C37CC(void) {
     return lbl_804945A4;
 }
 
+void *fn_801C3804(void *self) {
+    void *fn_80399BE8(s32);
+    CasListNode *n;
+
+    M2C_FIELD(self, CasListNode **, 4) = NULL;
+    n = fn_80399BE8(0xC);
+    n->next = n;
+    n->prev = n;
+    M2C_FIELD(self, CasListNode **, 4) = n;
+    return self;
+}
+
+void fn_801C3850(void *self, s32 arg1) {
+    extern void fn_803AD18C(void *);
+    extern void fn_803997AC(void *, s32);
+    extern void fn_802D20E8(void *);
+    CasListIter end;
+    CasListIter it;
+
+    end.node = M2C_FIELD(self, CasListNode **, 4);
+    it.node = end.node->next;
+    while (CasListIter_NotEqual(&it, &end)) {
+        it.node = it.node->next;
+    }
+    fn_803AD18C(self);
+    if (M2C_FIELD(self, void **, 4) != NULL) {
+        fn_803997AC(M2C_FIELD(self, void **, 4), 0xC);
+    }
+    if (arg1 & 1) {
+        fn_802D20E8(self);
+    }
+}
+
+s32 fn_801C38E4(void *self) {
+    CasListIter begin;
+    CasListIter end;
+    CasListIter it;
+    s32 n;
+
+    end.node = M2C_FIELD(self, CasListNode **, 4);
+    n = 0;
+    it.node = end.node->next;
+    while (CasListIter_NotEqual(&it, &end)) {
+        it.node = it.node->next;
+        n++;
+    }
+    if (n == 0) {
+        return 0;
+    }
+    begin.node = M2C_FIELD(self, CasListNode **, 4)->next;
+    return begin.node->value == 1;
+}
+
 void fn_801C465C(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x10) = 0;
 }
@@ -1145,6 +1198,26 @@ void fn_801C5750(void *self, s32 flags) {
     if (flags & 1) {
         fn_802D20E8(self);
     }
+}
+
+s32 fn_801C5998(CasFlags *self, s32 which, s32 row, u32 idx) {
+    s32 sel;
+
+    if (idx > 0xFF) {
+        return 0;
+    }
+    sel = which != 0;
+    return (self->small[sel][row][idx >> 5] & (1 << (idx & 31))) != 0;
+}
+
+s32 fn_801C59F0(CasFlags *self, s32 which, s32 row, u32 idx) {
+    s32 sel;
+
+    if (idx > 0x3FF) {
+        return 0;
+    }
+    sel = which != 0;
+    return (self->big[sel][row][idx >> 5] & (1 << (idx & 31))) != 0;
 }
 
 void fn_801C5AC4(CasBits *arg0, s32 arg1, s32 arg2, u32 arg3, s32 arg4) {
@@ -1303,7 +1376,7 @@ void fn_801C5FB0(s32 arg0, void *arg1) {
     void *temp_r9;
 
     key = arg1;
-    copy = CasMap_Insert(arg0, &key);
+    copy = ({ CasMap_Insert(arg0, &key); });
     temp_r9 = M2C_FIELD(arg1, void **, 4);
     M2C_FIELD(temp_r9, M2C_UNK (**)(void *, s32), 0x1C)((u8 *)arg1 + M2C_FIELD(temp_r9, s16 *, 0x18), arg0);
 }
