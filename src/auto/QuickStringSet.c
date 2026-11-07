@@ -52,6 +52,24 @@ static inline void QSSVec_Dealloc(void *p, s32 end) {
     }
 }
 
+static inline void QSSVec_DeallocBytes(void *p, const u32 *size) {
+    void fn_802D20E8(void *);
+    void fn_803997AC(void *, u32);
+    if (*size > 0x80) {
+        fn_802D20E8(p);
+    } else {
+        fn_803997AC(p, *size);
+    }
+}
+
+static inline void QSSVec_FreeBytes(QSSVec *v) {
+    void *p = (void *)v->begin;
+    if (p != 0) {
+        u32 size = (u32)((s32)v->alloc.cap - (s32)p) & ~3;
+        QSSVec_DeallocBytes(p, &size);
+    }
+}
+
 static inline void QSSVec_Free(QSSVec *v) {
     void *p = (void *)v->begin;
     if (p != 0) {
