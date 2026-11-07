@@ -847,9 +847,9 @@ void fn_802C9468(f32 *m, f32 s) {
 }
 
 f32 *fn_802C9624(f32 *m, f32 *v, s32 unused, f32 *axis) {
-    extern f32 lbl_803F00C8;
+    extern f32 lbl_803F00C8[];
     f32 *fn_802C9B20(f32 *, f32 *, f32);
-    fn_802C9B20(m, axis, lbl_803F00C8);
+    fn_802C9B20(m, axis, lbl_803F00C8[0]);
     fn_802C9368(m, v);
     return m;
 }
