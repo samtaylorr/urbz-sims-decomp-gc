@@ -986,7 +986,6 @@ f32 fn_802C88C0(f32 *m) {
 }
 
 f32 *fn_802C88F0(f32 *m, f32 angle) {
-    void fn_802C876C(void *);
     f32 fn_80243694(f32);
     f32 fn_802434CC(f32);
     f32 s, c;
