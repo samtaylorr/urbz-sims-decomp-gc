@@ -1277,6 +1277,16 @@ void fn_800FA100(s32 arg0) {
     fn_800FB360(arg0);
 }
 
+s32 fn_800FA57C(void *self) {
+    u8 *obj = M2C_FIELD(self, u8 **, 8);
+
+    if (obj != NULL) {
+        u8 *vt = *(u8 **)obj;
+        (*(void (**)(void *))(vt + 0x3C))(obj + *(s16 *)(vt + 0x38));
+    }
+    return 1;
+}
+
 void fn_800FAE08(void *arg0) {
     extern f32 lbl_80494E08;
     extern void fn_800FAE5C(void *);
