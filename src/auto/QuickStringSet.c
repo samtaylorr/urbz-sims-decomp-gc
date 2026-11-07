@@ -64,10 +64,13 @@ static inline u32 QSSVec1C_Size(QSSVec1C *v) {
     return v->end - v->begin;
 }
 
-static inline void QSSVec1C_Erase(QSSVec1C *v, QSSElem1C *first, QSSElem1C *last) {
-    QSSElem1C *p;
-    for (p = first; p != last; p++) {
+static inline void QSSVec1C_Destroy(QSSElem1C *first, QSSElem1C *last) {
+    for (; first != last; first++) {
     }
+}
+
+static inline void QSSVec1C_Erase(QSSVec1C *v, QSSElem1C *first, QSSElem1C *last) {
+    QSSVec1C_Destroy(first, v->end);
     v->end = first;
 }
 
@@ -1322,6 +1325,21 @@ s32 fn_800FC36C(void *arg0) {
 extern s32 lbl_804944B0;
 s32 fn_800FC378(void) {
     return lbl_804944B0;
+}
+
+s32 fn_800FC380(void *arg0, s32 arg1, s32 arg2, s32 *out) {
+    s32 fn_800FC3DC(void *, s32, s32, s32 **);
+    s32 *p;
+    s32 r;
+
+    p = 0;
+    r = fn_800FC3DC(arg0, arg1, arg2, &p);
+    if (r != 0) {
+        out[0] = p[0];
+        out[1] = p[1];
+        out[2] = p[2];
+    }
+    return r;
 }
 
 void fn_800FC6E0(void) {
