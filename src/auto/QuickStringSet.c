@@ -236,6 +236,18 @@ void fn_800F6134(void *arg0, s32 arg1) {
     }
 }
 
+s32 fn_800F6440(void *arg0, s32 arg1) {
+    s32 fn_800F6498(void *arg0);
+    if (fn_800F6498(arg0) == 0) {
+        return -0x31;
+    }
+    if (arg1 >= 0) {
+        *(s32 *)((u8 *)arg0 + 0x11C) = arg1;
+        return 0;
+    }
+    return -0x32;
+}
+
 s32 fn_800F6498(void *arg0) {
     return *(s32 *)((u8 *)arg0 + 0x114) != 0;
 }
@@ -294,6 +306,19 @@ s32 fn_800F66D8(void) {
     u32 hi = s >> 16;
     lbl_80495A94 = s * 0x41C64E6D + 0x3039;
     return ((lo * 0x4E6D + 0x3039) >> 16) + lo * 0x41C6 + hi * 0x4E6D + ((hi * 0x41C6) << 16);
+}
+
+s32 fn_800F6724(u32 arg0) {
+    s32 fn_800F66D8();
+    s32 a;
+    s32 b;
+
+    a = fn_800F66D8() % arg0;
+    b = fn_800F66D8() % arg0;
+    if (a > b) {
+        return a;
+    }
+    return b;
 }
 
 s32 fn_800F67E4(u32 arg0) {
