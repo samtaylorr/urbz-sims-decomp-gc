@@ -1196,8 +1196,8 @@ void fn_8034D958(void *arg0, u32 arg1, s32 arg2) {
     if (arg1 <= 999) {
         if (lbl_80472600[arg1] <= 2) {
             fn_8025302C(arg2);
-            lbl_80472600[arg1]++;
         }
+        lbl_80472600[arg1]++;
     }
 }
 
