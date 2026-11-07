@@ -1017,7 +1017,7 @@ void fn_800F8820(void (*cb)(void)) {
 
 s32 fn_800F8828(void *self, s32 val, s32 flag) {
     struct QSS {
-        s32 data[0xA00];
+        s32 data[0x50][32];
         u32 used[0x50];
         u32 mask[0x50];
     } *s = self;
@@ -1028,7 +1028,7 @@ s32 fn_800F8828(void *self, s32 val, s32 flag) {
             i = 0x40;
         }
         for (; i <= 0x4F; i++) {
-            u32 bits = s->used[i] | s->mask[i];
+            u32 bits = s->mask[i] | s->used[i];
             if (bits != -1) {
                 s32 n = 0;
                 u32 m = 1;
@@ -1037,8 +1037,9 @@ s32 fn_800F8828(void *self, s32 val, s32 flag) {
                     n++;
                 }
                 s->used[i] |= m;
-                s->data[i * 32 + n] = val;
-                return i * 32 + n;
+                n = i * 32 + n;
+                ((s32 *)s->data)[n] = val;
+                return n;
             }
         }
         return -1;
@@ -1128,6 +1129,20 @@ s32 fn_800F98FC(void *arg0) {
 
 s32 fn_800F9904(s32 arg0) {
     return arg0 + 0x20;
+}
+
+s32 fn_800F99F8(u8 *self, s32 arg1) {
+    s32 fn_800FB678(void *);
+    s32 fn_800FB614(s32 *);
+    s32 i;
+
+    for (i = 0; i < M2C_FIELD(self, s32 *, 0x1C); i++) {
+        if (fn_800FB678(M2C_FIELD(self, u8 **, 0xC) + i * 0x30) &&
+            fn_800FB614((s32 *)(M2C_FIELD(self, u8 **, 0xC) + i * 0x30)) == arg1) {
+            return 1;
+        }
+    }
+    return 0;
 }
 
 void fn_800FA0F0(s32 *self, s32 value) {
