@@ -1079,6 +1079,36 @@ s32 fn_800F9700(s32 *arg0) {
     return 1;
 }
 
+s32 fn_800F9738(u8 *self) {
+    s32 fn_800F9D50(u8 *);
+    void fn_800FA07C(u8 *, s32);
+    void fn_802D211C(void *);
+    u8 *arr;
+    u8 *p;
+
+    if (fn_800F9700(self) == 0) {
+        return 0;
+    }
+    fn_800F9D50(self);
+    if (M2C_FIELD(self, s32 *, 8) != 0) {
+        M2C_FIELD(self, s32 *, 8) = 0;
+    }
+    arr = M2C_FIELD(self, u8 **, 0xC);
+    if (arr != NULL) {
+        p = arr + ((s32 *)arr)[-2] * 0x30;
+        if (arr != p) {
+            do {
+                p -= 0x30;
+                fn_800FA07C(p, 0);
+            } while (M2C_FIELD(self, u8 **, 0xC) != p);
+        }
+        fn_802D211C(M2C_FIELD(self, u8 **, 0xC) - 8);
+        M2C_FIELD(self, u8 **, 0xC) = NULL;
+    }
+    M2C_FIELD(self, s32 *, 0x10) = 0;
+    return 1;
+}
+
 s32 fn_800F98E0(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x14) = arg1;
     return 1;
