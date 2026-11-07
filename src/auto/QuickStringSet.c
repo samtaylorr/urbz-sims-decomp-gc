@@ -93,8 +93,16 @@ void fn_800F66A0(void (*cb)(void)) {
 
 u16 fn_800F66A8(u32 arg0) {
     u16 *p = (u16 *)&lbl_804943C0;
-    lbl_804943C0 = p[1] * 0x4E6D + 0x3039;
+    *(s32 *)p = p[1] * 0x4E6D + 0x3039;
     return (p[0] & 0x7FFF) % arg0;
+}
+
+s32 fn_800F66D8(void) {
+    u32 s = lbl_80495A94;
+    u32 lo = s & 0xFFFF;
+    u32 hi = s >> 16;
+    lbl_80495A94 = s * 0x41C64E6D + 0x3039;
+    return ((lo * 0x4E6D + 0x3039) >> 16) + lo * 0x41C6 + hi * 0x4E6D + ((hi * 0x41C6) << 16);
 }
 
 s32 fn_800F67E4(u32 arg0) {
