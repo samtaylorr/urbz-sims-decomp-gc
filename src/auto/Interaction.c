@@ -582,15 +582,27 @@ void fn_8010F2BC(void *self) {
     }
 }
 
-void *fn_8010F4B0(void *self) {
+void *fn_8010F4B0(void *arg0) {
+    struct {
+        u8 *vt;
+        s32 unk4;
+        s32 unk8;
+        s32 unkC;
+        u8 pad10[8];
+        s32 unk18;
+        s32 unk1C;
+        s32 unk20;
+    } *self = arg0;
     extern u8 lbl_8040EA50[];
     extern void *lbl_80495AF8;
 
-    *(void **)self = lbl_8040EA50;
-    M2C_FIELD(self, s32 *, 0x18) = 0x400;
-    M2C_FIELD(self, s32 *, 0x1C) = 0x200;
-    M2C_FIELD(self, s32 *, 8) = 0;
-    M2C_FIELD(self, s32 *, 0xC) = M2C_FIELD(self, s32 *, 4) = M2C_FIELD(self, s32 *, 0x20) = 1;
+    self->vt = lbl_8040EA50;
+    self->unk18 = 0x400;
+    self->unk1C = 0x200;
+    self->unk8 = 0;
+    self->unk4 = 1;
+    self->unkC = 1;
+    self->unk20 = 1;
     fn_8010DABC(lbl_80495AF8, self);
     return self;
 }
