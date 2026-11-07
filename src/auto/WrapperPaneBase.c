@@ -128,17 +128,18 @@ s32 fn_800C488C(void) {
     extern u8 *lbl_80494FC4;
     extern u8 lbl_804349A8[];
     extern f32 lbl_803D0510[];
-    if (lbl_80495A34 != 0) {
-        u8 *obj = lbl_80494FC4;
-        u8 *vt = *(u8 **)obj;
-        return (s32)((*(f32 (**)(void *, void *))(vt + 0x2C))(obj + *(s16 *)(vt + 0x28), lbl_804349A8) * lbl_803D0510[0]);
-    } else {
-        u8 *obj = lbl_80494FC4;
-        u8 *vt = *(u8 **)obj;
+    u8 *obj;
+    u8 *vt;
+    if (lbl_80495A34 == 0) {
+        obj = lbl_80494FC4;
+        vt = *(u8 **)obj;
         (*(void (**)(void *, void *))(vt + 0x24))(obj + *(s16 *)(vt + 0x20), lbl_804349A8);
         lbl_80495A34 = 1;
         return 0;
     }
+    obj = lbl_80494FC4;
+    vt = *(u8 **)obj;
+    return (s32)((*(f32 (**)(void *, void *))(vt + 0x2C))(obj + *(s16 *)(vt + 0x28), lbl_804349A8) * lbl_803D0510[0]);
 }
 
 void fn_800C4E30(void *arg0) {
