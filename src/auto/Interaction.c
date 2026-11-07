@@ -395,6 +395,33 @@ zero:
     return 0;
 }
 
+s32 fn_8010EFA0(void *self) {
+    typedef struct {
+        u32 flags;
+        f32 x;
+        f32 y;
+        f32 z;
+        s32 pad[2];
+    } Q;
+    extern void *lbl_80494FA4;
+    extern f32 lbl_803D71F4[];
+
+    if (M2C_FIELD(self, s32 *, 0x1C) != 0) {
+        Q q;
+        void *obj;
+        void *vt;
+        q.flags = 0;
+        q.z = lbl_803D71F4[0];
+        q.flags |= 4;
+        obj = lbl_80494FA4;
+        vt = *(void **)obj;
+        ((void (*)(void *, s32, Q *))M2C_FIELD(vt, void **, 0xB4))(
+            (u8 *)obj + M2C_FIELD(vt, s16 *, 0xB0), M2C_FIELD(self, s32 *, 0x1C), &q);
+    }
+    M2C_FIELD(self, s32 *, 0x10) = 0;
+    return 1;
+}
+
 s32 fn_8010F020(void) {
     return 1;
 }
@@ -419,10 +446,7 @@ s32 fn_8010F164(void *self, s32 arg1, s32 arg2, u32 arg3) {
     extern f32 lbl_803D7200[];
     extern void fn_8010F078(void *, s32);
 
-    if (!(arg3 >= 50)) {
-        arg3 = 50;
-    }
-    M2C_FIELD(self, s32 *, 0x30) = (s32)((f32)arg3 / lbl_803D7200[0]);
+    M2C_FIELD(self, s32 *, 0x30) = (s32)((f32)(arg3 >= 50 ? arg3 : 50) / lbl_803D7200[0]);
     fn_8010F078(self, arg2);
     return 1;
 }
@@ -493,6 +517,21 @@ void fn_8010F2BC(void *self) {
         M2C_FIELD(t, s32 *, 4) -= 1;
         M2C_FIELD(self, void **, 0x18) = NULL;
     }
+}
+
+void *fn_8010F4B0(void *self) {
+    extern u8 lbl_8040EA50[];
+    extern void *lbl_80495AF8;
+
+    *(void **)self = lbl_8040EA50;
+    M2C_FIELD(self, s32 *, 0x18) = 0x400;
+    M2C_FIELD(self, s32 *, 0x1C) = 0x200;
+    M2C_FIELD(self, s32 *, 8) = 0;
+    M2C_FIELD(self, s32 *, 0x20) = 1;
+    M2C_FIELD(self, s32 *, 4) = 1;
+    M2C_FIELD(self, s32 *, 0xC) = 1;
+    fn_8010DABC(lbl_80495AF8, self);
+    return self;
 }
 
 extern u8 lbl_8040EA50[];
