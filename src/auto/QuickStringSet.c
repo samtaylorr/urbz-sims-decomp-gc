@@ -1095,6 +1095,36 @@ void fn_800F8CB4(void) {
 
 }
 
+void fn_800F8CB8(void) {
+    extern char *lbl_8041E640;
+    char *obj = **(char ***)(lbl_8041E640 + 4);
+    char *vt = M2C_FIELD(obj, char **, 8);
+
+    (*(void (**)(void *))(vt + 0x3C))(obj + *(s16 *)(vt + 0x38));
+}
+
+s32 fn_800F8CFC(char *arg0, u32 arg1) {
+    s32 count = 0;
+    char **arr;
+    char *e;
+    char *vt;
+
+    if (M2C_FIELD(arg0, s32 *, 4) != M2C_FIELD(arg0, s32 *, 0)) {
+        arr = (char **)(arg0 + 8);
+        do {
+            e = arr[M2C_FIELD(arg0, s32 *, 4)];
+            if (M2C_FIELD(e, u32 *, 0) > arg1) {
+                break;
+            }
+            vt = M2C_FIELD(e, char **, 4);
+            (*(void (**)(void *))(vt + 0x14))(e + *(s16 *)(vt + 0x10));
+            M2C_FIELD(arg0, s32 *, 4) = (M2C_FIELD(arg0, s32 *, 4) + 1) % 64;
+            count++;
+        } while (M2C_FIELD(arg0, s32 *, 4) != M2C_FIELD(arg0, s32 *, 0));
+    }
+    return count;
+}
+
 s32 fn_800F8EA4(void) {
     return 0;
 }
