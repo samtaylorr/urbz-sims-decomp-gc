@@ -1420,6 +1420,21 @@ s32 fn_800F99F8(u8 *self, s32 arg1) {
     return 0;
 }
 
+u8 *fn_800F9E08(u8 *self, s32 arg1) {
+    s32 fn_800FB678(void *);
+    void fn_800FA0F8(void *, s32);
+    s32 i;
+
+    for (i = 0; i < M2C_FIELD(self, s32 *, 0x1C); i++) {
+        if (!fn_800FB678(M2C_FIELD(self, u8 **, 0xC) + i * 0x30)) {
+            fn_800FA0F8(M2C_FIELD(self, u8 **, 0xC) + i * 0x30, arg1);
+            M2C_FIELD(self, s32 *, 0x10)++;
+            return M2C_FIELD(self, u8 **, 0xC) + i * 0x30;
+        }
+    }
+    return NULL;
+}
+
 s32 fn_800F9E9C(u8 *self, s32 arg1) {
     s32 fn_800FB678(void *);
     s32 fn_800FB614(s32 *);
