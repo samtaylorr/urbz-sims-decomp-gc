@@ -856,27 +856,23 @@ void fn_802DE608(void *self, f32 value) {
 
 u32 fn_802DE634(u32 **self, s32 pos, s32 count) {
     s32 word;
-    s32 shift;
     s32 end;
-    s32 last;
     u32 endWord;
     u32 mask;
 
     if (count != 0) {
         end = pos + count;
         word = pos >> 5;
-        last = end;
-        shift = pos & 31;
-        endWord = (u32)(last - 1) >> 5;
+        pos &= 31;
+        endWord = (u32)(end - 1) >> 5;
         if (word == endWord) {
             mask = (1 << count) - 1;
             if (mask != 0) {
-                u32 v = (*self)[word];
-                return (v >> shift) & mask;
+                return ((*self)[word] >> pos) & mask;
             }
             return (*self)[word];
         }
-        return (((*self)[endWord] & ((1 << (last & 31)) - 1)) << (32 - shift)) | ((*self)[word] >> shift);
+        return (((*self)[endWord] & ((1 << (end & 31)) - 1)) << (32 - pos)) | ((*self)[word] >> pos);
     }
     return 0;
 }
@@ -1067,15 +1063,18 @@ void fn_802DF214(void *arg0) {
 
 void fn_802DF248(void *arg0, void *arg1, s32 arg2, s32 arg3) {
     s32 n;
+    char *page;
     char *src;
     void *vt;
     s32 idx;
+    s32 off;
 
     while (arg3 != 0) {
         idx = (arg2 / 0x1000) * 4;
-        src = *(char **)((char *)M2C_FIELD(arg0, char ***, 0x20) + idx);
-        n = 0x1000 - (arg2 & 0xFFF);
-        src += arg2 & 0xFFF;
+        page = *(char **)((char *)M2C_FIELD(arg0, char ***, 0x20) + idx);
+        off = arg2 & 0xFFF;
+        n = 0x1000 - off;
+        src = page + off;
         if (arg3 < n) {
             n = arg3;
         }
