@@ -83,6 +83,19 @@ s32 *fn_802C66FC(s32 *arg0) {
     return arg0;
 }
 
+void fn_802C682C(void **head, s32 stride, s32 count, char *base) {
+    s32 i;
+
+    if (base == NULL) {
+        return;
+    }
+    for (i = count - 1; i >= 0; i--) {
+        void **item = (void **)(base + i * stride);
+        *item = *head;
+        *head = item;
+    }
+}
+
 void fn_802C686C(void *arg0, s8 *arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 4) = arg2;
     M2C_FIELD(arg0, s8 **, 0) = arg1;
@@ -574,6 +587,44 @@ loop_2:
         var_r9 += 1;
     } while (var_r9 <= 3);
     return arg0;
+}
+
+void fn_802C84E8(f32 *m, f32 v) {
+    m[0] = v;
+    m[1] = v;
+    m[2] = v;
+    m[3] = v;
+    m[4] = v;
+    m[5] = v;
+    m[6] = v;
+    m[7] = v;
+    m[8] = v;
+    m[9] = v;
+    m[10] = v;
+    m[11] = v;
+    m[12] = v;
+    m[13] = v;
+    m[14] = v;
+    m[15] = v;
+}
+
+void fn_802C8530(f32 (*m)[4], s32 col, f32 *out) {
+    out[0] = m[0][col];
+    out[1] = m[1][col];
+    out[2] = m[2][col];
+}
+
+void fn_802C8558(f32 (*m)[4], s32 col, f32 *out) {
+    out[0] = m[0][col];
+    out[1] = m[1][col];
+    out[2] = m[2][col];
+    out[3] = m[3][col];
+}
+
+void fn_802C858C(f32 (*m)[4], s32 col, f32 *in) {
+    m[0][col] = in[0];
+    m[1][col] = in[1];
+    m[2][col] = in[2];
 }
 
 void *fn_802C87C4(void *arg0, void *arg1) {
