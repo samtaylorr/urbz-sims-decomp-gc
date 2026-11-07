@@ -1081,6 +1081,13 @@ s32 fn_801A0978(void *arg0, u32 arg1) {
     return 0;
 }
 
+s32 fn_801A09E0(void *arg0) {
+    if (M2C_FIELD(arg0, s32 *, 0) & 0x30) {
+        return 1;
+    }
+    return 0;
+}
+
 void fn_801A0DFC(s32 *arg0, s32 arg1) {
     M2C_UNK fn_801A0780(s32);
     M2C_UNK fn_801A08DC(s32 *, s32);
