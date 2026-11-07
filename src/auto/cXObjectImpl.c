@@ -438,6 +438,12 @@ void fn_801392E8(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x80) = arg1;
 }
 
+void *fn_801392F0(void *ret, char *obj) {
+    void fn_80105574(void *, s32, s32, s32);
+    fn_80105574(ret, *(s32 *)(obj + 0x6C) >> 4, *(s32 *)(obj + 0x68) >> 4, *(s32 *)(obj + 0x80));
+    return ret;
+}
+
 void fn_80139440(void *arg0, s32 arg1) {
     if ((s32) M2C_FIELD(arg0, s32 *, 0xC4) != arg1) {
         M2C_FIELD(arg0, s32 *, 0xC4) = arg1;
