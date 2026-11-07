@@ -71,6 +71,15 @@ static inline void QSSVec1C_Erase(QSSVec1C *v, QSSElem1C *first, QSSElem1C *last
     v->end = first;
 }
 
+static inline void QSSVec1C_Resize(QSSVec1C *v, u32 n, QSSElem1C *val) {
+    void fn_8039FED8(QSSVec1C *, QSSElem1C *, u32, QSSElem1C *);
+    if (n < QSSVec1C_Size(v)) {
+        QSSVec1C_Erase(v, v->begin + n, v->end);
+    } else {
+        fn_8039FED8(v, v->end, n - QSSVec1C_Size(v), val);
+    }
+}
+
 s32 fn_800F6498(void *arg0) {
     return *(s32 *)((u8 *)arg0 + 0x114) != 0;
 }
