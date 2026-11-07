@@ -1538,6 +1538,11 @@ void fn_800D131C(void *arg0, f32 farg0) {
     M2C_FIELD(temp_r30, s32 *, 4) = (s32) (M2C_FIELD(temp_r30, s32 *, 4) | 2);
 }
 
+void fn_800D1404(void *arg0) {
+    M2C_UNK fn_800CCA68(s32);
+    fn_800CCA68(M2C_FIELD(arg0, s32 *, 0x64));
+}
+
 void fn_800D1428(void *arg0, s32 arg1) {
     void *temp_r30;
     void *temp_r3;
