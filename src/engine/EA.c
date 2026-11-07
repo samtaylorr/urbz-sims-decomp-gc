@@ -931,18 +931,18 @@ s32 fn_802DB2EC(void *arg0, s32 (*arg1)(s32, s32), s32 arg2, s32 arg3, s32 arg4,
 
 void *fn_802DB3A4(void *arg0, s32 *arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
     extern s32 *fn_802DB6B8(void *, s32, s32, s32, s32);
-    s32 *p = arg1;
-    if (p != 0) {
-        if (0x534E4150 != p[0]) {
-            p = 0;
+    if (arg1 != 0) {
+        s32 magic = 0x534E4150;
+        if (arg1[0] != magic) {
+            arg1 = 0;
         }
     } else {
-        p = fn_802DB6B8(arg0, arg2, arg3, arg4, arg5);
-        if (p != 0) {
-            p[4] = 1;
+        arg1 = fn_802DB6B8(arg0, arg2, arg3, arg4, arg5);
+        if (arg1 != 0) {
+            arg1[4] = 1;
         }
     }
-    return p;
+    return arg1;
 }
 
 void fn_802DB5F0(void *arg0, s32 *arg1) {
