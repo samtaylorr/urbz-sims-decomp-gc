@@ -847,6 +847,12 @@ s32 fn_801BFD84(void *arg0) {
     }
 }
 
+void fn_801BFDF8(void *self, s32 arg1) {
+    u8 *obj = (u8 *)fn_801BFD84(self);
+    CasVtEnt2 *ent = (CasVtEnt2 *)(M2C_FIELD(obj, u8 **, 8) + 0x30);
+    ent->fn(obj + ent->delta, arg1);
+}
+
 void fn_801BFE88(void *self, s32 arg1, s32 arg2) {
     extern void fn_801C02C4(void *, s32);
     u8 *obj;
