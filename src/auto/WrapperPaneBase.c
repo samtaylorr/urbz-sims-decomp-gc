@@ -56,9 +56,16 @@ void fn_800CD09C();
 s64 fn_800C46A4(void *arg0) {
     extern s64 fn_8024E1D0();
     void fn_800C4744(s64 *out);
-    s64 now;
-    s64 t = M2C_FIELD(arg0, s32 *, 0x18) != 0 ? (fn_800C4744(&now), now) : M2C_FIELD(arg0, s64 *, 8);
-    return fn_8024E1D0((t - M2C_FIELD(arg0, s64 *, 0)) * 1000000, M2C_FIELD(arg0, s64 *, 0x10));
+    u64 t;
+    if (M2C_FIELD(arg0, s32 *, 0x18) != 0) {
+        u64 now;
+        fn_800C4744((s64 *)&now);
+        t = now;
+    } else {
+        t = M2C_FIELD(arg0, u64 *, 8);
+    }
+    t -= M2C_FIELD(arg0, u64 *, 0);
+    return fn_8024E1D0(t * 1000000, M2C_FIELD(arg0, s64 *, 0x10));
 }
 
 s32 fn_800C472C(s64 *arg0) {
@@ -248,6 +255,11 @@ void fn_800C5858(void *arg0, f32 farg0) {
     M2C_FIELD(temp_r3, f32 *, 0x34) = farg0;
     fn_8039D8D8(temp_r3);
     M2C_FIELD(temp_r30, s32 *, 4) = (s32) (M2C_FIELD(temp_r30, s32 *, 4) | 2);
+}
+
+void fn_800C589C(void *arg0) {
+    void fn_800CCA68(void *);
+    fn_800CCA68(M2C_FIELD(M2C_FIELD(arg0, void **, 0x70), void **, 0x64));
 }
 
 void fn_800C5FEC(void *arg0, s32 arg1) {
