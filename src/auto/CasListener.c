@@ -77,7 +77,7 @@ void fn_801B7944(void *self) {
     fn_802CB8D4(list);
 }
 
-void fn_801B7C94() {
+void fn_801B7C94(void *arg0, s32 arg1) {
 
 }
 
@@ -484,16 +484,18 @@ void fn_801BBFD4(void *self) {
     }
 }
 
-void fn_801BC014(void *self, void *arg1) {
+void fn_801BC014(u8 *self, s32 *arg1) {
     extern void fn_8031EA2C(void *);
     extern void *fn_8033740C(void *, void *, s32, s32);
     extern u8 lbl_8045BA40[];
-    void fn_801BBFD4(void *);
-    M2C_FIELD(self, s32 *, 0x10) = 0;
-    fn_801BBFD4(self);
-    M2C_FIELD(self, void **, 0x24) = arg1;
-    M2C_FIELD(self, s32 *, 0x30) = M2C_FIELD(arg1, s32 *, 0);
-    M2C_FIELD(self, void **, 0x20) = fn_8033740C(lbl_8045BA40, M2C_FIELD(arg1, void **, 8), 0, 0);
+    *(s32 *)(self + 0x10) = 0;
+    if (*(void **)(self + 0x20) != NULL) {
+        fn_8031EA2C(*(void **)(self + 0x20));
+        *(void **)(self + 0x20) = NULL;
+    }
+    *(s32 **)(self + 0x24) = arg1;
+    *(s32 *)(self + 0x30) = arg1[0];
+    *(void **)(self + 0x20) = fn_8033740C(lbl_8045BA40, (void *)arg1[2], 0, 0);
 }
 
 s32 fn_801BC084(void *arg0) {
@@ -1481,15 +1483,17 @@ void fn_801C95D4(void *arg0, s32 arg1) {
 
     if (arg1 != 0) {
         v = M2C_FIELD(arg0, u32 *, 0x49C);
-        a = v;
+        M2C_FIELD(arg0, u32 *, 0x4FC) = v;
+        a = 0;
         switch (v) {
         case 4:
         case 5:
         case 6:
-            a = 0;
+            break;
+        default:
+            a = v;
             break;
         }
-        M2C_FIELD(arg0, u32 *, 0x4FC) = v;
         fn_801C88DC(arg0, a, lbl_803DE3A8[0]);
         M2C_FIELD(arg0, s32 *, 0x500) = 1;
     } else if (M2C_FIELD(arg0, s32 *, 0x500) != 0) {
