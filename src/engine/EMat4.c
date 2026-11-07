@@ -601,7 +601,7 @@ M2C_UNK fn_802C77D0(s32 arg0, s32 arg1) {
         while (n != 0 && (*p)[n - 1] == arg1) {
             n--;
         }
-        fn_802C6D20(arg0, arg0, n);
+        fn_802C6D20(p, p, n);
     }
     return arg0;
 }
