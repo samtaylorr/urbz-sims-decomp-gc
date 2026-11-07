@@ -311,6 +311,12 @@ void fn_8014846C(void **arg0, s32 arg1) {
     M2C_FIELD(*arg0, s32 *, 0x10) = arg1;
 }
 
+void fn_801484BC(void *self) {
+    u8 *obj = *(u8 **)((u8 *)self + 0x58);
+    u8 *vt = *(u8 **)obj;
+    (*(void (**)(void *, s32))(vt + 0x5C))(obj + *(s16 *)(vt + 0x58), *(s16 *)((u8 *)self + 0x64));
+}
+
 s32 fn_801484F8(char *self) {
     return *(s32 *)(self + 0xC);
 }
