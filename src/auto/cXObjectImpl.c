@@ -396,15 +396,14 @@ s32 fn_80138DBC(void *self) {
     s32 result = 0;
     char *obj = *(char **)((char *)self + 4);
     char *vt = *(char **)(obj + 4);
-    s32 flags = (*(s32 (**)(void *))(vt + 0x364))(obj + *(s16 *)(vt + 0x360));
-    switch (flags & 5) {
+    switch ((*(s32 (**)(void *))(vt + 0x364))(obj + *(s16 *)(vt + 0x360)) & 5) {
+    case 0:
+        break;
     case 1:
         result = 2;
         break;
     case 4:
         result = 8;
-        break;
-    default:
         break;
     }
     if (result != 0) {
