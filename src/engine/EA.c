@@ -297,6 +297,20 @@ s32 fn_802D8F90(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x318) == fn_802D9124();
 }
 
+M2C_UNK fn_802D8FCC(s32 arg0) {
+    extern void *lbl_8049619C;
+    void *it;
+    void *ret = NULL;
+
+    for (it = lbl_8049619C; it != NULL; it = M2C_FIELD(it, void **, 0x334)) {
+        if (M2C_FIELD(it, s32 *, 0x318) == arg0) {
+            ret = it;
+            break;
+        }
+    }
+    return (M2C_UNK) ret;
+}
+
 void fn_802D8FFC(void) {
     M2C_UNK fn_802D8FCC();
     M2C_UNK fn_802D9124();
