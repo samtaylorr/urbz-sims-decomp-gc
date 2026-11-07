@@ -956,6 +956,38 @@ void fn_80112170(void *self, s32 n, void *out) {
     }
 }
 
+s32 fn_8011220C(void *self) {
+    void *p;
+
+    fn_8011216C();
+    p = M2C_FIELD(self, void **, 0x8);
+    if (p != NULL) {
+        return M2C_FIELD(*(void **)p, s32 (**)(void *, s32), 0x74)((u8 *)p + M2C_FIELD(*(void **)p, s16 *, 0x70), -1);
+    }
+    return 0;
+}
+
+s32 fn_80112268(s32 kind) {
+    u8 obj[0x10];
+    s32 r = 0;
+
+    fn_80112010(obj);
+    fn_80112034(obj, 1);
+    switch (kind) {
+    case 0:
+        r = fn_80112104(obj, 0);
+        break;
+    case 1:
+        r = fn_80112104(obj, 1);
+        break;
+    case 2:
+        r = fn_80112104(obj, 2);
+        break;
+    }
+    fn_8011208C(obj, 2);
+    return r;
+}
+
 s32 fn_80112304(s32 arg0) {
     return arg0 >> 8;
 }
@@ -969,13 +1001,10 @@ s32 fn_80112F68(void *arg0) {
 }
 
 s32 fn_80112F88(IntGroupVec *self, s32 n) {
-    if (n > 0) {
-        IntGroup *b = self->begin;
-        if (n <= self->end - b) {
-            return b[n - 1].unk10;
-        }
+    if (n <= 0 || n > self->end - self->begin) {
+        return 0;
     }
-    return 0;
+    return self->begin[n - 1].unk10;
 }
 
 s32 fn_80112FCC(IntGroupVec *self, s32 id) {
@@ -1138,7 +1167,7 @@ void fn_80113DCC(char *self) {
     char *vt;
     fn_800F687C(obj, obj + 8, 0x104);
     *(char **)(self + 0x150) = obj;
-    fn_800F65C4(self + 0x14, obj);
+    fn_800F65C4(self + 0x14, *(char **)(self + 0x150));
     vt = *(char **)(self + 0x10);
     (*(void (**)(void *))(vt + 0x44))(self + *(s16 *)(vt + 0x40));
 }
