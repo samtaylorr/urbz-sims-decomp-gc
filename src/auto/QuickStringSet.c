@@ -159,25 +159,12 @@ static inline void QSSVec1C_Resize(QSSVec1C *v, u32 n, QSSElem1C *val) {
 
 s32 fn_800F5530(char *self, u32 key) {
     volatile u8 buf[0x10];
-    QSSMapNode *y = M2C_FIELD(self, QSSMapNode **, 4);
-    QSSMapNode *x = y->parent;
-    QSSMapNode *j;
-    while (x != 0) {
-        if (!(x->key < key)) {
-            y = x;
-            x = x->left;
-        } else {
-            x = x->right;
-        }
-    }
-    j = M2C_FIELD(self, QSSMapNode **, 4);
-    if (y == j || *(u32 *)&key < y->key) {
-        y = j;
-    }
-    *(QSSMapNode **)((u8 *)buf + 0) = y;
+    QSSMapNode *b;
+    b = QSSMap_Find(self, &key);
+    *(QSSMapNode **)((u8 *)buf + 0) = b;
     *(QSSMapNode **)((u8 *)buf + 8) = M2C_FIELD(self, QSSMapNode **, 4);
     if (QSSMapIter_Ne((QSSMapIter *)((u8 *)buf + 0), (QSSMapIter *)((u8 *)buf + 8))) {
-        return y->value;
+        return b->value;
     }
     return 0;
 }
