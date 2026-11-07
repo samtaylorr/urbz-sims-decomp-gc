@@ -893,7 +893,7 @@ s32 fn_80112F68(void *arg0) {
 
 s32 fn_80112F88(IntGroupVec *self, s32 n) {
     if (n > 0 && n <= self->end - self->begin) {
-        return self->begin[n - 1].unk10;
+        return (self->begin + n)[-1].unk10;
     }
     return 0;
 }
@@ -969,6 +969,12 @@ s32 fn_801132B0(char *self, s32 arg1, s32 result) {
         }
     }
     return result;
+}
+
+void fn_80113324(char *self, char *arg1, s32 n) {
+    void fn_803A2504(char *, s32, char *, s32);
+    fn_8018D8DC(arg1, self + 0x10, 1);
+    fn_803A2504(self, *(s32 *)self, arg1, n);
 }
 
 void *fn_80113378(void *arg0) {
