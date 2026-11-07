@@ -381,18 +381,17 @@ s32 fn_8010EDCC(void *arg0) {
         return q[4];
     }
     t = M2C_FIELD(arg0, void **, 0x18);
+    r = 0;
     if (t != NULL) {
         r = M2C_FIELD(arg0, s32 *, 0xC);
-        if (M2C_FIELD(arg0, s32 *, 0xC) != 0) {
+        if (r != 0) {
             b = (u32)(M2C_FIELD(t, s32 *, 0x14) - 1) <= 0xFFFFFFEFu;
             if (b != 0) {
-                goto zero;
+                r = 0;
             }
         }
-        return r;
     }
-zero:
-    return 0;
+    return r;
 }
 
 s32 fn_8010F020(void) {
@@ -901,10 +900,7 @@ s32 fn_80112F88(IntGroupVec *self, s32 n) {
 s32 fn_80112FCC(IntGroupVec *self, s32 id) {
     IntGroup *fn_80112480(IntGroupVec *, s32, s32);
     IntGroup *it = fn_80112480(self, id, 0);
-    if (it != self->end) {
-        return it->end - it->begin;
-    }
-    return 0;
+    return it != self->end ? it->end - it->begin : 0;
 }
 
 void fn_8011302C(IntGroupVec *self) {
@@ -988,11 +984,11 @@ void *fn_80113378(void *arg0) {
     M2C_FIELD(arg0, void **, 0x138) = lbl_8040EF48;
     M2C_FIELD(arg0, void **, 0x10) = lbl_8040EF60;
     M2C_FIELD(arg0, s32 *, 0x140) = -1;
-    M2C_FIELD(arg0, s32 *, 0x150) = 0;
     M2C_FIELD(arg0, s32 *, 0x13C) = 0;
     M2C_FIELD(arg0, s32 *, 0x144) = 0;
     M2C_FIELD(arg0, s32 *, 0x148) = 0;
     M2C_FIELD(arg0, s32 *, 0x14C) = 0;
+    M2C_FIELD(arg0, s32 *, 0x150) = 0;
     return arg0;
 }
 
