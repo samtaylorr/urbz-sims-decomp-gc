@@ -267,6 +267,56 @@ void *fn_802D85A4(void *arg0) {
     return arg0;
 }
 
+void fn_802D85FC(void *arg0, s32 arg1) {
+    extern void fn_802D20E8(s32);
+    fn_802D8260(arg0, 2);
+    if (arg1 & 1) {
+        fn_802D20E8((s32)arg0);
+    }
+}
+
+void fn_802D8640(void *arg0, s32 arg1) {
+    void fn_80251224(void *, s32, s32, s32, void (*)(void *));
+    s32 ticks = arg1 * (*(u32 *)0x800000F8 / 4000);
+    fn_80251224((char *)arg0 + 0x18, ticks, 0, ticks, fn_802D8580);
+    fn_802D8334(arg0, -1);
+}
+
+void *fn_802D86A8(void *arg0) {
+    extern char lbl_804195F8[];
+    extern void fn_802C5440(void *);
+    s32 fn_802D0AB8();
+    s32 fn_802D0B3C(void);
+    void *fn_802D197C(s32, u32, s32);
+    s32 fn_802DC3C0(void *, s32, s32, s32, s32);
+    s32 heap;
+    void *p;
+
+    fn_802C5440(arg0);
+    M2C_FIELD(arg0, char **, 0x28) = lbl_804195F8;
+    heap = fn_802D0AB8();
+    p = fn_802D197C(heap, 0x800, 0x20);
+    if (p == NULL) {
+        p = (void *)fn_802DC3C0((void *)heap, 0x800, 0x20, 0, 0);
+        if (p == NULL && heap == fn_802D0AB8()) {
+            p = (void *)fn_802DC3C0((void *)fn_802D0B3C(), 0x800, 0x20, 0, 0);
+        }
+    }
+    M2C_FIELD(arg0, void **, 0x34) = p;
+    return arg0;
+}
+
+void fn_802D8750(void *arg0, s32 arg1) {
+    extern char lbl_804195F8[];
+    extern void fn_802C5484(void *, s32);
+    void *fn_802D0AB8(void);
+    void fn_802D1A00(void *, void *);
+
+    M2C_FIELD(arg0, char **, 0x28) = lbl_804195F8;
+    fn_802D1A00(fn_802D0AB8(), M2C_FIELD(arg0, void **, 0x34));
+    fn_802C5484(arg0, arg1);
+}
+
 void fn_802D88C8(void *arg0) {
     M2C_UNK fn_80240EC8(s32);
     void *temp_r9;
@@ -983,6 +1033,18 @@ void fn_802DD020(void *arg0, void *arg1, void *arg2) {
 void fn_802DD03C(void *arg0, void *arg1) {
     M2C_FIELD(M2C_FIELD(arg1, void **, 0x20), void **, 0x24) = M2C_FIELD(arg1, void **, 0x24);
     M2C_FIELD(M2C_FIELD(arg1, void **, 0x24), void **, 0x20) = M2C_FIELD(arg1, void **, 0x20);
+}
+
+char **fn_802DD058(void *arg0, void *arg1) {
+    char *end = (char *)arg0 + 0x44C;
+    char *it;
+
+    for (it = M2C_FIELD(arg0, char **, 0x46C); it != end; it = *(char **)(it + 0x20)) {
+        if ((u32)arg1 >= (u32)it && (u32)arg1 < (u32)(it + *(s32 *)(it + 4))) {
+            return (char **)it;
+        }
+    }
+    return NULL;
 }
 
 void fn_802D21E0(void *);
