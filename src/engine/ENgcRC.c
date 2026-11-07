@@ -77,6 +77,17 @@ void fn_80345FB0(void) {
 
 }
 
+s32 fn_80346B90(void) {
+    extern u8 lbl_8046C400[];
+    u8 *p = lbl_8046C400;
+    if (*(s32 *)(p + 0xA0) != 0 && p[0xA4] == 2) {
+        p[0xA4] = 4;
+        p[0xA5] = 4;
+        return 1;
+    }
+    return 0;
+}
+
 s32 fn_80346E74(s32 arg0, void *arg1) {
     typedef struct { u32 w[4]; } Blk16;
     extern u8 lbl_8046C400[];
@@ -850,16 +861,16 @@ void fn_8034AFD8(void *self, s32 arg) {
     fn_80355168(lbl_8046DF78, &cmd);
 }
 
-void fn_8034B010(void *self, s32 arg) {
-    void fn_803551C0(void *, void *);
-    extern u8 lbl_8046DF78[];
+void fn_8034B010(void *self, u32 arg) {
     struct {
         u8 type;
-        s32 arg;
+        u32 arg;
     } cmd;
-    cmd.arg = arg;
-    cmd.arg = ~cmd.arg;
+    void fn_803551C0(void *, void *);
+    extern u8 lbl_8046DF78[];
+    arg ^= 0xFFFFFFFF;
     cmd.type = 0x13;
+    cmd.arg = arg;
     fn_803551C0(lbl_8046DF78, &cmd);
 }
 
@@ -1106,6 +1117,7 @@ void fn_8034B4AC(void *self, s16 id, s32 arg, f32 *v, f32 f) {
         s32 arg;
         f32 v[4];
         f32 f;
+        s32 pad[2];
     } cmd;
     void fn_8035710C(void *, void *);
     extern u8 lbl_8046DF78[];
