@@ -442,6 +442,14 @@ void fn_801BBFD0(void) {
 
 }
 
+void fn_801BBFD4(void *self) {
+    extern void fn_8031EA2C(void *);
+    if (M2C_FIELD(self, void **, 0x20) != NULL) {
+        fn_8031EA2C(M2C_FIELD(self, void **, 0x20));
+        M2C_FIELD(self, void **, 0x20) = NULL;
+    }
+}
+
 s32 fn_801BC084(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x10) & 1;
 }
