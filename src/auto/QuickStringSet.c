@@ -71,13 +71,12 @@ static inline void QSSVec1C_Destroy(QSSElem1C *first, QSSElem1C *last) {
 }
 
 static inline void QSSVec1C_Erase(QSSVec1C *v, QSSElem1C *first, QSSElem1C *last) {
-    QSSElem1C *src = last;
-    QSSElem1C *dst = first;
-    while (src != v->end) {
-        *dst++ = *src++;
-    }
-    QSSVec1C_Destroy(dst, v->end);
-    v->end = v->end - (last - first);
+    QSSVec1C_Destroy(first, last);
+    v->end = first;
+}
+
+static inline QSSElem1C *QSSVec1C_End(QSSVec1C *v) {
+    return v->end;
 }
 
 static inline void QSSVec1C_Resize(QSSVec1C *v, u32 n, QSSElem1C *val) {
