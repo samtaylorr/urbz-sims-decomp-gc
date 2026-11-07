@@ -1013,6 +1013,11 @@ void fn_801C6790(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 8) = arg1;
 }
 
+s32 fn_801C72C0(void *arg0) {
+    extern const f32 lbl_803DE1C0[];
+    return M2C_FIELD(arg0, f32 *, 0x14) > lbl_803DE1C0[0];
+}
+
 void fn_801C7A44(void *arg0, s32 arg1) {
     void fn_801C601C(s32, s32);
     if (arg1 == 0 && M2C_FIELD(arg0, s32 *, 0x4BC) != 0) {
