@@ -769,6 +769,20 @@ void fn_8034B700(void) {
 
 }
 
+void fn_8034BA60(void *self, s32 a, s32 b, s32 c, s32 d, s32 e, s16 value) {
+    struct {
+        u8 type;
+        s16 value;
+        s32 arg;
+    } cmd;
+    void fn_80356414(void *, void *);
+    extern u8 lbl_8046DF78[];
+    cmd.type = 0x34;
+    cmd.value = value;
+    cmd.arg = a | (b << 2) | (c << 4) | (d << 6) | (e << 8);
+    fn_80356414(lbl_8046DF78, &cmd);
+}
+
 void fn_8034BABC(void *self, s32 arg, s16 value) {
     struct {
         u8 type;
