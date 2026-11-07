@@ -79,10 +79,10 @@ f32 fn_80346EBC(void) {
     extern const f32 lbl_803F430C[];
     u8 *p = lbl_8046C400;
 
-    if (M2C_FIELD(p, s32 *, 0xA0) == 0) {
-        return lbl_803F430C[0];
+    if (M2C_FIELD(p, s32 *, 0xA0) != 0) {
+        return M2C_FIELD(p, f32 *, 0x4C);
     }
-    return M2C_FIELD(p, f32 *, 0x4C);
+    return lbl_803F430C[0];
 }
 
 s32 fn_80346EE4(void) {
