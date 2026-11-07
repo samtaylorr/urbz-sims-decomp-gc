@@ -44,8 +44,28 @@ static inline void *fn_802E5F90_inline(void *arg0, s32 arg1) {
 void fn_802ED364(void *arg0, void *arg1, s32 arg2);
 void fn_802EAF44(void *arg0, void *arg1, s32 arg2, f32 arg3);
 
-typedef struct { f32 v[4]; } E3DRect;
+typedef struct { f32 x, y, z, w; } E3DRect;
 typedef struct { s64 v[8]; } E3DMtx64;
+
+static inline E3DRect *E3DRect_Copy(E3DRect *d, const E3DRect *s) {
+    d->x = s->x;
+    d->y = s->y;
+    d->z = s->z;
+    d->w = s->w;
+    return d;
+}
+
+static inline E3DMtx64 *E3DMtx64_Copy(E3DMtx64 *d, const E3DMtx64 *s) {
+    d->v[0] = s->v[0];
+    d->v[1] = s->v[1];
+    d->v[2] = s->v[2];
+    d->v[3] = s->v[3];
+    d->v[4] = s->v[4];
+    d->v[5] = s->v[5];
+    d->v[6] = s->v[6];
+    d->v[7] = s->v[7];
+    return d;
+}
 
 void fn_802E2390();
 void fn_802E2108(void *self, s64 *src) {
