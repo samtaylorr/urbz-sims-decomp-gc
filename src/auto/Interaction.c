@@ -4,6 +4,7 @@
 extern u8 lbl_8040E9C8[];
 extern void fn_802D20E8(void *);
 void **fn_8010D2E8(void **self) {
+    void fn_8010D388(s32);
     *self = lbl_8040E9C8;
     fn_8010D388((s32)self);
     return self;
@@ -532,6 +533,27 @@ void fn_8010FE40(char *self, s32 flags) {
 
 void fn_801102DC(void) {
 
+}
+
+extern void *lbl_80496648;
+extern void *lbl_80496654;
+extern void *lbl_80496668;
+void fn_801914E4(void *);
+void fn_80190640(void *);
+void fn_801906D4(void *);
+void fn_8018DD8C(void *, void *);
+void fn_8018D8DC(void *, void *, s32);
+void fn_80111A20(s32 *arg0) {
+    arg0[9] = 0;
+    arg0[0] = 0;
+    arg0[1] = 0;
+    arg0[2] = 0;
+    arg0[3] = 0;
+    arg0[4] = 0;
+    arg0[5] = 0;
+    arg0[6] = 0;
+    arg0[7] = 0;
+    arg0[8] = 0;
 }
 
 s32 fn_80111A54(s32 *self) {
