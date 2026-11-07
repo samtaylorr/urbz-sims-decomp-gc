@@ -282,6 +282,13 @@ void fn_801BB8F8(void) {
 
 }
 
+void fn_801BB8FC(void **self) {
+    void fn_80044A38(void *);
+    if (M2C_FIELD(*self, void **, 0x2C) != NULL) {
+        fn_80044A38(M2C_FIELD(*self, void **, 0x2C));
+    }
+}
+
 void fn_801BB92C(void) {
 
 }
