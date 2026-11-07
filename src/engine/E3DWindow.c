@@ -68,6 +68,10 @@ static inline E3DVec3 E3DVec3_make(f32 x, f32 y, f32 z) {
     return r;
 }
 
+static inline E3DVec3 E3DVec3_splat(f32 s) {
+    return E3DVec3_make(s, s, s);
+}
+
 void fn_802ED364(void *arg0, void *arg1, s32 arg2);
 void fn_802EAF44(void *arg0, void *arg1, s32 arg2, f32 arg3);
 
@@ -804,19 +808,20 @@ s32 fn_802EC898(void *arg0, void *arg1) {
     void fn_802E7F64(void *, void *, E3DVec3 *, s32);
     s32 fn_802E34F0(void *, E3DVec3 *);
     void *g = lbl_80494EC4;
-    E3DVec3 v, u, t;
+    s32 ret;
+    E3DVec3 v, u;
+    E3DVec3 *pu;
 
     if (g == NULL) {
-        return 0;
+        ret = 0;
     } else {
-        t.x = lbl_803F0AF8[0];
-        t.z = lbl_803F0AF8[0];
-        t.y = lbl_803F0AF8[0];
-        u = t;
-        v = u;
+        pu = &u;
+        *pu = E3DVec3_make(lbl_803F0AF8[0], lbl_803F0AF8[0], lbl_803F0AF8[0]);
+        v = *pu;
         fn_802E7F64(arg0, arg1, &v, 0);
-        return fn_802E34F0(g, &v);
+        ret = fn_802E34F0(g, &v);
     }
+    return ret;
 }
 
 void fn_802ECD34(void *arg0, void *arg1, void *arg2, void *arg3) {
@@ -825,13 +830,23 @@ void fn_802ECD34(void *arg0, void *arg1, void *arg2, void *arg3) {
     void fn_8032AB10(void *, void *, void *, void *, s32);
     void *p;
     s32 has;
+    void *c;
+    void *e;
+    s32 n;
 
     if (M2C_FIELD(arg0, s32 *, 0x60) != 0) {
         fn_802E77F0(arg0, arg3, lbl_80494DFC);
     }
     p = M2C_FIELD(arg0, void **, 0x20);
     has = p != 0;
-    fn_8032AB10(arg2, arg1, M2C_FIELD(arg0, void **, 0xC), M2C_FIELD(arg0, void **, 0x8), has ? M2C_FIELD(p, s32 *, 0x24) : 0);
+    c = M2C_FIELD(arg0, void **, 0xC);
+    e = M2C_FIELD(arg0, void **, 0x8);
+    if (has) {
+        n = M2C_FIELD(p, s32 *, 0x24);
+    } else {
+        n = 0;
+    }
+    fn_8032AB10(arg2, arg1, c, e, n);
 }
 
 void *fn_802ECFAC(void *arg0, s32 arg1) {
