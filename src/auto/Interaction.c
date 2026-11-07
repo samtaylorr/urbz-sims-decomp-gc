@@ -714,7 +714,6 @@ void fn_801906D4(void *);
 void fn_8018DD8C(void *, void *);
 void fn_8018D8DC(void *, void *, s32);
 s32 *fn_80111A20(s32 *arg0) {
-    arg0[9] = 0;
     arg0[0] = 0;
     arg0[1] = 0;
     arg0[2] = 0;
@@ -724,6 +723,7 @@ s32 *fn_80111A20(s32 *arg0) {
     arg0[6] = 0;
     arg0[7] = 0;
     arg0[8] = 0;
+    arg0[9] = 0;
     return arg0;
 }
 
