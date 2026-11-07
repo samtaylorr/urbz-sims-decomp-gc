@@ -935,6 +935,7 @@ void *fn_802DB3A4(void *arg0, s32 *arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5)
 }
 
 void fn_802DB5F0(void *arg0, s32 *arg1) {
+    extern void fn_802DB9F8(void *, s32 *);
     if (arg1 != 0 && arg1[0] == 0x534E4150) {
         if (arg1[4] != 0) {
             fn_802DB9F8(arg0, arg1);
