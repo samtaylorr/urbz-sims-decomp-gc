@@ -122,6 +122,26 @@ void fn_802E232C(arg0)
     fn_802E2460(arg0);
 }
 
+void fn_802E2390(arg0)
+    void *arg0;
+{
+    extern void fn_802E2460(void *);
+    f32 temp_f10;
+    f32 temp_f7;
+    f32 temp_f8;
+    f32 temp_f9;
+
+    temp_f8 = M2C_FIELD(arg0, f32 *, 0x30);
+    temp_f7 = M2C_FIELD(arg0, f32 *, 0x34);
+    temp_f10 = M2C_FIELD(arg0, f32 *, 0);
+    temp_f9 = M2C_FIELD(arg0, f32 *, 0x14);
+    M2C_FIELD(arg0, f32 *, 0x220) = (M2C_FIELD(arg0, f32 *, 0x230) - temp_f8) / temp_f10;
+    M2C_FIELD(arg0, f32 *, 0x224) = (M2C_FIELD(arg0, f32 *, 0x234) - temp_f7) / temp_f9;
+    M2C_FIELD(arg0, f32 *, 0x228) = (M2C_FIELD(arg0, f32 *, 0x238) - temp_f8) / temp_f10;
+    M2C_FIELD(arg0, f32 *, 0x22C) = (M2C_FIELD(arg0, f32 *, 0x23C) - temp_f7) / temp_f9;
+    fn_802E2460(arg0);
+}
+
 void fn_802E2404(u8 *arg0, u8 *arg1, f32 *arg2) {
     extern const f32 lbl_803F0820[];
     s32 i;
