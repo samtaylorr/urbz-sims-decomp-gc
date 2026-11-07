@@ -962,14 +962,10 @@ s32 fn_80112F88(IntGroupVec *self, s32 n) {
 s32 fn_80112FCC(IntGroupVec *self, s32 id) {
     IntGroup *fn_80112480(IntGroupVec *, s32, s32);
     IntGroup *it = fn_80112480(self, id, 0);
-    IntItem *b;
-    IntItem *e;
     if (it == self->end) {
         return 0;
     }
-    b = it->begin;
-    e = it->end;
-    return e - b;
+    return it->end - it->begin;
 }
 
 void fn_8011302C(IntGroupVec *self) {
