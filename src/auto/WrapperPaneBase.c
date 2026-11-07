@@ -272,6 +272,18 @@ void fn_800C589C(void *arg0) {
     fn_800CCA68(M2C_FIELD(M2C_FIELD(arg0, void **, 0x70), void **, 0x64));
 }
 
+void fn_800C58C4(void *arg0, s32 arg1) {
+    M2C_UNK fn_8039D8D8(void *);
+    u8 *temp_r30;
+    u8 *temp_r3;
+
+    temp_r30 = M2C_FIELD(M2C_FIELD(arg0, void **, 0x70), u8 **, 0x64);
+    temp_r3 = temp_r30 + 0x20;
+    M2C_FIELD(temp_r3, s32 *, 0x30) = arg1;
+    fn_8039D8D8(temp_r3);
+    M2C_FIELD(temp_r30, s32 *, 4) = (s32) (M2C_FIELD(temp_r30, s32 *, 4) | 2);
+}
+
 void fn_800C594C(void *arg0, f32 *arg1) {
     char *obj;
     char *vt;
