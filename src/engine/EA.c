@@ -408,19 +408,21 @@ char *fn_802D9A44(void *arg0, char *arg1) {
 }
 
 u32 fn_802D9AC4(u32 size) {
+    u32 r;
     if ((size >> 6) <= 32) {
-        return (size >> 6) + 0x38;
+        r = (size >> 6) + 0x38;
+    } else if ((size >> 9) <= 20) {
+        r = (size >> 9) + 0x5B;
+    } else if ((size >> 12) <= 10) {
+        r = (size >> 12) + 0x6E;
+    } else if ((size >> 15) <= 4) {
+        r = (size >> 15) + 0x77;
+    } else if ((size >> 18) <= 2) {
+        r = (size >> 18) + 0x7C;
+    } else {
+        r = 0x7E;
     }
-    if ((size >> 9) <= 20) {
-        return (size >> 9) + 0x5B;
-    }
-    if ((size >> 12) <= 10) {
-        return (size >> 12) + 0x6E;
-    }
-    if ((size >> 15) <= 4) {
-        return (size >> 15) + 0x77;
-    }
-    return (size >> 18) <= 2 ? (size >> 18) + 0x7C : 0x7E;
+    return r;
 }
 
 s32 fn_802D9C00(void *arg0, char *arg1) {
@@ -496,16 +498,9 @@ void fn_802D9E8C(char *arg0, s32 arg1) {
 void fn_802D9EAC(char *arg0, s32 arg1) {
     s32 v = *(s32 *)(arg0 + 4);
     s32 size = (v & ~7) - 0x10;
-    s32 next;
-    char *p;
     *(s32 *)(arg0 + 4) = (v & 7) | size;
-    p = arg0 + size;
-    *(s32 *)(arg0 + size) = size;
-    next = size + 8;
-    *(s32 *)(p + 4) = arg1 | 8;
-    p = arg0 + next;
-    *(s32 *)(arg0 + next) = 8;
-    *(s32 *)(p + 4) = 9;
+    EA_SetBlockHeader(arg0, size, size, arg1 | 8);
+    EA_SetBlockHeader(arg0, size + 8, 8, 9);
 }
 
 char *fn_802D9EF0(char *arg0, s32 arg1, s32 arg2) {
