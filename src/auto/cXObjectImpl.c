@@ -214,6 +214,10 @@ void fn_80148988(s32 arg0) {
     fn_80142174(arg0 + 0x28);
 }
 
+void fn_801489AC(void *arg0, s32 i, s16 v) {
+    ((struct { u8 pad[0x16]; s16 a[1]; } *)arg0)->a[i] = v;
+}
+
 s32 fn_801489CC(void) {
     return 0;
 }
