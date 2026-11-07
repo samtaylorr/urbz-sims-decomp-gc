@@ -683,6 +683,10 @@ void fn_801BBFD0(void) {
 
 }
 
+static inline void CasListener_ClearFlags(void *self) {
+    M2C_FIELD(self, s32 *, 0x10) = 0;
+}
+
 static inline void CasListener_ReleaseSound(void *self) {
     extern void fn_8031EA2C(void *);
     if (M2C_FIELD(self, void **, 0x20) != NULL) {
@@ -703,13 +707,12 @@ void fn_801BC014(u8 *self, s32 *arg1) {
     extern void fn_8031EA2C(void *);
     extern void *fn_8033740C(void *, void *, s32, s32);
     extern u8 lbl_8045BA40[];
-    *(s32 *)(self + 0x10) = 0;
-    if (*(void **)(self + 0x20) != NULL) {
-        fn_8031EA2C(*(void **)(self + 0x20));
-        *(void **)(self + 0x20) = NULL;
-    }
+    s32 v;
+    M2C_FIELD(self, s32 *, 0x10) = 0;
+    CasListener_ReleaseSound(self);
+    v = arg1[0];
     *(s32 **)(self + 0x24) = arg1;
-    *(s32 *)(self + 0x30) = arg1[0];
+    *(s32 *)(self + 0x30) = v;
     *(void **)(self + 0x20) = fn_8033740C(lbl_8045BA40, (void *)arg1[2], 0, 0);
 }
 
@@ -1302,22 +1305,22 @@ s32 fn_801C38E4(void *self) {
     CasListIter it;
     CasListIter *pend;
     s32 n;
-    s32 ret;
 
+    it = CasList_Begin(self);
     end = CasList_End(self);
     pend = &end;
     n = 0;
-    for (it = CasList_Begin(self); CasListIter_NotEqual(&it, pend); CasListIter_Inc(&it)) {
+    while (CasListIter_NotEqual(&it, pend)) {
+        CasListIter_Inc(&it);
         n++;
     }
     if (n != 0) {
-        CasListIter_Inc(&begin);
+        CasListIter *pb;
         begin = CasList_Begin(self);
-        ret = 1;
-        if (begin.node->value != 1) {
-            ret = 0;
+        pb = &begin;
+        if (pb->node->value == 1) {
+            return 1;
         }
-        return ret;
     }
     return 0;
 }
@@ -1365,16 +1368,19 @@ void *fn_801C4108(void *self) {
 void fn_801C43AC(char *self) {
     char **vec;
     char **vec2;
-    CasVecIt first;
-    CasVecIt last;
+    char *begin;
+    char *end;
+    char *it;
 
     M2C_FIELD(self, s32 *, 0x10) = 0;
     vec = (char **)(self + 0x14);
-    first.p = vec[0];
-    last.p = vec[1];
+    begin = vec[0];
+    end = vec[1];
     vec2 = (char **)(self + 0x24);
-    CasBufVec_Destroy(first, last);
-    vec[1] = first.p;
+    for (it = begin; it != end; it += 0x10) {
+        CasBuf_Free((char **)it);
+    }
+    vec[1] = begin;
     vec2[1] = M2C_FIELD(self, char **, 0x24);
 }
 
