@@ -684,9 +684,10 @@ void fn_801116E0(void *self) {
 }
 
 void fn_80111754(void *self) {
+    char *obj;
     char *vt;
-    vt = *(char **)lbl_80496648;
-    if (M2C_FIELD(vt, s32 (**)(void *), 0x84)((char *)lbl_80496648 + M2C_FIELD(vt, s16 *, 0x80)) != 0) {
+    obj = lbl_80496648;
+    if (M2C_FIELD(*(char **)obj, s32 (**)(void *), 0x84)(obj + M2C_FIELD(*(char **)obj, s16 *, 0x80)) != 0) {
         vt = *(char **)self;
         M2C_FIELD(vt, void (**)(void *), 0x8C)((char *)self + M2C_FIELD(vt, s16 *, 0x88));
     }
@@ -697,7 +698,8 @@ void fn_801117B8(void *self, void *arg1, s32 arg2) {
     s32 i;
     fn_8018DD8C(arg1, (char *)self + 0x18);
     if (arg2 < 0x5A) {
-        for (i = 0; i < 10; i++) {
+        for (i = 0; i < 5; i++) {
+            fn_8018D8DC(arg1, buf, 1);
             fn_8018D8DC(arg1, buf, 1);
         }
     }
