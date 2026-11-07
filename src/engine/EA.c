@@ -40,7 +40,7 @@ void fn_802D7E5C(M2C_UNK **arg0, s32 arg1) {
 s32 fn_802D7EB0(s32 arg0, s32 arg1) {
     M2C_UNK fn_80261278();
     s32 fn_802C6434(s32, s32);
-    M2C_UNK fn_802C6508(s32, M2C_UNK, M2C_UNK, M2C_UNK, M2C_UNK, void *);
+    s32 fn_802C6508(s32, s32, s32, s32, s32, void (*)());
     void fn_802D87A0();
     void fn_802DFC94();
     s32 temp_r3;
@@ -930,15 +930,15 @@ s32 fn_802DB2EC(void *arg0, s32 (*arg1)(s32, s32), s32 arg2, s32 arg3, s32 arg4,
 
 void *fn_802DB3A4(void *arg0, s32 *arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
     extern s32 *fn_802DB6B8(void *, s32, s32, s32, s32);
-    if (arg1 == 0) {
-        arg1 = fn_802DB6B8(arg0, arg2, arg3, arg4, arg5);
-        if (arg1 != 0) {
-            arg1[4] = 1;
-        }
-    } else if (arg1[0] != 0x534E4150) {
-        arg1 = 0;
+    s32 *p;
+    if (arg1 != 0) {
+        return (arg1[0] == 0x534E4150) ? arg1 : 0;
     }
-    return arg1;
+    p = fn_802DB6B8(arg0, arg2, arg3, arg4, arg5);
+    if (p != 0) {
+        p[4] = 1;
+    }
+    return p;
 }
 
 void fn_802DB5F0(void *arg0, s32 *arg1) {
@@ -1449,8 +1449,36 @@ void fn_802DE0DC(void *self, s32 pos, s32 n) {
     M2C_FIELD(self, s32 *, 4) -= n;
 }
 
+s32 *fn_802DE158(s32 *self, s32 *other) {
+    void fn_802DDDD8(void *, s32, s32);
+    M2C_UNK fn_802482F8();
+    fn_802DDDD8(self, other[1], 0);
+    fn_802482F8(self[0], other[0], ((self[1] + 0x1F) >> 5) * 4);
+    return self;
+}
+
 u32 fn_802DE1B0(void *arg0) {
     return (u32) (M2C_FIELD(arg0, s32 *, 4) + 0x1F) >> 5U;
+}
+
+void fn_802DE1C0(u32 **arg0, u32 **arg1) {
+    u32 n = fn_802DE1B0(arg0);
+    u32 *d = *arg0;
+    u32 *s = *arg1;
+
+    while (n--) {
+        *d++ |= *s++;
+    }
+}
+
+void fn_802DE228(u32 **arg0, u32 **arg1) {
+    u32 n = fn_802DE1B0(arg0);
+    u32 *d = *arg0;
+    u32 *s = *arg1;
+
+    while (n--) {
+        *d++ &= *s++;
+    }
 }
 
 void fn_802DE290(u32 **self, u32 **other) {
@@ -1552,6 +1580,20 @@ f32 fn_802DE6DC(u32 **self, s32 pos) {
     } conv;
     conv.u = fn_802DE634(self, pos, 32);
     return conv.f;
+}
+
+s32 fn_802DE70C(u32 **self, s32 pos, s32 count) {
+    s32 fn_802DDC6C(s32, s32);
+    s32 n;
+
+    if (count == 0) {
+        return 0;
+    }
+    n = count - 1;
+    if (fn_802DDC6C((s32)self, pos + n)) {
+        return fn_802DE634(self, pos, n) | (-1 << n);
+    }
+    return fn_802DE634(self, pos, n);
 }
 
 s32 fn_802DE818(void *self, f32 f) {
