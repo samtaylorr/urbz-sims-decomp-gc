@@ -815,12 +815,14 @@ s32 fn_802EC898(void *arg0, void *arg1) {
     void *g = lbl_80494EC4;
     s32 ret;
     E3DVec3Pair v;
+    E3DVec3 *pb;
 
     if (g == NULL) {
         ret = 0;
     } else {
-        E3DVec3_splat(&v.b, lbl_803F0AF8[0]);
-        v.a = v.b;
+        pb = &v.b;
+        E3DVec3_splat(pb, lbl_803F0AF8[0]);
+        v.a = *pb;
         fn_802E7F64(arg0, arg1, &v, 0);
         ret = fn_802E34F0(g, &v);
     }
