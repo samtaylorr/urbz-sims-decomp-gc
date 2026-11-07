@@ -52,24 +52,6 @@ static inline void QSSVec_Dealloc(void *p, s32 end) {
     }
 }
 
-static inline void QSSVec_DeallocBytes(void *p, const u32 *size) {
-    void fn_802D20E8(void *);
-    void fn_803997AC(void *, u32);
-    if (*size > 0x80) {
-        fn_802D20E8(p);
-    } else {
-        fn_803997AC(p, *size);
-    }
-}
-
-static inline void QSSVec_FreeBytes(QSSVec *v) {
-    void *p = (void *)v->begin;
-    if (p != 0) {
-        u32 size = (u32)((s32)v->alloc.cap - (s32)p) & ~3;
-        QSSVec_DeallocBytes(p, &size);
-    }
-}
-
 static inline void QSSVec_Free(QSSVec *v) {
     void *p = (void *)v->begin;
     if (p != 0) {
@@ -164,11 +146,9 @@ static inline void QSSVec1C_Resize(QSSVec1C *v, u32 n, QSSElem1C *val) {
 s32 fn_800F5530(char *self, u32 key) {
     QSSMapIter it;
     QSSMapIter end;
-    s32 ne;
-    it.node = QSSMap_Find(self, &key);
-    end.node = M2C_FIELD(self, QSSMapNode **, 4);
-    ne = QSSMapIter_Ne(&it, &end);
-    if (ne) {
+    it = QSSMap_FindIt(self, &key);
+    end = QSSMap_End(self);
+    if (QSSMapIter_Ne(&it, &end)) {
         return it.node->value;
     }
     return 0;
@@ -1537,6 +1517,27 @@ s32 fn_800F8964(void *self, u32 idx) {
         }
     }
     return 0;
+}
+
+s32 fn_800F89E0(void *self, u32 idx, s32 val) {
+    struct QSS {
+        s32 data[0xA00];
+        u32 used[0x50];
+        u32 mask[0x50];
+    } *s = self;
+    void fn_800F8CB4(char *);
+    extern char lbl_803D5B58[];
+    if (idx + 2 <= 1) {
+        return 0;
+    }
+    if (idx > 0x9FF) {
+        fn_800F8CB4(lbl_803D5B58);
+    }
+    if (!((s->used[idx >> 5] >> (idx & 31)) & 1)) {
+        return 0;
+    }
+    s->data[idx] = val;
+    return 1;
 }
 
 s32 fn_800F8A60(void *self, u32 idx) {
