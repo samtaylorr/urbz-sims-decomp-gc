@@ -1486,8 +1486,8 @@ s32 fn_802DF984(void *arg0) {
 }
 
 void fn_802DF9E4(s32 arg0) {
-    M2C_UNK fn_802D8DA4(s32, s32);
-    fn_802D8DA4(arg0, fn_802D9124());
+    M2C_UNK fn_802D8DA4(void *, s32);
+    fn_802D8DA4((void *)arg0, fn_802D9124());
 }
 
 void fn_802DFB30(void) {
