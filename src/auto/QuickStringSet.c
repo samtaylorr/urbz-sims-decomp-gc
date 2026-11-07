@@ -64,6 +64,43 @@ static inline void QSSStrBuf_Init(QSSStrBuf *s) {
     void *fn_800F687C(void *, void *, s32);
     fn_800F687C(s, s->buf, 0x104);
 }
+typedef struct QSSMapNode {
+    s32 color;
+    struct QSSMapNode *parent;
+    struct QSSMapNode *left;
+    struct QSSMapNode *right;
+    u32 key;
+    s32 value;
+} QSSMapNode;
+
+typedef struct QSSMapIter { QSSMapNode *node; } QSSMapIter;
+
+static inline QSSMapNode *QSSMap_LowerBound(char *self, const u32 *k) {
+    QSSMapNode *y = M2C_FIELD(self, QSSMapNode **, 4);
+    QSSMapNode *x = y->parent;
+    while (x != 0) {
+        if (!(x->key < *k)) {
+            y = x;
+            x = x->left;
+        } else {
+            x = x->right;
+        }
+    }
+    return y;
+}
+
+static inline QSSMapNode *QSSMap_Find(char *self, const u32 *k) {
+    QSSMapNode *y = QSSMap_LowerBound(self, k);
+    QSSMapNode *end = M2C_FIELD(self, QSSMapNode **, 4);
+    if (y == end || *k < y->key) {
+        y = end;
+    }
+    return y;
+}
+
+static inline s32 QSSMapIter_Ne(QSSMapIter *a, QSSMapIter *b) {
+    return a->node != b->node;
+}
 typedef struct QSSElem1C { u8 b[0x1C]; } QSSElem1C;
 typedef struct QSSVec1C { QSSElem1C *begin; QSSElem1C *end; } QSSVec1C;
 
