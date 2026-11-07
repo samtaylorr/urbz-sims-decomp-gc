@@ -769,7 +769,7 @@ void fn_802DD930(s32 *arg0, s32 arg1) {
     s32 a = arg0[0];
     s32 b = arg0[1];
     s32 has = fn_802DDC6C(a, b) != 0;
-    fn_802DDCAC(a, b, arg1 ? has == 0 : has != 0);
+    fn_802DDCAC(a, b, (arg1 && !has) || (!arg1 && has));
 }
 
 s32 fn_802DD9B0(s32 *arg0) {
@@ -1309,7 +1309,7 @@ void fn_802DFB40(void) {
 }
 
 void fn_802DFB70(void) {
-    M2C_UNK fn_802DFB44(M2C_UNK, M2C_UNK);
+    void fn_802DFB44(s32, s32);
     fn_802DFB44(1, 0xFFFF);
 }
 
