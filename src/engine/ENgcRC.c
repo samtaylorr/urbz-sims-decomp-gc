@@ -987,7 +987,7 @@ M2C_UNK fn_8034D5B4(void *arg0) {
     fn_80268ED0(M2C_FIELD(arg0, s32 *, 0x34C));
     arr = (s32 *)((u8 *)arg0 + 0x344);
     M2C_FIELD(arg0, s32 *, 0x340) = (M2C_FIELD(arg0, s32 *, 0x340) + 1) % 2;
-    M2C_FIELD(arg0, s32 *, 0x34C) = arr[M2C_FIELD(arg0, s32 *, 0x340)];
+    M2C_FIELD(arg0, s32 *, 0x34C) = *(s32 *)((u8 *)arr + M2C_FIELD(arg0, s32 *, 0x340) * 4);
     fn_80268DA0();
     fn_802678D0();
 }
@@ -1291,9 +1291,25 @@ void fn_803560E8(void) {
     }
 }
 
+void fn_80356100(u8 *self, s32 *arg) {
+    void fn_8035613C(void *, s32, s32, s32, s32, s32, s32);
+    fn_8035613C(self, arg[1], arg[2], arg[3], arg[4], arg[5], arg[6]);
+}
+
 void fn_803563F4(u8 *self, u8 *arg) {
     self[*(u16 *)(arg + 2) * 0x40 + 0x569] = *(s32 *)(arg + 4);
     *(s32 *)(self + 0x510) = 1;
+}
+
+void fn_80356414(u8 *self, u8 *arg) {
+    s32 val = *(s32 *)(arg + 4);
+
+    *(s32 *)(self + 0x510) = 1;
+    self[0x565] = (val >> 2) & 3;
+    self[0x564] = val & 3;
+    self[0x566] = (val >> 4) & 3;
+    self[0x567] = (val >> 6) & 3;
+    self[0x568] = val >> 8;
 }
 
 void fn_80273F88(void);
