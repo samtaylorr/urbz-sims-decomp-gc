@@ -329,13 +329,13 @@ s32 fn_801BC090(void *arg0) {
     extern const f32 lbl_803DD000[];
     s32 n;
 
-    if (fn_801BF884(fn_801BFD7C(M2C_FIELD(arg0, s32 *, 0)), 0x17, M2C_FIELD(arg0, s32 *, 4)) == 0 &&
-        (M2C_FIELD(arg0, s32 *, 0x10) & 4)) {
-        n = fn_801BCF54(arg0);
-        M2C_FIELD(arg0, s32 *, 0x58) = n;
-        return (f32)n * lbl_803DD000[0];
+    if (fn_801BF884(fn_801BFD7C(M2C_FIELD(arg0, s32 *, 0)), 0x17, M2C_FIELD(arg0, s32 *, 4)) != 0 ||
+        !(M2C_FIELD(arg0, s32 *, 0x10) & 4)) {
+        return M2C_FIELD(arg0, s32 *, 0x60) * M2C_FIELD(arg0, s32 *, 0x30);
     }
-    return M2C_FIELD(arg0, s32 *, 0x60) * M2C_FIELD(arg0, s32 *, 0x30);
+    n = fn_801BCF54(arg0);
+    M2C_FIELD(arg0, s32 *, 0x58) = n;
+    return (f32)n * lbl_803DD000[0];
 }
 
 void *fn_801BD670(void *arg0, s32 arg1) {
