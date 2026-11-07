@@ -118,23 +118,6 @@ static inline void CasPairInit_Second(CasPairInit *p) {
     p->b = 0;
 }
 
-static inline s32 CasArr_Size(u32 **a) {
-    return a != NULL ? ((s32 *)a)[-1] : 0;
-}
-
-static inline u32 CasTbl_Get(void *self, s32 i) {
-    u32 **arr = *(u32 ***)self;
-    s32 n = 0;
-
-    if (arr != NULL) {
-        n = ((s32 *)arr)[-1];
-    }
-    if (i < n) {
-        return *arr[i];
-    }
-    return 0;
-}
-
 static inline s32 CasNode_Valid(void *n) {
     return n != NULL;
 }
@@ -1272,13 +1255,11 @@ void fn_801C3850(void *self, s32 arg1) {
     extern void fn_803AD18C(void *);
     extern void fn_803997AC(void *, s32);
     extern void fn_802D20E8(void *);
-    CasListIter end[1];
-    CasListIter it[1];
+    CasListIter end;
+    CasListIter it;
 
-    end[0] = CasList_End(self);
-    it[0] = CasList_Begin(self);
-    while (CasListIter_NotEqual(it, end)) {
-        it[0].node = it[0].node->next;
+    end = CasList_End(self);
+    for (it = CasList_Begin(self); CasListIter_NotEqual(&it, &end); CasListIter_Inc(&it)) {
     }
     fn_803AD18C(self);
     if (M2C_FIELD(self, void **, 4) != NULL) {
@@ -1423,7 +1404,7 @@ s32 fn_801C59F0(CasFlags *self, s32 which, s32 row, u32 idx) {
 
 void fn_801C5A4C(CasFlags *self, s32 which, s32 row, u32 idx, s32 on) {
     s32 sel;
-    s32 mask;
+    u32 mask;
 
     if (idx > 0xFF) {
         return;
@@ -1432,7 +1413,8 @@ void fn_801C5A4C(CasFlags *self, s32 which, s32 row, u32 idx, s32 on) {
     if (which != 0) {
         sel = 1;
     }
-    mask = 1 << (idx & 31);
+    mask = 1;
+    mask <<= idx & 31;
     idx >>= 5;
     if (on) {
         self->small[sel][row][idx] |= mask;
