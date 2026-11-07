@@ -80,6 +80,11 @@ s32 fn_802D80A8(char *self) {
     return (*(s32 (**)(char *))(vt + 0x34))(self + *(s16 *)(vt + 0x30));
 }
 
+s32 fn_802D80DC(char *self) {
+    char *vt = *(char **)(self + 0x28);
+    return (*(s32 (**)(char *))(vt + 0x3C))(self + *(s16 *)(vt + 0x38));
+}
+
 void fn_802D8260(void *arg0, s32 arg1) {
     extern void fn_802D6A28(void *, s32);
     extern void fn_802D8328(void *);
