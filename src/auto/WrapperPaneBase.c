@@ -206,6 +206,7 @@ void fn_800C5194(void *arg0) {
     void fn_800CE5A8(void *);
     void fn_800CDCA4(void *);
     void fn_800CEEC4(void *);
+    void fn_800CF02C(void *, char *);
     char *p;
     M2C_FIELD(arg0, s32 *, 0x7C)--;
     fn_800CF02C(arg0, lbl_803D068C);
