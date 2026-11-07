@@ -1330,6 +1330,7 @@ void *fn_801C4040(void *self) {
 void *fn_801C40A0(void *self, s32 arg) {
     void fn_803ABFA8(void *, s32);
     void fn_801C4170(void *, s32);
+    s32 pad[4];
     fn_803ABFA8(self, arg);
     M2C_FIELD(self, s32 *, 0x14) = 0;
     M2C_FIELD(self, s32 *, 0x18) = 0;
@@ -1343,6 +1344,7 @@ void *fn_801C40A0(void *self, s32 arg) {
 void *fn_801C4108(void *self) {
     void fn_803AD1F8(void *);
     void fn_801C4668(void *);
+    s32 pad[4];
     fn_803AD1F8(self);
     M2C_FIELD(self, s32 *, 0x10) = 0;
     CasSlot_InitBoth((s32 *)((u8 *)self + 0x14));
@@ -1421,8 +1423,7 @@ s32 fn_801C59F0(CasFlags *self, s32 which, s32 row, u32 idx) {
 
 void fn_801C5A4C(CasFlags *self, s32 which, s32 row, u32 idx, s32 on) {
     s32 sel;
-    u32 mask;
-    u32 word;
+    s32 mask;
 
     if (idx > 0xFF) {
         return;
@@ -1431,12 +1432,12 @@ void fn_801C5A4C(CasFlags *self, s32 which, s32 row, u32 idx, s32 on) {
     if (which != 0) {
         sel = 1;
     }
-    mask = 1U << (idx & 31);
-    word = idx >> 5;
+    mask = 1 << (idx & 31);
+    idx >>= 5;
     if (on) {
-        self->small[sel][row][word] |= mask;
+        self->small[sel][row][idx] |= mask;
     } else {
-        self->small[sel][row][word] &= ~mask;
+        self->small[sel][row][idx] &= ~mask;
     }
 }
 
