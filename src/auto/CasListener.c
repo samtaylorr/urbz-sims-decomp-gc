@@ -929,29 +929,18 @@ s32 fn_801C62C0(s32 *self) {
 }
 
 void fn_801C62C8(void *self, void *arg1) {
-    extern void *fn_8039AB24(void *);
-    void *it[1];
-    s32 more;
+    CasMapIter it;
     void *vt;
 
-    it[0] = NULL;
+    it.node = NULL;
     vt = M2C_FIELD(arg1, void **, 4);
     M2C_FIELD(vt, void (**)(void *), 0x14)((char *)arg1 + M2C_FIELD(vt, s16 *, 0x10));
-    it[0] = M2C_FIELD(M2C_FIELD(self, void **, 4), void **, 8);
-    for (;;) {
-        more = 1;
-        if (it[0] == M2C_FIELD(self, void **, 4)) {
-            more = 0;
-        }
-        if (!more) {
-            break;
-        }
-        {
-            char *obj = M2C_FIELD(it[0], char **, 0x10);
-            void *vt2 = M2C_FIELD(obj, void **, 4);
-            M2C_FIELD(vt2, void (**)(void *, void *), 0x14)(obj + M2C_FIELD(vt2, s16 *, 0x10), arg1);
-        }
-        it[0] = fn_8039AB24(it[0]);
+    it.node = M2C_FIELD(M2C_FIELD(self, void **, 4), void **, 8);
+    while (CasMapIter_NotEqual(&it, M2C_FIELD(self, void **, 4))) {
+        char *obj = M2C_FIELD(it.node, char **, 0x10);
+        void *vt2 = M2C_FIELD(obj, void **, 4);
+        M2C_FIELD(vt2, void (**)(void *, void *), 0x14)(obj + M2C_FIELD(vt2, s16 *, 0x10), arg1);
+        CasMapIter_Inc(&it);
     }
 }
 
