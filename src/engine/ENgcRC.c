@@ -827,6 +827,7 @@ void fn_8034AF84(void *self, void *arg1) {
     void fn_8035504C(void *, void *);
     s32 ok;
     if (arg1 == NULL) {
+        fn_8035504C(self, arg1);
         return;
     }
     ok = M2C_FIELD(arg1, s32 *, 0x20) == 0x900DBEEF;
@@ -858,9 +859,8 @@ void fn_8034B010(void *self, s32 arg) {
     } cmd;
     void fn_803551C0(void *, void *);
     extern u8 lbl_8046DF78[];
-    arg = ~arg;
-    cmd.arg = arg;
     cmd.type = 0x13;
+    cmd.arg = ~arg;
     fn_803551C0(lbl_8046DF78, &cmd);
 }
 
@@ -898,8 +898,7 @@ void fn_8034B0C0(void *self, s32 arg, u8 value) {
     } cmd;
     void fn_80355294(void *, void *);
     extern u8 lbl_8046DF78[];
-    register s32 inv asm("r4") = ~arg;
-    cmd.arg = inv;
+    cmd.arg = arg ^ -1;
     cmd.type = 0x16;
     cmd.value = value;
     fn_80355294(lbl_8046DF78, &cmd);
@@ -931,17 +930,20 @@ void fn_8034B13C(void *self, s32 arg) {
     fn_803549C0(lbl_8046DF78, &cmd);
 }
 
-void fn_8034B174(void *self, void *q) {
-    struct quat { f32 x, y, z, w; };
+void fn_8034B174(void *self, f32 *q) {
     struct {
         u8 type;
         s32 pad;
-        struct quat q;
+        f32 v[4];
+        s32 pad2[2];
     } cmd;
     void fn_80354A60(void *, void *);
     extern u8 lbl_8046DF78[];
     cmd.type = 0x36;
-    cmd.q = *(struct quat *)q;
+    cmd.v[0] = q[0];
+    cmd.v[1] = q[1];
+    cmd.v[2] = q[2];
+    cmd.v[3] = q[3];
     fn_80354A60(lbl_8046DF78, &cmd);
 }
 
@@ -1022,16 +1024,10 @@ void fn_8034B314(void *self, void *obj) {
     } cmd;
     void fn_803552F4(void *, void *);
     extern u8 lbl_8046DF78[];
-    s32 a;
-    s32 b;
-    a = 0;
-    if (obj) a = M2C_FIELD(obj, s32 *, 0xD8);
-    b = 0;
-    if (obj) b = M2C_FIELD(obj, s32 *, 0xDC);
     cmd.type = 0x18;
-    cmd.a = a;
-    cmd.b = b;
     cmd.obj = obj;
+    cmd.a = obj != NULL ? M2C_FIELD(obj, s32 *, 0xD8) : 0;
+    cmd.b = obj != NULL ? M2C_FIELD(obj, s32 *, 0xDC) : 0;
     fn_803552F4(lbl_8046DF78, &cmd);
 }
 
@@ -1771,12 +1767,17 @@ void fn_803563F4(u8 *self, u8 *arg) {
 
 void fn_80356414(u8 *self, u8 *arg) {
     u32 val = *(u32 *)(arg + 4);
-    u8 e = (val >> 8) & 0xFF;
+    u8 a, b, c, d, e;
 
-    self[0x565] = (val >> 2) & 3;
-    self[0x564] = val & 3;
-    self[0x566] = (val >> 4) & 3;
-    self[0x567] = (val >> 6) & 3;
+    a = val & 3;
+    b = (val >> 2) & 3;
+    c = (val >> 4) & 3;
+    d = (val >> 6) & 3;
+    e = (val >> 8) & 0xFF;
+    self[0x565] = b;
+    self[0x564] = a;
+    self[0x566] = c;
+    self[0x567] = d;
     self[0x568] = e;
     *(s32 *)(self + 0x510) = 1;
 }
