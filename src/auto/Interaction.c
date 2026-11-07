@@ -926,6 +926,28 @@ void fn_8011302C(IntGroupVec *self) {
     }
 }
 
+void fn_801130C8(IntGroupVec *self) {
+    extern void fn_803997AC(void *, u32);
+    IntGroup *begin = self->begin;
+    IntGroup *end = self->end;
+    IntGroup *g;
+
+    for (g = begin; g != end; g++) {
+        IntItem *p;
+        for (p = g->begin; p != g->end; p++) {
+        }
+        if (g->begin != 0) {
+            u32 size = (u32)((g->cap - g->begin) * sizeof(IntItem));
+            if (size > 0x80) {
+                fn_802D20E8(g->begin);
+            } else {
+                fn_803997AC(g->begin, size);
+            }
+        }
+    }
+    self->end = begin;
+}
+
 s32 fn_80113268(char *self, s32 arg1) {
     char *fn_80112480(char *, s32, s32);
     char *p = fn_80112480(self, arg1, 0);
