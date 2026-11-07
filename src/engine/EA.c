@@ -1494,14 +1494,12 @@ void fn_802DE1C0(u32 **arg0, u32 **arg1) {
 }
 
 void fn_802DE228(u32 **arg0, u32 **arg1) {
-    u32 *d;
-    u32 *s;
-    s32 n;
+    s32 n = fn_802DE1B0(arg0);
+    u32 *d = *arg0;
+    u32 *s = *arg1;
+    s32 i;
 
-    n = fn_802DE1B0(arg0);
-    d = *arg0;
-    s = *arg1;
-    for (; n != 0; n--) {
+    for (i = n - 1; i != -1; i--) {
         *d++ &= *s++;
     }
 }
