@@ -1294,6 +1294,24 @@ s32 fn_80112410(char **self, s32 id, s32 n) {
     return 0;
 }
 
+char *fn_80112A74(char *self, s32 arg1, s32 arg2, s32 arg3) {
+    char *fn_80112480(char *, s32, s32);
+    char *p = fn_80112480(self, arg1, 0);
+    char *it;
+    if (p == *(char **)(self + 4)) {
+        return 0;
+    }
+    if (arg3 != 0) {
+        *(s32 *)(p + 0x14) = arg3;
+    }
+    for (it = *(char **)(p + 0); it != *(char **)(p + 4); it += 0x58) {
+        if (*(s32 *)(it + 4) == arg2 && fn_80112304(*(s16 *)(it + 8)) != 0) {
+            return it;
+        }
+    }
+    return 0;
+}
+
 IntItem *fn_80112BFC(IntGroupVec *self, s32 id, s32 key, s32 val) {
     IntGroup *fn_80112480(IntGroupVec *, s32, s32);
     s32 fn_800F6B00(void *, s32);
@@ -1342,7 +1360,7 @@ s32 *fn_80112D1C(s32 arg0, s32 id, s32 n, s32 val) {
         g->unk14 = val;
     }
     if (n > 0 && n <= g->end - g->begin) {
-        return (s32 *)&g->begin[n - 1];
+        return (s32 *)(&g->begin[n] - 1);
     }
     return 0;
 }
