@@ -100,6 +100,7 @@ void fn_800C47CC(void) {
 void fn_800C4E30(void *arg0) {
     void fn_800C5194(void *);
     void fn_8031EA2C(s32);
+    void fn_800CEE00(void *);
     fn_800C5194(arg0);
     fn_800CEE00(arg0);
     if (M2C_FIELD(arg0, s32 *, 0x6C) != 0) {
