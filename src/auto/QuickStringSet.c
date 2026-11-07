@@ -58,6 +58,12 @@ void fn_800F661C(s32 arg0, s32 arg1) {
     fn_800F6A78(arg0, arg1, -1);
 }
 
+void fn_800F665C(s32 arg0, s32 arg1) {
+    void fn_800F6398(s32, s32, s32 *);
+    s32 sp8 = 1;
+    fn_800F6398(arg0, arg1, &sp8);
+}
+
 s32 fn_800F6688(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x10C);
 }
@@ -892,22 +898,22 @@ u16 *fn_800F8244(u16 *s, s32 c) {
     return *s != 0 ? s : 0;
 }
 
-u16 *fn_800F827C(u16 *str, u16 *find) {
+u16 *fn_800F827C(u16 *arg0, u16 *find) {
     s32 len = fn_800F8120(find);
     u16 c = find[0];
-    u16 *p;
+    register u16 *str asm("r31") = arg0;
 
     if (len == 0) {
         return 0;
     }
     do {
-        p = fn_800F8244(str + 1, c);
-        str = p;
-        if (p == 0) {
-            return p;
+        str++;
+        str = fn_800F8244(str, c);
+        if (str == 0) {
+            return str;
         }
-    } while (fn_800F8204(p, find, len) != 0);
-    return p;
+    } while (fn_800F8204(str, find, len) != 0);
+    return str;
 }
 
 s32 fn_800F86C8(void *arg0, s32 arg1) {
