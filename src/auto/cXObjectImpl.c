@@ -269,7 +269,7 @@ u8 fn_801394F8(void *arg0) {
 
     temp_r3 = M2C_FIELD(arg0, void **, 4);
     temp_r9 = M2C_FIELD(temp_r3, void **, 4);
-    return M2C_FIELD(temp_r9, u8 (**)(void *, s32), 0x224)(temp_r3 + M2C_FIELD(temp_r9, s16 *, 0x220), 0x37);
+    return M2C_FIELD(temp_r9, s32 (**)(void *, s32), 0x224)(temp_r3 + M2C_FIELD(temp_r9, s16 *, 0x220), 0x37);
 }
 
 s32 fn_80139538(void *arg0, s32 arg1) {
