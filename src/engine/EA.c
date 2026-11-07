@@ -1236,14 +1236,13 @@ void *fn_802DDA8C(void *arg0, s32 arg1, s32 arg2) {
     extern u8 lbl_80419678[];
     void fn_802DDDC8(void *, s32);
     M2C_UNK fn_802DDDD8(void *, s32, s32);
-    void *self = arg0;
-    M2C_FIELD(self, u8 **, 0x10) = lbl_80419678;
-    M2C_FIELD(self, s32 *, 0) = 0;
-    M2C_FIELD(self, s32 *, 8) = 0;
-    M2C_FIELD(self, s32 *, 4) = 0;
-    fn_802DDDC8(self, arg2);
-    fn_802DDDD8(self, arg1, 0);
-    return self;
+    M2C_FIELD(arg0, u8 **, 0x10) = lbl_80419678;
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    fn_802DDDC8(arg0, arg2);
+    fn_802DDDD8(arg0, arg1, 0);
+    return arg0;
 }
 
 s32 fn_802D0B3C(void);
@@ -1280,9 +1279,9 @@ void fn_802DDC18(void *arg0) {
     s32 *self = arg0;
     char *vt = *(char **)((char *)self + 0x10);
     (*(void (**)(void *, s32))(vt + 0x1C))((char *)self + *(s16 *)(vt + 0x18), self[0]);
-    self[1] = 0;
-    self[2] = 0;
     self[0] = 0;
+    self[2] = 0;
+    self[1] = 0;
 }
 
 s32 fn_802DDC6C(arg0, i)
