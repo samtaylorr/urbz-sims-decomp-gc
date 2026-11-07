@@ -3,6 +3,15 @@
 
 extern s32 lbl_80495A94;
 extern s32 lbl_804943C0;
+extern u8 lbl_8040D4F0[];
+
+static inline void QSS_FreePtr(void **p) {
+    extern void fn_8031EA2C(void *);
+    if (*p != NULL) {
+        fn_8031EA2C(*p);
+        *p = NULL;
+    }
+}
 
 typedef struct QSSAlloc { u8 *unk0; u8 *cap; } QSSAlloc;
 typedef struct QSSVec { u8 *begin; u8 *end; QSSAlloc alloc; } QSSVec;
@@ -1074,23 +1083,14 @@ s32 fn_800F8EA4(void) {
 }
 
 void fn_800F9320(u8 *self, u32 n) {
-    typedef struct { u8 b[0x1C]; } Elem;
-    typedef struct { Elem *begin; Elem *end; } Vec;
-    void fn_8039FED8(Vec *, Elem *, u32, Elem *);
-    Elem tmp;
-    Vec *v = (Vec *)(self + 0x20);
-    Elem *begin = v->begin;
-    u32 size = v->end - begin;
+    void fn_8039FED8(QSSVec1C *, QSSElem1C *, u32, QSSElem1C *);
+    QSSElem1C tmp;
+    QSSVec1C *v = (QSSVec1C *)(self + 0x20);
 
-    if (n < size) {
-        Elem *ne = begin + n;
-        Elem *last = v->end;
-        Elem *p;
-        for (p = ne; p != last; p++) {
-        }
-        v->end = ne;
+    if (n < QSSVec1C_Size(v)) {
+        QSSVec1C_Erase(v, v->begin + n, v->end);
     } else {
-        fn_8039FED8(v, v->end, n - size, &tmp);
+        fn_8039FED8(v, v->end, n - QSSVec1C_Size(v), &tmp);
     }
 }
 
