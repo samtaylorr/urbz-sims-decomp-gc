@@ -706,6 +706,21 @@ void fn_800CD0DC(s32 *self) {
     }
 }
 
+void fn_800CD4B0(void *arg0, s32 arg1, s32 arg2) {
+    extern f32 lbl_803D1268[];
+    void **it;
+
+    if ((M2C_FIELD(arg0, s32 *, 4) & 1) && M2C_FIELD(arg0, f32 *, 0x30) != lbl_803D1268[0]) {
+        for (it = M2C_FIELD(arg0, void ***, 8); it != WPBPtrVec_End((WPBPtrVec *)((u8 *)arg0 + 8)); it++) {
+            void *obj = *it;
+            if (arg2 == ((M2C_FIELD(obj, u32 *, 4) >> 3) & 1)) {
+                void *vt = M2C_FIELD(obj, void **, 0x1C);
+                M2C_FIELD(vt, void (**)(void *, s32, f32), 0x34)((u8 *)obj + M2C_FIELD(vt, s16 *, 0x30), arg1, M2C_FIELD(arg0, f32 *, 0x30));
+            }
+        }
+    }
+}
+
 void fn_800CD55C(void *arg0, s32 id, s32 n) {
     s32 i = 0;
     s32 **it;
@@ -1844,9 +1859,10 @@ void fn_800D0910(u8 *self, s32 i, s32 arg2) {
 void fn_800D0A88(u8 *self, s32 i) {
     void fn_800CE8F4(void *, s32);
     s32 off = i * 4;
-    void **arr = (void **)(self + 0x40);
-    u8 *obj = *(u8 **)((u8 *)arr + off);
-    (*(void (**)(void *))(*(u8 **)(obj + 0x1C) + 0x4C))(obj + *(s16 *)(*(u8 **)(obj + 0x1C) + 0x48));
+    u8 *p = self + 0x40;
+    u8 *obj = *(u8 **)(p + off);
+    p = *(u8 **)(obj + 0x1C);
+    (*(void (**)(void *))(p + 0x4C))(obj + *(s16 *)(p + 0x48));
     fn_800CE8F4(self, i);
 }
 
