@@ -92,9 +92,9 @@ void fn_800F66A0(void (*cb)(void)) {
 }
 
 u16 fn_800F66A8(u32 arg0) {
-    u16 *p = (u16 *)&lbl_804943C0;
-    *(s32 *)p = p[1] * 0x4E6D + 0x3039;
-    return (p[0] & 0x7FFF) % arg0;
+    union { s32 w; u16 h[2]; } *p = (void *)&lbl_804943C0;
+    p->w = p->h[1] * 0x4E6D + 0x3039;
+    return (p->h[0] & 0x7FFF) % arg0;
 }
 
 s32 fn_800F66D8(void) {
@@ -970,6 +970,31 @@ void *fn_800F86F4(void *arg0, s32 arg1) {
 
 s32 fn_800F873C(void) {
     return 0;
+}
+
+void *fn_800F8744(void *arg0, s32 arg1) {
+    s32 temp_r9;
+    s32 var_r9;
+
+    temp_r9 = M2C_FIELD(arg0, s32 *, 0);
+    if ((arg1 > temp_r9) || (arg1 <= (s32) (temp_r9 - 0x80))) {
+        return NULL;
+    }
+    var_r9 = (M2C_FIELD(arg0, s32 *, 4) + arg1) - temp_r9;
+    if (var_r9 < 0) {
+        var_r9 += 0x80;
+    }
+    return arg0 + ((var_r9 * 8) + 8);
+}
+
+void *fn_800F8788(void *arg0) {
+    extern u8 lbl_8040D400[];
+    M2C_UNK fn_80248488(s32, M2C_UNK, M2C_UNK);
+    M2C_FIELD(arg0, void **, 0x2A80) = lbl_8040D400;
+    fn_80248488((s32)arg0, 0, 0x2800);
+    fn_80248488((s32)arg0 + 0x2800, 0, 0x140);
+    fn_80248488((s32)arg0 + 0x2940, 0, 0x140);
+    return arg0;
 }
 
 extern s32 lbl_804943C8;
