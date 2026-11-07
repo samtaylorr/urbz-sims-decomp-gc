@@ -317,6 +317,21 @@ s32 fn_802D9030(void *arg0) {
     return fn_802D9060(arg0) != 0;
 }
 
+void *fn_802D9060(u32 arg0) {
+    extern void *lbl_8049619C;
+    void *it;
+
+    if (arg0 != 0) {
+        for (it = lbl_8049619C; it != NULL; it = M2C_FIELD(it, void **, 0x334)) {
+            u32 base = M2C_FIELD(it, u32 *, 0x31C);
+            if (arg0 >= base && arg0 < base + M2C_FIELD(it, u32 *, 0x320)) {
+                return it;
+            }
+        }
+    }
+    return NULL;
+}
+
 void fn_802D9110(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x32C) = arg1;
 }
