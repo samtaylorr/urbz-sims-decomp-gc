@@ -628,12 +628,13 @@ f32 *fn_802C8304(f32 *m, f32 *v) {
     return m;
 }
 
-void fn_802C839C(f32 *m, f32 *v) {
+f32 *fn_802C839C(f32 *m, f32 *v) {
     s32 i;
 
     for (i = 0; i < 3; i++) {
         m[12 + i] += v[0] * m[i] + v[1] * m[4 + i] + v[2] * m[8 + i];
     }
+    return m;
 }
 
 void *fn_802C846C(void *arg0, s32 arg1) {
@@ -733,6 +734,17 @@ f32 *fn_802C85E8(f32 *m) {
         fn_802C858C(m, i, v);
     }
     return m;
+}
+
+f32 *fn_802C8688(f32 *dst, f32 *src) {
+    s32 i;
+    s32 j;
+    for (i = 0; i < 4; i++) {
+        for (j = 0; j < 4; j++) {
+            dst[i * 4 + j] = src[j * 4 + i];
+        }
+    }
+    return src;
 }
 
 void *fn_802C87C4(void *arg0, void *arg1) {
