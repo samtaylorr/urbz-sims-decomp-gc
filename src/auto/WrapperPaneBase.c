@@ -1970,8 +1970,8 @@ void fn_800D1608(void) {
 }
 void fn_800CC79C(void *arg0) {
     M2C_UNK fn_800CC674(void *, s32, f32);
-    extern f32 lbl_803D10A8;
-    fn_800CC674(arg0, 0, lbl_803D10A8);
+    extern f32 lbl_803D10A8[];
+    fn_800CC674(arg0, 0, lbl_803D10A8[0]);
 }
 
 void fn_800CC938(void *arg0) {
