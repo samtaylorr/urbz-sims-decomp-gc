@@ -542,6 +542,17 @@ s32 fn_802DCB78(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     return ret;
 }
 
+s32 fn_802DCFE0(void *arg0) {
+    void *it;
+    s32 total;
+
+    total = 0;
+    for (it = M2C_FIELD(arg0, void **, 0x46C); it != (char *)arg0 + 0x44C; it = M2C_FIELD(it, void **, 0x20)) {
+        total += M2C_FIELD(it, s32 *, 4);
+    }
+    return total;
+}
+
 u32 fn_802DD014(void *arg0, void *arg1) {
     return M2C_FIELD(arg1, u32 *, -4) & ~7;
 }
