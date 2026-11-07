@@ -206,10 +206,7 @@ s32 fn_800F6048(void *arg0, s32 *arg1) {
     if (fn_800C4568(f, fn_800F69E8(arg1)) == 0) {
         return -0x28;
     }
-    if (fn_800C4550(f, fn_800F69E8(arg1)) == 0) {
-        return -0x27;
-    }
-    return 0;
+    return fn_800C4550(f, fn_800F69E8(arg1)) == 0 ? -0x27 : 0;
 }
 
 void *fn_800F60D4(void *arg0) {
@@ -261,7 +258,7 @@ void fn_800F661C(s32 arg0, s32 arg1) {
 }
 
 void fn_800F665C(s32 arg0, s32 arg1) {
-    void fn_800F6398(s32, s32, s32 *);
+    s32 fn_800F6398(s32, s32, s32 *);
     s32 sp8 = 1;
     fn_800F6398(arg0, arg1, &sp8);
 }
