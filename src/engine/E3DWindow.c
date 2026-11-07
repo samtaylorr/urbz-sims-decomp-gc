@@ -60,14 +60,6 @@ static inline void *fn_802E5F90_inline1000(void *arg0, s32 arg1) {
 
 typedef struct { f32 x, y, z; } E3DVec3;
 
-static inline E3DVec3 E3DVec3_make(f32 x, f32 y, f32 z) {
-    E3DVec3 r;
-    r.x = x;
-    r.z = z;
-    r.y = y;
-    return r;
-}
-
 static inline void E3DVec3_splat(E3DVec3 *d, f32 s) {
     E3DVec3 t;
     t.z = s;
