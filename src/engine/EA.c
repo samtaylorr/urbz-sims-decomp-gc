@@ -206,6 +206,11 @@ s32 fn_802D838C(void *arg0) {
     return 1;
 }
 
+void fn_802D83EC(char *self) {
+    char *vt = *(char **)self;
+    (*(void (**)(char *, s32))(vt + 0x14))(self + *(s16 *)(vt + 0x10), 0);
+}
+
 s32 fn_802D8458(char *self) {
     return *(s32 *)(self + 0xC);
 }
