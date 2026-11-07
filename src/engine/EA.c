@@ -401,6 +401,15 @@ s32 fn_802D8B2C(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x2C);
 }
 
+void *fn_802D8BA8(void *arg0) {
+    extern u8 lbl_80419658[];
+    void fn_802D8CA4(void *);
+    M2C_FIELD(arg0, void **, 0x338) = lbl_80419658;
+    M2C_FIELD(arg0, s32 *, 0x318) = 0;
+    fn_802D8CA4(arg0);
+    return arg0;
+}
+
 void fn_802D8BEC(void *arg0, s32 arg1) {
     extern u8 lbl_80419658[];
     M2C_UNK fn_802D8C4C(void *);
