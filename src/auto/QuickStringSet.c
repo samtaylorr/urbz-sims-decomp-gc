@@ -1478,6 +1478,14 @@ s32 fn_800FD9E8(void **obj) {
 
 extern u8 lbl_8040D4F0[];
 extern u8 lbl_8040D498[];
+
+static inline void QSS_FreePtr(void **p) {
+    extern void fn_8031EA2C(void *);
+    if (*p != NULL) {
+        fn_8031EA2C(*p);
+        *p = NULL;
+    }
+}
 void **fn_800FDA44(void **self) {
     fn_800FC1AC(self);
     self[4] = 0;
