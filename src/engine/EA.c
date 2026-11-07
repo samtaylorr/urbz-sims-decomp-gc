@@ -596,6 +596,25 @@ void *fn_802D9060(u32 arg0) {
     return NULL;
 }
 
+s32 fn_802D90A4(u32 arg0, u32 arg1) {
+    extern void *lbl_8049619C;
+    void *it;
+
+    if (arg0 != 0) {
+        for (it = lbl_8049619C; it != NULL; it = M2C_FIELD(it, void **, 0x334)) {
+            u32 end = arg0 + arg1;
+            u32 base = M2C_FIELD(it, u32 *, 0x31C);
+            if (end > base) {
+                u32 top = base + M2C_FIELD(it, u32 *, 0x320);
+                if (arg0 < top) {
+                    return arg0 >= base && end <= top;
+                }
+            }
+        }
+    }
+    return 1;
+}
+
 void fn_802D9110(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x32C) = arg1;
 }
@@ -610,6 +629,13 @@ void fn_802D9120(void) {
 
 s32 fn_802D9124(void) {
     return fn_80258544();
+}
+
+s32 fn_802D9144(char *str, u32 size, const char *fmt, ...) {
+    s32 fn_80246CB8(char *, u32, const char *, void *);
+    va_list ap;
+    va_start(ap, fmt);
+    return fn_80246CB8(str, size, fmt, ap);
 }
 
 s32 fn_802D91D4(void *arg0, s32 arg1) {
