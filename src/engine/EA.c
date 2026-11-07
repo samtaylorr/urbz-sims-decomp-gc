@@ -432,6 +432,34 @@ s32 fn_802D9E44(void *arg0, s32 arg1) {
     return temp_r3;
 }
 
+void fn_802D9E8C(char *arg0, s32 arg1) {
+    char *p;
+    *(s32 *)(arg0 + arg1) = arg1;
+    p = arg0 + arg1;
+    *(s32 *)(p + 0xC) = 9;
+    *(s32 *)(p + 8) = 8;
+    *(s32 *)(p + 4) = 8;
+}
+
+void fn_802D9EAC(char *arg0, s32 arg1) {
+    s32 v = *(s32 *)(arg0 + 4);
+    s32 size = (v & ~7) - 0x10;
+    char *p;
+    *(s32 *)(arg0 + 4) = (v & 7) | size;
+    p = arg0 + size;
+    *(s32 *)(arg0 + size) = size;
+    *(s32 *)(p + 4) = arg1 | 8;
+    *(s32 *)(arg0 + size + 8) = 8;
+    *(s32 *)(arg0 + size + 8 + 4) = 9;
+}
+
+char *fn_802D9EF0(char *arg0, s32 arg1, s32 arg2) {
+    *(s32 *)(arg0 + 4) = arg1 | arg2;
+    *(s32 *)(arg0 + 0) = 0;
+    fn_802D9EAC(arg0, 0);
+    return arg0;
+}
+
 void fn_802DB018(void);
 void fn_802DAFB0(void) {
     fn_802DB018();
