@@ -264,6 +264,16 @@ void fn_802C6CCC(s32 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     }
 }
 
+void fn_802C6D94(s32 *self, s32 out, s32 n) {
+    M2C_UNK fn_802C69B0(s32, s32);
+    s32 r = fn_802C6A5C(self) - n;
+
+    if (r < 0) {
+        r = 0;
+    }
+    fn_802C69B0(out, *self + r);
+}
+
 char **fn_802C6DE4(char **arg0, const char *arg1) {
     M2C_UNK fn_802482F8();
     s32 fn_80248808(const char *);
