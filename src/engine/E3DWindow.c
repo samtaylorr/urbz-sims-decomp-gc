@@ -41,6 +41,25 @@ static inline void *fn_802E5F90_inline(void *arg0, s32 arg1) {
     return NULL;
 }
 
+static inline void *fn_802E5F90_inline1000(void *arg0, s32 arg1) {
+    s32 i;
+
+    if (arg1 & 0x103F) {
+        if (fn_802E5F90_flags(arg0, M2C_FIELD(arg0, s32 *, 4)) & 0x1000) {
+            return M2C_FIELD(arg0, char **, 0x40) + M2C_FIELD(arg0, s32 *, 4) * 0xB0;
+        }
+        return NULL;
+    }
+    for (i = M2C_FIELD(arg0, s32 *, 0x34); i < M2C_FIELD(arg0, s32 *, 0x3C); i++) {
+        if ((arg1 >> i) & 1) {
+            return M2C_FIELD(arg0, char **, 0x40) + i * 0xB0;
+        }
+    }
+    return NULL;
+}
+
+typedef struct { f32 x, y, z; } E3DVec3;
+
 void fn_802ED364(void *arg0, void *arg1, s32 arg2);
 void fn_802EAF44(void *arg0, void *arg1, s32 arg2, f32 arg3);
 
@@ -84,10 +103,19 @@ void fn_802E2108(void *self, s64 *src) {
     fn_802E3CB4(self);
 }
 
-void fn_802E21C8(void *arg0, s32 arg1) {
+void fn_802E21C8(void *arg0, void *arg1) {
     extern void fn_802C8A34(void *);
     extern void fn_802E3CB4(void *);
-    E3DMtx64_Copy((E3DMtx64 *)((char *)arg0 + 0xE0), (E3DMtx64 *)arg1);
+    s64 *src = (s64 *)arg1;
+    s64 *dst = (s64 *)((char *)arg0 + 0xE0);
+    dst[0] = src[0];
+    dst[1] = src[1];
+    dst[2] = src[2];
+    dst[3] = src[3];
+    dst[4] = src[4];
+    dst[5] = src[5];
+    dst[6] = src[6];
+    dst[7] = src[7];
     fn_802C8A34((char *)arg0 + 0xA0);
     fn_802E3CB4(arg0);
 }
@@ -104,9 +132,14 @@ void fn_802E2288(s32 arg0) {
     fn_802E3CB4(arg0);
 }
 
-void fn_802E22D0(void *arg0, s32 arg1) {
+void fn_802E22D0(void *arg0, f32 *arg1) {
     extern void fn_8030A460(void *);
-    E3DRect_Copy((E3DRect *)((char *)arg0 + 0x220), (E3DRect *)arg1);
+    void fn_802E232C(void *);
+    f32 *dst = (f32 *)((char *)arg0 + 0x220);
+    dst[0] = arg1[0];
+    dst[1] = arg1[1];
+    dst[2] = arg1[2];
+    dst[3] = arg1[3];
     fn_8030A460(arg0);
     fn_802E232C(arg0);
 }
