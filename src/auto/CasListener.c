@@ -272,7 +272,7 @@ s32 fn_801B7EC8(void *arg0, s32 idx) {
         n = ((s32 *)p)[-1];
     }
     if (idx < n) {
-        s32 off = idx * 4;
+        register s32 off asm("r9") = idx * 4;
         p = *(void **)((char *)p + off);
         return *(s32 *)p;
     }
