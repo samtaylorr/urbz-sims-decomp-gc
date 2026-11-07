@@ -922,10 +922,10 @@ void fn_802C85B4(f32 *m, s32 col, f32 *in) {
 
 f32 *fn_802C85E8(f32 *m) {
     void fn_8025FB2C(f32 *, f32 *);
-    s32 i;
     f32 v[4];
-    f32 *p = v;
-    for (i = 0; i <= 2; i++) {
+    f32 *p;
+    s32 i;
+    for (i = 0, p = v; i <= 2; i++) {
         fn_802C8530(m, i, v);
         if (v[0] != 0.0f || p[1] != 0.0f || p[2] != 0.0f) {
             fn_8025FB2C(p, p);
@@ -1058,23 +1058,23 @@ f32 *fn_802C89C8(f32 *m, f32 angle) {
     return m;
 }
 
-void fn_802C8D24(f32 (*dst)[4], f32 (*src)[4]) {
+void fn_802C8D24(f32 *dst, f32 (*src)[4]) {
     extern f32 lbl_803F00B8[];
     s32 i;
     s32 j;
     f32 *t = src[3];
-    f32 *d3 = dst[3];
-    f32 *d1 = dst[1];
-    f32 *d2 = dst[2];
+    f32 *d3 = dst + 12;
+    f32 *d1 = dst + 4;
+    f32 *d2 = dst + 8;
     for (i = 0; i <= 2; i++) {
         for (j = 0; j < 3; j++) {
-            dst[j][i] = src[i][j];
+            dst[j * 4 + i] = src[i][j];
         }
     }
     for (j = 0; j < 3; j++) {
-        d3[j] = -(src[3][0] * dst[0][j] + t[1] * d1[j] + t[2] * d2[j]);
+        d3[j] = -(src[3][0] * dst[j] + t[1] * d1[j] + t[2] * d2[j]);
     }
-    dst[3][3] = lbl_803F00B8[0];
+    dst[15] = lbl_803F00B8[0];
 }
 
 f32 *fn_802C8ED0(f32 *m, f32 angle) {
@@ -1162,19 +1162,14 @@ f32 *fn_802C9624(f32 *m, f32 *v, s32 unused, f32 *axis) {
     return m;
 }
 
-void fn_802C9670(f32 (*m)[4]) {
+void fn_802C9670(f32 *m) {
     int i, j;
     f32 v;
 
     for (i = 0; i < 4; i++) {
         for (j = 0; j < 4; j++) {
-            v = m[i][j];
-            if (v < -32767.0f) {
-                v = -32767.0f;
-            } else if (v > 32767.0f) {
-                v = 32767.0f;
-            }
-            m[i][j] = v;
+            v = m[i * 4 + j];
+            m[i * 4 + j] = v < -32767.0f ? -32767.0f : (v > 32767.0f ? 32767.0f : v);
         }
     }
 }
