@@ -1001,10 +1001,9 @@ s32 fn_80112F68(void *arg0) {
 }
 
 s32 fn_80112F88(IntGroupVec *self, s32 n) {
-    if (n > 0) {
-        if (n <= self->end - self->begin) {
-            return self->begin[n - 1].unk10;
-        }
+    if (n > 0 && n <= self->end - self->begin) {
+        IntGroup *g = &self->begin[n];
+        return g[-1].unk10;
     }
     return 0;
 }
@@ -1283,14 +1282,14 @@ void *fn_80116904(void *self) {
     return self;
 }
 
-void *fn_801169A0(void *self, s32 arg1) {
+void *fn_801169A0(void *self, void *arg1) {
     extern u8 lbl_8040F088[];
     void fn_800F160C(void *);
-    void fn_801167DC(void *, s32);
+    void fn_801167DC(void *, void *);
     M2C_FIELD(self, u8 **, 0x54) = lbl_8040F088;
     fn_800F160C((u8 *)self + 0x34);
-    M2C_FIELD(self, void **, 0x24) = 0;
     M2C_FIELD(self, s32 *, 0x20) = 0;
+    M2C_FIELD(self, s32 *, 0x24) = 0;
     fn_801167DC(self, arg1);
     return self;
 }
