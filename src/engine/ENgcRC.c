@@ -1083,6 +1083,18 @@ void fn_8034F440(void *arg0, s32 arg1) {
     fn_8034F534(arg0, &msg);
 }
 
+void fn_8034F470(void *arg0, s32 arg1, s32 arg2) {
+    struct {
+        s32 type;
+        s32 a;
+        s32 b;
+    } msg;
+    msg.a = arg1;
+    msg.type = 2;
+    msg.b = arg2;
+    fn_8034F58C(arg0, &msg);
+}
+
 void fn_8034F4A4(void *arg0, s32 arg1) {
     M2C_UNK fn_8034F5EC(void *, void *);
     struct {
