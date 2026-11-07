@@ -87,6 +87,11 @@ static inline void *CasSlot_InitBoth(s32 *p) {
     return CasSlot_Init(p);
 }
 
+static inline CasListIter *CasListIter_Inc(CasListIter *it) {
+    it->node = it->node->next;
+    return it;
+}
+
 static inline CasListIter CasList_End(void *self) {
     CasListIter r;
     r.node = M2C_FIELD(self, CasListNode **, 4);
@@ -1419,6 +1424,7 @@ s32 fn_801C59F0(CasFlags *self, s32 which, s32 row, u32 idx) {
 void fn_801C5A4C(CasFlags *self, s32 which, s32 row, u32 idx, s32 on) {
     s32 sel;
     u32 mask;
+    u32 word;
 
     if (idx > 0xFF) {
         return;
@@ -1428,11 +1434,11 @@ void fn_801C5A4C(CasFlags *self, s32 which, s32 row, u32 idx, s32 on) {
         sel = 1;
     }
     mask = 1U << (idx & 31);
-    idx >>= 5;
+    word = idx >> 5;
     if (on) {
-        self->small[sel][row][idx] |= mask;
+        self->small[sel][row][word] |= mask;
     } else {
-        self->small[sel][row][idx] &= ~mask;
+        self->small[sel][row][word] &= ~mask;
     }
 }
 
