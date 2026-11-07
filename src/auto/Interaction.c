@@ -945,7 +945,8 @@ void fn_801100B8(void *self) {
         fn_8015121C(lbl_80496668);
     }
     lbl_80496668 = NULL;
-    fn_8019A0CC(lbl_80496648);
+    p = lbl_80496648;
+    fn_8019A0CC(p);
     lbl_80496648 = NULL;
     M2C_FIELD(self, s32 *, 0x14) = 0;
     fn_801AA45C();
@@ -1577,24 +1578,31 @@ void fn_80113DCC(char *self) {
 }
 
 s32 fn_80113E34(char *self) {
+    typedef struct {
+        s32 a;
+        s32 b;
+        char data[0x104];
+    } Str;
     extern void fn_800F687C(void *, void *, s32);
     extern void fn_800F6A78(void *, void *, s32);
     extern void fn_802D20E8(void *);
     extern s32 fn_800F68BC(void *);
-    char buf[0x110];
-    char *b = buf;
+    Str str;
+    Str *b = &str;
     void *s = *(void **)(self + 0x150);
-    fn_800F687C(b, b + 8, 0x104);
+    s32 ret;
+    fn_800F687C(b, b->data, 0x104);
     fn_800F6A78(b, s, -1);
     fn_802D20E8(*(void **)(self + 0x150));
     *(void **)(self + 0x150) = 0;
     if (fn_800F68BC(b) != 0) {
         char *vt = *(char **)(self + 0x10);
-        (*(void (**)(void *, void *))(vt + 0x2C))(self + *(s16 *)(vt + 0x28), b);
+        ret = (*(s32 (**)(void *, void *))(vt + 0x2C))(self + *(s16 *)(vt + 0x28), b);
         *(s32 *)(self + 0x140) = 0;
-        return 0;
+    } else {
+        ret = -0x32;
     }
-    return -0x32;
+    return ret;
 }
 
 s32 fn_80114000(void *arg0) {
@@ -1614,6 +1622,20 @@ s32 fn_8011402C(s32 arg0) {
 void fn_80114318(void *obj, s32 arg1, s32 arg2, s32 arg3) {
     char *vt = *(char **)((char *)obj + 0x10);
     (*(void (**)(void *, s32, s32, s32, s32))(vt + 0x9C))((char *)obj + *(s16 *)(vt + 0x98), arg1, arg2, 0, arg3);
+}
+
+void fn_80114B50(char *self) {
+    void fn_8018FA84(char *, s32);
+    s32 fn_8018FA7C(char *);
+    char *vt = *(char **)(self + 0x10);
+    if ((*(s32 (**)(void *))(vt + 0x64))(self + *(s16 *)(vt + 0x60)) == 0) {
+        fn_8018FA84(self, -0x31);
+    } else {
+        fn_8018FA84(self, 0);
+    }
+    if (fn_8018FA7C(self) == 0) {
+        fn_8018FA84(self, -0x5F);
+    }
 }
 
 void fn_80114EE4(char *self, s32 a1, s32 a2, s32 a3, s32 a4, s32 a5) {
