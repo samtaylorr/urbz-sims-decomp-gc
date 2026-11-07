@@ -221,12 +221,12 @@ void *fn_800F60D4(void *arg0) {
     void fn_800F687C(void *, void *, s32);
     M2C_FIELD(arg0, void **, 0x124) = lbl_8040D160;
     fn_800F687C(arg0, (u8 *)arg0 + 8, 0x104);
+    M2C_FIELD(arg0, s32 *, 0x110) = 0;
     M2C_FIELD(arg0, s32 *, 0x10C) = 0;
     M2C_FIELD(arg0, s32 *, 0x114) = 0;
-    M2C_FIELD(arg0, s32 *, 0x118) = 0;
-    M2C_FIELD(arg0, s32 *, 0x110) = 0;
-    M2C_FIELD(arg0, s32 *, 0x11C) = 0;
     M2C_FIELD(arg0, s32 *, 0x120) = 0;
+    M2C_FIELD(arg0, s32 *, 0x11C) = 0;
+    M2C_FIELD(arg0, s32 *, 0x118) = 0;
     return arg0;
 }
 
