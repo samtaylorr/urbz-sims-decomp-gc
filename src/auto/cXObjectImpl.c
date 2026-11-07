@@ -594,8 +594,8 @@ void fn_80148704(void *arg0) {
 }
 
 void fn_80148728(void *self, s32 arg1) {
-    char *obj = M2C_FIELD(self, char *, 4);
-    char *vt = M2C_FIELD(obj, char *, 4);
+    char *obj = *(char **)((char *)self + 4);
+    char *vt = *(char **)(obj + 4);
     char *r = (*(char *(**)(char *))(vt + 0x18C))(obj + *(s16 *)(vt + 0x188));
     (*(void (**)(char *, s32))(*(char **)r + 0x74))(r + *(s16 *)(*(char **)r + 0x70), arg1);
 }
@@ -903,12 +903,12 @@ s32 fn_80149248(void *self) {
 }
 
 s32 fn_80149284(void *arg0) {
-    if ((*(s32 (**)(void *))(*(u8 **)(M2C_FIELD(arg0, u8 *, 4) + 4) + 0x434))(M2C_FIELD(arg0, u8 *, 4) + *(s16 *)(*(u8 **)(M2C_FIELD(arg0, u8 *, 4) + 4) + 0x430)) != 0) {
-        u8 *obj = M2C_FIELD(arg0, u8 *, 4);
+    if ((*(s32 (**)(void *))(*(u8 **)(M2C_FIELD(arg0, u8 **, 4) + 4) + 0x434))(M2C_FIELD(arg0, u8 **, 4) + *(s16 *)(*(u8 **)(M2C_FIELD(arg0, u8 **, 4) + 4) + 0x430)) != 0) {
+        u8 *obj = M2C_FIELD(arg0, u8 **, 4);
         u8 *vt = *(u8 **)(obj + 4);
         return ((*(u32 (**)(void *))(vt + 0x35C))(obj + *(s16 *)(vt + 0x358)) & 2) == 0;
     }
-    return ((*(u32 (**)(void *))(*(u8 **)(M2C_FIELD(arg0, u8 *, 4) + 4) + 0x35C))(M2C_FIELD(arg0, u8 *, 4) + *(s16 *)(*(u8 **)(M2C_FIELD(arg0, u8 *, 4) + 4) + 0x358)) >> 4) & 1;
+    return ((*(u32 (**)(void *))(*(u8 **)(M2C_FIELD(arg0, u8 **, 4) + 4) + 0x35C))(M2C_FIELD(arg0, u8 **, 4) + *(s16 *)(*(u8 **)(M2C_FIELD(arg0, u8 **, 4) + 4) + 0x358)) >> 4) & 1;
 }
 
 s32 fn_80149318(void *arg0) {
