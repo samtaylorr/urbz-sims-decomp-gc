@@ -71,8 +71,8 @@ s32 fn_8010D590(void **self) {
 void *fn_8010D7B8(void **self);
 void fn_8010D5F8(void) {
     void *fn_802D1FC8(s32);
-    extern void *lbl_80495AF8;
-    lbl_80495AF8 = fn_8010D7B8(fn_802D1FC8(0x41c));
+    extern s32 lbl_80495AF8;
+    lbl_80495AF8 = (s32)fn_8010D7B8(fn_802D1FC8(0x41c));
 }
 
 void fn_8010D628(s32 *self, s32 value) {
@@ -112,11 +112,11 @@ void *fn_8010D7B8(void **self) {
     *self = lbl_8040EA18;
     fn_80248488((s32)self + 4, 0, 0x400);
     self[260] = (void *)1;
-    self[261] = 0;
-    self[262] = 0;
     self[257] = 0;
     self[258] = 0;
     self[259] = 0;
+    self[261] = 0;
+    self[262] = 0;
     return self;
 }
 
