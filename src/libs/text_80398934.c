@@ -698,8 +698,9 @@ void fn_80398A00(void) {
     extern u32 lbl_80496624;
     extern u8 *lbl_80496628;
     extern s32 lbl_8049662C;
-    extern s32 lbl_80496630;
-    s32 level = fn_8025465C();
+    extern u32 lbl_80496630;
+    s32 level;
+    level = fn_8025465C();
     fn_803996D8();
     fn_80399768();
     fn_803990E8();
@@ -748,8 +749,8 @@ u32 fn_80398C58(void *arg0) {
     return (M2C_FIELD(fn_803990B4(arg0), u32 *, 4) & 0x0FFFF000) + 0x80000000;
 }
 
-u8 fn_80398CA4(u32 i) {
-    u8 *p = lbl_80496628;
+u8 fn_80398CA4(s32 i) {
+    register u8 *p asm("r4") = lbl_80496628;
     return p[i];
 }
 
@@ -771,9 +772,9 @@ void fn_80398CD8(void (*cb)(void)) {
 void fn_80398D1C(void) {
     extern s32 fn_80251874(void);
     extern void fn_80251884(s32);
-    s32 p = fn_80251874();
-    lbl_80496628 = (u8 *)p;
-    fn_80251884(p + 0x1000);
+    u8 pad[8];
+    lbl_80496628 = (u8 *)fn_80251874();
+    fn_80251884((s32)lbl_80496628 + 0x1000);
     fn_80398EE4();
 }
 
