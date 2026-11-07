@@ -11,6 +11,33 @@ void fn_801906D4(void *);
 void fn_8018DD8C(void *, void *);
 void fn_8018D8DC(void *, void *, s32);
 extern void fn_802D20E8(void *);
+
+typedef struct {
+    u8 pad0[4];
+    s32 unk4;
+    s32 unk8;
+} IntObj;
+
+typedef struct {
+    u8 pad0[0xc];
+    IntObj *obj;
+    u8 pad10[0x48];
+} IntItem;
+
+typedef struct {
+    IntItem *begin;
+    IntItem *end;
+    s32 unk8;
+    IntItem *cap;
+    s32 unk10;
+    s32 unk14;
+} IntGroup;
+
+typedef struct {
+    IntGroup *begin;
+    IntGroup *end;
+} IntGroupVec;
+
 void **fn_8010D2E8(void **self) {
     void fn_8010D388(s32);
     *self = lbl_8040E9C8;
@@ -340,6 +367,7 @@ s32 fn_8010EDCC(void *arg0) {
     extern void *lbl_80494FA4;
     void *t;
     s32 r;
+    s32 b;
 
     if (M2C_FIELD(arg0, s32 *, 0x1C) != 0) {
         s32 q[6];
@@ -357,8 +385,11 @@ s32 fn_8010EDCC(void *arg0) {
         return 0;
     }
     r = M2C_FIELD(arg0, s32 *, 0xC);
-    if (r != 0 && (u32)(M2C_FIELD(t, s32 *, 0x14) - 1) <= 0xFFFFFFEFu) {
-        r = 0;
+    if (r != 0) {
+        b = (u32)(M2C_FIELD(t, s32 *, 0x14) - 1) <= 0xFFFFFFEFu;
+        if (b != 0) {
+            return 0;
+        }
     }
     return r;
 }
@@ -803,17 +834,21 @@ void *fn_80112010(void *self) {
 }
 
 void fn_80112034(void *self, s32 id) {
-    extern s32 lbl_803F63D4[][2];
-    s32 i;
-    for (i = 0; i <= 11; i++) {
-        if (lbl_803F63D4[i][0] == id) {
-            break;
-        }
+    extern struct { s32 id; s32 val; } lbl_803F63D4[];
+    s32 i = 0;
+    if (lbl_803F63D4[i].id == id) {
+        goto found;
     }
-    if (i <= 11) {
-        M2C_FIELD(self, s32 **, 0xC) = lbl_803F63D4[i];
-        M2C_FIELD(self, s32 *, 0x4) = id;
+next:
+    if (++i > 11) {
+        return;
     }
+    if (lbl_803F63D4[i].id != id) {
+        goto next;
+    }
+found:
+    M2C_FIELD(self, void **, 0xC) = &lbl_803F63D4[i];
+    M2C_FIELD(self, s32 *, 0x4) = id;
 }
 
 void fn_8011208C(void *self, s32 flags) {
