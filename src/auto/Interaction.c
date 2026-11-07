@@ -71,12 +71,9 @@ s32 fn_8010D590(void **self) {
 void *fn_8010D7B8(void **self);
 void fn_8010D5F8(void) {
     void *fn_802D1FC8(s32);
-    extern void *lbl_80495AF8;
-    void *p = fn_802D1FC8(0x41c);
-    if (p != 0) {
-        p = fn_8010D7B8(p);
-    }
-    lbl_80495AF8 = p;
+    extern s32 lbl_80495AF8;
+    fn_802D1FC8(0x41c);
+    lbl_80495AF8 = ((s32 (*)())fn_8010D7B8)();
 }
 
 void fn_8010D628(s32 *self, s32 value) {
@@ -177,6 +174,16 @@ void fn_8010DACC(void *arg0, void *arg1) {
     }
     if ((s32) M2C_FIELD(arg0, s32 *, 0x40C) == arg1) {
         M2C_FIELD(arg0, s32 *, 0x40C) = 0;
+    }
+}
+
+void fn_8010DB20(void) {
+    extern void *lbl_80495AF8;
+    void fn_8010DB58(void *);
+    void fn_8010DD7C(void *, s32);
+    if (lbl_80495AF8 != NULL) {
+        fn_8010DB58(lbl_80495AF8);
+        fn_8010DD7C(lbl_80495AF8, 0);
     }
 }
 
