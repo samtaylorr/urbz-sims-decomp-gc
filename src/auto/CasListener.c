@@ -1215,6 +1215,11 @@ s32 fn_801C95CC(void) {
     return lbl_804945C0;
 }
 
+void fn_801C9870(void *arg0, CasListenerVec3 *arg1, CasListenerVec3 *arg2) {
+    *arg1 = M2C_FIELD(arg0, CasListenerVec3 *, 0x480);
+    *arg2 = M2C_FIELD(arg0, CasListenerVec3 *, 0x48C);
+}
+
 s32 fn_801C98AC(void *arg0) {
     extern const f32 lbl_803DE3C4[];
     return M2C_FIELD(arg0, f32 *, 0x498) < lbl_803DE3C4[0];
