@@ -239,6 +239,15 @@ s32 fn_801489E4(s32 arg0) {
     return *((s16 *(*)(s32, s32))fn_80141C5C)(arg0 + 0x28, 0x3C) != 0;
 }
 
+void fn_80148A20(void *arg0) {
+    void *temp_r11;
+    void *temp_r9;
+
+    temp_r11 = M2C_FIELD(arg0, void **, 0x58);
+    temp_r9 = M2C_FIELD(temp_r11, void **, 0);
+    M2C_FIELD(temp_r9, M2C_UNK (**)(void *, s32, s32), 0x234)(temp_r11 + M2C_FIELD(temp_r9, s16 *, 0x230), M2C_FIELD(arg0, s16 *, 0x64), 1);
+}
+
 s32 fn_80148B5C(s32 arg0) {
     return arg0 + 0x70;
 }
