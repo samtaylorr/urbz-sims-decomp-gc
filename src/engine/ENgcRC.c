@@ -331,7 +331,7 @@ void fn_80346F10(void *arg0) {
     }
 }
 
-void fn_80346F5C(void) {
+void fn_80346F5C(s32 arg0) {
 
 }
 
