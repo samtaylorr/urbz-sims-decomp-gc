@@ -659,6 +659,19 @@ s32 fn_801115B4(void *self, void *arg1) {
     return (*(s32 (**)(void *, void *))(*(u8 **)r + 0x44))(r + *(s16 *)(*(u8 **)r + 0x40), arg1) != 0;
 }
 
+s32 fn_80111624(void *self, u8 *arg1) {
+    extern void *lbl_80496688;
+    u8 *obj = lbl_80496688;
+    u8 *r;
+    r = (*(u8 *(**)(void *))(*(u8 **)obj + 0x3C))(obj + *(s16 *)(*(u8 **)obj + 0x38));
+    if ((*(s32 (**)(void *, void *))(*(u8 **)r + 0x44))(r + *(s16 *)(*(u8 **)r + 0x40), arg1) != 0
+        || (*(s32 (**)(void *, s32))(*(u8 **)(arg1 + 4) + 0xFC))(arg1 + *(s16 *)(*(u8 **)(arg1 + 4) + 0xF8), 0) != 0
+        || (*(s32 (**)(void *, s32))(*(u8 **)(arg1 + 4) + 0xFC))(arg1 + *(s16 *)(*(u8 **)(arg1 + 4) + 0xF8), 1) != 0) {
+        return 1;
+    }
+    return 0;
+}
+
 void fn_801116E0(void *self) {
     char *vt;
     fn_801914E4(lbl_80496654);
@@ -789,15 +802,16 @@ void *fn_80112010(void *self) {
 
 void fn_80112034(void *self, s32 id) {
     extern s32 lbl_803F63D4[][2];
-    s32 i = 0;
-    do {
+    s32 i;
+    for (i = 0; i <= 11; i++) {
         if (lbl_803F63D4[i][0] == id) {
-            M2C_FIELD(self, s32 **, 0xC) = lbl_803F63D4[i];
-            M2C_FIELD(self, s32 *, 0x4) = id;
-            return;
+            break;
         }
-        i++;
-    } while (i <= 11);
+    }
+    if (i <= 11) {
+        M2C_FIELD(self, s32 **, 0xC) = lbl_803F63D4[i];
+        M2C_FIELD(self, s32 *, 0x4) = id;
+    }
 }
 
 void fn_8011208C(void *self, s32 flags) {
