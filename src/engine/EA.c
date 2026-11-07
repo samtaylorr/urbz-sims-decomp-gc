@@ -848,6 +848,7 @@ void fn_802DE59C(void *self, u32 bits, s32 count) {
 }
 
 void fn_802DE608(void *self, f32 value) {
+    void fn_802DE59C(void *, u32, s32);
     union {
         f32 f;
         u32 u;
