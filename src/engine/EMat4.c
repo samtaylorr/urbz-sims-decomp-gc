@@ -638,7 +638,7 @@ char **fn_802C7910(char **arg0, s32 arg1) {
         while (n != 0 && fn_80248640(arg1, (*arg0)[n - 1]) != 0) {
             n--;
         }
-        fn_802C6D20((s32)arg0, (s32)arg0, n);
+        fn_802C6D20(arg0, arg0, n);
     }
     return arg0;
 }
@@ -938,13 +938,11 @@ f32 *fn_802C85E8(f32 *m) {
 f32 *fn_802C8688(f32 *dst, f32 *src) {
     s32 i;
     s32 j;
-    i = 0;
-    do {
-        for (j = 0; j < 4; j++) {
+    for (i = 0; i <= 3; i++) {
+        for (j = 0; j <= 3; j++) {
             dst[i * 4 + j] = src[j * 4 + i];
         }
-        i++;
-    } while (i <= 3);
+    }
     return src;
 }
 
@@ -1058,23 +1056,23 @@ f32 *fn_802C89C8(f32 *m, f32 angle) {
     return m;
 }
 
-void fn_802C8D24(f32 *dst, f32 (*src)[4]) {
+void fn_802C8D24(f32 (*dst)[4], f32 (*src)[4]) {
     extern f32 lbl_803F00B8[];
     s32 i;
     s32 j;
     f32 *t = src[3];
-    f32 *d3 = dst + 12;
-    f32 *d1 = dst + 4;
-    f32 *d2 = dst + 8;
+    f32 *d3 = dst[3];
+    f32 *d1 = dst[1];
+    f32 *d2 = dst[2];
     for (i = 0; i <= 2; i++) {
         for (j = 0; j < 3; j++) {
-            dst[j * 4 + i] = src[i][j];
+            ((f32 *)dst)[j * 4 + i] = src[i][j];
         }
     }
     for (j = 0; j < 3; j++) {
-        d3[j] = -(src[3][0] * dst[j] + t[1] * d1[j] + t[2] * d2[j]);
+        d3[j] = -(src[3][0] * dst[0][j] + t[1] * d1[j] + t[2] * d2[j]);
     }
-    dst[15] = lbl_803F00B8[0];
+    dst[3][3] = lbl_803F00B8[0];
 }
 
 f32 *fn_802C8ED0(f32 *m, f32 angle) {
