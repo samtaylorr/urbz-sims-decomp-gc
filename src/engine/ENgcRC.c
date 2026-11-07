@@ -73,6 +73,18 @@ void fn_80345EA8(void *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, u32 *, 4) = (u32) M2C_FIELD(arg0, u32 *, 0x1C);
 }
 
+void fn_80345F60(void *arg0) {
+    void fn_80346AE4(void *);
+    void fn_803465D0(void *);
+    void fn_802D1A00(s32, s32);
+    fn_80346AE4(arg0);
+    fn_803465D0(arg0);
+    if (M2C_FIELD(arg0, s32 *, 0x28) != 0) {
+        fn_802D1A00(M2C_FIELD(arg0, s32 *, 0x2C), M2C_FIELD(arg0, s32 *, 0x28));
+        M2C_FIELD(arg0, s32 *, 0x28) = 0;
+    }
+}
+
 void fn_80345FB0(void) {
 
 }
