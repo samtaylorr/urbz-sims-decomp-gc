@@ -194,6 +194,32 @@ s32 fn_802C6AE8(char **arg0, const char *arg1) {
     return 0;
 }
 
+s32 fn_802C6B3C(char **arg0, const char *arg1) {
+    const char *p = *arg0;
+    char c1;
+    char c2;
+
+    do {
+        c1 = *p;
+        if ((u32)(c1 - 'a') <= 25) {
+            c1 = c1 - 0x20;
+        }
+        c2 = *arg1;
+        if ((u32)(c2 - 'a') <= 25) {
+            c2 = c2 - 0x20;
+        }
+        if (c1 < c2) {
+            return -1;
+        }
+        if (c1 > c2) {
+            return 1;
+        }
+        p++;
+        arg1++;
+    } while (*p != 0 || *arg1 != 0);
+    return 0;
+}
+
 s32 fn_802C6BB8(char **arg0, char *arg1) {
     char *a = *arg0;
     char *b = arg1;
@@ -867,19 +893,22 @@ f32 *fn_802C9624(f32 *m, f32 *v, s32 unused, f32 *axis) {
     return m;
 }
 
-void fn_802C9670(f32 *m) {
+void fn_802C9670(f32 (*m)[4]) {
     int i, j;
-    f32 v;
+    f32 v, r;
 
     for (i = 0; i < 4; i++) {
         for (j = 0; j < 4; j++) {
-            v = m[i * 4 + j];
+            v = m[i][j];
             if (v < -32767.0f) {
-                v = -32767.0f;
-            } else if (v > 32767.0f) {
-                v = 32767.0f;
+                r = -32767.0f;
+            } else {
+                r = v;
+                if (v > 32767.0f) {
+                    r = 32767.0f;
+                }
             }
-            m[i * 4 + j] = v;
+            m[i][j] = r;
         }
     }
 }
