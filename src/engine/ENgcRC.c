@@ -1122,10 +1122,8 @@ void fn_80355168(void *arg0, void *arg1) {
     v = M2C_FIELD(p, s32 *, 0x6E8);
     if (v & 4) {
         v = 1;
-    } else if (v & 2) {
+    } else if (v &= 2) {
         v = 2;
-    } else {
-        v = 0;
     }
     M2C_FIELD(p, s32 *, 0x79C) = v;
     M2C_FIELD(arg0, s32 *, 0x510) = 1;
