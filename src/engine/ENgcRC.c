@@ -28,6 +28,7 @@ void fn_8034F840(void *arg0, void *arg1);
 void fn_8034F8BC(void *arg0, void *arg1);
 void fn_8034F534(void *arg0, void *arg1);
 void fn_8034F58C(void *arg0, void *arg1);
+void fn_803529FC(void *arg0, u8 *arg1);
 void fn_80345EA8(void *arg0, s32 arg1, s32 arg2) {
     M2C_UNK fn_80346A88(void *);
     u16 temp_r0;
