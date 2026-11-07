@@ -95,6 +95,14 @@ s8 fn_8027F5A8(s8 arg0, s8 arg1) {
     return fn_80248230(buf, 0, 0x10);
 }
 
+s32 fn_8027F888(s32 arg0, s32 arg1) {
+    extern s32 lbl_80494B5C;
+    s32 fn_80248808(s32);
+    s32 fn_80248930(s32, s32, s32);
+    s32 s = lbl_80494B5C;
+    return fn_80248930(arg1, s, fn_80248808(s)) == 0;
+}
+
 void fn_8027F924(void) {
 
 }
@@ -212,14 +220,17 @@ void fn_80287A04(void *arg0, u8 **arg1) {
 
 void fn_80287C20(void *arg0, u8 **arg1) {
     char **regs = (char **)((u8 *)arg0 + 0x54);
-    s32 *p = (s32 *)(((u32)*arg1 + 3) & ~3);
+    u32 *p = (u32 *)(((u32)*arg1 + 3) & ~3);
     *arg1 = (u8 *)(p + 1);
     if (regs[*p] != 0) {
         char *obj = regs[*p];
         char *vt = *(char **)(obj + 4);
         (*(void (**)(char *))(vt + 0x14))(obj + *(s16 *)(vt + 0x10));
     }
-    regs[*p] = AptStack_Peek(arg0, 0);
+    {
+        char **stk = M2C_FIELD(arg0, char ***, 8) + M2C_FIELD(arg0, s32 *, 0);
+        regs[*p] = stk[-1];
+    }
     {
         char *obj = regs[*p];
         char *vt = *(char **)(obj + 4);
