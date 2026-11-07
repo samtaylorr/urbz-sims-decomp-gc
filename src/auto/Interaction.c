@@ -1257,6 +1257,30 @@ void fn_80114EE4(char *self, s32 a1, s32 a2, s32 a3, s32 a4, s32 a5) {
     (*(void (**)(void *, s32, s32, s32, s32, s32, s32))(vt + 0x104))(self + *(s16 *)(vt + 0x100), a1, a2, a3, a4, 0, a5);
 }
 
+s32 fn_8011560C(void *self, s32 *arg) {
+    extern s32 fn_80115688(void *, s32);
+    void *fn_802D0AB8(void);
+    void fn_802D1A00(void *, void *);
+    void *q;
+    s32 r;
+
+    if (arg[0] != -1) {
+        r = fn_80115688(self, arg[0]);
+        if (r != 0) {
+            return r;
+        }
+    }
+    q = (void *)arg[3];
+    if (q != NULL) {
+        if (M2C_FIELD(q, s32 *, 8) != 0) {
+            fn_802D1A00(fn_802D0AB8(), M2C_FIELD(q, void **, 4));
+        }
+        fn_802D1A00(fn_802D0AB8(), q);
+    }
+    arg[3] = 0;
+    return 0;
+}
+
 s32 fn_80115688(void *self, s32 b) {
     extern s32 fn_80115954(void *, void *, s32);
     extern s32 fn_801159B8(void *, void *, s32);
