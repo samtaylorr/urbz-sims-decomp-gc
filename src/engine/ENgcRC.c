@@ -124,10 +124,7 @@ void fn_80345FB0(void) {
 s32 fn_80345FB4(void *arg0) {
     s32 fn_80346F04(void *);
     extern s32 lbl_80495088;
-    if (lbl_80495088 == 0 && fn_80346F04(arg0) != 1) {
-        return fn_80346F04(arg0) != 2;
-    }
-    return 1;
+    return lbl_80495088 != 0 || fn_80346F04(arg0) == 1 || fn_80346F04(arg0) != 2;
 }
 
 void fn_80346258(void *self) {
@@ -202,7 +199,8 @@ s32 fn_80346A88(void) {
     if (*(s32 *)(p + 0xA0) != 0) {
         if (p[0xA4] == 1 || p[0xA4] == 4) {
             p[0xA4] = 2;
-            *(s64 *)(p + 0xC8) = -1;
+            *(s32 *)(p + 0xC8) = -1;
+            *(s32 *)(p + 0xCC) = -1;
             *(s32 *)(p + 0xD4) = 0;
             *(s32 *)(p + 0xD0) = 0;
             return 1;
@@ -526,24 +524,19 @@ s32 fn_8034809C(s32 arg0, s32 arg1) {
     extern u8 lbl_8046C3E8[];
     extern u8 lbl_8046C3F4[];
     extern s32 lbl_8049506C;
-    void (*cb)(void);
-    s32 a;
-    s32 ret;
+    s32 ok;
     if (arg1 != 0) {
-        cb = fn_803481E8;
-        a = arg1;
+        ok = fn_80258CEC(lbl_8046B090, fn_803481E8, arg1, lbl_8046C3A8, 0x1000, arg0, 1);
     } else {
-        cb = fn_803481C0;
-        a = 0;
+        ok = fn_80258CEC(lbl_8046B090, fn_803481C0, arg1, lbl_8046C3A8, 0x1000, arg0, 1);
     }
-    ret = 0;
-    if (fn_80258CEC(lbl_8046B090, cb, a, lbl_8046C3A8, 0x1000, arg0, 1) != 0) {
+    if (ok) {
         fn_8037A8D8(lbl_8046C3A8, lbl_8046C3E8, 3);
         fn_8037A8D8(lbl_8046C3C8, lbl_8046C3F4, 3);
         lbl_8049506C = 1;
-        ret = 1;
+        return 1;
     }
-    return ret;
+    return 0;
 }
 
 void fn_80348150(void) {
@@ -971,6 +964,14 @@ void fn_80348FB4(void *self, s32 arg1, s32 size) {
     }
 }
 
+void fn_8034A458(void *self) {
+    void fn_802FB688(void *, s32, s32);
+    u8 *fn_802FB800(void *, s32);
+    fn_802FB688(self, 0, 0);
+    *fn_802FB800(self, 1) = 0x42;
+    *(s32 *)((char *)self + 0x14) = 1;
+}
+
 void fn_8034AD3C(void) {
 
 }
@@ -1346,11 +1347,11 @@ void fn_8034B58C(void *self, s32 arg1, s32 arg2, s32 arg3) {
 }
 
 void fn_8034B620(void *self, void *obj, u8 arg2, s32 arg3, s32 arg4, s32 arg5) {
-    RCOpVtEnt *e;
     if (obj != NULL) {
         RC_SetTexture(obj, arg2, arg3, arg4, arg5);
     } else {
-        e = (RCOpVtEnt *)(M2C_FIELD(self, u8 **, 0x68) + 0x128);
+        u8 *vt = M2C_FIELD(self, u8 **, 0x68);
+        RCOpVtEnt *e = (RCOpVtEnt *)(vt + 0x128);
         ((void (*)(void *, s32))e->fn)((u8 *)self + e->delta, arg5 ? 0x100 : 0x80);
     }
 }
