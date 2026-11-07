@@ -331,6 +331,19 @@ void fn_801BB5F0(void) {
 
 }
 
+void fn_801BB5F4(void *self) {
+    extern void *lbl_80494FCC;
+    extern s32 fn_801BFD60(void *);
+    extern void *fn_8033390C(void *, s32);
+    extern s32 fn_803114D0(void *, s32, void *, s32);
+    extern u8 lbl_803DCB08[];
+    void *mgr;
+    if (M2C_FIELD(self, s32 *, 0x10) == 0) {
+        mgr = lbl_80494FCC;
+        M2C_FIELD(self, s32 *, 0x10) = fn_803114D0(fn_8033390C(mgr, fn_801BFD60(M2C_FIELD(self, void **, 0))), 0x40, lbl_803DCB08, 0x64);
+    }
+}
+
 void fn_801BB658(void *self) {
     extern void *lbl_80494FCC;
     extern s32 fn_801BFD60(void *);
