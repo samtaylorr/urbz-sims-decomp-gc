@@ -833,7 +833,6 @@ void *fn_802DB640(void *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 0x4) = arg1;
     M2C_FIELD(arg0, s32 *, 0x0) = 0x534E4150;
     M2C_FIELD(arg0, s32 *, 0x8) = arg2;
-    M2C_FIELD(arg0, s32 *, 0x28) = 0;
     M2C_FIELD(arg0, s32 *, 0xC) = 0;
     M2C_FIELD(arg0, s32 *, 0x10) = 0;
     M2C_FIELD(arg0, s32 *, 0x14) = 0;
@@ -841,6 +840,7 @@ void *fn_802DB640(void *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 0x1C) = 0;
     M2C_FIELD(arg0, s32 *, 0x20) = 0;
     M2C_FIELD(arg0, s32 *, 0x24) = 0;
+    M2C_FIELD(arg0, s32 *, 0x28) = 0;
     return arg0;
 }
 
