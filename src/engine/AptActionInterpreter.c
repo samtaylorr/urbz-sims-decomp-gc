@@ -39,8 +39,8 @@ void fn_8027D44C(void *arg0, u16 **arg1) {
     if (--*q == 0) {
         ((void (*)(void *)) lbl_80494DA0[1])(q);
     }
-    *arg1 = str;
     q = str;
+    *arg1 = q;
     if (--*q == 0) {
         ((void (*)(void *)) lbl_80494DA0[1])(q);
     }
