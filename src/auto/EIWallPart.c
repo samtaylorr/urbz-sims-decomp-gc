@@ -203,6 +203,20 @@ block_4:
     return 0;
 }
 
+void fn_8002F6DC(void) {
+    extern void fn_8031EA2C(s32);
+    extern s32 lbl_80493FEC;
+    extern s32 lbl_80493FF0;
+    if (lbl_80493FEC != 0) {
+        fn_8031EA2C(lbl_80493FEC);
+    }
+    if (lbl_80493FF0 != 0) {
+        fn_8031EA2C(lbl_80493FF0);
+    }
+    lbl_80493FF0 = 0;
+    lbl_80493FEC = 0;
+}
+
 void fn_8002F818(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x5C) = 1;
 }
@@ -385,13 +399,16 @@ s16 fn_80034F8C(void *arg0) {
 void fn_800358D8(void *self, s32 arg1) {
     void fn_8031EA2C(void *);
     void *fn_8033740C(void *, s32, s32, s32);
-    void fn_802F52DC(void *, s32, s32);
+    void fn_802F52DC(void *, u32, s32);
     extern u8 lbl_8045BA40[];
     void *obj;
+    u32 h;
 
     obj = fn_8033740C(lbl_8045BA40, arg1, 0, 0);
-    fn_802F52DC(self, 0x2B7EF272, arg1);
-    fn_802F52DC(self, 0xC26D593A, arg1);
+    h = 0x2B7EF272;
+    fn_802F52DC(self, h, arg1);
+    h = 0xC26D593A;
+    fn_802F52DC(self, h, arg1);
     if (M2C_FIELD(self, void **, 0x368) != NULL) {
         fn_8031EA2C(M2C_FIELD(self, void **, 0x368));
         M2C_FIELD(self, void **, 0x368) = NULL;
@@ -527,20 +544,20 @@ s32 fn_80039584(void *self, s32 arg1) {
     extern void fn_801055FC(void *, s32);
     extern void fn_80034F94(void *, void *);
     u8 *pos = (u8 *)arg1;
-    void **p = M2C_FIELD(self, void **, 0x14);
+    void **p;
+    void *obj;
+    Tile tile;
 
-    while (p != NULL) {
-        void *obj = p[0];
-        Tile tile;
-
+    for (p = M2C_FIELD(self, void **, 0x14); p != NULL; ) {
+        obj = p[0];
         fn_80105508(&tile);
         fn_80034F94(obj, &tile);
         if (pos[0] == tile.x && pos[1] == tile.y) {
             fn_801055FC(&tile, 2);
             return (s32)obj;
         }
-        fn_801055FC(&tile, 2);
         p = (void **)p[2];
+        fn_801055FC(&tile, 2);
     }
     return 0;
 }
