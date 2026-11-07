@@ -1606,6 +1606,12 @@ void fn_800D1468(void *arg0, f32 farg0) {
     M2C_FIELD(temp_r30, s32 *, 4) = (s32) (M2C_FIELD(temp_r30, s32 *, 4) | 2);
 }
 
+void fn_800D14A8(void *self) {
+    u8 *obj = *(u8 **)((u8 *)self + 0x64);
+    u8 *vt = *(u8 **)(obj + 0x1C);
+    (*(void (**)(void *))(vt + 0x3C))(obj + *(s16 *)(vt + 0x38));
+}
+
 s32 fn_800D1588(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x64) + 0x2C;
 }
