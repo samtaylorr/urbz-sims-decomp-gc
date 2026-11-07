@@ -719,6 +719,23 @@ void *fn_800CD5C4(void *arg0, s32 id) {
     return NULL;
 }
 
+s32 fn_800CD608(void *arg0, s32 id, s32 val) {
+    s32 i = 0;
+    s32 **it;
+    s32 **end = M2C_FIELD(arg0, s32 ***, 0xC);
+
+    for (it = M2C_FIELD(arg0, s32 ***, 8); it != end; it++) {
+        s32 *e = *it;
+        if (e[0] == id && (e[1] & 1)) {
+            if (e[2] == val) {
+                return i;
+            }
+            i++;
+        }
+    }
+    return -1;
+}
+
 void *fn_800CD660(void *self, s32 id, s32 n) {
     s32 i = 0;
     s32 **it;
@@ -1080,7 +1097,7 @@ void fn_800CEECC(void *arg0) {
     }
 }
 
-void fn_800CF02C(void) {
+void fn_800CF02C() {
 
 }
 
