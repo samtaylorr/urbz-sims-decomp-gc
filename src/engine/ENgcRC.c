@@ -1077,6 +1077,16 @@ void fn_8034F4A4(void *arg0, s32 arg1) {
     fn_8034F5EC(arg0, &msg.type);
 }
 
+void fn_8034F508(void *arg0) {
+    struct {
+        s32 type;
+        s32 a;
+        s32 b;
+    } msg;
+    msg.type = 5;
+    fn_8034F8BC(arg0, &msg);
+}
+
 void fn_8034F840(void *arg0, void *arg1) {
     s32 fn_80269134();
     M2C_UNK fn_8034D5B4();
