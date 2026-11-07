@@ -786,27 +786,17 @@ f32 *fn_802C839C(f32 *m, f32 *v) {
 }
 
 void *fn_802C83E4(void *arg0, s32 arg1) {
-    s32 var_r30;
-    f32 *var_r31;
-    s32 var_r9;
-    void *temp_r9;
-    f32 tmp;
+    s32 i;
+    s32 j;
 
-    var_r9 = 0;
-    do {
-        var_r31 = (f32 *)((var_r9 * 0x10) + arg1);
-        var_r30 = 4;
-loop_2:
-        temp_r9 = M2C_FIELD(arg0, void **, 0x18);
-        tmp = *var_r31;
-        M2C_FIELD(temp_r9, M2C_UNK (**)(void *, f32 *, M2C_UNK), 0x3C)(arg0 + M2C_FIELD(temp_r9, s16 *, 0x38), &tmp, 4);
-        var_r31++;
-        var_r30 -= 1;
-        if (var_r30 != 0) {
-            goto loop_2;
+    for (i = 0; i <= 3; i++) {
+        f32 *row = (f32 *)(arg1 + i * 0x10);
+        for (j = 4; j != 0; j--) {
+            void *vt = M2C_FIELD(arg0, void **, 0x18);
+            f32 f = *row++;
+            M2C_FIELD(vt, M2C_UNK (**)(void *, f32 *, M2C_UNK), 0x3C)(arg0 + M2C_FIELD(vt, s16 *, 0x38), &f, 4);
         }
-        var_r9 += 1;
-    } while (var_r9 <= 3);
+    }
     return arg0;
 }
 
@@ -1008,7 +998,6 @@ f32 *fn_802C88F0(f32 *m, f32 angle) {
 }
 
 f32 *fn_802C895C(f32 *m, f32 angle) {
-    void fn_802C876C(void *);
     f32 fn_80243694(f32);
     f32 fn_802434CC(f32);
     f32 s, c, ns;
