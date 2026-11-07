@@ -961,15 +961,11 @@ s32 fn_801132B0(char *self, s32 arg1, s32 result) {
     char *fn_80112480(char *, s32, s32);
     char *p = fn_80112480(self, arg1, 0);
     if (p != *(char **)(self + 4)) {
-        char *it = *(char **)(p + 0);
-        char *end = *(char **)(p + 4);
-        if (it != end) {
-            do {
-                if (*(s32 *)(it + 4) > result) {
-                    result = *(s16 *)(it + 6);
-                }
-                it += 0x58;
-            } while (it != end);
+        char *it;
+        for (it = *(char **)(p + 0); it != *(char **)(p + 4); it += 0x58) {
+            if (*(s32 *)(it + 4) > result) {
+                result = *(s16 *)(it + 6);
+            }
         }
     }
     return result;
