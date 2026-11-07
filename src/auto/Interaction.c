@@ -2,6 +2,14 @@
 #include "common.h"
 
 extern u8 lbl_8040E9C8[];
+extern void *lbl_80496648;
+extern void *lbl_80496654;
+extern void *lbl_80496668;
+void fn_801914E4(void *);
+void fn_80190640(void *);
+void fn_801906D4(void *);
+void fn_8018DD8C(void *, void *);
+void fn_8018D8DC(void *, void *, s32);
 extern void fn_802D20E8(void *);
 void **fn_8010D2E8(void **self) {
     void fn_8010D388(s32);
@@ -62,10 +70,9 @@ s32 fn_8010D590(void **self) {
 
 void *fn_8010D7B8(void **self);
 void fn_8010D5F8(void) {
-    M2C_UNK fn_802D1FC8(M2C_UNK);
+    void *fn_802D1FC8(s32);
     extern void *lbl_80495AF8;
-    fn_802D1FC8(0x41c);
-    lbl_80495AF8 = fn_8010D7B8(0);
+    lbl_80495AF8 = fn_8010D7B8(fn_802D1FC8(0x41c));
 }
 
 void fn_8010D628(s32 *self, s32 value) {
@@ -105,11 +112,11 @@ void *fn_8010D7B8(void **self) {
     *self = lbl_8040EA18;
     fn_80248488((s32)self + 4, 0, 0x400);
     self[260] = (void *)1;
+    self[261] = 0;
     self[262] = 0;
     self[257] = 0;
     self[258] = 0;
     self[259] = 0;
-    self[261] = 0;
     return self;
 }
 
@@ -535,6 +542,19 @@ void fn_801102DC(void) {
 
 }
 
+void fn_801117B8(void *self, void *arg1, s32 arg2) {
+    s32 buf[2];
+    s32 i;
+    fn_8018DD8C(arg1, (char *)self + 0x18);
+    if (arg2 < 0x5A) {
+        for (i = 0; i < 10; i++) {
+            fn_8018D8DC(arg1, buf, 1);
+        }
+    }
+    fn_8018D8DC(arg1, buf, 1);
+    fn_8018D8DC(arg1, buf, 1);
+}
+
 extern void *lbl_80496648;
 extern void *lbl_80496654;
 extern void *lbl_80496668;
@@ -612,22 +632,20 @@ void fn_80111FD0(void **obj) {
 void *fn_80112010(void *self) {
     extern char lbl_8040ED60[];
     M2C_FIELD(self, char **, 0) = lbl_8040ED60;
-    M2C_FIELD(self, s32 *, 0xC) = 0;
-    M2C_FIELD(self, s32 *, 0x8) = 0;
-    M2C_FIELD(self, s32 *, 0x4) = 0;
+    M2C_FIELD(self, s32 *, 0x4) = M2C_FIELD(self, s32 *, 0x8) = M2C_FIELD(self, s32 *, 0xC) = 0;
     return self;
 }
 
 void fn_80112034(void *self, s32 id) {
     extern s32 lbl_803F63D4[][2];
-    s32 i;
-    for (i = 0; i < 12; i++) {
-        if (lbl_803F63D4[i][0] == id) {
-            M2C_FIELD(self, s32 **, 0xC) = lbl_803F63D4[i];
-            M2C_FIELD(self, s32 *, 0x4) = id;
+    s32 i = 0;
+    while (lbl_803F63D4[i][0] != id) {
+        if (++i > 11) {
             return;
         }
     }
+    M2C_FIELD(self, s32 **, 0xC) = lbl_803F63D4[i];
+    M2C_FIELD(self, s32 *, 0x4) = id;
 }
 
 void fn_8011208C(void *self, s32 flags) {
