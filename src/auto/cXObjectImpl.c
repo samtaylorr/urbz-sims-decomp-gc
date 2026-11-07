@@ -150,6 +150,23 @@ void fn_80133954(s32 *arg0) {
     *arg0 = 0;
 }
 
+void *fn_801339A4(void *arg0, void *arg1) {
+    struct { s32 a, b; } *d;
+    s32 n;
+
+    M2C_FIELD(arg0, s32 *, 0) = M2C_FIELD(arg1, s32 *, 0);
+    n = M2C_FIELD(arg1, s32 *, 0x10);
+    M2C_FIELD(arg0, s32 *, 0x10) = n;
+    if (n != -1) {
+        M2C_FIELD(arg0, s32 *, 0x10) = n + 1;
+    }
+    d = (void *)((char *)arg0 + 4);
+    *d = *(typeof(d))((char *)arg1 + 4);
+    M2C_FIELD(arg0, s32 *, 0x14) = M2C_FIELD(arg1, s32 *, 0x14);
+    M2C_FIELD(arg0, s32 *, 0xC) = M2C_FIELD(arg1, s32 *, 0xC);
+    return arg0;
+}
+
 s32 fn_801339F0(s32 arg0, s32 arg1) {
     M2C_UNK fn_80133CBC(s32, s32);
     fn_80133CBC(arg1, arg0);
