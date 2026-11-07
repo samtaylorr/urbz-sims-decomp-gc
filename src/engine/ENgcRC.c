@@ -858,7 +858,8 @@ void fn_8034B010(void *self, s32 arg) {
     } cmd;
     void fn_803551C0(void *, void *);
     extern u8 lbl_8046DF78[];
-    cmd.arg = ~arg;
+    arg = ~arg;
+    cmd.arg = arg;
     cmd.type = 0x13;
     fn_803551C0(lbl_8046DF78, &cmd);
 }
@@ -927,6 +928,18 @@ void fn_8034B13C(void *self, s32 arg) {
     cmd.arg = arg;
     cmd.type = 0x9;
     fn_803549C0(lbl_8046DF78, &cmd);
+}
+
+void fn_8034B1CC(void *self, s32 arg) {
+    struct {
+        u8 type;
+        s32 arg;
+    } cmd;
+    void fn_80354A84(void *, void *);
+    extern u8 lbl_8046DF78[];
+    cmd.arg = arg;
+    cmd.type = 0xB;
+    fn_80354A84(lbl_8046DF78, &cmd);
 }
 
 void fn_8034B274(void *self, s32 arg) {
