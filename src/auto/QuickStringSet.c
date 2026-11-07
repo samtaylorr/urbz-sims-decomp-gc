@@ -221,13 +221,14 @@ s32 fn_800F6048(void *arg0, s32 *arg1) {
     }
     f = lbl_80495A30;
     if (fn_800C4568(f, fn_800F69E8(arg1)) != 0) {
-        ret = -0x27;
-        if (fn_800C4550(f, fn_800F69E8(arg1)) != 0) {
-            ret = 0;
+        if (fn_800C4550(f, fn_800F69E8(arg1)) == 0) {
+            return -0x27;
         }
-        return ret;
+        return 0;
+    } else {
+        ret = -0x28;
     }
-    return -0x28;
+    return ret;
 }
 
 void *fn_800F60D4(void *arg0) {
@@ -1245,10 +1246,10 @@ u16 *fn_800F82FC(u16 *dst, u16 *src) {
 
 void *fn_800F8360(void *self, s32 arg1) {
     extern u8 lbl_8040D3D8[];
-    void fn_80248488(void *, s32, s32);
+    M2C_UNK fn_80248488(s32, M2C_UNK, M2C_UNK);
 
     M2C_FIELD(self, u8 **, 0x408) = lbl_8040D3D8;
-    fn_80248488((void **)self + 2, 0, 0x400);
+    fn_80248488((s32)self + 8, 0, 0x400);
     M2C_FIELD(self, s32 *, 0) = arg1;
     M2C_FIELD(self, s32 *, 4) = 0;
     return self;
