@@ -124,13 +124,10 @@ void fn_80345FB0(void) {
 s32 fn_80345FB4(void *arg0) {
     s32 fn_80346F04(void *);
     extern s32 lbl_80495088;
-    s32 ret;
-    if (lbl_80495088 != 0 || fn_80346F04(arg0) == 1 || fn_80346F04(arg0) != 2) {
-        ret = 1;
-    } else {
-        ret = 0;
+    if (lbl_80495088 == 0 && fn_80346F04(arg0) != 1) {
+        return fn_80346F04(arg0) != 2;
     }
-    return ret;
+    return 1;
 }
 
 void fn_80346258(void *self) {
@@ -156,13 +153,17 @@ void fn_80346258(void *self) {
 s32 fn_803465D0(void) {
     void fn_80260574(void *);
     extern u8 lbl_8046C400[];
+    u8 *p = lbl_8046C400;
+    s32 ok;
 
-    if (M2C_FIELD(lbl_8046C400, s32 *, 0xA0) != 0 && M2C_FIELD(lbl_8046C400, u8 *, 0xA4) == 0) {
-        M2C_FIELD(lbl_8046C400, s32 *, 0xA0) = 0;
-        fn_80260574(lbl_8046C400);
-        return 1;
+    if (M2C_FIELD(p, s32 *, 0xA0) != 0 && M2C_FIELD(p, u8 *, 0xA4) == 0) {
+        M2C_FIELD(p, s32 *, 0xA0) = 0;
+        fn_80260574(p);
+        ok = 1;
+    } else {
+        ok = 0;
     }
-    return 0;
+    return ok;
 }
 
 u32 fn_80346620(void) {
@@ -200,9 +201,10 @@ s32 fn_80346A88(void) {
     u8 *p = lbl_8046C400;
     if (*(s32 *)(p + 0xA0) != 0) {
         if (p[0xA4] == 1 || p[0xA4] == 4) {
-            p[0xA4] = 2;
             *(s64 *)(p + 0xC8) = -1;
-            *(s64 *)(p + 0xD0) = 0;
+            *(s32 *)(p + 0xD4) = 0;
+            *(s32 *)(p + 0xD0) = 0;
+            p[0xA4] = 2;
             return 1;
         }
     }
@@ -524,15 +526,18 @@ s32 fn_8034809C(s32 arg0, s32 arg1) {
     extern u8 lbl_8046C3E8[];
     extern u8 lbl_8046C3F4[];
     extern s32 lbl_8049506C;
-    s32 ok;
+    void (*cb)(void);
+    s32 a;
     s32 ret;
     if (arg1 != 0) {
-        ok = fn_80258CEC(lbl_8046B090, fn_803481E8, arg1, lbl_8046C3A8, 0x1000, arg0, 1);
+        cb = fn_803481E8;
+        a = arg1;
     } else {
-        ok = fn_80258CEC(lbl_8046B090, fn_803481C0, 0, lbl_8046C3A8, 0x1000, arg0, 1);
+        cb = fn_803481C0;
+        a = 0;
     }
     ret = 0;
-    if (ok != 0) {
+    if (fn_80258CEC(lbl_8046B090, cb, a, lbl_8046C3A8, 0x1000, arg0, 1) != 0) {
         fn_8037A8D8(lbl_8046C3A8, lbl_8046C3E8, 3);
         fn_8037A8D8(lbl_8046C3C8, lbl_8046C3F4, 3);
         lbl_8049506C = 1;
@@ -1329,16 +1334,14 @@ void fn_8034B4AC(void *self, s16 id, s32 arg, f32 *v, f32 f) {
 
 void fn_8034B58C(void *self, s32 arg1, s32 arg2, s32 arg3) {
     extern u8 *lbl_80495050;
-    u8 *vt;
     RCOpVtEnt *e;
     if (arg1 != 0) {
-        vt = M2C_FIELD(self, u8 **, 0x68);
-        e = (RCOpVtEnt *)(vt + 0x110);
-        ((void (*)(void *, void *, s32, s32, s32, s32))e->fn)((u8 *)self + ((RCOpVtEnt *)(vt + 0x110))->delta, lbl_80495050 + 0x40, arg2 ? 4 : 1, 1, 0, arg3);
+        e = (RCOpVtEnt *)(M2C_FIELD(self, u8 **, 0x68) + 0x110);
+        ((void (*)(void *, void *, s32, s32, s32, s32))e->fn)((u8 *)self + e->delta, lbl_80495050 + 0x40, arg2 ? 4 : 1, 1, 0, arg3);
     } else {
-        vt = M2C_FIELD(self, u8 **, 0x68);
-        e = (RCOpVtEnt *)(vt + 0x128);
-        ((void (*)(void *, s32))e->fn)((u8 *)self + ((RCOpVtEnt *)(vt + 0x128))->delta, arg3 ? 0x100 : 0x80);
+        fn_8034B58C_off:
+        e = (RCOpVtEnt *)(M2C_FIELD(self, u8 **, 0x68) + 0x128);
+        ((void (*)(void *, s32))e->fn)((u8 *)self + e->delta, arg3 ? 0x100 : 0x80);
     }
 }
 
@@ -1939,13 +1942,8 @@ void fn_80354C18(void *arg0, void *arg1) {
 }
 
 void fn_80354C40(void *self, s64 *src, u32 count) {
-    s64 *dst;
-    u32 i;
     *(u32 *)((char *)self + 0x4558) = count;
-    dst = (s64 *)((char *)self + 0x758);
-    for (i = 0; i < count * 64; i += 8) {
-        *dst++ = *src++;
-    }
+    __builtin_memcpy((char *)self + 0x758, src, count * 64);
     *(s32 *)((char *)self + 0x510) = 1;
 }
 
@@ -1959,11 +1957,21 @@ void fn_80354D90(void *self, void *arg) {
 }
 
 void fn_80354F6C(void *self, void *arg) {
-    typedef struct { s64 m[8]; } Blk;
     extern s32 lbl_80495194;
     if (lbl_80495194 != 0) {
+        s64 *src;
+        s64 *dst;
         lbl_80495194 = 0;
-        *(Blk *)((char *)self + 0x498) = **(Blk **)((char *)arg + 4);
+        dst = (s64 *)((char *)self + 0x498);
+        src = *(s64 **)((char *)arg + 4);
+        dst[0] = src[0];
+        dst[1] = src[1];
+        dst[2] = src[2];
+        dst[3] = src[3];
+        dst[4] = src[4];
+        dst[5] = src[5];
+        dst[6] = src[6];
+        dst[7] = src[7];
     }
 }
 
