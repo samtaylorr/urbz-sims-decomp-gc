@@ -99,11 +99,6 @@ static inline void *CasSlot_Init(s32 *p) {
     return p;
 }
 
-typedef struct {
-    s32 a;
-    s32 b;
-} CasSlot;
-
 static inline void *CasSlot_InitBoth(s32 *p) {
     p[0] = 0;
     return CasSlot_Init(p);
