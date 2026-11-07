@@ -711,14 +711,6 @@ void fn_801BBFD0(void) {
 
 }
 
-static inline void CasSound_Release(void **h) {
-    extern void fn_8031EA2C(void *);
-    if (*h != NULL) {
-        fn_8031EA2C(*h);
-        *h = NULL;
-    }
-}
-
 static inline void CasListener_ReleaseSound(void *self) {
     extern void fn_8031EA2C(void *);
     if (M2C_FIELD(self, void **, 0x20) != NULL) {
@@ -739,9 +731,8 @@ void fn_801BC014(u8 *self, s32 *arg1) {
     extern void *fn_8033740C(void *, void *, s32, s32);
     extern u8 lbl_8045BA40[];
     s32 v;
-    s32 *flags = (s32 *)(self + 0x10);
-    *flags = 0;
-    CasListener_ReleaseSound(self);
+    *(s32 *)(self + 0x10) = 0;
+    CasSound_Release((void **)(self + 0x20));
     v = arg1[0];
     *(s32 **)(self + 0x24) = arg1;
     *(s32 *)(self + 0x30) = v;
@@ -1332,13 +1323,11 @@ void fn_801C3850(void *self, s32 arg1) {
 }
 
 s32 fn_801C38E4(void *self) {
-    CasListIter b;
-    CasListIter *pb;
+    CasListIter b[2];
 
     if (CasList_Size(self) != 0) {
-        b = CasList_Begin(self);
-        pb = &b;
-        if (*CasListIter_Deref(pb) == 1) {
+        b[0] = CasList_Begin(self);
+        if (*CasListIter_Deref(&b[0]) == 1) {
             return 1;
         }
     }
