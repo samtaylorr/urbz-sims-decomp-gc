@@ -53,6 +53,11 @@ static inline void **WPBPtrVec_End(WPBPtrVec *v) {
 }
 
 void fn_800CD09C();
+s32 fn_800C472C(s64 *arg0) {
+    *arg0 = 0x3F0D;
+    return 1;
+}
+
 void fn_800C55A4(void *self, s32 arg1) {
     extern M2C_UNK lbl_8040A948[];
     extern M2C_UNK lbl_8040AA10[];
