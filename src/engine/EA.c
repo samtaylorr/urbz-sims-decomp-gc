@@ -1386,8 +1386,8 @@ void fn_802DED3C(void *self) {
 }
 
 void fn_802DED64(void *self, void *arg1) {
-    M2C_UNK fn_802DDCAC(void *, void *, s32);
-    fn_802DDCAC(self, arg1, 0);
+    M2C_UNK fn_802DDCAC(s32, s32, s32);
+    fn_802DDCAC((s32)self, (s32)arg1, 0);
 }
 
 extern void fn_802DED88(void *);
