@@ -252,6 +252,11 @@ s32 fn_80030804(s32 arg0) {
     }
 }
 
+f32 fn_80032788(void) {
+    extern s32 lbl_80494048;
+    return (f32)lbl_80494048 / 100.0f;
+}
+
 void fn_800328F8(char *self, void *arg1) {
     fn_802E34F0(arg1, self + 0x44);
 }
@@ -503,7 +508,7 @@ void *fn_80039510(void *self, void **list, s32 arg2, s32 arg3, s32 arg4) {
 
 s32 fn_80039584(void *self, s32 arg1) {
     typedef struct { u8 x; u8 y; u8 z; } Tile;
-    extern void fn_80105508(void *);
+    extern void fn_80105508(s32);
     extern void fn_801055FC(void *, s32);
     extern void fn_80034F94(void *, void *);
     u8 *pos = (u8 *)arg1;
@@ -514,7 +519,7 @@ s32 fn_80039584(void *self, s32 arg1) {
             void *obj = p[0];
             Tile tile;
 
-            fn_80105508(&tile);
+            fn_80105508((s32)&tile);
             fn_80034F94(obj, &tile);
             if (pos[0] == tile.x && pos[1] == tile.y) {
                 fn_801055FC(&tile, 2);
