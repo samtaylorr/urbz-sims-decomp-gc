@@ -1091,6 +1091,23 @@ void fn_800F8BF4(s32 arg0) {
     fn_80248488(arg0 + 0x2940, 0, 0x140);
 }
 
+s32 fn_800F8C20(char *arg0, s32 arg1) {
+    s32 fn_80245BB4(char *, const char *, ...);
+    s32 fn_80248808(s32);
+    void fn_802D8004(char *, s32, s32, s32);
+    extern char lbl_803D5B6C[];
+    char buf[256];
+    char *vt = M2C_FIELD(arg0, char **, 0x1C);
+    s32 a = M2C_FIELD(arg0, s32 *, 0x10);
+    s32 b = M2C_FIELD(arg0, s32 *, 0x4);
+    s32 c = M2C_FIELD(arg0, s32 *, 0x8);
+    s32 r = (*(s32 (**)(void *))(vt + 0x54))(arg0 + *(s16 *)(vt + 0x50));
+
+    fn_80245BB4(buf, lbl_803D5B6C, a, b, c, r);
+    fn_802D8004(buf, fn_80248808((s32)buf), 1, arg1);
+    return 1;
+}
+
 void fn_800F8CB4(void) {
 
 }
