@@ -817,17 +817,18 @@ f32 *fn_802C91E0(f32 *m, f32 angle) {
     f32 fn_802434CC(f32);
     f32 s = fn_80243694(angle);
     f32 c = fn_802434CC(angle);
-    f32 a, b;
+    f32 b0 = m[4], b1 = m[5], b2 = m[6];
+    f32 a;
 
-    b = m[4]; a = m[0];
-    m[4] = -s * a + c * b;
-    m[0] = c * a + s * b;
-    b = m[5]; a = m[1];
-    m[5] = -s * a + c * b;
-    m[1] = c * a + s * b;
-    b = m[6]; a = m[2];
-    m[6] = -s * a + c * b;
-    m[2] = c * a + s * b;
+    a = m[0];
+    m[0] = c * a + s * b0;
+    m[4] = -s * a + c * b0;
+    a = m[1];
+    m[1] = c * a + s * b1;
+    m[5] = -s * a + c * b1;
+    a = m[2];
+    m[2] = c * a + s * b2;
+    m[6] = -s * a + c * b2;
     return m;
 }
 
@@ -854,6 +855,23 @@ f32 *fn_802C9624(f32 *m, f32 *v, s32 unused, f32 *axis) {
     fn_802C9B20(m, axis, lbl_803F00C8[0]);
     fn_802C9368(m, v);
     return m;
+}
+
+void fn_802C9670(f32 *m) {
+    int i, j;
+    f32 v;
+
+    for (i = 0; i < 4; i++) {
+        for (j = 0; j < 4; j++) {
+            v = m[i * 4 + j];
+            if (v < -32767.0f) {
+                v = -32767.0f;
+            } else if (v > 32767.0f) {
+                v = 32767.0f;
+            }
+            m[i * 4 + j] = v;
+        }
+    }
 }
 
 void fn_802C96D4(void) {
