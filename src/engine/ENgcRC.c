@@ -1068,14 +1068,15 @@ u16 fn_8034D924(void) {
 }
 
 void fn_8034F4A4(void *arg0, s32 arg1) {
-    M2C_UNK fn_8034F5EC(void *, s32 *);
+    M2C_UNK fn_8034F5EC(void *, void *);
     struct {
         s32 type;
         s32 a;
+        s32 b;
     } msg;
     msg.a = arg1;
     msg.type = 3;
-    fn_8034F5EC(arg0, &msg.type);
+    fn_8034F5EC(arg0, &msg);
 }
 
 void fn_8034F4D4(void *arg0, s32 arg1, s32 arg2) {
@@ -1513,13 +1514,18 @@ void fn_803563F4(u8 *self, u8 *arg) {
 
 void fn_80356414(u8 *self, u8 *arg) {
     u32 val = *(u32 *)(arg + 4);
-    u32 e = (val >> 8) & 0xFF;
+    u8 a, b, c, d, e;
 
     *(s32 *)(self + 0x510) = 1;
-    self[0x565] = (val >> 2) & 3;
-    self[0x564] = val & 3;
-    self[0x566] = (val >> 4) & 3;
-    self[0x567] = (val >> 6) & 3;
+    a = val & 3;
+    b = (val >> 2) & 3;
+    c = (val >> 4) & 3;
+    d = (val >> 6) & 3;
+    e = (val >> 8) & 0xFF;
+    self[0x565] = b;
+    self[0x564] = a;
+    self[0x566] = c;
+    self[0x567] = d;
     self[0x568] = e;
 }
 
