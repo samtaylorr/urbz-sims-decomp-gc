@@ -996,6 +996,14 @@ void fn_8011230C(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s16 *, 0) = (s16) (M2C_FIELD(arg0, u8 *, 1) | (arg1 << 8));
 }
 
+void fn_801123AC(char *self, char *arg1, s32 n) {
+    void fn_803A1C88(char *, s32, char *, s32);
+    s32 tmp = *(s32 *)(self + 0x10);
+    fn_8018D8DC(arg1, &tmp, 1);
+    *(s32 *)(self + 0x10) = tmp;
+    fn_803A1C88(self, *(s32 *)self, arg1, n);
+}
+
 s32 fn_80112F68(void *arg0) {
     return (s32) ((M2C_FIELD(arg0, s32 *, 4) - M2C_FIELD(arg0, s32 *, 0)) * 0xAAAAAAAB) >> 3;
 }
@@ -1288,8 +1296,8 @@ void *fn_801169A0(void *self, void *arg1) {
     void fn_801167DC(void *, void *);
     M2C_FIELD(self, u8 **, 0x54) = lbl_8040F088;
     fn_800F160C((u8 *)self + 0x34);
-    M2C_FIELD(self, s32 *, 0x20) = 0;
-    M2C_FIELD(self, s32 *, 0x24) = 0;
+    M2C_FIELD(self, void **, 0x24) = NULL;
+    M2C_FIELD(self, void **, 0x20) = NULL;
     fn_801167DC(self, arg1);
     return self;
 }
