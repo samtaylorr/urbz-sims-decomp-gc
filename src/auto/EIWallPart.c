@@ -664,19 +664,21 @@ void fn_800358D8(void *self, s32 arg1) {
 }
 
 void fn_80035960(void *self, s32 on) {
-    extern s32 fn_802F150C(void *);
+    extern s32 fn_802F150C(void *, s32);
     u32 flags = M2C_FIELD(self, u32 *, 0x64);
 
-    if (fn_802F150C(self) == 0) {
-        if (on) {
+    if (fn_802F150C(self, on) == 0) {
+        if (on != 0) {
             flags |= 1;
         } else {
             flags &= ~1;
         }
-    } else if (on) {
-        flags |= 2;
     } else {
-        flags &= ~2;
+        if (on != 0) {
+            flags |= 2;
+        } else {
+            flags &= ~2;
+        }
     }
     M2C_FIELD(self, u32 *, 0x64) = flags;
 }
