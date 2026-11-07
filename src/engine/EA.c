@@ -859,22 +859,25 @@ u32 fn_802DE634(u32 **self, s32 pos, s32 count) {
     s32 word;
     s32 shift;
     s32 end;
+    s32 last;
     u32 endWord;
     u32 mask;
 
     if (count != 0) {
         end = pos + count;
         word = pos >> 5;
+        last = end;
         shift = pos & 31;
-        endWord = (u32)(end - 1) >> 5;
+        endWord = (u32)(last - 1) >> 5;
         if (word == endWord) {
             mask = (1 << count) - 1;
             if (mask != 0) {
-                return ((*self)[word] >> shift) & mask;
+                u32 v = (*self)[word];
+                return (v >> shift) & mask;
             }
             return (*self)[word];
         }
-        return (((*self)[endWord] & ((1 << (end & 31)) - 1)) << (32 - shift)) | ((*self)[word] >> shift);
+        return (((*self)[endWord] & ((1 << (last & 31)) - 1)) << (32 - shift)) | ((*self)[word] >> shift);
     }
     return 0;
 }
@@ -1195,6 +1198,30 @@ s32 fn_802DF4B8(s32 arg0, s32 arg1) {
     }
     fn_802DF3F0(arg0);
     return arg0;
+}
+
+char *fn_802DF728(char *dst, char *src) {
+    char *fn_80248ADC(char *, s32);
+    char *fn_80248784(char *, char *);
+    char *p;
+    char *q;
+
+    if (dst != src) {
+        fn_80248784(dst, src);
+    }
+    fn_802DF3F0(dst);
+    p = fn_80248ADC(dst, '/');
+    if (p != NULL) {
+        p[1] = 0;
+    } else {
+        q = fn_80248ADC(dst, ':');
+        if (q != NULL) {
+            q[1] = (char) (s32) p;
+        } else {
+            __builtin_memcpy(dst, "./", 3);
+        }
+    }
+    return dst;
 }
 
 char *fn_802DF7BC(char *dst, char *src) {
