@@ -553,6 +553,11 @@ void fn_802DD020(void *arg0, void *arg1, void *arg2) {
     M2C_FIELD(M2C_FIELD(arg1, void **, 0x20), void **, 0x24) = arg1;
 }
 
+void fn_802DD03C(void *arg0, void *arg1) {
+    M2C_FIELD(M2C_FIELD(arg1, void **, 0x20), void **, 0x24) = M2C_FIELD(arg1, void **, 0x24);
+    M2C_FIELD(M2C_FIELD(arg1, void **, 0x24), void **, 0x20) = M2C_FIELD(arg1, void **, 0x20);
+}
+
 void fn_802D21E0(void *);
 void fn_802DD5B0(void *self, void *arg) {
     fn_802D21E0(arg);
