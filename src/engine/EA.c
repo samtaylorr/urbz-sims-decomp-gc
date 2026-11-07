@@ -539,24 +539,23 @@ void fn_802DB1A8(void *arg0, s32 arg1) {
     fn_802DB048(arg0, arg1 - 8);
 }
 
-s32 fn_802DB2EC(void *arg0, s32 (*arg1)(void *, s32), s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+s32 fn_802DB2EC(void *arg0, s32 (*arg1)(s32, s32), s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
     extern void *fn_802DB3A4(void *, s32, s32, s32, s32, s32);
-    extern void *fn_802DB410(void *, void *, s32);
+    extern s32 fn_802DB410(void *, void *, s32);
     extern void fn_802DB5F0(void *, void *);
     void *p;
-    void *r;
+    s32 r;
     s32 result = 0;
     if (arg1 != 0) {
         p = fn_802DB3A4(arg0, 0, arg3, arg4, arg5, arg6);
         if (p != 0) {
             result = 1;
             r = fn_802DB410(arg0, p, arg3);
-            while (r != 0) {
-                result = arg1(r, arg2);
-                r = fn_802DB410(arg0, p, arg3);
-                if (result == 0) {
-                    break;
-                }
+            if (r != 0) {
+                do {
+                    result = arg1(r, arg2);
+                    r = fn_802DB410(arg0, p, arg3);
+                } while (result != 0 && r != 0);
             }
         }
         fn_802DB5F0(arg0, p);
