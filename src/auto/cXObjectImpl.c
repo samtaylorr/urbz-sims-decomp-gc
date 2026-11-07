@@ -109,7 +109,7 @@ s32 fn_801352DC(void *arg0) {
 }
 
 s32 fn_80135D58(void *arg0, s32 arg1) {
-    return M2C_FIELD(arg0, s32 *, 0x4) == arg1;
+    return arg1 == M2C_FIELD(arg0, s32 *, 0x4);
 }
 
 void fn_80135D6C(void) {
