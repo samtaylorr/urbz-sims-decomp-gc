@@ -740,11 +740,13 @@ s32 fn_80148CB8(void *arg0) {
 }
 
 s32 fn_80148CD0(void *self) {
-    u8 *r = (*(u8 *(**)(void *))(*(u8 **)(M2C_FIELD(self, u8 *, 4) + 4) + 0x27C))(M2C_FIELD(self, u8 *, 4) + *(s16 *)(*(u8 **)(M2C_FIELD(self, u8 *, 4) + 4) + 0x278));
-    if (r == 0) {
-        return 0;
+    s32 result;
+    u8 *r = (*(u8 *(**)(void *))(*(u8 **)(M2C_FIELD(self, u8 **, 4) + 4) + 0x27C))(M2C_FIELD(self, u8 **, 4) + *(s16 *)(*(u8 **)(M2C_FIELD(self, u8 **, 4) + 4) + 0x278));
+    result = 0;
+    if (r != 0) {
+        result = (*(s32 (**)(void *, s32))(*(u8 **)(M2C_FIELD(self, u8 **, 4) + 4) + 0x44C))(M2C_FIELD(self, u8 **, 4) + *(s16 *)(*(u8 **)(M2C_FIELD(self, u8 **, 4) + 4) + 0x448), *(s16 *)(r + 4));
     }
-    return (*(s32 (**)(void *, s32))(*(u8 **)(M2C_FIELD(self, u8 *, 4) + 4) + 0x44C))(M2C_FIELD(self, u8 *, 4) + *(s16 *)(*(u8 **)(M2C_FIELD(self, u8 *, 4) + 4) + 0x448), *(s16 *)(r + 4));
+    return result;
 }
 
 u16 fn_80148D40(void *self) {
