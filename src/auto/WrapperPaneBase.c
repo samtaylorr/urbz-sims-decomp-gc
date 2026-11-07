@@ -298,6 +298,22 @@ void fn_800C5BF8(void *arg0) {
     fn_800CE954(self, 1);
 }
 
+void fn_800C5C34(void *arg0, s32 arg1) {
+    void fn_8039D8D8(void *);
+    void fn_800CE954(void *, s32);
+    void *self;
+    void *temp_r30;
+    void *temp_r3;
+
+    self = M2C_FIELD(arg0, void **, 0x70);
+    temp_r30 = M2C_FIELD(self, void **, 0x44);
+    temp_r3 = temp_r30 + 0x20;
+    M2C_FIELD(temp_r3, s32 *, 0x30) = arg1;
+    fn_8039D8D8(temp_r3);
+    M2C_FIELD(temp_r30, s32 *, 4) = (s32) (M2C_FIELD(temp_r30, s32 *, 4) | 2);
+    fn_800CE954(self, 1);
+}
+
 void fn_800C5F10(void *arg0) {
     void fn_800CE8F4(void *, s32);
     u8 *self = M2C_FIELD(arg0, u8 **, 0x70);
