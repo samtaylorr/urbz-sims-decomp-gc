@@ -692,6 +692,28 @@ void fn_80036514(void *self, s8 *arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
     }
 }
 
+s32 fn_800377E8(void *arg0, s32 arg1) {
+    void *fn_802CD440(void *, s32, s32);
+    s32 fn_8003904C(void *);
+    void *r;
+    void *p;
+    s32 sum;
+
+    r = fn_802CD440((u8 *)arg0 + 0x94, arg1, 0);
+    sum = 0;
+    if (r != NULL) {
+        r = M2C_FIELD(r, void **, 0x1C);
+        if (r != NULL) {
+            p = M2C_FIELD(r, void **, 0x0);
+            while (p != NULL) {
+                sum += fn_8003904C(M2C_FIELD(p, void **, 0x0));
+                p = M2C_FIELD(p, void **, 0x8);
+            }
+        }
+    }
+    return sum;
+}
+
 s32 fn_80037930(void *arg0, void *arg1, s32 arg2, s32 arg3) {
     void *fn_802CD440(void *, s32, s32);
     s32 fn_80036CBC(void *, void *, s32);
