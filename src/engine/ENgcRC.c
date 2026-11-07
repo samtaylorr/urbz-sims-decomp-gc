@@ -1131,6 +1131,18 @@ void fn_80354938(void *arg0, void *arg1) {
     M2C_FIELD(arg0, s32 *, 0x4DC) = (s32) M2C_FIELD(arg1, s32 *, 4);
 }
 
+void fn_80354944(void *arg0) {
+    s32 n;
+
+    n = M2C_FIELD(arg0, s32 *, 0x50C);
+    if (n != 0) {
+        M2C_FIELD(arg0, s32 *, 0x50C) = --n;
+        M2C_FIELD(arg0, s32 *, 0x4DC) = ((s32 *)((u8 *)arg0 + 0x4E4))[n];
+        return;
+    }
+    M2C_FIELD(arg0, s32 *, 0x4E0) = 1;
+}
+
 void fn_80354978(void *arg0) {
     M2C_UNK fn_8035C2D8(s32);
     fn_8035C2D8(M2C_FIELD(arg0, s32 *, 0x4D8));
@@ -1139,6 +1151,41 @@ void fn_80354978(void *arg0) {
 void fn_8035499C(void *arg0) {
     M2C_UNK fn_8035C370(s32);
     fn_8035C370(M2C_FIELD(arg0, s32 *, 0x4D8));
+}
+
+void fn_803549C0(void *arg0, void *arg1) {
+    extern s32 lbl_8049518C;
+    extern f32 lbl_803F4628;
+    extern f32 lbl_803F462C;
+    f32 *r;
+
+    if (lbl_8049518C == 0) {
+        return;
+    }
+    lbl_8049518C = 0;
+    r = M2C_FIELD(arg1, f32 **, 0x4);
+    M2C_FIELD(M2C_FIELD(arg0, void **, 0x4D8), f32 *, 0x9B0) = -r[0] + r[4];
+    M2C_FIELD(M2C_FIELD(arg0, void **, 0x4D8), f32 *, 0x9B4) = r[1] + r[5];
+    M2C_FIELD(M2C_FIELD(arg0, void **, 0x4D8), f32 *, 0x9B8) = (r[0] + r[4]) - (-r[0] + r[4]);
+    M2C_FIELD(M2C_FIELD(arg0, void **, 0x4D8), f32 *, 0x9BC) = (-r[1] + r[5]) - (r[1] + r[5]);
+    M2C_FIELD(M2C_FIELD(arg0, void **, 0x4D8), f32 *, 0x9C0) = lbl_803F4628;
+    M2C_FIELD(M2C_FIELD(arg0, void **, 0x4D8), f32 *, 0x9C4) = lbl_803F462C;
+    M2C_FIELD(M2C_FIELD(arg0, void **, 0x4D8), u32 *, 0x6CC) |= 0x80000200;
+}
+
+void fn_80354A60(void *arg0) {
+    extern s32 lbl_80495190;
+
+    M2C_FIELD(arg0, s32 *, 0x4DC) += 0x10;
+    if (lbl_80495190 != 0) {
+        lbl_80495190 = 0;
+    }
+}
+
+void fn_80354C18(void *arg0, void *arg1) {
+    void fn_80354C40(void *, s32, u8);
+
+    fn_80354C40(arg0, M2C_FIELD(arg1, s32 *, 0x4), M2C_FIELD(arg1, u8 *, 0x1));
 }
 
 void fn_8035500C(void) {
@@ -1331,7 +1378,9 @@ void fn_80356100(u8 *self, s32 *arg) {
 }
 
 void fn_803563F4(u8 *self, u8 *arg) {
-    self[*(u16 *)(arg + 2) * 0x40 + 0x569] = *(s32 *)(arg + 4);
+    s32 val = *(s32 *)(arg + 4);
+
+    (self + *(u16 *)(arg + 2) * 0x40)[0x569] = val;
     *(s32 *)(self + 0x510) = 1;
 }
 
