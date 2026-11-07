@@ -52,7 +52,7 @@ static inline void **WPBPtrVec_End(WPBPtrVec *v) {
     return v->end;
 }
 
-static inline void WPB_InitBase(void *self, char *name) {
+static inline void *WPB_InitBase(void *self, char *name) {
     extern char lbl_8040AA10[];
     extern void fn_8030728C(void *);
     s32 *a;
@@ -811,17 +811,17 @@ void fn_800CB2EC(void *arg0, s32 arg1) {
     extern u8 lbl_8041F754[];
     extern void fn_80048A48(void *);
     void fn_800CEF00(void *, s32);
-    s32 v;
     s32 *g;
     fn_80048A48(lbl_8041F754);
-    v = 0;
     if (M2C_FIELD(arg0, s32 *, 0x74) == 0) {
         g = (s32 *)lbl_8041F754;
         if (g[0x8C / 4] != 0) {
-            v = arg1;
+            goto on;
         }
     }
-    fn_800CEF00(arg0, v);
+    arg1 = 0;
+on:
+    fn_800CEF00(arg0, arg1);
 }
 
 void fn_800CB350(void *arg0) {
