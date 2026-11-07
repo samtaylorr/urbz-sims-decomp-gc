@@ -10,6 +10,12 @@ typedef struct {
 typedef struct { f32 x, y, z; } CasListenerVec3;
 
 typedef struct {
+    u32 small[2][32][8];
+    u32 pad[2];
+    u32 big[2][16][32];
+} CasFlags;
+
+typedef struct {
     void *node;
 } CasMapIter;
 
