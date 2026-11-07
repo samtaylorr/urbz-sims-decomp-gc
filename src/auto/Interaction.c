@@ -455,6 +455,19 @@ s32 fn_8010F580(void *arg0) {
     return ++M2C_FIELD(arg0, s32 *, 4);
 }
 
+s32 fn_8010F594(char *arg0) {
+    if (M2C_FIELD(arg0, s32 *, 0x4) == 1) {
+        void *vt = M2C_FIELD(arg0, void **, 0x0);
+        M2C_FIELD(vt, void (**)(void *), 0x34)(arg0 + M2C_FIELD(vt, s16 *, 0x30));
+        if (arg0 != NULL) {
+            vt = M2C_FIELD(arg0, void **, 0x0);
+            M2C_FIELD(vt, void (**)(void *, s32), 0x9C)(arg0 + M2C_FIELD(vt, s16 *, 0x98), 3);
+        }
+        return 0;
+    }
+    return --M2C_FIELD(arg0, s32 *, 0x4);
+}
+
 s32 fn_8010F724(s32 *self) {
     return self[2];
 }
@@ -935,13 +948,12 @@ s32 fn_80112F88(IntGroupVec *self, s32 n) {
 s32 fn_80112FCC(IntGroupVec *self, s32 id) {
     IntGroup *fn_80112480(IntGroupVec *, s32, s32);
     IntGroup *it = fn_80112480(self, id, 0);
-    s32 r;
     if (it != self->end) {
-        r = it->end - it->begin;
-    } else {
-        r = 0;
+        IntItem *b = it->begin;
+        IntItem *e = it->end;
+        return e - b;
     }
-    return r;
+    return 0;
 }
 
 void fn_8011302C(IntGroupVec *self) {
