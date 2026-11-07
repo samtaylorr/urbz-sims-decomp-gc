@@ -790,11 +790,14 @@ void *fn_802C83E4(void *arg0, s32 arg1) {
     s32 j;
 
     for (i = 0; i <= 3; i++) {
-        f32 *row = (f32 *)(arg1 + i * 0x10);
+        f32 *row = (f32 *)(i * 0x10 + arg1);
         for (j = 4; j != 0; j--) {
+            f32 f;
             void *vt = M2C_FIELD(arg0, void **, 0x18);
-            f32 f = *row++;
-            M2C_FIELD(vt, M2C_UNK (**)(void *, f32 *, M2C_UNK), 0x3C)(arg0 + M2C_FIELD(vt, s16 *, 0x38), &f, 4);
+            M2C_UNK (*fn)(void *, f32 *, M2C_UNK) = M2C_FIELD(vt, M2C_UNK (**)(void *, f32 *, M2C_UNK), 0x3C);
+            void *obj = arg0 + M2C_FIELD(vt, s16 *, 0x38);
+            f = *row++;
+            fn(obj, &f, 4);
         }
     }
     return arg0;
