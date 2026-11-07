@@ -847,14 +847,14 @@ void fn_8034AFD8(void *self, s32 arg) {
 }
 
 void fn_8034B010(void *self, s32 arg) {
+    void fn_803551C0(void *, void *);
+    extern u8 lbl_8046DF78[];
     struct {
         u8 type;
         s32 arg;
     } cmd;
-    void fn_803551C0(void *, void *);
-    extern u8 lbl_8046DF78[];
-    register s32 inv asm("r4") = ~arg;
-    cmd.arg = inv;
+    cmd.arg = arg;
+    cmd.arg = ~cmd.arg;
     cmd.type = 0x13;
     fn_803551C0(lbl_8046DF78, &cmd);
 }
@@ -1038,6 +1038,83 @@ void fn_8034B370(void *self, s32 arg) {
     cmd.arg = arg;
     cmd.type = 0x23;
     fn_80355D00(lbl_8046DF78, &cmd);
+}
+
+void fn_8034B3A8(void *self, f32 *a, f32 *b, f32 *c, f32 *d, f32 *e, f32 f) {
+    struct {
+        u8 type;
+        s32 pad;
+        f32 a[2];
+        f32 b[2];
+        f32 c[2];
+        f32 d[2];
+        f32 e[4];
+        f32 f;
+        s32 pad2[2];
+    } cmd;
+    void fn_80355484(void *, void *);
+    extern u8 lbl_8046DF78[];
+    cmd.type = 0x21;
+    cmd.a[0] = a[0];
+    cmd.a[1] = a[1];
+    cmd.b[0] = b[0];
+    cmd.b[1] = b[1];
+    cmd.c[0] = c[0];
+    cmd.c[1] = c[1];
+    cmd.d[0] = d[0];
+    cmd.d[1] = d[1];
+    cmd.e[0] = e[0];
+    cmd.e[1] = e[1];
+    cmd.e[2] = e[2];
+    cmd.e[3] = e[3];
+    cmd.f = f;
+    fn_80355484(lbl_8046DF78, &cmd);
+}
+
+void fn_8034B444(void *self, s16 id, s32 arg, f32 *v, f32 f) {
+    struct {
+        u8 type;
+        s16 id;
+        s32 arg;
+        f32 v[4];
+        f32 f;
+    } cmd;
+    void fn_803575B0(void *, void *);
+    extern u8 lbl_8046DF78[];
+    if (id != 0) {
+        cmd.type = 0x3A;
+        cmd.id = id;
+        cmd.arg = arg;
+        cmd.v[0] = v[0];
+        cmd.v[1] = v[1];
+        cmd.v[2] = v[2];
+        cmd.v[3] = v[3];
+        cmd.f = f;
+        fn_803575B0(lbl_8046DF78, &cmd);
+    }
+}
+
+void fn_8034B4AC(void *self, s16 id, s32 arg, f32 *v, f32 f) {
+    struct {
+        u8 type;
+        s16 id;
+        s32 arg;
+        f32 v[4];
+        f32 f;
+    } cmd;
+    void fn_8035710C(void *, void *);
+    extern u8 lbl_8046DF78[];
+    if (id != 0) {
+        cmd.type = 0x3B;
+        cmd.id = id;
+        cmd.arg = arg;
+        cmd.v[0] = v[0];
+        cmd.v[1] = v[1];
+        cmd.v[2] = v[2];
+        cmd.v[3] = v[3];
+        cmd.f = f;
+        fn_8035710C(lbl_8046DF78, &cmd);
+    }
 }
 
 void fn_8034B700(void) {
