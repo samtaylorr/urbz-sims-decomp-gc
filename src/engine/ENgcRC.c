@@ -89,6 +89,26 @@ void fn_80345FB0(void) {
 
 }
 
+void fn_80346258(void *self) {
+    void fn_80251ED0(void);
+    s32 fn_8025465C(void);
+    void fn_80254684(s32);
+    void fn_8026BAE8(void *);
+    extern void *lbl_80495078;
+    s32 enabled;
+
+    enabled = 1;
+    fn_80251ED0();
+    if (fn_8025465C() == 0) {
+        enabled = 0;
+    }
+    if (lbl_80495078 != NULL) {
+        fn_8026BAE8(lbl_80495078);
+    }
+    fn_80254684(enabled);
+    M2C_FIELD(self, s32 *, 0x20) = 0;
+}
+
 s32 fn_803465D0(void) {
     void fn_80260574(void *);
     extern u8 lbl_8046C400[];
