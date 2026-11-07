@@ -1548,7 +1548,7 @@ s32 fn_800D0B40(void *arg0) {
 }
 
 void fn_800D0B84(void *arg0, s32 arg1) {
-    M2C_UNK fn_800CE954(void *, M2C_UNK);
+    void fn_800CE954(void *, s32);
     void *temp_r30;
     void *temp_r3;
 
