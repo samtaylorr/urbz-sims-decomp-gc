@@ -1577,26 +1577,22 @@ void fn_80113DCC(char *self) {
 }
 
 s32 fn_80113E34(char *self) {
-    typedef struct {
-        s32 a;
-        s32 b;
-        char data[0x104];
-    } Str;
-    extern void fn_800F687C(void *, void *, s32);
-    extern void fn_800F6A78(void *, void *, s32);
-    extern void fn_802D20E8(void *);
-    extern s32 fn_800F68BC(void *);
-    Str str;
-    Str *b = &str;
+    typedef struct { u8 hdr[8]; char buf[0x104]; s32 pad; } Str;
+    void fn_800F687C(void *, char *, s32);
+    void fn_800F6A78(void *, void *, s32);
+    void fn_802D20E8(void *);
+    s32 fn_800F68BC(void *);
+    Str a;
     void *s = *(void **)(self + 0x150);
+    Str *p = &a;
     s32 ret;
-    fn_800F687C(b, b->data, 0x104);
-    fn_800F6A78(b, s, -1);
+    fn_800F687C(p, p->buf, 0x104);
+    fn_800F6A78(p, s, -1);
     fn_802D20E8(*(void **)(self + 0x150));
     *(void **)(self + 0x150) = 0;
-    if (fn_800F68BC(b) != 0) {
+    if (fn_800F68BC(p) != 0) {
         char *vt = *(char **)(self + 0x10);
-        ret = (*(s32 (**)(void *, void *))(vt + 0x2C))(self + *(s16 *)(vt + 0x28), b);
+        ret = (*(s32 (**)(void *, void *))(vt + 0x2C))(self + *(s16 *)(vt + 0x28), p);
         *(s32 *)(self + 0x140) = 0;
     } else {
         ret = -0x32;
@@ -1667,12 +1663,12 @@ s32 fn_80114BD0(char *self, IntObj *arg1) {
         return 1;
     }
     it = fn_80112CA4(*(IntGroupVec **)(self + 0x13C), arg1, &out, 0);
-    if (it == 0) {
-        fn_8018FA84(self, -0x63);
-        return 1;
+    if (it != 0) {
+        fn_8018FA84(self, 0);
+        return (*(u16 *)((char *)it + 8) >> 4) & 1;
     }
-    fn_8018FA84(self, 0);
-    return (*(u16 *)((char *)it + 8) >> 4) & 1;
+    fn_8018FA84(self, -0x63);
+    return 1;
 }
 
 void fn_80114C90(char *self, s32 arg1, s32 arg2) {
