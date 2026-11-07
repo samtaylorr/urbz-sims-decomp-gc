@@ -887,6 +887,14 @@ void fn_8034BDCC(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
 
+void fn_8034BE00(u32 *p, s32 size) {
+    u32 *end = (u32 *)((u8 *)p + size);
+
+    for (; p < end; p++) {
+        *p = 0x10801080;
+    }
+}
+
 extern u8 lbl_8041CE98[];
 extern void *lbl_804950A8;
 extern void fn_8036EE30(void *);
@@ -901,6 +909,10 @@ void fn_8034C028(u8 *self, s32 flags) {
 
 void fn_8034C05C(void) {
 
+}
+
+s32 fn_8034C060(u8 *self, s32 i) {
+    return ((s32 *)(self + 0x4620))[i];
 }
 
 s32 fn_8034E044();
