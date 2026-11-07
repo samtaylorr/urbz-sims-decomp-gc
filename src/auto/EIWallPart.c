@@ -249,6 +249,12 @@ s32 fn_80030804(s32 arg0) {
     }
 }
 
+s32 fn_80032334(s32 arg0) {
+    s32 fn_801A090C(s32, s32);
+    fn_801A090C(arg0, 1);
+    return fn_801A090C(arg0, 2) != 0;
+}
+
 s32 fn_80032380(s32 arg0) {
     s32 fn_801A090C(s32, s32);
     fn_801A090C(arg0, 8);
@@ -524,8 +530,8 @@ s32 fn_80039584(void *self, s32 arg1) {
     void **p = M2C_FIELD(self, void **, 0x14);
 
     while (p != NULL) {
-        Tile tile;
         void *obj = p[0];
+        Tile tile;
 
         fn_80105508(&tile);
         fn_80034F94(obj, &tile);
@@ -533,8 +539,8 @@ s32 fn_80039584(void *self, s32 arg1) {
             fn_801055FC(&tile, 2);
             return (s32)obj;
         }
-        p = (void **)p[2];
         fn_801055FC(&tile, 2);
+        p = (void **)p[2];
     }
     return 0;
 }
