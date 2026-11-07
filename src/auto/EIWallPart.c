@@ -35,6 +35,27 @@ static inline void *EIWallPart_AllocAligned(u32 size) {
     return p;
 }
 
+void fn_8002D378(void *self, s32 flags) {
+    extern u8 lbl_80407738[];
+    extern void fn_800F1A60(void *, s32);
+    extern void fn_8030834C(void *, s32);
+    M2C_FIELD(self, u8 **, 0x44) = lbl_80407738;
+    fn_8002D3CC(self);
+    fn_800F1A60((u8 *)self + 0x110, 2);
+    fn_8030834C(self, flags);
+}
+
+void fn_8002DA10(void *arg0) {
+    extern f32 lbl_803C5558[];
+    void *var_r3;
+
+    var_r3 = M2C_FIELD(arg0, void **, 0);
+    while (var_r3 != NULL) {
+        M2C_FIELD(M2C_FIELD(var_r3, void **, 0), f32 *, 0xB8) = lbl_803C5558[0];
+        var_r3 = M2C_FIELD(var_r3, void **, 8);
+    }
+}
+
 void fn_8002DA3C(void) {
 
 }
@@ -316,6 +337,23 @@ u32 fn_800359CC(void *self, s32 which) {
     return 0;
 }
 
+void *fn_80035C3C(u32 n) {
+    extern void *fn_802DBBCC(void *, u32, s32);
+    void *heap;
+    void *p;
+
+    heap = fn_802D0AB8((void *)n);
+    p = fn_802D197C(heap, 0x40, 4);
+    if (p == NULL) {
+        p = fn_802DBBCC(heap, 0x40, 0);
+        if (p == NULL && heap == fn_802D0AB8((void *)n)) {
+            p = fn_802DBBCC(fn_802D0B3C(), 0x40, 0);
+        }
+    }
+    fn_80248488(p, 0, n);
+    return p;
+}
+
 void fn_80035CD4(void *arg0) {
     fn_802D1A00(fn_802D0AB8(arg0), arg0);
 }
@@ -346,6 +384,22 @@ void fn_800382D0(s32 arg0, void **arg1) {
             var_r31 = M2C_FIELD(var_r31, void **, 8);
         } while (var_r31 != NULL);
     }
+}
+
+s32 fn_8003904C(void *self) {
+    void **p = M2C_FIELD(self, void **, 0x14);
+    s32 n = 0;
+
+    if (p == NULL) {
+        return n;
+    }
+    do {
+        if (p[0] != NULL) {
+            n++;
+        }
+        p = (void **)p[2];
+    } while (p != NULL);
+    return n;
 }
 
 s32 fn_80039620(void *arg0, s32 arg1, s32 arg2) {
