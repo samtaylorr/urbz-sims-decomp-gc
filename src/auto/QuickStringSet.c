@@ -115,9 +115,10 @@ void fn_800F5A4C(void *arg0, void *arg1, void *arg2) {
     QSSStrBuf a;
     QSSStrBuf b;
     QSSStrBuf *pa = &a;
-    QSSStrBuf *pb = &b;
+    QSSStrBuf *pb;
     fn_800F687C(pa, pa->buf, 0x104);
     QSSStrBuf_Init(&b);
+    pb = &b;
     fn_800F585C(arg0, pa, pb, arg2);
     fn_800F6A38(arg1, pa);
     fn_800F6A78(arg1, pb, -1);
@@ -183,14 +184,20 @@ s32 fn_800F5FBC(void *arg0, s32 *arg1) {
     s32 fn_800C4568(void *self, s32 name);
     s32 fn_800C4548(void *self, s32 name);
     void *f;
+    s32 ret;
     if (fn_800F6498(arg0) != 0) {
         return -0x2F;
     }
     f = lbl_80495A30;
-    if (fn_800C4568(f, fn_800F69E8(arg1)) != 0) {
-        return -0x2B;
+    if (fn_800C4568(f, fn_800F69E8(arg1)) == 0) {
+        ret = -0x2A;
+        if (fn_800C4548(f, fn_800F69E8(arg1)) != 0) {
+            ret = 0;
+        }
+    } else {
+        ret = -0x2B;
     }
-    return fn_800C4548(f, fn_800F69E8(arg1)) == 0 ? -0x2A : 0;
+    return ret;
 }
 
 s32 fn_800F6048(void *arg0, s32 *arg1) {
