@@ -663,6 +663,7 @@ void *fn_800CA8C8(void *self) {
     char *name;
     s32 *a;
     s32 *b;
+    s32 pad[2];
 
     name = lbl_803D0804;
     fn_8030728C(self);
@@ -981,6 +982,13 @@ void fn_800CD724(void *self, s32 id, s32 n, f32 arg3) {
 M2C_UNK fn_800CD774(void *self, s32 id, s32 n, s32 arg3) {
     M2C_UNK fn_800CCAB0(void *, s32);
     return fn_800CCAB0(fn_800CD660(self, id, n), arg3);
+}
+
+M2C_UNK fn_800CD7A8(void *self, s32 id, s32 n, s32 arg3) {
+    void *fn_800CD660(void *self, s32 id, s32 n);
+    u8 *obj = fn_800CD660(self, id, n);
+    u8 *vt = *(u8 **)(obj + 0x1C);
+    return (*(M2C_UNK (**)(void *, s32))(vt + 0x3C))(obj + *(s16 *)(vt + 0x38), arg3);
 }
 
 void *fn_800CD660(void *self, s32 id, s32 n);
