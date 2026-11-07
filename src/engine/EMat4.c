@@ -264,6 +264,25 @@ void fn_802C6CCC(s32 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     }
 }
 
+void fn_802C6D20(char **arg0, char **arg1, s32 n) {
+    M2C_UNK fn_802482F8();
+    s32 m;
+    s32 end;
+
+    if (arg0 != arg1) {
+        m = M2C_FIELD(arg1, s32 *, 4);
+        if (m > n) {
+            m = n;
+        }
+        fn_802482F8(*arg1, *arg0, m);
+    }
+    end = M2C_FIELD(arg1, s32 *, 4) - 1;
+    if (end > n) {
+        end = n;
+    }
+    (*arg1)[end] = 0;
+}
+
 void fn_802C6D94(s32 *self, s32 out, s32 n) {
     M2C_UNK fn_802C69B0(s32, s32);
     s32 r = fn_802C6A5C(self) - n;
@@ -935,15 +954,15 @@ f32 *fn_802C85E8(f32 *m) {
     return m;
 }
 
-f32 *fn_802C8688(f32 (*dst)[4], f32 (*src)[4]) {
+f32 *fn_802C8688(f32 (*dst)[4], f32 *src) {
     s32 i;
     s32 j;
     for (i = 0; i <= 3; i++) {
         for (j = 0; j < 4; j++) {
-            dst[i][j] = src[j][i];
+            dst[i][j] = src[i + j * 4];
         }
     }
-    return (f32 *)src;
+    return src;
 }
 
 void fn_802C86D4(f32 *m) {
@@ -1060,17 +1079,21 @@ void fn_802C8D24(f32 (*dst)[4], f32 (*src)[4]) {
     extern f32 lbl_803F00B8[];
     s32 i;
     s32 j;
-    f32 *t = src[3];
-    f32 *d3 = dst[3];
-    f32 *d1 = dst[1];
-    f32 *d2 = dst[2];
+    f32 *t;
+    f32 *d1;
+    f32 *d2;
+    f32 *d3;
     for (i = 0; i <= 2; i++) {
         for (j = 0; j < 3; j++) {
-            ((f32 *)dst)[j * 4 + i] = src[i][j];
+            dst[j][i] = src[i][j];
         }
     }
+    t = src[3];
+    d1 = dst[1];
+    d2 = dst[2];
+    d3 = dst[3];
     for (j = 0; j < 3; j++) {
-        d3[j] = -(src[3][0] * dst[0][j] + t[1] * d1[j] + t[2] * d2[j]);
+        d3[j] = -(t[0] * dst[0][j] + t[1] * d1[j] + t[2] * d2[j]);
     }
     dst[3][3] = lbl_803F00B8[0];
 }
@@ -1214,29 +1237,29 @@ void fn_802C97B4(void *m, f32 *v) {
 }
 
 f32 *fn_802C9AD4(f32 *m) {
+    typedef struct { f32 m[16]; } Mat;
     void fn_802C98D8(f32 *);
-    void fn_8039ABB0(f32 *, f32 *);
-    void fn_802C8A34(f32 *, f32 *);
-    f32 tmp[16];
+    void *fn_8039ABB0(void *, void *);
+    void fn_802C8A34(f32 *, Mat *);
+    Mat tmp;
 
     fn_802C98D8(m);
-    fn_8039ABB0(&tmp[0], m);
-    fn_802C8A34(m, &tmp[0]);
+    fn_8039ABB0(&tmp, m);
+    fn_802C8A34(m, &tmp);
     return m;
 }
 
 f32 *fn_802CA5BC(f32 *m, f32 a, f32 b, f32 c, f32 d) {
+    typedef struct { f32 x, y, z; } Vec;
     extern f32 lbl_803F0124[];
-    void fn_802C93A0(f32 *, f32 *);
-    f32 v[3];
-    f32 *p;
+    void fn_802C93A0(f32 *, Vec *);
+    Vec v;
 
     fn_802C9AD4(m);
-    p = v;
-    p[0] = c / a;
-    p[2] = lbl_803F0124[0];
-    p[1] = d / b;
-    fn_802C93A0(m, p);
+    v.x = c / a;
+    v.z = lbl_803F0124[0];
+    v.y = d / b;
+    fn_802C93A0(m, &v);
     return m;
 }
 
