@@ -471,6 +471,14 @@ void fn_801BBFD0(void) {
 
 }
 
+static inline void CasListener_ReleaseSound(void *self) {
+    extern void fn_8031EA2C(void *);
+    if (M2C_FIELD(self, void **, 0x20) != NULL) {
+        fn_8031EA2C(M2C_FIELD(self, void **, 0x20));
+        M2C_FIELD(self, void **, 0x20) = NULL;
+    }
+}
+
 void fn_801BBFD4(void *self) {
     extern void fn_8031EA2C(void *);
     if (M2C_FIELD(self, void **, 0x20) != NULL) {
