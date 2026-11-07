@@ -1297,6 +1297,24 @@ s32 fn_80115688(void *self, s32 b) {
     return fn_801159B8(self, buf, b);
 }
 
+s32 fn_80115954(void *self, s32 *out, s32 b) {
+    extern s32 fn_800F6440(void *, s32);
+    extern s32 fn_800F6398(void *, void *, s32 *);
+    s32 size = 0x4C;
+    void *p = (u8 *)self + 0x14;
+    s32 r;
+
+    r = fn_800F6440(p, b);
+    if (r != 0) {
+        return r;
+    }
+    r = fn_800F6398(p, out, &size);
+    if (r != 0) {
+        return r;
+    }
+    return 0;
+}
+
 s32 fn_801159B8(void *self, void *in, s32 b) {
     extern s32 fn_801139A0(void *, void *, s32);
     extern s32 fn_800F6440(void *, s32);
