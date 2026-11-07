@@ -905,6 +905,15 @@ s32 fn_801C02BC(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x28);
 }
 
+void fn_801C02C4(void *self, s32 arg1) {
+    if (M2C_FIELD(self, s32 *, 0x24) != arg1) {
+        u8 *obj = (u8 *)fn_801BFD84(self);
+        u8 *vt = M2C_FIELD(obj, u8 **, 8);
+        (*(void (**)(void *))(vt + 0x3C))(obj + *(s16 *)(vt + 0x38));
+        M2C_FIELD(self, s32 *, 0x24) = arg1;
+    }
+}
+
 s32 fn_801C031C(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x24);
 }
