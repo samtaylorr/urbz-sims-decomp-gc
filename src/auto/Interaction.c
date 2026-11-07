@@ -445,20 +445,21 @@ s32 fn_8010F1EC(void *self, s32 arg1) {
         M2C_FIELD(self, s32 *, 0x24) = arg1;
         if (M2C_FIELD(self, s32 *, 0x1C) != 0 && M2C_FIELD(self, s32 *, 0x30) == 0) {
             Q q;
+            Q *p = &q;
             f32 a;
             f32 b;
             void *obj;
             void *vt;
             q.flags = 0;
             fn_8010F334(self, M2C_FIELD(self, s32 *, 0x20), &a, &b);
-            q.x = a;
-            q.flags |= 1;
-            q.y = b;
-            q.flags |= 2;
+            p->x = a;
+            p->flags |= 1;
+            p->y = b;
+            p->flags |= 2;
             obj = lbl_80494FA4;
             vt = *(void **)obj;
             ((void (*)(void *, s32, Q *))M2C_FIELD(vt, void **, 0xB4))(
-                (u8 *)obj + M2C_FIELD(vt, s16 *, 0xB0), M2C_FIELD(self, s32 *, 0x1C), &q);
+                (u8 *)obj + M2C_FIELD(vt, s16 *, 0xB0), M2C_FIELD(self, s32 *, 0x1C), p);
         }
     }
     return 1;
