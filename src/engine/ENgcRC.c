@@ -982,12 +982,16 @@ M2C_UNK fn_8034D5B4(void *arg0) {
     void fn_80268ED0(s32);
     void fn_80268DA0(void);
     void fn_802678D0(void);
-    s32 *arr;
+    struct {
+        u8 pad[0x340];
+        s32 idx;
+        s32 buf[2];
+        s32 cur;
+    } *self = arg0;
 
-    fn_80268ED0(M2C_FIELD(arg0, s32 *, 0x34C));
-    arr = (s32 *)((u8 *)arg0 + 0x344);
-    M2C_FIELD(arg0, s32 *, 0x340) = (M2C_FIELD(arg0, s32 *, 0x340) + 1) % 2;
-    M2C_FIELD(arg0, s32 *, 0x34C) = *(s32 *)((u8 *)arr + M2C_FIELD(arg0, s32 *, 0x340) * 4);
+    fn_80268ED0(self->cur);
+    self->idx = (self->idx + 1) % 2;
+    self->cur = self->buf[self->idx];
     fn_80268DA0();
     fn_802678D0();
 }
@@ -1275,6 +1279,36 @@ void fn_80355E64(u8 *self, u8 *arg) {
     p[0x3AC] = on;
     *(s32 *)(p + 0x3B0) = val;
     *(u32 *)(p + 0x6CC) |= 0x80000000 | 0x40;
+}
+
+void fn_80355EC8(u8 *self, u8 *arg) {
+    extern s32 lbl_803F4684[];
+    u8 enable;
+    u8 mode;
+    u8 off;
+    u8 *p;
+
+    enable = arg[1];
+    p = *(u8 **)(self + 0x4D8);
+    off = arg[3];
+    mode = arg[2];
+    if (enable != 0) {
+        p[0x3C9] = 0;
+        *(s32 *)(p + 0x3B8) = lbl_803F4684[mode];
+        p[0x3BC] = off;
+        *(s32 *)(p + 0x3C4) = 7;
+        *(u32 *)(p + 0x6CC) |= 0x80000000 | 0x40;
+        *(s32 *)(p + 0x3C0) = 0;
+        p[0x3C8] = 0;
+    } else {
+        *(s32 *)(p + 0x3C4) = 7;
+        p[0x3C9] = 1;
+        p[0x3C8] = 0;
+        *(u32 *)(p + 0x6CC) |= 0x80000000 | 0x40;
+        *(s32 *)(p + 0x3B8) = 7;
+        p[0x3BC] = 0;
+        *(s32 *)(p + 0x3C0) = 1;
+    }
 }
 
 extern s32 lbl_804951A4;
