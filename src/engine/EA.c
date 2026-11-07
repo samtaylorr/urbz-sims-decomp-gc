@@ -275,6 +275,14 @@ void fn_802D8EF8(void *arg0) {
     fn_80259354(M2C_FIELD(arg0, s32 *, 0x318));
 }
 
+void fn_802D8F1C(void *arg0) {
+    void fn_802595DC(void *);
+
+    if (M2C_FIELD(arg0, void **, 0x318) != NULL) {
+        fn_802595DC(M2C_FIELD(arg0, void **, 0x318));
+    }
+}
+
 void fn_802D8F48(void *arg0) {
     M2C_UNK fn_8025993C(s32);
     fn_8025993C(M2C_FIELD(arg0, s32 *, 0x318));
