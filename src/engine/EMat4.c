@@ -103,7 +103,7 @@ void fn_802C686C(void *arg0, s8 *arg1, s32 arg2) {
 }
 
 void fn_802C6958(s32 arg0, s32 arg1, u8 c) {
-    M2C_UNK fn_802C6880();
+    void fn_802C6880(s32, s32, u16 *);
     u16 buf = c << 8;
     fn_802C6880(arg0, arg1, &buf);
 }
