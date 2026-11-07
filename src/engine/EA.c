@@ -388,8 +388,8 @@ M2C_UNK fn_802D8DA4(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x318) = arg1;
     M2C_FIELD(arg0, s32 *, 0x31C) = fn_802D9020(arg0);
     M2C_FIELD(arg0, s32 *, 0x320) = fn_802D9028(arg0);
-    M2C_FIELD(arg0, s32 *, 0x328) = 0;
     M2C_FIELD(arg0, s32 *, 0x324) = 0;
+    M2C_FIELD(arg0, s32 *, 0x328) = 0;
     if (M2C_FIELD(arg0, void **, 0x31C) != NULL) {
         fn_80248488(M2C_FIELD(arg0, void **, 0x31C), 0xDBDBDBDB, 0x1000);
         M2C_FIELD(arg0, s32 *, 0x328) = 1;
