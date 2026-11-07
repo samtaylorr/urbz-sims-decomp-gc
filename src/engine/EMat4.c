@@ -83,6 +83,16 @@ s32 *fn_802C66FC(s32 *arg0) {
     return arg0;
 }
 
+void fn_802C6710(void *self, s32 flags) {
+    extern void fn_802D20E8(void *);
+    extern void *fn_802D0AB8(void *);
+
+    fn_802D1A00(((void *(*)(void))fn_802D0AB8)(), M2C_FIELD(self, void **, 4));
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_802C682C(void **head, s32 stride, s32 count, char *base) {
     s32 i;
 
@@ -878,15 +888,15 @@ void fn_802C96D4(void) {
 
 }
 
-f32 fn_802C96D8(f32 *m) {
+f32 fn_802C96D8(f32 (*m)[4]) {
+    int i, j;
     f32 max = 0.0f;
     f32 sum;
-    int i, j;
 
     for (i = 0; i < 3; i++) {
         sum = 0.0f;
         for (j = 0; j < 3; j++) {
-            sum += __builtin_fabsf(m[j * 4 + i]);
+            sum += __builtin_fabsf(m[j][i]);
         }
         if (sum > max) {
             max = sum;
