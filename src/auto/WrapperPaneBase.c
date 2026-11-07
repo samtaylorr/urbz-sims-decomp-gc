@@ -1983,13 +1983,13 @@ void fn_800CC79C(void *arg0) {
 
 void fn_800CC938(void *arg0) {
     extern s32 lbl_804966B4;
-    extern f32 lbl_803D1208;
+    extern f32 lbl_803D1208[];
     u8 *p;
 
     p = (u8 *)arg0 + 0x20;
     M2C_FIELD(p, s32 *, 0x30) = lbl_804966B4;
     fn_8039D8D8(p);
-    M2C_FIELD(p, f32 *, 0x48) = lbl_803D1208;
+    M2C_FIELD(p, f32 *, 0x48) = lbl_803D1208[0];
     M2C_FIELD(p, s32 *, 0x38) = (M2C_FIELD(p, s32 *, 0x38) & ~1) | 0x38;
 }
 
