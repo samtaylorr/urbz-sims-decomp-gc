@@ -51,24 +51,24 @@ void fn_8027DA94(void *arg0, void *arg1, u32 *arg2, void **arg3) {
     void *fn_8027B9B0(void *, void *, void *);
     u32 w = arg2[0];
     s32 flag = 0;
-    if ((w & 0x3F) > 0xB && (w & 0x3F) <= 0x13) {
-        flag = (w >> 15) & 1;
-    }
-    if (flag == 0) {
-        char *vt = *(char **)((char *)arg2 + 4);
-        if ((*(s32 (**)(char *))(vt + 0x44))((char *)arg2 + *(s16 *)(vt + 0x40)) == 0) {
-            w = arg2[0];
-            flag = 0;
-            if ((w & 0x3F) == 1) {
-                flag = (w >> 15) & 1;
-            }
-            if (flag != 0) {
-                *arg3 = fn_8027B9B0(arg0, arg1, arg2 + 2);
-            }
-            return;
+    s32 t = w & 0x3F;
+    if (t > 0xB) {
+        if (t <= 0x13) {
+            flag = (w >> 15) & 1;
         }
     }
-    *arg3 = arg2;
+    if (flag != 0 || ((*(s32 (**)(char *))(*(char **)((char *)arg2 + 4) + 0x44))((char *)arg2 + *(s16 *)(*(char **)((char *)arg2 + 4) + 0x40))) != 0) {
+        *arg3 = arg2;
+    } else {
+        w = arg2[0];
+        flag = 0;
+        if ((w & 0x3F) == 1) {
+            flag = (w >> 15) & 1;
+        }
+        if (flag != 0) {
+            *arg3 = fn_8027B9B0(arg0, arg1, arg2 + 2);
+        }
+    }
 }
 
 void fn_8027ED20(void *arg0) {
@@ -190,30 +190,32 @@ void fn_80287A04(void *arg0, u8 **arg1) {
     void fn_802BBE7C(void *);
     extern void *lbl_80494B48;
     void *target = arg1[1];
+    void *g;
     u32 *p = (u32 *)(((u32)*arg1 + 3) & ~3);
     *arg1 = (u8 *)(p + 1);
     fn_802983B8(target, *p);
+    g = lbl_80494B48;
     M2C_FIELD(M2C_FIELD(target, void **, 0x50), u32 *, 0x1C) &= ~0x40;
-    if (M2C_FIELD(lbl_80494B48, s32 *, 4) != 0 && M2C_FIELD(arg0, s32 *, 0) == 0) {
-        fn_802BBE7C(lbl_80494B48);
+    if (M2C_FIELD(g, s32 *, 4) != 0 && M2C_FIELD(arg0, s32 *, 0) == 0) {
+        fn_802BBE7C(g);
     }
 }
 
 void fn_80287C20(void *arg0, u8 **arg1) {
     char **regs = (char **)((u8 *)arg0 + 0x54);
     u32 *p = (u32 *)(((u32)*arg1 + 3) & ~3);
-    char *obj;
-    char *vt;
     *arg1 = (u8 *)(p + 1);
-    obj = regs[*p];
-    if (obj != 0) {
-        vt = *(char **)(obj + 4);
+    if (regs[*p] != 0) {
+        char *obj = regs[*p];
+        char *vt = *(char **)(obj + 4);
         (*(void (**)(char *))(vt + 0x14))(obj + *(s16 *)(vt + 0x10));
     }
     regs[*p] = AptStack_Peek(arg0, 0);
-    obj = regs[*p];
-    vt = *(char **)(obj + 4);
-    (*(void (**)(char *))(vt + 0xC))(obj + *(s16 *)(vt + 8));
+    {
+        char *obj = regs[*p];
+        char *vt = *(char **)(obj + 4);
+        (*(void (**)(char *))(vt + 0xC))(obj + *(s16 *)(vt + 8));
+    }
 }
 
 void fn_80287CD0(void *arg0, u8 **arg1) {
