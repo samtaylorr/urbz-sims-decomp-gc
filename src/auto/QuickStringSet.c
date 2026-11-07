@@ -1140,8 +1140,8 @@ void fn_800F8CB4(void) {
 }
 
 void fn_800F8CB8(void) {
-    extern char *lbl_8041E640;
-    char *obj = **(char ***)(lbl_8041E640 + 4);
+    extern char *lbl_8041E640[];
+    char *obj = **(char ***)(lbl_8041E640[0] + 4);
     char *vt = M2C_FIELD(obj, char **, 8);
 
     (*(void (**)(void *))(vt + 0x3C))(obj + *(s16 *)(vt + 0x38));
@@ -1431,7 +1431,6 @@ void fn_800FB8AC(void) {
 }
 
 s32 fn_800FB8E4(void *arg0, s32 *arg1) {
-    struct QSSPos { s32 a; s32 b; };
     extern u8 *lbl_80496668;
     extern s32 fn_80105B84(void *);
     extern s32 fn_80105B78(void *);
@@ -1439,16 +1438,16 @@ s32 fn_800FB8E4(void *arg0, s32 *arg1) {
     u8 *g = lbl_80496668;
     u8 *obj;
     u8 *vt;
-    struct QSSPos pos;
+    s32 pos[2];
 
     obj = (*(u8 *(**)(u8 *, void *))(*(u8 **)g + 0x94))(g + *(s16 *)(*(u8 **)g + 0x90), arg0);
     if (obj != NULL) {
         vt = *(u8 **)(obj + 4);
-        pos = (*(struct QSSPos (**)(u8 *))(vt + 0x31C))(obj + *(s16 *)(vt + 0x318));
-        arg1[0] = fn_80105B84(&pos);
-        arg1[1] = fn_80105B78(&pos);
+        (*(void (**)(void *, u8 *))(vt + 0x31C))(pos, obj + *(s16 *)(vt + 0x318));
+        arg1[0] = fn_80105B84(pos);
+        arg1[1] = fn_80105B78(pos);
         arg1[2] = 1;
-        fn_801055FC(&pos, 2);
+        fn_801055FC(pos, 2);
         return 1;
     } else {
         return 0;
