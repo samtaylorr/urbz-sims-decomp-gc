@@ -92,8 +92,14 @@ void fn_800F66A0(void (*cb)(void)) {
 }
 
 u16 fn_800F66A8(u32 arg0) {
-    lbl_804943C0 = ((u16 *)&lbl_804943C0)[1] * 0x4E6D + 0x3039;
-    return (u16)((((u16 *)&lbl_804943C0)[0] & 0x7FFF) % arg0);
+    u16 *p = (u16 *)&lbl_804943C0;
+    u32 v;
+    v = p[1];
+    v = v * 0x4E6D + 0x3039;
+    *(s32 *)p = v;
+    v = p[0] & 0x7FFF;
+    v = v % arg0;
+    return v;
 }
 
 s32 fn_800F66D8(void) {
@@ -1010,6 +1016,33 @@ void fn_800F8820(void (*cb)(void)) {
     lbl_804943C8 = cb;
 }
 
+s32 fn_800F8828(void *self, s32 val, s32 flag) {
+    u32 i;
+    if (lbl_804943C8 == 0) {
+        return -2;
+    }
+    i = 0;
+    if (flag) {
+        i = 0x40;
+    }
+    for (; i <= 0x4F; i++) {
+        u32 bits = M2C_FIELD(self, u32 *, 0x2940 + i * 4) | M2C_FIELD(self, u32 *, 0x2800 + i * 4);
+        if (bits != -1) {
+            s32 n = 0;
+            u32 m = 1;
+            while (bits & m) {
+                m <<= 1;
+                n++;
+            }
+            M2C_FIELD(self, u32 *, 0x2800 + i * 4) |= m;
+            n = i * 32 + n;
+            ((s32 *)self)[n] = val;
+            return n;
+        }
+    }
+    return -1;
+}
+
 void fn_800F8BF4(s32 arg0) {
     M2C_UNK fn_80248488(s32, M2C_UNK, M2C_UNK);
     fn_80248488(arg0 + 0x2940, 0, 0x140);
@@ -1281,6 +1314,36 @@ void fn_800FCB00(void) {
     }
 }
 
+extern u8 lbl_8040D4F0[];
+void **fn_800FD650(void **self) {
+    fn_800FC1AC(self);
+    self[0] = lbl_8040D4F0;
+    self[4] = 0;
+    self[5] = 0;
+    self[6] = 0;
+    self[7] = 0;
+    return self;
+}
+
+void fn_800FD6A0(void **self, s32 arg1) {
+    extern void fn_8031EA2C(void *);
+    M2C_UNK fn_800FC1C0(void **, s32);
+    self[0] = lbl_8040D4F0;
+    if (self[4] != NULL) {
+        fn_8031EA2C(self[4]);
+        self[4] = NULL;
+    }
+    if (self[5] != NULL) {
+        fn_8031EA2C(self[5]);
+        self[5] = NULL;
+    }
+    if (self[6] != NULL) {
+        fn_8031EA2C(self[6]);
+        self[6] = NULL;
+    }
+    fn_800FC1C0(self, arg1);
+}
+
 s32 fn_800FD808(void *arg0, s32 arg1) {
     void *var_r9;
 
@@ -1377,6 +1440,7 @@ s32 fn_800FD9E8(void **obj) {
     return n;
 }
 
+extern u8 lbl_8040D4F0[];
 extern u8 lbl_8040D498[];
 void **fn_800FDA44(void **self) {
     fn_800FC1AC(self);
