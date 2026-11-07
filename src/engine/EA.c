@@ -1592,14 +1592,14 @@ s32 fn_802DE70C(u32 **self, s32 pos, s32 count) {
     s32 fn_802DDC6C(s32, s32);
     s32 n;
 
-    if (count == 0) {
-        return 0;
+    if (count != 0) {
+        n = count - 1;
+        if (fn_802DDC6C((s32)self, pos + n)) {
+            return (-1 << n) | fn_802DE634(self, pos, n);
+        }
+        return fn_802DE634(self, pos, n);
     }
-    n = count - 1;
-    if (fn_802DDC6C((s32)self, pos + n)) {
-        return fn_802DE634(self, pos, n) | (-1 << n);
-    }
-    return fn_802DE634(self, pos, n);
+    return 0;
 }
 
 s32 fn_802DE818(void *self, f32 f) {
