@@ -1532,12 +1532,11 @@ s32 fn_802DE2F8(u32 **self, u32 **other) {
 
 s32 fn_802DE384(u32 **self, u32 **other) {
     u32 fn_802DE1B0(void *);
-    u32 n = fn_802DE1B0(self);
+    s32 i = fn_802DE1B0(self) - 1;
     u32 *a = *self;
     u32 *b = *other;
-    u32 i;
 
-    for (i = 0; i < n; i++) {
+    for (; i != -1; i--) {
         if (*a++ & *b++) {
             return 1;
         }
