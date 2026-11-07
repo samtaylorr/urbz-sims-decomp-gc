@@ -977,11 +977,11 @@ s32 fn_80112268(s32 kind) {
     case 0:
         r = fn_80112104(obj, 0);
         break;
-    case 1:
-        r = fn_80112104(obj, 1);
-        break;
     case 2:
         r = fn_80112104(obj, 2);
+        break;
+    case 1:
+        r = fn_80112104(obj, 1);
         break;
     }
     fn_8011208C(obj, 2);
@@ -1001,10 +1001,12 @@ s32 fn_80112F68(void *arg0) {
 }
 
 s32 fn_80112F88(IntGroupVec *self, s32 n) {
-    if (n <= 0 || n > self->end - self->begin) {
-        return 0;
+    if (n > 0) {
+        if (n <= self->end - self->begin) {
+            return self->begin[n - 1].unk10;
+        }
     }
-    return self->begin[n - 1].unk10;
+    return 0;
 }
 
 s32 fn_80112FCC(IntGroupVec *self, s32 id) {
