@@ -74,7 +74,9 @@ static inline void QSSVec1C_Erase(QSSVec1C *v, QSSElem1C *first, QSSElem1C *last
 static inline void QSSVec1C_Resize(QSSVec1C *v, u32 n, QSSElem1C *val) {
     void fn_8039FED8(QSSVec1C *, QSSElem1C *, u32, QSSElem1C *);
     if (n < QSSVec1C_Size(v)) {
-        QSSVec1C_Erase(v, v->begin + n, v->end);
+        QSSElem1C *first = v->begin + n;
+        QSSElem1C *last = v->end;
+        QSSVec1C_Erase(v, first, last);
     } else {
         fn_8039FED8(v, v->end, n - QSSVec1C_Size(v), val);
     }
@@ -1092,15 +1094,8 @@ s32 fn_800F8EA4(void) {
 }
 
 void fn_800F9320(u8 *self, u32 n) {
-    void fn_8039FED8(QSSVec1C *, QSSElem1C *, u32, QSSElem1C *);
     QSSElem1C tmp;
-    QSSVec1C *v = (QSSVec1C *)(self + 0x20);
-
-    if (n < QSSVec1C_Size(v)) {
-        QSSVec1C_Erase(v, v->begin + n, v->end);
-    } else {
-        fn_8039FED8(v, v->end, n - QSSVec1C_Size(v), &tmp);
-    }
+    QSSVec1C_Resize((QSSVec1C *)(self + 0x20), n, &tmp);
 }
 
 void fn_800F9564(void *arg0, f32 farg0) {
@@ -1446,12 +1441,22 @@ void **fn_800FD650(void **self) {
     return self;
 }
 
-void fn_800FD6A0(void **self, s32 arg1) {
-    M2C_UNK fn_800FC1C0(void **, s32);
-    self[0] = lbl_8040D4F0;
-    QSS_FreePtr(&self[4]);
-    QSS_FreePtr(&self[5]);
-    QSS_FreePtr(&self[6]);
+void fn_800FD6A0(u8 **self, s32 arg1) {
+    extern void fn_8031EA2C(void *);
+    M2C_UNK fn_800FC1C0(u8 **, s32);
+    *self = lbl_8040D4F0;
+    if (self[4] != NULL) {
+        fn_8031EA2C(self[4]);
+        self[4] = NULL;
+    }
+    if (self[5] != NULL) {
+        fn_8031EA2C(self[5]);
+        self[5] = NULL;
+    }
+    if (self[6] != NULL) {
+        fn_8031EA2C(self[6]);
+        self[6] = NULL;
+    }
     fn_800FC1C0(self, arg1);
 }
 
