@@ -1072,6 +1072,17 @@ u16 fn_8034D924(void) {
     return lbl_80495144;
 }
 
+void fn_8034F440(void *arg0, s32 arg1) {
+    struct {
+        s32 type;
+        s32 a;
+        s32 b;
+    } msg;
+    msg.a = arg1;
+    msg.type = 1;
+    fn_8034F534(arg0, &msg);
+}
+
 void fn_8034F4A4(void *arg0, s32 arg1) {
     M2C_UNK fn_8034F5EC(void *, void *);
     struct {
