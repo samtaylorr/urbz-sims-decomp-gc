@@ -156,6 +156,30 @@ s32 fn_801339F0(s32 arg0, s32 arg1) {
     return arg0;
 }
 
+void *fn_80133A28(void *arg0, void *arg1, void *arg2, s32 arg3) {
+    struct { s32 a, b; } *d;
+
+    M2C_FIELD(arg0, s32 *, 0x10) = arg3;
+    M2C_FIELD(arg0, void **, 0xC) = arg1;
+    d = (void *)((char *)arg0 + 4);
+    *d = *(typeof(d))arg2;
+    M2C_FIELD(arg0, s32 *, 0) = 1;
+    M2C_FIELD(arg0, s32 *, 0x14) = M2C_FIELD(arg1, s32 *, 0x80);
+    return arg0;
+}
+
+void *fn_80133A58(void *arg0, void *arg1, s32 arg2) {
+    struct { s32 a, b; } *d;
+
+    d = (void *)((char *)arg0 + 4);
+    *d = *(typeof(d))arg1;
+    M2C_FIELD(arg0, s32 *, 0xC) = 0;
+    M2C_FIELD(arg0, s32 *, 0x10) = -1;
+    M2C_FIELD(arg0, s32 *, 0x14) = arg2;
+    M2C_FIELD(arg0, s32 *, 0) = 1;
+    return arg0;
+}
+
 s32 fn_80133F68(s32 arg0) {
     struct {
         s32 a;
