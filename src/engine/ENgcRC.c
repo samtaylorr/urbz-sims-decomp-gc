@@ -1235,14 +1235,14 @@ void fn_80354938(void *arg0, void *arg1) {
 }
 
 void fn_80354944(void *arg0) {
-    s32 *stack;
     s32 n;
+    s32 *stack;
 
     n = M2C_FIELD(arg0, s32 *, 0x50C);
     if (n != 0) {
         stack = (s32 *)((u8 *)arg0 + 0x4E4);
-        M2C_FIELD(arg0, s32 *, 0x50C) = n - 1;
-        M2C_FIELD(arg0, s32 *, 0x4DC) = stack[n - 1];
+        M2C_FIELD(arg0, s32 *, 0x50C) = --n;
+        M2C_FIELD(arg0, s32 *, 0x4DC) = stack[n];
         return;
     }
     M2C_FIELD(arg0, s32 *, 0x4E0) = 1;
@@ -1504,13 +1504,13 @@ void fn_80356100(u8 *self, s32 *arg) {
 
 void fn_803563F4(u8 *self, u8 *arg) {
     struct {
-        u8 pad[0x569];
+        u8 pad[0x29];
         u8 val;
-        u8 pad2[0x3E];
+        u8 pad2[0x16];
     } *e;
     s32 val = *(s32 *)(arg + 4);
 
-    e = (void *)self;
+    e = (void *)(self + 0x540);
     e[*(u16 *)(arg + 2)].val = val;
     *(s32 *)(self + 0x510) = 1;
 }
