@@ -967,6 +967,13 @@ void fn_8034D53C(void *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 0x3B0) = 0xFFFFFF;
 }
 
+s32 fn_8034D58C(void *arg0) {
+    if (M2C_FIELD(arg0, s32 *, 0x34C) == M2C_FIELD(arg0, s32 *, 0x344)) {
+        return M2C_FIELD(arg0, s32 *, 0x348);
+    }
+    return M2C_FIELD(arg0, s32 *, 0x344);
+}
+
 s32 fn_8034D5AC(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x34C);
 }
