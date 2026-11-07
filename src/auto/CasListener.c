@@ -148,10 +148,10 @@ s32 fn_801B7EC8(void *arg0, s32 idx) {
     if (arr != NULL) {
         n = ((s32 *)arr)[-1];
     }
-    if (idx >= n) {
-        return 0;
+    if (idx < n) {
+        return *arr[idx];
     }
-    return *arr[idx];
+    return 0;
 }
 
 extern s32 fn_801A09E0(void *);
@@ -484,13 +484,9 @@ void fn_801BC014(void *self, void *arg1) {
     extern void fn_8031EA2C(void *);
     extern void *fn_8033740C(void *, void *, s32, s32);
     extern u8 lbl_8045BA40[];
-    s32 *p;
+    void fn_801BBFD4(void *);
     M2C_FIELD(self, s32 *, 0x10) = 0;
-    p = (s32 *)((u8 *)self + 0x20);
-    if (*p != 0) {
-        fn_8031EA2C((void *)*p);
-        *p = 0;
-    }
+    fn_801BBFD4(self);
     M2C_FIELD(self, void **, 0x24) = arg1;
     M2C_FIELD(self, s32 *, 0x30) = M2C_FIELD(arg1, s32 *, 0);
     M2C_FIELD(self, void **, 0x20) = fn_8033740C(lbl_8045BA40, M2C_FIELD(arg1, void **, 8), 0, 0);
@@ -830,6 +826,18 @@ s32 fn_801BFD84(void *arg0) {
     default:
         return M2C_FIELD(arg0, s32 *, 0);
     }
+}
+
+void fn_801BFE88(void *self, s32 arg1, s32 arg2) {
+    extern void fn_801C02C4(void *, s32);
+    u8 *obj;
+    CasVtEnt2 *ent;
+
+    fn_801C02C4(self, 5);
+    obj = M2C_FIELD(self, u8 **, 0x14);
+    ent = (CasVtEnt2 *)(M2C_FIELD(obj, u8 **, 8) + 0x40);
+    ent->fn(obj + ent->delta, arg2);
+    fn_801B9CE0(M2C_FIELD(self, void **, 0x14), arg1);
 }
 
 void fn_801BFEEC(void *self, s32 arg1, s32 arg2) {
@@ -1469,10 +1477,8 @@ void fn_801C95D4(void *arg0, s32 arg1) {
 
     if (arg1 != 0) {
         v = M2C_FIELD(arg0, u32 *, 0x49C);
+        a = v;
         switch (v) {
-        default:
-            a = v;
-            break;
         case 4:
         case 5:
         case 6:
