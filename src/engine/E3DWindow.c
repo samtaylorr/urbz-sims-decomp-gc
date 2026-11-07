@@ -109,11 +109,11 @@ void fn_802E22D0(void *arg0, f32 *arg1) {
 }
 
 void fn_802E2404(u8 *arg0, u8 *arg1, f32 *arg2) {
-    extern const f32 lbl_803F0820;
+    extern const f32 lbl_803F0820[];
     s32 i;
 
     for (i = 0; i < 3; i++) {
-        if (arg2[i] >= lbl_803F0820) {
+        if (arg2[i] >= lbl_803F0820[0]) {
             arg0[i] = i * 4;
             arg1[i] = i * 4 + 0xC;
         } else {
@@ -341,11 +341,12 @@ void fn_802E7720(void *arg0) {
     }
 }
 
-s32 fn_802E7738(void *arg0, void *arg1, void *arg2, void *arg3) {
+s32 fn_802E7738(void *arg0, void *arg1, s32 arg2, s32 arg3) {
     extern f32 lbl_803F0A08[];
     void fn_802E86DC(void *, void *);
     s32 ret = 0;
     s32 has;
+    s32 a3;
 
     if (!(M2C_FIELD(arg1, u32 *, 0x30) & 0x08000000)) {
         if (M2C_FIELD(arg1, s32 *, 0xA8) == 1 && (has = M2C_FIELD(arg1, s32 *, 0x7C) != 0, has) &&
@@ -353,8 +354,9 @@ s32 fn_802E7738(void *arg0, void *arg1, void *arg2, void *arg3) {
             ret = 1;
             fn_802E86DC(arg0, arg1);
         } else if (M2C_FIELD(arg1, void **, 0x28) != 0) {
-            M2C_FIELD(arg1, void (**)(s32, void *, void *, s32, s32), 0x28)(
-                M2C_FIELD(arg1, s32 *, 0x2C), arg1, arg3, M2C_FIELD(arg0, s32 *, 0x20),
+            a3 = arg3;
+            M2C_FIELD(arg1, void (**)(s32, void *, s32, s32, s32), 0x28)(
+                M2C_FIELD(arg1, s32 *, 0x2C), arg1, a3, M2C_FIELD(arg0, s32 *, 0x20),
                 M2C_FIELD(arg0, s32 *, 8));
         }
     }
@@ -370,7 +372,6 @@ void fn_802E7C44(void *arg0, s32 arg1, s32 arg2) {
     s32 has;
     char *src;
     char *dst;
-    u32 n;
     u8 *g;
 
     fn_802E77F0(arg0, arg1);
@@ -378,15 +379,15 @@ void fn_802E7C44(void *arg0, s32 arg1, s32 arg2) {
         M2C_FIELD(arg0, s32 *, 0x30) = arg2;
         p = M2C_FIELD(arg0, void **, 0x20);
         has = p != 0;
-        n = 0;
+        arg2 = 0;
         if (has) {
-            n = M2C_FIELD(p, s32 *, 0x24);
+            arg2 = M2C_FIELD(p, s32 *, 0x24);
         }
         g = lbl_80459FB0;
-        dst = fn_8036375C(g + (M2C_FIELD(g, s32 *, 0x2C) * 0x14 + 4), n << 6, 0x10);
+        dst = fn_8036375C(g + (M2C_FIELD(g, s32 *, 0x2C) * 0x14 + 4), arg2 << 6, 0x10);
         M2C_FIELD(arg0, char **, 0x10) = dst;
         src = M2C_FIELD(arg0, char **, 0xC);
-        while (n--) {
+        while (arg2--) {
             fn_802C8A34(dst, src);
             dst += 0x40;
             src += 0x40;
@@ -404,16 +405,14 @@ void fn_802E7D04(void *arg0, s32 arg1) {
 }
 
 void fn_802E80D0(void *arg0, void *arg1) {
-    f32 *src = (f32 *)((char *)arg0 + 0x80);
     f32 *out = (f32 *)((char *)arg1 + 0x14);
     s32 i;
 
     for (i = 0; i < 3; i++) {
         if (M2C_FIELD(arg0, s32 *, 8) & (1 << i)) {
-            *out = *src;
+            *out = ((f32 *)((char *)arg0 + 0x80))[i];
         }
         out++;
-        src++;
     }
 }
 
