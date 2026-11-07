@@ -328,6 +328,19 @@ s32 fn_800F6724(u32 arg0) {
     return b;
 }
 
+s32 fn_800F6784(u32 arg0) {
+    s32 fn_800F66D8();
+    s32 a;
+    s32 b;
+
+    a = fn_800F66D8() % arg0;
+    b = fn_800F66D8() % arg0;
+    if (a < b) {
+        return a;
+    }
+    return b;
+}
+
 s32 fn_800F67E4(u32 arg0) {
     s32 fn_800F66D8();
     s32 temp_r31;
