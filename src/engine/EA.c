@@ -1033,6 +1033,20 @@ void *fn_802DEEB8(void *arg0) {
     return arg0;
 }
 
+void fn_802DEF04(void *arg0, s32 arg1) {
+    extern char lbl_804196A0[];
+    extern char lbl_804194F8[];
+    M2C_UNK fn_803BA4E0(void *);
+    M2C_UNK fn_803BA4A0(void *, s32);
+    M2C_FIELD(arg0, void **, 0x18) = lbl_804196A0;
+    fn_803BA4E0((char *)arg0 + 0x20);
+    fn_803BA4A0((char *)arg0 + 0x20, 2);
+    M2C_FIELD(arg0, void **, 0x18) = lbl_804194F8;
+    if (arg1 & 1) {
+        fn_802D20E8(arg0);
+    }
+}
+
 extern void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
 void fn_802DF214(void *arg0) {
