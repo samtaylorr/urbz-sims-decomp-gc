@@ -328,6 +328,10 @@ void fn_80148504(void *arg0, s32 arg1, s32 arg2) {
     }
 }
 
+s32 fn_80148524(void *arg0, s32 arg1) {
+    return (M2C_FIELD(arg0, s32 *, 0x84) & arg1) != 0;
+}
+
 s32 fn_80148664(void) {
     return lbl_80494474;
 }
