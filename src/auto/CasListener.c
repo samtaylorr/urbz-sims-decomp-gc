@@ -120,6 +120,19 @@ static inline s32 CasArr_Size(u32 **a) {
     return a != NULL ? ((s32 *)a)[-1] : 0;
 }
 
+static inline u32 CasTbl_Get(void *self, s32 i) {
+    u32 **arr = *(u32 ***)self;
+    s32 n = 0;
+
+    if (arr != NULL) {
+        n = ((s32 *)arr)[-1];
+    }
+    if (i < n) {
+        return *arr[i];
+    }
+    return 0;
+}
+
 static inline s32 CasNode_Valid(void *n) {
     return n != NULL;
 }
@@ -1385,7 +1398,6 @@ void fn_801C5750(void *self, s32 flags) {
 
 s32 fn_801C5998(CasFlags *self, s32 which, s32 row, u32 idx) {
     s32 sel;
-    u32 word;
 
     if (idx > 0xFF) {
         return 0;
@@ -1394,16 +1406,11 @@ s32 fn_801C5998(CasFlags *self, s32 which, s32 row, u32 idx) {
     if (which != 0) {
         sel = 1;
     }
-    word = self->small[sel][row][idx >> 5];
-    if (word & (1 << (idx & 31))) {
-        return 1;
-    }
-    return 0;
+    return CasFlags_Test(self->small[sel][row], idx);
 }
 
 s32 fn_801C59F0(CasFlags *self, s32 which, s32 row, u32 idx) {
     s32 sel;
-    u32 word;
 
     if (idx > 0x3FF) {
         return 0;
@@ -1412,11 +1419,7 @@ s32 fn_801C59F0(CasFlags *self, s32 which, s32 row, u32 idx) {
     if (which != 0) {
         sel = 1;
     }
-    word = self->big[sel][row][idx >> 5];
-    if (word & (1 << (idx & 31))) {
-        return 1;
-    }
-    return 0;
+    return CasFlags_Test(self->big[sel][row], idx);
 }
 
 void fn_801C5A4C(CasFlags *self, s32 which, s32 row, u32 idx, s32 on) {
