@@ -2,6 +2,11 @@
 #include "common.h"
 
 s32 fn_80258544(void);
+
+static inline void EA_SetBlockHeader(char *base, s32 off, s32 size, s32 flags) {
+    *(s32 *)(base + off) = size;
+    *(s32 *)(base + off + 4) = flags;
+}
 M2C_UNK **fn_802D7E20(M2C_UNK **arg0) {
     M2C_UNK fn_802C5D4C();
     extern M2C_UNK lbl_80419570[];
@@ -537,6 +542,31 @@ void fn_802DAFDC(void *arg0, s32 arg1) {
 void fn_802DB1A8(void *arg0, s32 arg1) {
     extern void fn_802DB048(void *, s32);
     fn_802DB048(arg0, arg1 - 8);
+}
+
+s32 fn_802DB2EC(void *arg0, s32 (*arg1)(void *, s32), s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+    extern void *fn_802DB3A4(void *, s32, s32, s32, s32, s32);
+    extern void *fn_802DB410(void *, void *, s32);
+    extern void fn_802DB5F0(void *, void *);
+    void *p;
+    void *r;
+    s32 result = 0;
+    if (arg1 != 0) {
+        p = fn_802DB3A4(arg0, 0, arg3, arg4, arg5, arg6);
+        if (p != 0) {
+            result = 1;
+            r = fn_802DB410(arg0, p, arg3);
+            while (r != 0) {
+                result = arg1(r, arg2);
+                r = fn_802DB410(arg0, p, arg3);
+                if (result == 0) {
+                    break;
+                }
+            }
+        }
+        fn_802DB5F0(arg0, p);
+    }
+    return result;
 }
 
 void fn_802DBBA8(void *arg0, s32 arg1, s32 arg2) {
