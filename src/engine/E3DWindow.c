@@ -44,7 +44,10 @@ static inline void *fn_802E5F90_inline(void *arg0, s32 arg1) {
 void fn_802ED364(void *arg0, void *arg1, s32 arg2);
 void fn_802EAF44(void *arg0, void *arg1, s32 arg2, f32 arg3);
 
-void fn_802E2390(void);
+typedef struct { f32 v[4]; } E3DRect;
+typedef struct { s64 v[8]; } E3DMtx64;
+
+void fn_802E2390();
 void fn_802E2108(void *self, s64 *src) {
     extern void fn_802C8A34(void *, s64 *);
     extern void fn_802E3CB4(void *);
