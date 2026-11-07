@@ -769,7 +769,7 @@ void fn_802DD930(s32 *arg0, s32 arg1) {
     s32 a = arg0[0];
     s32 b = arg0[1];
     s32 has = fn_802DDC6C(a, b) != 0;
-    fn_802DDCAC(a, b, (arg1 && !has) || (!arg1 && has));
+    fn_802DDCAC(a, b, arg1 ? (has ? 0 : 1) : (has ? 1 : 0));
 }
 
 s32 fn_802DD9B0(s32 *arg0) {
@@ -856,23 +856,26 @@ void fn_802DE608(void *self, f32 value) {
 
 u32 fn_802DE634(u32 **self, s32 pos, s32 count) {
     s32 word;
-    s32 end;
+    u32 end;
     u32 endWord;
     u32 mask;
+    u32 *data;
 
     if (count != 0) {
         end = pos + count;
         word = pos >> 5;
         pos &= 31;
-        endWord = (u32)(end - 1) >> 5;
+        endWord = (end - 1) >> 5;
         if (word == endWord) {
             mask = (1 << count) - 1;
+            data = *self;
             if (mask != 0) {
-                return ((*self)[word] >> pos) & mask;
+                return (data[word] >> pos) & mask;
             }
-            return (*self)[word];
+            return data[word];
         }
-        return (((*self)[endWord] & ((1 << (end & 31)) - 1)) << (32 - pos)) | ((*self)[word] >> pos);
+        data = *self;
+        return ((data[endWord] & ((1 << (end & 31)) - 1)) << (32 - pos)) | (data[word] >> pos);
     }
     return 0;
 }
@@ -1243,6 +1246,7 @@ char *fn_802DF7BC(char *dst, char *src) {
     return dst;
 }
 
+void fn_802DF8DC(void *, s32);
 s32 *fn_802DF844(s32 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     arg0[0] = arg1;
     arg0[1] = 0;
