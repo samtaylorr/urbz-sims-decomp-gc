@@ -70,9 +70,9 @@ static inline E3DVec3 E3DVec3_make(f32 x, f32 y, f32 z) {
 
 static inline void E3DVec3_splat(E3DVec3 *d, f32 s) {
     E3DVec3 t;
-    t.x = s;
     t.z = s;
     t.y = s;
+    t.x = s;
     *d = t;
 }
 
