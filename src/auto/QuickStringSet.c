@@ -1689,6 +1689,7 @@ void *fn_800F8EAC(void *arg0, s32 arg1) {
     char *pa;
     s32 *a;
     s32 *b;
+    f32 f;
     M2C_FIELD(arg0, s32 *, 0x14) = 0x400;
     M2C_FIELD(arg0, s32 *, 0x1C) = 2;
     M2C_FIELD(arg0, s32 *, 0x0) = 0;
@@ -1701,10 +1702,11 @@ void *fn_800F8EAC(void *arg0, s32 arg1) {
     a[0] = 0;
     a[1] = 0;
     pa = &alloc;
+    f = lbl_803D5BF8[0];
     b = (s32 *)((char *)arg0 + 0x28);
     b[1] = 0;
-    M2C_FIELD(arg0, f32 *, 0x34) = lbl_803D5BF8[0];
     M2C_FIELD(arg0, s32 *, 0x30) = arg1;
+    M2C_FIELD(arg0, f32 *, 0x34) = f;
     M2C_FIELD(arg0, s32 *, 0x38) = fn_800C488C();
     return arg0;
 }
