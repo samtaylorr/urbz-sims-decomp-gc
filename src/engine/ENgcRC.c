@@ -1346,6 +1346,31 @@ void fn_8034B4AC(void *self, s16 id, s32 arg, f32 *v, f32 f) {
     }
 }
 
+void fn_8034B514(void *self, f32 *a, f32 *b, f32 *c, f32 f) {
+    struct {
+        u8 type;
+        s32 pad;
+        f32 a[2];
+        f32 b[2];
+        f32 c[4];
+        f32 f;
+        s32 pad2[2];
+    } cmd;
+    void fn_80355870(void *, void *);
+    extern u8 lbl_8046DF78[];
+    cmd.type = 0x29;
+    cmd.a[0] = a[0];
+    cmd.a[1] = a[1];
+    cmd.b[0] = b[0];
+    cmd.b[1] = b[1];
+    cmd.c[0] = c[0];
+    cmd.c[1] = c[1];
+    cmd.c[2] = c[2];
+    cmd.c[3] = c[3];
+    cmd.f = f;
+    fn_80355870(lbl_8046DF78, &cmd);
+}
+
 void fn_8034B58C(void *self, s32 arg1, s32 arg2, s32 arg3) {
     extern u8 *lbl_80495050;
     if (arg1 != 0) {
