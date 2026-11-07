@@ -683,6 +683,15 @@ void *fn_802C87C4(void *arg0, void *arg1) {
     return arg0;
 }
 
+void *fn_802C8814(void *arg0, void *arg1) {
+    void fn_802C876C(void *);
+    fn_802C876C(arg0);
+    M2C_FIELD(arg0, f32 *, 0) = M2C_FIELD(arg1, f32 *, 0);
+    M2C_FIELD(arg0, f32 *, 0x14) = M2C_FIELD(arg1, f32 *, 4);
+    M2C_FIELD(arg0, f32 *, 0x28) = M2C_FIELD(arg1, f32 *, 8);
+    return arg0;
+}
+
 void fn_802C96D4(void) {
 
 }
