@@ -22,6 +22,10 @@ static inline s32 CasMapIter_NotEqual(const CasMapIter *a, void *b) {
     return a->node != b;
 }
 
+static inline s32 CasArr_Size(u32 **a) {
+    return a != NULL ? ((s32 *)a)[-1] : 0;
+}
+
 static inline s32 CasNode_Valid(void *n) {
     return n != NULL;
 }
@@ -125,10 +129,11 @@ s32 fn_801B7C98(void *arg0, void *arg1, s32 arg2) {
 
 s32 fn_801B7D68(void *arg0, s32 idx) {
     extern void *lbl_8041FA48[];
-    void *o = lbl_8041FA48[0];
-    u32 **arr = *(u32 ***)o;
+    u32 **arr;
     s32 n = 0;
 
+    arg0 = lbl_8041FA48[0];
+    arr = *(u32 ***)arg0;
     if (arr != NULL) {
         n = ((s32 *)arr)[-1];
     }
@@ -140,10 +145,11 @@ s32 fn_801B7D68(void *arg0, s32 idx) {
 
 s32 fn_801B7EC8(void *arg0, s32 idx) {
     extern void *lbl_8041FA48[];
-    void *o = lbl_8041FA48[0];
-    s32 **arr = *(s32 ***)o;
+    s32 **arr;
     s32 n = 0;
 
+    arg0 = lbl_8041FA48[0];
+    arr = *(s32 ***)arg0;
     if (arr != NULL) {
         n = ((s32 *)arr)[-1];
     }
