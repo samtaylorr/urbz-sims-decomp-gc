@@ -1728,6 +1728,11 @@ s32 fn_802D0334(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x1024);
 }
 
+void fn_802D033C(u8 *self, s32 i) {
+    void fn_802CF870(void *, void *);
+    fn_802CF870(self, self + (i * 16 + 0x1060));
+}
+
 void *fn_802D07E8(u32 size) {
     void *heap;
     void *p;
