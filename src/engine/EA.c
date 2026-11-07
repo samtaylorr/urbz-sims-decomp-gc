@@ -70,6 +70,11 @@ s32 fn_802D7F94(s32 arg0) {
     return 0;
 }
 
+s32 fn_802D7FC8(void *buf, s32 size, s32 n, char *f) {
+    char *vt = *(char **)(f + 0x28);
+    return (*(s32 (**)(char *, void *, s32))(vt + 0x1C))(f + *(s16 *)(vt + 0x18), buf, size * n);
+}
+
 s32 fn_802D80A8(char *self) {
     char *vt = *(char **)(self + 0x28);
     return (*(s32 (**)(char *))(vt + 0x34))(self + *(s16 *)(vt + 0x30));
