@@ -136,6 +136,18 @@ s32 fn_80346B90(void) {
     return 0;
 }
 
+s32 fn_80346E34(s32 arg0, void *arg1) {
+    typedef struct { u32 w[3]; } Blk12;
+    extern u8 lbl_8046C400[];
+    u8 *p = lbl_8046C400;
+
+    if (M2C_FIELD(p, s32 *, 0xA0) != 0) {
+        *(Blk12 *)arg1 = *(Blk12 *)(p + 0x80);
+        return 1;
+    }
+    return 0;
+}
+
 s32 fn_80346E74(s32 arg0, void *arg1) {
     typedef struct { u32 w[4]; } Blk16;
     extern u8 lbl_8046C400[];
