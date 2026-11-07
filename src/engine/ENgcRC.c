@@ -22,14 +22,14 @@ extern s32 lbl_80495120;
 extern s32 lbl_80495124;
 extern s32 lbl_803F4668[];
 
-static inline void RC_SetFog(u8 *p, u8 enable, s32 type, u8 color) {
-    *(s32 *)(p + 0x3C4) = 7;
+static inline void RC_SetFog(u8 *p, s32 enable, s32 type, s32 color) {
     p[0x3C9] = enable;
-    p[0x3C8] = 0;
-    *(u32 *)(p + 0x6CC) |= 0x80000000 | 0x40;
     *(s32 *)(p + 0x3B8) = type;
     p[0x3BC] = color;
+    *(s32 *)(p + 0x3C4) = 7;
+    *(u32 *)(p + 0x6CC) |= 0x80000000 | 0x40;
     *(s32 *)(p + 0x3C0) = enable;
+    p[0x3C8] = 0;
 }
 void fn_8034F9F0(u8 *self);
 void fn_80351084(u8 *self);
@@ -826,11 +826,12 @@ void fn_8034AF84(void *self, void *arg1) {
     extern u8 lbl_8046DF78[];
     void fn_8035504C(void *, void *);
     s32 ok;
-    if (arg1 != NULL) {
-        ok = M2C_FIELD(arg1, s32 *, 0x20) == 0x900DBEEF;
-        if (ok) {
-            fn_8035504C(lbl_8046DF78, arg1);
-        }
+    if (arg1 == NULL) {
+        return;
+    }
+    ok = M2C_FIELD(arg1, s32 *, 0x20) == 0x900DBEEF;
+    if (ok) {
+        fn_8035504C(lbl_8046DF78, arg1);
     }
 }
 
@@ -888,17 +889,17 @@ void fn_8034B084(void *self, s32 arg, u8 value) {
     fn_80355268(lbl_8046DF78, &cmd);
 }
 
-void fn_8034B0C0(void *self, s32 arg, u8 value) {
+void fn_8034B0C0(void *self, u32 arg, u8 value) {
     struct {
         u8 type;
         u8 value;
-        s32 arg;
+        u32 arg;
     } cmd;
     void fn_80355294(void *, void *);
     extern u8 lbl_8046DF78[];
-    cmd.arg = ~arg;
     cmd.type = 0x16;
     cmd.value = value;
+    cmd.arg = ~arg;
     fn_80355294(lbl_8046DF78, &cmd);
 }
 
@@ -971,10 +972,10 @@ void fn_8034B314(void *self, void *obj) {
     extern u8 lbl_8046DF78[];
     s32 a = obj != NULL ? M2C_FIELD(obj, s32 *, 0xD8) : 0;
     s32 b = obj != NULL ? M2C_FIELD(obj, s32 *, 0xDC) : 0;
+    cmd.obj = obj;
     cmd.type = 0x18;
     cmd.a = a;
     cmd.b = b;
-    cmd.obj = obj;
     fn_803552F4(lbl_8046DF78, &cmd);
 }
 
