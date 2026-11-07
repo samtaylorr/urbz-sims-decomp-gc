@@ -57,14 +57,12 @@ s64 fn_800C46A4(void *arg0) {
     extern s64 fn_8024E1D0();
     void fn_800C4744(s64 *out);
     s64 t;
-    s64 d;
     if (M2C_FIELD(arg0, s32 *, 0x18) != 0) {
         fn_800C4744(&t);
-        d = t - M2C_FIELD(arg0, s64 *, 0);
     } else {
-        d = M2C_FIELD(arg0, s64 *, 8) - M2C_FIELD(arg0, s64 *, 0);
+        t = M2C_FIELD(arg0, s64 *, 8);
     }
-    return fn_8024E1D0(d * 1000000, M2C_FIELD(arg0, s64 *, 0x10));
+    return fn_8024E1D0(1000000 * (t - M2C_FIELD(arg0, s64 *, 0)), M2C_FIELD(arg0, s64 *, 0x10));
 }
 
 s32 fn_800C472C(s64 *arg0) {
@@ -271,6 +269,7 @@ void fn_800C5F10(void *arg0) {
 }
 
 void fn_800C5F60(void *arg0) {
+    void fn_800CE924(void *, s32);
     u8 *self = M2C_FIELD(arg0, u8 **, 0x70);
     u8 *obj = *(u8 **)(self + 0x48);
     u8 *vt = *(u8 **)(obj + 0x1C);
