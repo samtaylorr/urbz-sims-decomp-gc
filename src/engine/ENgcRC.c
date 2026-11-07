@@ -890,17 +890,18 @@ void fn_8034B084(void *self, s32 arg, u8 value) {
     fn_80355268(lbl_8046DF78, &cmd);
 }
 
-void fn_8034B0C0(void *self, u32 arg, u8 value) {
+void fn_8034B0C0(void *self, s32 arg, u8 value) {
     struct {
         u8 type;
         u8 value;
-        u32 arg;
+        s32 arg;
     } cmd;
     void fn_80355294(void *, void *);
     extern u8 lbl_8046DF78[];
+    register s32 inv asm("r4") = ~arg;
+    cmd.arg = inv;
     cmd.type = 0x16;
     cmd.value = value;
-    cmd.arg = ~arg;
     fn_80355294(lbl_8046DF78, &cmd);
 }
 
@@ -940,6 +941,18 @@ void fn_8034B1CC(void *self, s32 arg) {
     cmd.arg = arg;
     cmd.type = 0xB;
     fn_80354A84(lbl_8046DF78, &cmd);
+}
+
+void fn_8034B204(void *self, s32 arg) {
+    struct {
+        u8 type;
+        s32 arg;
+    } cmd;
+    void fn_80354DDC(void *, void *);
+    extern u8 lbl_8046DF78[];
+    cmd.arg = arg;
+    cmd.type = 0xD;
+    fn_80354DDC(lbl_8046DF78, &cmd);
 }
 
 void fn_8034B274(void *self, s32 arg) {
