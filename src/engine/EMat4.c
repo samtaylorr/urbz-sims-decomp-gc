@@ -597,6 +597,17 @@ void fn_802C829C(s32 arg0, s32 arg1, s32 arg2) {
     fn_8037D6D8(arg1, arg2, arg0);
 }
 
+void fn_802C82CC(f32 *m, f32 s) {
+    s32 i;
+    s32 j;
+
+    for (i = 0; i < 3; i++) {
+        for (j = 0; j < 3; j++) {
+            m[i * 4 + j] *= s;
+        }
+    }
+}
+
 void *fn_802C846C(void *arg0, s32 arg1) {
     s32 temp_r4;
     s32 var_r30;
