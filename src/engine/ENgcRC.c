@@ -23,13 +23,13 @@ extern s32 lbl_80495124;
 extern s32 lbl_803F4668[];
 
 static inline void RC_SetFog(u8 *p, s32 enable, s32 type, s32 color) {
+    *(s32 *)(p + 0x3C4) = 7;
     p[0x3C9] = enable;
+    p[0x3C8] = 0;
+    *(u32 *)(p + 0x6CC) |= 0x80000000 | 0x40;
     *(s32 *)(p + 0x3B8) = type;
     p[0x3BC] = color;
-    *(s32 *)(p + 0x3C4) = 7;
-    *(u32 *)(p + 0x6CC) |= 0x80000000 | 0x40;
     *(s32 *)(p + 0x3C0) = enable;
-    p[0x3C8] = 0;
 }
 void fn_8034F9F0(u8 *self);
 void fn_80351084(u8 *self);
@@ -1016,18 +1016,16 @@ void fn_8034B2E0(void) {
 }
 
 void fn_8034B314(void *self, void *obj) {
+    void fn_803552F4(void *, void *);
+    extern u8 lbl_8046DF78[];
+    s32 a = obj != NULL ? M2C_FIELD(obj, s32 *, 0xD8) : 0;
+    s32 b = obj != NULL ? M2C_FIELD(obj, s32 *, 0xDC) : 0;
     struct {
         u8 type;
         u8 a;
         u8 b;
         void *obj;
-    } cmd;
-    void fn_803552F4(void *, void *);
-    extern u8 lbl_8046DF78[];
-    cmd.type = 0x18;
-    cmd.obj = obj;
-    cmd.a = obj != NULL ? M2C_FIELD(obj, s32 *, 0xD8) : 0;
-    cmd.b = obj != NULL ? M2C_FIELD(obj, s32 *, 0xDC) : 0;
+    } cmd = { 0x18, a, b, obj };
     fn_803552F4(lbl_8046DF78, &cmd);
 }
 
