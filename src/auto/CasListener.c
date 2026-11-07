@@ -15,6 +15,21 @@ typedef struct {
     u32 big[2][16][32];
 } CasFlags;
 
+static inline s32 CasFlags_Test(u32 *words, u32 idx) {
+    return (words[idx >> 5] & (1 << (idx & 31))) != 0;
+}
+
+static inline void CasFlags_Set(u32 *words, u32 idx, s32 on) {
+    u32 mask = 1 << (idx & 31);
+
+    idx >>= 5;
+    if (on) {
+        words[idx] |= mask;
+    } else {
+        words[idx] &= ~mask;
+    }
+}
+
 static inline void CasBuf_Free(char **buf) {
     void fn_802D20E8(void *, u32);
     void fn_803997AC(void *, u32);
@@ -197,32 +212,33 @@ s32 fn_801B7C98(void *arg0, void *arg1, s32 arg2) {
 
 s32 fn_801B7D68(void *arg0, s32 idx) {
     extern void *lbl_8041FA48[];
-    register u32 **arr asm("r10");
+    void *p;
     s32 n = 0;
 
     arg0 = lbl_8041FA48[0];
-    arr = *(u32 ***)arg0;
-    if (arr != NULL) {
-        n = ((s32 *)arr)[-1];
+    p = *(void **)arg0;
+    if (p != NULL) {
+        n = ((s32 *)p)[-1];
     }
     if (idx < n - 1) {
-        return (f32)*arr[idx] * 0.8f;
+        p = ((void **)p)[idx];
+        return (f32)*(u32 *)p * 0.8f;
     }
     return 0;
 }
 
 s32 fn_801B7EC8(void *arg0, s32 idx) {
     extern void *lbl_8041FA48[];
-    register u32 **arr asm("r11");
     s32 n = 0;
 
     arg0 = lbl_8041FA48[0];
-    arr = *(u32 ***)arg0;
-    if (arr != NULL) {
-        n = ((s32 *)arr)[-1];
+    arg0 = *(void **)arg0;
+    if (arg0 != NULL) {
+        n = ((s32 *)arg0)[-1];
     }
     if (idx < n) {
-        return *arr[idx];
+        arg0 = ((void **)arg0)[idx];
+        return *(s32 *)arg0;
     }
     return 0;
 }
@@ -342,6 +358,19 @@ void fn_801B8690(void *self, s32 flags) {
 
 s32 fn_801B872C(char *self) {
     return *(s32 *)(self + 0xC);
+}
+
+void fn_801B8734(char *arg0, char *arg1) {
+    void fn_801BA350(char *, s32);
+    void fn_801B9D9C(char *, s32);
+    fn_801BA350(arg0, 0);
+    M2C_FIELD(arg0, s16 *, 0x38) = 0;
+    if (arg1 != NULL) {
+        char *vt = *(char **)(arg1 + 4);
+        s16 v = (*(s16 (**)(void *))(vt + 0x2EC))(arg1 + *(s16 *)(vt + 0x2E8));
+        M2C_FIELD(arg0, s16 *, 0x38) = v;
+        fn_801B9D9C(arg0, v);
+    }
 }
 
 void fn_801B9CB8(void *arg0) {
@@ -1207,8 +1236,8 @@ void fn_801C3850(void *self, s32 arg1) {
     CasListIter end;
     CasListIter it;
 
-    end.node = M2C_FIELD(self, CasListNode **, 4);
-    it.node = end.node->next;
+    end = CasList_End(self);
+    it = CasList_Begin(self);
     while (CasListIter_NotEqual(&it, &end)) {
         it.node = it.node->next;
     }
@@ -1226,37 +1255,46 @@ s32 fn_801C38E4(void *self) {
     CasListIter end;
     CasListIter it;
     s32 n;
+    s32 ret;
 
-    end.node = M2C_FIELD(self, CasListNode **, 4);
+    end = CasList_End(self);
     n = 0;
-    it.node = end.node->next;
+    it = CasList_Begin(self);
     while (CasListIter_NotEqual(&it, &end)) {
         it.node = it.node->next;
         n++;
     }
-    if (n == 0) {
-        return 0;
+    if (n != 0) {
+        begin = CasList_Begin(self);
+        ret = 1;
+        if (begin.node->value != 1) {
+            ret = 0;
+        }
+        return ret;
     }
-    begin.node = M2C_FIELD(self, CasListNode **, 4)->next;
-    return begin.node->value == 1;
+    return 0;
 }
 
 void *fn_801C4040(void *self) {
     extern void fn_803ABFA8(void *);
-    s32 *p;
+    s32 *p1;
+    s32 *p2;
+    s32 *p3;
+    s32 *p4;
+    s32 pad[3];
 
     fn_803ABFA8(self);
+    p1 = (s32 *)((u8 *)self + 0x14);
     M2C_FIELD(self, s32 *, 0x10) = 0;
-    p = (s32 *)((u8 *)self + 0x14);
-    p[0] = 0;
-    p[1] = 0;
-    p = (s32 *)((u8 *)self + 0x1C);
-    p[1] = 0;
-    p = (s32 *)((u8 *)self + 0x24);
-    p[0] = 0;
-    p[1] = 0;
-    p = (s32 *)((u8 *)self + 0x2C);
-    p[1] = 0;
+    p2 = (s32 *)((u8 *)self + 0x1C);
+    p1[0] = 0;
+    p3 = (s32 *)((u8 *)self + 0x24);
+    p1[1] = 0;
+    p4 = (s32 *)((u8 *)self + 0x2C);
+    p2[1] = 0;
+    p3[0] = 0;
+    p3[1] = 0;
+    p4[1] = 0;
     return self;
 }
 
@@ -1276,6 +1314,7 @@ void *fn_801C40A0(void *self, s32 arg) {
 void *fn_801C4108(void *self) {
     void fn_803AD1F8(void *);
     void fn_801C4668(void *);
+    s32 pad[2];
     fn_803AD1F8(self);
     M2C_FIELD(self, s32 *, 0x10) = 0;
     CasSlot_InitBoth((s32 *)((u8 *)self + 0x14));
@@ -1324,6 +1363,7 @@ void fn_801C5750(void *self, s32 flags) {
 
 s32 fn_801C5998(CasFlags *self, s32 which, s32 row, u32 idx) {
     s32 sel;
+    u32 word;
 
     if (idx > 0xFF) {
         return 0;
@@ -1332,11 +1372,16 @@ s32 fn_801C5998(CasFlags *self, s32 which, s32 row, u32 idx) {
     if (which != 0) {
         sel = 1;
     }
-    return (self->small[sel][row][idx >> 5] & (1 << (idx & 31))) != 0;
+    word = self->small[sel][row][idx >> 5];
+    if (word & (1 << (idx & 31))) {
+        return 1;
+    }
+    return 0;
 }
 
 s32 fn_801C59F0(CasFlags *self, s32 which, s32 row, u32 idx) {
     s32 sel;
+    u32 word;
 
     if (idx > 0x3FF) {
         return 0;
@@ -1345,12 +1390,17 @@ s32 fn_801C59F0(CasFlags *self, s32 which, s32 row, u32 idx) {
     if (which != 0) {
         sel = 1;
     }
-    return (self->big[sel][row][idx >> 5] & (1 << (idx & 31))) != 0;
+    word = self->big[sel][row][idx >> 5];
+    if (word & (1 << (idx & 31))) {
+        return 1;
+    }
+    return 0;
 }
 
 void fn_801C5A4C(CasFlags *self, s32 which, s32 row, u32 idx, s32 on) {
     s32 sel;
     u32 mask;
+    u32 bit;
 
     if (idx > 0xFF) {
         return;
@@ -1359,7 +1409,8 @@ void fn_801C5A4C(CasFlags *self, s32 which, s32 row, u32 idx, s32 on) {
     if (which != 0) {
         sel = 1;
     }
-    mask = 1 << (idx & 31);
+    bit = idx & 31;
+    mask = 1 << bit;
     idx >>= 5;
     if (on) {
         self->small[sel][row][idx] |= mask;
