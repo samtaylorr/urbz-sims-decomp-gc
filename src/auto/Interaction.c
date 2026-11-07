@@ -1236,14 +1236,15 @@ IntItem *fn_80112BFC(IntGroupVec *self, s32 id, s32 key, s32 val) {
     s32 fn_800F6B00(void *, s32);
     IntGroup *g = fn_80112480(self, id, 0);
     IntItem *it;
-    if (g != self->end) {
-        if (val != 0) {
-            g->unk14 = val;
-        }
-        for (it = g->begin; it != g->end; it++) {
-            if (fn_800F6B00((char *)it + 0x10, key) == 0 && fn_80112304(*(s16 *)((char *)it + 8)) == 0) {
-                return it;
-            }
+    if (g == self->end) {
+        return 0;
+    }
+    if (val != 0) {
+        g->unk14 = val;
+    }
+    for (it = g->begin; it != g->end; it++) {
+        if (fn_800F6B00((char *)it + 0x10, key) == 0 && fn_80112304(*(s16 *)((char *)it + 8)) == 0) {
+            return it;
         }
     }
     return 0;
@@ -1264,6 +1265,22 @@ IntItem *fn_80112CA4(IntGroupVec *self, IntObj *key, s32 *out, s32 val) {
         }
     }
     *out = 0;
+    return 0;
+}
+
+s32 *fn_80112D1C(s32 arg0, s32 id, s32 n, s32 val) {
+    IntGroup *fn_80112480(IntGroupVec *, s32, s32);
+    IntGroupVec *self = (IntGroupVec *)arg0;
+    IntGroup *g = fn_80112480(self, id, 0);
+    if (g == self->end) {
+        return 0;
+    }
+    if (val != 0) {
+        g->unk14 = val;
+    }
+    if (n > 0 && n <= g->end - g->begin) {
+        return (s32 *)&g->begin[n - 1];
+    }
     return 0;
 }
 
