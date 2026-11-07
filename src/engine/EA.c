@@ -286,7 +286,7 @@ void fn_802D85FC(void *arg0, s32 arg1) {
 
 void fn_802D8640(void *arg0, s32 arg1) {
     void fn_80251224(void *, s32, s32, s32, void (*)(void *));
-    s32 ticks = arg1 * (*(u32 *)0x800000F8 / 4000);
+    s32 ticks = arg1 * ((*(u32 *)0x800000F8 / 4) / 1000);
     fn_80251224((char *)arg0 + 0x18, ticks, 0, ticks, fn_802D8580);
     fn_802D8334(arg0, -1);
 }
@@ -1180,6 +1180,14 @@ void fn_802DD858(s32 *arg0, s32 arg1) {
     s32 a = arg0[0];
     s32 b = arg0[1];
     fn_802DDCAC(a, b, (fn_802DDC6C(a, b) != 0) | (arg1 != 0));
+}
+
+void fn_802DD8C4(s32 *arg0, s32 arg1) {
+    s32 fn_802DDC6C(s32, s32);
+    M2C_UNK fn_802DDCAC(s32, s32, s32);
+    s32 a = arg0[0];
+    s32 b = arg0[1];
+    fn_802DDCAC(a, b, (fn_802DDC6C(a, b) != 0) & (arg1 != 0));
 }
 
 void fn_802DD930(s32 *arg0, s32 arg1) {
