@@ -534,6 +534,11 @@ void fn_802DAFDC(void *arg0, s32 arg1) {
     }
 }
 
+void fn_802DB1A8(void *arg0, s32 arg1) {
+    extern void fn_802DB048(void *, s32);
+    fn_802DB048(arg0, arg1 - 8);
+}
+
 void fn_802DBBA8(void *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 0x48C) = arg2;
     if (arg2 == 0) {
