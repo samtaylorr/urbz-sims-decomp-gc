@@ -858,6 +858,15 @@ void fn_802C96D4(void) {
 
 }
 
+void fn_802C97B4(void *m, f32 *v) {
+    void fn_802CBC5C(f32 *, void *);
+    f32 fn_802CBED0(f32 *, f32 *);
+    f32 q[4];
+
+    fn_802CBC5C(q, m);
+    fn_802CBED0(q, v);
+}
+
 f32 fn_802CA924(void) {
     extern u32 lbl_80494DC8;
     extern const f64 lbl_803F0130[];
