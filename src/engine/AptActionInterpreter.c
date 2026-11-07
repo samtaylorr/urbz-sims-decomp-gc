@@ -9,6 +9,8 @@ static inline u8 AptStream_ReadU8(u8 **pp) {
     return *(*pp)++;
 }
 
+typedef struct { s32 a, b; } AptPair;
+
 static inline void AptTriple_Init(s32 *p) {
     p[0] = 0;
     p[1] = 0;
