@@ -68,8 +68,12 @@ static inline E3DVec3 E3DVec3_make(f32 x, f32 y, f32 z) {
     return r;
 }
 
-static inline E3DVec3 E3DVec3_splat(f32 s) {
-    return E3DVec3_make(s, s, s);
+static inline void E3DVec3_splat(E3DVec3 *d, f32 s) {
+    E3DVec3 t;
+    t.x = s;
+    t.y = s;
+    t.z = s;
+    *d = t;
 }
 
 void fn_802ED364(void *arg0, void *arg1, s32 arg2);
