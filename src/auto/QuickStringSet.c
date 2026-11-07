@@ -82,7 +82,7 @@ static inline QSSElem1C *QSSVec1C_End(QSSVec1C *v) {
 static inline void QSSVec1C_Resize(QSSVec1C *v, u32 n, QSSElem1C *val) {
     void fn_8039FED8(QSSVec1C *, QSSElem1C *, u32, QSSElem1C *);
     if (n < QSSVec1C_Size(v)) {
-        QSSVec1C_Erase(v, v->begin + n, v->end);
+        QSSVec1C_Erase(v, v->begin + n, QSSVec1C_End(v));
     } else {
         fn_8039FED8(v, v->end, n - QSSVec1C_Size(v), val);
     }
