@@ -1272,12 +1272,13 @@ s32 fn_802DDC6C(arg0, i)
 }
 
 M2C_UNK fn_802DDCAC(s32 arg0, s32 i, s32 set) {
-    u32 *bits = *(u32 **)arg0;
+    u32 off = ((u32)i >> 5) * 4;
     u32 mask = 1 << (i & 31);
+    char *bits = *(char **)arg0;
     if (set != 0) {
-        bits[(u32)i >> 5] |= mask;
+        *(u32 *)(bits + off) |= mask;
     } else {
-        bits[(u32)i >> 5] &= ~mask;
+        *(u32 *)(bits + off) &= ~mask;
     }
 }
 
