@@ -1838,7 +1838,9 @@ void fn_800D0850(u8 *self, s32 i) {
 }
 
 void fn_800D0890(u8 *self, s32 i) {
-    u8 *obj = ((u8 **)(self + 0x40))[i];
+    s32 off = i * 4;
+    void **arr = (void **)(self + 0x40);
+    u8 *obj = *(u8 **)((u8 *)arr + off);
     u8 *vt = *(u8 **)(obj + 0x1C);
     (*(void (**)(void *))(vt + 0xDC))(obj + *(s16 *)(vt + 0xD8));
 }
