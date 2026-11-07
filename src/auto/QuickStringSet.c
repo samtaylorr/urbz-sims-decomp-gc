@@ -140,16 +140,10 @@ s32 fn_800F5AD4(s32 *arg0, const char *arg1) {
 }
 
 s32 fn_800F5B58(s32 *a, s32 *b) {
-    if (a[2] > b[2]) {
-        return 0;
+    if (a[2] <= b[2] && a[0] >= b[0] && a[1] >= b[1] && a[3] <= b[3]) {
+        return 1;
     }
-    if (a[0] < b[0]) {
-        return 0;
-    }
-    if (a[1] < b[1]) {
-        return 0;
-    }
-    return a[3] <= b[3];
+    return 0;
 }
 
 s32 fn_800F6498(void *arg0);
@@ -158,6 +152,55 @@ s32 fn_800F5EFC(void *arg0, s32 *arg1) {
         return -0x31;
     }
     *arg1 = *(s32 *)((u8 *)arg0 + 0x120);
+    return 0;
+}
+
+s32 fn_800F5F48(void *arg0, s32 arg1) {
+    s32 ret = 0;
+    if (fn_800F6498(arg0) == 0) {
+        ret = -0x31;
+    } else if (*(s32 *)((u8 *)arg0 + 0x10C) == 0) {
+        ret = -0x2D;
+    } else if (arg1 < 0) {
+        ret = -0x32;
+    } else {
+        *(s32 *)((u8 *)arg0 + 0x120) = arg1;
+        *(s32 *)((u8 *)arg0 + 0x11C) = arg1;
+    }
+    return ret;
+}
+
+s32 fn_800F5FBC(void *arg0, s32 *arg1) {
+    extern u8 lbl_80495A30[];
+    s32 fn_800F69E8(s32 *self);
+    s32 fn_800C4568(void *self, s32 name);
+    s32 fn_800C4548(void *self, s32 name);
+    if (fn_800F6498(arg0) != 0) {
+        return -0x2F;
+    }
+    if (fn_800C4568(lbl_80495A30, fn_800F69E8(arg1)) != 0) {
+        return -0x2B;
+    }
+    if (fn_800C4548(lbl_80495A30, fn_800F69E8(arg1)) == 0) {
+        return -0x2A;
+    }
+    return 0;
+}
+
+s32 fn_800F6048(void *arg0, s32 *arg1) {
+    extern u8 lbl_80495A30[];
+    s32 fn_800F69E8(s32 *self);
+    s32 fn_800C4568(void *self, s32 name);
+    s32 fn_800C4550(void *self, s32 name);
+    if (fn_800F6498(arg0) != 0) {
+        return -0x2F;
+    }
+    if (fn_800C4568(lbl_80495A30, fn_800F69E8(arg1)) == 0) {
+        return -0x28;
+    }
+    if (fn_800C4550(lbl_80495A30, fn_800F69E8(arg1)) == 0) {
+        return -0x27;
+    }
     return 0;
 }
 
@@ -1172,12 +1215,12 @@ s32 fn_800F8B60(char *arg0) {
         used = (u32 *)(arg0 + 0x2940);
         for (i = 0; i < 80; i++) {
             if ((used[i] | res[i]) != 0xFFFFFFFF) {
-                for (n = 0, bit = 1; ; n++, bit <<= 1) {
-                    if (!((used[i] | res[i]) & bit)) {
-                        used[i] |= bit;
-                        return i * 32 + n;
-                    }
+                n = 0;
+                for (bit = 1; (used[i] | res[i]) & bit; bit <<= 1) {
+                    n++;
                 }
+                used[i] |= bit;
+                return i * 32 + n;
             }
         }
     }
@@ -1506,11 +1549,8 @@ s32 fn_800FB838(void *arg0, s32 arg1) {
     if (p != NULL) {
         n = ((s32 *)p)[-1];
     }
-    if (arg1 < n) {
-        q = p[arg1];
-        if (q != NULL) {
-            return *q;
-        }
+    if (arg1 < n && (q = p[arg1]) != NULL) {
+        return *q;
     }
     return 0;
 }
