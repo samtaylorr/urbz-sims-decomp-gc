@@ -327,6 +327,18 @@ void fn_800C5A1C(void *arg0) {
     fn_800CE954(p, 0);
 }
 
+void fn_800C5A58(void *arg0, s32 arg1) {
+    void fn_8039D8D8(void *);
+    void fn_800CE954(void *, s32);
+    u8 *self = M2C_FIELD(arg0, u8 **, 0x70);
+    u8 *temp_r30 = *(u8 **)(self + 0x40);
+    u8 *temp_r3 = temp_r30 + 0x20;
+    M2C_FIELD(temp_r3, s32 *, 0x30) = arg1;
+    fn_8039D8D8(temp_r3);
+    M2C_FIELD(temp_r30, s32 *, 4) = (s32) (M2C_FIELD(temp_r30, s32 *, 4) | 2);
+    fn_800CE954(self, 0);
+}
+
 void fn_800C5BA8(void *arg0) {
     void fn_800CE924(void *, s32);
     u8 *self = M2C_FIELD(arg0, u8 **, 0x70);
@@ -1756,15 +1768,8 @@ f32 fn_800D083C(WrapperPaneBase *self, s32 i) {
 
 void fn_800D0A88(u8 *self, s32 i) {
     void fn_800CE8F4(void *, s32);
-    u8 *obj;
-    u8 *vt;
-    {
-        s32 off = i * 4;
-        void **arr = (void **)(self + 0x40);
-        obj = *(u8 **)((u8 *)arr + off);
-    }
-    vt = *(u8 **)(obj + 0x1C);
-    (*(void (**)(void *))(vt + 0x4C))(obj + *(s16 *)(vt + 0x48));
+    u8 *obj = ((u8 **)(self + 0x40))[i];
+    (*(void (**)(void *))(*(u8 **)(obj + 0x1C) + 0x4C))(obj + *(s16 *)(*(u8 **)(obj + 0x1C) + 0x48));
     fn_800CE8F4(self, i);
 }
 
