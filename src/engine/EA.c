@@ -883,12 +883,7 @@ f32 fn_802DEA44(void *self, s32 bits) {
 }
 
 u32 fn_802DEA8C(s32 *arg0) {
-    u32 n;
-    if (arg0[0] == 0) {
-        return 0;
-    }
-    n = arg0[1] + 0x1F;
-    return (n >> 5) * 4;
+    return arg0[0] != 0 ? ((u32) (arg0[1] + 0x1F) >> 5) * 4 : 0;
 }
 
 void *fn_802DEAB0(void *self, s32 **arg1) {
