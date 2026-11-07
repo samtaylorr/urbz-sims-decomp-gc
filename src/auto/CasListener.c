@@ -1269,9 +1269,11 @@ void fn_801C3850(void *self, s32 arg1) {
     CasListIter it;
     CasListIter *pend;
 
+    it = CasList_Begin(self);
     end = CasList_End(self);
     pend = &end;
-    for (it = CasList_Begin(self); CasListIter_NotEqual(&it, pend); CasListIter_Inc(&it)) {
+    while (CasListIter_NotEqual(&it, pend)) {
+        CasListIter_Inc(&it);
     }
     fn_803AD18C(self);
     if (M2C_FIELD(self, void **, 4) != NULL) {
@@ -1321,16 +1323,16 @@ void *fn_801C4040(void *self) {
     return self;
 }
 
-void *fn_801C40A0(void *self, s32 arg) {
+void *fn_801C40A0(u8 *self, s32 arg) {
     void fn_803ABFA8(void *, s32);
     void fn_801C4170(void *, s32);
     s32 pad[4];
     fn_803ABFA8(self, arg);
-    CasSlot_Init((s32 *)((u8 *)self + 0x1C));
-    CasSlot_InitBoth((s32 *)((u8 *)self + 0x24));
-    CasSlot_Init((s32 *)((u8 *)self + 0x2C));
-    M2C_FIELD(self, s32 *, 0x14) = 0;
-    M2C_FIELD(self, s32 *, 0x18) = 0;
+    *(s32 *)(self + 0x14) = 0;
+    *(s32 *)(self + 0x18) = 0;
+    CasSlot_Init((s32 *)(self + 0x1C));
+    CasSlot_InitBoth((s32 *)(self + 0x24));
+    CasSlot_Init((s32 *)(self + 0x2C));
     fn_801C4170(self, arg);
     return self;
 }
@@ -1352,19 +1354,16 @@ void *fn_801C4108(void *self) {
 void fn_801C43AC(char *self) {
     char **vec;
     char **vec2;
-    char *begin;
-    char *end;
-    char *it;
+    CasVecIt first;
+    CasVecIt last;
 
-    vec = (char **)(self + 0x14);
-    begin = vec[0];
     M2C_FIELD(self, s32 *, 0x10) = 0;
-    end = vec[1];
+    vec = (char **)(self + 0x14);
+    first.p = vec[0];
+    last.p = vec[1];
     vec2 = (char **)(self + 0x24);
-    for (it = begin; it != end; it += 0x10) {
-        CasBuf_Free((char **)it);
-    }
-    vec[1] = begin;
+    CasBufVec_Destroy(first, last);
+    vec[1] = first.p;
     vec2[1] = M2C_FIELD(self, char **, 0x24);
 }
 
