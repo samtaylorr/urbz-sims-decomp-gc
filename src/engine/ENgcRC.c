@@ -31,6 +31,25 @@ static inline void RC_SetFog(u8 *p, s32 enable, s32 type, s32 color) {
     p[0x3BC] = color;
     *(s32 *)(p + 0x3C0) = enable;
 }
+static inline void RC_SetTexture(void *obj, u8 stage, s32 a, s32 b, s32 c) {
+    struct {
+        u8 type;
+        u8 stage;
+        u8 flags;
+        void *obj;
+    } cmd;
+    void fn_8035500C(void *, void *);
+    extern u8 lbl_8046DF78[];
+    u32 flags;
+    cmd.obj = obj;
+    cmd.type = 0x10;
+    cmd.stage = stage;
+    flags = c ? 0x100 : 0x80;
+    if (a) flags |= 0x200;
+    if (b) flags |= 0x400;
+    cmd.flags = flags >> 7;
+    fn_8035500C(lbl_8046DF78, &cmd);
+}
 void fn_8034F9F0(u8 *self);
 void fn_80351084(u8 *self);
 void *fn_80348E8C(u32 size, void *p);
