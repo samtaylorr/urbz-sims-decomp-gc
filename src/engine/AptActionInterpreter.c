@@ -86,6 +86,15 @@ void fn_8027ED20(void *arg0) {
     }
 }
 
+s8 fn_8027F5A8(s8 arg0, s8 arg1) {
+    s32 fn_80248230(s8 *, s32, s32);
+    s8 buf[3];
+    buf[0] = arg0;
+    buf[1] = arg1;
+    buf[2] = 0;
+    return fn_80248230(buf, 0, 0x10);
+}
+
 void fn_8027F924(void) {
 
 }
@@ -203,7 +212,7 @@ void fn_80287A04(void *arg0, u8 **arg1) {
 
 void fn_80287C20(void *arg0, u8 **arg1) {
     char **regs = (char **)((u8 *)arg0 + 0x54);
-    u32 *p = (u32 *)(((u32)*arg1 + 3) & ~3);
+    s32 *p = (s32 *)(((u32)*arg1 + 3) & ~3);
     *arg1 = (u8 *)(p + 1);
     if (regs[*p] != 0) {
         char *obj = regs[*p];
