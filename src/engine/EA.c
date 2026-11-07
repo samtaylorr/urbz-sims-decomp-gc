@@ -1015,12 +1015,12 @@ s32 fn_802DEE08(void *arg0, s32 arg1, s32 arg2) {
 
 s32 fn_802DEE5C(void *arg0, s32 arg1, s32 arg2) {
     M2C_UNK fn_802482F8();
-    struct { u8 pad[0x1C]; s32 unk1C; s32 unk20; } *self = arg0;
-    if (self->unk1C != 0) {
-        fn_802482F8(self->unk1C, arg1 + self->unk20);
+    s32 n = arg2;
+    if (M2C_FIELD(arg0, s32 *, 0x1C) != 0) {
+        fn_802482F8(M2C_FIELD(arg0, s32 *, 0x1C), arg1 + M2C_FIELD(arg0, s32 *, 0x20));
     }
-    self->unk20 += arg2;
-    return arg2;
+    M2C_FIELD(arg0, s32 *, 0x20) += n;
+    return n;
 }
 
 void *fn_802DEEB8(void *arg0) {
@@ -1194,6 +1194,35 @@ s32 fn_802DF4B8(s32 arg0, s32 arg1) {
         fn_80248784(arg0, arg1);
     }
     fn_802DF3F0(arg0);
+    return arg0;
+}
+
+char *fn_802DF7BC(char *dst, char *src) {
+    char *fn_80248ADC(char *, s32);
+    char *fn_80248640(char *, s32);
+    char *fn_80248784(char *, char *);
+    char *p;
+
+    p = fn_80248ADC(src, '.');
+    if (p != NULL) {
+        if (fn_80248640(p, '/') != NULL || fn_80248640(p, '\\') != NULL) {
+            dst[0] = 0;
+        } else {
+            fn_80248784(dst, p + 1);
+        }
+    } else {
+        dst[0] = (char) (s32) p;
+    }
+    return dst;
+}
+
+s32 *fn_802DF844(s32 *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    arg0[0] = arg1;
+    arg0[1] = 0;
+    arg0[2] = arg3;
+    if (arg2 != 0) {
+        fn_802DF8DC(arg0, -1);
+    }
     return arg0;
 }
 
