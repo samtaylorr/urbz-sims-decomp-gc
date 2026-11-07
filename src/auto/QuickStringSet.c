@@ -581,6 +581,20 @@ s32 fn_800F6D9C(s32 *self, char *str, s32 start) {
     return -1;
 }
 
+void fn_800F6F24(s32 arg0, u16 *arg1) {
+    s32 fn_800F8120(u16 *);
+    void *fn_802D2058(s32);
+    void fn_802D211C(void *);
+    u8 *buf;
+
+    buf = fn_802D2058(fn_800F8120(arg1) + 1);
+    fn_800F684C(buf, arg1);
+    fn_800F69F8(arg0, (s32)buf);
+    if (buf != 0) {
+        fn_802D211C(buf);
+    }
+}
+
 void fn_800F6F88(u16 *dst, const u8 *src) {
     while (*src != 0) {
         *dst++ = *src++;
@@ -1436,6 +1450,19 @@ s32 fn_800F8828(void *self, s32 val, s32 flag) {
         return -1;
     }
     return -2;
+}
+
+s32 fn_800F8AF4(s32 *self, s32 (*cb)(s32, s32), s32 arg) {
+    s32 *p;
+    s32 *end = self + 0x9FF;
+    for (p = self; p <= end; p++) {
+        if (*p != 0) {
+            if (cb(*p, arg) == 0) {
+                return 0;
+            }
+        }
+    }
+    return 1;
 }
 
 s32 fn_800F8B60(char *arg0) {
@@ -2355,6 +2382,7 @@ void fn_800FDEB0(s32 arg0, s32 arg1) {
         if (arg0 != 0) {
             QSSVec_Init(&lbl_80434B28);
         } else {
+            QSSAlloc a;
             QSSVec_Free(&lbl_80434B28);
         }
     }
