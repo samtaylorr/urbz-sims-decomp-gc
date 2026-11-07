@@ -546,6 +546,13 @@ u32 fn_802DD014(void *arg0, void *arg1) {
     return M2C_FIELD(arg1, u32 *, -4) & ~7;
 }
 
+void fn_802DD020(void *arg0, void *arg1, void *arg2) {
+    M2C_FIELD(arg1, void **, 0x24) = arg2;
+    M2C_FIELD(arg1, void **, 0x20) = M2C_FIELD(arg2, void **, 0x20);
+    M2C_FIELD(arg2, void **, 0x20) = arg1;
+    M2C_FIELD(M2C_FIELD(arg1, void **, 0x20), void **, 0x24) = arg1;
+}
+
 void fn_802D21E0(void *);
 void fn_802DD5B0(void *self, void *arg) {
     fn_802D21E0(arg);
