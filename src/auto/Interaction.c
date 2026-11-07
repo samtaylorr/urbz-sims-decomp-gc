@@ -1385,6 +1385,20 @@ void fn_80116F80(void *arg0, void *arg1) {
     M2C_FIELD(arg0, u16 *, 0x1E) = (u16) M2C_FIELD(arg1, u16 *, 6);
 }
 
+void fn_80116FA4(char *self, u16 *src, s32 n) {
+    void fn_802D211C(void *);
+    void *fn_802D2058(s32);
+    s32 i;
+    if (*(void **)(self + 0x24) != 0) {
+        fn_802D211C(*(void **)(self + 0x24));
+    }
+    *(s32 *)(self + 0x20) = n;
+    *(u16 **)(self + 0x24) = fn_802D2058(((n + 3) & ~3) * 2);
+    for (i = 0; i < *(s32 *)(self + 0x20); i++) {
+        (*(u16 **)(self + 0x24))[i] = src[i];
+    }
+}
+
 void fn_8011709C(void *arg0) {
     extern s32 lbl_80494438;
     s32 temp_r9;
