@@ -534,6 +534,14 @@ void fn_802DAFDC(void *arg0, s32 arg1) {
     }
 }
 
+void fn_802DB018(arg0)
+    s32 arg0;
+{
+    void fn_80378278(char *, ...);
+    extern char lbl_803F03C8[];
+    fn_80378278(lbl_803F03C8, arg0);
+}
+
 void fn_802DB1A8(void *arg0, s32 arg1) {
     extern void fn_802DB048(void *, s32);
     fn_802DB048(arg0, arg1 - 8);
