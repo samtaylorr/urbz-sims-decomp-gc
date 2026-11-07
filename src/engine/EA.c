@@ -1267,7 +1267,7 @@ void fn_802DED88(void *self) {
     fn_802DDCE8(self, 0);
 }
 
-void fn_802DDC6C(void);
+s32 fn_802DDC6C();
 void fn_802DEDAC(void) {
     fn_802DDC6C();
 }
