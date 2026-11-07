@@ -34,8 +34,8 @@ void fn_8010D3C4(void *self, s32 i, s16 v) {
     ((struct { u8 pad[0x4]; s16 a[1]; } *)self)->a[i] = v;
 }
 
-s32 fn_8010D3D4(void **self, s32 start, s32 end, s32 bit) {
-    struct { s16 delta; s16 index; s16 (*func)(void *, s32); } *e;
+s32 fn_8010D3D4(void *self, s32 start, s32 end, s32 bit) {
+    struct Vtbl { u8 pad[8]; s16 delta; s16 index; s16 (*func)(void *, s32); };
     s16 mask;
 
     if (start < 0 || start > end) {
@@ -44,9 +44,8 @@ s32 fn_8010D3D4(void **self, s32 start, s32 end, s32 bit) {
     if (end > 0x26) {
         return 0;
     }
-    e = (void *)((u8 *)*self + 8);
     mask = 1 << (s16)(bit % 16);
-    return (s16)(e->func((u8 *)self + e->delta, start + bit / 16) & mask) != 0;
+    return (s16)((*(struct Vtbl **)self)->func((u8 *)self + (*(struct Vtbl **)self)->delta, start + bit / 16) & mask) != 0;
 }
 
 s32 fn_8010D590(void **self) {
@@ -97,6 +96,20 @@ void fn_8010D784(void **self, s32 flags) {
     if (flags & 1) {
         fn_802D20E8(self);
     }
+}
+
+void *fn_8010D7B8(void **self) {
+    extern u8 lbl_8040EA18[];
+    void fn_80248488(s32, s32, s32);
+    *self = lbl_8040EA18;
+    fn_80248488((s32)self + 4, 0, 0x400);
+    self[260] = (void *)1;
+    self[262] = 0;
+    self[257] = 0;
+    self[258] = 0;
+    self[259] = 0;
+    self[261] = 0;
+    return self;
 }
 
 s32 fn_8010D8F4(void) {
