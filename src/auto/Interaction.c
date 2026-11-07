@@ -996,6 +996,21 @@ void fn_8011230C(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s16 *, 0) = (s16) (M2C_FIELD(arg0, u8 *, 1) | (arg1 << 8));
 }
 
+void fn_80112320(char *self, char *arg1) {
+    void fn_8018D72C(void *, void *, s32);
+    void fn_8018E178(void *, void *);
+    s16 t;
+    fn_8018D8DC(arg1, self, 1);
+    t = *(s32 *)(self + 4);
+    fn_8018D72C(arg1, &t, 1);
+    *(s32 *)(self + 4) = t;
+    fn_8018D72C(arg1, self + 0xa, 1);
+    if (*(s32 *)(arg1 + 0xc) == 0) {
+        *(u16 *)(self + 8) = *(u16 *)(self + 0xa);
+    }
+    fn_8018E178(arg1, self + 0x10);
+}
+
 void fn_801123AC(char *self, char *arg1, s32 n) {
     void fn_803A1C88(char *, s32, char *, s32);
     s32 tmp = *(s32 *)(self + 0x10);
