@@ -1292,7 +1292,7 @@ s32 fn_802DDC6C(arg0, i)
     if (i >= ((s32 *)self)[1]) {
         return 0;
     }
-    return (self[0][i >> 5] & (1 << (i & 31))) != 0;
+    return (self[0][(u32)i >> 5] & (1 << (i & 31))) != 0;
 }
 
 M2C_UNK fn_802DDCAC(s32 arg0, s32 i, s32 set) {
@@ -1508,7 +1508,7 @@ s32 fn_802DEC58(s32 *self) {
 }
 
 void fn_802DEC60(void *arg0, void *arg1, s32 arg2) {
-    M2C_UNK fn_802DDFD4(void *, void *, s32, s32, s32);
+    void fn_802DDFD4(void *, void *, s32, s32, s32);
     fn_802DDFD4(arg0, arg1, 0, arg2, M2C_FIELD(arg1, s32 *, 4));
 }
 
