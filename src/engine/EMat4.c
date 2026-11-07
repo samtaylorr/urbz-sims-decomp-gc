@@ -1753,7 +1753,8 @@ void fn_802D003C(u8 *self) {
     u8 *p;
     u16 idx;
 
-    for (i = 0x1FF, p = self + 4; i != 0; i--, p += 8) {
+    for (i = 0; i < 0x1FF; i++) {
+        p = self + 4 + i * 8;
         if (M2C_FIELD(p, s32 *, 4) != 0) {
             fn_802CF60C(self, p);
         }
