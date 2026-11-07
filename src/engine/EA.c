@@ -401,6 +401,23 @@ s32 fn_802D8B2C(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x2C);
 }
 
+void *fn_802D8B34(void *arg0) {
+    extern u8 lbl_80419658[];
+    extern char lbl_803F03B4[];
+    void fn_80248488();
+    M2C_FIELD(arg0, void **, 0x338) = lbl_80419658;
+    fn_80248488(arg0, 0, 0x318);
+    M2C_FIELD(arg0, char **, 0x32C) = lbl_803F03B4;
+    M2C_FIELD(arg0, s32 *, 0x318) = 0;
+    M2C_FIELD(arg0, s32 *, 0x31C) = 0;
+    M2C_FIELD(arg0, s32 *, 0x320) = 0;
+    M2C_FIELD(arg0, s32 *, 0x324) = 0;
+    M2C_FIELD(arg0, s32 *, 0x328) = 0;
+    M2C_FIELD(arg0, s32 *, 0x330) = 0;
+    M2C_FIELD(arg0, s32 *, 0x334) = 0;
+    return arg0;
+}
+
 void *fn_802D8BA8(void *arg0) {
     extern u8 lbl_80419658[];
     void fn_802D8CA4(void *);
