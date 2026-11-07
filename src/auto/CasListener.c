@@ -711,8 +711,12 @@ void fn_801BBFD0(void) {
 
 }
 
-static inline void CasListener_ClearFlags(void *self) {
-    M2C_FIELD(self, s32 *, 0x10) = 0;
+static inline void CasSound_Release(void **h) {
+    extern void fn_8031EA2C(void *);
+    if (*h != NULL) {
+        fn_8031EA2C(*h);
+        *h = NULL;
+    }
 }
 
 static inline void CasListener_ReleaseSound(void *self) {
@@ -732,11 +736,11 @@ void fn_801BBFD4(void *self) {
 }
 
 void fn_801BC014(u8 *self, s32 *arg1) {
-    extern void fn_8031EA2C(void *);
     extern void *fn_8033740C(void *, void *, s32, s32);
     extern u8 lbl_8045BA40[];
     s32 v;
-    M2C_FIELD(self, s32 *, 0x10) = 0;
+    s32 *flags = (s32 *)(self + 0x10);
+    *flags = 0;
     CasListener_ReleaseSound(self);
     v = arg1[0];
     *(s32 **)(self + 0x24) = arg1;
@@ -1328,25 +1332,13 @@ void fn_801C3850(void *self, s32 arg1) {
 }
 
 s32 fn_801C38E4(void *self) {
-    CasListIter begin;
-    CasListIter end;
-    CasListIter it;
-    CasListIter *pend;
-    s32 n;
+    CasListIter b;
+    CasListIter *pb;
 
-    it = CasList_Begin(self);
-    end = CasList_End(self);
-    pend = &end;
-    n = 0;
-    while (CasListIter_NotEqual(&it, pend)) {
-        CasListIter_Inc(&it);
-        n++;
-    }
-    if (n != 0) {
-        CasListIter *pb;
-        begin = CasList_Begin(self);
-        pb = &begin;
-        if (pb->node->value == 1) {
+    if (CasList_Size(self) != 0) {
+        b = CasList_Begin(self);
+        pb = &b;
+        if (*CasListIter_Deref(pb) == 1) {
             return 1;
         }
     }
