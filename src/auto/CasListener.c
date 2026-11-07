@@ -68,6 +68,18 @@ static inline void *CasSlot_InitBoth(s32 *p) {
     return p;
 }
 
+static inline CasListIter CasList_End(void *self) {
+    CasListIter r;
+    r.node = M2C_FIELD(self, CasListNode **, 4);
+    return r;
+}
+
+static inline CasListIter CasList_Begin(void *self) {
+    CasListIter r;
+    r.node = M2C_FIELD(self, CasListNode **, 4)->next;
+    return r;
+}
+
 static inline s32 CasArr_Size(u32 **a) {
     return a != NULL ? ((s32 *)a)[-1] : 0;
 }
@@ -1324,7 +1336,10 @@ s32 fn_801C5998(CasFlags *self, s32 which, s32 row, u32 idx) {
     if (idx > 0xFF) {
         return 0;
     }
-    sel = which != 0;
+    sel = 0;
+    if (which != 0) {
+        sel = 1;
+    }
     return (self->small[sel][row][idx >> 5] & (1 << (idx & 31))) != 0;
 }
 
