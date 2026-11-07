@@ -755,6 +755,10 @@ void fn_802DE598(void) {
 
 }
 
+f32 fn_802DE9F8(void *self, s32 bits) {
+    return 1.0f / (f32) ((1 << (bits - 1)) - 1);
+}
+
 f32 fn_802DEA44(void *self, s32 bits) {
     return 1.0f / (f32) ((1 << bits) - 1);
 }
