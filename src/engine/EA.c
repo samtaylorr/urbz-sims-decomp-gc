@@ -403,25 +403,19 @@ char *fn_802D9A44(void *arg0, char *arg1) {
 }
 
 u32 fn_802D9AC4(u32 size) {
-    u32 t;
-    t = size >> 6;
-    if (t <= 32) {
-        return t + 0x38;
+    if ((size >> 6) <= 32) {
+        return (size >> 6) + 0x38;
     }
-    t = size >> 9;
-    if (t <= 20) {
-        return t + 0x5B;
+    if ((size >> 9) <= 20) {
+        return (size >> 9) + 0x5B;
     }
-    t = size >> 12;
-    if (t <= 10) {
-        return t + 0x6E;
+    if ((size >> 12) <= 10) {
+        return (size >> 12) + 0x6E;
     }
-    t = size >> 15;
-    if (t <= 4) {
-        return t + 0x77;
+    if ((size >> 15) <= 4) {
+        return (size >> 15) + 0x77;
     }
-    t = size >> 18;
-    return t <= 2 ? t + 0x7C : 0x7E;
+    return (size >> 18) <= 2 ? (size >> 18) + 0x7C : 0x7E;
 }
 
 s32 fn_802D9C00(void *arg0, char *arg1) {
@@ -517,10 +511,10 @@ char *fn_802D9EF0(char *arg0, s32 arg1, s32 arg2) {
 }
 
 void fn_802D9F34(void *arg0, u32 *arg1, u32 *arg2) {
-    struct S { u32 a; u32 b; };
-    arg2[5] = 0;
     *(u8 *)((char *)arg2 + 0x10) = 8;
-    *(struct S *)arg2 = *(struct S *)arg1;
+    arg2[5] = 0;
+    arg2[0] = arg1[0];
+    arg2[1] = arg1[1];
 }
 
 void fn_802DB018(void);
@@ -531,6 +525,13 @@ void fn_802DAFB0(void) {
 void fn_802DAFD0(void *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 0x4D0) = arg1;
     M2C_FIELD(arg0, s32 *, 0x4D4) = arg2;
+}
+
+void fn_802DAFDC(void *arg0, s32 arg1) {
+    void (*fn)(s32, s32) = M2C_FIELD(arg0, void (**)(s32, s32), 0x4D0);
+    if (fn != 0) {
+        fn(arg1, M2C_FIELD(arg0, s32 *, 0x4D4));
+    }
 }
 
 void fn_802DBBA8(void *arg0, s32 arg1, s32 arg2) {
