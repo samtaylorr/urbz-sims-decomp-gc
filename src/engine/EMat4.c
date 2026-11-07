@@ -512,6 +512,27 @@ void fn_802C7500(char **arg0, char **arg1) {
     }
 }
 
+void fn_802C758C(char **arg0, char **arg1) {
+    M2C_UNK fn_802C69B0(s32, s32);
+    void fn_802C6D20(char **, char **, s32);
+    s32 i;
+    s32 i1;
+    s32 i2;
+
+    fn_802C69B0((s32)arg1, (s32)*arg0);
+    i = fn_802C714C(arg1, '.');
+    if (i != -1) {
+        fn_802C6D20(arg1, arg1, i);
+    }
+    i1 = fn_802C714C(arg1, '\\');
+    i2 = fn_802C714C(arg1, ':');
+    if (i1 != -1) {
+        fn_802C6CCC((s32 *)arg1, (s32)arg1, i1 + 1, -1);
+    } else if (i2 != -1) {
+        fn_802C6CCC((s32 *)arg1, (s32)arg1, i2 + 1, -1);
+    }
+}
+
 char **fn_802C774C(char **arg0) {
     char *p;
 
