@@ -1619,6 +1619,12 @@ s32 fn_800D0F08(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x48);
 }
 
+void fn_800D0F10(void *arg0) {
+    void fn_800CCA68(void *);
+    fn_800CCA68(M2C_FIELD(arg0, void **, 0x48));
+    fn_800CE954(arg0, 2);
+}
+
 void fn_800D0F4C(void *arg0, s32 arg1) {
     void *temp_r30;
     void *temp_r3;
