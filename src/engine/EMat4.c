@@ -736,9 +736,9 @@ f32 fn_802CA924(void) {
 }
 
 f32 fn_802CA978(void) {
-    extern f32 lbl_803F013C;
+    extern const f32 lbl_803F013C[];
     f32 r = fn_802CA924();
-    return (r + r) - lbl_803F013C;
+    return (r + r) - lbl_803F013C[0];
 }
 
 void fn_802CAA50(char *self, s32 a, s32 b, s32 c) {
