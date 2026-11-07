@@ -489,6 +489,15 @@ void fn_800C5CD8(void *arg0) {
     fn_800CE924(self, 1);
 }
 
+void fn_800C5D34(void *arg0) {
+    void fn_800CE8F4(void *, s32);
+    u8 *self = M2C_FIELD(arg0, u8 **, 0x70);
+    u8 *obj = *(u8 **)(self + 0x44);
+    u8 *vt = *(u8 **)(obj + 0x1C);
+    (*(void (**)(void *))(vt + 0x4C))(obj + *(s16 *)(vt + 0x48));
+    fn_800CE8F4(self, 1);
+}
+
 void fn_800C5D84(void *arg0) {
     void fn_800CE924(void *, s32);
     u8 *self = M2C_FIELD(arg0, u8 **, 0x70);
