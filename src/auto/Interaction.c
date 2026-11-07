@@ -20,6 +20,10 @@ void fn_8010D388(s32 arg0) {
     fn_80248488(arg0 + 4, 0, 0x4E);
 }
 
+s32 fn_8010D3B4(void *self, s32 i) {
+    return ((struct { u8 pad[0x4]; s16 a[1]; } *)self)->a[i];
+}
+
 void fn_8010D628(s32 *self, s32 value) {
     *self = value;
 }
