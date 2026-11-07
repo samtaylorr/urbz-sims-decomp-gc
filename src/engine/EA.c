@@ -85,7 +85,7 @@ void fn_802D8040(char *self, s32 pos, s32 whence) {
     char *vt = *(char **)(self + 0x28);
     char *vt2;
 
-    (*(void (**)(char *, s32, u32))(vt + 0x2C))(self + *(s16 *)(vt + 0x28), pos, *(u32 *)((char *)lbl_803FD2A4 + whence * 4));
+    (*(void (**)(char *, s32, s32))(vt + 0x2C))(self + *(s16 *)(vt + 0x28), pos, lbl_803FD2A4[whence]);
     vt2 = *(char **)(self + 0x28);
     (*(void (**)(char *))(vt2 + 0x44))(self + *(s16 *)(vt2 + 0x40));
 }
@@ -178,14 +178,13 @@ s32 fn_802D8334(void *arg0, s32 arg1) {
     extern void fn_8037AC08(void *);
     extern s32 fn_8037AC78(void *);
 
-    if (arg1 != -1) {
-        if (fn_8037AC78((char *)arg0 + 0xC) != M2C_FIELD(arg0, s32 *, 0xC)) {
-            goto ret1;
-        }
+    if (arg1 == -1) {
+        fn_8037AC08((char *)arg0 + 0xC);
+        return 1;
+    }
+    if (fn_8037AC78((char *)arg0 + 0xC) == M2C_FIELD(arg0, s32 *, 0xC)) {
         return 0;
     }
-    fn_8037AC08((char *)arg0 + 0xC);
-ret1:
     return 1;
 }
 
