@@ -1139,20 +1139,14 @@ void fn_801C6790(void *arg0, s32 arg1) {
 }
 
 s32 fn_801C7210(void *arg0, u32 arg1, void *arg2) {
-    extern char *lbl_8049440C;
+    extern u8 *lbl_8049440C;
     void fn_8039AC6C(void *, void *, s32, s32);
-    char *obj;
-    char *vt;
     void *r;
 
-    obj = lbl_8049440C;
-    vt = *(char **)(obj + 0x10);
-    if (arg1 > (*(u32 (**)(void *, s32))(vt + 0x7C))(obj + *(s16 *)(vt + 0x78), 0x55736572)) {
+    if (arg1 > (*(u32 (**)(u8 *, s32))(*(u8 **)(lbl_8049440C + 0x10) + 0x7C))(lbl_8049440C + *(s16 *)(*(u8 **)(lbl_8049440C + 0x10) + 0x78), 0x55736572)) {
         return 0;
     }
-    obj = lbl_8049440C;
-    vt = *(char **)(obj + 0x10);
-    r = (*(void *(**)(void *, s32, s32, s32))(vt + 0x94))(obj + *(s16 *)(vt + 0x90), 0x55736572, (s16)arg1, 0);
+    r = (*(void *(**)(u8 *, s32, s32, s32))(*(u8 **)(lbl_8049440C + 0x10) + 0x94))(lbl_8049440C + *(s16 *)(*(u8 **)(lbl_8049440C + 0x10) + 0x90), 0x55736572, (s16)arg1, 0);
     if (r == NULL) {
         return 0;
     }
