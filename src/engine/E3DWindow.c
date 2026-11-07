@@ -106,9 +106,20 @@ void fn_802E2288(s32 arg0) {
 
 void fn_802E22D0(void *arg0, E3DRect *arg1) {
     extern void fn_8030A460(void *);
-    *(E3DRect *)((char *)arg0 + 0x220) = *arg1;
+    E3DRect_Copy((E3DRect *)((char *)arg0 + 0x220), arg1);
     fn_8030A460(arg0);
     fn_802E232C(arg0);
+}
+
+void fn_802E232C(arg0)
+    void *arg0;
+{
+    extern void fn_802E2460(void *);
+    M2C_FIELD(arg0, f32 *, 0x230) = M2C_FIELD(arg0, f32 *, 0x220) * M2C_FIELD(arg0, f32 *, 0) + M2C_FIELD(arg0, f32 *, 0x30);
+    M2C_FIELD(arg0, f32 *, 0x234) = M2C_FIELD(arg0, f32 *, 0x224) * M2C_FIELD(arg0, f32 *, 0x14) + M2C_FIELD(arg0, f32 *, 0x34);
+    M2C_FIELD(arg0, f32 *, 0x238) = M2C_FIELD(arg0, f32 *, 0x228) * M2C_FIELD(arg0, f32 *, 0) + M2C_FIELD(arg0, f32 *, 0x30);
+    M2C_FIELD(arg0, f32 *, 0x23C) = M2C_FIELD(arg0, f32 *, 0x22C) * M2C_FIELD(arg0, f32 *, 0x14) + M2C_FIELD(arg0, f32 *, 0x34);
+    fn_802E2460(arg0);
 }
 
 void fn_802E2404(u8 *arg0, u8 *arg1, f32 *arg2) {
