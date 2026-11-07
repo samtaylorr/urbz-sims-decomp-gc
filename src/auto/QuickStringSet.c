@@ -1452,6 +1452,30 @@ s32 fn_800F8828(void *self, s32 val, s32 flag) {
     return -2;
 }
 
+s32 fn_800F88D4(void *self, u32 idx) {
+    extern char lbl_803D5B58[];
+    void fn_800F8CB4();
+    struct QSS {
+        s32 data[0xA00];
+        u32 used[0x50];
+        u32 mask[0x50];
+    } *s = self;
+    u32 bit;
+
+    if (idx + 2 > 1) {
+        if (idx > 0x9FF) {
+            ((void (*)(char *))fn_800F8CB4)(lbl_803D5B58);
+        }
+        bit = 1 << (idx & 31);
+        if (!(s->used[idx >> 5] & bit)) {
+            s->used[idx >> 5] |= bit;
+            s->mask[idx >> 5] &= ~bit;
+            return 1;
+        }
+    }
+    return 0;
+}
+
 s32 fn_800F8AF4(s32 *self, s32 (*cb)(s32, s32), s32 arg) {
     s32 *p;
     s32 *end = self + 0x9FF;
@@ -1548,6 +1572,26 @@ s32 fn_800F8CFC(char *arg0, u32 arg1) {
 
 s32 fn_800F8EA4(void) {
     return 0;
+}
+
+void *fn_800F8EAC(void *arg0, s32 arg1) {
+    s32 fn_800C488C();
+    extern f32 lbl_803D5BF8;
+    M2C_FIELD(arg0, s32 *, 0x14) = 0x400;
+    M2C_FIELD(arg0, s32 *, 0x1C) = 2;
+    M2C_FIELD(arg0, s32 *, 0x0) = 0;
+    M2C_FIELD(arg0, s32 *, 0x4) = 0;
+    M2C_FIELD(arg0, s32 *, 0x8) = 0;
+    M2C_FIELD(arg0, s32 *, 0xC) = 0;
+    M2C_FIELD(arg0, s32 *, 0x10) = 0;
+    M2C_FIELD(arg0, s32 *, 0x18) = 0;
+    M2C_FIELD(arg0, s32 *, 0x20) = 0;
+    M2C_FIELD(arg0, s32 *, 0x24) = 0;
+    M2C_FIELD(arg0, s32 *, 0x2C) = 0;
+    M2C_FIELD(arg0, s32 *, 0x30) = arg1;
+    M2C_FIELD(arg0, f32 *, 0x34) = lbl_803D5BF8;
+    M2C_FIELD(arg0, s32 *, 0x38) = fn_800C488C();
+    return arg0;
 }
 
 void fn_800F9320(u8 *self, u32 n) {
