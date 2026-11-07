@@ -999,7 +999,6 @@ f32 *fn_802C88F0(f32 *m, f32 angle) {
 }
 
 f32 *fn_802C895C(f32 *m, f32 angle) {
-    void fn_802C876C(void *);
     f32 fn_80243694(f32);
     f32 fn_802434CC(f32);
     f32 s, c;
@@ -1133,20 +1132,13 @@ f32 *fn_802C9624(f32 *m, f32 *v, s32 unused, f32 *axis) {
 
 void fn_802C9670(f32 *m) {
     int i, j;
-    f32 v, r;
+    f32 v;
 
     for (i = 0; i < 4; i++) {
         for (j = 0; j < 4; j++) {
             v = m[i * 4 + j];
-            if (v < -32767.0f) {
-                r = -32767.0f;
-            } else {
-                r = v;
-                if (v > 32767.0f) {
-                    r = 32767.0f;
-                }
-            }
-            m[i * 4 + j] = r;
+            v = v < -32767.0f ? -32767.0f : (v > 32767.0f ? 32767.0f : v);
+            m[i * 4 + j] = v;
         }
     }
 }
