@@ -631,7 +631,13 @@ s32 fn_80148838(void *self) {
             M2C_FIELD(self, char **, 4) + M2C_FIELD(M2C_FIELD(M2C_FIELD(self, void **, 4), void **, 4), s16 *, 0x2D8)) == 8) {
         if (M2C_FIELD(M2C_FIELD(M2C_FIELD(self, void **, 4), void **, 4), s32 (**)(void *, s32), 0x194)(
                 M2C_FIELD(self, char **, 4) + M2C_FIELD(M2C_FIELD(M2C_FIELD(self, void **, 4), void **, 4), s16 *, 0x190), 0xF) == 0) {
-            if ((self != 0 ? fn_8015125C(*M2C_FIELD(self, void ***, 4), 6) : 0) != 0) {
+            s32 t;
+            if (self != 0) {
+                t = fn_8015125C(*M2C_FIELD(self, void ***, 4), 6);
+            } else {
+                t = 0;
+            }
+            if (t != 0) {
                 result = 1;
             }
         }
