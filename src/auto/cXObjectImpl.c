@@ -83,22 +83,20 @@ s32 fn_8013358C(void *self) {
         s32 a;
         s32 b;
     } buf;
-    char *obj;
-    char *vt;
     s32 r;
     s32 ret;
 
     fn_80105534(&buf);
-    obj = lbl_80496668;
-    vt = *(char **)obj;
-    r = (*(s32 (**)(void *, void *))(vt + 0x23C))(obj + *(s16 *)(vt + 0x238), &buf);
+    r = (*(s32 (**)(void *, void *))(*(char **)lbl_80496668 + 0x23C))((char *)lbl_80496668 + *(s16 *)(*(char **)lbl_80496668 + 0x238), &buf);
     if (r == 0) {
         fn_801055FC(&buf, 2);
         return 0;
     }
-    obj = M2C_FIELD(self, char **, 4);
-    vt = M2C_FIELD(obj, char **, 4);
-    ret = (*(s32 (**)(void *, s32))(vt + 0x44C))(obj + *(s16 *)(vt + 0x448), r);
+    {
+        char *obj = M2C_FIELD(self, char **, 4);
+        char *vt = M2C_FIELD(obj, char **, 4);
+        ret = (*(s32 (**)(void *, s32))(vt + 0x44C))(obj + *(s16 *)(vt + 0x448), r);
+    }
     fn_801055FC(&buf, 2);
     return ret;
 }
@@ -158,6 +156,21 @@ s32 fn_801339F0(s32 arg0, s32 arg1) {
     M2C_UNK fn_80133CBC(s32, s32);
     fn_80133CBC(arg1, arg0);
     return arg0;
+}
+
+s16 fn_80133FFC(s32 arg0) {
+    struct {
+        s32 a;
+        s32 b[2];
+        void *p;
+        u16 pad;
+        s16 h;
+        s32 c;
+    } info;
+    s32 fn_8013391C(s32, s32);
+
+    fn_8013391C((s32)&info, arg0);
+    return info.h;
 }
 
 s32 fn_801352DC(void *arg0) {
@@ -569,14 +582,14 @@ s32 fn_80149284(void *arg0) {
 
     obj = M2C_FIELD(arg0, u8 **, 4);
     vt = *(u8 **)(obj + 4);
-    if ((*(s32 (**)(void *))(vt + 0x434))(obj + *(s16 *)(vt + 0x430)) == 0) {
-        obj = M2C_FIELD(arg0, u8 **, 4);
-        vt = *(u8 **)(obj + 4);
-        return ((*(u32 (**)(void *))(vt + 0x35C))(obj + *(s16 *)(vt + 0x358)) >> 4) & 1;
-    } else {
+    if ((*(s32 (**)(void *))(vt + 0x434))(obj + *(s16 *)(vt + 0x430)) != 0) {
         obj = M2C_FIELD(arg0, u8 **, 4);
         vt = *(u8 **)(obj + 4);
         return ((*(u32 (**)(void *))(vt + 0x35C))(obj + *(s16 *)(vt + 0x358)) & 2) == 0;
+    } else {
+        obj = M2C_FIELD(arg0, u8 **, 4);
+        vt = *(u8 **)(obj + 4);
+        return ((*(u32 (**)(void *))(vt + 0x35C))(obj + *(s16 *)(vt + 0x358)) >> 4) & 1;
     }
 }
 
