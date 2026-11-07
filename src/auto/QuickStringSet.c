@@ -1330,6 +1330,12 @@ void fn_800FC6E0(void) {
 
 }
 
+void fn_800FC750(void *self) {
+    u8 *obj = *(u8 **)((u8 *)self + 8);
+    u8 *vt = *(u8 **)obj;
+    (*(void (**)(void *))(vt + 0x2C))(obj + *(s16 *)(vt + 0x28));
+}
+
 s32 fn_800FC788(void *arg0, s32 arg1) {
     if ((u32) (arg1 - 0x100) > 0x2228U) {
         /* Duplicate return node #1. Try simplifying control flow for better match */
@@ -1418,14 +1424,18 @@ s32 fn_800FD3C8(u8 *self, s32 arg1, u8 **arg2) {
     extern u8 *lbl_8049665C;
     extern u8 *fn_8011CECC(void *, s32);
     u8 *vt;
+    void *a;
     void *b;
+    u8 *obj;
 
     vt = *(u8 **)self;
-    b = (*(void *(**)(u8 *, void *))(*(u8 **)lbl_8049665C + 0x1FC))(lbl_8049665C + *(s16 *)(*(u8 **)lbl_8049665C + 0x1F8), (*(void *(**)(u8 *))(vt + 0x34))(self + *(s16 *)(vt + 0x30)));
-    *arg2 = fn_8011CECC(b, arg1);
-    if (*arg2 != NULL) {
-        vt = *(u8 **)*arg2;
-        (*(void (**)(u8 *))(vt + 0x14))(*arg2 + *(s16 *)(vt + 0x10));
+    a = (*(void *(**)(u8 *))(vt + 0x34))(self + *(s16 *)(vt + 0x30));
+    b = (*(void *(**)(u8 *, void *))(*(u8 **)lbl_8049665C + 0x1FC))(lbl_8049665C + *(s16 *)(*(u8 **)lbl_8049665C + 0x1F8), a);
+    obj = fn_8011CECC(b, arg1);
+    *arg2 = obj;
+    if (obj != NULL) {
+        vt = *(u8 **)obj;
+        (*(void (**)(u8 *))(vt + 0x14))(obj + *(s16 *)(vt + 0x10));
     }
     return *arg2 != NULL;
 }
