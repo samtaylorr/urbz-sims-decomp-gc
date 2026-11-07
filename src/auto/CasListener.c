@@ -30,6 +30,16 @@ static inline s32 CasNode_Valid(void *n) {
     return n != NULL;
 }
 
+static inline CasPair CasMap_Insert(s32 map, void **key) {
+    extern CasPair fn_803ADC94(s32, void **);
+    return fn_803ADC94(map, key);
+}
+
+typedef struct {
+    u8 pad[0x808];
+    u32 bits[2][32][32];
+} CasBits;
+
 void fn_803074F0(void);
 s32 fn_801B68E8(char *self) {
     return *(s32 *)(self + 0xC);
@@ -129,12 +139,10 @@ s32 fn_801B7C98(void *arg0, void *arg1, s32 arg2) {
 
 s32 fn_801B7D68(void *arg0, s32 idx) {
     extern void *lbl_8041FA48[];
-    u32 **arr;
 
     arg0 = lbl_8041FA48[0];
-    arr = *(u32 ***)arg0;
-    if (idx < CasArr_Size(arr) - 1) {
-        return (f32)*arr[idx] * 0.8f;
+    if (idx < CasArr_Size(*(u32 ***)arg0) - 1) {
+        return (f32)*(*(u32 ***)arg0)[idx] * 0.8f;
     }
     return 0;
 }
@@ -142,13 +150,15 @@ s32 fn_801B7D68(void *arg0, s32 idx) {
 s32 fn_801B7EC8(void *arg0, s32 idx) {
     extern void *lbl_8041FA48[];
     u32 **arr;
+    s32 n;
 
     arg0 = lbl_8041FA48[0];
     arr = *(u32 ***)arg0;
-    if (idx < CasArr_Size(arr)) {
-        return *arr[idx];
+    n = CasArr_Size(arr);
+    if (n <= idx) {
+        return 0;
     }
-    return 0;
+    return *arr[idx];
 }
 
 extern s32 fn_801A09E0(void *);
@@ -228,9 +238,14 @@ void *fn_801B861C(void *self) {
     M2C_FIELD(self, u8 **, 8) = lbl_80415BE8;
     p = (char *)self + 0x30;
     M2C_FIELD(p, s32 *, 4) = 0;
-    obj = fn_802D1FC8(0x14);
+    {
+        void *tmp = fn_802D1FC8(0x14);
+        if (tmp != NULL) {
+            M2C_FIELD(tmp, u8 **, 0) = lbl_80415C38;
+        }
+        obj = tmp;
+    }
     M2C_FIELD(self, void **, 0xC) = obj;
-    M2C_FIELD(obj, u8 **, 0) = lbl_80415C38;
     M2C_FIELD(self, s32 *, 0x18) = 0;
     M2C_FIELD(self, s32 *, 0x10) = 0;
     M2C_FIELD(self, s32 *, 0x14) = 0;
@@ -1116,6 +1131,28 @@ void fn_801C5750(void *self, s32 flags) {
     }
 }
 
+void fn_801C5AC4(void *arg0, s32 arg1, s32 arg2, u32 arg3, s32 arg4) {
+    s32 idx;
+    u32 mask;
+    u32 (*bits)[16][32];
+
+    if (arg3 > 0x3FF) {
+        return;
+    }
+    idx = 0;
+    if (arg1 != 0) {
+        idx = 1;
+    }
+    mask = 1 << (arg3 & 0x1F);
+    arg3 >>= 5;
+    bits = (u32 (*)[16][32])((u8 *)arg0 + 0x808);
+    if (arg4 != 0) {
+        bits[idx][arg2][arg3] |= mask;
+    } else {
+        bits[idx][arg2][arg3] &= ~mask;
+    }
+}
+
 void fn_801C5CBC(void *self, s32 flags) {
     extern u8 lbl_80415F08[];
     extern void fn_802D20E8(void *);
@@ -1247,12 +1284,13 @@ void fn_801C5F20(void *arg0, s32 arg1) {
 
 extern CasPair fn_803ADC94(s32, void **);
 void fn_801C5FB0(s32 arg0, void *arg1) {
-    CasPair copy;
     void *key;
     void *temp_r9;
 
     key = arg1;
-    copy = fn_803ADC94(arg0, &key);
+    {
+        CasPair copy = fn_803ADC94(arg0, &key);
+    }
     temp_r9 = M2C_FIELD(arg1, void **, 4);
     M2C_FIELD(temp_r9, M2C_UNK (**)(void *, s32), 0x1C)((u8 *)arg1 + M2C_FIELD(temp_r9, s16 *, 0x18), arg0);
 }
