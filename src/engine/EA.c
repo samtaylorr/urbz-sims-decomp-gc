@@ -148,6 +148,7 @@ void *fn_802D81B8(void *arg0) {
 
 void *fn_802D8200(void *arg0, s32 arg1, s32 arg2) {
     extern void **fn_802D6A14(void **);
+    s32 fn_802D82D4(void *, s32, s32);
     extern u8 lbl_804195C8[];
 
     fn_802D6A14(arg0);
