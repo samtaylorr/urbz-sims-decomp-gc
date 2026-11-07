@@ -2249,6 +2249,21 @@ s32 fn_800FDE40(void *arg0) {
     return ++M2C_FIELD(arg0, s32 *, 0x10);
 }
 
+s32 fn_800FDE54(void *arg0) {
+    s32 var_r3;
+    void *temp_r9;
+
+    var_r3 = --M2C_FIELD(arg0, s32 *, 0x10);
+    if (var_r3 == 0) {
+        if (arg0 != NULL) {
+            temp_r9 = M2C_FIELD(arg0, void **, 0);
+            M2C_FIELD(temp_r9, void (**)(void *, s32), 0x24)((char *)arg0 + M2C_FIELD(temp_r9, s16 *, 0x20), 3);
+        }
+        return 0;
+    }
+    return var_r3;
+}
+
 void fn_800FDEB0(s32 arg0, s32 arg1) {
     extern QSSVec lbl_80434B28;
     if (arg1 == 0xFFFF) {
