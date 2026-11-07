@@ -592,6 +592,13 @@ void fn_802C7F78(void *self) {
     M2C_FIELD(self, void **, 4) = NULL;
 }
 
+void fn_802C81F4(f32 *out, f32 *v, f32 *m) {
+    out[0] = v[0] * m[0] + v[1] * m[4] + v[2] * m[8] + v[3] * m[12];
+    out[1] = v[0] * m[1] + v[1] * m[5] + v[2] * m[9] + v[3] * m[13];
+    out[2] = v[0] * m[2] + v[1] * m[6] + v[2] * m[10] + v[3] * m[14];
+    out[3] = v[0] * m[3] + v[1] * m[7] + v[2] * m[11] + v[3] * m[15];
+}
+
 void fn_802C829C(s32 arg0, s32 arg1, s32 arg2) {
     M2C_UNK fn_8037D6D8(s32, s32, s32);
     fn_8037D6D8(arg1, arg2, arg0);
@@ -605,6 +612,26 @@ void fn_802C82CC(f32 *m, f32 s) {
         for (j = 0; j < 3; j++) {
             m[i * 4 + j] *= s;
         }
+    }
+}
+
+void fn_802C8304(f32 *m, f32 *v) {
+    m[0] *= v[0];
+    m[1] *= v[0];
+    m[2] *= v[0];
+    m[4] *= v[1];
+    m[5] *= v[1];
+    m[6] *= v[1];
+    m[8] *= v[2];
+    m[9] *= v[2];
+    m[10] *= v[2];
+}
+
+void fn_802C839C(f32 *m, f32 *v) {
+    s32 i;
+
+    for (i = 0; i < 3; i++) {
+        m[12 + i] += v[0] * m[i] + v[1] * m[4 + i] + v[2] * m[8 + i];
     }
 }
 
@@ -730,15 +757,34 @@ void fn_802C96D4(void) {
 
 f32 fn_802CA924(void) {
     extern u32 lbl_80494DC8;
-    extern f32 lbl_803F0138;
+    extern const f64 lbl_803F0130[];
+    extern const f32 lbl_803F0138[];
+    union {
+        f64 d;
+        struct {
+            u32 hi;
+            u32 lo;
+        } w;
+    } u;
     lbl_80494DC8 = lbl_80494DC8 * 0x41C64E6F + 0x303B;
-    return (f32)((lbl_80494DC8 >> 16) & 0x7FFF) * lbl_803F0138;
+    u.w.lo = (lbl_80494DC8 >> 16) & 0x7FFF;
+    u.w.hi = 0x43300000;
+    return (f32)(u.d - lbl_803F0130[0]) * lbl_803F0138[0];
 }
 
 f32 fn_802CA978(void) {
     extern const f32 lbl_803F013C[];
     f32 r = fn_802CA924();
     return (r + r) - lbl_803F013C[0];
+}
+
+void fn_802CAA00(void *self, s32 flags) {
+    extern u8 lbl_80419390[];
+    void fn_802D8260(void *, s32);
+    void fn_802D6A28(void **, s32);
+    *(void **)self = lbl_80419390;
+    fn_802D8260((char *)self + 4, 2);
+    fn_802D6A28(self, flags);
 }
 
 void fn_802CAA50(char *self, s32 a, s32 b, s32 c) {
