@@ -1462,13 +1462,16 @@ char *fn_8011702C(char *self) {
     char *obj = *(char **)(self + 0xC);
     char *vt;
     char *r;
+    char *ret;
     if (obj != 0) {
         vt = *(char **)(obj + 4);
         r = (*(char *(**)(void *))(vt + 0x324))(obj + *(s16 *)(vt + 0x320));
         vt = *(char **)r;
-        return (*(char *(**)(void *, s32))(vt + 0x8C))(r + *(s16 *)(vt + 0x88), *(s32 *)(self + 0x14));
+        ret = (*(char *(**)(void *, s32))(vt + 0x8C))(r + *(s16 *)(vt + 0x88), *(s32 *)(self + 0x14));
+    } else {
+        ret = 0;
     }
-    return 0;
+    return ret;
 }
 
 void fn_8011709C(void *arg0) {
