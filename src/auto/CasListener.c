@@ -249,17 +249,15 @@ s32 fn_801B7C98(void *arg0, void *arg1, s32 arg2) {
 s32 fn_801B7D68(void *arg0, s32 idx) {
     extern void *lbl_8041FA48[];
     register void *p asm("r10");
-    register void *mgr asm("r11");
     s32 n = 0;
 
-    mgr = lbl_8041FA48[0];
-    arg0 = mgr;
-    p = *(void **)mgr;
+    arg0 = lbl_8041FA48[0];
+    p = *(void **)arg0;
     if (p != NULL) {
         n = ((s32 *)p)[-1];
     }
     if (idx < n - 1) {
-        s32 off = idx * 4;
+        register s32 off asm("r9") = idx * 4;
         p = *(void **)((char *)p + off);
         return (f32)*(u32 *)p * 0.8f;
     }
