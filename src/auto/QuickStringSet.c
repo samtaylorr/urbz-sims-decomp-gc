@@ -137,10 +137,7 @@ s32 fn_800F5AD4(s32 *arg0, const char *arg1) {
         return -1;
     }
     p = arg0[1];
-    n = 0;
-    if (arg0 != NULL) {
-        n = arg0[0];
-    }
+    n = arg0 != NULL ? arg0[0] : 0;
     r = fn_802D8004(p, 1, n, f);
     fn_802D7F94(f);
     if (r != n) {
@@ -190,15 +187,10 @@ s32 fn_800F5FBC(void *arg0, s32 *arg1) {
         return -0x2F;
     }
     f = lbl_80495A30;
-    if (fn_800C4568(f, fn_800F69E8(arg1)) == 0) {
-        if (fn_800C4548(f, fn_800F69E8(arg1)) == 0) {
-            return -0x2A;
-        } else {
-            return 0;
-        }
-    } else {
+    if (fn_800C4568(f, fn_800F69E8(arg1)) != 0) {
         return -0x2B;
     }
+    return fn_800C4548(f, fn_800F69E8(arg1)) == 0 ? -0x2A : 0;
 }
 
 s32 fn_800F6048(void *arg0, s32 *arg1) {
