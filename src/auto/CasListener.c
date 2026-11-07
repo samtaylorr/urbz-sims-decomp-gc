@@ -49,6 +49,10 @@ typedef struct {
     void *node;
 } CasMapIter;
 
+typedef struct {
+    char *p;
+} CasVecIt;
+
 static inline void CasMapIter_Inc(CasMapIter *it) {
     extern void *fn_8039AB24(void *);
     it->node = fn_8039AB24(it->node);
@@ -1271,23 +1275,21 @@ void fn_801C3850(void *self, s32 arg1) {
 }
 
 s32 fn_801C38E4(void *self) {
-    CasListIter begin[2];
-    CasListIter end[1];
-    CasListIter it[1];
+    CasListIter begin;
+    CasListIter end;
+    CasListIter it;
     s32 n;
     s32 ret;
 
-    end[0] = CasList_End(self);
+    end = CasList_End(self);
     n = 0;
-    it[0] = CasList_Begin(self);
-    while (CasListIter_NotEqual(it, end)) {
-        it[0].node = it[0].node->next;
+    for (it = CasList_Begin(self); CasListIter_NotEqual(&it, &end); CasListIter_Inc(&it)) {
         n++;
     }
     if (n != 0) {
-        begin[0] = CasList_Begin(self);
+        begin = CasList_Begin(self);
         ret = 1;
-        if (begin[0].node->value != 1) {
+        if (begin.node->value != 1) {
             ret = 0;
         }
         return ret;
@@ -1308,9 +1310,9 @@ void *fn_801C4040(void *self) {
     return self;
 }
 
-void *fn_801C40A0(void *self, s32 arg) {
-    void fn_803ABFA8(void *, s32);
-    void fn_801C4170(void *, s32);
+void *fn_801C40A0(void *self, void *arg) {
+    void fn_803ABFA8(void *, void *);
+    void fn_801C4170(void *, void *);
     s32 pad[4];
     fn_803ABFA8(self, arg);
     M2C_FIELD(self, s32 *, 0x14) = 0;
@@ -1343,9 +1345,9 @@ void fn_801C43AC(char *self) {
     char *end;
     char *it;
 
-    M2C_FIELD(self, s32 *, 0x10) = 0;
     vec = (char **)(self + 0x14);
     begin = vec[0];
+    M2C_FIELD(self, s32 *, 0x10) = 0;
     end = vec[1];
     vec2 = (char **)(self + 0x24);
     for (it = begin; it != end; it += 0x10) {
