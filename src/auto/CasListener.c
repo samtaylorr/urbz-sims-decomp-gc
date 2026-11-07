@@ -853,6 +853,12 @@ void fn_801BFEEC(void *self, s32 arg1, s32 arg2) {
     fn_801C096C(M2C_FIELD(self, void **, 0xC), arg1, arg2);
 }
 
+void fn_801BFF34(void *self, s32 arg1) {
+    extern void fn_801C02C4(void *, s32);
+    fn_801C02C4(self, 2);
+    fn_801B7C94(M2C_FIELD(self, void **, 8), arg1);
+}
+
 void fn_801BFF74(void *self, void *arg1) {
     extern void fn_801C02C4(void *, s32);
     fn_801C02C4(self, 4);
