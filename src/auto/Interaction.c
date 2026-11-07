@@ -1464,6 +1464,29 @@ void fn_8011709C(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x40) = temp_r9;
 }
 
+char *fn_801170B0(char *self) {
+    s32 fn_800F4878(void *);
+    void fn_800F1B80(void *, const char *);
+    void fn_800F1D2C(void *, s32);
+    extern char lbl_803D7E00[];
+    char *p = self + 0x34;
+    char *obj;
+    char *vt;
+    if (fn_800F4878(p) == 0) {
+        obj = fn_8011702C(self);
+        if (obj != 0) {
+            vt = *(char **)obj;
+            if ((*(s32 (**)(void *))(vt + 0xCC))(obj + *(s16 *)(vt + 0xC8)) != 0) {
+                fn_800F1B80(p, lbl_803D7E00);
+            }
+            vt = *(char **)obj;
+            fn_800F1D2C(p, (*(s32 (**)(void *))(vt + 0x1A4))(obj + *(s16 *)(vt + 0x1A0)));
+        }
+    }
+    *(u32 *)(self + 0x44) &= ~0x80;
+    return self + 0x34;
+}
+
 void fn_80117160(void *arg0) {
     M2C_UNK fn_800F1AA0(s32);
     fn_800F1AA0(arg0 + 0x34);
