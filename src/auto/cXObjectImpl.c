@@ -16,6 +16,8 @@ s16 fn_801301F8(s32 arg0, s32 arg1) {
 }
 
 extern s32 lbl_80495BB0;
+extern char lbl_80434C40[];
+extern s32 lbl_80495BB8;
 extern void fn_800F1A60(s32, s32);
 void fn_8013020C(void) {
     fn_800F1A60((s32)&lbl_80495BB0, 2);
