@@ -83,11 +83,8 @@ typedef struct {
 } CasSlot;
 
 static inline void *CasSlot_InitBoth(s32 *p) {
-    CasSlot t;
-    t.a = 0;
-    t.b = 0;
-    *(CasSlot *)p = t;
-    return p;
+    p[0] = 0;
+    return CasSlot_Init(p);
 }
 
 static inline CasListIter CasList_End(void *self) {
@@ -246,7 +243,7 @@ s32 fn_801B7C98(void *arg0, void *arg1, s32 arg2) {
 
 s32 fn_801B7D68(void *arg0, s32 idx) {
     extern void *lbl_8041FA48[];
-    void *p;
+    register void *p asm("r10");
     s32 n = 0;
 
     arg0 = lbl_8041FA48[0];
@@ -255,7 +252,7 @@ s32 fn_801B7D68(void *arg0, s32 idx) {
         n = ((s32 *)p)[-1];
     }
     if (idx < n - 1) {
-        p = ((void **)p)[idx];
+        p = *(void **)((u32)idx * 4 + (char *)p);
         return (f32)*(u32 *)p * 0.8f;
     }
     return 0;
@@ -263,8 +260,19 @@ s32 fn_801B7D68(void *arg0, s32 idx) {
 
 s32 fn_801B7EC8(void *arg0, s32 idx) {
     extern void *lbl_8041FA48[];
+    register void *p asm("r11");
+    s32 n = 0;
 
-    return CasTbl_Get(lbl_8041FA48[0], idx);
+    p = lbl_8041FA48[0];
+    p = *(void **)p;
+    if (p != NULL) {
+        n = ((s32 *)p)[-1];
+    }
+    if (idx < n) {
+        p = *(void **)((u32)idx * 4 + (char *)p);
+        return *(s32 *)p;
+    }
+    return 0;
 }
 
 extern s32 fn_801A09E0(void *);
@@ -1373,42 +1381,34 @@ void fn_801C5750(void *self, s32 flags) {
 }
 
 s32 fn_801C5998(CasFlags *self, s32 which, s32 row, u32 idx) {
-    s32 sel;
-
     if (idx > 0xFF) {
         return 0;
     }
-    sel = 0;
-    if (which != 0) {
-        sel = 1;
-    }
-    return CasFlags_Test(self->small[sel][row], idx);
+    return (self->small[which ? 1 : 0][row][idx >> 5] & (1 << (idx & 31))) != 0;
 }
 
 s32 fn_801C59F0(CasFlags *self, s32 which, s32 row, u32 idx) {
-    s32 sel;
-
     if (idx > 0x3FF) {
         return 0;
     }
-    sel = 0;
-    if (which != 0) {
-        sel = 1;
-    }
-    return CasFlags_Test(self->big[sel][row], idx);
+    return (self->big[which ? 1 : 0][row][idx >> 5] & (1 << (idx & 31))) != 0;
 }
 
 void fn_801C5A4C(CasFlags *self, s32 which, s32 row, u32 idx, s32 on) {
     s32 sel;
+    u32 mask;
 
     if (idx > 0xFF) {
         return;
     }
-    sel = 0;
-    if (which != 0) {
-        sel = 1;
+    sel = which ? 1 : 0;
+    mask = 1 << (idx & 31);
+    idx >>= 5;
+    if (on) {
+        self->small[sel][row][idx] |= mask;
+    } else {
+        self->small[sel][row][idx] &= ~mask;
     }
-    CasFlags_Set(self->small[sel][row], idx, on);
 }
 
 void fn_801C5AC4(CasBits *arg0, s32 arg1, s32 arg2, u32 arg3, s32 arg4) {
