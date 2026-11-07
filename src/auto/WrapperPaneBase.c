@@ -881,6 +881,16 @@ void fn_800CF030(void *arg0, s32 arg1, s32 arg2) {
     fn_80311ABC(fn_803338D0(lbl_80494FCC, arg2), 0);
 }
 
+s32 fn_800CF254(void *self, s32 id) {
+    s32 *it;
+    for (it = M2C_FIELD(self, s32 **, 0x50); it != M2C_FIELD(self, s32 **, 0x54); it++) {
+        if (*it == id) {
+            return *it;
+        }
+    }
+    return 0;
+}
+
 void *fn_800CF538(void *arg0, s32 arg1) {
     M2C_UNK fn_800CBFB8(void *, M2C_UNK *, f32 *);
     M2C_UNK fn_800CC938(void *);
