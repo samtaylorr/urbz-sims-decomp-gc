@@ -260,6 +260,19 @@ u8 fn_800306FC(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 0x3B);
 }
 
+void *fn_80030704(void *self) {
+    extern u8 lbl_804076B0[];
+    extern void fn_8030728C(void *);
+    s32 *l;
+    fn_8030728C(self);
+    l = (s32 *)((u8 *)self + 0x4C);
+    M2C_FIELD(self, u8 **, 0x44) = lbl_804076B0;
+    l[1] = 0;
+    l[0] = 0;
+    l[2] = 1;
+    return self;
+}
+
 u8 fn_80030758(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 0x3B);
 }
