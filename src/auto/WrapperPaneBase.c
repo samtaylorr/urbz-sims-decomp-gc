@@ -127,6 +127,33 @@ f32 fn_800C56D4(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0x84);
 }
 
+void fn_800C56DC(void *arg0, s32 *arg1) {
+    M2C_UNK fn_8039D8D8(void *);
+    struct { s32 a, b; } *d = (void *)((u8 *)arg0 + 0x88);
+    u8 *p;
+    s32 a, b;
+    *d = *(typeof(d))arg1;
+    p = M2C_FIELD(M2C_FIELD(arg0, void **, 0x70), u8 **, 0x64);
+    a = arg1[0];
+    b = arg1[1];
+    M2C_FIELD(p, s32 *, 0x30) = b;
+    M2C_FIELD(p, s32 *, 0x2C) = a;
+    fn_8039D8D8(p + 0x20);
+}
+
+void fn_800C5728(void *arg0, f32 arg1) {
+    M2C_UNK fn_8039D8D8(void *);
+    u8 *p;
+    s32 a, b;
+    M2C_FIELD(arg0, f32 *, 0x88) = arg1;
+    p = M2C_FIELD(M2C_FIELD(arg0, void **, 0x70), u8 **, 0x64);
+    a = M2C_FIELD(arg0, s32 *, 0x88);
+    b = M2C_FIELD(arg0, s32 *, 0x8C);
+    M2C_FIELD(p, s32 *, 0x30) = b;
+    M2C_FIELD(p, s32 *, 0x2C) = a;
+    fn_8039D8D8(p + 0x20);
+}
+
 s32 fn_800C57A8(s32 arg0) {
     return arg0 + 0x88;
 }
