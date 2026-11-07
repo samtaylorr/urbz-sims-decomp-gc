@@ -58,6 +58,23 @@ s32 fn_800C472C(s64 *arg0) {
     return 1;
 }
 
+WPBTime64 fn_800C4744(void) {
+    extern s32 lbl_80495A34;
+    extern u8 *lbl_80494FC4;
+    extern u8 lbl_804349A8[];
+    extern f32 lbl_803D050C;
+    extern long long fn_8024E754();
+    WPBTime64 r;
+    if (lbl_80495A34 == 0) {
+        r.v = 0;
+    } else {
+        u8 *obj = lbl_80494FC4;
+        u8 *vt = *(u8 **)obj;
+        r.v = fn_8024E754((*(f32 (**)(void *, void *))(vt + 0x2C))(obj + *(s16 *)(vt + 0x28), lbl_804349A8) * lbl_803D050C);
+    }
+    return r;
+}
+
 void fn_800C55A4(void *self, s32 arg1) {
     extern M2C_UNK lbl_8040A948[];
     extern M2C_UNK lbl_8040AA10[];
@@ -1536,6 +1553,12 @@ void fn_800D131C(void *arg0, f32 farg0) {
     M2C_FIELD(temp_r3, f32 *, 0x34) = farg0;
     fn_8039D8D8(temp_r3);
     M2C_FIELD(temp_r30, s32 *, 4) = (s32) (M2C_FIELD(temp_r30, s32 *, 4) | 2);
+}
+
+void fn_800D13CC(void *self) {
+    u8 *obj = *(u8 **)((u8 *)self + 0x60);
+    u8 *vt = *(u8 **)(obj + 0x1C);
+    (*(void (**)(void *))(vt + 0x5C))(obj + *(s16 *)(vt + 0x58));
 }
 
 void fn_800D1404(void *arg0) {
