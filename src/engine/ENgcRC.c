@@ -124,7 +124,12 @@ void fn_80345FB0(void) {
 s32 fn_80345FB4(void *arg0) {
     s32 fn_80346F04(void *);
     extern s32 lbl_80495088;
-    return lbl_80495088 != 0 || fn_80346F04(arg0) == 1 || fn_80346F04(arg0) != 2;
+    if (lbl_80495088 == 0 && fn_80346F04(arg0) != 1) {
+        if (fn_80346F04(arg0) == 2) {
+            return 0;
+        }
+    }
+    return 1;
 }
 
 void fn_80346258(void *self) {
@@ -978,6 +983,14 @@ void fn_8034AD3C(void) {
 
 void fn_8034AD40(void) {
 
+}
+
+void fn_8034AD44(void *self) {
+    void fn_802FB688(void *, s32, s32);
+    u8 *fn_802FB800(void *, s32);
+    fn_802FB688(self, 0, 0);
+    *fn_802FB800(self, 1) = 0x48;
+    *(s32 *)((char *)self + 0x14) = 1;
 }
 
 void fn_8034AD94(void *arg0, void *arg1) {
