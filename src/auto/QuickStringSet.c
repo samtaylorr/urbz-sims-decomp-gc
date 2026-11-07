@@ -1402,10 +1402,10 @@ void fn_800FC6E0(void) {
 void fn_800FC6E4(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     extern char lbl_803D6030[];
     void fn_800F68F0(s32, char *, s32);
-    s32 buf[3];
+    QSSEntry12 buf;
 
-    if (fn_800FC380(arg0, arg1, arg2, buf) != 0) {
-        ((void (*)(void *, s32, s32 *, s32))fn_800FC6E0)(arg0, arg1, buf, arg3);
+    if (fn_800FC380(arg0, arg1, arg2, &buf) != 0) {
+        ((void (*)(void *, s32, QSSEntry12 *, s32))fn_800FC6E0)(arg0, arg1, &buf, arg3);
     } else {
         fn_800F68F0(arg3, lbl_803D6030, -1);
     }
