@@ -775,9 +775,9 @@ void fn_8034ADDC(void) {
 
 void fn_8034AE04(void *arg0, s32 arg1, s32 arg2) {
     extern u8 lbl_8046DF78[];
-    void fn_80354C40(void *);
+    void fn_80354C40(void *, s32, s32);
     M2C_FIELD(arg0, s32 *, 0x38) = arg2;
-    fn_80354C40(lbl_8046DF78);
+    fn_80354C40(lbl_8046DF78, arg1, arg2);
 }
 
 void fn_8034AE30(void *arg0, s32 arg1, u32 arg2) {
