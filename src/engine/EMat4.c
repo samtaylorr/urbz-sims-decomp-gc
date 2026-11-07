@@ -533,6 +533,25 @@ void fn_802C758C(char **arg0, char **arg1) {
     }
 }
 
+void fn_802C7644(char **arg0, char **arg1) {
+    extern char lbl_803F00A0[];
+    M2C_UNK fn_802C69B0(s32, s32);
+    void fn_802C6D20(char **, char **, s32);
+    s32 i;
+
+    i = fn_802C714C(arg0, '\\');
+    if (i == -1) {
+        i = fn_802C714C(arg0, ':');
+        if (i == -1) {
+            fn_802C69B0((s32)arg1, (s32)lbl_803F00A0);
+        } else {
+            fn_802C6D20(arg0, arg1, i + 1);
+        }
+    } else {
+        fn_802C6D20(arg0, arg1, i + 1);
+    }
+}
+
 void fn_802C76D4(char **arg0, char **arg1) {
     s32 i1;
     s32 i2;
