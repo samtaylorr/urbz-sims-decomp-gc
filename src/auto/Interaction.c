@@ -499,6 +499,12 @@ void fn_80111F9C(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x14) = 0;
 }
 
+void *fn_80111FA8(void) {
+    extern void *fn_802D1FC8(s32);
+    extern void *fn_80112010(void *);
+    return fn_80112010(fn_802D1FC8(0x10));
+}
+
 void fn_80111FD0(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
