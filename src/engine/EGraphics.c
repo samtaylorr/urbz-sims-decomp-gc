@@ -17,6 +17,14 @@ static inline Vec3f *Vec3f_Splat(Vec3f *v, f32 s) {
     return v;
 }
 
+typedef struct { Vec3f min; Vec3f max; } EGBox;
+
+static inline void EGBox_Init(EGBox *b, f32 c) {
+    Vec3f t = { c, c, c };
+    b->max = t;
+    b->min = b->max;
+}
+
 void fn_802D2FD0(void);
 extern s32 lbl_804961C4;
 extern void fn_802EFBA8(void *);
@@ -717,16 +725,21 @@ extern const f32 lbl_803F0CF4[];
 
 void fn_802EF220(void *arg0) {
     struct { Vec3f min; Vec3f max; } box;
-    Vec3f t;
-    f32 lo, hi;
-    t.x = lbl_803F0CEC[0];
-    t.z = lbl_803F0CEC[0];
-    t.y = lbl_803F0CEC[0];
-    lo = lbl_803F0CF0[0];
-    box.min = box.max = t;
+    register f32 lo asm("fr13") = lbl_803F0CF0[0];
+    Vec3f t = { lbl_803F0CEC[0], lbl_803F0CEC[0], lbl_803F0CEC[0] };
+    register Vec3f *p asm("r9") = &t;
+    register f32 hi asm("fr0");
+    box.max = t;
+    box.min = box.max;
     hi = lbl_803F0CF4[0];
-    Vec3f_SplatCopy(&box.min, &t, lo);
-    Vec3f_SplatCopy(&box.max, &t, hi);
+    p->z = lo;
+    p->y = lo;
+    p->x = lo;
+    box.min = *p;
+    p->z = hi;
+    p->y = hi;
+    p->x = hi;
+    box.max = *p;
     fn_802F09B8(arg0, &box);
 }
 
