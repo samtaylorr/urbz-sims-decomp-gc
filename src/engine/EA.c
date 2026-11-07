@@ -1067,6 +1067,19 @@ char **fn_802DD058(void *arg0, void *arg1) {
     return NULL;
 }
 
+s32 fn_802DD3DC(void *arg0, void *arg1) {
+    s32 ret = 0;
+
+    if (M2C_FIELD(arg1, s32 *, 0x10) != 0) {
+        void (*f)(void *, void *, s32, s32) = M2C_FIELD(arg1, void (**)(void *, void *, s32, s32), 0x18);
+        if (f != NULL) {
+            f(arg0, arg1, M2C_FIELD(arg1, s32 *, 0x4), M2C_FIELD(arg1, s32 *, 0x1C));
+            ret = 1;
+        }
+    }
+    return ret;
+}
+
 void fn_802D21E0(void *);
 void fn_802DD5B0(void *self, void *arg) {
     fn_802D21E0(arg);
