@@ -13,6 +13,7 @@ static inline void QSS_FreePtr(void **p) {
     }
 }
 
+typedef struct QSSEntry12 { s32 unk0, unk4, unk8; } QSSEntry12;
 typedef struct QSSAlloc { u8 *unk0; u8 *cap; } QSSAlloc;
 typedef struct QSSVec { u8 *begin; u8 *end; QSSAlloc alloc; } QSSVec;
 
@@ -1270,6 +1271,22 @@ s32 fn_800FB7B0(void *arg0, s32 arg1, s32 arg2) {
         return 0;
     }
     return -1;
+}
+
+s32 fn_800FB838(void *arg0, s32 arg1) {
+    s32 **p = *M2C_FIELD(arg0, s32 ***, 4);
+    s32 n = 0;
+    s32 *q;
+    if (p != NULL) {
+        n = ((s32 *)p)[-1];
+    }
+    if (arg1 < n) {
+        q = p[arg1];
+        if (q != NULL) {
+            return *q;
+        }
+    }
+    return 0;
 }
 
 s16 fn_800FB878(void *arg0) {
