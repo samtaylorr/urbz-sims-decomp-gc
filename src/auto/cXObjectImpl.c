@@ -553,10 +553,8 @@ s16 fn_80148D80(void *arg0) {
 }
 
 void fn_80148E94(void *arg0, void *arg1) {
-    s32 a = M2C_FIELD(arg1, s32 *, 0);
-    s32 b = M2C_FIELD(arg1, s32 *, 4);
-    M2C_FIELD(arg0, s32 *, 0x6C) = b;
-    M2C_FIELD(arg0, s32 *, 0x68) = a;
+    struct { s32 a, b; } *d = (void *)((u8 *)arg0 + 0x68);
+    *d = *(typeof(d))arg1;
 }
 
 void fn_80148EA8(void *arg0, void *arg1) {
