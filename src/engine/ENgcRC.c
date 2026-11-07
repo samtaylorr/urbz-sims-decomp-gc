@@ -827,6 +827,27 @@ void fn_8034B274(void *self, s32 arg) {
     fn_80354F6C(lbl_8046DF78, &cmd);
 }
 
+void fn_8034B314(void *self, void *obj) {
+    struct {
+        u8 type;
+        u8 a;
+        u8 b;
+        void *obj;
+    } cmd;
+    void fn_803552F4(void *, void *);
+    extern u8 lbl_8046DF78[];
+    u8 a = 0;
+    u8 b;
+    if (obj != NULL) a = M2C_FIELD(obj, s32 *, 0xD8);
+    b = 0;
+    if (obj != NULL) b = M2C_FIELD(obj, s32 *, 0xDC);
+    cmd.type = 0x18;
+    cmd.a = a;
+    cmd.b = b;
+    cmd.obj = obj;
+    fn_803552F4(lbl_8046DF78, &cmd);
+}
+
 void fn_8034B700(void) {
 
 }
@@ -1084,6 +1105,17 @@ u16 fn_8034D924(void) {
     return lbl_80495144;
 }
 
+void fn_8034D958(void *arg0, u32 arg1, s32 arg2) {
+    void fn_8025302C();
+    extern u32 lbl_80472600[];
+    if (arg1 <= 999) {
+        if (lbl_80472600[arg1] <= 2) {
+            fn_8025302C(arg2);
+            lbl_80472600[arg1]++;
+        }
+    }
+}
+
 void fn_8034F440(void *arg0, s32 arg1) {
     struct {
         s32 type;
@@ -1158,6 +1190,19 @@ void fn_8034F534(void *arg0, void *arg1) {
     M2C_FIELD(arg0, s32 *, 0x4630) = 0;
     fn_80348C44();
     lbl_804950EC = 0;
+}
+
+void fn_8034F58C(void *arg0, void *arg1) {
+    M2C_UNK fn_802EDF08(s32, s32, s32);
+    extern s32 lbl_80495050;
+    s32 flag = 1;
+    if (M2C_FIELD(arg1, s32 *, 8) == 0) {
+        flag = 0;
+    }
+    fn_803529FC(arg0, M2C_FIELD(M2C_FIELD(arg1, void **, 4), u8 **, 0x40));
+    if (flag != 0) {
+        fn_802EDF08(lbl_80495050, M2C_FIELD(arg1, s32 *, 4), 0);
+    }
 }
 
 void fn_8034F840(void *arg0, void *arg1) {
@@ -1283,7 +1328,7 @@ void fn_80354944(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x4E0) = 1;
 }
 
-void fn_80354978(void *arg0) {
+void fn_80354978(void *arg0, void *arg1) {
     M2C_UNK fn_8035C2D8(s32);
     fn_8035C2D8(M2C_FIELD(arg0, s32 *, 0x4D8));
 }
@@ -1493,29 +1538,34 @@ void fn_80355EC8(u8 *self, u8 *arg) {
     u8 mode;
     u8 off;
     u8 *p;
-    s32 val;
-    u8 b;
-    s32 c;
+    s32 on;
+    s32 type;
 
     enable = arg[1];
     mode = arg[2];
     off = arg[3];
     p = *(u8 **)(self + 0x4D8);
-    val = 7;
-    b = 0;
-    c = 1;
     if (enable != 0) {
-        val = lbl_803F4684[mode];
-        b = off;
-        c = 0;
+        on = 0;
+        type = lbl_803F4684[mode];
+        p[0x3C9] = on;
+        *(s32 *)(p + 0x3B8) = type;
+        p[0x3BC] = off;
+        *(s32 *)(p + 0x3C4) = 7;
+        *(u32 *)(p + 0x6CC) |= 0x80000000 | 0x40;
+        *(s32 *)(p + 0x3C0) = on;
+        p[0x3C8] = on;
+    } else {
+        on = 1;
+        type = 7;
+        p[0x3C9] = on;
+        *(s32 *)(p + 0x3B8) = type;
+        p[0x3BC] = enable;
+        *(s32 *)(p + 0x3C4) = type;
+        *(u32 *)(p + 0x6CC) |= 0x80000000 | 0x40;
+        *(s32 *)(p + 0x3C0) = on;
+        p[0x3C8] = enable;
     }
-    p[0x3C9] = c;
-    *(s32 *)(p + 0x3B8) = val;
-    p[0x3BC] = b;
-    *(s32 *)(p + 0x3C4) = 7;
-    *(u32 *)(p + 0x6CC) |= 0x80000000 | 0x40;
-    *(s32 *)(p + 0x3C0) = c;
-    p[0x3C8] = 0;
 }
 
 extern s32 lbl_804951A4;
