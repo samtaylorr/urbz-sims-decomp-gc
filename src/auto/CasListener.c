@@ -53,6 +53,18 @@ typedef struct {
     char *p;
 } CasVecIt;
 
+static inline CasVecIt CasVec_Begin(char **v) {
+    CasVecIt it;
+    it.p = v[0];
+    return it;
+}
+
+static inline CasVecIt CasVec_End(char **v) {
+    CasVecIt it;
+    it.p = v[1];
+    return it;
+}
+
 static inline void CasBufVec_Destroy(CasVecIt first, CasVecIt last) {
     for (; first.p != last.p; first.p += 0x10) {
         CasBuf_Free((char **)first.p);
@@ -1328,8 +1340,7 @@ void *fn_801C40A0(u8 *self, s32 arg) {
     void fn_801C4170(void *, s32);
     s32 pad[4];
     fn_803ABFA8(self, arg);
-    *(s32 *)(self + 0x14) = 0;
-    *(s32 *)(self + 0x18) = 0;
+    CasSlot_InitBoth((s32 *)(self + 0x14));
     CasSlot_Init((s32 *)(self + 0x1C));
     CasSlot_InitBoth((s32 *)(self + 0x24));
     CasSlot_Init((s32 *)(self + 0x2C));
