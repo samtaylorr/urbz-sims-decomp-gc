@@ -102,6 +102,10 @@ static inline s32 QSSMapIter_Ne(QSSMapIter *a, QSSMapIter *b) {
     return a->node != b->node;
 }
 
+static inline s32 QSSMapIter_NotEqual(QSSMapIter a, QSSMapIter b) {
+    return a.node != b.node;
+}
+
 static inline QSSMapIter QSSMap_FindIt(char *self, const u32 *k) {
     QSSMapIter r;
     r.node = QSSMap_Find(self, k);
@@ -1527,17 +1531,16 @@ s32 fn_800F89E0(void *self, u32 idx, s32 val) {
     } *s = self;
     void fn_800F8CB4(char *);
     extern char lbl_803D5B58[];
-    if (idx + 2 <= 1) {
-        return 0;
+    if (idx + 2 > 1) {
+        if (idx > 0x9FF) {
+            fn_800F8CB4(lbl_803D5B58);
+        }
+        if ((s->used[idx >> 5] >> (idx & 31)) & 1) {
+            s->data[idx] = val;
+            return 1;
+        }
     }
-    if (idx > 0x9FF) {
-        fn_800F8CB4(lbl_803D5B58);
-    }
-    if (!((s->used[idx >> 5] >> (idx & 31)) & 1)) {
-        return 0;
-    }
-    s->data[idx] = val;
-    return 1;
+    return 0;
 }
 
 s32 fn_800F8A60(void *self, u32 idx) {
@@ -1548,18 +1551,17 @@ s32 fn_800F8A60(void *self, u32 idx) {
     } *s = self;
     void fn_800F8CB4(char *);
     extern char lbl_803D5B58[];
-    if (idx + 2 <= 1) {
-        return 0;
+    if (idx + 2 > 1) {
+        if (idx > 0x9FF) {
+            fn_800F8CB4(lbl_803D5B58);
+        }
+        if ((s->used[idx >> 5] >> (idx & 31)) & 1) {
+            s->data[idx] = 0;
+            s->used[idx >> 5] &= ~(1 << (idx & 31));
+            return 1;
+        }
     }
-    if (idx > 0x9FF) {
-        fn_800F8CB4(lbl_803D5B58);
-    }
-    if (!((s->used[idx >> 5] >> (idx & 31)) & 1)) {
-        return 0;
-    }
-    s->data[idx] = 0;
-    s->used[idx >> 5] &= ~(1 << (idx & 31));
-    return 1;
+    return 0;
 }
 
 s32 fn_800F8AF4(s32 self, s32 (*cb)(s32, s32), s32 arg) {
@@ -2513,7 +2515,7 @@ void fn_800FDEB0(s32 arg0, s32 arg1) {
         if (arg0 != 0) {
             QSSVec_Init(&lbl_80434B28);
         } else {
-            QSSVec_FreeBytes(&lbl_80434B28);
+            QSSVec_Free(&lbl_80434B28);
         }
     }
 }
