@@ -1739,6 +1739,7 @@ void fn_802CFEC4(void *self, u8 *node) {
 void fn_802D003C(u8 *self) {
     void fn_802CF60C(void *, void *);
     void fn_802D0240(void *, void *);
+    void fn_802D00D4(void *);
     s32 i;
     u8 *p;
     u16 idx;
@@ -1980,6 +1981,15 @@ s32 fn_802D0F94(void) {
 
 void fn_802D0F9C(void) {
 
+}
+
+s32 fn_802D0FA0(void) {
+    s32 fn_802D0FFC(void *);
+    s32 a, b, c;
+    a = fn_802D0FFC(((void *(*)(void))fn_802D0AB8)());
+    b = fn_802D0FFC(fn_802D0B3C());
+    c = fn_802D0FFC(fn_802D0BC0());
+    return a + b + c + fn_802D0FFC(((void *(*)(void))fn_802D0C44)());
 }
 
 s32 fn_802D0FFC(void *arg0) {
