@@ -881,10 +881,10 @@ void fn_802C876C(void *arg) {
     m[5] = 1.0f;
     m[10] = 1.0f;
     m[15] = 1.0f;
+    return m;
 }
 
 void *fn_802C87C4(void *arg0, void *arg1) {
-    void fn_802C876C(void *);
     void *temp_r9;
 
     fn_802C876C(arg0);
@@ -896,7 +896,6 @@ void *fn_802C87C4(void *arg0, void *arg1) {
 }
 
 void *fn_802C8814(void *arg0, void *arg1) {
-    void fn_802C876C(void *);
     fn_802C876C(arg0);
     M2C_FIELD(arg0, f32 *, 0) = M2C_FIELD(arg1, f32 *, 0);
     M2C_FIELD(arg0, f32 *, 0x14) = M2C_FIELD(arg1, f32 *, 4);
