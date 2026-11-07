@@ -102,7 +102,7 @@ void fn_800F59D8(void *arg0, void *arg1) {
     QSSStrBuf b;
     QSSStrBuf *pa = &a;
     fn_800F687C(pa, pa->buf, 0x104);
-    fn_800F687C(&b, b.buf, 0x104);
+    QSSStrBuf_Init(&b);
     fn_800F585C(arg0, &b, arg1, pa);
     fn_800F6A78(arg1, pa, -1);
 }
