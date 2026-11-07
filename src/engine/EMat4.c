@@ -591,7 +591,7 @@ char **fn_802C774C(char **arg0) {
 }
 
 M2C_UNK fn_802C77D0(s32 arg0, s32 arg1) {
-    M2C_UNK fn_802C6D20(s32, s32, s32);
+    void fn_802C6D20(char **, char **, s32);
     char **p = (char **)arg0;
     s32 n;
 
