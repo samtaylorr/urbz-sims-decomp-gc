@@ -550,6 +550,22 @@ M2C_UNK fn_80348BC0(void) {
     }
 }
 
+void fn_80348C44(void) {
+    extern s32 lbl_80495090;
+    extern s32 lbl_80495094;
+    extern s32 lbl_8049509C;
+    extern struct { s32 unk0; s32 unk4; s32 unk8; s32 pad[13]; } lbl_80400D40[];
+    void fn_80270D34(void);
+    void fn_80276344(s32, s32);
+    void fn_80276D34(void);
+    if (lbl_80495090 != 0) {
+        fn_80270D34();
+        lbl_80495094 = (lbl_80495094 + 1) % lbl_8049509C;
+        fn_80276344(lbl_80400D40[lbl_80495094].unk8, 0x15);
+        fn_80276D34();
+    }
+}
+
 void *fn_80348CAC(void *arg0) {
     extern void fn_8031E8B0(void *);
     extern u8 lbl_8041CAC8[];
