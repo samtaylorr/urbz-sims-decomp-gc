@@ -136,6 +136,7 @@ void *fn_8010D918(void *arg0, s32 arg1) {
     void *fn_8010E98C(void *);
     void *heap;
     void *p;
+    void *q;
     void *r;
 
     heap = ((void *(*)(void))fn_802D0AB8)();
@@ -143,14 +144,15 @@ void *fn_8010D918(void *arg0, s32 arg1) {
     if (p == NULL) {
         p = fn_802DC9F4(heap, 0x3C, 1, 0);
         if (p == NULL && heap == ((void *(*)(void))fn_802D0AB8)()) {
-            p = fn_802DC9F4(fn_802D0B3C(), 0x3C, 1, 0);
+            q = fn_802DC9F4(fn_802D0B3C(), 0x3C, 1, 0);
             goto done;
         }
     } else {
         fn_80248488(p, 0, 0x3C);
     }
+    q = p;
 done:
-    r = fn_8010E98C(p);
+    r = fn_8010E98C(q);
     M2C_FIELD(r, s32 *, 0x14) = arg1;
     return r;
 }
