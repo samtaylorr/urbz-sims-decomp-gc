@@ -119,6 +119,18 @@ static inline QSSMapNode *QSSMap_Find(char *self, const u32 *k) {
 static inline s32 QSSMapIter_Ne(QSSMapIter *a, QSSMapIter *b) {
     return a->node != b->node;
 }
+
+static inline QSSMapIter QSSMap_FindIt(char *self, const u32 *k) {
+    QSSMapIter r;
+    r.node = QSSMap_Find(self, k);
+    return r;
+}
+
+static inline QSSMapIter QSSMap_End(char *self) {
+    QSSMapIter r;
+    r.node = M2C_FIELD(self, QSSMapNode **, 4);
+    return r;
+}
 typedef struct QSSElem1C { u8 b[0x1C]; } QSSElem1C;
 typedef struct QSSVec1C { QSSElem1C *begin; QSSElem1C *end; } QSSVec1C;
 
@@ -1525,6 +1537,28 @@ s32 fn_800F8964(void *self, u32 idx) {
         }
     }
     return 0;
+}
+
+s32 fn_800F8A60(void *self, u32 idx) {
+    struct QSS {
+        s32 data[0xA00];
+        u32 used[0x50];
+        u32 mask[0x50];
+    } *s = self;
+    void fn_800F8CB4(char *);
+    extern char lbl_803D5B58[];
+    if (idx + 2 <= 1) {
+        return 0;
+    }
+    if (idx > 0x9FF) {
+        fn_800F8CB4(lbl_803D5B58);
+    }
+    if (!((s->used[idx >> 5] >> (idx & 31)) & 1)) {
+        return 0;
+    }
+    s->data[idx] = 0;
+    s->used[idx >> 5] &= ~(1 << (idx & 31));
+    return 1;
 }
 
 s32 fn_800F8AF4(s32 self, s32 (*cb)(s32, s32), s32 arg) {
