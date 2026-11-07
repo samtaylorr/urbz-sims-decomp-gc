@@ -939,6 +939,15 @@ char *fn_802DDB50(s32 *arg0, s32 size) {
     return p;
 }
 
+void fn_802DDBE0(void *arg0, void *arg1) {
+    void *fn_802D0AB8(void *);
+    void fn_802D1A00(void *, void *);
+
+    if (arg1 != NULL) {
+        fn_802D1A00(fn_802D0AB8(arg0), arg1);
+    }
+}
+
 void fn_802DDDC8(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0xC) = (s32) ((arg1 + 0x1F) & 0xFFFFFFE0);
 }
