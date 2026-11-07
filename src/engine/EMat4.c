@@ -751,6 +751,13 @@ f32 fn_802C88C0(f32 *m) {
     return fn_8025FC40(v);
 }
 
+f32 *fn_802C9368(f32 *m, f32 *v) {
+    m[12] += v[0];
+    m[13] += v[1];
+    m[14] += v[2];
+    return m;
+}
+
 void fn_802C96D4(void) {
 
 }
