@@ -199,9 +199,9 @@ f32 fn_801367EC(u8 *arg0, u8 *arg1) {
 
 f32 fn_80136BBC(u8 *arg0, s32 *arg1) {
     s32 dx, dy;
-    dy = arg1[1] - M2C_FIELD(arg0, s32 *, 0x6C);
     dx = arg1[0] - M2C_FIELD(arg0, s32 *, 0x68);
-    return fn_8013678C((f32)(dx * dx + dy * dy) * 0.0625f);
+    dy = arg1[1] - M2C_FIELD(arg0, s32 *, 0x6C);
+    return fn_8013678C((f32)(dy * dy + dx * dx) * 0.0625f);
 }
 
 s32 fn_801375C8(void) {
@@ -235,9 +235,9 @@ s32 fn_80139454(void *arg0, f32 *arg1, f32 *arg2) {
 }
 
 void fn_80139478(void *arg0, f32 farg0, f32 farg1) {
-    M2C_FIELD(arg0, f32 *, 0xD0) = farg0;
     M2C_FIELD(arg0, s32 *, 0xCC) = 1;
     M2C_FIELD(arg0, f32 *, 0xD4) = farg1;
+    M2C_FIELD(arg0, f32 *, 0xD0) = farg0;
 }
 
 void fn_8013948C(void *arg0, f32 *arg1, f32 *arg2) {
