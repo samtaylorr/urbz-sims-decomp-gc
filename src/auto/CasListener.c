@@ -197,30 +197,34 @@ s32 fn_801B7C98(void *arg0, void *arg1, s32 arg2) {
 
 s32 fn_801B7D68(void *arg0, s32 idx) {
     extern void *lbl_8041FA48[];
-    u32 **arr;
-    s32 n;
+    register u32 **arr asm("r10");
+    s32 n = 0;
 
     arg0 = lbl_8041FA48[0];
-    n = 0;
     arr = *(u32 ***)arg0;
     if (arr != NULL) {
         n = ((s32 *)arr)[-1];
     }
-    if (idx >= n - 1) {
-        return 0;
+    if (idx < n - 1) {
+        return (f32)*arr[idx] * 0.8f;
     }
-    return (f32)*arr[idx] * 0.8f;
+    return 0;
 }
 
 s32 fn_801B7EC8(void *arg0, s32 idx) {
     extern void *lbl_8041FA48[];
+    register u32 **arr asm("r11");
     s32 n = 0;
-    u32 **arr = *(u32 ***)lbl_8041FA48[0];
 
-    if (arr) {
+    arg0 = lbl_8041FA48[0];
+    arr = *(u32 ***)arg0;
+    if (arr != NULL) {
         n = ((s32 *)arr)[-1];
     }
-    return idx < n ? *arr[idx] : 0;
+    if (idx < n) {
+        return *arr[idx];
+    }
+    return 0;
 }
 
 extern s32 fn_801A09E0(void *);
@@ -1186,6 +1190,7 @@ s32 fn_801C37CC(void) {
 void *fn_801C3804(void *self) {
     void *fn_80399BE8(s32);
     CasListNode *n;
+    s32 alloc[3];
 
     M2C_FIELD(self, CasListNode **, 4) = NULL;
     n = fn_80399BE8(0xC);
@@ -1261,10 +1266,9 @@ void *fn_801C40A0(void *self, s32 arg) {
     fn_803ABFA8(self, arg);
     M2C_FIELD(self, s32 *, 0x14) = 0;
     M2C_FIELD(self, s32 *, 0x18) = 0;
-    ((s32 *)((u8 *)self + 0x1C))[1] = 0;
-    ((s32 *)((u8 *)self + 0x24))[0] = 0;
-    ((s32 *)((u8 *)self + 0x24))[1] = 0;
-    ((s32 *)((u8 *)self + 0x2C))[1] = 0;
+    CasSlot_Init((s32 *)((u8 *)self + 0x1C));
+    CasSlot_InitBoth((s32 *)((u8 *)self + 0x24));
+    CasSlot_Init((s32 *)((u8 *)self + 0x2C));
     fn_801C4170(self, arg);
     return self;
 }
@@ -1274,25 +1278,20 @@ void *fn_801C4108(void *self) {
     void fn_801C4668(void *);
     fn_803AD1F8(self);
     M2C_FIELD(self, s32 *, 0x10) = 0;
-    ((s32 *)((u8 *)self + 0x14))[0] = 0;
-    ((s32 *)((u8 *)self + 0x14))[1] = 0;
-    ((s32 *)((u8 *)self + 0x1C))[1] = 0;
-    ((s32 *)((u8 *)self + 0x24))[0] = 0;
-    ((s32 *)((u8 *)self + 0x24))[1] = 0;
-    ((s32 *)((u8 *)self + 0x2C))[1] = 0;
+    CasSlot_InitBoth((s32 *)((u8 *)self + 0x14));
+    CasSlot_Init((s32 *)((u8 *)self + 0x1C));
+    CasSlot_InitBoth((s32 *)((u8 *)self + 0x24));
+    CasSlot_Init((s32 *)((u8 *)self + 0x2C));
     fn_801C4668(self);
     return self;
 }
 
 void fn_801C43AC(char *self) {
-    void fn_802D20E8(void *, u32);
-    void fn_803997AC(void *, u32);
     char **vec;
     char **vec2;
     char *begin;
     char *end;
     char *it;
-    u32 size;
 
     M2C_FIELD(self, s32 *, 0x10) = 0;
     vec = (char **)(self + 0x14);
@@ -1300,17 +1299,10 @@ void fn_801C43AC(char *self) {
     end = vec[1];
     vec2 = (char **)(self + 0x24);
     for (it = begin; it != end; it += 0x10) {
-        if (M2C_FIELD(it, char **, 0) != NULL) {
-            size = M2C_FIELD(it, char **, 0xC) - M2C_FIELD(it, char **, 0);
-            if (size > 0x80) {
-                fn_802D20E8(M2C_FIELD(it, void **, 0), size);
-            } else {
-                fn_803997AC(M2C_FIELD(it, void **, 0), size);
-            }
-        }
+        CasBuf_Free((char **)it);
     }
     vec[1] = begin;
-    vec2[1] = vec2[0];
+    vec2[1] = M2C_FIELD(self, char **, 0x24);
 }
 
 void fn_801C465C(void *arg0) {
@@ -1349,7 +1341,10 @@ s32 fn_801C59F0(CasFlags *self, s32 which, s32 row, u32 idx) {
     if (idx > 0x3FF) {
         return 0;
     }
-    sel = which != 0;
+    sel = 0;
+    if (which != 0) {
+        sel = 1;
+    }
     return (self->big[sel][row][idx >> 5] & (1 << (idx & 31))) != 0;
 }
 
@@ -1360,12 +1355,16 @@ void fn_801C5A4C(CasFlags *self, s32 which, s32 row, u32 idx, s32 on) {
     if (idx > 0xFF) {
         return;
     }
-    sel = which != 0;
+    sel = 0;
+    if (which != 0) {
+        sel = 1;
+    }
     mask = 1 << (idx & 31);
+    idx >>= 5;
     if (on) {
-        self->small[sel][row][idx >> 5] |= mask;
+        self->small[sel][row][idx] |= mask;
     } else {
-        self->small[sel][row][idx >> 5] &= ~mask;
+        self->small[sel][row][idx] &= ~mask;
     }
 }
 
