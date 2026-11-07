@@ -991,6 +991,26 @@ s32 fn_802DCB78(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     return ret;
 }
 
+s32 fn_802DCBF8(void *arg0, s32 arg1, s32 *arg2, s32 arg3, s32 arg4) {
+    extern s32 fn_802DCC78(void *, s32, s32, s32 *, s32, s32);
+    void *volatile p;
+    void *q;
+    void *r;
+    s32 ret;
+
+    q = M2C_FIELD(arg0, void **, 0x4FC);
+    p = q;
+    if (q != NULL) {
+        fn_802D9214(q);
+    }
+    ret = fn_802DCC78(arg0, arg1, arg1, arg2, arg3, arg4);
+    r = p;
+    if (r != NULL) {
+        fn_802D9244(r);
+    }
+    return ret;
+}
+
 u32 fn_802DCFA0(void *arg0, char *arg1) {
     char *h;
     u32 size;
