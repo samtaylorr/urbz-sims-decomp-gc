@@ -996,6 +996,14 @@ void fn_8034D91C(s16 arg0) {
     lbl_80495146 = arg0;
 }
 
+u16 fn_8034D924(void) {
+    void fn_80270B90(u16);
+    extern u16 lbl_80495144;
+    lbl_80495144++;
+    fn_80270B90(lbl_80495144);
+    return lbl_80495144;
+}
+
 void fn_8034F840(void *arg0) {
     s32 fn_80269134();
     M2C_UNK fn_8034D5B4();
