@@ -1905,6 +1905,29 @@ void **fn_800FC1AC(void **self) {
     return self;
 }
 
+s32 fn_800FC2C0(void *arg0, s16 arg1) {
+    extern s32 fn_800FD1A4(void *, s16, s32, s32);
+    s32 fn_801B27A4(void *);
+    void *obj;
+    void *vt;
+    s32 ret;
+
+    obj = NULL;
+    if (fn_800FD1A4(arg0, arg1, (s32)&obj, 1) == 0) {
+        if (obj != NULL) {
+            vt = M2C_FIELD(obj, void **, 0);
+            M2C_FIELD(vt, void (**)(void *), 0x1C)((char *)obj + M2C_FIELD(vt, s16 *, 0x18));
+        }
+        return 0;
+    }
+    ret = fn_801B27A4(obj);
+    if (obj != NULL) {
+        vt = M2C_FIELD(obj, void **, 0);
+        M2C_FIELD(vt, void (**)(void *), 0x1C)((char *)obj + M2C_FIELD(vt, s16 *, 0x18));
+    }
+    return ret;
+}
+
 s32 fn_800FC360(void *arg0) {
     return M2C_FIELD(M2C_FIELD(arg0, void **, 4), s32 *, 4);
 }
@@ -2268,11 +2291,9 @@ void fn_800FDEB0(s32 arg0, s32 arg1) {
     extern QSSVec lbl_80434B28;
     if (arg1 == 0xFFFF) {
         if (arg0 != 0) {
-            lbl_80434B28.begin = 0;
-            lbl_80434B28.end = 0;
-            QSSAlloc_Clear(&lbl_80434B28.alloc);
-        } else if (lbl_80434B28.begin != 0) {
-            QSSAlloc_Free(lbl_80434B28.begin, (lbl_80434B28.alloc.cap - lbl_80434B28.begin) & ~3);
+            QSSVec_Init(&lbl_80434B28);
+        } else {
+            QSSVec_Free(&lbl_80434B28);
         }
     }
 }
