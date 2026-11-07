@@ -627,12 +627,12 @@ void fn_802C84E8(f32 *m, f32 v) {
 }
 
 void fn_802C8530(f32 *m, s32 col, f32 *out) {
-    f32 *r0 = m;
     f32 *r1 = m + 4;
     f32 *r2 = m + 8;
-    out[0] = *(f32 *)((char *)r0 + col * 4);
-    out[1] = *(f32 *)((char *)r1 + col * 4);
-    out[2] = *(f32 *)((char *)r2 + col * 4);
+    col *= 4;
+    out[0] = *(f32 *)((char *)m + col);
+    out[1] = *(f32 *)((char *)r1 + col);
+    out[2] = *(f32 *)((char *)r2 + col);
 }
 
 void fn_802C8558(f32 *m, s32 col, f32 *out) {
