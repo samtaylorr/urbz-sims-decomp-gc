@@ -79,40 +79,48 @@ s32 fn_8013358C(void *self) {
     extern void fn_80105534(void *);
     extern void fn_801055FC(void *, s32);
     extern void *lbl_80496668;
-    u8 buf[8];
+    struct {
+        s32 a;
+        s32 b;
+    } buf;
     char *obj;
     char *vt;
     s32 r;
 
-    fn_80105534(buf);
+    fn_80105534(&buf);
     obj = lbl_80496668;
     vt = *(char **)obj;
-    r = (*(s32 (**)(void *, void *))(vt + 0x23C))(obj + *(s16 *)(vt + 0x238), buf);
-    if (r != 0) {
+    r = (*(s32 (**)(void *, void *))(vt + 0x23C))(obj + *(s16 *)(vt + 0x238), &buf);
+    if (r == 0) {
+        fn_801055FC(&buf, 2);
+        return 0;
+    } else {
         obj = M2C_FIELD(self, char **, 4);
         vt = M2C_FIELD(obj, char **, 4);
         r = (*(s32 (**)(void *, s32))(vt + 0x44C))(obj + *(s16 *)(vt + 0x448), r);
-        fn_801055FC(buf, 2);
+        fn_801055FC(&buf, 2);
         return r;
     }
-    fn_801055FC(buf, 2);
-    return 0;
 }
 
 void fn_8013362C(s32 arg0, s32 *arg1, s32 *arg2, s32 *arg3, u16 *arg4, s32 *arg5) {
+    typedef struct {
+        s32 x;
+        s32 y;
+    } Pair;
     struct {
         s32 a;
-        s32 b[2];
+        Pair b;
         void *p;
         u16 pad;
         u16 h;
         s32 c;
     } info;
     s32 v;
+    s32 fn_8013391C(s32, s32);
 
     fn_8013391C((s32)&info, arg0);
-    arg1[0] = info.b[0];
-    arg1[1] = info.b[1];
+    *(Pair *)arg1 = info.b;
     *arg2 = info.c;
     *arg4 = info.h;
     v = 0;
@@ -253,6 +261,15 @@ s32 fn_801394B4(void *arg0) {
     temp_r3 = M2C_FIELD(arg0, void **, 4);
     temp_r9 = M2C_FIELD(temp_r3, void **, 4);
     return M2C_FIELD(temp_r9, s32 (**)(void *), 0x2DC)(temp_r3 + M2C_FIELD(temp_r9, s16 *, 0x2D8)) == 2;
+}
+
+u8 fn_801394F8(void *arg0) {
+    void *temp_r3;
+    void *temp_r9;
+
+    temp_r3 = M2C_FIELD(arg0, void **, 4);
+    temp_r9 = M2C_FIELD(temp_r3, void **, 4);
+    return M2C_FIELD(temp_r9, u8 (**)(void *, s32), 0x224)(temp_r3 + M2C_FIELD(temp_r9, s16 *, 0x220), 0x37);
 }
 
 void fn_8013966C(s32 arg0) {
