@@ -796,6 +796,30 @@ void fn_802DE608(void *self, f32 value) {
     fn_802DE59C(self, conv.u, 32);
 }
 
+u32 fn_802DE634(u32 **self, s32 pos, s32 count) {
+    s32 word;
+    s32 shift;
+    u32 end;
+    u32 endWord;
+    u32 mask;
+
+    if (count == 0) {
+        return 0;
+    }
+    end = pos + count;
+    word = pos >> 5;
+    shift = pos & 31;
+    endWord = (end - 1) >> 5;
+    if (word == endWord) {
+        mask = (1 << count) - 1;
+        if (mask == 0) {
+            return (*self)[word];
+        }
+        return ((*self)[word] >> shift) & mask;
+    }
+    return (((*self)[endWord] & ((1 << (end & 31)) - 1)) << (32 - shift)) | ((*self)[word] >> shift);
+}
+
 f32 fn_802DE9F8(void *self, s32 bits) {
     return 1.0f / (f32) ((1 << (bits - 1)) - 1);
 }
@@ -827,8 +851,7 @@ void *fn_802DEAB0(void *self, s32 **arg1) {
     n = fn_802DE1B0(arg1);
     for (i = 0; i < n; i++) {
         struct vte *vt = *(struct vte **)((char *)self + 0x18);
-        s32 *base = arg1[0];
-        s32 v = *(s32 *)((char *)base + (i << 2));
+        s32 v = arg1[0][i];
         ((void (*)(void *, void *, s32))vt[7].pfn)((char *)self + vt[7].delta, &v, 4);
     }
     return self;
