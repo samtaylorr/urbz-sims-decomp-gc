@@ -1282,12 +1282,12 @@ s32 fn_8011560C(void *self, s32 *arg) {
 }
 
 s32 fn_80115688(void *self, s32 b) {
-    extern s32 fn_80115954(void *, void *, s32);
+    extern s32 fn_80115954(void *, s32 *, s32);
     extern s32 fn_801159B8(void *, void *, s32);
     u8 buf[0x50];
     s32 r;
 
-    r = fn_80115954(self, buf, b);
+    r = fn_80115954(self, (s32 *)buf, b);
     if (r != 0) {
         return r;
     }
