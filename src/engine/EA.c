@@ -1425,6 +1425,19 @@ void fn_802DE030(void *self, s32 pos, s32 n) {
     }
 }
 
+void fn_802DE0DC(void *self, s32 pos, s32 n) {
+    s32 fn_802DDC6C(s32, s32);
+    M2C_UNK fn_802DDCAC(s32, s32, s32);
+    s32 end = pos + n;
+    s32 cnt = M2C_FIELD(self, s32 *, 4) - end;
+    s32 i;
+
+    for (i = 0; i < cnt; i++) {
+        fn_802DDCAC((s32)self, pos + i, fn_802DDC6C((s32)self, end + i));
+    }
+    M2C_FIELD(self, s32 *, 4) -= n;
+}
+
 u32 fn_802DE1B0(void *arg0) {
     return (u32) (M2C_FIELD(arg0, s32 *, 4) + 0x1F) >> 5U;
 }
@@ -1438,6 +1451,26 @@ void fn_802DE290(u32 **self, u32 **other) {
     while (n-- != 0) {
         *dst++ ^= *src++;
     }
+}
+
+s32 fn_802DE2F8(u32 **self, u32 **other) {
+    u32 fn_802DE1B0(void *);
+    u32 n;
+    u32 *a;
+    u32 *b;
+
+    if (M2C_FIELD(self, s32 *, 4) != M2C_FIELD(other, s32 *, 4)) {
+        return 0;
+    }
+    n = fn_802DE1B0(self);
+    a = *self;
+    b = *other;
+    while (n-- != 0) {
+        if (*a++ != *b++) {
+            return 0;
+        }
+    }
+    return 1;
 }
 
 void fn_802DE598(void) {
