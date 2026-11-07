@@ -97,6 +97,14 @@ void fn_800C47CC(void) {
     }
 }
 
+u32 fn_800C4820(void) {
+    extern s64 fn_8025A3DC(void);
+    extern void fn_8025A874(s64, s32 *);
+    s32 t[10];
+    fn_8025A874(fn_8025A3DC(), t);
+    return (t[5] << 26) | ((t[4] & 0xF) << 22) | ((t[3] & 0x1F) << 17) | ((t[2] * 3600 + t[1] * 60 + t[0]) & 0x1FFFF);
+}
+
 s32 fn_800C488C(void) {
     extern s32 lbl_80495A34;
     extern u8 *lbl_80494FC4;
