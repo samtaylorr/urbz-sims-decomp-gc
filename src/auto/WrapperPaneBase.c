@@ -75,6 +75,18 @@ WPBTime64 fn_800C4744(void) {
     return r;
 }
 
+void fn_800C47CC(void) {
+    extern s32 lbl_80495A34;
+    extern u8 *lbl_80494FC4;
+    extern u8 lbl_804349A8[];
+    if (lbl_80495A34 == 0) {
+        u8 *obj = lbl_80494FC4;
+        u8 *vt = *(u8 **)obj;
+        (*(void (**)(void *, void *))(vt + 0x24))(obj + *(s16 *)(vt + 0x20), lbl_804349A8);
+        lbl_80495A34 = 1;
+    }
+}
+
 void fn_800C55A4(void *self, s32 arg1) {
     extern M2C_UNK lbl_8040A948[];
     extern M2C_UNK lbl_8040AA10[];
