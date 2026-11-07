@@ -335,6 +335,19 @@ s32 fn_80138970(void *self) {
     return (*(u16 *)fn_80141C5C((s32)self + 0x28, 8) >> 14) & 1;
 }
 
+s32 fn_801389A0(void *self, s32 arg1) {
+    s16 *fn_80141C5C(s32, s32);
+    void fn_80142174(s32, s32, s32);
+    s32 p = (s32)self + 0x28;
+    s32 v = *fn_80141C5C(p, 8);
+    if (arg1 != 0) {
+        fn_80142174(p, 8, v | 0x4000);
+    } else {
+        fn_80142174(p, 8, v & ~0x4000);
+    }
+    return 1;
+}
+
 s32 fn_801392E0(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x80);
 }
