@@ -544,8 +544,27 @@ s32 fn_80148BFC(void *self) {
     return result;
 }
 
+s32 fn_80148C70(void *self) {
+    u8 *obj = *(u8 **)((u8 *)self + 0x4);
+    u8 *vt = *(u8 **)(obj + 4);
+    u8 *r = (*(u8 *(**)(void *))(vt + 0x2D4))(obj + *(s16 *)(vt + 0x2D0));
+    return *(s16 *)(r + 0x12) == 0xE;
+}
+
 s32 fn_80148CB8(void *arg0) {
     return ((s32) (M2C_FIELD(arg0, s32 *, 0x94) - M2C_FIELD(arg0, s32 *, 0x90)) >> 5) - 1;
+}
+
+s32 fn_80148CD0(void *self) {
+    u8 *obj = *(u8 **)((u8 *)self + 0x4);
+    u8 *vt = *(u8 **)(obj + 4);
+    u8 *r = (*(u8 *(**)(void *))(vt + 0x27C))(obj + *(s16 *)(vt + 0x278));
+    if (r == 0) {
+        return 0;
+    }
+    obj = *(u8 **)((u8 *)self + 0x4);
+    vt = *(u8 **)(obj + 4);
+    return (*(s32 (**)(void *, s32))(vt + 0x44C))(obj + *(s16 *)(vt + 0x448), *(s16 *)(r + 4));
 }
 
 u16 fn_80148D40(void *self) {
