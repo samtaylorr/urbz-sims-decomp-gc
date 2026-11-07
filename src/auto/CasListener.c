@@ -375,9 +375,9 @@ void fn_801B8734(char *arg0, char *arg1) {
     M2C_FIELD(arg0, s16 *, 0x38) = 0;
     if (arg1 != NULL) {
         char *vt = *(char **)(arg1 + 4);
-        s16 v = (*(s16 (**)(void *))(vt + 0x2EC))(arg1 + *(s16 *)(vt + 0x2E8));
+        s32 v = (*(s32 (**)(void *))(vt + 0x2EC))(arg1 + *(s16 *)(vt + 0x2E8));
         M2C_FIELD(arg0, s16 *, 0x38) = v;
-        fn_801B9D9C(arg0, v);
+        fn_801B9D9C(arg0, (s16)v);
     }
 }
 
