@@ -126,6 +126,34 @@ static inline CasListIter CasList_Begin(void *self) {
     return r;
 }
 
+static inline s32 *CasListIter_Deref(CasListIter *it) {
+    return &it->node->value;
+}
+
+static inline s32 CasList_Size(void *self) {
+    CasListIter end;
+    CasListIter it;
+    CasListIter *pend;
+    s32 n;
+
+    it = CasList_Begin(self);
+    end = CasList_End(self);
+    pend = &end;
+    n = 0;
+    while (CasListIter_NotEqual(&it, pend)) {
+        CasListIter_Inc(&it);
+        n++;
+    }
+    return n;
+}
+
+static inline s32 CasList_Front(void *self) {
+    CasListIter b;
+
+    b = CasList_Begin(self);
+    return *CasListIter_Deref(&b);
+}
+
 typedef struct {
     s32 a;
     s32 b;
