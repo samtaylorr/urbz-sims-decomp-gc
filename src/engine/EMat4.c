@@ -758,6 +758,16 @@ f32 *fn_802C9368(f32 *m, f32 *v) {
     return m;
 }
 
+void fn_802C9468(f32 *m, f32 s) {
+    s32 i, j;
+
+    for (i = 0; i <= 3; i++) {
+        for (j = 0; j < 3; j++) {
+            m[i * 4 + j] *= s;
+        }
+    }
+}
+
 void fn_802C96D4(void) {
 
 }
