@@ -90,10 +90,20 @@ static inline QSSMapNode *QSSMap_LowerBound(char *self, const u32 *k) {
 }
 
 static inline QSSMapNode *QSSMap_Find(char *self, const u32 *k) {
-    QSSMapNode *y = QSSMap_LowerBound(self, k);
-    QSSMapNode *end = M2C_FIELD(self, QSSMapNode **, 4);
-    if (y == end || *k < y->key) {
-        y = end;
+    QSSMapNode *y = M2C_FIELD(self, QSSMapNode **, 4);
+    QSSMapNode *x = y->parent;
+    QSSMapNode *j;
+    while (x != 0) {
+        if (!(x->key < *k)) {
+            y = x;
+            x = x->left;
+        } else {
+            x = x->right;
+        }
+    }
+    j = M2C_FIELD(self, QSSMapNode **, 4);
+    if (y == j || *k < y->key) {
+        y = j;
     }
     return y;
 }
@@ -148,13 +158,26 @@ static inline void QSSVec1C_Resize(QSSVec1C *v, u32 n, QSSElem1C *val) {
 }
 
 s32 fn_800F5530(char *self, u32 key) {
-    struct QSSMapIter8 { QSSMapNode *node; s32 unk4; } it, end;
-    s32 ne;
-    it.node = QSSMap_Find(self, &key);
-    end.node = M2C_FIELD(self, QSSMapNode **, 4);
-    ne = it.node != end.node;
-    if (ne) {
-        return it.node->value;
+    volatile u8 buf[0x10];
+    QSSMapNode *y = M2C_FIELD(self, QSSMapNode **, 4);
+    QSSMapNode *x = y->parent;
+    QSSMapNode *j;
+    while (x != 0) {
+        if (!(x->key < key)) {
+            y = x;
+            x = x->left;
+        } else {
+            x = x->right;
+        }
+    }
+    j = M2C_FIELD(self, QSSMapNode **, 4);
+    if (y == j || *(u32 *)&key < y->key) {
+        y = j;
+    }
+    *(QSSMapNode **)((u8 *)buf + 0) = y;
+    *(QSSMapNode **)((u8 *)buf + 8) = M2C_FIELD(self, QSSMapNode **, 4);
+    if (QSSMapIter_Ne((QSSMapIter *)((u8 *)buf + 0), (QSSMapIter *)((u8 *)buf + 8))) {
+        return y->value;
     }
     return 0;
 }
@@ -1674,7 +1697,11 @@ s32 fn_800F8EA4(void) {
 
 void *fn_800F8EAC(void *arg0, s32 arg1) {
     s32 fn_800C488C();
-    extern f32 lbl_803D5BF8;
+    extern f32 lbl_803D5BF8[];
+    char alloc;
+    char *pa;
+    s32 *a;
+    s32 *b;
     M2C_FIELD(arg0, s32 *, 0x14) = 0x400;
     M2C_FIELD(arg0, s32 *, 0x1C) = 2;
     M2C_FIELD(arg0, s32 *, 0x0) = 0;
@@ -1683,11 +1710,14 @@ void *fn_800F8EAC(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0xC) = 0;
     M2C_FIELD(arg0, s32 *, 0x10) = 0;
     M2C_FIELD(arg0, s32 *, 0x18) = 0;
-    M2C_FIELD(arg0, s32 *, 0x20) = 0;
-    M2C_FIELD(arg0, s32 *, 0x24) = 0;
-    M2C_FIELD(arg0, s32 *, 0x2C) = 0;
+    a = (s32 *)((char *)arg0 + 0x20);
+    a[0] = 0;
+    a[1] = 0;
+    pa = &alloc;
+    b = (s32 *)((char *)arg0 + 0x28);
+    b[1] = 0;
+    M2C_FIELD(arg0, f32 *, 0x34) = lbl_803D5BF8[0];
     M2C_FIELD(arg0, s32 *, 0x30) = arg1;
-    M2C_FIELD(arg0, f32 *, 0x34) = lbl_803D5BF8;
     M2C_FIELD(arg0, s32 *, 0x38) = fn_800C488C();
     return arg0;
 }
