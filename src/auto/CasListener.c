@@ -297,6 +297,32 @@ s32 fn_801BB930(void) {
     return 0;
 }
 
+void fn_801BB9FC(void *self, s32 flags) {
+    extern u8 lbl_80415D20[];
+    extern void fn_8031EA2C(void *);
+    void fn_801BD690(void *, s32);
+    void *p;
+
+    M2C_FIELD(self, u8 **, 8) = lbl_80415D20;
+    p = M2C_FIELD(self, void **, 0xC);
+    if (p != NULL) {
+        M2C_FIELD(*(void **)p, void (**)(void *, s32), 0xC)((u8 *)p + M2C_FIELD(*(void **)p, s16 *, 8), 3);
+    }
+    if (M2C_FIELD(self, void **, 0x14) != NULL) {
+        fn_8031EA2C(M2C_FIELD(self, void **, 0x14));
+        M2C_FIELD(self, void **, 0x14) = NULL;
+    }
+    if (M2C_FIELD(self, void **, 0x18) != NULL) {
+        fn_8031EA2C(M2C_FIELD(self, void **, 0x18));
+        M2C_FIELD(self, void **, 0x18) = NULL;
+    }
+    if (M2C_FIELD(self, void **, 0x1C) != NULL) {
+        fn_8031EA2C(M2C_FIELD(self, void **, 0x1C));
+        M2C_FIELD(self, void **, 0x1C) = NULL;
+    }
+    fn_801BD690(self, flags);
+}
+
 s32 fn_801BBAB0(char *self) {
     return *(s32 *)(self + 0xC);
 }
