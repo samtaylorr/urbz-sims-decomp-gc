@@ -747,6 +747,10 @@ void fn_802DE598(void) {
 
 }
 
+f32 fn_802DEA44(void *self, s32 bits) {
+    return 1.0f / (f32) ((1 << bits) - 1);
+}
+
 u32 fn_802DEA8C(s32 *arg0) {
     if (arg0[0] == 0) {
         return 0;
