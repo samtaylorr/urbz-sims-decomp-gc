@@ -25,6 +25,12 @@ static inline void EGBox_Init(EGBox *b, f32 c) {
     b->min = b->max;
 }
 
+static inline void EGBox_SetRange(EGBox *b, f32 lo, f32 hi) {
+    Vec3f t;
+    b->min = *Vec3f_Splat(&t, lo);
+    b->max = *Vec3f_Splat(&t, hi);
+}
+
 void fn_802D2FD0(void);
 extern s32 lbl_804961C4;
 extern void fn_802EFBA8(void *);
@@ -724,22 +730,18 @@ extern const f32 lbl_803F0CF0[];
 extern const f32 lbl_803F0CF4[];
 
 void fn_802EF220(void *arg0) {
-    struct { Vec3f min; Vec3f max; } box;
-    register f32 lo asm("fr13") = lbl_803F0CF0[0];
-    Vec3f t = { lbl_803F0CEC[0], lbl_803F0CEC[0], lbl_803F0CEC[0] };
-    register Vec3f *p asm("r9") = &t;
+    EGBox box;
+    register f32 lo asm("fr13");
     register f32 hi asm("fr0");
-    box.max = t;
-    box.min = box.max;
-    hi = lbl_803F0CF4[0];
-    p->z = lo;
-    p->y = lo;
-    p->x = lo;
-    box.min = *p;
-    p->z = hi;
-    p->y = hi;
-    p->x = hi;
-    box.max = *p;
+    EGBox_Init(&box, lbl_803F0CEC[0]);
+    lo = lbl_803F0CF0[0];
+    {
+        Vec3f t;
+        Vec3f *p = &t;
+        hi = lbl_803F0CF4[0];
+        box.min = *Vec3f_Splat(p, lo);
+        box.max = *Vec3f_Splat(p, hi);
+    }
     fn_802F09B8(arg0, &box);
 }
 
