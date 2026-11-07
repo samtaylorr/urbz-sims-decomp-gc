@@ -858,6 +858,26 @@ f32 fn_802C88C0(f32 *m) {
     return fn_8025FC40(v);
 }
 
+f32 *fn_802C9058(f32 *m, f32 angle) {
+    f32 fn_80243694(f32);
+    f32 fn_802434CC(f32);
+    f32 s = fn_80243694(angle);
+    f32 c = fn_802434CC(angle);
+    f32 b0 = m[8], b1 = m[9], b2 = m[10];
+    f32 a;
+
+    a = m[0];
+    m[0] = c * a + -s * b0;
+    m[8] = s * a + c * b0;
+    a = m[1];
+    m[1] = c * a + -s * b1;
+    m[9] = s * a + c * b1;
+    a = m[2];
+    m[2] = c * a + -s * b2;
+    m[10] = s * a + c * b2;
+    return m;
+}
+
 f32 *fn_802C91E0(f32 *m, f32 angle) {
     f32 fn_80243694(f32);
     f32 fn_802434CC(f32);
@@ -903,22 +923,14 @@ f32 *fn_802C9624(f32 *m, f32 *v, s32 unused, f32 *axis) {
     return m;
 }
 
-void fn_802C9670(f32 (*m)[4]) {
+void fn_802C9670(f32 *m) {
     int i, j;
-    f32 v, r;
+    f32 v;
 
     for (i = 0; i < 4; i++) {
         for (j = 0; j < 4; j++) {
-            v = m[i][j];
-            if (v < -32767.0f) {
-                r = -32767.0f;
-            } else {
-                r = v;
-                if (v > 32767.0f) {
-                    r = 32767.0f;
-                }
-            }
-            m[i][j] = r;
+            v = m[i * 4 + j];
+            m[i * 4 + j] = v < -32767.0f ? -32767.0f : (v > 32767.0f ? 32767.0f : v);
         }
     }
 }
@@ -927,7 +939,7 @@ void fn_802C96D4(void) {
 
 }
 
-f32 fn_802C96D8(f32 (*m)[4]) {
+f32 fn_802C96D8(f32 *m) {
     int i, j;
     f32 max = 0.0f;
     f32 sum;
@@ -935,7 +947,7 @@ f32 fn_802C96D8(f32 (*m)[4]) {
     for (i = 0; i < 3; i++) {
         sum = 0.0f;
         for (j = 0; j < 3; j++) {
-            sum += __builtin_fabsf(m[j][i]);
+            sum += __builtin_fabsf(m[j * 4 + i]);
         }
         if (sum > max) {
             max = sum;
@@ -962,6 +974,18 @@ void fn_802C97B4(void *m, f32 *v) {
 
     fn_802CBC5C(q, m);
     fn_802CBED0(q, v);
+}
+
+f32 *fn_802C9AD4(f32 *m) {
+    void fn_802C98D8(f32 *);
+    void fn_8039ABB0(f32 *, f32 *);
+    void fn_802C8A34(f32 *, f32 *);
+    f32 tmp[16];
+
+    fn_802C98D8(m);
+    fn_8039ABB0(tmp, m);
+    fn_802C8A34(m, tmp);
+    return m;
 }
 
 f32 fn_802CA924(void) {
