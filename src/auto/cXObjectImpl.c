@@ -158,6 +158,21 @@ s32 fn_801339F0(s32 arg0, s32 arg1) {
     return arg0;
 }
 
+s32 fn_80133F68(s32 arg0) {
+    struct {
+        s32 a;
+        s32 b[2];
+        void *p;
+        u16 pad;
+        s16 h;
+        s32 c;
+    } info;
+    s32 fn_8013391C(s32, s32);
+
+    fn_8013391C((s32)&info, arg0);
+    return info.p != NULL;
+}
+
 s32 fn_80133FA4(s32 arg0) {
     struct {
         s32 a;
