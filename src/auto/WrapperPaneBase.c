@@ -14,6 +14,8 @@ typedef struct {
     s32 unk40[1];
 } WrapperPaneBase;
 
+typedef struct { s64 v; } WPBTime64;
+
 typedef struct { f32 x, y, z; } WPBVec3;
 typedef struct { f32 x, y, z, w; } WPBVec4;
 
