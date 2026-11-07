@@ -769,7 +769,11 @@ void fn_802DD930(s32 *arg0, s32 arg1) {
     s32 a = arg0[0];
     s32 b = arg0[1];
     s32 has = fn_802DDC6C(a, b) != 0;
-    fn_802DDCAC(a, b, arg1 ? (has ? 0 : 1) : (has ? 1 : 0));
+    if (arg1) {
+        fn_802DDCAC(a, b, !has);
+    } else {
+        fn_802DDCAC(a, b, has != 0);
+    }
 }
 
 s32 fn_802DD9B0(s32 *arg0) {
@@ -1310,6 +1314,15 @@ s32 fn_802DFB38(void) {
 
 void fn_802DFB40(void) {
 
+}
+
+void fn_802DFB44(s32 arg0, s32 arg1) {
+    extern void *lbl_8049619C;
+    if (arg1 == 0xFFFF && arg0 != 0) {
+        s32 *p = (s32 *)&lbl_8049619C;
+        p[1] = 0;
+        p[0] = 0;
+    }
 }
 
 void fn_802DFB70(void) {
