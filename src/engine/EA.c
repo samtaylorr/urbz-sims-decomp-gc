@@ -83,9 +83,10 @@ s32 fn_802D8004(void *buf, s32 size, s32 n, char *f) {
 void fn_802D8040(char *self, s32 pos, s32 whence) {
     extern s32 lbl_803FD2A4[];
     char *vt = *(char **)(self + 0x28);
+    void (*fn)(char *, s32, s32) = *(void (**)(char *, s32, s32))(vt + 0x2C);
     char *vt2;
 
-    (*(void (**)(char *, s32, s32))(vt + 0x2C))(self + *(s16 *)(vt + 0x28), pos, lbl_803FD2A4[whence]);
+    fn(self + *(s16 *)(vt + 0x28), pos, lbl_803FD2A4[whence]);
     vt2 = *(char **)(self + 0x28);
     (*(void (**)(char *))(vt2 + 0x44))(self + *(s16 *)(vt2 + 0x40));
 }
@@ -131,9 +132,9 @@ void *fn_802D81B8(void *arg0) {
     extern u8 lbl_804195C8[];
 
     fn_802D6A14(arg0);
-    M2C_FIELD(arg0, s32 *, 0x8) = 0;
-    M2C_FIELD(arg0, void **, 0x0) = lbl_804195C8;
     M2C_FIELD(arg0, s32 *, 0x4) = 0;
+    M2C_FIELD(arg0, void **, 0x0) = lbl_804195C8;
+    M2C_FIELD(arg0, s32 *, 0x8) = 0;
     return arg0;
 }
 
