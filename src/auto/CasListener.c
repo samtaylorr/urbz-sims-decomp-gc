@@ -15,6 +15,21 @@ typedef struct {
     u32 big[2][16][32];
 } CasFlags;
 
+static inline void CasBuf_Free(char **buf) {
+    void fn_802D20E8(void *, u32);
+    void fn_803997AC(void *, u32);
+    char *p = buf[0];
+    u32 size = buf[3] - p;
+
+    if (p != NULL) {
+        if (size > 0x80) {
+            fn_802D20E8(p, size);
+        } else {
+            fn_803997AC(p, size);
+        }
+    }
+}
+
 typedef struct {
     void *node;
 } CasMapIter;
@@ -172,15 +187,13 @@ s32 fn_801B7D68(void *arg0, s32 idx) {
 
 s32 fn_801B7EC8(void *arg0, s32 idx) {
     extern void *lbl_8041FA48[];
-    u32 **arr;
-    s32 n;
+    s32 n = 0;
+    u32 **arr = *(u32 ***)lbl_8041FA48[0];
 
-    arr = *(u32 ***)lbl_8041FA48[0];
-    n = CasArr_Size(arr);
-    if (idx < n) {
-        return *arr[idx];
+    if (arr) {
+        n = ((s32 *)arr)[-1];
     }
-    return 0;
+    return idx < n ? *arr[idx] : 0;
 }
 
 extern s32 fn_801A09E0(void *);
