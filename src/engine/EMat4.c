@@ -709,6 +709,17 @@ void fn_802C858C(f32 *m, s32 col, f32 *in) {
     *(f32 *)((char *)r2 + col) = in[2];
 }
 
+void fn_802C85B4(f32 *m, s32 col, f32 *in) {
+    f32 *r1 = m + 4;
+    f32 *r2 = m + 8;
+    f32 *r3 = m + 12;
+    col *= 4;
+    *(f32 *)((char *)m + col) = in[0];
+    *(f32 *)((char *)r1 + col) = in[1];
+    *(f32 *)((char *)r2 + col) = in[2];
+    *(f32 *)((char *)r3 + col) = in[3];
+}
+
 void *fn_802C87C4(void *arg0, void *arg1) {
     M2C_UNK fn_802C876C();
     void *temp_r9;
@@ -749,6 +760,23 @@ f32 fn_802C88C0(f32 *m) {
     f32 v[3];
     fn_802C8530(m, 2, v);
     return fn_8025FC40(v);
+}
+
+f32 *fn_802C91E0(f32 *m, f32 angle) {
+    f32 fn_80243694(f32);
+    f32 fn_802434CC(f32);
+    f32 s = fn_80243694(angle);
+    f32 c = fn_802434CC(angle);
+    f32 a, b;
+    s32 i;
+
+    for (i = 0; i < 3; i++) {
+        a = m[i];
+        b = m[i + 4];
+        m[i + 4] = c * b + -s * a;
+        m[i] = c * a + s * b;
+    }
+    return m;
 }
 
 f32 *fn_802C9368(f32 *m, f32 *v) {
