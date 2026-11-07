@@ -865,6 +865,15 @@ u32 fn_802DE634(u32 **self, s32 pos, s32 count) {
     return (((*self)[endWord] & ((1 << (end & 31)) - 1)) << (32 - shift)) | ((*self)[word] >> shift);
 }
 
+f32 fn_802DE6DC(u32 **self, s32 pos) {
+    union {
+        f32 f;
+        u32 u;
+    } conv;
+    conv.u = fn_802DE634(self, pos, 32);
+    return conv.f;
+}
+
 f32 fn_802DE9F8(void *self, s32 bits) {
     return 1.0f / (f32) ((1 << (bits - 1)) - 1);
 }
