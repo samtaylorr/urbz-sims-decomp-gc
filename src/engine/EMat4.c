@@ -615,7 +615,7 @@ void fn_802C82CC(f32 *m, f32 s) {
     }
 }
 
-void fn_802C8304(f32 *m, f32 *v) {
+f32 *fn_802C8304(f32 *m, f32 *v) {
     m[0] *= v[0];
     m[1] *= v[0];
     m[2] *= v[0];
@@ -625,6 +625,7 @@ void fn_802C8304(f32 *m, f32 *v) {
     m[8] *= v[2];
     m[9] *= v[2];
     m[10] *= v[2];
+    return m;
 }
 
 void fn_802C839C(f32 *m, f32 *v) {
@@ -720,6 +721,20 @@ void fn_802C85B4(f32 *m, s32 col, f32 *in) {
     *(f32 *)((char *)r3 + col) = in[3];
 }
 
+f32 *fn_802C85E8(f32 *m) {
+    void fn_8025FB2C(f32 *, f32 *);
+    f32 v[3];
+    s32 i;
+    for (i = 0; i <= 2; i++) {
+        fn_802C8530(m, i, v);
+        if (v[0] != 0.0f || v[1] != 0.0f || v[2] != 0.0f) {
+            fn_8025FB2C(v, v);
+        }
+        fn_802C858C(m, i, v);
+    }
+    return m;
+}
+
 void *fn_802C87C4(void *arg0, void *arg1) {
     M2C_UNK fn_802C876C();
     void *temp_r9;
@@ -794,6 +809,14 @@ void fn_802C9468(f32 *m, f32 s) {
             m[i * 4 + j] *= s;
         }
     }
+}
+
+f32 *fn_802C9624(f32 *m, f32 *v, s32 unused, f32 *axis) {
+    extern f32 lbl_803F00C8;
+    f32 *fn_802C9B20(f32 *, f32 *, f32);
+    fn_802C9B20(m, axis, lbl_803F00C8);
+    fn_802C9368(m, v);
+    return m;
 }
 
 void fn_802C96D4(void) {
