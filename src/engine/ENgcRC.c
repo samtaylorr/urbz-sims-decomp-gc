@@ -822,6 +822,18 @@ void fn_8034AE84(char *self, s32 arg1, s32 count) {
     }
 }
 
+void fn_8034AF84(void *self, void *arg1) {
+    extern u8 lbl_8046DF78[];
+    void fn_8035504C(void *, void *);
+    s32 ok;
+    if (arg1 != NULL) {
+        ok = M2C_FIELD(arg1, s32 *, 0x20) == 0x900DBEEF;
+        if (ok) {
+            fn_8035504C(lbl_8046DF78, arg1);
+        }
+    }
+}
+
 void fn_8034AFD4(void) {
 
 }
@@ -888,6 +900,18 @@ void fn_8034B100(void *self, s32 arg, u8 value) {
     cmd.type = 0x17;
     cmd.value = value;
     fn_803552C0(lbl_8046DF78, &cmd);
+}
+
+void fn_8034B13C(void *self, s32 arg) {
+    struct {
+        u8 type;
+        s32 arg;
+    } cmd;
+    void fn_803549C0(void *, void *);
+    extern u8 lbl_8046DF78[];
+    cmd.arg = arg;
+    cmd.type = 0x9;
+    fn_803549C0(lbl_8046DF78, &cmd);
 }
 
 void fn_8034B274(void *self, s32 arg) {
