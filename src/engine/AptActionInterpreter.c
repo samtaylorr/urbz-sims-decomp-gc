@@ -60,12 +60,12 @@ void fn_8027DA94(void *arg0, void *arg1, u32 *arg2, void **arg3) {
     if (flag != 0 || ((*(s32 (**)(char *))(*(char **)((char *)arg2 + 4) + 0x44))((char *)arg2 + *(s16 *)(*(char **)((char *)arg2 + 4) + 0x40))) != 0) {
         *arg3 = arg2;
     } else {
-        w = arg2[0];
-        flag = 0;
-        if ((w & 0x3F) == 1) {
-            flag = (w >> 15) & 1;
+        u32 w2 = arg2[0];
+        s32 flag2 = 0;
+        if ((w2 & 0x3F) == 1) {
+            flag2 = (w2 >> 15) & 1;
         }
-        if (flag != 0) {
+        if (flag2 != 0) {
             *arg3 = fn_8027B9B0(arg0, arg1, arg2 + 2);
         }
     }
