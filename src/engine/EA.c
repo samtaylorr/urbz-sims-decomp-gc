@@ -1395,12 +1395,14 @@ void fn_802DDCE8(void *self, s32 set) {
 
 void fn_802DDD70(void *self) {
     u32 fn_802DE1B0(void *arg0);
-    u32 n = fn_802DE1B0(self);
+    s32 n = fn_802DE1B0(self);
     s32 *p = *(s32 **)self;
-    while (n != 0) {
-        n--;
-        *p = ~*p;
-        p++;
+    s32 i = n - 1;
+    if (n != 0) {
+        do {
+            *p = ~*p;
+            p++;
+        } while (i-- != 0);
     }
 }
 
@@ -1484,25 +1486,23 @@ void fn_802DE1C0(u32 **arg0, u32 **arg1) {
     s32 n = fn_802DE1B0(arg0);
     u32 *d = *arg0;
     u32 *s = *arg1;
-    s32 i = n - 1;
+    s32 i;
 
-    if (n != 0) {
-        do {
-            *d++ |= *s++;
-        } while (i-- != 0);
+    for (i = n - 1; i != -1; i--) {
+        *d++ |= *s++;
     }
 }
 
 void fn_802DE228(u32 **arg0, u32 **arg1) {
-    s32 n = fn_802DE1B0(arg0);
-    s32 i = n - 1;
-    u32 *d = *arg0;
-    u32 *s = *arg1;
+    u32 *d;
+    u32 *s;
+    s32 n;
 
-    if (n != 0) {
-        do {
-            *d++ &= *s++;
-        } while (i-- != 0);
+    n = fn_802DE1B0(arg0);
+    d = *arg0;
+    s = *arg1;
+    for (; n != 0; n--) {
+        *d++ &= *s++;
     }
 }
 
