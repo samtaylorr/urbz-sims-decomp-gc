@@ -795,13 +795,14 @@ void fn_8034AE30(void *arg0, s32 arg1, u32 arg2) {
 }
 
 void fn_8034AE84(char *self, s32 arg1, s32 count) {
-    RCOpVtEnt ent;
+    char *vt;
     s32 i;
 
-    ent = (*(RCOpVtEnt **)(self + 0x68))[26];
-    for (i = 0; i < count; i++) {
-        ent = (*(RCOpVtEnt **)(self + 0x68))[27];
-        ((void (*)(char *, s32, s32))ent.fn)(self + ent.delta, i, i);
+    i = 0;
+    while (i < count) {
+        vt = *(char **)(self + 0x68);
+        (*(void (**)(char *, s32, s32))(vt + 0xDC))(self + *(s16 *)(vt + 0xD8), i, i);
+        i++;
     }
     if (count - 1 > M2C_FIELD(self, s32 *, 0x40)) {
         M2C_FIELD(self, s32 *, 0x40) = count - 1;
@@ -1103,7 +1104,7 @@ void fn_8034F508(void *arg0) {
     fn_8034F8BC(arg0, &msg);
 }
 
-void fn_8034F534(void *arg0) {
+void fn_8034F534(void *arg0, void *arg1) {
     extern f32 lbl_803F458C[];
     extern s32 lbl_8049511C;
     extern f32 lbl_804950D0;
@@ -1232,12 +1233,14 @@ void fn_80354938(void *arg0, void *arg1) {
 }
 
 void fn_80354944(void *arg0) {
+    s32 *stack;
     s32 n;
 
     n = M2C_FIELD(arg0, s32 *, 0x50C);
     if (n != 0) {
+        stack = (s32 *)((u8 *)arg0 + 0x4E4);
         M2C_FIELD(arg0, s32 *, 0x50C) = n - 1;
-        M2C_FIELD(arg0, s32 *, 0x4DC) = ((s32 *)((u8 *)arg0 + 0x4E4))[n - 1];
+        M2C_FIELD(arg0, s32 *, 0x4DC) = stack[n - 1];
         return;
     }
     M2C_FIELD(arg0, s32 *, 0x4E0) = 1;
@@ -1507,19 +1510,14 @@ void fn_803563F4(u8 *self, u8 *arg) {
 
 void fn_80356414(u8 *self, u8 *arg) {
     u32 val = *(u32 *)(arg + 4);
-    u8 a, b, c, d, e;
+    u8 e = (val >> 8) & 0xFF;
 
-    a = val & 3;
-    b = (val >> 2) & 3;
-    c = (val >> 4) & 3;
-    d = (val >> 6) & 3;
-    e = (val >> 8) & 0xFF;
-    *(s32 *)(self + 0x510) = 1;
-    self[0x565] = b;
-    self[0x564] = a;
-    self[0x566] = c;
-    self[0x567] = d;
+    self[0x565] = (val >> 2) & 3;
+    self[0x564] = val & 3;
+    self[0x566] = (val >> 4) & 3;
+    self[0x567] = (val >> 6) & 3;
     self[0x568] = e;
+    *(s32 *)(self + 0x510) = 1;
 }
 
 void fn_80273F88(void);
