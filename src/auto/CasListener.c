@@ -77,9 +77,16 @@ static inline void *CasSlot_Init(s32 *p) {
     return p;
 }
 
+typedef struct {
+    s32 a;
+    s32 b;
+} CasSlot;
+
 static inline void *CasSlot_InitBoth(s32 *p) {
-    p[0] = 0;
-    p[1] = 0;
+    CasSlot t;
+    t.a = 0;
+    t.b = 0;
+    *(CasSlot *)p = t;
     return p;
 }
 
@@ -229,16 +236,17 @@ s32 fn_801B7D68(void *arg0, s32 idx) {
 
 s32 fn_801B7EC8(void *arg0, s32 idx) {
     extern void *lbl_8041FA48[];
+    void *p;
     s32 n = 0;
 
-    arg0 = lbl_8041FA48[0];
-    arg0 = *(void **)arg0;
-    if (arg0 != NULL) {
-        n = ((s32 *)arg0)[-1];
+    p = lbl_8041FA48[0];
+    p = *(void **)p;
+    if (p != NULL) {
+        n = ((s32 *)p)[-1];
     }
     if (idx < n) {
-        arg0 = ((void **)arg0)[idx];
-        return *(s32 *)arg0;
+        p = ((void **)p)[idx];
+        return *(s32 *)p;
     }
     return 0;
 }
