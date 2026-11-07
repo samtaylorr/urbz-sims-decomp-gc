@@ -636,14 +636,14 @@ void fn_802C8530(f32 *m, s32 col, f32 *out) {
 }
 
 void fn_802C8558(f32 *m, s32 col, f32 *out) {
-    f32 *r0 = m;
     f32 *r1 = m + 4;
     f32 *r2 = m + 8;
     f32 *r3 = m + 12;
-    out[0] = *(r0 + col);
-    out[1] = *(r1 + col);
-    out[2] = *(r2 + col);
-    out[3] = *(r3 + col);
+    col *= 4;
+    out[0] = *(f32 *)((char *)m + col);
+    out[1] = *(f32 *)((char *)r1 + col);
+    out[2] = *(f32 *)((char *)r2 + col);
+    out[3] = *(f32 *)((char *)r3 + col);
 }
 
 void fn_802C858C(f32 *m, s32 col, f32 *in) {
