@@ -679,6 +679,12 @@ void fn_80148A20(void *arg0) {
     M2C_FIELD(temp_r9, M2C_UNK (**)(void *, s32, s32), 0x234)(temp_r11 + M2C_FIELD(temp_r9, s16 *, 0x230), M2C_FIELD(arg0, s16 *, 0x64), 1);
 }
 
+void fn_80148AA4(void *self) {
+    u8 *obj = *(u8 **)((u8 *)self + 0x58);
+    u8 *vt = *(u8 **)obj;
+    (*(void (**)(void *, s32))(vt + 0x224))(obj + *(s16 *)(vt + 0x220), *(s16 *)((u8 *)self + 0x64));
+}
+
 void fn_80148B20(void *self) {
     u8 *obj = *(u8 **)((u8 *)self + 0x58);
     u8 *vt = *(u8 **)obj;
