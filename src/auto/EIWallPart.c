@@ -402,6 +402,20 @@ s32 fn_8003904C(void *self) {
     return n;
 }
 
+void *fn_80039510(void *self, void **list, s32 arg2, s32 arg3, s32 arg4) {
+    s32 fn_8003907C(void *, s32, s32, s32);
+    void **p;
+    void *obj;
+
+    for (p = (void **)*list; p != NULL; p = (void **)p[2]) {
+        obj = p[0];
+        if (fn_8003907C(obj, arg2, arg3, arg4) != 0) {
+            return obj;
+        }
+    }
+    return NULL;
+}
+
 s32 fn_80039620(void *arg0, s32 arg1, s32 arg2) {
     s32 fn_80039584(void *, s32);
     void ***slot;
