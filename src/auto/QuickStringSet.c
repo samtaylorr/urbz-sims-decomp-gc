@@ -95,10 +95,11 @@ void fn_800F59D8(void *arg0, void *arg1) {
     void fn_800F6A78(void *, void *, s32);
     QSSStrBuf a;
     QSSStrBuf b;
-    fn_800F687C(&a, a.buf, 0x104);
+    QSSStrBuf *pa = &a;
+    fn_800F687C(pa, pa->buf, 0x104);
     fn_800F687C(&b, b.buf, 0x104);
-    fn_800F585C(arg0, &b, arg1, &a);
-    fn_800F6A78(arg1, &a, -1);
+    fn_800F585C(arg0, &b, arg1, pa);
+    fn_800F6A78(arg1, pa, -1);
 }
 
 void fn_800F5A4C(void *arg0, void *arg1, void *arg2) {
@@ -108,11 +109,13 @@ void fn_800F5A4C(void *arg0, void *arg1, void *arg2) {
     void fn_800F6A78(void *, void *, s32);
     QSSStrBuf a;
     QSSStrBuf b;
-    fn_800F687C(&a, a.buf, 0x104);
+    QSSStrBuf *pa = &a;
+    QSSStrBuf *pb = &b;
+    fn_800F687C(pa, pa->buf, 0x104);
     fn_800F687C(&b, b.buf, 0x104);
-    fn_800F585C(arg0, &a, &b, arg2);
-    fn_800F6A38(arg1, &a);
-    fn_800F6A78(arg1, &b, -1);
+    fn_800F585C(arg0, pa, pb, arg2);
+    fn_800F6A38(arg1, pa);
+    fn_800F6A78(arg1, pb, -1);
 }
 
 s32 fn_800F5AD4(s32 *arg0, const char *arg1) {
@@ -123,15 +126,17 @@ s32 fn_800F5AD4(s32 *arg0, const char *arg1) {
     void *f;
     s32 n;
     s32 r;
+    s32 p;
     f = fn_802D7F48(arg1, lbl_803D5A58);
     if (f == NULL) {
         return -1;
     }
+    p = arg0[1];
     n = 0;
     if (arg0 != NULL) {
         n = arg0[0];
     }
-    r = fn_802D8004(arg0[1], 1, n, f);
+    r = fn_802D8004(p, 1, n, f);
     fn_802D7F94(f);
     if (r != n) {
         return -1;
@@ -164,8 +169,8 @@ s32 fn_800F5F48(void *arg0, s32 arg1) {
     } else if (arg1 < 0) {
         ret = -0x32;
     } else {
-        *(s32 *)((u8 *)arg0 + 0x120) = arg1;
         *(s32 *)((u8 *)arg0 + 0x11C) = arg1;
+        *(s32 *)((u8 *)arg0 + 0x120) = arg1;
     }
     return ret;
 }
@@ -1543,14 +1548,17 @@ s32 fn_800FB7B0(void *arg0, s32 arg1, s32 arg2) {
 }
 
 s32 fn_800FB838(void *arg0, s32 arg1) {
-    s32 **p = *M2C_FIELD(arg0, s32 ***, 4);
+    void *t = M2C_FIELD(arg0, void **, 4);
+    s32 *p = *(s32 **)t;
     s32 n = 0;
-    s32 *q;
     if (p != NULL) {
-        n = ((s32 *)p)[-1];
+        n = p[-1];
     }
-    if (arg1 < n && (q = p[arg1]) != NULL) {
-        return *q;
+    if (arg1 < n) {
+        t = (void *)p[arg1];
+        if (t != NULL) {
+            return *(s32 *)t;
+        }
     }
     return 0;
 }
