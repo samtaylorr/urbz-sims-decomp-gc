@@ -331,6 +331,14 @@ void *fn_801340D8(void *self, s32 idx) {
     return M2C_FIELD(self, u8 **, 0x90) + (idx + 1) * 32;
 }
 
+void fn_80134E9C(void *self, s32 arg1, s32 arg2, void *arg3, s32 arg4) {
+    void fn_80134248(void *, void *, s32);
+    u8 buf[0x18];
+
+    fn_80133960(buf, arg1, arg2, arg3 != 0 ? (*(char *(**)(void *))(*(u8 **)((u8 *)arg3 + 4) + 0x4D4))((u8 *)arg3 + *(s16 *)(*(u8 **)((u8 *)arg3 + 4) + 0x4D0)) : 0, arg4);
+    fn_80134248(self, buf, 0);
+}
+
 s32 fn_801352DC(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0xB0);
 }
@@ -399,7 +407,8 @@ s32 fn_801375C8(void) {
 }
 
 s32 fn_80137BE8(void *self) {
-    char *obj = M2C_FIELD(M2C_FIELD(self, char **, 0x8C), char **, 0x50);
+    char *p = M2C_FIELD(self, char **, 0x8C);
+    char *obj = M2C_FIELD(p, char **, 0x50);
     char *vt = *(char **)obj;
     char *r = M2C_FIELD(vt, char *(**)(void *), 0xAC)(obj + M2C_FIELD(vt, s16 *, 0xA8));
     if (r == NULL) {
@@ -427,17 +436,15 @@ s32 fn_80137E34(void *self) {
         }
         return fn_80130388();
     } else {
-        s32 v = M2C_FIELD(M2C_FIELD(self, char **, 0x88), s16 *, 0x86);
-        if (v == 0) {
-            v = 0x10;
-        }
-        return v;
+        s16 v = M2C_FIELD(M2C_FIELD(self, char **, 0x88), s16 *, 0x86);
+        return v != 0 ? v : 0x10;
     }
 }
 
 s32 fn_80138428(void *self) {
     s16 *fn_80141C5C(s32, s32);
     s32 p;
+    s32 a;
     if (M2C_FIELD(M2C_FIELD(M2C_FIELD(self, void **, 4), void **, 4), s32 (**)(void *), 0x2DC)(
             M2C_FIELD(self, char **, 4) + M2C_FIELD(M2C_FIELD(M2C_FIELD(self, void **, 4), void **, 4), s16 *, 0x2D8)) == 2) {
         return 1;
@@ -447,10 +454,8 @@ s32 fn_80138428(void *self) {
         return 0;
     }
     p = (s32)self + 0x28;
-    if (*(u16 *)fn_80141C5C(p, 0x2B) & 8) {
-        return (*(u16 *)fn_80141C5C(p, 0x2B) & 0x10) == 0;
-    }
-    return (*(u16 *)fn_80141C5C(p, 0x2B) & 0x10) == 0;
+    a = (*fn_80141C5C(p, 0x2B) & 8) != 0;
+    return (*fn_80141C5C(p, 0x2B) & 0x10) == 0;
 }
 
 s32 fn_80138904(void *self) {
@@ -700,9 +705,9 @@ void fn_801482C4(s32 arg0, s32 arg1) {
             char *r;
             fn_800F160C(&lbl_80495BB8);
             p = lbl_80434C40;
-            *(s32 *)p = 0;
             q = p + 0xC;
             r = p + 4;
+            *(s32 *)lbl_80434C40 = 0;
             *(s32 *)(q + 4) = 0;
             *(s32 *)(r + 4) = 0;
             *(s32 *)(p + 4) = 0;
