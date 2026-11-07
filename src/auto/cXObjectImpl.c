@@ -200,8 +200,8 @@ f32 fn_801367EC(u8 *arg0, u8 *arg1) {
 
 f32 fn_80136BBC(u8 *arg0, s32 *arg1) {
     s32 dx, dy;
-    dx = arg1[0] - M2C_FIELD(arg0, s32 *, 0x68);
     dy = arg1[1] - M2C_FIELD(arg0, s32 *, 0x6C);
+    dx = arg1[0] - M2C_FIELD(arg0, s32 *, 0x68);
     return fn_8013678C((f32)(dy * dy + dx * dx) * 0.0625f);
 }
 
