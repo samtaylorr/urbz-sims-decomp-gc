@@ -1381,10 +1381,18 @@ void fn_801C5750(void *self, s32 flags) {
 }
 
 s32 fn_801C5998(CasFlags *self, s32 which, s32 row, u32 idx) {
+    s32 sel;
+    u32 mask;
+
     if (idx > 0xFF) {
         return 0;
     }
-    return (self->small[which ? 1 : 0][row][idx >> 5] & (1 << (idx & 31))) != 0;
+    sel = 0;
+    if (which != 0) {
+        sel = 1;
+    }
+    mask = 1U << (idx & 31);
+    return (self->small[sel][row][idx >> 5] & mask) != 0;
 }
 
 s32 fn_801C59F0(CasFlags *self, s32 which, s32 row, u32 idx) {
