@@ -162,14 +162,17 @@ void fn_80133954(s32 *arg0) {
     *arg0 = 0;
 }
 
-void *fn_80133960(void *arg0, char *arg1, s32 arg2, char *arg3, s32 arg4) {
+void *fn_80133960(void *arg0, s32 arg1, s32 arg2, char *arg3, s32 arg4) {
     struct { s32 a, b; } *d;
+    struct { s32 a, b; } *s;
 
     M2C_FIELD(arg0, s32 *, 0) = 1;
     if (arg3 != NULL) {
-        arg1 = arg3 + 0x68;
-        d = (void *)((char *)arg0 + 4);
-        *d = *(typeof(d))arg1;
+        s = (void *)(arg3 + 0x68);
+        if (s != NULL) {
+            d = (void *)((char *)arg0 + 4);
+            *d = *(typeof(d))s;
+        }
         M2C_FIELD(arg0, char **, 0xC) = arg3;
     }
     if (arg3 != NULL) {
@@ -593,6 +596,16 @@ void fn_80148460(void **arg0, s32 arg1) {
 
 void fn_8014846C(void **arg0, s32 arg1) {
     M2C_FIELD(*arg0, s32 *, 0x10) = arg1;
+}
+
+s32 fn_80148478(void *arg0) {
+    char *vt;
+
+    if (arg0 != NULL) {
+        vt = M2C_FIELD(arg0, char **, 4);
+        return ((s32 (*)(void *))M2C_FIELD(vt, void **, 0x4D4))((char *)arg0 + M2C_FIELD(vt, s16 *, 0x4D0));
+    }
+    return 0;
 }
 
 void fn_801484BC(void *self) {
