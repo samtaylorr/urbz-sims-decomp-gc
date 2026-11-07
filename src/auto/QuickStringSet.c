@@ -89,6 +89,78 @@ static inline void QSSVec1C_Resize(QSSVec1C *v, u32 n, QSSElem1C *val) {
     }
 }
 
+void fn_800F59D8(void *arg0, void *arg1) {
+    void *fn_800F687C(void *, void *, s32);
+    void fn_800F585C(void *, void *, void *, void *);
+    void fn_800F6A78(void *, void *, s32);
+    QSSStrBuf a;
+    QSSStrBuf b;
+    fn_800F687C(&a, a.buf, 0x104);
+    fn_800F687C(&b, b.buf, 0x104);
+    fn_800F585C(arg0, &b, arg1, &a);
+    fn_800F6A78(arg1, &a, -1);
+}
+
+void fn_800F5A4C(void *arg0, void *arg1, void *arg2) {
+    void *fn_800F687C(void *, void *, s32);
+    void fn_800F585C(void *, void *, void *, void *);
+    void fn_800F6A38(void *, void *);
+    void fn_800F6A78(void *, void *, s32);
+    QSSStrBuf a;
+    QSSStrBuf b;
+    fn_800F687C(&a, a.buf, 0x104);
+    fn_800F687C(&b, b.buf, 0x104);
+    fn_800F585C(arg0, &a, &b, arg2);
+    fn_800F6A38(arg1, &a);
+    fn_800F6A78(arg1, &b, -1);
+}
+
+s32 fn_800F5AD4(s32 *arg0, const char *arg1) {
+    extern char lbl_803D5A58[];
+    void *fn_802D7F48(const char *, const char *);
+    s32 fn_802D8004(s32, s32, s32, void *);
+    void fn_802D7F94(void *);
+    void *f;
+    s32 n;
+    s32 r;
+    f = fn_802D7F48(arg1, lbl_803D5A58);
+    if (f == NULL) {
+        return -1;
+    }
+    n = 0;
+    if (arg0 != NULL) {
+        n = arg0[0];
+    }
+    r = fn_802D8004(arg0[1], 1, n, f);
+    fn_802D7F94(f);
+    if (r != n) {
+        return -1;
+    }
+    return 0;
+}
+
+s32 fn_800F5B58(s32 *a, s32 *b) {
+    if (a[2] > b[2]) {
+        return 0;
+    }
+    if (a[0] < b[0]) {
+        return 0;
+    }
+    if (a[1] < b[1]) {
+        return 0;
+    }
+    return a[3] <= b[3];
+}
+
+s32 fn_800F6498(void *arg0);
+s32 fn_800F5EFC(void *arg0, s32 *arg1) {
+    if (fn_800F6498(arg0) == 0) {
+        return -0x31;
+    }
+    *arg1 = *(s32 *)((u8 *)arg0 + 0x120);
+    return 0;
+}
+
 s32 fn_800F6498(void *arg0) {
     return *(s32 *)((u8 *)arg0 + 0x114) != 0;
 }
@@ -1089,21 +1161,23 @@ s32 fn_800F8828(void *self, s32 val, s32 flag) {
 
 s32 fn_800F8B60(char *arg0) {
     extern s32 lbl_804943C8;
+    u32 *used;
+    u32 *res;
     s32 i;
     s32 n;
     u32 bit;
 
     if (lbl_804943C8 != 0) {
+        res = (u32 *)(arg0 + 0x2800);
+        used = (u32 *)(arg0 + 0x2940);
         for (i = 0; i < 80; i++) {
-            if ((((u32 *)(arg0 + 0x2940))[i] | ((u32 *)(arg0 + 0x2800))[i]) != 0xFFFFFFFF) {
-                n = 0;
-                bit = 1;
-                while ((((u32 *)(arg0 + 0x2940))[i] | ((u32 *)(arg0 + 0x2800))[i]) & bit) {
-                    bit <<= 1;
-                    n++;
+            if ((used[i] | res[i]) != 0xFFFFFFFF) {
+                for (n = 0, bit = 1; ; n++, bit <<= 1) {
+                    if (!((used[i] | res[i]) & bit)) {
+                        used[i] |= bit;
+                        return i * 32 + n;
+                    }
                 }
-                ((u32 *)(arg0 + 0x2940))[i] |= bit;
-                return i * 32 + n;
             }
         }
     }
