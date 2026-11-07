@@ -201,10 +201,10 @@ s32 fn_80346A88(void) {
     u8 *p = lbl_8046C400;
     if (*(s32 *)(p + 0xA0) != 0) {
         if (p[0xA4] == 1 || p[0xA4] == 4) {
+            p[0xA4] = 2;
             *(s64 *)(p + 0xC8) = -1;
             *(s32 *)(p + 0xD4) = 0;
             *(s32 *)(p + 0xD0) = 0;
-            p[0xA4] = 2;
             return 1;
         }
     }
@@ -1334,13 +1334,13 @@ void fn_8034B4AC(void *self, s16 id, s32 arg, f32 *v, f32 f) {
 
 void fn_8034B58C(void *self, s32 arg1, s32 arg2, s32 arg3) {
     extern u8 *lbl_80495050;
-    RCOpVtEnt *e;
     if (arg1 != 0) {
-        e = (RCOpVtEnt *)(M2C_FIELD(self, u8 **, 0x68) + 0x110);
+        u8 *vt = M2C_FIELD(self, u8 **, 0x68);
+        RCOpVtEnt *e = (RCOpVtEnt *)(vt + 0x110);
         ((void (*)(void *, void *, s32, s32, s32, s32))e->fn)((u8 *)self + e->delta, lbl_80495050 + 0x40, arg2 ? 4 : 1, 1, 0, arg3);
     } else {
-        fn_8034B58C_off:
-        e = (RCOpVtEnt *)(M2C_FIELD(self, u8 **, 0x68) + 0x128);
+        u8 *vt = M2C_FIELD(self, u8 **, 0x68);
+        RCOpVtEnt *e = (RCOpVtEnt *)(vt + 0x128);
         ((void (*)(void *, s32))e->fn)((u8 *)self + e->delta, arg3 ? 0x100 : 0x80);
     }
 }
@@ -1942,8 +1942,14 @@ void fn_80354C18(void *arg0, void *arg1) {
 }
 
 void fn_80354C40(void *self, s64 *src, u32 count) {
+    s64 *dst;
+    s64 *end;
     *(u32 *)((char *)self + 0x4558) = count;
-    __builtin_memcpy((char *)self + 0x758, src, count * 64);
+    dst = (s64 *)((char *)self + 0x758);
+    end = dst + count * 8;
+    while (dst != end) {
+        *dst++ = *src++;
+    }
     *(s32 *)((char *)self + 0x510) = 1;
 }
 
