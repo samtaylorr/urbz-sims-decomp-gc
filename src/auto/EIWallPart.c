@@ -654,6 +654,19 @@ void fn_800380B8(s32 on, void **list) {
     }
 }
 
+void fn_80038110(void *self, s32 v) {
+    s32 on = (u32)v <= 1;
+
+    fn_800380B8(on, (void **)((u8 *)self + 0x4));
+    fn_800380B8(on, (void **)((u8 *)self + 0x10));
+    fn_800380B8(on, (void **)((u8 *)self + 0x1C));
+    fn_800380B8(on, (void **)((u8 *)self + 0x28));
+    fn_800380B8(on, (void **)((u8 *)self + 0x34));
+    fn_800380B8(on, (void **)((u8 *)self + 0x40));
+    fn_800380B8(on, (void **)((u8 *)self + 0x4C));
+    fn_800380B8(on, (void **)((u8 *)self + 0x58));
+}
+
 void fn_800382D0(s32 arg0, void **arg1) {
     M2C_UNK fn_800381A4(s32, s32, s32);
     s32 temp_r4;
