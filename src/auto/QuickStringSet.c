@@ -1092,18 +1092,15 @@ s32 fn_800F8B60(char *arg0) {
     u32 *res;
     s32 i;
     s32 n;
-    u32 bit;
 
     if (lbl_804943C8 != 0) {
+        res = (u32 *)(arg0 + 0x2800);
+        used = (u32 *)(arg0 + 0x2940);
         for (i = 0; i < 80; i++) {
-            used = (u32 *)(arg0 + 0x2940);
-            res = (u32 *)(arg0 + 0x2800);
             if ((used[i] | res[i]) != 0xFFFFFFFF) {
-                n = 0;
-                for (bit = 1; (((u32 *)(arg0 + 0x2940))[i] | ((u32 *)(arg0 + 0x2800))[i]) & bit; bit <<= 1) {
-                    n++;
+                for (n = 0; (used[i] | res[i]) & (1 << n); n++) {
                 }
-                used[i] |= bit;
+                used[i] |= 1 << n;
                 return i * 32 + n;
             }
         }
@@ -1268,10 +1265,10 @@ void fn_800FA07C(void *self, s32 flags) {
     if (obj != NULL) {
         u8 *vt = *(u8 **)obj;
         (*(void (**)(void *))(vt + 0x1C))(obj + *(s16 *)(vt + 0x18));
+        M2C_FIELD(self, s32 *, 8) = 0;
     }
-    M2C_FIELD(self, s32 *, 8) = 0;
-    M2C_FIELD(self, s32 *, 0) = 0;
     M2C_FIELD(self, s32 *, 4) = 0;
+    M2C_FIELD(self, s32 *, 0) = 0;
     if (flags & 1) {
         fn_802D20E8(self);
     }
@@ -1462,22 +1459,23 @@ void fn_800FB8AC(void) {
 }
 
 s32 fn_800FB8E4(void *arg0, s32 *arg1) {
-    struct QSSPos { s32 a; s32 b; };
     extern u8 *lbl_80496668;
     extern s32 fn_80105B84(void *);
     extern s32 fn_80105B78(void *);
     extern void fn_801055FC(void *, s32);
     u8 *g = lbl_80496668;
     u8 *obj;
+    u8 *vt;
+    u8 buf[8];
 
     obj = (*(u8 *(**)(u8 *, void *))(*(u8 **)g + 0x94))(g + *(s16 *)(*(u8 **)g + 0x90), arg0);
     if (obj != NULL) {
-        u8 *vt = *(u8 **)(obj + 4);
-        struct QSSPos pos = (*(struct QSSPos (**)(u8 *))(vt + 0x31C))(obj + *(s16 *)(vt + 0x318));
-        arg1[0] = fn_80105B84(&pos);
-        arg1[1] = fn_80105B78(&pos);
+        vt = *(u8 **)(obj + 4);
+        (*(void (**)(void *, u8 *))(vt + 0x31C))(buf, obj + *(s16 *)(vt + 0x318));
+        arg1[0] = fn_80105B84(buf);
+        arg1[1] = fn_80105B78(buf);
         arg1[2] = 1;
-        fn_801055FC(&pos, 2);
+        fn_801055FC(buf, 2);
         return 1;
     } else {
         return 0;
