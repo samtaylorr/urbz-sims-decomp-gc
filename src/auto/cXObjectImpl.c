@@ -241,10 +241,10 @@ void fn_80133A8C(char *arg0) {
 void *fn_80133AE4(void *self, s32 idx) {
     struct { s32 a[8]; } *base;
 
-    if (idx < 0 || (u32)idx >= (u32)(M2C_FIELD(self, typeof(base) *, 0x94) - M2C_FIELD(self, typeof(base) *, 0x90))) {
-        return NULL;
+    if (idx >= 0 && (u32)idx < (u32)(M2C_FIELD(self, typeof(base) *, 0x94) - M2C_FIELD(self, typeof(base) *, 0x90))) {
+        return &M2C_FIELD(self, typeof(base) *, 0x90)[idx];
     }
-    return &M2C_FIELD(self, typeof(base) *, 0x90)[idx];
+    return NULL;
 }
 
 void fn_80133C74(char *self, s32 idx) {
