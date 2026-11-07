@@ -764,15 +764,13 @@ f32 fn_80037B30(void *self, s32 key, s32 idx) {
     void *fn_802CD440(void *, s32, s32);
     extern f32 lbl_803C5910[];
     void *p;
-    u8 *q;
-    u8 *r;
+    EIWallPartTbl *t;
 
     p = fn_802CD440((u8 *)self + 0xA0, key, 0);
-    if (p == NULL || (q = M2C_FIELD(p, u8 **, 0x1C)) == NULL) {
+    if (p == NULL || (t = M2C_FIELD(p, EIWallPartTbl **, 0x1C)) == NULL) {
         return lbl_803C5910[0];
     }
-    r = q + 8;
-    return *(f32 *)(r + idx * 4);
+    return t->f8[idx];
 }
 
 s32 fn_80037B90(void *self, s32 key, s32 idx) {
