@@ -548,11 +548,13 @@ s32 fn_80148EF8(void *arg0) {
 }
 
 s32 fn_8016CB94(void *);
-void fn_80148F04(void *arg0) {
+s32 fn_80148F04(void *arg0) {
     void *p = M2C_FIELD(arg0, void **, 0x8C);
-    if (M2C_FIELD(p, s32 *, 0) == 0) {
-        fn_8016CB94(p);
+    s32 r = M2C_FIELD(p, s32 *, 0);
+    if (r == 0) {
+        r = fn_8016CB94(p);
     }
+    return r;
 }
 
 s32 fn_80148F38(void *arg0) {
