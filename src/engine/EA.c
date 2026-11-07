@@ -785,6 +785,7 @@ s32 fn_802DD9B0(s32 *arg0) {
 
 void *fn_802DD9D8(void *arg0) {
     extern u8 lbl_80419678[];
+    void fn_802DDDC8(void *, s32);
     M2C_FIELD(arg0, u8 **, 0x10) = lbl_80419678;
     M2C_FIELD(arg0, s32 *, 0) = 0;
     M2C_FIELD(arg0, s32 *, 8) = 0;
@@ -864,21 +865,21 @@ u32 fn_802DE634(u32 **self, s32 pos, s32 count) {
     u32 endWord;
     u32 mask;
 
-    if (count == 0) {
-        return 0;
-    }
-    end = pos + count;
-    word = pos >> 5;
-    shift = pos & 31;
-    endWord = (end - 1) >> 5;
-    if (word == endWord) {
-        mask = (1 << count) - 1;
-        if (mask == 0) {
+    if (count != 0) {
+        end = pos + count;
+        word = pos >> 5;
+        shift = pos & 31;
+        endWord = (end - 1) >> 5;
+        if (word == endWord) {
+            mask = (1 << count) - 1;
+            if (mask != 0) {
+                return ((*self)[word] >> shift) & mask;
+            }
             return (*self)[word];
         }
-        return ((*self)[word] >> shift) & mask;
+        return (((*self)[endWord] & ((1 << (end & 31)) - 1)) << (32 - shift)) | ((*self)[word] >> shift);
     }
-    return (((*self)[endWord] & ((1 << (end & 31)) - 1)) << (32 - shift)) | ((*self)[word] >> shift);
+    return 0;
 }
 
 f32 fn_802DE6DC(u32 **self, s32 pos) {
@@ -1020,7 +1021,7 @@ s32 fn_802DEE5C(void *arg0, s32 arg1, s32 arg2) {
     if (M2C_FIELD(arg0, s32 *, 0x1C) != 0) {
         fn_802482F8(M2C_FIELD(arg0, s32 *, 0x1C), arg1 + M2C_FIELD(arg0, s32 *, 0x20));
     }
-    M2C_FIELD(arg0, s32 *, 0x20) = (s32) (M2C_FIELD(arg0, s32 *, 0x20) + arg2);
+    M2C_FIELD(arg0, s32 *, 0x20) += arg2;
     return arg2;
 }
 
