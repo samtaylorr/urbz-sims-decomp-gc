@@ -94,6 +94,17 @@ static inline void QSSVec1C_Resize(QSSVec1C *v, u32 n, QSSElem1C *val) {
     }
 }
 
+void fn_800F5974(void *arg0, void *arg1) {
+    void *fn_800F687C(void *, void *, s32);
+    void fn_800F585C(void *, void *, void *, void *);
+    QSSStrBuf a;
+    QSSStrBuf b;
+    QSSStrBuf *pa = &a;
+    fn_800F687C(pa, pa->buf, 0x104);
+    fn_800F687C(&b, b.buf, 0x104);
+    fn_800F585C(arg0, arg1, pa, &b);
+}
+
 void fn_800F59D8(void *arg0, void *arg1) {
     void *fn_800F687C(void *, void *, s32);
     void fn_800F585C(void *, void *, void *, void *);
@@ -264,6 +275,29 @@ s32 fn_800F631C(void *arg0) {
         M2C_FIELD(arg0, s32 *, 0x114) = 0;
     } else {
         ret = -0x31;
+    }
+    return ret;
+}
+
+s32 fn_800F6398(s32 arg0, s32 arg1, s32 *arg2) {
+    void fn_802482F8(s32, s32, s32);
+    s32 ret = 0;
+    s32 avail;
+
+    if (fn_800F6498((void *)arg0) == 0) {
+        return -0x31;
+    }
+    avail = M2C_FIELD(arg0, s32 *, 0x120) - M2C_FIELD(arg0, s32 *, 0x11C);
+    if (avail < 0) {
+        *arg2 = 0;
+        ret = -0x30;
+    } else {
+        if (*arg2 > avail) {
+            *arg2 = avail;
+            ret = -0x30;
+        }
+        fn_802482F8(arg1, M2C_FIELD(arg0, s32 *, 0x114) + M2C_FIELD(arg0, s32 *, 0x11C), *arg2);
+        M2C_FIELD(arg0, s32 *, 0x11C) += *arg2;
     }
     return ret;
 }
@@ -1200,6 +1234,47 @@ u16 *fn_800F827C(u16 *arg0, u16 *find) {
         }
     } while (fn_800F8204(str, find, len) != 0);
     return str;
+}
+
+u16 *fn_800F82FC(u16 *dst, u16 *src) {
+    u16 *p = dst + fn_800F8120(dst);
+
+    while (*src != 0) {
+        *p++ = *src++;
+    }
+    *p = 0;
+    return dst;
+}
+
+void *fn_800F8360(void *self, s32 arg1) {
+    extern u8 lbl_8040D3D8[];
+    void fn_80248488(void *, s32, s32);
+
+    M2C_FIELD(self, u8 **, 0x408) = lbl_8040D3D8;
+    fn_80248488((u8 *)self + 8, 0, 0x400);
+    M2C_FIELD(self, s32 *, 0) = arg1;
+    M2C_FIELD(self, s32 *, 4) = 0;
+    return self;
+}
+
+void fn_800F83B8(void *self, s32 flags) {
+    extern u8 lbl_8040D3D8[];
+    void fn_802D211C(void *);
+    void fn_802D20E8(void *);
+    void **p;
+    s32 i;
+
+    M2C_FIELD(self, u8 **, 0x408) = lbl_8040D3D8;
+    p = (void **)((u8 *)self + 8);
+    for (i = 0; i < 0x80; i++) {
+        if (p[0] != NULL) {
+            fn_802D211C(p[0]);
+        }
+        p += 2;
+    }
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
 }
 
 s32 fn_800F86C8(void *arg0, s32 arg1) {
