@@ -1470,7 +1470,7 @@ s32 *fn_802DE158(s32 *self, s32 *other) {
     void fn_802DDDD8(void *, s32, s32);
     M2C_UNK fn_802482F8();
     fn_802DDDD8(self, other[1], 0);
-    fn_802482F8(self[0], other[0], ((self[1] + 0x1F) >> 5) * 4);
+    fn_802482F8(self[0], other[0], ((u32)(self[1] + 0x1F) >> 5) * 4);
     return self;
 }
 
@@ -1489,11 +1489,12 @@ void fn_802DE1C0(u32 **arg0, u32 **arg1) {
 }
 
 void fn_802DE228(u32 **arg0, u32 **arg1) {
-    u32 n = fn_802DE1B0(arg0);
+    s32 n = fn_802DE1B0(arg0);
     u32 *d = *arg0;
     u32 *s = *arg1;
+    s32 i;
 
-    while (n--) {
+    for (i = n - 1; n != 0; n = i, i--) {
         *d++ &= *s++;
     }
 }
