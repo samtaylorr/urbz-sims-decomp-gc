@@ -57,6 +57,45 @@ static inline void *EIWallPart_Alloc(u32 size) {
     return p;
 }
 
+void fn_8002BC48(void) {
+    extern void fn_8031EA2C(s32);
+    extern s32 lbl_80493FD0;
+    extern s32 lbl_80493FD4;
+    extern s32 lbl_80493FD8;
+    extern s32 lbl_80493FDC;
+    extern s32 lbl_80493FE0;
+    extern s32 lbl_80493FE4;
+    extern s32 lbl_80493FE8;
+    if (lbl_80493FD0 != 0) {
+        fn_8031EA2C(lbl_80493FD0);
+    }
+    if (lbl_80493FD4 != 0) {
+        fn_8031EA2C(lbl_80493FD4);
+    }
+    if (lbl_80493FD8 != 0) {
+        fn_8031EA2C(lbl_80493FD8);
+    }
+    if (lbl_80493FDC != 0) {
+        fn_8031EA2C(lbl_80493FDC);
+    }
+    if (lbl_80493FE0 != 0) {
+        fn_8031EA2C(lbl_80493FE0);
+    }
+    if (lbl_80493FE4 != 0) {
+        fn_8031EA2C(lbl_80493FE4);
+    }
+    lbl_80493FD0 = 0;
+    lbl_80493FD4 = 0;
+    lbl_80493FD8 = 0;
+    lbl_80493FDC = 0;
+    lbl_80493FE0 = 0;
+    lbl_80493FE4 = 0;
+    if (lbl_80493FE8 != 0) {
+        fn_8031EA2C(lbl_80493FE8);
+    }
+    lbl_80493FE8 = 0;
+}
+
 void fn_8002BF1C(void *self, s32 flags) {
     extern u8 lbl_80407830[];
     extern void fn_8031EA2C(void *);
@@ -778,24 +817,13 @@ void fn_80037A30(void *arg0, s32 arg1) {
     void *a;
     void *b;
     s32 *arr;
-    void **it;
-    void *obj;
-    void *vt;
 
     a = M2C_FIELD(arg0, void **, 0x94);
     b = M2C_FIELD(arg0, void **, 0xA0);
     while (a != NULL) {
         arr = (s32 *)(M2C_FIELD(b, u8 **, 0x1C) + 0x10);
-        it = *M2C_FIELD(a, void ****, 0x1C);
         arr[arg1] = 1;
-        for (; it != NULL; it = M2C_FIELD(it, void ***, 8)) {
-            obj = *it;
-            vt = M2C_FIELD(obj, void **, 0x3C);
-            if (M2C_FIELD(vt, s32 (**)(void *, s32), 0x24)((u8 *)obj + M2C_FIELD(vt, s16 *, 0x20), arg1) == 0) {
-                arr[arg1] = 0;
-                break;
-            }
-        }
+        EIWallPart_checkAll(*M2C_FIELD(a, void ****, 0x1C), arr, arg1);
         a = M2C_FIELD(a, void **, 0x10);
         b = M2C_FIELD(b, void **, 0x10);
     }
@@ -1288,17 +1316,4 @@ void fn_8003A178(void) {
 void fn_8003A1A4(void) {
     void fn_80039B84(s32, s32);
     fn_80039B84(0, 0xFFFF);
-}
-static inline void EIWallPart_checkAll(void **it, s32 *arr, s32 idx) {
-    void *obj;
-    void *vt;
-
-    for (; it != NULL; it = M2C_FIELD(it, void ***, 8)) {
-        obj = *it;
-        vt = M2C_FIELD(obj, void **, 0x3C);
-        if (M2C_FIELD(vt, s32 (**)(void *, s32), 0x24)((u8 *)obj + M2C_FIELD(vt, s16 *, 0x20), idx) == 0) {
-            arr[idx] = 0;
-            break;
-        }
-    }
 }
