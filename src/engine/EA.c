@@ -296,8 +296,8 @@ static inline void *EA_AllocAligned800(void) {
     s32 fn_802D0B3C(void);
     void *fn_802D197C(s32, u32, s32);
     s32 fn_802DC3C0(void *, s32, s32, s32, s32);
-    s32 heap;
     void *p;
+    s32 heap;
 
     heap = fn_802D0AB8();
     p = fn_802D197C(heap, 0x800, 0x20);
