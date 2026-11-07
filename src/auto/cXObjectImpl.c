@@ -330,6 +330,11 @@ s32 fn_80137E2C(void) {
     return 0;
 }
 
+s32 fn_80138970(void *self) {
+    s16 *fn_80141C5C(s32, s32);
+    return (*(u16 *)fn_80141C5C((s32)self + 0x28, 8) >> 14) & 1;
+}
+
 s32 fn_801392E0(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x80);
 }
