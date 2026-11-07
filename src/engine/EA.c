@@ -255,6 +255,18 @@ void fn_802D8580(void *arg0) {
     fn_802D8424(M2C_FIELD(arg0, s32 *, 4));
 }
 
+void *fn_802D85A4(void *arg0) {
+    void fn_80250FC4(void *);
+    void fn_80251714(void *, void *);
+    char *p = (char *)arg0 + 0x18;
+
+    fn_802D81B8(arg0);
+    fn_802D82D4(arg0, 1, 0);
+    fn_80250FC4(p);
+    fn_80251714(p, arg0);
+    return arg0;
+}
+
 void fn_802D88C8(void *arg0) {
     M2C_UNK fn_80240EC8(s32);
     void *temp_r9;
