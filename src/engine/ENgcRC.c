@@ -1105,7 +1105,7 @@ void fn_8034F840(void *arg0, void *arg1) {
 }
 
 void fn_80270D34(void);
-void fn_8034F8BC(void) {
+void fn_8034F8BC(void *arg0, void *arg1) {
     fn_80270D34();
 }
 
