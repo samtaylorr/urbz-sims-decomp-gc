@@ -103,8 +103,23 @@ s32 fn_8027F888(s32 arg0, s32 arg1) {
     return fn_80248930(arg1, s, fn_80248808(s)) == 0;
 }
 
+s32 fn_8027F8D4(s32 arg0, s32 arg1, s32 arg2) {
+    extern s32 lbl_80494B5C;
+    extern void (*lbl_80443340[])(s32, s32);
+    s32 fn_80248808(s32);
+    lbl_80443340[0](arg1 + fn_80248808(lbl_80494B5C), arg2);
+    return 1;
+}
+
 void fn_8027F924(void) {
 
+}
+
+void fn_8027F928(s32 arg0, s32 *arg1) {
+    void fn_802983B8(s32, s32);
+    s32 p = arg1[1];
+    fn_802983B8(p, *(s32 *)(*(s32 *)(p + 0x50) + 0x18) + 1);
+    *(s32 *)(*(s32 *)(p + 0x50) + 0x1c) &= ~0x40;
 }
 
 void fn_8027FAA8(void) {
