@@ -1164,12 +1164,13 @@ s32 fn_80113AA4(char *self, s32 arg1) {
 void fn_80113DCC(char *self) {
     void *fn_802D1FC8(s32);
     void fn_800F687C(void *, void *, s32);
-    void fn_800F65C4(void *, void *);
-    char *obj = fn_802D1FC8(0x10C);
+    s32 fn_800F65C4(void *, s32);
     char *vt;
+    char *obj;
+    obj = fn_802D1FC8(0x10C);
     fn_800F687C(obj, obj + 8, 0x104);
     *(char **)(self + 0x150) = obj;
-    fn_800F65C4(self + 0x14, *(char **)(self + 0x150));
+    fn_800F65C4(self + 0x14, (s32)obj);
     vt = *(char **)(self + 0x10);
     (*(void (**)(void *))(vt + 0x44))(self + *(s16 *)(vt + 0x40));
 }
