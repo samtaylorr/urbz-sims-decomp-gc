@@ -157,6 +157,10 @@ s32 fn_801BA094(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x18) != 0;
 }
 
+s32 fn_801BA274(void *arg0) {
+    return M2C_FIELD(arg0, s32 *, 0x18) == 0;
+}
+
 s32 fn_801BB33C(char *self) {
     return *(s32 *)(self + 0xC);
 }
