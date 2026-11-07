@@ -52,6 +52,17 @@ s32 fn_800F6498(void *arg0) {
     return *(s32 *)((u8 *)arg0 + 0x114) != 0;
 }
 
+s32 fn_800F65C4(void *arg0, s32 arg1) {
+    void fn_800F68E0(s32);
+    void fn_800F6A78(s32, void *, s32);
+    if (fn_800F6498(arg0) == 0) {
+        return -0x31;
+    }
+    fn_800F68E0(arg1);
+    fn_800F6A78(arg1, arg0, -1);
+    return 0;
+}
+
 void fn_800F661C(s32 arg0, s32 arg1) {
     M2C_UNK fn_800F6A78(s32, s32, M2C_UNK);
     fn_800F68E0();
@@ -78,6 +89,12 @@ s32 fn_800F6698(void) {
 
 void fn_800F66A0(void (*cb)(void)) {
     lbl_80495A94 = cb;
+}
+
+u16 fn_800F66A8(u32 arg0) {
+    u16 *p = (u16 *)&lbl_804943C0;
+    lbl_804943C0 = p[1] * 0x4E6D + 0x3039;
+    return (p[0] & 0x7FFF) % arg0;
 }
 
 s32 fn_800F67E4(u32 arg0) {
