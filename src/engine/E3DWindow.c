@@ -134,7 +134,7 @@ void fn_802E3ED4(void) {
     fn_802E2390();
 }
 
-void fn_802E232C(void);
+void fn_802E232C();
 void fn_802E3EF4(void) {
     fn_802E232C();
 }
