@@ -1286,7 +1286,7 @@ void fn_800CEEC0() {
 
 }
 
-void fn_800CEEC4(void) {
+void fn_800CEEC4() {
 
 }
 
