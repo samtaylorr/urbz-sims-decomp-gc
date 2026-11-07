@@ -93,14 +93,11 @@ void fn_8002D3CC(void *self) {
 void fn_8002DA10(void *arg0) {
     extern f32 lbl_803C5558[];
     void *var_r3;
+    void *p;
 
-    var_r3 = M2C_FIELD(arg0, void **, 0);
-    if (var_r3 != NULL) {
-        do {
-            f32 f = lbl_803C5558[0];
-            M2C_FIELD(M2C_FIELD(var_r3, void **, 0), f32 *, 0xB8) = f;
-            var_r3 = M2C_FIELD(var_r3, void **, 8);
-        } while (var_r3 != NULL);
+    for (var_r3 = M2C_FIELD(arg0, void **, 0); var_r3 != NULL; var_r3 = M2C_FIELD(var_r3, void **, 8)) {
+        p = M2C_FIELD(var_r3, void **, 0);
+        M2C_FIELD(p, f32 *, 0xB8) = *lbl_803C5558;
     }
 }
 
@@ -252,6 +249,12 @@ s32 fn_80030804(s32 arg0) {
     }
 }
 
+s32 fn_800323CC(s32 arg0) {
+    s32 fn_801A090C(s32, s32);
+    fn_801A090C(arg0, 2);
+    return fn_801A090C(arg0, 1) != 0;
+}
+
 f32 fn_80032788(void) {
     extern s32 lbl_80494048;
     return (f32)lbl_80494048 / 100.0f;
@@ -368,9 +371,9 @@ s16 fn_80034F8C(void *arg0) {
 }
 
 void fn_800358D8(void *self, s32 arg1) {
-    extern void *fn_8033740C(void *, s32, s32, s32);
-    extern void fn_802F52DC(void *, u32, s32);
-    extern void fn_8031EA2C(void *);
+    void fn_8031EA2C(void *);
+    void *fn_8033740C(void *, s32, s32, s32);
+    void fn_802F52DC(void *, s32, s32);
     extern u8 lbl_8045BA40[];
     void *obj;
 
@@ -508,26 +511,24 @@ void *fn_80039510(void *self, void **list, s32 arg2, s32 arg3, s32 arg4) {
 
 s32 fn_80039584(void *self, s32 arg1) {
     typedef struct { u8 x; u8 y; u8 z; } Tile;
-    extern void fn_80105508(s32);
+    extern void fn_80105508(void *);
     extern void fn_801055FC(void *, s32);
     extern void fn_80034F94(void *, void *);
     u8 *pos = (u8 *)arg1;
     void **p = M2C_FIELD(self, void **, 0x14);
 
-    if (p != NULL) {
-        do {
-            void *obj = p[0];
-            Tile tile;
+    while (p != NULL) {
+        Tile tile;
+        void *obj = p[0];
 
-            fn_80105508((s32)&tile);
-            fn_80034F94(obj, &tile);
-            if (pos[0] == tile.x && pos[1] == tile.y) {
-                fn_801055FC(&tile, 2);
-                return (s32)obj;
-            }
-            p = (void **)p[2];
+        fn_80105508(&tile);
+        fn_80034F94(obj, &tile);
+        if (pos[0] == tile.x && pos[1] == tile.y) {
             fn_801055FC(&tile, 2);
-        } while (p != NULL);
+            return (s32)obj;
+        }
+        p = (void **)p[2];
+        fn_801055FC(&tile, 2);
     }
     return 0;
 }
