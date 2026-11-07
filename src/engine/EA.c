@@ -285,9 +285,9 @@ void fn_802D85FC(void *arg0, s32 arg1) {
 }
 
 void fn_802D8640(void *arg0, s32 arg1) {
+    typedef struct { u8 pad[0xF8]; u32 busClock; } BootInfo;
     void fn_80251224(void *, s32, s32, s32, void (*)(void *));
-    u32 clk = *(u32 *)0x800000F8;
-    s32 ticks = arg1 * (clk / 4000);
+    s32 ticks = arg1 * (((BootInfo *)0x80000000)->busClock / 4000);
     fn_80251224((char *)arg0 + 0x18, ticks, 0, ticks, fn_802D8580);
     fn_802D8334(arg0, -1);
 }
@@ -1289,10 +1289,12 @@ s32 fn_802DDC6C(arg0, i)
     s32 i;
 {
     u32 **self = (u32 **)arg0;
+    u32 mask;
     if (i >= ((s32 *)self)[1]) {
         return 0;
     }
-    return ((1 << (i & 31)) & self[0][(u32)i >> 5]) != 0;
+    mask = 1 << (i & 31);
+    return (self[0][(u32)i >> 5] & mask) != 0;
 }
 
 M2C_UNK fn_802DDCAC(s32 arg0, s32 i, s32 set) {
