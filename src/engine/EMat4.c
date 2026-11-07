@@ -2348,13 +2348,14 @@ void fn_802CF60C(void *self, void *arg1) {
         f32 buf[4];
         u8 bgr[8];
     } s;
+    u8 *b = s.bgr;
     u32 c = *(u32 *)color;
 
-    s.bgr[0] = color[3];
-    s.bgr[1] = c >> 8;
-    s.bgr[2] = c >> 16;
-    s.bgr[3] = c >> 24;
-    fn_802CF67C(self, s.bgr, s.buf);
+    b[0] = color[3];
+    b[1] = c >> 8;
+    b[2] = c >> 16;
+    b[3] = c >> 24;
+    fn_802CF67C(self, b, s.buf);
     fn_802CFACC(self, s.buf, M2C_FIELD(color, s32 *, 4));
 }
 
