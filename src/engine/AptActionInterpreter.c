@@ -185,6 +185,37 @@ void fn_80287304(void) {
 
 }
 
+void fn_80287A04(void *arg0, u8 **arg1) {
+    void fn_802983B8(void *, u32);
+    void fn_802BBE7C(void *);
+    extern void *lbl_80494B48;
+    void *target = arg1[1];
+    u32 *p = (u32 *)(((u32)*arg1 + 3) & ~3);
+    *arg1 = (u8 *)(p + 1);
+    fn_802983B8(target, *p);
+    M2C_FIELD(M2C_FIELD(target, void **, 0x50), u32 *, 0x1C) &= ~0x40;
+    if (M2C_FIELD(lbl_80494B48, s32 *, 4) != 0 && M2C_FIELD(arg0, s32 *, 0) == 0) {
+        fn_802BBE7C(lbl_80494B48);
+    }
+}
+
+void fn_80287C20(void *arg0, u8 **arg1) {
+    char **regs = (char **)((u8 *)arg0 + 0x54);
+    u32 *p = (u32 *)(((u32)*arg1 + 3) & ~3);
+    char *obj;
+    char *vt;
+    *arg1 = (u8 *)(p + 1);
+    obj = regs[*p];
+    if (obj != 0) {
+        vt = *(char **)(obj + 4);
+        (*(void (**)(char *))(vt + 0x14))(obj + *(s16 *)(vt + 0x10));
+    }
+    regs[*p] = AptStack_Peek(arg0, 0);
+    obj = regs[*p];
+    vt = *(char **)(obj + 4);
+    (*(void (**)(char *))(vt + 0xC))(obj + *(s16 *)(vt + 8));
+}
+
 void fn_80287CD0(void *arg0, u8 **arg1) {
     AptPair *p = (AptPair *)(((u32)*arg1 + 3) & ~3);
     *arg1 = (u8 *)(p + 1);
@@ -197,6 +228,18 @@ void fn_80287CF8(void) {
 
 void fn_80287DE4(void) {
 
+}
+
+void fn_80288AEC(void *arg0, u8 **arg1) {
+    void fn_802BBE7C(void *);
+    extern void *lbl_80494B48;
+    void *g = lbl_80494B48;
+    u32 *p = (u32 *)(((u32)*arg1 + 3) & ~3);
+    *arg1 = (u8 *)(p + 1);
+    *arg1 += *p;
+    if (M2C_FIELD(g, s32 *, 4) != 0 && M2C_FIELD(arg0, s32 *, 0) == 0) {
+        fn_802BBE7C(g);
+    }
 }
 
 void fn_802892A4(void *arg0) {
