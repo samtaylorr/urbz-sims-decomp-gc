@@ -868,6 +868,13 @@ void fn_800CF02C(void) {
 
 }
 
+void fn_800CF030(void *arg0, s32 arg1, s32 arg2) {
+    extern s32 lbl_80494FCC;
+    s32 fn_803338D0(s32, s32);
+    M2C_UNK fn_80311ABC(s32, s32);
+    fn_80311ABC(fn_803338D0(lbl_80494FCC, arg2), 0);
+}
+
 void *fn_800CF538(void *arg0, s32 arg1) {
     M2C_UNK fn_800CBFB8(void *, M2C_UNK *, f32 *);
     M2C_UNK fn_800CC938(void *);
