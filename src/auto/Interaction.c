@@ -1380,6 +1380,7 @@ void *fn_80113378(void *arg0) {
 void fn_801133E8(char *self, s32 arg1) {
     extern u8 lbl_8040EF48[];
     extern u8 lbl_8040EF60[];
+    s32 fn_8011402C(s32);
     void fn_80113B04(char *);
     void fn_800F6134(void *, s32);
     void fn_8018F914(char *, s32);
