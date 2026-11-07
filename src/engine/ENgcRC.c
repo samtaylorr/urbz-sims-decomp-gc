@@ -1200,6 +1200,24 @@ void fn_8034B700(void) {
 
 }
 
+void fn_8034B704(void *self, u8 a, u8 b, u8 c, s32 d) {
+    struct {
+        u8 type;
+        u8 a;
+        u8 b;
+        u8 c;
+        s32 d;
+    } cmd;
+    void fn_80355E64(void *, void *);
+    extern u8 lbl_8046DF78[];
+    cmd.a = a;
+    cmd.type = 0x2B;
+    cmd.b = b;
+    cmd.c = c;
+    cmd.d = d;
+    fn_80355E64(lbl_8046DF78, &cmd);
+}
+
 void fn_8034BA60(void *self, s32 a, s32 b, s32 c, s32 d, s32 e, s16 value) {
     struct {
         u8 type;
@@ -1732,6 +1750,17 @@ void fn_80354C18(void *arg0, void *arg1) {
     void fn_80354C40(void *, s32, u8);
 
     fn_80354C40(arg0, M2C_FIELD(arg1, s32 *, 0x4), M2C_FIELD(arg1, u8 *, 0x1));
+}
+
+void fn_80354C40(void *self, s64 *src, u32 count) {
+    s64 *dst;
+    u32 i;
+    *(u32 *)((char *)self + 0x4558) = count;
+    dst = (s64 *)((char *)self + 0x758);
+    for (i = 0; i < count * 8; i++) {
+        *dst++ = *src++;
+    }
+    *(s32 *)((char *)self + 0x510) = 1;
 }
 
 void fn_8035500C(void) {
