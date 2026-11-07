@@ -512,6 +512,11 @@ void fn_80148704(void *arg0) {
     fn_8016D954(M2C_FIELD(arg0, s32 *, 0x8C));
 }
 
+s32 fn_80148788(void *self) {
+    s16 *fn_80141C5C(s32, s32);
+    return (*(u16 *)fn_80141C5C((s32)self + 0x28, 8) >> 5) & 1;
+}
+
 void fn_80148988(s32 arg0) {
     M2C_UNK fn_80142174(s32);
     fn_80142174(arg0 + 0x28);
