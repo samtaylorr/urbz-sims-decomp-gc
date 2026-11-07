@@ -1763,6 +1763,15 @@ void fn_80354C40(void *self, s64 *src, u32 count) {
     *(s32 *)((char *)self + 0x510) = 1;
 }
 
+void fn_80354D90(void *self, void *arg) {
+    void fn_80354C7C(void *, s32, u8);
+    u8 *p = (u8 *)arg + 4;
+    s32 i;
+    for (i = 0; i <= 3; i++) {
+        fn_80354C7C(self, i, p[i]);
+    }
+}
+
 void fn_8035500C(void) {
 
 }
