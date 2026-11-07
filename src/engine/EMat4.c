@@ -109,9 +109,9 @@ void fn_802C6958(s32 arg0, s32 arg1, u8 c) {
 }
 
 void fn_802C6984(s32 arg0, u8 c) {
-    M2C_UNK fn_802C6880();
+    void fn_802C6880(s32, s32, u16 *);
     u16 buf = c << 8;
-    fn_802C6880(arg0, &buf);
+    ((void (*)(s32, u16 *))fn_802C6880)(arg0, &buf);
 }
 
 char **fn_802C6A40(char **arg0, char arg1) {
