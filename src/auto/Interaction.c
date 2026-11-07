@@ -77,6 +77,20 @@ void fn_8010D630(void *arg0) {
     M2C_FIELD(arg0, s32 *, 8) = fn_800C488C();
 }
 
+void fn_8010D72C(void **self, s32 arg1) {
+    void fn_8033789C(void *, void *);
+    void fn_802D1A00(void *, void *);
+    void *fn_802D0AB8(void);
+    extern void *lbl_8049627C;
+
+    if (self[4] != 0) {
+        fn_8033789C(lbl_8049627C, self[0]);
+    }
+    if (arg1 & 1) {
+        fn_802D1A00(fn_802D0AB8(), self);
+    }
+}
+
 extern u8 lbl_8040EBA0[];
 void fn_8010D784(void **self, s32 flags) {
     *self = lbl_8040EBA0;
