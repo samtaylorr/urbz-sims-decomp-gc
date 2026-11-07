@@ -65,7 +65,7 @@ void fn_801B7944(void *self) {
     }
     list = (char *)self + 0x58;
     node = M2C_FIELD(list, void **, 4);
-    while (node != NULL) {
+    while (CasNode_Valid(node)) {
         obj = M2C_FIELD(node, void **, 0);
         next = M2C_FIELD(node, void **, 4);
         if (M2C_FIELD(list, s32 *, 8) != 0 && obj != NULL) {
@@ -77,7 +77,7 @@ void fn_801B7944(void *self) {
     fn_802CB8D4(list);
 }
 
-void fn_801B7C94(void) {
+void fn_801B7C94() {
 
 }
 
@@ -127,17 +127,21 @@ s32 fn_801B7C98(void *arg0, void *arg1, s32 arg2) {
 
 s32 fn_801B7D68(void *arg0, s32 idx) {
     extern void *lbl_8041FA48[];
-    extern f32 lbl_803DC608;
+    extern f64 lbl_803DC600[];
+    extern f32 lbl_803DC608[];
     u32 **arr = *(u32 ***)lbl_8041FA48[0];
     s32 n = 0;
+    union { f64 d; struct { u32 hi; u32 lo; } i; } u;
 
     if (arr != NULL) {
         n = ((s32 *)arr)[-1];
     }
-    if (idx >= n - 1) {
-        return 0;
+    if (idx < n - 1) {
+        u.i.lo = *arr[idx];
+        u.i.hi = 0x43300000;
+        return (f32)(u.d - lbl_803DC600[0]) * lbl_803DC608[0];
     }
-    return (f32)*arr[idx] * lbl_803DC608;
+    return 0;
 }
 
 s32 fn_801B7EC8(void *arg0, s32 idx) {
