@@ -9,6 +9,19 @@ typedef struct {
 
 typedef struct { f32 x, y, z; } CasListenerVec3;
 
+typedef struct {
+    void *node;
+} CasMapIter;
+
+static inline void CasMapIter_Inc(CasMapIter *it) {
+    extern void *fn_8039AB24(void *);
+    it->node = fn_8039AB24(it->node);
+}
+
+static inline s32 CasMapIter_NotEqual(const CasMapIter *a, void *b) {
+    return a->node != b;
+}
+
 void fn_803074F0(void);
 s32 fn_801B68E8(char *self) {
     return *(s32 *)(self + 0xC);
