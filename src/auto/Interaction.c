@@ -383,7 +383,7 @@ s32 fn_8010EDCC(void *arg0) {
     t = M2C_FIELD(arg0, void **, 0x18);
     if (t != NULL) {
         r = M2C_FIELD(arg0, s32 *, 0xC);
-        if (r != 0) {
+        if (M2C_FIELD(arg0, s32 *, 0xC) != 0) {
             b = (u32)(M2C_FIELD(t, s32 *, 0x14) - 1) <= 0xFFFFFFEFu;
             if (b != 0) {
                 goto zero;
@@ -951,10 +951,10 @@ void fn_801130C8(IntGroupVec *self) {
 s32 fn_80113268(char *self, s32 arg1) {
     char *fn_80112480(char *, s32, s32);
     char *p = fn_80112480(self, arg1, 0);
-    if (p != *(char **)(self + 4)) {
-        return *(s32 *)(p + 0x14);
+    if (p == *(char **)(self + 4)) {
+        return 0;
     }
-    return 0;
+    return *(s32 *)(p + 0x14);
 }
 
 s32 fn_801132B0(char *self, s32 arg1, s32 result) {
@@ -1016,6 +1016,26 @@ void fn_80114318(void *obj, s32 arg1, s32 arg2, s32 arg3) {
 void fn_80114EE4(char *self, s32 a1, s32 a2, s32 a3, s32 a4, s32 a5) {
     char *vt = *(char **)(self + 0x10);
     (*(void (**)(void *, s32, s32, s32, s32, s32, s32))(vt + 0x104))(self + *(s16 *)(vt + 0x100), a1, a2, a3, a4, 0, a5);
+}
+
+s32 fn_8011608C(void *self, u32 n, s32 arg2) {
+    s32 *fn_80112D1C(s32, s32, s32, s32);
+    s32 fn_80115954(void *, s32 *, s32);
+    s32 buf[20];
+    s32 total = 0;
+    u16 i;
+
+    for (i = 1; i <= n; i++) {
+        s32 *p = fn_80112D1C(M2C_FIELD(self, s32 *, 0x13C), arg2, i, 0);
+        if (p == NULL) {
+            break;
+        }
+        if (fn_80115954(self, buf, *p) != 0) {
+            break;
+        }
+        total += buf[1];
+    }
+    return total;
 }
 
 void fn_80116748(void *arg0) {
@@ -1081,6 +1101,18 @@ void *fn_80116904(void *self) {
     M2C_FIELD(self, s32 *, 0x48) = -1;
     M2C_FIELD(self, s32 *, 0x50) = 0;
     M2C_FIELD(self, s32 *, 0x20) = 0;
+    return self;
+}
+
+void *fn_801169A0(void *self, s32 arg1) {
+    extern u8 lbl_8040F088[];
+    void fn_800F160C(void *);
+    void fn_801167DC(void *, s32);
+    M2C_FIELD(self, u8 **, 0x54) = lbl_8040F088;
+    fn_800F160C((u8 *)self + 0x34);
+    M2C_FIELD(self, s32 *, 0x24) = 0;
+    M2C_FIELD(self, s32 *, 0x20) = 0;
+    fn_801167DC(self, arg1);
     return self;
 }
 
