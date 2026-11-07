@@ -289,8 +289,8 @@ s32 fn_800F6398(s32 arg0, s32 arg1, s32 *arg2) {
     }
     avail = M2C_FIELD(arg0, s32 *, 0x120) - M2C_FIELD(arg0, s32 *, 0x11C);
     if (avail < 0) {
-        *arg2 = 0;
         ret = -0x30;
+        *arg2 = 0;
     } else {
         if (*arg2 > avail) {
             *arg2 = avail;
