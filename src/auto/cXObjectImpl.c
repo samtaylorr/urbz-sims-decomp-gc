@@ -321,12 +321,12 @@ void fn_80148BD8(void *arg0) {
 }
 
 s32 fn_80148BFC(void *self) {
-    u16 *fn_80141C5C();
+    s16 *fn_80141C5C(s32, s32);
     s32 result = 0;
     u8 *obj = *(u8 **)((u8 *)self + 0x4);
     u8 *vt = *(u8 **)(obj + 4);
     u8 *r = (*(u8 *(**)(void *))(vt + 0x2D4))(obj + *(s16 *)(vt + 0x2D0));
-    if (*(s16 *)(r + 0x5C) != 0 || (*fn_80141C5C((u8 *)self + 0x28, 8) & 0x400)) {
+    if (*(s16 *)(r + 0x5C) != 0 || (*fn_80141C5C((s32)self + 0x28, 8) & 0x400)) {
         result = 1;
     }
     return result;
