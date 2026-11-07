@@ -1017,7 +1017,7 @@ void fn_800F8820(void (*cb)(void)) {
 
 s32 fn_800F8828(void *self, s32 val, s32 flag) {
     struct QSS {
-        s32 data[0x50][32];
+        s32 data[0xA00];
         u32 used[0x50];
         u32 mask[0x50];
     } *s = self;
@@ -1037,9 +1037,8 @@ s32 fn_800F8828(void *self, s32 val, s32 flag) {
                     n++;
                 }
                 s->used[i] |= m;
-                n = i * 32 + n;
-                ((s32 *)s->data)[n] = val;
-                return n;
+                s->data[i * 32 + n] = val;
+                return i * 32 + n;
             }
         }
         return -1;
@@ -1058,6 +1057,27 @@ void fn_800F8CB4(void) {
 
 s32 fn_800F8EA4(void) {
     return 0;
+}
+
+void fn_800F9320(u8 *self, u32 n) {
+    typedef struct { u8 b[0x1C]; } Elem;
+    typedef struct { Elem *begin; Elem *end; } Vec;
+    void fn_8039FED8(Vec *, Elem *, u32, Elem *);
+    Elem tmp;
+    Vec *v = (Vec *)(self + 0x20);
+    Elem *begin = v->begin;
+    u32 size = v->end - begin;
+
+    if (n < size) {
+        Elem *ne = begin + n;
+        Elem *last = v->end;
+        Elem *p;
+        for (p = ne; p != last; p++) {
+        }
+        v->end = ne;
+    } else {
+        fn_8039FED8(v, v->end, n - size, &tmp);
+    }
 }
 
 void fn_800F9564(void *arg0, f32 farg0) {
@@ -1380,17 +1400,14 @@ s32 fn_800FD3C8(u8 *self, s32 arg1, u8 **arg2) {
     extern u8 *lbl_8049665C;
     extern u8 *fn_8011CECC(void *, s32);
     u8 *vt;
-    void *a;
     void *b;
-    u8 *obj;
 
     vt = *(u8 **)self;
-    a = (*(void *(**)(u8 *))(vt + 0x34))(self + *(s16 *)(vt + 0x30));
-    b = (*(void *(**)(u8 *, void *))(*(u8 **)lbl_8049665C + 0x1FC))(lbl_8049665C + *(s16 *)(*(u8 **)lbl_8049665C + 0x1F8), a);
-    obj = *arg2 = fn_8011CECC(b, arg1);
-    if (obj != NULL) {
-        vt = *(u8 **)obj;
-        (*(void (**)(u8 *))(vt + 0x14))(obj + *(s16 *)(vt + 0x10));
+    b = (*(void *(**)(u8 *, void *))(*(u8 **)lbl_8049665C + 0x1FC))(lbl_8049665C + *(s16 *)(*(u8 **)lbl_8049665C + 0x1F8), (*(void *(**)(u8 *))(vt + 0x34))(self + *(s16 *)(vt + 0x30)));
+    *arg2 = fn_8011CECC(b, arg1);
+    if (*arg2 != NULL) {
+        vt = *(u8 **)*arg2;
+        (*(void (**)(u8 *))(vt + 0x14))(*arg2 + *(s16 *)(vt + 0x10));
     }
     return *arg2 != NULL;
 }
@@ -1407,21 +1424,11 @@ void **fn_800FD650(void **self) {
 }
 
 void fn_800FD6A0(void **self, s32 arg1) {
-    extern void fn_8031EA2C(void *);
     M2C_UNK fn_800FC1C0(void **, s32);
-    self[0] = (void *)lbl_8040D4F0;
-    if (self[4] != NULL) {
-        fn_8031EA2C(self[4]);
-        self[4] = NULL;
-    }
-    if (self[5] != NULL) {
-        fn_8031EA2C(self[5]);
-        self[5] = NULL;
-    }
-    if (self[6] != NULL) {
-        fn_8031EA2C(self[6]);
-        self[6] = NULL;
-    }
+    self[0] = lbl_8040D4F0;
+    QSS_FreePtr(&self[4]);
+    QSS_FreePtr(&self[5]);
+    QSS_FreePtr(&self[6]);
     fn_800FC1C0(self, arg1);
 }
 
@@ -1521,16 +1528,7 @@ s32 fn_800FD9E8(void **obj) {
     return n;
 }
 
-extern u8 lbl_8040D4F0[];
 extern u8 lbl_8040D498[];
-
-static inline void QSS_FreePtr(void **p) {
-    extern void fn_8031EA2C(void *);
-    if (*p != NULL) {
-        fn_8031EA2C(*p);
-        *p = NULL;
-    }
-}
 void **fn_800FDA44(void **self) {
     fn_800FC1AC(self);
     self[4] = 0;
