@@ -57,6 +57,17 @@ static inline s32 CasListIter_NotEqual(const CasListIter *a, const CasListIter *
     return a->node != b->node;
 }
 
+static inline void *CasSlot_Init(s32 *p) {
+    p[1] = 0;
+    return p;
+}
+
+static inline void *CasSlot_InitBoth(s32 *p) {
+    p[0] = 0;
+    p[1] = 0;
+    return p;
+}
+
 static inline s32 CasArr_Size(u32 **a) {
     return a != NULL ? ((s32 *)a)[-1] : 0;
 }
@@ -177,12 +188,16 @@ s32 fn_801B7D68(void *arg0, s32 idx) {
     u32 **arr;
     s32 n;
 
-    arr = *(u32 ***)lbl_8041FA48[0];
-    n = CasArr_Size(arr);
-    if (idx < n - 1) {
-        return (f32)*arr[idx] * 0.8f;
+    arg0 = lbl_8041FA48[0];
+    n = 0;
+    arr = *(u32 ***)arg0;
+    if (arr != NULL) {
+        n = ((s32 *)arr)[-1];
     }
-    return 0;
+    if (idx >= n - 1) {
+        return 0;
+    }
+    return (f32)*arr[idx] * 0.8f;
 }
 
 s32 fn_801B7EC8(void *arg0, s32 idx) {
