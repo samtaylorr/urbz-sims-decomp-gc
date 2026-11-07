@@ -114,6 +114,27 @@ void fn_802C6984(s32 arg0, u8 c) {
     ((void (*)(s32, u16 *))fn_802C6880)(arg0, &buf);
 }
 
+M2C_UNK fn_802C69B0(s32 self, s32 str) {
+    extern const char *lbl_80494DB4;
+    M2C_UNK fn_802482F8();
+    s32 fn_80248808(const char *);
+    char **arg0 = (char **)self;
+    const char *arg1 = (const char *)str;
+    s32 n;
+
+    if (arg1 == NULL) {
+        arg1 = lbl_80494DB4;
+    }
+    n = fn_80248808(arg1) + 1;
+    if (n <= M2C_FIELD(arg0, s32 *, 4)) {
+        fn_802482F8(*arg0, arg1, n);
+    } else {
+        fn_802482F8(*arg0, arg1, M2C_FIELD(arg0, s32 *, 4) - 1);
+        (*arg0)[M2C_FIELD(arg0, s32 *, 4) - 1] = 0;
+    }
+    return (s32)arg0;
+}
+
 char **fn_802C6A40(char **arg0, char arg1) {
     (*arg0)[0] = arg1;
     (*arg0)[1] = 0;
