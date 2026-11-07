@@ -58,6 +58,7 @@ static inline void QSSVec_Free(QSSVec *v) {
         QSSVec_Dealloc(p, (s32)v->alloc.cap);
     }
 }
+typedef struct QSSStrBuf { s32 unk0; s32 unk4; char buf[0x104]; } QSSStrBuf;
 typedef struct QSSElem1C { u8 b[0x1C]; } QSSElem1C;
 typedef struct QSSVec1C { QSSElem1C *begin; QSSElem1C *end; } QSSVec1C;
 
@@ -1088,19 +1089,20 @@ s32 fn_800F8828(void *self, s32 val, s32 flag) {
 
 s32 fn_800F8B60(char *arg0) {
     extern s32 lbl_804943C8;
-    u32 *used;
-    u32 *res;
     s32 i;
     s32 n;
+    u32 bit;
 
     if (lbl_804943C8 != 0) {
-        res = (u32 *)(arg0 + 0x2800);
-        used = (u32 *)(arg0 + 0x2940);
         for (i = 0; i < 80; i++) {
-            if ((used[i] | res[i]) != 0xFFFFFFFF) {
-                for (n = 0; (used[i] | res[i]) & (1 << n); n++) {
+            if ((((u32 *)(arg0 + 0x2940))[i] | ((u32 *)(arg0 + 0x2800))[i]) != 0xFFFFFFFF) {
+                n = 0;
+                bit = 1;
+                while ((((u32 *)(arg0 + 0x2940))[i] | ((u32 *)(arg0 + 0x2800))[i]) & bit) {
+                    bit <<= 1;
+                    n++;
                 }
-                used[i] |= 1 << n;
+                ((u32 *)(arg0 + 0x2940))[i] |= bit;
                 return i * 32 + n;
             }
         }
