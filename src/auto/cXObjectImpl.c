@@ -79,17 +79,15 @@ s32 fn_8013358C(void *self) {
     extern void fn_80105534(void *);
     extern void fn_801055FC(void *, s32);
     extern void *lbl_80496668;
-    struct {
-        s32 a;
-        s32 b;
-    } buf;
+    typedef struct { s8 x; s8 y; s8 z; } Tile;
+    Tile tile;
     s32 r;
     s32 ret;
 
-    fn_80105534(&buf);
-    r = (*(s32 (**)(void *, void *))(*(char **)lbl_80496668 + 0x23C))((char *)lbl_80496668 + *(s16 *)(*(char **)lbl_80496668 + 0x238), &buf);
+    fn_80105534(&tile);
+    r = (*(s32 (**)(void *, void *))(*(char **)lbl_80496668 + 0x23C))((char *)lbl_80496668 + *(s16 *)(*(char **)lbl_80496668 + 0x238), &tile);
     if (r == 0) {
-        fn_801055FC(&buf, 2);
+        fn_801055FC(&tile, 2);
         return 0;
     }
     {
@@ -97,7 +95,7 @@ s32 fn_8013358C(void *self) {
         char *vt = M2C_FIELD(obj, char **, 4);
         ret = (*(s32 (**)(void *, s32))(vt + 0x44C))(obj + *(s16 *)(vt + 0x448), r);
     }
-    fn_801055FC(&buf, 2);
+    fn_801055FC(&tile, 2);
     return ret;
 }
 
@@ -635,16 +633,16 @@ s32 fn_80149284(void *arg0) {
     u8 *obj;
     u8 *vt;
 
-    temp_r3 = M2C_FIELD(arg0, void **, 4);
-    temp_r9 = M2C_FIELD(temp_r3, void **, 4);
-    if (M2C_FIELD(temp_r9, s32 (**)(void *), 0x434)(temp_r3 + M2C_FIELD(temp_r9, s16 *, 0x430)) != 0) {
-        obj = M2C_FIELD(arg0, u8 **, 4);
-        vt = *(u8 **)(obj + 4);
-        return ((*(u32 (**)(void *))(vt + 0x35C))(obj + *(s16 *)(vt + 0x358)) & 2) == 0;
-    } else {
+    obj = M2C_FIELD(arg0, u8 **, 4);
+    vt = *(u8 **)(obj + 4);
+    if ((*(s32 (**)(void *))(vt + 0x434))(obj + *(s16 *)(vt + 0x430)) != 0) {
         temp_r3 = M2C_FIELD(arg0, void **, 4);
         temp_r9 = M2C_FIELD(temp_r3, void **, 4);
-        return (M2C_FIELD(temp_r9, u32 (**)(void *), 0x35C)(temp_r3 + M2C_FIELD(temp_r9, s16 *, 0x358)) >> 4) & 1;
+        return (M2C_FIELD(temp_r9, u32 (**)(void *), 0x35C)(temp_r3 + M2C_FIELD(temp_r9, s16 *, 0x358)) & 2) == 0;
+    } else {
+        obj = M2C_FIELD(arg0, u8 **, 4);
+        vt = *(u8 **)(obj + 4);
+        return ((*(u32 (**)(void *))(vt + 0x35C))(obj + *(s16 *)(vt + 0x358)) >> 4) & 1;
     }
 }
 
