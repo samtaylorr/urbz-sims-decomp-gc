@@ -733,12 +733,13 @@ void fn_802C85B4(f32 *m, s32 col, f32 *in) {
 
 f32 *fn_802C85E8(f32 *m) {
     void fn_8025FB2C(f32 *, f32 *);
-    f32 v[3];
+    f32 v[4];
+    f32 *p = v;
     s32 i;
     for (i = 0; i <= 2; i++) {
         fn_802C8530(m, i, v);
-        if (v[0] != 0.0f || v[1] != 0.0f || v[2] != 0.0f) {
-            fn_8025FB2C(v, v);
+        if (p[0] != 0.0f || p[1] != 0.0f || p[2] != 0.0f) {
+            fn_8025FB2C(p, p);
         }
         fn_802C858C(m, i, v);
     }
@@ -748,9 +749,12 @@ f32 *fn_802C85E8(f32 *m) {
 f32 *fn_802C8688(f32 *dst, f32 *src) {
     s32 i;
     s32 j;
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i <= 3; i++) {
+        f32 *s = src + i;
+        f32 *d = dst + i * 4;
         for (j = 0; j < 4; j++) {
-            dst[i * 4 + j] = src[j * 4 + i];
+            *d++ = *s;
+            s += 4;
         }
     }
     return src;
@@ -817,15 +821,17 @@ f32 *fn_802C91E0(f32 *m, f32 angle) {
     f32 fn_802434CC(f32);
     f32 s = fn_80243694(angle);
     f32 c = fn_802434CC(angle);
-    f32 a0 = m[0], a1 = m[1], a2 = m[2];
-    f32 b0 = m[4], b1 = m[5], b2 = m[6];
+    f32 a, b;
 
-    m[4] = -s * a0 + c * b0;
-    m[0] = c * a0 + s * b0;
-    m[5] = -s * a1 + c * b1;
-    m[1] = c * a1 + s * b1;
-    m[6] = -s * a2 + c * b2;
-    m[2] = c * a2 + s * b2;
+    b = m[4]; a = m[0];
+    m[4] = -s * a + c * b;
+    m[0] = c * a + s * b;
+    b = m[5]; a = m[1];
+    m[5] = -s * a + c * b;
+    m[1] = c * a + s * b;
+    b = m[6]; a = m[2];
+    m[6] = -s * a + c * b;
+    m[2] = c * a + s * b;
     return m;
 }
 
@@ -858,6 +864,15 @@ void fn_802C96D4(void) {
 
 }
 
+void fn_802C9730(f32 *m, f32 *x, f32 *y, f32 *z) {
+    f32 fn_80242D18(f32, f32);
+    f32 fn_80243100(f32);
+
+    *x = fn_80242D18(m[8], m[10]);
+    *y = -fn_80242D18(m[9], fn_80243100(m[8] * m[8] + m[10] * m[10]));
+    *z = -fn_80242D18(-m[1], m[5]);
+}
+
 void fn_802C97B4(void *m, f32 *v) {
     void fn_802CBC5C(f32 *, void *);
     f32 fn_802CBED0(f32 *, f32 *);
@@ -869,19 +884,9 @@ void fn_802C97B4(void *m, f32 *v) {
 
 f32 fn_802CA924(void) {
     extern u32 lbl_80494DC8;
-    extern const f64 lbl_803F0130[];
     extern const f32 lbl_803F0138[];
-    union {
-        f64 d;
-        struct {
-            u32 hi;
-            u32 lo;
-        } w;
-    } u;
     lbl_80494DC8 = lbl_80494DC8 * 0x41C64E6F + 0x303B;
-    u.w.lo = (lbl_80494DC8 >> 16) & 0x7FFF;
-    u.w.hi = 0x43300000;
-    return (f32)(u.d - lbl_803F0130[0]) * lbl_803F0138[0];
+    return (f32)((lbl_80494DC8 >> 16) & 0x7FFF) * lbl_803F0138[0];
 }
 
 f32 fn_802CA978(void) {
