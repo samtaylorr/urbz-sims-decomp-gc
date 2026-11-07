@@ -71,8 +71,8 @@ static inline E3DVec3 E3DVec3_make(f32 x, f32 y, f32 z) {
 static inline void E3DVec3_splat(E3DVec3 *d, f32 s) {
     E3DVec3 t;
     t.x = s;
-    t.y = s;
     t.z = s;
+    t.y = s;
     *d = t;
 }
 
@@ -819,8 +819,7 @@ s32 fn_802EC898(void *arg0, void *arg1) {
     if (g == NULL) {
         ret = 0;
     } else {
-        E3DVec3 t = E3DVec3_make(lbl_803F0AF8[0], lbl_803F0AF8[0], lbl_803F0AF8[0]);
-        v.b = t;
+        E3DVec3_splat(&v.b, lbl_803F0AF8[0]);
         v.a = v.b;
         fn_802E7F64(arg0, arg1, &v, 0);
         ret = fn_802E34F0(g, &v);
