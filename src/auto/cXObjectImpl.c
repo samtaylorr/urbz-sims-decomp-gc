@@ -12,7 +12,8 @@ void fn_801301E0(void *arg0, s32 *arg1, s32 *arg2) {
 }
 
 s16 fn_801301F8(s32 arg0, s32 arg1) {
-    return (u8)arg1 | (arg0 << 8);
+    s16 r = (arg0 << 8) | (u8)arg1;
+    return r;
 }
 
 extern s32 lbl_80495BB0;
@@ -330,6 +331,15 @@ void fn_80148504(void *arg0, s32 arg1, s32 arg2) {
 
 s32 fn_80148524(void *arg0, s32 arg1) {
     return (M2C_FIELD(arg0, s32 *, 0x84) & arg1) != 0;
+}
+
+s32 fn_8014853C(void *arg0) {
+    void *temp_r3;
+    void *temp_r9;
+
+    temp_r3 = M2C_FIELD(arg0, void **, 4);
+    temp_r9 = M2C_FIELD(temp_r3, void **, 4);
+    return M2C_FIELD(temp_r9, s32 (**)(void *), 0x29C)(temp_r3 + M2C_FIELD(temp_r9, s16 *, 0x298)) ^ 1;
 }
 
 s32 fn_80148664(void) {
