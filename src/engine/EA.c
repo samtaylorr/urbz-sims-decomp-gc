@@ -60,6 +60,16 @@ s32 fn_802D7F48(s32 arg0, s32 arg1) {
     return sp8;
 }
 
+s32 fn_802D7F94(s32 arg0) {
+    void fn_802C63E8(void *, s32 *);
+    extern M2C_UNK lbl_804448E8[];
+    s32 sp8;
+
+    sp8 = arg0;
+    fn_802C63E8(lbl_804448E8, &sp8);
+    return 0;
+}
+
 void fn_802D8260(void *arg0, s32 arg1) {
     extern void fn_802D6A28(void *, s32);
     extern void fn_802D8328(void *);
@@ -768,12 +778,8 @@ void fn_802DD930(s32 *arg0, s32 arg1) {
     M2C_UNK fn_802DDCAC(s32, s32, s32);
     s32 a = arg0[0];
     s32 b = arg0[1];
-    s32 has = fn_802DDC6C(a, b) != 0;
-    if (arg1) {
-        fn_802DDCAC(a, b, !has);
-    } else {
-        fn_802DDCAC(a, b, has != 0);
-    }
+    u8 has = fn_802DDC6C(a, b) != 0;
+    fn_802DDCAC(a, b, arg1 ? has == 0 : has != 0);
 }
 
 s32 fn_802DD9B0(s32 *arg0) {
@@ -860,26 +866,24 @@ void fn_802DE608(void *self, f32 value) {
 
 u32 fn_802DE634(u32 **self, s32 pos, s32 count) {
     s32 word;
+    s32 shift;
     u32 end;
     u32 endWord;
     u32 mask;
-    u32 *data;
 
     if (count != 0) {
         end = pos + count;
         word = pos >> 5;
-        pos &= 31;
+        shift = pos & 31;
         endWord = (end - 1) >> 5;
         if (word == endWord) {
             mask = (1 << count) - 1;
-            data = *self;
             if (mask != 0) {
-                return (data[word] >> pos) & mask;
+                return ((*self)[word] >> shift) & mask;
             }
-            return data[word];
+            return (*self)[word];
         }
-        data = *self;
-        return ((data[endWord] & ((1 << (end & 31)) - 1)) << (32 - pos)) | (data[word] >> pos);
+        return (((*self)[endWord] & ((1 << (end & 31)) - 1)) << (32 - shift)) | ((*self)[word] >> shift);
     }
     return 0;
 }
