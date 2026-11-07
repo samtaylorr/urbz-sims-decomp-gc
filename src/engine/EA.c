@@ -632,10 +632,10 @@ u32 fn_802D9AC4(u32 size) {
 }
 
 s32 fn_802D9C00(void *arg0, char *arg1) {
-    char *fn_802DD058(void *, void *);
+    char **fn_802DD058(void *, void *);
     char *h;
     if ((*(u32 *)(arg1 + 4) & ~7) <= 15) {
-        h = fn_802DD058(arg0, arg1);
+        h = (char *)fn_802DD058(arg0, arg1);
         if (arg1 >= h + *(s32 *)(h + 4) - 16) {
             return 1;
         }
