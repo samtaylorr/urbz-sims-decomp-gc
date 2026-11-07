@@ -481,6 +481,21 @@ void fn_802C73FC(char **arg0) {
     }
 }
 
+void fn_802C748C(char **arg0) {
+    char *p;
+    u8 c;
+
+    if (fn_802C6A5C((s32 *)arg0) > 2) {
+        p = *arg0;
+        if (p[1] == ':') {
+            c = p[0];
+            if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) {
+                fn_802C6CCC((s32 *)arg0, (s32)arg0, 2, -1);
+            }
+        }
+    }
+}
+
 char **fn_802C774C(char **arg0) {
     char *p;
 
@@ -959,10 +974,13 @@ f32 *fn_802C895C(f32 *m, f32 angle) {
     void fn_802C876C(void *);
     f32 fn_80243694(f32);
     f32 fn_802434CC(f32);
-    f32 s = fn_80243694((fn_802C876C(m), angle));
-    f32 c = fn_802434CC(angle);
+    f32 s, c, ns;
+    fn_802C876C(m);
+    s = fn_80243694(angle);
+    c = fn_802434CC(angle);
+    ns = -s;
     m[0] = c;
-    m[2] = -s;
+    m[2] = ns;
     m[8] = s;
     m[10] = c;
     return m;
@@ -976,26 +994,34 @@ f32 *fn_802C89C8(f32 *m, f32 angle) {
     fn_802C876C(m);
     s = fn_80243694(angle);
     c = fn_802434CC(angle);
-    m[4] = -s;
-    m[1] = s;
     m[0] = c;
+    m[1] = s;
+    m[4] = -s;
     m[5] = c;
     return m;
 }
 
-void fn_802C8D24(f32 (*dst)[4], f32 (*src)[4]) {
+void fn_802C8D24(f32 *dst, f32 *src) {
     extern f32 lbl_803F00B8[];
     s32 i;
     s32 j;
+    f32 *t;
+    f32 *d1;
+    f32 *d2;
+    f32 *d3;
     for (i = 0; i <= 2; i++) {
         for (j = 0; j < 3; j++) {
-            dst[j][i] = src[i][j];
+            dst[j * 4 + i] = src[i * 4 + j];
         }
     }
+    t = src + 12;
+    d3 = dst + 12;
+    d1 = dst + 4;
+    d2 = dst + 8;
     for (j = 0; j < 3; j++) {
-        dst[3][j] = -(src[3][0] * dst[0][j] + src[3][1] * dst[1][j] + src[3][2] * dst[2][j]);
+        d3[j] = -(t[0] * dst[j] + t[1] * d1[j] + t[2] * d2[j]);
     }
-    dst[3][3] = lbl_803F00B8[0];
+    dst[15] = lbl_803F00B8[0];
 }
 
 f32 *fn_802C8ED0(f32 *m, f32 angle) {
