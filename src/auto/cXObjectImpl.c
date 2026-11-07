@@ -693,6 +693,11 @@ s16 fn_80149114(void *self) {
     return *fn_80141C5C((s32)self + 0x28, 0x10);
 }
 
+s32 fn_80149140(void *self) {
+    s16 *fn_80141C5C(s32, s32);
+    return *fn_80141C5C((s32)self + 0x28, 0xF) != 0;
+}
+
 s32 fn_80149284(void *arg0) {
     u8 *obj;
     u8 *vt;
