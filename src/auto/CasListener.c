@@ -159,18 +159,23 @@ void fn_801B9CE0(void *arg0, s32 arg1) {
     s32 fn_8015125C(s32, s32);
     extern void *lbl_8049665C;
     extern void *lbl_80496668;
-    void *vt;
     s32 r30;
     void *p;
     s32 res;
 
     M2C_FIELD(arg0, s32 *, 0x10) = 0;
     M2C_FIELD(arg0, s32 *, 0x14) = 1;
-    vt = M2C_FIELD(lbl_8049665C, void **, 0);
-    r30 = M2C_FIELD(vt, s32 (**)(void *, s32), 0x84)((char *)lbl_8049665C + M2C_FIELD(vt, s16 *, 0x80), 0x437);
+    {
+        void *o = lbl_8049665C;
+        void *vt = M2C_FIELD(o, void **, 0);
+        r30 = M2C_FIELD(vt, s32 (**)(void *, s32), 0x84)((char *)o + M2C_FIELD(vt, s16 *, 0x80), 0x437);
+    }
     p = fn_80107CBC(lbl_80496668, fn_8016CC44(arg1), r30, 1);
-    vt = M2C_FIELD(lbl_80496668, void **, 0);
-    p = M2C_FIELD(vt, void *(**)(void *, void *), 0x94)((char *)lbl_80496668 + M2C_FIELD(vt, s16 *, 0x90), p);
+    {
+        void *o = lbl_80496668;
+        void *vt = M2C_FIELD(o, void **, 0);
+        p = M2C_FIELD(vt, void *(**)(void *, void *), 0x94)((char *)o + M2C_FIELD(vt, s16 *, 0x90), p);
+    }
     if (p != NULL) {
         res = fn_8015125C(M2C_FIELD(p, s32 *, 0), 4);
     } else {
@@ -1012,6 +1017,44 @@ void fn_801C675C(void *self, s32 flags) {
 
 void fn_801C6790(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 8) = arg1;
+}
+
+void fn_801C8640(void *arg0, f32 farg0, f32 farg1, f32 farg2) {
+    M2C_FIELD(arg0, f32 *, 0x4F8) = farg2;
+    M2C_FIELD(arg0, f32 *, 0x4A4) = farg0;
+    M2C_FIELD(arg0, f32 *, 0x4F4) = farg1;
+}
+
+void fn_801C8880(void *arg0, s32 arg1) {
+    s32 fn_8032D5C8(s32, void *);
+    s32 fn_8032D6E8(s32, s32, s32);
+    extern u8 lbl_803DE330[];
+    s32 *dst = &M2C_FIELD(arg0, s32 *, 0x478);
+    s32 key;
+    s32 p;
+
+    key = fn_8032D5C8(M2C_FIELD(arg0, s32 *, 0x47C), lbl_803DE330);
+    p = fn_8032D6E8(M2C_FIELD(arg0, s32 *, 0x47C), key, arg1);
+    if (dst != NULL) {
+        *dst = p;
+    }
+}
+
+s32 fn_801C8F4C(void *arg0, u32 arg1) {
+    switch (arg1) {
+    case 0:
+    case 4 ... 18:
+        return 0;
+    case 1:
+        return 1;
+    case 2:
+        return 2;
+    case 3:
+    case 19 ... 28:
+        return 3;
+    default:
+        return 1;
+    }
 }
 
 s32 fn_801C94E8(void) {
