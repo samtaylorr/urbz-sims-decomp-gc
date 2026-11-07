@@ -931,6 +931,20 @@ void fn_8034B13C(void *self, s32 arg) {
     fn_803549C0(lbl_8046DF78, &cmd);
 }
 
+void fn_8034B174(void *self, void *q) {
+    struct quat { f32 x, y, z, w; };
+    struct {
+        u8 type;
+        s32 pad;
+        struct quat q;
+    } cmd;
+    void fn_80354A60(void *, void *);
+    extern u8 lbl_8046DF78[];
+    cmd.type = 0x36;
+    cmd.q = *(struct quat *)q;
+    fn_80354A60(lbl_8046DF78, &cmd);
+}
+
 void fn_8034B1CC(void *self, s32 arg) {
     struct {
         u8 type;
@@ -953,6 +967,18 @@ void fn_8034B204(void *self, s32 arg) {
     cmd.arg = arg;
     cmd.type = 0xD;
     fn_80354DDC(lbl_8046DF78, &cmd);
+}
+
+void fn_8034B23C(void *self, s32 arg) {
+    struct {
+        u8 type;
+        s32 arg;
+    } cmd;
+    void fn_80354EA8(void *, void *);
+    extern u8 lbl_8046DF78[];
+    cmd.arg = arg;
+    cmd.type = 0xE;
+    fn_80354EA8(lbl_8046DF78, &cmd);
 }
 
 void fn_8034B274(void *self, s32 arg) {
@@ -996,12 +1022,16 @@ void fn_8034B314(void *self, void *obj) {
     } cmd;
     void fn_803552F4(void *, void *);
     extern u8 lbl_8046DF78[];
-    s32 a = obj != NULL ? M2C_FIELD(obj, s32 *, 0xD8) : 0;
-    s32 b = obj != NULL ? M2C_FIELD(obj, s32 *, 0xDC) : 0;
-    cmd.obj = obj;
+    s32 a;
+    s32 b;
+    a = 0;
+    if (obj) a = M2C_FIELD(obj, s32 *, 0xD8);
+    b = 0;
+    if (obj) b = M2C_FIELD(obj, s32 *, 0xDC);
     cmd.type = 0x18;
     cmd.a = a;
     cmd.b = b;
+    cmd.obj = obj;
     fn_803552F4(lbl_8046DF78, &cmd);
 }
 
