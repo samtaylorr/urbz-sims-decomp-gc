@@ -592,11 +592,20 @@ void fn_802C7F78(void *self) {
     M2C_FIELD(self, void **, 4) = NULL;
 }
 
-void fn_802C81F4(f32 *out, f32 *v, f32 *m) {
-    out[0] = v[0] * m[0] + v[1] * m[4] + v[2] * m[8] + v[3] * m[12];
-    out[1] = v[0] * m[1] + v[1] * m[5] + v[2] * m[9] + v[3] * m[13];
-    out[2] = v[0] * m[2] + v[1] * m[6] + v[2] * m[10] + v[3] * m[14];
-    out[3] = v[0] * m[3] + v[1] * m[7] + v[2] * m[11] + v[3] * m[15];
+f32 *fn_802C81F4(f32 *out, f32 *v, f32 *m) {
+    f32 x = v[0];
+    f32 y = v[1];
+    f32 z = v[2];
+    f32 w = v[3];
+    f32 r0 = x * m[0] + y * m[4] + z * m[8] + w * m[12];
+    f32 r1 = x * m[1] + y * m[5] + z * m[9] + w * m[13];
+    f32 r2 = x * m[2] + y * m[6] + z * m[10] + w * m[14];
+    f32 r3 = x * m[3] + y * m[7] + z * m[11] + w * m[15];
+    out[0] = r0;
+    out[1] = r1;
+    out[2] = r2;
+    out[3] = r3;
+    return out;
 }
 
 void fn_802C829C(s32 arg0, s32 arg1, s32 arg2) {
@@ -745,6 +754,20 @@ f32 *fn_802C8688(f32 *dst, f32 *src) {
         }
     }
     return src;
+}
+
+void fn_802C86D4(f32 *m) {
+    s32 i;
+    s32 j;
+    f32 t;
+    for (i = 0; i < 4; i++) {
+        for (j = i + 1; j < 4; j++) {
+            t = m[j * 4 + i];
+            m[j * 4 + i] = m[i * 4 + j];
+            m[i * 4 + j] = m[j * 4 + i];
+            m[j * 4 + i] = t;
+        }
+    }
 }
 
 void *fn_802C87C4(void *arg0, void *arg1) {
