@@ -308,17 +308,16 @@ static inline void *EA_AllocAligned800(void) {
     s32 fn_802D0B3C(void);
     void *fn_802D197C(s32, u32, s32);
     s32 fn_802DC3C0(void *, s32, s32, s32, s32);
-    void *p;
     s32 heap;
+    void *p;
 
     heap = fn_802D0AB8();
     p = fn_802D197C(heap, 0x800, 0x20);
-    if (p != NULL) {
-        return p;
-    }
-    p = (void *)fn_802DC3C0((void *)heap, 0x800, 0x20, 0, 0);
-    if (p == NULL && heap == fn_802D0AB8()) {
-        return (void *)fn_802DC3C0((void *)fn_802D0B3C(), 0x800, 0x20, 0, 0);
+    if (p == NULL) {
+        p = (void *)fn_802DC3C0((void *)heap, 0x800, 0x20, 0, 0);
+        if (p == NULL && heap == fn_802D0AB8()) {
+            return (void *)fn_802DC3C0((void *)fn_802D0B3C(), 0x800, 0x20, 0, 0);
+        }
     }
     return p;
 }
@@ -1483,6 +1482,20 @@ s32 fn_802DE2F8(u32 **self, u32 **other) {
         }
     }
     return 1;
+}
+
+s32 fn_802DE384(u32 **self, u32 **other) {
+    u32 fn_802DE1B0(void *);
+    u32 n = fn_802DE1B0(self);
+    u32 *a = *self;
+    u32 *b = *other;
+
+    while (n-- != 0) {
+        if (*a++ & *b++) {
+            return 1;
+        }
+    }
+    return 0;
 }
 
 void fn_802DE598(void) {
