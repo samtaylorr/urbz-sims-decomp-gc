@@ -1881,7 +1881,9 @@ void fn_800D08D0(u8 *self, s32 i) {
 void fn_800D0910(u8 *self, s32 i, s32 arg2) {
     void fn_800CCA68(void *, s32);
     void fn_800CE954(void *, s32);
-    fn_800CCA68(((void **)(self + 0x40))[i], arg2);
+    s32 off = i * 4;
+    void **arr = (void **)(self + 0x40);
+    fn_800CCA68(*(void **)((u8 *)arr + off), arg2);
     fn_800CE954(self, i);
 }
 
