@@ -998,17 +998,17 @@ f32 *fn_802C88F0(f32 *m, f32 angle) {
 }
 
 f32 *fn_802C895C(f32 *m, f32 angle) {
+    void fn_802C876C(void *);
     f32 fn_80243694(f32);
     f32 fn_802434CC(f32);
-    f32 s, c, ns;
+    f32 s, c;
     fn_802C876C(m);
     s = fn_80243694(angle);
     c = fn_802434CC(angle);
-    ns = -s;
-    m[0] = c;
-    m[2] = ns;
     m[8] = s;
     m[10] = c;
+    m[2] = -s;
+    m[0] = c;
     return m;
 }
 
