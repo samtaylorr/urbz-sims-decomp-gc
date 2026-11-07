@@ -653,6 +653,23 @@ void fn_8013966C(s32 arg0) {
     fn_80145C80(arg0 + 0x28);
 }
 
+void *fn_80139690(void *self) {
+    void fn_80248488(void *, s32, s32);
+    fn_80248488(self, 0, 0xC);
+    M2C_FIELD(self, s32 *, 0xC) = 0;
+    M2C_FIELD(self, s32 *, 0x10) = 0;
+    M2C_FIELD(self, s32 *, 0x18) = 0;
+    M2C_FIELD(self, s16 *, 0x2C) = 0;
+    M2C_FIELD(self, s16 *, 0x1E) = 0;
+    M2C_FIELD(self, s16 *, 0x20) = 0;
+    M2C_FIELD(self, s16 *, 0x22) = 0;
+    M2C_FIELD(self, s16 *, 0x26) = 0;
+    M2C_FIELD(self, s16 *, 0x28) = 0;
+    M2C_FIELD(self, s16 *, 0x24) = 0;
+    M2C_FIELD(self, s16 *, 0x2A) = 0;
+    return self;
+}
+
 extern char lbl_80434C40[];
 extern s32 lbl_80495BB8;
 void fn_80141BF0(s32 *self, s32 flags) {
@@ -780,8 +797,8 @@ void fn_801485F4(void *self, s32 arg1) {
     char *obj = *(char **)((char *)self + 4);
     char *vt = *(char **)(obj + 4);
     char *e = vt + 0xB8;
-    s32 r = (*(s32 (**)(char *))(vt + 0x33C))(obj + *(s16 *)(vt + 0x338));
-    (*(void (**)(char *, s32, s32, s32, s32))(e + 4))(obj + *(s16 *)e, r, 0, arg1, 0);
+    (*(void (**)(char *, s32, s32, s32, s32))(e + 4))(obj + *(s16 *)e,
+        (*(s32 (**)(char *))(vt + 0x33C))(obj + *(s16 *)(vt + 0x338)), 0, arg1, 0);
 }
 
 s32 fn_80148664(void) {
