@@ -838,6 +838,18 @@ void fn_8034AFD8(void *self, s32 arg) {
     fn_80355168(lbl_8046DF78, &cmd);
 }
 
+void fn_8034B010(void *self, s32 arg) {
+    struct {
+        u8 type;
+        s32 arg;
+    } cmd;
+    void fn_803551C0(void *, void *);
+    extern u8 lbl_8046DF78[];
+    cmd.arg = ~arg;
+    cmd.type = 0x13;
+    fn_803551C0(lbl_8046DF78, &cmd);
+}
+
 void fn_8034B04C(void *self, s32 arg) {
     struct {
         u8 type;
@@ -862,6 +874,20 @@ void fn_8034B0C0(void *self, s32 arg, u8 value) {
     cmd.type = 0x16;
     cmd.value = value;
     fn_80355294(lbl_8046DF78, &cmd);
+}
+
+void fn_8034B100(void *self, s32 arg, u8 value) {
+    struct {
+        u8 type;
+        u8 value;
+        s32 arg;
+    } cmd;
+    void fn_803552C0(void *, void *);
+    extern u8 lbl_8046DF78[];
+    cmd.arg = arg;
+    cmd.type = 0x17;
+    cmd.value = value;
+    fn_803552C0(lbl_8046DF78, &cmd);
 }
 
 void fn_8034B274(void *self, s32 arg) {
@@ -1597,33 +1623,15 @@ void fn_80355EC8(u8 *self, u8 *arg) {
     u8 mode;
     u8 off;
     u8 *p;
-    s32 on;
-    s32 type;
 
     enable = arg[1];
     mode = arg[2];
     off = arg[3];
     p = *(u8 **)(self + 0x4D8);
     if (enable != 0) {
-        on = 0;
-        type = lbl_803F4684[mode];
-        p[0x3C9] = on;
-        *(s32 *)(p + 0x3B8) = type;
-        p[0x3BC] = off;
-        *(s32 *)(p + 0x3C4) = 7;
-        *(u32 *)(p + 0x6CC) |= 0x80000000 | 0x40;
-        *(s32 *)(p + 0x3C0) = on;
-        p[0x3C8] = on;
+        RC_SetFog(p, 0, lbl_803F4684[mode], off);
     } else {
-        on = 1;
-        type = 7;
-        p[0x3C9] = on;
-        *(s32 *)(p + 0x3B8) = type;
-        p[0x3BC] = enable;
-        *(s32 *)(p + 0x3C4) = type;
-        *(u32 *)(p + 0x6CC) |= 0x80000000 | 0x40;
-        *(s32 *)(p + 0x3C0) = on;
-        p[0x3C8] = enable;
+        RC_SetFog(p, 1, 7, 0);
     }
 }
 
