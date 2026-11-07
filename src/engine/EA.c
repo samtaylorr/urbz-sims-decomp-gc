@@ -542,6 +542,10 @@ s32 fn_802DCB78(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     return ret;
 }
 
+u32 fn_802DD014(void *arg0, void *arg1) {
+    return M2C_FIELD(arg1, u32 *, -4) & ~7;
+}
+
 void fn_802D21E0(void *);
 void fn_802DD5B0(void *self, void *arg) {
     fn_802D21E0(arg);
