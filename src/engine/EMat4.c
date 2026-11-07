@@ -780,12 +780,11 @@ void fn_802C85B4(f32 *m, s32 col, f32 *in) {
 f32 *fn_802C85E8(f32 *m) {
     void fn_8025FB2C(f32 *, f32 *);
     f32 v[4];
-    f32 *p = v;
     s32 i;
     for (i = 0; i <= 2; i++) {
         fn_802C8530(m, i, v);
-        if (p[0] != 0.0f || p[1] != 0.0f || p[2] != 0.0f) {
-            fn_8025FB2C(p, p);
+        if (v[0] != 0.0f || v[1] != 0.0f || v[2] != 0.0f) {
+            fn_8025FB2C(v, v);
         }
         fn_802C858C(m, i, v);
     }
@@ -796,31 +795,32 @@ f32 *fn_802C8688(f32 *dst, f32 *src) {
     s32 i;
     s32 j;
     for (i = 0; i <= 3; i++) {
-        f32 *s = src + i;
-        f32 *d = dst + i * 4;
         for (j = 0; j < 4; j++) {
-            *d++ = *s;
-            s += 4;
+            dst[i * 4 + j] = src[j * 4 + i];
         }
     }
     return src;
 }
 
 void fn_802C86D4(f32 *m) {
+    s32 i;
+    s32 j;
     f32 t;
-    t = m[4]; m[4] = m[1]; m[1] = m[4]; m[4] = t;
-    t = m[8]; m[8] = m[2]; m[2] = m[8]; m[8] = t;
-    t = m[12]; m[12] = m[3]; m[3] = m[12]; m[12] = t;
-    t = m[9]; m[9] = m[6]; m[6] = m[9]; m[9] = t;
-    t = m[13]; m[13] = m[7]; m[7] = m[13]; m[13] = t;
-    t = m[14]; m[14] = m[11]; m[11] = m[14]; m[14] = t;
+    for (i = 0; i < 4; i++) {
+        for (j = i + 1; j < 4; j++) {
+            t = m[j * 4 + i];
+            m[j * 4 + i] = m[i * 4 + j];
+            m[i * 4 + j] = m[j * 4 + i];
+            m[j * 4 + i] = t;
+        }
+    }
 }
 
 void *fn_802C87C4(void *arg0, void *arg1) {
-    M2C_UNK fn_802C876C();
+    void fn_802C876C(void *);
     void *temp_r9;
 
-    fn_802C876C();
+    fn_802C876C(arg0);
     temp_r9 = arg0 + 0x30;
     M2C_FIELD(arg0, f32 *, 0x30) = (f32) M2C_FIELD(arg1, f32 *, 0);
     M2C_FIELD(temp_r9, f32 *, 4) = (f32) M2C_FIELD(arg1, f32 *, 4);
@@ -856,6 +856,36 @@ f32 fn_802C88C0(f32 *m) {
     f32 v[3];
     fn_802C8530(m, 2, v);
     return fn_8025FC40(v);
+}
+
+f32 *fn_802C88F0(f32 *m, f32 angle) {
+    void fn_802C876C(void *);
+    f32 fn_80243694(f32);
+    f32 fn_802434CC(f32);
+    f32 s, c;
+    fn_802C876C(m);
+    s = fn_80243694(angle);
+    c = fn_802434CC(angle);
+    m[5] = c;
+    m[9] = -s;
+    m[6] = s;
+    m[10] = c;
+    return m;
+}
+
+f32 *fn_802C895C(f32 *m, f32 angle) {
+    void fn_802C876C(void *);
+    f32 fn_80243694(f32);
+    f32 fn_802434CC(f32);
+    f32 s, c;
+    fn_802C876C(m);
+    s = fn_80243694(angle);
+    c = fn_802434CC(angle);
+    m[0] = c;
+    m[2] = -s;
+    m[8] = s;
+    m[10] = c;
+    return m;
 }
 
 f32 *fn_802C8ED0(f32 *m, f32 angle) {
@@ -950,7 +980,12 @@ void fn_802C9670(f32 *m) {
     for (i = 0; i < 4; i++) {
         for (j = 0; j < 4; j++) {
             v = m[i * 4 + j];
-            m[i * 4 + j] = v < -32767.0f ? -32767.0f : (v > 32767.0f ? 32767.0f : v);
+            if (v < -32767.0f) {
+                v = -32767.0f;
+            } else if (v > 32767.0f) {
+                v = 32767.0f;
+            }
+            m[i * 4 + j] = v;
         }
     }
 }
@@ -959,7 +994,7 @@ void fn_802C96D4(void) {
 
 }
 
-f32 fn_802C96D8(f32 *m) {
+f32 fn_802C96D8(f32 (*m)[4]) {
     int i, j;
     f32 max = 0.0f;
     f32 sum;
@@ -967,7 +1002,7 @@ f32 fn_802C96D8(f32 *m) {
     for (i = 0; i < 3; i++) {
         sum = 0.0f;
         for (j = 0; j < 3; j++) {
-            sum += __builtin_fabsf(m[j * 4 + i]);
+            sum += __builtin_fabsf(m[j][i]);
         }
         if (sum > max) {
             max = sum;
@@ -1001,10 +1036,11 @@ f32 *fn_802C9AD4(f32 *m) {
     void fn_8039ABB0(f32 *, f32 *);
     void fn_802C8A34(f32 *, f32 *);
     f32 tmp[16];
+    f32 *t = tmp;
 
     fn_802C98D8(m);
-    fn_8039ABB0(tmp, m);
-    fn_802C8A34(m, tmp);
+    fn_8039ABB0(t, m);
+    fn_802C8A34(m, t);
     return m;
 }
 
@@ -1012,12 +1048,13 @@ f32 *fn_802CA5BC(f32 *m, f32 a, f32 b, f32 c, f32 d) {
     extern f32 lbl_803F0124[];
     void fn_802C93A0(f32 *, f32 *);
     f32 v[3];
+    f32 *p = v;
 
     fn_802C9AD4(m);
-    v[2] = lbl_803F0124[0];
-    v[1] = d / b;
-    v[0] = c / a;
-    fn_802C93A0(m, v);
+    p[0] = c / a;
+    p[2] = lbl_803F0124[0];
+    p[1] = d / b;
+    fn_802C93A0(m, p);
     return m;
 }
 
