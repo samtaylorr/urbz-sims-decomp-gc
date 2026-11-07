@@ -282,6 +282,14 @@ void fn_800C59E0(void *arg0) {
     (*(void (**)(void *))(vt + 0x5C))(obj + *(s16 *)(vt + 0x58));
 }
 
+void fn_800C5A1C(void *arg0) {
+    void fn_800CCA68(void *);
+    void fn_800CE954(void *, s32);
+    char *p = M2C_FIELD(arg0, char **, 0x70);
+    fn_800CCA68(M2C_FIELD(p, void **, 0x40));
+    fn_800CE954(p, 0);
+}
+
 void fn_800C5BF8(void *arg0) {
     void fn_800CCA68(void *);
     void fn_800CE954(void *, s32);
