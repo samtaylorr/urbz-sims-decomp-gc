@@ -579,6 +579,12 @@ void fn_80348D80(void *arg0, void *arg1) {
     }
 }
 
+void fn_80348E60(void *arg0) {
+    void fn_80338000(s32, void *, s32);
+    extern s32 lbl_8049627C;
+    fn_80338000(lbl_8049627C, arg0, 4);
+}
+
 void *fn_80348E8C(u32 size, void *p) {
     return p;
 }
