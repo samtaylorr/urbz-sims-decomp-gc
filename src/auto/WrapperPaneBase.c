@@ -909,7 +909,7 @@ void *fn_800CBD64(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, 
     f32 *p = v;
     f32 c = lbl_803D1078[0];
     p[1] = c;
-    p[0] = c;
+    v[0] = c;
     fn_800CBE0C(arg0, arg1, arg2, p, arg3, arg4, arg5, arg6, arg7);
     return arg0;
 }
@@ -2175,6 +2175,19 @@ void fn_800D095C(u8 *self, s32 i, s32 arg2) {
     u8 *obj = *(u8 **)((u8 *)arr + off);
     u8 *t = obj + 0x20;
     M2C_FIELD(t, s32 *, 0x30) = arg2;
+    fn_8039D8D8(t);
+    M2C_FIELD(obj, s32 *, 4) |= 2;
+    fn_800CE954(self, i);
+}
+
+void fn_800D09BC(u8 *self, s32 i, f32 arg2) {
+    void fn_8039D8D8(void *);
+    void fn_800CE954(void *, s32);
+    s32 off = i * 4;
+    void **arr = (void **)(self + 0x40);
+    u8 *obj = *(u8 **)((u8 *)arr + off);
+    u8 *t = obj + 0x20;
+    M2C_FIELD(t, f32 *, 0x34) = arg2;
     fn_8039D8D8(t);
     M2C_FIELD(obj, s32 *, 4) |= 2;
     fn_800CE954(self, i);
