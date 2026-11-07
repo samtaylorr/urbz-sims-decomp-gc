@@ -185,6 +185,12 @@ void fn_80287304(void) {
 
 }
 
+void fn_80287CD0(void *arg0, u8 **arg1) {
+    AptPair *p = (AptPair *)(((u32)*arg1 + 3) & ~3);
+    *arg1 = (u8 *)(p + 1);
+    M2C_FIELD(arg0, AptPair *, 0x48) = *p;
+}
+
 void fn_80287CF8(void) {
 
 }
