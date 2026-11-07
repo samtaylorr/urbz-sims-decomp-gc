@@ -786,8 +786,10 @@ void fn_8034AE30(void *arg0, s32 arg1, u32 arg2) {
     void fn_80354C7C(void *, s32, u32);
     if (M2C_FIELD(arg0, s32 *, 0xC) == 1) {
         fn_802FC904(arg0, arg1, arg2);
-    } else if (arg2 <= 0xF7 && (s32)arg2 > M2C_FIELD(arg0, s32 *, 0x40)) {
-        M2C_FIELD(arg0, s32 *, 0x40) = arg2;
+    } else {
+        if (arg2 <= 0xF7 && (s32)arg2 > M2C_FIELD(arg0, s32 *, 0x40)) {
+            M2C_FIELD(arg0, s32 *, 0x40) = arg2;
+        }
         fn_80354C7C(lbl_8046DF78, arg1, arg2);
     }
 }
@@ -1231,14 +1233,11 @@ void fn_80354938(void *arg0, void *arg1) {
 
 void fn_80354944(void *arg0) {
     s32 n;
-    s32 *stack;
 
     n = M2C_FIELD(arg0, s32 *, 0x50C);
     if (n != 0) {
-        stack = (s32 *)((u8 *)arg0 + 0x4E4);
-        n--;
-        M2C_FIELD(arg0, s32 *, 0x50C) = n;
-        M2C_FIELD(arg0, s32 *, 0x4DC) = stack[n];
+        M2C_FIELD(arg0, s32 *, 0x50C) = n - 1;
+        M2C_FIELD(arg0, s32 *, 0x4DC) = ((s32 *)((u8 *)arg0 + 0x4E4))[n - 1];
         return;
     }
     M2C_FIELD(arg0, s32 *, 0x4E0) = 1;
@@ -1515,12 +1514,12 @@ void fn_80356414(u8 *self, u8 *arg) {
     c = (val >> 4) & 3;
     d = (val >> 6) & 3;
     e = (val >> 8) & 0xFF;
+    *(s32 *)(self + 0x510) = 1;
     self[0x565] = b;
     self[0x564] = a;
     self[0x566] = c;
     self[0x567] = d;
     self[0x568] = e;
-    *(s32 *)(self + 0x510) = 1;
 }
 
 void fn_80273F88(void);
