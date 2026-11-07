@@ -131,6 +131,17 @@ static inline void QSSVec1C_Resize(QSSVec1C *v, u32 n, QSSElem1C *val) {
     }
 }
 
+s32 fn_800F5530(char *self, u32 key) {
+    QSSMapIter it;
+    QSSMapIter end;
+    it.node = QSSMap_Find(self, &key);
+    end.node = M2C_FIELD(self, QSSMapNode **, 4);
+    if (QSSMapIter_Ne(&it, &end)) {
+        return it.node->value;
+    }
+    return 0;
+}
+
 void fn_800F5974(void *arg0, void *arg1) {
     void *fn_800F687C(void *, void *, s32);
     void fn_800F585C(void *, void *, void *, void *);
@@ -1476,6 +1487,26 @@ s32 fn_800F88D4(void *self, u32 idx) {
     return 0;
 }
 
+s32 fn_800F8964(void *self, u32 idx) {
+    extern char lbl_803D5B58[];
+    void fn_800F8CB4();
+    struct QSS {
+        s32 data[0xA00];
+        u32 used[0x50];
+        u32 mask[0x50];
+    } *s = self;
+
+    if (idx + 2 > 1) {
+        if (idx > 0x9FF) {
+            ((void (*)(char *))fn_800F8CB4)(lbl_803D5B58);
+        }
+        if ((s->used[idx >> 5] >> (idx & 31)) & 1) {
+            return s->data[idx];
+        }
+    }
+    return 0;
+}
+
 s32 fn_800F8AF4(s32 *self, s32 (*cb)(s32, s32), s32 arg) {
     s32 *p;
     s32 *end = self + 0x9FF;
@@ -1536,7 +1567,7 @@ s32 fn_800F8C20(char *arg0, s32 arg1) {
     return 1;
 }
 
-void fn_800F8CB4(void) {
+void fn_800F8CB4(char *msg) {
 
 }
 
