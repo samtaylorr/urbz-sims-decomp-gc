@@ -129,8 +129,8 @@ void *fn_8002E160(void *self, s32 arg1) {
     l[0] = 0;
     l[2] = 1;
     M2C_FIELD(self, s32 *, 0x5C) = 0;
-    M2C_FIELD(self, s32 *, 0x48) = 0;
     M2C_FIELD(self, s32 *, 0x58) = 0;
+    M2C_FIELD(self, s32 *, 0x48) = 0;
     M2C_FIELD(self, s32 *, 0x38) = arg1;
     vt = M2C_FIELD(self, char **, 0x44);
     (*(void (**)(void *, s32, s32))(vt + 0x54))((char *)self + *(s16 *)(vt + 0x50), 0x10, 1);
