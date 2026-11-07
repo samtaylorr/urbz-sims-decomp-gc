@@ -496,9 +496,9 @@ void fn_802D9E8C(char *arg0, s32 arg1) {
 }
 
 void fn_802D9EAC(char *arg0, s32 arg1) {
-    s32 v = *(s32 *)(arg0 + 4);
-    s32 size = (v & ~7) - 0x10;
-    *(s32 *)(arg0 + 4) = (v & 7) | size;
+    u32 v = *(u32 *)(arg0 + 4);
+    u32 size = (v & ~7) - 0x10;
+    *(u32 *)(arg0 + 4) = (v & 7) | size;
     EA_SetBlockHeader(arg0, size, size, arg1 | 8);
     EA_SetBlockHeader(arg0, size + 8, 8, 9);
 }
@@ -517,7 +517,7 @@ void fn_802D9F34(void *arg0, u32 *arg1, u32 *arg2) {
     arg2[5] = 0;
 }
 
-void fn_802DB018(void);
+void fn_802DB018();
 void fn_802DAFB0(void) {
     fn_802DB018();
 }
@@ -745,6 +745,34 @@ u32 fn_802DE1B0(void *arg0) {
 
 void fn_802DE598(void) {
 
+}
+
+u32 fn_802DEA8C(s32 *arg0) {
+    if (arg0[0] == 0) {
+        return 0;
+    }
+    return (u32) (arg0[1] + 0x1F) >> 5U << 2;
+}
+
+void *fn_802DEAB0(void *self, s32 **arg1) {
+    struct vte { s16 delta; s16 pad; void *pfn; };
+    s32 n;
+    s32 i;
+    s32 tmp;
+
+    tmp = (s32) arg1[1];
+    {
+        struct vte *vt = *(struct vte **)((char *)self + 0x18);
+        ((void (*)(void *, void *, s32))vt[7].pfn)((char *)self + vt[7].delta, &tmp, 4);
+    }
+    n = fn_802DE1B0(arg1);
+    for (i = 0; i < n; i++) {
+        struct vte *vt = *(struct vte **)((char *)self + 0x18);
+        s32 *base = arg1[0];
+        s32 v = *(s32 *)((char *)base + (i << 2));
+        ((void (*)(void *, void *, s32))vt[7].pfn)((char *)self + vt[7].delta, &v, 4);
+    }
+    return self;
 }
 
 void fn_802DEBE4(void *arg0, s32 arg1) {
