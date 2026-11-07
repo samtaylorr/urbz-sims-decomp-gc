@@ -235,16 +235,11 @@ void fn_80133A8C(char *arg0) {
 
 void *fn_80133AE4(void *self, s32 idx) {
     struct { s32 a[8]; } *base;
-    struct { s32 a[8]; } *end;
 
-    if (idx >= 0) {
-        base = M2C_FIELD(self, void **, 0x90);
-        end = M2C_FIELD(self, void **, 0x94);
-        if ((u32)idx < (u32)((typeof(base))end - base)) {
-            return &base[idx];
-        }
+    if (idx < 0 || (u32)idx >= (u32)(M2C_FIELD(self, typeof(base) *, 0x94) - M2C_FIELD(self, typeof(base) *, 0x90))) {
+        return NULL;
     }
-    return NULL;
+    return &M2C_FIELD(self, typeof(base) *, 0x90)[idx];
 }
 
 void fn_80133C74(char *self, s32 idx) {
@@ -436,7 +431,8 @@ s32 fn_801390C0(void *self) {
     s32 v = *fn_80141C5C(p, 0x35);
     if (v != 0) {
         v <<= *fn_80141C5C(p, 1);
-        v = (u8)(v | (v >> 8));
+        v |= v >> 8;
+        v &= 0xFF;
     }
     return v;
 }
