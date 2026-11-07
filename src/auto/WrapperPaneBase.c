@@ -778,9 +778,10 @@ void fn_800CE5A8(void *arg0) {
 }
 
 void fn_800CE8F4(void *arg0, s32 arg1) {
-    void **arr = (void **)((u8 *)arg0 + 0x40);
     if (M2C_FIELD(arg0, s32 *, 4) & (0x100 << arg1)) {
-        void *p = arr[arg1];
+        s32 off = arg1 * 4;
+        void **arr = (void **)((u8 *)arg0 + 0x40);
+        void *p = *(void **)((u8 *)arr + off);
         M2C_FIELD(p, s32 *, 4) |= 0x10800000;
     }
 }
