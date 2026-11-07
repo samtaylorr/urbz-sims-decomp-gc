@@ -795,7 +795,8 @@ void fn_800CE924(void *arg0, s32 arg1) {
 
 void fn_800CE954(void *arg0, s32 arg1) {
     if (M2C_FIELD(arg0, s32 *, 4) & (0x100 << arg1)) {
-        void *p = ((void **)((u8 *)arg0 + 0x40))[arg1];
+        void **arr = (void **)((u8 *)arg0 + 0x40);
+        void *p = arr[arg1];
         M2C_FIELD(p, s32 *, 4) |= 0x40800000;
     }
 }
@@ -944,10 +945,10 @@ void *fn_800CF538(void *arg0, s32 arg1) {
     temp_r11 = (u8 *)arg0 + 0x20;
     f = lbl_803D12D0[0];
     M2C_FIELD(arg0, M2C_UNK **, 0x1C) = lbl_8040B028;
-    M2C_FIELD(arg0, f32 *, 0x18) = f;
     M2C_FIELD(arg0, f32 *, 0xC) = f;
     M2C_FIELD(arg0, f32 *, 0x10) = f;
     M2C_FIELD(arg0, f32 *, 0x14) = f;
+    M2C_FIELD(arg0, f32 *, 0x18) = f;
     M2C_FIELD(temp_r11, s32 *, 0x24) = 0;
     fn_800CBFB8(temp_r11);
     M2C_FIELD(arg0, s32 *, 0x6C) = 0;
