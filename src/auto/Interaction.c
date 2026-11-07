@@ -1242,9 +1242,9 @@ void fn_80114008(s32 arg0) {
     fn_800F65C4(arg0 + 0x14);
 }
 
-void fn_8011402C(s32 arg0) {
-    M2C_UNK fn_800F6498(s32);
-    fn_800F6498(arg0 + 0x14);
+s32 fn_8011402C(s32 arg0) {
+    s32 fn_800F6498(s32);
+    return fn_800F6498(arg0 + 0x14);
 }
 
 void fn_80114318(void *obj, s32 arg1, s32 arg2, s32 arg3) {
