@@ -506,6 +506,22 @@ char **fn_802C774C(char **arg0) {
     }
 }
 
+M2C_UNK fn_802C77D0(s32 arg0, s32 arg1) {
+    M2C_UNK fn_802C6D20(s32, s32, s32);
+    char **p = (char **)arg0;
+    s32 n;
+
+    n = fn_802C6A5C((s32 *)p);
+    if (n != 0 && (*p)[n - 1] == arg1) {
+        n--;
+        while (n != 0 && (*p)[n - 1] == arg1) {
+            n--;
+        }
+        fn_802C6D20(arg0, arg0, n);
+    }
+    return arg0;
+}
+
 char **fn_802C7874(char **arg0, s32 arg1) {
     M2C_UNK fn_802C69B0(s32, s32);
     char *p;
@@ -731,8 +747,8 @@ void *fn_802C83E4(void *arg0, s32 arg1) {
 loop_2:
         temp_r9 = M2C_FIELD(arg0, void **, 0x18);
         tmp = *var_r31;
-        var_r31++;
         M2C_FIELD(temp_r9, M2C_UNK (**)(void *, f32 *, M2C_UNK), 0x3C)(arg0 + M2C_FIELD(temp_r9, s16 *, 0x38), &tmp, 4);
+        var_r31++;
         var_r30 -= 1;
         if (var_r30 != 0) {
             goto loop_2;
@@ -830,10 +846,10 @@ void fn_802C85B4(f32 *m, s32 col, f32 *in) {
 f32 *fn_802C85E8(f32 *m) {
     void fn_8025FB2C(f32 *, f32 *);
     f32 v[4];
-    f32 *p;
     s32 i;
+    f32 *p;
+    p = v;
     for (i = 0; i <= 2; i++) {
-        p = v;
         fn_802C8530(m, i, v);
         if (v[0] != 0.0f || p[1] != 0.0f || p[2] != 0.0f) {
             fn_8025FB2C(p, p);
@@ -928,14 +944,14 @@ f32 *fn_802C88F0(f32 *m, f32 angle) {
     void fn_802C876C(void *);
     f32 fn_80243694(f32);
     f32 fn_802434CC(f32);
-    f32 c, s;
+    f32 s, c;
     fn_802C876C(m);
     s = fn_80243694(angle);
     c = fn_802434CC(angle);
-    m[9] = -s;
-    m[6] = s;
-    m[10] = c;
     m[5] = c;
+    m[6] = s;
+    m[9] = -s;
+    m[10] = c;
     return m;
 }
 
@@ -2280,6 +2296,24 @@ void *fn_802CF22C(u32 size) {
 
 void fn_802CF2BC(void *arg0) {
     fn_802D1A00(fn_802D0C44(arg0), arg0);
+}
+
+void fn_802CF60C(void *self, void *arg1) {
+    void fn_802CF67C(void *, u8 *, f32 *);
+    void fn_802CFACC(void *, f32 *, s32);
+    u8 *color = arg1;
+    struct {
+        f32 buf[4];
+        u8 bgr[8];
+    } s;
+    u32 c = *(u32 *)color;
+
+    s.bgr[0] = color[3];
+    s.bgr[1] = c >> 8;
+    s.bgr[2] = c >> 16;
+    s.bgr[3] = c >> 24;
+    fn_802CF67C(self, s.bgr, s.buf);
+    fn_802CFACC(self, s.buf, M2C_FIELD(color, s32 *, 4));
 }
 
 void fn_802CFEC4(void *self, u8 *node) {
