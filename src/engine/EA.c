@@ -84,9 +84,8 @@ void fn_802D8040(char *self, s32 pos, s32 whence) {
     extern s32 lbl_803FD2A4[];
     char *vt = *(char **)(self + 0x28);
     char *vt2;
-    s32 w = lbl_803FD2A4[whence];
 
-    (*(void (**)(char *, s32, s32))(vt + 0x2C))(self + *(s16 *)(vt + 0x28), pos, w);
+    (*(void (**)(char *, s32, u32))(vt + 0x2C))(self + *(s16 *)(vt + 0x28), pos, *(u32 *)((char *)lbl_803FD2A4 + whence * 4));
     vt2 = *(char **)(self + 0x28);
     (*(void (**)(char *))(vt2 + 0x44))(self + *(s16 *)(vt2 + 0x40));
 }
@@ -1010,6 +1009,59 @@ f32 fn_802DE6DC(u32 **self, s32 pos) {
     } conv;
     conv.u = fn_802DE634(self, pos, 32);
     return conv.f;
+}
+
+s32 fn_802DE818(void *self, f32 f) {
+    s32 n;
+    for (n = 2; n < 32; n++) {
+        if (1.0f / (f32) ((1 << n) - 1) <= f) {
+            break;
+        }
+    }
+    return n;
+}
+
+s32 fn_802DE8AC(s32 x) {
+    s32 n;
+    for (n = 1; n < 32; n++) {
+        if (x <= (1 << n) - 1) {
+            break;
+        }
+    }
+    return n;
+}
+
+s32 fn_802DE8E0(void *self, f32 f, s32 bits) {
+    f32 max = (f32) ((1 << (bits - 1)) - 1);
+    f32 v;
+    f *= max;
+    if (f < 0.0f) {
+        f -= 0.5f;
+    } else {
+        f += 0.5f;
+    }
+    if (f < -max) {
+        v = -max;
+    } else if (f > max) {
+        v = max;
+    } else {
+        v = f;
+    }
+    return (s32) v;
+}
+
+s32 fn_802DE978(void *self, f32 f, s32 bits) {
+    f32 max = (f32) ((1 << bits) - 1);
+    f32 t = f * max + 0.5f;
+    f32 v;
+    if (t < 0.0f) {
+        v = 0.0f;
+    } else if (t > max) {
+        v = max;
+    } else {
+        v = t;
+    }
+    return (s32) v;
 }
 
 f32 fn_802DE9F8(void *self, s32 bits) {
