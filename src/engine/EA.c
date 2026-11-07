@@ -345,14 +345,15 @@ s32 fn_802D8B2C(void *arg0) {
 void fn_802D8BEC(void *arg0, s32 arg1) {
     extern u8 lbl_80419658[];
     M2C_UNK fn_802D8C4C(void *);
-    void fn_802D20E8();
+    void fn_802D8E50(void *);
+    extern void fn_802D20E8(s32);
     M2C_FIELD(arg0, void **, 0x338) = lbl_80419658;
     if (M2C_FIELD(arg0, s32 *, 0x318) != 0) {
         fn_802D8E50(arg0);
     }
     fn_802D8C4C(arg0);
     if (arg1 & 1) {
-        fn_802D20E8(arg0);
+        fn_802D20E8((s32)arg0);
     }
 }
 
