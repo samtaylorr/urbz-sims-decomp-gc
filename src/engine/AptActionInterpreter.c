@@ -172,6 +172,20 @@ void fn_80280E28(void) {
 
 }
 
+void fn_80281168(void *arg0) {
+    s32 fn_802B71E8(void *);
+    void fn_802BBE7C(void *);
+    extern void *lbl_80494B48;
+    char *obj = AptStack_Peek(arg0, 0);
+    if (fn_802B71E8(obj) == 0) {
+        char *vt = *(char **)(obj + 4);
+        (*(void (**)(char *))(vt + 0x14))(obj + *(s16 *)(vt + 0x10));
+    }
+    if (--M2C_FIELD(arg0, s32 *, 0) == 0 && M2C_FIELD(lbl_80494B48, s32 *, 4) != 0) {
+        fn_802BBE7C(lbl_80494B48);
+    }
+}
+
 void fn_80281E3C(void) {
 
 }
