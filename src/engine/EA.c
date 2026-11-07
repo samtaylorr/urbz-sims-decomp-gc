@@ -899,6 +899,16 @@ s32 fn_802DB2EC(void *arg0, s32 (*arg1)(s32, s32), s32 arg2, s32 arg3, s32 arg4,
     return result;
 }
 
+void fn_802DB5F0(void *arg0, s32 *arg1) {
+    if (arg1 != 0 && arg1[0] == 0x534E4150) {
+        if (arg1[4] != 0) {
+            fn_802DB9F8(arg0, arg1);
+        } else {
+            arg1[10] = 0;
+        }
+    }
+}
+
 void *fn_802DB640(void *arg0, s32 arg1, s32 arg2) {
     extern void fn_80248488(void *, s32, s32);
     fn_80248488(arg0, 0, arg1);
@@ -1342,7 +1352,7 @@ void fn_802DE030(void *self, s32 pos, s32 n) {
     M2C_UNK fn_802DDDD8(void *, s32, s32);
     s32 old = M2C_FIELD(self, s32 *, 4);
     s32 size = old + n;
-    s32 count;
+    s32 i;
     s32 grow;
 
     if (size > M2C_FIELD(self, s32 *, 8)) {
@@ -1354,8 +1364,8 @@ void fn_802DE030(void *self, s32 pos, s32 n) {
     } else {
         M2C_FIELD(self, s32 *, 4) = size;
     }
-    for (count = old - pos; count > 0; count--) {
-        fn_802DDCAC((s32)self, size--, fn_802DDC6C((s32)self, old--));
+    for (i = 0; i < old - pos; i++) {
+        fn_802DDCAC((s32)self, size - i, fn_802DDC6C((s32)self, old - i));
     }
 }
 
