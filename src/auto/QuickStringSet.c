@@ -1420,6 +1420,15 @@ s32 fn_800FB614(s32 *self) {
     return self[1];
 }
 
+s32 fn_800FB61C(void *arg0) {
+    u8 *obj = M2C_FIELD(arg0, u8 **, 8);
+    s32 result = 0;
+    if (obj == NULL || (*(s32 (**)(u8 *))(*(u8 **)obj + 0x2C))(obj + *(s16 *)(*(u8 **)obj + 0x28)) == 0) {
+        result = 1;
+    }
+    return result;
+}
+
 s32 fn_800FB678(void *arg0) {
     s32 var_r9;
 
