@@ -1461,6 +1461,7 @@ void fn_800FB8AC(void) {
 }
 
 s32 fn_800FB8E4(void *arg0, s32 *arg1) {
+    typedef struct { s8 x; s8 y; s8 z; } Tile;
     extern u8 *lbl_80496668;
     extern s32 fn_80105B84(void *);
     extern s32 fn_80105B78(void *);
@@ -1468,16 +1469,16 @@ s32 fn_800FB8E4(void *arg0, s32 *arg1) {
     u8 *g = lbl_80496668;
     u8 *obj;
     u8 *vt;
-    u8 buf[8];
+    Tile tile;
 
     obj = (*(u8 *(**)(u8 *, void *))(*(u8 **)g + 0x94))(g + *(s16 *)(*(u8 **)g + 0x90), arg0);
     if (obj != NULL) {
         vt = *(u8 **)(obj + 4);
-        (*(void (**)(void *, u8 *))(vt + 0x31C))(buf, obj + *(s16 *)(vt + 0x318));
-        arg1[0] = fn_80105B84(buf);
-        arg1[1] = fn_80105B78(buf);
+        (*(void (**)(Tile *, u8 *))(vt + 0x31C))(&tile, obj + *(s16 *)(vt + 0x318));
+        arg1[0] = fn_80105B84(&tile);
+        arg1[1] = fn_80105B78(&tile);
         arg1[2] = 1;
-        fn_801055FC(buf, 2);
+        fn_801055FC(&tile, 2);
         return 1;
     } else {
         return 0;
