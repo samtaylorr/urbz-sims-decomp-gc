@@ -859,14 +859,15 @@ void fn_800CB3B8(void *arg0) {
     extern u8 lbl_803D0F58[];
     void fn_800CF02C();
     void fn_800CE5A8(void *);
+    void fn_800CEEC4();
     void *temp_r9;
 
     M2C_FIELD(arg0, s32 *, 0x70) = M2C_FIELD(arg0, s32 *, 0x70) - 1;
-    fn_800CF02C(arg0, lbl_803D0F58);
+    ((void (*)(void *, u8 *))fn_800CF02C)(arg0, lbl_803D0F58);
     temp_r9 = M2C_FIELD(arg0, void **, 0x6C);
     M2C_FIELD(temp_r9, u32 *, 4) = M2C_FIELD(temp_r9, u32 *, 4) & ~1;
     fn_800CE5A8(temp_r9);
-    fn_800CEEC4(arg0);
+    ((void (*)(void *))fn_800CEEC4)(arg0);
 }
 
 void fn_800CBCA4(void *self, s32 arg1) {
