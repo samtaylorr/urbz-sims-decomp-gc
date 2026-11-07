@@ -71,8 +71,13 @@ static inline void QSSVec1C_Destroy(QSSElem1C *first, QSSElem1C *last) {
 }
 
 static inline void QSSVec1C_Erase(QSSVec1C *v, QSSElem1C *first, QSSElem1C *last) {
-    QSSVec1C_Destroy(first, v->end);
-    v->end = first;
+    QSSElem1C *src = last;
+    QSSElem1C *dst = first;
+    while (src != v->end) {
+        *dst++ = *src++;
+    }
+    QSSVec1C_Destroy(dst, v->end);
+    v->end = v->end - (last - first);
 }
 
 static inline void QSSVec1C_Resize(QSSVec1C *v, u32 n, QSSElem1C *val) {
@@ -1315,6 +1320,30 @@ void fn_800FB8AC(void) {
 
     vt = *(void **)lbl_80496648;
     ((void (*)(void *))M2C_FIELD(vt, void **, 0x4C))((char *)lbl_80496648 + M2C_FIELD(vt, s16 *, 0x48));
+}
+
+s32 fn_800FB8E4(void *arg0, s32 *arg1) {
+    struct QSSPos { s32 a; s32 b; s32 c; };
+    extern u8 *lbl_80496668;
+    extern s32 fn_80105B84(void *);
+    extern s32 fn_80105B78(void *);
+    extern void fn_801055FC(void *, s32);
+    u8 *g = lbl_80496668;
+    u8 *obj;
+    u8 *vt;
+    struct QSSPos pos;
+
+    obj = (*(u8 *(**)(u8 *, void *))(*(u8 **)g + 0x94))(g + *(s16 *)(*(u8 **)g + 0x90), arg0);
+    if (obj == NULL) {
+        return 0;
+    }
+    vt = *(u8 **)(obj + 4);
+    pos = (*(struct QSSPos (**)(u8 *))(vt + 0x31C))(obj + *(s16 *)(vt + 0x318));
+    arg1[0] = fn_80105B84(&pos);
+    arg1[1] = fn_80105B78(&pos);
+    arg1[2] = 1;
+    fn_801055FC(&pos, 2);
+    return 1;
 }
 
 extern u8 lbl_8040D5A0[];
