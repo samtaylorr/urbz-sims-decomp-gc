@@ -1322,7 +1322,7 @@ char *fn_80112A74(char *self, s32 arg1, s32 arg2, s32 arg3) {
         *(s32 *)(p + 0x14) = arg3;
     }
     for (it = *(char **)(p + 0); it != *(char **)(p + 4); it += 0x58) {
-        if (*(s32 *)(it + 4) == arg2 && fn_80112304(*(s16 *)(it + 8)) != 0) {
+        if (*(s32 *)(it + 4) == arg2 && fn_80112304(*(s16 *)(it + 8)) == 0) {
             return it;
         }
     }
