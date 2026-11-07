@@ -1328,6 +1328,7 @@ void fn_801C5A4C(CasFlags *self, s32 which, s32 row, u32 idx, s32 on) {
 
 void fn_801C5AC4(CasBits *arg0, s32 arg1, s32 arg2, u32 arg3, s32 arg4) {
     s32 idx;
+    u32 word;
     u32 mask;
 
     if (arg3 > 0x3FF) {
@@ -1337,13 +1338,12 @@ void fn_801C5AC4(CasBits *arg0, s32 arg1, s32 arg2, u32 arg3, s32 arg4) {
     if (arg1 != 0) {
         idx = 1;
     }
-    mask = 1;
-    mask <<= arg3 & 0x1F;
-    arg3 >>= 5;
+    word = arg3 >> 5;
+    mask = 1 << (arg3 & 0x1F);
     if (arg4 != 0) {
-        arg0->bits[idx][arg2][arg3] |= mask;
+        arg0->bits[idx][arg2][word] |= mask;
     } else {
-        arg0->bits[idx][arg2][arg3] &= ~mask;
+        arg0->bits[idx][arg2][word] &= ~mask;
     }
 }
 
