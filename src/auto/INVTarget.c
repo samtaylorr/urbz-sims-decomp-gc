@@ -2982,6 +2982,13 @@ void *fn_801FB790(void *arg0) {
     return NULL;
 }
 
+s32 fn_801FB8CC(INVPair *arg0) {
+    if (arg0 == NULL) {
+        return 0xD59C7BB5;
+    }
+    return ((s32 *)arg0->a)[2];
+}
+
 s32 fn_801FB8EC(void **arg0) {
     if (arg0 != NULL) {
         return M2C_FIELD(*arg0, s32 *, 0);
@@ -4407,24 +4414,24 @@ u8 *fn_802208C0(void *self, u8 *p) {
     return *(u8 **)(p + 0xC);
 }
 
-u8 *fn_802208D8(u8 *list, s32 idx) {
+u8 *fn_802208D8(u8 *self, s32 idx) {
+    u8 *list = self;
     u8 *found = NULL;
-    u8 *p = list;
     s32 i = 0;
-    p = *(u8 **)(list + 0x4);
-    if (*(s32 *)(p + 0x4) != 0) {
-        for (p = *(u8 **)(list + 0x0); p != NULL && found == NULL; p = *(u8 **)(p + 0x4), i++) {
+    if (*(s32 *)(*(u8 **)(list + 0x4) + 0x4) != 0) {
+        for (self = *(u8 **)(list + 0x0); self != NULL && found == NULL; self = *(u8 **)(self + 0x4), i++) {
             if (i == idx) {
-                found = p;
+                found = self;
             }
         }
     } else {
-        while (*(s32 *)(p + 0x8) != 0) {
-            p = *(u8 **)(p + 0x0);
+        self = *(u8 **)(list + 0x4);
+        while (*(s32 *)(self + 0x8) != 0) {
+            self = *(u8 **)(self + 0x0);
         }
-        for (p = *(u8 **)(p + 0xC); p != NULL && found == NULL; p = *(u8 **)(p + 0xC), i++) {
+        for (self = *(u8 **)(self + 0xC); self != NULL && found == NULL; self = *(u8 **)(self + 0xC), i++) {
             if (i == idx) {
-                found = p;
+                found = self;
             }
         }
     }
