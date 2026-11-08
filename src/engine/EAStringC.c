@@ -134,11 +134,13 @@ void fn_80291DA0(void *arg0, s32 arg1) {
     extern s32 lbl_8049613C;
     extern void fn_80291BE0(void *, s32, f32 *);
     f32 *v = (f32 *)arg1;
+    f32 a = lbl_803ECA0C[0];
+    f32 b = lbl_803ECA10[0];
 
-    v[3] = lbl_803ECA10[0];
-    v[1] = lbl_803ECA0C[0];
-    v[0] = lbl_803ECA0C[0];
-    v[2] = lbl_803ECA10[0];
+    v[3] = b;
+    v[1] = a;
+    v[0] = a;
+    v[2] = b;
     fn_80291BE0(arg0, lbl_8049613C, v);
 }
 
@@ -609,6 +611,22 @@ s32 fn_80298FF4(void *arg0) {
         n++;
     }
     return n;
+}
+
+s32 fn_80299018(void *arg0, s32 arg1) {
+    extern s32 fn_80298FF4(void *);
+    s32 n = fn_80298FF4(arg0);
+    void *p;
+
+    if (arg1 > n) {
+        return -1;
+    }
+    p = arg0;
+    while (n != arg1) {
+        n--;
+        p = M2C_FIELD(p, void **, 0x4C);
+    }
+    return M2C_FIELD(p, s32 *, 8);
 }
 
 s32 fn_80299078(void *arg0) {
@@ -4721,10 +4739,11 @@ void *fn_802BBF08(void *arg0, s32 arg1) {
         p = lbl_80494DA0[0](size);
         M2C_FIELD(arg0, u16 **, 0) = p;
         p[0] = 1;
-        M2C_FIELD(arg0, u16 **, 0)[2] = size - 9;
-        M2C_FIELD(arg0, s16 **, 0)[1] = 0;
-        M2C_FIELD(arg0, s16 **, 0)[3] = 0;
-        M2C_FIELD(arg0, char **, 0)[8] = '\0';
+        size -= 9;
+        M2C_FIELD(arg0, u16 **, 0)[2] = size;
+        M2C_FIELD(arg0, u16 **, 0)[1] = 0;
+        M2C_FIELD(arg0, u16 **, 0)[3] = M2C_FIELD(arg0, u16 **, 0)[1] * 0;
+        M2C_FIELD(arg0, u8 **, 0)[8] = 0;
     } else {
         M2C_FIELD(arg0, u16 **, 0) = lbl_803FCE5C;
         lbl_803FCE5C[0]++;
@@ -4907,15 +4926,15 @@ s32 fn_802BD6A8(void **self, const char *s) {
     extern u32 fn_80248808(const char *);
     extern s32 fn_80248268(const char *, const char *, u32);
     struct Buf { u16 ref; u16 len; s32 cap; char data[1]; };
+    u16 len;
     u32 slen;
-    u32 len;
 
     len = ((struct Buf *)*self)->len;
     slen = fn_80248808(s);
-    if (len >= slen) {
-        return fn_80248268(&((struct Buf *)*self)->data[len] - slen, s, slen) == 0;
+    if (len < slen) {
+        return 0;
     }
-    return 0;
+    return fn_80248268(((struct Buf *)*self)->data + len - slen, s, slen) == 0;
 }
 
 inline char *fn_802BD8FC(void **self, s32 n) {
