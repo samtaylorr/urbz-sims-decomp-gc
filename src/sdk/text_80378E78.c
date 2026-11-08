@@ -1322,6 +1322,27 @@ void *fn_80382840(void) {
     return lbl_8047E260;
 }
 
+void fn_8038284C(s32 *arg0, s32 *arg1, s16 *arg2) {
+    s32 q;
+
+    q = *arg0 / 160;
+    if (q != 0) {
+        if (q > 20) {
+            q = 20;
+        }
+        if (q < -20) {
+            q = -20;
+        }
+        *arg1 = *arg0;
+        *arg0 -= q * 160;
+        *arg2 = -q;
+    } else {
+        *arg0 = 0;
+        *arg1 = 0;
+        *arg2 = 0;
+    }
+}
+
 void fn_80382CB8(void) {
     extern s32 lbl_80496418;
     extern s32 lbl_8049641C;
@@ -2497,6 +2518,7 @@ s32 fn_8038C018(u8 *card, u8 *ent) {
 }
 
 s32 fn_8038C644(s32 *fileInfo) {
+    s32 fn_80389134(s32 *, s32);
     s32 *card;
     s32 result;
 
