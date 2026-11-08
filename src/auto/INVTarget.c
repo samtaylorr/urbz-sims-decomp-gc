@@ -2814,6 +2814,12 @@ void fn_801F82E4(s32 arg0, s32 arg1) {
     fn_801F8FD4(arg0, arg1, 1);
 }
 
+void fn_801F8314(s32 arg0, s32 arg1) {
+    void fn_801F83C8(s32, s32);
+    ((u8 *)arg0 + 0xED)[arg1] = 0;
+    fn_801F83C8(arg0, arg1);
+}
+
 void fn_801F83BC(void) {
 
 }
@@ -4224,7 +4230,7 @@ void fn_802184BC(void *arg0) {
     s32 fn_80049B6C(void *);
     void fn_8000BFD0(void *, s32, s32);
     extern u8 lbl_8041F94C[];
-    s32 *slots;
+    s32 *slot;
     s32 n;
     s32 i;
 
@@ -4232,12 +4238,13 @@ void fn_802184BC(void *arg0) {
     if (fn_80049B6C(lbl_8041F94C) != 0) {
         n = 2;
     }
-    slots = (s32 *)((char *)arg0 + 0x8C);
+    slot = (s32 *)((char *)arg0 + 0x8C);
     for (i = 0; i < n; i++) {
-        if (slots[i] != -1) {
-            fn_8000BFD0(*(void **)(lbl_8041F94C + 0xD0), i, slots[i]);
-            slots[i] = -1;
+        if (*slot != -1) {
+            fn_8000BFD0(*(void **)(lbl_8041F94C + 0xD0), i, *slot);
+            *slot = -1;
         }
+        slot++;
     }
 }
 
@@ -4882,6 +4889,15 @@ void fn_802233F0(s32 arg0, void *arg1, void *arg2) {
     M2C_FIELD(arg1, s32 *, 0) = arg0;
     M2C_FIELD(arg1, s32 *, 4) = (s32) M2C_FIELD(arg2, s32 *, 8);
     M2C_FIELD(arg2, M2C_UNK (**)(void *), 0xC)(arg1);
+}
+
+void fn_80223428(void *arg0, s32 flags) {
+    void fn_802D20E8(void *);
+    extern char lbl_80417D08[];
+    M2C_FIELD(arg0, char **, 0x58) = lbl_80417D08;
+    if (flags & 1) {
+        fn_802D20E8(arg0);
+    }
 }
 
 void fn_8022345C(void) {
