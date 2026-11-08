@@ -1111,6 +1111,13 @@ s32 fn_80385AC0(void *arg0) {
     return 1;
 }
 
+void fn_80385AF0(void *arg0, u32 arg1) {
+    extern u8 lbl_8048FAA0[][0x60];
+    u8 *e = lbl_8048FAA0[M2C_FIELD(arg0, s32 *, 0x18)];
+    *(u32 *)(e + 0xc) = arg1;
+    *(u32 *)(e + 4) |= 0x40000000;
+}
+
 void fn_80385B18(void *arg0, u32 arg1) {
     extern u8 lbl_8048FAA0[][0x60];
     u8 *e = lbl_8048FAA0[M2C_FIELD(arg0, s32 *, 0x18)];
