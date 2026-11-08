@@ -4385,7 +4385,7 @@ void fn_8021825C(void *arg0, char *arg1, char *arg2) {
         case 2:
             fn_801DB274(lbl_803E90E4, 6);
             break;
-        default:
+        case 3:
             break;
         }
     }
