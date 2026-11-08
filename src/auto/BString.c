@@ -1380,12 +1380,29 @@ void fn_800D7A5C(s32 *self) {
     self[6] = 0;
 }
 
+void fn_800D84EC(s32 arg0) {
+    extern s32 lbl_8041F7C4[];
+    extern f32 lbl_803D432C;
+    extern s32 lbl_8041F94C[];
+    extern void fn_800E3DBC(s32, s32, f32);
+    extern void fn_80012020(void *);
+    s32 i;
+    lbl_8041F7C4[0] = 0;
+    fn_800E3DBC(arg0, 0, lbl_803D432C);
+    for (i = 0; i < 2; i++) {
+        void *p = (void *)lbl_8041F94C[0x160 / 4 + i];
+        if (p != NULL) {
+            fn_80012020(p);
+        }
+    }
+}
+
 void fn_800E3BC0(void);
 void fn_800D855C(void) {
     fn_800E3BC0();
 }
 
-void fn_800E3D4C(void);
+void fn_800E3D4C();
 void fn_800D857C(void) {
     fn_800E3D4C();
 }
