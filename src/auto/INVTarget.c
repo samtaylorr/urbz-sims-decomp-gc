@@ -4394,7 +4394,7 @@ void fn_8020A500(u8 *arg0) {
     s32 zero;
 
     fn_800F1B80(arg0 + 0xAC, (h1 = fn_8004C168(lbl_8041F94C, lbl_803E718C)).p != NULL ? (void *)*h1.p : NULL);
-    INV_setStr(arg0 + 0xB4, lbl_803E70E8);
+    INV_setStrT(arg0 + 0xB4, lbl_8041F94C, lbl_803E70E8);
     fn_800F1B80(arg0 + 0xB8, (h3 = fn_8004C168(lbl_8041F94C, lbl_803E70EC)).p != NULL ? (void *)*h3.p : NULL);
     fn_800F1B80(arg0 + 0xBC, lbl_803E6F74);
     zero = 0;
@@ -5899,7 +5899,7 @@ s32 fn_80229F5C(void *arg0) {
 void fn_8022A150(void) {
     s32 fn_80014EE0(void);
     void fn_80014F24(s32, s32, s32);
-    void fn_80225508(void);
+    s32 fn_80225508(void);
     void fn_80225304(void);
     fn_80014F24(fn_80014EE0(), 0, 0);
     fn_80014F24(fn_80014EE0(), 1, 0);
