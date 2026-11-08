@@ -77,15 +77,17 @@ s16 fn_80149BE4(void *arg0) {
 }
 
 s32 fn_8014A690(char *arg0) {
-    s32 i;
+    char **tbl;
     s32 total;
-    s32 n;
-    char *it;
+    s32 i;
 
+    tbl = (char **)(arg0 + 0x50);
     total = 0;
     for (i = 0; i <= 0xFF; i++) {
-        n = 0;
-        for (it = M2C_FIELD(arg0 + 0x50, char **, i * 4); it != NULL; it = M2C_FIELD(it, char **, 0xA0)) {
+        char *it = tbl[i];
+        s32 n = 0;
+        while (it != NULL) {
+            it = M2C_FIELD(it, char **, 0xA0);
             n++;
         }
         total += n;
@@ -384,6 +386,17 @@ s32 fn_801506B4(void) {
     return 0;
 }
 
+void fn_80150F98(void *self) {
+    s32 *p = (s32 *)((char *)self + 0x6DC);
+    if (p[2] != 0) {
+        fn_803A479C(p, (void *)((s32 *)p[1])[1]);
+        ((s32 *)p[1])[2] = p[1];
+        ((s32 *)p[1])[1] = 0;
+        ((s32 *)p[1])[3] = p[1];
+        p[2] = 0;
+    }
+}
+
 void fn_80150FFC(s32 arg0) {
     M2C_UNK fn_800F69E8(s32);
     fn_800F69E8(arg0 + 0x560);
@@ -407,6 +420,24 @@ s32 fn_80151038(void *arg0) {
 
 s32 fn_80151040(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x6D8);
+}
+
+extern void fn_803A479C(void *, void *);
+extern char *lbl_80496668;
+void fn_801510BC(s32 *self, s32 a, s32 b) {
+    self[1] = a;
+    self[2] = b;
+    self[0] = a;
+}
+
+s32 fn_801510D0(s32 *self, s32 *other) {
+    if (other[1] != self[1]) {
+        return 0;
+    }
+    if (other[1] == 0) {
+        return 1;
+    }
+    return other[0] == self[0];
 }
 
 void fn_8015121C(void **obj) {
@@ -477,8 +508,7 @@ s32 fn_80157A60(void *arg0) {
 }
 
 s32 fn_80157A74(void *self, s32 i) {
-    s32 *p = M2C_FIELD(self, s32 **, 0x2068);
-    return *(s32 *)((u8 *)p + i * 4);
+    return *(s32 *)(M2C_FIELD(self, char **, 0x2068) + (i << 2));
 }
 
 s32 fn_80157A84(void *arg0) {
@@ -530,12 +560,13 @@ s32 fn_80157F28(void *self) {
     }
     obj = M2C_FIELD(self, u8 **, 4);
     e = *(u8 **)(obj + 4) + 0x2D8;
-    if ((*(s32 (**)(void *))(e + 4))(obj + *(s16 *)e) == 2 ||
-        *fn_80141C5C((s32)self + 0x28, 0x19) != 0) {
-        return 1;
-    }
-    if (found) {
-        return 0;
+    if ((*(s32 (**)(void *))(e + 4))(obj + *(s16 *)e) != 2 &&
+        *fn_80141C5C((s32)self + 0x28, 0x19) == 0) {
+        if (found) {
+            return 0;
+        } else {
+            return 1;
+        }
     }
     return 1;
 }
