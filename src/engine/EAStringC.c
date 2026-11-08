@@ -4046,10 +4046,10 @@ void *fn_802B8F98(void *arg0, s32 idx) {
         return ((void *(*)(void *, s32))fn_802AEABC)((u8 *)arg0 + 8, idx - 2);
     }
     sub = M2C_FIELD(arg0, void **, 0x24);
-    if (sub == NULL) {
-        return NULL;
+    if (sub != NULL) {
+        return fn_80290650(sub, idx - n);
     }
-    return fn_80290650(sub, idx - n);
+    return NULL;
 }
 
 void fn_802B9038(char *self) {
