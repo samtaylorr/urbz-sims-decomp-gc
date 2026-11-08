@@ -396,7 +396,7 @@ void fn_8019B748(void *self, s32 *out) {
 s32 fn_8019B7B4(void *self, s32 arg1) {
     s16 fn_8004E8D0(void *);
     extern u8 lbl_8041F94C[];
-    u8 *arr;
+    s32 off;
     switch (arg1) {
     case 0x18:
         return 0;
@@ -407,8 +407,8 @@ s32 fn_8019B7B4(void *self, s32 arg1) {
         M2C_FIELD(self, s16 *, 0x72) = fn_8004E8D0(lbl_8041F94C);
         break;
     }
-    arr = (u8 *)self + 0x14;
-    return *(s16 *)(arr + arg1 * 2);
+    off = arg1 * 2;
+    return *(s16 *)((u8 *)self + 0x14 + off);
 }
 
 s32 fn_8019B83C(void *self, s32 arg1, u16 **out) {
@@ -1846,12 +1846,11 @@ s32 fn_801A0C10(void *self, u16 arg1, s32 arg2, s32 arg3) {
 s32 fn_801A0CC4(void *self, u32 arg1) {
     M2C_UNK fn_801A0780(s32);
     M2C_UNK fn_801A08DC(void *, s32);
-    u16 *p;
+    struct tab { u8 pad[8]; u16 v[6]; };
 
     fn_801A0780(arg1);
     fn_801A08DC(self, arg1);
-    p = (u16 *)((u8 *)self + 8);
-    return p[fn_801A0690(arg1, 0)];
+    return ((struct tab *)self)->v[fn_801A0690(arg1, 0)];
 }
 
 s32 fn_801A0D1C(void *self, u16 arg1, s32 arg2) {
@@ -2263,10 +2262,11 @@ char *fn_801A2AB0(char *self) {
 s32 fn_801A2AF8(char *self) {
     char **begin = M2C_FIELD(self, char ***, 8);
     s32 n = M2C_FIELD(self, char ***, 0xC) - begin;
-    if (n == 0) {
-        return 0;
+    if (n != 0) {
+        n = (n - 1) * 4;
+        return fn_801A29E0(*(char **)((char *)begin + n)) - M2C_FIELD(self, char **, 0);
     }
-    return fn_801A29E0(begin[n - 1]) - M2C_FIELD(self, char **, 0);
+    return 0;
 }
 
 s32 fn_801A2B54(void *arg0) {
