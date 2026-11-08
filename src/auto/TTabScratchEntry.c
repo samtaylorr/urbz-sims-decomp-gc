@@ -686,6 +686,11 @@ s32 fn_8019F2A8(void) {
     return 0xC;
 }
 
+void fn_8019F2B0(void *self) {
+    extern void *fn_8019D2DC(void *, s32);
+    fn_8019D2DC(self, -1);
+}
+
 extern void fn_8019F2D4(void *);
 void fn_8019F2D4(void *self) {
     extern void *fn_8019D2DC(void *, s32);
