@@ -180,25 +180,30 @@ void fn_8029280C(void *self, void *arg1) {
 
 s32 fn_80292CBC(void *self) {
     extern void fn_802A0890(s32, void *);
-    extern void fn_802BE53C(u16 **, char *);
-    extern void fn_802A5EE0(s32, u16 **, u16 **);
+    extern void fn_802BE53C(void *, char *);
+    extern void fn_802A5EE0(s32, void *, void *);
     extern char lbl_803ECA4C[];
     extern char lbl_803EC8D8[];
     extern s32 lbl_804960F4;
+    extern struct { void *unk0; void (*free)(void *); } *lbl_80494DA0;
     void *obj;
-    u16 *name;
-    u16 *str;
+    u16 *name[2];
+    struct { u16 *p; s32 pad; } str;
     s32 mgr;
+    u16 *p;
 
     obj = M2C_FIELD(self, void **, 0x4C);
     if (obj != NULL) {
         fn_802A0890(M2C_FIELD(obj, s32 *, 0x50) + 0x24, self);
     } else {
-        fn_802BE53C(&name, lbl_803ECA4C);
+        fn_802BE53C(name, lbl_803ECA4C);
         mgr = lbl_804960F4;
         fn_802BE53C(&str, lbl_803EC8D8);
-        fn_802A5EE0(mgr, &str, &name);
-        RefRelease(str);
+        fn_802A5EE0(mgr, &str, name);
+        p = str.p;
+        if (--*p == 0) {
+            lbl_80494DA0->free(p);
+        }
     }
     return lbl_80496130;
 }
@@ -711,6 +716,18 @@ s32 fn_80299DD0(void *arg0) {
 
     ok = 0;
     if (fn_802B70DC(arg0) == 0xC) {
+        ok = fn_802B72D4(arg0) == 0;
+    }
+    return ok;
+}
+
+s32 fn_80299E1C(void *arg0) {
+    extern s32 fn_802B70DC(void *);
+    extern s32 fn_802B72D4(void *);
+    s32 ok;
+
+    ok = 0;
+    if (fn_802B70DC(arg0) == 0xF) {
         ok = fn_802B72D4(arg0) == 0;
     }
     return ok;
