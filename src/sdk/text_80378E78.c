@@ -1785,6 +1785,12 @@ s32 fn_8038DE10(s32 arg0) {
     return var_r4;
 }
 
+s32 fn_8038DE98(void) {
+    extern u32 lbl_80495668;
+    lbl_80495668 = lbl_80495668 * 0x41C64E6D + 0x3039;
+    return (lbl_80495668 >> 16) & 0x7FFF;
+}
+
 extern s32 lbl_80495668;
 void fn_8038DEBC(s32 arg0) {
     lbl_80495668 = arg0;
