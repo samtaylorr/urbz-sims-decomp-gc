@@ -1322,6 +1322,25 @@ void fn_802A0FD4(void ***arg0) {
     }
 }
 
+void fn_802A1298(void **arg0, s32 arg1, f32 *arg2) {
+    extern s32 fn_802B70DC(void *);
+    extern s32 fn_802B72D4(void *);
+    extern void fn_80291BE0(void *, s32, f32 *);
+    char *p;
+
+    for (p = M2C_FIELD(*(char **)*arg0, char **, 0x58); p != NULL; p = M2C_FIELD(p, char **, 0x58)) {
+        if (((*(u32 *)p ^ 0x8000) & 0x8000) == 0) {
+            s32 r = 0;
+            if (fn_802B70DC(p) == 0x13) {
+                r = fn_802B72D4(p) == 0;
+            }
+            if (r == 0 && *M2C_FIELD(p, s32 **, 0x50) < 0) {
+                fn_80291BE0(p, arg1, arg2);
+            }
+        }
+    }
+}
+
 void fn_802A14A0(void ***arg0) {
     M2C_UNK fn_802A1420();
     M2C_UNK fn_803B79BC(void **, M2C_UNK);
