@@ -142,8 +142,8 @@ void fn_8019B330(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     M2C_FIELD(vt, void (**)(void *, s32, s32), 0xD4)((char *)arg0 + M2C_FIELD(vt, s16 *, 0xD0),
         p->a[arg3] + p->b[arg3] - arg2, arg3);
     if (arg3 == 0) {
-        s32 off = arg1 * 4;
-        *(s32 *)((u8 *)p->c + off) += arg2;
+        s32 t = p->c[arg1];
+        p->c[arg1] = t + arg2;
     }
 }
 
@@ -710,6 +710,13 @@ void fn_8019F320(void *arg0, s32 arg1) {
 
 void fn_8019F328(void *arg0, f32 farg0) {
     M2C_FIELD(arg0, f32 *, 0x5C) = farg0;
+}
+
+s32 fn_8019F330(void *arg0) {
+    if (M2C_FIELD(arg0, s32 *, 0x18) == -1) {
+        return M2C_FIELD(arg0, s32 *, 0x28);
+    }
+    return 0;
 }
 
 s32 fn_8019F34C(s32 *self) {
