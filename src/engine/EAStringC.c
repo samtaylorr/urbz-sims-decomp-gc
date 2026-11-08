@@ -953,7 +953,7 @@ void fn_802A0BC0(void *arg0, char *arg1, s32 arg2) {
 void fn_802A0FD4(void ***arg0) {
     M2C_UNK fn_8029142C(void *);
     void *var_r31;
-    s32 sp[0x24];
+    s32 sp[0x22];
 
     var_r31 = M2C_FIELD(**arg0, void **, 0x58);
     sp[0x20] = 0;
@@ -2241,6 +2241,7 @@ s32 fn_802AF6B4(void *arg0) {
     s32 found;
     s32 ok;
     s32 ok2;
+    s32 ret;
 
     found = 0;
     ok = 0;
@@ -2259,9 +2260,11 @@ s32 fn_802AF6B4(void *arg0) {
         }
     }
     if (found != 0) {
-        return (M2C_FIELD(M2C_FIELD(arg0, void **, 0x50), u32 *, 0x1C) >> 6) & 1;
+        ret = (M2C_FIELD(M2C_FIELD(arg0, void **, 0x50), u32 *, 0x1C) >> 6) & 1;
+    } else {
+        ret = 0;
     }
-    return 0;
+    return ret;
 }
 
 void fn_802AFF78(void *arg0, void *arg1, void *arg2) {
