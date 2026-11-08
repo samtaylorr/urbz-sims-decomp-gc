@@ -2611,7 +2611,7 @@ void fn_801F0744(void *arg0, s32 arg1) {
 }
 
 void fn_801F0784(void) {
-    M2C_UNK fn_801EA898(s32);
+    void fn_801EA898(s32);
     extern s32 lbl_80494630;
     fn_801EA898(lbl_80494630);
 }
@@ -4267,9 +4267,6 @@ void fn_80209608(u8 *arg0) {
 
     fn_801F5420((s32)(arg0 + 0x84));
     switch (fn_8020DD5C(*(s32 *)(arg0 + 0x110))) {
-    case -1:
-        INV_setStr(arg0 + 0xAC, NULL);
-        break;
     case 0:
     case 1:
     case 2:
@@ -4280,7 +4277,8 @@ void fn_80209608(u8 *arg0) {
     case 7:
         INV_setStr(arg0 + 0xAC, lbl_803E7058);
         break;
-    default:
+    case -1:
+        INV_setStr(arg0 + 0xAC, NULL);
         break;
     }
     fn_800F1B80(arg0 + 0xB4, (h = fn_8004C168(lbl_8041F94C, lbl_803E7014)).p != NULL ? (void *)*h.p : NULL);
