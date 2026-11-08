@@ -144,6 +144,13 @@ void fn_8019B420(void *self, s32 i, s16 v) {
     ((struct { u8 pad[0x14]; s16 a[1]; } *)self)->a[i] = v;
 }
 
+void fn_8019B430(void *arg0) {
+    extern f32 lbl_803DB4D4[];
+    extern f32 lbl_80494E08;
+    lbl_80494E08 = M2C_FIELD(arg0, f32 *, 0xAC);
+    M2C_FIELD(arg0, f32 *, 0xAC) = lbl_803DB4D4[0];
+}
+
 s32 fn_8019B448(void) {
     return 0;
 }
