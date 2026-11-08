@@ -1920,8 +1920,16 @@ void fn_801A30AC(void) {
 }
 
 void *fn_801A3198(void **arg0, s32 arg1) {
-    if (arg1 >= 0 && arg1 < TTSE_ArrCount(*arg0)) {
-        return (u8 *)*arg0 + (arg1 << 5);
+    if (arg1 >= 0) {
+        u32 base = (u32)*arg0;
+        s32 *p = (s32 *)base;
+        s32 n = 0;
+        if (p != NULL) {
+            n = p[-1];
+        }
+        if (arg1 < n) {
+            return (void *)(base + (arg1 << 5));
+        }
     }
     return NULL;
 }
@@ -2877,8 +2885,8 @@ extern char lbl_80435418[];
 extern char lbl_80435438[];
 void fn_802D23C0();
 void fn_800F6A38(s32, s32);
-s32 fn_801B225C(s32 arg0) {
-    fn_800F6A38(arg0, arg0 + 0x18);
+s32 fn_801B225C(s32 arg0, s32 arg1) {
+    fn_800F6A38(arg0 + 0x18, arg1);
     return 1;
 }
 
