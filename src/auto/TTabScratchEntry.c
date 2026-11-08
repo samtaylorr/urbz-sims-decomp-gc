@@ -3145,6 +3145,23 @@ void *fn_801A47A0(void *self, s32 arg1, s32 arg2) {
     return self;
 }
 
+void fn_801A4834(void *self, s32 arg1) {
+    void fn_801A4D30(void *);
+    void fn_8010515C(void *, s32);
+    void fn_802D20E8(void *);
+    extern u8 lbl_80415048[];
+    extern u8 lbl_80415068[];
+    extern u8 lbl_80415188[];
+    M2C_FIELD(self, void **, 0x10) = lbl_80415048;
+    M2C_FIELD(self, void **, 0) = lbl_80415068;
+    fn_801A4D30(self);
+    fn_8010515C((u8 *)self + 4, 0);
+    M2C_FIELD(self, void **, 0) = lbl_80415188;
+    if (arg1 & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 s32 fn_801A4FA8(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x2C);
 }
