@@ -2832,7 +2832,7 @@ u32 *fn_802B75C0(void *arg0, void *arg1, s32 arg2) {
     u32 *r;
 
     r = ((u32 *(*)(void *, s32))fn_802AE360)(lbl_80494D54 + 8, arg2);
-    if (r == NULL || (~*r & 0x8000)) {
+    if (r == NULL || ((*r ^ 0x8000) & 0x8000)) {
         r = ((u32 *(*)(void *, s32))fn_802AE360)(lbl_80494D58 + 8, arg2);
     }
     return r;
