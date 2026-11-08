@@ -138,10 +138,10 @@ void fn_80291DA0(void *arg0, s32 arg1) {
     f32 b = lbl_803ECA10[0];
     s32 g = lbl_8049613C;
 
-    v[3] = b;
-    v[1] = a;
     v[0] = a;
+    v[1] = a;
     v[2] = b;
+    v[3] = b;
     fn_80291BE0(arg0, g, v);
 }
 
@@ -2849,7 +2849,7 @@ void fn_802AFF78(void *arg0, void *arg1, void *arg2) {
 }
 
 void fn_802B0084(s32 arg0, s32 arg1) {
-    M2C_UNK fn_802B000C(M2C_UNK, s32, s32);
+    void fn_802B000C(void *, void *, void *);
     fn_802B000C(0, arg0, arg1);
 }
 
