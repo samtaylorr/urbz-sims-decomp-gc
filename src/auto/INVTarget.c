@@ -3713,43 +3713,38 @@ void fn_8020DF04(void) {
 }
 
 void fn_8020ECF8(u8 *arg0) {
-    typedef struct { s32 *p; } Handle;
-    Handle fn_8004C168();
-    void fn_800F1B80(void *, void *);
     M2C_UNK fn_801F53A0(void *);
+    INVHandle fn_8004C168();
     extern u8 lbl_8041F94C[];
     extern u8 lbl_803E791C[];
     extern u8 lbl_803E77A0[];
     extern u8 lbl_803E77A4[];
     extern u8 lbl_803E72BC[];
-    Handle h1, h2, h3;
-    s32 zero;
+    INVHandle h1, h2, h3;
 
     fn_800F1B80(arg0 + 0xAC, (h1 = fn_8004C168(lbl_8041F94C, lbl_803E791C)).p != NULL ? (void *)*h1.p : NULL);
-    for (;;) {
+    do {
         fn_800F1B80(arg0 + 0xB4, (h2 = fn_8004C168(lbl_8041F94C, lbl_803E77A0)).p != NULL ? (void *)*h2.p : NULL);
-        break;
-    }
+    } while (0);
     fn_800F1B80(arg0 + 0xB8, (h3 = fn_8004C168(lbl_8041F94C, lbl_803E77A4)).p != NULL ? (void *)*h3.p : NULL);
     fn_800F1B80(arg0 + 0xBC, lbl_803E72BC);
-    zero = 0;
     *(s32 *)(arg0 + 0xA0) = 1;
     *(s32 *)(arg0 + 0x84) = 2;
     *(s32 *)(arg0 + 0x88) = 1;
     *(s32 *)(arg0 + 0x8C) = 3;
-    *(s32 *)(arg0 + 0x98) = zero;
-    *(s32 *)(arg0 + 0xA4) = zero;
-    *(s32 *)(arg0 + 0x94) = zero;
-    *(s32 *)(arg0 + 0x90) = zero;
-    *(s32 *)(arg0 + 0xC0) = zero;
-    *(s16 *)(arg0 + 0xC4) = zero;
-    *(s16 *)(arg0 + 0xC6) = zero;
+    *(s16 *)(arg0 + 0xC6) = *(s16 *)(arg0 + 0xC4) = *(s32 *)(arg0 + 0xC0) = *(s32 *)(arg0 + 0x90) = *(s32 *)(arg0 + 0x94) = *(s32 *)(arg0 + 0xA4) = *(s32 *)(arg0 + 0x98) = 0;
     if (fn_801DB18C(lbl_803E75EC) == 1) {
         *(s32 *)(arg0 + 0xC8) = 2;
     } else {
         *(s32 *)(arg0 + 0xC8) = 1;
     }
     fn_801F53A0(arg0 + 0x84);
+}
+
+void fn_8020F1B8(void *arg0, s32 arg1, void *arg2) {
+    void fn_800F8178(void *, void *);
+    extern u8 lbl_803E72BC[];
+    fn_800F8178(arg2, lbl_803E72BC);
 }
 
 void fn_8020F430(s32 arg0) {
