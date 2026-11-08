@@ -836,12 +836,10 @@ void fn_80152B3C(s32 *arg0) {
 
 void *fn_80152E10(void *arg0, s32 id) {
     s32 fn_8016CCE0(void *);
-    void ***vec;
     void **it;
     void *x;
 
-    vec = (void ***)((char *)arg0 + 0x2058);
-    for (it = M2C_FIELD(arg0, void ***, 0x2058); it != vec[1]; it++) {
+    for (it = M2C_FIELD(arg0, void ***, 0x2058); it != OMIPtrVec_End((OMIPtrVec *)((u8 *)arg0 + 0x2058)); it++) {
         x = M2C_FIELD(*(void **)*it, void **, 4);
         if (fn_8016CCE0(M2C_FIELD(M2C_FIELD(x, void **, 4), void *(**)(void *), 0x32C)((char *)x + M2C_FIELD(M2C_FIELD(x, void **, 4), s16 *, 0x328))) == id) {
             return *it != NULL ? M2C_FIELD(*it, void **, 4) : NULL;
