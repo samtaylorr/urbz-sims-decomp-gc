@@ -17,6 +17,7 @@ void fn_801051C8(s32, s32);
 void fn_8019AFF0(void *);
 
 typedef struct TTSE_Flags36 {
+    s16 unk34;
     u16 rest : 15;
     u16 flag : 1;
 } TTSE_Flags36;
@@ -149,16 +150,14 @@ void fn_8019A38C(s32 *self, void *stream) {
 void fn_8019A7C0(void *self) {
     u16 i;
     for (i = 0; i < 2; i++) {
-        s32 *add = (s32 *)((u8 *)self + 0x7c);
-        s32 *val = (s32 *)((u8 *)self + 0x74);
-        s32 v = add[i];
+        s32 v = ((s32 *)((u8 *)self + 0x7c))[i];
         if (v != 0) {
-            s32 n = val[i] + v;
-            val[i] = n;
+            s32 n = ((s32 *)((u8 *)self + 0x74))[i] + v;
+            ((s32 *)((u8 *)self + 0x74))[i] = n;
             if (n > 999999) {
-                val[i] = 999999;
+                ((s32 *)((u8 *)self + 0x74))[i] = 999999;
             }
-            add[i] = 0;
+            ((s32 *)((u8 *)self + 0x7c))[i] = 0;
         }
     }
 }
@@ -167,17 +166,14 @@ s32 fn_8019ABDC(void *self) {
     s16 x = M2C_FIELD(self, s16 *, 0x14);
     if (x <= 5) {
         return 2;
-    }
-    if (x <= 6) {
+    } else if (x <= 6) {
         return 3;
-    }
-    if (x <= 0x11) {
+    } else if (x <= 0x11) {
         return 0;
+    } else if (x > 0x12) {
+        return 2;
     }
-    if (x <= 0x12) {
-        return 1;
-    }
-    return 2;
+    return 1;
 }
 
 s32 fn_8019AC24(void *arg0) {
@@ -2974,14 +2970,17 @@ s32 fn_801AA3B8(void *self, s32 arg1) {
     s32 row;
     s32 col;
     u8 *p;
+    s32 ret;
     if (M2C_FIELD(lbl_80496660, s32 *, 0x2D4) == 0) {
         tab = M2C_FIELD(self, u8 **, 0x34);
         row = fn_80105B78(arg1);
         col = fn_80105B84(arg1);
         p = (*(u8 ***)(tab + 0xC))[row];
-        return (p[col] & 0x20) == 0;
+        ret = (p[col] & 0x20) == 0;
+    } else {
+        ret = 1;
     }
-    return 1;
+    return ret;
 }
 
 void fn_801AA428(void) {
