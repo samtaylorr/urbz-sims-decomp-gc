@@ -3079,6 +3079,19 @@ s32 fn_802B4EBC(void) {
     return p != 0 ? ((s32 (*)(void *))fn_802AEABC)(p) : 0;
 }
 
+void fn_802B62E4(void) {
+    extern void *lbl_80496140;
+    char *obj;
+    void *vt;
+
+    obj = (char *)lbl_80496130;
+    vt = M2C_FIELD(obj, void **, 4);
+    ((void (*)(void *))M2C_FIELD(vt, void **, 0x1C))(obj + M2C_FIELD(vt, s16 *, 0x18));
+    obj = lbl_80496140;
+    vt = M2C_FIELD(obj, void **, 4);
+    ((void (*)(void *))M2C_FIELD(vt, void **, 0x1C))(obj + M2C_FIELD(vt, s16 *, 0x18));
+}
+
 void fn_802B6E08(s32 *arg0) {
     s32 temp_r0;
 
