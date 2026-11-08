@@ -382,16 +382,15 @@ s32 fn_800A527C(s32 arg0) {
 s32 fn_800A5678(s32 arg0, s32 arg1) {
     s32 fn_8012E048(void *, u8, s32);
     M2C_UNK fn_800A4924(s32, s32);
+    extern struct { s32 unk0, unk4, unk8, unkC; } *lbl_80494FDC;
     extern void *lbl_8049440C;
     extern s32 lbl_80494460;
     s32 ret;
-    s32 h;
 
-    SMC_SetBusy(0);
+    lbl_80494FDC->unkC = 0;
     ret = fn_8012E048(lbl_8049440C, arg0, arg1);
-    h = lbl_80494460;
-    SMC_SetBusy(1);
-    fn_800A4924(h, arg0);
+    lbl_80494FDC->unkC = 1;
+    fn_800A4924(lbl_80494460, arg0);
     return ret;
 }
 
@@ -1044,6 +1043,45 @@ void fn_800AB040(void) {
 
 void fn_800AB044(void) {
 
+}
+
+void fn_800AB048(void *self, s32 idx, s16 *o6, s16 *o5, s16 *o0, s16 *o1, s16 *o7, s16 *o8) {
+    void fn_8012ACB0(void *, s32);
+    u8 *fn_8019A0A4(void);
+    void fn_8019A0CC(void *);
+    s32 fn_8039BAC0(s32, s32, s32, s32, s32 *);
+    extern u8 *lbl_8049440C;
+    extern s32 lbl_80494430;
+    extern u8 *lbl_80496648;
+    s32 buf;
+    u8 *mgr = lbl_8049440C;
+    s32 cur = *(s32 *)(mgr + 0x28) + 1;
+    u8 *obj = lbl_80496648;
+    u8 *vt;
+
+    if (idx != cur) {
+        obj = fn_8019A0A4();
+        vt = *(u8 **)obj;
+        (*(void (**)(void *))(vt + 0x1C))(obj + *(s16 *)(vt + 0x18));
+        fn_8012ACB0(mgr, idx);
+        fn_8039BAC0((s32)obj, (s32)lbl_8049440C, lbl_80494430, 1, &buf);
+        fn_8012ACB0(mgr, cur);
+    }
+    vt = *(u8 **)obj;
+    *o8 = (*(s16 (**)(void *, s32))(vt + 0x34))(obj + *(s16 *)(vt + 0x30), 8);
+    vt = *(u8 **)obj;
+    *o7 = (*(s16 (**)(void *, s32))(vt + 0x34))(obj + *(s16 *)(vt + 0x30), 7);
+    vt = *(u8 **)obj;
+    *o1 = (*(s16 (**)(void *, s32))(vt + 0x34))(obj + *(s16 *)(vt + 0x30), 1);
+    vt = *(u8 **)obj;
+    *o0 = (*(s16 (**)(void *, s32))(vt + 0x34))(obj + *(s16 *)(vt + 0x30), 0);
+    vt = *(u8 **)obj;
+    *o5 = (*(s16 (**)(void *, s32))(vt + 0x34))(obj + *(s16 *)(vt + 0x30), 5);
+    vt = *(u8 **)obj;
+    *o6 = (*(s16 (**)(void *, s32))(vt + 0x34))(obj + *(s16 *)(vt + 0x30), 6);
+    if (idx != cur) {
+        fn_8019A0CC(obj);
+    }
 }
 
 s32 fn_800AB1CC(u8 *arg0) {
