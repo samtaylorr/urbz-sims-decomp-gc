@@ -2092,6 +2092,17 @@ s32 fn_801A9ECC(void) {
     return 0x40;
 }
 
+void fn_801AA45C(void) {
+    extern u8 *lbl_80496658;
+    u8 *obj = lbl_80496658;
+
+    if (obj != NULL) {
+        u8 *vt = *(u8 **)obj;
+        (*(void (**)(void *, s32))(vt + 0xC))(obj + *(s16 *)(vt + 8), 3);
+    }
+    lbl_80496658 = NULL;
+}
+
 void fn_801AA4A8(void) {
 
 }
