@@ -671,6 +671,30 @@ s32 fn_8037E86C(void) {
     return lbl_80496340;
 }
 
+void fn_8037E874(s32 arg0) {
+    extern s32 lbl_80496340;
+    extern s32 lbl_80496344;
+    void fn_80380318(u32, u32);
+
+    switch (arg0) {
+    case 0:
+        if ((u32)lbl_80496340 != 0) {
+            fn_80380318(0, lbl_80496340);
+        }
+        break;
+    case 1:
+        if ((u32)lbl_80496340 != 0) {
+            fn_80380318(0x4000, lbl_80496340 - 0x4000);
+        }
+        break;
+    case 2:
+        if ((u32)lbl_80496340 != 0 && (u32)lbl_80496344 != 0) {
+            fn_80380318(lbl_80496340, lbl_80496344);
+        }
+        break;
+    }
+}
+
 void fn_8037E904(s16 interrupt, void *context) {
     void fn_80252AAC(void *);
     void fn_802528A4(void *);
