@@ -15,6 +15,11 @@ void fn_800F6A38(s32, s32);
 s32 fn_801A0EBC(void *, s32);
 void fn_801051C8(s32, s32);
 void fn_8019AFF0(void *);
+
+typedef struct TTSE_Flags36 {
+    u16 rest : 15;
+    u16 flag : 1;
+} TTSE_Flags36;
 extern u8 lbl_80415370[];
 extern u8 lbl_804152F0[];
 extern char lbl_80435418[];
@@ -2780,18 +2785,28 @@ void *fn_801AA2FC(void *self, s32 arg1) {
     return (*(u8 ***)(tab + 0xC))[row] + col * 8;
 }
 
+void fn_801AA350(void *self, s32 arg1, s64 *arg2) {
+    u8 *tab = M2C_FIELD(self, u8 **, 0x38);
+    s32 row = fn_80105B78(arg1);
+    s32 col = fn_80105B84(arg1);
+    *(s64 *)((*(u8 ***)(tab + 0xC))[row] + col * 8) = *arg2;
+}
+
 s32 fn_801AA3B8(void *self, s32 arg1) {
     extern u8 *lbl_80496660;
     u8 *tab;
     s32 row;
     s32 col;
+    s32 ret;
     if (M2C_FIELD(lbl_80496660, s32 *, 0x2D4) == 0) {
         tab = M2C_FIELD(self, u8 **, 0x34);
         row = fn_80105B78(arg1);
         col = fn_80105B84(arg1);
-        return ((*(u8 ***)(tab + 0xC))[row][col] & 0x20) == 0;
+        ret = ((*(u8 ***)(tab + 0xC))[row][col] & 0x20) == 0;
+    } else {
+        ret = 1;
     }
-    return 1;
+    return ret;
 }
 
 void fn_801AA428(void) {
