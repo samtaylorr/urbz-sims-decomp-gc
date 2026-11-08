@@ -3059,10 +3059,14 @@ void fn_801FF1C4(void *arg0) {
 }
 
 s32 fn_801FF27C(void *arg0, u32 arg1, s32 arg2) {
+    struct S {
+        u8 pad[0x108];
+        s32 arr[12];
+    };
     if (arg1 > 11) {
         return 0;
     }
-    M2C_FIELD(arg0, s32 *, 0x108 + arg1 * 4) = arg2;
+    ((struct S *)arg0)->arr[arg1] = arg2;
     return 1;
 }
 
