@@ -1322,10 +1322,12 @@ void *fn_80382840(void) {
 }
 
 void fn_8038284C(s32 *arg0, s32 *arg1, s16 *arg2) {
+    s32 n;
     s32 q;
 
-    q = *arg0 / 160;
-    if (q != 0) {
+    n = *arg0 / 160;
+    if (n != 0) {
+        q = n;
         if (q > 20) {
             q = 20;
         }
