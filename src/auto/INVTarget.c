@@ -4320,7 +4320,7 @@ void *fn_80219E28(void *arg0, s32 arg1) {
 }
 
 s32 fn_8021ADB8(void *arg0, s32 arg1) {
-    extern s32 lbl_80493448[][10];
+    extern s32 lbl_80493448[];
     s32 count;
     s32 i;
 
@@ -4328,13 +4328,15 @@ s32 fn_8021ADB8(void *arg0, s32 arg1) {
         return 0;
     }
     count = 0;
-    for (i = 1; i <= 9; i++) {
-        if (lbl_80493448[M2C_FIELD(arg0, s32 *, 0x8C)][i] != 0) {
+    i = 1;
+    while (i <= 9) {
+        if (lbl_80493448[M2C_FIELD(arg0, s32 *, 0x8C) * 10 + i] != 0) {
             count++;
             if (count == arg1) {
                 return i;
             }
         }
+        i++;
     }
     return 0x63;
 }
@@ -4896,6 +4898,12 @@ u8 *fn_80223464(u8 *self) {
 
 s32 fn_8022346C(s32 arg0) {
     return arg0 + 0x20;
+}
+
+void fn_80223474(u8 *arg0, void *arg1) {
+    typedef struct { f32 x, y, z; } V3;
+    *(V3 *)(arg0 + 0x20) = *(V3 *)arg1;
+    *(s32 *)(arg0 + 0x2C) = 1;
 }
 
 s32 fn_8022349C(void *arg0) {
