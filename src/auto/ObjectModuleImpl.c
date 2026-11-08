@@ -447,6 +447,10 @@ void fn_80157FDC(s32 *arg0) {
     fn_801A1E50(*arg0);
 }
 
+s64 fn_80158338(void) {
+    return 1;
+}
+
 extern s32 lbl_80495BE8;
 void fn_8015A3FC(void) {
     fn_800F1A60((s32)&lbl_80495BE8, 2);
