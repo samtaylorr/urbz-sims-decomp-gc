@@ -179,6 +179,7 @@ void fn_8037B370(f32 (*src)[4], f32 (*xPose)[4]) {
         fn_8037AD9C(mTmp, xPose);
     }
 }
+#pragma peephole reset
 
 #pragma peephole off
 void fn_8037BAE4(void *arg0, char arg1, f32 farg0) {
