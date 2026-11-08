@@ -1793,6 +1793,25 @@ void fn_80387D34(s32 chan) {
     fn_80259838(lbl_804912A0 + chan * 0x110 + 0x8C);
 }
 
+void fn_80387F58(s32 chan) {
+    s32 fn_8025C4A4(s32);
+    s32 fn_8025CC2C(s32);
+    s32 fn_8025BFA8(s32);
+    extern u8 lbl_804912A0[];
+    u8 *p;
+    s32 unlock;
+    void (*callback)(s32, s32);
+
+    p = lbl_804912A0 + chan * 0x110;
+    unlock = !fn_8025C4A4(chan);
+    fn_8025CC2C(chan);
+    callback = *(void (**)(s32, s32))(p + 0xC8);
+    if (callback) {
+        *(void (**)(s32, s32))(p + 0xC8) = 0;
+        callback(chan, (!unlock && fn_8025BFA8(chan)) ? 0 : -3);
+    }
+}
+
 u16 fn_80388F84(void) {
     extern u16 lbl_804964A0;
     return lbl_804964A0;
