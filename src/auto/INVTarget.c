@@ -3117,17 +3117,20 @@ s32 fn_801FBA80(s32 arg0, u16 *arg1) {
     void fn_800F8120(u16 *);
     extern char lbl_803E4E18[];
     char buf[32];
+    char *p;
     s32 len;
 
-    if (arg1 == NULL) {
+    if (arg1 != NULL) {
+        p = buf;
+        fn_80248488(p, 0, 0x20);
+        len = fn_80245BB4(p, lbl_803E4E18, arg0);
+        fn_800C3C04(p, len, arg1);
+        arg1[len] = 0;
+        fn_800F8120(arg1);
+        return 1;
+    } else {
         return 0;
     }
-    fn_80248488(buf, 0, 0x20);
-    len = fn_80245BB4(buf, lbl_803E4E18, arg0);
-    fn_800C3C04(buf, len, arg1);
-    arg1[len] = 0;
-    fn_800F8120(arg1);
-    return 1;
 }
 
 s32 fn_801FBB14(u8 *arg0) {
@@ -4797,19 +4800,19 @@ void fn_80220A04(void *arg0) {
     extern f32 lbl_803EA65C[];
     extern s32 *lbl_8041FA48[];
     s32 *p;
-    void *r;
+    s32 n;
     f32 x, y;
     fn_8022D908(fn_8022554C(), arg0);
     x = lbl_803EA658[0];
     y = lbl_803EA65C[0];
-    r = NULL;
+    n = 0;
     M2C_FIELD(arg0, f32 *, 0x50) = x;
     M2C_FIELD(arg0, f32 *, 0x54) = y;
     p = *lbl_8041FA48[0];
     if (p != NULL) {
-        r = fn_802D2058(p[-1] << 2);
+        n = p[-1];
     }
-    M2C_FIELD(arg0, void **, 0xA4) = r;
+    M2C_FIELD(arg0, void **, 0xA4) = fn_802D2058(n << 2);
 }
 
 void fn_80221924(void *arg0, s32 arg1, f32 farg0) {
@@ -5145,6 +5148,11 @@ s32 fn_80224A28(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x14);
 }
 
+void fn_80224DE4(u8 *self, s32 arg1) {
+    extern void fn_802248A8(u8 *);
+    fn_802248A8(*(u8 **)self + arg1 * 0x20);
+}
+
 void *fn_80224E3C(s32 arg0, s32 arg1) {
     typedef struct { u8 pad[0x20]; } Ent;
     typedef struct { Ent *list; } Tbl;
@@ -5182,6 +5190,15 @@ s32 fn_80225554(s32 *self) {
 
 s32 fn_80229F5C(void *arg0) {
     return (s32) ((M2C_FIELD(arg0, s32 *, 0x70) - M2C_FIELD(arg0, s32 *, 0x6C)) * 0xB6DB6DB7) >> 3;
+}
+
+s32 fn_8022B564(u32 arg0) {
+    extern s32 lbl_804966A4[];
+    s32 ret = 0;
+    if (arg0 <= 1 && lbl_804966A4[arg0] != 0) {
+        ret = lbl_804966A4[arg0];
+    }
+    return ret;
 }
 
 extern u8 *lbl_80496654;
