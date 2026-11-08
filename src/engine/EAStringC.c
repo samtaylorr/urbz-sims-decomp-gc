@@ -83,6 +83,7 @@ void fn_80290B74(void *arg0, s32 arg1) {
     extern void (*lbl_80443318[])(void *, s32);
     extern void fn_802ADDF4(void *, s32);
     void fn_802A0B40(void ***arg0, s32 arg1);
+    void fn_802D20E8(void *);
     void *p;
 
     M2C_FIELD(arg0, void **, 0x14) = lbl_804185B0;
