@@ -5918,10 +5918,10 @@ void *fn_80225DB8(void *arg0) {
 void *fn_80229F24(void *self, s32 i) {
     typedef struct { u8 pad[0x38]; } Elem;
     Elem *begin = M2C_FIELD(self, Elem **, 0x6C);
-    if ((u32)i < (u32)(M2C_FIELD(self, Elem **, 0x70) - begin)) {
-        return &begin[i];
+    if ((u32)i >= (u32)(M2C_FIELD(self, Elem **, 0x70) - begin)) {
+        return 0;
     }
-    return 0;
+    return &begin[i];
 }
 
 s32 fn_80229F5C(void *arg0) {
