@@ -3217,7 +3217,8 @@ s32 fn_801FBB14(u8 *arg0) {
 
 s32 fn_801FBB84(u8 *arg0, s32 *arg1) {
     u8 *t;
-    s32 *l;
+    s32 *list;
+    s32 *q;
     s32 count;
 
     if (arg0 == NULL) {
@@ -3231,17 +3232,18 @@ s32 fn_801FBB84(u8 *arg0, s32 *arg1) {
     if (t == NULL) {
         return 0;
     }
-    l = *(s32 **)t;
+    list = *(s32 **)t;
+    q = list;
     count = 0;
-    if (l != NULL) {
-        count = l[-1];
+    if (q != NULL) {
+        count = q[-1];
     }
     if (count == 0) {
         return 0;
     }
-    arg1[1] = (*(s32 **)t)[0];
+    arg1[1] = list[0];
     arg1[0] = *(s32 *)(t + 0x20);
-    arg1[2] = (*(s32 **)t)[2];
+    arg1[2] = list[2];
     arg1[3] = 0;
     return arg1[1] != 0;
 }
@@ -3492,6 +3494,11 @@ void fn_80200FBC(void *arg0) {
 void fn_80203588(void *arg0) {
     extern s32 lbl_80494640[2];
     fn_801FEE14(arg0, lbl_80494640[M2C_FIELD(arg0, s32 *, 0x84)] + 1);
+}
+
+void fn_802035BC(void *arg0) {
+    extern s32 lbl_80494640[2];
+    fn_801FEE14(arg0, lbl_80494640[M2C_FIELD(arg0, s32 *, 0x84)] - 1);
 }
 
 s32 fn_802037F0(void *arg0) {
@@ -4557,14 +4564,10 @@ block_4:
 
 void *fn_80219E28(void *arg0, s32 arg1) {
     void *p = M2C_FIELD(arg0, void **, 0x84);
+    s32 i;
 
-    if (arg1 > 0) {
-        do {
-            if (p == NULL) {
-                return p;
-            }
-            p = M2C_FIELD(p, void **, 4);
-        } while (--arg1 != 0);
+    for (i = arg1; i > 0 && p != NULL; i--) {
+        p = M2C_FIELD(p, void **, 4);
     }
     return p;
 }
