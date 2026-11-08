@@ -112,6 +112,25 @@ void fn_8019A0CC(void **obj) {
     }
 }
 
+void fn_8019A38C(s32 *self, void *stream) {
+    void fn_8018D8DC(void *, s32 *, s32);
+    void fn_8018D8BC(void *, s32 *, s32);
+    s32 ver;
+    s32 n;
+    s32 i;
+    ver = 1;
+    fn_8018D8DC(stream, &ver, 1);
+    n = 8;
+    if (ver == 0) {
+        n = 7;
+    }
+    for (i = 0; i < n; i++) {
+        s32 v = self[i];
+        fn_8018D8BC(stream, &v, 1);
+        self[i] = v;
+    }
+}
+
 void fn_8019A7C0(void *self) {
     u16 i;
     for (i = 0; i < 2; i++) {
