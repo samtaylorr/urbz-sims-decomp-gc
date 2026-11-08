@@ -1267,11 +1267,12 @@ void fn_800D5374(char *self) {
 void fn_800D53B8(char *self, BSKey *key) {
     extern s32 lbl_8041FCCC[];
     extern s32 lbl_8041F9F8[];
+    typedef struct { s32 v[1]; } BSKeyA;
     char *node;
     char *e;
     char *obj;
     char *vt;
-    BSKey k;
+    BSKeyA k;
 
     lbl_8041FCCC[0] = 1;
     M2C_FIELD(self, s32 *, 0) = 1;
@@ -1279,17 +1280,16 @@ void fn_800D53B8(char *self, BSKey *key) {
     if (node != NULL) {
         do {
             e = M2C_FIELD(node, char **, 0);
-            k = *(BSKey *)e;
-            if (k.v == key->v) {
+            k = *(BSKeyA *)e;
+            if (k.v[0] == key->v) {
                 if (M2C_FIELD(self, char **, 4) != NULL) {
                     obj = *M2C_FIELD(self, char ***, 4);
                     vt = M2C_FIELD(obj, char **, 8);
-                    M2C_FIELD(vt, void (**)(void *, s32), 0x2C)(obj + M2C_FIELD(vt, s16 *, 0x28), k.v);
+                    M2C_FIELD(vt, void (**)(void *, s32), 0x2C)(obj + M2C_FIELD(vt, s16 *, 0x28), k.v[0]);
                 }
                 M2C_FIELD(self, char **, 4) = node;
-                lbl_8041F9F8[0] = key->v;
                 vt = M2C_FIELD(e, char **, 8);
-                M2C_FIELD(vt, void (**)(void *, s32), 0x14)(e + M2C_FIELD(vt, s16 *, 0x10), key->v);
+                M2C_FIELD(vt, void (**)(void *, s32), 0x14)(e + M2C_FIELD(vt, s16 *, 0x10), lbl_8041F9F8[0] = key->v);
                 return;
             }
             node = M2C_FIELD(node, char **, 8);
@@ -2373,6 +2373,18 @@ void fn_800DD170(void *arg0) {
 
 void fn_800DD3B4(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x18) = 0;
+}
+
+void fn_800DD53C(s32 *self) {
+    void fn_800C9618(void *, s32);
+    void fn_800E3B5C(s32 *, s32);
+    self[6] = 0;
+    self[7] = 0;
+    M2C_FIELD(M2C_FIELD(self[2], char **, 0x94), s32 *, 0x70) = 2;
+    fn_800C9618(M2C_FIELD(self[2], char **, 0x94), 0x11);
+    fn_800E3B5C(self, 0x24);
+    self[7] = 0;
+    self[6] = 1;
 }
 
 void fn_800DD5A8(s32 *self) {
