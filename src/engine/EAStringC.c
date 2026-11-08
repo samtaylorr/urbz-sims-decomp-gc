@@ -746,6 +746,10 @@ void fn_802A0980(s32 arg0, void *arg1) {
     }
 }
 
+void fn_802A09E4(s32 arg0, void *arg1) {
+    fn_802A0938(arg0, M2C_FIELD(arg1, void **, 0));
+}
+
 void fn_802A14A0(void ***arg0) {
     M2C_UNK fn_802A1420();
     M2C_UNK fn_803B79BC(void **, M2C_UNK);
