@@ -1898,6 +1898,14 @@ s32 fn_801A3934(void *arg0) {
     return M2C_FIELD(arg0, u16 *, 0x110) & 1;
 }
 
+void fn_801A3940(void *arg0, s32 arg1) {
+    s32 v = M2C_FIELD(arg0, u16 *, 0x110) & ~0x1;
+    M2C_FIELD(arg0, u16 *, 0x110) = v;
+    if (arg1 != 0) {
+        M2C_FIELD(arg0, u16 *, 0x110) = v | 0x1;
+    }
+}
+
 s32 fn_801A3960(void *arg0) {
     return ((u16) M2C_FIELD(arg0, u16 *, 0x110) >> 1U) & 1;
 }
@@ -2289,12 +2297,9 @@ s32 fn_801AA930(s32 *self) {
 void *fn_801AAE74(void *self, s32 a, s32 b, s32 c) {
     void fn_8019C854(void *);
     void fn_801AAEDC(void *, s32, s32, s32);
-    u8 *sub;
-    s32 pad[2];
     *(volatile s32 *)((u8 *)self + 0) = 0;
     *(volatile s32 *)((u8 *)self + 4) = 0;
-    sub = (u8 *)self + 8;
-    *(volatile s32 *)(sub + 4) = 0;
+    ScratchSub_Init((u8 *)self + 8);
     fn_8019C854((u8 *)self + 0x10);
     fn_801AAEDC(self, a, b, c);
     return self;
