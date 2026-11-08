@@ -1706,6 +1706,17 @@ void fn_802ADD10(u8 *self, s32 arg1, s32 arg2) {
     }
 }
 
+s32 fn_802ADDA0(u8 *self) {
+    extern s32 fn_802B490C(s32);
+    s32 r;
+
+    r = ((s32 (*)(s32))fn_802AE360)(*(s32 *)(self + 8));
+    if (r == 0) {
+        return -1;
+    }
+    return fn_802B490C(r);
+}
+
 s32 *fn_802ADDD8(s32 *self, s32 arg1) {
     self[0] = arg1;
     self[1] = 0;
