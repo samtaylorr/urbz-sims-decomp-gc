@@ -1747,6 +1747,20 @@ u32 fn_802AECCC(void) {
     return y;
 }
 
+void fn_802AED48(u32 seed) {
+    u32 *p;
+    s32 i;
+
+    seed |= 1;
+    lbl_8044342C[0] = seed;
+    lbl_80494D14 = 0;
+    p = &lbl_8044342C[1];
+    for (i = 623; i != 0; i--) {
+        seed *= 69069;
+        *p++ = seed;
+    }
+}
+
 void fn_802AF384(void *arg0, f32 farg0, f32 farg1) {
     M2C_FIELD(arg0, f32 *, 0x20) = farg0;
     M2C_FIELD(arg0, f32 *, 0x24) = farg1;
