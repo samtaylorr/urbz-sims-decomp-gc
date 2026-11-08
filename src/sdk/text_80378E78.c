@@ -4,6 +4,15 @@ extern s32 lbl_80496468;
 
 volatile u16 __DSPRegs[] : 0xCC005000;
 
+typedef struct DSPTaskInfo {
+    u32 state;
+    u32 priority;
+    u32 flags;
+    u8 pad_0C[0x38 - 0x0C];
+    struct DSPTaskInfo *next;
+    struct DSPTaskInfo *prev;
+} DSPTaskInfo;
+
 extern s32 lbl_80496440;
 
 
