@@ -16,6 +16,12 @@ static inline void INV_setStr(void *dst, void *key) {
     fn_800F1B80(dst, h.p != NULL ? (void *)*h.p : NULL);
 }
 
+static inline void INV_setStrT(void *dst, void *tbl, void *key) {
+    INVHandle fn_8004C168();
+    INVHandle h = fn_8004C168(tbl, key);
+    fn_800F1B80(dst, h.p != NULL ? (void *)*h.p : NULL);
+}
+
 static inline void *INV_getStr(void *key) {
     INVHandle fn_8004C168();
     extern u8 lbl_8041F94C[];
