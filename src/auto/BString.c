@@ -2076,11 +2076,9 @@ void fn_800DE03C(void *arg0) {
 
 void fn_800DE14C(s32 *self) {
     char *obj;
-    char *vt;
     if ((u32)(self[6] - 3) <= 1) {
         obj = *(char **)((char *)self[2] + 0x94);
-        vt = *(char **)(obj + 0x44);
-        (*(void (**)(void *))(vt + 0x1C))(obj + *(s16 *)(vt + 0x18));
+        (*(void (**)(void *))(*(char **)(obj + 0x44) + 0x1C))(obj + *(s16 *)(*(char **)(obj + 0x44) + 0x18));
     }
 }
 
@@ -2139,11 +2137,10 @@ void fn_800DED78(void *arg0) {
 }
 
 void fn_800DED90(s32 *self) {
-    char *obj;
     char *vt;
+    char *obj;
     if ((u32)(self[6] - 9) <= 2) {
-        char *b = (char *)self[2];
-        obj = M2C_FIELD(b, char **, 0x94);
+        obj = M2C_FIELD(self[2], char **, 0x94);
         vt = M2C_FIELD(obj, char **, 0x44);
         M2C_FIELD(vt, void (**)(void *), 0x1C)(obj + M2C_FIELD(vt, s16 *, 0x18));
     }
@@ -2250,12 +2247,13 @@ void fn_800E02D4(void *arg0) {
 }
 
 void fn_800E02E0(s32 *self) {
+    struct VEntry { s16 delta; s16 index; void (*fn)(void *); };
     char *obj;
-    char *vt;
+    struct VEntry *e;
     if ((u32)(self[6] - 8) <= 2) {
-        obj = *(char **)((char *)self[2] + 0x94);
-        vt = *(char **)(obj + 0x44);
-        (*(void (**)(void *))(vt + 0x1C))(obj + *(s16 *)(vt + 0x18));
+        obj = M2C_FIELD(self[2], char **, 0x94);
+        e = (struct VEntry *)(M2C_FIELD(obj, char **, 0x44) + 0x18);
+        e->fn(obj + e->delta);
     }
 }
 
@@ -2267,18 +2265,19 @@ void fn_800E0814(void *arg0) {
 }
 
 void fn_800E0828(s32 *self) {
+    struct VEntry { s16 delta; s16 index; void (*fn)(void *); };
     char *obj;
-    char *vt;
+    struct VEntry *e;
     if ((u32)(self[6] - 8) <= 1) {
-        obj = *(char **)((char *)self[2] + 0x94);
-        vt = *(char **)(obj + 0x44);
-        (*(void (**)(void *))(vt + 0x1C))(obj + *(s16 *)(vt + 0x18));
+        obj = M2C_FIELD(self[2], char **, 0x94);
+        e = (struct VEntry *)(M2C_FIELD(obj, char **, 0x44) + 0x18);
+        e->fn(obj + e->delta);
     }
 }
 
 void fn_800E0D70(s32 *self) {
     extern void fn_800C9618(void *, s32);
-    extern void fn_800E3B5C();
+    extern void fn_800E3B5C(s32 *, s32);
     extern void fn_800E3E40(s32, s32);
     extern void fn_800E1A48(void);
     s32 state = M2C_FIELD(self[2], s32 *, 0x8C);
