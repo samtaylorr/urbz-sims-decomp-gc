@@ -2045,9 +2045,8 @@ void fn_802AEDE4(u8 *self) {
     typedef struct { s32 v[8]; } AptXform;
     s32 *depth = (s32 *)(self + 0x3B8);
     s32 n = *depth;
-    AptXform *dst = (AptXform *)(self + 0x38) + n;
-    *dst = *(AptXform *)self;
-    *depth = n + 1;
+    ((AptXform *)(self + 0x38))[n++] = *(AptXform *)self;
+    *depth = n;
 }
 
 void fn_802AF384(void *arg0, f32 farg0, f32 farg1) {
