@@ -1206,25 +1206,30 @@ void fn_803847F8(s32 arg0, s32 arg1) {
 }
 
 void fn_8038489C(void *arg0) {
-    extern u8 lbl_80405980[];
-    u8 *tbl = lbl_80405980;
+    extern struct VolTable_80405980 {
+        u8 pad[0x78c];
+        s32 w[0x80];
+        s16 h[0x80];
+        s16 h2[0x80];
+    } lbl_80405980;
+    struct VolTable_80405980 *t = &lbl_80405980;
     u8 *e = arg0;
     s32 a = *(s32 *)(e + 0x14);
     s32 b = *(s32 *)(e + 0x18);
     s32 ia = 0x7f - a;
     s32 ib = 0x7f - b;
     if ((u32)lbl_80496468 == 3) {
-        *(s32 *)(e + 0x20) = *(s16 *)(tbl + a * 2 + 0x98c);
-        *(s32 *)(e + 0x24) = *(s16 *)(tbl + ia * 2 + 0x98c);
-        *(s32 *)(e + 0x28) = *(s16 *)(tbl + ib * 2 + 0x98c);
-        *(s32 *)(e + 0x2c) = *(s16 *)(tbl + b * 2 + 0x98c);
-        *(s32 *)(e + 0x30) = *(s16 *)(tbl + ia * 2 + 0xa8c);
-        *(s32 *)(e + 0x34) = *(s16 *)(tbl + a * 2 + 0xa8c);
+        *(s32 *)(e + 0x20) = t->h[a];
+        *(s32 *)(e + 0x24) = t->h[ia];
+        *(s32 *)(e + 0x28) = t->h[ib];
+        *(s32 *)(e + 0x2c) = t->h[b];
+        *(s32 *)(e + 0x30) = t->h2[ia];
+        *(s32 *)(e + 0x34) = t->h2[a];
     } else {
-        *(s32 *)(e + 0x20) = *(s32 *)(tbl + a * 4 + 0x78c);
-        *(s32 *)(e + 0x24) = *(s32 *)(tbl + ia * 4 + 0x78c);
-        *(s32 *)(e + 0x28) = *(s32 *)(tbl + ib * 4 + 0x78c);
-        *(s32 *)(e + 0x2c) = *(s32 *)(tbl + b * 4 + 0x78c);
+        *(s32 *)(e + 0x20) = t->w[a];
+        *(s32 *)(e + 0x24) = t->w[ia];
+        *(s32 *)(e + 0x28) = t->w[ib];
+        *(s32 *)(e + 0x2c) = t->w[b];
     }
 }
 
