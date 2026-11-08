@@ -3271,6 +3271,19 @@ void fn_800E3BB0(void *arg0) {
     M2C_FIELD(M2C_FIELD(arg0, void **, 8), s32 *, 0x8C) = 0;
 }
 
+void fn_800E3E08(s32 self) {
+    s32 fn_800E4174(s32);
+    s32 p = fn_800E4174(self);
+    if (p != 0) {
+        M2C_FIELD(self, s32 *, 0x80) = p;
+    }
+}
+
+void fn_800E3E40(s32 self, s32 arg1) {
+    M2C_FIELD(self, s32 *, 0x88) = arg1;
+    M2C_FIELD(self, s32 *, 0x84) = 1;
+}
+
 s32 fn_800E3E50(void *self) {
     s32 *p = M2C_FIELD(self, s32 **, 0x38);
     if (p == NULL) {
