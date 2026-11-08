@@ -1233,6 +1233,14 @@ s32 *fn_800D5070(s32 *self, s32 a) {
     return self;
 }
 
+void fn_800D5114(void *arg0, s32 arg1) {
+    extern u8 lbl_8040B9E0[];
+    M2C_FIELD(arg0, void **, 8) = lbl_8040B9E0;
+    if (arg1 & 1) {
+        fn_802D1A00(fn_802D0AB8(arg0), arg0);
+    }
+}
+
 void fn_800D5308(char *self, s32 arg1) {
     void fn_802CB8D4(void *);
     void fn_802D20E8(void *);
@@ -3937,9 +3945,11 @@ void fn_800E40C4(s32 self) {
     void fn_800E44CC(void *);
     void **it;
     u8 *q = (u8 *)self + 0x38;
+    f32 t;
     fn_800E44CC(q);
+    t = lbl_803D511C[0];
     M2C_FIELD(q, s32 *, 0x4) = 0;
-    M2C_FIELD(q, f32 *, 0x10) = lbl_803D511C[0];
+    M2C_FIELD(q, f32 *, 0x10) = t;
     for (it = M2C_FIELD(self, void ***, 0x28); it != BStringPtrVec_End((BStringPtrVec *)((u8 *)self + 0x28)); it++) {
         void *obj = *it;
         if (obj != NULL) {
