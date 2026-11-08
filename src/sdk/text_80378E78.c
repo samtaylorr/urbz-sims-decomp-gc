@@ -533,7 +533,7 @@ void fn_803806E4(void) {
         lbl_80496384 = 1;
     }
 }
-#pragma auto_inline reset
+#pragma dont_inline reset
 void fn_80380754(void) {
     extern s32 lbl_80496384;
     lbl_80496384 = 0;
