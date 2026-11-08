@@ -751,7 +751,9 @@ u32 fn_80398C58(void *arg0) {
 }
 
 s32 fn_80398C84(s32 i) {
-    return ((s32 *)lbl_80496624)[i];
+    register u32 *p asm("r4") = (u32 *)lbl_80496624;
+    register s32 off asm("r0") = i * 4;
+    return *(s32 *)((char *)p + off);
 }
 
 void fn_80398C94(s32 i, s32 v) {
@@ -3903,10 +3905,11 @@ void **fn_803A0A44(void **self, void **other) {
                 bytes = size;
                 if (size > 0x80) {
                     tmp = (void **)fn_802D1FC8(bytes);
+                    size = 0;
                 } else {
                     tmp = (void **)fn_80399BE8(bytes);
+                    size = 0;
                 }
-                size = 0;
             } else {
                 tmp = NULL;
                 bytes = 0;
