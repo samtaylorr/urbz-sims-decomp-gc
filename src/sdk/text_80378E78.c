@@ -1321,10 +1321,9 @@ void fn_803834D0(void *arg0) {
     u8 *p;
 
     p = lbl_8047E2A0 + M2C_FIELD(arg0, s32 *, 0x18) * 0xF4;
-    if (M2C_FIELD(p, u16 *, 0xE) != 1) {
-        return;
+    if (M2C_FIELD(p, u16 *, 0xE) == 1) {
+        fn_80382CE8(p);
     }
-    fn_80382CE8(p);
     M2C_FIELD(p, u16 *, 0x4C) = 0;
     M2C_FIELD(p, u16 *, 0x4A) = 0;
     M2C_FIELD(p, u16 *, 0x48) = 0;
