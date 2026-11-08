@@ -1486,12 +1486,13 @@ f32 fn_8019F61C(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0xC);
 }
 
-s32 fn_8019F624(void *self, s32 *arg1) {
+s32 fn_8019F624(void *arg0, s32 *arg1) {
     extern u8 *lbl_8049665C;
     void fn_801B383C(void *);
     void fn_800F68E0(void *);
     s32 *fn_803AB680(u8 *, u8 *, u16);
-    s32 *key = arg1;
+    register void *self asm("r30") = arg0;
+    register s32 *key asm("r31") = arg1;
     u8 *obj;
     u8 *p;
     s32 n;
@@ -3216,11 +3217,12 @@ s32 fn_801A4FB0(void *arg0) {
 }
 
 s32 fn_801A89E4(void *self, s32 arg1, s32 arg2) {
-    void fn_80105574(void *, s16, s16, void *);
+    void fn_80105574(void *, s32, s32, s32);
     void fn_801A8A80(void *, void *);
     void fn_801055FC(void *, s32);
     struct { s16 a, b, c; } buf;
     char *vt;
+    s16 *p;
 
     switch (arg1) {
     case 0x91:
@@ -3228,7 +3230,8 @@ s32 fn_801A89E4(void *self, s32 arg1, s32 arg2) {
         (*(void (**)(void *, s32))(vt + 0x104))((char *)self + *(s16 *)(vt + 0x100), arg2);
         return 1;
     case 0x102:
-        fn_80105574(&buf, ((s16 *)&arg2)[1], ((s16 *)&arg2)[0], NULL);
+        p = (s16 *)&arg2;
+        fn_80105574(&buf, p[1], p[0], 0);
         fn_801A8A80(self, &buf);
         fn_801055FC(&buf, 2);
         return 1;
