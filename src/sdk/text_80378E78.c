@@ -293,6 +293,27 @@ s32 fn_8037E86C(void) {
     return lbl_80496340;
 }
 
+void fn_8037E904(s16 interrupt, void *context) {
+    void fn_80252AAC(void *);
+    void fn_802528A4(void *);
+    extern void (*lbl_80496338)(void);
+    u8 exceptionContext[0x2C8];
+
+    __DSPRegs[5] = (u16)((__DSPRegs[5] & ~0x88) | 0x20);
+    fn_80252AAC(exceptionContext);
+    fn_802528A4(exceptionContext);
+    if (lbl_80496338) {
+        lbl_80496338();
+    }
+    fn_80252AAC(exceptionContext);
+    fn_802528A4(context);
+}
+
+void fn_8037E97C(void) {
+    u16 tmp = __DSPRegs[5];
+    __DSPRegs[5] = (tmp & ~0x88) | 0x20;
+}
+
 s32 fn_8037E99C(void) {
     return *(u16 *)0xCC00500A & 0x20;
 }
@@ -300,6 +321,18 @@ s32 fn_8037E99C(void) {
 void fn_8037E9AC(void) {
     while (__DSPRegs[5] & 0x200) {
     }
+}
+
+void fn_8037E9C4(u32 mainmem, u32 aram, u32 length) {
+    __DSPRegs[16] = (u16)((__DSPRegs[16] & ~0x3ff) | (u16)(mainmem >> 16));
+    __DSPRegs[17] = (u16)((__DSPRegs[17] & ~0xffe0) | (u16)(mainmem & 0xffff));
+    __DSPRegs[18] = (u16)((__DSPRegs[18] & ~0x3ff) | (u16)(aram >> 16));
+    __DSPRegs[19] = (u16)((__DSPRegs[19] & ~0xffe0) | (u16)(aram & 0xffff));
+    __DSPRegs[20] = (u16)(__DSPRegs[20] & ~0x8000);
+    __DSPRegs[20] = (u16)((__DSPRegs[20] & ~0x3ff) | (u16)(length >> 16));
+    __DSPRegs[21] = (u16)((__DSPRegs[21] & ~0xffe0) | (u16)(length & 0xffff));
+    fn_8037E9AC();
+    fn_8037E97C();
 }
 
 void fn_803805DC(void) {
