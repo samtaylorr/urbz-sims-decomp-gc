@@ -255,6 +255,25 @@ void fn_8037D1B8(void *arg0, void *arg1) {
     }
 }
 
+void fn_8037DCF4(f32 (*m)[4], f32 xT, f32 yT, f32 zT) {
+    m[0][0] = 1.0f;
+    m[0][1] = 0.0f;
+    m[0][2] = 0.0f;
+    m[0][3] = xT;
+    m[1][0] = 0.0f;
+    m[1][1] = 1.0f;
+    m[1][2] = 0.0f;
+    m[1][3] = yT;
+    m[2][0] = 0.0f;
+    m[2][1] = 0.0f;
+    m[2][2] = 1.0f;
+    m[2][3] = zT;
+    m[3][0] = 0.0f;
+    m[3][1] = 0.0f;
+    m[3][2] = 0.0f;
+    m[3][3] = 1.0f;
+}
+
 void fn_8037DD7C(void *arg0, void *arg1, f32 farg0, f32 farg1, f32 farg2) {
     if (arg0 != arg1) {
         M2C_FIELD(arg1, f32 *, 0) = (f32) M2C_FIELD(arg0, f32 *, 0);
