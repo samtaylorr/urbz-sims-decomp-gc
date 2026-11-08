@@ -138,6 +138,7 @@ void fn_8037B1B0(f32 (*a)[4], f32 (*srcBase)[3][4], f32 (*dstBase)[3][4], u32 co
 }
 
 void fn_8037B370(f32 (*src)[4], f32 (*xPose)[4]) {
+    void fn_8037AD9C(void *, void *);
     f32 mTmp[3][4];
     f32 (*m)[4];
 
@@ -301,6 +302,8 @@ void fn_8037C820(f32 (*m)[4], f32 t, f32 b, f32 l, f32 r, f32 scaleS, f32 scaleT
     m[2][3] = 1.0f;
 }
 
+#pragma push
+#pragma fp_contract off
 void fn_8037C8A8(f32 (*m)[4], f32 *src, f32 *dst) {
     f32 vTmp[3];
 
@@ -312,7 +315,6 @@ void fn_8037C8A8(f32 (*m)[4], f32 *src, f32 *dst) {
     dst[1] = vTmp[1];
     dst[2] = vTmp[2];
 }
-
 void fn_8037CC20(f32 (*m)[4], f32 *src, f32 *dst) {
     f32 vTmp[3];
 
@@ -324,7 +326,7 @@ void fn_8037CC20(f32 (*m)[4], f32 *src, f32 *dst) {
     dst[1] = vTmp[1];
     dst[2] = vTmp[2];
 }
-
+#pragma fp_contract reset
 void fn_8037CF34(f32 (*m)[4], f32 t, f32 b, f32 l, f32 r, f32 n, f32 f) {
     f32 tmp;
 
