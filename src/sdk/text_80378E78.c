@@ -605,6 +605,32 @@ void *fn_80381128(u32 idx) {
     return ret;
 }
 
+void fn_8038138C(void *arg0, u32 idx) {
+    typedef struct QNode_ {
+        struct QNode_ *next;
+        struct QNode_ *prev;
+        void *unk8;
+        u32 idx;
+    } QNode_;
+    extern QNode_ *lbl_804763C0[32];
+    extern QNode_ *lbl_80476440[32];
+    QNode_ *node = arg0;
+    s32 enabled = fn_8025465C();
+
+    fn_8038103C(node);
+    node->next = lbl_804763C0[idx];
+    node->prev = NULL;
+    if (node->next != NULL) {
+        lbl_804763C0[idx]->prev = node;
+        lbl_804763C0[idx] = node;
+    } else {
+        lbl_80476440[idx] = node;
+        lbl_804763C0[idx] = node;
+    }
+    node->idx = idx;
+    fn_80254684(enabled);
+}
+
 void fn_80381518(void) {
     extern s32 lbl_80496394;
     extern s32 lbl_80496390;
@@ -1039,8 +1065,11 @@ s32 fn_80387254(void) {
     return *(u16 *)0xCC00500A & 0x200;
 }
 
+extern DSPTaskInfo *lbl_80496490; /* __DSP_last_task */
+extern DSPTaskInfo *lbl_80496494; /* __DSP_first_task */
+extern DSPTaskInfo *lbl_80496498; /* __DSP_curr_task */
+
 void *fn_80387264(void *arg0) {
-    extern s32 lbl_80496494;
     void fn_80387B84(void *);
     void fn_803879F8(void *);
     s32 enabled = fn_8025465C();
@@ -1061,15 +1090,13 @@ void *fn_803872D4(void *arg0) {
     return arg0;
 }
 
-extern s32 lbl_80496494;
 void fn_80387B84(void *);
 void fn_803879F8(void *);
 void fn_803873DC(const char *fmt, ...) {
 }
 
-extern s32 lbl_80496498;
 s32 fn_8038742C(void) {
-    return lbl_80496498;
+    return (s32)lbl_80496498;
 }
 
 void fn_80387D30(void) {
