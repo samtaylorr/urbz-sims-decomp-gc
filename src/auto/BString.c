@@ -1195,6 +1195,15 @@ s32 *fn_800D5070(s32 *self, s32 a) {
     return self;
 }
 
+void fn_800D5374(char *self) {
+    char **p = *(char ***)(self + 4);
+    if (p != NULL) {
+        char *obj = *p;
+        char *vt = *(char **)(obj + 8);
+        (*(void (**)(void *))(vt + 0x34))(obj + *(s16 *)(vt + 0x30));
+    }
+}
+
 void fn_800D53B8(char *self, BSKey *key) {
     extern s32 lbl_8041FCCC;
     extern s32 lbl_8041F9F8;
@@ -1226,8 +1235,9 @@ void fn_800D53B8(char *self, BSKey *key) {
 
 void fn_800D5478(char *self, char *arg1) {
     void fn_802CB69C(void *);
-    fn_802CB69C(self + 8);
-    M2C_FIELD(arg1, char **, 4) = self;
+    char *s = self;
+    fn_802CB69C(s + 8);
+    M2C_FIELD(arg1, char **, 4) = s;
 }
 
 void fn_800D54B0(char *self) {
