@@ -714,6 +714,20 @@ s32 fn_80299CB4(u8 *self) {
     return *(s32 *)(self + 0x50);
 }
 
+s32 fn_80299D18(void *arg0) {
+    extern s32 fn_802B70DC(void *);
+    extern s32 fn_802B72D4(void *);
+    s32 ret;
+
+    ret = 0;
+    if (fn_802B70DC(arg0) > 0xB) {
+        if (fn_802B70DC(arg0) <= 0x13) {
+            ret = fn_802B72D4(arg0) == 0;
+        }
+    }
+    return ret;
+}
+
 s32 fn_80299D74(void *arg0, s32 arg1) {
     extern s32 fn_802B70DC(void *);
     extern s32 fn_802B72D4(void *);
