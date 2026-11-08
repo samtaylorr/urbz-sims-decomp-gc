@@ -150,6 +150,17 @@ s16 fn_8019AFE8(void *arg0) {
     return M2C_FIELD(arg0, s16 *, 0x34);
 }
 
+void fn_8019B128(void *self) {
+    extern f32 lbl_803DB4D0[];
+    u8 *vt = *(u8 **)self;
+    if ((*(s32 (**)(void *))(vt + 0x64))((u8 *)self + *(s16 *)(vt + 0x60)) != 0) {
+        fn_801051C8(0xBD, 0);
+    }
+    M2C_FIELD(self, f32 *, 0xA8) = lbl_803DB4D0[0];
+    M2C_FIELD(self, u16 *, 0x36) &= ~1;
+    fn_8019AFF0(self);
+}
+
 void fn_8019AFF0(void *self);
 void fn_8019B19C(void *self) {
     u8 *vt = *(u8 **)self;
@@ -1413,7 +1424,8 @@ void *fn_8019FCE4(void *self, u8 *src) {
 }
 
 void *fn_8019FD74(void *self, u8 *src, s32 a2, s32 a3, s32 a4, s32 a5) {
-    *(s32 *)((char *)self + 0x0) = src[0];
+    s32 flags = src[0];
+    *(s32 *)((char *)self + 0x0) = flags;
     *(s32 *)((char *)self + 0x4) = src[1];
     *(s16 *)((char *)self + 0x8) = src[2];
     *(s16 *)((char *)self + 0xa) = src[3];
@@ -1423,19 +1435,19 @@ void *fn_8019FD74(void *self, u8 *src, s32 a2, s32 a3, s32 a4, s32 a5) {
     *(s16 *)((char *)self + 0x16) = src[5];
     *(s16 *)((char *)self + 0x18) = src[7];
     *(s16 *)((char *)self + 0x1a) = src[6];
-    if (src[0] & 0x10) {
+    if (flags & 0x10) {
         *(s16 *)((char *)self + 0x1c) = src[6];
         *(s16 *)((char *)self + 0x1e) = src[7];
     } else {
-        *(s16 *)((char *)self + 0x1c) = 0;
         *(s16 *)((char *)self + 0x1e) = 0;
+        *(s16 *)((char *)self + 0x1c) = 0;
     }
     if (*(s32 *)((char *)self + 0x0) & 0x20) {
         *(s16 *)((char *)self + 0x20) = src[6];
         *(s16 *)((char *)self + 0x22) = src[7];
     } else {
-        *(s16 *)((char *)self + 0x20) = 0;
         *(s16 *)((char *)self + 0x22) = 0;
+        *(s16 *)((char *)self + 0x20) = 0;
     }
     *(s32 *)((char *)self + 0x30) = a2;
     *(s32 *)((char *)self + 0x24) = 0;
