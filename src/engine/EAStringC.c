@@ -2997,7 +2997,7 @@ void fn_802B3A74(u8 *self) {
     extern void fn_803B6F48(void *);
     extern void fn_803B6FFC(void *, void *);
     extern void fn_803B6F94(void *, s32);
-    s32 tmp;
+    void *volatile tmp;
     u8 *p = self + 8;
     fn_803B6F48(&tmp);
     fn_803B6FFC(p, &tmp);
@@ -4572,15 +4572,15 @@ void fn_802BBE14(void *arg0, s32 arg1) {
 }
 
 void fn_802BBE7C(void *arg0) {
-    s32 n;
+    u32 n;
     u32 *obj;
     char *vt;
 
-    while ((n = M2C_FIELD(arg0, s32 *, 4)) != 0) {
+    while ((n = M2C_FIELD(arg0, u32 *, 4)) != 0) {
         do {
             obj = M2C_FIELD(arg0, u32 **, 8)[--M2C_FIELD(arg0, s32 *, 4)];
             if (*obj & 0x0FFF0000) {
-                *obj &= ~0x20000000;
+                *obj &= ~0x40000000;
             } else {
                 vt = M2C_FIELD(obj, char **, 4);
                 M2C_FIELD(vt, void (**)(void *), 0x1C)((char *)obj + M2C_FIELD(vt, s16 *, 0x18));
@@ -4601,9 +4601,9 @@ void *fn_802BBF08(void *arg0, s32 arg1) {
         M2C_FIELD(arg0, u16 **, 0) = p;
         p[0] = 1;
         M2C_FIELD(arg0, u16 **, 0)[2] = size - 9;
-        M2C_FIELD(arg0, u16 **, 0)[1] = 0;
-        M2C_FIELD(arg0, u16 **, 0)[3] = 0;
-        M2C_FIELD(arg0, u8 **, 0)[8] = 0;
+        M2C_FIELD(arg0, s16 **, 0)[1] = 0;
+        M2C_FIELD(arg0, s16 **, 0)[3] = 0;
+        M2C_FIELD(arg0, char **, 0)[8] = '\0';
     } else {
         M2C_FIELD(arg0, u16 **, 0) = lbl_803FCE5C;
         lbl_803FCE5C[0]++;
@@ -4780,6 +4780,21 @@ void fn_802BD608(s32 arg0, s32 arg1) {
     M2C_UNK fn_802BD494(s32, s32);
     fn_802BD324();
     fn_802BD494(arg0, arg1);
+}
+
+s32 fn_802BDA60(void **self) {
+    extern char *fn_803B9024(char *, s32 *);
+    struct Buf { u16 ref; u16 len; s32 cap; char data[1]; };
+    char *p;
+    s32 count;
+    s32 c;
+
+    count = 0;
+    p = ((struct Buf *)*self)->data;
+    while (p = fn_803B9024(p, &c), c != 0) {
+        count++;
+    }
+    return count;
 }
 
 void fn_802BE5FC(u8 **arg0) {
