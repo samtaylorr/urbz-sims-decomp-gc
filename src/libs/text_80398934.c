@@ -723,7 +723,9 @@ void fn_80398AC4(u32 arg0, s32 arg1) {
 
 u32 fn_80398B30(u32 arg0) {
     void *fn_803990B4(u32);
-    return M2C_FIELD(fn_803990B4(arg0), u32 *, 0) >> 31;
+    volatile s32 pad;
+    register u32 v asm("r0") = M2C_FIELD(fn_803990B4(arg0), u32 *, 0);
+    return v >> 31;
 }
 
 u32 fn_80398B58(u32 arg0) {
@@ -740,9 +742,10 @@ u32 fn_80398B80(u32 arg0) {
 
 void fn_80398BA8(u32 arg0, s32 on) {
     u32 *fn_803990B4(u32);
+    register s32 o asm("r31") = on;
     register u32 *p asm("r3");
     p = fn_803990B4(arg0);
-    if (on) {
+    if (o) {
         p[1] |= 0x80;
     } else {
         p[1] &= ~0x80;
@@ -3909,12 +3912,12 @@ void **fn_803A0A44(void **self, void **other) {
                 register u32 size asm("r0");
                 size = xlen * 4;
                 bytes = size;
-                if (size > 0x80) {
-                    register void *a asm("r3") = (void *)bytes;
-                    tmp = (void **)fn_802D1FC8(a);
+                if (size <= 0x80) {
+                    size = 0;
+                    tmp = (void **)fn_80399BE8(bytes);
                 } else {
-                    register void *a asm("r3") = (void *)bytes;
-                    tmp = (void **)fn_80399BE8(a);
+                    size = 0;
+                    tmp = (void **)fn_802D1FC8(bytes);
                 }
             } else {
                 tmp = NULL;
