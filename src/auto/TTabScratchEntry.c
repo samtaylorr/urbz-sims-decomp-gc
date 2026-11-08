@@ -1419,6 +1419,11 @@ s32 fn_801A0FD4(void) {
     return 0x168;
 }
 
+s32 fn_801A1028(s32 year, s32 month, s32 day);
+s32 fn_801A0FDC(s32 y0, s32 m0, s32 d0, s32 y1, s32 m1, s32 d1) {
+    return fn_801A1028(y0, m0, d0) - fn_801A1028(y1, m1, d1);
+}
+
 s32 fn_801A1028(s32 year, s32 month, s32 day) {
     s32 i;
     s32 days;
@@ -1434,6 +1439,7 @@ s32 fn_801A1028(s32 year, s32 month, s32 day) {
 }
 
 s32 *fn_801A10A8(s32 *self, s32 arg1) {
+    struct { s32 a, b, c, d; } tmp;
     ScratchVec_Init(self + 2);
     self[6] = arg1;
     self[0] = 0;
@@ -2229,6 +2235,7 @@ s32 fn_801AA55C(s32 arg0, s32 arg1, u16 *out) {
     extern s32 fn_800FC7D4(s32);
     s32 type = fn_800FC854(arg0);
     s32 bits = 0;
+    s32 enc;
 
     switch (type) {
     case 3:
@@ -2246,11 +2253,11 @@ s32 fn_801AA55C(s32 arg0, s32 arg1, u16 *out) {
     if (arg0 > 0x3F) {
         return 0;
     }
-    bits += (arg0 & 0x3F) << 7;
+    enc = bits | ((arg0 & 0x3F) << 7);
     if (arg1 >= fn_801AA4E0()) {
         return 0;
     }
-    *out = bits | (arg1 & 0x7F);
+    *out = enc | (arg1 & 0x7F);
     return 1;
 }
 
@@ -2306,8 +2313,8 @@ void fn_801AB0F0(void *arg0) {
     if (i == -1) {
         return;
     }
-    if (i >= 0 && (u32)i < (u32)((M2C_FIELD(arg0, u8 **, 4) - M2C_FIELD(arg0, u8 **, 0)) >> 4)) {
-        M2C_FIELD(i * 0x10 + M2C_FIELD(arg0, u8 **, 0), s32 *, 8) = 0;
+    if (i >= 0 && (u32)i < (u32)((M2C_FIELD(arg0, s32 *, 4) - M2C_FIELD(arg0, s32 *, 0)) >> 4)) {
+        *(s32 *)(M2C_FIELD(arg0, s32 *, 0) + (i * 0x10) + 8) = 0;
     }
     M2C_FIELD(arg0, s32 *, 0x54) = -1;
     M2C_FIELD(arg0, s32 *, 0x58) = -1;
