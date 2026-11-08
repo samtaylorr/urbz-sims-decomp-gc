@@ -3258,9 +3258,9 @@ void fn_800E3B5C(s32 *self) {
     fn_800E3E08(self[2]);
 }
 
-extern void fn_800E3E40(s32);
+extern void fn_800E3E40(s32, s32);
 void fn_800E3B80(s32 *self, s32 arg) {
-    fn_800E3E40(self[2]);
+    fn_800E3E40(self[2], arg);
 }
 
 s32 fn_800E3BA4(void *arg0) {
@@ -3271,8 +3271,34 @@ void fn_800E3BB0(void *arg0) {
     M2C_FIELD(M2C_FIELD(arg0, void **, 8), s32 *, 0x8C) = 0;
 }
 
+s32 fn_800E3E50(void *self) {
+    s32 *p = M2C_FIELD(self, s32 **, 0x38);
+    if (p == NULL) {
+        return -1;
+    }
+    return *p;
+}
+
 s32 fn_800E3E6C(void *arg0) {
     return M2C_FIELD(M2C_FIELD(arg0, void **, 0x38), s32 *, 0xC);
+}
+
+s32 fn_800E3E78(void *self) {
+    typedef struct {
+        s32 ***cur;
+        s32 ***first;
+        s32 ***last;
+        s32 ****node;
+    } DequeIt;
+    DequeIt it = *(DequeIt *)((u8 *)self + 0x60);
+    if (it.cur == it.first) {
+        it.node--;
+        it.first = *it.node;
+        it.last = it.first + 32;
+        it.cur = it.last;
+    }
+    it.cur--;
+    return ***it.cur;
 }
 
 s32 fn_800E3EEC(void *arg0) {
