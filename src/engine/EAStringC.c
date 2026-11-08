@@ -4918,7 +4918,7 @@ s32 fn_802BD6A8(void **self, const char *s) {
     return 0;
 }
 
-char *fn_802BD8FC(void **self, s32 n) {
+inline char *fn_802BD8FC(void **self, s32 n) {
     extern char *fn_803B9024(char *, s32 *);
     struct Buf { u16 ref; u16 len; s32 cap; char data[1]; };
     char *p;
