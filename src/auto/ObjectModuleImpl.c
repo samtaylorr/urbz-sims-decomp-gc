@@ -98,20 +98,21 @@ s32 fn_8014A690(char *arg0) {
 char *fn_8014A6D8(char *self, s32 key) {
     s32 fn_8016CCE0(void *);
     char **tbl = (char **)(self + 0x50);
-    u32 idx = (u8)key;
+    s32 k;
     s32 *pkey;
     char *prev;
     char *n;
 
-    n = tbl[idx];
-    pkey = &key;
+    n = tbl[(u8)key];
+    k = key;
+    pkey = &k;
     prev = 0;
     while (n != 0) {
         if (*pkey == fn_8016CCE0(n)) {
             if (prev != 0) {
                 *(char **)(prev + 0xA0) = *(char **)(n + 0xA0);
-                *(char **)(n + 0xA0) = tbl[idx];
-                tbl[idx] = n;
+                *(char **)(n + 0xA0) = tbl[(u8)key];
+                tbl[(u8)key] = n;
             }
             break;
         }
@@ -155,6 +156,7 @@ void *fn_8014B0E0(void *arg0, void *arg1) {
     s32 fn_8016CC2C(void *, void *);
     void *it;
     s32 id;
+    s32 ok;
 
     it = NULL;
     id = M2C_FIELD(M2C_FIELD(arg1, void **, 0x38), s16 *, 0x14);
@@ -162,9 +164,14 @@ void *fn_8014B0E0(void *arg0, void *arg1) {
         return arg1;
     }
     while ((it = M2C_FIELD(*(void **)arg0, void *(**)(void *, void *), 0x7C)((char *)arg0 + M2C_FIELD(*(void **)arg0, s16 *, 0x78), it)) != NULL) {
-        if (fn_8016CC2C(it, arg1) != 0 && M2C_FIELD(M2C_FIELD(it, void **, 0x38), s16 *, 0x14) == id &&
-            (M2C_FIELD(M2C_FIELD(it, void **, 0x38), s16 *, 0x14) != 0 ? M2C_FIELD(M2C_FIELD(it, void **, 0x38), s16 *, 0x16) == -1 : 0)) {
-            return it;
+        if (fn_8016CC2C(it, arg1) != 0 && M2C_FIELD(M2C_FIELD(it, void **, 0x38), s16 *, 0x14) == id) {
+            ok = 0;
+            if (M2C_FIELD(M2C_FIELD(it, void **, 0x38), s16 *, 0x14) != 0) {
+                ok = M2C_FIELD(M2C_FIELD(it, void **, 0x38), s16 *, 0x16) == -1;
+            }
+            if (ok != 0) {
+                return it;
+            }
         }
     }
     return arg1;
@@ -173,22 +180,23 @@ void *fn_8014B0E0(void *arg0, void *arg1) {
 s32 fn_8014BDFC(void *arg0) {
     s32 fn_8032D8E0(void *, void *, s32 *);
     void *p;
-    void *h;
+    void *q;
     s32 out;
     s32 result;
 
     p = M2C_FIELD(*(void **)arg0, void *(**)(void *), 0x3C)((char *)arg0 + M2C_FIELD(*(void **)arg0, s16 *, 0x38));
-    if (p == NULL || (h = M2C_FIELD(p, void **, 0xC)) == NULL || (h = M2C_FIELD(h, void **, 0x34)) == NULL) {
+    if (p == NULL) {
         return -1;
     }
-    result = -1;
-    if (fn_8032D8E0(M2C_FIELD(arg0, void **, 0x6A0), h, &out) != 0) {
-        result = out;
+    q = M2C_FIELD(p, void **, 0xC);
+    if (q == NULL || M2C_FIELD(q, void **, 0x34) == NULL) {
+        return -1;
     }
-    if (result != 0) {
-        return result;
+    result = fn_8032D8E0(M2C_FIELD(arg0, void **, 0x6A0), M2C_FIELD(q, void **, 0x34), &out) != 0 ? out : -1;
+    if (result == 0) {
+        return -1;
     }
-    return -1;
+    return result;
 }
 
 void fn_8014C314(void *arg0, void **arg1) {
