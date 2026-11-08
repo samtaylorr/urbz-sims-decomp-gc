@@ -254,23 +254,21 @@ s32 fn_8019B448(void) {
 }
 
 s32 fn_8019B83C(void *self, s32 arg1, u16 **out) {
-    s32 ret = 0;
-
-    if ((u16)arg1 <= 0x2f) {
-        switch (arg1) {
-        case 3:
-        case 0x18:
-        case 0x20:
-        case 0x2e:
-        case 0x2f:
-            break;
-        default:
-            *out = (u16 *)((u8 *)self + 0x14 + arg1 * 2);
-            ret = 1;
-            break;
-        }
+    if ((u16)arg1 > 0x2f) {
+    fail:
+        return 0;
     }
-    return ret;
+    switch (arg1) {
+    case 3:
+    case 0x18:
+    case 0x20:
+    case 0x2e:
+    case 0x2f:
+        goto fail;
+    default:
+        *out = (u16 *)((u8 *)self + 0x14 + arg1 * 2);
+        return 1;
+    }
 }
 
 s32 fn_8019B89C(void *arg0) {
