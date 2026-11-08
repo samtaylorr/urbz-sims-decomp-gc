@@ -768,14 +768,14 @@ s32 fn_80157434(void) {
     extern u8 *lbl_80496648;
     u8 *obj = lbl_80496650;
     u8 *obj2;
-    if (obj != NULL
-        && ((*(s32 (**)(void *))(*(u8 **)obj + 0x1DC))(obj + *(s16 *)(*(u8 **)obj + 0x1D8)) != 0
-            || (*(s32 (**)(void *))(*(u8 **)lbl_80496650 + 0x1E4))(lbl_80496650 + *(s16 *)(*(u8 **)lbl_80496650 + 0x1E0)) != 0
-            || ((obj2 = lbl_80496648) != NULL
-                && (*(s32 (**)(void *))(*(u8 **)obj2 + 0xEC))(obj2 + *(s16 *)(*(u8 **)obj2 + 0xE8)) > 0x5B))) {
-        return 1;
+    if (obj == NULL
+        || ((*(s32 (**)(void *))(*(u8 **)obj + 0x1DC))(obj + *(s16 *)(*(u8 **)obj + 0x1D8)) == 0
+            && (*(s32 (**)(void *))(*(u8 **)lbl_80496650 + 0x1E4))(lbl_80496650 + *(s16 *)(*(u8 **)lbl_80496650 + 0x1E0)) == 0
+            && ((obj2 = lbl_80496648) == NULL
+                || (*(s32 (**)(void *))(*(u8 **)obj2 + 0xEC))(obj2 + *(s16 *)(*(u8 **)obj2 + 0xE8)) <= 0x5B))) {
+        return 0;
     }
-    return 0;
+    return 1;
 }
 
 s32 fn_801574D8(void) {
