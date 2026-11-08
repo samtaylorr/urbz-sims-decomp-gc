@@ -616,11 +616,7 @@ s32 fn_8029A98C(void *arg0, s32 month, s32 year) {
         days = 31;
         break;
     case 1:
-        if (fn_8029A908(arg0, year) == 0) {
-            days = 28;
-        } else {
-            days = 29;
-        }
+        days = fn_8029A908(arg0, year) ? 29 : 28;
         break;
     case 3:
     case 5:
