@@ -2262,8 +2262,7 @@ s32 fn_801A18A4(void *self) {
     extern s32 fn_800FC380(void *, s32, s16, u16 *);
     s16 fn_801A2F3C(u16 *);
     char *p;
-    volatile s32 pad[2];
-    u16 val[2];
+    u16 val[8];
     p = M2C_FIELD(M2C_FIELD(M2C_FIELD(self, char **, 0), char **, 0x1C), char *(**)(void *), 0x4C)(
         M2C_FIELD(self, char **, 0) + M2C_FIELD(M2C_FIELD(M2C_FIELD(self, char **, 0), char **, 0x1C), s16 *, 0x48));
     if (fn_800FC380(M2C_FIELD(p, void **, 0xC), fn_801A2F3C((u16 *)p), M2C_FIELD(p, s16 *, 2), val) != 0) {
