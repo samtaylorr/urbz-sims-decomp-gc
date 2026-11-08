@@ -2878,14 +2878,16 @@ s32 fn_801A9D9C(void *arg0, void *arg1) {
 s32 fn_801A9E50(void *self, s32 arg1) {
     void fn_80105534(void *, s32, s32);
     void fn_801055FC(void *, s32);
-    struct { s32 a, b, c; } buf;
-    void *vt;
+    s32 buf[2];
+    char *ent;
+    void *obj;
     s32 r;
 
-    vt = M2C_FIELD(self, void **, 0);
-    fn_80105534(&buf, arg1, 1);
-    r = M2C_FIELD(vt, s32 (**)(void *, void *), 0x64)((char *)self + M2C_FIELD(vt, s16 *, 0x60), &buf);
-    fn_801055FC(&buf, 2);
+    ent = M2C_FIELD(self, char *, 0) + 0x60;
+    obj = (char *)self + *(s16 *)ent;
+    fn_80105534(buf, arg1, 1);
+    r = (*(s32 (**)(void *, void *))(ent + 4))(obj, buf);
+    fn_801055FC(buf, 2);
     return r;
 }
 
@@ -2960,6 +2962,13 @@ u8 fn_801AA134(void *self, s32 arg1) {
     s32 row = fn_80105B78(arg1);
     s32 col = fn_80105B84(arg1);
     return (*(u8 ***)(tab + 0xC))[row][col];
+}
+
+void fn_801AA184(void *self, s32 arg1, u8 arg2) {
+    u8 *tab = M2C_FIELD(self, u8 **, 0x34);
+    s32 row = fn_80105B78(arg1);
+    s32 col = fn_80105B84(arg1);
+    (*(u8 ***)(tab + 0xC))[row][col] = arg2;
 }
 
 s32 fn_80105B78(s32);
