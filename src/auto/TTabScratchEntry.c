@@ -2059,6 +2059,11 @@ s32 fn_801B1824(void *arg0) {
     return M2C_FIELD(arg0, u16 *, 4) & 0x7FFF;
 }
 
+void fn_801B1830(void *arg0, s32 arg1) {
+    M2C_UNK fn_800EE424(s32);
+    fn_800EE424(M2C_FIELD(arg0, s32 *, 0x10) + (arg1 * 4));
+}
+
 void fn_801B185C(void *arg0, s32 i, s16 v) {
     M2C_FIELD(arg0, s16 **, 0x14)[i] = v;
 }
