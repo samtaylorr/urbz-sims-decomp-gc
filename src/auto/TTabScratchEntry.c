@@ -377,19 +377,19 @@ void fn_8019B6E4(void *self, s32 idx, TTabBlk20 *out) {
 }
 
 void fn_8019B748(void *self, s32 *out) {
-    s32 *src[3] = {
-        (s32 *)((u8 *)self + 0xbc),
-        (s32 *)((u8 *)self + 0xdc),
-        (s32 *)((u8 *)self + 0x15c),
+    u8 *src[3] = {
+        (u8 *)self + 0xbc,
+        (u8 *)self + 0xdc,
+        (u8 *)self + 0x15c,
     };
     s32 i;
     s32 j;
     for (i = 0; i < 8; i++) {
         s32 sum = 0;
         for (j = 0; j < 3; j++) {
-            sum += src[j][i];
+            sum += *(s32 *)(src[j] + i * 4);
         }
-        out[i] = sum;
+        *(s32 *)((u8 *)out + i * 4) = sum;
     }
 }
 
@@ -526,6 +526,13 @@ s32 fn_8019BA48(void *arg0) {
 
 void fn_8019BA50(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x9C) = arg1;
+}
+
+void fn_8019BA58(void *arg0, char *arg1, s32 arg2) {
+    char **self = arg0;
+
+    M2C_FIELD(M2C_FIELD(*(char **)*self, char **, 0x1C), void (**)(void *, s32), 0x2C)(*(char **)*self + M2C_FIELD(M2C_FIELD(*(char **)*self, char **, 0x1C), s16 *, 0x28), 0x43);
+    M2C_FIELD(M2C_FIELD(*self, char **, 4), void (**)(void *, s32), 0xDC)(*self + M2C_FIELD(M2C_FIELD(*self, char **, 4), s16 *, 0xD8), 0x43);
 }
 
 void fn_8019BAC4(void *arg0, char **arg1) {
