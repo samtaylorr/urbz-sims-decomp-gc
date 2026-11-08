@@ -63,6 +63,21 @@ void fn_80250290(void) {
     PPCMthid2(PPCMfhid2() & 0xBFFFFFFF);
 }
 
+typedef void (*__OSExceptionHandler)(u8, void *);
+extern __OSExceptionHandler *lbl_80495DEC;
+__OSExceptionHandler fn_80250BDC(u8 exception, __OSExceptionHandler handler) {
+    __OSExceptionHandler oldHandler;
+    oldHandler = lbl_80495DEC[exception];
+    lbl_80495DEC[exception] = handler;
+    return oldHandler;
+}
+
+#pragma push
+#pragma peephole off
+__OSExceptionHandler fn_80250BF8(u8 exception) {
+    return lbl_80495DEC[exception];
+}
+#pragma pop
 void fn_80250FC4(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0) = 0;
     M2C_FIELD(arg0, s32 *, 4) = 0;
