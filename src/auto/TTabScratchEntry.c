@@ -38,6 +38,16 @@ static inline s32 TTSE_ArrCount(void *arr) {
     return n;
 }
 
+s32 fn_80105B78(s32);
+s32 fn_80105B84(s32);
+
+static inline u8 *TTSE_Cell(void *self, s32 pos) {
+    u8 *tab = M2C_FIELD(self, u8 **, 0x2C);
+    s32 row = fn_80105B78(pos);
+    s32 col = fn_80105B84(pos);
+    return &(*(u8 ***)(tab + 0xC))[row][col];
+}
+
 typedef struct ScratchPool {
     u32 base;
     void *free;
