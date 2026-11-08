@@ -4019,9 +4019,12 @@ s32 fn_80206E64(void *obj) {
     s32 fn_800599B0(void *);
     s32 fn_800599F0(void *);
     s32 ret = 0;
+    s32 lo = 2;
     if (obj != NULL && fn_800599B0(obj) == 2) {
         s32 r = fn_800599F0(obj);
-        ret = r <= 5 && r >= 2;
+        if (r <= 5) {
+            ret = r >= lo;
+        }
     }
     return ret;
 }
