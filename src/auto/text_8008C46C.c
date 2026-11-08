@@ -649,6 +649,27 @@ void fn_80094F44(void *arg0, s32 arg1, s32 arg2) {
     fn_802EC15C((s32)p, d, c);
 }
 
+extern void fn_802EC178(s32, s32, s32);
+void fn_80094F94(void *arg0, s32 arg1, s32 arg2) {
+    register char *p asm("r3");
+    register s32 c asm("r5");
+    register s32 d asm("r4");
+    void *q;
+    s32 b;
+    q = M2C_FIELD(arg0, void *volatile *, 8);
+    d = arg2;
+    q = M2C_FIELD(q, void **, 0x334);
+    b = q != 0;
+    if (b) {
+        p = M2C_FIELD(arg0, char **, 8) + 0x314;
+        c = arg1;
+    } else {
+        p = M2C_FIELD(arg0, char **, 8) + 0x314;
+        c = arg1;
+    }
+    fn_802EC178((s32)p, d, c);
+}
+
 s32 fn_80095A44(void) {
     return 1;
 }
