@@ -1442,6 +1442,14 @@ void fn_80384270(void *arg0, u32 arg1) {
     fn_80254684();
 }
 
+void fn_803842C4(void *arg0, u32 arg1) {
+    fn_8025465C();
+    M2C_FIELD(arg0, u16 *, 0x1AE) = arg1 >> 16;
+    M2C_FIELD(arg0, u16 *, 0x1B0) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x1C) = (s32) (M2C_FIELD(arg0, s32 *, 0x1C) | 0x8000);
+    fn_80254684();
+}
+
 void fn_803845AC(void *arg0, void *arg1) {
     u16 *d = (u16 *)((u8 *)arg0 + 0x1F2);
     fn_8025465C();
