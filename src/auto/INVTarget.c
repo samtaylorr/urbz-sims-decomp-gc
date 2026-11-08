@@ -3078,6 +3078,12 @@ void fn_801FF39C(void *arg0) {
     }
 }
 
+void fn_801FF6E0(void) {
+    extern void fn_801B8734(s32);
+    extern void *lbl_8041FA30[];
+    fn_801B8734(M2C_FIELD(lbl_8041FA30[0], s32 *, 0x14));
+}
+
 void fn_802000DC(void *self, void *arg1) {
     extern void *fn_8016CC44(void *);
     u8 *name = (u8 *)self + 0x38B;
@@ -3816,16 +3822,20 @@ void fn_8020F1E4(void *arg0, s32 arg1, void *arg2) {
     void *fn_8020F76C(void *, s32);
     void fn_800F8178(void *, void *);
     void fn_800F82FC(void *, void *);
+    INVHandle fn_8004C168();
+    extern u8 lbl_8041F94C[];
     extern u8 lbl_803E79BC[];
     extern u8 lbl_803E79C0[];
     s32 idx = arg1 + 1;
+    INVHandle h;
 
     if (fn_8020F69C(arg0, idx) != 0) {
         fn_800F8178(arg2, fn_8020F724(arg0, idx));
         fn_800F82FC(arg2, lbl_803E79BC);
         fn_800F82FC(arg2, fn_8020F76C(arg0, idx));
     } else {
-        fn_800F8178(arg2, INV_getStr(lbl_803E79C0));
+        h = fn_8004C168(lbl_8041F94C, lbl_803E79C0);
+        fn_800F8178(arg2, h.p != NULL ? (void *)*h.p : NULL);
     }
 }
 
@@ -4359,24 +4369,24 @@ u8 *fn_802208C0(void *self, u8 *p) {
     return *(u8 **)(p + 0xC);
 }
 
-u8 *fn_802208D8(u8 *self, s32 idx) {
-    u8 *list = self;
+u8 *fn_802208D8(u8 *list, s32 idx) {
     u8 *found = NULL;
+    u8 *p = list;
     s32 i = 0;
-    self = *(u8 **)(list + 0x4);
-    if (*(s32 *)(self + 0x4) != 0) {
-        for (self = *(u8 **)(list + 0x0); self != NULL && found == NULL; self = *(u8 **)(self + 0x4), i++) {
+    p = *(u8 **)(list + 0x4);
+    if (*(s32 *)(p + 0x4) != 0) {
+        for (p = *(u8 **)(list + 0x0); p != NULL && found == NULL; p = *(u8 **)(p + 0x4), i++) {
             if (i == idx) {
-                found = self;
+                found = p;
             }
         }
     } else {
-        while (*(s32 *)(self + 0x8) != 0) {
-            self = *(u8 **)(self + 0x0);
+        while (*(s32 *)(p + 0x8) != 0) {
+            p = *(u8 **)(p + 0x0);
         }
-        for (self = *(u8 **)(self + 0xC); self != NULL && found == NULL; self = *(u8 **)(self + 0xC), i++) {
+        for (p = *(u8 **)(p + 0xC); p != NULL && found == NULL; p = *(u8 **)(p + 0xC), i++) {
             if (i == idx) {
-                found = self;
+                found = p;
             }
         }
     }
