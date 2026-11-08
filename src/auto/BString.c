@@ -1277,10 +1277,10 @@ void *fn_800D651C(void *self) {
     M2C_FIELD(self, s32 *, 0x4c) = 0;
     M2C_FIELD(self, s32 *, 0x30) = 0;
     M2C_FIELD(self, s32 *, 0x38) = 0;
-    lbl_8041F800[0] = self;
-    M2C_FIELD(self, s32 *, 0x5c) = -1;
     M2C_FIELD(self, s32 *, 0x3c) = 1;
     M2C_FIELD(self, s32 *, 0xc) = 0;
+    lbl_8041F800[0] = self;
+    M2C_FIELD(self, s32 *, 0x5c) = -1;
     return self;
 }
 
@@ -1389,13 +1389,13 @@ void fn_800D84B0(s32 arg0) {
 
 void fn_800D84EC(s32 arg0) {
     extern s32 lbl_8041F7C4[];
-    extern f32 lbl_803D432C;
+    extern f32 lbl_803D432C[];
     extern s32 lbl_8041F94C[];
     extern void fn_800E3DBC(s32, s32, f32);
     extern void fn_80012020(void *);
     s32 i;
     lbl_8041F7C4[0] = 0;
-    fn_800E3DBC(arg0, 0, lbl_803D432C);
+    fn_800E3DBC(arg0, 0, lbl_803D432C[0]);
     for (i = 0; i < 2; i++) {
         void *p = (void *)lbl_8041F94C[0x160 / 4 + i];
         if (p != NULL) {
