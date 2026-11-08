@@ -1176,6 +1176,37 @@ s32 *fn_800D5070(s32 *self, s32 a) {
     return self;
 }
 
+void fn_800D5478(char *self, char *arg1) {
+    void fn_802CB69C(void *);
+    fn_802CB69C(self + 8);
+    M2C_FIELD(arg1, char **, 4) = self;
+}
+
+void fn_800D54B0(char *self) {
+    BSKey k;
+    if (M2C_FIELD(self, s32 *, 4) != 0) {
+        k.v = 2;
+        fn_800D53B8(self, &k);
+    }
+}
+
+void fn_800D54E8(char *self) {
+    extern u8 lbl_8041F94C[];
+    void fn_8004B2B0(void *);
+    void fn_8004A068(void *);
+    char *obj;
+    char *vt;
+
+    if (M2C_FIELD(self, char **, 4) != NULL) {
+        obj = *M2C_FIELD(self, char ***, 4);
+        vt = M2C_FIELD(obj, char **, 8);
+        M2C_FIELD(vt, void (**)(void *, s32), 0x2C)(obj + M2C_FIELD(vt, s16 *, 0x28), 0);
+    }
+    M2C_FIELD(self, char **, 4) = NULL;
+    fn_8004B2B0(lbl_8041F94C);
+    fn_8004A068(lbl_8041F94C);
+}
+
 void fn_800D5FAC(void) {
 
 }
