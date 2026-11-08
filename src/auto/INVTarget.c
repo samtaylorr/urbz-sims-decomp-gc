@@ -3170,7 +3170,7 @@ s32 fn_801FB90C(INVPair *arg0) {
 }
 
 s32 fn_801FBA80(s32 arg0, u16 *arg1) {
-    void fn_80248488(s32, s32, s32, ...);
+    void *fn_80248488();
     s32 fn_80245BB4(char *, char *, ...);
     void fn_800C3C04(char *, s32, u16 *);
     s32 fn_800F8120(s32);
@@ -3183,7 +3183,7 @@ s32 fn_801FBA80(s32 arg0, u16 *arg1) {
         return 0;
     }
     p = buf;
-    fn_80248488((s32)p, 0, 0x20);
+    fn_80248488(p, 0, 0x20);
     len = fn_80245BB4(p, lbl_803E4E18, arg0);
     fn_800C3C04(p, len, arg1);
     arg1[len] = 0;
