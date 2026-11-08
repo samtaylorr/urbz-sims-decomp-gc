@@ -3820,18 +3820,19 @@ void fn_802174A0(void *arg0) {
 }
 
 void fn_80217530(void *arg0, s32 arg1, u32 arg2) {
-    extern s32 lbl_80494660[2];
+    extern s32 lbl_80494660;
+    extern s32 lbl_80494664;
     s32 done = arg2 > 11;
     if (done) {
         return;
     }
     if (arg1 == 2) {
-        lbl_80494660[0] = arg2;
+        lbl_80494660 = arg2;
         done = 1;
-        lbl_80494660[1] = arg2;
+        lbl_80494664 = arg2;
     }
     if (done == 0) {
-        lbl_80494660[arg1] = arg2;
+        (&lbl_80494660)[arg1] = arg2;
     }
 }
 
