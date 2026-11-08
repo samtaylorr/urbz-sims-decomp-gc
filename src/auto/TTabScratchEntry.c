@@ -156,7 +156,7 @@ void fn_8019B3B8(void *arg0) {
         ((s32 *)((u8 *)arg0 + 0x15C))[i] = 0;
     }
     for (i = 0; i < 5; i++) {
-        q = (struct S *)(i * 32 + (u8 *)arg0);
+        q = (struct S *)((s32 *)arg0 + i * 8);
         for (j = 7; j >= 0; j--) {
             q->a[j] = 0;
         }
@@ -360,15 +360,17 @@ extern u8 lbl_80414750[];
 extern f32 lbl_803DB6F0[];
 void fn_8019CC24(void *, s32);
 void **fn_8019CB00(void **self) {
+    f32 f;
     fn_8019C828(self);
+    f = lbl_803DB6F0[0];
     *self = lbl_80414750;
     M2C_FIELD(self, s16 *, 0x4) = 0;
     M2C_FIELD(self, s32 *, 0x8) = 0;
     M2C_FIELD(self, s32 *, 0xC) = 0x32;
     M2C_FIELD(self, s32 *, 0x10) = 0;
-    M2C_FIELD(self, f32 *, 0x14) = lbl_803DB6F0[0];
-    M2C_FIELD(self, f32 *, 0x18) = lbl_803DB6F0[0];
-    M2C_FIELD(self, f32 *, 0x1C) = lbl_803DB6F0[0];
+    M2C_FIELD(self, f32 *, 0x14) = f;
+    M2C_FIELD(self, f32 *, 0x18) = f;
+    M2C_FIELD(self, f32 *, 0x1C) = f;
     return self;
 }
 
@@ -1668,6 +1670,14 @@ s32 fn_801A3AAC(void *arg0) {
 
 s32 fn_801A3AD8(void *arg0) {
     return ((u16) M2C_FIELD(arg0, u16 *, 0x110) >> 9U) & 1;
+}
+
+void fn_801A3AE4(void *arg0, s32 arg1) {
+    s32 v = M2C_FIELD(arg0, u16 *, 0x110) & ~0x200;
+    M2C_FIELD(arg0, u16 *, 0x110) = v;
+    if (arg1 != 0) {
+        M2C_FIELD(arg0, u16 *, 0x110) = v | 0x200;
+    }
 }
 
 s32 fn_801A3B04(void *arg0) {
