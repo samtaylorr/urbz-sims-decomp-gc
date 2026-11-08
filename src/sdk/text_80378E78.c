@@ -934,6 +934,10 @@ u32 fn_80387044(void) {
     return (__DSPRegs[0] << 16) | __DSPRegs[1];
 }
 
+u32 fn_80387058(void) {
+    return (__DSPRegs[2] << 16) | __DSPRegs[3];
+}
+
 extern s32 lbl_80496470;
 s32 fn_80387188(void) {
     return lbl_80496470;
