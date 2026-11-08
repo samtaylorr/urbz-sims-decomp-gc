@@ -2312,6 +2312,27 @@ void *fn_801E1A84(void *arg0) {
     return obj;
 }
 
+void fn_801E1EE4(void *arg0) {
+    struct Pair { s32 a; s32 b; };
+    void *fn_8033390C(void *, s32);
+    void *fn_803114D0(void *, s32, char *, s32);
+    void fn_80311800(void *, void *, struct Pair *, s32);
+    extern void *lbl_80494FCC;
+    extern char lbl_803E19B8[];
+    extern struct Pair lbl_803E19CC[];
+    struct Pair tmp;
+    void *t;
+    void *r;
+
+    if (M2C_FIELD(arg0, void **, 0x30C) == NULL) {
+        t = fn_8033390C(lbl_80494FCC, M2C_FIELD(arg0, u8 *, 0x315));
+        r = fn_803114D0(t, 0, lbl_803E19B8, 0x64);
+        M2C_FIELD(arg0, void **, 0x30C) = r;
+        tmp = lbl_803E19CC[0];
+        fn_80311800(t, r, &tmp, 2);
+    }
+}
+
 void fn_801E2140(void *arg0) {
     M2C_UNK fn_801E2180();
     M2C_UNK fn_801E2674();
@@ -2336,23 +2357,16 @@ void fn_801EA748(void) {
 }
 
 void fn_801EFE08(char *self, char *name, void *arg2) {
-    typedef struct { char **begin; char **end; } V;
     s32 fn_801F0834(char *);
     u32 i;
     s32 id = fn_801F0834(name);
-    V *v = (V *)(self + 0xD4);
-    char *obj;
-    i = 0;
-    if ((u32)(v->end - M2C_FIELD(self, char ***, 0xD4)) != 0) {
-        do {
-            obj = M2C_FIELD(self, char ***, 0xD4)[i];
-            if (id == M2C_FIELD(obj, s32 *, 0x4)) {
-                char *vt = M2C_FIELD(obj, char **, 0x8);
-                M2C_FIELD(vt, void (**)(void *, void *), 0x14)(obj + M2C_FIELD(vt, s16 *, 0x10), arg2);
-                return;
-            }
-            i++;
-        } while (i < (u32)(v->end - M2C_FIELD(self, char ***, 0xD4)));
+    for (i = 0; i < INVPtrVec_size((INVPtrVec *)(self + 0xD4)); i++) {
+        char *obj = M2C_FIELD(self, char ***, 0xD4)[i];
+        if (id == M2C_FIELD(obj, s32 *, 0x4)) {
+            char *vt = M2C_FIELD(obj, char **, 0x8);
+            M2C_FIELD(vt, void (**)(void *, void *), 0x14)(obj + M2C_FIELD(vt, s16 *, 0x10), arg2);
+            return;
+        }
     }
 }
 
@@ -3859,8 +3873,8 @@ void fn_80206190(void) {
 
 }
 
-void fn_802063F8(void *arg0, s32 arg1, s32 arg2) {
-    void fn_80245BB4(s32, char *, ...);
+void fn_802063F8(void *arg0, char *arg1, s32 arg2) {
+    s32 fn_80245BB4(char *, char *, ...);
     extern char lbl_803E4E18[];
     extern u8 lbl_8045B82C[];
     void fn_80205CF8(void *, s32, void **, s32 *);
@@ -3869,14 +3883,17 @@ void fn_802063F8(void *arg0, s32 arg1, s32 arg2) {
     void fn_8033789C(void *, s32);
     void *a[2];
     s32 b[2];
+    void *g;
     s32 x;
 
     fn_80205CF8(arg0, M2C_FIELD(arg0, u8 *, 0x8C1), a, b);
-    if (b[0] > 11 || b[0] < 9) {
-        x = **(s32 **)**(s32 ***)(M2C_FIELD(fn_801FB790(a[0]), u8 **, 0x38) + 0xC0);
-        fn_80245BB4(arg1, lbl_803E4E18, fn_8032C2E0(fn_8033740C(lbl_8045B82C, x, 0, 0), arg2));
-        fn_8033789C(lbl_8045B82C, x);
+    if (b[0] <= 11 && b[0] >= 9) {
+        return;
     }
+    g = lbl_8045B82C;
+    x = **(s32 **)**(s32 ***)(M2C_FIELD(fn_801FB790(a[0]), u8 **, 0x38) + 0xC0);
+    fn_80245BB4(arg1, lbl_803E4E18, fn_8032C2E0(fn_8033740C(g, x, 0, 0), arg2));
+    fn_8033789C(g, x);
 }
 
 void fn_802064A8(void *arg0, s32 arg1) {
@@ -4379,20 +4396,19 @@ void fn_8020F430(s32 arg0) {
 
 s32 fn_8020F69C(void *arg0, s32 arg1) {
     char *p;
-    char *obj;
     char *vt;
 
     if ((u32)(arg1 - 1) > 3) {
         return 0;
     }
     if (M2C_FIELD(arg0, s32 *, 0x120) == 0x14) {
-        p = (char *)arg0 + (arg1 - 1) * 0x1BE0 + 0x70C8;
+        p = (char *)arg0 + arg1 * 0x1BE0 + 0x54E8;
     } else {
-        p = (char *)arg0 + (arg1 - 1) * 0x1BE0 + 0x148;
+        p = (char *)arg0 + arg1 * 0x1BE0 - 0x1A98;
     }
-    obj = p + 0xC;
-    vt = *(char **)obj;
-    return M2C_FIELD(vt, s32 (**)(void *), 0x9C)(obj + M2C_FIELD(vt, s16 *, 0x98)) != 0;
+    p += 0xC;
+    vt = *(char **)p;
+    return M2C_FIELD(vt, s32 (**)(void *), 0x9C)(p + M2C_FIELD(vt, s16 *, 0x98)) != 0;
 }
 
 void *fn_8020F724(void *arg0, s32 arg1) {
@@ -5452,8 +5468,8 @@ s32 *fn_80223638(s32 *arg0) {
     arg0[1] = 0;
     v[1] = 0;
     arg0[5] = -1;
-    arg0[7] = 0;
     *(u8 *)(arg0 + 4) = 0;
+    arg0[7] = 0;
     return arg0;
 }
 
