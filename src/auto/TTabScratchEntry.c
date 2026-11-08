@@ -32,11 +32,6 @@ static inline s32 TTSE_ArrCount(void *arr) {
     return n;
 }
 
-typedef struct TTSEKey {
-    s32 a;
-    s16 b;
-} TTSEKey;
-
 typedef struct ScratchPool {
     u32 base;
     void *free;
@@ -168,8 +163,8 @@ void fn_8019B0BC(void *self) {
     }
     {
         u16 f = M2C_FIELD(self, u16 *, 0x36);
-        M2C_FIELD(self, f32 *, 0xB0) = lbl_803DB4CC[0];
         M2C_FIELD(self, u16 *, 0x36) = f | 1;
+        M2C_FIELD(self, f32 *, 0xB0) = lbl_803DB4CC[0];
     }
 }
 
@@ -179,11 +174,11 @@ void fn_8019B128(void *self) {
     if ((*(s32 (**)(void *))(vt + 0x64))((u8 *)self + *(s16 *)(vt + 0x60)) != 0) {
         fn_801051C8(0xBD, 0);
     }
-    M2C_FIELD(self, f32 *, 0xA8) = lbl_803DB4D0[0];
     {
-        s32 f = M2C_FIELD(self, u16 *, 0x36);
-        M2C_FIELD(self, u16 *, 0x36) = f & ~1;
+        f32 v = lbl_803DB4D0[0];
+        M2C_FIELD(self, f32 *, 0xA8) = v;
     }
+    M2C_FIELD(self, u16 *, 0x36) &= ~1;
     fn_8019AFF0(self);
 }
 
@@ -3145,10 +3140,12 @@ void fn_801B1AB4(void *p) {
     }
 }
 
-s32 fn_801B1C0C(void *arg0, const TTSEKey *arg1) {
+s32 fn_801B1C0C(void *arg0, void *arg1) {
     void fn_801B383C(void *);
     void *fn_803ABF48(void *, void *, u16);
     extern void *lbl_8049665C;
+    register void *self asm("r30") = arg0;
+    register void *e asm("r31") = arg1;
     void *obj;
     void *vt;
     u8 *p;
@@ -3157,27 +3154,27 @@ s32 fn_801B1C0C(void *arg0, const TTSEKey *arg1) {
     u8 *q;
     s32 c;
 
-    fn_801B383C((char *)arg0 + 8);
+    fn_801B383C((char *)self + 8);
     obj = lbl_8049665C;
     vt = M2C_FIELD(obj, void **, 0);
-    obj = M2C_FIELD(vt, void *(**)(void *, s32), 0x3C)((char *)obj + M2C_FIELD(vt, s16 *, 0x38), arg1->a);
+    obj = M2C_FIELD(vt, void *(**)(void *, s32), 0x3C)((char *)obj + M2C_FIELD(vt, s16 *, 0x38), M2C_FIELD(e, s32 *, 0));
     p = M2C_FIELD(M2C_FIELD(obj, void **, 0xC), u8 **, 0x20);
     n = 0;
     if (p != NULL) {
         n = M2C_FIELD(p, s32 *, -4);
     }
-    r = fn_803ABF48(p, p + n * 16, arg1->b);
-    M2C_FIELD(arg0, void **, 0x18) = r;
+    r = fn_803ABF48(p, p + n * 16, M2C_FIELD(e, u16 *, 4));
+    M2C_FIELD(self, void **, 0x18) = r;
     if (r != NULL) {
         q = M2C_FIELD(r, u8 **, 4);
         c = 0;
         if (q != NULL) {
             c = M2C_FIELD(q, s32 *, -4);
         }
-        M2C_FIELD(arg0, s16 *, 4) = c;
+        M2C_FIELD(self, s16 *, 4) = c;
         return 1;
     }
-    M2C_FIELD(arg0, s16 *, 4) = (s32)r;
+    M2C_FIELD(self, s16 *, 4) = (s32)r;
     return 0;
 }
 
