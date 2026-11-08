@@ -656,6 +656,13 @@ void fn_80382004(void) {
 
 }
 
+void fn_80382008(u32 arg0) {
+    extern u32 lbl_804963D8;
+    if (lbl_804963D8 != arg0) {
+        lbl_804963D8 = arg0;
+    }
+}
+
 extern s32 lbl_804963D8;
 s32 fn_8038201C(void) {
     return lbl_804963D8;
@@ -1242,19 +1249,15 @@ s32 fn_8038DD80(s32 chan, s32 arg1, s32 arg2) {
 
 s32 fn_8038DDC8(u8 mask, s32 arg1) {
     extern u8 lbl_80495662;
-    s32 var_r5;
+    s32 prev;
 
-    if (lbl_80495662 & mask) {
-        var_r5 = 1;
-    } else {
-        var_r5 = 0;
-    }
+    prev = (lbl_80495662 & mask) ? 1 : 0;
     if (arg1 != 0) {
         lbl_80495662 |= mask;
     } else {
         lbl_80495662 &= ~mask;
     }
-    return var_r5;
+    return prev;
 }
 
 s32 fn_8038DE10(s32 arg0) {
