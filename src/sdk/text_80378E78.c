@@ -1148,6 +1148,38 @@ s32 fn_8038742C(void) {
     return (s32)lbl_80496498;
 }
 
+void fn_80387B84(void *arg0) {
+    DSPTaskInfo *task = arg0;
+    DSPTaskInfo *temp;
+
+    if (lbl_80496494 == NULL) {
+        lbl_80496494 = lbl_80496490 = lbl_80496498 = task;
+        task->next = task->prev = NULL;
+    } else {
+        temp = lbl_80496494;
+        while (temp != NULL) {
+            if (task->priority < temp->priority) {
+                task->prev = temp->prev;
+                temp->prev = task;
+                task->next = temp;
+                if (task->prev == NULL) {
+                    lbl_80496494 = task;
+                } else {
+                    task->prev->next = task;
+                }
+                break;
+            }
+            temp = temp->next;
+        }
+        if (temp == NULL) {
+            lbl_80496490->next = task;
+            task->next = NULL;
+            task->prev = lbl_80496490;
+            lbl_80496490 = task;
+        }
+    }
+}
+
 void fn_80387C24(DSPTaskInfo *task) {
     if (lbl_80496490 == NULL) {
         lbl_80496494 = lbl_80496490 = lbl_80496498 = task;
