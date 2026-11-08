@@ -2989,11 +2989,11 @@ s32 fn_801FB8CC(INVPair *arg0) {
     return ((s32 *)arg0->a)[2];
 }
 
-s32 fn_801FB8EC(void **arg0) {
-    if (arg0 != NULL) {
-        return M2C_FIELD(*arg0, s32 *, 0);
+s32 fn_801FB8EC(INVPair *arg0) {
+    if (arg0 == NULL) {
+        return 0xD59C7BB5;
     }
-    return 0xD59C7BB5;
+    return ((s32 *)arg0->a)[0];
 }
 
 void fn_801FE23C(s32 arg0) {
@@ -3498,6 +3498,13 @@ void fn_80206698(void *arg0) {
 void fn_802066BC(void *arg0) {
     extern void fn_801FF2C0(void *, s32);
     fn_801FF2C0(arg0, 1);
+}
+
+s32 fn_8020703C(void *arg0) {
+    s32 fn_80207074(void *);
+    typedef struct { s32 a; s32 b; } Ent;
+    s32 i = fn_80207074(arg0);
+    return M2C_FIELD(arg0, Ent **, 0x178)[i].a;
 }
 
 u8 fn_80207074(void *arg0) {
