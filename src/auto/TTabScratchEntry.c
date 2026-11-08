@@ -1823,6 +1823,11 @@ void *fn_801A3198(void **arg0, s32 arg1) {
     return NULL;
 }
 
+void fn_801A31D4(void *arg0, s32 arg1) {
+    M2C_UNK fn_801A30D4(s32, s32, f32);
+    fn_801A30D4(arg1, M2C_FIELD(arg0, s32 *, 0xC), M2C_FIELD(arg0, f32 *, 0x8));
+}
+
 void fn_801A34A8(void *arg0, s32 arg1) {
     M2C_UNK fn_801A30D4(s32, s32, f32);
     fn_801A30D4(arg1, M2C_FIELD(arg0, s32 *, 0x108), M2C_FIELD(arg0, f32 *, 0x10C));
