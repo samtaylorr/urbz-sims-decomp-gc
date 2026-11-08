@@ -2113,14 +2113,16 @@ void fn_801A1848(void *self, s16 *arg1, u16 *arg2) {
 
 s32 fn_801A18A4(void *self) {
     extern s32 fn_800FC380(void *, s32, s16, u16 *);
+    s16 fn_801A2F3C(u16 *);
     char *p;
     u16 val;
+    volatile s32 pad;
     p = M2C_FIELD(M2C_FIELD(M2C_FIELD(self, char **, 0), char **, 0x1C), char *(**)(void *), 0x4C)(
         M2C_FIELD(self, char **, 0) + M2C_FIELD(M2C_FIELD(M2C_FIELD(self, char **, 0), char **, 0x1C), s16 *, 0x48));
-    if (fn_800FC380(M2C_FIELD(p, void **, 0xC), fn_801A2F3C((u16 *)p), M2C_FIELD(p, s16 *, 2), &val) == 0) {
-        return -1;
+    if (fn_800FC380(M2C_FIELD(p, void **, 0xC), fn_801A2F3C((u16 *)p), M2C_FIELD(p, s16 *, 2), &val) != 0) {
+        return val & 0x7FFF;
     }
-    return val & 0x7FFF;
+    return -1;
 }
 
 void fn_801A191C(char *self, s32 arg1, s32 arg2) {
@@ -3143,7 +3145,8 @@ s32 fn_801AA22C(void *self, s32 arg1, s32 arg2) {
     u8 *tab = M2C_FIELD(self, u8 **, 0x38);
     s32 row = fn_80105B78(arg1);
     s32 col = fn_80105B84(arg1);
-    return ((*(u8 ***)(tab + 0xC))[row][col * 8] & arg2) == arg2;
+    s32 off = col * 8;
+    return ((*(u8 ***)(tab + 0xC))[row][off] & arg2) == arg2;
 }
 
 s32 fn_801AA294(void *self, s32 arg1) {
