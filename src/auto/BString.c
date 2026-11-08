@@ -2132,10 +2132,10 @@ void fn_800DEA64(void) {
 }
 
 void fn_800DED78(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0x28) = 0;
     M2C_FIELD(arg0, s32 *, 0x18) = 0;
     M2C_FIELD(arg0, s32 *, 0x1C) = 0;
     M2C_FIELD(arg0, s32 *, 0x24) = 0;
+    M2C_FIELD(arg0, s32 *, 0x28) = 0;
 }
 
 void fn_800DED90(s32 *self) {
