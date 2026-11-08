@@ -1184,11 +1184,12 @@ s32 fn_801660AC(void **self, char *obj, s32 arg2, s32 arg3, s32 arg4) {
     extern s32 fn_801A1B50(void *, void *, s32, void *, s32);
     char *vt = *(char **)obj;
     void *r = M2C_FIELD(vt, void *(**)(void *, s32), 0x4C)(obj + M2C_FIELD(vt, s16 *, 0x48), arg3);
+    s32 ret = 0;
 
-    if (r == NULL) {
-        return 0;
+    if (r != NULL) {
+        ret = fn_801A1B50(*self, obj, arg2, r, arg4);
     }
-    return fn_801A1B50(*self, obj, arg2, r, arg4);
+    return ret;
 }
 
 s32 fn_801669D0(f32 x) {
