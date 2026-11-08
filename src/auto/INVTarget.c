@@ -2362,36 +2362,40 @@ void fn_801E2140(void *arg0) {
     }
 }
 
-s32 fn_801E613C(char *arg0, s32 arg1, s32 arg2) {
-    u32 n = *(u32 *)(arg0 + 0xEC4);
+s32 fn_801E613C(void *arg0, s32 arg1, s32 arg2) {
+    struct {
+        u8 pad[0x564];
+        s32 list[(0xEC4 - 0x564) / 4];
+        u32 n;
+    } *p = arg0;
     u32 i;
     s32 j;
-    if (n == 0) {
+    if (p->n == 0) {
         return -1;
     }
-    if (n == 1) {
-        return ((s32 *)(arg0 + 0x564))[0];
+    if (p->n == 1) {
+        return p->list[0];
     }
-    for (i = 0; i < n; i++) {
-        if (((s32 *)(arg0 + 0x564))[i] == arg1) {
+    for (i = 0; i < p->n; i++) {
+        if (p->list[i] == arg1) {
             break;
         }
     }
-    if (i == n) {
-        return ((s32 *)(arg0 + 0x564))[0];
+    if (i == p->n) {
+        return p->list[0];
     }
     j = 0;
     if (arg2 != 0) {
-        if (i != n - 1) {
+        if (i != p->n - 1) {
             j = i + 1;
         }
     } else {
         j = i - 1;
         if (i == 0) {
-            j = n - 1;
+            j = p->n - 1;
         }
     }
-    return ((s32 *)(arg0 + 0x564))[j];
+    return p->list[j];
 }
 
 void fn_801EA6A0(char *arg0, s32 arg1) {
@@ -4031,7 +4035,13 @@ void fn_80206EC8(void *arg0, s32 arg1) {
     s32 fn_80206E64(void *);
     extern char lbl_803E4E18[];
     extern s32 lbl_80494648[2];
-    fn_80245BB4(arg1, lbl_803E4E18, fn_80206E64(((struct S *)arg0)->arr[lbl_80494648[M2C_FIELD(arg0, s32 *, 0x84)]]) == 0 ? 0 : 1);
+    s32 flag;
+    if (fn_80206E64(((struct S *)arg0)->arr[lbl_80494648[M2C_FIELD(arg0, s32 *, 0x84)]]) != 0) {
+        flag = 1;
+    } else {
+        flag = 0;
+    }
+    fn_80245BB4(arg1, lbl_803E4E18, flag);
 }
 
 void fn_80206F34(void *arg0, s32 arg1) {
