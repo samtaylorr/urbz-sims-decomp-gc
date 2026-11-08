@@ -3233,7 +3233,7 @@ s32 fn_801FA8FC(void *arg0, s32 arg1, u16 *arg2) {
     return 1;
 }
 
-void fn_801FA974(void *arg0, s32 arg1, s16 arg2) {
+void fn_801FA974(void *arg0, s32 arg1, s32 arg2) {
     s32 fn_80245BB4(char *, const char *, ...);
     void fn_8000AA68(s32, void *, s32, s32, s32, ...);
     extern char lbl_803E4788[];
@@ -3242,7 +3242,7 @@ void fn_801FA974(void *arg0, s32 arg1, s16 arg2) {
     char buf1[16];
     char buf2[16];
     fn_80245BB4(buf1, lbl_803E4788, arg1);
-    fn_80245BB4(buf2, lbl_803E4788, arg2);
+    fn_80245BB4(buf2, lbl_803E4788, (s16)arg2);
     fn_8000AA68(lbl_804956BC, lbl_803E4A44, 0, 0, 2, buf1, buf2);
 }
 
