@@ -2808,6 +2808,12 @@ void fn_801F8274(void *arg0) {
     }
 }
 
+void fn_801F82E4(s32 arg0, s32 arg1) {
+    void fn_801F8FD4(s32, s32, s32);
+    ((u8 *)arg0 + 0xED)[arg1] = 2;
+    fn_801F8FD4(arg0, arg1, 1);
+}
+
 void fn_801F83BC(void) {
 
 }
@@ -2896,6 +2902,12 @@ void fn_801F9D38(s32 arg0) {
 
 u8 fn_801F9D6C(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 0xDC);
+}
+
+s32 fn_801FA3E4(void *arg0, s32 arg1, s32 arg2) {
+    M2C_UNK fn_8016A87C(s32);
+    fn_8016A87C(arg2);
+    return 1;
 }
 
 void fn_801FAC58(void *arg0, s8 arg1) {
@@ -4296,8 +4308,9 @@ block_4:
 
 void *fn_80219E28(void *arg0, s32 arg1) {
     void *p = M2C_FIELD(arg0, void **, 0x84);
+    s32 i;
 
-    for (; arg1 > 0; arg1--) {
+    for (i = 0; i < arg1; i++) {
         if (p == NULL) {
             break;
         }
