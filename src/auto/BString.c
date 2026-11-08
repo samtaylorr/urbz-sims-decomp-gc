@@ -2247,6 +2247,16 @@ void fn_800E02D4(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x18) = 0;
 }
 
+void fn_800E02E0(s32 *self) {
+    char *obj;
+    char *vt;
+    if ((u32)(self[6] - 8) <= 2) {
+        obj = *(char **)((char *)self[2] + 0x94);
+        vt = *(char **)(obj + 0x44);
+        (*(void (**)(void *))(vt + 0x1C))(obj + *(s16 *)(vt + 0x18));
+    }
+}
+
 void fn_800E0814(void *arg0) {
     extern s32 lbl_80495A6C;
     M2C_FIELD(arg0, s32 *, 0x20) = 0;
@@ -3384,16 +3394,23 @@ s32 fn_800E3E78(void *self) {
         s32 ***last;
         s32 ****node;
     } DequeIt;
-    DequeIt it = *(DequeIt *)((u8 *)self + 0x60);
-    DequeIt *p = &it;
-    if (p->cur == p->first) {
-        p->node--;
-        p->first = *p->node;
-        p->last = p->first + 32;
+    DequeIt *src = (DequeIt *)((u8 *)self + 0x60);
+    DequeIt it;
+    DequeIt *p;
+    it.cur = src->cur;
+    it.first = src->first;
+    it.last = src->last;
+    it.node = src->node;
+    p = &it;
+    if (it.cur == it.first) {
+        s32 ****n = it.node - 1;
+        it.node = n;
+        it.first = *n;
+        it.last = it.first + 32;
         p->cur = p->last;
     }
-    p->cur--;
-    return ***p->cur;
+    it.cur--;
+    return ***it.cur;
 }
 
 s32 fn_800E3EEC(void *arg0) {
