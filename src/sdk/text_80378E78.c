@@ -1614,6 +1614,19 @@ s32 fn_8038AB0C(s32 chan, void *arg1) {
     return fn_8038A57C(chan, buf, arg1);
 }
 
+s32 fn_8038AB34(s32 chan, void *arg1) {
+    s32 fn_803894A8(s32);
+    s32 fn_8038A57C(s32, void *, void *);
+    extern void fn_80387D34(void);
+    s32 result;
+
+    result = fn_8038A57C(chan, arg1, fn_80387D34);
+    if (result < 0 || arg1 == NULL) {
+        return result;
+    }
+    return fn_803894A8(chan);
+}
+
 s32 fn_8038AD04(s32 chan) {
     s32 fn_8025BFA8(s32);
     if (*(u8 *)0x800030E3 & 0x80) {
