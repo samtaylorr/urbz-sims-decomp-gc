@@ -3872,12 +3872,12 @@ char *fn_802181A0(void *arg0, char *arg1) {
     if (fn_802486DC(arg1, lbl_803E9050) == 0) {
         *(struct Str7 *)buf = *(struct Str7 *)lbl_803E90D8;
     } else if (fn_802486DC(arg1, lbl_803E905C) == 0) {
-        char c = '0';
         if (fn_8004ECC8(lbl_8041F94C) != 0) {
-            c = '1';
+            buf[0] = '1';
+        } else {
+            buf[0] = '0';
         }
-        buf[0] = c;
-        buf[1] = '\0';
+        buf[1] = 0;
     }
     return buf;
 }
@@ -4245,7 +4245,6 @@ void *fn_8022315C(void *arg0) {
     f32 *v1;
     f32 *v2;
     V2 *p;
-    s32 i;
     V2 t;
 
     zero = lbl_803EA768[0];
@@ -4267,19 +4266,21 @@ void *fn_8022315C(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x2C) = 0;
     M2C_FIELD(arg0, s32 *, 0x30) = 0;
     p = &t;
-    i = 1;
-    do {
-    } while (i-- != 0);
+    {
+        s32 n = 0;
+        while (n-- >= 0) {
+        }
+    }
     zero = lbl_803EA768[0];
-    p->y = zero;
-    p->x = zero;
-    M2C_FIELD(arg0, V2 *, 0x34) = t;
-    M2C_FIELD(arg0, V2 *, 0x3C) = t;
     M2C_FIELD(arg0, s32 *, 0x44) = 0;
-    M2C_FIELD(arg0, s32 *, 0x48) = 0;
+    p->y = zero;
+    t.x = zero;
     M2C_FIELD(arg0, s32 *, 0x4C) = 0;
-    M2C_FIELD(arg0, f32 *, 0x50) = zero;
+    M2C_FIELD(arg0, V2 *, 0x3C) = *p;
     M2C_FIELD(arg0, f32 *, 0x54) = zero;
+    M2C_FIELD(arg0, V2 *, 0x34) = *p;
+    M2C_FIELD(arg0, f32 *, 0x50) = zero;
+    M2C_FIELD(arg0, s32 *, 0x48) = 0;
     return arg0;
 }
 
