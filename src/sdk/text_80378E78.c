@@ -729,12 +729,12 @@ void fn_803822B4(void) {
     extern s64 lbl_804963F0;
     s64 fn_8025A3DC(void);
     void fn_8038202C(u32);
-    s64 d;
+    u32 d;
 
     if (lbl_804963E8 == 2) {
         lbl_804963E8 = 0;
-        d = fn_8025A3DC() - lbl_804963F0;
-        fn_8038202C((u32)d / 4);
+        d = (u32)(fn_8025A3DC() - lbl_804963F0) / 4;
+        fn_8038202C(d);
     } else {
         lbl_804963E8 = 1;
     }
@@ -936,6 +936,13 @@ u32 fn_80387044(void) {
 
 u32 fn_80387058(void) {
     return (__DSPRegs[2] << 16) | __DSPRegs[3];
+}
+
+void fn_80387084(void) {
+    s32 enabled = fn_8025465C();
+    u16 tmp = __DSPRegs[5];
+    __DSPRegs[5] = (tmp & ~0xA8) | 2;
+    fn_80254684(enabled);
 }
 
 extern s32 lbl_80496470;
