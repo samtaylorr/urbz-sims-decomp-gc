@@ -1082,6 +1082,15 @@ s32 *fn_800D4B30(s32 *self, s32 a) {
     return self;
 }
 
+void fn_800D4B64(void *arg0) {
+    extern s32 lbl_80495B9C;
+    extern void fn_800D277C(void *);
+    ((s32 *)lbl_8041F754)[0] = 4;
+    ((s32 *)lbl_8041F754)[0x4c / 4] = 1;
+    lbl_80495B9C = 1;
+    fn_800D277C(arg0);
+}
+
 void fn_800D4EB8(void *arg0, s32 arg1) {
     extern s32 lbl_8041E640[];
     extern void fn_800D568C(s32);
