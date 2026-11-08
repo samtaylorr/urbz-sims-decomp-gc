@@ -183,7 +183,7 @@ s32 fn_8019ABDC(void *self) {
     } else if (x <= 0x11) {
         return 0;
     } else {
-        return x > 0x12 ? 2 : 1;
+        return x <= 0x12 ? 1 : 2;
     }
 }
 
@@ -2937,22 +2937,10 @@ s32 fn_801A9F24(void *self) {
 }
 
 u8 fn_801A9FA4(void *self, s32 arg1, s32 arg2) {
-    s32 fn_80105B78(s32);
-    s32 fn_80105B84(s32);
-    u8 *tab;
-    s32 row;
-    s32 col;
-    u8 old;
+    u8 old = *TTSE_Cell(self, arg1);
 
-    tab = M2C_FIELD(self, u8 **, 0x2C);
-    row = fn_80105B78(arg1);
-    col = fn_80105B84(arg1);
-    old = (*(u8 ***)(tab + 0xC))[row][col];
     if (old != arg2) {
-        tab = M2C_FIELD(self, u8 **, 0x2C);
-        row = fn_80105B78(arg1);
-        col = fn_80105B84(arg1);
-        (*(u8 ***)(tab + 0xC))[row][col] = arg2;
+        *TTSE_Cell(self, arg1) = arg2;
     }
     return old;
 }
