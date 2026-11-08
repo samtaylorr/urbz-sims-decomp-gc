@@ -3202,13 +3202,13 @@ s32 fn_801FA518(void *arg0, u32 arg1, s16 arg2, s16 arg3) {
             s16 max;
         } range[5];
     } *p = arg0;
-    if (arg1 > 4) {
+    if (arg1 <= 4) {
+        if (arg2 < arg3) {
+            p->range[arg1].min = arg2;
+            p->range[arg1].max = arg3;
+            return 1;
+        }
         return 0;
-    }
-    if (arg2 < arg3) {
-        p->range[arg1].min = arg2;
-        p->range[arg1].max = arg3;
-        return 1;
     }
     return 0;
 }
@@ -3218,7 +3218,7 @@ s32 fn_801FA8FC(void *arg0, s32 arg1, u16 *arg2) {
     struct {
         u8 pad[0xA4];
         s32 unkA4;
-        u8 table[0x58];
+        u8 table[14][6];
         u8 pad100;
         u8 index;
     } *p = arg0;
@@ -3228,7 +3228,7 @@ s32 fn_801FA8FC(void *arg0, s32 arg1, u16 *arg2) {
         if ((u16)arg1 > 5) {
             return 0;
         }
-        *arg2 = p->table[p->index * 6 + arg1];
+        *arg2 = p->table[p->index][arg1];
     }
     return 1;
 }
@@ -4393,8 +4393,10 @@ void fn_8020A500(u8 *arg0) {
     INVHandle h1, h3;
     s32 zero;
 
-    fn_800F1B80(arg0 + 0xAC, (h1 = fn_8004C168(lbl_8041F94C, lbl_803E718C)).p != NULL ? (void *)*h1.p : NULL);
-    INV_setStrT(arg0 + 0xB4, lbl_8041F94C, lbl_803E70E8);
+    do {
+        fn_800F1B80(arg0 + 0xAC, (h1 = fn_8004C168(lbl_8041F94C, lbl_803E718C)).p != NULL ? (void *)*h1.p : NULL);
+    } while (0);
+    INV_setStr(arg0 + 0xB4, lbl_803E70E8);
     fn_800F1B80(arg0 + 0xB8, (h3 = fn_8004C168(lbl_8041F94C, lbl_803E70EC)).p != NULL ? (void *)*h3.p : NULL);
     fn_800F1B80(arg0 + 0xBC, lbl_803E6F74);
     zero = 0;
@@ -5850,7 +5852,7 @@ s32 fn_80225B14(s32 *arg0, s32 arg1) {
 }
 
 void *fn_80225DB8(void *arg0) {
-    volatile s32 z[27];
+    volatile s32 z[25];
     char *p0 = (char *)arg0 + 0x8;
     char *p1 = (char *)arg0 + 0x14;
     char *p2 = (char *)arg0 + 0x1C;
@@ -5890,6 +5892,15 @@ void *fn_80225DB8(void *arg0) {
     *(volatile s32 *)(p11 + 4) = 0;
     *(volatile s32 *)(p12 + 4) = 0;
     return arg0;
+}
+
+void *fn_80229F24(void *self, s32 i) {
+    typedef struct { u8 pad[0x38]; } Elem;
+    Elem *begin = M2C_FIELD(self, Elem **, 0x6C);
+    if ((u32)i < (u32)(M2C_FIELD(self, Elem **, 0x70) - begin)) {
+        return &begin[i];
+    }
+    return 0;
 }
 
 s32 fn_80229F5C(void *arg0) {
