@@ -7,6 +7,15 @@ typedef struct {
 
 extern s32 lbl_804944B0;
 
+typedef struct {
+    void **begin;
+    void **end;
+} OMIPtrVec;
+
+static inline void **OMIPtrVec_End(OMIPtrVec *v) {
+    return v->end;
+}
+
 void fn_800F68E0(void *);
 void fn_80149624(char *self) {
     char *p;
@@ -804,10 +813,10 @@ void fn_80152310(void) {
 }
 
 void fn_80152B3C(s32 *arg0) {
-    void fn_80248488(void *, s32, s32);
-    void fn_8019D758(void *, s32);
-    void fn_8019D76C(void *, s32, s32, void *, s32, s32);
-    void fn_8019E514(void *, s32);
+    void fn_80248488();
+    void fn_8019D758();
+    void fn_8019D76C();
+    void fn_8019E514();
     struct {
         s16 a;
         s16 b;
