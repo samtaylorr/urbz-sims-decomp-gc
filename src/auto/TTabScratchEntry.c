@@ -542,12 +542,14 @@ void *fn_8019E53C(void *self) {
     extern u8 lbl_804148D0[];
     extern char lbl_803DB754[];
     void fn_801B3814(void *, s32, s32);
-    void *name;
+    register void *name asm("r28");
+    register char *s asm("r30");
 
     M2C_FIELD(self, void **, 0) = lbl_804148D0;
     name = (u8 *)self + 4;
+    s = lbl_803DB754;
     fn_800F687C(name, (u8 *)self + 0xC, 0x40);
-    fn_800F68F0(name, lbl_803DB754, -1);
+    fn_800F68F0(name, s, -1);
     fn_801B3814((u8 *)self + 0x4C, 0, 0);
     return self;
 }
@@ -1481,24 +1483,20 @@ s32 fn_801A0E54(void *self, s32 arg1) {
     return 0;
 }
 
-s32 fn_801A0EBC(void *self, s32 it) {
+s32 fn_801A0EBC(void *self, s32 arg1) {
     M2C_UNK fn_801A0780(s32);
     M2C_UNK fn_801A08DC(s32 *, s32);
+    s32 it;
 
-    fn_801A0780(it);
-    for (;;) {
+    fn_801A0780(arg1);
+    it = arg1;
+    do {
         it <<= 1;
         if (fn_801A08DC(self, it)) {
-            break;
+            return it;
         }
-        if (it > 0x1f) {
-            break;
-        }
-    }
-    if (it > 0x1f) {
-        return 0;
-    }
-    return it;
+    } while (it <= 0x1f);
+    return 0;
 }
 
 u16 fn_801A0F20(void *arg0, s32 arg1) {
@@ -1695,7 +1693,6 @@ void fn_801A2600(char *self) {
 }
 
 s16 fn_801A2624(char *self) {
-    extern s16 fn_801A2F28(void *);
     return fn_801A2F28(self + 8);
 }
 
@@ -1718,6 +1715,24 @@ s32 fn_801A29C4(void *arg0) {
 char *fn_801A29E0(char *self) {
     extern s32 fn_801A29C4(void *);
     return self + fn_801A29C4(self);
+}
+
+void fn_801A2A10(char *self, u16 *src, u16 *data) {
+    u16 *dst;
+    s32 i;
+    M2C_FIELD(self, s16 *, 0) = fn_801A2F3C(src);
+    M2C_FIELD(self, u16 *, 2) = M2C_FIELD(src, u16 *, 2);
+    M2C_FIELD(self, u16 *, 4) = M2C_FIELD(src, u16 *, 4);
+    M2C_FIELD(self, u8 *, 6) = M2C_FIELD(src, u8 *, 6);
+    M2C_FIELD(self, u8 *, 7) = M2C_FIELD(src, u8 *, 7);
+    M2C_FIELD(self, s32 *, 8) = M2C_FIELD(src, s32 *, 8);
+    M2C_FIELD(self, s32 *, 0xC) = M2C_FIELD(src, s32 *, 0xC);
+    if (data != NULL) {
+        dst = (u16 *)fn_801A29A8((s32)self);
+        for (i = M2C_FIELD(self, u8 *, 7) - 1; i >= 0; i--) {
+            dst[i] = data[i];
+        }
+    }
 }
 
 char *fn_801A2AB0(char *self) {
@@ -1902,20 +1917,8 @@ void fn_801A30AC(void) {
 }
 
 void *fn_801A3198(void **arg0, s32 arg1) {
-    s32 var_r0;
-    void *temp_r3;
-    void *temp_r9;
-
-    if (arg1 >= 0) {
-        temp_r3 = *arg0;
-        var_r0 = 0;
-        temp_r9 = temp_r3;
-        if (temp_r9 != NULL) {
-            var_r0 = M2C_FIELD(temp_r9, s32 *, -4);
-        }
-        if (arg1 < var_r0) {
-            return (u8 *)temp_r3 + (arg1 << 5);
-        }
+    if (arg1 >= 0 && arg1 < TTSE_ArrCount(*arg0)) {
+        return (u8 *)*arg0 + (arg1 << 5);
     }
     return NULL;
 }
