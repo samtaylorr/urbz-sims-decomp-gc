@@ -3615,7 +3615,7 @@ void fn_8020ECF8(u8 *arg0) {
     s32 zero;
 
     fn_800F1B80(arg0 + 0xAC, (h1 = fn_8004C168(lbl_8041F94C, lbl_803E791C)).p != NULL ? (void *)*h1.p : NULL);
-    fn_800F1B80(arg0 + 0xB4, (h2 = fn_8004C168(lbl_8041F94C, lbl_803E77A0)).p != NULL ? (void *)*h2.p : NULL);
+    fn_800F1B80(arg0 + 0xB4, (h2 = ((Handle (*)(void *, ...))fn_8004C168)(lbl_8041F94C, lbl_803E77A0)).p != NULL ? (void *)*h2.p : NULL);
     fn_800F1B80(arg0 + 0xB8, (h3 = fn_8004C168(lbl_8041F94C, lbl_803E77A4)).p != NULL ? (void *)*h3.p : NULL);
     fn_800F1B80(arg0 + 0xBC, lbl_803E72BC);
     zero = 0;
@@ -4029,9 +4029,11 @@ void fn_8021CCC0(u8 *arg0) {
     case 5:
     case 6:
     case 7:
-        h = fn_8004C168(lbl_8041F94C, lbl_803E9E48);
-        dst = arg0 + 0xAC;
-        fn_800F1B80(dst, h.p != NULL ? (void *)*h.p : NULL);
+        do {
+            h = fn_8004C168(lbl_8041F94C, lbl_803E9E48);
+            dst = arg0 + 0xAC;
+            fn_800F1B80(dst, h.p != NULL ? (void *)*h.p : NULL);
+        } while (0);
         break;
     }
     dst = arg0 + 0xB4;
@@ -4290,6 +4292,13 @@ void fn_80223240(void *arg0, s32 arg1) {
 
 s32 fn_80223248(s32 *self) {
     return self[1];
+}
+
+void fn_80223274(void *arg0, void *arg1) {
+    s32 a = M2C_FIELD(arg1, s32 *, 0);
+    s32 b = M2C_FIELD(arg1, s32 *, 4);
+    M2C_FIELD(arg0, s32 *, 0x54) = b;
+    M2C_FIELD(arg0, s32 *, 0x50) = a;
 }
 
 void fn_802233F0(s32 arg0, void *arg1, void *arg2) {
