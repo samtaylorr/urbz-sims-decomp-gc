@@ -1390,6 +1390,13 @@ void fn_800D857C(void) {
     fn_800E3D4C();
 }
 
+void fn_800D859C(void) {
+    extern void *lbl_80496640;
+    void *fn_800E45E0(void *, s32);
+    extern void fn_800E3E08(s32);
+    ((void (*)(void *, s32))fn_800E3E08)(fn_800E45E0(lbl_80496640, 0x53494D53), 0x2c);
+}
+
 void fn_800D9AC8(void) {
 
 }
