@@ -4239,6 +4239,8 @@ void fn_8021825C(void *arg0, char *arg1, char *arg2) {
         case 2:
             fn_801DB274(lbl_803E90E4, 6);
             break;
+        default:
+            break;
         }
     }
 }
@@ -4947,6 +4949,12 @@ s32 fn_8022349C(void *arg0) {
         var_r9 = 1;
     }
     return var_r9;
+}
+
+s32 fn_802234C4(u8 *arg0) {
+    f32 *a = (f32 *)(arg0 + 8);
+    f32 *b = (f32 *)(arg0 + 0x14);
+    return a[0] != b[0] || a[1] != b[1] || a[2] != b[2];
 }
 
 s32 fn_8022350C(s32 *self) {
