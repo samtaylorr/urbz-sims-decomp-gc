@@ -2126,10 +2126,8 @@ s32 fn_801A18A4(void *self) {
 void fn_801A191C(char *self, s32 arg1, s32 arg2) {
     void fn_801A2EE8(void *);
     void fn_801A1980(void *, s32, void *, s32);
-    struct { s32 a; s32 b; } tmp;
+    struct { s32 a; s32 b; } tmp = { 0, 0 };
     fn_801A2EE8(self + 8);
-    tmp.a = 0;
-    tmp.b = 0;
     fn_801A1980(self, arg1, &tmp, arg2);
     M2C_FIELD(self, s16 *, 0x30) = 0;
 }
@@ -3152,7 +3150,8 @@ s32 fn_801AA294(void *self, s32 arg1) {
     u8 *tab = M2C_FIELD(self, u8 **, 0x38);
     s32 row = fn_80105B78(arg1);
     s32 col = fn_80105B84(arg1);
-    return (*(u8 ***)(tab + 0xC))[row][col * 8] != 0;
+    s32 off = col * 8;
+    return (*(u8 ***)(tab + 0xC))[row][off] != 0;
 }
 
 s32 fn_80105B78(s32);
