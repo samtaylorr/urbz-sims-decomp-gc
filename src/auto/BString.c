@@ -1003,10 +1003,13 @@ void fn_800D4818(void) {
 
 void fn_800D481C(s32 *self) {
     s32 *g = (s32 *)lbl_8041F754;
-    self[0x1c / 4] = 0;
-    self[0x20 / 4] = 0;
-    self[0x18 / 4] = 0;
-    g[0xa0 / 4] = 0;
+    s32 zero = 0;
+    self[0x1c / 4] = zero;
+    self[0x20 / 4] = zero;
+    self[0x18 / 4] = zero;
+    g[0xa0 / 4] = zero;
+    if (g[0]) {
+    }
 }
 
 void fn_800D4914(void) {
@@ -1179,11 +1182,11 @@ void fn_800D5FAC(void) {
 
 void *fn_800D631C(void *arg0) {
     extern u8 lbl_8040B9E0[];
-    struct { s32 a; } t;
+    volatile s32 z;
 
     M2C_FIELD(arg0, void **, 8) = lbl_8040B9E0;
-    t.a = 0;
-    M2C_FIELD(arg0, s32 *, 0) = t.a;
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    z = 0;
     return arg0;
 }
 
@@ -1267,11 +1270,11 @@ void *fn_800D651C(void *self) {
     extern void *lbl_8041F800[];
     struct { s32 a; s32 b; s32 c; } t;
 
+    t.a = 0;
+    t.c = 1;
     M2C_FIELD(self, s32 *, 0x34) = 0;
     M2C_FIELD(self, void **, 8) = lbl_8040BBA0;
     M2C_FIELD(self, s32 *, 0x2c) = 1;
-    t.a = 0;
-    t.c = 1;
     M2C_FIELD(self, s32 *, 0) = t.c;
     M2C_FIELD(self, s32 *, 0x4c) = 0;
     M2C_FIELD(self, s32 *, 0x30) = 0;
@@ -3444,6 +3447,14 @@ s32 *fn_800E31B0(s32 *self, s32 arg1) {
     self[11] = 0;
     self[5] = (s32)lbl_8040C8E8;
     return self;
+}
+
+void fn_800E330C(void *self) {
+    char *obj = M2C_FIELD(self, char **, 0x20);
+    if (obj != NULL) {
+        char *vt = *(char **)(obj + 0x9C);
+        (*(void (**)(void *, s32))(vt + 0xC))(obj + *(s16 *)(vt + 8), 3);
+    }
 }
 
 s32 *fn_800E3A34(s32 *self, s32 a, s32 b) {
