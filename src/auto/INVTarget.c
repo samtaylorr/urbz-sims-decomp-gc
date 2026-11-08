@@ -5153,6 +5153,11 @@ void fn_80224DE4(u8 *self, s32 arg1) {
     fn_802248A8(*(u8 **)self + arg1 * 0x20);
 }
 
+void fn_80224E10(u8 *self, s32 arg1) {
+    extern void fn_802249AC(u8 *);
+    fn_802249AC(*(u8 **)self + arg1 * 0x20);
+}
+
 void *fn_80224E3C(s32 arg0, s32 arg1) {
     typedef struct { u8 pad[0x20]; } Ent;
     typedef struct { Ent *list; } Tbl;
