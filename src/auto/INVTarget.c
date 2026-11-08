@@ -2884,7 +2884,8 @@ s32 fn_801FACDC(void *arg0) {
 }
 
 s32 fn_801FACF0(void *arg0, s32 arg1) {
-    return ((u8 *)arg0 + 0xED)[arg1] == 2;
+    u8 *p = (u8 *)arg0 + 0xED;
+    return p[arg1] == 2;
 }
 
 u8 fn_801FAD08(void *arg0) {
@@ -3855,6 +3856,27 @@ s32 fn_80217A40(void *arg0, s32 arg1) {
     return ((s32 *)((u8 *)arg0 + 0x12C))[arg1];
 }
 
+char *fn_802181A0(void *arg0, char *arg1) {
+    struct Str7 { char c[7]; };
+    char *fn_800BF3FC(s32);
+    s32 fn_802486DC(char *, char *);
+    s32 fn_8004ECC8(void *);
+    extern char lbl_803E9050[];
+    extern char lbl_803E905C[];
+    extern struct Str7 lbl_803E90D8;
+    extern u8 lbl_8041F94C[];
+    char *buf = fn_800BF3FC(0x80);
+
+    buf[0] = 0;
+    if (fn_802486DC(arg1, lbl_803E9050) == 0) {
+        *(struct Str7 *)buf = lbl_803E90D8;
+    } else if (fn_802486DC(arg1, lbl_803E905C) == 0) {
+        buf[0] = fn_8004ECC8(lbl_8041F94C) ? '1' : '0';
+        buf[1] = 0;
+    }
+    return buf;
+}
+
 s32 fn_80219D14(void) {
     s32 var_r3;
     void *temp_r3;
@@ -4207,6 +4229,49 @@ s32 fn_80223138(void *arg0) {
 
 s32 fn_80223148(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0xA0) == 1;
+}
+
+void *fn_8022315C(void *arg0) {
+    extern char lbl_80417D08[];
+    extern f32 lbl_803EA768[];
+    typedef struct { f32 x, y; } V2;
+    f32 zero;
+    f32 *v;
+    s32 i;
+    V2 t;
+
+    zero = lbl_803EA768[0];
+    M2C_FIELD(arg0, char **, 0x58) = lbl_80417D08;
+    M2C_FIELD(arg0, s32 *, 0x0) = 0;
+    M2C_FIELD(arg0, s32 *, 0x4) = 0;
+    v = (f32 *)((char *)arg0 + 0x8);
+    v[1] = zero;
+    v[2] = zero;
+    v[0] = zero;
+    v = (f32 *)((char *)arg0 + 0x14);
+    v[1] = zero;
+    v[2] = zero;
+    v[0] = zero;
+    v = (f32 *)((char *)arg0 + 0x20);
+    v[1] = zero;
+    v[2] = zero;
+    v[0] = zero;
+    M2C_FIELD(arg0, s32 *, 0x30) = 0;
+    M2C_FIELD(arg0, s32 *, 0x2C) = 0;
+    i = 1;
+    while (i-- != 0) {
+    }
+    zero = lbl_803EA768[0];
+    M2C_FIELD(arg0, s32 *, 0x44) = 0;
+    t.y = zero;
+    t.x = zero;
+    M2C_FIELD(arg0, s32 *, 0x4C) = 0;
+    M2C_FIELD(arg0, V2 *, 0x3C) = t;
+    M2C_FIELD(arg0, f32 *, 0x54) = zero;
+    M2C_FIELD(arg0, V2 *, 0x34) = t;
+    M2C_FIELD(arg0, f32 *, 0x50) = zero;
+    M2C_FIELD(arg0, s32 *, 0x48) = 0;
+    return arg0;
 }
 
 void fn_80223240(void *arg0, s32 arg1) {
