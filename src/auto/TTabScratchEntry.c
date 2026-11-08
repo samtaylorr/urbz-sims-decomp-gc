@@ -163,7 +163,10 @@ void fn_8019B204(void *self, s16 arg1) {
 }
 
 s32 fn_8019B290(u8 *self, s32 i) {
-    return ((s32 *)(self + 0x74))[i] + ((s32 *)(self + 0x7C))[i];
+    u32 off = i * 4;
+    s32 *a = (s32 *)(self + 0x74);
+    s32 *b = (s32 *)(self + 0x7C);
+    return *(s32 *)((u8 *)a + off) + *(s32 *)((u8 *)b + off);
 }
 
 void fn_8019B2AC(u8 *self, s32 value, s32 i) {
@@ -2206,7 +2209,7 @@ s32 fn_801AA55C(s32 arg0, s32 arg1, u16 *out) {
     extern s32 fn_800FC854(s32);
     extern s32 fn_800FC7D4(s32);
     s32 type = fn_800FC854(arg0);
-    s32 bits = 0;
+    u16 bits = 0;
 
     switch (type) {
     case 3:
@@ -2224,7 +2227,7 @@ s32 fn_801AA55C(s32 arg0, s32 arg1, u16 *out) {
     if (arg0 > 0x3F) {
         return 0;
     }
-    bits = ((arg0 & 0x3F) << 7) | bits;
+    bits |= (arg0 & 0x3F) << 7;
     if (arg1 >= fn_801AA4E0()) {
         return 0;
     }
@@ -2240,6 +2243,7 @@ void *fn_801AAE74(void *self, s32 a, s32 b, s32 c) {
     void fn_8019C854(void *);
     void fn_801AAEDC(void *, s32, s32, s32);
     u8 *sub;
+    s32 pad[2];
     *(volatile s32 *)((u8 *)self + 0) = 0;
     *(volatile s32 *)((u8 *)self + 4) = 0;
     sub = (u8 *)self + 8;
@@ -2284,11 +2288,10 @@ void fn_801AB0F0(void *arg0) {
         return;
     }
     if (i >= 0 && (u32)i < (u32)((M2C_FIELD(arg0, u8 **, 4) - M2C_FIELD(arg0, u8 **, 0)) >> 4)) {
-        u8 *base = M2C_FIELD(arg0, u8 **, 0);
-        M2C_FIELD(base + i * 0x10, s32 *, 8) = 0;
+        M2C_FIELD(i * 0x10 + M2C_FIELD(arg0, u8 **, 0), s32 *, 8) = 0;
     }
-    M2C_FIELD(arg0, s32 *, 0x58) = -1;
     M2C_FIELD(arg0, s32 *, 0x54) = -1;
+    M2C_FIELD(arg0, s32 *, 0x58) = -1;
 }
 
 s32 fn_801AB13C(s32 arg0) {
