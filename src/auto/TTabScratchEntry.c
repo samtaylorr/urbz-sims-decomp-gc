@@ -377,20 +377,20 @@ void fn_8019B6E4(void *self, s32 idx, TTabBlk20 *out) {
 }
 
 void fn_8019B748(void *self, s32 *out) {
-    u8 *src[3] = {
-        (u8 *)self + 0xbc,
-        (u8 *)self + 0xdc,
-        (u8 *)self + 0x15c,
+    s32 *src[3] = {
+        (s32 *)((u8 *)self + 0xbc),
+        (s32 *)((u8 *)self + 0xdc),
+        (s32 *)((u8 *)self + 0x15c),
     };
     s32 i;
-    s32 j;
     for (i = 0; i < 8; i++) {
-        s32 off = i * 4;
+        s32 j;
+        s32 **p = src;
         s32 sum = 0;
         for (j = 0; j < 3; j++) {
-            sum += *(s32 *)(src[j] + off);
+            sum += (*p++)[i];
         }
-        *(s32 *)((u8 *)out + off) = sum;
+        out[i] = sum;
     }
 }
 
@@ -1676,6 +1676,21 @@ void *fn_8019FD74(void *self, u8 *src, s32 a2, s32 a3, s32 a4, s32 a5) {
     *(s32 *)((char *)self + 0x28) = a4;
     *(s32 *)((char *)self + 0x2c) = a5;
     return self;
+}
+
+s32 fn_801A0008(void *self, s32 arg1) {
+    M2C_UNK fn_801A0780(s32);
+    M2C_UNK fn_801A08DC(void *, s32);
+    s32 i;
+
+    fn_801A08DC(self, arg1);
+    fn_801A0780(arg1);
+    i = fn_801A0690(arg1, 0);
+    if (i > 3) {
+        return 3;
+    }
+    i += i;
+    return (M2C_FIELD(self, s32 *, 4) & (3 << i)) >> i;
 }
 
 s32 fn_801A0558(s32 arg0) {
@@ -3023,8 +3038,8 @@ void *fn_801A47A0(void *self, s32 arg1, s32 arg2) {
     extern u8 lbl_80415068[];
     M2C_FIELD(self, void **, 0) = lbl_80415188;
     fn_80105120((char *)self + 4);
-    M2C_FIELD(self, void **, 0x10) = lbl_80415048;
     M2C_FIELD(self, void **, 0) = lbl_80415068;
+    M2C_FIELD(self, void **, 0x10) = lbl_80415048;
     M2C_FIELD(self, s32 *, 0x14) = 0;
     M2C_FIELD(self, s32 *, 0x18) = 0;
     M2C_FIELD(self, s32 *, 0x2C) = 0;
@@ -3201,6 +3216,21 @@ u8 fn_801A9FA4(void *self, s32 arg1, s32 arg2) {
         *cell = arg2;
     }
     return old;
+}
+
+u16 fn_801AA030(void *self, s32 arg1) {
+    u8 *tab;
+    s32 row;
+    s32 col;
+    s32 off;
+    if (fn_80105B78(arg1) < 0 || fn_80105B78(arg1) >= M2C_FIELD(M2C_FIELD(self, u8 **, 0x30), s32 *, 8)
+        || fn_80105B84(arg1) < 0 || fn_80105B84(arg1) >= M2C_FIELD(tab = M2C_FIELD(self, u8 **, 0x30), s32 *, 4)) {
+        return 0;
+    }
+    row = fn_80105B78(arg1);
+    col = fn_80105B84(arg1);
+    off = col * 2;
+    return *(u16 *)((*(u8 ***)(tab + 0xC))[row] + off);
 }
 
 void fn_801AA0DC(void *self, s32 arg1, s16 arg2) {
