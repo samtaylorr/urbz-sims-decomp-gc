@@ -305,8 +305,6 @@ void fn_8037C820(f32 (*m)[4], f32 t, f32 b, f32 l, f32 r, f32 scaleS, f32 scaleT
     m[2][3] = 1.0f;
 }
 
-#pragma push
-#pragma fp_contract off
 void fn_8037C8A8(f32 (*m)[4], f32 *src, f32 *dst) {
     f32 vTmp[3];
 
