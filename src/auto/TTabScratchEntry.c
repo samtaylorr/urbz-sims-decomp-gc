@@ -2121,7 +2121,6 @@ s32 fn_801A3D5C(void *self, s32 arg1) {
     s32 fn_801A0E54(void *, s32);
     s32 fn_801A0CC4(void *, s32);
     s32 fn_801A3D24(s32);
-    s32 fn_801A0EBC(void *, s32);
     s32 it;
 
     for (it = fn_801A0E54(self, arg1); it != 0; it = fn_801A0EBC(self, it)) {
