@@ -1396,10 +1396,10 @@ void fn_80383E48(void *arg0, s16 arg1, s16 arg2) {
 }
 
 void fn_80383EA4(void *arg0) {
-    fn_8025465C();
+    s32 enabled = fn_8025465C();
     M2C_FIELD(arg0, s32 *, 0x24) = M2C_FIELD(arg0, s32 *, 0x24) + 1;
     M2C_FIELD(arg0, s32 *, 0x1C) = (s32) (M2C_FIELD(arg0, s32 *, 0x1C) | 0x80);
-    fn_80254684();
+    fn_80254684(enabled);
 }
 
 void fn_80384010(void *arg0, void *arg1) {
