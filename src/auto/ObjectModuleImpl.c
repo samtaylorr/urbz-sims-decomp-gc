@@ -115,6 +115,11 @@ void fn_8014C314(void *arg0, void **arg1) {
     *arg1 = NULL;
 }
 
+s32 fn_8014C3B8(void *arg0) {
+    void *p = M2C_FIELD(*(void **)arg0, void *(**)(void *), 0x3C)((char *)arg0 + M2C_FIELD(*(void **)arg0, s16 *, 0x38));
+    return M2C_FIELD(M2C_FIELD(p, void **, 0xC), s32 *, 0x44);
+}
+
 void fn_8014C3F4(void) {
 
 }
@@ -439,14 +444,8 @@ void fn_80150520(char *self, s32 arg1, s32 arg2) {
         obj = M2C_FIELD(vt, char *(**)(void *), 0x3C)(self + M2C_FIELD(vt, s16 *, 0x38));
     }
     if (obj != NULL) {
-        char *p = buf;
-        char *vt;
-        {
-            s32 n = 0x104;
-            char *d = p + 8;
-            fn_800F687C(p, d, n);
-        }
-        vt = M2C_FIELD(obj, char **, 0x10);
+        char *p = ({ char *t = buf; fn_800F687C(t, t + 8, 0x104); t; });
+        char *vt = M2C_FIELD(obj, char **, 0x10);
         M2C_FIELD(vt, void (**)(void *, void *), 0x5C)(obj + M2C_FIELD(vt, s16 *, 0x58), p);
         fn_800F59D8(p, arg2);
     }
