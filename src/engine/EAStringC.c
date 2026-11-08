@@ -834,16 +834,6 @@ void *fn_8029F8BC(void *arg0) {
     return arg0;
 }
 
-static inline void *fn_8029F550_Find(s32 tree, void *key) {
-    extern void fn_8029F550(s32, void *, s32, s32 *, void **);
-    s32 sp8;
-    void *spC;
-    spC = NULL;
-    sp8 = 0;
-    fn_8029F550(tree, key, 0, &sp8, &spC);
-    return spC;
-}
-
 void fn_802A0890(s32 arg0, void *arg1) {
     extern u8 lbl_803FCE5C[];
     extern void *fn_802AE360(void *, void *);
