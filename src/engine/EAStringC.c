@@ -2869,25 +2869,23 @@ s32 fn_802AFE08(f32 *m) {
     extern f32 lbl_803EDEE8[];
     f32 det;
     f32 inv;
-    f32 a, b, c, d, tx, ty;
+    f32 n0, n1, n2, n3;
 
     det = m[0] * m[3] - m[1] * m[2];
     if (__builtin_fabs(det) < lbl_803EDEE0[0]) {
         return 0;
     }
     inv = lbl_803EDEE8[0] / det;
-    a = m[0];
-    b = m[1];
-    c = m[2];
-    d = m[3];
-    tx = m[4];
-    ty = m[5];
-    m[3] = a * inv;
-    m[1] = -c * inv;
-    m[2] = -b * inv;
-    m[0] = d * inv;
-    m[5] = -(tx * m[1] + ty * m[3]);
-    m[4] = -(tx * m[0] + ty * m[2]);
+    n3 = m[0] * inv;
+    n1 = -m[2] * inv;
+    n2 = -m[1] * inv;
+    n0 = m[3] * inv;
+    m[3] = n3;
+    m[1] = n1;
+    m[2] = n2;
+    m[0] = n0;
+    m[5] = -(m[4] * n1 + m[5] * n3);
+    m[4] = -(m[4] * n0 + m[5] * n2);
     return 1;
 }
 
@@ -4535,8 +4533,8 @@ void fn_802BA118(void *arg0, s32 arg1) {
     extern void fn_802ADDF4(void *, s32);
     extern void fn_802B709C(void *, s32);
     extern void fn_802A1EF0(void *);
-    M2C_FIELD(arg0, s32 *, 0x20) = 0;
     M2C_FIELD(arg0, s32 *, 0x1C) = 0;
+    M2C_FIELD(arg0, s32 *, 0x20) = 0;
     M2C_FIELD(arg0, u8 **, 4) = lbl_804189F0;
     fn_802ADDF4((u8 *)arg0 + 8, 2);
     fn_802B709C(arg0, 0);
