@@ -925,6 +925,32 @@ void fn_800D4428(void) {
     fn_800D1F84();
 }
 
+void fn_800D4448(void *arg0) {
+    extern f32 lbl_803D1B84[];
+    extern void fn_80047AA8(void *);
+    extern void fn_800D2180(void *);
+    s32 var_r9;
+    s32 var_r9_2;
+
+    fn_800D2180(arg0);
+    var_r9 = 0;
+    if ((M2C_FIELD(arg0, s32 *, 0x20) == 0) && (M2C_FIELD(arg0, s32 *, 0x28) != 0)) {
+        var_r9 = 1;
+    }
+    if (var_r9 != 0) {
+        fn_80047AA8(lbl_8041F754);
+        fn_800E3B38(arg0, 0x11, lbl_803D1B84[0]);
+        return;
+    }
+    var_r9_2 = 0;
+    if ((M2C_FIELD(arg0, s32 *, 0x20) == 0) && (M2C_FIELD(arg0, s32 *, 0x2C) != 0)) {
+        var_r9_2 = 1;
+    }
+    if (var_r9_2 != 0) {
+        fn_800E3B80(arg0, 1);
+    }
+}
+
 extern u8 lbl_8040B758[];
 s32 *fn_800D44F4(s32 *self, s32 arg1) {
     self[0] = arg1;
