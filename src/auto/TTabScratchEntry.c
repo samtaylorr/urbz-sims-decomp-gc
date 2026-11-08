@@ -1467,15 +1467,12 @@ void fn_801A251C(void *self) {
 s32 fn_801A2558(void *self) {
     s32 fn_801A2F28(void *);
     s32 fn_801A2F3C(s32);
-    char *obj;
-    char *vt;
     s32 i = 0;
     s32 n = fn_801A2F28((char *)self + 8) - 1;
 
     for (; i <= n; i++) {
-        obj = M2C_FIELD(self, char **, 0);
-        vt = M2C_FIELD(obj, char **, 0x1C);
-        if (fn_801A2F3C(M2C_FIELD(vt, s32 (**)(void *, s16), 0x5C)(obj + M2C_FIELD(vt, s16 *, 0x58), i)) == -1) {
+        if (fn_801A2F3C(M2C_FIELD(M2C_FIELD(M2C_FIELD(self, char **, 0), char **, 0x1C), s32 (**)(void *, s16), 0x5C)(
+                M2C_FIELD(self, char **, 0) + M2C_FIELD(M2C_FIELD(M2C_FIELD(self, char **, 0), char **, 0x1C), s16 *, 0x58), i)) == -1) {
             n = i - 1;
             break;
         }
@@ -1483,9 +1480,8 @@ s32 fn_801A2558(void *self) {
     if (n == -1) {
         return 0;
     }
-    obj = M2C_FIELD(self, char **, 0);
-    vt = M2C_FIELD(obj, char **, 0x1C);
-    return M2C_FIELD(vt, s32 (**)(void *, s16), 0x5C)(obj + M2C_FIELD(vt, s16 *, 0x58), n);
+    return M2C_FIELD(M2C_FIELD(M2C_FIELD(self, char **, 0), char **, 0x1C), s32 (**)(void *, s16), 0x5C)(
+        M2C_FIELD(self, char **, 0) + M2C_FIELD(M2C_FIELD(M2C_FIELD(self, char **, 0), char **, 0x1C), s16 *, 0x58), n);
 }
 
 void fn_801A2EF4();
@@ -2159,27 +2155,28 @@ s32 fn_801AA4E8(u32 code, u16 *base, s32 *idx) {
 s32 fn_800FC854(s32);
 s32 fn_800FC7D4(s32);
 s32 fn_801AA55C(s32 arg0, s32 arg1, u16 *out) {
+    extern s32 fn_800FC854(s32);
+    extern s32 fn_800FC7D4(s32);
     s32 type = fn_800FC854(arg0);
     s32 bits = 0;
-    s16 d;
 
     switch (type) {
+    case 3:
+        bits = 0x2000;
+        break;
     case 1:
         bits = 0x4000;
         break;
     case 2:
         break;
-    case 3:
-        bits = 0x2000;
-        break;
     default:
         return 0;
     }
-    d = arg0 - fn_800FC7D4((s16)type);
-    if (d > 0x3F) {
+    arg0 = (s16)(arg0 - fn_800FC7D4((s16)type));
+    if (arg0 > 0x3F) {
         return 0;
     }
-    bits |= (d & 0x3F) << 7;
+    bits = ((arg0 & 0x3F) << 7) | bits;
     if (arg1 >= fn_801AA4E0()) {
         return 0;
     }
