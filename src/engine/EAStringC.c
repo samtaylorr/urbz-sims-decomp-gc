@@ -58,6 +58,28 @@ void fn_80290C24(s32 arg0) {
     fn_802A14A0(arg0 + 0x24);
 }
 
+void fn_80291DEC(void *arg0, s32 arg1) {
+    typedef struct { f32 m[6]; } AptMtx23;
+    extern AptMtx23 lbl_804445F0;
+    extern s32 lbl_8049613C;
+    void fn_802AF0D0(void *, void *, void *);
+    void fn_802AF000(s32);
+    void fn_802AF1CC(s32, void *);
+    void fn_80291DA0(void *, s32);
+    void fn_802AF050(s32);
+    AptMtx23 m;
+    void *p;
+
+    m = lbl_804445F0;
+    for (p = M2C_FIELD(arg0, void **, 0x4C); p != NULL; p = M2C_FIELD(p, void **, 0x4C)) {
+        fn_802AF0D0(&m, (char *)p + 0x10, &m);
+    }
+    fn_802AF000(lbl_8049613C);
+    fn_802AF1CC(lbl_8049613C, &m);
+    fn_80291DA0(arg0, arg1);
+    fn_802AF050(lbl_8049613C);
+}
+
 void fn_80291EA4(void *arg0, f32 *arg1, f32 *arg2) {
     typedef struct { f32 m[6]; } AptMtx23;
     extern AptMtx23 lbl_804445F0;
@@ -78,22 +100,22 @@ void fn_80291EA4(void *arg0, f32 *arg1, f32 *arg2) {
 }
 
 f32 fn_80291F50(f32 x) {
-    extern f32 lbl_803ECA14;
-    extern f32 lbl_803ECA18;
-    extern f32 lbl_803ECA1C;
+    extern f32 lbl_803ECA14[];
+    extern f32 lbl_803ECA18[];
+    extern f32 lbl_803ECA1C[];
     f32 fn_80242F38(f32, f32);
-    x = fn_80242F38(x, lbl_803ECA14);
-    if (x >= lbl_803ECA18) {
-        x -= lbl_803ECA14;
+    x = fn_80242F38(x, lbl_803ECA14[0]);
+    if (!(x < lbl_803ECA18[0])) {
+        x -= lbl_803ECA14[0];
     }
-    if (x < lbl_803ECA1C) {
-        x += lbl_803ECA14;
+    if (!(x >= lbl_803ECA1C[0])) {
+        x += lbl_803ECA14[0];
     }
     return x;
 }
 
 f32 fn_802921A0(void *arg0, s32 arg1) {
-    return M2C_FIELD(arg0, f32 **, 0x48)[arg1];
+    return arg1[M2C_FIELD(arg0, f32 **, 0x48)];
 }
 
 void fn_802927E8(void *self, void *arg1) {
@@ -2498,8 +2520,8 @@ s32 fn_802B72BC(u32 *arg0) {
     return (*arg0 & 0x3F) == 3;
 }
 
-s32 fn_802B72D4(s32 *arg0) {
-    return (*arg0 & 0x8000) != 0;
+s32 fn_802B72D4(u32 *arg0) {
+    return (*arg0 & 0x8000) ? 1 : 0;
 }
 
 s32 fn_802B72E8(u32 *arg0) {
@@ -2698,12 +2720,16 @@ s32 fn_802B74E8(u32 *arg0, s32 arg1) {
     u32 flags = *arg0;
     s32 type = flags & 0x3F;
 
-    if (type > 0xB && type <= 0x13) {
-        if (arg1 != 0 || (flags & 0x8000)) {
-            return 1;
-        }
+    if (type <= 0xB) {
+        return 0;
     }
-    return 0;
+    if (type > 0x13) {
+        return 0;
+    }
+    if (arg1 == 0 && !(flags & 0x8000)) {
+        return 0;
+    }
+    return 1;
 }
 
 s32 fn_802B7520(u32 *arg0) {
@@ -2764,6 +2790,18 @@ s32 fn_802B75A0(u32 *arg0) {
         var_r9 = (temp_r3 >> 0xFU) & 1;
     }
     return var_r9;
+}
+
+u32 *fn_802B75C0(void *arg0, void *arg1, s32 arg2) {
+    extern char *lbl_80494D54;
+    extern char *lbl_80494D58;
+    u32 *r;
+
+    r = ((u32 *(*)(void *, s32))fn_802AE360)(lbl_80494D54 + 8, arg2);
+    if (r == NULL || !(*r & 0x8000)) {
+        r = ((u32 *(*)(void *, s32))fn_802AE360)(lbl_80494D58 + 8, arg2);
+    }
+    return r;
 }
 
 void fn_802B76E0(void) {
