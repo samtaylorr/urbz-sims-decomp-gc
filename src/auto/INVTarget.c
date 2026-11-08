@@ -4455,17 +4455,17 @@ void fn_802184BC(void *arg0) {
     struct T { u8 pad[0x8C]; s32 h[2]; };
     s32 fn_80049B6C(void *);
     void fn_8000BFD0(void *, s32, s32);
-    extern u8 lbl_8041F94C[];
+    extern struct { u8 pad[0xD0]; void *unkD0; } lbl_8041F94C;
     s32 n;
     s32 i;
 
     n = 1;
-    if (fn_80049B6C(lbl_8041F94C) != 0) {
+    if (fn_80049B6C(&lbl_8041F94C) != 0) {
         n = 2;
     }
     for (i = 0; i < n; i++) {
         if (((struct T *)arg0)->h[i] != -1) {
-            fn_8000BFD0(*(void **)(lbl_8041F94C + 0xD0), i, ((struct T *)arg0)->h[i]);
+            fn_8000BFD0(lbl_8041F94C.unkD0, i, ((struct T *)arg0)->h[i]);
             ((struct T *)arg0)->h[i] = -1;
         }
     }
@@ -4551,7 +4551,7 @@ void *fn_80219E28(void *arg0, s32 arg1) {
 }
 
 s32 fn_8021ADB8(void *arg0, s32 arg1) {
-    extern s32 lbl_80493448[];
+    extern s32 lbl_80493448[][10];
     s32 count;
     s32 i;
 
@@ -4559,22 +4559,16 @@ s32 fn_8021ADB8(void *arg0, s32 arg1) {
         return 0;
     }
     count = 0;
-    i = 1;
-    goto body;
-next:
-    i++;
-    if (i > 9) {
-        return 0x63;
+    i = 0;
+    while (++i <= 9) {
+        if (lbl_80493448[M2C_FIELD(arg0, s32 *, 0x8C)][i] != 0) {
+            count++;
+            if (count == arg1) {
+                return i;
+            }
+        }
     }
-body:
-    if (lbl_80493448[M2C_FIELD(arg0, s32 *, 0x8C) * 10 + i] == 0) {
-        goto next;
-    }
-    count++;
-    if (count != arg1) {
-        goto next;
-    }
-    return i;
+    return 0x63;
 }
 
 void fn_8021B654(void *arg0, s32 arg1) {
