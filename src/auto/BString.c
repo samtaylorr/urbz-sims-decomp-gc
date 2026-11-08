@@ -3090,6 +3090,11 @@ void fn_800E2BB0(void) {
     ((s32 *)lbl_8041F754)[0] = 3;
 }
 
+void fn_800E2DD4(void) {
+    extern s32 lbl_8041FA1C[];
+    ((s32 *)lbl_8041FA1C[0])[0x3ac / 4] = 1;
+}
+
 void fn_800E2FD8(void *arg0) {
     M2C_UNK fn_800D2180();
     s32 var_r9;
