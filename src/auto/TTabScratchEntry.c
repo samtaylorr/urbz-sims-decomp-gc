@@ -443,9 +443,9 @@ void fn_8019D3A8(void *self) {
     extern f32 lbl_803DB73C[];
     f32 z = lbl_803DB73C[0];
     M2C_FIELD(self, s32 *, 0x18) = 0;
-    M2C_FIELD(self, s32 *, 0x10) = 0;
     M2C_FIELD(self, s32 *, 0x1C) = 0;
     M2C_FIELD(self, s32 *, 0x48) = 0;
+    M2C_FIELD(self, s32 *, 0x10) = 0;
     M2C_FIELD(self, f32 *, 0xC) = M2C_FIELD(self, f32 *, 0x4C);
     M2C_FIELD(self, f32 *, 0x50) = z;
     M2C_FIELD(self, f32 *, 0x54) = z;
