@@ -2237,6 +2237,28 @@ void *fn_801E0380(void *arg0, s32 arg1) {
     return arg0;
 }
 
+void fn_801E0398(void *arg0) {
+    void fn_800BF4D8(void *);
+    void fn_801E01FC(void *, s32);
+    void fn_8031EA2C(void *);
+    if (M2C_FIELD(arg0, void **, 0x60) != NULL) {
+        fn_800BF4D8(M2C_FIELD(arg0, void **, 0x60));
+        M2C_FIELD(arg0, void **, 0x60) = NULL;
+    }
+    if (M2C_FIELD(arg0, void **, 0x74) != NULL) {
+        fn_801E01FC(M2C_FIELD(arg0, void **, 0x74), 3);
+        M2C_FIELD(arg0, void **, 0x74) = NULL;
+    }
+    if (M2C_FIELD(arg0, void **, 0x70) != NULL) {
+        fn_801E01FC(M2C_FIELD(arg0, void **, 0x70), 3);
+        M2C_FIELD(arg0, void **, 0x70) = NULL;
+    }
+    if (M2C_FIELD(arg0, void **, 0x68) != NULL) {
+        fn_8031EA2C(M2C_FIELD(arg0, void **, 0x68));
+        M2C_FIELD(arg0, void **, 0x68) = NULL;
+    }
+}
+
 s32 fn_801E0428(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x74);
 }
@@ -4373,12 +4395,14 @@ void fn_80223288(void *arg0, s32 arg1) {
 
     if (arg1 == 7) {
         pv = &v;
-        pv->x = pv->y = lbl_803EA76C[0];
-        *(struct V2 *)((u8 *)arg0 + 0x34) = *pv;
+        pv->y = lbl_803EA76C[0];
+        v.x = lbl_803EA76C[0];
+        *(struct V2 *)((u8 *)arg0 + 0x34) = v;
     } else if (arg1 == 8) {
         pv = &v;
-        pv->x = pv->y = lbl_803EA76C[0];
-        *(struct V2 *)((u8 *)arg0 + 0x3C) = *pv;
+        pv->y = lbl_803EA76C[0];
+        v.x = lbl_803EA76C[0];
+        *(struct V2 *)((u8 *)arg0 + 0x3C) = v;
     }
 }
 
