@@ -1201,8 +1201,9 @@ void fn_80388FB4(u8 *p) {
 }
 
 u32 fn_80388FEC(s32 chan) {
-    extern u8 lbl_804912A0[];
-    return *(u32 *)(lbl_804912A0 + chan * 0x110 + 0x10c);
+    typedef struct { u8 pad[0x10c]; u32 v; } Chan110;
+    extern Chan110 lbl_804912A0[];
+    return lbl_804912A0[chan].v;
 }
 
 s32 fn_80389004(s32 chan, u32 x) {
