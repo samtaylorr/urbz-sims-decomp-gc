@@ -5763,6 +5763,16 @@ s32 fn_80225554(s32 *self) {
     return *self;
 }
 
+s32 fn_80225B14(s32 *arg0, s32 arg1) {
+    if (arg0[0] == 0) {
+        return 0;
+    }
+    if (arg1 < 0 || arg1 >= arg0[1] || (u32)arg1 > 7) {
+        return 0;
+    }
+    return 1;
+}
+
 s32 fn_80229F5C(void *arg0) {
     return (s32) ((M2C_FIELD(arg0, s32 *, 0x70) - M2C_FIELD(arg0, s32 *, 0x6C)) * 0xB6DB6DB7) >> 3;
 }
