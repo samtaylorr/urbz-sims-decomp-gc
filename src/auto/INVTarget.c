@@ -4235,6 +4235,18 @@ u8 *fn_802208D8(u8 *self, s32 idx) {
     return found;
 }
 
+void *fn_8022096C(u8 *self) {
+    extern void *fn_8022315C(void *);
+    extern u8 lbl_80417C30[];
+    extern u8 lbl_80417728[];
+    fn_8022315C(self);
+    *(u8 **)(self + 0x58) = lbl_80417C30;
+    *(u8 **)(self + 0x8C) = lbl_80417728;
+    *(s32 *)(self + 0x7C) = 4;
+    *(s32 *)(self + 0xA4) = 0;
+    return self;
+}
+
 void fn_80221924(void *arg0, s32 arg1, f32 farg0) {
     switch (arg1) {                                 /* irregular */
     case 7:
