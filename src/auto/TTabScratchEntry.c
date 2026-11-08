@@ -150,6 +150,12 @@ s16 fn_8019AFE8(void *arg0) {
     return M2C_FIELD(arg0, s16 *, 0x34);
 }
 
+void fn_8019AFF0(void *self);
+void fn_8019B19C(void *self) {
+    u8 *vt = *(u8 **)self;
+    (*(void (**)(void *))(vt + 0x74))((u8 *)self + *(s16 *)(vt + 0x70));
+}
+
 s32 fn_8019B1D0(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0xA4);
 }
@@ -2254,7 +2260,8 @@ s16 fn_801A3700(void *self, s16 a, s16 b) {
         count = M2C_FIELD(arr, s32 *, -4);
     }
     for (i = 0; i < count; i++) {
-        if (M2C_FIELD(arr + i * 32, s16 *, 0) == a && M2C_FIELD(arr + i * 32, s16 *, 2) == b) {
+        char *e = arr + i * 32;
+        if (M2C_FIELD(e, s16 *, 0) == a && M2C_FIELD(e, s16 *, 2) == b) {
             return i;
         }
     }
@@ -3127,28 +3134,26 @@ void fn_801B1F0C(void *arg0) {
     M2C_FIELD(vt, void (**)(void *), 0x34)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x30));
 }
 
-s32 fn_801B1F40(void *arg0, void *arg1) {
+s32 fn_801B1F40(void *arg0, TTSEKey arg1) {
     void fn_801B1DA0(void *, void *, void *);
     void fn_801B383C(void *);
     extern void *lbl_8049665C;
-    register void *self asm("r29") = arg0;
-    register void *e asm("r30") = arg1;
     void *g;
     void *obj;
     void *vt;
     void *vt2;
     void *r;
 
-    fn_801B383C((char *)self + 8);
+    fn_801B383C((char *)arg0 + 8);
     g = lbl_8049665C;
     vt = M2C_FIELD(g, void **, 0);
-    obj = M2C_FIELD(vt, void *(**)(void *, s32), 0x3C)((char *)g + M2C_FIELD(vt, s16 *, 0x38), M2C_FIELD(e, s32 *, 0));
+    obj = M2C_FIELD(vt, void *(**)(void *, s32), 0x3C)((char *)g + M2C_FIELD(vt, s16 *, 0x38), arg1.a);
     vt2 = M2C_FIELD(obj, void **, 0x10);
-    r = M2C_FIELD(vt2, void *(**)(void *, s32, s32, s32), 0x84)((char *)obj + M2C_FIELD(vt2, s16 *, 0x80), 0x42434F4E, M2C_FIELD(e, s16 *, 4), 0);
+    r = M2C_FIELD(vt2, void *(**)(void *, s32, s32, s32), 0x84)((char *)obj + M2C_FIELD(vt2, s16 *, 0x80), 0x42434F4E, arg1.b, 0);
     if (r == NULL) {
         return 0;
     }
-    fn_801B1DA0(self, obj, r);
+    fn_801B1DA0(arg0, obj, r);
     return 1;
 }
 
