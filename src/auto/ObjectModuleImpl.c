@@ -7,23 +7,6 @@ typedef struct {
 
 extern s32 lbl_804944B0;
 
-void fn_8019CFF4(void *);
-
-static inline void ObjVec6C_Destroy(char **vec) {
-    char *it;
-
-    for (it = vec[0]; it != vec[1]; it += 0x6C) {
-        fn_8019CFF4(it);
-    }
-}
-
-static inline void ObjVec6C_Each(char **vec, void (*fn)(void *)) {
-    char *it;
-
-    for (it = vec[0]; it != vec[1]; it += 0x6C) {
-        fn(it);
-    }
-}
 void fn_800F68E0(void *);
 void fn_80149624(char *self) {
     char *p;
