@@ -2347,6 +2347,19 @@ void fn_802AD4A0(void) {
 
 }
 
+void fn_802ADC7C(u8 *self, s32 arg1, s32 arg2) {
+    extern u8 lbl_804433C4[];
+    extern void fn_8027F1F8(void *, s32, s32, s32);
+    s32 i;
+
+    for (i = 0; i < ((s32 *)(*(u8 **)(self + 4) + arg2 * 8))[0]; i++) {
+        s32 *item = (*(s32 ***)(*(u8 **)(self + 4) + arg2 * 8 + 4))[i];
+        if (*item == 1) {
+            fn_8027F1F8(lbl_804433C4, item[1], arg1, -1);
+        }
+    }
+}
+
 void fn_802ADD10(u8 *self, s32 arg1, s32 arg2) {
     extern void *lbl_804960E8;
     extern s32 lbl_80494B3C;
@@ -3207,11 +3220,11 @@ void fn_802B6E24(u32 *obj) {
     u32 v = obj[0];
     s32 cnt = ((v >> 16) & 0xFFF) - 1;
 
-    v = (v & 0xF000FFFF) | (cnt << 16);
+    v = (cnt << 16) | (v & 0xF000FFFF);
     obj[0] = v;
     if (cnt == 0 && !(v & 0x40000000)) {
-        obj[0] = v | 0x40000000;
         list = lbl_80494B48;
+        obj[0] = v | 0x40000000;
         n = list[1];
         if (n < list[0]) {
             ((u32 **)list[2])[n] = obj;
