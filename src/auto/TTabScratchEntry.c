@@ -385,11 +385,12 @@ void fn_8019B748(void *self, s32 *out) {
     s32 i;
     s32 j;
     for (i = 0; i < 8; i++) {
+        s32 off = i * 4;
         s32 sum = 0;
         for (j = 0; j < 3; j++) {
-            sum += *(s32 *)(src[j] + i * 4);
+            sum += *(s32 *)(src[j] + off);
         }
-        *(s32 *)((u8 *)out + i * 4) = sum;
+        *(s32 *)((u8 *)out + off) = sum;
     }
 }
 
@@ -2165,9 +2166,11 @@ s32 fn_801A18A4(void *self) {
 void fn_801A191C(char *self, s32 arg1, s32 arg2) {
     void fn_801A2EE8(void *);
     void fn_801A1980(void *, s32, void *, s32);
-    struct { s32 a; s32 b; } tmp = { 0, 0 };
     fn_801A2EE8(self + 8);
-    fn_801A1980(self, arg1, &tmp, arg2);
+    {
+        struct { s32 a; s32 b; } tmp = { 0, 0 };
+        fn_801A1980(self, arg1, &tmp, arg2);
+    }
     M2C_FIELD(self, s16 *, 0x30) = 0;
 }
 
