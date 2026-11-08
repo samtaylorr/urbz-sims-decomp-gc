@@ -3534,6 +3534,35 @@ void fn_802076D4(void *arg0, s32 arg1) {
     }
 }
 
+char *fn_80207818(void *arg0) {
+    char *fn_801DB224(char *);
+    extern char lbl_803E6DF4[];
+    extern char lbl_803E6E08[];
+    extern char lbl_803E6E18[];
+    extern char lbl_803E6E2C[];
+    extern char lbl_803E6E3C[];
+    char *s = NULL;
+
+    switch (M2C_FIELD(arg0, s32 *, 0x84)) {
+    case 1:
+        s = fn_801DB224(lbl_803E6DF4);
+        break;
+    case 2:
+        s = fn_801DB224(lbl_803E6E08);
+        break;
+    case 3:
+        s = fn_801DB224(lbl_803E6E18);
+        break;
+    case 4:
+        s = fn_801DB224(lbl_803E6E2C);
+        break;
+    }
+    if (s == NULL) {
+        s = lbl_803E6E3C;
+    }
+    return s;
+}
+
 s32 fn_802078B4(void *arg0) {
     s32 v = M2C_FIELD(arg0, s32 *, 0x84);
     return v <= 4 && v >= 1;
