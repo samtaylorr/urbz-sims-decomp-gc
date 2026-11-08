@@ -112,6 +112,21 @@ void fn_8019A0CC(void **obj) {
     }
 }
 
+void fn_8019A320(void *self, s32 arg1) {
+    void fn_8010515C(void *, s32);
+    void fn_802D20E8(void *);
+    extern u8 lbl_80414378[];
+    extern u8 lbl_80414398[];
+    extern u8 lbl_80414540[];
+    M2C_FIELD(self, void **, 0x10) = lbl_80414378;
+    M2C_FIELD(self, void **, 0) = lbl_80414398;
+    fn_8010515C((u8 *)self + 4, 0);
+    M2C_FIELD(self, void **, 0) = lbl_80414540;
+    if (arg1 & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_8019A38C(s32 *self, void *stream) {
     void fn_8018D8DC(void *, s32 *, s32);
     void fn_8018D8BC(void *, s32 *, s32);
