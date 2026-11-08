@@ -2801,13 +2801,12 @@ extern u8 lbl_8040C270[];
 extern f32 lbl_803D4C6C[];
 s32 *fn_800E25BC(s32 *self, s32 a) {
     self[0] = a;
+    self[1] = -1;
     self[2] = 0;
     self[3] = -1;
     self[4] = 1;
     self[5] = (s32)lbl_8040C270;
-    self[1] = -1;
-    ((f32 *)self)[0x2c / 4] = lbl_803D4C6C[0];
-    ((f32 *)self)[0x30 / 4] = lbl_803D4C6C[0];
+    ((f32 *)self)[0x2c / 4] = ((f32 *)self)[0x30 / 4] = lbl_803D4C6C[0];
     return self;
 }
 
