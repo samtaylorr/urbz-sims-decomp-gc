@@ -5102,6 +5102,7 @@ void *fn_802BBF08(void *arg0, s32 arg1) {
 }
 
 u16 **fn_802BBFAC(u16 **self, const char *s, u32 len) {
+    struct Str { u16 ref, len, cap, flags; char data[1]; };
     extern u16 lbl_803FCE5C[];
     extern void *(**lbl_80494DA0)(s32);
     extern void fn_80248488(void *, const void *, u32);
@@ -5117,7 +5118,7 @@ u16 **fn_802BBFAC(u16 **self, const char *s, u32 len) {
         fn_80248488(*self + 4, s, len);
         (*self)[1] = len;
         (*self)[3] = 0;
-        ((char *)(*self + 4))[len] = 0;
+        ((struct Str *)*self)->data[len] = 0;
     } else {
         *self = lbl_803FCE5C;
         lbl_803FCE5C[0]++;
