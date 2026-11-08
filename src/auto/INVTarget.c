@@ -2390,9 +2390,10 @@ s32 fn_801E613C(void *arg0, s32 arg1, s32 arg2) {
             j = i + 1;
         }
     } else {
-        j = i - 1;
         if (i == 0) {
             j = p->n - 1;
+        } else {
+            j = i - 1;
         }
     }
     return p->list[j];
@@ -4263,14 +4264,24 @@ void fn_80209608(u8 *arg0) {
     extern u8 lbl_803E7024[];
     extern u8 lbl_803E7034[];
     INVHandle h;
-    s32 t;
 
     fn_801F5420((s32)(arg0 + 0x84));
-    t = fn_8020DD5C(*(s32 *)(arg0 + 0x110));
-    if (t == -1) {
+    switch (fn_8020DD5C(*(s32 *)(arg0 + 0x110))) {
+    case -1:
         INV_setStr(arg0 + 0xAC, NULL);
-    } else if (t >= 0 && t <= 7) {
+        break;
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
         INV_setStr(arg0 + 0xAC, lbl_803E7058);
+        break;
+    default:
+        break;
     }
     fn_800F1B80(arg0 + 0xB4, (h = fn_8004C168(lbl_8041F94C, lbl_803E7014)).p != NULL ? (void *)*h.p : NULL);
     if (*(s32 *)(arg0 + 0x120) & 1) {
