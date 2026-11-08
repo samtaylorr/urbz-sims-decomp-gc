@@ -1720,6 +1720,7 @@ char *fn_801A29E0(char *self) {
     return self + fn_801A29C4(self);
 }
 
+s16 fn_801A2F3C(u16 *);
 void fn_801A2A10(char *self, u16 *src, u16 *data) {
     u16 *dst;
     s32 i;
