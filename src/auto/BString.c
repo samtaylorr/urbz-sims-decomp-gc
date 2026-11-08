@@ -993,8 +993,8 @@ void fn_800D4608(s32 *self) {
     if (M2C_FIELD(M2C_FIELD(obj, void **, 0x8), s32 (**)(void *), 0x3C)((u8 *)obj + M2C_FIELD(M2C_FIELD(obj, void **, 0x8), s16 *, 0x38)) != 0) {
         obj = **(void ***)(*(u8 **)(mgr + 0x478) + 4);
         M2C_FIELD(M2C_FIELD(obj, void **, 0x8), void (**)(void *), 0x44)((u8 *)obj + M2C_FIELD(M2C_FIELD(obj, void **, 0x8), s16 *, 0x40));
+        fn_8010C96C(lbl_80496644, 4);
     }
-    fn_8010C96C(lbl_80496644, 4);
 }
 
 void fn_800D4818(void) {
