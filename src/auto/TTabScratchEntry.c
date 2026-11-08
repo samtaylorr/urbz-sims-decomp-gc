@@ -166,8 +166,11 @@ void fn_8019B0BC(void *self) {
     if ((*(s32 (**)(void *))(vt + 0x64))((u8 *)self + *(s16 *)(vt + 0x60)) == 0) {
         fn_801051C8(0xBD, 0);
     }
-    M2C_FIELD(self, u16 *, 0x36) |= 1;
-    M2C_FIELD(self, f32 *, 0xB0) = lbl_803DB4CC[0];
+    {
+        u16 f = M2C_FIELD(self, u16 *, 0x36);
+        M2C_FIELD(self, f32 *, 0xB0) = lbl_803DB4CC[0];
+        M2C_FIELD(self, u16 *, 0x36) = f | 1;
+    }
 }
 
 void fn_8019B128(void *self) {
@@ -1861,13 +1864,13 @@ void fn_801A1458(void *self, void *arg1) {
 s32 *fn_801A15BC(s32 *self) {
     extern u8 lbl_80414D70[];
     self[7] = (s32)lbl_80414D70;
-    self[6] = 0;
     self[0] = 0;
     self[1] = 0;
     self[2] = 0;
     self[3] = 0;
     self[4] = 0;
     self[5] = 0;
+    self[6] = 0;
     return self;
 }
 
@@ -2213,14 +2216,13 @@ void *fn_801A3204(void *self) {
         M2C_FIELD(p, s32 *, 0xC) = 0;
         p += 0x10;
     }
-    i = 0;
-    M2C_FIELD(self, s16 *, 4) = i;
-    M2C_FIELD(self, s16 *, 6) = i;
+    M2C_FIELD(self, s16 *, 4) = 0;
+    M2C_FIELD(self, s16 *, 6) = 0;
+    M2C_FIELD(self, s16 *, 0x110) = 0;
     M2C_FIELD(self, s16 *, 0x114) = 0x32;
     M2C_FIELD(self, s16 *, 0x116) = -1;
     M2C_FIELD(self, s32 *, 0x108) = 3;
-    M2C_FIELD(self, s32 *, 0x118) = i;
-    M2C_FIELD(self, s16 *, 0x110) = i;
+    M2C_FIELD(self, s32 *, 0x118) = 0;
     return self;
 }
 
@@ -2331,17 +2333,18 @@ s32 fn_801A3698(struct { char pad[0x20]; } **arg0, s32 arg1) {
 }
 
 s16 fn_801A3700(void *self, s16 a, s16 b) {
-    s32 *arr;
+    char *arr;
     s32 count;
     s16 i;
 
-    arr = M2C_FIELD(self, s32 **, 0);
+    arr = M2C_FIELD(self, char **, 0);
     count = 0;
     if (arr != NULL) {
-        count = arr[-1];
+        count = M2C_FIELD(arr, s32 *, -4);
     }
     for (i = 0; i < count; i++) {
-        if (M2C_FIELD((char *)arr + i * 32, s16 *, 0) == a && M2C_FIELD((char *)arr + i * 32, s16 *, 2) == b) {
+        char *e = arr + i * 32;
+        if (M2C_FIELD(e, s16 *, 0) == a && M2C_FIELD(e, s16 *, 2) == b) {
             return i;
         }
     }
