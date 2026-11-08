@@ -2381,6 +2381,22 @@ void fn_802AD120(void *arg0, s32 arg1) {
     }
 }
 
+void *fn_802AD198(void *arg0) {
+    extern char lbl_80418870[];
+    extern void fn_802B6FA8(void *, s32);
+    extern void fn_802ADDD8(void *, s32);
+    extern void fn_802B7178(void *, s32);
+    extern void fn_802B710C(void *, s32);
+    void *p;
+    fn_802B6FA8(arg0, 0x1F);
+    p = (u8 *)arg0 + 8;
+    M2C_FIELD(arg0, void **, 4) = lbl_80418870;
+    fn_802ADDD8(p, 8);
+    fn_802B7178(arg0, 1);
+    fn_802B710C(arg0, 0xFFF);
+    return arg0;
+}
+
 void fn_802AD1FC(void) {
 
 }
@@ -2817,23 +2833,27 @@ s32 fn_802AF6B4(void *arg0) {
 s32 fn_802AFE08(f32 *m) {
     extern f64 lbl_803EDEE0[];
     extern f32 lbl_803EDEE8[];
-    f32 a = m[0];
-    f32 b = m[1];
-    f32 c = m[2];
-    f32 d = m[3];
-    f32 det = a * d - b * c;
+    f32 det;
     f32 inv;
+    f32 a, b, c, d, tx, ty;
 
+    det = m[0] * m[3] - m[1] * m[2];
     if (fabsf(det) < lbl_803EDEE0[0]) {
         return 0;
     }
     inv = lbl_803EDEE8[0] / det;
-    m[3] = a * inv;
-    m[1] = -c * inv;
-    m[2] = -b * inv;
-    m[0] = d * inv;
-    m[5] = -(m[4] * m[1] + m[5] * m[3]);
-    m[4] = -(m[4] * m[0] + m[5] * m[2]);
+    d = m[0] * inv;
+    b = -m[2] * inv;
+    c = -m[1] * inv;
+    a = m[3] * inv;
+    tx = m[4];
+    ty = m[5];
+    m[3] = d;
+    m[1] = b;
+    m[2] = c;
+    m[0] = a;
+    m[5] = -(tx * b + ty * d);
+    m[4] = -(tx * a + ty * c);
     return 1;
 }
 
@@ -5020,6 +5040,19 @@ void fn_802BD608(s32 arg0, s32 arg1) {
     M2C_UNK fn_802BD494(s32, s32);
     fn_802BD324();
     fn_802BD494(arg0, arg1);
+}
+
+s32 fn_802BD644(void **self, const char *s) {
+    extern u32 fn_80248808(const char *);
+    extern s32 fn_80248268(const char *, const char *, u32);
+    struct Buf { u16 ref; u16 len; s32 cap; char data[1]; };
+    u32 slen;
+
+    slen = fn_80248808(s);
+    if (((struct Buf *)*self)->len < slen) {
+        return 0;
+    }
+    return fn_80248268(((struct Buf *)*self)->data, s, slen) == 0;
 }
 
 s32 fn_802BD6A8(void **self, const char *s) {
