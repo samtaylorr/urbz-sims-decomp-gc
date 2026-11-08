@@ -3219,7 +3219,7 @@ s32 fn_801FA8FC(void *arg0, s32 arg1, u16 *arg2) {
         u8 pad[0xA4];
         s32 unkA4;
         u8 table[14][6];
-        u8 pad100;
+        u8 padFC[5];
         u8 index;
     } *p = arg0;
     if (arg1 == 5 && p->unkA4 != 0) {
