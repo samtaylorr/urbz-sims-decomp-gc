@@ -2955,7 +2955,10 @@ s32 fn_801AD7D4(s32 *arg0, s32 *arg1) {
     if (arg0 != NULL) {
         idx = fn_80192DE4(rect, arg0);
         if (idx != -1) {
-            return *(s32 *)(*(char **)arg0 + idx * 0x14 + 0x10) == 0x7FFFFFFF;
+            s32 off = idx * 0x14;
+            if (*(s32 *)(*(char **)arg0 + off + 0x10) == 0x7FFFFFFF) {
+                return 1;
+            }
         }
     }
     return 0;
