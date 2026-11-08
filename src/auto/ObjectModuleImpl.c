@@ -279,8 +279,7 @@ void fn_8014DDA4(u8 *self, u8 *obj) {
 
     if (*(s32 *)(obj + 0x9C) != 1 && *(s32 *)(*(u8 **)(obj + 0x38) + 0xC0) != 0) {
         u8 *vt = *(u8 **)self;
-        u8 *p = self + *(s16 *)(vt + 0x260);
-        (*(void (**)(void *, void *, s32))(vt + 0x264))(p, obj, 1);
+        (*(s32 (**)(void *, void *, s32))(vt + 0x264))(self + *(s16 *)(vt + 0x260), obj, 1);
         *(s32 *)(self + 0x6D8) += fn_8014FDB4(self, obj);
         *(s32 *)(obj + 0x68) += 1;
     }
@@ -1175,6 +1174,39 @@ s32 fn_80163FF4(char *obj) {
     return fn_8016CCE0(r);
 }
 
+s32 fn_80164060(char *self, u8 *arg1) {
+    s64 fn_80166A5C(void *, s32, s32, s32, s32, s16 *);
+    struct { u8 a; s16 b; s16 c; } loc;
+    char *obj;
+    char *vt;
+
+    if (arg1[4] >> 7) {
+        return *(s32 *)arg1;
+    }
+    loc.c = -1;
+    loc.a = *(u16 *)arg1;
+    loc.b = *(s16 *)(arg1 + 2);
+    if (fn_80166A5C(self, loc.a, loc.b, 0, 0, &loc.c) == -1) {
+        return 0;
+    }
+    obj = M2C_FIELD(self, char **, 4);
+    vt = M2C_FIELD(obj, char **, 4);
+    return fn_80163FF4(M2C_FIELD(vt, char *(**)(void *, s32), 0x44C)(obj + M2C_FIELD(vt, s16 *, 0x448), loc.c));
+}
+
+s32 fn_80164108(void *self, u8 *arg1) {
+    s64 fn_80166A5C(void *, s32, s32, s32, s32, s16 *);
+    struct { u8 a; s16 b; s16 c; } loc;
+
+    loc.c = 0;
+    loc.a = arg1[5];
+    loc.b = *(s16 *)(arg1 + 6);
+    if (fn_80166A5C(self, loc.a, loc.b, 0, 0, &loc.c) == -1) {
+        return 0;
+    }
+    return loc.c;
+}
+
 void *fn_801658B8(void **self) {
     extern void *fn_801A23AC(void *);
     extern s16 *fn_80141C5C(void *, s32);
@@ -1190,10 +1222,12 @@ void *fn_801658B8(void **self) {
         }
         {
             char **vec = (char **)((char *)self + 0xB0);
-            char *it = vec[0];
-            while (it != vec[1]) {
-                fn_8019CFF4(it);
-                it += 0x6C;
+            char *it = M2C_FIELD(self, char **, 0xB0);
+            if (it != vec[1]) {
+                do {
+                    fn_8019CFF4(it);
+                    it += 0x6C;
+                } while (it != vec[1]);
             }
         }
     }
