@@ -1786,14 +1786,16 @@ s32 fn_80389198(s32 chan) {
 
 s32 fn_80389318(s32 chan, u16 *out) {
     s32 fn_8038907C(s32, void *);
-    s32 result;
     s32 *card;
+    u8 *id;
+    s32 result;
 
     result = fn_8038907C(chan, &card);
     if (result < 0) {
         return result;
     }
-    *out = *(u16 *)(*(u8 **)(card + 0x80 / 4) + 0x24);
+    id = *(u8 **)(card + 0x80 / 4);
+    *out = *(u16 *)(id + 0x24);
     return fn_80389134(card, 0);
 }
 
