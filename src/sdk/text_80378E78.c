@@ -1360,13 +1360,13 @@ void fn_80383A20(void) {
 }
 
 void fn_80383AE8(void *arg0, u16 arg1) {
-    fn_8025465C();
+    s32 enabled = fn_8025465C();
     M2C_FIELD(arg0, u16 *, 0x146) = arg1;
     M2C_FIELD(arg0, s32 *, 0x1C) = (s32) (M2C_FIELD(arg0, s32 *, 0x1C) | 4);
     if (arg1 == 0) {
         M2C_FIELD(arg0, s32 *, 0x20) = 1;
     }
-    fn_80254684();
+    fn_80254684(enabled);
 }
 
 void fn_80383B44(void *arg0, s16 arg1) {
