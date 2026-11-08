@@ -2785,6 +2785,27 @@ void *fn_801AA2FC(void *self, s32 arg1) {
     return (*(u8 ***)(tab + 0xC))[row] + col * 8;
 }
 
+s32 fn_801AA3B8(void *self, s32 arg1) {
+    extern u8 *lbl_80496660;
+    u8 *tab;
+    s32 row;
+    s32 col;
+    if (M2C_FIELD(lbl_80496660, s32 *, 0x2D4) == 0) {
+        tab = M2C_FIELD(self, u8 **, 0x34);
+        row = fn_80105B78(arg1);
+        col = fn_80105B84(arg1);
+        return ((*(u8 ***)(tab + 0xC))[row][col] & 0x20) == 0;
+    }
+    return 1;
+}
+
+void fn_801AA428(void) {
+    extern void *lbl_80496658;
+    extern void *fn_802D1FC8(u32);
+    extern void *fn_801A47A0(void *, s32, s32);
+    lbl_80496658 = fn_801A47A0(fn_802D1FC8(0x3C), 0x27, 0x27);
+}
+
 void fn_801AA45C(void) {
     extern u8 *lbl_80496658;
     u8 *obj = lbl_80496658;
@@ -3225,7 +3246,7 @@ void fn_801B1F0C(void *arg0) {
     M2C_FIELD(vt, void (**)(void *), 0x34)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x30));
 }
 
-s32 fn_801B1F40(void *arg0, const TTSEKey *arg1) {
+s32 fn_801B1F40(void *arg0, void *arg1) {
     void fn_801B1DA0(void *, void *, void *);
     void fn_801B383C(void *);
     extern void *lbl_8049665C;
@@ -3238,9 +3259,9 @@ s32 fn_801B1F40(void *arg0, const TTSEKey *arg1) {
     fn_801B383C((char *)arg0 + 8);
     g = lbl_8049665C;
     vt = M2C_FIELD(g, void **, 0);
-    obj = M2C_FIELD(vt, void *(**)(void *, s32), 0x3C)((char *)g + M2C_FIELD(vt, s16 *, 0x38), arg1->a);
+    obj = M2C_FIELD(vt, void *(**)(void *, s32), 0x3C)((char *)g + M2C_FIELD(vt, s16 *, 0x38), M2C_FIELD(arg1, s32 *, 0));
     vt2 = M2C_FIELD(obj, void **, 0x10);
-    r = M2C_FIELD(vt2, void *(**)(void *, s32, s32, s32), 0x84)((char *)obj + M2C_FIELD(vt2, s16 *, 0x80), 0x42434F4E, arg1->b, 0);
+    r = M2C_FIELD(vt2, void *(**)(void *, s32, s32, s32), 0x84)((char *)obj + M2C_FIELD(vt2, s16 *, 0x80), 0x42434F4E, M2C_FIELD(arg1, s16 *, 4), 0);
     if (r == NULL) {
         return 0;
     }
