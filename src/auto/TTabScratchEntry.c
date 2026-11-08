@@ -12,6 +12,7 @@ void *fn_800F687C(void *, void *, s32);
 void fn_800F68F0(void *, void *, s32);
 s32 fn_800F68BC(s32);
 void fn_800F6A38(s32, s32);
+s32 fn_801A0EBC(void *, s32);
 extern u8 lbl_80415370[];
 extern u8 lbl_804152F0[];
 extern char lbl_80435418[];
@@ -1389,13 +1390,15 @@ s32 fn_801A0E54(void *self, s32 arg1) {
     M2C_UNK fn_801A08DC(s32 *, s32);
     s32 i;
 
-    if (*(s32 *)self == 0) {
-        return 0;
+    if (*(s32 *)self != 0) {
+        for (i = 1;; i <<= 1) {
+            if (fn_801A08DC(self, i)) {
+                fn_801A0780(i);
+                return i;
+            }
+        }
     }
-    for (i = 1; !fn_801A08DC(self, i); i <<= 1) {
-    }
-    fn_801A0780(i);
-    return i;
+    return 0;
 }
 
 u16 fn_801A0F3C(void *arg0, u16 arg1, s32 arg2) {
