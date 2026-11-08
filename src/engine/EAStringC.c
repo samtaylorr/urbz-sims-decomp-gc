@@ -2400,14 +2400,10 @@ void fn_802ADDF4(void *arg0, s32 arg1) {
     }
 }
 
-s32 fn_802ADFB0(s32 arg0, s32 arg1, s32 arg2) {
-    s32 ret;
-
-    ret = ((s32 (*)(s32, s32, s32))fn_802AE360)(arg0, arg1, arg2);
-    if (ret == 0) {
-        ret = ((s32 (*)(s32, s32, s32))fn_802ADFFC)(arg0, arg1, arg2);
+void fn_802ADFB0(s32 arg0, s32 arg1, s32 arg2) {
+    if (((s32 (*)(s32, s32, s32))fn_802AE360)(arg0, arg1, arg2) == 0) {
+        ((void (*)(s32, s32, s32))fn_802ADFFC)(arg0, arg1, arg2);
     }
-    return ret;
 }
 
 void fn_802AE440(void);
