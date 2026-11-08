@@ -2852,6 +2852,14 @@ void fn_801FAC58(void *arg0, s8 arg1) {
     M2C_FIELD(arg0, s8 *, 0x100) = arg1;
 }
 
+s32 fn_801FAC74(void *arg0) {
+    u16 v = M2C_FIELD(arg0, u16 *, 0xCE);
+    if (v == 0) {
+        return 5;
+    }
+    return v + 2;
+}
+
 void *fn_801FAC90(void *arg0, s32 arg1) {
     return (u8 *)arg0 + (arg1 * 0x318 + 0x104);
 }
@@ -2861,6 +2869,10 @@ s32 fn_801FACA0(void *arg0) {
         return 1;
     }
     return 0;
+}
+
+s32 fn_801FACB8(void *arg0) {
+    return M2C_FIELD(arg0, u8 *, 0xEC) == 0;
 }
 
 u8 fn_801FAD08(void *arg0) {
