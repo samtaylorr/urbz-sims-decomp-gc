@@ -1241,6 +1241,19 @@ void fn_803847F8(s32 arg0, s32 arg1) {
     lbl_8049645C = 1;
 }
 
+u32 fn_80384814(void) {
+    extern u32 lbl_80496458;
+    u32 n;
+    fn_8025465C();
+    n = lbl_80496458;
+    if (n != 0) {
+        n--;
+    }
+    lbl_80496458 = 0;
+    fn_80254684();
+    return n;
+}
+
 u16 fn_80384860(s32 arg0) {
     extern struct VolTable2_80405980 {
         u8 pad[0x710];
