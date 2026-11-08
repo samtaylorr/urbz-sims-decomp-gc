@@ -634,6 +634,30 @@ void fn_8019C850(void) {
 
 }
 
+void *fn_8019C854(void *self) {
+    extern f32 lbl_803DB6E4;
+    extern f32 lbl_803DB6E8;
+    extern u8 lbl_80414710[];
+
+    fn_8019C828(self);
+    *(void **)self = lbl_80414710;
+    M2C_FIELD(self, f32 *, 0xC) = lbl_803DB6E4;
+    M2C_FIELD(self, s32 *, 0x18) = 0;
+    M2C_FIELD(self, s32 *, 0x20) = -1;
+    M2C_FIELD(self, f32 *, 0x30) = lbl_803DB6E8;
+    M2C_FIELD(self, s32 *, 0x34) = -2;
+    M2C_FIELD(self, s32 *, 0x38) = 0x10;
+    M2C_FIELD(self, f32 *, 0x4) = lbl_803DB6E4;
+    M2C_FIELD(self, f32 *, 0x8) = lbl_803DB6E4;
+    M2C_FIELD(self, s32 *, 0x1C) = 0;
+    M2C_FIELD(self, s32 *, 0x10) = 0;
+    M2C_FIELD(self, s32 *, 0x14) = 0;
+    M2C_FIELD(self, s32 *, 0x24) = 0x10;
+    M2C_FIELD(self, s32 *, 0x28) = 0x10;
+    M2C_FIELD(self, s32 *, 0x2C) = 0x10;
+    return self;
+}
+
 void fn_8019C998(void *arg0, void *arg1) {
     M2C_FIELD(arg1, s16 *, 0) = 3;
     M2C_FIELD(arg1, s32 *, 0x28) = (s32) M2C_FIELD(arg0, s32 *, 0x1C);
