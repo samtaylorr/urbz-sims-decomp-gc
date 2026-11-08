@@ -318,9 +318,10 @@ s32 fn_80294148(s32 arg0, s32 arg1) {
     u16 *q;
 
     if (arg1 > 0) {
+        s32 top = fn_StackPeek(lbl_804433C4, 0);
         p = lbl_803FCE5C;
         lbl_803FCE5C[0]++;
-        fn_802B4ADC(fn_StackPeek(lbl_804433C4, 0), &p);
+        fn_802B4ADC(top, &p);
         fn_8027B794(lbl_804433C4, arg0, 0, &p);
         q = p;
         if (--*q == 0) {
@@ -4702,10 +4703,9 @@ void fn_802BBE7C(void *arg0) {
                 vt = M2C_FIELD(obj, char **, 4);
                 M2C_FIELD(vt, void (**)(void *), 0x1C)((char *)obj + M2C_FIELD(vt, s16 *, 0x18));
             }
-            if (n == 0) {
+            if (n-- == 0) {
                 break;
             }
-            n--;
         }
     }
 }
