@@ -64,10 +64,10 @@ void fn_8029039C(s32 *arg0, void *arg1, s32 arg2, void *arg3) {
         fn_802AF1CC(arg1, arg3);
     }
     switch (*arg0) {
-    case 1:
+    case 10:
         fn_802AF214(arg1, arg2, arg0 + 2);
         break;
-    case 10:
+    case 1:
         fn_802AF214(arg1, arg2, arg0 + 2);
         break;
     }
@@ -747,6 +747,18 @@ s32 fn_80299E1C(void *arg0) {
 
     ok = 0;
     if (fn_802B70DC(arg0) == 0xF) {
+        ok = fn_802B72D4(arg0) == 0;
+    }
+    return ok;
+}
+
+s32 fn_80299E68(void *arg0) {
+    extern s32 fn_802B70DC(void *);
+    extern s32 fn_802B72D4(void *);
+    s32 ok;
+
+    ok = 0;
+    if (fn_802B70DC(arg0) == 0x10) {
         ok = fn_802B72D4(arg0) == 0;
     }
     return ok;
