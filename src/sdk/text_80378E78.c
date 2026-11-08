@@ -605,6 +605,29 @@ void *fn_80381128(u32 idx) {
     return ret;
 }
 
+void fn_80381198(void *arg0) {
+    typedef struct QNode_ {
+        struct QNode_ *next;
+        struct QNode_ *prev;
+        void *unk8;
+        u32 idx;
+    } QNode_;
+    extern QNode_ *lbl_804763C0[32];
+    void fn_803837D8(void *);
+    QNode_ *node = arg0;
+    s32 enabled = fn_8025465C();
+
+    fn_8038103C(node);
+    if (*(u16 *)((u8 *)node + 0x146) == 1) {
+        *(s32 *)((u8 *)node + 0x20) = 1;
+        fn_803837D8(node);
+    }
+    node->next = lbl_804763C0[0];
+    lbl_804763C0[0] = node;
+    node->idx = 0;
+    fn_80254684(enabled);
+}
+
 void fn_8038138C(void *arg0, u32 idx) {
     typedef struct QNode_ {
         struct QNode_ *next;
@@ -1106,6 +1129,25 @@ void fn_80387D30(void) {
 u16 fn_80388F84(void) {
     extern u16 lbl_804964A0;
     return lbl_804964A0;
+}
+
+u32 fn_80388FEC(s32 chan) {
+    extern u8 lbl_804912A0[];
+    return *(u32 *)(lbl_804912A0 + chan * 0x110 + 0x10c);
+}
+
+s32 fn_80389004(s32 chan, u32 x) {
+    extern u8 lbl_804912A0[];
+    s32 fn_8025465C(void);
+    void fn_80254684(s32);
+    u8 *p = lbl_804912A0 + chan * 0x110;
+    s32 level = fn_8025465C();
+    if (*(s32 *)(p + 4) == -1) {
+        return -1;
+    }
+    *(u32 *)(p + 0x10c) = x ? x : 0x80000000;
+    fn_80254684(level);
+    return 0;
 }
 
 s32 fn_80389540(s32 arg0) {
