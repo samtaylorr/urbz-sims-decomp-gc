@@ -1031,6 +1031,12 @@ s32 fn_80384AC4(void) {
     return lbl_80496468;
 }
 
+void fn_80385948(void *arg0) {
+    extern u8 lbl_8048FAA0[][0x60];
+    u8 *e = lbl_8048FAA0[M2C_FIELD(arg0, s32 *, 0x18)];
+    *(u32 *)(e + 0) = 0;
+}
+
 void fn_80385A1C(void *arg0, u32 arg1) {
     extern u8 lbl_8048FAA0[][0x60];
     u8 *e = lbl_8048FAA0[M2C_FIELD(arg0, s32 *, 0x18)];
