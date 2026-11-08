@@ -1716,7 +1716,7 @@ s32 *fn_802ADDD8(s32 *self, s32 arg1) {
 
 void fn_802ADDF4(void *arg0, s32 arg1) {
     extern void (*lbl_80443318[])(void *, s32);
-    void fn_802AE5EC();
+    extern void fn_802AE5EC(void *);
 
     fn_802AE5EC(arg0);
     if (arg1 & 1) {
