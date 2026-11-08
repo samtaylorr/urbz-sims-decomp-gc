@@ -30,6 +30,11 @@ static inline s32 TTSE_ArrCount(void *arr) {
     return n;
 }
 
+typedef struct TTSEKey {
+    s32 a;
+    s16 b;
+} TTSEKey;
+
 typedef struct ScratchPool {
     u32 base;
     void *free;
@@ -258,12 +263,12 @@ s32 fn_8019B83C(void *self, s32 arg1, u16 **out) {
     case 0x20:
     case 0x2e:
     case 0x2f:
-        break;
+        return 0;
     default:
-        *out = (u16 *)((u8 *)self + 0x14 + arg1 * 2);
-        return 1;
+        break;
     }
-    return 0;
+    *out = (u16 *)((u8 *)self + 0x14 + arg1 * 2);
+    return 1;
 }
 
 s32 fn_8019B89C(void *arg0) {
@@ -1376,6 +1381,61 @@ s32 fn_8019FC9C(void) {
     fn_800C4744(&sp8);
     temp_r29 = fn_800C4820();
     return temp_r29 ^ (M2C_FIELD(&sp8, s32 *, 4) ^ fn_80247C34());
+}
+
+void fn_8019FCE4(void *self, u8 *src) {
+    *(s32 *)((char *)self + 0x0) = src[0];
+    *(s32 *)((char *)self + 0x4) = src[1];
+    *(s16 *)((char *)self + 0x8) = src[2];
+    *(s16 *)((char *)self + 0xa) = src[3];
+    *(s16 *)((char *)self + 0x10) = src[3];
+    *(s16 *)((char *)self + 0x12) = src[3];
+    *(s16 *)((char *)self + 0x14) = src[4];
+    *(s16 *)((char *)self + 0x16) = src[5];
+    *(s16 *)((char *)self + 0x18) = src[7];
+    *(s16 *)((char *)self + 0x1a) = src[6];
+    *(s16 *)((char *)self + 0x1c) = src[6];
+    *(s16 *)((char *)self + 0x1e) = src[7];
+    *(s16 *)((char *)self + 0x20) = src[6];
+    *(s16 *)((char *)self + 0x22) = src[7];
+    *(s32 *)((char *)self + 0x24) = 0;
+    *(s32 *)((char *)self + 0x28) = 0;
+    *(s32 *)((char *)self + 0x2c) = 0;
+    *(s32 *)((char *)self + 0x30) = 0;
+    *(s32 *)((char *)self + 0x34) = 0;
+}
+
+void *fn_8019FD74(void *self, u8 *src, s32 a2, s32 a3, s32 a4, s32 a5) {
+    *(s32 *)((char *)self + 0x0) = src[0];
+    *(s32 *)((char *)self + 0x4) = src[1];
+    *(s16 *)((char *)self + 0x8) = src[2];
+    *(s16 *)((char *)self + 0xa) = src[3];
+    *(s16 *)((char *)self + 0x10) = src[3];
+    *(s16 *)((char *)self + 0x12) = src[3];
+    *(s16 *)((char *)self + 0x14) = src[4];
+    *(s16 *)((char *)self + 0x16) = src[5];
+    *(s16 *)((char *)self + 0x18) = src[7];
+    *(s16 *)((char *)self + 0x1a) = src[6];
+    if (src[0] & 0x10) {
+        *(s16 *)((char *)self + 0x1c) = src[6];
+        *(s16 *)((char *)self + 0x1e) = src[7];
+    } else {
+        *(s16 *)((char *)self + 0x1c) = 0;
+        *(s16 *)((char *)self + 0x1e) = 0;
+    }
+    if (*(s32 *)((char *)self + 0x0) & 0x20) {
+        *(s16 *)((char *)self + 0x20) = src[6];
+        *(s16 *)((char *)self + 0x22) = src[7];
+    } else {
+        *(s16 *)((char *)self + 0x20) = 0;
+        *(s16 *)((char *)self + 0x22) = 0;
+    }
+    *(s32 *)((char *)self + 0x30) = a2;
+    *(s32 *)((char *)self + 0x24) = 0;
+    *(s32 *)((char *)self + 0x34) = a3;
+    *(s32 *)((char *)self + 0x28) = a4;
+    *(s32 *)((char *)self + 0x2c) = a5;
+    return self;
 }
 
 s32 fn_801A0558(s32 arg0) {
