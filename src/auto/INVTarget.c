@@ -3371,6 +3371,12 @@ void fn_801FFF98(void *arg0, char *arg1) {
     fn_80245BB4(arg1, lbl_803E56EC, *((u8 *)arg0 + 0x189) + 1, *((u8 *)arg0 + 0x18A) + 1);
 }
 
+void fn_802000A8(void *arg0, u8 *arg1, s32 arg2, u16 arg3) {
+    s32 fn_80245BB4(void *, char *, ...);
+    extern char lbl_803E5714[];
+    fn_80245BB4(arg1, lbl_803E5714, arg3);
+}
+
 void fn_802000DC(void *self, void *arg1) {
     extern void *fn_8016CC44(void *);
     u8 *name = (u8 *)self + 0x38B;
