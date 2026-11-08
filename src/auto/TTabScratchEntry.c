@@ -1337,6 +1337,15 @@ void *fn_8019FB7C(void *self) {
     return self;
 }
 
+void *fn_801981B4(void *arg0, s32 arg1);
+void *fn_8019FC40(void *arg0, s32 arg1) {
+    void *p = fn_801981B4(arg0, arg1);
+    if (p != NULL) {
+        return p;
+    }
+    return NULL;
+}
+
 s32 fn_8019FC9C(void) {
     M2C_UNK fn_800C4744(M2C_UNK *);
     s32 fn_800C4820();
