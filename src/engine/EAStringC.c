@@ -570,9 +570,9 @@ s32 fn_8029A04C(s32 arg0) {
 
 void fn_8029A094(s32 arg0, s32 arg1) {
     extern void (*lbl_80443318[])(s32, s32);
-    extern void fn_802A1EF0(void);
+    extern void fn_802A1EF0(void *);
 
-    fn_802A1EF0();
+    fn_802A1EF0((void *)arg0);
     lbl_80443318[0](arg0 - 8, arg1 + 8);
 }
 
@@ -589,7 +589,7 @@ s32 fn_8029A0E8(void) {
 }
 
 s32 fn_8029A908(void *arg0, s32 year) {
-    return (year & 3) == 0 && (year % 100 != 0 || year % 400 == 0);
+    return (year & 3) == 0 ? (year % 100 != 0 ? 1 : year % 400 == 0) : 0;
 }
 
 s32 fn_8029A95C(void *arg0, s32 year) {
@@ -866,9 +866,13 @@ void fn_802A0938(s32 arg0, void *arg1) {
 }
 
 void fn_802A0980(s32 arg0, void *arg1) {
-    void *node = fn_8029F550_Find(M2C_FIELD(arg0, s32 *, 0), M2C_FIELD(arg1, void **, 8));
-    if (M2C_FIELD(node, s32 *, 8) > 0x3FFF) {
-        fn_802A0890(arg0, node);
+    extern void fn_8029F550(s32, void *, s32, s32 *, s32 *);
+    s32 sp8;
+    s32 spC;
+    sp8 = spC = 0;
+    fn_8029F550(M2C_FIELD(arg0, s32 *, 0), M2C_FIELD(arg1, void **, 8), 0, &sp8, &spC);
+    if (M2C_FIELD(spC, s32 *, 8) > 0x3FFF) {
+        fn_802A0890(arg0, (void *)spC);
     }
 }
 
@@ -2035,27 +2039,26 @@ void fn_802AED48(u32 seed) {
 
 extern f32 lbl_803EDBB8[];
 extern f32 lbl_803EDBBC[];
-void fn_802AED88(f32 *m) {
-    f32 *p;
-    f32 one = lbl_803EDBBC[0];
+void *fn_802AED88(f32 *m) {
     f32 zero = lbl_803EDBB8[0];
-    m[13] = one;
-    m[11] = zero;
+    f32 one = lbl_803EDBBC[0];
     M2C_FIELD(m, s32 *, 0x3BC) = 0;
-    p = m;
-    p[0] = zero;
-    p[1] = zero;
-    p[2] = zero;
-    p[3] = zero;
-    p[4] = one;
-    p[5] = one;
-    p[6] = one;
-    p[7] = one;
-    p[8] = zero;
-    p[9] = one;
-    p[10] = one;
-    p[12] = one;
-    M2C_FIELD(p, s32 *, 0x3B8) = 0;
+    m[0] = zero;
+    m[1] = zero;
+    m[2] = zero;
+    m[3] = zero;
+    m[4] = one;
+    m[5] = one;
+    m[6] = one;
+    m[7] = one;
+    m[8] = zero;
+    m[9] = one;
+    m[10] = one;
+    m[11] = zero;
+    m[12] = one;
+    m[13] = one;
+    M2C_FIELD(m, s32 *, 0x3B8) = 0;
+    return m;
 }
 
 void fn_802AEDE4(u8 *self) {
