@@ -24,6 +24,18 @@ s32 fn_803798A4(void *arg0) {
     return 0;
 }
 
+s32 fn_8037ACCC(s32 *arg0) {
+    s32 enabled;
+    s32 n;
+
+    enabled = fn_8025465C();
+    n = *arg0;
+    *arg0 = n + 1;
+    fn_80259838(arg0 + 1);
+    fn_80254684(enabled);
+    return n;
+}
+
 s32 fn_8037AD2C(s32 *self) {
     return *self;
 }
