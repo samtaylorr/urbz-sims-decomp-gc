@@ -136,6 +136,47 @@ s32 fn_8019B1D0(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0xA4);
 }
 
+void fn_8019B204(void *self, s16 arg1) {
+    void fn_801051C8(s32, s32);
+    void *vt;
+    s32 prev;
+    s32 cur;
+
+    M2C_FIELD(self, s16 *, 0x14) = arg1;
+    M2C_FIELD(self, s16 *, 0x1E) = 0;
+    fn_801051C8(0xD7, 0);
+    vt = M2C_FIELD(self, void **, 0);
+    prev = M2C_FIELD(vt, s32 (**)(void *), 0xF4)((char *)self + M2C_FIELD(vt, s16 *, 0xF0));
+    vt = M2C_FIELD(self, void **, 0);
+    cur = M2C_FIELD(vt, s32 (**)(void *), 0x19C)((char *)self + M2C_FIELD(vt, s16 *, 0x198));
+    if (cur != prev) {
+        M2C_FIELD(self, s16 *, 0x1C) = cur;
+        fn_801051C8(0xD9, 0);
+    }
+}
+
+s32 fn_8019B290(u8 *self, s32 i) {
+    return ((s32 *)(self + 0x74))[i] + ((s32 *)(self + 0x7C))[i];
+}
+
+void fn_8019B2AC(u8 *self, s32 value, s32 i) {
+    s32 *a = (s32 *)(self + 0x74);
+    s32 *b = (s32 *)(self + 0x7C);
+
+    if (value == a[i] + b[i]) {
+        return;
+    }
+    b[i] = value - a[i];
+    if (a[i] + b[i] > 999999) {
+        b[i] = 999999 - a[i];
+        value = a[i] + b[i];
+    }
+    if (i == 0) {
+        *(s16 *)(self + 0x30) = value / 10000;
+        *(s16 *)(self + 0x2E) = value % 10000;
+    }
+}
+
 void fn_8019B330(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     struct S { u8 pad[0x74]; s32 a[2]; s32 b[56]; s32 c[8]; } *p = arg0;
     void *vt = M2C_FIELD(arg0, void **, 0);
@@ -2191,9 +2232,11 @@ s32 fn_801AA930(s32 *self) {
 void *fn_801AAE74(void *self, s32 a, s32 b, s32 c) {
     void fn_8019C854(void *);
     void fn_801AAEDC(void *, s32, s32, s32);
-    M2C_FIELD(self, s32 *, 0) = 0;
-    M2C_FIELD(self, s32 *, 4) = 0;
-    M2C_FIELD((u8 *)self + 8, s32 *, 4) = 0;
+    u8 *sub;
+    *(volatile s32 *)((u8 *)self + 0) = 0;
+    *(volatile s32 *)((u8 *)self + 4) = 0;
+    sub = (u8 *)self + 8;
+    *(volatile s32 *)(sub + 4) = 0;
     fn_8019C854((u8 *)self + 0x10);
     fn_801AAEDC(self, a, b, c);
     return self;
@@ -2230,15 +2273,15 @@ void fn_801AB0E8(void *arg0, s32 arg1) {
 
 void fn_801AB0F0(void *arg0) {
     s32 i = M2C_FIELD(arg0, s32 *, 0x54);
-
     if (i == -1) {
         return;
     }
-    if (i >= 0 && (u32)i < (u32)((M2C_FIELD(arg0, char **, 4) - M2C_FIELD(arg0, char **, 0)) >> 4)) {
-        M2C_FIELD(arg0, s32 **, 0)[i * 4 + 2] = 0;
+    if (i >= 0 && (u32)i < (u32)((M2C_FIELD(arg0, u8 **, 4) - M2C_FIELD(arg0, u8 **, 0)) >> 4)) {
+        u8 *base = M2C_FIELD(arg0, u8 **, 0);
+        M2C_FIELD(base + i * 0x10, s32 *, 8) = 0;
     }
-    M2C_FIELD(arg0, s32 *, 0x54) = -1;
     M2C_FIELD(arg0, s32 *, 0x58) = -1;
+    M2C_FIELD(arg0, s32 *, 0x54) = -1;
 }
 
 s32 fn_801AB13C(s32 arg0) {
