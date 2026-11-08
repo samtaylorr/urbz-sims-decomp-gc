@@ -345,9 +345,11 @@ s32 fn_8029433C(s32 p) {
 
 s32 fn_80294388(s32 p) {
     extern void fn_802983B8(s32, s32);
+    s32 ret;
     fn_802983B8(p, *(s32 *)(*(s32 *)(p + 0x50) + 0x18) - 1);
+    ret = lbl_80496130;
     *(s32 *)(*(s32 *)(p + 0x50) + 0x1c) &= ~0x40;
-    return lbl_80496130;
+    return ret;
 }
 
 void *fn_802943D4(void *self) {
