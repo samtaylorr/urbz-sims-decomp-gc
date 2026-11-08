@@ -424,14 +424,16 @@ s32 fn_8037E70C(s32 *arg0) {
     s32 fn_8025465C(void);
     void fn_80254684(s32);
     s32 enabled;
+    s32 size;
 
     enabled = fn_8025465C();
     lbl_80496350--;
     if (arg0 != NULL) {
         *arg0 = *lbl_80496350;
     }
+    size = *lbl_80496350;
     lbl_8049634C++;
-    lbl_80496348 -= *lbl_80496350;
+    lbl_80496348 -= size;
     fn_80254684(enabled);
     return lbl_80496348;
 }
@@ -507,6 +509,7 @@ void fn_8037E9C4(u32 mainmem, u32 aram, u32 length) {
     fn_8037E97C();
 }
 
+#pragma peephole off
 void fn_8037EA74(u32 mainmem, u32 aram, u32 length) {
     __DSPRegs[16] = (u16)((__DSPRegs[16] & ~0x3ff) | (u16)(mainmem >> 16));
     __DSPRegs[17] = (u16)((__DSPRegs[17] & ~0xffe0) | (u16)(mainmem & 0xffff));
@@ -515,10 +518,11 @@ void fn_8037EA74(u32 mainmem, u32 aram, u32 length) {
     __DSPRegs[20] = (u16)(__DSPRegs[20] | 0x8000);
     __DSPRegs[20] = (u16)((__DSPRegs[20] & ~0x3ff) | (u16)(length >> 16));
     __DSPRegs[21] = (u16)((__DSPRegs[21] & ~0xffe0) | (u16)(length & 0xffff));
-    if (!fn_8037E99C_like()) {
+    if (!(__DSPRegs[5] & 0x200)) {
+        fn_8037E97C();
     }
 }
-
+#pragma peephole reset
 void fn_8038046C(void) {
     extern void *lbl_80496358;
     extern void *lbl_80496370;
@@ -1205,6 +1209,17 @@ void fn_80384224(void *arg0, s16 arg1) {
     fn_8025465C();
     M2C_FIELD(arg0, s16 *, 0x1A6) = arg1;
     M2C_FIELD(arg0, s32 *, 0x1C) = (s32) (M2C_FIELD(arg0, s32 *, 0x1C) | 0x2000);
+    fn_80254684();
+}
+
+void fn_803845AC(void *arg0, void *arg1) {
+    u16 *d = (u16 *)((u8 *)arg0 + 0x1F2);
+    fn_8025465C();
+    d[0] = M2C_FIELD(arg1, u16 *, 0);
+    d[1] = M2C_FIELD(arg1, u16 *, 2);
+    d[2] = M2C_FIELD(arg1, u16 *, 4);
+    d[3] = M2C_FIELD(arg1, u16 *, 6);
+    M2C_FIELD(arg0, s32 *, 0x1C) = (s32) (M2C_FIELD(arg0, s32 *, 0x1C) | 0x200000);
     fn_80254684();
 }
 
