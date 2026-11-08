@@ -1241,13 +1241,11 @@ s32 fn_801A2F28(void *arg0) {
 
 s32 fn_801A2F80(s16 *arg0) {
     s16 v = *arg0;
-    if (v == -1) {
-        return 0;
+    s32 r = 0;
+    if (v != -1 && (v & 0x8000)) {
+        r = 1;
     }
-    if (v & 0x8000) {
-        return 1;
-    }
-    return 0;
+    return r;
 }
 
 void fn_801A2FA0(u16 *arg0, s32 arg1) {
