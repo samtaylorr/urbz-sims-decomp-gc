@@ -593,6 +593,22 @@ s32 fn_80150238(void *self, s32 arg1, s32 arg2, s32 arg3, void *obj) {
     return result;
 }
 
+s32 fn_8015027C(char *self, s32 arg1, s32 arg2, s32 arg3) {
+    char *vt;
+    char *r;
+    s32 result;
+
+    if (arg3 != 1) {
+        result = 0;
+    } else {
+        vt = *(char **)self;
+        r = (*(char *(**)(void *, s32))(vt + 0x3C))(self + *(s16 *)(vt + 0x38), arg2);
+        vt = *(char **)(r + 0x10);
+        result = (*(s32 (**)(void *, s32))(vt + 0x7C))(r + *(s16 *)(vt + 0x78), arg1);
+    }
+    return result;
+}
+
 void fn_80150520(char *self, s32 arg1, s32 arg2) {
     extern void fn_800F687C(void *, void *, s32);
     extern void fn_800F59D8(void *, s32);
