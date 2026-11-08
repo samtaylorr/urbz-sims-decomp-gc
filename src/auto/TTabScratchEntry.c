@@ -570,6 +570,34 @@ s64 fn_8019C440(char *self, s32 arg1, s32 *arg2) {
     return 1;
 }
 
+s64 fn_8019C6F4(char *self, s32 arg1, s32 *arg2) {
+    void fn_8019BA58(void *, char *, s32);
+    extern char *lbl_8049454C;
+    extern char lbl_803DB5EC[];
+    char *obj;
+
+    obj = M2C_FIELD(lbl_8049454C, char **, 0x18);
+    if ((*arg2 = M2C_FIELD(*(char **)obj, s32 (**)(void *, s32), 0x24)(obj + M2C_FIELD(*(char **)obj, s16 *, 0x20), (s16)arg1)) == 0) {
+        fn_8019BA58(self, lbl_803DB5EC, arg1);
+        return -1;
+    }
+    return 1;
+}
+
+s64 fn_8019C77C(char *self, s32 arg1, s32 *arg2) {
+    void fn_8019BA58(void *, char *, s32);
+    extern char *lbl_8049454C;
+    extern char lbl_803DB5F4[];
+    char *obj;
+
+    obj = M2C_FIELD(lbl_8049454C, char **, 0x1C);
+    if ((*arg2 = M2C_FIELD(*(char **)obj, s32 (**)(void *, s32), 0x24)(obj + M2C_FIELD(*(char **)obj, s16 *, 0x20), (s16)arg1)) == 0) {
+        fn_8019BA58(self, lbl_803DB5F4, arg1);
+        return -1;
+    }
+    return 1;
+}
+
 s32 fn_8019C804(void) {
     extern void *lbl_8049454C;
     return M2C_FIELD(lbl_8049454C, s32 *, 0x18);
