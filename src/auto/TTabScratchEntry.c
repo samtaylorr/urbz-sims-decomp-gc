@@ -1493,10 +1493,13 @@ s32 fn_801A0EBC(void *self, s32 arg1) {
     do {
         it <<= 1;
         if (fn_801A08DC(self, it)) {
-            return it;
+            break;
         }
     } while (it <= 0x1f);
-    return 0;
+    if (it > 0x1f) {
+        return 0;
+    }
+    return it;
 }
 
 u16 fn_801A0F20(void *arg0, s32 arg1) {
@@ -1738,10 +1741,10 @@ void fn_801A2A10(char *self, u16 *src, u16 *data) {
 char *fn_801A2AB0(char *self) {
     char **begin = M2C_FIELD(self, char ***, 8);
     s32 n = M2C_FIELD(self, char ***, 0xC) - begin;
-    if (n == 0) {
-        return M2C_FIELD(self, char **, 0);
+    if (n != 0) {
+        return fn_801A29E0(begin[n - 1]);
     }
-    return fn_801A29E0(begin[n - 1]);
+    return M2C_FIELD(self, char **, 0);
 }
 
 s32 fn_801A2B54(void *arg0) {
