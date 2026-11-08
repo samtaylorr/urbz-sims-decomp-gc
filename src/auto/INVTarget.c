@@ -3188,6 +3188,25 @@ s32 fn_801FA470(void *arg0, s32 arg1, s32 arg2) {
     return 1;
 }
 
+s32 fn_801FA518(void *arg0, u32 arg1, s16 arg2, s16 arg3) {
+    struct {
+        u8 pad[0x8A];
+        struct {
+            s16 min;
+            s16 max;
+        } range[5];
+    } *p = arg0;
+    if (arg1 > 4) {
+        return 0;
+    }
+    if (arg2 < arg3) {
+        p->range[arg1].min = arg2;
+        p->range[arg1].max = arg3;
+        return 1;
+    }
+    return 0;
+}
+
 void fn_801FAC58(void *arg0, s8 arg1) {
     if (arg1 != 0) {
         M2C_FIELD(arg0, s8 *, 0x100) = 1;
@@ -5779,8 +5798,62 @@ s32 fn_80225B14(s32 *arg0, s32 arg1) {
     return 1;
 }
 
+void *fn_80225DB8(void *arg0) {
+    volatile s32 z[27];
+    char *p0 = (char *)arg0 + 0x8;
+    char *p1 = (char *)arg0 + 0x14;
+    char *p2 = (char *)arg0 + 0x1C;
+    char *p3 = (char *)arg0 + 0x28;
+    char *p4 = (char *)arg0 + 0x30;
+    char *p5 = (char *)arg0 + 0x3C;
+    char *p6 = (char *)arg0 + 0x44;
+    char *p7 = (char *)arg0 + 0x4C;
+    char *p8 = (char *)arg0 + 0x54;
+    char *p9 = (char *)arg0 + 0x5C;
+    char *p10 = (char *)arg0 + 0x64;
+    char *p11 = (char *)arg0 + 0x6C;
+    char *p12 = (char *)arg0 + 0x74;
+
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    *(volatile s32 *)(p0 + 4) = 0;
+    M2C_FIELD(arg0, u8 *, 0x10) = 0;
+    M2C_FIELD(arg0, s32 *, 0x14) = 0;
+    *(volatile s32 *)(p1 + 4) = 0;
+    *(volatile s32 *)(p2 + 4) = 0;
+    *(volatile u8 *)(p1 + 0x10) = 0;
+    M2C_FIELD(arg0, s32 *, 0x28) = 0;
+    *(volatile s32 *)(p3 + 4) = 0;
+    *(volatile s32 *)(p4 + 4) = 0;
+    *(volatile u8 *)(p3 + 0x10) = 0;
+    M2C_FIELD(arg0, s32 *, 0x3C) = 0;
+    *(volatile s32 *)(p5 + 4) = 0;
+    *(volatile s32 *)(p6 + 4) = 0;
+    M2C_FIELD(arg0, s32 *, 0x4C) = 0;
+    *(volatile s32 *)(p7 + 4) = 0;
+    *(volatile s32 *)(p8 + 4) = 0;
+    M2C_FIELD(arg0, s32 *, 0x5C) = 0;
+    *(volatile s32 *)(p9 + 4) = 0;
+    *(volatile s32 *)(p10 + 4) = 0;
+    M2C_FIELD(arg0, s32 *, 0x6C) = 0;
+    *(volatile s32 *)(p11 + 4) = 0;
+    *(volatile s32 *)(p12 + 4) = 0;
+    return arg0;
+}
+
 s32 fn_80229F5C(void *arg0) {
     return (s32) ((M2C_FIELD(arg0, s32 *, 0x70) - M2C_FIELD(arg0, s32 *, 0x6C)) * 0xB6DB6DB7) >> 3;
+}
+
+void fn_8022A150(void) {
+    s32 fn_80014EE0(void);
+    void fn_80014F24(s32, s32, s32);
+    void fn_80225508(void);
+    void fn_80225304(void);
+    fn_80014F24(fn_80014EE0(), 0, 0);
+    fn_80014F24(fn_80014EE0(), 1, 0);
+    fn_80225508();
+    fn_80225304();
 }
 
 s32 fn_8022B3B4(s32 arg0) {
