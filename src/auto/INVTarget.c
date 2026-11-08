@@ -2996,6 +2996,13 @@ s32 fn_801FB8EC(INVPair *arg0) {
     return ((s32 *)arg0->a)[0];
 }
 
+s32 fn_801FB90C(INVPair *arg0) {
+    if (arg0 == NULL) {
+        return 0xD59C7BB5;
+    }
+    return ((s32 *)arg0->a)[3];
+}
+
 void fn_801FE23C(s32 arg0) {
     M2C_UNK fn_801E0F64(s32);
     fn_801E0F64(arg0 + 0x79C);
