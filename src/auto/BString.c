@@ -1279,10 +1279,10 @@ void *fn_800D651C(void *self) {
     M2C_FIELD(self, s32 *, 0x4c) = 0;
     M2C_FIELD(self, s32 *, 0x30) = 0;
     M2C_FIELD(self, s32 *, 0x38) = 0;
-    M2C_FIELD(self, s32 *, 0x3c) = 1;
-    M2C_FIELD(self, s32 *, 0xc) = 0;
     lbl_8041F800[0] = self;
     M2C_FIELD(self, s32 *, 0x5c) = -1;
+    M2C_FIELD(self, s32 *, 0x3c) = 1;
+    M2C_FIELD(self, s32 *, 0xc) = 0;
     return self;
 }
 
@@ -1378,6 +1378,15 @@ void fn_800D7A5C(s32 *self) {
     extern void fn_80334CF8(void *, s32);
     fn_80334CF8(lbl_8045B438, self[6]);
     self[6] = 0;
+}
+
+void fn_800D84B0(s32 arg0) {
+    M2C_UNK fn_800E44CC(s32);
+    M2C_UNK fn_800E40C4(s32);
+    void fn_802D0F9C(void);
+    fn_800E44CC(arg0 + 0x38);
+    fn_800E40C4(arg0);
+    fn_802D0F9C();
 }
 
 void fn_800D84EC(s32 arg0) {
