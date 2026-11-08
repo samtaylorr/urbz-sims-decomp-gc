@@ -2208,9 +2208,12 @@ static inline void fn_802ACD80_base(void *self, s32 type, void *vt, s32 n) {
 
 void *fn_802ACD80(void *arg0) {
     extern char lbl_80418970[];
+    extern void fn_802B6FA8(void *, s32);
     extern void fn_802B7178(void *, s32);
     extern void fn_802B710C(void *, s32);
-    fn_802ACD80_base(arg0, 0x17, lbl_80418970, 8);
+    fn_802B6FA8(arg0, 0x17);
+    M2C_FIELD(arg0, void **, 4) = lbl_80418970;
+    fn_802ACD80_init(arg0, 8);
     fn_802B7178(arg0, 1);
     fn_802B710C(arg0, 0xFFF);
     return arg0;
@@ -2702,6 +2705,14 @@ void fn_802AEDE4(u8 *self) {
     *depth = n;
 }
 
+void fn_802AEE5C(u8 *self) {
+    typedef struct { s32 v[8]; } AptXform;
+    s32 *depth = (s32 *)(self + 0x3B8);
+    s32 n = *depth - 1;
+    *depth = n;
+    *(AptXform *)self = ((AptXform *)(self + 0x38))[n];
+}
+
 void fn_802AEED0(f32 *self, f32 *arg1) {
     extern void (*lbl_8044338C[])(void *);
     self[4] = arg1[4] * self[0] + self[4];
@@ -2885,25 +2896,30 @@ void fn_802AFB18(void *arg0, f32 *out) {
 s32 fn_802AFE08(f32 *m) {
     extern f64 lbl_803EDEE0[];
     extern f32 lbl_803EDEE8[];
-    f32 det;
+    f32 b = m[1];
+    f32 c = m[2];
+    f32 a = m[0];
+    f32 d = m[3];
+    f32 det = a * d - b * c;
     f32 inv;
-    f32 n0, n1, n2, n3;
+    f32 tx, ty;
 
-    det = m[0] * m[3] - m[1] * m[2];
     if (__builtin_fabs(det) < lbl_803EDEE0[0]) {
         return 0;
     }
     inv = lbl_803EDEE8[0] / det;
-    n3 = m[0] * inv;
-    n1 = -m[2] * inv;
-    n2 = -m[1] * inv;
-    n0 = m[3] * inv;
-    m[3] = n3;
-    m[1] = n1;
-    m[2] = n2;
-    m[0] = n0;
-    m[5] = -(m[4] * n1 + m[5] * n3);
-    m[4] = -(m[4] * n0 + m[5] * n2);
+    a *= inv;
+    c = -c * inv;
+    b = -b * inv;
+    d *= inv;
+    tx = m[4];
+    ty = m[5];
+    m[3] = a;
+    m[1] = c;
+    m[2] = b;
+    m[0] = d;
+    m[5] = -(tx * c + ty * a);
+    m[4] = -(tx * d + ty * b);
     return 1;
 }
 
