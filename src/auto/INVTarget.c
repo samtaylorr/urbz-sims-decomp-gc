@@ -2432,11 +2432,11 @@ void fn_801EA748(void) {
 
 f32 fn_801EA760(s32 arg0) {
     f32 fn_8004387C(s32);
-    extern f32 lbl_803E29F0;
-    extern f32 lbl_803E29F4;
+    extern f32 lbl_803E29F0[];
+    extern f32 lbl_803E29F4[];
     f32 t = fn_8004387C(arg0);
-    if (t == lbl_803E29F0) {
-        return lbl_803E29F4;
+    if (t == lbl_803E29F0[0]) {
+        return lbl_803E29F4[0];
     }
     return t;
 }
