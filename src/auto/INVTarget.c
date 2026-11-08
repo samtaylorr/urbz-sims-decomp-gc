@@ -3135,7 +3135,7 @@ s32 fn_801FBB14(u8 *arg0) {
     extern s32 fn_8016CCE0(void *);
     u8 *vt;
     void *p;
-    s32 r;
+    void *r;
 
     if (arg0 == NULL) {
         return 0;
@@ -3145,16 +3145,17 @@ s32 fn_801FBB14(u8 *arg0) {
     if (p == NULL) {
         return 0;
     }
-    r = fn_8016CC44(p);
-    if (r == 0) {
-        r = fn_8016CCE0(p);
+    r = (void *)fn_8016CC44(p);
+    if (r == NULL) {
+        r = p;
     }
-    return r;
+    return fn_8016CCE0(r);
 }
 
 s32 fn_801FBB84(u8 *arg0, s32 *arg1) {
     u8 *t;
     s32 *list;
+    s32 *q;
     s32 count;
 
     if (arg0 == NULL) {
@@ -3169,17 +3170,18 @@ s32 fn_801FBB84(u8 *arg0, s32 *arg1) {
         return 0;
     }
     list = *(s32 **)t;
+    q = list;
     count = 0;
-    if (list != NULL) {
-        count = list[-1];
+    if (q != NULL) {
+        count = q[-1];
     }
     if (count == 0) {
         return 0;
     }
     arg1[1] = list[0];
     arg1[0] = *(s32 *)(t + 0x20);
-    arg1[3] = 0;
     arg1[2] = list[2];
+    arg1[3] = 0;
     return arg1[1] != 0;
 }
 
