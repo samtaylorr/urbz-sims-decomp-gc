@@ -1143,6 +1143,15 @@ void fn_80385B94(void *arg0) {
     *(u32 *)(e + 4) |= 0x40000002;
 }
 
+s32 fn_80385BBC(void *arg0) {
+    extern u8 lbl_8048FAA0[][0x60];
+    u8 *e = lbl_8048FAA0[M2C_FIELD(arg0, s32 *, 0x18)];
+    if (*(u32 *)(e + 4) & 2) {
+        return 0;
+    }
+    return 1;
+}
+
 void fn_80385C8C(void *arg0, s32 arg1) {
     extern u8 lbl_8048FAA0[][0x60];
     u8 *e = lbl_8048FAA0[M2C_FIELD(arg0, s32 *, 0x18)];
@@ -1835,6 +1844,13 @@ s32 fn_8038DE98(void) {
 extern s32 lbl_80495668;
 void fn_8038DEBC(s32 arg0) {
     lbl_80495668 = arg0;
+}
+
+u32 fn_8038E45C(void) {
+    extern s32 lbl_80495668;
+    s32 fn_8025A3F4(void);
+    lbl_80495668 = fn_8025A3F4();
+    return (0x7FEC8000 | fn_8038DE98()) & ~0xFFF;
 }
 
 s32 fn_8038F53C(s32 chan, u32 addr, u32 length, void *dst, void *callback) {
