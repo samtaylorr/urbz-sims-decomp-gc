@@ -4191,6 +4191,50 @@ void fn_802200F8(void *arg0, s32 arg1) {
     }
 }
 
+s32 fn_8022088C(void *self, u8 *p) {
+    s32 n = 0;
+    while (p != NULL) {
+        n++;
+        if (*(s32 *)(p + 0x8) == 0) {
+            p = *(u8 **)(p + 0x4);
+        } else {
+            p = *(u8 **)(p + 0xC);
+        }
+    }
+    return n;
+}
+
+u8 *fn_802208C0(void *self, u8 *p) {
+    u8 *r = *(u8 **)(p + 0x4);
+    if (r != NULL) {
+        return r;
+    }
+    return *(u8 **)(p + 0xC);
+}
+
+u8 *fn_802208D8(u8 *self, s32 idx) {
+    u8 *found = NULL;
+    u8 *p = *(u8 **)(self + 0x4);
+    s32 i = 0;
+    if (*(s32 *)(p + 0x4) != 0) {
+        for (p = *(u8 **)(self + 0x0); p != NULL && found == NULL; p = *(u8 **)(p + 0x4), i++) {
+            if (i == idx) {
+                found = p;
+            }
+        }
+    } else {
+        while (*(s32 *)(p + 0x8) != 0) {
+            p = *(u8 **)(p + 0x0);
+        }
+        for (p = *(u8 **)(p + 0xC); p != NULL && found == NULL; p = *(u8 **)(p + 0xC), i++) {
+            if (i == idx) {
+                found = p;
+            }
+        }
+    }
+    return found;
+}
+
 void fn_80221924(void *arg0, s32 arg1, f32 farg0) {
     switch (arg1) {                                 /* irregular */
     case 7:
@@ -4416,17 +4460,22 @@ void fn_80223288(void *arg0, s32 arg1) {
     extern f32 lbl_803EA76C[];
     struct V2 { f32 x, y; } v;
     struct V2 *pv;
+    struct V2 *d;
 
     if (arg1 == 7) {
         pv = &v;
         pv->y = lbl_803EA76C[0];
         v.x = lbl_803EA76C[0];
-        *(struct V2 *)((u8 *)arg0 + 0x34) = v;
+        d = (struct V2 *)((u8 *)arg0 + 0x34);
+        M2C_FIELD(d, s32 *, 4) = M2C_FIELD(pv, s32 *, 4);
+        M2C_FIELD(d, s32 *, 0) = M2C_FIELD(&v, s32 *, 0);
     } else if (arg1 == 8) {
         pv = &v;
         pv->y = lbl_803EA76C[0];
         v.x = lbl_803EA76C[0];
-        *(struct V2 *)((u8 *)arg0 + 0x3C) = v;
+        d = (struct V2 *)((u8 *)arg0 + 0x3C);
+        M2C_FIELD(d, s32 *, 4) = M2C_FIELD(pv, s32 *, 4);
+        M2C_FIELD(d, s32 *, 0) = M2C_FIELD(&v, s32 *, 0);
     }
 }
 
