@@ -1405,7 +1405,8 @@ void fn_800D5FAC(void) {
 s32 fn_800D5FB0(void *self, s32 arg1) {
     extern s32 lbl_80494FCC;
     extern s32 fn_803338C0(s32);
-    s32 ret = 0;
+    s32 ret;
+    ret = 0;
     if (fn_803338C0(lbl_80494FCC) != 0) {
         if (arg1 != 0) {
             ret = M2C_FIELD(self, s32 *, 0x34) == 0;
@@ -1640,8 +1641,8 @@ void fn_800D7A9C(s32 *self) {
     fn_800ABFC4(M2C_FIELD(g[0xAC / 4], s32 *, 0x34));
     lbl_8041FA5C[0] = M2C_FIELD(g[0xAC / 4], s32 *, 0x34);
     fn_80229F7C();
-    self[3] = 0;
     self[6] = 0;
+    self[3] = 0;
     fn_80049134(g, lbl_803D45E4, 0x14);
 }
 
