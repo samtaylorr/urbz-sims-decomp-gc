@@ -424,16 +424,14 @@ s32 fn_8037E70C(s32 *arg0) {
     s32 fn_8025465C(void);
     void fn_80254684(s32);
     s32 enabled;
-    s32 size;
 
     enabled = fn_8025465C();
     lbl_80496350--;
     if (arg0 != NULL) {
         *arg0 = *lbl_80496350;
     }
-    size = *lbl_80496350;
+    lbl_80496348 = lbl_80496348 - *lbl_80496350;
     lbl_8049634C++;
-    lbl_80496348 -= size;
     fn_80254684(enabled);
     return lbl_80496348;
 }
