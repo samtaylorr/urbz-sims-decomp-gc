@@ -1325,7 +1325,6 @@ void fn_800D53B8(char *self, BSKey *key) {
     char *obj;
     char *vt;
     BSKey k;
-    BSKey *kp;
     s32 v;
 
     lbl_8041FCCC[0] = 1;
@@ -1335,12 +1334,11 @@ void fn_800D53B8(char *self, BSKey *key) {
         do {
             e = M2C_FIELD(node, char **, 0);
             k = *(BSKey *)e;
-            kp = &k;
-            if (kp->v == key->v) {
+            if (k.v == key->v) {
                 if (M2C_FIELD(self, char **, 4) != NULL) {
                     obj = *M2C_FIELD(self, char ***, 4);
                     vt = M2C_FIELD(obj, char **, 8);
-                    M2C_FIELD(vt, void (**)(void *), 0x2C)(obj + M2C_FIELD(vt, s16 *, 0x28));
+                    M2C_FIELD(vt, void (**)(), 0x2C)(obj + M2C_FIELD(vt, s16 *, 0x28), k);
                 }
                 M2C_FIELD(self, char **, 4) = node;
                 v = key->v;
@@ -1407,12 +1405,9 @@ void fn_800D5FAC(void) {
 s32 fn_800D5FB0(void *self, s32 arg1) {
     extern s32 lbl_80494FCC;
     extern s32 fn_803338C0(s32);
-    register s32 ret asm("r30");
-    register s32 flag asm("r31");
-    flag = arg1;
-    ret = 0;
+    register s32 ret asm("r30") = 0;
     if (fn_803338C0(lbl_80494FCC) != 0) {
-        if (flag != 0) {
+        if (arg1 != 0) {
             ret = M2C_FIELD(self, s32 *, 0x34) == 0;
         } else if (M2C_FIELD(self, s32 *, 0x30) == 0) {
             ret = 1;
