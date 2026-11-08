@@ -2230,6 +2230,13 @@ void fn_801E0308(void *arg0, void *arg1) {
     M2C_FIELD(arg0, void **, 0x74) = arg1;
 }
 
+void *fn_801E0380(void *arg0, s32 arg1) {
+    for (; arg1 != 0; arg1--) {
+        arg0 = M2C_FIELD(arg0, void **, 0x74);
+    }
+    return arg0;
+}
+
 s32 fn_801E0428(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x74);
 }
