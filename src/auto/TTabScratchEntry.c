@@ -2145,6 +2145,19 @@ s32 fn_801AB088(s32 *arg0, s32 arg1) {
     return *arg0 + (arg1 * 0x10);
 }
 
+s32 fn_801AB098(void *arg0) {
+    if (M2C_FIELD(arg0, s32 *, 0x58) == -1) {
+        u8 *it;
+        M2C_FIELD(arg0, s32 *, 0x58) = 0;
+        for (it = M2C_FIELD(arg0, u8 **, 0); it != M2C_FIELD(arg0, u8 **, 4); it += 0x10) {
+            if (M2C_FIELD(it, s32 *, 8) > M2C_FIELD(arg0, s32 *, 0x58)) {
+                M2C_FIELD(arg0, s32 *, 0x58) = M2C_FIELD(it, s32 *, 8);
+            }
+        }
+    }
+    return M2C_FIELD(arg0, s32 *, 0x58);
+}
+
 void fn_801AB0E8(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x54) = arg1;
 }
