@@ -139,9 +139,9 @@ void fn_80291DA0(void *arg0, s32 arg1) {
     s32 g = lbl_8049613C;
 
     v[0] = a;
-    v[1] = a;
-    v[2] = b;
     v[3] = b;
+    v[2] = b;
+    v[1] = a;
     fn_80291BE0(arg0, g, v);
 }
 
@@ -2295,8 +2295,7 @@ void *fn_802ACF8C(void *arg0) {
     extern void fn_802B7178(s32 *, s32);
     extern void fn_802B710C(s32 *, s32);
     fn_802B6FA8(arg0, 0x18);
-    ((void **)arg0)[1] = lbl_804188F0;
-    fn_802ADDD8((s32 *)arg0 + 2, 8);
+    fn_802ADDD8((((void **)arg0)[1] = lbl_804188F0, (s32 *)arg0 + 2), 8);
     fn_802B7178(arg0, 1);
     fn_802B710C(arg0, 0xFFF);
     return arg0;
@@ -2847,6 +2846,16 @@ void fn_802AFF78(void *arg0, void *arg1, void *arg2) {
     M2C_FIELD(arg0, f32 *, 4) = (f32) (M2C_FIELD(arg2, f32 *, 4) * M2C_FIELD(arg1, f32 *, 4));
     M2C_FIELD(arg0, f32 *, 8) = (f32) (M2C_FIELD(arg2, f32 *, 8) * M2C_FIELD(arg1, f32 *, 8));
     M2C_FIELD(arg0, f32 *, 0xC) = (f32) (M2C_FIELD(arg2, f32 *, 0xC) * M2C_FIELD(arg1, f32 *, 0xC));
+}
+
+void fn_802B000C(void *root, void *node, void *arg2) {
+    extern void fn_802AFD84(void *, void *, void *);
+    char *p;
+
+    for (p = node; p != root && p != NULL;) {
+        fn_802AFD84(arg2, p + 0x10, arg2);
+        p = M2C_FIELD(p, void **, 0x50) != NULL ? M2C_FIELD(p, char **, 0x4C) : NULL;
+    }
 }
 
 void fn_802B0084(s32 arg0, s32 arg1) {
