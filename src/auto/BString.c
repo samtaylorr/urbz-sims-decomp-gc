@@ -3669,6 +3669,16 @@ s32 fn_800E3EF8(void *arg0) {
     return *M2C_FIELD(arg0, s32 **, 0x44);
 }
 
+void fn_800E3F04(void *self) {
+    extern f32 lbl_803D5118[];
+    void fn_800E44CC(void *);
+    u8 *q = (u8 *)self + 0x38;
+    fn_800E44CC(q);
+    M2C_FIELD(q, s32 *, 0x4) = 0;
+    M2C_FIELD(q, f32 *, 0x10) = lbl_803D5118[0];
+    M2C_FIELD(self, s32 *, 0x2C) = M2C_FIELD(self, s32 *, 0x28);
+}
+
 f32 fn_800E416C(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0x4C);
 }
