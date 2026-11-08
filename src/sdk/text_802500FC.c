@@ -65,6 +65,9 @@ void fn_80250290(void) {
 
 typedef void (*__OSExceptionHandler)(u8, void *);
 extern __OSExceptionHandler *lbl_80495DEC;
+
+#pragma push
+#pragma peephole off
 __OSExceptionHandler fn_80250BDC(u8 exception, __OSExceptionHandler handler) {
     __OSExceptionHandler oldHandler;
     oldHandler = lbl_80495DEC[exception];
@@ -72,8 +75,6 @@ __OSExceptionHandler fn_80250BDC(u8 exception, __OSExceptionHandler handler) {
     return oldHandler;
 }
 
-#pragma push
-#pragma peephole off
 __OSExceptionHandler fn_80250BF8(u8 exception) {
     return lbl_80495DEC[exception];
 }
