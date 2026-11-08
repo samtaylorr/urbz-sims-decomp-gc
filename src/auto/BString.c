@@ -1252,6 +1252,7 @@ void fn_800D5478(char *self, char *arg1) {
 }
 
 void fn_800D54B0(char *self) {
+    void fn_800D53B8(char *, BSKey *);
     BSKey k;
     if (M2C_FIELD(self, s32 *, 4) != 0) {
         k.v = 2;
