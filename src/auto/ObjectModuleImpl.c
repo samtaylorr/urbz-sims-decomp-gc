@@ -705,6 +705,14 @@ void fn_80157514(void) {
     (*(void (**)(void *))(vt + 0x74))(obj + *(s16 *)(vt + 0x70));
 }
 
+void fn_8015763C(void *self, s32 idx, s32 bits, s32 set) {
+    s32 off = (idx - 1) * 4;
+    *(u32 *)((u8 *)M2C_FIELD(self, u32 **, 0x1C) + off) &= ~(bits << 16);
+    if (set != 0) {
+        *(u32 *)((u8 *)M2C_FIELD(self, u32 **, 0x1C) + off) |= bits << 16;
+    }
+}
+
 s32 fn_80157674(void *self, s32 idx, s32 mask) {
     s32 off = (idx - 1) * 4;
     return (*(u32 *)((u8 *)M2C_FIELD(self, u32 **, 0x1C) + off) & (mask << 16)) != 0;
