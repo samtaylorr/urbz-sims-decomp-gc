@@ -5089,12 +5089,11 @@ void **fn_802BD284(void **self) {
 
     len = ((struct Buf *)*self)->len;
     fn_802BE3D0(self, len, 0, len, 1, len);
-    len = ((struct Buf *)*self)->len;
-    if (len <= 1) {
+    if (((struct Buf *)*self)->len <= 1) {
         return self;
     }
     p = ((struct Buf *)*self)->data;
-    q = p + len - 1;
+    q = p + ((struct Buf *)*self)->len - 1;
     while (p < q) {
         t = *p;
         *p = *q;
