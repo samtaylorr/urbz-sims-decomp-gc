@@ -3198,15 +3198,15 @@ s32 fn_801A9D1C(void *self, s8 *pos, s32 wide) {
     if (wide != 0) {
         minX = 2;
         minY = 2;
-        maxY = M2C_FIELD(self, s32 *, 0x18) - 2;
         maxX = M2C_FIELD(self, s32 *, 0x14) - 2;
+        maxY = M2C_FIELD(self, s32 *, 0x18) - 2;
     } else {
         minX = 1;
         minY = 1;
-        maxY = M2C_FIELD(self, s32 *, 0x18) - 1;
         maxX = M2C_FIELD(self, s32 *, 0x14) - 1;
+        maxY = M2C_FIELD(self, s32 *, 0x18) - 1;
     }
-    if (pos[0] >= minX && pos[0] < maxX && pos[1] >= minY && pos[1] < maxY) {
+    if (pos[0] < minX || pos[0] >= maxX || pos[1] < minY || pos[1] >= maxY) {
         return 1;
     }
     return 0;
