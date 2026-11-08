@@ -2222,10 +2222,10 @@ void fn_8038F0CC(void *alarm) {
     }
     mail = *(u32 *)(p + 0x80);
     fn_80387070(0xFF000000);
-    while (fn_80387024()) {
+    while ((u32)fn_80387024() != 0) {
     }
     fn_80387070(mail);
-    while (fn_80387024()) {
+    while ((u32)fn_80387024() != 0) {
     }
 }
 #pragma pop
