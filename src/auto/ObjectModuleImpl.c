@@ -6,6 +6,14 @@ typedef struct {
 } S16Table10;
 
 extern s32 lbl_804944B0;
+
+static inline void ObjVec6C_Each(char **vec, void (*fn)(void *)) {
+    char *it;
+
+    for (it = vec[0]; it != vec[1]; it += 0x6C) {
+        fn(it);
+    }
+}
 void fn_800F68E0(void *);
 void fn_80149624(char *self) {
     char *p;
@@ -100,6 +108,7 @@ char *fn_8014A6D8(char *self, s32 key) {
     char **tbl = (char **)(self + 0x50);
     s32 k;
     s32 *pkey;
+    s32 kv;
     char *prev;
     char *n;
 
@@ -108,7 +117,8 @@ char *fn_8014A6D8(char *self, s32 key) {
     pkey = &k;
     prev = 0;
     while (n != 0) {
-        if (*pkey == fn_8016CCE0(n)) {
+        kv = *pkey;
+        if (kv == fn_8016CCE0(n)) {
             if (prev != 0) {
                 *(char **)(prev + 0xA0) = *(char **)(n + 0xA0);
                 *(char **)(n + 0xA0) = tbl[(u8)key];
