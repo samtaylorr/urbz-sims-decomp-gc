@@ -311,6 +311,11 @@ s32 fn_8019B938(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x84);
 }
 
+void fn_8019B940(char *self) {
+    char *vt = *(char **)self;
+    M2C_FIELD(vt, void (**)(void *, s32), 0x34)(self + M2C_FIELD(vt, s16 *, 0x30), 4);
+}
+
 void fn_8019B978(void *arg0, s16 arg1) {
     M2C_FIELD(arg0, s16 *, 0x1C) = arg1;
 }
