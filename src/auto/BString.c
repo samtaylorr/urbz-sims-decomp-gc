@@ -1206,6 +1206,20 @@ s32 *fn_800D5070(s32 *self, s32 a) {
     return self;
 }
 
+void fn_800D5308(char *self, s32 arg1) {
+    void fn_802CB8D4(void *);
+    void fn_802D20E8(void *);
+    char *obj = *(char **)(self + 0x50);
+    if (obj != NULL) {
+        char *vt = *(char **)(obj + 0x9C);
+        (*(void (**)(void *, s32))(vt + 0xC))(obj + *(s16 *)(vt + 8), 3);
+    }
+    fn_802CB8D4(self + 8);
+    if (arg1 & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 void fn_800D5374(char *self) {
     char **p = *(char ***)(self + 4);
     if (p != NULL) {
