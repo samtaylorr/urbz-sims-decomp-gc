@@ -1274,13 +1274,12 @@ s32 fn_800D50A4(void) {
     extern char *lbl_80496650;
     extern s32 lbl_8041F94C[];
     char *obj = lbl_80496650;
+    char *vt;
     if (obj != NULL) {
-        char *vt = *(char **)obj;
-        if ((*(s32 (**)(void *))(vt + 0x1DC))(obj + *(s16 *)(vt + 0x1D8)) != 0) {
-            s32 *p = lbl_8041F94C;
-            if (p[0xDC / 4] != 0) {
-                return p[0xD8 / 4] != 0;
-            }
+        vt = *(char **)obj;
+        if ((*(s32 (**)(void *))(vt + 0x1DC))(obj + *(s16 *)(vt + 0x1D8)) != 0
+            && lbl_8041F94C[0xDC / 4] != 0 && lbl_8041F94C[0xD8 / 4] != 0) {
+            return 1;
         }
     }
     return 0;
@@ -1325,7 +1324,8 @@ void fn_800D53B8(char *self, BSKey *key) {
     char *e;
     char *obj;
     char *vt;
-    struct { s32 v; s32 w; } k;
+    BSKey k;
+    BSKey *kp;
     s32 v;
 
     lbl_8041FCCC[0] = 1;
@@ -1334,8 +1334,9 @@ void fn_800D53B8(char *self, BSKey *key) {
     if (node != NULL) {
         do {
             e = M2C_FIELD(node, char **, 0);
-            k.v = *(s32 *)e;
-            if (k.v == key->v) {
+            k = *(BSKey *)e;
+            kp = &k;
+            if (kp->v == key->v) {
                 if (M2C_FIELD(self, char **, 4) != NULL) {
                     obj = *M2C_FIELD(self, char ***, 4);
                     vt = M2C_FIELD(obj, char **, 8);
@@ -1406,14 +1407,13 @@ void fn_800D5FAC(void) {
 s32 fn_800D5FB0(void *self, s32 arg1) {
     extern s32 lbl_80494FCC;
     extern s32 fn_803338C0(s32);
+    register s32 flag asm("r31") = arg1;
     s32 ret = 0;
     if (fn_803338C0(lbl_80494FCC) != 0) {
-        if (arg1 == 0) {
-            if (M2C_FIELD(self, s32 *, 0x30) == 0) {
-                ret = 1;
-            }
-        } else {
+        if (flag != 0) {
             ret = M2C_FIELD(self, s32 *, 0x34) == 0;
+        } else if (M2C_FIELD(self, s32 *, 0x30) == 0) {
+            ret = 1;
         }
     }
     return ret;
@@ -2868,8 +2868,8 @@ void fn_800E1908(void *arg0) {
     a[1] = 0;
     b = (s32 *)((char *)p + 0x58);
     b[1] = 0;
-    M2C_FIELD(p, s32 *, 0x64) = 1;
     M2C_FIELD(p, char **, 0x44) = lbl_8040AA98;
+    M2C_FIELD(p, s32 *, 0x64) = 1;
     M2C_FIELD(p, s32 *, 0xC8) = 0;
     M2C_FIELD(arg0, void **, 0x94) = p;
     M2C_FIELD(p, s32 *, 0x60) = 1;
