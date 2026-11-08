@@ -11,11 +11,11 @@ extern void *lbl_80494B48;
 
 static inline void fn_802B457C_InitSub(u8 *sub) {
     extern void fn_802B6FA8(void *, s32);
-    extern void fn_802ADDD8(void *, s32);
+    extern s32 *fn_802ADDD8(s32 *, s32);
     extern u8 lbl_804189F0[];
     fn_802B6FA8(sub, 0x24);
     M2C_FIELD(sub, void **, 0x4) = lbl_804189F0;
-    fn_802ADDD8(sub + 8, 8);
+    fn_802ADDD8((s32 *)(sub + 8), 8);
     M2C_FIELD(sub, s32 *, 0x18) = 0;
 }
 extern void *lbl_80494D98;
