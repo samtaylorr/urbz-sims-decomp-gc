@@ -7,7 +7,7 @@ extern u8 lbl_804152F0[];
 extern char lbl_803DBDE0[];
 void fn_801B1774(void **, s32);
 void fn_801B1AB4(void *);
-void fn_801B1644(void *);
+void *fn_801B1644(void *);
 void *fn_800F687C(void *, void *, s32);
 void fn_800F68F0(void *, void *, s32);
 s32 fn_800F68BC(s32);
@@ -408,6 +408,10 @@ void fn_8019CFDC(void *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 0x1C) = arg1;
     M2C_FIELD(arg0, s32 *, 0x20) = arg2;
     M2C_FIELD(arg0, s32 *, 0x48) = (s32) (M2C_FIELD(arg0, s32 *, 0x48) | 0x40);
+}
+
+void fn_8019D37C(void *self, s32 arg1) {
+    fn_8019D2DC(self, M2C_FIELD(self, s32 *, 0x2C) * 12 * arg1);
 }
 
 void fn_8019D3A8(void *self) {
