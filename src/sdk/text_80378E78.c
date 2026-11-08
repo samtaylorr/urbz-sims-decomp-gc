@@ -1647,7 +1647,7 @@ void fn_8038ACB0(s32 arg0) {
     s32 enabled;
 
     enabled = fn_8025465C();
-    *(u8 *)0x800030E3 &= ~0x80;
+    *(u8 *)0x800030E3 &= 0x7F;
     if (arg0) {
         *(u8 *)0x800030E3 |= 0x80;
     }
