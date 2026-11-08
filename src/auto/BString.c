@@ -20,6 +20,8 @@ typedef struct UnkDC234 {
     f32 unk18;
 } UnkDC234;
 
+typedef struct { s32 v; } BSKey;
+
 void fn_800D1F84(void);
 extern u8 lbl_8040B320[];
 extern u8 lbl_8040B368[];
@@ -2557,17 +2559,17 @@ void fn_800E1908(void *arg0) {
     M2C_FIELD(p, s32 *, 0x64) = 1;
     M2C_FIELD(p, char **, 0x44) = lbl_8040AA98;
     M2C_FIELD(p, s32 *, 0xC8) = 0;
-    M2C_FIELD(p, s32 *, 0x60) = 1;
-    M2C_FIELD(p, s32 *, 0x68) = 0;
-    M2C_FIELD(p, s32 *, 0x6C) = 0;
-    M2C_FIELD(p, s32 *, 0x84) = 0;
-    M2C_FIELD(p, s32 *, 0x88) = 0;
-    M2C_FIELD(p, s32 *, 0xB8) = 0;
-    M2C_FIELD(p, s32 *, 0xBC) = 0;
-    M2C_FIELD(p, s32 *, 0xC0) = 0;
-    M2C_FIELD(p, s32 *, 0xC4) = 0;
     M2C_FIELD(arg0, void **, 0x94) = p;
     if (p != NULL) {
+        M2C_FIELD(p, s32 *, 0x60) = 1;
+        M2C_FIELD(p, s32 *, 0x68) = 0;
+        M2C_FIELD(p, s32 *, 0x6C) = 0;
+        M2C_FIELD(p, s32 *, 0x84) = 0;
+        M2C_FIELD(p, s32 *, 0x88) = 0;
+        M2C_FIELD(p, s32 *, 0xB8) = 0;
+        M2C_FIELD(p, s32 *, 0xBC) = 0;
+        M2C_FIELD(p, s32 *, 0xC0) = 0;
+        M2C_FIELD(p, s32 *, 0xC4) = 0;
         fn_800C60D4(p);
     }
 }
