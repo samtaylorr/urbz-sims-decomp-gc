@@ -1836,6 +1836,13 @@ void fn_802AED88(f32 *m) {
     M2C_FIELD(m, s32 *, 0x3B8) = 0;
 }
 
+void fn_802AEDE4(u8 *self) {
+    typedef struct { s32 v[8]; } AptXform;
+    s32 n = M2C_FIELD(self, s32 *, 0x3B8);
+    ((AptXform *)(self + 0x38))[n] = *(AptXform *)self;
+    M2C_FIELD(self, s32 *, 0x3B8) = n + 1;
+}
+
 void fn_802AF384(void *arg0, f32 farg0, f32 farg1) {
     M2C_FIELD(arg0, f32 *, 0x20) = farg0;
     M2C_FIELD(arg0, f32 *, 0x24) = farg1;
@@ -1933,8 +1940,8 @@ void *fn_802B0A68(void *self, void *arg1) {
     M2C_FIELD(self, u8 **, 4) = lbl_80418A70;
     M2C_FIELD(self, s32 *, 0x18) = 0;
     M2C_FIELD(self, s32 *, 0x20) = 0;
-    M2C_FIELD(self, s32 *, 0x24) = 0;
     M2C_FIELD(self, s32 *, 0x1C) = *(s32 *)(*(u8 **)(*(u8 **)((u8 *)arg1 + 0x50) + 8) + 4);
+    M2C_FIELD(self, s32 *, 0x24) = 0;
     return self;
 }
 
