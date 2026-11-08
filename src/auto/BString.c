@@ -3253,7 +3253,7 @@ void fn_800E3B38(s32 *self, s32 id, f32 time) {
 }
 
 extern void fn_800E3E08(s32);
-void fn_800E3B5C(s32 *self) {
+void fn_800E3B5C(s32 *self, s32 arg) {
     fn_800E3E08(self[2]);
 }
 
