@@ -2421,7 +2421,7 @@ void fn_800E0E34(s32 *self) {
 }
 
 void fn_800E0E64(void *self) {
-    char *obj = *M2C_FIELD(M2C_FIELD(self, char **, 8), char **, 0x94);
+    char *obj = M2C_FIELD(M2C_FIELD(self, char **, 8), char **, 0x94);
     if (obj != NULL) {
         char *vt = M2C_FIELD(obj, char **, 0x44);
         (*(void (**)(void *))(vt + 0x14))(obj + *(s16 *)(vt + 0x10));
