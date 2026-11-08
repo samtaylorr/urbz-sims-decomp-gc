@@ -5827,6 +5827,15 @@ s32 fn_802254C0(void *arg0, s32 arg1) {
     return M2C_FIELD(arg0, s32 *, 0x40) + (var_r31 * 0x10);
 }
 
+s32 fn_80225508(void) {
+    void *fn_802D1FC8(s32);
+    extern s32 lbl_80494670;
+    if ((s32) lbl_80494670 == 0) {
+        lbl_80494670 = (s32) fn_80224E5C(fn_802D1FC8(0x50));
+    }
+    return lbl_80494670;
+}
+
 extern s32 lbl_80494674;
 s32 fn_80225544(void) {
     return lbl_80494674;
@@ -5937,20 +5946,20 @@ void fn_8022A304(void *out, void *obj) {
     }
 }
 
-void fn_8022ADD8(void *out, s32 arg1) {
+void *fn_8022ADD8(void *out, s32 arg1) {
     typedef struct { f32 x; f32 y; } Vec2;
     extern u8 *lbl_8041FA38[];
     void fn_8022ACE0(s32 *, s32 *, s32);
+    Vec2 v;
     s32 a;
     s32 b;
-    Vec2 v;
 
     fn_8022ACE0(&a, &b, arg1);
     v.x = a;
     v.y = b;
-    *(Vec2 *)out = v;
-    ((Vec2 *)out)->y += *(f32 *)(lbl_8041FA38[0] + 0x68);
-    ((Vec2 *)out)->x += *(f32 *)(lbl_8041FA38[0] + 0x64);
+    ((Vec2 *)out)->y = v.y + *(f32 *)(lbl_8041FA38[0] + 0x68);
+    ((Vec2 *)out)->x = v.x + *(f32 *)(lbl_8041FA38[0] + 0x64);
+    return out;
 }
 
 s32 fn_8022B3B4(s32 arg0) {
