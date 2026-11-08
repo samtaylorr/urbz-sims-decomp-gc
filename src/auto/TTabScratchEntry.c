@@ -1092,6 +1092,30 @@ void *fn_8019F0CC(void *self) {
     return self;
 }
 
+void fn_8019F120(void *self, s32 flags) {
+    typedef struct { u8 b[0x48]; } Elem48;
+    extern u8 lbl_80414790[];
+    extern void fn_802D20E8(void *);
+    extern void fn_803997AC(void *, u32);
+    void fn_8019E5B0(void **self, s32 flags);
+    Elem48 **v;
+    Elem48 *p;
+
+    M2C_FIELD(self, void **, 0) = lbl_80414790;
+    v = (Elem48 **)((u8 *)self + 0x54);
+    for (p = v[0]; p != v[1]; p++) {
+    }
+    if (v[0] != 0) {
+        u32 size = (u32)((v[3] - v[0]) * sizeof(Elem48));
+        if (size > 0x80) {
+            fn_802D20E8(v[0]);
+        } else {
+            fn_803997AC(v[0], size);
+        }
+    }
+    fn_8019E5B0(self, flags);
+}
+
 s32 fn_8019F1C0(void *arg0) {
     return (s32) ((M2C_FIELD(arg0, s32 *, 0x58) - M2C_FIELD(arg0, s32 *, 0x54)) * 0x38E38E39) >> 3;
 }
