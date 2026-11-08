@@ -2325,6 +2325,7 @@ s32 fn_801AA930(s32 *self) {
 void *fn_801AAE74(void *self, s32 a, s32 b, s32 c) {
     void fn_8019C854(void *);
     void fn_801AAEDC(void *, s32, s32, s32);
+    volatile s32 pad;
     *(volatile s32 *)((u8 *)self + 0) = 0;
     *(volatile s32 *)((u8 *)self + 4) = 0;
     ScratchSub_Init((u8 *)self + 8);
