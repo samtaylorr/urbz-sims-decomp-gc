@@ -1263,8 +1263,9 @@ void fn_801A2FA0(u16 *arg0, s32 arg1) {
 }
 
 extern void *lbl_803F67C4[];
-void *fn_801A2FD0(u16 arg0) {
-    if (arg0 > 0x3D) {
+void *fn_801A2FD0(s32 arg0) {
+    extern void *lbl_803F67C4[];
+    if ((u16)arg0 > 0x3D) {
         return NULL;
     }
     return lbl_803F67C4[arg0];
