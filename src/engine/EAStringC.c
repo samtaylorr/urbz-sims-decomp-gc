@@ -1583,6 +1583,35 @@ s32 fn_802A4354(void) {
     return 1;
 }
 
+void fn_802A435C(u8 *self) {
+    extern void fn_802A4264(u8 *, s32);
+    extern s32 lbl_80496130;
+    s32 i;
+
+    for (i = 0; i < M2C_FIELD(self, s32 *, 0x1238); i++) {
+        fn_802A4264(self, M2C_FIELD(self, s32 **, 0x123C)[i]);
+    }
+    if (M2C_FIELD(self, s32 *, 0x1248) == 1) {
+        M2C_FIELD(self, s32 *, 0x1248) = 0;
+        M2C_FIELD(self, s32 *, 0x1240) = lbl_80496130;
+    }
+    M2C_FIELD(self, s32 *, 0x1238) = 0;
+}
+
+void fn_802A44B8(void **self, s32 arg1) {
+    extern void (*lbl_80443318[])(void *, s32);
+    extern void fn_802A4C14(void **, void *);
+    void **node;
+
+    while (*self != 0) {
+        node = *self;
+        fn_802A4C14(self, (char *)*node + 4);
+    }
+    if (arg1 & 1) {
+        lbl_80443318[0](self, 4);
+    }
+}
+
 void fn_802A463C(void *self, s32 **arg1) {
     void fn_802A6754(s32 **);
     extern s32 fn_802A661C(s32 *);
@@ -2193,17 +2222,10 @@ void fn_802ACD08(void *arg0, s32 arg1) {
     }
 }
 
-static inline void fn_802ACD80_init(void *self, s32 n) {
+static inline void fn_802ACD80_init(void *self, void *vt) {
     extern void fn_802ADDD8(void *, s32);
-    fn_802ADDD8((u8 *)self + 8, n);
-}
-
-static inline void fn_802ACD80_base(void *self, s32 type, void *vt, s32 n) {
-    extern void fn_802B6FA8(void *, s32);
-    extern void fn_802ADDD8(void *, s32);
-    fn_802B6FA8(self, type);
     M2C_FIELD(self, void **, 4) = vt;
-    fn_802ADDD8((u8 *)self + 8, n);
+    fn_802ADDD8((u8 *)self + 8, 8);
 }
 
 void *fn_802ACD80(void *arg0) {
@@ -2896,9 +2918,9 @@ void fn_802AFB18(void *arg0, f32 *out) {
 s32 fn_802AFE08(f32 *m) {
     extern f64 lbl_803EDEE0[];
     extern f32 lbl_803EDEE8[];
+    f32 a = m[0];
     f32 b = m[1];
     f32 c = m[2];
-    f32 a = m[0];
     f32 d = m[3];
     f32 det = a * d - b * c;
     f32 inv;
@@ -2908,18 +2930,14 @@ s32 fn_802AFE08(f32 *m) {
         return 0;
     }
     inv = lbl_803EDEE8[0] / det;
-    a *= inv;
-    c = -c * inv;
-    b = -b * inv;
-    d *= inv;
     tx = m[4];
     ty = m[5];
-    m[3] = a;
-    m[1] = c;
-    m[2] = b;
-    m[0] = d;
-    m[5] = -(tx * c + ty * a);
-    m[4] = -(tx * d + ty * b);
+    m[3] = a * inv;
+    m[1] = -c * inv;
+    m[2] = -b * inv;
+    m[0] = d * inv;
+    m[5] = -(tx * m[1] + ty * m[3]);
+    m[4] = -(tx * m[0] + ty * m[2]);
     return 1;
 }
 
