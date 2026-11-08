@@ -140,6 +140,10 @@ s16 fn_8019B418(void *arg0) {
     return M2C_FIELD(arg0, s16 *, 0x4C);
 }
 
+void fn_8019B420(void *self, s32 i, s16 v) {
+    ((struct { u8 pad[0x14]; s16 a[1]; } *)self)->a[i] = v;
+}
+
 s32 fn_8019B448(void) {
     return 0;
 }
