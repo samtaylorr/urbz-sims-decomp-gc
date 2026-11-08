@@ -1401,6 +1401,11 @@ void fn_801A0F64(void *self) {
     }
 }
 
+s32 fn_801A0F94(s32 a, s32 b) {
+    extern s32 lbl_804926EC[][64];
+    return lbl_804926EC[b][a];
+}
+
 s32 fn_801A0FCC(void) {
     return 0x1E;
 }
@@ -2218,7 +2223,7 @@ s32 fn_801AA55C(s32 arg0, s32 arg1, u16 *out) {
     extern s32 fn_800FC854(s32);
     extern s32 fn_800FC7D4(s32);
     s32 type = fn_800FC854(arg0);
-    u16 bits = 0;
+    s32 bits = 0;
 
     switch (type) {
     case 3:
@@ -2236,7 +2241,7 @@ s32 fn_801AA55C(s32 arg0, s32 arg1, u16 *out) {
     if (arg0 > 0x3F) {
         return 0;
     }
-    bits |= (arg0 & 0x3F) << 7;
+    bits += (arg0 & 0x3F) << 7;
     if (arg1 >= fn_801AA4E0()) {
         return 0;
     }
