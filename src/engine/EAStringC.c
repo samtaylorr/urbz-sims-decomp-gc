@@ -528,6 +528,36 @@ s32 fn_80299CB4(u8 *self) {
     return *(s32 *)(self + 0x50);
 }
 
+s32 fn_80299FA8(void *arg0, s32 arg1) {
+    extern s32 fn_802B70DC(void *);
+    extern s32 fn_802B72D4(void *);
+    s32 found;
+    s32 ok;
+    s32 ok2;
+
+    found = 0;
+    ok = 0;
+    if (fn_802B70DC(arg0) == 0xD) {
+        if (arg1 != 0 || fn_802B72D4(arg0) == 0) {
+            ok = 1;
+        }
+    }
+    if (ok) {
+        found = 1;
+    } else {
+        ok2 = 0;
+        if (fn_802B70DC(arg0) == 0x12) {
+            if (arg1 != 0 || fn_802B72D4(arg0) == 0) {
+                ok2 = 1;
+            }
+        }
+        if (ok2) {
+            found = 1;
+        }
+    }
+    return found;
+}
+
 s32 fn_8029A04C(s32 arg0) {
     extern s32 (*lbl_80443310[])(s32);
     extern void fn_802A1E98(s32);
