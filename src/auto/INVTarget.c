@@ -4388,26 +4388,22 @@ void fn_8021825C(void *arg0, char *arg1, char *arg2) {
 }
 
 void fn_802184BC(void *arg0) {
+    struct T { u8 pad[0x8C]; s32 h[2]; };
     s32 fn_80049B6C(void *);
     void fn_8000BFD0(void *, s32, s32);
     extern u8 lbl_8041F94C[];
-    u8 *g;
-    s32 *slot;
     s32 n;
     s32 i;
 
-    g = lbl_8041F94C;
     n = 1;
-    if (fn_80049B6C(g) != 0) {
+    if (fn_80049B6C(lbl_8041F94C) != 0) {
         n = 2;
     }
-    slot = (s32 *)((char *)arg0 + 0x8C);
     for (i = 0; i < n; i++) {
-        if (*slot != -1) {
-            fn_8000BFD0(*(void **)(g + 0xD0), i, *slot);
-            *slot = -1;
+        if (((struct T *)arg0)->h[i] != -1) {
+            fn_8000BFD0(*(void **)(lbl_8041F94C + 0xD0), i, ((struct T *)arg0)->h[i]);
+            ((struct T *)arg0)->h[i] = -1;
         }
-        slot++;
     }
 }
 
@@ -5168,6 +5164,36 @@ void *fn_80224E3C(s32 arg0, s32 arg1) {
     return &t->list[arg1];
 }
 
+void *fn_80224E5C(void *arg0) {
+    volatile s32 z[6];
+    char *p0 = (char *)arg0 + 0xC;
+    char *p1 = (char *)arg0 + 0x14;
+    char *p2 = (char *)arg0 + 0x1C;
+    char *p3 = (char *)arg0 + 0x24;
+    char *p4 = (char *)arg0 + 0x2C;
+    char *p5 = (char *)arg0 + 0x34;
+    char *p6 = (char *)arg0 + 0x40;
+    char *p7 = (char *)arg0 + 0x48;
+
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    M2C_FIELD(arg0, s32 *, 8) = -1;
+    M2C_FIELD(arg0, s32 *, 4) = -1;
+    M2C_FIELD(arg0, s32 *, 0xC) = 0;
+    *(volatile s32 *)(p0 + 4) = 0;
+    *(volatile s32 *)(p1 + 4) = 0;
+    M2C_FIELD(arg0, s32 *, 0x1C) = 0;
+    *(volatile s32 *)(p2 + 4) = 0;
+    *(volatile s32 *)(p3 + 4) = 0;
+    M2C_FIELD(arg0, s32 *, 0x2C) = 0;
+    *(volatile s32 *)(p4 + 4) = 0;
+    *(volatile s32 *)(p5 + 4) = 0;
+    M2C_FIELD(arg0, u8 *, 0x3C) = 0;
+    M2C_FIELD(arg0, s32 *, 0x40) = 0;
+    *(volatile s32 *)(p6 + 4) = 0;
+    *(volatile s32 *)(p7 + 4) = 0;
+    return arg0;
+}
+
 s32 fn_802254C0(void *arg0, s32 arg1) {
     s32 fn_80225B14();
     s32 var_r31;
@@ -5222,7 +5248,7 @@ s32 fn_8022B50C(s32 arg0) {
 }
 
 s32 fn_8022B564(u32 arg0) {
-    extern s32 lbl_804966A4[];
+    extern s32 lbl_804966A4[2];
     s32 ret = 0;
     if (arg0 <= 1 && lbl_804966A4[arg0] != 0) {
         ret = lbl_804966A4[arg0];
