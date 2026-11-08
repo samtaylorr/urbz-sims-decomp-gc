@@ -2182,7 +2182,7 @@ s32 fn_801AA4E0(void) {
 }
 
 s32 fn_801AA4E8(u32 code, u16 *base, s32 *idx) {
-    switch ((code >> 13) & 7) {
+    switch ((s32)((code >> 13) & 7)) {
     case 0:
         *base = 0x1000;
         break;
