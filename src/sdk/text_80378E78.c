@@ -115,6 +115,21 @@ void fn_8037C020(void *arg0, void *arg1, f32 farg0, f32 farg1, f32 farg2) {
     M2C_FIELD(arg1, f32 *, 0x2C) = (f32) (M2C_FIELD(arg0, f32 *, 0x2C) + farg2);
 }
 
+void fn_8037C0E4(void *arg0, f32 farg0, f32 farg1, f32 farg2) {
+    M2C_FIELD(arg0, f32 *, 0) = farg0;
+    M2C_FIELD(arg0, f32 *, 4) = 0.0f;
+    M2C_FIELD(arg0, f32 *, 8) = 0.0f;
+    M2C_FIELD(arg0, f32 *, 0xC) = 0.0f;
+    M2C_FIELD(arg0, f32 *, 0x10) = 0.0f;
+    M2C_FIELD(arg0, f32 *, 0x14) = farg1;
+    M2C_FIELD(arg0, f32 *, 0x18) = 0.0f;
+    M2C_FIELD(arg0, f32 *, 0x1C) = 0.0f;
+    M2C_FIELD(arg0, f32 *, 0x20) = 0.0f;
+    M2C_FIELD(arg0, f32 *, 0x24) = 0.0f;
+    M2C_FIELD(arg0, f32 *, 0x28) = farg2;
+    M2C_FIELD(arg0, f32 *, 0x2C) = 0.0f;
+}
+
 void fn_8037C144(void *arg0, void *arg1, f32 farg0, f32 farg1, f32 farg2) {
     M2C_FIELD(arg1, f32 *, 0) = (f32) (M2C_FIELD(arg0, f32 *, 0) * farg0);
     M2C_FIELD(arg1, f32 *, 4) = (f32) (M2C_FIELD(arg0, f32 *, 4) * farg0);
