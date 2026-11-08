@@ -1152,6 +1152,27 @@ void fn_80387C24(DSPTaskInfo *task) {
     fn_803873DC("__DSP_add_task() : Added task    : 0x%08X\n", task);
 }
 
+void fn_80387C9C(DSPTaskInfo *task) {
+    task->flags = 0;
+    task->state = 3;
+    if (lbl_80496494 == task) {
+        if (task->next != NULL) {
+            lbl_80496494 = task->next;
+            task->next->prev = NULL;
+        } else {
+            lbl_80496494 = lbl_80496490 = lbl_80496498 = NULL;
+        }
+    } else if (lbl_80496490 == task) {
+        lbl_80496490 = task->prev;
+        task->prev->next = NULL;
+        lbl_80496498 = lbl_80496494;
+    } else {
+        lbl_80496498 = task->next;
+        task->prev->next = task->next;
+        task->next->prev = task->prev;
+    }
+}
+
 void fn_80387D30(void) {
 
 }
