@@ -835,6 +835,14 @@ void *fn_8029F8BC(void *arg0) {
     return arg0;
 }
 
+static inline void *fn_8029F550_Find(s32 tree, void *key) {
+    extern void fn_8029F550(s32, void *, s32, s32 *, void **);
+    s32 sp8 = 0;
+    void *spC = NULL;
+    fn_8029F550(tree, key, 0, &sp8, &spC);
+    return spC;
+}
+
 void fn_802A0890(s32 arg0, void *arg1) {
     extern u8 lbl_803FCE5C[];
     extern void *fn_802AE360(void *, void *);
@@ -2002,7 +2010,8 @@ void fn_802AEDE4(u8 *self) {
     typedef struct { s32 v[8]; } AptXform;
     s32 *depth = (s32 *)(self + 0x3B8);
     s32 n = *depth;
-    ((AptXform *)(self + 0x38))[n] = *(AptXform *)self;
+    AptXform *dst = (AptXform *)(self + 0x38) + n;
+    *dst = *(AptXform *)self;
     *depth = n + 1;
 }
 
