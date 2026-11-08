@@ -724,6 +724,22 @@ void fn_803822AC(s32 arg0) {
     lbl_80496404 = arg0;
 }
 
+void fn_803822B4(void) {
+    extern u32 lbl_804963E8;
+    extern s64 lbl_804963F0;
+    s64 fn_8025A3DC(void);
+    void fn_8038202C(u32);
+    s64 d;
+
+    if (lbl_804963E8 == 2) {
+        lbl_804963E8 = 0;
+        d = fn_8025A3DC() - lbl_804963F0;
+        fn_8038202C((u32)d / 4);
+    } else {
+        lbl_804963E8 = 1;
+    }
+}
+
 void fn_8038230C(void) {
     M2C_UNK fn_80259838(M2C_UNK *);
     extern s32 lbl_80496400;
@@ -912,6 +928,10 @@ s32 fn_80387024(void) {
 
 s32 fn_80387034(void) {
     return ((u16) *(u16 *)0xCC005004 >> 0xFU) & 1;
+}
+
+u32 fn_80387044(void) {
+    return (__DSPRegs[0] << 16) | __DSPRegs[1];
 }
 
 extern s32 lbl_80496470;
@@ -1288,19 +1308,19 @@ s32 fn_8038DD80(s32 chan, s32 arg1, s32 arg2) {
     return fn_803894A8(chan);
 }
 
-s32 fn_8038DDC8(u8 mask, s32 arg1) {
+s32 fn_8038DDC8(u32 mask, s32 arg1) {
     extern u8 lbl_80495662;
     s32 var_r5;
 
-    if (lbl_80495662 & mask) {
+    if (lbl_80495662 & (u8)mask) {
         var_r5 = 1;
     } else {
         var_r5 = 0;
     }
-    if (arg1) {
+    if (arg1 != 0) {
         lbl_80495662 |= mask;
     } else {
-        lbl_80495662 &= (u8)~mask;
+        lbl_80495662 &= ~(u8)mask;
     }
     return var_r5;
 }
