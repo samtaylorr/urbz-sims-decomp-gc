@@ -541,22 +541,21 @@ void fn_8019CF2C(void *self, s32 arg1) {
     u8 *vt;
     M2C_FIELD(self, s32 *, 0x28) = arg1;
     M2C_FIELD(self, s32 *, 0x30) = 0;
+    M2C_FIELD(self, s32 *, 0x2C) = 1;
     M2C_FIELD(self, s32 *, 0x34) = 1;
     M2C_FIELD(self, s32 *, 0x18) = -1;
-    M2C_FIELD(self, s32 *, 0x2C) = 1;
     obj = lbl_80496660;
     vt = *(u8 **)(obj + 0x3A4);
     (*(void (**)(void *, void *))(vt + 0x54))(obj + *(s16 *)(vt + 0x50), self);
-    M2C_FIELD(self, s32 *, 0x40) = -1;
     M2C_FIELD(self, s32 *, 0x3C) = -1;
+    M2C_FIELD(self, s32 *, 0x40) = -1;
 }
 
 void fn_8019CF9C(void *self, s32 arg1) {
     extern u8 *lbl_80496660;
-    u8 *obj;
+    u8 *obj = lbl_80496660;
     u8 *vt;
     M2C_FIELD(self, s32 *, 0x18) = arg1;
-    obj = lbl_80496660;
     vt = *(u8 **)(obj + 0x3A4);
     (*(void (**)(void *, void *))(vt + 0x54))(obj + *(s16 *)(vt + 0x50), self);
 }
@@ -2869,8 +2868,8 @@ s32 fn_801B1C0C(void *arg0, void *arg1) {
     void fn_801B383C(void *);
     void *fn_803ABF48(void *, void *, u16);
     extern void *lbl_8049665C;
-    void *e = arg1;
-    void *self = arg0;
+    register void *self asm("r30") = arg0;
+    register void *e asm("r31") = arg1;
     void *obj;
     void *vt;
     u8 *p;
