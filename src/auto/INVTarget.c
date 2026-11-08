@@ -2319,8 +2319,9 @@ void fn_801EFE08(char *self, char *name, void *arg2) {
     V *v;
     u32 i;
     s32 id = fn_801F0834(name);
-    for (i = 0; i < (u32)((v = (V *)(self + 0xD4))->end - M2C_FIELD(self, char ***, 0xD4)); i++) {
-        char *obj = M2C_FIELD(self, char ***, 0xD4)[i];
+    v = (V *)(self + 0xD4);
+    for (i = 0; i < (u32)(v->end - v->begin); i++) {
+        char *obj = v->begin[i];
         if (id == M2C_FIELD(obj, s32 *, 0x4)) {
             char *vt = M2C_FIELD(obj, char **, 0x8);
             M2C_FIELD(vt, void (**)(void *, void *), 0x14)(obj + M2C_FIELD(vt, s16 *, 0x10), arg2);
@@ -2364,12 +2365,12 @@ void *fn_801F0148(void **self, char *name, void *arg2) {
     extern u8 lbl_804173B0[];
     extern char lbl_803E2FF0[];
     s32 fn_801F0834(char *);
-    void fn_80245BB4(s32, char *, ...);
+    s32 fn_80245BB4();
     self[2] = lbl_80417510;
     self[0] = name;
     self[1] = (void *)fn_801F0834(name);
     self[2] = lbl_804173B0;
-    fn_80245BB4((s32)&self[3], lbl_803E2FF0, arg2);
+    fn_80245BB4(&self[3], lbl_803E2FF0, arg2);
     return self;
 }
 
@@ -3232,9 +3233,12 @@ s32 fn_801FBB84(u8 *arg0, s32 *arg1) {
     }
     list = *(s32 **)t;
     count = 0;
-    if (list != NULL) {
-        count = *(s32 *)((u8 *)list - 4);
-    }
+    do {
+        s32 *l = list;
+        if (l != NULL) {
+            count = l[-1];
+        }
+    } while (0);
     if (count == 0) {
         return 0;
     }
@@ -4549,7 +4553,7 @@ void *fn_80219E28(void *arg0, s32 arg1) {
     if (arg1 > 0) {
         do {
             if (p == NULL) {
-                break;
+                return p;
             }
             p = M2C_FIELD(p, void **, 4);
         } while (--arg1 != 0);
