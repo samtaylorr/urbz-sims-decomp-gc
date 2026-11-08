@@ -1387,7 +1387,7 @@ void fn_802A1298(void **arg0, s32 arg1, f32 *arg2) {
 M2C_UNK fn_802A1420(void ***arg0) {
     extern void fn_802BBE7C(void *);
     extern void *lbl_80494B48;
-    extern s32 lbl_804433C4;
+    extern s32 lbl_804433C4[];
     char *p;
     char *next;
 
@@ -1397,7 +1397,7 @@ M2C_UNK fn_802A1420(void ***arg0) {
             do {
                 next = M2C_FIELD(p, char **, 0x58);
                 fn_802A0890((s32)arg0, p);
-                if (M2C_FIELD(lbl_80494B48, s32 *, 4) != 0 && lbl_804433C4 == 0) {
+                if (M2C_FIELD(lbl_80494B48, s32 *, 4) != 0 && lbl_804433C4[0] == 0) {
                     fn_802BBE7C(lbl_80494B48);
                 }
                 p = next;
