@@ -1913,9 +1913,9 @@ s32 fn_802AD290(s32 arg0) {
 
 void fn_802AD2D8(s32 arg0, s32 arg1) {
     extern void (*lbl_80443318[])(s32, s32);
-    extern void fn_802A1EF0(void);
+    extern void fn_802A1EF0(void *);
 
-    fn_802A1EF0();
+    fn_802A1EF0((void *)arg0);
     lbl_80443318[0](arg0 - 8, arg1 + 8);
 }
 
@@ -2051,8 +2051,10 @@ void fn_802AED48(u32 seed) {
 extern f32 lbl_803EDBB8[];
 extern f32 lbl_803EDBBC[];
 void *fn_802AED88(f32 *m) {
-    f32 one = lbl_803EDBBC[0];
-    f32 zero = lbl_803EDBB8[0];
+    f32 zero;
+    f32 one;
+    one = lbl_803EDBBC[0];
+    zero = lbl_803EDBB8[0];
     m[0] = zero;
     m[1] = zero;
     m[2] = zero;
