@@ -2879,6 +2879,10 @@ s32 fn_801FACC8(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 0xEC) == 1;
 }
 
+s32 fn_801FACDC(void *arg0) {
+    return M2C_FIELD(arg0, u8 *, 0xEC) == 2;
+}
+
 u8 fn_801FAD08(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 0x100);
 }
