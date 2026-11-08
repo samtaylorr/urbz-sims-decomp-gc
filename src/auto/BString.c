@@ -1282,9 +1282,8 @@ void fn_800D53B8(char *self, BSKey *key) {
 
 void fn_800D5478(char *self, char *arg1) {
     void fn_802CB69C(void *);
-    char *s = self;
-    fn_802CB69C(s + 8);
-    M2C_FIELD(arg1, char **, 4) = s;
+    fn_802CB69C(self + 8);
+    *(char **)(arg1 + 4) = self;
 }
 
 void fn_800D54B0(char *self) {
@@ -3652,6 +3651,19 @@ void fn_800E330C(void *self) {
         char *vt = *(char **)(obj + 0x9C);
         (*(void (**)(void *, s32))(vt + 0xC))(obj + *(s16 *)(vt + 8), 3);
     }
+}
+
+void fn_800E3930(s32 self) {
+    extern u8 *lbl_80495A78;
+    void fn_800E44CC(void *);
+    void fn_800E40C4(s32);
+    M2C_UNK fn_800DC03C(M2C_UNK);
+    fn_800E44CC((void *)(self + 0x38));
+    fn_800E40C4(self);
+    fn_800E330C(lbl_80495A78);
+    fn_802D20E8(lbl_80495A78);
+    lbl_80495A78 = 0;
+    fn_800DC03C(9);
 }
 
 void fn_800E3988(s32 self) {
