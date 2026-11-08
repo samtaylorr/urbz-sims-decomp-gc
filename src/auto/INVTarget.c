@@ -5836,9 +5836,9 @@ void *fn_80224E5C(void *arg0) {
 }
 
 void *fn_80225458(s32 arg0, s32 arg1, s32 arg2) {
-    s32 fn_80225B14();
+    s32 fn_80225B14(s32 *, s32);
     s32 *e;
-    if (fn_80225B14(arg0, arg1)) {
+    if (fn_80225B14((s32 *) arg0, arg1)) {
         e = (s32 *)(M2C_FIELD(arg0, char **, 0x1C) + arg1 * 8);
         if (arg2 == -1 || e[0] == arg2) {
             return (void *) e[1];
