@@ -1397,6 +1397,16 @@ void fn_800D859C(void) {
     ((void (*)(void *, s32))fn_800E3E08)(fn_800E45E0(lbl_80496640, 0x53494D53), 0x2c);
 }
 
+void fn_800D85D0(void *self) {
+    extern s32 lbl_8041F94C[];
+    void fn_803153B8(s32);
+    lbl_8041F94C[0x344 / 4] = 0;
+    lbl_8041F94C[0x354 / 4] = 0;
+    M2C_FIELD(self, s32 *, 0x20) = 1;
+    fn_803153B8(lbl_8041F94C[0x158 / 4]);
+    lbl_8041F94C[0x384 / 4] = 0;
+}
+
 void fn_800D9AC8(void) {
 
 }
