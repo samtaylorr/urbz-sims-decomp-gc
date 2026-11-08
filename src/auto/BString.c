@@ -1315,10 +1315,10 @@ void fn_800D54E8(char *self) {
 
 void fn_800D5628(char *self) {
     void fn_800194C4(void *);
-    extern void *lbl_8041FAA8;
+    extern void *lbl_8041FAA8[];
     *(s32 *)self = 0;
-    if (lbl_8041FAA8 != NULL) {
-        fn_800194C4(lbl_8041FAA8);
+    if (lbl_8041FAA8[0] != NULL) {
+        fn_800194C4(lbl_8041FAA8[0]);
     }
     {
         char *obj = **(char ***)(self + 4);
