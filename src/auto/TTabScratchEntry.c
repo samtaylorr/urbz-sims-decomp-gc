@@ -2016,6 +2016,14 @@ s32 fn_801A3A80(void *arg0) {
     return ((u16) M2C_FIELD(arg0, u16 *, 0x110) >> 7U) & 1;
 }
 
+void fn_801A3A8C(void *arg0, s32 arg1) {
+    s32 v = M2C_FIELD(arg0, u16 *, 0x110) & ~0x80;
+    M2C_FIELD(arg0, u16 *, 0x110) = v;
+    if (arg1 != 0) {
+        M2C_FIELD(arg0, u16 *, 0x110) = v | 0x80;
+    }
+}
+
 s32 fn_801A3AAC(void *arg0) {
     return ((u16) M2C_FIELD(arg0, u16 *, 0x110) >> 8U) & 1;
 }
