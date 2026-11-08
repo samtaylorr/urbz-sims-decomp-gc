@@ -8,6 +8,16 @@ static inline s32 fn_StackPeek(s32 *stack, s32 i) {
 extern s32 lbl_80496130;
 
 extern void *lbl_80494B48;
+
+static inline void fn_802B457C_InitSub(u8 *sub) {
+    extern void fn_802B6FA8(void *, s32);
+    extern void fn_802ADDD8(void *, s32);
+    extern u8 lbl_804189F0[];
+    fn_802B6FA8(sub, 0x24);
+    M2C_FIELD(sub, void **, 0x4) = lbl_804189F0;
+    fn_802ADDD8(sub + 8, 8);
+    M2C_FIELD(sub, s32 *, 0x18) = 0;
+}
 extern void *lbl_80494D98;
 
 static inline void *AptNumber_New(f32 value) {
@@ -288,6 +298,28 @@ s32 fn_80292E88(s32 arg0) {
         }
         if (enabled != 0) {
             fn_802A0980(M2C_FIELD(M2C_FIELD(obj, void **, 0x4C), s32 *, 0x50) + 0x24, obj);
+        }
+    }
+    return lbl_80496130;
+}
+
+s32 fn_80294148(s32 arg0, s32 arg1) {
+    extern s32 lbl_804433C4[];
+    extern u16 lbl_803FCE5C[];
+    extern void **lbl_80494DA0;
+    extern void fn_802B4ADC(s32, u16 **);
+    extern void fn_8027B794(s32 *, s32, s32, u16 **);
+    u16 *p;
+    u16 *q;
+
+    if (arg1 > 0) {
+        p = lbl_803FCE5C;
+        lbl_803FCE5C[0]++;
+        fn_802B4ADC(fn_StackPeek(lbl_804433C4, 0), &p);
+        fn_8027B794(lbl_804433C4, arg0, 0, &p);
+        q = p;
+        if (--*q == 0) {
+            ((void (*)(void *)) lbl_80494DA0[1])(q);
         }
     }
     return lbl_80496130;
