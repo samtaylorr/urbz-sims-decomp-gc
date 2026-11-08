@@ -2966,6 +2966,20 @@ void fn_801FE23C(s32 arg0) {
     fn_801E0F64(arg0 + 0x79C);
 }
 
+s32 fn_801FE260(void *arg0) {
+    extern void fn_801FF814(void *);
+    extern void fn_801FFA10(void *);
+    extern void fn_801FF2C0(void *, s32);
+    if (M2C_FIELD(arg0, s32 *, 0x8C) != 0x10) {
+        return 0;
+    }
+    fn_801FF814(arg0);
+    fn_801FFA10(arg0);
+    fn_801FF2C0(arg0, 1);
+    M2C_FIELD(arg0, s32 *, 0x954) = 1;
+    return 1;
+}
+
 void fn_801FE2C0(void) {
 
 }
