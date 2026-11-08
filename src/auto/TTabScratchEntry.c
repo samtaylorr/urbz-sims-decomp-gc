@@ -1441,14 +1441,14 @@ s32 fn_801A23AC(void *self) {
     s32 fn_801A1E98(void *, s32);
     char *obj;
     char *vt;
-    s32 r;
 
     M2C_FIELD(self, s32 *, 4) = 0;
     for (;;) {
         obj = M2C_FIELD(self, char **, 0);
         vt = M2C_FIELD(obj, char **, 0x1C);
-        r = fn_801A1E98(self, M2C_FIELD(vt, s32 (**)(void *), 0x4C)(obj + M2C_FIELD(vt, s16 *, 0x48)));
-        switch (r) {
+        switch (fn_801A1E98(self, M2C_FIELD(vt, s32 (**)(void *), 0x4C)(obj + M2C_FIELD(vt, s16 *, 0x48)))) {
+        case 0:
+            break;
         case 1:
             return 1;
         case 2:
