@@ -979,19 +979,23 @@ void fn_802A0BC0(void *arg0, char *arg1, s32 arg2) {
     M2C_UNK fn_802AF050(void *);
     M2C_UNK fn_802AEE5C(void *);
     s32 var_r29;
+    void *p0;
+    char *p1;
 
     fn_802AEDE4(arg0);
     var_r29 = 0;
     fn_802AEED0(arg0, arg1 + 0x28);
     fn_802AF000(arg0);
-    if (fn_802B70DC(arg1) == 0xF && fn_802B72D4(arg1) == 0) {
-        var_r29 = 1;
+    if (fn_802B70DC(arg1) == 0xF) {
+        var_r29 = fn_802B72D4(arg1) == 0;
     }
     if (var_r29 != 0) {
         fn_80291164(arg1, *(s32 *)(arg1 + 0x4C));
     }
-    fn_802AF1CC(arg0, arg1 + 0x10);
-    fn_80291534(arg1, arg0, NULL, arg2);
+    p1 = arg1 + 0x10;
+    p0 = arg0;
+    fn_802AF1CC(p0, p1);
+    fn_80291534(arg1, p0, NULL, arg2);
     fn_802AF050(arg0);
     fn_802AEE5C(arg0);
 }
@@ -2224,6 +2228,17 @@ void fn_802AEDE4(u8 *self) {
     s32 n = *depth;
     ((AptXform *)(self + 0x38))[n++] = *(AptXform *)self;
     *depth = n;
+}
+
+void fn_802AEF80(void *arg0, void *arg1) {
+    typedef struct { f32 m[6]; } AptMtx23;
+    extern AptMtx23 lbl_804445F0;
+
+    if (M2C_FIELD(arg0, s32 *, 0x3BC) > 0) {
+        *(AptMtx23 *)arg1 = M2C_FIELD(arg0, AptMtx23 *, 0x20);
+    } else {
+        *(AptMtx23 *)arg1 = lbl_804445F0;
+    }
 }
 
 void fn_802AF000(s32 arg0) {
@@ -3687,11 +3702,16 @@ void *fn_802B919C(void *arg0, u32 *arg1) {
     char *obj;
     char *vt;
     void *r;
+    s32 ok;
 
     fn_802BA0A4(arg0, 0x21, 0);
     M2C_FIELD(arg0, void **, 4) = lbl_80418F70;
     obj = lbl_80494B58;
-    if ((*arg1 & 0x3F) == 1 && ((*arg1 >> 15) & 1)) {
+    ok = 0;
+    if ((*arg1 & 0x3F) == 1) {
+        ok = (*arg1 >> 15) & 1;
+    }
+    if (ok) {
         vt = M2C_FIELD(obj, char **, 0);
         r = M2C_FIELD(vt, void *(**)(void *, s32), 0xC)(obj + M2C_FIELD(vt, s16 *, 8), M2C_FIELD(arg1, s32 *, 8) + 8);
     } else {
