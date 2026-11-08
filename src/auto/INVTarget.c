@@ -2820,6 +2820,16 @@ void fn_801F8314(s32 arg0, s32 arg1) {
     fn_801F83C8(arg0, arg1);
 }
 
+void fn_801F8340(s32 arg0, s32 arg1) {
+    void fn_801F8FD4(s32, s32, s32);
+    fn_801E1868((u8 *)arg0 + (arg1 * 0x124 + 0x734));
+    if (fn_801F8708(arg0, arg1) == 0) {
+        fn_801E2BB4((u8 *)arg0 + (arg1 * 0x318 + 0x104));
+        fn_801F8FD4(arg0, arg1, 0);
+        ((u8 *)arg0 + 0xED)[arg1] = 1;
+    }
+}
+
 void fn_801F83BC(void) {
 
 }
@@ -2908,6 +2918,13 @@ void fn_801F9D38(s32 arg0) {
 
 u8 fn_801F9D6C(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 0xDC);
+}
+
+s32 fn_801FA3B8(void *arg0, s32 arg1, s32 arg2, s16 *arg3) {
+    M2C_UNK fn_8016A87C(s32);
+    *arg3 = arg1;
+    fn_8016A87C(arg1);
+    return 1;
 }
 
 s32 fn_801FA3E4(void *arg0, s32 arg1, s32 arg2) {
