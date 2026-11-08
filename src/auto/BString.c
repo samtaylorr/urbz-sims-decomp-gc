@@ -1184,9 +1184,9 @@ void *fn_800D631C(void *arg0) {
     extern u8 lbl_8040B9E0[];
     volatile s32 z;
 
+    z = 0;
     M2C_FIELD(arg0, void **, 8) = lbl_8040B9E0;
     M2C_FIELD(arg0, s32 *, 0) = 0;
-    z = 0;
     return arg0;
 }
 
