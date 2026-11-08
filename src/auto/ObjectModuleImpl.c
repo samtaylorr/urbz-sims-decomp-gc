@@ -431,8 +431,9 @@ void fn_80151048(s32 *self, s32 arg1, s32 arg2) {
     obj = lbl_80496668;
     vt = *(char **)obj;
     r = (*(s32 (**)(char *, s32))(vt + 0x94))(obj + *(s16 *)(vt + 0x90), r);
+    self[0] = r;
+    self[1] = r;
     self[2] = arg2;
-    self[0] = self[1] = r;
 }
 
 extern void fn_803A479C(void *, void *);
@@ -578,8 +579,11 @@ s32 fn_80157F28(void *self) {
     }
     obj = M2C_FIELD(self, u8 **, 4);
     e = *(u8 **)(obj + 4) + 0x2D8;
-    return (*(s32 (**)(void *))(e + 4))(obj + *(s16 *)e) == 2 ||
-        *fn_80141C5C((s32)self + 0x28, 0x19) != 0 || !found;
+    if ((*(s32 (**)(void *))(e + 4))(obj + *(s16 *)e) == 2 ||
+        *fn_80141C5C((s32)self + 0x28, 0x19) != 0) {
+        return 1;
+    }
+    return found ? 0 : 1;
 }
 
 void fn_80157FDC(s32 *arg0) {
