@@ -2364,23 +2364,21 @@ void fn_801E2140(void *arg0) {
 
 s32 fn_801E613C(char *arg0, s32 arg1, s32 arg2) {
     u32 n = *(u32 *)(arg0 + 0xEC4);
-    s32 *list;
     u32 i;
     s32 j;
     if (n == 0) {
         return -1;
     }
-    list = (s32 *)(arg0 + 0x564);
     if (n == 1) {
-        return list[0];
+        return ((s32 *)(arg0 + 0x564))[0];
     }
     for (i = 0; i < n; i++) {
-        if (list[i] == arg1) {
+        if (((s32 *)(arg0 + 0x564))[i] == arg1) {
             break;
         }
     }
     if (i == n) {
-        return list[0];
+        return ((s32 *)(arg0 + 0x564))[0];
     }
     j = 0;
     if (arg2 != 0) {
@@ -2393,7 +2391,7 @@ s32 fn_801E613C(char *arg0, s32 arg1, s32 arg2) {
             j = n - 1;
         }
     }
-    return list[j];
+    return ((s32 *)(arg0 + 0x564))[j];
 }
 
 void fn_801EA6A0(char *arg0, s32 arg1) {
@@ -2402,7 +2400,7 @@ void fn_801EA6A0(char *arg0, s32 arg1) {
     void fn_801CF8B0(void *, s32);
     void fn_801C6A20(void *, s32);
     extern s32 lbl_8049462C;
-    extern s32 lbl_8041FC60;
+    extern s32 lbl_8041FC60[];
     char *obj;
     char *vt;
     if (*(s32 *)(arg0 + 0xF38) == 0) {
@@ -2416,10 +2414,10 @@ void fn_801EA6A0(char *arg0, s32 arg1) {
     vt = *(char **)(obj + 4);
     (*(void (**)(void *))(vt + 0x6C))(obj + *(s16 *)(vt + 0x68));
     fn_801CE250(arg0 + 0x37C, arg1);
-    if (lbl_8041FC60 != 0) {
+    if (lbl_8041FC60[0] != 0) {
         fn_801EA190(arg0, arg1);
+        fn_801CF8B0(arg0 + 0x37C, arg1);
     }
-    fn_801CF8B0(arg0 + 0x37C, arg1);
     fn_801C6A20(arg0 + 0x504, arg1);
 }
 
@@ -4019,23 +4017,21 @@ s32 fn_80206E64(void *obj) {
     s32 ret = 0;
     if (obj != NULL && fn_800599B0(obj) == 2) {
         s32 r = fn_800599F0(obj);
-        if (r <= 5) {
-            ret = r >= 2;
-        }
+        ret = r <= 5 && r >= 2;
     }
     return ret;
 }
 
 void fn_80206EC8(void *arg0, s32 arg1) {
+    struct S {
+        u8 pad[0xD8];
+        void *arr[1];
+    };
     void fn_80245BB4(s32, char *, ...);
     s32 fn_80206E64(void *);
     extern char lbl_803E4E18[];
     extern s32 lbl_80494648[2];
-    s32 flag = 0;
-    if (fn_80206E64(((void **)((u8 *)arg0 + 0xD8))[lbl_80494648[M2C_FIELD(arg0, s32 *, 0x84)]]) != 0) {
-        flag = 1;
-    }
-    fn_80245BB4(arg1, lbl_803E4E18, flag);
+    fn_80245BB4(arg1, lbl_803E4E18, fn_80206E64(((struct S *)arg0)->arr[lbl_80494648[M2C_FIELD(arg0, s32 *, 0x84)]]) == 0 ? 0 : 1);
 }
 
 void fn_80206F34(void *arg0, s32 arg1) {
@@ -4254,22 +4250,14 @@ void fn_80209608(u8 *arg0) {
     extern u8 lbl_803E7024[];
     extern u8 lbl_803E7034[];
     INVHandle h;
+    s32 t;
 
     fn_801F5420((s32)(arg0 + 0x84));
-    switch (fn_8020DD5C(*(s32 *)(arg0 + 0x110))) {
-    case 0:
-    case 1:
-    case 2:
-    case 3:
-    case 4:
-    case 5:
-    case 6:
-    case 7:
-        INV_setStr(arg0 + 0xAC, lbl_803E7058);
-        break;
-    case -1:
+    t = fn_8020DD5C(*(s32 *)(arg0 + 0x110));
+    if (t == -1) {
         INV_setStr(arg0 + 0xAC, NULL);
-        break;
+    } else if (t >= 0 && t <= 7) {
+        INV_setStr(arg0 + 0xAC, lbl_803E7058);
     }
     fn_800F1B80(arg0 + 0xB4, (h = fn_8004C168(lbl_8041F94C, lbl_803E7014)).p != NULL ? (void *)*h.p : NULL);
     if (*(s32 *)(arg0 + 0x120) & 1) {
