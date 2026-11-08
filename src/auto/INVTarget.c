@@ -25,6 +25,7 @@ static inline void *INV_getStr(void *key) {
 
 typedef struct { char **begin; char **end; } INVPtrVec;
 static inline u32 INVPtrVec_size(INVPtrVec *v) { return v->end - v->begin; }
+static inline char *INVPtrVec_at(INVPtrVec *v, u32 i) { return v->begin[i]; }
 
 typedef struct { s16 delta; s16 idx; s32 (*fn)(void *, s32); } CasVtEnt2;
 typedef struct { void *a; u8 *cur; s32 b; s32 c; } CasIter;
@@ -2290,6 +2291,7 @@ s32 fn_801E0438(void *arg0) {
 }
 
 void fn_801E1338(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+    struct T { u8 pad[0xE4]; void *arr[1]; };
     void *fn_802D1FC8(s32);
     void fn_801E0254(void *, s32, s32, s32, s32, s32, s32);
     void fn_801E0318(void *, void *);
@@ -2297,7 +2299,7 @@ void fn_801E1338(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32
 
     obj = fn_801E01A0(fn_802D1FC8(0x78));
     fn_801E0254(obj, arg1, arg2, arg3, arg4, arg5, arg6);
-    fn_801E0318(((void **)((u8 *)arg0 + 0xE4))[M2C_FIELD(arg0, u8 *, 0x114)], obj);
+    fn_801E0318(((struct T *)arg0)->arr[M2C_FIELD(arg0, u8 *, 0x114)], obj);
 }
 
 void fn_801E13BC(void *arg0) {
@@ -2387,11 +2389,11 @@ char *fn_801EFEB0(char *self, char *name) {
     char *buf = fn_800BF3FC(0x20);
     buf[0] = 0;
     for (i = 0; i < INVPtrVec_size((INVPtrVec *)(self + 0xC4)); i++) {
-        char *obj = ((INVPtrVec *)(self + 0xC4))->begin[i];
+        char *obj = M2C_FIELD(self, char ***, 0xC4)[i];
         if (id == M2C_FIELD(obj, s32 *, 0x4)) {
             char *vt = M2C_FIELD(obj, char **, 0x8);
             M2C_FIELD(vt, void (**)(void *, char *), 0x14)(obj + M2C_FIELD(vt, s16 *, 0x10), buf);
-            break;
+            return buf;
         }
     }
     return buf;
@@ -3922,7 +3924,7 @@ void fn_80206520(void *arg0, s32 arg1, u32 arg2) {
     extern s32 lbl_803E6C10[];
     s32 v = 0;
     if (arg2 < (u32)(M2C_FIELD(arg0, struct Ent **, 0x17C) - M2C_FIELD(arg0, struct Ent **, 0x178))) {
-        v = (M2C_FIELD(arg0, struct Ent **, 0x178) + arg2)->a;
+        v = *(s32 *)(M2C_FIELD(arg0, u8 **, 0x178) + arg2 * 8);
     }
     fn_80245BB4(arg1, lbl_803E4E18, lbl_803E6C10[v]);
 }
@@ -4399,7 +4401,6 @@ void fn_8020F430(s32 arg0) {
 }
 
 s32 fn_8020F69C(void *arg0, s32 arg1) {
-    typedef struct { u8 pad[0x1BE0]; } INVSlot;
     char *p;
     char *vt;
 
@@ -4407,25 +4408,24 @@ s32 fn_8020F69C(void *arg0, s32 arg1) {
         return 0;
     }
     if (M2C_FIELD(arg0, s32 *, 0x120) == 0x14) {
-        p = (char *)&((INVSlot *)arg0)[arg1] + 0x54E8;
+        p = arg1 * 0x1BE0 + (char *)arg0 + 0x54F4;
     } else {
-        p = (char *)&((INVSlot *)arg0)[arg1] - 0x1A98;
+        p = arg1 * 0x1BE0 + (char *)arg0 - 0x1A8C;
     }
-    vt = *(char **)(p + 0xC);
-    return M2C_FIELD(vt, s32 (**)(void *), 0x9C)(p + 0xC + M2C_FIELD(vt, s16 *, 0x98)) != 0;
+    vt = *(char **)p;
+    return M2C_FIELD(vt, s32 (**)(void *), 0x9C)(p + M2C_FIELD(vt, s16 *, 0x98)) != 0;
 }
 
 void *fn_8020F724(void *arg0, s32 arg1) {
-    typedef struct { u8 pad[0x1BE0]; } INVSlot;
     extern u8 lbl_803E72BC[];
 
     if ((u32)(arg1 - 1) > 3) {
         return lbl_803E72BC;
     }
     if (M2C_FIELD(arg0, s32 *, 0x120) == 0x14) {
-        return (char *)&((INVSlot *)arg0)[arg1] + 0x6FE0;
+        return arg1 * 0x1BE0 + (char *)arg0 + 0x6FE0;
     }
-    return (char *)&((INVSlot *)arg0)[arg1] + 0x60;
+    return arg1 * 0x1BE0 + (char *)arg0 + 0x60;
 }
 
 s32 fn_8020F990(void) {
@@ -5345,25 +5345,17 @@ void fn_80223288(void *arg0, s32 arg1) {
 void fn_802232F0(void *arg0, s32 arg1, f32 arg2) {
     struct V2 { f32 x, y; } v;
     struct V2 *pv;
-    s32 a;
-    s32 b;
 
     if (arg1 == 7) {
         pv = &v;
         pv->y = arg2;
         v.x = arg2;
-        a = M2C_FIELD(pv, s32 *, 4);
-        b = M2C_FIELD(&v, s32 *, 0);
-        M2C_FIELD(arg0, s32 *, 0x38) = a;
-        M2C_FIELD(arg0, s32 *, 0x34) = b;
+        M2C_FIELD(arg0, struct V2 *, 0x34) = *pv;
     } else if (arg1 == 8) {
         pv = &v;
         pv->y = arg2;
         v.x = arg2;
-        a = M2C_FIELD(pv, s32 *, 4);
-        b = M2C_FIELD(&v, s32 *, 0);
-        M2C_FIELD(arg0, s32 *, 0x40) = a;
-        M2C_FIELD(arg0, s32 *, 0x3C) = b;
+        M2C_FIELD(arg0, struct V2 *, 0x3C) = *pv;
     }
 }
 
