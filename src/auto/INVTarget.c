@@ -2361,10 +2361,11 @@ char *fn_801EFEB0(char *self, char *name) {
 
 void fn_801EFF70(void *self) {
     extern f32 lbl_803E2FD0[];
-    void fn_80042C88(void *, f32);
+    void fn_80042C88(f32);
     void fn_80042D38(void);
+    f32 f = lbl_803E2FD0[0];
     M2C_FIELD(self, s32 *, 0xC0) = 1;
-    fn_80042C88(self, lbl_803E2FD0[0]);
+    fn_80042C88(f);
     fn_80042D38();
 }
 
@@ -4637,23 +4638,24 @@ void *fn_80219E28(void *arg0, s32 arg1) {
 s32 fn_8021ADB8(void *arg0, s32 arg1) {
     extern s32 lbl_80493448[][10];
     s32 count;
+    s32 ret;
     s32 i;
 
     if (arg1 == 0) {
         return 0;
     }
+    ret = 0x63;
     count = 0;
-    for (i = 1; ; i++) {
-        if (i > 9) {
-            return 0x63;
-        }
+    for (i = 1; i <= 9; i++) {
         if (lbl_80493448[M2C_FIELD(arg0, s32 *, 0x8C)][i] != 0) {
             count++;
             if (count == arg1) {
-                return i;
+                ret = i;
+                break;
             }
         }
     }
+    return ret;
 }
 
 void fn_8021B654(void *arg0, s32 arg1) {
