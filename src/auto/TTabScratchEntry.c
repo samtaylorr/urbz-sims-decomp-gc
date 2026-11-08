@@ -660,7 +660,7 @@ void *fn_8019EFC8(void *arg0, u8 *arg1) {
 
 void *fn_8019EFFC(void *arg0) {
     extern u8 lbl_80414830[];
-    void fn_8019E53C(void *);
+    void *fn_8019E53C(void *);
     fn_8019E53C(arg0);
     M2C_FIELD(arg0, s32 *, 0x5C) = 0;
     M2C_FIELD(arg0, void **, 0) = lbl_80414830;
