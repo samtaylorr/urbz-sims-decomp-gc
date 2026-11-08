@@ -72,8 +72,8 @@ s32 fn_8037AC78(s32 *sem) {
 
     enabled = fn_8025465C();
     count = *sem;
-    if (count > 0) {
-        *sem = count - 1;
+    if (0 < count) {
+        --*sem;
     }
     fn_80254684(enabled);
     return count;
@@ -130,6 +130,8 @@ void fn_8037AD9C(void *arg0, void *arg1) {
 void fn_8037B1B0(f32 (*a)[4], f32 (*srcBase)[3][4], f32 (*dstBase)[3][4], u32 count) {
     u32 i;
 
+    do {} while (0);
+    do {} while (0);
     for (i = 0; i < count; i++) {
         fn_8037AE3C(a, *srcBase, *dstBase);
         srcBase++;
