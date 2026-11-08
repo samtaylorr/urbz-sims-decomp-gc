@@ -1141,6 +1141,13 @@ void fn_80385EAC(void *arg0) {
     *(u32 *)(e + 4) |= 0x10000000;
 }
 
+void fn_80385F0C(void *arg0, u32 arg1) {
+    extern u8 lbl_8048FAA0[][0x60];
+    u8 *e = lbl_8048FAA0[M2C_FIELD(arg0, s32 *, 0x18)];
+    *(u32 *)(e + 0x1c) = arg1;
+    *(u32 *)(e + 4) |= 0x40000000;
+}
+
 void fn_80385F34(void *arg0, u32 arg1) {
     extern u8 lbl_8048FAA0[][0x60];
     u8 *e = lbl_8048FAA0[M2C_FIELD(arg0, s32 *, 0x18)];
