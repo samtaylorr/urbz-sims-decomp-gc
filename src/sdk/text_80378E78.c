@@ -1152,6 +1152,18 @@ u16 fn_80388F84(void) {
     return lbl_804964A0;
 }
 
+u16 fn_80388F8C(u16 x) {
+    extern u16 lbl_804964A0;
+    u16 old = lbl_804964A0;
+    switch (x) {
+    case 0:
+    case 1:
+        lbl_804964A0 = x;
+        break;
+    }
+    return old;
+}
+
 void fn_80388FB4(u8 *p) {
     extern u8 lbl_804912A0[];
     *(u8 **)(lbl_804912A0 + 0x10c) = p ? p : lbl_804912A0 + 0x220;
