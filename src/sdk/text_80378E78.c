@@ -1215,6 +1215,18 @@ s32 fn_8038DBC8(s32 chan, void *dst) {
     fn_80389134(sp10, 0);
 }
 
+s32 fn_8038DC5C(s32 arg0, s32 arg1, u8 *arg2) {
+    s32 fn_8038F6F8(s32, s32, void *);
+    u8 stat[0x40];
+    s32 result;
+
+    result = fn_8038F6F8(arg0, arg1, stat);
+    if (result == 0) {
+        *arg2 = stat[0x34];
+    }
+    return result;
+}
+
 s32 fn_8038DD80(s32 chan, s32 arg1, s32 arg2) {
     s32 fn_803894A8(s32);
     s32 fn_8038DC9C(s32, s32, s32, void *);
@@ -1226,6 +1238,23 @@ s32 fn_8038DD80(s32 chan, s32 arg1, s32 arg2) {
         return result;
     }
     return fn_803894A8(chan);
+}
+
+s32 fn_8038DDC8(u8 mask, s32 arg1) {
+    extern u8 lbl_80495662;
+    s32 var_r5;
+
+    if (lbl_80495662 & mask) {
+        var_r5 = 1;
+    } else {
+        var_r5 = 0;
+    }
+    if (arg1 != 0) {
+        lbl_80495662 |= mask;
+    } else {
+        lbl_80495662 &= ~mask;
+    }
+    return var_r5;
 }
 
 s32 fn_8038DE10(s32 arg0) {
