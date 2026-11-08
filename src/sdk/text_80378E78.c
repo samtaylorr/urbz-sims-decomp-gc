@@ -2360,6 +2360,19 @@ s32 fn_80389318(s32 chan, u16 *out) {
     return fn_80389134(card, 0);
 }
 
+s32 fn_80389424(s32 chan, u32 *size) {
+    s32 fn_8038907C(s32, void *);
+    s32 *card;
+    s32 result;
+
+    result = fn_8038907C(chan, &card);
+    if (result < 0) {
+        return result;
+    }
+    *size = card[0xc / 4];
+    return fn_80389134(card, 0);
+}
+
 s32 fn_80389540(s32 arg0) {
     s32 fn_8038B684(M2C_UNK);
     if ((arg0 == 0) && ((fn_8038B684(0) == -1) || (fn_8038B684(1) == -1))) {
