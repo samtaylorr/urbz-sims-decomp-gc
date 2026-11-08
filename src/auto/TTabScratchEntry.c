@@ -1809,11 +1809,11 @@ s16 fn_801A2F3C(u16 *p) {
     return *p & 0x7FFF;
 }
 
-void fn_801A2F5C(u16 *p, s16 v) {
+void fn_801A2F5C(s16 *p, s16 v) {
     if (v == -1) {
         *p = v;
     } else {
-        *p = v | (*p >> 15 << 15);
+        *p = v | (*p & 0x8000);
     }
 }
 
