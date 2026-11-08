@@ -17,6 +17,10 @@ extern u8 lbl_804152F0[];
 extern char lbl_80435418[];
 extern char lbl_803DBDE0[];
 
+static inline void ScratchSub_Init(void *sub) {
+    *(volatile s32 *)((u8 *)sub + 4) = 0;
+}
+
 typedef struct ScratchPool {
     u32 base;
     void *free;
@@ -1453,7 +1457,7 @@ s32 fn_801A1028(s32 year, s32 month, s32 day) {
 }
 
 s32 *fn_801A10A8(s32 *self, s32 arg1) {
-    struct { s32 a, b; } tmp;
+    s32 tmp[2];
     ScratchVec_Init(self + 2);
     self[6] = arg1;
     self[0] = 0;
@@ -2249,7 +2253,6 @@ s32 fn_801AA55C(s32 arg0, s32 arg1, u16 *out) {
     extern s32 fn_800FC7D4(s32);
     s32 type = fn_800FC854(arg0);
     s32 bits = 0;
-    s32 enc;
 
     switch (type) {
     case 3:
@@ -2267,11 +2270,12 @@ s32 fn_801AA55C(s32 arg0, s32 arg1, u16 *out) {
     if (arg0 > 0x3F) {
         return 0;
     }
-    enc = bits | ((arg0 & 0x3F) << 7);
+    enc:
+    bits = (arg0 << 7 & 0x1F80) | bits;
     if (arg1 >= fn_801AA4E0()) {
         return 0;
     }
-    *out = enc | (arg1 & 0x7F);
+    *out = bits | (arg1 & 0x7F);
     return 1;
 }
 
