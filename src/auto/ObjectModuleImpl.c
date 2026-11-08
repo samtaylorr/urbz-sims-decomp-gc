@@ -7,6 +7,28 @@ typedef struct {
 
 extern s32 lbl_804944B0;
 void fn_800F68E0(void *);
+void fn_80149624(char *self) {
+    char *p;
+    char *e;
+    s32 r;
+
+    {
+        char *obj = M2C_FIELD(self, char **, 4);
+        char *vt = M2C_FIELD(obj, char **, 4);
+        M2C_FIELD(vt, void (**)(void *, s32, s32), 0x6C)(obj + M2C_FIELD(vt, s16 *, 0x68), 0x100, 1);
+    }
+    {
+        char *obj = M2C_FIELD(self, char **, 4);
+        char *vt;
+        p = M2C_FIELD(self, char **, 0x58);
+        vt = M2C_FIELD(obj, char **, 4);
+        e = *(char **)p + 0x228;
+        p += *(s16 *)e;
+        r = M2C_FIELD(vt, s32 (**)(void *), 0x2EC)(obj + M2C_FIELD(vt, s16 *, 0x2E8));
+    }
+    M2C_FIELD(e, void (**)(void *, s32, s32, s32), 4)(p, r, 4, 1);
+}
+
 void fn_80149998(void *self, void *arg) {
     fn_800F68E0(arg);
 }
@@ -52,6 +74,23 @@ s32 fn_80149BDC(void) {
 
 s16 fn_80149BE4(void *arg0) {
     return M2C_FIELD(arg0, s16 *, 4);
+}
+
+s32 fn_8014A690(char *arg0) {
+    s32 i;
+    s32 total;
+    s32 n;
+    char *it;
+
+    total = 0;
+    for (i = 0; i <= 0xFF; i++) {
+        n = 0;
+        for (it = M2C_FIELD(arg0 + 0x50, char **, i * 4); it != NULL; it = M2C_FIELD(it, char **, 0xA0)) {
+            n++;
+        }
+        total += n;
+    }
+    return total;
 }
 
 void fn_8014C314(void *arg0, void **arg1) {
@@ -428,7 +467,8 @@ s32 fn_80157A38(void) {
 }
 
 s32 fn_80157A40(void *self, s32 i) {
-    u8 *p = M2C_FIELD(self, u8 ***, 0x2058)[i];
+    u8 **t = M2C_FIELD(self, u8 ***, 0x2058);
+    u8 *p = *(u8 **)((u8 *)t + i * 4);
     return p != NULL ? *(s32 *)(p + 4) : 0;
 }
 
@@ -437,7 +477,8 @@ s32 fn_80157A60(void *arg0) {
 }
 
 s32 fn_80157A74(void *self, s32 i) {
-    return M2C_FIELD(self, s32 **, 0x2068)[i];
+    s32 *p = M2C_FIELD(self, s32 **, 0x2068);
+    return *(s32 *)((u8 *)p + i * 4);
 }
 
 s32 fn_80157A84(void *arg0) {
