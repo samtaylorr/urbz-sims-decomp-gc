@@ -24,6 +24,20 @@ s32 fn_803798A4(void *arg0) {
     return 0;
 }
 
+extern u16 lbl_80495620;
+BOOL fn_80257770(u8* buf, s32 length, s32 offset);
+void fn_80379930(u8* buf, s32 length, s32 offset) {
+    s32 len;
+    while (length > 0) {
+        len = (length <= 0x100) ? length : 0x100;
+        length -= len;
+        while (!fn_80257770(buf, len, offset)) {
+        }
+        offset += len;
+        buf += len;
+    }
+}
+
 s32 fn_8037ACCC(s32 *arg0) {
     s32 enabled;
     s32 n;
