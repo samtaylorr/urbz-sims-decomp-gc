@@ -22,6 +22,14 @@ static inline void ScratchSub_Init(void *sub) {
     *(volatile s32 *)((u8 *)sub + 4) = 0;
 }
 
+static inline s32 TTSE_ArrCount(void *arr) {
+    s32 n = 0;
+    if (arr != NULL) {
+        n = M2C_FIELD(arr, s32 *, -4);
+    }
+    return n;
+}
+
 typedef struct ScratchPool {
     u32 base;
     void *free;
@@ -720,6 +728,20 @@ s32 fn_8019F0BC(void) {
 
 s32 fn_8019F0C4(void) {
     return 0;
+}
+
+void *fn_8019F0CC(void *self) {
+    extern u8 lbl_80414790[];
+    void *fn_8019E53C(void *);
+    s32 *v;
+    fn_8019E53C(self);
+    M2C_FIELD(self, s32 *, 0x54) = 0;
+    M2C_FIELD(self, void **, 0) = lbl_80414790;
+    v = (s32 *)((u8 *)self + 0x5C);
+    M2C_FIELD(self, s32 *, 0x58) = 0;
+    v[1] = 0;
+    M2C_FIELD(self, s32 *, 0x64) = 0;
+    return self;
 }
 
 s32 fn_8019F1C0(void *arg0) {
@@ -1444,11 +1466,13 @@ s32 fn_801A0E54(void *self, s32 arg1) {
     return 0;
 }
 
-s32 fn_801A0EBC(void *self, s32 it) {
+s32 fn_801A0EBC(void *self, s32 arg1) {
     M2C_UNK fn_801A0780(s32);
     M2C_UNK fn_801A08DC(s32 *, s32);
+    s32 it;
 
-    fn_801A0780(it);
+    it = arg1;
+    fn_801A0780(arg1);
     do {
         it <<= 1;
         if (fn_801A08DC(self, it)) {
@@ -1678,6 +1702,15 @@ s32 fn_801A29C4(void *arg0) {
 char *fn_801A29E0(char *self) {
     extern s32 fn_801A29C4(void *);
     return self + fn_801A29C4(self);
+}
+
+char *fn_801A2AB0(char *self) {
+    char **begin = M2C_FIELD(self, char ***, 8);
+    s32 n = M2C_FIELD(self, char ***, 0xC) - begin;
+    if (n == 0) {
+        return M2C_FIELD(self, char **, 0);
+    }
+    return fn_801A29E0(begin[n - 1]);
 }
 
 s32 fn_801A2B54(void *arg0) {
