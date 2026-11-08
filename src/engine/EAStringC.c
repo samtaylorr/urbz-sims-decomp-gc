@@ -58,6 +58,40 @@ void fn_80290C24(s32 arg0) {
     fn_802A14A0(arg0 + 0x24);
 }
 
+void fn_80291EA4(void *arg0, f32 *arg1, f32 *arg2) {
+    typedef struct { f32 m[6]; } AptMtx23;
+    extern AptMtx23 lbl_804445F0;
+    void fn_802AF0D0(void *, void *, void *);
+    AptMtx23 m;
+    void *p;
+
+    m = lbl_804445F0;
+    for (p = arg0; p != NULL; p = M2C_FIELD(p, void **, 0x4C)) {
+        fn_802AF0D0(&m, (char *)p + 0x10, &m);
+    }
+    if (arg1 != NULL) {
+        *arg1 = m.m[4];
+    }
+    if (arg2 != NULL) {
+        *arg2 = m.m[5];
+    }
+}
+
+f32 fn_80291F50(f32 x) {
+    extern f32 lbl_803ECA14;
+    extern f32 lbl_803ECA18;
+    extern f32 lbl_803ECA1C;
+    f32 fn_80242F38(f32, f32);
+    x = fn_80242F38(x, lbl_803ECA14);
+    if (x >= lbl_803ECA18) {
+        x -= lbl_803ECA14;
+    }
+    if (x < lbl_803ECA1C) {
+        x += lbl_803ECA14;
+    }
+    return x;
+}
+
 f32 fn_802921A0(void *arg0, s32 arg1) {
     return M2C_FIELD(arg0, f32 **, 0x48)[arg1];
 }
@@ -2658,6 +2692,18 @@ s32 fn_802B74C8(u32 *arg0) {
         var_r9 = (temp_r3 >> 0xFU) & 1;
     }
     return var_r9;
+}
+
+s32 fn_802B74E8(u32 *arg0, s32 arg1) {
+    u32 flags = *arg0;
+    s32 type = flags & 0x3F;
+
+    if (type > 0xB && type <= 0x13) {
+        if (arg1 != 0 || (flags & 0x8000)) {
+            return 1;
+        }
+    }
+    return 0;
 }
 
 s32 fn_802B7520(u32 *arg0) {
