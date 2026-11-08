@@ -376,6 +376,38 @@ void fn_8019B6E4(void *self, s32 idx, TTabBlk20 *out) {
     *out = ((TTabBlk20 *)((u8 *)self + 0xbc))[idx];
 }
 
+void fn_8019B748(void *self, s32 *out) {
+    s32 *src[3];
+    s32 i;
+    s32 j;
+    src[0] = (s32 *)((u8 *)self + 0xbc);
+    src[1] = (s32 *)((u8 *)self + 0xdc);
+    src[2] = (s32 *)((u8 *)self + 0x15c);
+    for (i = 0; i < 8; i++) {
+        s32 sum = 0;
+        for (j = 0; j < 3; j++) {
+            sum += src[j][i];
+        }
+        out[i] = sum;
+    }
+}
+
+s32 fn_8019B7B4(void *self, s32 arg1) {
+    s16 fn_8004E8D0(void *);
+    extern u8 lbl_8041F94C[];
+    switch (arg1) {
+    case 0x18:
+        return 0;
+    case 0x2e:
+        M2C_FIELD(self, s16 *, 0x70) = fn_8004E8D0(lbl_8041F94C);
+        break;
+    case 0x2f:
+        M2C_FIELD(self, s16 *, 0x72) = fn_8004E8D0(lbl_8041F94C);
+        break;
+    }
+    return ((s16 *)((u8 *)self + 0x14))[arg1];
+}
+
 s32 fn_8019B83C(void *self, s32 arg1, u16 **out) {
     if ((u16)arg1 > 0x2f) {
     fail:
@@ -2061,6 +2093,19 @@ void fn_801A1810(char *self, s32 arg1, s32 arg2) {
     M2C_FIELD(self, s32 *, 0x2C) = arg2;
 }
 
+void fn_801A1848(void *self, s16 *arg1, u16 *arg2) {
+    s16 fn_801A2F3C(u16 *);
+    u8 *obj;
+    u8 *vt;
+    u16 *p;
+
+    obj = M2C_FIELD(self, u8 **, 0);
+    vt = *(u8 **)(obj + 0x1C);
+    p = (*(u16 *(**)(void *))(vt + 0x4C))(obj + *(s16 *)(vt + 0x48));
+    *arg1 = fn_801A2F3C(p);
+    *arg2 = p[1];
+}
+
 void fn_801A1E30(void) {
     fn_801A1B50();
 }
@@ -2184,6 +2229,15 @@ char *fn_801A2AB0(char *self) {
         return fn_801A29E0(*(char **)((char *)begin + n));
     }
     return M2C_FIELD(self, char **, 0);
+}
+
+s32 fn_801A2AF8(char *self) {
+    char **begin = M2C_FIELD(self, char ***, 8);
+    s32 n = M2C_FIELD(self, char ***, 0xC) - begin;
+    if (n == 0) {
+        return 0;
+    }
+    return fn_801A29E0(begin[n - 1]) - M2C_FIELD(self, char **, 0);
 }
 
 s32 fn_801A2B54(void *arg0) {
@@ -2976,21 +3030,17 @@ s32 fn_801A9F24(void *self) {
     void *vt;
     s32 idx;
     s32 *arr;
-    s32 n;
+    s32 t;
 
     vt = M2C_FIELD(self, void **, 0);
     idx = M2C_FIELD(vt, s32 (**)(void *), 0x8C)((char *)self + M2C_FIELD(vt, s16 *, 0x88));
     arr = *lbl_8041FA48[0];
-    n = 0;
-    if (arr != NULL) {
-        n = arr[-1];
-    }
-    if (idx < n) {
-        idx = M2C_FIELD(arr[idx], s32 *, 0x10);
-        if (idx == 8) {
+    if (idx < TTSE_ArrCount(arr)) {
+        t = M2C_FIELD(arr[idx], s32 *, 0x10);
+        if (t == 8) {
             goto yes;
         }
-        if (idx == 9) {
+        if (t == 9) {
         yes:
             return 1;
         }
@@ -2998,12 +3048,15 @@ s32 fn_801A9F24(void *self) {
     return 0;
 }
 
-u8 fn_801A9FA4(void *self, s32 arg1, u8 arg2) {
+u8 fn_801A9FA4(void *self, s32 arg1, s32 arg2) {
+    u8 *cell;
     u8 old;
 
-    old = *TTSE_Cell(self, arg1);
+    cell = TTSE_Cell(self, arg1);
+    old = *cell;
     if (old != arg2) {
-        *TTSE_Cell(self, arg1) = arg2;
+        cell = TTSE_Cell(self, arg1);
+        *cell = arg2;
     }
     return old;
 }
@@ -3180,6 +3233,17 @@ s32 fn_801AA55C(s32 arg0, s32 arg1, u16 *out) {
 
 s32 fn_801AA930(s32 *self) {
     return self[1];
+}
+
+void *fn_801AAE18(void *self) {
+    void fn_8019C854(void *);
+    void fn_801AAEDC(void *, s32, s32, s32);
+    *(volatile s32 *)((u8 *)self + 0) = 0;
+    *(volatile s32 *)((u8 *)self + 4) = 0;
+    ScratchSub_Init((u8 *)self + 8);
+    fn_8019C854((u8 *)self + 0x10);
+    fn_801AAEDC(self, 0, 0, 0);
+    return self;
 }
 
 void *fn_801AAE74(void *self, s32 a, s32 b, s32 c) {
