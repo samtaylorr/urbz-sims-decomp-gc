@@ -3602,12 +3602,12 @@ void fn_800E3D7C(void *self) {
 }
 
 void fn_800E3DBC(s32 self, s32 id, f32 time) {
-    s32 fn_800E4174();
-    s32 p = fn_800E4174(self, id);
+    s32 fn_800E4174(s32);
+    s32 p = ((s32 (*)(s32, s32))fn_800E4174)(self, id);
     if (p != 0) {
         u8 *q = (u8 *)self + 0x38;
-        M2C_FIELD(q, f32 *, 0x10) = time;
         M2C_FIELD(q, s32 *, 0x4) = p;
+        M2C_FIELD(q, f32 *, 0x10) = time;
     }
 }
 
