@@ -20,6 +20,10 @@ extern u8 lbl_804152F0[];
 extern char lbl_80435418[];
 extern char lbl_803DBDE0[];
 
+typedef struct TTabBlk20 {
+    s32 v[8];
+} TTabBlk20;
+
 static inline void ScratchSub_Init(void *sub) {
     *(volatile s32 *)((u8 *)sub + 4) = 0;
 }
@@ -2988,8 +2992,9 @@ s32 fn_801A9F24(void *self) {
 }
 
 u8 fn_801A9FA4(void *self, s32 arg1, s32 arg2) {
-    s32 old = *TTSE_Cell(self, arg1);
+    u8 old;
 
+    old = *TTSE_Cell(self, arg1);
     if (old != arg2) {
         *TTSE_Cell(self, arg1) = arg2;
     }
