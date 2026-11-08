@@ -2877,16 +2877,16 @@ s32 fn_801A9D9C(void *arg0, void *arg1) {
 s32 fn_801A9E50(void *self, s32 arg1) {
     void fn_80105534(void *, s32, s32);
     void fn_801055FC(void *, s32);
-    s32 buf[2];
+    struct { s16 a, b, c; } buf;
     char *ent;
     void *obj;
     s32 r;
 
-    ent = M2C_FIELD(self, char *, 0) + 0x60;
+    ent = M2C_FIELD(self, char **, 0) + 0x60;
     obj = (char *)self + *(s16 *)ent;
-    fn_80105534(buf, arg1, 1);
-    r = (*(s32 (**)(void *, void *))(ent + 4))(obj, buf);
-    fn_801055FC(buf, 2);
+    fn_80105534(&buf, arg1, 1);
+    r = (*(s32 (**)(void *, void *))(ent + 4))(obj, &buf);
+    fn_801055FC(&buf, 2);
     return r;
 }
 
