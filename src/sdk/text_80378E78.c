@@ -1542,6 +1542,31 @@ s32 fn_8038F6E0(s32 chan) {
     return M2C_FIELD(lbl_804912A0 + chan * 0x110, s32 *, 0xB8);
 }
 
+s32 fn_8038F6F8(s32 chan, s32 fileNo, void *dst) {
+    s32 fn_8038907C(s32, void *);
+    u8 *fn_80389994(void *);
+    s32 fn_8038C1E0(void *, void *);
+    void fn_802482F8(void *, void *, u32);
+    s32 fn_80389134(void *, s32);
+    void *card;
+    u8 *ent;
+    s32 result;
+
+    if (fileNo < 0 || fileNo >= 127) {
+        return -0x80;
+    }
+    result = fn_8038907C(chan, &card);
+    if (result < 0) {
+        return result;
+    }
+    ent = fn_80389994(card) + fileNo * 0x40;
+    result = fn_8038C1E0(card, ent);
+    if (result >= 0) {
+        fn_802482F8(dst, ent, 0x40);
+    }
+    return fn_80389134(card, result);
+}
+
 s32 fn_8038FA38(s32 chan, s32 arg1, s32 arg2) {
     s32 fn_803894A8(s32);
     s32 fn_8038F79C(s32, s32, s32, void *);
