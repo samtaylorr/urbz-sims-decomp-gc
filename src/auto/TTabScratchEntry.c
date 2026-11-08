@@ -1605,6 +1605,19 @@ s32 fn_801A2B54(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 4) - M2C_FIELD(arg0, s32 *, 0);
 }
 
+void fn_801A2E74(void *self) {
+    void ***v = (void ***)((u8 *)self + 8);
+    if ((u32)(v[1] - v[0]) == 0) {
+        char *obj;
+        char *vt;
+        M2C_FIELD(M2C_FIELD(self, char **, 0x18), s16 *, 0x30) = 0x3e9;
+        obj = M2C_FIELD(self, char **, 0x18);
+        vt = M2C_FIELD(obj, char **, 0x38);
+        M2C_FIELD(vt, void (**)(void *, s32), 0x14)(obj + M2C_FIELD(vt, s16 *, 0x10), 0x3e9);
+    }
+    v[1]--;
+}
+
 void fn_801A2EE8(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0xC) = (s32) M2C_FIELD(arg0, s32 *, 8);
 }
