@@ -1642,6 +1642,11 @@ void fn_801A2600(char *self) {
     fn_801A2EF4(self + 8);
 }
 
+s16 fn_801A2624(char *self) {
+    extern s16 fn_801A2F28(void *);
+    return fn_801A2F28(self + 8);
+}
+
 void fn_801A264C(void) {
 
 }
