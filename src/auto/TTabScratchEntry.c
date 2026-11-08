@@ -142,8 +142,8 @@ void fn_8019B330(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     M2C_FIELD(vt, void (**)(void *, s32, s32), 0xD4)((char *)arg0 + M2C_FIELD(vt, s16 *, 0xD0),
         p->a[arg3] + p->b[arg3] - arg2, arg3);
     if (arg3 == 0) {
-        s32 *c = p->c;
-        arg1[c] += arg2;
+        s32 off = arg1 * 4;
+        *(s32 *)((u8 *)p->c + off) += arg2;
     }
 }
 
@@ -156,7 +156,8 @@ void fn_8019B3B8(void *arg0) {
         ((s32 *)((u8 *)arg0 + 0x15C))[i] = 0;
     }
     for (i = 0; i < 5; i++) {
-        q = (struct S *)((s32 *)arg0 + i * 8);
+        s32 off = i * 32;
+        q = (struct S *)((u8 *)arg0 + off);
         for (j = 7; j >= 0; j--) {
             q->a[j] = 0;
         }
@@ -368,9 +369,9 @@ void **fn_8019CB00(void **self) {
     M2C_FIELD(self, f32 *, 0x18) = f;
     M2C_FIELD(self, f32 *, 0x1C) = f;
     M2C_FIELD(self, s16 *, 0x4) = 0;
-    M2C_FIELD(self, s32 *, 0x8) = 0;
-    M2C_FIELD(self, s32 *, 0xC) = 0x32;
     M2C_FIELD(self, s32 *, 0x10) = 0;
+    M2C_FIELD(self, s32 *, 0xC) = 0x32;
+    M2C_FIELD(self, s32 *, 0x8) = 0;
     return self;
 }
 
