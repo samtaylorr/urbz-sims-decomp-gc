@@ -2310,11 +2310,6 @@ s32 fn_802AF678(void *arg0) {
 s32 fn_802AF6B4(void *arg0) {
     extern s32 fn_802B70DC(void *);
     extern s32 fn_802B72D4(void *);
-    struct Flags1C {
-        u32 pad : 25;
-        u32 flag : 1;
-        u32 rest : 6;
-    };
     s32 found;
     s32 ok;
     s32 ok2;
@@ -2335,7 +2330,10 @@ s32 fn_802AF6B4(void *arg0) {
             found = 1;
         }
     }
-    return found ? ((struct Flags1C *)((char *)M2C_FIELD(arg0, void **, 0x50) + 0x1C))->flag : 0;
+    if (!found) {
+        return 0;
+    }
+    return (M2C_FIELD(M2C_FIELD(arg0, void **, 0x50), u32 *, 0x1C) >> 6) & 1;
 }
 
 void fn_802AFF78(void *arg0, void *arg1, void *arg2) {
@@ -3631,6 +3629,30 @@ void *fn_802B9158(void *arg0, s32 arg1) {
     extern char lbl_80418F70[];
     fn_802BA0A4(arg0, 0x21, arg1);
     M2C_FIELD(arg0, void **, 4) = lbl_80418F70;
+    return arg0;
+}
+
+void *fn_802B919C(void *arg0, u32 *arg1) {
+    extern void fn_802BA0A4(void *, s32, s32);
+    extern char lbl_80418F70[];
+    extern char *lbl_80494B58;
+    char *obj;
+    char *vt;
+    void *r;
+
+    fn_802BA0A4(arg0, 0x21, 0);
+    M2C_FIELD(arg0, void **, 4) = lbl_80418F70;
+    obj = lbl_80494B58;
+    if ((*arg1 & 0x3F) == 1 && ((*arg1 >> 15) & 1)) {
+        vt = M2C_FIELD(obj, char **, 0);
+        r = M2C_FIELD(vt, void *(**)(void *, s32), 0xC)(obj + M2C_FIELD(vt, s16 *, 8), M2C_FIELD(arg1, s32 *, 8) + 8);
+    } else {
+        vt = M2C_FIELD(obj, char **, 0);
+        r = M2C_FIELD(vt, void *(**)(void *, s32), 0xC)(obj + M2C_FIELD(vt, s16 *, 8), 0);
+    }
+    if (r != NULL) {
+        M2C_FIELD(arg0, void **, 0x1C) = r;
+    }
     return arg0;
 }
 
