@@ -1407,8 +1407,10 @@ void fn_800D5FAC(void) {
 s32 fn_800D5FB0(void *self, s32 arg1) {
     extern s32 lbl_80494FCC;
     extern s32 fn_803338C0(s32);
-    register s32 flag asm("r31") = arg1;
-    s32 ret = 0;
+    register s32 ret asm("r30");
+    register s32 flag asm("r31");
+    flag = arg1;
+    ret = 0;
     if (fn_803338C0(lbl_80494FCC) != 0) {
         if (flag != 0) {
             ret = M2C_FIELD(self, s32 *, 0x34) == 0;
@@ -3845,14 +3847,12 @@ void fn_800E3350(void *arg0) {
     ((s32 *)self)[11] = 0;
 }
 
-void fn_800E3404(void *arg0) {
+void fn_800E3404(void *arg0, f32 dt) {
     extern f32 lbl_803D4F40[];
     f32 *self = arg0;
-    f32 dt;
-    f32 k;
+    f32 k = lbl_803D4F40[0];
     self[0] += dt;
     self[2] += dt;
-    k = lbl_803D4F40[0];
     if (self[2] >= k) {
         self[2] -= k;
         ((s32 *)self)[3] ^= 1;
@@ -3890,8 +3890,8 @@ void fn_800E3988(s32 self) {
 
 void fn_800E39EC(s32 self, f32 t) {
     extern u8 *lbl_80495A78;
-    extern void fn_800E3404(void *);
-    fn_800E3404(lbl_80495A78);
+    extern void fn_800E3404(void *, f32);
+    fn_800E3404(lbl_80495A78, t);
     ((void (*)(s32, f32))fn_800E3BC0)(self, t);
 }
 
