@@ -1841,6 +1841,25 @@ void fn_80388000(s32 chan) {
     }
 }
 
+s32 fn_80388084(s32 chan, s32 enable) {
+    s32 fn_8025C378(s32, s32, s32);
+    s32 fn_8025B6F0(s32, void *, s32, s32, void *);
+    s32 fn_8025BAD8(s32);
+    s32 fn_8025C4A4(s32);
+    s32 err;
+    u32 cmd;
+
+    if (!fn_8025C378(chan, 0, 4)) {
+        return -3;
+    }
+    cmd = enable ? 0x81010000 : 0x81000000;
+    err = 0;
+    err |= !fn_8025B6F0(chan, &cmd, 2, 1, 0);
+    err |= !fn_8025BAD8(chan);
+    err |= !fn_8025C4A4(chan);
+    return err ? -3 : 0;
+}
+
 u16 fn_80388F84(void) {
     extern u16 lbl_804964A0;
     return lbl_804964A0;
