@@ -9,15 +9,6 @@ extern s32 lbl_80496130;
 
 extern void *lbl_80494B48;
 
-static inline void fn_802B457C_InitSub(u8 *sub) {
-    extern void fn_802B6FA8(void *, s32);
-    extern s32 *fn_802ADDD8(s32 *, s32);
-    extern u8 lbl_804189F0[];
-    fn_802B6FA8(sub, 0x24);
-    M2C_FIELD(sub, void **, 0x4) = lbl_804189F0;
-    fn_802ADDD8((s32 *)(sub + 8), 8);
-    M2C_FIELD(sub, s32 *, 0x18) = 0;
-}
 extern void *lbl_80494D98;
 
 static inline void *AptNumber_New(f32 value) {
@@ -3204,18 +3195,12 @@ void fn_802B3CA8(void) {
 void *fn_802B457C(u8 *self, u8 *arg1) {
     extern void fn_803B6F28(void *);
     extern void fn_803B7864(void *, void *);
-    extern void fn_802B6FA8(void *, s32);
     extern void fn_803B6FFC(void *, void *);
-    extern u8 lbl_804189F0[];
     extern u8 lbl_80418B70[];
-    u8 *sub = self + 0x10;
 
     fn_803B6F28(self);
     fn_803B7864(self, arg1);
-    fn_802B6FA8(self + 0x10, 0x24);
-    M2C_FIELD(sub, void **, 0x4) = lbl_804189F0;
-    fn_802ADDD8((s32 *)(self + 0x18), 8);
-    M2C_FIELD(sub, s32 *, 0x18) = 0;
+    fn_802B457C_InitSub(self + 0x10);
     M2C_FIELD(self, void **, 0x14) = lbl_80418B70;
     M2C_FIELD(self, s32 *, 0xC) = M2C_FIELD(arg1, s32 *, 0xC);
     M2C_FIELD(self, s32 *, 0x8) = M2C_FIELD(arg1, s32 *, 0x8);
@@ -4677,7 +4662,7 @@ void fn_802BBE7C(void *arg0) {
     char *vt;
 
     while ((n = M2C_FIELD(arg0, s32 *, 4)) != 0) {
-        while (n-- != 0) {
+        for (;;) {
             obj = M2C_FIELD(arg0, u32 **, 8)[--M2C_FIELD(arg0, s32 *, 4)];
             if (*obj & 0x0FFF0000) {
                 *obj &= ~0x40000000;
@@ -4685,6 +4670,10 @@ void fn_802BBE7C(void *arg0) {
                 vt = M2C_FIELD(obj, char **, 4);
                 M2C_FIELD(vt, void (**)(void *), 0x1C)((char *)obj + M2C_FIELD(vt, s16 *, 0x18));
             }
+            if (n == 0) {
+                break;
+            }
+            n--;
         }
     }
 }
@@ -4886,15 +4875,15 @@ s32 fn_802BD6A8(void **self, const char *s) {
     extern u32 fn_80248808(const char *);
     extern s32 fn_80248268(const char *, const char *, u32);
     struct Buf { u16 ref; u16 len; s32 cap; char data[1]; };
-    u32 len;
     u32 slen;
+    u32 len;
 
     len = ((struct Buf *)*self)->len;
     slen = fn_80248808(s);
-    if (len < slen) {
-        return 0;
+    if (len >= slen) {
+        return fn_80248268(&((struct Buf *)*self)->data[len] - slen, s, slen) == 0;
     }
-    return fn_80248268(((struct Buf *)*self)->data + len - slen, s, slen) == 0;
+    return 0;
 }
 
 char *fn_802BD8FC(void **self, s32 n) {
@@ -4944,13 +4933,16 @@ void **fn_802BDAB4(void **out, void **self, s32 n) {
     }
     base = ((struct Buf *)*self)->data;
     p = base;
-    for (i = 0; i < n; i++) {
-        p = fn_803B9024(p, &c);
-        if (c == 0) {
-            p = 0;
-            break;
-        }
+    i = 0;
+    if (i < n) {
+        do {
+            p = fn_803B9024(p, &c);
+            if (c == 0) {
+                goto fail;
+            }
+        } while (++i < n);
     }
+check:
     if (p == 0) {
         *out = lbl_803FCE5C;
         lbl_803FCE5C[0]++;
@@ -4958,6 +4950,9 @@ void **fn_802BDAB4(void **out, void **self, s32 n) {
         fn_802BCFAC(out, self, p - base);
     }
     return out;
+fail:
+    p = 0;
+    goto check;
 }
 
 void fn_802BE5FC(u8 **arg0) {
