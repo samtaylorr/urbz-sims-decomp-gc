@@ -166,11 +166,10 @@ void fn_8037AD9C(void *arg0, void *arg1) {
     }
 }
 
+#pragma peephole off
 void fn_8037B1B0(f32 (*a)[4], f32 (*srcBase)[3][4], f32 (*dstBase)[3][4], u32 count) {
     u32 i;
 
-    do {} while (0);
-    do {} while (0);
     for (i = 0; i < count; i++) {
         fn_8037AE3C(a, *srcBase, *dstBase);
         srcBase++;
