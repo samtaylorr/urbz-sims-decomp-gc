@@ -434,7 +434,8 @@ void *fn_8019D2DC(void *self, s32 arg1) {
 }
 
 void fn_8019D37C(void *self, s32 arg1) {
-    fn_8019D2DC(self, arg1 * (M2C_FIELD(self, s32 *, 0x2C) * 12));
+    s32 n = M2C_FIELD(self, s32 *, 0x2C) * 12;
+    fn_8019D2DC(self, n * arg1);
 }
 
 void *fn_8019D2DC(void *self, s32 arg1);
