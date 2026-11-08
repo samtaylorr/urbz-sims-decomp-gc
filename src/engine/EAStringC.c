@@ -4951,30 +4951,17 @@ s32 fn_802BDA60(void **self) {
 }
 
 void **fn_802BDAB4(void **out, void **self, s32 n) {
-    extern char *fn_803B9024(char *, s32 *);
     extern void fn_802BCFAC(void **, void **, s32);
     extern u16 lbl_803FCE5C[];
     struct Buf { u16 ref; u16 len; s32 cap; char data[1]; };
     char *base;
     char *p;
-    s32 i;
-    s32 c;
 
     if (n < 0) {
         n = 0;
     }
     base = ((struct Buf *)*self)->data;
-    p = base;
-    i = 0;
-    if (i < n) {
-        do {
-            p = fn_803B9024(p, &c);
-            if (c == 0) {
-                goto fail;
-            }
-        } while (++i < n);
-    }
-check:
+    p = fn_802BD8FC(self, n);
     if (p == 0) {
         *out = lbl_803FCE5C;
         lbl_803FCE5C[0]++;
@@ -4982,9 +4969,6 @@ check:
         fn_802BCFAC(out, self, p - base);
     }
     return out;
-fail:
-    p = 0;
-    goto check;
 }
 
 void fn_802BE5FC(u8 **arg0) {
