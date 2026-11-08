@@ -387,6 +387,18 @@ void fn_803806AC(void) {
     lbl_8049636C = 0;
 }
 
+void fn_803806BC(void *arg0) {
+    extern void *lbl_80496368;
+    extern void *lbl_8049636C;
+    if (lbl_80496368 == NULL) {
+        lbl_80496368 = arg0;
+        lbl_8049636C = arg0;
+        return;
+    }
+    *(void **)lbl_8049636C = arg0;
+    lbl_8049636C = arg0;
+}
+
 void fn_80380754(void) {
     extern s32 lbl_80496384;
     lbl_80496384 = 0;
