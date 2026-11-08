@@ -779,6 +779,7 @@ void fn_80398D1C(void) {
     extern s32 fn_80251874(void);
     extern void fn_80251884(s32);
     register u8 *p asm("r3");
+    volatile s32 pad[2];
 
     p = (u8 *)fn_80251874();
     lbl_80496628 = p;
