@@ -182,14 +182,17 @@ s32 fn_8014BDFC(void *arg0) {
     s32 result;
 
     p = M2C_FIELD(*(void **)arg0, void *(**)(void *), 0x3C)((char *)arg0 + M2C_FIELD(*(void **)arg0, s16 *, 0x38));
-    if (p == NULL || M2C_FIELD(p, void **, 0xC) == NULL || (h = M2C_FIELD(M2C_FIELD(p, void **, 0xC), void **, 0x34)) == NULL) {
+    if (p == NULL || (h = M2C_FIELD(p, void **, 0xC)) == NULL || (h = M2C_FIELD(h, void **, 0x34)) == NULL) {
         return -1;
     }
-    result = fn_8032D8E0(M2C_FIELD(arg0, void **, 0x6A0), h, &out) != 0 ? out : -1;
-    if (result == 0) {
-        result = -1;
+    result = -1;
+    if (fn_8032D8E0(M2C_FIELD(arg0, void **, 0x6A0), h, &out) != 0) {
+        result = out;
     }
-    return result;
+    if (result != 0) {
+        return result;
+    }
+    return -1;
 }
 
 void fn_8014C314(void *arg0, void **arg1) {
@@ -279,9 +282,9 @@ void fn_8014DDA4(u8 *self, u8 *obj) {
     s32 fn_8014FDB4(void *, void *);
 
     if (*(s32 *)(obj + 0x9C) != 1 && *(s32 *)(*(u8 **)(obj + 0x38) + 0xC0) != 0) {
-        struct { s16 delta; s16 pad; void (*fn)(void *, void *, s32); } *ent;
-        ent = (void *)(*(u8 **)self + 0x260);
-        ent->fn(self + ent->delta, obj, 1);
+        u8 *vt = *(u8 **)self;
+        u8 *p = self + *(s16 *)(vt + 0x260);
+        (*(void (**)(void *, void *, s32))(vt + 0x264))(p, obj, 1);
         *(s32 *)(self + 0x6D8) += fn_8014FDB4(self, obj);
         *(s32 *)(obj + 0x68) += 1;
     }
@@ -1154,18 +1157,17 @@ void *fn_801658B8(void **self) {
 
     if (ret != NULL) {
         char *p = (char *)self + 0x28;
-        char *it;
 
         if (*fn_80141C5C(p, 0x19) != 0) {
             fn_80142174(p, 0x19, *fn_80141C5C(p, 0x19) - 1);
         }
-        self = (void **)((char *)self + 0xB0);
-        it = self[0];
-        if (it != self[1]) {
-            do {
+        {
+            char **vec = (char **)((char *)self + 0xB0);
+            char *it = vec[0];
+            while (it != vec[1]) {
                 fn_8019CFF4(it);
                 it += 0x6C;
-            } while (it != self[1]);
+            }
         }
     }
     return ret;
@@ -1198,7 +1200,7 @@ s32 fn_801660AC(void **self, char *obj, s32 arg2, s32 arg3, s32 arg4) {
 }
 
 s32 fn_801669D0(f32 x) {
-    return x >= 0.0f ? x + 0.5 : x - 0.5;
+    return !(x < 0.0f) ? x + 0.5 : x - 0.5;
 }
 
 void fn_80166A1C(void) {
