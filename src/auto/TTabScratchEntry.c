@@ -254,21 +254,23 @@ s32 fn_8019B448(void) {
 }
 
 s32 fn_8019B83C(void *self, s32 arg1, u16 **out) {
-    if ((u16)arg1 > 0x2f) {
-        return 0;
+    s32 ret = 0;
+
+    if ((u16)arg1 <= 0x2f) {
+        switch (arg1) {
+        case 3:
+        case 0x18:
+        case 0x20:
+        case 0x2e:
+        case 0x2f:
+            break;
+        default:
+            *out = (u16 *)((u8 *)self + 0x14 + arg1 * 2);
+            ret = 1;
+            break;
+        }
     }
-    switch (arg1) {
-    case 3:
-    case 0x18:
-    case 0x20:
-    case 0x2e:
-    case 0x2f:
-        return 0;
-    default:
-        break;
-    }
-    *out = (u16 *)((u8 *)self + 0x14 + arg1 * 2);
-    return 1;
+    return ret;
 }
 
 s32 fn_8019B89C(void *arg0) {
@@ -2279,10 +2281,10 @@ s16 fn_801A375C(void **arg0, s32 arg1) {
 void *fn_801A3798(void *self) {
     extern u8 lbl_80414FD0[];
     M2C_FIELD(self, void **, 0) = lbl_80414FD0;
-    M2C_FIELD(self, s16 *, 8) = 0;
-    M2C_FIELD(self, s32 *, 0xC) = 0;
     M2C_FIELD(self, s16 *, 4) = 0;
     M2C_FIELD(self, s16 *, 6) = 0;
+    M2C_FIELD(self, s16 *, 8) = 0;
+    M2C_FIELD(self, s32 *, 0xC) = 0;
     return self;
 }
 
