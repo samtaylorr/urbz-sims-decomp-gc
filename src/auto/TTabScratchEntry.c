@@ -158,18 +158,17 @@ void fn_8019A38C(s32 *self, void *stream) {
 }
 
 void fn_8019A7C0(void *self) {
-    s32 *add = (s32 *)((u8 *)self + 0x7c);
     u16 i;
     for (i = 0; i < 2; i++) {
-        s32 *val = (s32 *)((u8 *)self + 0x74);
-        s32 v = add[i];
+        s32 off = i * 4;
+        s32 v = *(s32 *)((u8 *)self + 0x7c + off);
         if (v != 0) {
-            s32 n = val[i] + v;
-            val[i] = n;
+            s32 n = *(s32 *)((u8 *)self + 0x74 + off) + v;
+            *(s32 *)((u8 *)self + 0x74 + off) = n;
             if (n > 999999) {
-                val[i] = 999999;
+                *(s32 *)((u8 *)self + 0x74 + off) = 999999;
             }
-            add[i] = 0;
+            *(s32 *)((u8 *)self + 0x7c + off) = 0;
         }
     }
 }
@@ -248,11 +247,15 @@ void fn_8019B0BC(void *self) {
 void fn_8019B128(void *self) {
     extern f32 lbl_803DB4D0[];
     u8 *vt = *(u8 **)self;
+    u8 *p;
+    s32 f;
     if ((*(s32 (**)(void *))(vt + 0x64))((u8 *)self + *(s16 *)(vt + 0x60)) != 0) {
         fn_801051C8(0xBD, 0);
     }
     M2C_FIELD(self, f32 *, 0xA8) = lbl_803DB4D0[0];
-    ((TTSE_Flags36 *)((u8 *)self + 0x34))->flag = 0;
+    p = (u8 *)self + 0x34;
+    f = *(u16 *)(p + 2);
+    *(u16 *)(p + 2) = f & ~1;
     fn_8019AFF0(self);
 }
 
@@ -2945,6 +2948,13 @@ u8 fn_801A9FA4(void *self, s32 arg1, s32 arg2) {
     return old;
 }
 
+void fn_801AA0DC(void *self, s32 arg1, s16 arg2) {
+    u8 *tab = M2C_FIELD(self, u8 **, 0x30);
+    s32 row = fn_80105B78(arg1);
+    s32 col = fn_80105B84(arg1);
+    (*(s16 ***)(tab + 0xC))[row][col] = arg2;
+}
+
 u8 fn_801AA134(void *self, s32 arg1) {
     u8 *tab = M2C_FIELD(self, u8 **, 0x34);
     s32 row = fn_80105B78(arg1);
@@ -2957,6 +2967,13 @@ void fn_801AA184(void *self, s32 arg1, u8 arg2) {
     s32 row = fn_80105B78(arg1);
     s32 col = fn_80105B84(arg1);
     (*(u8 ***)(tab + 0xC))[row][col] = arg2;
+}
+
+s32 fn_801AA1D8(void *self, s32 arg1) {
+    u8 *tab = M2C_FIELD(self, u8 **, 0x34);
+    s32 row = fn_80105B78(arg1);
+    s32 col = fn_80105B84(arg1);
+    return ((*(u8 ***)(tab + 0xC))[row][col] >> 2) & 1;
 }
 
 s32 fn_80105B78(s32);
