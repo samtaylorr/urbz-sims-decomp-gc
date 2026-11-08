@@ -116,9 +116,9 @@ f32 fn_80291F50(f32 x) {
     return x;
 }
 
-f32 fn_802921A0(void *arg0, s32 arg1) {
-    f32 *vals = M2C_FIELD(arg0, f32 **, 0x48);
-    return *(f32 *)((char *)vals + arg1 * 4);
+f32 fn_802921A0(void *arg0, u32 arg1) {
+    struct { u8 pad[0x48]; f32 *vals; } *p = arg0;
+    return p->vals[arg1];
 }
 
 void fn_802927E8(void *self, void *arg1) {
@@ -2756,16 +2756,14 @@ s32 fn_802B74E8(u32 *arg0, s32 arg1) {
     s32 type = flags & 0x3F;
     s32 ret = 0;
 
-    if (type <= 0xB) {
-        return ret;
+    if (type > 0xB) {
+        if (type <= 0x13) {
+            if (arg1 != 0 || !((flags ^ 0x8000) & 0x8000)) {
+                ret = 1;
+            }
+        }
     }
-    if (type > 0x13) {
-        return ret;
-    }
-    if (arg1 == 0 && (~flags & 0x8000)) {
-        return ret;
-    }
-    return 1;
+    return ret;
 }
 
 s32 fn_802B7520(u32 *arg0) {
