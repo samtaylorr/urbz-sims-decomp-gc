@@ -4375,10 +4375,14 @@ s32 fn_80223248(s32 *self) {
 }
 
 void fn_80223250(void *arg0, f32 *arg1) {
-    struct V2 { f32 x, y; };
+    s32 a;
+    s32 b;
     arg1[0] = M2C_FIELD(arg0, f32 *, 0x8);
     arg1[1] = M2C_FIELD(arg0, f32 *, 0xC);
-    *(struct V2 *)(arg1 + 2) = *(struct V2 *)((u8 *)arg0 + 0x50);
+    a = M2C_FIELD(arg0, s32 *, 0x50);
+    b = M2C_FIELD(arg0, s32 *, 0x54);
+    ((s32 *)arg1)[3] = b;
+    ((s32 *)arg1)[2] = a;
 }
 
 void fn_80223274(void *arg0, void *arg1) {
