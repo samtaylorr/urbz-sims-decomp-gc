@@ -1091,6 +1091,16 @@ void fn_800D4B64(void *arg0) {
     fn_800D277C(arg0);
 }
 
+void fn_800D4BA0(s32 *self) {
+    extern f32 lbl_803D1F0C[];
+    fn_800D27B8(self);
+    if (self[6] != 0) {
+        fn_800E3B38(self, 0x1a, lbl_803D1F0C[0]);
+    } else if (self[7] != 0) {
+        fn_800E3B80(self, 1);
+    }
+}
+
 void fn_800D4EB8(void *arg0, s32 arg1) {
     extern s32 lbl_8041E640[];
     extern void fn_800D568C(s32);
