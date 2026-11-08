@@ -640,21 +640,19 @@ void fn_8038138C(void *arg0, u32 idx) {
     extern QNode_ *lbl_804763C0[32];
     extern QNode_ *lbl_80476440[32];
     s32 enabled;
-    QNode_ *node;
 
     enabled = fn_8025465C();
-    node = arg0;
-    fn_8038103C(node);
-    node->next = lbl_804763C0[idx];
-    node->prev = NULL;
-    if (node->next != NULL) {
-        lbl_804763C0[idx]->prev = node;
-        lbl_804763C0[idx] = node;
+    fn_8038103C(arg0);
+    ((QNode_ *)arg0)->next = lbl_804763C0[idx];
+    ((QNode_ *)arg0)->prev = NULL;
+    if (((QNode_ *)arg0)->next != NULL) {
+        lbl_804763C0[idx]->prev = arg0;
+        lbl_804763C0[idx] = arg0;
     } else {
-        lbl_80476440[idx] = node;
-        lbl_804763C0[idx] = node;
+        lbl_80476440[idx] = arg0;
+        lbl_804763C0[idx] = arg0;
     }
-    node->idx = idx;
+    ((QNode_ *)arg0)->idx = idx;
     fn_80254684(enabled);
 }
 
