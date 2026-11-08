@@ -411,10 +411,10 @@ void fn_8037EA74(u32 mainmem, u32 aram, u32 length) {
     __DSPRegs[20] = (u16)(__DSPRegs[20] | 0x8000);
     __DSPRegs[20] = (u16)((__DSPRegs[20] & ~0x3ff) | (u16)(length >> 16));
     __DSPRegs[21] = (u16)((__DSPRegs[21] & ~0xffe0) | (u16)(length & 0xffff));
-    if (__DSPRegs[5] & 0x200) {
-        return;
+    if (!(__DSPRegs[5] & 0x200)) {
+        u16 tmp = __DSPRegs[5];
+        __DSPRegs[5] = (tmp & ~0x88) | 0x20;
     }
-    __DSPRegs[5] = (u16)((__DSPRegs[5] & ~0x88) | 0x20);
 }
 
 void fn_8038046C(void) {
@@ -486,7 +486,7 @@ void fn_803806E4(void) {
         lbl_80496384 = 1;
     }
 }
-#pragma dont_inline reset
+#pragma auto_inline reset
 void fn_80380754(void) {
     extern s32 lbl_80496384;
     lbl_80496384 = 0;
@@ -1138,6 +1138,52 @@ void fn_803847F8(s32 arg0, s32 arg1) {
     lbl_8049645C = 1;
 }
 
+void fn_8038489C(void *arg0) {
+    extern u8 lbl_80405980[];
+    u8 *e = arg0;
+    u8 *tbl = lbl_80405980;
+    s32 a = *(s32 *)(e + 0x14);
+    s32 b = *(s32 *)(e + 0x18);
+    s32 ia = 0x7f - a;
+    s32 ib = 0x7f - b;
+    if ((u32)lbl_80496468 == 3) {
+        *(s32 *)(e + 0x20) = *(s16 *)(tbl + 0x98c + a * 2);
+        *(s32 *)(e + 0x24) = *(s16 *)(tbl + 0x98c + ia * 2);
+        *(s32 *)(e + 0x28) = *(s16 *)(tbl + 0x98c + ib * 2);
+        *(s32 *)(e + 0x2c) = *(s16 *)(tbl + 0x98c + b * 2);
+        *(s32 *)(e + 0x30) = *(s16 *)(tbl + 0xa8c + ia * 2);
+        *(s32 *)(e + 0x34) = *(s16 *)(tbl + 0xa8c + a * 2);
+    } else {
+        *(s32 *)(e + 0x20) = *(s32 *)(tbl + 0x78c + a * 4);
+        *(s32 *)(e + 0x24) = *(s32 *)(tbl + 0x78c + ia * 4);
+        *(s32 *)(e + 0x28) = *(s32 *)(tbl + 0x78c + ib * 4);
+        *(s32 *)(e + 0x2c) = *(s32 *)(tbl + 0x78c + b * 4);
+    }
+}
+
+void fn_8038489C(void *arg0);
+void fn_80384958(void *arg0) {
+    u8 *e = arg0;
+    *(u32 *)(e + 0x4) = 0x50000000;
+    *(u32 *)(e + 0x8) = 0;
+    *(u32 *)(e + 0xc) = -0x3c0;
+    *(u32 *)(e + 0x10) = -0x3c0;
+    *(u32 *)(e + 0x1c) = 0;
+    *(u32 *)(e + 0x14) = 0x40;
+    *(u32 *)(e + 0x18) = 0x7f;
+    *(u16 *)(e + 0x5c) = 0;
+    *(u16 *)(e + 0x58) = 0;
+    *(u16 *)(e + 0x54) = 0;
+    *(u16 *)(e + 0x50) = 0;
+    *(u16 *)(e + 0x4c) = 0;
+    *(u16 *)(e + 0x48) = 0;
+    *(u16 *)(e + 0x44) = 0;
+    *(u16 *)(e + 0x40) = 0;
+    *(u16 *)(e + 0x3c) = 0;
+    *(u16 *)(e + 0x38) = 0;
+    fn_8038489C(e);
+}
+
 s32 fn_803849D0(s32 arg0) {
     if (arg0 < 0) {
         return 0;
@@ -1640,9 +1686,9 @@ s32 fn_8038907C(s32 chan, void *out) {
     extern u8 lbl_804912A0[];
     s32 fn_8025465C(void);
     void fn_80254684(s32);
-    u8 *p;
-    s32 enabled;
     s32 result;
+    s32 enabled;
+    u8 *p;
 
     p = lbl_804912A0 + chan * 0x110;
     if (chan < 0 || chan >= 2 || *(u32 *)(p + 0x10c) == 0) {
@@ -1661,6 +1707,46 @@ s32 fn_8038907C(s32 chan, void *out) {
     }
     fn_80254684(enabled);
     return result;
+}
+
+s32 fn_80389134(void *card, s32 result) {
+    s32 fn_8025465C(void);
+    void fn_80254684(s32);
+    u8 *p = card;
+    s32 enabled;
+
+    enabled = fn_8025465C();
+    if (*(s32 *)(p + 0) != 0) {
+        *(s32 *)(p + 4) = result;
+    } else if (*(s32 *)(p + 4) == -1) {
+        *(s32 *)(p + 4) = result;
+    }
+    fn_80254684(enabled);
+    return result;
+}
+
+s32 fn_80389198(s32 chan) {
+    typedef struct { u8 pad[4]; s32 result; u8 pad2[0x110 - 8]; } Chan110;
+    extern Chan110 lbl_804912A0[];
+
+    if (chan < 0 || chan >= 2) {
+        return -128;
+    }
+    return lbl_804912A0[chan].result;
+}
+
+s32 fn_80389318(s32 chan, u16 *out) {
+    s32 fn_8038907C(s32, void *);
+    s32 fn_80389134(void *, s32);
+    u8 *card;
+    s32 result;
+
+    result = fn_8038907C(chan, &card);
+    if (result < 0) {
+        return result;
+    }
+    *out = *(u16 *)(*(u8 **)(card + 0x80) + 0x24);
+    return fn_80389134(card, 0);
 }
 
 s32 fn_80389540(s32 arg0) {
