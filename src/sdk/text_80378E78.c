@@ -1037,6 +1037,14 @@ void fn_80385948(void *arg0) {
     *(u32 *)(e + 0) = 0;
 }
 
+void fn_8038489C(void *);
+void fn_803859F4(void *arg0, u32 arg1) {
+    extern u8 lbl_8048FAA0[][0x60];
+    u8 *e = lbl_8048FAA0[M2C_FIELD(arg0, s32 *, 0x18)];
+    *(u32 *)(e + 8) = arg1;
+    *(u32 *)(e + 4) |= 0x10000000;
+}
+
 void fn_80385A1C(void *arg0, u32 arg1) {
     extern u8 lbl_8048FAA0[][0x60];
     u8 *e = lbl_8048FAA0[M2C_FIELD(arg0, s32 *, 0x18)];
