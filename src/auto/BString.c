@@ -2797,6 +2797,20 @@ s32 fn_800E25B0(s32 *self) {
     return *(s32 *)(self[2] + 0x94);
 }
 
+extern u8 lbl_8040C270[];
+extern f32 lbl_803D4C6C;
+s32 *fn_800E25BC(s32 *self, s32 a) {
+    self[0] = a;
+    self[1] = -1;
+    self[2] = 0;
+    self[3] = -1;
+    self[4] = 1;
+    self[5] = (s32)lbl_8040C270;
+    ((f32 *)self)[0x2c / 4] = lbl_803D4C6C;
+    ((f32 *)self)[0x30 / 4] = lbl_803D4C6C;
+    return self;
+}
+
 void fn_800E2600(s32 *self, s32 flags) {
     self[5] = (s32)lbl_804093F8;
     if (flags & 1) {
@@ -3070,6 +3084,10 @@ void fn_800E2B70(s32 *self, s32 flags) {
 
 s32 fn_800E2BA4(s32 *self) {
     return *(s32 *)(self[2] + 0x94);
+}
+
+void fn_800E2BB0(void) {
+    ((s32 *)lbl_8041F754)[0] = 3;
 }
 
 void fn_800E2FD8(void *arg0) {
