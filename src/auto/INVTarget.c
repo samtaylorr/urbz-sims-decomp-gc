@@ -2444,6 +2444,14 @@ f32 fn_801EA760(s32 arg0) {
     return t;
 }
 
+void fn_801EA898(s32 arg0) {
+    void (*cb)(f32) = *(void (**)(f32))(arg0 + 0xA8);
+    if (cb != NULL) {
+        *(s32 *)(arg0 + 0x88) -= 1;
+        cb(*(f32 *)(arg0 + 0xA4));
+    }
+}
+
 void fn_801EFE08(char *self, char *name, void *arg2) {
     s32 fn_801F0834(char *);
     s32 i;
