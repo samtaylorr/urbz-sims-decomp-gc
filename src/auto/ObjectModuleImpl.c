@@ -784,10 +784,18 @@ void fn_80152270(void *arg0, void *arg1, void **arg2) {
     void *fn_8015125C(void *, s32);
     void *tmp;
 
-    tmp = *arg2 != NULL ? *(void **)*arg2 : *arg2;
+    if (*arg2 != NULL) {
+        tmp = *(void **)*arg2;
+    } else {
+        tmp = *arg2;
+    }
     M2C_FIELD(*(void **)arg0, void (**)(void *, void *, void **), 0x1C4)((char *)arg0 + M2C_FIELD(*(void **)arg0, s16 *, 0x1C0), arg1, &tmp);
     if (M2C_FIELD(arg1, s32 *, 0xC) == 0) {
-        *arg2 = tmp != NULL ? fn_8015125C(*M2C_FIELD(tmp, void ***, 4), 7) : tmp;
+        if (tmp != NULL) {
+            *arg2 = fn_8015125C(*M2C_FIELD(tmp, void ***, 4), 7);
+        } else {
+            *arg2 = tmp;
+        }
     }
 }
 
