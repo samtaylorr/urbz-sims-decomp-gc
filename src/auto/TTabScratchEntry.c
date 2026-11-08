@@ -1391,12 +1391,10 @@ s32 fn_801A0E54(void *self, s32 arg1) {
     s32 i;
 
     if (*(s32 *)self != 0) {
-        for (i = 1;; i <<= 1) {
-            if (fn_801A08DC(self, i)) {
-                fn_801A0780(i);
-                return i;
-            }
+        for (i = 1; !fn_801A08DC(self, i); i <<= 1) {
         }
+        fn_801A0780(i);
+        return i;
     }
     return 0;
 }
