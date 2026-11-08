@@ -418,11 +418,14 @@ s32 fn_801501D0(void *self, s32 arg1, s32 arg2, void *obj, s32 arg4) {
 }
 
 s32 fn_80150238(void *self, s32 arg1, s32 arg2, s32 arg3, void *obj) {
+    s32 result;
     if (arg1 != -1) {
         u8 *vt = M2C_FIELD(obj, u8 **, 0);
-        return (*(s32 (**)(void *))(vt + 0x44))((u8 *)obj + *(s16 *)(vt + 0x40));
+        result = (*(s32 (**)(void *))(vt + 0x44))((u8 *)obj + *(s16 *)(vt + 0x40));
+    } else {
+        result = 0;
     }
-    return 0;
+    return result;
 }
 
 s32 fn_801506AC(void) {
