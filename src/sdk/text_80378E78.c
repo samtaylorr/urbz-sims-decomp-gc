@@ -2332,6 +2332,62 @@ s32 fn_80388234(s32 chan) {
     return err ? -3 : 0;
 }
 
+void fn_80388438(void *alarm, void *context) {
+    void fn_8025BD6C(s32, s32);
+    extern u8 lbl_804912A0[];
+    s32 chan;
+    u8 *card;
+    void (*callback)(s32, s32);
+
+    for (chan = 0; chan < 2; chan++) {
+        card = lbl_804912A0 + chan * 0x110;
+        if (alarm == card + 0xE0) {
+            break;
+        }
+    }
+    if (*(s32 *)card != 0) {
+        fn_8025BD6C(chan, 0);
+        callback = *(void (**)(s32, s32))(card + 0xCC);
+        if (callback != 0) {
+            *(void (**)(s32, s32))(card + 0xCC) = 0;
+            callback(chan, -5);
+        }
+    }
+}
+
+void fn_80388ED8(void) {
+    u16 fn_803798D8(void);
+    void OSRegisterVersion(const char *);
+    void fn_803870C4(void);
+    void fn_80250F6C(void);
+    void fn_80258534(void *);
+    void fn_80250FC4(void *);
+    void fn_80388FB4(u32);
+    void OSRegisterResetFunction(void *);
+    extern u8 lbl_804912A0[];
+    extern u16 lbl_804964A0;
+    extern const char *lbl_80495658;
+    extern u8 lbl_80406748[];
+    s32 chan;
+    u8 *card;
+
+    if (*(u32 *)(lbl_804912A0 + 0x10C) != 0 && *(u32 *)(lbl_804912A0 + 0x110 + 0x10C) != 0) {
+        return;
+    }
+    lbl_804964A0 = fn_803798D8();
+    OSRegisterVersion(lbl_80495658);
+    fn_803870C4();
+    fn_80250F6C();
+    for (chan = 0; chan < 2; chan++) {
+        card = lbl_804912A0 + chan * 0x110;
+        *(s32 *)(card + 4) = -3;
+        fn_80258534(card + 0x8C);
+        fn_80250FC4(card + 0xE0);
+    }
+    fn_80388FB4(0x80000000);
+    OSRegisterResetFunction(lbl_80406748);
+}
+
 u16 fn_80388F84(void) {
     extern u16 lbl_804964A0;
     return lbl_804964A0;
@@ -2444,6 +2500,29 @@ s32 fn_80389318(s32 chan, u16 *out) {
     return fn_80389134(card, 0);
 }
 
+s32 fn_803893A0(s32 chan, u16 *out) {
+    s32 fn_8038907C(s32, void *);
+    s32 fn_8025465C(void);
+    void fn_80254684(s32);
+    s32 *card;
+    s32 result;
+    s32 enabled;
+
+    result = fn_8038907C(chan, &card);
+    if (result < 0) {
+        return result;
+    }
+    *out = *(u16 *)((u8 *)card + 8);
+    enabled = fn_8025465C();
+    if (card[0] != 0) {
+        card[1] = 0;
+    } else if (card[1] == -1) {
+        card[1] = 0;
+    }
+    fn_80254684(enabled);
+    return 0;
+}
+
 s32 fn_80389424(s32 chan, u32 *size) {
     s32 fn_8038907C(s32, void *);
     s32 *card;
@@ -2455,6 +2534,24 @@ s32 fn_80389424(s32 chan, u32 *size) {
     }
     *size = card[0xc / 4];
     return fn_80389134(card, 0);
+}
+
+s32 fn_803894A8(s32 chan) {
+    s32 fn_8025465C(void);
+    void fn_80254684(s32);
+    void fn_8025974C(void *);
+    extern u8 lbl_804912A0[];
+    u8 *card;
+    s32 enabled;
+    s32 result;
+
+    card = lbl_804912A0 + chan * 0x110;
+    enabled = fn_8025465C();
+    while ((result = (chan < 0 || chan >= 2) ? -128 : *(s32 *)(card + 4)) == -1) {
+        fn_8025974C(card + 0x8C);
+    }
+    fn_80254684(enabled);
+    return result;
 }
 
 s32 fn_80389540(s32 arg0) {
