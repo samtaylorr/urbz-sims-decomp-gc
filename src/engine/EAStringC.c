@@ -2193,6 +2193,14 @@ void fn_802ACD08(void *arg0, s32 arg1) {
     }
 }
 
+static inline void fn_802ACD80_base(void *self, s32 type, void *vt, s32 n) {
+    extern void fn_802B6FA8(void *, s32);
+    extern void fn_802ADDD8(void *, s32);
+    fn_802B6FA8(self, type);
+    M2C_FIELD(self, void **, 4) = vt;
+    fn_802ADDD8((u8 *)self + 8, n);
+}
+
 void *fn_802ACD80(void *arg0) {
     extern char lbl_80418970[];
     extern void fn_802B6FA8(void *, s32);
@@ -5127,13 +5135,12 @@ void **fn_802BD1F8(void **self) {
     len = ((struct Buf *)*self)->len;
     fn_802BE3D0(self, len, 0, len, 1, len);
     p = ((struct Buf *)*self)->data;
-    for (i = 0; i < len; i++) {
+    for (i = 0; i < len; i++, p++) {
         s32 ch = *p;
         if (ch[lbl_803EBA39] & 2) {
             ch -= 0x20;
             *p = ch;
         }
-        p++;
     }
     return self;
 }
