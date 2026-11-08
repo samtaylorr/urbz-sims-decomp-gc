@@ -67,12 +67,14 @@ void fn_80291DEC(void *arg0, s32 arg1) {
     void fn_802AF1CC(s32, void *);
     void fn_80291DA0(void *, s32);
     void fn_802AF050(s32);
-    AptMtx23 m;
     void *p;
+    AptMtx23 m;
 
+    p = M2C_FIELD(arg0, void **, 0x4C);
     m = lbl_804445F0;
-    for (p = M2C_FIELD(arg0, void **, 0x4C); p != NULL; p = M2C_FIELD(p, void **, 0x4C)) {
+    while (p != NULL) {
         fn_802AF0D0(&m, (char *)p + 0x10, &m);
+        p = M2C_FIELD(p, void **, 0x4C);
     }
     fn_802AF000(lbl_8049613C);
     fn_802AF1CC(lbl_8049613C, &m);
