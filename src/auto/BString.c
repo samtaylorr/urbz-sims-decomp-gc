@@ -1004,9 +1004,9 @@ void fn_800D4818(void) {
 
 void fn_800D481C(s32 *self) {
     s32 *g = (s32 *)lbl_8041F754;
-    self[0x18 / 4] = 0;
-    self[0x1c / 4] = 0;
     self[0x20 / 4] = 0;
+    self[0x1c / 4] = 0;
+    self[0x18 / 4] = 0;
     g[0xa0 / 4] = 0;
 }
 
@@ -2317,18 +2317,18 @@ void fn_800DFFE4(void *arg0) {
 }
 
 void fn_800DFFF4(s32 *self) {
-    char *obj;
-    char *vt;
+    register char *b asm("r11");
+    register char *obj asm("r10");
+    register char *vt asm("r9");
     switch (self[6]) {
     case 7:
         break;
-    case 9: {
-        char *b = (char *)self[2];
+    case 9:
+        b = (char *)self[2];
         obj = M2C_FIELD(b, char **, 0x94);
         vt = M2C_FIELD(obj, char **, 0x44);
         M2C_FIELD(vt, void (**)(void *), 0x1C)(obj + M2C_FIELD(vt, s16 *, 0x18));
         break;
-    }
     }
 }
 
@@ -2337,10 +2337,11 @@ void fn_800E023C(void *arg0) {
 }
 
 void fn_800E0248(s32 *self) {
-    char *obj;
-    char *vt;
+    register char *b asm("r11");
+    register char *obj asm("r10");
+    register char *vt asm("r9");
     if ((u32)(self[6] - 1) <= 1) {
-        char *b = (char *)self[2];
+        b = (char *)self[2];
         obj = M2C_FIELD(b, char **, 0x94);
         vt = M2C_FIELD(obj, char **, 0x44);
         M2C_FIELD(vt, void (**)(void *), 0x1C)(obj + M2C_FIELD(vt, s16 *, 0x18));
@@ -2380,9 +2381,11 @@ void fn_800E0814(void *arg0) {
 
 void fn_800E0828(s32 *self) {
     char *obj;
-    if ((u32)(self[6] - 8) <= 1) {
+    char *vt;
+    if (self[6] == 8 || self[6] == 9) {
         obj = M2C_FIELD(self[2], char **, 0x94);
-        M2C_FIELD(M2C_FIELD(obj, char **, 0x44), void (**)(void *), 0x1C)(obj + M2C_FIELD(M2C_FIELD(obj, char **, 0x44), s16 *, 0x18));
+        vt = M2C_FIELD(obj, char **, 0x44);
+        (*(void (**)(void *))(vt + 0x1C))(obj + *(s16 *)(vt + 0x18));
     }
 }
 
