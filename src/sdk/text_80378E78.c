@@ -28,6 +28,21 @@ s32 fn_8037AD2C(s32 *self) {
     return *self;
 }
 
+void fn_8037AD34(void *arg0) {
+    M2C_FIELD(arg0, f32 *, 0) = 1.0f;
+    M2C_FIELD(arg0, f32 *, 4) = 0.0f;
+    M2C_FIELD(arg0, f32 *, 8) = 0.0f;
+    M2C_FIELD(arg0, f32 *, 0xC) = 0.0f;
+    M2C_FIELD(arg0, f32 *, 0x10) = 0.0f;
+    M2C_FIELD(arg0, f32 *, 0x14) = 1.0f;
+    M2C_FIELD(arg0, f32 *, 0x18) = 0.0f;
+    M2C_FIELD(arg0, f32 *, 0x1C) = 0.0f;
+    M2C_FIELD(arg0, f32 *, 0x20) = 0.0f;
+    M2C_FIELD(arg0, f32 *, 0x24) = 0.0f;
+    M2C_FIELD(arg0, f32 *, 0x28) = 1.0f;
+    M2C_FIELD(arg0, f32 *, 0x2C) = 0.0f;
+}
+
 void fn_8037AD9C(void *arg0, void *arg1) {
     if (arg0 != arg1) {
         M2C_FIELD(arg1, f32 *, 0) = (f32) M2C_FIELD(arg0, f32 *, 0);
@@ -2012,11 +2027,8 @@ void fn_8038DEBC(s32 arg0) {
 u32 fn_8038E45C(void) {
     extern s32 lbl_80495668;
     s32 fn_8025A3F4(void);
-    u32 base;
     lbl_80495668 = fn_8025A3F4();
-    base = 0x7FEC8000;
-    lbl_80495668 = lbl_80495668 * 0x41C64E6D + 0x3039;
-    return (base | ((lbl_80495668 >> 16) & 0x7FFF)) & ~0xFFF;
+    return (u32)((u8 *)0x7FEC8000 + fn_8038DE98()) & ~0xFFF;
 }
 
 s32 fn_8038F53C(s32 chan, u32 addr, u32 length, void *dst, void *callback) {
