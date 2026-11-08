@@ -1380,6 +1380,20 @@ void fn_801A0E48(s32 *arg0) {
     *arg0 = 0;
 }
 
+s32 fn_801A0E54(void *self, s32 arg1) {
+    M2C_UNK fn_801A0780(s32);
+    M2C_UNK fn_801A08DC(s32 *, s32);
+    s32 i;
+
+    if (*(s32 *)self == 0) {
+        return 0;
+    }
+    for (i = 1; !fn_801A08DC(self, i); i <<= 1) {
+    }
+    fn_801A0780(i);
+    return i;
+}
+
 u16 fn_801A0F3C(void *arg0, u16 arg1, s32 arg2) {
     u16 var_r0;
 
@@ -1439,7 +1453,7 @@ s32 fn_801A1028(s32 year, s32 month, s32 day) {
 }
 
 s32 *fn_801A10A8(s32 *self, s32 arg1) {
-    struct { s32 a, b, c, d; } tmp;
+    struct { s32 a, b; } tmp;
     ScratchVec_Init(self + 2);
     self[6] = arg1;
     self[0] = 0;
@@ -2314,7 +2328,8 @@ void fn_801AB0F0(void *arg0) {
         return;
     }
     if (i >= 0 && (u32)i < (u32)((M2C_FIELD(arg0, s32 *, 4) - M2C_FIELD(arg0, s32 *, 0)) >> 4)) {
-        *(s32 *)(M2C_FIELD(arg0, s32 *, 0) + (i * 0x10) + 8) = 0;
+        s32 off = i * 0x10;
+        *(s32 *)(M2C_FIELD(arg0, s32 *, 0) + off + 8) = 0;
     }
     M2C_FIELD(arg0, s32 *, 0x54) = -1;
     M2C_FIELD(arg0, s32 *, 0x58) = -1;
