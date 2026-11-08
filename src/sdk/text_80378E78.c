@@ -726,15 +726,13 @@ void fn_803822AC(s32 arg0) {
 
 void fn_803822B4(void) {
     extern u32 lbl_804963E8;
-    extern s64 lbl_804963F0;
+    extern volatile s64 lbl_804963F0;
     s64 fn_8025A3DC(void);
     void fn_8038202C(u32);
-    u32 d;
 
     if (lbl_804963E8 == 2) {
         lbl_804963E8 = 0;
-        d = (u32)(fn_8025A3DC() - lbl_804963F0) / 4;
-        fn_8038202C(d);
+        fn_8038202C((u32)(fn_8025A3DC() - lbl_804963F0) / 4);
     } else {
         lbl_804963E8 = 1;
     }
