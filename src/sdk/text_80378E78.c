@@ -637,9 +637,11 @@ void fn_8038138C(void *arg0, u32 idx) {
     } QNode_;
     extern QNode_ *lbl_804763C0[32];
     extern QNode_ *lbl_80476440[32];
-    QNode_ *node = arg0;
-    s32 enabled = fn_8025465C();
+    s32 enabled;
+    QNode_ *node;
 
+    enabled = fn_8025465C();
+    node = arg0;
     fn_8038103C(node);
     node->next = lbl_804763C0[idx];
     node->prev = NULL;
@@ -1127,6 +1129,20 @@ s32 fn_8038742C(void) {
     return (s32)lbl_80496498;
 }
 
+void fn_80387C24(DSPTaskInfo *task) {
+    if (lbl_80496490 == NULL) {
+        lbl_80496494 = lbl_80496490 = lbl_80496498 = task;
+        task->next = task->prev = NULL;
+    } else {
+        lbl_80496490->next = task;
+        task->next = NULL;
+        task->prev = lbl_80496490;
+        lbl_80496490 = task;
+    }
+    task->state = 0;
+    fn_803873DC("__DSP_add_task() : Added task    : 0x%08X\n", task);
+}
+
 void fn_80387D30(void) {
 
 }
@@ -1134,6 +1150,12 @@ void fn_80387D30(void) {
 u16 fn_80388F84(void) {
     extern u16 lbl_804964A0;
     return lbl_804964A0;
+}
+
+void fn_80388FB4(u8 *p) {
+    extern u8 lbl_804912A0[];
+    *(u8 **)(lbl_804912A0 + 0x10c) = p ? p : lbl_804912A0 + 0x220;
+    *(u8 **)(lbl_804912A0 + 0x21c) = p ? p : lbl_804912A0 + 0x220;
 }
 
 u32 fn_80388FEC(s32 chan) {
@@ -1501,6 +1523,11 @@ s32 fn_8038DE10(s32 arg0) {
 extern s32 lbl_80495668;
 void fn_8038DEBC(s32 arg0) {
     lbl_80495668 = arg0;
+}
+
+s32 fn_8038F6E0(s32 chan) {
+    extern u8 lbl_804912A0[];
+    return M2C_FIELD(lbl_804912A0 + chan * 0x110, s32 *, 0xB8);
 }
 
 s32 fn_8038FA38(s32 chan, s32 arg1, s32 arg2) {
