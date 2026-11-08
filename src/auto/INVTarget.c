@@ -2798,6 +2798,16 @@ void fn_801F788C(s32 arg0, u8 *arg1) {
     fn_801F78F0(arg0, var_r30, var_r31);
 }
 
+void fn_801F8274(void *arg0) {
+    void fn_8000AA68(s32, void *, s32, s32, s32, ...);
+    extern s32 lbl_804956BC;
+    extern char lbl_803E48A0[];
+    if (!(fn_801F55E0(M2C_FIELD(arg0, u8 *, 0xEF)) & 1) && M2C_FIELD(arg0, s32 *, 0xE8) != 0 &&
+        M2C_FIELD(arg0, u8 *, 0xEC) == 2) {
+        fn_8000AA68(lbl_804956BC, lbl_803E48A0, 0, 0, 0);
+    }
+}
+
 void fn_801F83BC(void) {
 
 }
