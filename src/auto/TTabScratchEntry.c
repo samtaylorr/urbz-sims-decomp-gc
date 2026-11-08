@@ -1775,6 +1775,7 @@ s32 fn_801A0008(void *self, s32 arg1) {
 s32 fn_801A0078(void *self, s32 val, s32 arg2) {
     M2C_UNK fn_801A0780(s32);
     M2C_UNK fn_801A08DC(void *, s32);
+    s32 fn_801A0690(s32, s32);
     s32 i;
 
     fn_801A08DC(self, arg2);
