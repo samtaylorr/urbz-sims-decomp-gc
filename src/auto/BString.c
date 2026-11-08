@@ -2075,10 +2075,14 @@ void fn_800DE03C(void *arg0) {
 }
 
 void fn_800DE14C(s32 *self) {
-    char *obj;
-    if ((u32)(self[6] - 3) <= 1) {
-        obj = *(char **)((char *)self[2] + 0x94);
-        (*(void (**)(void *))(*(char **)(obj + 0x44) + 0x1C))(obj + *(s16 *)(*(char **)(obj + 0x44) + 0x18));
+    switch (self[6]) {
+    case 3:
+    case 4: {
+        char *obj = *(char **)((char *)self[2] + 0x94);
+        char *vt = *(char **)(obj + 0x44);
+        (*(void (**)(void *))(vt + 0x1C))(obj + *(s16 *)(vt + 0x18));
+        break;
+    }
     }
 }
 
@@ -2137,12 +2141,10 @@ void fn_800DED78(void *arg0) {
 }
 
 void fn_800DED90(s32 *self) {
-    char *vt;
     char *obj;
     if ((u32)(self[6] - 9) <= 2) {
         obj = M2C_FIELD(self[2], char **, 0x94);
-        vt = M2C_FIELD(obj, char **, 0x44);
-        M2C_FIELD(vt, void (**)(void *), 0x1C)(obj + M2C_FIELD(vt, s16 *, 0x18));
+        M2C_FIELD(M2C_FIELD(obj, char **, 0x44), void (**)(void *), 0x1C)(obj + M2C_FIELD(M2C_FIELD(obj, char **, 0x44), s16 *, 0x18));
     }
 }
 
