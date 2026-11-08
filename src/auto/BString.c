@@ -1002,14 +1002,12 @@ void fn_800D4818(void) {
 }
 
 void fn_800D481C(s32 *self) {
-    s32 *g = (s32 *)lbl_8041F754;
-    s32 zero = 0;
-    self[0x1c / 4] = zero;
-    self[0x20 / 4] = zero;
-    self[0x18 / 4] = zero;
-    g[0xa0 / 4] = zero;
-    if (g[0]) {
-    }
+    s32 *g;
+    self[0x1c / 4] = 0;
+    self[0x20 / 4] = 0;
+    self[0x18 / 4] = 0;
+    g = (s32 *)&lbl_8041F754;
+    g[0xa0 / 4] = 0;
 }
 
 void fn_800D4914(void) {
