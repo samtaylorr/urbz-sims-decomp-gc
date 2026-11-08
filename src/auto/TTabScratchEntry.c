@@ -372,6 +372,10 @@ void fn_8019B688(void *self, TTabBlk20 *out) {
     *out = *(TTabBlk20 *)((u8 *)self + 0x15c);
 }
 
+void fn_8019B6E4(void *self, s32 idx, TTabBlk20 *out) {
+    *out = ((TTabBlk20 *)((u8 *)self + 0xbc))[idx];
+}
+
 s32 fn_8019B83C(void *self, s32 arg1, u16 **out) {
     if ((u16)arg1 > 0x2f) {
     fail:
