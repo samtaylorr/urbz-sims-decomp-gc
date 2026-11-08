@@ -2110,22 +2110,22 @@ void fn_802AED48(u32 seed) {
 extern f32 lbl_803EDBB8[];
 extern f32 lbl_803EDBBC[];
 void *fn_802AED88(f32 *m) {
-    f32 zero = lbl_803EDBB8[0];
     f32 one = lbl_803EDBBC[0];
-    m[4] = one;
-    m[5] = one;
-    m[6] = one;
-    m[7] = one;
-    m[9] = one;
-    m[10] = one;
-    m[12] = one;
-    m[13] = one;
+    f32 zero = lbl_803EDBB8[0];
     m[0] = zero;
     m[1] = zero;
     m[2] = zero;
     m[3] = zero;
+    m[4] = one;
+    m[5] = one;
+    m[6] = one;
+    m[7] = one;
     m[8] = zero;
+    m[9] = one;
+    m[10] = one;
     m[11] = zero;
+    m[12] = one;
+    m[13] = one;
     M2C_FIELD(m, s32 *, 0x3B8) = 0;
     M2C_FIELD(m, s32 *, 0x3BC) = 0;
     return m;
@@ -2137,6 +2137,15 @@ void fn_802AEDE4(u8 *self) {
     s32 n = *depth;
     ((AptXform *)(self + 0x38))[n++] = *(AptXform *)self;
     *depth = n;
+}
+
+void fn_802AF340(s32 n) {
+    extern s32 lbl_803EDC30[];
+    extern void fn_80378278(void *, ...);
+    while (n != 0) {
+        fn_80378278(lbl_803EDC30);
+        n--;
+    }
 }
 
 void fn_802AF384(void *arg0, f32 farg0, f32 farg1) {
