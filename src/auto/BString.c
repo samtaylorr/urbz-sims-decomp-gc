@@ -3583,6 +3583,31 @@ void fn_800E3BB0(void *arg0) {
     M2C_FIELD(M2C_FIELD(arg0, void **, 8), s32 *, 0x8C) = 0;
 }
 
+void fn_800E3D4C(void *self) {
+    void fn_800E4560(void *);
+    if (M2C_FIELD(self, s32 *, 0x90) != 0) {
+        fn_800E4560((u8 *)self + 0x38);
+    }
+}
+
+void fn_800E3D7C(void *self) {
+    extern s32 lbl_8041F7B4;
+    void fn_800E45A0(void *);
+    if (lbl_8041F7B4 != 0 && M2C_FIELD(self, s32 *, 0x90) != 0) {
+        fn_800E45A0((u8 *)self + 0x38);
+    }
+}
+
+void fn_800E3DBC(s32 self, s32 id, f32 time) {
+    s32 fn_800E4174();
+    s32 p = fn_800E4174(self, id);
+    if (p != 0) {
+        u8 *q = (u8 *)self + 0x38;
+        M2C_FIELD(q, f32 *, 0x10) = time;
+        M2C_FIELD(q, s32 *, 0x4) = p;
+    }
+}
+
 void fn_800E3E08(s32 self) {
     s32 fn_800E4174(s32);
     s32 p = fn_800E4174(self);
