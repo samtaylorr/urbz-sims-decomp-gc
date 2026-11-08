@@ -155,14 +155,20 @@ void *fn_8014B0E0(void *arg0, void *arg1) {
     s32 fn_8016CC2C(void *, void *);
     s32 id;
     void *it;
+    s32 ok;
 
     it = NULL;
     id = M2C_FIELD(M2C_FIELD(arg1, void **, 0x38), s16 *, 0x14);
     if (id != 0) {
         while ((it = M2C_FIELD(*(void **)arg0, void *(**)(void *, void *), 0x7C)((char *)arg0 + M2C_FIELD(*(void **)arg0, s16 *, 0x78), it)) != NULL) {
-            if (fn_8016CC2C(it, arg1) != 0 && M2C_FIELD(M2C_FIELD(it, void **, 0x38), s16 *, 0x14) == id &&
-                (M2C_FIELD(M2C_FIELD(it, void **, 0x38), s16 *, 0x14) != 0 && M2C_FIELD(M2C_FIELD(it, void **, 0x38), s16 *, 0x16) == -1)) {
-                return it;
+            if (fn_8016CC2C(it, arg1) != 0 && M2C_FIELD(M2C_FIELD(it, void **, 0x38), s16 *, 0x14) == id) {
+                ok = 0;
+                if (M2C_FIELD(M2C_FIELD(it, void **, 0x38), s16 *, 0x14) != 0) {
+                    ok = M2C_FIELD(M2C_FIELD(it, void **, 0x38), s16 *, 0x16) == -1;
+                }
+                if (ok != 0) {
+                    return it;
+                }
             }
         }
     }
@@ -1163,8 +1169,14 @@ void *fn_801658B8(void **self) {
 s64 fn_80165DA8(char *self, char *arg1, s16 *arg2) {
     extern void *lbl_80496644;
     extern void fn_8010CBA8(void *, s32);
+    s16 v;
 
-    fn_8010CBA8(lbl_80496644, *arg2 != 0 ? M2C_FIELD(arg1, s16 *, 4) : M2C_FIELD(self, s16 *, 0x64));
+    if (*arg2 != 0) {
+        v = M2C_FIELD(arg1, s16 *, 4);
+    } else {
+        v = M2C_FIELD(self, s16 *, 0x64);
+    }
+    fn_8010CBA8(lbl_80496644, v);
     return 1;
 }
 
