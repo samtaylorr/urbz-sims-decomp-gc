@@ -1725,13 +1725,14 @@ s32 fn_80389134(s32 *card, s32 result) {
 }
 
 s32 fn_80389198(s32 chan) {
-    typedef struct { u8 pad[4]; s32 result; u8 pad2[0x110 - 8]; } Chan110;
-    extern Chan110 lbl_804912A0[];
+    extern u8 lbl_804912A0[];
+    u8 *p;
 
     if (chan < 0 || chan >= 2) {
         return -128;
     }
-    return lbl_804912A0[chan].result;
+    p = lbl_804912A0 + chan * 0x110;
+    return *(s32 *)(p + 4);
 }
 
 s32 fn_80389318(s32 chan, u16 *out) {
@@ -2174,6 +2175,27 @@ u32 fn_8038E45C(void) {
     lbl_80495668 = lbl_80495668 * 0x41C64E6D + 0x3039;
     r = (lbl_80495668 >> 16) & 0x7FFF;
     return (r | 0x7FEC8000) & 0xFFFFF000;
+}
+
+void fn_8038F0CC(void *alarm) {
+    extern u8 lbl_804912A0[];
+    u8 *p;
+    s32 chan;
+    u32 mail;
+
+    for (chan = 0; chan < 2; chan++) {
+        p = lbl_804912A0 + chan * 0x110;
+        if (alarm == p + 0x30) {
+            break;
+        }
+    }
+    mail = *(u32 *)(p + 0x80);
+    fn_80387070(0xFF000000);
+    while (fn_80387024()) {
+    }
+    fn_80387070(mail);
+    while (fn_80387024()) {
+    }
 }
 
 s32 fn_8038F53C(s32 chan, u32 addr, u32 length, void *dst, void *callback) {
