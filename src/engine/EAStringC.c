@@ -270,6 +270,35 @@ s32 fn_80292E88(s32 arg0) {
     return lbl_80496130;
 }
 
+s32 fn_802941FC(void *arg0) {
+    extern s32 fn_802B70DC(void *);
+    extern s32 fn_802B72D4(void *);
+    s32 found;
+    s32 ok;
+    s32 ok2;
+
+    found = 0;
+    ok = 0;
+    if (fn_802B70DC(arg0) == 0xD) {
+        ok = fn_802B72D4(arg0) == 0;
+    }
+    if (ok) {
+        found = 1;
+    } else {
+        ok2 = 0;
+        if (fn_802B70DC(arg0) == 0x12) {
+            ok2 = fn_802B72D4(arg0) == 0;
+        }
+        if (ok2) {
+            found = 1;
+        }
+    }
+    if (found != 0) {
+        *(s32 *)(*(s32 *)((char *)arg0 + 0x50) + 0x1c) &= ~0x40;
+    }
+    return lbl_80496130;
+}
+
 s32 fn_8029429C(void *arg0) {
     extern s32 fn_802B70DC(void *);
     extern s32 fn_802B72D4(void *);
@@ -2793,10 +2822,10 @@ void fn_802B3A74(u8 *self) {
     extern void fn_803B6F48(void *);
     extern void fn_803B6FFC(void *, void *);
     extern void fn_803B6F94(void *, s32);
-    s32 tmp[2];
-    fn_803B6F48(tmp);
-    fn_803B6FFC(self + 8, tmp);
-    fn_803B6F94(tmp, 2);
+    void *volatile tmp;
+    fn_803B6F48((void *)&tmp);
+    fn_803B6FFC(self + 8, (void *)&tmp);
+    fn_803B6F94((void *)&tmp, 2);
 }
 
 void fn_802BC17C();
