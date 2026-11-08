@@ -5192,6 +5192,18 @@ s32 fn_80229F5C(void *arg0) {
     return (s32) ((M2C_FIELD(arg0, s32 *, 0x70) - M2C_FIELD(arg0, s32 *, 0x6C)) * 0xB6DB6DB7) >> 3;
 }
 
+s32 fn_8022B50C(s32 arg0) {
+    extern s32 fn_80225508(void);
+    extern void *fn_80225458(s32, s32, s32);
+    extern s32 fn_8008C46C(void *, s32);
+    s32 ret = 0;
+    u8 *p = fn_80225458(fn_80225508(), arg0, 0);
+    if (p != 0) {
+        ret = fn_8008C46C(p + 0x5C, arg0);
+    }
+    return ret;
+}
+
 s32 fn_8022B564(u32 arg0) {
     extern s32 lbl_804966A4[];
     s32 ret = 0;
