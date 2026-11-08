@@ -1373,6 +1373,20 @@ s32 fn_801A09E0(void *arg0) {
     return 0;
 }
 
+s32 fn_801A0D90(s32 *self, s32 arg1) {
+    M2C_UNK fn_801A0780(s32);
+    M2C_UNK fn_801A0378(s32 *, s32);
+
+    fn_801A0780(arg1);
+    fn_801A0378(self, arg1);
+    *self |= arg1;
+    if (arg1 == 0x10 || arg1 == 0x20) {
+        M2C_FIELD(self, u16 *, 8) = 0;
+        M2C_FIELD(self, u16 *, 0x14) = 0;
+    }
+    return arg1;
+}
+
 void fn_801A0DFC(s32 *arg0, s32 arg1) {
     M2C_UNK fn_801A0780(s32);
     M2C_UNK fn_801A08DC(s32 *, s32);
@@ -1637,7 +1651,7 @@ void fn_801A2F5C(u16 *p, s16 v) {
     if (v == -1) {
         *p = v;
     } else {
-        *p = v | (*p & 0x8000);
+        *p = v | (*p & ~0x7FFF);
     }
 }
 
