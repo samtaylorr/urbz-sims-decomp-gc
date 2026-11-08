@@ -950,6 +950,14 @@ s32 fn_80387188(void) {
     return lbl_80496470;
 }
 
+void fn_80387190(void) {
+    s32 enabled = fn_8025465C();
+    u16 tmp = __DSPRegs[5];
+    __DSPRegs[5] = (tmp & ~0xA8) | 0x801;
+    lbl_80496470 = 0;
+    fn_80254684(enabled);
+}
+
 void fn_803871D8(void) {
     s32 enabled = fn_8025465C();
     u16 tmp = __DSPRegs[5];
