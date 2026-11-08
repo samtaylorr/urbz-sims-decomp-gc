@@ -58,14 +58,14 @@ void fn_8029030C(s32 *arg0, void *arg1, s32 arg2, s32 arg3) {
     extern void fn_802AF000(void *);
     extern void fn_802AF1CC(void *, s32);
     extern void fn_802AF050(void *);
-    extern void (*lbl_80443390)(s32, s32);
+    extern void (*lbl_80443390[])(s32, s32);
 
     if (arg3 != 0) {
         fn_802AF000(arg1);
         fn_802AF1CC(arg1, arg3);
     }
     if (arg0[0] == 1) {
-        lbl_80443390(arg0[6], arg2);
+        lbl_80443390[0](arg0[6], arg2);
     }
     if (arg3 != 0) {
         fn_802AF050(arg1);
