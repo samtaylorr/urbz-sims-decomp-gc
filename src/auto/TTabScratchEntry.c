@@ -352,7 +352,8 @@ void fn_8019CA88(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
 }
 
 void fn_8019CAF0(void *arg0, s32 arg1, s32 arg2) {
-    ((s32 *)((u8 *)arg0 + 0x10))[arg1] = arg2;
+    struct { u8 pad[0x10]; s32 a[1]; } *p = arg0;
+    p->a[arg1] = arg2;
 }
 
 extern u8 lbl_80414750[];
