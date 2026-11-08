@@ -1178,6 +1178,15 @@ s32 fn_8038DAA4(s32 chan, s32 arg1, s32 arg2) {
     return fn_803894A8(chan);
 }
 
+u16 fn_8038DAEC(u16 arg0) {
+    extern u16 lbl_80495660;
+    u16 old;
+
+    old = lbl_80495660;
+    lbl_80495660 = arg0;
+    return old;
+}
+
 u16 fn_8038DAFC(void) {
     extern u16 lbl_80495660;
     return lbl_80495660;
