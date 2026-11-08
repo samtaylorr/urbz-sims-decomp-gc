@@ -539,9 +539,9 @@ void fn_8019CF2C(void *self, s32 arg1) {
     u8 *obj;
     u8 *vt;
     M2C_FIELD(self, s32 *, 0x28) = arg1;
-    M2C_FIELD(self, s32 *, 0x30) = 0;
-    M2C_FIELD(self, s32 *, 0x2C) = 1;
     M2C_FIELD(self, s32 *, 0x18) = -1;
+    M2C_FIELD(self, s32 *, 0x2C) = 1;
+    M2C_FIELD(self, s32 *, 0x30) = 0;
     M2C_FIELD(self, s32 *, 0x34) = 1;
     obj = lbl_80496660;
     vt = *(u8 **)(obj + 0x3A4);
