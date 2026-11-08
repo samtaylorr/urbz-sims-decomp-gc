@@ -1305,6 +1305,23 @@ void fn_8038230C(void) {
     fn_80259838(&lbl_80496408);
 }
 
+void fn_803827A4(void) {
+    extern s32 lbl_804963F8;
+    extern u8 lbl_8047E1C0[];
+    extern M2C_UNK lbl_80496408;
+    void *fn_803872D4(void *);
+    void fn_8025974C(M2C_UNK *);
+    void fn_8026BBDC(void);
+    s32 level;
+
+    level = fn_8025465C();
+    lbl_804963F8 = 0;
+    fn_803872D4(lbl_8047E1C0);
+    fn_8025974C(&lbl_80496408);
+    fn_8026BBDC();
+    fn_80254684(level);
+}
+
 s32 fn_803827FC(s32 arg0) {
     extern s32 lbl_804963F8;
     s32 temp_r31;
@@ -2443,16 +2460,17 @@ s32 fn_8038984C(s32 chan, u16 nBlock, void *callback) {
     u16 nextBlock;
 
     card = &lbl_804912A0[chan];
-    if (!card->attached) {
+    if (card->attached == 0) {
         return -3;
     }
     fat = card->currentFat;
-    for (; nBlock != 0xFFFF; nBlock = nextBlock) {
-        if (nBlock < 5 || card->cBlock <= nBlock) {
+    while (nBlock != 0xFFFF) {
+        if (nBlock < 5 || nBlock >= card->cBlock) {
             return -6;
         }
         nextBlock = fat[nBlock];
         fat[nBlock] = 0;
+        nBlock = nextBlock;
         ++fat[3];
     }
     return fn_803898E8(chan, fat, callback);
