@@ -341,6 +341,15 @@ void fn_8019CA78(void *arg0, u32 arg1) {
     }
 }
 
+extern u8 lbl_80414750[];
+extern f32 lbl_803DB6F0[];
+void fn_8019CC24(void *, s32);
+void fn_8019CA88(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    M2C_FIELD(arg0, s32 *, 0x24) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x28) = arg2;
+    M2C_FIELD(arg0, s32 *, 0x2C) = arg3;
+}
+
 void fn_8019CBE8(void *arg0, void *arg1) {
     M2C_FIELD(arg1, s16 *, 0) = 0;
     M2C_FIELD(arg1, s32 *, 0x10) = (s32) M2C_FIELD(arg0, s32 *, 0xC);
