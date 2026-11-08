@@ -413,6 +413,12 @@ void fn_8019CFDC(void *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 0x48) = (s32) (M2C_FIELD(arg0, s32 *, 0x48) | 0x40);
 }
 
+void *fn_8019D758(void *self, s32 a) {
+    M2C_FIELD(self, s32 *, 0x0) = a;
+    M2C_FIELD(self, s16 *, 0x4) = 0;
+    return self;
+}
+
 s32 fn_8019E508(void) {
     return 1;
 }
