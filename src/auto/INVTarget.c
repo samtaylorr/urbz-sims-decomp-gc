@@ -2854,10 +2854,10 @@ void fn_801FAC58(void *arg0, s8 arg1) {
 
 s32 fn_801FAC74(void *arg0) {
     u16 v = M2C_FIELD(arg0, u16 *, 0xCE);
-    if (v == 0) {
-        return 5;
+    if (v != 0) {
+        return v + 2;
     }
-    return v + 2;
+    return 5;
 }
 
 void *fn_801FAC90(void *arg0, s32 arg1) {
