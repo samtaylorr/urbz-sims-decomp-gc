@@ -2957,3 +2957,19 @@ s32 fn_8038FA38(s32 chan, s32 arg1, s32 arg2) {
     return fn_803894A8(chan);
 }
 
+void fn_8038FC10(void *list, u32 nbytes) {
+    extern u8 *__GXData;
+    void fn_802713FC(void);
+    void fn_8027154C(void);
+
+    if (*(u32 *)(__GXData + 0x5ac) != 0) {
+        fn_802713FC();
+    }
+    if (*(u32 *)(__GXData + 0x0) == 0) {
+        fn_8027154C();
+    }
+    *(volatile u8 *)0xCC008000 = 0x40;
+    *(volatile u32 *)0xCC008000 = (u32)list;
+    *(volatile u32 *)0xCC008000 = nbytes;
+}
+
