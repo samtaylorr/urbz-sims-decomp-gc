@@ -235,7 +235,7 @@ void fn_8019B0BC(void *self) {
         fn_801051C8(0xBD, 0);
     }
     M2C_FIELD(self, f32 *, 0xB0) = lbl_803DB4CC[0];
-    ((TTSE_Flags36 *)((u8 *)self + 0x36))->flag = 1;
+    *(u16 *)((u8 *)self + 0x36) |= 1;
 }
 
 void fn_8019B128(void *self) {
@@ -476,15 +476,8 @@ void fn_8019BA50(void *arg0, s32 arg1) {
 }
 
 void fn_8019BAC4(void *arg0, char **arg1) {
-    char *obj;
-    char *vt;
-
-    obj = *(char **)*arg1;
-    vt = M2C_FIELD(obj, char **, 0x1C);
-    M2C_FIELD(vt, void (**)(void *, s32), 0x2C)(obj + M2C_FIELD(vt, s16 *, 0x28), 0x43);
-    obj = *arg1;
-    vt = M2C_FIELD(obj, char **, 4);
-    M2C_FIELD(vt, void (**)(void *, s32), 0xDC)(obj + M2C_FIELD(vt, s16 *, 0xD8), 0x43);
+    M2C_FIELD(M2C_FIELD(*(char **)*arg1, char **, 0x1C), void (**)(void *, s32), 0x2C)(*(char **)*arg1 + M2C_FIELD(M2C_FIELD(*(char **)*arg1, char **, 0x1C), s16 *, 0x28), 0x43);
+    M2C_FIELD(M2C_FIELD(*arg1, char **, 4), void (**)(void *, s32), 0xDC)(*arg1 + M2C_FIELD(M2C_FIELD(*arg1, char **, 4), s16 *, 0xD8), 0x43);
 }
 
 void fn_8019C0D4(void) {
@@ -2936,6 +2929,27 @@ s32 fn_801A9F24(void *self) {
     return 0;
 }
 
+u8 fn_801A9FA4(void *self, s32 arg1, s32 arg2) {
+    s32 fn_80105B78(s32);
+    s32 fn_80105B84(s32);
+    u8 *tab;
+    s32 row;
+    s32 col;
+    u8 old;
+
+    tab = M2C_FIELD(self, u8 **, 0x2C);
+    row = fn_80105B78(arg1);
+    col = fn_80105B84(arg1);
+    old = (*(u8 ***)(tab + 0xC))[row][col];
+    if (old != arg2) {
+        tab = M2C_FIELD(self, u8 **, 0x2C);
+        row = fn_80105B78(arg1);
+        col = fn_80105B84(arg1);
+        (*(u8 ***)(tab + 0xC))[row][col] = arg2;
+    }
+    return old;
+}
+
 s32 fn_80105B78(s32);
 s32 fn_80105B84(s32);
 void *fn_801AA2FC(void *self, s32 arg1) {
@@ -2959,16 +2973,15 @@ s32 fn_801AA3B8(void *self, s32 arg1) {
     u8 *tab;
     s32 row;
     s32 col;
-    s32 ret;
+    u8 *p;
     if (M2C_FIELD(lbl_80496660, s32 *, 0x2D4) == 0) {
         tab = M2C_FIELD(self, u8 **, 0x34);
         row = fn_80105B78(arg1);
         col = fn_80105B84(arg1);
-        ret = (*(u8 *)((*(s32 **)(tab + 0xC))[row] + col) & 0x20) == 0;
-    } else {
-        ret = 1;
+        p = (*(u8 ***)(tab + 0xC))[row];
+        return (p[col] & 0x20) == 0;
     }
-    return ret;
+    return 1;
 }
 
 void fn_801AA428(void) {
