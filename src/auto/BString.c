@@ -3572,6 +3572,22 @@ void fn_800E330C(void *self) {
     }
 }
 
+void fn_800E3988(s32 self) {
+    extern u8 *lbl_80495A78;
+    extern void fn_800E3350(void *);
+    extern s32 lbl_8041F94C[];
+    extern f32 lbl_803D4FE8[];
+    void fn_800E3DBC(s32, s32, f32);
+    s32 id;
+    fn_800E3350(lbl_80495A78);
+    lbl_8041F94C[0x384 / 4] = 1;
+    id = 0;
+    if (lbl_8041F94C[0x390 / 4] != 0) {
+        id = 2;
+    }
+    fn_800E3DBC(self, id, lbl_803D4FE8[0]);
+}
+
 void fn_800E39EC(s32 self, f32 t) {
     extern u8 *lbl_80495A78;
     extern void fn_800E3404(void *);
