@@ -3373,6 +3373,17 @@ void fn_801FFF98(void *arg0, char *arg1) {
     fn_80245BB4(arg1, lbl_803E56EC, *((u8 *)arg0 + 0x189) + 1, *((u8 *)arg0 + 0x18A) + 1);
 }
 
+void fn_801FFFDC(void *arg0, u8 *arg1, s32 arg2, void *arg3) {
+    typedef struct { char c[12]; } Str12;
+    extern Str12 lbl_803E56FC;
+    s32 fn_80248808(void *);
+    void *fn_802485B0(void *, void *);
+    *(Str12 *)arg1 = lbl_803E56FC;
+    fn_80248808(arg1);
+    fn_80248808(arg3);
+    fn_802485B0(arg1, arg3);
+}
+
 void fn_80200044(void *arg0, u8 *arg1, s32 arg2, s32 arg3) {
     extern char lbl_803E5708[];
     void *fn_80248784(void *, void *);
