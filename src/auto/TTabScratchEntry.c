@@ -170,16 +170,17 @@ s32 fn_8019B290(u8 *self, s32 i) {
 }
 
 void fn_8019B2AC(u8 *self, s32 value, s32 i) {
+    u32 off = i * 4;
     s32 *a = (s32 *)(self + 0x74);
     s32 *b = (s32 *)(self + 0x7C);
 
-    if (value == a[i] + b[i]) {
+    if (value == *(s32 *)((u8 *)a + off) + *(s32 *)((u8 *)b + off)) {
         return;
     }
-    b[i] = value - a[i];
-    if (a[i] + b[i] > 999999) {
-        b[i] = 999999 - a[i];
-        value = a[i] + b[i];
+    *(s32 *)((u8 *)b + off) = value - *(s32 *)((u8 *)a + off);
+    if (*(s32 *)((u8 *)a + off) + *(s32 *)((u8 *)b + off) > 999999) {
+        *(s32 *)((u8 *)b + off) = 999999 - *(s32 *)((u8 *)a + off);
+        value = *(s32 *)((u8 *)a + off) + *(s32 *)((u8 *)b + off);
     }
     if (i == 0) {
         *(s16 *)(self + 0x30) = value / 10000;
