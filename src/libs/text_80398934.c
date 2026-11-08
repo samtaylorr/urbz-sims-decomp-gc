@@ -764,10 +764,16 @@ u8 fn_80398CA4(s32 i) {
 }
 
 void fn_80398CB0(s32 i, s32 on) {
-    if (on != 0) {
-        lbl_80496628[i] = 1;
+    register u8 *p asm("r4");
+    register s32 v asm("r0");
+    if (on) {
+        p = lbl_80496628;
+        v = 1;
+        p[i] = v;
     } else {
-        lbl_80496628[i] = 0;
+        p = lbl_80496628;
+        v = 0;
+        p[i] = v;
     }
 }
 
@@ -3895,15 +3901,12 @@ void **fn_803A0A44(void **self, void **other) {
                 register u32 size asm("r0");
                 size = xlen * 4;
                 bytes = size;
-                goto check;
-            check:
                 if (size > 0x80) {
-                    size = 0;
                     tmp = (void **)fn_802D1FC8(bytes);
                 } else {
-                    size = 0;
                     tmp = (void **)fn_80399BE8(bytes);
                 }
+                size = 0;
             } else {
                 tmp = NULL;
                 bytes = 0;
