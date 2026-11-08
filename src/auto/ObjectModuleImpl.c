@@ -95,6 +95,32 @@ s32 fn_8014A690(char *arg0) {
     return total;
 }
 
+char *fn_8014A6D8(char *self, u8 key) {
+    char **tbl = (char **)(self + 0x50);
+    s32 *pkey;
+    s32 k;
+    char *prev;
+    char *n;
+
+    n = tbl[key];
+    k = key;
+    pkey = &k;
+    prev = 0;
+    while (n != 0) {
+        if (*pkey == fn_8016CCE0(n)) {
+            if (prev != 0) {
+                *(char **)(prev + 0xA0) = *(char **)(n + 0xA0);
+                *(char **)(n + 0xA0) = tbl[key];
+                tbl[key] = n;
+            }
+            break;
+        }
+        prev = n;
+        n = *(char **)(n + 0xA0);
+    }
+    return n;
+}
+
 void fn_8014ABB0(void *);
 s32 fn_8016CCE0(void *);
 extern void **lbl_80496220;
@@ -102,6 +128,27 @@ void fn_8014AB64(void *self) {
     char *vt = (char *)*lbl_80496220;
     (*(void (**)(void *))(vt + 0x4C))((char *)lbl_80496220 + *(s16 *)(vt + 0x48));
     fn_8014ABB0(self);
+}
+
+s32 fn_8014B05C(char *self) {
+    char *vt = *(char **)self;
+    char *r;
+    char **arr;
+    char **p;
+    char *x;
+    s32 i;
+
+    r = (*(char *(**)(void *))(vt + 0x84))(self + *(s16 *)(vt + 0x80));
+    arr = **(char ****)(r + 0x54);
+    p = arr;
+    for (i = 0; i < (arr != 0 ? ((s32 *)arr)[-1] : 0); i++) {
+        x = *(char **)(*p + 0xC0);
+        if (x != 0) {
+            return *(s32 *)(x + 0x1C);
+        }
+        p++;
+    }
+    return 0;
 }
 
 void *fn_8014B0E0(void *arg0, void *arg1) {
@@ -125,18 +172,15 @@ void *fn_8014B0E0(void *arg0, void *arg1) {
 s32 fn_8014BDFC(void *arg0) {
     s32 fn_8032D8E0(void *, void *, s32 *);
     void *p;
-    void *q;
+    void *h;
     s32 out;
     s32 result;
 
     p = M2C_FIELD(*(void **)arg0, void *(**)(void *), 0x3C)((char *)arg0 + M2C_FIELD(*(void **)arg0, s16 *, 0x38));
-    if (p == NULL || (q = M2C_FIELD(p, void **, 0xC)) == NULL || M2C_FIELD(q, void **, 0x34) == NULL) {
+    if (p == NULL || M2C_FIELD(p, void **, 0xC) == NULL || (h = M2C_FIELD(M2C_FIELD(p, void **, 0xC), void **, 0x34)) == NULL) {
         return -1;
     }
-    result = -1;
-    if (fn_8032D8E0(M2C_FIELD(arg0, void **, 0x6A0), M2C_FIELD(q, void **, 0x34), &out) != 0) {
-        result = out;
-    }
+    result = fn_8032D8E0(M2C_FIELD(arg0, void **, 0x6A0), h, &out) != 0 ? out : -1;
     if (result == 0) {
         result = -1;
     }
@@ -180,10 +224,12 @@ s32 fn_8014D4C8(void *arg0, s32 *out) {
     *out = 0;
     for (i = 1; i <= 4; i++) {
         obj = M2C_FIELD(*(void **)lbl_80496650, void *(**)(void *, s32), 0x13C)((char *)lbl_80496650 + M2C_FIELD(*(void **)lbl_80496650, s16 *, 0x138), i);
-        if (M2C_FIELD(*(void **)obj, s32 (**)(void *, void *), 0x4C)((char *)obj + M2C_FIELD(*(void **)obj, s16 *, 0x48), arg0) != 0 &&
-            M2C_FIELD(*(void **)obj, s32 (**)(void *), 0x9C)((char *)obj + M2C_FIELD(*(void **)obj, s16 *, 0x98)) != 0) {
-            *out = i;
-            return 1;
+        if (M2C_FIELD(*(void **)obj, s32 (**)(void *, void *), 0x4C)((char *)obj + M2C_FIELD(*(void **)obj, s16 *, 0x48), arg0) != 0) {
+            if (M2C_FIELD(*(void **)obj, s32 (**)(void *), 0x9C)((char *)obj + M2C_FIELD(*(void **)obj, s16 *, 0x98)) != 0) {
+                *out = i;
+                return 1;
+            }
+            return 0;
         }
     }
     return 0;
@@ -206,16 +252,20 @@ void fn_8014DD00(u8 *self, u8 *obj) {
     extern u8 *lbl_80496660;
 
     if (*(s32 *)(obj + 0x98) == 0) {
-        u8 *g = lbl_80496660;
-        u8 *vt = *(u8 **)(g + 0x3A4);
         u8 *e;
-        (*(void (**)(void *))(vt + 0xA4))(g + *(s16 *)(vt + 0xA0));
+        s32 v;
+        (*(void (**)(void *))(*(u8 **)(lbl_80496660 + 0x3A4) + 0xA4))(lbl_80496660 + *(s16 *)(*(u8 **)(lbl_80496660 + 0x3A4) + 0xA0));
         if (*(s32 *)obj == 0) {
-            vt = *(u8 **)self;
-            (*(void (**)(void *, void *))(vt + 0x154))(self + *(s16 *)(vt + 0x150), obj);
+            (*(void (**)(void *, void *))(*(u8 **)self + 0x154))(self + *(s16 *)(*(u8 **)self + 0x150), obj);
         }
         e = *(u8 **)(*(u8 **)(obj + 0x38) + 0xC0);
-        *(s32 *)(self + 0x6D4) = e != NULL ? *(s32 *)(self + 0x6D4) + *(s32 *)(e + 0x10) : *(s32 *)(self + 0x6D4);
+        v = *(s32 *)(self + 0x6D4);
+        if (e != NULL) {
+            v = v + *(s32 *)(e + 0x10);
+        } else {
+            v = v;
+        }
+        *(s32 *)(self + 0x6D4) = v;
     }
 }
 
@@ -223,8 +273,7 @@ void fn_8014DDA4(u8 *self, u8 *obj) {
     s32 fn_8014FDB4(void *, void *);
 
     if (*(s32 *)(obj + 0x9C) != 1 && *(s32 *)(*(u8 **)(obj + 0x38) + 0xC0) != 0) {
-        u8 *vt = *(u8 **)self;
-        (*(void (**)(void *, void *, s32))(vt + 0x264))(self + *(s16 *)(vt + 0x260), obj, 1);
+        (*(void (**)(void *, void *, s32))(*(u8 **)self + 0x264))(self + *(s16 *)(*(u8 **)self + 0x260), obj, 1);
         *(s32 *)(self + 0x6D8) += fn_8014FDB4(self, obj);
         *(s32 *)(obj + 0x68) += 1;
     }
@@ -1112,6 +1161,13 @@ s32 fn_801660AC(void **self, char *obj, s32 arg2, s32 arg3, s32 arg4) {
         return 0;
     }
     return fn_801A1B50(*self, obj, arg2, r, arg4);
+}
+
+s32 fn_801669D0(f32 x) {
+    if (!(x < 0.0f)) {
+        return x + 0.5;
+    }
+    return x - 0.5;
 }
 
 void fn_80166A1C(void) {
