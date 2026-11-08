@@ -1384,6 +1384,15 @@ void fn_80385EAC(void *arg0) {
     *(u32 *)(e + 4) |= 0x10000000;
 }
 
+s32 fn_80385EDC(void *arg0) {
+    extern u8 lbl_8048FAA0[][0x60];
+    u8 *e = lbl_8048FAA0[M2C_FIELD(arg0, s32 *, 0x18)];
+    if (*(u32 *)(e + 4) & 4) {
+        return 1;
+    }
+    return 0;
+}
+
 void fn_80385F0C(void *arg0, u32 arg1) {
     extern u8 lbl_8048FAA0[][0x60];
     u8 *e = lbl_8048FAA0[M2C_FIELD(arg0, s32 *, 0x18)];
@@ -1625,6 +1634,33 @@ s32 fn_80389004(s32 chan, u32 x) {
     *(u32 *)(p + 0x10c) = x ? x : 0x80000000;
     fn_80254684(level);
     return 0;
+}
+
+s32 fn_8038907C(s32 chan, void *out) {
+    extern u8 lbl_804912A0[];
+    s32 fn_8025465C(void);
+    void fn_80254684(s32);
+    u8 *p;
+    s32 enabled;
+    s32 result;
+
+    p = lbl_804912A0 + chan * 0x110;
+    if (chan < 0 || chan >= 2 || *(u32 *)(p + 0x10c) == 0) {
+        return -128;
+    }
+    enabled = fn_8025465C();
+    if (*(s32 *)(p + 0) == 0) {
+        result = -3;
+    } else if (*(s32 *)(p + 4) == -1) {
+        result = -1;
+    } else {
+        *(s32 *)(p + 4) = -1;
+        *(s32 *)(p + 0xd0) = 0;
+        *(u8 **)out = p;
+        result = 0;
+    }
+    fn_80254684(enabled);
+    return result;
 }
 
 s32 fn_80389540(s32 arg0) {
