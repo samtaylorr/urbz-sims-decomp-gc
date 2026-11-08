@@ -507,6 +507,13 @@ s32 fn_801510D0(s32 *self, s32 *other) {
     return 0;
 }
 
+void fn_801511F4(void) {
+    M2C_UNK fn_80151338();
+    M2C_UNK fn_802D1FC8(M2C_UNK);
+    fn_802D1FC8(0x20E0);
+    fn_80151338();
+}
+
 void fn_8015121C(void **obj) {
     if (obj != NULL) {
         char *vt = (char *)*obj;
