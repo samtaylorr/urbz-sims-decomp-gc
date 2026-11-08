@@ -2702,6 +2702,19 @@ void fn_802AEDE4(u8 *self) {
     *depth = n;
 }
 
+void fn_802AEED0(f32 *self, f32 *arg1) {
+    extern void (*lbl_8044338C[])(void *);
+    self[4] = arg1[4] * self[0] + self[4];
+    self[5] = arg1[5] * self[1] + self[5];
+    self[6] = arg1[6] * self[2] + self[6];
+    self[7] = arg1[7] * self[3] + self[7];
+    self[0] = self[0] * arg1[0];
+    self[1] = self[1] * arg1[1];
+    self[2] = self[2] * arg1[2];
+    self[3] = self[3] * arg1[3];
+    lbl_8044338C[0](self);
+}
+
 void fn_802AEF80(void *arg0, void *arg1) {
     typedef struct { f32 m[6]; } AptMtx23;
     extern AptMtx23 lbl_804445F0;
@@ -4784,6 +4797,7 @@ void *fn_802BB800(void *arg0, f32 arg1) {
     extern char lbl_804190F0[];
     extern void *lbl_80494B48;
     extern void fn_803B76C8(void *, void *);
+    f32 v = arg1;
 
     M2C_FIELD(arg0, void **, 4) = lbl_80418D70;
     fn_802B7124(arg0, 6);
@@ -4793,7 +4807,7 @@ void *fn_802BB800(void *arg0, f32 arg1) {
     fn_802B7178(arg0, 0);
     fn_802B71C8(arg0);
     fn_803B76C8(lbl_80494B48, arg0);
-    M2C_FIELD(arg0, f32 *, 8) = arg1;
+    M2C_FIELD(arg0, f32 *, 8) = v;
     M2C_FIELD(arg0, void **, 4) = lbl_804190F0;
     return arg0;
 }
