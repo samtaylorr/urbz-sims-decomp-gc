@@ -1369,6 +1369,27 @@ void fn_80382CE4(void) {
 
 }
 
+void fn_80382CE8(void *arg0) {
+    extern s32 lbl_80496418;
+    extern s32 lbl_8049641C;
+    extern s32 lbl_80496420;
+    extern s32 lbl_80496424;
+    extern s32 lbl_80496428;
+    extern s32 lbl_8049642C;
+    extern s32 lbl_80496430;
+    extern s32 lbl_80496434;
+    extern s32 lbl_80496438;
+    lbl_80496418 += M2C_FIELD(arg0, s16 *, 0x52);
+    lbl_80496424 += M2C_FIELD(arg0, s16 *, 0x54);
+    lbl_80496430 += M2C_FIELD(arg0, s16 *, 0x56);
+    lbl_8049641C += M2C_FIELD(arg0, s16 *, 0x58);
+    lbl_80496428 += M2C_FIELD(arg0, s16 *, 0x5A);
+    lbl_80496434 += M2C_FIELD(arg0, s16 *, 0x5C);
+    lbl_80496420 += M2C_FIELD(arg0, s16 *, 0x5E);
+    lbl_8049642C += M2C_FIELD(arg0, s16 *, 0x60);
+    lbl_80496438 += M2C_FIELD(arg0, s16 *, 0x62);
+}
+
 extern s32 lbl_80496448;
 s32 fn_80382D7C(void) {
     return lbl_80496448;
@@ -2389,24 +2410,32 @@ s32 fn_80389590(void *arg0) {
 }
 
 s32 fn_8038984C(s32 chan, u16 nBlock, void *callback) {
-    extern u8 lbl_804912A0[];
+    extern struct CardBlk {
+        s32 attached;
+        u8 pad4[0xc];
+        u16 cBlock;
+        u8 pad12[0x76];
+        u16 *currentFat;
+        u8 pad8C[0x84];
+    } lbl_804912A0[];
     s32 fn_803898E8(s32 chan, u16 *fat, void *callback);
-    s32 *card;
+    struct CardBlk *card;
     u16 *fat;
-    u16 nextBlock;
 
-    card = (s32 *)(lbl_804912A0 + chan * 0x110);
-    if (card[0] == 0) {
+    card = &lbl_804912A0[chan];
+    if (card->attached == 0) {
         return -3;
     }
-    fat = *(u16 **)(card + 0x88 / 4);
+    fat = card->currentFat;
     while (nBlock != 0xFFFF) {
-        if (nBlock < 5 || nBlock >= *(u16 *)((u8 *)card + 0x10)) {
+        if (!(5 <= nBlock && nBlock < card->cBlock)) {
             return -6;
         }
-        nextBlock = fat[nBlock];
-        fat[nBlock] = 0;
-        nBlock = nextBlock;
+        {
+            u16 nextBlock = fat[nBlock];
+            fat[nBlock] = 0;
+            nBlock = nextBlock;
+        }
         ++fat[3];
     }
     return fn_803898E8(chan, fat, callback);
