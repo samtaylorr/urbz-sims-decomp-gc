@@ -1614,8 +1614,9 @@ s32 fn_8038F67C(s32 chan, u32 addr, u32 length, void *dst, void *callback) {
 }
 
 s32 fn_8038F6E0(s32 chan) {
-    extern u8 lbl_804912A0[];
-    return M2C_FIELD(lbl_804912A0 + chan * 0x110, s32 *, 0xB8);
+    typedef struct { u8 pad[0xB8]; s32 xferred; u8 pad2[0x110 - 0xBC]; } CARDBlock;
+    extern CARDBlock lbl_804912A0[];
+    return lbl_804912A0[chan].xferred;
 }
 
 s32 fn_8038F6F8(s32 chan, s32 fileNo, void *dst) {
