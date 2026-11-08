@@ -298,8 +298,10 @@ void fn_8037E904(s16 interrupt, void *context) {
     void fn_802528A4(void *);
     extern void (*lbl_80496338)(void);
     u8 exceptionContext[0x2C8];
+    u16 tmp;
 
-    __DSPRegs[5] = (u16)((__DSPRegs[5] & ~0x88) | 0x20);
+    tmp = __DSPRegs[5];
+    __DSPRegs[5] = (tmp & ~0x88) | 0x20;
     fn_80252AAC(exceptionContext);
     fn_802528A4(exceptionContext);
     if (lbl_80496338) {
