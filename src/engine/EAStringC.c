@@ -817,6 +817,16 @@ void fn_8029F834(s32 arg0, void *arg1, void *arg2) {
     M2C_FIELD(fn_8029F6B4((void *)arg0, (void *)sp8, arg2), void **, 8) = arg1;
 }
 
+s32 fn_8029F888(s32 arg0, s32 arg1) {
+    M2C_UNK fn_8029F550(s32, s32, s32, s32 *, s32 *);
+    s32 fn_8029F8BC(s32);
+    s32 sp8;
+    s32 spC;
+
+    fn_8029F550(arg0, arg1, 0, &sp8, &spC);
+    return fn_8029F8BC(spC);
+}
+
 void *fn_8029F8BC(void *arg0) {
     void *temp_r11;
     void *temp_r11_2;
@@ -864,16 +874,9 @@ void fn_802A0938(s32 arg0, void *arg1) {
 }
 
 void fn_802A0980(s32 arg0, void *arg1) {
-    extern void fn_8029F550(s32, void *, s32, s32 *, void **);
-    s32 sp8;
-    void *spC;
-    s32 tree = M2C_FIELD(arg0, s32 *, 0);
-    void *key = M2C_FIELD(arg1, void **, 8);
-    sp8 = 0;
-    spC = NULL;
-    fn_8029F550(tree, key, 0, &sp8, &spC);
-    if (M2C_FIELD(spC, s32 *, 8) > 0x3FFF) {
-        fn_802A0890(arg0, spC);
+    void *node = fn_8029F550_Find(M2C_FIELD(arg0, s32 *, 0), M2C_FIELD(arg1, void **, 8));
+    if (M2C_FIELD(node, s32 *, 8) > 0x3FFF) {
+        fn_802A0890(arg0, node);
     }
 }
 
