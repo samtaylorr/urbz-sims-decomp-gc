@@ -979,8 +979,36 @@ void fn_800D4818(void) {
 
 }
 
+void fn_800D481C(s32 *self) {
+    s32 *g = (s32 *)lbl_8041F754;
+    self[0x18 / 4] = 0;
+    self[0x1c / 4] = 0;
+    self[0x20 / 4] = 0;
+    g[0xa0 / 4] = 0;
+}
+
 void fn_800D4914(void) {
 
+}
+
+void fn_800D49E4(s32 *self) {
+    extern s32 fn_800E18B8(s32);
+    extern s32 fn_800E18EC(s32);
+    s32 *g = (s32 *)lbl_8041F754;
+    if (g[0x140 / 4] == 0) {
+        if (g[0x7c / 4] != 0) {
+            fn_800E3B80(self, 1);
+        } else {
+            s32 r = fn_800E18EC(0x14);
+            if (r == 3) {
+                fn_800E3B80(self, 1);
+            } else if (r == 1) {
+                fn_800E3B80(self, 2);
+            } else if (r == 2) {
+                fn_800E18B8(0x14);
+            }
+        }
+    }
 }
 
 s32 *fn_800D4AB8(s32 *self, s32 a) {
