@@ -2442,13 +2442,18 @@ s32 *fn_802AE6A0(s32 *arr, s32 *e) {
     extern s32 fn_803B8378(s32 *);
     extern u8 lbl_803FCE5C[];
     s32 *end;
+    s32 used;
 
     if (fn_803B8378(arr) != 0) {
         return NULL;
     }
     end = (s32 *)arr[1] + arr[0] * 2;
     for (e += 2; e < end; e += 2) {
-        if (e[0] != 0 && e[0] != (s32)lbl_803FCE5C) {
+        used = 1;
+        if (e[0] == 0) {
+            used = 0;
+        }
+        if (used && e[0] != (s32)lbl_803FCE5C) {
             return e;
         }
     }
