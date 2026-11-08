@@ -2817,7 +2817,8 @@ void fn_801F82E4(s32 arg0, s32 arg1) {
 
 void fn_801F8314(s32 arg0, s32 arg1) {
     void fn_801F83C8(s32, s32);
-    ((u8 *)arg0 + 0xED)[arg1] = 0;
+    struct { u8 pad[0xED]; u8 state[1]; } *p = (void *)arg0;
+    p->state[arg1] = 0;
     fn_801F83C8(arg0, arg1);
 }
 
@@ -3075,6 +3076,37 @@ s32 fn_801FB90C(INVPair *arg0) {
         return 0xD59C7BB5;
     }
     return ((s32 *)arg0->a)[3];
+}
+
+s32 fn_801FBB84(u8 *arg0, s32 *arg1) {
+    u8 *t;
+    s32 *list;
+    s32 count;
+
+    if (arg0 == NULL) {
+        return 0;
+    }
+    t = *(u8 **)(arg0 + 0x38);
+    if (t == NULL) {
+        return 0;
+    }
+    t = *(u8 **)(t + 0xC0);
+    if (t == NULL) {
+        return 0;
+    }
+    list = *(s32 **)t;
+    count = 0;
+    if (list != NULL) {
+        count = list[-1];
+    }
+    if (count == 0) {
+        return 0;
+    }
+    arg1[1] = list[0];
+    arg1[0] = *(s32 *)(t + 0x20);
+    arg1[3] = 0;
+    arg1[2] = list[2];
+    return arg1[1] != 0;
 }
 
 s32 fn_801FBC04(s32 arg0) {
@@ -4942,6 +4974,24 @@ void fn_80223288(void *arg0, s32 arg1) {
         M2C_FIELD(d, s32 *, 4) = M2C_FIELD(pv, s32 *, 4);
         M2C_FIELD(d, s32 *, 0) = M2C_FIELD(&v, s32 *, 0);
     }
+}
+
+f32 fn_8022338C(s32 *arg0) {
+    extern s32 fn_80014EE0(void);
+    extern s32 fn_80014F30(s32, s32);
+    extern f32 fn_8000DB6C(s32);
+    extern const f32 lbl_803EA774[];
+    extern const f32 lbl_803EA778[];
+    extern const f32 lbl_803EA77C[];
+    s32 obj;
+    f32 t;
+
+    obj = fn_80014F30(fn_80014EE0(), *arg0);
+    if (obj == 0) {
+        return lbl_803EA77C[0];
+    }
+    t = fn_8000DB6C(obj);
+    return t * (lbl_803EA778[0] - lbl_803EA774[0]) + lbl_803EA774[0];
 }
 
 void fn_802233F0(s32 arg0, void *arg1, void *arg2) {
