@@ -29,6 +29,25 @@ static inline void *INV_getStr(void *key) {
     return h.p != NULL ? (void *)*h.p : NULL;
 }
 
+static inline void *INV_Alloc(u32 size, u32 align) {
+    void *fn_802D0AB8(void);
+    void *fn_802D197C(void *heap, u32 size, u32 align);
+    void *fn_802DBBCC(void *heap, u32 size, u32 align);
+    void *fn_802D0B3C(void);
+    void *heap;
+    void *p;
+
+    heap = fn_802D0AB8();
+    p = fn_802D197C(heap, size, align);
+    if (p == NULL) {
+        p = fn_802DBBCC(heap, size, 0);
+        if (p == NULL && heap == fn_802D0AB8()) {
+            return fn_802DBBCC(fn_802D0B3C(), size, 0);
+        }
+    }
+    return p;
+}
+
 typedef struct { char **begin; char **end; } INVPtrVec;
 static inline u32 INVPtrVec_size(INVPtrVec *v) { return v->end - v->begin; }
 static inline char *INVPtrVec_at(INVPtrVec *v, u32 i) { return v->begin[i]; }
