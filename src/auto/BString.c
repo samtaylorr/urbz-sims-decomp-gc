@@ -2806,7 +2806,7 @@ s32 *fn_800E25BC(s32 *self, s32 a) {
     self[3] = -1;
     self[4] = 1;
     self[5] = (s32)lbl_8040C270;
-    ((f32 *)self)[0x2c / 4] = ((f32 *)self)[0x30 / 4] = lbl_803D4C6C[0];
+    ((f32 *)self)[0x30 / 4] = ((f32 *)self)[0x2c / 4] = lbl_803D4C6C[0];
     return self;
 }
 
@@ -3303,14 +3303,15 @@ s32 fn_800E3E78(void *self) {
         s32 ****node;
     } DequeIt;
     DequeIt it = *(DequeIt *)((u8 *)self + 0x60);
-    if (it.cur == it.first) {
-        it.node--;
-        it.first = *it.node;
-        it.last = it.first + 32;
-        it.cur = it.last;
+    DequeIt *p = &it;
+    if (p->cur == p->first) {
+        p->node--;
+        p->first = *p->node;
+        p->last = p->first + 32;
+        p->cur = p->last;
     }
-    it.cur--;
-    return ***it.cur;
+    p->cur--;
+    return ***p->cur;
 }
 
 s32 fn_800E3EEC(void *arg0) {
