@@ -451,6 +451,8 @@ void fn_80299280(void *arg0) {
     extern char *lbl_804960E8;
     extern void fn_802A64AC(void *, void *);
     extern void fn_802993E8(void *, s32);
+    extern void *fn_8029F8BC(void *);
+    struct Flags { u32 hi : 4; u32 count : 12; u32 lo : 16; };
     char *vt;
     fn_802A64AC(lbl_804960F4, arg0);
     if (M2C_FIELD(lbl_804960E8, void **, 0x124C) == arg0) {
@@ -459,7 +461,7 @@ void fn_80299280(void *arg0) {
         M2C_FIELD(lbl_804960E8, void **, 0x124C) = NULL;
     }
     fn_802993E8(arg0, 1);
-    if (((M2C_FIELD(arg0, u32 *, 0) >> 16) & 0xFFF) > 1) {
+    if (((struct Flags *)arg0)->count > 1) {
         fn_8029F8BC(arg0);
         M2C_FIELD(arg0, u32 *, 0) &= ~0x8000;
     }
@@ -973,7 +975,7 @@ void fn_802A0BC0(void *arg0, char *arg1, s32 arg2) {
     s32 fn_802B72D4(void *);
     M2C_UNK fn_80291164(void *, s32);
     M2C_UNK fn_802AF1CC(void *, void *);
-    M2C_UNK fn_80291534(void *, void *, s32, s32);
+    M2C_UNK fn_80291534(void *, void *, void *, s32);
     M2C_UNK fn_802AF050(void *);
     M2C_UNK fn_802AEE5C(void *);
     s32 var_r29;
@@ -989,7 +991,7 @@ void fn_802A0BC0(void *arg0, char *arg1, s32 arg2) {
         fn_80291164(arg1, *(s32 *)(arg1 + 0x4C));
     }
     fn_802AF1CC(arg0, arg1 + 0x10);
-    fn_80291534(arg1, arg0, 0, arg2);
+    fn_80291534(arg1, arg0, NULL, arg2);
     fn_802AF050(arg0);
     fn_802AEE5C(arg0);
 }
@@ -2308,6 +2310,11 @@ s32 fn_802AF678(void *arg0) {
 s32 fn_802AF6B4(void *arg0) {
     extern s32 fn_802B70DC(void *);
     extern s32 fn_802B72D4(void *);
+    struct Flags1C {
+        u32 pad : 25;
+        u32 flag : 1;
+        u32 rest : 6;
+    };
     s32 found;
     s32 ok;
     s32 ok2;
@@ -2328,7 +2335,7 @@ s32 fn_802AF6B4(void *arg0) {
             found = 1;
         }
     }
-    return found ? (M2C_FIELD(M2C_FIELD(arg0, void **, 0x50), u32 *, 0x1C) >> 6) & 1 : 0;
+    return found ? ((struct Flags1C *)((char *)M2C_FIELD(arg0, void **, 0x50) + 0x1C))->flag : 0;
 }
 
 void fn_802AFF78(void *arg0, void *arg1, void *arg2) {
@@ -3617,6 +3624,14 @@ s32 fn_802B914C(void) {
 
 void fn_802B9154(void) {
 
+}
+
+void *fn_802B9158(void *arg0, s32 arg1) {
+    extern void fn_802BA0A4(void *, s32, s32);
+    extern char lbl_80418F70[];
+    fn_802BA0A4(arg0, 0x21, arg1);
+    M2C_FIELD(arg0, void **, 4) = lbl_80418F70;
+    return arg0;
 }
 
 void fn_802B9314(void) {
