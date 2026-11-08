@@ -368,6 +368,10 @@ s32 fn_8019B448(void) {
     return 0;
 }
 
+void fn_8019B688(void *self, TTabBlk20 *out) {
+    *out = *(TTabBlk20 *)((u8 *)self + 0x15c);
+}
+
 s32 fn_8019B83C(void *self, s32 arg1, u16 **out) {
     if ((u16)arg1 > 0x2f) {
     fail:
@@ -2969,7 +2973,6 @@ s32 fn_801A9F24(void *self) {
     s32 idx;
     s32 *arr;
     s32 n;
-    s32 t;
 
     vt = M2C_FIELD(self, void **, 0);
     idx = M2C_FIELD(vt, s32 (**)(void *), 0x8C)((char *)self + M2C_FIELD(vt, s16 *, 0x88));
@@ -2979,11 +2982,11 @@ s32 fn_801A9F24(void *self) {
         n = arr[-1];
     }
     if (idx < n) {
-        t = M2C_FIELD(arr[idx], s32 *, 0x10);
-        if (t == 8) {
+        idx = M2C_FIELD(arr[idx], s32 *, 0x10);
+        if (idx == 8) {
             goto yes;
         }
-        if (t == 9) {
+        if (idx == 9) {
         yes:
             return 1;
         }
@@ -2991,7 +2994,7 @@ s32 fn_801A9F24(void *self) {
     return 0;
 }
 
-u8 fn_801A9FA4(void *self, s32 arg1, s32 arg2) {
+u8 fn_801A9FA4(void *self, s32 arg1, u8 arg2) {
     u8 old;
 
     old = *TTSE_Cell(self, arg1);
