@@ -2261,8 +2261,8 @@ void fn_800E02E0(s32 *self) {
 
 void fn_800E0814(void *arg0) {
     extern s32 lbl_80495A6C;
-    M2C_FIELD(arg0, s32 *, 0x20) = 0;
     M2C_FIELD(arg0, s32 *, 0x18) = 0;
+    M2C_FIELD(arg0, s32 *, 0x20) = 0;
     lbl_80495A6C = 0;
 }
 
