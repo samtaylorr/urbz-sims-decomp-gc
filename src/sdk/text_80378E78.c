@@ -317,6 +317,7 @@ void fn_8037C8A8(f32 (*m)[4], f32 *src, f32 *dst) {
     dst[1] = vTmp[1];
     dst[2] = vTmp[2];
 }
+#pragma fp_contract off
 void fn_8037CC20(f32 (*m)[4], f32 *src, f32 *dst) {
     f32 vTmp[3];
 
