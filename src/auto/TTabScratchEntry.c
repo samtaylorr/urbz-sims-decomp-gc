@@ -2773,6 +2773,15 @@ s32 fn_801A9ECC(void) {
     return 0x40;
 }
 
+s32 fn_80105B78(s32);
+s32 fn_80105B84(s32);
+void *fn_801AA2FC(void *self, s32 arg1) {
+    u8 *tab = M2C_FIELD(self, u8 **, 0x38);
+    s32 row = fn_80105B78(arg1);
+    s32 col = fn_80105B84(arg1);
+    return (*(u8 ***)(tab + 0xC))[row] + col * 8;
+}
+
 void fn_801AA45C(void) {
     extern u8 *lbl_80496658;
     u8 *obj = lbl_80496658;
