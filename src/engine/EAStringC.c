@@ -2252,13 +2252,13 @@ void fn_802AF000(s32 arg0) {
 
 void fn_802AF050(s32 arg0) {
     typedef struct { f32 m[6]; } AptMtx23;
-    extern void (*lbl_80443388)(void *);
+    extern void (*lbl_80443388[])(void *);
     s32 n;
 
     n = M2C_FIELD(arg0, s32 *, 0x3BC) - 1;
     M2C_FIELD(arg0, s32 *, 0x3BC) = n;
     M2C_FIELD(arg0, AptMtx23 *, 0x20) = ((AptMtx23 *)(arg0 + 0x238))[n];
-    lbl_80443388((void *)(arg0 + 0x20));
+    lbl_80443388[0]((void *)(arg0 + 0x20));
 }
 
 void fn_802AF1CC(s32 arg0, void *arg1) {
