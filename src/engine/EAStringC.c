@@ -595,7 +595,7 @@ s32 fn_8029A908(void *arg0, s32 year) {
         if (year % 100 != 0) {
             return 1;
         }
-        ret = year % 400 == 0;
+        ret = !(year % 400);
     }
     return ret;
 }
@@ -877,10 +877,10 @@ void fn_802A0980(s32 arg0, void *arg1) {
     extern void fn_8029F550(s32, void *, s32, s32 *, void **);
     s32 sp8;
     void *spC;
-    void *key = M2C_FIELD(arg1, void **, 8);
     s32 tree = M2C_FIELD(arg0, s32 *, 0);
-    spC = NULL;
+    void *key = M2C_FIELD(arg1, void **, 8);
     sp8 = 0;
+    spC = NULL;
     fn_8029F550(tree, key, 0, &sp8, &spC);
     if (M2C_FIELD(spC, s32 *, 8) > 0x3FFF) {
         fn_802A0890(arg0, spC);
@@ -1833,9 +1833,9 @@ s32 fn_802AD084(s32 arg0) {
 
 void fn_802AD0CC(s32 arg0, s32 arg1) {
     extern void (*lbl_80443318[])(s32, s32);
-    extern void fn_802A1EF0(void);
+    extern void fn_802A1EF0(void *);
 
-    fn_802A1EF0();
+    fn_802A1EF0((void *)arg0);
     lbl_80443318[0](arg0 - 8, arg1 + 8);
 }
 
