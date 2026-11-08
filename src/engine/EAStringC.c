@@ -475,6 +475,21 @@ void fn_80299330(void *arg0) {
     }
 }
 
+void fn_80299370(void *arg0) {
+    char *obj = M2C_FIELD(arg0, char **, 0x50);
+    char *vt;
+    if (obj != NULL) {
+        vt = M2C_FIELD(obj, char **, 0x14);
+        M2C_FIELD(vt, void (**)(void *), 0x1C)(obj + M2C_FIELD(vt, s16 *, 0x18));
+    }
+    obj = M2C_FIELD(arg0, char **, 0x4C);
+    if (obj != NULL) {
+        vt = M2C_FIELD(obj, char **, 4);
+        M2C_FIELD(vt, void (**)(void *), 0x14)(obj + M2C_FIELD(vt, s16 *, 0x10));
+    }
+    M2C_FIELD(arg0, void **, 0x4C) = NULL;
+}
+
 s32 fn_802999D4(void *arg0) {
     extern s32 fn_802B70DC(void *);
     extern s32 fn_802B72D4(void *);
