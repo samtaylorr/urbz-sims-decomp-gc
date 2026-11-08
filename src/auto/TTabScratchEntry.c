@@ -2932,7 +2932,7 @@ s32 fn_801A9F24(void *self) {
 }
 
 u8 fn_801A9FA4(void *self, s32 arg1, s32 arg2) {
-    u8 old = *TTSE_Cell(self, arg1);
+    s32 old = *TTSE_Cell(self, arg1);
 
     if (old != arg2) {
         *TTSE_Cell(self, arg1) = arg2;
@@ -2944,7 +2944,8 @@ void fn_801AA0DC(void *self, s32 arg1, s16 arg2) {
     u8 *tab = M2C_FIELD(self, u8 **, 0x30);
     s32 row = fn_80105B78(arg1);
     s32 col = fn_80105B84(arg1);
-    *(s16 *)(col * 2 + (*(u8 ***)(tab + 0xC))[row]) = arg2;
+    s32 off = col * 2;
+    *(s16 *)((*(u8 ***)(tab + 0xC))[row] + off) = arg2;
 }
 
 u8 fn_801AA134(void *self, s32 arg1) {
