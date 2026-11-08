@@ -259,19 +259,20 @@ void fn_8014DD00(u8 *self, u8 *obj) {
 
     if (*(s32 *)(obj + 0x98) == 0) {
         u8 *e;
-        s32 v;
+        s32 base;
+        s32 res;
         (*(void (**)(void *))(*(u8 **)(lbl_80496660 + 0x3A4) + 0xA4))(lbl_80496660 + *(s16 *)(*(u8 **)(lbl_80496660 + 0x3A4) + 0xA0));
         if (*(s32 *)obj == 0) {
             (*(void (**)(void *, void *))(*(u8 **)self + 0x154))(self + *(s16 *)(*(u8 **)self + 0x150), obj);
         }
         e = *(u8 **)(*(u8 **)(obj + 0x38) + 0xC0);
-        v = *(s32 *)(self + 0x6D4);
+        base = *(s32 *)(self + 0x6D4);
         if (e != NULL) {
-            v = v + *(s32 *)(e + 0x10);
+            res = base + *(s32 *)(e + 0x10);
         } else {
-            v = v;
+            res = base;
         }
-        *(s32 *)(self + 0x6D4) = v;
+        *(s32 *)(self + 0x6D4) = res;
     }
 }
 
@@ -279,7 +280,9 @@ void fn_8014DDA4(u8 *self, u8 *obj) {
     s32 fn_8014FDB4(void *, void *);
 
     if (*(s32 *)(obj + 0x9C) != 1 && *(s32 *)(*(u8 **)(obj + 0x38) + 0xC0) != 0) {
-        (*(void (**)(void *, void *, s32))(*(u8 **)self + 0x264))(self + *(s16 *)(*(u8 **)self + 0x260), obj, 1);
+        struct { s16 delta; s16 pad; void (*fn)(void *, void *, s32); } *ent;
+        ent = (void *)(*(u8 **)self + 0x260);
+        ent->fn(self + ent->delta, obj, 1);
         *(s32 *)(self + 0x6D8) += fn_8014FDB4(self, obj);
         *(s32 *)(obj + 0x68) += 1;
     }
@@ -1152,15 +1155,18 @@ void *fn_801658B8(void **self) {
 
     if (ret != NULL) {
         char *p = (char *)self + 0x28;
-        char **vec;
         char *it;
 
         if (*fn_80141C5C(p, 0x19) != 0) {
             fn_80142174(p, 0x19, *fn_80141C5C(p, 0x19) - 1);
         }
-        vec = (char **)((char *)self + 0xB0);
-        for (it = vec[0]; it != vec[1]; it += 0x6C) {
-            fn_8019CFF4(it);
+        self = (void **)((char *)self + 0xB0);
+        it = self[0];
+        if (it != self[1]) {
+            do {
+                fn_8019CFF4(it);
+                it += 0x6C;
+            } while (it != self[1]);
         }
     }
     return ret;
