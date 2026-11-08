@@ -2153,12 +2153,12 @@ s32 fn_801A18A4(void *self) {
     extern s32 fn_800FC380(void *, s32, s16, u16 *);
     s16 fn_801A2F3C(u16 *);
     char *p;
-    u16 val;
-    volatile s32 pad;
+    u16 val[2];
+    volatile s32 pad[2];
     p = M2C_FIELD(M2C_FIELD(M2C_FIELD(self, char **, 0), char **, 0x1C), char *(**)(void *), 0x4C)(
         M2C_FIELD(self, char **, 0) + M2C_FIELD(M2C_FIELD(M2C_FIELD(self, char **, 0), char **, 0x1C), s16 *, 0x48));
-    if (fn_800FC380(M2C_FIELD(p, void **, 0xC), fn_801A2F3C((u16 *)p), M2C_FIELD(p, s16 *, 2), &val) != 0) {
-        return val & 0x7FFF;
+    if (fn_800FC380(M2C_FIELD(p, void **, 0xC), fn_801A2F3C((u16 *)p), M2C_FIELD(p, s16 *, 2), val) != 0) {
+        return val[0] & 0x7FFF;
     }
     return -1;
 }
@@ -3084,6 +3084,25 @@ s32 fn_801A9CCC(void *arg0, void *arg1) {
     return 0;
 }
 
+s32 fn_801A9D1C(void *self, s8 *pos, s32 wide) {
+    s32 minX, minY, maxX, maxY;
+    if (wide != 0) {
+        minX = 2;
+        minY = 2;
+        maxY = M2C_FIELD(self, s32 *, 0x18) - 2;
+        maxX = M2C_FIELD(self, s32 *, 0x14) - 2;
+    } else {
+        minX = 1;
+        minY = 1;
+        maxY = M2C_FIELD(self, s32 *, 0x18) - 1;
+        maxX = M2C_FIELD(self, s32 *, 0x14) - 1;
+    }
+    if (pos[0] >= minX && pos[0] < maxX && pos[1] >= minY && pos[1] < maxY) {
+        return 1;
+    }
+    return 0;
+}
+
 s32 fn_801A9D9C(void *arg0, void *arg1) {
     u8 temp_r0;
     u8 temp_r0_2;
@@ -3093,6 +3112,22 @@ s32 fn_801A9D9C(void *arg0, void *arg1) {
         return 1;
     }
     return 0;
+}
+
+s32 fn_801A9DE4(void *self, s32 arg1) {
+    void fn_80105534(void *, s32, s32);
+    void fn_801055FC(void *, s32);
+    struct { s16 a, b, c; } buf;
+    char *ent;
+    void *obj;
+    s32 r;
+
+    ent = M2C_FIELD(self, char **, 0) + 0x58;
+    obj = (char *)self + *(s16 *)ent;
+    fn_80105534(&buf, arg1, 1);
+    r = (*(s32 (**)(void *, void *))(ent + 4))(obj, &buf);
+    fn_801055FC(&buf, 2);
+    return r;
 }
 
 s32 fn_801A9E50(void *self, s32 arg1) {
