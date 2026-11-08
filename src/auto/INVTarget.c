@@ -2831,8 +2831,8 @@ void fn_801F8340(s32 arg0, s32 arg1) {
     if (fn_801F8708(arg0, arg1) == 0) {
         fn_801E2BB4((u8 *)arg0 + (arg1 * 0x318 + 0x104));
         fn_801F8FD4(arg0, arg1, 0);
-        p->state[arg1] = 1;
     }
+    p->state[arg1] = 1;
 }
 
 void fn_801F83BC(void) {
