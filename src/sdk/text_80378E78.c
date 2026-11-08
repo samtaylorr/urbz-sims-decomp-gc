@@ -2244,6 +2244,22 @@ s32 fn_80389590(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x88);
 }
 
+s32 fn_803898E8(s32 chan, u16 *fat, void *callback) {
+    extern u8 lbl_804912A0[];
+    extern void fn_8038966C(void);
+    void fn_80389BF8(void *, s32, u16 *, u16 *);
+    void fn_80251C4C(void *, u32);
+    s32 fn_80388DF8(s32, u32, void *);
+    u8 *card;
+
+    card = lbl_804912A0 + chan * 0x110;
+    ++fat[2];
+    fn_80389BF8(fat + 2, 0x1FFC, fat, fat + 1);
+    fn_80251C4C(fat, 0x2000);
+    *(void **)(card + 0xd8) = callback;
+    return fn_80388DF8(chan, (((u32)fat - *(u32 *)(card + 0x80)) / 0x2000) * *(s32 *)(card + 0xc), fn_8038966C);
+}
+
 s32 fn_80389994(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x84);
 }
