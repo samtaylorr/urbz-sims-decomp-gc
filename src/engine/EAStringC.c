@@ -671,6 +671,29 @@ void fn_80299370(void *arg0) {
     M2C_FIELD(arg0, void **, 0x4C) = NULL;
 }
 
+void *fn_80299938(void *arg0, s32 idx) {
+    extern s32 fn_802999D4(void *);
+    extern s32 fn_802A1514(void *);
+    extern void *fn_8029F688(void *, s32);
+    extern void fn_802AEA9C();
+    extern void fn_802AEABC();
+    void *p;
+    s32 n;
+
+    if (idx == 0) {
+        return M2C_FIELD(arg0, void **, 0x4C);
+    }
+    n = 1;
+    p = (void *)fn_802999D4(arg0);
+    if (p != NULL) {
+        n = ((s32 (*)(void *))fn_802AEA9C)(p) + 1;
+    }
+    if (idx > 0 && idx < n) {
+        return ((void *(*)(void *, s32))fn_802AEABC)(p, idx - 1);
+    }
+    return fn_8029F688((void *)fn_802A1514(M2C_FIELD(arg0, char **, 0x50) + 0x24), idx - n);
+}
+
 s32 fn_802999D4(void *arg0) {
     extern s32 fn_802B70DC(void *);
     extern s32 fn_802B72D4(void *);
