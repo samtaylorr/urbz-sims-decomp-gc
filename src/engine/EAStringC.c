@@ -728,6 +728,14 @@ void fn_802A0890(s32 arg0, void *arg1) {
     }
 }
 
+void fn_802A0938(s32 arg0, void *arg1) {
+    extern void fn_8029F550(s32, void *, s32, s32 *, void **);
+    s32 sp8;
+    void *spC;
+    fn_8029F550(M2C_FIELD(arg0, s32 *, 0), arg1, 0, &sp8, &spC);
+    fn_802A0890(arg0, spC);
+}
+
 void fn_802A14A0(void ***arg0) {
     M2C_UNK fn_802A1420();
     M2C_UNK fn_803B79BC(void **, M2C_UNK);
