@@ -1050,6 +1050,11 @@ u32 fn_80387058(void) {
     return (__DSPRegs[2] << 16) | __DSPRegs[3];
 }
 
+void fn_80387070(u32 mail) {
+    __DSPRegs[0] = mail >> 16;
+    __DSPRegs[1] = mail;
+}
+
 void fn_80387084(void) {
     s32 enabled = fn_8025465C();
     u16 tmp = __DSPRegs[5];
