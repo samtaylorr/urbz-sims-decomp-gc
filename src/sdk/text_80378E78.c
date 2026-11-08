@@ -64,6 +64,21 @@ void fn_80379930(u8* buf, s32 length, s32 offset) {
     }
 }
 
+s32 fn_8037AC78(s32 *sem) {
+    s32 fn_8025465C(void);
+    void fn_80254684(s32);
+    s32 enabled;
+    s32 count;
+
+    enabled = fn_8025465C();
+    count = *sem;
+    if (count > 0) {
+        *sem = count - 1;
+    }
+    fn_80254684(enabled);
+    return count;
+}
+
 s32 fn_8037ACCC(s32 *arg0) {
     s32 enabled;
     s32 n;
@@ -109,6 +124,16 @@ void fn_8037AD9C(void *arg0, void *arg1) {
         M2C_FIELD(arg1, f32 *, 0x24) = (f32) M2C_FIELD(arg0, f32 *, 0x24);
         M2C_FIELD(arg1, f32 *, 0x28) = (f32) M2C_FIELD(arg0, f32 *, 0x28);
         M2C_FIELD(arg1, f32 *, 0x2C) = (f32) M2C_FIELD(arg0, f32 *, 0x2C);
+    }
+}
+
+void fn_8037B1B0(f32 (*a)[4], f32 (*srcBase)[3][4], f32 (*dstBase)[3][4], u32 count) {
+    u32 i;
+
+    for (i = 0; i < count; i++) {
+        fn_8037AE3C(a, *srcBase, *dstBase);
+        srcBase++;
+        dstBase++;
     }
 }
 
@@ -253,6 +278,79 @@ void fn_8037C144(void *arg0, void *arg1, f32 farg0, f32 farg1, f32 farg2) {
     M2C_FIELD(arg1, f32 *, 0x24) = (f32) (M2C_FIELD(arg0, f32 *, 0x24) * farg2);
     M2C_FIELD(arg1, f32 *, 0x28) = (f32) (M2C_FIELD(arg0, f32 *, 0x28) * farg2);
     M2C_FIELD(arg1, f32 *, 0x2C) = (f32) (M2C_FIELD(arg0, f32 *, 0x2C) * farg2);
+}
+
+void fn_8037C820(f32 (*m)[4], f32 t, f32 b, f32 l, f32 r, f32 scaleS, f32 scaleT, f32 transS, f32 transT) {
+    f32 tmp;
+
+    tmp = 1.0f / (r - l);
+    m[0][0] = 2.0f * tmp * scaleS;
+    m[0][1] = 0.0f;
+    m[0][2] = 0.0f;
+    m[0][3] = ((-(r + l) * tmp) * scaleS) + transS;
+
+    tmp = 1.0f / (t - b);
+    m[1][0] = 0.0f;
+    m[1][1] = 2.0f * tmp * scaleT;
+    m[1][2] = 0.0f;
+    m[1][3] = ((-(t + b) * tmp) * scaleT) + transT;
+
+    m[2][0] = 0.0f;
+    m[2][1] = 0.0f;
+    m[2][2] = 0.0f;
+    m[2][3] = 1.0f;
+}
+
+void fn_8037C8A8(f32 (*m)[4], f32 *src, f32 *dst) {
+    f32 vTmp[3];
+
+    vTmp[0] = m[0][0] * src[0] + m[0][1] * src[1] + m[0][2] * src[2] + m[0][3];
+    vTmp[1] = m[1][0] * src[0] + m[1][1] * src[1] + m[1][2] * src[2] + m[1][3];
+    vTmp[2] = m[2][0] * src[0] + m[2][1] * src[1] + m[2][2] * src[2] + m[2][3];
+
+    dst[0] = vTmp[0];
+    dst[1] = vTmp[1];
+    dst[2] = vTmp[2];
+}
+
+void fn_8037CC20(f32 (*m)[4], f32 *src, f32 *dst) {
+    f32 vTmp[3];
+
+    vTmp[0] = m[0][0] * src[0] + m[0][1] * src[1] + m[0][2] * src[2];
+    vTmp[1] = m[1][0] * src[0] + m[1][1] * src[1] + m[1][2] * src[2];
+    vTmp[2] = m[2][0] * src[0] + m[2][1] * src[1] + m[2][2] * src[2];
+
+    dst[0] = vTmp[0];
+    dst[1] = vTmp[1];
+    dst[2] = vTmp[2];
+}
+
+void fn_8037CF34(f32 (*m)[4], f32 t, f32 b, f32 l, f32 r, f32 n, f32 f) {
+    f32 tmp;
+
+    tmp = 1.0f / (r - l);
+    m[0][0] = (2.0f * n) * tmp;
+    m[0][1] = 0.0f;
+    m[0][2] = (r + l) * tmp;
+    m[0][3] = 0.0f;
+
+    tmp = 1.0f / (t - b);
+    m[1][0] = 0.0f;
+    m[1][1] = (2.0f * n) * tmp;
+    m[1][2] = (t + b) * tmp;
+    m[1][3] = 0.0f;
+
+    m[2][0] = 0.0f;
+    m[2][1] = 0.0f;
+
+    tmp = 1.0f / (f - n);
+    m[2][2] = -(n)*tmp;
+    m[2][3] = tmp * -(f * n);
+
+    m[3][0] = 0.0f;
+    m[3][1] = 0.0f;
+    m[3][2] = -1.0f;
+    m[3][3] = 0.0f;
 }
 
 void fn_8037D0A0(f32 (*m)[4], f32 t, f32 b, f32 l, f32 r, f32 n, f32 f) {
@@ -1255,6 +1353,16 @@ void fn_80383A20(void) {
 
 }
 
+void fn_80383AE8(void *arg0, u16 arg1) {
+    fn_8025465C();
+    M2C_FIELD(arg0, u16 *, 0x146) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x1C) = (s32) (M2C_FIELD(arg0, s32 *, 0x1C) | 4);
+    if (arg1 == 0) {
+        M2C_FIELD(arg0, s32 *, 0x20) = 1;
+    }
+    fn_80254684();
+}
+
 void fn_80383B44(void *arg0, s16 arg1) {
     fn_8025465C();
     M2C_FIELD(arg0, s16 *, 0x148) = arg1;
@@ -1279,6 +1387,13 @@ void fn_80383E48(void *arg0, s16 arg1, s16 arg2) {
     M2C_FIELD(arg0, s16 *, 0x178) = arg1;
     M2C_FIELD(arg0, s16 *, 0x17A) = arg2;
     M2C_FIELD(arg0, s32 *, 0x1C) = (s32) (M2C_FIELD(arg0, s32 *, 0x1C) | 0x40);
+    fn_80254684();
+}
+
+void fn_80383EA4(void *arg0) {
+    fn_8025465C();
+    M2C_FIELD(arg0, s32 *, 0x24) = M2C_FIELD(arg0, s32 *, 0x24) + 1;
+    M2C_FIELD(arg0, s32 *, 0x1C) = (s32) (M2C_FIELD(arg0, s32 *, 0x1C) | 0x80);
     fn_80254684();
 }
 
