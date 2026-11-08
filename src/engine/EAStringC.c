@@ -2829,6 +2829,20 @@ void fn_802B0084(s32 arg0, s32 arg1) {
     fn_802B000C(0, arg0, arg1);
 }
 
+void *fn_802B0174(char *a, char *b) {
+    char *q;
+
+    for (; a != NULL; a = M2C_FIELD(a, void **, 0x50) != NULL ? M2C_FIELD(a, char **, 0x4C) : NULL) {
+        for (q = b; q != a && q != NULL;) {
+            q = M2C_FIELD(q, void **, 0x50) != NULL ? M2C_FIELD(q, char **, 0x4C) : NULL;
+        }
+        if (a == q) {
+            return a;
+        }
+    }
+    return NULL;
+}
+
 s32 fn_802B01E4(void *self, s32 arg1) {
     extern void fn_802B0694(void *, s32, s32);
     s32 n = 0;
