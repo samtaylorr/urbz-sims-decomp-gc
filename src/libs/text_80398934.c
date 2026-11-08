@@ -757,7 +757,9 @@ s32 fn_80398C84(s32 i) {
 }
 
 void fn_80398C94(s32 i, s32 v) {
-    ((s32 *)lbl_80496624)[i] = v;
+    register u32 *p asm("r5") = (u32 *)lbl_80496624;
+    register s32 off asm("r0") = i * 4;
+    *(s32 *)((char *)p + off) = v;
 }
 
 u8 fn_80398CA4(s32 i) {
@@ -3904,11 +3906,11 @@ void **fn_803A0A44(void **self, void **other) {
                 size = xlen * 4;
                 bytes = size;
                 if (size > 0x80) {
-                    tmp = (void **)fn_802D1FC8(bytes);
-                    size = 0;
+                    register void *a asm("r3") = (void *)bytes;
+                    tmp = (void **)fn_802D1FC8(a);
                 } else {
-                    tmp = (void **)fn_80399BE8(bytes);
-                    size = 0;
+                    register void *a asm("r3") = (void *)bytes;
+                    tmp = (void **)fn_80399BE8(a);
                 }
             } else {
                 tmp = NULL;
