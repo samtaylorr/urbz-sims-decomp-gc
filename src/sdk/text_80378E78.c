@@ -622,8 +622,8 @@ void fn_80381198(void *arg0) {
     fn_8038103C(node);
     if (*(u16 *)((u8 *)node + 0x146) == 1) {
         *(s32 *)((u8 *)node + 0x20) = 1;
-        fn_803837D8(node);
     }
+    fn_803837D8(node);
     node->next = lbl_804763C0[0];
     lbl_804763C0[0] = node;
     node->idx = 0;
