@@ -1841,6 +1841,11 @@ void fn_802B0084(s32 arg0, s32 arg1) {
     fn_802B000C(0, arg0, arg1);
 }
 
+void fn_802B0904(void *self) {
+    M2C_UNK fn_802B0694(void *, s32, s32);
+    fn_802B0694(self, 0, 1);
+}
+
 void fn_8027873C(void);
 void fn_802B092C(void) {
     fn_8027873C();
