@@ -77,17 +77,16 @@ s16 fn_80149BE4(void *arg0) {
 }
 
 s32 fn_8014A690(char *arg0) {
-    char **tbl;
-    s32 total;
     s32 i;
+    s32 total;
+    char **tbl;
 
-    tbl = (char **)(arg0 + 0x50);
     total = 0;
-    for (i = 0; i <= 0xFF; i++) {
-        char *it = tbl[i];
+    tbl = (char **)(arg0 + 0x50);
+    for (i = 0; i < 0x100; i++) {
         s32 n = 0;
-        while (it != NULL) {
-            it = M2C_FIELD(it, char **, 0xA0);
+        char *it;
+        for (it = tbl[i]; it != NULL; it = M2C_FIELD(it, char **, 0xA0)) {
             n++;
         }
         total += n;
@@ -424,20 +423,26 @@ s32 fn_80151040(void *arg0) {
 
 extern void fn_803A479C(void *, void *);
 extern char *lbl_80496668;
-void fn_801510BC(s32 *self, s32 a, s32 b) {
-    self[1] = a;
-    self[2] = b;
-    self[0] = a;
+s32 *fn_801510BC(s32 *self, s32 a, s32 b) {
+    s32 *p = self;
+    p[1] = a;
+    p[2] = b;
+    p[0] = a;
+    return self;
 }
 
 s32 fn_801510D0(s32 *self, s32 *other) {
-    if (other[1] != self[1]) {
-        return 0;
+    s32 r;
+    if (other[1] == self[1]) {
+        if (other[1] == 0) {
+            return 1;
+        }
+        r = 1;
+        if (other[0] == self[0]) {
+            return r;
+        }
     }
-    if (other[1] == 0) {
-        return 1;
-    }
-    return other[0] == self[0];
+    return 0;
 }
 
 void fn_8015121C(void **obj) {
