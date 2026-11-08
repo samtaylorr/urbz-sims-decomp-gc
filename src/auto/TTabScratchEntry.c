@@ -482,8 +482,8 @@ void fn_8019C0D4(void) {
 
     if (lbl_8049454C != 0) {
         fn_803AABBC(lbl_8049454C, 3);
-        lbl_8049454C = 0;
     }
+    lbl_8049454C = 0;
 }
 
 s64 fn_8019C3C4(char *self, s32 arg1, s32 *arg2) {
