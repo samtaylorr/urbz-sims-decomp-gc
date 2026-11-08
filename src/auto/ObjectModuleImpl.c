@@ -498,8 +498,7 @@ s32 fn_80157A38(void) {
 }
 
 s32 fn_80157A40(void *self, s32 i) {
-    u8 **t = M2C_FIELD(self, u8 ***, 0x2058);
-    u8 *p = *(u8 **)((u8 *)t + i * 4);
+    u8 *p = *(u8 **)(M2C_FIELD(self, char **, 0x2058) + (i << 2));
     return p != NULL ? *(s32 *)(p + 4) : 0;
 }
 
