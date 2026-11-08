@@ -3656,6 +3656,19 @@ void *fn_802B919C(void *arg0, u32 *arg1) {
     return arg0;
 }
 
+void fn_802B9254(void *arg0, s32 arg1) {
+    extern char lbl_80418F70[];
+    extern void (*lbl_80443318[])(void *, s32);
+    extern void fn_802BA118(void *, s32);
+    extern void fn_802A1EF0(void *);
+    M2C_FIELD(arg0, void **, 4) = lbl_80418F70;
+    fn_802BA118(arg0, 0);
+    if (arg1 & 1) {
+        fn_802A1EF0(arg0);
+        lbl_80443318[0]((u8 *)arg0 - 8, 0x2C);
+    }
+}
+
 void fn_802B9314(void) {
     extern u8 *lbl_80494D6C;
     extern u8 *lbl_80494D70;
