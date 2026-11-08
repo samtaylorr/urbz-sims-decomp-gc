@@ -1288,6 +1288,7 @@ s32 fn_800D50A4(void) {
 
 void fn_800D5114(void *arg0, s32 arg1) {
     extern u8 lbl_8040B9E0[];
+    void fn_802D1A00(void *, void *);
     M2C_FIELD(arg0, void **, 8) = lbl_8040B9E0;
     if (arg1 & 1) {
         fn_802D1A00(fn_802D0AB8(arg0), arg0);
@@ -1324,7 +1325,7 @@ void fn_800D53B8(char *self, BSKey *key) {
     char *e;
     char *obj;
     char *vt;
-    BSKey k;
+    struct { s32 v; s32 w; } k;
     s32 v;
 
     lbl_8041FCCC[0] = 1;
@@ -1333,12 +1334,12 @@ void fn_800D53B8(char *self, BSKey *key) {
     if (node != NULL) {
         do {
             e = M2C_FIELD(node, char **, 0);
-            k = *(BSKey *)e;
-            if (*(s32 *)&k == key->v) {
+            k.v = *(s32 *)e;
+            if (k.v == key->v) {
                 if (M2C_FIELD(self, char **, 4) != NULL) {
                     obj = *M2C_FIELD(self, char ***, 4);
                     vt = M2C_FIELD(obj, char **, 8);
-                    M2C_FIELD(vt, void (**)(void *, s32), 0x2C)(obj + M2C_FIELD(vt, s16 *, 0x28), k.v);
+                    M2C_FIELD(vt, void (**)(void *), 0x2C)(obj + M2C_FIELD(vt, s16 *, 0x28));
                 }
                 M2C_FIELD(self, char **, 4) = node;
                 v = key->v;
@@ -1405,13 +1406,14 @@ void fn_800D5FAC(void) {
 s32 fn_800D5FB0(void *self, s32 arg1) {
     extern s32 lbl_80494FCC;
     extern s32 fn_803338C0(s32);
-    s32 ret;
-    ret = 0;
+    s32 ret = 0;
     if (fn_803338C0(lbl_80494FCC) != 0) {
-        if (arg1 != 0) {
+        if (arg1 == 0) {
+            if (M2C_FIELD(self, s32 *, 0x30) == 0) {
+                ret = 1;
+            }
+        } else {
             ret = M2C_FIELD(self, s32 *, 0x34) == 0;
-        } else if (M2C_FIELD(self, s32 *, 0x30) == 0) {
-            ret = 1;
         }
     }
     return ret;
@@ -3821,16 +3823,19 @@ void fn_800E3350(void *arg0) {
     extern f32 lbl_803D4F3C[];
     void fn_80048770(void *, s32);
     struct v2 { f32 x, y; } v;
+    struct v2 *pv;
     f32 *self = arg0;
     f32 zero = lbl_803D4F2C[0];
+    f32 one = lbl_803D4F30[0];
 
     self[0] = zero;
     self[2] = zero;
-    self[1] = lbl_803D4F30[0];
+    self[1] = one;
     ((s32 *)self)[3] = 1;
     fn_80048770(lbl_8041F754, 0);
-    v.x = lbl_803D4F34[0];
-    v.y = lbl_803D4F38[0];
+    pv = &v;
+    pv->x = lbl_803D4F34[0];
+    pv->y = lbl_803D4F38[0];
     ((s32 *)self)[0x30 / 4] = 0;
     *(struct v2 *)(self + 4) = v;
     self[6] = lbl_803D4F3C[0];
