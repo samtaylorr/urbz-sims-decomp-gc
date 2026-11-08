@@ -608,6 +608,7 @@ s32 fn_8029A95C(void *arg0, s32 year) {
 }
 
 s32 fn_8029A98C(void *arg0, s32 month, s32 year) {
+    s32 fn_8029A908(void *, s32);
     s32 days = 31;
 
     switch (month) {
@@ -621,9 +622,8 @@ s32 fn_8029A98C(void *arg0, s32 month, s32 year) {
         days = 31;
         break;
     case 1:
-        if (fn_8029A908(arg0, year) == 0) {
-            days = 28;
-        } else {
+        days = 28;
+        if (fn_8029A908(arg0, year) != 0) {
             days = 29;
         }
         break;
@@ -941,6 +941,16 @@ void fn_802A1E98(s32 arg0) {
     node[0] = 0;
     node[1] = lbl_80494C8C;
     lbl_80494C8C = arg0;
+}
+
+s32 fn_802A1F64(void *arg0) {
+    void *vt;
+
+    if (arg0 == NULL) {
+        return 0;
+    }
+    vt = M2C_FIELD(arg0, void **, 4);
+    return M2C_FIELD(vt, s32 (**)(void *), 0x34)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x30));
 }
 
 s32 fn_802A2014(s32 arg0) {
