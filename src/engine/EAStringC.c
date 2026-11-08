@@ -625,8 +625,9 @@ s32 fn_8029A98C(void *arg0, s32 month, s32 year) {
         days = 31;
         break;
     case 1:
-        days = 28;
-        if (fn_8029A908(arg0, year) != 0) {
+        if (fn_8029A908(arg0, year) == 0) {
+            days = 28;
+        } else {
             days = 29;
         }
         break;
@@ -991,6 +992,23 @@ void fn_802A21B0(void *arg0) {
     for (; i < count; i++) {
         vt = M2C_FIELD(arg0, u8 **, 4);
         child = (*(void *(**)(void *, s32))(vt + 0x2C))((u8 *)arg0 + *(s16 *)(vt + 0x28), i);
+        if (child != NULL && !(M2C_FIELD(child, s32 *, 0) & 0x4000)) {
+            fn_802A21B0(child);
+        }
+    }
+}
+
+void fn_802A224C(void **arg0) {
+    s32 i;
+    s32 count;
+    void *obj;
+    void *child;
+
+    i = 0;
+    obj = arg0[0];
+    count = ((s32 (*)(void *))arg0[1])(obj);
+    for (; i < count; i++) {
+        child = ((void *(*)(void *, s32))arg0[2])(obj, i);
         if (child != NULL && !(M2C_FIELD(child, s32 *, 0) & 0x4000)) {
             fn_802A21B0(child);
         }
