@@ -17,6 +17,10 @@ extern s32 lbl_80496440;
 
 
 extern s32 lbl_80496354;
+BOOL fn_803794FC(u8 c) {
+    return (0x81 <= c && c <= 0x9f) || (0xe0 <= c && c <= 0xfc);
+}
+
 BOOL fn_80379554(u8 c) {
     return 0x40 <= c && c <= 0xfc && c != 0x7f;
 }
