@@ -2975,7 +2975,7 @@ void *fn_801FB790(void *arg0) {
     if (p != NULL) {
         do {
             if (M2C_FIELD(M2C_FIELD(p, void **, 0x38), s32 *, 0xC0) != 0) {
-                break;
+                return NULL;
             }
             e = (VtEnt *)(*(u8 **)obj + 0xB0);
             p = e->fn(obj + e->delta, p, i++);
@@ -3105,7 +3105,11 @@ void fn_801FF39C(void *arg0) {
 void fn_801FF6E0(void *arg0) {
     M2C_UNK fn_801B8734(s32);
     extern void *lbl_8041FA30[];
-    fn_801B8734(M2C_FIELD(*lbl_8041FA30, s32 *, 0x14));
+    s32 v;
+    do {
+        v = M2C_FIELD(lbl_8041FA30[0], s32 *, 0x14);
+    } while (0);
+    fn_801B8734(v);
 }
 
 void fn_802000DC(void *self, void *arg1) {
@@ -3521,9 +3525,8 @@ void fn_80206FF8(void *arg0, s32 arg1) {
 
 s32 fn_8020703C(void *arg0) {
     s32 fn_80207074(void *);
-    typedef struct { s32 a; s32 b; } Ent;
     s32 i = fn_80207074(arg0);
-    return (*(Ent **)((u8 *)arg0 + 0x178) + i)->a;
+    return M2C_FIELD(arg0, s32 **, 0x178)[i * 2];
 }
 
 u8 fn_80207074(void *arg0) {
@@ -3601,10 +3604,14 @@ char *fn_80207818(void *arg0) {
 }
 
 s32 fn_802078B4(void *arg0) {
-    s32 v = M2C_FIELD(arg0, s32 *, 0x84);
     s32 r = 0;
-    if (v <= 4 && v >= 1) {
+    switch (M2C_FIELD(arg0, s32 *, 0x84)) {
+    case 1:
+    case 2:
+    case 3:
+    case 4:
         r = 1;
+        break;
     }
     return r;
 }
@@ -4448,11 +4455,11 @@ s32 fn_8022088C(void *self, u8 *p) {
 }
 
 u8 *fn_802208C0(void *self, u8 *p) {
-    s32 r = *(s32 *)(p + 0x4);
-    if (r != 0) {
-        return (u8 *)r;
+    u8 *r = *(u8 **)(p + 0x4);
+    if (r == NULL) {
+        r = *(u8 **)(p + 0xC);
     }
-    return *(u8 **)(p + 0xC);
+    return r;
 }
 
 u8 *fn_802208D8(u8 *self, s32 idx) {
@@ -4495,8 +4502,9 @@ void fn_802209C4(void *arg0, s32 arg1) {
     void fn_802D20E8(void *);
     extern char lbl_80417770[];
     extern char lbl_80417D08[];
+    char **a = &M2C_FIELD(arg0, char *, 0x8C);
+    *a = lbl_80417770;
     M2C_FIELD(arg0, char **, 0x58) = lbl_80417D08;
-    M2C_FIELD(arg0, char **, 0x8C) = lbl_80417770;
     if (arg1 & 1) {
         fn_802D20E8(arg0);
     }
