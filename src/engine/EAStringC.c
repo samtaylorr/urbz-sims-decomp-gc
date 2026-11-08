@@ -796,9 +796,10 @@ void *fn_8029F688(void **arg0, s32 arg1) {
 
 void *fn_8029F6B4(void *arg0, void *arg1, void *arg2) {
     u8 *vt;
-    M2C_FIELD(arg2, void **, 0x54) = arg1;
-    M2C_FIELD(arg2, void **, 0x58) = M2C_FIELD(arg1, void **, 0x58);
+    void *next = M2C_FIELD(arg1, void **, 0x58);
     vt = M2C_FIELD(arg2, u8 **, 4);
+    M2C_FIELD(arg2, void **, 0x54) = arg1;
+    M2C_FIELD(arg2, void **, 0x58) = next;
     (*(void (**)(void *))(vt + 0xC))((u8 *)arg2 + *(s16 *)(vt + 8));
     if (M2C_FIELD(arg2, void **, 0x58) != NULL) {
         M2C_FIELD(M2C_FIELD(arg2, void **, 0x58), void **, 0x54) = arg2;
