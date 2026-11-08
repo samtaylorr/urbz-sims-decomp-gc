@@ -2248,6 +2248,29 @@ s32 fn_80389994(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x84);
 }
 
+s32 fn_8038A4F0(u8 *card) {
+    s32 fn_80389DA8(u8 *);
+    s32 fn_8038A02C(u8 *, s32 *);
+    s32 fn_8038A26C(u8 *, s32 *);
+    s32 result;
+    s32 errors;
+
+    result = fn_80389DA8(card);
+    if (result < 0) {
+        return result;
+    }
+    errors = fn_8038A02C(card, 0);
+    errors += fn_8038A26C(card, 0);
+    switch (errors) {
+    case 0:
+        return 0;
+    case 1:
+        return -6;
+    default:
+        return -6;
+    }
+}
+
 s32 fn_8038AB0C(s32 chan, void *arg1) {
     s32 fn_8038A57C(s32, void *, void *);
     u8 buf[8];
