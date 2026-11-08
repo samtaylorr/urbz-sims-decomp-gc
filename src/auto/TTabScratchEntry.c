@@ -142,22 +142,23 @@ void fn_8019B330(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     M2C_FIELD(vt, void (**)(void *, s32, s32), 0xD4)((char *)arg0 + M2C_FIELD(vt, s16 *, 0xD0),
         p->a[arg3] + p->b[arg3] - arg2, arg3);
     if (arg3 == 0) {
-        p->c[arg1] = p->c[arg1] + arg2;
+        s32 *c = p->c;
+        c[arg1] += arg2;
     }
 }
 
 void fn_8019B3B8(void *arg0) {
-    struct Row { s32 x[8]; };
-    struct S { u8 pad[0xBC]; struct Row a[5]; s32 b[8]; } *p = arg0;
+    struct S { u8 pad[0xBC]; s32 a[8]; } *q;
     s32 i;
     s32 j;
 
     for (i = 7; i >= 0; i--) {
-        p->b[i] = 0;
+        ((s32 *)((u8 *)arg0 + 0x15C))[i] = 0;
     }
     for (i = 0; i < 5; i++) {
+        q = (struct S *)(i * 32 + (u8 *)arg0);
         for (j = 7; j >= 0; j--) {
-            p->a[i].x[j] = 0;
+            q->a[j] = 0;
         }
     }
     M2C_FIELD(arg0, s16 *, 0x4C) = 0;
@@ -348,6 +349,39 @@ void fn_8019CA88(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     M2C_FIELD(arg0, s32 *, 0x24) = arg1;
     M2C_FIELD(arg0, s32 *, 0x28) = arg2;
     M2C_FIELD(arg0, s32 *, 0x2C) = arg3;
+}
+
+void fn_8019CAF0(void *arg0, s32 arg1, s32 arg2) {
+    ((s32 *)((u8 *)arg0 + 0x10))[arg1] = arg2;
+}
+
+extern u8 lbl_80414750[];
+extern f32 lbl_803DB6F0[];
+void fn_8019CC24(void *, s32);
+void **fn_8019CB00(void **self) {
+    fn_8019C828(self);
+    *self = lbl_80414750;
+    M2C_FIELD(self, s16 *, 0x4) = 0;
+    M2C_FIELD(self, s32 *, 0x8) = 0;
+    M2C_FIELD(self, s32 *, 0xC) = 0x32;
+    M2C_FIELD(self, s32 *, 0x10) = 0;
+    M2C_FIELD(self, f32 *, 0x14) = lbl_803DB6F0[0];
+    M2C_FIELD(self, f32 *, 0x18) = lbl_803DB6F0[0];
+    M2C_FIELD(self, f32 *, 0x1C) = lbl_803DB6F0[0];
+    return self;
+}
+
+void **fn_8019CB6C(void **self, void *arg1) {
+    fn_8019C83C(self);
+    *self = lbl_80414750;
+    M2C_FIELD(self, s16 *, 0x4) = 0;
+    M2C_FIELD(self, f32 *, 0x14) = M2C_FIELD(arg1, f32 *, 0x4);
+    M2C_FIELD(self, f32 *, 0x18) = M2C_FIELD(arg1, f32 *, 0x8);
+    M2C_FIELD(self, f32 *, 0x1C) = M2C_FIELD(arg1, f32 *, 0xC);
+    M2C_FIELD(self, s32 *, 0xC) = M2C_FIELD(arg1, s32 *, 0x10);
+    M2C_FIELD(self, s32 *, 0x10) = M2C_FIELD(arg1, s32 *, 0x14);
+    fn_8019CC24(self, M2C_FIELD(arg1, s32 *, 0x18));
+    return self;
 }
 
 void fn_8019CBE8(void *arg0, void *arg1) {
@@ -1773,6 +1807,10 @@ s32 fn_801A3D08(void) {
 
 void fn_801A3D10(void) {
 
+}
+
+s32 fn_801A3D14(s32 arg0) {
+    return arg0 == 3;
 }
 
 s32 fn_801A3D24(s32 arg0) {
