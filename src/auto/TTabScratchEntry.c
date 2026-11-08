@@ -1435,6 +1435,13 @@ s32 fn_801A23AC(void *self) {
     }
 }
 
+void fn_801A251C(void *self) {
+    s32 fn_801A2F28(void *);
+    void fn_801A2EF4(void *, s32);
+    char *v = (char *)self + 8;
+    fn_801A2EF4(v, fn_801A2F28(v) - 1);
+}
+
 void fn_801A2EF4();
 void fn_801A2600(char *self) {
     extern void fn_801A2EF4(void *);
@@ -2065,6 +2072,37 @@ s32 fn_801AA4C4(void) {
 
 s32 fn_801AA4E0(void) {
     return 0x80;
+}
+
+s32 fn_800FC854(s32);
+s32 fn_800FC7D4(s32);
+s32 fn_801AA55C(s32 arg0, s32 arg1, u16 *out) {
+    s32 type = fn_800FC854(arg0);
+    s32 bits = 0;
+    s16 d;
+
+    switch (type) {
+    case 1:
+        bits = 0x4000;
+        break;
+    case 2:
+        break;
+    case 3:
+        bits = 0x2000;
+        break;
+    default:
+        return 0;
+    }
+    d = arg0 - fn_800FC7D4((s16)type);
+    if (d > 0x3F) {
+        return 0;
+    }
+    bits |= (d & 0x3F) << 7;
+    if (arg1 >= fn_801AA4E0()) {
+        return 0;
+    }
+    *out = bits | (arg1 & 0x7F);
+    return 1;
 }
 
 s32 fn_801AA930(s32 *self) {
