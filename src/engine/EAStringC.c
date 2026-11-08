@@ -558,6 +558,43 @@ s32 fn_8029A0E8(void) {
     return 1;
 }
 
+s32 fn_8029A95C(void *arg0, s32 year) {
+    if (fn_8029A908(arg0, year) == 0) {
+        return 365;
+    }
+    return 366;
+}
+
+s32 fn_8029A98C(void *arg0, s32 month, s32 year) {
+    s32 days = 31;
+
+    switch (month) {
+    case 0:
+    case 2:
+    case 4:
+    case 6:
+    case 7:
+    case 9:
+    case 11:
+        days = 31;
+        break;
+    case 1:
+        if (fn_8029A908(arg0, year) == 0) {
+            days = 28;
+        } else {
+            days = 29;
+        }
+        break;
+    case 3:
+    case 5:
+    case 8:
+    case 10:
+        days = 30;
+        break;
+    }
+    return days;
+}
+
 void *fn_8029B8C0(void) {
     extern void *lbl_80494D9C;
     extern u8 lbl_80418D70[];
@@ -702,6 +739,27 @@ void *fn_8029F688(void **arg0, s32 arg1) {
     return NULL;
 }
 
+void *fn_8029F6B4(void *arg0, void *arg1, void *arg2) {
+    u8 *vt;
+    M2C_FIELD(arg2, void **, 0x54) = arg1;
+    M2C_FIELD(arg2, void **, 0x58) = M2C_FIELD(arg1, void **, 0x58);
+    vt = M2C_FIELD(arg2, u8 **, 4);
+    (*(void (**)(void *))(vt + 0xC))((u8 *)arg2 + *(s16 *)(vt + 8));
+    if (M2C_FIELD(arg2, void **, 0x58) != NULL) {
+        M2C_FIELD(M2C_FIELD(arg2, void **, 0x58), void **, 0x54) = arg2;
+    }
+    M2C_FIELD(M2C_FIELD(arg2, void **, 0x54), void **, 0x58) = arg2;
+    return arg2;
+}
+
+void fn_8029F834(s32 arg0, void *arg1, void *arg2) {
+    extern void fn_8029F550(s32, void *, s32, s32 *, void **);
+    s32 sp8;
+    void *spC;
+    fn_8029F550(arg0, arg1, 0, &sp8, &spC);
+    M2C_FIELD(fn_8029F6B4((void *)arg0, (void *)sp8, arg2), void **, 8) = arg1;
+}
+
 void *fn_8029F8BC(void *arg0) {
     void *temp_r11;
     void *temp_r11_2;
@@ -750,11 +808,12 @@ void fn_802A0938(s32 arg0, void *arg1) {
 
 void fn_802A0980(s32 arg0, void *arg1) {
     extern void fn_8029F550(s32, void *, s32, s32 *, void **);
+    void *key = M2C_FIELD(arg1, void **, 8);
     s32 sp8;
     void *spC;
-    spC = NULL;
     sp8 = 0;
-    fn_8029F550(M2C_FIELD(arg0, s32 *, 0), M2C_FIELD(arg1, void **, 8), 0, &sp8, &spC);
+    spC = NULL;
+    fn_8029F550(M2C_FIELD(arg0, s32 *, 0), key, 0, &sp8, &spC);
     if (M2C_FIELD(spC, s32 *, 8) > 0x3FFF) {
         fn_802A0890(arg0, spC);
     }
@@ -1832,29 +1891,31 @@ void fn_802AED48(u32 seed) {
 extern f32 lbl_803EDBB8[];
 extern f32 lbl_803EDBBC[];
 void fn_802AED88(f32 *m) {
-    m[13] = lbl_803EDBBC[0];
-    m[11] = lbl_803EDBB8[0];
+    f32 zero = lbl_803EDBB8[0];
+    f32 one = lbl_803EDBBC[0];
+    m[13] = one;
+    m[11] = zero;
     M2C_FIELD(m, s32 *, 0x3BC) = 0;
-    m[0] = lbl_803EDBB8[0];
-    m[1] = lbl_803EDBB8[0];
-    m[2] = lbl_803EDBB8[0];
-    m[3] = lbl_803EDBB8[0];
-    m[4] = lbl_803EDBBC[0];
-    m[5] = lbl_803EDBBC[0];
-    m[6] = lbl_803EDBBC[0];
-    m[7] = lbl_803EDBBC[0];
-    m[8] = lbl_803EDBB8[0];
-    m[9] = lbl_803EDBBC[0];
-    m[10] = lbl_803EDBBC[0];
-    m[12] = lbl_803EDBBC[0];
+    m[0] = zero;
+    m[1] = zero;
+    m[2] = zero;
+    m[3] = zero;
+    m[4] = one;
+    m[5] = one;
+    m[6] = one;
+    m[7] = one;
+    m[8] = zero;
+    m[9] = one;
+    m[10] = one;
+    m[12] = one;
     M2C_FIELD(m, s32 *, 0x3B8) = 0;
 }
 
 void fn_802AEDE4(u8 *self) {
     typedef struct { s32 v[8]; } AptXform;
-    s32 n = M2C_FIELD(self, s32 *, 0x3B8);
-    ((AptXform *)(self + 0x38))[n] = *(AptXform *)self;
-    M2C_FIELD(self, s32 *, 0x3B8) = n + 1;
+    s32 *depth = (s32 *)(self + 0x3B8);
+    ((AptXform *)(self + 0x38))[*depth] = *(AptXform *)self;
+    (*depth)++;
 }
 
 void fn_802AF384(void *arg0, f32 farg0, f32 farg1) {
