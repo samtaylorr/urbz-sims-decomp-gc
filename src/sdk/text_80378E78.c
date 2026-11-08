@@ -1458,6 +1458,23 @@ void fn_80384318(void *arg0, u32 arg1) {
     fn_80254684();
 }
 
+void fn_8038436C(void *arg0, u32 *arg1) {
+    u32 *dst = (u32 *)((u8 *)arg0 + 0x1B6);
+    fn_8025465C();
+    dst[0] = arg1[0];
+    dst[1] = arg1[1];
+    dst[2] = arg1[2];
+    dst[3] = arg1[3];
+    dst[4] = arg1[4];
+    dst[5] = arg1[5];
+    dst[6] = arg1[6];
+    dst[7] = arg1[7];
+    dst[8] = arg1[8];
+    dst[9] = arg1[9];
+    M2C_FIELD(arg0, s32 *, 0x1C) = (s32) (M2C_FIELD(arg0, s32 *, 0x1C) | 0x20000);
+    fn_80254684();
+}
+
 void fn_803845AC(void *arg0, void *arg1) {
     u16 *d = (u16 *)((u8 *)arg0 + 0x1F2);
     fn_8025465C();
