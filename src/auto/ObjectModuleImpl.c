@@ -772,6 +772,18 @@ void fn_80152310(void) {
 
 }
 
+void fn_80153E74(char *self) {
+    extern void fn_801325E4(void *);
+    char *vt = *(char **)self;
+    char *p;
+
+    for (p = M2C_FIELD(vt, char *(**)(void *), 0x9C)(self + M2C_FIELD(vt, s16 *, 0x98)); p != NULL;
+         p = M2C_FIELD(M2C_FIELD(p, char **, 4), char *(**)(void *), 0x454)(p + M2C_FIELD(M2C_FIELD(p, char **, 4), s16 *, 0x450))) {
+        vt = M2C_FIELD(p, char **, 4);
+        fn_801325E4(M2C_FIELD(vt, void *(**)(void *), 0x4D4)(p + M2C_FIELD(vt, s16 *, 0x4D0)));
+    }
+}
+
 void fn_80154BB4(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x2048) = (s32) M2C_FIELD(arg0, s32 *, 0x2044);
 }
