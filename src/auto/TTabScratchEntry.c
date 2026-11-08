@@ -136,6 +136,13 @@ s32 fn_8019B1D0(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0xA4);
 }
 
+s32 fn_8019B1D8(void *arg0) {
+    if (M2C_FIELD(arg0, s32 *, 0xA0) != 0) {
+        return 1;
+    }
+    return M2C_FIELD(arg0, s16 *, 0x36) != 0;
+}
+
 void fn_8019B204(void *self, s16 arg1) {
     void fn_801051C8(s32, s32);
     void *vt;
