@@ -377,19 +377,19 @@ void fn_8019B6E4(void *self, s32 idx, TTabBlk20 *out) {
 }
 
 void fn_8019B748(void *self, s32 *out) {
-    u8 *src[3];
+    s32 *src[3] = {
+        (s32 *)((u8 *)self + 0xbc),
+        (s32 *)((u8 *)self + 0xdc),
+        (s32 *)((u8 *)self + 0x15c),
+    };
     s32 i;
     s32 j;
-    src[0] = (u8 *)self + 0xbc;
-    src[1] = (u8 *)self + 0xdc;
-    src[2] = (u8 *)self + 0x15c;
     for (i = 0; i < 8; i++) {
-        s32 off = i * 4;
         s32 sum = 0;
         for (j = 0; j < 3; j++) {
-            sum += *(s32 *)(src[j] + off);
+            sum += src[j][i];
         }
-        *(s32 *)((u8 *)out + off) = sum;
+        out[i] = sum;
     }
 }
 
@@ -397,6 +397,7 @@ s32 fn_8019B7B4(void *self, s32 arg1) {
     s16 fn_8004E8D0(void *);
     extern u8 lbl_8041F94C[];
     s32 off;
+    u8 *arr;
     switch (arg1) {
     case 0x18:
         return 0;
@@ -408,7 +409,8 @@ s32 fn_8019B7B4(void *self, s32 arg1) {
         break;
     }
     off = arg1 * 2;
-    return *(s16 *)((u8 *)self + 0x14 + off);
+    arr = (u8 *)self + 0x14;
+    return *(s16 *)(arr + off);
 }
 
 s32 fn_8019B83C(void *self, s32 arg1, u16 **out) {
@@ -2985,12 +2987,12 @@ void *fn_801A47A0(void *self, s32 arg1, s32 arg2) {
     fn_80105120((char *)self + 4);
     M2C_FIELD(self, void **, 0x10) = lbl_80415048;
     M2C_FIELD(self, void **, 0) = lbl_80415068;
-    M2C_FIELD(self, s32 *, 0x38) = 0;
     M2C_FIELD(self, s32 *, 0x14) = 0;
     M2C_FIELD(self, s32 *, 0x18) = 0;
     M2C_FIELD(self, s32 *, 0x2C) = 0;
     M2C_FIELD(self, s32 *, 0x30) = 0;
     M2C_FIELD(self, s32 *, 0x34) = 0;
+    M2C_FIELD(self, s32 *, 0x38) = 0;
     fn_801A48A4(self, arg1, arg2, 0);
     fn_8019FE34();
     return self;
