@@ -5348,6 +5348,31 @@ s32 *fn_80223638(s32 *arg0) {
     return arg0;
 }
 
+void fn_8022366C(void *arg0, s32 flags) {
+    typedef struct { u8 b[12]; } Elem12;
+    extern void fn_802249AC(void *);
+    extern void fn_802D20E8(void *);
+    extern void fn_803997AC(void *, u32);
+    Elem12 **v;
+    Elem12 *p;
+
+    fn_802249AC(arg0);
+    v = (Elem12 **)arg0;
+    for (p = v[0]; p != v[1]; p++) {
+    }
+    if (v[0] != 0) {
+        u32 size = (u32)((v[3] - v[0]) * sizeof(Elem12));
+        if (size > 0x80) {
+            fn_802D20E8(v[0]);
+        } else {
+            fn_803997AC(v[0], size);
+        }
+    }
+    if (flags & 1) {
+        fn_802D20E8(arg0);
+    }
+}
+
 s32 fn_80224A28(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x14);
 }
