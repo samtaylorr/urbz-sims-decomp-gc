@@ -2197,6 +2197,13 @@ s32 fn_802B6F58(void) {
     return 0;
 }
 
+void fn_802B6F60(void **obj) {
+    if (obj != NULL) {
+        char *vt = (char *)obj[1];
+        (*(void (**)(void *, s32))(vt + 0x64))((char *)obj + *(s16 *)(vt + 0x60), 3);
+    }
+}
+
 void fn_802B6FA0(void) {
 
 }
