@@ -2300,8 +2300,8 @@ s32 fn_801A2AF8(char *self) {
     char **begin = M2C_FIELD(self, char ***, 8);
     s32 n = M2C_FIELD(self, char ***, 0xC) - begin;
     if (n != 0) {
-        n = (n - 1) * 4;
-        return fn_801A29E0(*(char **)((char *)begin + n)) - M2C_FIELD(self, char **, 0);
+        n -= 1;
+        return fn_801A29E0(begin[n]) - M2C_FIELD(self, char **, 0);
     }
     return 0;
 }
@@ -3052,6 +3052,22 @@ s32 fn_801A9C10(void *arg0, void *arg1) {
         var_r11 = 1;
     }
     return var_r11;
+}
+
+s32 fn_801A9C60(void *self, s32 arg1) {
+    void fn_80105534(void *, s32, s32);
+    void fn_801055FC(void *, s32);
+    struct { s16 a, b, c; } buf;
+    char *ent;
+    void *obj;
+    s32 r;
+
+    ent = M2C_FIELD(self, char **, 0) + 0x48;
+    obj = (char *)self + *(s16 *)ent;
+    fn_80105534(&buf, arg1, 1);
+    r = (*(s32 (**)(void *, void *))(ent + 4))(obj, &buf);
+    fn_801055FC(&buf, 2);
+    return r;
 }
 
 s32 fn_801A9CCC(void *arg0, void *arg1) {
