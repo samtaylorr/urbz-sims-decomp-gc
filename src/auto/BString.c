@@ -114,6 +114,15 @@ static inline s32 BString_CharNe(const u8 *a, const u8 *b) {
     return !BString_CharEq(a, b);
 }
 
+typedef struct {
+    void **begin;
+    void **end;
+} BStringPtrVec;
+
+static inline void **BStringPtrVec_End(BStringPtrVec *v) {
+    return v->end;
+}
+
 void fn_800D1634(void) {
     fn_800F1A60((s32)&lbl_80495A3C, 2);
 }
@@ -1267,12 +1276,12 @@ void fn_800D53B8(char *self, BSKey *key) {
                 if (M2C_FIELD(self, char **, 4) != NULL) {
                     obj = *M2C_FIELD(self, char ***, 4);
                     vt = M2C_FIELD(obj, char **, 8);
-                    M2C_FIELD(vt, void (**)(void *), 0x2C)(obj + M2C_FIELD(vt, s16 *, 0x28));
+                    M2C_FIELD(vt, void (**)(void *, BSKey), 0x2C)(obj + M2C_FIELD(vt, s16 *, 0x28), k);
                 }
                 M2C_FIELD(self, char **, 4) = node;
                 lbl_8041F9F8[0] = key->v;
                 vt = M2C_FIELD(e, char **, 8);
-                M2C_FIELD(vt, void (**)(void *), 0x14)(e + M2C_FIELD(vt, s16 *, 0x10));
+                M2C_FIELD(vt, void (**)(void *, BSKey), 0x14)(e + M2C_FIELD(vt, s16 *, 0x10), *key);
                 return;
             }
             node = M2C_FIELD(node, char **, 8);
