@@ -778,6 +778,18 @@ s32 fn_80299F00(void *arg0, s32 arg1) {
     return ret;
 }
 
+s32 fn_80299F5C(void *arg0) {
+    extern s32 fn_802B70DC(void *);
+    extern s32 fn_802B72D4(void *);
+    s32 ret;
+
+    ret = 0;
+    if (fn_802B70DC(arg0) == 0x13) {
+        ret = fn_802B72D4(arg0) == 0;
+    }
+    return ret;
+}
+
 s32 fn_80299FA8(void *arg0, s32 arg1) {
     extern s32 fn_802B70DC(void *);
     extern s32 fn_802B72D4(void *);
