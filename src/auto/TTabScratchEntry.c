@@ -1841,6 +1841,20 @@ void fn_801A135C(char *self) {
     fn_803AB7D4(self + 8);
 }
 
+void fn_801A1458(void *self, void *arg1) {
+    extern s32 fn_801A2F3C(void *);
+    extern void fn_800FD2C4(void *, s32, void *);
+    extern void fn_800F69F8(void *, void *);
+    extern u8 lbl_803DB878[];
+    void *p = M2C_FIELD(self, void **, 0xC);
+
+    if (p != NULL) {
+        fn_800FD2C4(p, fn_801A2F3C(self), arg1);
+    } else {
+        fn_800F69F8(arg1, lbl_803DB878);
+    }
+}
+
 s32 *fn_801A15BC(s32 *self) {
     extern u8 lbl_80414D70[];
     self[7] = (s32)lbl_80414D70;
