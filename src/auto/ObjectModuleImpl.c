@@ -689,6 +689,14 @@ s32 fn_80157434(void) {
     return 0;
 }
 
+s32 fn_801574D8(void) {
+    extern u8 *lbl_80496660;
+    u8 *obj = lbl_80496660;
+    u8 *vt = *(u8 **)(obj + 0x3A4);
+    (*(void (**)(void *))(vt + 0x8C))(obj + *(s16 *)(vt + 0x88));
+    return 0;
+}
+
 s32 fn_80157674(void *self, s32 idx, s32 mask) {
     s32 off = (idx - 1) * 4;
     return (*(u32 *)((u8 *)M2C_FIELD(self, u32 **, 0x1C) + off) & (mask << 16)) != 0;
