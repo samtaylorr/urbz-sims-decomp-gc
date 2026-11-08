@@ -105,13 +105,14 @@ s32 fn_8014A690(char *arg0) {
 
 char *fn_8014A6D8(char *self, s32 key) {
     s32 fn_8016CCE0(void *);
-    char **tbl = (char **)(self + 0x50);
+    char *prev;
+    char **tbl;
     s32 k;
     s32 *pkey;
     s32 kv;
-    char *prev;
     char *n;
 
+    tbl = (char **)(self + 0x50);
     n = tbl[(u8)key];
     k = key;
     pkey = &k;
@@ -1165,10 +1166,7 @@ s64 fn_80163584(void) {
     extern s32 fn_80049B6C(void *);
     extern s32 fn_800434F0(void);
     extern u8 lbl_8041F94C[];
-    if (fn_80049B6C(lbl_8041F94C) != 0 || fn_800434F0() != 0) {
-        return 1;
-    }
-    return 0;
+    return fn_80049B6C(lbl_8041F94C) != 0 || fn_800434F0() != 0;
 }
 
 s32 fn_80163FF4(char *obj) {
@@ -1192,19 +1190,21 @@ s32 fn_80163FF4(char *obj) {
     return fn_8016CCE0(r);
 }
 
-s32 fn_80164060(char *self, u8 *arg1) {
+s32 fn_80164060(char *self, u16 *arg1) {
     s64 fn_80166A5C(void *, s32, s32, s32, s32, s16 *);
     struct { u8 a; s16 b; s16 c; } loc;
     char *obj;
     char *vt;
+    u16 t;
 
-    if (arg1[4] >> 7) {
+    if (((u8 *)arg1)[4] >> 7) {
         return *(s32 *)arg1;
     }
+    t = arg1[0];
     loc.c = -1;
-    loc.a = *(u16 *)arg1;
-    loc.b = *(s16 *)(arg1 + 2);
-    if (fn_80166A5C(self, loc.a, loc.b, 0, 0, &loc.c) == -1) {
+    loc.a = t;
+    loc.b = arg1[1];
+    if (fn_80166A5C(self, (u8)t, loc.b, 0, 0, &loc.c) == -1) {
         return 0;
     }
     obj = M2C_FIELD(self, char **, 4);
