@@ -343,6 +343,26 @@ s32 fn_8014FBCC(void *arg0, void *arg1) {
     return var_r30;
 }
 
+s32 fn_8014FC44(void *arg0, void *arg1) {
+    s32 fn_8016CB30(void *);
+    s32 fn_800F5530(s32, void *);
+    s32 var_r30;
+    void *temp_r9;
+
+    var_r30 = 0;
+    if (M2C_FIELD(arg1, s32 *, 0x68) == 1 && fn_8016CB30(arg1) == 0) {
+        temp_r9 = M2C_FIELD(M2C_FIELD(arg1, void **, 0x38), void **, 0xC0);
+        if (temp_r9 != NULL) {
+            var_r30 = M2C_FIELD(temp_r9, s32 *, 0x10);
+        }
+        if (fn_800F5530(M2C_FIELD(arg0, s32 *, 0x4C), M2C_FIELD(arg1, void **, 0x54)) == 1) {
+            var_r30 += M2C_FIELD(M2C_FIELD(arg1, void **, 0x54), s32 *, 0x3C);
+            var_r30 += M2C_FIELD(M2C_FIELD(arg1, void **, 0x54), s32 *, 0x40);
+        }
+    }
+    return var_r30;
+}
+
 s32 fn_8014FCD0(void *arg0, void *arg1) {
     s32 fn_8016CC2C(void *, void *);
     s32 fn_8014FDB4(void *, void *);
@@ -581,8 +601,9 @@ s32 fn_801576E4(void *self, s32 idx) {
 
 s32 fn_8015794C(void *self, u32 id) {
     s32 *p;
-    if (id - 0x4000 <= 15) {
-        p = ((s32 **)((char *)self + 0x20A0))[id - 0x4000];
+    u32 idx = id - 0x4000;
+    if (idx <= 15) {
+        p = ((s32 **)((char *)self + 0x20A0))[idx];
         return p != NULL ? p[1] : 0;
     }
     p = M2C_FIELD(self, s32 ***, 0x2090)[id];
