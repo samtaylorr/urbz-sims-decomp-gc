@@ -1201,8 +1201,9 @@ u16 fn_80388F8C(u16 x) {
 
 void fn_80388FB4(u8 *p) {
     extern u8 lbl_804912A0[];
-    *(u8 **)(lbl_804912A0 + 0x10c) = p ? p : lbl_804912A0 + 0x220;
-    *(u8 **)(lbl_804912A0 + 0x21c) = p ? p : lbl_804912A0 + 0x220;
+    u8 *base = lbl_804912A0;
+    *(u8 **)(base + 0x10c) = p ? p : base + 0x220;
+    *(u8 **)(base + 0x21c) = p ? p : base + 0x220;
 }
 
 u32 fn_80388FEC(s32 chan) {
