@@ -2972,12 +2972,14 @@ void *fn_801FB790(void *arg0) {
     obj = M2C_FIELD(arg0, u8 **, 0x50);
     i = 0;
     p = fn_8016CC44(arg0);
-    while (p != NULL) {
-        if (M2C_FIELD(M2C_FIELD(p, void **, 0x38), s32 *, 0xC0) != 0) {
-            break;
-        }
-        e = (VtEnt *)(*(u8 **)obj + 0xB0);
-        p = e->fn(obj + e->delta, p, i++);
+    if (p != NULL) {
+        do {
+            if (M2C_FIELD(M2C_FIELD(p, void **, 0x38), s32 *, 0xC0) != 0) {
+                break;
+            }
+            e = (VtEnt *)(*(u8 **)obj + 0xB0);
+            p = e->fn(obj + e->delta, p, i++);
+        } while (p != NULL);
     }
     return NULL;
 }
@@ -3100,11 +3102,10 @@ void fn_801FF39C(void *arg0) {
     }
 }
 
-void fn_801FF6E0(void) {
-    extern void fn_801B8734(s32);
-    extern s32 *lbl_8041FA30[];
-    s32 *p = lbl_8041FA30[0];
-    fn_801B8734(p[5]);
+void fn_801FF6E0(void *arg0) {
+    M2C_UNK fn_801B8734(s32);
+    extern void *lbl_8041FA30[];
+    fn_801B8734(M2C_FIELD(*lbl_8041FA30, s32 *, 0x14));
 }
 
 void fn_802000DC(void *self, void *arg1) {
@@ -3522,7 +3523,7 @@ s32 fn_8020703C(void *arg0) {
     s32 fn_80207074(void *);
     typedef struct { s32 a; s32 b; } Ent;
     s32 i = fn_80207074(arg0);
-    return M2C_FIELD(arg0, Ent **, 0x178)[i].a;
+    return (*(Ent **)((u8 *)arg0 + 0x178) + i)->a;
 }
 
 u8 fn_80207074(void *arg0) {
@@ -3601,7 +3602,11 @@ char *fn_80207818(void *arg0) {
 
 s32 fn_802078B4(void *arg0) {
     s32 v = M2C_FIELD(arg0, s32 *, 0x84);
-    return v <= 4 && v >= 1;
+    s32 r = 0;
+    if (v <= 4 && v >= 1) {
+        r = 1;
+    }
+    return r;
 }
 
 void fn_80208374(void *arg0, s32 arg1) {
@@ -3821,6 +3826,13 @@ void fn_8020DCB0(void *arg0, s32 *arg1, s32 arg2) {
     } else if (arg1[2] == 0) {
         fn_80245BB4(arg2, lbl_803E7668, 4);
     }
+}
+
+s32 fn_8020DD5C(s32 arg0) {
+    if (*(s32 *)(arg0 + 0x120) == 0x13) {
+        return *(s32 *)(arg0 + 0x110);
+    }
+    return *(s32 *)(arg0 + 0x104);
 }
 
 s32 fn_8020DD78(void *arg0) {
@@ -4444,15 +4456,12 @@ u8 *fn_802208C0(void *self, u8 *p) {
 }
 
 u8 *fn_802208D8(u8 *self, s32 idx) {
-    u8 *found;
-    s32 i;
-    u8 *list;
-    found = NULL;
-    list = self;
-    self = *(u8 **)(list + 0x4);
-    i = 0;
+    u8 **list = (u8 **)self;
+    u8 *found = NULL;
+    s32 i = 0;
+    self = list[1];
     if (*(s32 *)(self + 0x4) != 0) {
-        for (self = *(u8 **)(list + 0x0); self != NULL && found == NULL; self = *(u8 **)(self + 0x4), i++) {
+        for (self = list[0]; self != NULL && found == NULL; self = *(u8 **)(self + 0x4), i++) {
             if (i == idx) {
                 found = self;
             }
