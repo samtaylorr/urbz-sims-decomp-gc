@@ -512,22 +512,16 @@ s64 fn_8019C440(char *self, s32 arg1, s32 *arg2) {
     void fn_8019BA58(void *, char *, s32);
     extern char *lbl_8049454C;
     extern char lbl_803DB5E4[];
-    char *vt;
     char *obj;
     s32 idx;
-    s32 r;
 
-    vt = M2C_FIELD(self, char **, 4);
-    idx = M2C_FIELD(vt, s32 (**)(void *), 0x1BC)(self + M2C_FIELD(vt, s16 *, 0x1B8));
+    idx = M2C_FIELD(M2C_FIELD(self, char **, 4), s32 (**)(void *), 0x1BC)(self + M2C_FIELD(M2C_FIELD(self, char **, 4), s16 *, 0x1B8));
     obj = M2C_FIELD(lbl_8049454C + idx * 4, char **, 0x20);
-    vt = *(char **)obj;
-    r = M2C_FIELD(vt, s32 (**)(void *, s32), 0x24)(obj + M2C_FIELD(vt, s16 *, 0x20), (s16)arg1);
-    *arg2 = r;
-    if (r != 0) {
-        return 1;
+    if ((*arg2 = M2C_FIELD(*(char **)obj, s32 (**)(void *, s32), 0x24)(obj + M2C_FIELD(*(char **)obj, s16 *, 0x20), (s16)arg1)) == 0) {
+        fn_8019BA58(self, lbl_803DB5E4, arg1);
+        return -1;
     }
-    fn_8019BA58(self, lbl_803DB5E4, arg1);
-    return -1;
+    return 1;
 }
 
 s32 fn_8019C804(void) {
