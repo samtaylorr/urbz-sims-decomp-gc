@@ -1627,6 +1627,33 @@ s32 fn_8038AB34(s32 chan, void *arg1) {
     return fn_803894A8(chan);
 }
 
+s32 fn_8038AB90(s32 chan) {
+    s32 fn_803894A8(s32);
+    s32 fn_8038A57C(s32, void *, void *);
+    extern void fn_80387D34(void);
+    s32 result;
+    s32 buf;
+
+    result = fn_8038A57C(chan, &buf, fn_80387D34);
+    if (result < 0 || &buf == NULL) {
+        return result;
+    }
+    return fn_803894A8(chan);
+}
+
+void fn_8038ACB0(s32 arg0) {
+    s32 fn_8025465C(void);
+    void fn_80254684(s32);
+    s32 enabled;
+
+    enabled = fn_8025465C();
+    *(u8 *)0x800030E3 &= ~0x80;
+    if (arg0) {
+        *(u8 *)0x800030E3 |= 0x80;
+    }
+    fn_80254684(enabled);
+}
+
 s32 fn_8038AD04(s32 chan) {
     s32 fn_8025BFA8(s32);
     if (*(u8 *)0x800030E3 & 0x80) {
