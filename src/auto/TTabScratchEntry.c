@@ -539,8 +539,8 @@ void fn_8019E5B0(void **self, s32 flags) {
     }
 }
 
-s32 fn_8019E638(s32 arg0) {
-    fn_800F6A38(arg0, arg0 + 4);
+s32 fn_8019E638(s32 arg0, s32 arg1) {
+    fn_800F6A38(arg0 + 4, arg1);
     return 1;
 }
 
