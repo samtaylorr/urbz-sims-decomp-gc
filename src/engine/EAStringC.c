@@ -1051,6 +1051,31 @@ void fn_802A1E98(s32 arg0) {
     lbl_80494C8C = arg0;
 }
 
+void fn_802A1EF0(void *arg0) {
+    extern s32 lbl_80494C8C;
+    extern s32 fn_802A2014(s32);
+    s32 *node;
+    s32 prev;
+    s32 next;
+    s32 *pn;
+    s32 *nn;
+
+    node = (s32 *)fn_802A2014((s32)arg0);
+    prev = node[0];
+    pn = (s32 *)fn_802A2014(prev);
+    next = node[1];
+    nn = (s32 *)fn_802A2014(next);
+    if (prev != 0) {
+        pn[1] = next;
+    }
+    if (next != 0) {
+        nn[0] = prev;
+    }
+    if (lbl_80494C8C == (s32)arg0) {
+        lbl_80494C8C = next;
+    }
+}
+
 s32 fn_802A1F64(void *arg0) {
     void *vt;
 
