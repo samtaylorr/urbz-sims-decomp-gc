@@ -614,9 +614,11 @@ void fn_80381198(void *arg0) {
     } QNode_;
     extern QNode_ *lbl_804763C0[32];
     void fn_803837D8(void *);
-    QNode_ *node = arg0;
-    s32 enabled = fn_8025465C();
+    s32 enabled;
+    QNode_ *node;
 
+    enabled = fn_8025465C();
+    node = arg0;
     fn_8038103C(node);
     if (*(u16 *)((u8 *)node + 0x146) == 1) {
         *(s32 *)((u8 *)node + 0x20) = 1;
@@ -1029,6 +1031,13 @@ void fn_80384ABC(s32 arg0) {
 extern s32 lbl_80496468;
 s32 fn_80384AC4(void) {
     return lbl_80496468;
+}
+
+void fn_80385A1C(void *arg0, u32 arg1) {
+    extern u8 lbl_8048FAA0[][0x60];
+    u8 *e = lbl_8048FAA0[M2C_FIELD(arg0, s32 *, 0x18)];
+    *(u32 *)(e + 8) += arg1;
+    *(u32 *)(e + 4) |= 0x10000000;
 }
 
 extern s32 lbl_80496464;
