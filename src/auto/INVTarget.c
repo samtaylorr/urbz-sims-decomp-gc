@@ -2317,10 +2317,13 @@ void fn_801EFE08(char *self, char *name, void *arg2) {
     typedef struct { char **begin; char **end; } V;
     s32 fn_801F0834(char *);
     V *v;
+    V *w;
     u32 i;
     s32 id = fn_801F0834(name);
+    v = (V *)(self + 0xD4);
     i = 0;
-    if ((u32)((v = (V *)(self + 0xD4))->end - M2C_FIELD(self, char ***, 0xD4)) != 0) {
+    if ((u32)(v->end - M2C_FIELD(self, char ***, 0xD4)) != 0) {
+        w = v;
         do {
             char *obj = M2C_FIELD(self, char ***, 0xD4)[i];
             if (id == M2C_FIELD(obj, s32 *, 0x4)) {
@@ -2329,7 +2332,7 @@ void fn_801EFE08(char *self, char *name, void *arg2) {
                 break;
             }
             i++;
-        } while (i < (u32)((v = (V *)(self + 0xD4))->end - M2C_FIELD(self, char ***, 0xD4)));
+        } while (i < (u32)(w->end - M2C_FIELD(self, char ***, 0xD4)));
     }
 }
 
@@ -3849,13 +3852,14 @@ void fn_802064DC(void *arg0, s32 arg1) {
 }
 
 void fn_80206520(void *arg0, s32 arg1, u32 arg2) {
+    struct Ent { s32 a; s32 b; };
     void fn_80245BB4(s32, char *, ...);
     extern char lbl_803E4E18[];
     extern s32 lbl_803E6C10[];
-    s32 *begin = M2C_FIELD(arg0, s32 **, 0x178);
+    struct Ent *begin = M2C_FIELD(arg0, struct Ent **, 0x178);
     s32 v = 0;
-    if (arg2 < (u32)((M2C_FIELD(arg0, s32 *, 0x17C) - (s32)begin) >> 3)) {
-        v = begin[arg2 * 2];
+    if (arg2 < (u32)(M2C_FIELD(arg0, struct Ent **, 0x17C) - begin)) {
+        v = begin[arg2].a;
     }
     fn_80245BB4(arg1, lbl_803E4E18, lbl_803E6C10[v]);
 }
@@ -4293,6 +4297,25 @@ void fn_8020F378(void *arg0, s32 arg1, s32 arg2) {
     void fn_80245BB4(s32, char *, ...);
     extern char lbl_803E7668[];
     fn_80245BB4(arg2, lbl_803E7668, 1);
+}
+
+void fn_8020F3AC(void *arg0, s32 arg1, s32 arg2) {
+    void fn_80245BB4(s32, char *, ...);
+    s32 fn_8020F69C(void *, s32);
+    extern char lbl_803E7668[];
+    s32 v;
+
+    if (M2C_FIELD(arg0, s32 *, 0x120) == 0x14) {
+        v = fn_8020F69C(arg0, arg1 + 1);
+    } else if (M2C_FIELD(arg0, s32 *, 0x138) != 0) {
+        v = 1;
+        if (arg1 == M2C_FIELD(arg0, s32 *, 0x13C) - 1) {
+            v = 0;
+        }
+    } else {
+        v = 1;
+    }
+    fn_80245BB4(arg2, lbl_803E7668, v);
 }
 
 void fn_8020F430(s32 arg0) {
@@ -5309,6 +5332,20 @@ void fn_80223514(void *arg0, s32 arg1) {
 
 s32 fn_8022351C(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x4C);
+}
+
+s32 *fn_80223638(s32 *arg0) {
+    struct { s32 w[6]; } tmp;
+    s32 *v;
+
+    arg0[0] = 0;
+    v = arg0 + 2;
+    arg0[1] = 0;
+    v[1] = 0;
+    arg0[5] = -1;
+    arg0[7] = 0;
+    *(u8 *)(arg0 + 4) = 0;
+    return arg0;
 }
 
 s32 fn_80224A28(void *arg0) {
