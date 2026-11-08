@@ -2144,6 +2144,12 @@ void fn_802AF3A0(void *arg0, void *arg1, void *arg2, f32 farg0) {
     M2C_FIELD(arg2, f32 *, 0x44) = (f32) (((M2C_FIELD(arg1, f32 *, 0x44) - temp_f13_12) * farg0) + temp_f13_12);
 }
 
+s32 fn_802AF678(void *arg0) {
+    extern f32 fn_802921A0(void *, s32);
+    extern f32 lbl_803EDED8[];
+    return fn_802921A0(arg0, 0xB) >= lbl_803EDED8[0];
+}
+
 void fn_802AFF78(void *arg0, void *arg1, void *arg2) {
     M2C_FIELD(arg0, f32 *, 0x10) = (f32) ((M2C_FIELD(arg2, f32 *, 0x10) * M2C_FIELD(arg1, f32 *, 0)) + M2C_FIELD(arg1, f32 *, 0x10));
     M2C_FIELD(arg0, f32 *, 0x14) = (f32) ((M2C_FIELD(arg2, f32 *, 0x14) * M2C_FIELD(arg1, f32 *, 4)) + M2C_FIELD(arg1, f32 *, 0x14));
