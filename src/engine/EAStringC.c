@@ -4570,8 +4570,8 @@ void *fn_802BA0A4(void *self, s32 arg1, s32 arg2) {
     fn_802ADDD8((s32 *)self + 2, 8);
     M2C_FIELD(self, s32 *, 0x1C) = arg2;
     M2C_FIELD(self, u8 **, 4) = lbl_80418FF0;
-    M2C_FIELD(self, s32 *, 0x20) = 0;
     M2C_FIELD(self, s32 *, 0x18) = 0;
+    M2C_FIELD(self, s32 *, 0x20) = 0;
     return self;
 }
 
