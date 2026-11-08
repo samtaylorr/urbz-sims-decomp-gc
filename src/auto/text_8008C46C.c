@@ -630,17 +630,23 @@ static inline s32 Field314_Get(void *arg0) {
 extern void fn_802EC15C(s32, s32, s32);
 extern void fn_802ED00C(s32, s32, s32);
 void fn_80094F44(void *arg0, s32 arg1, s32 arg2) {
+    register char *p asm("r3");
+    register s32 c asm("r5");
+    register s32 d asm("r4");
+    void *q;
     s32 b;
-
-    b = M2C_FIELD(M2C_FIELD(arg0, void **, 8), s32 *, 0x334) != 0;
+    q = M2C_FIELD(arg0, void *volatile *, 8);
+    d = arg2;
+    q = M2C_FIELD(q, void **, 0x334);
+    b = q != 0;
     if (b) {
-        goto call;
+        p = M2C_FIELD(arg0, char **, 8) + 0x314;
+        c = arg1;
+    } else {
+        p = M2C_FIELD(arg0, char **, 8) + 0x314;
+        c = arg1;
     }
-call:
-    fn_802EC15C((s32)M2C_FIELD(arg0, void **, 8) + 0x314, arg2, arg1);
-    if (b) {
-        return;
-    }
+    fn_802EC15C((s32)p, d, c);
 }
 
 s32 fn_80095A44(void) {
