@@ -3265,11 +3265,11 @@ void fn_802B6E08(s32 *arg0) {
 void fn_802B6E24(u32 *obj) {
     s32 *list;
     s32 n;
-    u32 v = obj[0];
-    s32 cnt = ((v >> 16) & 0xFFF) - 1;
+    s32 cnt = ((obj[0] >> 16) & 0xFFF) - 1;
+    u32 v;
 
-    v = (v & 0xF000FFFF) | (u32)(cnt << 16);
-    obj[0] = v;
+    obj[0] = (obj[0] & ~0x0FFF0000) | (cnt << 16);
+    v = obj[0];
     if (cnt == 0 && !(v & 0x40000000)) {
         list = lbl_80494B48;
         obj[0] = v | 0x40000000;
