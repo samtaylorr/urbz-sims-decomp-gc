@@ -1279,8 +1279,8 @@ void *fn_800D651C(void *self) {
     M2C_FIELD(self, s32 *, 0x38) = 0;
     M2C_FIELD(self, s32 *, 0x3c) = 1;
     M2C_FIELD(self, s32 *, 0xc) = 0;
-    lbl_8041F800[0] = self;
     M2C_FIELD(self, s32 *, 0x5c) = -1;
+    lbl_8041F800[0] = self;
     return self;
 }
 
@@ -2541,6 +2541,7 @@ void fn_800E1908(void *arg0) {
     char *name;
     s32 *a;
     s32 *b;
+    volatile s32 pad;
 
     p = fn_802D1FC8(0xDC);
     name = lbl_803D4BBC;
