@@ -53,6 +53,24 @@ static inline void *AptNumber_New(f32 value) {
 }
 
 s32 fn_802999D4();
+void fn_8029030C(s32 *arg0, void *arg1, s32 arg2, s32 arg3) {
+    extern void fn_802AF000(void *);
+    extern void fn_802AF1CC(void *, s32);
+    extern void fn_802AF050(void *);
+    extern void (*lbl_80443390)(s32, s32);
+
+    if (arg3 != 0) {
+        fn_802AF000(arg1);
+        fn_802AF1CC(arg1, arg3);
+    }
+    if (arg0[0] == 1) {
+        lbl_80443390(arg0[6], arg2);
+    }
+    if (arg3 != 0) {
+        fn_802AF050(arg1);
+    }
+}
+
 void fn_8029039C(s32 *arg0, void *arg1, s32 arg2, void *arg3) {
     M2C_UNK fn_802AF000(void *);
     M2C_UNK fn_802AF1CC(void *, void *);
@@ -4782,6 +4800,23 @@ void fn_802BD608(s32 arg0, s32 arg1) {
     fn_802BD494(arg0, arg1);
 }
 
+char *fn_802BD8FC(void **self, s32 n) {
+    extern char *fn_803B9024(char *, s32 *);
+    struct Buf { u16 ref; u16 len; s32 cap; char data[1]; };
+    char *p;
+    s32 i;
+    s32 c;
+
+    p = ((struct Buf *)*self)->data;
+    for (i = 0; i < n; i++) {
+        p = fn_803B9024(p, &c);
+        if (c == 0) {
+            return 0;
+        }
+    }
+    return p;
+}
+
 s32 fn_802BDA60(void **self) {
     extern char *fn_803B9024(char *, s32 *);
     struct Buf { u16 ref; u16 len; s32 cap; char data[1]; };
@@ -4795,6 +4830,37 @@ s32 fn_802BDA60(void **self) {
         count++;
     }
     return count;
+}
+
+void **fn_802BDAB4(void **out, void **self, s32 n) {
+    extern char *fn_803B9024(char *, s32 *);
+    extern void fn_802BCFAC(void **, void **, s32);
+    extern u16 lbl_803FCE5C[];
+    struct Buf { u16 ref; u16 len; s32 cap; char data[1]; };
+    char *base;
+    char *p;
+    s32 i;
+    s32 c;
+
+    if (n < 0) {
+        n = 0;
+    }
+    base = ((struct Buf *)*self)->data;
+    p = base;
+    for (i = 0; i < n; i++) {
+        p = fn_803B9024(p, &c);
+        if (c == 0) {
+            p = 0;
+            break;
+        }
+    }
+    if (p == 0) {
+        *out = lbl_803FCE5C;
+        lbl_803FCE5C[0]++;
+    } else {
+        fn_802BCFAC(out, self, p - base);
+    }
+    return out;
 }
 
 void fn_802BE5FC(u8 **arg0) {
