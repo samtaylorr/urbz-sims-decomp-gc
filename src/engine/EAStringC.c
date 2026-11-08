@@ -863,13 +863,10 @@ void fn_802A0938(s32 arg0, void *arg1) {
 
 void fn_802A0980(s32 arg0, void *arg1) {
     extern void fn_8029F550(s32, void *, s32, s32 *, void **);
+    s32 sp8 = 0;
+    void *spC = NULL;
     void *key = M2C_FIELD(arg1, void **, 8);
-    s32 tree = M2C_FIELD(arg0, s32 *, 0);
-    s32 sp8;
-    void *spC;
-    sp8 = 0;
-    spC = NULL;
-    fn_8029F550(tree, key, 0, &sp8, &spC);
+    fn_8029F550(M2C_FIELD(arg0, s32 *, 0), key, 0, &sp8, &spC);
     if (M2C_FIELD(spC, s32 *, 8) > 0x3FFF) {
         fn_802A0890(arg0, spC);
     }
@@ -904,6 +901,22 @@ s32 fn_802A1514(s32 *self) {
 
 void fn_802A151C(s32 *self, s32 value) {
     *self = value;
+}
+
+void fn_802A1E68(void) {
+    extern s32 lbl_80494C90;
+    extern s32 lbl_80493530[];
+    s32 *p;
+    s32 i;
+
+    lbl_80494C90 = 0;
+    p = lbl_80493530;
+    for (i = 0x10; i != 0; i--) {
+        p[2] = 0;
+        p[0] = 0;
+        p[1] = 0;
+        p += 3;
+    }
 }
 
 s32 fn_802A2014(s32 arg0) {
@@ -1949,8 +1962,6 @@ extern f32 lbl_803EDBBC[];
 void fn_802AED88(f32 *m) {
     f32 zero = lbl_803EDBB8[0];
     f32 one = lbl_803EDBBC[0];
-    m[13] = one;
-    m[11] = zero;
     M2C_FIELD(m, s32 *, 0x3BC) = 0;
     m[0] = zero;
     m[1] = zero;
@@ -1963,15 +1974,18 @@ void fn_802AED88(f32 *m) {
     m[8] = zero;
     m[9] = one;
     m[10] = one;
+    m[11] = zero;
     m[12] = one;
+    m[13] = one;
     M2C_FIELD(m, s32 *, 0x3B8) = 0;
 }
 
 void fn_802AEDE4(u8 *self) {
     typedef struct { s32 v[8]; } AptXform;
     s32 *depth = (s32 *)(self + 0x3B8);
-    ((AptXform *)(self + 0x38))[*depth] = *(AptXform *)self;
-    (*depth)++;
+    s32 n = *depth;
+    ((AptXform *)(self + 0x38))[n] = *(AptXform *)self;
+    *depth = n + 1;
 }
 
 void fn_802AF384(void *arg0, f32 farg0, f32 farg1) {
