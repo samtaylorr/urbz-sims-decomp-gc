@@ -1406,6 +1406,11 @@ s32 fn_801A0F94(s32 a, s32 b) {
     return lbl_804926EC[b][a];
 }
 
+s32 fn_801A0FB0(s32 arg0, s32 arg1) {
+    extern s32 lbl_80492AEC[][5];
+    return lbl_80492AEC[arg1][arg0];
+}
+
 s32 fn_801A0FCC(void) {
     return 0x1E;
 }
