@@ -1432,6 +1432,30 @@ s32 fn_801A0E54(void *self, s32 arg1) {
     return 0;
 }
 
+s32 fn_801A0EBC(void *self, s32 it) {
+    M2C_UNK fn_801A0780(s32);
+    M2C_UNK fn_801A08DC(s32 *, s32);
+
+    fn_801A0780(it);
+    do {
+        it <<= 1;
+        if (fn_801A08DC(self, it)) {
+            break;
+        }
+    } while (it <= 0x1f);
+    if (it > 0x1f) {
+        return 0;
+    }
+    return it;
+}
+
+u16 fn_801A0F20(void *arg0, s32 arg1) {
+    if ((u32)(arg1 - 1) <= 1U) {
+        return M2C_FIELD(arg0, u16 *, 8);
+    }
+    return M2C_FIELD(arg0, u16 *, 0x14);
+}
+
 u16 fn_801A0F3C(void *arg0, u16 arg1, s32 arg2) {
     u16 var_r0;
 
