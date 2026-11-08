@@ -64,11 +64,13 @@ void fn_8029039C(s32 *arg0, void *arg1, s32 arg2, void *arg3) {
         fn_802AF1CC(arg1, arg3);
     }
     switch (*arg0) {
+    case 1:
+        fn_802AF214(arg1, arg2, arg0 + 2);
+        break;
     case 10:
         fn_802AF214(arg1, arg2, arg0 + 2);
         break;
-    case 1:
-        fn_802AF214(arg1, arg2, arg0 + 2);
+    case 11:
         break;
     }
     if (arg3 != NULL) {
@@ -3045,14 +3047,13 @@ void *fn_802B457C(u8 *self, u8 *arg1) {
     extern void fn_803B6FFC(void *, void *);
     extern u8 lbl_804189F0[];
     extern u8 lbl_80418B70[];
-    u8 *sub = self + 0x10;
 
     fn_803B6F28(self);
     fn_803B7864(self, arg1);
-    fn_802B6FA8(sub, 0x24);
-    M2C_FIELD(sub, void **, 0x4) = lbl_804189F0;
+    fn_802B6FA8(self + 0x10, 0x24);
+    M2C_FIELD(self, void **, 0x14) = lbl_804189F0;
     fn_802ADDD8((s32 *)(self + 0x18), 8);
-    M2C_FIELD(sub, s32 *, 0x18) = 0;
+    M2C_FIELD(self, s32 *, 0x28) = 0;
     M2C_FIELD(self, void **, 0x14) = lbl_80418B70;
     M2C_FIELD(self, s32 *, 0xC) = M2C_FIELD(arg1, s32 *, 0xC);
     M2C_FIELD(self, s32 *, 0x8) = M2C_FIELD(arg1, s32 *, 0x8);
