@@ -3233,6 +3233,31 @@ s32 fn_801FA8FC(void *arg0, s32 arg1, u16 *arg2) {
     return 1;
 }
 
+void fn_801FA974(void *arg0, s32 arg1, s16 arg2) {
+    s32 fn_80245BB4(char *, const char *, ...);
+    void fn_8000AA68(s32, void *, s32, s32, s32, ...);
+    extern char lbl_803E4788[];
+    extern char lbl_803E4A44[];
+    extern s32 lbl_804956BC;
+    char buf1[16];
+    char buf2[16];
+    fn_80245BB4(buf1, lbl_803E4788, arg1);
+    fn_80245BB4(buf2, lbl_803E4788, arg2);
+    fn_8000AA68(lbl_804956BC, lbl_803E4A44, 0, 0, 2, buf1, buf2);
+}
+
+void fn_801FAAF8(void *arg0, s32 arg1) {
+    s32 fn_80245BB4(char *, const char *, ...);
+    void fn_8000AA68(s32, void *, s32, s32, s32, ...);
+    extern char lbl_803E4788[];
+    extern char lbl_803E4A9C[];
+    extern s32 lbl_804956BC;
+    char buf[16];
+    *((u8 *)arg0 + 0x100) = 2;
+    fn_80245BB4(buf, lbl_803E4788, arg1);
+    fn_8000AA68(lbl_804956BC, lbl_803E4A9C, 0, 0, 1, buf);
+}
+
 void fn_801FAC58(void *arg0, s8 arg1) {
     if (arg1 != 0) {
         M2C_FIELD(arg0, s8 *, 0x100) = 1;
@@ -5899,6 +5924,22 @@ void fn_8022A304(void *out, void *obj) {
         fn_801055FC(&tile, 2);
         ((Pos *)out)->z = lbl_803EAC64[0];
     }
+}
+
+void fn_8022ADD8(void *out, s32 arg1) {
+    typedef struct { f32 x; f32 y; } Vec2;
+    extern u8 *lbl_8041FA38[];
+    void fn_8022ACE0(s32 *, s32 *, s32);
+    s32 a;
+    s32 b;
+    Vec2 v;
+
+    fn_8022ACE0(&a, &b, arg1);
+    v.x = a;
+    v.y = b;
+    *(Vec2 *)out = v;
+    ((Vec2 *)out)->y += *(f32 *)(lbl_8041FA38[0] + 0x68);
+    ((Vec2 *)out)->x += *(f32 *)(lbl_8041FA38[0] + 0x64);
 }
 
 s32 fn_8022B3B4(s32 arg0) {
