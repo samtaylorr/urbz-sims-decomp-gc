@@ -3207,6 +3207,26 @@ s32 fn_801FA518(void *arg0, u32 arg1, s16 arg2, s16 arg3) {
     return 0;
 }
 
+s32 fn_801FA8FC(void *arg0, s32 arg1, u16 *arg2) {
+    s32 fn_801FA6BC(void *);
+    struct {
+        u8 pad[0xA4];
+        s32 unkA4;
+        u8 table[0x58];
+        u8 pad100;
+        u8 index;
+    } *p = arg0;
+    if (arg1 == 5 && p->unkA4 != 0) {
+        *arg2 = fn_801FA6BC(p);
+    } else {
+        if ((u16)arg1 > 5) {
+            return 0;
+        }
+        *arg2 = p->table[p->index * 6 + arg1];
+    }
+    return 1;
+}
+
 void fn_801FAC58(void *arg0, s8 arg1) {
     if (arg1 != 0) {
         M2C_FIELD(arg0, s8 *, 0x100) = 1;
@@ -5854,6 +5874,25 @@ void fn_8022A150(void) {
     fn_80014F24(fn_80014EE0(), 1, 0);
     fn_80225508();
     fn_80225304();
+}
+
+void fn_8022A304(void *out, void *obj) {
+    typedef struct { s8 x; s8 y; s8 z; } Tile;
+    typedef struct { f32 x; f32 y; f32 z; } Pos;
+    extern f32 lbl_803EAC64[];
+    void fn_80105400(f32 *, s8 *);
+    void fn_801055FC(void *, s32);
+    Pos pos;
+    Tile tile;
+
+    if (obj) {
+        u8 *vt = *(u8 **)((u8 *)obj + 4);
+        tile = (*(Tile (**)(void *))(vt + 0x31C))((u8 *)obj + *(s16 *)(vt + 0x318));
+        fn_80105400((f32 *)&pos, (s8 *)&tile);
+        *(Pos *)out = pos;
+        fn_801055FC(&tile, 2);
+        ((Pos *)out)->z = lbl_803EAC64[0];
+    }
 }
 
 s32 fn_8022B3B4(s32 arg0) {
