@@ -4055,6 +4055,57 @@ void fn_8021CCC0(u8 *arg0) {
     fn_801F53A0(arg0 + 0x84);
 }
 
+void fn_8021D7BC(u8 *arg0) {
+    typedef struct { s32 *p; } Handle;
+    Handle fn_8004C168();
+    void fn_800F1B80(void *, void *);
+    s32 fn_801DB18C(u8 *);
+    M2C_UNK fn_801F53A0(void *);
+    s32 fn_8020DD5C(s32);
+    extern u8 lbl_8041F94C[];
+    extern u8 lbl_803E9F40[];
+    extern u8 lbl_803E9D58[];
+    extern u8 lbl_803E9F64[];
+    extern u8 lbl_803E9CBC[];
+    extern u8 lbl_803E9D7C[];
+    Handle h;
+    void *dst;
+
+    switch (fn_8020DD5C(*(s32 *)(arg0 + 0x10C))) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+        h = fn_8004C168(lbl_8041F94C, lbl_803E9F40);
+        dst = arg0 + 0xAC;
+        fn_800F1B80(dst, h.p != NULL ? (void *)*h.p : NULL);
+        break;
+    }
+    do {
+        dst = arg0 + 0xB4;
+        h = fn_8004C168(lbl_8041F94C, lbl_803E9D58);
+        fn_800F1B80(dst, h.p != NULL ? (void *)*h.p : NULL);
+    } while (0);
+    dst = arg0 + 0xB8;
+    h = fn_8004C168(lbl_8041F94C, lbl_803E9F64);
+    fn_800F1B80(dst, h.p != NULL ? (void *)*h.p : NULL);
+    fn_800F1B80(arg0 + 0xBC, lbl_803E9CBC);
+    *(s32 *)(arg0 + 0x84) = 2;
+    *(s32 *)(arg0 + 0xA0) = 1;
+    *(s32 *)(arg0 + 0x8C) = 3;
+    *(s16 *)(arg0 + 0xC6) = *(s16 *)(arg0 + 0xC4) = *(s32 *)(arg0 + 0xC0) = *(s32 *)(arg0 + 0x90) = *(s32 *)(arg0 + 0x94) = *(s32 *)(arg0 + 0x88) = *(s32 *)(arg0 + 0x98) = 0;
+    if (fn_801DB18C(lbl_803E9D7C) == 1) {
+        *(s32 *)(arg0 + 0xC8) = 2;
+    } else {
+        *(s32 *)(arg0 + 0xC8) = 1;
+    }
+    fn_801F53A0(arg0 + 0x84);
+}
+
 void fn_802200F8(void *arg0, s32 arg1) {
     extern s32 fn_801D7CDC(void *, s32);
     extern s32 fn_801D8B40(void *, void *);
