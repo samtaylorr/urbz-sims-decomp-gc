@@ -2262,13 +2262,13 @@ void fn_802AF050(s32 arg0) {
 }
 
 void fn_802AF1CC(s32 arg0, void *arg1) {
-    extern void (*lbl_80443388)(void *);
+    extern void (*lbl_80443388[])(void *);
     void fn_802AF0D0(void *, void *, void *);
     void *p;
 
     p = (void *)(arg0 + 0x20);
     fn_802AF0D0(p, arg1, p);
-    lbl_80443388(p);
+    lbl_80443388[0](p);
 }
 
 void fn_802AF340(s32 n) {
@@ -2701,6 +2701,16 @@ void fn_803B6FFC();
 void fn_802B3A50(char *self) {
     extern void fn_803B6FFC(void *);
     fn_803B6FFC(self + 8);
+}
+
+void fn_802B3A74(u8 *self) {
+    extern void fn_803B6F48(void *);
+    extern void fn_803B6FFC(void *, void *);
+    extern void fn_803B6F94(void *, s32);
+    s32 tmp[2];
+    fn_803B6F48(tmp);
+    fn_803B6FFC(self + 8, tmp);
+    fn_803B6F94(tmp, 2);
 }
 
 void fn_802BC17C();
