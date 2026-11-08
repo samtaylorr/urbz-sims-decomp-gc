@@ -3184,14 +3184,13 @@ s32 fn_801FBB84(u8 *arg0, s32 *arg1) {
 }
 
 s32 fn_801FBC04(s32 arg0) {
-    if (arg0 < 0) {
-        return 0;
-    }
-    if (arg0 <= 8) {
-        return 1;
-    }
-    if (arg0 <= 13) {
-        return 2;
+    if (arg0 >= 0) {
+        if (arg0 <= 8) {
+            return 1;
+        }
+        if (arg0 <= 13) {
+            return 2;
+        }
     }
     return 0;
 }
