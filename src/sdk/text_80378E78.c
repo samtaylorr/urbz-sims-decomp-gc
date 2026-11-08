@@ -32,6 +32,22 @@ s32 fn_803798A4(void *arg0) {
     return 0;
 }
 
+u16 fn_803798D8(void) {
+    extern u16 lbl_80495620;
+    if (lbl_80495620 <= 1) {
+        return lbl_80495620;
+    }
+    switch (*(u32*)0x800000CC) {
+    case 0:
+        lbl_80495620 = (*(volatile u16*)0xCC00206E & 2) ? 1 : 0;
+        break;
+    default:
+        lbl_80495620 = 0;
+        break;
+    }
+    return lbl_80495620;
+}
+
 extern u16 lbl_80495620;
 BOOL fn_80257770(u8* buf, s32 length, s32 offset);
 void fn_80379930(u8* buf, s32 length, s32 offset) {
@@ -1168,6 +1184,21 @@ s32 fn_80382D7C(void) {
 extern u8 lbl_8047E2A0[];
 void *fn_803837CC(void) {
     return lbl_8047E2A0;
+}
+
+void fn_803837D8(void *arg0) {
+    M2C_FIELD(arg0, s16 *, 0x146) = 0;
+    M2C_FIELD(arg0, s16 *, 0x16E) = 0;
+    M2C_FIELD(arg0, s32 *, 0x1C) = 0x2000A4;
+    M2C_FIELD(arg0, s32 *, 0x28) = 0;
+    M2C_FIELD(arg0, s32 *, 0x24) = 0;
+    M2C_FIELD(arg0, void **, 0x30) = (u8 *)arg0 + 0x34;
+    M2C_FIELD(arg0, s16 *, 0x184) = 0;
+    M2C_FIELD(arg0, s16 *, 0x182) = 0;
+    M2C_FIELD(arg0, s16 *, 0x180) = 0;
+    M2C_FIELD(arg0, s16 *, 0x17E) = 0;
+    M2C_FIELD(arg0, s16 *, 0x17C) = 0;
+    M2C_FIELD(arg0, s16 *, 0x1F2) = 0;
 }
 
 void fn_80383A20(void) {
