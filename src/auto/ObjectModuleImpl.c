@@ -95,23 +95,22 @@ s32 fn_8014A690(char *arg0) {
     return total;
 }
 
-char *fn_8014A6D8(char *self, u8 key) {
+char *fn_8014A6D8(char *self, s32 key) {
+    s32 fn_8016CCE0(void *);
     char **tbl = (char **)(self + 0x50);
     s32 *pkey;
-    s32 k;
     char *prev;
     char *n;
 
-    n = tbl[key];
-    k = key;
-    pkey = &k;
+    pkey = &key;
+    n = tbl[(u8)key];
     prev = 0;
     while (n != 0) {
         if (*pkey == fn_8016CCE0(n)) {
             if (prev != 0) {
                 *(char **)(prev + 0xA0) = *(char **)(n + 0xA0);
-                *(char **)(n + 0xA0) = tbl[key];
-                tbl[key] = n;
+                *(char **)(n + 0xA0) = tbl[(u8)key];
+                tbl[(u8)key] = n;
             }
             break;
         }
@@ -141,7 +140,7 @@ s32 fn_8014B05C(char *self) {
     r = (*(char *(**)(void *))(vt + 0x84))(self + *(s16 *)(vt + 0x80));
     arr = **(char ****)(r + 0x54);
     p = arr;
-    for (i = 0; i < (arr != 0 ? ((s32 *)arr)[-1] : 0); i++) {
+    for (i = 0; i < ({ s32 n = 0; if (arr != 0) n = ((s32 *)arr)[-1]; n; }); i++) {
         x = *(char **)(*p + 0xC0);
         if (x != 0) {
             return *(s32 *)(x + 0x1C);
@@ -1199,10 +1198,7 @@ s32 fn_801660AC(void **self, char *obj, s32 arg2, s32 arg3, s32 arg4) {
 }
 
 s32 fn_801669D0(f32 x) {
-    if (!(x < 0.0f)) {
-        return x + 0.5;
-    }
-    return x - 0.5;
+    return x >= 0.0f ? x + 0.5 : x - 0.5;
 }
 
 void fn_80166A1C(void) {
