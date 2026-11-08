@@ -249,18 +249,19 @@ s32 fn_8019B448(void) {
 }
 
 s32 fn_8019B83C(void *self, s32 arg1, u16 **out) {
-    if ((u16)arg1 <= 0x2f) {
-        switch (arg1) {
-        case 3:
-        case 0x18:
-        case 0x20:
-        case 0x2e:
-        case 0x2f:
-            break;
-        default:
-            *out = (u16 *)((u8 *)self + 0x14 + arg1 * 2);
-            return 1;
-        }
+    if ((u16)arg1 > 0x2f) {
+        return 0;
+    }
+    switch (arg1) {
+    case 3:
+    case 0x18:
+    case 0x20:
+    case 0x2e:
+    case 0x2f:
+        break;
+    default:
+        *out = (u16 *)((u8 *)self + 0x14 + arg1 * 2);
+        return 1;
     }
     return 0;
 }
@@ -1346,6 +1347,25 @@ void *fn_8019FC40(void *arg0, s32 arg1) {
     return NULL;
 }
 
+void *fn_8019FC6C(void *arg0, s32 arg1) {
+    void *ret;
+
+    if (arg1 == 0xD) {
+        return arg0;
+    }
+    if (arg1 == 0xE) {
+        return arg0;
+    }
+    if (arg1 == 0xF) {
+        return arg0;
+    }
+    ret = NULL;
+    if (arg1 == 0x10) {
+        ret = arg0;
+    }
+    return ret;
+}
+
 s32 fn_8019FC9C(void) {
     M2C_UNK fn_800C4744(M2C_UNK *);
     s32 fn_800C4820();
@@ -2029,6 +2049,32 @@ void *fn_801A3198(struct { char pad[0x20]; } **arg0, s32 arg1) {
 void fn_801A31D4(void *arg0, s32 arg1) {
     M2C_UNK fn_801A30D4(s32, s32, f32);
     fn_801A30D4(arg1, M2C_FIELD(arg0, s32 *, 0xC), M2C_FIELD(arg0, f32 *, 0x8));
+}
+
+void *fn_801A3204(void *self) {
+    extern u8 lbl_80414E08[];
+    extern u8 lbl_80414FD0[];
+    u8 *p;
+    s32 i;
+
+    M2C_FIELD(self, u8 **, 0) = lbl_80414E08;
+    p = (u8 *)self + 8;
+    for (i = 16; i != 0; i--) {
+        M2C_FIELD(p, void **, 0) = lbl_80414FD0;
+        M2C_FIELD(p, s16 *, 4) = 0;
+        M2C_FIELD(p, s16 *, 6) = 0;
+        M2C_FIELD(p, s16 *, 8) = 0;
+        M2C_FIELD(p, s32 *, 0xC) = 0;
+        p += 0x10;
+    }
+    M2C_FIELD(self, s16 *, 6) = 0;
+    M2C_FIELD(self, s16 *, 0x114) = 0x32;
+    M2C_FIELD(self, s16 *, 0x116) = -1;
+    M2C_FIELD(self, s32 *, 0x108) = 3;
+    M2C_FIELD(self, s32 *, 0x118) = 0;
+    M2C_FIELD(self, s16 *, 0x110) = 0;
+    M2C_FIELD(self, s16 *, 4) = 0;
+    return self;
 }
 
 void fn_801A3280(void *self, s32 flags) {
