@@ -297,6 +297,11 @@ s32 fn_8037E99C(void) {
     return *(u16 *)0xCC00500A & 0x20;
 }
 
+void fn_8037E9AC(void) {
+    while (__DSPRegs[5] & 0x200) {
+    }
+}
+
 void fn_803805DC(void) {
 
 }
