@@ -1821,6 +1821,23 @@ s32 fn_801A3D24(s32 arg0) {
     return 0;
 }
 
+s32 fn_801A3D5C(void *self, s32 arg1) {
+    s32 fn_801A0E54(void *, s32);
+    s32 fn_801A0CC4(void *, s32);
+    s32 fn_801A3D24(s32);
+    s32 fn_801A0EBC(void *, s32);
+    s32 it;
+
+    for (it = fn_801A0E54(self, arg1); it != 0; it = fn_801A0EBC(self, it)) {
+        if ((it & arg1) == 0) {
+            if (fn_801A3D24(fn_801A0CC4(self, it)) == 0) {
+                return 0;
+            }
+        }
+    }
+    return 0;
+}
+
 u8 fn_801A4308(s32 arg0, s32 arg1) {
     return (u8) ((s32) ((arg0 * 0x10) | arg0) >> ((s32) (8 - arg1) >> 1));
 }
