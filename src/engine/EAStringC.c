@@ -2193,6 +2193,11 @@ void fn_802ACD08(void *arg0, s32 arg1) {
     }
 }
 
+static inline void fn_802ACD80_init(void *self, s32 n) {
+    extern void fn_802ADDD8(void *, s32);
+    fn_802ADDD8((u8 *)self + 8, n);
+}
+
 static inline void fn_802ACD80_base(void *self, s32 type, void *vt, s32 n) {
     extern void fn_802B6FA8(void *, s32);
     extern void fn_802ADDD8(void *, s32);
