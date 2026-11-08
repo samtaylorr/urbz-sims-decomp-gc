@@ -3836,6 +3836,12 @@ void fn_80206190(void) {
 
 }
 
+void fn_802064A8(void *arg0, s32 arg1) {
+    void fn_80245BB4(s32, char *, ...);
+    extern char lbl_803E4E18[];
+    fn_80245BB4(arg1, lbl_803E4E18, 0);
+}
+
 void fn_80206698(void *arg0) {
     extern void fn_801FF2C0(void *, s32);
     fn_801FF2C0(arg0, 1);
