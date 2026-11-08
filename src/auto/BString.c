@@ -1180,12 +1180,11 @@ void fn_800D5FAC(void) {
 
 void fn_800D631C(void *arg0) {
     extern u8 lbl_8040B9E0[];
-    BStringHandle h;
-    BStringHandle *ph = &h;
+    volatile s32 z;
 
     M2C_FIELD(arg0, void **, 8) = lbl_8040B9E0;
-    ph->value = 0;
-    *(BStringHandle *)arg0 = *ph;
+    M2C_FIELD(arg0, s32 *, 0) = 0;
+    z = 0;
 }
 
 void *fn_800D6344(u32 size) {
@@ -1246,6 +1245,21 @@ void fn_800D6444(void) {
         fn_8033740C(lbl_8045B0F0, *p++, 0, 0);
     } while (p <= &lbl_803F62AC[17]);
     fn_8033740C(lbl_8045B980, 0x71BB1EF7, 0, 0);
+}
+
+void fn_800D64B8(void) {
+    extern u32 lbl_803F62AC[];
+    extern u8 lbl_8045B0F0[];
+    extern u8 lbl_8045B980[];
+    extern void fn_8033789C(void *, u32);
+    u32 *p;
+
+    p = lbl_803F62AC;
+    do {
+        fn_8033789C(lbl_8045B0F0, *p++);
+    } while (p <= &lbl_803F62AC[17]);
+    fn_8033789C(lbl_8045B980, 0x71BB1EF7);
+    fn_8010DB20();
 }
 
 void fn_800D6700(void) {
@@ -2133,11 +2147,15 @@ void fn_800DE03C(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x1C) = 0;
 }
 
-void fn_800DE14C(void *arg0) {
-    if ((u32)(M2C_FIELD(arg0, s32 *, 0x18) - 3) <= 1) {
-        char *obj = M2C_FIELD(M2C_FIELD(arg0, char **, 8), char **, 0x94);
-        char *vt = M2C_FIELD(obj, char **, 0x44);
-        M2C_FIELD(vt, void (**)(void *), 0x1C)(obj + M2C_FIELD(vt, s16 *, 0x18));
+void fn_800DE14C(s32 *self) {
+    char *vt;
+    char *obj;
+    char *owner;
+    if ((u32)(self[6] - 3) <= 1) {
+        owner = (char *)self[2];
+        obj = *(char **)(owner + 0x94);
+        vt = *(char **)(obj + 0x44);
+        (*(void (**)(void *))(vt + 0x1C))(obj + *(s16 *)(vt + 0x18));
     }
 }
 
@@ -2197,9 +2215,11 @@ void fn_800DED78(void *arg0) {
 
 void fn_800DED90(s32 *self) {
     char *obj;
+    register char *vt asm("r9");
     if ((u32)(self[6] - 9) <= 2) {
         obj = M2C_FIELD(self[2], char **, 0x94);
-        M2C_FIELD(M2C_FIELD(obj, char **, 0x44), void (**)(void *), 0x1C)(obj + M2C_FIELD(M2C_FIELD(obj, char **, 0x44), s16 *, 0x18));
+        vt = M2C_FIELD(obj, char **, 0x44);
+        M2C_FIELD(vt, void (**)(void *), 0x1C)(obj + M2C_FIELD(vt, s16 *, 0x18));
     }
 }
 
@@ -2304,13 +2324,13 @@ void fn_800E02D4(void *arg0) {
 }
 
 void fn_800E02E0(s32 *self) {
-    struct VEntry { s16 delta; s16 index; void (*fn)(void *); };
     char *obj;
-    struct VEntry *e;
+    char *vt;
     if ((u32)(self[6] - 8) <= 2) {
         obj = M2C_FIELD(self[2], char **, 0x94);
-        e = (struct VEntry *)(M2C_FIELD(obj, char **, 0x44) + 0x18);
-        e->fn(obj + e->delta);
+        vt = M2C_FIELD(obj, char **, 0x44);
+        vt = vt;
+        (*(void (**)(void *))(vt + 0x1C))(obj + *(s16 *)(vt + 0x18));
     }
 }
 
@@ -2322,12 +2342,11 @@ void fn_800E0814(void *arg0) {
 }
 
 void fn_800E0828(s32 *self) {
-    char *vt;
     char *obj;
+    char *vt;
     if ((u32)(self[6] - 8) <= 1) {
-        char *owner = (char *)self[2];
-        obj = *(char **)(owner + 0x94);
-        vt = *(char **)(obj + 0x44);
+        obj = M2C_FIELD(self[2], char **, 0x94);
+        vt = M2C_FIELD(obj, char **, 0x44);
         (*(void (**)(void *))(vt + 0x1C))(obj + *(s16 *)(vt + 0x18));
     }
 }
