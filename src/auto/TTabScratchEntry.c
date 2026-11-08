@@ -1675,6 +1675,11 @@ s32 fn_801A29C4(void *arg0) {
     return (((M2C_FIELD(arg0, u8 *, 6) + M2C_FIELD(arg0, u8 *, 7) + 3) * 2) & 0x7F8) + 0x10;
 }
 
+char *fn_801A29E0(char *self) {
+    extern s32 fn_801A29C4(void *);
+    return self + fn_801A29C4(self);
+}
+
 s32 fn_801A2B54(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 4) - M2C_FIELD(arg0, s32 *, 0);
 }
