@@ -3705,8 +3705,8 @@ void *fn_802B919C(void *arg0, u32 *arg1) {
     s32 ok;
 
     fn_802BA0A4(arg0, 0x21, 0);
-    M2C_FIELD(arg0, void **, 4) = lbl_80418F70;
     obj = lbl_80494B58;
+    M2C_FIELD(arg0, void **, 4) = lbl_80418F70;
     ok = 0;
     if ((*arg1 & 0x3F) == 1) {
         ok = (*arg1 >> 15) & 1;
