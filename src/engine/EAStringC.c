@@ -335,8 +335,10 @@ s32 fn_8029429C(void *arg0) {
 
 s32 fn_8029433C(s32 p) {
     extern void fn_802983B8(s32, s32);
+    s32 *q;
     fn_802983B8(p, *(s32 *)(*(s32 *)(p + 0x50) + 0x18) + 1);
-    *(s32 *)(*(s32 *)(p + 0x50) + 0x1c) &= ~0x40;
+    q = (s32 *)(*(s32 *)(p + 0x50) + 0x1c);
+    *q = *q & ~0x40;
     return lbl_80496130;
 }
 
@@ -741,6 +743,20 @@ s32 fn_80299EB4(void *arg0) {
     ret = 0;
     if (fn_802B70DC(arg0) == 0x11) {
         ret = fn_802B72D4(arg0) == 0;
+    }
+    return ret;
+}
+
+s32 fn_80299F00(void *arg0, s32 arg1) {
+    extern s32 fn_802B70DC(void *);
+    extern s32 fn_802B72D4(void *);
+    s32 ret;
+
+    ret = 0;
+    if (fn_802B70DC(arg0) == 0x12) {
+        if (arg1 != 0 || fn_802B72D4(arg0) == 0) {
+            ret = 1;
+        }
     }
     return ret;
 }
@@ -3126,6 +3142,28 @@ void fn_802B6E08(s32 *arg0) {
 
     temp_r0 = *arg0;
     *arg0 = (temp_r0 & 0xF000FFFF) | ((temp_r0 & 0x0FFF0000) + 0x10000);
+}
+
+void fn_802B6E24(u32 *obj) {
+    s32 *list;
+    s32 n;
+    u32 v = obj[0];
+    s32 cnt = ((v >> 16) & 0xFFF) - 1;
+
+    v = (v & 0xF000FFFF) | (cnt << 16);
+    obj[0] = v;
+    if (cnt == 0 && !(v & 0x40000000)) {
+        obj[0] = v | 0x40000000;
+        list = lbl_80494B48;
+        n = list[1];
+        if (n < list[0]) {
+            ((u32 **)list[2])[n] = obj;
+            list[1] = n + 1;
+        } else {
+            char *vt = (char *)obj[1];
+            (*(void (**)(void *))(vt + 0x1C))((char *)obj + *(s16 *)(vt + 0x18));
+        }
+    }
 }
 
 s32 fn_802B6F38(void) {
