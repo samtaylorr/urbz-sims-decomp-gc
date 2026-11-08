@@ -2856,6 +2856,13 @@ void *fn_801FAC90(void *arg0, s32 arg1) {
     return (u8 *)arg0 + (arg1 * 0x318 + 0x104);
 }
 
+s32 fn_801FACA0(void *arg0) {
+    if (M2C_FIELD(arg0, u16 *, 0xCC) != 0) {
+        return 1;
+    }
+    return 0;
+}
+
 u8 fn_801FAD08(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 0x100);
 }
