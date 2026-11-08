@@ -2203,17 +2203,9 @@ static inline void fn_802ACD80_base(void *self, s32 type, void *vt, s32 n) {
 
 void *fn_802ACD80(void *arg0) {
     extern char lbl_80418970[];
-    extern void fn_802B6FA8(void *, s32);
-    extern void fn_802ADDD8(void *, s32);
     extern void fn_802B7178(void *, s32);
     extern void fn_802B710C(void *, s32);
-    fn_802B6FA8(arg0, 0x17);
-    M2C_FIELD(arg0, void **, 4) = lbl_80418970;
-    {
-        s32 n = 8;
-        void *p = (u8 *)arg0 + 8;
-        fn_802ADDD8(p, n);
-    }
+    fn_802ACD80_base(arg0, 0x17, lbl_80418970, 8);
     fn_802B7178(arg0, 1);
     fn_802B710C(arg0, 0xFFF);
     return arg0;
@@ -2861,7 +2853,7 @@ s32 fn_802AFE08(f32 *m) {
     extern f32 lbl_803EDEE8[];
     f32 det;
     f32 inv;
-    f32 a, b, c, d;
+    f32 a, b, c, d, tx, ty;
 
     det = m[0] * m[3] - m[1] * m[2];
     if (__builtin_fabs(det) < lbl_803EDEE0[0]) {
@@ -2872,12 +2864,14 @@ s32 fn_802AFE08(f32 *m) {
     b = m[1];
     c = m[2];
     d = m[3];
+    tx = m[4];
+    ty = m[5];
     m[3] = a * inv;
     m[1] = -c * inv;
     m[2] = -b * inv;
     m[0] = d * inv;
-    m[5] = -(m[4] * m[1] + m[5] * m[3]);
-    m[4] = -(m[4] * m[0] + m[5] * m[2]);
+    m[5] = -(tx * m[1] + ty * m[3]);
+    m[4] = -(tx * m[0] + ty * m[2]);
     return 1;
 }
 
@@ -5135,12 +5129,13 @@ void **fn_802BD1F8(void **self) {
     len = ((struct Buf *)*self)->len;
     fn_802BE3D0(self, len, 0, len, 1, len);
     p = ((struct Buf *)*self)->data;
-    for (i = 0; i < len; i++, p++) {
+    for (i = 0; i < len; i++) {
         s32 ch = *p;
         if (ch[lbl_803EBA39] & 2) {
             ch -= 0x20;
-            *p = ch;
         }
+        *p = ch;
+        p++;
     }
     return self;
 }
