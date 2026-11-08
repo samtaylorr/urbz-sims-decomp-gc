@@ -4567,11 +4567,11 @@ void *fn_802BBDC4(void *arg0, s32 arg1) {
 }
 
 void fn_802BBE14(void *arg0, s32 arg1) {
-    extern void (*lbl_80443310[])(void *, s32);
-    lbl_80443310[1](M2C_FIELD(arg0, void **, 8), 0);
+    extern void (*lbl_80443310[])(void *);
+    lbl_80443310[1](M2C_FIELD(arg0, void **, 8));
     M2C_FIELD(arg0, void **, 8) = NULL;
     if (arg1 & 1) {
-        lbl_80443310[2](arg0, 0xC);
+        ((void (*)(void *, s32))lbl_80443310[2])(arg0, 0xC);
     }
 }
 
