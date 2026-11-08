@@ -2810,7 +2810,8 @@ void fn_801F8274(void *arg0) {
 
 void fn_801F82E4(s32 arg0, s32 arg1) {
     void fn_801F8FD4(s32, s32, s32);
-    ((u8 *)arg0 + 0xED)[arg1] = 2;
+    struct { u8 pad[0xED]; u8 state[1]; } *p = (void *)arg0;
+    p->state[arg1] = 2;
     fn_801F8FD4(arg0, arg1, 1);
 }
 
@@ -2933,6 +2934,32 @@ s32 fn_801FA3E4(void *arg0, s32 arg1, s32 arg2) {
     return 1;
 }
 
+s32 fn_801FA470(void *arg0, s32 arg1, s32 arg2) {
+    s32 pct;
+    s32 row;
+
+    if (arg1 == 5 && M2C_FIELD(arg0, s32 *, 0xA4) != 0) {
+        return 0;
+    }
+    if ((u16)arg1 > 5) {
+        return 0;
+    }
+    row = M2C_FIELD(arg0, u8 *, 0x101);
+    ((s16 *)((u8 *)arg0 + 0xB4))[arg1 + row * 6] = arg2;
+    {
+        u16 lo = ((u16 *)((u8 *)arg0 + 0x8A))[arg1 * 2];
+        u16 hi = ((u16 *)((u8 *)arg0 + 0x8C))[arg1 * 2];
+        pct = ((arg2 - (s16)lo) * 100) / (s16)(hi - lo);
+    }
+    if (pct < 0) {
+        pct = 0;
+    } else if (pct > 100) {
+        pct = 100;
+    }
+    ((u8 *)arg0 + 0xA8)[arg1 + M2C_FIELD(arg0, u8 *, 0x101) * 6] = pct;
+    return 1;
+}
+
 void fn_801FAC58(void *arg0, s8 arg1) {
     if (arg1 != 0) {
         M2C_FIELD(arg0, s8 *, 0x100) = 1;
@@ -3048,6 +3075,19 @@ s32 fn_801FB90C(INVPair *arg0) {
         return 0xD59C7BB5;
     }
     return ((s32 *)arg0->a)[3];
+}
+
+s32 fn_801FBC04(s32 arg0) {
+    if (arg0 < 0) {
+        return 0;
+    }
+    if (arg0 <= 8) {
+        return 1;
+    }
+    if (arg0 <= 13) {
+        return 2;
+    }
+    return 0;
 }
 
 void fn_801FE23C(s32 arg0) {
