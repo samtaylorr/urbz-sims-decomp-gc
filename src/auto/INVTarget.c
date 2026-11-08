@@ -5112,6 +5112,12 @@ void fn_8021D7BC(u8 *arg0) {
     fn_801F53A0(arg0 + 0x84);
 }
 
+s32 fn_8021F05C(s32 arg0, s32 arg1) {
+    void fn_8021EF20();
+    fn_8021EF20(arg0, arg1, 3);
+    return arg0;
+}
+
 void fn_802200F8(void *arg0, s32 arg1) {
     extern s32 fn_801D7CDC(void *, s32);
     extern s32 fn_801D8B40(void *, void *);
