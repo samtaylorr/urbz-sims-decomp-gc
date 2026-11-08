@@ -1384,6 +1384,28 @@ void fn_802A1298(void **arg0, s32 arg1, f32 *arg2) {
     }
 }
 
+M2C_UNK fn_802A1420(void ***arg0) {
+    extern void fn_802BBE7C(void *);
+    extern void *lbl_80494B48;
+    extern s32 lbl_804433C4;
+    char *p;
+    char *next;
+
+    if (*arg0 != NULL) {
+        p = M2C_FIELD(*(char **)*arg0, char **, 0x58);
+        if (p != NULL) {
+            do {
+                next = M2C_FIELD(p, char **, 0x58);
+                fn_802A0890((s32)arg0, p);
+                if (M2C_FIELD(lbl_80494B48, s32 *, 4) != 0 && lbl_804433C4 == 0) {
+                    fn_802BBE7C(lbl_80494B48);
+                }
+                p = next;
+            } while (p != NULL);
+        }
+    }
+}
+
 void fn_802A14A0(void ***arg0) {
     M2C_UNK fn_802A1420();
     M2C_UNK fn_803B79BC(void **, M2C_UNK);
@@ -1580,19 +1602,33 @@ void fn_802A2AE4(void *arg0, void *arg1, void *arg2) {
 }
 
 s32 fn_802A2B30(f32 *p, f32 x, f32 y) {
+    struct Pt { f32 x; f32 y; };
+    struct Pt *v = (struct Pt *)p;
+    struct Pt *a;
+    struct Pt *b;
     s32 i;
     s32 j;
     s32 c;
 
     c = 0;
     for (i = 0, j = 2; i < 3; j = i++) {
-        if (((p[i * 2 + 1] <= y && y < p[j * 2 + 1]) ||
-             (p[j * 2 + 1] <= y && y < p[i * 2 + 1])) &&
-            x < (p[j * 2] - p[i * 2]) * (y - p[i * 2 + 1]) / (p[j * 2 + 1] - p[i * 2 + 1]) + p[i * 2]) {
+        a = &v[i];
+        b = &v[j];
+        if (((!(a->y > y) && y < b->y) ||
+             (!(b->y > y) && !(y >= a->y))) &&
+            !(x >= (b->x - a->x) * (y - a->y) / (b->y - a->y) + a->x)) {
             c ^= 1;
         }
     }
     return c;
+}
+
+s32 fn_802A3370(u8 *self, void *arg1) {
+    f32 r[4];
+
+    fn_80291DEC(arg1, (s32)r);
+    return !((f32)M2C_FIELD(self, s32 *, 0x1254) < r[0] || (f32)M2C_FIELD(self, s32 *, 0x1254) > r[2] ||
+             (f32)M2C_FIELD(self, s32 *, 0x1258) < r[1] || (f32)M2C_FIELD(self, s32 *, 0x1258) > r[3]);
 }
 
 s32 fn_802A4354(void) {
@@ -5068,7 +5104,7 @@ void *fn_802BBF08(void *arg0, s32 arg1) {
 u16 **fn_802BBFAC(u16 **self, const char *s, u32 len) {
     extern u16 lbl_803FCE5C[];
     extern void *(**lbl_80494DA0)(s32);
-    extern void fn_80248488();
+    extern void fn_80248488(void *, const void *, u32);
     s32 size;
     u16 *p;
 
@@ -5450,16 +5486,19 @@ u8 **fn_802C4024(const char *arg0) {
     u8 *e;
     u8 **p;
 
+    i = 0;
     len = fn_80248808(arg0);
     p = lbl_80444628;
-    for (i = 0; p <= &lbl_80444628[0xAF]; i++, p++) {
+    do {
         e = lbl_80444628[i];
         if (*(u16 *)(e + 2) == len) {
             if (fn_8027A6AC(e + 8, arg0) == 0) {
                 return p;
             }
         }
-    }
+        p++;
+        i++;
+    } while ((s32)p <= (s32)&lbl_80444628[0xAF]);
     return NULL;
 }
 
