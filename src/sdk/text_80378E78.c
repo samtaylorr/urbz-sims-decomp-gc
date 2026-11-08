@@ -417,6 +417,25 @@ s32 fn_8037E6A4(s32 arg0) {
     return ret;
 }
 
+s32 fn_8037E70C(s32 *arg0) {
+    extern s32 lbl_80496348;
+    extern s32 lbl_8049634C;
+    extern s32 *lbl_80496350;
+    s32 fn_8025465C(void);
+    void fn_80254684(s32);
+    s32 enabled;
+
+    enabled = fn_8025465C();
+    lbl_80496350--;
+    if (arg0 != NULL) {
+        *arg0 = *lbl_80496350;
+    }
+    lbl_8049634C++;
+    lbl_80496348 -= *lbl_80496350;
+    fn_80254684(enabled);
+    return lbl_80496348;
+}
+
 s32 fn_8037E780(void) {
     return lbl_80496354;
 }
@@ -496,9 +515,7 @@ void fn_8037EA74(u32 mainmem, u32 aram, u32 length) {
     __DSPRegs[20] = (u16)(__DSPRegs[20] | 0x8000);
     __DSPRegs[20] = (u16)((__DSPRegs[20] & ~0x3ff) | (u16)(length >> 16));
     __DSPRegs[21] = (u16)((__DSPRegs[21] & ~0xffe0) | (u16)(length & 0xffff));
-    if (!(__DSPRegs[5] & 0x200)) {
-        u16 tmp = __DSPRegs[5];
-        __DSPRegs[5] = (tmp & ~0x88) | 0x20;
+    if (!fn_8037E99C_like()) {
     }
 }
 
@@ -1222,6 +1239,20 @@ void fn_803847F8(s32 arg0, s32 arg1) {
     lbl_80496454 = arg1;
     lbl_80496458 = 0;
     lbl_8049645C = 1;
+}
+
+u16 fn_80384860(s32 arg0) {
+    extern struct VolTable2_80405980 {
+        u8 pad[0x710];
+        u16 v[1];
+    } lbl_80405980;
+    if (arg0 <= -0x388) {
+        return 0;
+    }
+    if (arg0 >= 0x3C) {
+        return 0xFF64;
+    }
+    return lbl_80405980.v[arg0];
 }
 
 void fn_8038489C(void *arg0) {
