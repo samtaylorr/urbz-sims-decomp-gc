@@ -25,6 +25,21 @@ void fn_80149B1C(void **obj) {
     }
 }
 
+void fn_80149B5C(void *arg0) {
+    extern s32 fn_800F68BC(void *);
+    extern char *fn_800F69F0(void *);
+    s32 i;
+    s32 n;
+
+    i = 0;
+    n = fn_800F68BC(arg0);
+    for (; i < n; i++) {
+        if (fn_800F69F0(arg0)[i] == '/') {
+            fn_800F69F0(arg0)[i] = '\\';
+        }
+    }
+}
+
 extern char lbl_80411120[];
 void fn_80149BC8(void **arg0, s16 arg1) {
     *arg0 = lbl_80411120;
@@ -474,8 +489,11 @@ s32 fn_80157F28(void *self) {
     }
     obj = M2C_FIELD(self, u8 **, 4);
     e = *(u8 **)(obj + 4) + 0x2D8;
-    if ((*(s32 (**)(void *))(e + 4))(obj + *(s16 *)e) != 2 &&
-        *fn_80141C5C((s32)self + 0x28, 0x19) == 0 && found) {
+    if ((*(s32 (**)(void *))(e + 4))(obj + *(s16 *)e) == 2 ||
+        *fn_80141C5C((s32)self + 0x28, 0x19) != 0) {
+        return 1;
+    }
+    if (found) {
         return 0;
     }
     return 1;
