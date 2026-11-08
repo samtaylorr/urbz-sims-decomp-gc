@@ -64,6 +64,17 @@ void fn_80379930(u8* buf, s32 length, s32 offset) {
     }
 }
 
+void fn_8037A8D8(s32 *mq, void *msgArray, s32 msgCount) {
+    void fn_80258534(void *);
+
+    fn_80258534(mq);
+    fn_80258534(mq + 2);
+    mq[4] = (s32)msgArray;
+    mq[5] = msgCount;
+    mq[6] = 0;
+    mq[7] = 0;
+}
+
 void fn_8037ABB0(s32 *sem, s32 count) {
     s32 fn_8025465C(void);
     void fn_80254684(s32);
@@ -74,6 +85,22 @@ void fn_8037ABB0(s32 *sem, s32 count) {
     fn_80258534(sem + 1);
     *sem = count;
     fn_80254684(enabled);
+}
+
+s32 fn_8037AC08(s32 *sem) {
+    s32 fn_8025465C(void);
+    void fn_80254684(s32);
+    void fn_8025974C(void *);
+    s32 enabled;
+    s32 count;
+
+    enabled = fn_8025465C();
+    while ((count = *sem) <= 0) {
+        fn_8025974C(sem + 1);
+    }
+    --*sem;
+    fn_80254684(enabled);
+    return count;
 }
 
 s32 fn_8037AC78(s32 *sem) {
@@ -2467,6 +2494,18 @@ s32 fn_8038C018(u8 *card, u8 *ent) {
         return 0;
     }
     return -10;
+}
+
+s32 fn_8038C644(s32 *fileInfo) {
+    s32 *card;
+    s32 result;
+
+    result = fn_8038907C(fileInfo[0], &card);
+    if (result < 0) {
+        return result;
+    }
+    fileInfo[0] = -1;
+    return fn_80389134(card, 0);
 }
 
 s32 fn_8038C698(void) {
