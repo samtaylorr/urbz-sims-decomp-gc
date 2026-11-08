@@ -376,21 +376,20 @@ void fn_8019B6E4(void *self, s32 idx, TTabBlk20 *out) {
     *out = ((TTabBlk20 *)((u8 *)self + 0xbc))[idx];
 }
 
-void fn_8019B748(void *self, s32 *out) {
-    s32 *src[3] = {
-        (s32 *)((u8 *)self + 0xbc),
-        (s32 *)((u8 *)self + 0xdc),
-        (s32 *)((u8 *)self + 0x15c),
+void fn_8019B748(void *self, TTabBlk20 *out) {
+    TTabBlk20 *src[3] = {
+        (TTabBlk20 *)((u8 *)self + 0xbc),
+        (TTabBlk20 *)((u8 *)self + 0xdc),
+        (TTabBlk20 *)((u8 *)self + 0x15c),
     };
     s32 i;
+    s32 j;
     for (i = 0; i < 8; i++) {
-        s32 j;
-        s32 **p = src;
         s32 sum = 0;
         for (j = 0; j < 3; j++) {
-            sum += (*p++)[i];
+            sum += src[j]->v[i];
         }
-        out[i] = sum;
+        out->v[i] = sum;
     }
 }
 
@@ -1691,6 +1690,21 @@ s32 fn_801A0008(void *self, s32 arg1) {
     }
     i += i;
     return (M2C_FIELD(self, s32 *, 4) & (3 << i)) >> i;
+}
+
+s32 fn_801A0078(void *self, s32 val, s32 arg2) {
+    M2C_UNK fn_801A0780(s32);
+    M2C_UNK fn_801A08DC(void *, s32);
+    s32 i;
+
+    fn_801A08DC(self, arg2);
+    fn_801A0780(arg2);
+    i = fn_801A0690(arg2, 0);
+    if (i <= 3) {
+        i += i;
+        M2C_FIELD(self, s32 *, 4) = (M2C_FIELD(self, s32 *, 4) & ~(3 << i)) | (val << i);
+    }
+    return arg2;
 }
 
 s32 fn_801A0558(s32 arg0) {
