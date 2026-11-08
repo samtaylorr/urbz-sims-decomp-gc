@@ -2263,8 +2263,9 @@ void fn_802B709C(void *self, s32 flags) {
     }
 }
 
-u32 fn_802B70D0(u32 *arg0) {
-    return (*arg0 >> 16) & 0xFFF;
+u32 fn_802B70D0(void *arg0) {
+    struct Bits { u32 a : 4; u32 b : 12; u32 c : 16; };
+    return ((struct Bits *)arg0)->b;
 }
 
 s32 fn_802B70DC(s32 *arg0) {
