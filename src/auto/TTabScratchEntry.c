@@ -152,13 +152,13 @@ void fn_8019A38C(s32 *self, void *stream) {
 }
 
 void fn_8019A7C0(void *self) {
+    u8 *add = (u8 *)self + 0x7c;
     u16 i;
     for (i = 0; i < 2; i++) {
-        u8 *add = (u8 *)self + 0x7c;
-        u8 *val = (u8 *)self + 0x74;
         s32 off = i * 4;
         s32 v = *(s32 *)(add + off);
         if (v != 0) {
+            u8 *val = (u8 *)self + 0x74;
             s32 n = *(s32 *)(val + off) + v;
             *(s32 *)(val + off) = n;
             if (n > 999999) {
@@ -2944,7 +2944,7 @@ void fn_801AA0DC(void *self, s32 arg1, s16 arg2) {
     u8 *tab = M2C_FIELD(self, u8 **, 0x30);
     s32 row = fn_80105B78(arg1);
     s32 col = fn_80105B84(arg1);
-    *(s16 *)((*(u8 ***)(tab + 0xC))[row] + col * 2) = arg2;
+    *(s16 *)(col * 2 + (*(u8 ***)(tab + 0xC))[row]) = arg2;
 }
 
 u8 fn_801AA134(void *self, s32 arg1) {
