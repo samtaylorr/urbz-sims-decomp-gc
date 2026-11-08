@@ -993,6 +993,10 @@ f32 fn_8019F61C(void *arg0) {
     return M2C_FIELD(arg0, f32 *, 0xC);
 }
 
+s32 fn_8019F748(void *arg0) {
+    return ++M2C_FIELD(arg0, s32 *, 0x58);
+}
+
 extern u8 lbl_80414970[];
 void fn_8019F844(void **self, s32 flags) {
     *self = lbl_80414970;
