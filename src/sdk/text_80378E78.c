@@ -1772,6 +1772,13 @@ void fn_80387D30(void) {
 
 }
 
+void fn_80387D34(s32 chan) {
+    void fn_80259838(void *);
+    extern u8 lbl_804912A0[];
+
+    fn_80259838(lbl_804912A0 + chan * 0x110 + 0x8C);
+}
+
 u16 fn_80388F84(void) {
     extern u16 lbl_804964A0;
     return lbl_804964A0;
