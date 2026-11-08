@@ -1192,6 +1192,29 @@ u16 fn_8038DAFC(void) {
     return lbl_80495660;
 }
 
+s32 fn_8038DBC8(s32 chan, void *dst) {
+    s32 fn_8038907C(s32, void *);
+    u8 *fn_80257270(void);
+    void fn_802482F8(void *, void *, u32);
+    s32 fn_8025762C(s32);
+    void fn_80389134(s32, s32);
+    s32 sp10;
+    s32 result;
+    u8 *sram;
+
+    if (chan < 0 || chan >= 2) {
+        return -0x80;
+    }
+    result = fn_8038907C(chan, &sp10);
+    if (result < 0) {
+        return result;
+    }
+    sram = fn_80257270();
+    fn_802482F8(dst, sram + chan * 0xC + 4, 8);
+    fn_8025762C(0);
+    fn_80389134(sp10, 0);
+}
+
 s32 fn_8038DD80(s32 chan, s32 arg1, s32 arg2) {
     s32 fn_803894A8(s32);
     s32 fn_8038DC9C(s32, s32, s32, void *);
