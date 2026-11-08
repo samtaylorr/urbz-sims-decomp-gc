@@ -3852,8 +3852,8 @@ s32 fn_80217A30(void *arg0, s32 arg1) {
 }
 
 s32 fn_80217A40(void *arg0, s32 arg1) {
-    s32 *p = (s32 *)((u8 *)arg0 + 0x12C);
-    return p[arg1];
+    struct T { u8 pad[0x12C]; s32 unk12C[1]; };
+    return ((struct T *)arg0)->unk12C[arg1];
 }
 
 char *fn_802181A0(void *arg0, char *arg1) {
@@ -3863,16 +3863,20 @@ char *fn_802181A0(void *arg0, char *arg1) {
     s32 fn_8004ECC8(void *);
     extern char lbl_803E9050[];
     extern char lbl_803E905C[];
-    extern struct Str7 lbl_803E90D8;
+    extern char lbl_803E90D8[];
     extern u8 lbl_8041F94C[];
     char *buf = fn_800BF3FC(0x80);
 
     buf[0] = 0;
     if (fn_802486DC(arg1, lbl_803E9050) == 0) {
-        *(struct Str7 *)buf = lbl_803E90D8;
+        *(struct Str7 *)buf = *(struct Str7 *)lbl_803E90D8;
     } else if (fn_802486DC(arg1, lbl_803E905C) == 0) {
-        buf[0] = fn_8004ECC8(lbl_8041F94C) ? '1' : '0';
-        buf[1] = 0;
+        char c = '0';
+        if (fn_8004ECC8(lbl_8041F94C) != 0) {
+            c = '1';
+        }
+        buf[0] = c;
+        buf[1] = '\0';
     }
     return buf;
 }
@@ -4236,7 +4240,10 @@ void *fn_8022315C(void *arg0) {
     extern f32 lbl_803EA768[];
     typedef struct { f32 x, y; } V2;
     f32 zero;
-    f32 *v;
+    f32 *v0;
+    f32 *v1;
+    f32 *v2;
+    V2 *p;
     s32 i;
     V2 t;
 
@@ -4244,33 +4251,34 @@ void *fn_8022315C(void *arg0) {
     M2C_FIELD(arg0, char **, 0x58) = lbl_80417D08;
     M2C_FIELD(arg0, s32 *, 0x0) = 0;
     M2C_FIELD(arg0, s32 *, 0x4) = 0;
-    v = (f32 *)((char *)arg0 + 0x8);
-    v[1] = zero;
-    v[2] = zero;
-    v[0] = zero;
-    v = (f32 *)((char *)arg0 + 0x14);
-    v[1] = zero;
-    v[2] = zero;
-    v[0] = zero;
-    v = (f32 *)((char *)arg0 + 0x20);
-    v[1] = zero;
-    v[2] = zero;
-    v[0] = zero;
-    M2C_FIELD(arg0, s32 *, 0x30) = 0;
+    v0 = (f32 *)((char *)arg0 + 0x8);
+    v1 = (f32 *)((char *)arg0 + 0x14);
+    v2 = (f32 *)((char *)arg0 + 0x20);
+    v0[2] = zero;
+    v0[1] = zero;
+    v0[0] = zero;
+    v1[2] = zero;
+    v1[1] = zero;
+    v1[0] = zero;
+    v2[2] = zero;
+    v2[1] = zero;
+    v2[0] = zero;
     M2C_FIELD(arg0, s32 *, 0x2C) = 0;
+    M2C_FIELD(arg0, s32 *, 0x30) = 0;
+    p = &t;
     i = 1;
-    while (i-- != 0) {
-    }
+    do {
+    } while (i-- != 0);
     zero = lbl_803EA768[0];
-    M2C_FIELD(arg0, s32 *, 0x44) = 0;
-    t.y = zero;
-    t.x = zero;
-    M2C_FIELD(arg0, s32 *, 0x4C) = 0;
-    M2C_FIELD(arg0, V2 *, 0x3C) = t;
-    M2C_FIELD(arg0, f32 *, 0x54) = zero;
+    p->y = zero;
+    p->x = zero;
     M2C_FIELD(arg0, V2 *, 0x34) = t;
-    M2C_FIELD(arg0, f32 *, 0x50) = zero;
+    M2C_FIELD(arg0, V2 *, 0x3C) = t;
+    M2C_FIELD(arg0, s32 *, 0x44) = 0;
     M2C_FIELD(arg0, s32 *, 0x48) = 0;
+    M2C_FIELD(arg0, s32 *, 0x4C) = 0;
+    M2C_FIELD(arg0, f32 *, 0x50) = zero;
+    M2C_FIELD(arg0, f32 *, 0x54) = zero;
     return arg0;
 }
 
