@@ -116,9 +116,8 @@ f32 fn_80291F50(f32 x) {
     return x;
 }
 
-f32 fn_802921A0(void *arg0, u32 arg1) {
-    struct { u8 pad[0x48]; f32 *vals; } *p = arg0;
-    return p->vals[arg1];
+f32 fn_802921A0(void *arg0, s32 arg1) {
+    return *(M2C_FIELD(arg0, f32 **, 0x48) + arg1);
 }
 
 void fn_802927E8(void *self, void *arg1) {
@@ -1728,6 +1727,24 @@ void fn_802ADDF4(void *arg0, s32 arg1) {
 void fn_802AE440(void);
 void fn_802AE5EC(void) {
     fn_802AE440();
+}
+
+extern s32 lbl_80494D14;
+extern u32 *lbl_80496108;
+extern u32 lbl_8044342C[];
+u32 fn_802AEB5C(void);
+u32 fn_802AECCC(void) {
+    u32 y;
+
+    if (--lbl_80494D14 < 0) {
+        return fn_802AEB5C();
+    }
+    y = *lbl_80496108++;
+    y ^= y >> 11;
+    y ^= (y << 7) & 0x9D2C5680;
+    y ^= (y << 15) & 0xEFC60000;
+    y ^= y >> 18;
+    return y;
 }
 
 void fn_802AF384(void *arg0, f32 farg0, f32 farg1) {
