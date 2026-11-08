@@ -2165,9 +2165,9 @@ s32 fn_801AA4C4(void) {
 }
 
 void fn_801AA4CC(void *self, s32 arg1) {
-    extern u8 lbl_804152A8;
+    extern u8 lbl_804152A8[];
     M2C_FIELD(self, s32 *, 4) = arg1;
-    M2C_FIELD(self, u8 **, 0) = &lbl_804152A8;
+    M2C_FIELD(self, u8 **, 0) = lbl_804152A8;
 }
 
 s32 fn_801AA4E0(void) {
