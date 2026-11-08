@@ -1475,6 +1475,22 @@ void fn_80383EEC(void *arg0, s16 arg1, s16 arg2) {
     fn_80254684(enabled);
 }
 
+void fn_80383F74(void *arg0, void *arg1) {
+    u16 *d = (u16 *)((u8 *)arg0 + 0x18A);
+    fn_8025465C();
+    d[0] = M2C_FIELD(arg1, u16 *, 0);
+    d[1] = M2C_FIELD(arg1, u16 *, 2);
+    d[2] = M2C_FIELD(arg1, u16 *, 4);
+    d[3] = M2C_FIELD(arg1, u16 *, 6);
+    d[4] = M2C_FIELD(arg1, u16 *, 8);
+    d[5] = M2C_FIELD(arg1, u16 *, 10);
+    d[6] = M2C_FIELD(arg1, u16 *, 12);
+    d[7] = M2C_FIELD(arg1, u16 *, 14);
+    d[8] = M2C_FIELD(arg1, u16 *, 16);
+    M2C_FIELD(arg0, s32 *, 0x1C) = (s32) (M2C_FIELD(arg0, s32 *, 0x1C) | 0x100);
+    fn_80254684();
+}
+
 void fn_80384010(void *arg0, void *arg1) {
     fn_8025465C();
     M2C_FIELD(arg0, u16 *, 0x19C) = (u16) M2C_FIELD(arg1, u16 *, 0);
