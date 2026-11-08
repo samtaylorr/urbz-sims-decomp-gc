@@ -958,9 +958,9 @@ void fn_802A1FE4(s32 arg0, s32 arg1, s32 arg2) {
     extern s32 lbl_80494C90;
     s32 n = lbl_80494C90;
     lbl_80494C90 = n + 1;
-    lbl_80493530[n][2] = arg2;
-    lbl_80493530[n][1] = arg1;
     lbl_80493530[n][0] = arg0;
+    lbl_80493530[n][1] = arg1;
+    lbl_80493530[n][2] = arg2;
 }
 
 s32 fn_802A2014(s32 arg0) {
@@ -2040,9 +2040,8 @@ void fn_802AED48(u32 seed) {
 extern f32 lbl_803EDBB8[];
 extern f32 lbl_803EDBBC[];
 void *fn_802AED88(f32 *m) {
-    f32 zero = lbl_803EDBB8[0];
     f32 one = lbl_803EDBBC[0];
-    M2C_FIELD(m, s32 *, 0x3BC) = 0;
+    f32 zero = lbl_803EDBB8[0];
     m[0] = zero;
     m[1] = zero;
     m[2] = zero;
@@ -2057,6 +2056,7 @@ void *fn_802AED88(f32 *m) {
     m[11] = zero;
     m[12] = one;
     m[13] = one;
+    M2C_FIELD(m, s32 *, 0x3BC) = 0;
     M2C_FIELD(m, s32 *, 0x3B8) = 0;
     return m;
 }
