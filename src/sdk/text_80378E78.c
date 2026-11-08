@@ -1567,6 +1567,23 @@ void fn_8038DEBC(s32 arg0) {
     lbl_80495668 = arg0;
 }
 
+s32 fn_8038F67C(s32 chan, u32 addr, u32 length, void *dst, void *callback) {
+    s32 fn_80388BF8(s32, void *);
+    extern void fn_8038F5A0(void);
+    extern u8 lbl_804912A0[];
+    u8 *p;
+
+    p = lbl_804912A0 + chan * 0x110;
+    if (M2C_FIELD(p, s32 *, 0) == 0) {
+        return -3;
+    }
+    M2C_FIELD(p, void **, 0xD4) = callback;
+    M2C_FIELD(p, u32 *, 0xAC) = length / 128;
+    M2C_FIELD(p, u32 *, 0xB0) = addr;
+    M2C_FIELD(p, void **, 0xB4) = dst;
+    return fn_80388BF8(chan, fn_8038F5A0);
+}
+
 s32 fn_8038F6E0(s32 chan) {
     extern u8 lbl_804912A0[];
     return M2C_FIELD(lbl_804912A0 + chan * 0x110, s32 *, 0xB8);
