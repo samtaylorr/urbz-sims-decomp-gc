@@ -553,7 +553,7 @@ s32 fn_80157674(void *self, s32 idx, s32 mask) {
     return (M2C_FIELD(self, u32 **, 0x1C)[idx - 1] & (mask << 16)) != 0;
 }
 
-s16 fn_8015769C(void *self, s32 idx) {
+s16 fn_8015769C(void *self, u32 idx) {
     return ((s16 *)&M2C_FIELD(self, u32 **, 0x1C)[idx - 1])[1];
 }
 
@@ -572,6 +572,21 @@ s32 fn_801576E4(void *self, s32 idx) {
         return 0;
     }
     return p[1];
+}
+
+s32 fn_801579A0(void *self) {
+    s32 *p;
+    s32 i;
+    s32 n;
+
+    p = (s32 *)((char *)self + 0x20A0);
+    n = 0;
+    for (i = 0; i < 16; i++) {
+        if (*p++ != 0) {
+            n++;
+        }
+    }
+    return (M2C_FIELD(self, s32 **, 0x2094) - M2C_FIELD(self, s32 **, 0x2090)) + n;
 }
 
 extern s32 lbl_8049665C;
