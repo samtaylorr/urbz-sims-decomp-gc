@@ -1112,6 +1112,24 @@ void fn_800D4C08(s32 *self) {
     }
 }
 
+void fn_800D4D48(u8 *self) {
+    extern char *lbl_80496648;
+    extern u8 *lbl_80496660;
+    extern void fn_80047AA8(void *);
+    char *obj = lbl_80496648;
+    char *vt = *(char **)obj;
+    u8 *p;
+    (*(void (**)(void *))(vt + 0x1c))(obj + *(s16 *)(vt + 0x18));
+    fn_80047AA8((s32 *)&lbl_8041F754);
+    p = lbl_80496660;
+    *(s32 *)(p + 0x354) = 1;
+    *(s32 *)(p + 0x358) = -1;
+    *(s32 *)(p + 0x35C) = 1;
+    *(s32 *)(p + 0x348) = 1;
+    *(s32 *)(p + 0x360) = 1;
+    *(s32 *)(self + 0x18) = 0;
+}
+
 void fn_800D4EB8(void *arg0, s32 arg1) {
     extern s32 lbl_8041E640[];
     extern void fn_800D568C(s32);
@@ -1230,31 +1248,35 @@ void fn_800D5374(char *self) {
 }
 
 void fn_800D53B8(char *self, BSKey *key) {
-    extern s32 lbl_8041FCCC;
-    extern s32 lbl_8041F9F8;
+    extern s32 lbl_8041FCCC[];
+    extern s32 lbl_8041F9F8[];
     char *node;
     char *e;
     char *obj;
     char *vt;
     BSKey k;
 
-    lbl_8041FCCC = 1;
+    lbl_8041FCCC[0] = 1;
     M2C_FIELD(self, s32 *, 0) = 1;
-    for (node = M2C_FIELD(self, char **, 8); node != NULL; node = M2C_FIELD(node, char **, 8)) {
-        e = M2C_FIELD(node, char **, 0);
-        k = *(BSKey *)e;
-        if (k.v == key->v) {
-            if (M2C_FIELD(self, char **, 4) != NULL) {
-                obj = *M2C_FIELD(self, char ***, 4);
-                vt = M2C_FIELD(obj, char **, 8);
-                M2C_FIELD(vt, void (**)(void *), 0x2C)(obj + M2C_FIELD(vt, s16 *, 0x28));
+    node = M2C_FIELD(self, char **, 8);
+    if (node != NULL) {
+        do {
+            e = M2C_FIELD(node, char **, 0);
+            k = *(BSKey *)e;
+            if (k.v == key->v) {
+                if (M2C_FIELD(self, char **, 4) != NULL) {
+                    obj = *M2C_FIELD(self, char ***, 4);
+                    vt = M2C_FIELD(obj, char **, 8);
+                    M2C_FIELD(vt, void (**)(void *), 0x2C)(obj + M2C_FIELD(vt, s16 *, 0x28));
+                }
+                M2C_FIELD(self, char **, 4) = node;
+                lbl_8041F9F8[0] = key->v;
+                vt = M2C_FIELD(e, char **, 8);
+                M2C_FIELD(vt, void (**)(void *), 0x14)(e + M2C_FIELD(vt, s16 *, 0x10));
+                return;
             }
-            M2C_FIELD(self, char **, 4) = node;
-            lbl_8041F9F8 = key->v;
-            vt = M2C_FIELD(e, char **, 8);
-            M2C_FIELD(vt, void (**)(void *), 0x14)(e + M2C_FIELD(vt, s16 *, 0x10));
-            break;
-        }
+            node = M2C_FIELD(node, char **, 8);
+        } while (node != NULL);
     }
 }
 
@@ -1289,6 +1311,20 @@ void fn_800D54E8(char *self) {
     M2C_FIELD(self, char **, 4) = NULL;
     fn_8004B2B0(lbl_8041F94C);
     fn_8004A068(lbl_8041F94C);
+}
+
+void fn_800D5628(char *self) {
+    void fn_800194C4(void *);
+    extern void *lbl_8041FAA8;
+    *(s32 *)self = 0;
+    if (lbl_8041FAA8 != NULL) {
+        fn_800194C4(lbl_8041FAA8);
+    }
+    {
+        char *obj = **(char ***)(self + 4);
+        char *vt = *(char **)(obj + 8);
+        (*(void (**)(void *))(vt + 0x1C))(obj + *(s16 *)(vt + 0x18));
+    }
 }
 
 void fn_800D5FAC(void) {
@@ -3826,11 +3862,13 @@ void fn_800E40C4(s32 self) {
     extern f32 lbl_803D511C[];
     void fn_800E44CC(void *);
     void **it;
+    void ***v;
     u8 *q = (u8 *)self + 0x38;
     fn_800E44CC(q);
     M2C_FIELD(q, s32 *, 0x4) = 0;
     M2C_FIELD(q, f32 *, 0x10) = lbl_803D511C[0];
-    for (it = M2C_FIELD(self, void ***, 0x28); it != M2C_FIELD(self, void ***, 0x2C); it++) {
+    v = (void ***)((u8 *)self + 0x28);
+    for (it = M2C_FIELD(self, void ***, 0x28); it != v[1]; it++) {
         void *obj = *it;
         if (obj != NULL) {
             void *vt = M2C_FIELD(obj, void **, 0x14);
