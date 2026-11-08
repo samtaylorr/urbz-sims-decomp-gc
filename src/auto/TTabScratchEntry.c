@@ -241,11 +241,13 @@ void fn_8019B0BC(void *self) {
 void fn_8019B128(void *self) {
     extern f32 lbl_803DB4D0[];
     u8 *vt = *(u8 **)self;
+    u8 *p;
     if ((*(s32 (**)(void *))(vt + 0x64))((u8 *)self + *(s16 *)(vt + 0x60)) != 0) {
         fn_801051C8(0xBD, 0);
     }
     M2C_FIELD(self, f32 *, 0xA8) = lbl_803DB4D0[0];
-    ((TTSE_Flags36 *)((u8 *)self + 0x36))->flag = 0;
+    p = (u8 *)self + 0x34;
+    *(u16 *)(p + 2) = *(u16 *)(p + 2) & ~1;
     fn_8019AFF0(self);
 }
 
@@ -2881,6 +2883,20 @@ s32 fn_801A9D9C(void *arg0, void *arg1) {
     return 0;
 }
 
+s32 fn_801A9E50(void *self, s32 arg1) {
+    void fn_80105534(void *, s32, s32);
+    void fn_801055FC(void *, s32);
+    struct { s32 a, b, c; } buf;
+    void *vt;
+    s32 r;
+
+    vt = M2C_FIELD(self, void **, 0);
+    fn_80105534(&buf, arg1, 1);
+    r = M2C_FIELD(vt, s32 (**)(void *, void *), 0x64)((char *)self + M2C_FIELD(vt, s16 *, 0x60), &buf);
+    fn_801055FC(&buf, 2);
+    return r;
+}
+
 s32 fn_801A9EBC(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x14);
 }
@@ -2940,7 +2956,8 @@ void fn_801AA350(void *self, s32 arg1, void *arg2) {
     u8 *tab = M2C_FIELD(self, u8 **, 0x38);
     s32 row = fn_80105B78(arg1);
     s32 col = fn_80105B84(arg1);
-    *(struct pair *)((*(s32 **)(tab + 0xC))[row] + col * 8) = *(struct pair *)arg2;
+    struct pair *dst = (struct pair *)(*(u8 ***)(tab + 0xC))[row] + col;
+    *dst = *(struct pair *)arg2;
 }
 
 s32 fn_801AA3B8(void *self, s32 arg1) {
