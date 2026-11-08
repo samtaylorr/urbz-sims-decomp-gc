@@ -98,7 +98,7 @@ s32 fn_8037AC08(s32 *sem) {
     while ((count = *sem) <= 0) {
         fn_8025974C(sem + 1);
     }
-    --*sem;
+    *sem = *(volatile s32 *)sem - 1;
     fn_80254684(enabled);
     return count;
 }
@@ -1458,6 +1458,17 @@ void fn_80383EA4(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x24) = M2C_FIELD(arg0, s32 *, 0x24) + 1;
     M2C_FIELD(arg0, s32 *, 0x1C) = (s32) (M2C_FIELD(arg0, s32 *, 0x1C) | 0x80);
     fn_80254684(enabled);
+}
+
+void fn_80383EEC(void *arg0, s16 arg1, s16 arg2) {
+    fn_8025465C();
+    M2C_FIELD(arg0, s32 *, 0x28) += 2;
+    *M2C_FIELD(arg0, s16 **, 0x30) = arg1;
+    M2C_FIELD(arg0, s16 **, 0x30)++;
+    *M2C_FIELD(arg0, s16 **, 0x30) = arg2;
+    M2C_FIELD(arg0, s16 **, 0x30)++;
+    M2C_FIELD(arg0, s32 *, 0x1C) = (s32) (M2C_FIELD(arg0, s32 *, 0x1C) | 0x80);
+    fn_80254684();
 }
 
 void fn_80384010(void *arg0, void *arg1) {
