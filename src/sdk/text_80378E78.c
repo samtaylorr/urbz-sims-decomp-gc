@@ -1827,6 +1827,20 @@ void fn_80387F58(s32 chan) {
     }
 }
 
+void fn_80388000(s32 chan) {
+    s32 fn_8025BFA8(s32);
+    extern u8 lbl_804912A0[];
+    u8 *p;
+    void (*callback)(s32, s32);
+
+    p = lbl_804912A0 + chan * 0x110;
+    callback = *(void (**)(s32, s32))(p + 0xDC);
+    if (callback) {
+        *(void (**)(s32, s32))(p + 0xDC) = 0;
+        callback(chan, fn_8025BFA8(chan) ? 1 : -3);
+    }
+}
+
 u16 fn_80388F84(void) {
     extern u16 lbl_804964A0;
     return lbl_804964A0;
