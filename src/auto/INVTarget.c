@@ -3120,17 +3120,16 @@ s32 fn_801FBA80(s32 arg0, u16 *arg1) {
     char *p;
     s32 len;
 
-    if (arg1 != NULL) {
-        p = buf;
-        fn_80248488(p, 0, 0x20);
-        len = fn_80245BB4(p, lbl_803E4E18, arg0);
-        fn_800C3C04(p, len, arg1);
-        arg1[len] = 0;
-        fn_800F8120(arg1);
-        return 1;
-    } else {
+    if (arg1 == NULL) {
         return 0;
     }
+    p = buf;
+    fn_80248488(p, 0, 0x20);
+    len = fn_80245BB4(p, lbl_803E4E18, arg0);
+    fn_800C3C04(p, len, arg1);
+    arg1[len] = 0;
+    fn_800F8120(arg1);
+    return 1;
 }
 
 s32 fn_801FBB14(u8 *arg0) {
@@ -4497,19 +4496,21 @@ s32 fn_8021ADB8(void *arg0, s32 arg1) {
     }
     count = 0;
     i = 1;
-    for (;;) {
-        if (lbl_80493448[M2C_FIELD(arg0, s32 *, 0x8C) * 10 + i] != 0) {
-            count++;
-            if (count == arg1) {
-                return i;
-            }
-        }
-        i++;
-        if (i > 9) {
-            break;
-        }
+    goto body;
+next:
+    i++;
+    if (i > 9) {
+        return 0x63;
     }
-    return 0x63;
+body:
+    if (lbl_80493448[M2C_FIELD(arg0, s32 *, 0x8C) * 10 + i] == 0) {
+        goto next;
+    }
+    count++;
+    if (count != arg1) {
+        goto next;
+    }
+    return i;
 }
 
 void fn_8021B654(void *arg0, s32 arg1) {
@@ -5227,6 +5228,21 @@ s32 fn_8022B564(u32 arg0) {
         ret = lbl_804966A4[arg0];
     }
     return ret;
+}
+
+void fn_8022B75C(s32 arg0, s32 arg1) {
+    extern void *fn_8022B40C(s32);
+    extern void fn_8022B684(s32, s32, void *);
+    s32 *obj;
+    s32 v;
+    u8 buf[8];
+
+    obj = fn_8022B40C(arg0);
+    v = 0;
+    if (obj != 0) {
+        v = obj[1];
+    }
+    fn_8022B684(v, arg1, buf);
 }
 
 extern u8 *lbl_80496654;
