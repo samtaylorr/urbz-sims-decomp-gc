@@ -600,8 +600,9 @@ s32 fn_80157674(void *self, u32 idx, s32 mask) {
     return (M2C_FIELD(self, u32 **, 0x1C)[idx - 1] & (mask << 16)) != 0;
 }
 
-s16 fn_8015769C(void *self, u32 idx) {
-    return ((s16 *)&M2C_FIELD(self, u32 **, 0x1C)[idx - 1])[1];
+s16 fn_8015769C(void *self, s32 idx) {
+    s32 off = (idx - 1) * 4;
+    return *(s16 *)((u8 *)M2C_FIELD(self, u32 **, 0x1C) + off + 2);
 }
 
 void fn_801576B4(void *self, u32 idx, u16 val) {
