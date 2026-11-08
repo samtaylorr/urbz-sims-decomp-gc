@@ -58,6 +58,10 @@ void fn_80290C24(s32 arg0) {
     fn_802A14A0(arg0 + 0x24);
 }
 
+f32 fn_802921A0(void *arg0, s32 arg1) {
+    return M2C_FIELD(arg0, f32 **, 0x48)[arg1];
+}
+
 void fn_802927E8(void *self, void *arg1) {
     M2C_UNK fn_802922B8(void *, void *, s32);
     fn_802922B8(self, arg1, 0);
@@ -2444,6 +2448,10 @@ s32 fn_802B725C(u32 *arg0) {
     return (*arg0 & 0x3F) == 0x20;
 }
 
+s32 fn_802B7274(u32 *arg0) {
+    return (*arg0 & 0x3F) == 0x21;
+}
+
 s32 fn_802B728C(u32 *arg0) {
     return (*arg0 & 0x3F) == 0x22;
 }
@@ -2457,7 +2465,7 @@ s32 fn_802B72BC(u32 *arg0) {
 }
 
 s32 fn_802B72D4(s32 *arg0) {
-    return (*arg0 & 0x8000) > 0;
+    return (*arg0 & 0x8000) != 0;
 }
 
 s32 fn_802B72E8(u32 *arg0) {
