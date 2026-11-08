@@ -1620,6 +1620,14 @@ s16 fn_801A2F3C(u16 *p) {
     return *p & 0x7FFF;
 }
 
+void fn_801A2F5C(u16 *p, s16 v) {
+    if (v == -1) {
+        *p = v;
+    } else {
+        *p = v | (*p & 0x8000);
+    }
+}
+
 s32 fn_801A2F80(s16 *arg0) {
     s16 v = *arg0;
     s32 r = 0;
@@ -1925,6 +1933,14 @@ void fn_801A396C(void *arg0, s32 arg1) {
 
 s32 fn_801A398C(void *arg0) {
     return ((u16) M2C_FIELD(arg0, u16 *, 0x110) >> 2U) & 1;
+}
+
+void fn_801A3998(void *arg0, s32 arg1) {
+    s32 v = M2C_FIELD(arg0, u16 *, 0x110) & ~0x4;
+    M2C_FIELD(arg0, u16 *, 0x110) = v;
+    if (arg1 != 0) {
+        M2C_FIELD(arg0, u16 *, 0x110) = v | 0x4;
+    }
 }
 
 s32 fn_801A39B8(void *arg0) {
