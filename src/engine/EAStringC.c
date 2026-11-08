@@ -4926,15 +4926,18 @@ s32 fn_802BD6A8(void **self, const char *s) {
     extern u32 fn_80248808(const char *);
     extern s32 fn_80248268(const char *, const char *, u32);
     struct Buf { u16 ref; u16 len; s32 cap; char data[1]; };
-    u16 len;
+    u32 len;
     u32 slen;
+    char *data;
 
     len = ((struct Buf *)*self)->len;
     slen = fn_80248808(s);
     if (len < slen) {
         return 0;
     }
-    return fn_80248268(((struct Buf *)*self)->data + len - slen, s, slen) == 0;
+    data = ((struct Buf *)*self)->data;
+    data += len;
+    return fn_80248268(data - slen, s, slen) == 0;
 }
 
 inline char *fn_802BD8FC(void **self, s32 n) {
