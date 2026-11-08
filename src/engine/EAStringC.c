@@ -589,13 +589,16 @@ s32 fn_8029A0E8(void) {
 }
 
 s32 fn_8029A908(void *arg0, s32 year) {
-    if (year & 3) {
-        return 0;
+    s32 ret = 0;
+
+    if ((year & 3) == 0) {
+        if (year % 100 != 0) {
+            ret = 1;
+        } else {
+            ret = year % 400 == 0;
+        }
     }
-    if (year % 100 != 0) {
-        return 1;
-    }
-    return year % 400 == 0;
+    return ret;
 }
 
 s32 fn_8029A95C(void *arg0, s32 year) {
@@ -873,13 +876,9 @@ void fn_802A0938(s32 arg0, void *arg1) {
 }
 
 void fn_802A0980(s32 arg0, void *arg1) {
-    extern void fn_8029F550(s32, void *, s32, s32 *, void **);
-    s32 sp8 = 0;
-    void *spC = NULL;
-    void *key = M2C_FIELD(arg1, void **, 8);
-    fn_8029F550(M2C_FIELD(arg0, s32 *, 0), key, 0, &sp8, &spC);
-    if (M2C_FIELD(spC, s32 *, 8) > 0x3FFF) {
-        fn_802A0890(arg0, spC);
+    void *node = fn_8029F550_Find(M2C_FIELD(arg0, s32 *, 0), M2C_FIELD(arg1, void **, 8));
+    if (M2C_FIELD(node, s32 *, 8) > 0x3FFF) {
+        fn_802A0890(arg0, node);
     }
 }
 
@@ -953,6 +952,15 @@ s32 fn_802A1F64(void *arg0) {
     return M2C_FIELD(vt, s32 (**)(void *), 0x34)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x30));
 }
 
+void fn_802A1FE4(s32 arg0, s32 arg1, s32 arg2) {
+    extern s32 lbl_80493530[][3];
+    extern s32 lbl_80494C90;
+    s32 n = lbl_80494C90++;
+    lbl_80493530[n][2] = arg2;
+    lbl_80493530[n][1] = arg1;
+    lbl_80493530[n][0] = arg0;
+}
+
 s32 fn_802A2014(s32 arg0) {
     return arg0 - 8;
 }
@@ -968,6 +976,25 @@ s32 fn_802A2024(void *arg0) {
 void fn_802A204C(void);
 void fn_802A202C(void) {
     fn_802A204C();
+}
+
+void fn_802A21B0(void *arg0) {
+    s32 i;
+    s32 count;
+    u8 *vt;
+    void *child;
+
+    i = 0;
+    M2C_FIELD(arg0, s32 *, 0) |= 0x4000;
+    vt = M2C_FIELD(arg0, u8 **, 4);
+    count = (*(s32 (**)(void *))(vt + 0x24))((u8 *)arg0 + *(s16 *)(vt + 0x20));
+    for (; i < count; i++) {
+        vt = M2C_FIELD(arg0, u8 **, 4);
+        child = (*(void *(**)(void *, s32))(vt + 0x2C))((u8 *)arg0 + *(s16 *)(vt + 0x28), i);
+        if (child != NULL && !(M2C_FIELD(child, s32 *, 0) & 0x4000)) {
+            fn_802A21B0(child);
+        }
+    }
 }
 
 s32 fn_802A2784(s32 arg0) {
@@ -1993,12 +2020,9 @@ void fn_802AED48(u32 seed) {
 
 extern f32 lbl_803EDBB8[];
 extern f32 lbl_803EDBBC[];
-void fn_802AED88(u8 *self) {
-    f32 *m;
+void fn_802AED88(f32 *m) {
     f32 zero = lbl_803EDBB8[0];
     f32 one = lbl_803EDBBC[0];
-    M2C_FIELD(self, s32 *, 0x3BC) = 0;
-    m = (f32 *)self;
     m[0] = zero;
     m[1] = zero;
     m[2] = zero;
@@ -2013,7 +2037,8 @@ void fn_802AED88(u8 *self) {
     m[11] = zero;
     m[12] = one;
     m[13] = one;
-    M2C_FIELD(self, s32 *, 0x3B8) = 0;
+    M2C_FIELD(m, s32 *, 0x3BC) = 0;
+    M2C_FIELD(m, s32 *, 0x3B8) = 0;
 }
 
 void fn_802AEDE4(u8 *self) {
