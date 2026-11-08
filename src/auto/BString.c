@@ -3286,10 +3286,10 @@ void fn_800E3E40(s32 self, s32 arg1) {
 
 s32 fn_800E3E50(void *self) {
     s32 *p = M2C_FIELD(self, s32 **, 0x38);
-    if (p == NULL) {
-        return -1;
+    if (p != NULL) {
+        return *p;
     }
-    return *p;
+    return -1;
 }
 
 s32 fn_800E3E6C(void *arg0) {
