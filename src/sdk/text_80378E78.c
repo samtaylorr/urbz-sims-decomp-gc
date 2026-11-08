@@ -376,6 +376,19 @@ void fn_8037E9C4(u32 mainmem, u32 aram, u32 length) {
     fn_8037E97C();
 }
 
+void fn_8037EA74(u32 mainmem, u32 aram, u32 length) {
+    __DSPRegs[16] = (u16)((__DSPRegs[16] & ~0x3ff) | (u16)(mainmem >> 16));
+    __DSPRegs[17] = (u16)((__DSPRegs[17] & ~0xffe0) | (u16)(mainmem & 0xffff));
+    __DSPRegs[18] = (u16)((__DSPRegs[18] & ~0x3ff) | (u16)(aram >> 16));
+    __DSPRegs[19] = (u16)((__DSPRegs[19] & ~0xffe0) | (u16)(aram & 0xffff));
+    __DSPRegs[20] = (u16)(__DSPRegs[20] | 0x8000);
+    __DSPRegs[20] = (u16)((__DSPRegs[20] & ~0x3ff) | (u16)(length >> 16));
+    __DSPRegs[21] = (u16)((__DSPRegs[21] & ~0xffe0) | (u16)(length & 0xffff));
+    if (!(__DSPRegs[5] & 0x200)) {
+        fn_8037E97C();
+    }
+}
+
 void fn_8038046C(void) {
     extern void *lbl_80496358;
     extern void *lbl_80496370;
@@ -1594,6 +1607,13 @@ s32 fn_80389994(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x84);
 }
 
+s32 fn_8038AB0C(s32 chan, void *arg1) {
+    s32 fn_8038A57C(s32, void *, void *);
+    u8 buf[8];
+
+    return fn_8038A57C(chan, buf, arg1);
+}
+
 s32 fn_8038AD04(s32 chan) {
     s32 fn_8025BFA8(s32);
     if (*(u8 *)0x800030E3 & 0x80) {
@@ -1952,9 +1972,11 @@ void fn_8038DEBC(s32 arg0) {
 u32 fn_8038E45C(void) {
     extern s32 lbl_80495668;
     s32 fn_8025A3F4(void);
+    u32 base;
     lbl_80495668 = fn_8025A3F4();
+    base = 0x7FEC8000;
     lbl_80495668 = lbl_80495668 * 0x41C64E6D + 0x3039;
-    return ((lbl_80495668 >> 16) & 0x7FFF | 0x7FEC8000) & ~0xFFF;
+    return (base | ((lbl_80495668 >> 16) & 0x7FFF)) & ~0xFFF;
 }
 
 s32 fn_8038F53C(s32 chan, u32 addr, u32 length, void *dst, void *callback) {
