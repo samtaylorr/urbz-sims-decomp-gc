@@ -1709,17 +1709,16 @@ s32 fn_8038907C(s32 chan, void *out) {
     return result;
 }
 
-s32 fn_80389134(void *card, s32 result) {
+s32 fn_80389134(s32 *card, s32 result) {
     s32 fn_8025465C(void);
     void fn_80254684(s32);
-    u8 *p = card;
     s32 enabled;
 
     enabled = fn_8025465C();
-    if (*(s32 *)(p + 0) != 0) {
-        *(s32 *)(p + 4) = result;
-    } else if (*(s32 *)(p + 4) == -1) {
-        *(s32 *)(p + 4) = result;
+    if (card[0] != 0) {
+        card[1] = result;
+    } else if (card[1] == -1) {
+        card[1] = result;
     }
     fn_80254684(enabled);
     return result;
