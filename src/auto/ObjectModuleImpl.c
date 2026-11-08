@@ -579,6 +579,11 @@ s32 fn_801579E0(void) {
     return lbl_8049665C;
 }
 
+void fn_801579E8(char *self, s32 arg1, s32 arg2) {
+    char *vt = *(char **)self;
+    (*(void (**)(char *, s32, s32, s32))(vt + 0x24C))(self + *(s16 *)(vt + 0x248), arg1, arg2, 0);
+}
+
 s32 fn_80157A20(void *arg0) {
     u8 *p = M2C_FIELD(arg0, u8 **, 0x2C);
     return p != NULL ? *(s32 *)(p + 4) : 0;
