@@ -283,6 +283,7 @@ void fn_8037C144(void *arg0, void *arg1, f32 farg0, f32 farg1, f32 farg2) {
     M2C_FIELD(arg1, f32 *, 0x2C) = (f32) (M2C_FIELD(arg0, f32 *, 0x2C) * farg2);
 }
 
+#pragma fp_contract off
 void fn_8037C820(f32 (*m)[4], f32 t, f32 b, f32 l, f32 r, f32 scaleS, f32 scaleT, f32 transS, f32 transT) {
     f32 tmp;
 
