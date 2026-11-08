@@ -776,6 +776,17 @@ void fn_80154BB4(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x2048) = (s32) M2C_FIELD(arg0, s32 *, 0x2044);
 }
 
+void fn_80154FE0(char *self) {
+    char *vt = *(char **)self;
+    char *p;
+
+    for (p = M2C_FIELD(vt, char *(**)(void *), 0x9C)(self + M2C_FIELD(vt, s16 *, 0x98)); p != NULL;
+         p = M2C_FIELD(M2C_FIELD(p, char **, 4), char *(**)(void *), 0x454)(p + M2C_FIELD(M2C_FIELD(p, char **, 4), s16 *, 0x450))) {
+        vt = M2C_FIELD(p, char **, 4);
+        M2C_FIELD(vt, void (**)(void *), 0x184)(p + M2C_FIELD(vt, s16 *, 0x180));
+    }
+}
+
 s32 fn_80156444(void) {
     return 0;
 }
@@ -786,6 +797,21 @@ void fn_8015644C(void) {
 
 void fn_80156450(void) {
 
+}
+
+void fn_80156664(char *self) {
+    void fn_8018AC24(char *);
+    char ***vec = (char ***)(self + 0x2058);
+    char **it;
+    char *obj;
+    char *vt;
+
+    for (it = vec[0]; it != vec[1];) {
+        obj = *(char **)(*it++ + 4);
+        vt = *(char **)(obj + 4);
+        (*(void (**)(void *))(vt + 0x20C))(obj + *(s16 *)(vt + 0x208));
+    }
+    fn_8018AC24(self);
 }
 
 void fn_801566DC(void) {
@@ -802,6 +828,19 @@ void fn_801566E4(void) {
 
 void fn_801566E8(void) {
 
+}
+
+void fn_801566EC(char *self, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    extern char *lbl_80496650;
+    char *vt;
+
+    if (arg4 != 0) {
+        vt = *(char **)lbl_80496650;
+        (*(void (**)(void *, s32))(vt + 0x114))(lbl_80496650 + *(s16 *)(vt + 0x110), arg1);
+        vt = *(char **)lbl_80496650;
+        (*(void (**)(void *, s32))(vt + 0x114))(lbl_80496650 + *(s16 *)(vt + 0x110), arg2);
+    }
+    *(s32 *)(self + 0x18) = 1;
 }
 
 s32 fn_80156DB8(void *arg0) {
@@ -916,6 +955,29 @@ s32 fn_801576E4(void *self, s32 idx) {
     return r;
 }
 
+s32 fn_8015772C(char *self, void *pos) {
+    s32 fn_80105B78(void *);
+    s32 fn_80105B84(void *);
+    s32 x = fn_80105B78(pos);
+    s32 y = fn_80105B84(pos);
+
+    if (x > 0x3F || y > 0x3F || x < 0 || y < 0) {
+        return 0;
+    }
+    return ((s16 (*)[64])(self + 0x34))[y][x];
+}
+
+void fn_801577A8(char *self, void *pos, s16 val) {
+    u32 fn_80105B78(void *);
+    u32 fn_80105B84(void *);
+    u32 x = fn_80105B78(pos);
+    u32 y = fn_80105B84(pos);
+
+    if (x <= 0x3F && y <= 0x3F) {
+        ((s16 (*)[64])(self + 0x34))[y][x] = val;
+    }
+}
+
 s32 fn_80157810(u8 *self, u8 *arg) {
     s32 fn_8015125C(void *, s32);
     u8 *vt;
@@ -938,22 +1000,25 @@ s32 fn_80157810(u8 *self, u8 *arg) {
 u8 *fn_80157890(u8 *self) {
     typedef struct { u8 **begin; u8 **end; } V;
     V *v = (V *)(self + 0x2090);
-    u32 i;
+    u32 i = 0;
     u8 *found = NULL;
 
-    for (i = 0; i < (u32)(v->end - v->begin); i++) {
-        u8 *e = v->begin[i];
-        u8 *o = NULL;
-        if (e != NULL) {
-            o = *(u8 **)(e + 4);
-        }
-        if (o != NULL) {
-            u8 *vt = *(u8 **)(o + 4);
-            if ((*(s32 (**)(void *))(vt + 0x474))(o + *(s16 *)(vt + 0x470)) != 0) {
-                found = o;
-                break;
+    if (v->end - v->begin != 0) {
+        do {
+            u8 *e = M2C_FIELD(self, u8 ***, 0x2090)[i];
+            u8 *o = NULL;
+            if (e != NULL) {
+                o = *(u8 **)(e + 4);
             }
-        }
+            if (o != NULL) {
+                u8 *vt = *(u8 **)(o + 4);
+                if ((*(s32 (**)(void *))(vt + 0x474))(o + *(s16 *)(vt + 0x470)) != 0) {
+                    found = o;
+                    break;
+                }
+            }
+            i++;
+        } while (i < (u32)(v->end - M2C_FIELD(self, u8 ***, 0x2090)));
     }
     return found;
 }
@@ -1090,11 +1155,10 @@ void fn_8015A040(void *arg0, void *arg1) {
     s32 fn_800F7138(void *);
     void fn_800F7148(void *, s32);
     u8 buf[0x208];
-    u8 *p = buf;
 
-    fn_800F6FB4(p, p + 8, 0x100);
-    fn_800BD804(arg1, p, 0);
-    fn_800F7148(arg0, fn_800F7138(p));
+    fn_800F6FB4(buf, buf + 8, 0x100);
+    fn_800BD804(arg1, buf, 0);
+    fn_800F7148(arg0, fn_800F7138(buf));
 }
 
 extern s32 lbl_80495BE8;
@@ -1281,6 +1345,7 @@ void *fn_801658B8(void **self) {
     extern void *fn_801A23AC(void *);
     extern s16 *fn_80141C5C(void *, s32);
     extern void fn_80142174(void *, s32, s16);
+    extern void fn_8019CFF4(void *);
     void *ret = fn_801A23AC(*self);
 
     if (ret != NULL) {
@@ -1289,7 +1354,7 @@ void *fn_801658B8(void **self) {
         if (*fn_80141C5C(p, 0x19) != 0) {
             fn_80142174(p, 0x19, *fn_80141C5C(p, 0x19) - 1);
         }
-        ObjVec6C_Destroy((char **)((char *)self + 0xB0));
+        ObjVec6C_Each((char **)((char *)self + 0xB0), fn_8019CFF4);
     }
     return ret;
 }
