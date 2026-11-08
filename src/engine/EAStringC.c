@@ -2440,6 +2440,10 @@ void fn_802B7258(void) {
 
 }
 
+s32 fn_802B728C(u32 *arg0) {
+    return (*arg0 & 0x3F) == 0x22;
+}
+
 s32 fn_802B72E8(u32 *arg0) {
     s32 var_r9;
     u32 temp_r3;
