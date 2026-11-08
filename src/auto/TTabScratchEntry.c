@@ -1392,6 +1392,14 @@ u16 fn_801A0F3C(void *arg0, u16 arg1, s32 arg2) {
     return var_r0;
 }
 
+void fn_801A0F64(void *self) {
+    void fn_801A00F0(void *, s32);
+
+    if (M2C_FIELD(self, s32 *, 0x24) != 0) {
+        fn_801A00F0(self, 4 - M2C_FIELD(self, s32 *, 0x24));
+    }
+}
+
 s32 fn_801A0FCC(void) {
     return 0x1E;
 }
