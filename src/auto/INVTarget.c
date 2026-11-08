@@ -3060,10 +3060,14 @@ s32 fn_801FF27C(void *arg0, u32 arg1, s32 arg2) {
 }
 
 s32 fn_801FF2A0(void *arg0, u32 arg1) {
+    struct S {
+        u8 pad[0x108];
+        s32 arr[12];
+    };
     if (arg1 > 11) {
         return 0;
     }
-    return ((s32 *)((char *)arg0 + 0x108))[arg1];
+    return ((struct S *)arg0)->arr[arg1];
 }
 
 void fn_801FF39C(void *arg0) {
@@ -3528,6 +3532,11 @@ void fn_802076D4(void *arg0, s32 arg1) {
     if (arg1 & 1) {
         fn_802D20E8((s32)arg0);
     }
+}
+
+s32 fn_802078B4(void *arg0) {
+    s32 v = M2C_FIELD(arg0, s32 *, 0x84);
+    return v <= 4 && v >= 1;
 }
 
 void fn_80208374(void *arg0, s32 arg1) {
