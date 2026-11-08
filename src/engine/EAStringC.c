@@ -128,6 +128,20 @@ void fn_80290C24(s32 arg0) {
     fn_802A14A0(arg0 + 0x24);
 }
 
+void fn_80291DA0(void *arg0, s32 arg1) {
+    extern f32 lbl_803ECA0C[];
+    extern f32 lbl_803ECA10[];
+    extern s32 lbl_8049613C;
+    extern void fn_80291BE0(void *, s32, f32 *);
+    f32 *v = (f32 *)arg1;
+
+    v[3] = lbl_803ECA10[0];
+    v[1] = lbl_803ECA0C[0];
+    v[0] = lbl_803ECA0C[0];
+    v[2] = lbl_803ECA10[0];
+    fn_80291BE0(arg0, lbl_8049613C, v);
+}
+
 void fn_80291DEC(void *arg0, s32 arg1) {
     typedef struct { f32 m[6]; } AptMtx23;
     extern AptMtx23 lbl_804445F0;
@@ -705,16 +719,11 @@ void fn_80299AF4(s32 *arg0) {
 }
 
 void fn_80299B10(void *arg0) {
-    struct RefBits {
-        u32 hi : 4;
-        u32 count : 12;
-        u32 lo : 16;
-    };
-    struct RefBits *bits = (struct RefBits *)arg0;
+    u32 *bits = (u32 *)arg0;
     s32 n;
 
-    n = bits->count - 1;
-    bits->count = n;
+    n = ((*bits >> 16) & 0xFFF) - 1;
+    *bits = (*bits & ~0x0FFF0000) | (n << 16);
     if (n == 0) {
         char *vt = M2C_FIELD(arg0, char **, 4);
         (*(void (**)(void *))(vt + 0x1C))((char *)arg0 + *(s16 *)(vt + 0x18));
