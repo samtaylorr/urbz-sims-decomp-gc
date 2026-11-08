@@ -2915,6 +2915,24 @@ void fn_802AFB18(void *arg0, f32 *out) {
     }
 }
 
+void fn_802AFD84(void *arg0, void *arg1, void *arg2) {
+    f32 *out = arg0;
+    f32 *a = arg1;
+    f32 *b = arg2;
+    f32 r0 = b[0] * a[0] + b[1] * a[2];
+    f32 r1 = b[0] * a[1] + b[1] * a[3];
+    f32 r2 = b[2] * a[0] + b[3] * a[2];
+    f32 r3 = b[2] * a[1] + b[3] * a[3];
+    f32 r4 = b[4] * a[0] + b[5] * a[2] + a[4];
+    f32 r5 = b[4] * a[1] + b[5] * a[3] + a[5];
+    out[0] = r0;
+    out[1] = r1;
+    out[2] = r2;
+    out[3] = r3;
+    out[4] = r4;
+    out[5] = r5;
+}
+
 s32 fn_802AFE08(f32 *m) {
     extern f64 lbl_803EDEE0[];
     extern f32 lbl_803EDEE8[];
