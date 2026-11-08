@@ -3480,6 +3480,17 @@ void fn_802B6E24(u32 *obj) {
     }
 }
 
+void fn_802B6EBC(u8 *self) {
+    u8 *vt = *(u8 **)(self + 4);
+    (*(void (**)(void *))(vt + 0x6C))(self + *(s16 *)(vt + 0x68));
+    vt = *(u8 **)(self + 4);
+    (*(void (**)(void *))(vt + 0x74))(self + *(s16 *)(vt + 0x70));
+    if (self != NULL) {
+        vt = *(u8 **)(self + 4);
+        (*(void (**)(void *, s32))(vt + 0x64))(self + *(s16 *)(vt + 0x60), 3);
+    }
+}
+
 s32 fn_802B6F38(void) {
     return 0;
 }
