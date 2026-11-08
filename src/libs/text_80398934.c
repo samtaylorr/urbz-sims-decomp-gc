@@ -695,9 +695,6 @@ void fn_80398A00(void) {
     void fn_80399768(void);
     void fn_803990E8(void);
     extern u32 lbl_80496620;
-    extern u32 lbl_80496624;
-    extern u8 *lbl_80496628;
-    extern s32 lbl_8049662C;
     extern u32 lbl_80496630;
     s32 level;
     level = fn_8025465C();
@@ -713,7 +710,9 @@ void fn_80398A00(void) {
 }
 
 void fn_80398AC4(u32 arg0, s32 arg1) {
-    u32 *e = (u32 *)fn_803990B4(arg0);
+    void *fn_803990B4(u32);
+    void fn_80398CB0(u32, u8);
+    u32 *e = fn_803990B4(arg0);
     e[0] = 0;
     e[1] = 0;
     fn_80251C4C(e, 8);
@@ -723,20 +722,22 @@ void fn_80398AC4(u32 arg0, s32 arg1) {
 }
 
 u32 fn_80398B30(u32 arg0) {
-    return *(u32 *)fn_803990B4(arg0) >> 31;
+    void *fn_803990B4(u32);
+    return M2C_FIELD(fn_803990B4(arg0), u32 *, 0) >> 31;
 }
 
 u32 fn_80398B58(u32 arg0) {
-    return (((u32 *)fn_803990B4(arg0))[1] >> 8) & 1;
+    void *fn_803990B4(u32);
+    return (M2C_FIELD(fn_803990B4(arg0), u32 *, 4) >> 8) & 1;
 }
 
 u32 fn_80398B80(u32 arg0) {
-    return (((u32 *)fn_803990B4(arg0))[1] >> 7) & 1;
+    void *fn_803990B4(u32);
+    return (M2C_FIELD(fn_803990B4(arg0), u32 *, 4) >> 7) & 1;
 }
 
 void fn_80398BA8(u32 arg0, s32 on) {
-    void *fn_803990B4(u32);
-    u32 *p = fn_803990B4(arg0);
+    u32 *p = (u32 *)fn_803990B4(arg0);
     if (on) {
         p[1] |= 0x80;
     } else {
@@ -749,19 +750,24 @@ u32 fn_80398C58(void *arg0) {
     return (M2C_FIELD(fn_803990B4(arg0), u32 *, 4) & 0x0FFFF000) + 0x80000000;
 }
 
+s32 fn_80398C84(s32 i) {
+    return ((s32 *)lbl_80496624)[i];
+}
+
+void fn_80398C94(s32 i, s32 v) {
+    ((s32 *)lbl_80496624)[i] = v;
+}
+
 u8 fn_80398CA4(s32 i) {
     register u8 *p asm("r4") = lbl_80496628;
     return p[i];
 }
 
-void fn_80398CB0(u32 i, u8 on) {
-    u8 *p;
+void fn_80398CB0(s32 i, s32 on) {
     if (on != 0) {
-        p = lbl_80496628;
-        p[i] = 1;
+        lbl_80496628[i] = 1;
     } else {
-        p = lbl_80496628;
-        p[i] = 0;
+        lbl_80496628[i] = 0;
     }
 }
 
@@ -772,10 +778,24 @@ void fn_80398CD8(void (*cb)(void)) {
 void fn_80398D1C(void) {
     extern s32 fn_80251874(void);
     extern void fn_80251884(s32);
-    u8 pad[8];
-    lbl_80496628 = (u8 *)fn_80251874();
-    fn_80251884((s32)lbl_80496628 + 0x1000);
+    register u8 *p asm("r3");
+
+    p = (u8 *)fn_80251874();
+    lbl_80496628 = p;
+    fn_80251884((s32)(p + 0x1000));
     fn_80398EE4();
+}
+
+void fn_80398D4C(void) {
+    extern s32 fn_80251874(void);
+    extern void fn_80251884(s32);
+    register s32 p asm("r3");
+    volatile s32 pad;
+
+    p = fn_80251874();
+    lbl_80496624 = p;
+    fn_80251884(p + 0x4000);
+    fn_80398FBC();
 }
 
 void fn_80398DA8(void);
@@ -3874,6 +3894,8 @@ void **fn_803A0A44(void **self, void **other) {
                 register u32 size asm("r0");
                 size = xlen * 4;
                 bytes = size;
+                goto check;
+            check:
                 if (size > 0x80) {
                     size = 0;
                     tmp = (void **)fn_802D1FC8(bytes);
