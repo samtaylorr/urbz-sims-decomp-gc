@@ -461,7 +461,7 @@ void fn_80299280(void *arg0) {
         M2C_FIELD(lbl_804960E8, void **, 0x124C) = NULL;
     }
     fn_802993E8(arg0, 1);
-    if (((struct Flags *)arg0)->count > 1) {
+    if (((struct Flags *)arg0)->count > 1U) {
         fn_8029F8BC(arg0);
         M2C_FIELD(arg0, u32 *, 0) &= ~0x8000;
     }
