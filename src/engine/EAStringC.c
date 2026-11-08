@@ -713,6 +713,23 @@ void fn_80299AF4(s32 *arg0) {
     *arg0 = (temp_r0 & 0xF000FFFF) | ((temp_r0 & 0x0FFF0000) + 0x10000);
 }
 
+void fn_80299B10(void *arg0) {
+    struct RefBits {
+        u32 hi : 4;
+        u32 count : 12;
+        u32 lo : 16;
+    };
+    struct RefBits *bits = (struct RefBits *)arg0;
+    s32 n;
+
+    n = bits->count - 1;
+    bits->count = n;
+    if (n == 0) {
+        char *vt = M2C_FIELD(arg0, char **, 4);
+        (*(void (**)(void *))(vt + 0x1C))((char *)arg0 + *(s16 *)(vt + 0x18));
+    }
+}
+
 void fn_80299B6C(void *arg0, s32 arg1) {
     s32 temp_r0;
 
@@ -761,6 +778,20 @@ s32 fn_80299CAC(u8 *self) {
 
 s32 fn_80299CB4(u8 *self) {
     return *(s32 *)(self + 0x50);
+}
+
+s32 fn_80299CBC(void *arg0, s32 arg1) {
+    extern s32 fn_802B70DC(void *);
+    extern s32 fn_802B72D4(void *);
+    s32 ret;
+
+    ret = 0;
+    if (fn_802B70DC(arg0) == 0xD) {
+        if (arg1 != 0 || fn_802B72D4(arg0) == 0) {
+            ret = 1;
+        }
+    }
+    return ret;
 }
 
 s32 fn_80299D18(void *arg0) {
@@ -4622,12 +4653,12 @@ void fn_802BBE14(void *arg0, s32 arg1) {
 }
 
 void fn_802BBE7C(void *arg0) {
-    u32 n;
+    s32 n;
     u32 *obj;
     char *vt;
 
-    while ((n = M2C_FIELD(arg0, u32 *, 4)) != 0) {
-        do {
+    while ((n = M2C_FIELD(arg0, s32 *, 4)) != 0) {
+        while (n-- != 0) {
             obj = M2C_FIELD(arg0, u32 **, 8)[--M2C_FIELD(arg0, s32 *, 4)];
             if (*obj & 0x0FFF0000) {
                 *obj &= ~0x40000000;
@@ -4635,7 +4666,7 @@ void fn_802BBE7C(void *arg0) {
                 vt = M2C_FIELD(obj, char **, 4);
                 M2C_FIELD(vt, void (**)(void *), 0x1C)((char *)obj + M2C_FIELD(vt, s16 *, 0x18));
             }
-        } while (n-- != 0);
+        }
     }
 }
 
@@ -4830,6 +4861,21 @@ void fn_802BD608(s32 arg0, s32 arg1) {
     M2C_UNK fn_802BD494(s32, s32);
     fn_802BD324();
     fn_802BD494(arg0, arg1);
+}
+
+s32 fn_802BD6A8(void **self, const char *s) {
+    extern u32 fn_80248808(const char *);
+    extern s32 fn_80248268(const char *, const char *, u32);
+    struct Buf { u16 ref; u16 len; s32 cap; char data[1]; };
+    u32 len;
+    u32 slen;
+
+    len = ((struct Buf *)*self)->len;
+    slen = fn_80248808(s);
+    if (len < slen) {
+        return 0;
+    }
+    return fn_80248268(((struct Buf *)*self)->data + len - slen, s, slen) == 0;
 }
 
 char *fn_802BD8FC(void **self, s32 n) {
