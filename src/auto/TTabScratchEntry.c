@@ -1615,6 +1615,13 @@ s32 fn_801A2F28(void *arg0) {
     return (s32) (M2C_FIELD(arg0, s32 *, 0xC) - M2C_FIELD(arg0, s32 *, 8)) >> 2;
 }
 
+s16 fn_801A2F3C(u16 *p) {
+    if ((s16)*p == -1) {
+        return -1;
+    }
+    return *p & 0x7FFF;
+}
+
 s32 fn_801A2F80(s16 *arg0) {
     s16 v = *arg0;
     s32 r = 0;
