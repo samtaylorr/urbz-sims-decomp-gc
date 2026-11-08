@@ -2230,6 +2230,21 @@ void fn_801E0308(void *arg0, void *arg1) {
     M2C_FIELD(arg0, void **, 0x74) = arg1;
 }
 
+void fn_801E0318(void *arg0, void *arg1) {
+    void *fn_801E0428(void *);
+    void *fn_801E0430(void *);
+    void fn_801E0308(void *, void *);
+    void *p = M2C_FIELD(arg0, void **, 0x70);
+    if (p == NULL) {
+        M2C_FIELD(arg0, void **, 0x70) = arg1;
+    } else {
+        while (fn_801E0430(p) != NULL) {
+            p = fn_801E0428(p);
+        }
+        fn_801E0308(p, arg1);
+    }
+}
+
 void *fn_801E0380(void *arg0, s32 arg1) {
     for (; arg1 != 0; arg1--) {
         arg0 = M2C_FIELD(arg0, void **, 0x74);
@@ -4364,6 +4379,11 @@ void *fn_8022315C(void *arg0) {
     M2C_FIELD(arg0, f32 *, 0x50) = zero;
     M2C_FIELD(arg0, s32 *, 0x48) = 0;
     return arg0;
+}
+
+void fn_8022321C(u8 *arg0) {
+    struct V3 { f32 x, y, z; };
+    *(struct V3 *)(arg0 + 0x14) = *(struct V3 *)(arg0 + 0x8);
 }
 
 void fn_80223240(void *arg0, s32 arg1) {
