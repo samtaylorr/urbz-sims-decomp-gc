@@ -2272,6 +2272,25 @@ s32 fn_80388084(s32 chan, s32 enable) {
     return err ? -3 : 0;
 }
 
+s32 fn_80388234(s32 chan) {
+    s32 fn_8025C378(s32, s32, s32);
+    s32 fn_8025B6F0(s32, void *, s32, s32, void *);
+    s32 fn_8025BAD8(s32);
+    s32 fn_8025C4A4(s32);
+    s32 err;
+    u32 cmd;
+
+    if (!fn_8025C378(chan, 0, 4)) {
+        return -3;
+    }
+    cmd = 0x89000000;
+    err = 0;
+    err |= !fn_8025B6F0(chan, &cmd, 1, 1, 0);
+    err |= !fn_8025BAD8(chan);
+    err |= !fn_8025C4A4(chan);
+    return err ? -3 : 0;
+}
+
 u16 fn_80388F84(void) {
     extern u16 lbl_804964A0;
     return lbl_804964A0;
@@ -2421,21 +2440,19 @@ s32 fn_8038984C(s32 chan, u16 nBlock, void *callback) {
     s32 fn_803898E8(s32 chan, u16 *fat, void *callback);
     struct CardBlk *card;
     u16 *fat;
+    u16 nextBlock;
 
     card = &lbl_804912A0[chan];
-    if (card->attached == 0) {
+    if (!card->attached) {
         return -3;
     }
     fat = card->currentFat;
-    while (nBlock != 0xFFFF) {
-        if (!(5 <= nBlock && nBlock < card->cBlock)) {
+    for (; nBlock != 0xFFFF; nBlock = nextBlock) {
+        if (nBlock < 5 || card->cBlock <= nBlock) {
             return -6;
         }
-        {
-            u16 nextBlock = fat[nBlock];
-            fat[nBlock] = 0;
-            nBlock = nextBlock;
-        }
+        nextBlock = fat[nBlock];
+        fat[nBlock] = 0;
         ++fat[3];
     }
     return fn_803898E8(chan, fat, callback);
