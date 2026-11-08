@@ -1579,11 +1579,14 @@ void fn_80384410(void *arg0, void *arg1) {
 }
 
 void fn_803844A8(void *arg0, f32 farg0) {
-    s32 level;
     u32 v;
+    s32 level;
     level = fn_8025465C();
     farg0 = 65536.0f * farg0;
-    v = ((u32)farg0 > 0x40000) ? 0x40000 : (u32)farg0;
+    v = (u32)farg0;
+    if ((u32)farg0 > 0x40000) {
+        v = 0x40000;
+    }
     M2C_FIELD(arg0, u16 *, 0x1DE) = v >> 16;
     M2C_FIELD(arg0, u16 *, 0x1E0) = v;
     M2C_FIELD(arg0, s32 *, 0x1C) = (s32) (M2C_FIELD(arg0, s32 *, 0x1C) | 0x80000);
@@ -2383,6 +2386,30 @@ s32 fn_80389540(s32 arg0) {
 
 s32 fn_80389590(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x88);
+}
+
+s32 fn_8038984C(s32 chan, u16 nBlock, void *callback) {
+    extern u8 lbl_804912A0[];
+    s32 fn_803898E8(s32 chan, u16 *fat, void *callback);
+    s32 *card;
+    u16 *fat;
+    u16 nextBlock;
+
+    card = (s32 *)(lbl_804912A0 + chan * 0x110);
+    if (card[0] == 0) {
+        return -3;
+    }
+    fat = *(u16 **)(card + 0x88 / 4);
+    while (nBlock != 0xFFFF) {
+        if (nBlock < 5 || nBlock >= *(u16 *)((u8 *)card + 0x10)) {
+            return -6;
+        }
+        nextBlock = fat[nBlock];
+        fat[nBlock] = 0;
+        nBlock = nextBlock;
+        ++fat[3];
+    }
+    return fn_803898E8(chan, fat, callback);
 }
 
 s32 fn_803898E8(s32 chan, u16 *fat, void *callback) {
