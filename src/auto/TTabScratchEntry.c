@@ -3313,8 +3313,8 @@ void fn_801AA604(char *path, void *dst) {
         } else {
             p = path;
         }
-        dot = fn_80248ADC(p, '.');
         len = -1;
+        dot = fn_80248ADC(p, '.');
         if (dot != NULL) {
             len = dot - p;
         }
