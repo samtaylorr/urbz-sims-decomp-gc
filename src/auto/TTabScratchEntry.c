@@ -1756,9 +1756,57 @@ s32 fn_801A09E0(void *arg0) {
     return 0;
 }
 
+u16 fn_801A0B88(void *self, s32 arg1, s32 arg2) {
+    M2C_UNK fn_801A0780(s32);
+    M2C_UNK fn_801A08DC(void *, s32);
+
+    fn_801A0780(arg1);
+    fn_801A08DC(self, arg1);
+    if (arg1 == 0x10 && arg2 == 0) {
+        arg2 = 4;
+    } else if (arg1 == 0x20 && arg2 == 0) {
+        arg2 = 1;
+    }
+    return ((u16 *)((u8 *)self + 0x14))[fn_801A0690(arg1, arg2)];
+}
+
+s32 fn_801A0C10(void *self, u16 arg1, s32 arg2, s32 arg3) {
+    M2C_UNK fn_801A08DC(void *, s32);
+    s32 fn_801A0708(u32, s32 *);
+    u16 *p;
+    u32 i;
+    s32 tmp;
+
+    if (arg2 != 0xff) {
+        fn_801A08DC(self, arg2);
+    }
+    if (arg2 == 0x10 && arg3 == 0) {
+        arg3 = 4;
+    } else if (arg2 == 0x20 && arg3 == 0) {
+        arg3 = 1;
+    }
+    p = (u16 *)((u8 *)self + 0x14);
+    for (i = 0; i <= 7; i++) {
+        if ((fn_801A0708(i, &tmp) & arg2) && tmp == arg3) {
+            *p = arg1;
+        }
+        p++;
+    }
+    return arg2;
+}
+
+s32 fn_801A0CC4(void *self, u32 arg1) {
+    M2C_UNK fn_801A0780(s32);
+    M2C_UNK fn_801A08DC(void *, s32);
+
+    fn_801A0780(arg1);
+    fn_801A08DC(self, arg1);
+    return ((u16 *)((u8 *)self + 8))[fn_801A0690(arg1, 0)];
+}
+
 s32 fn_801A0D1C(void *self, u16 arg1, s32 arg2) {
     M2C_UNK fn_801A08DC(void *, s32);
-    s32 fn_801A0708(u32, s32);
+    s32 fn_801A0708(u32, s32 *);
     u16 *p;
     u32 i;
 
@@ -2915,16 +2963,24 @@ s32 fn_801A9F24(void *self) {
     extern s32 **lbl_8041FA48[];
     void *vt;
     s32 idx;
+    s32 *arr;
+    s32 n;
     s32 t;
 
     vt = M2C_FIELD(self, void **, 0);
     idx = M2C_FIELD(vt, s32 (**)(void *), 0x8C)((char *)self + M2C_FIELD(vt, s16 *, 0x88));
-    if (idx < TTSE_ArrCount(*lbl_8041FA48[0])) {
-        t = M2C_FIELD((*lbl_8041FA48[0])[idx], s32 *, 0x10);
+    arr = *lbl_8041FA48[0];
+    n = 0;
+    if (arr != NULL) {
+        n = arr[-1];
+    }
+    if (idx < n) {
+        t = M2C_FIELD(arr[idx], s32 *, 0x10);
         if (t == 8) {
-            return 1;
+            goto yes;
         }
         if (t == 9) {
+        yes:
             return 1;
         }
     }
