@@ -690,6 +690,18 @@ s32 fn_8029F660(void **arg0) {
     return var_r9;
 }
 
+void *fn_8029F688(void **arg0, s32 arg1) {
+    void *p = *arg0;
+    while (p != NULL) {
+        if (arg1 == 0) {
+            return p;
+        }
+        p = M2C_FIELD(p, void **, 0x58);
+        arg1--;
+    }
+    return NULL;
+}
+
 void *fn_8029F8BC(void *arg0) {
     void *temp_r11;
     void *temp_r11_2;
@@ -738,8 +750,10 @@ void fn_802A0938(s32 arg0, void *arg1) {
 
 void fn_802A0980(s32 arg0, void *arg1) {
     extern void fn_8029F550(s32, void *, s32, s32 *, void **);
-    s32 sp8 = 0;
-    void *spC = NULL;
+    s32 sp8;
+    void *spC;
+    spC = NULL;
+    sp8 = 0;
     fn_8029F550(M2C_FIELD(arg0, s32 *, 0), M2C_FIELD(arg1, void **, 8), 0, &sp8, &spC);
     if (M2C_FIELD(spC, s32 *, 8) > 0x3FFF) {
         fn_802A0890(arg0, spC);
