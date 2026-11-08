@@ -64,6 +64,18 @@ void fn_80379930(u8* buf, s32 length, s32 offset) {
     }
 }
 
+void fn_8037ABB0(s32 *sem, s32 count) {
+    s32 fn_8025465C(void);
+    void fn_80254684(s32);
+    void fn_80258534(void *);
+    s32 enabled;
+
+    enabled = fn_8025465C();
+    fn_80258534(sem + 1);
+    *sem = count;
+    fn_80254684(enabled);
+}
+
 s32 fn_8037AC78(s32 *sem) {
     s32 fn_8025465C(void);
     void fn_80254684(s32);
