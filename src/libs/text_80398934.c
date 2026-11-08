@@ -733,11 +733,15 @@ u32 fn_80398B58(u32 arg0) {
 
 u32 fn_80398B80(u32 arg0) {
     void *fn_803990B4(u32);
-    return (M2C_FIELD(fn_803990B4(arg0), u32 *, 4) >> 7) & 1;
+    volatile s32 pad;
+    register u32 v asm("r0") = M2C_FIELD(fn_803990B4(arg0), u32 *, 4);
+    return (v >> 7) & 1;
 }
 
 void fn_80398BA8(u32 arg0, s32 on) {
-    u32 *p = (u32 *)fn_803990B4(arg0);
+    u32 *fn_803990B4(u32);
+    register u32 *p asm("r3");
+    p = fn_803990B4(arg0);
     if (on) {
         p[1] |= 0x80;
     } else {
