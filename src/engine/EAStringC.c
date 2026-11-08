@@ -4509,6 +4509,14 @@ void fn_802BBD98(void) {
     lbl_80443314[0]();
 }
 
+void *fn_802BBDC4(void *arg0, s32 arg1) {
+    extern void *(*lbl_80443310[])(s32);
+    M2C_FIELD(arg0, s32 *, 0) = arg1;
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    M2C_FIELD(arg0, void **, 8) = lbl_80443310[0](arg1 * 4);
+    return arg0;
+}
+
 void **fn_802BC580(void **self, void **other) {
     extern void fn_802BC600(void **, u32);
     extern void fn_802482F8();
