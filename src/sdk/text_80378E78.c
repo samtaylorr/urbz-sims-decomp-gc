@@ -2505,6 +2505,7 @@ s32 fn_803893A0(s32 chan, u16 *out) {
     s32 fn_8025465C(void);
     void fn_80254684(s32);
     s32 *card;
+    s32 *c;
     s32 result;
     s32 enabled;
 
@@ -2513,11 +2514,12 @@ s32 fn_803893A0(s32 chan, u16 *out) {
         return result;
     }
     *out = *(u16 *)((u8 *)card + 8);
+    c = card;
     enabled = fn_8025465C();
-    if (card[0] != 0) {
-        card[1] = 0;
-    } else if (card[1] == -1) {
-        card[1] = 0;
+    if (c[0] != 0) {
+        c[1] = 0;
+    } else if (c[1] == -1) {
+        c[1] = 0;
     }
     fn_80254684(enabled);
     return 0;
@@ -2547,7 +2549,15 @@ s32 fn_803894A8(s32 chan) {
 
     card = lbl_804912A0 + chan * 0x110;
     enabled = fn_8025465C();
-    while ((result = (chan < 0 || chan >= 2) ? -128 : *(s32 *)(card + 4)) == -1) {
+    for (;;) {
+        if (chan < 0 || chan >= 2) {
+            result = -128;
+        } else {
+            result = *(s32 *)(card + 4);
+        }
+        if (result != -1) {
+            break;
+        }
         fn_8025974C(card + 0x8C);
     }
     fn_80254684(enabled);
