@@ -1859,6 +1859,27 @@ s32 fn_802B0958(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x4C);
 }
 
+void fn_802B0AE4(void) {
+    extern u8 *lbl_80494D18;
+    extern u8 *lbl_80494D20;
+    extern u8 *lbl_80494D1C;
+    if (lbl_80494D18 != NULL) {
+        u8 *vt = *(u8 **)(lbl_80494D18 + 4);
+        (*(void (**)(void *))(vt + 0x14))(lbl_80494D18 + *(s16 *)(vt + 0x10));
+        lbl_80494D18 = NULL;
+    }
+    if (lbl_80494D20 != NULL) {
+        u8 *vt = *(u8 **)(lbl_80494D20 + 4);
+        (*(void (**)(void *))(vt + 0x14))(lbl_80494D20 + *(s16 *)(vt + 0x10));
+        lbl_80494D20 = NULL;
+    }
+    if (lbl_80494D1C != NULL) {
+        u8 *vt = *(u8 **)(lbl_80494D1C + 4);
+        (*(void (**)(void *))(vt + 0x14))(lbl_80494D1C + *(s16 *)(vt + 0x10));
+        lbl_80494D1C = NULL;
+    }
+}
+
 s32 fn_802B0D24(void) {
     return lbl_80496130;
 }
