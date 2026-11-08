@@ -1496,21 +1496,20 @@ s32 fn_8019F624(void *self, s32 *arg1) {
     fn_800F68E0((u8 *)self + 4);
     obj = (*(u8 *(**)(u8 *, s32))(*(u8 **)lbl_8049665C + 0x3C))(lbl_8049665C + *(s16 *)(*(u8 **)lbl_8049665C + 0x38), arg1[0]);
     obj = *(u8 **)(obj + 0xC);
-    if (obj == NULL) {
-        return 0;
-    }
-    p = *(u8 **)(obj + 0x18);
-    n = 0;
-    if (p != NULL) {
-        n = *(s32 *)(p - 4);
-    }
-    r = fn_803AB680(p, p + n * 8, *(u16 *)(arg1 + 1));
-    if (r == NULL) {
+    if (obj != NULL) {
+        p = *(u8 **)(obj + 0x18);
+        n = 0;
+        if (p != NULL) {
+            n = *(s32 *)(p - 4);
+        }
+        r = fn_803AB680(p, p + n * 8, *(u16 *)(arg1 + 1));
+        if (r != NULL) {
+            M2C_FIELD(self, s32 *, 0x4C) = r[1];
+            return 1;
+        }
         M2C_FIELD(self, s32 *, 0x4C) = 0;
-        return 0;
     }
-    M2C_FIELD(self, s32 *, 0x4C) = r[1];
-    return 1;
+    return 0;
 }
 
 s32 fn_8019F6D8(void *arg0, s32 arg1, void **arg2) {
