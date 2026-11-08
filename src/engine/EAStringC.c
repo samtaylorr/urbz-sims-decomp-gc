@@ -1708,9 +1708,9 @@ void fn_802ADD10(u8 *self, s32 arg1, s32 arg2) {
 
 s32 *fn_802ADDD8(s32 *self, s32 arg1) {
     self[0] = arg1;
-    self[3] = 0;
     self[1] = 0;
     self[2] = 0;
+    self[3] = 0;
     return self;
 }
 
