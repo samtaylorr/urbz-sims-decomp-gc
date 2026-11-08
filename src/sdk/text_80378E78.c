@@ -411,9 +411,10 @@ void fn_8037EA74(u32 mainmem, u32 aram, u32 length) {
     __DSPRegs[20] = (u16)(__DSPRegs[20] | 0x8000);
     __DSPRegs[20] = (u16)((__DSPRegs[20] & ~0x3ff) | (u16)(length >> 16));
     __DSPRegs[21] = (u16)((__DSPRegs[21] & ~0xffe0) | (u16)(length & 0xffff));
-    if (!(__DSPRegs[5] & 0x200)) {
-        fn_8037E97C();
+    if (__DSPRegs[5] & 0x200) {
+        return;
     }
+    __DSPRegs[5] = (u16)((__DSPRegs[5] & ~0x88) | 0x20);
 }
 
 void fn_8038046C(void) {
@@ -485,7 +486,7 @@ void fn_803806E4(void) {
         lbl_80496384 = 1;
     }
 }
-
+#pragma dont_inline reset
 void fn_80380754(void) {
     extern s32 lbl_80496384;
     lbl_80496384 = 0;
@@ -1295,6 +1296,14 @@ void fn_80385C20(void *arg0, u32 arg1) {
     *(u32 *)(e + 4) |= 0x40000000;
 }
 
+s32 fn_80385C5C(void *arg0) {
+    extern u8 lbl_8048FAA0[][0x60];
+    if ((u32)lbl_80496468 == 3) {
+        return -0x3c0;
+    }
+    return *(s32 *)(lbl_8048FAA0[M2C_FIELD(arg0, s32 *, 0x18)] + 0x10);
+}
+
 void fn_80385C8C(void *arg0, s32 arg1) {
     extern u8 lbl_8048FAA0[][0x60];
     u8 *e = lbl_8048FAA0[M2C_FIELD(arg0, s32 *, 0x18)];
@@ -2039,8 +2048,11 @@ void fn_8038DEBC(s32 arg0) {
 u32 fn_8038E45C(void) {
     extern s32 lbl_80495668;
     s32 fn_8025A3F4(void);
+    u32 r;
     lbl_80495668 = fn_8025A3F4();
-    return (u32)((u8 *)0x7FEC8000 + fn_8038DE98()) & ~0xFFF;
+    lbl_80495668 = lbl_80495668 * 0x41C64E6D + 0x3039;
+    r = (lbl_80495668 >> 16) & 0x7FFF;
+    return (r | 0x7FEC8000) & 0xFFFFF000;
 }
 
 s32 fn_8038F53C(s32 chan, u32 addr, u32 length, void *dst, void *callback) {
