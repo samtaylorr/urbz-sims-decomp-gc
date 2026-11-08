@@ -2401,6 +2401,22 @@ BOOL fn_8038BFB0(void *dir, const char *fileName) {
     return FALSE;
 }
 
+s32 fn_8038C018(u8 *card, u8 *ent) {
+    extern u8 lbl_804914C0[];
+    s32 fn_80248268(const void *, const void *, u32);
+    u8 *diskID;
+
+    diskID = *(u8 **)(card + 0x10c);
+    if (ent[0] == 0xFF) {
+        return -4;
+    }
+    if (diskID == lbl_804914C0 ||
+        (fn_80248268(ent, diskID, 4) == 0 && fn_80248268(ent + 4, diskID + 4, 2) == 0)) {
+        return 0;
+    }
+    return -10;
+}
+
 s32 fn_8038C698(void) {
     return 0;
 }
