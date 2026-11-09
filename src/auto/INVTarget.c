@@ -2945,6 +2945,20 @@ void fn_801F3890(void) {
 
 }
 
+void fn_801F4F3C(void *self);
+void fn_801F4FB4(void *self) {
+    void fn_801F4D1C(void *);
+    void *obj = M2C_FIELD(self, void **, 0xD0);
+    if (obj != NULL) {
+        M2C_FIELD(self, s32 *, 0xE0) = 1;
+        M2C_FIELD(self, void **, 0xD0) = NULL;
+        (*M2C_FIELD(obj, void (**)(void *), 0xC))(obj);
+    }
+    if (M2C_FIELD(self, s32 *, 0xE4) != 0) {
+        fn_801F4D1C(self);
+    }
+}
+
 void fn_801F501C(void *arg0) {
     void *temp_r9;
 
