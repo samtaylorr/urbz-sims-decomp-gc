@@ -425,6 +425,15 @@ s32 fn_801D7DE4(void) {
     return lbl_804945FC;
 }
 
+void fn_801D7E20(void) {
+    extern char *lbl_804945FC;
+    if (lbl_804945FC != NULL) {
+        char *vt = M2C_FIELD(lbl_804945FC, char **, 0x1C);
+        M2C_FIELD(vt, void (**)(void *, s32), 0xC)(lbl_804945FC + M2C_FIELD(vt, s16 *, 8), 3);
+        lbl_804945FC = NULL;
+    }
+}
+
 M2C_UNK fn_801D8080(void **arg0, s32 arg1, s32 arg2, s32 arg3) {
     void **node;
     void **next;
