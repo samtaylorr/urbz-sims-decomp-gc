@@ -4413,10 +4413,9 @@ void fn_8020A500(u8 *arg0) {
     s32 zero;
 
     fn_800F1B80(arg0 + 0xAC, (h1 = fn_8004C168(lbl_8041F94C, lbl_803E718C)).p != NULL ? (void *)*h1.p : NULL);
+second:
     INV_setStr(arg0 + 0xB4, lbl_803E70E8);
-    do {
-        fn_800F1B80(arg0 + 0xB8, (h3 = fn_8004C168(lbl_8041F94C, lbl_803E70EC)).p != NULL ? (void *)*h3.p : NULL);
-    } while (0);
+    fn_800F1B80(arg0 + 0xB8, (h3 = fn_8004C168(lbl_8041F94C, lbl_803E70EC)).p != NULL ? (void *)*h3.p : NULL);
     fn_800F1B80(arg0 + 0xBC, lbl_803E6F74);
     zero = 0;
     *(s32 *)(arg0 + 0xA0) = 1;
@@ -5227,6 +5226,17 @@ s32 fn_8021F1D4(s32 arg0, s32 arg1) {
     return arg0;
 }
 
+void fn_8021F894(void) {
+    extern void *lbl_80494668;
+    void *fn_802D0AB8(void);
+    void fn_802D1A00(void *, void *);
+
+    if (lbl_80494668 != NULL) {
+        fn_802D1A00(fn_802D0AB8(), lbl_80494668);
+        lbl_80494668 = NULL;
+    }
+}
+
 void fn_802200F8(void *arg0, s32 arg1) {
     extern s32 fn_801D7CDC(void *, s32);
     extern s32 fn_801D8B40(void *, void *);
@@ -5979,17 +5989,19 @@ void fn_8022A304(void *out, void *obj) {
 
 void *fn_8022ADD8(void *out, s32 arg1) {
     typedef struct { f32 x; f32 y; } Vec2;
+    typedef struct { s32 x; s32 y; } Pt;
     extern u8 *lbl_8041FA38[];
     void fn_8022ACE0(s32 *, s32 *, s32);
     Vec2 v;
-    s32 a;
-    s32 b;
+    Pt p;
+    u8 *g;
 
-    fn_8022ACE0(&a, &b, arg1);
-    v.x = a;
-    v.y = b;
-    ((Vec2 *)out)->y = v.y + *(f32 *)(lbl_8041FA38[0] + 0x68);
-    ((Vec2 *)out)->x = v.x + *(f32 *)(lbl_8041FA38[0] + 0x64);
+    fn_8022ACE0(&p.x, &p.y, arg1);
+    v.x = p.x;
+    v.y = p.y;
+    g = lbl_8041FA38[0];
+    ((Vec2 *)out)->y = v.y + *(f32 *)(g + 0x68);
+    ((Vec2 *)out)->x = v.x + *(f32 *)(g + 0x64);
     return out;
 }
 
