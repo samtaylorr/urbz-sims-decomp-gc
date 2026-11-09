@@ -5379,10 +5379,11 @@ void fn_8020FB60(void *self) {
     extern char lbl_803E7640[];
     void fn_8021F454(void);
     s32 fn_801DB274(char *, s32);
+    u8 *p = lbl_8041F94C;
     s32 zero = 0;
 
-    M2C_FIELD(lbl_8041F94C, s32 *, 0x338) = M2C_FIELD(self, s32 *, 0x10C);
-    M2C_FIELD(lbl_8041F94C, s32 *, 0x33C) = zero;
+    M2C_FIELD(p, s32 *, 0x338) = M2C_FIELD(self, s32 *, 0x10C);
+    M2C_FIELD(p, s32 *, 0x33C) = zero;
     fn_8021F454();
     M2C_FIELD(self, s32 *, 0xC0) = zero;
     M2C_FIELD(self, s16 *, 0xC4) = zero;
