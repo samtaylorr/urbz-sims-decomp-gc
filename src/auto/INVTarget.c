@@ -51,6 +51,8 @@ static inline void *INV_Alloc(u32 size, u32 align) {
 typedef struct { char **begin; char **end; } INVPtrVec;
 static inline u32 INVPtrVec_size(INVPtrVec *v) { return v->end - v->begin; }
 static inline char *INVPtrVec_at(INVPtrVec *v, u32 i) { return v->begin[i]; }
+typedef struct { s32 type; s32 idx; } INVTargetEntry;
+typedef struct { INVTargetEntry *begin; INVTargetEntry *end; } INVTargetEntryVec;
 
 typedef struct { s16 delta; s16 idx; s32 (*fn)(void *, s32); } CasVtEnt2;
 typedef struct { void *a; u8 *cur; s32 b; s32 c; } CasIter;
@@ -6075,23 +6077,20 @@ void fn_8022A304(void *out, void *obj) {
     }
 }
 
-void *fn_8022ADD8(void *out, s32 arg1) {
+void fn_8022ADD8(void *out, s32 arg1) {
     typedef struct { f32 x; f32 y; } Vec2;
     extern u8 *lbl_8041FA38[];
     void fn_8022ACE0(s32 *, s32 *, s32);
-    Vec2 v;
     s32 a;
     s32 b;
-    u8 *g;
+    Vec2 v;
 
     fn_8022ACE0(&a, &b, arg1);
     v.x = a;
     v.y = b;
-    g = lbl_8041FA38[0];
-    v.y += *(f32 *)(g + 0x68);
-    v.x += *(f32 *)(g + 0x64);
     *(Vec2 *)out = v;
-    return out;
+    ((Vec2 *)out)->y += *(f32 *)(lbl_8041FA38[0] + 0x68);
+    ((Vec2 *)out)->x += *(f32 *)(lbl_8041FA38[0] + 0x64);
 }
 
 s32 fn_8022B3B4(s32 arg0) {
