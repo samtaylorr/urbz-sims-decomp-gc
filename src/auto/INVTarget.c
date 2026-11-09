@@ -4282,7 +4282,7 @@ s32 fn_80204458(void *arg0, s32 **arg1, s32 arg2, s32 arg3) {
     void fn_802045DC(void *);
     void fn_80248488();
     s32 fn_80203A0C(s32, s32, s32);
-    void fn_801FCFE8(void *, s32, s32, char *);
+    s32 fn_801FCFE8(void *, s32, s32, char *);
     void fn_801DB32C(char *, char *);
     char buf[0x200];
     char *p;
