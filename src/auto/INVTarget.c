@@ -22,6 +22,11 @@ static inline void INV_setStrT(void *dst, void *tbl, void *key) {
     fn_800F1B80(dst, h.p != NULL ? (void *)*h.p : NULL);
 }
 
+static inline void INV_resetStr(void *p) {
+    void fn_800F2868(void *, s32, s32);
+    fn_800F2868(p, 0, -1);
+}
+
 static inline void INV_initWStr(void *p) {
     void fn_800F6FB4(void *, void *, s32);
     fn_800F6FB4(p, (u8 *)p + 8, 0x100);
@@ -280,6 +285,21 @@ void fn_801D6DC8(void *arg0, s32 arg1) {
     if (arg1 & 1) {
         fn_802D20E8(arg0);
     }
+}
+
+s32 fn_801D7194(s32 self, char *a, void *b, s32 c, s32 d) {
+    void fn_801D6E68(s32, char *, void *, void *, s32, s32);
+    M2C_UNK fn_801D6FD0(void **, void *);
+    void *r;
+    if (b != NULL && M2C_FIELD(self, s32 *, 8) != 0) {
+        r = fn_801D7224((void **)self, (s32)a);
+        if (r != NULL) {
+            fn_801D6FD0((void **)self, r);
+        }
+        fn_801D6E68(self, a, NULL, b, c, d);
+        return 1;
+    }
+    return 0;
 }
 
 void *fn_801D7224(void **arg0, s32 arg1) {
@@ -3826,7 +3846,6 @@ s32 fn_801FCF84(void *arg0) {
 }
 
 s32 fn_801FCFE8(void *arg0, s32 arg1, s32 arg2, char *arg3) {
-    void fn_800F6FB4(void *, void *, s32);
     void fn_800BD804(s32, void *, s32);
     s32 fn_801FCF28(void *);
     void fn_800F8178(char *, char *);
@@ -3837,12 +3856,9 @@ s32 fn_801FCFE8(void *arg0, s32 arg1, s32 arg2, char *arg3) {
     if (arg3 == NULL) {
         return 0;
     }
-    {
-        void *p = &b;
-        *(s16 *)arg3 = 0;
-        fn_800F6FB4(p, (u8 *)p + 8, 0x100);
-        fn_800BD804(arg1, p, 1);
-    }
+    *(s16 *)arg3 = 0;
+    INV_initWStr(&b);
+    fn_800BD804(arg1, &b, 1);
     if (arg2 != 0 && arg1 > fn_801FCF28(arg0)) {
         fn_800F8178(arg3, lbl_803E5068);
         fn_800F8178(arg3 + 0x20, fn_800F7138(&b));
