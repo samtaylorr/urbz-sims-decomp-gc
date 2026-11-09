@@ -2993,8 +2993,9 @@ void fn_801F3890(void) {
 
 }
 
-void fn_801F4EA4(void *self, void *arg1, s16 arg2, s16 arg3) {
+void fn_801F4EA4(void *self, void *arg1, s32 arg2, s32 arg3) {
     extern char lbl_803E3CF8[];
+    void fn_801F4F3C(void *);
     void fn_801D7194(s32, char *, void *, s32, s32);
     if (M2C_FIELD(self, s32 *, 0xB4) != 0) {
         fn_801F4F3C(self);
@@ -3821,6 +3822,25 @@ void fn_801FF894(void *self) {
     fn_803118A0(res, M2C_FIELD(self, s32 *, 0xD0), 0xF0000);
     fn_803118A0(res, M2C_FIELD(self, s32 *, 0xD0), 0x80);
     fn_803118A0(res, M2C_FIELD(self, s32 *, 0xD0), 0x40);
+}
+
+void fn_801FFA10(void *self) {
+    void *fn_803338D0(void *, s32);
+    s32 fn_803338F0(void *, s32);
+    void fn_803115C0(void *, s32);
+    void *fn_801BFD84(void *);
+    extern void *lbl_80494FCC;
+    extern struct { u8 pad[0xE4]; void *arr[1]; } lbl_8041F94C;
+    void *mgr;
+    void *obj;
+    void *vt;
+
+    mgr = lbl_80494FCC;
+    fn_803115C0(fn_803338D0(mgr, fn_803338F0(mgr, M2C_FIELD(self, s32 *, 0x84))), M2C_FIELD(self, s32 *, 0xD0));
+    M2C_FIELD(self, s32 *, 0xD0) = 0;
+    obj = fn_801BFD84(lbl_8041F94C.arr[M2C_FIELD(self, s32 *, 0x84)]);
+    vt = M2C_FIELD(obj, void **, 8);
+    M2C_FIELD(vt, void (**)(void *, s32), 0x44)((u8 *)obj + M2C_FIELD(vt, s16 *, 0x40), M2C_FIELD(self, s32 *, 0xD0));
 }
 
 void fn_801FFF28(void *arg0, u8 *arg1, s32 arg2, void *arg3) {
