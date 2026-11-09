@@ -1733,12 +1733,12 @@ void fn_801DD0E0(void *arg0, s32 arg1) {
 
 void fn_801DDF34(u8 *self, s32 arg1) {
     extern u8 lbl_80417028[];
-    extern void *lbl_8041FA1C;
+    extern void *lbl_8041FA1C[];
     extern void fn_8000C220(void *, void *);
     extern void fn_80307364(void *, s32);
 
     *(u8 **)(self + 0x44) = lbl_80417028;
-    fn_8000C220(lbl_8041FA1C, self);
+    fn_8000C220(lbl_8041FA1C[0], self);
     fn_80307364(self, arg1);
 }
 
