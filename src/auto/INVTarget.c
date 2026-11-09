@@ -5305,15 +5305,17 @@ void *fn_8020F724(void *arg0, s32 arg1) {
 }
 
 void *fn_8020F76C(void *arg0, s32 arg1) {
+    typedef struct { u8 pad[0x1B38]; u8 data[0x1BE0 - 0x1B38]; } INVSlot;
+    typedef struct { u8 pad[0x148]; INVSlot a[4]; u8 pad2[0x70C8 - 0x148 - 4 * 0x1BE0]; INVSlot b[4]; } INVSlots;
     extern u8 lbl_803E72BC[];
 
     if ((u32)(arg1 - 1) > 3) {
         return lbl_803E72BC;
     }
     if (M2C_FIELD(arg0, s32 *, 0x120) == 0x14) {
-        return arg1 * 0x1BE0 + (u8 *)arg0 + 0x7020;
+        return ((INVSlots *)arg0)->b[arg1 - 1].data;
     }
-    return arg1 * 0x1BE0 + (u8 *)arg0 + 0xA0;
+    return ((INVSlots *)arg0)->a[arg1 - 1].data;
 }
 
 void fn_8020F908(void *self) {
