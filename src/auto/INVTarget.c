@@ -1345,6 +1345,20 @@ void fn_801D97CC(void) {
     }
 }
 
+s32 fn_801DB18C(u8 *name) {
+    extern s32 lbl_80494610;
+    void *fn_801DB3C8(void *, s32);
+    void *e;
+    if (lbl_80494610 == 0) {
+        return 0;
+    }
+    e = fn_801DB3C8(name, 0x69);
+    if (e != NULL) {
+        return M2C_FIELD(e, s32 *, 8);
+    }
+    return 0;
+}
+
 f32 fn_801DB1DC(char *name) {
     extern s32 lbl_80494610;
     extern const f32 lbl_803E098C[];
