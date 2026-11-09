@@ -3380,6 +3380,19 @@ s32 fn_801FAD44(s32 arg0) {
     }
 }
 
+s32 fn_801FAD88(void *arg0) {
+    void *fn_8016CC44(void *);
+    void *p;
+    if (arg0 == 0) {
+        return 0;
+    }
+    p = *(void **)((u8 *)fn_8016CC44(arg0) + 0x38);
+    if (p == 0) {
+        return 0;
+    }
+    return *(s16 *)((u8 *)p + 0x24);
+}
+
 void *fn_801FB790(void *arg0) {
     typedef struct { s16 delta; s16 idx; void *(*fn)(void *, void *, s32); } VtEnt;
     void *fn_8016CC44(void *);
@@ -4492,9 +4505,10 @@ void fn_8020A500(u8 *arg0) {
     extern u8 lbl_803E7034[];
     INVHandle h1, h3;
     s32 zero;
+    s32 one = 1;
 
     fn_800F1B80(arg0 + 0xAC, (h1 = fn_8004C168(lbl_8041F94C, lbl_803E718C)).p != NULL ? (void *)*h1.p : NULL);
-    if (arg0 != NULL) {
+    if (one) {
         INV_setStr(arg0 + 0xB4, lbl_803E70E8);
     }
     fn_800F1B80(arg0 + 0xB8, (h3 = fn_8004C168(lbl_8041F94C, lbl_803E70EC)).p != NULL ? (void *)*h3.p : NULL);
