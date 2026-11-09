@@ -5226,6 +5226,22 @@ s32 fn_8021F1D4(s32 arg0, s32 arg1) {
     return arg0;
 }
 
+void fn_8021F454(void) {
+    extern u8 lbl_8041F94C[];
+    extern void *lbl_803F6E70[4];
+    s32 fn_80049BD4(void *, s32);
+    void fn_8021F8D0(s32, void *, s32, s32);
+    s32 a = fn_80049BD4(lbl_8041F94C, 0);
+    s32 b = fn_80049BD4(lbl_8041F94C, 1);
+
+    if (a >= 1 && a <= 4 && lbl_803F6E70[a - 1] != NULL) {
+        fn_8021F8D0(0, lbl_803F6E70[a - 1], 2, 0);
+    }
+    if (a != b && b > 0 && b <= 4 && lbl_803F6E70[b - 1] != NULL) {
+        fn_8021F8D0(1, lbl_803F6E70[b - 1], 2, 0);
+    }
+}
+
 void fn_8021F514(void) {
     extern void *lbl_803F6E70[4];
     void *fn_802D0AB8(void);
@@ -6027,8 +6043,12 @@ void *fn_8022ADD8(void *out, s32 arg1) {
         s32 a;
         s32 b;
         fn_8022ACE0(&a, &b, arg1);
-        v.x = a;
-        v.y = b;
+        {
+            Vec2 t;
+            t.x = a;
+            t.y = b;
+            v = t;
+        }
     }
     g = lbl_8041FA38[0];
     ((Vec2 *)out)->y = v.y + *(f32 *)(g + 0x68);
