@@ -1925,11 +1925,11 @@ u8 *fn_801DF04C(u8 *self) {
     t->unkF8 = lbl_804170B0;
     for (i = 0; i < 20; i++) {
         t->a[i] = 0;
-        t->b[i] = lbl_803E1348[0];
+        t->b[i] = 0.0f;
     }
     t->unkF0 = 0;
     t->unkF4 = 3;
-    t->b[5] = lbl_803E134C[0];
+    t->b[5] = 1.0f;
     return self;
 }
 
