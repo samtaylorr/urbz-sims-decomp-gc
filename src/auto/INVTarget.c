@@ -3117,6 +3117,14 @@ void fn_801F5060(void *arg0) {
     }
 }
 
+M2C_UNK fn_801F50B8(void *arg0, s32 arg1) {
+    extern void fn_801F4D1C(void *);
+    if (M2C_FIELD(arg0, s32 *, 0x88) == 0 && arg1 == 0) {
+        fn_801F4D1C(arg0);
+    }
+    M2C_FIELD(arg0, s32 *, 0x90) = arg1;
+}
+
 void fn_801F5304(void *arg0, s32 arg1) {
     extern void fn_800F1A60(void *, s32);
     extern void fn_8031EA2C(void *);
