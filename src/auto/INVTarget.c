@@ -3042,14 +3042,14 @@ void fn_801F4EA4(void *self, void *arg1, s32 arg2, s32 arg3) {
 
 void fn_801F4F3C(void *self) {
     extern char lbl_803E3CF8[];
+    s32 zero;
     if (M2C_FIELD(self, s32 *, 0xB4) != 0) {
-        s32 zero;
         INVTarget_Send(self, (u32)lbl_803E3CF8, 0x9F93FF74);
-        zero = 0;
-        M2C_FIELD(self, s32 *, 0xB4) = zero;
-        M2C_FIELD(self, s16 *, 0xB8) = zero;
-        M2C_FIELD(self, s16 *, 0xBA) = zero;
     }
+    zero = 0;
+    M2C_FIELD(self, s32 *, 0xB4) = zero;
+    M2C_FIELD(self, s16 *, 0xB8) = zero;
+    M2C_FIELD(self, s16 *, 0xBA) = zero;
 }
 
 void fn_801F4F3C(void *self);
