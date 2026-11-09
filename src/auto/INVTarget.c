@@ -1957,19 +1957,17 @@ void fn_801DEFF0(void) {
 
 u8 *fn_801DF04C(u8 *self) {
     extern u8 lbl_804170B0[];
-    extern f32 lbl_803E1348[];
-    extern f32 lbl_803E134C[];
     struct T { u8 pad[0x50]; s32 a[20]; f32 b[20]; s32 unkF0; s32 unkF4; u8 *unkF8; } *t = (struct T *)self;
     s32 i;
 
     t->unkF8 = lbl_804170B0;
     for (i = 0; i < 20; i++) {
         t->a[i] = 0;
-        t->b[i] = 0.0f;
+        t->b[i] = 28.0f;
     }
     t->unkF0 = 0;
     t->unkF4 = 3;
-    t->b[5] = 1.0f;
+    t->b[5] = 48.0f;
     return self;
 }
 
@@ -5341,6 +5339,23 @@ s32 fn_8020F9F8(void) {
         }
     }
     return 0;
+}
+
+void fn_8020FB60(void *self) {
+    extern u8 lbl_8041F94C[];
+    extern char lbl_803E7640[];
+    void fn_8021F454(void);
+    s32 fn_801DB274(char *, s32);
+    s32 zero = 0;
+
+    M2C_FIELD(lbl_8041F94C, s32 *, 0x338) = M2C_FIELD(self, s32 *, 0x10C);
+    M2C_FIELD(lbl_8041F94C, s32 *, 0x33C) = zero;
+    fn_8021F454();
+    M2C_FIELD(self, s32 *, 0xC0) = zero;
+    M2C_FIELD(self, s16 *, 0xC4) = zero;
+    M2C_FIELD(self, s16 *, 0xC6) = zero;
+    fn_801DB274(lbl_803E7640, 2);
+    M2C_FIELD(self, s32 *, 0x124) = 3;
 }
 
 void fn_802127FC(s32 arg0, s32 arg1) {
