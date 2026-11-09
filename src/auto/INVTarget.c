@@ -4622,7 +4622,7 @@ void fn_80209608(u8 *arg0) {
 }
 
 void fn_8020A500(u8 *arg0) {
-    s32 fn_801DB18C(void *);
+    s32 fn_801DB18C(u8 *);
     M2C_UNK fn_801F53A0(void *);
     INVHandle fn_8004C168();
     extern u8 lbl_8041F94C[];
