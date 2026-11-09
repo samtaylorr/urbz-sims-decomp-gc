@@ -1897,13 +1897,17 @@ void fn_801DECDC(void *arg0, s32 arg1) {
 }
 
 void fn_801DEFA8(void) {
-    extern u8 *fn_801DF04C(void *);
+    extern u8 *fn_801DF04C(u8 *);
     extern void fn_801DF0DC(void);
-    extern void fn_801DF3F8(s32);
+    extern void fn_801DF3F8(void *);
     extern void *fn_802D1FC8(s32);
-    extern s32 lbl_80494618;
+    extern void *lbl_80494618;
     if (lbl_80494618 == 0) {
-        lbl_80494618 = (s32)fn_801DF04C(fn_802D1FC8(0xFC));
+        void *p = fn_802D1FC8(0xFC);
+        if (p != 0) {
+            p = fn_801DF04C(p);
+        }
+        lbl_80494618 = p;
         fn_801DF0DC();
         fn_801DF3F8(lbl_80494618);
     }
@@ -3134,21 +3138,21 @@ M2C_UNK fn_801F50B8(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x90) = arg1;
 }
 
-void fn_801F5304(void *arg0, s32 arg1) {
+void fn_801F5304(char *arg0, s32 arg1) {
     extern void fn_800F1A60(void *, s32);
     extern void fn_8031EA2C(void *);
     extern void fn_802D20E8(void *);
     extern char lbl_80417628[];
-    M2C_FIELD(arg0, char **, 0x7C) = lbl_80417628;
-    if (M2C_FIELD(arg0, s32 *, 0x3C) != 0) {
-        fn_8031EA2C(M2C_FIELD(arg0, void **, 0x3C));
-        M2C_FIELD(arg0, s32 *, 0x3C) = 0;
+    *(char **)(arg0 + 0x7C) = lbl_80417628;
+    if (*(void **)(arg0 + 0x3C) != 0) {
+        fn_8031EA2C(*(void **)(arg0 + 0x3C));
+        *(void **)(arg0 + 0x3C) = 0;
     }
-    fn_800F1A60((char *)arg0 + 0x38, 2);
-    fn_800F1A60((char *)arg0 + 0x34, 2);
-    fn_800F1A60((char *)arg0 + 0x30, 2);
-    fn_800F1A60((char *)arg0 + 0x2C, 2);
-    fn_800F1A60((char *)arg0 + 0x28, 2);
+    fn_800F1A60(arg0 + 0x38, 2);
+    fn_800F1A60(arg0 + 0x34, 2);
+    fn_800F1A60(arg0 + 0x30, 2);
+    fn_800F1A60(arg0 + 0x2C, 2);
+    fn_800F1A60(arg0 + 0x28, 2);
     if (arg1 & 1) {
         fn_802D20E8(arg0);
     }
@@ -3996,7 +4000,7 @@ void fn_801FFAE4(void *self, u16 *out) {
 }
 
 void fn_801FFEE0(void *arg0) {
-    void fn_80248488();
+    void fn_80248488(void *, s32, s32);
     u8 *p;
     s32 i;
 
@@ -5208,6 +5212,20 @@ void *fn_8020F724(void *arg0, s32 arg1) {
         return ((INVSlots *)arg0)->b[arg1 - 1].name;
     }
     return ((INVSlots *)arg0)->a[arg1 - 1].name;
+}
+
+void *fn_8020F76C(void *arg0, s32 arg1) {
+    typedef struct { u8 data[0x1BE0]; } INVSlot2;
+    typedef struct { u8 pad[0xA0]; INVSlot2 a[4]; u8 pad2[0x7020 - 0xA0 - 4 * 0x1BE0]; INVSlot2 b[4]; } INVSlots2;
+    extern u8 lbl_803E72BC[];
+
+    if ((u32)(arg1 - 1) > 3) {
+        return lbl_803E72BC;
+    }
+    if (M2C_FIELD(arg0, s32 *, 0x120) == 0x14) {
+        return ((INVSlots2 *)arg0)->b[arg1].data;
+    }
+    return ((INVSlots2 *)arg0)->a[arg1].data;
 }
 
 s32 fn_8020F990(void) {
