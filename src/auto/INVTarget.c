@@ -1825,13 +1825,13 @@ void fn_801DECDC(void *arg0, s32 arg1) {
 }
 
 void fn_801DEFA8(void) {
-    extern void *fn_801DF04C(void *);
+    extern s32 fn_801DF04C(void *);
     extern void fn_801DF0DC(void);
     extern void fn_801DF3F8(void *);
     extern void *fn_802D1FC8(s32);
     extern void *lbl_80494618;
     if (lbl_80494618 == 0) {
-        lbl_80494618 = fn_801DF04C(fn_802D1FC8(0xFC));
+        lbl_80494618 = (void *)fn_801DF04C(fn_802D1FC8(0xFC));
         fn_801DF0DC();
         fn_801DF3F8(lbl_80494618);
     }
@@ -4087,9 +4087,11 @@ void fn_80205130(void *self, s32 idx) {
     typedef struct { s32 type; s32 n; } Ent;
     void fn_802052AC(void *, void *, s32);
     void fn_802054DC(void *, void *, s32);
-    Ent *e = M2C_FIELD(self, Ent **, 0x178);
-    s32 type = e[idx].type;
-    s32 start = e[idx].n * 12;
+    void fn_802051C0(void *, INVPair **, s32);
+    void fn_802053F0(void *, INVPair **, s32);
+    Ent *e = M2C_FIELD(self, Ent **, 0x178) + idx;
+    s32 type = e->type;
+    s32 start = e->n * 12;
     switch (type) {
     case 9:
         fn_802052AC(self, M2C_FIELD(self, void **, 0x164), start);
