@@ -3043,10 +3043,12 @@ void fn_801F4EA4(void *self, void *arg1, s32 arg2, s32 arg3) {
 void fn_801F4F3C(void *self) {
     extern char lbl_803E3CF8[];
     if (M2C_FIELD(self, s32 *, 0xB4) != 0) {
+        s32 zero;
         INVTarget_Send(self, (u32)lbl_803E3CF8, 0x9F93FF74);
-        M2C_FIELD(self, s16 *, 0xB8) = 0;
-        M2C_FIELD(self, s32 *, 0xB4) = 0;
-        M2C_FIELD(self, s16 *, 0xBA) = 0;
+        zero = 0;
+        M2C_FIELD(self, s32 *, 0xB4) = zero;
+        M2C_FIELD(self, s16 *, 0xB8) = zero;
+        M2C_FIELD(self, s16 *, 0xBA) = zero;
     }
 }
 
@@ -3883,15 +3885,16 @@ void fn_801FFA9C(void *self, u16 *out) {
     switch (state) {
     case 0:
         *out = lbl_803E4CA0[0];
+    advance:
+        M2C_FIELD(self, u8 *, 0x189) = state;
+        M2C_FIELD(self, u8 *, 0x138)++;
         break;
     case 1:
         *out = lbl_803E4CA4[0];
+        goto advance;
+    case 2:
         break;
-    default:
-        return;
     }
-    M2C_FIELD(self, u8 *, 0x189) = state;
-    M2C_FIELD(self, u8 *, 0x138)++;
 }
 
 void fn_801FFAE4(void *self, u16 *out) {
@@ -3910,8 +3913,10 @@ void fn_801FFAE4(void *self, u16 *out) {
         M2C_FIELD(self, u8 *, 0x18A) = state;
         M2C_FIELD(self, u8 *, 0x138)--;
         fn_801FFEE0(self);
-        M2C_FIELD(self, u8 *, 0x8C1) = 0;
         M2C_FIELD(self, u8 *, 0x189) = 0;
+        M2C_FIELD(self, u8 *, 0x8C1) = 0;
+        break;
+    case 2:
         break;
     }
 }
