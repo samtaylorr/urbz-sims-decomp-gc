@@ -1782,22 +1782,14 @@ void fn_801DD0E0(void *arg0, s32 arg1) {
 u8 *fn_801DDEA0(u8 *self) {
     extern u8 lbl_80417028[];
     extern void *lbl_8041FA1C[];
-    extern s32 lbl_80494604;
-    extern s32 lbl_80494608;
     extern void fn_8030728C(void *);
-    extern void *fn_802D1FC8(s32);
     extern void fn_8000C1F4(void *, void *);
+    struct T { u8 pad[0x44]; u8 *vt; s32 unk48; s32 unk4C; } *t = (struct T *)self;
 
     fn_8030728C(self);
-    *(u8 **)(self + 0x44) = lbl_80417028;
-    if (lbl_80494604 == 0) {
-        lbl_80494604 = fn_801D8810(fn_802D1FC8(0x10));
-    }
-    *(void **)(self + 0x48) = (void *)lbl_80494604;
-    if (lbl_80494608 == 0) {
-        lbl_80494608 = fn_801D8CE4(fn_802D1FC8(0x10));
-    }
-    *(void **)(self + 0x4C) = (void *)lbl_80494608;
+    t->vt = lbl_80417028;
+    t->unk48 = INV_Get04();
+    t->unk4C = INV_Get08();
     fn_8000C1F4(lbl_8041FA1C[0], self);
     return self;
 }
@@ -1927,17 +1919,17 @@ u8 *fn_801DF04C(u8 *self) {
     extern u8 lbl_804170B0[];
     extern f32 lbl_803E1348[];
     extern f32 lbl_803E134C[];
-    struct T { u8 pad[0x50]; s32 a[20]; f32 b[20]; } *t = (struct T *)self;
+    struct T { u8 pad[0x50]; s32 a[20]; f32 b[20]; s32 unkF0; s32 unkF4; u8 *unkF8; } *t = (struct T *)self;
     s32 i;
 
-    *(u8 **)(self + 0xF8) = lbl_804170B0;
+    t->unkF8 = lbl_804170B0;
     for (i = 0; i < 20; i++) {
         t->a[i] = 0;
         t->b[i] = lbl_803E1348[0];
     }
-    *(s32 *)(self + 0xF0) = 0;
-    *(s32 *)(self + 0xF4) = 3;
-    *(f32 *)(self + 0xB4) = lbl_803E134C[0];
+    t->unkF0 = 0;
+    t->unkF4 = 3;
+    t->b[5] = lbl_803E134C[0];
     return self;
 }
 
@@ -3752,6 +3744,20 @@ s32 fn_801FBC04(s32 arg0) {
     return 0;
 }
 
+s32 fn_801FCF84(void *arg0) {
+    extern u8 *lbl_80496648;
+    u8 *obj;
+    void *vt;
+
+    obj = lbl_80496648;
+    if (obj == NULL) {
+        return 0;
+    }
+    vt = *(void **)obj;
+    M2C_FIELD(vt, void (**)(void *, s32, s32), 0xD4)(obj + M2C_FIELD(vt, s16 *, 0xD0), M2C_FIELD(arg0, s32 *, 0x84) != 0, 0);
+    return 1;
+}
+
 void fn_801FE23C(s32 arg0) {
     M2C_UNK fn_801E0F64(s32);
     fn_801E0F64(arg0 + 0x79C);
@@ -3859,6 +3865,25 @@ void fn_801FF6E0(void *arg0) {
     fn_801B8734(v);
 }
 
+void fn_801FF814(void *arg0) {
+    s32 fn_801C031C(void *);
+    void *fn_801BFD84(void *);
+    void fn_801BA350(void *, s32);
+    void *fn_801BFD74(void *);
+    extern struct { u8 pad[0xE4]; void *arr[1]; } lbl_8041F94C;
+    void *obj;
+    void *o;
+    void *vt;
+
+    obj = lbl_8041F94C.arr[M2C_FIELD(arg0, s32 *, 0x84)];
+    if (fn_801C031C(obj) == 5) {
+        fn_801BA350(fn_801BFD84(obj), 0);
+    }
+    o = fn_801BFD74(obj);
+    vt = M2C_FIELD(o, void **, 4);
+    M2C_FIELD(vt, void (**)(void *, s32), 0x14)((u8 *)o + M2C_FIELD(vt, s16 *, 0x10), 0);
+}
+
 void fn_801FF894(void *self) {
     void *fn_803338D0(void *, s32);
     s32 fn_803338F0(void *, s32);
@@ -3897,18 +3922,18 @@ void fn_801FFA10(void *self) {
 }
 
 void fn_801FFA9C(void *self, struct S2 { u16 v; } *out) {
-    extern const struct S2 lbl_803E4CA0;
-    extern const struct S2 lbl_803E4CA4;
+    extern const struct S2 lbl_803E4CA0[];
+    extern const struct S2 lbl_803E4CA4[];
     u8 state = M2C_FIELD(self, u8 *, 0x138);
 
     switch (state) {
     case 0:
-        *out = lbl_803E4CA0;
+        *out = lbl_803E4CA0[0];
         M2C_FIELD(self, u8 *, 0x189) = state;
         M2C_FIELD(self, u8 *, 0x138)++;
         break;
     case 1:
-        *out = lbl_803E4CA4;
+        *out = lbl_803E4CA4[0];
         M2C_FIELD(self, u8 *, 0x189) = state;
         M2C_FIELD(self, u8 *, 0x138)++;
         break;
