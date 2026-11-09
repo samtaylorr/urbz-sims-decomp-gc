@@ -231,6 +231,25 @@ static inline s32 INVList_IsNotEmpty(void *list) {
     }
     return r;
 }
+
+s32 fn_801D8810(void **arg0);
+s32 fn_801D8CE4(void **arg0);
+static inline s32 INV_Get04(void) {
+    void *fn_802D1FC8(s32);
+    extern s32 lbl_80494604;
+    if (lbl_80494604 == 0) {
+        lbl_80494604 = fn_801D8810(fn_802D1FC8(0x10));
+    }
+    return lbl_80494604;
+}
+static inline s32 INV_Get08(void) {
+    void *fn_802D1FC8(s32);
+    extern s32 lbl_80494608;
+    if (lbl_80494608 == 0) {
+        lbl_80494608 = fn_801D8CE4(fn_802D1FC8(0x10));
+    }
+    return lbl_80494608;
+}
 void *fn_801D7224(void **arg0, s32 arg1);
 void *fn_801D7224(void **arg0, s32 arg1) {
     s32 fn_802486DC(s32, s32);
@@ -2364,16 +2383,16 @@ s32 fn_801E0254(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s3
     fn_800F1AA0((u8 *)arg0 + 0x5C, arg3);
     n = fn_800F4878((u8 *)arg0 + 0x5C) + 1;
     M2C_FIELD(arg0, char **, 0x60) = fn_800BF3FC(n * 4);
-    fn_801F55C0(fn_800F3304((u8 *)arg0 + 0x5C), n, M2C_FIELD(arg0, char **, 0x60));
+    ((void (*)(void *, s32, char *))fn_801F55C0)(fn_800F3304((u8 *)arg0 + 0x5C), n, M2C_FIELD(arg0, char **, 0x60));
     if (arg5 != 0) {
         fn_8031EAB8(arg5);
     }
     if (M2C_FIELD(arg0, s32 *, 0x68) != 0) {
         fn_8031EA2C(M2C_FIELD(arg0, s32 *, 0x68));
     }
+    M2C_FIELD(arg0, s32 *, 0x68) = arg5;
     M2C_FIELD(arg0, s32 *, 0x6C) = arg6;
     M2C_FIELD(arg0, s32 *, 0x64) = arg4;
-    M2C_FIELD(arg0, s32 *, 0x68) = arg5;
 }
 
 void fn_801E0308(void *arg0, void *arg1) {
@@ -3885,13 +3904,14 @@ void fn_801FFA9C(void *self, u16 *out) {
     switch (state) {
     case 0:
         *out = lbl_803E4CA0[0];
-    advance:
         M2C_FIELD(self, u8 *, 0x189) = state;
         M2C_FIELD(self, u8 *, 0x138)++;
         break;
     case 1:
         *out = lbl_803E4CA4[0];
-        goto advance;
+        M2C_FIELD(self, u8 *, 0x189) = state;
+        M2C_FIELD(self, u8 *, 0x138) = M2C_FIELD(self, u8 *, 0x138) + 1;
+        break;
     case 2:
         break;
     }
