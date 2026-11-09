@@ -5226,6 +5226,21 @@ s32 fn_8021F1D4(s32 arg0, s32 arg1) {
     return arg0;
 }
 
+void fn_8021F514(void) {
+    extern void *lbl_803F6E70[4];
+    void *fn_802D0AB8(void);
+    void fn_802D1A00(void *, void *);
+    s32 i;
+
+    for (i = 0; i < 4; i++) {
+        if (lbl_803F6E70[i] != NULL) {
+            fn_802D1A00(fn_802D0AB8(), lbl_803F6E70[i]);
+            lbl_803F6E70[i] = NULL;
+        }
+        lbl_803F6E70[i] = INV_Alloc(0x400, 4);
+    }
+}
+
 void fn_8021F5D0(void) {
     extern void *lbl_803F6E70[4];
     void *fn_802D0AB8(void);
