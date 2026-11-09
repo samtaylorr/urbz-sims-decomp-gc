@@ -3794,8 +3794,9 @@ void fn_80200FBC(void *arg0) {
 
 void fn_802013D0(s32 *self) {
     extern char lbl_803E5440[];
+    char *name = lbl_803E5440;
     if (self[0] != 0) {
-        fn_801D8A44((void **)self[1], (s32)lbl_803E5440, (s32)((u8 *)self + 0x28));
+        fn_801D8A44((void **)self[1], (s32)name, (s32)((u8 *)self + 0x28));
     }
 }
 
