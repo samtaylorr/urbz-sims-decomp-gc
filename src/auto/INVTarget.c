@@ -3590,6 +3590,17 @@ void fn_801FF6E0(void *arg0) {
     fn_801B8734(v);
 }
 
+void fn_801FFF28(void *arg0, u8 *arg1, s32 arg2, void *arg3) {
+    typedef struct { char c[11]; } Str11;
+    extern Str11 lbl_803E56E0;
+    s32 fn_80248808(void *);
+    void *fn_802485B0(void *, void *);
+    *(Str11 *)arg1 = lbl_803E56E0;
+    fn_80248808(arg1);
+    fn_80248808(arg3);
+    fn_802485B0(arg1, arg3);
+}
+
 void fn_801FFF98(void *arg0, char *arg1) {
     s32 fn_80245BB4(char *, char *, ...);
     extern char lbl_803E56EC[];
