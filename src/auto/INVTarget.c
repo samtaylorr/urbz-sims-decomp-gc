@@ -22,6 +22,11 @@ static inline void INV_setStrT(void *dst, void *tbl, void *key) {
     fn_800F1B80(dst, h.p != NULL ? (void *)*h.p : NULL);
 }
 
+static inline void INV_initWStr(void *p) {
+    void fn_800F6FB4(void *, void *, s32);
+    fn_800F6FB4(p, (u8 *)p + 8, 0x100);
+}
+
 static inline void *INV_getStr(void *key) {
     INVHandle fn_8004C168();
     extern u8 lbl_8041F94C[];
@@ -3165,20 +3170,20 @@ void fn_801F5304(void *arg0, s32 arg1) {
     extern void fn_8031EA2C(void *);
     extern void fn_802D20E8(void *);
     extern char lbl_80417628[];
-    s32 flags = arg1;
-    void *self = arg0;
-    M2C_FIELD(self, char **, 0x7C) = lbl_80417628;
-    if (M2C_FIELD(self, s32 *, 0x3C) != 0) {
-        fn_8031EA2C(M2C_FIELD(self, void **, 0x3C));
-        M2C_FIELD(self, s32 *, 0x3C) = 0;
+    void *p;
+    M2C_FIELD(arg0, char **, 0x7C) = lbl_80417628;
+    p = M2C_FIELD(arg0, void **, 0x3C);
+    if (p != 0) {
+        fn_8031EA2C(p);
+        M2C_FIELD(arg0, s32 *, 0x3C) = 0;
     }
-    fn_800F1A60((char *)self + 0x38, 2);
-    fn_800F1A60((char *)self + 0x34, 2);
-    fn_800F1A60((char *)self + 0x30, 2);
-    fn_800F1A60((char *)self + 0x2C, 2);
-    fn_800F1A60((char *)self + 0x28, 2);
-    if (flags & 1) {
-        fn_802D20E8(self);
+    fn_800F1A60((char *)arg0 + 0x38, 2);
+    fn_800F1A60((char *)arg0 + 0x34, 2);
+    fn_800F1A60((char *)arg0 + 0x30, 2);
+    fn_800F1A60((char *)arg0 + 0x2C, 2);
+    fn_800F1A60((char *)arg0 + 0x28, 2);
+    if (arg1 & 1) {
+        fn_802D20E8(arg0);
     }
 }
 
