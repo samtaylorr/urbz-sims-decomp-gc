@@ -3085,7 +3085,7 @@ void fn_801F4948(void *arg0) {
 void fn_801F4EA4(void *self, void *arg1, s32 arg2, s32 arg3) {
     extern char lbl_803E3CF8[];
     void fn_801F4F3C(void *);
-    void fn_801D7194(s32, char *, void *, s32, s32);
+    s32 fn_801D7194(s32, char *, void *, s32, s32);
     if (M2C_FIELD(self, s32 *, 0xB4) != 0) {
         fn_801F4F3C(self);
     }
@@ -5284,12 +5284,11 @@ void *fn_8020F76C(void *arg0, s32 arg1) {
 
 void fn_8020F908(void *self) {
     extern char *lbl_80496650;
-    char *mgr = lbl_80496650;
     char *obj;
     char *vt;
 
-    vt = *(char **)mgr;
-    obj = (*(char *(**)(void *, s32))(vt + 0x13C))(mgr + *(s16 *)(vt + 0x138), M2C_FIELD(self, s32 *, 0x10C));
+    vt = *(char **)lbl_80496650;
+    obj = (*(char *(**)(void *, s32))(vt + 0x13C))(lbl_80496650 + *(s16 *)(vt + 0x138), M2C_FIELD(self, s32 *, 0x10C));
     vt = *(char **)obj;
     M2C_FIELD(self, s32 *, 0xE04C) = (*(s32 (**)(void *))(vt + 0x9C))(obj + *(s16 *)(vt + 0x98));
     vt = *(char **)obj;
