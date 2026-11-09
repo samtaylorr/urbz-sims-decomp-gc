@@ -3013,9 +3013,7 @@ void fn_801F4F3C(void *self) {
     extern char lbl_803E3CF8[];
     if (M2C_FIELD(self, s32 *, 0xB4) != 0) {
         INVTarget_Send(self, (u32)lbl_803E3CF8, 0x9F93FF74);
-        M2C_FIELD(self, s16 *, 0xBA) = 0;
-        M2C_FIELD(self, s32 *, 0xB4) = 0;
-        M2C_FIELD(self, s16 *, 0xB8) = 0;
+        M2C_FIELD(self, s16 *, 0xBA) = M2C_FIELD(self, s32 *, 0xB4) = M2C_FIELD(self, s16 *, 0xB8) = 0;
     }
 }
 
@@ -3805,6 +3803,24 @@ void fn_801FF6E0(void *arg0) {
         v = M2C_FIELD(lbl_8041FA30[0], s32 *, 0x14);
     } while (0);
     fn_801B8734(v);
+}
+
+void fn_801FF894(void *self) {
+    void *fn_803338D0(void *, s32);
+    s32 fn_803338F0(void *, s32);
+    s32 fn_803114D0(void *, s32, char *, s32);
+    void fn_803118A0(void *, s32, s32);
+    extern void *lbl_80494FCC;
+    extern char lbl_803E56C4[];
+    void *mgr;
+    void *res;
+
+    mgr = lbl_80494FCC;
+    res = fn_803338D0(mgr, fn_803338F0(mgr, M2C_FIELD(self, s32 *, 0x84)));
+    M2C_FIELD(self, s32 *, 0xD0) = fn_803114D0(res, 0, lbl_803E56C4, 0x64);
+    fn_803118A0(res, M2C_FIELD(self, s32 *, 0xD0), 0xF0000);
+    fn_803118A0(res, M2C_FIELD(self, s32 *, 0xD0), 0x80);
+    fn_803118A0(res, M2C_FIELD(self, s32 *, 0xD0), 0x40);
 }
 
 void fn_801FFF28(void *arg0, u8 *arg1, s32 arg2, void *arg3) {
