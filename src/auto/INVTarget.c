@@ -287,6 +287,21 @@ void fn_801D6DC8(void *arg0, s32 arg1) {
     }
 }
 
+s32 fn_801D7110(s32 self, u32 a, s32 b, s32 c, s32 d) {
+    void fn_801D6E68(s32, u32, s32, s32, s32, s32);
+    M2C_UNK fn_801D6FD0(void **, void *);
+    void *r;
+    if (M2C_FIELD(self, s32 *, 8) != 0) {
+        r = fn_801D7224((void **)self, a);
+        if (r != NULL) {
+            fn_801D6FD0((void **)self, r);
+        }
+        fn_801D6E68(self, a, b, 0, c, d);
+        return 1;
+    }
+    return 0;
+}
+
 s32 fn_801D7194(s32 self, char *a, void *b, s32 c, s32 d) {
     void fn_801D6E68(s32, char *, void *, void *, s32, s32);
     M2C_UNK fn_801D6FD0(void **, void *);
