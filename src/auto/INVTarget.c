@@ -4042,6 +4042,7 @@ void fn_80204C00(void *arg0) {
 void fn_80204F2C(void *self) {
     typedef struct { s32 a; s32 b; } Ent;
     typedef struct { Ent *begin; Ent *end; } EntVec;
+    void fn_802050EC(void *);
     EntVec *v = (EntVec *)((u8 *)self + 0x178);
     if ((u32)((u8 *)v->end - (u8 *)v->begin) >> 3) {
         u8 sel = M2C_FIELD(self, u8 *, 0x8C0);
