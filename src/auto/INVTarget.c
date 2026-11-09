@@ -3287,6 +3287,26 @@ void fn_801FAB58(void *self) {
     fn_8000AA68(lbl_804956BC, lbl_803E4AA4, 0, 0, 0);
 }
 
+void fn_801FAB9C(void *self, s32 arg1, s32 arg2) {
+    s32 fn_80245BB4(char *, const char *, ...);
+    void fn_8000AA68(s32, void *, s32, s32, s32, ...);
+    s32 fn_800120DC(void *);
+    void fn_80012288(void *);
+    extern char lbl_803E4788[];
+    extern char lbl_803E4AB4[];
+    extern s32 lbl_804956BC;
+    extern struct { u8 pad[0x160]; void *arr[1]; } lbl_8041F94C;
+    char buf1[16];
+    char buf2[16];
+    *((u8 *)self + 0x100) = 4;
+    fn_80245BB4(buf1, lbl_803E4788, arg1);
+    fn_80245BB4(buf2, lbl_803E4788, arg2);
+    if (lbl_8041F94C.arr[arg2] != 0 && fn_800120DC(lbl_8041F94C.arr[arg2]) != 0) {
+        fn_80012288(lbl_8041F94C.arr[arg2]);
+    }
+    fn_8000AA68(lbl_804956BC, lbl_803E4AB4, 0, 0, 2, buf1, buf2);
+}
+
 void fn_801FAC58(void *arg0, s8 arg1) {
     if (arg1 != 0) {
         M2C_FIELD(arg0, s8 *, 0x100) = 1;
