@@ -147,19 +147,19 @@ void fn_80340064(void *arg0, void *obj) {
 }
 
 void fn_803403B4(u8 *self, u8 *arg1) {
+    typedef struct { f32 x, y; } V2;
     s32 i;
 
     for (i = 0; i < *(s32 *)(self + 0x2A4); i++) {
-        f32 a[2];
-        f32 b[2];
-        f32 *src = (f32 *)(self + 0xE4 + i * 0xC);
+        V2 a;
+        V2 b;
         u8 *vt;
-        b[0] = *(f32 *)(self + 0x1A4 + i * 0xC);
-        b[1] = *(f32 *)(self + 0x1A8 + i * 0xC);
-        a[0] = src[0];
-        a[1] = src[1];
+        a.x = *(f32 *)(self + 0xE4 + i * 0xC);
+        a.y = *(f32 *)(self + 0xE8 + i * 0xC);
+        b.x = *(f32 *)(self + 0x1A4 + i * 0xC);
+        b.y = *(f32 *)(self + 0x1A8 + i * 0xC);
         vt = *(u8 **)(arg1 + 0x68);
-        (*(void (**)(void *, f32 *, f32 *, f32))(vt + 0x33C))(arg1 + *(s16 *)(vt + 0x338), a, b, *(f32 *)(self + 0x1AC + i * 0xC));
+        (*(void (**)(void *, V2, V2 *, f32))(vt + 0x33C))(arg1 + *(s16 *)(vt + 0x338), a, &b, *(f32 *)(self + 0x1AC + i * 0xC));
     }
     *(s32 *)(self + 0x2A4) = 0;
 }

@@ -1583,10 +1583,9 @@ s32 fn_80113E34(char *self) {
     void fn_802D20E8(void *);
     s32 fn_800F68BC(void *);
     Str a;
-    Str *p = &a;
     void *s = *(void **)(self + 0x150);
+    Str *p = ({ Str *t = &a; fn_800F687C(t, t->buf, 0x104); t; });
     s32 ret;
-    fn_800F687C(&a, a.buf, 0x104);
     fn_800F6A78(p, s, -1);
     fn_802D20E8(*(void **)(self + 0x150));
     *(void **)(self + 0x150) = 0;
@@ -1677,16 +1676,17 @@ s32 fn_80114BD0(char *self, IntObj *arg1) {
 void fn_80114C90(char *self, s32 arg1, s32 arg2) {
     extern void fn_800F687C(void *, void *, s32);
     char buf[0x48];
+    char *b = buf;
     s32 r;
     char *vt;
-    fn_800F687C(buf, buf + 8, 0x40);
+    fn_800F687C(b, (void *)((s32)b + 8), 0x40);
     vt = *(char **)(self + 0x10);
-    (*(void (**)(void *, s32, void *))(vt + 0xA4))(self + *(s16 *)(vt + 0xA0), arg1, buf);
+    (*(void (**)(void *, s32, void *))(vt + 0xA4))(self + *(s16 *)(vt + 0xA0), arg1, b);
     vt = *(char **)(self + 0x10);
     r = (*(s32 (**)(void *, s32))(vt + 0xC4))(self + *(s16 *)(vt + 0xC0), arg1);
     if (*(s32 *)(self + 8) == 0) {
         vt = *(char **)(self + 0x10);
-        (*(void (**)(void *, s32, s32, void *, s32))(vt + 0x11C))(self + *(s16 *)(vt + 0x118), arg1, arg2, buf, r);
+        (*(void (**)(void *, s32, s32, void *, s32))(vt + 0x11C))(self + *(s16 *)(vt + 0x118), arg1, arg2, b, r);
     }
 }
 

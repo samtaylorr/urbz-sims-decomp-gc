@@ -328,15 +328,29 @@ void fn_80100268(void *arg0, s32 arg1, s32 arg2) {
 }
 
 void fn_80100494(void *arg0, s32 arg1, s32 arg2) {
-    void fn_80100100(It_80100494 *, void *, s32, s32);
+    void fn_80100100(s32 *, void *, s32, s32);
+    void *fn_8039F9B0(s32, void *, void *, void *);
+    void fn_803997AC(void *, s32);
     char *tree = (char *)arg0 + 0x3C;
-    It_80100494 it[2];
-    It_80100494 end;
+    s32 it[3];
+    s32 pos[2];
+    s32 node[2];
+    s32 found;
+    char *hdr;
+    void *p;
 
     fn_80100100(it, arg0, arg1, arg2);
-    end = Tree_end(tree);
-    if (TreeIt_ne(&it[0], &end)) {
-        Map_erase(tree, it[0]);
+    it[2] = M2C_FIELD(tree, s32 *, 4);
+    found = it[0] != it[2];
+    if (found) {
+        pos[0] = it[0];
+        node[0] = it[0];
+        hdr = M2C_FIELD(tree, char **, 4);
+        p = fn_8039F9B0(node[0], hdr + 4, hdr + 8, hdr + 0xC);
+        if (p != NULL) {
+            fn_803997AC(p, 0x18);
+        }
+        M2C_FIELD(tree, s32 *, 8) = M2C_FIELD(tree, s32 *, 8) - 1;
     }
 }
 

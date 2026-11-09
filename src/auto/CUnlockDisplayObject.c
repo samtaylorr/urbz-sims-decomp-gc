@@ -320,17 +320,13 @@ void fn_800BB4C4(void *arg0) {
     extern void *fn_802D1FC8(s32);
     extern void *fn_802E55C0(void *);
     extern void fn_802E58E4(void *, s32, s32, s32);
-    extern void fn_802F42A8(s32, s32, s32, s32, s32);
-    s32 a;
-    s32 b;
+    void fn_802F42A8();
 
     if (M2C_FIELD(arg0, s32 *, 0x80) == 0) {
         M2C_FIELD(arg0, void **, 0x10) = fn_802E55C0(fn_802D1FC8(0x78));
         fn_802E58E4(M2C_FIELD(arg0, void **, 0x10), M2C_FIELD(arg0, s32 *, 0x30), 1, 0);
         M2C_FIELD(M2C_FIELD(arg0, void **, 0x10), f32 *, 0x54) = M2C_FIELD(M2C_FIELD(arg0, void **, 0x14), f32 *, 0x6C);
-        b = M2C_FIELD(arg0, s32 *, 0x2C);
-        a = M2C_FIELD(arg0, s32 *, 0x1C);
-        fn_802F42A8(a, b, 0, 0, 0);
+        fn_802F42A8(M2C_FIELD(arg0, s32 *, 0x1C), M2C_FIELD(arg0, s32 *, 0x2C), 0, 0, 0);
     }
 }
 

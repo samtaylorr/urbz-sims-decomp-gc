@@ -77,13 +77,8 @@ s32 fn_803321E4(void) {
 }
 
 void fn_803321EC(void *self) {
-    FamilyQuad *q;
     M2C_FIELD(self, s32 *, 0x10) = 0;
-    q = self;
-    q->a = 0;
-    q->b = 0;
-    q->c = 0;
-    q->d = 0;
+    FamilyQuad_Clear(self);
 }
 
 void fn_8033220C(s32 *self, s32 a, s32 b) {

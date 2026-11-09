@@ -263,17 +263,20 @@ void fn_8009CA88(s32 arg0, s32 arg1) {
     extern f32 lbl_803CD120[];
     extern f32 lbl_803CD124[];
     extern f32 lbl_803CD128[];
-    extern f32 lbl_80495898[];
-    extern f32 lbl_804958A0[];
-    extern f32 lbl_804958A8[];
+    extern f32 lbl_80495898[2];
+    extern f32 lbl_804958A0[2];
+    extern f32 lbl_804958A8[2];
 
     if (arg1 == 0xFFFF && arg0 != 0) {
-        lbl_804958A0[1] = lbl_803CD124[0];
-        lbl_804958A8[1] = lbl_803CD120[0];
-        lbl_80495898[0] = lbl_803CD120[0];
-        lbl_804958A8[0] = lbl_803CD128[0];
-        lbl_80495898[1] = lbl_803CD120[0];
-        lbl_804958A0[0] = lbl_803CD120[0];
+        f32 *c = lbl_80495898;
+        f32 *a = lbl_804958A0;
+        f32 *b = lbl_804958A8;
+        c[1] = lbl_803CD120[0];
+        c[0] = lbl_803CD120[0];
+        a[0] = lbl_803CD120[0];
+        a[1] = lbl_803CD124[0];
+        b[0] = lbl_803CD128[0];
+        b[1] = lbl_803CD120[0];
     }
 }
 

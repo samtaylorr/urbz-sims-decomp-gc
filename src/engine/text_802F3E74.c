@@ -175,6 +175,26 @@ void fn_802F4A8C(char *self, void *arg1) {
     fn_802E34F0(arg1, self + 0x44);
 }
 
+void fn_802F53B8(void *self, s32 arg1) {
+    extern void fn_8032F5A0(void *, u8);
+    void **iter;
+    char *grp;
+    s32 i;
+    s32 j;
+
+    if (M2C_FIELD(self, void **, 0x134) == NULL) {
+        return;
+    }
+    iter = M2C_FIELD(self, void ***, 0x12C);
+    for (i = 0; i < M2C_FIELD(M2C_FIELD(self, void **, 0x134), s32 *, 0x24); i++) {
+        grp = M2C_FIELD(M2C_FIELD(self, void **, 0x134), char **, 0x20) + i * 0x18;
+        for (j = 0; j < M2C_FIELD(grp, s32 *, 4); j++) {
+            fn_8032F5A0(*iter, (u8)arg1);
+            iter++;
+        }
+    }
+}
+
 void *fn_802F5518(void *self, void *arg1) {
     extern s32 fn_80330F38(void *, void *);
     void **iter;
@@ -204,8 +224,6 @@ void *fn_802F55D4(void *self) {
     char *grp;
     void *obj;
     void *t;
-    s32 n;
-    s32 m;
     s32 i;
     s32 j;
 
@@ -213,18 +231,16 @@ void *fn_802F55D4(void *self) {
     if (p == NULL) {
         return NULL;
     }
-    n = M2C_FIELD(p, s32 *, 0x24);
     iter = M2C_FIELD(self, void ***, 0x12C);
-    for (i = 0; i < n; i++) {
+    for (i = 0; i < M2C_FIELD(p, s32 *, 0x24); i++) {
         grp = M2C_FIELD(p, char **, 0x20) + i * 0x18;
-        m = M2C_FIELD(grp, s32 *, 4);
-        for (j = 0; j < m; j++) {
+        for (j = 0; j < M2C_FIELD(grp, s32 *, 4); j++) {
             obj = *iter;
             t = obj;
             if (M2C_FIELD(obj, u32 *, 0x64) & 2) {
                 t = M2C_FIELD(obj, void **, 0x24);
             }
-            if ((M2C_FIELD(t, u32 *, 0x64) >> 7) & 1) {
+            if ((M2C_FIELD(t, u32 *, 0x64) << 24) >> 31) {
                 return obj;
             }
             iter++;

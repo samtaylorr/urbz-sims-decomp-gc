@@ -725,8 +725,17 @@ extern const f32 lbl_803F0CF4[];
 
 void fn_802EF220(void *arg0) {
     EGBox box;
+    register f32 lo asm("fr13") = lbl_803F0CF0[0];
+    register Vec3f *p asm("r9");
+    register f32 hi asm("fr0");
     EGBox_Init(&box, lbl_803F0CEC[0]);
-    EGBox_SetRange(&box, lbl_803F0CF0[0], lbl_803F0CF4[0]);
+    {
+        Vec3f t;
+        p = &t;
+        hi = lbl_803F0CF4[0];
+        box.min = *Vec3f_Splat(p, lo);
+        box.max = *Vec3f_Splat(p, hi);
+    }
     fn_802F09B8(arg0, &box);
 }
 

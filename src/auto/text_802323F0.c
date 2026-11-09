@@ -262,15 +262,16 @@ void fn_80232E38(s32 arg0, s32 arg1) {
 }
 
 void fn_80232E74(u8 *arg0, Struct1A8_7 *arg1) {
+    typedef union { s32 i; f32 f; } U1B8;
     void fn_80232C74(u8 *, u8 *);
     s32 fn_802337C8(void **, s32, s32);
     extern s32 lbl_8041FC0C[];
-    struct { s32 v; s32 pad; } saved;
+    U1B8 saved;
 
     if (arg1 != NULL) {
-        saved.v = *(s32 *)(arg0 + 0x1B8);
+        saved = *(U1B8 *)(arg0 + 0x1B8);
         *(Struct1A8_7 *)(arg0 + 0x1A8) = *arg1;
-        *(s32 *)(arg0 + 0x1B8) = saved.v;
+        *(U1B8 *)(arg0 + 0x1B8) = saved;
         if (fn_802337C8((void **)(arg0 + 0x60), *(s32 *)(arg0 + 0x1BC), *(u8 *)(arg0 + 0x1C0)) != 0) {
             if (lbl_8041FC0C[0] != 0) {
                 fn_80232C74(arg0, *(u8 **)(arg0 + 0x60));
@@ -332,8 +333,13 @@ void fn_80233138(u8 *arg0) {
         void *vtbl;
         s32 unkC[3];
     } tmp, *p;
+    struct {
+        s32 unk0;
+        s32 unk4;
+        s32 arg;
+        void (*fn)(void *);
+    } *cb;
     s32 *dvt;
-    s32 *cb;
     s32 *h = (s32 *)(arg0 + 0x60);
     s32 ok;
 
@@ -345,10 +351,10 @@ void fn_80233138(u8 *arg0) {
         p = &tmp;
         p->vtbl = lbl_80417F18;
         tmp.unk0 = 0;
-        cb = (s32 *)(arg0 + 0x1A8);
+        cb = (void *)(arg0 + 0x1A8);
         dvt = lbl_80417CF0;
-        p->unk4 = ((volatile s32 *)cb)[2];
-        ((void (*)(void *))((volatile s32 *)cb)[3])(p);
+        p->unk4 = cb->arg;
+        cb->fn(p);
         if (lbl_8041FC0C[0] != 0) {
             fn_80232C74(arg0, 0);
         }

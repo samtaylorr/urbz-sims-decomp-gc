@@ -405,10 +405,14 @@ void fn_8003ECBC(void *arg0, s32 *arg1) {
 }
 
 void fn_8003ECEC(u32 arg0, u8 *arg1) {
-    arg1[0] = arg0;
-    arg1[1] = (arg0 >> 8) & 0xFF;
-    arg1[2] = (arg0 >> 16) & 0xFF;
-    arg1[3] = arg0 >> 24;
+    u8 a = arg0 >> 24;
+    u8 g = arg0 >> 8;
+    u8 r = arg0 >> 16;
+    u8 b = arg0;
+    arg1[3] = a;
+    arg1[1] = g;
+    arg1[2] = r;
+    arg1[0] = b;
 }
 
 u32 fn_8003ED0C(u32 arg0, u32 arg1, u8 *arg2, u32 arg3, u32 arg4) {
@@ -467,7 +471,6 @@ void fn_8003F410(void *arg0) {
     extern void fn_8003F4C0(void *, s32);
     char buf[0x18];
     char *info;
-    Entry *tbl;
 
     {
         char *obj = M2C_FIELD(arg0, char **, 0x3B0);
@@ -476,9 +479,12 @@ void fn_8003F410(void *arg0) {
     }
     fn_801CAFCC(buf);
     fn_801CB05C(buf, M2C_FIELD(info, s32 *, 0x80));
-    tbl = *fn_801CB188(buf);
-    if (tbl[*(s8 *)(info + 0x89)].unk8 != 0) {
-        fn_8003F4C0(arg0, fn_801CB6F8(buf, 0xC, *(s8 *)(info + 0x8A)));
+    {
+        Entry **r = fn_801CB188(buf);
+        s32 idx = *(s8 *)(info + 0x89);
+        if ((*r + idx)->unk8 != 0) {
+            fn_8003F4C0(arg0, fn_801CB6F8(buf, 0xC, *(s8 *)(info + 0x8A)));
+        }
     }
     fn_801CB130(buf, 2);
 }

@@ -217,14 +217,24 @@ void fn_800416A8(void *arg0, s32 arg1) {
 void fn_800416F4(void **arg0, void *arg1) {
     void *node;
     void *obj;
+    s32 id;
 
-    for (node = *arg0; node != NULL; node = M2C_FIELD(node, void **, 8)) {
-        obj = M2C_FIELD(node, void **, 0);
-        if (M2C_FIELD(obj, s32 *, 8) != M2C_FIELD(arg1, s32 *, 0x64)) {
-            continue;
-        }
+    node = *arg0;
+    if (node == NULL) {
+        return;
+    }
+    obj = M2C_FIELD(node, void **, 0);
+    id = M2C_FIELD(arg1, s32 *, 0x64);
+    if (M2C_FIELD(obj, s32 *, 8) == id) {
         M2C_FIELD(obj, s32 *, 4) = 1;
         return;
+    }
+    while ((node = M2C_FIELD(node, void **, 8)) != NULL) {
+        obj = M2C_FIELD(node, void **, 0);
+        if (M2C_FIELD(obj, s32 *, 8) == id) {
+            M2C_FIELD(obj, s32 *, 4) = 1;
+            return;
+        }
     }
 }
 

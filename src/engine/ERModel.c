@@ -96,7 +96,6 @@ s32 fn_80329DDC(u8 *self, s32 data) {
     extern void fn_80338184(void *, void *);
     extern u8 lbl_8045B82C[];
     s32 start = data;
-    s32 size;
 
     fn_802482F8(self + 0x164, (void *)data, 4);
     data += 4;
@@ -106,9 +105,8 @@ s32 fn_80329DDC(u8 *self, s32 data) {
     }
     if (*(s32 *)(self + 0x164) != 0) {
         *(void **)(self + 0x168) = fn_80338000(lbl_8045B82C, *(s32 *)(self + 0x164) << 6, 0x10);
-        size = *(s32 *)(self + 0x164) << 6;
-        ((void (*)(void *, void *, u32))fn_802482F8)(*(void **)(self + 0x168), (void *)data, size);
-        data += size;
+        fn_802482F8(*(void **)(self + 0x168), (void *)data, *(s32 *)(self + 0x164) << 6);
+        data += *(s32 *)(self + 0x164) << 6;
     }
     return data - start;
 }

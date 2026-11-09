@@ -66,8 +66,8 @@ u32 fn_80373B44(void) {
 }
 
 void fn_80373B58(void *arg0, u32 arg1, u32 arg2) {
-    M2C_UNK fn_80251C1C(void *, u32);
-    M2C_UNK fn_80380760(void *, s32, s32, s32, void *, u32, u32, void (*)(void));
+    M2C_UNK fn_80251C1C(u32, u32);
+    M2C_UNK fn_80380760(void *, s32, s32, s32, u32, u32, u32, void (*)(void));
     extern u8 lbl_80475680[];
     extern volatile s32 lbl_8049525C;
 
@@ -76,8 +76,8 @@ void fn_80373B58(void *arg0, u32 arg1, u32 arg2) {
         }
     }
     lbl_8049525C = 1;
-    fn_80251C1C(arg0, arg2);
-    fn_80380760(lbl_80475680, 0, 0, 1, arg0, arg1, arg2, fn_80373BEC);
+    fn_80251C1C((u32)arg0, arg2);
+    fn_80380760(lbl_80475680, 0, 0, 1, (u32)arg0, arg1, arg2, fn_80373BEC);
     while (lbl_8049525C != 0) {
     }
 }

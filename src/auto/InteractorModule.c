@@ -343,10 +343,10 @@ f32 fn_8023C2D0(void) {
 f32 fn_8023C2D8(void *arg0) {
     extern f32 lbl_80496764;
     extern f32 lbl_80496768;
-    if (M2C_FIELD(arg0, u32 *, 0xC0) & 0x100) {
-        return lbl_80496768;
+    if (((M2C_FIELD(arg0, u32 *, 0xC0) >> 8) & 1) == 0) {
+        return lbl_80496764;
     }
-    return lbl_80496764;
+    return lbl_80496768;
 }
 
 void fn_8023C2F0(void) {
@@ -356,11 +356,18 @@ void fn_8023C2F0(void) {
 void *fn_8023C2F4(void *arg0) {
     extern void fn_8022315C(void *);
     extern s32 lbl_80418148[];
+    extern s32 lbl_804176F8[];
+    s32 *p;
+    s32 pad[2];
 
     fn_8022315C(arg0);
     M2C_FIELD(arg0, s32 **, 0x58) = lbl_80418148;
     IMSlot_Init((IMSlot *) ((u8 *) arg0 + 0x98));
-    IMTimer_Init((s32 *) ((u8 *) arg0 + 0xA8));
+    p = (s32 *) ((u8 *) arg0 + 0xA8);
+    p[4] = (s32) lbl_804176F8;
+    p[0] = 3;
+    p[5] = 0;
+    p[8] = 0;
     return arg0;
 }
 

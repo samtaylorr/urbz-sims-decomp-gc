@@ -50,15 +50,15 @@ static inline void *EyeToyAlloc(s32 count) {
     return p;
 }
 
-s32 fn_80338FD0(s32 arg0, u32 arg1) {
+s32 fn_80338FD0(s32 arg0, s32 arg1) {
     extern s32 lbl_80494F7C;
-    extern u32 lbl_80494F6C;
+    extern s32 lbl_80494F6C;
     extern s32 lbl_80494F70;
 
     if (lbl_80494F7C == 0) {
         lbl_80494F6C = arg1;
         lbl_80494F70 = arg0;
-        if ((lbl_80494F7C = EyeToyOpenDevice()) == 0) {
+        if ((lbl_80494F7C = fn_8033909C()) == 0) {
             fn_80339018();
         }
     }

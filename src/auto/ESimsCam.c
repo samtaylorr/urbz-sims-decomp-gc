@@ -42,14 +42,17 @@ char *fn_8000CA9C(char *self, s32 arg1, s32 arg2, char *arg3) {
     f32 x, y, z;
 
     *(s32 *)(self + 0x4) = *(s32 *)(arg3 + 0x0);
-    z = *(f32 *)(arg3 + 0x10);
-    y = *(f32 *)(arg3 + 0xC);
     x = *(f32 *)(arg3 + 0x8);
+    y = *(f32 *)(arg3 + 0xC);
+    z = *(f32 *)(arg3 + 0x10);
     dst->x = x;
     dst->z = z;
     dst->y = y;
     *(s32 *)(self + 0x0) = arg2;
-    ESimsCam_InitState(self, arg1);
+    *(s32 *)(self + 0x24) = 0;
+    *(s32 *)(self + 0x1C) = arg1;
+    *(s32 *)(self + 0x20) = 0;
+    *(s32 *)(self + 0x28) = 0;
     fn_803374C8(lbl_8045BBA0);
     fn_8000CB1C(self);
     return self;
@@ -219,7 +222,6 @@ void fn_8000DCE0(char *self) {
     extern s32 lbl_8041FBC4[];
     extern s32 lbl_80493F20;
     void fn_8000F5AC(char *, f32);
-    s32 v;
 
     *(s32 *)(self + 0x588) = 0;
     *(s32 *)(self + 0x578) = 0;
@@ -228,14 +230,12 @@ void fn_8000DCE0(char *self) {
     *(s32 *)(self + 0x580) = 0;
     *(s32 *)(self + 0x584) = 0;
     fn_8000F5AC(self, lbl_803C1F04[0]);
-    *(s32 *)(self + 0x3DC) = 0;
     if (lbl_8041FBC4[0] != 0) {
         lbl_80493F20 = 1;
     }
-    v = lbl_80493F20;
+    *(s32 *)(self + 0x3D4) = *(s32 *)(self + 0x3D8) = lbl_80493F20;
     *(s32 *)(self + 0x49C) = -1;
-    *(s32 *)(self + 0x3D8) = v;
-    *(s32 *)(self + 0x3D4) = v;
+    *(s32 *)(self + 0x3DC) = 0;
 }
 
 void fn_8000DD64(void *arg0) {
@@ -382,18 +382,17 @@ f32 fn_80010C3C(Vec3f *arg0) {
 
     len = fn_8025FC40(arg0);
     if (len < lbl_803C1FD4[0]) {
-        a = lbl_803C1FD8[0];
-    } else {
-        pv = &v;
-        v.x = arg0->x;
-        pv->y = arg0->y;
-        pv->z = arg0->z;
-        zero = lbl_803C1FD8[0];
-        v.z = zero;
-        a = fn_80242ACC(fn_8025FC40(pv) / len);
-        if (arg0->z > zero) {
-            a = lbl_803C1FDC[0] - a;
-        }
+        return lbl_803C1FD8[0];
+    }
+    zero = lbl_803C1FD8[0];
+    pv = &v;
+    v.x = arg0->x;
+    pv->z = arg0->z;
+    pv->y = arg0->y;
+    v.z = zero;
+    a = fn_80242ACC(fn_8025FC40(pv) / len);
+    if (arg0->z > zero) {
+        a = lbl_803C1FDC[0] - a;
     }
     return a;
 }
@@ -696,12 +695,11 @@ void fn_80012534(void *arg0, void *arg1, void *arg2) {
 }
 
 s32 fn_800132EC(void *arg0) {
-    s32 ok = 0;
     if (M2C_FIELD(arg0, s32 *, 0x230) == 2 || ((M2C_FIELD(arg0, u32 *, 0x238) ^ 1) & 1)) {
         fn_80012288(arg0);
-        ok = 1;
+        return 1;
     }
-    return ok;
+    return 0;
 }
 
 s32 fn_80013450(void *arg0, f32 arg1, s32 arg2, s32 arg3) {

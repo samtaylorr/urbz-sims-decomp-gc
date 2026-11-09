@@ -705,15 +705,18 @@ void *fn_801918DC(void *self, u16 id, s32 arg2) {
 
 M2C_UNK fn_80191B04(void *self) {
     extern f32 lbl_803DAF9C[];
-    f32 f = lbl_803DAF9C[0];
-    char **v = (char **)((char *)self + 0x14);
-    char *begin = v[0];
+    char **v;
+    char *begin;
     char *p;
     s32 *s = self;
+    f32 f;
 
-    *(f32 *)&s[0x1F] = f;
+    f = lbl_803DAF9C[0];
     s[0x24] = 0;
     s[0x20] = 1;
+    v = (char **)((char *)self + 0x14);
+    begin = v[0];
+    *(f32 *)&s[0x1F] = f;
     s[0xD] = 0;
     s[0x12] = 0;
     s[0x14] = 0;

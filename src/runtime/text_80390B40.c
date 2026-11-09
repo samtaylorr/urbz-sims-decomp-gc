@@ -56,7 +56,6 @@ void fn_803918D0(void) {
 
 s32 fn_8039850C(Nibbles *n) {
     s32 v;
-    s32 c;
 
     if (!(n->pos & 0xF)) {
         n->a = (*n->ptr >> 4) & 7;
@@ -65,9 +64,7 @@ s32 fn_8039850C(Nibbles *n) {
         n->pos += 2;
     }
     if (n->pos & 1) {
-        c = *n->ptr;
-        n->ptr++;
-        v = (s32)(c << 28) >> 28;
+        v = (s32)((u32)*n->ptr++ << 28) >> 28;
     } else {
         v = (s32)((*n->ptr << 24) & 0xF0000000) >> 28;
     }

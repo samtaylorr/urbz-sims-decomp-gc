@@ -101,25 +101,18 @@ void fn_800ABFC4(void *self) {
 }
 
 void fn_800ABFD4(void *self) {
-    struct ABF28 {
-        char *items[2];
-        u8 unk8;
-        s32 unkC;
-        s16 unk10;
-    } *s = self;
     u8 i;
 
-    i = 0;
-    while (i <= 1) {
-        char *p = s->items[i];
-        if (p != NULL) {
-            char *vt = M2C_FIELD(p, char **, 0x440);
-            (*(void (**)(void *, s32))(vt + 0xC))(p + *(s16 *)(vt + 8), 3);
+    for (i = 0; i <= 1; i++) {
+        void **slot = &((void **)self)[i];
+        if (*slot != NULL) {
+            char *vt = M2C_FIELD(*slot, char **, 0x440);
+            (*(void (**)(void *, s32))(vt + 0xC))((char *)*slot + *(s16 *)(vt + 8), 3);
         }
-        s->items[i++] = NULL;
+        *slot = NULL;
     }
-    s->unk8 = 0;
-    s->unk10 = 0;
+    M2C_FIELD(self, u8 *, 8) = 0;
+    M2C_FIELD(self, s16 *, 0x10) = 0;
 }
 
 void fn_800AC130(void *self, s32 arg1) {

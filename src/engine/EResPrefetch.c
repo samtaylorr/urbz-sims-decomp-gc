@@ -91,19 +91,18 @@ M2C_UNK fn_8031F140(void *arg0, s32 *arg1) {
 }
 
 M2C_UNK fn_8031F1CC(void *self, s32 *arg1) {
-    extern struct { s32 unk0; s32 unk4; void *unk8; } lbl_8045BA2C;
+    extern u8 lbl_8045BA2C[];
     extern char lbl_803F2EBC[];
     extern f32 lbl_803F2EEC[];
-    void fn_80338AF4(char *, char *, s32, s32);
+    M2C_UNK fn_80338AF4();
     s32 fn_80337CBC(s32, s32);
     u32 fn_80337D30(s32, s32);
     M2C_UNK fn_802D20E8(void *);
     s32 r;
-    register u32 n asm("r3");
-    register u32 d asm("r0");
+    u32 n;
 
     if (M2C_FIELD(self, s32 *, 0x3FC) != 0) {
-        fn_80338AF4((char *)&lbl_8045BA2C, self, (s32)lbl_803F2EBC, 0xEE);
+        fn_80338AF4(lbl_8045BA2C, self, lbl_803F2EBC, 0xEE);
     }
     M2C_FIELD(self, s32 *, 0x3DC) = arg1[3];
     M2C_FIELD(self, s32 *, 0x3E0) = arg1[1];
@@ -111,12 +110,11 @@ M2C_UNK fn_8031F1CC(void *self, s32 *arg1) {
     M2C_FIELD(self, s32 *, 0x3EC) = r;
     M2C_FIELD(self, s32 *, 0x3E4) = r;
     n = fn_80337D30(M2C_FIELD(self, s32 *, 0x3DC), M2C_FIELD(self, s32 *, 0x3E0));
-    d = M2C_FIELD(self, u32 *, 0x3F8);
     M2C_FIELD(self, u32 *, 0x3E8) = n;
+    M2C_FIELD(self, u32 *, 0x3F0) = n / M2C_FIELD(self, u32 *, 0x3F8);
+    M2C_FIELD(self, u32 *, 0x3F4) = n % M2C_FIELD(self, u32 *, 0x3F8);
     M2C_FIELD(self, s32 *, 0x414) = 1;
     M2C_FIELD(self, f32 *, 0x410) = lbl_803F2EEC[0];
-    M2C_FIELD(self, u32 *, 0x3F0) = n / d;
-    M2C_FIELD(self, u32 *, 0x3F4) = n % d;
     fn_802D20E8(arg1);
 }
 

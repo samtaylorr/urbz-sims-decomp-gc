@@ -126,17 +126,19 @@ void fn_8036B4A0(void *arg0, s32 arg1, f32 *out) {
 }
 
 void *fn_8036B878(void *arg0, s32 arg1) {
+    void *sub = (u8 *)arg0 + 0x14;
+
     M2C_FIELD(arg0, void **, 0x5C) = lbl_8041D808;
     fn_80363734(arg0, arg1);
-    fn_80363734((u8 *)arg0 + 0x14, arg1);
+    fn_80363734(sub, arg1);
     ScalarList_Init((ScalarList *)((u8 *)arg0 + 0x28));
     ScalarList_Init((ScalarList *)((u8 *)arg0 + 0x34));
-    M2C_FIELD(arg0, s32 *, 0x44) = 0;
     M2C_FIELD(arg0, s32 *, 0x40) = 0;
     M2C_FIELD(arg0, s32 *, 0x48) = 0;
     M2C_FIELD(arg0, s32 *, 0x4C) = 0;
     M2C_FIELD(arg0, s32 *, 0x54) = 0;
     M2C_FIELD(arg0, s32 *, 0x50) = 0;
+    M2C_FIELD(arg0, s32 *, 0x44) = 0;
     return arg0;
 }
 

@@ -655,11 +655,10 @@ void fn_8016DAB4(void *arg0, void *arg1) {
     void fn_800F6A38(void *, void *);
     Str a;
     Str b;
-    Str *p = &a;
+    Str *q = &b;
     s32 v = M2C_FIELD(arg0, s32 *, 0x18);
-    Str *q;
+    Str *p = &a;
     fn_800F687C(p, p->buf, 0x104);
-    q = &b;
     fn_800F68F0(p, v, -1);
     fn_800F687C(&b, b.buf, 0x104);
     fn_800F59D8(p, q);
@@ -841,6 +840,40 @@ void fn_8016E6FC(void *self, char *obj) {
         obj = M2C_FIELD(vt, char *(**)(void *), 0x1D4)(obj + M2C_FIELD(vt, s16 *, 0x1D0));
     }
     M2C_FIELD(self, char **, 4) = obj;
+}
+
+void fn_8016EC50(void *arg0, s32 arg1) {
+    void fn_8011752C(void *, s32);
+    struct { u8 pad[0x44]; u32 b0 : 20; u32 b11 : 1; u32 b10 : 6; u32 b4 : 1; u32 b3 : 4; } *p = arg0;
+    s32 v;
+
+    p->b4 = 0;
+    if (arg1 == 1) {
+        p->b4 = 1;
+    }
+    p->b11 = 0;
+    if (arg1 == 2) {
+        p->b11 = 1;
+    }
+    v = 0;
+    switch (arg1) {
+    case 0:
+    case 1:
+        break;
+    case 3:
+        v = 1;
+        break;
+    case 4:
+        v = 2;
+        break;
+    case 5:
+        v = 3;
+        break;
+    case 2:
+        v = 4;
+        break;
+    }
+    fn_8011752C(arg0, v);
 }
 
 void fn_8016ECF0(void *self, void *arg1) {

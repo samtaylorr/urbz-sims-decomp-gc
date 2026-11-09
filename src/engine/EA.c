@@ -40,9 +40,9 @@ void fn_802D7E5C(M2C_UNK **arg0, s32 arg1) {
 void *fn_802D7EB0(void *arg0, s32 arg1) {
     M2C_UNK fn_80261278();
     void *fn_802C6434(void *, s32);
-    s32 fn_802C6508(void *, s32, s32, s32, s32, void (*)());
-    void fn_802D87A0();
-    void fn_802DFC94();
+    s32 fn_802C6508(void *, s32, s32, s32, s32, void *);
+    s32 fn_802D87A0();
+    s32 fn_802DFC94();
     void *temp_r3;
 
     fn_80261278();
@@ -50,10 +50,11 @@ void *fn_802D7EB0(void *arg0, s32 arg1) {
         arg1 = 3;
     }
     temp_r3 = fn_802C6434(arg0, arg1);
-    if (temp_r3 != 0) {
-        fn_802C6508(arg0, 0x80000000, 0x80000000, 0x80000000, 0, fn_802DFC94);
-        fn_802C6508(arg0, 0x80000000, 2, 0x80000000, 0, fn_802D87A0);
+    if (temp_r3 == 0) {
+        return 0;
     }
+    fn_802C6508(arg0, 0x80000000, 0x80000000, 0x80000000, 0, fn_802DFC94);
+    fn_802C6508(arg0, 0x80000000, 2, 0x80000000, 0, fn_802D87A0);
     return temp_r3;
 }
 
@@ -1397,12 +1398,10 @@ void fn_802DDD70(void *self) {
     u32 fn_802DE1B0(void *arg0);
     s32 n = fn_802DE1B0(self);
     s32 *p = *(s32 **)self;
-    s32 i = n - 1;
-    if (n != 0) {
-        do {
-            *p = ~*p;
-            p++;
-        } while (i-- != 0);
+    s32 i;
+    for (i = n - 1; n != 0; n = i, i--) {
+        *p = ~*p;
+        p++;
     }
 }
 

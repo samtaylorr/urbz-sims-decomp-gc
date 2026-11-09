@@ -368,12 +368,12 @@ void *fn_802C5B1C(void *self, void *stream) {
 }
 
 void *fn_802C5BBC(void *arg0, void *arg1) {
-    void *obj;
     void *vt;
+    void *obj;
     s16 val;
 
     vt = M2C_FIELD(arg1, void **, 0x0);
-    obj = (*(void *(**)(void *))((char *)vt + 0x14))((char *)arg1 + *(s16 *)((char *)vt + 0x10));
+    obj = M2C_FIELD(vt, void *(**)(void *), 0x14)((char *)arg1 + M2C_FIELD(vt, s16 *, 0x10));
     vt = M2C_FIELD(arg0, void **, 0x28);
     M2C_FIELD(vt, void (**)(void *, void *, s32), 0x1C)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x18), &val, 2);
     M2C_FIELD(obj, s16 *, 0x16) = val;

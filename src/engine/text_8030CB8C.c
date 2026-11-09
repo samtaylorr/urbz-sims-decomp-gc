@@ -84,24 +84,24 @@ void fn_8030F488(void **arg0) {
         return;
     }
     M2C_FIELD(*arg0, void **, 0x90) = M2C_FIELD(*arg0, void **, 0x88);
-    goto check;
-    do {
-        void *cur = sp8;
-        M2C_FIELD(*arg0, void **, 0x90) = *M2C_FIELD(*arg0, void ***, 0x90);
-        fn_8030F5B8(cur);
-        if (M2C_FIELD(sp8, void (**)(s32), 0xa4) != NULL) {
-            M2C_FIELD(sp8, void (**)(s32), 0xa4)(M2C_FIELD(sp8, s32 *, 0xa8));
-        }
-        fn_8030F938(arg0, sp8);
-        fn_8030F818(&sp8);
-    check:
+    for (;;) {
         n = M2C_FIELD(*arg0, void **, 0x90);
         if (n != NULL) {
             sp8 = M2C_FIELD(n, void **, 8);
         } else {
             sp8 = n;
         }
-    } while (sp8 != NULL);
+        if (sp8 == NULL) {
+            break;
+        }
+        M2C_FIELD(*arg0, void **, 0x90) = *M2C_FIELD(*arg0, void ***, 0x90);
+        fn_8030F5B8(sp8);
+        if (M2C_FIELD(sp8, void (**)(s32), 0xa4) != NULL) {
+            M2C_FIELD(sp8, void (**)(s32), 0xa4)(M2C_FIELD(sp8, s32 *, 0xa8));
+        }
+        fn_8030F938(arg0, sp8);
+        fn_8030F818(&sp8);
+    }
 }
 
 void fn_8030F538(void **arg0) {
@@ -137,7 +137,6 @@ void fn_8030F5B8(u32 *arg0) {
     extern s32 lbl_80494EEC;
     extern f32 lbl_803F2190[];
     void *n;
-    f32 f;
 
     M2C_FIELD(M2C_FIELD(arg0, void **, 4), void **, 0x90) = M2C_FIELD(M2C_FIELD(arg0, void **, 4), void **, 0x88);
     n = M2C_FIELD(M2C_FIELD(arg0, void **, 4), void **, 0x90);
@@ -147,10 +146,8 @@ void fn_8030F5B8(u32 *arg0) {
         fn_8036FB28(lbl_80494EEC, n);
         n = M2C_FIELD(M2C_FIELD(arg0, void **, 4), void **, 0x90);
     }
-    f = lbl_803F2190[0];
     arg0[0] |= 6;
-    M2C_FIELD(arg0, f32 *, 0x78) = f;
-    M2C_FIELD(arg0, f32 *, 0x84) = f;
+    M2C_FIELD(arg0, f32 *, 0x84) = M2C_FIELD(arg0, f32 *, 0x78) = lbl_803F2190[0];
 }
 
 void fn_8030F8EC(s32 *arg0, void *arg1) {

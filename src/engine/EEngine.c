@@ -65,9 +65,13 @@ void fn_802E0648(u8 *self) {
     extern u8 lbl_803F0554[];
     u8 *vt = *(u8 **)(self + 0x338);
     s32 r = (*(s32 (**)(void *))(vt + 0xC4))(self + *(s16 *)(vt + 0xC0));
-    fn_802D8CA4(self, 0x18, r, 0);
-    *(u8 **)(self + 0x32C) = lbl_803F0554;
-    fn_802D8EF8(self);
+    {
+        u8 *p = self;
+        s32 n = r;
+        fn_802D8CA4(p, 0x18, n, 0);
+        *(u8 **)(p + 0x32C) = lbl_803F0554;
+        fn_802D8EF8(p);
+    }
 }
 
 void fn_802E06B0(u8 *self) {

@@ -6,6 +6,22 @@ s32 fn_8024154C(void);
 void fn_80241510(void);
 void fn_8024158C(s32);
 
+void fn_8023ECC8(void) {
+    void fn_8025302C(void *, s32);
+    void fn_80242258(void);
+    void fn_802427D4(void);
+    register u8 *p asm("r31");
+    s32 v;
+    p = (u8 *)0x80437CA0;
+    *(s32 *)(p + 0x6bc) = 0;
+    v = (*(s32 (**)(void))(p + 0x698))();
+    fn_8025302C((void *)0x803F71E8, v);
+    if (*(s32 *)(p + 0x6cc) == 4) {
+        fn_80242258();
+        fn_802427D4();
+    }
+}
+
 void fn_8023EF7C(void) {
     register s32 v asm("r4");
     register u8 *p asm("r3");
@@ -191,6 +207,21 @@ void fn_8024148C(void) {
 
 }
 
+void fn_80241490(void) {
+    register s32 v asm("r0");
+    register u8 *p asm("r5");
+    void (*f)(void);
+
+    v = 0x1000;
+    p = (u8 *)0xCC000000;
+    *(volatile s32 *)(p + 0x3000) = v;
+    f = *(void (**)(void))0x803F73A0;
+    if (f != 0) {
+        *(volatile u8 *)0x803F73A8 = 1;
+        f();
+    }
+}
+
 void fn_802414E4(void) {
     register u8 *p asm("r4");
     register s32 v asm("r3");
@@ -211,13 +242,12 @@ void fn_802414FC(void) {
 void fn_80241510(void) {
     register u8 *p asm("r4");
     register s32 v asm("r5");
-    s32 i;
+    register s32 i asm("r3");
     p = (u8 *)0xCC000000;
     v = *(volatile s32 *)(p + 0x6828) & 5;
     *(volatile s32 *)(p + 0x6828) = v;
-    i = 6;
-    do {
-    } while (--i);
+    for (i = 6; i != 0; i--) {
+    }
     v |= 0xD0;
     *(volatile s32 *)(p + 0x6828) = v;
 }
@@ -228,8 +258,7 @@ void fn_80241538(void) {
     p = (u8 *)0xCC000000;
     do {
         v = *(volatile u32 *)(p + 0x6834);
-        v = v << 31 >> 31;
-    } while (v != 0);
+    } while ((s32)(v << 31) != 0);
 }
 
 void fn_8024162C(void) {
@@ -241,6 +270,139 @@ void fn_8024162C(void) {
     } while (fn_8024154C() == 0xff);
     fn_80241510();
     fn_8024158C(2);
+}
+
+void fn_8024167C(s32 a, s32 b) {
+    s32 fn_8024154C(void);
+    void fn_80241510(void);
+    register u8 *p asm("r29");
+    register s32 v asm("r3");
+
+    fn_80241510();
+    while (fn_8024154C() == 0) {
+    }
+    do {
+        fn_80241510();
+    } while (fn_8024154C() == 0xff);
+    fn_80241510();
+    p = (u8 *)0xCC000000;
+    *(volatile s32 *)(p + 0x682C) = a;
+    *(volatile s32 *)(p + 0x6830) = b;
+    v = 3;
+    *(volatile s32 *)(p + 0x6834) = v;
+    v = *(volatile s32 *)(p + 0x6828);
+    v |= 0xC;
+    *(volatile s32 *)(p + 0x6828) = v;
+}
+
+void fn_802416EC(s32 a, s32 b) {
+    s32 fn_8024154C(void);
+    void fn_80241510(void);
+    void fn_80241538(void);
+    register u8 *p asm("r29");
+    register s32 v asm("r3");
+
+    fn_80241510();
+    while (fn_8024154C() == 0) {
+    }
+    do {
+        fn_80241510();
+    } while (fn_8024154C() == 0xff);
+    fn_80241510();
+    p = (u8 *)0xCC000000;
+    *(volatile s32 *)(p + 0x682C) = a;
+    *(volatile s32 *)(p + 0x6830) = b;
+    v = 3;
+    *(volatile s32 *)(p + 0x6834) = v;
+    fn_80241538();
+}
+
+void fn_80241754(u32 arg0) {
+    fn_802414E4();
+    while (fn_8024154C() == 0) {
+    }
+    do {
+        fn_80241510();
+    } while (fn_8024154C() == 0xff);
+    fn_80241510();
+    fn_8024158C(3);
+    fn_8024158C(arg0 >> 8);
+    fn_8024158C(arg0);
+}
+
+void fn_802417B8(s32 a, s32 b) {
+    s32 fn_8024154C(void);
+    void fn_80241510(void);
+    register u8 *p asm("r29");
+    register s32 v asm("r3");
+
+    fn_80241510();
+    while (fn_8024154C() == 0) {
+    }
+    do {
+        fn_80241510();
+    } while (fn_8024154C() == 0xff);
+    fn_80241510();
+    p = (u8 *)0xCC000000;
+    *(volatile s32 *)(p + 0x682C) = a;
+    *(volatile s32 *)(p + 0x6830) = b;
+    v = 7;
+    *(volatile s32 *)(p + 0x6834) = v;
+    v = *(volatile s32 *)(p + 0x6828);
+    v |= 0xC;
+    *(volatile s32 *)(p + 0x6828) = v;
+}
+
+void fn_80241828(s32 a, s32 b) {
+    s32 fn_8024154C(void);
+    void fn_80241510(void);
+    void fn_80241538(void);
+    register u8 *p asm("r29");
+    register s32 v asm("r3");
+
+    fn_80241510();
+    while (fn_8024154C() == 0) {
+    }
+    do {
+        fn_80241510();
+    } while (fn_8024154C() == 0xff);
+    fn_80241510();
+    p = (u8 *)0xCC000000;
+    *(volatile s32 *)(p + 0x682C) = a;
+    *(volatile s32 *)(p + 0x6830) = b;
+    v = 7;
+    *(volatile s32 *)(p + 0x6834) = v;
+    fn_80241538();
+}
+
+void fn_80241890(u8 *a, s32 n) {
+    s32 fn_8024154C(void);
+    void fn_80241510(void);
+    void fn_802415FC(s32);
+    void fn_8024158C(s32);
+    void fn_802414FC(void);
+    s32 i;
+    s32 len;
+
+    fn_80241510();
+    while (fn_8024154C() == 0) {
+    }
+    do {
+        fn_80241510();
+    } while (fn_8024154C() == 0xff);
+    fn_80241510();
+    len = n & 0x1C;
+    for (i = 0; i < len; i += 4) {
+        fn_802415FC(*(s32 *)(a + i));
+    }
+    a += i;
+    len = n & 3;
+    for (i = 0; i < len; i++) {
+        fn_8024158C(a[i]);
+    }
+    for (i = 15; i != 0; i--) {
+    }
+    fn_802414FC();
 }
 
 void fn_80241934(void) {

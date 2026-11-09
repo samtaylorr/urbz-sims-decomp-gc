@@ -587,8 +587,9 @@ s32 fn_80247C34(void) {
 void fn_80247C58(void) {
     extern char lbl_803EBB7C[];
     s32 fn_802530CC();
-    register char *lr asm("r6");
-    fn_802530CC(0, 0, lbl_803EBB7C, lr - 4);
+    register char *lr asm("r6") = __builtin_return_address(-1);
+    lr -= 4;
+    fn_802530CC(0, 0, lbl_803EBB7C, lr);
 }
 
 void fn_80248078(void) {
@@ -1413,4 +1414,20 @@ s32 fn_8024FED8(void *arg0) {
     }
     return f(obj, arg0, 0) != 0;
 }
+
+u32 fn_8024FFF8(void) { return __mfspr(952); }
+
+void fn_80250000(u32 v) { __mtspr(952, v); }
+
+u32 fn_80250008(void) { return __mfspr(956); }
+
+void fn_80250010(u32 v) { __mtspr(956, v); }
+
+u32 fn_80250018(void) { return __mfspr(953); }
+
+void fn_80250020(u32 v) { __mtspr(953, v); }
+
+u32 fn_80250028(void) { return __mfspr(954); }
+
+void fn_80250030(u32 v) { __mtspr(954, v); }
 

@@ -847,13 +847,12 @@ s32 fn_8012E4F0(void *arg0, char *arg1) {
     void fn_802D7F94(void *);
     extern char lbl_803D87EC[];
     NghResPath path;
-    NghResPath *p;
     void *data;
     s32 size;
     void *f;
+    NghResPath *p = &path;
 
-    p = &path;
-    fn_800F687C(p, path.buf, 0x104);
+    fn_800F687C(p, (char *)p + 8, 0x104);
     fn_8012F71C(arg0, arg1, p);
     f = fn_802D7F48(fn_800F69E8(p), lbl_803D87EC);
     if (f != NULL) {
@@ -881,7 +880,7 @@ void fn_8012F71C(void *arg0, char *arg1, NghResPath *arg2) {
     obj = lbl_80494DF0;
     vt = M2C_FIELD(obj, char **, 0x338);
     dir = (*(char *(**)(void *))(vt + 0x24))(obj + *(s16 *)(vt + 0x20));
-    fn_800F687C(p, path.buf, 0x104);
+    fn_800F687C(p, p->buf, 0x104);
     fn_800F68F0(p, dir, -1);
     fn_800F6A38(arg2, p);
     fn_800F68F0(arg2, arg1, -1);

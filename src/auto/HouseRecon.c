@@ -52,13 +52,13 @@ void *fn_80050040(u8 *arg0) {
 void fn_800500A4(u8 *arg0, s32 arg1) {
     extern void fn_800ECE00(void *, s32);
     extern void fn_802D20E8(void *);
-    HouseReconEntry *begin = (HouseReconEntry *)(arg0 + 0x8004);
+    u8 *begin = arg0 + 0x8004;
     if (begin != NULL) {
-        HouseReconEntry *p = (HouseReconEntry *)(arg0 + 0x16004);
+        u8 *p = arg0 + 0x16004;
         if (begin != p) {
             do {
-                p--;
-                fn_800ECE00((u8 *)p + 0x10, 2);
+                p -= 0x1C;
+                fn_800ECE00(p + 0x10, 2);
             } while (begin != p);
         }
     }

@@ -86,12 +86,11 @@ void fn_80123450(void *self) {
 
 void *fn_801234B4(void *self) {
     extern u8 lbl_8040FD60[];
+    void fn_800F687C(void *, void *, s32);
     void fn_800F6FB4(void *, void *, s32);
-    s16 *p;
-    s32 i;
 
     M2C_FIELD(self, void **, 0) = lbl_8040FD60;
-    NbhdPath_Init((NbhdPath *)((char *)self + 4));
+    ({ NbhdPath *s = (NbhdPath *)((char *)self + 4); fn_800F687C(s, s->buf, 0x104); s; });
     fn_800F6FB4((char *)self + 0x110, (char *)self + 0x118, 0x20);
     M2C_FIELD(self, s32 *, 0x158) = 0;
     M2C_FIELD(self, s32 *, 0x15C) = 0;
@@ -100,11 +99,7 @@ void *fn_801234B4(void *self) {
     NbhdPair_InitB((NbhdPair *)((char *)self + 0x1B8));
     NbhdPair_Init((NbhdPair *)((char *)self + 0x1C0));
     NbhdPair_InitB((NbhdPair *)((char *)self + 0x1C8));
-    p = (s16 *)((char *)self + 0x1AE);
-    for (i = 0x23; i >= 0; i--) {
-        *p = 0;
-        p--;
-    }
+    NbhdS16_Clear((s16 *)((char *)self + 0x168), 0x24);
     M2C_FIELD(self, s32 *, 0x1D4) = 0;
     return self;
 }

@@ -426,14 +426,11 @@ s32 fn_800436B8(s32 arg0) {
     extern s32 lbl_803C6144[];
     s32 mask = fn_80043554(arg0);
     s32 count = 0;
-    s32 i = 0;
+    s32 i;
     s32 result;
 
-    if (mask & 1) {
-        count = 1;
-        while (++i <= 4 && ((mask >> i) & 1)) {
-            count++;
-        }
+    for (i = 0; i <= 4 && ((mask >> i) & 1); i++) {
+        count++;
     }
     result = 0;
     for (i = 0; i < count; i++) {

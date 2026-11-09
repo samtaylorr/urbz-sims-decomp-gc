@@ -1630,14 +1630,13 @@ s32 fn_802A3370(u8 *self, void *arg1) {
 
     fn_80291DEC(arg1, (s32)r);
     x = M2C_FIELD(self, s32 *, 0x1254);
-    if (x < r[0] || x > r[2]) {
-        return 0;
+    if (x >= r[0] && x <= r[2]) {
+        y = M2C_FIELD(self, s32 *, 0x1258);
+        if (y >= r[1] && y <= r[3]) {
+            return 1;
+        }
     }
-    y = M2C_FIELD(self, s32 *, 0x1258);
-    if (y < r[1]) {
-        return 0;
-    }
-    return !(y > r[3]);
+    return 0;
 }
 
 s32 fn_802A4354(void) {

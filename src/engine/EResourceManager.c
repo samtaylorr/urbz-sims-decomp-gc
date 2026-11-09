@@ -394,23 +394,18 @@ void fn_8033775C(char *self, s32 key) {
     char *volatile lock;
     char *res;
     char *vt;
-    void (*fn)(void *, s32);
-    void (*fn2)(void *);
-    char *o;
 
     lock = self;
     vt = *(char **)self;
     res = 0;
-    fn = *(void (**)(void *, s32))(vt + 0x14);
-    fn(self + *(s16 *)(vt + 0x10), -1);
+    (*(void (**)(void *, s32))(vt + 0x14))(self + *(s16 *)(vt + 0x10), -1);
     fn_80338598(self + 0x40, key, &res);
     if (res != 0) {
         fn_80337510(self, res);
     }
-    o = lock;
-    vt = *(char **)o;
-    fn2 = *(void (**)(void *))(vt + 0x1C);
-    fn2(o + *(s16 *)(vt + 0x18));
+    self = lock;
+    vt = *(char **)self;
+    (*(void (**)(void *))(vt + 0x1C))(self + *(s16 *)(vt + 0x18));
 }
 
 void fn_803377F0(char *arg0, s32 arg1) {
@@ -432,23 +427,18 @@ void fn_8033789C(char *self, s32 key) {
     s32 fn_80338598(char *, s32, char **);
     struct {
         char *obj;
-        char *res;
+        char *volatile res;
     } lock;
-    char *vt;
 
-    lock.obj = self;
     lock.res = 0;
-    vt = *(char **)self;
-    (*(void (**)(void *, s32))(vt + 0x14))(self + *(s16 *)(vt + 0x10), -1);
-    fn_80338598(self + 0x40, key, &lock.res);
+    ERMLock_Lock((ERMLock *)&lock, self);
+    fn_80338598(self + 0x40, key, (char **)&lock.res);
     if (lock.res == 0) {
-        vt = *(char **)lock.obj;
-        (*(void (**)(void *))(vt + 0x1C))(lock.obj + *(s16 *)(vt + 0x18));
+        ERMLock_Unlock((ERMLock *)&lock);
         return;
     }
     fn_80337AEC(self, lock.res);
-    vt = *(char **)lock.obj;
-    (*(void (**)(void *))(vt + 0x1C))(lock.obj + *(s16 *)(vt + 0x18));
+    ERMLock_Unlock((ERMLock *)&lock);
 }
 
 void fn_80337950(char *arg0, s32 arg1) {

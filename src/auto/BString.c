@@ -1334,11 +1334,11 @@ void fn_800D53B8(char *self, BSKey *key) {
         do {
             e = M2C_FIELD(node, char **, 0);
             k = *(BSKey *)e;
-            if (k.v == key->v) {
+            if (*(s32 *)&k == key->v) {
                 if (M2C_FIELD(self, char **, 4) != NULL) {
                     obj = *M2C_FIELD(self, char ***, 4);
                     vt = M2C_FIELD(obj, char **, 8);
-                    M2C_FIELD(vt, void (**)(), 0x2C)(obj + M2C_FIELD(vt, s16 *, 0x28), k);
+                    M2C_FIELD(vt, void (**)(void *, s32), 0x2C)(obj + M2C_FIELD(vt, s16 *, 0x28), k.v);
                 }
                 M2C_FIELD(self, char **, 4) = node;
                 v = key->v;
@@ -2865,10 +2865,11 @@ void fn_800E1908(void *arg0) {
     a[1] = 0;
     b = (s32 *)((char *)p + 0x58);
     b[1] = 0;
-    M2C_FIELD(p, char **, 0x44) = lbl_8040AA98;
     M2C_FIELD(p, s32 *, 0x64) = 1;
+    M2C_FIELD(p, char **, 0x44) = lbl_8040AA98;
     M2C_FIELD(p, s32 *, 0xC8) = 0;
     M2C_FIELD(arg0, void **, 0x94) = p;
+    M2C_FIELD(p, s32 *, 0xC4) = 0;
     M2C_FIELD(p, s32 *, 0x60) = 1;
     M2C_FIELD(p, s32 *, 0x68) = 0;
     M2C_FIELD(p, s32 *, 0x6C) = 0;
@@ -2877,7 +2878,6 @@ void fn_800E1908(void *arg0) {
     M2C_FIELD(p, s32 *, 0xB8) = 0;
     M2C_FIELD(p, s32 *, 0xBC) = 0;
     M2C_FIELD(p, s32 *, 0xC0) = 0;
-    M2C_FIELD(p, s32 *, 0xC4) = 0;
     if (p != NULL) {
         fn_800C60D4(p);
     }

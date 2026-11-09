@@ -59,17 +59,21 @@ void fn_80197AD4(void *arg0, s32 arg1, s32 arg2) {
     s32 i;
     char buf[0x10];
 
+    i = 0;
     e = (SeqEntry *)((char *)arg0 + 0xD4);
-    for (i = 0; e[i].type != 0; i++) {
+    while (e[i].type != 0) {
+        i++;
     }
     if (i > 7 || arg1 > 4 || arg1 < 0) {
         return;
     }
+    e = (SeqEntry *)((char *)arg0 + 0xD4);
     e[i].type = arg1;
     fn_800F687C(buf, buf + 8, 8);
     fn_800F68F0(buf, arg2, -1);
-    fn_800F6A38(e[i].name, buf);
-    e[i + 1].type = 0;
+    fn_800F6A38(((SeqEntry *)((char *)arg0 + 0xD4))[i].name, buf);
+    i++;
+    e[i].type = 0;
 }
 
 void fn_80197B90(void *arg0, s32 arg1) {

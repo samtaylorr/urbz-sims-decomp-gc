@@ -361,16 +361,13 @@ void fn_80055E40(void *self, void *obj, void *out) {
     void fn_800F6FB4(void *, void *, s32);
     void *fn_800F7138(void *);
     void fn_800F22F0(void *, void *);
-    struct {
-        u8 hdr[8];
-        char str[0x40];
-    } buf;
-    void *s;
+    char buf[0x48];
+    char *s;
     void *vt;
 
     if (obj != NULL) {
-        s = &buf;
-        fn_800F6FB4(s, ((char *)s) + 8, 0x20);
+        s = buf;
+        fn_800F6FB4(s, buf + 8, 0x20);
         vt = M2C_FIELD(obj, void **, 0);
         M2C_FIELD(vt, void (**)(void *, void *), 0x74)((char *)obj + M2C_FIELD(vt, s16 *, 0x70), s);
         fn_800F22F0(out, fn_800F7138(s));

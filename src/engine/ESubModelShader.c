@@ -527,18 +527,20 @@ s32 fn_80304198(u8 *self, s32 idx) {
 
 u8 *fn_803041B0(u8 *self) {
     extern f32 lbl_803F1878[];
-    extern f32 lbl_803F187C[];
+    extern const f32 lbl_803F187C[];
     extern f32 lbl_803F1880[];
     extern f32 lbl_803F1884[];
     extern f32 lbl_803F1888[];
     f32 zero;
     f32 one;
+    f32 far;
 
     *(f32 *)(self + 0x24) = lbl_803F1878[0];
+    far = lbl_803F187C[0] * lbl_803F1880[0];
     zero = lbl_803F1884[0];
     one = lbl_803F1888[0];
     *(s32 *)(self + 0x30) = 1;
-    *(f32 *)(self + 0x28) = lbl_803F187C[0] * lbl_803F1880[0];
+    *(f32 *)(self + 0x28) = far;
     *(s32 *)(self + 0x34) = 0;
     *(s32 *)(self + 0x2C) = 0;
     Vec3f_Set((Vec3f *)self, zero, zero, zero);

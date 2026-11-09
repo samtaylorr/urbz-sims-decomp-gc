@@ -1171,9 +1171,7 @@ void fn_80363174(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 
 void fn_80363220(u32 *src, s32 w, s32 h, u32 *out) {
     u32 *row;
-    u32 *p;
-    u32 *q;
-    s32 x, y, k;
+    s32 x, y;
     s32 bw = w / 8;
     s32 bh = h / 8;
     s32 stride = bw * 4;
@@ -1181,13 +1179,8 @@ void fn_80363220(u32 *src, s32 w, s32 h, u32 *out) {
     for (y = 0; y < bh; y++) {
         row = src + y * bw * 8;
         for (x = 0; x < bw; x++) {
-            p = row++;
-            q = out;
+            ENgcTexture_CopyColumn8(out, row++, stride);
             out += 8;
-            for (k = 0; k < 8; k++) {
-                *q++ = *p;
-                p = (u32 *)((u8 *)p + stride);
-            }
         }
     }
 }
@@ -1270,20 +1263,20 @@ void *fn_80363C08(void *arg0) {
     void fn_802C4D24(V3 *);
     void fn_802C5070(V3 *, void *);
     V3 b;
-    V3 a;
+    s32 a[3];
     V3 t;
     s32 *d;
     s32 x, y, z;
 
     t.x = t.y = t.z = lbl_803F4F20[0];
-    d = (s32 *)&a;
+    d = a;
     x = ((s32 *)&t)[0];
     y = ((s32 *)&t)[1];
     z = ((s32 *)&t)[2];
     d[0] = x;
     d[1] = y;
     d[2] = z;
-    b = a;
+    b = *(V3 *)a;
     fn_802C4D24(&b);
     fn_802C5070(&b, arg0);
     return arg0;
@@ -1369,8 +1362,7 @@ void fn_80363E44(void **obj) {
     void ***p;
     s32 i;
 
-    p = (void ***)((char *)obj + 0x24);
-    for (i = 1; i >= 0; i--, p--) {
+    for (i = 1, p = (void ***)((char *)obj + 0x24); i >= 0; i--, p--) {
         if (fn_802D2540(*p, lbl_80493920) != 0) {
             fn_80363E44(*p);
         } else {

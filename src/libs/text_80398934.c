@@ -696,8 +696,7 @@ void fn_80398A00(void) {
     void fn_803990E8(void);
     extern u32 lbl_80496620;
     extern u32 lbl_80496630;
-    s32 level;
-    level = fn_8025465C();
+    register s32 level asm("r31") = fn_8025465C();
     fn_803996D8();
     fn_80399768();
     fn_803990E8();
@@ -709,12 +708,21 @@ void fn_80398A00(void) {
     fn_80254684(level);
 }
 
+void fn_80398A58(u32 arg0, u32 arg1, s32 arg2) {
+    struct { u32 a; u32 b; } *fn_803990B4(u32), *e;
+    e = fn_803990B4(arg0);
+    e->a = ((arg0 >> 22) & 0x3F) | 0x80000000;
+    e->b = arg1 & 0x0FFFF000;
+    fn_80251C4C(e, 8);
+    fn_80398C94(arg2, arg0);
+}
+
 void fn_80398AC4(u32 arg0, s32 arg1) {
-    void *fn_803990B4(u32);
+    struct { u32 a; u32 b; } *fn_803990B4(u32), *e;
     void fn_80398CB0(u32, u8);
-    u32 *e = fn_803990B4(arg0);
-    e[0] = 0;
-    e[1] = 0;
+    e = fn_803990B4(arg0);
+    e->a = 0;
+    e->b = 0;
     fn_80251C4C(e, 8);
     fn_80398C94(arg1, 0);
     fn_80398CB0(arg1, 0);
@@ -3914,12 +3922,12 @@ void **fn_803A0A44(void **self, void **other) {
                 register u32 size asm("r0");
                 size = xlen * 4;
                 bytes = size;
-                if (size <= 0x80) {
-                    size = 0;
-                    tmp = (void **)fn_80399BE8(bytes);
-                } else {
+                if (size > 0x80) {
                     size = 0;
                     tmp = (void **)fn_802D1FC8(bytes);
+                } else {
+                    size = 0;
+                    tmp = (void **)fn_80399BE8(bytes);
                 }
             } else {
                 tmp = NULL;

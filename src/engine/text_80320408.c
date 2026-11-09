@@ -92,39 +92,37 @@ void fn_803205D4(void *arg0, void *arg1) {
     extern void fn_802D3CE4(void *, s32);
     extern void fn_802C5BBC(void *, void *);
     extern void fn_802D39F0(void *, s32);
-    struct {
-        s32 a;
-        s32 pad[3];
-    } buf;
-    register void *bp asm("r29");
-    void *p;
+    s32 buf[4];
+    s32 *bp = buf;
+    s32 *p;
 
-    bp = &buf;
     fn_80320590(arg0);
     fn_802D39E4(bp);
     fn_802C5B1C(arg1, bp);
-    fn_802D3CE4((char *)arg0 + 0x18, buf.a);
+    fn_802D3CE4((char *)arg0 + 0x18, *bp);
     fn_802C5BBC(arg1, (char *)arg0 + 0x20);
-    p = M2C_FIELD(arg0, void **, 0x24);
+    p = M2C_FIELD(arg0, s32 **, 0x24);
     if (p != NULL) {
-        p = *(void **)p;
-        M2C_FIELD(arg0, void **, 0x60) = p;
-        M2C_FIELD(arg0, f32 *, 0x58) = M2C_FIELD(p, s32 *, 4);
+        p = *(s32 **)p;
+        M2C_FIELD(arg0, s32 **, 0x60) = p;
+        M2C_FIELD(arg0, f32 *, 0x58) = p[1];
     }
-    fn_802D39F0(bp, buf.a);
+    fn_802D39F0(bp, *bp);
 }
 
 void fn_80322898(s32 arg0, Vec2Arg *arg1, s32 arg2, s32 arg3) {
     extern f32 lbl_803F301C[];
 
-    if (arg2 != 0 || arg3 != 0) {
-        if (arg2 != 0) {
-            arg1->x = (s32)(arg1->x + lbl_803F301C[0]);
-        }
-        if (arg3 != 0) {
-            arg1->y = (s32)(arg1->y + lbl_803F301C[0]);
-        }
+    if (arg2 == 0 && arg3 == 0) {
+        return;
     }
+    if (arg2) {
+        arg1->x = (s32)(arg1->x + lbl_803F301C[0]);
+    }
+    if (arg3 == 0) {
+        return;
+    }
+    arg1->y = (s32)(arg1->y + lbl_803F301C[0]);
 }
 
 void fn_80323460(void *arg0) {

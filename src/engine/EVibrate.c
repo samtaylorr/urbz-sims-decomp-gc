@@ -79,10 +79,12 @@ void fn_80314E54(void *self, s32 idx) {
 }
 
 s32 fn_80314E68(void *self, u8 index) {
+    EVibratePort *port;
     if (index > 1) {
         return 0;
     }
-    return EVibrate_PortAt((EVibratePort *)((s8 *)self + 0x38), index)->active;
+    port = EVibrate_PortAt((EVibratePort *)((s8 *)self + 0x38), index);
+    return port->active;
 }
 
 void fn_80314E88(void *self) {

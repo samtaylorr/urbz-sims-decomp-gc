@@ -42,11 +42,11 @@ s32 fn_8036D868(void *arg0) {
     extern void fn_803BAB78(void *);
     extern f32 lbl_803F5304[];
     extern u8 lbl_8041DAB0[];
-    char *q;
+    ECamVec3 *q;
     ECamVec3 v;
     f32 c;
 
-    q = (char *)arg0 + 0x90;
+    q = (ECamVec3 *)((char *)arg0 + 0x90);
     fn_802F04BC(arg0);
     *(void **)arg0 = lbl_8041DAB0;
     fn_803BAB78(q);
@@ -55,15 +55,15 @@ s32 fn_8036D868(void *arg0) {
     v.x = c;
     v.z = c;
     v.y = c;
-    *(ECamVec3 *)q = v;
+    *q = v;
     M2C_FIELD(arg0, s32 *, 0x8C) = 0;
     M2C_FIELD(arg0, s32 *, 0xB4) = 0;
     M2C_FIELD(arg0, s32 *, 0xA8) = 0;
     M2C_FIELD(arg0, s32 *, 0xB0) = 0;
     M2C_FIELD(arg0, s32 *, 0xAC) = 0;
+    M2C_FIELD(q, f32 *, 0xC) = c;
     M2C_FIELD(arg0, s32 *, 0xB8) = 0;
     M2C_FIELD(arg0, s32 *, 0xA4) = 0;
-    M2C_FIELD(q, f32 *, 0xC) = c;
     return (s32)arg0;
 }
 

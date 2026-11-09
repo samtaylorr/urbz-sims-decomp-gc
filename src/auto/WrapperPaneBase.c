@@ -734,20 +734,21 @@ void fn_800C962C(void *arg0, s32 arg1) {
 void *fn_800CA8C8(void *self) {
     extern char lbl_803D0804[];
     extern char lbl_8040AA98[];
+    char *p;
 
-    WPB_InitBase(self, lbl_803D0804);
-    M2C_FIELD(self, char **, 0x44) = lbl_8040AA98;
-    M2C_FIELD(self, s32 *, 0xC8) = 0;
-    M2C_FIELD(self, s32 *, 0x60) = 1;
-    M2C_FIELD(self, s32 *, 0x68) = 0;
-    M2C_FIELD(self, s32 *, 0x6C) = 0;
-    M2C_FIELD(self, s32 *, 0x84) = 0;
-    M2C_FIELD(self, s32 *, 0x88) = 0;
-    M2C_FIELD(self, s32 *, 0xB8) = 0;
-    M2C_FIELD(self, s32 *, 0xBC) = 0;
-    M2C_FIELD(self, s32 *, 0xC0) = 0;
-    M2C_FIELD(self, s32 *, 0xC4) = 0;
-    return self;
+    p = WPB_InitBase(self, lbl_803D0804);
+    M2C_FIELD(p, char **, 0x44) = lbl_8040AA98;
+    M2C_FIELD(p, s32 *, 0xC8) = 0;
+    M2C_FIELD(p, s32 *, 0x60) = 1;
+    M2C_FIELD(p, s32 *, 0x68) = 0;
+    M2C_FIELD(p, s32 *, 0x6C) = 0;
+    M2C_FIELD(p, s32 *, 0x84) = 0;
+    M2C_FIELD(p, s32 *, 0x88) = 0;
+    M2C_FIELD(p, s32 *, 0xB8) = 0;
+    M2C_FIELD(p, s32 *, 0xBC) = 0;
+    M2C_FIELD(p, s32 *, 0xC0) = 0;
+    M2C_FIELD(p, s32 *, 0xC4) = 0;
+    return p;
 }
 
 void fn_800CA968(void *self, s32 arg1) {
@@ -812,17 +813,10 @@ void fn_800CB2EC(void *arg0, s32 arg1) {
     extern u8 lbl_8041F754[];
     extern void fn_80048A48(void *);
     void fn_800CEF00(void *, s32);
-    s32 *g;
     s32 v;
     fn_80048A48(lbl_8041F754);
     v = 0;
-    if (M2C_FIELD(arg0, s32 *, 0x74) == 0) {
-        g = (s32 *)lbl_8041F754;
-        if (g[0x8C / 4] != 0) {
-            v = 1;
-        }
-    }
-    if (v) {
+    if (M2C_FIELD(arg0, s32 *, 0x74) == 0 && M2C_FIELD(lbl_8041F754, s32 *, 0x8C) != 0) {
         v = arg1;
     }
     fn_800CEF00(arg0, v);
@@ -908,13 +902,13 @@ s32 fn_800CBD58(void *arg0) {
 }
 
 void *fn_800CBD64(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7) {
-    M2C_UNK fn_800CBE0C(void *, s32, s32, f32 *, s32, s32, s32, s32, s32);
+    M2C_UNK fn_800CBE0C(void *, s32, s32, void *, s32, s32, s32, s32, s32);
     extern f32 lbl_803D1078[];
-    f32 v[2];
-    f32 *p = v;
+    struct { f32 x, y; } v, *p;
     f32 c = lbl_803D1078[0];
-    v[0] = c;
-    p[1] = c;
+    p = &v;
+    p->y = c;
+    p->x = c;
     fn_800CBE0C(arg0, arg1, arg2, p, arg3, arg4, arg5, arg6, arg7);
     return arg0;
 }

@@ -813,10 +813,10 @@ void fn_80152310(void) {
 }
 
 void fn_80152B3C(s32 *arg0) {
-    void fn_80248488();
-    void fn_8019D758();
-    void fn_8019D76C();
-    void fn_8019E514();
+    void fn_80248488(void *, s32, s32);
+    void fn_8019D758(void *, s32);
+    void fn_8019D76C(void *, s32, s32, void *, s32, s32);
+    void fn_8019E514(void *, s32);
     struct {
         s16 a;
         s16 b;

@@ -227,12 +227,14 @@ void fn_802E010C(s32 arg0) {
 void fn_802E0150(char *self) {
     void fn_803665B8(void *, s32);
     void fn_802D8EF8(void *);
-    char *p;
 
-    p = self + 8;
     fn_803665B8(self + 0x368, 0x20);
-    fn_802E0150_start(p);
-    fn_802D8EF8(p);
+    {
+        char *p = self + 8;
+        M2C_FIELD(p, void **, 0x32C) = lbl_803F04A0;
+        fn_802D8CA4(p, 0x19, 0x6000, 0);
+        fn_802D8EF8(p);
+    }
     M2C_FIELD(self, s32 *, 0x348) = 1;
 }
 

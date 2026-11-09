@@ -2368,10 +2368,11 @@ void fn_80388ED8(void) {
     extern u16 lbl_804964A0;
     extern const char *lbl_80495658;
     extern u8 lbl_80406748[];
-    s32 chan;
     u8 *card;
+    s32 chan;
 
-    if (*(u32 *)(lbl_804912A0 + 0x10C) != 0 && *(u32 *)(lbl_804912A0 + 0x110 + 0x10C) != 0) {
+    card = lbl_804912A0;
+    if (*(u32 *)(card + 0x10C) != 0 && *(u32 *)(card + 0x110 + 0x10C) != 0) {
         return;
     }
     lbl_804964A0 = fn_803798D8();
@@ -2379,10 +2380,10 @@ void fn_80388ED8(void) {
     fn_803870C4();
     fn_80250F6C();
     for (chan = 0; chan < 2; chan++) {
-        card = lbl_804912A0 + chan * 0x110;
         *(s32 *)(card + 4) = -3;
         fn_80258534(card + 0x8C);
         fn_80250FC4(card + 0xE0);
+        card += 0x110;
     }
     fn_80388FB4(0x80000000);
     OSRegisterResetFunction(lbl_80406748);
@@ -2549,15 +2550,7 @@ s32 fn_803894A8(s32 chan) {
 
     card = lbl_804912A0 + chan * 0x110;
     enabled = fn_8025465C();
-    for (;;) {
-        if (chan < 0 || chan >= 2) {
-            result = -128;
-        } else {
-            result = *(s32 *)(card + 4);
-        }
-        if (result != -1) {
-            break;
-        }
+    while ((result = fn_80389198(chan)) == -1) {
         fn_8025974C(card + 0x8C);
     }
     fn_80254684(enabled);

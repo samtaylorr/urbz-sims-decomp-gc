@@ -347,16 +347,22 @@ void *fn_80307020(void *self) {
     extern f32 lbl_803F1B28[];
     extern f32 lbl_803F1B2C[];
     extern u8 lbl_8041ACA0[];
-    M2C_FIELD(self, void **, 0x24) = lbl_8041ACA0;
-    M2C_FIELD(self, f32 *, 0x0) = lbl_803F1B24[0];
-    M2C_FIELD(self, f32 *, 0x4) = lbl_803F1B28[0];
-    M2C_FIELD(self, s32 *, 0xC) = 1;
-    M2C_FIELD(self, f32 *, 0x14) = lbl_803F1B2C[0];
-    M2C_FIELD(self, s32 *, 0x20) = 0;
-    M2C_FIELD(self, s32 *, 0x8) = 0;
-    M2C_FIELD(self, f32 *, 0x10) = lbl_803F1B2C[0];
-    M2C_FIELD(self, s32 *, 0x18) = 0;
-    M2C_FIELD(self, s32 *, 0x1C) = 0;
+    struct {
+        f32 x0; f32 x4; s32 x8; s32 xC; f32 x10; f32 x14; s32 x18; s32 x1C; s32 x20; void *x24;
+    } *p = self;
+    f32 a = lbl_803F1B24[0];
+    f32 c = lbl_803F1B2C[0];
+    f32 b = lbl_803F1B28[0];
+    p->x24 = lbl_8041ACA0;
+    p->x0 = a;
+    p->x4 = b;
+    p->xC = 1;
+    p->x14 = c;
+    p->x20 = 0;
+    p->x8 = 0;
+    p->x10 = c;
+    p->x18 = 0;
+    p->x1C = 0;
     return self;
 }
 
@@ -364,12 +370,17 @@ s32 fn_80307224(void *self) {
     extern f32 lbl_803F1B34[];
     s32 ret = 0;
     if (M2C_FIELD(self, s32 *, 0x20) != 0) {
-        if (M2C_FIELD(self, s32 *, 0x1C) == 0 ||
-            (M2C_FIELD(self, f32 *, 0x10) > M2C_FIELD(self, f32 *, 0x0) &&
-             M2C_FIELD(self, f32 *, 0x14) > M2C_FIELD(self, f32 *, 0x4))) {
+        if (M2C_FIELD(self, s32 *, 0x1C) != 0) {
+            if (M2C_FIELD(self, f32 *, 0x10) > M2C_FIELD(self, f32 *, 0x0) &&
+                M2C_FIELD(self, f32 *, 0x14) > M2C_FIELD(self, f32 *, 0x4)) {
+                ret = 1;
+            }
+        } else {
             ret = 1;
-            M2C_FIELD(self, s32 *, 0x1C) = ret;
+        }
+        if (ret != 0) {
             M2C_FIELD(self, f32 *, 0x14) = lbl_803F1B34[0];
+            M2C_FIELD(self, s32 *, 0x1C) = 1;
         }
     }
     return ret;

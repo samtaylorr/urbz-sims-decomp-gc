@@ -324,8 +324,8 @@ s32 fn_800C38C8(s32 arg0) {
     s32 found;
     s32 i;
 
-    found = i = 0;
-    for (; i < 10; i++) {
+    found = 0;
+    for (i = found; i < 10; i++) {
         if (arg0 == lbl_80432EC8[i]) {
             found = 1;
             break;
@@ -428,7 +428,7 @@ void fn_800C3B48(u16 *src, s32 len, u8 *dst) {
             *dst = ((c >> 6) & 0x1F) | 0xC0;
             *++dst = (*src & 0x3F) | 0x80;
         } else {
-            *dst = ((c & 0xF000) >> 12) | 0xE0;
+            *dst = ((u8)(c >> 8) >> 4) | 0xE0;
             *++dst = ((*src >> 6) & 0x3F) | 0x80;
             *++dst = (*src & 0x3F) | 0x80;
         }
@@ -438,9 +438,9 @@ void fn_800C3B48(u16 *src, s32 len, u8 *dst) {
 }
 
 void fn_800C3C04(u8 *src, s32 len, u16 *dst) {
-    u8 *end;
+    u32 end = (u32)src + len;
 
-    for (end = src + len; src < end;) {
+    while ((u32)src < end) {
         if (!(*src & 0x80)) {
             *dst = *src;
             src++;

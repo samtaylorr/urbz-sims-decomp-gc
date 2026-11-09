@@ -4,6 +4,35 @@
 extern u32 *lbl_804964DC;
 
 extern s32 lbl_804964C4;
+void fn_8038FC80(u32 arg0, s32 arg1, s32 arg2) {
+    extern s32 lbl_804964C4;
+    extern s32 lbl_80495670;
+    extern s32 lbl_804964B8;
+    extern u32 lbl_804964B0;
+    extern u32 lbl_804964BC;
+    extern s32 fn_8025465C(void);
+    extern void fn_80254684(s32);
+    extern void fn_8038FE1C(void);
+    extern void fn_80398934(void (*)(void));
+    extern void fn_803909F8(void);
+    extern void fn_80390AA0(void);
+    extern void fn_8038FDEC(void);
+    s32 level;
+    if (lbl_804964C4 == 0) {
+        level = fn_8025465C();
+        lbl_804964C4 = 1;
+        lbl_80495670 = arg1;
+        lbl_804964B8 = arg2;
+        lbl_804964B0 = arg0;
+        lbl_804964BC = arg0 >> 12;
+        fn_80398934(fn_8038FE1C);
+        fn_803909F8();
+        fn_80390AA0();
+        fn_8038FDEC();
+        fn_80254684(level);
+    }
+}
+
 s32 fn_8038FD1C(void) {
     return lbl_804964C4;
 }
@@ -85,6 +114,37 @@ void fn_8038FDEC(void) {
     fn_80251884(lbl_804964B4 + lbl_804964B0);
 }
 
+void fn_80390018(u32 arg0) {
+    extern u32 fn_80398C58(u32);
+    extern s32 fn_8025465C(void);
+    extern void fn_80254684(s32);
+    extern u32 fn_8037E578(void);
+    extern u16 fn_8037E99C(void);
+    extern void fn_8037E97C(void);
+    extern void fn_80251C1C(u32, u32);
+    extern u32 fn_80390934(u32);
+    extern void fn_8037E5B4(s32, u32, u32, u32);
+    extern void fn_803909CC(u32);
+    u32 addr;
+    s32 level;
+    u16 state;
+
+    addr = fn_80398C58(arg0);
+    level = fn_8025465C();
+    while (fn_8037E578() != 0) {
+    }
+    state = fn_8037E99C();
+    fn_80251C1C(addr, 0x1000);
+    fn_8037E5B4(0, addr, fn_80390934(arg0), 0x1000);
+    while (fn_8037E578() != 0) {
+    }
+    if (state == 0) {
+        fn_8037E97C();
+    }
+    fn_80254684(level);
+    fn_803909CC(arg0);
+}
+
 void fn_803902D8(void (*cb)(void));
 void fn_803902D0(void (*cb)(void));
 void fn_803900F4(void) {
@@ -95,19 +155,16 @@ void fn_803900F4(void) {
 }
 
 void fn_80390124(u32 arg0, s32 arg1) {
-    M2C_UNK fn_80398AC4(u32, u32);
-    s32 fn_80398B30(u32);
-    s32 fn_80398C58(u32);
-    u32 var_r31;
+    extern void fn_80398AC4(u32, u32);
+    extern s32 fn_80398B30(u32);
+    extern u32 fn_80398C58(u32);
+    u32 end = arg0 + arg1;
 
-    var_r31 = arg0;
-loop_4:
-    if (var_r31 < (u32) (arg0 + arg1)) {
-        if (fn_80398B30(var_r31) != 0) {
-            fn_80398AC4(var_r31, (u32) (fn_80398C58(var_r31) - lbl_804964B4) >> 0xCU);
+    while (arg0 < end) {
+        if (fn_80398B30(arg0) != 0) {
+            fn_80398AC4(arg0, (fn_80398C58(arg0) - lbl_804964B4) >> 12);
         }
-        var_r31 += 0x1000;
-        goto loop_4;
+        arg0 += 0x1000;
     }
 }
 

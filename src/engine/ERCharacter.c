@@ -581,11 +581,12 @@ void fn_8031B228(f32 *out, f32 t) {
     extern f32 lbl_803F2C8C[];
     f32 t2 = t * t;
     f32 t3 = t2 * t;
+    f32 a = (t3 + t3) - t2 * lbl_803F2C88[0];
 
-    out[0] = (t3 + t3) - t2 * lbl_803F2C88[0] + lbl_803F2C8C[0];
-    out[3] = -t2 + t3;
-    out[1] = -((t3 + t3) - t2 * lbl_803F2C88[0]);
+    out[0] = a + lbl_803F2C8C[0];
+    out[1] = -a;
     out[2] = (t - (t2 + t2)) + t3;
+    out[3] = -t2 + t3;
 }
 
 s32 fn_8031B700(void *arg0) {

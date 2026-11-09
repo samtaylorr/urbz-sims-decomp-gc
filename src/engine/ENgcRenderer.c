@@ -333,11 +333,12 @@ s32 fn_8035E08C(void *self, s32 slot) {
 void fn_8035E9D4(void *self, s32 slot, f32 ratio) {
     extern ENgcRendererSlot lbl_80473F7C[];
     void fn_803844A8(s32, f32);
+    f32 len;
 
     if (slot != -1 && lbl_80473F7C[slot].unk0 != 0) {
         fn_8035EE7C();
-        fn_803844A8(lbl_80473F7C[slot].unk0,
-                    ((f32)*(u32 *)(lbl_80473F7C[slot].unk24 + 8) * ratio) / 32028.66015625f);
+        len = *(u32 *)(lbl_80473F7C[slot].unk24 + 8);
+        fn_803844A8(lbl_80473F7C[slot].unk0, len * ratio / 32028.66015625f);
         fn_8035EE3C();
     }
 }
