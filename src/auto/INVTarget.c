@@ -251,6 +251,32 @@ static inline s32 INV_Get08(void) {
     return lbl_80494608;
 }
 void *fn_801D7224(void **arg0, s32 arg1);
+void fn_801D6DC8(void *arg0, s32 arg1) {
+    extern u8 lbl_80416DD8[];
+    void fn_802D20E8(void *);
+    char *p;
+    char *next;
+
+    M2C_FIELD(arg0, void **, 0xC) = lbl_80416DD8;
+    p = M2C_FIELD(arg0, char **, 8);
+    if (M2C_FIELD(arg0, char **, 0) != NULL) {
+        M2C_FIELD(M2C_FIELD(arg0, char **, 4), char **, 4) = p;
+        M2C_FIELD(M2C_FIELD(arg0, char **, 8), char **, 0) = M2C_FIELD(arg0, char **, 4);
+        p = M2C_FIELD(arg0, char **, 0);
+    }
+    do {
+        next = M2C_FIELD(p, char **, 4);
+        if (p != NULL) {
+            char *vt = M2C_FIELD(p, char **, 0x2C);
+            M2C_FIELD(vt, void (**)(void *, s32), 0xC)(p + M2C_FIELD(vt, s16 *, 8), 3);
+        }
+        p = next;
+    } while (p != NULL);
+    if (arg1 & 1) {
+        fn_802D20E8(arg0);
+    }
+}
+
 void *fn_801D7224(void **arg0, s32 arg1) {
     s32 fn_802486DC(s32, s32);
     void *var_r31;
