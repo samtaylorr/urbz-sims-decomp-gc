@@ -4036,6 +4036,13 @@ void fn_80204C00(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x88) = 0;
 }
 
+void fn_80205130(void *self, s32 idx);
+void fn_802050EC(void *self) {
+    u8 fn_80207074(void *);
+    fn_8020512C();
+    fn_80205130(self, fn_80207074(self));
+}
+
 void fn_8020512C(void) {
 
 }
@@ -4525,16 +4532,18 @@ void fn_80209608(u8 *arg0) {
         INV_setStr(arg0 + 0xAC, NULL);
         break;
     }
-    fn_800F1B80(arg0 + 0xB4, (h = fn_8004C168(lbl_8041F94C, lbl_803E7014)).p != NULL ? (void *)*h.p : NULL);
-    if (*(s32 *)(arg0 + 0x120) & 1) {
-        INV_setStr(arg0 + 0xB8, lbl_803E706C);
-        INV_setStr(arg0 + 0xBC, lbl_803E701C);
-        *(s32 *)(arg0 + 0x84) = 3;
-    } else {
-        INV_setStr(arg0 + 0xB8, lbl_803E7024);
-        INV_setStr(arg0 + 0xBC, lbl_803E706C);
-        *(s32 *)(arg0 + 0x84) = 3;
-    }
+    do {
+        fn_800F1B80(arg0 + 0xB4, (h = fn_8004C168(lbl_8041F94C, lbl_803E7014)).p != NULL ? (void *)*h.p : NULL);
+        if (*(s32 *)(arg0 + 0x120) & 1) {
+            INV_setStr(arg0 + 0xB8, lbl_803E706C);
+            INV_setStr(arg0 + 0xBC, lbl_803E701C);
+            *(s32 *)(arg0 + 0x84) = 3;
+        } else {
+            INV_setStr(arg0 + 0xB8, lbl_803E7024);
+            INV_setStr(arg0 + 0xBC, lbl_803E706C);
+            *(s32 *)(arg0 + 0x84) = 3;
+        }
+    } while (0);
     *(s32 *)(arg0 + 0xA0) = 1;
     *(s32 *)(arg0 + 0x8C) = 3;
     *(s16 *)(arg0 + 0xC6) = *(s16 *)(arg0 + 0xC4) = *(s32 *)(arg0 + 0xC0) = *(s32 *)(arg0 + 0x90) = *(s32 *)(arg0 + 0x94) = *(s32 *)(arg0 + 0x88) = *(s32 *)(arg0 + 0x98) = 0;
@@ -4560,7 +4569,10 @@ void fn_8020A500(u8 *arg0) {
     s32 zero;
 
     fn_800F1B80(arg0 + 0xAC, (h1 = fn_8004C168(lbl_8041F94C, lbl_803E718C)).p != NULL ? (void *)*h1.p : NULL);
-    INV_setStr(arg0 + 0xB4, lbl_803E70E8);
+    switch ((s32)arg0) {
+    default:
+        INV_setStr(arg0 + 0xB4, lbl_803E70E8);
+    }
     fn_800F1B80(arg0 + 0xB8, (h3 = fn_8004C168(lbl_8041F94C, lbl_803E70EC)).p != NULL ? (void *)*h3.p : NULL);
     fn_800F1B80(arg0 + 0xBC, lbl_803E6F74);
     zero = 0;
