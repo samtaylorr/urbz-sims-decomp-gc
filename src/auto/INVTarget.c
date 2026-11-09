@@ -3734,6 +3734,25 @@ void fn_80200D74(void *arg0) {
     fn_80200D9C(M2C_FIELD(arg0, s32 *, 4), arg0);
 }
 
+void fn_80200D9C(void *self, s32 *msg) {
+    void fn_80206588(void *, s32);
+    void fn_802066E0(void *, s32, s32);
+    void fn_80206FC0(void *);
+    switch (msg[0]) {
+    case 3:
+        fn_80206588(self, 1);
+        break;
+    case 4:
+        fn_80206588(self, 0);
+        fn_802066E0(self, 0, 1);
+        break;
+    case 5:
+        M2C_FIELD(self, s32 *, 0x950) = msg[3];
+        fn_80206FC0(self);
+        break;
+    }
+}
+
 void fn_80200FBC(void *arg0) {
     M2C_UNK fn_80200E2C(s32, void *);
     fn_80200E2C(M2C_FIELD(arg0, s32 *, 4), arg0);
