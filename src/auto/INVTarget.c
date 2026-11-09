@@ -1388,6 +1388,21 @@ char *fn_801DB224(char *name) {
     return 0;
 }
 
+s32 fn_801DB274(char *name, s32 value) {
+    extern s32 lbl_80494610;
+    void *fn_801DB3C8(void *, s32);
+    void *e;
+    if (lbl_80494610 == 0) {
+        return 0;
+    }
+    e = fn_801DB3C8(name, 0x69);
+    if (e != NULL) {
+        M2C_FIELD(e, s32 *, 8) = value;
+        return 1;
+    }
+    return 0;
+}
+
 void fn_801DB8B8(void *arg0, s32 arg1) {
     extern s32 fn_801D7CDC(void *, s32);
     extern s32 fn_801D8B40(void *, void *);
