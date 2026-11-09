@@ -3705,6 +3705,19 @@ void fn_8020064C(void) {
 
 }
 
+void fn_80200650(void *self, s32 arg1) {
+    extern s32 fn_80225508(void);
+    extern void *fn_80225458(s32, s32, s32);
+    void fn_802330E0(void *);
+    void *p;
+    if (arg1 == 0) {
+        p = fn_80225458(fn_80225508(), M2C_FIELD(self, s32 *, 0x84), 1);
+        if (p != NULL) {
+            fn_802330E0(p);
+        }
+    }
+}
+
 void fn_8020069C(void) {
 
 }
@@ -6056,22 +6069,17 @@ void *fn_8022ADD8(void *out, s32 arg1) {
     extern u8 *lbl_8041FA38[];
     void fn_8022ACE0(s32 *, s32 *, s32);
     Vec2 v;
+    s32 a;
+    s32 b;
     u8 *g;
 
-    {
-        s32 a;
-        s32 b;
-        fn_8022ACE0(&a, &b, arg1);
-        {
-            Vec2 t;
-            t.x = a;
-            t.y = b;
-            v = t;
-        }
-    }
+    fn_8022ACE0(&a, &b, arg1);
+    v.x = a;
+    v.y = b;
     g = lbl_8041FA38[0];
-    ((Vec2 *)out)->y = v.y + *(f32 *)(g + 0x68);
-    ((Vec2 *)out)->x = v.x + *(f32 *)(g + 0x64);
+    v.y += *(f32 *)(g + 0x68);
+    v.x += *(f32 *)(g + 0x64);
+    *(Vec2 *)out = v;
     return out;
 }
 
