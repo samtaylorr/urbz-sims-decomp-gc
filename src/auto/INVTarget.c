@@ -1857,11 +1857,14 @@ u8 *fn_801DF04C(u8 *self) {
     extern f32 lbl_803E1348[];
     extern f32 lbl_803E134C[];
     s32 i;
+    f32 *p;
 
     *(u8 **)(self + 0xF8) = lbl_804170B0;
+    p = (f32 *)(self + 0xA0);
     for (i = 0; i < 20; i++) {
-        ((s32 *)(self + 0x50))[i] = 0;
-        ((f32 *)(self + 0xA0))[i] = lbl_803E1348[0];
+        ((s32 *)p)[-20] = 0;
+        *p = lbl_803E1348[0];
+        p++;
     }
     *(s32 *)(self + 0xF0) = 0;
     *(s32 *)(self + 0xF4) = 3;
@@ -4056,15 +4059,16 @@ void fn_80204F98(void *self, s32 arg) {
     typedef struct { s32 a; s32 b; } Ent;
     typedef struct { Ent *begin; Ent *end; } EntVec;
     s8 fn_80246E00(s32);
+    void fn_802050EC(void *);
     EntVec *v = (EntVec *)((u8 *)self + 0x178);
     if ((u32)((u8 *)v->end - (u8 *)v->begin) >> 3) {
-        u8 sel;
+        s8 sel;
         s32 n;
         M2C_FIELD(self, u8 *, 0x8C1) = 0;
         sel = fn_80246E00(arg);
         M2C_FIELD(self, u8 *, 0x8C0) = sel;
         n = v->end - v->begin;
-        if (sel >= (u32)n) {
+        if ((u8)sel >= (u32)n) {
             M2C_FIELD(self, u8 *, 0x8C0) = n - 1;
         }
         fn_802050EC(self);
