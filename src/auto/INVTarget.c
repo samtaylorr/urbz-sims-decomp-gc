@@ -1925,19 +1925,19 @@ void fn_801DEFF0(void) {
 
 u8 *fn_801DF04C(u8 *self) {
     extern u8 lbl_804170B0[];
-    extern const f32 lbl_803E1348;
-    extern const f32 lbl_803E134C;
-    struct T { u8 pad[0x50]; s32 a[20]; f32 b[20]; u8 pad2[0x0]; } *t = (struct T *)self;
+    extern f32 lbl_803E1348[];
+    extern f32 lbl_803E134C[];
+    struct T { u8 pad[0x50]; s32 a[20]; f32 b[20]; } *t = (struct T *)self;
     s32 i;
 
     *(u8 **)(self + 0xF8) = lbl_804170B0;
     for (i = 0; i < 20; i++) {
         t->a[i] = 0;
-        t->b[i] = lbl_803E1348;
+        t->b[i] = lbl_803E1348[0];
     }
     *(s32 *)(self + 0xF0) = 0;
     *(s32 *)(self + 0xF4) = 3;
-    *(f32 *)(self + 0xB4) = lbl_803E134C;
+    *(f32 *)(self + 0xB4) = lbl_803E134C[0];
     return self;
 }
 
@@ -2390,9 +2390,9 @@ s32 fn_801E0254(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s3
     if (M2C_FIELD(arg0, s32 *, 0x68) != 0) {
         fn_8031EA2C(M2C_FIELD(arg0, s32 *, 0x68));
     }
+    M2C_FIELD(arg0, s32 *, 0x64) = arg4;
     M2C_FIELD(arg0, s32 *, 0x68) = arg5;
     M2C_FIELD(arg0, s32 *, 0x6C) = arg6;
-    M2C_FIELD(arg0, s32 *, 0x64) = arg4;
 }
 
 void fn_801E0308(void *arg0, void *arg1) {
@@ -3896,21 +3896,21 @@ void fn_801FFA10(void *self) {
     M2C_FIELD(vt, void (**)(void *, s32), 0x44)((u8 *)obj + M2C_FIELD(vt, s16 *, 0x40), M2C_FIELD(self, s32 *, 0xD0));
 }
 
-void fn_801FFA9C(void *self, u16 *out) {
-    extern const u16 lbl_803E4CA0[];
-    extern const u16 lbl_803E4CA4[];
+void fn_801FFA9C(void *self, struct S2 { u16 v; } *out) {
+    extern const struct S2 lbl_803E4CA0;
+    extern const struct S2 lbl_803E4CA4;
     u8 state = M2C_FIELD(self, u8 *, 0x138);
 
     switch (state) {
     case 0:
-        *out = lbl_803E4CA0[0];
+        *out = lbl_803E4CA0;
         M2C_FIELD(self, u8 *, 0x189) = state;
         M2C_FIELD(self, u8 *, 0x138)++;
         break;
     case 1:
-        *out = lbl_803E4CA4[0];
+        *out = lbl_803E4CA4;
         M2C_FIELD(self, u8 *, 0x189) = state;
-        M2C_FIELD(self, u8 *, 0x138) = M2C_FIELD(self, u8 *, 0x138) + 1;
+        M2C_FIELD(self, u8 *, 0x138)++;
         break;
     case 2:
         break;
@@ -3939,6 +3939,20 @@ void fn_801FFAE4(void *self, u16 *out) {
     case 2:
         break;
     }
+}
+
+void fn_801FFEE0(void *arg0) {
+    void fn_80248488();
+    u8 *p;
+    s32 i;
+
+    p = (u8 *)arg0 + 0x18B;
+    i = 5;
+    do {
+        fn_80248488(p, 0, 0x100);
+        p += 0x100;
+        i -= 1;
+    } while (i != 0);
 }
 
 void fn_801FFF28(void *arg0, u8 *arg1, s32 arg2, void *arg3) {
