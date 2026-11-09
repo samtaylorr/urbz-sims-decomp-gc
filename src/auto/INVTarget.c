@@ -5312,6 +5312,32 @@ s32 fn_8020F990(void) {
     return var_r3;
 }
 
+s32 fn_8020F9F8(void) {
+    extern u8 lbl_803E75FC[];
+    s32 fn_801DB18C(u8 *);
+    M2C_UNK fn_800A4B14(M2C_UNK, s32 *);
+    M2C_UNK fn_800A4CBC(M2C_UNK, s32 *);
+    M2C_UNK fn_800A4FCC(M2C_UNK, s32 *);
+    s32 obj;
+    s32 a;
+    s32 b;
+    s32 c;
+
+    obj = fn_801DB18C(lbl_803E75FC);
+    a = 0;
+    fn_800A4B14(obj, &a);
+    if (a != 0) {
+        b = 0;
+        fn_800A4CBC(obj, &b);
+        if (b != 0) {
+            c = 1;
+            fn_800A4FCC(obj, &c);
+            return c == 0;
+        }
+    }
+    return 0;
+}
+
 void fn_802127FC(s32 arg0, s32 arg1) {
     extern u16 lbl_803F6B20[][20];
     s32 idx;
