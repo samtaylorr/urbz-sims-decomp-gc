@@ -5118,7 +5118,7 @@ char *fn_802181A0(void *arg0, char *arg1) {
 void fn_8021825C(void *arg0, char *arg1, char *arg2) {
     s32 fn_802486DC(char *, char *);
     void fn_80245C94(char *, char *, ...);
-    void fn_801DB274(char *, s32);
+    s32 fn_801DB274(char *, s32);
     extern char lbl_803E9070[];
     extern char lbl_803E90E0[];
     extern char lbl_803E90E4[];
