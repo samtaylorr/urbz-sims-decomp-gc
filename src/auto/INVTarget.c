@@ -2418,6 +2418,23 @@ s32 fn_801E0440(void *arg0) {
     return n;
 }
 
+void fn_801E059C(void *arg0, s32 arg1) {
+    extern void *lbl_80494FCC;
+    void *fn_8033390C(void *, s32);
+    void fn_803115C0(void *, void *);
+    void fn_801E01FC(void *, s32);
+    void fn_802D20E8(void *);
+
+    if (M2C_FIELD(arg0, void **, 0x120) != NULL) {
+        fn_803115C0(fn_8033390C(lbl_80494FCC, M2C_FIELD(arg0, u8 *, 0x11C)), M2C_FIELD(arg0, void **, 0x120));
+        M2C_FIELD(arg0, void **, 0x120) = NULL;
+    }
+    fn_801E01FC((u8 *)arg0 + 0x6C, 2);
+    if (arg1 & 1) {
+        fn_802D20E8(arg0);
+    }
+}
+
 void fn_801E1338(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
     struct T { u8 pad[0xE4]; void *arr[1]; };
     void *fn_802D1FC8(s32);
