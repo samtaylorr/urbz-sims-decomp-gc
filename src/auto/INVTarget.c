@@ -5008,6 +5008,18 @@ void fn_802039AC(void *arg0) {
     }
 }
 
+s32 fn_80203A0C(s32 a, s32 b, s32 c) {
+    s32 r;
+    if (a == 0 || b == 0 || c == 0) {
+        return 0;
+    }
+    r = (s32)((f32)a / (f32)b * 100.0f);
+    if (r <= 0) {
+        r = 1;
+    }
+    return r * c;
+}
+
 void fn_80204038(void *arg0, s32 arg1) {
     s8 fn_80246E00(s32);
     M2C_FIELD(arg0, s32 *, 0x798) = fn_80246E00(arg1) == 1;
