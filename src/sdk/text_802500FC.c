@@ -465,8 +465,10 @@ void fn_802530AC(void) {
     fn_80378324();
 }
 
+#pragma push
 #pragma dont_inline on
-#pragma peephole on
+#pragma peephole off
+#pragma scheduling off
 void fn_802538BC(void *arg0, u32 entry) {
     extern volatile u32 __PIRegs[];
     void fn_80253A14(void *, void *);
@@ -477,7 +479,7 @@ void fn_802538BC(void *arg0, u32 entry) {
     fn_8025465C();
     fn_80253880(entry);
 }
-#pragma dont_inline reset
+#pragma pop
 volatile u32 __PIRegs[] : 0xCC003000;
 
 #pragma scheduling off
@@ -537,11 +539,10 @@ void fn_80254420(char *path, u32 arg1) {
 
     if (path[0] == 0) {
         addr = 0;
-    } else {
-        if (!fn_802604AC(path, &fileInfo)) {
-            return;
-        }
+    } else if (fn_802604AC(path, &fileInfo)) {
         addr = fileInfo.startAddr;
+    } else {
+        return;
     }
     fn_80254284(addr, 0xC0000000, arg1);
 }
@@ -564,11 +565,10 @@ void fn_80254488(char *path, u32 arg1) {
     fn_8025187C(0x812F0000);
     if (path[0] == 0) {
         addr = 0;
-    } else {
-        if (!fn_802604AC(path, &fileInfo)) {
-            return;
-        }
+    } else if (fn_802604AC(path, &fileInfo)) {
         addr = fileInfo.startAddr;
+    } else {
+        return;
     }
     fn_80254284(addr, 0xC0000000, arg1);
 }
@@ -633,6 +633,22 @@ s32 fn_80255A38(void) {
 
 s32 fn_80255A44(void) {
     return *(s32 *)0x800000F0;
+}
+
+void fn_80255DEC(u32 arg0, s32 arg1) {
+    void fn_80252AAC(void *);
+    void fn_802528A4(void *);
+    void fn_80254284(s32, u32, void *);
+    u8 context[0x2C8];
+    s32 sp10;
+
+    fn_8025465C();
+    fn_80251884(0x81280000);
+    fn_8025187C(0x812F0000);
+    fn_80252AAC(context);
+    fn_802528A4(context);
+    sp10 = 0;
+    fn_80254284(arg1, arg0 | 0x80000000, &sp10);
 }
 
 void fn_80255E5C(s32 arg0, s32 arg1) {
@@ -2084,6 +2100,13 @@ void fn_80270740(void) {
 u16 fn_80270C44(void) {
     extern void *__peReg;
     return M2C_FIELD(__peReg, u16 *, 0xE);
+}
+
+void fn_80270DD8(void) {
+    extern void *__GXData;
+    *(volatile u8 *)0xCC008000 = 0x61;
+    *(volatile u32 *)0xCC008000 = 0x63000000;
+    M2C_FIELD(__GXData, u16 *, 0x2) = 0;
 }
 
 void fn_80270DFC(u8 a, u8 b) {
