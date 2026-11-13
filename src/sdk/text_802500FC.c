@@ -547,6 +547,10 @@ __OSInterruptHandler fn_802546A8(s16 interrupt, __OSInterruptHandler handler) {
     return oldHandler;
 }
 
+__OSInterruptHandler fn_802546C4(s16 interrupt) {
+    return lbl_80495E18[interrupt];
+}
+
 s32 fn_80254A24(void) {
     return *(s32 *)0x800000C8;
 }
@@ -1880,14 +1884,17 @@ s32 fn_8026C4FC(void) {
 
 void fn_8026CC4C(u8 odd, u8 even) {
     extern void *__GXData;
-    u32 reg = 0;
+    void *gx;
+    u32 reg;
 
+    reg = 0;
+    gx = __GXData;
     reg = __rlwimi(reg, even, 0, 31, 31);
     reg = __rlwimi(reg, odd, 1, 30, 30);
     reg = __rlwimi(reg, 0x44, 24, 0, 7);
     *(volatile u8 *)0xCC008000 = 0x61;
     *(volatile u32 *)0xCC008000 = reg;
-    M2C_FIELD(__GXData, u16 *, 0x2) = 0;
+    M2C_FIELD(gx, u16 *, 0x2) = 0;
 }
 
 void fn_8026CC84(u8 field_mode, u8 half_aspect_ratio) {
