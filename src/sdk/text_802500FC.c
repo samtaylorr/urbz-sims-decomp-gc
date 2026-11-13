@@ -634,6 +634,7 @@ s32 fn_80255A44(void) {
     return *(s32 *)0x800000F0;
 }
 
+#pragma dont_inline on
 void fn_80255DEC(u32 arg0, s32 arg1) {
     void fn_80252AAC(void *);
     void fn_802528A4(void *);
@@ -2186,6 +2187,7 @@ s32 fn_80271074(s32 arg0) {
 
 void fn_80271FC0(u8 *color, u32 val) {
     extern void *__GXData;
+    void *gx = __GXData;
     u32 reg0;
     u32 reg1;
     u32 reg2;
@@ -2207,7 +2209,7 @@ void fn_80271FC0(u8 *color, u32 val) {
     reg2 = __rlwimi(reg2, 0x51, 24, 0, 7);
     *(volatile u8 *)0xCC008000 = 0x61;
     *(volatile u32 *)0xCC008000 = reg2;
-    M2C_FIELD(__GXData, u16 *, 0x2) = 0;
+    M2C_FIELD(gx, u16 *, 0x2) = 0;
 }
 
 void fn_80272240(u32 v) {
