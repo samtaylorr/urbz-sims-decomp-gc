@@ -705,15 +705,14 @@ s32 fn_80255A50(s32 final) {
 }
 
 void fn_80255A8C(s16 interrupt, void *context) {
-    extern void (*lbl_80440BB0[])();
-    void fn_80253410();
-    volatile u16 *regs = (volatile u16 *)0xCC004000;
+    extern void (*lbl_80440BB0[])(u16, void *, ...);
+    void fn_80253410(u16, void *, u32, u32);
     u32 cause;
     u32 addr;
 
-    cause = regs[0xF];
-    addr = (((u32)regs[0x12] & 0x3FF) << 16) | regs[0x11];
-    regs[0x10] = 0;
+    cause = __MEMRegs[0xF];
+    addr = (((u32)__MEMRegs[0x12] & 0x3FF) << 16) | __MEMRegs[0x11];
+    __MEMRegs[0x10] = 0;
     if (lbl_80440BB0[15]) {
         lbl_80440BB0[15](15, context, cause, addr);
         return;
@@ -1111,8 +1110,9 @@ s32 fn_8025C2BC(s32 chan) {
 }
 
 s32 fn_8025CD08(s32 chan) {
-    extern u8 lbl_80441650[];
-    return M2C_FIELD(lbl_80441650 + chan * 0x40, s32 *, 0xC);
+    typedef struct { u8 pad0[0xC]; s32 state; u8 pad10[0x30]; } EXICtrl;
+    extern EXICtrl lbl_80441650[];
+    return lbl_80441650[chan].state;
 }
 
 s32 fn_8025CD20(s32 chan) {
