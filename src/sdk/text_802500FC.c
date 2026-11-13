@@ -2402,7 +2402,7 @@ s32 fn_80273698(u32 *arg0) {
 }
 
 u8 fn_802737A0(u32 *arg0) {
-    extern u8 lbl_80494B30[];
+    extern u8 lbl_80494B30[8];
     return lbl_80494B30[((u32) *arg0 >> 5U) & 7];
 }
 
