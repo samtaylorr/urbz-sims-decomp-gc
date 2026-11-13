@@ -4314,7 +4314,7 @@ void fn_801FF1C4(void *arg0) {
     extern s32 lbl_803E622C[][12];
     extern char *lbl_803E65EC[][12];
     extern char lbl_803E56C0[];
-    void fn_801DB32C(char *, char *);
+    s32 fn_801DB32C(char *, u16 *);
     u32 i;
     s32 s;
     for (i = 0; i < 12; i++) {
@@ -7494,9 +7494,10 @@ void fn_8022D2C4(s32 key, INVCountVec *v) {
 }
 
 s32 *fn_8022D6FC(s32 *self) {
+    struct { s16 a, b, c; } tmp;
     INVVec_Init(self + 2);
-    self[0] = 0;
     self[1] = 0;
+    self[0] = 0;
     return self;
 }
 
