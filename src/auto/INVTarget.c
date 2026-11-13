@@ -1498,8 +1498,8 @@ void fn_801DB118(void) {
         if (p->type == 0x73) {
             if (p->value != NULL) {
                 fn_802D1A00(fn_802D0C44(), p->value);
+                p->value = 0;
             }
-            p->value = 0;
             p->type = 0;
         }
         p++;
