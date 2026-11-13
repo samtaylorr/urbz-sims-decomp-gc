@@ -2943,6 +2943,22 @@ void *fn_801E33CC(void *arg0) {
     return obj;
 }
 
+s32 fn_801E3438(void *arg0, void *arg1) {
+    typedef struct { u8 hdr[8]; u8 buf[0x200]; } Str;
+    void fn_800F6FB4(Str *, u8 *, s32);
+    void fn_800BD804(void *, Str *, s32);
+    void *fn_800F7138(Str *);
+    void fn_800F8178(void *, void *);
+    Str s;
+    if (arg1 != NULL) {
+        fn_800F6FB4(&s, s.buf, 0x100);
+        fn_800BD804(arg0, &s, 0);
+        fn_800F8178(arg1, fn_800F7138(&s));
+        return 1;
+    }
+    return 0;
+}
+
 s32 fn_801E613C(void *arg0, s32 arg1, s32 arg2) {
     struct {
         u8 pad[0x564];
@@ -3787,7 +3803,9 @@ void fn_801F805C(void *arg0, s32 arg1, s32 arg2) {
     u8 fn_801FA6BC(void *);
     void fn_801F80D0(void *, s32);
     struct { u8 pad[0xAC]; struct { u8 a; u8 b; u8 c[4]; } e[1]; } *p = arg0;
-    if (INV_inRange(M2C_FIELD(arg0, u16 *, 0xCC), 1, 9)) {
+    s32 v = M2C_FIELD(arg0, u16 *, 0xCC);
+    s32 lo = 1;
+    if (v <= 9 && v >= lo) {
         if (arg2 == 5 && M2C_FIELD(arg0, s32 *, 0xA4) != 0) {
             p->e[arg1].b = fn_801FA6BC(arg0);
         }
