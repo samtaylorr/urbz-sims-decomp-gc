@@ -3681,6 +3681,21 @@ void fn_801F83C4(void) {
 
 }
 
+void fn_801F87F0(void *arg0) {
+    extern s32 lbl_80494638;
+    extern u8 lbl_8049463B;
+    void fn_801F81FC(void *);
+    s32 ok = 1;
+    if (lbl_80494638 == M2C_FIELD(arg0, u8 *, 0xEF)) {
+        ok = 0;
+    }
+    M2C_FIELD(arg0, u8 *, 0xEF) = lbl_8049463B;
+    M2C_FIELD(arg0, u8 *, 0xF0) = lbl_8049463B;
+    if (ok && lbl_80494638 == 1) {
+        fn_801F81FC(arg0);
+    }
+}
+
 void fn_801F8FD4(s32 arg0, s32 arg1, s32 arg2) {
     extern struct { u8 pad[0xD8]; u8 *arr[1]; } lbl_8041F94C;
     void fn_80183DDC(void *, s32);
@@ -7496,8 +7511,7 @@ void fn_8022D2C4(s32 key, INVCountVec *v) {
 }
 
 s32 *fn_8022D6FC(s32 *self) {
-    struct { s16 a, b, c; } tmp;
-    struct { s16 a, b, c; } tmp2;
+    struct { s16 a, b, c; } tmp[3];
     INVVec_Init(self + 2);
     self[1] = 0;
     self[0] = 0;
