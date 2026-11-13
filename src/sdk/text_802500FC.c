@@ -3394,6 +3394,37 @@ s32 fn_80277694(s32 arg0, s32 arg1) {
 volatile u32 __EXIRegs[] : 0xCC006800;
 s32 fn_80277EB4(void *buf, s32 len, s32 mode);
 
+extern void (*lbl_804960C8)(s32);
+extern void (*lbl_804960CC)(s32);
+extern void *lbl_804960D8;
+extern s8 lbl_804960DC;
+
+void fn_80277960(void **arg0, void (*arg1)(s32)) {
+    s32 enabled;
+
+    enabled = fn_8025465C();
+    lbl_804960D8 = &lbl_804960DC;
+    *arg0 = lbl_804960D8;
+    lbl_804960C8 = arg1;
+    fn_80254AC0(0x18000);
+    __EXIRegs[10] = 0;
+    fn_80254684(enabled);
+}
+
+void fn_802779D8(s16 arg0) {
+    __PIRegs[0] = 0x1000;
+    if (lbl_804960CC != NULL) {
+        lbl_804960CC(arg0);
+    }
+}
+
+void fn_80277A18(void) {
+    lbl_804960DC = 1;
+    if (lbl_804960C8 != NULL) {
+        lbl_804960C8(0);
+    }
+}
+
 static inline BOOL DBGEXISelect(u32 v) {
     u32 regs = __EXIRegs[10];
     regs &= 0x405;
