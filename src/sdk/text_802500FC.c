@@ -595,6 +595,22 @@ __OSInterruptHandler fn_802546C4(s16 interrupt) {
     return lbl_80495E18[interrupt];
 }
 
+void fn_802546D8(void) {
+    extern volatile u32 __PIRegs[];
+    void fn_80248488(void *, s32, u32);
+    void fn_80254AC0(u32);
+    void fn_80250BDC(s32, void *);
+    void fn_80254F14(void);
+
+    lbl_80495E18 = (__OSInterruptHandler *)0x80003040;
+    fn_80248488(lbl_80495E18, 0, 0x80);
+    *(u32 *)0x800000C4 = 0;
+    *(u32 *)0x800000C8 = 0;
+    __PIRegs[1] = 0xF0;
+    fn_80254AC0(0xFFFFFFE0);
+    fn_80250BDC(4, fn_80254F14);
+}
+
 s32 fn_80254A24(void) {
     return *(s32 *)0x800000C8;
 }
@@ -2068,6 +2084,19 @@ void fn_80270740(void) {
 u16 fn_80270C44(void) {
     extern void *__peReg;
     return M2C_FIELD(__peReg, u16 *, 0xE);
+}
+
+void fn_80270DFC(u8 a, u8 b) {
+    extern volatile u16 *__peReg;
+    __peReg[3] = __rlwimi(b, a, 8, 0, 23);
+}
+
+void fn_80270E10(u32 x) {
+    extern volatile u16 *__peReg;
+    u32 reg = 0;
+    reg = __rlwimi(reg, x, 0, 30, 31);
+    reg = __rlwimi(reg, 1, 2, 29, 29);
+    __peReg[4] = reg;
 }
 
 s32 fn_80270FA8(s32 arg0) {
