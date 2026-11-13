@@ -19,7 +19,6 @@ typedef struct DVDCommandBlock {
 extern DVDCommandBlock *lbl_80495ED0;
 
 volatile u32 __SIRegs[] : 0xCC006400;
-volatile u32 __PIRegs[] : 0xCC003000;
 
 typedef struct DVDFileInfo {
     DVDCommandBlock cb;
