@@ -2089,6 +2089,10 @@ void fn_802734A4(void *arg0, f32 arg1) {
     M2C_FIELD(arg0, u32 *, 0x4) = (M2C_FIELD(arg0, u32 *, 0x4) & ~0xFF00) | (((u8)(s32)(lbl_804975A8 * arg1)) << 8);
 }
 
+void fn_80273598(u32 *obj, u8 v) {
+    *obj = (*obj & ~0x200000) | ((u32)v << 21);
+}
+
 void fn_802735E0(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x10) = arg1;
 }
