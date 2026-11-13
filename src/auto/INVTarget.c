@@ -3217,6 +3217,27 @@ void *fn_801F0DCC(void **self, char *name) {
     return self;
 }
 
+void fn_801F37F4(void *arg0) {
+    extern char lbl_803E3A08[];
+    extern char lbl_803E3A14[];
+    char *s;
+
+    if (M2C_FIELD(arg0, s32 *, 0x8C) == 0) {
+        s = lbl_803E3A08;
+    } else {
+        s = lbl_803E3A14;
+    }
+    if (M2C_FIELD(arg0, s32 *, 0x94) == 1) {
+        if (M2C_FIELD(arg0, s32 *, 0x0) != 0 && M2C_FIELD(arg0, s32 *, 0x1C) != 0) {
+            fn_801D7110(M2C_FIELD(arg0, s32 *, 0x1C), (u32)s, 0x13E8E443, M2C_FIELD(arg0, s32 *, 0x7C), 0);
+        }
+    } else {
+        if (M2C_FIELD(arg0, s32 *, 0x0) != 0 && M2C_FIELD(arg0, void ***, 0x1C) != NULL) {
+            fn_801D72DC(M2C_FIELD(arg0, void ***, 0x1C), (s32)s);
+        }
+    }
+}
+
 void fn_801F388C(void) {
 
 }
