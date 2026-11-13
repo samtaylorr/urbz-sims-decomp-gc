@@ -2197,20 +2197,19 @@ s32 fn_80271074(s32 arg0) {
 
 #pragma push
 #pragma peephole on
-void fn_80271FC0(u8 *color, u32 val) {
+void fn_80271FC0(struct { u8 r, g, b, a; } color, u32 val) {
     extern void *__GXData;
-    void *gx = __GXData;
     u32 reg;
 
     reg = 0;
-    reg = __rlwimi(reg, color[0], 0, 24, 31);
-    reg = __rlwimi(reg, color[3], 8, 16, 23);
+    reg = __rlwimi(reg, color.r, 0, 24, 31);
+    reg = __rlwimi(reg, color.a, 8, 16, 23);
     reg = __rlwimi(reg, 0x4F, 24, 0, 7);
     *(volatile u8 *)0xCC008000 = 0x61;
     *(volatile u32 *)0xCC008000 = reg;
     reg = 0;
-    reg = __rlwimi(reg, color[2], 0, 24, 31);
-    reg = __rlwimi(reg, color[1], 8, 16, 23);
+    reg = __rlwimi(reg, color.b, 0, 24, 31);
+    reg = __rlwimi(reg, color.g, 8, 16, 23);
     reg = __rlwimi(reg, 0x50, 24, 0, 7);
     *(volatile u8 *)0xCC008000 = 0x61;
     *(volatile u32 *)0xCC008000 = reg;
@@ -2219,7 +2218,7 @@ void fn_80271FC0(u8 *color, u32 val) {
     reg = __rlwimi(reg, 0x51, 24, 0, 7);
     *(volatile u8 *)0xCC008000 = 0x61;
     *(volatile u32 *)0xCC008000 = reg;
-    M2C_FIELD(gx, u16 *, 0x2) = 0;
+    M2C_FIELD(__GXData, u16 *, 0x2) = 0;
 }
 #pragma pop
 
@@ -2420,8 +2419,9 @@ f32 fn_802737F4(void *arg0) {
 
 f32 fn_80273828(u32 *arg0) {
     extern f32 lbl_804975D4;
-    s16 bias = ((u32) *arg0 >> 9U) & 0xFF;
-    return (f32) (s8) bias * lbl_804975D4;
+    s16 bias = (s16) (((u32) *arg0 >> 9U) & 0xFF);
+    s8 b = bias;
+    return (f32) b * lbl_804975D4;
 }
 
 s32 fn_80273868(u32 *arg0) {
@@ -2458,6 +2458,13 @@ u16 fn_80273AE0(void *arg0) {
     return M2C_FIELD(arg0, u16 *, 8);
 }
 
+void GXInitTlutRegion(u32 *region, u32 tmem_addr, u32 tlut_size) {
+    *region = 0;
+    *region = __rlwimi(*region, (tmem_addr - 0x80000) >> 9, 0, 22, 31);
+    *region = __rlwimi(*region, tlut_size, 10, 11, 21);
+    *region = __rlwimi(*region, 0x65, 24, 0, 7);
+}
+
 void fn_80273E3C(u32 *arg0, s32 *arg1, s32 *arg2) {
     *arg1 = ((*arg0 << 9) & 0x7FE00) + 0x80000;
     *arg2 = ((u32) *arg0 >> 0xAU) & 0x7FF;
@@ -2489,6 +2496,24 @@ s32 fn_80273FE4(s32 arg0) {
     temp_r0 = M2C_FIELD(__GXData, s32 *, 0x4CC);
     M2C_FIELD(__GXData, s32 *, 0x4CC) = arg0;
     return temp_r0;
+}
+
+void fn_8027425C(u32 coord, u8 enable, u16 ss, u16 ts) {
+    extern void *__GXData;
+    u8 *gx = __GXData;
+    u32 *ts0;
+
+    M2C_FIELD(gx, u32 *, 0x594) = (M2C_FIELD(gx, u32 *, 0x594) & ~(1 << coord)) | (enable << coord);
+    if (enable) {
+        ts0 = (u32 *)(gx + coord * 4);
+        ts0[0xB8 / 4] = __rlwimi(ts0[0xB8 / 4], ss - 1, 0, 16, 31);
+        ts0[0xD8 / 4] = __rlwimi(ts0[0xD8 / 4], ts - 1, 0, 16, 31);
+        *(volatile u8 *)0xCC008000 = 0x61;
+        *(volatile u32 *)0xCC008000 = ts0[0xB8 / 4];
+        *(volatile u8 *)0xCC008000 = 0x61;
+        *(volatile u32 *)0xCC008000 = ts0[0xD8 / 4];
+        M2C_FIELD(gx, u16 *, 0x2) = 0;
+    }
 }
 
 void fn_80275168(void) {
