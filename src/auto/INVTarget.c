@@ -4761,7 +4761,7 @@ s32 fn_802043A0(void *arg0, s32 **arg1, s32 arg2, s32 arg3) {
     void fn_80248488();
     s32 fn_80203A0C(s32, s32, s32);
     s32 fn_801FCFE8(void *, s32, s32, char *);
-    void fn_801DB32C(char *, char *);
+    s32 fn_801DB32C(char *, u16 *);
     char buf[0x200];
     char *p;
     char *s;
@@ -7127,11 +7127,11 @@ s32 fn_802253D0(void *self, s32 i) {
         u8 bit = 1 << i;
         if (!(M2C_FIELD(self, u8 *, 0x3C) & bit)) {
             Pair p;
-            Pair *pp = &p;
             M2C_FIELD(self, u8 *, 0x3C) |= bit;
-            pp->a = -1;
-            pp->b = 0;
-            M2C_FIELD(self, Pair **, 0x2C)[i] = p;
+            p.a = -1;
+            p.b = 0;
+            M2C_FIELD(self, Pair **, 0x2C)[i].a = p.a;
+            *(&M2C_FIELD(self, Pair **, 0x2C)[i].b) = *(volatile s32 *)&p.b;
             return 1;
         }
     }
