@@ -2324,7 +2324,8 @@ static inline s32 PADSync(void) {
     extern u32 lbl_80495FF0;
     extern s32 lbl_80494AB4;
     extern s32 fn_8025DAB8(void);
-    return lbl_80495FF0 == 0 && lbl_80494AB4 == 0x20 && !fn_8025DAB8();
+    s32 sync = lbl_80495FF0 == 0 && lbl_80494AB4 == 0x20 && !fn_8025DAB8();
+    return sync;
 }
 
 s32 fn_8026B838(s32 final) {
