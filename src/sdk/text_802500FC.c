@@ -850,7 +850,7 @@ u32 fn_8025E910(s32 chan) {
 }
 
 void fn_8025E924(void) {
-    *(volatile u32 *)0xCC006438 = 0x80000000;
+    __SIRegs[14] = 0x80000000;
 }
 
 u32 fn_8025E934(u32 x, u32 y) {
