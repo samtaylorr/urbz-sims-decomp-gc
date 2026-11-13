@@ -1192,6 +1192,12 @@ s32 fn_8025D804(void) {
     return 0x10 - (cmd >> 24);
 }
 
+s32 fn_8025DAB8(void) {
+    typedef struct { s32 chan; u32 poll; u32 inputBytes; void *input; void *callback; } SIControl;
+    extern SIControl lbl_803F9124;
+    return lbl_803F9124.chan != -1 ? 1 : 0;
+}
+
 s32 fn_8025DAD8(s32 chan) {
     typedef struct { s32 chan; u32 poll; u32 inputBytes; void *input; void *callback; } SIControl;
     typedef struct { s32 chan; u8 pad[0x1C]; } SIPacket;
