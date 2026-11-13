@@ -546,9 +546,9 @@ void fn_80254420(char *path, u32 arg1) {
     fn_80254284(addr, 0xC0000000, arg1);
 }
 
-void fn_80254488(char *path, u32 arg1) {
+void fn_80254488(char *path, char **argv) {
     s32 fn_802604AC(char *, DVDFileInfo *);
-    void fn_80254284(u32, u32, u32);
+    void fn_80254284(u32, u32, char **);
     void fn_80258640(void);
     void fn_8025611C(s32);
     void fn_80258680(void);
@@ -564,12 +564,13 @@ void fn_80254488(char *path, u32 arg1) {
     fn_8025187C(0x812F0000);
     if (path[0] == 0) {
         addr = 0;
-    } else if (fn_802604AC(path, &fileInfo)) {
-        addr = fileInfo.startAddr;
     } else {
-        return;
+        if (!fn_802604AC(path, &fileInfo)) {
+            return;
+        }
+        addr = fileInfo.startAddr;
     }
-    fn_80254284(addr, 0xC0000000, arg1);
+    fn_80254284(addr, 0xC0000000, argv);
 }
 
 s32 fn_80254670(void) {
@@ -609,7 +610,7 @@ void fn_802546D8(void) {
     fn_80254AC0(0xFFFFFFE0);
     fn_80250BDC(4, fn_80254F14);
 }
-
+#pragma scheduling reset
 s32 fn_80254A24(void) {
     return *(s32 *)0x800000C8;
 }
@@ -2135,15 +2136,16 @@ u16 fn_80270C44(void) {
 
 void fn_80270DD8(void) {
     extern void *__GXData;
-    void *gx = __GXData;
     *(volatile u8 *)0xCC008000 = 0x61;
     *(volatile u32 *)0xCC008000 = 0x63000000;
-    M2C_FIELD(gx, u16 *, 0x2) = 0;
+    ((u16 *)__GXData)[1] = 0;
 }
 
-void fn_80270DFC(u32 a, u8 b) {
+void fn_80270DFC(u32 a, u32 b) {
     extern volatile u16 *__peReg;
-    __peReg[3] = __rlwimi(b, a, 8, 0, 23);
+    u32 reg = b & 0xFF;
+    reg = __rlwimi(reg, a, 8, 0, 23);
+    __peReg[3] = reg;
 }
 
 void fn_80270E10(u32 x) {
@@ -2181,6 +2183,12 @@ s32 fn_80271074(s32 arg0) {
     lbl_804960B4 = arg0;
     fn_80254684();
     return temp_r31;
+}
+
+void fn_80272240(u32 v) {
+    extern void *__GXData;
+    u32 *gx = __GXData;
+    gx[0x1EC / 4] = __rlwimi(gx[0x1EC / 4], v, 7, 23, 24);
 }
 
 void fn_802725B4(void *arg0, f32 farg0, f32 farg1, f32 farg2, f32 farg3, f32 farg4, f32 farg5) {
