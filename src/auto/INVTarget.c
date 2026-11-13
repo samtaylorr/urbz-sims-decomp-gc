@@ -1503,7 +1503,7 @@ void fn_801DB118(void) {
             p->type = 0;
         }
         p++;
-    } while (p <= end);
+    } while ((s32)p <= (s32)end);
     lbl_80494610 = 0;
 }
 
@@ -3555,11 +3555,9 @@ M2C_UNK fn_801F5420(s32 arg0) {
     extern void fn_800F2868(void *, s32, s32);
     extern void fn_801F4D1C(void *);
     extern void *lbl_8041FAC8[];
-    s32 zero = 0;
-    s32 neg = -1;
-    fn_800F2868((void *)(arg0 + 0x28), zero, neg);
-    fn_800F2868((void *)(arg0 + 0x30), zero, neg);
-    fn_800F2868((void *)(arg0 + 0x34), zero, neg);
+    fn_800F2868((void *)(arg0 + 0x28), 0, -1);
+    fn_800F2868((void *)(arg0 + 0x30), 0, -1);
+    fn_800F2868((void *)(arg0 + 0x34), 0, -1);
     fn_800F2868((void *)(arg0 + 0x38), 0, -1);
     fn_801F4D1C(lbl_8041FAC8[0]);
 }
@@ -4252,6 +4250,24 @@ s32 fn_801FBC04(s32 arg0) {
         }
     }
     return 0;
+}
+
+s32 fn_801FCF28(void *arg0) {
+    extern u8 *lbl_80496648;
+    u8 *obj;
+    void *vt;
+    s32 flag;
+
+    obj = lbl_80496648;
+    if (obj == NULL) {
+        return 0;
+    }
+    flag = 1;
+    if (M2C_FIELD(arg0, s32 *, 0x84) == 0) {
+        flag = 0;
+    }
+    vt = *(void **)obj;
+    return M2C_FIELD(vt, s32 (**)(void *, s32), 0xA4)(obj + M2C_FIELD(vt, s16 *, 0xA0), flag);
 }
 
 s32 fn_801FCF84(void *arg0) {
@@ -7140,11 +7156,12 @@ s32 fn_802253D0(void *self, s32 i) {
         u8 bit = 1 << i;
         if (!(M2C_FIELD(self, u8 *, 0x3C) & bit)) {
             Pair p;
+            Pair *e;
             M2C_FIELD(self, u8 *, 0x3C) |= bit;
-            p.a = -1;
             p.b = 0;
-            M2C_FIELD(self, Pair **, 0x2C)[i].a = p.a;
-            *(&M2C_FIELD(self, Pair **, 0x2C)[i].b) = *(volatile s32 *)&p.b;
+            p.a = -1;
+            e = &M2C_FIELD(self, Pair **, 0x2C)[i];
+            *e = p;
             return 1;
         }
     }
