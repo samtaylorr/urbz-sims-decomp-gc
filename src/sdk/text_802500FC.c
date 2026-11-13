@@ -78,6 +78,17 @@ __OSExceptionHandler fn_80250BDC(u8 exception, __OSExceptionHandler handler) {
 __OSExceptionHandler fn_80250BF8(u8 exception) {
     return lbl_80495DEC[exception];
 }
+
+u8 fn_80250D54(void) {
+    return (u8) *(s32 *)0xCC006024;
+}
+
+void OSRegisterVersion(char *version) {
+    void fn_8025302C(char *, ...);
+    extern char lbl_804949A4[4];
+    fn_8025302C(lbl_804949A4, version);
+}
+
 #pragma pop
 void fn_80250FC4(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0) = 0;
