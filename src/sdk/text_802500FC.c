@@ -530,9 +530,9 @@ void fn_80253A14(void *arg0, void *arg1) {
     *(void **)0x800030F0 = arg1;
 }
 
-void fn_80254420(char *path, u32 arg1) {
+void fn_80254420(char *path, char **argv) {
     s32 fn_802604AC(char *, DVDFileInfo *);
-    void fn_80254284(u32, u32, u32);
+    void fn_80254284(u32, u32, char **);
     DVDFileInfo fileInfo;
     u32 addr;
 
@@ -543,7 +543,7 @@ void fn_80254420(char *path, u32 arg1) {
     } else {
         return;
     }
-    fn_80254284(addr, 0xC0000000, arg1);
+    fn_80254284(addr, 0xC0000000, argv);
 }
 
 void fn_80254488(char *path, char **argv) {
@@ -2185,10 +2185,53 @@ s32 fn_80271074(s32 arg0) {
     return temp_r31;
 }
 
+void fn_80271FC0(u8 *color, u32 val) {
+    extern void *__GXData;
+    u32 reg0;
+    u32 reg1;
+    u32 reg2;
+
+    reg0 = 0;
+    reg0 = __rlwimi(reg0, color[0], 0, 24, 31);
+    reg0 = __rlwimi(reg0, color[3], 8, 16, 23);
+    reg0 = __rlwimi(reg0, 0x4F, 24, 0, 7);
+    *(volatile u8 *)0xCC008000 = 0x61;
+    *(volatile u32 *)0xCC008000 = reg0;
+    reg1 = 0;
+    reg1 = __rlwimi(reg1, color[2], 0, 24, 31);
+    reg1 = __rlwimi(reg1, color[1], 8, 16, 23);
+    reg1 = __rlwimi(reg1, 0x50, 24, 0, 7);
+    *(volatile u8 *)0xCC008000 = 0x61;
+    *(volatile u32 *)0xCC008000 = reg1;
+    reg2 = 0;
+    reg2 = __rlwimi(reg2, val, 0, 8, 31);
+    reg2 = __rlwimi(reg2, 0x51, 24, 0, 7);
+    *(volatile u8 *)0xCC008000 = 0x61;
+    *(volatile u32 *)0xCC008000 = reg2;
+    M2C_FIELD(__GXData, u16 *, 0x2) = 0;
+}
+
 void fn_80272240(u32 v) {
     extern void *__GXData;
     u32 *gx = __GXData;
     gx[0x1EC / 4] = __rlwimi(gx[0x1EC / 4], v, 7, 23, 24);
+}
+
+void fn_80272548(void) {
+    extern void *__GXData;
+    *(volatile u8 *)0xCC008000 = 0x61;
+    *(volatile u32 *)0xCC008000 = 0x550003FF;
+    *(volatile u8 *)0xCC008000 = 0x61;
+    *(volatile u32 *)0xCC008000 = 0x560003FF;
+    M2C_FIELD(__GXData, u16 *, 0x2) = 0;
+}
+
+void fn_80272580(u16 *a, u16 *b, u16 *c, u16 *d) {
+    extern volatile u16 *__peReg;
+    *a = __peReg[8];
+    *b = __peReg[10];
+    *c = __peReg[9];
+    *d = __peReg[11];
 }
 
 void fn_802725B4(void *arg0, f32 farg0, f32 farg1, f32 farg2, f32 farg3, f32 farg4, f32 farg5) {
