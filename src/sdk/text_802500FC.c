@@ -1268,10 +1268,10 @@ void fn_8025DB14(void) {
 }
 
 s32 fn_8025E260(s32 enable) {
-    typedef struct { u8 pad[0x1E0]; u32 vcount[4]; } SIStatic;
     s32 fn_8025465C(void);
     void fn_80254684(s32);
-    extern SIStatic lbl_80441710;
+    extern u8 lbl_80441710[];
+    u8 *si = lbl_80441710;
     s32 enabled;
     u32 reg;
     s32 rc;
@@ -1287,12 +1287,12 @@ s32 fn_8025E260(s32 enable) {
     if (enable) {
         reg |= 0x08000000;
         for (i = 0; i < 4; i++) {
-            lbl_80441710.vcount[i] = 0;
+            ((s32 *)(si + 0x1E0))[i] = 0;
         }
     } else {
         reg &= ~0x08000000;
     }
-    reg &= ~0x80000001;
+    reg &= ~(0x80000000 | 1);
     __SIRegs[13] = reg;
     fn_80254684(enabled);
     return rc;
@@ -2228,6 +2228,23 @@ void fn_8026AD18(void) {
 extern s32 lbl_80494AC0;
 s32 fn_8026AF1C(void) {
     return lbl_80494AC0;
+}
+
+s8 fn_8026B20C(s8 x, s8 min) {
+    s8 m;
+
+    if (min > 0) {
+        m = min - 128;
+        if (x < m) {
+            x = m;
+        }
+    } else if (min < 0) {
+        m = min + 127;
+        if (m < x) {
+            x = m;
+        }
+    }
+    return x - min;
 }
 
 u8 fn_8026B260(u8 x, u8 min) {
