@@ -2575,6 +2575,24 @@ void fn_801E059C(void *arg0, s32 arg1) {
     }
 }
 
+void fn_801E0800(u8 *self, s32 arg1, u8 arg2) {
+    extern void *fn_802B092C(s32);
+    extern void *fn_802AFC94(void *, void *);
+    extern void fn_802AF634(void *, s32);
+    extern void fn_801E060C(u8 *, void *);
+    extern u8 lbl_803E15B8[];
+    extern u8 lbl_803E15E4[];
+    void *p;
+    self[0x69] = 1;
+    *(s32 *)(self + 0x0) = arg1;
+    self[0x11C] = arg2;
+    p = fn_802AFC94(fn_802B092C(0), self[0x11C] != 0 ? lbl_803E15B8 : lbl_803E15E4);
+    if (p != NULL) {
+        fn_802AF634(p, 1);
+        fn_801E060C(self, p);
+    }
+}
+
 void fn_801E1338(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
     struct T { u8 pad[0xE4]; void *arr[1]; };
     void *fn_802D1FC8(s32);
@@ -3613,8 +3631,12 @@ void fn_801E2A24(void *, s32);
 void fn_801E2BB4(void *);
 void fn_801F983C(s32 arg0, s32 arg1) {
     void fn_801E2BB4(void *);
-    if (INVSlot_IsUsed((void *)arg0, arg1)) {
-        fn_801E2BB4((u8 *)arg0 + (arg1 * 0x318 + 0x104));
+    s32 ok = 1;
+    if (*(s32 *)(arg1 * 0x318 + arg0 + 0x108) == 0) {
+        ok = 0;
+    }
+    if (ok) {
+        fn_801E2BB4(INVSlot_Get((void *)arg0, arg1));
     }
 }
 
