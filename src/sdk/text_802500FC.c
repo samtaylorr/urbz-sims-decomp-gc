@@ -481,7 +481,6 @@ void fn_802538BC(void *arg0, u32 entry) {
 #pragma pop
 volatile u32 __PIRegs[] : 0xCC003000;
 
-#pragma scheduling off
 #pragma peephole off
 void fn_80253924(void *arg0, s32 arg1, s32 arg2) {
     s32 fn_802642C0(DVDCommandBlock *);
