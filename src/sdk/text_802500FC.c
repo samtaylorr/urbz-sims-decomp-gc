@@ -505,6 +505,7 @@ void fn_802538BC(void *arg0, u32 entry) {
 }
 #pragma pop
 volatile u32 __PIRegs[] : 0xCC003000;
+volatile u16 __MEMRegs[] : 0xCC004000;
 
 #pragma peephole off
 void fn_80253924(void *arg0, s32 arg1, s32 arg2) {
@@ -693,6 +694,32 @@ s32 fn_80255A38(void) {
 
 s32 fn_80255A44(void) {
     return *(s32 *)0x800000F0;
+}
+
+s32 fn_80255A50(s32 final) {
+    void fn_80254AC0(u32);
+    if (final) {
+        *(volatile u16 *)0xCC004010 = 0xFF;
+        fn_80254AC0(0xF0000000);
+    }
+    return 1;
+}
+
+void fn_80255A8C(s16 interrupt, void *context) {
+    extern void (*lbl_80440BB0[])();
+    void fn_80253410();
+    volatile u16 *regs = (volatile u16 *)0xCC004000;
+    u32 cause;
+    u32 addr;
+
+    cause = regs[0xF];
+    addr = (((u32)regs[0x12] & 0x3FF) << 16) | regs[0x11];
+    regs[0x10] = 0;
+    if (lbl_80440BB0[15]) {
+        lbl_80440BB0[15](15, context, cause, addr);
+        return;
+    }
+    fn_80253410(15, context, cause, addr);
 }
 
 #pragma dont_inline on
@@ -1059,6 +1086,40 @@ void fn_8025B1BC(void) {
 void fn_8025B2B0(void) {
     M2C_UNK fn_80259838();
     fn_80259838();
+}
+
+s32 fn_8025C2BC(s32 chan) {
+    s32 fn_8025465C(void);
+    void fn_80254684(s32);
+    void fn_80254AC0(u32);
+    extern u8 lbl_80441650[];
+    u8 *exi = lbl_80441650 + chan * 0x40;
+    s32 enabled;
+
+    enabled = fn_8025465C();
+    if (!(M2C_FIELD(exi, u32 *, 0xC) & 8)) {
+        fn_80254684(enabled);
+        return 1;
+    }
+    if ((M2C_FIELD(exi, u32 *, 0xC) & 0x10) && M2C_FIELD(exi, u32 *, 0x18) == 0) {
+        fn_80254684(enabled);
+        return 0;
+    }
+    M2C_FIELD(exi, u32 *, 0xC) &= ~8;
+    fn_80254AC0(0x500000 >> (chan * 3));
+    fn_80254684(enabled);
+    return 1;
+}
+
+s32 fn_8025CD08(s32 chan) {
+    extern u8 lbl_80441650[];
+    return M2C_FIELD(lbl_80441650 + chan * 0x40, s32 *, 0xC);
+}
+
+s32 fn_8025CD20(s32 chan) {
+    s32 fn_8025CD48(s32, s32, u32 *);
+    u32 id;
+    return fn_8025CD48(chan, 0, &id);
 }
 
 s32 fn_8025D78C(void) {
@@ -2265,28 +2326,30 @@ s32 fn_80271074(s32 arg0) {
     return temp_r31;
 }
 
-void fn_80271FC0(struct { u8 r, g, b, a; } color, u32 val) {
+void fn_80271FC0(u8 *color, u32 val) {
     extern void *__GXData;
     void *gx = __GXData;
-    u32 reg;
+    u32 reg0;
+    u32 reg1;
+    u32 reg2;
 
-    reg = 0;
-    reg = __rlwimi(reg, color.r, 0, 24, 31);
-    reg = __rlwimi(reg, color.a, 8, 16, 23);
-    reg = __rlwimi(reg, 0x4F, 24, 0, 7);
+    reg0 = 0;
+    reg0 = __rlwimi(reg0, color[0], 0, 24, 31);
+    reg0 = __rlwimi(reg0, color[3], 8, 16, 23);
+    reg0 = __rlwimi(reg0, 0x4F, 24, 0, 7);
     *(volatile u8 *)0xCC008000 = 0x61;
-    *(volatile u32 *)0xCC008000 = reg;
-    reg = 0;
-    reg = __rlwimi(reg, color.b, 0, 24, 31);
-    reg = __rlwimi(reg, color.g, 8, 16, 23);
-    reg = __rlwimi(reg, 0x50, 24, 0, 7);
+    *(volatile u32 *)0xCC008000 = reg0;
+    reg1 = 0;
+    reg1 = __rlwimi(reg1, color[2], 0, 24, 31);
+    reg1 = __rlwimi(reg1, color[1], 8, 16, 23);
+    reg1 = __rlwimi(reg1, 0x50, 24, 0, 7);
     *(volatile u8 *)0xCC008000 = 0x61;
-    *(volatile u32 *)0xCC008000 = reg;
-    reg = 0;
-    reg = __rlwimi(reg, val, 0, 8, 31);
-    reg = __rlwimi(reg, 0x51, 24, 0, 7);
+    *(volatile u32 *)0xCC008000 = reg1;
+    reg2 = 0;
+    reg2 = __rlwimi(reg2, val, 0, 8, 31);
+    reg2 = __rlwimi(reg2, 0x51, 24, 0, 7);
     *(volatile u8 *)0xCC008000 = 0x61;
-    *(volatile u32 *)0xCC008000 = reg;
+    *(volatile u32 *)0xCC008000 = reg2;
     M2C_FIELD(gx, u16 *, 0x2) = 0;
 }
 
@@ -2298,12 +2361,14 @@ void fn_80272240(u32 v) {
 
 void fn_80272548(void) {
     extern void *__GXData;
-    void *gx = __GXData;
+    u32 reg;
+    reg = 0x550003FF;
     *(volatile u8 *)0xCC008000 = 0x61;
-    *(volatile u32 *)0xCC008000 = 0x550003FF;
+    *(volatile u32 *)0xCC008000 = reg;
+    reg = 0x560003FF;
     *(volatile u8 *)0xCC008000 = 0x61;
-    *(volatile u32 *)0xCC008000 = 0x560003FF;
-    M2C_FIELD(gx, u16 *, 0x2) = 0;
+    *(volatile u32 *)0xCC008000 = reg;
+    M2C_FIELD(__GXData, u16 *, 0x2) = 0;
 }
 
 void fn_80272580(u16 *a, u16 *b, u16 *c, u16 *d) {
