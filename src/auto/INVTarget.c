@@ -2643,7 +2643,7 @@ void fn_801E23B8(void *arg0) {
         if (*((u8 *)arg0 + i * 0x14 + 0xAD) == 0) {
             ok = 0;
         }
-        if (ok) {
+        if (!ok) {
             break;
         }
         i++;
@@ -2664,7 +2664,7 @@ void fn_801E242C(void *arg0) {
         if (*((u8 *)arg0 + i * 0x14 + 0xAD) == 0) {
             ok = 0;
         }
-        if (ok) {
+        if (!ok) {
             break;
         }
         i--;
