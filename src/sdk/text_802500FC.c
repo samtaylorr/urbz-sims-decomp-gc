@@ -679,6 +679,30 @@ u32 fn_80254AC0(u32 global) {
     fn_80254684(enabled);
     return prev;
 }
+
+#pragma push
+#pragma dont_inline on
+#pragma peephole off
+u32 fn_80254B48(u32 global) {
+    s32 enabled;
+    u32 prev;
+    u32 local;
+    u32 mask;
+
+    enabled = fn_8025465C();
+    prev = *(u32 *)0x800000C4;
+    local = *(u32 *)0x800000C8;
+    mask = global & (prev | local);
+    global = prev & ~global;
+    *(u32 *)0x800000C4 = global;
+    while (mask) {
+        mask = fn_8025474C(mask, global | local);
+    }
+    fn_80254684(enabled);
+    return prev;
+}
+#pragma pop
+
 #pragma pop
 
 void fn_80254F64(void) {
@@ -2908,9 +2932,14 @@ void fn_8026EBA4(void) {
 void fn_8026EBC8(u8 en) {
     extern void *__GXData;
     extern volatile u16 *__cpReg;
-    u8 v = en ? 1 : 0;
     u32 *gx = __GXData;
+    u32 v;
 
+    if (en) {
+        v = 1;
+    } else {
+        v = 0;
+    }
     gx[2] = __rlwimi(gx[2], v, 4, 27, 27);
     __cpReg[1] = gx[2];
 }
