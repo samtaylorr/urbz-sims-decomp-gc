@@ -2893,6 +2893,20 @@ void fn_801E25D0(u8 *self, s32 idx) {
     }
 }
 
+void fn_801E2BB4(void *arg0) {
+    void fn_801E2C28(void *);
+    u8 *self = arg0;
+    if (self[0x308] > 1) {
+        self[0x308] = 1;
+    }
+    self[self[0x308] * 0x14 + 0x168] = 6;
+    ((s32 *)(self + 0x2C0))[self[0x308]] = 0;
+    self[0x308]++;
+    if (self[0x30A] == 0) {
+        fn_801E2C28(self);
+    }
+}
+
 void fn_801E30E0(void *self) {
     void fn_801E2EE0(void *);
     void fn_801E2C28(void *);
@@ -2946,7 +2960,7 @@ s32 fn_801E3438(void *arg0, void *arg1) {
         return 0;
     }
     ps = &s;
-    fn_800F6FB4(ps, ps->buf, 0x100);
+    fn_800F6FB4(ps, (u16 *)((u8 *)ps + 8), 0x100);
     fn_800BD804(arg0, ps, 0);
     fn_800F8178(arg1, fn_800F7138(ps));
     return 1;
@@ -5504,6 +5518,20 @@ void fn_80206190(void) {
 
 }
 
+void fn_80206194(void *arg0, s32 arg1) {
+    s32 fn_80207074(void *);
+    s32 fn_801FBC04(s32);
+    extern void fn_801FEEB8(void *, s32);
+    void fn_80245BB4(s32, char *, ...);
+    extern char lbl_803E4E18[];
+    typedef struct { s32 a; s32 b; } Ent;
+    s32 n;
+
+    n = fn_801FBC04(M2C_FIELD(arg0, Ent **, 0x178)[fn_80207074(arg0)].a);
+    fn_801FEEB8(arg0, n);
+    fn_80245BB4(arg1, lbl_803E4E18, n - 1);
+}
+
 void fn_802063F8(void *arg0, char *arg1, s32 arg2) {
     s32 fn_80245BB4(char *, char *, ...);
     extern char lbl_803E4E18[];
@@ -6205,6 +6233,23 @@ void fn_8020FB60(void *self) {
     M2C_FIELD(self, s32 *, 0xC0) = zero;
     M2C_FIELD(self, s16 *, 0xC4) = zero;
     M2C_FIELD(self, s16 *, 0xC6) = zero;
+    fn_801DB274(lbl_803E7640, 2);
+    M2C_FIELD(self, s32 *, 0x124) = 3;
+}
+
+void fn_8020FBC8(void *self) {
+    extern u8 lbl_8041F94C[];
+    extern char lbl_803E7640[];
+    void fn_8021F454(void);
+    s32 fn_801DB274(char *, s32);
+    u8 *p = lbl_8041F94C;
+
+    M2C_FIELD(p, s32 *, 0x338) = M2C_FIELD(self, s32 *, 0x13C);
+    M2C_FIELD(p, s32 *, 0x33C) = M2C_FIELD(self, s32 *, 0x10C);
+    fn_8021F454();
+    M2C_FIELD(self, s32 *, 0xC0) = 0;
+    M2C_FIELD(self, s16 *, 0xC4) = 0;
+    M2C_FIELD(self, s16 *, 0xC6) = 0;
     fn_801DB274(lbl_803E7640, 2);
     M2C_FIELD(self, s32 *, 0x124) = 3;
 }
