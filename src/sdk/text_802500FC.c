@@ -1145,6 +1145,27 @@ s32 fn_8025D7FC(void) {
     return 4;
 }
 
+s32 fn_8025D804(void) {
+    s32 fn_8025C378(s32, s32, s32);
+    s32 fn_8025B6F0(s32, void *, s32, s32, void *);
+    s32 fn_8025BAD8(s32);
+    s32 fn_8025C4A4(s32);
+    extern s32 lbl_80495E80;
+    extern s32 lbl_80495E84;
+    u32 cmd;
+
+    if (!fn_8025C378(lbl_80495E80, lbl_80495E84, 3)) {
+        return -1;
+    }
+    cmd = 0x20010000;
+    fn_8025B6F0(lbl_80495E80, &cmd, 4, 1, 0);
+    fn_8025BAD8(lbl_80495E80);
+    fn_8025B6F0(lbl_80495E80, &cmd, 1, 0, 0);
+    fn_8025BAD8(lbl_80495E80);
+    fn_8025C4A4(lbl_80495E80);
+    return 0x10 - (cmd >> 24);
+}
+
 void fn_8025E8FC(s32 chan, u32 command) {
     __SIRegs[chan * 3] = command;
 }
