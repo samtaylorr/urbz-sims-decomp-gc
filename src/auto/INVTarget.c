@@ -2604,6 +2604,17 @@ void fn_801E1EE4(void *arg0) {
     }
 }
 
+void fn_801E1F6C(void *arg0) {
+    extern void *lbl_80494FCC;
+    void *fn_8033390C(void *, s32);
+    void fn_803115C0(void *, void *);
+
+    if (M2C_FIELD(arg0, void **, 0x30C) != NULL) {
+        fn_803115C0(fn_8033390C(lbl_80494FCC, M2C_FIELD(arg0, u8 *, 0x315)), M2C_FIELD(arg0, void **, 0x30C));
+        M2C_FIELD(arg0, void **, 0x30C) = NULL;
+    }
+}
+
 void fn_801E2140(void *arg0) {
     M2C_UNK fn_801E2180();
     M2C_UNK fn_801E2674();
@@ -6166,6 +6177,34 @@ void fn_80220D6C(void *arg0) {
     } else {
         M2C_FIELD(arg0, u8 *, 0x5C) &= ~0xC0;
     }
+}
+
+void fn_80220EA8(u8 *arg0, s32 arg1) {
+    extern s32 lbl_80417CD8[];
+    extern s32 lbl_80417CF0[];
+    typedef struct {
+        s32 unk0;
+        s32 unk4;
+        void *vtbl;
+        s32 unkC;
+    } Ev;
+    typedef struct {
+        s32 pad[2];
+        s32 data;
+        void (*fn)(Ev *);
+    } Cb;
+    Ev tmp, *p;
+    s32 *dvt = lbl_80417CF0;
+    Cb *cb;
+
+    p = &tmp;
+    p->vtbl = lbl_80417CD8;
+    cb = (Cb *)(arg0 + 0x7C);
+    p->unkC = arg1;
+    p->unk0 = 5;
+    p->unk4 = cb->data;
+    cb->fn(p);
+    p->vtbl = dvt;
 }
 
 void fn_80221924(void *arg0, s32 arg1, f32 farg0) {
