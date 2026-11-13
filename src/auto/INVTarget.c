@@ -2956,23 +2956,18 @@ void *fn_801E33CC(void *arg0) {
 }
 
 s32 fn_801E3438(void *arg0, void *arg1) {
-    typedef struct { u8 hdr[8]; u16 buf[0x100]; } Str;
-    void fn_800F6FB4(Str *, u16 *, s32);
-    void fn_800BD804(void *, Str *, s32);
-    void *fn_800F7138(Str *);
+    void fn_800BD804(void *, void *, s32);
+    void *fn_800F7138(void *);
     void fn_800F8178(void *, void *);
-    Str s;
-    if (arg1 == NULL) {
-        return 0;
+    char buf[0x208];
+    char *s = buf;
+    if (arg1 != NULL) {
+        INV_initWStr(s);
+        fn_800BD804(arg0, s, 0);
+        fn_800F8178(arg1, fn_800F7138(s));
+        return 1;
     }
-    {
-        Str *ps = &s;
-        u16 *b = ps->buf;
-        fn_800F6FB4(ps, b, 0x100);
-        fn_800BD804(arg0, ps, 0);
-        fn_800F8178(arg1, fn_800F7138(ps));
-    }
-    return 1;
+    return 0;
 }
 
 void fn_801E5334(u8 *self) {
@@ -6302,16 +6297,21 @@ void fn_8020FCE0(void *self) {
     void *mem;
     u8 *r;
 
-    M2C_FIELD(self, s32 *, 0xE058) = 0;
     M2C_FIELD(self, s32 *, 0xE054) = 0;
+    M2C_FIELD(self, s32 *, 0xE058) = 0;
     M2C_FIELD(self, s32 *, 0x104) = 0;
     M2C_FIELD(self, s32 *, 0x120) = 3;
     M2C_FIELD(self, s32 *, 0x108) = -1;
     fn_801DB274(lbl_803E75FC, 0);
     if (M2C_FIELD(self, s32 *, 0x11C) == 0) {
+        s32 v;
         mem = fn_802D1FC8(0x13C);
         r = fn_8021AF28(mem, self, fn_8020DD78(self), 0xFA);
-        M2C_FIELD(self, u8 **, 0x11C) = r ? r + 0x104 : 0;
+        v = 0;
+        if (r != 0) {
+            v = (s32)(r + 0x104);
+        }
+        M2C_FIELD(self, s32 *, 0x11C) = v;
     }
 }
 
