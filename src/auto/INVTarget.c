@@ -5172,6 +5172,7 @@ s32 fn_80204C0C(void *self, s32 type) {
     s32 fn_80059B50(void *);
     s32 n = 1;
     s32 have;
+    s32 r;
     void *p;
     switch (type) {
     case 2:
@@ -5188,15 +5189,12 @@ s32 fn_80204C0C(void *self, s32 type) {
         break;
     }
     p = fn_8005A574(M2C_FIELD(self, void **, 0x90));
-    if (p != 0) {
-        have = fn_80059B50(p);
-    } else {
-        have = 0;
-    }
+    have = p ? fn_80059B50(p) : 0;
+    r = n;
     if ((u32)(have + n) > 99) {
-        return 99 - have;
+        r = 99 - have;
     }
-    return n;
+    return r;
 }
 
 void fn_80204EC4(void *self) {
@@ -7262,16 +7260,21 @@ void fn_80223288(void *arg0, s32 arg1) {
     struct V2 { f32 x, y; } v;
     struct V2 *pv;
     struct V2 *d;
+    f32 t;
 
     if (arg1 == 7) {
         pv = &v;
-        pv->y = v.x = lbl_803EA76C[0];
+        t = lbl_803EA76C[0];
+        pv->y = t;
+        v.x = t;
         d = (struct V2 *)((u8 *)arg0 + 0x34);
         M2C_FIELD(d, s32 *, 4) = M2C_FIELD(pv, s32 *, 4);
         M2C_FIELD(d, s32 *, 0) = M2C_FIELD(&v, s32 *, 0);
     } else if (arg1 == 8) {
         pv = &v;
-        pv->y = v.x = lbl_803EA76C[0];
+        t = lbl_803EA76C[0];
+        pv->y = t;
+        v.x = t;
         d = (struct V2 *)((u8 *)arg0 + 0x3C);
         M2C_FIELD(d, s32 *, 4) = M2C_FIELD(pv, s32 *, 4);
         M2C_FIELD(d, s32 *, 0) = M2C_FIELD(&v, s32 *, 0);
