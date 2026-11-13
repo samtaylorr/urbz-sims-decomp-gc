@@ -1322,11 +1322,7 @@ f32 fn_8025FB70(f32 *v) {
 #pragma push
 #pragma fp_contract off
 f32 fn_8025FBAC(f32 *v) {
-    f32 sqmag;
-    f32 mag;
-
-    sqmag = v[0] * v[0] + v[1] * v[1] + v[2] * v[2];
-    mag = sqrtf(sqmag);
+    f32 mag = sqrtf(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
     return mag;
 }
 #pragma pop
@@ -2971,6 +2967,22 @@ s32 fn_80277CB8(void *arg0) {
 
     __EXIRegs[10] = (__EXIRegs[10] & 0x405) | 0xC0;
     cmd = 0x60000000;
+    err = !fn_80277EB4(&cmd, 2, 1);
+    while (__EXIRegs[13] & 1) {
+    }
+    err |= !fn_80277EB4(arg0, 4, 0);
+    while (__EXIRegs[13] & 1) {
+    }
+    __EXIRegs[10] &= 0x405;
+    return !err;
+}
+
+s32 fn_80277DF0(void *arg0) {
+    u32 cmd;
+    s32 err;
+
+    __EXIRegs[10] = (__EXIRegs[10] & 0x405) | 0x80;
+    cmd = 0;
     err = !fn_80277EB4(&cmd, 2, 1);
     while (__EXIRegs[13] & 1) {
     }
