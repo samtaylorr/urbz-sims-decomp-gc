@@ -1628,7 +1628,7 @@ void *fn_801DB3C8(void *name, s32 type) {
         }
         p++;
         q++;
-    } while (p <= end);
+    } while ((s32)p <= (s32)end);
     if (found) {
         return result;
     }
