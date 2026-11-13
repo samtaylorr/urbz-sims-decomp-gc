@@ -842,7 +842,7 @@ s32 fn_8025D7FC(void) {
 }
 
 void fn_8025E8FC(s32 chan, u32 command) {
-    ((volatile u32 *)0xCC006400)[chan * 3] = command;
+    __SIRegs[chan * 3] = command;
 }
 
 u32 fn_8025E910(s32 chan) {
@@ -1841,6 +1841,19 @@ s32 fn_8026C4FC(void) {
     return 0;
 }
 
+void fn_8026CC4C(u8 odd, u8 even) {
+    extern void *__GXData;
+    u32 reg;
+
+    reg = 0;
+    reg = (reg & ~1) | even;
+    reg = (reg & ~2) | ((u32)odd << 1);
+    reg = (reg & 0x00FFFFFF) | (0x44 << 24);
+    *(volatile u8 *)0xCC008000 = 0x61;
+    *(volatile u32 *)0xCC008000 = reg;
+    M2C_FIELD(__GXData, u16 *, 0x2) = 0;
+}
+
 void fn_8026CC84(u8 field_mode, u8 half_aspect_ratio) {
     extern void *__GXData;
     void __GXFlushTextureState(void);
@@ -2039,6 +2052,10 @@ void fn_80272A08(void *arg0, s32 *arg1) {
 
 void fn_80272A14(void *arg0, s32 *arg1) {
     *arg1 = M2C_FIELD(arg0, s32 *, 0xC);
+}
+
+void fn_80273438(void *arg0, u32 arg1) {
+    M2C_FIELD(arg0, u32 *, 0xC) = (M2C_FIELD(arg0, u32 *, 0xC) & ~0x1FFFFF) | (arg1 >> 5);
 }
 
 void fn_80273464(void *arg0, s32 arg1) {
