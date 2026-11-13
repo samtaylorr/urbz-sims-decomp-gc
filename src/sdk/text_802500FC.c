@@ -864,7 +864,8 @@ u32 fn_8025E934(u32 x, u32 y) {
     u32 poll;
     s32 enabled;
 
-    poll = (x << 16) | (y << 8);
+    poll = x << 16;
+    poll |= y << 8;
     enabled = fn_8025465C();
     lbl_803F9124.poll &= ~0x03FFFF00;
     lbl_803F9124.poll |= poll;
@@ -2068,6 +2069,24 @@ void fn_80273448(void *arg0, u32 arg1, u32 arg2) {
 
 void fn_80273464(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x18) = arg1;
+}
+
+void fn_8027346C(void *arg0, s32 arg1, s32 arg2) {
+    extern u8 lbl_80494B28[];
+    M2C_FIELD(arg0, u32 *, 0x0) = (M2C_FIELD(arg0, u32 *, 0x0) & ~0x10) | ((arg2 == 1 ? 1 : 0) << 4);
+    M2C_FIELD(arg0, u32 *, 0x0) = (M2C_FIELD(arg0, u32 *, 0x0) & ~0xE0) | (lbl_80494B28[arg1] << 5);
+}
+
+void fn_802734A4(void *arg0, f32 arg1) {
+    extern f32 lbl_804975C8;
+    extern f32 lbl_804975CC;
+    extern f32 lbl_804975A8;
+    if (arg1 < lbl_804975C8) {
+        arg1 = lbl_804975C8;
+    } else if (arg1 > lbl_804975CC) {
+        arg1 = lbl_804975CC;
+    }
+    M2C_FIELD(arg0, u32 *, 0x4) = (M2C_FIELD(arg0, u32 *, 0x4) & ~0xFF00) | (((u8)(s32)(lbl_804975A8 * arg1)) << 8);
 }
 
 void fn_802735E0(void *arg0, s32 arg1) {
