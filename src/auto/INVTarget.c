@@ -1466,6 +1466,29 @@ void fn_801D97CC(void) {
     }
 }
 
+void fn_801DB118(void) {
+    extern INVVar lbl_80436680[];
+    extern s32 lbl_80494610;
+    void *fn_802D0C44(void);
+    void fn_802D1A00(void *, void *);
+    INVVar *p;
+    INVVar *end;
+
+    p = lbl_80436680;
+    end = &lbl_80436680[0x4A];
+    do {
+        if (p->type == 0x73) {
+            if (p->value != NULL) {
+                fn_802D1A00(fn_802D0C44(), p->value);
+            }
+            p->value = 0;
+            p->type = 0;
+        }
+        p++;
+    } while (p <= end);
+    lbl_80494610 = 0;
+}
+
 s32 fn_801DB18C(u8 *name) {
     extern s32 lbl_80494610;
     void *fn_801DB3C8(void *, s32);
@@ -3621,7 +3644,7 @@ void fn_801F96A8(s32 arg0, s32 arg1) {
 void fn_801F97E4(s32 arg0, s32 arg1, s32 arg2) {
     void fn_801E2A24(void *, s32);
     if (INVSlot_IsUsed((void *)arg0, arg1)) {
-        fn_801E2A24((u8 *)arg0 + (arg1 * 0x318 + 0x104), arg2);
+        fn_801E2A24(INVSlot_Get((void *)arg0, arg1), arg2);
     }
 }
 
@@ -6857,17 +6880,19 @@ s32 fn_80224A28(void *arg0) {
 
 void fn_80224CFC(void *arg0, s32 arg1) {
     typedef struct { u8 b[0x20]; } Elem;
+    typedef struct { Elem *list; } Arr;
     extern void fn_802D20E8(void *);
     extern void fn_802D211C(void *);
-    if (M2C_FIELD(arg0, Elem **, 0x0) != NULL) {
-        Elem *p = M2C_FIELD(arg0, Elem **, 0x0);
+    Arr *a = (Arr *)arg0;
+    if (a->list != NULL) {
+        Elem *p = a->list;
         Elem *end = p + ((s32 *)p)[-2];
-        while (M2C_FIELD(arg0, Elem **, 0x0) != end) {
+        while (a->list != end) {
             end--;
             fn_8022366C(end, 0);
         }
-        fn_802D211C((s32 *)M2C_FIELD(arg0, Elem **, 0x0) - 2);
-        M2C_FIELD(arg0, void **, 0x0) = NULL;
+        fn_802D211C((s32 *)a->list - 2);
+        a->list = NULL;
     }
     if (arg1 & 1) {
         fn_802D20E8(arg0);
@@ -7354,12 +7379,12 @@ void fn_8022D2C4(s32 key, INVCountVec *v) {
 }
 
 s32 *fn_8022D6FC(s32 *self) {
+    struct { s16 a, b, c; } tmp;
     s32 *v = self + 2;
-    s32 *w = v + 2;
     s32 i;
     v[0] = 0;
     v[1] = 0;
-    w[1] = 0;
+    (v + 2)[1] = 0;
     ((u8 *)v)[0x10] = 0;
     for (i = 3; i != 0; i--) {
     }
@@ -7377,9 +7402,13 @@ void fn_8022D750(void *arg0, s32 flags) {
     s32 *self = arg0;
     s32 *v = self + 2;
     char *p;
+    char *end;
 
-    for (p = (char *)v[0]; p != (char *)v[1]; p += 0x80) {
+    p = (char *)v[0];
+    end = (char *)v[1];
+    while (p != end) {
         fn_80225E68(p + 4, 2);
+        p += 0x80;
     }
     if (v[0] != 0) {
         u32 size = (u32)(v[3] - v[0]) & ~0x7F;
