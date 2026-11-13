@@ -3287,6 +3287,18 @@ void fn_802771C0(u32 v) {
     *(volatile u32 *)0xCC008000 = 1;
 }
 
+static inline u32 __GXReadCPCounterU32(volatile u16 *lo, volatile u16 *hi) {
+    u32 h0, h1, l;
+
+    h0 = *hi;
+    do {
+        h1 = h0;
+        l = *lo;
+        h0 = *hi;
+    } while (h0 != h1);
+    return (h0 << 16) | l;
+}
+
 void fn_80277204(u32 *a, u32 *b, u32 *c) {
     extern volatile u16 *__cpReg;
     volatile u16 *lo;
