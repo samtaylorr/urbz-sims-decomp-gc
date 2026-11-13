@@ -1575,9 +1575,8 @@ s32 fn_801DB2D4(char *name, f32 value) {
     e = fn_801DB3C8(name, 0x66);
     if (e != NULL) {
         M2C_FIELD(e, f32 *, 8) = value;
-        e = (void *)1;
     }
-    return (s32)e;
+    return 1;
 }
 
 s32 fn_801DB32C(char *name, u16 *str) {
