@@ -3556,7 +3556,11 @@ void fn_801F96A8(s32 arg0, s32 arg1) {
 
 void fn_801F97E4(s32 arg0, s32 arg1, s32 arg2) {
     void fn_801E2A24(void *, s32);
-    if (INVSlot_IsUsed(arg0, arg1)) {
+    s32 ok = 1;
+    if (*(s32 *)(arg1 * 0x318 + arg0 + 0x108) == 0) {
+        ok = 0;
+    }
+    if (ok) {
         fn_801E2A24((u8 *)arg0 + (arg1 * 0x318 + 0x104), arg2);
     }
 }
@@ -3568,12 +3572,34 @@ void fn_801E2BB4(void *);
 void fn_801F983C(s32 arg0, s32 arg1) {
     void fn_801E2BB4(void *);
     s32 ok = 1;
-    if (*(s32 *)((u8 *)arg0 + (arg1 * 0x318 + 0x104) + 4) == 0) {
+    if (*(s32 *)(arg1 * 0x318 + arg0 + 0x108) == 0) {
         ok = 0;
     }
     if (ok) {
         fn_801E2BB4((u8 *)arg0 + (arg1 * 0x318 + 0x104));
     }
+}
+
+void fn_801F9BE4(void *arg0) {
+    extern void fn_800F1A60(void *, s32);
+    extern void fn_8031EA2C(void *);
+    extern void fn_802D20E8(void *);
+    void *p;
+    while (M2C_FIELD(arg0, void **, 0xD4) != NULL) {
+        p = M2C_FIELD(arg0, void **, 0xD4);
+        M2C_FIELD(arg0, void **, 0xD8) = M2C_FIELD(p, void **, 0x1C);
+        if (p != NULL) {
+            if (M2C_FIELD(p, void **, 0x10) != NULL) {
+                fn_8031EA2C(M2C_FIELD(p, void **, 0x10));
+            }
+            fn_800F1A60((char *)p + 0xC, 2);
+            fn_800F1A60((char *)p + 0x8, 2);
+            fn_800F1A60((char *)p + 0x4, 2);
+            fn_802D20E8(p);
+        }
+        M2C_FIELD(arg0, void **, 0xD4) = M2C_FIELD(arg0, void **, 0xD8);
+    }
+    M2C_FIELD(arg0, u8 *, 0xDC) = 0;
 }
 
 void fn_801F9D38(s32 arg0) {
@@ -7237,17 +7263,14 @@ void fn_80230718(void **arg0, s32 *arg1) {
     fn_8002B86C(lbl_8041FA38[0], arg0[*arg1]);
 }
 
-void fn_80230774(s32 arg0, u32 *arg1) {
-    extern s32 lbl_804966A4[2];
+void fn_80230774(s32 arg0, u32 arg1) {
     extern s32 lbl_8049467C;
     void fn_8008B374(s32);
     void fn_8008BD8C(s32, s32);
-    s32 obj = 0;
+    s32 obj;
 
-    arg0 = *arg1;
-    if ((u32)arg0 <= 1 && lbl_804966A4[arg0] != 0) {
-        obj = lbl_804966A4[arg0];
-    }
+    arg1 = *(u32 *)arg1;
+    obj = INV_getSlot(arg1);
     if (obj != 0) {
         fn_8008B374(obj);
         fn_8008BD8C(obj, lbl_8049467C);
