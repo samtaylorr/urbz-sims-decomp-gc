@@ -1796,6 +1796,11 @@ void fn_8026BCA4(s32 arg0) {
     *(s32 *)0xCC006C0C = arg0;
 }
 
+u32 fn_8026BCB0(void) {
+    extern volatile u32 __AIRegs[];
+    return __AIRegs[3];
+}
+
 s32 fn_8026BD98(void) {
     return *(s32 *)0xCC006C00 & 1;
 }
