@@ -7169,6 +7169,15 @@ void fn_80230718(void **arg0, s32 *arg1) {
     fn_8002B86C(lbl_8041FA38[0], arg0[*arg1]);
 }
 
+s32 fn_802308A8(s32 arg0, s32 arg1, s32 arg2) {
+    s32 fn_802311B4();
+    s32 fn_80231F8C(s32, s32, s32);
+    if (fn_802311B4() == 0) {
+        return 0;
+    }
+    return fn_80231F8C(arg0, arg1, arg2);
+}
+
 void fn_802323C4(void) {
     M2C_UNK fn_80232338(M2C_UNK, M2C_UNK);
     fn_80232338(1, 0xFFFF);
