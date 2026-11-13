@@ -1580,6 +1580,31 @@ s32 fn_801DB2D4(char *name, f32 value) {
     return ret;
 }
 
+s32 fn_801DB32C(char *name, u16 *str) {
+    extern s32 lbl_80494610;
+    extern u16 lbl_803E03D8[];
+    void *fn_801DB3C8(void *, s32);
+    s32 fn_800F8120(u16 *);
+    void fn_800F81A8(u16 *, u16 *, s32);
+    void fn_800F8178(u16 *, u16 *);
+    void *e;
+    s32 len;
+    if (lbl_80494610 == 0) {
+        return 0;
+    }
+    e = fn_801DB3C8(name, 0x73);
+    if (e != NULL) {
+        len = fn_800F8120(str);
+        if (len > 0x3F) {
+            len = 0x3F;
+        }
+        fn_800F81A8(M2C_FIELD(e, u16 **, 8), str, len);
+        fn_800F8178(M2C_FIELD(e, u16 **, 8) + len, lbl_803E03D8);
+        return 1;
+    }
+    return 0;
+}
+
 void *fn_801DB3C8(void *name, s32 type) {
     extern INVVar lbl_80436680[];
     s32 fn_802486DC(char *, void *);
