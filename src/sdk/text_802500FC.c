@@ -747,6 +747,27 @@ void fn_80255F1C(void *arg0) {
     M2C_FIELD(temp_r5, void **, 8) = temp_r4;
 }
 
+s32 fn_80255F54(s32 final) {
+    extern OSResetFunctionQueue ResetFunctionQueue_80495E38;
+    u32 fn_80257650(void);
+    OSResetFunctionInfo *info;
+    s32 err = 0;
+    u32 priority = 0;
+
+    for (info = ResetFunctionQueue_80495E38.head; info; info = info->next) {
+        if (err && priority != info->priority) {
+            break;
+        }
+        err |= !info->func(final);
+        priority = info->priority;
+    }
+    err |= !fn_80257650();
+    if (err) {
+        return 0;
+    }
+    return 1;
+}
+
 s32 fn_80256504(s32 arg0) {
     extern s32 lbl_80495E40;
     s32 temp_r0;
