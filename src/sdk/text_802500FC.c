@@ -2692,6 +2692,43 @@ s32 fn_8026C4FC(void) {
     return 0;
 }
 
+void fn_8026CADC(u8 before_tex) {
+    extern void *__GXData;
+    u32 *gx = __GXData;
+
+    gx[0x1DC / 4] = __rlwimi(gx[0x1DC / 4], before_tex, 6, 25, 25);
+    *(volatile u8 *)0xCC008000 = 0x61;
+    *(volatile u32 *)0xCC008000 = gx[0x1DC / 4];
+    ((u16 *)gx)[1] = 0;
+}
+
+void fn_8026CBE4(u8 dither) {
+    extern void *__GXData;
+    u32 *gx = __GXData;
+    u32 reg;
+
+    reg = gx[0x1D0 / 4];
+    reg = __rlwimi(reg, dither, 2, 29, 29);
+    *(volatile u8 *)0xCC008000 = 0x61;
+    *(volatile u32 *)0xCC008000 = reg;
+    gx[0x1D0 / 4] = reg;
+    ((u16 *)gx)[1] = 0;
+}
+
+void fn_8026CC10(u8 enable, u8 alpha) {
+    extern void *__GXData;
+    u32 *gx = __GXData;
+    u32 reg;
+
+    reg = gx[0x1D4 / 4];
+    reg = __rlwimi(reg, alpha, 0, 24, 31);
+    reg = __rlwimi(reg, enable, 8, 23, 23);
+    *(volatile u8 *)0xCC008000 = 0x61;
+    *(volatile u32 *)0xCC008000 = reg;
+    gx[0x1D4 / 4] = reg;
+    ((u16 *)gx)[1] = 0;
+}
+
 void fn_8026CC4C(u8 odd, u8 even) {
     extern void *__GXData;
     void *gx = __GXData;
