@@ -1304,7 +1304,11 @@ f32 fn_8025FB70(f32 *v) {
 #pragma push
 #pragma fp_contract off
 f32 fn_8025FBAC(f32 *v) {
-    f32 mag = sqrtf(fn_8025FB70(v));
+    f32 sqmag;
+    f32 mag;
+
+    sqmag = v[0] * v[0] + v[1] * v[1] + v[2] * v[2];
+    mag = sqrtf(sqmag);
     return mag;
 }
 #pragma pop
@@ -2716,6 +2720,12 @@ s32 fn_80273888(u32 *arg0) {
 
 s32 fn_80273894(s32 *self) {
     return self[6];
+}
+
+void fn_80273A18(void *obj, u32 id) {
+    extern void *__GXData;
+    extern void fn_8027389C(void *obj, void *region, u32 id);
+    fn_8027389C(obj, M2C_FIELD(__GXData, void *(**)(void *, u32), 0x4C8)(obj, id), id);
 }
 
 void fn_80273AA4(void *arg0, s32 *arg1, s32 *arg2, u16 *arg3) {
