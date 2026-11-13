@@ -1850,9 +1850,9 @@ void fn_8026CC4C(u8 odd, u8 even) {
     u32 reg;
 
     reg = 0;
-    reg = (reg & ~1) | even;
-    reg = (reg & ~2) | ((u32)odd << 1);
-    reg = (reg & 0x00FFFFFF) | (0x44 << 24);
+    reg = (reg & ~1) | (even & 1);
+    reg = (reg & ~2) | (((u32)odd << 1) & 2);
+    reg = (reg & 0x00FFFFFF) | ((0x44 << 24) & 0xFF000000);
     *(volatile u8 *)0xCC008000 = 0x61;
     *(volatile u32 *)0xCC008000 = reg;
     M2C_FIELD(__GXData, u16 *, 0x2) = 0;
@@ -1862,7 +1862,7 @@ void fn_8026CC84(u8 field_mode, u8 half_aspect_ratio) {
     extern void *__GXData;
     void __GXFlushTextureState(void);
 
-    M2C_FIELD(__GXData, u32 *, 0x7C) = (M2C_FIELD(__GXData, u32 *, 0x7C) & ~0x400000) | ((u32)half_aspect_ratio << 22);
+    M2C_FIELD(__GXData, u32 *, 0x7C) = (M2C_FIELD(__GXData, u32 *, 0x7C) & ~0x400000) | (((u32)half_aspect_ratio << 22) & 0x400000);
     *(volatile u8 *)0xCC008000 = 0x61;
     *(volatile u32 *)0xCC008000 = M2C_FIELD(__GXData, u32 *, 0x7C);
     __GXFlushTextureState();
@@ -2093,12 +2093,30 @@ void fn_80273598(u32 *obj, u8 v) {
     *obj = (*obj & ~0x200000) | ((u32)v << 21);
 }
 
+void fn_802735AC(u32 *obj, u8 v) {
+    *obj = (*obj & ~0x100) | ((u32)(v ? 0 : 1) << 8);
+}
+
+void fn_802735D0(u32 *obj, u32 v) {
+    *obj = (*obj & ~0x180000) | (v << 19);
+}
+
 void fn_802735E0(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x10) = arg1;
 }
 
 s32 fn_802735E8(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x10);
+}
+
+void fn_802735F0(u32 *obj, u32 *image, u16 *width, u16 *height, u32 *format, u32 *wrapS, u32 *wrapT, u8 *mipmap) {
+    *image = (obj[3] & 0x1FFFFF) << 5;
+    *width = (obj[2] & 0x3FF) + 1;
+    *height = ((obj[2] >> 10) & 0x3FF) + 1;
+    *format = obj[5];
+    *wrapS = obj[0] & 3;
+    *wrapT = (obj[0] >> 2) & 3;
+    *mipmap = (((u8 *)obj)[0x1F] & 1) == 1;
 }
 
 s32 fn_80273658(void *arg0) {
