@@ -3456,6 +3456,22 @@ void fn_801F4780(void *self) {
     }
 }
 
+void fn_801F47DC(void *self) {
+    void fn_801F4864(void *, s32);
+    switch (M2C_FIELD(self, s32 *, 0xE8)) {
+    case 1:
+        fn_801F4864(self, 0);
+        break;
+    case 2:
+        fn_801F4864(self, 1);
+        break;
+    case 3:
+        fn_801F4864(self, 0);
+        fn_801F4864(self, 1);
+        break;
+    }
+}
+
 void fn_801F4948(void *arg0) {
     extern void fn_8000BFD0(void *, s32, s32);
     extern struct { u8 pad[0xD0]; void *d0; } lbl_8041F94C;
