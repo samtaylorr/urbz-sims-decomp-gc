@@ -524,8 +524,8 @@ typedef void (*__OSInterruptHandler)(s16 interrupt, void *context);
 extern __OSInterruptHandler *lbl_80495E18;
 __OSInterruptHandler fn_802546A8(s16 interrupt, __OSInterruptHandler handler) {
     __OSInterruptHandler oldHandler;
-    oldHandler = lbl_80495E18[interrupt];
-    lbl_80495E18[interrupt] = handler;
+    oldHandler = *(lbl_80495E18 + interrupt);
+    *(lbl_80495E18 + interrupt) = handler;
     return oldHandler;
 }
 
@@ -1864,8 +1864,8 @@ s32 fn_8026C4FC(void) {
 
 void fn_8026CC4C(u8 odd, u8 even) {
     extern void *__GXData;
-    void *gx = __GXData;
     u32 reg;
+    void *gx = __GXData;
 
     reg = 0;
     reg = __rlwimi(reg, even, 0, 31, 31);
@@ -2117,8 +2117,7 @@ void fn_80273598(u32 *obj, u8 v) {
 }
 
 void fn_802735AC(u32 *obj, u8 v) {
-    struct { u32 pad0 : 23; u32 f : 1; u32 pad1 : 8; } *p = (void *)obj;
-    p->f = v ? 0 : 1;
+    *obj = __rlwimi(*obj, v ? 0 : 1, 8, 23, 23);
 }
 
 void fn_802735D0(u32 *obj, u32 v) {
