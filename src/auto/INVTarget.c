@@ -50,14 +50,6 @@ static inline s32 INVSlot_IsUsed(void *base, u32 idx) {
     return ok;
 }
 
-static inline s32 INV_inRange(s32 v, s32 lo, s32 hi) {
-    return v <= hi && v >= lo;
-}
-
-static inline void *INVSlot_Get(void *base, s32 idx) {
-    return (u8 *)base + (idx * 0x318 + 0x104);
-}
-
 static inline void INV_setStr(void *dst, void *key) {
     INVHandle fn_8004C168();
     extern u8 lbl_8041F94C[];
