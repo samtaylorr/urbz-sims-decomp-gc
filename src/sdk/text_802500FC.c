@@ -1000,6 +1000,7 @@ void fn_80258228(u16 mode) {
     u8 *sram;
     s32 enabled;
     s32 *locked;
+    u8 pad[8];
 
     scb = &lbl_80440C00;
     if ((u32)(mode & 0x7C00) == 0x5000 || (u32)(mode & 0xC0) == 0xC0) {
