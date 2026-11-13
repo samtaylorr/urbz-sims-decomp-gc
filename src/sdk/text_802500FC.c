@@ -2225,6 +2225,32 @@ void fn_8026AD18(void) {
     fn_8025F710();
 }
 
+void fn_8026AEBC(u32 type) {
+    extern s32 lbl_80496014;
+    extern void *lbl_80494AC4;
+    extern u32 lbl_80494AC0;
+    void fn_8026AF24();
+    void fn_8026B098();
+    void fn_8026B27C();
+
+    lbl_80496014 = 0;
+    switch (type) {
+    case 0:
+        lbl_80494AC4 = fn_8026AF24;
+        break;
+    case 1:
+        lbl_80494AC4 = fn_8026B098;
+        break;
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+        lbl_80494AC4 = fn_8026B27C;
+        break;
+    }
+    lbl_80494AC0 = type;
+}
+
 extern s32 lbl_80494AC0;
 s32 fn_8026AF1C(void) {
     return lbl_80494AC0;
