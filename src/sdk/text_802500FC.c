@@ -1783,6 +1783,11 @@ s32 fn_8026BC38(s32 arg0) {
     return temp_r31;
 }
 
+u32 fn_8026BC7C(void) {
+    extern volatile u32 __AIRegs[];
+    return __AIRegs[2];
+}
+
 void fn_8026BC8C(void) {
     *(s32 *)0xCC006C00 = (*(s32 *)0xCC006C00 & 0xFFFFFFDF) | 0x20;
 }
