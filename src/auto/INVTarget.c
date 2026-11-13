@@ -5158,6 +5158,32 @@ void fn_80204C00(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x88) = 0;
 }
 
+s32 fn_80204C0C(void *self, s32 type) {
+    void *fn_8005A574(void *);
+    s32 fn_80059B50(void *);
+    s32 n = 1;
+    s32 have;
+    void *p;
+    switch (type) {
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+        n = 20;
+        break;
+    }
+    p = fn_8005A574(M2C_FIELD(self, void **, 0x90));
+    if (p != 0) {
+        have = fn_80059B50(p);
+    } else {
+        have = 0;
+    }
+    if ((u32)(have + n) > 99) {
+        n = 99 - have;
+    }
+    return n;
+}
+
 void fn_80204EC4(void *self) {
     typedef struct { s32 a; s32 b; } Ent;
     typedef struct { Ent *begin; Ent *end; } EntVec;
@@ -5387,6 +5413,20 @@ void fn_80205BF8(void *arg0, u16 *arg1) {
     if (arg1 != NULL) {
         *arg1 = 0;
         fn_80204974(arg0, ((struct S *)arg0)->arr[lbl_80494648[M2C_FIELD(arg0, s32 *, 0x84)]], arg1);
+    }
+}
+
+void fn_80205C4C(void *arg0, u16 *arg1) {
+    void fn_80205CF8(void *, s32, s32 *, s32 *);
+    void fn_80204B00(void *, s32, s32 *, u16 *);
+    s32 sp8[2];
+    s32 sp10;
+
+    if (arg1 != NULL) {
+        *arg1 = 0;
+        sp10 = 0;
+        fn_80205CF8(arg0, M2C_FIELD(arg0, u8 *, 0x8C1), sp8, &sp10);
+        fn_80204B00(arg0, sp10, sp8, arg1);
     }
 }
 
