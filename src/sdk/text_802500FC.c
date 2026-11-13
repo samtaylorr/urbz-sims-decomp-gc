@@ -653,8 +653,7 @@ void fn_80254F6C(s32 arg0) {
 }
 
 void fn_80255980(void) {
-    *(u32 *)0x800030CC = 0;
-    *(u32 *)0x800030C8 = 0;
+    *(OSModuleInfo **)0x800030C8 = *(OSModuleInfo **)0x800030CC = NULL;
     *(u32 *)0x800030D0 = 0;
 }
 
@@ -699,7 +698,7 @@ s32 fn_80255A44(void) {
 s32 fn_80255A50(s32 final) {
     void fn_80254AC0(u32);
     if (final) {
-        *(volatile u16 *)0xCC004010 = 0xFF;
+        __MEMRegs[8] = 0xFF;
         fn_80254AC0(0xF0000000);
     }
     return 1;
@@ -1273,6 +1272,21 @@ void fn_8025FA20(void *arg0, void *arg1, f32 farg0) {
 
 f32 fn_8025FB70(f32 *v) {
     return v[0] * v[0] + v[1] * v[1] + v[2] * v[2];
+}
+
+f32 fn_8025FBAC(f32 *v) {
+    volatile f32 y;
+    f32 x = v[0] * v[0] + v[1] * v[1] + v[2] * v[2];
+
+    if (x > 0.0f) {
+        f64 guess = __frsqrte((f64)x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        y = (f32)(x * guess);
+        return y;
+    }
+    return x;
 }
 
 s32 fn_80260574(void) {
@@ -2387,13 +2401,16 @@ void fn_80272240(u32 v) {
 void fn_80272548(void) {
     extern void *__GXData;
     u32 reg;
+    void *gx;
+
     reg = 0x550003FF;
+    gx = __GXData;
     *(volatile u8 *)0xCC008000 = 0x61;
     *(volatile u32 *)0xCC008000 = reg;
     reg = 0x560003FF;
     *(volatile u8 *)0xCC008000 = 0x61;
     *(volatile u32 *)0xCC008000 = reg;
-    M2C_FIELD(__GXData, u16 *, 0x2) = 0;
+    M2C_FIELD(gx, u16 *, 0x2) = 0;
 }
 
 void fn_80272580(u16 *a, u16 *b, u16 *c, u16 *d) {
