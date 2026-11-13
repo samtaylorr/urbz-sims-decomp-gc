@@ -2422,7 +2422,8 @@ f32 fn_802737F4(void *arg0) {
 
 f32 fn_80273828(u32 *arg0) {
     extern f32 lbl_804975D4;
-    return (f32) (s8) (s16) ((u32) *arg0 >> 9U) * lbl_804975D4;
+    s16 bias = ((u32) *arg0 >> 9U) & 0xFF;
+    return (f32) (s8) bias * lbl_804975D4;
 }
 
 s32 fn_80273868(u32 *arg0) {
@@ -2470,6 +2471,15 @@ s32 fn_80273FD0(s32 arg0) {
 
     temp_r0 = M2C_FIELD(__GXData, s32 *, 0x4C8);
     M2C_FIELD(__GXData, s32 *, 0x4C8) = arg0;
+    return temp_r0;
+}
+
+s32 fn_80273FE4(s32 arg0) {
+    extern void *__GXData;
+    s32 temp_r0;
+
+    temp_r0 = M2C_FIELD(__GXData, s32 *, 0x4CC);
+    M2C_FIELD(__GXData, s32 *, 0x4CC) = arg0;
     return temp_r0;
 }
 
