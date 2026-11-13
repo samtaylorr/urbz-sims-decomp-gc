@@ -2225,6 +2225,29 @@ void fn_8026AD18(void) {
     fn_8025F710();
 }
 
+void fn_8026AE04(s32 chan, u32 mode) {
+    s32 fn_8025465C(void);
+    void fn_80254684(s32);
+    u32 fn_8025F148(s32);
+    extern u32 lbl_80495FEC;
+    extern u32 lbl_80494AC0;
+    extern u32 lbl_80494ABC;
+    s32 enabled;
+
+    enabled = fn_8025465C();
+    if ((lbl_80495FEC & (0x80000000 >> chan)) && !(fn_8025F148(chan) & 0x20000000)) {
+        if (lbl_80494AC0 < 2 && mode == 2) {
+            mode = 0;
+        }
+        if (*(u8 *)0x800030E3 & 0x20) {
+            mode = 0;
+        }
+        fn_8025E8FC(chan, lbl_80494ABC | 0x400000 | (mode & 3));
+        fn_8025E924();
+    }
+    fn_80254684(enabled);
+}
+
 void fn_8026AEBC(u32 type) {
     extern s32 lbl_80496014;
     extern void *lbl_80494AC4;
@@ -3196,12 +3219,12 @@ s32 fn_80277DF0(u32 *arg0) {
 
     DBGEXISelect(0);
     v = 0;
-    total |= (fn_80277EB4(&v, 2, 1) == FALSE);
-    total |= (DBGEXISync() == FALSE);
-    total |= (fn_80277EB4(arg0, 4, 0) == FALSE);
-    total |= (DBGEXISync() == FALSE);
-    total |= (DBGEXIDeselect() == FALSE);
-    return (total == FALSE);
+    total |= !fn_80277EB4(&v, 2, 1);
+    total |= !DBGEXISync();
+    total |= !fn_80277EB4(arg0, 4, 0);
+    total |= !DBGEXISync();
+    total |= !DBGEXIDeselect();
+    return !total;
 }
 
 void fn_80277E9C(void) {
