@@ -7051,7 +7051,8 @@ void fn_80220588(s32 *self, s32 *list) {
         i = 0;
         pit = &it;
         it = *list;
-        for (; i < fn_8016F500(list); i++) {
+        while (i < fn_8016F500(list)) {
+            i++;
             fn_80220608(self, it);
             fn_8016F79C(pit);
         }
@@ -8463,6 +8464,125 @@ s32 fn_802308A8(s32 arg0, s32 arg1, s32 arg2) {
         return 0;
     }
     return fn_80231F8C(arg0, arg1, arg2);
+}
+
+s32 fn_80230A10(void *arg0, u32 arg1, s32 arg2) {
+    void *fn_80232298(void *, u32);
+    void *fn_80227EB8(void *, s32);
+    extern s32 lbl_8049467C;
+    void *r;
+    void *o;
+    void *obj;
+    void *vt;
+
+    r = fn_80232298(arg0, arg1);
+    if (r == NULL) {
+        return 0;
+    }
+    o = fn_80227EB8(r, arg2);
+    if (o == NULL) {
+        return 0;
+    }
+    obj = M2C_FIELD(o, void **, 0x20);
+    vt = M2C_FIELD(obj, void **, 0xF0);
+    M2C_FIELD(vt, void (**)(void *, s32, s32), 0x14)((char *)obj + M2C_FIELD(vt, s16 *, 0x10), lbl_8049467C, 0);
+    return 1;
+}
+
+s32 fn_80231F8C(void *self, u32 key, s32 arg2) {
+    typedef struct { u32 key; u8 data[0x7C]; } Ent;
+    typedef struct { Ent *begin; Ent *end; } Vec;
+    s32 fn_80226070(void *, s32);
+    Vec *v = (Vec *)((u8 *)self + 8);
+    u32 *k = &key;
+    Ent *first = v->begin;
+    s32 len = v->end - first;
+    Ent *it;
+
+    while (len > 0) {
+        s32 half = len >> 1;
+        Ent *mid = first + half;
+        if (mid->key < key) {
+            first = mid + 1;
+            len = len - half - 1;
+        } else {
+            len = half;
+        }
+    }
+    it = first;
+    if (it != v->end && *k < it->key) {
+        it = v->end;
+    }
+    if (it == v->end) {
+        return 0;
+    }
+    return fn_80226070(it->data, arg2);
+}
+
+s32 fn_80232040(void *self, u32 key, s32 arg2) {
+    typedef struct { u32 key; u8 data[0x7C]; } Ent;
+    typedef struct { Ent *begin; Ent *end; } Vec;
+    void fn_80229C10(void *, s32);
+    Vec *v = (Vec *)((u8 *)self + 8);
+    u32 *k = &key;
+    Ent *first = v->begin;
+    s32 len = v->end - first;
+    Ent *it;
+
+    while (len > 0) {
+        s32 half = len >> 1;
+        Ent *mid = first + half;
+        if (mid->key < key) {
+            first = mid + 1;
+            len = len - half - 1;
+        } else {
+            len = half;
+        }
+    }
+    it = first;
+    if (it != v->end && *k < it->key) {
+        it = v->end;
+    }
+    if (it == v->end) {
+        return 0;
+    }
+    fn_80229C10(it->data, arg2);
+    return 1;
+}
+
+void *fn_80232298(void *self, u32 key) {
+    typedef struct { u32 key; u8 data[0x7C]; } Ent;
+    typedef struct { Ent *begin; Ent *end; } Vec;
+    Vec *v;
+    u32 *k = &key;
+    Ent *first;
+    s32 len;
+    Ent *it;
+
+    if (key == 0) {
+        return NULL;
+    }
+    v = (Vec *)((u8 *)self + 8);
+    first = v->begin;
+    len = v->end - first;
+    while (len > 0) {
+        s32 half = len >> 1;
+        Ent *mid = first + half;
+        if (mid->key < key) {
+            first = mid + 1;
+            len = len - half - 1;
+        } else {
+            len = half;
+        }
+    }
+    it = first;
+    if (it != v->end && *k < it->key) {
+        it = v->end;
+    }
+    if (it == v->end) {
+        return NULL;
+    }
+    return it->data;
 }
 
 void fn_802323C4(void) {
