@@ -4779,7 +4779,7 @@ s32 fn_80204458(void *arg0, s32 **arg1, s32 arg2, s32 arg3) {
     void fn_80248488();
     s32 fn_80203A0C(s32, s32, s32);
     s32 fn_801FCFE8(void *, s32, s32, char *);
-    void fn_801DB32C(char *, char *);
+    s32 fn_801DB32C(char *, u16 *);
     char buf[0x200];
     char *p;
     char *s;
@@ -7112,9 +7112,10 @@ s32 fn_802253D0(void *self, s32 i) {
         u8 bit = 1 << i;
         if (!(M2C_FIELD(self, u8 *, 0x3C) & bit)) {
             Pair p;
+            Pair *pp = &p;
             M2C_FIELD(self, u8 *, 0x3C) |= bit;
-            p.a = -1;
-            p.b = 0;
+            pp->a = -1;
+            pp->b = 0;
             M2C_FIELD(self, Pair **, 0x2C)[i] = p;
             return 1;
         }
@@ -7496,6 +7497,7 @@ void fn_8022D2C4(s32 key, INVCountVec *v) {
 
 s32 *fn_8022D6FC(s32 *self) {
     struct { s16 a, b, c; } tmp;
+    struct { s16 a, b, c; } tmp2;
     INVVec_Init(self + 2);
     self[1] = 0;
     self[0] = 0;
