@@ -2318,6 +2318,31 @@ s32 fn_8026B6EC(s32 arg0, s32 *arg1) {
     return 1;
 }
 
+s32 fn_8026B838(s32 final) {
+    extern void *lbl_8049600C;
+    extern u32 lbl_80495FF0;
+    extern s32 lbl_80494AB4;
+    extern s32 lbl_80496010;
+    extern s32 fn_8025DAB8(void);
+    extern s32 fn_8026A7B4(u32);
+    extern void *fn_8026B960(void *);
+    s32 sync;
+
+    if (lbl_8049600C != NULL) {
+        fn_8026B960(NULL);
+    }
+    if (final == 0) {
+        sync = (lbl_80495FF0 == 0 && lbl_80494AB4 == 0x20) && fn_8025DAB8() == 0;
+        if (lbl_80496010 == 0 && sync) {
+            lbl_80496010 = fn_8026A7B4(0xF0000000);
+            return 0;
+        }
+        return sync;
+    }
+    lbl_80496010 = 0;
+    return 1;
+}
+
 void fn_8026B8F4(void) {
     extern s32 lbl_80494AB8;
     lbl_80494AB8 = 0;
@@ -2517,6 +2542,48 @@ u8 fn_8026C010(void) {
 void fn_8026C18C(void) {
     extern s32 lbl_80496028;
     lbl_80496028 = 0;
+}
+
+void fn_8026C198(s16 interrupt, void *context) {
+    void fn_80252AAC(void *);
+    void fn_802528A4(void *);
+    extern void (*lbl_80496018)(u32);
+    u8 exceptionContext[0x2C8];
+
+    __AIRegs[0] |= 8;
+    fn_80252AAC(exceptionContext);
+    fn_802528A4(exceptionContext);
+    if (lbl_80496018) {
+        lbl_80496018(__AIRegs[2]);
+    }
+    fn_80252AAC(exceptionContext);
+    fn_802528A4(context);
+}
+
+void fn_8026C2C0(void (*callback)(void));
+
+void fn_8026C214(s16 interrupt, void *context) {
+    void fn_80252AAC(void *);
+    void fn_802528A4(void *);
+    extern void (*lbl_8049601C)(void);
+    extern void *lbl_80496020;
+    extern s32 lbl_8049602C;
+    u8 exceptionContext[0x2C8];
+
+    __DSPRegs[5] = (__DSPRegs[5] & ~0xA0) | 8;
+    fn_80252AAC(exceptionContext);
+    fn_802528A4(exceptionContext);
+    if (lbl_8049601C && !lbl_8049602C) {
+        lbl_8049602C = 1;
+        if (lbl_80496020) {
+            fn_8026C2C0(lbl_8049601C);
+        } else {
+            lbl_8049601C();
+        }
+        lbl_8049602C = 0;
+    }
+    fn_80252AAC(exceptionContext);
+    fn_802528A4(context);
 }
 
 s32 fn_8026C4FC(void) {
