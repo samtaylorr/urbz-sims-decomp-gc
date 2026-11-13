@@ -596,6 +596,11 @@ void fn_80256914(void) {
     fn_8025667C();
 }
 
+s32 fn_80257608(s32 arg0) {
+    s32 fn_802572CC(s32, s32);
+    return fn_802572CC(arg0, 0);
+}
+
 s32 fn_8025762C(s32 arg0) {
     s32 fn_802572CC(s32, s32);
     return fn_802572CC(arg0, 0x14);
@@ -663,6 +668,18 @@ void fn_8025A410(s64 time) {
     fn_8025A3FC(time);
     fn_8025BDE8();
     fn_80254684(enabled);
+}
+
+s64 fn_8025A4F8(s64 time) {
+    s32 fn_8025465C(void);
+    void fn_80254684(s32);
+    s32 enabled;
+    s64 result;
+
+    enabled = fn_8025465C();
+    result = *(s64 *)0x800030D8 + time;
+    fn_80254684(enabled);
+    return result;
 }
 
 s32 fn_8025A558(s32 year) {
