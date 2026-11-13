@@ -1850,9 +1850,9 @@ void fn_8026CC4C(u8 odd, u8 even) {
     u32 reg;
 
     reg = 0;
-    reg = (reg & ~1) | (even & 1);
-    reg = (reg & ~2) | (((u32)odd << 1) & 2);
-    reg = (reg & 0x00FFFFFF) | ((0x44 << 24) & 0xFF000000);
+    reg = __rlwimi(reg, even, 0, 31, 31);
+    reg = __rlwimi(reg, odd, 1, 30, 30);
+    reg = __rlwimi(reg, 0x44, 24, 0, 7);
     *(volatile u8 *)0xCC008000 = 0x61;
     *(volatile u32 *)0xCC008000 = reg;
     M2C_FIELD(__GXData, u16 *, 0x2) = 0;
@@ -1862,7 +1862,7 @@ void fn_8026CC84(u8 field_mode, u8 half_aspect_ratio) {
     extern void *__GXData;
     void __GXFlushTextureState(void);
 
-    M2C_FIELD(__GXData, u32 *, 0x7C) = (M2C_FIELD(__GXData, u32 *, 0x7C) & ~0x400000) | (((u32)half_aspect_ratio << 22) & 0x400000);
+    M2C_FIELD(__GXData, u32 *, 0x7C) = __rlwimi(M2C_FIELD(__GXData, u32 *, 0x7C), half_aspect_ratio, 22, 9, 9);
     *(volatile u8 *)0xCC008000 = 0x61;
     *(volatile u32 *)0xCC008000 = M2C_FIELD(__GXData, u32 *, 0x7C);
     __GXFlushTextureState();
@@ -1882,7 +1882,7 @@ void fn_8026CD0C(void) {
     hid2 |= 0x40000000;
     PPCMthid2(hid2);
 }
-
+#pragma peephole reset
 void fn_8026CD4C(void) {
     s32 PPCMfhid2();
     M2C_UNK PPCMthid2(s32);
@@ -2059,25 +2059,26 @@ void fn_80272A14(void *arg0, s32 *arg1) {
 }
 
 void fn_80273438(void *arg0, u32 arg1) {
-    M2C_FIELD(arg0, u32 *, 0xC) = (M2C_FIELD(arg0, u32 *, 0xC) & ~0x1FFFFF) | (arg1 >> 5);
+    struct { u32 w0, w1, w2; u32 pad : 11; u32 addr : 21; } *p = arg0;
+    p->addr = arg1 >> 5;
 }
 
-void fn_80273448(void *arg0, u32 arg1, u32 arg2) {
-    M2C_FIELD(arg0, u32 *, 0x0) = (M2C_FIELD(arg0, u32 *, 0x0) & ~3) | arg1;
-    M2C_FIELD(arg0, u32 *, 0x0) = (M2C_FIELD(arg0, u32 *, 0x0) & ~0xC) | (arg2 << 2);
+void fn_80273448(u32 *arg0, u32 arg1, u32 arg2) {
+    arg0[0] = (arg0[0] & ~3) | (arg1 & 3);
+    arg0[0] = (arg0[0] & ~0xC) | ((arg2 << 2) & 0xC);
 }
 
 void fn_80273464(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x18) = arg1;
 }
 
-void fn_8027346C(void *arg0, s32 arg1, s32 arg2) {
-    extern u8 lbl_80494B28[];
-    M2C_FIELD(arg0, u32 *, 0x0) = (M2C_FIELD(arg0, u32 *, 0x0) & ~0x10) | ((arg2 == 1 ? 1 : 0) << 4);
-    M2C_FIELD(arg0, u32 *, 0x0) = (M2C_FIELD(arg0, u32 *, 0x0) & ~0xE0) | (lbl_80494B28[arg1] << 5);
+void fn_8027346C(u32 *arg0, s32 arg1, s32 arg2) {
+    extern u8 lbl_80494B28[6];
+    arg0[0] = (arg0[0] & ~0x10) | (((arg2 == 1 ? 1 : 0) << 4) & 0x10);
+    arg0[0] = (arg0[0] & ~0xE0) | ((lbl_80494B28[arg1] << 5) & 0xE0);
 }
 
-void fn_802734A4(void *arg0, f32 arg1) {
+void fn_802734A4(u32 *arg0, f32 arg1) {
     extern f32 lbl_804975C8;
     extern f32 lbl_804975CC;
     extern f32 lbl_804975A8;
@@ -2086,19 +2087,19 @@ void fn_802734A4(void *arg0, f32 arg1) {
     } else if (arg1 > lbl_804975CC) {
         arg1 = lbl_804975CC;
     }
-    M2C_FIELD(arg0, u32 *, 0x4) = (M2C_FIELD(arg0, u32 *, 0x4) & ~0xFF00) | (((u8)(s32)(lbl_804975A8 * arg1)) << 8);
+    arg0[1] = (arg0[1] & ~0xFF00) | (((s32)(lbl_804975A8 * arg1) << 8) & 0xFF00);
 }
 
 void fn_80273598(u32 *obj, u8 v) {
-    *obj = (*obj & ~0x200000) | ((u32)v << 21);
+    *obj = (*obj & 0xFFDFFFFF) | (((u32)v << 21) & 0x00200000);
 }
 
 void fn_802735AC(u32 *obj, u8 v) {
-    *obj = (*obj & ~0x100) | ((u32)(v ? 0 : 1) << 8);
+    *obj = (*obj & 0xFFFFFEFF) | (((u32)(v ? 0 : 1) << 8) & 0x00000100);
 }
 
 void fn_802735D0(u32 *obj, u32 v) {
-    *obj = (*obj & ~0x180000) | (v << 19);
+    *obj = (*obj & 0xFFE7FFFF) | ((v << 19) & 0x00180000);
 }
 
 void fn_802735E0(void *arg0, s32 arg1) {
