@@ -3632,6 +3632,19 @@ void fn_801F788C(s32 arg0, u8 *arg1) {
     fn_801F78F0(arg0, var_r30, var_r31);
 }
 
+void fn_801F805C(void *arg0, s32 arg1, s32 arg2) {
+    u8 fn_801FA6BC(void *);
+    void fn_801F80D0(void *, s32);
+    u16 v = M2C_FIELD(arg0, u16 *, 0xCC);
+    if (v <= 9 && v >= 1) {
+        if (arg2 == 5 && M2C_FIELD(arg0, s32 *, 0xA4) != 0) {
+            ((u8 *)arg0 + 0xAD)[arg1 * 6] = fn_801FA6BC(arg0);
+        }
+    } else {
+        fn_801F80D0(arg0, arg1);
+    }
+}
+
 void fn_801F8274(void *arg0) {
     void fn_8000AA68(s32, void *, s32, s32, s32, ...);
     extern s32 lbl_804956BC;
@@ -5201,7 +5214,7 @@ void fn_80206F34(void *arg0, s32 arg1) {
 
 void fn_80206FC0(void *arg0) {
     s32 fn_801FBA80(s32, u16 *);
-    void fn_801DB32C(char *, u16 *);
+    s32 fn_801DB32C(char *, u16 *);
     extern char lbl_803E60F8[];
     u16 buf[32];
     fn_801FBA80(M2C_FIELD(arg0, s32 *, 0x950), buf);
