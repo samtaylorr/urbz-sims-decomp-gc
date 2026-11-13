@@ -2093,19 +2093,20 @@ void fn_80273438(void *arg0, u32 arg1) {
     p->addr = arg1 >> 5;
 }
 
+#pragma push
+#pragma peephole on
 void fn_80273448(u32 *arg0, u32 arg1, u32 arg2) {
-    arg0[0] = (arg0[0] & ~(3 << 0)) | (arg1 << 0);
-    arg0[0] = (arg0[0] & ~(3 << 2)) | ((arg2 & 3) << 2);
+    arg0[0] = (arg0[0] & ~3) | (arg1 & 3);
+    arg0[0] = (arg0[0] & ~0xC) | ((arg2 << 2) & 0xC);
 }
-
 void fn_80273464(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x18) = arg1;
 }
 
 void fn_8027346C(u32 *arg0, s32 arg1, s32 arg2) {
     extern u8 lbl_80494B28[6];
-    arg0[0] = (arg0[0] & 0xFFFFFFEF) | (((arg2 == 1 ? 1 : 0) << 4) & 0x10);
-    arg0[0] = (arg0[0] & 0xFFFFFF1F) | ((lbl_80494B28[arg1] << 5) & 0xE0);
+    arg0[0] = (arg0[0] & ~0x10) | (((arg2 == 1 ? 1 : 0) << 4) & 0x10);
+    arg0[0] = (arg0[0] & ~0xE0) | ((lbl_80494B28[arg1] << 5) & 0xE0);
 }
 
 void fn_802734A4(u32 *arg0, f32 arg1) {
