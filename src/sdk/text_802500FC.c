@@ -523,20 +523,18 @@ void fn_80253A14(void *arg0, void *arg1) {
     fn_802482F8(arg1, arg0, 0x1C);
     *(void **)0x800030F0 = arg1;
 }
+#pragma peephole reset
+#pragma scheduling reset
 
 typedef void (*__OSInterruptHandler)(s16 interrupt, void *context);
 extern __OSInterruptHandler *lbl_80495E18;
 __OSInterruptHandler fn_802546A8(s16 interrupt, __OSInterruptHandler handler) {
-    __OSInterruptHandler *p;
     __OSInterruptHandler oldHandler;
-    p = &lbl_80495E18[interrupt];
-    oldHandler = *p;
-    *p = handler;
+    oldHandler = lbl_80495E18[interrupt];
+    lbl_80495E18[interrupt] = handler;
     return oldHandler;
 }
 
-#pragma peephole reset
-#pragma scheduling reset
 s32 fn_80254A24(void) {
     return *(s32 *)0x800000C8;
 }
