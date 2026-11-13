@@ -2322,7 +2322,7 @@ s32 fn_8026B6EC(s32 arg0, s32 *arg1) {
 
 s32 fn_8026B838(s32 final) {
     extern void *lbl_8049600C;
-    extern u32 lbl_80495FF0;
+    extern s32 lbl_80495FF0;
     extern s32 lbl_80494AB4;
     extern s32 lbl_80496010;
     extern s32 fn_8025DAB8(void);
@@ -2333,15 +2333,19 @@ s32 fn_8026B838(s32 final) {
     if (lbl_8049600C != NULL) {
         fn_8026B960(NULL);
     }
-    if (final == 0) {
-        sync = (lbl_80495FF0 == 0 && lbl_80494AB4 == 0x20) && fn_8025DAB8() == 0;
-        if (lbl_80496010 == 0 && sync) {
+    if (!final) {
+        sync = 0;
+        if (lbl_80495FF0 == 0 && lbl_80494AB4 == 0x20 && !fn_8025DAB8()) {
+            sync = 1;
+        }
+        if (!lbl_80496010 && sync) {
             lbl_80496010 = fn_8026A7B4(0xF0000000);
             return 0;
         }
         return sync;
+    } else {
+        lbl_80496010 = 0;
     }
-    lbl_80496010 = 0;
     return 1;
 }
 
@@ -2571,8 +2575,10 @@ void fn_8026C214(s16 interrupt, void *context) {
     extern void *lbl_80496020;
     extern s32 lbl_8049602C;
     u8 exceptionContext[0x2C8];
+    u16 tmp;
 
-    __DSPRegs[5] = (__DSPRegs[5] & ~0xA0) | 8;
+    tmp = __DSPRegs[5];
+    __DSPRegs[5] = (tmp & ~0xA0) | 8;
     fn_80252AAC(exceptionContext);
     fn_802528A4(exceptionContext);
     if (lbl_8049601C && !lbl_8049602C) {
@@ -3348,15 +3354,15 @@ s32 fn_80277CB8(u32 *arg0) {
 }
 
 s32 fn_80277D64(u32 arg0) {
-    BOOL total = FALSE;
+    BOOL total;
     u32 v;
 
     DBGEXISelect(4);
     v = (arg0 & 0x1FFFFFFF) | 0xC0000000;
-    total |= !fn_80277EB4(&v, 4, 1);
+    total = !fn_80277EB4(&v, 4, 1);
     total |= !DBGEXISync();
     total |= !DBGEXIDeselect();
-    return total == FALSE;
+    return !total;
 }
 
 s32 fn_80277DF0(u32 *arg0) {
