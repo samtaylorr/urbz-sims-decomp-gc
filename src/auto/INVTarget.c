@@ -2935,19 +2935,21 @@ void *fn_801E33CC(void *arg0) {
 }
 
 s32 fn_801E3438(void *arg0, void *arg1) {
-    typedef struct { u8 hdr[8]; u8 buf[0x200]; } Str;
-    void fn_800F6FB4(Str *, u8 *, s32);
+    typedef struct { u8 hdr[8]; u16 buf[0x100]; } Str;
+    void fn_800F6FB4(Str *, u16 *, s32);
     void fn_800BD804(void *, Str *, s32);
     void *fn_800F7138(Str *);
     void fn_800F8178(void *, void *);
     Str s;
-    if (arg1 != NULL) {
-        fn_800F6FB4(&s, s.buf, 0x100);
-        fn_800BD804(arg0, &s, 0);
-        fn_800F8178(arg1, fn_800F7138(&s));
-        return 1;
+    Str *ps;
+    if (arg1 == NULL) {
+        return 0;
     }
-    return 0;
+    ps = &s;
+    fn_800F6FB4(ps, ps->buf, 0x100);
+    fn_800BD804(arg0, ps, 0);
+    fn_800F8178(arg1, fn_800F7138(ps));
+    return 1;
 }
 
 void fn_801E5334(u8 *self) {
@@ -2974,6 +2976,30 @@ void fn_801E59C0(void) {
         fn_80245BB4(name, lbl_803E25C4, i);
         fn_801DB32C(name, str);
     }
+}
+
+s32 fn_801E5D38(void *self, s32 arg1) {
+    switch (arg1) {
+    case 6:
+        return 6;
+    case 2:
+        return 2;
+    case 8:
+        return 8;
+    case 3:
+        return 3;
+    case 1:
+        return 1;
+    case 4:
+        return 4;
+    case 0:
+        return 0;
+    case 5:
+        return 5;
+    case 7:
+        return 7;
+    }
+    return 9;
 }
 
 s32 fn_801E613C(void *arg0, s32 arg1, s32 arg2) {
@@ -5188,7 +5214,6 @@ s32 fn_80204C0C(void *self, s32 type) {
     s32 fn_80059B50(void *);
     s32 n = 1;
     s32 have;
-    s32 r;
     void *p;
     switch (type) {
     case 2:
@@ -5205,12 +5230,15 @@ s32 fn_80204C0C(void *self, s32 type) {
         break;
     }
     p = fn_8005A574(M2C_FIELD(self, void **, 0x90));
-    have = p ? fn_80059B50(p) : 0;
-    r = n;
-    if ((u32)(have + n) > 99) {
-        r = 99 - have;
+    if (p != 0) {
+        have = fn_80059B50(p);
+    } else {
+        have = 0;
     }
-    return r;
+    if ((u32)(have + n) > 99) {
+        n = 99 - have;
+    }
+    return n;
 }
 
 void fn_80204EC4(void *self) {
