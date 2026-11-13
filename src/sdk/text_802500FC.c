@@ -665,6 +665,10 @@ s32 fn_802599FC(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x2D4);
 }
 
+u32 fn_8025A3F4(void) {
+    return __mftb();
+}
+
 #pragma push
 #pragma peephole off
 void fn_8025A410(s64 time) {
@@ -699,9 +703,12 @@ s64 fn_8025A4F8(s64 time) {
     return result;
 }
 
+#pragma push
+#pragma peephole off
 s32 fn_8025A558(s32 year) {
     return (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
 }
+#pragma pop
 
 #pragma push
 #pragma peephole off
@@ -830,6 +837,36 @@ s32 fn_8025D78C(void) {
 
 s32 fn_8025D7FC(void) {
     return 4;
+}
+
+void fn_8025E8FC(s32 chan, u32 command) {
+    ((volatile u32 *)0xCC006400)[chan * 3] = command;
+}
+
+u32 fn_8025E910(s32 chan) {
+    return ((volatile u32 *)0xCC006400)[chan * 3];
+}
+
+void fn_8025E924(void) {
+    *(volatile u32 *)0xCC006438 = 0x80000000;
+}
+
+u32 fn_8025E934(u32 x, u32 y) {
+    typedef struct { u32 a; u32 poll; } SIControl;
+    extern SIControl lbl_803F9124;
+    s32 fn_8025465C(void);
+    void fn_80254684(s32);
+    u32 poll;
+    s32 enabled;
+
+    poll = (x << 16) | (y << 8);
+    enabled = fn_8025465C();
+    lbl_803F9124.poll &= ~0x03FFFF00;
+    lbl_803F9124.poll |= poll;
+    poll = lbl_803F9124.poll;
+    *(volatile u32 *)0xCC006430 = poll;
+    fn_80254684(enabled);
+    return poll;
 }
 
 void fn_8025F594(void) {
