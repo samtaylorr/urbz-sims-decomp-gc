@@ -7,6 +7,15 @@ void fn_801FFFDC(void *, u8 *, s32, void *);
 void fn_802000A8(void *, u8 *, s32, u16);
 
 typedef struct { s32 *p; } INVHandle;
+
+static inline s32 INV_getSlot(u32 idx) {
+    extern s32 lbl_804966A4[2];
+    s32 ret = 0;
+    if (idx <= 1 && lbl_804966A4[idx] != 0) {
+        ret = lbl_804966A4[idx];
+    }
+    return ret;
+}
 void fn_800F1B80(void *, void *);
 
 static inline void INV_setStr(void *dst, void *key) {
