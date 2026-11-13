@@ -3495,7 +3495,7 @@ volatile u32 __EXIRegs[] : 0xCC006800;
 s32 fn_80277EB4(void *buf, s32 len, s32 mode);
 
 extern void (*lbl_804960C8)(s32);
-extern void (*lbl_804960CC)(s32);
+extern void (*lbl_804960CC)();
 extern void *lbl_804960D8;
 extern s8 lbl_804960DC;
 
