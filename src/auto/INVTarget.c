@@ -2916,6 +2916,33 @@ void fn_801E30E0(void *self) {
     }
 }
 
+void fn_801E3140(void *self) {
+    void fn_801E2EE0(void *);
+    void fn_801E2C28(void *);
+    void fn_801E31A8(void *);
+    u8 n = M2C_FIELD(self, u8 *, 0x30A);
+    if (n != 0) {
+        M2C_FIELD(self, u8 *, 0x30A) = --n;
+        if (n == 0) {
+            fn_801E2EE0(self);
+            if (M2C_FIELD(self, u8 *, 0x308) != 0) {
+                fn_801E2C28(self);
+                fn_801E31A8(self);
+            }
+        }
+    }
+}
+
+void *fn_801E33CC(void *arg0) {
+    extern struct { u8 pad[0xD8]; u8 *arr[1]; } lbl_8041F94C;
+    u8 *obj = lbl_8041F94C.arr[M2C_FIELD(arg0, u8 *, 0x315)];
+
+    if (obj != NULL && (*(s32 (**)(u8 *))(*(u8 **)(obj + 4) + 0x29C))(obj + *(s16 *)(*(u8 **)(obj + 4) + 0x298)) == 0) {
+        obj = NULL;
+    }
+    return obj;
+}
+
 s32 fn_801E613C(void *arg0, s32 arg1, s32 arg2) {
     struct {
         u8 pad[0x564];
