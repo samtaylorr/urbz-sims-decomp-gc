@@ -2894,7 +2894,7 @@ void fn_801E25D0(u8 *self, s32 idx) {
 }
 
 void fn_801E2BB4(void *arg0) {
-    struct E { u8 b[0x14]; };
+    struct E { u8 pad[0x168]; u8 type; };
     struct T {
         u8 pad0[0x2C0];
         s32 vals[18];
@@ -2906,7 +2906,7 @@ void fn_801E2BB4(void *arg0) {
     if (self->n > 1) {
         self->n = 1;
     }
-    ((struct E *)self + self->n)->b[0x168] = 6;
+    ((struct E *)((u8 *)self + self->n * 0x14))->type = 6;
     self->vals[self->n] = 0;
     self->n++;
     if (self->busy == 0) {
@@ -2956,20 +2956,20 @@ void *fn_801E33CC(void *arg0) {
 }
 
 s32 fn_801E3438(void *arg0, void *arg1) {
-    void fn_800F6FB4(void *, void *, s32);
-    void fn_800BD804(void *, void *, s32);
-    void *fn_800F7138(void *);
+    typedef struct { u8 hdr[8]; u16 buf[0x100]; } Str;
+    void fn_800F6FB4(Str *, u16 *, s32);
+    void fn_800BD804(void *, Str *, s32);
+    void *fn_800F7138(Str *);
     void fn_800F8178(void *, void *);
-    char buf[0x208];
+    Str s;
+    Str *ps;
     if (arg1 == NULL) {
         return 0;
     }
-    {
-        char *s = buf;
-        fn_800F6FB4(s, buf + 8, 0x100);
-        fn_800BD804(arg0, s, 0);
-        fn_800F8178(arg1, fn_800F7138(s));
-    }
+    ps = &s;
+    fn_800F6FB4(ps, ps->buf, 0x100);
+    fn_800BD804(arg0, ps, 0);
+    fn_800F8178(arg1, fn_800F7138(ps));
     return 1;
 }
 
@@ -6322,8 +6322,8 @@ void fn_8020FD84(void *self) {
     extern s32 lbl_8041F94C[];
     void fn_8020FDF4(void *);
     void fn_8012FE10(void);
-    lbl_8041F94C[0x33C / 4] = 0;
     lbl_8041F94C[0x338 / 4] = 0;
+    lbl_8041F94C[0x33C / 4] = 0;
     M2C_FIELD(self, s32 *, 0x104) = 0;
     M2C_FIELD(self, s32 *, 0x108) = -1;
     M2C_FIELD(self, s32 *, 0xE050) = 1;
@@ -6876,13 +6876,13 @@ s32 fn_8021E60C(u8 *self, s32 n) {
     s32 result = 0;
 
     if (n != 0) {
-        s32 *p = lbl_80493498[*(s32 *)(self + 0x90)].slots;
-        s32 count = 0;
+        s32 count;
         s32 i;
 
         result = 99;
+        count = 0;
         for (i = 1; i <= 18 && result == 99; i++) {
-            if (*p++ != 0) {
+            if (lbl_80493498[*(s32 *)(self + 0x90)].slots[i - 1] != 0) {
                 if (++count == n) {
                     result = i;
                 }
