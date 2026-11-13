@@ -7076,6 +7076,42 @@ void fn_80222D58(u8 *arg0) {
     p->vtbl = dvt;
 }
 
+void fn_80222DBC(u8 *arg0) {
+    extern s32 lbl_80417CD8[];
+    extern s32 lbl_80417CF0[];
+    void *fn_801D7E6C();
+    M2C_UNK fn_802D1FC8(M2C_UNK);
+    void fn_801D841C(void *, s32);
+    extern void *lbl_80494600;
+    typedef struct {
+        s32 unk0;
+        s32 unk4;
+        void *vtbl;
+        s32 unkC;
+    } Ev;
+    typedef struct {
+        s32 pad[2];
+        s32 data;
+        void (*fn)(Ev *);
+    } Cb;
+    Ev tmp, *p;
+    s32 *dvt = lbl_80417CF0;
+    Cb *cb;
+
+    p = &tmp;
+    p->vtbl = lbl_80417CD8;
+    cb = (Cb *)(arg0 + 0x7C);
+    tmp.unk0 = 4;
+    p->unk4 = cb->data;
+    cb->fn(p);
+    if (lbl_80494600 == 0) {
+        fn_802D1FC8(0x78);
+        lbl_80494600 = fn_801D7E6C();
+    }
+    fn_801D841C(lbl_80494600, 0x64AC15);
+    p->vtbl = dvt;
+}
+
 s32 fn_802230D0(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 0x5C) & 1;
 }
