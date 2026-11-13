@@ -7056,8 +7056,8 @@ void fn_80220588(s32 *self, s32 *list) {
             fn_80220608(self, it);
             fn_8016F79C(pit);
         }
+        self[1] = self[0];
     }
-    self[1] = self[0];
 }
 
 s32 fn_8022088C(void *self, u8 *p) {
