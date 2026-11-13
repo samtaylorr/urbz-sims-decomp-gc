@@ -1304,7 +1304,8 @@ f32 fn_8025FB70(f32 *v) {
 #pragma push
 #pragma fp_contract off
 f32 fn_8025FBAC(f32 *v) {
-    return sqrtf(fn_8025FB70(v));
+    f32 sqmag = v[0] * v[0] + v[1] * v[1] + v[2] * v[2];
+    return sqrtf(sqmag);
 }
 #pragma pop
 s32 fn_80260574(void) {
