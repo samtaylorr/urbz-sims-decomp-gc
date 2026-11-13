@@ -669,8 +669,10 @@ void fn_80254F6C(s32 arg0) {
     *(s32 *)0x800030D0 = arg0;
 }
 
-void fn_80255980(void *unused) {
-    *(OSModuleInfo **)0x800030C8 = *(OSModuleInfo **)0x800030CC = NULL;
+void fn_80255980(void) {
+    OSModuleInfo **list = (OSModuleInfo **)0x800030C8;
+    list[1] = NULL;
+    list[0] = NULL;
     *(u32 *)0x800030D0 = 0;
 }
 
@@ -2399,6 +2401,13 @@ void fn_80270E30(u8 x) {
     extern volatile u16 *__peReg;
     u32 reg = __peReg[1];
     reg = __rlwimi(reg, x, 4, 27, 27);
+    __peReg[1] = reg;
+}
+
+void fn_80270EAC(u8 x) {
+    extern volatile u16 *__peReg;
+    u32 reg = __peReg[1];
+    reg = __rlwimi(reg, x, 3, 28, 28);
     __peReg[1] = reg;
 }
 
