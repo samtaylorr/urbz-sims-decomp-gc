@@ -2894,10 +2894,11 @@ void fn_801E25D0(u8 *self, s32 idx) {
 }
 
 void fn_801E2BB4(void *arg0) {
-    struct E { u8 type; u8 pad[0x13]; };
+    struct E { u8 pad[0x10]; u8 type; u8 pad2[3]; };
     struct T {
-        u8 pad0[0x168];
-        struct E ents[18];
+        u8 pad0[0x158];
+        struct E ents[19];
+        u8 pad2bc[4];
         s32 vals[18];
         u8 n;
         u8 pad309;
@@ -6292,6 +6293,28 @@ void fn_8020FC34(void *self) {
     M2C_FIELD(self, s32 *, 0x124) = 3;
 }
 
+void fn_8020FCE0(void *self) {
+    extern char lbl_803E75FC[];
+    s32 fn_801DB274(char *, s32);
+    void *fn_802D1FC8(s32);
+    s32 fn_8020DD78(void *);
+    u8 *fn_8021AF28(void *, void *, s32, s32);
+    void *mem;
+    u8 *r;
+
+    M2C_FIELD(self, s32 *, 0xE058) = 0;
+    M2C_FIELD(self, s32 *, 0xE054) = 0;
+    M2C_FIELD(self, s32 *, 0x104) = 0;
+    M2C_FIELD(self, s32 *, 0x120) = 3;
+    M2C_FIELD(self, s32 *, 0x108) = -1;
+    fn_801DB274(lbl_803E75FC, 0);
+    if (M2C_FIELD(self, s32 *, 0x11C) == 0) {
+        mem = fn_802D1FC8(0x13C);
+        r = fn_8021AF28(mem, self, fn_8020DD78(self), 0xFA);
+        M2C_FIELD(self, u8 **, 0x11C) = r ? r + 0x104 : 0;
+    }
+}
+
 void fn_802127FC(s32 arg0, s32 arg1) {
     extern u16 lbl_803F6B20[][20];
     s32 idx;
@@ -6811,6 +6834,27 @@ void fn_8021D7BC(u8 *arg0) {
     fn_801F53A0(arg0 + 0x84);
 }
 
+s32 fn_8021E60C(u8 *self, s32 n) {
+    extern u8 lbl_80493498[];
+    s32 result = 0;
+
+    if (n != 0) {
+        s32 *p = (s32 *)(lbl_80493498 + *(s32 *)(self + 0x90) * 0x4C + 4);
+        s32 count = 0;
+        s32 i;
+
+        result = 99;
+        for (i = 1; i <= 18 && result == 99; i++) {
+            if (*p++ != 0) {
+                if (++count == n) {
+                    result = i;
+                }
+            }
+        }
+    }
+    return result;
+}
+
 s32 fn_8021F05C(s32 arg0, s32 arg1) {
     void fn_8021EF20();
     fn_8021EF20(arg0, arg1, 3);
@@ -6833,6 +6877,32 @@ s32 fn_8021F1D4(s32 arg0, s32 arg1) {
     void fn_8021EF20();
     fn_8021EF20(arg0, arg1, 2);
     return arg0;
+}
+
+void fn_8021F3A4(s32 id, s32 *arg) {
+    extern void *lbl_803F6E70[4];
+    void *fn_802482F8(void *, s32, s32);
+    s32 ok = 1;
+    s32 idx = 0;
+    u32 n;
+
+    if (id == 0x55697831) {
+    } else if (id == 0x55697832) {
+        idx = 1;
+    } else if (id == 0x55697833) {
+        idx = 2;
+    } else if (id == 0x55697834) {
+        idx = 3;
+    } else {
+        ok = 0;
+    }
+    if (ok) {
+        n = arg[0];
+        if (n > 0x400) {
+            n = 0x400;
+        }
+        fn_802482F8(lbl_803F6E70[idx], arg[1], n);
+    }
 }
 
 void fn_8021F454(void) {
