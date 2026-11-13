@@ -18,6 +18,14 @@ static inline s32 INV_getSlot(u32 idx) {
 }
 void fn_800F1B80(void *, void *);
 
+static inline s32 INVSlot_IsUsed(s32 base, s32 idx) {
+    s32 ok = 1;
+    if (*(s32 *)(idx * 0x318 + base + 0x108) == 0) {
+        ok = 0;
+    }
+    return ok;
+}
+
 static inline void INV_setStr(void *dst, void *key) {
     INVHandle fn_8004C168();
     extern u8 lbl_8041F94C[];
