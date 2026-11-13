@@ -2950,6 +2950,16 @@ s32 fn_801E3438(void *arg0, void *arg1) {
     return 0;
 }
 
+void fn_801E5334(u8 *self) {
+    void fn_801C601C(void *, void *);
+    void *obj = self + 0x8C;
+    fn_801C601C(obj, self + 0x84);
+    fn_801C601C(obj, *(void **)(self + 0x500));
+    fn_801C601C(obj, self + 0x37C);
+    fn_801C601C(obj, self + 0xB4);
+    fn_801C601C(obj, self + 0x504);
+}
+
 s32 fn_801E613C(void *arg0, s32 arg1, s32 arg2) {
     struct {
         u8 pad[0x564];
