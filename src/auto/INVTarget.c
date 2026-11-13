@@ -6882,9 +6882,10 @@ s32 fn_8021E60C(u8 *self, s32 n) {
         count = 0;
         for (i = 1; i <= 18 && result == 99; i++) {
             if (lbl_80493498[*(s32 *)(self + 0x90)].slots[i - 1] != 0) {
-                if (++count == n) {
-                    result = i;
-                }
+                count++;
+            }
+            if (count == n) {
+                result = i;
             }
         }
     }
