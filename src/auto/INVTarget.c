@@ -7009,6 +7009,33 @@ void fn_80222C2C(void *self, void *room, void *pos, void *obj, s32 *out1, s32 *o
     }
 }
 
+void fn_80222D58(u8 *arg0) {
+    extern s32 lbl_80417CD8[];
+    extern s32 lbl_80417CF0[];
+    typedef struct {
+        s32 unk0;
+        s32 unk4;
+        void *vtbl;
+        s32 unkC;
+    } Ev;
+    typedef struct {
+        s32 pad[2];
+        s32 data;
+        void (*fn)(Ev *);
+    } Cb;
+    Ev tmp, *p;
+    s32 *dvt = lbl_80417CF0;
+    Cb *cb;
+
+    p = &tmp;
+    p->vtbl = lbl_80417CD8;
+    cb = (Cb *)(arg0 + 0x7C);
+    tmp.unk0 = 3;
+    p->unk4 = cb->data;
+    cb->fn(p);
+    p->vtbl = dvt;
+}
+
 s32 fn_802230D0(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 0x5C) & 1;
 }
