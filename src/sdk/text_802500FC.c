@@ -3105,6 +3105,26 @@ s32 fn_80277694(s32 arg0, s32 arg1) {
 
 volatile u32 __EXIRegs[] : 0xCC006800;
 s32 fn_80277EB4(void *buf, s32 len, s32 mode);
+
+static inline BOOL DBGEXISelect(u32 v) {
+    u32 regs = __EXIRegs[10];
+    regs &= 0x405;
+    regs |= 0x80 | (v << 4);
+    __EXIRegs[10] = regs;
+    return TRUE;
+}
+
+static inline BOOL DBGEXIDeselect(void) {
+    __EXIRegs[10] &= 0x405;
+    return TRUE;
+}
+
+static inline BOOL DBGEXISync(void) {
+    while (__EXIRegs[13] & 1) {
+    }
+    return TRUE;
+}
+
 s32 fn_80277CB8(void *arg0) {
     u32 cmd;
     s32 err;
