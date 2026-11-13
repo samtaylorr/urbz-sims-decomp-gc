@@ -1268,10 +1268,10 @@ void fn_8025DB14(void) {
 }
 
 s32 fn_8025E260(s32 enable) {
+    typedef struct { u8 pad[0x1E0]; u32 vcount[4]; } SIStatic;
     s32 fn_8025465C(void);
     void fn_80254684(s32);
-    extern u8 lbl_80441710[];
-    u8 *si = lbl_80441710;
+    extern SIStatic lbl_80441710;
     s32 enabled;
     u32 reg;
     s32 rc;
@@ -1287,7 +1287,7 @@ s32 fn_8025E260(s32 enable) {
     if (enable) {
         reg |= 0x08000000;
         for (i = 0; i < 4; i++) {
-            ((u32 *)(si + 0x1E0))[i] = 0;
+            lbl_80441710.vcount[i] = 0;
         }
     } else {
         reg &= ~0x08000000;
@@ -2230,6 +2230,13 @@ s32 fn_8026AF1C(void) {
     return lbl_80494AC0;
 }
 
+u8 fn_8026B260(u8 x, u8 min) {
+    if (x < min) {
+        x = min;
+    }
+    return x - min;
+}
+
 s32 fn_8026B6EC(s32 arg0, s32 *arg1) {
     extern s32 lbl_80494AB4;
     extern s32 lbl_80495FEC;
@@ -3126,43 +3133,38 @@ static inline BOOL DBGEXISync(void) {
     return TRUE;
 }
 
-s32 fn_80277CB8(void *arg0) {
-    u32 cmd;
-    s32 err;
+s32 fn_80277CB8(u32 *arg0) {
+    BOOL total = FALSE;
+    u32 v;
 
-    __EXIRegs[10] = (__EXIRegs[10] & 0x405) | 0xC0;
-    cmd = 0x60000000;
-    err = !fn_80277EB4(&cmd, 2, 1);
-    while (__EXIRegs[13] & 1) {
-    }
-    err |= !fn_80277EB4(arg0, 4, 0);
-    while (__EXIRegs[13] & 1) {
-    }
-    __EXIRegs[10] &= 0x405;
-    return !err;
+    DBGEXISelect(4);
+    v = 0x60000000;
+    total |= (fn_80277EB4(&v, 2, 1) == FALSE);
+    total |= (DBGEXISync() == FALSE);
+    total |= (fn_80277EB4(arg0, 4, 0) == FALSE);
+    total |= (DBGEXISync() == FALSE);
+    total |= (DBGEXIDeselect() == FALSE);
+    return (total == FALSE);
 }
 
-s32 fn_80277DF0(void *arg0) {
-    u32 cmd;
-    s32 err;
+s32 fn_80277DF0(u32 *arg0) {
+    BOOL total = FALSE;
+    u32 v;
 
-    __EXIRegs[10] = (__EXIRegs[10] & 0x405) | 0x80;
-    cmd = 0;
-    err = !fn_80277EB4(&cmd, 2, 1);
-    while (__EXIRegs[13] & 1) {
-    }
-    err |= !fn_80277EB4(arg0, 4, 0);
-    while (__EXIRegs[13] & 1) {
-    }
-    __EXIRegs[10] &= 0x405;
-    return !err;
+    DBGEXISelect(0);
+    v = 0;
+    total |= (fn_80277EB4(&v, 2, 1) == FALSE);
+    total |= (DBGEXISync() == FALSE);
+    total |= (fn_80277EB4(arg0, 4, 0) == FALSE);
+    total |= (DBGEXISync() == FALSE);
+    total |= (DBGEXIDeselect() == FALSE);
+    return (total == FALSE);
 }
 
 void fn_80277E9C(void) {
-    u32 reg;
-
-    reg = __EXIRegs[10];
-    __EXIRegs[10] = 0x80A;
+    volatile u32 *regs = __EXIRegs;
+    u32 reg = regs[10];
+    regs[10] = 0x80A;
 }
 
 void fn_802781E0(void) {
