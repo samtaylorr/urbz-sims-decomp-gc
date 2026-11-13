@@ -651,6 +651,12 @@ void fn_80254F6C(s32 arg0) {
     *(s32 *)0x800030D0 = arg0;
 }
 
+void fn_80255980(void) {
+    *(u32 *)0x800030CC = 0;
+    *(u32 *)0x800030C8 = 0;
+    *(u32 *)0x800030D0 = 0;
+}
+
 s32 fn_80255A38(void) {
     return *(s32 *)0x80000028;
 }
@@ -2229,8 +2235,6 @@ s32 fn_80271074(s32 arg0) {
     return temp_r31;
 }
 
-#pragma push
-#pragma peephole on
 void fn_80271FC0(struct { u8 r, g, b, a; } color, u32 val) {
     extern void *__GXData;
     void *gx = __GXData;
@@ -2255,7 +2259,6 @@ void fn_80271FC0(struct { u8 r, g, b, a; } color, u32 val) {
     *(volatile u32 *)0xCC008000 = reg;
     M2C_FIELD(gx, u16 *, 0x2) = 0;
 }
-#pragma pop
 
 void fn_80272240(u32 v) {
     extern void *__GXData;
@@ -2454,8 +2457,7 @@ f32 fn_802737F4(void *arg0) {
 
 f32 fn_80273828(u32 *arg0) {
     extern f32 lbl_804975D4;
-    s16 bias = (s16) (((u32) *arg0 >> 9U) & 0xFF);
-    return (f32) (s8) bias * lbl_804975D4;
+    return (f32) (s8) (s16) ((u32) *arg0 >> 9U) * lbl_804975D4;
 }
 
 s32 fn_80273868(u32 *arg0) {
