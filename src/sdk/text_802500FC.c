@@ -2479,6 +2479,12 @@ s32 fn_8026BFB8(void) {
     return ((u32) *(u32 *)0xCC006C00 >> 1U) & 1;
 }
 
+volatile u32 __AIRegs[] : 0xCC006C00;
+
+void fn_8026BFC8(u8 vol) {
+    __AIRegs[1] = (__AIRegs[1] & ~0xFF) | vol;
+}
+
 u8 fn_8026BFE4(void) {
     return (u8) *(s32 *)0xCC006C04;
 }
