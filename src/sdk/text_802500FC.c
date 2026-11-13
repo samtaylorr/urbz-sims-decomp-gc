@@ -1273,13 +1273,17 @@ s32 fn_8025E260(s32 enable) {
     extern u8 lbl_80441710[];
     u8 *si = lbl_80441710;
     s32 enabled;
-    s32 rc;
     u32 reg;
+    s32 rc;
     s32 i;
 
     enabled = fn_8025465C();
     reg = __SIRegs[13];
-    rc = (reg & 0x08000000) ? 1 : 0;
+    if (reg & 0x08000000) {
+        rc = 1;
+    } else {
+        rc = 0;
+    }
     if (enable) {
         reg |= 0x08000000;
         for (i = 0; i < 4; i++) {
@@ -1712,17 +1716,14 @@ void fn_8026284C(u32 arg0) {
 
 s32 fn_80262868(u32 arg0) {
     extern u32 lbl_803F9760[];
+    s32 i;
     if ((u32)(arg0 - 9) <= 3U) {
         return 1;
     }
-    if (arg0 == lbl_803F9760[0]) {
-        return 1;
-    }
-    if (arg0 == lbl_803F9760[1]) {
-        return 1;
-    }
-    if (arg0 == lbl_803F9760[2]) {
-        return 1;
+    for (i = 0; i < 3; i++) {
+        if (arg0 == lbl_803F9760[i]) {
+            return 1;
+        }
     }
     return 0;
 }
