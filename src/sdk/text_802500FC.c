@@ -39,6 +39,19 @@ typedef struct DVDFileInfo {
     void (*callback)(s32, struct DVDFileInfo *);
 } DVDFileInfo;
 
+typedef struct OSSectionInfo {
+    u32 offset;
+    u32 size;
+} OSSectionInfo;
+
+typedef struct OSModuleInfo {
+    u32 id;
+    struct OSModuleInfo *next;
+    struct OSModuleInfo *prev;
+    u32 numSections;
+    OSSectionInfo *sectionInfo;
+} OSModuleInfo;
+
 typedef struct FSTEntry {
     u32 isDirAndStringOff;
     u32 parentOrPosition;
@@ -2421,8 +2434,7 @@ f32 fn_802737F4(void *arg0) {
 f32 fn_80273828(u32 *arg0) {
     extern f32 lbl_804975D4;
     s16 bias = (s16) (((u32) *arg0 >> 9U) & 0xFF);
-    s8 b = bias;
-    return (f32) b * lbl_804975D4;
+    return (f32) (s8) bias * lbl_804975D4;
 }
 
 s32 fn_80273868(u32 *arg0) {
