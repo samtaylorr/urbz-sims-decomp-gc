@@ -3592,11 +3592,7 @@ void fn_801F96A8(s32 arg0, s32 arg1) {
 
 void fn_801F97E4(s32 arg0, s32 arg1, s32 arg2) {
     void fn_801E2A24(void *, s32);
-    s32 ok = 1;
-    if (*(s32 *)(arg1 * 0x318 + arg0 + 0x108) == 0) {
-        ok = 0;
-    }
-    if (ok) {
+    if (INVSlot_IsUsed(arg0, arg1)) {
         fn_801E2A24((u8 *)arg0 + (arg1 * 0x318 + 0x104), arg2);
     }
 }
@@ -3607,11 +3603,7 @@ void fn_801E2A24(void *, s32);
 void fn_801E2BB4(void *);
 void fn_801F983C(s32 arg0, s32 arg1) {
     void fn_801E2BB4(void *);
-    s32 ok = 1;
-    if (*(s32 *)(arg1 * 0x318 + arg0 + 0x108) == 0) {
-        ok = 0;
-    }
-    if (ok) {
+    if (INVSlot_IsUsed(arg0, arg1)) {
         fn_801E2BB4((u8 *)arg0 + (arg1 * 0x318 + 0x104));
     }
 }
@@ -3660,9 +3652,9 @@ void fn_801F9D74(s32 arg0, s32 arg1) {
 }
 
 void fn_801F9DD8(s32 arg0, s32 arg1) {
-    extern s32 lbl_8041FBD8;
+    extern s32 lbl_8041FBD8[];
     void fn_801F9E2C(s32, s32, s32);
-    if (lbl_8041FBD8 != 0) {
+    if (lbl_8041FBD8[0] != 0) {
         fn_801F9E2C(arg0, arg1, 0);
         fn_801F9E2C(arg0, arg1, 1);
     }
