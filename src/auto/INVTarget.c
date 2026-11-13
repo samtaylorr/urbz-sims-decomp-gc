@@ -2703,8 +2703,8 @@ M2C_UNK fn_801E0884(void *arg0, void *arg1, u8 arg2) {
     void *p;
     self[0x11C] = arg2;
     self[0x69] = 1;
-    *(void **)(self + 0x4) = arg1;
     *(void **)(self + 0x0) = arg1;
+    *(void **)(self + 0x4) = arg1;
     p = fn_802AFC94(fn_802B092C(0), lbl_803E1610);
     fn_802AF634(p, 1);
     fn_801E060C(self, p);
@@ -7110,8 +7110,10 @@ s32 fn_802253D0(void *self, s32 i) {
     if (fn_80225B14((s32 *)self, i)) {
         u8 bit = 1 << i;
         if (!(M2C_FIELD(self, u8 *, 0x3C) & bit)) {
-            Pair p = { -1, 0 };
+            Pair p;
             M2C_FIELD(self, u8 *, 0x3C) |= bit;
+            p.a = -1;
+            p.b = 0;
             M2C_FIELD(self, Pair **, 0x2C)[i] = p;
             return 1;
         }
@@ -7492,17 +7494,7 @@ void fn_8022D2C4(s32 key, INVCountVec *v) {
 }
 
 s32 *fn_8022D6FC(s32 *self) {
-    struct { s16 a, b, c; } tmp;
-    s32 *v = self + 2;
-    s32 i;
-    v[0] = 0;
-    v[1] = 0;
-    (v + 2)[1] = 0;
-    ((u8 *)v)[0x10] = 0;
-    for (i = 3; i != 0; i--) {
-    }
-    for (i = 4; i != 0; i--) {
-    }
+    INVVec_Init(self + 2);
     self[0] = 0;
     self[1] = 0;
     return self;
