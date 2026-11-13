@@ -2525,6 +2525,20 @@ void *fn_801E01A0(u8 *self) {
     return self;
 }
 
+void fn_801E01FC(void *arg0, s32 flags) {
+    extern void fn_801E0398(void *);
+    extern void fn_800F1A60(void *, s32);
+    extern void fn_80116F1C(void *, s32);
+    extern void fn_802D20E8(void *);
+    u8 *self = arg0;
+    fn_801E0398(self);
+    fn_800F1A60(self + 0x5C, 2);
+    fn_80116F1C(self + 0x4, 2);
+    if (flags & 1) {
+        fn_802D20E8(self);
+    }
+}
+
 s32 fn_801E0254(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
     void fn_801167DC(void *, s32);
     void fn_800F1AA0(void *, s32);
