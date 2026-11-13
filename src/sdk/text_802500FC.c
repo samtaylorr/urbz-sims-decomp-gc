@@ -2147,8 +2147,8 @@ s32 fn_8026BAE8(s32 arg0) {
     return temp_r31;
 }
 
+volatile u16 __DSPRegs[] : 0xCC005000;
 void fn_8026BB2C(u32 addr, u32 len) {
-    extern volatile u16 __DSPRegs[];
     s32 enabled;
 
     enabled = fn_8025465C();
