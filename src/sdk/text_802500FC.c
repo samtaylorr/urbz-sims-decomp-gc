@@ -3504,6 +3504,26 @@ u32 fn_80277E9C(void) {
     return reg;
 }
 
+BOOL fn_8027814C(void) {
+    while (__EXIRegs[13] & 1) {
+    }
+    return TRUE;
+}
+
+BOOL fn_80278184(u32 v) {
+    u32 regs = __EXIRegs[10];
+    regs &= 0x405;
+    regs |= 0x80 | (v << 4);
+    __EXIRegs[10] = regs;
+    return TRUE;
+}
+
+void fn_802781AC(void) {
+    void fn_80254AC0(u32);
+    fn_80254AC0(0x18000);
+    __EXIRegs[10] = 0;
+}
+
 void fn_802781E0(void) {
 
 }
