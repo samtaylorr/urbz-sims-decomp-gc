@@ -20,6 +20,18 @@ extern DVDCommandBlock *lbl_80495ED0;
 
 volatile u32 __SIRegs[] : 0xCC006400;
 
+typedef struct OSResetFunctionInfo {
+    s32 (*func)(s32 final);
+    u32 priority;
+    struct OSResetFunctionInfo *next;
+    struct OSResetFunctionInfo *prev;
+} OSResetFunctionInfo;
+
+typedef struct OSResetFunctionQueue {
+    OSResetFunctionInfo *head;
+    OSResetFunctionInfo *tail;
+} OSResetFunctionQueue;
+
 typedef struct DVDFileInfo {
     DVDCommandBlock cb;
     u32 startAddr;
@@ -542,7 +554,7 @@ void fn_80254420(char *path, char **argv) {
     } else {
         return;
     }
-    fn_80254284(addr, 0xC0000000, argv);
+    fn_80254284(addr, 0x80000000 | 0x40000000, argv);
 }
 
 void fn_80254488(char *path, char **argv) {
@@ -596,13 +608,13 @@ __OSInterruptHandler fn_802546C4(s16 interrupt) {
 
 void fn_802546D8(void) {
     extern volatile u32 __PIRegs[];
-    void fn_80248488(void *, s32, u32);
+    void *fn_80248488(void *, s32, u32);
     void fn_80254AC0(u32);
     void fn_80250BDC(s32, void *);
     void fn_80254F14(void);
 
-    lbl_80495E18 = (__OSInterruptHandler *)0x80003040;
-    fn_80248488(lbl_80495E18, 0, 0x80);
+    lbl_80495E18 = (__OSInterruptHandler *)((u8 *)0x80000000 + 0x3040);
+    fn_80248488(lbl_80495E18, 0, 32 * sizeof(__OSInterruptHandler));
     *(u32 *)0x800000C4 = 0;
     *(u32 *)0x800000C8 = 0;
     __PIRegs[1] = 0xF0;
@@ -2135,16 +2147,17 @@ u16 fn_80270C44(void) {
 }
 
 void fn_80270DD8(void) {
-    extern void *__GXData;
+    extern u16 *const __GXData;
     *(volatile u8 *)0xCC008000 = 0x61;
     *(volatile u32 *)0xCC008000 = 0x63000000;
-    ((u16 *)__GXData)[1] = 0;
+    __GXData[1] = 0;
 }
 
-void fn_80270DFC(u32 a, u32 b) {
+void fn_80270DFC(u32 a, u8 b) {
     extern volatile u16 *__peReg;
-    u32 reg = b & 0xFF;
-    reg = __rlwimi(reg, a, 8, 0, 23);
+    u32 reg = 0;
+    reg = __rlwimi(reg, b, 0, 24, 31);
+    reg = __rlwimi(reg, a, 8, 16, 23);
     __peReg[3] = reg;
 }
 
@@ -2220,11 +2233,12 @@ void fn_80272240(u32 v) {
 
 void fn_80272548(void) {
     extern void *__GXData;
+    void *gx = __GXData;
     *(volatile u8 *)0xCC008000 = 0x61;
     *(volatile u32 *)0xCC008000 = 0x550003FF;
     *(volatile u8 *)0xCC008000 = 0x61;
     *(volatile u32 *)0xCC008000 = 0x560003FF;
-    M2C_FIELD(__GXData, u16 *, 0x2) = 0;
+    M2C_FIELD(gx, u16 *, 0x2) = 0;
 }
 
 void fn_80272580(u16 *a, u16 *b, u16 *c, u16 *d) {
