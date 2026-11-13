@@ -926,25 +926,13 @@ static inline u8 *LockSram(u32 offset) {
 }
 
 void fn_80258228(u16 mode) {
-    extern u8 lbl_80440C00[];
     s32 fn_802572CC(s32, s32);
-    u8 *scb;
     u8 *sram;
-    s32 enabled;
 
     if ((mode & 0x7C00) == 0x5000 || (mode & 0xC0) == 0xC0) {
         mode = 0;
     }
-    scb = lbl_80440C00;
-    enabled = fn_8025465C();
-    if (*(s32 *)(scb + 0x48)) {
-        fn_80254684(enabled);
-        sram = NULL;
-    } else {
-        *(s32 *)(scb + 0x44) = enabled;
-        *(s32 *)(scb + 0x48) = 1;
-        sram = scb + 0x14;
-    }
+    sram = LockSram(0x14);
     if (mode == *(u16 *)(sram + 0x28)) {
         fn_802572CC(0, 0x14);
         return;
@@ -954,14 +942,14 @@ void fn_80258228(u16 mode) {
 }
 
 void fn_80258300(void) {
-    extern u8 fn_802582E0[];
+    void fn_802582E0(void);
     void *fn_802482F8(void *, void *, u32);
     void fn_80251C7C(void *, u32);
     void fn_80251D2C(void *, u32);
     void *addr;
 
     addr = (void *)0x80000C00;
-    fn_802482F8(addr, fn_802582E0, (u32)&fn_802582E0[0x1C] - (u32)&fn_802582E0[0]);
+    fn_802482F8(addr, (void *)fn_802582E0, (u8 *)fn_802582E0 + 0x1C - (u8 *)fn_802582E0);
     fn_80251C7C(addr, 0x100);
     __sync();
     fn_80251D2C(addr, 0x100);
@@ -3407,33 +3395,22 @@ void fn_802771C0(u32 v) {
     *(volatile u32 *)0xCC008000 = 1;
 }
 
-static inline u32 __GXReadCPCounterU32(volatile u16 *lo, volatile u16 *hi) {
+static inline u32 __GXReadCPCounterU32(volatile u16 *hi, volatile u16 *lo) {
     u32 h0, h1, l;
 
     h0 = *hi;
     do {
         h1 = h0;
-        h0 = *hi;
         l = *lo;
+        h0 = *hi;
     } while (h0 != h1);
     return (h0 << 16) | l;
 }
 
 void fn_80277204(u32 *a, u32 *b, u32 *c) {
     extern volatile u16 *__cpReg;
-    volatile u16 *lo;
-    volatile u16 *hi;
-    u32 h0, h1, l;
 
-    hi = &__cpReg[0x29];
-    lo = &__cpReg[0x28];
-    h0 = *hi;
-    do {
-        h1 = h0;
-        l = *lo;
-        h0 = *hi;
-    } while (h0 != h1);
-    *a = (h0 << 16) | l;
+    *a = __GXReadCPCounterU32(&__cpReg[0x28], &__cpReg[0x29]);
     *b = __GXReadCPCounterU32(&__cpReg[0x2A], &__cpReg[0x2B]);
     *c = __GXReadCPCounterU32(&__cpReg[0x2C], &__cpReg[0x2D]);
 }
