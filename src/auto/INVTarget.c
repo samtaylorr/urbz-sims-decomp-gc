@@ -2854,6 +2854,7 @@ void fn_801E2554(void *arg0) {
 }
 
 void fn_801E25D0(u8 *self, s32 idx) {
+    struct T { u8 pad[0x50]; void *items[1]; } *t = (struct T *)self;
     extern void fn_802AF754(void *, void *, s32, s32);
     extern u8 lbl_803E1A08[];
     extern u8 lbl_803E1A14[];
@@ -2864,11 +2865,11 @@ void fn_801E25D0(u8 *self, s32 idx) {
     }
     cur = *(s8 *)(self + 0x316);
     if (cur != -1) {
-        fn_802AF754(((void **)(self + 0x50))[cur], lbl_803E1A08, 0, 1);
+        fn_802AF754(t->items[cur], lbl_803E1A08, 0, 1);
     }
     *(s8 *)(self + 0x316) = idx;
     if (idx != -1) {
-        fn_802AF754(((void **)(self + 0x50))[idx], lbl_803E1A14, 0, 1);
+        fn_802AF754(t->items[idx], lbl_803E1A14, 0, 1);
     }
 }
 
