@@ -8532,18 +8532,18 @@ s32 fn_80232040(void *self, u32 key, s32 arg2) {
     while (len > 0) {
         s32 half = len >> 1;
         Ent *mid = first + half;
-        if (mid->key < key) {
+        if (mid->key >= key) {
+            len = half;
+        } else {
             first = mid + 1;
             len = len - half - 1;
-        } else {
-            len = half;
         }
     }
     it = first;
     if (it != v->end && *k < it->key) {
         it = v->end;
     }
-    if (it == v->end) {
+    if (it == M2C_FIELD(self, Ent **, 0xC)) {
         return 0;
     }
     fn_80229C10(it->data, arg2);
