@@ -3227,10 +3227,10 @@ s32 fn_80277DF0(u32 *arg0) {
     return !total;
 }
 
-void fn_80277E9C(void) {
-    volatile u32 *regs = __EXIRegs;
-    u32 reg = regs[10];
-    regs[10] = 0x80A;
+u32 fn_80277E9C(void) {
+    u32 reg = __EXIRegs[10];
+    __EXIRegs[10] = 0x80A;
+    return reg;
 }
 
 void fn_802781E0(void) {
