@@ -722,6 +722,14 @@ BOOL fn_80255514(OSModuleInfo *newModule, void *bss) {
     return fn_80255234(newModule, bss, FALSE);
 }
 
+BOOL fn_80255538(OSModuleInfo *newModule, void *bss) {
+    switch (M2C_FIELD(newModule, u32 *, 0x1C)) {
+    case 3:
+        return fn_80255234(newModule, bss, TRUE);
+    }
+    return FALSE;
+}
+
 void fn_80255980(void) {
     OSModuleInfo **list = (OSModuleInfo **)0x800030C8;
     list[1] = NULL;
@@ -987,13 +995,25 @@ static inline u8 *LockSram(u32 offset) {
 }
 
 void fn_80258228(u16 mode) {
+    extern SramControlBlock lbl_80440C00;
     s32 fn_802572CC(s32, s32);
+    SramControlBlock *scb;
     u8 *sram;
+    s32 enabled;
 
+    scb = &lbl_80440C00;
     if ((u32)(mode & 0x7C00) == 0x5000 || (u32)(mode & 0xC0) == 0xC0) {
         mode = 0;
     }
-    sram = LockSram(0x14);
+    enabled = fn_8025465C();
+    if (scb->locked != 0) {
+        fn_80254684(enabled);
+        sram = NULL;
+    } else {
+        scb->enabled = enabled;
+        scb->locked = 1;
+        sram = scb->sram + 0x14;
+    }
     if (mode == *(u16 *)(sram + 0x28)) {
         fn_802572CC(0, 0x14);
         return;
@@ -3015,6 +3035,10 @@ void fn_80270D34(void) {
 }
 
 void fn_80270DB4(void) {
+    extern u8 *const __GXData;
+    *(volatile u8 *)0xCC008000 = 0x61;
+    *(volatile u32 *)0xCC008000 = *(u32 *)(__GXData + 0x1DC);
+    *(u16 *)(__GXData + 2) = 0;
 }
 
 void fn_80270DD8(void) {
@@ -3045,6 +3069,16 @@ void fn_80270E30(u8 x) {
 }
 
 void fn_80270E48(s32 type, s32 src, s32 dst, s32 op) {
+    extern volatile u16 *__peReg;
+    u32 reg = __peReg[1];
+    reg = __rlwimi(reg, (type == 1 || type == 3), 0, 31, 31);
+    reg = __rlwimi(reg, type == 3, 11, 20, 20);
+    reg = __rlwimi(reg, type == 2, 1, 30, 30);
+    reg = __rlwimi(reg, op, 12, 16, 19);
+    reg = __rlwimi(reg, src, 8, 21, 23);
+    reg = __rlwimi(reg, dst, 5, 24, 26);
+    reg = __rlwimi(reg, 0x41, 24, 0, 7);
+    __peReg[1] = reg;
 }
 
 void fn_80270EAC(u8 x) {
