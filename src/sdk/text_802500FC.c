@@ -911,6 +911,19 @@ void fn_80257894(s32 arg0) {
     }
 }
 
+void fn_80258300(void) {
+    extern u8 fn_802582E0[];
+    void *fn_802482F8(void *, void *, u32);
+    void fn_80251C7C(void *, u32);
+    void fn_80251D2C(void *, u32);
+    void *addr = (void *)0x80000C00;
+
+    fn_802482F8(addr, fn_802582E0, (u32)(fn_802582E0 + 0x1C) - (u32)fn_802582E0);
+    fn_80251C7C(addr, 0x100);
+    __sync();
+    fn_80251D2C(addr, 0x100);
+}
+
 void fn_80258364(void) {
 
 }
@@ -3546,7 +3559,10 @@ void fn_802781AC(void) {
 }
 
 s32 fn_80278168(void) {
-    return DBGEXIDeselect();
+    u32 regs = __EXIRegs[10];
+    regs &= 0x405;
+    __EXIRegs[10] = regs;
+    return TRUE;
 }
 
 void fn_802781E0(void) {
