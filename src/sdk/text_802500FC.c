@@ -2996,6 +2996,9 @@ void fn_80270E30(u8 x) {
     __peReg[1] = reg;
 }
 
+void fn_80270E48(s32 type, s32 src, s32 dst, s32 op) {
+}
+
 void fn_80270EAC(u8 x) {
     extern volatile u16 *__peReg;
     u32 reg = __peReg[1];
