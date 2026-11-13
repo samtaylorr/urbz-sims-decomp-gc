@@ -2341,8 +2341,7 @@ s32 fn_8026B838(s32 final) {
     if (!final) {
         sync = PADSync();
         if (!lbl_80496010 && sync) {
-            s32 ret = fn_8026A7B4(0xF0000000);
-            lbl_80496010 = ret;
+            lbl_80496010 = fn_8026A7B4(0xF0000000);
             return 0;
         }
         return sync;
