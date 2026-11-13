@@ -596,6 +596,11 @@ void fn_80256914(void) {
     fn_8025667C();
 }
 
+u32 fn_80257650(void) {
+    extern u32 lbl_80440C00[];
+    return lbl_80440C00[0x13];
+}
+
 void fn_80258364(void) {
 
 }
@@ -634,6 +639,23 @@ void fn_80258CB0(void) {
 
 s32 fn_802599FC(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x2D4);
+}
+
+void fn_8025A410(s64 time) {
+    s32 fn_8025465C(void);
+    void fn_80254684(s32);
+    s64 fn_8025A3DC(void);
+    void fn_8025A3FC(s64);
+    void fn_8025BDE8(void);
+    s32 enabled;
+    s64 timeBase;
+
+    enabled = fn_8025465C();
+    timeBase = fn_8025A3DC();
+    *(s64 *)0x800030D8 += timeBase - time;
+    fn_8025A3FC(time);
+    fn_8025BDE8();
+    fn_80254684(enabled);
 }
 
 void fn_8025AD58(void) {
