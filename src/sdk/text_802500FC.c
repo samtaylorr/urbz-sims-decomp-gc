@@ -2122,6 +2122,13 @@ void fn_80270E10(u32 x) {
     __peReg[4] = reg;
 }
 
+void fn_80270E30(u8 x) {
+    extern volatile u16 *__peReg;
+    u32 reg = __peReg[1];
+    reg = __rlwimi(reg, x, 4, 27, 27);
+    __peReg[1] = reg;
+}
+
 s32 fn_80270FA8(s32 arg0) {
     extern s32 lbl_804960B0;
     s32 temp_r31;
