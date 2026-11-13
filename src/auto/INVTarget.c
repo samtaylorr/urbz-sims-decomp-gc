@@ -26,6 +26,10 @@ static inline s32 INVSlot_IsUsed(void *base, u32 idx) {
     return ok;
 }
 
+static inline void *INVSlot_Get(void *base, s32 idx) {
+    return (u8 *)base + (idx * 0x318 + 0x104);
+}
+
 static inline void INV_setStr(void *dst, void *key) {
     INVHandle fn_8004C168();
     extern u8 lbl_8041F94C[];
@@ -6901,6 +6905,15 @@ void *fn_80224E5C(void *arg0) {
     return arg0;
 }
 
+void fn_8022537C(s32 *self, f32 t) {
+    extern s32 lbl_80494674;
+    extern void fn_80225B4C(s32 *, f32);
+    if (*self != 0) {
+        fn_80224D88((u8 *)lbl_80494674);
+    }
+    fn_80225B4C(self, t);
+}
+
 s32 fn_802253D0(void *self, s32 i) {
     typedef struct { s32 a; s32 b; } Pair;
     s32 fn_80225B14(s32 *, s32);
@@ -7122,6 +7135,24 @@ void fn_8022B75C(s32 arg0, s32 arg1) {
         v = obj[1];
     }
     fn_8022B684(v, arg1, buf);
+}
+
+s32 fn_8022BBF8(u8 *self, s32 arg1, s32 arg2) {
+    typedef struct { s16 delta; s16 idx; s32 (*fn)(void *); } VtEnt;
+    extern s32 fn_8022B7A8(void *, s32, s32);
+    VtEnt *e;
+
+    if (self != 0) {
+        e = (VtEnt *)(*(u8 **)(self + 4) + 0x170);
+        if (e->fn(self + e->delta) != 0) {
+            return 0;
+        }
+    }
+    e = (VtEnt *)(*(u8 **)(self + 4) + 0x350);
+    if (e->fn(self + e->delta) == 0) {
+        return fn_8022B7A8(self, arg1, arg2);
+    }
+    fn_8022B75C((s32)self, arg1);
 }
 
 void fn_8022BE60(s32 *arg0) {
