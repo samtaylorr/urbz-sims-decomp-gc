@@ -63,8 +63,18 @@ void fn_80250290(void) {
     PPCMthid2(PPCMfhid2() & 0xBFFFFFFF);
 }
 
+s32 fn_802502B8(void) {
+    extern u32 *lbl_80495DC8;
+    if (lbl_80495DC8 == NULL || lbl_80495DC8[11] == 0) {
+        return 0x10000002;
+    }
+    return lbl_80495DC8[11];
+}
+
 extern u32 *lbl_80495DC8;
 extern u16 lbl_80440B40[];
+#pragma push
+#pragma peephole off
 void fn_80250418(void *arg0, s32 *arg1) {
     switch (arg1[3]) {
     case 0:
@@ -74,9 +84,8 @@ void fn_80250418(void *arg0, s32 *arg1) {
         *(u16 *)0x800030E6 = 1;
         break;
     }
-    return;
 }
-
+#pragma pop
 typedef void (*__OSExceptionHandler)(u8, void *);
 extern __OSExceptionHandler *lbl_80495DEC;
 
@@ -436,6 +445,15 @@ void fn_8025289C(void *a, void *b) {
 
 s32 fn_80252900(void) {
     return *(s32 *)0x800000D4;
+}
+
+void fn_80252AAC(void *ctx) {
+    *(u16 *)((u8 *)ctx + 0x1A0) = 0;
+    *(u16 *)((u8 *)ctx + 0x1A2) = 0;
+    if (ctx == *(void **)0x800000D8) {
+        *(void **)0x800000D8 = 0;
+    }
+    return;
 }
 
 void fn_802530AC(void) {
