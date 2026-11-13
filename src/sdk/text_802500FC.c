@@ -467,7 +467,9 @@ void fn_802530AC(void) {
 }
 
 #pragma dont_inline on
+#pragma peephole on
 void fn_802538BC(void *arg0, u32 entry) {
+    extern volatile u32 __PIRegs[];
     void fn_80253A14(void *, void *);
     void fn_80253880(u32);
     s32 fn_8025465C(void);
@@ -1878,16 +1880,14 @@ s32 fn_8026C4FC(void) {
 
 void fn_8026CC4C(u8 odd, u8 even) {
     extern void *__GXData;
-    u32 reg;
-    void *gx = __GXData;
+    u32 reg = 0;
 
-    reg = 0;
     reg = __rlwimi(reg, even, 0, 31, 31);
     reg = __rlwimi(reg, odd, 1, 30, 30);
     reg = __rlwimi(reg, 0x44, 24, 0, 7);
     *(volatile u8 *)0xCC008000 = 0x61;
     *(volatile u32 *)0xCC008000 = reg;
-    M2C_FIELD(gx, u16 *, 0x2) = 0;
+    M2C_FIELD(__GXData, u16 *, 0x2) = 0;
 }
 
 void fn_8026CC84(u8 field_mode, u8 half_aspect_ratio) {
