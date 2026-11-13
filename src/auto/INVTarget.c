@@ -7184,6 +7184,17 @@ void fn_80230774(s32 arg0, u32 *arg1) {
     }
 }
 
+void fn_80230848(s32 arg0, s32 arg1, s32 arg2) {
+    u8 *obj;
+    u8 *vt;
+
+    obj = fn_80225458(fn_80225508(), arg2, -1);
+    if (obj != NULL) {
+        vt = M2C_FIELD(obj, u8 **, 0x58);
+        M2C_FIELD(vt, void (**)(void *, s32), 0x8C)(obj + M2C_FIELD(vt, s16 *, 0x88), arg0);
+    }
+}
+
 s32 fn_802308A8(s32 arg0, s32 arg1, s32 arg2) {
     s32 fn_802311B4();
     s32 fn_80231F8C(s32, s32, s32);
