@@ -2199,6 +2199,7 @@ s32 fn_80271074(s32 arg0) {
 #pragma peephole on
 void fn_80271FC0(struct { u8 r, g, b, a; } color, u32 val) {
     extern void *__GXData;
+    void *gx = __GXData;
     u32 reg;
 
     reg = 0;
@@ -2218,7 +2219,7 @@ void fn_80271FC0(struct { u8 r, g, b, a; } color, u32 val) {
     reg = __rlwimi(reg, 0x51, 24, 0, 7);
     *(volatile u8 *)0xCC008000 = 0x61;
     *(volatile u32 *)0xCC008000 = reg;
-    M2C_FIELD(__GXData, u16 *, 0x2) = 0;
+    M2C_FIELD(gx, u16 *, 0x2) = 0;
 }
 #pragma pop
 
@@ -2498,7 +2499,7 @@ s32 fn_80273FE4(s32 arg0) {
     return temp_r0;
 }
 
-void fn_8027425C(u32 coord, u8 enable, u16 ss, u16 ts) {
+void fn_8027425C(u32 coord, u8 enable, u32 ss, u32 ts) {
     extern void *__GXData;
     u8 *gx = __GXData;
     u32 *ts0;
