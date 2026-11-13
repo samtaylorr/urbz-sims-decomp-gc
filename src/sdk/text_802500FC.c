@@ -2833,6 +2833,14 @@ void fn_80271630(u8 a, u32 b) {
     ((u16 *)gx)[1] = 0;
 }
 
+void fn_80271670(u8 *a, u32 *b) {
+    extern void *__GXData;
+    u32 *gx = __GXData;
+
+    *a = gx[0x7C / 4] >> 8;
+    *b = (gx[0x7C / 4] >> 19) & 7;
+}
+
 void fn_80271FC0(u8 *color, u32 val) {
     extern void *__GXData;
     void *gx = __GXData;
@@ -3347,8 +3355,8 @@ s32 fn_80277D64(u32 arg0) {
     v = (arg0 & 0x1FFFFFFF) | 0xC0000000;
     total |= !fn_80277EB4(&v, 4, 1);
     total |= !DBGEXISync();
-    DBGEXIDeselect();
-    return !total;
+    total |= !DBGEXIDeselect();
+    return total == FALSE;
 }
 
 s32 fn_80277DF0(u32 *arg0) {
