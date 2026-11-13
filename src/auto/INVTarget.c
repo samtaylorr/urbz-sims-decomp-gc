@@ -3508,6 +3508,21 @@ void fn_801F83C4(void) {
 
 }
 
+s32 fn_801F9038(s32 arg0, s32 arg1) {
+    u8 *flags = (u8 *)arg0 + 0xEF;
+    s32 ret = 0;
+    if (!(fn_801F55E0(flags[arg1]) & 4)) {
+        s32 ok = 1;
+        if (*(s32 *)(arg1 * 0x318 + arg0 + 0x108) == 0) {
+            ok = 0;
+        }
+        if (ok && fn_801F8708(arg0, arg1) != 0) {
+            ret = 1;
+        }
+    }
+    return ret;
+}
+
 void fn_801F94C4(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
     fn_801F9614(arg0, arg1);
     fn_801E1254((s32)((u8 *)arg0 + (arg1 * 0x124 + 0x734)), arg2, arg3, arg4, arg5);
