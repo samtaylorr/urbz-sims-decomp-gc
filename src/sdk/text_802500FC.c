@@ -1105,6 +1105,8 @@ void fn_8025B2B0(void) {
     fn_80259838();
 }
 
+#pragma push
+#pragma scheduling off
 s32 fn_8025C2BC(s32 chan) {
     typedef struct { u8 pad0[0xC]; volatile u32 state; u8 pad10[8]; u32 dev; u8 pad1C[0x24]; } EXICtrl;
     s32 fn_8025465C(void);
@@ -1128,7 +1130,7 @@ s32 fn_8025C2BC(s32 chan) {
     fn_80254684(enabled);
     return 1;
 }
-
+#pragma pop
 s32 fn_8025CD08(s32 chan) {
     typedef struct { u8 pad0[0xC]; s32 state; u8 pad10[0x30]; } EXICtrl;
     extern EXICtrl lbl_80441650[];
