@@ -638,7 +638,7 @@ void fn_80255DEC(u32 arg0, s32 arg1) {
     void fn_80252AAC(void *);
     void fn_802528A4(void *);
     void fn_80254284(s32, u32, void *);
-    u8 context[0x2C8];
+    f64 context[0x2C8 / 8];
     s32 sp10;
 
     fn_8025465C();
@@ -649,7 +649,7 @@ void fn_80255DEC(u32 arg0, s32 arg1) {
     sp10 = 0;
     fn_80254284(arg1, arg0 | 0x80000000, &sp10);
 }
-
+#pragma dont_inline reset
 void fn_80255E5C(s32 arg0, s32 arg1) {
     extern s32 lbl_80495E30;
     extern s32 lbl_80495E34;
@@ -668,6 +668,38 @@ void fn_80255E7C(s32 *arg0, s32 *arg1) {
     extern s32 lbl_80440B90[];
     *arg0 = lbl_80440B90[3];
     *arg1 = lbl_80440B90[4];
+}
+
+void OSRegisterResetFunction(void *info) {
+    extern M2C_UNK ResetFunctionQueue_80495E38;
+    void *iter;
+    void *tmp;
+
+    for (iter = M2C_FIELD(&ResetFunctionQueue_80495E38, void **, 0);
+         iter != NULL && M2C_FIELD(iter, u32 *, 4) <= M2C_FIELD(info, u32 *, 4);
+         iter = M2C_FIELD(iter, void **, 8)) {
+    }
+    if (iter == NULL) {
+        tmp = M2C_FIELD(&ResetFunctionQueue_80495E38, void **, 4);
+        if (tmp == NULL) {
+            M2C_FIELD(&ResetFunctionQueue_80495E38, void **, 0) = info;
+        } else {
+            M2C_FIELD(tmp, void **, 8) = info;
+        }
+        M2C_FIELD(info, void **, 0xC) = tmp;
+        M2C_FIELD(info, void **, 8) = NULL;
+        M2C_FIELD(&ResetFunctionQueue_80495E38, void **, 4) = info;
+        return;
+    }
+    M2C_FIELD(info, void **, 8) = iter;
+    tmp = M2C_FIELD(iter, void **, 0xC);
+    M2C_FIELD(iter, void **, 0xC) = info;
+    M2C_FIELD(info, void **, 0xC) = tmp;
+    if (tmp == NULL) {
+        M2C_FIELD(&ResetFunctionQueue_80495E38, void **, 0) = info;
+    } else {
+        M2C_FIELD(tmp, void **, 8) = info;
+    }
 }
 
 void fn_80255F1C(void *arg0) {
