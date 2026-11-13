@@ -468,7 +468,6 @@ void fn_802530AC(void) {
 #pragma push
 #pragma dont_inline on
 #pragma peephole off
-#pragma scheduling off
 void fn_802538BC(void *arg0, u32 entry) {
     extern volatile u32 __PIRegs[];
     void fn_80253A14(void *, void *);
@@ -2104,12 +2103,13 @@ u16 fn_80270C44(void) {
 
 void fn_80270DD8(void) {
     extern void *__GXData;
+    void *gx = __GXData;
     *(volatile u8 *)0xCC008000 = 0x61;
     *(volatile u32 *)0xCC008000 = 0x63000000;
-    M2C_FIELD(__GXData, u16 *, 0x2) = 0;
+    M2C_FIELD(gx, u16 *, 0x2) = 0;
 }
 
-void fn_80270DFC(u8 a, u8 b) {
+void fn_80270DFC(u32 a, u8 b) {
     extern volatile u16 *__peReg;
     __peReg[3] = __rlwimi(b, a, 8, 0, 23);
 }
