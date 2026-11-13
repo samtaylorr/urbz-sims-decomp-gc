@@ -717,6 +717,11 @@ void fn_80254F6C(s32 arg0) {
     *(s32 *)0x800030D0 = arg0;
 }
 
+BOOL fn_80255234(OSModuleInfo *newModule, void *bss, BOOL fixed);
+BOOL fn_80255514(OSModuleInfo *newModule, void *bss) {
+    return fn_80255234(newModule, bss, FALSE);
+}
+
 void fn_80255980(void) {
     OSModuleInfo **list = (OSModuleInfo **)0x800030C8;
     list[1] = NULL;
@@ -982,25 +987,13 @@ static inline u8 *LockSram(u32 offset) {
 }
 
 void fn_80258228(u16 mode) {
-    extern SramControlBlock lbl_80440C00;
     s32 fn_802572CC(s32, s32);
-    SramControlBlock *scb;
     u8 *sram;
-    s32 enabled;
 
-    scb = &lbl_80440C00;
-    if ((mode & 0x7C00) == 0x5000 || (mode & 0xC0) == 0xC0) {
+    if ((u32)(mode & 0x7C00) == 0x5000 || (u32)(mode & 0xC0) == 0xC0) {
         mode = 0;
     }
-    enabled = fn_8025465C();
-    if (scb->locked != 0) {
-        fn_80254684(enabled);
-        sram = NULL;
-    } else {
-        scb->enabled = enabled;
-        scb->locked = 1;
-        sram = scb->sram + 0x14;
-    }
+    sram = LockSram(0x14);
     if (mode == *(u16 *)(sram + 0x28)) {
         fn_802572CC(0, 0x14);
         return;
@@ -2932,14 +2925,15 @@ void fn_8026EBA4(void) {
 void fn_8026EBC8(u8 en) {
     extern void *__GXData;
     extern volatile u16 *__cpReg;
-    u32 *gx = __GXData;
     u32 v;
+    u32 *gx;
 
     if (en) {
         v = 1;
     } else {
         v = 0;
     }
+    gx = __GXData;
     gx[2] = __rlwimi(gx[2], v, 4, 27, 27);
     __cpReg[1] = gx[2];
 }
@@ -2990,10 +2984,34 @@ u16 fn_80270C44(void) {
     return M2C_FIELD(__peReg, u16 *, 0xE);
 }
 
+extern volatile u8 lbl_804960B8;
+extern u8 lbl_804960BC[];
 void fn_80270CE8(void) {
+    s32 fn_8025465C(void);
+    void fn_80254684(s32);
+    void fn_8025974C(void *);
+    s32 level;
+
+    level = fn_8025465C();
+    while (!lbl_804960B8) {
+        fn_8025974C(lbl_804960BC);
+    }
+    fn_80254684(level);
 }
 
 void fn_80270D34(void) {
+    s32 fn_8025465C(void);
+    void fn_80254684(s32);
+    void fn_802706E4(void);
+    s32 level;
+
+    level = fn_8025465C();
+    *(volatile u8 *)0xCC008000 = 0x61;
+    *(volatile u32 *)0xCC008000 = 0x45000002;
+    fn_802706E4();
+    lbl_804960B8 = 0;
+    fn_80254684(level);
+    fn_80270CE8();
 }
 
 void fn_80270DB4(void) {
