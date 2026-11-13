@@ -3522,6 +3522,11 @@ void fn_802781AC(void) {
     __EXIRegs[10] = 0;
 }
 
+s32 fn_80278168(void) {
+    __EXIRegs[10] &= 0x405;
+    return TRUE;
+}
+
 void fn_802781E0(void) {
 
 }
