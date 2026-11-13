@@ -2555,9 +2555,8 @@ u8 fn_8026BFE4(void) {
     return (u8) *(s32 *)0xCC006C04;
 }
 
-void fn_8026BFF4(u32 arg0) {
-    volatile u32 *regs = (volatile u32 *)0xCC006C00;
-    regs[1] = (regs[1] & ~0xFF00) | ((arg0 & 0xFF) << 8);
+void fn_8026BFF4(u8 vol) {
+    __AIRegs[1] = (__AIRegs[1] & ~0xFF00) | (vol << 8);
 }
 
 u8 fn_8026C010(void) {
@@ -3320,14 +3319,13 @@ void fn_80277298(void) {
 
 void fn_802772B4(void) {
     extern void *__GXData;
-    void *gx = __GXData;
 
     *(volatile u8 *)0xCC008000 = 0x61;
     *(volatile u32 *)0xCC008000 = 0x2402C022;
     *(volatile u8 *)0xCC008000 = 0x10;
     *(volatile u32 *)0xCC008000 = 0x1006;
     *(volatile u32 *)0xCC008000 = 0x31000;
-    M2C_FIELD(gx, u16 *, 0x2) = 1;
+    M2C_FIELD(__GXData, u16 *, 0x2) = 1;
 }
 
 void fn_802773FC(void) {
