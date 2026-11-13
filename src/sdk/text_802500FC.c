@@ -684,35 +684,35 @@ void fn_80255E7C(s32 *arg0, s32 *arg1) {
     *arg1 = lbl_80440B90[4];
 }
 
-void OSRegisterResetFunction(void *info) {
-    extern M2C_UNK ResetFunctionQueue_80495E38;
-    void *iter;
-    void *tmp;
+void OSRegisterResetFunction(OSResetFunctionInfo *info) {
+    extern OSResetFunctionQueue ResetFunctionQueue_80495E38;
+    OSResetFunctionInfo *tmp;
+    OSResetFunctionInfo *iter;
 
-    for (iter = M2C_FIELD(&ResetFunctionQueue_80495E38, void **, 0);
-         iter != NULL && M2C_FIELD(iter, u32 *, 4) <= M2C_FIELD(info, u32 *, 4);
-         iter = M2C_FIELD(iter, void **, 8)) {
-    }
+    for (iter = ResetFunctionQueue_80495E38.head; iter && iter->priority <= info->priority; iter = iter->next)
+        ;
+
     if (iter == NULL) {
-        tmp = M2C_FIELD(&ResetFunctionQueue_80495E38, void **, 4);
+        tmp = ResetFunctionQueue_80495E38.tail;
         if (tmp == NULL) {
-            M2C_FIELD(&ResetFunctionQueue_80495E38, void **, 0) = info;
+            ResetFunctionQueue_80495E38.head = info;
         } else {
-            M2C_FIELD(tmp, void **, 8) = info;
+            tmp->next = info;
         }
-        M2C_FIELD(info, void **, 0xC) = tmp;
-        M2C_FIELD(info, void **, 8) = NULL;
-        M2C_FIELD(&ResetFunctionQueue_80495E38, void **, 4) = info;
+        info->prev = tmp;
+        info->next = NULL;
+        ResetFunctionQueue_80495E38.tail = info;
         return;
     }
-    M2C_FIELD(info, void **, 8) = iter;
-    tmp = M2C_FIELD(iter, void **, 0xC);
-    M2C_FIELD(iter, void **, 0xC) = info;
-    M2C_FIELD(info, void **, 0xC) = tmp;
+
+    info->next = iter;
+    tmp = iter->prev;
+    iter->prev = info;
+    info->prev = tmp;
     if (tmp == NULL) {
-        M2C_FIELD(&ResetFunctionQueue_80495E38, void **, 0) = info;
+        ResetFunctionQueue_80495E38.head = info;
     } else {
-        M2C_FIELD(tmp, void **, 8) = info;
+        tmp->next = info;
     }
 }
 
@@ -2400,6 +2400,11 @@ s32 fn_8027368C(s32 *arg0) {
 
 s32 fn_80273698(u32 *arg0) {
     return ((u32) *arg0 >> 2U) & 3;
+}
+
+u8 fn_802737A0(u32 *arg0) {
+    extern u8 lbl_80494B30[];
+    return lbl_80494B30[((u32) *arg0 >> 5U) & 7];
 }
 
 s32 fn_802737B4(u32 *arg0) {
