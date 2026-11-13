@@ -50,6 +50,10 @@ static inline s32 INVSlot_IsUsed(void *base, u32 idx) {
     return ok;
 }
 
+static inline s32 INV_inRange(s32 v, s32 lo, s32 hi) {
+    return v <= hi && v >= lo;
+}
+
 static inline void *INVSlot_Get(void *base, s32 idx) {
     return (u8 *)base + (idx * 0x318 + 0x104);
 }
@@ -2897,6 +2901,21 @@ void fn_801E25D0(u8 *self, s32 idx) {
     }
 }
 
+void fn_801E30E0(void *self) {
+    void fn_801E2EE0(void *);
+    void fn_801E2C28(void *);
+    void fn_801E3140(void *);
+    if (M2C_FIELD(self, u8 *, 0x30A) != 0) {
+        fn_801E2EE0(self);
+    } else {
+        fn_801E2C28(self);
+        fn_801E2EE0(self);
+        if (M2C_FIELD(self, u8 *, 0x308) <= 0x11) {
+            fn_801E3140(self);
+        }
+    }
+}
+
 s32 fn_801E613C(void *arg0, s32 arg1, s32 arg2) {
     struct {
         u8 pad[0x564];
@@ -3608,9 +3627,9 @@ M2C_UNK fn_801F5420(s32 arg0) {
     extern void fn_801F4D1C(void *);
     extern void *lbl_8041FAC8[];
     u8 *p = (u8 *)arg0;
-    fn_800F2868(p + 0x28, 0, -1);
-    fn_800F2868(p + 0x30, 0, -1);
-    fn_800F2868(p + 0x34, 0, -1);
+    INV_resetStr(p + 0x28);
+    INV_resetStr(p + 0x30);
+    INV_resetStr(p + 0x34);
     fn_800F2868(p + 0x38, 0, -1);
     fn_801F4D1C(lbl_8041FAC8[0]);
 }
@@ -3725,11 +3744,15 @@ void fn_801F805C(void *arg0, s32 arg1, s32 arg2) {
     void fn_801F80D0(void *, s32);
     struct { u8 pad[0xAC]; struct { u8 a; u8 b; u8 c[4]; } e[1]; } *p = arg0;
     s32 v = M2C_FIELD(arg0, u16 *, 0xCC);
-    if (v > 9 || v < 1) {
-        fn_801F80D0(arg0, arg1);
-    } else if (arg2 == 5 && M2C_FIELD(arg0, s32 *, 0xA4) != 0) {
-        p->e[arg1].b = fn_801FA6BC(arg0);
+    if (v < 10) {
+        if (v > 0) {
+            if (arg2 == 5 && M2C_FIELD(arg0, s32 *, 0xA4) != 0) {
+                p->e[arg1].b = fn_801FA6BC(arg0);
+            }
+            return;
+        }
     }
+    fn_801F80D0(arg0, arg1);
 }
 
 M2C_UNK fn_801F81FC(void *arg0) {
