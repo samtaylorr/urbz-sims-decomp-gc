@@ -2329,10 +2329,7 @@ static inline s32 PADSync(void) {
 
 s32 fn_8026B838(s32 final) {
     extern void *lbl_8049600C;
-    extern s32 lbl_80495FF0;
-    extern s32 lbl_80494AB4;
     extern s32 lbl_80496010;
-    extern s32 fn_8025DAB8(void);
     extern s32 fn_8026A7B4(u32);
     extern void *fn_8026B960(void *);
     s32 sync;
@@ -2341,11 +2338,7 @@ s32 fn_8026B838(s32 final) {
         fn_8026B960(NULL);
     }
     if (!final) {
-        s32 busy = (lbl_80495FF0 == 0 && lbl_80494AB4 == 0x20);
-        sync = 0;
-        if (busy && !fn_8025DAB8()) {
-            sync = 1;
-        }
+        sync = PADSync();
         if (!lbl_80496010 && sync) {
             lbl_80496010 = fn_8026A7B4(0xF0000000);
             return 0;
@@ -3262,6 +3255,12 @@ void fn_80276FB0(void) {
     M2C_FIELD(__memReg, s16 *, 0x52) = 0;
     M2C_FIELD(__memReg, s16 *, 0x58) = 0;
     M2C_FIELD(__memReg, s16 *, 0x56) = 0;
+}
+
+void fn_80277298(void) {
+    *(volatile u8 *)0xCC008000 = 0x8;
+    *(volatile u8 *)0xCC008000 = 0;
+    *(volatile u32 *)0xCC008000 = 0;
 }
 
 void fn_802773FC(void) {
