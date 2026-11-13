@@ -1192,6 +1192,14 @@ s32 fn_8025D804(void) {
     return 0x10 - (cmd >> 24);
 }
 
+s32 fn_8025DAD8(s32 chan) {
+    typedef struct { s32 chan; u32 poll; u32 inputBytes; void *input; void *callback; } SIControl;
+    typedef struct { s32 chan; u8 pad[0x1C]; } SIPacket;
+    extern SIControl lbl_803F9124;
+    extern SIPacket lbl_80441710[];
+    return lbl_80441710[chan].chan != -1 || lbl_803F9124.chan == chan;
+}
+
 void fn_8025DB14(void) {
     __SIRegs[13] = (__SIRegs[13] | 0x80000000) & ~1;
 }
@@ -2947,6 +2955,24 @@ s32 fn_80277694(s32 arg0, s32 arg1) {
     lbl_804960DC = 0;
     fn_80254684(temp_r31);
     return 0;
+}
+
+volatile u32 __EXIRegs[] : 0xCC006800;
+s32 fn_80277EB4(void *buf, s32 len, s32 mode);
+s32 fn_80277CB8(void *arg0) {
+    u32 cmd;
+    s32 err;
+
+    __EXIRegs[10] = (__EXIRegs[10] & 0x405) | 0xC0;
+    cmd = 0x60000000;
+    err = !fn_80277EB4(&cmd, 2, 1);
+    while (__EXIRegs[13] & 1) {
+    }
+    err |= !fn_80277EB4(arg0, 4, 0);
+    while (__EXIRegs[13] & 1) {
+    }
+    __EXIRegs[10] &= 0x405;
+    return !err;
 }
 
 void fn_802781E0(void) {
