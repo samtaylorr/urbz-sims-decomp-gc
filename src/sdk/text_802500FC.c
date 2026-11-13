@@ -3289,26 +3289,37 @@ void fn_802771C0(u32 v) {
 
 void fn_80277204(u32 *a, u32 *b, u32 *c) {
     extern volatile u16 *__cpReg;
-    u16 hi, lo, hi2;
+    volatile u16 *lo;
+    volatile u16 *hi;
+    u32 h0, h1, l;
 
+    hi = &__cpReg[0x29];
+    lo = &__cpReg[0x28];
+    h0 = *hi;
     do {
-        hi = __cpReg[0x29];
-        lo = __cpReg[0x28];
-        hi2 = __cpReg[0x29];
-    } while (hi2 != hi);
-    *a = ((u32)hi2 << 16) | lo;
+        h1 = h0;
+        l = *lo;
+        h0 = *hi;
+    } while (h0 != h1);
+    *a = (h0 << 16) | l;
+    hi = &__cpReg[0x2B];
+    lo = &__cpReg[0x2A];
+    h0 = *hi;
     do {
-        hi = __cpReg[0x2B];
-        lo = __cpReg[0x2A];
-        hi2 = __cpReg[0x2B];
-    } while (hi2 != hi);
-    *b = ((u32)hi2 << 16) | lo;
+        h1 = h0;
+        l = *lo;
+        h0 = *hi;
+    } while (h0 != h1);
+    *b = (h0 << 16) | l;
+    hi = &__cpReg[0x2D];
+    lo = &__cpReg[0x2C];
+    h0 = *hi;
     do {
-        hi = __cpReg[0x2D];
-        lo = __cpReg[0x2C];
-        hi2 = __cpReg[0x2D];
-    } while (hi2 != hi);
-    *c = ((u32)hi2 << 16) | lo;
+        h1 = h0;
+        l = *lo;
+        h0 = *hi;
+    } while (h0 != h1);
+    *c = (h0 << 16) | l;
 }
 
 void fn_80277298(void) {
