@@ -1498,7 +1498,8 @@ f32 fn_8025FBAC(f32 *v) {
 f32 fn_8025FC84(f32 *a, f32 *b) {
     return a[2] * b[2] + (a[0] * b[0] + a[1] * b[1]);
 }
-#pragma pop
+#pragma push
+#pragma fp_contract off
 void fn_8025FCD4(f32 *a, f32 *b, f32 *axb) {
     f32 x = a[1] * b[2] - a[2] * b[1];
     f32 y = a[2] * b[0] - a[0] * b[2];
@@ -1507,7 +1508,7 @@ void fn_8025FCD4(f32 *a, f32 *b, f32 *axb) {
     axb[1] = y;
     axb[2] = z;
 }
-
+#pragma pop
 s32 fn_80260574(void) {
     M2C_UNK fn_802646D0();
     fn_802646D0();
