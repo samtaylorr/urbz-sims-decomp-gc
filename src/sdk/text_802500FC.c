@@ -2200,27 +2200,25 @@ s32 fn_80271074(s32 arg0) {
 void fn_80271FC0(u8 *color, u32 val) {
     extern void *__GXData;
     void *gx = __GXData;
-    u32 reg0;
-    u32 reg1;
-    u32 reg2;
+    u32 reg;
 
-    reg0 = 0;
-    reg0 = __rlwimi(reg0, color[0], 0, 24, 31);
-    reg0 = __rlwimi(reg0, color[3], 8, 16, 23);
-    reg0 = __rlwimi(reg0, 0x4F, 24, 0, 7);
+    reg = 0;
+    reg = __rlwimi(reg, color[0], 0, 24, 31);
+    reg = __rlwimi(reg, color[3], 8, 16, 23);
+    reg = __rlwimi(reg, 0x4F, 24, 0, 7);
     *(volatile u8 *)0xCC008000 = 0x61;
-    *(volatile u32 *)0xCC008000 = reg0;
-    reg1 = 0;
-    reg1 = __rlwimi(reg1, color[2], 0, 24, 31);
-    reg1 = __rlwimi(reg1, color[1], 8, 16, 23);
-    reg1 = __rlwimi(reg1, 0x50, 24, 0, 7);
+    *(volatile u32 *)0xCC008000 = reg;
+    reg = 0;
+    reg = __rlwimi(reg, color[2], 0, 24, 31);
+    reg = __rlwimi(reg, color[1], 8, 16, 23);
+    reg = __rlwimi(reg, 0x50, 24, 0, 7);
     *(volatile u8 *)0xCC008000 = 0x61;
-    *(volatile u32 *)0xCC008000 = reg1;
-    reg2 = 0;
-    reg2 = __rlwimi(reg2, val, 0, 8, 31);
-    reg2 = __rlwimi(reg2, 0x51, 24, 0, 7);
+    *(volatile u32 *)0xCC008000 = reg;
+    reg = 0;
+    reg = __rlwimi(reg, val, 0, 8, 31);
+    reg = __rlwimi(reg, 0x51, 24, 0, 7);
     *(volatile u8 *)0xCC008000 = 0x61;
-    *(volatile u32 *)0xCC008000 = reg2;
+    *(volatile u32 *)0xCC008000 = reg;
     M2C_FIELD(gx, u16 *, 0x2) = 0;
 }
 #pragma pop
@@ -2463,6 +2461,16 @@ u16 fn_80273AE0(void *arg0) {
 void fn_80273E3C(u32 *arg0, s32 *arg1, s32 *arg2) {
     *arg1 = ((*arg0 << 9) & 0x7FE00) + 0x80000;
     *arg2 = ((u32) *arg0 >> 0xAU) & 0x7FF;
+}
+
+void fn_80273F88(void) {
+    extern void __GXFlushTextureState(void);
+    __GXFlushTextureState();
+    *(volatile u8 *)0xCC008000 = 0x61;
+    *(volatile u32 *)0xCC008000 = 0x66001000;
+    *(volatile u8 *)0xCC008000 = 0x61;
+    *(volatile u32 *)0xCC008000 = 0x66001100;
+    __GXFlushTextureState();
 }
 
 s32 fn_80273FD0(s32 arg0) {
