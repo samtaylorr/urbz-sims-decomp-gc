@@ -660,6 +660,7 @@ s32 fn_80254A24(void) {
 u32 fn_8025474C(u32 mask, u32 current);
 #pragma push
 #pragma dont_inline on
+#pragma peephole off
 u32 fn_80254AC0(u32 global) {
     s32 enabled;
     u32 prev;
