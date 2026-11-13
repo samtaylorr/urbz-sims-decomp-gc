@@ -700,7 +700,7 @@ s64 fn_8025A4F8(s64 time) {
 }
 
 s32 fn_8025A558(s32 year) {
-    return (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
+    return (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
 }
 
 #pragma push
