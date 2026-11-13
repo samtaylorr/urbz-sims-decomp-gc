@@ -2822,6 +2822,17 @@ void fn_80271614(u8 *a, u32 *b) {
     *b = (gx[0x7C / 4] >> 16) & 7;
 }
 
+void fn_80271630(u8 a, u32 b) {
+    extern void *__GXData;
+    u32 *gx = __GXData;
+
+    gx[0x7C / 4] = __rlwimi(gx[0x7C / 4], a, 8, 16, 23);
+    gx[0x7C / 4] = __rlwimi(gx[0x7C / 4], b, 19, 10, 12);
+    *(volatile u8 *)0xCC008000 = 0x61;
+    *(volatile u32 *)0xCC008000 = gx[0x7C / 4];
+    ((u16 *)gx)[1] = 0;
+}
+
 void fn_80271FC0(u8 *color, u32 val) {
     extern void *__GXData;
     void *gx = __GXData;
