@@ -63,6 +63,20 @@ void fn_80250290(void) {
     PPCMthid2(PPCMfhid2() & 0xBFFFFFFF);
 }
 
+extern u32 *lbl_80495DC8;
+extern u16 lbl_80440B40[];
+void fn_80250418(void *arg0, s32 *arg1) {
+    switch (arg1[3]) {
+    case 0:
+        *(u16 *)0x800030E6 = lbl_80440B40[1] | 0x8000;
+        break;
+    default:
+        *(u16 *)0x800030E6 = 1;
+        break;
+    }
+    return;
+}
+
 typedef void (*__OSExceptionHandler)(u8, void *);
 extern __OSExceptionHandler *lbl_80495DEC;
 
@@ -80,7 +94,8 @@ __OSExceptionHandler fn_80250BF8(u8 exception) {
 }
 
 u8 fn_80250D54(void) {
-    return (u8) *(s32 *)0xCC006024;
+    extern volatile u32 __DIRegs[];
+    return (u8)__DIRegs[9];
 }
 
 void OSRegisterVersion(char *version) {
