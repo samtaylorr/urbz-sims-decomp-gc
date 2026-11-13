@@ -2234,9 +2234,11 @@ void fn_8026AE04(s32 chan, u32 mode) {
     extern u32 lbl_80494AC0;
     extern u32 lbl_80494ABC;
     s32 enabled;
+    u32 chanBit;
 
     enabled = fn_8025465C();
-    if ((lbl_80495FEC & (0x80000000 >> chan)) && !(fn_8025F148(chan) & 0x20000000)) {
+    chanBit = 0x80000000 >> chan;
+    if ((lbl_80495FEC & chanBit) && !(fn_8025F148(chan) & 0x20000000)) {
         if (lbl_80494AC0 < 2 && mode == 2) {
             mode = 0;
         }
@@ -3308,8 +3310,8 @@ s32 fn_80277CB8(u32 *arg0) {
 }
 
 s32 fn_80277D64(u32 arg0) {
-    BOOL total = FALSE;
     u32 v;
+    BOOL total = FALSE;
 
     DBGEXISelect(4);
     v = (arg0 & 0x1FFFFFFF) | 0xC0000000;
