@@ -3592,7 +3592,7 @@ void fn_801F96A8(s32 arg0, s32 arg1) {
 
 void fn_801F97E4(s32 arg0, s32 arg1, s32 arg2) {
     void fn_801E2A24(void *, s32);
-    if (INVSlot_IsUsed(arg0, arg1)) {
+    if (INVSlot_IsUsed((void *)arg0, arg1)) {
         fn_801E2A24((u8 *)arg0 + (arg1 * 0x318 + 0x104), arg2);
     }
 }
@@ -7035,11 +7035,10 @@ void fn_8022A150(void) {
     s32 fn_80014EE0(void);
     void fn_80014F24(s32, s32, s32);
     s32 fn_80225508(void);
-    void fn_80225304(void);
+    void fn_80225304(s32 *);
     fn_80014F24(fn_80014EE0(), 0, 0);
     fn_80014F24(fn_80014EE0(), 1, 0);
-    fn_80225508();
-    fn_80225304();
+    fn_80225304((s32 *)fn_80225508());
 }
 
 void fn_8022A304(void *out, void *obj) {
