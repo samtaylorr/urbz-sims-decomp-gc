@@ -657,6 +657,36 @@ void fn_80255980(void) {
     *(u32 *)0x800030D0 = 0;
 }
 
+OSModuleInfo *fn_80255998(void *ptr, u32 *section, u32 *offset) {
+    OSModuleInfo *module;
+    OSSectionInfo *info;
+    u32 i;
+    u32 addr;
+
+    if (ptr == NULL) {
+        return NULL;
+    }
+    for (module = *(OSModuleInfo **)0x800030C8; module; module = module->next) {
+        info = module->sectionInfo;
+        for (i = 0; i < module->numSections; ++i) {
+            if (info->size) {
+                addr = info->offset & ~1;
+                if (addr <= (u32)ptr && (u32)ptr < addr + info->size) {
+                    if (section) {
+                        *section = i;
+                    }
+                    if (offset) {
+                        *offset = (u32)ptr - addr;
+                    }
+                    return module;
+                }
+            }
+            info++;
+        }
+    }
+    return NULL;
+}
+
 s32 fn_80255A38(void) {
     return *(s32 *)0x80000028;
 }
