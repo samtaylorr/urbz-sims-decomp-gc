@@ -3633,6 +3633,23 @@ u8 fn_801F55E0(s32 arg0) {
     return r;
 }
 
+void fn_801F6C18(s32 arg0, u8 *arg1, s32 arg2) {
+    M2C_UNK fn_801F6C84(s32, u8, u8 *, s32);
+    s32 fn_80245988(s8);
+    u8 *var_r31;
+    u8 temp_r9;
+    u8 var_r30;
+
+    var_r31 = arg1;
+    var_r30 = 0;
+    if (fn_80245988((s8) *var_r31) != 0) {
+        temp_r9 = *var_r31;
+        var_r31 += 1;
+        var_r30 = temp_r9 - 0x30;
+    }
+    fn_801F6C84(arg0, var_r30, var_r31, arg2);
+}
+
 void fn_801F730C(s32 arg0, u8 *arg1) {
     M2C_UNK fn_801F7370(s32, u8, u8 *);
     s32 fn_80245988(s8);
