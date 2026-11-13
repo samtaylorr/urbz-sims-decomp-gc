@@ -3612,6 +3612,26 @@ u8 fn_801F9D6C(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 0xDC);
 }
 
+void fn_801F9D74(s32 arg0, s32 arg1) {
+    s32 fn_80245BB4(char *, const char *, ...);
+    void fn_8000AA68(s32, void *, s32, s32, s32, ...);
+    extern char lbl_803E4788[];
+    extern char lbl_803E4988[];
+    extern s32 lbl_804956BC;
+    char buf[8];
+    fn_80245BB4(buf, lbl_803E4788, arg1);
+    fn_8000AA68(lbl_804956BC, lbl_803E4988, 0, 0, 1, buf);
+}
+
+void fn_801F9DD8(s32 arg0, s32 arg1) {
+    extern s32 lbl_8041FBD8;
+    void fn_801F9E2C(s32, s32, s32);
+    if (lbl_8041FBD8 != 0) {
+        fn_801F9E2C(arg0, arg1, 0);
+        fn_801F9E2C(arg0, arg1, 1);
+    }
+}
+
 s32 fn_801FA3B8(void *arg0, s32 arg1, s32 arg2, s16 *arg3) {
     M2C_UNK fn_8016A87C(s32);
     *arg3 = arg1;
