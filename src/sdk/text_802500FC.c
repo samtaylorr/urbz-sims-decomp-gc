@@ -478,6 +478,7 @@ void fn_802538BC(void *arg0, u32 entry) {
     fn_80253880(entry);
 }
 #pragma dont_inline reset
+volatile u32 __PIRegs[] : 0xCC003000;
 
 #pragma scheduling off
 #pragma peephole off
@@ -1882,18 +1883,16 @@ s32 fn_8026C4FC(void) {
 }
 
 void fn_8026CC4C(u8 odd, u8 even) {
-    extern void *__GXData;
-    void *gx;
+    extern void *const __GXData;
     u32 reg;
 
     reg = 0;
-    gx = __GXData;
     reg = __rlwimi(reg, even, 0, 31, 31);
     reg = __rlwimi(reg, odd, 1, 30, 30);
     reg = __rlwimi(reg, 0x44, 24, 0, 7);
     *(volatile u8 *)0xCC008000 = 0x61;
     *(volatile u32 *)0xCC008000 = reg;
-    M2C_FIELD(gx, u16 *, 0x2) = 0;
+    M2C_FIELD(__GXData, u16 *, 0x2) = 0;
 }
 
 void fn_8026CC84(u8 field_mode, u8 half_aspect_ratio) {
