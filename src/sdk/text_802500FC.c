@@ -596,6 +596,11 @@ void fn_80256914(void) {
     fn_8025667C();
 }
 
+s32 fn_8025762C(s32 arg0) {
+    s32 fn_802572CC(s32, s32);
+    return fn_802572CC(arg0, 0x14);
+}
+
 u32 fn_80257650(void) {
     extern u32 lbl_80440C00[];
     return lbl_80440C00[0x13];
@@ -649,13 +654,19 @@ void fn_8025A410(s64 time) {
     void fn_8025BDE8(void);
     s32 enabled;
     s64 timeBase;
+    s64 *systemTime;
 
     enabled = fn_8025465C();
     timeBase = fn_8025A3DC();
-    *(s64 *)0x800030D8 += timeBase - time;
+    systemTime = (s64 *)0x800030D8;
+    *systemTime = *systemTime + (timeBase - time);
     fn_8025A3FC(time);
     fn_8025BDE8();
     fn_80254684(enabled);
+}
+
+s32 fn_8025A558(s32 year) {
+    return (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
 }
 
 void fn_8025AD58(void) {
