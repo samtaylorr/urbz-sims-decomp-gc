@@ -2155,10 +2155,7 @@ void fn_80270DD8(void) {
 
 void fn_80270DFC(u32 a, u8 b) {
     extern volatile u16 *__peReg;
-    u32 reg = 0;
-    reg = __rlwimi(reg, b, 0, 24, 31);
-    reg = __rlwimi(reg, a, 8, 16, 23);
-    __peReg[3] = reg;
+    __peReg[3] = (a << 8) | b;
 }
 
 void fn_80270E10(u32 x) {
