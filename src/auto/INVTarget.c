@@ -2960,6 +2960,22 @@ void fn_801E5334(u8 *self) {
     fn_801C601C(obj, self + 0x504);
 }
 
+void fn_801E59C0(void) {
+    void fn_80248488(void *, s32, s32);
+    s32 fn_80245BB4(char *, const char *, ...);
+    s32 fn_801DB32C(char *, u16 *);
+    extern char lbl_803E25C4[];
+    char name[32];
+    u16 str[32];
+    u32 i;
+
+    fn_80248488(str, 0, 0x40);
+    for (i = 0; i <= 5; i++) {
+        fn_80245BB4(name, lbl_803E25C4, i);
+        fn_801DB32C(name, str);
+    }
+}
+
 s32 fn_801E613C(void *arg0, s32 arg1, s32 arg2) {
     struct {
         u8 pad[0x564];
