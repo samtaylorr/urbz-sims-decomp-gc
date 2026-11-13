@@ -2875,6 +2875,38 @@ void fn_80270F00(u8 a, u32 b, u8 c) {
     __peReg[0] = reg;
 }
 
+void fn_80270F20(u16 x, u16 y, u32 *z) {
+    u32 addr = 0xC8000000;
+    addr = __rlwimi(addr, x, 2, 20, 29);
+    addr = __rlwimi(addr, y, 12, 10, 19);
+    addr = __rlwimi(addr, 0, 22, 8, 9);
+    *z = *(volatile u32 *)addr;
+}
+
+void fn_80270F44(u16 x, u16 y, u32 z) {
+    u32 addr = 0xC8000000;
+    addr = __rlwimi(addr, x, 2, 20, 29);
+    addr = __rlwimi(addr, y, 12, 10, 19);
+    addr = __rlwimi(addr, 0, 22, 8, 9);
+    *(volatile u32 *)addr = z;
+}
+
+void fn_80270F64(u16 x, u16 y, u32 *z) {
+    u32 addr = 0xC8000000;
+    addr = __rlwimi(addr, x, 2, 20, 29);
+    addr = __rlwimi(addr, y, 12, 10, 19);
+    addr = __rlwimi(addr, 1, 22, 8, 9);
+    *z = *(volatile u32 *)addr;
+}
+
+void fn_80270F88(u16 x, u16 y, u32 z) {
+    u32 addr = 0xC8000000;
+    addr = __rlwimi(addr, x, 2, 20, 29);
+    addr = __rlwimi(addr, y, 12, 10, 19);
+    addr = __rlwimi(addr, 1, 22, 8, 9);
+    *(volatile u32 *)addr = z;
+}
+
 s32 fn_80270FA8(s32 arg0) {
     extern s32 lbl_804960B0;
     s32 temp_r31;
