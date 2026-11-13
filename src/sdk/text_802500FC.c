@@ -18,6 +18,8 @@ typedef struct DVDCommandBlock {
 
 extern DVDCommandBlock *lbl_80495ED0;
 
+volatile u32 __SIRegs[] : 0xCC006400;
+
 typedef struct DVDFileInfo {
     DVDCommandBlock cb;
     u32 startAddr;
