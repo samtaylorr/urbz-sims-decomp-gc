@@ -2371,6 +2371,23 @@ void fn_8026B900(s16 interrupt, void *context) {
     }
 }
 
+void *fn_8026B960(void *cb) {
+    extern void *lbl_8049600C;
+    extern void fn_8025E2F8(void (*)(s16, void *));
+    extern void fn_8025E3C4(void (*)(s16, void *));
+    extern void fn_8026B900(s16, void *);
+    void *old;
+
+    old = lbl_8049600C;
+    lbl_8049600C = cb;
+    if (cb != NULL) {
+        fn_8025E2F8(fn_8026B900);
+    } else {
+        fn_8025E3C4(fn_8026B900);
+    }
+    return old;
+}
+
 s32 fn_8026B9B4(s32 arg0) {
     s32 fn_8025465C(void);
     void fn_80254684(s32);
