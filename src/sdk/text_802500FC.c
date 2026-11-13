@@ -546,6 +546,7 @@ void fn_80254420(char *path, char **argv) {
     void fn_80254284(u32, u32, char **);
     DVDFileInfo fileInfo;
     u32 addr;
+    u32 code = 0xC0000000;
 
     if (path[0] == 0) {
         addr = 0;
@@ -554,7 +555,7 @@ void fn_80254420(char *path, char **argv) {
     } else {
         return;
     }
-    fn_80254284(addr, 0x80000000 | 0x40000000, argv);
+    fn_80254284(addr, code, argv);
 }
 
 void fn_80254488(char *path, char **argv) {
@@ -2195,6 +2196,8 @@ s32 fn_80271074(s32 arg0) {
     return temp_r31;
 }
 
+#pragma push
+#pragma peephole on
 void fn_80271FC0(u8 *color, u32 val) {
     extern void *__GXData;
     void *gx = __GXData;
@@ -2221,6 +2224,7 @@ void fn_80271FC0(u8 *color, u32 val) {
     *(volatile u32 *)0xCC008000 = reg2;
     M2C_FIELD(gx, u16 *, 0x2) = 0;
 }
+#pragma pop
 
 void fn_80272240(u32 v) {
     extern void *__GXData;
