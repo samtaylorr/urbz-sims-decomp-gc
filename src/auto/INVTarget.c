@@ -7755,8 +7755,8 @@ void *fn_80224C80(void *self, s32 n) {
     char *arr;
     char *q;
     s32 i;
-    M2C_FIELD(self, s32 *, 4) = n;
     M2C_FIELD(self, s32 *, 0) = 0;
+    M2C_FIELD(self, s32 *, 4) = n;
     i = n - 1;
     arr = (char *)fn_802D2058((n << 5) | 8) + 8;
     *(s32 *)(arr - 8) = n;
