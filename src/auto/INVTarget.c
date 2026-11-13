@@ -4490,10 +4490,10 @@ void fn_801FF814(void *arg0) {
     obj = lbl_8041F94C.arr[M2C_FIELD(arg0, s32 *, 0x84)];
     if (fn_801C031C(obj) == 5) {
         fn_801BA350(fn_801BFD84(obj), 0);
+        o = fn_801BFD74(obj);
+        vt = M2C_FIELD(o, void **, 4);
+        M2C_FIELD(vt, void (**)(void *, s32), 0x14)((u8 *)o + M2C_FIELD(vt, s16 *, 0x10), 0);
     }
-    o = fn_801BFD74(obj);
-    vt = M2C_FIELD(o, void **, 4);
-    M2C_FIELD(vt, void (**)(void *, s32), 0x14)((u8 *)o + M2C_FIELD(vt, s16 *, 0x10), 0);
 }
 
 void fn_801FF894(void *self) {
