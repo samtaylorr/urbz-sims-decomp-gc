@@ -2894,7 +2894,7 @@ void fn_801E25D0(u8 *self, s32 idx) {
 }
 
 void fn_801E2BB4(void *arg0) {
-    struct E { u8 type; u8 pad[0x13]; };
+    struct E { u8 b[0x14]; };
     struct T {
         u8 pad0[0x2C0];
         s32 vals[18];
@@ -2906,7 +2906,7 @@ void fn_801E2BB4(void *arg0) {
     if (self->n > 1) {
         self->n = 1;
     }
-    ((struct E *)((u8 *)self + 0x168))[self->n].type = 6;
+    ((struct E *)self + self->n)->b[0x168] = 6;
     self->vals[self->n] = 0;
     self->n++;
     if (self->busy == 0) {
@@ -2956,18 +2956,21 @@ void *fn_801E33CC(void *arg0) {
 }
 
 s32 fn_801E3438(void *arg0, void *arg1) {
+    void fn_800F6FB4(void *, void *, s32);
     void fn_800BD804(void *, void *, s32);
     void *fn_800F7138(void *);
     void fn_800F8178(void *, void *);
     char buf[0x208];
-    char *s = buf;
-    if (arg1 != NULL) {
-        INV_initWStr(s);
+    if (arg1 == NULL) {
+        return 0;
+    }
+    {
+        char *s = buf;
+        fn_800F6FB4(s, buf + 8, 0x100);
         fn_800BD804(arg0, s, 0);
         fn_800F8178(arg1, fn_800F7138(s));
-        return 1;
     }
-    return 0;
+    return 1;
 }
 
 void fn_801E5334(u8 *self) {
@@ -5529,11 +5532,11 @@ void fn_80206194(void *arg0, s32 arg1) {
     void fn_80245BB4(s32, char *, ...);
     extern char lbl_803E4E18[];
     typedef struct { s32 a; s32 b; } Ent;
+    Ent *e;
     s32 n;
-    s32 i;
 
-    i = fn_80207074(arg0);
-    n = fn_801FBC04(M2C_FIELD(arg0, Ent **, 0x178)[i].a);
+    e = &M2C_FIELD(arg0, Ent **, 0x178)[fn_80207074(arg0)];
+    n = fn_801FBC04(e->a);
     fn_801FEEB8(arg0, n);
     fn_80245BB4(arg1, lbl_803E4E18, n - 1);
 }
@@ -6869,11 +6872,11 @@ void fn_8021D7BC(u8 *arg0) {
 }
 
 s32 fn_8021E60C(u8 *self, s32 n) {
-    extern u8 lbl_80493498[];
+    extern struct { s32 unk0; s32 slots[18]; } lbl_80493498[];
     s32 result = 0;
 
     if (n != 0) {
-        s32 *p = (s32 *)(lbl_80493498 + *(s32 *)(self + 0x90) * 0x4C + 4);
+        s32 *p = lbl_80493498[*(s32 *)(self + 0x90)].slots;
         s32 count = 0;
         s32 i;
 
@@ -7041,13 +7044,15 @@ void fn_80220588(s32 *self, s32 *list) {
     s32 fn_8016F79C(s32 *);
     void fn_80220608(s32 *, s32);
     s32 it;
+    s32 *pit;
     u32 i;
 
     if (fn_8016F500(list) != 0) {
         it = *list;
+        pit = &it;
         for (i = 0; i < fn_8016F500(list); i++) {
             fn_80220608(self, it);
-            fn_8016F79C(&it);
+            fn_8016F79C(pit);
         }
     }
     self[1] = self[0];
@@ -7725,6 +7730,29 @@ void fn_8022366C(void *arg0, s32 flags) {
 
 s32 fn_80224A28(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x14);
+}
+
+void *fn_80224C80(void *self, s32 n) {
+    void *fn_802D2058(s32);
+    s32 *mem;
+    char *arr;
+    char *q;
+    s32 i;
+    M2C_FIELD(self, s32 *, 4) = n;
+    M2C_FIELD(self, s32 *, 0) = 0;
+    i = n - 1;
+    mem = fn_802D2058((n << 5) | 8);
+    arr = (char *)(mem + 2);
+    mem[0] = n;
+    q = arr;
+    if (n != 0) {
+        do {
+            fn_80223638((s32 *)q);
+            q += 0x20;
+        } while (i-- != 0);
+    }
+    M2C_FIELD(self, char **, 0) = arr;
+    return self;
 }
 
 void fn_80224CFC(void *arg0, s32 arg1) {
