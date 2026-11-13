@@ -911,6 +911,34 @@ void fn_80257894(s32 arg0) {
     }
 }
 
+void fn_80258228(u16 mode) {
+    extern u8 lbl_80440C00[];
+    s32 fn_802572CC(s32, s32);
+    u8 *scb;
+    u8 *sram;
+    s32 enabled;
+
+    if ((mode & 0x7C00) == 0x5000 || (mode & 0xC0) == 0xC0) {
+        mode = 0;
+    }
+    scb = lbl_80440C00;
+    enabled = fn_8025465C();
+    if (*(s32 *)(scb + 0x48)) {
+        fn_80254684(enabled);
+        sram = NULL;
+    } else {
+        *(s32 *)(scb + 0x44) = enabled;
+        *(s32 *)(scb + 0x48) = 1;
+        sram = scb + 0x14;
+    }
+    if (mode == *(u16 *)(sram + 0x28)) {
+        fn_802572CC(0, 0x14);
+        return;
+    }
+    *(u16 *)(sram + 0x28) = mode;
+    fn_802572CC(1, 0x14);
+}
+
 void fn_80258300(void) {
     extern u8 fn_802582E0[];
     void *fn_802482F8(void *, void *, u32);
@@ -1450,6 +1478,20 @@ f32 fn_8025FBAC(f32 *v) {
     return mag;
 }
 #pragma pop
+
+f32 fn_8025FC84(f32 *a, f32 *b) {
+    return a[2] * b[2] + (a[0] * b[0] + a[1] * b[1]);
+}
+
+void fn_8025FCD4(f32 *a, f32 *b, f32 *axb) {
+    f32 x = a[1] * b[2] - a[2] * b[1];
+    f32 y = a[2] * b[0] - a[0] * b[2];
+    f32 z = a[0] * b[1] - a[1] * b[0];
+    axb[0] = x;
+    axb[1] = y;
+    axb[2] = z;
+}
+
 s32 fn_80260574(void) {
     M2C_UNK fn_802646D0();
     fn_802646D0();
@@ -3370,13 +3412,15 @@ void fn_80277298(void) {
 
 void fn_802772B4(void) {
     extern void *__GXData;
+    void *gx = __GXData;
+    u32 reg = 0x31000;
 
     *(volatile u8 *)0xCC008000 = 0x61;
     *(volatile u32 *)0xCC008000 = 0x2402C022;
     *(volatile u8 *)0xCC008000 = 0x10;
     *(volatile u32 *)0xCC008000 = 0x1006;
-    *(volatile u32 *)0xCC008000 = 0x31000;
-    M2C_FIELD(__GXData, u16 *, 0x2) = 1;
+    *(volatile u32 *)0xCC008000 = reg;
+    M2C_FIELD(gx, u16 *, 0x2) = 1;
 }
 
 void fn_802773FC(void) {
