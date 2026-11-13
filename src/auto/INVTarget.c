@@ -1562,6 +1562,36 @@ s32 fn_801DB2D4(char *name, f32 value) {
     return 0;
 }
 
+void *fn_801DB3C8(void *name, s32 type) {
+    extern INVVar lbl_80436680[];
+    s32 fn_802486DC(char *, void *);
+    INVVar *p;
+    INVVar *q;
+    INVVar *result;
+    INVVar *end;
+    s32 found;
+
+    p = lbl_80436680;
+    end = &lbl_80436680[0x4A];
+    found = 0;
+    q = p;
+    do {
+        result = q;
+        if (p->type == type && fn_802486DC(p->name, name) == 0) {
+            found = 1;
+        }
+        if (found) {
+            break;
+        }
+        p++;
+        q++;
+    } while (p <= end);
+    if (found) {
+        return result;
+    }
+    return NULL;
+}
+
 void fn_801DB8B8(void *arg0, s32 arg1) {
     extern s32 fn_801D7CDC(void *, s32);
     extern s32 fn_801D8B40(void *, void *);
@@ -3669,12 +3699,14 @@ void fn_801E2A24(void *, s32);
 void fn_801E2BB4(void *);
 void fn_801F983C(s32 arg0, s32 arg1) {
     void fn_801E2BB4(void *);
+    struct Slot { u8 pad[4]; s32 used; u8 pad2[0x310]; };
+    struct Inv { u8 pad[0x104]; struct Slot slots[1]; } *inv = (void *)arg0;
     s32 ok = 1;
-    if (*(s32 *)(arg1 * 0x318 + arg0 + 0x108) == 0) {
+    if (inv->slots[arg1].used == 0) {
         ok = 0;
     }
     if (ok) {
-        fn_801E2BB4(INVSlot_Get((void *)arg0, arg1));
+        fn_801E2BB4(&inv->slots[arg1]);
     }
 }
 
@@ -7000,8 +7032,8 @@ void fn_8022537C(s32 *self, f32 t) {
     extern void fn_80225B4C(s32 *, f32);
     if (*self != 0) {
         fn_80224D88((u8 *)lbl_80494674);
+        fn_80225B4C(self, t);
     }
-    fn_80225B4C(self, t);
 }
 
 s32 fn_802253D0(void *self, s32 i) {
