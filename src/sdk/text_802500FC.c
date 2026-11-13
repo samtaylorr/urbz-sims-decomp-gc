@@ -723,11 +723,10 @@ BOOL fn_80255514(OSModuleInfo *newModule, void *bss) {
 }
 
 BOOL fn_80255538(OSModuleInfo *newModule, void *bss) {
-    switch (M2C_FIELD(newModule, u32 *, 0x1C)) {
-    case 3:
-        return fn_80255234(newModule, bss, TRUE);
+    if (M2C_FIELD(newModule, u32 *, 0x1C) > 3 || M2C_FIELD(newModule, u32 *, 0x1C) < 3) {
+        return FALSE;
     }
-    return FALSE;
+    return fn_80255234(newModule, bss, TRUE);
 }
 
 void fn_80255980(void) {
@@ -1000,18 +999,20 @@ void fn_80258228(u16 mode) {
     SramControlBlock *scb;
     u8 *sram;
     s32 enabled;
+    s32 *locked;
 
     scb = &lbl_80440C00;
     if ((u32)(mode & 0x7C00) == 0x5000 || (u32)(mode & 0xC0) == 0xC0) {
         mode = 0;
     }
     enabled = fn_8025465C();
-    if (scb->locked != 0) {
+    locked = &scb->locked;
+    if (*locked != 0) {
         fn_80254684(enabled);
         sram = NULL;
     } else {
         scb->enabled = enabled;
-        scb->locked = 1;
+        *locked = 1;
         sram = scb->sram + 0x14;
     }
     if (mode == *(u16 *)(sram + 0x28)) {
