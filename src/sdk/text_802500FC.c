@@ -2420,8 +2420,17 @@ f32 fn_802737F4(void *arg0) {
     return (f32) (u8) ((u32) M2C_FIELD(arg0, u32 *, 4) >> 8U) * lbl_804975D0;
 }
 
+f32 fn_80273828(u32 *arg0) {
+    extern f32 lbl_804975D4;
+    return (f32) (s8) (s16) ((u32) *arg0 >> 9U) * lbl_804975D4;
+}
+
 s32 fn_80273868(u32 *arg0) {
     return ((u32) *arg0 >> 0x15U) & 1;
+}
+
+u8 fn_80273874(u32 *arg0) {
+    return !(((u32) *arg0 >> 8U) & 1);
 }
 
 s32 fn_80273888(u32 *arg0) {
