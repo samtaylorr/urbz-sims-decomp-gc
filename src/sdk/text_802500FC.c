@@ -3038,6 +3038,13 @@ s32 fn_80277DF0(void *arg0) {
     return !err;
 }
 
+void fn_80277E9C(void) {
+    u32 reg;
+
+    reg = __EXIRegs[10];
+    __EXIRegs[10] = 0x80A;
+}
+
 void fn_802781E0(void) {
 
 }
