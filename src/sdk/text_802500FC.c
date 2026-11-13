@@ -657,6 +657,29 @@ s32 fn_80254A24(void) {
     return *(s32 *)0x800000C8;
 }
 
+u32 fn_8025474C(u32 mask, u32 current);
+#pragma push
+#pragma dont_inline on
+u32 fn_80254AC0(u32 global) {
+    s32 enabled;
+    u32 prev;
+    u32 local;
+    u32 mask;
+
+    enabled = fn_8025465C();
+    prev = *(u32 *)0x800000C4;
+    local = *(u32 *)0x800000C8;
+    mask = global & ~(prev | local);
+    global |= prev;
+    *(u32 *)0x800000C4 = global;
+    while (mask) {
+        mask = fn_8025474C(mask, global | local);
+    }
+    fn_80254684(enabled);
+    return prev;
+}
+#pragma pop
+
 void fn_80254F64(void) {
 
 }
@@ -933,13 +956,25 @@ static inline u8 *LockSram(u32 offset) {
 }
 
 void fn_80258228(u16 mode) {
+    extern SramControlBlock lbl_80440C00;
     s32 fn_802572CC(s32, s32);
+    SramControlBlock *scb;
     u8 *sram;
+    s32 enabled;
 
+    scb = &lbl_80440C00;
     if ((mode & 0x7C00) == 0x5000 || (mode & 0xC0) == 0xC0) {
         mode = 0;
     }
-    sram = LockSram(0x14);
+    enabled = fn_8025465C();
+    if (scb->locked != 0) {
+        fn_80254684(enabled);
+        sram = NULL;
+    } else {
+        scb->enabled = enabled;
+        scb->locked = 1;
+        sram = scb->sram + 0x14;
+    }
     if (mode == *(u16 *)(sram + 0x28)) {
         fn_802572CC(0, 0x14);
         return;
@@ -2787,11 +2822,14 @@ void fn_8026CD4C(void) {
 
 void *fn_8026CE70(u32 id) {
     extern u8 *__GXData;
+    void *obj;
 
     if (id >= 20) {
-        return NULL;
+        obj = NULL;
+    } else {
+        obj = __GXData + 0x388 + id * 16;
     }
-    return __GXData + 0x388 + id * 16;
+    return obj;
 }
 
 void fn_8026E418(void *arg0, s32 arg1, s32 arg2) {
@@ -2869,9 +2907,10 @@ void fn_8026EBA4(void) {
 void fn_8026EBC8(u8 en) {
     extern void *__GXData;
     extern volatile u16 *__cpReg;
+    u8 v = en ? 1 : 0;
     u32 *gx = __GXData;
 
-    gx[2] = __rlwimi(gx[2], en ? 1 : 0, 4, 27, 27);
+    gx[2] = __rlwimi(gx[2], v, 4, 27, 27);
     __cpReg[1] = gx[2];
 }
 
@@ -2919,6 +2958,15 @@ void fn_80270740(void) {
 u16 fn_80270C44(void) {
     extern void *__peReg;
     return M2C_FIELD(__peReg, u16 *, 0xE);
+}
+
+void fn_80270CE8(void) {
+}
+
+void fn_80270D34(void) {
+}
+
+void fn_80270DB4(void) {
 }
 
 void fn_80270DD8(void) {
