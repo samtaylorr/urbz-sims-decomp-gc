@@ -1300,7 +1300,7 @@ f32 fn_8025FB70(f32 *v) {
 #pragma push
 #pragma fp_contract off
 f32 fn_8025FBAC(f32 *v) {
-    return sqrtf(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
+    return sqrtf(fn_8025FB70(v));
 }
 #pragma pop
 s32 fn_80260574(void) {
@@ -2144,12 +2144,13 @@ s32 fn_8026BAE8(s32 arg0) {
 }
 
 void fn_8026BB2C(u32 addr, u32 len) {
+    extern volatile u16 __DSPRegs[];
     s32 enabled;
 
     enabled = fn_8025465C();
-    ((volatile u16 *)0xCC005000)[0x18] = (((volatile u16 *)0xCC005000)[0x18] & ~0x3FF) | (addr >> 16);
-    ((volatile u16 *)0xCC005000)[0x19] = (((volatile u16 *)0xCC005000)[0x19] & ~0xFFE0) | (addr & 0xFFFF);
-    ((volatile u16 *)0xCC005000)[0x1B] = (((volatile u16 *)0xCC005000)[0x1B] & ~0x7FFF) | ((len >> 5) & 0xFFFF);
+    __DSPRegs[0x18] = (u16)((__DSPRegs[0x18] & ~0x3FF) | (addr >> 16));
+    __DSPRegs[0x19] = (u16)((__DSPRegs[0x19] & ~0xFFE0) | (0xFFFF & addr));
+    __DSPRegs[0x1B] = (u16)((__DSPRegs[0x1B] & ~0x7FFF) | (u16)((len >> 5) & 0xFFFF));
     fn_80254684(enabled);
 }
 
@@ -2432,6 +2433,15 @@ void fn_80270EE8(u8 x) {
     u32 reg = __peReg[1];
     reg = __rlwimi(reg, x, 2, 29, 29);
     __peReg[1] = reg;
+}
+
+void fn_80270F00(u8 a, u32 b, u8 c) {
+    extern volatile u16 *__peReg;
+    u32 reg = 0;
+    reg = __rlwimi(reg, a, 0, 31, 31);
+    reg = __rlwimi(reg, b, 1, 28, 30);
+    reg = __rlwimi(reg, c, 4, 27, 27);
+    __peReg[0] = reg;
 }
 
 s32 fn_80270FA8(s32 arg0) {
