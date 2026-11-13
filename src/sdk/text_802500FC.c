@@ -2225,6 +2225,7 @@ void fn_8026AD18(void) {
     fn_8025F710();
 }
 
+#pragma dont_inline on
 void fn_8026AE04(s32 chan, u32 mode) {
     s32 fn_8025465C(void);
     void fn_80254684(s32);
@@ -2247,7 +2248,7 @@ void fn_8026AE04(s32 chan, u32 mode) {
     }
     fn_80254684(enabled);
 }
-
+#pragma dont_inline reset
 void fn_8026AEBC(u32 type) {
     extern s32 lbl_80496014;
     extern void *lbl_80494AC4;
@@ -2320,6 +2321,21 @@ s32 fn_8026B6EC(s32 arg0, s32 *arg1) {
 void fn_8026B8F4(void) {
     extern s32 lbl_80494AB8;
     lbl_80494AB8 = 0;
+}
+
+void fn_8026B900(s16 interrupt, void *context) {
+    void fn_80252AAC(void *);
+    void fn_802528A4(void *);
+    extern void (*lbl_8049600C)(void);
+    u8 ctx[0x2C8];
+
+    if (lbl_8049600C != NULL) {
+        fn_80252AAC(ctx);
+        fn_802528A4(ctx);
+        lbl_8049600C();
+        fn_80252AAC(ctx);
+        fn_802528A4(context);
+    }
 }
 
 s32 fn_8026B9B4(s32 arg0) {
@@ -2487,6 +2503,11 @@ void fn_8026BFC8(u8 vol) {
 
 u8 fn_8026BFE4(void) {
     return (u8) *(s32 *)0xCC006C04;
+}
+
+void fn_8026BFF4(u32 arg0) {
+    volatile u32 *regs = (volatile u32 *)0xCC006C00;
+    regs[1] = (regs[1] & ~0xFF00) | ((arg0 & 0xFF) << 8);
 }
 
 u8 fn_8026C010(void) {
@@ -3214,6 +3235,18 @@ s32 fn_80277CB8(u32 *arg0) {
     total |= !fn_80277EB4(&v, 2, 1);
     total |= !DBGEXISync();
     total |= !fn_80277EB4(arg0, 4, 0);
+    total |= !DBGEXISync();
+    total |= !DBGEXIDeselect();
+    return !total;
+}
+
+s32 fn_80277D64(u32 arg0) {
+    BOOL total = FALSE;
+    u32 v;
+
+    DBGEXISelect(4);
+    v = (arg0 & 0x1FFFFFFF) | 0xC0000000;
+    total |= !fn_80277EB4(&v, 4, 1);
     total |= !DBGEXISync();
     total |= !DBGEXIDeselect();
     return !total;
