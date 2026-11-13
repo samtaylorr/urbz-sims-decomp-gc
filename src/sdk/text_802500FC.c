@@ -665,6 +665,8 @@ s32 fn_802599FC(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x2D4);
 }
 
+#pragma push
+#pragma peephole off
 void fn_8025A410(s64 time) {
     s32 fn_8025465C(void);
     void fn_80254684(s32);
@@ -672,26 +674,27 @@ void fn_8025A410(s64 time) {
     void fn_8025A3FC(s64);
     void fn_8025BDE8(void);
     s32 enabled;
-    s64 timeBase;
-    s64 *systemTime;
+    s64 *timeAdjustAddr;
+    s64 diff;
 
     enabled = fn_8025465C();
-    timeBase = fn_8025A3DC();
-    systemTime = (s64 *)0x800030D8;
-    *systemTime = *systemTime + (timeBase - time);
+    diff = fn_8025A3DC() - time;
+    timeAdjustAddr = (s64 *)0x800030D8;
+    *timeAdjustAddr += diff;
     fn_8025A3FC(time);
     fn_8025BDE8();
     fn_80254684(enabled);
 }
-
+#pragma pop
 s64 fn_8025A4F8(s64 time) {
     s32 fn_8025465C(void);
     void fn_80254684(s32);
     s32 enabled;
+    s64 *timeAdjustAddr = (s64 *)((u32)0x30D8 + 0x80000000);
     s64 result;
 
     enabled = fn_8025465C();
-    result = *(s64 *)0x800030D8 + time;
+    result = *timeAdjustAddr + time;
     fn_80254684(enabled);
     return result;
 }
@@ -700,6 +703,8 @@ s32 fn_8025A558(s32 year) {
     return (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
 }
 
+#pragma push
+#pragma peephole off
 s32 fn_8025A5E0(s32 year, s32 mon) {
     extern s32 lbl_803F8F70[];
     extern s32 lbl_803F8FA0[];
@@ -707,7 +712,7 @@ s32 fn_8025A5E0(s32 year, s32 mon) {
 
     return md[mon];
 }
-
+#pragma pop
 void fn_8025AD58(void) {
     M2C_UNK fn_8025AD78();
     fn_8025AD78();
