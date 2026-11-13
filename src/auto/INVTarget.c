@@ -5071,15 +5071,15 @@ void fn_80209608(u8 *arg0) {
     {
         u8 *tbl = lbl_8041F94C;
         INV_setStrT(arg0 + 0xB4, tbl, lbl_803E7014);
-        if (*(s32 *)(arg0 + 0x120) & 1) {
-            INV_setStrT(arg0 + 0xB8, tbl, lbl_803E706C);
-            INV_setStrT(arg0 + 0xBC, tbl, lbl_803E701C);
-            *(s32 *)(arg0 + 0x84) = 3;
-        } else {
-            INV_setStrT(arg0 + 0xB8, tbl, lbl_803E7024);
-            INV_setStrT(arg0 + 0xBC, tbl, lbl_803E706C);
-            *(s32 *)(arg0 + 0x84) = 3;
-        }
+    }
+    if (*(s32 *)(arg0 + 0x120) & 1) {
+        INV_setStr(arg0 + 0xB8, lbl_803E706C);
+        INV_setStr(arg0 + 0xBC, lbl_803E701C);
+        *(s32 *)(arg0 + 0x84) = 3;
+    } else {
+        INV_setStr(arg0 + 0xB8, lbl_803E7024);
+        INV_setStr(arg0 + 0xBC, lbl_803E706C);
+        *(s32 *)(arg0 + 0x84) = 3;
     }
     *(s32 *)(arg0 + 0xA0) = 1;
     *(s32 *)(arg0 + 0x8C) = 3;
@@ -6244,8 +6244,8 @@ void fn_80220EA8(u8 *arg0, s32 arg1) {
     p = &tmp;
     p->vtbl = lbl_80417CD8;
     cb = (Cb *)(arg0 + 0x7C);
-    p->unkC = arg1;
-    p->unk0 = 5;
+    tmp.unkC = arg1;
+    tmp.unk0 = 5;
     p->unk4 = cb->data;
     cb->fn(p);
     p->vtbl = dvt;
