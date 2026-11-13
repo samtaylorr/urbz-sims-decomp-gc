@@ -2340,7 +2340,8 @@ s32 fn_8026B838(s32 final) {
     if (!final) {
         sync = PADSync();
         if (!lbl_80496010 && sync) {
-            lbl_80496010 = fn_8026A7B4(0xF0000000);
+            s32 ret = fn_8026A7B4(0xF0000000);
+            lbl_80496010 = ret;
             return 0;
         }
         return sync;
@@ -3257,10 +3258,59 @@ void fn_80276FB0(void) {
     M2C_FIELD(__memReg, s16 *, 0x56) = 0;
 }
 
+void fn_802771C0(u32 v) {
+    extern void *__GXData;
+    u32 *gx = __GXData;
+
+    gx[0x5A4 / 4] = __rlwimi(gx[0x5A4 / 4], v, 0, 28, 31);
+    *(volatile u8 *)0xCC008000 = 0x8;
+    *(volatile u8 *)0xCC008000 = 0x20;
+    *(volatile u32 *)0xCC008000 = gx[0x5A4 / 4];
+    *(volatile u8 *)0xCC008000 = 0x8;
+    *(volatile u8 *)0xCC008000 = 0x10;
+    *(volatile u32 *)0xCC008000 = 1;
+}
+
+void fn_80277204(u32 *a, u32 *b, u32 *c) {
+    extern volatile u16 *__cpReg;
+    u16 hi, lo, hi2;
+
+    do {
+        hi = __cpReg[0x29];
+        lo = __cpReg[0x28];
+        hi2 = __cpReg[0x29];
+    } while (hi2 != hi);
+    *a = ((u32)hi2 << 16) | lo;
+    do {
+        hi = __cpReg[0x2B];
+        lo = __cpReg[0x2A];
+        hi2 = __cpReg[0x2B];
+    } while (hi2 != hi);
+    *b = ((u32)hi2 << 16) | lo;
+    do {
+        hi = __cpReg[0x2D];
+        lo = __cpReg[0x2C];
+        hi2 = __cpReg[0x2D];
+    } while (hi2 != hi);
+    *c = ((u32)hi2 << 16) | lo;
+}
+
 void fn_80277298(void) {
     *(volatile u8 *)0xCC008000 = 0x8;
     *(volatile u8 *)0xCC008000 = 0;
     *(volatile u32 *)0xCC008000 = 0;
+}
+
+void fn_802772B4(void) {
+    extern void *__GXData;
+    void *gx = __GXData;
+
+    *(volatile u8 *)0xCC008000 = 0x61;
+    *(volatile u32 *)0xCC008000 = 0x2402C022;
+    *(volatile u8 *)0xCC008000 = 0x10;
+    *(volatile u32 *)0xCC008000 = 0x1006;
+    *(volatile u32 *)0xCC008000 = 0x31000;
+    M2C_FIELD(gx, u16 *, 0x2) = 1;
 }
 
 void fn_802773FC(void) {
