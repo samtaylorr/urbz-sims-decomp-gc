@@ -1273,28 +1273,22 @@ s32 fn_8025E260(s32 enable) {
     extern u8 lbl_80441710[];
     u8 *si = lbl_80441710;
     s32 enabled;
-    u32 reg;
     s32 rc;
-    s32 chan;
-    s32 *valid;
+    u32 reg;
+    s32 i;
 
     enabled = fn_8025465C();
     reg = __SIRegs[13];
-    if (reg & 0x08000000) {
-        rc = 1;
-    } else {
-        rc = 0;
-    }
+    rc = (reg & 0x08000000) ? 1 : 0;
     if (enable) {
         reg |= 0x08000000;
-        valid = (s32 *)(si + 0x1E0);
-        for (chan = 0; chan < 4; chan++) {
-            valid[chan] = 0;
+        for (i = 0; i < 4; i++) {
+            ((u32 *)(si + 0x1E0))[i] = 0;
         }
     } else {
         reg &= ~0x08000000;
     }
-    reg &= ~(0x80000000 | 1);
+    reg &= ~0x80000001;
     __SIRegs[13] = reg;
     fn_80254684(enabled);
     return rc;
@@ -1681,10 +1675,33 @@ void fn_802621D4(void) {
     fn_802663EC(fn_802621FC);
 }
 
+void fn_80262828(u32 arg0) {
+    extern u32 lbl_803F9760[];
+    extern s32 lbl_80495F1C;
+    lbl_803F9760[lbl_80495F1C++] = arg0;
+}
+
 void fn_8026284C(u32 arg0) {
     extern u32 lbl_80494A3C;
     extern s32 lbl_80495F20;
     (&lbl_80494A3C)[lbl_80495F20++] = arg0;
+}
+
+s32 fn_80262868(u32 arg0) {
+    extern u32 lbl_803F9760[];
+    if ((u32)(arg0 - 9) <= 3U) {
+        return 1;
+    }
+    if (arg0 == lbl_803F9760[0]) {
+        return 1;
+    }
+    if (arg0 == lbl_803F9760[1]) {
+        return 1;
+    }
+    if (arg0 == lbl_803F9760[2]) {
+        return 1;
+    }
+    return 0;
 }
 
 s32 fn_802628C4(u32 arg0) {
