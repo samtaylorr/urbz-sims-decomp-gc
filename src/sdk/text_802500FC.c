@@ -953,20 +953,6 @@ void fn_80258300(void) {
     fn_80251D2C(addr, 0x100);
 }
 
-static inline u8 *LockSram(u32 offset) {
-    extern u32 lbl_80440C00[];
-    s32 enabled;
-
-    enabled = fn_8025465C();
-    if (lbl_80440C00[0x12] != 0) {
-        fn_80254684(enabled);
-        return NULL;
-    }
-    lbl_80440C00[0x11] = enabled;
-    lbl_80440C00[0x12] = 1;
-    return (u8 *)lbl_80440C00 + offset;
-}
-
 void fn_80258364(void) {
 
 }
@@ -3421,8 +3407,19 @@ static inline u32 __GXReadCPCounterU32(volatile u16 *lo, volatile u16 *hi) {
 
 void fn_80277204(u32 *a, u32 *b, u32 *c) {
     extern volatile u16 *__cpReg;
+    volatile u16 *lo;
+    volatile u16 *hi;
+    u32 h0, h1, l;
 
-    *a = __GXReadCPCounterU32(&__cpReg[0x28], &__cpReg[0x29]);
+    hi = &__cpReg[0x29];
+    lo = &__cpReg[0x28];
+    h0 = *hi;
+    do {
+        h1 = h0;
+        l = *lo;
+        h0 = *hi;
+    } while (h0 != h1);
+    *a = (h0 << 16) | l;
     *b = __GXReadCPCounterU32(&__cpReg[0x2A], &__cpReg[0x2B]);
     *c = __GXReadCPCounterU32(&__cpReg[0x2C], &__cpReg[0x2D]);
 }
