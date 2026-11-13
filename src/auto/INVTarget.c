@@ -2894,7 +2894,6 @@ void fn_801E25D0(u8 *self, s32 idx) {
 }
 
 void fn_801E2BB4(void *arg0) {
-    struct E { u8 pad[0x168]; u8 type; };
     struct T {
         u8 pad0[0x2C0];
         s32 vals[18];
@@ -2906,7 +2905,7 @@ void fn_801E2BB4(void *arg0) {
     if (self->n > 1) {
         self->n = 1;
     }
-    ((struct E *)((u8 *)self + self->n * 0x14))->type = 6;
+    *((u8 *)self + (self->n * 0x14 + 0x168)) = 6;
     self->vals[self->n] = 0;
     self->n++;
     if (self->busy == 0) {
@@ -7048,9 +7047,10 @@ void fn_80220588(s32 *self, s32 *list) {
     u32 i;
 
     if (fn_8016F500(list) != 0) {
-        it = *list;
+        i = 0;
         pit = &it;
-        for (i = 0; i < fn_8016F500(list); i++) {
+        it = *list;
+        for (; i < fn_8016F500(list); i++) {
             fn_80220608(self, it);
             fn_8016F79C(pit);
         }
@@ -7728,28 +7728,43 @@ void fn_8022366C(void *arg0, s32 flags) {
     }
 }
 
+void fn_802249AC(u8 *self) {
+    extern void *lbl_80494FCC;
+    void *fn_8033390C(void *, s32);
+    void fn_803115C0(void *, s32);
+    char *b;
+    char *p;
+    if (M2C_FIELD(self, s32 *, 0x14) != -1) {
+        fn_803115C0(fn_8033390C(lbl_80494FCC, M2C_FIELD(self, s32 *, 0x18)), M2C_FIELD(self, s32 *, 0x14));
+        M2C_FIELD(self, s32 *, 0x14) = -1;
+    }
+    b = M2C_FIELD(self, char **, 0);
+    for (p = b; p != M2C_FIELD(self, char **, 4); p += 0xC) {
+    }
+    M2C_FIELD(self, char **, 4) = b;
+    M2C_FIELD(self, s32 *, 0x1C) = 0;
+}
+
 s32 fn_80224A28(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x14);
 }
 
 void *fn_80224C80(void *self, s32 n) {
     void *fn_802D2058(s32);
-    s32 *mem;
     char *arr;
     char *q;
     s32 i;
     M2C_FIELD(self, s32 *, 4) = n;
     M2C_FIELD(self, s32 *, 0) = 0;
     i = n - 1;
-    mem = fn_802D2058((n << 5) | 8);
-    arr = (char *)(mem + 2);
-    mem[0] = n;
+    arr = (char *)fn_802D2058((n << 5) | 8) + 8;
+    *(s32 *)(arr - 8) = n;
     q = arr;
     if (n != 0) {
         do {
             fn_80223638((s32 *)q);
             q += 0x20;
-        } while (i-- != 0);
+        } while (--i != -1);
     }
     M2C_FIELD(self, char **, 0) = arr;
     return self;
