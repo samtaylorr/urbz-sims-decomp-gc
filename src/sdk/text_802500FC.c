@@ -2814,6 +2814,51 @@ s32 fn_8026EA10(s32 arg0) {
     return temp_r31;
 }
 
+void __GXFifoInit(void) {
+    extern void fn_8026E208();
+    M2C_UNK fn_802546A8(s32, void *);
+    M2C_UNK fn_80254B48(s32);
+    s32 fn_80258544(void);
+    extern s32 lbl_80496098;
+    extern s32 lbl_804960A0;
+    extern s32 lbl_80496090;
+    extern s32 lbl_80496094;
+
+    fn_802546A8(0x11, fn_8026E208);
+    fn_80254B48(0x4000);
+    lbl_80496098 = fn_80258544();
+    lbl_804960A0 = 0;
+    lbl_80496090 = 0;
+    lbl_80496094 = 0;
+}
+
+void fn_8026EB80(void) {
+    extern void *__GXData;
+    extern volatile u16 *__cpReg;
+    u32 *gx = __GXData;
+
+    gx[2] = __rlwimi(gx[2], 1, 0, 31, 31);
+    __cpReg[1] = gx[2];
+}
+
+void fn_8026EBA4(void) {
+    extern void *__GXData;
+    extern volatile u16 *__cpReg;
+    u32 *gx = __GXData;
+
+    gx[2] = __rlwimi(gx[2], 0, 0, 31, 31);
+    __cpReg[1] = gx[2];
+}
+
+void fn_8026EBC8(u8 en) {
+    extern void *__GXData;
+    extern volatile u16 *__cpReg;
+    u32 *gx = __GXData;
+
+    gx[2] = __rlwimi(gx[2], en ? 1 : 0, 4, 27, 27);
+    __cpReg[1] = gx[2];
+}
+
 extern s32 lbl_80496098;
 s32 fn_8026EDD8(void) {
     return lbl_80496098;
@@ -3447,9 +3492,9 @@ static inline u32 __GXReadCPCounterU32(volatile u16 *hi, volatile u16 *lo) {
 void fn_80277204(u32 *a, u32 *b, u32 *c) {
     extern volatile u16 *__cpReg;
 
-    *a = __GXReadCPCounterU32(&__cpReg[0x28], &__cpReg[0x29]);
-    *b = __GXReadCPCounterU32(&__cpReg[0x2A], &__cpReg[0x2B]);
-    *c = __GXReadCPCounterU32(&__cpReg[0x2C], &__cpReg[0x2D]);
+    *a = __GXReadCPCounterU32(&__cpReg[0x29], &__cpReg[0x28]);
+    *b = __GXReadCPCounterU32(&__cpReg[0x2B], &__cpReg[0x2A]);
+    *c = __GXReadCPCounterU32(&__cpReg[0x2D], &__cpReg[0x2C]);
 }
 
 void fn_80277298(void) {
