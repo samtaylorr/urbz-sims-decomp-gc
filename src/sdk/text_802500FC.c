@@ -2320,6 +2320,13 @@ s32 fn_8026B6EC(s32 arg0, s32 *arg1) {
     return 1;
 }
 
+static inline s32 PADSync(void) {
+    extern u32 lbl_80495FF0;
+    extern s32 lbl_80494AB4;
+    extern s32 fn_8025DAB8(void);
+    return lbl_80495FF0 == 0 && lbl_80494AB4 == 0x20 && !fn_8025DAB8();
+}
+
 s32 fn_8026B838(s32 final) {
     extern void *lbl_8049600C;
     extern s32 lbl_80495FF0;
@@ -2334,8 +2341,9 @@ s32 fn_8026B838(s32 final) {
         fn_8026B960(NULL);
     }
     if (!final) {
+        s32 busy = (lbl_80495FF0 == 0 && lbl_80494AB4 == 0x20);
         sync = 0;
-        if (lbl_80495FF0 == 0 && lbl_80494AB4 == 0x20 && !fn_8025DAB8()) {
+        if (busy && !fn_8025DAB8()) {
             sync = 1;
         }
         if (!lbl_80496010 && sync) {
