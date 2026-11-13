@@ -979,8 +979,6 @@ void *fn_80259A94(void) {
 
 BOOL fn_80259AB0(u8 **queue) {
     u8 *t;
-    u8 *next;
-    u8 *prev;
 
     if (queue[0] != NULL && M2C_FIELD(queue[0], u8 **, 0x2e4) != NULL) {
         return FALSE;
@@ -988,13 +986,11 @@ BOOL fn_80259AB0(u8 **queue) {
     if (queue[1] != NULL && M2C_FIELD(queue[1], u8 **, 0x2e0) != NULL) {
         return FALSE;
     }
-    for (t = queue[0]; t != NULL; t = next) {
-        next = M2C_FIELD(t, u8 **, 0x2e0);
-        if (next != NULL && t != M2C_FIELD(next, u8 **, 0x2e4)) {
+    for (t = queue[0]; t != NULL; t = M2C_FIELD(t, u8 **, 0x2e0)) {
+        if (M2C_FIELD(t, u8 **, 0x2e0) != NULL && t != M2C_FIELD(M2C_FIELD(t, u8 **, 0x2e0), u8 **, 0x2e4)) {
             return FALSE;
         }
-        prev = M2C_FIELD(t, u8 **, 0x2e4);
-        if (prev != NULL && t != M2C_FIELD(prev, u8 **, 0x2e0)) {
+        if (M2C_FIELD(t, u8 **, 0x2e4) != NULL && t != M2C_FIELD(M2C_FIELD(t, u8 **, 0x2e4), u8 **, 0x2e0)) {
             return FALSE;
         }
     }
