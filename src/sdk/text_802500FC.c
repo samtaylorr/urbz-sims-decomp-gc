@@ -944,9 +944,10 @@ void fn_80258300(void) {
     void *fn_802482F8(void *, void *, u32);
     void fn_80251C7C(void *, u32);
     void fn_80251D2C(void *, u32);
-    void *addr = (void *)0x80000C00;
+    void *addr;
 
-    fn_802482F8(addr, fn_802582E0, (u32)(fn_802582E0 + 0x1C) - (u32)fn_802582E0);
+    addr = (void *)0x80000C00;
+    fn_802482F8(addr, fn_802582E0, (u32)&fn_802582E0[0x1C] - (u32)&fn_802582E0[0]);
     fn_80251C7C(addr, 0x100);
     __sync();
     fn_80251D2C(addr, 0x100);
