@@ -3371,37 +3371,10 @@ static inline u32 __GXReadCPCounterU32(volatile u16 *lo, volatile u16 *hi) {
 
 void fn_80277204(u32 *a, u32 *b, u32 *c) {
     extern volatile u16 *__cpReg;
-    volatile u16 *lo;
-    volatile u16 *hi;
-    u32 h0, h1, l;
 
-    hi = &__cpReg[0x29];
-    lo = &__cpReg[0x28];
-    h0 = *hi;
-    do {
-        h1 = h0;
-        l = *lo;
-        h0 = *hi;
-    } while (h0 != h1);
-    *a = (h0 << 16) | l;
-    hi = &__cpReg[0x2B];
-    lo = &__cpReg[0x2A];
-    h0 = *hi;
-    do {
-        h1 = h0;
-        l = *lo;
-        h0 = *hi;
-    } while (h0 != h1);
-    *b = (h0 << 16) | l;
-    hi = &__cpReg[0x2D];
-    lo = &__cpReg[0x2C];
-    h0 = *hi;
-    do {
-        h1 = h0;
-        l = *lo;
-        h0 = *hi;
-    } while (h0 != h1);
-    *c = (h0 << 16) | l;
+    *a = __GXReadCPCounterU32(&__cpReg[0x28], &__cpReg[0x29]);
+    *b = __GXReadCPCounterU32(&__cpReg[0x2A], &__cpReg[0x2B]);
+    *c = __GXReadCPCounterU32(&__cpReg[0x2C], &__cpReg[0x2D]);
 }
 
 void fn_80277298(void) {
