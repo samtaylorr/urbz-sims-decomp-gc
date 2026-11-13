@@ -1001,7 +1001,7 @@ BOOL fn_80259B4C(u8 **queue, u8 *thread) {
     u8 *t;
 
     for (t = queue[0]; t != NULL; t = M2C_FIELD(t, u8 **, 0x2e0)) {
-        if (t == thread) {
+        if (thread == t) {
             return TRUE;
         }
     }
@@ -1275,7 +1275,8 @@ s32 fn_8025E260(s32 enable) {
     s32 enabled;
     u32 reg;
     s32 rc;
-    s32 i;
+    s32 chan;
+    s32 *valid;
 
     enabled = fn_8025465C();
     reg = __SIRegs[13];
@@ -1286,8 +1287,9 @@ s32 fn_8025E260(s32 enable) {
     }
     if (enable) {
         reg |= 0x08000000;
-        for (i = 0; i < 4; i++) {
-            ((s32 *)(si + 0x1E0))[i] = 0;
+        valid = (s32 *)(si + 0x1E0);
+        for (chan = 0; chan < 4; chan++) {
+            valid[chan] = 0;
         }
     } else {
         reg &= ~0x08000000;
@@ -1389,6 +1391,14 @@ void fn_8025F970(void *arg0, void *arg1, void *arg2) {
     M2C_FIELD(arg2, f32 *, 0) = (f32) (M2C_FIELD(arg0, f32 *, 0) + M2C_FIELD(arg1, f32 *, 0));
     M2C_FIELD(arg2, f32 *, 4) = (f32) (M2C_FIELD(arg0, f32 *, 4) + M2C_FIELD(arg1, f32 *, 4));
     M2C_FIELD(arg2, f32 *, 8) = (f32) (M2C_FIELD(arg0, f32 *, 8) + M2C_FIELD(arg1, f32 *, 8));
+}
+
+void fn_8025F9A4(f32 *a, f32 *b, f32 *ab) {
+    f32 v0, v1, s;
+    v0 = __psq_l(a, 0, 0, 0);
+    v1 = __psq_l(b, 0, 0, 0);
+    s = __ps_add(v0, v1);
+    __psq_st(ab, s, 0, 0, 0);
 }
 
 void fn_8025F9C8(void *arg0, void *arg1, void *arg2) {
