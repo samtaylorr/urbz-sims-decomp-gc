@@ -546,7 +546,6 @@ void fn_80254420(char *path, char **argv) {
     void fn_80254284(u32, u32, char **);
     DVDFileInfo fileInfo;
     u32 addr;
-    u32 code = 0xC0000000;
 
     if (path[0] == 0) {
         addr = 0;
@@ -555,7 +554,7 @@ void fn_80254420(char *path, char **argv) {
     } else {
         return;
     }
-    fn_80254284(addr, code, argv);
+    fn_80254284(addr, 0xC0000000, (char **)argv);
 }
 
 void fn_80254488(char *path, char **argv) {
