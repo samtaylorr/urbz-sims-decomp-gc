@@ -3718,6 +3718,20 @@ void fn_801F6A74(void *self) {
     fn_801E1F6C((u8 *)self + 0x41C);
 }
 
+void fn_801F6B1C(void *arg0) {
+    extern u8 *lbl_80496648;
+    extern void *lbl_80496644;
+    void fn_8010CBF4(void *);
+    void *vt;
+
+    if (M2C_FIELD(arg0, u8 *, 0xF1) == 0) {
+        vt = *(void **)lbl_80496648;
+        M2C_FIELD(vt, void (**)(void *), 0x54)(lbl_80496648 + M2C_FIELD(vt, s16 *, 0x50));
+        fn_8010CBF4(lbl_80496644);
+    }
+    M2C_FIELD(arg0, u8 *, 0xF1)++;
+}
+
 void fn_801F6C18(s32 arg0, u8 *arg1, s32 arg2) {
     M2C_UNK fn_801F6C84(s32, u8, u8 *, s32);
     s32 fn_80245988(s8);
