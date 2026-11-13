@@ -5158,6 +5158,18 @@ void fn_80204C00(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x88) = 0;
 }
 
+void fn_80204EC4(void *self) {
+    typedef struct { s32 a; s32 b; } Ent;
+    typedef struct { Ent *begin; Ent *end; } EntVec;
+    void fn_802050EC(void *);
+    EntVec *v = (EntVec *)((u8 *)self + 0x178);
+    if ((u32)((u8 *)v->end - (u8 *)v->begin) >> 3) {
+        M2C_FIELD(self, u8 *, 0x8C1) = 0;
+        M2C_FIELD(self, u8 *, 0x8C0) = (u32)(M2C_FIELD(self, u8 *, 0x8C0) + 1) % (u32)(v->end - v->begin);
+        fn_802050EC(self);
+    }
+}
+
 void fn_80204F2C(void *self) {
     typedef struct { s32 a; s32 b; } Ent;
     typedef struct { Ent *begin; Ent *end; } EntVec;
