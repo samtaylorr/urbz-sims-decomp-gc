@@ -3603,7 +3603,7 @@ void fn_801E2A24(void *, s32);
 void fn_801E2BB4(void *);
 void fn_801F983C(s32 arg0, s32 arg1) {
     void fn_801E2BB4(void *);
-    if (INVSlot_IsUsed(arg0, arg1)) {
+    if (INVSlot_IsUsed((void *)arg0, arg1)) {
         fn_801E2BB4((u8 *)arg0 + (arg1 * 0x318 + 0x104));
     }
 }
@@ -7125,6 +7125,39 @@ void fn_8022B75C(s32 arg0, s32 arg1) {
     fn_8022B684(v, arg1, buf);
 }
 
+void fn_8022BE60(s32 *arg0) {
+    typedef struct { s16 delta; s16 idx; void (*fn)(void *, s32); } VtEnt;
+    extern u8 *lbl_80496658;
+    extern u8 *lbl_8041FA38[];
+    extern void fn_800650DC(s32, s32);
+    extern s32 fn_8015125C(s32, s32);
+    extern void fn_8002AF18(void *);
+    extern s32 fn_8004E29C(void *, void *);
+    extern u8 lbl_8041F94C[];
+    u8 *obj = lbl_80496658;
+    u8 *t;
+    s32 r;
+
+    {
+        VtEnt *e = (VtEnt *)(*(u8 **)obj + 0x100);
+        e->fn(obj + e->delta, 0);
+    }
+    t = lbl_8041FA38[0];
+    if (*(s32 *)(t + 4) != 0) {
+        fn_800650DC(*(s32 *)(t + 4), 0);
+    }
+    if (arg0 != 0) {
+        r = fn_8015125C(*arg0, 0xB);
+    } else {
+        r = 0;
+    }
+    if (r != 0) {
+        fn_8002AF18(t);
+    } else if (fn_8004E29C(lbl_8041F94C, arg0) != 0) {
+        fn_8002AF18(t);
+    }
+}
+
 extern u8 *lbl_80496654;
 extern void fn_801910C8(void *, s32, u16 **, void *, void *, void *);
 s32 fn_8022CC90(s32 arg0) {
@@ -7237,6 +7270,47 @@ void fn_8022D2C4(s32 key, INVCountVec *v) {
         tmp.key = key;
         tmp.count = 1;
         INVCount_push_back(v, &tmp);
+    }
+}
+
+s32 *fn_8022D6FC(s32 *self) {
+    s32 *v = self + 2;
+    s32 *w = v + 2;
+    s32 i;
+    v[0] = 0;
+    v[1] = 0;
+    w[1] = 0;
+    ((u8 *)v)[0x10] = 0;
+    for (i = 3; i != 0; i--) {
+    }
+    for (i = 4; i != 0; i--) {
+    }
+    self[0] = 0;
+    self[1] = 0;
+    return self;
+}
+
+void fn_8022D750(void *arg0, s32 flags) {
+    extern void fn_802D20E8(void *);
+    extern void fn_803997AC(void *, u32);
+    extern void fn_80225E68(void *, s32);
+    s32 *self = arg0;
+    s32 *v = self + 2;
+    char *p;
+
+    for (p = (char *)v[0]; p != (char *)v[1]; p += 0x80) {
+        fn_80225E68(p + 4, 2);
+    }
+    if (v[0] != 0) {
+        u32 size = (u32)(v[3] - v[0]) & ~0x7F;
+        if (size > 0x80) {
+            fn_802D20E8((void *)v[0]);
+        } else {
+            fn_803997AC((void *)v[0], size);
+        }
+    }
+    if (flags & 1) {
+        fn_802D20E8(self);
     }
 }
 
