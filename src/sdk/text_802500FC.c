@@ -692,6 +692,8 @@ void fn_8025A410(s64 time) {
     fn_80254684(enabled);
 }
 #pragma pop
+#pragma push
+#pragma peephole off
 s64 fn_8025A4F8(s64 time) {
     s32 fn_8025465C(void);
     void fn_80254684(s32);
@@ -704,6 +706,7 @@ s64 fn_8025A4F8(s64 time) {
     fn_80254684(enabled);
     return result;
 }
+#pragma pop
 
 #pragma push
 #pragma peephole off
@@ -2056,6 +2059,11 @@ void fn_80272A14(void *arg0, s32 *arg1) {
 
 void fn_80273438(void *arg0, u32 arg1) {
     M2C_FIELD(arg0, u32 *, 0xC) = (M2C_FIELD(arg0, u32 *, 0xC) & ~0x1FFFFF) | (arg1 >> 5);
+}
+
+void fn_80273448(void *arg0, u32 arg1, u32 arg2) {
+    M2C_FIELD(arg0, u32 *, 0x0) = (M2C_FIELD(arg0, u32 *, 0x0) & ~3) | arg1;
+    M2C_FIELD(arg0, u32 *, 0x0) = (M2C_FIELD(arg0, u32 *, 0x0) & ~0xC) | (arg2 << 2);
 }
 
 void fn_80273464(void *arg0, s32 arg1) {
