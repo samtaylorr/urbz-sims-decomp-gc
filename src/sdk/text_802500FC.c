@@ -449,15 +449,15 @@ s32 fn_80252900(void) {
     return *(s32 *)0x800000D4;
 }
 
+#pragma peephole off
 void fn_80252AAC(void *ctx) {
     *(u16 *)((u8 *)ctx + 0x1A0) = 0;
     *(u16 *)((u8 *)ctx + 0x1A2) = 0;
     if (ctx == *(void **)0x800000D8) {
         *(void **)0x800000D8 = 0;
     }
-    return;
 }
-
+#pragma peephole reset
 void fn_802530AC(void) {
     M2C_UNK fn_80378324();
     fn_80378324();
