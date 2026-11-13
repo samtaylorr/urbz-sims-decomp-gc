@@ -2820,18 +2820,17 @@ void fn_8026CD4C(void) {
     PPCMthid2(PPCMfhid2() & 0xBFFFFFFF);
 }
 
+#pragma push
+#pragma peephole off
 void *fn_8026CE70(u32 id) {
     extern u8 *__GXData;
-    void *obj;
 
     if (id >= 20) {
-        obj = NULL;
-    } else {
-        obj = __GXData + 0x388 + id * 16;
+        return NULL;
     }
-    return obj;
+    return __GXData + 0x388 + id * 16;
 }
-
+#pragma pop
 void fn_8026E418(void *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 0xC) = arg1;
     M2C_FIELD(arg0, s32 *, 0x10) = arg2;
