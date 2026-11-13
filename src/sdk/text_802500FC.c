@@ -1295,10 +1295,12 @@ f32 fn_8025FB70(f32 *v) {
     return v[0] * v[0] + v[1] * v[1] + v[2] * v[2];
 }
 
+#pragma push
+#pragma fp_contract off
 f32 fn_8025FBAC(f32 *v) {
     return sqrtf(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
 }
-
+#pragma pop
 s32 fn_80260574(void) {
     M2C_UNK fn_802646D0();
     fn_802646D0();
@@ -2413,6 +2415,14 @@ void fn_80270EAC(u8 x) {
     u32 reg = __peReg[1];
     reg = __rlwimi(reg, x, 3, 28, 28);
     __peReg[1] = reg;
+}
+
+void fn_80270EC4(u8 a, u8 b) {
+    extern volatile u16 *__peReg;
+    u32 reg = 0;
+    reg = __rlwimi(reg, b, 0, 24, 31);
+    reg = __rlwimi(reg, a, 8, 23, 23);
+    __peReg[2] = reg;
 }
 
 s32 fn_80270FA8(s32 arg0) {
