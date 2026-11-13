@@ -5162,7 +5162,6 @@ s32 fn_80204C0C(void *self, s32 type) {
     s32 fn_80059B50(void *);
     s32 n = 1;
     s32 have;
-    s32 r;
     void *p;
     switch (type) {
     case 2:
@@ -5184,11 +5183,10 @@ s32 fn_80204C0C(void *self, s32 type) {
     } else {
         have = 0;
     }
-    r = n;
     if ((u32)(have + n) > 99) {
-        r = 99 - have;
+        return 99 - have;
     }
-    return r;
+    return n;
 }
 
 void fn_80204EC4(void *self) {
@@ -7015,6 +7013,13 @@ s32 fn_802219C8(void *arg0, void *arg1, s32 arg2) {
         }
     }
     return 1;
+}
+
+void fn_80222038(void *self, s32 *a, s32 *b, s32 *c, s32 *d) {
+    *a = (s32)(M2C_FIELD(self, f32 *, 0x24) < M2C_FIELD(self, f32 *, 0x64) ? M2C_FIELD(self, f32 *, 0x24) : M2C_FIELD(self, f32 *, 0x64));
+    *b = (s32)(M2C_FIELD(self, f32 *, 0x20) < M2C_FIELD(self, f32 *, 0x60) ? M2C_FIELD(self, f32 *, 0x20) : M2C_FIELD(self, f32 *, 0x60));
+    *c = (s32)(M2C_FIELD(self, f32 *, 0x24) > M2C_FIELD(self, f32 *, 0x64) ? M2C_FIELD(self, f32 *, 0x24) : M2C_FIELD(self, f32 *, 0x64));
+    *d = (s32)(M2C_FIELD(self, f32 *, 0x20) > M2C_FIELD(self, f32 *, 0x60) ? M2C_FIELD(self, f32 *, 0x20) : M2C_FIELD(self, f32 *, 0x60));
 }
 
 extern s32 fn_801A09E0(void *);
