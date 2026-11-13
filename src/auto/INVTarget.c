@@ -2894,15 +2894,23 @@ void fn_801E25D0(u8 *self, s32 idx) {
 }
 
 void fn_801E2BB4(void *arg0) {
+    struct E { u8 type; u8 pad[0x13]; };
+    struct T {
+        u8 pad0[0x168];
+        struct E ents[18];
+        s32 vals[18];
+        u8 n;
+        u8 pad309;
+        u8 busy;
+    } *self = arg0;
     void fn_801E2C28(void *);
-    u8 *self = arg0;
-    if (self[0x308] > 1) {
-        self[0x308] = 1;
+    if (self->n > 1) {
+        self->n = 1;
     }
-    self[self[0x308] * 0x14 + 0x168] = 6;
-    ((s32 *)(self + 0x2C0))[self[0x308]] = 0;
-    self[0x308]++;
-    if (self[0x30A] == 0) {
+    self->ents[self->n].type = 6;
+    self->vals[self->n] = 0;
+    self->n++;
+    if (self->busy == 0) {
         fn_801E2C28(self);
     }
 }
@@ -2955,14 +2963,16 @@ s32 fn_801E3438(void *arg0, void *arg1) {
     void *fn_800F7138(Str *);
     void fn_800F8178(void *, void *);
     Str s;
-    Str *ps;
     if (arg1 == NULL) {
         return 0;
     }
-    ps = &s;
-    fn_800F6FB4(ps, (u16 *)((u8 *)ps + 8), 0x100);
-    fn_800BD804(arg0, ps, 0);
-    fn_800F8178(arg1, fn_800F7138(ps));
+    {
+        Str *ps = &s;
+        u16 *b = ps->buf;
+        fn_800F6FB4(ps, b, 0x100);
+        fn_800BD804(arg0, ps, 0);
+        fn_800F8178(arg1, fn_800F7138(ps));
+    }
     return 1;
 }
 
@@ -6251,6 +6261,34 @@ void fn_8020FBC8(void *self) {
     M2C_FIELD(self, s16 *, 0xC4) = 0;
     M2C_FIELD(self, s16 *, 0xC6) = 0;
     fn_801DB274(lbl_803E7640, 2);
+    M2C_FIELD(self, s32 *, 0x124) = 3;
+}
+
+void fn_8020FC34(void *self) {
+    extern char lbl_803E75E0[];
+    extern char lbl_803E7640[];
+    extern s32 lbl_8049440C;
+    s32 fn_801DB18C(u8 *);
+    s32 fn_801DB274(char *, s32);
+    void fn_8012AE08(s32);
+    void fn_8021F5D0(void);
+
+    if (M2C_FIELD(self, s32 *, 0x120) == 1) {
+        switch (fn_801DB18C((u8 *)lbl_803E75E0)) {
+        case 1:
+        case 4:
+        case 6:
+            fn_801DB274(lbl_803E7640, 1);
+            break;
+        case 3:
+            fn_801DB274(lbl_803E7640, 4);
+            break;
+        }
+    } else {
+        fn_8012AE08(lbl_8049440C);
+        fn_8021F5D0();
+        fn_801DB274(lbl_803E7640, 0);
+    }
     M2C_FIELD(self, s32 *, 0x124) = 3;
 }
 
