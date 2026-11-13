@@ -3205,6 +3205,18 @@ void fn_80271670(u8 *a, u32 *b) {
     *b = (gx[0x7C / 4] >> 19) & 7;
 }
 
+void fn_802716D8(u32 a) {
+}
+
+void fn_8027171C(u32 *a) {
+}
+
+void fn_80271760(u8 a) {
+}
+
+void fn_80271794(void) {
+}
+
 void fn_80271FC0(u8 *color, u32 val) {
     extern void *__GXData;
     void *gx = __GXData;
