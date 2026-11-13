@@ -477,6 +477,9 @@ void fn_802538BC(void *arg0, u32 entry) {
     fn_80253880(entry);
 }
 #pragma dont_inline reset
+
+#pragma scheduling off
+#pragma peephole off
 void fn_80253924(void *arg0, s32 arg1, s32 arg2) {
     s32 fn_802642C0(DVDCommandBlock *);
     s32 fn_802649F8(void);
