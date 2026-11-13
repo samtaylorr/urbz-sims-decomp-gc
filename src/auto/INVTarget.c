@@ -2918,9 +2918,9 @@ void fn_801E3140(void *self) {
             fn_801E2EE0(self);
             if (M2C_FIELD(self, u8 *, 0x308) != 0) {
                 fn_801E2C28(self);
-                fn_801E31A8(self);
             }
         }
+        fn_801E31A8(self);
     }
 }
 
