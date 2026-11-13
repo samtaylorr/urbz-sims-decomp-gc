@@ -3516,6 +3516,19 @@ void fn_801F83C4(void) {
 
 }
 
+void fn_801F8FD4(s32 arg0, s32 arg1, s32 arg2) {
+    extern struct { u8 pad[0xD8]; u8 *arr[1]; } lbl_8041F94C;
+    void fn_80183DDC(void *, s32);
+    u8 *obj;
+    u8 *vt;
+
+    obj = lbl_8041F94C.arr[arg1];
+    if (obj != NULL) {
+        vt = *(u8 **)(obj + 4);
+        fn_80183DDC((*(void *(**)(void *))(vt + 0x29C))(obj + *(s16 *)(vt + 0x298)), arg2);
+    }
+}
+
 s32 fn_801F9038(s32 arg0, s32 arg1) {
     u8 *flags = (u8 *)arg0 + 0xEF;
     s32 ret = 0;
