@@ -2624,6 +2624,32 @@ void fn_802734A4(u32 *arg0, f32 arg1) {
     arg0[1] = (arg0[1] & ~0xFF00) | (((s32)(lbl_804975A8 * arg1) << 8) & 0xFF00);
 }
 #pragma pop
+
+void fn_802734F4(u32 *obj, f32 v) {
+    extern f32 lbl_804975C8;
+    extern f32 lbl_804975CC;
+    extern f32 lbl_804975A8;
+    if (v < lbl_804975C8) {
+        v = lbl_804975C8;
+    } else if (v > lbl_804975CC) {
+        v = lbl_804975CC;
+    }
+    obj[1] = __rlwimi(obj[1], (s32)(lbl_804975A8 * v), 0, 24, 31);
+}
+
+void fn_80273544(u32 *obj, f32 v) {
+    extern f32 lbl_804975B8;
+    extern f32 lbl_804975BC;
+    extern f32 lbl_804975C0;
+    extern f32 lbl_804975C4;
+    if (v < lbl_804975B8) {
+        v = lbl_804975B8;
+    } else if (v >= lbl_804975BC) {
+        v = lbl_804975C0;
+    }
+    obj[0] = __rlwimi(obj[0], (s32)(lbl_804975C4 * v), 9, 15, 22);
+}
+
 void fn_80273598(u32 *obj, u8 v) {
     *obj = __rlwimi(*obj, v, 21, 10, 10);
 }
