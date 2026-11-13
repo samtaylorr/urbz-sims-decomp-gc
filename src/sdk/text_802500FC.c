@@ -1271,6 +1271,10 @@ void fn_8025FA20(void *arg0, void *arg1, f32 farg0) {
     M2C_FIELD(arg1, f32 *, 8) = (f32) (M2C_FIELD(arg0, f32 *, 8) * farg0);
 }
 
+f32 fn_8025FB70(f32 *v) {
+    return v[0] * v[0] + v[1] * v[1] + v[2] * v[2];
+}
+
 s32 fn_80260574(void) {
     M2C_UNK fn_802646D0();
     fn_802646D0();
