@@ -468,7 +468,6 @@ void fn_802530AC(void) {
 
 #pragma dont_inline on
 void fn_802538BC(void *arg0, u32 entry) {
-    extern volatile u32 __PIRegs[];
     void fn_80253A14(void *, void *);
     void fn_80253880(u32);
     s32 fn_8025465C(void);
@@ -527,6 +526,13 @@ void fn_80253A14(void *arg0, void *arg1) {
     fn_802482F8(arg1, arg0, 0x1C);
     *(void **)0x800030F0 = arg1;
 }
+
+s32 fn_80254670(void) {
+    u32 msr = __mfmsr();
+    __mtmsr(msr | 0x8000);
+    return (msr >> 15) & 1;
+}
+
 #pragma peephole reset
 #pragma scheduling reset
 
@@ -2118,9 +2124,9 @@ void fn_802734A4(u32 *arg0, f32 arg1) {
     } else if (arg1 > lbl_804975CC) {
         arg1 = lbl_804975CC;
     }
-    arg0[1] = (arg0[1] & 0xFFFF00FF) | (((s32)(lbl_804975A8 * arg1) << 8) & 0xFF00);
+    arg0[1] = (arg0[1] & ~0xFF00) | (((s32)(lbl_804975A8 * arg1) << 8) & 0xFF00);
 }
-
+#pragma pop
 void fn_80273598(u32 *obj, u8 v) {
     *obj = __rlwimi(*obj, v, 21, 10, 10);
 }
