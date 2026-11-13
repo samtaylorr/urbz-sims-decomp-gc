@@ -529,6 +529,50 @@ void fn_80253A14(void *arg0, void *arg1) {
     *(void **)0x800030F0 = arg1;
 }
 
+void fn_80254420(char *path, u32 arg1) {
+    s32 fn_802604AC(char *, DVDFileInfo *);
+    void fn_80254284(u32, u32, u32);
+    DVDFileInfo fileInfo;
+    u32 addr;
+
+    if (path[0] == 0) {
+        addr = 0;
+    } else {
+        if (!fn_802604AC(path, &fileInfo)) {
+            return;
+        }
+        addr = fileInfo.startAddr;
+    }
+    fn_80254284(addr, 0xC0000000, arg1);
+}
+
+void fn_80254488(char *path, u32 arg1) {
+    s32 fn_802604AC(char *, DVDFileInfo *);
+    void fn_80254284(u32, u32, u32);
+    void fn_80258640(void);
+    void fn_8025611C(s32);
+    void fn_80258680(void);
+    void fn_80251884(u32);
+    void fn_8025187C(u32);
+    DVDFileInfo fileInfo;
+    u32 addr;
+
+    fn_80258640();
+    fn_8025611C(0);
+    fn_80258680();
+    fn_80251884(0x81280000);
+    fn_8025187C(0x812F0000);
+    if (path[0] == 0) {
+        addr = 0;
+    } else {
+        if (!fn_802604AC(path, &fileInfo)) {
+            return;
+        }
+        addr = fileInfo.startAddr;
+    }
+    fn_80254284(addr, 0xC0000000, arg1);
+}
+
 s32 fn_80254670(void) {
     u32 msr = __mfmsr();
     __mtmsr(msr | 0x8000);
@@ -580,6 +624,13 @@ void fn_80255E5C(s32 arg0, s32 arg1) {
     extern s32 lbl_80495E34;
     lbl_80495E30 = arg0;
     lbl_80495E34 = arg1;
+}
+
+void fn_80255E68(s32 *arg0, s32 *arg1) {
+    extern s32 lbl_80495E30;
+    extern s32 lbl_80495E34;
+    *arg0 = lbl_80495E30;
+    *arg1 = lbl_80495E34;
 }
 
 void fn_80255F1C(void *arg0) {
@@ -1883,7 +1934,8 @@ s32 fn_8026C4FC(void) {
 }
 
 void fn_8026CC4C(u8 odd, u8 even) {
-    extern void *const __GXData;
+    extern void *__GXData;
+    void *gx = __GXData;
     u32 reg;
 
     reg = 0;
@@ -1892,7 +1944,7 @@ void fn_8026CC4C(u8 odd, u8 even) {
     reg = __rlwimi(reg, 0x44, 24, 0, 7);
     *(volatile u8 *)0xCC008000 = 0x61;
     *(volatile u32 *)0xCC008000 = reg;
-    M2C_FIELD(__GXData, u16 *, 0x2) = 0;
+    M2C_FIELD(gx, u16 *, 0x2) = 0;
 }
 
 void fn_8026CC84(u8 field_mode, u8 half_aspect_ratio) {
