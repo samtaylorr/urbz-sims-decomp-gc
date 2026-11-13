@@ -669,13 +669,9 @@ void fn_80254F6C(s32 arg0) {
     *(s32 *)0x800030D0 = arg0;
 }
 
-void fn_80255980(void) {
-    struct {
-        OSModuleInfo *head;
-        OSModuleInfo *tail;
-    } *list = (void *)0x800030C8;
-    list->head = list->tail = NULL;
-    *(void **)0x800030D0 = NULL;
+void fn_80255980(void *unused) {
+    *(OSModuleInfo **)0x800030C8 = *(OSModuleInfo **)0x800030CC = NULL;
+    *(u32 *)0x800030D0 = 0;
 }
 
 OSModuleInfo *fn_80255998(void *ptr, u32 *section, u32 *offset) {
@@ -1108,7 +1104,7 @@ void fn_8025B2B0(void) {
 }
 
 s32 fn_8025C2BC(s32 chan) {
-    typedef struct { u8 pad0[0xC]; u32 state; u8 pad10[8]; u32 dev; u8 pad1C[0x24]; } EXICtrl;
+    typedef struct { u8 pad0[0xC]; volatile u32 state; u8 pad10[8]; u32 dev; u8 pad1C[0x24]; } EXICtrl;
     s32 fn_8025465C(void);
     void fn_80254684(s32);
     void fn_80254AC0(u32);
@@ -1134,13 +1130,14 @@ s32 fn_8025C2BC(s32 chan) {
 s32 fn_8025CD08(s32 chan) {
     typedef struct { u8 pad0[0xC]; s32 state; u8 pad10[0x30]; } EXICtrl;
     extern EXICtrl lbl_80441650[];
-    return lbl_80441650[chan].state;
+    EXICtrl *exi = &lbl_80441650[chan];
+    return exi->state;
 }
 
 s32 fn_8025CD20(s32 chan) {
     s32 fn_8025CD48(s32, s32, u32 *);
-    u32 id[2];
-    return fn_8025CD48(chan, 0, id);
+    u64 id;
+    return fn_8025CD48(chan, 0, (u32 *)&id);
 }
 
 s32 fn_8025D78C(void) {
@@ -1297,18 +1294,7 @@ f32 fn_8025FB70(f32 *v) {
 }
 
 f32 fn_8025FBAC(f32 *v) {
-    volatile f32 y;
-    f32 x = v[0] * v[0] + v[1] * v[1] + v[2] * v[2];
-
-    if (x > 0.0f) {
-        f64 guess = __frsqrte((f64)x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
-        y = (f32)(x * guess);
-        return y;
-    }
-    return x;
+    return sqrtf(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
 }
 
 s32 fn_80260574(void) {
@@ -2112,7 +2098,11 @@ s32 fn_8026BA30(s32 arg0) {
     s32 prev;
 
     enabled = fn_8025465C();
-    prev = (*(u8 *)0x800030E3 & 0x20) ? 1 : 0;
+    if (*(u8 *)0x800030E3 & 0x20) {
+        prev = 1;
+    } else {
+        prev = 0;
+    }
     *(u8 *)0x800030E3 &= ~0x20;
     if (arg0) {
         *(u8 *)0x800030E3 |= 0x20;
@@ -2144,13 +2134,12 @@ s32 fn_8026BAE8(s32 arg0) {
 }
 
 void fn_8026BB2C(u32 addr, u32 len) {
-    extern volatile u16 __DSPRegs[];
     s32 enabled;
 
     enabled = fn_8025465C();
-    __DSPRegs[0x18] = (__DSPRegs[0x18] & ~0x3FF) | (addr >> 16);
-    __DSPRegs[0x19] = (__DSPRegs[0x19] & ~0xFFE0) | (addr & 0xFFFF);
-    __DSPRegs[0x1B] = (__DSPRegs[0x1B] & ~0x7FFF) | ((len >> 5) & 0xFFFF);
+    ((volatile u16 *)0xCC005000)[0x18] = (((volatile u16 *)0xCC005000)[0x18] & ~0x3FF) | (addr >> 16);
+    ((volatile u16 *)0xCC005000)[0x19] = (((volatile u16 *)0xCC005000)[0x19] & ~0xFFE0) | (addr & 0xFFFF);
+    ((volatile u16 *)0xCC005000)[0x1B] = (((volatile u16 *)0xCC005000)[0x1B] & ~0x7FFF) | ((len >> 5) & 0xFFFF);
     fn_80254684(enabled);
 }
 
