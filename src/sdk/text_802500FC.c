@@ -20,6 +20,23 @@ extern DVDCommandBlock *lbl_80495ED0;
 
 volatile u32 __SIRegs[] : 0xCC006400;
 
+#pragma push
+#pragma fp_contract off
+static inline f32 sqrtf(f32 x) {
+    volatile f32 y;
+
+    if (x > 0.0f) {
+        f64 guess = __frsqrte((f64)x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        y = (f32)(x * guess);
+        return y;
+    }
+    return x;
+}
+#pragma pop
+
 typedef struct OSResetFunctionInfo {
     s32 (*func)(s32 final);
     u32 priority;
@@ -653,8 +670,12 @@ void fn_80254F6C(s32 arg0) {
 }
 
 void fn_80255980(void) {
-    *(OSModuleInfo **)0x800030C8 = *(OSModuleInfo **)0x800030CC = NULL;
-    *(u32 *)0x800030D0 = 0;
+    struct {
+        OSModuleInfo *head;
+        OSModuleInfo *tail;
+    } *list = (void *)0x800030C8;
+    list->head = list->tail = NULL;
+    *(void **)0x800030D0 = NULL;
 }
 
 OSModuleInfo *fn_80255998(void *ptr, u32 *section, u32 *offset) {
@@ -1087,24 +1108,25 @@ void fn_8025B2B0(void) {
 }
 
 s32 fn_8025C2BC(s32 chan) {
+    typedef struct { u8 pad0[0xC]; u32 state; u8 pad10[8]; u32 dev; u8 pad1C[0x24]; } EXICtrl;
     s32 fn_8025465C(void);
     void fn_80254684(s32);
     void fn_80254AC0(u32);
-    extern u8 lbl_80441650[];
-    u8 *exi = lbl_80441650 + chan * 0x40;
+    extern EXICtrl lbl_80441650[];
+    EXICtrl *exi = &lbl_80441650[chan];
     s32 enabled;
 
     enabled = fn_8025465C();
-    if (!(M2C_FIELD(exi, u32 *, 0xC) & 8)) {
+    if (!(exi->state & 8)) {
         fn_80254684(enabled);
         return 1;
     }
-    if ((M2C_FIELD(exi, u32 *, 0xC) & 0x10) && M2C_FIELD(exi, u32 *, 0x18) == 0) {
+    if ((exi->state & 0x10) && exi->dev == 0) {
         fn_80254684(enabled);
         return 0;
     }
-    M2C_FIELD(exi, u32 *, 0xC) &= ~8;
-    fn_80254AC0(0x500000 >> (chan * 3));
+    exi->state &= ~8;
+    fn_80254AC0(0x500000u >> (chan * 3));
     fn_80254684(enabled);
     return 1;
 }
@@ -1117,8 +1139,8 @@ s32 fn_8025CD08(s32 chan) {
 
 s32 fn_8025CD20(s32 chan) {
     s32 fn_8025CD48(s32, s32, u32 *);
-    u32 id;
-    return fn_8025CD48(chan, 0, &id);
+    u32 id[2];
+    return fn_8025CD48(chan, 0, id);
 }
 
 s32 fn_8025D78C(void) {
@@ -2067,6 +2089,38 @@ void fn_8026B8F4(void) {
     lbl_80494AB8 = 0;
 }
 
+s32 fn_8026B9B4(s32 arg0) {
+    s32 fn_8025465C(void);
+    void fn_80254684(s32);
+    s32 enabled;
+    s32 prev;
+
+    enabled = fn_8025465C();
+    prev = (*(u8 *)0x800030E3 & 0x40) ? 1 : 0;
+    *(u8 *)0x800030E3 &= ~0x40;
+    if (arg0) {
+        *(u8 *)0x800030E3 |= 0x40;
+    }
+    fn_80254684(enabled);
+    return prev;
+}
+
+s32 fn_8026BA30(s32 arg0) {
+    s32 fn_8025465C(void);
+    void fn_80254684(s32);
+    s32 enabled;
+    s32 prev;
+
+    enabled = fn_8025465C();
+    prev = (*(u8 *)0x800030E3 & 0x20) ? 1 : 0;
+    *(u8 *)0x800030E3 &= ~0x20;
+    if (arg0) {
+        *(u8 *)0x800030E3 |= 0x20;
+    }
+    fn_80254684(enabled);
+    return prev;
+}
+
 s32 fn_8026BAAC(s32 arg0) {
     extern s32 lbl_80496004;
     if ((arg0 < 0) || (arg0 >= 4)) {
@@ -2087,6 +2141,17 @@ s32 fn_8026BAE8(s32 arg0) {
     lbl_8049601C = arg0;
     fn_80254684();
     return temp_r31;
+}
+
+void fn_8026BB2C(u32 addr, u32 len) {
+    extern volatile u16 __DSPRegs[];
+    s32 enabled;
+
+    enabled = fn_8025465C();
+    __DSPRegs[0x18] = (__DSPRegs[0x18] & ~0x3FF) | (addr >> 16);
+    __DSPRegs[0x19] = (__DSPRegs[0x19] & ~0xFFE0) | (addr & 0xFFFF);
+    __DSPRegs[0x1B] = (__DSPRegs[0x1B] & ~0x7FFF) | ((len >> 5) & 0xFFFF);
+    fn_80254684(enabled);
 }
 
 s32 fn_8026BBB4(void) {
@@ -2405,16 +2470,11 @@ void fn_80272240(u32 v) {
 
 void fn_80272548(void) {
     extern void *__GXData;
-    u32 reg;
-    void *gx;
-
-    reg = 0x550003FF;
-    gx = __GXData;
+    void *gx = __GXData;
     *(volatile u8 *)0xCC008000 = 0x61;
-    *(volatile u32 *)0xCC008000 = reg;
-    reg = 0x560003FF;
+    *(volatile u32 *)0xCC008000 = 0x550003FF;
     *(volatile u8 *)0xCC008000 = 0x61;
-    *(volatile u32 *)0xCC008000 = reg;
+    *(volatile u32 *)0xCC008000 = 0x560003FF;
     M2C_FIELD(gx, u16 *, 0x2) = 0;
 }
 
