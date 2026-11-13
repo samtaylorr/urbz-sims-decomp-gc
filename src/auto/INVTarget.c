@@ -8,6 +8,24 @@ void fn_802000A8(void *, u8 *, s32, u16);
 
 typedef struct { s32 *p; } INVHandle;
 
+static inline s32 *INVPair_Init(s32 *p) {
+    p[1] = 0;
+    return p;
+}
+
+static inline s32 *INVVec_Init(s32 *v) {
+    s32 i;
+    v[0] = 0;
+    INVPair_Init(v);
+    INVPair_Init(v + 2);
+    ((u8 *)v)[0x10] = 0;
+    for (i = 3; i != 0; i--) {
+    }
+    for (i = 4; i != 0; i--) {
+    }
+    return v;
+}
+
 typedef struct {
     char *name;
     s32 type;
@@ -2833,6 +2851,25 @@ void fn_801E2554(void *arg0) {
     }
     fn_803115C0(fn_8033390C(lbl_80494FCC, M2C_FIELD(arg0, u8 *, 0x315)), M2C_FIELD(arg0, void **, 0x310));
     M2C_FIELD(arg0, void **, 0x310) = NULL;
+}
+
+void fn_801E25D0(u8 *self, s32 idx) {
+    extern void fn_802AF754(void *, void *, s32, s32);
+    extern u8 lbl_803E1A08[];
+    extern u8 lbl_803E1A14[];
+    s32 cur;
+    if (idx < 0 || (u32)idx >= *(u32 *)(self + 0x150)) {
+        fn_801E2554(self);
+        return;
+    }
+    cur = *(s8 *)(self + 0x316);
+    if (cur != -1) {
+        fn_802AF754(((void **)(self + 0x50))[cur], lbl_803E1A08, 0, 1);
+    }
+    *(s8 *)(self + 0x316) = idx;
+    if (idx != -1) {
+        fn_802AF754(((void **)(self + 0x50))[idx], lbl_803E1A14, 0, 1);
+    }
 }
 
 s32 fn_801E613C(void *arg0, s32 arg1, s32 arg2) {
