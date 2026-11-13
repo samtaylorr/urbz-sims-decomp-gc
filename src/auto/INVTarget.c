@@ -2675,6 +2675,23 @@ void fn_801E0800(u8 *self, s32 arg1, u8 arg2) {
     }
 }
 
+M2C_UNK fn_801E0884(void *arg0, void *arg1, u8 arg2) {
+    extern void *fn_802B092C(s32);
+    extern void *fn_802AFC94(void *, void *);
+    extern void fn_802AF634(void *, s32);
+    extern void fn_801E060C(u8 *, void *);
+    extern u8 lbl_803E1610[];
+    u8 *self = arg0;
+    void *p;
+    self[0x11C] = arg2;
+    self[0x69] = 1;
+    *(void **)(self + 0x4) = arg1;
+    *(void **)(self + 0x0) = arg1;
+    p = fn_802AFC94(fn_802B092C(0), lbl_803E1610);
+    fn_802AF634(p, 1);
+    fn_801E060C(self, p);
+}
+
 void fn_801E1338(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
     struct T { u8 pad[0xE4]; void *arr[1]; };
     void *fn_802D1FC8(s32);
@@ -6953,8 +6970,8 @@ void fn_80224CFC(void *arg0, s32 arg1) {
             fn_8022366C(end, 0);
         }
         fn_802D211C((s32 *)a->list - 2);
-        a->list = NULL;
     }
+    a->list = NULL;
     if (arg1 & 1) {
         fn_802D20E8(arg0);
     }
@@ -7051,16 +7068,13 @@ void fn_8022537C(s32 *self, f32 t) {
 }
 
 s32 fn_802253D0(void *self, s32 i) {
-    typedef struct { s32 a; volatile s32 b; } Pair;
+    typedef struct { s32 a; s32 b; } Pair;
     s32 fn_80225B14(s32 *, s32);
     if (fn_80225B14((s32 *)self, i)) {
         u8 bit = 1 << i;
-        u8 flags = M2C_FIELD(self, u8 *, 0x3C);
-        if (!(flags & bit)) {
-            Pair p;
-            M2C_FIELD(self, u8 *, 0x3C) = flags | bit;
-            p.a = -1;
-            p.b = 0;
+        if (!(M2C_FIELD(self, u8 *, 0x3C) & bit)) {
+            Pair p = { -1, 0 };
+            M2C_FIELD(self, u8 *, 0x3C) |= bit;
             M2C_FIELD(self, Pair **, 0x2C)[i] = p;
             return 1;
         }
