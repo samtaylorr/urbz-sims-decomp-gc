@@ -3396,6 +3396,20 @@ static inline BOOL DBGEXISync(void) {
     return TRUE;
 }
 
+s32 fn_80277A54(u32 *arg0) {
+    BOOL total;
+    u32 v;
+
+    DBGEXISelect(4);
+    v = 0x40000000;
+    total = !fn_80277EB4(&v, 2, 1);
+    total |= !DBGEXISync();
+    total |= !fn_80277EB4(arg0, 4, 0);
+    total |= !DBGEXISync();
+    total |= !DBGEXIDeselect();
+    return !total;
+}
+
 s32 fn_80277CB8(u32 *arg0) {
     BOOL total = FALSE;
     u32 v;
