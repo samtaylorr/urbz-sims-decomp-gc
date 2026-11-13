@@ -1876,6 +1876,8 @@ void fn_8026CC4C(u8 odd, u8 even) {
     M2C_FIELD(gx, u16 *, 0x2) = 0;
 }
 
+#pragma push
+#pragma peephole off
 void fn_8026CC84(u8 field_mode, u8 half_aspect_ratio) {
     extern void *__GXData;
     void __GXFlushTextureState(void);
@@ -1889,7 +1891,7 @@ void fn_8026CC84(u8 field_mode, u8 half_aspect_ratio) {
     *(volatile u32 *)0xCC008000 = 0x68000000 | field_mode;
     __GXFlushTextureState();
 }
-
+#pragma pop
 void fn_8026CD0C(void) {
     s32 PPCMfhid2();
     void PPCMtwpar(u32);
@@ -2121,8 +2123,7 @@ void fn_802735AC(u32 *obj, u8 v) {
 }
 
 void fn_802735D0(u32 *obj, u32 v) {
-    struct { u32 pad0 : 11; u32 f : 2; u32 pad1 : 19; } *p = (void *)obj;
-    p->f = v;
+    *obj = __rlwimi(*obj, v, 19, 11, 12);
 }
 
 void fn_802735E0(void *arg0, s32 arg1) {
