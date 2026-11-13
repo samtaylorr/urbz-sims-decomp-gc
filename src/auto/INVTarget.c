@@ -7215,6 +7215,30 @@ void fn_80220EA8(u8 *arg0, s32 arg1) {
     p->vtbl = dvt;
 }
 
+void fn_80221898(void *arg0, s32 arg1) {
+    extern f32 lbl_803EA6B8[];
+
+    switch (arg1) {
+    case 7:
+        M2C_FIELD(arg0, f32 *, 0x34) = lbl_803EA6B8[0];
+        return;
+    case 8:
+        M2C_FIELD(arg0, f32 *, 0x38) = lbl_803EA6B8[0];
+        return;
+    case 11:
+        M2C_FIELD(arg0, f32 *, 0x3C) = lbl_803EA6B8[0];
+        return;
+    case 12:
+        M2C_FIELD(arg0, f32 *, 0x40) = lbl_803EA6B8[0];
+        return;
+    case 2:
+        if (M2C_FIELD(arg0, u8 *, 0x5C) & 2) {
+            M2C_FIELD(arg0, u8 *, 0x5C) = 0;
+        }
+        return;
+    }
+}
+
 void fn_80221924(void *arg0, s32 arg1, f32 farg0) {
     switch (arg1) {                                 /* irregular */
     case 7:
