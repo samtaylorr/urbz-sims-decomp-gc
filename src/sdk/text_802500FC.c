@@ -633,6 +633,12 @@ void fn_80255E68(s32 *arg0, s32 *arg1) {
     *arg1 = lbl_80495E34;
 }
 
+void fn_80255E7C(s32 *arg0, s32 *arg1) {
+    extern s32 lbl_80440B90[];
+    *arg0 = lbl_80440B90[3];
+    *arg1 = lbl_80440B90[4];
+}
+
 void fn_80255F1C(void *arg0) {
     extern M2C_UNK ResetFunctionQueue_80495E38;
     void *temp_r4;
