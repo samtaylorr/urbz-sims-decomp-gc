@@ -18,9 +18,9 @@ static inline s32 INV_getSlot(u32 idx) {
 }
 void fn_800F1B80(void *, void *);
 
-static inline s32 INVSlot_IsUsed(s32 base, s32 idx) {
+static inline s32 INVSlot_IsUsed(void *base, u32 idx) {
     s32 ok = 1;
-    if (*(s32 *)(idx * 0x318 + base + 0x108) == 0) {
+    if (*(s32 *)((u8 *)base + idx * 0x318 + 0x108) == 0) {
         ok = 0;
     }
     return ok;
@@ -6823,6 +6823,25 @@ s32 fn_80224A28(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x14);
 }
 
+void fn_80224CFC(void *arg0, s32 arg1) {
+    typedef struct { u8 b[0x20]; } Elem;
+    extern void fn_802D20E8(void *);
+    extern void fn_802D211C(void *);
+    if (M2C_FIELD(arg0, Elem **, 0x0) != NULL) {
+        Elem *p = M2C_FIELD(arg0, Elem **, 0x0);
+        Elem *end = p + ((s32 *)p)[-2];
+        while (M2C_FIELD(arg0, Elem **, 0x0) != end) {
+            end--;
+            fn_8022366C(end, 0);
+        }
+        fn_802D211C((s32 *)M2C_FIELD(arg0, Elem **, 0x0) - 2);
+        M2C_FIELD(arg0, void **, 0x0) = NULL;
+    }
+    if (arg1 & 1) {
+        fn_802D20E8(arg0);
+    }
+}
+
 void fn_80224D88(u8 *self) {
     extern void fn_80224A30(u8 *);
     s32 i;
@@ -6880,6 +6899,24 @@ void *fn_80224E5C(void *arg0) {
     *(volatile s32 *)(p6 + 4) = 0;
     *(volatile s32 *)(p7 + 4) = 0;
     return arg0;
+}
+
+s32 fn_802253D0(void *self, s32 i) {
+    typedef struct { s32 a; s32 b; } Pair;
+    s32 fn_80225B14(s32 *, s32);
+    if (fn_80225B14((s32 *)self, i)) {
+        u8 bit = 1 << i;
+        u8 flags = M2C_FIELD(self, u8 *, 0x3C);
+        if (!(flags & bit)) {
+            Pair p;
+            M2C_FIELD(self, u8 *, 0x3C) = flags | bit;
+            p.a = -1;
+            p.b = flags & bit;
+            M2C_FIELD(self, Pair **, 0x2C)[i] = p;
+            return 1;
+        }
+    }
+    return 0;
 }
 
 void *fn_80225458(s32 arg0, s32 arg1, s32 arg2) {
