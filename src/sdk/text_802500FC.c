@@ -465,8 +465,16 @@ void fn_802530AC(void) {
     fn_80378324();
 }
 
-#pragma scheduling off
-#pragma peephole off
+void fn_802538BC(void *arg0, u32 entry) {
+    void fn_80253A14(void *, void *);
+    void fn_80253880(u32);
+    s32 fn_8025465C(void);
+    fn_80253A14(arg0, fn_8025188C(0x1C, 1));
+    *(volatile u32 *)0xCC003024 = 7;
+    fn_8025465C();
+    fn_80253880(entry);
+}
+
 void fn_80253924(void *arg0, s32 arg1, s32 arg2) {
     s32 fn_802642C0(DVDCommandBlock *);
     s32 fn_802649F8(void);
@@ -481,7 +489,6 @@ void fn_80253924(void *arg0, s32 arg1, s32 arg2) {
     }
 }
 #pragma peephole reset
-#pragma scheduling reset
 void fn_80253990(void) {
     extern s32 lbl_80495E10;
     lbl_80495E10 = 1;
@@ -512,6 +519,16 @@ void fn_80253A14(void *arg0, void *arg1) {
     fn_802482F8(arg1, arg0, 0x1C);
     *(void **)0x800030F0 = arg1;
 }
+
+typedef void (*__OSInterruptHandler)(s16 interrupt, void *context);
+extern __OSInterruptHandler *lbl_80495E18;
+__OSInterruptHandler fn_802546A8(s16 interrupt, __OSInterruptHandler handler) {
+    __OSInterruptHandler oldHandler;
+    oldHandler = lbl_80495E18[interrupt];
+    lbl_80495E18[interrupt] = handler;
+    return oldHandler;
+}
+
 #pragma peephole reset
 #pragma scheduling reset
 s32 fn_80254A24(void) {
@@ -1847,6 +1864,7 @@ s32 fn_8026C4FC(void) {
 
 void fn_8026CC4C(u8 odd, u8 even) {
     extern void *__GXData;
+    void *gx = __GXData;
     u32 reg;
 
     reg = 0;
@@ -1855,16 +1873,17 @@ void fn_8026CC4C(u8 odd, u8 even) {
     reg = __rlwimi(reg, 0x44, 24, 0, 7);
     *(volatile u8 *)0xCC008000 = 0x61;
     *(volatile u32 *)0xCC008000 = reg;
-    M2C_FIELD(__GXData, u16 *, 0x2) = 0;
+    M2C_FIELD(gx, u16 *, 0x2) = 0;
 }
 
 void fn_8026CC84(u8 field_mode, u8 half_aspect_ratio) {
     extern void *__GXData;
     void __GXFlushTextureState(void);
+    void *gx = __GXData;
 
-    M2C_FIELD(__GXData, u32 *, 0x7C) = __rlwimi(M2C_FIELD(__GXData, u32 *, 0x7C), half_aspect_ratio, 22, 9, 9);
+    M2C_FIELD(gx, u32 *, 0x7C) = __rlwimi(M2C_FIELD(gx, u32 *, 0x7C), half_aspect_ratio, 22, 9, 9);
     *(volatile u8 *)0xCC008000 = 0x61;
-    *(volatile u32 *)0xCC008000 = M2C_FIELD(__GXData, u32 *, 0x7C);
+    *(volatile u32 *)0xCC008000 = M2C_FIELD(gx, u32 *, 0x7C);
     __GXFlushTextureState();
     *(volatile u8 *)0xCC008000 = 0x61;
     *(volatile u32 *)0xCC008000 = 0x68000000 | field_mode;
@@ -2063,43 +2082,48 @@ void fn_80273438(void *arg0, u32 arg1) {
     p->addr = arg1 >> 5;
 }
 
-void fn_80273448(u32 *arg0, u32 arg1, u32 arg2) {
-    arg0[0] = (arg0[0] & ~3) | (arg1 & 3);
-    arg0[0] = (arg0[0] & ~0xC) | ((arg2 << 2) & 0xC);
+void fn_80273448(void *arg0, u32 arg1, u32 arg2) {
+    struct { u32 pad : 28; u32 t : 2; u32 s : 2; } *p = arg0;
+    p->s = arg1;
+    p->t = arg2;
 }
 
 void fn_80273464(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x18) = arg1;
 }
 
-void fn_8027346C(u32 *arg0, s32 arg1, s32 arg2) {
+void fn_8027346C(void *arg0, s32 arg1, s32 arg2) {
     extern u8 lbl_80494B28[6];
-    arg0[0] = (arg0[0] & ~0x10) | (((arg2 == 1 ? 1 : 0) << 4) & 0x10);
-    arg0[0] = (arg0[0] & ~0xE0) | ((lbl_80494B28[arg1] << 5) & 0xE0);
+    struct { u32 pad : 24; u32 min : 3; u32 mag : 1; u32 rest : 4; } *p = arg0;
+    p->mag = arg2 == 1 ? 1 : 0;
+    p->min = lbl_80494B28[arg1];
 }
 
-void fn_802734A4(u32 *arg0, f32 arg1) {
+void fn_802734A4(void *arg0, f32 arg1) {
     extern f32 lbl_804975C8;
     extern f32 lbl_804975CC;
     extern f32 lbl_804975A8;
+    struct { u32 w0; u32 pad : 16; u32 v : 8; u32 rest : 8; } *p = arg0;
     if (arg1 < lbl_804975C8) {
         arg1 = lbl_804975C8;
     } else if (arg1 > lbl_804975CC) {
         arg1 = lbl_804975CC;
     }
-    arg0[1] = (arg0[1] & ~0xFF00) | (((s32)(lbl_804975A8 * arg1) << 8) & 0xFF00);
+    p->v = (s32)(lbl_804975A8 * arg1);
 }
 
 void fn_80273598(u32 *obj, u8 v) {
-    *obj = (*obj & 0xFFDFFFFF) | (((u32)v << 21) & 0x00200000);
+    *obj = __rlwimi(*obj, v, 21, 10, 10);
 }
 
 void fn_802735AC(u32 *obj, u8 v) {
-    *obj = (*obj & 0xFFFFFEFF) | (((u32)(v ? 0 : 1) << 8) & 0x00000100);
+    struct { u32 pad0 : 23; u32 f : 1; u32 pad1 : 8; } *p = (void *)obj;
+    p->f = v ? 0 : 1;
 }
 
 void fn_802735D0(u32 *obj, u32 v) {
-    *obj = (*obj & 0xFFE7FFFF) | ((v << 19) & 0x00180000);
+    struct { u32 pad0 : 11; u32 f : 2; u32 pad1 : 19; } *p = (void *)obj;
+    p->f = v;
 }
 
 void fn_802735E0(void *arg0, s32 arg1) {
