@@ -3408,7 +3408,7 @@ void fn_802771C0(u32 v) {
 }
 
 static inline u32 __GXReadCPCounterU32(volatile u16 *lo, volatile u16 *hi) {
-    u16 h0, h1, l;
+    u32 h0, h1, l;
 
     h0 = *hi;
     do {
