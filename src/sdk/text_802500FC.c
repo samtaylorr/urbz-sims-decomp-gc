@@ -63,6 +63,8 @@ void fn_80250290(void) {
     PPCMthid2(PPCMfhid2() & 0xBFFFFFFF);
 }
 
+#pragma push
+#pragma peephole off
 s32 fn_802502B8(void) {
     extern u32 *lbl_80495DC8;
     if (lbl_80495DC8 == NULL || lbl_80495DC8[11] == 0) {
@@ -70,7 +72,7 @@ s32 fn_802502B8(void) {
     }
     return lbl_80495DC8[11];
 }
-
+#pragma pop
 extern u32 *lbl_80495DC8;
 extern u16 lbl_80440B40[];
 #pragma push
