@@ -928,6 +928,21 @@ void fn_80258364(void) {
 
 }
 
+void *fn_80258368(void *cb) {
+    extern void *lbl_804949C0;
+    s32 enabled;
+    void *prev;
+
+    enabled = fn_8025465C();
+    prev = lbl_804949C0;
+    lbl_804949C0 = cb ? cb : (void *)fn_80258364;
+    fn_80254684(enabled);
+    if (prev == (void *)fn_80258364) {
+        return NULL;
+    }
+    return prev;
+}
+
 void fn_80258534(void *arg0) {
     M2C_FIELD(arg0, s32 *, 4) = 0;
     M2C_FIELD(arg0, s32 *, 0) = 0;
