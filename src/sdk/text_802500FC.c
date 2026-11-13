@@ -970,6 +970,48 @@ void *fn_80259A04(void *func, void *param, void *stack, u32 stackSize) {
     return NULL;
 }
 
+void *fn_80259A94(void) {
+    if (M2C_FIELD(lbl_80440D58, u16 *, 0x2c8) == 0) {
+        return NULL;
+    }
+    return lbl_80440D58;
+}
+
+BOOL fn_80259AB0(u8 **queue) {
+    u8 *t;
+    u8 *next;
+    u8 *prev;
+
+    if (queue[0] != NULL && M2C_FIELD(queue[0], u8 **, 0x2e4) != NULL) {
+        return FALSE;
+    }
+    if (queue[1] != NULL && M2C_FIELD(queue[1], u8 **, 0x2e0) != NULL) {
+        return FALSE;
+    }
+    for (t = queue[0]; t != NULL; t = next) {
+        next = M2C_FIELD(t, u8 **, 0x2e0);
+        if (next != NULL && t != M2C_FIELD(next, u8 **, 0x2e4)) {
+            return FALSE;
+        }
+        prev = M2C_FIELD(t, u8 **, 0x2e4);
+        if (prev != NULL && t != M2C_FIELD(prev, u8 **, 0x2e0)) {
+            return FALSE;
+        }
+    }
+    return TRUE;
+}
+
+BOOL fn_80259B4C(u8 **queue, u8 *thread) {
+    u8 *t;
+
+    for (t = queue[0]; t != NULL; t = M2C_FIELD(t, u8 **, 0x2e0)) {
+        if (t == thread) {
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
 u32 fn_8025A3F4(void) {
     return __mftb();
 }
@@ -1233,19 +1275,24 @@ s32 fn_8025E260(s32 enable) {
     s32 fn_8025465C(void);
     void fn_80254684(s32);
     extern u8 lbl_80441710[];
+    u8 *si = lbl_80441710;
     s32 enabled;
     u32 reg;
     s32 rc;
+    s32 i;
 
     enabled = fn_8025465C();
     reg = __SIRegs[13];
-    rc = (reg & 0x08000000) ? 1 : 0;
+    if (reg & 0x08000000) {
+        rc = 1;
+    } else {
+        rc = 0;
+    }
     if (enable) {
         reg |= 0x08000000;
-        M2C_FIELD(lbl_80441710, s32 *, 0x1E0) = 0;
-        M2C_FIELD(lbl_80441710, s32 *, 0x1E4) = 0;
-        M2C_FIELD(lbl_80441710, s32 *, 0x1E8) = 0;
-        M2C_FIELD(lbl_80441710, s32 *, 0x1EC) = 0;
+        for (i = 0; i < 4; i++) {
+            ((s32 *)(si + 0x1E0))[i] = 0;
+        }
     } else {
         reg &= ~0x08000000;
     }
