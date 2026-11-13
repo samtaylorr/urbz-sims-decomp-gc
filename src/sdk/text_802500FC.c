@@ -952,6 +952,20 @@ void fn_80258300(void) {
     fn_80251D2C(addr, 0x100);
 }
 
+static inline u8 *LockSram(u32 offset) {
+    extern u32 lbl_80440C00[];
+    s32 enabled;
+
+    enabled = fn_8025465C();
+    if (lbl_80440C00[0x12] != 0) {
+        fn_80254684(enabled);
+        return NULL;
+    }
+    lbl_80440C00[0x11] = enabled;
+    lbl_80440C00[0x12] = 1;
+    return (u8 *)lbl_80440C00 + offset;
+}
+
 void fn_80258364(void) {
 
 }
