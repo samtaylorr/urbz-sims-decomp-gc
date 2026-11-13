@@ -1681,6 +1681,12 @@ void fn_802621D4(void) {
     fn_802663EC(fn_802621FC);
 }
 
+void fn_8026284C(u32 arg0) {
+    extern u32 lbl_80494A3C;
+    extern s32 lbl_80495F20;
+    (&lbl_80494A3C)[lbl_80495F20++] = arg0;
+}
+
 s32 fn_802628C4(u32 arg0) {
     extern u32 lbl_80494A3C;
     if ((arg0 == 1U) || ((u32) (arg0 - 4) <= 1U) || (arg0 == 0xEU)) {
