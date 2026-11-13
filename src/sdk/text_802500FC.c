@@ -3526,10 +3526,10 @@ void fn_80277960(void **arg0, void (*arg1)(s32)) {
     fn_80254684(enabled);
 }
 
-void fn_802779D8(s16 arg0) {
+void fn_802779D8(s16 arg0, void *arg1) {
     __PIRegs[0] = 0x1000;
     if (lbl_804960CC != NULL) {
-        lbl_804960CC(arg0);
+        lbl_804960CC(arg0, arg1);
     }
 }
 
