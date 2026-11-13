@@ -3413,8 +3413,8 @@ static inline u32 __GXReadCPCounterU32(volatile u16 *lo, volatile u16 *hi) {
     h0 = *hi;
     do {
         h1 = h0;
-        l = *lo;
         h0 = *hi;
+        l = *lo;
     } while (h0 != h1);
     return (h0 << 16) | l;
 }
