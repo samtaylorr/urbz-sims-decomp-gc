@@ -1758,6 +1758,11 @@ s32 fn_8026BBF4(void) {
     return (*(u16 *)0xCC00503A << 5) & 0xFFFE0;
 }
 
+u32 fn_8026BC04(void) {
+    extern volatile u16 __DSPRegs[];
+    return ((__DSPRegs[0x18] << 16) & 0x03FF0000) | (__DSPRegs[0x19] & 0xFFE0);
+}
+
 s32 fn_8026BC20(void) {
     return (*(u16 *)0xCC005036 << 5) & 0xFFFE0;
 }
