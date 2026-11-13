@@ -611,6 +611,20 @@ u32 fn_80257650(void) {
     return lbl_80440C00[0x13];
 }
 
+void fn_80257894(s32 arg0) {
+    extern u32 lbl_80440C00[];
+    void fn_8025C4A4(void);
+    void fn_8025CC2C(s32);
+    void (*cb)(void);
+    fn_8025C4A4();
+    fn_8025CC2C(arg0);
+    cb = (void (*)(void))lbl_80440C00[0x14];
+    if (cb != NULL) {
+        lbl_80440C00[0x14] = 0;
+        cb();
+    }
+}
+
 void fn_80258364(void) {
 
 }
@@ -684,6 +698,14 @@ s64 fn_8025A4F8(s64 time) {
 
 s32 fn_8025A558(s32 year) {
     return (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
+}
+
+s32 fn_8025A5E0(s32 year, s32 mon) {
+    extern s32 lbl_803F8F70[];
+    extern s32 lbl_803F8FA0[];
+    s32 *md = fn_8025A558(year) ? lbl_803F8FA0 : lbl_803F8F70;
+
+    return md[mon];
 }
 
 void fn_8025AD58(void) {
