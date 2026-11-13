@@ -8,6 +8,12 @@ void fn_802000A8(void *, u8 *, s32, u16);
 
 typedef struct { s32 *p; } INVHandle;
 
+typedef struct {
+    char *name;
+    s32 type;
+    void *value;
+} INVVar;
+
 static inline s32 INV_getSlot(u32 idx) {
     extern s32 lbl_804966A4[2];
     s32 ret = 0;
@@ -6915,7 +6921,7 @@ void fn_8022537C(s32 *self, f32 t) {
 }
 
 s32 fn_802253D0(void *self, s32 i) {
-    typedef struct { s32 a; s32 b; } Pair;
+    typedef struct { s32 a; volatile s32 b; } Pair;
     s32 fn_80225B14(s32 *, s32);
     if (fn_80225B14((s32 *)self, i)) {
         u8 bit = 1 << i;
@@ -6924,7 +6930,7 @@ s32 fn_802253D0(void *self, s32 i) {
             Pair p;
             M2C_FIELD(self, u8 *, 0x3C) = flags | bit;
             p.a = -1;
-            p.b = flags & bit;
+            p.b = 0;
             M2C_FIELD(self, Pair **, 0x2C)[i] = p;
             return 1;
         }
