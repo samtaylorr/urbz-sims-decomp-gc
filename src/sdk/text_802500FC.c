@@ -1192,6 +1192,10 @@ s32 fn_8025D804(void) {
     return 0x10 - (cmd >> 24);
 }
 
+void fn_8025DB14(void) {
+    __SIRegs[13] = (__SIRegs[13] | 0x80000000) & ~1;
+}
+
 void fn_8025E8FC(s32 chan, u32 command) {
     __SIRegs[chan * 3] = command;
 }
