@@ -5214,6 +5214,7 @@ s32 fn_80204C0C(void *self, s32 type) {
     s32 fn_80059B50(void *);
     s32 n = 1;
     s32 have;
+    s32 r;
     void *p;
     switch (type) {
     case 2:
@@ -5236,9 +5237,11 @@ s32 fn_80204C0C(void *self, s32 type) {
         have = 0;
     }
     if ((u32)(have + n) > 99) {
-        n = 99 - have;
+        r = 99 - have;
+    } else {
+        r = n;
     }
-    return n;
+    return r;
 }
 
 void fn_80204EC4(void *self) {
