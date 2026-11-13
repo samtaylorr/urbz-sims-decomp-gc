@@ -846,7 +846,7 @@ void fn_8025E8FC(s32 chan, u32 command) {
 }
 
 u32 fn_8025E910(s32 chan) {
-    return ((volatile u32 *)0xCC006400)[chan * 3];
+    return __SIRegs[chan * 3];
 }
 
 void fn_8025E924(void) {
@@ -854,7 +854,7 @@ void fn_8025E924(void) {
 }
 
 u32 fn_8025E934(u32 x, u32 y) {
-    typedef struct { u32 a; u32 poll; } SIControl;
+    typedef struct { s32 chan; u32 poll; u32 inputBytes; void *input; void *callback; } SIControl;
     extern SIControl lbl_803F9124;
     s32 fn_8025465C(void);
     void fn_80254684(s32);
@@ -866,7 +866,7 @@ u32 fn_8025E934(u32 x, u32 y) {
     lbl_803F9124.poll &= ~0x03FFFF00;
     lbl_803F9124.poll |= poll;
     poll = lbl_803F9124.poll;
-    *(volatile u32 *)0xCC006430 = poll;
+    __SIRegs[12] = poll;
     fn_80254684(enabled);
     return poll;
 }
@@ -1839,6 +1839,31 @@ void fn_8026C18C(void) {
 
 s32 fn_8026C4FC(void) {
     return 0;
+}
+
+void fn_8026CC84(u8 field_mode, u8 half_aspect_ratio) {
+    extern void *__GXData;
+    void __GXFlushTextureState(void);
+
+    M2C_FIELD(__GXData, u32 *, 0x7C) = (M2C_FIELD(__GXData, u32 *, 0x7C) & ~0x400000) | ((u32)half_aspect_ratio << 22);
+    *(volatile u8 *)0xCC008000 = 0x61;
+    *(volatile u32 *)0xCC008000 = M2C_FIELD(__GXData, u32 *, 0x7C);
+    __GXFlushTextureState();
+    *(volatile u8 *)0xCC008000 = 0x61;
+    *(volatile u32 *)0xCC008000 = 0x68000000 | field_mode;
+    __GXFlushTextureState();
+}
+
+void fn_8026CD0C(void) {
+    s32 PPCMfhid2();
+    void PPCMtwpar(u32);
+    void PPCMthid2(s32);
+    s32 hid2;
+
+    hid2 = PPCMfhid2();
+    PPCMtwpar(0x0C008000);
+    hid2 |= 0x40000000;
+    PPCMthid2(hid2);
 }
 
 void fn_8026CD4C(void) {
