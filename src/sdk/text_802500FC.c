@@ -3078,21 +3078,23 @@ void fn_80270C50(void) {
     void fn_802713FC(void);
     void fn_8024FFA8(void);
     s32 level;
+    u32 reg;
 
     level = fn_8025465C();
-    *(volatile u8 *)0xCC008000 = 0x61;
-    *(volatile u32 *)0xCC008000 = 0x45000002;
+    reg = 0x45000002;
+    GXWGFifo.u8 = 0x61;
+    GXWGFifo.u32 = reg;
     if (*(u32 *)(__GXData + 0x5AC)) {
         fn_802713FC();
     }
-    *(volatile u32 *)0xCC008000 = 0;
-    *(volatile u32 *)0xCC008000 = 0;
-    *(volatile u32 *)0xCC008000 = 0;
-    *(volatile u32 *)0xCC008000 = 0;
-    *(volatile u32 *)0xCC008000 = 0;
-    *(volatile u32 *)0xCC008000 = 0;
-    *(volatile u32 *)0xCC008000 = 0;
-    *(volatile u32 *)0xCC008000 = 0;
+    GXWGFifo.u32 = 0;
+    GXWGFifo.u32 = 0;
+    GXWGFifo.u32 = 0;
+    GXWGFifo.u32 = 0;
+    GXWGFifo.u32 = 0;
+    GXWGFifo.u32 = 0;
+    GXWGFifo.u32 = 0;
+    GXWGFifo.u32 = 0;
     fn_8024FFA8();
     lbl_804960B8 = 0;
     fn_80254684(level);
