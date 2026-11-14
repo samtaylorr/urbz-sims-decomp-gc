@@ -1884,6 +1884,8 @@ f32 fn_8025FF6C(f32 *a, f32 *b) {
 extern char *lbl_80495EB8;
 extern u32 lbl_80495EBC;
 s32 fn_803781C0(s32 c);
+#pragma push
+#pragma peephole on
 void fn_8026006C(void) {
     extern void *lbl_80495EB0;
     lbl_80495EB0 = (void *)0x80000000;
@@ -1893,7 +1895,7 @@ void fn_8026006C(void) {
         lbl_80495EB8 = (char *)&lbl_80495EB4[lbl_80495EBC];
     }
 }
-
+#pragma pop
 s32 fn_802600A4(char *path, char *string) {
     while (*string != '\0') {
         if (fn_803781C0(*path++) != fn_803781C0(*string++)) {
@@ -4016,29 +4018,32 @@ void fn_80271794(void) {
 
 void fn_802718FC(u16 left, u16 top, u16 wd, u16 ht) {
     extern void *__GXData;
-    struct { u8 pad[0x1E0]; u32 src; u32 size; } *gx = __GXData;
+    u32 *gx = __GXData;
+    u32 reg = 0;
 
-    gx->src = 0;
-    gx->src = __rlwimi(gx->src, left, 0, 22, 31);
-    gx->src = __rlwimi(gx->src, top, 10, 12, 21);
-    gx->src = __rlwimi(gx->src, 0x49, 24, 0, 7);
-    gx->size = 0;
-    gx->size = __rlwimi(gx->size, wd - 1, 0, 22, 31);
-    gx->size = __rlwimi(gx->size, ht - 1, 10, 12, 21);
-    gx->size = __rlwimi(gx->size, 0x4A, 24, 0, 7);
+    gx[0x1E0 / 4] = reg;
+    gx[0x1E0 / 4] = __rlwimi(gx[0x1E0 / 4], left, 0, 22, 31);
+    gx[0x1E0 / 4] = __rlwimi(gx[0x1E0 / 4], top, 10, 12, 21);
+    gx[0x1E0 / 4] = __rlwimi(gx[0x1E0 / 4], 0x49, 24, 0, 7);
+    gx[0x1E4 / 4] = reg;
+    gx[0x1E4 / 4] = __rlwimi(gx[0x1E4 / 4], wd - 1, 0, 22, 31);
+    gx[0x1E4 / 4] = __rlwimi(gx[0x1E4 / 4], ht - 1, 10, 12, 21);
+    gx[0x1E4 / 4] = __rlwimi(gx[0x1E4 / 4], 0x4A, 24, 0, 7);
 }
 
 void fn_80271978(u16 left, u16 top, u16 wd, u16 ht) {
     extern void *__GXData;
-    u32 *gx = __GXData;
+    u32 *gx;
+    u32 l = left, t = top, w = wd, h = ht;
 
+    gx = __GXData;
     gx[0x1F0 / 4] = 0;
-    gx[0x1F0 / 4] = __rlwimi(gx[0x1F0 / 4], left, 0, 22, 31);
-    gx[0x1F0 / 4] = __rlwimi(gx[0x1F0 / 4], top, 10, 12, 21);
+    gx[0x1F0 / 4] = __rlwimi(gx[0x1F0 / 4], l, 0, 22, 31);
+    gx[0x1F0 / 4] = __rlwimi(gx[0x1F0 / 4], t, 10, 12, 21);
     gx[0x1F0 / 4] = __rlwimi(gx[0x1F0 / 4], 0x49, 24, 0, 7);
     gx[0x1F4 / 4] = 0;
-    gx[0x1F4 / 4] = __rlwimi(gx[0x1F4 / 4], wd - 1, 0, 22, 31);
-    gx[0x1F4 / 4] = __rlwimi(gx[0x1F4 / 4], ht - 1, 10, 12, 21);
+    gx[0x1F4 / 4] = __rlwimi(gx[0x1F4 / 4], w - 1, 0, 22, 31);
+    gx[0x1F4 / 4] = __rlwimi(gx[0x1F4 / 4], h - 1, 10, 12, 21);
     gx[0x1F4 / 4] = __rlwimi(gx[0x1F4 / 4], 0x4A, 24, 0, 7);
 }
 
