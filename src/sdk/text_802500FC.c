@@ -1348,10 +1348,10 @@ void fn_80257CB4(u32 mode) {
     s32 *locked;
     u8 pad[8];
 
+    scb = &lbl_80440C00;
     if (mode > 2) {
         mode = 0;
     }
-    scb = &lbl_80440C00;
     enabled = fn_8025465C();
     locked = &scb->locked;
     if (*locked != 0) {
@@ -2405,6 +2405,27 @@ s32 fn_8025E260(s32 enable) {
     __SIRegs[13] = reg;
     fn_80254684(enabled);
     return rc;
+}
+
+u32 fn_8025E880(s32 chan) {
+    s32 fn_8025465C(void);
+    void fn_80254684(s32);
+    extern u32 lbl_803F9138[];
+    s32 enabled;
+    u32 sr;
+    int chanShift;
+
+    enabled = fn_8025465C();
+    sr = __SIRegs[14];
+    chanShift = 8 * (4 - 1 - chan);
+    sr >>= chanShift;
+    if (sr & 8) {
+        if (!(lbl_803F9138[chan] & 0x80)) {
+            lbl_803F9138[chan] = 8;
+        }
+    }
+    fn_80254684(enabled);
+    return sr;
 }
 
 void fn_8025E8FC(s32 chan, u32 command) {
