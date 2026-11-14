@@ -74,10 +74,11 @@ void fn_8030EF10(void) {
 }
 
 void fn_8030F488(void **arg0) {
+    struct It { void *node; };
     void fn_8030F5B8(void *);
     void fn_8030F938(void *, void *);
-    void fn_8030F818(void **);
-    void *sp8;
+    void fn_8030F818(struct It *);
+    struct It it;
     void *n;
 
     if (arg0 == NULL) {
@@ -87,20 +88,24 @@ void fn_8030F488(void **arg0) {
     for (;;) {
         n = M2C_FIELD(*arg0, void **, 0x90);
         if (n != NULL) {
-            sp8 = M2C_FIELD(n, void **, 8);
+            it.node = M2C_FIELD(n, void **, 8);
         } else {
-            sp8 = n;
+            it.node = n;
         }
-        if (sp8 == NULL) {
+        if (it.node == NULL) {
             break;
         }
-        M2C_FIELD(*arg0, void **, 0x90) = *M2C_FIELD(*arg0, void ***, 0x90);
-        fn_8030F5B8(sp8);
-        if (M2C_FIELD(sp8, void (**)(s32), 0xa4) != NULL) {
-            M2C_FIELD(sp8, void (**)(s32), 0xa4)(M2C_FIELD(sp8, s32 *, 0xa8));
+        {
+            void **head = *arg0;
+            void *cur = it.node;
+            M2C_FIELD(head, void **, 0x90) = *M2C_FIELD(head, void ***, 0x90);
+            fn_8030F5B8(cur);
         }
-        fn_8030F938(arg0, sp8);
-        fn_8030F818(&sp8);
+        if (M2C_FIELD(it.node, void (**)(s32), 0xa4) != NULL) {
+            M2C_FIELD(it.node, void (**)(s32), 0xa4)(M2C_FIELD(it.node, s32 *, 0xa8));
+        }
+        fn_8030F938(arg0, it.node);
+        fn_8030F818(&it);
     }
 }
 
@@ -146,8 +151,8 @@ void fn_8030F5B8(u32 *arg0) {
         fn_8036FB28(lbl_80494EEC, n);
         n = M2C_FIELD(M2C_FIELD(arg0, void **, 4), void **, 0x90);
     }
-    arg0[0] |= 6;
     M2C_FIELD(arg0, f32 *, 0x84) = M2C_FIELD(arg0, f32 *, 0x78) = lbl_803F2190[0];
+    arg0[0] |= 6;
 }
 
 void fn_8030F8EC(s32 *arg0, void *arg1) {
