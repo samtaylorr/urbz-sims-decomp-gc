@@ -14,11 +14,6 @@ static inline void EIPortalPointLight_Write(void *stream, void *data, s32 size) 
     M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)((char *)stream + M2C_FIELD(vt, s16 *, 0x38), data, size);
 }
 
-static inline void *EIPortalPointLight_WriteF32(void *stream, f32 val) {
-    EIPortalPointLight_Write(stream, &val, 4);
-    return stream;
-}
-
 static inline void *EIPortalPointLight_WriteF32P(void *stream, f32 *val) {
     void *vt = M2C_FIELD(stream, void **, 0x18);
     void (*fn)(void *, void *, s32) = M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C);
