@@ -164,23 +164,19 @@ s32 fn_802E091C(void *arg0) {
 void fn_802E0934(void *self, u32 count, char **list) {
     extern char *fn_802485B0(char *, char *);
     extern char *fn_80248784(char *, char *);
-    extern void fn_802C686C(void *, void *, s32);
     extern void fn_802C69B0(void *, void *);
-    extern void fn_802C728C(void *, void *, s32);
     extern char lbl_803F0560[];
     struct {
         char *data;
         u8 hdr[4];
         u8 buf[0x200];
-    } str, tmp;
-    void *sp;
+    } str;
     s32 i;
 
     M2C_FIELD(self, u8 *, 0x350) = 0;
     if (count > 100) {
         count = 0;
     }
-    sp = &str;
     for (i = 0; i < (s32)count; i++) {
         if (i != 0) {
             fn_802485B0((char *)self + 0x350, lbl_803F0560);
@@ -188,10 +184,10 @@ void fn_802E0934(void *self, u32 count, char **list) {
         fn_802485B0((char *)self + 0x350, list[i]);
         {
             char *s = list[i];
+            void *sp = &str;
             fn_802C686C(sp, (u8 *)sp + 8, 0x200);
             fn_802C69B0(sp, s);
-            fn_802C686C(&tmp, tmp.buf, 0x200);
-            fn_802C728C(sp, &tmp, 0x22);
+            EEngine_StrEscape(sp, 0x22);
         }
         fn_80248784(list[i], str.data);
     }
@@ -402,6 +398,21 @@ void fn_802E0E2C(u8 *self, s32 arg1) {
     if (arg1 != 0) {
         vt = *(u8 **)self;
         (*(void (**)(void *))(vt + 0xAC))(self + *(s16 *)(vt + 0xA8));
+    }
+}
+
+extern s32 lbl_80494E04;
+extern f32 lbl_804961B0;
+
+static inline void EEngine_SetFrameStep(f32 dt) {
+    s32 n = (s32) (dt / lbl_804961B0 + 0.5);
+    lbl_80494E04 = n;
+    if (n > 0) {
+        if (n > 15) {
+            lbl_80494E04 = 15;
+        }
+    } else {
+        lbl_80494E04 = 1;
     }
 }
 
