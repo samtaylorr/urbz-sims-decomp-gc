@@ -403,9 +403,9 @@ void fn_802EE570(char *self, f32 *out, f32 *rect) {
     out[4] = w + rect[0];
     out[5] = h + rect[1];
     out[6] = b + d;
-    out[7] = lbl_803F0C08[0];
-    out[2] = d;
     out[3] = lbl_803F0C04[0];
+    out[2] = d;
+    out[7] = lbl_803F0C08[0];
 }
 
 void fn_802EE654(char *self) {
