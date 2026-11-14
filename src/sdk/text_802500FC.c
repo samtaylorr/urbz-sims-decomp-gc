@@ -1646,10 +1646,12 @@ f32 fn_8025FF08(f32 *a, f32 *b) {
 
 f32 fn_8025FF6C(f32 *a, f32 *b) {
     f32 diff[3];
+    f32 dist;
     diff[0] = a[0] - b[0];
     diff[1] = a[1] - b[1];
     diff[2] = a[2] - b[2];
-    return sqrtf(diff[2] * diff[2] + (diff[0] * diff[0] + diff[1] * diff[1]));
+    dist = sqrtf(diff[2] * diff[2] + (diff[0] * diff[0] + diff[1] * diff[1]));
+    return dist;
 }
 
 #pragma pop
@@ -4001,8 +4003,9 @@ void fn_8027612C(f32 scale, f32 offset) {
     f32 zmin, zmax;
 
     zOffset = lbl_80497608 * offset;
+    scale = lbl_80497608 * scale;
     M2C_FIELD(gx, f32 *, 0x50C) = zOffset;
-    zScale = lbl_804975FC + lbl_80497608 * scale;
+    zScale = lbl_804975FC + scale;
     M2C_FIELD(gx, f32 *, 0x510) = zScale;
     zmax = M2C_FIELD(gx, f32 *, 0x508) * zScale;
     zmin = M2C_FIELD(gx, f32 *, 0x504) * zScale;
