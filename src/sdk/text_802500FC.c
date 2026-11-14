@@ -2393,6 +2393,43 @@ void fn_80265F80(s32 a, s32 b, s32 c, s32 d) {
     fn_80265D98(a, b, c, d);
 }
 
+s32 fn_80266358(u32 offset, void (*cb)(s32)) {
+    extern void (*lbl_80495F48)(s32);
+    extern s32 lbl_80495F40;
+    extern u8 lbl_80442AB0[];
+    void fn_80251224(void *, s64, void *);
+    void fn_80265CC4(void *, void *);
+
+    lbl_80495F48 = cb;
+    lbl_80495F40 = 0;
+    __DIRegs[2] = 0xAB000000;
+    __DIRegs[3] = offset >> 2;
+    __DIRegs[7] = 1;
+    fn_80250FC4(lbl_80442AB0);
+    fn_80251224(lbl_80442AB0, (*(u32 *)0x800000F8 / 4) * 10, fn_80265CC4);
+    return 1;
+}
+
+s32 fn_80266418(void *diskID, void (*cb)(s32)) {
+    extern void (*lbl_80495F48)(s32);
+    extern s32 lbl_80495F40;
+    extern u8 lbl_80442AB0[];
+    void fn_80251224(void *, s64, void *);
+    void fn_80265CC4(void *, void *);
+
+    lbl_80495F48 = cb;
+    lbl_80495F40 = 0;
+    __DIRegs[2] = 0xA8000040;
+    __DIRegs[3] = 0;
+    __DIRegs[4] = 0x20;
+    __DIRegs[5] = (u32)diskID;
+    __DIRegs[6] = 0x20;
+    __DIRegs[7] = 3;
+    fn_80250FC4(lbl_80442AB0);
+    fn_80251224(lbl_80442AB0, (*(u32 *)0x800000F8 / 4) * 10, fn_80265CC4);
+    return 1;
+}
+
 s32 fn_802668EC(s32 arg0) {
     extern s32 lbl_80495F4C;
     s32 temp_r31;
@@ -2527,6 +2564,17 @@ void fn_802696D0(s16 *arg0, s16 *arg1) {
     *arg0 = lbl_80495FAC;
     *arg1 = lbl_80495FAE;
     fn_80254684();
+}
+
+void fn_802698E8(u32 hct, u32 vct, s16 *x, s16 *y);
+void fn_80269B64(u32 arg0) {
+    volatile u16 *regs = (volatile u16 *)0xCC002000;
+    u16 reg;
+
+    reg = regs[1];
+    reg = (reg & ~0x30) | (arg0 << 4);
+    reg = (reg & ~0xC0) | (arg0 << 6);
+    regs[1] = reg;
 }
 
 void fn_80269C78(u32 arg0, s32 arg1, s32 arg2) {
@@ -2933,6 +2981,19 @@ void fn_8026C214(s16 interrupt, void *context) {
 
 s32 fn_8026C4FC(void) {
     return 0;
+}
+
+void fn_8026CA50(u8 enable) {
+    extern void *__GXData;
+    u32 *gx = __GXData;
+    u32 reg;
+
+    reg = gx[0x1D0 / 4];
+    reg = __rlwimi(reg, enable, 3, 28, 28);
+    *(volatile u8 *)0xCC008000 = 0x61;
+    *(volatile u32 *)0xCC008000 = reg;
+    gx[0x1D0 / 4] = reg;
+    ((u16 *)gx)[1] = 0;
 }
 
 void fn_8026CADC(u8 before_tex) {
@@ -3923,18 +3984,20 @@ void fn_802751C0(s32 id, u32 mode) {
 
     if (id == 0) {
         ctmp = tbl + mode;
-        atmp = tbl + 10 + mode;
+        atmp = tbl + mode + 10;
     } else {
-        ctmp = tbl + 5 + mode;
-        atmp = tbl + 15 + mode;
+        ctmp = tbl + mode + 5;
+        atmp = tbl + mode + 15;
     }
     gx = __GXData;
     regs = (u32 *)(gx + id * 4);
-    tevReg = (*ctmp & ~0xFF000000) | (regs[0x130 / 4] & 0xFF000000);
+    tevReg = regs[0x130 / 4];
+    tevReg = (*ctmp & ~0xFF000000) | (tevReg & 0xFF000000);
     GXWGFifo.u8 = 0x61;
     GXWGFifo.u32 = tevReg;
     regs[0x130 / 4] = tevReg;
-    tevReg = (*atmp & ~0xFF00000F) | (regs[0x170 / 4] & 0xFF00000F);
+    tevReg = regs[0x170 / 4];
+    tevReg = (*atmp & ~0xFF00000F) | (tevReg & 0xFF00000F);
     GXWGFifo.u8 = 0x61;
     GXWGFifo.u32 = tevReg;
     regs[0x170 / 4] = tevReg;
@@ -4125,18 +4188,26 @@ void fn_80276198(u32 left, u32 top, u32 wd, u32 ht) {
     M2C_FIELD(gx, u16 *, 0x2) = 0;
 }
 
+#pragma push
+#pragma scheduling off
 void fn_80276210(u32 *left, u32 *top, u32 *wd, u32 *ht) {
     extern void *__GXData;
-    u32 *gx = __GXData;
-    u32 scis0 = gx[0xF8 / 4];
-    u32 scis1 = gx[0xFC / 4];
+    u32 tp, lf, bm, rt;
+    u32 scis0 = M2C_FIELD(__GXData, u32 *, 0xF8);
+    u32 scis1 = M2C_FIELD(__GXData, u32 *, 0xFC);
+    u32 w;
 
-    *left = ((scis0 >> 12) & 0x7FF) - 0x156;
-    *top = (scis0 & 0x7FF) - 0x156;
-    *wd = ((scis1 >> 12) & 0x7FF) - ((scis0 >> 12) & 0x7FF) + 1;
-    *ht = (scis1 & 0x7FF) - (scis0 & 0x7FF) + 1;
+    lf = (scis0 >> 12) & 0x7FF;
+    *left = lf - 0x156;
+    tp = scis0 & 0x7FF;
+    *top = tp - 0x156;
+    rt = (scis1 >> 12) & 0x7FF;
+    w = rt - lf + 1;
+    bm = scis1 & 0x7FF;
+    *wd = w;
+    *ht = bm - tp + 1;
 }
-
+#pragma pop
 void fn_80276258(s32 x, s32 y) {
     extern void *__GXData;
     u32 reg = 0;
