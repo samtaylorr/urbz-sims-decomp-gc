@@ -3330,9 +3330,10 @@ void fn_8026E6C4(s32 arg0) {
 void fn_8026E7C0(void *fifo) {
     extern volatile u16 *__cpReg;
     u32 *f = fifo;
-    u32 hi = __cpReg[0x1D];
+    u32 rd;
 
-    f[5] = __rlwimi(__cpReg[0x1C], hi, 16, 0, 15) + 0x80000000;
+    rd = (__cpReg[0x1D] << 16) | __cpReg[0x1C];
+    f[5] = rd + 0x80000000;
     f[7] = (__cpReg[0x19] << 16) | __cpReg[0x18];
 }
 
@@ -4315,17 +4316,18 @@ void fn_802742D8(u32 coord, u32 s_enable, u32 t_enable) {
     }
 }
 
-void fn_8027433C(u32 coord, u8 s_enable, u8 t_enable) {
+void fn_8027433C(u32 coord, u32 s_enable, u32 t_enable) {
     extern void *__GXData;
     u32 *gx = __GXData;
+    u32 *ts = &gx[coord];
 
-    gx[0xB8 / 4 + coord] = __rlwimi(gx[0xB8 / 4 + coord], s_enable, 16, 15, 15);
-    gx[0xD8 / 4 + coord] = __rlwimi(gx[0xD8 / 4 + coord], t_enable, 16, 15, 15);
+    ts[0xB8 / 4] = __rlwimi(ts[0xB8 / 4], s_enable, 16, 15, 15);
+    ts[0xD8 / 4] = __rlwimi(ts[0xD8 / 4], t_enable, 16, 15, 15);
     if (gx[0x594 / 4] & (1 << coord)) {
         GXWGFifo.u8 = 0x61;
-        GXWGFifo.u32 = gx[0xB8 / 4 + coord];
+        GXWGFifo.u32 = ts[0xB8 / 4];
         GXWGFifo.u8 = 0x61;
-        GXWGFifo.u32 = gx[0xD8 / 4 + coord];
+        GXWGFifo.u32 = ts[0xD8 / 4];
         M2C_FIELD(gx, u16 *, 0x2) = 0;
     }
 }
@@ -4333,21 +4335,23 @@ void fn_8027433C(u32 coord, u8 s_enable, u8 t_enable) {
 void fn_802743A0(u32 tmap, u32 tcoord) {
     extern void *__GXData;
     u32 *gx = __GXData;
+    u32 *tm = &gx[tmap];
+    u32 *ts = &gx[tcoord];
     u32 w, h;
     u8 s_bias, t_bias;
 
-    w = gx[0x514 / 4 + tmap] & 0x3FF;
-    h = (gx[0x514 / 4 + tmap] >> 10) & 0x3FF;
-    gx[0xB8 / 4 + tcoord] = __rlwimi(gx[0xB8 / 4 + tcoord], w, 0, 16, 31);
-    gx[0xD8 / 4 + tcoord] = __rlwimi(gx[0xD8 / 4 + tcoord], h, 0, 16, 31);
-    s_bias = (gx[0x534 / 4 + tmap] & 3) == 1;
-    t_bias = ((gx[0x534 / 4 + tmap] >> 2) & 3) == 1;
-    gx[0xB8 / 4 + tcoord] = __rlwimi(gx[0xB8 / 4 + tcoord], s_bias, 16, 15, 15);
-    gx[0xD8 / 4 + tcoord] = __rlwimi(gx[0xD8 / 4 + tcoord], t_bias, 16, 15, 15);
+    w = tm[0x514 / 4] & 0x3FF;
+    h = (tm[0x514 / 4] >> 10) & 0x3FF;
+    ts[0xB8 / 4] = __rlwimi(ts[0xB8 / 4], w, 0, 16, 31);
+    ts[0xD8 / 4] = __rlwimi(ts[0xD8 / 4], h, 0, 16, 31);
+    s_bias = (tm[0x534 / 4] & 3) == 1;
+    t_bias = ((tm[0x534 / 4] >> 2) & 3) == 1;
+    ts[0xB8 / 4] = __rlwimi(ts[0xB8 / 4], s_bias, 16, 15, 15);
+    ts[0xD8 / 4] = __rlwimi(ts[0xD8 / 4], t_bias, 16, 15, 15);
     GXWGFifo.u8 = 0x61;
-    GXWGFifo.u32 = gx[0xB8 / 4 + tcoord];
+    GXWGFifo.u32 = ts[0xB8 / 4];
     GXWGFifo.u8 = 0x61;
-    GXWGFifo.u32 = gx[0xD8 / 4 + tcoord];
+    GXWGFifo.u32 = ts[0xD8 / 4];
     M2C_FIELD(gx, u16 *, 0x2) = 0;
 }
 
