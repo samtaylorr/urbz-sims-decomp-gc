@@ -193,21 +193,24 @@ void fn_8036DF8C(char *self, void *arg1) {
 
 void fn_8036DFB8(char *self, char *obj) {
     extern void *fn_8032A410(void *);
-    u32 n;
+    typedef struct { s16 delta; s16 pad; void *pfn; } Ent;
+    s32 n;
     char *elem;
     char **list;
     char *data;
     char *sub;
+    Ent *vt;
     void *r;
 
     r = fn_8032A410(*(void **)(self + 0xB4));
-    (*(void (**)(void *, void *, s32))(*(char **)(obj + 0x68) + 0xE4))(obj + *(s16 *)(*(char **)(obj + 0x68) + 0xE0), r, 1);
-    n = *(u32 *)(self + 0xB0);
-    elem = *(char **)(self + 0xA8);
+    vt = *(Ent **)(obj + 0x68);
+    ((void (*)(void *, void *, s32))vt[28].pfn)(obj + vt[28].delta, r, 1);
+    n = *(s32 *)(self + 0xB0);
     list = *(char ***)(self + 0xAC);
-    while (n--) {
-        data = *(char **)(elem + 0x18);
+    elem = *(char **)(self + 0xA8);
+    for (n--; n != -1; n--) {
         sub = *(char **)(*list + 0x20);
+        data = *(char **)(elem + 0x18);
         if (!(*(u32 *)(sub + 4) & 0x401)) {
             (*(void (**)(void *, void *))(*(char **)(sub + 0xF0) + 0x1C))(sub + *(s16 *)(*(char **)(sub + 0xF0) + 0x18), obj);
             (*(void (**)(void *, s32, f32))(*(char **)(obj + 0x68) + 0x1AC))(obj + *(s16 *)(*(char **)(obj + 0x68) + 0x1A8), 0, *(f32 *)(data + 0x24));
