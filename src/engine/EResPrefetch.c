@@ -1,6 +1,28 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+M2C_UNK fn_8031EE78(void *self) {
+    extern void fn_802D8B34(void *);
+    extern void fn_8031FAA0(void *);
+    extern void fn_803664B0(void *);
+    extern void fn_8031F9D4(void *);
+    extern u8 lbl_8041B6F0[];
+    extern u8 lbl_8041B6A0[];
+    extern u8 lbl_8041B6C0[];
+    M2C_FIELD(self, void **, 0) = lbl_8041B6F0;
+    fn_802D8B34(self + 8);
+    M2C_FIELD(self, void **, 0x340) = lbl_8041B6A0;
+    M2C_FIELD(self, void **, 0) = lbl_8041B6C0;
+    fn_8031FAA0(self + 0x348);
+    fn_803664B0(self + 0x38C);
+    M2C_FIELD(self, s32 *, 0x3F8) = 0xDEADBEAF;
+    M2C_FIELD(self, s32 *, 0x3FC) = 0xDEADBEAF;
+    M2C_FIELD(self, s32 *, 0x400) = 0xDEADBEAF;
+    fn_8031F9D4(self);
+    M2C_FIELD(self, s32 *, 0x3D8) = 0;
+    return self;
+}
+
 M2C_UNK fn_8031EF04(void *self, s32 flags) {
     extern u8 lbl_8041B6A0[];
     extern u8 lbl_8041B6C0[];
