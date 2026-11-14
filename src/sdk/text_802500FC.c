@@ -1340,6 +1340,38 @@ void fn_80257894(s32 arg0) {
     }
 }
 
+void fn_80257CB4(u32 mode) {
+    extern SramControlBlock lbl_80440C00;
+    s32 fn_802572CC(s32, s32);
+    SramControlBlock *scb;
+    u8 *sram;
+    s32 enabled;
+    s32 *locked;
+    u8 pad[8];
+
+    scb = &lbl_80440C00;
+    if (mode > 2) {
+        mode = 0;
+    }
+    enabled = fn_8025465C();
+    locked = &scb->locked;
+    if (*locked != 0) {
+        fn_80254684(enabled);
+        sram = NULL;
+    } else {
+        scb->enabled = enabled;
+        *locked = 1;
+        sram = scb->sram;
+    }
+    if (mode == (sram[0x13] & 3)) {
+        fn_802572CC(0, 0);
+        return;
+    }
+    sram[0x13] &= ~3;
+    sram[0x13] |= mode;
+    fn_802572CC(1, 0);
+}
+
 u8 fn_80257D64(void) {
     extern SramControlBlock lbl_80440C00;
     s32 fn_802572CC(s32, s32);
@@ -2627,6 +2659,16 @@ void fn_80260D48(void) {
 void fn_80260D6C(void) {
     M2C_UNK fn_802642C0();
     fn_802642C0();
+}
+
+s32 fn_80260D8C(s32 entrynum, DVDDir *dir) {
+    if ((entrynum < 0) || (entrynum >= lbl_80495EBC) || !((!(lbl_80495EB4[entrynum].isDirAndStringOff & 0xFF000000)) ? 0 : 1)) {
+        return 0;
+    }
+    dir->entryNum = entrynum;
+    dir->location = entrynum + 1;
+    dir->next = lbl_80495EB4[entrynum].nextEntryOrLength;
+    return 1;
 }
 
 s32 fn_80260F58(void) {
@@ -5889,14 +5931,14 @@ void fn_80272D00(s32 chan, u8 enable, s32 amb_src, s32 mat_src, u32 light_mask, 
 
     idx = chan & 0x3;
     reg = 0;
-    reg = (reg & ~0x2) | (enable << 1);
-    reg = (reg & ~0x1) | mat_src;
-    reg = (reg & ~0x40) | (amb_src << 6);
-    reg = (reg & ~0x180) | ((attn_fn == 0 ? 0 : diff_fn) << 7);
-    reg = (reg & ~0x200) | ((attn_fn != 2) << 9);
-    reg = (reg & ~0x400) | ((attn_fn != 0) << 10);
-    reg = (reg & ~0x3C) | ((light_mask & 0xF) << 2);
-    reg = (reg & ~0x7800) | (((light_mask >> 4) & 0xF) << 11);
+    reg = (reg & ~0x2) | ((enable << 1) & 0x2);
+    reg = (reg & ~0x1) | (mat_src & 0x1);
+    reg = (reg & ~0x40) | ((amb_src << 6) & 0x40);
+    reg = (reg & ~0x180) | (((attn_fn == 0 ? 0 : diff_fn) << 7) & 0x180);
+    reg = (reg & ~0x200) | (((attn_fn != 2) << 9) & 0x200);
+    reg = (reg & ~0x400) | (((attn_fn != 0) << 10) & 0x400);
+    reg = (reg & ~0x3C) | ((light_mask << 2) & 0x3C);
+    reg = (reg & ~0x7800) | (((light_mask >> 4) << 11) & 0x7800);
     GXWGFifo.u8 = 0x10;
     GXWGFifo.u32 = idx + 0x100E;
     GXWGFifo.u32 = reg;
