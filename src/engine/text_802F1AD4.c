@@ -100,11 +100,36 @@ void *fn_802F1B74(void *self) {
 extern void fn_802EFC54(void *, void *);
 extern void *fn_802D34B0(void *, void *);
 void fn_802F1C20(void *self, void *stream) {
+    u8 b;
     fn_802EFC54(self, stream);
     stream = fn_802D34B0(stream, (u8 *)self + 0xC0);
-    stream = Stream_WriteF32(stream, M2C_FIELD(self, f32 *, 0xD8));
-    stream = Stream_WriteF32(stream, M2C_FIELD(self, f32 *, 0xDC));
-    Stream_WriteBool(stream, M2C_FIELD(self, s32 *, 0xE0));
+    stream = Stream_WriteF32p(stream, (f32 *)((u8 *)self + 0xD8));
+    stream = Stream_WriteF32p(stream, (f32 *)((u8 *)self + 0xDC));
+    b = 0;
+    if (M2C_FIELD(self, s32 *, 0xE0) != 0) {
+        b = 1;
+    }
+    Stream_WriteU8(stream, b);
+}
+
+void fn_802F1CE8(char *self, void *stream) {
+    extern u16 lbl_804937A6[];
+    extern void fn_802EFD68(void *, void *);
+    extern void *fn_802D3714(void *, void *);
+    u8 flag;
+    void *vt;
+
+    fn_802EFD68(self, stream);
+    if (lbl_804937A6[0] == 0) {
+        stream = fn_802D3714(stream, self + 0xC0);
+        vt = M2C_FIELD(stream, void **, 0x18);
+        M2C_FIELD(vt, void (**)(void *, void *, s32), 0x34)((char *)stream + M2C_FIELD(vt, s16 *, 0x30), self + 0xD8, 4);
+        vt = M2C_FIELD(stream, void **, 0x18);
+        M2C_FIELD(vt, void (**)(void *, void *, s32), 0x34)((char *)stream + M2C_FIELD(vt, s16 *, 0x30), self + 0xDC, 4);
+        vt = M2C_FIELD(stream, void **, 0x18);
+        M2C_FIELD(vt, void (**)(void *, void *, s32), 0x34)((char *)stream + M2C_FIELD(vt, s16 *, 0x30), &flag, 1);
+        M2C_FIELD(self, s32 *, 0xE0) = flag != 0;
+    }
 }
 
 void fn_802F2468(s32 arg0, s32 arg1) {
