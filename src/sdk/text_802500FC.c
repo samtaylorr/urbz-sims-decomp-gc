@@ -3116,14 +3116,21 @@ void fn_80270D34(void) {
     void fn_80254684(s32);
     void fn_802706E4(void);
     s32 level;
+    u32 reg;
+    s32 level2;
 
     level = fn_8025465C();
+    reg = 0x45000002;
     *(volatile u8 *)0xCC008000 = 0x61;
-    *(volatile u32 *)0xCC008000 = 0x45000002;
+    *(volatile u32 *)0xCC008000 = reg;
     fn_802706E4();
     lbl_804960B8 = 0;
     fn_80254684(level);
-    fn_80270CE8();
+    level2 = fn_8025465C();
+    while (!lbl_804960B8) {
+        fn_8025974C(lbl_804960BC);
+    }
+    fn_80254684(level2);
 }
 
 void fn_80270DB4(void) {
