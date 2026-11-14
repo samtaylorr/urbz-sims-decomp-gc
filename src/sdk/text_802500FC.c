@@ -812,8 +812,11 @@ s32 fn_80254A24(void) {
     return *(s32 *)0x800000C8;
 }
 
+u32 fn_8025474C(u32 mask, u32 current);
+#pragma push
+#pragma dont_inline on
+#pragma peephole off
 u32 fn_80254A30(u32 local) {
-    u32 fn_8025474C(u32 mask, u32 current);
     s32 enabled;
     u32 global;
     u32 prev;
@@ -831,10 +834,6 @@ u32 fn_80254A30(u32 local) {
     return prev;
 }
 
-u32 fn_8025474C(u32 mask, u32 current);
-#pragma push
-#pragma dont_inline on
-#pragma peephole off
 u32 fn_80254AC0(u32 global) {
     s32 enabled;
     u32 prev;
@@ -1569,6 +1568,36 @@ void fn_802592B4(void *arg0) {
     fn_80254684(enabled);
 }
 
+s32 fn_8025993C(void *thread, s32 priority) {
+    void *fn_802587D0(void *, s32);
+    void fn_80258A58(s32);
+    extern s32 lbl_80495E6C;
+    s32 enabled;
+
+    if (priority < 0 || priority > 31) {
+        return 0;
+    }
+    enabled = fn_8025465C();
+    if (M2C_FIELD(thread, s32 *, 0x2d4) != priority) {
+        M2C_FIELD(thread, s32 *, 0x2d4) = priority;
+        do {
+            if (M2C_FIELD(thread, s32 *, 0x2cc) > 0) {
+                break;
+            }
+            priority = fn_80258794(thread);
+            if (M2C_FIELD(thread, s32 *, 0x2d0) == priority) {
+                break;
+            }
+            thread = fn_802587D0(thread, priority);
+        } while (thread != NULL);
+        if (lbl_80495E6C != 0) {
+            fn_80258A58(0);
+        }
+    }
+    fn_80254684(enabled);
+    return 1;
+}
+
 s32 fn_802599FC(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x2D4);
 }
@@ -1909,6 +1938,25 @@ BOOL fn_8025B434(OSThread_ *thread) {
     return TRUE;
 }
 
+s32 fn_8025B94C(s32 chan, void *buf, s32 len, u32 mode) {
+    s32 fn_8025B6F0(s32, void *, s32, u32, void *);
+    s32 fn_8025BAD8(s32);
+    s32 xLen;
+
+    while (len) {
+        xLen = (len < 4) ? len : 4;
+        if (!fn_8025B6F0(chan, buf, xLen, mode, NULL)) {
+            return 0;
+        }
+        if (!fn_8025BAD8(chan)) {
+            return 0;
+        }
+        buf = (u8 *)buf + xLen;
+        len -= xLen;
+    }
+    return 1;
+}
+
 volatile u32 __EXIChanRegs[] : 0xCC006800;
 
 u32 fn_8025BD24(s32 chan, BOOL exi, BOOL tc, BOOL ext) {
@@ -1983,6 +2031,19 @@ s32 fn_8025BFA8(s32 chan) {
     }
     return result;
 }
+
+s32 fn_8025C028(s32 chan) {
+    s32 fn_8025BFA8(s32);
+
+    if (fn_8025BFA8(chan)) {
+        return 1;
+    } else if (((s32 *)0x800030C0)[chan] != 0) {
+        return 0;
+    } else {
+        return -1;
+    }
+}
+
 #pragma pop
 
 #pragma push
@@ -4688,7 +4749,7 @@ void fn_8026F0B0(void) {
     }
     nCols = 33 - __cntlzw((*(u32 *)(__GXData + 0x14) >> 13) & 0xF);
     nCols /= 2;
-    nTex = 33 - __cntlzw(*(u32 *)(__GXData + 0x18) & 0xFFFF);
+    nTex = 33 - __cntlzw((*(u32 *)(__GXData + 0x18) >> 0) & 0xFFFF);
     nTex /= 2;
     gx = __GXData;
     *(volatile u8 *)0xCC008000 = 0x10;
