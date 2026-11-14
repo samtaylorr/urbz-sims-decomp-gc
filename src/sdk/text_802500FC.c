@@ -2996,26 +2996,27 @@ void fn_80263B5C(s32 arg0, void *arg1) {
     fn_80259838(&lbl_80495EC8);
 }
 
-#pragma push
-#pragma dont_inline on
+void fn_80263CE0(s32 arg0, void *arg1);
+static inline s32 DVDCommand0CAsync(DVDCommandBlock *block, void *callback) {
+    s32 idle;
+
+    block->command = 0xC;
+    block->callback = callback;
+    idle = fn_80262F24(1, block);
+    return idle;
+}
+
 s32 fn_80263C40(DVDCommandBlock *block) {
     s32 fn_8025465C();
     M2C_UNK fn_80254684(s32);
     M2C_UNK fn_8025974C(M2C_UNK *);
-    void fn_80263CE0(s32 arg0, void *arg1);
     extern M2C_UNK lbl_80495EC8;
     s32 result;
     s32 enabled;
     s32 state;
     s32 retVal;
 
-    {
-        s32 idle;
-        block->command = 0xC;
-        block->callback = fn_80263CE0;
-        idle = fn_80262F24(1, block);
-        result = idle;
-    }
+    result = DVDCommand0CAsync(block, (void *)fn_80263CE0);
     if (result == 0) {
         return -1;
     }
