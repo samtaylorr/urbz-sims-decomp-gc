@@ -20,6 +20,18 @@ static inline void ETexture_ResetRow(void *arg0, s32 i) {
     }
 }
 
+static inline void ETexture_ResetRow2(f32 *cur, f32 *prev, f32 *cur2, f32 *prev2, s32 *flags, s32 i) {
+    extern f32 lbl_803F5480[];
+    s32 j;
+
+    for (j = 0; j < 2; j++) {
+        prev[i * 2 + j] = cur[i * 2 + j];
+        prev2[i * 2 + j] = cur2[i * 2 + j];
+        cur2[i * 2 + j] = lbl_803F5480[0];
+        flags[i * 2 + j] = 0;
+    }
+}
+
 void fn_8036ECE0(u8 *self) {
     typedef struct { s16 delta; s16 pad; void *pfn; } Ent;
     extern u8 *lbl_80495050;
@@ -672,7 +684,14 @@ void fn_8036FC58(void *arg0, s32 arg1) {
 }
 
 void fn_8036FD3C(void *arg0, s32 arg1) {
+    extern f32 lbl_803F5480[];
     s32 i;
+    s32 j;
+    f32 *cur = (f32 *)((u8 *)arg0 + 0x28);
+    f32 *prev = (f32 *)((u8 *)arg0 + 0x38);
+    f32 *cur2 = (f32 *)((u8 *)arg0 + 0x48);
+    f32 *prev2 = (f32 *)((u8 *)arg0 + 0x58);
+    s32 *flags = (s32 *)((u8 *)arg0 + 0x68);
 
     M2C_FIELD(arg0, s32 *, 0xC) = M2C_FIELD(arg0, s32 *, 0x8);
     M2C_FIELD(arg0, s32 *, 0x14) = M2C_FIELD(arg0, s32 *, 0x10);
@@ -682,9 +701,16 @@ void fn_8036FD3C(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x18) = 0;
     M2C_FIELD(arg0, s32 *, 0x20) = 0;
     M2C_FIELD(arg0, s32 *, 0x8) = 0;
-    for (i = 0; i < 2; i++) {
-        ETexture_ResetRow(arg0, i);
-    }
+    i = 0;
+    do {
+        for (j = 0; j < 2; j++) {
+            prev[i * 2 + j] = cur[i * 2 + j];
+            prev2[i * 2 + j] = cur2[i * 2 + j];
+            cur2[i * 2 + j] = lbl_803F5480[0];
+            flags[i * 2 + j] = 0;
+        }
+        i++;
+    } while (i <= 1);
     M2C_FIELD(arg0, s32 *, 0x10) = arg1 ? 0 : -1;
     for (i = 0; i < 32; i++) {
         fn_8036FC20(arg0, i, 0);
