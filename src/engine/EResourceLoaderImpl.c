@@ -399,9 +399,9 @@ void fn_8031D300(s32 arg0) {
     fn_8031C91C(arg0 + 0x37C);
 }
 
-void fn_8031D324(s32 arg0) {
-    M2C_UNK fn_8031C820(s32);
-    fn_8031C820(arg0 + 0x37C);
+void fn_8031D324(s32 arg0, s32 arg1, s32 arg2) {
+    s32 fn_8031C820(s32, s32, s32);
+    fn_8031C820(arg0 + 0x37C, arg1, arg2);
 }
 
 void fn_8031D454(char *self, s32 arg1, s32 arg2) {
@@ -476,9 +476,9 @@ void fn_8031D970(char *self) {
     ERMLock_Unlock(&lock);
 }
 
-void fn_8031DA10(char *self, char *res) {
+void fn_8031DA10(char *self, s32 res) {
     extern s32 *fn_802D1FC8(s32);
-    void fn_803364F0(char *);
+    void fn_803364F0(s32);
     ERMLock lock;
     char *vt;
     s32 r;
@@ -494,7 +494,8 @@ void fn_8031DA10(char *self, char *res) {
         } else {
             msg = fn_8031C7B4(fn_802D1FC8(0x28));
             msg[0] = 8;
-            msg[1] = (s32)res;
+            msg[8] = r;
+            msg[1] = res;
             msg[8] = r;
             fn_8031D084((s32)self, msg);
             vt = *(char **)self;
