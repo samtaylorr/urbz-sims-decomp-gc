@@ -57,6 +57,17 @@ typedef struct OSThread_ {
 
 volatile u32 __SIRegs[] : 0xCC006400;
 
+typedef struct __va_list_tag {
+    char gpr;
+    char fpr;
+    char *overflow_arg_area;
+    char *reg_save_area;
+} va_list[1];
+
+#define va_start(AP, LASTARG) \
+    (__builtin_next_arg(LASTARG), *(AP) = *(struct __va_list_tag *)__builtin_saveregs())
+#define va_end(AP) ((void)0)
+
 #pragma push
 #pragma fp_contract off
 static inline f32 sqrtf(f32 x) {
@@ -5820,20 +5831,21 @@ void fn_802755C8(u32 stage, u32 ras_sel, u32 tex_sel) {
 
 void fn_80275610(u32 table, u32 red, u32 green, u32 blue, u32 alpha) {
     extern struct { u16 unk0; u16 bpSentNot; u8 pad4[0x1AC]; u32 tevKsel[8]; } *__GXData;
-    u32 *reg;
+    struct { u16 unk0; u16 bpSentNot; u8 pad4[0x1AC]; u32 tevKsel[8]; } *gx = (void *)__GXData;
+    u32 *Kreg;
 
-    reg = &__GXData->tevKsel[table * 2];
-    *reg = __rlwimi(*reg, red, 0, 30, 31);
-    *reg = __rlwimi(*reg, green, 2, 28, 29);
+    Kreg = &gx->tevKsel[table * 2];
+    *Kreg = __rlwimi(*Kreg, red, 0, 30, 31);
+    *Kreg = __rlwimi(*Kreg, green, 2, 28, 29);
     *(volatile u8 *)0xCC008000 = 0x61;
-    *(volatile u32 *)0xCC008000 = *reg;
+    *(volatile u32 *)0xCC008000 = *Kreg;
 
-    reg = &__GXData->tevKsel[table * 2 + 1];
-    *reg = __rlwimi(*reg, blue, 0, 30, 31);
-    *reg = __rlwimi(*reg, alpha, 2, 28, 29);
+    Kreg = &gx->tevKsel[table * 2 + 1];
+    *Kreg = __rlwimi(*Kreg, blue, 0, 30, 31);
+    *Kreg = __rlwimi(*Kreg, alpha, 2, 28, 29);
     *(volatile u8 *)0xCC008000 = 0x61;
-    *(volatile u32 *)0xCC008000 = *reg;
-    __GXData->bpSentNot = 0;
+    *(volatile u32 *)0xCC008000 = *Kreg;
+    gx->bpSentNot = 0;
 }
 
 void fn_80275690(void) {
