@@ -1237,25 +1237,19 @@ void fn_8025A2C8(u8 val) {
 void fn_8025A374(s32 index, void *ptr) {
     u8 *thread = *(u8 **)0x800000E4;
 
-    if (thread == NULL) {
+    if (thread == NULL || index < 0 || index >= 2) {
         return;
     }
-    if (index < 0 || index >= 2) {
-        return;
-    }
-    M2C_FIELD(thread + index * 4, void **, 0x310) = ptr;
+    ((void **)(thread + index * 4))[0x310 / 4] = ptr;
 }
 
 void *fn_8025A3A4(s32 index) {
     u8 *thread = *(u8 **)0x800000E4;
 
-    if (thread == NULL) {
+    if (thread == NULL || index < 0 || index >= 2) {
         return NULL;
     }
-    if (index < 0 || index >= 2) {
-        return NULL;
-    }
-    return M2C_FIELD(thread + index * 4, void **, 0x310);
+    return ((void **)(thread + index * 4))[0x310 / 4];
 }
 
 u32 fn_8025A3F4(void) {
@@ -1282,6 +1276,21 @@ void fn_8025A410(s64 time) {
     fn_8025BDE8();
     fn_80254684(enabled);
 }
+
+s64 fn_8025A494(void) {
+    s32 fn_8025465C(void);
+    void fn_80254684(s32);
+    s64 fn_8025A3DC(void);
+    s32 enabled;
+    s64 *timeAdjustAddr = (s64 *)((u32)0x30D8 + 0x80000000);
+    s64 result;
+
+    enabled = fn_8025465C();
+    result = *timeAdjustAddr + fn_8025A3DC();
+    fn_80254684(enabled);
+    return result;
+}
+
 #pragma pop
 #pragma push
 #pragma peephole off
@@ -2622,6 +2631,7 @@ void fn_802696D0(s16 *arg0, s16 *arg1) {
 
 void fn_80269B04(s16 *x, s16 *y) {
     u32 hcount, vcount0, vcount;
+    u32 hct, vct;
 
     vcount = __VIRegs[0x16] & 0x7FF;
     do {
@@ -2629,7 +2639,9 @@ void fn_80269B04(s16 *x, s16 *y) {
         hcount = __VIRegs[0x17] & 0x7FF;
         vcount = __VIRegs[0x16] & 0x7FF;
     } while (vcount0 != vcount);
-    fn_802698E8(hcount, vcount, x, y);
+    hct = hcount;
+    vct = vcount;
+    fn_802698E8(hct, vct, x, y);
 }
 
 void fn_80269B64(u32 arg0) {
