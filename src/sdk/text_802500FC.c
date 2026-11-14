@@ -923,6 +923,43 @@ s32 fn_80255F54(s32 final) {
     return 1;
 }
 
+void fn_8025606C(void) {
+    void fn_80258FB8(void *);
+    u8 *thread;
+    u8 *next;
+
+    for (thread = *(u8 **)0x800000DC; thread != NULL; thread = next) {
+        next = *(u8 **)(thread + 0x2FC);
+        switch (*(u16 *)(thread + 0x2C8)) {
+        case 1:
+        case 4:
+            fn_80258FB8(thread);
+            break;
+        default:
+            break;
+        }
+    }
+}
+
+void fn_802560D4(u32 arg0) {
+    s32 fn_8025465C(void);
+    void fn_80251D60(void);
+    void fn_80255FFC(u32);
+
+    fn_8025465C();
+    *(volatile u16 *)0xCC002002 = 0;
+    fn_80251D60();
+    fn_80255FFC(arg0 << 3);
+}
+
+u32 fn_802564CC(void) {
+    extern s32 lbl_80440B90[];
+    if (lbl_80440B90[0] != 0) {
+        return lbl_80440B90[1] | 0x80000000;
+    }
+    return (*(volatile u32 *)0xCC003024 & ~7) >> 3;
+}
+
 s32 fn_80256504(s32 arg0) {
     extern s32 lbl_80495E40;
     s32 temp_r0;
@@ -3851,6 +3888,17 @@ void fn_80271670(u8 *a, u32 *b) {
     *b = (gx[0x7C / 4] >> 19) & 7;
 }
 
+void fn_80271690(u32 stage, u32 a, u8 b) {
+    extern void *__GXData;
+    u32 *gx = __GXData;
+
+    gx[0xB8 / 4 + stage] = __rlwimi(gx[0xB8 / 4 + stage], a, 18, 13, 13);
+    gx[0xB8 / 4 + stage] = __rlwimi(gx[0xB8 / 4 + stage], b, 19, 12, 12);
+    *(volatile u8 *)0xCC008000 = 0x61;
+    *(volatile u32 *)0xCC008000 = gx[0xB8 / 4 + stage];
+    ((u16 *)gx)[1] = 0;
+}
+
 void fn_802716D8(u32 a) {
     extern u32 *__GXData;
     u32 *gx;
@@ -4379,7 +4427,7 @@ void fn_8027425C(u32 coord, u8 enable, u32 ss, u32 ts) {
 }
 
 void fn_802742D8(u32 coord, u32 s_enable, u32 t_enable) {
-    extern struct {
+    struct GXTsRegs {
         u16 pad0;
         u16 bpSentNot;
         u8 pad1[0xB4];
@@ -4387,16 +4435,18 @@ void fn_802742D8(u32 coord, u32 s_enable, u32 t_enable) {
         u32 suTs1[8];
         u8 pad2[0x594 - 0xF8];
         u32 tcsManEnab;
-    } *__GXData;
+    };
+    extern void *__GXData;
+    struct GXTsRegs *gx = __GXData;
 
-    __GXData->suTs0[coord] = __rlwimi(__GXData->suTs0[coord], s_enable, 17, 14, 14);
-    __GXData->suTs1[coord] = __rlwimi(__GXData->suTs1[coord], t_enable, 17, 14, 14);
-    if (__GXData->tcsManEnab & (1 << coord)) {
+    gx->suTs0[coord] = __rlwimi(gx->suTs0[coord], s_enable, 17, 14, 14);
+    gx->suTs1[coord] = __rlwimi(gx->suTs1[coord], t_enable, 17, 14, 14);
+    if (gx->tcsManEnab & (1 << coord)) {
         GXWGFifo.u8 = 0x61;
-        GXWGFifo.u32 = __GXData->suTs0[coord];
+        GXWGFifo.u32 = gx->suTs0[coord];
         GXWGFifo.u8 = 0x61;
-        GXWGFifo.u32 = __GXData->suTs1[coord];
-        __GXData->bpSentNot = 0;
+        GXWGFifo.u32 = gx->suTs1[coord];
+        gx->bpSentNot = 0;
     }
 }
 
@@ -4915,6 +4965,8 @@ void fn_802772B4(void) {
     M2C_FIELD(gx, u16 *, 0x2) = 1;
 }
 
+#pragma push
+#pragma inline_depth(0)
 u32 fn_802773BC(void) {
     extern volatile u16 *__cpReg;
     fn_80270D34();
@@ -4922,7 +4974,7 @@ u32 fn_802773BC(void) {
     __cpReg[0x30] = 0x1007;
     return (u32)__cpReg[0x32] >> 8;
 }
-#pragma dont_inline reset
+#pragma pop
 void fn_802773FC(void) {
 
 }
@@ -5009,6 +5061,17 @@ s32 fn_80277720(void) {
         fn_80254684(enabled);
     }
     return lbl_804960D4;
+}
+
+void fn_8027790C(void) {
+    extern void (*lbl_804960CC)(s32, void *);
+    void fn_80277A18(void);
+    void fn_802779D8(s16, void *);
+    fn_80254AC0(0x18000);
+    fn_80254AC0(0x40);
+    lbl_804960CC = (void (*)(s32, void *))fn_80277A18;
+    fn_802546A8(0x19, (__OSInterruptHandler)fn_802779D8);
+    fn_80254B48(0x40);
 }
 
 volatile u32 __EXIRegs[] : 0xCC006800;
