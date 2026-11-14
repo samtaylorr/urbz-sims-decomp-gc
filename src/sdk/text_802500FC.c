@@ -2999,6 +2999,24 @@ s32 fn_8026C4FC(void) {
     return 0;
 }
 
+void fn_8026C9FC(u32 type, u32 src, u32 dst, u32 op) {
+    extern void *__GXData;
+    u32 *gx = __GXData;
+    u32 reg;
+
+    reg = gx[0x1D0 / 4];
+    reg = __rlwimi(reg, (type == 3), 11, 20, 20);
+    reg = __rlwimi(reg, type, 0, 31, 31);
+    reg = __rlwimi(reg, (type == 2), 1, 30, 30);
+    reg = __rlwimi(reg, op, 12, 16, 19);
+    reg = __rlwimi(reg, src, 8, 21, 23);
+    reg = __rlwimi(reg, dst, 5, 24, 26);
+    *(volatile u8 *)0xCC008000 = 0x61;
+    *(volatile u32 *)0xCC008000 = reg;
+    gx[0x1D0 / 4] = reg;
+    ((u16 *)gx)[1] = 0;
+}
+
 void fn_8026CA50(u8 enable) {
     extern void *__GXData;
     u32 *gx = __GXData;
@@ -4008,7 +4026,6 @@ void fn_802751C0(s32 id, u32 mode) {
     u8 *gx;
     u32 *ctmp;
     u32 *atmp;
-    u32 *regs;
     u32 tevReg;
 
     if (id == 0) {
@@ -4019,17 +4036,16 @@ void fn_802751C0(s32 id, u32 mode) {
         atmp = tbl + mode + 15;
     }
     gx = __GXData;
-    regs = (u32 *)(gx + id * 4);
-    tevReg = regs[0x130 / 4];
+    tevReg = ((u32 *)(gx + 0x130))[id];
     tevReg = (*ctmp & ~0xFF000000) | (tevReg & 0xFF000000);
     GXWGFifo.u8 = 0x61;
     GXWGFifo.u32 = tevReg;
-    regs[0x130 / 4] = tevReg;
-    tevReg = regs[0x170 / 4];
+    ((u32 *)(gx + 0x130))[id] = tevReg;
+    tevReg = ((u32 *)(gx + 0x170))[id];
     tevReg = (*atmp & ~0xFF00000F) | (tevReg & 0xFF00000F);
     GXWGFifo.u8 = 0x61;
     GXWGFifo.u32 = tevReg;
-    regs[0x170 / 4] = tevReg;
+    ((u32 *)(gx + 0x170))[id] = tevReg;
     *(u16 *)(gx + 2) = 0;
 }
 
