@@ -8,6 +8,11 @@ extern void *fn_802DC3C0(void *, u32, s32, s32, s32);
 extern void *fn_802D0B3C(void);
 extern void *fn_80248488(void *, s32, u32);
 
+typedef struct ScrollVec2 {
+    s32 x;
+    s32 y;
+} ScrollVec2;
+
 static inline void *ScrollingTextBox_AllocAligned(u32 size) {
     void *heap;
     void *p;
@@ -79,6 +84,47 @@ void fn_8009A948(void *arg0, void *arg1) {
     s32 b = M2C_FIELD(arg1, s32 *, 4);
     M2C_FIELD(arg0, s32 *, 0x18) = b;
     M2C_FIELD(arg0, s32 *, 0x14) = a;
+}
+
+void fn_8009A95C(void *arg0, u16 *str, f32 size) {
+    typedef struct { s32 x; s32 y; } Pair;
+    typedef struct {
+        u16 *text;
+        f32 x4;
+        f32 x8;
+        f32 xC;
+        u8 pad10[0xC];
+        f32 x1C;
+        u8 pad20[8];
+        f32 x28;
+        Pair x2C;
+    } Box;
+    extern void fn_802D211C(void *);
+    extern s32 fn_800F8120(u16 *);
+    extern void *fn_802D2058(u32);
+    extern void fn_800F81A8(u16 *, u16 *, s32);
+    extern void fn_80320680(void *, s32, f32, f32);
+    extern void fn_803227C4(s32 *, void *, u16 *, s32, s32, s32);
+    extern void *lbl_80494378;
+    extern const f32 lbl_803CCE10[];
+    extern const f32 lbl_803CCE14[];
+    Box *self = arg0;
+    s32 len;
+    s32 v[2];
+
+    if (self->text != NULL) {
+        fn_802D211C(self->text);
+    }
+    len = fn_800F8120(str);
+    self->text = fn_802D2058((len + 1) * 2);
+    fn_800F81A8(self->text, str, len);
+    self->text[len] = 0;
+    self->x28 = size;
+    fn_80320680(lbl_80494378, 1, size, lbl_803CCE10[0]);
+    fn_803227C4(v, lbl_80494378, self->text, 1, 1, 0);
+    self->x1C = (self->xC - self->x4) * lbl_803CCE14[0] + self->x4;
+    self->x2C.x = v[0];
+    self->x2C.y = v[1];
 }
 
 void fn_8009AA44(void *arg0, f32 farg0, f32 farg1, f32 farg2, f32 farg3) {
