@@ -701,6 +701,22 @@ s32 fn_80338598(void *arg0, s32 arg1, s32 *arg2) {
     return 0;
 }
 
+s32 fn_80338858(void *arg0, s32 arg1) {
+    typedef struct { s32 key; s32 val; } Entry;
+    s32 i = fn_8033854C(arg0, arg1);
+
+    if (M2C_FIELD(arg0, Entry **, 0)[i].key != arg1) {
+        return 0;
+    }
+    for (; i < M2C_FIELD(arg0, s32 *, 4) - 1; i++) {
+        M2C_FIELD(arg0, Entry **, 0)[i] = M2C_FIELD(arg0, Entry **, 0)[i + 1];
+    }
+    M2C_FIELD(arg0, s32 *, 4) -= 1;
+    M2C_FIELD(arg0, Entry **, 0)[M2C_FIELD(arg0, s32 *, 4)].key = 0;
+    M2C_FIELD(arg0, Entry **, 0)[M2C_FIELD(arg0, s32 *, 4)].val = 0;
+    return 1;
+}
+
 s32 fn_8033891C(s32 *self) {
     return self[1];
 }
