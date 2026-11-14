@@ -17,6 +17,7 @@ typedef struct DVDCommandBlock {
 } DVDCommandBlock;
 
 extern DVDCommandBlock *lbl_80495ED0;
+void fn_802622E0(void);
 
 typedef struct GXVtxDescList {
     s32 attr;
@@ -3163,6 +3164,7 @@ void fn_8026561C(void);
 s32 fn_80261200(DVDFileInfo *fileInfo) {
     s32 bytes;
     DVDCommandBlock *cb = &fileInfo->cb;
+    u32 transferred;
     switch (cb->state) {
     case 0:
     case -1:
@@ -3179,7 +3181,8 @@ s32 fn_80261200(DVDFileInfo *fileInfo) {
         bytes = 0;
         break;
     case 1:
-        bytes = (s32)((cb->currTransferSize - ((volatile u32 *)0xCC006000)[6]) + cb->transferredSize);
+        transferred = cb->transferredSize;
+        bytes = (s32)(transferred + (cb->currTransferSize - ((volatile u32 *)0xCC006000)[6]));
         break;
     }
     return bytes;
@@ -3216,7 +3219,7 @@ void fn_8026561C(void);
 void fn_802622E0(void);
 void fn_80261458(u32 intType) {
     DVDCommandBlock *finished;
-    extern s32 lbl_80495EE8;
+    extern u32 lbl_80495EE8;
     extern DVDCommandBlock lbl_80442960;
     extern u32 lbl_80495EF0;
     extern void (*lbl_80495EF4)(s32, DVDCommandBlock *);
@@ -3229,7 +3232,7 @@ void fn_80261458(u32 intType) {
     fn_8026561C();
     finished = lbl_80495ED0;
     lbl_80495ED0 = &lbl_80442960;
-    lbl_80495EE8 = 1;
+    lbl_80495EE8 = TRUE;
     if (finished->callback) {
         ((void (*)(s32, DVDCommandBlock *))finished->callback)(-1, finished);
     }
@@ -5768,8 +5771,7 @@ void fn_8026F9C4(GXVtxDescList *list) {
     }
     list[attr].attr = 25;
     fn_8026F810(25, &list[attr].type);
-    attr++;
-    list[attr].attr = 0xFF;
+    list[++attr].attr = 0xFF;
 }
 
 void fn_8026FA54(void) {
@@ -5783,24 +5785,31 @@ void fn_8026FA54(void) {
 }
 
 void fn_8026FF68(void) {
-    extern u8 *__GXData;
-    u8 *gx = __GXData;
+    extern struct GXVATData {
+        u8 pad0[0x1C];
+        u32 vatA[8];
+        u32 vatB[8];
+        u32 vatC[8];
+        u8 pad7C[0x5AB - 0x7C];
+        u8 dirtyVAT;
+    } *__GXData;
+    struct GXVATData *gx = __GXData;
     u8 i;
 
     for (i = 0; i < 8; i++) {
-        if (gx[0x5AB] & (1 << i)) {
+        if (gx->dirtyVAT & (1 << i)) {
             *(volatile u8 *)0xCC008000 = 8;
             *(volatile u8 *)0xCC008000 = i | 0x70;
-            *(volatile u32 *)0xCC008000 = ((u32 *)(gx + 0x1C))[i];
+            *(volatile u32 *)0xCC008000 = gx->vatA[i];
             *(volatile u8 *)0xCC008000 = 8;
             *(volatile u8 *)0xCC008000 = i | 0x80;
-            *(volatile u32 *)0xCC008000 = ((u32 *)(gx + 0x3C))[i];
+            *(volatile u32 *)0xCC008000 = gx->vatB[i];
             *(volatile u8 *)0xCC008000 = 8;
             *(volatile u8 *)0xCC008000 = i | 0x90;
-            *(volatile u32 *)0xCC008000 = ((u32 *)(gx + 0x5C))[i];
+            *(volatile u32 *)0xCC008000 = gx->vatC[i];
         }
     }
-    __GXData[0x5AB] = 0;
+    __GXData->dirtyVAT = 0;
 }
 
 void fn_80270284(s32 fmt, s32 *vat) {
