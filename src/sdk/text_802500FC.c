@@ -1235,12 +1235,11 @@ void fn_8025A2C8(u8 val) {
 }
 
 void fn_8025A374(s32 index, void *ptr) {
-    u8 *thread = *(u8 **)0x800000E4;
+    struct { u8 pad[0x310]; void *specific[2]; } *thread = *(void **)0x800000E4;
 
-    if (thread == NULL || index < 0 || index >= 2) {
-        return;
+    if (thread != NULL && 0 <= index && index < 2) {
+        thread->specific[index] = ptr;
     }
-    ((void **)(thread + index * 4))[0x310 / 4] = ptr;
 }
 
 void *fn_8025A3A4(s32 index) {
@@ -2630,7 +2629,7 @@ void fn_802696D0(s16 *arg0, s16 *arg1) {
 }
 
 void fn_80269B04(s16 *x, s16 *y) {
-    u32 hcount, vcount0, vcount;
+    u32 vcount, vcount0, hcount;
     u32 hct, vct;
 
     vcount = __VIRegs[0x16] & 0x7FF;
