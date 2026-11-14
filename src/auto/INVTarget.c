@@ -5837,56 +5837,19 @@ s32 fn_80208AFC(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x104);
 }
 
-static inline void INV_setRankStr(u8 *arg0, s32 t) {
-    extern u8 lbl_803E7058[];
-    switch (t) {
-    case 0:
-    case 1:
-    case 2:
-    case 3:
-    case 4:
-    case 5:
-    case 6:
-    case 7:
-        INV_setStr(arg0 + 0xAC, lbl_803E7058);
-        break;
-    case -1:
-        INV_setStr(arg0 + 0xAC, NULL);
-        break;
-    }
-}
-
 void fn_80209608(u8 *arg0) {
     s32 fn_801DB18C(u8 *);
     M2C_UNK fn_801F53A0(void *);
     s32 fn_8020DD5C(s32);
-    INVHandle fn_8004C168();
-    extern u8 lbl_8041F94C[];
-    extern u8 lbl_803E7058[];
     extern u8 lbl_803E7014[];
     extern u8 lbl_803E706C[];
     extern u8 lbl_803E701C[];
     extern u8 lbl_803E7024[];
     extern u8 lbl_803E7034[];
-    INVHandle h;
 
     fn_801F5420((s32)(arg0 + 0x84));
-    switch (fn_8020DD5C(*(s32 *)(arg0 + 0x110))) {
-    case 0:
-    case 1:
-    case 2:
-    case 3:
-    case 4:
-    case 5:
-    case 6:
-    case 7:
-        INV_setStr(arg0 + 0xAC, lbl_803E7058);
-        break;
-    case -1:
-        INV_setStr(arg0 + 0xAC, NULL);
-        break;
-    }
-    fn_800F1B80(arg0 + 0xB4, (h = fn_8004C168(lbl_8041F94C, lbl_803E7014)).p != NULL ? (void *)*h.p : NULL);
+    INV_setRankStr(arg0, fn_8020DD5C(*(s32 *)(arg0 + 0x110)));
+    INV_setStr(arg0 + 0xB4, lbl_803E7014);
     if (*(s32 *)(arg0 + 0x120) & 1) {
         INV_setStr(arg0 + 0xB8, lbl_803E706C);
         INV_setStr(arg0 + 0xBC, lbl_803E701C);
