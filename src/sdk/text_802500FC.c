@@ -3978,7 +3978,7 @@ void fn_802718FC(u16 left, u16 top, u16 wd, u16 ht) {
 }
 
 void fn_80271978(u16 left, u16 top, u16 wd, u16 ht) {
-    extern u32 *__GXData;
+    extern void *__GXData;
     u32 *gx = __GXData;
 
     gx[0x1F0 / 4] = 0;
@@ -4441,26 +4441,22 @@ void fn_8027425C(u32 coord, u8 enable, u32 ss, u32 ts) {
 }
 
 void fn_802742D8(u32 coord, u32 s_enable, u32 t_enable) {
-    struct GXTsRegs {
-        u16 pad0;
-        u16 bpSentNot;
-        u8 pad1[0xB4];
-        u32 suTs0[8];
-        u32 suTs1[8];
-        u8 pad2[0x594 - 0xF8];
-        u32 tcsManEnab;
-    };
     extern void *__GXData;
-    struct GXTsRegs *gx = __GXData;
+    u32 *gx = __GXData;
+    u32 *ts;
+    u32 reg;
 
-    gx->suTs0[coord] = __rlwimi(gx->suTs0[coord], s_enable, 17, 14, 14);
-    gx->suTs1[coord] = __rlwimi(gx->suTs1[coord], t_enable, 17, 14, 14);
-    if (gx->tcsManEnab & (1 << coord)) {
+    ts = &gx[coord];
+    reg = ts[0xB8 / 4];
+    ts[0xB8 / 4] = __rlwimi(reg, s_enable, 17, 14, 14);
+    reg = ts[0xD8 / 4];
+    ts[0xD8 / 4] = __rlwimi(reg, t_enable, 17, 14, 14);
+    if (gx[0x594 / 4] & (1 << coord)) {
         GXWGFifo.u8 = 0x61;
-        GXWGFifo.u32 = gx->suTs0[coord];
+        GXWGFifo.u32 = ts[0xB8 / 4];
         GXWGFifo.u8 = 0x61;
-        GXWGFifo.u32 = gx->suTs1[coord];
-        gx->bpSentNot = 0;
+        GXWGFifo.u32 = ts[0xD8 / 4];
+        M2C_FIELD(gx, u16 *, 0x2) = 0;
     }
 }
 
@@ -5077,6 +5073,8 @@ s32 fn_80277720(void) {
     return lbl_804960D4;
 }
 
+#pragma push
+#pragma inline_depth(0)
 void fn_8027790C(void) {
     extern void (*lbl_804960CC)(s32, void *);
     void fn_80277A18(void);
@@ -5087,7 +5085,7 @@ void fn_8027790C(void) {
     fn_802546A8(0x19, (__OSInterruptHandler)fn_802779D8);
     fn_80254B48(0x40);
 }
-
+#pragma pop
 volatile u32 __EXIRegs[] : 0xCC006800;
 s32 fn_80277EB4(void *buf, s32 len, s32 mode);
 
