@@ -3556,6 +3556,43 @@ void fn_80269C78(u32 arg0, s32 arg1, s32 arg2) {
     fn_80269C04(arg1, arg2);
 }
 
+void fn_80269CB8(s32 chan) {
+    extern u32 lbl_80495FEC;
+    extern u32 lbl_80494ABC;
+    s32 fn_8025EB7C(s32, u32 *);
+    void fn_8025E9A0(u32);
+    u32 cmd;
+
+    lbl_80495FEC |= 0x80000000 >> chan;
+    fn_8025EB7C(chan, &cmd);
+    fn_8025E8FC(chan, lbl_80494ABC | 0x400000);
+    fn_8025E9A0(lbl_80495FEC);
+}
+
+void fn_80269D18(s32 chan) {
+    s32 fn_8025465C(void);
+    void fn_80254684(s32);
+    void fn_8025EA3C(u32);
+    extern u32 lbl_80495FEC;
+    extern u32 lbl_80495FF8;
+    extern u32 lbl_80495FFC;
+    extern u32 lbl_80496000;
+    extern u32 lbl_80496004;
+    s32 enabled;
+    u32 chanBit;
+
+    enabled = fn_8025465C();
+    chanBit = 0x80000000 >> chan;
+    fn_8025EA3C(chanBit);
+    lbl_80495FEC &= ~chanBit;
+    lbl_80495FF8 &= ~chanBit;
+    lbl_80495FFC &= ~chanBit;
+    lbl_80496000 &= ~chanBit;
+    lbl_80496004 &= ~chanBit;
+    fn_8025810C(chan, 0);
+    fn_80254684(enabled);
+}
+
 void fn_8026AD18(void) {
     M2C_UNK fn_8025F710();
     fn_8025F710();
