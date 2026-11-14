@@ -3,15 +3,6 @@
 
 extern void (*lbl_804940B0)(void);
 
-static inline void EyeToy_FlushPending(s32 *pending) {
-    void fn_800438D0(f32);
-    extern f32 lbl_804957B4;
-    if (*pending != 0) {
-        *pending = 0;
-        fn_800438D0(lbl_804957B4);
-    }
-}
-
 extern s32 lbl_804957B8;
 void fn_80041AB4(s32 *arg) {
     typedef struct { s32 size; s32 unk4; s32 unk8; f32 f0; f32 f1; f32 f2; f32 f3; } EyeToyParams;
