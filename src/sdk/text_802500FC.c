@@ -3309,6 +3309,19 @@ void fn_802716D8(u32 a) {
 }
 
 void fn_8027171C(u32 *a) {
+    extern u32 *__GXData;
+    u32 val = (__GXData[0x204 / 4] >> 14) & 3;
+    switch (val) {
+    case 1:
+        *a = 2;
+        break;
+    case 2:
+        *a = 1;
+        break;
+    default:
+        *a = val;
+        break;
+    }
 }
 
 void fn_80271760(u8 a) {
