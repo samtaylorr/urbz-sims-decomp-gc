@@ -2626,6 +2626,19 @@ s32 fn_80269134(void) {
 void fn_802698E8(u32 hct, u32 vct, s16 *x, s16 *y);
 volatile u16 __VIRegs[] : 0xCC002000;
 
+static void GetCurrentDisplayPosition(u32 *hct, u32 *vct) {
+    u32 hcount, vcount0, vcount;
+
+    vcount = __VIRegs[0x16] & 0x7FF;
+    do {
+        vcount0 = vcount;
+        hcount = __VIRegs[0x17] & 0x7FF;
+        vcount = __VIRegs[0x16] & 0x7FF;
+    } while (vcount0 != vcount);
+    *hct = hcount;
+    *vct = vcount;
+}
+
 void fn_802696D0(s16 *arg0, s16 *arg1) {
     extern s16 lbl_80495FAC;
     extern s16 lbl_80495FAE;
