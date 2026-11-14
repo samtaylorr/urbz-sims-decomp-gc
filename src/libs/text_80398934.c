@@ -253,6 +253,10 @@ static inline void **PtrVec_AllocateRef(u32 *n) {
     return NULL;
 }
 
+static inline void *PtrVec_AllocateByRef(u32 *n) {
+    return (*n > 0x80) ? (void *)fn_802D1FC8(*n) : fn_80399BE8(*n);
+}
+
 static inline void *PtrVec_AllocateElems(u32 n) {
     return PtrVec_Allocate(n * 4);
 }
