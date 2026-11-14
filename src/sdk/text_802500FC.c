@@ -2491,6 +2491,21 @@ s32 fn_802643B8(s32 arg0) {
     return temp_r0;
 }
 
+void fn_802643C8(void) {
+    s32 fn_8025465C(void);
+    void fn_80254684(s32);
+    extern s32 lbl_80495EDC;
+    extern s32 lbl_80495EE0;
+    s32 enabled;
+
+    enabled = fn_8025465C();
+    lbl_80495EDC = 1;
+    if (lbl_80495ED0 == NULL) {
+        lbl_80495EE0 = 1;
+    }
+    fn_80254684(enabled);
+}
+
 void fn_8026477C(void) {
     extern M2C_UNK lbl_80495EC8;
     fn_80259838(&lbl_80495EC8);
@@ -2846,12 +2861,14 @@ void fn_80266830(void) {
     s64 fn_8025A494(void);
     u32 reg;
     s64 resetStart;
+    u32 wait;
 
     __DIRegs[1] = 2;
     reg = __PIRegs[9];
     __PIRegs[9] = (reg & ~4) | 1;
     resetStart = fn_8025A494();
-    while ((fn_8025A494() - resetStart) < (s64)((12 * ((*(u32 *)0x800000F8 / 4) / 125000)) / 8))
+    wait = (12 * ((*(u32 *)0x800000F8 / 4) / 125000)) / 8;
+    while ((fn_8025A494() - resetStart) < wait)
         ;
     __PIRegs[9] = reg | 5;
     lbl_80495F58 = 1;
