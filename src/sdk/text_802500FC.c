@@ -5828,7 +5828,7 @@ void fn_8027533C(u32 stage, s32 op, u32 bias, u32 scale, u8 clamp, u32 out_reg) 
 }
 
 void fn_80275510(s32 stage, u32 sel) {
-    extern struct { u16 unk0; u16 bpSentNot; u8 pad4[0x1AC]; u32 tevKsel[8]; } *const __GXData;
+    extern struct { u16 unk0; u16 bpSentNot; u8 pad4[0x1AC]; u32 tevKsel[8]; } *__GXData;
     u32 *reg = &__GXData->tevKsel[stage >> 1];
 
     if (stage & 1) {
@@ -5836,8 +5836,8 @@ void fn_80275510(s32 stage, u32 sel) {
     } else {
         *reg = __rlwimi(*reg, sel, 4, 23, 27);
     }
-    *(volatile u8 *)0xCC008000 = 0x61;
-    *(volatile u32 *)0xCC008000 = *reg;
+    GXWGFifo.u8 = 0x61;
+    GXWGFifo.u32 = *reg;
     __GXData->bpSentNot = 0;
 }
 
