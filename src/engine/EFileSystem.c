@@ -571,8 +571,55 @@ s32 fn_802C5F64(void *self, s32 a, s32 b, s32 c) {
     return 0x80000000;
 }
 
+s32 fn_802C5F88(void *self, s32 a, u8 b, s32 c, s32 arg4) {
+    s32 fn_80248930(void *, s8 *, s32);
+    s8 *ext = (s8 *)arg4;
+    s32 r;
+
+    r = fn_802C5F64(self, M2C_FIELD(self, s32 *, 4), a, 8);
+    r |= fn_802C5F64(self, M2C_FIELD(self, s32 *, 8), b, 4);
+    if (r < 0) {
+        return r;
+    }
+    r |= fn_802C5F64(self, M2C_FIELD(self, s32 *, 0xC), c, 2);
+    r &= 0x7FFFFFFF;
+    if (ext != NULL && *ext != 0) {
+        if (*ext == 0x2E) {
+            ext++;
+        }
+        if (M2C_FIELD(self, s8 *, 0x10) != 0 && fn_80248930((char *)self + 0x10, ext, 3) == 0) {
+            r |= 1;
+        }
+    }
+    return r;
+}
+
 s32 fn_802C605C(s32 *self) {
     return *self;
+}
+
+s32 fn_802C6064(void *arg0, s32 arg1, u8 arg2, s32 arg3, s32 arg4) {
+    s32 fn_802C5F88(void *, s32, u8, s32, s32);
+    s32 fn_80240584(void);
+    s32 i;
+    s32 n = M2C_FIELD(arg0, s32 *, 8);
+    s32 best = -1;
+    s32 bestScore = -1;
+
+    for (i = 0; i < n; i++) {
+        s32 score = fn_802C5F88(M2C_FIELD(arg0, char **, 4) + i * 0x14, arg1, arg2, arg3, arg4);
+        if (score > bestScore) {
+            bestScore = score;
+            best = i;
+        }
+    }
+    if (best >= 0) {
+        return fn_802C605C((s32 *)(M2C_FIELD(arg0, char **, 4) + best * 0x14));
+    }
+    if (fn_80240584() != 0) {
+        *(s32 *)0 = 0;
+    }
+    return 0;
 }
 
 void fn_802C63E8(void *self, void **p) {
