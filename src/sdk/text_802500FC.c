@@ -3135,10 +3135,9 @@ void fn_80270D34(void) {
 
 void fn_80270DB4(void) {
     extern u8 *__GXData;
-    u8 *gx = __GXData;
-    *(volatile u8 *)0xCC008000 = 0x61;
-    *(volatile u32 *)0xCC008000 = *(u32 *)(gx + 0x1DC);
-    *(u16 *)(gx + 2) = 0;
+    GXWGFifo.u8 = 0x61;
+    GXWGFifo.u32 = *(u32 *)(__GXData + 0x1DC);
+    *(u16 *)(__GXData + 2) = 0;
 }
 
 void fn_80270DD8(void) {
