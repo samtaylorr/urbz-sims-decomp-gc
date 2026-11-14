@@ -413,14 +413,22 @@ s32 fn_8031112C(void *arg0, s32 arg1, s32 arg2, f32 thresh) {
     return __builtin_fabsf(d) >= thresh;
 }
 
-f32 fn_803111F0(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+f32 fn_803111F0(char *self, s32 arg1, s32 arg2, s32 arg3) {
     s32 fn_803119D4(void *, s32);
     extern const f32 lbl_803F22D8[];
+    struct Self {
+        u8 pad0[0x18C];
+        s32 a18C[2];
+        s32 a194[2][2];
+    };
+    struct Data {
+        u8 pad0[0x38];
+        f32 a38[2][2];
+    };
     s32 m;
     s32 idx;
-    s32 off;
 
-    m = fn_803119D4(arg0, arg3);
+    m = fn_803119D4(self, arg3);
     if (arg1 == 0) {
         if (m & 0xF0000) {
             return lbl_803F22D8[0];
@@ -431,12 +439,10 @@ f32 fn_803111F0(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
         }
     }
     idx = arg2;
-    if (*(s32 *)((char *)arg0 + 0x18C + arg1 * 4) != 0) {
+    if (((struct Self *)self)->a18C[arg1] != 0) {
         idx = !idx;
     }
-    off = idx * 4 + arg1 * 8;
-    return (f32)*(s32 *)((char *)arg0 + 0x194 + off) *
-           *(f32 *)((char *)M2C_FIELD(arg0, void **, 0x200) + 0x38 + off);
+    return (f32)((struct Self *)self)->a194[arg1][idx] * (*(struct Data **)(self + 0x200))->a38[arg1][idx];
 }
 
 void fn_803112BC(void *arg0) {
