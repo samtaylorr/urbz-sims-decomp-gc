@@ -264,6 +264,19 @@ void fn_80251224(void *alarm, s64 tick, void *handler) {
     fn_80254684(enabled);
 }
 
+void fn_8025128C(void *alarm, s64 time, void *handler) {
+    s32 fn_8025465C(void);
+    void fn_80254684(s32);
+    s64 fn_8025A4F8(s64);
+    void fn_80250FD4(void *, s64, void *);
+    s32 enabled;
+
+    enabled = fn_8025465C();
+    M2C_FIELD(alarm, s64 *, 0x18) = 0;
+    fn_80250FD4(alarm, fn_8025A4F8(time), handler);
+    fn_80254684(enabled);
+}
+
 void fn_80251714(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 4) = arg1;
 }
