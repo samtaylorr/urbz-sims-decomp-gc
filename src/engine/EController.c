@@ -368,12 +368,15 @@ s32 fn_8031112C(void *arg0, s32 arg1, s32 arg2, f32 thresh) {
     f32 fn_80310FFC(void *, s32, s32, s32);
     f32 fn_803111F0(void *, s32, s32, s32);
     f32 a;
+    f32 d;
     a = fn_80310FFC(arg0, arg1, 0, arg2);
-    if (__builtin_fabsf(a - fn_803111F0(arg0, arg1, 0, arg2)) >= thresh) {
+    d = a - fn_803111F0(arg0, arg1, 0, arg2);
+    if (__builtin_fabsf(d) >= thresh) {
         return 1;
     }
     a = fn_80310FFC(arg0, arg1, 1, arg2);
-    return __builtin_fabsf(a - fn_803111F0(arg0, arg1, 1, arg2)) >= thresh;
+    d = a - fn_803111F0(arg0, arg1, 1, arg2);
+    return __builtin_fabsf(d) >= thresh;
 }
 
 void fn_803112BC(void *arg0) {
