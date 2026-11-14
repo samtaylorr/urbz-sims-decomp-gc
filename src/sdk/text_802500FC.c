@@ -3033,6 +3033,30 @@ u16 fn_80270C44(void) {
 extern volatile u8 lbl_804960B8;
 extern u8 lbl_804960BC[8];
 void fn_80270C50(void) {
+    extern u8 *const __GXData;
+    s32 fn_8025465C(void);
+    void fn_80254684(s32);
+    void fn_802713FC(void);
+    void fn_8024FFA8(void);
+    s32 level;
+
+    level = fn_8025465C();
+    *(volatile u8 *)0xCC008000 = 0x61;
+    *(volatile u32 *)0xCC008000 = 0x45000002;
+    if (*(u32 *)(__GXData + 0x5AC)) {
+        fn_802713FC();
+    }
+    *(volatile u32 *)0xCC008000 = 0;
+    *(volatile u32 *)0xCC008000 = 0;
+    *(volatile u32 *)0xCC008000 = 0;
+    *(volatile u32 *)0xCC008000 = 0;
+    *(volatile u32 *)0xCC008000 = 0;
+    *(volatile u32 *)0xCC008000 = 0;
+    *(volatile u32 *)0xCC008000 = 0;
+    *(volatile u32 *)0xCC008000 = 0;
+    fn_8024FFA8();
+    lbl_804960B8 = 0;
+    fn_80254684(level);
 }
 
 void fn_80270CE8(void) {
