@@ -2890,6 +2890,15 @@ void fn_80263D08(DVDCommandBlock *block, u32 offset, u32 length, void *callback)
     fn_80262F24(2, block);
 }
 
+s32 fn_80263DC4(DVDCommandBlock *block, void *callback) {
+    s32 idle;
+
+    block->command = 0xF;
+    block->callback = callback;
+    idle = fn_80262F24(2, block);
+    return idle;
+}
+
 void fn_80264094(void) {
     extern M2C_UNK lbl_80495EC8;
     fn_80259838(&lbl_80495EC8);
