@@ -1221,6 +1221,30 @@ BOOL fn_80259B4C(u8 **queue, u8 *thread) {
     return FALSE;
 }
 
+void fn_8025A374(s32 index, void *ptr) {
+    u8 *thread = *(u8 **)0x800000E4;
+
+    if (thread == NULL) {
+        return;
+    }
+    if (index < 0 || index >= 2) {
+        return;
+    }
+    M2C_FIELD(thread + index * 4, void **, 0x310) = ptr;
+}
+
+void *fn_8025A3A4(s32 index) {
+    u8 *thread = *(u8 **)0x800000E4;
+
+    if (thread == NULL) {
+        return NULL;
+    }
+    if (index < 0 || index >= 2) {
+        return NULL;
+    }
+    return M2C_FIELD(thread + index * 4, void **, 0x310);
+}
+
 u32 fn_8025A3F4(void) {
     return __mftb();
 }
@@ -2571,6 +2595,9 @@ s32 fn_80269134(void) {
     return lbl_80495F8C;
 }
 
+void fn_802698E8(u32 hct, u32 vct, s16 *x, s16 *y);
+volatile u16 __VIRegs[] : 0xCC002000;
+
 void fn_802696D0(s16 *arg0, s16 *arg1) {
     extern s16 lbl_80495FAC;
     extern s16 lbl_80495FAE;
@@ -2580,8 +2607,6 @@ void fn_802696D0(s16 *arg0, s16 *arg1) {
     fn_80254684();
 }
 
-void fn_802698E8(u32 hct, u32 vct, s16 *x, s16 *y);
-volatile u16 __VIRegs[] : 0xCC002000;
 void fn_80269B64(u32 arg0) {
     u32 reg;
 
@@ -3767,16 +3792,15 @@ void fn_802728D0(void *arg0, f32 *arg1, f32 *arg2, f32 *arg3) {
 
 void fn_802729DC(void *lt_obj, f32 px, f32 py, f32 pz, f32 nx, f32 ny, f32 nz) {
     extern f32 lbl_804975A0;
-    f32 x, y, z;
     M2C_FIELD(lt_obj, f32 *, 0x34) = nx;
     M2C_FIELD(lt_obj, f32 *, 0x38) = ny;
     M2C_FIELD(lt_obj, f32 *, 0x3C) = nz;
-    x = lbl_804975A0 * px;
-    y = lbl_804975A0 * py;
-    z = lbl_804975A0 * pz;
-    M2C_FIELD(lt_obj, f32 *, 0x28) = x;
-    M2C_FIELD(lt_obj, f32 *, 0x2C) = y;
-    M2C_FIELD(lt_obj, f32 *, 0x30) = z;
+    px *= lbl_804975A0;
+    py *= lbl_804975A0;
+    pz *= lbl_804975A0;
+    M2C_FIELD(lt_obj, f32 *, 0x28) = px;
+    M2C_FIELD(lt_obj, f32 *, 0x2C) = py;
+    M2C_FIELD(lt_obj, f32 *, 0x30) = pz;
 }
 
 void fn_80272A08(void *arg0, s32 *arg1) {
