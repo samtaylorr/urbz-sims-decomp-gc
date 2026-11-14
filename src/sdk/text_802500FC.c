@@ -1901,6 +1901,8 @@ BOOL fn_8025B434(OSThread_ *thread) {
     return TRUE;
 }
 
+volatile u32 __EXIChanRegs[] : 0xCC006800;
+
 u32 fn_8025BD24(s32 chan, BOOL exi, BOOL tc, BOOL ext) {
     extern volatile u32 __EXIRegs[];
     u32 cpr;
@@ -4668,6 +4670,7 @@ void fn_8026F0B0(void) {
     u32 nNrm;
     u32 nCols;
     u32 nTex;
+    u8 *gx;
 
     if (__GXData[0x4D5]) {
         nNrm = 2;
@@ -4676,14 +4679,15 @@ void fn_8026F0B0(void) {
     } else {
         nNrm = 0;
     }
+    gx = __GXData;
     nCols = 33 - __cntlzw((*(u32 *)(__GXData + 0x14) >> 13) & 0xF);
     nCols /= 2;
-    *(volatile u8 *)0xCC008000 = 0x10;
-    nTex = 33 - __cntlzw(*(u32 *)(__GXData + 0x18) & 0xFFFF);
+    nTex = 33 - __cntlzw(*(u32 *)(gx + 0x18) & 0xFFFF);
     nTex /= 2;
+    *(volatile u8 *)0xCC008000 = 0x10;
     *(volatile u32 *)0xCC008000 = 0x1008;
     *(volatile u32 *)0xCC008000 = nCols | (nNrm << 2) | (nTex << 4);
-    *(u16 *)(__GXData + 2) = 1;
+    *(u16 *)(gx + 2) = 1;
 }
 
 void fn_8026F630(void) {
