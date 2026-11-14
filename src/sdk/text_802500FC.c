@@ -3056,7 +3056,7 @@ void fn_80264404(void) {
 
     enabled = fn_8025465C();
     lbl_80495EDC = 0;
-    if (lbl_80495EE0) {
+    if (*(volatile s32 *)&lbl_80495EE0) {
         lbl_80495EE0 = 0;
         fn_802622E0();
     }
@@ -3155,6 +3155,23 @@ DVDCommandBlock *fn_80264CE4(s32 prio) {
     block->next = NULL;
     block->prev = NULL;
     return block;
+}
+
+DVDCommandBlock *fn_80264D48(void) {
+    s32 enabled;
+    u32 i;
+    DVDCommandBlock *q;
+
+    enabled = fn_8025465C();
+    for (i = 0; i < 4; i++) {
+        q = (DVDCommandBlock *)&lbl_804429B8[i];
+        if (q->next != q) {
+            fn_80254684(enabled);
+            return fn_80264CE4(i);
+        }
+    }
+    fn_80254684(enabled);
+    return NULL;
 }
 
 s32 fn_80264DE8(void) {
