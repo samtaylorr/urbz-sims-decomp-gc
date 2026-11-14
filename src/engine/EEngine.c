@@ -339,8 +339,8 @@ s32 fn_802E0D34(u8 *self) {
     extern u8 lbl_80452418[];
     extern s32 lbl_80496194;
     void fn_802D0F9C(void *);
-    void fn_802E13B4();
-    void fn_802E13B8();
+    void fn_802E13B4(void);
+    void fn_802E13B8(void);
     void fn_802DFB40(void);
     void fn_802D838C(void *);
     void fn_80363724(void);
@@ -349,9 +349,9 @@ s32 fn_802E0D34(u8 *self) {
 
     fn_802D0F9C(self);
     ((void (*)(void *))fn_802E0D30)(self);
-    fn_802E13B4(self);
+    ((void (*)(void *))fn_802E13B4)(self);
     ((void (*)(void *))fn_802E0D30)(self);
-    fn_802E13B8(self);
+    ((void (*)(void *))fn_802E13B8)(self);
     ((void (*)(void *))fn_802E0D30)(self);
     vt = *(u8 **)self;
     if ((*(s32 (**)(void *))(vt + 0x8C))(self + *(s16 *)(vt + 0x88)) == 0) {
