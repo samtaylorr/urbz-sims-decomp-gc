@@ -5837,6 +5837,25 @@ s32 fn_80208AFC(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x104);
 }
 
+static inline void INV_setRankStr(u8 *arg0, s32 t) {
+    extern u8 lbl_803E7058[];
+    switch (t) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+        INV_setStr(arg0 + 0xAC, lbl_803E7058);
+        break;
+    case -1:
+        INV_setStr(arg0 + 0xAC, NULL);
+        break;
+    }
+}
+
 void fn_80209608(u8 *arg0) {
     s32 fn_801DB18C(u8 *);
     M2C_UNK fn_801F53A0(void *);
@@ -5899,13 +5918,16 @@ void fn_8020A500(u8 *arg0) {
     extern u8 lbl_803E6F74[];
     extern u8 lbl_803E7034[];
     INVHandle h1, h3;
+    void *s;
     s32 zero;
 
-    fn_800F1B80(arg0 + 0xAC, (h1 = fn_8004C168(lbl_8041F94C, lbl_803E718C)).p != NULL ? (void *)*h1.p : NULL);
-    switch ((s32)arg0) {
-    default:
-        INV_setStr(arg0 + 0xB4, lbl_803E70E8);
+    h1 = fn_8004C168(lbl_8041F94C, lbl_803E718C);
+    s = NULL;
+    if (h1.p != NULL) {
+        s = (void *)*h1.p;
     }
+    fn_800F1B80(arg0 + 0xAC, s);
+    INV_setStr(arg0 + 0xB4, lbl_803E70E8);
     fn_800F1B80(arg0 + 0xB8, (h3 = fn_8004C168(lbl_8041F94C, lbl_803E70EC)).p != NULL ? (void *)*h3.p : NULL);
     fn_800F1B80(arg0 + 0xBC, lbl_803E6F74);
     zero = 0;
@@ -6031,7 +6053,7 @@ void fn_8020ECF8(u8 *arg0) {
     s32 zero;
 
     fn_800F1B80(arg0 + 0xAC, (h1 = fn_8004C168(lbl_8041F94C, lbl_803E791C)).p != NULL ? (void *)*h1.p : NULL);
-    fn_800F1B80(arg0 + 0xB4, (h2 = fn_8004C168((u8 *)((u32)lbl_8041F94C), lbl_803E77A0)).p != NULL ? (void *)*h2.p : NULL);
+    fn_800F1B80(arg0 + 0xB4, (h2 = fn_8004C168(lbl_8041F94C, lbl_803E77A0)).p != NULL ? (void *)*h2.p : NULL);
     fn_800F1B80(arg0 + 0xB8, (h3 = fn_8004C168(lbl_8041F94C, lbl_803E77A4)).p != NULL ? (void *)*h3.p : NULL);
     fn_800F1B80(arg0 + 0xBC, lbl_803E72BC);
     zero = 0;
@@ -8554,7 +8576,7 @@ void *fn_80232298(void *self, u32 key) {
     typedef struct { u32 key; u8 data[0x7C]; } Ent;
     typedef struct { Ent *begin; Ent *end; } Vec;
     Vec *v;
-    u32 *k = &key;
+    u32 *k;
     Ent *first;
     s32 len;
     Ent *it;
@@ -8563,23 +8585,24 @@ void *fn_80232298(void *self, u32 key) {
         return NULL;
     }
     v = (Vec *)((u8 *)self + 8);
+    k = &key;
     first = v->begin;
     len = v->end - first;
     while (len > 0) {
         s32 half = len >> 1;
         Ent *mid = first + half;
-        if (mid->key < key) {
+        if (mid->key >= key) {
+            len = half;
+        } else {
             first = mid + 1;
             len = len - half - 1;
-        } else {
-            len = half;
         }
     }
     it = first;
     if (it != v->end && *k < it->key) {
         it = v->end;
     }
-    if (it == v->end) {
+    if (it == M2C_FIELD(self, Ent **, 0xC)) {
         return NULL;
     }
     return it->data;
