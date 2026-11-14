@@ -1208,6 +1208,32 @@ void fn_80257894(s32 arg0) {
     }
 }
 
+u16 fn_80258088(s32 chan) {
+    extern SramControlBlock lbl_80440C00;
+    s32 fn_802572CC(s32, s32);
+    SramControlBlock *scb;
+    u8 *sram;
+    s32 enabled;
+    s32 *locked;
+    u16 id;
+    u8 pad[8];
+
+    scb = &lbl_80440C00;
+    enabled = fn_8025465C();
+    locked = &scb->locked;
+    if (*locked != 0) {
+        fn_80254684(enabled);
+        sram = NULL;
+    } else {
+        scb->enabled = enabled;
+        *locked = 1;
+        sram = scb->sram + 0x14;
+    }
+    id = ((u16 *)(sram + 0x1C))[chan];
+    fn_802572CC(0, 0x14);
+    return id;
+}
+
 static inline u8 *LockSram(u32 offset) {
     extern SramControlBlock lbl_80440C00;
     SramControlBlock *scb = &lbl_80440C00;
