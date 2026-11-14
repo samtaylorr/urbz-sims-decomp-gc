@@ -3007,7 +3007,10 @@ u16 fn_80270C44(void) {
 }
 
 extern volatile u8 lbl_804960B8;
-extern u8 lbl_804960BC[];
+extern u8 lbl_804960BC[8];
+void fn_80270C50(void) {
+}
+
 void fn_80270CE8(void) {
     s32 fn_8025465C(void);
     void fn_80254684(s32);
