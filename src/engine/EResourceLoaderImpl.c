@@ -194,7 +194,7 @@ void fn_8031CE6C(char *self, s32 arg1) {
         fn_802D8328(e);
         fn_802D8260(e, 2);
     }
-    while (M2C_FIELD(self, s32 *, 0x3E4) == 0) {
+    while (*(volatile s32 *)(self + 0x3E4) == 0) {
     }
 }
 
@@ -314,6 +314,8 @@ void fn_8031D454(char *self, s32 arg1, s32 arg2) {
         vt = M2C_FIELD(self, void **, 0);
         r = ((s32 (*)(void *))M2C_FIELD(vt, void **, 0x2C))(self + M2C_FIELD(vt, s16 *, 0x28));
         if (r != 0) {
+            fn_8033789C(arg1, arg2);
+        } else {
             msg = fn_8031C7B4(fn_802D1FC8(0x28));
             msg[0] = 4;
             msg[2] = arg2;
@@ -323,8 +325,6 @@ void fn_8031D454(char *self, s32 arg1, s32 arg2) {
             msg[5] = r;
             msg[8] = r;
             fn_8031D084((s32)self, msg);
-        } else {
-            fn_8033789C(arg1, arg2);
         }
     }
 }
