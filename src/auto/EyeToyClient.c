@@ -3,11 +3,12 @@
 
 extern void (*lbl_804940B0)(void);
 
-static inline void EyeToy_FlushPending(s32 *pending, f32 value) {
+static inline void EyeToy_FlushPending(s32 *pending) {
     void fn_800438D0(f32);
+    extern f32 lbl_804957B4;
     if (*pending != 0) {
         *pending = 0;
-        fn_800438D0(value);
+        fn_800438D0(lbl_804957B4);
     }
 }
 
@@ -425,6 +426,7 @@ s32 fn_80043228(void) {
 
 s32 fn_80043230(void) {
     s32 fn_803390AC(s32, void (*)(s32), s32, s32, void (*)(void));
+    void fn_800438D0(f32);
     extern s32 lbl_804957B0;
     extern f32 lbl_804957B4;
     extern s32 lbl_8049409C;
@@ -439,7 +441,13 @@ s32 fn_80043230(void) {
         idx = fn_8004200C();
         if (idx != -1) {
             lbl_8049407C = fn_803390AC(idx, fn_80041FCC, 1, 0, fn_80042A68);
-            EyeToy_FlushPending(&lbl_804957B0, lbl_804957B4);
+            {
+                s32 *p = &lbl_804957B0;
+                if (*p != 0) {
+                    *p = 0;
+                    fn_800438D0(lbl_804957B4);
+                }
+            }
         }
     }
     return lbl_804940A8 != 0 && lbl_804957AC != 0 && lbl_8049407C != -1;
