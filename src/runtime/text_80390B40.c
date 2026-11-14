@@ -112,12 +112,12 @@ void fn_803985F0(void) {
 
 void fn_8039861C(void) {
     extern void *lbl_80496618;
-    u32 i;
     u32 rem = M2C_FIELD(lbl_80496618, u32 *, 8) & 31;
 
     if (rem != 0) {
-        for (i = rem; i < 32; i++) {
+        while (rem < 32) {
             *M2C_FIELD(lbl_80496618, u8 **, 8)++ = 0;
+            rem++;
         }
     }
 }
