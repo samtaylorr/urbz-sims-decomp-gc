@@ -1227,6 +1227,18 @@ void fn_80256934(u8 arg0) {
     fn_80254684(enabled);
 }
 
+void fn_80256EF8(void) {
+    extern u8 lbl_80440C00[];
+    s32 fn_80256F58(u8 *, u32, u32);
+    u8 *scb = lbl_80440C00;
+    u32 *offset = (u32 *)(scb + 0x40);
+
+    *(s32 *)(scb + 0x4C) = fn_80256F58(scb + *offset, *offset, 0x40 - *offset);
+    if (*(s32 *)(scb + 0x4C) != 0) {
+        *offset = 0x40;
+    }
+}
+
 u8 *fn_802571AC(u32 offset) {
     extern u8 lbl_80440C00[];
     u8 *scb = lbl_80440C00;
@@ -4184,6 +4196,27 @@ s32 fn_8026B6EC(s32 arg0, s32 *arg1) {
         return 0;
     }
     return 1;
+}
+
+void fn_8026B7C4(u32 mode) {
+    s32 fn_8025465C(void);
+    void fn_80254684(s32);
+    void fn_8025EA3C(u32);
+    extern u32 lbl_80495FEC;
+    extern u32 lbl_80495FF8;
+    extern u32 lbl_80495FFC;
+    extern u32 lbl_80494ABC;
+    s32 enabled;
+    u32 mask;
+
+    enabled = fn_8025465C();
+    lbl_80494ABC = mode << 8;
+    mask = lbl_80495FEC;
+    lbl_80495FEC &= ~mask;
+    lbl_80495FF8 &= ~mask;
+    lbl_80495FFC &= ~mask;
+    fn_8025EA3C(mask);
+    fn_80254684(enabled);
 }
 
 static inline s32 PADSync(void) {
