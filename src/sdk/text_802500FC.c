@@ -1398,6 +1398,21 @@ BOOL fn_8025B3FC(OSThread_ *thread) {
     return FALSE;
 }
 
+BOOL fn_8025B434(OSThread_ *thread) {
+    BOOL fn_8025B2FC(OSMutex_ *);
+    OSMutex_ *mutex;
+
+    for (mutex = thread->head; mutex; mutex = mutex->next) {
+        if (mutex->thread != thread) {
+            return FALSE;
+        }
+        if (!fn_8025B2FC(mutex)) {
+            return FALSE;
+        }
+    }
+    return TRUE;
+}
+
 #pragma push
 #pragma scheduling off
 s32 fn_8025C2BC(s32 chan) {
@@ -3863,30 +3878,33 @@ void __GXFlushTextureState(void) {
 }
 
 void fn_802751C0(s32 id, u32 mode) {
-    extern u8 *__GXData;
-    extern u32 lbl_803FB248[4][5];
+    extern void *__GXData;
+    extern u32 lbl_803FB248[];
+    u32 *tbl = lbl_803FB248;
+    u8 *gx;
     u32 *ctmp;
     u32 *atmp;
+    u32 *regs;
     u32 tevReg;
 
     if (id == 0) {
-        ctmp = lbl_803FB248[0] + mode;
-        atmp = lbl_803FB248[2] + mode;
+        ctmp = tbl + mode;
+        atmp = tbl + 10 + mode;
     } else {
-        ctmp = lbl_803FB248[1] + mode;
-        atmp = lbl_803FB248[3] + mode;
+        ctmp = tbl + 5 + mode;
+        atmp = tbl + 15 + mode;
     }
-    tevReg = ((u32 *)(__GXData + 0x130))[id];
-    tevReg = (*ctmp & ~0xFF000000) | (tevReg & 0xFF000000);
+    gx = __GXData;
+    regs = (u32 *)(gx + id * 4);
+    tevReg = (*ctmp & ~0xFF000000) | (regs[0x130 / 4] & 0xFF000000);
     GXWGFifo.u8 = 0x61;
     GXWGFifo.u32 = tevReg;
-    ((u32 *)(__GXData + 0x130))[id] = tevReg;
-    tevReg = ((u32 *)(__GXData + 0x170))[id];
-    tevReg = (*atmp & ~0xFF00000F) | (tevReg & 0xFF00000F);
+    regs[0x130 / 4] = tevReg;
+    tevReg = (*atmp & ~0xFF00000F) | (regs[0x170 / 4] & 0xFF00000F);
     GXWGFifo.u8 = 0x61;
     GXWGFifo.u32 = tevReg;
-    ((u32 *)(__GXData + 0x170))[id] = tevReg;
-    *(u16 *)(__GXData + 2) = 0;
+    regs[0x170 / 4] = tevReg;
+    *(u16 *)(gx + 2) = 0;
 }
 
 void fn_80275690(void) {
