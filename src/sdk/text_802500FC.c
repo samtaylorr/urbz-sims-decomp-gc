@@ -1375,23 +1375,23 @@ void fn_80257CB4(u32 mode) {
 u8 fn_80257D64(void) {
     extern SramControlBlock lbl_80440C00;
     s32 fn_802572CC(s32, s32);
-    u8 *sram;
+    SramControlBlock *scb;
     s32 enabled;
     s32 *locked;
     u8 language;
     u8 pad[8];
 
+    scb = &lbl_80440C00;
     enabled = fn_8025465C();
-    locked = &lbl_80440C00.locked;
+    locked = &scb->locked;
     if (*locked != 0) {
         fn_80254684(enabled);
-        sram = NULL;
+        scb = NULL;
     } else {
-        lbl_80440C00.enabled = enabled;
+        scb->enabled = enabled;
         *locked = 1;
-        sram = lbl_80440C00.sram;
     }
-    language = sram[0x12];
+    language = scb->sram[0x12];
     fn_802572CC(0, 0);
     return language;
 }
@@ -3635,26 +3635,26 @@ void fn_8026588C(void) {
 
 s32 fn_802658CC(void) {
     typedef struct {
-        s32 type;
-        s32 a;
-        s32 b;
-        s32 c;
-        s32 d;
+        s32 command;
+        s32 addr;
+        s32 length;
+        s32 offset;
+        s32 callback;
     } Cmd;
     extern s32 lbl_80442A48[];
     extern s32 lbl_80495F84;
     void fn_80265D98(s32, s32, s32, s32);
     s32 fn_80266358(u32 offset, void (*cb)(s32));
-    Cmd *cmd = &((Cmd *)lbl_80442A48)[lbl_80495F84];
+    Cmd *list = (Cmd *)lbl_80442A48;
+    s32 n = lbl_80495F84;
 
-    switch (cmd->type) {
-    case 1:
-        lbl_80495F84++;
-        fn_80265D98(cmd->a, cmd->b, cmd->c, cmd->d);
+    if (list[n].command == 1) {
+        ++lbl_80495F84;
+        fn_80265D98(list[n].addr, list[n].length, list[n].offset, list[n].callback);
         return 1;
-    case 2:
-        lbl_80495F84++;
-        fn_80266358(cmd->c, (void (*)(s32))cmd->d);
+    } else if (list[n].command == 2) {
+        ++lbl_80495F84;
+        fn_80266358(list[n].offset, (void (*)(s32))list[n].callback);
         return 1;
     }
     return 0;
@@ -6641,23 +6641,24 @@ void fn_80275420(u32 id, s16 *color) {
     extern void *__GXData;
     u32 regRA;
     u32 regBG;
+    u32 reg;
 
     regRA = 0;
-    regRA = (regRA & ~0x7FF) | (color[0] & 0x7FF);
-    regRA = (regRA & ~0x7FF000) | ((color[3] & 0x7FF) << 12);
-    regRA = (regRA & ~0xFF000000) | ((id * 2 + 0xE0) << 24);
+    regRA = __rlwimi(regRA, color[0], 0, 21, 31);
+    regRA = __rlwimi(regRA, color[3], 12, 9, 19);
     regBG = 0;
-    regBG = (regBG & ~0x7FF) | (color[2] & 0x7FF);
-    regBG = (regBG & ~0x7FF000) | ((color[1] & 0x7FF) << 12);
-    regBG = (regBG & ~0xFF000000) | ((id * 2 + 0xE1) << 24);
+    regBG = __rlwimi(regBG, color[2], 0, 21, 31);
+    regBG = __rlwimi(regBG, color[1], 12, 9, 19);
     GXWGFifo.u8 = 0x61;
-    GXWGFifo.u32 = regRA;
+    reg = __rlwimi(regRA, id * 2 + 0xE0, 24, 0, 7);
+    GXWGFifo.u32 = reg;
     GXWGFifo.u8 = 0x61;
-    GXWGFifo.u32 = regBG;
+    reg = __rlwimi(regBG, id * 2 + 0xE1, 24, 0, 7);
+    GXWGFifo.u32 = reg;
     GXWGFifo.u8 = 0x61;
-    GXWGFifo.u32 = regBG;
+    GXWGFifo.u32 = reg;
     GXWGFifo.u8 = 0x61;
-    GXWGFifo.u32 = regBG;
+    GXWGFifo.u32 = reg;
     M2C_FIELD(__GXData, u16 *, 0x2) = 0;
 }
 #pragma pop
