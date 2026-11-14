@@ -17,6 +17,13 @@ static inline Vec3f *Vec3f_Splat(Vec3f *v, f32 s) {
     return v;
 }
 
+static inline Vec3f *Vec3f_Fill(Vec3f *v, f32 s) {
+    v->x = s;
+    v->y = s;
+    v->z = s;
+    return v;
+}
+
 static inline s32 EGraphics_ToBool(s32 x) {
     s32 t = 0;
     if (x) t = 1;
@@ -65,22 +72,21 @@ s32 fn_802ED904(char *self) {
     extern const f32 lbl_803F0BEC[];
     extern char *lbl_80495220;
     Vec3f v;
+    Vec3f *p;
     char *vt;
     char *obj;
-    s32 t;
     *(s32 *)(self + 8) = 1;
-    Vec3f_Set(&v, lbl_803F0BEC[0], lbl_803F0BEC[0], lbl_803F0BEC[0]);
+    p = &v;
+    p->x = lbl_803F0BEC[0];
+    p->y = lbl_803F0BEC[0];
+    p->z = lbl_803F0BEC[0];
     vt = *(char **)self;
-    (*(void (**)(void *, Vec3f *, s32, s32))(vt + 0x4C))(self + *(s16 *)(vt + 0x48), &v, 0xFF, 1);
+    (*(void (**)(void *, Vec3f *, s32, s32))(vt + 0x4C))(self + *(s16 *)(vt + 0x48), p, 0xFF, 1);
     vt = *(char **)self;
     (*(void (**)(void *))(vt + 0x214))(self + *(s16 *)(vt + 0x210));
     obj = lbl_80495220;
     vt = *(char **)(obj + 0x338);
-    t = 0;
-    if ((*(s32 (**)(void *))(vt + 0x1C))(obj + *(s16 *)(vt + 0x18)) != 0) {
-        t = 1;
-    }
-    return t;
+    return EGraphics_ToBool((*(s32 (**)(void *))(vt + 0x1C))(obj + *(s16 *)(vt + 0x18)));
 }
 
 void fn_802ED9B4(char *self) {
@@ -380,27 +386,26 @@ void fn_802EE4F4(void *arg0, s32 arg1) {
 }
 
 void fn_802EE570(char *self, f32 *out, f32 *rect) {
-    extern f32 lbl_803F0C00[];
-    extern f32 lbl_803F0C04[];
-    extern f32 lbl_803F0C08[];
+    extern const f32 lbl_803F0C00[];
+    extern const f32 lbl_803F0C04[];
+    extern const f32 lbl_803F0C08[];
     char *vt = *(char **)self;
     f32 a = (*(f32 (**)(void *))(vt + 0x11C))(self + *(s16 *)(vt + 0x118));
     f32 b;
     f32 w, h, d;
     vt = *(char **)self;
     b = (*(f32 (**)(void *))(vt + 0x124))(self + *(s16 *)(vt + 0x120));
-    a = a - b;
     h = (rect[3] - rect[1]) * lbl_803F0C00[0];
     w = (rect[2] - rect[0]) * lbl_803F0C00[0];
+    d = (a - b) * lbl_803F0C00[0];
     out[1] = -h;
     out[0] = w;
-    d = a * lbl_803F0C00[0];
-    out[2] = d;
-    out[3] = lbl_803F0C04[0];
     out[4] = w + rect[0];
     out[5] = h + rect[1];
     out[6] = b + d;
     out[7] = lbl_803F0C08[0];
+    out[2] = d;
+    out[3] = lbl_803F0C04[0];
 }
 
 void fn_802EE654(char *self) {
