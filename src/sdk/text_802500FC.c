@@ -4290,6 +4290,17 @@ void fn_80270384(void) {
     *(s8 *)0xCC008000 = 0x48;
 }
 
+void fn_80270614(u8 nTexGens) {
+    extern void *__GXData;
+    u32 *gx = __GXData;
+
+    gx[0x204 / 4] = __rlwimi(gx[0x204 / 4], nTexGens, 0, 28, 31);
+    *(volatile u8 *)0xCC008000 = 0x10;
+    *(volatile u32 *)0xCC008000 = 0x103F;
+    *(volatile u32 *)0xCC008000 = nTexGens;
+    gx[0x5AC / 4] |= 4;
+}
+
 void fn_80270740(void) {
     M2C_UNK PPCMtwpar(M2C_UNK);
     s32 fn_802500C0();
