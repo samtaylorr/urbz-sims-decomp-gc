@@ -166,7 +166,10 @@ M2C_UNK fn_803233D4(void *arg0) {
 
     if (i < M2C_FIELD(arg0, List **, 0x60)->count) {
         do {
-            s32 *item = M2C_FIELD(arg0, List **, 0x60)->items[i];
+            s32 **pp = M2C_FIELD(arg0, List **, 0x60)->items;
+            s32 *item;
+            pp += i;
+            item = *pp;
             if (item[2] == 0) {
                 item[2] = fn_8033740C(lbl_8045BA40, item[1], 0, 0);
             }
