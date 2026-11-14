@@ -2410,6 +2410,18 @@ s32 fn_80266358(u32 offset, void (*cb)(s32)) {
     return 1;
 }
 
+s32 fn_802663EC(void (*cb)(void)) {
+    extern void (*lbl_80495F48)(void);
+    extern s32 lbl_80495F40;
+    extern s32 lbl_80495F5C;
+
+    lbl_80495F48 = cb;
+    lbl_80495F5C = 1;
+    lbl_80495F40 = 0;
+    __DIRegs[1] = 2;
+    return 1;
+}
+
 s32 fn_80266418(void *diskID, void (*cb)(s32)) {
     extern void (*lbl_80495F48)(s32);
     extern s32 lbl_80495F40;
@@ -2578,14 +2590,13 @@ void fn_80269B64(u32 arg0) {
 }
 
 s32 fn_80269B90(s16 *x, s16 *y) {
-    volatile u16 *regs = (volatile u16 *)0xCC002000;
     u32 hcount, vcount;
 
-    if (regs[0x20] & 0x8000) {
-        vcount = regs[0x20] & 0x7FF;
-        hcount = regs[0x21] & 0x7FF;
-        regs[0x20] = 0;
-        regs[0x21] = 0;
+    if (__VIRegs[0x20] >> 15 & 1) {
+        vcount = __VIRegs[0x20] & 0x7FF;
+        hcount = __VIRegs[0x21] & 0x7FF;
+        __VIRegs[0x20] = 0;
+        __VIRegs[0x21] = 0;
         fn_802698E8(hcount, vcount, x, y);
         return 1;
     }
@@ -3755,12 +3766,16 @@ void fn_802728D0(void *arg0, f32 *arg1, f32 *arg2, f32 *arg3) {
 
 void fn_802729DC(void *lt_obj, f32 px, f32 py, f32 pz, f32 nx, f32 ny, f32 nz) {
     extern f32 lbl_804975A0;
+    f32 x, y, z;
     M2C_FIELD(lt_obj, f32 *, 0x34) = nx;
     M2C_FIELD(lt_obj, f32 *, 0x38) = ny;
     M2C_FIELD(lt_obj, f32 *, 0x3C) = nz;
-    M2C_FIELD(lt_obj, f32 *, 0x28) = lbl_804975A0 * px;
-    M2C_FIELD(lt_obj, f32 *, 0x2C) = lbl_804975A0 * py;
-    M2C_FIELD(lt_obj, f32 *, 0x30) = lbl_804975A0 * pz;
+    x = lbl_804975A0 * px;
+    y = lbl_804975A0 * py;
+    z = lbl_804975A0 * pz;
+    M2C_FIELD(lt_obj, f32 *, 0x28) = x;
+    M2C_FIELD(lt_obj, f32 *, 0x2C) = y;
+    M2C_FIELD(lt_obj, f32 *, 0x30) = z;
 }
 
 void fn_80272A08(void *arg0, s32 *arg1) {
