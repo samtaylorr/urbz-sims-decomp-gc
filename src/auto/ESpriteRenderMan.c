@@ -67,51 +67,54 @@ void fn_8003FC04(void) {
 
 void fn_800402BC(s32 arg0, void *arg1);
 void *fn_8003FC08(void *self) {
-    s32 *sub;
+    typedef struct { s32 a[11]; f32 f2c; f32 f30; s32 x34; } Sub;
+    typedef struct { s32 u[0x29]; Sub sub; s32 pad[3]; void *vt; } Obj;
+    extern f32 lbl_803C5F5C[];
+    Obj *o = self;
+    Sub *s;
 
-    M2C_FIELD(self, void **, 0xE8) = lbl_80407F88;
-    sub = (s32 *)((u8 *)self + 0xA4);
-    sub[0] = 0;
-    sub[1] = 0;
-    sub[2] = 0;
-    sub[3] = 0;
-    sub[4] = 0;
-    sub[5] = 0;
-    sub[6] = 0;
-    sub[7] = 0;
-    sub[8] = 0;
-    sub[9] = 0;
-    sub[10] = 0;
-    sub[13] = 0;
-    ((f32 *)sub)[12] = 0.0f;
-    ((f32 *)sub)[11] = 0.0f;
-    M2C_FIELD(self, s32 *, 0x0) = 0;
-    M2C_FIELD(self, s32 *, 0x4) = 0;
-    M2C_FIELD(self, s32 *, 0x8) = 0;
-    M2C_FIELD(self, s32 *, 0x10) = 0;
-    M2C_FIELD(self, s32 *, 0x34) = 0;
-    M2C_FIELD(self, s32 *, 0x18) = 0;
-    M2C_FIELD(self, s32 *, 0x20) = 0;
-    sub[0] = 0;
-    sub[1] = 0;
-    sub[2] = 0;
-    sub[3] = 0;
-    sub[4] = 0;
-    sub[5] = 0;
-    sub[6] = 0;
-    sub[7] = 0;
-    sub[8] = 0;
-    sub[9] = 0;
-    sub[13] = 0;
-    sub[5] = (s32)fn_800402BC;
-    M2C_FIELD(self, s32 *, 0x30) = 0;
-    sub[6] = (s32)self;
-    M2C_FIELD(self, s32 *, 0xC) = 0;
-    M2C_FIELD(self, s32 *, 0x14) = 0;
-    M2C_FIELD(self, s32 *, 0x1C) = 0;
-    M2C_FIELD(self, s32 *, 0x24) = 0;
-    M2C_FIELD(self, s32 *, 0x28) = 0;
-    M2C_FIELD(self, s32 *, 0x2C) = 0;
+    o->vt = lbl_80407F88;
+    s = &o->sub;
+    s->a[0] = 0;
+    s->a[1] = 0;
+    s->a[2] = 0;
+    s->a[3] = 0;
+    s->a[4] = 0;
+    s->a[5] = 0;
+    s->a[6] = 0;
+    s->a[7] = 0;
+    s->a[8] = 0;
+    s->a[9] = 0;
+    s->a[10] = 0;
+    s->f30 = s->f2c = lbl_803C5F5C[0];
+    s->x34 = 0;
+    o->u[0] = 0;
+    o->u[1] = 0;
+    o->u[2] = 0;
+    o->u[4] = 0;
+    o->u[13] = 0;
+    o->u[6] = 0;
+    o->u[8] = 0;
+    s->a[0] = 0;
+    s->a[1] = 0;
+    s->a[2] = 0;
+    s->a[3] = 0;
+    s->a[4] = 0;
+    s->a[5] = 0;
+    s->a[6] = 0;
+    s->a[7] = 0;
+    s->a[8] = 0;
+    s->a[9] = 0;
+    s->x34 = 0;
+    o->sub.a[5] = (s32)fn_800402BC;
+    o->u[12] = 0;
+    o->sub.a[6] = (s32)o;
+    o->u[3] = 0;
+    o->u[5] = 0;
+    o->u[7] = 0;
+    o->u[9] = 0;
+    o->u[10] = 0;
+    o->u[11] = 0;
     return self;
 }
 
@@ -376,6 +379,59 @@ s32 fn_800418E4(s32 arg0) {
         }
     }
     return arg0;
+}
+
+extern f32 lbl_8041F1FC[6][4];
+extern const f32 lbl_803C5FB8[];
+extern const f32 lbl_803C5FBC[];
+extern const f32 lbl_803C5FC0[];
+extern const f32 lbl_803C5FC4[];
+void fn_8004198C(s32 arg0, s32 arg1) {
+    f32 *p;
+
+    if (arg1 != 0xFFFF) {
+        return;
+    }
+    if (arg0 != 0) {
+        p = lbl_8041F1FC[0];
+        p[0] = lbl_803C5FB8[0];
+        p[1] = lbl_803C5FBC[0];
+        p[2] = lbl_803C5FBC[0];
+        p[3] = lbl_803C5FBC[0];
+        p += 4;
+        p[0] = lbl_803C5FBC[0];
+        p[1] = lbl_803C5FC0[0];
+        p[2] = lbl_803C5FC4[0];
+        p[3] = lbl_803C5FBC[0];
+        p += 4;
+        p[0] = lbl_803C5FBC[0];
+        p[1] = lbl_803C5FB8[0];
+        p[2] = lbl_803C5FC4[0];
+        p[3] = lbl_803C5FBC[0];
+        p += 4;
+        p[0] = lbl_803C5FC0[0];
+        p[1] = lbl_803C5FBC[0];
+        p[2] = lbl_803C5FBC[0];
+        p[3] = lbl_803C5FBC[0];
+        p += 4;
+        p[0] = lbl_803C5FBC[0];
+        p[1] = lbl_803C5FBC[0];
+        p[2] = lbl_803C5FC4[0];
+        p[3] = lbl_803C5FBC[0];
+        p += 4;
+        p[0] = lbl_803C5FBC[0];
+        p[1] = lbl_803C5FBC[0];
+        p[2] = lbl_803C5FBC[0];
+        p[3] = lbl_803C5FBC[0];
+    } else {
+        f32 *base = lbl_8041F1FC[0];
+        if (base != NULL) {
+            p = base + 24;
+            while (p != base) {
+                p -= 4;
+            }
+        }
+    }
 }
 
 void fn_8004198C(s32 arg0, s32 arg1);
