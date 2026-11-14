@@ -2577,6 +2577,29 @@ s32 fn_802642C0(void *arg0) {
     return var_r31;
 }
 
+s32 fn_8026430C(void) {
+    extern s32 lbl_80495EE8;
+    extern s32 lbl_80495EE0;
+    extern DVDCommandBlock lbl_80442960;
+    s32 enabled;
+    s32 retVal;
+
+    enabled = fn_8025465C();
+    if (lbl_80495EE8) {
+        retVal = -1;
+    } else if (lbl_80495EE0) {
+        retVal = 8;
+    } else if (lbl_80495ED0 == NULL) {
+        retVal = 0;
+    } else if (lbl_80495ED0 == &lbl_80442960) {
+        retVal = 0;
+    } else {
+        retVal = fn_802642C0(lbl_80495ED0);
+    }
+    fn_80254684(enabled);
+    return retVal;
+}
+
 s32 fn_802643B8(s32 arg0) {
     extern s32 lbl_80494A2C;
     s32 temp_r0;
