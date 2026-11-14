@@ -165,6 +165,17 @@ s32 fn_80329DDC(u8 *self, s32 data) {
     return data - start;
 }
 
+static inline void SetModelFlags(u8 *self, u32 flags) {
+    *(s32 *)(self + 0x80) = (u8)flags >> 1 & 1;
+    *(s32 *)(self + 0x70) = flags & 1;
+    *(s32 *)(self + 0x8C) = (u8)flags >> 2 & 1;
+    *(s32 *)(self + 0x94) = 0;
+    *(s32 *)(self + 0x84) = (u8)flags >> 4 & 1;
+    *(s32 *)(self + 0x88) = (u8)flags >> 5 & 1;
+    *(s32 *)(self + 0x90) = (u8)flags >> 6 & 1;
+    *(s32 *)(self + 0x98) = flags >> 7 & 1;
+}
+
 void fn_8032A240(void **self, char *arg1) {
     extern void fn_80364C90(void *);
     extern void fn_80364CB0(void *, s32);
@@ -187,6 +198,35 @@ void fn_8032A240(void **self, char *arg1) {
         (*(void (**)(void *, void *))(vt + 0x84))((char *)self + *(s16 *)(vt + 0x80), buf);
     }
     fn_80364CB0(buf, 2);
+}
+
+void fn_8032A2EC(u8 *self, u32 flags) {
+    extern void fn_8032C19C(u8 *);
+    extern void fn_80300264(u8 *, s32, s32, s32, f32, f32);
+    extern const f32 lbl_803F3358[];
+    extern const f32 lbl_803F335C[];
+    s32 i;
+
+    *(s32 *)(self + 0x80) = (u8)flags >> 1 & 1;
+    *(s32 *)(self + 0x70) = flags & 1;
+    *(s32 *)(self + 0x8C) = (u8)flags >> 2 & 1;
+    *(s32 *)(self + 0x94) = 0;
+    *(s32 *)(self + 0x84) = (u8)flags >> 4 & 1;
+    *(s32 *)(self + 0x88) = (u8)flags >> 5 & 1;
+    *(s32 *)(self + 0x90) = (u8)flags >> 6 & 1;
+    *(s32 *)(self + 0x98) = flags >> 7 & 1;
+    {
+        f32 v[2] = { lbl_803F3358[0], lbl_803F335C[0] };
+        if (*(s32 *)(self + 0x88) != 0) {
+            fn_8032C19C(self);
+        }
+        if (*(s32 *)(self + 0x84) == 0) {
+            for (i = 0; i < ListCount(self + 0x20); i++) {
+                fn_80300264(*(u8 **)(self + 0x20) + i * 0x18, *(s32 *)(self + 0x80), *(s32 *)(self + 0x18),
+                            *(s32 *)(self + 0x94), v[0], v[1]);
+            }
+        }
+    }
 }
 
 s32 fn_8032A3DC(u8 *self) {
