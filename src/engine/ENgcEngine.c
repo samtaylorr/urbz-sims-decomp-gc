@@ -212,6 +212,32 @@ void fn_8033F2C8(void) {
     }
 }
 
+void fn_8033F304(u8 *src, s32 x, s32 y) {
+    extern s32 lbl_80495024;
+    extern s32 lbl_80495028;
+    extern u16 lbl_803FD3D0[];
+    s32 row;
+    s32 j;
+    s32 k;
+    s32 base;
+    u16 *dst;
+    u8 *p;
+    u8 b;
+
+    for (row = 0; row < 24; row++) {
+        dst = (u16 *)(lbl_80495024 + (y + row) * lbl_80495028 * 2) + x;
+        base = (row / 8) * 24 + row % 8;
+        for (j = 0; j < 3; j++) {
+            p = src + (base + j * 8) * 4;
+            for (k = 0; k < 4; k++) {
+                b = *p++;
+                *dst++ = lbl_803FD3D0[b >> 4];
+                *dst++ = lbl_803FD3D0[b & 0xF];
+            }
+        }
+    }
+}
+
 void fn_8033F3D0(char *s, s32 *width, s32 *count) {
     s32 n;
     u8 c;
