@@ -194,15 +194,15 @@ M2C_UNK fn_802F1594(s32 arg0, s32 arg1) {
     }
 }
 
+void fn_802F04BC(void *arg0);
 void fn_802F1604(void) {
-    M2C_UNK fn_802D1FC8(M2C_UNK);
-    fn_802D1FC8(0x8C);
-    fn_802F04BC();
+    void *fn_802D1FC8(s32);
+    fn_802F04BC(fn_802D1FC8(0x8C));
 }
 
-void fn_802F04BC();
 void fn_802F162C(void) {
-    fn_802F04BC();
+    register void *arg0 asm("r3");
+    fn_802F04BC(arg0);
 }
 
 extern void fn_802F05AC(void *, s32);
