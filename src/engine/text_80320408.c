@@ -88,7 +88,7 @@ void fn_80320590(void *arg0) {
 
 void fn_803205D4(void *arg0, void *arg1) {
     extern void fn_802D39E4(void *);
-    extern void fn_802C5B1C();
+    extern void fn_802C5B1C(void *, void *);
     extern void fn_802D3CE4(void *, s32);
     extern void fn_802C5BBC(void *, void *);
     extern void fn_802D39F0(void *, s32);
@@ -100,7 +100,7 @@ void fn_803205D4(void *arg0, void *arg1) {
 
     fn_80320590(arg0);
     fn_802D39E4(&buf);
-    fn_802C5B1C(arg1, &buf);
+    fn_802C5B1C(arg1, &buf.a);
     fn_802D3CE4((char *)arg0 + 0x18, buf.a);
     fn_802C5BBC(arg1, (char *)arg0 + 0x20);
     p = M2C_FIELD(arg0, s32 ***, 0x24);
@@ -138,6 +138,28 @@ void fn_803207F0(void *arg0, void *arg1, s32 arg2) {
     }
 }
 
+Vec2Arg fn_803227C4(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    extern f32 lbl_803F3018[];
+    void fn_80321870(s32, s32, s32, s32, s32, Vec2Arg *, s32, Vec2Arg *, s32, s32, s32, s32, s32);
+    void fn_803209D4(s32, s32, s32, s32, s32, Vec2Arg *, s32, Vec2Arg *, s32, s32, s32, s32, s32);
+    Vec2Arg scale;
+    Vec2Arg out;
+
+    if (arg3 != 0) {
+        scale.x = scale.y = lbl_803F3018[0];
+        fn_80321870(arg0, arg1, arg2, 0, 0, &scale, 0, &out, arg4, 0, 0, 0, 0);
+    } else {
+        scale.x = scale.y = lbl_803F3018[0];
+        fn_803209D4(arg0, arg1, arg2, 0, 0, &scale, 0, &out, arg4, 0, 0, 0, 0);
+    }
+    return out;
+}
+
+static inline f32 fn_80322898_round(f32 v) {
+    extern f32 lbl_803F301C[];
+    return (s32)(v + lbl_803F301C[0]);
+}
+
 void fn_80322898(s32 arg0, Vec2Arg *arg1, s32 arg2, s32 arg3) {
     extern f32 lbl_803F301C[];
 
@@ -145,13 +167,12 @@ void fn_80322898(s32 arg0, Vec2Arg *arg1, s32 arg2, s32 arg3) {
         return;
     }
     if (arg2 != 0) {
-        f32 *c = lbl_803F301C;
-        arg1->x = (s32)(arg1->x + *c);
+        arg1->x = (s32)(arg1->x + lbl_803F301C[0]);
     }
     if (arg3 != 0) {
-        f32 *c = lbl_803F301C;
-        arg1->y = (s32)(arg1->y + *c);
+        arg1->y = (s32)(arg1->y + lbl_803F301C[0]);
     }
+    return;
 }
 
 M2C_UNK fn_803233D4(void *arg0) {
