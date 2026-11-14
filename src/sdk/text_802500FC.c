@@ -3772,11 +3772,9 @@ void fn_80274D78(u32 tev_stage) {
 
 void fn_80274DC0(u32 tev_stage, u32 ind_stage, u8 signed_offsets, u8 replace_mode, u32 matrix_sel) {
     u32 wrap;
-    u32 bias;
 
     wrap = replace_mode ? 6 : 0;
-    bias = signed_offsets ? 7 : 0;
-    fn_80274940(tev_stage, ind_stage, 0, bias, matrix_sel, wrap, wrap, 0, 0, 0);
+    fn_80274940(tev_stage, ind_stage, 0, signed_offsets ? 7 : 0, matrix_sel, wrap, wrap, 0, 0, 0);
 }
 
 void fn_802750DC(u32 tev_stage, u32 ind_stage, u32 matrix_sel) {
