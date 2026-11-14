@@ -1,6 +1,23 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+typedef struct ERMLock {
+    char *obj;
+    u8 unk4[3];
+} ERMLock;
+
+static inline void ERMLock_Lock(ERMLock *l, char *obj) {
+    char *vt;
+    l->obj = obj;
+    vt = *(char **)obj;
+    (*(void (**)(void *, s32))(vt + 0x14))(obj + *(s16 *)(vt + 0x10), -1);
+}
+
+static inline void ERMLock_Unlock(ERMLock *l) {
+    char *vt = *(char **)l->obj;
+    (*(void (**)(void *))(vt + 0x1C))(l->obj + *(s16 *)(vt + 0x18));
+}
+
 extern u8 lbl_8041C298[];
 extern void fn_802D20E8(void *);
 void fn_8033BD7C(void **self, s32 flags) {
@@ -89,6 +106,41 @@ s32 fn_8033C4E4(void) {
 
 s32 fn_8033C4EC(void) {
     return 0;
+}
+
+void fn_8033C7FC(void *self) {
+    extern u8 lbl_8045BD40[];
+    extern u8 lbl_8045B198[];
+    extern s32 lbl_80494F98;
+    extern s32 lbl_80494FA8;
+    s32 fn_8035FD24(s32, s32);
+    void fn_8033789C(void *, s32);
+    struct {
+        char *obj;
+        u8 unk4[3];
+    } lock;
+    char *vt;
+    u8 *p;
+    u8 *end;
+
+    if (lbl_80494F98 != 0) {
+        lock.obj = (char *)self + 0x40;
+        vt = *(char **)lock.obj;
+        (*(void (**)(void *, s32))(vt + 0x14))(lock.obj + *(s16 *)(vt + 0x10), -1);
+        p = lbl_8045BD40;
+        end = p + 0x10bc;
+        do {
+            if (M2C_FIELD(p, s32 *, 0) != -1 && M2C_FIELD(p, s32 *, 0x40) != -1) {
+                if (fn_8035FD24(lbl_80494FA8, M2C_FIELD(p, s32 *, 0x40)) != 0) {
+                    fn_8033789C(lbl_8045B198, M2C_FIELD(p, s32 *, 0));
+                    M2C_FIELD(p, s32 *, 0) = -1;
+                }
+            }
+            p += 0x44;
+        } while (p <= end);
+        vt = *(char **)lock.obj;
+        (*(void (**)(void *))(vt + 0x1C))(lock.obj + *(s16 *)(vt + 0x18));
+    }
 }
 
 void fn_8033C8C4(void *arg0) {
