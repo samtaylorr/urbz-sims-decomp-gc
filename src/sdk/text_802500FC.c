@@ -2502,8 +2502,8 @@ s32 fn_80266358(u32 offset, void (*cb)(s32)) {
 
 s32 fn_802663EC(void (*cb)(void)) {
     extern void (*lbl_80495F48)(void);
-    extern s32 lbl_80495F40;
-    extern s32 lbl_80495F5C;
+    extern volatile s32 lbl_80495F40;
+    extern volatile s32 lbl_80495F5C;
 
     lbl_80495F48 = cb;
     lbl_80495F5C = 1;
