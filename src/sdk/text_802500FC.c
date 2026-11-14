@@ -813,6 +813,25 @@ s32 fn_80254A24(void) {
     return *(s32 *)0x800000C8;
 }
 
+u32 fn_80254A30(u32 local) {
+    u32 fn_8025474C(u32 mask, u32 current);
+    s32 enabled;
+    u32 global;
+    u32 prev;
+    u32 mask;
+
+    enabled = fn_8025465C();
+    global = *(u32 *)0x800000C4;
+    prev = *(u32 *)0x800000C8;
+    mask = (global | prev) ^ local;
+    *(u32 *)0x800000C8 = local;
+    while (mask) {
+        mask = fn_8025474C(mask, global | local);
+    }
+    fn_80254684(enabled);
+    return prev;
+}
+
 u32 fn_8025474C(u32 mask, u32 current);
 #pragma push
 #pragma dont_inline on
@@ -1168,6 +1187,13 @@ u32 fn_80257650(void) {
     return lbl_80440C00[0x13];
 }
 
+typedef struct SramControlBlock {
+    u8 sram[64];
+    u32 offset;
+    s32 enabled;
+    s32 locked;
+} SramControlBlock;
+
 void fn_80257894(s32 arg0) {
     extern u32 lbl_80440C00[];
     void fn_8025C4A4(void);
@@ -1181,13 +1207,6 @@ void fn_80257894(s32 arg0) {
         cb();
     }
 }
-
-typedef struct SramControlBlock {
-    u8 sram[64];
-    u32 offset;
-    s32 enabled;
-    s32 locked;
-} SramControlBlock;
 
 static inline u8 *LockSram(u32 offset) {
     extern SramControlBlock lbl_80440C00;
@@ -1882,9 +1901,10 @@ void fn_8025BDE8(void) {
     typedef struct { u8 pad0[0x20]; s32 idTime; u8 pad24[0x1C]; } EXICtrl;
     s32 fn_8025BE34(s32);
     extern EXICtrl lbl_80441650[];
+    s32 *probeStartTime = (s32 *)0x800030C0;
 
-    ((u32 *)0x800030C0)[1] = ((u32 *)0x800030C0)[0] = 0;
-    lbl_80441650[1].idTime = lbl_80441650[0].idTime = 0;
+    probeStartTime[0] = probeStartTime[1] = 0;
+    lbl_80441650[0].idTime = lbl_80441650[1].idTime = 0;
     fn_8025BE34(0);
     fn_8025BE34(1);
 }
@@ -4327,6 +4347,21 @@ void GXInitFifoBase(void *fifo, void *base, u32 size) {
     fn_8026E3A8(fifo, base, base);
 }
 
+void fn_8026E3A8(void *fifo, void *readPtr, void *writePtr) {
+    s32 fn_8025465C(void);
+    void fn_80254684(s32);
+    s32 enabled;
+
+    enabled = fn_8025465C();
+    *(void **)((u8 *)fifo + 0x14) = readPtr;
+    *(void **)((u8 *)fifo + 0x18) = writePtr;
+    *(s32 *)((u8 *)fifo + 0x1C) = (u8 *)writePtr - (u8 *)readPtr;
+    if (*(s32 *)((u8 *)fifo + 0x1C) < 0) {
+        *(s32 *)((u8 *)fifo + 0x1C) += *(s32 *)((u8 *)fifo + 0x8);
+    }
+    fn_80254684(enabled);
+}
+
 void fn_8026E418(void *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 0xC) = arg1;
     M2C_FIELD(arg0, s32 *, 0x10) = arg2;
@@ -4582,25 +4617,22 @@ void fn_8026F0B0(void) {
     u32 nNrm;
     u32 nCols;
     u32 nTex;
-    u8 *gx = __GXData;
-    u8 *gx2;
 
-    if (gx[0x4D5]) {
+    if (__GXData[0x4D5]) {
         nNrm = 2;
-    } else if (gx[0x4D4]) {
+    } else if (__GXData[0x4D4]) {
         nNrm = 1;
     } else {
         nNrm = 0;
     }
-    gx2 = __GXData;
-    nCols = 33 - __cntlzw((*(u32 *)(gx + 0x14) >> 13) & 0xF);
+    nCols = 33 - __cntlzw((*(u32 *)(__GXData + 0x14) >> 13) & 0xF);
     nCols /= 2;
-    nTex = 33 - __cntlzw(*(u32 *)(gx2 + 0x18) & 0xFFFF);
+    nTex = 33 - __cntlzw(*(u32 *)(__GXData + 0x18) & 0xFFFF);
     nTex /= 2;
     *(volatile u8 *)0xCC008000 = 0x10;
     *(volatile u32 *)0xCC008000 = 0x1008;
     *(volatile u32 *)0xCC008000 = nCols | (nNrm << 2) | (nTex << 4);
-    *(u16 *)(gx2 + 2) = 1;
+    *(u16 *)(__GXData + 2) = 1;
 }
 
 void fn_8026F630(void) {
