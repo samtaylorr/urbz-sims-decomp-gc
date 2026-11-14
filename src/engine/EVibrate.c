@@ -272,6 +272,35 @@ s32 fn_80315430(void) {
     return 1;
 }
 
+s32 *fn_8031647C(s32 *self) {
+    extern const f32 lbl_803F2658[];
+    extern void fn_8036B754(void *, f32 *);
+    f32 zero = lbl_803F2658[0];
+    f32 a[4];
+    f32 b[4];
+    f32 c[4];
+    f32 d[4];
+    f32 e[4];
+    s32 i;
+
+    a[3] = zero; a[2] = zero; a[1] = zero; a[0] = zero;
+    fn_8036B754(self + 2, a);
+    b[3] = zero; b[2] = zero; b[1] = zero; b[0] = zero;
+    fn_8036B754(self + 8, b);
+    c[3] = zero; c[2] = zero; c[1] = zero; c[0] = zero;
+    fn_8036B754(self + 14, c);
+    d[3] = zero; d[2] = zero; d[1] = zero; d[0] = zero;
+    fn_8036B754(self + 20, d);
+    e[3] = zero; e[2] = zero; e[1] = zero; e[0] = zero;
+    fn_8036B754(self + 26, e);
+    self[39] = 1;
+    self[40] = 1;
+    for (i = 1; i >= 0; i--) {
+        self[i] = 0;
+    }
+    return self;
+}
+
 void fn_80316EFC(void *arg0, s32 arg1) {
     M2C_UNK fn_80316A58();
     if (arg1 != (s32) M2C_FIELD(arg0, s32 *, 0x9C)) {
