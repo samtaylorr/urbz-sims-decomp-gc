@@ -2811,7 +2811,7 @@ s32 fn_802664BC(void (*cb)(void)) {
     return 1;
 }
 
-s32 fn_80266794(u8 enable, u32 size, void (*cb)(void)) {
+s32 fn_80266794(s32 enable, u32 size, void (*cb)(void)) {
     extern void (*lbl_80495F48)(void);
     extern s32 lbl_80495F40;
     extern u8 lbl_80442AB0[];
@@ -2835,12 +2835,14 @@ void fn_80266830(void) {
     s64 fn_8025A494(void);
     u32 reg;
     s64 resetStart;
+    s64 wait;
 
     __DIRegs[1] = 2;
     reg = __PIRegs[9];
     __PIRegs[9] = (reg & ~4) | 1;
     resetStart = fn_8025A494();
-    while ((fn_8025A494() - resetStart) < ((12 * ((*(u32 *)0x800000F8 / 4) / 125000)) / 8))
+    wait = (12 * ((*(u32 *)0x800000F8 / 4) / 125000)) / 8;
+    while ((fn_8025A494() - resetStart) < wait)
         ;
     __PIRegs[9] = reg | 5;
     lbl_80495F58 = 1;
