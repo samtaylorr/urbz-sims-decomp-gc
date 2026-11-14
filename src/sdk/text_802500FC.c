@@ -3306,6 +3306,19 @@ void fn_80271670(u8 *a, u32 *b) {
 }
 
 void fn_802716D8(u32 a) {
+    extern u32 *__GXData;
+    u32 *gx;
+    switch (a) {
+    case 1:
+        a = 2;
+        break;
+    case 2:
+        a = 1;
+        break;
+    }
+    gx = __GXData;
+    gx[0x204 / 4] = __rlwimi(gx[0x204 / 4], a, 14, 16, 17);
+    gx[0x5AC / 4] |= 4;
 }
 
 void fn_8027171C(u32 *a) {
