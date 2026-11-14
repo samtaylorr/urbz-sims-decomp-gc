@@ -1227,6 +1227,23 @@ void fn_80256934(u8 arg0) {
     fn_80254684(enabled);
 }
 
+u8 *fn_802571AC(u32 offset) {
+    extern u8 lbl_80440C00[];
+    u8 *scb = lbl_80440C00;
+    s32 enabled;
+    s32 *locked;
+
+    enabled = fn_8025465C();
+    locked = (s32 *)(scb + 0x48);
+    if (*locked != 0) {
+        fn_80254684(enabled);
+        return NULL;
+    }
+    *(s32 *)(scb + 0x44) = enabled;
+    *locked = 1;
+    return scb + offset;
+}
+
 u8 *fn_80257214(void) {
     extern u8 lbl_80440C00[];
     u8 *scb = lbl_80440C00;
