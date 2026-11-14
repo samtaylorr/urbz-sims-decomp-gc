@@ -3484,6 +3484,22 @@ void fn_802696D0(s16 *arg0, s16 *arg1) {
     fn_80254684();
 }
 
+u32 fn_8026989C(void) {
+    s32 fn_8025465C(void);
+    void fn_80254684(s32);
+    extern u32 lbl_80495FA4;
+    s32 enabled;
+    u32 old;
+
+    enabled = fn_8025465C();
+    __VIRegs[0x1C] = 0;
+    __VIRegs[0x1E] = 0;
+    old = lbl_80495FA4;
+    lbl_80495FA4 = 0;
+    fn_80254684(enabled);
+    return old;
+}
+
 void fn_80269B04(s16 *x, s16 *y) {
     u32 hct, vct;
 
@@ -5559,19 +5575,19 @@ void fn_802752D4(u32 stage, s32 op, u32 bias, u32 scale, u8 clamp, u32 out_reg) 
     u32 reg;
 
     reg = __GXData[0x130 / 4 + stage];
-    reg = (reg & ~0x40000) | ((u32)op << 18);
+    reg = __rlwimi(reg, op, 18, 13, 13);
     if (op <= 1) {
-        reg = (reg & ~0x300000) | (scale << 20);
-        reg = (reg & ~0x30000) | (bias << 16);
+        reg = __rlwimi(reg, scale, 20, 10, 11);
+        reg = __rlwimi(reg, bias, 16, 14, 15);
     } else {
-        reg = (reg & ~0x300000) | ((u32)((op >> 1) & 3) << 20);
-        reg = (reg & ~0x30000) | (3 << 16);
+        reg = __rlwimi(reg, (op >> 1) & 3, 20, 10, 11);
+        reg = __rlwimi(reg, 3, 16, 14, 15);
     }
-    reg = (reg & ~0x80000) | ((u32)clamp << 19);
-    reg = (reg & ~0xC00000) | (out_reg << 22);
+    gx = __GXData;
+    reg = __rlwimi(reg, clamp, 19, 12, 12);
+    reg = __rlwimi(reg, out_reg, 22, 8, 9);
     *(volatile u8 *)0xCC008000 = 0x61;
     *(volatile u32 *)0xCC008000 = reg;
-    gx = __GXData;
     gx[0x130 / 4 + stage] = reg;
     ((u16 *)gx)[1] = 0;
 }
