@@ -364,6 +364,18 @@ s32 fn_803110C8(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     return 0;
 }
 
+s32 fn_8031112C(void *arg0, s32 arg1, s32 arg2, f32 thresh) {
+    f32 fn_80310FFC(void *, s32, s32, s32);
+    f32 fn_803111F0(void *, s32, s32, s32);
+    f32 a;
+    a = fn_80310FFC(arg0, arg1, 0, arg2);
+    if (__builtin_fabsf(a - fn_803111F0(arg0, arg1, 0, arg2)) >= thresh) {
+        return 1;
+    }
+    a = fn_80310FFC(arg0, arg1, 1, arg2);
+    return __builtin_fabsf(a - fn_803111F0(arg0, arg1, 1, arg2)) >= thresh;
+}
+
 void fn_803112BC(void *arg0) {
     M2C_FIELD(M2C_FIELD(arg0, void **, 0x200), s32 *, 0x78) = 1;
 }
@@ -428,6 +440,32 @@ s32 *fn_80311370(void *arg0, s32 arg1) {
         return p;
     }
     return NULL;
+}
+
+void fn_803115C0(char *self, s32 arg1) {
+    s32 fn_80311990(void *, s32);
+    struct Entry { s32 a, b, c; };
+    s32 i;
+    s32 off;
+    char *pb;
+    char *pc;
+    char *pa;
+
+    ((void (*)(void *, s32))fn_80310528)(self, (*(u32 *)(self + 4) >> 1) & 1);
+    i = fn_80311990(self, arg1);
+    if (i >= 0) {
+        pa = self + 0xC;
+        pc = self + 0x14;
+        pb = self + 0x10;
+        for (; i < *(s32 *)(self + 8); i++) {
+            *(struct Entry *)(self + 0xC + i * 0xC) = *(struct Entry *)(self + 0x18 + i * 0xC);
+        }
+        off = i * 0xC;
+        *(s32 *)(pa + off) = 0;
+        *(s32 *)(pc + off) = 0;
+        *(s32 *)(pb + off) = 0;
+        *(s32 *)(self + 8) -= 1;
+    }
 }
 
 void fn_80311778(s32 arg0, s32 arg1, s32 arg2) {
