@@ -55,8 +55,8 @@ static inline void EIPortalPointLight_GetB(void *arg0, s16 *arg1, s16 *arg2) {
         temp_r0(M2C_FIELD(arg0, s32 *, 0x2C), 0, arg1, arg2);
         return;
     }
-    *arg1 = -1;
     *arg2 = -1;
+    *arg1 = -1;
 }
 
 extern s32 lbl_804961D8;
