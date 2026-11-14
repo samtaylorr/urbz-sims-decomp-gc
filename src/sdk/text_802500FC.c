@@ -2492,6 +2492,17 @@ s32 fn_802649F0(void) {
     return 0x80000000;
 }
 
+u32 fn_80265370(const char *s, u32 n) {
+    u32 i;
+
+    for (i = 0; i < n; i++) {
+        if (*s++ == '\0') {
+            return i;
+        }
+    }
+    return n;
+}
+
 void *fn_802654A0(u8 *id, char *game, char *company, u8 diskNumber, u8 version) {
     extern void *fn_80248488(void *, s32, u32);
     extern char *fn_80248A10(char *, const char *, u32);
