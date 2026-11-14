@@ -185,17 +185,16 @@ void fn_8035C2D8(u8 *self) {
 void fn_8035C370(u8 *self) {
     typedef struct { s32 v[5]; } S14;
     typedef struct { s32 v[3]; } S0C;
-    typedef struct { S0C a; S14 b; s32 c; s32 d; } E;
-    extern u8 lbl_80493AE0[];
+    typedef struct { S14 b; s32 c; s32 d; s32 pad[3]; } E;
+    extern E lbl_80493AE0[];
     extern s32 lbl_80495210;
-    E *e;
+    s32 i;
 
-    lbl_80495210--;
-    e = (E *)(lbl_80493AE0 - 0xC) + lbl_80495210;
-    *(S14 *)(self + 0x3B8) = e->b;
-    *(S0C *)(self + 0x3AC) = e->a;
-    *(s32 *)(self + 0x6E8) = e->c;
-    *(s32 *)(self + 0x6EC) = e->d;
+    i = --lbl_80495210;
+    *(S14 *)(self + 0x3B8) = lbl_80493AE0[i].b;
+    *(S0C *)(self + 0x3AC) = *(S0C *)((u8 *)lbl_80493AE0 - 0xC + i * 0x28);
+    *(s32 *)(self + 0x6E8) = lbl_80493AE0[i].c;
+    *(s32 *)(self + 0x6EC) = lbl_80493AE0[i].d;
     *(u32 *)(self + 0x6CC) |= 0x80000040;
 }
 
