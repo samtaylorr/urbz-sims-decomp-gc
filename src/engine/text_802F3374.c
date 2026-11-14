@@ -5,7 +5,7 @@ extern s32 fn_802D6A90(void *, void *, void *, void *, s32, void *, void *);
 void fn_802F3CE0(void);
 void fn_802F3D08(void);
 void fn_802F3D28(void *);
-void fn_802F3414(void);
+void *fn_802F3414();
 extern u8 lbl_804937E0[];
 extern u8 lbl_803F1054[];
 extern u8 lbl_80493740[];
