@@ -4830,6 +4830,22 @@ void fn_80273AE8(GXTlutObjInt *t, u32 tlut_name) {
     r->tlutObj = *t;
 }
 
+void fn_80273C74(u32 *region, u32 tmem_even, u32 size_even, u32 tmem_odd, u32 size_odd) {
+    region[0] = 0;
+    region[0] = __rlwimi(region[0], tmem_even >> 5, 0, 17, 31);
+    region[0] = __rlwimi(region[0], 0, 15, 14, 16);
+    region[0] = __rlwimi(region[0], 0, 18, 11, 13);
+    region[0] = __rlwimi(region[0], 1, 21, 10, 10);
+    region[1] = 0;
+    region[1] = __rlwimi(region[1], tmem_odd >> 5, 0, 17, 31);
+    region[1] = __rlwimi(region[1], 0, 15, 14, 16);
+    region[1] = __rlwimi(region[1], 0, 18, 11, 13);
+    ((u8 *)region)[0xC] = 0;
+    ((u8 *)region)[0xD] = 0;
+    ((u16 *)region)[4] = size_even >> 5;
+    ((u16 *)region)[5] = size_odd >> 5;
+}
+
 void GXInitTlutRegion(u32 *region, u32 tmem_addr, u32 tlut_size) {
     *region = 0;
     *region = __rlwimi(*region, (tmem_addr - 0x80000) >> 9, 0, 22, 31);
