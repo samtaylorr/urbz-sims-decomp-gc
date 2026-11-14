@@ -538,15 +538,17 @@ s32 fn_803114D0(char *self, s32 arg1, s32 arg2, u32 arg3) {
     char *pb;
     char *pc;
     char *pa;
+    char *p;
 
     ((void (*)(void *, s32))fn_80310528)(self, (*(u32 *)(self + 4) >> 1) & 1);
     if (*(s32 *)(self + 8) <= 30) {
         i = *(s32 *)(self + 8);
         id = ++lbl_80494EF8;
-        pb = self + 0x10;
+        p = self + 0x10;
         pa = self + 0xC;
         pc = self + 0x14;
-        while (arg3 < *(u32 *)(pb + i * 0xC) && i >= 0) {
+        pb = p;
+        while (arg3 < ((struct Entry *)p)[i].a && i >= 0) {
             *(struct Entry *)(self + 0x18 + i * 0xC) = *(struct Entry *)(self + 0xC + i * 0xC);
             i--;
         }
@@ -591,15 +593,22 @@ void fn_8031167C(char *self, s32 arg1) {
     struct Entry { s32 a; u32 b; s32 c; };
     struct Entry tmp;
     s32 i;
+    s32 j;
+    s32 off;
     char *pb;
 
     i = fn_80311990(self, arg1);
     if (i >= 0) {
         tmp = *(struct Entry *)(self + 0xC + i * 0xC);
-        pb = self + 0x10;
-        while (i < *(s32 *)(self + 8) && tmp.b >= *(u32 *)(pb + (i + 1) * 0xC)) {
+        while (i < *(s32 *)(self + 8)) {
+            j = i + 1;
+            pb = self + 0x10;
+            off = j * 0xC;
+            if (tmp.b < *(u32 *)(pb + off)) {
+                break;
+            }
             *(struct Entry *)(self + 0xC + i * 0xC) = *(struct Entry *)(self + 0x18 + i * 0xC);
-            i++;
+            i = j;
         }
         *(struct Entry *)(self + 0xC + i * 0xC) = tmp;
     }
