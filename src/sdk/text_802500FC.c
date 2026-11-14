@@ -1426,6 +1426,32 @@ void fn_80257DD0(u8 language) {
     fn_802572CC(1, 0);
 }
 
+u32 fn_80257E64(void) {
+    extern SramControlBlock lbl_80440C00;
+    s32 fn_802572CC(s32, s32);
+    SramControlBlock *scb;
+    u8 *sram;
+    s32 enabled;
+    s32 *locked;
+    u8 flags;
+    u8 pad[8];
+
+    scb = &lbl_80440C00;
+    enabled = fn_8025465C();
+    locked = &scb->locked;
+    if (*locked != 0) {
+        fn_80254684(enabled);
+        sram = NULL;
+    } else {
+        scb->enabled = enabled;
+        *locked = 1;
+        sram = scb->sram;
+    }
+    flags = sram[0x11];
+    fn_802572CC(0, 0);
+    return flags & 0x80;
+}
+
 u16 fn_80258088(s32 chan) {
     extern SramControlBlock lbl_80440C00;
     s32 fn_802572CC(s32, s32);
@@ -2668,6 +2694,28 @@ s32 fn_80260D8C(s32 entrynum, DVDDir *dir) {
     dir->entryNum = entrynum;
     dir->location = entrynum + 1;
     dir->next = lbl_80495EB4[entrynum].nextEntryOrLength;
+    return 1;
+}
+
+s32 fn_80260DF4(char *dirName, DVDDir *dir) {
+    s32 fn_80260730(s32, char *, u32);
+    void fn_8025302C(char *, ...);
+    extern char lbl_803F9434[];
+    s32 entry;
+    char currentDir[128];
+
+    entry = fn_80260144(dirName);
+    if (entry < 0) {
+        fn_80260730(lbl_80495EC0, currentDir, 128);
+        fn_8025302C(lbl_803F9434, dirName, currentDir);
+        return 0;
+    }
+    if (!((!(lbl_80495EB4[entry].isDirAndStringOff & 0xFF000000)) ? 0 : 1)) {
+        return 0;
+    }
+    dir->entryNum = entry;
+    dir->location = entry + 1;
+    dir->next = lbl_80495EB4[entry].nextEntryOrLength;
     return 1;
 }
 
@@ -6535,18 +6583,22 @@ void fn_802753A4(u32 id, u8 *color) {
 
 void fn_80275420(u32 id, s16 *color) {
     extern void *__GXData;
+    s16 r = color[0];
+    s16 a = color[3];
+    s16 b = color[2];
+    s16 g = color[1];
     u32 regRA;
     u32 regBG;
 
     regRA = 0;
-    regRA = __rlwimi(regRA, color[0], 0, 21, 31);
-    regRA = __rlwimi(regRA, color[3], 12, 9, 19);
-    regBG = 0;
-    regBG = __rlwimi(regBG, color[2], 0, 21, 31);
-    regBG = __rlwimi(regBG, color[1], 12, 9, 19);
+    regRA = __rlwimi(regRA, r, 0, 21, 31);
+    regRA = __rlwimi(regRA, a, 12, 9, 19);
     regRA = __rlwimi(regRA, id * 2 + 0xE0, 24, 0, 7);
     GXWGFifo.u8 = 0x61;
     GXWGFifo.u32 = regRA;
+    regBG = 0;
+    regBG = __rlwimi(regBG, b, 0, 21, 31);
+    regBG = __rlwimi(regBG, g, 12, 9, 19);
     regBG = __rlwimi(regBG, id * 2 + 0xE1, 24, 0, 7);
     GXWGFifo.u8 = 0x61;
     GXWGFifo.u32 = regBG;
