@@ -3852,12 +3852,62 @@ void fn_80275690(void) {
 }
 
 void fn_80275694(u32 comp0, u8 ref0, u32 op, u32 comp1, u8 ref1) {
+    extern void *__GXData;
+    void *gx = __GXData;
+    u32 reg = 0;
+
+    reg = __rlwimi(reg, ref0, 0, 24, 31);
+    reg = __rlwimi(reg, ref1, 8, 16, 23);
+    reg = __rlwimi(reg, comp0, 16, 13, 15);
+    reg = __rlwimi(reg, comp1, 19, 10, 12);
+    reg = __rlwimi(reg, op, 22, 8, 9);
+    reg = __rlwimi(reg, 0xF3, 24, 0, 7);
+    GXWGFifo.u8 = 0x61;
+    GXWGFifo.u32 = reg;
+    M2C_FIELD(gx, u16 *, 0x2) = 0;
 }
 
 void fn_802756D8(u32 op, u32 fmt, u32 bias) {
+    extern void *__GXData;
+    void *gx = __GXData;
+    u32 zenv0;
+    u32 zenv1;
+    u32 type;
+
+    zenv0 = 0;
+    zenv0 = __rlwimi(zenv0, bias, 0, 8, 31);
+    zenv0 = __rlwimi(zenv0, 0xF4, 24, 0, 7);
+    zenv1 = 0;
+    switch (fmt) {
+    case 0x11:
+        type = 0;
+        break;
+    case 0x13:
+        type = 1;
+        break;
+    case 0x16:
+        type = 2;
+        break;
+    default:
+        type = 2;
+        break;
+    }
+    zenv1 = __rlwimi(zenv1, type, 0, 30, 31);
+    zenv1 = __rlwimi(zenv1, op, 2, 28, 29);
+    zenv1 = __rlwimi(zenv1, 0xF5, 24, 0, 7);
+    GXWGFifo.u8 = 0x61;
+    GXWGFifo.u32 = zenv0;
+    GXWGFifo.u8 = 0x61;
+    GXWGFifo.u32 = zenv1;
+    M2C_FIELD(gx, u16 *, 0x2) = 0;
 }
 
 void fn_80275900(u8 nStages) {
+    extern u32 *__GXData;
+    u32 *gx = __GXData;
+
+    gx[0x204 / 4] = __rlwimi(gx[0x204 / 4], nStages - 1, 10, 18, 21);
+    gx[0x5AC / 4] |= 4;
 }
 
 void fn_80275CC8(const f32 *src, volatile f32 *dst) {
