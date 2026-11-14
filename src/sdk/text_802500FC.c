@@ -2525,6 +2525,20 @@ s32 fn_80264C7C(s32 prio, DVDCommandBlock *block) {
     return 1;
 }
 
+DVDCommandBlock *fn_80264CE4(s32 prio) {
+    DVDCommandBlock *q;
+    DVDCommandBlock *block;
+    s32 enabled = fn_8025465C();
+    q = (DVDCommandBlock *)&lbl_804429B8[prio];
+    block = q->next;
+    q->next = block->next;
+    ((DVDCommandBlock *)block->next)->prev = q;
+    fn_80254684(enabled);
+    block->next = NULL;
+    block->prev = NULL;
+    return block;
+}
+
 u32 fn_80264E40(void **item) {
     s32 fn_8025465C(void);
     void fn_80254684(s32);
