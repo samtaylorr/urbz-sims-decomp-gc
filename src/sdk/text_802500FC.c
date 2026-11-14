@@ -1358,15 +1358,15 @@ void fn_80257894(s32 arg0) {
     }
 }
 
-void fn_80257CB4(u32 mode) {
+u32 fn_80257A00(void) {
     extern SramControlBlock lbl_80440C00;
     s32 fn_802572CC(s32, s32);
     SramControlBlock *scb;
     s32 enabled;
     s32 *locked;
+    u32 mode;
     u8 pad[8];
 
-    mode = (mode > 2) ? 0 : mode;
     scb = &lbl_80440C00;
     enabled = fn_8025465C();
     locked = &scb->locked;
@@ -1377,12 +1377,26 @@ void fn_80257CB4(u32 mode) {
         scb->enabled = enabled;
         *locked = 1;
     }
-    if (mode == (scb->sram[0x13] & 3)) {
+    mode = (scb->sram[0x13] & 4) ? 1 : 0;
+    fn_802572CC(0, 0);
+    return mode;
+}
+
+void fn_80257CB4(u32 mode) {
+    s32 fn_802572CC(s32, s32);
+    u8 *sram;
+    u8 pad[8];
+
+    if (mode > 2) {
+        mode = 0;
+    }
+    sram = LockSramHeader();
+    if (mode == (sram[0x13] & 3)) {
         fn_802572CC(0, 0);
         return;
     }
-    scb->sram[0x13] &= ~3;
-    scb->sram[0x13] |= mode;
+    sram[0x13] &= ~3;
+    sram[0x13] |= mode;
     fn_802572CC(1, 0);
 }
 
