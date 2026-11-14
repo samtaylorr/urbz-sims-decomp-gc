@@ -1901,9 +1901,8 @@ void fn_8025BDE8(void) {
     typedef struct { u8 pad0[0x20]; s32 idTime; u8 pad24[0x1C]; } EXICtrl;
     s32 fn_8025BE34(s32);
     extern EXICtrl lbl_80441650[];
-    s32 *probeStartTime = (s32 *)0x800030C0;
 
-    probeStartTime[0] = probeStartTime[1] = 0;
+    ((s32 *)((u32)0x30C0 + 0x80000000))[0] = ((s32 *)((u32)0x30C0 + 0x80000000))[1] = 0;
     lbl_80441650[0].idTime = lbl_80441650[1].idTime = 0;
     fn_8025BE34(0);
     fn_8025BE34(1);
@@ -4357,7 +4356,7 @@ void fn_8026E3A8(void *fifo, void *readPtr, void *writePtr) {
     *(void **)((u8 *)fifo + 0x18) = writePtr;
     *(s32 *)((u8 *)fifo + 0x1C) = (u8 *)writePtr - (u8 *)readPtr;
     if (*(s32 *)((u8 *)fifo + 0x1C) < 0) {
-        *(s32 *)((u8 *)fifo + 0x1C) += *(s32 *)((u8 *)fifo + 0x8);
+        *(s32 *)((u8 *)fifo + 0x1C) = *(s32 *)((u8 *)fifo + 0x1C) + *(s32 *)((u8 *)fifo + 0x8);
     }
     fn_80254684(enabled);
 }
@@ -4617,15 +4616,16 @@ void fn_8026F0B0(void) {
     u32 nNrm;
     u32 nCols;
     u32 nTex;
+    u8 *gx = __GXData;
 
-    if (__GXData[0x4D5]) {
+    if (gx[0x4D5]) {
         nNrm = 2;
-    } else if (__GXData[0x4D4]) {
+    } else if (gx[0x4D4]) {
         nNrm = 1;
     } else {
         nNrm = 0;
     }
-    nCols = 33 - __cntlzw((*(u32 *)(__GXData + 0x14) >> 13) & 0xF);
+    nCols = 33 - __cntlzw((*(u32 *)(gx + 0x14) >> 13) & 0xF);
     nCols /= 2;
     nTex = 33 - __cntlzw(*(u32 *)(__GXData + 0x18) & 0xFFFF);
     nTex /= 2;
@@ -5842,7 +5842,7 @@ void fn_80275510(s32 stage, u32 sel) {
 }
 
 void fn_8027556C(s32 stage, u32 sel) {
-    extern struct { u16 unk0; u16 bpSentNot; u8 pad4[0x1AC]; u32 tevKsel[8]; } *const __GXData;
+    extern struct { u16 unk0; u16 bpSentNot; u8 pad4[0x1AC]; u32 tevKsel[8]; } *__GXData;
     u32 *reg = &__GXData->tevKsel[stage >> 1];
 
     if (stage & 1) {
@@ -5850,8 +5850,8 @@ void fn_8027556C(s32 stage, u32 sel) {
     } else {
         *reg = __rlwimi(*reg, sel, 9, 18, 22);
     }
-    *(volatile u8 *)0xCC008000 = 0x61;
-    *(volatile u32 *)0xCC008000 = *reg;
+    GXWGFifo.u8 = 0x61;
+    GXWGFifo.u32 = *reg;
     __GXData->bpSentNot = 0;
 }
 
@@ -5871,18 +5871,19 @@ void fn_80275610(u32 table, u32 red, u32 green, u32 blue, u32 alpha) {
     extern struct { u16 unk0; u16 bpSentNot; u8 pad4[0x1AC]; u32 tevKsel[8]; } *__GXData;
     struct { u16 unk0; u16 bpSentNot; u8 pad4[0x1AC]; u32 tevKsel[8]; } *gx = (void *)__GXData;
     u32 *Kreg;
+    u32 index = table * 2;
 
-    Kreg = &gx->tevKsel[table * 2];
+    Kreg = &gx->tevKsel[index];
     *Kreg = __rlwimi(*Kreg, red, 0, 30, 31);
     *Kreg = __rlwimi(*Kreg, green, 2, 28, 29);
-    *(volatile u8 *)0xCC008000 = 0x61;
-    *(volatile u32 *)0xCC008000 = *Kreg;
+    GXWGFifo.u8 = 0x61;
+    GXWGFifo.u32 = *Kreg;
 
-    Kreg = &gx->tevKsel[table * 2 + 1];
+    Kreg = &gx->tevKsel[index + 1];
     *Kreg = __rlwimi(*Kreg, blue, 0, 30, 31);
     *Kreg = __rlwimi(*Kreg, alpha, 2, 28, 29);
-    *(volatile u8 *)0xCC008000 = 0x61;
-    *(volatile u32 *)0xCC008000 = *Kreg;
+    GXWGFifo.u8 = 0x61;
+    GXWGFifo.u32 = *Kreg;
     gx->bpSentNot = 0;
 }
 
