@@ -18,19 +18,6 @@ static inline void ERMLock_Unlock(ERMLock *l) {
     (*(void (**)(void *))(vt + 0x1C))(l->obj + *(s16 *)(vt + 0x18));
 }
 
-static inline s32 ERM_LookupName(void *self, s32 name) {
-    void fn_802D3C60(s32 *, s32);
-    void fn_802D39F0(s32 *, s32);
-    s32 fn_8031E254(void *, s32 *);
-    s32 str[2];
-    s32 ret;
-
-    fn_802D3C60(str, name);
-    ret = fn_8031E254(self, str);
-    fn_802D39F0(str, str[0]);
-    return ret;
-}
-
 extern u8 lbl_8041B4F0[];
 extern void fn_802D20E8(void *);
 void **fn_8031C754(void **self) {
@@ -334,11 +321,8 @@ void fn_8031D0AC(char *self) {
 }
 
 s32 fn_8031D158(char *self, char *res) {
-    void fn_802D39F0(s32 *, s32);
-    s32 fn_8031E254(void *, s32 *);
     ERMLock lock;
     char **list;
-    s32 str[2];
     s32 ret;
 
     ERMLock_Lock(&lock, self + 0x360);
@@ -351,9 +335,7 @@ s32 fn_8031D158(char *self, char *res) {
     }
     *(char **)(res + 0xA0) = NULL;
     list[1] = res;
-    ERMName_Init(str, *(s32 *)(res + 0x54));
-    ret = fn_8031E254(self, str);
-    fn_802D39F0(str, str[0]);
+    ret = ERM_LookupName(self, *(s32 *)(res + 0x54));
     ERMLock_Unlock(&lock);
     return ret;
 }
@@ -462,6 +444,33 @@ void fn_8031D970(char *self) {
         fn_8033627C(res);
     }
     ERMLock_Unlock(&lock);
+}
+
+void fn_8031DA10(char *self, char *res) {
+    extern s32 *fn_802D1FC8(s32);
+    void fn_803364F0(char *);
+    ERMLock lock;
+    char *vt;
+    s32 r;
+    s32 *msg;
+
+    if (*(s32 *)(res + 0x68) == 0) {
+        vt = *(char **)self;
+        r = (*(s32 (**)(void *))(vt + 0x2C))(self + *(s16 *)(vt + 0x28));
+        if (r != 0) {
+            ERMLock_Lock(&lock, self + 0x360);
+            fn_803364F0(res);
+            ERMLock_Unlock(&lock);
+        } else {
+            msg = fn_8031C7B4(fn_802D1FC8(0x28));
+            msg[0] = 8;
+            msg[8] = r;
+            msg[1] = (s32)res;
+            fn_8031D084((s32)self, msg);
+            vt = *(char **)self;
+            (*(void (**)(void *))(vt + 0x4C))(self + *(s16 *)(vt + 0x48));
+        }
+    }
 }
 
 void fn_8031DAF8(char *self) {
