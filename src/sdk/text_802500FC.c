@@ -3153,6 +3153,7 @@ void fn_80261068(s32 result, DVDCommandBlock *block) {
     }
 }
 
+volatile u32 __DIRegsT[] : 0xCC006000;
 void fn_802611DC(void) {
     extern M2C_UNK lbl_80495EC8;
     fn_80259838(&lbl_80495EC8);
@@ -4632,7 +4633,7 @@ void fn_802679A0(u16 fbSizeX, s32 xfbMode, u16 panPosX, u16 panSizeX, u8 *wordPe
 
 void fn_80267A38(u8 *tm) {
     extern u16 lbl_80442B18[];
-    extern u64 lbl_80495FB8;
+    extern volatile u64 lbl_80495FB8;
 
     lbl_80442B18[11] = (u16)(tm[0xC] | (*(u16 *)(tm + 0x10) << 5));
     lbl_80495FB8 |= 1ull << (63 - 11);
@@ -4646,7 +4647,7 @@ void fn_80267A38(u8 *tm) {
 
 void fn_80267AF4(u16 panSizeX, u16 dispSizeX, s32 threeD) {
     extern u16 lbl_80442B18[];
-    extern u64 lbl_80495FB8;
+    extern volatile u64 lbl_80495FB8;
     u32 scale;
 
     panSizeX = (u16)(threeD ? panSizeX * 2 : panSizeX);
@@ -5950,28 +5951,27 @@ void fn_8026FA54(void) {
 }
 
 void fn_8026FF68(void) {
-    extern struct GXVATData {
+    extern struct {
         u8 pad0[0x1C];
         u32 vatA[8];
         u32 vatB[8];
         u32 vatC[8];
         u8 pad7C[0x5AB - 0x7C];
         u8 dirtyVAT;
-    } *__GXData;
-    struct GXVATData *gx = __GXData;
+    } *const __GXData;
     u8 i;
 
     for (i = 0; i < 8; i++) {
-        if (gx->dirtyVAT & (1 << i)) {
+        if (__GXData->dirtyVAT & (1 << i)) {
             *(volatile u8 *)0xCC008000 = 8;
             *(volatile u8 *)0xCC008000 = i | 0x70;
-            *(volatile u32 *)0xCC008000 = *(u32 *)((u8 *)gx + i * 4 + 0x1C);
+            *(volatile u32 *)0xCC008000 = __GXData->vatA[i];
             *(volatile u8 *)0xCC008000 = 8;
             *(volatile u8 *)0xCC008000 = i | 0x80;
-            *(volatile u32 *)0xCC008000 = *(u32 *)((u8 *)gx + i * 4 + 0x3C);
+            *(volatile u32 *)0xCC008000 = __GXData->vatB[i];
             *(volatile u8 *)0xCC008000 = 8;
             *(volatile u8 *)0xCC008000 = i | 0x90;
-            *(volatile u32 *)0xCC008000 = *(u32 *)((u8 *)gx + i * 4 + 0x5C);
+            *(volatile u32 *)0xCC008000 = __GXData->vatC[i];
         }
     }
     __GXData->dirtyVAT = 0;
