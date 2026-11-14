@@ -1434,6 +1434,33 @@ u32 fn_80257B24(void) {
     return mode;
 }
 
+u32 fn_80257C38(void) {
+    extern SramControlBlock lbl_80440C00;
+    s32 fn_802572CC(s32, s32);
+    SramControlBlock *scb;
+    s32 enabled;
+    s32 *locked;
+    u32 mode;
+    u8 pad[8];
+
+    scb = &lbl_80440C00;
+    enabled = fn_8025465C();
+    locked = &scb->locked;
+    if (*locked != 0) {
+        fn_80254684(enabled);
+        scb = NULL;
+    } else {
+        scb->enabled = enabled;
+        *locked = 1;
+    }
+    mode = scb->sram[0x13] & 3;
+    fn_802572CC(0, 0);
+    if (mode > 2) {
+        mode = 0;
+    }
+    return mode;
+}
+
 void fn_80257CB4(u32 mode) {
     extern SramControlBlock lbl_80440C00;
     s32 fn_802572CC(s32, s32);
@@ -2591,9 +2618,10 @@ void fn_8025E4B8(void) {
     extern char *lbl_80494A00;
     void fn_8025DF1C(s16, void *);
     u32 fn_8025F148(s32);
+    SIPacket *packet = lbl_80441710;
 
     OSRegisterVersion(lbl_80494A00);
-    lbl_80441710[0].chan = lbl_80441710[1].chan = lbl_80441710[2].chan = lbl_80441710[3].chan = -1;
+    packet[0].chan = packet[1].chan = packet[2].chan = packet[3].chan = -1;
     lbl_803F9124.poll = 0;
     fn_8025F710(0);
     do {
@@ -3105,7 +3133,7 @@ s32 fn_80261200(DVDFileInfo *fileInfo) {
         bytes = 0;
         break;
     case 1:
-        bytes = (s32)(cb->transferredSize + (cb->currTransferSize - *(volatile u32 *)0xCC006018));
+        bytes = (s32)(cb->transferredSize + (cb->currTransferSize - ((volatile u32 *)0xCC006000)[6]));
         break;
     }
     return bytes;
