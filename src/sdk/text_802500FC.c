@@ -549,6 +549,17 @@ void fn_80252AAC(void *ctx) {
         *(void **)0x800000D8 = 0;
     }
 }
+
+void fn_80252EB8(void) {
+    extern void *fn_80250BDC(u8, void *);
+    extern void fn_80252E34(void);
+    extern void fn_8025F920(const char *, ...);
+    extern char lbl_803F832C[];
+    fn_80250BDC(7, fn_80252E34);
+    *(u32 *)0x800000D8 = 0;
+    fn_8025F920(lbl_803F832C);
+}
+
 #pragma peephole reset
 void fn_802530AC(void) {
     M2C_UNK fn_80378324();
