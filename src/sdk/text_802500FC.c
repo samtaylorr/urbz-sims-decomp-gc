@@ -2510,7 +2510,9 @@ s32 fn_80264C0C(DVDCommandBlock *block) {
 void fn_80264C44(void) {
     u32 i;
     for (i = 0; i < 4; i++) {
-        lbl_804429B8[i].next = lbl_804429B8[i].prev = (DVDCommandBlock *)&lbl_804429B8[i];
+        DVDCommandBlock *q = (DVDCommandBlock *)&lbl_804429B8[i];
+        q->next = q;
+        q->prev = q;
     }
 }
 
