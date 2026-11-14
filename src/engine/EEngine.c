@@ -15,6 +15,18 @@ extern void fn_802D8B34(void *);
 extern void fn_802D8CA4(void *, s32, s32, s32);
 extern void fn_802D8EF8(void *);
 extern u8 lbl_803F0554[];
+extern void fn_802C686C(void *, void *, s32);
+extern void fn_802C728C(void *, void *, s32);
+
+static inline void EEngine_StrEscape(void *s, s32 c) {
+    struct {
+        u8 hdr[8];
+        u8 buf[0x200];
+    } tmp;
+    fn_802C686C(&tmp, tmp.buf, 0x200);
+    fn_802C728C(s, &tmp, c);
+}
+
 typedef struct EEngineVEntry {
     s16 delta;
     s16 pad;
@@ -90,15 +102,23 @@ void fn_802E056C(u8 *self) {
             u8 *vt = *(u8 **)o;
             (*(s32 (**)(void *))(vt + 0x24))(o + *(s16 *)(vt + 0x20));
         }) != 0) {
-        EEngine_VCall0(self, 0xB0);
+        {
+            EEngineVEntry *ve = (EEngineVEntry *)(*(u8 **)(self + 0x338) + 0xB0);
+            ((void (*)(void *))ve->fn)(self + ve->delta);
+        }
         {
             u8 *vt = *(u8 **)(self + 0x338);
             (*(void (**)(void *))(vt + 0xBC))(self + *(s16 *)(vt + 0xB8));
         }
         if (*(s32 *)(self + 0x340) != 0) {
-            EEngine_VCall0(self, 0xC8);
+            EEngineVEntry *ve = (EEngineVEntry *)(*(u8 **)(self + 0x338) + 0xC8);
+            ((void (*)(void *))ve->fn)(self + ve->delta);
         }
-        EEngine_VCall1(lbl_80494FDC, 0x50, 1);
+        {
+            u8 *o = lbl_80494FDC;
+            EEngineVEntry *ve = (EEngineVEntry *)(*(u8 **)o + 0x50);
+            ((void (*)(void *, s32))ve->fn)(o + ve->delta, 1);
+        }
     }
 }
 
@@ -152,13 +172,15 @@ void fn_802E0934(void *self, u32 count, char **list) {
         char *data;
         u8 hdr[4];
         u8 buf[0x200];
-    } str[2];
+    } str, tmp;
+    void *sp;
     s32 i;
 
     M2C_FIELD(self, u8 *, 0x350) = 0;
     if (count > 100) {
         count = 0;
     }
+    sp = &str;
     for (i = 0; i < (s32)count; i++) {
         if (i != 0) {
             fn_802485B0((char *)self + 0x350, lbl_803F0560);
@@ -166,13 +188,12 @@ void fn_802E0934(void *self, u32 count, char **list) {
         fn_802485B0((char *)self + 0x350, list[i]);
         {
             char *s = list[i];
-            void *sp = &str[0];
             fn_802C686C(sp, (u8 *)sp + 8, 0x200);
             fn_802C69B0(sp, s);
-            fn_802C686C(&str[1], str[1].buf, 0x200);
-            fn_802C728C(sp, &str[1], 0x22);
+            fn_802C686C(&tmp, tmp.buf, 0x200);
+            fn_802C728C(sp, &tmp, 0x22);
         }
-        fn_80248784(list[i], str[0].data);
+        fn_80248784(list[i], str.data);
     }
     M2C_FIELD(self, char ***, 0x34C) = list;
     M2C_FIELD(self, u32 *, 0x348) = count;
@@ -392,28 +413,18 @@ void fn_802E0ED8(void *self, f32 dt) {
     extern f32 lbl_80494E24;
     extern f32 lbl_80494E28;
     extern f32 lbl_804961B0;
-    s32 n;
     if ((s32) M2C_FIELD(self, s32 *, 8) != 0) {
         f32 a = lbl_80494E18 > lbl_80494E1C ? lbl_80494E18 : lbl_80494E1C;
         f32 b = lbl_80494E24 > lbl_80494E28 ? lbl_80494E24 : lbl_80494E28;
         f32 m = a > b ? a : b;
-        lbl_80494E04 = n = (s32) (m / lbl_804961B0 + 0.5);
-        if (n > 0) {
-            if (n > 15) {
-                lbl_80494E04 = 15;
-            }
-        } else {
-            lbl_80494E04 = 1;
-        }
+        lbl_80494E04 = (s32) (m / lbl_804961B0 + 0.5);
     } else {
-        lbl_80494E04 = n = (s32) (dt / lbl_804961B0 + 0.5);
-        if (n > 0) {
-            if (n > 15) {
-                lbl_80494E04 = 15;
-            }
-        } else {
-            lbl_80494E04 = 1;
-        }
+        lbl_80494E04 = (s32) (dt / lbl_804961B0 + 0.5);
+    }
+    if (lbl_80494E04 <= 0) {
+        lbl_80494E04 = 1;
+    } else if (lbl_80494E04 > 15) {
+        lbl_80494E04 = 15;
     }
     lbl_80494E00 += lbl_80494E04;
 }
