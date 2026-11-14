@@ -2016,7 +2016,7 @@ void fn_80262170(u32 arg0) {
 }
 
 void fn_802621FC(void);
-void fn_802663EC(void (*)(void));
+s32 fn_802663EC(void (*)(void));
 void fn_802621D4(void) {
     fn_802663EC(fn_802621FC);
 }
@@ -3751,6 +3751,16 @@ void fn_802728D0(void *arg0, f32 *arg1, f32 *arg2, f32 *arg3) {
     *arg1 = -M2C_FIELD(arg0, f32 *, 0x34);
     *arg2 = -M2C_FIELD(arg0, f32 *, 0x38);
     *arg3 = -M2C_FIELD(arg0, f32 *, 0x3C);
+}
+
+void fn_802729DC(void *lt_obj, f32 px, f32 py, f32 pz, f32 nx, f32 ny, f32 nz) {
+    extern f32 lbl_804975A0;
+    M2C_FIELD(lt_obj, f32 *, 0x34) = nx;
+    M2C_FIELD(lt_obj, f32 *, 0x38) = ny;
+    M2C_FIELD(lt_obj, f32 *, 0x3C) = nz;
+    M2C_FIELD(lt_obj, f32 *, 0x28) = lbl_804975A0 * px;
+    M2C_FIELD(lt_obj, f32 *, 0x2C) = lbl_804975A0 * py;
+    M2C_FIELD(lt_obj, f32 *, 0x30) = lbl_804975A0 * pz;
 }
 
 void fn_80272A08(void *arg0, s32 *arg1) {
