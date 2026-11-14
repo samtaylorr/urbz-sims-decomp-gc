@@ -3826,8 +3826,8 @@ void __GXFlushTextureState(void) {
 
 void fn_802751C0(s32 id, u32 sel) {
     extern void *__GXData;
-    extern u32 lbl_803FB248[4][5];
-    u32 (*tbl)[5] = lbl_803FB248;
+    extern u32 lbl_803FB248[];
+    u32 *tbl = lbl_803FB248;
     u8 *gx;
     u32 *p0;
     u32 *p1;
@@ -3835,11 +3835,11 @@ void fn_802751C0(s32 id, u32 sel) {
     u32 reg;
 
     if (id == 0) {
-        p0 = &tbl[0][sel];
-        p1 = &tbl[2][sel];
+        p0 = &tbl[sel];
+        p1 = &tbl[sel + 10];
     } else {
-        p0 = &tbl[1][sel];
-        p1 = &tbl[3][sel];
+        p0 = &tbl[sel + 5];
+        p1 = &tbl[sel + 15];
     }
     gx = __GXData;
     regs = (u32 *)(gx + id * 4);
@@ -3996,23 +3996,25 @@ void fn_8027612C(f32 scale, f32 offset) {
     extern f32 lbl_80497608;
     extern f32 lbl_804975FC;
     u8 *gx = __GXData;
-    f32 zOffset;
     f32 zScale;
-    f32 zmin;
+    f32 zOffset;
+    f32 zmax;
 
     zOffset = lbl_80497608 * offset;
-    zScale = lbl_80497608 * scale;
+    offset = lbl_80497608 * scale;
     M2C_FIELD(gx, f32 *, 0x50C) = zOffset;
-    zScale = lbl_804975FC + zScale;
+    zScale = lbl_804975FC + offset;
     M2C_FIELD(gx, f32 *, 0x510) = zScale;
-    scale = M2C_FIELD(gx, f32 *, 0x508) * zScale;
-    zmin = M2C_FIELD(gx, f32 *, 0x504) * zScale;
+    zmax = M2C_FIELD(gx, f32 *, 0x508) * zScale;
+    scale = M2C_FIELD(gx, f32 *, 0x504) * zScale;
+    zOffset = zOffset + zmax;
+    scale = zmax - scale;
     GXWGFifo.u8 = 0x10;
     GXWGFifo.u32 = 0x101C;
-    GXWGFifo.f32 = scale - zmin;
+    GXWGFifo.f32 = scale;
     GXWGFifo.u8 = 0x10;
     GXWGFifo.u32 = 0x101F;
-    GXWGFifo.f32 = zOffset + scale;
+    GXWGFifo.f32 = zOffset;
     M2C_FIELD(gx, u16 *, 0x2) = 1;
 }
 
@@ -4038,17 +4040,16 @@ void fn_80276198(u32 left, u32 top, u32 wd, u32 ht) {
 
 void fn_80276210(u32 *left, u32 *top, u32 *wd, u32 *ht) {
     extern void *__GXData;
-    u32 *gx = __GXData;
-    u32 tp1, lf1, tp2, lf2;
+    u32 tp, lf, bm, rt;
 
-    tp1 = gx[0xF8 / 4] & 0x7FF;
-    lf1 = (gx[0xF8 / 4] >> 12) & 0x7FF;
-    tp2 = gx[0xFC / 4] & 0x7FF;
-    lf2 = (gx[0xFC / 4] >> 12) & 0x7FF;
-    *left = lf1 - 0x156;
-    *top = tp1 - 0x156;
-    *wd = lf2 - lf1 + 1;
-    *ht = tp2 - tp1 + 1;
+    tp = M2C_FIELD(__GXData, u32 *, 0xF8) & 0x7FF;
+    lf = (M2C_FIELD(__GXData, u32 *, 0xF8) >> 12) & 0x7FF;
+    bm = M2C_FIELD(__GXData, u32 *, 0xFC) & 0x7FF;
+    rt = (M2C_FIELD(__GXData, u32 *, 0xFC) >> 12) & 0x7FF;
+    *left = lf - 0x156;
+    *top = tp - 0x156;
+    *wd = rt - lf + 1;
+    *ht = bm - tp + 1;
 }
 
 void fn_80276258(s32 x, s32 y) {
