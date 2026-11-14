@@ -3243,7 +3243,7 @@ void fn_8026561C(void);
 void fn_802622E0(void);
 void fn_80261458(u32 intType) {
     DVDCommandBlock *finished;
-    extern u32 lbl_80495EE8;
+    extern s32 lbl_80495EE8;
     extern DVDCommandBlock lbl_80442960;
     extern u32 lbl_80495EF0;
     extern void (*lbl_80495EF4)(s32, DVDCommandBlock *);
@@ -3255,8 +3255,8 @@ void fn_80261458(u32 intType) {
     }
     fn_8026561C();
     finished = lbl_80495ED0;
+    lbl_80495EE8 = 1;
     lbl_80495ED0 = &lbl_80442960;
-    lbl_80495EE8 = TRUE;
     if (finished->callback) {
         ((void (*)(s32, DVDCommandBlock *))finished->callback)(-1, finished);
     }
