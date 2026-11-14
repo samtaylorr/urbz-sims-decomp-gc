@@ -230,6 +230,7 @@ s32 fn_8000B254(void *self, s32 a, s32 b) {
     f32 fn_80242F38(f32, f32);
     s32 r = 0;
     s32 n;
+    s32 m;
 
     lbl_80493F1C += lbl_80493F18;
     n = (s32)(lbl_80493F1C / lbl_803C19A4[0]);
@@ -237,12 +238,14 @@ s32 fn_8000B254(void *self, s32 a, s32 b) {
     if (n > 4) {
         n = 4;
     }
+    m = lbl_803F5800[a][b];
     lbl_803F5820[a][b] += n;
-    if (lbl_803F5820[a][b] >= lbl_803F5800[a][b]) {
+    if (lbl_803F5820[a][b] >= m) {
         lbl_803F5820[a][b] = 0;
-        lbl_803F5800[a][b] -= 3;
         r = 1;
-        if (lbl_803F5800[a][b] < 12) {
+        m -= 3;
+        lbl_803F5800[a][b] = m;
+        if (m < 12) {
             lbl_803F5800[a][b] = 12;
         }
     }
@@ -251,20 +254,18 @@ s32 fn_8000B254(void *self, s32 a, s32 b) {
 
 void fn_8000B3E8(void *self, s32 a, s32 b);
 s32 fn_8000B324(void *self) {
-    s32 (*isActive)(void *, s32) = (s32 (*)(void *, s32))fn_803338C0;
     s32 i;
+    s32 n = 4;
 
-    i = 0;
-    do {
-        if (isActive(lbl_80494FCC, 0) && fn_803338F0(lbl_80494FCC, 0) == i) {
+    for (i = 0; i < n; i++) {
+        if (fn_803338C0(lbl_80494FCC, 0) && fn_803338F0(lbl_80494FCC, 0) == i) {
             fn_8000B3E8(self, 0, i);
-        } else if (isActive(lbl_80494FCC, 1) && fn_803338F0(lbl_80494FCC, 1) == i) {
+        } else if (fn_803338C0(lbl_80494FCC, 1) && fn_803338F0(lbl_80494FCC, 1) == i) {
             fn_8000B3E8(self, 1, i);
         } else if (*(s32 *)((char *)self + 0x3AC) != -1) {
             fn_8000B3E8(self, *(s32 *)((char *)self + 0x3AC), i);
         }
-        i++;
-    } while (i < 4);
+    }
     return 0;
 }
 
