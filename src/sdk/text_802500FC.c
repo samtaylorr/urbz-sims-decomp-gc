@@ -3497,6 +3497,16 @@ void fn_8026EBFC(u8 hiWatermarkEn, u8 loWatermarkEn) {
     __cpReg[1] = gx[2];
 }
 
+void fn_8026EC2C(u8 hiWatermarkClr, u8 loWatermarkClr) {
+    extern void *__GXData;
+    extern volatile u16 *__cpReg;
+    u32 *gx = __GXData;
+
+    gx[4] = __rlwimi(gx[4], hiWatermarkClr, 0, 31, 31);
+    gx[4] = __rlwimi(gx[4], loWatermarkClr, 1, 30, 30);
+    __cpReg[2] = gx[4];
+}
+
 extern s32 lbl_80496098;
 s32 fn_8026EDD8(void) {
     return lbl_80496098;
