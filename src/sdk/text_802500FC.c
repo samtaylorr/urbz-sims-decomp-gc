@@ -6255,6 +6255,30 @@ void fn_8027533C(u32 stage, s32 op, u32 bias, u32 scale, u8 clamp, u32 out_reg) 
     ((u16 *)gx)[1] = 0;
 }
 
+void fn_802753A4(u32 id, u8 *color) {
+    extern void *__GXData;
+    u32 regRA;
+    u32 regBG;
+
+    regRA = 0;
+    regRA = __rlwimi(regRA, color[0], 0, 21, 31);
+    regRA = __rlwimi(regRA, color[3], 12, 9, 19);
+    regBG = 0;
+    regBG = __rlwimi(regBG, color[2], 0, 21, 31);
+    regBG = __rlwimi(regBG, color[1], 12, 9, 19);
+    regRA = __rlwimi(regRA, id * 2 + 0xE0, 24, 0, 7);
+    regBG = __rlwimi(regBG, id * 2 + 0xE1, 24, 0, 7);
+    GXWGFifo.u8 = 0x61;
+    GXWGFifo.u32 = regRA;
+    GXWGFifo.u8 = 0x61;
+    GXWGFifo.u32 = regBG;
+    GXWGFifo.u8 = 0x61;
+    GXWGFifo.u32 = regBG;
+    GXWGFifo.u8 = 0x61;
+    GXWGFifo.u32 = regBG;
+    M2C_FIELD(__GXData, u16 *, 0x2) = 0;
+}
+
 void fn_80275420(u32 id, s16 *color) {
     extern void *__GXData;
     u32 regRA;
