@@ -3215,7 +3215,7 @@ void fn_802678D0(void) {
 
 void fn_80267924(u8 *tm) {
     extern u16 lbl_80442B18[];
-    extern u64 lbl_80495FB8;
+    extern volatile u64 lbl_80495FB8;
     u16 vct, hct, borrow;
 
     vct = (u16)(*(u16 *)(tm + 0x18) / 2);
@@ -3245,23 +3245,10 @@ s32 fn_80269134(void) {
 }
 
 extern u16 *lbl_80495FD0;
-u32 fn_80269230(void) {
-    extern u16 lbl_80442C08[];
-    s32 enabled;
-    u32 nextField;
-    u32 hct, vct;
-
-    enabled = fn_8025465C();
-    fn_8026913C(&hct, &vct);
-    nextField = (((vct - 1) << 1) + (hct - 1) / lbl_80495FD0[0xD] < lbl_80495FD0[0xC]) ? 1 : 0;
-    fn_80254684(enabled);
-    return (nextField ^ 1) ^ (lbl_80442C08[5] & 1);
-}
-
 void fn_802698E8(u32 hct, u32 vct, s16 *x, s16 *y);
 volatile u16 __VIRegs[] : 0xCC002000;
 
-static void GetCurrentDisplayPosition(u32 *hct, u32 *vct) {
+void fn_8026913C(u32 *hct, u32 *vct) {
     u32 hcount, vcount0, vcount;
 
     vcount = __VIRegs[0x16] & 0x7FF;
@@ -3272,6 +3259,32 @@ static void GetCurrentDisplayPosition(u32 *hct, u32 *vct) {
     } while (vcount0 != vcount);
     *hct = hcount;
     *vct = vcount;
+}
+
+u32 fn_80269178(void) {
+    u32 hct, vct;
+
+    fn_8026913C(&hct, &vct);
+    return ((vct - 1) << 1) + (hct - 1) / lbl_80495FD0[0xD];
+}
+
+u32 fn_802691C8(void) {
+    if (fn_80269178() < lbl_80495FD0[0xC]) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+u32 fn_80269230(void) {
+    extern u16 lbl_80442C08[];
+    s32 nextField;
+    s32 enabled;
+
+    enabled = fn_8025465C();
+    nextField = fn_802691C8() ^ 1;
+    fn_80254684(enabled);
+    return nextField ^ (lbl_80442C08[5] & 1);
 }
 
 void fn_802696D0(s16 *arg0, s16 *arg1) {
@@ -3286,7 +3299,7 @@ void fn_802696D0(s16 *arg0, s16 *arg1) {
 void fn_80269B04(s16 *x, s16 *y) {
     u32 hct, vct;
 
-    GetCurrentDisplayPosition(&hct, &vct);
+    fn_8026913C(&hct, &vct);
     fn_802698E8(hct, vct, x, y);
 }
 
@@ -4132,6 +4145,7 @@ void fn_8026F630(void) {
     u32 nCols;
     u32 nTex;
     u8 *gx = __GXData;
+    u8 *gx2;
 
     *(volatile u8 *)0xCC008000 = 8;
     *(volatile u8 *)0xCC008000 = 0x50;
@@ -4147,14 +4161,15 @@ void fn_8026F630(void) {
     } else {
         nNrm = 0;
     }
+    gx2 = __GXData;
     nCols = 33 - __cntlzw((*(u32 *)(gx + 0x14) >> 13) & 0xF);
     nCols /= 2;
-    nTex = 33 - __cntlzw(*(u32 *)(__GXData + 0x18) & 0xFFFF);
+    nTex = 33 - __cntlzw(*(u32 *)(gx2 + 0x18) & 0xFFFF);
     nTex /= 2;
     *(volatile u8 *)0xCC008000 = 0x10;
     *(volatile u32 *)0xCC008000 = 0x1008;
     *(volatile u32 *)0xCC008000 = nCols | (nNrm << 2) | (nTex << 4);
-    *(u16 *)(__GXData + 2) = 1;
+    *(u16 *)(gx2 + 2) = 1;
 }
 
 void fn_8026F9C4(GXVtxDescList *list) {
@@ -4181,24 +4196,24 @@ void fn_8026FA54(void) {
 }
 
 void fn_8026FF68(void) {
-    extern u32 *__GXData;
-    u32 *gx = __GXData;
+    extern u8 *__GXData;
+    u8 *gx = __GXData;
     u8 i;
 
     for (i = 0; i < 8; i++) {
-        if (((u8 *)gx)[0x5AB] & (1 << i)) {
+        if (gx[0x5AB] & (1 << i)) {
             *(volatile u8 *)0xCC008000 = 8;
             *(volatile u8 *)0xCC008000 = i | 0x70;
-            *(volatile u32 *)0xCC008000 = gx[7 + i];
+            *(volatile u32 *)0xCC008000 = *(u32 *)(gx + (i * 4 + 0x1C));
             *(volatile u8 *)0xCC008000 = 8;
             *(volatile u8 *)0xCC008000 = i | 0x80;
-            *(volatile u32 *)0xCC008000 = gx[15 + i];
+            *(volatile u32 *)0xCC008000 = *(u32 *)(gx + (i * 4 + 0x3C));
             *(volatile u8 *)0xCC008000 = 8;
             *(volatile u8 *)0xCC008000 = i | 0x90;
-            *(volatile u32 *)0xCC008000 = gx[23 + i];
+            *(volatile u32 *)0xCC008000 = *(u32 *)(gx + (i * 4 + 0x5C));
         }
     }
-    ((u8 *)__GXData)[0x5AB] = 0;
+    __GXData[0x5AB] = 0;
 }
 
 void fn_80270384(void) {
