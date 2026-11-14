@@ -1645,10 +1645,7 @@ f32 fn_8025FF08(f32 *a, f32 *b) {
 }
 
 f32 fn_8025FF6C(f32 *a, f32 *b) {
-    f32 dx = a[0] - b[0];
-    f32 dy = a[1] - b[1];
-    f32 dz = a[2] - b[2];
-    return sqrtf(dz * dz + (dx * dx + dy * dy));
+    return sqrtf(fn_8025FF08(a, b));
 }
 
 #pragma pop
@@ -3889,6 +3886,50 @@ void fn_802760C0(f32 left, f32 top, f32 wd, f32 ht, f32 nearz, f32 farz) {
     M2C_FIELD(gx, f32 *, 0x508) = farz;
     fn_80275FD8();
     M2C_FIELD(__GXData, u16 *, 0x2) = 1;
+}
+
+void fn_8027612C(f32 scale, f32 offset) {
+    extern void *__GXData;
+    extern f32 lbl_80497608;
+    extern f32 lbl_804975FC;
+    u8 *gx = __GXData;
+    f32 zOffset;
+    f32 zScale;
+    f32 sz, oz;
+
+    zOffset = offset * lbl_80497608;
+    M2C_FIELD(gx, f32 *, 0x50C) = zOffset;
+    zScale = lbl_804975FC + scale * lbl_80497608;
+    M2C_FIELD(gx, f32 *, 0x510) = zScale;
+    sz = M2C_FIELD(gx, f32 *, 0x508) * zScale - M2C_FIELD(gx, f32 *, 0x504) * zScale;
+    oz = zOffset + M2C_FIELD(gx, f32 *, 0x508) * zScale;
+    GXWGFifo.u8 = 0x10;
+    GXWGFifo.u32 = 0x101C;
+    GXWGFifo.f32 = sz;
+    GXWGFifo.u8 = 0x10;
+    GXWGFifo.u32 = 0x101F;
+    GXWGFifo.f32 = oz;
+    M2C_FIELD(gx, u16 *, 0x2) = 1;
+}
+
+void fn_80276198(u32 left, u32 top, u32 wd, u32 ht) {
+    extern void *__GXData;
+    u32 *gx = __GXData;
+    u32 tp, lf, bm, rt;
+
+    tp = top + 0x156;
+    lf = left + 0x156;
+    bm = tp + ht - 1;
+    rt = lf + wd - 1;
+    gx[0xF8 / 4] = __rlwimi(gx[0xF8 / 4], tp, 0, 21, 31);
+    gx[0xF8 / 4] = __rlwimi(gx[0xF8 / 4], lf, 12, 9, 19);
+    gx[0xFC / 4] = __rlwimi(gx[0xFC / 4], bm, 0, 21, 31);
+    gx[0xFC / 4] = __rlwimi(gx[0xFC / 4], rt, 12, 9, 19);
+    GXWGFifo.u8 = 0x61;
+    GXWGFifo.u32 = gx[0xF8 / 4];
+    GXWGFifo.u8 = 0x61;
+    GXWGFifo.u32 = gx[0xFC / 4];
+    M2C_FIELD(gx, u16 *, 0x2) = 0;
 }
 
 void fn_80276D34(void) {
