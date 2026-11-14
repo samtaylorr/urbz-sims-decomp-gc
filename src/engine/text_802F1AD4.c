@@ -28,6 +28,18 @@ static inline void *Stream_WriteBool(void *stream, s32 v) {
     return Stream_Write(stream, &t, 1);
 }
 
+static inline void *Stream_WriteF32p(void *stream, const f32 *v) {
+    void *vt = M2C_FIELD(stream, void **, 0x18);
+    f32 t = *v;
+    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)((char *)stream + M2C_FIELD(vt, s16 *, 0x38), &t, 4);
+    return stream;
+}
+
+static inline void *Stream_WriteU8(void *stream, u8 v) {
+    u8 t = v;
+    return Stream_Write(stream, &t, 1);
+}
+
 extern s32 lbl_804961D4;
 extern u8 lbl_80493790[];
 extern u8 lbl_803F0EF4[];
@@ -68,17 +80,19 @@ void *fn_802F1B74(void *self) {
     extern const f32 lbl_803F0F40[];
     extern u8 lbl_8041A218[];
     Vec3f v;
+    s32 zero;
 
     fn_802EFBA8(self);
     Vec3f_Set(&v, lbl_803F0F38[0], lbl_803F0F38[0], lbl_803F0F38[0]);
     *(void **)self = lbl_8041A218;
     *(Vec3f *)((u8 *)self + 0xC0) = v;
+    zero = 0;
+    *(s32 *)((u8 *)self + 0xCC) = zero;
     *(s32 *)((u8 *)self + 0xD4) = -1;
-    *(s32 *)((u8 *)self + 0xCC) = 0;
     *(f32 *)((u8 *)self + 0xD8) = lbl_803F0F3C[0];
     *(f32 *)((u8 *)self + 0xDC) = lbl_803F0F40[0];
     *(s32 *)((u8 *)self + 0xE0) = 1;
-    *(s32 *)((u8 *)self + 0xD0) = 0;
+    *(s32 *)((u8 *)self + 0xD0) = zero;
     fn_802F2378(self);
     return self;
 }
@@ -86,22 +100,11 @@ void *fn_802F1B74(void *self) {
 extern void fn_802EFC54(void *, void *);
 extern void *fn_802D34B0(void *, void *);
 void fn_802F1C20(void *self, void *stream) {
-    void *vt;
-    f32 x;
-    f32 y;
-    u8 b;
-
     fn_802EFC54(self, stream);
     stream = fn_802D34B0(stream, (u8 *)self + 0xC0);
-    x = M2C_FIELD(self, f32 *, 0xD8);
-    vt = M2C_FIELD(stream, void **, 0x18);
-    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)((char *)stream + M2C_FIELD(vt, s16 *, 0x38), &x, 4);
-    y = M2C_FIELD(self, f32 *, 0xDC);
-    vt = M2C_FIELD(stream, void **, 0x18);
-    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)((char *)stream + M2C_FIELD(vt, s16 *, 0x38), &y, 4);
-    b = M2C_FIELD(self, s32 *, 0xE0) != 0;
-    vt = M2C_FIELD(stream, void **, 0x18);
-    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)((char *)stream + M2C_FIELD(vt, s16 *, 0x38), &b, 1);
+    stream = Stream_WriteF32(stream, M2C_FIELD(self, f32 *, 0xD8));
+    stream = Stream_WriteF32(stream, M2C_FIELD(self, f32 *, 0xDC));
+    Stream_WriteBool(stream, M2C_FIELD(self, s32 *, 0xE0));
 }
 
 void fn_802F2468(s32 arg0, s32 arg1) {
