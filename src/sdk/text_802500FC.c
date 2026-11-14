@@ -2903,6 +2903,16 @@ s32 fn_80266B64(void) {
     return 1;
 }
 
+s32 fn_80266B6C(u64 x) {
+    u32 hi = x >> 32;
+    u32 lo = x & 0xFFFFFFFF;
+    s32 n = __cntlzw(hi);
+    if (n < 32) {
+        return n;
+    }
+    return __cntlzw(lo) + 32;
+}
+
 s32 fn_80266F5C(s32 arg0) {
     extern s32 lbl_80495F9C;
     s32 temp_r31;
