@@ -2922,11 +2922,13 @@ void fn_80263CE0(s32 arg0, void *arg1) {
 }
 
 void fn_80263D08(DVDCommandBlock *block, u32 offset, u32 length, void *callback) {
+    s32 idle;
+
     block->command = 0xD;
     block->offset = offset;
     block->length = length;
     block->callback = callback;
-    fn_80262F24(2, block);
+    idle = fn_80262F24(2, block);
 }
 
 s32 fn_80263DC4(DVDCommandBlock *block, void *callback) {
