@@ -5418,6 +5418,22 @@ void fn_8027524C(u32 stage, u32 a, u32 b, u32 c, u32 d) {
     ((u16 *)gx)[1] = 0;
 }
 
+void fn_80275290(u32 stage, u32 a, u32 b, u32 c, u32 d) {
+    extern void *__GXData;
+    u32 *gx = __GXData;
+    u32 reg;
+
+    reg = gx[0x170 / 4 + stage];
+    reg = __rlwimi(reg, a, 13, 16, 18);
+    reg = __rlwimi(reg, b, 10, 19, 21);
+    reg = __rlwimi(reg, c, 7, 22, 24);
+    reg = __rlwimi(reg, d, 4, 25, 27);
+    *(volatile u8 *)0xCC008000 = 0x61;
+    *(volatile u32 *)0xCC008000 = reg;
+    gx[0x170 / 4 + stage] = reg;
+    ((u16 *)gx)[1] = 0;
+}
+
 void fn_80275690(void) {
 
 }
