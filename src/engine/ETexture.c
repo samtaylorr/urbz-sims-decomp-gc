@@ -675,6 +675,18 @@ void fn_8036FD3C(void *arg0, s32 arg1) {
     }
 }
 
+static inline void ETexture_ResetRow(void *arg0, s32 i) {
+    extern f32 lbl_803F5480[];
+    s32 j;
+
+    for (j = 0; j < 2; j++) {
+        ((f32 *)((u8 *)arg0 + 0x38))[i * 2 + j] = ((f32 *)((u8 *)arg0 + 0x28))[i * 2 + j];
+        ((f32 *)((u8 *)arg0 + 0x58))[i * 2 + j] = ((f32 *)((u8 *)arg0 + 0x48))[i * 2 + j];
+        ((f32 *)((u8 *)arg0 + 0x48))[i * 2 + j] = lbl_803F5480[0];
+        ((s32 *)((u8 *)arg0 + 0x68))[i * 2 + j] = 0;
+    }
+}
+
 void fn_8036FE3C(void *arg0, void *arg1) {
     s32 fn_8036FBA8(void *, s32);
     s32 fn_8036FBC8(void *, s32);
