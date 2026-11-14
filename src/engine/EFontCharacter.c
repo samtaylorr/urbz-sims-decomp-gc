@@ -9,20 +9,6 @@ static inline s32 ListCount(u8 *list) {
     return *(s32 *)(list + 4);
 }
 
-static inline void EFontCharacter_CallWriteU16(void (*func)(void *, void *, s32), void *obj, u16 val) {
-    func(obj, &val, 2);
-}
-
-static inline void EFontCharacter_WriteU16(void *stream, u16 *val) {
-    char *vt;
-    void (*func)(void *, void *, s32);
-    void *obj;
-
-    vt = M2C_FIELD(stream, char **, 0x18);
-    func = (void (*)(void *, void *, s32))M2C_FIELD(vt, void **, 0x3C);
-    obj = (char *)stream + M2C_FIELD(vt, s16 *, 0x38);
-    EFontCharacter_CallWriteU16(func, obj, *val);
-}
 
 extern u8 lbl_804194A0[];
 
@@ -66,8 +52,8 @@ void fn_8036BDF4(void *self, void *stream) {
     obj = (char *)stream + M2C_FIELD(vt, s16 *, 0x38);
     b = M2C_FIELD(self, s32 *, 0x8);
     func(obj, &b, 4);
-    EFontCharacter_WriteU16(stream, M2C_FIELD(self, u16 *, 0xC));
-    EFontCharacter_WriteU16(stream, M2C_FIELD(self, u16 *, 0xE));
+    EFontCharacter_WriteU16(stream, (u16 *)((char *)self + 0xC));
+    EFontCharacter_WriteU16(stream, (u16 *)((char *)self + 0xE));
 }
 
 void fn_8036BEC0(char *self, void *stream) {
