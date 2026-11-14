@@ -2497,6 +2497,26 @@ s32 fn_802649F0(void) {
     return 0x80000000;
 }
 
+u32 fn_80264E40(void **item) {
+    s32 fn_8025465C(void);
+    void fn_80254684(s32);
+    s32 enabled;
+    void **prev;
+    void **next;
+
+    enabled = fn_8025465C();
+    prev = (void **)item[1];
+    next = (void **)item[0];
+    if (prev == NULL || next == NULL) {
+        fn_80254684(enabled);
+        return 0;
+    }
+    prev[0] = next;
+    next[1] = prev;
+    fn_80254684(enabled);
+    return 1;
+}
+
 u32 fn_80265370(const char *s, u32 n) {
     u32 i;
 
