@@ -3396,6 +3396,24 @@ void fn_8026EA54(u32 breakPt) {
     fn_80254684(enabled);
 }
 
+void fn_8026EAE0(void) {
+    extern void *__GXData;
+    extern volatile u16 *__cpReg;
+    extern s32 lbl_804960AC;
+    s32 fn_8025465C(void);
+    void fn_80254684(s32);
+    s32 enabled;
+    u32 *gx;
+
+    enabled = fn_8025465C();
+    gx = __GXData;
+    gx[2] = __rlwimi(gx[2], 0, 1, 30, 30);
+    gx[2] = __rlwimi(gx[2], 0, 5, 26, 26);
+    __cpReg[1] = gx[2];
+    lbl_804960AC = 0;
+    fn_80254684(enabled);
+}
+
 void __GXFifoInit(void) {
     extern void fn_8026E208();
     M2C_UNK fn_802546A8(s32, void *);
