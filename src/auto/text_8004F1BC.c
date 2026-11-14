@@ -1,6 +1,27 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+s32 fn_8004F1BC(s32 arg0) {
+    switch (arg0) {
+    case 0x3FD182D0:
+    case 0x8963D7C1:
+    case 0x81E6BEF9:
+    case 0x865A6812:
+    case 0xE25246D2:
+    case 0xBF1C5EFC:
+    case 0x1CD89442:
+    case 0x61B89983:
+    case 0x4A0C562F:
+    case 0x50907E06:
+    case 0x6ACAF6AD:
+    case 0x6660026F:
+    case 0x70F69082:
+        return 0;
+    default:
+        return 1;
+    }
+}
+
 s32 fn_8004F2A4(s32 arg0) {
     if (arg0 == 0x24C95F99) {
         return 1;
