@@ -2,6 +2,24 @@
 #include "common.h"
 
 void fn_802D2FD0(void);
+void fn_80399F48(void *);
+void fn_803C0C50(void *);
+
+static inline void EMemoryWriteStream_DestroyVec(void *vec) {
+    s32 n = M2C_FIELD(vec, s32 *, 4);
+    s32 i;
+    s32 off;
+
+    if (n > 0) {
+        i = n;
+        off = 0;
+        do {
+            fn_80399F48(M2C_FIELD(vec, u8 **, 0) + off);
+            off += 0xC;
+        } while (--i != 0);
+    }
+    fn_803C0C50(vec);
+}
 void *fn_80374058(void *arg0) {
     void fn_803C0C20(void *);
     extern u8 lbl_8041E178[];
@@ -15,6 +33,46 @@ void *fn_80374058(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x8C) = 0;
     M2C_FIELD(arg0, s32 *, 0x90) = 0;
     return arg0;
+}
+
+void fn_803740C0(void *arg0, s32 arg1) {
+    extern u8 lbl_8041E178[];
+    extern void fn_80399F48(void *);
+    extern void fn_803C0C50(void *);
+    extern void fn_803C0C9C(void *, s32);
+    extern void fn_802D20E8(void *);
+    void *v2;
+    s32 n;
+    s32 i;
+    s32 off;
+
+    M2C_FIELD(arg0, void **, 0xAC) = lbl_8041E178;
+    n = M2C_FIELD(arg0, s32 *, 0xA4);
+    if (n > 0) {
+        i = n;
+        off = 0;
+        do {
+            fn_80399F48(M2C_FIELD(arg0, u8 **, 0xA0) + off);
+            off += 0xC;
+        } while (--i != 0);
+    }
+    fn_803C0C50((u8 *)arg0 + 0xA0);
+    v2 = (u8 *)arg0 + 0x94;
+    n = M2C_FIELD(v2, s32 *, 4);
+    if (n > 0) {
+        i = n;
+        off = 0;
+        do {
+            fn_80399F48(M2C_FIELD(arg0, u8 **, 0x94) + off);
+            off += 0xC;
+        } while (--i != 0);
+    }
+    fn_803C0C50(v2);
+    fn_803C0C9C((u8 *)arg0 + 0xA0, 2);
+    fn_803C0C9C(v2, 2);
+    if (arg1 & 1) {
+        fn_802D20E8(arg0);
+    }
 }
 
 void *fn_8037475C(void *arg0, void *arg1) {
