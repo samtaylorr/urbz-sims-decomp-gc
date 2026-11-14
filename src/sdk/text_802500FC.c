@@ -2678,9 +2678,9 @@ void fn_80260C6C(s32 result, DVDCommandBlock *block) {
 void fn_80260D48(void);
 s32 fn_80260C9C(DVDFileInfo *fileInfo, s32 offset, s32 prio) {
     s32 fn_8025465C();
-    void fn_80254684(s32);
-    void fn_8025974C(void *);
-    extern u8 lbl_80495EC8[];
+    M2C_UNK fn_80254684(s32);
+    M2C_UNK fn_8025974C(M2C_UNK *);
+    extern M2C_UNK lbl_80495EC8;
     DVDCommandBlock *block;
     s32 result;
     s32 state;
@@ -2707,7 +2707,7 @@ s32 fn_80260C9C(DVDFileInfo *fileInfo, s32 offset, s32 prio) {
             retVal = -3;
             break;
         }
-        fn_8025974C(lbl_80495EC8);
+        fn_8025974C(&lbl_80495EC8);
     }
     fn_80254684(enabled);
     return retVal;
@@ -6639,23 +6639,19 @@ void fn_802753A4(u32 id, u8 *color) {
 #pragma scheduling off
 void fn_80275420(u32 id, s16 *color) {
     extern void *__GXData;
-    s16 r = color[0];
-    s16 a = color[3];
-    s16 b = color[2];
-    s16 g = color[1];
     u32 regRA;
     u32 regBG;
 
     regRA = 0;
-    regRA = __rlwimi(regRA, r, 0, 21, 31);
-    regRA = __rlwimi(regRA, a, 12, 9, 19);
-    regRA = __rlwimi(regRA, id * 2 + 0xE0, 24, 0, 7);
+    regRA = (regRA & ~0x7FF) | (color[0] & 0x7FF);
+    regRA = (regRA & ~0x7FF000) | ((color[3] & 0x7FF) << 12);
+    regRA = (regRA & ~0xFF000000) | ((id * 2 + 0xE0) << 24);
+    regBG = 0;
+    regBG = (regBG & ~0x7FF) | (color[2] & 0x7FF);
+    regBG = (regBG & ~0x7FF000) | ((color[1] & 0x7FF) << 12);
+    regBG = (regBG & ~0xFF000000) | ((id * 2 + 0xE1) << 24);
     GXWGFifo.u8 = 0x61;
     GXWGFifo.u32 = regRA;
-    regBG = 0;
-    regBG = __rlwimi(regBG, b, 0, 21, 31);
-    regBG = __rlwimi(regBG, g, 12, 9, 19);
-    regBG = __rlwimi(regBG, id * 2 + 0xE1, 24, 0, 7);
     GXWGFifo.u8 = 0x61;
     GXWGFifo.u32 = regBG;
     GXWGFifo.u8 = 0x61;
