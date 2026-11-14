@@ -3628,6 +3628,36 @@ s32 fn_802636F8(DVDCommandBlock *block, void *callback) {
     return idle;
 }
 
+s32 fn_802637B4(DVDCommandBlock *block) {
+    s32 fn_8025465C();
+    M2C_UNK fn_80254684(s32);
+    M2C_UNK fn_8025974C(M2C_UNK *);
+    void fn_80263854(s32, void *);
+    extern M2C_UNK lbl_80495EC8;
+    s32 result;
+    s32 enabled;
+    s32 state;
+    s32 retVal;
+
+    block->command = 9;
+    block->callback = (void *)fn_80263854;
+    result = fn_80262F24(1, block);
+    if (result == 0) {
+        return -1;
+    }
+    enabled = fn_8025465C();
+    while (1) {
+        state = block->state;
+        if (state == 0 || state == -1 || state == 10) {
+            retVal = block->transferredSize;
+            break;
+        }
+        fn_8025974C(&lbl_80495EC8);
+    }
+    fn_80254684(enabled);
+    return retVal;
+}
+
 void fn_80263854(s32 arg0, void *arg1);
 void fn_80263854(s32 arg0, void *arg1) {
     M2C_UNK fn_80259838(M2C_UNK *);
@@ -6984,7 +7014,25 @@ void fn_802745BC(u32 coord, u16 *ss, u16 *ts) {
     *ts = (u16)(gx[0xD8 / 4 + coord] & 0xFFFF) + 1;
 }
 
-void fn_80274940(u32 tev_stage, u32 ind_stage, u32 format, u32 bias_sel, u32 matrix_sel, u32 wrap_s, u32 wrap_t, u8 add_prev, u8 utc_lod, u32 alpha_sel);
+void fn_80274940(u32 tev_stage, u32 ind_stage, u32 format, u32 bias_sel, u32 matrix_sel, u32 wrap_s, u32 wrap_t, u8 add_prev, u8 utc_lod, u32 alpha_sel) {
+    extern void *__GXData;
+    u32 reg;
+
+    reg = 0;
+    reg = __rlwimi(reg, ind_stage, 0, 30, 31);
+    reg = __rlwimi(reg, format, 2, 28, 29);
+    reg = __rlwimi(reg, bias_sel, 4, 25, 27);
+    reg = __rlwimi(reg, alpha_sel, 7, 23, 24);
+    reg = __rlwimi(reg, matrix_sel, 9, 19, 22);
+    reg = __rlwimi(reg, wrap_s, 13, 16, 18);
+    reg = __rlwimi(reg, wrap_t, 16, 13, 15);
+    reg = __rlwimi(reg, utc_lod, 19, 12, 12);
+    reg = __rlwimi(reg, add_prev, 20, 11, 11);
+    reg = __rlwimi(reg, tev_stage + 0x10, 24, 0, 7);
+    GXWGFifo.u8 = 0x61;
+    GXWGFifo.u32 = reg;
+    M2C_FIELD(__GXData, u16 *, 0x2) = 0;
+}
 
 void fn_80274D54(u8 nIndStages) {
     extern u32 *__GXData;
@@ -6994,6 +7042,8 @@ void fn_80274D54(u8 nIndStages) {
     gx[0x5AC / 4] |= 6;
 }
 
+#pragma push
+#pragma inline_depth(0)
 void fn_80274D78(u32 tev_stage) {
     fn_80274940(tev_stage, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 }
@@ -7012,6 +7062,7 @@ void fn_802750DC(u32 tev_stage, u32 ind_stage, u32 matrix_sel) {
 void fn_80275120(u32 tev_stage) {
     fn_80274940(tev_stage, 0, 0, 0, 0, 6, 6, 1, 0, 0);
 }
+#pragma pop
 
 void fn_80275168(void) {
 
