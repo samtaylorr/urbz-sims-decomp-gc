@@ -249,6 +249,8 @@ void fn_8025171C(u32 tag) {
     fn_80254684(enabled);
 }
 
+#pragma push
+#pragma peephole off
 BOOL fn_802517CC(BOOL final) {
     extern void *lbl_80495E00;
     s32 fn_80264C0C(void *);
@@ -257,19 +259,16 @@ BOOL fn_802517CC(BOOL final) {
     void *next;
 
     if (final) {
-        alarm = lbl_80495E00;
-        next = alarm ? M2C_FIELD(alarm, void **, 0x14) : NULL;
-        while (alarm) {
+        for (alarm = lbl_80495E00, next = alarm ? M2C_FIELD(alarm, void **, 0x14) : NULL; alarm;
+             alarm = next, next = alarm ? M2C_FIELD(alarm, void **, 0x14) : NULL) {
             if (fn_80264C0C(alarm) == FALSE) {
                 fn_80251378(alarm);
             }
-            alarm = next;
-            next = alarm ? M2C_FIELD(alarm, void **, 0x14) : NULL;
         }
     }
     return TRUE;
 }
-
+#pragma pop
 extern s32 lbl_80495E08;
 s32 fn_8025186C(void) {
     return lbl_80495E08;
@@ -5905,9 +5904,9 @@ void fn_802755C8(u32 stage, u32 ras_sel, u32 tex_sel) {
 
 void fn_80275610(u32 table, u32 red, u32 green, u32 blue, u32 alpha) {
     extern struct { u16 unk0; u16 bpSentNot; u8 pad4[0x1AC]; u32 tevKsel[8]; } *__GXData;
-    struct { u16 unk0; u16 bpSentNot; u8 pad4[0x1AC]; u32 tevKsel[8]; } *gx = (void *)__GXData;
     u32 *Kreg;
     u32 index = table * 2;
+    struct { u16 unk0; u16 bpSentNot; u8 pad4[0x1AC]; u32 tevKsel[8]; } *gx = (void *)__GXData;
 
     Kreg = &gx->tevKsel[index];
     *Kreg = __rlwimi(*Kreg, red, 0, 30, 31);
