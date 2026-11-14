@@ -1,5 +1,14 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
+typedef struct __va_list_tag {
+    char gpr;
+    char fpr;
+    char *overflow_arg_area;
+    char *reg_save_area;
+} va_list[1];
+
+#define va_start(AP, LASTARG) \
+    (__builtin_next_arg(LASTARG), *(AP) = *(struct __va_list_tag *)__builtin_saveregs())
 
 typedef struct { f32 x, y, z; } EVec3;
 typedef struct { EVec3 min; EVec3 max; } EBox;
@@ -605,9 +614,10 @@ s32 fn_802C6064(void *arg0, s32 arg1, u8 arg2, s32 arg3, s32 arg4) {
     s32 n = M2C_FIELD(arg0, s32 *, 8);
     s32 best = -1;
     s32 bestScore = -1;
+    u8 c = arg2;
 
     for (i = 0; i < n; i++) {
-        s32 score = fn_802C5F88(M2C_FIELD(arg0, char **, 4) + i * 0x14, arg1, arg2, arg3, arg4);
+        s32 score = fn_802C5F88(M2C_FIELD(arg0, char **, 4) + i * 0x14, arg1, c, arg3, arg4);
         if (score > bestScore) {
             bestScore = score;
             best = i;
