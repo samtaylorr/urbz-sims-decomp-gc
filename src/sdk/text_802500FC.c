@@ -1885,6 +1885,7 @@ f32 fn_8025FF6C(f32 *a, f32 *b) {
     diff[2] = a[2] - b[2];
     return fn_8025FBAC(diff);
 }
+#pragma pop
 
 extern char *lbl_80495EB8;
 extern u32 lbl_80495EBC;
@@ -4077,6 +4078,7 @@ void fn_80271794(void) {
 void fn_802718FC(u16 left, u16 top, u16 wd, u16 ht) {
     extern void *__GXData;
     u32 *gx;
+    u32 w = wd, h = ht;
 
     gx = __GXData;
     gx[0x1E0 / 4] = 0;
@@ -4084,8 +4086,8 @@ void fn_802718FC(u16 left, u16 top, u16 wd, u16 ht) {
     gx[0x1E0 / 4] = __rlwimi(gx[0x1E0 / 4], top, 10, 12, 21);
     gx[0x1E0 / 4] = __rlwimi(gx[0x1E0 / 4], 0x49, 24, 0, 7);
     gx[0x1E4 / 4] = 0;
-    gx[0x1E4 / 4] = __rlwimi(gx[0x1E4 / 4], wd - 1, 0, 22, 31);
-    gx[0x1E4 / 4] = __rlwimi(gx[0x1E4 / 4], ht - 1, 10, 12, 21);
+    gx[0x1E4 / 4] = __rlwimi(gx[0x1E4 / 4], w - 1, 0, 22, 31);
+    gx[0x1E4 / 4] = __rlwimi(gx[0x1E4 / 4], h - 1, 10, 12, 21);
     gx[0x1E4 / 4] = __rlwimi(gx[0x1E4 / 4], 0x4A, 24, 0, 7);
 }
 
