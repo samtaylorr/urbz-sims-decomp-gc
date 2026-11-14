@@ -27,6 +27,28 @@ static inline void ERMLock_Unlock(ERMLock *l) {
     (*(void (**)(void *))(vt + 0x1C))(l->obj + *(s16 *)(vt + 0x18));
 }
 
+void *fn_8001C5A8(void *arg0, void *arg1) {
+    extern void *fn_800F160C(void *);
+    extern u8 lbl_80407108[];
+
+    M2C_FIELD(arg0, void **, 0x48) = lbl_80407108;
+    fn_800F160C((char *)arg0 + 0x18);
+    fn_800F160C((char *)arg0 + 0x1C);
+    fn_800F160C((char *)arg0 + 0x20);
+    fn_800F160C((char *)arg0 + 0x24);
+    fn_800F160C((char *)arg0 + 0x28);
+    M2C_FIELD(arg0, void **, 0x0) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x4) = 0;
+    M2C_FIELD(arg0, s32 *, 0x2C) = 0;
+    M2C_FIELD(arg0, s32 *, 0x30) = 0;
+    M2C_FIELD(arg0, s32 *, 0x34) = 0;
+    M2C_FIELD(arg0, s32 *, 0x38) = 0;
+    M2C_FIELD(arg0, s32 *, 0x3C) = 0;
+    M2C_FIELD(arg0, s32 *, 0x40) = 0;
+    M2C_FIELD(arg0, s32 *, 0x44) = 0;
+    return arg0;
+}
+
 void *fn_8001D654(u32 size, s32 arg1, void *p) {
     return p;
 }
@@ -285,19 +307,16 @@ void fn_8001E51C(void *arg0, void *arg1) {
 }
 
 void fn_8001E5B8(void *arg0, void *arg1, s32 arg2) {
-    void fn_8001E284(char *);
     extern u8 lbl_8041EE24[];
     extern void *lbl_80496220;
-    void *obj;
+    ERMLock lock[1];
     void *vt;
 
     fn_8001E284(arg0);
-    obj = arg0;
+    ERMLock_Lock(lock, arg0);
     M2C_FIELD(arg0, s32 *, 0xA8) = 2;
-    vt = *(void **)arg0;
-    ((void (*)(void *, s32))M2C_FIELD(vt, void **, 0x14))((char *)arg0 + M2C_FIELD(vt, s16 *, 0x10), -1);
     M2C_FIELD(arg1, s32 *, 0x600) += 1;
-    fn_8001E5B8_call(&obj);
+    ERMLock_Unlock(lock);
     vt = *(void **)lbl_80496220;
     ((void (*)(void *, void *, s32, void *, void *, s32, s32))M2C_FIELD(vt, void **, 0x64))((char *)lbl_80496220 + M2C_FIELD(vt, s16 *, 0x60), arg0, 1, lbl_8041EE24, arg1, arg2, 0);
 }
