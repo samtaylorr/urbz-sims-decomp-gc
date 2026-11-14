@@ -3616,6 +3616,15 @@ void fn_802636D0(s32 arg0, void *arg1) {
     fn_80259838(&lbl_80495EC8);
 }
 
+s32 fn_802636F8(DVDCommandBlock *block, void *callback) {
+    s32 idle;
+
+    block->command = 9;
+    block->callback = callback;
+    idle = fn_80262F24(1, block);
+    return idle;
+}
+
 void fn_80263854(s32 arg0, void *arg1);
 void fn_80263854(s32 arg0, void *arg1) {
     M2C_UNK fn_80259838(M2C_UNK *);
