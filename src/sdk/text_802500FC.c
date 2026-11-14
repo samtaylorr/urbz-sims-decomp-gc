@@ -1137,6 +1137,17 @@ s32 fn_80258544(void) {
     return *(s32 *)0x800000E4;
 }
 
+void fn_80258550(void *thread) {
+    extern void (*lbl_804949C0)(void *, void *);
+    void fn_802528A4(void *);
+    void fn_8025298C(void *);
+
+    lbl_804949C0(*(void **)0x800000E4, thread);
+    *(void **)0x800000E4 = thread;
+    fn_802528A4(thread);
+    fn_8025298C(thread);
+}
+
 s32 fn_802585AC(void *arg0) {
     if ((s32) M2C_FIELD(arg0, s32 *, 0x2CC) > 0) {
         return 1;
