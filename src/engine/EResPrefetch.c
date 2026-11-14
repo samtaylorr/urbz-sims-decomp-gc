@@ -52,6 +52,42 @@ M2C_UNK fn_8031EF04(void *self, s32 flags) {
     }
 }
 
+s32 fn_8031EFA8(void *self) {
+    typedef struct { s16 delta; s16 idx; s32 (*func)(void *); } VEntry;
+    extern s32 lbl_8045BA3C[];
+    extern u8 *lbl_80494DF0;
+    extern s32 fn_803665B8(void *, s32);
+    extern s32 fn_802D8CA4(void *, s32, s32, s32);
+    extern void fn_802D8EF8(void *);
+    extern u8 lbl_803F2EA0[];
+    u8 *obj;
+    VEntry *e;
+    u32 n;
+    u32 q;
+
+    obj = lbl_80494DF0;
+    M2C_FIELD(self, s32 *, 0x3FC) = lbl_8045BA3C[0];
+    e = (VEntry *)(*(u8 **)(obj + 0x338) + 0x38);
+    n = e->func(obj + e->delta);
+    M2C_FIELD(self, u32 *, 0x3F8) = n;
+    if (n != 0) {
+        q = M2C_FIELD(self, u32 *, 0x3FC) / n;
+    } else {
+        q = 0;
+    }
+    M2C_FIELD(self, u32 *, 0x400) = q;
+    if (fn_803665B8((u8 *)self + 0x38C, 0x800) != 0) {
+        void *p = (u8 *)self + 8;
+        M2C_FIELD(p, void **, 0x32C) = lbl_803F2EA0;
+        if (fn_802D8CA4(p, 0x17, 0x2000, 0) != 0) {
+            fn_802D8EF8(p);
+            M2C_FIELD(self, s32 *, 0x3D8) = 1;
+            return 1;
+        }
+    }
+    return 0;
+}
+
 void fn_8031F074(void *arg0) {
     M2C_UNK fn_802D8F1C(s32);
     M2C_UNK fn_8031F568();
