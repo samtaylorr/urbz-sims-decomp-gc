@@ -20,6 +20,9 @@ static inline void EMemoryWriteStream_DestroyVec(void *vec) {
     }
     fn_803C0C50(vec);
 }
+static inline s32 EMemoryWriteStream_VecSize(void *vec) {
+    return M2C_FIELD(vec, s32 *, 4);
+}
 void *fn_80374058(void *arg0) {
     void fn_803C0C20(void *);
     extern u8 lbl_8041E178[];
@@ -37,11 +40,8 @@ void *fn_80374058(void *arg0) {
 
 void fn_803740C0(void *arg0, s32 arg1) {
     extern u8 lbl_8041E178[];
-    extern void fn_80399F48(void *);
-    extern void fn_803C0C50(void *);
     extern void fn_803C0C9C(void *, s32);
     extern void fn_802D20E8(void *);
-    void *v2;
     s32 n;
     s32 i;
     s32 off;
@@ -57,8 +57,7 @@ void fn_803740C0(void *arg0, s32 arg1) {
         } while (--i != 0);
     }
     fn_803C0C50((u8 *)arg0 + 0xA0);
-    v2 = (u8 *)arg0 + 0x94;
-    n = M2C_FIELD(v2, s32 *, 4);
+    n = M2C_FIELD((u8 *)arg0 + 0x94, s32 *, 4);
     if (n > 0) {
         i = n;
         off = 0;
@@ -67,9 +66,9 @@ void fn_803740C0(void *arg0, s32 arg1) {
             off += 0xC;
         } while (--i != 0);
     }
-    fn_803C0C50(v2);
+    fn_803C0C50((u8 *)arg0 + 0x94);
     fn_803C0C9C((u8 *)arg0 + 0xA0, 2);
-    fn_803C0C9C(v2, 2);
+    fn_803C0C9C((u8 *)arg0 + 0x94, 2);
     if (arg1 & 1) {
         fn_802D20E8(arg0);
     }
