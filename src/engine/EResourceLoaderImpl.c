@@ -18,6 +18,11 @@ static inline void ERMLock_Unlock(ERMLock *l) {
     (*(void (**)(void *))(vt + 0x1C))(l->obj + *(s16 *)(vt + 0x18));
 }
 
+static inline void ERMName_Init(s32 *s, s32 name) {
+    void fn_802D3C60(s32 *, s32);
+    fn_802D3C60(s, name);
+}
+
 extern u8 lbl_8041B4F0[];
 extern void fn_802D20E8(void *);
 void **fn_8031C754(void **self) {
@@ -299,8 +304,6 @@ s32 fn_8031D158(char *self, char *res) {
     s32 fn_8031E254(void *, s32 *);
     ERMLock lock;
     char **list;
-    s32 str[2];
-    s32 *p;
     s32 ret;
 
     ERMLock_Lock(&lock, self + 0x360);
@@ -311,12 +314,15 @@ s32 fn_8031D158(char *self, char *res) {
     } else {
         list[0] = res;
     }
-    p = str;
     *(char **)(res + 0xA0) = NULL;
     list[1] = res;
-    fn_802D3C60(p, *(s32 *)(res + 0x54));
-    ret = fn_8031E254(self, p);
-    fn_802D39F0(p, *p);
+    {
+        s32 str[2];
+        s32 *s = str;
+        fn_802D3C60(s, *(s32 *)(res + 0x54));
+        ret = fn_8031E254(self, s);
+        fn_802D39F0(s, s[0]);
+    }
     ERMLock_Unlock(&lock);
     return ret;
 }
