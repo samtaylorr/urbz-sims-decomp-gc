@@ -2625,7 +2625,7 @@ void fn_802643C8(void) {
 }
 
 #pragma push
-#pragma scheduling off
+#pragma peephole off
 void fn_80264404(void) {
     s32 fn_8025465C(void);
     void fn_80254684(s32);
@@ -4175,7 +4175,7 @@ void fn_8026F9C4(GXVtxDescList *list) {
 void fn_8026FA54(void) {
     extern u32 *const __GXData;
     __GXData[0x14 / 4] = 0;
-    __GXData[0x14 / 4] = (__GXData[0x14 / 4] & ~(3 << 9)) | ((u32)1 << 9);
+    __GXData[0x14 / 4] = __rlwimi(__GXData[0x14 / 4], 1, 9, 21, 22);
     __GXData[0x18 / 4] = 0;
     ((u8 *)__GXData)[0x4D4] = 0;
     ((u8 *)__GXData)[0x4D5] = 0;
