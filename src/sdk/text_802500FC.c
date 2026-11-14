@@ -3355,6 +3355,20 @@ void fn_80271794(void) {
     *(u16 *)(__GXData + 2) = 0;
 }
 
+void fn_80271B58(u32 mode) {
+}
+
+void fn_80271B7C(u32 clamp) {
+}
+
+u32 fn_80271BD4(u32 efbHt, u32 iScale) {
+    return 0;
+}
+
+u16 fn_80271C2C(u16 efbHeight, f32 yScale) {
+    return 0;
+}
+
 void fn_80271FC0(u8 *color, u32 val) {
     extern void *__GXData;
     void *gx = __GXData;
