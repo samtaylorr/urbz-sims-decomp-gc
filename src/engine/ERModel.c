@@ -45,6 +45,40 @@ s32 fn_803292C4(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void fn_8032952C(void *self, s32 flags) {
+    extern u8 lbl_8041B910[];
+    extern u8 lbl_8045B82C[];
+    extern void fn_8032A490(void *);
+    extern void fn_80338184(void *, void *);
+    extern void fn_803BC66C(void *, s32);
+    extern void fn_803BC538(void *, s32);
+    extern void fn_803BC404(void *, s32);
+    extern void fn_803BC2D0(void *, s32);
+    extern void fn_803BC19C(void *, s32);
+    extern void fn_803BC0B0(void *, s32);
+    extern void fn_8031E910(void *, s32);
+
+    M2C_FIELD(self, void **, 0) = lbl_8041B910;
+    fn_8032A490(self);
+    if (M2C_FIELD(self, void **, 0x168) != 0) {
+        fn_80338184(lbl_8045B82C, M2C_FIELD(self, void **, 0x168));
+        M2C_FIELD(self, void **, 0x168) = 0;
+    }
+    M2C_FIELD(self, u8 *, 0x160) = 0;
+    M2C_FIELD(self, s8 *, 0x161) = -1;
+    M2C_FIELD(self, s32 *, 0x164) = 0;
+    fn_803BC66C((u8 *)self + 0x154, 2);
+    fn_803BC538((u8 *)self + 0x148, 2);
+    fn_803BC404((u8 *)self + 0x13C, 2);
+    fn_803BC2D0((u8 *)self + 0x130, 2);
+    fn_803BC19C((u8 *)self + 0x9C, 2);
+    fn_803BC0B0((u8 *)self + 0x20, 2);
+    fn_8031E910(self, 0);
+    if (flags & 1) {
+        fn_80338184(lbl_8045B82C, self);
+    }
+}
+
 void fn_8032960C(u8 *self, u8 *arg) {
     typedef struct { s16 delta; s16 pad; void *pfn; } Ent;
     u8 *r;
