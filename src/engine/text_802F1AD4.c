@@ -150,12 +150,44 @@ void fn_802F1DB0(char *self, f32 *pos, f32 *out) {
         scale = lbl_803F0F4C[0];
         if (M2C_FIELD(self, s32 *, 0xE0) != 0) {
             scale = M2C_FIELD(self, f32 *, 0xDC) / (dist * lbl_803F0F50[0]);
-            scale = scale * scale;
+            scale *= scale;
         }
-        *out = scale * *out;
+        *out *= scale;
         if (*out > lbl_803F0F4C[0]) {
             *out = lbl_803F0F4C[0];
         }
+    }
+}
+
+void fn_802F2278(char *self, Vec3f *pos) {
+    extern s32 lbl_80494E58;
+    void (*cb)(s32, s32, u16 *, s16 *);
+    u16 a;
+    s16 b;
+    u16 *pa;
+    s16 *pb;
+    s32 ix;
+    s32 iy;
+
+    *(Vec3f *)(self + 0xC0) = *pos;
+    pa = &a;
+    pb = &b;
+    cb = M2C_FIELD(self, void (**)(s32, s32, u16 *, s16 *), 0x20);
+    if (cb != NULL) {
+        cb(M2C_FIELD(self, s32 *, 0x30), 0, pa, pb);
+    } else {
+        *pb = 0;
+        *pa = 0;
+    }
+    M2C_FIELD(self, s32 *, 8) = M2C_FIELD(self, u16 *, 0x28) != *pa;
+    M2C_FIELD(self, u16 *, 0x28) = *pa;
+    ix = (s32)pos->x;
+    iy = (s32)pos->y;
+    if (ix != M2C_FIELD(self, s32 *, 0xCC) || iy != M2C_FIELD(self, s32 *, 0xD0) || M2C_FIELD(self, s32 *, 0xD4) != b) {
+        M2C_FIELD(self, s32 *, 0xCC) = ix;
+        M2C_FIELD(self, s32 *, 0xD0) = iy;
+        M2C_FIELD(self, s32 *, 0xD4) = b;
+        lbl_80494E58 = 1;
     }
 }
 
@@ -167,14 +199,11 @@ void fn_802F2378(void *self) {
     extern void fn_802F09B8(void *, void *);
     struct { Vec3f min; Vec3f max; } box;
     Vec3f tmp;
-    Vec3f *t;
+    Vec3f *t = &tmp;
 
-    tmp.x = lbl_803F0F70[0];
-    tmp.z = lbl_803F0F70[0];
-    tmp.y = lbl_803F0F70[0];
-    box.max = tmp;
+    Vec3f_Set(t, lbl_803F0F70[0], lbl_803F0F70[0], lbl_803F0F70[0]);
+    box.max = *t;
     box.min = box.max;
-    t = &tmp;
     if (M2C_FIELD(self, s32 *, 0xE0) != 0) {
         fn_802C5148(&box, (u8 *)self + 0xC0, M2C_FIELD(self, f32 *, 0xDC));
     } else {
