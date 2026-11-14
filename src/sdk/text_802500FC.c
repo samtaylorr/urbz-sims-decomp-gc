@@ -3330,21 +3330,24 @@ void fn_8026E6C4(s32 arg0) {
 void fn_8026E7C0(void *fifo) {
     extern volatile u16 *__cpReg;
     u32 *f = fifo;
+    u32 hi = __cpReg[0x1D];
 
-    f[5] = (u32)((__cpReg[0x1D] << 16) | __cpReg[0x1C]) + 0x80000000;
+    f[5] = __rlwimi(__cpReg[0x1C], hi, 16, 0, 15) + 0x80000000;
     f[7] = (__cpReg[0x19] << 16) | __cpReg[0x18];
 }
 
 void fn_8026E7F0(u8 *overhi, u8 *underlow, u8 *readIdle, u8 *cmdIdle, u8 *brkpt) {
     extern volatile u16 *__cpReg;
-    extern u32 *__GXData;
+    extern void *__GXData;
+    volatile u16 *cp = __cpReg;
+    u32 *gx = __GXData;
 
-    __GXData[3] = __cpReg[0];
-    *overhi = __GXData[3] & 1;
-    *underlow = (__GXData[3] >> 1) & 1;
-    *readIdle = (__GXData[3] >> 2) & 1;
-    *cmdIdle = (__GXData[3] >> 3) & 1;
-    *brkpt = (__GXData[3] >> 4) & 1;
+    gx[3] = cp[0];
+    *overhi = gx[3] & 1;
+    *underlow = (gx[3] >> 1) & 1;
+    *readIdle = (gx[3] >> 2) & 1;
+    *cmdIdle = (gx[3] >> 3) & 1;
+    *brkpt = (gx[3] >> 4) & 1;
 }
 
 void fn_8026E954(void *fifo, u32 *readPtr, u32 *writePtr) {
@@ -3358,7 +3361,7 @@ void fn_8026E954(void *fifo, u32 *readPtr, u32 *writePtr) {
         f[6] = (__piReg[5] & 0xFBFFFFFF) + 0x80000000;
     }
     if (fifo == lbl_80496094) {
-        f[5] = (u32)((__cpReg[0x1D] << 16) | __cpReg[0x1C]) + 0x80000000;
+        f[5] = (u32)(void *)((u32)((__cpReg[0x1D] << 16) | __cpReg[0x1C]) + 0x80000000);
         f[7] = (__cpReg[0x19] << 16) | __cpReg[0x18];
     } else {
         f[7] = f[6] - f[5];
@@ -4557,6 +4560,16 @@ void fn_80275D4C(const f32 *mtx, u32 id) {
     __psq_st(dst, v3, 0, 0, 0);
     __psq_st(dst, v4, 0, 0, 0);
     __psq_st(dst, v5, 0, 0, 0);
+}
+
+void fn_80275D9C(u16 mtx_indx, u32 id) {
+    u32 reg = 0;
+
+    reg = __rlwimi(reg, id * 4, 0, 20, 31);
+    reg = __rlwimi(reg, 0xB, 12, 16, 19);
+    reg = __rlwimi(reg, mtx_indx, 16, 0, 15);
+    GXWGFifo.u8 = 0x20;
+    GXWGFifo.u32 = reg;
 }
 
 void fn_802760C0(f32 left, f32 top, f32 wd, f32 ht, f32 nearz, f32 farz) {
