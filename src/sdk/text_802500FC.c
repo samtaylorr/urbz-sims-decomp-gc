@@ -18,6 +18,11 @@ typedef struct DVDCommandBlock {
 
 extern DVDCommandBlock *lbl_80495ED0;
 
+typedef struct DVDQueue {
+    DVDCommandBlock *next;
+    DVDCommandBlock *prev;
+} DVDQueue;
+
 typedef struct OSMutex_ {
     s32 queue[2];
     struct OSThread_ *thread;
@@ -4029,14 +4034,14 @@ void fn_80271794(void) {
 
 void fn_802718FC(u16 left, u16 top, u16 wd, u16 ht) {
     extern void *__GXData;
-    u32 *gx = __GXData;
-    u32 reg = 0;
+    u32 *gx;
 
-    gx[0x1E0 / 4] = reg;
+    gx = __GXData;
+    gx[0x1E0 / 4] = 0;
     gx[0x1E0 / 4] = __rlwimi(gx[0x1E0 / 4], left, 0, 22, 31);
     gx[0x1E0 / 4] = __rlwimi(gx[0x1E0 / 4], top, 10, 12, 21);
     gx[0x1E0 / 4] = __rlwimi(gx[0x1E0 / 4], 0x49, 24, 0, 7);
-    gx[0x1E4 / 4] = reg;
+    gx[0x1E4 / 4] = 0;
     gx[0x1E4 / 4] = __rlwimi(gx[0x1E4 / 4], wd - 1, 0, 22, 31);
     gx[0x1E4 / 4] = __rlwimi(gx[0x1E4 / 4], ht - 1, 10, 12, 21);
     gx[0x1E4 / 4] = __rlwimi(gx[0x1E4 / 4], 0x4A, 24, 0, 7);
