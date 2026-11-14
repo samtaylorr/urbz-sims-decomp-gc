@@ -1375,6 +1375,17 @@ void fn_8025B2B0(void) {
     fn_80259838();
 }
 
+BOOL fn_8025B2D0(OSMutex_ **queue, OSMutex_ *mutex) {
+    OSMutex_ *member;
+
+    for (member = queue[0]; member != NULL; member = member->next) {
+        if (mutex == member) {
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
 #pragma push
 #pragma scheduling off
 s32 fn_8025C2BC(s32 chan) {
@@ -3840,9 +3851,8 @@ void __GXFlushTextureState(void) {
 }
 
 void fn_802751C0(s32 id, u32 mode) {
-    extern void *__GXData;
+    extern u8 *__GXData;
     extern u32 lbl_803FB248[4][5];
-    u8 *gx = __GXData;
     u32 *ctmp;
     u32 *atmp;
     u32 tevReg;
@@ -3854,17 +3864,17 @@ void fn_802751C0(s32 id, u32 mode) {
         ctmp = lbl_803FB248[1] + mode;
         atmp = lbl_803FB248[3] + mode;
     }
-    tevReg = ((u32 *)(gx + 0x130))[id];
+    tevReg = ((u32 *)(__GXData + 0x130))[id];
     tevReg = (*ctmp & ~0xFF000000) | (tevReg & 0xFF000000);
     GXWGFifo.u8 = 0x61;
     GXWGFifo.u32 = tevReg;
-    ((u32 *)(gx + 0x130))[id] = tevReg;
-    tevReg = ((u32 *)(gx + 0x170))[id];
+    ((u32 *)(__GXData + 0x130))[id] = tevReg;
+    tevReg = ((u32 *)(__GXData + 0x170))[id];
     tevReg = (*atmp & ~0xFF00000F) | (tevReg & 0xFF00000F);
     GXWGFifo.u8 = 0x61;
     GXWGFifo.u32 = tevReg;
-    ((u32 *)(gx + 0x170))[id] = tevReg;
-    M2C_FIELD(gx, u16 *, 0x2) = 0;
+    ((u32 *)(__GXData + 0x170))[id] = tevReg;
+    *(u16 *)(__GXData + 2) = 0;
 }
 
 void fn_80275690(void) {
@@ -4056,12 +4066,12 @@ void fn_80276210(u32 *left, u32 *top, u32 *wd, u32 *ht) {
     u32 tp, lf, bm, rt;
 
     lf = (M2C_FIELD(__GXData, u32 *, 0xF8) >> 12) & 0x7FF;
-    tp = M2C_FIELD(__GXData, u32 *, 0xF8) & 0x7FF;
-    rt = (M2C_FIELD(__GXData, u32 *, 0xFC) >> 12) & 0x7FF;
-    bm = M2C_FIELD(__GXData, u32 *, 0xFC) & 0x7FF;
     *left = lf - 0x156;
+    tp = M2C_FIELD(__GXData, u32 *, 0xF8) & 0x7FF;
     *top = tp - 0x156;
+    rt = (M2C_FIELD(__GXData, u32 *, 0xFC) >> 12) & 0x7FF;
     *wd = rt - lf + 1;
+    bm = M2C_FIELD(__GXData, u32 *, 0xFC) & 0x7FF;
     *ht = bm - tp + 1;
 }
 
