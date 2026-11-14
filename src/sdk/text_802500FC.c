@@ -3795,9 +3795,9 @@ void fn_802729DC(void *lt_obj, f32 px, f32 py, f32 pz, f32 nx, f32 ny, f32 nz) {
     M2C_FIELD(lt_obj, f32 *, 0x34) = nx;
     M2C_FIELD(lt_obj, f32 *, 0x38) = ny;
     M2C_FIELD(lt_obj, f32 *, 0x3C) = nz;
-    px *= lbl_804975A0;
-    py *= lbl_804975A0;
-    pz *= lbl_804975A0;
+    px = lbl_804975A0 * px;
+    py = lbl_804975A0 * py;
+    pz = lbl_804975A0 * pz;
     M2C_FIELD(lt_obj, f32 *, 0x28) = px;
     M2C_FIELD(lt_obj, f32 *, 0x2C) = py;
     M2C_FIELD(lt_obj, f32 *, 0x30) = pz;
