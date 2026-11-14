@@ -1645,7 +1645,11 @@ f32 fn_8025FF08(f32 *a, f32 *b) {
 }
 
 f32 fn_8025FF6C(f32 *a, f32 *b) {
-    return sqrtf(fn_8025FF08(a, b));
+    f32 diff[3];
+    diff[0] = a[0] - b[0];
+    diff[1] = a[1] - b[1];
+    diff[2] = a[2] - b[2];
+    return sqrtf(diff[2] * diff[2] + (diff[0] * diff[0] + diff[1] * diff[1]));
 }
 
 #pragma pop
@@ -3994,20 +3998,20 @@ void fn_8027612C(f32 scale, f32 offset) {
     u8 *gx = __GXData;
     f32 zOffset;
     f32 zScale;
-    f32 sz, oz;
+    f32 zmin, zmax;
 
-    zOffset = offset * lbl_80497608;
+    zOffset = lbl_80497608 * offset;
     M2C_FIELD(gx, f32 *, 0x50C) = zOffset;
-    zScale = lbl_804975FC + scale * lbl_80497608;
+    zScale = lbl_804975FC + lbl_80497608 * scale;
     M2C_FIELD(gx, f32 *, 0x510) = zScale;
-    sz = M2C_FIELD(gx, f32 *, 0x508) * zScale - M2C_FIELD(gx, f32 *, 0x504) * zScale;
-    oz = zOffset + M2C_FIELD(gx, f32 *, 0x508) * zScale;
+    zmax = M2C_FIELD(gx, f32 *, 0x508) * zScale;
+    zmin = M2C_FIELD(gx, f32 *, 0x504) * zScale;
     GXWGFifo.u8 = 0x10;
     GXWGFifo.u32 = 0x101C;
-    GXWGFifo.f32 = sz;
+    GXWGFifo.f32 = zmax - zmin;
     GXWGFifo.u8 = 0x10;
     GXWGFifo.u32 = 0x101F;
-    GXWGFifo.f32 = oz;
+    GXWGFifo.f32 = zOffset + zmax;
     M2C_FIELD(gx, u16 *, 0x2) = 1;
 }
 
