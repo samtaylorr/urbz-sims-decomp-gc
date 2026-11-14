@@ -3810,12 +3810,13 @@ void fn_80275168(void) {
 }
 
 void __GXSetIndirectMask(u32 mask) {
-    extern u8 *__GXData;
+    extern void *__GXData;
+    u32 *gx = __GXData;
 
-    *(u32 *)(__GXData + 0x124) = __rlwimi(*(u32 *)(__GXData + 0x124), mask, 0, 24, 31);
+    gx[0x124 / 4] = __rlwimi(gx[0x124 / 4], mask, 0, 24, 31);
     GXWGFifo.u8 = 0x61;
-    GXWGFifo.u32 = *(u32 *)(__GXData + 0x124);
-    *(u16 *)(__GXData + 2) = 0;
+    GXWGFifo.u32 = gx[0x124 / 4];
+    ((u16 *)gx)[1] = 0;
 }
 
 void __GXFlushTextureState(void) {
@@ -3999,18 +4000,18 @@ void fn_8027612C(f32 scale, f32 offset) {
     u8 *gx = __GXData;
     f32 zOffset;
     f32 zScale;
-    f32 zmax;
+    f32 zmax, zmin;
 
     zOffset = lbl_80497608 * offset;
-    zScale = lbl_80497608 * scale;
+    scale = lbl_80497608 * scale;
     M2C_FIELD(gx, f32 *, 0x50C) = zOffset;
-    zScale = lbl_804975FC + zScale;
+    zScale = lbl_804975FC + scale;
     M2C_FIELD(gx, f32 *, 0x510) = zScale;
     zmax = M2C_FIELD(gx, f32 *, 0x508) * zScale;
-    scale = M2C_FIELD(gx, f32 *, 0x504) * zScale;
+    zmin = M2C_FIELD(gx, f32 *, 0x504) * zScale;
     GXWGFifo.u8 = 0x10;
     GXWGFifo.u32 = 0x101C;
-    GXWGFifo.f32 = zmax - scale;
+    GXWGFifo.f32 = zmax - zmin;
     GXWGFifo.u8 = 0x10;
     GXWGFifo.u32 = 0x101F;
     GXWGFifo.f32 = zOffset + zmax;
