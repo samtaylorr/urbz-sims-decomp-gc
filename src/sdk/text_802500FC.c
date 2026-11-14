@@ -2624,6 +2624,8 @@ void fn_802643C8(void) {
     fn_80254684(enabled);
 }
 
+#pragma push
+#pragma scheduling off
 void fn_80264404(void) {
     s32 fn_8025465C(void);
     void fn_80254684(s32);
@@ -2640,7 +2642,7 @@ void fn_80264404(void) {
     }
     fn_80254684(enabled);
 }
-
+#pragma pop
 void fn_8026477C(void) {
     extern M2C_UNK lbl_80495EC8;
     fn_80259838(&lbl_80495EC8);
@@ -3146,6 +3148,88 @@ s32 fn_80266FA0(s32 arg0) {
     return temp_r31;
 }
 
+u8 *fn_80266FE4(u32 mode) {
+    extern u8 lbl_803F9DE8[];
+    u8 *timing = lbl_803F9DE8 + 0x44;
+
+    switch (mode) {
+    case 0:
+        return timing;
+    case 1:
+        return timing + 0x26;
+    case 4:
+        return timing + 0x4C;
+    case 5:
+        return timing + 0x72;
+    case 20:
+        return timing;
+    case 21:
+        return timing + 0x26;
+    case 8:
+        return timing + 0x98;
+    case 9:
+        return timing + 0xBE;
+    case 2:
+        return timing + 0xE4;
+    case 3:
+        return timing + 0x10A;
+    case 16:
+        return timing + 0x4C;
+    case 17:
+        return timing + 0x72;
+    case 24:
+        return timing + 0x130;
+    case 26:
+        return timing + 0x156;
+    }
+    return 0;
+}
+
+#pragma push
+#pragma inline_depth(0)
+void fn_802673E4(void) {
+    extern s16 lbl_80495FAC;
+    extern s16 lbl_80495FAE;
+    u8 *fn_80257214(void);
+    u8 *sram;
+
+    sram = fn_80257214();
+    lbl_80495FAC = (s8)sram[0x10];
+    lbl_80495FAE = 0;
+    fn_80257608(0);
+}
+#pragma pop
+void fn_802678D0(void) {
+    extern s32 lbl_80495F8C;
+    extern u8 lbl_80495F94[];
+    void fn_8025974C(void *);
+    s32 enabled;
+    s32 count;
+
+    enabled = fn_8025465C();
+    count = lbl_80495F8C;
+    do {
+        fn_8025974C(lbl_80495F94);
+    } while (count == lbl_80495F8C);
+    fn_80254684(enabled);
+}
+
+void fn_80267924(u8 *tm) {
+    extern u16 lbl_80442B18[];
+    extern u64 lbl_80495FB8;
+    u16 vct, hct, borrow;
+
+    vct = (u16)(*(u16 *)(tm + 0x18) / 2);
+    borrow = (u16)(*(u16 *)(tm + 0x18) % 2);
+    hct = (u16)(borrow ? *(u16 *)(tm + 0x1A) : (u16)0);
+    vct++;
+    hct++;
+    lbl_80442B18[25] = hct;
+    lbl_80495FB8 |= 1ull << (63 - 25);
+    lbl_80442B18[24] = vct | 0x1000;
+    lbl_80495FB8 |= 1ull << (63 - 24);
+}
+
 extern s32 lbl_80495FD8;
 s32 fn_80268F3C(void) {
     return lbl_80495FD8;
@@ -3159,6 +3243,20 @@ s32 fn_80268F44(void) {
 extern s32 lbl_80495F8C;
 s32 fn_80269134(void) {
     return lbl_80495F8C;
+}
+
+extern u16 *lbl_80495FD0;
+u32 fn_80269230(void) {
+    extern u16 lbl_80442C08[];
+    s32 enabled;
+    u32 nextField;
+    u32 hct, vct;
+
+    enabled = fn_8025465C();
+    fn_8026913C(&hct, &vct);
+    nextField = (((vct - 1) << 1) + (hct - 1) / lbl_80495FD0[0xD] < lbl_80495FD0[0xC]) ? 1 : 0;
+    fn_80254684(enabled);
+    return (nextField ^ 1) ^ (lbl_80442C08[5] & 1);
 }
 
 void fn_802698E8(u32 hct, u32 vct, s16 *x, s16 *y);
@@ -4030,20 +4128,19 @@ s32 fn_8026EDF8(void) {
 }
 
 void fn_8026F630(void) {
-    extern u8 *const __GXData;
+    extern u8 *__GXData;
     u32 nNrm;
     u32 nCols;
     u32 nTex;
-    u8 *gx;
+    u8 *gx = __GXData;
 
     *(volatile u8 *)0xCC008000 = 8;
     *(volatile u8 *)0xCC008000 = 0x50;
-    *(volatile u32 *)0xCC008000 = *(u32 *)(__GXData + 0x14);
+    *(volatile u32 *)0xCC008000 = *(u32 *)(gx + 0x14);
     *(volatile u8 *)0xCC008000 = 8;
     *(volatile u8 *)0xCC008000 = 0x60;
-    *(volatile u32 *)0xCC008000 = *(u32 *)(__GXData + 0x18);
+    *(volatile u32 *)0xCC008000 = *(u32 *)(gx + 0x18);
 
-    gx = __GXData;
     if (gx[0x4D5]) {
         nNrm = 2;
     } else if (gx[0x4D4]) {
@@ -4053,12 +4150,12 @@ void fn_8026F630(void) {
     }
     nCols = 33 - __cntlzw((*(u32 *)(gx + 0x14) >> 13) & 0xF);
     nCols /= 2;
-    nTex = 33 - __cntlzw(*(u32 *)(gx + 0x18) & 0xFFFF);
+    nTex = 33 - __cntlzw(*(u32 *)(__GXData + 0x18) & 0xFFFF);
     nTex /= 2;
     *(volatile u8 *)0xCC008000 = 0x10;
     *(volatile u32 *)0xCC008000 = 0x1008;
     *(volatile u32 *)0xCC008000 = nCols | (nNrm << 2) | (nTex << 4);
-    *(u16 *)(gx + 2) = 1;
+    *(u16 *)(__GXData + 2) = 1;
 }
 
 void fn_8026F9C4(GXVtxDescList *list) {
@@ -4086,24 +4183,24 @@ void fn_8026FA54(void) {
 }
 
 void fn_8026FF68(void) {
-    extern u8 *__GXData;
-    u8 *gx = __GXData;
+    extern u32 *__GXData;
+    u32 *gx = __GXData;
     u8 i;
 
     for (i = 0; i < 8; i++) {
-        if (gx[0x5AB] & (1 << i)) {
+        if (((u8 *)gx)[0x5AB] & (1 << i)) {
             *(volatile u8 *)0xCC008000 = 8;
             *(volatile u8 *)0xCC008000 = i | 0x70;
-            *(volatile u32 *)0xCC008000 = ((u32 *)(gx + 0x1C))[i];
+            *(volatile u32 *)0xCC008000 = gx[7 + i];
             *(volatile u8 *)0xCC008000 = 8;
             *(volatile u8 *)0xCC008000 = i | 0x80;
-            *(volatile u32 *)0xCC008000 = ((u32 *)(gx + 0x3C))[i];
+            *(volatile u32 *)0xCC008000 = gx[15 + i];
             *(volatile u8 *)0xCC008000 = 8;
             *(volatile u8 *)0xCC008000 = i | 0x90;
-            *(volatile u32 *)0xCC008000 = ((u32 *)(gx + 0x5C))[i];
+            *(volatile u32 *)0xCC008000 = gx[23 + i];
         }
     }
-    __GXData[0x5AB] = 0;
+    ((u8 *)__GXData)[0x5AB] = 0;
 }
 
 void fn_80270384(void) {
