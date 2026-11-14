@@ -250,7 +250,9 @@ void fn_802F52DC(void *self, s32 arg1, void *arg2) {
         for (i = 0; i < M2C_FIELD(p, s32 *, 0x24); i++) {
             grp = fn_802F5454_Entry(self, i);
             for (j = 0; j < M2C_FIELD(grp, s32 *, 4); j++) {
-                if (M2C_FIELD(M2C_FIELD(grp, char **, 0) + j * 0x6C, s32 *, 0xC) == arg1) {
+                char *item = M2C_FIELD(grp, char **, 0);
+                item += j * 0x6C;
+                if (M2C_FIELD(item, s32 *, 0xC) == arg1) {
                     fn_8031EA2C(*iter);
                     *iter = fn_8033740C(lbl_8045BA40, arg2, 0, 0);
                 }
