@@ -3217,6 +3217,7 @@ void fn_802613D8(u32 intType) {
     DVDCommandBlock *finished;
     extern s32 lbl_80495F04;
     extern DVDCommandBlock lbl_80442960;
+    void fn_8026006C(void);
 
     if (intType == 16) {
         fn_80261530();
@@ -4540,7 +4541,7 @@ void fn_802678D0(void) {
 
 void fn_80267924(u8 *tm) {
     extern u16 lbl_80442B18[];
-    extern volatile u64 lbl_80495FB8;
+    extern u64 lbl_80495FB8;
     u16 vct, hct, borrow;
 
     vct = (u16)(*(u16 *)(tm + 0x18) / 2);
@@ -4550,8 +4551,20 @@ void fn_80267924(u8 *tm) {
     hct++;
     lbl_80442B18[25] = hct;
     lbl_80495FB8 |= 1ull << (63 - 25);
-    lbl_80442B18[24] = vct | 0x1000;
+    lbl_80442B18[24] = (u16)(vct | 0x1000);
     lbl_80495FB8 |= 1ull << (63 - 24);
+}
+
+void fn_802679A0(u16 fbSizeX, s32 xfbMode, u16 panPosX, u16 panSizeX, u8 *wordPerLine, u8 *std, u8 *wpl, u8 *xof) {
+    extern u16 lbl_80442B18[];
+    extern u64 lbl_80495FB8;
+
+    *wordPerLine = (u8)((fbSizeX + 15) / 16);
+    *std = (u8)((xfbMode == 0) ? *wordPerLine : (u8)(2 * *wordPerLine));
+    *xof = (u8)(panPosX % 16);
+    *wpl = (u8)((*xof + panSizeX + 15) / 16);
+    lbl_80442B18[36] = (u16)((*std) | (*wpl << 8));
+    lbl_80495FB8 |= 1ull << (63 - 36);
 }
 
 void fn_80268ED0(void *callback) {
@@ -5850,20 +5863,20 @@ void fn_8026FF68(void) {
         u8 pad7C[0x5AB - 0x7C];
         u8 dirtyVAT;
     } *const __GXData;
+    struct GXVATData *const gx = __GXData;
     u8 i;
-    u8 dirty = __GXData->dirtyVAT;
 
     for (i = 0; i < 8; i++) {
-        if (__GXData->dirtyVAT & (1 << i)) {
+        if (gx->dirtyVAT & (1 << i)) {
             *(volatile u8 *)0xCC008000 = 8;
             *(volatile u8 *)0xCC008000 = i | 0x70;
-            *(volatile u32 *)0xCC008000 = __GXData->vatA[i];
+            *(volatile u32 *)0xCC008000 = gx->vatA[i];
             *(volatile u8 *)0xCC008000 = 8;
             *(volatile u8 *)0xCC008000 = i | 0x80;
-            *(volatile u32 *)0xCC008000 = __GXData->vatB[i];
+            *(volatile u32 *)0xCC008000 = gx->vatB[i];
             *(volatile u8 *)0xCC008000 = 8;
             *(volatile u8 *)0xCC008000 = i | 0x90;
-            *(volatile u32 *)0xCC008000 = __GXData->vatC[i];
+            *(volatile u32 *)0xCC008000 = gx->vatC[i];
         }
     }
     __GXData->dirtyVAT = 0;
@@ -7537,8 +7550,8 @@ void fn_80275FD8(void) {
 
     sx = M2C_FIELD(gx, f32 *, 0x4FC) * lbl_80497600;
     sy = -M2C_FIELD(gx, f32 *, 0x500) * lbl_80497600;
-    ox = lbl_80497604 + (M2C_FIELD(gx, f32 *, 0x4F4) + M2C_FIELD(gx, f32 *, 0x4FC) * lbl_80497600);
-    oy = lbl_80497604 + (M2C_FIELD(gx, f32 *, 0x4F8) + M2C_FIELD(gx, f32 *, 0x500) * lbl_80497600);
+    ox = M2C_FIELD(gx, f32 *, 0x4F4) + sx + lbl_80497604;
+    oy = M2C_FIELD(gx, f32 *, 0x4F8) + M2C_FIELD(gx, f32 *, 0x500) * lbl_80497600 + lbl_80497604;
     zmin = M2C_FIELD(gx, f32 *, 0x504) * M2C_FIELD(gx, f32 *, 0x510);
     zmax = M2C_FIELD(gx, f32 *, 0x508) * M2C_FIELD(gx, f32 *, 0x510);
     sz = zmax - zmin;
