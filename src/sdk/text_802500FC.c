@@ -3398,7 +3398,8 @@ u32 fn_80271BD4(u32 efbHt, u32 iScale) {
 }
 
 u16 fn_80271C2C(u16 efbHeight, f32 yScale) {
-    return 0;
+    u32 iScale = (u32)(256.0f / yScale) & 0x1FF;
+    return fn_80271BD4(efbHeight, iScale);
 }
 
 void fn_80271FC0(u8 *color, u32 val) {
