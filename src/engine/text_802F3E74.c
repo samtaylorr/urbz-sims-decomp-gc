@@ -178,6 +178,19 @@ void fn_802F42E4(s32 arg0, s32 arg1) {
     fn_802F42A8(arg0, fn_80337F14(arg1), 0, 0, 0);
 }
 
+void fn_802F4498(void *arg0, void *arg1) {
+    s64 *src = (s64 *)((char *)arg0 + 0xD0);
+    s64 *dst = arg1;
+    dst[0] = src[0];
+    dst[1] = src[1];
+    dst[2] = src[2];
+    dst[3] = src[3];
+    dst[4] = src[4];
+    dst[5] = src[5];
+    dst[6] = src[6];
+    dst[7] = src[7];
+}
+
 extern void fn_802E34F0(void *, void *);
 void fn_802F4A8C(char *self, void *arg1) {
     fn_802E34F0(arg1, self + 0x44);
