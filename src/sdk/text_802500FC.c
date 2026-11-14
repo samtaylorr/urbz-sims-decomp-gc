@@ -604,11 +604,12 @@ s32 fn_8025399C(void) {
 
 void fn_802539D4(void *arg0) {
     void fn_802482F8(void *, void *, u32);
-    void *p = *(void **)0x800030F0;
-    if ((void *)0x80000000 > p) {
-        *(s32 *)arg0 = 0;
-    } else {
+    u8 *base = (u8 *)0x80000000;
+    u8 *p = *(u8 **)(base + 0x30F0);
+    if (base <= p) {
         fn_802482F8(arg0, p, 0x1C);
+    } else {
+        *(s32 *)arg0 = 0;
     }
 }
 
