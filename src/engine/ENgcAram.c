@@ -14,13 +14,6 @@ u32 fn_80373B44(void);
 void fn_80373B58(void *, u32, u32);
 void fn_80373BEC(void);
 
-static inline void aramDmaStart(void *req, s32 type, u32 src, u32 dst, u32 len, void (*cb)(void)) {
-    M2C_UNK fn_80251C1C(u32, u32);
-    M2C_UNK fn_80380760(void *, s32, s32, s32, u32, u32, u32, void (*)(void));
-    fn_80251C1C(src, len);
-    fn_80380760(req, 0, type, 1, src, dst, len, cb);
-}
-
 void fn_802D0C44(void);
 void fn_80373A18(void) {
     fn_802D0C44();
@@ -95,8 +88,6 @@ void fn_80373BEC(void) {
 }
 
 void fn_80373BF8(void *arg0, u32 arg1, u32 arg2, void (*cb)(s32), s32 cbArg) {
-    M2C_UNK fn_80251C1C();
-    M2C_UNK fn_80380760();
     void fn_80373F64(void);
     void fn_80373F24(void);
     void fn_80373CF0(void *);
@@ -118,8 +109,7 @@ void fn_80373BF8(void *arg0, u32 arg1, u32 arg2, void (*cb)(s32), s32 cbArg) {
     } else {
         lbl_804756E0[i].unk20 = cb;
         lbl_804756E0[i].unk24 = cbArg;
-        fn_80251C1C(arg0, arg2);
-        fn_80380760(&lbl_804756E0[i], 0, 0, 1, arg0, arg1, arg2, fn_80373CF0);
+        aramDmaStart(&lbl_804756E0[i], 0, (u32)arg0, arg1, arg2, (void (*)(void))fn_80373CF0);
         fn_80373F24();
     }
 }
@@ -167,6 +157,8 @@ void fn_80373E20(void) {
 }
 
 void fn_80373E2C(u32 arg0, u32 arg1, u32 arg2, void (*cb)(s32), s32 cbArg) {
+    M2C_UNK fn_80251BF0(u32, u32);
+    M2C_UNK fn_80380760(void *, s32, s32, s32, u32, u32, u32, void (*)(void *));
     void fn_80373F64(void);
     void fn_80373F24(void);
     void fn_80373CF0(void *);
@@ -185,13 +177,14 @@ void fn_80373E2C(u32 arg0, u32 arg1, u32 arg2, void (*cb)(s32), s32 cbArg) {
         if (cb != 0) {
             cb(cbArg);
         }
-        return;
+    } else {
+        ARAMEntry *e = &lbl_804756E0[i];
+        e->unk20 = cb;
+        e->unk24 = cbArg;
+        fn_80251BF0(arg0, arg2);
+        fn_80380760(e, 0, 1, 1, arg1, arg0, arg2, fn_80373CF0);
+        fn_80373F24();
     }
-    lbl_804756E0[i].unk20 = cb;
-    lbl_804756E0[i].unk24 = cbArg;
-    fn_80251BF0(arg0, arg2);
-    fn_80380760(lbl_804756E0 + i, 0, 1, 1, arg1, arg0, arg2, fn_80373CF0);
-    fn_80373F24();
 }
 
 void fn_80373F24(void) {
