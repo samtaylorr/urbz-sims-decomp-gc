@@ -342,6 +342,38 @@ void fn_802C54FC(void (*cb)(void)) {
     lbl_80494DB0 = cb;
 }
 
+char *fn_802C56E8(char *str) {
+    extern void *fn_802D0AB8(void);
+    extern void *fn_802D0B3C(void);
+    extern void *fn_802D197C(void *heap, u32 size, s32 align);
+    extern void *fn_802DBBCC(void *heap, u32 size, s32 flag);
+    extern s32 fn_80248808(const char *s);
+    extern char *fn_80248784(char *dst, const char *src);
+    void *heap;
+    void *p;
+    u32 size;
+
+    if (str != NULL) {
+        heap = fn_802D0AB8();
+        size = fn_80248808(str) + 1;
+        if (size == 0) {
+            heap = NULL;
+        } else {
+            p = fn_802D197C(heap, size, 4);
+            if (p == NULL && (p = fn_802DBBCC(heap, size, 0)) == NULL && heap == fn_802D0AB8()) {
+                heap = fn_802DBBCC(fn_802D0B3C(), size, 0);
+            } else {
+                heap = p;
+            }
+        }
+        if (heap != NULL) {
+            fn_80248784(heap, str);
+            return heap;
+        }
+    }
+    return NULL;
+}
+
 void *fn_802C5B1C(void *self, void *stream) {
     extern void fn_802D3E40(void *);
     extern void fn_802D41A8(void *, char *);
