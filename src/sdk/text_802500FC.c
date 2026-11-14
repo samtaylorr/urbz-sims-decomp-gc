@@ -4299,17 +4299,18 @@ void fn_8027425C(u32 coord, u8 enable, u32 ss, u32 ts) {
     }
 }
 
-void fn_802742D8(u32 coord, u8 s_enable, u8 t_enable) {
+void fn_802742D8(u32 coord, u32 s_enable, u32 t_enable) {
     extern void *__GXData;
     u32 *gx = __GXData;
+    u32 *ts = &gx[coord];
 
-    gx[0xB8 / 4 + coord] = __rlwimi(gx[0xB8 / 4 + coord], s_enable, 17, 14, 14);
-    gx[0xD8 / 4 + coord] = __rlwimi(gx[0xD8 / 4 + coord], t_enable, 17, 14, 14);
+    ts[0xB8 / 4] = __rlwimi(ts[0xB8 / 4], s_enable, 17, 14, 14);
+    ts[0xD8 / 4] = __rlwimi(ts[0xD8 / 4], t_enable, 17, 14, 14);
     if (gx[0x594 / 4] & (1 << coord)) {
         GXWGFifo.u8 = 0x61;
-        GXWGFifo.u32 = gx[0xB8 / 4 + coord];
+        GXWGFifo.u32 = ts[0xB8 / 4];
         GXWGFifo.u8 = 0x61;
-        GXWGFifo.u32 = gx[0xD8 / 4 + coord];
+        GXWGFifo.u32 = ts[0xD8 / 4];
         M2C_FIELD(gx, u16 *, 0x2) = 0;
     }
 }
@@ -4569,6 +4570,16 @@ void fn_80275D9C(u16 mtx_indx, u32 id) {
     reg = __rlwimi(reg, 0xB, 12, 16, 19);
     reg = __rlwimi(reg, mtx_indx, 16, 0, 15);
     GXWGFifo.u8 = 0x20;
+    GXWGFifo.u32 = reg;
+}
+
+void fn_80275E64(u16 mtx_indx, u32 id) {
+    u32 reg = 0;
+
+    reg = __rlwimi(reg, id * 3 + 0x400, 0, 20, 31);
+    reg = __rlwimi(reg, 8, 12, 16, 19);
+    reg = __rlwimi(reg, mtx_indx, 16, 0, 15);
+    GXWGFifo.u8 = 0x28;
     GXWGFifo.u32 = reg;
 }
 
