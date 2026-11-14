@@ -3115,6 +3115,9 @@ void fn_802611DC(void) {
     fn_80259838(&lbl_80495EC8);
 }
 
+void fn_80261530(void);
+void fn_80261564(void);
+void fn_8026561C(void);
 s32 fn_80261200(DVDFileInfo *fileInfo) {
     s32 bytes;
     DVDCommandBlock *cb = &fileInfo->cb;
@@ -3134,7 +3137,7 @@ s32 fn_80261200(DVDFileInfo *fileInfo) {
         bytes = 0;
         break;
     case 1:
-        bytes = (s32)(cb->transferredSize + (cb->currTransferSize - ((volatile u32 *)0xCC006000)[6]));
+        bytes = (s32)((cb->currTransferSize - ((volatile u32 *)0xCC006000)[6]) + cb->transferredSize);
         break;
     }
     return bytes;
@@ -3163,6 +3166,38 @@ void fn_80261344(void) {
         fn_802530CC(lbl_80494A34, 0x28D, lbl_803F96EC);
     }
     fn_802660C0(M2C_FIELD(lbl_80495ED8, void **, 0x38), (lbl_80442920[2] + 31) & ~31, lbl_80442920[1], fn_802613D8);
+}
+
+void fn_80261530(void);
+void fn_80261564(void);
+void fn_8026561C(void);
+void fn_802622E0(void);
+void fn_80261458(u32 intType) {
+    DVDCommandBlock *finished;
+    extern s32 lbl_80495EE8;
+    extern DVDCommandBlock lbl_80442960;
+    extern u32 lbl_80495EF0;
+    extern void (*lbl_80495EF4)(s32, DVDCommandBlock *);
+
+    lbl_80495ED0->state = -1;
+    if (intType == 16) {
+        fn_80261530();
+        return;
+    }
+    fn_8026561C();
+    finished = lbl_80495ED0;
+    lbl_80495ED0 = &lbl_80442960;
+    lbl_80495EE8 = 1;
+    if (finished->callback) {
+        ((void (*)(s32, DVDCommandBlock *))finished->callback)(-1, finished);
+    }
+    if (lbl_80495EF0) {
+        lbl_80495EF0 = 0;
+        if (lbl_80495EF4) {
+            lbl_80495EF4(0, finished);
+        }
+    }
+    fn_802622E0();
 }
 
 void fn_80261458();
@@ -5682,7 +5717,8 @@ void fn_8026F9C4(GXVtxDescList *list) {
     }
     list[attr].attr = 25;
     fn_8026F810(25, &list[attr].type);
-    list[++attr].attr = 0xFF;
+    attr++;
+    list[attr].attr = 0xFF;
 }
 
 void fn_8026FA54(void) {
@@ -5704,13 +5740,13 @@ void fn_8026FF68(void) {
         if (gx[0x5AB] & (1 << i)) {
             *(volatile u8 *)0xCC008000 = 8;
             *(volatile u8 *)0xCC008000 = i | 0x70;
-            *(volatile u32 *)0xCC008000 = *(u32 *)(gx + (i * 4 + 0x1C));
+            *(volatile u32 *)0xCC008000 = ((u32 *)(gx + 0x1C))[i];
             *(volatile u8 *)0xCC008000 = 8;
             *(volatile u8 *)0xCC008000 = i | 0x80;
-            *(volatile u32 *)0xCC008000 = *(u32 *)(gx + (i * 4 + 0x3C));
+            *(volatile u32 *)0xCC008000 = ((u32 *)(gx + 0x3C))[i];
             *(volatile u8 *)0xCC008000 = 8;
             *(volatile u8 *)0xCC008000 = i | 0x90;
-            *(volatile u32 *)0xCC008000 = *(u32 *)(gx + (i * 4 + 0x5C));
+            *(volatile u32 *)0xCC008000 = ((u32 *)(gx + 0x5C))[i];
         }
     }
     __GXData[0x5AB] = 0;
