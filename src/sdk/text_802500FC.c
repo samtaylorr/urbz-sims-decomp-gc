@@ -5436,6 +5436,19 @@ s32 fn_80271074(s32 arg0) {
     return temp_r31;
 }
 
+void fn_8027154C(void) {
+    extern void *__GXData;
+    u32 i;
+    u32 numD = M2C_FIELD(__GXData, u16 *, 0x4) * M2C_FIELD(__GXData, u16 *, 0x6);
+
+    GXWGFifo.u8 = 0x98;
+    GXWGFifo.u16 = M2C_FIELD(__GXData, u16 *, 0x4);
+    for (i = 0; i < numD; i += 4) {
+        GXWGFifo.u32 = 0;
+    }
+    M2C_FIELD(__GXData, u16 *, 0x2) = 1;
+}
+
 void fn_802715D4(u8 a, u32 b) {
     extern void *__GXData;
     u32 *gx = __GXData;
@@ -5770,6 +5783,36 @@ void fn_80272CC4(u8 nChans) {
     GXWGFifo.u32 = 0x1009;
     GXWGFifo.u32 = nChans;
     gx[0x5AC / 4] |= 4;
+}
+
+void fn_80272D00(s32 chan, u8 enable, s32 amb_src, s32 mat_src, u32 light_mask, s32 diff_fn, s32 attn_fn) {
+    extern void *__GXData;
+    u32 reg;
+    u32 idx;
+
+    idx = chan & 0x3;
+    reg = 0;
+    reg = (reg & ~0x2) | (enable << 1);
+    reg = (reg & ~0x1) | mat_src;
+    reg = (reg & ~0x40) | (amb_src << 6);
+    reg = (reg & ~0x180) | ((attn_fn == 0 ? 0 : diff_fn) << 7);
+    reg = (reg & ~0x200) | ((attn_fn != 2) << 9);
+    reg = (reg & ~0x400) | ((attn_fn != 0) << 10);
+    reg = (reg & ~0x3C) | ((light_mask & 0xF) << 2);
+    reg = (reg & ~0x7800) | (((light_mask >> 4) & 0xF) << 11);
+    GXWGFifo.u8 = 0x10;
+    GXWGFifo.u32 = idx + 0x100E;
+    GXWGFifo.u32 = reg;
+    if (chan == 4) {
+        GXWGFifo.u8 = 0x10;
+        GXWGFifo.u32 = 0x1010;
+        GXWGFifo.u32 = reg;
+    } else if (chan == 5) {
+        GXWGFifo.u8 = 0x10;
+        GXWGFifo.u32 = 0x1011;
+        GXWGFifo.u32 = reg;
+    }
+    M2C_FIELD(__GXData, u16 *, 0x2) = 1;
 }
 
 void fn_80272DB8(u32 fmt, u32 *rowTileS, u32 *colTileS) {
@@ -6355,16 +6398,20 @@ void fn_80275420(u32 id, s16 *color) {
     extern void *__GXData;
     u32 regRA;
     u32 regBG;
+    s16 r = color[0];
+    s16 g = color[1];
+    s16 b = color[2];
+    s16 a = color[3];
 
     regRA = 0;
-    regRA = __rlwimi(regRA, color[0], 0, 21, 31);
-    regRA = __rlwimi(regRA, color[3], 12, 9, 19);
+    regRA = __rlwimi(regRA, r, 0, 21, 31);
+    regRA = __rlwimi(regRA, a, 12, 9, 19);
     regRA = __rlwimi(regRA, id * 2 + 0xE0, 24, 0, 7);
     GXWGFifo.u8 = 0x61;
     GXWGFifo.u32 = regRA;
     regBG = 0;
-    regBG = __rlwimi(regBG, color[2], 0, 21, 31);
-    regBG = __rlwimi(regBG, color[1], 12, 9, 19);
+    regBG = __rlwimi(regBG, b, 0, 21, 31);
+    regBG = __rlwimi(regBG, g, 12, 9, 19);
     regBG = __rlwimi(regBG, id * 2 + 0xE1, 24, 0, 7);
     GXWGFifo.u8 = 0x61;
     GXWGFifo.u32 = regBG;
