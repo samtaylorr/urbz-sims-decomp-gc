@@ -3312,6 +3312,14 @@ void fn_8027171C(u32 *a) {
 }
 
 void fn_80271760(u8 a) {
+    extern u32 *__GXData;
+    u32 *gx = __GXData;
+
+    gx[0x204 / 4] = __rlwimi(gx[0x204 / 4], a, 19, 12, 12);
+    GXWGFifo.u8 = 0x61;
+    GXWGFifo.u32 = 0xFE080000;
+    GXWGFifo.u8 = 0x61;
+    GXWGFifo.u32 = gx[0x204 / 4];
 }
 
 void fn_80271794(void) {
