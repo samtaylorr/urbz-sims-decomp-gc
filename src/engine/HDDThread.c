@@ -105,6 +105,31 @@ void fn_80332228(void *arg0) {
     }
 }
 
+s32 fn_80332628(void *self) {
+    void fn_803322A0(void *);
+    s32 fn_80331FB0(FamilyQuad *, s32, s32, void *, s32);
+    FamilyQuad q;
+
+    if (M2C_FIELD(self, s32 *, 0x10) != 0) {
+        return 1;
+    }
+    fn_803322A0(self);
+    if (M2C_FIELD(self, s32 *, 0x10) == 0 && M2C_FIELD(self, s32 *, 0) != 0 && M2C_FIELD(self, s32 *, 8) != 0) {
+        fn_80331EA4(&q);
+        if (fn_80331FB0(&q, M2C_FIELD(self, s32 *, 4), M2C_FIELD(self, s32 *, 0), (char *)self + 0xC, M2C_FIELD(self, s32 *, 8)) != 0) {
+            fn_803322A0(self);
+            if (M2C_FIELD(self, s32 *, 0x10) != 0) {
+                fn_80331EC0(&q, 2);
+                goto done;
+            }
+        }
+        fn_80331EC0(&q, 2);
+        return 0;
+    }
+done:
+    return 1;
+}
+
 s32 fn_803326F0(void *arg0) {
     if (((s32) M2C_FIELD(arg0, s32 *, 4) != 0) && ((s32) M2C_FIELD(arg0, s32 *, 0) != 0)) {
         return M2C_FIELD(arg0, s32 *, 0x10);
