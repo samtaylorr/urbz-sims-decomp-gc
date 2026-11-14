@@ -11,6 +11,13 @@ extern u8 lbl_803F1054[];
 extern u8 lbl_80493740[];
 extern s32 lbl_804961DC;
 
+typedef struct { f32 x, y, z; } Vec3_802F;
+static inline void Vec3_802F_Set(Vec3_802F *v, f32 x, f32 y, f32 z) {
+    v->x = x;
+    v->y = y;
+    v->z = z;
+}
+
 void fn_802D2FD0(void);
 void fn_802F3374(void) {
     fn_802D2FD0();
@@ -32,6 +39,46 @@ s32 fn_802F33D4(s32 arg0, s32 *out) {
     fn_802C5C58((void *)arg0, &tmp);
     *out = tmp;
     return arg0;
+}
+
+void *fn_802F3414(self)
+    void *self;
+{
+    extern void fn_802EFBA8(void *);
+    extern void fn_802F3A5C(void *);
+    extern u8 lbl_8041A500[];
+    extern const f32 lbl_803F1060[];
+    extern const f32 lbl_803F1064[];
+    extern const f32 lbl_803F1068[];
+    extern f32 lbl_803F106C[];
+    extern f32 lbl_803F1070[];
+    extern f32 lbl_803F1074[];
+    extern f32 lbl_803F1078[];
+    typedef struct { f32 x, y, z; } Vec;
+    Vec t;
+    Vec *v;
+    f32 a;
+    f32 b;
+
+    fn_802EFBA8(self);
+    *(u8 **)self = lbl_8041A500;
+    v = (Vec *)((char *)self + 0xCC);
+    v->x = lbl_803F1060[0];
+    v->z = lbl_803F1064[0];
+    v->y = lbl_803F1060[0];
+    t.z = lbl_803F1060[0];
+    t.y = lbl_803F1060[0];
+    t.x = lbl_803F1060[0];
+    M2C_FIELD(self, Vec *, 0xC0) = t;
+    M2C_FIELD(self, f32 *, 0xD8) = lbl_803F1068[0];
+    M2C_FIELD(self, f32 *, 0xDC) = lbl_803F106C[0];
+    a = lbl_803F1070[0] * lbl_803F1074[0];
+    b = lbl_803F1078[0] * lbl_803F1074[0];
+    M2C_FIELD(self, s32 *, 0xE8) = 1;
+    M2C_FIELD(self, f32 *, 0xE0) = a;
+    M2C_FIELD(self, f32 *, 0xE4) = b;
+    fn_802F3A5C(self);
+    return self;
 }
 
 void fn_802F3C70(s32 arg0, s32 arg1) {
