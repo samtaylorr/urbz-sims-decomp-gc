@@ -4599,7 +4599,7 @@ void fn_80267924(u8 *tm) {
 
 void fn_802679A0(u16 fbSizeX, s32 xfbMode, u16 panPosX, u16 panSizeX, u8 *wordPerLine, u8 *std, u8 *wpl, u8 *xof) {
     extern u16 lbl_80442B18[];
-    extern u64 lbl_80495FB8;
+    extern volatile u64 lbl_80495FB8;
 
     *wordPerLine = (u8)((fbSizeX + 15) / 16);
     *std = (u8)((xfbMode == 0) ? *wordPerLine : (u8)(2 * *wordPerLine));
