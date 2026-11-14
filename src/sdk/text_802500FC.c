@@ -1439,6 +1439,7 @@ void fn_80257CB4(u32 mode) {
     s32 fn_802572CC(s32, s32);
     SramControlBlock *scb;
     s32 enabled;
+    s32 *locked;
     u8 pad[8];
 
     scb = &lbl_80440C00;
@@ -1446,12 +1447,13 @@ void fn_80257CB4(u32 mode) {
         mode = 0;
     }
     enabled = fn_8025465C();
-    if (scb->locked != 0) {
+    locked = &scb->locked;
+    if (*locked != 0) {
         fn_80254684(enabled);
         scb = NULL;
     } else {
         scb->enabled = enabled;
-        scb->locked = 1;
+        *locked = 1;
     }
     if (mode == (scb->sram[0x13] & 3)) {
         fn_802572CC(0, 0);
@@ -2499,6 +2501,30 @@ s32 fn_8025E260(s32 enable) {
     return rc;
 }
 
+void fn_8025E4B8(void) {
+    typedef struct { s32 chan; u32 poll; u32 inputBytes; void *input; void *callback; } SIControl;
+    typedef struct { s32 chan; u8 pad[0x1C]; } SIPacket;
+    extern SIControl lbl_803F9124;
+    extern SIPacket lbl_80441710[];
+    extern char *lbl_80494A00;
+    void fn_8025DF1C(s16, void *);
+    u32 fn_8025F148(s32);
+
+    OSRegisterVersion(lbl_80494A00);
+    lbl_80441710[0].chan = lbl_80441710[1].chan = lbl_80441710[2].chan = lbl_80441710[3].chan = -1;
+    lbl_803F9124.poll = 0;
+    fn_8025F710(0);
+    do {
+    } while (__SIRegs[13] & 1);
+    __SIRegs[13] = 0x80000000;
+    fn_802546A8(0x14, (__OSInterruptHandler)fn_8025DF1C);
+    fn_80254B48(0x800);
+    fn_8025F148(0);
+    fn_8025F148(1);
+    fn_8025F148(2);
+    fn_8025F148(3);
+}
+
 u32 fn_8025E880(s32 chan) {
     s32 fn_8025465C(void);
     void fn_80254684(s32);
@@ -3010,6 +3036,22 @@ void fn_8026126C(void) {
 extern s32 lbl_80494A30;
 void fn_80261270(s32 arg0) {
     lbl_80494A30 = arg0;
+}
+
+void fn_80261344(void) {
+    extern u32 lbl_80442920[];
+    extern void *lbl_80495ED8;
+    extern void (*lbl_80495F24)(void);
+    extern char lbl_80494A34[];
+    extern char lbl_803F96EC[];
+    extern void fn_802660C0(void *, u32, u32, void (*)(u32));
+    void fn_802613D8(u32);
+
+    lbl_80495F24 = fn_80261344;
+    if (M2C_FIELD(lbl_80495ED8, u32 *, 0x3c) < lbl_80442920[2]) {
+        fn_802530CC(lbl_80494A34, 0x28D, lbl_803F96EC);
+    }
+    fn_802660C0(M2C_FIELD(lbl_80495ED8, void **, 0x38), (lbl_80442920[2] + 31) & ~31, lbl_80442920[1], fn_802613D8);
 }
 
 void fn_80261458();
@@ -5851,6 +5893,49 @@ s32 fn_80271074(s32 arg0) {
     return temp_r31;
 }
 
+void fn_802710B8(s16 interrupt, void *context) {
+    extern volatile u16 *__peReg;
+    extern void (*lbl_804960B4)(void);
+    void fn_80252AAC(void *);
+    void fn_802528A4(void *);
+    void fn_80259838(void *);
+    u8 ctx[0x2C8];
+    u32 reg;
+
+    reg = __peReg[5];
+    reg = __rlwimi(reg, 1, 3, 28, 28);
+    __peReg[5] = reg;
+    lbl_804960B8 = 1;
+    if (lbl_804960B4 != NULL) {
+        fn_80252AAC(ctx);
+        fn_802528A4(ctx);
+        lbl_804960B4();
+        fn_80252AAC(ctx);
+        fn_802528A4(context);
+    }
+    fn_80259838(lbl_804960BC);
+}
+
+void __GXPEInit(void) {
+    extern volatile u16 *__peReg;
+    void fn_80270FEC(s16, void *);
+    void fn_802710B8(s16, void *);
+    void fn_80258534(void *);
+    u32 reg;
+
+    fn_802546A8(0x12, (__OSInterruptHandler)fn_80270FEC);
+    fn_802546A8(0x13, (__OSInterruptHandler)fn_802710B8);
+    fn_80258534(lbl_804960BC);
+    fn_80254B48(0x2000);
+    fn_80254B48(0x1000);
+    reg = __peReg[5];
+    reg = __rlwimi(reg, 1, 2, 29, 29);
+    reg = __rlwimi(reg, 1, 3, 28, 28);
+    reg = __rlwimi(reg, 1, 0, 31, 31);
+    reg = __rlwimi(reg, 1, 1, 30, 30);
+    __peReg[5] = reg;
+}
+
 void fn_802713FC(void) {
     extern void *__GXData;
     void fn_80274440(void);
@@ -7117,6 +7202,31 @@ void fn_80275F80(u16 mtx_indx, u32 id, s32 type) {
     reg = __rlwimi(reg, mtx_indx, 16, 0, 15);
     GXWGFifo.u8 = 0x30;
     GXWGFifo.u32 = reg;
+}
+
+void fn_80275FD8(void) {
+    extern void *__GXData;
+    extern f32 lbl_80497600;
+    extern f32 lbl_80497604;
+    u8 *gx = __GXData;
+    f32 sx, sy, sz, ox, oy, oz, zmin, zmax;
+
+    sx = M2C_FIELD(gx, f32 *, 0x4FC) * lbl_80497600;
+    sy = -M2C_FIELD(gx, f32 *, 0x500) * lbl_80497600;
+    ox = lbl_80497604 + (M2C_FIELD(gx, f32 *, 0x4F4) + sx);
+    oy = lbl_80497604 + (M2C_FIELD(gx, f32 *, 0x4F8) + M2C_FIELD(gx, f32 *, 0x500) * lbl_80497600);
+    zmin = M2C_FIELD(gx, f32 *, 0x504) * M2C_FIELD(gx, f32 *, 0x510);
+    zmax = M2C_FIELD(gx, f32 *, 0x508) * M2C_FIELD(gx, f32 *, 0x510);
+    sz = zmax - zmin;
+    oz = zmax + M2C_FIELD(gx, f32 *, 0x50C);
+    GXWGFifo.u8 = 0x10;
+    GXWGFifo.u32 = 0x5101A;
+    GXWGFifo.f32 = sx;
+    GXWGFifo.f32 = sy;
+    GXWGFifo.f32 = sz;
+    GXWGFifo.f32 = ox;
+    GXWGFifo.f32 = oy;
+    GXWGFifo.f32 = oz;
 }
 
 void fn_80276068(f32 left, f32 top, f32 wd, f32 ht, f32 nearz, f32 farz, u32 field) {
