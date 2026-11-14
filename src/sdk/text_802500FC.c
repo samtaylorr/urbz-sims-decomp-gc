@@ -2058,6 +2058,18 @@ void fn_80261D34(s32 arg0) {
     fn_802660C0(lbl_80442920, 0x20, 0x420, fn_80261E68);
 }
 
+void fn_80262030(void) {
+    extern void fn_80264274(void);
+    extern void fn_80251BF0(void *, u32);
+    extern void fn_80262140(DVDCommandBlock *);
+    extern u8 lbl_80442940[];
+    extern void (*lbl_80495F24)(DVDCommandBlock *);
+    fn_80264274();
+    fn_80251BF0(lbl_80442940, 0x20);
+    lbl_80495F24 = fn_80262140;
+    fn_80262140(lbl_80495ED0);
+}
+
 void fn_80262140(DVDCommandBlock *block) {
     extern s32 fn_80266418(void *diskID, void (*cb)(s32));
     extern u8 lbl_80442940[];
@@ -3292,6 +3304,48 @@ void fn_8026E6C4(s32 arg0) {
     M2C_UNK fn_802706E4();
     fn_802706E4();
     fn_8026E6F8(arg0);
+}
+
+void fn_8026E7C0(void *fifo) {
+    extern volatile u16 *__cpReg;
+
+    M2C_FIELD(fifo, u32 *, 0x14) = ((__cpReg[0x1D] << 16) | __cpReg[0x1C]) + 0x80000000;
+    M2C_FIELD(fifo, u32 *, 0x1C) = (__cpReg[0x19] << 16) | __cpReg[0x18];
+}
+
+void fn_8026E7F0(u8 *overhi, u8 *underlow, u8 *readIdle, u8 *cmdIdle, u8 *brkpt) {
+    extern volatile u16 *__cpReg;
+    extern void *__GXData;
+    u32 *gx = __GXData;
+
+    gx[3] = __cpReg[0];
+    *overhi = gx[3] & 1;
+    *underlow = (gx[3] >> 1) & 1;
+    *readIdle = (gx[3] >> 2) & 1;
+    *cmdIdle = (gx[3] >> 3) & 1;
+    *brkpt = (gx[3] >> 4) & 1;
+}
+
+void fn_8026E954(void *fifo, u32 *readPtr, u32 *writePtr) {
+    extern void *lbl_80496090;
+    extern void *lbl_80496094;
+    extern volatile u32 *__piReg;
+    extern volatile u16 *__cpReg;
+
+    if (fifo == lbl_80496090) {
+        M2C_FIELD(fifo, u32 *, 0x18) = (__piReg[5] & 0xFBFFFFFF) + 0x80000000;
+    }
+    if (fifo == lbl_80496094) {
+        M2C_FIELD(fifo, u32 *, 0x14) = ((__cpReg[0x1D] << 16) | __cpReg[0x1C]) + 0x80000000;
+        M2C_FIELD(fifo, u32 *, 0x1C) = (__cpReg[0x19] << 16) | __cpReg[0x18];
+    } else {
+        M2C_FIELD(fifo, s32 *, 0x1C) = M2C_FIELD(fifo, s32 *, 0x18) - M2C_FIELD(fifo, s32 *, 0x14);
+        if (M2C_FIELD(fifo, s32 *, 0x1C) < 0) {
+            M2C_FIELD(fifo, s32 *, 0x1C) += M2C_FIELD(fifo, s32 *, 0x8);
+        }
+    }
+    *readPtr = M2C_FIELD(fifo, u32 *, 0x14);
+    *writePtr = M2C_FIELD(fifo, u32 *, 0x18);
 }
 
 s32 fn_8026E9EC(s32 *self) {
