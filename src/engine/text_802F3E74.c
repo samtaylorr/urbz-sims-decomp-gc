@@ -11,6 +11,10 @@ static inline void ECamVec3_Set(ECamVec3 *dst, f32 x, f32 y, f32 z) {
     *dst = v;
 }
 
+static inline char *fn_802F5454_Entry(void *obj, s32 i) {
+    return M2C_FIELD(M2C_FIELD(obj, char **, 0x134), char **, 0x20) + i * 0x18;
+}
+
 void fn_802D2FD0(void);
 void fn_802F3E74(void) {
     fn_802D2FD0();
@@ -192,6 +196,31 @@ void fn_802F4A8C(char *self, void *arg1) {
     fn_802E34F0(arg1, self + 0x44);
 }
 
+void fn_802F52DC(void *self, s32 arg1, void *arg2) {
+    extern void fn_8031EA2C(void *);
+    extern void *fn_8033740C(void *, void *, s32, s32);
+    extern char lbl_8045BA40[];
+    void **iter;
+    char *grp;
+    s32 i;
+    s32 j;
+
+    if (M2C_FIELD(self, void **, 0x134) == NULL) {
+        return;
+    }
+    iter = M2C_FIELD(self, void ***, 0x12C);
+    for (i = 0; i < M2C_FIELD(M2C_FIELD(self, void **, 0x134), s32 *, 0x24); i++) {
+        grp = M2C_FIELD(M2C_FIELD(self, void **, 0x134), char **, 0x20) + i * 0x18;
+        for (j = 0; j < M2C_FIELD(grp, s32 *, 4); j++) {
+            if (M2C_FIELD(M2C_FIELD(grp, char **, 0) + j * 0x6C, s32 *, 0xC) == arg1) {
+                fn_8031EA2C(*iter);
+                *iter = fn_8033740C(lbl_8045BA40, arg2, 0, 0);
+            }
+            iter++;
+        }
+    }
+}
+
 void fn_802F53B8(void *self, s32 arg1) {
     extern void fn_8032F5A0(void *, u8);
     void **iter;
@@ -208,6 +237,24 @@ void fn_802F53B8(void *self, s32 arg1) {
         for (j = 0; j < M2C_FIELD(grp, s32 *, 4); j++) {
             fn_8032F5A0(*iter, (u8)arg1);
             iter++;
+        }
+    }
+}
+
+void fn_802F5454(void *arg0) {
+    extern f32 lbl_803F11D0[];
+    s32 i;
+    s32 j;
+    char **objs;
+
+    if (M2C_FIELD(arg0, char **, 0x134) != NULL) {
+        objs = M2C_FIELD(arg0, char ***, 0x12C);
+        for (i = 0; i < M2C_FIELD(M2C_FIELD(arg0, char **, 0x134), s32 *, 0x24); i++) {
+            char *entry = M2C_FIELD(M2C_FIELD(arg0, char **, 0x134), char **, 0x20) + i * 0x18;
+            for (j = 0; j < M2C_FIELD(entry, s32 *, 4); j++) {
+                (*(void (**)(void *, s32, s32, s32, f32))(*(char **)*objs + 0x84))(*objs + *(s16 *)(*(char **)*objs + 0x80), 0, 0, 0, lbl_803F11D0[0]);
+                objs++;
+            }
         }
     }
 }
