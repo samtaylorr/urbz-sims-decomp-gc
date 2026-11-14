@@ -1286,6 +1286,41 @@ void fn_802586C0(void *thread) {
     lbl_80495E6C = 1;
 }
 
+void fn_8025872C(void *thread) {
+    extern u32 lbl_80495E68;
+    void *next = M2C_FIELD(thread, void **, 0x2e0);
+    void **queue = M2C_FIELD(thread, void ***, 0x2dc);
+    void *prev = M2C_FIELD(thread, void **, 0x2e4);
+
+    if (next == NULL) {
+        queue[1] = prev;
+    } else {
+        M2C_FIELD(next, void **, 0x2e4) = prev;
+    }
+    if (prev == NULL) {
+        queue[0] = next;
+    } else {
+        M2C_FIELD(prev, void **, 0x2e0) = next;
+    }
+    if (queue[0] == NULL) {
+        lbl_80495E68 &= ~(1u << (31 - M2C_FIELD(thread, s32 *, 0x2d0)));
+    }
+    M2C_FIELD(thread, void **, 0x2dc) = NULL;
+}
+
+s32 fn_80258794(void *thread) {
+    s32 priority = M2C_FIELD(thread, s32 *, 0x2d4);
+    void *mutex;
+
+    for (mutex = M2C_FIELD(thread, void **, 0x2f4); mutex != NULL; mutex = M2C_FIELD(mutex, void **, 0x10)) {
+        void *blocked = M2C_FIELD(mutex, void **, 0);
+        if (blocked != NULL && M2C_FIELD(blocked, s32 *, 0x2d0) < priority) {
+            priority = M2C_FIELD(blocked, s32 *, 0x2d0);
+        }
+    }
+    return priority;
+}
+
 void fn_80258C80(void) {
     M2C_UNK fn_80258A58(M2C_UNK);
     extern s32 lbl_80495E6C;
@@ -4010,6 +4045,27 @@ void fn_8026FA54(void) {
     __GXData[0x5AC / 4] |= 8;
 }
 
+void fn_8026FF68(void) {
+    extern u8 *__GXData;
+    u8 *gx = __GXData;
+    u8 i;
+
+    for (i = 0; i < 8; i++) {
+        if (gx[0x5AB] & (1 << i)) {
+            *(volatile u8 *)0xCC008000 = 8;
+            *(volatile u8 *)0xCC008000 = i | 0x70;
+            *(volatile u32 *)0xCC008000 = ((u32 *)(gx + 0x1C))[i];
+            *(volatile u8 *)0xCC008000 = 8;
+            *(volatile u8 *)0xCC008000 = i | 0x80;
+            *(volatile u32 *)0xCC008000 = ((u32 *)(gx + 0x3C))[i];
+            *(volatile u8 *)0xCC008000 = 8;
+            *(volatile u8 *)0xCC008000 = i | 0x90;
+            *(volatile u32 *)0xCC008000 = ((u32 *)(gx + 0x5C))[i];
+        }
+    }
+    __GXData[0x5AB] = 0;
+}
+
 void fn_80270384(void) {
     *(s8 *)0xCC008000 = 0x48;
 }
@@ -4756,6 +4812,22 @@ s32 fn_80273AD4(u32 *arg0) {
 
 u16 fn_80273AE0(void *arg0) {
     return M2C_FIELD(arg0, u16 *, 8);
+}
+
+void fn_80273AE8(GXTlutObjInt *t, u32 tlut_name) {
+    extern void *__GXData;
+    extern void __GXFlushTextureState(void);
+    GXTlutRegionInt *r;
+
+    r = M2C_FIELD(__GXData, GXTlutRegionInt *(**)(u32), 0x4CC)(tlut_name);
+    __GXFlushTextureState();
+    *(volatile u8 *)0xCC008000 = 0x61;
+    *(volatile u32 *)0xCC008000 = t->loadTlut0;
+    *(volatile u8 *)0xCC008000 = 0x61;
+    *(volatile u32 *)0xCC008000 = r->loadTlut1;
+    __GXFlushTextureState();
+    t->tlut = __rlwimi(t->tlut, r->loadTlut1, 0, 22, 31);
+    r->tlutObj = *t;
 }
 
 void GXInitTlutRegion(u32 *region, u32 tmem_addr, u32 tlut_size) {
