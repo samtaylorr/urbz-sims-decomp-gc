@@ -3760,11 +3760,10 @@ void fn_8027425C(u32 coord, u8 enable, u32 ss, u32 ts) {
 void fn_80274940(u32 tev_stage, u32 ind_stage, u32 format, u32 bias_sel, u32 matrix_sel, u32 wrap_s, u32 wrap_t, u8 add_prev, u8 utc_lod, u32 alpha_sel);
 
 void fn_80274D54(u8 nIndStages) {
-    extern void *__GXData;
-    u8 *gx = __GXData;
+    extern u32 *__GXData;
 
-    M2C_FIELD(gx, u32 *, 0x204) = __rlwimi(M2C_FIELD(gx, u32 *, 0x204), nIndStages, 16, 13, 15);
-    M2C_FIELD(gx, u32 *, 0x5AC) |= 6;
+    __GXData[0x204 / 4] = __rlwimi(__GXData[0x204 / 4], nIndStages, 16, 13, 15);
+    __GXData[0x5AC / 4] |= 6;
 }
 
 void fn_80274D78(u32 tev_stage) {
@@ -3852,6 +3851,21 @@ void fn_80275D4C(const f32 *mtx, u32 id) {
     __psq_st(dst, v3, 0, 0, 0);
     __psq_st(dst, v4, 0, 0, 0);
     __psq_st(dst, v5, 0, 0, 0);
+}
+
+void fn_802760C0(f32 left, f32 top, f32 wd, f32 ht, f32 nearz, f32 farz) {
+    void fn_80275FD8(void);
+    extern void *__GXData;
+    u8 *gx = __GXData;
+
+    M2C_FIELD(gx, f32 *, 0x4F4) = left;
+    M2C_FIELD(gx, f32 *, 0x4F8) = top;
+    M2C_FIELD(gx, f32 *, 0x4FC) = wd;
+    M2C_FIELD(gx, f32 *, 0x500) = ht;
+    M2C_FIELD(gx, f32 *, 0x504) = nearz;
+    M2C_FIELD(gx, f32 *, 0x508) = farz;
+    fn_80275FD8();
+    M2C_FIELD(__GXData, u16 *, 0x2) = 1;
 }
 
 void fn_80276D34(void) {
