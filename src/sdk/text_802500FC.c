@@ -3778,7 +3778,7 @@ void fn_80274D54(u8 nIndStages) {
     extern u32 *__GXData;
     u32 *gx = __GXData;
 
-    gx[0x204 / 4] = (gx[0x204 / 4] & ~0x70000) | ((u32)nIndStages << 16);
+    gx[0x204 / 4] = __rlwimi(gx[0x204 / 4], nIndStages, 16, 13, 15);
     gx[0x5AC / 4] |= 6;
 }
 
