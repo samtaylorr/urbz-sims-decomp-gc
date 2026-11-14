@@ -1144,6 +1144,10 @@ s32 fn_802585AC(void *arg0) {
     return 0;
 }
 
+s32 fn_802585C8(void *thread) {
+    return (M2C_FIELD(thread, u16 *, 0x2C8) == 8 || M2C_FIELD(thread, u16 *, 0x2C8) == 0) ? 1 : 0;
+}
+
 void fn_80258C80(void) {
     M2C_UNK fn_80258A58(M2C_UNK);
     extern s32 lbl_80495E6C;
@@ -3340,10 +3344,10 @@ void fn_8026E7C0(void *fifo) {
 void fn_8026E7F0(u8 *overhi, u8 *underlow, u8 *readIdle, u8 *cmdIdle, u8 *brkpt) {
     extern volatile u16 *__cpReg;
     extern void *__GXData;
-    volatile u16 *cp = __cpReg;
-    u32 *gx = __GXData;
+    u32 *gx;
 
-    gx[3] = cp[0];
+    gx = __GXData;
+    gx[3] = M2C_FIELD(__cpReg, u16 *, 0);
     *overhi = gx[3] & 1;
     *underlow = (gx[3] >> 1) & 1;
     *readIdle = (gx[3] >> 2) & 1;
