@@ -5,6 +5,10 @@ typedef struct EInstVec3 {
     s32 x, y, z;
 } EInstVec3;
 
+typedef struct EInstVec3f {
+    f32 x, y, z;
+} EInstVec3f;
+
 extern f32 lbl_803F0E6C[];
 extern f32 lbl_803F0E70[];
 extern f32 lbl_803F0E74[];
