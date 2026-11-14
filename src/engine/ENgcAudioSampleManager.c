@@ -81,6 +81,41 @@ void fn_8033D5B8(void *arg0, void *arg1) {
     }
 }
 
+void fn_8033DB94(void *arg0, SampleEntry *e) {
+    u32 key;
+    SampleEntry *p;
+
+    key = e->owner->unk10 - e->unk10;
+    p = e->next;
+    if (p == NULL) {
+        return;
+    }
+    do {
+        if (p->owner->unk10 - p->unk10 <= key) {
+            if (p == e->next) {
+                return;
+            }
+            if ((e->next->prev = e->prev) != NULL) {
+                e->prev->next = e->next;
+            }
+            e->next = p;
+            e->prev = p->prev;
+            p->prev = e;
+            e->prev->next = e;
+            return;
+        }
+        p = p->next;
+    } while (p != NULL);
+    if ((e->next->prev = e->prev) != NULL) {
+        e->prev->next = e->next;
+    }
+    e->next = NULL;
+    if ((e->prev = M2C_FIELD(arg0, SampleEntry **, 0xAC)) != NULL) {
+        M2C_FIELD(arg0, SampleEntry **, 0xAC)->next = e;
+    }
+    M2C_FIELD(arg0, SampleEntry **, 0xAC) = e;
+}
+
 void *fn_8033DD34(void *arg0, s32 arg1) {
     void *p;
 
