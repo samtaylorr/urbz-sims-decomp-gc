@@ -7,6 +7,19 @@ extern u8 lbl_803D04CC[];
 extern u8 lbl_80495A30[];
 extern void *fn_802D7F48(const char *, void *);
 extern void fn_802D7F94(void *);
+extern void fn_800F687C(void *, void *, s32);
+extern void fn_800F68F0(void *, const char *, s32);
+
+typedef struct {
+    void *a;
+    s32 b;
+    char data[0x104];
+} CTGName;
+
+static inline void CTGName_Init(CTGName *self, const char *src) {
+    fn_800F687C(self, self->data, 0x104);
+    fn_800F68F0(self, src, -1);
+}
 void fn_800C3E20(void **self, s32 flags) {
     *self = lbl_8040A890;
     if (flags & 1) {
@@ -197,6 +210,46 @@ s32 fn_800C4400(void) {
 
 void fn_800C4408(void) {
 
+}
+
+void **fn_800C440C(void *self, const char *path, s32 write) {
+    extern void fn_800F687C(void *, void *, s32);
+    extern void fn_800F68F0(void *, const char *, s32);
+    extern void *fn_800F5248(void *, const void *);
+    extern void *fn_800F52EC(void *, s32);
+    extern void *fn_802D1FC8(s32);
+    extern void fn_800F6A38(void *, void *);
+    extern u8 lbl_803D04C8[];
+    extern u8 lbl_803D04D0[];
+    extern u8 lbl_803D04F8[];
+    extern u8 lbl_803D04FC[];
+    extern u8 lbl_803D0508[];
+    extern u8 lbl_80495A90;
+    struct {
+        void *a;
+        s32 b;
+        char data[0x104];
+    } name;
+    void *f;
+    void *s;
+    void **obj;
+
+    fn_800F687C(&name, name.data, 0x104);
+    fn_800F68F0(&name, path, -1);
+    f = fn_802D7F48(path, write ? lbl_803D04C8 : lbl_803D04CC);
+    if (f == NULL) {
+        return NULL;
+    }
+    s = fn_800F5248(&lbl_80495A90, lbl_803D04D0);
+    s = fn_800F5248(s, lbl_803D04F8);
+    s = fn_800F52EC(s, 0x144);
+    s = fn_800F5248(s, lbl_803D04FC);
+    s = fn_800F5248(s, path);
+    fn_800F5248(s, lbl_803D0508);
+    obj = ((void **(*)(void *, s32, s32, s32, s32))fn_800C3E54)(fn_802D1FC8(0x114), 0, 0, 0, 0);
+    obj[0x44] = f;
+    fn_800F6A38(obj + 1, &name);
+    return obj;
 }
 
 void fn_800C4508(void *self, void **obj) {
