@@ -1365,6 +1365,40 @@ void fn_8025B090(void *arg0) {
     }
 }
 
+BOOL fn_8025B100(OSMutex_ *mutex) {
+    s32 fn_8025465C(void);
+    void fn_80254684(s32);
+    OSThread_ *fn_80258544(void);
+    s32 enabled;
+    OSThread_ *current;
+    BOOL locked;
+
+    enabled = fn_8025465C();
+    current = fn_80258544();
+    if (mutex->thread == NULL) {
+        OSMutex_ *prev;
+        mutex->thread = current;
+        mutex->count++;
+        prev = current->tail;
+        if (prev == NULL) {
+            current->head = mutex;
+        } else {
+            prev->next = mutex;
+        }
+        mutex->prev = prev;
+        mutex->next = NULL;
+        current->tail = mutex;
+        locked = TRUE;
+    } else if (mutex->thread == current) {
+        mutex->count++;
+        locked = TRUE;
+    } else {
+        locked = FALSE;
+    }
+    fn_80254684(enabled);
+    return locked;
+}
+
 void fn_8025B1BC(void) {
     M2C_UNK fn_80258534();
     fn_80258534();
