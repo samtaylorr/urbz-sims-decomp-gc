@@ -2493,6 +2493,18 @@ void fn_80264250(void) {
     fn_80259838(&lbl_80495EC8);
 }
 
+void fn_80264274(void) {
+    void fn_80266830(void);
+    extern s32 lbl_80495F08;
+    extern u32 lbl_80495EF8;
+
+    fn_80266830();
+    __DIRegs[0] = 0x2a;
+    __DIRegs[1] = __DIRegs[1];
+    lbl_80495F08 = 0;
+    lbl_80495EF8 = 0;
+}
+
 extern s32 lbl_80495F08;
 s32 fn_802642B8(void) {
     return lbl_80495F08;
