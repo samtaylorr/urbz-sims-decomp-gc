@@ -4061,18 +4061,18 @@ void fn_8026F630(void) {
     *(u16 *)(gx + 2) = 1;
 }
 
-void fn_8026F9C4(s32 *list) {
+void fn_8026F9C4(GXVtxDescList *list) {
     void fn_8026F810(s32, s32 *);
     s32 attr;
 
     for (attr = 0; attr <= 20; attr++) {
-        list[attr * 2] = attr;
-        fn_8026F810(attr, &list[attr * 2 + 1]);
+        list[attr].attr = attr;
+        fn_8026F810(attr, &list[attr].type);
     }
-    list[attr * 2] = 25;
-    fn_8026F810(25, &list[attr * 2 + 1]);
+    list[attr].attr = 25;
+    fn_8026F810(25, &list[attr].type);
     attr++;
-    list[attr * 2] = 0xFF;
+    list[attr].attr = 0xFF;
 }
 
 void fn_8026FA54(void) {
