@@ -3055,7 +3055,7 @@ void fn_80264404(void) {
     s32 enabled;
 
     enabled = fn_8025465C();
-    lbl_80495EDC = 0;
+    *(volatile s32 *)&lbl_80495EDC = 0;
     if (*(volatile s32 *)&lbl_80495EE0) {
         lbl_80495EE0 = 0;
         fn_802622E0();
@@ -3323,6 +3323,27 @@ void fn_8026588C(void) {
     lbl_80442A48[0] = -1;
     fn_80266AE8(0, 0);
     fn_80250F6C();
+}
+
+s32 fn_802658CC(void) {
+    extern s32 lbl_80442A48[];
+    extern s32 lbl_80495F84;
+    void fn_80265D98(s32, s32, s32, s32);
+    s32 fn_80266358(u32 offset, void (*cb)(s32));
+    s32 *cmd;
+
+    cmd = &lbl_80442A48[lbl_80495F84 * 5];
+    if (cmd[0] == 1) {
+        lbl_80495F84++;
+        fn_80265D98(cmd[1], cmd[2], cmd[3], cmd[4]);
+        return 1;
+    }
+    if (cmd[0] == 2) {
+        lbl_80495F84++;
+        fn_80266358(cmd[3], (void (*)(s32))cmd[4]);
+        return 1;
+    }
+    return 0;
 }
 
 void fn_80265CC4(void *alarm, void *context) {
