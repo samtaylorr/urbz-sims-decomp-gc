@@ -131,6 +131,18 @@ void fn_8009B1A4(void *self, s32 flags) {
     }
 }
 
+void fn_8009B1D4(void ***self, void *arg1) {
+    extern void fn_8009B308(void ***self, s32 idx, s32 arg2);
+    fn_8009B308(self, 3, M2C_FIELD(arg1, s8 *, 0xAA));
+    fn_8009B308(self, 4, M2C_FIELD(arg1, s8 *, 0xAC));
+    fn_8009B308(self, 5, M2C_FIELD(arg1, s8 *, 0xAD));
+    fn_8009B308(self, 2, M2C_FIELD(arg1, s8 *, 0xA9));
+    fn_8009B308(self, 6, M2C_FIELD(arg1, s8 *, 0xAE));
+    fn_8009B308(self, 0, M2C_FIELD(arg1, s8 *, 0xB1));
+    fn_8009B308(self, 7, M2C_FIELD(arg1, s8 *, 0xB2));
+    fn_8009B308(self, 0x13, M2C_FIELD(arg1, s8 *, 0xB3));
+}
+
 s32 fn_8009B29C(void ***self, s32 idx, s32 arg2) {
     extern s32 fn_8032C268(void *);
     extern s32 fn_8032C2E0(void *, s32);
