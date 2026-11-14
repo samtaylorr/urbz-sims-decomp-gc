@@ -313,8 +313,8 @@ void fn_8001E5B8(void *arg0, void *arg1, s32 arg2) {
     void *vt;
 
     fn_8001E284(arg0);
-    ERMLock_Lock(lock, arg0);
     M2C_FIELD(arg0, s32 *, 0xA8) = 2;
+    ERMLock_Lock(lock, arg0);
     M2C_FIELD(arg1, s32 *, 0x600) += 1;
     ERMLock_Unlock(lock);
     vt = *(void **)lbl_80496220;
