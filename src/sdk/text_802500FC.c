@@ -2428,6 +2428,7 @@ s32 fn_80266418(void *diskID, void (*cb)(s32)) {
     extern u8 lbl_80442AB0[];
     void fn_80251224(void *, s64, void *);
     void fn_80265CC4(void *, void *);
+    u32 timeout;
 
     lbl_80495F48 = cb;
     lbl_80495F40 = 0;
@@ -2437,8 +2438,9 @@ s32 fn_80266418(void *diskID, void (*cb)(s32)) {
     __DIRegs[5] = (u32)diskID;
     __DIRegs[6] = 0x20;
     __DIRegs[7] = 3;
+    timeout = (*(u32 *)0x800000F8 / 4) * 10;
     fn_80250FC4(lbl_80442AB0);
-    fn_80251224(lbl_80442AB0, (*(u32 *)0x800000F8 / 4) * 10, fn_80265CC4);
+    fn_80251224(lbl_80442AB0, timeout, fn_80265CC4);
     return 1;
 }
 
@@ -2605,14 +2607,13 @@ s32 fn_80269B90(s16 *x, s16 *y) {
 }
 
 s32 fn_80269C04(s16 *x, s16 *y) {
-    volatile u16 *regs = (volatile u16 *)0xCC002000;
     u32 hcount, vcount;
 
-    if (regs[0x22] & 0x8000) {
-        vcount = regs[0x22] & 0x7FF;
-        hcount = regs[0x23] & 0x7FF;
-        regs[0x22] = 0;
-        regs[0x23] = 0;
+    if (__VIRegs[0x22] >> 15 & 1) {
+        vcount = __VIRegs[0x22] & 0x7FF;
+        hcount = __VIRegs[0x23] & 0x7FF;
+        __VIRegs[0x22] = 0;
+        __VIRegs[0x23] = 0;
         fn_802698E8(hcount, vcount, x, y);
         return 1;
     }
