@@ -3287,6 +3287,16 @@ u32 fn_80269230(void) {
     return nextField ^ (lbl_80442C08[5] & 1);
 }
 
+u32 fn_802693CC(void) {
+    s32 enabled;
+    u32 reg;
+
+    enabled = fn_8025465C();
+    reg = __VIRegs[0x37] & 3;
+    fn_80254684(enabled);
+    return reg & 1;
+}
+
 void fn_802696D0(s16 *arg0, s16 *arg1) {
     extern s16 lbl_80495FAC;
     extern s16 lbl_80495FAE;
