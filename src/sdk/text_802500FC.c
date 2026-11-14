@@ -3329,9 +3329,10 @@ void fn_8026E6C4(s32 arg0) {
 
 void fn_8026E7C0(void *fifo) {
     extern volatile u16 *__cpReg;
+    u32 *f = fifo;
 
-    M2C_FIELD(fifo, u32 *, 0x14) = ((__cpReg[0x1D] << 16) | __cpReg[0x1C]) + 0x80000000;
-    M2C_FIELD(fifo, u32 *, 0x1C) = (__cpReg[0x19] << 16) | __cpReg[0x18];
+    f[5] = (u32)((__cpReg[0x1D] << 16) | __cpReg[0x1C]) + 0x80000000;
+    f[7] = (__cpReg[0x19] << 16) | __cpReg[0x18];
 }
 
 void fn_8026E7F0(u8 *overhi, u8 *underlow, u8 *readIdle, u8 *cmdIdle, u8 *brkpt) {
