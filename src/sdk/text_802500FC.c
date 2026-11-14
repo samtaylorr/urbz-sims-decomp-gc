@@ -3357,16 +3357,14 @@ void fn_8026E7C0(void *fifo) {
 
 void fn_8026E7F0(u8 *overhi, u8 *underlow, u8 *readIdle, u8 *cmdIdle, u8 *brkpt) {
     extern volatile u16 *__cpReg;
-    extern void *__GXData;
-    u32 *gx;
+    extern u32 *const __GXData;
 
-    gx = __GXData;
-    gx[3] = M2C_FIELD(__cpReg, u16 *, 0);
-    *overhi = gx[3] & 1;
-    *underlow = (gx[3] >> 1) & 1;
-    *readIdle = (gx[3] >> 2) & 1;
-    *cmdIdle = (gx[3] >> 3) & 1;
-    *brkpt = (gx[3] >> 4) & 1;
+    __GXData[3] = __cpReg[0];
+    *overhi = __GXData[3] & 1;
+    *underlow = (__GXData[3] >> 1) & 1;
+    *readIdle = (__GXData[3] >> 2) & 1;
+    *cmdIdle = (__GXData[3] >> 3) & 1;
+    *brkpt = (__GXData[3] >> 4) & 1;
 }
 
 void fn_8026E954(void *fifo, u32 *readPtr, u32 *writePtr) {
@@ -4352,17 +4350,16 @@ void fn_8027433C(u32 coord, u32 s_enable, u32 t_enable) {
 void fn_802743A0(u32 tmap, u32 tcoord) {
     extern void *__GXData;
     u32 *gx = __GXData;
-    u32 *tm = &gx[tmap];
     u32 *ts = &gx[tcoord];
     u32 w, h;
     u8 s_bias, t_bias;
 
-    w = tm[0x514 / 4] & 0x3FF;
-    h = (tm[0x514 / 4] >> 10) & 0x3FF;
+    w = gx[0x514 / 4 + tmap] & 0x3FF;
+    h = (gx[0x514 / 4 + tmap] >> 10) & 0x3FF;
     ts[0xB8 / 4] = __rlwimi(ts[0xB8 / 4], w, 0, 16, 31);
     ts[0xD8 / 4] = __rlwimi(ts[0xD8 / 4], h, 0, 16, 31);
-    s_bias = (tm[0x534 / 4] & 3) == 1;
-    t_bias = ((tm[0x534 / 4] >> 2) & 3) == 1;
+    s_bias = (gx[0x534 / 4 + tmap] & 3) == 1;
+    t_bias = ((gx[0x534 / 4 + tmap] >> 2) & 3) == 1;
     ts[0xB8 / 4] = __rlwimi(ts[0xB8 / 4], s_bias, 16, 15, 15);
     ts[0xD8 / 4] = __rlwimi(ts[0xD8 / 4], t_bias, 16, 15, 15);
     GXWGFifo.u8 = 0x61;
