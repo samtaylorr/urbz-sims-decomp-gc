@@ -3784,6 +3784,17 @@ void fn_80272A9C(u32 lt_obj_indx, u32 light) {
     M2C_FIELD(__GXData, u16 *, 0x2) = 1;
 }
 
+void fn_80272CC4(u8 nChans) {
+    extern void *__GXData;
+    u32 *gx = __GXData;
+
+    gx[0x204 / 4] = __rlwimi(gx[0x204 / 4], nChans, 4, 25, 27);
+    GXWGFifo.u8 = 0x10;
+    GXWGFifo.u32 = 0x1009;
+    GXWGFifo.u32 = nChans;
+    gx[0x5AC / 4] |= 4;
+}
+
 void fn_80273438(void *arg0, u32 arg1) {
     struct { u32 w0, w1, w2; u32 pad : 11; u32 addr : 21; } *p = arg0;
     p->addr = arg1 >> 5;
