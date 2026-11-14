@@ -1954,10 +1954,10 @@ s32 fn_80261640(u32 resume) {
         lbl_80495ED0 = &lbl_80442960;
         finished->state = 10;
         if (finished->callback) {
-            ((void (*)(s32, DVDCommandBlock *))finished->callback)(-3, finished);
+            (*(void (*)(s32, DVDCommandBlock *))finished->callback)(-3, finished);
         }
         if (lbl_80495EF4) {
-            lbl_80495EF4(0, finished);
+            (*lbl_80495EF4)(0, finished);
         }
         fn_802622E0();
         return 1;
@@ -2512,6 +2512,8 @@ s32 fn_802663EC(void (*cb)(void)) {
     return 1;
 }
 
+#pragma push
+#pragma dont_inline on
 s32 fn_80266418(void *diskID, void (*cb)(s32)) {
     extern void (*lbl_80495F48)(s32);
     extern s32 lbl_80495F40;
@@ -2533,6 +2535,25 @@ s32 fn_80266418(void *diskID, void (*cb)(s32)) {
     fn_80251224(lbl_80442AB0, timeout, fn_80265CC4);
     return 1;
 }
+
+s32 fn_802664BC(void (*cb)(void)) {
+    extern void (*lbl_80495F48)(void);
+    extern s32 lbl_80495F40;
+    extern u8 lbl_80442AB0[];
+    void fn_80251224(void *, s64, void *);
+    void fn_80265CC4(void *, void *);
+    u32 timeout;
+
+    lbl_80495F48 = cb;
+    lbl_80495F40 = 0;
+    __DIRegs[2] = 0xE3000000;
+    __DIRegs[7] = 1;
+    timeout = (*(u32 *)0x800000F8 / 4) * 10;
+    fn_80250FC4(lbl_80442AB0);
+    fn_80251224(lbl_80442AB0, timeout, fn_80265CC4);
+    return 1;
+}
+#pragma pop
 
 s32 fn_802668EC(s32 arg0) {
     extern s32 lbl_80495F4C;
