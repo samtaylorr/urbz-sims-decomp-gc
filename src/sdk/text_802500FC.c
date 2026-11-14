@@ -1732,6 +1732,14 @@ s32 fn_8025A5E0(s32 year, s32 mon) {
 
     return md[mon];
 }
+
+s32 fn_8025A688(s32 year) {
+    if (year < 1) {
+        return 0;
+    }
+    return (year + 3) / 4 - (year - 1) / 100 + (year - 1) / 400;
+}
+
 #pragma pop
 void fn_8025AD58(void) {
     M2C_UNK fn_8025AD78();
@@ -4678,11 +4686,11 @@ void fn_8026F0B0(void) {
     } else {
         nNrm = 0;
     }
-    gx = __GXData;
     nCols = 33 - __cntlzw((*(u32 *)(__GXData + 0x14) >> 13) & 0xF);
     nCols /= 2;
-    nTex = 33 - __cntlzw(*(u32 *)(gx + 0x18) & 0xFFFF);
+    nTex = 33 - __cntlzw(*(u32 *)(__GXData + 0x18) & 0xFFFF);
     nTex /= 2;
+    gx = __GXData;
     *(volatile u8 *)0xCC008000 = 0x10;
     *(volatile u32 *)0xCC008000 = 0x1008;
     *(volatile u32 *)0xCC008000 = nCols | (nNrm << 2) | (nTex << 4);
