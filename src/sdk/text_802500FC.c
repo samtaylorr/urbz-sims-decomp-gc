@@ -217,6 +217,34 @@ void OSRegisterVersion(char *version) {
     fn_8025302C(lbl_804949A4, version);
 }
 
+void fn_80250ED4(void *alarm) {
+    s64 fn_8025A494(void);
+    void fn_8024FF98(u32);
+    s64 delta;
+
+    delta = M2C_FIELD(alarm, s64 *, 8) - fn_8025A494();
+    if (delta < 0) {
+        fn_8024FF98(0);
+    } else if (delta < 0x80000000) {
+        fn_8024FF98((u32)delta);
+    } else {
+        fn_8024FF98(0x7FFFFFFF);
+    }
+}
+
+void fn_80250F6C(void) {
+    extern struct { void *head; void *tail; } lbl_80495E00;
+    extern OSResetFunctionInfo lbl_803F7CD0;
+    void fn_802516C4(u8, void *);
+    void OSRegisterResetFunction(OSResetFunctionInfo *);
+
+    if (fn_80250BF8(8) != (__OSExceptionHandler)fn_802516C4) {
+        lbl_80495E00.head = lbl_80495E00.tail = NULL;
+        fn_80250BDC(8, (__OSExceptionHandler)fn_802516C4);
+        OSRegisterResetFunction(&lbl_803F7CD0);
+    }
+}
+
 #pragma pop
 void fn_80250FC4(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0) = 0;
@@ -2018,17 +2046,15 @@ s32 fn_8025BFA8(s32 chan) {
     return result;
 }
 
+volatile s32 __EXIProbeStartTime[2] : 0x800030C0;
 s32 fn_8025C028(s32 chan) {
-    s32 *startTime;
-
     if (fn_8025BFA8(chan)) {
         return 1;
-    }
-    startTime = (s32 *)0x800030C0;
-    if (startTime[chan] != 0) {
+    } else if (__EXIProbeStartTime[chan] != 0) {
         return 0;
+    } else {
+        return -1;
     }
-    return -1;
 }
 
 #pragma pop
@@ -3006,6 +3032,41 @@ void fn_80264404(void) {
     }
     fn_80254684(enabled);
 }
+
+s32 fn_802646D0(DVDCommandBlock *block) {
+    s32 fn_80264454(DVDCommandBlock *, void *);
+    void fn_8026477C(void);
+    s32 fn_8025465C();
+    M2C_UNK fn_80254684(s32);
+    M2C_UNK fn_8025974C(M2C_UNK *);
+    extern M2C_UNK lbl_80495EC8;
+    s32 result;
+    s32 enabled;
+    s32 state;
+    u32 command;
+
+    result = fn_80264454(block, (void *)fn_8026477C);
+    if (result == 0) {
+        return -1;
+    }
+    enabled = fn_8025465C();
+    while (1) {
+        state = block->state;
+        if (state == -1 || state == 0 || state == 10) {
+            break;
+        }
+        if (state == 3) {
+            command = block->command;
+            if (command == 4 || command == 5 || command == 13 || command == 15) {
+                break;
+            }
+        }
+        fn_8025974C(&lbl_80495EC8);
+    }
+    fn_80254684(enabled);
+    return 0;
+}
+
 #pragma pop
 void fn_8026477C(void) {
     extern M2C_UNK lbl_80495EC8;
