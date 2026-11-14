@@ -220,6 +220,54 @@ void fn_8000B218(void *self, s32 a, s32 b) {
     lbl_803F5820[a][b] = 0;
 }
 
+s32 fn_8000B254(void *self, s32 a, s32 b) {
+    extern s32 lbl_803F5820[][4];
+    extern s32 lbl_803F5800[][4];
+    extern f32 lbl_80493F1C;
+    extern f32 lbl_80493F18;
+    extern f32 lbl_803C19A4[];
+    extern f32 lbl_803C19A8[];
+    f32 fn_80242F38(f32, f32);
+    s32 r = 0;
+    s32 n;
+
+    lbl_80493F1C += lbl_80493F18;
+    n = (s32)(lbl_80493F1C / lbl_803C19A4[0]);
+    lbl_80493F1C = fn_80242F38(lbl_80493F1C, lbl_803C19A8[0]);
+    if (n > 4) {
+        n = 4;
+    }
+    lbl_803F5820[a][b] += n;
+    if (lbl_803F5820[a][b] >= lbl_803F5800[a][b]) {
+        lbl_803F5820[a][b] = 0;
+        lbl_803F5800[a][b] -= 3;
+        r = 1;
+        if (lbl_803F5800[a][b] < 12) {
+            lbl_803F5800[a][b] = 12;
+        }
+    }
+    return r;
+}
+
+void fn_8000B3E8(void *self, s32 a, s32 b);
+s32 fn_8000B324(void *self) {
+    s32 (*isActive)(void *, s32) = (s32 (*)(void *, s32))fn_803338C0;
+    s32 i;
+
+    i = 0;
+    do {
+        if (isActive(lbl_80494FCC, 0) && fn_803338F0(lbl_80494FCC, 0) == i) {
+            fn_8000B3E8(self, 0, i);
+        } else if (isActive(lbl_80494FCC, 1) && fn_803338F0(lbl_80494FCC, 1) == i) {
+            fn_8000B3E8(self, 1, i);
+        } else if (*(s32 *)((char *)self + 0x3AC) != -1) {
+            fn_8000B3E8(self, *(s32 *)((char *)self + 0x3AC), i);
+        }
+        i++;
+    } while (i < 4);
+    return 0;
+}
+
 s32 fn_803114D0(s32, s32, s32, s32);
 void fn_803115C0(s32, s32);
 s32 fn_8000BF20(u8 *self, u32 index, s32 arg) {
@@ -343,17 +391,14 @@ s32 fn_8000C12C(u8 *self, u32 index) {
     return *(s32 *)(tbl + (index * 0x50 + j * 8));
 }
 
-extern void *lbl_80494FCC;
-s32 fn_803338C0(void *);
 s32 fn_803338D0(void *, s32);
-s32 fn_803338F0(void *, s32);
 s32 fn_8033394C(void *);
 s32 fn_8000C170(void *self, s32 arg) {
     s32 idx;
     s32 result;
 
     result = 0;
-    if (fn_803338C0(lbl_80494FCC)) {
+    if (fn_803338C0(lbl_80494FCC, arg)) {
         void *mgr = lbl_80494FCC;
         idx = fn_803338F0(mgr, arg);
         return fn_803338D0(mgr, idx);
