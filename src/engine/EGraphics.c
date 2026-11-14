@@ -17,6 +17,12 @@ static inline Vec3f *Vec3f_Splat(Vec3f *v, f32 s) {
     return v;
 }
 
+static inline s32 EGraphics_ToBool(s32 x) {
+    s32 t = 0;
+    if (x) t = 1;
+    return t;
+}
+
 typedef struct { Vec3f min; Vec3f max; } EGBox;
 
 static inline void EGBox_Init(EGBox *b, f32 c) {
