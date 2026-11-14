@@ -1904,11 +1904,10 @@ BOOL fn_8025B434(OSThread_ *thread) {
 volatile u32 __EXIChanRegs[] : 0xCC006800;
 
 u32 fn_8025BD24(s32 chan, BOOL exi, BOOL tc, BOOL ext) {
-    extern volatile u32 __EXIRegs[];
     u32 cpr;
     u32 prev;
 
-    prev = cpr = __EXIRegs[chan * 5];
+    prev = cpr = __EXIChanRegs[chan * 5];
     cpr &= 0x7F5;
     if (exi) {
         cpr |= 2;
@@ -1919,7 +1918,7 @@ u32 fn_8025BD24(s32 chan, BOOL exi, BOOL tc, BOOL ext) {
     if (ext) {
         cpr |= 0x800;
     }
-    __EXIRegs[chan * 5] = cpr;
+    __EXIChanRegs[chan * 5] = cpr;
     return prev;
 }
 
