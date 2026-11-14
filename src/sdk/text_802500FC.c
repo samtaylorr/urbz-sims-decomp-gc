@@ -1648,12 +1648,10 @@ f32 fn_8025FF08(f32 *a, f32 *b) {
 #pragma peephole off
 f32 fn_8025FF6C(f32 *a, f32 *b) {
     f32 diff[3];
-    f32 dist;
     diff[0] = a[0] - b[0];
     diff[1] = a[1] - b[1];
     diff[2] = a[2] - b[2];
-    dist = diff[2] * diff[2] + (diff[0] * diff[0] + diff[1] * diff[1]);
-    return sqrtf(dist);
+    return fn_8025FBAC(diff);
 }
 #pragma pop
 s32 fn_80260574(void) {
@@ -4000,21 +3998,21 @@ void fn_8027612C(f32 scale, f32 offset) {
     u8 *gx = __GXData;
     f32 zOffset;
     f32 zScale;
-    f32 zmax, zmin;
+    f32 zmin;
 
     zOffset = lbl_80497608 * offset;
-    scale = lbl_80497608 * scale;
+    zScale = lbl_80497608 * scale;
     M2C_FIELD(gx, f32 *, 0x50C) = zOffset;
-    zScale = lbl_804975FC + scale;
+    zScale = lbl_804975FC + zScale;
     M2C_FIELD(gx, f32 *, 0x510) = zScale;
-    zmax = M2C_FIELD(gx, f32 *, 0x508) * zScale;
+    scale = M2C_FIELD(gx, f32 *, 0x508) * zScale;
     zmin = M2C_FIELD(gx, f32 *, 0x504) * zScale;
     GXWGFifo.u8 = 0x10;
     GXWGFifo.u32 = 0x101C;
-    GXWGFifo.f32 = zmax - zmin;
+    GXWGFifo.f32 = scale - zmin;
     GXWGFifo.u8 = 0x10;
     GXWGFifo.u32 = 0x101F;
-    GXWGFifo.f32 = zOffset + zmax;
+    GXWGFifo.f32 = zOffset + scale;
     M2C_FIELD(gx, u16 *, 0x2) = 1;
 }
 
@@ -4036,6 +4034,21 @@ void fn_80276198(u32 left, u32 top, u32 wd, u32 ht) {
     GXWGFifo.u8 = 0x61;
     GXWGFifo.u32 = gx[0xFC / 4];
     M2C_FIELD(gx, u16 *, 0x2) = 0;
+}
+
+void fn_80276210(u32 *left, u32 *top, u32 *wd, u32 *ht) {
+    extern void *__GXData;
+    u32 *gx = __GXData;
+    u32 tp1, lf1, tp2, lf2;
+
+    tp1 = gx[0xF8 / 4] & 0x7FF;
+    lf1 = (gx[0xF8 / 4] >> 12) & 0x7FF;
+    tp2 = gx[0xFC / 4] & 0x7FF;
+    lf2 = (gx[0xFC / 4] >> 12) & 0x7FF;
+    *left = lf1 - 0x156;
+    *top = tp1 - 0x156;
+    *wd = lf2 - lf1 + 1;
+    *ht = tp2 - tp1 + 1;
 }
 
 void fn_80276258(s32 x, s32 y) {
@@ -4062,24 +4075,21 @@ void fn_80276298(u32 mode) {
 
 void fn_802762C0(s32 attr) {
     extern void *__GXData;
-    u32 reg;
 
     if (attr < 5) {
-        reg = M2C_FIELD(__GXData, u32 *, 0x80);
         GXWGFifo.u8 = 0x08;
         GXWGFifo.u8 = 0x30;
-        GXWGFifo.u32 = reg;
+        GXWGFifo.u32 = M2C_FIELD(__GXData, u32 *, 0x80);
         GXWGFifo.u8 = 0x10;
         GXWGFifo.u32 = 0x1018;
-        GXWGFifo.u32 = reg;
+        GXWGFifo.u32 = M2C_FIELD(__GXData, u32 *, 0x80);
     } else {
-        reg = M2C_FIELD(__GXData, u32 *, 0x84);
         GXWGFifo.u8 = 0x08;
         GXWGFifo.u8 = 0x40;
-        GXWGFifo.u32 = reg;
+        GXWGFifo.u32 = M2C_FIELD(__GXData, u32 *, 0x84);
         GXWGFifo.u8 = 0x10;
         GXWGFifo.u32 = 0x1019;
-        GXWGFifo.u32 = reg;
+        GXWGFifo.u32 = M2C_FIELD(__GXData, u32 *, 0x84);
     }
     M2C_FIELD(__GXData, u16 *, 0x2) = 1;
 }
