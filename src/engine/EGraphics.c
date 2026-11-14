@@ -374,20 +374,21 @@ void fn_802EE4F4(void *arg0, s32 arg1) {
 }
 
 void fn_802EE570(char *self, f32 *out, f32 *rect) {
-    extern const f32 lbl_803F0C00[];
-    extern const f32 lbl_803F0C04[];
-    extern const f32 lbl_803F0C08[];
+    extern f32 lbl_803F0C00[];
+    extern f32 lbl_803F0C04[];
+    extern f32 lbl_803F0C08[];
     char *vt = *(char **)self;
     f32 a = (*(f32 (**)(void *))(vt + 0x11C))(self + *(s16 *)(vt + 0x118));
     f32 b;
     f32 w, h, d;
     vt = *(char **)self;
     b = (*(f32 (**)(void *))(vt + 0x124))(self + *(s16 *)(vt + 0x120));
+    a = a - b;
     h = (rect[3] - rect[1]) * lbl_803F0C00[0];
     w = (rect[2] - rect[0]) * lbl_803F0C00[0];
-    d = (a - b) * lbl_803F0C00[0];
     out[1] = -h;
     out[0] = w;
+    d = a * lbl_803F0C00[0];
     out[2] = d;
     out[3] = lbl_803F0C04[0];
     out[4] = w + rect[0];
@@ -782,9 +783,9 @@ void fn_802EF170(u8 *arg0, Vec3f *arg1, f32 *arg2, Vec3f *arg3, Vec3f *arg4) {
     *arg3 = v;
     dir = (Vec3f *)(arg0 + 0xA4);
     scale = *(f32 *)(arg0 + 0xA0);
-    v.x = scale * dir->x;
-    v.y = scale * dir->y;
-    v.z = scale * dir->z;
+    v.x = dir->x * scale;
+    v.y = dir->y * scale;
+    v.z = dir->z * scale;
     *arg4 = v;
 }
 
