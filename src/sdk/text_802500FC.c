@@ -605,10 +605,10 @@ s32 fn_8025399C(void) {
 void fn_802539D4(void *arg0) {
     void fn_802482F8(void *, void *, u32);
     void *p = *(void **)0x800030F0;
-    if ((u32)p >= 0x80000000U) {
-        fn_802482F8(arg0, p, 0x1C);
-    } else {
+    if ((void *)0x80000000 > p) {
         *(s32 *)arg0 = 0;
+    } else {
+        fn_802482F8(arg0, p, 0x1C);
     }
 }
 
@@ -5400,6 +5400,22 @@ void fn_802751C0(s32 id, u32 mode) {
     GXWGFifo.u32 = tevReg;
     regs[0x170 / 4] = tevReg;
     *(u16 *)(gx + 2) = 0;
+}
+
+void fn_8027524C(u32 stage, u32 a, u32 b, u32 c, u32 d) {
+    extern void *__GXData;
+    u32 *gx = __GXData;
+    u32 reg;
+
+    reg = gx[0x130 / 4 + stage];
+    reg = __rlwimi(reg, a, 12, 16, 19);
+    reg = __rlwimi(reg, b, 8, 20, 23);
+    reg = __rlwimi(reg, c, 4, 24, 27);
+    reg = __rlwimi(reg, d, 0, 28, 31);
+    *(volatile u8 *)0xCC008000 = 0x61;
+    *(volatile u32 *)0xCC008000 = reg;
+    gx[0x130 / 4 + stage] = reg;
+    ((u16 *)gx)[1] = 0;
 }
 
 void fn_80275690(void) {
