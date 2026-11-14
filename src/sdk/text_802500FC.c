@@ -2037,6 +2037,13 @@ void fn_80261D34(s32 arg0) {
     fn_802660C0(lbl_80442920, 0x20, 0x420, fn_80261E68);
 }
 
+void fn_80262140(DVDCommandBlock *block) {
+    extern s32 fn_80266418(void *diskID, void (*cb)(s32));
+    extern u8 lbl_80442940[];
+    extern void fn_80262170(u32);
+    fn_80266418(lbl_80442940, (void (*)(s32))fn_80262170);
+}
+
 void fn_80262170(u32 arg0) {
     extern void fn_802652F4(u32);
     extern void fn_80264274(void);
