@@ -3628,6 +3628,8 @@ s32 fn_802636F8(DVDCommandBlock *block, void *callback) {
     return idle;
 }
 
+#pragma push
+#pragma inline_depth(0)
 s32 fn_802637B4(DVDCommandBlock *block) {
     s32 fn_8025465C();
     M2C_UNK fn_80254684(s32);
@@ -3657,7 +3659,7 @@ s32 fn_802637B4(DVDCommandBlock *block) {
     fn_80254684(enabled);
     return retVal;
 }
-
+#pragma pop
 void fn_80263854(s32 arg0, void *arg1);
 void fn_80263854(s32 arg0, void *arg1) {
     M2C_UNK fn_80259838(M2C_UNK *);
@@ -5815,28 +5817,27 @@ void fn_8026FA54(void) {
 }
 
 void fn_8026FF68(void) {
-    extern struct GXVATData {
+    extern struct {
         u8 pad0[0x1C];
         u32 vatA[8];
         u32 vatB[8];
         u32 vatC[8];
         u8 pad7C[0x5AB - 0x7C];
         u8 dirtyVAT;
-    } *__GXData;
-    struct GXVATData *gx = __GXData;
+    } *const __GXData;
     u8 i;
 
     for (i = 0; i < 8; i++) {
-        if (gx->dirtyVAT & (1 << i)) {
+        if (__GXData->dirtyVAT & (1 << i)) {
             *(volatile u8 *)0xCC008000 = 8;
             *(volatile u8 *)0xCC008000 = i | 0x70;
-            *(volatile u32 *)0xCC008000 = gx->vatA[i];
+            *(volatile u32 *)0xCC008000 = __GXData->vatA[i];
             *(volatile u8 *)0xCC008000 = 8;
             *(volatile u8 *)0xCC008000 = i | 0x80;
-            *(volatile u32 *)0xCC008000 = gx->vatB[i];
+            *(volatile u32 *)0xCC008000 = __GXData->vatB[i];
             *(volatile u8 *)0xCC008000 = 8;
             *(volatile u8 *)0xCC008000 = i | 0x90;
-            *(volatile u32 *)0xCC008000 = gx->vatC[i];
+            *(volatile u32 *)0xCC008000 = __GXData->vatC[i];
         }
     }
     __GXData->dirtyVAT = 0;
