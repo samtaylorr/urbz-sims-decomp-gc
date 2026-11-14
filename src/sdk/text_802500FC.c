@@ -1255,6 +1255,17 @@ s32 fn_80258640(void) {
     return count;
 }
 
+s32 fn_80258680(void) {
+    extern s32 lbl_80495E70;
+    s32 enabled;
+    s32 count;
+
+    enabled = fn_8025465C();
+    count = lbl_80495E70--;
+    fn_80254684(enabled);
+    return count;
+}
+
 void fn_80258C80(void) {
     M2C_UNK fn_80258A58(M2C_UNK);
     extern s32 lbl_80495E6C;
@@ -2502,6 +2513,23 @@ void fn_802643C8(void) {
     lbl_80495EDC = 1;
     if (lbl_80495ED0 == NULL) {
         lbl_80495EE0 = 1;
+    }
+    fn_80254684(enabled);
+}
+
+void fn_80264404(void) {
+    s32 fn_8025465C(void);
+    void fn_80254684(s32);
+    void fn_802622E0(void);
+    extern s32 lbl_80495EDC;
+    extern s32 lbl_80495EE0;
+    s32 enabled;
+
+    enabled = fn_8025465C();
+    lbl_80495EDC = 0;
+    if (lbl_80495EE0) {
+        lbl_80495EE0 = 0;
+        fn_802622E0();
     }
     fn_80254684(enabled);
 }
@@ -3892,6 +3920,16 @@ s32 fn_8026EDF8(void) {
     temp_r3 = lbl_804960A8;
     lbl_804960A8 = 0;
     return temp_r3;
+}
+
+void fn_8026FA54(void) {
+    extern u32 *const __GXData;
+    __GXData[0x14 / 4] = 0;
+    __GXData[0x14 / 4] = (__GXData[0x14 / 4] & ~0x600) | (1 << 9);
+    __GXData[0x18 / 4] = 0;
+    ((u8 *)__GXData)[0x4D4] = 0;
+    ((u8 *)__GXData)[0x4D5] = 0;
+    __GXData[0x5AC / 4] |= 8;
 }
 
 void fn_80270384(void) {
