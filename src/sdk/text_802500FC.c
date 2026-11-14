@@ -2445,22 +2445,27 @@ void fn_80265F80(s32 a, s32 b, s32 c, s32 d) {
     fn_80265D98(a, b, c, d);
 }
 
+#pragma push
+#pragma dont_inline on
 s32 fn_80266358(u32 offset, void (*cb)(s32)) {
     extern void (*lbl_80495F48)(s32);
     extern s32 lbl_80495F40;
     extern u8 lbl_80442AB0[];
     void fn_80251224(void *, s64, void *);
     void fn_80265CC4(void *, void *);
+    u32 timeout;
 
     lbl_80495F48 = cb;
     lbl_80495F40 = 0;
     __DIRegs[2] = 0xAB000000;
     __DIRegs[3] = offset >> 2;
     __DIRegs[7] = 1;
+    timeout = (*(u32 *)0x800000F8 / 4) * 10;
     fn_80250FC4(lbl_80442AB0);
-    fn_80251224(lbl_80442AB0, (*(u32 *)0x800000F8 / 4) * 10, fn_80265CC4);
+    fn_80251224(lbl_80442AB0, timeout, fn_80265CC4);
     return 1;
 }
+#pragma pop
 
 s32 fn_802663EC(void (*cb)(void)) {
     extern void (*lbl_80495F48)(void);
