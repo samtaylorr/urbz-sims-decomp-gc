@@ -4561,11 +4561,7 @@ void fn_8026F0B0(void) {
 
 void fn_8026F630(void) {
     extern u8 *__GXData;
-    u32 nNrm;
-    u32 nCols;
-    u32 nTex;
     u8 *gx = __GXData;
-    u8 *gx2;
 
     *(volatile u8 *)0xCC008000 = 8;
     *(volatile u8 *)0xCC008000 = 0x50;
@@ -4573,23 +4569,7 @@ void fn_8026F630(void) {
     *(volatile u8 *)0xCC008000 = 8;
     *(volatile u8 *)0xCC008000 = 0x60;
     *(volatile u32 *)0xCC008000 = *(u32 *)(gx + 0x18);
-
-    if (gx[0x4D5]) {
-        nNrm = 2;
-    } else if (gx[0x4D4]) {
-        nNrm = 1;
-    } else {
-        nNrm = 0;
-    }
-    gx2 = __GXData;
-    nCols = 33 - __cntlzw((*(u32 *)(gx + 0x14) >> 13) & 0xF);
-    nCols /= 2;
-    nTex = 33 - __cntlzw(*(u32 *)(gx2 + 0x18) & 0xFFFF);
-    nTex /= 2;
-    *(volatile u8 *)0xCC008000 = 0x10;
-    *(volatile u32 *)0xCC008000 = 0x1008;
-    *(volatile u32 *)0xCC008000 = nCols | (nNrm << 2) | (nTex << 4);
-    *(u16 *)(gx2 + 2) = 1;
+    fn_8026F0B0();
 }
 
 void fn_8026F9C4(GXVtxDescList *list) {
