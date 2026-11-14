@@ -4302,6 +4302,48 @@ void fn_80270614(u8 nTexGens) {
     gx[0x5AC / 4] |= 4;
 }
 
+void GXSetMisc(s32 token, u32 val) {
+    extern u8 *__GXData;
+
+    switch (token) {
+    case 0:
+        break;
+    case 1:
+        *(u16 *)(__GXData + 4) = val;
+        *(u16 *)(__GXData + 0) = !*(u16 *)(__GXData + 4);
+        *(u16 *)(__GXData + 2) = 1;
+        if (*(u16 *)(__GXData + 4)) {
+            *(u32 *)(__GXData + 0x5AC) |= 8;
+        }
+        break;
+    case 2:
+        __GXData[0x5A9] = (val != 0);
+        break;
+    case 3:
+        __GXData[0x5AA] = (val != 0);
+        break;
+    }
+}
+
+void fn_802706E4(void) {
+    extern u8 *__GXData;
+    void fn_802713FC(void);
+    void fn_8024FFA8(void);
+
+    if (*(u32 *)(__GXData + 0x5AC)) {
+        fn_802713FC();
+    }
+    *(volatile u32 *)0xCC008000 = 0;
+    *(volatile u32 *)0xCC008000 = 0;
+    *(volatile u32 *)0xCC008000 = 0;
+    *(volatile u32 *)0xCC008000 = 0;
+    *(volatile u32 *)0xCC008000 = 0;
+    *(volatile u32 *)0xCC008000 = 0;
+    *(volatile u32 *)0xCC008000 = 0;
+    *(volatile u32 *)0xCC008000 = 0;
+    fn_8024FFA8();
+}
+
 void fn_80270740(void) {
     M2C_UNK PPCMtwpar(M2C_UNK);
     s32 fn_802500C0();
