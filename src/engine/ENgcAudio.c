@@ -306,6 +306,30 @@ void fn_8033CC10(void **self, void *arg1) {
     fn_802D20E8(arg1);
 }
 
+void fn_8033CDF4(void *self, void *p) {
+    void fn_8035E8BC(s32, s32);
+    void fn_80337AEC(s32, s32);
+    extern s32 lbl_80494FAC;
+    extern s32 lbl_8049627C;
+    extern s32 lbl_8045CE40[];
+    ERMLock lock;
+    u32 i;
+
+    ERMLock_Lock(&lock, (char *)self + 0x5C);
+    if (M2C_FIELD(p, s32 *, 8) != -1) {
+        fn_8035E8BC(lbl_80494FAC, M2C_FIELD(p, s32 *, 8));
+        fn_80337AEC(lbl_8049627C, M2C_FIELD(p, s32 *, 4));
+        for (i = 0; i < 64; i++) {
+            if (lbl_8045CE40[i] == M2C_FIELD(p, s32 *, 8)) {
+                lbl_8045CE40[i] = -1;
+                break;
+            }
+        }
+        M2C_FIELD(p, s32 *, 8) = -1;
+    }
+    ERMLock_Unlock(&lock);
+}
+
 void fn_8033CED8(void *arg0, void *p, s32 *out) {
     s32 fn_8035E08C(s32, s32);
     extern s32 lbl_80494FAC;
