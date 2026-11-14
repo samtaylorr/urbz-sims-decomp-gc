@@ -74,33 +74,30 @@ void fn_8030EF10(void) {
 }
 
 void fn_8030F488(void **arg0) {
+    struct Node { struct Node *next; s32 pad; void *data; };
     struct It { void *node; };
     void fn_8030F5B8(void *);
     void fn_8030F938(void *, void *);
     void fn_8030F818(struct It *);
     struct It it;
-    void *n;
+    struct Node *n;
 
     if (arg0 == NULL) {
         return;
     }
-    M2C_FIELD(*arg0, void **, 0x90) = M2C_FIELD(*arg0, void **, 0x88);
+    M2C_FIELD(*arg0, struct Node **, 0x90) = M2C_FIELD(*arg0, struct Node **, 0x88);
     for (;;) {
-        n = M2C_FIELD(*arg0, void **, 0x90);
+        n = M2C_FIELD(*arg0, struct Node **, 0x90);
         if (n != NULL) {
-            it.node = M2C_FIELD(n, void **, 8);
+            it.node = n->data;
         } else {
             it.node = n;
         }
         if (it.node == NULL) {
             break;
         }
-        {
-            void **head = *arg0;
-            void *cur = it.node;
-            M2C_FIELD(head, void **, 0x90) = *M2C_FIELD(head, void ***, 0x90);
-            fn_8030F5B8(cur);
-        }
+        M2C_FIELD(*arg0, struct Node **, 0x90) = M2C_FIELD(*arg0, struct Node **, 0x90)->next;
+        fn_8030F5B8(it.node);
         if (M2C_FIELD(it.node, void (**)(s32), 0xa4) != NULL) {
             M2C_FIELD(it.node, void (**)(s32), 0xa4)(M2C_FIELD(it.node, s32 *, 0xa8));
         }
@@ -205,11 +202,11 @@ s32 fn_8030FA44(void *arg0) {
     return M2C_FIELD(M2C_FIELD(arg0, void **, 4), s32 *, 0x84);
 }
 
-void fn_8030F818(void);
+void fn_8030F818(void **);
 s32 fn_8030FA50(s32 *arg0, s32 arg1) {
     s32 fn_8036FACC(s32);
     M2C_UNK fn_8036F3E0();
-    void fn_8030F818(void);
+    void fn_8030F818(void **);
     extern s32 lbl_80494EE4;
     s32 obj = fn_8036FACC(lbl_80494EE4);
     if (obj == 0) {
