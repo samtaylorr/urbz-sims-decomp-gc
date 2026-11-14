@@ -2565,22 +2565,21 @@ void fn_802652F4(u32 code) {
     u8 fn_80265078(u32);
     u8 *fn_80257270(void);
     s32 fn_8025762C(s32);
-    u32 val;
+    u8 num;
 
-    if (code - 0x01230000 == 0x4567) {
-        val = 0xff;
-    } else if (code - 0x01230000 == 0x4568) {
-        val = 0xfe;
+    if (code == 0x01234567) {
+        num = 0xff;
+    } else if (code == 0x01234568) {
+        num = 0xfe;
     } else {
-        u8 r;
-        val = code >> 24;
-        r = fn_80265078(code & 0xffffff);
-        if (val >= 6) {
-            val = 6;
+        u32 statusCode = code >> 24;
+        u8 errorNum = fn_80265078(code & 0xffffff);
+        if (statusCode >= 6) {
+            statusCode = 6;
         }
-        val = r + val * 30;
+        num = errorNum + statusCode * 30;
     }
-    fn_80257270()[0x24] = val;
+    fn_80257270()[0x24] = num;
     fn_8025762C(1);
 }
 
@@ -2811,6 +2810,43 @@ s32 fn_802664BC(void (*cb)(void)) {
     fn_80251224(lbl_80442AB0, timeout, fn_80265CC4);
     return 1;
 }
+
+s32 fn_80266794(u8 enable, u32 size, void (*cb)(void)) {
+    extern void (*lbl_80495F48)(void);
+    extern s32 lbl_80495F40;
+    extern u8 lbl_80442AB0[];
+    void fn_80251224(void *, s64, void *);
+    void fn_80265CC4(void *, void *);
+    u32 timeout;
+
+    lbl_80495F48 = cb;
+    lbl_80495F40 = 0;
+    __DIRegs[2] = 0xE4000000 | (enable ? 0x10000 : 0) | size;
+    __DIRegs[7] = 1;
+    timeout = (*(u32 *)0x800000F8 / 4) * 10;
+    fn_80250FC4(lbl_80442AB0);
+    fn_80251224(lbl_80442AB0, timeout, fn_80265CC4);
+    return 1;
+}
+
+void fn_80266830(void) {
+    extern s32 lbl_80495F58;
+    extern s64 lbl_80495F50;
+    s64 fn_8025A494(void);
+    u32 reg;
+    s64 resetStart;
+
+    __DIRegs[1] = 2;
+    reg = __PIRegs[9];
+    __PIRegs[9] = (reg & ~4) | 1;
+    resetStart = fn_8025A494();
+    while ((fn_8025A494() - resetStart) < ((12 * ((*(u32 *)0x800000F8 / 4) / 125000)) / 8))
+        ;
+    __PIRegs[9] = reg | 5;
+    lbl_80495F58 = 1;
+    lbl_80495F50 = fn_8025A494();
+}
+
 #pragma pop
 
 s32 fn_802668EC(s32 arg0) {
