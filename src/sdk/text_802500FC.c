@@ -3009,9 +3009,13 @@ s32 fn_80263C40(DVDCommandBlock *block) {
     s32 state;
     s32 retVal;
 
-    block->command = 0xC;
-    block->callback = fn_80263CE0;
-    result = fn_80262F24(1, block);
+    {
+        s32 idle;
+        block->command = 0xC;
+        block->callback = fn_80263CE0;
+        idle = fn_80262F24(1, block);
+        result = idle;
+    }
     if (result == 0) {
         return -1;
     }
@@ -3836,6 +3840,21 @@ void fn_80267924(u8 *tm) {
     lbl_80495FB8 |= 1ull << (63 - 24);
 }
 
+void fn_80268ED0(void *callback) {
+    s32 fn_8025465C(void);
+    void fn_80254684(s32);
+    void fn_80267C10(void *, void *, void *, void *, void *);
+    extern u8 lbl_80442B18[];
+    extern s32 lbl_80495FE0;
+    s32 enabled;
+
+    enabled = fn_8025465C();
+    *(void **)(lbl_80442B18 + 0x120) = callback;
+    lbl_80495FE0 = 1;
+    fn_80267C10(lbl_80442B18 + 0xF0, lbl_80442B18 + 0x124, lbl_80442B18 + 0x128, lbl_80442B18 + 0x13C, lbl_80442B18 + 0x140);
+    fn_80254684(enabled);
+}
+
 extern s32 lbl_80495FD8;
 s32 fn_80268F3C(void) {
     return lbl_80495FD8;
@@ -3852,12 +3871,13 @@ void fn_80268F4C(void *callback) {
     void fn_80267C10(void *, void *, void *, void *, void *);
     extern u8 lbl_80442B18[];
     extern s32 lbl_80495FE0;
+    u8 *hv = lbl_80442B18;
     s32 enabled;
 
     enabled = fn_8025465C();
-    *(void **)(lbl_80442B18 + 0x138) = callback;
+    *(void **)(hv + 0x138) = callback;
     lbl_80495FE0 = 1;
-    fn_80267C10(lbl_80442B18 + 0xF0, lbl_80442B18 + 0x124, lbl_80442B18 + 0x128, lbl_80442B18 + 0x13C, lbl_80442B18 + 0x140);
+    fn_80267C10(hv + 0xF0, hv + 0x124, hv + 0x128, hv + 0x13C, hv + 0x140);
     fn_80254684(enabled);
 }
 
@@ -4215,6 +4235,14 @@ s32 fn_8026B6EC(s32 arg0, s32 *arg1) {
         return 0;
     }
     return 1;
+}
+
+s32 fn_8026B760(void) {
+    extern u32 lbl_80495FF0;
+    extern s32 lbl_80494AB4;
+    extern s32 fn_8025DAB8(void);
+    s32 sync = lbl_80495FF0 == 0 && lbl_80494AB4 == 0x20 && !fn_8025DAB8();
+    return sync;
 }
 
 void fn_8026B7C4(u32 mode) {
@@ -6288,12 +6316,12 @@ void fn_80275420(u32 id, s16 *color) {
     regRA = __rlwimi(regRA, color[0], 0, 21, 31);
     regRA = __rlwimi(regRA, color[3], 12, 9, 19);
     regRA = __rlwimi(regRA, id * 2 + 0xE0, 24, 0, 7);
+    GXWGFifo.u8 = 0x61;
+    GXWGFifo.u32 = regRA;
     regBG = 0;
     regBG = __rlwimi(regBG, color[2], 0, 21, 31);
     regBG = __rlwimi(regBG, color[1], 12, 9, 19);
     regBG = __rlwimi(regBG, id * 2 + 0xE1, 24, 0, 7);
-    GXWGFifo.u8 = 0x61;
-    GXWGFifo.u32 = regRA;
     GXWGFifo.u8 = 0x61;
     GXWGFifo.u32 = regBG;
     GXWGFifo.u8 = 0x61;
