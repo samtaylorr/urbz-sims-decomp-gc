@@ -133,6 +133,27 @@ void fn_8036DA0C(void *self, void *stream) {
     fn_8036DC68(self);
 }
 
+void fn_8036DAAC(void *self, void *stream) {
+    extern void fn_802F07FC(void *, void *);
+    extern void fn_8036DC68(void *);
+    extern u16 lbl_80493D1A[];
+    char *vt;
+
+    ((void (*)(void *))fn_8036D960)(self);
+    fn_802F07FC(self, stream);
+    if (lbl_80493D1A[0] == 0) {
+        vt = M2C_FIELD(stream, char **, 0x28);
+        (*(void (**)(void *, void *, s32))(vt + 0x1C))((char *)stream + *(s16 *)(vt + 0x18), (char *)self + 0xA0, 4);
+        vt = M2C_FIELD(stream, char **, 0x28);
+        (*(void (**)(void *, void *, s32))(vt + 0x1C))((char *)stream + *(s16 *)(vt + 0x18), (char *)self + 0x8C, 4);
+        vt = M2C_FIELD(stream, char **, 0x28);
+        (*(void (**)(void *, void *, s32))(vt + 0x1C))((char *)stream + *(s16 *)(vt + 0x18), (char *)self + 0x90, 0xC);
+        vt = M2C_FIELD(stream, char **, 0x28);
+        (*(void (**)(void *, void *, s32))(vt + 0x1C))((char *)stream + *(s16 *)(vt + 0x18), (char *)self + 0x9C, 4);
+    }
+    fn_8036DC68(self);
+}
+
 void fn_8036DB80(void *self, void *out) {
     struct TVec3Raw { s32 x, y, z; };
     char *p = (char *)self + 0x90;
