@@ -1266,10 +1266,11 @@ u8 *fn_80257214(void) {
     locked = (s32 *)(scb + 0x48);
     if (*locked != 0) {
         fn_80254684(enabled);
-        return NULL;
+        scb = NULL;
+    } else {
+        *(s32 *)(scb + 0x44) = enabled;
+        *locked = 1;
     }
-    *(s32 *)(scb + 0x44) = enabled;
-    *locked = 1;
     return scb;
 }
 
@@ -2994,6 +2995,8 @@ void fn_80263B5C(s32 arg0, void *arg1) {
     fn_80259838(&lbl_80495EC8);
 }
 
+#pragma push
+#pragma dont_inline on
 s32 fn_80263C40(DVDCommandBlock *block) {
     s32 fn_8025465C();
     M2C_UNK fn_80254684(s32);
@@ -3023,7 +3026,7 @@ s32 fn_80263C40(DVDCommandBlock *block) {
     fn_80254684(enabled);
     return retVal;
 }
-
+#pragma pop
 void fn_80263CE0(s32 arg0, void *arg1);
 void fn_80263CE0(s32 arg0, void *arg1) {
     M2C_UNK fn_80259838(M2C_UNK *);
