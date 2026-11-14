@@ -1417,6 +1417,7 @@ u32 fn_80257B24(void) {
     s32 enabled;
     s32 *locked;
     u32 mode;
+    u8 pad[8];
 
     scb = &lbl_80440C00;
     enabled = fn_8025465C();
