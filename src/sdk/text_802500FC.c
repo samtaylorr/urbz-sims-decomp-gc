@@ -3315,6 +3315,10 @@ void fn_80271760(u8 a) {
 }
 
 void fn_80271794(void) {
+    extern u8 *__GXData;
+    GXWGFifo.u8 = 0x61;
+    GXWGFifo.u32 = *(u32 *)(__GXData + 0x204);
+    *(u16 *)(__GXData + 2) = 0;
 }
 
 void fn_80271FC0(u8 *color, u32 val) {
