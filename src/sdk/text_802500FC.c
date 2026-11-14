@@ -993,6 +993,30 @@ static inline u8 *LockSram(u32 offset) {
     return scb->sram + offset;
 }
 
+void fn_8025810C(s32 chan, u16 id) {
+    s32 fn_802572CC(s32, s32);
+    u8 *sram;
+
+    sram = LockSram(0x14);
+    if (*(u16 *)(sram + 0x1C + chan * 2) != id) {
+        *(u16 *)(sram + 0x1C + chan * 2) = id;
+        fn_802572CC(1, 0x14);
+    } else {
+        fn_802572CC(0, 0x14);
+    }
+}
+
+u16 fn_802581B8(void) {
+    s32 fn_802572CC(s32, s32);
+    u8 *sram;
+    u16 id;
+
+    sram = LockSram(0x14);
+    id = *(u16 *)(sram + 0x28);
+    fn_802572CC(0, 0x14);
+    return id;
+}
+
 void fn_80258228(u16 mode) {
     extern SramControlBlock lbl_80440C00;
     s32 fn_802572CC(s32, s32);
