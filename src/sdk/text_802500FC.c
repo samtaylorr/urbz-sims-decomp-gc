@@ -4353,6 +4353,16 @@ void fn_80270740(void) {
     PPCMtwpar(0x0C008000);
 }
 
+void fn_80270774(u32 clocks) {
+    s64 fn_8025A3DC(void);
+    s64 time0, time1;
+
+    time0 = fn_8025A3DC();
+    do {
+        time1 = fn_8025A3DC();
+    } while (time1 - time0 <= (clocks / 4));
+}
+
 u16 fn_80270C44(void) {
     extern void *__peReg;
     return M2C_FIELD(__peReg, u16 *, 0xE);
