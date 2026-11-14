@@ -29,6 +29,32 @@ void fn_80041AB4(s32 *arg) {
     arg[0] = lbl_8041F714.size;
 }
 
+void fn_80041B60(s32 mode, s32 *arg) {
+    typedef struct { s32 *list; s32 count; s32 state; } EyeToyEntry;
+    extern EyeToyEntry lbl_803F5DA8[];
+    u8 *fn_802FF608(void *, s32);
+    u8 *obj;
+    s32 w;
+    s32 h;
+
+    arg[1] = 0;
+    arg[0] = 0;
+    if ((u32)mode <= 4) {
+        EyeToyEntry *e = &lbl_803F5DA8[mode];
+        if (e->state != 0 && e->list != 0 && e->list[1] != 0 && *(void **)(e->list[1] + 0x20) != 0) {
+            obj = fn_802FF608(*(void **)(e->list[1] + 0x20), 0);
+            if (obj != 0) {
+                u8 *vt;
+                w = 0;
+                vt = *(u8 **)(obj + 0x24);
+                h = 0;
+                arg[1] = ((s32 (*)(void *, s32, s32 *, s32 *))*(void **)(vt + 0x44))(obj + *(s16 *)(vt + 0x40), 0, &w, &h);
+                arg[0] = w * h;
+            }
+        }
+    }
+}
+
 void fn_80041C2C(s32 id, s32 *arg) {
     void fn_80041AB4(s32 *);
     void fn_80041B60(s32, s32 *);
@@ -286,6 +312,40 @@ void fn_80042A68(void) {
     }
 }
 
+void fn_80042BB4(void) {
+    typedef struct { s32 id; s32 handle; } EyeToyPair;
+    typedef struct { EyeToyPair *list; s32 count; s32 state; } EyeToyEntry2;
+    extern EyeToyEntry2 lbl_803F5DA8[];
+    extern s32 lbl_8049407C;
+    extern s32 lbl_80494080;
+    extern s32 lbl_804940AC;
+    extern char lbl_8045BA40[];
+    void fn_80043304(void);
+    void fn_80337AEC(void *, s32);
+    void fn_803390C4(s32);
+    void fn_803398AC(void);
+    s32 i;
+    s32 j;
+    EyeToyPair *list;
+
+    fn_80043304();
+    fn_803390C4(lbl_8049407C);
+    if (lbl_804940AC != 0) {
+        fn_80337AEC(lbl_8045BA40, lbl_804940AC);
+    }
+    lbl_8049407C = -1;
+    lbl_804940AC = 0;
+    lbl_80494080 = 0;
+    fn_803398AC();
+    for (i = 0; i <= 4; i++) {
+        list = lbl_803F5DA8[i].list;
+        for (j = 0; j < lbl_803F5DA8[i].count; j++) {
+            fn_80337AEC(lbl_8045BA40, list[j].handle);
+            list[j].handle = 0;
+        }
+    }
+}
+
 extern void (*lbl_804940B0)(void);
 extern s32 lbl_8049407C;
 extern s32 lbl_80494084;
@@ -332,6 +392,33 @@ s32 fn_80043220(void) {
 
 s32 fn_80043228(void) {
     return 5;
+}
+
+s32 fn_80043230(void) {
+    s32 fn_803390AC(s32, void (*)(s32), s32, s32, void (*)(void));
+    void fn_800438D0(f32);
+    extern s32 lbl_804957B0;
+    extern f32 lbl_804957B4;
+    extern s32 lbl_8049409C;
+    extern void *lbl_804957AC;
+    extern s32 lbl_804940A8;
+    s32 idx;
+
+    if (lbl_8049409C == 0) {
+        lbl_8049409C = 1;
+        lbl_804940A8 = ((s32 (*)(s16, s16, u8))fn_8004206C)(0x80, 0x80, 0x10);
+        lbl_804957AC = ((void *(*)(s16, s16, u8))fn_8004206C)(0x80, 0x80, 0x10);
+        idx = fn_8004200C();
+        if (idx != -1) {
+            s32 *p = &lbl_804957B0;
+            lbl_8049407C = fn_803390AC(idx, fn_80041FCC, 1, 0, fn_80042A68);
+            if (*p != 0) {
+                *p = 0;
+                fn_800438D0(lbl_804957B4);
+            }
+        }
+    }
+    return lbl_804940A8 != 0 && lbl_804957AC != 0 && lbl_8049407C != -1;
 }
 
 void fn_80043304(void) {
