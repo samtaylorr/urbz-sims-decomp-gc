@@ -5464,6 +5464,27 @@ void fn_802752D4(u32 stage, s32 op, u32 bias, u32 scale, u8 clamp, u32 out_reg) 
     ((u16 *)__GXData)[1] = 0;
 }
 
+void fn_8027533C(u32 stage, s32 op, u32 bias, u32 scale, u8 clamp, u32 out_reg) {
+    extern u32 *__GXData;
+    u32 reg;
+
+    reg = __GXData[0x170 / 4 + stage];
+    reg = __rlwimi(reg, op, 18, 13, 13);
+    if (op <= 1) {
+        reg = __rlwimi(reg, scale, 20, 10, 11);
+        reg = __rlwimi(reg, bias, 16, 14, 15);
+    } else {
+        reg = __rlwimi(reg, op >> 1, 19, 10, 11);
+        reg = __rlwimi(reg, 3, 16, 14, 15);
+    }
+    reg = __rlwimi(reg, clamp, 19, 12, 12);
+    reg = __rlwimi(reg, out_reg, 22, 8, 9);
+    *(volatile u8 *)0xCC008000 = 0x61;
+    *(volatile u32 *)0xCC008000 = reg;
+    __GXData[0x170 / 4 + stage] = reg;
+    ((u16 *)__GXData)[1] = 0;
+}
+
 void fn_80275690(void) {
 
 }
