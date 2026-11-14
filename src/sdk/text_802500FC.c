@@ -1375,23 +1375,21 @@ void fn_80257CB4(u32 mode) {
 u8 fn_80257D64(void) {
     extern SramControlBlock lbl_80440C00;
     s32 fn_802572CC(s32, s32);
-    SramControlBlock *scb;
     u8 *sram;
     s32 enabled;
     s32 *locked;
     u8 language;
     u8 pad[8];
 
-    scb = &lbl_80440C00;
     enabled = fn_8025465C();
-    locked = &scb->locked;
+    locked = &lbl_80440C00.locked;
     if (*locked != 0) {
         fn_80254684(enabled);
         sram = NULL;
     } else {
-        scb->enabled = enabled;
+        lbl_80440C00.enabled = enabled;
         *locked = 1;
-        sram = scb->sram;
+        sram = lbl_80440C00.sram;
     }
     language = sram[0x12];
     fn_802572CC(0, 0);
@@ -2677,6 +2675,44 @@ void fn_80260C6C(s32 result, DVDCommandBlock *block) {
     }
 }
 
+void fn_80260D48(void);
+s32 fn_80260C9C(DVDFileInfo *fileInfo, s32 offset, s32 prio) {
+    s32 fn_8025465C();
+    void fn_80254684(s32);
+    void fn_8025974C(void *);
+    extern u8 lbl_80495EC8[];
+    DVDCommandBlock *block;
+    s32 result;
+    s32 state;
+    s32 enabled;
+    s32 retVal;
+
+    block = &fileInfo->cb;
+    result = fn_802630BC(block, fileInfo->startAddr + offset, fn_80260D48, prio);
+    if (result == 0) {
+        return -1;
+    }
+    enabled = fn_8025465C();
+    while (1) {
+        state = ((volatile DVDCommandBlock *)block)->state;
+        if (state == 0) {
+            retVal = 0;
+            break;
+        }
+        if (state == -1) {
+            retVal = -1;
+            break;
+        }
+        if (state == 10) {
+            retVal = -3;
+            break;
+        }
+        fn_8025974C(lbl_80495EC8);
+    }
+    fn_80254684(enabled);
+    return retVal;
+}
+
 void fn_80260D48(void) {
     extern M2C_UNK lbl_80495EC8;
     fn_80259838(&lbl_80495EC8);
@@ -3609,15 +3645,15 @@ s32 fn_802658CC(void) {
     extern s32 lbl_80495F84;
     void fn_80265D98(s32, s32, s32, s32);
     s32 fn_80266358(u32 offset, void (*cb)(s32));
-    Cmd *cmds = (Cmd *)lbl_80442A48;
-    Cmd *cmd;
+    Cmd *cmd = &((Cmd *)lbl_80442A48)[lbl_80495F84];
 
-    if (cmds[lbl_80495F84].type == 1) {
-        cmd = &cmds[lbl_80495F84++];
+    switch (cmd->type) {
+    case 1:
+        lbl_80495F84++;
         fn_80265D98(cmd->a, cmd->b, cmd->c, cmd->d);
         return 1;
-    } else if (cmds[lbl_80495F84].type == 2) {
-        cmd = &cmds[lbl_80495F84++];
+    case 2:
+        lbl_80495F84++;
         fn_80266358(cmd->c, (void (*)(s32))cmd->d);
         return 1;
     }
@@ -5993,19 +6029,18 @@ void fn_80272CC4(u8 nChans) {
 
 void fn_80272D00(s32 chan, u8 enable, s32 amb_src, s32 mat_src, u32 light_mask, s32 diff_fn, s32 attn_fn) {
     extern void *__GXData;
-    u32 reg;
+    u32 reg = 0;
     u32 idx;
 
+    reg = __rlwimi(reg, enable, 1, 30, 30);
+    reg = __rlwimi(reg, mat_src, 0, 31, 31);
+    reg = __rlwimi(reg, amb_src, 6, 25, 25);
     idx = chan & 0x3;
-    reg = 0;
-    reg = (reg & ~0x2) | ((enable << 1) & 0x2);
-    reg = (reg & ~0x1) | (mat_src & 0x1);
-    reg = (reg & ~0x40) | ((amb_src << 6) & 0x40);
-    reg = (reg & ~0x180) | (((attn_fn == 0 ? 0 : diff_fn) << 7) & 0x180);
-    reg = (reg & ~0x200) | (((attn_fn != 2) << 9) & 0x200);
-    reg = (reg & ~0x400) | (((attn_fn != 0) << 10) & 0x400);
-    reg = (reg & ~0x3C) | ((light_mask << 2) & 0x3C);
-    reg = (reg & ~0x7800) | (((light_mask >> 4) << 11) & 0x7800);
+    reg = __rlwimi(reg, attn_fn == 0 ? 0 : diff_fn, 7, 23, 24);
+    reg = __rlwimi(reg, attn_fn != 2, 9, 22, 22);
+    reg = __rlwimi(reg, attn_fn != 0, 10, 21, 21);
+    reg = (reg & ~0x3C) | ((light_mask & 0xF) << 2);
+    reg = (reg & ~0x7800) | (((light_mask >> 4) & 0xF) << 11);
     GXWGFifo.u8 = 0x10;
     GXWGFifo.u32 = idx + 0x100E;
     GXWGFifo.u32 = reg;
@@ -6600,6 +6635,8 @@ void fn_802753A4(u32 id, u8 *color) {
     M2C_FIELD(__GXData, u16 *, 0x2) = 0;
 }
 
+#pragma push
+#pragma scheduling off
 void fn_80275420(u32 id, s16 *color) {
     extern void *__GXData;
     s16 r = color[0];
@@ -6627,7 +6664,7 @@ void fn_80275420(u32 id, s16 *color) {
     GXWGFifo.u32 = regBG;
     M2C_FIELD(__GXData, u16 *, 0x2) = 0;
 }
-
+#pragma pop
 void fn_8027549C(u32 id, u8 *color) {
     extern void *__GXData;
     u32 regRA;
