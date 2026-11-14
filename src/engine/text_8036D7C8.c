@@ -14,6 +14,14 @@ extern s32 lbl_80496304;
 
 typedef struct { f32 x, y, z; } ECamVec3;
 
+static inline ECamVec3 ECamVec3_Make(f32 x, f32 y, f32 z) {
+    ECamVec3 v;
+    v.x = x;
+    v.z = z;
+    v.y = y;
+    return v;
+}
+
 void fn_802D2FD0(void);
 void fn_8036D7C8(void) {
     fn_802D2FD0();
@@ -42,11 +50,11 @@ s32 fn_8036D868(void *arg0) {
     extern void fn_803BAB78(void *);
     extern f32 lbl_803F5304[];
     extern u8 lbl_8041DAB0[];
-    ECamVec3 *q;
+    char *q;
     ECamVec3 v;
     f32 c;
 
-    q = (ECamVec3 *)((char *)arg0 + 0x90);
+    q = (char *)arg0 + 0x90;
     fn_802F04BC(arg0);
     *(void **)arg0 = lbl_8041DAB0;
     fn_803BAB78(q);
@@ -55,7 +63,7 @@ s32 fn_8036D868(void *arg0) {
     v.x = c;
     v.z = c;
     v.y = c;
-    *q = v;
+    M2C_FIELD(arg0, ECamVec3 *, 0x90) = v;
     M2C_FIELD(arg0, s32 *, 0x8C) = 0;
     M2C_FIELD(arg0, s32 *, 0xB4) = 0;
     M2C_FIELD(arg0, s32 *, 0xA8) = 0;
