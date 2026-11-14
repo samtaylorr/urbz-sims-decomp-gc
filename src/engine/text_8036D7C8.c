@@ -177,6 +177,24 @@ void fn_8036E318(char *self, char *obj) {
     fn_80300200(*(u8 **)(*(char **)(self + 0xB4) + 0x20) + *(s32 *)(self + 0x8C) * 0x18, obj);
 }
 
+void fn_8036E8B0(char *self, char *item) {
+    struct Elem38 { u8 pad[0x38]; };
+    char *owner;
+    char *data;
+    char *child;
+    char *sub;
+    void *res;
+
+    owner = *(char **)(item + 0x24);
+    data = *(char **)(item + 0x18);
+    child = (*(char ***)(owner + 0xAC))[(struct Elem38 *)item - *(struct Elem38 **)(owner + 0xA8)];
+    res = (*(void *(**)(void *))(*(char **)owner + 0x12C))(owner + *(s16 *)(*(char **)owner + 0x128));
+    sub = *(char **)(child + 0x20);
+    (*(void (**)(void *, void *, void *))(*(char **)(sub + 0xF0) + 0x14))(sub + *(s16 *)(*(char **)(sub + 0xF0) + 0x10), self, res);
+    (*(void (**)(void *, s32, f32))(*(char **)(self + 0x68) + 0x1AC))(self + *(s16 *)(*(char **)(self + 0x68) + 0x1A8), 0, *(f32 *)(data + 0x24));
+    (*(void (**)(void *, s32))(*(char **)(self + 0x68) + 0xB4))(self + *(s16 *)(*(char **)(self + 0x68) + 0xB0), *(s32 *)data);
+}
+
 s32 fn_8036E97C(void *arg0) {
     u32 i;
     void **list;
