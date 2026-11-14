@@ -4825,6 +4825,7 @@ void fn_80273AE8(GXTlutObjInt *t, u32 tlut_name) {
     extern void *__GXData;
     extern void __GXFlushTextureState(void);
     GXTlutRegionInt *r;
+    u32 tlut_offset;
 
     r = M2C_FIELD(__GXData, GXTlutRegionInt *(**)(u32), 0x4CC)(tlut_name);
     __GXFlushTextureState();
@@ -4833,7 +4834,8 @@ void fn_80273AE8(GXTlutObjInt *t, u32 tlut_name) {
     *(volatile u8 *)0xCC008000 = 0x61;
     *(volatile u32 *)0xCC008000 = r->loadTlut1;
     __GXFlushTextureState();
-    t->tlut = __rlwimi(t->tlut, r->loadTlut1, 0, 22, 31);
+    tlut_offset = r->loadTlut1 & 0x3FF;
+    t->tlut = __rlwimi(t->tlut, tlut_offset, 0, 22, 31);
     r->tlutObj = *t;
 }
 
