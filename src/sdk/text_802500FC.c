@@ -227,6 +227,8 @@ void fn_80251714(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 4) = arg1;
 }
 
+#pragma push
+#pragma peephole off
 void fn_8025171C(u32 tag) {
     extern void *lbl_80495E00;
     void fn_80251378(void *);
@@ -249,8 +251,6 @@ void fn_8025171C(u32 tag) {
     fn_80254684(enabled);
 }
 
-#pragma push
-#pragma peephole off
 BOOL fn_802517CC(BOOL final) {
     extern void *lbl_80495E00;
     s32 fn_80264C0C(void *);
@@ -5920,20 +5920,21 @@ void fn_802755C8(u32 stage, u32 ras_sel, u32 tex_sel) {
 
 void fn_80275610(u32 table, u32 red, u32 green, u32 blue, u32 alpha) {
     extern struct { u16 unk0; u16 bpSentNot; u8 pad4[0x1AC]; u32 tevKsel[8]; } *__GXData;
+    struct { u16 unk0; u16 bpSentNot; u8 pad4[0x1AC]; u32 tevKsel[8]; } *gx = (void *)__GXData;
     u32 *Kreg;
 
-    Kreg = &__GXData->tevKsel[table << 1];
+    Kreg = &gx->tevKsel[table << 1];
     *Kreg = __rlwimi(*Kreg, red, 0, 30, 31);
     *Kreg = __rlwimi(*Kreg, green, 2, 28, 29);
     GXWGFifo.u8 = 0x61;
     GXWGFifo.u32 = *Kreg;
 
-    Kreg = &__GXData->tevKsel[(table << 1) + 1];
+    Kreg = &gx->tevKsel[(table << 1) + 1];
     *Kreg = __rlwimi(*Kreg, blue, 0, 30, 31);
     *Kreg = __rlwimi(*Kreg, alpha, 2, 28, 29);
     GXWGFifo.u8 = 0x61;
     GXWGFifo.u32 = *Kreg;
-    __GXData->bpSentNot = 0;
+    gx->bpSentNot = 0;
 }
 
 void fn_80275690(void) {
