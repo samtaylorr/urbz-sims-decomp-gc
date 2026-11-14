@@ -3044,7 +3044,6 @@ s32 fn_80263C40(DVDCommandBlock *block) {
     fn_80254684(enabled);
     return retVal;
 }
-#pragma pop
 void fn_80263CE0(s32 arg0, void *arg1);
 void fn_80263CE0(s32 arg0, void *arg1) {
     M2C_UNK fn_80259838(M2C_UNK *);
