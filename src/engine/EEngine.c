@@ -405,10 +405,9 @@ extern s32 lbl_80494E04;
 extern f32 lbl_804961B0;
 
 static inline void EEngine_SetFrameStep(f32 dt) {
-    s32 n = (s32) (dt / lbl_804961B0 + 0.5);
-    lbl_80494E04 = n;
-    if (n > 0) {
-        if (n > 15) {
+    lbl_80494E04 = (s32) (dt / lbl_804961B0 + 0.5);
+    if (lbl_80494E04 > 0) {
+        if (lbl_80494E04 > 15) {
             lbl_80494E04 = 15;
         }
     } else {
@@ -418,24 +417,16 @@ static inline void EEngine_SetFrameStep(f32 dt) {
 
 void fn_802E0ED8(void *self, f32 dt) {
     extern s32 lbl_80494E00;
-    extern s32 lbl_80494E04;
     extern f32 lbl_80494E18;
     extern f32 lbl_80494E1C;
     extern f32 lbl_80494E24;
     extern f32 lbl_80494E28;
-    extern f32 lbl_804961B0;
     if ((s32) M2C_FIELD(self, s32 *, 8) != 0) {
         f32 a = lbl_80494E18 > lbl_80494E1C ? lbl_80494E18 : lbl_80494E1C;
         f32 b = lbl_80494E24 > lbl_80494E28 ? lbl_80494E24 : lbl_80494E28;
-        f32 m = a > b ? a : b;
-        lbl_80494E04 = (s32) (m / lbl_804961B0 + 0.5);
+        EEngine_SetFrameStep(a > b ? a : b);
     } else {
-        lbl_80494E04 = (s32) (dt / lbl_804961B0 + 0.5);
-    }
-    if (lbl_80494E04 <= 0) {
-        lbl_80494E04 = 1;
-    } else if (lbl_80494E04 > 15) {
-        lbl_80494E04 = 15;
+        EEngine_SetFrameStep(dt);
     }
     lbl_80494E00 += lbl_80494E04;
 }
