@@ -1340,6 +1340,60 @@ void fn_80257894(s32 arg0) {
     }
 }
 
+u8 fn_80257D64(void) {
+    extern SramControlBlock lbl_80440C00;
+    s32 fn_802572CC(s32, s32);
+    SramControlBlock *scb;
+    u8 *sram;
+    s32 enabled;
+    s32 *locked;
+    u8 language;
+    u8 pad[8];
+
+    scb = &lbl_80440C00;
+    enabled = fn_8025465C();
+    locked = &scb->locked;
+    if (*locked != 0) {
+        fn_80254684(enabled);
+        sram = NULL;
+    } else {
+        scb->enabled = enabled;
+        *locked = 1;
+        sram = scb->sram;
+    }
+    language = sram[0x12];
+    fn_802572CC(0, 0);
+    return language;
+}
+
+void fn_80257DD0(u8 language) {
+    extern SramControlBlock lbl_80440C00;
+    s32 fn_802572CC(s32, s32);
+    SramControlBlock *scb;
+    u8 *sram;
+    s32 enabled;
+    s32 *locked;
+    u8 pad[8];
+
+    scb = &lbl_80440C00;
+    enabled = fn_8025465C();
+    locked = &scb->locked;
+    if (*locked != 0) {
+        fn_80254684(enabled);
+        sram = NULL;
+    } else {
+        scb->enabled = enabled;
+        *locked = 1;
+        sram = scb->sram;
+    }
+    if (language == sram[0x12]) {
+        fn_802572CC(0, 0);
+        return;
+    }
+    sram[0x12] = language;
+    fn_802572CC(1, 0);
+}
+
 u16 fn_80258088(s32 chan) {
     extern SramControlBlock lbl_80440C00;
     s32 fn_802572CC(s32, s32);
@@ -6441,20 +6495,16 @@ void fn_80275420(u32 id, s16 *color) {
     extern void *__GXData;
     u32 regRA;
     u32 regBG;
-    s16 r = color[0];
-    s16 g = color[1];
-    s16 b = color[2];
-    s16 a = color[3];
 
     regRA = 0;
-    regRA = __rlwimi(regRA, r, 0, 21, 31);
-    regRA = __rlwimi(regRA, a, 12, 9, 19);
+    regRA = __rlwimi(regRA, color[0], 0, 21, 31);
+    regRA = __rlwimi(regRA, color[3], 12, 9, 19);
+    regBG = 0;
+    regBG = __rlwimi(regBG, color[2], 0, 21, 31);
+    regBG = __rlwimi(regBG, color[1], 12, 9, 19);
     regRA = __rlwimi(regRA, id * 2 + 0xE0, 24, 0, 7);
     GXWGFifo.u8 = 0x61;
     GXWGFifo.u32 = regRA;
-    regBG = 0;
-    regBG = __rlwimi(regBG, b, 0, 21, 31);
-    regBG = __rlwimi(regBG, g, 12, 9, 19);
     regBG = __rlwimi(regBG, id * 2 + 0xE1, 24, 0, 7);
     GXWGFifo.u8 = 0x61;
     GXWGFifo.u32 = regBG;
