@@ -620,6 +620,15 @@ void fn_80253A14(void *arg0, void *arg1) {
     *(void **)0x800030F0 = arg1;
 }
 
+s32 fn_80253DC0(char *arg0) {
+    s32 fn_80248930(char *, char *, s32);
+    extern char lbl_803F8670[];
+    if (fn_80248930(arg0, lbl_803F8670, 10) > 0) {
+        return 1;
+    }
+    return 0;
+}
+
 void fn_80254420(char *path, char **argv) {
     s32 fn_802604AC(char *, DVDFileInfo *);
     void fn_80254284(u32, u32, char **);
