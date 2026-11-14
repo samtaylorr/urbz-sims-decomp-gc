@@ -3157,6 +3157,23 @@ DVDCommandBlock *fn_80264CE4(s32 prio) {
     return block;
 }
 
+s32 fn_80264DE8(void) {
+    s32 enabled;
+    u32 i;
+    DVDCommandBlock *q;
+
+    enabled = fn_8025465C();
+    for (i = 0; i < 4; i++) {
+        q = (DVDCommandBlock *)&lbl_804429B8[i];
+        if (q->next != q) {
+            fn_80254684(enabled);
+            return 1;
+        }
+    }
+    fn_80254684(enabled);
+    return 0;
+}
+
 u32 fn_80264E40(void **item) {
     s32 fn_8025465C(void);
     void fn_80254684(s32);
