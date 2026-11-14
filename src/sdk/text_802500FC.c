@@ -1410,15 +1410,51 @@ void fn_80257A80(u32 on) {
     fn_802572CC(1, 0);
 }
 
-void fn_80257CB4(u32 mode) {
+u32 fn_80257B24(void) {
+    extern SramControlBlock lbl_80440C00;
     s32 fn_802572CC(s32, s32);
+    SramControlBlock *scb;
+    s32 enabled;
+    s32 *locked;
+    u32 mode;
+
+    scb = &lbl_80440C00;
+    enabled = fn_8025465C();
+    locked = &scb->locked;
+    if (*locked != 0) {
+        fn_80254684(enabled);
+        scb = NULL;
+    } else {
+        scb->enabled = enabled;
+        *locked = 1;
+    }
+    mode = (scb->sram[0x13] >> 7) & 1;
+    fn_802572CC(0, 0);
+    return mode;
+}
+
+void fn_80257CB4(u32 mode) {
+    extern SramControlBlock lbl_80440C00;
+    s32 fn_802572CC(s32, s32);
+    SramControlBlock *scb = &lbl_80440C00;
     u8 *sram;
+    s32 enabled;
+    s32 *locked;
     u8 pad[8];
 
     if (mode > 2) {
         mode = 0;
     }
-    sram = LockSramHeader();
+    enabled = fn_8025465C();
+    locked = &scb->locked;
+    if (*locked != 0) {
+        fn_80254684(enabled);
+        sram = NULL;
+    } else {
+        scb->enabled = enabled;
+        *locked = 1;
+        sram = scb->sram;
+    }
     if (mode == (sram[0x13] & 3)) {
         fn_802572CC(0, 0);
         return;
@@ -2893,7 +2929,7 @@ void fn_80261270(s32 arg0) {
     lbl_80494A30 = arg0;
 }
 
-void fn_80261458(void);
+void fn_80261458();
 void fn_802652F4();
 s32 fn_802664BC(void (*)(void));
 void fn_80261504(void) {
