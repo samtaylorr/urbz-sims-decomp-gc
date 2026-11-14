@@ -3239,6 +3239,21 @@ s32 fn_80268F44(void) {
     return lbl_80495FDC;
 }
 
+void fn_80268FB8(u32 black) {
+    extern u8 lbl_80442B18[];
+    void fn_80267FB0(u16, u16, u8, u16, u16, u16, u16, u16, u32);
+    s32 enabled;
+    u8 *tm;
+
+    enabled = fn_8025465C();
+    *(u32 *)(lbl_80442B18 + 0x130) = black;
+    tm = *(u8 **)(lbl_80442B18 + 0x144);
+    fn_80267FB0(*(u16 *)(lbl_80442B18 + 0xFA), *(u16 *)(lbl_80442B18 + 0xF6), tm[0], *(u16 *)(tm + 2),
+                *(u16 *)(tm + 4), *(u16 *)(tm + 6), *(u16 *)(tm + 8), *(u16 *)(tm + 0xA),
+                *(u32 *)(lbl_80442B18 + 0x130));
+    fn_80254684(enabled);
+}
+
 extern s32 lbl_80495F8C;
 s32 fn_80269134(void) {
     return lbl_80495F8C;
@@ -3271,7 +3286,10 @@ u32 fn_80269178(void) {
 }
 
 u32 fn_802691C8(void) {
-    if (fn_80269178() < lbl_80495FD0[0xC]) {
+    u32 halfLine;
+
+    halfLine = fn_80269178();
+    if (halfLine < lbl_80495FD0[0xC]) {
         return 1;
     } else {
         return 0;
