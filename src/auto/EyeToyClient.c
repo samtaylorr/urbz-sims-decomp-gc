@@ -31,7 +31,7 @@ void fn_80041AB4(s32 *arg) {
 
 void fn_80041C2C(s32 id, s32 *arg) {
     void fn_80041AB4(s32 *);
-    void fn_80041B60(s32);
+    void fn_80041B60(s32, s32 *);
     s32 mode = 0;
 
     switch (id) {
@@ -55,7 +55,7 @@ void fn_80041C2C(s32 id, s32 *arg) {
     default:
         return;
     }
-    fn_80041B60(mode);
+    fn_80041B60(mode, arg);
 }
 
 void fn_80041CDC(void) {
