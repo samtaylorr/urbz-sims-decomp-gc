@@ -1636,6 +1636,14 @@ void fn_8025FCD4(f32 *a, f32 *b, f32 *axb) {
     axb[1] = y;
     axb[2] = z;
 }
+
+f32 fn_8025FF08(f32 *a, f32 *b) {
+    f32 dx = a[0] - b[0];
+    f32 dy = a[1] - b[1];
+    f32 dz = a[2] - b[2];
+    return dz * dz + (dx * dx + dy * dy);
+}
+
 #pragma pop
 s32 fn_80260574(void) {
     M2C_UNK fn_802646D0();
