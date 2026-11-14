@@ -4738,6 +4738,7 @@ void fn_8026F0B0(void) {
     u32 nNrm;
     u32 nCols;
     u32 nTex;
+    u32 reg;
     u8 *gx;
 
     if (__GXData[0x4D5]) {
@@ -4749,12 +4750,13 @@ void fn_8026F0B0(void) {
     }
     nCols = 33 - __cntlzw((*(u32 *)(__GXData + 0x14) >> 13) & 0xF);
     nCols /= 2;
-    nTex = 33 - __cntlzw((*(u32 *)(__GXData + 0x18) >> 0) & 0xFFFF);
+    nTex = 33 - __cntlzw(*(u32 *)(__GXData + 0x18) & 0xFFFF);
     nTex /= 2;
+    reg = nCols | (nNrm << 2) | (nTex << 4);
     gx = __GXData;
     *(volatile u8 *)0xCC008000 = 0x10;
     *(volatile u32 *)0xCC008000 = 0x1008;
-    *(volatile u32 *)0xCC008000 = nCols | (nNrm << 2) | (nTex << 4);
+    *(volatile u32 *)0xCC008000 = reg;
     *(u16 *)(gx + 2) = 1;
 }
 
