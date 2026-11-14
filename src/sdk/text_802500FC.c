@@ -4304,16 +4304,18 @@ void fn_80270614(u8 nTexGens) {
 
 void GXSetMisc(s32 token, u32 val) {
     extern u8 *__GXData;
+    u8 *gx;
 
     switch (token) {
     case 0:
         break;
     case 1:
-        *(u16 *)(__GXData + 4) = val;
-        *(u16 *)(__GXData + 0) = !*(u16 *)(__GXData + 4);
-        *(u16 *)(__GXData + 2) = 1;
-        if (*(u16 *)(__GXData + 4)) {
-            *(u32 *)(__GXData + 0x5AC) |= 8;
+        gx = __GXData;
+        *(u16 *)(gx + 4) = val;
+        *(u16 *)(gx + 0) = !*(u16 *)(gx + 4);
+        *(u16 *)(gx + 2) = 1;
+        if (*(u16 *)(gx + 4)) {
+            *(u32 *)(gx + 0x5AC) |= 8;
         }
         break;
     case 2:
