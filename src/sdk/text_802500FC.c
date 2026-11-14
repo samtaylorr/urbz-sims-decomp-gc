@@ -1644,6 +1644,13 @@ f32 fn_8025FF08(f32 *a, f32 *b) {
     return dz * dz + (dx * dx + dy * dy);
 }
 
+f32 fn_8025FF6C(f32 *a, f32 *b) {
+    f32 dx = a[0] - b[0];
+    f32 dy = a[1] - b[1];
+    f32 dz = a[2] - b[2];
+    return sqrtf(dz * dz + (dx * dx + dy * dy));
+}
+
 #pragma pop
 s32 fn_80260574(void) {
     M2C_UNK fn_802646D0();
@@ -3769,9 +3776,10 @@ void fn_80274940(u32 tev_stage, u32 ind_stage, u32 format, u32 bias_sel, u32 mat
 
 void fn_80274D54(u8 nIndStages) {
     extern u32 *__GXData;
+    u32 *gx = __GXData;
 
-    __GXData[0x204 / 4] = __rlwimi(__GXData[0x204 / 4], nIndStages, 16, 13, 15);
-    __GXData[0x5AC / 4] |= 6;
+    gx[0x204 / 4] = (gx[0x204 / 4] & ~0x70000) | ((u32)nIndStages << 16);
+    gx[0x5AC / 4] |= 6;
 }
 
 void fn_80274D78(u32 tev_stage) {
