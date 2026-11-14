@@ -339,7 +339,6 @@ extern void fn_80320528(void *, s32);
 extern f32 lbl_8049622C[2];
 extern f32 lbl_803F30E4[];
 extern s32 lbl_80496234;
-extern Vec2Arg fn_803227C4(s32, s32, s32, s32, s32);
 typedef void (*Fn803227C4)(s32, s32, s32, s32, s32, s32);
 s32 fn_80323FA8(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     ((Fn803227C4)fn_803227C4)(arg0, arg1, arg2, 0, arg4, arg3);
