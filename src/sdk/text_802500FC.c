@@ -3181,11 +3181,7 @@ s32 fn_80261200(DVDFileInfo *fileInfo) {
         bytes = 0;
         break;
     case 1:
-        {
-            u32 cur = cb->currTransferSize;
-            u32 done = cb->transferredSize;
-            bytes = (s32)(done + (cur - *(volatile u32 *)0xCC006018));
-        }
+        bytes = (s32)(cb->transferredSize + (cb->currTransferSize - __DIRegsT[6]));
         break;
     }
     return bytes;
@@ -4662,16 +4658,20 @@ void fn_802678D0(void) {
 
 void fn_80267924(u8 *tm) {
     extern u16 lbl_80442B18[];
-    extern volatile u64 lbl_80495FB8;
+    extern volatile u32 lbl_80495FB8;
+    extern volatile u32 lbl_80495FBC;
     u16 vct, hct, borrow;
+    u32 hi, lo;
 
     vct = (u16)(*(u16 *)(tm + 0x18) / 2);
     borrow = (u16)(*(u16 *)(tm + 0x18) % 2);
     hct = (u16)(borrow ? *(u16 *)(tm + 0x1A) : (u16)0);
     lbl_80442B18[25] = (u16)(hct + 1);
-    lbl_80495FB8 |= 1ull << (63 - 25);
+    hi = lbl_80495FB8; lo = lbl_80495FBC;
+    lbl_80495FBC = lo; lbl_80495FB8 = hi | 0x40;
     lbl_80442B18[24] = (u16)((vct + 1) | 0x1000);
-    lbl_80495FB8 |= 1ull << (63 - 24);
+    hi = lbl_80495FB8; lo = lbl_80495FBC;
+    lbl_80495FBC = lo; lbl_80495FB8 = hi | 0x80;
 }
 
 void fn_802679A0(u16 fbSizeX, s32 xfbMode, u16 panPosX, u16 panSizeX, u8 *wordPerLine, u8 *std, u8 *wpl, u8 *xof) {
@@ -4688,21 +4688,22 @@ void fn_802679A0(u16 fbSizeX, s32 xfbMode, u16 panPosX, u16 panSizeX, u8 *wordPe
 
 void fn_80267A38(u8 *tm) {
     extern u16 lbl_80442B18[];
-    extern volatile u64 lbl_80495FB8;
-    u16 val;
+    extern volatile u32 lbl_80495FB8;
+    extern volatile u32 lbl_80495FBC;
+    u32 hi, lo;
 
-    val = (u16)(tm[0xC] | (*(u16 *)(tm + 0x10) << 5));
-    lbl_80442B18[11] = val;
-    lbl_80495FB8 |= 1ull << (63 - 11);
-    val = (u16)(tm[0xE] | (*(u16 *)(tm + 0x14) << 5));
-    lbl_80442B18[10] = val;
-    lbl_80495FB8 |= 1ull << (63 - 10);
-    val = (u16)(tm[0xD] | (*(u16 *)(tm + 0x12) << 5));
-    lbl_80442B18[13] = val;
-    lbl_80495FB8 |= 1ull << (63 - 13);
-    val = (u16)(tm[0xF] | (*(u16 *)(tm + 0x16) << 5));
-    lbl_80442B18[12] = val;
-    lbl_80495FB8 |= 1ull << (63 - 12);
+    lbl_80442B18[11] = (u16)(tm[0xC] | (*(u16 *)(tm + 0x10) << 5));
+    hi = lbl_80495FB8; lo = lbl_80495FBC;
+    lbl_80495FBC = lo; lbl_80495FB8 = hi | 0x100000;
+    lbl_80442B18[10] = (u16)(tm[0xE] | (*(u16 *)(tm + 0x14) << 5));
+    hi = lbl_80495FB8; lo = lbl_80495FBC;
+    lbl_80495FBC = lo; lbl_80495FB8 = hi | 0x200000;
+    lbl_80442B18[13] = (u16)(tm[0xD] | (*(u16 *)(tm + 0x12) << 5));
+    hi = lbl_80495FB8; lo = lbl_80495FBC;
+    lbl_80495FBC = lo; lbl_80495FB8 = hi | 0x40000;
+    lbl_80442B18[12] = (u16)(tm[0xF] | (*(u16 *)(tm + 0x16) << 5));
+    hi = lbl_80495FB8; lo = lbl_80495FBC;
+    lbl_80495FBC = lo; lbl_80495FB8 = hi | 0x80000;
 }
 
 void fn_80267AF4(u16 panSizeX, u16 dispSizeX, s32 threeD) {
@@ -4721,6 +4722,40 @@ void fn_80267AF4(u16 panSizeX, u16 dispSizeX, s32 threeD) {
     } else {
         regs[37] = 0x100;
         lbl_80495FB8 |= 1ull << (63 - 37);
+    }
+}
+
+void fn_80267B90(u32 bufAddr, u16 panPosX, u16 panPosY, u8 wordPerLine, s32 xfbMode, u16 dispPosY, u32 *tfbb, u32 *bfbb) {
+    u32 bytesPerLine, xoffInWords;
+    u32 tmp;
+
+    xoffInWords = (u32)panPosX / 16;
+    bytesPerLine = (u32)wordPerLine * 32;
+    *tfbb = bufAddr + xoffInWords * 32 + (u32)panPosY * bytesPerLine;
+    *bfbb = (xfbMode == 0) ? *tfbb : (*tfbb + bytesPerLine);
+    if (dispPosY % 2 == 1) {
+        tmp = *tfbb;
+        *tfbb = *bfbb;
+        *bfbb = tmp;
+    }
+    *tfbb = *tfbb & 0x3FFFFFFF;
+    *bfbb = *bfbb & 0x3FFFFFFF;
+}
+
+void fn_80268150(void) {
+    extern u32 lbl_80495FE4;
+    extern char lbl_803F9DE8[];
+    void fn_8025302C(char *, ...);
+
+    if (lbl_80495FE4 == 0) {
+        lbl_80495FE4 = 1;
+        fn_8025302C(lbl_803F9DE8 + 0x260);
+        fn_8025302C(lbl_803F9DE8 + 0x28C);
+        fn_8025302C(lbl_803F9DE8 + 0x2B8);
+        fn_8025302C(lbl_803F9DE8 + 0x2E4);
+        fn_8025302C(lbl_803F9DE8 + 0x310);
+        fn_8025302C(lbl_803F9DE8 + 0x33C);
+        fn_8025302C(lbl_803F9DE8 + 0x260);
     }
 }
 
