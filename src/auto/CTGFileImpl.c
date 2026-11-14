@@ -158,6 +158,29 @@ s32 fn_800C4250(char *self, char *buf) {
     return 1;
 }
 
+s32 fn_800C4310(char *self, char *str) {
+    extern s32 fn_80248808(const char *);
+    char *vt;
+    s32 len = fn_80248808(str);
+    if (len < 0xFF) {
+        vt = *(char **)self;
+        if ((*(s32 (**)(char *, u8))(vt + 0x64))(self + *(s16 *)(vt + 0x60), len) == 0) {
+            return 0;
+        }
+    } else {
+        vt = *(char **)self;
+        if ((*(s32 (**)(char *, u8))(vt + 0x64))(self + *(s16 *)(vt + 0x60), 0xFF) == 0) {
+            return 0;
+        }
+        vt = *(char **)self;
+        if ((*(s32 (**)(char *, s32))(vt + 0x74))(self + *(s16 *)(vt + 0x70), len) == 0) {
+            return 0;
+        }
+    }
+    vt = *(char **)self;
+    return (*(s32 (**)(char *, char *, s32))(vt + 0x54))(self + *(s16 *)(vt + 0x50), str, len);
+}
+
 void fn_800C43D4(void *self) {
 
 }
