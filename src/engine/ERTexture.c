@@ -74,6 +74,30 @@ void fn_8033160C(void *self) {
     M2C_FIELD(self, s32 *, 0x20) = 0;
 }
 
+void fn_8033165C(u8 *self, u8 *arg1) {
+    typedef struct { s16 delta; s16 pad; void *pfn; } Ent;
+    extern u8 *lbl_80495050;
+    u8 *obj;
+    void *r;
+    Ent *vt = *(Ent **)(arg1 + 0x18);
+    r = ((void *(*)(void *))vt[4].pfn)(arg1 + vt[4].delta);
+    if (r != 0) {
+        if (*(s32 *)(self + 0x20) == 0) {
+            vt = *(Ent **)self;
+            ((void (*)(void *, void *))vt[9].pfn)(self + vt[9].delta, r);
+        } else {
+            obj = lbl_80495050;
+            vt = *(Ent **)obj;
+            ((void (*)(void *))vt[8].pfn)(obj + vt[8].delta);
+            vt = *(Ent **)self;
+            ((void (*)(void *, void *))vt[9].pfn)(self + vt[9].delta, r);
+            obj = lbl_80495050;
+            vt = *(Ent **)obj;
+            ((void (*)(void *))vt[8].pfn)(obj + vt[8].delta);
+        }
+    }
+}
+
 void fn_80331888(void *arg0, char *arg1) {
     void fn_803318AC(void *, void *);
     fn_803318AC(arg0, arg1 + 4);
