@@ -15,19 +15,6 @@ static inline void *Stream_Write(void *stream, void *data, s32 size) {
     return stream;
 }
 
-static inline void *Stream_WriteF32(void *stream, f32 v) {
-    f32 t = v;
-    return Stream_Write(stream, &t, 4);
-}
-
-static inline void *Stream_WriteBool(void *stream, s32 v) {
-    u8 t = 0;
-    if (v) {
-        t = 1;
-    }
-    return Stream_Write(stream, &t, 1);
-}
-
 static inline void *Stream_WriteF32p(void *stream, const f32 *v) {
     void *vt;
     void (*f)(void *, void *, s32);
@@ -148,13 +135,15 @@ void fn_802F1DB0(char *self, f32 *pos, f32 *out) {
     Vec3f v;
     f32 dist;
     f32 scale;
+    f32 a;
 
-    v.y = pos[1] - M2C_FIELD(self, f32 *, 0xC4);
     v.x = pos[0] - M2C_FIELD(self, f32 *, 0xC0);
+    v.y = pos[1] - M2C_FIELD(self, f32 *, 0xC4);
     v.z = lbl_803F0F44[0];
     dist = fn_8025FC40(&v);
-    *out = M2C_FIELD(self, f32 *, 0xA0);
-    if (M2C_FIELD(self, f32 *, 0xA0) == lbl_803F0F44[0]) {
+    a = M2C_FIELD(self, f32 *, 0xA0);
+    *out = a;
+    if (a == lbl_803F0F44[0]) {
         *out = lbl_803F0F48[0];
     }
     if (dist != lbl_803F0F44[0]) {
@@ -178,11 +167,14 @@ void fn_802F2378(void *self) {
     extern void fn_802F09B8(void *, void *);
     struct { Vec3f min; Vec3f max; } box;
     Vec3f tmp;
-    Vec3f *t = &tmp;
+    Vec3f *t;
 
-    Vec3f_Set(t, lbl_803F0F70[0], lbl_803F0F70[0], lbl_803F0F70[0]);
-    box.max = *t;
+    tmp.x = lbl_803F0F70[0];
+    tmp.z = lbl_803F0F70[0];
+    tmp.y = lbl_803F0F70[0];
+    box.max = tmp;
     box.min = box.max;
+    t = &tmp;
     if (M2C_FIELD(self, s32 *, 0xE0) != 0) {
         fn_802C5148(&box, (u8 *)self + 0xC0, M2C_FIELD(self, f32 *, 0xDC));
     } else {
