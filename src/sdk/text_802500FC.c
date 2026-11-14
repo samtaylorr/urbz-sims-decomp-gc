@@ -3263,9 +3263,11 @@ void fn_8026913C(u32 *hct, u32 *vct) {
 
 u32 fn_80269178(void) {
     u32 hct, vct;
+    u32 halfLine;
 
     fn_8026913C(&hct, &vct);
-    return ((vct - 1) << 1) + (hct - 1) / lbl_80495FD0[0xD];
+    halfLine = ((vct - 1) << 1) + (hct - 1) / lbl_80495FD0[0xD];
+    return halfLine;
 }
 
 u32 fn_802691C8(void) {
@@ -3285,6 +3287,23 @@ u32 fn_80269230(void) {
     nextField = fn_802691C8() ^ 1;
     fn_80254684(enabled);
     return nextField ^ (lbl_80442C08[5] & 1);
+}
+
+u32 fn_802692CC(void) {
+    u16 *tm;
+    s32 enabled;
+    u32 hct, vct;
+    u32 halfLine;
+
+    tm = lbl_80495FD0;
+    enabled = fn_8025465C();
+    fn_8026913C(&hct, &vct);
+    halfLine = ((vct - 1) << 1) + (hct - 1) / lbl_80495FD0[0xD];
+    fn_80254684(enabled);
+    if (halfLine >= tm[0xC]) {
+        halfLine -= tm[0xC];
+    }
+    return halfLine >> 1;
 }
 
 u32 fn_80269364(void) {
