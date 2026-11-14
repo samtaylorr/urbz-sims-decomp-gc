@@ -115,31 +115,24 @@ void fn_8033C7FC(void *self) {
     extern s32 lbl_80494FA8;
     s32 fn_8035FD24(s32, s32);
     void fn_8033789C(void *, s32);
-    struct {
-        char *obj;
-        u8 unk4[3];
-    } lock;
-    char *vt;
+    ERMLock lock;
     u8 *p;
     u8 *end;
 
     if (lbl_80494F98 != 0) {
-        lock.obj = (char *)self + 0x40;
-        vt = *(char **)lock.obj;
-        (*(void (**)(void *, s32))(vt + 0x14))(lock.obj + *(s16 *)(vt + 0x10), -1);
+        ERMLock_Lock(&lock, (char *)self + 0x40);
         p = lbl_8045BD40;
         end = p + 0x10bc;
         do {
             if (M2C_FIELD(p, s32 *, 0) != -1 && M2C_FIELD(p, s32 *, 0x40) != -1) {
                 if (fn_8035FD24(lbl_80494FA8, M2C_FIELD(p, s32 *, 0x40)) != 0) {
                     fn_8033789C(lbl_8045B198, M2C_FIELD(p, s32 *, 0));
-                    M2C_FIELD(p, s32 *, 0) = -1;
                 }
+                M2C_FIELD(p, s32 *, 0) = -1;
             }
             p += 0x44;
         } while (p <= end);
-        vt = *(char **)lock.obj;
-        (*(void (**)(void *))(vt + 0x1C))(lock.obj + *(s16 *)(vt + 0x18));
+        ERMLock_Unlock(&lock);
     }
 }
 
