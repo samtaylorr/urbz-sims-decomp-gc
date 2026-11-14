@@ -1266,6 +1266,26 @@ s32 fn_80258680(void) {
     return count;
 }
 
+void fn_802586C0(void *thread) {
+    extern u8 lbl_80440C58[];
+    extern u32 lbl_80495E68;
+    extern s32 lbl_80495E6C;
+    void *prev;
+
+    M2C_FIELD(thread, void **, 0x2dc) = (void *)(lbl_80440C58 + M2C_FIELD(thread, s32 *, 0x2d0) * 8);
+    prev = M2C_FIELD(thread, void ***, 0x2dc)[1];
+    if (prev == NULL) {
+        M2C_FIELD(thread, void ***, 0x2dc)[0] = thread;
+    } else {
+        M2C_FIELD(prev, void **, 0x2e0) = thread;
+    }
+    M2C_FIELD(thread, void **, 0x2e4) = prev;
+    M2C_FIELD(thread, void **, 0x2e0) = NULL;
+    M2C_FIELD(thread, void ***, 0x2dc)[1] = thread;
+    lbl_80495E68 |= 1u << (31 - M2C_FIELD(thread, s32 *, 0x2d0));
+    lbl_80495E6C = 1;
+}
+
 void fn_80258C80(void) {
     M2C_UNK fn_80258A58(M2C_UNK);
     extern s32 lbl_80495E6C;
@@ -2888,8 +2908,8 @@ void fn_80266830(void) {
     extern s64 lbl_80495F50;
     s64 fn_8025A494(void);
     u32 reg;
-    s64 resetStart;
     u32 wait;
+    s64 resetStart;
 
     __DIRegs[1] = 2;
     reg = __PIRegs[9];
@@ -3922,6 +3942,52 @@ s32 fn_8026EDF8(void) {
     return temp_r3;
 }
 
+void fn_8026F630(void) {
+    extern u8 *const __GXData;
+    u32 nNrm;
+    u32 nCols;
+    u32 nTex;
+    u8 *gx;
+
+    *(volatile u8 *)0xCC008000 = 8;
+    *(volatile u8 *)0xCC008000 = 0x50;
+    *(volatile u32 *)0xCC008000 = *(u32 *)(__GXData + 0x14);
+    *(volatile u8 *)0xCC008000 = 8;
+    *(volatile u8 *)0xCC008000 = 0x60;
+    *(volatile u32 *)0xCC008000 = *(u32 *)(__GXData + 0x18);
+
+    gx = __GXData;
+    if (gx[0x4D5]) {
+        nNrm = 2;
+    } else if (gx[0x4D4]) {
+        nNrm = 1;
+    } else {
+        nNrm = 0;
+    }
+    nCols = 33 - __cntlzw((*(u32 *)(gx + 0x14) >> 13) & 0xF);
+    nCols /= 2;
+    nTex = 33 - __cntlzw(*(u32 *)(gx + 0x18) & 0xFFFF);
+    nTex /= 2;
+    *(volatile u8 *)0xCC008000 = 0x10;
+    *(volatile u32 *)0xCC008000 = 0x1008;
+    *(volatile u32 *)0xCC008000 = nCols | (nNrm << 2) | (nTex << 4);
+    *(u16 *)(gx + 2) = 1;
+}
+
+void fn_8026F9C4(s32 *list) {
+    void fn_8026F810(s32, s32 *);
+    s32 attr;
+
+    for (attr = 0; attr <= 20; attr++) {
+        list[attr * 2] = attr;
+        fn_8026F810(attr, &list[attr * 2 + 1]);
+    }
+    list[attr * 2] = 25;
+    fn_8026F810(25, &list[attr * 2 + 1]);
+    attr++;
+    list[attr * 2] = 0xFF;
+}
+
 void fn_8026FA54(void) {
     extern u32 *const __GXData;
     __GXData[0x14 / 4] = 0;
@@ -4652,6 +4718,14 @@ void fn_80273A18(void *obj, u32 id) {
     extern void *__GXData;
     extern void fn_8027389C(void *obj, void *region, u32 id);
     fn_8027389C(obj, M2C_FIELD(__GXData, void *(**)(void *, u32), 0x4C8)(obj, id), id);
+}
+
+void fn_80273A6C(u32 *tlut_obj, void *lut, u32 fmt, u16 n_entries) {
+    tlut_obj[0] = 0;
+    tlut_obj[0] = __rlwimi(tlut_obj[0], fmt, 10, 20, 21);
+    tlut_obj[1] = __rlwimi(tlut_obj[1], (u32)lut >> 5, 0, 11, 31);
+    tlut_obj[1] = __rlwimi(tlut_obj[1], 0x64, 24, 0, 7);
+    ((u16 *)tlut_obj)[4] = n_entries;
 }
 
 void fn_80273AA4(void *arg0, s32 *arg1, s32 *arg2, u16 *arg3) {
