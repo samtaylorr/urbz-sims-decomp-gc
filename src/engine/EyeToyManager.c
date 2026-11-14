@@ -427,6 +427,29 @@ void *fn_8033B274(s32 a, s32 b, s32 c, s32 d, EyeToyRGB *col) {
     return fn_80339CE8(a, b, c, d, k.v, sum, 3, 3, *col);
 }
 
+void fn_8033B4B4(s16 *src, s16 *dst, s32 w, s32 h, s16 *param) {
+    extern s8 lbl_803FD3B0[];
+    s32 i;
+
+    w *= h;
+    if (param[2] == 4) {
+        for (i = 0; i < w; i++) {
+            s32 v = src[i];
+            dst[i] = (v & 0x6318) | 0xC63;
+        }
+    } else if (param[2] == 3) {
+        for (i = 0; i < w; i++) {
+            s32 v = src[i];
+            dst[i] = (lbl_803FD3B0[(v >> 10) & 0x1F] << 10) | (lbl_803FD3B0[(v >> 5) & 0x1F] << 5) | lbl_803FD3B0[v & 0x1F];
+        }
+    } else if (param[2] == 2) {
+        for (i = 0; i < w; i++) {
+            s32 v = src[i];
+            dst[i] = (v & 0x4210) | 0x1CE7;
+        }
+    }
+}
+
 void fn_8033B58C(s16 *src, s16 *dst, s32 w, s32 h, s16 *param) {
     s32 i;
 
