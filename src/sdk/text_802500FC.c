@@ -1227,6 +1227,23 @@ void fn_80256934(u8 arg0) {
     fn_80254684(enabled);
 }
 
+u8 *fn_80257214(void) {
+    extern u8 lbl_80440C00[];
+    u8 *scb = lbl_80440C00;
+    s32 enabled;
+    s32 *locked;
+
+    enabled = fn_8025465C();
+    locked = (s32 *)(scb + 0x48);
+    if (*locked != 0) {
+        fn_80254684(enabled);
+        return NULL;
+    }
+    *(s32 *)(scb + 0x44) = enabled;
+    *locked = 1;
+    return scb;
+}
+
 s32 fn_80257608(s32 arg0) {
     s32 fn_802572CC(s32, s32);
     return fn_802572CC(arg0, 0);
@@ -6160,12 +6177,12 @@ void fn_8027549C(u32 id, u8 *color) {
     regRA = 0;
     regRA = __rlwimi(regRA, color[0], 0, 24, 31);
     regRA = __rlwimi(regRA, color[3], 12, 12, 19);
+    regRA = __rlwimi(regRA, 8, 20, 8, 11);
+    regRA = __rlwimi(regRA, id * 2 + 0xE0, 24, 0, 7);
     regBG = 0;
     regBG = __rlwimi(regBG, color[2], 0, 24, 31);
     regBG = __rlwimi(regBG, color[1], 12, 12, 19);
-    regRA = __rlwimi(regRA, 8, 20, 8, 11);
     regBG = __rlwimi(regBG, 8, 20, 8, 11);
-    regRA = __rlwimi(regRA, id * 2 + 0xE0, 24, 0, 7);
     regBG = __rlwimi(regBG, id * 2 + 0xE1, 24, 0, 7);
     GXWGFifo.u8 = 0x61;
     GXWGFifo.u32 = regRA;
