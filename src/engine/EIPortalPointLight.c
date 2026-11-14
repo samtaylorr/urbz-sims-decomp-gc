@@ -81,6 +81,64 @@ void fn_802F27E4(void *arg0, s32 arg1, s32 arg2) {
     (*(void (**)(void *))(vt + 0x5C))((char *)arg0 + *(s16 *)(vt + 0x58));
 }
 
+void fn_802F2904(char *self, void *stream) {
+    extern u16 lbl_804937CE[];
+    extern void fn_802EFD68(void *, void *);
+    extern void *fn_802D3714(void *, void *);
+    EIPortalPointLightVec3 v;
+    u8 flag;
+    void *vt;
+
+    fn_802EFD68(self, stream);
+    if (lbl_804937CE[0] == 0) {
+        stream = fn_802D3714(stream, &v);
+        vt = M2C_FIELD(stream, void **, 0x18);
+        M2C_FIELD(vt, void (**)(void *, void *, s32), 0x34)((char *)stream + M2C_FIELD(vt, s16 *, 0x30), self + 0xD8, 4);
+        vt = M2C_FIELD(stream, void **, 0x18);
+        M2C_FIELD(vt, void (**)(void *, void *, s32), 0x34)((char *)stream + M2C_FIELD(vt, s16 *, 0x30), self + 0xDC, 4);
+        vt = M2C_FIELD(stream, void **, 0x18);
+        M2C_FIELD(vt, void (**)(void *, void *, s32), 0x34)((char *)stream + M2C_FIELD(vt, s16 *, 0x30), &flag, 1);
+        M2C_FIELD(self, s32 *, 0xE0) = flag != 0;
+    }
+    fn_802F2278(self, &v);
+}
+
+s32 fn_802F3084(u8 *self) {
+    void (*fn)(s32, s32, u16 *, u16 *);
+    u16 a;
+    u16 b;
+    s16 c;
+    s16 d;
+    u16 v;
+    s32 var_r11;
+
+    fn = M2C_FIELD(self, void (**)(s32, s32, u16 *, u16 *), 0x20);
+    if (fn != NULL) {
+        fn(M2C_FIELD(self, s32 *, 0x30), 0, &a, &b);
+    } else {
+        a = (u16) (s32) fn;
+        b = (u16) (s32) fn;
+    }
+    v = a;
+    var_r11 = 1;
+    if (M2C_FIELD(self, u16 *, 0x28) == v) {
+        var_r11 = 0;
+    }
+    M2C_FIELD(self, s32 *, 8) = var_r11;
+    M2C_FIELD(self, u16 *, 0x28) = v;
+    fn = M2C_FIELD(self, void (**)(s32, s32, u16 *, u16 *), 0x24);
+    if (fn != NULL) {
+        fn(M2C_FIELD(self, s32 *, 0x2C), 0, (u16 *)&c, (u16 *)&d);
+    } else {
+        c = -1;
+        d = -1;
+    }
+    if (c != (s16)a && M2C_FIELD(self, s32 *, 0x9C) != 0) {
+        return 1;
+    }
+    return 0;
+}
+
 void fn_802F3158(s32 arg0, s32 arg1) {
     if (arg1 == 0xFFFF && arg0 != 0) {
         lbl_804961D8 = fn_802D6A90(lbl_804937B8, fn_802F31C8, fn_802F31F0, fn_802F3210, 0, lbl_803F0FAC, lbl_80493740);
