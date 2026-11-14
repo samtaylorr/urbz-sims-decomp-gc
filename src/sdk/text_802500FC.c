@@ -3364,10 +3364,37 @@ void fn_80271B58(u32 mode) {
 }
 
 void fn_80271B7C(u32 clamp) {
+    extern u32 *__GXData;
+    u32 *gx = __GXData;
+    u8 clmpB = (clamp & 1) == 1;
+    u8 clmpT = (clamp & 2) == 2;
+
+    gx[0x1EC / 4] = __rlwimi(gx[0x1EC / 4], clmpB, 0, 31, 31);
+    gx[0x1EC / 4] = __rlwimi(gx[0x1EC / 4], clmpT, 1, 30, 30);
+    gx[0x1FC / 4] = __rlwimi(gx[0x1FC / 4], clmpB, 0, 31, 31);
+    gx[0x1FC / 4] = __rlwimi(gx[0x1FC / 4], clmpT, 1, 30, 30);
 }
 
 u32 fn_80271BD4(u32 efbHt, u32 iScale) {
-    return 0;
+    u32 count;
+    u32 realHt;
+    u32 iScaleD;
+
+    count = (efbHt - 1) * 0x100;
+    realHt = (count / iScale) + 1;
+    iScaleD = iScale;
+    if (iScaleD > 0x80 && iScaleD < 0x100) {
+        while (iScaleD % 2 == 0) {
+            iScaleD /= 2;
+        }
+        if (efbHt % iScaleD == 0) {
+            realHt++;
+        }
+    }
+    if (realHt > 0x400) {
+        realHt = 0x400;
+    }
+    return realHt;
 }
 
 u16 fn_80271C2C(u16 efbHeight, f32 yScale) {
