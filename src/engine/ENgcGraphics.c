@@ -149,17 +149,26 @@ void fn_80340064(void *arg0, void *obj) {
 void fn_803403B4(u8 *self, u8 *arg1) {
     typedef struct { f32 x, y; } V2;
     s32 i;
+    f32 *p;
+    V2 a;
+    V2 b;
+    V2 *pa;
 
-    for (i = 0; i < *(s32 *)(self + 0x2A4); i++) {
-        V2 a;
-        V2 b;
-        u8 *vt;
-        a.x = *(f32 *)(self + 0xE4 + i * 0xC);
-        a.y = *(f32 *)(self + 0xE8 + i * 0xC);
-        b.x = *(f32 *)(self + 0x1A4 + i * 0xC);
-        b.y = *(f32 *)(self + 0x1A8 + i * 0xC);
-        vt = *(u8 **)(arg1 + 0x68);
-        (*(void (**)(void *, V2, V2 *, f32))(vt + 0x33C))(arg1 + *(s16 *)(vt + 0x338), a, &b, *(f32 *)(self + 0x1AC + i * 0xC));
+    i = 0;
+    if (i < *(s32 *)(self + 0x2A4)) {
+        pa = &a;
+        p = (f32 *)(self + 0x1AC);
+        do {
+            u8 *vt;
+            a.x = p[-50];
+            pa->y = p[-49];
+            b.x = p[-2];
+            b.y = p[-1];
+            vt = *(u8 **)(arg1 + 0x68);
+            i++;
+            (*(void (**)(void *, V2 *, V2 *, f32))(vt + 0x33C))(arg1 + *(s16 *)(vt + 0x338), pa, &b, p[0]);
+            p += 3;
+        } while (i < *(s32 *)(self + 0x2A4));
     }
     *(s32 *)(self + 0x2A4) = 0;
 }
@@ -169,13 +178,18 @@ void fn_80340458(u8 *self) {
         f32 *v = (f32 *)(self + 0x300);
         f32 s = *(f32 *)(self + 0x2F8);
         f32 tmp[3];
-        f32 x = v[0] * s;
-        f32 y = v[1] * s;
-        f32 z = v[2] * s;
-        tmp[0] = x;
-        tmp[1] = y;
-        tmp[2] = z;
-        fn_8035A124(lbl_8046DF78, tmp, self + 0x30C, *(f32 *)(self + 0x2E0), *(f32 *)(self + 0x2E4), *(f32 *)(self + 0x2E8) * lbl_803F417C[0], *(f32 *)(self + 0x2F4));
+        f32 fov;
+        f32 a;
+        register f32 d;
+        f32 b;
+        tmp[0] = v[0] * s;
+        tmp[1] = v[1] * s;
+        fov = *(f32 *)(self + 0x2E8) * lbl_803F417C[0];
+        a = *(f32 *)(self + 0x2E0);
+        b = *(f32 *)(self + 0x2E4);
+        tmp[2] = v[2] * s;
+        d = *(f32 *)(self + 0x2F4);
+        fn_8035A124(lbl_8046DF78, tmp, self + 0x30C, a, b, fov, d);
     }
 }
 
