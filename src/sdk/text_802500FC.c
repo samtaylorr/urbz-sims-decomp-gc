@@ -4813,6 +4813,15 @@ void fn_80276FB0(void) {
     M2C_FIELD(__memReg, s16 *, 0x56) = 0;
 }
 
+void fn_80277190(void) {
+    extern void *__GXData;
+    GXWGFifo.u8 = 0x61;
+    GXWGFifo.u32 = 0x57000000;
+    GXWGFifo.u8 = 0x61;
+    GXWGFifo.u32 = 0x57000AAA;
+    M2C_FIELD(__GXData, u16 *, 0x2) = 0;
+}
+
 void fn_802771C0(u32 v) {
     extern void *__GXData;
     u32 *gx = __GXData;
