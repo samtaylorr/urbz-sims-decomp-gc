@@ -441,6 +441,40 @@ M2C_UNK fn_8031461C(void *arg0) {
     return (M2C_UNK)arg0;
 }
 
+M2C_UNK fn_803146A0(void *arg0, s32 arg1) {
+    M2C_UNK fn_802CB8D4(void *);
+    M2C_UNK fn_802D20E8(void *);
+    M2C_UNK fn_802D39F0(void *, s32);
+    M2C_UNK fn_80364240(void *, s32, s32, s32);
+    M2C_UNK fn_80369AF4(void *, s32);
+    s8 *list;
+    void *node;
+    void *next;
+    s32 *obj;
+
+    list = (s8 *)arg0 + 0xC;
+    node = M2C_FIELD(list, void **, 4);
+    while (ETweakNode_Valid(node)) {
+        next = M2C_FIELD(node, void **, 4);
+        obj = M2C_FIELD(node, s32 **, 0);
+        if (M2C_FIELD(list, s32 *, 8) != 0 && obj != NULL) {
+            fn_802D39F0(&obj[1], obj[1]);
+            fn_802D20E8(obj);
+        }
+        node = next;
+    }
+    fn_802CB8D4(list);
+    fn_80364240((s8 *)arg0 + 0x1C, 1, 0, 0);
+    fn_80369AF4((s8 *)arg0 + 0x30, 2);
+    fn_802CB8D4((s8 *)arg0 + 0x24);
+    fn_802D39F0((s8 *)arg0 + 0x20, M2C_FIELD(arg0, s32 *, 0x20));
+    fn_802D39F0((s8 *)arg0 + 0x18, M2C_FIELD(arg0, s32 *, 0x18));
+    fn_802CB8D4((s8 *)arg0 + 0xC);
+    if (arg1 & 1) {
+        fn_802D20E8(arg0);
+    }
+}
+
 s32 fn_80314784(void *arg0) {
     M2C_UNK fn_80314808(void *);
     extern const f32 lbl_803F260C[];
