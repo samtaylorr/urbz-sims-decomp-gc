@@ -1148,6 +1148,20 @@ s32 fn_802585C8(void *thread) {
     return (M2C_FIELD(thread, u16 *, 0x2C8) == 8 || M2C_FIELD(thread, u16 *, 0x2C8) == 0) ? 1 : 0;
 }
 
+s32 fn_802585FC(void *thread) {
+    void *active;
+
+    if (M2C_FIELD(thread, u16 *, 0x2C8) == 0) {
+        return 0;
+    }
+    for (active = *(void **)0x800000DC; active != NULL; active = M2C_FIELD(active, void **, 0x2FC)) {
+        if (thread == active) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
 void fn_80258C80(void) {
     M2C_UNK fn_80258A58(M2C_UNK);
     extern s32 lbl_80495E6C;
@@ -4306,17 +4320,16 @@ void fn_8027425C(u32 coord, u8 enable, u32 ss, u32 ts) {
 
 void fn_802742D8(u32 coord, u32 s_enable, u32 t_enable) {
     extern void *__GXData;
-    u32 *gx = __GXData;
-    u32 *ts = &gx[coord];
+    u32 *ts = (u32 *)__GXData + coord;
 
     ts[0xB8 / 4] = __rlwimi(ts[0xB8 / 4], s_enable, 17, 14, 14);
     ts[0xD8 / 4] = __rlwimi(ts[0xD8 / 4], t_enable, 17, 14, 14);
-    if (gx[0x594 / 4] & (1 << coord)) {
+    if (M2C_FIELD(__GXData, u32 *, 0x594) & (1 << coord)) {
         GXWGFifo.u8 = 0x61;
         GXWGFifo.u32 = ts[0xB8 / 4];
         GXWGFifo.u8 = 0x61;
         GXWGFifo.u32 = ts[0xD8 / 4];
-        M2C_FIELD(gx, u16 *, 0x2) = 0;
+        M2C_FIELD(__GXData, u16 *, 0x2) = 0;
     }
 }
 
@@ -4812,6 +4825,14 @@ void fn_802772B4(void) {
     *(volatile u32 *)0xCC008000 = 0x1006;
     *(volatile u32 *)0xCC008000 = reg;
     M2C_FIELD(gx, u16 *, 0x2) = 1;
+}
+
+u32 fn_802773BC(void) {
+    extern volatile u16 *__cpReg;
+    fn_80270D34();
+    __cpReg[0x31] = 0x1007;
+    __cpReg[0x30] = 0x1007;
+    return __cpReg[0x32] >> 8;
 }
 
 void fn_802773FC(void) {
