@@ -36,6 +36,33 @@ s32 fn_802FEFA0(void *arg0) {
     return 1;
 }
 
+void fn_802FF104(void *self) {
+    extern u8 lbl_80454A38[];
+    extern char *lbl_804961E4;
+    extern char *lbl_804961E8;
+    extern u8 lbl_8045BA40[];
+    void fn_80338184(void *, void *);
+    char *node;
+
+    if (M2C_FIELD(self, void **, 0xE8) != NULL) {
+        M2C_FIELD(M2C_FIELD(lbl_80454A38, void **, 0), void (**)(void *, s32), 0x14)(lbl_80454A38 + M2C_FIELD(M2C_FIELD(lbl_80454A38, void **, 0), s16 *, 0x10), -1);
+        node = M2C_FIELD(self, char **, 0xE8);
+        if (lbl_804961E4 == node) {
+            lbl_804961E4 = M2C_FIELD(node, char **, 0x20);
+        } else {
+            M2C_FIELD(M2C_FIELD(node, char **, 0x1C), char **, 0x20) = M2C_FIELD(node, char **, 0x20);
+        }
+        if (lbl_804961E8 == node) {
+            lbl_804961E8 = M2C_FIELD(node, char **, 0x1C);
+        } else {
+            M2C_FIELD(M2C_FIELD(node, char **, 0x20), char **, 0x1C) = M2C_FIELD(node, char **, 0x1C);
+        }
+        M2C_FIELD(M2C_FIELD(lbl_80454A38, void **, 0), void (**)(void *), 0x1C)(lbl_80454A38 + M2C_FIELD(M2C_FIELD(lbl_80454A38, void **, 0), s16 *, 0x18));
+        fn_80338184(lbl_8045BA40, M2C_FIELD(self, void **, 0xE8));
+        M2C_FIELD(self, void **, 0xE8) = NULL;
+    }
+}
+
 void fn_802FF1E0(f32 arg0) {
     extern u8 lbl_80454A38[];
     extern s32 lbl_804961E4[2];
@@ -98,6 +125,33 @@ s32 fn_802FF658(void *arg0) {
         }
     }
     return 0;
+}
+
+void fn_802FF70C(void *arg0) {
+    struct { u8 n; u8 pad[0x63]; struct { char *a; u8 pad[0x3C]; } e[1]; } *p = arg0;
+    char *e;
+    char *vt;
+    s32 i;
+
+    if (M2C_FIELD(arg0, s32 *, 4) & 0x04000000) {
+        u8 *q = (u8 *)arg0 + 0x64;
+        s32 n = *(u8 *)(q + 0x24);
+        for (i = 0; i < n; i++) {
+            e = (*(char ***)(q + 4))[i];
+            if (e != NULL) {
+                vt = *(char **)(e + 0x24);
+                (*(void (**)(char *))(vt + 0x8C))(e + *(s16 *)(vt + 0x88));
+            }
+        }
+    } else {
+        for (i = 0; i < p->n; i++) {
+            e = p->e[i].a;
+            if (e != NULL) {
+                vt = *(char **)(e + 0x24);
+                (*(void (**)(char *))(vt + 0x8C))(e + *(s16 *)(vt + 0x88));
+            }
+        }
+    }
 }
 
 void fn_802FFB40(char *self, s32 arg1) {
