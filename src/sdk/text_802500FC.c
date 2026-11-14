@@ -217,6 +217,49 @@ void fn_80251714(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 4) = arg1;
 }
 
+void fn_8025171C(u32 tag) {
+    extern void *lbl_80495E00;
+    void fn_80251378(void *);
+    s32 fn_8025465C(void);
+    void fn_80254684(s32);
+    s32 enabled;
+    void *alarm;
+    void *next;
+
+    if (tag == 0) {
+        return;
+    }
+    enabled = fn_8025465C();
+    for (alarm = lbl_80495E00, next = alarm ? M2C_FIELD(alarm, void **, 0x14) : NULL; alarm;
+         alarm = next, next = alarm ? M2C_FIELD(alarm, void **, 0x14) : NULL) {
+        if (M2C_FIELD(alarm, u32 *, 4) == tag) {
+            fn_80251378(alarm);
+        }
+    }
+    fn_80254684(enabled);
+}
+
+BOOL fn_802517CC(BOOL final) {
+    extern void *lbl_80495E00;
+    s32 fn_80264C0C(void *);
+    void fn_80251378(void *);
+    void *alarm;
+    void *next;
+
+    if (final) {
+        alarm = lbl_80495E00;
+        next = alarm ? M2C_FIELD(alarm, void **, 0x14) : NULL;
+        while (alarm) {
+            if (fn_80264C0C(alarm) == FALSE) {
+                fn_80251378(alarm);
+            }
+            alarm = next;
+            next = alarm ? M2C_FIELD(alarm, void **, 0x14) : NULL;
+        }
+    }
+    return TRUE;
+}
+
 extern s32 lbl_80495E08;
 s32 fn_8025186C(void) {
     return lbl_80495E08;
@@ -4433,6 +4476,21 @@ void fn_8026EC5C(void) {
     __cpReg[0x15] = fifo[3] >> 16 & 0x3FFF;
 }
 
+s32 fn_8026ED8C(void) {
+    s32 fn_8025465C(void);
+    void fn_80254684(s32);
+    s32 fn_80258544(void);
+    extern s32 lbl_80496098;
+    s32 enabled;
+    s32 old;
+
+    enabled = fn_8025465C();
+    old = lbl_80496098;
+    lbl_80496098 = fn_80258544();
+    fn_80254684(enabled);
+    return old;
+}
+
 extern s32 lbl_80496098;
 s32 fn_8026EDD8(void) {
     return lbl_80496098;
@@ -5674,8 +5732,8 @@ void fn_8027533C(u32 stage, s32 op, u32 bias, u32 scale, u8 clamp, u32 out_reg) 
 }
 
 void fn_80275510(s32 stage, u32 sel) {
-    extern u32 *__GXData;
-    u32 *reg = (u32 *)((u8 *)__GXData + ((stage >> 1) * 4 + 0x1B0));
+    extern struct { u16 unk0; u16 bpSentNot; u8 pad4[0x1AC]; u32 tevKsel[8]; } *__GXData;
+    u32 *reg = &__GXData->tevKsel[stage >> 1];
 
     if (stage & 1) {
         *reg = __rlwimi(*reg, sel, 14, 13, 17);
@@ -5684,12 +5742,12 @@ void fn_80275510(s32 stage, u32 sel) {
     }
     *(volatile u8 *)0xCC008000 = 0x61;
     *(volatile u32 *)0xCC008000 = *reg;
-    ((u16 *)__GXData)[1] = 0;
+    __GXData->bpSentNot = 0;
 }
 
 void fn_8027556C(s32 stage, u32 sel) {
-    extern u32 *__GXData;
-    u32 *reg = (u32 *)((u8 *)__GXData + ((stage >> 1) * 4 + 0x1B0));
+    extern struct { u16 unk0; u16 bpSentNot; u8 pad4[0x1AC]; u32 tevKsel[8]; } *__GXData;
+    u32 *reg = &__GXData->tevKsel[stage >> 1];
 
     if (stage & 1) {
         *reg = __rlwimi(*reg, sel, 19, 8, 12);
@@ -5698,39 +5756,36 @@ void fn_8027556C(s32 stage, u32 sel) {
     }
     *(volatile u8 *)0xCC008000 = 0x61;
     *(volatile u32 *)0xCC008000 = *reg;
-    ((u16 *)__GXData)[1] = 0;
+    __GXData->bpSentNot = 0;
 }
 
 void fn_802755C8(u32 stage, u32 ras_sel, u32 tex_sel) {
-    extern u32 *__GXData;
-    u32 *gx = __GXData;
-    u32 *reg = (u32 *)((u8 *)gx + (stage * 4 + 0x170));
+    extern struct { u16 unk0; u16 bpSentNot; u8 pad4[0x16C]; u32 tevSwap[16]; } *__GXData;
+    u32 *reg = &__GXData->tevSwap[stage];
 
     *reg = __rlwimi(*reg, ras_sel, 0, 30, 31);
     *reg = __rlwimi(*reg, tex_sel, 2, 28, 29);
     *(volatile u8 *)0xCC008000 = 0x61;
     *(volatile u32 *)0xCC008000 = *reg;
-    ((u16 *)gx)[1] = 0;
+    __GXData->bpSentNot = 0;
 }
 
 void fn_80275610(u32 table, u32 red, u32 green, u32 blue, u32 alpha) {
-    extern u32 *__GXData;
-    u32 *gx = __GXData;
+    extern struct { u16 unk0; u16 bpSentNot; u8 pad4[0x1AC]; u32 tevKsel[8]; } *__GXData;
     u32 *reg;
-    u32 *reg2;
 
-    reg = (u32 *)((u8 *)gx + (table * 2 * 4 + 0x1B0));
+    reg = &__GXData->tevKsel[table * 2];
     *reg = __rlwimi(*reg, red, 0, 30, 31);
     *reg = __rlwimi(*reg, green, 2, 28, 29);
     *(volatile u8 *)0xCC008000 = 0x61;
     *(volatile u32 *)0xCC008000 = *reg;
 
-    reg2 = (u32 *)((u8 *)gx + ((table * 2 + 1) * 4 + 0x1B0));
-    *reg2 = __rlwimi(*reg2, blue, 0, 30, 31);
-    *reg2 = __rlwimi(*reg2, alpha, 2, 28, 29);
+    reg = &__GXData->tevKsel[table * 2 + 1];
+    *reg = __rlwimi(*reg, blue, 0, 30, 31);
+    *reg = __rlwimi(*reg, alpha, 2, 28, 29);
     *(volatile u8 *)0xCC008000 = 0x61;
-    *(volatile u32 *)0xCC008000 = *reg2;
-    ((u16 *)gx)[1] = 0;
+    *(volatile u32 *)0xCC008000 = *reg;
+    __GXData->bpSentNot = 0;
 }
 
 void fn_80275690(void) {
