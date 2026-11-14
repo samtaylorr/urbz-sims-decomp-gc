@@ -2497,6 +2497,16 @@ s32 fn_802649F0(void) {
     return 0x80000000;
 }
 
+extern DVDCommandBlock lbl_80442990;
+extern DVDQueue lbl_804429B8[4];
+s32 fn_80266B2C(DVDCommandBlock *);
+s32 fn_80264C0C(DVDCommandBlock *block) {
+    if (block == &lbl_80442990) {
+        return 1;
+    }
+    return fn_80266B2C(block);
+}
+
 u32 fn_80264E40(void **item) {
     s32 fn_8025465C(void);
     void fn_80254684(s32);
