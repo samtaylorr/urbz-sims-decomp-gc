@@ -191,6 +191,72 @@ void fn_8036DF8C(char *self, void *arg1) {
     fn_802E34F0(arg1, self + 0x44);
 }
 
+void fn_8036DFB8(char *self, char *obj) {
+    extern void *fn_8032A410(void *);
+    u32 n;
+    char *elem;
+    char **list;
+    char *data;
+    char *sub;
+    void *r;
+
+    r = fn_8032A410(*(void **)(self + 0xB4));
+    (*(void (**)(void *, void *, s32))(*(char **)(obj + 0x68) + 0xE4))(obj + *(s16 *)(*(char **)(obj + 0x68) + 0xE0), r, 1);
+    n = *(u32 *)(self + 0xB0);
+    elem = *(char **)(self + 0xA8);
+    list = *(char ***)(self + 0xAC);
+    while (n--) {
+        data = *(char **)(elem + 0x18);
+        sub = *(char **)(*list + 0x20);
+        if (!(*(u32 *)(sub + 4) & 0x401)) {
+            (*(void (**)(void *, void *))(*(char **)(sub + 0xF0) + 0x1C))(sub + *(s16 *)(*(char **)(sub + 0xF0) + 0x18), obj);
+            (*(void (**)(void *, s32, f32))(*(char **)(obj + 0x68) + 0x1AC))(obj + *(s16 *)(*(char **)(obj + 0x68) + 0x1A8), 0, *(f32 *)(data + 0x24));
+            (*(void (**)(void *, s32))(*(char **)(obj + 0x68) + 0xB4))(obj + *(s16 *)(*(char **)(obj + 0x68) + 0xB0), *(s32 *)data);
+        }
+        elem += 0x38;
+        list++;
+    }
+}
+
+extern void fn_802F113C(void *, void *, void *, s32);
+extern void fn_802F14E0(void *, void *);
+extern s32 lbl_80496664;
+void fn_8036E0A8(char *self, void *arg1, char *arg2) {
+    s32 count;
+    char *elem;
+    char **list;
+    s32 r;
+
+    fn_802F113C(self, self + 0x50, self + 0xBC, 0);
+    if (*(s32 *)(self + 0xC) != 0) {
+        fn_802F113C(self, self + 0x90, self + 0x19C, 1);
+    }
+    count = *(s32 *)(self + 0xB0);
+    elem = *(char **)(self + 0xA8);
+    list = *(char ***)(self + 0xAC);
+    for (count--; count != -1; count--) {
+        *(char **)(elem + 0x10) = self + 0xBC;
+        if (*(u32 *)elem & 0x2000) {
+            *(char **)(elem + 0x1C) = arg2 + 0xE0;
+        }
+        r = 1;
+        if (!(*(u32 *)(*(char **)(*list + 0x20) + 4) & 0xC)) {
+            r = 0;
+        }
+        if (r) {
+            *(char **)(elem + 0x1C) = arg2 + 0xE0;
+        }
+        if (lbl_80496664 != 0) {
+            *(u32 *)(elem + 0x34) |= 1;
+        } else {
+            *(u32 *)(elem + 0x34) &= ~1;
+        }
+        fn_802F14E0(self, elem);
+        elem += 0x38;
+        list++;
+    }
+}
+
 void fn_8036E318(char *self, char *obj) {
     extern void fn_80300200(u8 *, char *);
     char *vt = *(char **)(obj + 0x68);
