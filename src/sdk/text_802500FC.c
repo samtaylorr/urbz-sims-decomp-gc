@@ -64,9 +64,8 @@ typedef struct __va_list_tag {
     char *reg_save_area;
 } va_list[1];
 
-#define va_start(AP, LASTARG) \
-    (__builtin_next_arg(LASTARG), *(AP) = *(struct __va_list_tag *)__builtin_saveregs())
-#define va_end(AP) ((void)0)
+#define va_start(ap, fmt) ((void)fmt, __builtin_va_info(&ap))
+#define va_end(ap) ((void)0)
 
 #pragma push
 #pragma fp_contract off
@@ -612,6 +611,15 @@ void fn_80252EB8(void) {
     fn_80250BDC(7, fn_80252E34);
     *(u32 *)0x800000D8 = 0;
     fn_8025F920(lbl_803F832C);
+}
+
+void fn_8025302C(char *msg, ...) {
+    s32 fn_80378324(const char *fmt, va_list ap);
+    va_list args;
+
+    va_start(args, msg);
+    fn_80378324(msg, args);
+    va_end(args);
 }
 
 #pragma peephole reset
@@ -1875,10 +1883,8 @@ void fn_8025BDE8(void) {
     s32 fn_8025BE34(s32);
     extern EXICtrl lbl_80441650[];
 
-    *(u32 *)0x800030C4 = 0;
-    *(u32 *)0x800030C0 = 0;
-    lbl_80441650[1].idTime = 0;
-    lbl_80441650[0].idTime = 0;
+    ((u32 *)0x800030C0)[1] = ((u32 *)0x800030C0)[0] = 0;
+    lbl_80441650[1].idTime = lbl_80441650[0].idTime = 0;
     fn_8025BE34(0);
     fn_8025BE34(1);
 }
@@ -5790,7 +5796,7 @@ void fn_8027533C(u32 stage, s32 op, u32 bias, u32 scale, u8 clamp, u32 out_reg) 
 }
 
 void fn_80275510(s32 stage, u32 sel) {
-    extern struct { u16 unk0; u16 bpSentNot; u8 pad4[0x1AC]; u32 tevKsel[8]; } *__GXData;
+    extern struct { u16 unk0; u16 bpSentNot; u8 pad4[0x1AC]; u32 tevKsel[8]; } *const __GXData;
     u32 *reg = &__GXData->tevKsel[stage >> 1];
 
     if (stage & 1) {
@@ -5804,7 +5810,7 @@ void fn_80275510(s32 stage, u32 sel) {
 }
 
 void fn_8027556C(s32 stage, u32 sel) {
-    extern struct { u16 unk0; u16 bpSentNot; u8 pad4[0x1AC]; u32 tevKsel[8]; } *__GXData;
+    extern struct { u16 unk0; u16 bpSentNot; u8 pad4[0x1AC]; u32 tevKsel[8]; } *const __GXData;
     u32 *reg = &__GXData->tevKsel[stage >> 1];
 
     if (stage & 1) {
