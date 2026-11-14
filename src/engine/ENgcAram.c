@@ -89,16 +89,18 @@ void fn_80373BEC(void) {
 
 void fn_80373CF0(void *arg0) {
     extern ARAMEntry lbl_804756E0[];
+    ARAMEntry *base = lbl_804756E0;
     u32 i;
 
     for (i = 0; i < 64; i++) {
-        if (&lbl_804756E0[i] == arg0) {
+        if (&base[i] == arg0) {
             break;
         }
     }
     if (i != 64) {
         if (lbl_804756E0[i].unk20 != 0) {
-            lbl_804756E0[i].unk20(lbl_804756E0[i].unk24);
+            ARAMEntry *e = &lbl_804756E0[i];
+            e->unk20(lbl_804756E0[i].unk24);
         }
         lbl_804756E0[i].unk24 = -1;
     }
@@ -111,9 +113,9 @@ void fn_80373D8C(s32 arg0, s32 arg1, s32 arg2) {
     extern u8 lbl_804756A0[];
     extern volatile s32 lbl_80495260;
 
-    if (lbl_80495260 != 0) {
-        while (lbl_80495260 != 0) {
-        }
+    while (lbl_80495260 != 0) {
+    }
+    if (lbl_80495260 == 0) {
     }
     lbl_80495260 = 1;
     fn_80251BF0(arg0, arg2);
