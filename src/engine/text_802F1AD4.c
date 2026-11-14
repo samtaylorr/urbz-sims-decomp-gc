@@ -29,9 +29,16 @@ static inline void *Stream_WriteBool(void *stream, s32 v) {
 }
 
 static inline void *Stream_WriteF32p(void *stream, const f32 *v) {
-    void *vt = M2C_FIELD(stream, void **, 0x18);
-    f32 t = *v;
-    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)((char *)stream + M2C_FIELD(vt, s16 *, 0x38), &t, 4);
+    void *vt;
+    void (*f)(void *, void *, s32);
+    void *p;
+    f32 t;
+
+    vt = M2C_FIELD(stream, void **, 0x18);
+    f = M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C);
+    p = (char *)stream + M2C_FIELD(vt, s16 *, 0x38);
+    t = *v;
+    f(p, &t, 4);
     return stream;
 }
 
@@ -100,16 +107,16 @@ void *fn_802F1B74(void *self) {
 extern void fn_802EFC54(void *, void *);
 extern void *fn_802D34B0(void *, void *);
 void fn_802F1C20(void *self, void *stream) {
+    void *s;
     u8 b;
     fn_802EFC54(self, stream);
-    stream = fn_802D34B0(stream, (u8 *)self + 0xC0);
-    stream = Stream_WriteF32p(stream, (f32 *)((u8 *)self + 0xD8));
-    stream = Stream_WriteF32p(stream, (f32 *)((u8 *)self + 0xDC));
+    s = fn_802D34B0(stream, (u8 *)self + 0xC0);
+    Stream_WriteF32(Stream_WriteF32(s, M2C_FIELD(self, f32 *, 0xD8)), M2C_FIELD(self, f32 *, 0xDC));
     b = 0;
     if (M2C_FIELD(self, s32 *, 0xE0) != 0) {
         b = 1;
     }
-    Stream_WriteU8(stream, b);
+    Stream_WriteU8(s, b);
 }
 
 void fn_802F1CE8(char *self, void *stream) {
@@ -129,6 +136,37 @@ void fn_802F1CE8(char *self, void *stream) {
         vt = M2C_FIELD(stream, void **, 0x18);
         M2C_FIELD(vt, void (**)(void *, void *, s32), 0x34)((char *)stream + M2C_FIELD(vt, s16 *, 0x30), &flag, 1);
         M2C_FIELD(self, s32 *, 0xE0) = flag != 0;
+    }
+}
+
+void fn_802F1DB0(char *self, f32 *pos, f32 *out) {
+    extern f32 fn_8025FC40(Vec3f *);
+    extern const f32 lbl_803F0F44[];
+    extern const f32 lbl_803F0F48[];
+    extern const f32 lbl_803F0F4C[];
+    extern const f32 lbl_803F0F50[];
+    Vec3f v;
+    f32 dist;
+    f32 scale;
+
+    v.y = pos[1] - M2C_FIELD(self, f32 *, 0xC4);
+    v.x = pos[0] - M2C_FIELD(self, f32 *, 0xC0);
+    v.z = lbl_803F0F44[0];
+    dist = fn_8025FC40(&v);
+    *out = M2C_FIELD(self, f32 *, 0xA0);
+    if (M2C_FIELD(self, f32 *, 0xA0) == lbl_803F0F44[0]) {
+        *out = lbl_803F0F48[0];
+    }
+    if (dist != lbl_803F0F44[0]) {
+        scale = lbl_803F0F4C[0];
+        if (M2C_FIELD(self, s32 *, 0xE0) != 0) {
+            scale = M2C_FIELD(self, f32 *, 0xDC) / (dist * lbl_803F0F50[0]);
+            scale = scale * scale;
+        }
+        *out = scale * *out;
+        if (*out > lbl_803F0F4C[0]) {
+            *out = lbl_803F0F4C[0];
+        }
     }
 }
 
