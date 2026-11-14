@@ -1358,18 +1358,20 @@ void *fn_80363DE8(char *obj, void *s) {
 }
 
 void fn_80363E44(void **obj) {
+    typedef struct { void *vt; u8 pad[0x1C]; void *arr[2]; } T;
     extern u8 lbl_80493920[];
     s32 fn_802D2540(void *, void *);
+    T *o = (T *)obj;
     s32 i;
 
     for (i = 1; i >= 0; i--) {
-        if (fn_802D2540(obj[8 + i], lbl_80493920) != 0) {
-            fn_80363E44(obj[8 + i]);
+        if (fn_802D2540(o->arr[i], lbl_80493920) != 0) {
+            fn_80363E44(o->arr[i]);
         } else {
-            char *vt = *(char **)obj[8 + i];
-            (*(void (**)(void *))(vt + 0xC))((char *)obj[8 + i] + *(s16 *)(vt + 0x8));
+            char *vt = *(char **)o->arr[i];
+            (*(void (**)(void *))(vt + 0xC))((char *)o->arr[i] + *(s16 *)(vt + 0x8));
         }
-        obj[8 + i] = NULL;
+        o->arr[i] = NULL;
     }
     {
         char *vt = (char *)*obj;
