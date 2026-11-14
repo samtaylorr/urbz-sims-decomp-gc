@@ -196,7 +196,7 @@ void fn_802F1604(void) {
     fn_802F04BC();
 }
 
-void fn_802F04BC(void);
+void fn_802F04BC();
 void fn_802F162C(void) {
     fn_802F04BC();
 }
