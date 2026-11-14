@@ -68,7 +68,7 @@ void fn_8003FC04(void) {
 void fn_800402BC(s32 arg0, void *arg1);
 void *fn_8003FC08(void *self) {
     typedef struct { s32 a[11]; f32 f2c; f32 f30; s32 x34; } Sub;
-    typedef struct { s32 u[11]; void *p2c; s32 u30[0x1D]; Sub sub; s32 pad[3]; void *vt; } Obj;
+    typedef struct { s32 u[0x29]; Sub sub; s32 pad[3]; void *vt; } Obj;
     extern f32 lbl_803C5F5C[];
     Obj *o = self;
     Sub *s;
@@ -92,7 +92,7 @@ void *fn_8003FC08(void *self) {
     o->u[1] = 0;
     o->u[2] = 0;
     o->u[4] = 0;
-    o->u30[1] = 0;
+    o->u[13] = 0;
     o->u[6] = 0;
     o->u[8] = 0;
     s->a[0] = 0;
@@ -107,14 +107,14 @@ void *fn_8003FC08(void *self) {
     s->a[9] = 0;
     s->x34 = 0;
     o->sub.a[5] = (s32)fn_800402BC;
-    o->u30[0] = 0;
     o->sub.a[6] = (s32)o;
     o->u[3] = 0;
     o->u[5] = 0;
     o->u[7] = 0;
     o->u[9] = 0;
     o->u[10] = 0;
-    o->p2c = 0;
+    o->u[11] = 0;
+    o->u[12] = 0;
     return self;
 }
 
