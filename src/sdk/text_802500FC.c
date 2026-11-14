@@ -1232,6 +1232,7 @@ void fn_80256EF8(void) {
     s32 fn_80256F58(u8 *, u32, u32);
     u8 *scb = lbl_80440C00;
     u32 *offset = (u32 *)(scb + 0x40);
+    u8 pad[8];
 
     *(s32 *)(scb + 0x4C) = fn_80256F58(scb + *offset, *offset, 0x40 - *offset);
     if (*(s32 *)(scb + 0x4C) != 0) {
@@ -3845,6 +3846,21 @@ s32 fn_80268F44(void) {
     return lbl_80495FDC;
 }
 
+void fn_80268F4C(void *callback) {
+    s32 fn_8025465C(void);
+    void fn_80254684(s32);
+    void fn_80267C10(void *, void *, void *, void *, void *);
+    extern u8 lbl_80442B18[];
+    extern s32 lbl_80495FE0;
+    s32 enabled;
+
+    enabled = fn_8025465C();
+    *(void **)(lbl_80442B18 + 0x138) = callback;
+    lbl_80495FE0 = 1;
+    fn_80267C10(lbl_80442B18 + 0xF0, lbl_80442B18 + 0x124, lbl_80442B18 + 0x128, lbl_80442B18 + 0x13C, lbl_80442B18 + 0x140);
+    fn_80254684(enabled);
+}
+
 void fn_80268FB8(u32 black) {
     extern u8 lbl_80442B18[];
     void fn_80267FB0(u16, u16, u8, u16, u16, u16, u16, u16, u32);
@@ -6237,6 +6253,30 @@ void fn_8027533C(u32 stage, s32 op, u32 bias, u32 scale, u8 clamp, u32 out_reg) 
     gx = __GXData;
     gx[0x170 / 4 + stage] = reg;
     ((u16 *)gx)[1] = 0;
+}
+
+void fn_80275420(u32 id, s16 *color) {
+    extern void *__GXData;
+    u32 regRA;
+    u32 regBG;
+
+    regRA = 0;
+    regRA = __rlwimi(regRA, color[0], 0, 21, 31);
+    regRA = __rlwimi(regRA, color[3], 12, 9, 19);
+    regRA = __rlwimi(regRA, id * 2 + 0xE0, 24, 0, 7);
+    regBG = 0;
+    regBG = __rlwimi(regBG, color[2], 0, 21, 31);
+    regBG = __rlwimi(regBG, color[1], 12, 9, 19);
+    regBG = __rlwimi(regBG, id * 2 + 0xE1, 24, 0, 7);
+    GXWGFifo.u8 = 0x61;
+    GXWGFifo.u32 = regRA;
+    GXWGFifo.u8 = 0x61;
+    GXWGFifo.u32 = regBG;
+    GXWGFifo.u8 = 0x61;
+    GXWGFifo.u32 = regBG;
+    GXWGFifo.u8 = 0x61;
+    GXWGFifo.u32 = regBG;
+    M2C_FIELD(__GXData, u16 *, 0x2) = 0;
 }
 
 void fn_8027549C(u32 id, u8 *color) {
