@@ -4229,23 +4229,25 @@ void fn_80265FB4(s32 addr, s32 length, u32 offset, void (*cb)(s32)) {
     extern s32 lbl_80495F84;
     extern s32 lbl_80495F68;
     s32 fn_80266358(u32 offset, void (*cb)(s32));
+    s32 *cmd;
     u32 seekOffset;
 
+    cmd = lbl_80442A48;
     seekOffset = offset & ~0x7FFF;
     if (seekOffset == 0) {
         seekOffset = 0;
     } else {
         seekOffset += lbl_80495F68;
     }
-    lbl_80442A48[0] = 2;
-    lbl_80442A48[3] = seekOffset;
-    lbl_80442A48[4] = (s32)cb;
-    lbl_80442A48[5] = 1;
-    lbl_80442A48[6] = addr;
-    lbl_80442A48[7] = length;
-    lbl_80442A48[8] = offset;
-    lbl_80442A48[9] = (s32)cb;
-    lbl_80442A48[10] = -1;
+    cmd[0] = 2;
+    cmd[3] = seekOffset;
+    cmd[4] = (s32)cb;
+    cmd[5] = 1;
+    cmd[6] = addr;
+    cmd[7] = length;
+    cmd[8] = offset;
+    cmd[9] = (s32)cb;
+    cmd[10] = -1;
     lbl_80495F84 = 0;
     fn_80266358(seekOffset, cb);
 }
