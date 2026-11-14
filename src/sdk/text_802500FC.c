@@ -1490,6 +1490,22 @@ s32 fn_80258794(void *thread) {
     return priority;
 }
 
+void fn_80258990(void *thread) {
+    void *fn_802587D0(void *, s32);
+    s32 priority;
+
+    do {
+        if (M2C_FIELD(thread, s32 *, 0x2cc) > 0) {
+            break;
+        }
+        priority = fn_80258794(thread);
+        if (M2C_FIELD(thread, s32 *, 0x2d0) == priority) {
+            break;
+        }
+        thread = fn_802587D0(thread, priority);
+    } while (thread != NULL);
+}
+
 void *fn_802587D0(void *thread, s32 priority);
 void fn_80258A08(void *thread, s32 priority) {
     do {
@@ -5905,21 +5921,19 @@ void fn_802755C8(u32 stage, u32 ras_sel, u32 tex_sel) {
 void fn_80275610(u32 table, u32 red, u32 green, u32 blue, u32 alpha) {
     extern struct { u16 unk0; u16 bpSentNot; u8 pad4[0x1AC]; u32 tevKsel[8]; } *__GXData;
     u32 *Kreg;
-    u32 index = table * 2;
-    struct { u16 unk0; u16 bpSentNot; u8 pad4[0x1AC]; u32 tevKsel[8]; } *gx = (void *)__GXData;
 
-    Kreg = &gx->tevKsel[index];
+    Kreg = &__GXData->tevKsel[table << 1];
     *Kreg = __rlwimi(*Kreg, red, 0, 30, 31);
     *Kreg = __rlwimi(*Kreg, green, 2, 28, 29);
     GXWGFifo.u8 = 0x61;
     GXWGFifo.u32 = *Kreg;
 
-    Kreg = &gx->tevKsel[index + 1];
+    Kreg = &__GXData->tevKsel[(table << 1) + 1];
     *Kreg = __rlwimi(*Kreg, blue, 0, 30, 31);
     *Kreg = __rlwimi(*Kreg, alpha, 2, 28, 29);
     GXWGFifo.u8 = 0x61;
     GXWGFifo.u32 = *Kreg;
-    gx->bpSentNot = 0;
+    __GXData->bpSentNot = 0;
 }
 
 void fn_80275690(void) {
