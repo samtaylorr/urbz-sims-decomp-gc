@@ -1978,6 +1978,8 @@ BOOL fn_8025B434(OSThread_ *thread) {
     return TRUE;
 }
 
+#pragma push
+#pragma scheduling off
 s32 fn_8025B94C(s32 chan, void *buf, s32 len, u32 mode) {
     s32 fn_8025B6F0(s32, void *, s32, u32, void *);
     s32 fn_8025BAD8(s32);
@@ -1996,7 +1998,7 @@ s32 fn_8025B94C(s32 chan, void *buf, s32 len, u32 mode) {
     }
     return 1;
 }
-
+#pragma pop
 volatile u32 __EXIChanRegs[] : 0xCC006800;
 
 u32 fn_8025BD24(s32 chan, BOOL exi, BOOL tc, BOOL ext) {
@@ -3071,7 +3073,6 @@ s32 fn_802646D0(DVDCommandBlock *block) {
     s32 result;
     s32 enabled;
     s32 state;
-    u32 command;
 
     result = fn_80264454(block, (void *)fn_8026477C);
     if (result == 0) {
@@ -3084,8 +3085,7 @@ s32 fn_802646D0(DVDCommandBlock *block) {
             break;
         }
         if (state == 3) {
-            command = block->command;
-            if (command == 4 || command == 5 || command == 13 || command == 15) {
+            if (block->command - 4 <= 1 || block->command == 13 || block->command == 15) {
                 break;
             }
         }
