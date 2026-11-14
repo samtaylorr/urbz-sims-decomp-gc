@@ -2567,14 +2567,14 @@ void fn_802696D0(s16 *arg0, s16 *arg1) {
 }
 
 void fn_802698E8(u32 hct, u32 vct, s16 *x, s16 *y);
+volatile u16 __VIRegs[] : 0xCC002000;
 void fn_80269B64(u32 arg0) {
-    volatile u16 *regs = (volatile u16 *)0xCC002000;
-    u16 reg;
+    u32 reg;
 
-    reg = regs[1];
+    reg = __VIRegs[1];
     reg = (reg & ~0x30) | (arg0 << 4);
     reg = (reg & ~0xC0) | (arg0 << 6);
-    regs[1] = reg;
+    __VIRegs[1] = reg;
 }
 
 s32 fn_80269B90(s16 *x, s16 *y) {
