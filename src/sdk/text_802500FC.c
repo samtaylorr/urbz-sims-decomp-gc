@@ -3771,6 +3771,19 @@ void fn_80272A14(void *arg0, s32 *arg1) {
     *arg1 = M2C_FIELD(arg0, s32 *, 0xC);
 }
 
+void fn_80272A9C(u32 lt_obj_indx, u32 light) {
+    extern void *__GXData;
+    u32 reg = 0;
+    u32 idx = 31 - __cntlzw(light);
+
+    reg = __rlwimi(reg, (idx & 7) * 16 + 0x600, 0, 20, 31);
+    reg = __rlwimi(reg, 0xF, 12, 16, 19);
+    reg = __rlwimi(reg, lt_obj_indx, 16, 0, 15);
+    GXWGFifo.u8 = 0x38;
+    GXWGFifo.u32 = reg;
+    M2C_FIELD(__GXData, u16 *, 0x2) = 1;
+}
+
 void fn_80273438(void *arg0, u32 arg1) {
     struct { u32 w0, w1, w2; u32 pad : 11; u32 addr : 21; } *p = arg0;
     p->addr = arg1 >> 5;
@@ -4062,31 +4075,33 @@ void __GXFlushTextureState(void) {
 
 void fn_802751C0(s32 id, u32 mode) {
     extern void *__GXData;
-    extern u32 lbl_803FB248[];
-    u32 *tbl = lbl_803FB248;
+    extern u32 lbl_803FB248[4][5];
+    u32 (*tbl)[5] = lbl_803FB248;
     u8 *gx;
     u32 *ctmp;
     u32 *atmp;
+    u32 *regs;
     u32 tevReg;
 
     if (id == 0) {
-        ctmp = tbl + mode;
-        atmp = tbl + mode + 10;
+        ctmp = tbl[0] + mode;
+        atmp = tbl[2] + mode;
     } else {
-        ctmp = tbl + mode + 5;
-        atmp = tbl + mode + 15;
+        ctmp = tbl[1] + mode;
+        atmp = tbl[3] + mode;
     }
     gx = __GXData;
-    tevReg = ((u32 *)(gx + 0x130))[id];
+    regs = (u32 *)(gx + id * 4);
+    tevReg = regs[0x130 / 4];
     tevReg = (*ctmp & ~0xFF000000) | (tevReg & 0xFF000000);
     GXWGFifo.u8 = 0x61;
     GXWGFifo.u32 = tevReg;
-    ((u32 *)(gx + 0x130))[id] = tevReg;
-    tevReg = ((u32 *)(gx + 0x170))[id];
+    regs[0x130 / 4] = tevReg;
+    tevReg = regs[0x170 / 4];
     tevReg = (*atmp & ~0xFF00000F) | (tevReg & 0xFF00000F);
     GXWGFifo.u8 = 0x61;
     GXWGFifo.u32 = tevReg;
-    ((u32 *)(gx + 0x170))[id] = tevReg;
+    regs[0x170 / 4] = tevReg;
     *(u16 *)(gx + 2) = 0;
 }
 
