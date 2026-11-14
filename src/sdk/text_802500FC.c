@@ -18,6 +18,11 @@ typedef struct DVDCommandBlock {
 
 extern DVDCommandBlock *lbl_80495ED0;
 
+typedef struct GXVtxDescList {
+    s32 attr;
+    s32 type;
+} GXVtxDescList;
+
 typedef struct DVDQueue {
     DVDCommandBlock *next;
     DVDCommandBlock *prev;
