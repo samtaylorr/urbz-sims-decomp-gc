@@ -2616,12 +2616,13 @@ void fn_8025E4B8(void) {
     extern SIControl lbl_803F9124;
     extern SIPacket lbl_80441710[];
     extern char *lbl_80494A00;
+    void OSRegisterVersion(char *);
+    __OSInterruptHandler fn_802546A8(s16, __OSInterruptHandler);
     void fn_8025DF1C(s16, void *);
     u32 fn_8025F148(s32);
-    SIPacket *packet = lbl_80441710;
 
     OSRegisterVersion(lbl_80494A00);
-    packet[0].chan = packet[1].chan = packet[2].chan = packet[3].chan = -1;
+    lbl_80441710[0].chan = lbl_80441710[1].chan = lbl_80441710[2].chan = lbl_80441710[3].chan = -1;
     lbl_803F9124.poll = 0;
     fn_8025F710(0);
     do {
@@ -5715,6 +5716,18 @@ void fn_8026FF68(void) {
     __GXData[0x5AB] = 0;
 }
 
+void fn_80270284(s32 fmt, s32 *vat) {
+    void fn_80270004(s32, s32, s32 *, s32 *, s32 *);
+    s32 attr;
+
+    for (attr = 9; attr <= 20; attr++) {
+        vat[0] = attr;
+        fn_80270004(fmt, attr, &vat[1], &vat[2], &vat[3]);
+        vat += 4;
+    }
+    vat[0] = 0xFF;
+}
+
 void fn_80270384(void) {
     *(s8 *)0xCC008000 = 0x48;
 }
@@ -6045,7 +6058,7 @@ void __GXPEInit(void) {
     reg = __rlwimi(reg, 1, 1, 30, 30);
     __peReg[5] = reg;
 }
-
+#pragma pop
 void fn_802713FC(void) {
     extern void *__GXData;
     void fn_80274440(void);
@@ -7323,7 +7336,7 @@ void fn_80275FD8(void) {
 
     sx = M2C_FIELD(gx, f32 *, 0x4FC) * lbl_80497600;
     sy = -M2C_FIELD(gx, f32 *, 0x500) * lbl_80497600;
-    ox = lbl_80497604 + (M2C_FIELD(gx, f32 *, 0x4F4) + sx);
+    ox = lbl_80497604 + (M2C_FIELD(gx, f32 *, 0x4F4) + M2C_FIELD(gx, f32 *, 0x4FC) * lbl_80497600);
     oy = lbl_80497604 + (M2C_FIELD(gx, f32 *, 0x4F8) + M2C_FIELD(gx, f32 *, 0x500) * lbl_80497600);
     zmin = M2C_FIELD(gx, f32 *, 0x504) * M2C_FIELD(gx, f32 *, 0x510);
     zmax = M2C_FIELD(gx, f32 *, 0x508) * M2C_FIELD(gx, f32 *, 0x510);
