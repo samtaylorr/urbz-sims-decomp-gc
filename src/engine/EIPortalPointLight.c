@@ -36,8 +36,8 @@ static inline void EIPortalPointLight_GetA(void *arg0, s16 *arg1, s16 *arg2) {
     if (temp_r0 != NULL) {
         temp_r0(M2C_FIELD(arg0, s32 *, 0x30), 0, arg1, arg2);
     } else {
-        *arg2 = (s16) (s32) temp_r0;
         *arg1 = (s16) (s32) temp_r0;
+        *arg2 = (s16) (s32) temp_r0;
     }
     var_r11 = 1;
     if (M2C_FIELD(arg0, u16 *, 0x28) == (u16) *arg1) {
@@ -140,10 +140,7 @@ void fn_802F2820(char *self, void *stream) {
     fn_802EFC54(self, stream);
     vt = *(void **)self;
     M2C_FIELD(vt, void (**)(void *, void *), 0x154)(self + M2C_FIELD(vt, s16 *, 0x150), &v);
-    stream = fn_802D34B0(stream, &v);
-    EIPortalPointLight_WriteF32(stream, M2C_FIELD(self, f32 *, 0xD8));
-    EIPortalPointLight_WriteF32(stream, M2C_FIELD(self, f32 *, 0xDC));
-    EIPortalPointLight_WriteBool(stream, M2C_FIELD(self, s32 *, 0xE0));
+    EIPortalPointLight_WriteBool(EIPortalPointLight_WriteF32(EIPortalPointLight_WriteF32(fn_802D34B0(stream, &v), M2C_FIELD(self, f32 *, 0xD8)), M2C_FIELD(self, f32 *, 0xDC)), M2C_FIELD(self, s32 *, 0xE0));
 }
 
 void fn_802F2904(char *self, void *stream) {
@@ -169,40 +166,13 @@ void fn_802F2904(char *self, void *stream) {
 }
 
 s32 fn_802F3084(u8 *self) {
-    void (*fn)(s32, s32, s16 *, s16 *);
-    s16 a;
-    s16 b;
-    s16 c;
-    s16 d;
-    s16 *p;
-    u16 v;
-    s32 var_r11;
+    struct { s16 x; s16 y; } a, c;
     s32 ret;
 
-    p = &a;
-    fn = M2C_FIELD(self, void (**)(s32, s32, s16 *, s16 *), 0x20);
-    if (fn != NULL) {
-        fn(M2C_FIELD(self, s32 *, 0x30), 0, p, &b);
-    } else {
-        b = (s16) (s32) fn;
-        *p = (s16) (s32) fn;
-    }
-    v = *p;
-    var_r11 = 1;
-    if (M2C_FIELD(self, u16 *, 0x28) == v) {
-        var_r11 = 0;
-    }
-    M2C_FIELD(self, s32 *, 8) = var_r11;
-    M2C_FIELD(self, u16 *, 0x28) = v;
-    fn = M2C_FIELD(self, void (**)(s32, s32, s16 *, s16 *), 0x24);
-    if (fn != NULL) {
-        fn(M2C_FIELD(self, s32 *, 0x2C), 0, &c, &d);
-    } else {
-        d = -1;
-        c = -1;
-    }
+    EIPortalPointLight_GetA(self, &a.x, &a.y);
+    EIPortalPointLight_GetB(self, &c.x, &c.y);
     ret = 0;
-    if (c != a && M2C_FIELD(self, s32 *, 0x9C) != 0) {
+    if (c.x != a.x && M2C_FIELD(self, s32 *, 0x9C) != 0) {
         ret = 1;
     }
     return ret;
