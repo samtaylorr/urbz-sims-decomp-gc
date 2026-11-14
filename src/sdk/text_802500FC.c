@@ -1562,6 +1562,34 @@ u32 fn_80257F74(void) {
     return mode;
 }
 
+void fn_80257FE4(u32 on) {
+    extern SramControlBlock lbl_80440C00;
+    s32 fn_802572CC(s32, s32);
+    SramControlBlock *scb;
+    s32 enabled;
+    s32 *locked;
+    u8 pad[8];
+
+    on = (on & 1) << 6;
+    scb = &lbl_80440C00;
+    enabled = fn_8025465C();
+    locked = &scb->locked;
+    if (*locked != 0) {
+        fn_80254684(enabled);
+        scb = NULL;
+    } else {
+        scb->enabled = enabled;
+        *locked = 1;
+    }
+    if (on == (scb->sram[0x11] & 0x40)) {
+        fn_802572CC(0, 0);
+        return;
+    }
+    scb->sram[0x11] &= ~0x40;
+    scb->sram[0x11] |= on;
+    fn_802572CC(1, 0);
+}
+
 u16 fn_80258088(s32 chan) {
     extern SramControlBlock lbl_80440C00;
     s32 fn_802572CC(s32, s32);
@@ -2525,6 +2553,8 @@ s32 fn_8025E260(s32 enable) {
     return rc;
 }
 
+#pragma push
+#pragma inline_depth(0)
 void fn_8025E4B8(void) {
     typedef struct { s32 chan; u32 poll; u32 inputBytes; void *input; void *callback; } SIControl;
     typedef struct { s32 chan; u8 pad[0x1C]; } SIPacket;
@@ -2548,7 +2578,7 @@ void fn_8025E4B8(void) {
     fn_8025F148(2);
     fn_8025F148(3);
 }
-
+#pragma pop
 u32 fn_8025E880(s32 chan) {
     s32 fn_8025465C(void);
     void fn_80254684(s32);
