@@ -3213,6 +3213,30 @@ void fn_80261344(void) {
     fn_802660C0(M2C_FIELD(lbl_80495ED8, void **, 0x38), (lbl_80442920[2] + 31) & ~31, lbl_80442920[1], fn_802613D8);
 }
 
+void fn_802613D8(u32 intType) {
+    DVDCommandBlock *finished;
+    extern s32 lbl_80495F04;
+    extern DVDCommandBlock lbl_80442960;
+
+    if (intType == 16) {
+        fn_80261530();
+        return;
+    }
+    if (intType & 1) {
+        lbl_80495F04 = 0;
+        fn_8026006C();
+        finished = lbl_80495ED0;
+        lbl_80495ED0 = &lbl_80442960;
+        finished->state = 0;
+        if (finished->callback) {
+            ((void (*)(s32, DVDCommandBlock *))finished->callback)(0, finished);
+        }
+        fn_802622E0();
+    } else {
+        fn_80261564();
+    }
+}
+
 void fn_80261530(void);
 void fn_80261564(void);
 void fn_8026561C(void);
@@ -3640,6 +3664,7 @@ s32 fn_802637B4(DVDCommandBlock *block) {
     s32 enabled;
     s32 state;
     s32 retVal;
+    u8 pad[8];
 
     block->command = 9;
     block->callback = (void *)fn_80263854;
@@ -5817,7 +5842,7 @@ void fn_8026FA54(void) {
 }
 
 void fn_8026FF68(void) {
-    extern struct {
+    extern struct GXVATData {
         u8 pad0[0x1C];
         u32 vatA[8];
         u32 vatB[8];
@@ -5826,6 +5851,7 @@ void fn_8026FF68(void) {
         u8 dirtyVAT;
     } *const __GXData;
     u8 i;
+    u8 dirty = __GXData->dirtyVAT;
 
     for (i = 0; i < 8; i++) {
         if (__GXData->dirtyVAT & (1 << i)) {
