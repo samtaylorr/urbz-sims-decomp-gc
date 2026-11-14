@@ -56,21 +56,25 @@ void fn_802ED900(void) {
 }
 
 s32 fn_802ED904(char *self) {
-    extern const f32 lbl_803F0BEC;
+    extern const f32 lbl_803F0BEC[];
     extern char *lbl_80495220;
     Vec3f v;
-    char *vt = *(char **)self;
+    char *vt;
     char *obj;
+    s32 t;
     *(s32 *)(self + 8) = 1;
-    v.x = lbl_803F0BEC;
-    v.z = lbl_803F0BEC;
-    v.y = lbl_803F0BEC;
+    Vec3f_Set(&v, lbl_803F0BEC[0], lbl_803F0BEC[0], lbl_803F0BEC[0]);
+    vt = *(char **)self;
     (*(void (**)(void *, Vec3f *, s32, s32))(vt + 0x4C))(self + *(s16 *)(vt + 0x48), &v, 0xFF, 1);
     vt = *(char **)self;
     (*(void (**)(void *))(vt + 0x214))(self + *(s16 *)(vt + 0x210));
     obj = lbl_80495220;
     vt = *(char **)(obj + 0x338);
-    return (*(s32 (**)(void *))(vt + 0x1C))(obj + *(s16 *)(vt + 0x18)) != 0;
+    t = 0;
+    if ((*(s32 (**)(void *))(vt + 0x1C))(obj + *(s16 *)(vt + 0x18)) != 0) {
+        t = 1;
+    }
+    return t;
 }
 
 void fn_802ED9B4(char *self) {
@@ -367,6 +371,29 @@ void fn_802EE4F4(void *arg0, s32 arg1) {
     } else {
         fn_802D1A00(fn_802D0AB8(), arg1);
     }
+}
+
+void fn_802EE570(char *self, f32 *out, f32 *rect) {
+    extern const f32 lbl_803F0C00[];
+    extern const f32 lbl_803F0C04[];
+    extern const f32 lbl_803F0C08[];
+    char *vt = *(char **)self;
+    f32 a = (*(f32 (**)(void *))(vt + 0x11C))(self + *(s16 *)(vt + 0x118));
+    f32 b;
+    f32 w, h, d;
+    vt = *(char **)self;
+    b = (*(f32 (**)(void *))(vt + 0x124))(self + *(s16 *)(vt + 0x120));
+    h = (rect[3] - rect[1]) * lbl_803F0C00[0];
+    w = (rect[2] - rect[0]) * lbl_803F0C00[0];
+    d = (a - b) * lbl_803F0C00[0];
+    out[1] = -h;
+    out[0] = w;
+    out[2] = d;
+    out[3] = lbl_803F0C04[0];
+    out[4] = w + rect[0];
+    out[5] = h + rect[1];
+    out[6] = b + d;
+    out[7] = lbl_803F0C08[0];
 }
 
 void fn_802EE654(char *self) {
@@ -718,6 +745,49 @@ s32 fn_802EF070(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void fn_802EF0B0(u8 *arg0, s32 arg1, Vec3f *arg2) {
+    extern f32 lbl_803F0CE4[];
+    char *vt;
+    Vec3f *dir;
+    f32 scale;
+    f32 zero;
+    Vec3f v;
+
+    zero = lbl_803F0CE4[0];
+    Vec3f_Set(&v, zero, zero, zero);
+    *arg2 = v;
+    vt = *(char **)arg0;
+    if ((*(s32 (**)(void *))(vt + 0x15C))(arg0 + *(s16 *)(vt + 0x158)) != 0) {
+        dir = (Vec3f *)(arg0 + 0xA4);
+        scale = *(f32 *)(arg0 + 0xA0);
+        v.x = dir->x * scale;
+        v.y = dir->y * scale;
+        v.z = dir->z * scale;
+        *arg2 = v;
+    }
+}
+
+void fn_802EF170(u8 *arg0, Vec3f *arg1, f32 *arg2, Vec3f *arg3, Vec3f *arg4) {
+    extern f32 lbl_803F0CE8[];
+    Vec3f *dir;
+    f32 scale;
+    f32 zero;
+    Vec3f v;
+
+    zero = lbl_803F0CE8[0];
+    Vec3f_Set(&v, zero, zero, zero);
+    *arg1 = v;
+    Vec3f_Set(&v, zero, zero, zero);
+    *arg2 = zero;
+    *arg3 = v;
+    dir = (Vec3f *)(arg0 + 0xA4);
+    scale = *(f32 *)(arg0 + 0xA0);
+    v.x = scale * dir->x;
+    v.y = scale * dir->y;
+    v.z = scale * dir->z;
+    *arg4 = v;
+}
+
 extern void fn_802F09B8(void *, void *);
 extern const f32 lbl_803F0CEC[];
 extern const f32 lbl_803F0CF0[];
@@ -725,12 +795,14 @@ extern const f32 lbl_803F0CF4[];
 
 void fn_802EF220(void *arg0) {
     EGBox box;
-    f32 lo = lbl_803F0CF0[0];
+    register f32 lo asm("fr13") = lbl_803F0CF0[0];
+    register Vec3f *p asm("r9");
+    register f32 hi asm("fr0");
     EGBox_Init(&box, lbl_803F0CEC[0]);
     {
         Vec3f t;
-        Vec3f *p = &t;
-        f32 hi = lbl_803F0CF4[0];
+        p = &t;
+        hi = lbl_803F0CF4[0];
         box.min = *Vec3f_Splat(p, lo);
         box.max = *Vec3f_Splat(p, hi);
     }
