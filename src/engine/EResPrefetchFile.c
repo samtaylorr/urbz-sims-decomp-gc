@@ -57,6 +57,39 @@ u32 fn_8031FB48(void *self, u8 *dst, u32 n) {
     return i;
 }
 
+u32 fn_8031FB8C(void *self, u8 *dst, u32 n) {
+    extern u32 fn_80336FB0(s32, u8 *, s32, u32);
+    u32 avail;
+    u32 rem;
+    u32 r;
+    u8 *p;
+    u8 *end;
+
+    if (n == 0) {
+        return 0;
+    }
+    p = M2C_FIELD(self, u8 **, 0x30);
+    end = M2C_FIELD(self, u8 **, 0x34) + M2C_FIELD(self, s32 *, 0x38);
+    if (p + n >= end) {
+        avail = end - p;
+        rem = n - avail;
+        if (avail == 0) {
+            r = fn_80336FB0(M2C_FIELD(self, s32 *, 0x2C), dst, M2C_FIELD(self, s32 *, 0x40), n);
+            M2C_FIELD(self, s32 *, 0x40) += n;
+        } else {
+            r = fn_8031FB48(self, dst, avail);
+            if (rem != 0) {
+                fn_80336FB0(M2C_FIELD(self, s32 *, 0x2C), dst, M2C_FIELD(self, s32 *, 0x40), rem);
+                r += rem;
+            }
+            M2C_FIELD(self, s32 *, 0x40) += rem;
+        }
+    } else {
+        r = fn_8031FB48(self, dst, n);
+    }
+    return r;
+}
+
 s32 fn_8031FC74(void) {
     return 0;
 }
