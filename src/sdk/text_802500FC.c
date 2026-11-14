@@ -3901,6 +3901,20 @@ void fn_80271794(void) {
     *(u16 *)(__GXData + 2) = 0;
 }
 
+void fn_80271978(u16 left, u16 top, u16 wd, u16 ht) {
+    extern u32 *__GXData;
+    u32 *gx = __GXData;
+
+    gx[0x1F0 / 4] = 0;
+    gx[0x1F0 / 4] = __rlwimi(gx[0x1F0 / 4], left, 0, 22, 31);
+    gx[0x1F0 / 4] = __rlwimi(gx[0x1F0 / 4], top, 10, 12, 21);
+    gx[0x1F0 / 4] = __rlwimi(gx[0x1F0 / 4], 0x49, 24, 0, 7);
+    gx[0x1F4 / 4] = 0;
+    gx[0x1F4 / 4] = __rlwimi(gx[0x1F4 / 4], wd - 1, 0, 22, 31);
+    gx[0x1F4 / 4] = __rlwimi(gx[0x1F4 / 4], ht - 1, 10, 12, 21);
+    gx[0x1F4 / 4] = __rlwimi(gx[0x1F4 / 4], 0x4A, 24, 0, 7);
+}
+
 void fn_802719F4(u16 wd, u16 ht) {
     extern u32 *__GXData;
     u32 *gx = __GXData;
@@ -4640,6 +4654,15 @@ void fn_80275E64(u16 mtx_indx, u32 id) {
     reg = __rlwimi(reg, mtx_indx, 16, 0, 15);
     GXWGFifo.u8 = 0x28;
     GXWGFifo.u32 = reg;
+}
+
+void fn_80275E98(u32 index) {
+    extern void *__GXData;
+    void fn_802762C0(s32 attr);
+    u32 *gx = __GXData;
+
+    gx[0x80 / 4] = __rlwimi(gx[0x80 / 4], index, 0, 26, 31);
+    fn_802762C0(0);
 }
 
 void fn_802760C0(f32 left, f32 top, f32 wd, f32 ht, f32 nearz, f32 farz) {
