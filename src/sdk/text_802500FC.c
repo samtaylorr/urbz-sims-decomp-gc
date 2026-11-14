@@ -3593,6 +3593,24 @@ void fn_80269D18(s32 chan) {
     fn_80254684(enabled);
 }
 
+void fn_80269DBC(void) {
+    extern u32 lbl_80495FF0;
+    extern s32 lbl_80494AB4;
+    extern u8 lbl_80442C70[][12];
+    extern void *fn_80248488(void *, s32, u32);
+    s32 fn_8025F30C(s32, void *);
+    void fn_8026A238();
+    u32 chanBit;
+
+    lbl_80494AB4 = __cntlzw(lbl_80495FF0);
+    if (lbl_80494AB4 != 32) {
+        chanBit = 0x80000000 >> lbl_80494AB4;
+        lbl_80495FF0 &= ~chanBit;
+        fn_80248488(&lbl_80442C70[lbl_80494AB4], 0, 12);
+        fn_8025F30C(lbl_80494AB4, fn_8026A238);
+    }
+}
+
 void fn_8026AD18(void) {
     M2C_UNK fn_8025F710();
     fn_8025F710();
@@ -5606,7 +5624,7 @@ void fn_80275290(u32 stage, u32 a, u32 b, u32 c, u32 d) {
 
 #pragma push
 #pragma peephole off
-void fn_802752D4(u32 stage, s32 op, u32 bias, u32 scale, u8 clamp, u32 out_reg) {
+void fn_802752D4(u32 stage, s32 op, u32 bias, u32 scale, u32 clamp, u32 out_reg) {
     extern u32 *__GXData;
     u32 *gx;
     u32 reg;
@@ -5617,7 +5635,7 @@ void fn_802752D4(u32 stage, s32 op, u32 bias, u32 scale, u8 clamp, u32 out_reg) 
         reg = __rlwimi(reg, scale, 20, 10, 11);
         reg = __rlwimi(reg, bias, 16, 14, 15);
     } else {
-        reg = __rlwimi(reg, (op >> 1) & 3, 20, 10, 11);
+        reg = __rlwimi(reg, (u32)op >> 1, 20, 10, 11);
         reg = __rlwimi(reg, 3, 16, 14, 15);
     }
     gx = __GXData;
@@ -5683,7 +5701,7 @@ void fn_8027556C(s32 stage, u32 sel) {
 void fn_802755C8(u32 stage, u32 ras_sel, u32 tex_sel) {
     extern u32 *__GXData;
     u32 *gx = __GXData;
-    u32 *reg = &gx[0x170 / 4 + stage];
+    u32 *reg = (u32 *)((u8 *)gx + (stage * 4 + 0x170));
 
     *reg = __rlwimi(*reg, ras_sel, 0, 30, 31);
     *reg = __rlwimi(*reg, tex_sel, 2, 28, 29);
