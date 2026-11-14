@@ -217,6 +217,7 @@ void OSRegisterVersion(char *version) {
     fn_8025302C(lbl_804949A4, version);
 }
 
+#pragma pop
 void fn_80250ED4(void *alarm) {
     s64 fn_8025A494(void);
     void fn_8024FF98(u32);
@@ -232,6 +233,8 @@ void fn_80250ED4(void *alarm) {
     }
 }
 
+#pragma push
+#pragma inline_depth(0)
 void fn_80250F6C(void) {
     extern struct { void *head; void *tail; } lbl_80495E00;
     extern OSResetFunctionInfo lbl_803F7CD0;
@@ -244,8 +247,8 @@ void fn_80250F6C(void) {
         OSRegisterResetFunction(&lbl_803F7CD0);
     }
 }
-
 #pragma pop
+
 void fn_80250FC4(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0) = 0;
     M2C_FIELD(arg0, s32 *, 4) = 0;
