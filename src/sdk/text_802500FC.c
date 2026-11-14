@@ -1386,6 +1386,18 @@ BOOL fn_8025B2D0(OSMutex_ **queue, OSMutex_ *mutex) {
     return FALSE;
 }
 
+BOOL fn_8025B3FC(OSThread_ *thread) {
+    OSMutex_ *mutex = thread->mutex;
+
+    while (mutex && mutex->thread) {
+        if (mutex->thread == thread) {
+            return TRUE;
+        }
+        mutex = mutex->thread->mutex;
+    }
+    return FALSE;
+}
+
 #pragma push
 #pragma scheduling off
 s32 fn_8025C2BC(s32 chan) {
@@ -4063,16 +4075,14 @@ void fn_80276198(u32 left, u32 top, u32 wd, u32 ht) {
 
 void fn_80276210(u32 *left, u32 *top, u32 *wd, u32 *ht) {
     extern void *__GXData;
-    u32 tp, lf, bm, rt;
+    u32 *gx = __GXData;
+    u32 scis0 = gx[0xF8 / 4];
+    u32 scis1 = gx[0xFC / 4];
 
-    lf = (M2C_FIELD(__GXData, u32 *, 0xF8) >> 12) & 0x7FF;
-    *left = lf - 0x156;
-    tp = M2C_FIELD(__GXData, u32 *, 0xF8) & 0x7FF;
-    *top = tp - 0x156;
-    rt = (M2C_FIELD(__GXData, u32 *, 0xFC) >> 12) & 0x7FF;
-    *wd = rt - lf + 1;
-    bm = M2C_FIELD(__GXData, u32 *, 0xFC) & 0x7FF;
-    *ht = bm - tp + 1;
+    *left = ((scis0 >> 12) & 0x7FF) - 0x156;
+    *top = (scis0 & 0x7FF) - 0x156;
+    *wd = ((scis1 >> 12) & 0x7FF) - ((scis0 >> 12) & 0x7FF) + 1;
+    *ht = (scis1 & 0x7FF) - (scis0 & 0x7FF) + 1;
 }
 
 void fn_80276258(s32 x, s32 y) {
