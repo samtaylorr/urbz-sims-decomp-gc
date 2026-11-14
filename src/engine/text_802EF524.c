@@ -92,7 +92,7 @@ void fn_802EF6A8(u8 *arg0, s32 arg1, Vec3f *arg2) {
 }
 
 void fn_802EF768(u8 *arg0, Vec3f *arg1, f32 *arg2, Vec3f *arg3, Vec3f *arg4) {
-    extern f32 lbl_803F0D30[];
+    extern const f32 lbl_803F0D30[];
     Vec3f *dir;
     f32 scale;
     f32 zero;
