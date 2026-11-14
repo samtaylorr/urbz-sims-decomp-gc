@@ -1925,7 +1925,7 @@ void fn_8026199C(u32 arg0) {
     extern void fn_802652F4(u32);
     extern void fn_80264274(void);
     extern void fn_80261458(s32);
-    extern void fn_802664BC(void (*)(s32));
+    extern s32 fn_802664BC(void (*)(s32));
 
     if (arg0 == 0x10) {
         fn_802652F4(0x01234568);
@@ -2586,6 +2586,22 @@ s32 fn_80269B90(s16 *x, s16 *y) {
         hcount = regs[0x21] & 0x7FF;
         regs[0x20] = 0;
         regs[0x21] = 0;
+        fn_802698E8(hcount, vcount, x, y);
+        return 1;
+    }
+    *x = *y = -1;
+    return 0;
+}
+
+s32 fn_80269C04(s16 *x, s16 *y) {
+    volatile u16 *regs = (volatile u16 *)0xCC002000;
+    u32 hcount, vcount;
+
+    if (regs[0x22] & 0x8000) {
+        vcount = regs[0x22] & 0x7FF;
+        hcount = regs[0x23] & 0x7FF;
+        regs[0x22] = 0;
+        regs[0x23] = 0;
         fn_802698E8(hcount, vcount, x, y);
         return 1;
     }
