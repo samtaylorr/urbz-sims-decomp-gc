@@ -4,7 +4,7 @@
 void fn_800C3828(void *);
 
 extern void *lbl_80494FCC;
-s32 fn_803338C0();
+s32 fn_803338C0(void *, s32);
 s32 fn_803338F0(void *, s32);
 
 void *fn_802D0AB8(void);
