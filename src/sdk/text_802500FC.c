@@ -1000,7 +1000,8 @@ void fn_8025810C(s32 chan, u16 id) {
     u8 *sram;
     s32 enabled;
     s32 *locked;
-    u8 pad[8];
+    u16 *p;
+    u8 pad[4];
 
     scb = &lbl_80440C00;
     enabled = fn_8025465C();
@@ -1013,8 +1014,9 @@ void fn_8025810C(s32 chan, u16 id) {
         *locked = 1;
         sram = scb->sram + 0x14;
     }
-    if (((u16 *)(sram + 0x1C))[chan] != id) {
-        ((u16 *)(sram + 0x1C))[chan] = id;
+    p = &((u16 *)(sram + 0x1C))[chan];
+    if (*p != id) {
+        *p = id;
         fn_802572CC(1, 0x14);
         return;
     }
