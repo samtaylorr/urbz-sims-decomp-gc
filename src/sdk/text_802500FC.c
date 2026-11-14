@@ -2719,6 +2719,18 @@ s32 fn_80260DF4(char *dirName, DVDDir *dir) {
     return 1;
 }
 
+s32 fn_80260EB4(DVDDir *dir, DVDDirEntry *dirent) {
+    u32 loc = dir->location;
+    if ((loc <= dir->entryNum) || (dir->next <= loc)) {
+        return 0;
+    }
+    dirent->entryNum = loc;
+    dirent->isDir = (!(lbl_80495EB4[loc].isDirAndStringOff & 0xFF000000)) ? 0 : 1;
+    dirent->name = lbl_80495EB8 + (lbl_80495EB4[loc].isDirAndStringOff & 0x00FFFFFF);
+    dir->location = ((!(lbl_80495EB4[loc].isDirAndStringOff & 0xFF000000)) ? 0 : 1) ? lbl_80495EB4[loc].nextEntryOrLength : (loc + 1);
+    return 1;
+}
+
 s32 fn_80260F58(void) {
     return 1;
 }
@@ -3586,20 +3598,27 @@ void fn_8026588C(void) {
 }
 
 s32 fn_802658CC(void) {
+    typedef struct {
+        s32 type;
+        s32 a;
+        s32 b;
+        s32 c;
+        s32 d;
+    } Cmd;
     extern s32 lbl_80442A48[];
     extern s32 lbl_80495F84;
     void fn_80265D98(s32, s32, s32, s32);
     s32 fn_80266358(u32 offset, void (*cb)(s32));
-    s32 *cmd;
+    Cmd *cmds = (Cmd *)lbl_80442A48;
+    Cmd *cmd;
 
-    if (lbl_80442A48[lbl_80495F84 * 5] == 1) {
-        cmd = &lbl_80442A48[lbl_80495F84++ * 5];
-        fn_80265D98(cmd[1], cmd[2], cmd[3], cmd[4]);
+    if (cmds[lbl_80495F84].type == 1) {
+        cmd = &cmds[lbl_80495F84++];
+        fn_80265D98(cmd->a, cmd->b, cmd->c, cmd->d);
         return 1;
-    }
-    if (lbl_80442A48[lbl_80495F84 * 5] == 2) {
-        cmd = &lbl_80442A48[lbl_80495F84++ * 5];
-        fn_80266358(cmd[3], (void (*)(s32))cmd[4]);
+    } else if (cmds[lbl_80495F84].type == 2) {
+        cmd = &cmds[lbl_80495F84++];
+        fn_80266358(cmd->c, (void (*)(s32))cmd->d);
         return 1;
     }
     return 0;
