@@ -36,6 +36,16 @@ static inline u32 ENgcTexture_CheckHalf(void *e, u32 a, u32 b) {
     return M2C_FIELD(e, u32 *, 0x70) / 2;
 }
 
+typedef struct { f32 x, y, z; } ENgcVec3;
+
+static inline void ENgcVec3_splat(ENgcVec3 *d, f32 s) {
+    ENgcVec3 t;
+    t.z = s;
+    t.y = s;
+    t.x = s;
+    *d = t;
+}
+
 typedef struct {
     s16 delta;
     s16 index;
@@ -1259,26 +1269,25 @@ void fn_803639A8(void *arg0) {
 
 void *fn_80363C08(void *arg0) {
     typedef struct { f32 x, y, z; } V3;
+    typedef struct { V3 a; V3 b; } V3Pair;
     extern f32 lbl_803F4F20[];
-    void fn_802C4D24(V3 *);
-    void fn_802C5070(V3 *, void *);
-    V3 b;
-    s32 a[3];
-    V3 t;
-    s32 *d;
-    s32 x, y, z;
+    void fn_802C4D24(V3Pair *);
+    void fn_802C5070(V3Pair *, void *);
+    V3Pair v;
+    V3 *pb;
 
-    t.x = t.y = t.z = lbl_803F4F20[0];
-    d = a;
-    x = ((s32 *)&t)[0];
-    y = ((s32 *)&t)[1];
-    z = ((s32 *)&t)[2];
-    d[0] = x;
-    d[1] = y;
-    d[2] = z;
-    b = *(V3 *)a;
-    fn_802C4D24(&b);
-    fn_802C5070(&b, arg0);
+    pb = &v.b;
+    {
+        V3 t;
+        f32 s = lbl_803F4F20[0];
+        t.z = s;
+        t.y = s;
+        t.x = s;
+        *pb = t;
+    }
+    v.a = *pb;
+    fn_802C4D24(&v);
+    fn_802C5070(&v, arg0);
     return arg0;
 }
 
@@ -1359,17 +1368,16 @@ void *fn_80363DE8(char *obj, void *s) {
 void fn_80363E44(void **obj) {
     extern u8 lbl_80493920[];
     s32 fn_802D2540(void *, void *);
-    void ***p;
     s32 i;
 
-    for (i = 1, p = (void ***)((char *)obj + 0x24); i >= 0; i--, p--) {
-        if (fn_802D2540(*p, lbl_80493920) != 0) {
-            fn_80363E44(*p);
+    for (i = 1; i >= 0; i--) {
+        if (fn_802D2540(obj[8 + i], lbl_80493920) != 0) {
+            fn_80363E44(obj[8 + i]);
         } else {
-            char *vt = (char *)**p;
-            (*(void (**)(void *))(vt + 0xC))((char *)*p + *(s16 *)(vt + 0x8));
+            char *vt = *(char **)obj[8 + i];
+            (*(void (**)(void *))(vt + 0xC))((char *)obj[8 + i] + *(s16 *)(vt + 0x8));
         }
-        *p = NULL;
+        obj[8 + i] = NULL;
     }
     {
         char *vt = (char *)*obj;
