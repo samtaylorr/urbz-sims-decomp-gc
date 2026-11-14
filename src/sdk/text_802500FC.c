@@ -3901,6 +3901,20 @@ void fn_80271794(void) {
     *(u16 *)(__GXData + 2) = 0;
 }
 
+void fn_802718FC(u16 left, u16 top, u16 wd, u16 ht) {
+    extern u32 *__GXData;
+    u32 *gx = __GXData;
+
+    gx[0x1E0 / 4] = 0;
+    gx[0x1E0 / 4] = __rlwimi(gx[0x1E0 / 4], left, 0, 22, 31);
+    gx[0x1E0 / 4] = __rlwimi(gx[0x1E0 / 4], top, 10, 12, 21);
+    gx[0x1E0 / 4] = __rlwimi(gx[0x1E0 / 4], 0x49, 24, 0, 7);
+    gx[0x1E4 / 4] = 0;
+    gx[0x1E4 / 4] = __rlwimi(gx[0x1E4 / 4], wd - 1, 0, 22, 31);
+    gx[0x1E4 / 4] = __rlwimi(gx[0x1E4 / 4], ht - 1, 10, 12, 21);
+    gx[0x1E4 / 4] = __rlwimi(gx[0x1E4 / 4], 0x4A, 24, 0, 7);
+}
+
 void fn_80271978(u16 left, u16 top, u16 wd, u16 ht) {
     extern u32 *__GXData;
     u32 *gx = __GXData;
@@ -4365,20 +4379,24 @@ void fn_8027425C(u32 coord, u8 enable, u32 ss, u32 ts) {
 }
 
 void fn_802742D8(u32 coord, u32 s_enable, u32 t_enable) {
-    extern void *__GXData;
-    u32 *ts;
-    u32 *gx;
+    extern struct {
+        u16 pad0;
+        u16 bpSentNot;
+        u8 pad1[0xB4];
+        u32 suTs0[8];
+        u32 suTs1[8];
+        u8 pad2[0x594 - 0xF8];
+        u32 tcsManEnab;
+    } *__GXData;
 
-    gx = __GXData;
-    ts = &gx[coord];
-    ts[0xB8 / 4] = __rlwimi(ts[0xB8 / 4], s_enable, 17, 14, 14);
-    ts[0xD8 / 4] = __rlwimi(ts[0xD8 / 4], t_enable, 17, 14, 14);
-    if (gx[0x594 / 4] & (1 << coord)) {
+    __GXData->suTs0[coord] = __rlwimi(__GXData->suTs0[coord], s_enable, 17, 14, 14);
+    __GXData->suTs1[coord] = __rlwimi(__GXData->suTs1[coord], t_enable, 17, 14, 14);
+    if (__GXData->tcsManEnab & (1 << coord)) {
         GXWGFifo.u8 = 0x61;
-        GXWGFifo.u32 = ts[0xB8 / 4];
+        GXWGFifo.u32 = __GXData->suTs0[coord];
         GXWGFifo.u8 = 0x61;
-        GXWGFifo.u32 = ts[0xD8 / 4];
-        M2C_FIELD(gx, u16 *, 0x2) = 0;
+        GXWGFifo.u32 = __GXData->suTs1[coord];
+        __GXData->bpSentNot = 0;
     }
 }
 
@@ -4902,9 +4920,9 @@ u32 fn_802773BC(void) {
     fn_80270D34();
     __cpReg[0x31] = 0x1007;
     __cpReg[0x30] = 0x1007;
-    return __cpReg[0x32] >> 8;
+    return (u32)__cpReg[0x32] >> 8;
 }
-
+#pragma dont_inline reset
 void fn_802773FC(void) {
 
 }
@@ -4964,6 +4982,33 @@ s32 fn_80277694(s32 arg0, s32 arg1) {
     lbl_804960DC = 0;
     fn_80254684(temp_r31);
     return 0;
+}
+
+s32 fn_80277720(void) {
+    extern s32 lbl_804960D0;
+    extern s32 lbl_804960D4;
+    extern s8 lbl_804960DC;
+    s32 fn_80277A54(u32 *);
+    s32 fn_80277CB8(u32 *);
+    s32 enabled;
+    u32 v;
+
+    lbl_804960DC = 0;
+    if (lbl_804960D4 == 0) {
+        enabled = fn_8025465C();
+        fn_80277A54(&v);
+        if (v & 1) {
+            fn_80277CB8(&v);
+            v &= 0x1FFFFFFF;
+            if ((v & 0x1F000000) == 0x1F000000) {
+                lbl_804960D0 = v;
+                lbl_804960D4 = v & 0x7FFF;
+                lbl_804960DC = 1;
+            }
+        }
+        fn_80254684(enabled);
+    }
+    return lbl_804960D4;
 }
 
 volatile u32 __EXIRegs[] : 0xCC006800;
