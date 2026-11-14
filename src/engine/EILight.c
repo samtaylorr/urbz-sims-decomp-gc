@@ -63,17 +63,33 @@ u8 *fn_802EFBA8(self)
     *(EILightVec3 *)(self + 0xA4) = v;
     *(f32 *)(self + 0xB8) = f;
     *(s32 *)(self + 0xBC) = 1;
-    *(u32 *)(self + 0x64) |= 0x80000;
+    M2C_FIELD(self, u32 *, 0x64) |= 0x80000;
     *(s32 *)(self + 0x98) = 0;
     *(s32 *)(self + 0x94) = 0;
-    ((EILightVec3 *)(self + 0xB0))->x = f;
-    ((EILightVec3 *)(self + 0xB0))->y = f;
+    *(f32 *)(self + 0xB0) = f;
+    *(f32 *)(self + 0xB4) = f;
     return self;
 }
 
 void fn_802EFE84(char *self) {
     char *vt = *(char **)self;
     (*(void (**)(char *))(vt + 0x144))(self + *(s16 *)(vt + 0x140));
+}
+
+void fn_802EFEB8(u8 *obj, s32 *out, f32 scale) {
+    extern f32 lbl_803F0DA8[];
+    extern const f32 lbl_803F0DAC[];
+    register EILightVec3 *c = (EILightVec3 *)(obj + 0xA4);
+    EILightVec3 v;
+    f32 s;
+
+    s = scale * lbl_803F0DA8[0] * *(f32 *)(obj + 0xA0);
+    v.y = c->y * s;
+    v.z = c->z * s;
+    v.x = c->x * s;
+    out[0] = v.x > lbl_803F0DAC[0] ? 0xFF : v.x;
+    out[1] = v.y > lbl_803F0DAC[0] ? 0xFF : v.y;
+    out[2] = v.z > lbl_803F0DAC[0] ? 0xFF : v.z;
 }
 
 void fn_802EFF8C(EILightVec3 *out, u8 *obj) {
