@@ -1949,15 +1949,15 @@ s32 fn_80261640(u32 resume) {
     DVDCommandBlock *finished;
     if (lbl_80495EF0) {
         lbl_80495EF8 = resume;
-        lbl_80495EF0 = 0;
+        *(volatile u32 *)&lbl_80495EF0 = 0;
         finished = lbl_80495ED0;
         lbl_80495ED0 = &lbl_80442960;
         finished->state = 10;
         if (finished->callback) {
-            (*(void (*)(s32, DVDCommandBlock *))finished->callback)(-3, finished);
+            ((void (*)(s32, DVDCommandBlock *))finished->callback)(-3, finished);
         }
         if (lbl_80495EF4) {
-            (*lbl_80495EF4)(0, finished);
+            lbl_80495EF4(0, finished);
         }
         fn_802622E0();
         return 1;
@@ -3505,6 +3505,16 @@ void fn_8026EC2C(u8 hiWatermarkClr, u8 loWatermarkClr) {
     gx[4] = __rlwimi(gx[4], hiWatermarkClr, 0, 31, 31);
     gx[4] = __rlwimi(gx[4], loWatermarkClr, 1, 30, 30);
     __cpReg[2] = gx[4];
+}
+
+void fn_8026EC5C(void) {
+    extern s32 lbl_80496094;
+    extern volatile u16 *__cpReg;
+    u8 *fifo = (u8 *)lbl_80496094;
+
+    M2C_FIELD(fifo, u32 *, 0xC) = M2C_FIELD(fifo, u32 *, 0x10) + 0x200;
+    __cpReg[0x14] = M2C_FIELD(fifo, u32 *, 0xC);
+    __cpReg[0x15] = M2C_FIELD(fifo, u32 *, 0xC) >> 16 & 0x3FFF;
 }
 
 extern s32 lbl_80496098;
