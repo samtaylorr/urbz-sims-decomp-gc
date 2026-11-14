@@ -994,6 +994,20 @@ void fn_80256914(void) {
     fn_8025667C();
 }
 
+void fn_80256934(u8 arg0) {
+    s32 fn_8025465C(void);
+    void fn_80254684(s32);
+    s32 enabled;
+
+    enabled = fn_8025465C();
+    if (arg0 > 0x1F) {
+        arg0 = 0x1F;
+    }
+    *(u8 *)0x800030E3 &= ~0x1F;
+    *(u8 *)0x800030E3 |= arg0;
+    fn_80254684(enabled);
+}
+
 s32 fn_80257608(s32 arg0) {
     s32 fn_802572CC(s32, s32);
     return fn_802572CC(arg0, 0);
