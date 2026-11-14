@@ -347,6 +347,32 @@ void fn_80310FF4(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x1B0) = arg1;
 }
 
+f32 fn_80310FFC(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    s32 fn_803119D4(void *, s32);
+    extern f32 lbl_803F22CC[];
+    s32 m;
+    s32 i;
+    s32 k;
+
+    m = fn_803119D4(arg0, arg3);
+    if (arg1 == 0) {
+        if (m & 0xF0000) {
+            return lbl_803F22CC[0];
+        }
+    } else if (arg1 == 1) {
+        if (m & 0xF00000) {
+            return lbl_803F22CC[0];
+        }
+    }
+    i = arg2;
+    if (((s32 *)((char *)arg0 + 0x18C))[arg1] != 0) {
+        i = !i;
+    }
+    k = i + arg1 * 2;
+    return (f32)((s32 *)((char *)arg0 + 0x194))[k] *
+           ((f32 *)(M2C_FIELD(arg0, char **, 0x200) + 0x28))[k];
+}
+
 s32 fn_803110C8(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 fn_803119D4(void *, s32);
     s32 m;
@@ -377,6 +403,28 @@ s32 fn_8031112C(void *arg0, s32 arg1, s32 arg2, f32 thresh) {
     a = fn_80310FFC(arg0, arg1, 1, arg2);
     d = a - fn_803111F0(arg0, arg1, 1, arg2);
     return __builtin_fabsf(d) >= thresh;
+}
+
+f32 fn_803111F0(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
+    s32 fn_803119D4(void *, s32);
+    extern const f32 lbl_803F22D8[];
+    s32 m;
+
+    m = fn_803119D4(arg0, arg3);
+    if (arg1 == 0) {
+        if (m & 0xF0000) {
+            return lbl_803F22D8[0];
+        }
+    } else if (arg1 == 1) {
+        if (m & 0xF00000) {
+            return lbl_803F22D8[0];
+        }
+    }
+    if (((s32 *)((char *)arg0 + 0x18C))[arg1] != 0) {
+        arg2 = !arg2;
+    }
+    return (f32)((s32 (*)[2])((char *)arg0 + 0x194))[arg1][arg2] *
+           ((f32 (*)[2])((char *)M2C_FIELD(arg0, void **, 0x200) + 0x38))[arg1][arg2];
 }
 
 void fn_803112BC(void *arg0) {
@@ -564,7 +612,7 @@ s32 fn_80311990(void *arg0, s32 arg1) {
 
 s32 fn_80311990();
 s32 fn_803112CC(void *arg0, s32 arg1, s32 arg2, s32 arg3);
-void fn_80311404(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+    s32 fn_80311404(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
 s32 fn_80311990(void *arg0, s32 arg1);
 s32 fn_803119D4(arg0, arg1)
     void *arg0;
