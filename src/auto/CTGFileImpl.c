@@ -16,9 +16,10 @@ typedef struct {
     char data[0x104];
 } CTGName;
 
-static inline void CTGName_Init(CTGName *self, const char *src) {
+static inline CTGName *CTGName_Init(CTGName *self, const char *src) {
     fn_800F687C(self, self->data, 0x104);
     fn_800F68F0(self, src, -1);
+    return self;
 }
 void fn_800C3E20(void **self, s32 flags) {
     *self = lbl_8040A890;
@@ -213,8 +214,6 @@ void fn_800C4408(void) {
 }
 
 void **fn_800C440C(void *self, const char *path, s32 write) {
-    extern void fn_800F687C(void *, void *, s32);
-    extern void fn_800F68F0(void *, const char *, s32);
     extern void *fn_800F5248(void *, const void *);
     extern void *fn_800F52EC(void *, s32);
     extern void *fn_802D1FC8(s32);
@@ -225,17 +224,12 @@ void **fn_800C440C(void *self, const char *path, s32 write) {
     extern u8 lbl_803D04FC[];
     extern u8 lbl_803D0508[];
     extern u8 lbl_80495A90;
-    struct {
-        void *a;
-        s32 b;
-        char data[0x104];
-    } name;
+    CTGName name;
     void *f;
     void *s;
     void **obj;
 
-    fn_800F687C(&name, name.data, 0x104);
-    fn_800F68F0(&name, path, -1);
+    CTGName_Init(&name, path);
     f = fn_802D7F48(path, write ? lbl_803D04C8 : lbl_803D04CC);
     if (f == NULL) {
         return NULL;
