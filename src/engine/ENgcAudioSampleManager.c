@@ -15,6 +15,19 @@ typedef struct SampleList {
     s32 count;
 } SampleList;
 
+typedef struct SampleOwner {
+    u8 pad0[0x10];
+    u32 unk10;
+} SampleOwner;
+
+typedef struct SampleEntry {
+    s32 unk0;
+    SampleOwner *owner;
+    struct SampleEntry *next;
+    struct SampleEntry *prev;
+    u32 unk10;
+} SampleEntry;
+
 extern u32 lbl_80494FB8;
 void fn_8033DD9C(void *, u32);
 extern u8 lbl_8045D140[];
