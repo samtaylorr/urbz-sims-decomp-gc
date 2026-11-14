@@ -409,6 +409,25 @@ s32 fn_8030C7BC(void *arg0, s32 arg1, s32 arg2, void *arg3) {
     return id;
 }
 
+void fn_8030C880(void);
+s32 fn_8030CA7C(void *arg0, s32 arg1, s32 arg2, void *arg3) {
+    s32 id;
+    s32 p;
+
+    id = fn_8030AA04(arg0, arg1, arg2, (s32)arg3, (s32)fn_8030C880, 0, 0, 0);
+    if (id != -1) {
+        fn_8030ADA0(arg0, (s32)fn_8030C880, (s32)fn_8030C4B0, (s32)fn_8030C598, 0, fn_8030ACB0(arg0), 0, 0, 0, 0);
+        p = fn_8030ACB0(arg0);
+        M2C_FIELD(p, s32 *, 0x80) = (s32)((u8 *)arg3 + 0x16C);
+        fn_8030AB88(arg0, M2C_FIELD(p, s32 *, 0x88));
+        M2C_FIELD(M2C_FIELD(p, void **, 0x88), u32 *, 0x108) |= 0x2000000;
+        M2C_FIELD(M2C_FIELD(p, void **, 0x88), u32 *, 0x108) |= 0x800;
+        M2C_FIELD(M2C_FIELD(p, void **, 0x88), s32 *, 0x104) = M2C_FIELD(arg3, s32 *, 0x168);
+        return id;
+    }
+    return id;
+}
+
 void fn_8030CB5C(s32 arg0, s32 arg1) {
 
 }
