@@ -75,6 +75,24 @@ void fn_802FF1E0(f32 arg0) {
     M2C_FIELD(M2C_FIELD(lbl_80454A38, void **, 0), void (**)(void *), 0x1C)(lbl_80454A38 + M2C_FIELD(M2C_FIELD(lbl_80454A38, void **, 0), s16 *, 0x18));
 }
 
+void fn_802FF4EC(u8 *self, u8 *src) {
+    typedef struct { s32 a, b, c; } Vec3i;
+    f32 fn_8039AA70(void *, s32);
+    f32 *row0 = (f32 *)(self + 0x10);
+    u8 *src1 = src + 0x10;
+    f32 *row1 = row0 + 4;
+    row0[0] = fn_8039AA70(src, 0);
+    row0[1] = fn_8039AA70(src, 1);
+    row0[2] = fn_8039AA70(src, 2);
+    row0[3] = fn_8039AA70(src, 3);
+    row0[4] = fn_8039AA70(src1, 0);
+    row1[1] = fn_8039AA70(src1, 1);
+    row1[2] = fn_8039AA70(src1, 2);
+    row1[3] = fn_8039AA70(src1, 3);
+    *(Vec3i *)(self + 0x30) = *(Vec3i *)(src + 0x20);
+    row0[11] = *(f32 *)(src + 0x2C);
+}
+
 s32 fn_802FF5CC(void *arg0, u32 arg1) {
     s32 flags = M2C_FIELD(arg0, s32 *, 4);
     if (!(flags & 0x04000000)) {
