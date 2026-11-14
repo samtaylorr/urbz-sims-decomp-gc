@@ -3953,12 +3953,13 @@ void fn_80271670(u8 *a, u32 *b) {
     *b = (gx[0x7C / 4] >> 19) & 7;
 }
 
-void fn_80271690(u32 stage, u32 a, u32 b) {
+void fn_80271690(u32 stage, u8 a, u8 b) {
     extern void *__GXData;
     u32 *gx = __GXData;
+    u32 b32 = b;
 
     gx[0xB8 / 4 + stage] = __rlwimi(gx[0xB8 / 4 + stage], a, 18, 13, 13);
-    gx[0xB8 / 4 + stage] = __rlwimi(gx[0xB8 / 4 + stage], (u8)b, 19, 12, 12);
+    gx[0xB8 / 4 + stage] = __rlwimi(gx[0xB8 / 4 + stage], b32, 19, 12, 12);
     *(volatile u8 *)0xCC008000 = 0x61;
     *(volatile u32 *)0xCC008000 = gx[0xB8 / 4 + stage];
     ((u16 *)gx)[1] = 0;
