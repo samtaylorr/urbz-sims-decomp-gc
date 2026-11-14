@@ -2559,6 +2559,29 @@ u32 fn_80264E40(void **item) {
     return 1;
 }
 
+void fn_802652F4(u32 code) {
+    u8 fn_80265078(u32);
+    u8 *fn_80257270(void);
+    s32 fn_8025762C(s32);
+    u32 val;
+
+    if (code - 0x01230000 == 0x4567) {
+        val = 0xff;
+    } else if (code - 0x01230000 == 0x4568) {
+        val = 0xfe;
+    } else {
+        u8 r;
+        val = code >> 24;
+        r = fn_80265078(code & 0xffffff);
+        if (val >= 6) {
+            val = 6;
+        }
+        val = r + val * 30;
+    }
+    fn_80257270()[0x24] = val;
+    fn_8025762C(1);
+}
+
 u32 fn_80265370(const char *s, u32 n) {
     u32 i;
 
