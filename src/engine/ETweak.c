@@ -483,7 +483,7 @@ void fn_80314938(void *arg0, s32 arg1) {
     s32 *obj;
 
     sub = (s8 *)arg0 + 0x1C;
-    if (*M2C_FIELD(sub, s8 **, 4) != 0) {
+    if (*M2C_FIELD(arg0, s8 **, 0x20) != 0) {
         fn_80364240(sub, 0, 0, 0);
     }
     str = (s8 *)arg0 + 0x18;
@@ -491,15 +491,13 @@ void fn_80314938(void *arg0, s32 arg1) {
         list = (s8 *)arg0 + 0xC;
         fn_802D3E40(str);
         M2C_FIELD(arg0, s32 *, 8) = 0;
-        node = M2C_FIELD(list, void **, 4);
-        while (ETweakNode_Valid(node)) {
-            obj = M2C_FIELD(node, s32 **, 0);
+        for (node = M2C_FIELD(list, void **, 4); ETweakNode_Valid(node); node = next) {
             next = M2C_FIELD(node, void **, 4);
+            obj = M2C_FIELD(node, s32 **, 0);
             if (M2C_FIELD(list, s32 *, 8) != 0 && obj != NULL) {
                 fn_802D39F0(&obj[1], obj[1]);
                 fn_802D20E8(obj);
             }
-            node = next;
         }
         fn_802CB8D4(list);
     }
