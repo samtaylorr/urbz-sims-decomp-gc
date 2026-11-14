@@ -3152,7 +3152,7 @@ void fn_80261344(void) {
     extern u32 lbl_80442920[];
     extern void *lbl_80495ED8;
     extern void (*lbl_80495F24)(void);
-    extern char lbl_80494A34[];
+    extern char lbl_80494A34[8];
     extern char lbl_803F96EC[];
     extern void fn_802660C0(void *, u32, u32, void (*)(u32));
     void fn_802613D8(u32);
