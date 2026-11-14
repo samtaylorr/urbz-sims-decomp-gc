@@ -168,6 +168,17 @@ void fn_8035BF60(void) {
     }
 }
 
+void fn_8035C418(u8 *self) {
+    typedef struct { s32 v[6]; } S18;
+    typedef struct { s32 v[4]; } S10;
+    extern S18 lbl_80493C3C[];
+    extern s32 lbl_80495214;
+
+    *(S18 *)((u8 *)lbl_80493C3C + lbl_80495214 * 0x28) = *(S18 *)(self + 0x9B0);
+    *(S10 *)((u8 *)lbl_80493C3C + 0x18 + lbl_80495214 * 0x28) = *(S10 *)(self + 0x9C8);
+    lbl_80495214++;
+}
+
 void fn_8035C4A8(u8 *self) {
     typedef struct { s32 v[6]; } S18;
     typedef struct { s32 v[4]; } S10;
