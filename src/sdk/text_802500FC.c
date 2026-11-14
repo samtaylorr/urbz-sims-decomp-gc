@@ -3335,14 +3335,13 @@ s32 fn_802658CC(void) {
     s32 fn_80266358(u32 offset, void (*cb)(s32));
     s32 *cmd;
 
-    cmd = &lbl_80442A48[lbl_80495F84 * 5];
-    if (cmd[0] == 1) {
-        lbl_80495F84++;
+    if (lbl_80442A48[lbl_80495F84 * 5] == 1) {
+        cmd = &lbl_80442A48[lbl_80495F84++ * 5];
         fn_80265D98(cmd[1], cmd[2], cmd[3], cmd[4]);
         return 1;
     }
-    if (cmd[0] == 2) {
-        lbl_80495F84++;
+    if (lbl_80442A48[lbl_80495F84 * 5] == 2) {
+        cmd = &lbl_80442A48[lbl_80495F84++ * 5];
         fn_80266358(cmd[3], (void (*)(s32))cmd[4]);
         return 1;
     }
