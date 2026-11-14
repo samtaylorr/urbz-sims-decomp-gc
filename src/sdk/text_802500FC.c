@@ -928,7 +928,8 @@ void fn_8025606C(void) {
     u8 *thread;
     u8 *next;
 
-    for (thread = *(u8 **)0x800000DC; thread != NULL; thread = next) {
+    thread = *(u8 **)0x800000DC;
+    while (thread != NULL) {
         next = *(u8 **)(thread + 0x2FC);
         switch (*(u16 *)(thread + 0x2C8)) {
         case 1:
@@ -938,6 +939,7 @@ void fn_8025606C(void) {
         default:
             break;
         }
+        thread = next;
     }
 }
 
@@ -954,10 +956,13 @@ void fn_802560D4(u32 arg0) {
 
 u32 fn_802564CC(void) {
     extern s32 lbl_80440B90[];
+    u32 code;
     if (lbl_80440B90[0] != 0) {
-        return lbl_80440B90[1] | 0x80000000;
+        code = lbl_80440B90[1] | 0x80000000;
+    } else {
+        code = (__PIRegs[9] & ~7) >> 3;
     }
-    return (*(volatile u32 *)0xCC003024 & ~7) >> 3;
+    return code;
 }
 
 s32 fn_80256504(s32 arg0) {
@@ -1876,11 +1881,57 @@ f32 fn_8025FF6C(f32 *a, f32 *b) {
     diff[2] = a[2] - b[2];
     return fn_8025FBAC(diff);
 }
+
+extern char *lbl_80495EB8;
+extern u32 lbl_80495EBC;
+s32 fn_803781C0(s32 c);
+void fn_8026006C(void) {
+    extern void *lbl_80495EB0;
+    lbl_80495EB0 = (void *)0x80000000;
+    lbl_80495EB4 = M2C_FIELD(lbl_80495EB0, FSTEntry **, 0x38);
+    if (lbl_80495EB4) {
+        lbl_80495EBC = lbl_80495EB4[0].nextEntryOrLength;
+        lbl_80495EB8 = (char *)&lbl_80495EB4[lbl_80495EBC];
+    }
+}
+
+s32 fn_802600A4(char *path, char *string) {
+    while (*string != '\0') {
+        if (fn_803781C0(*path++) != fn_803781C0(*string++)) {
+            return 0;
+        }
+    }
+    if ((*path == '/') || (*path == '\0')) {
+        return 1;
+    }
+    return 0;
+}
+
+s32 fn_80260438(s32 entrynum, DVDFileInfo *fileInfo) {
+    if ((entrynum < 0) || (entrynum >= lbl_80495EBC) || ((!(lbl_80495EB4[entrynum].isDirAndStringOff & 0xFF000000)) ? 0 : 1)) {
+        return 0;
+    }
+    fileInfo->startAddr = lbl_80495EB4[entrynum].parentOrPosition;
+    fileInfo->length = lbl_80495EB4[entrynum].nextEntryOrLength;
+    fileInfo->callback = 0;
+    fileInfo->cb.state = 0;
+    return 1;
+}
+
 #pragma pop
 s32 fn_80260574(void) {
     M2C_UNK fn_802646D0();
     fn_802646D0();
     return 1;
+}
+
+u32 fn_80260598(char *dest, char *src, u32 maxlen) {
+    u32 i = maxlen;
+    while ((i > 0) && (*src != 0)) {
+        *dest++ = *src++;
+        i--;
+    }
+    return maxlen - i;
 }
 
 s32 fn_80260948(char *dirName) {
@@ -3902,12 +3953,12 @@ void fn_80271670(u8 *a, u32 *b) {
     *b = (gx[0x7C / 4] >> 19) & 7;
 }
 
-void fn_80271690(u32 stage, u32 a, u8 b) {
+void fn_80271690(u32 stage, u32 a, u32 b) {
     extern void *__GXData;
     u32 *gx = __GXData;
 
     gx[0xB8 / 4 + stage] = __rlwimi(gx[0xB8 / 4 + stage], a, 18, 13, 13);
-    gx[0xB8 / 4 + stage] = __rlwimi(gx[0xB8 / 4 + stage], b, 19, 12, 12);
+    gx[0xB8 / 4 + stage] = __rlwimi(gx[0xB8 / 4 + stage], (u8)b, 19, 12, 12);
     *(volatile u8 *)0xCC008000 = 0x61;
     *(volatile u32 *)0xCC008000 = gx[0xB8 / 4 + stage];
     ((u16 *)gx)[1] = 0;
@@ -3964,17 +4015,17 @@ void fn_80271794(void) {
 }
 
 void fn_802718FC(u16 left, u16 top, u16 wd, u16 ht) {
-    extern u32 *__GXData;
-    u32 *gx = __GXData;
+    extern void *__GXData;
+    struct { u8 pad[0x1E0]; u32 src; u32 size; } *gx = __GXData;
 
-    gx[0x1E0 / 4] = 0;
-    gx[0x1E0 / 4] = __rlwimi(gx[0x1E0 / 4], left, 0, 22, 31);
-    gx[0x1E0 / 4] = __rlwimi(gx[0x1E0 / 4], top, 10, 12, 21);
-    gx[0x1E0 / 4] = __rlwimi(gx[0x1E0 / 4], 0x49, 24, 0, 7);
-    gx[0x1E4 / 4] = 0;
-    gx[0x1E4 / 4] = __rlwimi(gx[0x1E4 / 4], wd - 1, 0, 22, 31);
-    gx[0x1E4 / 4] = __rlwimi(gx[0x1E4 / 4], ht - 1, 10, 12, 21);
-    gx[0x1E4 / 4] = __rlwimi(gx[0x1E4 / 4], 0x4A, 24, 0, 7);
+    gx->src = 0;
+    gx->src = __rlwimi(gx->src, left, 0, 22, 31);
+    gx->src = __rlwimi(gx->src, top, 10, 12, 21);
+    gx->src = __rlwimi(gx->src, 0x49, 24, 0, 7);
+    gx->size = 0;
+    gx->size = __rlwimi(gx->size, wd - 1, 0, 22, 31);
+    gx->size = __rlwimi(gx->size, ht - 1, 10, 12, 21);
+    gx->size = __rlwimi(gx->size, 0x4A, 24, 0, 7);
 }
 
 void fn_80271978(u16 left, u16 top, u16 wd, u16 ht) {
@@ -4443,14 +4494,10 @@ void fn_8027425C(u32 coord, u8 enable, u32 ss, u32 ts) {
 void fn_802742D8(u32 coord, u32 s_enable, u32 t_enable) {
     extern void *__GXData;
     u32 *gx = __GXData;
-    u32 *ts;
-    u32 reg;
+    u32 *ts = &gx[coord];
 
-    ts = &gx[coord];
-    reg = ts[0xB8 / 4];
-    ts[0xB8 / 4] = __rlwimi(reg, s_enable, 17, 14, 14);
-    reg = ts[0xD8 / 4];
-    ts[0xD8 / 4] = __rlwimi(reg, t_enable, 17, 14, 14);
+    ts[0xB8 / 4] = __rlwimi(ts[0xB8 / 4], s_enable, 17, 14, 14);
+    ts[0xD8 / 4] = __rlwimi(ts[0xD8 / 4], t_enable, 17, 14, 14);
     if (gx[0x594 / 4] & (1 << coord)) {
         GXWGFifo.u8 = 0x61;
         GXWGFifo.u32 = ts[0xB8 / 4];
@@ -4478,27 +4525,22 @@ void fn_8027433C(u32 coord, u32 s_enable, u32 t_enable) {
 
 void fn_802743A0(u32 tmap, u32 tcoord) {
     extern void *__GXData;
-    u32 *ts;
-    u32 *tm;
-    u32 *gx;
+    u32 *gx = __GXData;
     u32 w, h;
     u8 s_bias, t_bias;
 
-    gx = __GXData;
-    tm = &gx[tmap];
-    ts = &gx[tcoord];
-    w = tm[0x514 / 4] & 0x3FF;
-    h = (tm[0x514 / 4] >> 10) & 0x3FF;
-    ts[0xB8 / 4] = __rlwimi(ts[0xB8 / 4], w, 0, 16, 31);
-    ts[0xD8 / 4] = __rlwimi(ts[0xD8 / 4], h, 0, 16, 31);
-    s_bias = (tm[0x534 / 4] & 3) == 1;
-    t_bias = ((tm[0x534 / 4] >> 2) & 3) == 1;
-    ts[0xB8 / 4] = __rlwimi(ts[0xB8 / 4], s_bias, 16, 15, 15);
-    ts[0xD8 / 4] = __rlwimi(ts[0xD8 / 4], t_bias, 16, 15, 15);
+    w = gx[0x514 / 4 + tmap] & 0x3FF;
+    h = (gx[0x514 / 4 + tmap] >> 10) & 0x3FF;
+    gx[0xB8 / 4 + tcoord] = __rlwimi(gx[0xB8 / 4 + tcoord], w, 0, 16, 31);
+    gx[0xD8 / 4 + tcoord] = __rlwimi(gx[0xD8 / 4 + tcoord], h, 0, 16, 31);
+    s_bias = (gx[0x534 / 4 + tmap] & 3) == 1;
+    t_bias = ((gx[0x534 / 4 + tmap] >> 2) & 3) == 1;
+    gx[0xB8 / 4 + tcoord] = __rlwimi(gx[0xB8 / 4 + tcoord], s_bias, 16, 15, 15);
+    gx[0xD8 / 4 + tcoord] = __rlwimi(gx[0xD8 / 4 + tcoord], t_bias, 16, 15, 15);
     GXWGFifo.u8 = 0x61;
-    GXWGFifo.u32 = ts[0xB8 / 4];
+    GXWGFifo.u32 = gx[0xB8 / 4 + tcoord];
     GXWGFifo.u8 = 0x61;
-    GXWGFifo.u32 = ts[0xD8 / 4];
+    GXWGFifo.u32 = gx[0xD8 / 4 + tcoord];
     M2C_FIELD(gx, u16 *, 0x2) = 0;
 }
 
