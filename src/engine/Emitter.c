@@ -391,6 +391,24 @@ void fn_8030C598(void) {
     M2C_FIELD(vt, void (**)(void *, f32), 0x254)((u8 *)lbl_80494ED4 + M2C_FIELD(vt, s16 *, 0x250), lbl_803F2094[0]);
 }
 
+void fn_8030C5D8(void);
+void fn_8030C4B0(void);
+s32 fn_8030C7BC(void *arg0, s32 arg1, s32 arg2, void *arg3) {
+    s32 id;
+    s32 p;
+
+    id = fn_8030AA04(arg0, arg1, arg2, (s32)arg3, (s32)fn_8030C5D8, 0, 0, 0);
+    if (id != -1) {
+        fn_8030ADA0(arg0, (s32)fn_8030C5D8, (s32)fn_8030C4B0, (s32)fn_8030C598, 0, fn_8030ACB0(arg0), 0, 0, 0, 0);
+        p = fn_8030ACB0(arg0);
+        M2C_FIELD(p, s32 *, 0x80) = M2C_FIELD(arg3, s32 *, 0x16C);
+        fn_8030AB88(arg0, M2C_FIELD(p, s32 *, 0x88));
+        M2C_FIELD(M2C_FIELD(p, void **, 0x88), u32 *, 0x108) |= 0x200000;
+        return id;
+    }
+    return id;
+}
+
 void fn_8030CB5C(s32 arg0, s32 arg1) {
 
 }
