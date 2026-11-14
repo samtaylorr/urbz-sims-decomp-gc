@@ -2882,6 +2882,14 @@ void fn_80263CE0(s32 arg0, void *arg1) {
     fn_80259838(&lbl_80495EC8);
 }
 
+void fn_80263D08(DVDCommandBlock *block, u32 offset, u32 length, void *callback) {
+    block->command = 0xD;
+    block->offset = offset;
+    block->length = length;
+    block->callback = callback;
+    fn_80262F24(2, block);
+}
+
 void fn_80264094(void) {
     extern M2C_UNK lbl_80495EC8;
     fn_80259838(&lbl_80495EC8);
@@ -4749,7 +4757,11 @@ void fn_8026F0B0(void) {
 
 void fn_8026F630(void) {
     extern u8 *__GXData;
+    u32 nNrm;
+    u32 nCols;
+    u32 nTex;
     u8 *gx = __GXData;
+    u8 *gx2;
 
     *(volatile u8 *)0xCC008000 = 8;
     *(volatile u8 *)0xCC008000 = 0x50;
@@ -4757,7 +4769,23 @@ void fn_8026F630(void) {
     *(volatile u8 *)0xCC008000 = 8;
     *(volatile u8 *)0xCC008000 = 0x60;
     *(volatile u32 *)0xCC008000 = *(u32 *)(gx + 0x18);
-    fn_8026F0B0();
+
+    if (gx[0x4D5]) {
+        nNrm = 2;
+    } else if (gx[0x4D4]) {
+        nNrm = 1;
+    } else {
+        nNrm = 0;
+    }
+    nCols = 33 - __cntlzw((*(u32 *)(gx + 0x14) >> 13) & 0xF);
+    nCols /= 2;
+    nTex = 33 - __cntlzw(*(u32 *)(__GXData + 0x18) & 0xFFFF);
+    nTex /= 2;
+    gx2 = __GXData;
+    *(volatile u8 *)0xCC008000 = 0x10;
+    *(volatile u32 *)0xCC008000 = 0x1008;
+    *(volatile u32 *)0xCC008000 = nCols | (nNrm << 2) | (nTex << 4);
+    *(u16 *)(gx2 + 2) = 1;
 }
 
 void fn_8026F9C4(GXVtxDescList *list) {
