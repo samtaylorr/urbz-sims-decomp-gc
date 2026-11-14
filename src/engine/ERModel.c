@@ -197,6 +197,20 @@ void fn_8032A490(u8 *self) {
     }
 }
 
+extern f32 fn_802C96D8(f32 (*m)[4]);
+void fn_8032A4D8(u8 *self, f32 (*m)[4], f32 *out) {
+    typedef struct { f32 x, y, z; } V3;
+    V3 t;
+    f32 *c;
+    f32 s = fn_802C96D8(m);
+    c = (f32 *)(self + 0x2c);
+    t.x = c[0] * m[0][0] + c[1] * m[1][0] + c[2] * m[2][0] + m[3][0];
+    t.y = c[0] * m[0][1] + c[1] * m[1][1] + c[2] * m[2][1] + m[3][1];
+    t.z = c[0] * m[0][2] + c[1] * m[1][2] + c[2] * m[2][2] + m[3][2];
+    *(V3 *)out = t;
+    out[3] = *(f32 *)(self + 0x38) * s;
+}
+
 void fn_8032A5B4(u8 *self, s32 arg1) {
     extern void fn_80300104(u8 *, s32);
     s32 i;
