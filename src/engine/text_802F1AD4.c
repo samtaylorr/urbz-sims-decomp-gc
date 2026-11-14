@@ -111,7 +111,7 @@ void fn_802F1C20(void *self, void *stream) {
     u8 b;
     fn_802EFC54(self, stream);
     s = fn_802D34B0(stream, (u8 *)self + 0xC0);
-    Stream_WriteF32(Stream_WriteF32(s, M2C_FIELD(self, f32 *, 0xD8)), M2C_FIELD(self, f32 *, 0xDC));
+    Stream_WriteF32p(Stream_WriteF32p(s, (f32 *)((u8 *)self + 0xD8)), (f32 *)((u8 *)self + 0xDC));
     b = 0;
     if (M2C_FIELD(self, s32 *, 0xE0) != 0) {
         b = 1;
@@ -168,6 +168,30 @@ void fn_802F1DB0(char *self, f32 *pos, f32 *out) {
             *out = lbl_803F0F4C[0];
         }
     }
+}
+
+void fn_802F2378(void *self) {
+    extern const f32 lbl_803F0F70[];
+    extern const f32 lbl_803F0F74[];
+    extern const f32 lbl_803F0F78[];
+    extern void fn_802C5148(void *, void *, f32);
+    extern void fn_802F09B8(void *, void *);
+    struct { Vec3f min; Vec3f max; } box;
+    Vec3f tmp;
+    Vec3f *t = &tmp;
+
+    Vec3f_Set(t, lbl_803F0F70[0], lbl_803F0F70[0], lbl_803F0F70[0]);
+    box.max = *t;
+    box.min = box.max;
+    if (M2C_FIELD(self, s32 *, 0xE0) != 0) {
+        fn_802C5148(&box, (u8 *)self + 0xC0, M2C_FIELD(self, f32 *, 0xDC));
+    } else {
+        Vec3f_Set(t, lbl_803F0F74[0], lbl_803F0F74[0], lbl_803F0F74[0]);
+        box.min = *t;
+        Vec3f_Set(t, lbl_803F0F78[0], lbl_803F0F78[0], lbl_803F0F78[0]);
+        box.max = *t;
+    }
+    fn_802F09B8(self, &box);
 }
 
 void fn_802F2468(s32 arg0, s32 arg1) {
