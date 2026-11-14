@@ -1732,6 +1732,77 @@ BOOL fn_8025B434(OSThread_ *thread) {
     return TRUE;
 }
 
+u32 fn_8025BD24(s32 chan, BOOL exi, BOOL tc, BOOL ext) {
+    volatile u32 *reg = (volatile u32 *)(0xCC006800 + chan * 0x14);
+    u32 cpr;
+    u32 prev;
+
+    prev = cpr = reg[0];
+    cpr &= 0x7F5;
+    if (exi) {
+        cpr |= 2;
+    }
+    if (tc) {
+        cpr |= 8;
+    }
+    if (ext) {
+        cpr |= 0x800;
+    }
+    reg[0] = cpr;
+    return prev;
+}
+
+void *fn_8025BD6C(s32 chan, void *callback) {
+    typedef struct { void *exiCallback; u8 pad4[0x3C]; } EXICtrl;
+    s32 fn_8025465C(void);
+    void fn_80254684(s32);
+    void fn_8025B4A8(s32, EXICtrl *);
+    extern EXICtrl lbl_80441650[];
+    EXICtrl *exi = &lbl_80441650[chan];
+    s32 enabled;
+    void *prev;
+
+    enabled = fn_8025465C();
+    prev = exi->exiCallback;
+    exi->exiCallback = callback;
+    if (chan != 2) {
+        fn_8025B4A8(chan, exi);
+    } else {
+        fn_8025B4A8(0, &lbl_80441650[0]);
+    }
+    fn_80254684(enabled);
+    return prev;
+}
+
+void fn_8025BDE8(void) {
+    typedef struct { u8 pad0[0x20]; s32 idTime; u8 pad24[0x1C]; } EXICtrl;
+    s32 fn_8025BE34(s32);
+    extern EXICtrl lbl_80441650[];
+
+    *(u32 *)0x800030C4 = 0;
+    *(u32 *)0x800030C0 = 0;
+    lbl_80441650[1].idTime = 0;
+    lbl_80441650[0].idTime = 0;
+    fn_8025BE34(0);
+    fn_8025BE34(1);
+}
+
+s32 fn_8025BFA8(s32 chan) {
+    typedef struct { u8 pad0[0x20]; s32 idTime; u8 pad24[0x1C]; } EXICtrl;
+    s32 fn_8025BE34(s32);
+    s32 fn_8025CD48(s32, s32, u32 *);
+    extern EXICtrl lbl_80441650[];
+    EXICtrl *exi = &lbl_80441650[chan];
+    u32 id;
+    s32 result;
+
+    result = fn_8025BE34(chan);
+    if (result && exi->idTime == 0) {
+        result = fn_8025CD48(chan, 0, &id) ? 1 : 0;
+    }
+    return result;
+}
+
 #pragma push
 #pragma scheduling off
 s32 fn_8025C2BC(s32 chan) {
@@ -5526,6 +5597,34 @@ void fn_8027533C(u32 stage, s32 op, u32 bias, u32 scale, u8 clamp, u32 out_reg) 
     gx = __GXData;
     gx[0x170 / 4 + stage] = reg;
     ((u16 *)gx)[1] = 0;
+}
+
+void fn_80275510(s32 stage, u32 sel) {
+    extern u32 *__GXData;
+    u32 *reg = &__GXData[0x1B0 / 4 + (stage >> 1)];
+
+    if (stage & 1) {
+        *reg = __rlwimi(*reg, sel, 14, 13, 17);
+    } else {
+        *reg = __rlwimi(*reg, sel, 4, 23, 27);
+    }
+    *(volatile u8 *)0xCC008000 = 0x61;
+    *(volatile u32 *)0xCC008000 = *reg;
+    ((u16 *)__GXData)[1] = 0;
+}
+
+void fn_8027556C(s32 stage, u32 sel) {
+    extern u32 *__GXData;
+    u32 *reg = &__GXData[0x1B0 / 4 + (stage >> 1)];
+
+    if (stage & 1) {
+        *reg = __rlwimi(*reg, sel, 19, 8, 12);
+    } else {
+        *reg = __rlwimi(*reg, sel, 9, 18, 22);
+    }
+    *(volatile u8 *)0xCC008000 = 0x61;
+    *(volatile u32 *)0xCC008000 = *reg;
+    ((u16 *)__GXData)[1] = 0;
 }
 
 void fn_802755C8(u32 stage, u32 ras_sel, u32 tex_sel) {
