@@ -466,7 +466,7 @@ void fn_80043390(s32 arg0) {
 }
 
 void fn_800433A4(s32 arg0, s32 arg1, s32 arg2) {
-    void fn_8004221C(void *);
+    void fn_8004221C(u8 *, u8 *);
     void fn_80330DEC(void *, s32, s32);
     extern u8 lbl_803F5DA8[];
     u8 *entry = lbl_803F5DA8 + arg0 * 0xC;
@@ -474,7 +474,7 @@ void fn_800433A4(s32 arg0, s32 arg1, s32 arg2) {
     s32 i;
     s32 val;
 
-    fn_8004221C(*(void **)(list + 4));
+    fn_8004221C(*(u8 **)(list + 4), (u8 *)arg1);
     val = *(s32 *)(*(u8 **)(list + 4) + 0x2C);
     for (i = 1; i < *(s32 *)(entry + 4); i++) {
         fn_80330DEC(*(void **)(list + 4 + i * 8), val, 0);
