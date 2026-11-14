@@ -1221,6 +1221,19 @@ BOOL fn_80259B4C(u8 **queue, u8 *thread) {
     return FALSE;
 }
 
+void fn_8025A2C8(u8 val) {
+    u32 fn_80252A64(void);
+    u32 sp;
+    u32 *p;
+    u32 pattern;
+
+    pattern = ((u32)val << 24) | ((u32)val << 16) | ((u32)val << 8) | (u32)val;
+    sp = fn_80252A64();
+    for (p = M2C_FIELD(*(u8 **)0x800000E4, u32 **, 0x308) + 1; p < (u32 *)sp; p++) {
+        *p = pattern;
+    }
+}
+
 void fn_8025A374(s32 index, void *ptr) {
     u8 *thread = *(u8 **)0x800000E4;
 
@@ -2605,6 +2618,18 @@ void fn_802696D0(s16 *arg0, s16 *arg1) {
     *arg0 = lbl_80495FAC;
     *arg1 = lbl_80495FAE;
     fn_80254684();
+}
+
+void fn_80269B04(s16 *x, s16 *y) {
+    u32 hcount, vcount0, vcount;
+
+    vcount = __VIRegs[0x16] & 0x7FF;
+    do {
+        vcount0 = vcount;
+        hcount = __VIRegs[0x17] & 0x7FF;
+        vcount = __VIRegs[0x16] & 0x7FF;
+    } while (vcount0 != vcount);
+    fn_802698E8(hcount, vcount, x, y);
 }
 
 void fn_80269B64(u32 arg0) {
