@@ -339,6 +339,29 @@ s32 fn_8032BB20(u8 *self, s32 name, s32 idx) {
     return 0;
 }
 
+s32 fn_8032BBA8(u8 *self, s32 idx) {
+    extern void fn_80300558(u8 *, s32);
+    extern void fn_8031EA2C(void *);
+    extern const f32 lbl_803F339C[];
+    struct { u8 pad[0xA8]; struct { s32 flag; void *res; } entries[11]; f32 weights[12]; } *p = (void *)self;
+    void *res;
+    s32 i;
+
+    if (p->entries[idx].res == 0) {
+        return 0;
+    }
+    for (i = 0; i < ListCount(self + 0x20); i++) {
+        fn_80300558(*(u8 **)(self + 0x20) + i * 0x18, idx);
+    }
+    if (p->entries[idx].flag != 0) {
+        fn_8031EA2C(p->entries[idx].res);
+    }
+    res = p->entries[idx].res;
+    p->entries[idx].res = 0;
+    p->weights[idx] = lbl_803F339C[0];
+    return (s32)res;
+}
+
 s32 fn_8032BC70(u8 *self, s32 arg1) {
     extern s32 fn_8032BBA8(u8 *, s32);
     struct { u8 pad[0xAC]; struct { s32 key; s32 val; } entries[11]; } *p = (void *)self;
