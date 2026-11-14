@@ -3805,6 +3805,15 @@ void fn_80275690(void) {
 
 }
 
+void fn_80275694(u32 comp0, u8 ref0, u32 op, u32 comp1, u8 ref1) {
+}
+
+void fn_802756D8(u32 op, u32 fmt, u32 bias) {
+}
+
+void fn_80275900(u8 nStages) {
+}
+
 void fn_80275CC8(const f32 *src, volatile f32 *dst) {
     f32 v0, v1, v2, v3, v4, v5;
     v0 = __psq_l(src, 0, 0, 0);
