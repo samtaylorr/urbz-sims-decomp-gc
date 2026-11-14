@@ -2612,9 +2612,9 @@ s32 fn_8025E260(s32 enable) {
 #pragma inline_depth(0)
 void fn_8025E4B8(void) {
     typedef struct { s32 chan; u32 poll; u32 inputBytes; void *input; void *callback; } SIControl;
-    typedef struct { s32 chan; u8 pad[0x1C]; } SIPacket;
+    typedef struct { s32 chan; void *output; u32 outputBytes; void *input; u32 inputBytes; void *callback; u8 pad[8]; } SIPacket;
     extern SIControl lbl_803F9124;
-    extern SIPacket lbl_80441710[];
+    extern SIPacket lbl_80441710[4];
     extern char *lbl_80494A00;
     void OSRegisterVersion(char *);
     __OSInterruptHandler fn_802546A8(s16, __OSInterruptHandler);
@@ -2625,8 +2625,8 @@ void fn_8025E4B8(void) {
     lbl_80441710[0].chan = lbl_80441710[1].chan = lbl_80441710[2].chan = lbl_80441710[3].chan = -1;
     lbl_803F9124.poll = 0;
     fn_8025F710(0);
-    do {
-    } while (__SIRegs[13] & 1);
+    while (__SIRegs[13] & 1)
+        ;
     __SIRegs[13] = 0x80000000;
     fn_802546A8(0x14, (__OSInterruptHandler)fn_8025DF1C);
     fn_80254B48(0x800);
@@ -6064,6 +6064,8 @@ void fn_802710B8(s16 interrupt, void *context) {
     fn_80259838(lbl_804960BC);
 }
 
+#pragma push
+#pragma inline_depth(0)
 void __GXPEInit(void) {
     extern volatile u16 *__peReg;
     void fn_80270FEC(s16, void *);
