@@ -5923,22 +5923,21 @@ void fn_802755C8(u32 stage, u32 ras_sel, u32 tex_sel) {
 }
 
 void fn_80275610(u32 table, u32 red, u32 green, u32 blue, u32 alpha) {
-    extern struct { u16 unk0; u16 bpSentNot; u8 pad4[0x1AC]; u32 tevKsel[8]; } *__GXData;
-    struct { u16 unk0; u16 bpSentNot; u8 pad4[0x1AC]; u32 tevKsel[8]; } *gx = (void *)__GXData;
+    extern struct { u16 unk0; u16 bpSentNot; u8 pad4[0x1AC]; u32 tevKsel[8]; } *const __GXData;
     u32 *Kreg;
 
-    Kreg = &gx->tevKsel[table << 1];
+    Kreg = &__GXData->tevKsel[table << 1];
     *Kreg = __rlwimi(*Kreg, red, 0, 30, 31);
     *Kreg = __rlwimi(*Kreg, green, 2, 28, 29);
     GXWGFifo.u8 = 0x61;
     GXWGFifo.u32 = *Kreg;
 
-    Kreg = &gx->tevKsel[(table << 1) + 1];
+    Kreg = &__GXData->tevKsel[(table << 1) + 1];
     *Kreg = __rlwimi(*Kreg, blue, 0, 30, 31);
     *Kreg = __rlwimi(*Kreg, alpha, 2, 28, 29);
     GXWGFifo.u8 = 0x61;
     GXWGFifo.u32 = *Kreg;
-    gx->bpSentNot = 0;
+    __GXData->bpSentNot = 0;
 }
 
 void fn_80275690(void) {
