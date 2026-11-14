@@ -3975,6 +3975,66 @@ void *fn_8026CE70(u32 id) {
     return __GXData + 0x388 + id * 16;
 }
 #pragma pop
+
+void fn_8026EBFC(u8 hiWatermarkEn, u8 loWatermarkEn);
+void fn_8026EC2C(u8 hiWatermarkClr, u8 loWatermarkClr);
+
+void fn_8026E0F4(void) {
+    extern s32 lbl_80496098;
+    extern s32 lbl_804960A0;
+    extern s32 lbl_804960A8;
+    void fn_802595DC(s32);
+
+    lbl_804960A8++;
+    fn_8026EBFC(0, 1);
+    fn_8026EC2C(1, 0);
+    lbl_804960A0 = 1;
+    fn_802595DC(lbl_80496098);
+}
+
+void fn_8026E144(void) {
+    extern s32 lbl_80496098;
+    extern s32 lbl_804960A0;
+    void fn_80259354(s32);
+
+    fn_80259354(lbl_80496098);
+    lbl_804960A0 = 0;
+    fn_8026EC2C(1, 1);
+    fn_8026EBFC(1, 0);
+}
+
+void fn_8026E188(s16 interrupt, void *context) {
+    extern void *__GXData;
+    extern volatile u16 *__cpReg;
+    extern void (*lbl_804960A4)(void);
+    void fn_80252AAC(void *);
+    void fn_802528A4(void *);
+    u8 ctx[0x2C8];
+    u32 *gx = __GXData;
+
+    gx[2] = __rlwimi(gx[2], 0, 5, 26, 26);
+    __cpReg[1] = gx[2];
+    if (lbl_804960A4 != NULL) {
+        fn_80252AAC(ctx);
+        fn_802528A4(ctx);
+        lbl_804960A4();
+        fn_80252AAC(ctx);
+        fn_802528A4(context);
+    }
+}
+
+void fn_8026E3A8(void *fifo, void *readPtr, void *writePtr);
+void fn_8026E418(void *arg0, s32 arg1, s32 arg2);
+
+void GXInitFifoBase(void *fifo, void *base, u32 size) {
+    M2C_FIELD(fifo, void **, 0x0) = base;
+    M2C_FIELD(fifo, void **, 0x4) = (u8 *)base + size - 4;
+    M2C_FIELD(fifo, u32 *, 0x8) = size;
+    M2C_FIELD(fifo, s32 *, 0x1C) = 0;
+    fn_8026E418(fifo, size - 0x4000, (size >> 1) & ~0x1F);
+    fn_8026E3A8(fifo, base, base);
+}
+
 void fn_8026E418(void *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 0xC) = arg1;
     M2C_FIELD(arg0, s32 *, 0x10) = arg2;
