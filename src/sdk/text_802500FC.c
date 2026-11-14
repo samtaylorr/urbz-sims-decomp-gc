@@ -613,6 +613,8 @@ s32 fn_8025399C(void) {
     return 0;
 }
 
+#pragma push
+#pragma scheduling off
 void fn_802539D4(void *arg0) {
     void fn_802482F8(void *, void *, u32);
     if (0x80000000 <= (u32)*(void **)0x800030F0) {
@@ -621,6 +623,7 @@ void fn_802539D4(void *arg0) {
         *(s32 *)arg0 = 0;
     }
 }
+#pragma pop
 
 #pragma scheduling off
 #pragma peephole off
@@ -5477,29 +5480,31 @@ void fn_80275290(u32 stage, u32 a, u32 b, u32 c, u32 d) {
     ((u16 *)gx)[1] = 0;
 }
 
+#pragma push
+#pragma peephole off
 void fn_802752D4(u32 stage, s32 op, u32 bias, u32 scale, u8 clamp, u32 out_reg) {
     extern u32 *__GXData;
     u32 *gx;
     u32 reg;
 
     reg = __GXData[0x130 / 4 + stage];
-    reg = __rlwimi(reg, op, 18, 13, 13);
+    reg = (reg & ~0x40000) | ((u32)op << 18);
     if (op <= 1) {
-        reg = __rlwimi(reg, scale, 20, 10, 11);
-        reg = __rlwimi(reg, bias, 16, 14, 15);
+        reg = (reg & ~0x300000) | (scale << 20);
+        reg = (reg & ~0x30000) | (bias << 16);
     } else {
-        reg = __rlwimi(reg, (op >> 1) & 3, 20, 10, 11);
-        reg = __rlwimi(reg, 3, 16, 14, 15);
+        reg = (reg & ~0x300000) | ((u32)((op >> 1) & 3) << 20);
+        reg = (reg & ~0x30000) | (3 << 16);
     }
-    reg = __rlwimi(reg, clamp, 19, 12, 12);
-    reg = __rlwimi(reg, out_reg, 22, 8, 9);
+    reg = (reg & ~0x80000) | ((u32)clamp << 19);
+    reg = (reg & ~0xC00000) | (out_reg << 22);
     *(volatile u8 *)0xCC008000 = 0x61;
     *(volatile u32 *)0xCC008000 = reg;
     gx = __GXData;
     gx[0x130 / 4 + stage] = reg;
     ((u16 *)gx)[1] = 0;
 }
-
+#pragma pop
 void fn_8027533C(u32 stage, s32 op, u32 bias, u32 scale, u8 clamp, u32 out_reg) {
     extern u32 *__GXData;
     u32 *gx;
@@ -5520,6 +5525,37 @@ void fn_8027533C(u32 stage, s32 op, u32 bias, u32 scale, u8 clamp, u32 out_reg) 
     *(volatile u32 *)0xCC008000 = reg;
     gx = __GXData;
     gx[0x170 / 4 + stage] = reg;
+    ((u16 *)gx)[1] = 0;
+}
+
+void fn_802755C8(u32 stage, u32 ras_sel, u32 tex_sel) {
+    extern u32 *__GXData;
+    u32 *gx = __GXData;
+    u32 *reg = &gx[0x170 / 4 + stage];
+
+    *reg = __rlwimi(*reg, ras_sel, 0, 30, 31);
+    *reg = __rlwimi(*reg, tex_sel, 2, 28, 29);
+    *(volatile u8 *)0xCC008000 = 0x61;
+    *(volatile u32 *)0xCC008000 = *reg;
+    ((u16 *)gx)[1] = 0;
+}
+
+void fn_80275610(u32 table, u32 red, u32 green, u32 blue, u32 alpha) {
+    extern u32 *__GXData;
+    u32 *gx = __GXData;
+    u32 *reg;
+
+    reg = &gx[0x1B0 / 4 + table * 2];
+    *reg = __rlwimi(*reg, red, 0, 30, 31);
+    *reg = __rlwimi(*reg, green, 2, 28, 29);
+    *(volatile u8 *)0xCC008000 = 0x61;
+    *(volatile u32 *)0xCC008000 = *reg;
+
+    reg = &gx[0x1B0 / 4 + table * 2 + 1];
+    *reg = __rlwimi(*reg, blue, 0, 30, 31);
+    *reg = __rlwimi(*reg, alpha, 2, 28, 29);
+    *(volatile u8 *)0xCC008000 = 0x61;
+    *(volatile u32 *)0xCC008000 = *reg;
     ((u16 *)gx)[1] = 0;
 }
 
