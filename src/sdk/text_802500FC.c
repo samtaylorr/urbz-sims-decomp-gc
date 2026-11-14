@@ -3181,8 +3181,11 @@ s32 fn_80261200(DVDFileInfo *fileInfo) {
         bytes = 0;
         break;
     case 1:
-        bytes = (s32)cb->transferredSize;
-        bytes += cb->currTransferSize - ((volatile u32 *)0xCC006000)[6];
+        {
+            u32 cur = cb->currTransferSize;
+            u32 done = cb->transferredSize;
+            bytes = (s32)(done + (cur - *(volatile u32 *)0xCC006018));
+        }
         break;
     }
     return bytes;
@@ -3702,6 +3705,40 @@ s32 fn_8026387C(DVDCommandBlock *block, void *callback) {
     idle = fn_80262F24(1, block);
     return idle;
 }
+
+#pragma push
+#pragma inline_depth(0)
+s32 fn_80263938(DVDCommandBlock *block) {
+    s32 fn_8025465C();
+    M2C_UNK fn_80254684(s32);
+    M2C_UNK fn_8025974C(M2C_UNK *);
+    void fn_802639D8(s32, void *);
+    extern M2C_UNK lbl_80495EC8;
+    s32 result;
+    s32 enabled;
+    s32 state;
+    s32 retVal;
+    u8 pad[8];
+
+    block->command = 0xA;
+    block->callback = (void *)fn_802639D8;
+    result = fn_80262F24(1, block);
+    if (result == 0) {
+        return -1;
+    }
+    enabled = fn_8025465C();
+    while (1) {
+        state = block->state;
+        if (state == 0 || state == -1 || state == 10) {
+            retVal = block->transferredSize;
+            break;
+        }
+        fn_8025974C(&lbl_80495EC8);
+    }
+    fn_80254684(enabled);
+    return retVal;
+}
+#pragma pop
 
 void fn_802639D8(s32 arg0, void *arg1);
 void fn_802639D8(s32 arg0, void *arg1) {
