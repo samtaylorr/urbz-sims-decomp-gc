@@ -2459,6 +2459,24 @@ u32 fn_8025E934(u32 x, u32 y) {
     return poll;
 }
 
+void fn_8025EC40(void *alarm, void *context) {
+    typedef struct { s32 chan; void *output; u32 outputBytes; void *input; u32 inputBytes; void *callback; u8 pad[8]; } SIPacket;
+    typedef struct { u8 pad[0x28]; } OSAlarm;
+    extern SIPacket lbl_80441710[];
+    extern OSAlarm lbl_80441790[];
+    s32 fn_8025E56C(s32, void *, u32, void *, u32, void *);
+    s32 chan;
+    SIPacket *packet;
+
+    chan = (OSAlarm *)alarm - lbl_80441790;
+    packet = &lbl_80441710[chan];
+    if (packet->chan != -1) {
+        if (fn_8025E56C(packet->chan, packet->output, packet->outputBytes, packet->input, packet->inputBytes, packet->callback)) {
+            packet->chan = -1;
+        }
+    }
+}
+
 void fn_8025F594(void) {
     M2C_UNK fn_8025F148();
     M2C_UNK fn_8025F448();
