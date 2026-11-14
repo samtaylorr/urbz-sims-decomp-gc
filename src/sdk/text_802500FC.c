@@ -3356,6 +3356,11 @@ void fn_80271794(void) {
 }
 
 void fn_80271B58(u32 mode) {
+    extern u32 *__GXData;
+    u32 *gx = __GXData;
+
+    gx[0x1EC / 4] = __rlwimi(gx[0x1EC / 4], mode, 12, 18, 19);
+    gx[0x1FC / 4] = __rlwimi(gx[0x1FC / 4], 0, 12, 18, 19);
 }
 
 void fn_80271B7C(u32 clamp) {
