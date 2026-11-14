@@ -4613,11 +4613,9 @@ void fn_80267924(u8 *tm) {
     vct = (u16)(*(u16 *)(tm + 0x18) / 2);
     borrow = (u16)(*(u16 *)(tm + 0x18) % 2);
     hct = (u16)(borrow ? *(u16 *)(tm + 0x1A) : (u16)0);
-    vct++;
-    hct++;
-    lbl_80442B18[25] = (u16)hct;
+    lbl_80442B18[25] = (u16)(hct + 1);
     lbl_80495FB8 |= 1ull << (63 - 25);
-    lbl_80442B18[24] = (u16)(vct | 0x1000);
+    lbl_80442B18[24] = (u16)((vct + 1) | 0x1000);
     lbl_80495FB8 |= 1ull << (63 - 24);
 }
 
@@ -4636,31 +4634,37 @@ void fn_802679A0(u16 fbSizeX, s32 xfbMode, u16 panPosX, u16 panSizeX, u8 *wordPe
 void fn_80267A38(u8 *tm) {
     extern u16 lbl_80442B18[];
     extern volatile u64 lbl_80495FB8;
+    u16 val;
 
-    lbl_80442B18[11] = (u16)(tm[0xC] | (*(u16 *)(tm + 0x10) << 5));
+    val = (u16)(tm[0xC] | (*(u16 *)(tm + 0x10) << 5));
+    lbl_80442B18[11] = val;
     lbl_80495FB8 |= 1ull << (63 - 11);
-    lbl_80442B18[10] = (u16)(tm[0xE] | (*(u16 *)(tm + 0x14) << 5));
+    val = (u16)(tm[0xE] | (*(u16 *)(tm + 0x14) << 5));
+    lbl_80442B18[10] = val;
     lbl_80495FB8 |= 1ull << (63 - 10);
-    lbl_80442B18[13] = (u16)(tm[0xD] | (*(u16 *)(tm + 0x12) << 5));
+    val = (u16)(tm[0xD] | (*(u16 *)(tm + 0x12) << 5));
+    lbl_80442B18[13] = val;
     lbl_80495FB8 |= 1ull << (63 - 13);
-    lbl_80442B18[12] = (u16)(tm[0xF] | (*(u16 *)(tm + 0x16) << 5));
+    val = (u16)(tm[0xF] | (*(u16 *)(tm + 0x16) << 5));
+    lbl_80442B18[12] = val;
     lbl_80495FB8 |= 1ull << (63 - 12);
 }
 
 void fn_80267AF4(u16 panSizeX, u16 dispSizeX, s32 threeD) {
     extern u16 lbl_80442B18[];
     extern volatile u64 lbl_80495FB8;
+    u16 *regs = lbl_80442B18;
     u32 scale;
 
     panSizeX = (u16)(threeD ? panSizeX * 2 : panSizeX);
     if (panSizeX < dispSizeX) {
         scale = (256 * (u32)panSizeX + (u32)dispSizeX - 1) / (u32)dispSizeX;
-        lbl_80442B18[37] = (u16)(scale | 0x1000);
+        regs[37] = (u16)(scale | 0x1000);
         lbl_80495FB8 |= 1ull << (63 - 37);
-        lbl_80442B18[56] = (u16)panSizeX;
+        regs[56] = (u16)panSizeX;
         lbl_80495FB8 |= 1ull << (63 - 56);
     } else {
-        lbl_80442B18[37] = 0x100;
+        regs[37] = 0x100;
         lbl_80495FB8 |= 1ull << (63 - 37);
     }
 }
