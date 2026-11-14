@@ -154,16 +154,14 @@ void fn_8001E034(void *arg0, s32 arg1) {
 f32 fn_8001E06C(void *arg0) {
     s32 total;
 
-    if (M2C_FIELD(arg0, s32 *, 0xA8) == 1) {
-        total = M2C_FIELD(arg0, s32 *, 0xB0);
-        if (total == 0) {
-            goto none;
-        }
-        return (f32)M2C_FIELD(arg0, s32 *, 0xAC) / (f32)total;
+    if (M2C_FIELD(arg0, s32 *, 0xA8) != 1) {
+        return 0.0f;
     }
-    return 0.0f;
-none:
-    return 1.0f;
+    total = M2C_FIELD(arg0, s32 *, 0xB0);
+    if (total == 0) {
+        return 1.0f;
+    }
+    return (f32)M2C_FIELD(arg0, s32 *, 0xAC) / (f32)total;
 }
 
 void fn_8001E210(void *arg0, s32 arg1) {
