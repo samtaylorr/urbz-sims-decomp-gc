@@ -32,12 +32,6 @@ static inline s32 EGraphics_ToBool(s32 x) {
 
 typedef struct { Vec3f min; Vec3f max; } EGBox;
 
-static inline Vec3f Vec3f_Make(f32 s) {
-    Vec3f t;
-    Vec3f_Splat(&t, s);
-    return t;
-}
-
 static inline void EGBox_Init(EGBox *b, f32 c) {
     Vec3f t = { c, c, c };
     b->max = t;
@@ -810,13 +804,13 @@ extern const f32 lbl_803F0CF4[];
 
 void fn_802EF220(void *arg0) {
     EGBox box;
-    f32 lo;
-    f32 hi;
+    register f32 lo asm("fr13") = lbl_803F0CF0[0];
+    register Vec3f *p asm("r9");
+    register f32 hi asm("fr0");
     EGBox_Init(&box, lbl_803F0CEC[0]);
-    lo = lbl_803F0CF0[0];
     {
         Vec3f t;
-        Vec3f *p = &t;
+        p = &t;
         hi = lbl_803F0CF4[0];
         box.min = *Vec3f_Splat(p, lo);
         box.max = *Vec3f_Splat(p, hi);
