@@ -3794,8 +3794,57 @@ void fn_802750DC(u32 tev_stage, u32 ind_stage, u32 matrix_sel) {
     fn_80274940(tev_stage, ind_stage, 0, 7, matrix_sel, 0, 0, 0, 0, 0);
 }
 
+void fn_80275120(u32 tev_stage) {
+    fn_80274940(tev_stage, 0, 0, 0, 0, 6, 6, 1, 0, 0);
+}
+
 void fn_80275168(void) {
 
+}
+
+void __GXSetIndirectMask(u32 mask) {
+    extern void *__GXData;
+    u8 *gx = __GXData;
+
+    M2C_FIELD(gx, u32 *, 0x124) = __rlwimi(M2C_FIELD(gx, u32 *, 0x124), mask, 0, 24, 31);
+    GXWGFifo.u8 = 0x61;
+    GXWGFifo.u32 = M2C_FIELD(gx, u32 *, 0x124);
+    M2C_FIELD(gx, u16 *, 0x2) = 0;
+}
+
+void __GXFlushTextureState(void) {
+    extern u8 *__GXData;
+    GXWGFifo.u8 = 0x61;
+    GXWGFifo.u32 = *(u32 *)(__GXData + 0x124);
+    *(u16 *)(__GXData + 2) = 0;
+}
+
+void fn_802751C0(u32 id, u32 sel) {
+    extern void *__GXData;
+    extern u32 lbl_803FB248[4][5];
+    u8 *gx = __GXData;
+    u32 *p0;
+    u32 *p1;
+    u32 *regs;
+    u32 reg;
+
+    if (id == 0) {
+        p0 = &lbl_803FB248[0][sel];
+        p1 = &lbl_803FB248[2][sel];
+    } else {
+        p0 = &lbl_803FB248[1][sel];
+        p1 = &lbl_803FB248[3][sel];
+    }
+    regs = (u32 *)(gx + id * 4);
+    reg = (regs[0x130 / 4] & 0xFF000000) | (*p0 & 0x00FFFFFF);
+    GXWGFifo.u8 = 0x61;
+    GXWGFifo.u32 = reg;
+    regs[0x130 / 4] = reg;
+    reg = (regs[0x170 / 4] & 0xFF00000F) | (*p1 & 0x00FFFFF0);
+    GXWGFifo.u8 = 0x61;
+    GXWGFifo.u32 = reg;
+    regs[0x170 / 4] = reg;
+    M2C_FIELD(gx, u16 *, 0x2) = 0;
 }
 
 void fn_80275690(void) {
