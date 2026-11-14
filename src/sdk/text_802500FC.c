@@ -18,6 +18,21 @@ typedef struct DVDCommandBlock {
 
 extern DVDCommandBlock *lbl_80495ED0;
 
+typedef struct OSMutex_ {
+    s32 queue[2];
+    struct OSThread_ *thread;
+    s32 count;
+    struct OSMutex_ *next;
+    struct OSMutex_ *prev;
+} OSMutex_;
+
+typedef struct OSThread_ {
+    u8 pad[0x2F0];
+    OSMutex_ *mutex;
+    OSMutex_ *head;
+    OSMutex_ *tail;
+} OSThread_;
+
 volatile u32 __SIRegs[] : 0xCC006400;
 
 #pragma push
@@ -3824,34 +3839,32 @@ void __GXFlushTextureState(void) {
     *(u16 *)(__GXData + 2) = 0;
 }
 
-void fn_802751C0(s32 id, u32 sel) {
+void fn_802751C0(s32 id, u32 mode) {
     extern void *__GXData;
-    extern u32 lbl_803FB248[];
-    u32 *tbl = lbl_803FB248;
-    u8 *gx;
-    u32 *p0;
-    u32 *p1;
-    u32 *regs;
-    u32 reg;
+    extern u32 lbl_803FB248[4][5];
+    u8 *gx = __GXData;
+    u32 *ctmp;
+    u32 *atmp;
+    u32 tevReg;
 
     if (id == 0) {
-        p0 = &tbl[sel];
-        p1 = &tbl[sel + 10];
+        ctmp = lbl_803FB248[0] + mode;
+        atmp = lbl_803FB248[2] + mode;
     } else {
-        p0 = &tbl[sel + 5];
-        p1 = &tbl[sel + 15];
+        ctmp = lbl_803FB248[1] + mode;
+        atmp = lbl_803FB248[3] + mode;
     }
-    gx = __GXData;
-    regs = (u32 *)(gx + id * 4);
-    reg = __rlwimi(regs[0x130 / 4] & 0xFF000000, *p0, 0, 8, 31);
+    tevReg = ((u32 *)(gx + 0x130))[id];
+    tevReg = (*ctmp & ~0xFF000000) | (tevReg & 0xFF000000);
     GXWGFifo.u8 = 0x61;
-    GXWGFifo.u32 = reg;
-    regs[0x130 / 4] = reg;
-    reg = __rlwimi(regs[0x170 / 4] & 0xFF00000F, *p1, 0, 8, 27);
+    GXWGFifo.u32 = tevReg;
+    ((u32 *)(gx + 0x130))[id] = tevReg;
+    tevReg = ((u32 *)(gx + 0x170))[id];
+    tevReg = (*atmp & ~0xFF00000F) | (tevReg & 0xFF00000F);
     GXWGFifo.u8 = 0x61;
-    GXWGFifo.u32 = reg;
-    regs[0x170 / 4] = reg;
-    *(u16 *)(gx + 2) = 0;
+    GXWGFifo.u32 = tevReg;
+    ((u32 *)(gx + 0x170))[id] = tevReg;
+    M2C_FIELD(gx, u16 *, 0x2) = 0;
 }
 
 void fn_80275690(void) {
@@ -4042,10 +4055,10 @@ void fn_80276210(u32 *left, u32 *top, u32 *wd, u32 *ht) {
     extern void *__GXData;
     u32 tp, lf, bm, rt;
 
-    tp = M2C_FIELD(__GXData, u32 *, 0xF8) & 0x7FF;
     lf = (M2C_FIELD(__GXData, u32 *, 0xF8) >> 12) & 0x7FF;
-    bm = M2C_FIELD(__GXData, u32 *, 0xFC) & 0x7FF;
+    tp = M2C_FIELD(__GXData, u32 *, 0xF8) & 0x7FF;
     rt = (M2C_FIELD(__GXData, u32 *, 0xFC) >> 12) & 0x7FF;
+    bm = M2C_FIELD(__GXData, u32 *, 0xFC) & 0x7FF;
     *left = lf - 0x156;
     *top = tp - 0x156;
     *wd = rt - lf + 1;
