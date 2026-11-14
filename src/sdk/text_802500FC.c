@@ -1427,6 +1427,16 @@ s32 fn_80258794(void *thread) {
     return priority;
 }
 
+void *fn_802587D0(void *thread, s32 priority);
+void fn_80258A08(void *thread, s32 priority) {
+    do {
+        if (M2C_FIELD(thread, s32 *, 0x2cc) > 0 || M2C_FIELD(thread, s32 *, 0x2d0) <= priority) {
+            break;
+        }
+        thread = fn_802587D0(thread, priority);
+    } while (thread != NULL);
+}
+
 void fn_80258C80(void) {
     M2C_UNK fn_80258A58(M2C_UNK);
     extern s32 lbl_80495E6C;
@@ -4521,6 +4531,32 @@ s32 fn_8026EDF8(void) {
     temp_r3 = lbl_804960A8;
     lbl_804960A8 = 0;
     return temp_r3;
+}
+
+void fn_8026F0B0(void) {
+    extern u8 *__GXData;
+    u32 nNrm;
+    u32 nCols;
+    u32 nTex;
+    u8 *gx = __GXData;
+    u8 *gx2;
+
+    if (gx[0x4D5]) {
+        nNrm = 2;
+    } else if (gx[0x4D4]) {
+        nNrm = 1;
+    } else {
+        nNrm = 0;
+    }
+    gx2 = __GXData;
+    nCols = 33 - __cntlzw((*(u32 *)(gx + 0x14) >> 13) & 0xF);
+    nCols /= 2;
+    nTex = 33 - __cntlzw(*(u32 *)(gx2 + 0x18) & 0xFFFF);
+    nTex /= 2;
+    *(volatile u8 *)0xCC008000 = 0x10;
+    *(volatile u32 *)0xCC008000 = 0x1008;
+    *(volatile u32 *)0xCC008000 = nCols | (nNrm << 2) | (nTex << 4);
+    *(u16 *)(gx2 + 2) = 1;
 }
 
 void fn_8026F630(void) {
