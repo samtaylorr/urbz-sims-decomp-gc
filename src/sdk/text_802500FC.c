@@ -4660,13 +4660,11 @@ void fn_80267924(u8 *tm) {
     extern u16 lbl_80442B18[];
     extern volatile u32 lbl_80495FB8;
     extern volatile u32 lbl_80495FBC;
-    u16 vct, hct, borrow;
+    u16 vct;
     u32 hi, lo;
 
     vct = (u16)(*(u16 *)(tm + 0x18) / 2);
-    borrow = (u16)(*(u16 *)(tm + 0x18) % 2);
-    hct = (u16)(borrow ? *(u16 *)(tm + 0x1A) : (u16)0);
-    lbl_80442B18[25] = (u16)(hct + 1);
+    lbl_80442B18[25] = (u16)(((u16)(*(u16 *)(tm + 0x18) % 2) ? *(u16 *)(tm + 0x1A) : 0) + 1);
     hi = lbl_80495FB8; lo = lbl_80495FBC;
     lbl_80495FBC = lo; lbl_80495FB8 = hi | 0x40;
     lbl_80442B18[24] = (u16)((vct + 1) | 0x1000);
@@ -4690,20 +4688,20 @@ void fn_80267A38(u8 *tm) {
     extern u16 lbl_80442B18[];
     extern volatile u32 lbl_80495FB8;
     extern volatile u32 lbl_80495FBC;
-    u32 hi, lo;
+    u64 m;
 
     lbl_80442B18[11] = (u16)(tm[0xC] | (*(u16 *)(tm + 0x10) << 5));
-    hi = lbl_80495FB8; lo = lbl_80495FBC;
-    lbl_80495FBC = lo; lbl_80495FB8 = hi | 0x100000;
+    m = ((u64)lbl_80495FB8 << 32 | lbl_80495FBC) | (1ull << (63 - 11));
+    lbl_80495FBC = (u32)m; lbl_80495FB8 = (u32)(m >> 32);
     lbl_80442B18[10] = (u16)(tm[0xE] | (*(u16 *)(tm + 0x14) << 5));
-    hi = lbl_80495FB8; lo = lbl_80495FBC;
-    lbl_80495FBC = lo; lbl_80495FB8 = hi | 0x200000;
+    m = ((u64)lbl_80495FB8 << 32 | lbl_80495FBC) | (1ull << (63 - 10));
+    lbl_80495FBC = (u32)m; lbl_80495FB8 = (u32)(m >> 32);
     lbl_80442B18[13] = (u16)(tm[0xD] | (*(u16 *)(tm + 0x12) << 5));
-    hi = lbl_80495FB8; lo = lbl_80495FBC;
-    lbl_80495FBC = lo; lbl_80495FB8 = hi | 0x40000;
+    m = ((u64)lbl_80495FB8 << 32 | lbl_80495FBC) | (1ull << (63 - 13));
+    lbl_80495FBC = (u32)m; lbl_80495FB8 = (u32)(m >> 32);
     lbl_80442B18[12] = (u16)(tm[0xF] | (*(u16 *)(tm + 0x16) << 5));
-    hi = lbl_80495FB8; lo = lbl_80495FBC;
-    lbl_80495FBC = lo; lbl_80495FB8 = hi | 0x80000;
+    m = ((u64)lbl_80495FB8 << 32 | lbl_80495FBC) | (1ull << (63 - 12));
+    lbl_80495FBC = (u32)m; lbl_80495FB8 = (u32)(m >> 32);
 }
 
 void fn_80267AF4(u16 panSizeX, u16 dispSizeX, s32 threeD) {
@@ -4731,7 +4729,7 @@ void fn_80267B90(u32 bufAddr, u16 panPosX, u16 panPosY, u8 wordPerLine, s32 xfbM
 
     xoffInWords = (u32)panPosX / 16;
     bytesPerLine = (u32)wordPerLine * 32;
-    *tfbb = bufAddr + xoffInWords * 32 + (u32)panPosY * bytesPerLine;
+    *tfbb = bufAddr + xoffInWords * 32 + bytesPerLine * (u32)panPosY;
     *bfbb = (xfbMode == 0) ? *tfbb : (*tfbb + bytesPerLine);
     if (dispPosY % 2 == 1) {
         tmp = *tfbb;
