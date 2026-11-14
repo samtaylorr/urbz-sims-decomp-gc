@@ -117,6 +117,39 @@ void fn_802786B8(s32 *arg0, s32 arg1, s32 arg2, s32 arg3) {
     }
 }
 
+void fn_8027887C(s32 *a, s32 *b) {
+    extern u8 *lbl_804960E8;
+    extern s32 fn_802B70DC(void *);
+    extern s32 fn_802B72D4(void *);
+    void *obj;
+    if (lbl_804960E8 == NULL) {
+        return;
+    }
+    obj = M2C_FIELD(*M2C_FIELD(lbl_804960E8, void ***, 0x122C), void **, 0x58);
+    if (obj != NULL) {
+        s32 empty = 0;
+        if (fn_802B70DC(obj) == 0x12) {
+            empty = fn_802B72D4(obj) == 0;
+        }
+        if (empty) {
+            void *p = M2C_FIELD(M2C_FIELD(*M2C_FIELD(lbl_804960E8, void ***, 0x122C), void **, 0x58), void **, 0x50);
+            if (a != NULL) {
+                *a = M2C_FIELD(M2C_FIELD(p, void **, 8), s32 *, 0x1C);
+            }
+            if (b != NULL) {
+                *b = M2C_FIELD(M2C_FIELD(p, void **, 8), s32 *, 0x20);
+            }
+            return;
+        }
+    }
+    if (a != NULL) {
+        *a = 0;
+    }
+    if (b != NULL) {
+        *b = 0;
+    }
+}
+
 void fn_80278950(void) {
     M2C_UNK fn_802A2990(s32);
     extern s32 lbl_804960E8;
@@ -125,6 +158,32 @@ void fn_80278950(void) {
 
 s32 fn_80278974(void) {
     return 1;
+}
+
+void fn_8027897C(char *arg0) {
+    extern void fn_802BE53C(u16 **, char *);
+    extern void fn_802A5EE0(s32, u16 **, u16 **);
+    extern s32 lbl_804960EC;
+    extern s32 lbl_804960F4;
+    extern struct { void *unk0; void (*free)(void *); } *lbl_80494DA0;
+    u16 *name[2];
+    u16 *copy[2];
+    u16 *str[2];
+    u16 *p;
+
+    fn_802BE53C(name, arg0);
+    lbl_804960EC = 0;
+    copy[0] = name[0];
+    (*name[0])++;
+    fn_802A5EE0(lbl_804960F4, (fn_802BE53C(str, arg0), str), copy);
+    p = str[0];
+    if (--*p == 0) {
+        lbl_80494DA0->free(p);
+    }
+    p = name[0];
+    if (--*p == 0) {
+        lbl_80494DA0->free(p);
+    }
 }
 
 s32 fn_80278A40(s32 arg0, s32 arg1) {
