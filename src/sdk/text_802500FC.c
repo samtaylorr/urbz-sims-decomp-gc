@@ -1453,6 +1453,33 @@ void fn_80258CB0(void) {
     fn_80254684(temp_r31);
 }
 
+void fn_802592B4(void *thread) {
+    void fn_80259838(void *);
+    s32 enabled;
+    void *next;
+    void *prev;
+
+    enabled = fn_8025465C();
+    M2C_FIELD(thread, u16 *, 0x2ca) |= 1;
+    if (M2C_FIELD(thread, u16 *, 0x2c8) == 8) {
+        next = M2C_FIELD(thread, void **, 0x2fc);
+        prev = M2C_FIELD(thread, void **, 0x300);
+        if (next == NULL) {
+            *(void **)0x800000E0 = prev;
+        } else {
+            M2C_FIELD(next, void **, 0x300) = prev;
+        }
+        if (prev == NULL) {
+            *(void **)0x800000DC = next;
+        } else {
+            M2C_FIELD(prev, void **, 0x2fc) = next;
+        }
+        M2C_FIELD(thread, u16 *, 0x2c8) = 0;
+    }
+    fn_80259838((u8 *)thread + 0x2e8);
+    fn_80254684(enabled);
+}
+
 s32 fn_802599FC(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x2D4);
 }
@@ -5781,13 +5808,14 @@ void fn_8027556C(s32 stage, u32 sel) {
 
 void fn_802755C8(u32 stage, u32 ras_sel, u32 tex_sel) {
     extern struct { u16 unk0; u16 bpSentNot; u8 pad4[0x16C]; u32 tevSwap[16]; } *__GXData;
-    u32 *reg = &__GXData->tevSwap[stage];
+    struct { u16 unk0; u16 bpSentNot; u8 pad4[0x16C]; u32 tevSwap[16]; } *gx = (void *)__GXData;
+    u32 *reg = &gx->tevSwap[stage];
 
     *reg = __rlwimi(*reg, ras_sel, 0, 30, 31);
     *reg = __rlwimi(*reg, tex_sel, 2, 28, 29);
     *(volatile u8 *)0xCC008000 = 0x61;
     *(volatile u32 *)0xCC008000 = *reg;
-    __GXData->bpSentNot = 0;
+    gx->bpSentNot = 0;
 }
 
 void fn_80275610(u32 table, u32 red, u32 green, u32 blue, u32 alpha) {
