@@ -1326,6 +1326,24 @@ typedef struct SramControlBlock {
     s32 locked;
 } SramControlBlock;
 
+static inline u8 *LockSramHeader(void) {
+    extern SramControlBlock lbl_80440C00;
+    SramControlBlock *scb = &lbl_80440C00;
+    s32 enabled;
+    s32 *locked;
+
+    enabled = fn_8025465C();
+    locked = &scb->locked;
+    if (*locked != 0) {
+        fn_80254684(enabled);
+        scb = NULL;
+    } else {
+        scb->enabled = enabled;
+        *locked = 1;
+    }
+    return scb->sram;
+}
+
 void fn_80257894(s32 arg0) {
     extern u32 lbl_80440C00[];
     void fn_8025C4A4(void);
@@ -1348,10 +1366,8 @@ void fn_80257CB4(u32 mode) {
     s32 *locked;
     u8 pad[8];
 
+    mode = (mode > 2) ? 0 : mode;
     scb = &lbl_80440C00;
-    if (mode > 2) {
-        mode = 0;
-    }
     enabled = fn_8025465C();
     locked = &scb->locked;
     if (*locked != 0) {
