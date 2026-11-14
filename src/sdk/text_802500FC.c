@@ -4242,8 +4242,7 @@ s32 fn_8026B760(void) {
     extern u32 lbl_80495FF0;
     extern s32 lbl_80494AB4;
     extern s32 fn_8025DAB8(void);
-    s32 sync = lbl_80495FF0 == 0 && lbl_80494AB4 == 0x20 && !fn_8025DAB8();
-    return sync;
+    return lbl_80495FF0 == 0 && lbl_80494AB4 == 0x20 && !fn_8025DAB8();
 }
 
 void fn_8026B7C4(u32 mode) {
