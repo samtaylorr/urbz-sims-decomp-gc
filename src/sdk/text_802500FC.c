@@ -4658,18 +4658,17 @@ void fn_802678D0(void) {
 
 void fn_80267924(u8 *tm) {
     extern u16 lbl_80442B18[];
-    extern volatile u32 lbl_80495FB8;
-    extern volatile u32 lbl_80495FBC;
-    u16 vct;
-    u32 hi, lo;
+    extern volatile u64 lbl_80495FB8;
+    u16 vct, borrow;
+    u32 hct;
 
     vct = (u16)(*(u16 *)(tm + 0x18) / 2);
-    lbl_80442B18[25] = (u16)(((u16)(*(u16 *)(tm + 0x18) % 2) ? *(u16 *)(tm + 0x1A) : 0) + 1);
-    hi = lbl_80495FB8; lo = lbl_80495FBC;
-    lbl_80495FBC = lo; lbl_80495FB8 = hi | 0x40;
+    borrow = (u16)(*(u16 *)(tm + 0x18) % 2);
+    hct = (borrow ? *(u16 *)(tm + 0x1A) : 0) + 1;
+    lbl_80442B18[25] = hct;
+    lbl_80495FB8 |= 1ull << (63 - 25);
     lbl_80442B18[24] = (u16)((vct + 1) | 0x1000);
-    hi = lbl_80495FB8; lo = lbl_80495FBC;
-    lbl_80495FBC = lo; lbl_80495FB8 = hi | 0x80;
+    lbl_80495FB8 |= 1ull << (63 - 24);
 }
 
 void fn_802679A0(u16 fbSizeX, s32 xfbMode, u16 panPosX, u16 panSizeX, u8 *wordPerLine, u8 *std, u8 *wpl, u8 *xof) {
@@ -4740,23 +4739,26 @@ void fn_80267B90(u32 bufAddr, u16 panPosX, u16 panPosY, u8 wordPerLine, s32 xfbM
     *bfbb = *bfbb & 0x3FFFFFFF;
 }
 
+#pragma push
+#pragma optimization_level 1
 void fn_80268150(void) {
     extern u32 lbl_80495FE4;
     extern char lbl_803F9DE8[];
     void fn_8025302C(char *, ...);
+    register char *str = lbl_803F9DE8;
 
     if (lbl_80495FE4 == 0) {
         lbl_80495FE4 = 1;
-        fn_8025302C(lbl_803F9DE8 + 0x260);
-        fn_8025302C(lbl_803F9DE8 + 0x28C);
-        fn_8025302C(lbl_803F9DE8 + 0x2B8);
-        fn_8025302C(lbl_803F9DE8 + 0x2E4);
-        fn_8025302C(lbl_803F9DE8 + 0x310);
-        fn_8025302C(lbl_803F9DE8 + 0x33C);
-        fn_8025302C(lbl_803F9DE8 + 0x260);
+        fn_8025302C(str + 0x260);
+        fn_8025302C(str + 0x28C);
+        fn_8025302C(str + 0x2B8);
+        fn_8025302C(str + 0x2E4);
+        fn_8025302C(str + 0x310);
+        fn_8025302C(str + 0x33C);
+        fn_8025302C(str + 0x260);
     }
 }
-
+#pragma pop
 void fn_80268ED0(void *callback) {
     s32 fn_8025465C(void);
     void fn_80254684(s32);
