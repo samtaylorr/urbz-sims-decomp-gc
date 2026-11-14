@@ -191,8 +191,8 @@ void fn_802E0934(void *self, u32 count, char **list) {
         }
         fn_80248784(list[i], str.data);
     }
-    M2C_FIELD(self, char ***, 0x34C) = list;
     M2C_FIELD(self, u32 *, 0x348) = count;
+    M2C_FIELD(self, char ***, 0x34C) = list;
 }
 
 void *fn_802E0A18(void *self, void *key) {
