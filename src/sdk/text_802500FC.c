@@ -1344,31 +1344,29 @@ void fn_80257CB4(u32 mode) {
     extern SramControlBlock lbl_80440C00;
     s32 fn_802572CC(s32, s32);
     SramControlBlock *scb;
-    u8 *sram;
     s32 enabled;
     s32 *locked;
     u8 pad[8];
 
-    scb = &lbl_80440C00;
     if (mode > 2) {
         mode = 0;
     }
+    scb = &lbl_80440C00;
     enabled = fn_8025465C();
     locked = &scb->locked;
     if (*locked != 0) {
         fn_80254684(enabled);
-        sram = NULL;
+        scb = NULL;
     } else {
         scb->enabled = enabled;
         *locked = 1;
-        sram = scb->sram;
     }
-    if (mode == (sram[0x13] & 3)) {
+    if (mode == (scb->sram[0x13] & 3)) {
         fn_802572CC(0, 0);
         return;
     }
-    sram[0x13] &= ~3;
-    sram[0x13] |= mode;
+    scb->sram[0x13] &= ~3;
+    scb->sram[0x13] |= mode;
     fn_802572CC(1, 0);
 }
 
@@ -1426,7 +1424,6 @@ u32 fn_80257E64(void) {
     extern SramControlBlock lbl_80440C00;
     s32 fn_802572CC(s32, s32);
     SramControlBlock *scb;
-    u8 *sram;
     s32 enabled;
     s32 *locked;
     u8 flags;
@@ -1437,13 +1434,12 @@ u32 fn_80257E64(void) {
     locked = &scb->locked;
     if (*locked != 0) {
         fn_80254684(enabled);
-        sram = NULL;
+        scb = NULL;
     } else {
         scb->enabled = enabled;
         *locked = 1;
-        sram = scb->sram;
     }
-    flags = sram[0x11];
+    flags = scb->sram[0x11];
     fn_802572CC(0, 0);
     return flags & 0x80;
 }
@@ -3636,15 +3632,17 @@ s32 fn_802658CC(void) {
     extern s32 lbl_80495F84;
     void fn_80265D98(s32, s32, s32, s32);
     s32 fn_80266358(u32 offset, void (*cb)(s32));
-    s32 n = lbl_80495F84 * 5;
+    s32 *cmd;
 
-    if (lbl_80442A48[n] == 1) {
-        ++lbl_80495F84;
-        fn_80265D98(lbl_80442A48[n + 1], lbl_80442A48[n + 2], lbl_80442A48[n + 3], lbl_80442A48[n + 4]);
+    cmd = &lbl_80442A48[lbl_80495F84 * 5];
+    if (cmd[0] == 1) {
+        lbl_80495F84++;
+        fn_80265D98(cmd[1], cmd[2], cmd[3], cmd[4]);
         return 1;
-    } else if (lbl_80442A48[n] == 2) {
-        ++lbl_80495F84;
-        fn_80266358(lbl_80442A48[n + 3], (void (*)(s32))lbl_80442A48[n + 4]);
+    }
+    if (cmd[0] == 2) {
+        lbl_80495F84++;
+        fn_80266358(cmd[3], (void (*)(s32))cmd[4]);
         return 1;
     }
     return 0;
@@ -6629,26 +6627,29 @@ void fn_802753A4(u32 id, u8 *color) {
 #pragma scheduling off
 void fn_80275420(u32 id, s16 *color) {
     extern void *__GXData;
+    s16 r = color[0];
+    s16 a = color[3];
+    s16 b = color[2];
+    s16 g = color[1];
     u32 regRA;
     u32 regBG;
-    u32 reg;
 
     regRA = 0;
-    regRA = __rlwimi(regRA, color[0], 0, 21, 31);
-    regRA = __rlwimi(regRA, color[3], 12, 9, 19);
+    regRA = __rlwimi(regRA, r, 0, 21, 31);
+    regRA = __rlwimi(regRA, a, 12, 9, 19);
+    regRA = __rlwimi(regRA, id * 2 + 0xE0, 24, 0, 7);
+    GXWGFifo.u8 = 0x61;
+    GXWGFifo.u32 = regRA;
     regBG = 0;
-    regBG = __rlwimi(regBG, color[2], 0, 21, 31);
-    regBG = __rlwimi(regBG, color[1], 12, 9, 19);
+    regBG = __rlwimi(regBG, b, 0, 21, 31);
+    regBG = __rlwimi(regBG, g, 12, 9, 19);
+    regBG = __rlwimi(regBG, id * 2 + 0xE1, 24, 0, 7);
     GXWGFifo.u8 = 0x61;
-    reg = __rlwimi(regRA, id * 2 + 0xE0, 24, 0, 7);
-    GXWGFifo.u32 = reg;
+    GXWGFifo.u32 = regBG;
     GXWGFifo.u8 = 0x61;
-    reg = __rlwimi(regBG, id * 2 + 0xE1, 24, 0, 7);
-    GXWGFifo.u32 = reg;
+    GXWGFifo.u32 = regBG;
     GXWGFifo.u8 = 0x61;
-    GXWGFifo.u32 = reg;
-    GXWGFifo.u8 = 0x61;
-    GXWGFifo.u32 = reg;
+    GXWGFifo.u32 = regBG;
     M2C_FIELD(__GXData, u16 *, 0x2) = 0;
 }
 #pragma pop
