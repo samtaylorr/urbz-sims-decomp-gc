@@ -227,40 +227,17 @@ void fn_8036B980(void *arg0) {
 }
 
 void *fn_8036BA10(u32 size) {
-    void fn_802CAA88(void *, s32);
-    void fn_802CAAAC(void *);
-    s32 fn_802D0AB8(void);
-    void *fn_802D0B3C(void);
-    void *fn_802D197C(void *, u32, s32);
-    void *fn_802DBBCC(void *, u32, s32);
     ScratchPool *pool = (ScratchPool *)lbl_8047551C;
     void *lock = (u8 *)pool + 0x20;
     void *p;
-    void *heap;
 
     fn_802CAA88(lock, -1);
-    p = pool->free;
-    if (p != NULL) {
-        pool->free = *(void **)p;
-        fn_802CAAAC(lock);
-    } else {
-        fn_802CAAAC(lock);
-    }
+    p = ScratchPool_Alloc(pool);
+    fn_802CAAAC(lock);
     if (p != NULL) {
         return p;
     }
-    heap = (void *)fn_802D0AB8();
-    if (size == 0) {
-        return NULL;
-    }
-    p = fn_802D197C(heap, size, 4);
-    if (p == NULL) {
-        p = fn_802DBBCC(heap, size, 0);
-        if (p == NULL && heap == (void *)fn_802D0AB8()) {
-            return fn_802DBBCC(fn_802D0B3C(), size, 0);
-        }
-    }
-    return p;
+    return Heap_Alloc(size);
 }
 
 void fn_80363734(void *, s32);
