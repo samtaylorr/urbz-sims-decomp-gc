@@ -6784,6 +6784,45 @@ void *fn_803AD1F8(void *arg0, void *arg1) {
     return s;
 }
 
+void **fn_803AD8AC(void **self, void **other) {
+    if (other != self) {
+        void **finish = (void **)other[1];
+        void **start = (void **)other[0];
+        u32 xlen = finish - start;
+        register u32 bytes asm("r30");
+        if (xlen > (u32)((void **)self[3] - (void **)self[0])) {
+            void **tmp;
+            if (xlen != 0) {
+                u32 buf = xlen * 4;
+                tmp = (void **)PtrVec_AllocateByRef(&buf);
+                bytes = xlen * 4;
+            } else {
+                tmp = NULL;
+                bytes = 0;
+            }
+            PtrVec_Copy(start, finish, tmp);
+            {
+                void **s = (void **)self[0];
+                u32 cnt = (void **)self[3] - s;
+                if (s != NULL) {
+                    PtrVec_Deallocate(s, cnt * 4);
+                }
+            }
+            self[0] = tmp;
+            self[3] = (char *)tmp + bytes;
+        } else if ((u32)((void **)self[1] - (void **)self[0]) >= xlen) {
+            PtrVec_Copy(start, finish, (void **)self[0]);
+            bytes = xlen * 4;
+        } else {
+            PtrVec_Copy(start, start + ((void **)self[1] - (void **)self[0]), (void **)self[0]);
+            bytes = xlen * 4;
+            PtrVec_Copy((void **)other[0] + ((void **)self[1] - (void **)self[0]), (void **)other[1], (void **)self[1]);
+        }
+        self[1] = (char *)self[0] + bytes;
+    }
+    return self;
+}
+
 void fn_803ADA28(void) {
     extern char lbl_803DDD5C[];
     extern void fn_80245AB8(char *);
@@ -11047,10 +11086,19 @@ Pair8Vec *fn_803B50DC(Pair8Vec *self, Pair8Vec *x) {
             self->start = tmp;
             self->end = tmp + xlen;
         } else if ((u32)(self->finish - dst) >= xlen) {
-            Pair8_Destroy(Pair8_Copy(src, last, dst), self->finish);
+            s32 k;
+            for (k = last - src; k > 0; k--) {
+                s32 a = src->a;
+                s32 b = src->b;
+                dst->a = a;
+                dst->b = b;
+                src++;
+                dst++;
+            }
+            Pair8_Destroy(dst, self->finish);
         } else {
-            Pair8_Copy(first, first + (self->finish - dst), start);
-            Pair8_UninitCopy(first + (self->finish - self->start), x->finish, self->finish);
+            Pair8_Copy(first, first + (self->finish - start), start);
+            Pair8_UninitCopy(x->start + (self->finish - self->start), x->finish, self->finish);
         }
         self->finish = self->start + xlen;
     }
