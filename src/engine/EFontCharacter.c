@@ -222,6 +222,34 @@ void fn_8036C56C(s32 arg0) {
     fn_803BEE20(arg0 + 0x20);
 }
 
+void *fn_803BEE88(void *stream, void *v);
+void *fn_803BEF64(void *self, s32 *vec);
+void fn_8036C590(void *self, void *stream) {
+    char *vt;
+    void (*func)(void *, void *, s32);
+    void *obj;
+    s32 a;
+    s32 b;
+    s32 c;
+
+    vt = M2C_FIELD(stream, char **, 0x18);
+    func = (void (*)(void *, void *, s32))M2C_FIELD(vt, void **, 0x3C);
+    obj = (char *)stream + M2C_FIELD(vt, s16 *, 0x38);
+    a = M2C_FIELD(self, s32 *, 0x4);
+    func(obj, &a, 4);
+    vt = M2C_FIELD(stream, char **, 0x18);
+    func = (void (*)(void *, void *, s32))M2C_FIELD(vt, void **, 0x3C);
+    obj = (char *)stream + M2C_FIELD(vt, s16 *, 0x38);
+    b = M2C_FIELD(self, s32 *, 0x8);
+    func(obj, &b, 4);
+    vt = M2C_FIELD(stream, char **, 0x18);
+    func = (void (*)(void *, void *, s32))M2C_FIELD(vt, void **, 0x3C);
+    obj = (char *)stream + M2C_FIELD(vt, s16 *, 0x38);
+    c = M2C_FIELD(self, s32 *, 0xC);
+    func(obj, &c, 4);
+    fn_803BEF64(fn_803BEE88(stream, (char *)self + 0x10), (s32 *)((char *)self + 0x20));
+}
+
 void fn_8036C648(char *self, void *stream) {
     extern u16 lbl_80493D92[];
     void fn_8036C48C(void *);
