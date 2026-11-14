@@ -1283,46 +1283,46 @@ s32 fn_80258680(void) {
     return count;
 }
 
-void fn_802586C0(void *thread) {
-    extern u8 lbl_80440C58[];
+void fn_802586C0(OSThread_ *thread) {
+    extern OSThreadQueue_ lbl_80440C58[];
     extern u32 lbl_80495E68;
     extern s32 lbl_80495E6C;
-    void *prev;
+    OSThread_ *prev;
 
-    M2C_FIELD(thread, void **, 0x2dc) = (void *)(lbl_80440C58 + M2C_FIELD(thread, s32 *, 0x2d0) * 8);
-    prev = M2C_FIELD(thread, void ***, 0x2dc)[1];
+    thread->queue = &lbl_80440C58[thread->priority];
+    prev = thread->queue->tail;
     if (prev == NULL) {
-        M2C_FIELD(thread, void ***, 0x2dc)[0] = thread;
+        thread->queue->head = thread;
     } else {
-        M2C_FIELD(prev, void **, 0x2e0) = thread;
+        prev->next = thread;
     }
-    M2C_FIELD(thread, void **, 0x2e4) = prev;
-    M2C_FIELD(thread, void **, 0x2e0) = NULL;
-    M2C_FIELD(thread, void ***, 0x2dc)[1] = thread;
-    lbl_80495E68 |= 1u << (31 - M2C_FIELD(thread, s32 *, 0x2d0));
+    thread->prev = prev;
+    thread->next = NULL;
+    thread->queue->tail = thread;
+    lbl_80495E68 |= 1u << (31 - thread->priority);
     lbl_80495E6C = 1;
 }
 
-void fn_8025872C(void *thread) {
+void fn_8025872C(OSThread_ *thread) {
     extern u32 lbl_80495E68;
-    void *next = M2C_FIELD(thread, void **, 0x2e0);
-    void **queue = M2C_FIELD(thread, void ***, 0x2dc);
-    void *prev = M2C_FIELD(thread, void **, 0x2e4);
+    OSThread_ *next = thread->next;
+    OSThreadQueue_ *queue = thread->queue;
+    OSThread_ *prev = thread->prev;
 
     if (next == NULL) {
-        queue[1] = prev;
+        queue->tail = prev;
     } else {
-        M2C_FIELD(next, void **, 0x2e4) = prev;
+        next->prev = prev;
     }
     if (prev == NULL) {
-        queue[0] = next;
+        queue->head = next;
     } else {
-        M2C_FIELD(prev, void **, 0x2e0) = next;
+        prev->next = next;
     }
-    if (queue[0] == NULL) {
-        lbl_80495E68 &= ~(1u << (31 - M2C_FIELD(thread, s32 *, 0x2d0)));
+    if (queue->head == NULL) {
+        lbl_80495E68 &= ~(1u << (31 - thread->priority));
     }
-    M2C_FIELD(thread, void **, 0x2dc) = NULL;
+    thread->queue = NULL;
 }
 
 s32 fn_80258794(void *thread) {
