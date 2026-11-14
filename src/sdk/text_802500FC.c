@@ -954,17 +954,16 @@ void fn_802560D4(u32 arg0) {
     fn_80255FFC(arg0 << 3);
 }
 
+#pragma push
+#pragma peephole off
 u32 fn_802564CC(void) {
     extern s32 lbl_80440B90[];
-    u32 code;
     if (lbl_80440B90[0] != 0) {
-        code = lbl_80440B90[1] | 0x80000000;
-    } else {
-        code = (__PIRegs[9] & ~7) >> 3;
+        return lbl_80440B90[1] | 0x80000000;
     }
-    return code;
+    return (__PIRegs[9] & ~7) >> 3;
 }
-
+#pragma pop
 s32 fn_80256504(s32 arg0) {
     extern s32 lbl_80495E40;
     s32 temp_r0;
