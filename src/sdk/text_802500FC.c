@@ -4342,6 +4342,27 @@ s32 fn_802664BC(void (*cb)(void)) {
     return 1;
 }
 
+s32 fn_802665D4(void *addr, void (*cb)(s32)) {
+    extern void (*lbl_80495F48)(s32);
+    extern s32 lbl_80495F40;
+    extern u8 lbl_80442AB0[];
+    void fn_80251224(void *, s64, void *);
+    void fn_80265CC4(void *, void *);
+    u32 timeout;
+
+    lbl_80495F48 = cb;
+    lbl_80495F40 = 0;
+    __DIRegs[2] = 0x12000000;
+    __DIRegs[4] = 0x20;
+    __DIRegs[5] = (u32)addr;
+    __DIRegs[6] = 0x20;
+    __DIRegs[7] = 3;
+    timeout = (*(u32 *)0x800000F8 / 4) * 10;
+    fn_80250FC4(lbl_80442AB0);
+    fn_80251224(lbl_80442AB0, timeout, fn_80265CC4);
+    return 1;
+}
+
 s32 fn_80266794(s32 enable, u32 size, void (*cb)(void)) {
     extern void (*lbl_80495F48)(void);
     extern s32 lbl_80495F40;
