@@ -3164,7 +3164,6 @@ void fn_8026561C(void);
 s32 fn_80261200(DVDFileInfo *fileInfo) {
     s32 bytes;
     DVDCommandBlock *cb = &fileInfo->cb;
-    u32 transferred;
     switch (cb->state) {
     case 0:
     case -1:
@@ -3181,8 +3180,8 @@ s32 fn_80261200(DVDFileInfo *fileInfo) {
         bytes = 0;
         break;
     case 1:
-        transferred = cb->transferredSize;
-        bytes = (s32)(transferred + (cb->currTransferSize - ((volatile u32 *)0xCC006000)[6]));
+        bytes = (s32)cb->transferredSize;
+        bytes += cb->currTransferSize - ((volatile u32 *)0xCC006000)[6];
         break;
     }
     return bytes;
@@ -4224,6 +4223,49 @@ void fn_80265F80(s32 a, s32 b, s32 c, s32 d) {
     fn_80265D98(a, b, c, d);
 }
 
+void fn_80265FB4(s32 addr, s32 length, u32 offset, void (*cb)(s32)) {
+    extern s32 lbl_80442A48[];
+    extern s32 lbl_80495F84;
+    extern s32 lbl_80495F68;
+    s32 fn_80266358(u32 offset, void (*cb)(s32));
+    u32 seekOffset;
+
+    seekOffset = offset & ~0x7FFF;
+    if (seekOffset == 0) {
+        seekOffset = 0;
+    } else {
+        seekOffset += lbl_80495F68;
+    }
+    lbl_80442A48[0] = 2;
+    lbl_80442A48[3] = seekOffset;
+    lbl_80442A48[4] = (s32)cb;
+    lbl_80442A48[5] = 1;
+    lbl_80442A48[6] = addr;
+    lbl_80442A48[7] = length;
+    lbl_80442A48[8] = offset;
+    lbl_80442A48[9] = (s32)cb;
+    lbl_80442A48[10] = -1;
+    lbl_80495F84 = 0;
+    fn_80266358(seekOffset, cb);
+}
+
+void fn_80266034(s32 a, s32 b, s32 c, s32 d, s64 timeout) {
+    extern s32 lbl_80442A48[];
+    extern s32 lbl_80495F84;
+    void fn_80251224(void *, s64, void *);
+    void fn_80265C40(void *, void *);
+
+    lbl_80442A48[0] = 1;
+    lbl_80442A48[1] = a;
+    lbl_80442A48[2] = b;
+    lbl_80442A48[3] = c;
+    lbl_80442A48[4] = d;
+    lbl_80442A48[5] = -1;
+    lbl_80495F84 = 0;
+    fn_80250FC4(&lbl_80442A48[0x10]);
+    fn_80251224(&lbl_80442A48[0x10], timeout, fn_80265C40);
+}
+
 #pragma push
 #pragma dont_inline on
 s32 fn_80266358(u32 offset, void (*cb)(s32)) {
@@ -4541,7 +4583,7 @@ void fn_802678D0(void) {
 
 void fn_80267924(u8 *tm) {
     extern u16 lbl_80442B18[];
-    extern u64 lbl_80495FB8;
+    extern volatile u64 lbl_80495FB8;
     u16 vct, hct, borrow;
 
     vct = (u16)(*(u16 *)(tm + 0x18) / 2);
@@ -4549,7 +4591,7 @@ void fn_80267924(u8 *tm) {
     hct = (u16)(borrow ? *(u16 *)(tm + 0x1A) : (u16)0);
     vct++;
     hct++;
-    lbl_80442B18[25] = hct;
+    lbl_80442B18[25] = (u16)hct;
     lbl_80495FB8 |= 1ull << (63 - 25);
     lbl_80442B18[24] = (u16)(vct | 0x1000);
     lbl_80495FB8 |= 1ull << (63 - 24);
@@ -4565,6 +4607,38 @@ void fn_802679A0(u16 fbSizeX, s32 xfbMode, u16 panPosX, u16 panSizeX, u8 *wordPe
     *wpl = (u8)((*xof + panSizeX + 15) / 16);
     lbl_80442B18[36] = (u16)((*std) | (*wpl << 8));
     lbl_80495FB8 |= 1ull << (63 - 36);
+}
+
+void fn_80267A38(u8 *tm) {
+    extern u16 lbl_80442B18[];
+    extern u64 lbl_80495FB8;
+
+    lbl_80442B18[11] = (u16)(tm[0xC] | (*(u16 *)(tm + 0x10) << 5));
+    lbl_80495FB8 |= 1ull << (63 - 11);
+    lbl_80442B18[10] = (u16)(tm[0xE] | (*(u16 *)(tm + 0x14) << 5));
+    lbl_80495FB8 |= 1ull << (63 - 10);
+    lbl_80442B18[13] = (u16)(tm[0xD] | (*(u16 *)(tm + 0x12) << 5));
+    lbl_80495FB8 |= 1ull << (63 - 13);
+    lbl_80442B18[12] = (u16)(tm[0xF] | (*(u16 *)(tm + 0x16) << 5));
+    lbl_80495FB8 |= 1ull << (63 - 12);
+}
+
+void fn_80267AF4(u16 panSizeX, u16 dispSizeX, s32 threeD) {
+    extern u16 lbl_80442B18[];
+    extern u64 lbl_80495FB8;
+    u32 scale;
+
+    panSizeX = (u16)(threeD ? panSizeX * 2 : panSizeX);
+    if (panSizeX < dispSizeX) {
+        scale = (256 * (u32)panSizeX + (u32)dispSizeX - 1) / (u32)dispSizeX;
+        lbl_80442B18[37] = (u16)(scale | 0x1000);
+        lbl_80495FB8 |= 1ull << (63 - 37);
+        lbl_80442B18[56] = (u16)panSizeX;
+        lbl_80495FB8 |= 1ull << (63 - 56);
+    } else {
+        lbl_80442B18[37] = 0x100;
+        lbl_80495FB8 |= 1ull << (63 - 37);
+    }
 }
 
 void fn_80268ED0(void *callback) {
@@ -5862,21 +5936,21 @@ void fn_8026FF68(void) {
         u32 vatC[8];
         u8 pad7C[0x5AB - 0x7C];
         u8 dirtyVAT;
-    } *const __GXData;
-    struct GXVATData *const gx = __GXData;
+    } *__GXData;
+    struct GXVATData *gx = __GXData;
     u8 i;
 
     for (i = 0; i < 8; i++) {
         if (gx->dirtyVAT & (1 << i)) {
             *(volatile u8 *)0xCC008000 = 8;
             *(volatile u8 *)0xCC008000 = i | 0x70;
-            *(volatile u32 *)0xCC008000 = gx->vatA[i];
+            *(volatile u32 *)0xCC008000 = *(u32 *)((u8 *)gx + i * 4 + 0x1C);
             *(volatile u8 *)0xCC008000 = 8;
             *(volatile u8 *)0xCC008000 = i | 0x80;
-            *(volatile u32 *)0xCC008000 = gx->vatB[i];
+            *(volatile u32 *)0xCC008000 = *(u32 *)((u8 *)gx + i * 4 + 0x3C);
             *(volatile u8 *)0xCC008000 = 8;
             *(volatile u8 *)0xCC008000 = i | 0x90;
-            *(volatile u32 *)0xCC008000 = gx->vatC[i];
+            *(volatile u32 *)0xCC008000 = *(u32 *)((u8 *)gx + i * 4 + 0x5C);
         }
     }
     __GXData->dirtyVAT = 0;
@@ -7543,21 +7617,21 @@ void fn_80275F80(u16 mtx_indx, u32 id, s32 type) {
 
 void fn_80275FD8(void) {
     extern void *__GXData;
-    extern f32 lbl_80497600;
-    extern f32 lbl_80497604;
     u8 *gx = __GXData;
     f32 sx, sy, sz, ox, oy, oz, zmin, zmax;
+    u32 reg;
 
-    sx = M2C_FIELD(gx, f32 *, 0x4FC) * lbl_80497600;
-    sy = -M2C_FIELD(gx, f32 *, 0x500) * lbl_80497600;
-    ox = M2C_FIELD(gx, f32 *, 0x4F4) + sx + lbl_80497604;
-    oy = M2C_FIELD(gx, f32 *, 0x4F8) + M2C_FIELD(gx, f32 *, 0x500) * lbl_80497600 + lbl_80497604;
+    sx = M2C_FIELD(gx, f32 *, 0x4FC) / 2.0f;
+    sy = -M2C_FIELD(gx, f32 *, 0x500) / 2.0f;
+    ox = M2C_FIELD(gx, f32 *, 0x4F4) + (M2C_FIELD(gx, f32 *, 0x4FC) / 2.0f) + 342.0f;
+    oy = M2C_FIELD(gx, f32 *, 0x4F8) + (M2C_FIELD(gx, f32 *, 0x500) / 2.0f) + 342.0f;
     zmin = M2C_FIELD(gx, f32 *, 0x504) * M2C_FIELD(gx, f32 *, 0x510);
     zmax = M2C_FIELD(gx, f32 *, 0x508) * M2C_FIELD(gx, f32 *, 0x510);
     sz = zmax - zmin;
     oz = zmax + M2C_FIELD(gx, f32 *, 0x50C);
+    reg = 0x5101A;
     GXWGFifo.u8 = 0x10;
-    GXWGFifo.u32 = 0x5101A;
+    GXWGFifo.u32 = reg;
     GXWGFifo.f32 = sx;
     GXWGFifo.f32 = sy;
     GXWGFifo.f32 = sz;
