@@ -3150,37 +3150,36 @@ s32 fn_80266FA0(s32 arg0) {
 
 u8 *fn_80266FE4(u32 mode) {
     extern u8 lbl_803F9DE8[];
-    u8 *timing = lbl_803F9DE8 + 0x44;
 
     switch (mode) {
     case 0:
-        return timing;
+        return lbl_803F9DE8 + 0x44;
     case 1:
-        return timing + 0x26;
+        return lbl_803F9DE8 + 0x6A;
     case 4:
-        return timing + 0x4C;
+        return lbl_803F9DE8 + 0x90;
     case 5:
-        return timing + 0x72;
+        return lbl_803F9DE8 + 0xB6;
     case 20:
-        return timing;
+        return lbl_803F9DE8 + 0x44;
     case 21:
-        return timing + 0x26;
+        return lbl_803F9DE8 + 0x6A;
     case 8:
-        return timing + 0x98;
+        return lbl_803F9DE8 + 0xDC;
     case 9:
-        return timing + 0xBE;
+        return lbl_803F9DE8 + 0x102;
     case 2:
-        return timing + 0xE4;
+        return lbl_803F9DE8 + 0x128;
     case 3:
-        return timing + 0x10A;
+        return lbl_803F9DE8 + 0x14E;
     case 16:
-        return timing + 0x4C;
+        return lbl_803F9DE8 + 0x90;
     case 17:
-        return timing + 0x72;
+        return lbl_803F9DE8 + 0xB6;
     case 24:
-        return timing + 0x130;
+        return lbl_803F9DE8 + 0x174;
     case 26:
-        return timing + 0x156;
+        return lbl_803F9DE8 + 0x19A;
     }
     return 0;
 }
@@ -3200,16 +3199,16 @@ void fn_802673E4(void) {
 }
 #pragma pop
 void fn_802678D0(void) {
-    extern s32 lbl_80495F8C;
-    extern u8 lbl_80495F94[];
+    extern u32 lbl_80495F8C;
+    extern struct { void *head; void *tail; } lbl_80495F94;
     void fn_8025974C(void *);
     s32 enabled;
-    s32 count;
+    u32 count;
 
     enabled = fn_8025465C();
     count = lbl_80495F8C;
     do {
-        fn_8025974C(lbl_80495F94);
+        fn_8025974C(&lbl_80495F94);
     } while (count == lbl_80495F8C);
     fn_80254684(enabled);
 }
@@ -4168,8 +4167,7 @@ void fn_8026F9C4(GXVtxDescList *list) {
     }
     list[attr].attr = 25;
     fn_8026F810(25, &list[attr].type);
-    attr++;
-    list[attr].attr = 0xFF;
+    list[++attr].attr = 0xFF;
 }
 
 void fn_8026FA54(void) {
