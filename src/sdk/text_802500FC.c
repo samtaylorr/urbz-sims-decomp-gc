@@ -1491,30 +1491,40 @@ void fn_80258CB0(void) {
     fn_80254684(temp_r31);
 }
 
-void fn_802592B4(void *thread) {
+void fn_802592B4(void *arg0) {
+    typedef struct DetachThread {
+        u8 pad[0x2C8];
+        u16 state;
+        u16 attr;
+        u8 pad2[0x2E8 - 0x2CC];
+        u8 queueJoin[0x2FC - 0x2E8];
+        struct DetachThread *next;
+        struct DetachThread *prev;
+    } DetachThread;
     void fn_80259838(void *);
+    DetachThread *thread = arg0;
     s32 enabled;
-    void *next;
-    void *prev;
+    DetachThread *next;
+    DetachThread *prev;
 
     enabled = fn_8025465C();
-    M2C_FIELD(thread, u16 *, 0x2ca) |= 1;
-    if (M2C_FIELD(thread, u16 *, 0x2c8) == 8) {
-        next = M2C_FIELD(thread, void **, 0x2fc);
-        prev = M2C_FIELD(thread, void **, 0x300);
+    thread->attr |= 1;
+    if (thread->state == 8) {
+        next = thread->next;
+        prev = thread->prev;
         if (next == NULL) {
-            *(void **)0x800000E0 = prev;
+            *(DetachThread **)0x800000E0 = prev;
         } else {
-            M2C_FIELD(next, void **, 0x300) = prev;
+            next->prev = prev;
         }
         if (prev == NULL) {
-            *(void **)0x800000DC = next;
+            *(DetachThread **)0x800000DC = next;
         } else {
-            M2C_FIELD(prev, void **, 0x2fc) = next;
+            prev->next = next;
         }
-        M2C_FIELD(thread, u16 *, 0x2c8) = 0;
+        thread->state = 0;
     }
-    fn_80259838((u8 *)thread + 0x2e8);
+    fn_80259838(thread->queueJoin);
     fn_80254684(enabled);
 }
 
@@ -1851,7 +1861,7 @@ BOOL fn_8025B434(OSThread_ *thread) {
 }
 
 u32 fn_8025BD24(s32 chan, BOOL exi, BOOL tc, BOOL ext) {
-    volatile u32 *reg = (volatile u32 *)(0xCC006800 + chan * 0x14);
+    volatile u32 *reg = (volatile u32 *)0xCC006800 + chan * 5;
     u32 cpr;
     u32 prev;
 
