@@ -1646,12 +1646,10 @@ f32 fn_8025FF08(f32 *a, f32 *b) {
 
 f32 fn_8025FF6C(f32 *a, f32 *b) {
     f32 diff[3];
-    f32 dist;
     diff[0] = a[0] - b[0];
     diff[1] = a[1] - b[1];
     diff[2] = a[2] - b[2];
-    dist = sqrtf(diff[2] * diff[2] + (diff[0] * diff[0] + diff[1] * diff[1]));
-    return dist;
+    return sqrtf(fn_8025FB70(diff));
 }
 
 #pragma pop
@@ -3873,7 +3871,6 @@ void fn_80275694(u32 comp0, u8 ref0, u32 op, u32 comp1, u8 ref1) {
 
 void fn_802756D8(u32 op, u32 fmt, u32 bias) {
     extern void *__GXData;
-    void *gx = __GXData;
     u32 zenv0;
     u32 zenv1;
     u32 type;
@@ -3903,7 +3900,7 @@ void fn_802756D8(u32 op, u32 fmt, u32 bias) {
     GXWGFifo.u32 = zenv0;
     GXWGFifo.u8 = 0x61;
     GXWGFifo.u32 = zenv1;
-    M2C_FIELD(gx, u16 *, 0x2) = 0;
+    M2C_FIELD(__GXData, u16 *, 0x2) = 0;
 }
 
 void fn_80275900(u8 nStages) {
