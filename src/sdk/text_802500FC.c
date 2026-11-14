@@ -615,10 +615,8 @@ s32 fn_8025399C(void) {
 
 void fn_802539D4(void *arg0) {
     void fn_802482F8(void *, void *, u32);
-    u8 *base = (u8 *)0x80000000;
-    u8 *p = *(u8 **)(base + 0x30F0);
-    if (base <= p) {
-        fn_802482F8(arg0, p, 0x1C);
+    if (0x80000000 <= (u32)*(void **)0x800030F0) {
+        fn_802482F8(arg0, *(void **)0x800030F0, 0x1C);
     } else {
         *(s32 *)arg0 = 0;
     }
@@ -630,6 +628,30 @@ void fn_80253A14(void *arg0, void *arg1) {
     void fn_802482F8(void *, void *, u32);
     fn_802482F8(arg1, arg0, 0x1C);
     *(void **)0x800030F0 = arg1;
+}
+
+void fn_80253A58(void) {
+    extern s32 lbl_80495DD4;
+    void fn_8026BFC8(s32);
+    void fn_8026BFF4(s32);
+    void fn_8026BCC0(s32);
+    s32 fn_802642C0(DVDCommandBlock *);
+    s32 fn_802649F8(void);
+    void fn_802560D4(s32);
+    s32 fn_802633F0(DVDCommandBlock *block, void *callback);
+    DVDCommandBlock block;
+
+    if (lbl_80495DD4 == 0 && fn_8025399C()) {
+        fn_8026BFC8(0);
+        fn_8026BFF4(0);
+        fn_802633F0(&block, 0);
+        while (fn_802642C0(&block)) {
+            if (!fn_802649F8()) {
+                fn_802560D4(0);
+            }
+        }
+        fn_8026BCC0(0);
+    }
 }
 
 s32 fn_80253DC0(char *arg0) {
@@ -5457,6 +5479,7 @@ void fn_80275290(u32 stage, u32 a, u32 b, u32 c, u32 d) {
 
 void fn_802752D4(u32 stage, s32 op, u32 bias, u32 scale, u8 clamp, u32 out_reg) {
     extern u32 *__GXData;
+    u32 *gx;
     u32 reg;
 
     reg = __GXData[0x130 / 4 + stage];
@@ -5465,19 +5488,21 @@ void fn_802752D4(u32 stage, s32 op, u32 bias, u32 scale, u8 clamp, u32 out_reg) 
         reg = __rlwimi(reg, scale, 20, 10, 11);
         reg = __rlwimi(reg, bias, 16, 14, 15);
     } else {
-        reg = __rlwimi(reg, op >> 1, 19, 10, 11);
+        reg = __rlwimi(reg, (op >> 1) & 3, 20, 10, 11);
         reg = __rlwimi(reg, 3, 16, 14, 15);
     }
     reg = __rlwimi(reg, clamp, 19, 12, 12);
     reg = __rlwimi(reg, out_reg, 22, 8, 9);
     *(volatile u8 *)0xCC008000 = 0x61;
     *(volatile u32 *)0xCC008000 = reg;
-    __GXData[0x130 / 4 + stage] = reg;
-    ((u16 *)__GXData)[1] = 0;
+    gx = __GXData;
+    gx[0x130 / 4 + stage] = reg;
+    ((u16 *)gx)[1] = 0;
 }
 
 void fn_8027533C(u32 stage, s32 op, u32 bias, u32 scale, u8 clamp, u32 out_reg) {
     extern u32 *__GXData;
+    u32 *gx;
     u32 reg;
 
     reg = __GXData[0x170 / 4 + stage];
@@ -5486,15 +5511,16 @@ void fn_8027533C(u32 stage, s32 op, u32 bias, u32 scale, u8 clamp, u32 out_reg) 
         reg = __rlwimi(reg, scale, 20, 10, 11);
         reg = __rlwimi(reg, bias, 16, 14, 15);
     } else {
-        reg = __rlwimi(reg, op >> 1, 19, 10, 11);
+        reg = __rlwimi(reg, (op >> 1) & 3, 20, 10, 11);
         reg = __rlwimi(reg, 3, 16, 14, 15);
     }
     reg = __rlwimi(reg, clamp, 19, 12, 12);
     reg = __rlwimi(reg, out_reg, 22, 8, 9);
     *(volatile u8 *)0xCC008000 = 0x61;
     *(volatile u32 *)0xCC008000 = reg;
-    __GXData[0x170 / 4 + stage] = reg;
-    ((u16 *)__GXData)[1] = 0;
+    gx = __GXData;
+    gx[0x170 / 4 + stage] = reg;
+    ((u16 *)gx)[1] = 0;
 }
 
 void fn_80275690(void) {
