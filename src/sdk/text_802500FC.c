@@ -1173,6 +1173,17 @@ s32 fn_802585FC(void *thread) {
     return 0;
 }
 
+s32 fn_80258640(void) {
+    extern s32 lbl_80495E70;
+    s32 enabled;
+    s32 count;
+
+    enabled = fn_8025465C();
+    count = lbl_80495E70++;
+    fn_80254684(enabled);
+    return count;
+}
+
 void fn_80258C80(void) {
     M2C_UNK fn_80258A58(M2C_UNK);
     extern s32 lbl_80495E6C;
