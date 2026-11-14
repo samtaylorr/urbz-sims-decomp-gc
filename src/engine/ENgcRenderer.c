@@ -168,6 +168,37 @@ void fn_8035BF60(void) {
     }
 }
 
+void fn_8035C2D8(u8 *self) {
+    typedef struct { s32 v[5]; } S14;
+    typedef struct { s32 v[3]; } S0C;
+    typedef struct { S14 b; s32 c; s32 d; s32 pad[3]; } E;
+    extern E lbl_80493AE0[];
+    extern s32 lbl_80495210;
+
+    lbl_80493AE0[lbl_80495210].b = *(S14 *)(self + 0x3B8);
+    *(S0C *)((u8 *)lbl_80493AE0 - 0xC + lbl_80495210 * 0x28) = *(S0C *)(self + 0x3AC);
+    lbl_80493AE0[lbl_80495210].c = *(s32 *)(self + 0x6E8);
+    lbl_80493AE0[lbl_80495210].d = *(s32 *)(self + 0x6EC);
+    lbl_80495210++;
+}
+
+void fn_8035C370(u8 *self) {
+    typedef struct { s32 v[5]; } S14;
+    typedef struct { s32 v[3]; } S0C;
+    typedef struct { S0C a; S14 b; s32 c; s32 d; } E;
+    extern u8 lbl_80493AE0[];
+    extern s32 lbl_80495210;
+    E *e;
+
+    lbl_80495210--;
+    e = (E *)(lbl_80493AE0 - 0xC) + lbl_80495210;
+    *(S14 *)(self + 0x3B8) = e->b;
+    *(S0C *)(self + 0x3AC) = e->a;
+    *(s32 *)(self + 0x6E8) = e->c;
+    *(s32 *)(self + 0x6EC) = e->d;
+    *(u32 *)(self + 0x6CC) |= 0x80000040;
+}
+
 void fn_8035C418(u8 *self) {
     typedef struct { s32 v[6]; } S18;
     typedef struct { s32 v[4]; } S10;
@@ -222,6 +253,50 @@ void fn_8035DA38(u8 *arg0) {
 
 s32 fn_8035DA74(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x28);
+}
+
+void fn_8035DA7C(u8 *self, u8 *arg1) {
+    typedef struct {
+        s32 unk0;
+        s32 unk4;
+        u32 unk8;
+        s32 unkC;
+        s16 unk10;
+        s16 unk12;
+        s16 unk14;
+        s16 unk16;
+        u8 unk18;
+        u8 unk19;
+        u8 unk1A;
+        u8 unk1B;
+        s32 unk1C;
+    } TexMsg;
+    extern u8 *lbl_80495050;
+    void fn_80361244(s32, s32);
+    void fn_8036EF14(u8 *, u8 *);
+    TexMsg msg;
+    TexMsg *m = &msg;
+    u8 *vt;
+
+    m->unk0 = 0;
+    m->unk12 = 0x40;
+    m->unk10 = 0x40;
+    m->unk18 = 1;
+    m->unk19 = 0;
+    m->unk1A = 0x20;
+    m->unk1B = 0;
+    m->unk1C = 0;
+    m->unk4 = 0;
+    m->unk8 = 0;
+    m->unk14 = 0;
+    m->unk16 = 0;
+    msg.unk10 = *(u16 *)(arg1 + 2);
+    msg.unk12 = *(u16 *)(arg1 + 6);
+    msg.unk8 |= 0x80;
+    vt = *(u8 **)lbl_80495050;
+    *(s32 *)(self + 0x28) = ((s32 (*)(u8 *, TexMsg *))*(void **)(vt + 0xA4))(lbl_80495050 + *(s16 *)(vt + 0xA0), m);
+    fn_80361244(*(s32 *)(self + 0x28), 1);
+    fn_8036EF14(self, arg1);
 }
 
 void fn_8035DB44(void) {
