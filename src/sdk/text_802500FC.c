@@ -3859,18 +3859,16 @@ void fn_80275690(void) {
 
 void fn_80275694(u32 comp0, u8 ref0, u32 op, u32 comp1, u8 ref1) {
     extern void *__GXData;
-    void *gx = __GXData;
-    u32 reg = 0;
+    u32 reg = 0xF3000000;
 
     reg = __rlwimi(reg, ref0, 0, 24, 31);
     reg = __rlwimi(reg, ref1, 8, 16, 23);
     reg = __rlwimi(reg, comp0, 16, 13, 15);
     reg = __rlwimi(reg, comp1, 19, 10, 12);
     reg = __rlwimi(reg, op, 22, 8, 9);
-    reg = __rlwimi(reg, 0xF3, 24, 0, 7);
     GXWGFifo.u8 = 0x61;
     GXWGFifo.u32 = reg;
-    M2C_FIELD(gx, u16 *, 0x2) = 0;
+    M2C_FIELD(__GXData, u16 *, 0x2) = 0;
 }
 
 void fn_802756D8(u32 op, u32 fmt, u32 bias) {
