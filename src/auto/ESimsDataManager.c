@@ -49,6 +49,23 @@ void *fn_8001C5A8(void *arg0, void *arg1) {
     return arg0;
 }
 
+void fn_8001C718(void *self) {
+    extern u8 lbl_8045BA40[];
+    s32 fn_8033740C(void *, u32, s32, s32);
+    if (M2C_FIELD(self, s32 *, 0x2C) == 0) {
+        M2C_FIELD(self, s32 *, 0x2C) = fn_8033740C(lbl_8045BA40, 0x875049C1, 0, 0);
+    }
+    if (M2C_FIELD(self, s32 *, 0x30) == 0) {
+        M2C_FIELD(self, s32 *, 0x30) = fn_8033740C(lbl_8045BA40, 0x1E59187B, 0, 0);
+    }
+    if (M2C_FIELD(self, s32 *, 0x34) == 0) {
+        M2C_FIELD(self, s32 *, 0x34) = fn_8033740C(lbl_8045BA40, 0xE33BE101, 0, 0);
+    }
+    if (M2C_FIELD(self, s32 *, 0x38) == 0) {
+        M2C_FIELD(self, s32 *, 0x38) = fn_8033740C(lbl_8045BA40, 0x943CD197, 0, 0);
+    }
+}
+
 void *fn_8001D654(u32 size, s32 arg1, void *p) {
     return p;
 }
