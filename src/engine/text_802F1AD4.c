@@ -9,6 +9,25 @@ static inline void Vec3f_Set(Vec3f *v, f32 x, f32 y, f32 z) {
     v->x = x;
 }
 
+static inline void *Stream_Write(void *stream, void *data, s32 size) {
+    void *vt = M2C_FIELD(stream, void **, 0x18);
+    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)((char *)stream + M2C_FIELD(vt, s16 *, 0x38), data, size);
+    return stream;
+}
+
+static inline void *Stream_WriteF32(void *stream, f32 v) {
+    f32 t = v;
+    return Stream_Write(stream, &t, 4);
+}
+
+static inline void *Stream_WriteBool(void *stream, s32 v) {
+    u8 t = 0;
+    if (v) {
+        t = 1;
+    }
+    return Stream_Write(stream, &t, 1);
+}
+
 extern s32 lbl_804961D4;
 extern u8 lbl_80493790[];
 extern u8 lbl_803F0EF4[];
@@ -44,27 +63,45 @@ s32 fn_802F1B34(s32 arg0, s32 *out) {
 void *fn_802F1B74(void *self) {
     extern void fn_802EFBA8(void *);
     extern void fn_802F2378(void *);
-    extern f32 lbl_803F0F38[];
-    extern f32 lbl_803F0F3C[];
-    extern f32 lbl_803F0F40[];
+    extern const f32 lbl_803F0F38[];
+    extern const f32 lbl_803F0F3C[];
+    extern const f32 lbl_803F0F40[];
     extern u8 lbl_8041A218[];
     Vec3f v;
-    f32 a, b;
 
     fn_802EFBA8(self);
     Vec3f_Set(&v, lbl_803F0F38[0], lbl_803F0F38[0], lbl_803F0F38[0]);
     *(void **)self = lbl_8041A218;
     *(Vec3f *)((u8 *)self + 0xC0) = v;
-    *(s32 *)((u8 *)self + 0xCC) = 0;
     *(s32 *)((u8 *)self + 0xD4) = -1;
-    a = lbl_803F0F3C[0];
-    b = lbl_803F0F40[0];
-    *(f32 *)((u8 *)self + 0xD8) = a;
-    *(f32 *)((u8 *)self + 0xDC) = b;
+    *(s32 *)((u8 *)self + 0xCC) = 0;
+    *(f32 *)((u8 *)self + 0xD8) = lbl_803F0F3C[0];
+    *(f32 *)((u8 *)self + 0xDC) = lbl_803F0F40[0];
     *(s32 *)((u8 *)self + 0xE0) = 1;
     *(s32 *)((u8 *)self + 0xD0) = 0;
     fn_802F2378(self);
     return self;
+}
+
+extern void fn_802EFC54(void *, void *);
+extern void *fn_802D34B0(void *, void *);
+void fn_802F1C20(void *self, void *stream) {
+    void *vt;
+    f32 x;
+    f32 y;
+    u8 b;
+
+    fn_802EFC54(self, stream);
+    stream = fn_802D34B0(stream, (u8 *)self + 0xC0);
+    x = M2C_FIELD(self, f32 *, 0xD8);
+    vt = M2C_FIELD(stream, void **, 0x18);
+    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)((char *)stream + M2C_FIELD(vt, s16 *, 0x38), &x, 4);
+    y = M2C_FIELD(self, f32 *, 0xDC);
+    vt = M2C_FIELD(stream, void **, 0x18);
+    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)((char *)stream + M2C_FIELD(vt, s16 *, 0x38), &y, 4);
+    b = M2C_FIELD(self, s32 *, 0xE0) != 0;
+    vt = M2C_FIELD(stream, void **, 0x18);
+    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)((char *)stream + M2C_FIELD(vt, s16 *, 0x38), &b, 1);
 }
 
 void fn_802F2468(s32 arg0, s32 arg1) {
