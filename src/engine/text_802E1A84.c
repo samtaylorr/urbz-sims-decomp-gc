@@ -16,14 +16,15 @@ s32 fn_802E1A84(s32 arg0, s32 arg1) {
     extern u8 lbl_803F07A0[];
     extern s32 lbl_80494DF0;
     extern u8 *lbl_80494FDC;
-    extern s32 lbl_80494E48;
+    extern void (*lbl_80494E48)(void);
+    register s32 argc asm("r28") = arg0;
     u8 *vt;
 
     fn_80378528();
     fn_8033E8B4();
     fn_8033E81C();
     fn_802C7B54();
-    fn_802E0934(lbl_80494DF0, arg0, arg1);
+    fn_802E0934(lbl_80494DF0, argc, arg1);
     fn_802DF9E4(&lbl_80452428);
     lbl_80452428.unk32C = lbl_803F07A0;
     fn_802E0648(lbl_80494DF0);
@@ -31,8 +32,8 @@ s32 fn_802E1A84(s32 arg0, s32 arg1) {
     vt = *(u8 **)lbl_80494FDC;
     (*(void (**)(void *))(vt + 0x4C))(lbl_80494FDC + *(s16 *)(vt + 0x48));
     fn_802C7C90();
-    if (lbl_80494E48 != 0) {
-        ((void (*)(void))lbl_80494E48)();
+    if (lbl_80494E48 != NULL) {
+        lbl_80494E48();
     }
     return 0;
 }
