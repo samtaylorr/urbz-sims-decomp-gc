@@ -1647,13 +1647,13 @@ f32 fn_8025FF08(f32 *a, f32 *b) {
 #pragma push
 #pragma peephole off
 f32 fn_8025FF6C(f32 *a, f32 *b) {
-    f32 dist;
     f32 diff[3];
+    f32 dist;
     diff[0] = a[0] - b[0];
     diff[1] = a[1] - b[1];
     diff[2] = a[2] - b[2];
-    dist = sqrtf(diff[2] * diff[2] + (diff[0] * diff[0] + diff[1] * diff[1]));
-    return dist;
+    dist = diff[2] * diff[2] + (diff[0] * diff[0] + diff[1] * diff[1]);
+    return sqrtf(dist);
 }
 #pragma pop
 s32 fn_80260574(void) {
@@ -3828,19 +3828,22 @@ void __GXFlushTextureState(void) {
 void fn_802751C0(s32 id, u32 sel) {
     extern void *__GXData;
     extern u32 lbl_803FB248[4][5];
+    u32 (*tbl)[5] = lbl_803FB248;
+    u8 *gx;
     u32 *p0;
     u32 *p1;
     u32 *regs;
     u32 reg;
 
     if (id == 0) {
-        p0 = &lbl_803FB248[0][sel];
-        p1 = &lbl_803FB248[2][sel];
+        p0 = &tbl[0][sel];
+        p1 = &tbl[2][sel];
     } else {
-        p0 = &lbl_803FB248[1][sel];
-        p1 = &lbl_803FB248[3][sel];
+        p0 = &tbl[1][sel];
+        p1 = &tbl[3][sel];
     }
-    regs = (u32 *)((u8 *)__GXData + id * 4);
+    gx = __GXData;
+    regs = (u32 *)(gx + id * 4);
     reg = __rlwimi(regs[0x130 / 4] & 0xFF000000, *p0, 0, 8, 31);
     GXWGFifo.u8 = 0x61;
     GXWGFifo.u32 = reg;
@@ -3849,7 +3852,7 @@ void fn_802751C0(s32 id, u32 sel) {
     GXWGFifo.u8 = 0x61;
     GXWGFifo.u32 = reg;
     regs[0x170 / 4] = reg;
-    *(u16 *)((u8 *)__GXData + 2) = 0;
+    *(u16 *)(gx + 2) = 0;
 }
 
 void fn_80275690(void) {
@@ -4034,11 +4037,49 @@ void fn_80276198(u32 left, u32 top, u32 wd, u32 ht) {
     M2C_FIELD(gx, u16 *, 0x2) = 0;
 }
 
+void fn_80276258(s32 x, s32 y) {
+    extern void *__GXData;
+    u32 reg = 0;
+    u32 hx = (u32)(x + 0x156) >> 1;
+    u32 hy = (u32)(y + 0x156) >> 1;
+
+    reg = __rlwimi(reg, hx, 0, 22, 31);
+    reg = __rlwimi(reg, hy, 10, 12, 21);
+    reg = __rlwimi(reg, 0x59, 24, 0, 7);
+    GXWGFifo.u8 = 0x61;
+    GXWGFifo.u32 = reg;
+    M2C_FIELD(__GXData, u16 *, 0x2) = 0;
+}
+
 void fn_80276298(u32 mode) {
     extern void *__GXData;
     GXWGFifo.u8 = 0x10;
     GXWGFifo.u32 = 0x1005;
     GXWGFifo.u32 = mode;
+    M2C_FIELD(__GXData, u16 *, 0x2) = 1;
+}
+
+void fn_802762C0(s32 attr) {
+    extern void *__GXData;
+    u32 reg;
+
+    if (attr < 5) {
+        reg = M2C_FIELD(__GXData, u32 *, 0x80);
+        GXWGFifo.u8 = 0x08;
+        GXWGFifo.u8 = 0x30;
+        GXWGFifo.u32 = reg;
+        GXWGFifo.u8 = 0x10;
+        GXWGFifo.u32 = 0x1018;
+        GXWGFifo.u32 = reg;
+    } else {
+        reg = M2C_FIELD(__GXData, u32 *, 0x84);
+        GXWGFifo.u8 = 0x08;
+        GXWGFifo.u8 = 0x40;
+        GXWGFifo.u32 = reg;
+        GXWGFifo.u8 = 0x10;
+        GXWGFifo.u32 = 0x1019;
+        GXWGFifo.u32 = reg;
+    }
     M2C_FIELD(__GXData, u16 *, 0x2) = 1;
 }
 
