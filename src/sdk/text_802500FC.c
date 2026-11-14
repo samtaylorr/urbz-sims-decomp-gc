@@ -3364,15 +3364,15 @@ void fn_80271B58(u32 mode) {
 }
 
 void fn_80271B7C(u32 clamp) {
-    extern u32 *__GXData;
-    u32 *gx = __GXData;
-    u8 clmpT = (clamp & 2) == 2;
+    extern u8 *__GXData;
     u8 clmpB = (clamp & 1) == 1;
+    u8 clmpT = (clamp & 2) == 2;
+    u8 *gx = __GXData;
 
-    gx[0x1EC / 4] = __rlwimi(gx[0x1EC / 4], clmpB, 0, 31, 31);
-    gx[0x1EC / 4] = __rlwimi(gx[0x1EC / 4], clmpT, 1, 30, 30);
-    gx[0x1FC / 4] = __rlwimi(gx[0x1FC / 4], clmpB, 0, 31, 31);
-    gx[0x1FC / 4] = __rlwimi(gx[0x1FC / 4], clmpT, 1, 30, 30);
+    *(u32 *)(gx + 0x1EC) = __rlwimi(*(u32 *)(gx + 0x1EC), clmpB, 0, 31, 31);
+    *(u32 *)(gx + 0x1EC) = __rlwimi(*(u32 *)(gx + 0x1EC), clmpT, 1, 30, 30);
+    *(u32 *)(gx + 0x1FC) = __rlwimi(*(u32 *)(gx + 0x1FC), clmpB, 0, 31, 31);
+    *(u32 *)(gx + 0x1FC) = __rlwimi(*(u32 *)(gx + 0x1FC), clmpT, 1, 30, 30);
 }
 
 u32 fn_80271BD4(u32 efbHt, u32 iScale) {
