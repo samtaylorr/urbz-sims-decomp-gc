@@ -1925,7 +1925,6 @@ s32 fn_80260438(s32 entrynum, DVDFileInfo *fileInfo) {
     return 1;
 }
 
-#pragma pop
 s32 fn_80260574(void) {
     M2C_UNK fn_802646D0();
     fn_802646D0();
