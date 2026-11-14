@@ -156,6 +156,26 @@ f32 fn_803132BC(f32 cur, f32 target, f32 rate, f32 eps) {
     return r;
 }
 
+f32 fn_80313324(f32 cur, f32 target, f32 rate, f32 eps) {
+    extern const f32 lbl_803F2424[];
+    extern const f32 lbl_803F2428[];
+    extern const f32 lbl_803F242C[];
+    f32 d = cur - target;
+    if (d >= lbl_803F2424[0] ? d > lbl_803F2428[0] : -d > lbl_803F2428[0]) {
+        if (cur > target) {
+            while (cur > target + lbl_803F2428[0]) {
+                target += lbl_803F242C[0];
+            }
+        } else {
+            f32 lim = cur + lbl_803F2428[0];
+            while (target > lim) {
+                target -= lbl_803F242C[0];
+            }
+        }
+    }
+    return fn_803132BC(cur, target, rate, eps);
+}
+
 f32 fn_803133E8(f32 a, f32 b) {
     extern const f32 lbl_803F2430[];
     extern const f32 lbl_803F2434[];
@@ -425,9 +445,12 @@ void fn_80314A18(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
 
     obj = (s32 *)fn_802D1FC8(0xC);
     fn_802D39E4(&obj[1]);
-    obj[0] = arg1;
-    obj[2] = arg3;
-    fn_802D3CE4(&obj[1], arg2);
+    {
+        s32 *p = &obj[1];
+        obj[0] = arg1;
+        obj[2] = arg3;
+        fn_802D3CE4(p, arg2);
+    }
     fn_802CB69C((s8 *)arg0 + 0xC, obj);
     M2C_FIELD(arg0, s32 *, 8)++;
 }
