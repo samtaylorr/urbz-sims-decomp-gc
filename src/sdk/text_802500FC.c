@@ -2931,6 +2931,36 @@ void fn_80263B5C(s32 arg0, void *arg1) {
     fn_80259838(&lbl_80495EC8);
 }
 
+s32 fn_80263C40(DVDCommandBlock *block) {
+    s32 fn_8025465C();
+    M2C_UNK fn_80254684(s32);
+    M2C_UNK fn_8025974C(M2C_UNK *);
+    void fn_80263CE0(s32 arg0, void *arg1);
+    extern M2C_UNK lbl_80495EC8;
+    s32 result;
+    s32 enabled;
+    s32 state;
+    s32 retVal;
+
+    block->command = 0xC;
+    block->callback = fn_80263CE0;
+    result = fn_80262F24(1, block);
+    if (result == 0) {
+        return -1;
+    }
+    enabled = fn_8025465C();
+    while (1) {
+        state = block->state;
+        if (state == 0 || state == -1 || state == 10) {
+            retVal = block->transferredSize;
+            break;
+        }
+        fn_8025974C(&lbl_80495EC8);
+    }
+    fn_80254684(enabled);
+    return retVal;
+}
+
 void fn_80263CE0(s32 arg0, void *arg1);
 void fn_80263CE0(s32 arg0, void *arg1) {
     M2C_UNK fn_80259838(M2C_UNK *);
@@ -6353,7 +6383,7 @@ void fn_80275E98(u32 index) {
     fn_802762C0(0);
 }
 
-void fn_80275F80(u16 mtx_indx, u32 id, u32 type) {
+void fn_80275F80(u16 mtx_indx, u32 id, s32 type) {
     u32 reg;
     u32 addr;
     u32 count;
