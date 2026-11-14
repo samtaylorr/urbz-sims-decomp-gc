@@ -3060,6 +3060,13 @@ u16 fn_80270C44(void) {
     return M2C_FIELD(__peReg, u16 *, 0xE);
 }
 
+volatile union {
+    u8 u8;
+    u16 u16;
+    u32 u32;
+    f32 f32;
+} GXWGFifo : 0xCC008000;
+
 extern volatile u8 lbl_804960B8;
 extern u8 lbl_804960BC[8];
 void fn_80270C50(void) {
