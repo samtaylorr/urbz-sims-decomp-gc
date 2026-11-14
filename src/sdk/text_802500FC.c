@@ -5728,6 +5728,31 @@ void fn_80270284(s32 fmt, s32 *vat) {
     vat[0] = 0xFF;
 }
 
+void fn_802702F8(s32 attr, void *base, u8 stride) {
+    extern u8 *__GXData;
+    s32 cpAttr;
+    u32 phyAddr;
+    s32 reg;
+
+    attr = (attr == 25) ? 10 : attr;
+    cpAttr = attr - 9;
+    phyAddr = (u32)base & 0x3FFFFFFF;
+    *(volatile u8 *)0xCC008000 = 8;
+    *(volatile u8 *)0xCC008000 = cpAttr | 0xA0;
+    *(volatile u32 *)0xCC008000 = phyAddr;
+    reg = cpAttr - 12;
+    if (reg >= 0 && reg < 4) {
+        ((u32 *)(__GXData + 0x88))[reg] = phyAddr;
+    }
+    *(volatile u8 *)0xCC008000 = 8;
+    *(volatile u8 *)0xCC008000 = cpAttr | 0xB0;
+    *(volatile u32 *)0xCC008000 = stride;
+    reg = cpAttr - 12;
+    if (reg >= 0 && reg < 4) {
+        ((u32 *)(__GXData + 0x98))[reg] = stride;
+    }
+}
+
 void fn_80270384(void) {
     *(s8 *)0xCC008000 = 0x48;
 }
