@@ -3366,8 +3366,8 @@ void fn_80271B58(u32 mode) {
 void fn_80271B7C(u32 clamp) {
     extern u32 *__GXData;
     u32 *gx = __GXData;
-    u8 clmpB = (clamp & 1) == 1;
     u8 clmpT = (clamp & 2) == 2;
+    u8 clmpB = (clamp & 1) == 1;
 
     gx[0x1EC / 4] = __rlwimi(gx[0x1EC / 4], clmpB, 0, 31, 31);
     gx[0x1EC / 4] = __rlwimi(gx[0x1EC / 4], clmpT, 1, 30, 30);
@@ -3757,12 +3757,101 @@ void fn_8027425C(u32 coord, u8 enable, u32 ss, u32 ts) {
     }
 }
 
+void fn_80274940(u32 tev_stage, u32 ind_stage, u32 format, u32 bias_sel, u32 matrix_sel, u32 wrap_s, u32 wrap_t, u8 add_prev, u8 utc_lod, u32 alpha_sel);
+
+void fn_80274D54(u8 nIndStages) {
+    extern void *__GXData;
+    u8 *gx = __GXData;
+
+    M2C_FIELD(gx, u32 *, 0x204) = __rlwimi(M2C_FIELD(gx, u32 *, 0x204), nIndStages, 16, 13, 15);
+    M2C_FIELD(gx, u32 *, 0x5AC) |= 6;
+}
+
+void fn_80274D78(u32 tev_stage) {
+    fn_80274940(tev_stage, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+}
+
+void fn_80274DC0(u32 tev_stage, u32 ind_stage, u8 signed_offsets, u8 replace_mode, u32 matrix_sel) {
+    u32 wrap;
+    u32 bias;
+
+    wrap = replace_mode ? 6 : 0;
+    bias = signed_offsets ? 7 : 0;
+    fn_80274940(tev_stage, ind_stage, 0, bias, matrix_sel, wrap, wrap, 0, 0, 0);
+}
+
+void fn_802750DC(u32 tev_stage, u32 ind_stage, u32 matrix_sel) {
+    fn_80274940(tev_stage, ind_stage, 0, 7, matrix_sel, 0, 0, 0, 0, 0);
+}
+
 void fn_80275168(void) {
 
 }
 
 void fn_80275690(void) {
 
+}
+
+void fn_80275CC8(const f32 *src, volatile f32 *dst) {
+    f32 v0, v1, v2, v3, v4, v5;
+    v0 = __psq_l(src, 0, 0, 0);
+    v1 = src[2];
+    v2 = __psq_l(src, 0x10, 0, 0);
+    v3 = src[6];
+    v4 = __psq_l(src, 0x20, 0, 0);
+    v5 = src[10];
+    __psq_st(dst, v0, 0, 0, 0);
+    *dst = v1;
+    __psq_st(dst, v2, 0, 0, 0);
+    *dst = v3;
+    __psq_st(dst, v4, 0, 0, 0);
+    *dst = v5;
+}
+
+void fn_80275CFC(const f32 *src, volatile f32 *dst) {
+    f32 v0, v1, v2, v3, v4;
+    v0 = __psq_l(src, 0, 0, 0);
+    v1 = __psq_l(src, 0x8, 0, 0);
+    v2 = __psq_l(src, 0x10, 0, 0);
+    v3 = __psq_l(src, 0x18, 0, 0);
+    v4 = src[8];
+    __psq_st(dst, v0, 0, 0, 0);
+    __psq_st(dst, v1, 0, 0, 0);
+    __psq_st(dst, v2, 0, 0, 0);
+    __psq_st(dst, v3, 0, 0, 0);
+    *dst = v4;
+}
+
+void fn_80275D28(const f32 *src, volatile f32 *dst) {
+    f32 v0, v1, v2, v3;
+    v0 = __psq_l(src, 0, 0, 0);
+    v1 = __psq_l(src, 0x8, 0, 0);
+    v2 = __psq_l(src, 0x10, 0, 0);
+    v3 = __psq_l(src, 0x18, 0, 0);
+    __psq_st(dst, v0, 0, 0, 0);
+    __psq_st(dst, v1, 0, 0, 0);
+    __psq_st(dst, v2, 0, 0, 0);
+    __psq_st(dst, v3, 0, 0, 0);
+}
+
+void fn_80275D4C(const f32 *mtx, u32 id) {
+    volatile f32 *dst;
+    f32 v0, v1, v2, v3, v4, v5;
+    GXWGFifo.u8 = 0x10;
+    GXWGFifo.u32 = (id * 4) | 0xB0000;
+    dst = &GXWGFifo.f32;
+    v0 = __psq_l(mtx, 0, 0, 0);
+    v1 = __psq_l(mtx, 0x8, 0, 0);
+    v2 = __psq_l(mtx, 0x10, 0, 0);
+    v3 = __psq_l(mtx, 0x18, 0, 0);
+    v4 = __psq_l(mtx, 0x20, 0, 0);
+    v5 = __psq_l(mtx, 0x28, 0, 0);
+    __psq_st(dst, v0, 0, 0, 0);
+    __psq_st(dst, v1, 0, 0, 0);
+    __psq_st(dst, v2, 0, 0, 0);
+    __psq_st(dst, v3, 0, 0, 0);
+    __psq_st(dst, v4, 0, 0, 0);
+    __psq_st(dst, v5, 0, 0, 0);
 }
 
 void fn_80276D34(void) {
