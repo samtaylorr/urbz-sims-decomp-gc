@@ -134,18 +134,20 @@ void fn_802FF70C(void *arg0) {
     s32 i;
 
     if (M2C_FIELD(arg0, s32 *, 4) & 0x04000000) {
-        u8 *q = (u8 *)arg0 + 0x64;
-        s32 n = *(u8 *)(q + 0x24);
-        for (i = 0; i < n; i++) {
-            e = (*(char ***)(q + 4))[i];
-            if (e != NULL) {
-                vt = *(char **)(e + 0x24);
-                (*(void (**)(char *))(vt + 0x8C))(e + *(s16 *)(vt + 0x88));
+        s32 n = M2C_FIELD(arg0, u8 *, 0x88);
+        if (n > 0) {
+            for (i = 0; i < n; i++) {
+                e = M2C_FIELD(arg0, char ***, 0x68)[i];
+                if (e != NULL) {
+                    vt = *(char **)(e + 0x24);
+                    (*(void (**)(char *))(vt + 0x8C))(e + *(s16 *)(vt + 0x88));
+                }
             }
         }
     } else {
-        for (i = 0; i < p->n; i++) {
-            e = p->e[i].a;
+        s32 j;
+        for (j = 0; j < p->n; j++) {
+            e = p->e[j].a;
             if (e != NULL) {
                 vt = *(char **)(e + 0x24);
                 (*(void (**)(char *))(vt + 0x8C))(e + *(s16 *)(vt + 0x88));
