@@ -34,12 +34,6 @@ static inline void *EIPortalPointLight_WriteBoolP(void *stream, s32 *val) {
     return stream;
 }
 
-static inline void *EIPortalPointLight_WriteBool(void *stream, s32 val) {
-    u8 b = val != 0;
-    EIPortalPointLight_Write(stream, &b, 1);
-    return stream;
-}
-
 static inline void EIPortalPointLight_GetRawA(void *arg0, s16 *arg1, s16 *arg2) {
     void (*temp_r0)(s32, s32, s16 *, s16 *);
 
