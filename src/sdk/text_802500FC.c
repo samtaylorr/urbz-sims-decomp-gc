@@ -5437,6 +5437,37 @@ s32 fn_80271074(s32 arg0) {
     return temp_r31;
 }
 
+void fn_802713FC(void) {
+    extern void *__GXData;
+    void fn_80274440(void);
+    void fn_80275168(void);
+    void fn_80271794(void);
+    void fn_8026F630(void);
+    void fn_8026FF68(void);
+    void fn_8026F6EC(void);
+    u32 dState = M2C_FIELD(__GXData, u32 *, 0x5AC);
+
+    if (dState & 1) {
+        fn_80274440();
+    }
+    if (dState & 2) {
+        fn_80275168();
+    }
+    if (dState & 4) {
+        fn_80271794();
+    }
+    if (dState & 8) {
+        fn_8026F630();
+    }
+    if (dState & 0x10) {
+        fn_8026FF68();
+    }
+    if (dState & 0x18) {
+        fn_8026F6EC();
+    }
+    M2C_FIELD(__GXData, u32 *, 0x5AC) = 0;
+}
+
 void fn_8027154C(void) {
     extern void *__GXData;
     u32 i;
