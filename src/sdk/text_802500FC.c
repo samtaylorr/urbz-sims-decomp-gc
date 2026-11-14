@@ -31,8 +31,20 @@ typedef struct OSMutex_ {
     struct OSMutex_ *prev;
 } OSMutex_;
 
+typedef struct OSThreadQueue_ {
+    struct OSThread_ *head;
+    struct OSThread_ *tail;
+} OSThreadQueue_;
+
 typedef struct OSThread_ {
-    u8 pad[0x2F0];
+    u8 pad[0x2D0];
+    s32 priority;
+    s32 base;
+    void *val;
+    OSThreadQueue_ *queue;
+    struct OSThread_ *next;
+    struct OSThread_ *prev;
+    u8 pad2[0x2F0 - 0x2E8];
     OSMutex_ *mutex;
     OSMutex_ *head;
     OSMutex_ *tail;
