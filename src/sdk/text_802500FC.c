@@ -2577,6 +2577,18 @@ void fn_8026561C(void) {
     }
 }
 
+void fn_8026588C(void) {
+    extern s32 lbl_80442A48[];
+    extern s32 lbl_80495F84;
+    void fn_80266AE8(s32, s32);
+    void fn_80250F6C(void);
+
+    lbl_80495F84 = 0;
+    lbl_80442A48[0] = -1;
+    fn_80266AE8(0, 0);
+    fn_80250F6C();
+}
+
 void fn_80265CC4(void *alarm, void *context) {
     M2C_UNK fn_80254AC0(M2C_UNK);
     void fn_80252AAC(void *);
@@ -4050,16 +4062,16 @@ void fn_802718FC(u16 left, u16 top, u16 wd, u16 ht) {
 void fn_80271978(u16 left, u16 top, u16 wd, u16 ht) {
     extern void *__GXData;
     u32 *gx;
-    u32 l = left, t = top, w = wd, h = ht;
+    u32 l = left;
 
     gx = __GXData;
     gx[0x1F0 / 4] = 0;
     gx[0x1F0 / 4] = __rlwimi(gx[0x1F0 / 4], l, 0, 22, 31);
-    gx[0x1F0 / 4] = __rlwimi(gx[0x1F0 / 4], t, 10, 12, 21);
+    gx[0x1F0 / 4] = __rlwimi(gx[0x1F0 / 4], top, 10, 12, 21);
     gx[0x1F0 / 4] = __rlwimi(gx[0x1F0 / 4], 0x49, 24, 0, 7);
     gx[0x1F4 / 4] = 0;
-    gx[0x1F4 / 4] = __rlwimi(gx[0x1F4 / 4], w - 1, 0, 22, 31);
-    gx[0x1F4 / 4] = __rlwimi(gx[0x1F4 / 4], h - 1, 10, 12, 21);
+    gx[0x1F4 / 4] = __rlwimi(gx[0x1F4 / 4], wd - 1, 0, 22, 31);
+    gx[0x1F4 / 4] = __rlwimi(gx[0x1F4 / 4], ht - 1, 10, 12, 21);
     gx[0x1F4 / 4] = __rlwimi(gx[0x1F4 / 4], 0x4A, 24, 0, 7);
 }
 
