@@ -2577,6 +2577,22 @@ void fn_80269B64(u32 arg0) {
     regs[1] = reg;
 }
 
+s32 fn_80269B90(s16 *x, s16 *y) {
+    volatile u16 *regs = (volatile u16 *)0xCC002000;
+    u32 hcount, vcount;
+
+    if (regs[0x20] & 0x8000) {
+        vcount = regs[0x20] & 0x7FF;
+        hcount = regs[0x21] & 0x7FF;
+        regs[0x20] = 0;
+        regs[0x21] = 0;
+        fn_802698E8(hcount, vcount, x, y);
+        return 1;
+    }
+    *x = *y = -1;
+    return 0;
+}
+
 void fn_80269C78(u32 arg0, s32 arg1, s32 arg2) {
     M2C_UNK fn_80269B90(s32, s32);
     M2C_UNK fn_80269C04(s32, s32);
@@ -2990,6 +3006,19 @@ void fn_8026CA50(u8 enable) {
 
     reg = gx[0x1D0 / 4];
     reg = __rlwimi(reg, enable, 3, 28, 28);
+    *(volatile u8 *)0xCC008000 = 0x61;
+    *(volatile u32 *)0xCC008000 = reg;
+    gx[0x1D0 / 4] = reg;
+    ((u16 *)gx)[1] = 0;
+}
+
+void fn_8026CA7C(u8 enable) {
+    extern void *__GXData;
+    u32 *gx = __GXData;
+    u32 reg;
+
+    reg = gx[0x1D0 / 4];
+    reg = __rlwimi(reg, enable, 4, 27, 27);
     *(volatile u8 *)0xCC008000 = 0x61;
     *(volatile u32 *)0xCC008000 = reg;
     gx[0x1D0 / 4] = reg;
