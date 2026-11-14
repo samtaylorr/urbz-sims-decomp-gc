@@ -294,7 +294,7 @@ void fn_80310DE4(char *self, s32 i, s32 j, f32 v) {
         (*(struct Data **)(self + 0x1FC))->a28[i][j] = v;
         (*(struct Data **)(self + 0x1FC))->a48[i][j] = v - (*(struct Data **)(self + 0x1FC))->a38[i][j];
     }
-    if (!((*(struct Data **)(self + 0x1FC))->a38[i][j] * v > lbl_803F22C8[0])) {
+    if ((*(struct Data **)(self + 0x1FC))->a38[i][j] * v <= lbl_803F22C8[0]) {
         (*(struct Data **)(self + 0x1FC))->a68[i][j] = 1;
     }
 }
