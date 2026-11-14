@@ -350,11 +350,21 @@ void fn_80310FF4(void *arg0, s32 arg1) {
 f32 fn_80310FFC(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 fn_803119D4(void *, s32);
     extern f32 lbl_803F22CC[];
+    struct Cfg {
+        char pad[0x28];
+        f32 scale[2][2];
+    };
+    struct Ctl {
+        char pad[0x18C];
+        s32 swap[2];
+        s32 axis[2][2];
+        char pad2[0x200 - 0x1A4];
+        struct Cfg *cfg;
+    } *self = arg0;
     s32 m;
     s32 i;
-    s32 k;
 
-    m = fn_803119D4(arg0, arg3);
+    m = fn_803119D4(self, arg3);
     if (arg1 == 0) {
         if (m & 0xF0000) {
             return lbl_803F22CC[0];
@@ -365,12 +375,10 @@ f32 fn_80310FFC(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
         }
     }
     i = arg2;
-    if (((s32 *)((char *)arg0 + 0x18C))[arg1] != 0) {
+    if (self->swap[arg1] != 0) {
         i = !i;
     }
-    k = i + arg1 * 2;
-    return (f32)((s32 *)((char *)arg0 + 0x194))[k] *
-           ((f32 *)(M2C_FIELD(arg0, char **, 0x200) + 0x28))[k];
+    return (f32)self->axis[arg1][i] * self->cfg->scale[arg1][i];
 }
 
 s32 fn_803110C8(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
