@@ -1965,6 +1965,27 @@ s32 fn_80261640(u32 resume) {
     return 0;
 }
 
+void fn_80261940(u32 arg0) {
+    extern void fn_802652F4(u32);
+    extern void fn_80264274(void);
+    extern void fn_80261458(s32);
+    extern void fn_80266548(void (*)(void));
+    extern void fn_8026199C(void);
+    extern void fn_80261A1C(void);
+
+    if (arg0 == 0x10) {
+        fn_802652F4(0x01234568);
+        fn_80264274();
+        fn_80261458(0);
+        return;
+    }
+    if (arg0 & 1) {
+        fn_80261A1C();
+        return;
+    }
+    fn_80266548(fn_8026199C);
+}
+
 volatile u32 __DIRegs[] : 0xCC006000;
 void fn_8026199C(u32 arg0) {
     extern void fn_802652F4(u32);
