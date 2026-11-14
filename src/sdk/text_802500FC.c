@@ -4625,6 +4625,13 @@ void fn_80272CC4(u8 nChans) {
     gx[0x5AC / 4] |= 4;
 }
 
+void fn_8027328C(u32 *obj, void *image_ptr, u16 width, u16 height, u32 format, u32 wrap_s, u32 wrap_t, u8 mipmap, u32 tlut_name) {
+    extern void fn_80273040(u32 *obj, void *image_ptr, u16 width, u16 height, u32 format, u32 wrap_s, u32 wrap_t, u8 mipmap);
+    fn_80273040(obj, image_ptr, width, height, format, wrap_s, wrap_t, mipmap);
+    ((u8 *)obj)[0x1F] &= ~2;
+    obj[6] = tlut_name;
+}
+
 void fn_80273438(void *arg0, u32 arg1) {
     struct { u32 w0, w1, w2; u32 pad : 11; u32 addr : 21; } *p = arg0;
     p->addr = arg1 >> 5;
