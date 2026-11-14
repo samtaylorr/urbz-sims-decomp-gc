@@ -51,7 +51,6 @@ s32 fn_8036D868(void *arg0) {
     extern f32 lbl_803F5304[];
     extern u8 lbl_8041DAB0[];
     ECamVec3 *q;
-    ECamVec3 v;
     f32 c;
 
     q = (ECamVec3 *)((char *)arg0 + 0x90);
@@ -60,20 +59,15 @@ s32 fn_8036D868(void *arg0) {
     fn_803BAB78(q);
     c = lbl_803F5304[0];
     M2C_FIELD(arg0, s32 *, 0xA0) = 0;
-    v.x = c;
-    v.z = c;
-    v.y = c;
-    q->x = v.x;
     M2C_FIELD(arg0, s32 *, 0x8C) = 0;
     M2C_FIELD(arg0, s32 *, 0xB4) = 0;
     M2C_FIELD(arg0, s32 *, 0xA8) = 0;
     M2C_FIELD(arg0, s32 *, 0xB0) = 0;
     M2C_FIELD(arg0, s32 *, 0xAC) = 0;
+    ECamVec3_Set(q, c, c, c);
     M2C_FIELD(q, f32 *, 0xC) = c;
-    q->y = v.y;
-    q->z = v.z;
-    M2C_FIELD(arg0, s32 *, 0xB8) = 0;
     M2C_FIELD(arg0, s32 *, 0xA4) = 0;
+    M2C_FIELD(arg0, s32 *, 0xB8) = 0;
     return (s32)arg0;
 }
 
