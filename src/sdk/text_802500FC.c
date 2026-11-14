@@ -1844,7 +1844,7 @@ void fn_80261270(s32 arg0) {
 
 void fn_80261458(void);
 void fn_802652F4(void);
-void fn_802664BC(void (*)(void));
+s32 fn_802664BC(void (*)(void));
 void fn_80261504(void) {
     fn_802652F4();
     fn_802664BC(fn_80261458);
