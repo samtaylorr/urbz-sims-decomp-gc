@@ -1752,6 +1752,8 @@ u32 fn_8025BD24(s32 chan, BOOL exi, BOOL tc, BOOL ext) {
     return prev;
 }
 
+#pragma push
+#pragma scheduling off
 void *fn_8025BD6C(s32 chan, void *callback) {
     typedef struct { void *exiCallback; u8 pad4[0x3C]; } EXICtrl;
     s32 fn_8025465C(void);
@@ -1759,8 +1761,8 @@ void *fn_8025BD6C(s32 chan, void *callback) {
     void fn_8025B4A8(s32, EXICtrl *);
     extern EXICtrl lbl_80441650[];
     EXICtrl *exi = &lbl_80441650[chan];
-    s32 enabled;
     void *prev;
+    s32 enabled;
 
     enabled = fn_8025465C();
     prev = exi->exiCallback;
@@ -1773,7 +1775,7 @@ void *fn_8025BD6C(s32 chan, void *callback) {
     fn_80254684(enabled);
     return prev;
 }
-
+#pragma pop
 void fn_8025BDE8(void) {
     typedef struct { u8 pad0[0x20]; s32 idTime; u8 pad24[0x1C]; } EXICtrl;
     s32 fn_8025BE34(s32);
