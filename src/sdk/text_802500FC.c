@@ -3511,11 +3511,11 @@ void fn_8026EC2C(u8 hiWatermarkClr, u8 loWatermarkClr) {
 void fn_8026EC5C(void) {
     extern s32 lbl_80496094;
     extern volatile u16 *__cpReg;
-    u8 *fifo = (u8 *)lbl_80496094;
+    u32 *fifo = (u32 *)lbl_80496094;
 
-    M2C_FIELD(fifo, u32 *, 0xC) = M2C_FIELD(fifo, u32 *, 0x10) + 0x200;
-    __cpReg[0x14] = M2C_FIELD(fifo, u32 *, 0xC);
-    __cpReg[0x15] = M2C_FIELD(fifo, u32 *, 0xC) >> 16 & 0x3FFF;
+    fifo[3] = fifo[4] + 0x200;
+    __cpReg[0x14] = fifo[3];
+    __cpReg[0x15] = fifo[3] >> 16 & 0x3FFF;
 }
 
 extern s32 lbl_80496098;
