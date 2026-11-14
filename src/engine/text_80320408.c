@@ -88,7 +88,7 @@ void fn_80320590(void *arg0) {
 
 void fn_803205D4(void *arg0, void *arg1) {
     extern void fn_802D39E4(void *);
-    extern void fn_802C5B1C(void *, void *);
+    extern void fn_802C5B1C();
     extern void fn_802D3CE4(void *, s32);
     extern void fn_802C5BBC(void *, void *);
     extern void fn_802D39F0(void *, s32);
@@ -157,13 +157,21 @@ void fn_80322898(s32 arg0, Vec2Arg *arg1, s32 arg2, s32 arg3) {
 M2C_UNK fn_803233D4(void *arg0) {
     extern u8 lbl_8045BA40[];
     extern s32 fn_8033740C(void *, s32, s32, s32);
-    s32 i;
+    typedef struct {
+        u8 pad[0x20];
+        s32 **items;
+        s32 count;
+    } List;
+    s32 i = 0;
 
-    for (i = 0; i < M2C_FIELD(M2C_FIELD(arg0, void **, 0x60), s32 *, 0x24); i++) {
-        s32 *item = M2C_FIELD(M2C_FIELD(arg0, void **, 0x60), s32 **, 0x20)[i];
-        if (item[2] == 0) {
-            item[2] = fn_8033740C(lbl_8045BA40, item[1], 0, 0);
-        }
+    if (i < M2C_FIELD(arg0, List **, 0x60)->count) {
+        do {
+            s32 *item = M2C_FIELD(arg0, List **, 0x60)->items[i];
+            if (item[2] == 0) {
+                item[2] = fn_8033740C(lbl_8045BA40, item[1], 0, 0);
+            }
+            i++;
+        } while (i < M2C_FIELD(arg0, List **, 0x60)->count);
     }
 }
 
@@ -307,14 +315,15 @@ extern void fn_80320528(void *, s32);
 extern f32 lbl_8049622C[2];
 extern f32 lbl_803F30E4[];
 extern s32 lbl_80496234;
-extern void fn_803227C4(s32, s32, s32, s32, s32, s32);
+extern Vec2Arg fn_803227C4(s32, s32, s32, s32, s32);
+typedef void (*Fn803227C4)(s32, s32, s32, s32, s32, s32);
 s32 fn_80323FA8(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
-    fn_803227C4(arg0, arg1, arg2, 0, arg4, arg3);
+    ((Fn803227C4)fn_803227C4)(arg0, arg1, arg2, 0, arg4, arg3);
     return arg0;
 }
 
 s32 fn_80323FE0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
-    fn_803227C4(arg0, arg1, arg2, 1, arg4, arg3);
+    ((Fn803227C4)fn_803227C4)(arg0, arg1, arg2, 1, arg4, arg3);
     return arg0;
 }
 
