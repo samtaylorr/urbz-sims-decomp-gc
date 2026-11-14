@@ -2579,6 +2579,26 @@ u32 fn_8025E9A0(u32 poll) {
     return poll;
 }
 
+u32 fn_8025EA3C(u32 poll) {
+    typedef struct { s32 chan; u32 poll; u32 inputBytes; void *input; void *callback; } SIControl;
+    extern SIControl lbl_803F9124;
+    s32 fn_8025465C(void);
+    void fn_80254684(s32);
+    s32 enabled;
+
+    if (poll == 0) {
+        return lbl_803F9124.poll;
+    }
+    enabled = fn_8025465C();
+    poll >>= 24;
+    poll &= 0xF0;
+    poll = lbl_803F9124.poll & ~poll;
+    __SIRegs[12] = poll;
+    lbl_803F9124.poll = poll;
+    fn_80254684(enabled);
+    return poll;
+}
+
 void fn_8025EC40(void *alarm, void *context) {
     typedef struct { s32 chan; void *output; u32 outputBytes; void *input; u32 inputBytes; void *callback; u8 pad[8]; } SIPacket;
     typedef struct { u8 pad[0x28]; } OSAlarm;
