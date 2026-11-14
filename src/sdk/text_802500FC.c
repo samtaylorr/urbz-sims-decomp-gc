@@ -3059,6 +3059,21 @@ void fn_8026CA7C(u8 enable) {
     ((u16 *)gx)[1] = 0;
 }
 
+void fn_8026CAA8(u8 enable, u32 func, u8 update) {
+    extern void *__GXData;
+    u32 *gx = __GXData;
+    u32 reg;
+
+    reg = gx[0x1D8 / 4];
+    reg = __rlwimi(reg, enable, 0, 31, 31);
+    reg = __rlwimi(reg, func, 1, 28, 30);
+    reg = __rlwimi(reg, update, 4, 27, 27);
+    *(volatile u8 *)0xCC008000 = 0x61;
+    *(volatile u32 *)0xCC008000 = reg;
+    gx[0x1D8 / 4] = reg;
+    ((u16 *)gx)[1] = 0;
+}
+
 void fn_8026CADC(u8 before_tex) {
     extern void *__GXData;
     u32 *gx = __GXData;
