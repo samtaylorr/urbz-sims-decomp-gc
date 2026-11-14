@@ -3096,7 +3096,6 @@ s32 fn_802646D0(DVDCommandBlock *block) {
     return 0;
 }
 
-#pragma pop
 void fn_8026477C(void) {
     extern M2C_UNK lbl_80495EC8;
     fn_80259838(&lbl_80495EC8);
