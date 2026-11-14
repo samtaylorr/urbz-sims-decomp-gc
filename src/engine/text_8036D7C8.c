@@ -14,12 +14,12 @@ extern s32 lbl_80496304;
 
 typedef struct { f32 x, y, z; } ECamVec3;
 
-static inline ECamVec3 ECamVec3_Make(f32 x, f32 y, f32 z) {
+static inline void ECamVec3_Set(ECamVec3 *dst, f32 x, f32 y, f32 z) {
     ECamVec3 v;
     v.x = x;
     v.z = z;
     v.y = y;
-    return v;
+    *dst = v;
 }
 
 void fn_802D2FD0(void);
@@ -50,11 +50,11 @@ s32 fn_8036D868(void *arg0) {
     extern void fn_803BAB78(void *);
     extern f32 lbl_803F5304[];
     extern u8 lbl_8041DAB0[];
-    char *q;
+    ECamVec3 *q;
     ECamVec3 v;
     f32 c;
 
-    q = (char *)arg0 + 0x90;
+    q = (ECamVec3 *)((char *)arg0 + 0x90);
     fn_802F04BC(arg0);
     *(void **)arg0 = lbl_8041DAB0;
     fn_803BAB78(q);
@@ -63,13 +63,15 @@ s32 fn_8036D868(void *arg0) {
     v.x = c;
     v.z = c;
     v.y = c;
-    M2C_FIELD(arg0, ECamVec3 *, 0x90) = v;
+    q->x = v.x;
     M2C_FIELD(arg0, s32 *, 0x8C) = 0;
     M2C_FIELD(arg0, s32 *, 0xB4) = 0;
     M2C_FIELD(arg0, s32 *, 0xA8) = 0;
     M2C_FIELD(arg0, s32 *, 0xB0) = 0;
     M2C_FIELD(arg0, s32 *, 0xAC) = 0;
     M2C_FIELD(q, f32 *, 0xC) = c;
+    q->y = v.y;
+    q->z = v.z;
     M2C_FIELD(arg0, s32 *, 0xB8) = 0;
     M2C_FIELD(arg0, s32 *, 0xA4) = 0;
     return (s32)arg0;
