@@ -3901,6 +3901,16 @@ void fn_80271794(void) {
     *(u16 *)(__GXData + 2) = 0;
 }
 
+void fn_802719F4(u16 wd, u16 ht) {
+    extern u32 *__GXData;
+    u32 *gx = __GXData;
+    u16 stride = (u16)(wd << 1);
+
+    gx[0x1E8 / 4] = 0;
+    gx[0x1E8 / 4] = __rlwimi(gx[0x1E8 / 4], stride >> 5, 0, 22, 31);
+    gx[0x1E8 / 4] = __rlwimi(gx[0x1E8 / 4], 0x4D, 24, 0, 7);
+}
+
 void fn_80271B58(u32 mode) {
     extern u32 *__GXData;
     u32 *gx = __GXData;
@@ -4342,16 +4352,19 @@ void fn_8027425C(u32 coord, u8 enable, u32 ss, u32 ts) {
 
 void fn_802742D8(u32 coord, u32 s_enable, u32 t_enable) {
     extern void *__GXData;
-    u32 *ts = (u32 *)__GXData + coord;
+    u32 *ts;
+    u32 *gx;
 
+    gx = __GXData;
+    ts = &gx[coord];
     ts[0xB8 / 4] = __rlwimi(ts[0xB8 / 4], s_enable, 17, 14, 14);
     ts[0xD8 / 4] = __rlwimi(ts[0xD8 / 4], t_enable, 17, 14, 14);
-    if (M2C_FIELD(__GXData, u32 *, 0x594) & (1 << coord)) {
+    if (gx[0x594 / 4] & (1 << coord)) {
         GXWGFifo.u8 = 0x61;
         GXWGFifo.u32 = ts[0xB8 / 4];
         GXWGFifo.u8 = 0x61;
         GXWGFifo.u32 = ts[0xD8 / 4];
-        M2C_FIELD(__GXData, u16 *, 0x2) = 0;
+        M2C_FIELD(gx, u16 *, 0x2) = 0;
     }
 }
 
@@ -4373,17 +4386,21 @@ void fn_8027433C(u32 coord, u32 s_enable, u32 t_enable) {
 
 void fn_802743A0(u32 tmap, u32 tcoord) {
     extern void *__GXData;
-    u32 *gx = __GXData;
-    u32 *ts = &gx[tcoord];
+    u32 *ts;
+    u32 *tm;
+    u32 *gx;
     u32 w, h;
     u8 s_bias, t_bias;
 
-    w = gx[0x514 / 4 + tmap] & 0x3FF;
-    h = (gx[0x514 / 4 + tmap] >> 10) & 0x3FF;
+    gx = __GXData;
+    tm = &gx[tmap];
+    ts = &gx[tcoord];
+    w = tm[0x514 / 4] & 0x3FF;
+    h = (tm[0x514 / 4] >> 10) & 0x3FF;
     ts[0xB8 / 4] = __rlwimi(ts[0xB8 / 4], w, 0, 16, 31);
     ts[0xD8 / 4] = __rlwimi(ts[0xD8 / 4], h, 0, 16, 31);
-    s_bias = (gx[0x534 / 4 + tmap] & 3) == 1;
-    t_bias = ((gx[0x534 / 4 + tmap] >> 2) & 3) == 1;
+    s_bias = (tm[0x534 / 4] & 3) == 1;
+    t_bias = ((tm[0x534 / 4] >> 2) & 3) == 1;
     ts[0xB8 / 4] = __rlwimi(ts[0xB8 / 4], s_bias, 16, 15, 15);
     ts[0xD8 / 4] = __rlwimi(ts[0xD8 / 4], t_bias, 16, 15, 15);
     GXWGFifo.u8 = 0x61;
