@@ -3846,12 +3846,13 @@ void fn_80268ED0(void *callback) {
     void fn_80267C10(void *, void *, void *, void *, void *);
     extern u8 lbl_80442B18[];
     extern s32 lbl_80495FE0;
+    u8 *hv = lbl_80442B18;
     s32 enabled;
 
     enabled = fn_8025465C();
-    *(void **)(lbl_80442B18 + 0x120) = callback;
+    *(void **)(hv + 0x120) = callback;
     lbl_80495FE0 = 1;
-    fn_80267C10(lbl_80442B18 + 0xF0, lbl_80442B18 + 0x124, lbl_80442B18 + 0x128, lbl_80442B18 + 0x13C, lbl_80442B18 + 0x140);
+    fn_80267C10(hv + 0xF0, hv + 0x124, hv + 0x128, hv + 0x13C, hv + 0x140);
     fn_80254684(enabled);
 }
 
