@@ -46,7 +46,6 @@ void fn_802F3CE0(void) {
     fn_802F3414();
 }
 
-void fn_802F3414(void);
 void fn_802F3D08(void) {
     fn_802F3414();
 }
