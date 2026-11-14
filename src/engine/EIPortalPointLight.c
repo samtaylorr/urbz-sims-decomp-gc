@@ -9,6 +9,17 @@ static inline void EIPortalPointLightVec3_Set(EIPortalPointLightVec3 *v, f32 x, 
     v->x = x;
 }
 
+static inline void EIPortalPointLight_WriteF32(void *stream, f32 val) {
+    void *vt = M2C_FIELD(stream, void **, 0x18);
+    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)((char *)stream + M2C_FIELD(vt, s16 *, 0x38), &val, 4);
+}
+
+static inline void EIPortalPointLight_WriteBool(void *stream, s32 val) {
+    u8 b = val ? 1 : 0;
+    void *vt = M2C_FIELD(stream, void **, 0x18);
+    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)((char *)stream + M2C_FIELD(vt, s16 *, 0x38), &b, 1);
+}
+
 extern s32 lbl_804961D8;
 extern u8 lbl_804937B8[];
 extern u8 lbl_803F0FAC[];
@@ -81,6 +92,37 @@ void fn_802F27E4(void *arg0, s32 arg1, s32 arg2) {
     (*(void (**)(void *))(vt + 0x5C))((char *)arg0 + *(s16 *)(vt + 0x58));
 }
 
+void fn_802F2820(char *self, void *stream) {
+    extern void fn_802EFC54(void *, void *);
+    extern void *fn_802D34B0(void *, void *);
+    EIPortalPointLightVec3 v;
+    u8 flag;
+    void *vt;
+
+    fn_802EFC54(self, stream);
+    vt = *(void **)self;
+    M2C_FIELD(vt, void (**)(void *, void *), 0x154)(self + M2C_FIELD(vt, s16 *, 0x150), &v);
+    stream = fn_802D34B0(stream, &v);
+    {
+        f32 a;
+        vt = M2C_FIELD(stream, void **, 0x18);
+        a = M2C_FIELD(self, f32 *, 0xD8);
+        M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)((char *)stream + M2C_FIELD(vt, s16 *, 0x38), &a, 4);
+    }
+    {
+        f32 b;
+        vt = M2C_FIELD(stream, void **, 0x18);
+        b = M2C_FIELD(self, f32 *, 0xDC);
+        M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)((char *)stream + M2C_FIELD(vt, s16 *, 0x38), &b, 4);
+    }
+    flag = 0;
+    if (M2C_FIELD(self, s32 *, 0xE0) != 0) {
+        flag = 1;
+    }
+    vt = M2C_FIELD(stream, void **, 0x18);
+    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)((char *)stream + M2C_FIELD(vt, s16 *, 0x38), &flag, 1);
+}
+
 void fn_802F2904(char *self, void *stream) {
     extern u16 lbl_804937CE[];
     extern void fn_802EFD68(void *, void *);
@@ -104,39 +146,43 @@ void fn_802F2904(char *self, void *stream) {
 }
 
 s32 fn_802F3084(u8 *self) {
-    void (*fn)(s32, s32, u16 *, u16 *);
-    u16 a;
-    u16 b;
+    void (*fn)(s32, s32, s16 *, s16 *);
+    s16 a;
+    s16 b;
     s16 c;
     s16 d;
+    s16 *p;
     u16 v;
     s32 var_r11;
+    s32 ret;
 
-    fn = M2C_FIELD(self, void (**)(s32, s32, u16 *, u16 *), 0x20);
+    p = &a;
+    fn = M2C_FIELD(self, void (**)(s32, s32, s16 *, s16 *), 0x20);
     if (fn != NULL) {
-        fn(M2C_FIELD(self, s32 *, 0x30), 0, &a, &b);
+        fn(M2C_FIELD(self, s32 *, 0x30), 0, p, &b);
     } else {
-        a = (u16) (s32) fn;
-        b = (u16) (s32) fn;
+        b = (s16) (s32) fn;
+        *p = (s16) (s32) fn;
     }
-    v = a;
+    v = *p;
     var_r11 = 1;
     if (M2C_FIELD(self, u16 *, 0x28) == v) {
         var_r11 = 0;
     }
     M2C_FIELD(self, s32 *, 8) = var_r11;
     M2C_FIELD(self, u16 *, 0x28) = v;
-    fn = M2C_FIELD(self, void (**)(s32, s32, u16 *, u16 *), 0x24);
+    fn = M2C_FIELD(self, void (**)(s32, s32, s16 *, s16 *), 0x24);
     if (fn != NULL) {
-        fn(M2C_FIELD(self, s32 *, 0x2C), 0, (u16 *)&c, (u16 *)&d);
+        fn(M2C_FIELD(self, s32 *, 0x2C), 0, &c, &d);
     } else {
-        c = -1;
         d = -1;
+        c = -1;
     }
-    if (c != (s16)a && M2C_FIELD(self, s32 *, 0x9C) != 0) {
-        return 1;
+    ret = 0;
+    if (c != a && M2C_FIELD(self, s32 *, 0x9C) != 0) {
+        ret = 1;
     }
-    return 0;
+    return ret;
 }
 
 void fn_802F3158(s32 arg0, s32 arg1) {
