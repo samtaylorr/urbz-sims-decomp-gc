@@ -3287,6 +3287,31 @@ u32 fn_80269230(void) {
     return nextField ^ (lbl_80442C08[5] & 1);
 }
 
+u32 fn_80269364(void) {
+    extern u32 lbl_80495FD4;
+    s32 enabled;
+    u32 format;
+
+    enabled = fn_8025465C();
+    switch (lbl_80495FD4) {
+    case 0:
+    case 3:
+    case 6:
+        format = 0;
+        break;
+    case 1:
+    case 4:
+        format = 1;
+        break;
+    case 2:
+    case 5:
+        format = lbl_80495FD4;
+        break;
+    }
+    fn_80254684(enabled);
+    return format;
+}
+
 u32 fn_802693CC(void) {
     s32 enabled;
     u32 reg;
