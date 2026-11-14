@@ -1437,31 +1437,28 @@ u32 fn_80257B24(void) {
 void fn_80257CB4(u32 mode) {
     extern SramControlBlock lbl_80440C00;
     s32 fn_802572CC(s32, s32);
-    SramControlBlock *scb = &lbl_80440C00;
-    u8 *sram;
+    SramControlBlock *scb;
     s32 enabled;
-    s32 *locked;
     u8 pad[8];
 
+    scb = &lbl_80440C00;
     if (mode > 2) {
         mode = 0;
     }
     enabled = fn_8025465C();
-    locked = &scb->locked;
-    if (*locked != 0) {
+    if (scb->locked != 0) {
         fn_80254684(enabled);
-        sram = NULL;
+        scb = NULL;
     } else {
         scb->enabled = enabled;
-        *locked = 1;
-        sram = scb->sram;
+        scb->locked = 1;
     }
-    if (mode == (sram[0x13] & 3)) {
+    if (mode == (scb->sram[0x13] & 3)) {
         fn_802572CC(0, 0);
         return;
     }
-    sram[0x13] &= ~3;
-    sram[0x13] |= mode;
+    scb->sram[0x13] &= ~3;
+    scb->sram[0x13] |= mode;
     fn_802572CC(1, 0);
 }
 
@@ -2617,6 +2614,21 @@ void fn_8025EC40(void *alarm, void *context) {
     }
 }
 
+void fn_8025EE38(s32 chan, u32 type) {
+    typedef void (*SITypeAndStatusCallback)(s32, u32);
+    extern SITypeAndStatusCallback lbl_80441870[][4];
+    SITypeAndStatusCallback callback;
+    int i;
+
+    for (i = 0; i < 4; ++i) {
+        callback = lbl_80441870[chan][i];
+        if (callback) {
+            lbl_80441870[chan][i] = 0;
+            callback(chan, type);
+        }
+    }
+}
+
 void fn_8025F594(void) {
     M2C_UNK fn_8025F148();
     M2C_UNK fn_8025F448();
@@ -2964,6 +2976,31 @@ void fn_80261068(s32 result, DVDCommandBlock *block) {
 void fn_802611DC(void) {
     extern M2C_UNK lbl_80495EC8;
     fn_80259838(&lbl_80495EC8);
+}
+
+s32 fn_80261200(DVDFileInfo *fileInfo) {
+    s32 bytes;
+    DVDCommandBlock *cb = &fileInfo->cb;
+    switch (cb->state) {
+    case 0:
+    case -1:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+    case 10:
+    case 11:
+        bytes = (s32)cb->transferredSize;
+        break;
+    case 2:
+        bytes = 0;
+        break;
+    case 1:
+        bytes = (s32)(cb->transferredSize + (cb->currTransferSize - *(volatile u32 *)0xCC006018));
+        break;
+    }
+    return bytes;
 }
 
 void fn_8026126C(void) {
