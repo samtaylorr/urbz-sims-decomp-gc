@@ -2675,17 +2675,9 @@ void fn_802696D0(s16 *arg0, s16 *arg1) {
 }
 
 void fn_80269B04(s16 *x, s16 *y) {
-    u32 vcount, vcount0, hcount;
     u32 hct, vct;
 
-    vcount = __VIRegs[0x16] & 0x7FF;
-    do {
-        vcount0 = vcount;
-        hcount = __VIRegs[0x17] & 0x7FF;
-        vcount = __VIRegs[0x16] & 0x7FF;
-    } while (vcount0 != vcount);
-    hct = hcount;
-    vct = vcount;
+    GetCurrentDisplayPosition(&hct, &vct);
     fn_802698E8(hct, vct, x, y);
 }
 
