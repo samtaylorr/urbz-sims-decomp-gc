@@ -1819,6 +1819,9 @@ void *fn_8025BD6C(s32 chan, void *callback) {
     return prev;
 }
 #pragma pop
+
+#pragma push
+#pragma scheduling off
 void fn_8025BDE8(void) {
     typedef struct { u8 pad0[0x20]; s32 idTime; u8 pad24[0x1C]; } EXICtrl;
     s32 fn_8025BE34(s32);
@@ -1847,6 +1850,7 @@ s32 fn_8025BFA8(s32 chan) {
     }
     return result;
 }
+#pragma pop
 
 #pragma push
 #pragma scheduling off
