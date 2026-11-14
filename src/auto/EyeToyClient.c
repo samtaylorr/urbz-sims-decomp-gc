@@ -289,6 +289,30 @@ void fn_800421DC(void *arg0) {
     }
 }
 
+void fn_8004221C(u8 *arg0, u8 *arg1) {
+    u8 *fn_802FF608(void *, s32);
+    u8 *tex;
+    u16 *src;
+    u16 *dst;
+    s32 w;
+    s32 h;
+    s32 *pw;
+    s32 *ph;
+    u32 i;
+    u32 n;
+
+    pw = &w;
+    tex = fn_802FF608(*(void **)(arg0 + 0x20), 0);
+    ph = &h;
+    ((void (*)(void *))*(void **)(*(u8 **)(tex + 0x24) + 0x34))(tex + *(s16 *)(*(u8 **)(tex + 0x24) + 0x30));
+    src = ((u16 *(*)(void *, s32, s32 *, s32 *))*(void **)(*(u8 **)(arg1 + 0x24) + 0x44))(arg1 + *(s16 *)(*(u8 **)(arg1 + 0x24) + 0x40), 0, pw, ph);
+    dst = ((u16 *(*)(void *, s32, s32 *, s32 *))*(void **)(*(u8 **)(tex + 0x24) + 0x44))(tex + *(s16 *)(*(u8 **)(tex + 0x24) + 0x40), 0, pw, ph);
+    n = (w / 2) * h;
+    for (i = 0; i < n; i++) {
+        dst[i] = src[i] | 0x8000;
+    }
+}
+
 void fn_800426A4(void) {
     void fn_80337AEC(void *, s32);
     void fn_803374C8(void *a, char *b);
@@ -401,7 +425,6 @@ s32 fn_80043228(void) {
 
 s32 fn_80043230(void) {
     s32 fn_803390AC(s32, void (*)(s32), s32, s32, void (*)(void));
-    void fn_800438D0(f32);
     extern s32 lbl_804957B0;
     extern f32 lbl_804957B4;
     extern s32 lbl_8049409C;
@@ -415,14 +438,8 @@ s32 fn_80043230(void) {
         lbl_804957AC = ((void *(*)(s16, s16, u8))fn_8004206C)(0x80, 0x80, 0x10);
         idx = fn_8004200C();
         if (idx != -1) {
-            s32 *p;
-            s32 h = fn_803390AC(idx, fn_80041FCC, 1, 0, fn_80042A68);
-            p = &lbl_804957B0;
-            lbl_8049407C = h;
-            if (*p != 0) {
-                *p = 0;
-                fn_800438D0(lbl_804957B4);
-            }
+            lbl_8049407C = fn_803390AC(idx, fn_80041FCC, 1, 0, fn_80042A68);
+            EyeToy_FlushPending(&lbl_804957B0, lbl_804957B4);
         }
     }
     return lbl_804940A8 != 0 && lbl_804957AC != 0 && lbl_8049407C != -1;
