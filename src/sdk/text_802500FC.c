@@ -2935,6 +2935,18 @@ void fn_80266AE8(s32 arg0, s32 arg1) {
     fn_80254684();
 }
 
+s32 fn_80266B2C(DVDCommandBlock *block) {
+    extern u8 lbl_80442AD8[];
+    extern u8 lbl_80442AB0[];
+    if ((void *)block == lbl_80442AD8) {
+        return 1;
+    }
+    if ((void *)block == lbl_80442AB0) {
+        return 1;
+    }
+    return 0;
+}
+
 s32 fn_80266B64(void) {
     return 1;
 }
