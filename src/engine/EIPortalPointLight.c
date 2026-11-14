@@ -11,20 +11,15 @@ static inline void EIPortalPointLightVec3_Set(EIPortalPointLightVec3 *v, f32 x, 
 
 static inline void *EIPortalPointLight_WriteF32(void *stream, f32 val) {
     void *vt = M2C_FIELD(stream, void **, 0x18);
-    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)((char *)stream + M2C_FIELD(vt, s16 *, 0x38), &val, 4);
+    f32 tmp = val;
+    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)((char *)stream + M2C_FIELD(vt, s16 *, 0x38), &tmp, 4);
     return stream;
 }
 
-static inline void *EIPortalPointLight_WriteBool(void *stream, s32 val) {
-    u8 b;
-    void *vt;
-
-    b = 0;
-    if (val) {
-        b = 1;
-    }
-    vt = M2C_FIELD(stream, void **, 0x18);
-    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)((char *)stream + M2C_FIELD(vt, s16 *, 0x38), &b, 1);
+static inline void *EIPortalPointLight_WriteBool(void *stream, u8 val) {
+    void *vt = M2C_FIELD(stream, void **, 0x18);
+    u8 tmp = val;
+    M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C)((char *)stream + M2C_FIELD(vt, s16 *, 0x38), &tmp, 1);
     return stream;
 }
 
