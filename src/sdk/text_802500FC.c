@@ -1243,12 +1243,12 @@ void fn_8025A374(s32 index, void *ptr) {
 }
 
 void *fn_8025A3A4(s32 index) {
-    u8 *thread = *(u8 **)0x800000E4;
+    struct { u8 pad[0x310]; void *specific[2]; } *thread = *(void **)0x800000E4;
 
-    if (thread == NULL || index < 0 || index >= 2) {
-        return NULL;
+    if (thread != NULL && 0 <= index && index < 2) {
+        return thread->specific[index];
     }
-    return ((void **)(thread + index * 4))[0x310 / 4];
+    return NULL;
 }
 
 u32 fn_8025A3F4(void) {
