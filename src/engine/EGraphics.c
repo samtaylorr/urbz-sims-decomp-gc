@@ -32,6 +32,12 @@ static inline s32 EGraphics_ToBool(s32 x) {
 
 typedef struct { Vec3f min; Vec3f max; } EGBox;
 
+static inline Vec3f Vec3f_Make(f32 s) {
+    Vec3f t;
+    Vec3f_Splat(&t, s);
+    return t;
+}
+
 static inline void EGBox_Init(EGBox *b, f32 c) {
     Vec3f t = { c, c, c };
     b->max = t;
@@ -72,21 +78,18 @@ s32 fn_802ED904(char *self) {
     extern const f32 lbl_803F0BEC[];
     extern char *lbl_80495220;
     Vec3f v;
-    Vec3f *p;
     char *vt;
+    char *vt2;
+    char *vt3;
     char *obj;
+    vt = *(char **)self;
     *(s32 *)(self + 8) = 1;
-    p = &v;
-    p->x = lbl_803F0BEC[0];
-    p->y = lbl_803F0BEC[0];
-    p->z = lbl_803F0BEC[0];
-    vt = *(char **)self;
-    (*(void (**)(void *, Vec3f *, s32, s32))(vt + 0x4C))(self + *(s16 *)(vt + 0x48), p, 0xFF, 1);
-    vt = *(char **)self;
-    (*(void (**)(void *))(vt + 0x214))(self + *(s16 *)(vt + 0x210));
+    (*(void (**)(void *, Vec3f *, s32, s32))(vt + 0x4C))(self + *(s16 *)(vt + 0x48), Vec3f_Fill(&v, lbl_803F0BEC[0]), 0xFF, 1);
+    vt2 = *(char **)self;
+    (*(void (**)(void *))(vt2 + 0x214))(self + *(s16 *)(vt2 + 0x210));
     obj = lbl_80495220;
-    vt = *(char **)(obj + 0x338);
-    return EGraphics_ToBool((*(s32 (**)(void *))(vt + 0x1C))(obj + *(s16 *)(vt + 0x18)));
+    vt3 = *(char **)(obj + 0x338);
+    return EGraphics_ToBool((*(s32 (**)(void *))(vt3 + 0x1C))(obj + *(s16 *)(vt3 + 0x18)));
 }
 
 void fn_802ED9B4(char *self) {
@@ -807,13 +810,13 @@ extern const f32 lbl_803F0CF4[];
 
 void fn_802EF220(void *arg0) {
     EGBox box;
-    register f32 lo asm("fr13") = lbl_803F0CF0[0];
-    register Vec3f *p asm("r9");
-    register f32 hi asm("fr0");
+    f32 lo;
+    f32 hi;
     EGBox_Init(&box, lbl_803F0CEC[0]);
+    lo = lbl_803F0CF0[0];
     {
         Vec3f t;
-        p = &t;
+        Vec3f *p = &t;
         hi = lbl_803F0CF4[0];
         box.min = *Vec3f_Splat(p, lo);
         box.max = *Vec3f_Splat(p, hi);
