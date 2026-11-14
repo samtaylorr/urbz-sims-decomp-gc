@@ -3,6 +3,14 @@
 
 extern void (*lbl_804940B0)(void);
 
+static inline void EyeToy_FlushPending(s32 *pending, f32 value) {
+    void fn_800438D0(f32);
+    if (*pending != 0) {
+        *pending = 0;
+        fn_800438D0(value);
+    }
+}
+
 extern s32 lbl_804957B8;
 void fn_80041AB4(s32 *arg) {
     typedef struct { s32 size; s32 unk4; s32 unk8; f32 f0; f32 f1; f32 f2; f32 f3; } EyeToyParams;
@@ -34,8 +42,6 @@ void fn_80041B60(s32 mode, s32 *arg) {
     extern EyeToyEntry lbl_803F5DA8[];
     u8 *fn_802FF608(void *, s32);
     u8 *obj;
-    s32 w;
-    s32 h;
 
     arg[1] = 0;
     arg[0] = 0;
@@ -44,10 +50,9 @@ void fn_80041B60(s32 mode, s32 *arg) {
         if (e->state != 0 && e->list != 0 && e->list[1] != 0 && *(void **)(e->list[1] + 0x20) != 0) {
             obj = fn_802FF608(*(void **)(e->list[1] + 0x20), 0);
             if (obj != 0) {
-                u8 *vt;
-                w = 0;
-                vt = *(u8 **)(obj + 0x24);
-                h = 0;
+                u8 *vt = *(u8 **)(obj + 0x24);
+                s32 w = 0;
+                s32 h = 0;
                 arg[1] = ((s32 (*)(void *, s32, s32 *, s32 *))*(void **)(vt + 0x44))(obj + *(s16 *)(vt + 0x40), 0, &w, &h);
                 arg[0] = w * h;
             }
@@ -410,8 +415,10 @@ s32 fn_80043230(void) {
         lbl_804957AC = ((void *(*)(s16, s16, u8))fn_8004206C)(0x80, 0x80, 0x10);
         idx = fn_8004200C();
         if (idx != -1) {
-            s32 *p = &lbl_804957B0;
-            lbl_8049407C = fn_803390AC(idx, fn_80041FCC, 1, 0, fn_80042A68);
+            s32 *p;
+            s32 h = fn_803390AC(idx, fn_80041FCC, 1, 0, fn_80042A68);
+            p = &lbl_804957B0;
+            lbl_8049407C = h;
             if (*p != 0) {
                 *p = 0;
                 fn_800438D0(lbl_804957B4);
