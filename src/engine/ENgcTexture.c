@@ -1268,23 +1268,15 @@ void fn_803639A8(void *arg0) {
 }
 
 void *fn_80363C08(void *arg0) {
-    typedef struct { f32 x, y, z; } V3;
-    typedef struct { V3 a; V3 b; } V3Pair;
+    typedef struct { ENgcVec3 a; ENgcVec3 b; } V3Pair;
     extern f32 lbl_803F4F20[];
     void fn_802C4D24(V3Pair *);
     void fn_802C5070(V3Pair *, void *);
     V3Pair v;
-    V3 *pb;
+    ENgcVec3 *pb;
 
     pb = &v.b;
-    {
-        V3 t;
-        f32 s = lbl_803F4F20[0];
-        t.z = s;
-        t.y = s;
-        t.x = s;
-        *pb = t;
-    }
+    ENgcVec3_splat(pb, lbl_803F4F20[0]);
     v.a = *pb;
     fn_802C4D24(&v);
     fn_802C5070(&v, arg0);
