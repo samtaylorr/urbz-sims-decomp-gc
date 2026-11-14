@@ -92,22 +92,50 @@ void fn_803205D4(void *arg0, void *arg1) {
     extern void fn_802D3CE4(void *, s32);
     extern void fn_802C5BBC(void *, void *);
     extern void fn_802D39F0(void *, s32);
-    s32 buf[4];
-    s32 *bp = buf;
-    s32 *p;
+    struct {
+        s32 a;
+        s32 pad;
+    } buf;
+    s32 **p;
 
     fn_80320590(arg0);
-    fn_802D39E4(bp);
-    fn_802C5B1C(arg1, bp);
-    fn_802D3CE4((char *)arg0 + 0x18, *bp);
+    fn_802D39E4(&buf);
+    fn_802C5B1C(arg1, &buf);
+    fn_802D3CE4((char *)arg0 + 0x18, buf.a);
     fn_802C5BBC(arg1, (char *)arg0 + 0x20);
-    p = M2C_FIELD(arg0, s32 **, 0x24);
+    p = M2C_FIELD(arg0, s32 ***, 0x24);
     if (p != NULL) {
-        p = *(s32 **)p;
-        M2C_FIELD(arg0, s32 **, 0x60) = p;
-        M2C_FIELD(arg0, f32 *, 0x58) = p[1];
+        s32 *q = *p;
+        M2C_FIELD(arg0, s32 **, 0x60) = q;
+        M2C_FIELD(arg0, f32 *, 0x58) = q[1];
     }
-    fn_802D39F0(bp, *bp);
+    fn_802D39F0(&buf, buf.a);
+}
+
+void fn_803207F0(void *arg0, void *arg1, s32 arg2) {
+    typedef struct { u8 r, g, b; } Rgb;
+    typedef struct { s16 delta; s16 pad; void (*fn)(void *, void *, s32); } VtEntry;
+    typedef struct { s16 delta; s16 pad; void (*fn)(void *, s32, s32, s32, s32); } VtEntry2;
+    extern struct { u8 pad[0x462C]; Rgb c; } lbl_8046DF78;
+    Rgb c;
+    void *obj;
+    char *arr;
+    VtEntry *e;
+    VtEntry2 *e2;
+
+    if (M2C_FIELD(arg0, s32 *, 0x74) != arg2) {
+        M2C_FIELD(arg0, s32 *, 0x74) = arg2;
+        c.r = lbl_8046DF78.c.r;
+        c.g = lbl_8046DF78.c.g;
+        c.b = lbl_8046DF78.c.b;
+        arr = M2C_FIELD(M2C_FIELD(arg0, void **, 0x60), char **, 0x20);
+        arr += arg2 * 4;
+        obj = M2C_FIELD(M2C_FIELD(*(void **)arr, void **, 8), void **, 0x20);
+        e = (VtEntry *)(M2C_FIELD(obj, char **, 0xF0) + 0x10);
+        e->fn((char *)obj + e->delta, arg1, 0);
+        e2 = (VtEntry2 *)(M2C_FIELD(arg1, char **, 0x68) + 0x1B8);
+        e2->fn((char *)arg1 + e2->delta, c.r != 0, c.g, c.b, 0);
+    }
 }
 
 void fn_80322898(s32 arg0, Vec2Arg *arg1, s32 arg2, s32 arg3) {
@@ -116,13 +144,27 @@ void fn_80322898(s32 arg0, Vec2Arg *arg1, s32 arg2, s32 arg3) {
     if (arg2 == 0 && arg3 == 0) {
         return;
     }
-    if (arg2) {
-        arg1->x = (s32)(arg1->x + lbl_803F301C[0]);
+    if (arg2 != 0) {
+        f32 *c = lbl_803F301C;
+        arg1->x = (s32)(arg1->x + *c);
     }
-    if (arg3 == 0) {
-        return;
+    if (arg3 != 0) {
+        f32 *c = lbl_803F301C;
+        arg1->y = (s32)(arg1->y + *c);
     }
-    arg1->y = (s32)(arg1->y + lbl_803F301C[0]);
+}
+
+M2C_UNK fn_803233D4(void *arg0) {
+    extern u8 lbl_8045BA40[];
+    extern s32 fn_8033740C(void *, s32, s32, s32);
+    s32 i;
+
+    for (i = 0; i < M2C_FIELD(M2C_FIELD(arg0, void **, 0x60), s32 *, 0x24); i++) {
+        s32 *item = M2C_FIELD(M2C_FIELD(arg0, void **, 0x60), s32 **, 0x20)[i];
+        if (item[2] == 0) {
+            item[2] = fn_8033740C(lbl_8045BA40, item[1], 0, 0);
+        }
+    }
 }
 
 void fn_80323460(void *arg0) {
