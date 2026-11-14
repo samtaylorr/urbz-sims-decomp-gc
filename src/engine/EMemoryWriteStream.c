@@ -47,7 +47,7 @@ void fn_803740C0(void *arg0, s32 arg1) {
     s32 off;
 
     M2C_FIELD(arg0, void **, 0xAC) = lbl_8041E178;
-    n = M2C_FIELD(arg0, s32 *, 0xA4);
+    n = EMemoryWriteStream_VecSize((u8 *)arg0 + 0xA0);
     if (n > 0) {
         i = n;
         off = 0;
@@ -57,7 +57,7 @@ void fn_803740C0(void *arg0, s32 arg1) {
         } while (--i != 0);
     }
     fn_803C0C50((u8 *)arg0 + 0xA0);
-    n = M2C_FIELD((u8 *)arg0 + 0x94, s32 *, 4);
+    n = EMemoryWriteStream_VecSize((u8 *)arg0 + 0x94);
     if (n > 0) {
         i = n;
         off = 0;
