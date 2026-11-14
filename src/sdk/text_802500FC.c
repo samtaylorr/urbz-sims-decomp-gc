@@ -1400,7 +1400,6 @@ void fn_80257DD0(u8 language) {
     extern SramControlBlock lbl_80440C00;
     s32 fn_802572CC(s32, s32);
     SramControlBlock *scb;
-    u8 *sram;
     s32 enabled;
     s32 *locked;
     u8 pad[8];
@@ -1410,17 +1409,16 @@ void fn_80257DD0(u8 language) {
     locked = &scb->locked;
     if (*locked != 0) {
         fn_80254684(enabled);
-        sram = NULL;
+        scb = NULL;
     } else {
         scb->enabled = enabled;
         *locked = 1;
-        sram = scb->sram;
     }
-    if (language == sram[0x12]) {
+    if (language == scb->sram[0x12]) {
         fn_802572CC(0, 0);
         return;
     }
-    sram[0x12] = language;
+    scb->sram[0x12] = language;
     fn_802572CC(1, 0);
 }
 
@@ -3634,27 +3632,19 @@ void fn_8026588C(void) {
 }
 
 s32 fn_802658CC(void) {
-    typedef struct {
-        s32 command;
-        s32 addr;
-        s32 length;
-        s32 offset;
-        s32 callback;
-    } Cmd;
     extern s32 lbl_80442A48[];
     extern s32 lbl_80495F84;
     void fn_80265D98(s32, s32, s32, s32);
     s32 fn_80266358(u32 offset, void (*cb)(s32));
-    Cmd *list = (Cmd *)lbl_80442A48;
-    s32 n = lbl_80495F84;
+    s32 n = lbl_80495F84 * 5;
 
-    if (list[n].command == 1) {
+    if (lbl_80442A48[n] == 1) {
         ++lbl_80495F84;
-        fn_80265D98(list[n].addr, list[n].length, list[n].offset, list[n].callback);
+        fn_80265D98(lbl_80442A48[n + 1], lbl_80442A48[n + 2], lbl_80442A48[n + 3], lbl_80442A48[n + 4]);
         return 1;
-    } else if (list[n].command == 2) {
+    } else if (lbl_80442A48[n] == 2) {
         ++lbl_80495F84;
-        fn_80266358(list[n].offset, (void (*)(s32))list[n].callback);
+        fn_80266358(lbl_80442A48[n + 3], (void (*)(s32))lbl_80442A48[n + 4]);
         return 1;
     }
     return 0;
