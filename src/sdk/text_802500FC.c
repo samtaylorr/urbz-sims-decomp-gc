@@ -923,13 +923,14 @@ s32 fn_80255F54(s32 final) {
     return 1;
 }
 
+#pragma push
+#pragma peephole off
 void fn_8025606C(void) {
     void fn_80258FB8(void *);
     u8 *thread;
     u8 *next;
 
-    thread = *(u8 **)0x800000DC;
-    while (thread != NULL) {
+    for (thread = *(u8 **)0x800000DC; thread != NULL; thread = next) {
         next = *(u8 **)(thread + 0x2FC);
         switch (*(u16 *)(thread + 0x2C8)) {
         case 1:
@@ -939,10 +940,9 @@ void fn_8025606C(void) {
         default:
             break;
         }
-        thread = next;
     }
 }
-
+#pragma pop
 void fn_802560D4(u32 arg0) {
     s32 fn_8025465C(void);
     void fn_80251D60(void);
