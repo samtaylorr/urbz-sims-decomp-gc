@@ -37,8 +37,9 @@ void *fn_80332F70(void *arg0, void *arg1, s32 arg2, s32 arg3) {
     } else {
         heap = p;
     }
-    end = start + arg2 - 1;
+    end = start + arg2;
     fn_8031E8B0(heap);
+    end--;
     M2C_FIELD(heap, s32 *, 0x24) = start;
     M2C_FIELD(heap, s32 *, 0x28) = end;
     *(void **)heap = lbl_8041BC88;
