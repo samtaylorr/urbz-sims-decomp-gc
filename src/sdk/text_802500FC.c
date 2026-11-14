@@ -2508,6 +2508,24 @@ s32 fn_80264C0C(DVDCommandBlock *block) {
     return fn_80266B2C(block);
 }
 
+void fn_80264C44(void) {
+    u32 i;
+    for (i = 0; i < 4; i++) {
+        lbl_804429B8[i].next = lbl_804429B8[i].prev = (DVDCommandBlock *)&lbl_804429B8[i];
+    }
+}
+
+s32 fn_80264C7C(s32 prio, DVDCommandBlock *block) {
+    s32 enabled = fn_8025465C();
+    DVDCommandBlock *q = (DVDCommandBlock *)&lbl_804429B8[prio];
+    ((DVDCommandBlock *)q->prev)->next = block;
+    block->prev = q->prev;
+    block->next = q;
+    q->prev = block;
+    fn_80254684(enabled);
+    return 1;
+}
+
 u32 fn_80264E40(void **item) {
     s32 fn_8025465C(void);
     void fn_80254684(s32);
