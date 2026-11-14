@@ -65,6 +65,33 @@ s32 fn_8031C7E8(s32 arg0) {
     return arg0;
 }
 
+s32 fn_8031CB40(s32 arg0, s32 *arg1, s32 arg2) {
+    s32 fn_802D8334(void *, s32);
+    void fn_802D838C(void *);
+    char *self = (char *)arg0;
+    char *obj;
+
+    if (fn_802D8334(self + 0x18, arg2 != 0 ? -1 : 0) == 0) {
+        return 0;
+    }
+    obj = self + 0x4C;
+    {
+        char *vt = *(char **)obj;
+        (*(void (**)(void *, s32))(vt + 0x14))(obj + *(s16 *)(vt + 0x10), -1);
+    }
+    if (arg1 != NULL) {
+        *arg1 = M2C_FIELD(self, s32 **, 0x3C)[M2C_FIELD(self, s32 *, 0x34)];
+    }
+    M2C_FIELD(self, s32 *, 0x34) =
+        (M2C_FIELD(self, s32 *, 0x34) + 1) % M2C_FIELD(self, s32 *, 0x38);
+    {
+        char *vt = *(char **)obj;
+        (*(void (**)(void *))(vt + 0x1C))(obj + *(s16 *)(vt + 0x18));
+    }
+    fn_802D838C(self);
+    return 1;
+}
+
 void fn_8031CC10(s32 arg0) {
     M2C_UNK fn_803669E4(s32);
     fn_803669E4(arg0 + 0x37C);
@@ -299,11 +326,11 @@ void fn_8031D0AC(char *self) {
 }
 
 s32 fn_8031D158(char *self, char *res) {
-    void fn_802D3C60(s32 *, s32);
     void fn_802D39F0(s32 *, s32);
     s32 fn_8031E254(void *, s32 *);
     ERMLock lock;
     char **list;
+    s32 str[2];
     s32 ret;
 
     ERMLock_Lock(&lock, self + 0x360);
@@ -316,13 +343,9 @@ s32 fn_8031D158(char *self, char *res) {
     }
     *(char **)(res + 0xA0) = NULL;
     list[1] = res;
-    {
-        s32 str[2];
-        s32 *s = str;
-        fn_802D3C60(s, *(s32 *)(res + 0x54));
-        ret = fn_8031E254(self, s);
-        fn_802D39F0(s, s[0]);
-    }
+    ERMName_Init(str, *(s32 *)(res + 0x54));
+    ret = fn_8031E254(self, str);
+    fn_802D39F0(str, str[0]);
     ERMLock_Unlock(&lock);
     return ret;
 }
