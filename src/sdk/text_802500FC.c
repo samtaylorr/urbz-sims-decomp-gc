@@ -145,6 +145,18 @@ s32 fn_802630BC(void *, s32, void *, s32);
 void fn_80260A68(s32 result, DVDCommandBlock *block);
 void fn_80260C6C(s32 result, DVDCommandBlock *block);
 
+typedef struct DVDDir {
+    u32 entryNum;
+    u32 location;
+    u32 next;
+} DVDDir;
+
+typedef struct DVDDirEntry {
+    u32 entryNum;
+    BOOL isDir;
+    char *name;
+} DVDDirEntry;
+
 unsigned long fn_8024FF70(void);
 void fn_8024FF78(unsigned long);
 void fn_802500FC(void) {
