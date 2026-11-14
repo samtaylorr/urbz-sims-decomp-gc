@@ -20,8 +20,11 @@ static inline void *EIPortalPointLight_WriteF32(void *stream, f32 val) {
 }
 
 static inline void *EIPortalPointLight_WriteF32P(void *stream, f32 *val) {
+    void *vt = M2C_FIELD(stream, void **, 0x18);
+    void (*fn)(void *, void *, s32) = M2C_FIELD(vt, void (**)(void *, void *, s32), 0x3C);
+    s16 off = M2C_FIELD(vt, s16 *, 0x38);
     f32 tmp = *val;
-    EIPortalPointLight_Write(stream, &tmp, 4);
+    fn((char *)stream + off, &tmp, 4);
     return stream;
 }
 
@@ -159,7 +162,7 @@ void fn_802F2820(char *self, void *stream) {
     fn_802EFC54(self, stream);
     vt = *(void **)self;
     M2C_FIELD(vt, void (**)(void *, void *), 0x154)(self + M2C_FIELD(vt, s16 *, 0x150), &v);
-    EIPortalPointLight_WriteBool(EIPortalPointLight_WriteF32(EIPortalPointLight_WriteF32(fn_802D34B0(stream, &v), M2C_FIELD(self, f32 *, 0xD8)), M2C_FIELD(self, f32 *, 0xDC)), M2C_FIELD(self, s32 *, 0xE0));
+    EIPortalPointLight_WriteBoolP(EIPortalPointLight_WriteF32P(EIPortalPointLight_WriteF32P(fn_802D34B0(stream, &v), (f32 *)(self + 0xD8)), (f32 *)(self + 0xDC)), (s32 *)(self + 0xE0));
 }
 
 void fn_802F2904(char *self, void *stream) {
@@ -185,16 +188,14 @@ void fn_802F2904(char *self, void *stream) {
 }
 
 s32 fn_802F3084(u8 *self) {
-    s16 a;
-    s16 b;
-    s16 c;
-    s16 d;
+    s16 a[2];
+    s16 c[2];
     s32 ret;
 
-    EIPortalPointLight_GetA(self, &a, &b);
-    EIPortalPointLight_GetB(self, &c, &d);
+    EIPortalPointLight_GetA(self, &a[0], &a[1]);
+    EIPortalPointLight_GetB(self, &c[0], &c[1]);
     ret = 0;
-    if (a != c && M2C_FIELD(self, s32 *, 0x9C) != 0) {
+    if (c[0] != a[0] && M2C_FIELD(self, s32 *, 0x9C) != 0) {
         ret = 1;
     }
     return ret;
