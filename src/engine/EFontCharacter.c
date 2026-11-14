@@ -34,6 +34,22 @@ s32 fn_8036BDB4(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void fn_8036BEC0(char *self, void *stream) {
+    extern u16 lbl_80493D42[];
+    void *vt;
+
+    if (lbl_80493D42[0] == 0) {
+        vt = M2C_FIELD(stream, void **, 0x18);
+        M2C_FIELD(vt, void (**)(void *, void *, s32), 0x34)((char *)stream + M2C_FIELD(vt, s16 *, 0x30), self + 4, 4);
+        vt = M2C_FIELD(stream, void **, 0x18);
+        M2C_FIELD(vt, void (**)(void *, void *, s32), 0x34)((char *)stream + M2C_FIELD(vt, s16 *, 0x30), self + 8, 4);
+        vt = M2C_FIELD(stream, void **, 0x18);
+        M2C_FIELD(vt, void (**)(void *, void *, s32), 0x34)((char *)stream + M2C_FIELD(vt, s16 *, 0x30), self + 0xC, 2);
+        vt = M2C_FIELD(stream, void **, 0x18);
+        M2C_FIELD(vt, void (**)(void *, void *, s32), 0x34)((char *)stream + M2C_FIELD(vt, s16 *, 0x30), self + 0xE, 2);
+    }
+}
+
 void fn_8036BF7C(char *self, void *stream) {
     extern u16 lbl_80493D42[];
     void *vt;
