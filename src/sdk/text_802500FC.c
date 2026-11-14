@@ -994,24 +994,54 @@ static inline u8 *LockSram(u32 offset) {
 }
 
 void fn_8025810C(s32 chan, u16 id) {
+    extern SramControlBlock lbl_80440C00;
     s32 fn_802572CC(s32, s32);
+    SramControlBlock *scb;
     u8 *sram;
+    s32 enabled;
+    s32 *locked;
+    u8 pad[8];
 
-    sram = LockSram(0x14);
-    if (*(u16 *)(sram + 0x1C + chan * 2) != id) {
-        *(u16 *)(sram + 0x1C + chan * 2) = id;
-        fn_802572CC(1, 0x14);
+    scb = &lbl_80440C00;
+    enabled = fn_8025465C();
+    locked = &scb->locked;
+    if (*locked != 0) {
+        fn_80254684(enabled);
+        sram = NULL;
     } else {
-        fn_802572CC(0, 0x14);
+        scb->enabled = enabled;
+        *locked = 1;
+        sram = scb->sram + 0x14;
     }
+    if (((u16 *)(sram + 0x1C))[chan] != id) {
+        ((u16 *)(sram + 0x1C))[chan] = id;
+        fn_802572CC(1, 0x14);
+        return;
+    }
+    fn_802572CC(0, 0x14);
 }
 
 u16 fn_802581B8(void) {
+    extern SramControlBlock lbl_80440C00;
     s32 fn_802572CC(s32, s32);
+    SramControlBlock *scb;
     u8 *sram;
+    s32 enabled;
+    s32 *locked;
     u16 id;
+    u8 pad[8];
 
-    sram = LockSram(0x14);
+    scb = &lbl_80440C00;
+    enabled = fn_8025465C();
+    locked = &scb->locked;
+    if (*locked != 0) {
+        fn_80254684(enabled);
+        sram = NULL;
+    } else {
+        scb->enabled = enabled;
+        *locked = 1;
+        sram = scb->sram + 0x14;
+    }
     id = *(u16 *)(sram + 0x28);
     fn_802572CC(0, 0x14);
     return id;
@@ -3088,10 +3118,11 @@ void fn_80270D34(void) {
 }
 
 void fn_80270DB4(void) {
-    extern u8 *const __GXData;
+    extern u8 *__GXData;
+    u8 *gx = __GXData;
     *(volatile u8 *)0xCC008000 = 0x61;
-    *(volatile u32 *)0xCC008000 = *(u32 *)(__GXData + 0x1DC);
-    *(u16 *)(__GXData + 2) = 0;
+    *(volatile u32 *)0xCC008000 = *(u32 *)(gx + 0x1DC);
+    *(u16 *)(gx + 2) = 0;
 }
 
 void fn_80270DD8(void) {
