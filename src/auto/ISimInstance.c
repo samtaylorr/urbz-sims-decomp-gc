@@ -58,8 +58,8 @@ typedef struct { f32 x, y, z; } ISimVec3;
 
 static inline void ISimVec3_Set(ISimVec3 *dst, f32 x, f32 y, f32 z) {
     dst->x = x;
-    dst->z = z;
     dst->y = y;
+    dst->z = z;
 }
 
 static inline s32 ISimInstance_IterValid(void *it) {
@@ -459,7 +459,6 @@ s32 fn_80065AD4(void *arg0) {
 void *fn_80065ADC(arg0)
     void *arg0;
 {
-    typedef struct { f32 x, y, z; } Vec3;
     extern void fn_802F3F14(void *);
     extern void fn_802E55C0(void *);
     extern u8 lbl_80409030[];
@@ -468,25 +467,23 @@ void *fn_80065ADC(arg0)
     extern const f32 lbl_803C863C[];
     extern u8 lbl_8042EE68[];
     extern u8 lbl_8042EF48[];
-    Vec3 v;
+    ISimVec3 v;
 
     fn_802F3F14(arg0);
     M2C_FIELD(arg0, void **, 0x300) = lbl_80409030;
     M2C_FIELD(arg0, void **, 0) = lbl_80409068;
     fn_802E55C0((u8 *)arg0 + 0x314);
-    v.x = lbl_803C8638[0];
-    v.z = lbl_803C863C[0];
-    v.y = lbl_803C863C[0];
+    ISimVec3_Set(&v, lbl_803C8638[0], lbl_803C863C[0], lbl_803C863C[0]);
     M2C_FIELD(arg0, s32 *, 0x308) = 0;
     M2C_FIELD(arg0, s32 *, 0x30C) = 0;
-    *(Vec3 *)lbl_8042EE68 = v;
-    *(Vec3 *)lbl_8042EF48 = v;
+    *(ISimVec3 *)lbl_8042EE68 = v;
+    *(ISimVec3 *)lbl_8042EF48 = v;
     M2C_FIELD(lbl_8042EE68, s32 *, 0xD8) = 0;
     M2C_FIELD(lbl_8042EE68, s32 *, 0xDC) = 0;
+    M2C_FIELD(arg0, s32 *, 0x38C) = 0;
     M2C_FIELD(arg0, s32 *, 0x390) = 0;
     M2C_FIELD(arg0, s32 *, 0x39C) = 0;
     M2C_FIELD(arg0, s32 *, 0x3A0) = 0;
-    M2C_FIELD(arg0, s32 *, 0x38C) = 0;
     return arg0;
 }
 
