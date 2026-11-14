@@ -1568,15 +1568,15 @@ void fn_802592B4(void *arg0) {
     fn_80254684(enabled);
 }
 
-s32 fn_8025993C(void *thread, s32 priority) {
+s32 fn_8025993C(OSThread_ *thread, s32 priority) {
     s32 enabled;
 
     if (priority < 0 || priority > 31) {
         return 0;
     }
     enabled = fn_8025465C();
-    if (M2C_FIELD(thread, s32 *, 0x2d4) != priority) {
-        M2C_FIELD(thread, s32 *, 0x2d4) = priority;
+    if (thread->base != priority) {
+        thread->base = priority;
         fn_80258990(thread);
         fn_80258C80();
     }
