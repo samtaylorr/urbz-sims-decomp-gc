@@ -942,20 +942,20 @@ void fn_8025606C(void) {
         }
     }
 }
-#pragma pop
-void fn_802560D4(u32 arg0) {
+#pragma push
+#pragma peephole off
+void fn_802560D4(s32 arg0) {
+    extern volatile u16 __VIRegs[];
     s32 fn_8025465C(void);
     void fn_80251D60(void);
     void fn_80255FFC(u32);
 
     fn_8025465C();
-    *(volatile u16 *)0xCC002002 = 0;
+    __VIRegs[1] = 0;
     fn_80251D60();
     fn_80255FFC(arg0 << 3);
 }
-
-#pragma push
-#pragma peephole off
+#pragma pop
 u32 fn_802564CC(void) {
     extern s32 lbl_80440B90[];
     if (lbl_80440B90[0] != 0) {
