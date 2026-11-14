@@ -18,9 +18,17 @@ static inline void ERMLock_Unlock(ERMLock *l) {
     (*(void (**)(void *))(vt + 0x1C))(l->obj + *(s16 *)(vt + 0x18));
 }
 
-static inline void ERMName_Init(s32 *s, s32 name) {
+static inline s32 ERM_LookupName(void *self, s32 name) {
     void fn_802D3C60(s32 *, s32);
-    fn_802D3C60(s, name);
+    void fn_802D39F0(s32 *, s32);
+    s32 fn_8031E254(void *, s32 *);
+    s32 str[2];
+    s32 ret;
+
+    fn_802D3C60(str, name);
+    ret = fn_8031E254(self, str);
+    fn_802D39F0(str, str[0]);
+    return ret;
 }
 
 extern u8 lbl_8041B4F0[];
