@@ -3384,12 +3384,14 @@ void fn_8026E954(void *fifo, u32 *readPtr, u32 *writePtr) {
     extern volatile u32 *__piReg;
     extern volatile u16 *__cpReg;
     s32 *f = fifo;
+    u32 rd;
 
     if (fifo == lbl_80496090) {
         f[6] = (__piReg[5] & 0xFBFFFFFF) + 0x80000000;
     }
     if (fifo == lbl_80496094) {
-        f[5] = (u32)(void *)((u32)((__cpReg[0x1D] << 16) | __cpReg[0x1C]) + 0x80000000);
+        rd = (__cpReg[0x1D] << 16) | __cpReg[0x1C];
+        f[5] = rd + 0x80000000;
         f[7] = (__cpReg[0x19] << 16) | __cpReg[0x18];
     } else {
         f[7] = f[6] - f[5];
