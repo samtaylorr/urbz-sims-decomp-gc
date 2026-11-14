@@ -4155,19 +4155,16 @@ void fn_802718FC(u16 left, u16 top, u16 wd, u16 ht) {
 }
 
 void fn_80271978(u16 left, u16 top, u16 wd, u16 ht) {
-    extern void *__GXData;
-    u32 *gx;
-    u32 l = left;
+    extern u32 *const __GXData;
 
-    gx = __GXData;
-    gx[0x1F0 / 4] = 0;
-    gx[0x1F0 / 4] = __rlwimi(gx[0x1F0 / 4], l, 0, 22, 31);
-    gx[0x1F0 / 4] = __rlwimi(gx[0x1F0 / 4], top, 10, 12, 21);
-    gx[0x1F0 / 4] = __rlwimi(gx[0x1F0 / 4], 0x49, 24, 0, 7);
-    gx[0x1F4 / 4] = 0;
-    gx[0x1F4 / 4] = __rlwimi(gx[0x1F4 / 4], wd - 1, 0, 22, 31);
-    gx[0x1F4 / 4] = __rlwimi(gx[0x1F4 / 4], ht - 1, 10, 12, 21);
-    gx[0x1F4 / 4] = __rlwimi(gx[0x1F4 / 4], 0x4A, 24, 0, 7);
+    __GXData[0x1F0 / 4] = 0;
+    __GXData[0x1F0 / 4] = __rlwimi(__GXData[0x1F0 / 4], left, 0, 22, 31);
+    __GXData[0x1F0 / 4] = __rlwimi(__GXData[0x1F0 / 4], top, 10, 12, 21);
+    __GXData[0x1F0 / 4] = __rlwimi(__GXData[0x1F0 / 4], 0x49, 24, 0, 7);
+    __GXData[0x1F4 / 4] = 0;
+    __GXData[0x1F4 / 4] = __rlwimi(__GXData[0x1F4 / 4], wd - 1, 0, 22, 31);
+    __GXData[0x1F4 / 4] = __rlwimi(__GXData[0x1F4 / 4], ht - 1, 10, 12, 21);
+    __GXData[0x1F4 / 4] = __rlwimi(__GXData[0x1F4 / 4], 0x4A, 24, 0, 7);
 }
 
 void fn_802719F4(u16 wd, u16 ht) {
