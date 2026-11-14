@@ -1285,8 +1285,8 @@ s32 fn_80258680(void) {
 
 void fn_802586C0(OSThread_ *thread) {
     extern OSThreadQueue_ lbl_80440C58[];
-    extern u32 lbl_80495E68;
-    extern s32 lbl_80495E6C;
+    extern volatile u32 lbl_80495E68;
+    extern volatile s32 lbl_80495E6C;
     OSThread_ *prev;
 
     thread->queue = &lbl_80440C58[thread->priority];
@@ -4078,7 +4078,7 @@ void fn_8026F9C4(s32 *list) {
 void fn_8026FA54(void) {
     extern u32 *const __GXData;
     __GXData[0x14 / 4] = 0;
-    __GXData[0x14 / 4] = (__GXData[0x14 / 4] & ~0x600) | (1 << 9);
+    __GXData[0x14 / 4] = (__GXData[0x14 / 4] & ~(3 << 9)) | ((u32)1 << 9);
     __GXData[0x18 / 4] = 0;
     ((u8 *)__GXData)[0x4D4] = 0;
     ((u8 *)__GXData)[0x4D5] = 0;
