@@ -45,6 +45,26 @@ s32 fn_803292C4(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void fn_8032960C(u8 *self, u8 *arg) {
+    typedef struct { s16 delta; s16 pad; void *pfn; } Ent;
+    u8 *r;
+    s16 a;
+    s32 b;
+    Ent *vt = *(Ent **)(arg + 0x18);
+    r = ((u8 *(*)(void *))vt[4].pfn)(arg + vt[4].delta);
+    if (r) {
+        vt = *(Ent **)self;
+        if (((s32 (*)(void *, void *))vt[17].pfn)(self + vt[17].delta, r) == 0) {
+            vt = *(Ent **)(r + 0x28);
+            ((void (*)(void *, void *, s32))vt[3].pfn)(r + vt[3].delta, &a, 2);
+            vt = *(Ent **)(r + 0x28);
+            ((void (*)(void *, void *, s32))vt[3].pfn)(r + vt[3].delta, &b, 4);
+            vt = *(Ent **)self;
+            ((s32 (*)(void *, void *))vt[17].pfn)(self + vt[17].delta, r);
+        }
+    }
+}
+
 void fn_803296D4(u8 *self) {
     extern void fn_802FFE1C(u8 *);
     s32 i;
