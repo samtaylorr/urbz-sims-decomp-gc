@@ -510,11 +510,44 @@ void fn_8036F65C(void *arg0, void **arg1) {
 }
 
 void *fn_8036F6E4(void *arg0, char *name, s32 key) {
+    u8 *cur;
+    s32 found;
+
     if (name != NULL) {
-        return ETexture_FindByName(arg0, name);
+        found = 0;
+        fn_8036F364(arg0);
+        if ((cur = M2C_FIELD(arg0, u8 **, 0x90) = M2C_FIELD(arg0, u8 **, 0x88)) != NULL) {
+            do {
+                if (fn_802486DC((char *)(cur + 0x10), name) == 0) {
+                    found = 1;
+                } else {
+                    M2C_FIELD(arg0, u8 **, 0x90) = *M2C_FIELD(arg0, u8 ***, 0x90);
+                }
+                if (found) {
+                    break;
+                }
+            } while ((cur = M2C_FIELD(arg0, u8 **, 0x90)) != NULL);
+        }
+        fn_8036F3A4(arg0);
+        return cur;
     }
     if (key != 0) {
-        return ETexture_FindByKey(arg0, key);
+        found = 0;
+        fn_8036F364(arg0);
+        if ((cur = M2C_FIELD(arg0, u8 **, 0x90) = M2C_FIELD(arg0, u8 **, 0x88)) != NULL) {
+            do {
+                if (M2C_FIELD(cur, s32 *, 8) == key) {
+                    found = 1;
+                } else {
+                    M2C_FIELD(arg0, u8 **, 0x90) = *M2C_FIELD(arg0, u8 ***, 0x90);
+                }
+                if (found) {
+                    break;
+                }
+            } while ((cur = M2C_FIELD(arg0, u8 **, 0x90)) != NULL);
+        }
+        fn_8036F3A4(arg0);
+        return cur;
     }
     return NULL;
 }
@@ -622,9 +655,8 @@ M2C_UNK fn_8036FC20(void *arg0, s32 arg1, s32 arg2) {
 void fn_8036FC58(void *arg0, s32 arg1) {
     extern f32 lbl_803F547C[];
     s32 var_r31;
-    s32 var_ctr;
     s32 temp_r0;
-    void *var_r9;
+    s32 *var_r9;
     f32 temp_f0;
 
     M2C_FIELD(arg0, s32 *, 0xC) = 0;
@@ -632,9 +664,8 @@ void fn_8036FC58(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x24) = 0;
     M2C_FIELD(arg0, s32 *, 0x78) = 0;
     temp_f0 = lbl_803F547C[0];
-    var_r9 = arg0 + 0x68;
-    var_ctr = 2;
-    do {
+    var_r9 = (s32 *)(arg0 + 0x68);
+    for (var_r31 = 0; var_r31 < 2; var_r31++) {
         M2C_FIELD(var_r9, f32 *, -0x2C) = temp_f0;
         M2C_FIELD(var_r9, f32 *, -0x30) = temp_f0;
         M2C_FIELD(var_r9, f32 *, -0x3C) = temp_f0;
@@ -643,11 +674,10 @@ void fn_8036FC58(void *arg0, s32 arg1) {
         M2C_FIELD(var_r9, f32 *, -0x10) = temp_f0;
         M2C_FIELD(var_r9, f32 *, -0x1C) = temp_f0;
         M2C_FIELD(var_r9, f32 *, -0x20) = temp_f0;
-        M2C_FIELD(var_r9, s32 *, 4) = 0;
-        M2C_FIELD(var_r9, s32 *, 0) = 0;
-        var_r9 += 8;
-        var_ctr -= 1;
-    } while (var_ctr != 0);
+        var_r9[1] = 0;
+        var_r9[0] = 0;
+        var_r9 += 2;
+    }
     temp_r0 = 0;
     if (arg1 == 0) {
         temp_r0 = -1;
@@ -659,12 +689,10 @@ void fn_8036FC58(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 4) = 0;
     M2C_FIELD(arg0, s32 *, 8) = 0;
     M2C_FIELD(arg0, s32 *, 0x18) = 0;
-    var_r31 = 0;
-    do {
+    for (var_r31 = 0; var_r31 <= 0x1F; var_r31++) {
         fn_8036FC20(arg0, var_r31, 0);
         fn_8036FBE8(arg0, var_r31, 0);
-        var_r31 += 1;
-    } while (var_r31 <= 0x1F);
+    }
 }
 
 void fn_8036FD3C(void *arg0, s32 arg1) {
