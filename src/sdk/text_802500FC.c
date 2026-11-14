@@ -5773,6 +5773,50 @@ void fn_80272CC4(u8 nChans) {
     gx[0x5AC / 4] |= 4;
 }
 
+void fn_80272DB8(u32 fmt, u32 *rowTileS, u32 *colTileS) {
+    switch (fmt) {
+    case 0x0:
+    case 0x8:
+    case 0xE:
+    case 0x20:
+    case 0x30:
+        *rowTileS = 3;
+        *colTileS = 3;
+        break;
+    case 0x1:
+    case 0x2:
+    case 0x9:
+    case 0x11:
+    case 0x22:
+    case 0x27:
+    case 0x28:
+    case 0x29:
+    case 0x2A:
+    case 0x39:
+    case 0x3A:
+        *rowTileS = 3;
+        *colTileS = 2;
+        break;
+    case 0x3:
+    case 0x4:
+    case 0x5:
+    case 0x6:
+    case 0xA:
+    case 0x13:
+    case 0x16:
+    case 0x23:
+    case 0x2B:
+    case 0x2C:
+    case 0x3C:
+        *rowTileS = 2;
+        *colTileS = 2;
+        break;
+    default:
+        *rowTileS = *colTileS = 0;
+        break;
+    }
+}
+
 void fn_8027328C(u32 *obj, void *image_ptr, u16 width, u16 height, u32 format, u32 wrap_s, u32 wrap_t, u8 mipmap, u32 tlut_name) {
     extern void fn_80273040(u32 *obj, void *image_ptr, u16 width, u16 height, u32 format, u32 wrap_s, u32 wrap_t, u8 mipmap);
     fn_80273040(obj, image_ptr, width, height, format, wrap_s, wrap_t, mipmap);
