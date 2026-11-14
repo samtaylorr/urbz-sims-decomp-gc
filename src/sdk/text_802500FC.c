@@ -95,6 +95,17 @@ typedef struct FSTEntry {
     u32 nextEntryOrLength;
 } FSTEntry;
 
+typedef struct GXTlutObjInt {
+    u32 tlut;
+    u32 loadTlut0;
+    u16 numEntries;
+} GXTlutObjInt;
+
+typedef struct GXTlutRegionInt {
+    u32 loadTlut1;
+    GXTlutObjInt tlutObj;
+} GXTlutRegionInt;
+
 extern FSTEntry *lbl_80495EB4;
 extern s32 lbl_80495EC0;
 s32 fn_80260144(char *);
@@ -2835,14 +2846,12 @@ void fn_80266830(void) {
     s64 fn_8025A494(void);
     u32 reg;
     s64 resetStart;
-    s64 wait;
 
     __DIRegs[1] = 2;
     reg = __PIRegs[9];
     __PIRegs[9] = (reg & ~4) | 1;
     resetStart = fn_8025A494();
-    wait = (12 * ((*(u32 *)0x800000F8 / 4) / 125000)) / 8;
-    while ((fn_8025A494() - resetStart) < wait)
+    while ((fn_8025A494() - resetStart) < (s64)((12 * ((*(u32 *)0x800000F8 / 4) / 125000)) / 8))
         ;
     __PIRegs[9] = reg | 5;
     lbl_80495F58 = 1;
