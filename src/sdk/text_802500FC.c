@@ -1886,11 +1886,11 @@ BOOL fn_8025B434(OSThread_ *thread) {
 }
 
 u32 fn_8025BD24(s32 chan, BOOL exi, BOOL tc, BOOL ext) {
-    volatile u32 *reg = (volatile u32 *)0xCC006800 + chan * 5;
+    extern volatile u32 __EXIRegs[];
     u32 cpr;
     u32 prev;
 
-    prev = cpr = reg[0];
+    prev = cpr = __EXIRegs[chan * 5];
     cpr &= 0x7F5;
     if (exi) {
         cpr |= 2;
@@ -1901,7 +1901,7 @@ u32 fn_8025BD24(s32 chan, BOOL exi, BOOL tc, BOOL ext) {
     if (ext) {
         cpr |= 0x800;
     }
-    reg[0] = cpr;
+    __EXIRegs[chan * 5] = cpr;
     return prev;
 }
 
@@ -4385,13 +4385,14 @@ void fn_8026E3A8(void *fifo, void *readPtr, void *writePtr) {
     s32 fn_8025465C(void);
     void fn_80254684(s32);
     s32 enabled;
+    s32 *f = fifo;
 
     enabled = fn_8025465C();
-    *(void **)((u8 *)fifo + 0x14) = readPtr;
-    *(void **)((u8 *)fifo + 0x18) = writePtr;
-    *(s32 *)((u8 *)fifo + 0x1C) = (u8 *)writePtr - (u8 *)readPtr;
-    if (*(s32 *)((u8 *)fifo + 0x1C) < 0) {
-        *(s32 *)((u8 *)fifo + 0x1C) = *(s32 *)((u8 *)fifo + 0x1C) + *(s32 *)((u8 *)fifo + 0x8);
+    f[5] = (s32)readPtr;
+    f[6] = (s32)writePtr;
+    f[7] = (u8 *)writePtr - (u8 *)readPtr;
+    if (f[7] < 0) {
+        f[7] += f[2];
     }
     fn_80254684(enabled);
 }
@@ -4651,20 +4652,19 @@ void fn_8026F0B0(void) {
     u32 nNrm;
     u32 nCols;
     u32 nTex;
-    u8 *gx = __GXData;
 
-    if (gx[0x4D5]) {
+    if (__GXData[0x4D5]) {
         nNrm = 2;
-    } else if (gx[0x4D4]) {
+    } else if (__GXData[0x4D4]) {
         nNrm = 1;
     } else {
         nNrm = 0;
     }
-    nCols = 33 - __cntlzw((*(u32 *)(gx + 0x14) >> 13) & 0xF);
+    nCols = 33 - __cntlzw((*(u32 *)(__GXData + 0x14) >> 13) & 0xF);
     nCols /= 2;
+    *(volatile u8 *)0xCC008000 = 0x10;
     nTex = 33 - __cntlzw(*(u32 *)(__GXData + 0x18) & 0xFFFF);
     nTex /= 2;
-    *(volatile u8 *)0xCC008000 = 0x10;
     *(volatile u32 *)0xCC008000 = 0x1008;
     *(volatile u32 *)0xCC008000 = nCols | (nNrm << 2) | (nTex << 4);
     *(u16 *)(__GXData + 2) = 1;
