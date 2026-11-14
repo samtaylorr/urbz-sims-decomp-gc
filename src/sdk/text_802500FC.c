@@ -1949,8 +1949,8 @@ s32 fn_80261640(u32 resume) {
     DVDCommandBlock *finished;
     if (lbl_80495EF0) {
         lbl_80495EF8 = resume;
-        *(volatile u32 *)&lbl_80495EF0 = 0;
-        finished = lbl_80495ED0;
+        lbl_80495EF0 = 0;
+        finished = *(DVDCommandBlock *volatile *)&lbl_80495ED0;
         lbl_80495ED0 = &lbl_80442960;
         finished->state = 10;
         if (finished->callback) {
@@ -3337,15 +3337,14 @@ void fn_8026E7C0(void *fifo) {
 
 void fn_8026E7F0(u8 *overhi, u8 *underlow, u8 *readIdle, u8 *cmdIdle, u8 *brkpt) {
     extern volatile u16 *__cpReg;
-    extern void *__GXData;
-    u32 *gx = __GXData;
+    extern u32 *__GXData;
 
-    gx[3] = __cpReg[0];
-    *overhi = gx[3] & 1;
-    *underlow = (gx[3] >> 1) & 1;
-    *readIdle = (gx[3] >> 2) & 1;
-    *cmdIdle = (gx[3] >> 3) & 1;
-    *brkpt = (gx[3] >> 4) & 1;
+    __GXData[3] = __cpReg[0];
+    *overhi = __GXData[3] & 1;
+    *underlow = (__GXData[3] >> 1) & 1;
+    *readIdle = (__GXData[3] >> 2) & 1;
+    *cmdIdle = (__GXData[3] >> 3) & 1;
+    *brkpt = (__GXData[3] >> 4) & 1;
 }
 
 void fn_8026E954(void *fifo, u32 *readPtr, u32 *writePtr) {
@@ -3353,21 +3352,22 @@ void fn_8026E954(void *fifo, u32 *readPtr, u32 *writePtr) {
     extern void *lbl_80496094;
     extern volatile u32 *__piReg;
     extern volatile u16 *__cpReg;
+    s32 *f = fifo;
 
     if (fifo == lbl_80496090) {
-        M2C_FIELD(fifo, u32 *, 0x18) = (__piReg[5] & 0xFBFFFFFF) + 0x80000000;
+        f[6] = (__piReg[5] & 0xFBFFFFFF) + 0x80000000;
     }
     if (fifo == lbl_80496094) {
-        M2C_FIELD(fifo, u32 *, 0x14) = ((__cpReg[0x1D] << 16) | __cpReg[0x1C]) + 0x80000000;
-        M2C_FIELD(fifo, u32 *, 0x1C) = (__cpReg[0x19] << 16) | __cpReg[0x18];
+        f[5] = (u32)((__cpReg[0x1D] << 16) | __cpReg[0x1C]) + 0x80000000;
+        f[7] = (__cpReg[0x19] << 16) | __cpReg[0x18];
     } else {
-        M2C_FIELD(fifo, s32 *, 0x1C) = M2C_FIELD(fifo, s32 *, 0x18) - M2C_FIELD(fifo, s32 *, 0x14);
-        if (M2C_FIELD(fifo, s32 *, 0x1C) < 0) {
-            M2C_FIELD(fifo, s32 *, 0x1C) += M2C_FIELD(fifo, s32 *, 0x8);
+        f[7] = f[6] - f[5];
+        if (f[7] < 0) {
+            f[7] += f[2];
         }
     }
-    *readPtr = M2C_FIELD(fifo, u32 *, 0x14);
-    *writePtr = M2C_FIELD(fifo, u32 *, 0x18);
+    *readPtr = f[5];
+    *writePtr = f[6];
 }
 
 s32 fn_8026E9EC(s32 *self) {
@@ -4294,6 +4294,65 @@ void fn_8027425C(u32 coord, u8 enable, u32 ss, u32 ts) {
         *(volatile u32 *)0xCC008000 = ts0[0xD8 / 4];
         M2C_FIELD(gx, u16 *, 0x2) = 0;
     }
+}
+
+void fn_802742D8(u32 coord, u8 s_enable, u8 t_enable) {
+    extern void *__GXData;
+    u32 *gx = __GXData;
+
+    gx[0xB8 / 4 + coord] = __rlwimi(gx[0xB8 / 4 + coord], s_enable, 17, 14, 14);
+    gx[0xD8 / 4 + coord] = __rlwimi(gx[0xD8 / 4 + coord], t_enable, 17, 14, 14);
+    if (gx[0x594 / 4] & (1 << coord)) {
+        GXWGFifo.u8 = 0x61;
+        GXWGFifo.u32 = gx[0xB8 / 4 + coord];
+        GXWGFifo.u8 = 0x61;
+        GXWGFifo.u32 = gx[0xD8 / 4 + coord];
+        M2C_FIELD(gx, u16 *, 0x2) = 0;
+    }
+}
+
+void fn_8027433C(u32 coord, u8 s_enable, u8 t_enable) {
+    extern void *__GXData;
+    u32 *gx = __GXData;
+
+    gx[0xB8 / 4 + coord] = __rlwimi(gx[0xB8 / 4 + coord], s_enable, 16, 15, 15);
+    gx[0xD8 / 4 + coord] = __rlwimi(gx[0xD8 / 4 + coord], t_enable, 16, 15, 15);
+    if (gx[0x594 / 4] & (1 << coord)) {
+        GXWGFifo.u8 = 0x61;
+        GXWGFifo.u32 = gx[0xB8 / 4 + coord];
+        GXWGFifo.u8 = 0x61;
+        GXWGFifo.u32 = gx[0xD8 / 4 + coord];
+        M2C_FIELD(gx, u16 *, 0x2) = 0;
+    }
+}
+
+void fn_802743A0(u32 tmap, u32 tcoord) {
+    extern void *__GXData;
+    u32 *gx = __GXData;
+    u32 w, h;
+    u8 s_bias, t_bias;
+
+    w = gx[0x514 / 4 + tmap] & 0x3FF;
+    h = (gx[0x514 / 4 + tmap] >> 10) & 0x3FF;
+    gx[0xB8 / 4 + tcoord] = __rlwimi(gx[0xB8 / 4 + tcoord], w, 0, 16, 31);
+    gx[0xD8 / 4 + tcoord] = __rlwimi(gx[0xD8 / 4 + tcoord], h, 0, 16, 31);
+    s_bias = (gx[0x534 / 4 + tmap] & 3) == 1;
+    t_bias = ((gx[0x534 / 4 + tmap] >> 2) & 3) == 1;
+    gx[0xB8 / 4 + tcoord] = __rlwimi(gx[0xB8 / 4 + tcoord], s_bias, 16, 15, 15);
+    gx[0xD8 / 4 + tcoord] = __rlwimi(gx[0xD8 / 4 + tcoord], t_bias, 16, 15, 15);
+    GXWGFifo.u8 = 0x61;
+    GXWGFifo.u32 = gx[0xB8 / 4 + tcoord];
+    GXWGFifo.u8 = 0x61;
+    GXWGFifo.u32 = gx[0xD8 / 4 + tcoord];
+    M2C_FIELD(gx, u16 *, 0x2) = 0;
+}
+
+void fn_802745BC(u32 coord, u16 *ss, u16 *ts) {
+    extern void *__GXData;
+    u32 *gx = __GXData;
+
+    *ss = (u16)(gx[0xB8 / 4 + coord] & 0xFFFF) + 1;
+    *ts = (u16)(gx[0xD8 / 4 + coord] & 0xFFFF) + 1;
 }
 
 void fn_80274940(u32 tev_stage, u32 ind_stage, u32 format, u32 bias_sel, u32 matrix_sel, u32 wrap_s, u32 wrap_t, u8 add_prev, u8 utc_lod, u32 alpha_sel);
