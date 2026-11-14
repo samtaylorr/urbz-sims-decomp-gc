@@ -27,6 +27,14 @@ static inline void ERMLock_Unlock(ERMLock *l) {
     (*(void (**)(void *))(vt + 0x1C))(l->obj + *(s16 *)(vt + 0x18));
 }
 
+static inline void ESimsDataManager_Free(void **p) {
+    extern void fn_8031EA2C(void *);
+    if (*p != NULL) {
+        fn_8031EA2C(*p);
+        *p = NULL;
+    }
+}
+
 void *fn_8001C5A8(void *arg0, void *arg1) {
     extern void *fn_800F160C(void *);
     extern u8 lbl_80407108[];
@@ -47,6 +55,39 @@ void *fn_8001C5A8(void *arg0, void *arg1) {
     M2C_FIELD(arg0, s32 *, 0x40) = 0;
     M2C_FIELD(arg0, s32 *, 0x44) = 0;
     return arg0;
+}
+
+void fn_8001C634(void *arg0, s32 flags) {
+    extern void fn_8031EA2C(s32);
+    extern void fn_800F1A60(void *, s32);
+    extern void fn_802D20E8(void *);
+    extern u8 lbl_80407108[];
+
+    M2C_FIELD(arg0, void **, 0x48) = lbl_80407108;
+    if (M2C_FIELD(arg0, s32 *, 0x2C) != 0) {
+        fn_8031EA2C(M2C_FIELD(arg0, s32 *, 0x2C));
+        M2C_FIELD(arg0, s32 *, 0x2C) = 0;
+    }
+    if (M2C_FIELD(arg0, s32 *, 0x30) != 0) {
+        fn_8031EA2C(M2C_FIELD(arg0, s32 *, 0x30));
+        M2C_FIELD(arg0, s32 *, 0x30) = 0;
+    }
+    if (M2C_FIELD(arg0, s32 *, 0x34) != 0) {
+        fn_8031EA2C(M2C_FIELD(arg0, s32 *, 0x34));
+        M2C_FIELD(arg0, s32 *, 0x34) = 0;
+    }
+    if (M2C_FIELD(arg0, s32 *, 0x38) != 0) {
+        fn_8031EA2C(M2C_FIELD(arg0, s32 *, 0x38));
+        M2C_FIELD(arg0, s32 *, 0x38) = 0;
+    }
+    fn_800F1A60((char *)arg0 + 0x28, 2);
+    fn_800F1A60((char *)arg0 + 0x24, 2);
+    fn_800F1A60((char *)arg0 + 0x20, 2);
+    fn_800F1A60((char *)arg0 + 0x1C, 2);
+    fn_800F1A60((char *)arg0 + 0x18, 2);
+    if (flags & 1) {
+        fn_802D20E8(arg0);
+    }
 }
 
 void fn_8001C718(void *self) {
