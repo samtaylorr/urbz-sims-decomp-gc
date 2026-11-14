@@ -1382,6 +1382,34 @@ u32 fn_80257A00(void) {
     return mode;
 }
 
+void fn_80257A80(u32 on) {
+    extern SramControlBlock lbl_80440C00;
+    s32 fn_802572CC(s32, s32);
+    SramControlBlock *scb;
+    s32 enabled;
+    s32 *locked;
+    u8 pad[8];
+
+    on = (on & 1) << 2;
+    scb = &lbl_80440C00;
+    enabled = fn_8025465C();
+    locked = &scb->locked;
+    if (*locked != 0) {
+        fn_80254684(enabled);
+        scb = NULL;
+    } else {
+        scb->enabled = enabled;
+        *locked = 1;
+    }
+    if (on == (scb->sram[0x13] & 4)) {
+        fn_802572CC(0, 0);
+        return;
+    }
+    scb->sram[0x13] &= ~4;
+    scb->sram[0x13] |= on;
+    fn_802572CC(1, 0);
+}
+
 void fn_80257CB4(u32 mode) {
     s32 fn_802572CC(s32, s32);
     u8 *sram;
