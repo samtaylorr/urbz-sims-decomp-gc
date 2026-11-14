@@ -3,6 +3,14 @@
 
 typedef struct { f32 x, y, z; } ECamVec3;
 
+static inline void ECamVec3_Set(ECamVec3 *dst, f32 x, f32 y, f32 z) {
+    ECamVec3 v;
+    v.x = x;
+    v.z = z;
+    v.y = y;
+    *dst = v;
+}
+
 void fn_802D2FD0(void);
 void fn_802F3E74(void) {
     fn_802D2FD0();
