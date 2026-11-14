@@ -6332,6 +6332,45 @@ void fn_80275E98(u32 index) {
     fn_802762C0(0);
 }
 
+void fn_80275F80(u16 mtx_indx, u32 id, u32 type) {
+    u32 reg;
+    u32 addr;
+    u32 count;
+
+    if (id >= 0x40) {
+        addr = (id - 0x40) * 4 + 0x500;
+    } else {
+        addr = id * 4;
+    }
+    count = (type == 1) ? 8 : 12;
+    reg = 0;
+    reg = __rlwimi(reg, addr, 0, 20, 31);
+    reg = __rlwimi(reg, count - 1, 12, 16, 19);
+    reg = __rlwimi(reg, mtx_indx, 16, 0, 15);
+    GXWGFifo.u8 = 0x30;
+    GXWGFifo.u32 = reg;
+}
+
+void fn_80276068(f32 left, f32 top, f32 wd, f32 ht, f32 nearz, f32 farz, u32 field) {
+    void fn_80275FD8(void);
+    extern void *__GXData;
+    extern f32 lbl_80497600;
+    u8 *gx;
+
+    if (field == 0) {
+        top -= lbl_80497600;
+    }
+    gx = __GXData;
+    M2C_FIELD(gx, f32 *, 0x4F4) = left;
+    M2C_FIELD(gx, f32 *, 0x4F8) = top;
+    M2C_FIELD(gx, f32 *, 0x4FC) = wd;
+    M2C_FIELD(gx, f32 *, 0x500) = ht;
+    M2C_FIELD(gx, f32 *, 0x504) = nearz;
+    M2C_FIELD(gx, f32 *, 0x508) = farz;
+    fn_80275FD8();
+    M2C_FIELD(__GXData, u16 *, 0x2) = 1;
+}
+
 void fn_802760C0(f32 left, f32 top, f32 wd, f32 ht, f32 nearz, f32 farz) {
     void fn_80275FD8(void);
     extern void *__GXData;
