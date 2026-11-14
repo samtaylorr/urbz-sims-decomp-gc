@@ -3062,6 +3062,7 @@ void fn_80264404(void) {
     }
     fn_80254684(enabled);
 }
+#pragma pop
 
 s32 fn_802646D0(DVDCommandBlock *block) {
     s32 fn_80264454(DVDCommandBlock *, void *);
