@@ -160,23 +160,18 @@ static inline f32 fn_80322898_round(f32 v) {
     return (s32)(v + lbl_803F301C[0]);
 }
 
-static inline void fn_80322898_snap(f32 *v, s32 flag) {
-    if (flag != 0) {
+void fn_80322898(s32 arg0, Vec2Arg *arg1, s32 arg2, s32 arg3) {
+    f32 *v = &arg1->x;
+
+    if (arg2 == 0 && arg3 == 0) {
+        return;
+    }
+    if (arg2 != 0) {
         *v = fn_80322898_round(*v);
     }
-}
-
-void fn_80322898(s32 arg0, Vec2Arg *arg1, s32 arg2, s32 arg3) {
-    if (arg2 != 0 || arg3 != 0) {
-        f32 *v;
-        if (arg2 != 0) {
-            v = &arg1->x;
-            *v = fn_80322898_round(*v);
-        }
-        if (arg3 != 0) {
-            v = &arg1->y;
-            *v = fn_80322898_round(*v);
-        }
+    v = &arg1->y;
+    if (arg3 != 0) {
+        *v = fn_80322898_round(*v);
     }
 }
 
