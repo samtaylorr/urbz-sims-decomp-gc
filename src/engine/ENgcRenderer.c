@@ -285,11 +285,11 @@ void fn_8035DA7C(u8 *self, u8 *arg1) {
     m->unk19 = 0;
     m->unk1A = 0x20;
     m->unk1B = 0;
-    m->unk1C = 0;
     m->unk4 = 0;
     m->unk8 = 0;
     m->unk14 = 0;
     m->unk16 = 0;
+    m->unk1C = 0;
     msg.unk10 = *(u16 *)(arg1 + 2);
     msg.unk12 = *(u16 *)(arg1 + 6);
     msg.unk8 |= 0x80;
