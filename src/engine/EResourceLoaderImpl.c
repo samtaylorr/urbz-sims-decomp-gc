@@ -194,7 +194,7 @@ void fn_8031CE6C(char *self, s32 arg1) {
         fn_802D8328(e);
         fn_802D8260(e, 2);
     }
-    while (*(volatile s32 *)(self + 0x3E4) == 0) {
+    while (M2C_FIELD(self, s32 *, 0x3E4) == 0) {
     }
 }
 
@@ -290,6 +290,58 @@ void fn_8031D0AC(char *self) {
         fn_802D8334(e, -1);
         fn_802D8328(e);
         fn_802D8260(e, 2);
+    }
+}
+
+s32 fn_8031D158(char *self, char *res) {
+    void fn_802D3C60(s32 *, s32);
+    void fn_802D39F0(s32 *, s32);
+    s32 fn_8031E254(void *, s32 *);
+    ERMLock lock;
+    char **list;
+    s32 str[2];
+    s32 *p;
+    s32 ret;
+
+    ERMLock_Lock(&lock, self + 0x360);
+    list = (char **)(self + 0x348);
+    *(char **)(res + 0x9C) = list[1];
+    if (list[1] != NULL) {
+        *(char **)(list[1] + 0xA0) = res;
+    } else {
+        list[0] = res;
+    }
+    p = str;
+    *(char **)(res + 0xA0) = NULL;
+    list[1] = res;
+    fn_802D3C60(p, *(s32 *)(res + 0x54));
+    ret = fn_8031E254(self, p);
+    fn_802D39F0(p, *p);
+    ERMLock_Unlock(&lock);
+    return ret;
+}
+
+void fn_8031D224(char *self, char *res) {
+    ERMLock lock;
+    void *vt;
+    char **list;
+
+    if (M2C_FIELD(self, s32 *, 0x350) != 0) {
+        vt = M2C_FIELD(self, void **, 0);
+        ((void (*)(void *))M2C_FIELD(vt, void **, 0x4C))(self + M2C_FIELD(vt, s16 *, 0x48));
+        ERMLock_Lock(&lock, self + 0x360);
+        list = (char **)(self + 0x348);
+        if (list[0] == res) {
+            list[0] = *(char **)(res + 0xA0);
+        } else {
+            *(char **)(*(char **)(res + 0x9C) + 0xA0) = *(char **)(res + 0xA0);
+        }
+        if (list[1] == res) {
+            list[1] = *(char **)(res + 0x9C);
+        } else {
+            *(char **)(*(char **)(res + 0xA0) + 0x9C) = *(char **)(res + 0x9C);
+        }
+        ERMLock_Unlock(&lock);
     }
 }
 
