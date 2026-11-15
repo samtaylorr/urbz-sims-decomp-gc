@@ -20,11 +20,15 @@ typedef struct Strip {
     u8 unk1C[0x18];
 } Strip;
 
+static inline Strip *GetStrip(u8 *self, s32 i) {
+    return &(*(Strip **)(self + 0x14))[i];
+}
+
 static inline void Strip_MinMaxX(u8 *self, s32 i, f32 *min, f32 *max) {
-    s16 *p = (*(Strip **)(self + 0x14))[i].verts;
+    s16 *p = GetStrip(self, i)->verts;
     u32 j;
 
-    for (j = 0; j < (*(Strip **)(self + 0x14))[i].count; j++) {
+    for (j = 0; j < GetStrip(self, i)->count; j++) {
         f32 v = p[j * 4];
         if (v <= *min) {
             *min = v;
@@ -406,24 +410,26 @@ s32 fn_80300ACC(u8 *self) {
 }
 
 void fn_80300B18(u8 *self, u8 *arg1) {
-    if (*(s32 *)(arg1 + 0x20) == 0) {
-        return;
+    s32 *e;
+
+    if (*(s32 *)(arg1 + 0x20) != 0) {
+        e = (s32 *)arg1;
+        e[5] = 0;
+        ((void (*)(u8 *, s32, s32))fn_803008DC)(self, *(s32 *)(arg1 + 0x20), 0);
+        ((void (*)(u8 *, s32, s32))fn_803008DC)(self, *(s32 *)(arg1 + 0x4), 0);
+        ((void (*)(u8 *, s32, s32))fn_803008DC)(self, *(s32 *)(arg1 + 0x8), 0);
+        ((void (*)(u8 *, s32, s32))fn_803008DC)(self, *(s32 *)(arg1 + 0xC), 0);
+        ((void (*)(u8 *, s32, s32))fn_803008DC)(self, *(s32 *)(arg1 + 0x10), 0);
+        ((void (*)(u8 *, s32, s32))fn_803008DC)(self, *(s32 *)(arg1 + 0x14), 1);
+        ((void (*)(u8 *, s32, s32))fn_803008DC)(self, *(s32 *)(arg1 + 0x0), 1);
+        *(s32 *)(arg1 + 0x10) = 0;
+        *(s32 *)(arg1 + 0x20) = 0;
+        *(s32 *)(arg1 + 0x14) = 0;
+        *(s32 *)(arg1 + 0x0) = 0;
+        *(s32 *)(arg1 + 0x4) = 0;
+        *(s32 *)(arg1 + 0x8) = 0;
+        *(s32 *)(arg1 + 0xC) = 0;
     }
-    *(void **)(arg1 + 0x14) = NULL;
-    ((void (*)(u8 *, void *, s32))fn_803008DC)(self, *(void **)(arg1 + 0x20), 0);
-    ((void (*)(u8 *, void *, s32))fn_803008DC)(self, *(void **)(arg1 + 0x4), 0);
-    ((void (*)(u8 *, void *, s32))fn_803008DC)(self, *(void **)(arg1 + 0x8), 0);
-    ((void (*)(u8 *, void *, s32))fn_803008DC)(self, *(void **)(arg1 + 0xC), 0);
-    ((void (*)(u8 *, void *, s32))fn_803008DC)(self, *(void **)(arg1 + 0x10), 0);
-    ((void (*)(u8 *, void *, s32))fn_803008DC)(self, *(void **)(arg1 + 0x14), 1);
-    ((void (*)(u8 *, void *, s32))fn_803008DC)(self, *(void **)(arg1 + 0x0), 1);
-    *(s32 *)(arg1 + 0x10) = 0;
-    *(s32 *)(arg1 + 0x20) = 0;
-    *(s32 *)(arg1 + 0x14) = 0;
-    *(s32 *)(arg1 + 0x0) = 0;
-    *(s32 *)(arg1 + 0x4) = 0;
-    *(s32 *)(arg1 + 0x8) = 0;
-    *(s32 *)(arg1 + 0xC) = 0;
 }
 
 void fn_80300BE8(u8 *self) {
