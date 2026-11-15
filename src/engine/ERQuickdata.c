@@ -675,7 +675,10 @@ void fn_80330EA4(ERQdLookup *self, void *res, s32 idx) {
         }
         self->unk2C[idx] = res;
         self->unk34[idx] = M2C_FIELD(res, s32 *, 8);
-        ((struct { s32 a; u8 pad[60]; } *)(self->unk20 + 0x19))[idx].a = M2C_FIELD(res, s32 *, 0x20);
+        {
+            s32 *tbl = (s32 *)((u8 *)self->unk20 + 0x64);
+            tbl[idx * 16] = M2C_FIELD(res, s32 *, 0x20);
+        }
     }
 }
 
@@ -733,7 +736,7 @@ void fn_80331064(void) {
 }
 
 void fn_8033108C(void *self) {
-    void fn_8032E230(void *);
+    void *fn_8032E230(void *);
     void *fn_80331208(u32 size, void *p);
     fn_8032E230(fn_80331208(0x78, self));
 }
