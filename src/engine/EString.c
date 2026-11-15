@@ -1322,27 +1322,28 @@ s32 fn_802D52A4(s32 *arg0, s32 arg1, s32 arg2) {
     void fn_802D5254(s32 *, s32);
     void fn_802D55A4(s32 *, s32 *, s32 *, s32, s32);
     void fn_803BA3C4(s32, s32 *);
-    s32 str;
-    s32 tok;
-    s32 pos;
+    s32 *fn_802D57BC(s32 *, u16 *);
+    s32 str[2];
+    s32 tok[2];
+    s32 pos[2];
     s32 len;
     s32 n;
 
     if (*(u16 *)*arg0 == 0) {
         return 0;
     }
-    pos = 0;
+    pos[0] = 0;
     len = fn_802D5200((u16 *)*arg0);
-    fn_802D5238((void *)&str);
+    fn_802D5238((void *)str);
     n = 0;
     do {
-        fn_802D55A4(&tok, arg0, &pos, len, arg1);
+        fn_802D55A4(tok, arg0, pos, len, arg1);
         n++;
-        fn_802D57BC(&str, (u16 *)tok);
-        fn_802D5254(&tok, tok);
-        fn_803BA3C4(arg2, &str);
-    } while (str != 0);
-    fn_802D5254(&str, str);
+        fn_802D57BC(str, (u16 *)tok[0]);
+        fn_802D5254(tok, tok[0]);
+        fn_803BA3C4(arg2, str);
+    } while (str[0] != 0);
+    fn_802D5254(str, str[0]);
     return n - 1;
 }
 
@@ -1382,6 +1383,47 @@ s32 *fn_802D5564(s32 *arg0, u16 arg1) {
     sp8[1] = 0;
     fn_802D56C4(arg0, sp8);
     return arg0;
+}
+
+void fn_802D56C4(s32 *arg0, u16 *arg1) {
+    M2C_UNK fn_802482F8();
+    s32 fn_802D0AB8(void);
+    s32 fn_802D0B3C(void);
+    void *fn_802D197C(s32, u32, s32);
+    void *fn_802DBBCC(s32, u32, s32);
+    s32 heap;
+    void *p;
+    void *buf;
+    s32 len;
+    u32 size;
+
+    if (arg1 != NULL) {
+        len = fn_802D5200(arg1);
+    } else {
+        len = 0;
+    }
+    if (len != 0) {
+        size = (len + 1) * 2;
+        heap = fn_802D0AB8();
+        if (size == 0) {
+            buf = NULL;
+        } else {
+            p = fn_802D197C(heap, size, 4);
+            if (p == NULL && (p = fn_802DBBCC(heap, size, 0)) == NULL && heap == fn_802D0AB8()) {
+                buf = fn_802DBBCC(fn_802D0B3C(), size, 0);
+            } else {
+                buf = p;
+            }
+        }
+        if (buf != NULL) {
+            fn_802482F8(buf, arg1, size);
+            *arg0 = (s32)buf;
+        } else {
+            fn_802D5238((M2C_UNK **)arg0);
+        }
+    } else {
+        fn_802D5244((M2C_UNK **)arg0);
+    }
 }
 
 s32 *fn_802D57BC(s32 *arg0, u16 *arg1) {
