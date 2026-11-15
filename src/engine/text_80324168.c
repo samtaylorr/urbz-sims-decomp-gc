@@ -183,6 +183,30 @@ void fn_80325888(void) {
 
 }
 
+M2C_UNK fn_8032588C(s32 arg0, void *arg1) {
+    typedef struct { char pad[0x49120]; void *items[0x800]; s32 count; } Stack;
+    s32 fn_802CB69C(s32, void *);
+    s32 fn_802CCE6C(s32, s32, void *, s32);
+
+    ((void (*)(s32, void *))fn_80325888)(arg0, arg1);
+    M2C_FIELD(arg1, s32 *, 0x4) = arg0;
+    if (M2C_FIELD(arg1, u32 *, 0x64) & 0x20000) {
+        M2C_FIELD(arg1, s32 *, 0x88) = fn_802CB69C(arg0 + 0x490CC, arg1);
+    } else if (M2C_FIELD(arg1, u32 *, 0x64) & 0x10000) {
+        M2C_FIELD(arg1, s32 *, 0x88) = fn_802CB69C(arg0 + 0x490DC, arg1);
+    } else if (M2C_FIELD(arg1, u32 *, 0x64) & 0x40000) {
+        M2C_FIELD(arg1, s32 *, 0x88) = fn_802CB69C(arg0 + 0x4910C, arg1);
+    } else {
+        ((Stack *)arg0)->items[((Stack *)arg0)->count] = arg1;
+        ((Stack *)arg0)->count++;
+    }
+    if (M2C_FIELD(arg1, u32 *, 0x64) & 0x100) {
+        char *vt = M2C_FIELD(arg1, char **, 0);
+        s32 id = (*(s32 (**)(void *))(vt + 0xA4))((char *)arg1 + *(s16 *)(vt + 0xA0));
+        M2C_FIELD(arg1, s32 *, 0x3C) = fn_802CCE6C(arg0 + 0x490C0, id, arg1, 1);
+    }
+}
+
 void fn_80325978(s32 arg0, void *arg1) {
     void fn_803259C8(s32, void *);
     void *vt;
