@@ -152,18 +152,18 @@ void fn_801D27A0(u8 *self, s32 arg1) {
 }
 
 void fn_801D30E0(u8 *self, u8 *arg1) {
-    extern u8 *fn_801CB188(u8 *, u32);
+    extern u8 *fn_801CB188(u8 *);
     extern s32 fn_801CE8BC(u8 *, u32, s32);
     extern void fn_801CD9F0(u8 *, u32, s32, void *);
     extern s8 fn_801C9BC8(void *, u32);
-    s32 *p = (s32 *)(self + 8);
     u32 i;
+    s32 *p;
 
-    for (i = 0; i <= 0x16; i++) {
+    for (i = 0, p = (s32 *)(self + 8); i <= 0x16; i++) {
         if (*p++ == 0) {
             if (i == 1) {
                 s32 n = (s8)arg1[0x87];
-                u8 *q = *(u8 **)(fn_801CB188(self + 0xf8, i) + 0x14) + n * 0x14 + 0xc;
+                u8 *q = *(u8 **)(fn_801CB188(self + 0xf8) + 0x14) + n * 0x14 + 0xc;
                 fn_801CD9F0(self, 1, fn_801CE8BC(self, 1, n), q);
             } else {
                 fn_801CD9F0(self, i, fn_801CE8BC(self, i, fn_801C9BC8(arg1, i)), 0);
