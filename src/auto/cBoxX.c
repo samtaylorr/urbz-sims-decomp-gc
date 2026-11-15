@@ -41,6 +41,38 @@ static inline It_80100494 Tree_end(char *tree) {
     return it;
 }
 
+static inline It_80100494 Tree_lower_bound(char *tree, const u32 *kp) {
+    It_80100494 it;
+    char *y = M2C_FIELD(tree, char **, 4);
+    char *x = M2C_FIELD(y, char **, 4);
+    while (x != NULL) {
+        if (!(M2C_FIELD(x, u32 *, 0x10) < *kp)) {
+            y = x;
+            x = M2C_FIELD(y, char **, 8);
+        } else {
+            x = M2C_FIELD(x, char **, 0xC);
+        }
+    }
+    it.node = (s32)y;
+    return it;
+}
+
+static inline It_80100494 Tree_upper_bound(char *tree, const u32 *kp) {
+    It_80100494 it;
+    char *y = M2C_FIELD(tree, char **, 4);
+    char *x = M2C_FIELD(y, char **, 4);
+    while (x != NULL) {
+        if (*kp < M2C_FIELD(x, u32 *, 0x10)) {
+            y = x;
+            x = M2C_FIELD(y, char **, 8);
+        } else {
+            x = M2C_FIELD(x, char **, 0xC);
+        }
+    }
+    it.node = (s32)y;
+    return it;
+}
+
 s32 fn_800FE02C(s32 arg0, s32 arg1, s32 arg2) {
     extern s32 lbl_804943E4;
     extern s32 lbl_80495AD0;
@@ -771,7 +803,7 @@ void fn_80101C50(void *arg0) {
     fn_80101C90(arg0, fn_80101BF8(arg0), lbl_803D67B0[0]);
 }
 
-void fn_80101C90(void *arg0, s32 arg1, f32 arg2) {
+void fn_80101C90(s32 *arg0, s32 arg1, f32 arg2) {
     extern void *lbl_80494FA4;
     extern u8 *lbl_8041FAD0[];
     extern f32 lbl_803D67C0[];
@@ -781,15 +813,13 @@ void fn_80101C90(void *arg0, s32 arg1, f32 arg2) {
     char *obj;
     char *vt;
 
-    M2C_FIELD(arg0, s32 *, 4) = 0;
+    arg0[1] = 0;
     {
         char *o = lbl_80494FA4;
         VtEnt *e = (VtEnt *)(*(char **)o + 0x40);
-        o += e->off;
-        fn_8033BEA0(buf, arg1, 0);
-        e->fn(o, buf);
+        e->fn(o + e->off, (fn_8033BEA0(buf, arg1, 0), buf));
     }
-    if (M2C_FIELD(arg0, s32 *, 8) == 0) {
+    if (arg0[2] == 0) {
         obj = lbl_80494FA4;
         vt = *(char **)obj;
         ((void (*)(void *, f32))M2C_FIELD(vt, void **, 0x64))(obj + M2C_FIELD(vt, s16 *, 0x60), arg2 * (f32)(s8)lbl_8041FAD0[0][0x1D] / lbl_803D67C0[0]);
