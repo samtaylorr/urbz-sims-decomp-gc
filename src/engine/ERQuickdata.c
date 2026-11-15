@@ -657,18 +657,7 @@ void fn_8032FE1C(void *self) {
             void (*f)(void *, s32) = *(void (**)(void *, s32))(vt + 0x14);
             f(lbl_8045AA90 + off, -1);
         }
-        {
-            void ***tail = &lbl_80496250;
-            void **n = M2C_FIELD(self, void ***, 0x60);
-            n[1] = *tail;
-            if (*tail != NULL) {
-                (*tail)[2] = n;
-            } else {
-                lbl_8049624C[0] = (s32)n;
-            }
-            n[2] = NULL;
-            *tail = n;
-        }
+        QList_Append((void **)lbl_8049624C, &lbl_80496250, M2C_FIELD(self, void ***, 0x60));
         {
             char *vt = *(char **)lbl_8045AA90;
             s16 off = *(s16 *)(vt + 0x18);
