@@ -45,12 +45,6 @@ static inline PtrList *PtrList_Init(PtrList *l) {
     fn_802CB8D4(l);
     return l;
 }
-static inline PtrList *PtrList_Ctor(PtrList *l) {
-    l->last = 0;
-    l->first = 0;
-    l->owns = 1;
-    return l;
-}
 typedef struct { f32 x, y, z; } Vec3f;
 typedef struct { f32 x, y, z, w; } Vec4f;
 
@@ -426,9 +420,10 @@ void fn_80232F2C(void *arg0) {
     void *vt;
     void **arr;
 
-    q = PtrList_Init(&list);
-    fn_800643BC(M2C_FIELD(lbl_8041FA38[0], void **, 4), M2C_FIELD(arg0, s32 *, 0), q);
-    if (list.first != 0 && list.first == list.last) {
+    q = PtrList_Ctor(&list);
+    fn_802CB8D4(&list);
+    fn_800643BC(M2C_FIELD(lbl_8041FA38[0], void **, 4), M2C_FIELD(arg0, s32 *, 0), &list);
+    if (list.first != 0 && list.first == q->last) {
         obj = fn_80065AD4(*list.first);
         vt = M2C_FIELD(obj, void **, 4);
         ((void (*)(void *, void *))fn_80233024)(arg0,
@@ -437,9 +432,9 @@ void fn_80232F2C(void *arg0) {
         vt = M2C_FIELD(arg0, void **, 0x58);
         M2C_FIELD(vt, void (**)(void *), 0x74)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x70));
         arr = (void **)(lbl_8041F770[0] + 0x12C);
-        fn_801FF614(arr[M2C_FIELD(arg0, s32 *, 0)], &list);
+        fn_801FF614(arr[M2C_FIELD(arg0, s32 *, 0)], q);
     }
-    fn_802CB8D4(&list);
+    fn_802CB8D4(q);
 }
 
 void fn_80233024(u8 *arg0) {
@@ -969,8 +964,8 @@ void *fn_80235828(u8 *arg0) {
     M2C_FIELD(arg0, s32 *, 0x70) = 0;
     fn_80089650(arg0 + 0x78);
     q = (Vec3f *)(arg0 + 0xA8);
-    q->y = zero;
     q->z = zero;
+    q->y = zero;
     M2C_FIELD(arg0, f32 *, 0xB4) = lbl_803EB420[0];
     q->x = zero;
     Box3f_Init((Box3f *)(arg0 + 0xB8), zero);
