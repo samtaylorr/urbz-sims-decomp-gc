@@ -1,6 +1,17 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+typedef struct { f32 x, y, z; } ESimVec3;
+typedef struct { ESimVec3 a; ESimVec3 b; } ESimVec3Pair;
+
+static inline void ESimVec3_splat(ESimVec3 *d, f32 s) {
+    ESimVec3 t;
+    t.z = s;
+    t.y = s;
+    t.x = s;
+    *d = t;
+}
+
 static inline void *ESim_AllocAligned(s32 size) {
     void *fn_802D0AB8(void);
     void *fn_802D0B3C(void);
@@ -106,6 +117,36 @@ void fn_8003AEC8(void *self) {
     (*(void (**)(void *))(vt + 0x1B4))(obj + *(s16 *)(vt + 0x1B0));
 }
 
+void fn_8003B978(void *arg0, s32 arg1) {
+    extern void fn_801CAFCC(void *);
+    extern void fn_801CB05C(void *, s32);
+    extern void fn_801CCDD4(void *, s32, s32 *);
+    extern void fn_801CB130(void *, s32);
+    s32 fn_8003AD54(void *);
+    u8 buf[0x18];
+    s32 flags[23];
+    s32 *p;
+    s32 *q;
+    s32 i;
+
+    p = (s32 *)((char *)arg0 + 0x410);
+    fn_801CAFCC(buf);
+    fn_801CB05C(buf, fn_8003AD54(arg0));
+    q = p;
+    for (i = 0; i <= 0x16; i++) {
+        flags[i] = 0;
+        *q++ = *(q - 23);
+    }
+    fn_801CCDD4(buf, arg1, flags);
+    q = p;
+    for (i = 0; i <= 0x16; i++) {
+        if (flags[i] != 0) {
+            q[i] = 0;
+        }
+    }
+    fn_801CB130(buf, 2);
+}
+
 M2C_UNK fn_8003C7A8(void *arg0, void *arg1) {
     extern s32 fn_8032C194(void *);
     extern void fn_8032BF88(void *, s32);
@@ -198,6 +239,39 @@ void fn_8003CFE0(s32 arg0) {
 
 void fn_8003D024(void) {
 
+}
+
+s32 fn_8003D9D0(void *self, void *arg1) {
+    typedef struct { f32 x, y, z; } Vec3;
+    typedef struct { Vec3 a; Vec3 b; } Vec3Pair;
+    extern const f32 lbl_803C5CC0[];
+    s32 fn_8003E48C(void *);
+    s32 fn_802E33E8(void *, void *);
+    void fn_802E7F64(void *, void *, Vec3Pair *, s32);
+    s32 fn_802E34F0(void *, Vec3Pair *);
+    u8 *p;
+    Vec3Pair v;
+    Vec3 t;
+    u8 buf[0x40];
+
+    if (fn_8003E48C(self) != 0) {
+        return 0;
+    }
+    p = (u8 *)self + 0x314;
+    if (*(s32 *)(p + 0xC) == 0) {
+        return fn_802E33E8(arg1, (u8 *)self + 0x110);
+    }
+    t.z = lbl_803C5CC0[0];
+    t.y = lbl_803C5CC0[0];
+    t.x = lbl_803C5CC0[0];
+    v.b = t;
+    v.a = v.b;
+    {
+        u8 *vt = *(u8 **)self;
+        (*(void (**)(void *, void *))(vt + 0xF4))((u8 *)self + *(s16 *)(vt + 0xF0), buf);
+    }
+    fn_802E7F64(p, buf, &v, 0);
+    return fn_802E34F0(arg1, &v);
 }
 
 void fn_8003DAB4(void *self, void *arg1) {
@@ -434,6 +508,27 @@ u32 fn_8003ED0C(u32 arg0, u32 arg1, u8 *arg2, u32 arg3, u32 arg4) {
     }
     arg3 *= arg3;
     return (r / arg3) | ((g / arg3) << 8) | ((b / arg3) << 16) | ((a / arg3) << 24);
+}
+
+u16 fn_8003EDBC(u32 arg0, u32 arg1, u16 *arg2, u32 arg3, u32 arg4) {
+    u32 r = 0;
+    u32 g = 0;
+    u32 b = 0;
+    u32 a = 0;
+    u32 x;
+    u32 y;
+
+    for (y = arg1; y < arg1 + arg3; y++) {
+        for (x = arg0; x < arg0 + arg3; x++) {
+            u16 c = arg2[y * arg4 + x];
+            r += c & 0x1F;
+            g += (c >> 5) & 0x1F;
+            b += (c >> 10) & 0x1F;
+            a += c >> 15;
+        }
+    }
+    arg3 = arg3 * arg3;
+    return (u16)((r / arg3) | ((g / arg3) << 5) | ((b / arg3) << 10) | ((a / arg3) << 15));
 }
 
 void fn_8003F3CC(void *arg0) {
