@@ -370,9 +370,8 @@ s32 fn_8028D764(void *arg0) {
     count = M2C_FIELD(arg0, s32 *, 0x1284);
     n = M2C_FIELD(arg0, s32 *, 0x1234);
     for (i = 0; i < count; i++) {
-        Entry *e = &M2C_FIELD(arg0, Entry **, 0x1230)[i];
-        if (e->used != 0) {
-            size += 1 + e->size;
+        if (M2C_FIELD(arg0, Entry **, 0x1230)[i].used != 0) {
+            size += 1 + M2C_FIELD(arg0, Entry **, 0x1230)[i].size;
             if (--n == 0) {
                 break;
             }
@@ -609,6 +608,36 @@ void *fn_8028F3F0(u32 *self) {
             fn_8024839C((s32 *)self[7], (s32 *)self[7] + 1, n * 4);
         }
         ((s32 *)self[7])[self[9]] = 0;
+    }
+    return r;
+}
+
+s32 fn_8028F64C(void *arg0, void *arg1) {
+    extern u16 lbl_803FCE5C[];
+    extern void **lbl_80494DA0;
+    extern void fn_802B4ADC(s32, u16 **);
+    extern s32 fn_802486DC(u16 *, u16 *);
+    s32 x = *(s32 *)arg0 & ~1;
+    s32 y = *(s32 *)arg1 & ~1;
+    u16 *a[2];
+    u16 *b[2];
+    u16 *q;
+    s32 r;
+
+    a[0] = lbl_803FCE5C;
+    lbl_803FCE5C[0]++;
+    b[0] = lbl_803FCE5C;
+    lbl_803FCE5C[0]++;
+    fn_802B4ADC(x, a);
+    fn_802B4ADC(y, b);
+    r = fn_802486DC(a[0] + 4, b[0] + 4);
+    q = b[0];
+    if (--*q == 0) {
+        ((void (*)(void *))lbl_80494DA0[1])(q);
+    }
+    q = a[0];
+    if (--*q == 0) {
+        ((void (*)(void *))lbl_80494DA0[1])(q);
     }
     return r;
 }
