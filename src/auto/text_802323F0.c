@@ -35,16 +35,13 @@ typedef struct {
     s32 owns;
 } PtrList;
 
-static inline void PtrList_Init(PtrList *l) {
+static inline PtrList *PtrList_Init(PtrList *l) {
     void fn_802CB8D4(void *);
     l->last = 0;
     l->first = 0;
     l->owns = 1;
     fn_802CB8D4(l);
-}
-
-static inline s32 PtrList_IsSingle(PtrList *l) {
-    return l->first != 0 && l->first == l->last;
+    return l;
 }
 typedef struct { f32 x, y, z; } Vec3f;
 typedef struct { f32 x, y, z, w; } Vec4f;
@@ -956,7 +953,7 @@ void *fn_80235828(u8 *arg0) {
     t.x = zero;
     t.y = zero;
     t.z = zero;
-    *(Vec3f *)(arg0 + 0xC4) = t;
+    Vec3f_Copy((Vec3f *)(arg0 + 0xC4), t);
     *(Vec3f *)(arg0 + 0xB8) = *(Vec3f *)(arg0 + 0xC4);
     Vec3f_Set((Vec3f *)(arg0 + 0xD0), zero, zero, zero);
     Vec3f_Set((Vec3f *)(arg0 + 0xDC), zero, zero, zero);
