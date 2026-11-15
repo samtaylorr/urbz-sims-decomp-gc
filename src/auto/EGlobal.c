@@ -336,6 +336,29 @@ EGlobalHandle fn_8004BC44(void *arg1, s32 arg2) {
     return lbl_80495804;
 }
 
+EGlobalHandle fn_8004BCB4(void *arg1, s32 arg2) {
+    s32 fn_8032D5C8(s32, void *);
+    EGlobalHandle *fn_8032D6E8(s32, s32, void *);
+    extern u8 lbl_803C6C40[];
+    extern char lbl_803C6C50[];
+    extern struct { u8 pad[0x11C]; s32 table; } lbl_8041F94C;
+    extern EGlobalHandle lbl_80495804;
+    EGlobalHandle *p;
+    s32 key;
+
+    if (arg2 != 0) {
+        key = fn_8032D5C8(M2C_FIELD(arg1, s32 *, 0x11C), lbl_803C6C40);
+        p = fn_8032D6E8(lbl_8041F94C.table, key, (void *)arg2);
+        if (p == NULL) {
+            p = fn_8032D6E8(lbl_8041F94C.table, key, lbl_803C6C50);
+        }
+        if (p != NULL) {
+            return *p;
+        }
+    }
+    return lbl_80495804;
+}
+
 EGlobalHandle fn_8004BD48(void *arg1, s32 arg2) {
     s32 fn_8032D5C8(s32, void *);
     EGlobalHandle *fn_8032D6E8(s32, s32, s32);
