@@ -233,6 +233,7 @@ void fn_8018F068(char *self, s32 key, u32 n) {
     char *tree = self + 4;
     void ***it;
     void **vec;
+    u32 size;
 
     it = fn_8018F2C4(self, key);
     if (it == *(void ****)(tree + 4)) {
@@ -243,12 +244,17 @@ void fn_8018F068(char *self, s32 key, u32 n) {
         }
     }
     vec = *it;
-    if ((u32)((void **)vec[1] - (void **)vec[0]) < n) {
+    size = (void **)vec[1] - (void **)vec[0];
+    if (size < n) {
         void *zero = NULL;
         fn_803A9318(vec, vec[1], n - ((void **)vec[1] - (void **)vec[0]), &zero);
-    } else if ((u32)((void **)vec[1] - (void **)vec[0]) > n) {
-        void **first = (void **)vec[1] - (((void **)vec[1] - (void **)vec[0]) - n);
-        RM_PtrVec_Erase(vec, &first);
+    } else if (size > n) {
+        void **first = (void **)vec[1] - (size - n);
+        void **last = vec[1];
+        void **p;
+        for (p = first; p != last; p++) {
+        }
+        vec[1] = first;
     }
 }
 
@@ -478,6 +484,34 @@ void fn_8018FA8C(char *self, char *arg1) {
         }
         fn_802D1A00(fn_802D0AB8(), arg1);
     }
+}
+
+s32 fn_8018FB0C(char *self, s32 arg1, s32 flags) {
+    char *vt;
+    s32 ret;
+    if (flags & 2) {
+        vt = *(char **)(self + 0x10);
+        ret = (*(s32 (**)(char *))(vt + 0x24))(self + *(s16 *)(vt + 0x20));
+        if (ret != -40) {
+            return ret;
+        }
+        vt = *(char **)(self + 0x10);
+        ret = (*(s32 (**)(char *, s32))(vt + 0x1C))(self + *(s16 *)(vt + 0x18), arg1);
+        if (ret != 0) {
+            return ret;
+        }
+    }
+    vt = *(char **)(self + 0x10);
+    ret = (*(s32 (**)(char *, s32))(vt + 0x2C))(self + *(s16 *)(vt + 0x28), arg1);
+    if (ret != 0 && (flags & 1)) {
+        vt = *(char **)(self + 0x10);
+        ret = (*(s32 (**)(char *, s32))(vt + 0x1C))(self + *(s16 *)(vt + 0x18), arg1);
+        if (ret == 0) {
+            vt = *(char **)(self + 0x10);
+            ret = (*(s32 (**)(char *, s32))(vt + 0x2C))(self + *(s16 *)(vt + 0x28), arg1);
+        }
+    }
+    return ret;
 }
 
 s32 fn_8018FBF4(char *self, s32 arg1) {
@@ -814,7 +848,7 @@ void fn_8019164C(u16 id, s32 flag, f32 f) {
         char *room = it.node->value;
         if (room != NULL && *(s32 *)(room + 0x34) != 0) {
             u16 key = *(u16 *)room;
-            if ((key == id && flag == 0) || (key != id && flag != 0)) {
+            if ((key == id && flag == 0) || (id != key && flag != 0)) {
                 RMVec3 tmp;
                 RMVec3 *t = &tmp;
                 t->z = f;
