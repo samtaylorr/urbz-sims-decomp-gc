@@ -85,6 +85,7 @@ typedef struct {
 } Flags_8036012C;
 
 typedef struct {
+    u8 unk74;
     u8 b80 : 1;
     u8 b40 : 1;
     u8 b20 : 1;
@@ -367,9 +368,9 @@ s32 fn_8036012C(Entry_8035F8AC *e, void *a, s32 b, s32 c) {
     M2C_FIELD(e, u8 *, 0x14) = b;
     e->unk15 = c;
     M2C_FIELD(e, u8 *, 0x75) &= ~0x8;
-    M2C_FIELD(e, Flags_8036012C *, 0x74).unk74 = 1;
+    M2C_FIELD(e, s8 *, 0x74) = 1;
     M2C_FIELD(e, u32 *, 0x70) = 0x232A0;
-    M2C_FIELD(e, u8 *, 0x75) |= 0x10;
+    M2C_FIELD(e, Flags_8036012C *, 0x74).b10 = 1;
     M2C_FIELD(e, void **, 0x10) = a;
     M2C_FIELD(e, u32 *, 0x60) = 0xA0C0;
     M2C_FIELD(e, u32 *, 0x64) = M2C_FIELD(a, u32 *, 0xC);
@@ -760,7 +761,7 @@ s32 fn_80361C4C(void *self, s32 n, u32 *w_out, u32 *h_out) {
     s32 w = M2C_FIELD(self, u16 *, 0x10);
     s32 h = M2C_FIELD(self, u16 *, 0x12);
     s32 total = 0;
-    s32 bpp;
+    u32 bpp;
     s32 i;
 
     *w_out = ENgcTexture_RoundUp(w - 1, M2C_FIELD(self, u8 *, 0x7C));
@@ -770,11 +771,12 @@ s32 fn_80361C4C(void *self, s32 n, u32 *w_out, u32 *h_out) {
         bpp = 32;
     }
     for (i = 0; i < n; i++) {
-        total += ENgcTexture_LevelSize(*w_out, *h_out, bpp);
+        s32 size = ENgcTexture_LevelSize(*w_out, *h_out, bpp);
         w >>= 1;
         h >>= 1;
         *w_out = ENgcTexture_RoundUp(w - 1, M2C_FIELD(self, u8 *, 0x7C));
         *h_out = ENgcTexture_RoundUp(h - 1, M2C_FIELD(self, u8 *, 0x7D));
+        total += size;
     }
     return total;
 }
