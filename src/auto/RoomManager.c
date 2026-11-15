@@ -226,6 +226,45 @@ s32 fn_8018EF28(void *arg0, s32 id) {
     return 0;
 }
 
+void fn_8018EF7C(char *self, s32 key) {
+    extern void fn_802D20E8(void *);
+    extern void fn_803997AC(void *, u32);
+    extern void fn_8024839C(void *, void *, u32);
+    s32 **v = (s32 **)(self + 4);
+    s32 **it;
+
+    for (it = (s32 **)v[0]; it != (s32 **)v[1]; it++) {
+        s32 *p = *it;
+        if (p[4] == key) {
+            s32 **w = (s32 **)(self + 4);
+            s32 **next;
+            if (p != NULL) {
+                s32 *q;
+                for (q = (s32 *)p[0]; q != (s32 *)p[1]; q++) {
+                }
+                if (p[0] != 0) {
+                    u32 size = (u32)(p[3] - p[0]) & ~3;
+                    if (size > 0x80) {
+                        fn_802D20E8((void *)p[0]);
+                    } else {
+                        fn_803997AC((void *)p[0], size);
+                    }
+                }
+                fn_802D20E8(p);
+            }
+            next = it + 1;
+            if (next != (s32 **)w[1]) {
+                s32 **e = (s32 **)w[1];
+                if (e != next) {
+                    fn_8024839C(it, next, (char *)e - (char *)next);
+                }
+            }
+            w[1] = (s32 *)((s32 **)w[1] - 1);
+            return;
+        }
+    }
+}
+
 void fn_8018F068(char *self, s32 key, u32 n) {
     extern void ***fn_8018F2C4(char *, s32);
     extern void fn_8018F14C(char *, s32);
