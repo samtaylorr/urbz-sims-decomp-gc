@@ -23,6 +23,10 @@ s32 fn_8010C3F8(void *arg0, void *arg1, s32 arg2);
 void fn_801B3908(void *, s32);
 void fn_801B3910(void *, u16);
 
+static inline u32 FamilyVec_Size(FamilyVec *v) {
+    return v->end - v->begin;
+}
+
 static inline char *FamilySub_Init(char *sub) {
     M2C_FIELD(sub, s32 *, 4) = 0;
     return sub;
@@ -251,6 +255,32 @@ void fn_8010B630(void *arg0, s32 flags) {
     }
     fn_800F1A60(self + 1, 2);
     fn_8010B568((void **)self, flags);
+}
+
+void fn_8010B6CC(void *arg0) {
+    extern char *lbl_80496668;
+    extern char *lbl_80496650;
+    u32 i;
+    char *mgr;
+    s32 **vec;
+
+    {
+        char *vt = *(char **)arg0;
+        (*(void (**)(void *))(vt + 0x1C))((char *)arg0 + *(s16 *)(vt + 0x18));
+    }
+    vec = (s32 **)((char *)arg0 + 0x24);
+    mgr = lbl_80496668;
+    for (i = 0; i < (u32)(vec[1] - M2C_FIELD(arg0, s32 **, 0x24)); i++) {
+        void *x;
+        {
+            char *vt = *(char **)lbl_80496650;
+            x = (*(void *(**)(void *, s32))(vt + 0xE4))(lbl_80496650 + *(s16 *)(vt + 0xE0), *(s32 *)((char *)M2C_FIELD(arg0, s32 **, 0x24) + i * 4));
+        }
+        {
+            char *vt = *(char **)mgr;
+            (*(void (**)(void *, void *))(vt + 0x25C))(mgr + *(s16 *)(vt + 0x258), x);
+        }
+    }
 }
 
 void fn_8010B898(u8 *self, u8 **arg1) {
