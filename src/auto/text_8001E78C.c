@@ -428,7 +428,7 @@ s32 fn_80023BB0(u8 *self) {
 }
 
 void fn_80023BD4(void) {
-    M2C_UNK fn_80023864(M2C_UNK, M2C_UNK);
+    void fn_80023864(s32, s32);
     fn_80023864(1, 0xFFFF);
 }
 
