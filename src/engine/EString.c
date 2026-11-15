@@ -1,5 +1,14 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
+typedef struct __va_list_tag {
+    char gpr;
+    char fpr;
+    char *overflow_arg_area;
+    char *reg_save_area;
+} va_list[1];
+
+#define va_start(AP, LASTARG) \
+    (__builtin_next_arg(LASTARG), *(AP) = *(struct __va_list_tag *)__builtin_saveregs())
 
 typedef struct EStringVec3Scale {
     u8 pad[0x5C];
@@ -810,6 +819,34 @@ s32 fn_802D43C4(char **arg0, const char *arg1) {
     return -1;
 }
 
+s32 fn_802D4474(s32 *arg0, char *arg1, char *arg2) {
+    s32 fn_80248808(const char *);
+    s32 pos;
+
+    pos = fn_802D4364((char **)arg0, arg1, 0);
+    if (pos == -1) {
+        return 0;
+    } else {
+        s32 left[2];
+        s32 *pl = left;
+        fn_802D40E4(pl, arg0, pos);
+        {
+            s32 mid[2];
+            fn_802D3928(mid, (char *)pl[0], arg2);
+            {
+                s32 res[2];
+                s32 *pr = res;
+                fn_802D3928(pr, (char *)mid[0], (char *)(*arg0 + (pos + fn_80248808(arg1))));
+                fn_802D3CE4(arg0, (char *)pr[0]);
+                fn_802D39F0(pr, pr[0]);
+            }
+            fn_802D39F0(mid, mid[0]);
+        }
+        fn_802D39F0(pl, pl[0]);
+    }
+    return 1;
+}
+
 s32 fn_802D453C(char **arg0) {
     char *fn_80248ADC(char *);
     char *p;
@@ -1099,6 +1136,31 @@ s32 fn_802D4D78(s32 *arg0, s32 arg1, s8 arg2) {
     fn_8024839C(buf + arg1 + 1, buf + arg1, size - arg1);
     buf[arg1] = arg2;
     fn_802D4F00(arg0);
+    return size;
+}
+
+s32 fn_802D4E00(s32 *arg0, s32 arg1, const char *arg2) {
+    void fn_8024839C(char *, char *, s32);
+    s32 fn_80248808(const char *);
+    s32 fn_802D4EC4(s32 *, s32);
+    void fn_802D4F00(s32 *);
+    char *buf;
+    s32 len;
+    s32 size;
+
+    if (arg1 > fn_802D3D24(arg0)) {
+        arg1 = fn_802D3D24(arg0);
+    }
+    len = arg2 ? fn_80248808(arg2) : 0;
+    size = fn_802D3D24(arg0);
+    if (len > 0) {
+        size += len;
+        buf = (char *)fn_802D4EC4(arg0, size);
+        buf += arg1;
+        fn_8024839C(buf + len, buf, size - arg1 - len + 1);
+        fn_802482F8(buf, arg2, len);
+        fn_802D4F00(arg0);
+    }
     return size;
 }
 
@@ -1622,6 +1684,32 @@ s32 fn_802D6108(u16 **arg0, u16 *arg1) {
         }
     }
     return -1;
+}
+
+s32 fn_802D61C4(s32 *arg0, u16 *arg1, u16 *arg2) {
+    s32 fn_802D50BC(s32, s32, s32);
+    void fn_802D5254(s32 *, s32);
+    s32 s[5];
+    s32 *pa;
+    s32 *pc;
+    s32 idx;
+    s32 rest;
+
+    idx = fn_802D6108((u16 **)arg0, arg1);
+    if (idx == -1) {
+        return 0;
+    }
+    pa = &s[4];
+    fn_802D5D08(pa, arg0, idx);
+    pc = &s[0];
+    fn_802D50BC((s32)&s[2], s[4], (s32)arg2);
+    rest = (idx + fn_802D5200(arg1)) * 2 + *arg0;
+    fn_802D50BC((s32)&s[0], s[2], rest);
+    fn_802D57BC(arg0, (u16 *)s[0]);
+    fn_802D5254(pc, s[0]);
+    fn_802D5254(&s[2], s[2]);
+    fn_802D5254(pa, s[4]);
+    return 1;
 }
 
 s32 fn_802D628C(u16 **arg0, s32 arg1) {
