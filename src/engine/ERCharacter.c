@@ -740,6 +740,27 @@ void *fn_8031A548(void *arg0, void *arg1) {
     return arg0;
 }
 
+void ***fn_8031A594(void *self, s32 n, s32 m, s32 w, s32 h) {
+    extern u8 lbl_8045B82C[];
+    void *fn_80338000(void *, s32, s32);
+    void *fn_80248488(void *, s32, u32);
+    void ***rows;
+    s32 i;
+    s32 j;
+
+    rows = fn_80338000(lbl_8045B82C, n * 4, 0x10);
+    fn_80248488(rows, 0, n * 4);
+    for (i = 0; i < n; i++) {
+        rows[i] = fn_80338000(lbl_8045B82C, m * 4, 0x10);
+        fn_80248488(rows[i], 0, m * 4);
+        for (j = 0; j < m; j++) {
+            rows[i][j] = fn_80338000(lbl_8045B82C, w * h, 0x10);
+            fn_80248488(rows[i][j], 0, w * h);
+        }
+    }
+    return rows;
+}
+
 s32 fn_8031AE8C(void *arg0) {
     s32 temp_r3;
 
