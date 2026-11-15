@@ -26,6 +26,27 @@ typedef struct TextVec2 {
     f32 x, y;
 } TextVec2;
 
+static inline TextVec2 TextVec2_Sub(const TextVec2 *a, const TextVec2 *b) {
+    TextVec2 r;
+    r.x = a->x - b->x;
+    r.y = a->y - b->y;
+    return r;
+}
+
+static inline TextVec2 TextVec2_Add(const TextVec2 *a, const TextVec2 *b) {
+    TextVec2 r;
+    r.x = a->x + b->x;
+    r.y = a->y + b->y;
+    return r;
+}
+
+static inline TextVec2 TextVec2_Scale(const TextVec2 *a, f32 s) {
+    TextVec2 r;
+    r.x = a->x * s;
+    r.y = a->y * s;
+    return r;
+}
+
 static inline void ClearField4(char *p) {
     M2C_FIELD(p, s32 *, 4) = 0;
 }
@@ -223,10 +244,10 @@ void fn_800A17C0(void) {
         lbl_804942CC = NULL;
         lbl_804942D0 = NULL;
         lbl_804942D4 = NULL;
-        ReleasePtr(&lbl_804942D8);
-        ReleasePtr(&lbl_804942DC);
-        ReleasePtr(&lbl_804942E0);
-        ReleasePtr(&lbl_804942E4);
+        ReleasePtr((void **)&lbl_804942D8);
+        ReleasePtr((void **)&lbl_804942DC);
+        ReleasePtr((void **)&lbl_804942E0);
+        ReleasePtr((void **)&lbl_804942E4);
     }
 }
 
@@ -535,6 +556,41 @@ void fn_800A3F74(char *arg0) {
         p = arg0 + 0x4C;
         fn_800A2B08(p);
         fn_800A2794(p, lbl_8041F94C.arr[M2C_FIELD(arg0, s32 *, 0x38)]);
+    }
+}
+
+void fn_800A3FFC(char *arg0) {
+    typedef struct { f32 x, y; } V2;
+    extern f32 lbl_80494E08;
+    extern f32 lbl_803CD994[];
+    extern f32 lbl_803CD998[];
+    extern f32 lbl_803CD99C[];
+    extern f32 lbl_803CD9A0[];
+    extern f32 lbl_803CD9A4[];
+    V2 res;
+    V2 scaled;
+    V2 diff;
+    V2 *a;
+    f32 t, s, e;
+
+    if (M2C_FIELD(arg0, s32 *, 0x0) != 0) {
+        t = M2C_FIELD(arg0, f32 *, 0x4) + lbl_80494E08;
+        M2C_FIELD(arg0, f32 *, 0x4) = t;
+        if (t >= lbl_803CD994[0]) {
+            M2C_FIELD(arg0, f32 *, 0x4) = lbl_803CD994[0];
+            M2C_FIELD(arg0, V2 *, 0x18) = M2C_FIELD(arg0, V2 *, 0x10);
+        } else {
+            s = lbl_803CD998[0] - (lbl_803CD994[0] - t) / lbl_803CD994[0];
+            e = s * lbl_803CD99C[0] + (s * lbl_803CD9A0[0] * s * s + s * lbl_803CD9A4[0] * s);
+            a = &M2C_FIELD(arg0, V2 *, 0x8);
+            diff.x = M2C_FIELD(arg0, V2 *, 0x10).x - a->x;
+            diff.y = M2C_FIELD(arg0, V2 *, 0x10).y - a->y;
+            scaled.x = diff.x * e;
+            scaled.y = diff.y * e;
+            res.x = a->x + scaled.x;
+            res.y = a->y + scaled.y;
+            M2C_FIELD(arg0, V2 *, 0x18) = res;
+        }
     }
 }
 
