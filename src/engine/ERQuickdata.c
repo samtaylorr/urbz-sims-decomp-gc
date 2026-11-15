@@ -556,14 +556,14 @@ void fn_8032E35C(void *self) {
         }
         M2C_FIELD(self, void **, 0x20) = NULL;
     }
-    M2C_FIELD(self, s32 *, 0x3C) = 0;
     M2C_FIELD(self, f32 *, 0x6C) = lbl_803F34DC[0];
+    M2C_FIELD(self, s32 *, 0x3C) = 0;
     fn_80338184(lbl_8045BA40, M2C_FIELD(self, s32 *, 0x40));
     fn_80338184(lbl_8045BA40, M2C_FIELD(self, s32 *, 0x44));
     fn_80338184(lbl_8045BA40, M2C_FIELD(self, s32 *, 0x74));
-    M2C_FIELD(self, s32 *, 0x74) = 0;
     M2C_FIELD(self, s32 *, 0x40) = 0;
     M2C_FIELD(self, s32 *, 0x44) = 0;
+    M2C_FIELD(self, s32 *, 0x74) = 0;
 }
 
 void fn_8032E58C(void *self) {
