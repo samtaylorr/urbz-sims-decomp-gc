@@ -49,15 +49,15 @@ typedef struct { f32 x, y, z; } Vec3f;
 typedef struct { f32 x, y, z, w; } Vec4f;
 
 static inline void Vec4f_Set(Vec4f *v, f32 x, f32 y, f32 z, f32 w) {
-    v->y = y;
-    v->z = z;
     v->w = w;
+    v->z = z;
+    v->y = y;
     v->x = x;
 }
 
 static inline void Vec3f_Set(Vec3f *v, f32 x, f32 y, f32 z) {
-    v->y = y;
     v->z = z;
+    v->y = y;
     v->x = x;
 }
 
@@ -958,8 +958,8 @@ void *fn_80235828(u8 *arg0) {
     t.x = zero;
     t.y = zero;
     t.z = zero;
-    Vec3f_Copy((Vec3f *)(arg0 + 0xC4), t);
-    *(Vec3f *)(arg0 + 0xB8) = *(Vec3f *)(arg0 + 0xC4);
+    Vec3f_Assign((Vec3f *)(arg0 + 0xC4), &t);
+    Vec3f_Assign((Vec3f *)(arg0 + 0xB8), (Vec3f *)(arg0 + 0xC4));
     Vec3f_Set((Vec3f *)(arg0 + 0xD0), zero, zero, zero);
     Vec3f_Set((Vec3f *)(arg0 + 0xDC), zero, zero, zero);
     M2C_FIELD(arg0, s32 *, 0xFC) = 0;
