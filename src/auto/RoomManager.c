@@ -26,6 +26,21 @@ static inline void RM_PtrVec_Erase(void **v, void **const *first) {
     v[1] = i;
 }
 
+static inline u32 RM_PtrVec_Size(void **const *v) {
+    return (void **)(*v)[1] - (void **)(*v)[0];
+}
+
+static inline void RM_PtrVec_Resize(void **v, u32 n) {
+    extern void fn_803A9318(void **, void *, s32, void **);
+    if (RM_PtrVec_Size(&v) < n) {
+        void *zero = NULL;
+        fn_803A9318(v, v[1], n - RM_PtrVec_Size(&v), &zero);
+    } else if (RM_PtrVec_Size(&v) > n) {
+        void **first = (void **)v[1] - (RM_PtrVec_Size(&v) - n);
+        RM_PtrVec_Erase(v, &first);
+    }
+}
+
 static inline RMVec3 RMVec3_make(f32 x, f32 y, f32 z) {
     RMVec3 r;
     r.z = z;
@@ -218,7 +233,6 @@ void fn_8018F068(char *self, s32 key, u32 n) {
     char *tree = self + 4;
     void ***it;
     void **vec;
-    u32 size;
 
     it = fn_8018F2C4(self, key);
     if (it == *(void ****)(tree + 4)) {
@@ -229,17 +243,12 @@ void fn_8018F068(char *self, s32 key, u32 n) {
         }
     }
     vec = *it;
-    size = (void **)vec[1] - (void **)vec[0];
-    if (size < n) {
+    if ((u32)((void **)vec[1] - (void **)vec[0]) < n) {
         void *zero = NULL;
         fn_803A9318(vec, vec[1], n - ((void **)vec[1] - (void **)vec[0]), &zero);
-    } else if (size > n) {
-        void **first = (void **)vec[1] - (size - n);
-        void **last = vec[1];
-        void **p;
-        for (p = first; p != last; p++) {
-        }
-        vec[1] = first;
+    } else if ((u32)((void **)vec[1] - (void **)vec[0]) > n) {
+        void **first = (void **)vec[1] - (((void **)vec[1] - (void **)vec[0]) - n);
+        RM_PtrVec_Erase(vec, &first);
     }
 }
 
@@ -793,6 +802,27 @@ void fn_80191584(char *self) {
             h3 = *(RMMapNode **)(self + 4);
             h3->right = h3;
             *(s32 *)(self + 8) = more;
+        }
+    }
+}
+
+void fn_8019164C(u16 id, s32 flag, f32 f) {
+    char *map = (char *)fn_80192C7C();
+    RMMapIter it;
+
+    for (it = RMMap_Begin(map); RMMapIter_NotEqual(it, RMMap_End(map)); RMMapIter_Inc(&it)) {
+        char *room = it.node->value;
+        if (room != NULL && *(s32 *)(room + 0x34) != 0) {
+            u16 key = *(u16 *)room;
+            if ((key == id && flag == 0) || (key != id && flag != 0)) {
+                RMVec3 tmp;
+                RMVec3 *t = &tmp;
+                t->z = f;
+                t->y = f;
+                t->x = f;
+                *(RMVec3 *)(room + 0x38) = *t;
+                *(s32 *)(room + 0x44) = 1;
+            }
         }
     }
 }
