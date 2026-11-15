@@ -7,19 +7,19 @@ static inline s32 ListCount(u8 *list) {
 
 s32 fn_80317758(s32, s32, s32, s32 *, s32);
 s32 fn_803173E8(u8 *p, s32 n) {
+    s32 ret;
     if (n == 1) {
-        return p[0];
+        ret = p[0];
+    } else if (n == 2) {
+        ret = (p[0] << 8) | p[1];
+    } else if (n == 3) {
+        ret = (p[0] << 16) | (p[1] << 8) | p[2];
+    } else if (n == 4) {
+        ret = (p[0] << 24) | (p[1] << 16) | (p[2] << 8) | p[3];
+    } else {
+        ret = 0;
     }
-    if (n == 2) {
-        return (p[0] << 8) | p[1];
-    }
-    if (n == 3) {
-        return (p[0] << 16) | (p[1] << 8) | p[2];
-    }
-    if (n == 4) {
-        return (p[0] << 24) | (p[1] << 16) | (p[2] << 8) | p[3];
-    }
-    return 0;
+    return ret;
 }
 
 s32 fn_80317478(const char *a, const char *b) {
@@ -29,7 +29,7 @@ s32 fn_80317478(const char *a, const char *b) {
     s32 cb;
     s32 d;
 
-    do {
+    for (;;) {
         c = *a;
         ca = c;
         if (c[lbl_803EBA39] & 1) {
@@ -43,10 +43,12 @@ s32 fn_80317478(const char *a, const char *b) {
         if (d != 0) {
             return d;
         }
+        if (c == 0) {
+            return 0;
+        }
         a++;
         b++;
-    } while (c != 0);
-    return d;
+    }
 }
 
 s32 fn_80317514(void *arg0) {
