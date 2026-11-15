@@ -27,10 +27,6 @@ static inline u32 FamilyVec_Size(FamilyVec *v) {
     return v->end - v->begin;
 }
 
-static inline s32 FamilyVec_At(FamilyVec *v, u32 i) {
-    return v->begin[i];
-}
-
 static inline char *FamilySub_Init(char *sub) {
     M2C_FIELD(sub, s32 *, 4) = 0;
     return sub;
@@ -828,23 +824,28 @@ void fn_8010C780(void *arg0) {
     void *fn_800FE1C0(void *);
     void fn_800FE340(void *);
     void fn_8033D10C(void *, void *);
-    char *obj;
-    char *e;
     void *mgr;
 
     if (M2C_FIELD(arg0, s32 *, 0) != 0) {
         return;
     }
     if (M2C_FIELD(lbl_8049668C, s32 *, 0x178) == 0) {
-        obj = lbl_80494FA4;
-        e = *(char **)obj + 0x48;
-        (*(void (**)(void *))(e + 4))(obj + *(s16 *)e);
+        char *obj = lbl_80494FA4;
+        char *vt = *(char **)obj;
+        s16 off = *(s16 *)(vt + 0x48);
+        void (*f)(void *) = *(void (**)(void *))(vt + 0x4c);
+        f(obj + off);
     } else {
-        obj = fn_8010D5F8();
+        char *obj = fn_8010D5F8();
+        char *vt;
+        s16 off;
+        void (*f)(void *);
         lbl_80495AFC = obj;
         M2C_FIELD(arg0, char **, 4) = obj;
-        e = *(char **)obj + 0x10;
-        (*(void (**)(void *))(e + 4))(obj + *(s16 *)e);
+        vt = *(char **)obj;
+        off = *(s16 *)(vt + 0x10);
+        f = *(void (**)(void *))(vt + 0x14);
+        f(obj + off);
     }
     if (M2C_FIELD(arg0, s32 *, 0) == 0 && M2C_FIELD(arg0, s32 *, 4) != 0) {
         M2C_FIELD(arg0, s32 *, 8) = 1;
