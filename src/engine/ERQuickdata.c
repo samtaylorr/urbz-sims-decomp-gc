@@ -426,6 +426,46 @@ s32 fn_8032E1F0(s32 arg0, s32 *out) {
     return arg0;
 }
 
+void *fn_8032E230(void *self) {
+    extern void fn_8031E8B0(void *);
+    extern u8 lbl_8041BAC0[];
+    extern f32 lbl_803F34D8[];
+    u8 *p;
+    s32 i;
+    f32 f;
+
+    fn_8031E8B0(self);
+    *(u8 **)self = lbl_8041BAC0;
+    p = (u8 *)self + 0x48;
+    M2C_FIELD(self, s32 *, 0x48) = -1;
+    M2C_FIELD(self, s32 *, 0x20) = 0;
+    M2C_FIELD(self, s32 *, 0x24) = 0;
+    M2C_FIELD(self, s32 *, 0x28) = 0;
+    M2C_FIELD(self, s32 *, 0x3c) = 0;
+    M2C_FIELD(self, s32 *, 0x40) = 0;
+    M2C_FIELD(self, s32 *, 0x44) = 0;
+    f = lbl_803F34D8[0];
+    M2C_FIELD(p, s32 *, 0x10) = 0;
+    M2C_FIELD(p, f32 *, 0x4) = f;
+    M2C_FIELD(p, u8 *, 0x8) = 0;
+    M2C_FIELD(p, s32 *, 0xc) = 0;
+    M2C_FIELD(self, f32 *, 0x6c) = f;
+    M2C_FIELD(self, s32 *, 0x74) = 0;
+    M2C_FIELD(self, u8 *, 0x5c) = 0;
+    M2C_FIELD(self, s32 *, 0x60) = 0;
+    M2C_FIELD(self, s32 *, 0x64) = 0;
+    M2C_FIELD(self, s32 *, 0x68) = 0;
+    M2C_FIELD(self, u8 *, 0x70) = 0;
+    M2C_FIELD(self, u8 *, 0x71) = 0;
+    M2C_FIELD(self, u8 *, 0x72) = 0;
+    M2C_FIELD(self, u8 *, 0x73) = 0;
+    for (i = 0; i < 2; i++) {
+        M2C_FIELD(self, s32 *, 0x2c + i * 4) = 0;
+        M2C_FIELD(self, s32 *, 0x34 + i * 4) = 0;
+    }
+    return self;
+}
+
 void fn_8032E2F4(void *self, s32 flags) {
     extern u8 lbl_8041BAC0[];
     extern void fn_8032E35C(void *);
@@ -534,7 +574,7 @@ void fn_8032FE1C(void *self) {
     extern u8 lbl_8045BA40[];
     extern u8 lbl_8045AA90[];
     extern s32 lbl_8049624C[2];
-    extern void **lbl_80496250;
+    extern void *lbl_80496250;
 
     if (M2C_FIELD(self, void ***, 0x60) == NULL) {
         void **node = fn_80338000(lbl_8045BA40, 0xC, 4);
@@ -549,7 +589,7 @@ void fn_8032FE1C(void *self) {
         node = M2C_FIELD(self, void ***, 0x60);
         node[1] = lbl_80496250;
         if (lbl_80496250 != NULL) {
-            lbl_80496250[2] = node;
+            ((void **)lbl_80496250)[2] = node;
         } else {
             lbl_8049624C[0] = (s32)node;
         }
@@ -621,7 +661,7 @@ void fn_80330D4C(u8 *self, s32 a, s32 b) {
     register s32 n = self[0x50];
     u8 v;
     s32 found = 0;
-    void fn_8032F3B0(void *, u8);
+    s32 fn_8032F3B0(void *, u8);
     s32 i;
 
     v = b / 15 + a * 4;
@@ -676,8 +716,8 @@ void fn_80330EA4(ERQdLookup *self, void *res, s32 idx) {
         self->unk2C[idx] = res;
         self->unk34[idx] = M2C_FIELD(res, s32 *, 8);
         {
-            s32 *tbl = (s32 *)((u8 *)self->unk20 + 0x64);
-            tbl[idx * 16] = M2C_FIELD(res, s32 *, 0x20);
+            struct { s32 a; u8 pad[60]; } *tbl = (void *)((u8 *)self->unk20 + 0x64);
+            tbl[idx].a = M2C_FIELD(res, s32 *, 0x20);
         }
     }
 }
