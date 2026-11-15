@@ -58,6 +58,12 @@ static inline void *SeqStr_InitBuf104(void *s, char *data) {
     return s;
 }
 
+s32 fn_80197E68(void *arg0, void *arg1, void *arg2, s32 arg3);
+
+static inline s32 SeqRes_Load(void *self, void *obj, void *name, s32 i, s32 *err) {
+    return fn_80197E68(self, obj, name, i);
+}
+
 extern s32 lbl_80495D10;
 extern void fn_800F1A60(s32, s32);
 void fn_80197AC8(void *arg0) {
@@ -121,28 +127,27 @@ s32 fn_80197E68(void *arg0, void *arg1, void *arg2, s32 arg3) {
     void fn_800F6A38(void *, void *);
     s32 fn_80197990(void *, void *);
     s32 ret = -0xFA;
+    s32 r;
+    char *vt;
+    SeqStr buf;
+    SeqStr *s;
 
     if (arg1 != NULL) {
-        SeqStr buf;
-        SeqStr *s = SeqStr_Init(&buf);
-        s32 r = -0xFA;
-        char *vt;
+        s = SeqStr_Init(&buf);
+        r = -0xFA;
         fn_800F6A38(s, arg2);
         if (fn_80197990(s, (char *)arg0 + (arg3 * 0x14 + 0xD4)) != 0) {
             vt = M2C_FIELD(arg1, char **, 0x10);
             r = M2C_FIELD(vt, s32 (**)(void *, void *), 0x24)((char *)arg1 + M2C_FIELD(vt, s16 *, 0x20), s);
         }
-        vt = M2C_FIELD(arg1, char **, 0x10);
         if (r != 0) {
             ret = r;
         }
+        vt = M2C_FIELD(arg1, char **, 0x10);
         M2C_FIELD(vt, void (**)(void *, s32), 0xC)((char *)arg1 + M2C_FIELD(vt, s16 *, 0x8), 3);
-        if (ret == -0x5E) {
-            return ret;
-        }
-        if (ret == -0x2D) {
-            return ret;
-        }
+    }
+    if (ret == -0x5E || ret == -0x2D) {
+        return ret;
     }
     return ret;
 }
@@ -158,10 +163,10 @@ s32 fn_801980C8(void *arg0, void *arg1) {
     } SeqEntry;
     s32 err = 0;
     s32 ret = -0xFA;
-    s32 i;
+    s32 i = 0;
     void *obj;
 
-    for (i = 0; ((SeqEntry *)((char *)arg0 + 0xD4))[i].type != 0 && !err; i++) {
+    while (((SeqEntry *)((char *)arg0 + 0xD4))[i].type != 0) {
         obj = NULL;
         switch (((SeqEntry *)((char *)arg0 + 0xD4))[i].type) {
         case 2:
@@ -174,9 +179,9 @@ s32 fn_801980C8(void *arg0, void *arg1) {
             M2C_FIELD(obj, s32 **, 0x10) = lbl_8040EE20;
             break;
         }
-        ret = fn_80197E68(arg0, obj, arg1, i);
+        ret = fn_80197E68(arg0, obj, arg1, i++);
     }
-    if (err) {
+    if (err != 0) {
         return 0;
     }
     return ret;
@@ -233,24 +238,24 @@ void *fn_80198444(void *arg0) {
     void fn_800F68F0(void *, s32, s32);
     void fn_800F6A38(void *, void *);
     extern s32 lbl_80414248[];
+    typedef struct { u8 hdr[8]; u8 data[8]; } Str8;
     s32 i;
     char *p;
-    SeqStr8 buf;
-    SeqStr8 *q;
+    void *b;
+    Str8 s;
 
     i = 8;
     p = (char *)arg0 + 0xD4;
     fn_80102B5C(arg0);
-    q = &buf;
     M2C_FIELD(arg0, s32 **, 0x10) = lbl_80414248;
     do {
         SeqStr8_Init((SeqStr8 *)(p + 4));
         p += 0x14;
     } while (--i != -1);
     M2C_FIELD(arg0, s32 *, 0xD4) = 0;
-    SeqStr8_InitBuf(q, q->buf);
-    fn_800F68F0(q, 0, -1);
-    fn_800F6A38((char *)arg0 + 0xD8, q);
+    b = SeqStr8_InitBuf(&s, (char *)s.data);
+    fn_800F68F0(b, 0, -1);
+    fn_800F6A38((char *)arg0 + 0xD8, b);
     return arg0;
 }
 
@@ -283,7 +288,6 @@ void *fn_80198854(void *arg0, s32 arg1) {
         f32 z;
         *(s32 *)self = 0;
         z = lbl_803DB288[0];
-        self[9] = z;
         self[1] = z;
         self[2] = z;
         self[3] = z;
@@ -292,6 +296,7 @@ void *fn_80198854(void *arg0, s32 arg1) {
         self[6] = z;
         self[7] = z;
         self[8] = z;
+        self[9] = z;
     } else {
         f32 *m;
         {
