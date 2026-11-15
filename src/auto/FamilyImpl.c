@@ -27,6 +27,14 @@ static inline u32 FamilyVec_Size(FamilyVec *v) {
     return v->end - v->begin;
 }
 
+typedef struct {
+    s32 *p;
+} Handle;
+
+static inline s32 Handle_Get(Handle *h) {
+    return h->p != NULL ? *h->p : 0;
+}
+
 static inline char *FamilySub_Init(char *sub) {
     M2C_FIELD(sub, s32 *, 4) = 0;
     return sub;
@@ -184,6 +192,36 @@ void fn_8010AB64(void *arg0, s32 arg1) {
         M2C_FIELD(arg0, s32 *, 0x80) = (s32) (M2C_FIELD(arg0, s32 *, 0) - 1);
     }
     lbl_804944C4 = 1;
+}
+
+void fn_8010AB88(void *arg0, void *arg1, s32 arg2, s32 arg3, s32 arg4) {
+    s32 fn_802D5200(s32);
+    void fn_800F22F0(s32, s32);
+    extern char lbl_803D6B8C[];
+    char *e;
+    s32 *h;
+    s32 *p;
+
+    if (arg3 <= 0) {
+        if (arg4 != 0) {
+            fn_800F22F0(arg2, arg4);
+            return;
+        }
+        fn_800F22F0(arg2, (s32)lbl_803D6B8C);
+        return;
+    }
+    if (arg3 == 0xfe) {
+        fn_800F22F0(arg2, (s32)lbl_803D6B8C);
+        return;
+    }
+    e = M2C_FIELD(arg1, char **, 0) + 0x88;
+    (*(void (**)())(e + 4))(&h, (char *)arg1 + *(s16 *)e);
+    p = h;
+    if ((p != NULL ? *p : 0) != 0 && fn_802D5200(p != NULL ? *p : 0) != 0) {
+        fn_800F22F0(arg2, p != NULL ? *p : 0);
+    } else if (arg4 != 0) {
+        fn_800F22F0(arg2, arg4);
+    }
 }
 
 s32 fn_8010B4E8(void *arg0) {
@@ -823,8 +861,10 @@ void fn_8010C780(void *arg0) {
     void *fn_802D1FC8(s32);
     void *fn_800FE1C0(void *);
     void fn_800FE340(void *);
-    void fn_8033D10C(void *, void *);
+    void fn_8033D10C(void *, void (*)(s32));
     void *mgr;
+    char *p;
+    void (*cb)(s32);
 
     if (M2C_FIELD(arg0, s32 *, 0) != 0) {
         return;
@@ -846,14 +886,16 @@ void fn_8010C780(void *arg0) {
         off = *(s16 *)(vt + 0x10);
         f = *(void (**)(void *))(vt + 0x14);
         f(obj + off);
-    }
-    if (M2C_FIELD(arg0, s32 *, 0) == 0 && M2C_FIELD(arg0, s32 *, 4) != 0) {
-        M2C_FIELD(arg0, s32 *, 8) = 1;
-        mgr = fn_800FE1C0(fn_802D1FC8(0x90));
-        lbl_80495ADC = mgr;
-        fn_800FE340(mgr);
-        M2C_FIELD(arg0, s32 *, 0) = 1;
-        fn_8033D10C(lbl_8045BC60, fn_8010C690);
+        if (M2C_FIELD(arg0, s32 *, 0) == 0 && M2C_FIELD(arg0, s32 *, 4) != 0) {
+            M2C_FIELD(arg0, s32 *, 8) = 1;
+            mgr = fn_800FE1C0(fn_802D1FC8(0x90));
+            lbl_80495ADC = mgr;
+            fn_800FE340(mgr);
+            M2C_FIELD(arg0, s32 *, 0) = 1;
+            p = lbl_8045BC60;
+            cb = fn_8010C690;
+            fn_8033D10C(p, cb);
+        }
     }
 }
 
