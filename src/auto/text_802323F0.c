@@ -238,9 +238,11 @@ void fn_80232D74(u8 *arg0, Struct1A8_5 *arg1) {
     void fn_80232C74(u8 *, u8 *);
     extern s32 lbl_8041FC0C[];
     Struct1B8 saved;
+    Struct1B8 tmp;
 
     fn_80232528(arg0, arg1);
-    saved = *(Struct1B8 *)(arg0 + 0x1B8);
+    tmp = *(Struct1B8 *)(arg0 + 0x1B8);
+    saved = tmp;
     *(Struct1A8_5 *)(arg0 + 0x1A8) = *arg1;
     *(Struct1B8 *)(arg0 + 0x1B8) = saved;
     fn_80234BE8(arg0 + 0x60);
@@ -828,6 +830,32 @@ void fn_80237084(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x30) = 0;
     M2C_FIELD(arg0, s32 *, 0x64) = 0;
     M2C_FIELD(arg0, s32 *, 0xEC) = 0;
+}
+
+void fn_802370C0(u8 *self) {
+    extern struct { u8 pad[0xD8]; u8 *arr[1]; } lbl_8041F94C;
+    extern f32 lbl_803EB4A0[];
+    u8 *fn_8008C46C(void *, s32);
+    void fn_8008B284(u8 *, s32);
+    void fn_8008C830(void *, s32, void *);
+    u8 *list = self + 0x5C;
+    u8 *obj = fn_8008C46C(list, *(s32 *)self);
+    u8 *o;
+    u8 *vt;
+    u8 *r;
+
+    if (obj != NULL) {
+        fn_8008B284(obj, *(s32 *)(self + 0x6C));
+        *(s32 *)(obj + 0x14C) |= 1;
+        o = lbl_8041F94C.arr[*(s32 *)self];
+        vt = *(u8 **)(o + 4);
+        (*(void (**)(void *, s32, s32))(vt + 0x114))(o + *(s16 *)(vt + 0x110), 0x24, 0x32);
+        o = lbl_8041F94C.arr[*(s32 *)self];
+        vt = *(u8 **)(o + 4);
+        r = (*(u8 *(**)(void *))(vt + 0x14C))(o + *(s16 *)(vt + 0x148));
+        *(f32 *)(r + 0xFC) = lbl_803EB4A0[0];
+        fn_8008C830(list, *(s32 *)self, list);
+    }
 }
 
 void fn_80237190(void *arg0, Vec3i *arg1) {
