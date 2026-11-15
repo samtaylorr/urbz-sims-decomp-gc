@@ -446,19 +446,20 @@ void *fn_8032E230(void *self) {
     M2C_FIELD(self, s32 *, 0x40) = 0;
     M2C_FIELD(self, s32 *, 0x44) = 0;
     f = lbl_803F34D8[0];
-    M2C_FIELD(p, s32 *, 0x10) = 0;
     M2C_FIELD(p, f32 *, 0x4) = f;
     M2C_FIELD(p, u8 *, 0x8) = 0;
     M2C_FIELD(p, s32 *, 0xc) = 0;
-    M2C_FIELD(self, f32 *, 0x6c) = f;
-    M2C_FIELD(self, s32 *, 0x74) = 0;
+    M2C_FIELD(p, s32 *, 0x10) = 0;
     M2C_FIELD(self, u8 *, 0x5c) = 0;
     M2C_FIELD(self, s32 *, 0x60) = 0;
     M2C_FIELD(self, s32 *, 0x64) = 0;
     M2C_FIELD(self, s32 *, 0x68) = 0;
-    for (i = 0; i < 4; i++) {
-        M2C_FIELD(self, u8 *, 0x70 + i) = 0;
-    }
+    M2C_FIELD(self, f32 *, 0x6c) = f;
+    M2C_FIELD(self, u8 *, 0x70) = 0;
+    M2C_FIELD(self, u8 *, 0x71) = 0;
+    M2C_FIELD(self, u8 *, 0x72) = 0;
+    M2C_FIELD(self, u8 *, 0x73) = 0;
+    M2C_FIELD(self, s32 *, 0x74) = 0;
     q = (s32 *)((u8 *)self + 0x34);
     for (i = 2; i != 0; i--) {
         q[-2] = 0;
