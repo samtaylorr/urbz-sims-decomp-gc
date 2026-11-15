@@ -1,6 +1,10 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
 
+static inline char *ObjSelector_GetData(void *sub) {
+    return M2C_FIELD(sub, char **, 0x1C);
+}
+
 static inline void ObjSelector_ClearPair(s32 *p) {
     p[0] = 0;
     p[1] = 0;
@@ -384,6 +388,32 @@ void fn_8016C97C(void *arg0, s32 arg1) {
     if (arg1 & 1) {
         fn_802D20E8(arg0);
     }
+}
+
+s32 fn_8016CA50(void *arg0) {
+    extern char *lbl_8049665C;
+    struct Sub { u8 pad[0x1C]; char *data; };
+    struct Self { u8 pad[0x1C]; struct Sub sub; };
+    s32 result = 0;
+    char *list;
+    char *o;
+    s16 id;
+
+    if (M2C_FIELD(arg0, s32 *, 0x9C) == 1 || M2C_FIELD(((struct Self *)arg0)->sub.data, s32 *, 0xC0) == 0) {
+        result = 1;
+    }
+    if (M2C_FIELD(((struct Self *)arg0)->sub.data, s32 *, 0xC0) == 0) {
+        list = lbl_8049665C;
+        id = M2C_FIELD(((struct Self *)arg0)->sub.data, s16 *, 0x14);
+        o = NULL;
+        while ((o = M2C_FIELD(*(char **)list, void *(**)(void *, void *), 0x7C)(list + M2C_FIELD(*(char **)list, s16 *, 0x78), o)) != NULL) {
+            char *d = M2C_FIELD(o, char **, 0x38);
+            if (M2C_FIELD(d, s16 *, 0x14) == id && M2C_FIELD(d, s32 *, 0xC0) != 0 && fn_8016CC2C(o, arg0) && M2C_FIELD(o, s32 *, 0x9C) != 1) {
+                result = 0;
+            }
+        }
+    }
+    return result;
 }
 
 s32 fn_8016CB30(void *arg0) {
