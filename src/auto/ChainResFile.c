@@ -114,6 +114,12 @@ static inline void ChainVec_Free(ChainVec *v) {
     }
 }
 
+static inline void ChainVec_Release(ChainVec *v) {
+    if (v->begin != 0) {
+        ChainVec_Dealloc((void *)v->begin, v->alloc.cap);
+    }
+}
+
 typedef struct ChainSlot {
     void *obj;
     s32 begin;
@@ -531,17 +537,61 @@ s32 fn_80102F34(void *self) {
     return ret;
 }
 
+s32 fn_8010309C(void *self) {
+    extern void fn_8018FA84(void *, s32);
+    s32 i;
+    ChainEntry *e;
+
+    i = 0;
+    fn_8018FA84(self, 0);
+    e = (ChainEntry *)((char *)self + 0x14);
+    while (e[i].obj != NULL) {
+        void *o = e[i].obj;
+        char *vt = *(char **)((char *)o + 0x10);
+        if ((*(s32 (**)(void *))(vt + 0x54))((char *)o + *(s16 *)(vt + 0x50)) != 0) {
+            return 1;
+        }
+        i++;
+        if (i > 7) {
+            break;
+        }
+    }
+    return 0;
+}
+
+s32 fn_80103130(void *self) {
+    extern void fn_8018FA84(void *, s32);
+    s32 i;
+    ChainEntry *e;
+
+    i = 0;
+    fn_8018FA84(self, 0);
+    e = (ChainEntry *)((char *)self + 0x14);
+    for (; i < 8 && e[i].obj != NULL; i++) {
+        void *o = e[i].obj;
+        char *vt = *(char **)((char *)o + 0x10);
+        if ((*(s32 (**)(void *))(vt + 0x64))((char *)o + *(s16 *)(vt + 0x60)) != 0) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
 s16 fn_8010328C(void *self) {
     extern void fn_8018FA84(void *, s32);
     extern void fn_80103320(void *, ChainVec *);
     ChainVec v;
     s16 count;
+    void *p;
 
     fn_8018FA84(self, 0);
     ChainVec_Init(&v);
     fn_80103320(self, &v);
-    count = ChainVec_Size(&v);
-    ChainVec_Free(&v);
+    p = (void *)v.begin;
+    count = (v.end - (s32)p) >> 2;
+    if (p != NULL) {
+        ChainVec_Dealloc(p, v.alloc.cap);
+    }
     return count;
 }
 
@@ -555,7 +605,7 @@ s16 fn_80103678(void *self, s32 arg1) {
     fn_8018FA84(self, 0);
     total = 0;
     e = (ChainEntry *)((char *)self + 0x14);
-    for (i = 0; i < 8 && e->obj != NULL; i++, e++) {
+    for (i = 0, e += total; i < 8 && e->obj != NULL; i++, e++) {
         void *o = e->obj;
         char *vt = *(char **)((char *)o + 0x10);
         total += (*(s32 (**)(void *, s32))(vt + 0x7C))((char *)o + *(s16 *)(vt + 0x78), arg1);
