@@ -154,7 +154,9 @@ s32 fn_80049C08(char *self, s32 idx, s32 val) {
     char *b;
 
     if (idx <= 1) {
-        char *o = (*(char *(*)[2])(self + 0xD8))[idx];
+        s32 off = idx * 4;
+        char *arr = self + 0xD8;
+        char *o = *(char **)(arr + off);
         if (o == NULL) {
             return 0;
         }
@@ -595,7 +597,6 @@ void fn_8004C3F0(void *self, void *str) {
     u16 *buf;
     u16 *d;
     u32 i;
-    char c;
 
     if (fn_800F4878(str) != 0 && *fn_800F31F4(str, 0) == 0x23) {
         i = 0;
@@ -604,17 +605,16 @@ void fn_8004C3F0(void *self, void *str) {
         buf = fn_802D2058((fn_800F4878(str) + 1) * 2);
         d = buf;
         *d = *s;
-        c = ((char *)s)[1];
-        tmp[i] = c;
-        while (c != 0) {
+        for (;;) {
+            if ((tmp[i] = ((char *)s)[1]) == 0) {
+                break;
+            }
             i++;
             s++;
             if (i > 0x3F) {
                 break;
             }
             *++d = *s;
-            c = ((char *)s)[1];
-            tmp[i] = c;
         }
         fn_800F1B80(str, buf);
         if (buf != NULL) {
