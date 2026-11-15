@@ -599,7 +599,7 @@ void fn_80330D4C(u8 *self, s32 a, s32 b) {
 
 void fn_80330DEC(ERQdLookup *self, void *res, s32 idx) {
     extern void fn_8031EA2C(void *);
-    extern void fn_8033740C(void *, void *, s32, s32);
+    extern void fn_8033740C(void *, s32, s32, s32);
     extern u8 lbl_8045BAE8[];
 
     if (self->unk64 & 2) {
@@ -607,12 +607,11 @@ void fn_80330DEC(ERQdLookup *self, void *res, s32 idx) {
         return;
     }
     if (!(self->unk20[1] & 0x4000000)) {
-        if (((void **)((u8 *)self + 0x2C))[idx] != NULL) {
-            fn_8031EA2C(((void **)((u8 *)self + 0x2C))[idx]);
+        if (self->unk2C[idx] != NULL) {
+            fn_8031EA2C(self->unk2C[idx]);
         }
-        ((void **)((u8 *)self + 0x2C))[idx] = res;
-        self->unk34[idx] = M2C_FIELD(res, s32 *, 8);
-        fn_8033740C(lbl_8045BAE8, res, 0, 0);
+        self->unk2C[idx] = res;
+        fn_8033740C(lbl_8045BAE8, self->unk34[idx] = M2C_FIELD(res, s32 *, 8), 0, 0);
         {
             u8 *obj = (u8 *)self->unk20;
             char *vt = M2C_FIELD(obj, char **, 0xF0);
@@ -631,10 +630,10 @@ void fn_80330EA4(ERQdLookup *self, void *res, s32 idx) {
         return;
     }
     if (!(self->unk20[1] & 0x4000000)) {
-        if (((void **)((u8 *)self + 0x2C))[idx] != NULL) {
-            fn_8031EA2C(((void **)((u8 *)self + 0x2C))[idx]);
+        if (self->unk2C[idx] != NULL) {
+            fn_8031EA2C(self->unk2C[idx]);
         }
-        ((void **)((u8 *)self + 0x2C))[idx] = res;
+        self->unk2C[idx] = res;
         self->unk34[idx] = M2C_FIELD(res, s32 *, 8);
         ((s32 (*)[16])((u8 *)self->unk20 + 0x64))[idx][0] = M2C_FIELD(res, s32 *, 0x20);
     }
