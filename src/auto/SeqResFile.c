@@ -33,12 +33,14 @@ typedef struct SeqStr8 {
     char buf[8];
 } SeqStr8;
 
-static inline void SeqStr_Init(SeqStr *s) {
+static inline SeqStr *SeqStr_Init(SeqStr *s) {
     fn_800F687C(s, s->buf, 0x104);
+    return s;
 }
 
-static inline void SeqStr8_Init(SeqStr8 *s) {
+static inline SeqStr8 *SeqStr8_Init(SeqStr8 *s) {
     fn_800F687C(s, s->buf, 8);
+    return s;
 }
 
 extern s32 lbl_80495D10;
