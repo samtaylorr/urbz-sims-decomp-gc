@@ -332,6 +332,17 @@ void fn_801D3C44(void *self, s32 flags) {
     }
 }
 
+void fn_801D420C(u8 *self) {
+    typedef struct { s32 data[0x3A]; } CasTweakState;
+    extern void fn_801D4858(u8 *, u8 *);
+    if (*(s32 *)(self + 0x88) != 0) {
+        *(CasTweakState *)(self + 0x1d8) = *(CasTweakState *)(self + 8);
+    } else {
+        *(CasTweakState *)(self + 0xf0) = *(CasTweakState *)(self + 8);
+    }
+    fn_801D4858(self, self + 8);
+}
+
 u8 *fn_801D494C(u8 *self) {
     return self + 8;
 }
