@@ -1121,6 +1121,15 @@ s32 *fn_802D4C6C(s32 *arg0, s32 arg1) {
     return arg0;
 }
 
+void fn_802D4CAC(s32 *self, const char *fmt, ...) {
+    s32 fn_80246CB8(char *, s32, const char *, va_list);
+    s32 fn_80246C5C(char *, const char *, va_list);
+    va_list ap;
+    va_start(ap, fmt);
+    fn_802D3DB0(self, fn_80246CB8(NULL, 0, fmt, ap));
+    fn_80246C5C((char *)*self, fmt, ap);
+}
+
 s32 fn_802D4D78(s32 *arg0, s32 arg1, s8 arg2) {
     void fn_8024839C(char *, char *, s32);
     s32 fn_802D4EC4(s32 *, s32);
