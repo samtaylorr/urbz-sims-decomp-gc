@@ -143,8 +143,8 @@ void fn_80336194(char *self) {
     void fn_802D3D48(void *);
     register Str *p asm("r3");
     Str str;
-    Str b;
     Str a;
+    Str b;
     char *name = self + 0x58;
 
     fn_802D3CE4(name, *(s32 *)(self + 0x54));
@@ -285,14 +285,17 @@ static inline void *ERM_Alloc(s32 count) {
 
 void *fn_802DC3C0(void *, u32, s32, s32, s32);
 
-static inline void *ERM_AllocAlignedFrom(void *heap, u32 n) {
+static inline void *ERM_AllocAligned(u32 *psize) {
+    void *heap;
     void *p;
     u32 size;
 
-    if (n == 0) {
+    heap = fn_802D0AB8();
+    size = *psize;
+    if (size == 0) {
         return 0;
     }
-    size = (n + 0xF) & ~0xF;
+    size = (size + 0xF) & ~0xF;
     p = fn_802D197C(heap, size, 0x10);
     if (p == 0) {
         p = fn_802DC3C0(heap, size, 0x10, 0, 0);
