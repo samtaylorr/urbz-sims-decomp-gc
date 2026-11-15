@@ -23,6 +23,25 @@ typedef struct EGlobalList {
     u32 count;
 } EGlobalList;
 
+static inline s32 EGlobal_FindValue(void *db, s32 key, s32 *result, s32 *outIdx) {
+    void *fn_8032D8E0(void *, s32, u32 *);
+    s32 **tbl;
+    u32 idx;
+
+    tbl = fn_8032D8E0(db, key, &idx);
+    if (tbl != NULL) {
+        if (tbl[2] != NULL) {
+            *result = tbl[2][idx];
+        }
+        if (outIdx != NULL) {
+            *outIdx = idx;
+        }
+        return 1;
+    }
+    *outIdx = -1;
+    return 0;
+}
+
 static inline EGlobalList *EGlobal_ToList(void *p) {
     if (p != NULL) {
         return p;
@@ -414,18 +433,23 @@ EGlobalHandle fn_8004BD48(void *arg1, s32 arg2) {
 }
 
 void *fn_8004BDB8(void *arg1, s32 arg2) {
+    void *fn_8032D5C8(s32, void *);
     extern u8 lbl_803C6C78[];
     EGlobalList *list;
     EGlobalEntry18 *e;
+    void *p;
     u32 i;
-    u32 n;
 
     if (arg2 != 0) {
-        list = EGlobal_ToList(EGlobal_FindList(arg1, lbl_803C6C78));
+        p = fn_8032D5C8(M2C_FIELD(arg1, s32 *, 0x11C), lbl_803C6C78);
+        if (p != NULL) {
+            list = p;
+        } else {
+            list = NULL;
+        }
         if (list != NULL) {
             e = list->entries;
-            n = list->count;
-            for (i = 0; i < n; i++, e++) {
+            for (i = 0; i < list->count; i++, e++) {
                 if (e->id == arg2) {
                     return e;
                 }
