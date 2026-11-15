@@ -24,36 +24,20 @@ s32 fn_803173E8(u8 *p, s32 n) {
 
 s32 fn_80317478(const char *a, const char *b) {
     extern const u8 lbl_803EBA39[];
+#define TOLOWER(c) ({ int __x = (c); (__x[lbl_803EBA39] & 1) ? __x + 0x20 : __x; })
     s32 c;
-    s32 ca;
-    s32 cb;
     s32 d;
 
     c = *a;
-    ca = c;
-    if (c[lbl_803EBA39] & 1) {
-        ca = c + 0x20;
-    }
-    cb = *b;
-    if (cb[lbl_803EBA39] & 1) {
-        cb += 0x20;
-    }
-    d = ca - cb;
+    d = TOLOWER(c) - TOLOWER(*b);
     while (d == 0 && c != 0) {
         a++;
         b++;
         c = *a;
-        ca = c;
-        if (c[lbl_803EBA39] & 1) {
-            ca = c + 0x20;
-        }
-        cb = *b;
-        if (cb[lbl_803EBA39] & 1) {
-            cb += 0x20;
-        }
-        d = ca - cb;
+        d = TOLOWER(c) - TOLOWER(*b);
     }
     return d;
+#undef TOLOWER
 }
 
 s32 fn_80317514(void *arg0) {
@@ -597,6 +581,45 @@ void fn_803190C0(const char *arg0, s32 arg1) {
     fn_80318A70(lbl_803F2A08, arg0, arg1);
     fn_80318A70(lbl_803F2740);
     fn_803189F0();
+}
+
+void fn_803191A4(s32 arg0) {
+    extern char lbl_803F2A2C[];
+    extern char lbl_803F2A34[];
+    extern char lbl_803F2A3C[];
+    extern char lbl_803F2A40[];
+    extern char lbl_803F2A48[];
+    s32 fn_80248808(const char *);
+    char *fn_80248B28(const char *, const char *);
+    char *s = (char *)arg0;
+    s32 i;
+    char *p;
+
+    for (i = fn_80248808(s) - 1; i >= 0; i--) {
+        if (s[i] == '\n') {
+            s[i] = '\t';
+        }
+    }
+    p = fn_80248B28(s, lbl_803F2A2C);
+    if (p) {
+        p[4] = '\t';
+    }
+    p = fn_80248B28(s, lbl_803F2A34);
+    if (p) {
+        p[5] = '\t';
+    }
+    p = fn_80248B28(s, lbl_803F2A3C);
+    if (p) {
+        p[0] = '\t';
+    }
+    p = fn_80248B28(s, lbl_803F2A40);
+    if (p) {
+        p[5] = '\t';
+    }
+    p = fn_80248B28(s, lbl_803F2A48);
+    if (p) {
+        p[6] = '\t';
+    }
 }
 
 void fn_80319294(s32 arg0, s32 arg1, s32 arg2) {
