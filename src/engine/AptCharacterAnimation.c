@@ -514,20 +514,20 @@ void *fn_8028F870(u32 *self, s32 arg1) {
 
 void *fn_8028FB40(u32 *self) {
     extern void *lbl_80496130;
+    struct Arr { u32 flags; s32 pad[6]; s32 *data; s32 pad2; s32 count; } *a;
     s32 ok;
     s32 i;
 
+    a = (struct Arr *)self;
     ok = 0;
-    if ((self[0] & 0x3F) == 0x16) {
-        ok = (self[0] >> 15) & 1;
+    if ((a->flags & 0x3F) == 0x16) {
+        ok = (a->flags >> 15) & 1;
     }
     if (ok != 0) {
-        for (i = 0; i < ((s32 *)self)[9] / 2; i++) {
-            s32 j = ((s32 *)self)[9] - i;
-            s32 *arr = (s32 *)self[7];
-            s32 tmp = arr[i];
-            arr[i] = arr[j - 1];
-            ((s32 *)self[7])[((s32 *)self)[9] - i - 1] = tmp;
+        for (i = 0; i < a->count / 2; i++) {
+            s32 tmp = a->data[i];
+            a->data[i] = a->data[a->count - i - 1];
+            a->data[a->count - i - 1] = tmp;
         }
         return self;
     }
