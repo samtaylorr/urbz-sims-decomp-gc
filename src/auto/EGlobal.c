@@ -42,6 +42,13 @@ static inline s32 EGlobal_FindValue(void *db, s32 key, s32 *result, EGlobalHandl
     return 0;
 }
 
+static inline s32 EGlobal_GetValue(s32 key, s32 *result, EGlobalHandle *outIdx) {
+    extern void *lbl_8049665C;
+    void *vt = *(void **)lbl_8049665C;
+
+    return EGlobal_FindValue(((void *(*)(void *))M2C_FIELD(vt, void **, 0x1AC))((char *)lbl_8049665C + M2C_FIELD(vt, s16 *, 0x1A8)), key, result, outIdx);
+}
+
 static inline EGlobalList *EGlobal_ToList(void *p) {
     if (p != NULL) {
         return p;
