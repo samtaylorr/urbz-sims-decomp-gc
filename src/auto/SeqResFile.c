@@ -182,6 +182,21 @@ void fn_8019882C(void) {
     fn_800F1A60((s32)&lbl_80495D10, 2);
 }
 
+void fn_80198940(f32 *self, s32 arg1) {
+    f32 tmp[10];
+    void fn_80198854(void *, s32);
+    fn_80198854(tmp, arg1);
+    self[1] = tmp[1] - self[1];
+    self[2] = tmp[2] - self[2];
+    self[3] = tmp[3] - self[3];
+    self[4] = tmp[4] - self[4];
+    self[5] = tmp[5] - self[5];
+    self[6] = tmp[6] - self[6];
+    self[7] = tmp[7] - self[7];
+    self[8] = tmp[8] - self[8];
+    self[9] = tmp[9] - self[9];
+}
+
 void *fn_80198A08(void *arg0) {
     void fn_80198854(void *, s32);
     fn_80198854(arg0, 0);
