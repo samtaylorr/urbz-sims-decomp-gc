@@ -217,7 +217,6 @@ s32 fn_801CC5E0(void *self, s32 idx, u32 n) {
     s32 fn_801CB378(void *, s32);
     s32 fn_801CCA18(void *, s32, s32 *);
     s32 buf[600];
-    s32 *e;
 
     if (M2C_FIELD(self, s32 *, 8) == 0) {
         return 0;
@@ -227,15 +226,40 @@ s32 fn_801CC5E0(void *self, s32 idx, u32 n) {
     }
     switch (idx) {
     case 0: case 1: case 2: case 3: case 4: case 5:
-    case 6: case 7: case 8: case 9: case 10: case 11:
+    case 6: case 7: case 8: case 9: case 10: case 11: {
+        s32 *e;
         fn_801CCA18(self, idx, buf);
         e = (s32 *)(M2C_FIELD(M2C_FIELD(self, u8 **, 8), u8 **, 0x2C) + buf[n] * 0x14);
         return e[3];
-    case 12:
-        e = (s32 *)(M2C_FIELD(M2C_FIELD(self, u8 **, 8), u8 **, 4) + n * 0x14);
+    }
+    case 12: {
+        s32 *e = (s32 *)(M2C_FIELD(M2C_FIELD(self, u8 **, 8), u8 **, 4) + n * 0x14);
         return e[3];
     }
+    }
     return 0;
+}
+
+s32 fn_801CC954(void *self, s32 idx, u32 n) {
+    s32 fn_801CB378(void *, s32);
+    s32 fn_801CCA18(void *, s32, s32 *);
+    s32 buf[600];
+
+    if (M2C_FIELD(self, s32 *, 8) == 0) {
+        return 10;
+    }
+    if (n >= (u32)fn_801CB378(self, idx)) {
+        return 10;
+    }
+    switch (idx) {
+    case 0: case 1: case 2: case 3: case 4: case 5:
+    case 6: case 7: case 8: case 9: case 10: case 11:
+        fn_801CCA18(self, idx, buf);
+        return *(s32 *)(buf[n] * 0x14 + M2C_FIELD(M2C_FIELD(self, u8 **, 8), u8 **, 0x2C) + 4);
+    case 12:
+        return *(s32 *)(n * 0x14 + M2C_FIELD(M2C_FIELD(self, u8 **, 8), u8 **, 4) + 4);
+    }
+    return 9;
 }
 
 s32 fn_801CCA18(void *arg0, s32 arg1, s32 *arg2) {
