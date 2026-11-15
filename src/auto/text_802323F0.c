@@ -62,6 +62,10 @@ static inline void Vec3f_Set(Vec3f *v, f32 x, f32 y, f32 z) {
     v->x = x;
 }
 
+static inline void Vec3f_Copy(Vec3f *d, Vec3f s) {
+    *d = s;
+}
+
 static inline Vec3f Vec3f_Make(f32 x, f32 y, f32 z) {
     Vec3f v;
     v.x = x;
@@ -392,12 +396,6 @@ void fn_80232E74(u8 *arg0, Struct1A8_7 *arg1) {
 }
 
 void fn_80232F2C(void *arg0) {
-    typedef struct {
-        void **first;
-        void **last;
-        s32 owns;
-        s32 pad;
-    } List3;
     extern void *lbl_8041FA38[];
     extern char *lbl_8041F770[];
     void fn_802CB8D4(void *);
@@ -405,19 +403,16 @@ void fn_80232F2C(void *arg0) {
     void *fn_80065AD4(void *);
     void fn_801FF614(void *, void *);
     void fn_80233024();
-    List3 list;
-    List3 *p = &list;
-    List3 *lp;
+    PtrList list;
+    PtrList *lp;
     void *obj;
     void *vt;
+    void **arr;
 
-    p->last = 0;
-    list.first = 0;
-    p->owns = 1;
-    fn_802CB8D4(p);
-    lp = p;
-    fn_800643BC(M2C_FIELD(lbl_8041FA38[0], void **, 4), M2C_FIELD(arg0, s32 *, 0), p);
-    if (list.first != 0 && list.first == lp->last) {
+    PtrList_Init(&list);
+    lp = &list;
+    fn_800643BC(M2C_FIELD(lbl_8041FA38[0], void **, 4), M2C_FIELD(arg0, s32 *, 0), &list);
+    if (PtrList_IsSingle(lp)) {
         obj = fn_80065AD4(*list.first);
         vt = M2C_FIELD(obj, void **, 4);
         fn_80233024(arg0,
@@ -425,7 +420,8 @@ void fn_80232F2C(void *arg0) {
     } else if (list.first != 0) {
         vt = M2C_FIELD(arg0, void **, 0x58);
         M2C_FIELD(vt, void (**)(void *), 0x74)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x70));
-        fn_801FF614(((void **)(lbl_8041F770[0] + 0x12C))[M2C_FIELD(arg0, s32 *, 0)], lp);
+        arr = (void **)(lbl_8041F770[0] + 0x12C);
+        fn_801FF614(arr[M2C_FIELD(arg0, s32 *, 0)], lp);
     }
     fn_802CB8D4(lp);
 }
@@ -938,7 +934,7 @@ void fn_802357F0(void *arg0) {
     ((void (*)(void *))fn_80232460)(arg0);
 }
 
-void fn_80235828(u8 *arg0) {
+void *fn_80235828(u8 *arg0) {
     void fn_8022315C(void *);
     void fn_80089650(void *);
     extern u8 lbl_80417FD8[];
@@ -966,6 +962,7 @@ void fn_80235828(u8 *arg0) {
     Vec3f_Set((Vec3f *)(arg0 + 0xDC), zero, zero, zero);
     M2C_FIELD(arg0, s32 *, 0xFC) = 0;
     M2C_FIELD(arg0, s32 *, 0x100) = 0;
+    return arg0;
 }
 
 void fn_80235914(void *arg0, s32 arg1) {
