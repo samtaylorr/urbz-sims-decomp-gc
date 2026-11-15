@@ -273,45 +273,62 @@ void fn_800C2834(void) {
 
 }
 
+typedef struct { s32 alloc; char *data; } VecProxy;
+typedef struct { char *start; char *finish; VecProxy eos; } PtrVec;
+
+static inline void VecProxy_Swap(VecProxy *a, VecProxy *b) {
+    VecProxy t;
+    t.data = a->data;
+    *a = *b;
+    *b = t;
+}
+
 void fn_800C2838(s32 *self) {
     extern char lbl_8045B58C[];
     extern void fn_80338184(void *, s32);
     extern void fn_802D20E8(void *);
     extern void fn_803997AC(void *, u32);
-    s32 tmp[4];
-    s32 t2[2];
-    s32 *v;
-    s32 t;
+    struct Proxy { char alloc; char *data; };
+    struct Vec { char *start; char *finish; struct Proxy eos; };
+    struct Vec tmp;
+    struct Vec *v;
+    struct Vec *pt;
+    struct Proxy *pe;
+    struct Proxy *ve;
+    char *a;
+    char *b;
+    struct Proxy pp;
     char *p;
 
-    tmp[0] = 0;
-    tmp[1] = 0;
-    tmp[3] = 0;
-    v = self + 3;
-    t = v[0];
-    v[0] = tmp[0];
-    tmp[0] = t;
-    t = v[1];
-    v[1] = tmp[1];
-    tmp[1] = t;
+    pt = &tmp;
+    pe = &pt->eos;
+    tmp.start = 0;
+    pt->finish = 0;
+    pe->data = 0;
+    v = (struct Vec *)(self + 3);
+    ve = &v->eos;
+    a = v->start;
+    b = v->finish;
+    v->start = pt->start;
+    v->finish = pt->finish;
+    pt->start = a;
+    pt->finish = b;
     self[0] = 0;
-    t2[1] = v[3];
-    v[2] = tmp[2];
-    v[3] = tmp[3];
-    tmp[2] = t2[0];
-    tmp[3] = t2[1];
+    pp.data = ve->data;
+    *ve = *pe;
+    *pe = pp;
     if (self[1] != 0) {
         fn_80338184(lbl_8045B58C, self[1]);
     }
     self[1] = 0;
-    for (p = (char *)tmp[0]; p != (char *)tmp[1]; p += 8) {
+    for (p = pt->start; p != pt->finish; p += 8) {
     }
-    if (tmp[0] != 0) {
-        u32 size = (u32)(tmp[3] - tmp[0]) & ~7;
+    if (pt->start != 0) {
+        u32 size = (u32)(pe->data - pt->start) & ~7;
         if (size > 0x80) {
-            fn_802D20E8((void *)tmp[0]);
+            fn_802D20E8(pt->start);
         } else {
-            fn_803997AC((void *)tmp[0], size);
+            fn_803997AC(pt->start, size);
         }
     }
 }
