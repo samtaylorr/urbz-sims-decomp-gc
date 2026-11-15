@@ -36,6 +36,11 @@ typedef struct {
     ERQdEntry entries[1];
 } ERQdTable;
 
+static inline void Pair_Clear(s32 *p) {
+    p[0] = 0;
+    p[1] = 0;
+}
+
 void fn_802D2FD0(void);
 extern void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
