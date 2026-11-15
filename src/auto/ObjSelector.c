@@ -524,6 +524,32 @@ void *fn_8016CF9C(s32 arg0, s32 arg1) {
     return M2C_FIELD(r, void **, 0x4);
 }
 
+s32 fn_8016CFFC(void *arg0, void **arg1) {
+    struct Sel { u8 pad[0x2C]; char *items[2]; };
+    extern char lbl_8045BA40[];
+    void *fn_8033740C(char *, void *, s32, s32);
+    s32 fn_8016D0C0(void *, void **);
+    void *r = fn_8016CF9C(fn_8016CCE0(arg0), 1);
+    if (r != NULL) {
+        *arg1 = fn_8033740C(lbl_8045BA40, r, 0, 0);
+        if (*arg1 != NULL) {
+            u32 i;
+            for (i = 0; i < 2; i++) {
+                char *p = ((struct Sel *)*arg1)->items[i];
+                if (p != NULL) {
+                    char *q = M2C_FIELD(p, char **, 0x20);
+                    if (q != NULL) {
+                        char *vt = M2C_FIELD(q, char **, 0x24);
+                        M2C_FIELD(vt, void (**)(void *), 0x5C)(q + M2C_FIELD(vt, s16 *, 0x58));
+                    }
+                }
+            }
+        }
+        return 1;
+    }
+    return fn_8016D0C0(arg0, arg1);
+}
+
 void fn_8016D218(void *arg0, s32 arg1) {
     extern char *lbl_80495050;
     extern char lbl_8045BA40[];
