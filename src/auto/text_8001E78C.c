@@ -48,6 +48,41 @@ void fn_8001EC68(void) {
     }
 }
 
+void fn_8001F7F8(void *arg0) {
+    extern char *lbl_80495050;
+    extern u8 *lbl_8041FA44[];
+    void fn_800F1A60(void *, s32);
+    void fn_802CB8D4(void *);
+    char *list;
+    void *node;
+    void *data;
+    void *next;
+    char *e;
+    u8 *obj;
+    char *self;
+
+    list = M2C_FIELD(arg0, char **, 0x50);
+    self = lbl_80495050;
+    M2C_FIELD(list, s32 *, 0x20) = 0;
+    e = *(char **)self + 0x40;
+    (*(void (**)(void *))(e + 4))(self + *(s16 *)e);
+    node = M2C_FIELD(list, void **, 4);
+    while (List_Valid(node)) {
+        next = M2C_FIELD(node, void **, 4);
+        data = M2C_FIELD(node, void **, 0);
+        if (M2C_FIELD(list, s32 *, 8) != 0 && data != NULL) {
+            fn_800F1A60(data, 3);
+        }
+        node = next;
+    }
+    fn_802CB8D4(list);
+    obj = lbl_8041FA44[0];
+    if (obj != NULL) {
+        u8 *vt = *(u8 **)(obj + 0x44);
+        ((void (*)(void *, s32, s32))*(void **)(vt + 0x3c))(obj + *(s16 *)(vt + 0x38), 0, 0x1f);
+    }
+}
+
 void fn_8001FC30(void) {
     fn_800A23A4();
 }
