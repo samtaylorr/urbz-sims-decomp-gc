@@ -684,6 +684,36 @@ void fn_8004D3EC(void) {
 
 }
 
+void fn_8004D630(char *self, char **arg1) {
+    s32 fn_8016D444(void *);
+    char *fn_8006468C(void *, void *, void *);
+    char *v = arg1[1];
+
+    if (fn_8016D444((*(void *(**)(char *))(v + 0x32C))((char *)arg1 + *(s16 *)(v + 0x328))) == 0) {
+        if (({
+                char *o = *arg1;
+                char *v = *(char **)(o + 0x1C);
+                (*(s32 (**)(char *))(v + 0x8C))(o + *(s16 *)(v + 0x88));
+            }) == 0) {
+            char *t = *(char **)(self + 0xEC);
+            char *p = fn_8006468C(*(void **)(t + 4), arg1, *(void **)(t + 0x1C));
+            char *q = NULL;
+            if (p != NULL) {
+                q = p + 0x300;
+            }
+            *(char **)(*arg1 + 0x14) = q;
+        } else {
+            char *r = ({
+                char *o = *arg1;
+                char *v = *(char **)(o + 0x1C);
+                (*(char *(**)(char *))(v + 0x8C))(o + *(s16 *)(v + 0x88));
+            }) + 0x300;
+            char *vt = *(char **)r;
+            (*(void (**)(char *))(vt + 0x14))(r + *(s16 *)(vt + 0x10));
+        }
+    }
+}
+
 void fn_8004D8E0(void *arg0) {
     M2C_UNK fn_8004174C(s32);
     fn_8004174C(M2C_FIELD(arg0, s32 *, 0x150));
@@ -942,6 +972,24 @@ s32 fn_8004E72C(void *arg0) {
 }
 
 s32 fn_8004E734(void) {
+    return 0;
+}
+
+s32 fn_8004E73C(void *arg0, s32 arg1) {
+    extern void *lbl_8049665C;
+    void *temp_r9;
+    s32 result;
+    s32 idx;
+
+    result = 0;
+    idx = 0;
+    temp_r9 = *(void **)lbl_8049665C;
+    if (((void *(*)(void *))M2C_FIELD(temp_r9, void **, 0x1AC))((char *)lbl_8049665C + M2C_FIELD(temp_r9, s16 *, 0x1A8)) != NULL) {
+        temp_r9 = *(void **)lbl_8049665C;
+        if (EGlobal_FindValue(((void *(*)(void *))M2C_FIELD(temp_r9, void **, 0x1AC))((char *)lbl_8049665C + M2C_FIELD(temp_r9, s16 *, 0x1A8)), arg1, &result, &idx)) {
+            return result;
+        }
+    }
     return 0;
 }
 
