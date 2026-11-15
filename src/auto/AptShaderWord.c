@@ -64,15 +64,16 @@ f32 fn_80007F5C(void) {
     return lbl_803C1660[0];
 }
 
-AptVec2 fn_803227C4(s32, s32, s32, s32, s32);
-
 static inline void AptShaderWord_UpdateHeight(void *arg0) {
     extern s32 lbl_80494378;
     extern s32 lbl_80495A7C[];
+    void fn_803227C4(void *, s32, s32, s32, s32, s32);
     s32 fn_800F3304(void *);
     f32 fn_801DF514(s32);
+    f32 v[3];
 
-    M2C_FIELD(arg0, f32 *, 0x28) = fn_803227C4(lbl_80494378, fn_800F3304(lbl_80495A7C), 1, 0, 0).y;
+    fn_803227C4(v, lbl_80494378, fn_800F3304(lbl_80495A7C), 1, 0, 0);
+    M2C_FIELD(arg0, f32 *, 0x28) = v[1];
     if (M2C_FIELD(arg0, f32 *, 0x28) < fn_801DF514(M2C_FIELD(arg0, s32 *, 0x34))) {
         M2C_FIELD(arg0, f32 *, 0x28) = fn_801DF514(M2C_FIELD(arg0, s32 *, 0x34));
     }
