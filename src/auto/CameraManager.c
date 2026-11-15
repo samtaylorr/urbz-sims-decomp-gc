@@ -142,6 +142,22 @@ void fn_80014F48(void *self, s32 flags) {
     }
 }
 
+void fn_80014F70(s32 *self, s32 arg1) {
+    extern s32 lbl_80496644;
+    extern void fn_8010C96C(s32, s32);
+    void *p;
+
+    self[3] = 0;
+    fn_8010C96C(lbl_80496644, 4);
+    self[0] = 0;
+    self[2] = arg1;
+    p = CameraManager_AllocAligned(0xF60);
+    fn_80248488(p, 0, 0xF60);
+    self[1] = (s32)fn_80015118(p);
+    fn_80015710();
+    self[0] = 1;
+}
+
 void fn_80015050(void *arg0) {
     void *temp_r11;
     void *temp_r9;
@@ -345,6 +361,19 @@ s32 fn_800159F4(void *arg0) {
     return *(s32 *)(self + 0x558);
 }
 
+void fn_80016224(void *arg0) {
+    struct Blk14C { u32 w[0x53]; };
+    void fn_80016354(void *, void *, s32);
+    u16 *fn_800F8178(u16 *, u16 *);
+
+    *(struct Blk14C *)((u8 *)arg0 + 0x400) =
+        ((struct Blk14C *)M2C_FIELD(arg0, void **, 0x3FC))[M2C_FIELD(arg0, s8 *, 0x59A)];
+    fn_80016354(arg0, (u8 *)arg0 + 0x400, 0);
+    fn_800F8178(M2C_FIELD(arg0, u16 **, 0xF58), M2C_FIELD(arg0, u16 **, 0xF50));
+    fn_800F8178(M2C_FIELD(arg0, u16 **, 0xF5C), M2C_FIELD(arg0, u16 **, 0xF54));
+    M2C_FIELD(arg0, s32 *, 0x48) = 1;
+}
+
 void fn_80016300(void *arg0) {
     M2C_UNK fn_800F8178(s32, s32);
     if ((s32) M2C_FIELD(arg0, s32 *, 0x48) != 0) {
@@ -423,20 +452,20 @@ void fn_80016C7C(void *arg0) {
 }
 
 void fn_80016D54(void *arg0) {
-    extern char lbl_803C2724[];
-    extern char lbl_803C2738[];
-    extern char lbl_803C273C[];
-    extern char lbl_803C2748[];
-    extern char lbl_803C2750[];
-    extern char lbl_803C2758[];
-    void fn_8000AA2C(void *, const char *, s32, s32, s32, ...);
+    extern const char lbl_803C2724[];
+    extern const char lbl_803C2738[];
+    extern const char lbl_803C273C[];
+    extern const char lbl_803C2748[];
+    extern const char lbl_803C2750[];
+    extern const char lbl_803C2758[];
+    void fn_8000AA2C(s32, const char *, s32, s32, s32, ...);
 
     if (M2C_FIELD(arg0, s32 *, 0xF3C) != 0) {
-        fn_8000AA2C(M2C_FIELD(arg0, void **, 0xED4), lbl_803C2724, 0, 0, 1, lbl_803C2738);
-        fn_8000AA2C(M2C_FIELD(arg0, void **, 0xED4), lbl_803C273C, 0, 0, 1, lbl_803C2748);
-        fn_8000AA2C(M2C_FIELD(arg0, void **, 0xED4), lbl_803C273C, 0, 0, 1, lbl_803C2750);
+        fn_8000AA2C(M2C_FIELD(arg0, s32 *, 0xED4), lbl_803C2724, 0, 0, 1, lbl_803C2738);
+        fn_8000AA2C(M2C_FIELD(arg0, s32 *, 0xED4), lbl_803C273C, 0, 0, 1, lbl_803C2748);
+        fn_8000AA2C(M2C_FIELD(arg0, s32 *, 0xED4), lbl_803C273C, 0, 0, 1, lbl_803C2750);
     }
-    fn_8000AA2C(M2C_FIELD(arg0, void **, 0xED4), lbl_803C2758, 0, 0, 0);
+    fn_8000AA2C(M2C_FIELD(arg0, s32 *, 0xED4), lbl_803C2758, 0, 0, 0);
     M2C_FIELD(arg0, s32 *, 0xF38) = 1;
 }
 
