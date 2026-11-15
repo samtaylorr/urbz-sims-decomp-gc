@@ -18,6 +18,14 @@ void **fn_8039AB24(void **node);
 
 typedef struct { f32 x, y, z; } RMVec3;
 
+static inline void RM_PtrVec_Erase(void **v, void **const *first) {
+    void **i = *first;
+    void **q;
+    for (q = i; q != (void **)v[1]; q++) {
+    }
+    v[1] = i;
+}
+
 static inline RMVec3 RMVec3_make(f32 x, f32 y, f32 z) {
     RMVec3 r;
     r.z = z;
