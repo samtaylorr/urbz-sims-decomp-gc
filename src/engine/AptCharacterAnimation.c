@@ -249,6 +249,27 @@ void fn_8028D048(void *arg0, char *arg1, char *arg2, char *arg3, s32 arg4) {
     }
 }
 
+void fn_8028D114(void *arg0, char *arg1, char *arg2, char *arg3, s32 arg4) {
+    AptAnimCmd *prev;
+
+    prev = M2C_FIELD(arg0, AptAnimCmd **, 4) - 1;
+    if (prev < M2C_FIELD(arg0, AptAnimCmd **, 0)) {
+        prev = M2C_FIELD(arg0, AptAnimCmd **, 0) + (M2C_FIELD(arg0, s32 *, 0x1290) - 1);
+    }
+    if ((s32)prev != M2C_FIELD(arg0, s32 *, 8)) {
+        M2C_FIELD(arg0, AptAnimCmd **, 4) = prev;
+        prev->type = 1;
+        M2C_FIELD(arg0, AptAnimCmd **, 4)->unk4 = arg4;
+        M2C_FIELD(arg0, AptAnimCmd **, 4)->unk8 = (s32)arg1;
+        (*(void (**)(void *))(M2C_FIELD((char *)M2C_FIELD(arg0, AptAnimCmd **, 4)->unk8, char **, 4) + 0xC))(
+            (char *)M2C_FIELD(arg0, AptAnimCmd **, 4)->unk8 + *(s16 *)(M2C_FIELD((char *)M2C_FIELD(arg0, AptAnimCmd **, 4)->unk8, char **, 4) + 8));
+        M2C_FIELD(arg0, AptAnimCmd **, 4)->unkC = arg2;
+        (*(void (**)(void *))(M2C_FIELD((char *)M2C_FIELD(arg0, AptAnimCmd **, 4)->unkC, char **, 4) + 0xC))(
+            (char *)M2C_FIELD(arg0, AptAnimCmd **, 4)->unkC + *(s16 *)(M2C_FIELD((char *)M2C_FIELD(arg0, AptAnimCmd **, 4)->unkC, char **, 4) + 8));
+        M2C_FIELD(arg0, AptAnimCmd **, 4)->obj = arg3;
+    }
+}
+
 void fn_8028D378(void *arg0) {
     s32 i;
 
@@ -341,15 +362,15 @@ s32 fn_8028D764(void *arg0) {
     s32 n;
 
     size = fn_8028D6E0(arg0) * 2 + M2C_FIELD(arg0, s32 *, 0x10) + 0x202 + M2C_FIELD(arg0, s32 *, 0x818);
-    size += fn_8029F660(M2C_FIELD(arg0, s32 *, 0x122C)) + 0x280;
+    size += 0x280;
+    size += fn_8029F660(M2C_FIELD(arg0, s32 *, 0x122C));
     n = M2C_FIELD(arg0, s32 *, 0x1234);
     for (i = 0; i < M2C_FIELD(arg0, s32 *, 0x1284); i++) {
-        if (M2C_FIELD(arg0, Entry **, 0x1230)[i].used == 0) {
-            break;
-        }
-        size += 1 + M2C_FIELD(arg0, Entry **, 0x1230)[i].size;
-        if (--n == 0) {
-            break;
+        if (M2C_FIELD(arg0, Entry **, 0x1230)[i].used != 0) {
+            size += 1 + M2C_FIELD(arg0, Entry **, 0x1230)[i].size;
+            if (--n == 0) {
+                break;
+            }
         }
     }
     return size;
