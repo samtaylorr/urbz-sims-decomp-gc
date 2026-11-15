@@ -76,6 +76,22 @@ void *fn_8028B87C(u8 *self, s32 **arg1) {
     return self;
 }
 
+void fn_8028B914(u8 *self, s32 flags) {
+    extern u8 lbl_80418488[];
+    extern s32 fn_802A6630(s32 *);
+    extern void fn_802A6644(void *);
+    extern void fn_80290B74(u8 *, s32);
+    extern void (*lbl_80443318[])(u8 *, s32);
+    *(u8 **)(self + 0x14) = lbl_80418488;
+    if (*(s32 **)(self + 0x34) != NULL && fn_802A6630(*(s32 **)(self + 0x34)) == 0) {
+        fn_802A6644(*(s32 **)(self + 0x34));
+    }
+    fn_80290B74(self, 0);
+    if (flags & 1) {
+        lbl_80443318[0](self, 0x38);
+    }
+}
+
 void fn_8028B998(s32 arg0) {
     M2C_UNK fn_802A1420(s32);
     fn_802A1420(arg0 + 0x24);
@@ -506,10 +522,12 @@ void *fn_8028FB40(u32 *self) {
         ok = (self[0] >> 15) & 1;
     }
     if (ok != 0) {
-        for (i = 0; i < (s32)self[9] / 2; i++) {
-            s32 tmp = ((s32 *)self[7])[i];
-            ((s32 *)self[7])[i] = ((s32 *)self[7])[self[9] - i - 1];
-            ((s32 *)self[7])[self[9] - i - 1] = tmp;
+        for (i = 0; i < ((s32 *)self)[9] / 2; i++) {
+            s32 j = ((s32 *)self)[9] - i;
+            s32 *arr = (s32 *)self[7];
+            s32 tmp = arr[i];
+            arr[i] = arr[j - 1];
+            ((s32 *)self[7])[((s32 *)self)[9] - i - 1] = tmp;
         }
         return self;
     }
