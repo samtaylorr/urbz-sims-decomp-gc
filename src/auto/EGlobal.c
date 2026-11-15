@@ -34,10 +34,10 @@ static inline EGlobalList *EGlobal_FindList(void *arg1, void *name) {
     void *fn_8032D5C8(s32, void *);
     void *p = fn_8032D5C8(M2C_FIELD(arg1, s32 *, 0x11C), name);
 
-    if (p != NULL) {
-        return p;
+    if (p == NULL) {
+        return NULL;
     }
-    return NULL;
+    return p;
 }
 
 extern void *fn_802D0AB8();
@@ -414,20 +414,18 @@ EGlobalHandle fn_8004BD48(void *arg1, s32 arg2) {
 }
 
 void *fn_8004BDB8(void *arg1, s32 arg2) {
-    void *fn_8032D5C8(s32, void *);
     extern u8 lbl_803C6C78[];
     EGlobalList *list;
     EGlobalEntry18 *e;
     u32 i;
+    u32 n;
 
     if (arg2 != 0) {
-        list = fn_8032D5C8(M2C_FIELD(arg1, s32 *, 0x11C), lbl_803C6C78);
-        if (list == NULL) {
-            list = NULL;
-        }
+        list = EGlobal_ToList(EGlobal_FindList(arg1, lbl_803C6C78));
         if (list != NULL) {
             e = list->entries;
-            for (i = 0; i < list->count; i++, e++) {
+            n = list->count;
+            for (i = 0; i < n; i++, e++) {
                 if (e->id == arg2) {
                     return e;
                 }
@@ -441,19 +439,14 @@ void *fn_8004BE3C(void *arg1, s32 arg2) {
     void *fn_8032D5C8(s32, void *);
     extern u8 lbl_803C6C8C[];
     EGlobalList *list;
-    EGlobalEntry14 *entries;
     EGlobalEntry14 *e;
     u32 i;
 
     if (arg2 != 0) {
-        list = fn_8032D5C8(M2C_FIELD(arg1, s32 *, 0x11C), lbl_803C6C8C);
-        if (list == NULL) {
-            list = NULL;
-        }
+        list = EGlobal_ToList(fn_8032D5C8(M2C_FIELD(arg1, s32 *, 0x11C), lbl_803C6C8C));
         if (list != NULL) {
-            entries = list->entries;
-            for (i = 0; i < list->count; i++) {
-                e = &entries[i];
+            e = list->entries;
+            for (i = 0; i < list->count; i++, e++) {
                 if (e->id == arg2) {
                     return e;
                 }
