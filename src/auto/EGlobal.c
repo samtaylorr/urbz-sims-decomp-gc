@@ -24,7 +24,20 @@ typedef struct EGlobalList {
 } EGlobalList;
 
 static inline EGlobalList *EGlobal_ToList(void *p) {
-    return p != NULL ? (EGlobalList *)p : NULL;
+    if (p != NULL) {
+        return p;
+    }
+    return NULL;
+}
+
+static inline EGlobalList *EGlobal_FindList(void *arg1, void *name) {
+    void *fn_8032D5C8(s32, void *);
+    void *p = fn_8032D5C8(M2C_FIELD(arg1, s32 *, 0x11C), name);
+
+    if (p != NULL) {
+        return p;
+    }
+    return NULL;
 }
 
 extern void *fn_802D0AB8();
@@ -398,6 +411,56 @@ EGlobalHandle fn_8004BD48(void *arg1, s32 arg2) {
         }
     }
     return lbl_80495804;
+}
+
+void *fn_8004BDB8(void *arg1, s32 arg2) {
+    void *fn_8032D5C8(s32, void *);
+    extern u8 lbl_803C6C78[];
+    EGlobalList *list;
+    EGlobalEntry18 *e;
+    u32 i;
+
+    if (arg2 != 0) {
+        list = fn_8032D5C8(M2C_FIELD(arg1, s32 *, 0x11C), lbl_803C6C78);
+        if (list == NULL) {
+            list = NULL;
+        }
+        if (list != NULL) {
+            e = list->entries;
+            for (i = 0; i < list->count; i++, e++) {
+                if (e->id == arg2) {
+                    return e;
+                }
+            }
+        }
+    }
+    return NULL;
+}
+
+void *fn_8004BE3C(void *arg1, s32 arg2) {
+    void *fn_8032D5C8(s32, void *);
+    extern u8 lbl_803C6C8C[];
+    EGlobalList *list;
+    EGlobalEntry14 *entries;
+    EGlobalEntry14 *e;
+    u32 i;
+
+    if (arg2 != 0) {
+        list = fn_8032D5C8(M2C_FIELD(arg1, s32 *, 0x11C), lbl_803C6C8C);
+        if (list == NULL) {
+            list = NULL;
+        }
+        if (list != NULL) {
+            entries = list->entries;
+            for (i = 0; i < list->count; i++) {
+                e = &entries[i];
+                if (e->id == arg2) {
+                    return e;
+                }
+            }
+        }
+    }
+    return NULL;
 }
 
 void *fn_8004BEDC(void *arg1, u32 arg2) {
