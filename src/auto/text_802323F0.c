@@ -473,7 +473,6 @@ void fn_80233468(u8 *arg0) {
         s32 unkC;
     } tmp, *p;
     u8 *obj = *(u8 **)(arg0 + 0x60);
-    Callback1A8 *cb;
 
     if (fn_80234AF4(arg0 + 0x60) == 1) {
         if (obj != NULL) {
@@ -483,13 +482,17 @@ void fn_80233468(u8 *arg0) {
         p = &tmp;
         p->ev.vtbl = lbl_80417E58;
         p->unkC = 0;
-        tmp.ev.unk0 = 0;
-        cb = (Callback1A8 *)(arg0 + 0x1A8);
-        Callback1A8_Call(cb, &p->ev);
-        if (tmp.unkC != 0) {
-            fn_80232E74(arg0, (Struct1A8_7 *)cb);
-        } else {
-            fn_80232D2C(arg0, 1);
+        p->ev.unk0 = 0;
+        {
+            Callback1A8 *cb = (Callback1A8 *)(arg0 + 0x1A8);
+            Event1A8 *ev = &p->ev;
+            ev->unk4 = cb->data;
+            cb->fn(ev);
+            if (tmp.unkC != 0) {
+                fn_80232E74(arg0, (Struct1A8_7 *)cb);
+            } else {
+                fn_80232D2C(arg0, 1);
+            }
         }
         p->ev.vtbl = lbl_80417CF0;
     }
@@ -613,6 +616,32 @@ s32 fn_802346C8(void *arg0, void *arg1) {
     vt = M2C_FIELD(obj, void **, 0x4);
     M2C_FIELD(vt, void (**)(void *), 0xC)((char *)obj + M2C_FIELD(vt, s16 *, 0x8));
     return 1;
+}
+
+void fn_80234820(s32 *arg0) {
+    extern s32 lbl_80494424;
+
+    if (arg0[0] != 0) {
+        char *obj = (char *)arg0[0];
+        char *vt = M2C_FIELD(obj, char **, 4);
+        if ((*(s32 (**)(void *))(vt + 0x174))(obj + *(s16 *)(vt + 0x170)) != 0) {
+            char *obj2 = (char *)arg0[0];
+            char *vt2;
+            lbl_80494424 = 1;
+            vt2 = M2C_FIELD(obj2, char **, 4);
+            (*(void (**)(void *))(vt2 + 0xF4))(obj2 + *(s16 *)(vt2 + 0xF0));
+            lbl_80494424 = 0;
+        }
+    }
+    if (arg0[1] != 0) {
+        char *obj = M2C_FIELD(*(void **)arg0[1], char **, 4);
+        char *vt = M2C_FIELD(obj, char **, 4);
+        if ((*(s32 (**)(void *))(vt + 0x174))(obj + *(s16 *)(vt + 0x170)) != 0) {
+            char *obj2 = *M2C_FIELD(arg0[1], char ***, 4);
+            char *vt2 = M2C_FIELD(obj2, char **, 4);
+            (*(void (**)(void *))(vt2 + 0xF4))(obj2 + *(s16 *)(vt2 + 0xF0));
+        }
+    }
 }
 
 s32 fn_802348F8(s32 *arg0, s32 arg1, s32 arg2) {
