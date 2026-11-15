@@ -41,6 +41,17 @@ static inline void Pair_Set(s32 *p, s32 a, s32 b) {
     p[1] = b;
 }
 
+static inline void QList_Append(void **head, void ***tail, void **node) {
+    node[1] = *tail;
+    if (*tail != NULL) {
+        (*tail)[2] = node;
+    } else {
+        *head = node;
+    }
+    node[2] = NULL;
+    *tail = node;
+}
+
 void fn_802D2FD0(void);
 extern void *fn_802D0AB8(void *);
 extern void fn_802D1A00(void *, void *);
@@ -634,7 +645,7 @@ void fn_8032FE1C(void *self) {
     extern u8 lbl_8045BA40[];
     extern u8 lbl_8045AA90[];
     extern s32 lbl_8049624C[2];
-    extern s32 lbl_80496250;
+    extern void **lbl_80496250;
 
     if (M2C_FIELD(self, void ***, 0x60) == NULL) {
         void **node = fn_80338000(lbl_8045BA40, 0xC, 4);
@@ -646,15 +657,18 @@ void fn_8032FE1C(void *self) {
             void (*f)(void *, s32) = *(void (**)(void *, s32))(vt + 0x14);
             f(lbl_8045AA90 + off, -1);
         }
-        node = M2C_FIELD(self, void ***, 0x60);
-        ((s32 *)node)[1] = lbl_80496250;
-        if ((void **)lbl_80496250 != NULL) {
-            ((void ***)lbl_80496250)[2] = (void *)node;
-        } else {
-            lbl_8049624C[0] = (s32)node;
+        {
+            void ***tail = &lbl_80496250;
+            void **n = M2C_FIELD(self, void ***, 0x60);
+            n[1] = *tail;
+            if (*tail != NULL) {
+                (*tail)[2] = n;
+            } else {
+                lbl_8049624C[0] = (s32)n;
+            }
+            n[2] = NULL;
+            *tail = n;
         }
-        node[2] = NULL;
-        lbl_80496250 = (s32)node;
         {
             char *vt = *(char **)lbl_8045AA90;
             s16 off = *(s16 *)(vt + 0x18);
@@ -820,8 +834,9 @@ void fn_80330FC4(s32 arg0, s32 arg1) {
     if (arg1 == 0xFFFF) {
         if (arg0 != 0) {
             s32 *p = lbl_8049624C;
-            p[1] = 0;
-            p[0] = 0;
+            s32 z = 0;
+            p[1] = z;
+            p[0] = z;
             fn_802CA9A8(lbl_8045AA90);
             lbl_80496254 = fn_802D6A90(lbl_80493970, fn_80331064, fn_8033108C, fn_803310B8, 2, lbl_803F34C0, lbl_80493858);
         } else {
