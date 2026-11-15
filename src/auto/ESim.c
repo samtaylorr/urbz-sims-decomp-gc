@@ -135,7 +135,7 @@ void fn_8003B978(void *arg0, s32 arg1) {
     q = p;
     for (i = 0; i <= 0x16; i++) {
         flags[i] = 0;
-        *q++ = *(q - 23);
+        *q++ = p[i - 23];
     }
     fn_801CCDD4(buf, arg1, flags);
     q = p;
@@ -242,36 +242,36 @@ void fn_8003D024(void) {
 }
 
 s32 fn_8003D9D0(void *self, void *arg1) {
-    typedef struct { f32 x, y, z; } Vec3;
-    typedef struct { Vec3 a; Vec3 b; } Vec3Pair;
     extern const f32 lbl_803C5CC0[];
     s32 fn_8003E48C(void *);
     s32 fn_802E33E8(void *, void *);
-    void fn_802E7F64(void *, void *, Vec3Pair *, s32);
-    s32 fn_802E34F0(void *, Vec3Pair *);
+    void fn_802E7F64(void *, void *, ESimVec3Pair *, s32);
+    s32 fn_802E34F0(void *, ESimVec3Pair *);
     u8 *p;
-    Vec3Pair v;
-    Vec3 t;
-    u8 buf[0x40];
+    s32 ret;
+    ESimVec3Pair v;
+    ESimVec3 *pb;
 
     if (fn_8003E48C(self) != 0) {
-        return 0;
+        ret = 0;
+    } else {
+        p = (u8 *)self + 0x314;
+        if (*(s32 *)(p + 0xC) == 0) {
+            ret = fn_802E33E8(arg1, (u8 *)self + 0x110);
+        } else {
+            pb = &v.b;
+            ESimVec3_splat(pb, lbl_803C5CC0[0]);
+            v.a = *pb;
+            {
+                u8 buf[0x40];
+                u8 *vt = *(u8 **)self;
+                (*(void (**)(void *, void *))(vt + 0xF4))((u8 *)self + *(s16 *)(vt + 0xF0), buf);
+                fn_802E7F64(p, buf, &v, 0);
+            }
+            ret = fn_802E34F0(arg1, &v);
+        }
     }
-    p = (u8 *)self + 0x314;
-    if (*(s32 *)(p + 0xC) == 0) {
-        return fn_802E33E8(arg1, (u8 *)self + 0x110);
-    }
-    t.z = lbl_803C5CC0[0];
-    t.y = lbl_803C5CC0[0];
-    t.x = lbl_803C5CC0[0];
-    v.b = t;
-    v.a = v.b;
-    {
-        u8 *vt = *(u8 **)self;
-        (*(void (**)(void *, void *))(vt + 0xF4))((u8 *)self + *(s16 *)(vt + 0xF0), buf);
-    }
-    fn_802E7F64(p, buf, &v, 0);
-    return fn_802E34F0(arg1, &v);
+    return ret;
 }
 
 void fn_8003DAB4(void *self, void *arg1) {
