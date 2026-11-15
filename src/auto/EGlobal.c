@@ -23,7 +23,7 @@ typedef struct EGlobalList {
     u32 count;
 } EGlobalList;
 
-static inline s32 EGlobal_FindValue(void *db, s32 key, s32 *result, s32 *outIdx) {
+static inline s32 EGlobal_FindValue(void *db, s32 key, s32 *result, EGlobalHandle *outIdx) {
     void *fn_8032D8E0(void *, s32, u32 *);
     s32 **tbl;
     u32 idx;
@@ -34,11 +34,11 @@ static inline s32 EGlobal_FindValue(void *db, s32 key, s32 *result, s32 *outIdx)
             *result = tbl[2][idx];
         }
         if (outIdx != NULL) {
-            *outIdx = idx;
+            outIdx->value = idx;
         }
         return 1;
     }
-    *outIdx = -1;
+    outIdx->value = -1;
     return 0;
 }
 
@@ -995,8 +995,8 @@ void fn_8004E64C(char *self) {
     char *obj = lbl_80496648;
     char *a;
     char *b;
-    char *p;
     char *e;
+    char *p;
     s32 r;
 
     if (obj == NULL) {
@@ -1021,7 +1021,7 @@ void fn_8004E64C(char *self) {
     }
     M2C_FIELD(e, void (**)(void *, s32, s32), 4)(p, 3, r);
     {
-        char *o = **M2C_FIELD(self, char ***, 0xDC);
+        char *o = *M2C_FIELD(self, char ***, 0xDC);
         char *vt = M2C_FIELD(o, char **, 4);
         e = *(char **)obj + 0x38;
         p = obj + *(s16 *)e;
