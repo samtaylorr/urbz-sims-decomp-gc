@@ -36,6 +36,13 @@ typedef struct {
     ERQdEntry entries[1];
 } ERQdTable;
 
+extern void fn_802482F8(void *, void *, u32);
+
+static inline char *Qd_Read(void *dst, char *src, u32 n) {
+    fn_802482F8(dst, src, n);
+    return src + n;
+}
+
 static inline void Pair_Set(s32 *p, s32 a, s32 b) {
     p[1] = b;
     p[0] = a;
@@ -708,24 +715,24 @@ s32 fn_8032F5A0(void *self, u8 v) {
     return 1;
 }
 
-char *fn_8032FD38(void *arg0, char *self, char *src) {
+char *fn_8032FD38(void *arg0, u8 *self, char *src) {
     extern void fn_802482F8(void *, void *, u32);
-    char *p;
+    u8 *p;
     s32 i;
 
-    fn_802482F8(self, src, 1);
+    fn_802482F8(&self[0], src, 1);
     src += 1;
-    fn_802482F8(self + 1, src, 1);
+    fn_802482F8(&self[1], src, 1);
     src += 1;
-    fn_802482F8(self + 2, src, 2);
+    fn_802482F8((s16 *)(self + 2), src, 2);
     src += 2;
-    fn_802482F8(self + 4, src, 4);
+    fn_802482F8((s32 *)(self + 4), src, 4);
     src += 4;
-    fn_802482F8(self + 8, src, 4);
+    fn_802482F8((s32 *)(self + 8), src, 4);
     src += 4;
-    fn_802482F8(self + 0xC, src, 4);
+    fn_802482F8((s32 *)(self + 0xC), src, 4);
     src += 4;
-    fn_802482F8(self + 0x10, src, 0x30);
+    fn_802482F8(&self[0x10], src, 0x30);
     src += 0x30;
     p = self + 0x64;
     for (i = 2; i != 0; i--) {
