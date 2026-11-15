@@ -60,6 +60,48 @@ s32 fn_800FE178(s32 arg0, s32 arg1, s32 *arg2) {
     return var_r3;
 }
 
+void *fn_800FE1C0(void *self) {
+    extern void *fn_80399BE8(s32);
+    s32 *fn_801011D4(s32 *arg0);
+    extern char lbl_8040D5E8[];
+    extern void *lbl_80495ADC;
+    s32 *list;
+    s32 *p;
+    char alloc[16];
+
+    M2C_FIELD(self, void **, 0x8C) = lbl_8040D5E8;
+    M2C_FIELD(self, s32 *, 0x4) = 1;
+    M2C_FIELD(self, s32 *, 0x8) = 0;
+    M2C_FIELD(self, s32 *, 0xC) = 0;
+    M2C_FIELD(self, s32 *, 0x10) = 0;
+    M2C_FIELD(self, s32 *, 0x14) = 0;
+    M2C_FIELD(self, s32 *, 0x18) = 0;
+    M2C_FIELD(self, s32 *, 0x1C) = 0;
+    M2C_FIELD(self, s32 *, 0x20) = 0;
+    M2C_FIELD(self, s32 *, 0x28) = 0;
+    M2C_FIELD(self, s32 *, 0x2C) = 0;
+    M2C_FIELD(self, s32 *, 0x30) = 0;
+    M2C_FIELD(self, s32 *, 0x34) = 0;
+    list = (s32 *)((char *)self + 0x3C);
+    list[1] = 0;
+    p = fn_80399BE8(0x18);
+    list[2] = 0;
+    list[1] = (s32)p;
+    *(u8 *)&list[3] = 0;
+    p[0] = 0;
+    ((s32 *)list[1])[1] = 0;
+    ((s32 *)list[1])[2] = list[1];
+    ((s32 *)list[1])[3] = list[1];
+    fn_801011D4((s32 *)((char *)self + 0x4C));
+    M2C_FIELD(self, s32 *, 0x78) = 0;
+    M2C_FIELD(self, s32 *, 0x7C) = 0;
+    M2C_FIELD(self, s32 *, 0x80) = 0;
+    M2C_FIELD(self, s32 *, 0x84) = 0;
+    M2C_FIELD(self, s32 *, 0x88) = 0;
+    lbl_80495ADC = self;
+    return self;
+}
+
 void fn_800FE28C(void *arg0, s32 arg1) {
     extern void fn_8031EA2C(void *);
     M2C_UNK fn_803A0690(void *, s32);
