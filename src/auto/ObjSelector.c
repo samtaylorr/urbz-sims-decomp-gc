@@ -392,21 +392,20 @@ void fn_8016C97C(void *arg0, s32 arg1) {
 
 s32 fn_8016CA50(void *arg0) {
     extern char *lbl_8049665C;
-    struct Sub { u8 pad[0x1C]; char *data; };
-    struct Self { u8 pad[0x1C]; struct Sub sub; };
+    s32 fn_8016CC2C(void *, void *);
     s32 result = 0;
     char *list;
     char *o;
     s16 id;
 
-    if (M2C_FIELD(arg0, s32 *, 0x9C) == 1 || M2C_FIELD(((struct Self *)arg0)->sub.data, s32 *, 0xC0) == 0) {
+    if (M2C_FIELD(arg0, s32 *, 0x9C) == 1 || M2C_FIELD(ObjSelector_GetData((char *)arg0 + 0x1C), s32 *, 0xC0) == 0) {
         result = 1;
     }
-    if (M2C_FIELD(((struct Self *)arg0)->sub.data, s32 *, 0xC0) == 0) {
+    if (M2C_FIELD(ObjSelector_GetData((char *)arg0 + 0x1C), s32 *, 0xC0) == 0) {
         list = lbl_8049665C;
-        id = M2C_FIELD(((struct Self *)arg0)->sub.data, s16 *, 0x14);
-        o = NULL;
-        while ((o = M2C_FIELD(*(char **)list, void *(**)(void *, void *), 0x7C)(list + M2C_FIELD(*(char **)list, s16 *, 0x78), o)) != NULL) {
+        id = M2C_FIELD(ObjSelector_GetData((char *)arg0 + 0x1C), s16 *, 0x14);
+        for (o = M2C_FIELD(*(char **)list, void *(**)(void *, void *), 0x7C)(list + M2C_FIELD(*(char **)list, s16 *, 0x78), NULL); o != NULL;
+             o = M2C_FIELD(*(char **)list, void *(**)(void *, void *), 0x7C)(list + M2C_FIELD(*(char **)list, s16 *, 0x78), o)) {
             char *d = M2C_FIELD(o, char **, 0x38);
             if (M2C_FIELD(d, s16 *, 0x14) == id && M2C_FIELD(d, s32 *, 0xC0) != 0 && fn_8016CC2C(o, arg0) && M2C_FIELD(o, s32 *, 0x9C) != 1) {
                 result = 0;
@@ -723,6 +722,36 @@ s32 fn_8016D4D0(void *arg0) {
         M2C_FIELD(arg0, s32 *, 0x78) = fn_800FCB50(M2C_FIELD(arg0, s32 *, 0xC), v);
     }
     return M2C_FIELD(arg0, s32 *, 0x78);
+}
+
+void *fn_8016D954(char *self) {
+    char *vt;
+
+    if (*(char **)(self + 0x64) == NULL) {
+        char *obj = ((char *(*)(char *))fn_8016C114)(self);
+        if (obj != *(char **)(self + 0x64)) {
+            if (obj != NULL) {
+                vt = *(char **)obj;
+                (*(void (**)(void *))(vt + 0x14))(obj + *(s16 *)(vt + 0x10));
+            }
+            if (*(char **)(self + 0x64) != NULL) {
+                char *old = *(char **)(self + 0x64);
+                vt = *(char **)old;
+                (*(void (**)(void *))(vt + 0x1C))(old + *(s16 *)(vt + 0x18));
+            }
+            *(char **)(self + 0x64) = obj;
+        }
+        {
+            char *p = *(char **)(self + 0x64);
+            vt = *(char **)p;
+            if ((*(s32 (**)(void *, s32, s32))(vt + 0x94))(p + *(s16 *)(vt + 0x90), *(s32 *)(self + 4), *(s16 *)(self + 0x7C)) == -0x62) {
+                char *q = *(char **)(self + 0x64);
+                vt = *(char **)q;
+                (*(void (**)(void *, s32))(vt + 0x6C))(q + *(s16 *)(vt + 0x68), *(s32 *)(self + 0x38));
+            }
+        }
+    }
+    return *(char **)(self + 0x64);
 }
 
 char *fn_8016DA34(void *arg0) {
