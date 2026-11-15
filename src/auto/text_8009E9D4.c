@@ -66,16 +66,28 @@ TextVec2 *fn_800A04A0(s32 arg0) {
     extern TextVec2 lbl_804958BC;
     extern TextVec2 lbl_804958B4;
     extern u8 lbl_8041F94C[];
-    TextVec2 a;
-    TextVec2 b;
-    TextVec2 c;
+    f32 a[2];
+    f32 b[2];
+    f32 c[2];
+    s32 *pa = (s32 *)a;
+    s32 *pb = (s32 *)b;
+    s32 *pc = (s32 *)c;
+    s32 *d0 = (s32 *)&lbl_804958C4;
+    s32 *d1 = (s32 *)&lbl_804958BC;
+    s32 *d2 = (s32 *)&lbl_804958B4;
 
-    TextVec2_Set(&a, lbl_803CD764[0], lbl_803CD768[0]);
-    TextVec2_Set(&b, lbl_803CD764[0], lbl_803CD76C[0]);
-    TextVec2_Set(&c, lbl_803CD770[0], lbl_803CD764[0]);
-    lbl_804958C4 = c;
-    lbl_804958BC = b;
-    lbl_804958B4 = a;
+    a[0] = lbl_803CD764[0];
+    a[1] = lbl_803CD768[0];
+    b[0] = lbl_803CD764[0];
+    b[1] = lbl_803CD76C[0];
+    c[0] = lbl_803CD770[0];
+    c[1] = lbl_803CD764[0];
+    d0[0] = pc[0];
+    d0[1] = pc[1];
+    d1[0] = pb[0];
+    d1[1] = pb[1];
+    d2[0] = pa[0];
+    d2[1] = pa[1];
     if (arg0 == 1) {
         return &lbl_804958C4;
     }
@@ -188,6 +200,44 @@ void fn_800A1534(char *arg0) {
     M2C_FIELD(arg0, f32 *, 0x198) = lbl_803CD800[0];
     M2C_FIELD(arg0, f32 *, 0x194) = lbl_803CD800[0];
     fn_800A13E4(arg0, lbl_8042EFE0 + M2C_FIELD(arg0, s32 *, 0x38) * 32, 1);
+}
+
+extern void *lbl_804942B8;
+extern void *lbl_804942BC;
+extern void *lbl_804942C0;
+extern void *lbl_804942C4;
+extern void *lbl_804942C8;
+extern void *lbl_804942CC;
+extern void *lbl_804942D0;
+extern void *lbl_804942D4;
+extern void *lbl_804942D8;
+extern void *lbl_804942DC;
+extern void *lbl_804942E0;
+extern void *lbl_804942E4;
+void fn_800A17C0(void) {
+    if (lbl_804942B4 != 0) {
+        lbl_804942B4 = 0;
+        fn_8031EA2C(lbl_804942B8);
+        fn_8031EA2C(lbl_804942BC);
+        fn_8031EA2C(lbl_804942C0);
+        fn_8031EA2C(lbl_804942C4);
+        fn_8031EA2C(lbl_804942C8);
+        fn_8031EA2C(lbl_804942CC);
+        fn_8031EA2C(lbl_804942D0);
+        fn_8031EA2C(lbl_804942D4);
+        lbl_804942B8 = NULL;
+        lbl_804942BC = NULL;
+        lbl_804942C0 = NULL;
+        lbl_804942C4 = NULL;
+        lbl_804942C8 = NULL;
+        lbl_804942CC = NULL;
+        lbl_804942D0 = NULL;
+        lbl_804942D4 = NULL;
+        ReleasePtr(&lbl_804942D8);
+        ReleasePtr(&lbl_804942DC);
+        ReleasePtr(&lbl_804942E0);
+        ReleasePtr(&lbl_804942E4);
+    }
 }
 
 s32 fn_800A18A8(void *arg0, s32 arg1) {
