@@ -812,6 +812,29 @@ s32 fn_8004DB2C(void **arg0) {
     return 0;
 }
 
+s32 fn_8004DB74(char *self) {
+    char *fn_8015125C(char *, s32);
+    char *it;
+    s32 r;
+
+    if (({ char *v = *(char **)(self + 4); (*(s32 (**)(char *))(v + 0x354))(self + *(s16 *)(v + 0x350)); }) == 0) {
+        return *(s32 *)(({ char *v = *(char **)(self + 4); (*(char *(**)(char *))(v + 0x2D4))(self + *(s16 *)(v + 0x2D0)); }) + 0xC0);
+    }
+    if (self != NULL) {
+        it = fn_8015125C(*(char **)self, 3);
+    } else {
+        it = NULL;
+    }
+    for (it = ({ char *v = *(char **)(it + 4); (*(char *(**)(char *))(v + 0x14))(it + *(s16 *)(v + 0x10)); }); it != NULL;
+         it = ({ char *v = *(char **)(it + 4); (*(char *(**)(char *))(v + 0x1C))(it + *(s16 *)(v + 0x18)); })) {
+        r = *(s32 *)(({ char *o = *(char **)it; char *v = *(char **)(o + 4); (*(char *(**)(char *))(v + 0x2D4))(o + *(s16 *)(v + 0x2D0)); }) + 0xC0);
+        if (r != 0) {
+            return r;
+        }
+    }
+    return 0;
+}
+
 void fn_8004DC58(void *arg0) {
     void *vt;
 
@@ -965,6 +988,46 @@ void fn_8004E5DC(void *self, f32 x, f32 y, f32 z) {
 
 s32 fn_8004E644(void) {
     return 0;
+}
+
+extern char *lbl_80496648;
+void fn_8004E64C(char *self) {
+    char *obj = lbl_80496648;
+    char *a;
+    char *b;
+    char *p;
+    char *e;
+    s32 r;
+
+    if (obj == NULL) {
+        return;
+    }
+    a = M2C_FIELD(self, char **, 0xD8);
+    if (a == NULL) {
+        return;
+    }
+    b = M2C_FIELD(self, char **, 0xDC);
+    if (b == NULL) {
+        return;
+    }
+    M2C_FIELD(self, char **, 0xDC) = a;
+    M2C_FIELD(self, char **, 0xD8) = b;
+    {
+        char *o = *(char **)b;
+        char *vt = M2C_FIELD(o, char **, 4);
+        e = *(char **)obj + 0x38;
+        p = obj + *(s16 *)e;
+        r = M2C_FIELD(vt, s32 (**)(void *), 0x2EC)(o + M2C_FIELD(vt, s16 *, 0x2E8));
+    }
+    M2C_FIELD(e, void (**)(void *, s32, s32), 4)(p, 3, r);
+    {
+        char *o = **M2C_FIELD(self, char ***, 0xDC);
+        char *vt = M2C_FIELD(o, char **, 4);
+        e = *(char **)obj + 0x38;
+        p = obj + *(s16 *)e;
+        r = M2C_FIELD(vt, s32 (**)(void *), 0x2EC)(o + M2C_FIELD(vt, s16 *, 0x2E8));
+    }
+    M2C_FIELD(e, void (**)(void *, s32, s32), 4)(p, 0x20, r);
 }
 
 s32 fn_8004E72C(void *arg0) {
