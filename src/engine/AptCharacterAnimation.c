@@ -639,6 +639,35 @@ void *fn_8028F870(u32 *self, s32 arg1) {
     return lbl_80496130;
 }
 
+void *fn_8028FA6C(u32 *self, s32 arg1) {
+    extern void *lbl_80496130;
+    extern s32 lbl_804433C4[];
+    extern u16 lbl_803FCE5C[];
+    extern u16 *lbl_80496104;
+    extern void **lbl_80494DA0;
+    extern void fn_802B4ADC(s32, u16 **);
+    extern s32 fn_8028F914(void *, void *);
+    extern void fn_8024729C(s32, s32, s32, s32 (*)(void *, void *));
+    s32 ok;
+
+    ok = 0;
+    if ((self[0] & 0x3F) == 0x16) {
+        ok = (self[0] >> 15) & 1;
+    }
+    if (ok != 0 && arg1 > 0) {
+        u16 *p;
+        fn_802B4ADC(((s32 *)lbl_804433C4[2])[lbl_804433C4[0] - 1], &lbl_80496104);
+        fn_8024729C(self[7], self[9], 4, fn_8028F914);
+        p = lbl_80496104;
+        if (--*p == 0) {
+            ((void (*)(void *))lbl_80494DA0[1])(p);
+        }
+        lbl_80496104 = lbl_803FCE5C;
+        lbl_803FCE5C[0]++;
+    }
+    return lbl_80496130;
+}
+
 void *fn_8028FB40(u32 *self) {
     extern void *lbl_80496130;
     struct Arr { u32 flags; s32 pad[6]; s32 *data; s32 pad2; s32 count; } *a;
