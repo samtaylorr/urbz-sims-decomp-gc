@@ -48,6 +48,16 @@ static inline void *SeqStr_InitBuf(void *s, char *data, s32 n) {
     return s;
 }
 
+static inline void *SeqStr8_InitBuf(void *s, char *data) {
+    fn_800F687C(s, data, 8);
+    return s;
+}
+
+static inline void *SeqStr_InitBuf104(void *s, char *data) {
+    fn_800F687C(s, data, 0x104);
+    return s;
+}
+
 extern s32 lbl_80495D10;
 extern void fn_800F1A60(s32, s32);
 void fn_80197AC8(void *arg0) {
@@ -61,20 +71,28 @@ void fn_80197AD4(void *arg0, s32 arg1, s32 arg2) {
         s32 type;
         char name[0x10];
     } SeqEntry;
+    SeqEntry *e;
     s32 i;
-    SeqStr8 *b;
     SeqStr8 buf;
+    SeqStr8 *q;
+    void *b;
 
-    for (i = 0; ((SeqEntry *)((char *)arg0 + 0xD4))[i].type != 0; i++) {
+    i = 0;
+    e = (SeqEntry *)((char *)arg0 + 0xD4);
+    while (e[i].type != 0) {
+        i++;
     }
     if (i > 7 || arg1 > 4 || arg1 < 0) {
         return;
     }
-    ((SeqEntry *)((char *)arg0 + 0xD4))[i].type = arg1;
-    b = SeqStr8_Init(&buf);
+    e = (SeqEntry *)((char *)arg0 + 0xD4);
+    q = &buf;
+    e[i].type = arg1;
+    b = SeqStr_InitBuf(q, q->buf, 8);
     fn_800F68F0(b, arg2, -1);
     fn_800F6A38(((SeqEntry *)((char *)arg0 + 0xD4))[i].name, b);
-    ((SeqEntry *)((char *)arg0 + 0xD4))[i + 1].type = 0;
+    i++;
+    e[i].type = 0;
 }
 
 void fn_80197B90(void *arg0, s32 arg1) {
@@ -112,7 +130,7 @@ s32 fn_80197E68(void *arg0, void *arg1, void *arg2, s32 arg3) {
         s = SeqStr_Init(&buf);
         r = -0xFA;
         fn_800F6A38(s, arg2);
-        if (fn_80197990(s, (char *)arg0 + arg3 * 0x14 + 0xD4) != 0) {
+        if (fn_80197990(s, (char *)arg0 + (arg3 * 0x14 + 0xD4)) != 0) {
             vt = M2C_FIELD(arg1, char **, 0x10);
             r = M2C_FIELD(vt, s32 (**)(void *, void *), 0x24)((char *)arg1 + M2C_FIELD(vt, s16 *, 0x20), s);
         }
@@ -121,9 +139,49 @@ s32 fn_80197E68(void *arg0, void *arg1, void *arg2, s32 arg3) {
         }
         vt = M2C_FIELD(arg1, char **, 0x10);
         M2C_FIELD(vt, void (**)(void *, s32), 0xC)((char *)arg1 + M2C_FIELD(vt, s16 *, 0x8), 3);
+        if (ret == -0x5E || ret == -0x2D) {
+            return ret;
+        }
     }
-    if (ret == -0x5E) {
-    } else if (ret == -0x2D) {
+    return ret;
+}
+
+s32 fn_801980C8(void *arg0, void *arg1) {
+    void *fn_802D1FC8(s32);
+    void *fn_80113378(void *);
+    extern s32 lbl_8040EE08[];
+    extern s32 lbl_8040EE20[];
+    typedef struct {
+        s32 type;
+        char name[0x10];
+    } SeqEntry;
+    s32 err = 0;
+    s32 ret = -0xFA;
+    s32 i;
+
+    for (i = 0; ((SeqEntry *)((char *)arg0 + 0xD4))[i].type != 0; i++) {
+        void *obj;
+        switch (((SeqEntry *)((char *)arg0 + 0xD4))[i].type) {
+        case 2:
+            obj = fn_80113378(fn_802D1FC8(0x154));
+            break;
+        case 3:
+            obj = fn_802D1FC8(0x154);
+            fn_80113378(obj);
+            M2C_FIELD(obj, s32 **, 0x138) = lbl_8040EE08;
+            M2C_FIELD(obj, s32 **, 0x10) = lbl_8040EE20;
+            break;
+        default:
+            obj = NULL;
+            break;
+        }
+        ret = fn_80197E68(arg0, obj, arg1, i);
+        if (err) {
+            break;
+        }
+    }
+    if (err) {
+        return 0;
     }
     return ret;
 }
@@ -154,7 +212,7 @@ void fn_8019839C(void *arg0, s32 arg1) {
     void fn_800F5A4C(void *, s32, void *);
     SeqStr a;
     SeqStr b;
-    SeqStr *pa;
+    SeqStr *q;
     void *obj;
 
     {
@@ -163,14 +221,15 @@ void fn_8019839C(void *arg0, s32 arg1) {
             return;
         }
     }
-    pa = SeqStr_Init(&a);
+    q = &a;
+    SeqStr_InitBuf(q, q->buf, 0x104);
     SeqStr_Init(&b);
     obj = fn_80102DAC(arg0, 0);
     {
         char *vt = M2C_FIELD(obj, char **, 0x10);
-        M2C_FIELD(vt, void (**)(void *, void *), 0x5C)((char *)obj + M2C_FIELD(vt, s16 *, 0x58), pa);
+        M2C_FIELD(vt, void (**)(void *, void *), 0x5C)((char *)obj + M2C_FIELD(vt, s16 *, 0x58), q);
     }
-    fn_800F5A4C(pa, arg1, &b);
+    fn_800F5A4C(q, arg1, &b);
 }
 
 void *fn_80198444(void *arg0) {
@@ -180,19 +239,21 @@ void *fn_80198444(void *arg0) {
     extern s32 lbl_80414248[];
     s32 i;
     char *p;
-    SeqStr8 *b;
+    void *b;
     SeqStr8 buf;
+    SeqStr8 *q;
 
     i = 8;
     p = (char *)arg0 + 0xD4;
     fn_80102B5C(arg0);
+    q = &buf;
     M2C_FIELD(arg0, s32 **, 0x10) = lbl_80414248;
     do {
         SeqStr8_Init((SeqStr8 *)(p + 4));
         p += 0x14;
     } while (--i != -1);
     M2C_FIELD(arg0, s32 *, 0xD4) = 0;
-    b = SeqStr8_Init(&buf);
+    b = SeqStr_InitBuf(q, q->buf, 8);
     fn_800F68F0(b, 0, -1);
     fn_800F6A38((char *)arg0 + 0xD8, b);
     return arg0;
@@ -216,6 +277,47 @@ s32 fn_801984E0(s32 arg0, s32 arg1) {
 
 void fn_8019882C(void) {
     fn_800F1A60((s32)&lbl_80495D10, 2);
+}
+
+extern f32 lbl_803DB288;
+void fn_80198854(void *arg0, s32 arg1) {
+    s32 fn_8016CCE0(s32);
+    f32 *self = arg0;
+    char **p = (char **)arg1;
+    if (p == NULL) {
+        f32 z;
+        *(s32 *)self = 0;
+        z = lbl_803DB288;
+        self[9] = z;
+        self[1] = z;
+        self[2] = z;
+        self[3] = z;
+        self[4] = z;
+        self[5] = z;
+        self[6] = z;
+        self[7] = z;
+        self[8] = z;
+    } else {
+        f32 *m;
+        {
+            char *o = *p;
+            char *vt = *(char **)(o + 4);
+            *(s32 *)self = fn_8016CCE0((*(s32 (**)(void *))(vt + 0x32C))(o + *(s16 *)(vt + 0x328)));
+        }
+        {
+            char *vt = p[1];
+            m = (*(f32 *(**)(void *))(vt + 0x1FC))((char *)p + *(s16 *)(vt + 0x1F8));
+        }
+        self[1] = m[3];
+        self[2] = m[5];
+        self[3] = m[6];
+        self[4] = m[7];
+        self[5] = m[8];
+        self[6] = m[9];
+        self[7] = m[13];
+        self[8] = m[14];
+        self[9] = m[15];
+    }
 }
 
 void fn_80198940(f32 *self, s32 arg1) {
