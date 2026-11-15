@@ -18,8 +18,7 @@ static inline void Strip_MinMaxX(u8 *self, s32 i, f32 *min, f32 *max) {
     u32 j;
 
     for (j = 0; j < *(u32 *)(*(u8 **)(self + 0x14) + i * 0x34 + 0x18); j++) {
-        f32 v = *p;
-        p += 4;
+        f32 v = p[j * 4];
         if (v <= *min) {
             *min = v;
         }
@@ -400,19 +399,24 @@ s32 fn_80300ACC(u8 *self) {
 }
 
 void fn_80300B18(u8 *self, u8 *arg1) {
-    s32 *e = (s32 *)arg1;
-
-    if (e[8] != 0) {
-        e[5] = 0;
-        ((void (*)(u8 *, s32, s32))fn_803008DC)(self, e[8], 0);
-        ((void (*)(u8 *, s32, s32))fn_803008DC)(self, e[1], 0);
-        ((void (*)(u8 *, s32, s32))fn_803008DC)(self, e[2], 0);
-        ((void (*)(u8 *, s32, s32))fn_803008DC)(self, e[3], 0);
-        ((void (*)(u8 *, s32, s32))fn_803008DC)(self, e[4], 0);
-        ((void (*)(u8 *, s32, s32))fn_803008DC)(self, e[5], 1);
-        ((void (*)(u8 *, s32, s32))fn_803008DC)(self, e[0], 1);
-        e[4] = e[8] = e[5] = e[0] = e[1] = e[2] = e[3] = 0;
+    if (*(s32 *)(arg1 + 0x20) == 0) {
+        return;
     }
+    *(u8 *)(arg1 + 0x14) = 0;
+    ((void (*)(u8 *, s32, s32))fn_803008DC)(self, *(s32 *)(arg1 + 0x20), 0);
+    ((void (*)(u8 *, s32, s32))fn_803008DC)(self, *(s32 *)(arg1 + 0x4), 0);
+    ((void (*)(u8 *, s32, s32))fn_803008DC)(self, *(s32 *)(arg1 + 0x8), 0);
+    ((void (*)(u8 *, s32, s32))fn_803008DC)(self, *(s32 *)(arg1 + 0xC), 0);
+    ((void (*)(u8 *, s32, s32))fn_803008DC)(self, *(s32 *)(arg1 + 0x10), 0);
+    ((void (*)(u8 *, s32, s32))fn_803008DC)(self, *(s32 *)(arg1 + 0x14), 1);
+    ((void (*)(u8 *, s32, s32))fn_803008DC)(self, *(s32 *)(arg1 + 0x0), 1);
+    *(s32 *)(arg1 + 0x10) = 0;
+    *(s32 *)(arg1 + 0x20) = 0;
+    *(s32 *)(arg1 + 0x14) = 0;
+    *(s32 *)(arg1 + 0x0) = 0;
+    *(s32 *)(arg1 + 0x4) = 0;
+    *(s32 *)(arg1 + 0x8) = 0;
+    *(s32 *)(arg1 + 0xC) = 0;
 }
 
 void fn_80300BE8(u8 *self) {
@@ -536,6 +540,35 @@ s32 fn_80301170(u8 *self, u8 *buf, u8 *obj) {
     return buf - start;
 }
 
+s32 fn_80301230(u8 *self, u8 *buf, u8 *obj) {
+    extern u8 *fn_803008A4(u8 *, s32, const char *, s32, const char *);
+    extern void fn_802482F8(void *, void *, s32);
+    extern void fn_80251C4C(void *, s32);
+    extern const char lbl_803F172C[];
+    extern const char lbl_803F1798[];
+    u8 *start = buf;
+    u32 i;
+
+    if (*(s32 *)(self + 0x10) & 8) {
+        s32 off;
+        *(u8 **)(obj + 0x8) = fn_803008A4(self, *(s32 *)(obj + 0x18) * 4, lbl_803F172C, 0x6F0, lbl_803F1798);
+        off = 0;
+        for (i = 0; i < *(u32 *)(obj + 0x18); i++) {
+            u8 c[4];
+            fn_802482F8(c, buf, 3);
+            buf += 3;
+            c[3] = 0;
+            (*(u8 **)(obj + 0x8))[off] = c[0];
+            (*(u8 **)(obj + 0x8) + off)[1] = c[1];
+            (*(u8 **)(obj + 0x8) + off)[2] = c[2];
+            (*(u8 **)(obj + 0x8) + off)[3] = c[3];
+            off += 4;
+        }
+        fn_80251C4C(*(u8 **)(obj + 0x8), *(s32 *)(obj + 0x18) * 4);
+    }
+    return buf - start;
+}
+
 void fn_80302228(void) {
 
 }
@@ -623,23 +656,10 @@ void fn_803023D8(u8 *self) {
 }
 
 void fn_803040A4(u8 *self, s32 arg1, s32 arg2) {
-    f32 *min = (f32 *)arg1;
-    f32 *max = (f32 *)arg2;
     s32 i;
-    u32 j;
-    s16 *p;
 
     for (i = 0; i < ListCount(self + 0x14); i++) {
-        for (j = 0, p = *(s16 **)(*(u8 **)(self + 0x14) + i * 0x34); j < *(u32 *)(*(u8 **)(self + 0x14) + i * 0x34 + 0x18); j++) {
-            f32 v = *p;
-            p += 4;
-            if (v <= *min) {
-                *min = v;
-            }
-            if (v >= *max) {
-                *max = v;
-            }
-        }
+        Strip_MinMaxX(self, i, (f32 *)arg1, (f32 *)arg2);
     }
 }
 
@@ -782,7 +802,6 @@ void fn_803051DC(char *self, s32 arg1, s32 arg2) {
     extern f32 lbl_80454A54[];
     extern const f32 lbl_803F196C[];
     extern const f32 lbl_803F1970[];
-    f32 c[4];
     s32 idx;
     s32 flags;
     f32 s;
@@ -801,12 +820,11 @@ void fn_803051DC(char *self, s32 arg1, s32 arg2) {
         s = lbl_803F1970[0];
     }
     p = &lbl_80454A54[idx * 4];
-    c[0] = s * p[0];
-    c[1] = s * p[1];
-    c[2] = s * p[2];
-    c[3] = s * p[3];
-    vt = M2C_FIELD(self, char **, 0x44);
-    (*(void (**)(char *, s32, s32, f32 *, s32))(vt + 0x8C))(self + *(s16 *)(vt + 0x88), arg1, (flags & 8) == 0, c, arg2 == 0);
+    {
+        f32 c[4] = { s * p[0], s * p[1], s * p[2], s * p[3] };
+        vt = M2C_FIELD(self, char **, 0x44);
+        (*(void (**)(char *, s32, s32, f32 *, s32))(vt + 0x8C))(self + *(s16 *)(vt + 0x88), arg1, !(flags & 8), c, !arg2);
+    }
 }
 
 void fn_803052AC(void *self, s32 arg1) {
