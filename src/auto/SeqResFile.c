@@ -60,10 +60,6 @@ static inline void *SeqStr_InitBuf104(void *s, char *data) {
 
 s32 fn_80197E68(void *arg0, void *arg1, void *arg2, s32 arg3);
 
-static inline s32 SeqRes_Type(void *self, s32 i) {
-    return M2C_FIELD(self, s32 *, 0xD4 + i * 0x14);
-}
-
 extern s32 lbl_80495D10;
 extern void fn_800F1A60(s32, s32);
 void fn_80197AC8(void *arg0) {
@@ -157,21 +153,14 @@ s32 fn_801980C8(void *arg0, void *arg1) {
     void *fn_80113378(void *);
     extern s32 lbl_8040EE08[];
     extern s32 lbl_8040EE20[];
-    typedef struct {
-        s32 type;
-        char name[0x10];
-    } SeqEntry;
     s32 err = 0;
     s32 ret = -0xFA;
     s32 i;
     void *obj;
 
-    for (i = 0; ((SeqEntry *)((char *)arg0 + 0xD4))[i].type != 0; i++) {
+    for (i = 0; SeqRes_Type(arg0, i) != 0; i++) {
         obj = NULL;
-        switch (((SeqEntry *)((char *)arg0 + 0xD4))[i].type) {
-        case 0:
-            err = 1;
-            break;
+        switch (SeqRes_Type(arg0, i)) {
         case 2:
             obj = fn_80113378(fn_802D1FC8(0x154));
             break;
