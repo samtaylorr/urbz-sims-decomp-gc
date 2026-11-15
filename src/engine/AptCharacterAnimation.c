@@ -228,6 +228,27 @@ void fn_8028CFA0(void *arg0, void *arg1, char *arg2, s32 arg3) {
     }
 }
 
+void fn_8028D048(void *arg0, char *arg1, char *arg2, char *arg3, s32 arg4) {
+    AptAnimCmd *next;
+
+    next = (AptAnimCmd *)((s32)M2C_FIELD(arg0, AptAnimCmd **, 8) + 0x14);
+    if ((s32)next == M2C_FIELD(arg0, s32 *, 0) + M2C_FIELD(arg0, s32 *, 0x1290) * 0x14) {
+        next = M2C_FIELD(arg0, AptAnimCmd **, 0);
+    }
+    if ((s32)next != M2C_FIELD(arg0, s32 *, 4)) {
+        M2C_FIELD(arg0, AptAnimCmd **, 8)->type = 1;
+        M2C_FIELD(arg0, AptAnimCmd **, 8)->unk4 = arg4;
+        M2C_FIELD(arg0, AptAnimCmd **, 8)->unk8 = (s32)arg1;
+        (*(void (**)(void *))(M2C_FIELD((char *)M2C_FIELD(arg0, AptAnimCmd **, 8)->unk8, char **, 4) + 0xC))(
+            (char *)M2C_FIELD(arg0, AptAnimCmd **, 8)->unk8 + *(s16 *)(M2C_FIELD((char *)M2C_FIELD(arg0, AptAnimCmd **, 8)->unk8, char **, 4) + 8));
+        M2C_FIELD(arg0, AptAnimCmd **, 8)->unkC = arg2;
+        (*(void (**)(void *))(M2C_FIELD((char *)M2C_FIELD(arg0, AptAnimCmd **, 8)->unkC, char **, 4) + 0xC))(
+            (char *)M2C_FIELD(arg0, AptAnimCmd **, 8)->unkC + *(s16 *)(M2C_FIELD((char *)M2C_FIELD(arg0, AptAnimCmd **, 8)->unkC, char **, 4) + 8));
+        M2C_FIELD(arg0, AptAnimCmd **, 8)->obj = arg3;
+        M2C_FIELD(arg0, AptAnimCmd **, 8) = next;
+    }
+}
+
 void fn_8028D378(void *arg0) {
     s32 i;
 
@@ -304,6 +325,34 @@ s32 fn_8028D714(void *arg0, s32 arg1) {
         return base + i * 0x14;
     }
     return base + (i + cap) * 0x14;
+}
+
+s32 fn_8028D764(void *arg0) {
+    s32 fn_8028D6E0(void *);
+    s32 fn_8029F660(s32);
+    typedef struct {
+        s32 used;
+        u8 pad4[0x10];
+        s32 size;
+        u8 pad18[0x8];
+    } Entry;
+    s32 size;
+    s32 i;
+    s32 n;
+
+    size = fn_8028D6E0(arg0) * 2 + M2C_FIELD(arg0, s32 *, 0x10) + 0x202 + M2C_FIELD(arg0, s32 *, 0x818);
+    size += fn_8029F660(M2C_FIELD(arg0, s32 *, 0x122C)) + 0x280;
+    n = M2C_FIELD(arg0, s32 *, 0x1234);
+    for (i = 0; i < M2C_FIELD(arg0, s32 *, 0x1284); i++) {
+        if (M2C_FIELD(arg0, Entry **, 0x1230)[i].used == 0) {
+            break;
+        }
+        size += 1 + M2C_FIELD(arg0, Entry **, 0x1230)[i].size;
+        if (--n == 0) {
+            break;
+        }
+    }
+    return size;
 }
 
 void fn_8028DA5C(void) {
