@@ -403,6 +403,25 @@ void fn_80016C78(void) {
 
 }
 
+void fn_80016C7C(void *arg0) {
+    extern char lbl_803C2724[];
+    extern char lbl_803C2738[];
+    extern char lbl_803C2774[];
+    extern char lbl_803C2748[];
+    extern char lbl_803C2750[];
+    extern char lbl_803C2758[];
+    void fn_8000AA2C(s32, void *, s32, s32, s32, ...);
+
+    if (M2C_FIELD(arg0, s32 *, 0xF3C) == 0) {
+        fn_8000AA2C(M2C_FIELD(arg0, s32 *, 0xED4), lbl_803C2724, 0, 0, 1, lbl_803C2738);
+        fn_8000AA2C(M2C_FIELD(arg0, s32 *, 0xED4), lbl_803C2774, 0, 0, 1, lbl_803C2748);
+        fn_8000AA2C(M2C_FIELD(arg0, s32 *, 0xED4), lbl_803C2774, 0, 0, 1, lbl_803C2750);
+        fn_8000AA2C(M2C_FIELD(arg0, s32 *, 0xED4), lbl_803C2758, 0, 0, 0);
+        M2C_FIELD(arg0, s32 *, 0xF3C) = 1;
+    }
+    M2C_FIELD(arg0, s32 *, 0xF38) = 1;
+}
+
 void fn_80016D54(void *arg0) {
     extern char lbl_803C2724[];
     extern char lbl_803C2738[];
