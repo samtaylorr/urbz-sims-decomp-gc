@@ -23,6 +23,24 @@ static inline f32 *EVec3_At(EVec3 *v, s32 i) {
     return &(&v->x)[i];
 }
 
+static inline void EVec3_Add(EVec3 *out, EVec3 *a, EVec3 *b) {
+    out->x = a->x + b->x;
+    out->y = a->y + b->y;
+    out->z = a->z + b->z;
+}
+
+static inline void EVec3_Sub(EVec3 *out, EVec3 *a, EVec3 *b) {
+    out->x = a->x - b->x;
+    out->y = a->y - b->y;
+    out->z = a->z - b->z;
+}
+
+static inline void EVec3_Scale(EVec3 *out, EVec3 *a, f32 s) {
+    out->x = a->x * s;
+    out->y = a->y * s;
+    out->z = a->z * s;
+}
+
 static inline s32 ListCount(u8 *list) {
     return *(s32 *)(list + 4);
 }
@@ -206,6 +224,25 @@ void fn_802C4D24(EBox *box, EVec3 *pts, s32 n) {
     }
 }
 
+void fn_802C5070(EBox *box, f32 *out) {
+    extern f32 lbl_803F0084[];
+    extern f32 fn_8025FC40(EVec3 *);
+    EVec3 *max = &box->max;
+    EVec3 v;
+    EVec3 sum;
+    sum.x = box->min.x + max->x;
+    sum.y = box->min.y + max->y;
+    sum.z = box->min.z + max->z;
+    v.x = sum.x * lbl_803F0084[0];
+    v.y = sum.y * lbl_803F0084[0];
+    v.z = sum.z * lbl_803F0084[0];
+    *(EVec3 *)out = v;
+    v.x = out[0] - box->max.x;
+    v.y = out[1] - max->y;
+    v.z = out[2] - max->z;
+    out[3] = fn_8025FC40(&v);
+}
+
 void fn_802C5148(EBox *box, EVec3 *c, f32 r) {
     EVec3_Set(&box->min, c->x - r, c->y - r, c->z - r);
     EVec3_Set(&box->max, c->x + r, c->y + r, c->z + r);
@@ -381,6 +418,31 @@ char *fn_802C56E8(char *str) {
         }
     }
     return NULL;
+}
+
+void fn_802C57AC(void *self, const char *path) {
+    extern void *fn_802D0AB8(void);
+    void fn_802D1A00(void *, void *);
+    void fn_802C5504(const char *, char *, char *, char *, char *);
+    extern s32 fn_80248808(const char *s);
+    extern char *fn_80248784(char *dst, const char *src);
+    char dir[0x100];
+    char name[0x100];
+    char ext[0x100];
+    char drive[8];
+
+    fn_802C5504(path, drive, dir, name, ext);
+    if (fn_80248808(ext) != 0 && ext[0] == '.') {
+        fn_80248784(ext, ext + 1);
+    }
+    fn_802D1A00(fn_802D0AB8(), M2C_FIELD(self, void **, 0x18));
+    M2C_FIELD(self, char **, 0x18) = fn_802C56E8(drive);
+    fn_802D1A00(fn_802D0AB8(), M2C_FIELD(self, void **, 0x1C));
+    M2C_FIELD(self, char **, 0x1C) = fn_802C56E8(dir);
+    fn_802D1A00(fn_802D0AB8(), M2C_FIELD(self, void **, 0x20));
+    M2C_FIELD(self, char **, 0x20) = fn_802C56E8(name);
+    fn_802D1A00(fn_802D0AB8(), M2C_FIELD(self, void **, 0x24));
+    M2C_FIELD(self, char **, 0x24) = fn_802C56E8(ext);
 }
 
 void fn_802C5884(void *self, const char *fmt, ...) {
