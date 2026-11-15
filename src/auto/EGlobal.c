@@ -5,6 +5,28 @@ typedef struct EGlobalHandle {
     s32 value;
 } EGlobalHandle;
 
+typedef struct EGlobalEntry18 {
+    s32 id;
+    u8 pad[0x14];
+} EGlobalEntry18;
+
+typedef struct EGlobalEntry14 {
+    u8 pad[0x10];
+    s16 id;
+    u8 pad2[2];
+} EGlobalEntry14;
+
+typedef struct EGlobalList {
+    u8 pad0[4];
+    void *entries;
+    u8 pad8[4];
+    u32 count;
+} EGlobalList;
+
+static inline EGlobalList *EGlobal_ToList(void *p) {
+    return p != NULL ? (EGlobalList *)p : NULL;
+}
+
 extern void *fn_802D0AB8();
 extern void *fn_802D0B3C(void);
 extern void *fn_802D197C(void *, u32, s32);
