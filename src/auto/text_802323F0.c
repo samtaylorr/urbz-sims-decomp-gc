@@ -145,6 +145,56 @@ void fn_802326E4(void *arg0, s32 arg1) {
     }
 }
 
+void fn_80232790(void *arg0, s32 arg1) {
+    void fn_80233138(u8 *);
+    void fn_80232F2C(u8 *);
+    void fn_802331F4(u8 *);
+    void fn_8023334C(u8 *);
+    void fn_802333E4(u8 *);
+    M2C_UNK fn_80234E50(void *, M2C_UNK);
+    s32 var_r9;
+
+    switch (arg1) {
+    case 0:
+        var_r9 = 1;
+        if ((s32) M2C_FIELD(arg0, s32 *, 0x60) == 0) {
+            var_r9 = 0;
+        }
+        if (var_r9 != 0) {
+            fn_80233138(arg0);
+        } else {
+            fn_80232F2C(arg0);
+        }
+        break;
+    case 1:
+        var_r9 = 1;
+        if ((s32) M2C_FIELD(arg0, s32 *, 0x60) == 0) {
+            var_r9 = 0;
+        }
+        if (var_r9 != 0) {
+            fn_802331F4(arg0);
+        }
+        break;
+    case 4:
+        var_r9 = 1;
+        if ((s32) M2C_FIELD(arg0, s32 *, 0x60) == 0) {
+            var_r9 = 0;
+        }
+        if (var_r9 != 0) {
+            fn_8023334C(arg0);
+        } else {
+            fn_802333E4(arg0);
+        }
+        break;
+    case 5:
+        fn_80234E50(arg0 + 0x60, 1);
+        break;
+    case 6:
+        fn_80234E50(arg0 + 0x60, 0);
+        break;
+    }
+}
+
 void fn_80232878(void *arg0, s32 arg1, f32 farg0) {
     switch (arg1) {                                 /* irregular */
     case 7:
