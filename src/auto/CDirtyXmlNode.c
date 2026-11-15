@@ -278,7 +278,7 @@ typedef struct { char *start; char *finish; VecProxy eos; } PtrVec;
 
 static inline void VecProxy_Swap(VecProxy *a, VecProxy *b) {
     VecProxy t;
-    t.data = a->data;
+    VecProxy_Copy(&t, a);
     *a = *b;
     *b = t;
 }
@@ -288,25 +288,18 @@ void fn_800C2838(s32 *self) {
     extern void fn_80338184(void *, s32);
     extern void fn_802D20E8(void *);
     extern void fn_803997AC(void *, u32);
-    struct Proxy { char alloc; char *data; };
-    struct Vec { char *start; char *finish; struct Proxy eos; };
-    struct Vec tmp;
-    struct Vec *v;
-    struct Vec *pt;
-    struct Proxy *pe;
-    struct Proxy *ve;
+    PtrVec tmp;
+    PtrVec *v;
+    PtrVec *pt;
     char *a;
     char *b;
-    struct Proxy pp;
     char *p;
 
     pt = &tmp;
-    pe = &pt->eos;
     tmp.start = 0;
     pt->finish = 0;
-    pe->data = 0;
-    v = (struct Vec *)(self + 3);
-    ve = &v->eos;
+    pt->eos.data = 0;
+    v = (PtrVec *)(self + 3);
     a = v->start;
     b = v->finish;
     v->start = pt->start;
@@ -314,17 +307,15 @@ void fn_800C2838(s32 *self) {
     pt->start = a;
     pt->finish = b;
     self[0] = 0;
-    pp.data = ve->data;
-    *ve = *pe;
-    *pe = pp;
+    VecProxy_Swap(&v->eos, &pt->eos);
     if (self[1] != 0) {
         fn_80338184(lbl_8045B58C, self[1]);
+        self[1] = 0;
     }
-    self[1] = 0;
     for (p = pt->start; p != pt->finish; p += 8) {
     }
     if (pt->start != 0) {
-        u32 size = (u32)(pe->data - pt->start) & ~7;
+        u32 size = (u32)(pt->eos.data - pt->start) & ~7;
         if (size > 0x80) {
             fn_802D20E8(pt->start);
         } else {
