@@ -1419,10 +1419,10 @@ void fn_802D56C4(s32 *arg0, u16 *arg1) {
             fn_802482F8(buf, arg1, size);
             *arg0 = (s32)buf;
         } else {
-            fn_802D5238((M2C_UNK **)arg0);
+            fn_802D5244((M2C_UNK **)arg0);
         }
     } else {
-        fn_802D5244((M2C_UNK **)arg0);
+        fn_802D5238((M2C_UNK **)arg0);
     }
 }
 
