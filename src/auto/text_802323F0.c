@@ -63,6 +63,14 @@ static inline Event1A8C *Event1A8C_Ctor(Event1A8C *e, void *vtbl) {
     e->unkC = 0;
     return e;
 }
+
+static inline void Event1A8C_Send(Event1A8C *e, void *vtbl, Callback1A8 *cb) {
+    e->ev.vtbl = vtbl;
+    e->unkC = 0;
+    e->ev.unk0 = 0;
+    e->ev.unk4 = cb->data;
+    cb->fn(&e->ev);
+}
 typedef struct { s16 h[3]; } Elem6;
 typedef struct { Elem6 *begin; Elem6 *end; } VecElem6;
 
@@ -366,6 +374,43 @@ void fn_80232E74(u8 *arg0, Struct1A8_7 *arg1) {
     }
 }
 
+void fn_80232F2C(void *arg0) {
+    typedef struct {
+        void **first;
+        void **last;
+        s32 owns;
+    } List3;
+    extern void *lbl_8041FA38;
+    extern char *lbl_8041F770;
+    void fn_802CB8D4(void *);
+    void fn_800643BC(void *, s32, void *);
+    void *fn_80065AD4(void *);
+    void fn_801FF614(void *, void *);
+    void fn_80233024();
+    List3 list;
+    List3 *lp;
+    void *obj;
+    void *vt;
+
+    list.last = 0;
+    list.first = 0;
+    list.owns = 1;
+    fn_802CB8D4(&list);
+    lp = &list;
+    fn_800643BC(M2C_FIELD(lbl_8041FA38, void **, 4), M2C_FIELD(arg0, s32 *, 0), &list);
+    if (list.first != 0 && list.first == lp->last) {
+        obj = fn_80065AD4(*list.first);
+        vt = M2C_FIELD(obj, void **, 4);
+        fn_80233024(arg0,
+            M2C_FIELD(vt, void *(**)(void *), 0x2EC)((char *)obj + M2C_FIELD(vt, s16 *, 0x2E8)));
+    } else if (list.first != 0) {
+        vt = M2C_FIELD(arg0, void **, 0x58);
+        M2C_FIELD(vt, void (**)(void *), 0x74)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x70));
+        fn_801FF614(M2C_FIELD(lbl_8041F770 + 0x12C, void **, M2C_FIELD(arg0, s32 *, 0) * 4), lp);
+    }
+    fn_802CB8D4(lp);
+}
+
 void fn_80233024(u8 *arg0) {
     void fn_80232C74(u8 *, u8 *);
     s32 fn_80233868(void *);
@@ -502,10 +547,9 @@ void fn_80233468(u8 *arg0) {
     s32 fn_80234AF4(void *);
     extern s32 lbl_80417E58[];
     extern s32 lbl_80417CF0[];
-    struct {
-        Event1A8 ev;
-        s32 unkC;
-    } tmp, *p;
+    Event1A8C tmp;
+    Event1A8C *p;
+    Callback1A8 *cb;
     u8 *obj = *(u8 **)(arg0 + 0x60);
 
     if (fn_80234AF4(arg0 + 0x60) == 1) {
@@ -513,20 +557,14 @@ void fn_80233468(u8 *arg0) {
             u8 *vt = *(u8 **)(obj + 4);
             (*(void (**)(void *, s32))(vt + 0x42C))(obj + *(s16 *)(vt + 0x428), 1);
         }
-        p = &tmp;
-        p->ev.vtbl = lbl_80417E58;
-        p->unkC = 0;
-        p->ev.unk0 = 0;
-        {
-            Callback1A8 *cb = (Callback1A8 *)(arg0 + 0x1A8);
-            Event1A8 *ev = &p->ev;
-            ev->unk4 = cb->data;
-            cb->fn(ev);
-            if (tmp.unkC != 0) {
-                fn_80232E74(arg0, (Struct1A8_7 *)cb);
-            } else {
-                fn_80232D2C(arg0, 1);
-            }
+        p = Event1A8C_Ctor(&tmp, lbl_80417E58);
+        tmp.ev.unk0 = 0;
+        cb = (Callback1A8 *)(arg0 + 0x1A8);
+        Callback1A8_Call(cb, &p->ev);
+        if (tmp.unkC != 0) {
+            fn_80232E74(arg0, (Struct1A8_7 *)cb);
+        } else {
+            fn_80232D2C(arg0, 1);
         }
         p->ev.vtbl = lbl_80417CF0;
     }
@@ -878,6 +916,34 @@ void fn_802357F0(void *arg0) {
     M2C_FIELD(arg0, void **, 0x58) = lbl_80417DB0;
     M2C_FIELD(arg0, void **, 0x1B8) = lbl_80417770;
     ((void (*)(void *))fn_80232460)(arg0);
+}
+
+void fn_80235828(u8 *arg0) {
+    void fn_8022315C(void *);
+    void fn_80089650(void *);
+    extern u8 lbl_80417FD8[];
+    extern f32 lbl_803EB41C[];
+    extern f32 lbl_803EB420[];
+    f32 zero;
+    Vec3f t;
+
+    fn_8022315C(arg0);
+    zero = lbl_803EB41C[0];
+    M2C_FIELD(arg0, void **, 0x58) = lbl_80417FD8;
+    M2C_FIELD(arg0, f32 *, 0x60) = zero;
+    M2C_FIELD(arg0, s32 *, 0x64) = 0;
+    M2C_FIELD(arg0, s32 *, 0x68) = 0;
+    M2C_FIELD(arg0, s32 *, 0x6C) = 0;
+    M2C_FIELD(arg0, s32 *, 0x70) = 0;
+    fn_80089650(arg0 + 0x78);
+    Vec4f_Set((Vec4f *)(arg0 + 0xA8), zero, zero, zero, lbl_803EB420[0]);
+    Vec3f_Set(&t, zero, zero, zero);
+    *(Vec3f *)(arg0 + 0xC4) = t;
+    *(Vec3f *)(arg0 + 0xB8) = *(Vec3f *)(arg0 + 0xC4);
+    Vec3f_Set((Vec3f *)(arg0 + 0xD0), zero, zero, zero);
+    Vec3f_Set((Vec3f *)(arg0 + 0xDC), zero, zero, zero);
+    M2C_FIELD(arg0, s32 *, 0x100) = 0;
+    M2C_FIELD(arg0, s32 *, 0xFC) = 0;
 }
 
 void fn_80235914(void *arg0, s32 arg1) {
