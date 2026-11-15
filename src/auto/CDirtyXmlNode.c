@@ -28,6 +28,39 @@ s32 fn_800BEF48(s32 arg0, s32 arg1) {
     return arg0 + sp8;
 }
 
+void *fn_800BF3FC(s32 size) {
+    extern void **lbl_80433F78[];
+    extern char lbl_80432580[];
+    void *heap;
+    void *p;
+
+    if ((u32)size <= 0x40) {
+        void **pool = lbl_80433F78[(u32)(size - 1) >> 3];
+        void *q = pool[1];
+        if (q != NULL) {
+            pool[1] = *(void **)q;
+        }
+        p = q;
+        if (p != NULL) {
+            return p;
+        }
+    }
+    p = fn_802DBBCC(lbl_80432580, size, 0);
+    if (p == NULL) {
+        heap = ((void *(*)(void))fn_802D0AB8)();
+        if (size != 0) {
+            p = fn_802D197C(heap, size, 4);
+            if (p == NULL) {
+                p = fn_802DBBCC(heap, size, 0);
+                if (p == NULL && heap == ((void *(*)(void))fn_802D0AB8)()) {
+                    p = fn_802DBBCC(fn_802D0B3C(), size, 0);
+                }
+            }
+        }
+    }
+    return p;
+}
+
 void fn_800BF5E0(void) {
 
 }
@@ -238,6 +271,49 @@ void fn_800C243C(void) {
 
 void fn_800C2834(void) {
 
+}
+
+void fn_800C2838(s32 *self) {
+    extern char lbl_8045B58C[];
+    extern void fn_80338184(void *, s32);
+    extern void fn_802D20E8(void *);
+    extern void fn_803997AC(void *, u32);
+    s32 tmp[4];
+    s32 t2[2];
+    s32 *v;
+    s32 t;
+    char *p;
+
+    tmp[0] = 0;
+    tmp[1] = 0;
+    tmp[3] = 0;
+    v = self + 3;
+    t = v[0];
+    v[0] = tmp[0];
+    tmp[0] = t;
+    t = v[1];
+    v[1] = tmp[1];
+    tmp[1] = t;
+    self[0] = 0;
+    t2[1] = v[3];
+    v[2] = tmp[2];
+    v[3] = tmp[3];
+    tmp[2] = t2[0];
+    tmp[3] = t2[1];
+    if (self[1] != 0) {
+        fn_80338184(lbl_8045B58C, self[1]);
+    }
+    self[1] = 0;
+    for (p = (char *)tmp[0]; p != (char *)tmp[1]; p += 8) {
+    }
+    if (tmp[0] != 0) {
+        u32 size = (u32)(tmp[3] - tmp[0]) & ~7;
+        if (size > 0x80) {
+            fn_802D20E8((void *)tmp[0]);
+        } else {
+            fn_803997AC((void *)tmp[0], size);
+        }
+    }
 }
 
 void fn_800C292C(void) {
