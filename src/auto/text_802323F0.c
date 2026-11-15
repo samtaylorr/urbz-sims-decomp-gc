@@ -69,6 +69,14 @@ static inline void Vec3f_Assign(Vec3f *d, const Vec3f *s) {
     *d = *s;
 }
 
+typedef struct { Vec3f min; Vec3f max; } Box3f;
+
+static inline void Box3f_Init(Box3f *b, f32 c) {
+    Vec3f t = { c, c, c };
+    b->max = t;
+    b->min = b->max;
+}
+
 static inline Vec3f Vec3f_Make(f32 x, f32 y, f32 z) {
     Vec3f v;
     v.x = x;
@@ -407,25 +415,25 @@ void fn_80232F2C(void *arg0) {
     void fn_801FF614(void *, void *);
     void fn_80233024();
     PtrList list;
-    PtrList *lp;
+    PtrList *q;
     void *obj;
     void *vt;
     void **arr;
 
-    lp = PtrList_Init(&list);
+    q = PtrList_Init(&list);
     fn_800643BC(M2C_FIELD(lbl_8041FA38[0], void **, 4), M2C_FIELD(arg0, s32 *, 0), &list);
-    if (list.first != 0 && list.first == lp->last) {
+    if (list.first != 0 && list.first == q->last) {
         obj = fn_80065AD4(*list.first);
         vt = M2C_FIELD(obj, void **, 4);
-        fn_80233024(arg0,
+        ((void (*)(void *, void *))fn_80233024)(arg0,
             M2C_FIELD(vt, void *(**)(void *), 0x2EC)((char *)obj + M2C_FIELD(vt, s16 *, 0x2E8)));
-    } else if (list.first != 0) {
+    } else if (q->first != 0) {
         vt = M2C_FIELD(arg0, void **, 0x58);
         M2C_FIELD(vt, void (**)(void *), 0x74)((char *)arg0 + M2C_FIELD(vt, s16 *, 0x70));
         arr = (void **)(lbl_8041F770[0] + 0x12C);
-        fn_801FF614(arr[M2C_FIELD(arg0, s32 *, 0)], lp);
+        fn_801FF614(arr[M2C_FIELD(arg0, s32 *, 0)], q);
     }
-    fn_802CB8D4(lp);
+    fn_802CB8D4(q);
 }
 
 void fn_80233024(u8 *arg0) {
@@ -943,7 +951,6 @@ void *fn_80235828(u8 *arg0) {
     extern f32 lbl_803EB41C[];
     extern f32 lbl_803EB420[];
     f32 zero;
-    Vec3f t;
 
     fn_8022315C(arg0);
     zero = lbl_803EB41C[0];
@@ -955,11 +962,11 @@ void *fn_80235828(u8 *arg0) {
     M2C_FIELD(arg0, s32 *, 0x70) = 0;
     fn_80089650(arg0 + 0x78);
     Vec4f_Set((Vec4f *)(arg0 + 0xA8), zero, zero, zero, lbl_803EB420[0]);
-    t.x = zero;
-    t.y = zero;
-    t.z = zero;
-    Vec3f_Assign((Vec3f *)(arg0 + 0xC4), &t);
-    Vec3f_Assign((Vec3f *)(arg0 + 0xB8), (Vec3f *)(arg0 + 0xC4));
+    {
+        Vec3f t = { zero, zero, zero };
+        *(Vec3f *)(arg0 + 0xC4) = t;
+        *(Vec3f *)(arg0 + 0xB8) = *(Vec3f *)(arg0 + 0xC4);
+    }
     Vec3f_Set((Vec3f *)(arg0 + 0xD0), zero, zero, zero);
     Vec3f_Set((Vec3f *)(arg0 + 0xDC), zero, zero, zero);
     M2C_FIELD(arg0, s32 *, 0xFC) = 0;
