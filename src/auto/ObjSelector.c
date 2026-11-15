@@ -751,6 +751,35 @@ s32 fn_8016D538(void) {
     return count > 0;
 }
 
+s32 fn_8016D620(void) {
+    s32 count = 0;
+    char *obj = fn_8016DBF0();
+    char *vt;
+    s32 i;
+    s32 n;
+
+    if (obj != NULL) {
+        vt = *(char **)obj;
+        n = M2C_FIELD(vt, s32 (**)(void *), 0x74)(obj + M2C_FIELD(vt, s16 *, 0x70));
+        for (i = 0; i < n; i++) {
+            char *item;
+            vt = *(char **)obj;
+            item = M2C_FIELD(vt, char *(**)(void *, s32), 0x7C)(obj + M2C_FIELD(vt, s16 *, 0x78), i);
+            if (item != NULL) {
+                vt = *(char **)item;
+                if (M2C_FIELD(vt, s32 (**)(void *), 0xCC)(item + M2C_FIELD(vt, s16 *, 0xC8)) == 0) {
+                    count++;
+                    vt = *(char **)item;
+                    if (M2C_FIELD(vt, s32 (**)(void *), 0x8C)(item + M2C_FIELD(vt, s16 *, 0x88)) != 0) {
+                        return 0;
+                    }
+                }
+            }
+        }
+    }
+    return count > 0;
+}
+
 void *fn_8016D954(char *self) {
     if (*(char **)(self + 0x64) == NULL) {
         char *obj = ((char *(*)(char *))fn_8016C114)(self);
