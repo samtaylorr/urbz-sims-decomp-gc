@@ -19,6 +19,32 @@ typedef struct {
     u8 padE[0x1C - 0xE];
 } HouseReconEntry;
 
+void fn_8004FEF4(u8 **arg0, void *stream) {
+    extern void fn_8018D6D8(void *, s32 *);
+    extern void fn_8018D1E8(void *);
+    extern void fn_8018D72C(void *, void *, s32);
+    void *fn_8004FFDC(u8 **, s32);
+    struct Ent { s16 key; void *val; };
+    struct Ent *base = *(struct Ent **)arg0;
+    s32 *count = (s32 *)((u8 *)base + 0x8000);
+    s32 ok = 1;
+    s16 key;
+    s16 id;
+    fn_8018D6D8(stream, &ok);
+    if (ok) {
+        fn_8018D1E8(stream);
+    }
+    fn_8018D72C(stream, &key, 1);
+    *count = 0;
+    while (key != 0) {
+        fn_8018D72C(stream, &id, 1);
+        base[*count].val = fn_8004FFDC(arg0, id);
+        base[*count].key = key;
+        (*count)++;
+        fn_8018D72C(stream, &key, 1);
+    }
+}
+
 void *fn_8004FFDC(u8 **arg0, s32 arg1) {
     u8 *base = *arg0;
     s32 *count = (s32 *)(base + 0x16004);
