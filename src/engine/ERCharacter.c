@@ -24,20 +24,36 @@ s32 fn_803173E8(u8 *p, s32 n) {
 
 s32 fn_80317478(const char *a, const char *b) {
     extern const u8 lbl_803EBA39[];
-#define TOLOWER(c) ({ int __x = (c); (__x[lbl_803EBA39] & 1) ? __x + 0x20 : __x; })
     s32 c;
+    s32 ca;
+    s32 cb;
     s32 d;
 
     c = *a;
-    d = TOLOWER(c) - TOLOWER(*b);
+    ca = c;
+    if (c[lbl_803EBA39] & 1) {
+        ca = c + 0x20;
+    }
+    cb = *b;
+    if (cb[lbl_803EBA39] & 1) {
+        cb += 0x20;
+    }
+    d = ca - cb;
     while (d == 0 && c != 0) {
         a++;
         b++;
         c = *a;
-        d = TOLOWER(c) - TOLOWER(*b);
+        ca = c;
+        if (c[lbl_803EBA39] & 1) {
+            ca = c + 0x20;
+        }
+        cb = *b;
+        if (cb[lbl_803EBA39] & 1) {
+            cb += 0x20;
+        }
+        d = ca - cb;
     }
     return d;
-#undef TOLOWER
 }
 
 s32 fn_80317514(void *arg0) {
@@ -79,7 +95,7 @@ s32 fn_80317598(u8 *arg0) {
 }
 
 s32 fn_80317724(s32 arg0) {
-    void fn_80317624(s32, s32 *, s32);
+    s32 fn_80317624(s32, s32 *, s32);
     s32 result = 0;
     fn_80317624(arg0, &result, 0);
     return result;
