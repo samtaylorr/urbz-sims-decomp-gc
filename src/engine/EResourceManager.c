@@ -140,7 +140,10 @@ void fn_80336194(char *self) {
     void fn_802D39E4(s32 *);
     void fn_802D3928(s32 *, s32, s32);
     void fn_802D3D48(void *);
+    register s32 *p asm("r3");
     s32 str;
+    s32 b;
+    s32 a;
     char *name = self + 0x58;
 
     fn_802D3CE4(name, *(s32 *)(self + 0x54));
@@ -151,17 +154,15 @@ void fn_80336194(char *self) {
     }
     fn_802D39E4(&str);
     fn_802D3CE4(&str, (s32)lbl_803F3A2C);
-    {
-        s32 a;
-        fn_802D3928(&a, str, *(s32 *)(self + 0x58));
-        {
-            s32 b;
-            fn_802D3928(&b, a, (s32)lbl_803F3A34);
-            fn_802D3CE4(name, b);
-            fn_802D39F0(&b, b);
-        }
-        fn_802D39F0(&a, a);
-    }
+    p = &a;
+    fn_802D3928(p, str, *(s32 *)(self + 0x58));
+    p = &b;
+    fn_802D3928(p, a, (s32)lbl_803F3A34);
+    fn_802D3CE4(name, b);
+    p = &b;
+    fn_802D39F0(p, b);
+    p = &a;
+    fn_802D39F0(p, a);
     fn_802D3D48(name);
     fn_802D39F0(&str, str);
 }
@@ -299,6 +300,11 @@ static inline void *ERM_AllocAlignedFrom(void *heap, u32 n) {
         }
     }
     return p;
+}
+
+static inline void *ERM_AllocAligned(u32 *psize) {
+    void *heap = fn_802D0AB8();
+    return ERM_AllocAlignedFrom(heap, *psize);
 }
 
 void fn_80336CBC(char *self) {
