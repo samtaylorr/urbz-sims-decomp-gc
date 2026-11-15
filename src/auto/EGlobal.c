@@ -147,6 +147,28 @@ s32 fn_80049BFC(void) {
     return 0x67F664FB;
 }
 
+s32 fn_80049C08(char *self, s32 idx, s32 val) {
+    s32 fn_80117474(char *);
+    s32 ret;
+    char *a;
+    char *b;
+
+    if (idx <= 1) {
+        char *o = (*(char *(*)[2])(self + 0xD8))[idx];
+        if (o == NULL) {
+            return 0;
+        }
+        return fn_80117474(({ char *v = *(char **)(o + 4); (*(char *(**)(char *))(v + 0xBC))(o + *(s16 *)(v + 0xB8)); })) == val;
+    }
+    ret = 0;
+    a = ({ char *o = *(char **)(self + 0xD8); char *v = *(char **)(o + 4); (*(char *(**)(char *))(v + 0xBC))(o + *(s16 *)(v + 0xB8)); });
+    b = ({ char *o = *(char **)(self + 0xDC); char *v = *(char **)(o + 4); (*(char *(**)(char *))(v + 0xBC))(o + *(s16 *)(v + 0xB8)); });
+    if (fn_80117474(a) == val || (*(char **)(self + 0xDC) != NULL && fn_80117474(b) == val)) {
+        ret = 1;
+    }
+    return ret;
+}
+
 void fn_8004A01C(void *arg0) {
     extern void *lbl_8049668C;
     extern void *fn_802D1FC8(s32);
@@ -558,6 +580,47 @@ EGlobalHandle fn_8004C168(void *arg1, s32 arg2) {
         }
     }
     return lbl_80495804;
+}
+
+void fn_8004C3F0(void *self, void *str) {
+    extern s32 fn_800F4878(void *);
+    extern u16 *fn_800F31F4(void *, s32);
+    extern u16 *fn_800F3304(void *);
+    extern void *fn_802D2058(u32);
+    extern void fn_800F1B80(void *, u16 *);
+    extern void fn_802D211C(void *);
+    char tmp[64];
+    u16 *src;
+    u16 *s;
+    u16 *buf;
+    u16 *d;
+    u32 i;
+    char c;
+
+    if (fn_800F4878(str) != 0 && *fn_800F31F4(str, 0) == 0x23) {
+        i = 0;
+        src = fn_800F3304(str);
+        s = src + 1;
+        buf = fn_802D2058((fn_800F4878(str) + 1) * 2);
+        d = buf;
+        *d = *s;
+        c = ((char *)s)[1];
+        tmp[i] = c;
+        while (c != 0) {
+            i++;
+            s++;
+            if (i > 0x3F) {
+                break;
+            }
+            *++d = *s;
+            c = ((char *)s)[1];
+            tmp[i] = c;
+        }
+        fn_800F1B80(str, buf);
+        if (buf != NULL) {
+            fn_802D211C(buf);
+        }
+    }
 }
 
 void fn_8004C614(void) {
@@ -995,9 +1058,6 @@ void fn_8004E64C(char *self) {
     char *obj = lbl_80496648;
     char *a;
     char *b;
-    char *e;
-    char *p;
-    s32 r;
 
     if (obj == NULL) {
         return;
@@ -1015,19 +1075,17 @@ void fn_8004E64C(char *self) {
     {
         char *o = *(char **)b;
         char *vt = M2C_FIELD(o, char **, 4);
-        e = *(char **)obj + 0x38;
-        p = obj + *(s16 *)e;
-        r = M2C_FIELD(vt, s32 (**)(void *), 0x2EC)(o + M2C_FIELD(vt, s16 *, 0x2E8));
+        char *e = *(char **)obj + 0x38;
+        M2C_FIELD(e, void (**)(void *, s32, s32), 4)(obj + *(s16 *)e, 3,
+            M2C_FIELD(vt, s32 (**)(void *), 0x2EC)(o + M2C_FIELD(vt, s16 *, 0x2E8)));
     }
-    M2C_FIELD(e, void (**)(void *, s32, s32), 4)(p, 3, r);
     {
         char *o = *M2C_FIELD(self, char ***, 0xDC);
         char *vt = M2C_FIELD(o, char **, 4);
-        e = *(char **)obj + 0x38;
-        p = obj + *(s16 *)e;
-        r = M2C_FIELD(vt, s32 (**)(void *), 0x2EC)(o + M2C_FIELD(vt, s16 *, 0x2E8));
+        char *e = *(char **)obj + 0x38;
+        M2C_FIELD(e, void (**)(void *, s32, s32), 4)(obj + *(s16 *)e, 0x20,
+            M2C_FIELD(vt, s32 (**)(void *), 0x2EC)(o + M2C_FIELD(vt, s16 *, 0x2E8)));
     }
-    M2C_FIELD(e, void (**)(void *, s32, s32), 4)(p, 0x20, r);
 }
 
 s32 fn_8004E72C(void *arg0) {
@@ -1042,14 +1100,14 @@ s32 fn_8004E73C(void *arg0, s32 arg1) {
     extern void *lbl_8049665C;
     void *temp_r9;
     s32 result;
-    s32 idx;
+    EGlobalHandle h;
 
     result = 0;
-    idx = 0;
+    h.value = 0;
     temp_r9 = *(void **)lbl_8049665C;
     if (((void *(*)(void *))M2C_FIELD(temp_r9, void **, 0x1AC))((char *)lbl_8049665C + M2C_FIELD(temp_r9, s16 *, 0x1A8)) != NULL) {
         temp_r9 = *(void **)lbl_8049665C;
-        if (EGlobal_FindValue(((void *(*)(void *))M2C_FIELD(temp_r9, void **, 0x1AC))((char *)lbl_8049665C + M2C_FIELD(temp_r9, s16 *, 0x1A8)), arg1, &result, &idx)) {
+        if (EGlobal_FindValue(((void *(*)(void *))M2C_FIELD(temp_r9, void **, 0x1AC))((char *)lbl_8049665C + M2C_FIELD(temp_r9, s16 *, 0x1A8)), arg1, &result, &h)) {
             return result;
         }
     }
