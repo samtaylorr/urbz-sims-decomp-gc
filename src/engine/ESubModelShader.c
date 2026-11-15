@@ -13,6 +13,22 @@ static inline s32 ListCount(u8 *list) {
     return *(s32 *)(list + 4);
 }
 
+static inline void Strip_MinMaxX(u8 *self, s32 i, f32 *min, f32 *max) {
+    s16 *p = *(s16 **)(*(u8 **)(self + 0x14) + i * 0x34);
+    u32 j;
+
+    for (j = 0; j < *(u32 *)(*(u8 **)(self + 0x14) + i * 0x34 + 0x18); j++) {
+        f32 v = *p;
+        p += 4;
+        if (v <= *min) {
+            *min = v;
+        }
+        if (v >= *max) {
+            *max = v;
+        }
+    }
+}
+
 void *fn_802FFD98(void *arg0) {
     M2C_UNK fn_803BAD8C();
     fn_803BAD8C();
@@ -611,10 +627,10 @@ void fn_803040A4(u8 *self, s32 arg1, s32 arg2) {
     f32 *max = (f32 *)arg2;
     s32 i;
     u32 j;
+    s16 *p;
 
     for (i = 0; i < ListCount(self + 0x14); i++) {
-        s16 *p = *(s16 **)(*(u8 **)(self + 0x14) + i * 0x34);
-        for (j = 0; j < *(u32 *)(*(u8 **)(self + 0x14) + i * 0x34 + 0x18); j++) {
+        for (j = 0, p = *(s16 **)(*(u8 **)(self + 0x14) + i * 0x34); j < *(u32 *)(*(u8 **)(self + 0x14) + i * 0x34 + 0x18); j++) {
             f32 v = *p;
             p += 4;
             if (v <= *min) {
@@ -768,17 +784,17 @@ void fn_803051DC(char *self, s32 arg1, s32 arg2) {
     extern const f32 lbl_803F1970[];
     f32 c[4];
     s32 idx;
-    u32 flags;
+    s32 flags;
     f32 s;
     f32 *p;
     char *vt;
 
-    if (M2C_FIELD(self, u32 *, 0x18) & 8) {
+    if (M2C_FIELD(self, s32 *, 0x18) & 8) {
         idx = M2C_FIELD(self, s32 *, 0x50);
     } else {
         idx = M2C_FIELD(self, s32 *, 0x54);
     }
-    flags = M2C_FIELD(self, u32 *, 0x18);
+    flags = M2C_FIELD(self, s32 *, 0x18);
     if (flags & 4) {
         s = lbl_803F196C[0];
     } else {
@@ -790,7 +806,7 @@ void fn_803051DC(char *self, s32 arg1, s32 arg2) {
     c[2] = s * p[2];
     c[3] = s * p[3];
     vt = M2C_FIELD(self, char **, 0x44);
-    (*(void (**)(char *, s32, s32, f32 *, s32))(vt + 0x8C))(self + *(s16 *)(vt + 0x88), arg1, !(flags & 8), c, arg2 == 0);
+    (*(void (**)(char *, s32, s32, f32 *, s32))(vt + 0x8C))(self + *(s16 *)(vt + 0x88), arg1, (flags & 8) == 0, c, arg2 == 0);
 }
 
 void fn_803052AC(void *self, s32 arg1) {
