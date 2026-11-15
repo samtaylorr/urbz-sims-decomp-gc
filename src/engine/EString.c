@@ -1334,8 +1334,8 @@ s32 fn_802D52A4(s32 *arg0, s32 arg1, s32 arg2) {
     }
     pos[0] = 0;
     len = fn_802D5200((u16 *)*arg0);
-    fn_802D5238((void *)str);
     n = 0;
+    fn_802D5238((void *)str);
     do {
         fn_802D55A4(tok, arg0, pos, len, arg1);
         n++;
@@ -1796,21 +1796,24 @@ s32 fn_802D6108(u16 **arg0, u16 *arg1) {
 s32 fn_802D61C4(s32 *arg0, u16 *arg1, u16 *arg2) {
     s32 fn_802D50BC(s32, s32, s32);
     void fn_802D5254(s32 *, s32);
+    register s32 *self asm("r28") = arg0;
+    register u16 *find asm("r27") = arg1;
+    register u16 *repl asm("r26") = arg2;
     s32 s[5];
     register s32 *pa asm("r29");
     register s32 *pc asm("r30");
     s32 idx;
 
-    idx = fn_802D6108((u16 **)arg0, arg1);
+    idx = fn_802D6108((u16 **)self, find);
     if (idx == -1) {
         return 0;
     }
     pa = &s[4];
-    fn_802D5D08(pa, arg0, idx);
+    fn_802D5D08(pa, self, idx);
     pc = &s[0];
-    fn_802D50BC((s32)&s[2], s[4], (s32)arg2);
-    fn_802D50BC((s32)&s[0], s[2], (idx + fn_802D5200(arg1)) * 2 + *arg0);
-    fn_802D57BC(arg0, (u16 *)s[0]);
+    fn_802D50BC((s32)&s[2], s[4], (s32)repl);
+    fn_802D50BC((s32)&s[0], s[2], (idx + fn_802D5200(find)) * 2 + *self);
+    fn_802D57BC(self, (u16 *)s[0]);
     fn_802D5254(pc, s[0]);
     fn_802D5254(&s[2], s[2]);
     fn_802D5254(pa, s[4]);
