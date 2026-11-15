@@ -529,6 +529,41 @@ s32 fn_8032F52C(void *self, s32 id) {
     return M2C_FIELD(self, s32 **, 0x58)[i];
 }
 
+void fn_8032FE1C(void *self) {
+    void *fn_80338000(void *, s32, s32);
+    extern u8 lbl_8045BA40[];
+    extern u8 lbl_8045AA90[];
+    extern s32 lbl_8049624C[2];
+    extern void **lbl_80496250;
+
+    if (M2C_FIELD(self, void ***, 0x60) == NULL) {
+        void **node = fn_80338000(lbl_8045BA40, 0xC, 4);
+        M2C_FIELD(self, void ***, 0x60) = node;
+        node[0] = self;
+        {
+            char *vt = *(char **)lbl_8045AA90;
+            s16 off = *(s16 *)(vt + 0x10);
+            void (*f)(void *, s32) = *(void (**)(void *, s32))(vt + 0x14);
+            f(lbl_8045AA90 + off, -1);
+        }
+        node = M2C_FIELD(self, void ***, 0x60);
+        node[1] = lbl_80496250;
+        if (lbl_80496250 != NULL) {
+            lbl_80496250[2] = node;
+        } else {
+            lbl_8049624C[0] = (s32)node;
+        }
+        node[2] = NULL;
+        lbl_80496250 = node;
+        {
+            char *vt = *(char **)lbl_8045AA90;
+            s16 off = *(s16 *)(vt + 0x18);
+            void (*f)(void *) = *(void (**)(void *))(vt + 0x1C);
+            f(lbl_8045AA90 + off);
+        }
+    }
+}
+
 s32 fn_803302A0(void *self, ERQdLookup *a, ERQdLookup *b) {
     s32 i;
     s32 n;
@@ -640,7 +675,7 @@ void fn_80330EA4(ERQdLookup *self, void *res, s32 idx) {
         }
         self->unk2C[idx] = res;
         self->unk34[idx] = M2C_FIELD(res, s32 *, 8);
-        ((s32 (*)[16])((u8 *)self->unk20 + 0x64))[idx][0] = M2C_FIELD(res, s32 *, 0x20);
+        ((struct { s32 a; u8 pad[60]; } *)(self->unk20 + 0x19))[idx].a = M2C_FIELD(res, s32 *, 0x20);
     }
 }
 
@@ -681,9 +716,7 @@ void fn_80330FC4(s32 arg0, s32 arg1) {
     void fn_802CAA00(void *, s32);
     if (arg1 == 0xFFFF) {
         if (arg0 != 0) {
-            s32 *p = lbl_8049624C;
-            p[0] = 0;
-            p[1] = 0;
+            Pair_Clear(lbl_8049624C);
             fn_802CA9A8(lbl_8045AA90);
             lbl_80496254 = fn_802D6A90(lbl_80493970, fn_80331064, fn_8033108C, fn_803310B8, 2, lbl_803F34C0, lbl_80493858);
         } else {
@@ -693,7 +726,7 @@ void fn_80330FC4(s32 arg0, s32 arg1) {
 }
 
 void fn_80331064(void) {
-    M2C_UNK fn_8032E230();
+    void *fn_8032E230();
     M2C_UNK fn_803311D8(M2C_UNK);
     fn_803311D8(0x78);
     fn_8032E230();
