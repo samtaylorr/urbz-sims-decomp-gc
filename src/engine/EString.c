@@ -819,6 +819,22 @@ s32 fn_802D43C4(char **arg0, const char *arg1) {
     return -1;
 }
 
+typedef struct EStringTmp {
+    s32 s;
+} EStringTmp;
+
+static inline EStringTmp EString_Left(s32 *src, s32 n) {
+    EStringTmp t;
+    fn_802D40E4(&t.s, src, n);
+    return t;
+}
+
+static inline EStringTmp EString_Concat(char *a, char *b) {
+    EStringTmp t;
+    fn_802D3928(&t.s, a, b);
+    return t;
+}
+
 s32 fn_802D4474(s32 *arg0, char *arg1, char *arg2) {
     s32 fn_80248808(const char *);
     s32 pos;
@@ -1796,24 +1812,23 @@ s32 fn_802D6108(u16 **arg0, u16 *arg1) {
 s32 fn_802D61C4(s32 *arg0, u16 *arg1, u16 *arg2) {
     s32 fn_802D50BC(s32, s32, s32);
     void fn_802D5254(s32 *, s32);
-    register s32 *self asm("r28") = arg0;
-    register u16 *find asm("r27") = arg1;
-    register u16 *repl asm("r26") = arg2;
     s32 s[5];
     register s32 *pa asm("r29");
     register s32 *pc asm("r30");
     s32 idx;
+    s32 rest;
 
-    idx = fn_802D6108((u16 **)self, find);
+    idx = fn_802D6108((u16 **)arg0, arg1);
     if (idx == -1) {
         return 0;
     }
     pa = &s[4];
-    fn_802D5D08(pa, self, idx);
+    fn_802D5D08(pa, arg0, idx);
     pc = &s[0];
-    fn_802D50BC((s32)&s[2], s[4], (s32)repl);
-    fn_802D50BC((s32)&s[0], s[2], (idx + fn_802D5200(find)) * 2 + *self);
-    fn_802D57BC(self, (u16 *)s[0]);
+    fn_802D50BC((s32)&s[2], s[4], (s32)arg2);
+    rest = (idx + fn_802D5200(arg1)) * 2 + *arg0;
+    fn_802D50BC((s32)pc, s[2], rest);
+    fn_802D57BC(arg0, (u16 *)s[0]);
     fn_802D5254(pc, s[0]);
     fn_802D5254(&s[2], s[2]);
     fn_802D5254(pa, s[4]);
