@@ -434,9 +434,9 @@ void fn_80016E24(void *arg0) {
         fn_8000AA2C(M2C_FIELD(arg0, s32 *, 0xED4), lbl_803C2724, 0, 0, 1, lbl_803C2738);
         fn_8000AA2C(M2C_FIELD(arg0, s32 *, 0xED4), lbl_803C2784, 0, 0, 1, lbl_803C2748);
         fn_8000AA2C(M2C_FIELD(arg0, s32 *, 0xED4), lbl_803C2784, 0, 0, 1, lbl_803C2750);
+        fn_8000AA2C(M2C_FIELD(arg0, s32 *, 0xED4), lbl_803C2758, 0, 0, 0);
+        M2C_FIELD(arg0, s32 *, 0xF38) = 0;
     }
-    fn_8000AA2C(M2C_FIELD(arg0, s32 *, 0xED4), lbl_803C2758, 0, 0, 0);
-    M2C_FIELD(arg0, s32 *, 0xF38) = 0;
 }
 
 void fn_80016EF4(void *arg0) {
