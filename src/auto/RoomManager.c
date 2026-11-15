@@ -589,6 +589,42 @@ void fn_80190CB0(char *self) {
     }
 }
 
+void fn_8019139C(char *self) {
+    void fn_803A9C48(void *, void *);
+    M2C_UNK fn_80191B04(void *);
+    u8 buf[16];
+    RMMapNode *b;
+    s32 more;
+    char *map;
+    void *temp_r9;
+    void *temp_r11;
+    void *temp_r9_2;
+
+    *(RMMapNode **)(buf + 0) = NULL;
+    b = (*(RMMapNode **)(self + 4))->left;
+    *(RMMapNode **)(buf + 8) = b;
+    *(RMMapNode **)(buf + 0) = b;
+    while (RMMap_EndP((RMMapIter *)(buf + 8), self),
+           (more = RMMapIter_NotEqualP((RMMapIter *)(buf + 0), (RMMapIter *)(buf + 8))) != 0) {
+        char *room = (*(RMMapNode **)(buf + 0))->value;
+        if (*(s32 *)(room + 0x34) != 0) {
+            fn_80191B04(room);
+        }
+        RMMapIter_Inc((RMMapIter *)(buf + 0));
+    }
+    map = self + 0x10;
+    if (M2C_FIELD(map, s32 *, 8) != 0) {
+        fn_803A9C48(map, M2C_FIELD(M2C_FIELD(map, void **, 4), void **, 4));
+        temp_r9 = M2C_FIELD(map, void **, 4);
+        M2C_FIELD(temp_r9, void **, 8) = temp_r9;
+        temp_r11 = M2C_FIELD(map, void **, 4);
+        M2C_FIELD(temp_r11, s32 *, 4) = more;
+        temp_r9_2 = M2C_FIELD(map, void **, 4);
+        M2C_FIELD(temp_r9_2, void **, 0xC) = temp_r9_2;
+        M2C_FIELD(map, s32 *, 8) = more;
+    }
+}
+
 void fn_80191460(void) {
 
 }
@@ -635,6 +671,39 @@ void fn_801914E4(char *self) {
         for (p = begin; p != end; p += 0x14) {
         }
         vec[1] = begin;
+    }
+}
+
+void fn_80191584(char *self) {
+    void fn_803A9BEC(void *, void *);
+    void fn_80191990(void *, s32);
+    u8 buf[16];
+    RMMapNode *b;
+    s32 more;
+
+    if (*(s32 *)(self + 8) != 0) {
+        *(RMMapNode **)(buf + 0) = NULL;
+        b = (*(RMMapNode **)(self + 4))->left;
+        *(RMMapNode **)(buf + 0) = b;
+        *(RMMapNode **)(buf + 8) = b;
+        while (RMMap_EndP((RMMapIter *)(buf + 8), self),
+               (more = RMMapIter_NotEqualP((RMMapIter *)(buf + 0), (RMMapIter *)(buf + 8))) != 0) {
+            void *room = (*(RMMapNode **)(buf + 0))->value;
+            if (room != NULL) {
+                fn_80191990(room, 3);
+            }
+            RMMapIter_Inc((RMMapIter *)(buf + 0));
+        }
+        if (*(s32 *)(self + 8) != 0) {
+            RMMapNode *h;
+            fn_803A9BEC(self, (*(RMMapNode **)(self + 4))->parent);
+            h = *(RMMapNode **)(self + 4);
+            h->left = h;
+            (*(RMMapNode **)(self + 4))->parent = (RMMapNode *)more;
+            h = *(RMMapNode **)(self + 4);
+            h->right = h;
+            *(s32 *)(self + 8) = more;
+        }
     }
 }
 
