@@ -26,9 +26,14 @@ typedef struct TextVec2 {
     f32 x, y;
 } TextVec2;
 
-static inline void TextVec2_Set(TextVec2 *v, f32 x, f32 y) {
+static inline TextVec2 *TextVec2_Set(TextVec2 *v, f32 x, f32 y) {
     v->x = x;
     v->y = y;
+    return v;
+}
+
+static inline void TextVec2_Copy(TextVec2 *d, const TextVec2 *s) {
+    *d = *s;
 }
 
 static inline void ClearField4(char *p) {
@@ -49,6 +54,35 @@ f32 fn_8009E9D4(f32 x) {
         r = v;
     }
     return r;
+}
+
+TextVec2 *fn_800A04A0(s32 arg0) {
+    s32 fn_80049B6C(void *);
+    extern const f32 lbl_803CD764[];
+    extern const f32 lbl_803CD768[];
+    extern const f32 lbl_803CD76C[];
+    extern const f32 lbl_803CD770[];
+    extern TextVec2 lbl_804958C4;
+    extern TextVec2 lbl_804958BC;
+    extern TextVec2 lbl_804958B4;
+    extern u8 lbl_8041F94C[];
+    TextVec2 a;
+    TextVec2 b;
+    TextVec2 c;
+
+    TextVec2_Set(&a, lbl_803CD764[0], lbl_803CD768[0]);
+    TextVec2_Set(&b, lbl_803CD764[0], lbl_803CD76C[0]);
+    TextVec2_Set(&c, lbl_803CD770[0], lbl_803CD764[0]);
+    lbl_804958C4 = c;
+    lbl_804958BC = b;
+    lbl_804958B4 = a;
+    if (arg0 == 1) {
+        return &lbl_804958C4;
+    }
+    if (fn_80049B6C(lbl_8041F94C) != 0) {
+        return &lbl_804958BC;
+    }
+    return &lbl_804958B4;
 }
 
 void fn_800A0568(void) {
