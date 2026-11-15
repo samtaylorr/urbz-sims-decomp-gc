@@ -287,14 +287,12 @@ void fn_80232D74(u8 *arg0, Struct1A8_5 *arg1) {
     void fn_80234BE8(void *);
     void fn_80232C74(u8 *, u8 *);
     extern s32 lbl_8041FC0C[];
-    Struct1B8 saved;
-    Struct1B8 tmp;
+    s16 saved[2];
 
     fn_80232528(arg0, arg1);
-    tmp = *(Struct1B8 *)(arg0 + 0x1B8);
-    saved = tmp;
+    *(s32 *)saved = *(s32 *)(arg0 + 0x1B8);
     *(Struct1A8_5 *)(arg0 + 0x1A8) = *arg1;
-    *(Struct1B8 *)(arg0 + 0x1B8) = saved;
+    *(s32 *)(arg0 + 0x1B8) = *(s32 *)saved;
     fn_80234BE8(arg0 + 0x60);
     if (lbl_8041FC0C[0] != 0) {
         fn_80232C74(arg0, 0);
@@ -466,6 +464,37 @@ s32 fn_80233460(s32 arg0) {
     return arg0 + 0x60;
 }
 
+void fn_80233468(u8 *arg0) {
+    s32 fn_80234AF4(void *);
+    extern s32 lbl_80417E58[];
+    extern s32 lbl_80417CF0[];
+    struct {
+        Event1A8 ev;
+        s32 unkC;
+    } tmp, *p;
+    u8 *obj = *(u8 **)(arg0 + 0x60);
+    Callback1A8 *cb;
+
+    if (fn_80234AF4(arg0 + 0x60) == 1) {
+        if (obj != NULL) {
+            u8 *vt = *(u8 **)(obj + 4);
+            (*(void (**)(void *, s32))(vt + 0x42C))(obj + *(s16 *)(vt + 0x428), 1);
+        }
+        p = &tmp;
+        p->ev.vtbl = lbl_80417E58;
+        p->unkC = 0;
+        tmp.ev.unk0 = 0;
+        cb = (Callback1A8 *)(arg0 + 0x1A8);
+        Callback1A8_Call(cb, &p->ev);
+        if (tmp.unkC != 0) {
+            fn_80232E74(arg0, (Struct1A8_7 *)cb);
+        } else {
+            fn_80232D2C(arg0, 1);
+        }
+        p->ev.vtbl = lbl_80417CF0;
+    }
+}
+
 void fn_80233538(u8 *arg0) {
     void fn_80234C90(void *);
     extern s32 lbl_80417E58[];
@@ -588,7 +617,7 @@ s32 fn_802346C8(void *arg0, void *arg1) {
 
 s32 fn_802348F8(s32 *arg0, s32 arg1, s32 arg2) {
     s32 fn_8022BBF8(s32, s32, s32);
-    M2C_UNK fn_80234820(s32 *);
+    void fn_80234820(s32 *);
     s32 var_r3;
 
     var_r3 = 0;
