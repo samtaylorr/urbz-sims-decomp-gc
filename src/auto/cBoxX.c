@@ -41,6 +41,19 @@ static inline It_80100494 Tree_end(char *tree) {
     return it;
 }
 
+static inline It_80100494 Tree_begin(char *tree) {
+    It_80100494 it;
+    it.node = M2C_FIELD(M2C_FIELD(tree, char **, 4), s32 *, 8);
+    return it;
+}
+
+static inline It_80100494 TreeIt_postinc(It_80100494 *it) {
+    void *fn_8039AB24(void *);
+    It_80100494 tmp = *it;
+    it->node = (s32)fn_8039AB24((void *)it->node);
+    return tmp;
+}
+
 static inline It_80100494 Tree_lower_bound(char *tree, const u32 *kp) {
     It_80100494 it;
     char *y = M2C_FIELD(tree, char **, 4);
@@ -95,8 +108,8 @@ s32 fn_800FE098(s32 arg0, const char *fmt, ...) {
     extern char *lbl_80495AD8;
     s32 fn_80246C5C(char *, const char *, va_list);
     s32 fn_80240584(void);
-    char buf[0x1000];
     va_list ap;
+    char buf[0x1000];
 
     if (arg0 != 0) {
         return 0;
@@ -104,8 +117,8 @@ s32 fn_800FE098(s32 arg0, const char *fmt, ...) {
     va_start(ap, fmt);
     fn_80246C5C(buf, fmt, ap);
     lbl_80495AD8 = buf;
-    lbl_804943E8 = 1;
     lbl_804943E4 = 1;
+    lbl_804943E8 = 1;
     if (fn_80240584() != 0) {
         *(s32 *)0 = 0;
     }
@@ -551,47 +564,20 @@ void fn_801005A4(void **out, void *arg1, u32 key) {
 void fn_80100978(void *self, u32 key) {
     extern void *lbl_80495C90;
     void *fn_801759A4(void *, u32, s32);
-    void fn_80100A64(void *, It_80100494 *, It_80100494 *);
-    const u32 *kp = &key;
-    It_80100494 range[2];
-    It_80100494 *out;
-    void *y;
-    void *x;
+    void fn_80100A64(void *, It_80100494, It_80100494);
+    It_80100494 lo;
+    It_80100494 hi;
+    lo = Tree_lower_bound((char *)self + 0x3C, &key);
+    hi = Tree_upper_bound((char *)self + 0x3C, &key);
 
-    out = &range[0];
-    y = M2C_FIELD(self, void **, 0x40);
-    x = M2C_FIELD(y, void **, 4);
-    while (x != NULL) {
-        if (!(M2C_FIELD(x, u32 *, 0x10) < *kp)) {
-            y = x;
-            x = M2C_FIELD(y, void **, 8);
-        } else {
-            x = M2C_FIELD(x, void **, 0xC);
-        }
-    }
-    out->node = (s32)y;
-    out = &range[1];
-    y = M2C_FIELD(self, void **, 0x40);
-    x = M2C_FIELD(y, void **, 4);
-    while (x != NULL) {
-        if (*kp < M2C_FIELD(x, u32 *, 0x10)) {
-            y = x;
-            x = M2C_FIELD(y, void **, 8);
-        } else {
-            x = M2C_FIELD(x, void **, 0xC);
-        }
-    }
-    out->node = (s32)y;
-    if (range[0].node == range[1].node) {
+    if (!TreeIt_ne(&lo, &hi)) {
         void *r = fn_801759A4(M2C_FIELD(lbl_80495C90, void **, 0x58), key, 0);
         if (r != NULL) {
             void *vt = M2C_FIELD(r, void **, 0xBC);
             ((void (*)(void *))M2C_FIELD(vt, void **, 0xE4))((char *)r + M2C_FIELD(vt, s16 *, 0xE0));
         }
     } else {
-        It_80100494 a = range[0];
-        It_80100494 b = range[1];
-        fn_80100A64(self, &a, &b);
+        fn_80100A64(self, lo, hi);
     }
 }
 
@@ -812,6 +798,7 @@ void fn_80101C90(s32 *arg0, s32 arg1, f32 arg2) {
     char buf[0x18];
     char *obj;
     char *vt;
+    f32 scale = arg2;
 
     arg0[1] = 0;
     {
@@ -822,7 +809,7 @@ void fn_80101C90(s32 *arg0, s32 arg1, f32 arg2) {
     if (arg0[2] == 0) {
         obj = lbl_80494FA4;
         vt = *(char **)obj;
-        ((void (*)(void *, f32))M2C_FIELD(vt, void **, 0x64))(obj + M2C_FIELD(vt, s16 *, 0x60), arg2 * (f32)(s8)lbl_8041FAD0[0][0x1D] / lbl_803D67C0[0]);
+        ((void (*)(void *, f32))M2C_FIELD(vt, void **, 0x64))(obj + M2C_FIELD(vt, s16 *, 0x60), scale * (f32)(s8)lbl_8041FAD0[0][0x1D] / lbl_803D67C0[0]);
     }
 }
 
