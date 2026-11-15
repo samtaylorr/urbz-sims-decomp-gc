@@ -131,40 +131,41 @@ void fn_803360FC(char *self, s32 arg1, s32 arg2) {
 }
 
 void fn_80336194(char *self) {
+    typedef struct { s32 p; s32 n; } Str;
     extern char lbl_803F3A2C[];
     extern char lbl_803F3A34[];
     void fn_802D3CE4(void *, s32);
     s32 fn_802D3D24(void *);
-    void fn_802D40E4(s32 *, void *, s32);
-    void fn_802D39F0(s32 *, s32);
-    void fn_802D39E4(s32 *);
-    void fn_802D3928(s32 *, s32, s32);
+    void fn_802D40E4(Str *, void *, s32);
+    void fn_802D39F0(Str *, s32);
+    void fn_802D39E4(Str *);
+    void fn_802D3928(Str *, s32, s32);
     void fn_802D3D48(void *);
-    register s32 *p asm("r3");
-    s32 str;
-    s32 b;
-    s32 a;
+    register Str *p asm("r3");
+    Str str;
+    Str b;
+    Str a;
     char *name = self + 0x58;
 
     fn_802D3CE4(name, *(s32 *)(self + 0x54));
     if (fn_802D3D24(name) > 8) {
         fn_802D40E4(&str, name, 8);
-        fn_802D3CE4(name, str);
-        fn_802D39F0(&str, str);
+        fn_802D3CE4(name, str.p);
+        fn_802D39F0(&str, str.p);
     }
     fn_802D39E4(&str);
     fn_802D3CE4(&str, (s32)lbl_803F3A2C);
     p = &a;
-    fn_802D3928(p, str, *(s32 *)(self + 0x58));
+    fn_802D3928(p, str.p, *(s32 *)(self + 0x58));
     p = &b;
-    fn_802D3928(p, a, (s32)lbl_803F3A34);
-    fn_802D3CE4(name, b);
+    fn_802D3928(p, a.p, (s32)lbl_803F3A34);
+    fn_802D3CE4(name, b.p);
     p = &b;
-    fn_802D39F0(p, b);
+    fn_802D39F0(p, b.p);
     p = &a;
-    fn_802D39F0(p, a);
+    fn_802D39F0(p, a.p);
     fn_802D3D48(name);
-    fn_802D39F0(&str, str);
+    fn_802D39F0(&str, str.p);
 }
 
 s32 fn_803363D0(char *self) {
@@ -300,11 +301,6 @@ static inline void *ERM_AllocAlignedFrom(void *heap, u32 n) {
         }
     }
     return p;
-}
-
-static inline void *ERM_AllocAligned(u32 *psize) {
-    void *heap = fn_802D0AB8();
-    return ERM_AllocAlignedFrom(heap, *psize);
 }
 
 void fn_80336CBC(char *self) {
@@ -878,12 +874,14 @@ void *fn_802DC3C0(void *, u32, s32, s32, s32);
 void fn_80338A08(char *self) {
     extern char *lbl_80494DF0;
     char *vt;
+    s32 size;
 
     if (*(void **)(self + 0xC) == NULL) {
         vt = *(char **)(lbl_80494DF0 + 0x338);
-        *(s32 *)(self + 0x10) = (*(s32 (**)(void *))(vt + 0x44))(lbl_80494DF0 + *(s16 *)(vt + 0x40));
-        if (*(s32 *)(self + 0x10) != 0) {
-            *(void **)(self + 0xC) = ERM_AllocAligned(*(u32 *)(self + 0x10));
+        size = (*(s32 (**)(void *))(vt + 0x44))(lbl_80494DF0 + *(s16 *)(vt + 0x40));
+        *(s32 *)(self + 0x10) = size;
+        if (size != 0) {
+            *(void **)(self + 0xC) = ERM_AllocAligned((u32 *)(self + 0x10));
         }
     }
 }
