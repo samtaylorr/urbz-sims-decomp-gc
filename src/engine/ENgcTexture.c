@@ -104,6 +104,21 @@ void fn_8035F3FC(u8 *arg0, u8 *arg1, s32 arg2) {
     ((void (*)(u8 *, u8 *, s32))e->func)(arg1 + e->delta, arg0, arg2);
 }
 
+void fn_8035F4A0(u8 *arg0, u8 *arg1) {
+    VtEntry_8035F3FC *e;
+
+    e = (VtEntry_8035F3FC *)(M2C_FIELD(arg1, u8 **, 0x68) + 0x118);
+    ((void (*)(u8 *, s32, s32))e->func)(arg1 + e->delta, 0, 0);
+    e = (VtEntry_8035F3FC *)(M2C_FIELD(arg1, u8 **, 0x68) + 0x330);
+    ((void (*)(u8 *, u8 *, s32))e->func)(arg1 + e->delta, arg0, 0);
+    e = (VtEntry_8035F3FC *)(M2C_FIELD(arg1, u8 **, 0x68) + 0x120);
+    ((void (*)(u8 *, s32))e->func)(arg1 + e->delta, 0x4000);
+    e = (VtEntry_8035F3FC *)(M2C_FIELD(arg1, u8 **, 0x68) + 0x138);
+    ((void (*)(u8 *, s32, s32))e->func)(arg1 + e->delta, 0x40, 0);
+    e = (VtEntry_8035F3FC *)(M2C_FIELD(arg1, u8 **, 0x68) + 0x1B8);
+    ((void (*)(u8 *, s32, s32, s32, s32))e->func)(arg1 + e->delta, 0, 2, 0, 0);
+}
+
 void fn_8035F6E4(void) {
     fn_802FF4EC();
 }
@@ -615,6 +630,29 @@ s32 fn_80361944(void *arg0, s32 arg1) {
 
 s32 fn_80361ADC(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x90);
+}
+
+s32 fn_80361C4C(void *self, s32 n, u32 *w_out, u32 *h_out) {
+    s32 w = M2C_FIELD(self, u16 *, 0x10);
+    s32 h = M2C_FIELD(self, u16 *, 0x12);
+    s32 total = 0;
+    s32 bpp;
+    s32 i;
+
+    *w_out = (w - 1 + M2C_FIELD(self, u8 *, 0x7C)) & -M2C_FIELD(self, u8 *, 0x7C);
+    *h_out = (h - 1 + M2C_FIELD(self, u8 *, 0x7D)) & -M2C_FIELD(self, u8 *, 0x7D);
+    bpp = M2C_FIELD(self, u8 *, 0x1A);
+    if (bpp == 24) {
+        bpp = 32;
+    }
+    for (i = 0; i < n; i++) {
+        total += (((s32)(*w_out * *h_out * bpp) + 7) / 8 + 31) & ~31;
+        w >>= 1;
+        h >>= 1;
+        *w_out = (w - 1 + M2C_FIELD(self, u8 *, 0x7C)) & -M2C_FIELD(self, u8 *, 0x7C);
+        *h_out = (h - 1 + M2C_FIELD(self, u8 *, 0x7D)) & -M2C_FIELD(self, u8 *, 0x7D);
+    }
+    return total;
 }
 
 s32 fn_80361D14(void) {
