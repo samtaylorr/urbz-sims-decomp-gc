@@ -383,14 +383,38 @@ s32 fn_80300ACC(u8 *self) {
     return 1;
 }
 
+void fn_80300B18(u8 *self, u8 *arg1) {
+    if (*(void **)(arg1 + 0x20) != NULL) {
+        *(void **)(arg1 + 0x14) = NULL;
+        ((void (*)(u8 *, void *, s32))fn_803008DC)(self, *(void **)(arg1 + 0x20), 0);
+        ((void (*)(u8 *, void *, s32))fn_803008DC)(self, *(void **)(arg1 + 0x4), 0);
+        ((void (*)(u8 *, void *, s32))fn_803008DC)(self, *(void **)(arg1 + 0x8), 0);
+        ((void (*)(u8 *, void *, s32))fn_803008DC)(self, *(void **)(arg1 + 0xC), 0);
+        ((void (*)(u8 *, void *, s32))fn_803008DC)(self, *(void **)(arg1 + 0x10), 0);
+        ((void (*)(u8 *, void *, s32))fn_803008DC)(self, *(void **)(arg1 + 0x14), 1);
+        ((void (*)(u8 *, void *, s32))fn_803008DC)(self, *(void **)(arg1 + 0x0), 1);
+        *(void **)(arg1 + 0x0) = NULL;
+        *(void **)(arg1 + 0x4) = NULL;
+        *(void **)(arg1 + 0x8) = NULL;
+        *(void **)(arg1 + 0xC) = NULL;
+        *(void **)(arg1 + 0x10) = NULL;
+        *(void **)(arg1 + 0x14) = NULL;
+        *(void **)(arg1 + 0x20) = NULL;
+    }
+}
+
 void fn_80300BE8(u8 *self) {
+    extern void **lbl_80495050;
     extern void fn_8031EA2C(s32);
     extern void fn_80300CB4(u8 *);
     extern void fn_80300D24(u8 *);
     extern void fn_80300DC0(u8 *);
 
     if (*(void **)self != NULL) {
-        ReleaseGfxHandle(*(void **)self);
+        if ((*(s32 (**)(void *))((char *)*lbl_80495050 + 0x9C))((char *)lbl_80495050 + *(s16 *)((char *)*lbl_80495050 + 0x98)) != 0) {
+            (*(void (**)(void *))((char *)*lbl_80495050 + 0x44))((char *)lbl_80495050 + *(s16 *)((char *)*lbl_80495050 + 0x40));
+        }
+        (*(void (**)(void *, void *))((char *)*lbl_80495050 + 0x94))((char *)lbl_80495050 + *(s16 *)((char *)*lbl_80495050 + 0x90), *(void **)self);
         *(void **)self = NULL;
     }
     if (*(s32 *)(self + 8) != 0) {
@@ -512,6 +536,30 @@ void fn_80302230(void) {
 
 }
 
+void fn_80302234(u8 *self) {
+    extern void fn_803BB000(void *, s32, s32);
+    extern void fn_802482F8();
+    extern u8 *fn_803008A4(u8 *, s32, const char *, s32, const char *);
+    extern const char lbl_803F172C[];
+    extern const char lbl_803F1760[];
+    s32 n = *(s32 *)(self + 0x18);
+    s32 i;
+
+    if (n != 0) {
+        fn_803BB000(self + 0x2C, n, 0);
+        fn_802482F8(*(void **)(self + 0x2C), *(void **)(self + 0x14), n * 0x34);
+        for (i = 0; i < n; i++) {
+            s32 cnt = *(s32 *)(*(u8 **)(self + 0x14) + i * 0x34 + 0x18);
+            *(void **)(*(u8 **)(self + 0x2C) + i * 0x34) = NULL;
+            if (*(s32 *)(self + 0x10) & 0x10) {
+                *(u8 **)(*(u8 **)(self + 0x2C) + i * 0x34) = fn_803008A4(self, cnt * 8, lbl_803F172C, 0xACE, lbl_803F1760);
+            } else {
+                *(u8 **)(*(u8 **)(self + 0x2C) + i * 0x34) = fn_803008A4(self, cnt * 16, lbl_803F172C, 0xAD3, lbl_803F1760);
+            }
+        }
+    }
+}
+
 s32 fn_8030230C(u8 *self, u8 *other, s32 idx) {
     extern void fn_80302234(u8 *);
     extern void fn_803023D8(u8 *);
@@ -552,6 +600,27 @@ void fn_803023D8(u8 *self) {
                 fn_80248488(*(void **)e, 0, cnt * 8);
             } else {
                 fn_80248488(*(void **)e, 0, cnt * 16);
+            }
+        }
+    }
+}
+
+void fn_803040A4(u8 *self, s32 arg1, s32 arg2) {
+    f32 *min = (f32 *)arg1;
+    f32 *max = (f32 *)arg2;
+    s32 i;
+    u32 j;
+
+    for (i = 0; i < *(s32 *)(self + 0x18); i++) {
+        s16 *p = *(s16 **)(*(u8 **)(self + 0x14) + i * 0x34);
+        for (j = 0; j < *(u32 *)(*(u8 **)(self + 0x14) + i * 0x34 + 0x18); j++) {
+            f32 v = *p;
+            p += 4;
+            if (v <= *min) {
+                *min = v;
+            }
+            if (v >= *max) {
+                *max = v;
             }
         }
     }
@@ -693,7 +762,7 @@ void fn_80304BE4(void *self, s32 arg1) {
 }
 
 void fn_803052AC(void *self, s32 arg1) {
-    extern void fn_803051DC(void *);
+    extern void fn_803051DC();
     extern void fn_80307478(void *, s32);
     if (M2C_FIELD(self, s32 *, 0x18) & 2) {
         fn_803051DC(self);
