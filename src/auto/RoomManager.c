@@ -684,8 +684,8 @@ void fn_80191584(char *self) {
     if (*(s32 *)(self + 8) != 0) {
         *(RMMapNode **)(buf + 0) = NULL;
         b = (*(RMMapNode **)(self + 4))->left;
-        *(RMMapNode **)(buf + 0) = b;
         *(RMMapNode **)(buf + 8) = b;
+        *(RMMapNode **)(buf + 0) = b;
         while (RMMap_EndP((RMMapIter *)(buf + 8), self),
                (more = RMMapIter_NotEqualP((RMMapIter *)(buf + 0), (RMMapIter *)(buf + 8))) != 0) {
             void *room = (*(RMMapNode **)(buf + 0))->value;
@@ -696,12 +696,15 @@ void fn_80191584(char *self) {
         }
         if (*(s32 *)(self + 8) != 0) {
             RMMapNode *h;
+            RMMapNode *h2;
+            RMMapNode *h3;
             fn_803A9BEC(self, (*(RMMapNode **)(self + 4))->parent);
             h = *(RMMapNode **)(self + 4);
             h->left = h;
-            (*(RMMapNode **)(self + 4))->parent = (RMMapNode *)more;
-            h = *(RMMapNode **)(self + 4);
-            h->right = h;
+            h2 = *(RMMapNode **)(self + 4);
+            h2->parent = (RMMapNode *)more;
+            h3 = *(RMMapNode **)(self + 4);
+            h3->right = h3;
             *(s32 *)(self + 8) = more;
         }
     }
