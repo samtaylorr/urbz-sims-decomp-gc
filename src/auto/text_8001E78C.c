@@ -5,6 +5,11 @@ typedef struct {
     f32 x, y, z, w;
 } Quat4;
 
+static inline void Vec2_Set(f32 *v, f32 x, f32 y) {
+    v[0] = x;
+    v[1] = y;
+}
+
 static inline s32 List_Valid(void *n) {
     return n != NULL;
 }
@@ -323,6 +328,32 @@ void fn_800235FC(void *arg0, f32 farg0, f32 farg1, f32 farg2, f32 farg3) {
     M2C_FIELD(M2C_FIELD(arg0, void **, 0x4C), f32 *, 0x14) = farg1;
     M2C_FIELD(M2C_FIELD(arg0, void **, 0x4C), f32 *, 0x18) = farg2;
     M2C_FIELD(M2C_FIELD(arg0, void **, 0x4C), f32 *, 0x1C) = farg3;
+}
+
+extern f32 lbl_8049572C[2];
+extern f32 lbl_80495734[2];
+extern f32 lbl_8049573C[2];
+extern f32 lbl_80495744[2];
+extern f32 lbl_8049574C[2];
+extern f32 lbl_80495754[2];
+extern f32 lbl_8049575C[2];
+void fn_80023864(s32 arg0, s32 arg1) {
+    if (arg1 == 0xFFFF && arg0 != 0) {
+        lbl_8049572C[0] = 0.184375f;
+        lbl_8049572C[1] = 0.175f;
+        lbl_80495734[0] = 0.2f;
+        lbl_80495734[1] = 0.28f;
+        lbl_8049573C[0] = 0.6390625f;
+        lbl_8049573C[1] = 0.545f;
+        lbl_80495744[0] = 0.5428125f;
+        lbl_80495744[1] = 0.26625f;
+        lbl_8049574C[0] = 0.603125f;
+        lbl_8049574C[1] = 0.29583329f;
+        lbl_80495754[0] = 0.603125f;
+        lbl_80495754[1] = 0.05f;
+        lbl_8049575C[0] = 0.603125f;
+        lbl_8049575C[1] = 0.05f;
+    }
 }
 
 extern void *fn_802D0AB8(void);
