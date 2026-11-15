@@ -725,29 +725,27 @@ s32 fn_8016D4D0(void *arg0) {
 }
 
 void *fn_8016D954(char *self) {
-    char *vt;
-
     if (*(char **)(self + 0x64) == NULL) {
         char *obj = ((char *(*)(char *))fn_8016C114)(self);
         if (obj != *(char **)(self + 0x64)) {
             if (obj != NULL) {
-                vt = *(char **)obj;
+                char *vt = *(char **)obj;
                 (*(void (**)(void *))(vt + 0x14))(obj + *(s16 *)(vt + 0x10));
             }
             if (*(char **)(self + 0x64) != NULL) {
                 char *old = *(char **)(self + 0x64);
-                vt = *(char **)old;
+                char *vt = *(char **)old;
                 (*(void (**)(void *))(vt + 0x1C))(old + *(s16 *)(vt + 0x18));
             }
             *(char **)(self + 0x64) = obj;
         }
         {
             char *p = *(char **)(self + 0x64);
-            vt = *(char **)p;
+            char *vt = *(char **)p;
             if ((*(s32 (**)(void *, s32, s32))(vt + 0x94))(p + *(s16 *)(vt + 0x90), *(s32 *)(self + 4), *(s16 *)(self + 0x7C)) == -0x62) {
                 char *q = *(char **)(self + 0x64);
-                vt = *(char **)q;
-                (*(void (**)(void *, s32))(vt + 0x6C))(q + *(s16 *)(vt + 0x68), *(s32 *)(self + 0x38));
+                char *vt2 = *(char **)q;
+                (*(void (**)(void *, s32))(vt2 + 0x6C))(q + *(s16 *)(vt2 + 0x68), *(s32 *)(self + 0x38));
             }
         }
     }
