@@ -37,8 +37,8 @@ typedef struct {
 } ERQdTable;
 
 static inline void Pair_Set(s32 *p, s32 a, s32 b) {
-    p[0] = a;
     p[1] = b;
+    p[0] = a;
 }
 
 static inline void QList_Append(void **head, void ***tail, void **node) {
