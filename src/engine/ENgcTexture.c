@@ -84,6 +84,15 @@ typedef struct {
     u32 rest : 19;
 } Flags_8036012C;
 
+typedef struct {
+    u8 b80 : 1;
+    u8 b40 : 1;
+    u8 b20 : 1;
+    u8 b10 : 1;
+    u8 b08 : 1;
+    u8 rest : 3;
+} Flags8_8036012C;
+
 void fn_802FF4EC(void);
 void fn_803601FC(void);
 void fn_8036023C(void);
@@ -685,8 +694,8 @@ void fn_80361484(void *arg0, s32 arg1) {
     }
     fn_80338184(lbl_8045BAE8, *(s32 *)(self + 0x74));
     fn_80338184(lbl_8045BAE8, *(s32 *)(self + 0x90));
-    *(s32 *)(self + 0x74) = 0;
     *(s32 *)(self + 0x78) = 0;
+    *(s32 *)(self + 0x74) = 0;
     *(s32 *)(self + 0x90) = 0;
     fn_802CAA00(self + 0x28, 2);
     fn_8036F080(self, 0);
