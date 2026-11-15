@@ -28,6 +28,22 @@ s32 fn_80317514(void *arg0) {
     return var_r7;
 }
 
+s32 fn_80317598(u8 *arg0) {
+    s32 ret = 0;
+    u8 *q;
+    switch (fn_80317514(arg0)) {
+    case 1:
+        ret = ((arg0[2] << 8) | arg0[3]) + 4;
+        break;
+    case 2:
+    case 3:
+        q = arg0 + 0xC;
+        ret = (q[0] << 24) | (q[1] << 16) | (q[2] << 8) | q[3];
+        break;
+    }
+    return ret;
+}
+
 s32 fn_80317724(s32 arg0) {
     void fn_80317624(s32, s32 *, s32);
     s32 result = 0;
