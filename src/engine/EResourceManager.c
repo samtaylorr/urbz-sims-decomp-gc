@@ -131,15 +131,14 @@ void fn_803360FC(char *self, s32 arg1, s32 arg2) {
 }
 
 void fn_80336194(char *self) {
-    typedef struct { s32 p; s32 n; } EStr;
     extern char lbl_803F3A2C[];
     extern char lbl_803F3A34[];
     void fn_802D3CE4(void *, s32);
     s32 fn_802D3D24(void *);
     void fn_802D40E4(s32 *, void *, s32);
-    void fn_802D39F0(void *, s32);
+    void fn_802D39F0(s32 *, s32);
     void fn_802D39E4(s32 *);
-    EStr fn_802D3928(s32, s32);
+    void fn_802D3928(s32 *, s32, s32);
     void fn_802D3D48(void *);
     s32 str;
     char *name = self + 0x58;
@@ -153,11 +152,15 @@ void fn_80336194(char *self) {
     fn_802D39E4(&str);
     fn_802D3CE4(&str, (s32)lbl_803F3A2C);
     {
-        EStr a = fn_802D3928(str, *(s32 *)(self + 0x58));
-        EStr b = fn_802D3928(a.p, (s32)lbl_803F3A34);
-        fn_802D3CE4(name, b.p);
-        fn_802D39F0(&b, b.p);
-        fn_802D39F0(&a, a.p);
+        s32 a;
+        fn_802D3928(&a, str, *(s32 *)(self + 0x58));
+        {
+            s32 b;
+            fn_802D3928(&b, a, (s32)lbl_803F3A34);
+            fn_802D3CE4(name, b);
+            fn_802D39F0(&b, b);
+        }
+        fn_802D39F0(&a, a);
     }
     fn_802D3D48(name);
     fn_802D39F0(&str, str);
@@ -280,18 +283,15 @@ static inline void *ERM_Alloc(s32 count) {
 
 void *fn_802DC3C0(void *, u32, s32, s32, s32);
 
-static inline void *ERM_AllocAligned(u32 *psize) {
+static inline void *ERM_AllocAligned(u32 size) {
     void *heap;
     void *p;
-    u32 n;
-    u32 size;
 
     heap = fn_802D0AB8();
-    n = *psize;
-    if (n == 0) {
+    if (size == 0) {
         return 0;
     }
-    size = (n + 0xF) & ~0xF;
+    size = (size + 0xF) & ~0xF;
     p = fn_802D197C(heap, size, 0x10);
     if (p == 0) {
         p = fn_802DC3C0(heap, size, 0x10, 0, 0);
