@@ -620,6 +620,34 @@ s32 fn_80338230(char *self, u32 max) {
     return total != 0;
 }
 
+s32 fn_803382D4(char *self, u32 max, s32 arg2, s32 arg3) {
+    extern char lbl_8045B58C[];
+    extern char lbl_8045B980[];
+    extern char lbl_8045B0F0[];
+    extern char lbl_8045BA40[];
+    extern char *lbl_80495050;
+    s32 fn_80337F3C(char *);
+    u32 total = 0;
+    s32 did;
+
+    do {
+        did = fn_80337F3C(lbl_8045B58C);
+        did += fn_80337F3C(lbl_8045B980);
+        did += fn_80337F3C(lbl_8045B0F0);
+        did += fn_80337F3C(lbl_8045BA40);
+        total += did;
+    } while (did != 0 && total < max);
+    if (total != 0) {
+        char *obj = lbl_80495050;
+        char *vt = *(char **)obj;
+        (*(void (**)(void *))(vt + 0x44))(obj + *(s16 *)(vt + 0x40));
+    }
+    if (total != 0) {
+        return 1;
+    }
+    return ((s32 (*)(char *, u32, s32, s32))fn_80338230)(self, max, arg2, arg3);
+}
+
 s32 fn_803383A8(char *self, u32 max, s32 arg2, s32 arg3) {
     extern char lbl_8045B82C[];
     extern char *lbl_80495050;
