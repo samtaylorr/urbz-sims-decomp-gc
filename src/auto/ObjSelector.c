@@ -5,12 +5,6 @@ static inline char *ObjSelector_GetData(void *sub) {
     return M2C_FIELD(sub, char **, 0x1C);
 }
 
-static inline void *ObjSelector_InitEntry(void *entry, void *src) {
-    void **fn_801169A0(void *, void *);
-    fn_801169A0(entry, src);
-    return entry;
-}
-
 static inline void ObjSelector_ClearPair(s32 *p) {
     p[0] = 0;
     p[1] = 0;
@@ -1105,27 +1099,26 @@ s32 fn_8016F120(void) {
 void fn_8016F150(void *arg0, u16 *arg1, s32 arg2, s32 arg3, s32 arg4, void *arg5, s32 arg6) {
     extern void *lbl_804966F4;
     extern void *lbl_804966F0;
-    void *fn_801169A0(void *, void *);
     void fn_800F1B80(void *, void *);
     void *fn_801A29B0(void *);
     void fn_80116FA4(void *, void *, s32);
     void fn_80116F1C(void *, s32);
     void fn_8016F528(void *, void *);
     u8 buf[0x58];
+    u8 *p;
 
     if (fn_8016F120()) {
-        u8 *p;
-        fn_801169A0(p = buf, lbl_804966F4);
+        p = ObjSelector_InitEntry(buf, lbl_804966F4);
         fn_8016EC50(buf, arg6);
         fn_800F1B80(buf + 0x34, arg0);
         M2C_FIELD(p, u32 *, 0x44) |= 4;
-        M2C_FIELD(buf, u16 *, 0x18) = arg1[0];
-        M2C_FIELD(buf, u16 *, 0x1A) = arg1[1];
-        M2C_FIELD(buf, u16 *, 0x1C) = arg1[2];
-        M2C_FIELD(buf, u16 *, 0x1E) = arg1[3];
-        M2C_FIELD(buf, s32 *, 0x48) = arg2;
-        M2C_FIELD(buf, s32 *, 0x4C) = arg3;
-        M2C_FIELD(buf, s32 *, 0x50) = arg4;
+        M2C_FIELD(p, u16 *, 0x18) = arg1[0];
+        M2C_FIELD(p, u16 *, 0x1A) = arg1[1];
+        M2C_FIELD(p, u16 *, 0x1C) = arg1[2];
+        M2C_FIELD(p, u16 *, 0x1E) = arg1[3];
+        M2C_FIELD(p, s32 *, 0x48) = arg2;
+        M2C_FIELD(p, s32 *, 0x4C) = arg3;
+        M2C_FIELD(p, s32 *, 0x50) = arg4;
         if (M2C_FIELD(arg5, u8 *, 6) != 0) {
             fn_80116FA4(p, fn_801A29B0(arg5), M2C_FIELD(arg5, u8 *, 6));
         }
