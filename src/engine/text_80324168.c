@@ -411,6 +411,42 @@ void fn_803283C4(u8 *self, u8 *arg1) {
     }
 }
 
+void fn_803286E4(u8 *self) {
+    void fn_802CB8D4(void *);
+    void (*temp_r0)(s32, s32, s16 *, s16 *);
+    u8 *node;
+    u8 *arg0;
+    s16 a;
+    s16 b;
+    s16 *pa;
+    s32 var_r11;
+    s32 idx;
+
+    for (node = *(u8 **)(self + 0x490DC); node != NULL; node = *(u8 **)(node + 8)) {
+        arg0 = *(u8 **)node;
+        pa = &a;
+        temp_r0 = M2C_FIELD(arg0, void (**)(s32, s32, s16 *, s16 *), 0x20);
+        if (temp_r0 != NULL) {
+            temp_r0(M2C_FIELD(arg0, s32 *, 0x30), 0, pa, &b);
+        } else {
+            b = (s16) (s32) temp_r0;
+            a = (s16) (s32) temp_r0;
+        }
+        var_r11 = 1;
+        if (M2C_FIELD(arg0, s16 *, 0x28) == *pa) {
+            var_r11 = 0;
+        }
+        M2C_FIELD(arg0, s32 *, 8) = var_r11;
+        idx = b;
+        M2C_FIELD(arg0, s16 *, 0x28) = *pa;
+        if (idx >= 0 && idx < *(s32 *)(self + 0x4911C)) {
+            (*(u8 ***)(self + 0x490E8))[idx] = arg0;
+            M2C_FIELD(arg0, s32 *, 0x88) = 0;
+        }
+    }
+    fn_802CB8D4(self + 0x490DC);
+}
+
 void fn_80328C30(u8 *self, s32 idx, Vec3_80325FD8 *v) {
     u8 *grp;
     u8 *obj;
