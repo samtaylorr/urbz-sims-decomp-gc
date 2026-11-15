@@ -33,6 +33,8 @@ typedef struct {
     void **first;
     void **last;
     s32 owns;
+    s32 unkC;
+    s32 unk10;
 } PtrList;
 
 static inline PtrList *PtrList_Init(PtrList *l) {
