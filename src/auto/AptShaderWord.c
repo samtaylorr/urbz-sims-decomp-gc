@@ -64,32 +64,27 @@ f32 fn_80007F5C(void) {
     return lbl_803C1660[0];
 }
 
-static inline void AptShaderWord_UpdateHeight(void *arg0) {
-    extern s32 lbl_80494378;
-    extern s32 lbl_80495A7C[];
-    void fn_803227C4(void *, s32, s32, s32, s32, s32);
-    s32 fn_800F3304(void *);
-    f32 fn_801DF514(s32);
-    f32 v[3];
-
-    fn_803227C4(v, lbl_80494378, fn_800F3304(lbl_80495A7C), 1, 0, 0);
-    M2C_FIELD(arg0, f32 *, 0x28) = v[1];
-    if (M2C_FIELD(arg0, f32 *, 0x28) < fn_801DF514(M2C_FIELD(arg0, s32 *, 0x34))) {
-        M2C_FIELD(arg0, f32 *, 0x28) = fn_801DF514(M2C_FIELD(arg0, s32 *, 0x34));
-    }
-    M2C_FIELD(arg0, f32 *, 0x24) = M2C_FIELD(arg0, f32 *, 0x28) / fn_80007F5C() + M2C_FIELD(arg0, f32 *, 0x30);
-}
 
 void fn_800082B4(void *arg0, f32 arg1) {
     extern f32 lbl_803C1678[];
     extern s32 lbl_80494378;
+    extern s32 lbl_80495A7C[];
     void fn_80320680(s32, s32, f32, f32);
+    void fn_803227C4(void *, s32, s32, s32, s32, s32);
+    s32 fn_800F3304(void *);
+    f32 fn_801DF514(s32);
     void *obj;
+    f32 v[2];
 
     obj = M2C_FIELD(arg0, void **, 0xC);
     if (obj != NULL && (M2C_FIELD(obj, s32 *, 0) != 0 || M2C_FIELD(obj, s32 *, 0xC) != 0)) {
         fn_80320680(lbl_80494378, 1, M2C_FIELD(obj, f32 *, 0x24), lbl_803C1678[0]);
-        AptShaderWord_UpdateHeight(arg0);
+        fn_803227C4(&v, lbl_80494378, fn_800F3304(lbl_80495A7C), 1, 0, 0);
+        M2C_FIELD(arg0, f32 *, 0x28) = v[1];
+        if (M2C_FIELD(arg0, f32 *, 0x28) < fn_801DF514(M2C_FIELD(arg0, s32 *, 0x34))) {
+            M2C_FIELD(arg0, f32 *, 0x28) = fn_801DF514(M2C_FIELD(arg0, s32 *, 0x34));
+        }
+        M2C_FIELD(arg0, f32 *, 0x24) = M2C_FIELD(arg0, f32 *, 0x28) / fn_80007F5C() + M2C_FIELD(arg0, f32 *, 0x30);
         fn_80320680(lbl_80494378, 1, arg1, lbl_803C1678[0]);
     }
 }
