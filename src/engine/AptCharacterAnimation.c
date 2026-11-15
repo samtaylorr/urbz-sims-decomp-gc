@@ -362,7 +362,9 @@ s32 fn_8028D764(void *arg0) {
     s32 n;
     s32 count;
 
-    size = fn_8028D6E0(arg0) * 2 + M2C_FIELD(arg0, s32 *, 0x10) + 0x202 + M2C_FIELD(arg0, s32 *, 0x818);
+    size = fn_8028D6E0(arg0) * 2 + M2C_FIELD(arg0, s32 *, 0x10);
+    size += 0x202;
+    size += M2C_FIELD(arg0, s32 *, 0x818);
     size += 0x280;
     size += fn_8029F660(M2C_FIELD(arg0, s32 *, 0x122C));
     count = M2C_FIELD(arg0, s32 *, 0x1284);
@@ -500,14 +502,16 @@ void fn_8028E120(void *arg0, s32 arg1) {
 void fn_8028E1EC(void *arg0, s32 arg1, void *arg2_) {
     u8 *arg2 = arg2_;
     u32 p;
+    s32 n;
 
     if (arg1 < 0) {
         return;
     }
-    fn_8028E120(arg0, arg1 + 1);
+    n = arg1 + 1;
+    fn_8028E120(arg0, n);
     p = (*(u32 **)((u8 *)arg0 + 0x1C))[arg1];
-    (*(void (**)(u8 *))(*(u8 **)(arg2 + 4) + 0xC))(arg2 + *(s16 *)(*(u8 **)(arg2 + 4) + 0x8));
     p &= ~1;
+    (*(void (**)(u8 *))(*(u8 **)(arg2 + 4) + 0xC))(arg2 + *(s16 *)(*(u8 **)(arg2 + 4) + 0x8));
     if (p != 0) {
         (*(void (**)(u8 *))(*(u8 **)(p + 4) + 0x14))((u8 *)p + *(s16 *)(*(u8 **)(p + 4) + 0x10));
     }
@@ -516,9 +520,7 @@ void fn_8028E1EC(void *arg0, s32 arg1, void *arg2_) {
         p |= 1;
     }
     (*(u32 **)((u8 *)arg0 + 0x1C))[arg1] = p;
-    if (*(s32 *)((u8 *)arg0 + 0x24) < arg1 + 1) {
-        *(s32 *)((u8 *)arg0 + 0x24) = arg1 + 1;
-    }
+    *(s32 *)((u8 *)arg0 + 0x24) = *(s32 *)((u8 *)arg0 + 0x24) < n ? n : *(s32 *)((u8 *)arg0 + 0x24);
 }
 
 void *fn_8028E2B8(void *arg0, s32 arg1) {
