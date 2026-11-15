@@ -276,6 +276,10 @@ void fn_800C2834(void) {
 typedef struct { s32 alloc; char *data; } VecProxy;
 typedef struct { char *start; char *finish; VecProxy eos; } PtrVec;
 
+static inline void VecProxy_Copy(VecProxy *self, VecProxy *src) {
+    self->data = src->data;
+}
+
 static inline void VecProxy_Swap(VecProxy *a, VecProxy *b) {
     VecProxy t;
     VecProxy_Copy(&t, a);
