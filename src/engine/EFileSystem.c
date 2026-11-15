@@ -205,6 +205,26 @@ void fn_802C4A90(EBox *box, f32 (*pts)[4], s32 n) {
     }
 }
 
+void fn_802C4B1C(EBox *box, EVec3 *pts, s32 n, f32 *m) {
+    s32 i;
+    s32 j;
+    for (i = 0; i < n; i++) {
+        EVec3 p;
+        EVec3 *q = &p;
+        EVec3 *s = &pts[i];
+        q->x = s->x * m[0] + s->y * m[4] + s->z * m[8] + m[12];
+        q->y = s->x * m[1] + s->y * m[5] + s->z * m[9] + m[13];
+        q->z = s->x * m[2] + s->y * m[6] + s->z * m[10] + m[14];
+        for (j = 0; j < 3; j++) {
+            if (*EVec3_At(q, j) < *EVec3_At(&box->min, j)) {
+                *EVec3_At(&box->min, j) = *EVec3_At(q, j);
+            } else if (*EVec3_At(q, j) > *EVec3_At(&box->max, j)) {
+                *EVec3_At(&box->max, j) = *EVec3_At(q, j);
+            }
+        }
+    }
+}
+
 void fn_802C4D24(EBox *box, EVec3 *pts, s32 n) {
     extern const f32 lbl_803F007C[];
     void fn_802C4A28(EBox *, EVec3 *, s32);
@@ -227,19 +247,12 @@ void fn_802C4D24(EBox *box, EVec3 *pts, s32 n) {
 void fn_802C5070(EBox *box, f32 *out) {
     extern f32 lbl_803F0084[];
     extern f32 fn_8025FC40(EVec3 *);
-    EVec3 *max = &box->max;
     EVec3 v;
     EVec3 sum;
-    sum.x = box->min.x + max->x;
-    sum.y = box->min.y + max->y;
-    sum.z = box->min.z + max->z;
-    v.x = sum.x * lbl_803F0084[0];
-    v.y = sum.y * lbl_803F0084[0];
-    v.z = sum.z * lbl_803F0084[0];
+    EVec3_Add(&sum, &box->min, &box->max);
+    EVec3_Scale(&v, &sum, lbl_803F0084[0]);
     *(EVec3 *)out = v;
-    v.x = out[0] - box->max.x;
-    v.y = out[1] - max->y;
-    v.z = out[2] - max->z;
+    EVec3_Sub(&v, (EVec3 *)out, &box->max);
     out[3] = fn_8025FC40(&v);
 }
 
@@ -426,10 +439,10 @@ void fn_802C57AC(void *self, const char *path) {
     void fn_802C5504(const char *, char *, char *, char *, char *);
     extern s32 fn_80248808(const char *s);
     extern char *fn_80248784(char *dst, const char *src);
+    char drive[3];
     char dir[0x100];
     char name[0x100];
     char ext[0x100];
-    char drive[8];
 
     fn_802C5504(path, drive, dir, name, ext);
     if (fn_80248808(ext) != 0 && ext[0] == '.') {
