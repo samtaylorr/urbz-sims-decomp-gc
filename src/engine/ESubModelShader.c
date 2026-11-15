@@ -14,10 +14,10 @@ static inline s32 ListCount(u8 *list) {
 }
 
 static inline void Strip_MinMaxX(u8 *self, s32 i, f32 *min, f32 *max) {
-    s16 *p = *(s16 **)(*(u8 **)(self + 0x14) + i * 0x34);
+    s16 *p = *(s16 **)(i * 0x34 + *(u8 **)(self + 0x14));
     u32 j;
 
-    for (j = 0; j < *(u32 *)(*(u8 **)(self + 0x14) + i * 0x34 + 0x18); j++) {
+    for (j = 0; j < *(u32 *)(i * 0x34 + *(u8 **)(self + 0x14) + 0x18); j++) {
         f32 v = p[j * 4];
         if (v <= *min) {
             *min = v;
@@ -402,7 +402,7 @@ void fn_80300B18(u8 *self, u8 *arg1) {
     if (*(s32 *)(arg1 + 0x20) == 0) {
         return;
     }
-    *(u8 *)(arg1 + 0x14) = 0;
+    *(s32 *)(arg1 + 0x14) = 0;
     ((void (*)(u8 *, s32, s32))fn_803008DC)(self, *(s32 *)(arg1 + 0x20), 0);
     ((void (*)(u8 *, s32, s32))fn_803008DC)(self, *(s32 *)(arg1 + 0x4), 0);
     ((void (*)(u8 *, s32, s32))fn_803008DC)(self, *(s32 *)(arg1 + 0x8), 0);
@@ -799,8 +799,10 @@ void fn_803051DC(char *self, s32 arg1, s32 arg2) {
     extern f32 lbl_80454A54[];
     extern const f32 lbl_803F196C[];
     extern const f32 lbl_803F1970[];
+    f32 c[4];
     s32 idx;
     s32 flags;
+    s32 b;
     f32 s;
     f32 *p;
     char *vt;
@@ -817,11 +819,13 @@ void fn_803051DC(char *self, s32 arg1, s32 arg2) {
         s = lbl_803F1970[0];
     }
     p = &lbl_80454A54[idx * 4];
-    {
-        f32 c[4] = { s * p[0], s * p[1], s * p[2], s * p[3] };
-        vt = M2C_FIELD(self, char **, 0x44);
-        (*(void (**)(char *, s32, s32, f32 *, s32))(vt + 0x8C))(self + *(s16 *)(vt + 0x88), arg1, !(flags & 8), c, !arg2);
-    }
+    c[0] = s * p[0];
+    c[1] = s * p[1];
+    c[2] = s * p[2];
+    c[3] = s * p[3];
+    b = (flags & 8) == 0;
+    vt = M2C_FIELD(self, char **, 0x44);
+    (*(void (**)(char *, s32, s32, f32 *, s32))(vt + 0x8C))(self + *(s16 *)(vt + 0x88), arg1, b, c, arg2 == 0);
 }
 
 void fn_803052AC(void *self, s32 arg1) {
