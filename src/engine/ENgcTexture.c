@@ -70,6 +70,16 @@ typedef struct {
     u8 pad6C[0xC];
 } Entry_8035F8AC;
 
+typedef struct {
+    u32 unk74 : 8;
+    u32 b80 : 1;
+    u32 b40 : 1;
+    u32 b20 : 1;
+    u32 b10 : 1;
+    u32 b08 : 1;
+    u32 rest : 19;
+} Flags_8036012C;
+
 void fn_802FF4EC(void);
 void fn_803601FC(void);
 void fn_8036023C(void);
@@ -703,8 +713,8 @@ s32 fn_80361C4C(void *self, s32 n, u32 *w_out, u32 *h_out) {
     s32 bpp;
     s32 i;
 
-    *w_out = ENgcTexture_RoundUp(w, M2C_FIELD(self, u8 *, 0x7C));
-    *h_out = ENgcTexture_RoundUp(h, M2C_FIELD(self, u8 *, 0x7D));
+    *w_out = ENgcTexture_RoundUp(w - 1, M2C_FIELD(self, u8 *, 0x7C));
+    *h_out = ENgcTexture_RoundUp(h - 1, M2C_FIELD(self, u8 *, 0x7D));
     bpp = M2C_FIELD(self, u8 *, 0x1A);
     if (bpp == 24) {
         bpp = 32;
@@ -713,8 +723,8 @@ s32 fn_80361C4C(void *self, s32 n, u32 *w_out, u32 *h_out) {
         total += (((s32)(*w_out * *h_out * bpp) + 7) / 8 + 31) & ~31;
         w >>= 1;
         h >>= 1;
-        *w_out = ENgcTexture_RoundUp(w, M2C_FIELD(self, u8 *, 0x7C));
-        *h_out = ENgcTexture_RoundUp(h, M2C_FIELD(self, u8 *, 0x7D));
+        *w_out = ENgcTexture_RoundUp(w - 1, M2C_FIELD(self, u8 *, 0x7C));
+        *h_out = ENgcTexture_RoundUp(h - 1, M2C_FIELD(self, u8 *, 0x7D));
     }
     return total;
 }
