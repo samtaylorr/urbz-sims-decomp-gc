@@ -26,19 +26,25 @@ typedef struct TextVec2 {
     f32 x, y;
 } TextVec2;
 
-static inline void TextVec2_Sub(TextVec2 *out, const TextVec2 *a, const TextVec2 *b) {
-    out->x = a->x - b->x;
-    out->y = a->y - b->y;
+static inline TextVec2 TextVec2_Sub(TextVec2 a, TextVec2 b) {
+    TextVec2 r;
+    r.x = a.x - b.x;
+    r.y = a.y - b.y;
+    return r;
 }
 
-static inline void TextVec2_Add(TextVec2 *out, const TextVec2 *a, const TextVec2 *b) {
-    out->x = a->x + b->x;
-    out->y = a->y + b->y;
+static inline TextVec2 TextVec2_Add(TextVec2 a, TextVec2 b) {
+    TextVec2 r;
+    r.x = a.x + b.x;
+    r.y = a.y + b.y;
+    return r;
 }
 
-static inline void TextVec2_Scale(TextVec2 *out, const TextVec2 *a, f32 s) {
-    out->x = a->x * s;
-    out->y = a->y * s;
+static inline TextVec2 TextVec2_Scale(TextVec2 a, f32 s) {
+    TextVec2 r;
+    r.x = a.x * s;
+    r.y = a.y * s;
+    return r;
 }
 
 static inline void ClearField4(char *p) {
@@ -590,8 +596,8 @@ void fn_800A3FFC(char *arg0) {
             a = &M2C_FIELD(arg0, TextVec2 *, 0x8);
             diff.x = M2C_FIELD(arg0, TextVec2 *, 0x10).x - a->x;
             diff.y = M2C_FIELD(arg0, TextVec2 *, 0x10).y - a->y;
-            scaled.x = diff.x * e;
             scaled.y = diff.y * e;
+            scaled.x = diff.x * e;
             res.x = a->x + scaled.x;
             res.y = a->y + scaled.y;
             M2C_FIELD(arg0, TextVec2 *, 0x18) = res;
