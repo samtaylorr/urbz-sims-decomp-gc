@@ -835,6 +835,20 @@ static inline EStringTmp EString_Concat(char *a, char *b) {
     return t;
 }
 
+static inline EStringTmp EString_WLeft(s32 *src, s32 n) {
+    s32 *fn_802D5D08(s32 *, s32 *, s32);
+    EStringTmp t;
+    fn_802D5D08(&t.s, src, n);
+    return t;
+}
+
+static inline EStringTmp EString_WConcat(s32 a, s32 b) {
+    s32 fn_802D50BC(s32, s32, s32);
+    EStringTmp t;
+    fn_802D50BC((s32)&t.s, a, b);
+    return t;
+}
+
 s32 fn_802D4474(s32 *arg0, char *arg1, char *arg2) {
     s32 fn_80248808(const char *);
     s32 pos;
@@ -844,20 +858,18 @@ s32 fn_802D4474(s32 *arg0, char *arg1, char *arg2) {
         return 0;
     } else {
         s32 left[2];
+        s32 mid[2];
+        s32 res[2];
         s32 *pl = left;
+        s32 *pr;
+
         fn_802D40E4(pl, arg0, pos);
-        {
-            s32 mid[2];
-            fn_802D3928(mid, (char *)pl[0], arg2);
-            {
-                s32 res[2];
-                s32 *pr = res;
-                fn_802D3928(pr, (char *)mid[0], (char *)(*arg0 + (pos + fn_80248808(arg1))));
-                fn_802D3CE4(arg0, (char *)pr[0]);
-                fn_802D39F0(pr, pr[0]);
-            }
-            fn_802D39F0(mid, mid[0]);
-        }
+        pr = res;
+        fn_802D3928(mid, (char *)pl[0], arg2);
+        fn_802D3928(res, (char *)mid[0], (char *)(*arg0 + (pos + fn_80248808(arg1))));
+        fn_802D3CE4(arg0, (char *)res[0]);
+        fn_802D39F0(pr, res[0]);
+        fn_802D39F0(mid, mid[0]);
         fn_802D39F0(pl, pl[0]);
     }
     return 1;
