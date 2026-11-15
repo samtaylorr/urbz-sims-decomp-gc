@@ -684,12 +684,14 @@ void fn_80361484(void *arg0, s32 arg1) {
     s32 a;
     s32 b;
     s32 r;
+    s32 h;
 
     *(u8 **)(self + 0x24) = lbl_8041D138;
     r = fn_80361C4C(self, *(u16 *)(self + 0x16) > 1 ? *(u16 *)(self + 0x16) : 1, &a, &b);
+    h = *(s32 *)(self + 0x78);
     lbl_80495228--;
     lbl_8049522C -= r;
-    if (*(s32 *)(self + 0x78) != 0) {
+    if (h != 0) {
         fn_802D1A00(fn_802D0C44(), *(s32 *)(self + 0x78));
     }
     fn_80338184(lbl_8045BAE8, *(s32 *)(self + 0x74));
@@ -755,9 +757,9 @@ s32 fn_80361ADC(void *arg0) {
 }
 
 s32 fn_80361C4C(void *self, s32 n, u32 *w_out, u32 *h_out) {
-    s32 total = 0;
     s32 w = M2C_FIELD(self, u16 *, 0x10);
     s32 h = M2C_FIELD(self, u16 *, 0x12);
+    s32 total = 0;
     s32 bpp;
     s32 i;
 
@@ -768,12 +770,10 @@ s32 fn_80361C4C(void *self, s32 n, u32 *w_out, u32 *h_out) {
         bpp = 32;
     }
     for (i = 0; i < n; i++) {
-        s32 bits = *w_out * *h_out * bpp;
+        total += ENgcTexture_LevelSize(*w_out, *h_out, bpp);
         w >>= 1;
         h >>= 1;
-        bits = (bits + 7) / 8;
         *w_out = ENgcTexture_RoundUp(w - 1, M2C_FIELD(self, u8 *, 0x7C));
-        total += (bits + 31) & ~31;
         *h_out = ENgcTexture_RoundUp(h - 1, M2C_FIELD(self, u8 *, 0x7D));
     }
     return total;
