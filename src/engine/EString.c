@@ -1318,6 +1318,62 @@ void fn_802D5254(s32 *arg0, s32 arg1) {
     }
 }
 
+s32 fn_802D52A4(s32 *arg0, s32 arg1, s32 arg2) {
+    void fn_802D5254(s32 *, s32);
+    void fn_802D55A4(s32 *, s32 *, s32 *, s32, s32);
+    void fn_803BA3C4(s32, s32 *);
+    s32 str;
+    s32 tok;
+    s32 pos;
+    s32 len;
+    s32 n;
+
+    if (*(u16 *)*arg0 == 0) {
+        return 0;
+    }
+    pos = 0;
+    len = fn_802D5200((u16 *)*arg0);
+    fn_802D5238((void *)&str);
+    n = 0;
+    do {
+        fn_802D55A4(&tok, arg0, &pos, len, arg1);
+        n++;
+        fn_802D57BC(&str, (u16 *)tok);
+        fn_802D5254(&tok, tok);
+        fn_803BA3C4(arg2, &str);
+    } while (str != 0);
+    fn_802D5254(&str, str);
+    return n - 1;
+}
+
+s32 fn_802D5378(s32 *arg0, s32 arg1) {
+    extern char lbl_803F0330[];
+    void fn_802D5254(s32 *, s32);
+    void fn_802D56C4(s32 *, u16 *);
+    s32 fn_802D7FC8(u16 *, s32, s32, s32);
+    u16 buf[4096];
+    u16 c;
+    s32 n;
+    s32 i;
+
+    i = 0;
+    do {
+        n = fn_802D7FC8(&c, 1, 1, arg1);
+        if (n == 0 || c == '\n') {
+            buf[i++] = (u16)(s32)lbl_803F0330;
+            break;
+        }
+        buf[i++] = c;
+    } while (n == 1);
+    if (i > 1 && buf[i - 2] == '\r') {
+        buf[i - 2] = (u16)(s32)lbl_803F0330;
+        i--;
+    }
+    fn_802D5254(arg0, *arg0);
+    fn_802D56C4(arg0, buf);
+    return i - 1;
+}
+
 s32 *fn_802D5564(s32 *arg0, u16 arg1) {
     M2C_UNK fn_802D56C4(s32 *, u16 *);
     u16 sp8[2];
@@ -1699,10 +1755,9 @@ s32 fn_802D61C4(s32 *arg0, u16 *arg1, u16 *arg2) {
     s32 fn_802D50BC(s32, s32, s32);
     void fn_802D5254(s32 *, s32);
     s32 s[5];
-    s32 *pa;
-    s32 *pc;
+    register s32 *pa asm("r29");
+    register s32 *pc asm("r30");
     s32 idx;
-    s32 rest;
 
     idx = fn_802D6108((u16 **)arg0, arg1);
     if (idx == -1) {
@@ -1712,8 +1767,7 @@ s32 fn_802D61C4(s32 *arg0, u16 *arg1, u16 *arg2) {
     fn_802D5D08(pa, arg0, idx);
     pc = &s[0];
     fn_802D50BC((s32)&s[2], s[4], (s32)arg2);
-    rest = (idx + fn_802D5200(arg1)) * 2 + *arg0;
-    fn_802D50BC((s32)&s[0], s[2], rest);
+    fn_802D50BC((s32)&s[0], s[2], (idx + fn_802D5200(arg1)) * 2 + *arg0);
     fn_802D57BC(arg0, (u16 *)s[0]);
     fn_802D5254(pc, s[0]);
     fn_802D5254(&s[2], s[2]);
