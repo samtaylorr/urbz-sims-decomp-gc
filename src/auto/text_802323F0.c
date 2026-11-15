@@ -63,6 +63,10 @@ static inline void Vec3f_Copy(Vec3f *d, Vec3f s) {
     *d = s;
 }
 
+static inline void Vec3f_Assign(Vec3f *d, const Vec3f *s) {
+    *d = *s;
+}
+
 static inline Vec3f Vec3f_Make(f32 x, f32 y, f32 z) {
     Vec3f v;
     v.x = x;
@@ -406,10 +410,9 @@ void fn_80232F2C(void *arg0) {
     void *vt;
     void **arr;
 
-    PtrList_Init(&list);
-    lp = &list;
+    lp = PtrList_Init(&list);
     fn_800643BC(M2C_FIELD(lbl_8041FA38[0], void **, 4), M2C_FIELD(arg0, s32 *, 0), &list);
-    if (PtrList_IsSingle(lp)) {
+    if (list.first != 0 && list.first == lp->last) {
         obj = fn_80065AD4(*list.first);
         vt = M2C_FIELD(obj, void **, 4);
         fn_80233024(arg0,
