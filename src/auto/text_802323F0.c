@@ -33,16 +33,16 @@ typedef struct { f32 x, y, z; } Vec3f;
 typedef struct { f32 x, y, z, w; } Vec4f;
 
 static inline void Vec4f_Set(Vec4f *v, f32 x, f32 y, f32 z, f32 w) {
-    v->x = x;
     v->y = y;
     v->z = z;
     v->w = w;
+    v->x = x;
 }
 
 static inline void Vec3f_Set(Vec3f *v, f32 x, f32 y, f32 z) {
-    v->x = x;
     v->y = y;
     v->z = z;
+    v->x = x;
 }
 
 static inline Vec3f Vec3f_Make(f32 x, f32 y, f32 z) {
