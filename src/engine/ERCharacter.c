@@ -412,6 +412,44 @@ void fn_80318C54(void *arg0) {
     fn_80318A70(lbl_803F2860, a, b, c, fn_802D1194(arg0));
 }
 
+void fn_80318CC4(const char *arg0, s32 arg1) {
+    void fn_802D1004(void);
+    void fn_80318960(void);
+    void fn_803189F0(void);
+    void fn_80318C08(void);
+    void fn_80318C54(void *);
+    void *fn_802D0AB8(void);
+    void *fn_802D0B3C(void);
+    void *fn_802D0BC0(void);
+    void *fn_802D0C44(void);
+    void fn_80318A70(const char *fmt, ...);
+    extern char lbl_803F2888[];
+    extern char lbl_803F28C4[];
+    extern char lbl_803F28DC[];
+    extern void *lbl_80496220;
+    void *obj;
+    char *vt;
+
+    fn_802D1004();
+    fn_80318960();
+    obj = lbl_80496220;
+    vt = *(char **)obj;
+    ((void (*)(void *))*(void **)(vt + 0xEC))((char *)obj + *(s16 *)(vt + 0xE8));
+    fn_80318A70(lbl_803F2888);
+    fn_80318A70(lbl_803F28C4, arg0, arg1);
+    fn_80318C08();
+    fn_80318C54(fn_802D0AB8());
+    fn_80318C54(fn_802D0B3C());
+    fn_80318C54(fn_802D0BC0());
+    fn_80318C54(fn_802D0C44());
+    obj = lbl_80496220;
+    vt = *(char **)obj;
+    ((void (*)(void *))*(void **)(vt + 0xDC))((char *)obj + *(s16 *)(vt + 0xD8));
+    fn_80318A70(lbl_803F28DC, arg0, arg1);
+    fn_80318A70(lbl_803F2888);
+    fn_803189F0();
+}
+
 void fn_80318DA4(void *arg0, s32 arg1, s32 arg2) {
     s32 fn_802D12C4(void *);
     void fn_80318C54(void *);
