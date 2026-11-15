@@ -233,15 +233,16 @@ void fn_80232D3C(u8 *arg0) {
 }
 
 void fn_80232D74(u8 *arg0, Struct1A8_5 *arg1) {
+    void fn_80232528(u8 *, Struct1A8_5 *);
     void fn_80234BE8(void *);
     void fn_80232C74(u8 *, u8 *);
     extern s32 lbl_8041FC0C[];
-    Struct1B8b saved;
+    Struct1B8 saved;
 
-    fn_80232528();
-    saved = *(Struct1B8b *)(arg0 + 0x1B8);
+    fn_80232528(arg0, arg1);
+    saved = *(Struct1B8 *)(arg0 + 0x1B8);
     *(Struct1A8_5 *)(arg0 + 0x1A8) = *arg1;
-    *(Struct1B8b *)(arg0 + 0x1B8) = saved;
+    *(Struct1B8 *)(arg0 + 0x1B8) = saved;
     fn_80234BE8(arg0 + 0x60);
     if (lbl_8041FC0C[0] != 0) {
         fn_80232C74(arg0, 0);
@@ -783,6 +784,29 @@ void fn_80236F4C(void *arg0, s32 arg1) {
     }
     if ((arg1 == 1) && ((s32) M2C_FIELD(arg0, s32 *, 0xEC) != 1)) {
         M2C_FIELD(arg0, s32 *, 0x64) = arg1;
+    }
+}
+
+void fn_80236F7C(char *self, s32 arg1) {
+    extern const f32 lbl_803EB49C[];
+    if (arg1 == 0) {
+        char *vt;
+        *(s32 *)(self + 0x30) = arg1;
+        if (*(s32 *)(self + 0xEC) == 1) {
+            *(s32 *)(self + 0xEC) = arg1;
+        }
+        vt = *(char **)(self + 0x58);
+        (*(void (**)(void *))(vt + 0xA4))(self + *(s16 *)(vt + 0xA0));
+    } else if (arg1 == 1) {
+        *(s32 *)(self + 0x64) = 0;
+    } else if (arg1 == 7) {
+        *(f32 *)(self + 0x34) = lbl_803EB49C[0];
+    } else if (arg1 == 8) {
+        *(f32 *)(self + 0x38) = lbl_803EB49C[0];
+    } else if (arg1 == 11) {
+        *(f32 *)(self + 0x3C) = lbl_803EB49C[0];
+    } else if (arg1 == 12) {
+        *(f32 *)(self + 0x40) = lbl_803EB49C[0];
     }
 }
 
