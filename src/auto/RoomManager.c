@@ -178,18 +178,18 @@ s32 fn_8018EE50(void) {
 }
 
 void fn_8018EE58(char *self, void *visitor) {
-    RMPtrVec *vec = (RMPtrVec *)(self + 4);
+    char **vec = (char **)(self + 4);
     char **it;
 
-    for (it = *(char ***)(self + 4); it != RMPtrVec_End(vec); it++) {
-        RMPtrVec *e = *(RMPtrVec **)it;
+    for (it = (char **)vec[0]; it != (char **)vec[1]; it++) {
+        char *e = *it;
         s32 i = 0;
-        s32 n = e->end - e->begin;
+        s32 n = (*(s32 **)(e + 4) - *(s32 **)(e + 0));
         char *vt = *(char **)visitor;
-        (*(void (**)(void *, s32, s32))(vt + 0x2C))((char *)visitor + *(s16 *)(vt + 0x28), *(s32 *)((char *)e + 0x10), n);
+        (*(void (**)(void *, s32, s32))(vt + 0x2C))((char *)visitor + *(s16 *)(vt + 0x28), *(s32 *)(e + 0x10), n);
         for (; i < n; i++) {
             char *vt2 = *(char **)visitor;
-            (*(void (**)(void *, s32, s32, char *))(vt2 + 0x4C))((char *)visitor + *(s16 *)(vt2 + 0x48), *(s32 *)((char *)e + 0x10), i, e->begin[i]);
+            (*(void (**)(void *, s32, s32, s32))(vt2 + 0x4C))((char *)visitor + *(s16 *)(vt2 + 0x48), *(s32 *)(e + 0x10), i, (*(s32 **)e)[i]);
         }
     }
 }
@@ -201,6 +201,38 @@ s32 fn_8018EF28(void *arg0, s32 id) {
         return (M2C_FIELD(*it, s32 *, 4) - M2C_FIELD(*it, s32 *, 0)) >> 2;
     }
     return 0;
+}
+
+void fn_8018F068(char *self, s32 key, u32 n) {
+    extern void ***fn_8018F2C4(char *, s32);
+    extern void fn_8018F14C(char *, s32);
+    extern void fn_803A9318(void **, void *, s32, void **);
+    char *tree = self + 4;
+    void ***it;
+    void **vec;
+    u32 size;
+
+    it = fn_8018F2C4(self, key);
+    if (it == *(void ****)(tree + 4)) {
+        fn_8018F14C(self, key);
+        it = fn_8018F2C4(self, key);
+        if (it == *(void ****)(tree + 4)) {
+            return;
+        }
+    }
+    vec = *it;
+    size = (void **)vec[1] - (void **)vec[0];
+    if (size < n) {
+        void *zero = NULL;
+        fn_803A9318(vec, vec[1], n - ((void **)vec[1] - (void **)vec[0]), &zero);
+    } else if (size > n) {
+        void **first = (void **)vec[1] - (size - n);
+        void **last = vec[1];
+        void **p;
+        for (p = first; p != last; p++) {
+        }
+        vec[1] = first;
+    }
 }
 
 s32 ***fn_8018F2C4(void *arg0, s32 id) {
@@ -222,18 +254,20 @@ s32 fn_8018F304(void *arg0, s32 arg1, s32 arg2) {
 void fn_8018F340(void *arg0, s32 id, u32 idx, s32 val) {
     s32 ***fn_8018F2C4(void *, s32);
     s32 ***it = fn_8018F2C4(arg0, id);
-    s32 ***it2;
     s32 **v;
 
     if (it == M2C_FIELD(arg0, s32 ****, 8) || idx >= (u32)((*it)[1] - (*it)[0])) {
         char *vt = *(char **)arg0;
         (*(void (**)(void *, s32, s32))(vt + 0x2C))((char *)arg0 + *(s16 *)(vt + 0x28), id, idx + 1);
+        it = fn_8018F2C4(arg0, id);
     }
-    it2 = fn_8018F2C4(arg0, id);
-    if (it2 != NULL) {
-        v = *it2;
-        if (v != NULL && (u32)(v[1] - v[0]) > idx && idx[v[0]] != val) {
-            idx[v[0]] = val;
+    if (it != NULL) {
+        v = *it;
+        if (v != NULL && (u32)(v[1] - v[0]) > idx) {
+            s32 *p = &v[0][idx];
+            if (*p != val) {
+                *p = val;
+            }
         }
     }
 }
