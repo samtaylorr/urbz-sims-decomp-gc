@@ -134,6 +134,15 @@ static inline void RMMap_EndP(RMMapIter *out, char *map) {
     out->node = *(RMMapNode **)(map + 4);
 }
 
+typedef struct {
+    char **begin;
+    char **end;
+} RMPtrVec;
+
+static inline char **RMPtrVec_End(RMPtrVec *v) {
+    return v->end;
+}
+
 extern s32 lbl_80494538;
 void fn_8018FA84(void *arg0, s32 arg1);
 void *fn_8018ED98(void) {
@@ -168,6 +177,23 @@ s32 fn_8018EE50(void) {
     return 1;
 }
 
+void fn_8018EE58(char *self, void *visitor) {
+    char **vec = (char **)(self + 4);
+    char **it;
+
+    for (it = (char **)vec[0]; it != (char **)vec[1]; it++) {
+        char *e = *it;
+        s32 i = 0;
+        s32 n = (*(s32 **)(e + 4) - *(s32 **)(e + 0));
+        char *vt = *(char **)visitor;
+        (*(void (**)(void *, s32, s32))(vt + 0x2C))((char *)visitor + *(s16 *)(vt + 0x28), *(s32 *)(e + 0x10), n);
+        for (; i < n; i++) {
+            char *vt2 = *(char **)visitor;
+            (*(void (**)(void *, s32, s32, s32))(vt2 + 0x4C))((char *)visitor + *(s16 *)(vt2 + 0x48), *(s32 *)(e + 0x10), i, (*(s32 **)e)[i]);
+        }
+    }
+}
+
 s32 fn_8018EF28(void *arg0, s32 id) {
     s32 ***fn_8018F2C4(void *, s32);
     s32 ***it = fn_8018F2C4(arg0, id);
@@ -191,6 +217,24 @@ s32 fn_8018F304(void *arg0, s32 arg1, s32 arg2) {
     s32 ***r = fn_8018F2C4(arg0, arg1);
     s32 *a = **r;
     return a[arg2];
+}
+
+void fn_8018F340(void *arg0, s32 id, u32 idx, s32 val) {
+    s32 ***fn_8018F2C4(void *, s32);
+    s32 ***it = fn_8018F2C4(arg0, id);
+    s32 **v;
+
+    if (it == M2C_FIELD(arg0, s32 ****, 8) || idx >= (u32)((*it)[1] - (*it)[0])) {
+        char *vt = *(char **)arg0;
+        (*(void (**)(void *, s32, s32))(vt + 0x2C))((char *)arg0 + *(s16 *)(vt + 0x28), id, idx + 1);
+    }
+    it = fn_8018F2C4(arg0, id);
+    if (it != NULL && (v = *it) != NULL) {
+        s32 *b = v[0];
+        if ((u32)(v[1] - b) > idx && *(s32 *)((char *)b + idx * 4) != val) {
+            *(s32 *)((char *)b + idx * 4) = val;
+        }
+    }
 }
 
 void fn_8018F664(char *self, char *arg1, s32 n) {
