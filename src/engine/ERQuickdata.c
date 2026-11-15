@@ -11,7 +11,8 @@ typedef struct ERQdLookup {
     u8 pad0[0x20];
     u32 *unk20;
     struct ERQdLookup *unk24;
-    u8 pad28[0x34 - 0x28];
+    u8 pad28[0x2C - 0x28];
+    void *unk2C[2];
     s32 unk34[2];
     u32 unk3C;
     u8 pad40[4];
@@ -596,6 +597,49 @@ void fn_80330D4C(u8 *self, s32 a, s32 b) {
     }
 }
 
+void fn_80330DEC(ERQdLookup *self, void *res, s32 idx) {
+    extern void fn_8031EA2C(void *);
+    extern void fn_8033740C(void *, void *, s32, s32);
+    extern u8 lbl_8045BAE8[];
+
+    if (self->unk64 & 2) {
+        fn_80330DEC(self->unk24, res, idx);
+        return;
+    }
+    if (!(self->unk20[1] & 0x4000000)) {
+        if (((void **)((u8 *)self + 0x2C))[idx] != NULL) {
+            fn_8031EA2C(((void **)((u8 *)self + 0x2C))[idx]);
+        }
+        ((void **)((u8 *)self + 0x2C))[idx] = res;
+        self->unk34[idx] = M2C_FIELD(res, s32 *, 8);
+        fn_8033740C(lbl_8045BAE8, res, 0, 0);
+        {
+            u8 *obj = (u8 *)self->unk20;
+            char *vt = M2C_FIELD(obj, char **, 0xF0);
+            s16 off = *(s16 *)(vt + 0x40);
+            void (*f)(void *, s32, s32) = *(void (**)(void *, s32, s32))(vt + 0x44);
+            f(obj + off, M2C_FIELD(res, s32 *, 0x20), idx);
+        }
+    }
+}
+
+void fn_80330EA4(ERQdLookup *self, void *res, s32 idx) {
+    extern void fn_8031EA2C(void *);
+
+    if (self->unk64 & 2) {
+        fn_80330EA4(self->unk24, res, idx);
+        return;
+    }
+    if (!(self->unk20[1] & 0x4000000)) {
+        if (((void **)((u8 *)self + 0x2C))[idx] != NULL) {
+            fn_8031EA2C(((void **)((u8 *)self + 0x2C))[idx]);
+        }
+        ((void **)((u8 *)self + 0x2C))[idx] = res;
+        self->unk34[idx] = M2C_FIELD(res, s32 *, 8);
+        ((s32 (*)[16])((u8 *)self->unk20 + 0x64))[idx][0] = M2C_FIELD(res, s32 *, 0x20);
+    }
+}
+
 s32 fn_80330F38(ERQdLookup *self, s32 id) {
     if (self->unk64 & 2) {
         return fn_80330F38(self->unk24, id);
@@ -634,9 +678,8 @@ void fn_80330FC4(s32 arg0, s32 arg1) {
     if (arg1 == 0xFFFF) {
         if (arg0 != 0) {
             s32 *p = lbl_8049624C;
-            s32 zero = 0;
-            p[1] = zero;
-            p[0] = zero;
+            p[0] = 0;
+            p[1] = 0;
             fn_802CA9A8(lbl_8045AA90);
             lbl_80496254 = fn_802D6A90(lbl_80493970, fn_80331064, fn_8033108C, fn_803310B8, 2, lbl_803F34C0, lbl_80493858);
         } else {
