@@ -168,6 +168,40 @@ void fn_8035F8AC(void *arg0, s32 arg1) {
     }
 }
 
+void fn_8035F938(void) {
+    extern Entry_8035F8AC lbl_804753B8[];
+    u32 fn_80360948(s32, u32, s32, u32, void *);
+    Entry_8035F8AC *e;
+    u32 i;
+    u32 a;
+    u32 b;
+    u32 pos;
+    u32 end;
+
+    e = lbl_804753B8;
+    for (i = 0; i <= 1; i++, e++) {
+        if (!(M2C_FIELD(e, u32 *, 0x74) & 0x200000)) {
+            if (e->unk0 != 5 || (M2C_FIELD(e, u32 *, 0x74) & 0x400000) || (M2C_FIELD(e, u8 *, 0x75) & 0x10)) {
+                continue;
+            }
+        }
+        a = 0;
+        b = 0;
+        if (e->unk1C != NULL) {
+            pos = M2C_FIELD(e->unk1C, u32 *, 0x1B2);
+            if (pos < M2C_FIELD(e, u32 *, 0x20)) {
+                b = M2C_FIELD(e, u32 *, 0x70) >> 1;
+            }
+            end = M2C_FIELD(e, u32 *, 0x18) * 2 + M2C_FIELD(e, u32 *, 0x6C);
+            if (pos >= end && M2C_FIELD(e, u32 *, 0x20) < end) {
+                a = M2C_FIELD(e, u32 *, 0x70) >> 1;
+            }
+            M2C_FIELD(e, u32 *, 0x20) = pos;
+        }
+        fn_80360948(0, a, 0, b, e);
+    }
+}
+
 void fn_8035FA0C(void *self, void *tex) {
     extern Entry_8035F8AC lbl_804753B8[];
     void fn_80383AE8(void *, s32);
