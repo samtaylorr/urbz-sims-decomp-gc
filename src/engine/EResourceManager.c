@@ -283,15 +283,14 @@ static inline void *ERM_Alloc(s32 count) {
 
 void *fn_802DC3C0(void *, u32, s32, s32, s32);
 
-static inline void *ERM_AllocAligned(u32 size) {
-    void *heap;
+static inline void *ERM_AllocAlignedFrom(void *heap, u32 n) {
     void *p;
+    u32 size;
 
-    heap = fn_802D0AB8();
-    if (size == 0) {
+    if (n == 0) {
         return 0;
     }
-    size = (size + 0xF) & ~0xF;
+    size = (n + 0xF) & ~0xF;
     p = fn_802D197C(heap, size, 0x10);
     if (p == 0) {
         p = fn_802DC3C0(heap, size, 0x10, 0, 0);
@@ -873,14 +872,12 @@ void *fn_802DC3C0(void *, u32, s32, s32, s32);
 void fn_80338A08(char *self) {
     extern char *lbl_80494DF0;
     char *vt;
-    s32 size;
 
     if (*(void **)(self + 0xC) == NULL) {
         vt = *(char **)(lbl_80494DF0 + 0x338);
-        size = (*(s32 (**)(void *))(vt + 0x44))(lbl_80494DF0 + *(s16 *)(vt + 0x40));
-        *(s32 *)(self + 0x10) = size;
-        if (size != 0) {
-            *(void **)(self + 0xC) = ERM_AllocAligned((u32 *)(self + 0x10));
+        *(s32 *)(self + 0x10) = (*(s32 (**)(void *))(vt + 0x44))(lbl_80494DF0 + *(s16 *)(vt + 0x40));
+        if (*(s32 *)(self + 0x10) != 0) {
+            *(void **)(self + 0xC) = ERM_AllocAligned(*(u32 *)(self + 0x10));
         }
     }
 }
