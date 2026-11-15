@@ -36,6 +36,10 @@ static inline u32 ENgcTexture_CheckHalf(void *e, u32 a, u32 b) {
     return M2C_FIELD(e, u32 *, 0x70) / 2;
 }
 
+static inline u32 ENgcTexture_RoundUp(s32 v, s32 align) {
+    return (v - 1 + align) & -align;
+}
+
 typedef struct { f32 x, y, z; } ENgcVec3;
 
 static inline void ENgcVec3_splat(ENgcVec3 *d, f32 s) {
@@ -639,8 +643,8 @@ s32 fn_80361C4C(void *self, s32 n, u32 *w_out, u32 *h_out) {
     s32 bpp;
     s32 i;
 
-    *w_out = (w - 1 + M2C_FIELD(self, u8 *, 0x7C)) & -M2C_FIELD(self, u8 *, 0x7C);
-    *h_out = (h - 1 + M2C_FIELD(self, u8 *, 0x7D)) & -M2C_FIELD(self, u8 *, 0x7D);
+    *w_out = (w + M2C_FIELD(self, u8 *, 0x7C) - 1) & -M2C_FIELD(self, u8 *, 0x7C);
+    *h_out = (h + M2C_FIELD(self, u8 *, 0x7D) - 1) & -M2C_FIELD(self, u8 *, 0x7D);
     bpp = M2C_FIELD(self, u8 *, 0x1A);
     if (bpp == 24) {
         bpp = 32;
@@ -649,8 +653,8 @@ s32 fn_80361C4C(void *self, s32 n, u32 *w_out, u32 *h_out) {
         total += (((s32)(*w_out * *h_out * bpp) + 7) / 8 + 31) & ~31;
         w >>= 1;
         h >>= 1;
-        *w_out = (w - 1 + M2C_FIELD(self, u8 *, 0x7C)) & -M2C_FIELD(self, u8 *, 0x7C);
-        *h_out = (h - 1 + M2C_FIELD(self, u8 *, 0x7D)) & -M2C_FIELD(self, u8 *, 0x7D);
+        *w_out = (w + M2C_FIELD(self, u8 *, 0x7C) - 1) & -M2C_FIELD(self, u8 *, 0x7C);
+        *h_out = (h + M2C_FIELD(self, u8 *, 0x7D) - 1) & -M2C_FIELD(self, u8 *, 0x7D);
     }
     return total;
 }
