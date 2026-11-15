@@ -410,26 +410,24 @@ s32 fn_80300ACC(u8 *self) {
 }
 
 void fn_80300B18(u8 *self, u8 *arg1) {
-    s32 *e;
-
-    if (*(s32 *)(arg1 + 0x20) != 0) {
-        e = (s32 *)arg1;
-        e[5] = 0;
-        ((void (*)(u8 *, s32, s32))fn_803008DC)(self, *(s32 *)(arg1 + 0x20), 0);
-        ((void (*)(u8 *, s32, s32))fn_803008DC)(self, *(s32 *)(arg1 + 0x4), 0);
-        ((void (*)(u8 *, s32, s32))fn_803008DC)(self, *(s32 *)(arg1 + 0x8), 0);
-        ((void (*)(u8 *, s32, s32))fn_803008DC)(self, *(s32 *)(arg1 + 0xC), 0);
-        ((void (*)(u8 *, s32, s32))fn_803008DC)(self, *(s32 *)(arg1 + 0x10), 0);
-        ((void (*)(u8 *, s32, s32))fn_803008DC)(self, *(s32 *)(arg1 + 0x14), 1);
-        ((void (*)(u8 *, s32, s32))fn_803008DC)(self, *(s32 *)(arg1 + 0x0), 1);
-        *(s32 *)(arg1 + 0x10) = 0;
-        *(s32 *)(arg1 + 0x20) = 0;
-        *(s32 *)(arg1 + 0x14) = 0;
-        *(s32 *)(arg1 + 0x0) = 0;
-        *(s32 *)(arg1 + 0x4) = 0;
-        *(s32 *)(arg1 + 0x8) = 0;
-        *(s32 *)(arg1 + 0xC) = 0;
+    if (*(s32 *)(arg1 + 0x20) == 0) {
+        return;
     }
+    *(u8 *)(arg1 + 0x14) = 0;
+    ((void (*)(u8 *, s32, s32))fn_803008DC)(self, *(s32 *)(arg1 + 0x20), 0);
+    ((void (*)(u8 *, s32, s32))fn_803008DC)(self, *(s32 *)(arg1 + 0x4), 0);
+    ((void (*)(u8 *, s32, s32))fn_803008DC)(self, *(s32 *)(arg1 + 0x8), 0);
+    ((void (*)(u8 *, s32, s32))fn_803008DC)(self, *(s32 *)(arg1 + 0xC), 0);
+    ((void (*)(u8 *, s32, s32))fn_803008DC)(self, *(s32 *)(arg1 + 0x10), 0);
+    ((void (*)(u8 *, s32, s32))fn_803008DC)(self, *(s32 *)(arg1 + 0x14), 1);
+    ((void (*)(u8 *, s32, s32))fn_803008DC)(self, *(s32 *)(arg1 + 0x0), 1);
+    *(s32 *)(arg1 + 0x10) = 0;
+    *(s32 *)(arg1 + 0x20) = 0;
+    *(s32 *)(arg1 + 0x14) = 0;
+    *(s32 *)(arg1 + 0x0) = 0;
+    *(s32 *)(arg1 + 0x4) = 0;
+    *(s32 *)(arg1 + 0x8) = 0;
+    *(s32 *)(arg1 + 0xC) = 0;
 }
 
 void fn_80300BE8(u8 *self) {
@@ -669,7 +667,7 @@ void fn_803040A4(u8 *self, s32 arg1, s32 arg2) {
     s32 i;
 
     for (i = 0; i < ListCount(self + 0x14); i++) {
-        Strip_MinMaxX((Strip **)(self + 0x14), i, (f32 *)arg1, (f32 *)arg2);
+        Strip_MinMaxX(self, i, (f32 *)arg1, (f32 *)arg2);
     }
 }
 
