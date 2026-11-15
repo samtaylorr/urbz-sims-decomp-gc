@@ -52,6 +52,11 @@ static inline void TextVec2_AddO(TextVec2 *out, const TextVec2 *a, const TextVec
     out->y = a->y + b->y;
 }
 
+static inline void TextVec2_ScaleO(TextVec2 *out, const TextVec2 *a, f32 s) {
+    out->x = a->x * s;
+    out->y = a->y * s;
+}
+
 static inline TextVec2 TextVec2_AddP(const TextVec2 *a, TextVec2 b) {
     TextVec2 r;
     r.x = a->x + b.x;
@@ -609,12 +614,11 @@ void fn_800A3FFC(char *arg0) {
             M2C_FIELD(arg0, f32 *, 0x4) = lbl_803CD994[0];
             M2C_FIELD(arg0, TextVec2 *, 0x18) = M2C_FIELD(arg0, TextVec2 *, 0x10);
         } else {
-            t = (lbl_803CD994[0] - t) / lbl_803CD994[0];
-            s = lbl_803CD998[0] - t;
-            e = lbl_803CD9A0[0] * s * s * s + lbl_803CD9A4[0] * s * s + lbl_803CD99C[0] * s;
+            s = lbl_803CD998[0] - (lbl_803CD994[0] - t) / lbl_803CD994[0];
+            e = s * lbl_803CD99C[0] + (s * lbl_803CD9A0[0] * s * s + s * lbl_803CD9A4[0] * s);
             diff = TextVec2_SubP(&M2C_FIELD(arg0, TextVec2 *, 0x10), &M2C_FIELD(arg0, TextVec2 *, 0x8));
             scaled = TextVec2_Scale(diff, e);
-            res = TextVec2_AddP(&M2C_FIELD(arg0, TextVec2 *, 0x8), scaled);
+            TextVec2_AddO(&res, &M2C_FIELD(arg0, TextVec2 *, 0x8), &scaled);
             M2C_FIELD(arg0, TextVec2 *, 0x18) = res;
         }
     }
