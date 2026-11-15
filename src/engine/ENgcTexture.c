@@ -36,8 +36,8 @@ static inline u32 ENgcTexture_CheckHalf(void *e, u32 a, u32 b) {
     return M2C_FIELD(e, u32 *, 0x70) / 2;
 }
 
-static inline u32 ENgcTexture_RoundUp(s32 v, s32 align) {
-    return (v - 1 + align) & -align;
+static inline u32 ENgcTexture_RoundUp(s32 v, u8 align) {
+    return (v + align) & -align;
 }
 
 typedef struct { f32 x, y, z; } ENgcVec3;
@@ -298,6 +298,32 @@ void fn_8035FF98(void *self, void *tex, u8 v) {
         }
     }
     fn_803601FC();
+}
+
+s32 fn_8036012C(Entry_8035F8AC *e, void *a, s32 b, s32 c) {
+    void fn_80248488(void *, s32, u32);
+    u32 n;
+
+    M2C_FIELD(e, u32 *, 0x74) |= 0x800000;
+    M2C_FIELD(e, u32 *, 0x74) &= ~0x200000;
+    M2C_FIELD(e, u32 *, 0x6C) = 0x14180;
+    M2C_FIELD(e, u8 *, 0x14) = b;
+    e->unk15 = c;
+    M2C_FIELD(e, u8 *, 0x75) &= ~0x8;
+    M2C_FIELD(e, u8 *, 0x74) = 1;
+    M2C_FIELD(e, u32 *, 0x70) = 0x232A0;
+    M2C_FIELD(e, u8 *, 0x75) |= 0x10;
+    M2C_FIELD(e, void **, 0x10) = a;
+    M2C_FIELD(e, u32 *, 0x60) = 0xA0C0;
+    M2C_FIELD(e, u32 *, 0x64) = M2C_FIELD(a, u32 *, 0xC);
+    if (M2C_FIELD(e, u32 *, 0x64) < 0xA0C0) {
+        n = M2C_FIELD(e, u32 *, 0x64);
+        fn_80248488((u8 *)e->unk68 + n, 0, 0xA0C0 - n);
+    } else {
+        n = 0xA0C0;
+    }
+    e->unk0 = 2;
+    return n;
 }
 
 void fn_803601FC(void) {
@@ -643,8 +669,8 @@ s32 fn_80361C4C(void *self, s32 n, u32 *w_out, u32 *h_out) {
     s32 bpp;
     s32 i;
 
-    *w_out = (w + M2C_FIELD(self, u8 *, 0x7C) - 1) & -M2C_FIELD(self, u8 *, 0x7C);
-    *h_out = (h + M2C_FIELD(self, u8 *, 0x7D) - 1) & -M2C_FIELD(self, u8 *, 0x7D);
+    *w_out = ENgcTexture_RoundUp(w, M2C_FIELD(self, u8 *, 0x7C));
+    *h_out = ENgcTexture_RoundUp(h, M2C_FIELD(self, u8 *, 0x7D));
     bpp = M2C_FIELD(self, u8 *, 0x1A);
     if (bpp == 24) {
         bpp = 32;
@@ -653,8 +679,8 @@ s32 fn_80361C4C(void *self, s32 n, u32 *w_out, u32 *h_out) {
         total += (((s32)(*w_out * *h_out * bpp) + 7) / 8 + 31) & ~31;
         w >>= 1;
         h >>= 1;
-        *w_out = (w + M2C_FIELD(self, u8 *, 0x7C) - 1) & -M2C_FIELD(self, u8 *, 0x7C);
-        *h_out = (h + M2C_FIELD(self, u8 *, 0x7D) - 1) & -M2C_FIELD(self, u8 *, 0x7D);
+        *w_out = ENgcTexture_RoundUp(w, M2C_FIELD(self, u8 *, 0x7C));
+        *h_out = ENgcTexture_RoundUp(h, M2C_FIELD(self, u8 *, 0x7D));
     }
     return total;
 }
