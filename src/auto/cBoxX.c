@@ -1,5 +1,14 @@
 /* Functions from 0x800034C0 to 0x803C0D60, found by decomp-toolkit. */
 #include "common.h"
+typedef struct __va_list_tag {
+    char gpr;
+    char fpr;
+    char *overflow_arg_area;
+    char *reg_save_area;
+} va_list[1];
+
+#define va_start(AP, LASTARG) \
+    (__builtin_next_arg(LASTARG), *(AP) = *(struct __va_list_tag *)__builtin_saveregs())
 
 typedef struct { s32 node; } It_80100494;
 
@@ -442,6 +451,51 @@ void fn_801005A4(void **out, void *arg1, u32 key) {
     *out = y;
 }
 
+void fn_80100978(void *self, u32 key) {
+    extern void *lbl_80495C90;
+    void *fn_801759A4(void *, u32, s32);
+    void fn_80100A64(void *, It_80100494 *, It_80100494 *);
+    const u32 *kp = &key;
+    It_80100494 lo;
+    It_80100494 hi;
+    void *y;
+    void *x;
+
+    y = M2C_FIELD(self, void **, 0x40);
+    x = M2C_FIELD(y, void **, 4);
+    while (x != NULL) {
+        if (!(M2C_FIELD(x, u32 *, 0x10) < *kp)) {
+            y = x;
+            x = M2C_FIELD(y, void **, 8);
+        } else {
+            x = M2C_FIELD(x, void **, 0xC);
+        }
+    }
+    lo.node = (s32)y;
+    y = M2C_FIELD(self, void **, 0x40);
+    x = M2C_FIELD(y, void **, 4);
+    while (x != NULL) {
+        if (*kp < M2C_FIELD(x, u32 *, 0x10)) {
+            y = x;
+            x = M2C_FIELD(y, void **, 8);
+        } else {
+            x = M2C_FIELD(x, void **, 0xC);
+        }
+    }
+    hi.node = (s32)y;
+    if (!TreeIt_ne(&lo, &hi)) {
+        void *r = fn_801759A4(M2C_FIELD(lbl_80495C90, void **, 0x58), key, 0);
+        if (r != NULL) {
+            void *vt = M2C_FIELD(r, void **, 0xBC);
+            ((void (*)(void *))M2C_FIELD(vt, void **, 0xE4))((char *)r + M2C_FIELD(vt, s16 *, 0xE0));
+        }
+    } else {
+        It_80100494 a = lo;
+        It_80100494 b = hi;
+        fn_80100A64(self, &a, &b);
+    }
+}
+
 void fn_80100D9C(s32 arg0) {
     M2C_UNK fn_80100F68(s32);
     M2C_UNK fn_80100E14(s32);
@@ -648,6 +702,29 @@ void fn_80101C50(void *arg0) {
     void fn_80101C90(void *, s32, f32);
     extern f32 lbl_803D67B0[];
     fn_80101C90(arg0, fn_80101BF8(arg0), lbl_803D67B0[0]);
+}
+
+void fn_80101C90(void *arg0, s32 arg1, f32 arg2) {
+    extern void *lbl_80494FA4;
+    extern u8 *lbl_8041FAD0[];
+    extern f32 lbl_803D67C0[];
+    void fn_8033BEA0(void *, s32, s32);
+    typedef struct { s16 off; void (*fn)(void *, void *); } VtEnt;
+    char buf[0x18];
+    char *obj;
+    char *vt;
+
+    M2C_FIELD(arg0, s32 *, 4) = 0;
+    {
+        char *o = lbl_80494FA4;
+        VtEnt *e = (VtEnt *)(*(char **)o + 0x40);
+        e->fn(o + e->off, (fn_8033BEA0(buf, arg1, 0), buf));
+    }
+    if (M2C_FIELD(arg0, s32 *, 8) == 0) {
+        obj = lbl_80494FA4;
+        vt = *(char **)obj;
+        ((void (*)(void *, f32))M2C_FIELD(vt, void **, 0x64))(obj + M2C_FIELD(vt, s16 *, 0x60), arg2 * (f32)(s8)lbl_8041FAD0[0][0x1D] / lbl_803D67C0[0]);
+    }
 }
 
 void fn_80102010(s32 arg0, s32 arg1) {
