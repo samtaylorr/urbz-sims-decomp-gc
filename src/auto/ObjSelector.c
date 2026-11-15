@@ -695,7 +695,7 @@ s32 fn_8016D41C(void *arg0) {
 }
 
 void *fn_8016DBF0();
-void *fn_8016D954(void);
+void *fn_8016D954();
 s32 fn_800FCB50(s32, s32);
 s32 fn_8016D444(void *arg0) {
     return M2C_FIELD(M2C_FIELD(arg0, char **, 0x38), s16 *, 0x12) == 2;
