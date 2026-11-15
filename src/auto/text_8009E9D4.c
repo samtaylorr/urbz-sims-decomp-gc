@@ -22,6 +22,15 @@ static inline void ReleasePtr(void **pp) {
         *pp = NULL;
     }
 }
+typedef struct TextVec2 {
+    f32 x, y;
+} TextVec2;
+
+static inline void TextVec2_Set(TextVec2 *v, f32 x, f32 y) {
+    v->x = x;
+    v->y = y;
+}
+
 static inline void ClearField4(char *p) {
     M2C_FIELD(p, s32 *, 4) = 0;
 }
