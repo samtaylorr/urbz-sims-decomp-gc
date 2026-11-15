@@ -40,6 +40,10 @@ static inline u32 ENgcTexture_RoundUp(s32 v, u8 align) {
     return (v + align) & -align;
 }
 
+static inline s32 ENgcTexture_LevelSize(u32 w, u32 h, s32 bpp) {
+    return ((s32)(w * h * bpp + 7) / 8 + 31) & ~31;
+}
+
 typedef struct { f32 x, y, z; } ENgcVec3;
 
 static inline void ENgcVec3_splat(ENgcVec3 *d, f32 s) {
@@ -353,18 +357,18 @@ s32 fn_8036012C(Entry_8035F8AC *e, void *a, s32 b, s32 c) {
     M2C_FIELD(e, u32 *, 0x6C) = 0x14180;
     M2C_FIELD(e, u8 *, 0x14) = b;
     e->unk15 = c;
-    M2C_FIELD(e, Flags_8036012C *, 0x74).b08 = 0;
+    M2C_FIELD(e, u8 *, 0x75) &= ~0x8;
     M2C_FIELD(e, Flags_8036012C *, 0x74).unk74 = 1;
     M2C_FIELD(e, u32 *, 0x70) = 0x232A0;
-    M2C_FIELD(e, Flags_8036012C *, 0x74).b10 = 1;
+    M2C_FIELD(e, u8 *, 0x75) |= 0x10;
     M2C_FIELD(e, void **, 0x10) = a;
     M2C_FIELD(e, u32 *, 0x60) = 0xA0C0;
     M2C_FIELD(e, u32 *, 0x64) = M2C_FIELD(a, u32 *, 0xC);
-    if (M2C_FIELD(e, u32 *, 0x64) >= 0xA0C0) {
-        n = 0xA0C0;
-    } else {
+    if (M2C_FIELD(e, u32 *, 0x64) < M2C_FIELD(e, u32 *, 0x60)) {
         n = M2C_FIELD(e, u32 *, 0x64);
-        fn_80248488((u8 *)e->unk68 + n, 0, 0xA0C0 - n);
+        fn_80248488((u8 *)e->unk68 + n, 0, M2C_FIELD(e, u32 *, 0x60) - n);
+    } else {
+        n = M2C_FIELD(e, u32 *, 0x60);
     }
     e->unk0 = 2;
     return n;
