@@ -158,6 +158,31 @@ void fn_802C4868(f32 *box, f32 *out) {
     }
 }
 
+void fn_802C48DC(f32 *box, f32 (*m)[4], EVec3 *out) {
+    EVec3 corners[8];
+    EVec3 t;
+    EVec3 *c;
+    EVec3 *o;
+    s32 i;
+
+    for (i = 0; i < 8; i++) {
+    }
+    fn_802C4800(box, &corners[0].x);
+    c = corners;
+    o = out;
+    for (i = 0; i < 8; i++) {
+        f32 x = c->x;
+        f32 y = c->y;
+        f32 z = c->z;
+        t.x = x * m[0][0] + y * m[1][0] + z * m[2][0] + m[3][0];
+        t.y = x * m[0][1] + y * m[1][1] + z * m[2][1] + m[3][1];
+        t.z = x * m[0][2] + y * m[1][2] + z * m[2][2] + m[3][2];
+        *o = t;
+        c++;
+        o++;
+    }
+}
+
 void fn_802C49D4(f32 *box, s32 arg1, s32 arg2) {
     extern void fn_802C4DCC(s32, f32 *, s32, s32);
     f32 corners[8][3];
@@ -205,16 +230,16 @@ void fn_802C4A90(EBox *box, f32 (*pts)[4], s32 n) {
     }
 }
 
-void fn_802C4B1C(EBox *box, EVec3 *pts, s32 n, f32 *m) {
+void fn_802C4B1C(EBox *box, EVec3 *pts, s32 n, f32 (*m)[4]) {
     s32 i;
     s32 j;
     for (i = 0; i < n; i++) {
         EVec3 p;
         EVec3 *q = &p;
-        EVec3 *s = &pts[i];
-        q->x = s->x * m[0] + s->y * m[4] + s->z * m[8] + m[12];
-        q->y = s->x * m[1] + s->y * m[5] + s->z * m[9] + m[13];
-        q->z = s->x * m[2] + s->y * m[6] + s->z * m[10] + m[14];
+        EVec3 *s = (EVec3 *)((char *)pts + i * sizeof(EVec3));
+        q->x = s->x * m[0][0] + s->y * m[1][0] + s->z * m[2][0] + m[3][0];
+        q->y = s->x * m[0][1] + s->y * m[1][1] + s->z * m[2][1] + m[3][1];
+        q->z = s->x * m[0][2] + s->y * m[1][2] + s->z * m[2][2] + m[3][2];
         for (j = 0; j < 3; j++) {
             if (*EVec3_At(q, j) < *EVec3_At(&box->min, j)) {
                 *EVec3_At(&box->min, j) = *EVec3_At(q, j);
@@ -247,12 +272,19 @@ void fn_802C4D24(EBox *box, EVec3 *pts, s32 n) {
 void fn_802C5070(EBox *box, f32 *out) {
     extern f32 lbl_803F0084[];
     extern f32 fn_8025FC40(EVec3 *);
+    EVec3 *max = &box->max;
     EVec3 v;
     EVec3 sum;
-    EVec3_Add(&sum, &box->min, &box->max);
-    EVec3_Scale(&v, &sum, lbl_803F0084[0]);
+    sum.x = box->min.x + max->x;
+    sum.y = box->min.y + max->y;
+    sum.z = box->min.z + max->z;
+    v.x = sum.x * lbl_803F0084[0];
+    v.y = sum.y * lbl_803F0084[0];
+    v.z = sum.z * lbl_803F0084[0];
     *(EVec3 *)out = v;
-    EVec3_Sub(&v, (EVec3 *)out, &box->max);
+    v.x = out[0] - box->max.x;
+    v.y = out[1] - max->y;
+    v.z = out[2] - max->z;
     out[3] = fn_8025FC40(&v);
 }
 
