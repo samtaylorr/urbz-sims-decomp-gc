@@ -360,14 +360,17 @@ s32 fn_8028D764(void *arg0) {
     s32 size;
     s32 i;
     s32 n;
+    s32 count;
 
     size = fn_8028D6E0(arg0) * 2 + M2C_FIELD(arg0, s32 *, 0x10) + 0x202 + M2C_FIELD(arg0, s32 *, 0x818);
     size += 0x280;
     size += fn_8029F660(M2C_FIELD(arg0, s32 *, 0x122C));
+    count = M2C_FIELD(arg0, s32 *, 0x1284);
     n = M2C_FIELD(arg0, s32 *, 0x1234);
-    for (i = 0; i < M2C_FIELD(arg0, s32 *, 0x1284); i++) {
-        if (M2C_FIELD(arg0, Entry **, 0x1230)[i].used != 0) {
-            size += 1 + M2C_FIELD(arg0, Entry **, 0x1230)[i].size;
+    for (i = 0; i < count; i++) {
+        Entry *e = &M2C_FIELD(arg0, Entry **, 0x1230)[i];
+        if (e->used != 0) {
+            size += 1 + e->size;
             if (--n == 0) {
                 break;
             }
@@ -462,6 +465,60 @@ void *fn_8028E0A0(void *arg0, s32 arg1) {
         return (void *) (v & ~1);
     }
     return fn_802AEABC((u8 *) arg0 + 8, arg1 - M2C_FIELD(arg0, s32 *, 0x24));
+}
+
+void fn_8028E120(void *arg0, s32 arg1) {
+    extern void *(*lbl_80443310[])(s32);
+    extern void fn_80248488(void *, s32, s32);
+    extern void fn_802482F8();
+    s32 size;
+    s32 bytes;
+    void *buf;
+
+    size = 0;
+    if (*(s32 *)((u8 *)arg0 + 0x20) < arg1) {
+        arg1--;
+        while (arg1 != 0) {
+            size++;
+            arg1 >>= 1;
+        }
+        size = 1 << size;
+        size = size < 8 ? 8 : size;
+        bytes = size * 4;
+        buf = lbl_80443310[0](bytes);
+        fn_80248488(buf, 0, bytes);
+        if (*(void **)((u8 *)arg0 + 0x1C) != 0) {
+            fn_802482F8(buf, *(void **)((u8 *)arg0 + 0x1C), *(s32 *)((u8 *)arg0 + 0x20) * 4);
+            ((void (*)(void *))lbl_80443310[1])(*(void **)((u8 *)arg0 + 0x1C));
+            *(void **)((u8 *)arg0 + 0x1C) = 0;
+        }
+        *(void **)((u8 *)arg0 + 0x1C) = buf;
+        *(s32 *)((u8 *)arg0 + 0x20) = size;
+    }
+}
+
+void fn_8028E1EC(void *arg0, s32 arg1, void *arg2_) {
+    u8 *arg2 = arg2_;
+    u32 p;
+
+    if (arg1 < 0) {
+        return;
+    }
+    fn_8028E120(arg0, arg1 + 1);
+    p = (*(u32 **)((u8 *)arg0 + 0x1C))[arg1];
+    (*(void (**)(u8 *))(*(u8 **)(arg2 + 4) + 0xC))(arg2 + *(s16 *)(*(u8 **)(arg2 + 4) + 0x8));
+    p &= ~1;
+    if (p != 0) {
+        (*(void (**)(u8 *))(*(u8 **)(p + 4) + 0x14))((u8 *)p + *(s16 *)(*(u8 **)(p + 4) + 0x10));
+    }
+    p = (u32)arg2;
+    if ((*(s32 (**)(u8 *))(*(u8 **)(p + 4) + 0x34))((u8 *)p + *(s16 *)(*(u8 **)(p + 4) + 0x30)) == 1) {
+        p |= 1;
+    }
+    (*(u32 **)((u8 *)arg0 + 0x1C))[arg1] = p;
+    if (*(s32 *)((u8 *)arg0 + 0x24) < arg1 + 1) {
+        *(s32 *)((u8 *)arg0 + 0x24) = arg1 + 1;
+    }
 }
 
 void *fn_8028E2B8(void *arg0, s32 arg1) {
