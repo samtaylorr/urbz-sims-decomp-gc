@@ -383,6 +383,21 @@ char *fn_802C56E8(char *str) {
     return NULL;
 }
 
+void fn_802C5884(void *self, const char *fmt, ...) {
+    s32 fn_80246C5C(char *, const char *, va_list);
+    va_list ap;
+
+    va_start(ap, fmt);
+    {
+        char buf[0x400];
+        s32 n = fn_80246C5C(buf, fmt, ap);
+        if (n > 0) {
+            char *vt = M2C_FIELD(self, char **, 0x28);
+            (*(void (**)(void *, char *, s32))(vt + 0x24))((char *)self + *(s16 *)(vt + 0x20), buf, n);
+        }
+    }
+}
+
 void *fn_802C5B1C(void *self, void *stream) {
     extern void fn_802D3E40(void *);
     extern void fn_802D41A8(void *, char *);
@@ -607,14 +622,14 @@ s32 fn_802C605C(s32 *self) {
     return *self;
 }
 
-s32 fn_802C6064(void *arg0, s32 arg1, u8 arg2, s32 arg3, s32 arg4) {
+s32 fn_802C6064(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     s32 fn_802C5F88(void *, s32, u8, s32, s32);
     s32 fn_80240584(void);
     s32 i;
     s32 n = M2C_FIELD(arg0, s32 *, 8);
+    u8 c = arg2;
     s32 best = -1;
     s32 bestScore = -1;
-    u8 c = arg2;
 
     for (i = 0; i < n; i++) {
         s32 score = fn_802C5F88(M2C_FIELD(arg0, char **, 4) + i * 0x14, arg1, c, arg3, arg4);
