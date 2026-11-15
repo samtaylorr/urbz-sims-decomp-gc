@@ -13,6 +13,14 @@ static inline s32 ListCount(u8 *list) {
     return *(s32 *)(list + 4);
 }
 
+static inline void ReleaseGfxHandle(void *h) {
+    extern void **lbl_80495050;
+    if ((*(s32 (**)(void *))((char *)*lbl_80495050 + 0x9C))((char *)lbl_80495050 + *(s16 *)((char *)*lbl_80495050 + 0x98)) != 0) {
+        (*(void (**)(void *))((char *)*lbl_80495050 + 0x44))((char *)lbl_80495050 + *(s16 *)((char *)*lbl_80495050 + 0x40));
+    }
+    (*(void (**)(void *, void *))((char *)*lbl_80495050 + 0x94))((char *)lbl_80495050 + *(s16 *)((char *)*lbl_80495050 + 0x90), h);
+}
+
 void *fn_802FFD98(void *arg0) {
     M2C_UNK fn_803BAD8C();
     fn_803BAD8C();
@@ -71,6 +79,30 @@ s32 fn_802FFF68(void) {
 
 void fn_802FFF70(void) {
 
+}
+
+s32 fn_802FFF74(u8 *self, u8 *data) {
+    extern void *fn_802482F8(void *, const void *, u32);
+    extern void fn_803BB250(u8 *, s32, s32);
+    extern s32 fn_8032C194(void *);
+    extern s32 fn_80301ED0(u8 *, u8 *);
+    typedef struct { s32 unk0; s32 unk4; u8 pad[0x64]; } Item;
+    u8 *start = data;
+    s32 n;
+    s32 i;
+
+    fn_802482F8(self + 0xC, data, 4);
+    data += 4;
+    fn_802482F8(&n, data, 4);
+    data += 4;
+    fn_803BB250(self, n, 0);
+    for (i = 0; i < n; i++) {
+        if (*(void **)(self + 0x14) != NULL && fn_8032C194(*(void **)(self + 0x14)) != 0) {
+            (*(Item **)self)[i].unk4 = 1;
+        }
+        data += fn_80301ED0(*(u8 **)self + i * 0x6C, data);
+    }
+    return data - start;
 }
 
 void fn_80300044(u8 *self, u8 *arg1) {
@@ -356,6 +388,26 @@ s32 fn_80300ACC(u8 *self) {
         }
     }
     return 1;
+}
+
+void fn_80300BE8(u8 *self) {
+    extern void **lbl_80495050;
+    extern void fn_8031EA2C(s32);
+    extern void fn_80300CB4(u8 *);
+    extern void fn_80300D24(u8 *);
+    extern void fn_80300DC0(u8 *);
+
+    if (*(void **)self != NULL) {
+        if ((*(s32 (**)(void *))((char *)*lbl_80495050 + 0x9C))((char *)lbl_80495050 + *(s16 *)((char *)*lbl_80495050 + 0x98)) != 0) {
+            (*(void (**)(void *))((char *)*lbl_80495050 + 0x44))((char *)lbl_80495050 + *(s16 *)((char *)*lbl_80495050 + 0x40));
+        }
+        (*(void (**)(void *, void *))((char *)*lbl_80495050 + 0x94))((char *)lbl_80495050 + *(s16 *)((char *)*lbl_80495050 + 0x90), *(void **)self);
+        *(void **)self = NULL;
+    }
+    fn_80300A40(self);
+    fn_80300CB4(self);
+    fn_80300D24(self);
+    fn_80300DC0(self);
 }
 
 void fn_80300CB4(u8 *self) {
