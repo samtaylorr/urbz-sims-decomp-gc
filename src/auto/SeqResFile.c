@@ -60,8 +60,8 @@ static inline void *SeqStr_InitBuf104(void *s, char *data) {
 
 s32 fn_80197E68(void *arg0, void *arg1, void *arg2, s32 arg3);
 
-static inline s32 SeqRes_Load(void *self, void *obj, void *name, s32 i, s32 *err) {
-    return fn_80197E68(self, obj, name, i);
+static inline s32 SeqRes_Type(void *self, s32 i) {
+    return M2C_FIELD(self, s32 *, 0xD4 + i * 0x14);
 }
 
 extern s32 lbl_80495D10;
@@ -163,12 +163,15 @@ s32 fn_801980C8(void *arg0, void *arg1) {
     } SeqEntry;
     s32 err = 0;
     s32 ret = -0xFA;
-    s32 i = 0;
+    s32 i;
     void *obj;
 
-    while (((SeqEntry *)((char *)arg0 + 0xD4))[i].type != 0) {
+    for (i = 0; ((SeqEntry *)((char *)arg0 + 0xD4))[i].type != 0; i++) {
         obj = NULL;
         switch (((SeqEntry *)((char *)arg0 + 0xD4))[i].type) {
+        case 0:
+            err = 1;
+            break;
         case 2:
             obj = fn_80113378(fn_802D1FC8(0x154));
             break;
@@ -179,9 +182,9 @@ s32 fn_801980C8(void *arg0, void *arg1) {
             M2C_FIELD(obj, s32 **, 0x10) = lbl_8040EE20;
             break;
         }
-        ret = fn_80197E68(arg0, obj, arg1, i++);
+        ret = fn_80197E68(arg0, obj, arg1, i);
     }
-    if (err != 0) {
+    if (err) {
         return 0;
     }
     return ret;
