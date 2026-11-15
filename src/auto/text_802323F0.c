@@ -53,6 +53,16 @@ static inline Vec3f Vec3f_Make(f32 x, f32 y, f32 z) {
     return v;
 }
 
+typedef struct {
+    Event1A8 ev;
+    s32 unkC;
+} Event1A8C;
+
+static inline Event1A8C *Event1A8C_Ctor(Event1A8C *e, void *vtbl) {
+    e->ev.vtbl = vtbl;
+    e->unkC = 0;
+    return e;
+}
 typedef struct { s16 h[3]; } Elem6;
 typedef struct { Elem6 *begin; Elem6 *end; } VecElem6;
 
