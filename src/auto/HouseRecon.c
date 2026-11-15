@@ -201,6 +201,48 @@ s32 fn_800522E0(void *arg0, s32 arg1) {
     return 1;
 }
 
+s32 fn_800522EC(void *arg0, void *out, s32 idx) {
+    typedef struct { f32 x, y, z; } V3;
+    typedef struct { s32 unk0; s32 kind[2]; s32 id[2]; } Slot;
+    struct Self { u8 pad[0x350]; u8 *slots[14]; s32 unk388; s32 unk38C; void *unk390; };
+    extern void fn_802ECDB8(V3 *, void *, s32);
+    extern f32 lbl_803C73B8[];
+    struct Self *self = (struct Self *)arg0;
+    s32 ret = 0;
+    V3 v;
+    u8 *p;
+    s32 found;
+    s32 i;
+    s32 j;
+
+    if (self->unk388 == 0) {
+        return 0;
+    }
+    p = self->slots[idx];
+    found = -1;
+    i = 0;
+    do {
+        j = 0;
+        do {
+            if (((Slot *)(p + i * 16))->kind[j] == 1) {
+                found = ((Slot *)(p + i * 16))->id[j];
+            }
+            j++;
+        } while (j < 2 && found < 0);
+        i++;
+    } while (found < 0 && i < 4);
+    if (found >= 0) {
+        fn_802ECDB8(&v, self->unk390, found);
+        ret = 1;
+        *(V3 *)out = v;
+    } else {
+        V3 *vp = &v;
+        vp->x = vp->y = vp->z = lbl_803C73B8[0];
+        *(V3 *)out = v;
+    }
+    return ret;
+}
+
 void fn_800523DC(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x3BC) = arg1;
     if (arg1 == 0x92D8AE4A || arg1 == 0x30AA9779 || arg1 == 0x6BCF6EE9) {
