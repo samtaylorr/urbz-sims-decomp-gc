@@ -84,16 +84,6 @@ typedef struct {
     u32 rest : 19;
 } Flags_8036012C;
 
-typedef struct {
-    u8 unk74;
-    u8 b80 : 1;
-    u8 b40 : 1;
-    u8 b20 : 1;
-    u8 b10 : 1;
-    u8 b08 : 1;
-    u8 rest : 3;
-} Flags8_8036012C;
-
 void fn_802FF4EC(void);
 void fn_803601FC(void);
 void fn_8036023C(void);
@@ -361,16 +351,18 @@ void fn_8035FF98(void *self, void *tex, u8 v) {
 s32 fn_8036012C(Entry_8035F8AC *e, void *a, s32 b, s32 c) {
     void fn_80248488(void *, s32, u32);
     u32 n;
+    u8 *f;
 
     M2C_FIELD(e, u32 *, 0x74) |= 0x800000;
     M2C_FIELD(e, u32 *, 0x74) &= ~0x200000;
     M2C_FIELD(e, u32 *, 0x6C) = 0x14180;
     M2C_FIELD(e, u8 *, 0x14) = b;
     e->unk15 = c;
-    M2C_FIELD(e, u8 *, 0x75) &= ~0x8;
-    M2C_FIELD(e, s8 *, 0x74) = 1;
+    f = (u8 *)e + 0x75;
+    *f &= ~0x8;
+    M2C_FIELD(e, u8 *, 0x74) = 1;
     M2C_FIELD(e, u32 *, 0x70) = 0x232A0;
-    M2C_FIELD(e, Flags_8036012C *, 0x74).b10 = 1;
+    *f |= 0x10;
     M2C_FIELD(e, void **, 0x10) = a;
     M2C_FIELD(e, u32 *, 0x60) = 0xA0C0;
     M2C_FIELD(e, u32 *, 0x64) = M2C_FIELD(a, u32 *, 0xC);
