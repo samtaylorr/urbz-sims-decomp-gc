@@ -86,7 +86,6 @@ s32 fn_802FFF74(u8 *self, u8 *data) {
     extern void fn_803BB250(u8 *, s32, s32);
     extern s32 fn_8032C194(void *);
     extern s32 fn_80301ED0(u8 *, u8 *);
-    typedef struct { s32 unk0; s32 unk4; u8 pad[0x64]; } Item;
     u8 *start = data;
     s32 n;
     s32 i;
@@ -98,7 +97,9 @@ s32 fn_802FFF74(u8 *self, u8 *data) {
     fn_803BB250(self, n, 0);
     for (i = 0; i < n; i++) {
         if (*(void **)(self + 0x14) != NULL && fn_8032C194(*(void **)(self + 0x14)) != 0) {
-            (*(Item **)self)[i].unk4 = 1;
+            u8 *item = *(u8 **)self;
+            item += i * 0x6C;
+            *(s32 *)(item + 4) = 1;
         }
         data += fn_80301ED0(*(u8 **)self + i * 0x6C, data);
     }
